@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>CZS em manutenção</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #5f6b7d;
+        --paper: #f7f3ea;
+        --line: rgba(23, 32, 51, 0.14);
+        --blue: #1d6fbd;
+        --green: #1a936f;
+        --yellow: #f4c95d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--ink);
+        background: linear-gradient(180deg, rgba(29, 111, 189, 0.08), transparent 46%), var(--paper);
+      }
+
+      main {
+        width: min(920px, 100%);
+        display: grid;
+        grid-template-columns: minmax(220px, 0.85fr) minmax(280px, 1fr);
+        gap: 34px;
+        align-items: center;
+      }
+
+      .worker-scene {
+        min-height: 300px;
+        position: relative;
+        display: grid;
+        place-items: end center;
+        border-bottom: 5px solid var(--line);
+      }
+
+      .worker {
+        width: 168px;
+        height: 232px;
+        position: relative;
+      }
+
+      .helmet,
+      .head,
+      .body,
+      .arm,
+      .leg,
+      .tool,
+      .spark {
+        position: absolute;
+      }
+
+      .helmet {
+        left: 44px;
+        top: 8px;
+        width: 80px;
+        height: 44px;
+        border-radius: 42px 42px 10px 10px;
+        background: var(--yellow);
+        border: 3px solid #9f7a16;
+      }
+
+      .helmet::after {
+        content: "";
+        position: absolute;
+        left: -10px;
+        bottom: -6px;
+        width: 100px;
+        height: 12px;
+        border-radius: 999px;
+        background: #d8a928;
+      }
+
+      .head {
+        left: 54px;
+        top: 42px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #c9875e;
+        border: 3px solid #81533a;
+      }
+
+      .head::before,
+      .head::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #1b1b1b;
+      }
+
+      .head::before {
+        left: 18px;
+      }
+
+      .head::after {
+        right: 18px;
+      }
+
+      .body {
+        left: 38px;
+        top: 100px;
+        width: 92px;
+        height: 82px;
+        border-radius: 18px 18px 12px 12px;
+        background: var(--blue);
+        border: 3px solid #174c81;
+      }
+
+      .body::before {
+        content: "";
+        position: absolute;
+        left: 37px;
+        top: 0;
+        width: 16px;
+        height: 82px;
+        background: var(--green);
+      }
+
+      .arm {
+        width: 30px;
+        height: 94px;
+        border-radius: 999px;
+        background: #c9875e;
+        border: 3px solid #81533a;
+        transform-origin: top center;
+      }
+
+      .arm.left {
+        left: 18px;
+        top: 108px;
+        transform: rotate(20deg);
+      }
+
+      .arm.right {
+        right: 12px;
+        top: 106px;
+        transform: rotate(-32deg);
+      }
+
+      .leg {
+        top: 176px;
+        width: 34px;
+        height: 56px;
+        border-radius: 0 0 12px 12px;
+        background: #243654;
+      }
+
+      .leg.left {
+        left: 48px;
+      }
+
+      .leg.right {
+        right: 48px;
+      }
+
+      .tool {
+        right: 4px;
+        top: 66px;
+        width: 12px;
+        height: 118px;
+        border-radius: 999px;
+        background: #575f6d;
+        transform: rotate(-34deg);
+      }
+
+      .tool::before {
+        content: "";
+        position: absolute;
+        left: -18px;
+        top: -7px;
+        width: 50px;
+        height: 15px;
+        border-radius: 999px;
+        background: #343b46;
+      }
+
+      .spark {
+        right: 0;
+        top: 52px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--yellow);
+        box-shadow: 22px 22px 0 #ff7a59, -18px 28px 0 var(--green), 14px -20px 0 var(--blue);
+        animation: pulse 1.4s ease-in-out infinite alternate;
+      }
+
+      .copy {
+        max-width: 520px;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--green);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 7vw, 4.8rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 18px 0 0;
+        font-size: clamp(1rem, 2vw, 1.22rem);
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      a {
+        display: inline-flex;
+        margin-top: 28px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      @keyframes pulse {
+        from {
+          transform: translateY(0) scale(0.84);
+          opacity: 0.58;
+        }
+        to {
+          transform: translateY(-8px) scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 720px) {
+        body {
+          padding: 22px;
+        }
+
+        main {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .worker-scene {
+          min-height: 250px;
+        }
+
+        a {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main aria-labelledby="maintenance-title">
+      <div class="worker-scene" aria-hidden="true">
+        <div class="worker">
+          <span class="helmet"></span>
+          <span class="head"></span>
+          <span class="body"></span>
+          <span class="arm left"></span>
+          <span class="arm right"></span>
+          <span class="leg left"></span>
+          <span class="leg right"></span>
+          <span class="tool"></span>
+          <span class="spark"></span>
+        </div>
+      </div>
+      <section class="copy">
+        <p class="eyebrow">CZS em manutenção</p>
+        <h1 id="maintenance-title">Estamos trabalhando em uma nova experiência.</h1>
+        <p>Voltamos em breve.</p>
+        <a href="./pubpaid-v2.html?v=20260517-pubpaid-fullfocus-onlinefix1">Ir para PubPaid 2.0</a>
+      </section>
+    </main>
+  </body>
+</html>

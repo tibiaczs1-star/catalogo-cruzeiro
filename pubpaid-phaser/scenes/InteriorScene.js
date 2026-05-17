@@ -216,33 +216,17 @@ export class InteriorScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "interior-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientFx();
 
-    const seatedNorth = this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 172, 348, 0.052, 2600, 0x50efff, { staticBitmap: true, depth: 2.16, alpha: 0.86 });
-    const seatedSouth = this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 178, 546, 0.054, 2800, 0xffd06d, { staticBitmap: true, depth: 2.22, alpha: 0.86 });
-    seatedSouth.setFlipX(true);
-    const waiterNpc = this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 512, 0.108, 2400, 0xfff0c0, {
+    const waiterNpc = this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 500, 0.128, 2400, 0xfff0c0, {
       depth: 2.62,
       glowDepth: 2.49,
       alpha: 0.98
     });
     waiterNpc.ppgNpc = { id: "waiter-host", zone: "waiter", role: "lobby-host" };
-    const stageDancer = this.addActor(PUBPAID_TEXTURE_KEYS.singer, 1060, 324, 0.088, 2100, 0xff4fb8, {
-      staticBitmap: true,
-      depth: 2.38,
-      glowDepth: 2.18,
-      alpha: 0.96
-    });
-    stageDancer.ppgNpc = { id: "stage-dancer", zone: "stage", role: "dancer" };
-    stageDancer.ppgBaseX = stageDancer.x;
-    stageDancer.ppgBaseY = stageDancer.y;
-    stageDancer.ppgBaseScale = stageDancer.scaleX;
-    this.stageNpc = stageDancer;
+    this.stageNpc = null;
     this.actors = [
-      waiterNpc,
-      stageDancer,
-      seatedNorth,
-      seatedSouth
+      waiterNpc
     ];
-    this.waiterIndicator = this.buildWaiterIndicator(704, 356);
+    this.waiterIndicator = this.buildWaiterIndicator(704, 336);
 
     this.player = this.buildPlayer(606, 392);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);

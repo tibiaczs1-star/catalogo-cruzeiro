@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T03:10:00.000Z",
+  "lastUpdatedAt": "2026-05-17T03:55:00.000Z",
   "assets": [
+    {
+      "id": "pubpaid-fullfocus-local-screens-20260517",
+      "kind": "image-set",
+      "path": ".codex-temp/",
+      "source": "workspace-playwright",
+      "note": "Capturas locais da rodada full focus: maintenance-desktop.png, pubpaid-desktop.png e pubpaid-mobile.png.",
+      "linkedOrderIds": [
+        "2026-05-17-pubpaid-fullfocus-maintenance-onlinefix1"
+      ],
+      "createdAt": "2026-05-17T03:55:00.000Z"
+    },
     {
       "id": "pubpaid-salon-npcs-stage-waiter-20260517",
       "kind": "image",

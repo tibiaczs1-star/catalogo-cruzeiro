@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js?v=20260517-mobile-fix-stage-wallet1";
+} from "../services/accountService.js?v=20260517-pubpaid-fullfocus-onlinefix1";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);
@@ -185,7 +185,7 @@ export function bindWalletInterface() {
     local.txid = createPubpaidPaymentTxid("PUB");
     local.amount = amount;
     local.qrReady = false;
-    html(refs.qr, "<p>Gerando QR Code na base do PubPaid 1.0...</p>");
+    html(refs.qr, "<p>Gerando QR Code seguro...</p>");
     setFeedback("Gerando Pix protegido.");
 
     try {
@@ -204,7 +204,7 @@ export function bindWalletInterface() {
         </div>
       `);
       syncRegisterDepositButton();
-      setFeedback(`QR criado para ${formatCoins(amount)} creditos. Depois do Pix, toque em Já fiz o pagamento.`);
+      setFeedback(`QR criado para ${formatCoins(amount)} creditos. Depois do Pix, toque em Pagamento enviado.`);
       refs.qr?.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
     } catch (error) {
       resetDeposit(error?.message || "Nao foi possivel gerar QR agora.");
@@ -231,7 +231,7 @@ export function bindWalletInterface() {
     }
 
     refs.registerDeposit.disabled = true;
-    setFeedback("Registrando pagamento para conferencia manual...");
+    setFeedback("Enviando pagamento para conferencia manual...");
     try {
       const payload = await registerPubpaidDeposit({
         amount: local.amount || getDepositAmount(refs.depositAmount),
@@ -239,10 +239,10 @@ export function bindWalletInterface() {
         receiptName,
         sourcePage: "/pubpaid-v2.html"
       });
-      html(refs.qr, `<p><strong>Pagamento informado.</strong></p><p>Aguarde confirmação. Referência ${escapeHtml(local.txid)} enviada com o nome do comprovante.</p>`);
+      html(refs.qr, `<p><strong>Pagamento enviado.</strong></p><p>Aguardando confirmação. Referência ${escapeHtml(local.txid)} enviada com o nome do comprovante.</p>`);
       local.qrReady = false;
       syncRegisterDepositButton();
-      setFeedback(payload.message || "Pagamento informado. Aguarde confirmação.");
+      setFeedback(payload.message || "Pagamento enviado. Aguardando confirmação.");
     } catch (error) {
       syncRegisterDepositButton();
       setFeedback(error?.message || "Falha ao registrar deposito.");

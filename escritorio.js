@@ -2767,7 +2767,7 @@
         return;
       }
       if (action === "home") {
-        window.location.href = officeVariant === "nerd" ? "./pubpaid.html" : "./index.html?skipIntro=1";
+        window.location.href = officeVariant === "nerd" ? "./pubpaid-v2.html" : "./index.html?skipIntro=1";
       }
     });
   });

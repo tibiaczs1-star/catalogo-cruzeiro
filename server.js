@@ -102,6 +102,7 @@ const DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
   : DEFAULT_DATA_DIR;
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
+const MAINTENANCE_FILE = path.join(ROOT_DIR, "maintenance.html");
 const ADMIN_MASTER_FILE = path.join(ROOT_DIR, "backend", "public", "admin-master.html");
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
@@ -654,15 +655,17 @@ const STATIC_PAGE_SEO = {
     fileName: "pesquisa-acre-2026.html"
   },
   "/pubpaid.html": {
-    title: `PubPaid Demo | ${SITE_NAME}`,
+    title: `PubPaid 2.0 | ${SITE_NAME}`,
     description:
-      "Demo jogavel de um bar pixelado com avatar, perfil, lobby local, quatro mesas PvP e moedas ficticias para validar a experiencia do PubPaid.",
+      "A versao publica ativa do PubPaid agora fica na experiencia 2.0.",
     themeColor: "#120C24",
     colorScheme: "dark light",
     ogType: "website",
-    schemaType: "CollectionPage",
+    schemaType: "WebPage",
     priority: "0.63",
     changefreq: "weekly",
+    robots: "noindex,nofollow",
+    sitemap: false,
     fileName: "pubpaid.html"
   },
   "/pubpaid-v2.html": {
@@ -3974,7 +3977,7 @@ function buildCollectionInventory({
       key: "pubpaidDeposits",
       label: "Depositos PubPaid",
       total: pubpaidDeposits.length,
-      source: "pubpaid.html -> /api/pubpaid/deposits",
+      source: "pubpaid-v2.html -> /api/pubpaid/deposits",
       purpose: "Controla depositos em QR Code, conta Google, referencia e confirmacao manual.",
       readyForDb: true
     },
@@ -13760,6 +13763,7 @@ function normalizePubpaidWalletRecord(item = {}) {
   const lockedLegacy = item.locked === true ? coerceMoney(item.balance || item.balanceCoins || 0) : 0;
   const lockedWithdrawalCoins = coerceMoney(item.lockedWithdrawalCoins ?? lockedLegacy);
   const lockedMatchCoins = coerceMoney(item.lockedMatchCoins ?? item.lockedPvpCoins ?? 0);
+  const matchSpentCoins = coerceMoney(item.matchSpentCoins ?? item.matchDebitCoins ?? item.spentMatchCoins ?? 0);
   const balanceCoins = coerceMoney(item.balanceCoins ?? item.balance ?? 0);
   const manualApprovedBalanceCoins = coerceMoney(
     item.manualApprovedBalanceCoins ?? item.manualApprovedCoins ?? item.matchPayoutCoins ?? item.bonusCoins ?? 0
@@ -13769,6 +13773,7 @@ function normalizePubpaidWalletRecord(item = {}) {
     balanceCoins,
     availableCoins: Math.max(0, coerceMoney(item.availableCoins ?? (balanceCoins - lockedWithdrawalCoins - lockedMatchCoins))),
     lockedMatchCoins,
+    matchSpentCoins,
     lockedWithdrawalCoins,
     totalApprovedDeposits: coerceMoney(item.totalApprovedDeposits ?? item.depositsApproved ?? 0),
     totalApprovedWithdrawals: coerceMoney(item.totalApprovedWithdrawals ?? item.withdrawalsApproved ?? 0),
@@ -13825,6 +13830,7 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
               normalizePubpaidMoney(walletRecord.lockedMatchCoins ?? 0))
         ),
         lockedMatchCoins: normalizePubpaidMoney(walletRecord.lockedMatchCoins ?? 0),
+        matchSpentCoins: normalizePubpaidMoney(walletRecord.matchSpentCoins ?? 0),
         lockedWithdrawalCoins: normalizePubpaidMoney(walletRecord.lockedWithdrawalCoins ?? walletRecord.locked),
         totalApprovedDeposits: normalizePubpaidMoney(walletRecord.totalApprovedDeposits ?? walletRecord.approvedDeposits),
         totalApprovedWithdrawals: normalizePubpaidMoney(walletRecord.totalApprovedWithdrawals ?? walletRecord.approvedWithdrawals),
@@ -13842,6 +13848,7 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
       balanceCoins: 0,
       availableCoins: 0,
       lockedMatchCoins: 0,
+      matchSpentCoins: 0,
       lockedWithdrawalCoins: 0,
       totalApprovedDeposits: 0,
       totalApprovedWithdrawals: 0,
@@ -13860,6 +13867,7 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
         balanceCoins: 0,
         availableCoins: 0,
         lockedMatchCoins: 0,
+        matchSpentCoins: 0,
         lockedWithdrawalCoins: 0,
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
@@ -13888,6 +13896,7 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
     balanceCoins: 0,
     availableCoins: 0,
     lockedMatchCoins: 0,
+    matchSpentCoins: 0,
     lockedWithdrawalCoins: 0,
     totalApprovedDeposits: 0,
     totalApprovedWithdrawals: 0,
@@ -13900,6 +13909,7 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
   next.walletKey = key;
   next.balanceCoins = Math.max(0, normalizePubpaidMoney(next.balanceCoins));
   next.lockedMatchCoins = Math.max(0, normalizePubpaidMoney(next.lockedMatchCoins));
+  next.matchSpentCoins = Math.max(0, normalizePubpaidMoney(next.matchSpentCoins ?? 0));
   next.lockedWithdrawalCoins = Math.max(0, normalizePubpaidMoney(next.lockedWithdrawalCoins));
   next.manualApprovedBalanceCoins = Math.max(0, normalizePubpaidMoney(next.manualApprovedBalanceCoins ?? 0));
   next.availableCoins = Math.max(0, normalizePubpaidMoney(next.balanceCoins - next.lockedMatchCoins - next.lockedWithdrawalCoins));
@@ -13917,6 +13927,7 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
       balanceCoins: next.balanceCoins,
       availableCoins: next.availableCoins,
       lockedMatchCoins: next.lockedMatchCoins,
+      matchSpentCoins: next.matchSpentCoins,
       lockedWithdrawalCoins: next.lockedWithdrawalCoins,
       totalApprovedDeposits: next.totalApprovedDeposits,
       totalApprovedWithdrawals: next.totalApprovedWithdrawals,
@@ -16962,7 +16973,7 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 201, {
       ok: true,
       item: nextItem,
-      message: "Pagamento informado. Aguarde confirmação para o saldo ficar jogável."
+      message: "Pagamento enviado. Aguardando confirmação."
     });
   }
 
@@ -17016,7 +17027,7 @@ async function handleApi(req, res, pathname, searchParams) {
         confirmationMode: "manual"
       },
       reviewDeadlineAt,
-      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid.html", 260),
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid-v2.html", 260),
       visitorId: tracking.visitorId || tracking.cookieVisitorId,
       sessionId: tracking.sessionId || tracking.cookieSessionId,
       city: tracking.city,
@@ -17152,7 +17163,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-wallets.csv") {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
-    const rows = getPubpaidWalletStore().map((item) => ({
+    const rows = Object.values(getPubpaidWalletStore() || {}).map((item) => ({
       updatedAt: item.updatedAt || item.createdAt || "",
       player: item?.user?.name || "",
       email: item?.user?.email || "",
@@ -17496,6 +17507,18 @@ function handleStatic(req, res, pathname, requestUrl) {
     return sendText(res, 410, "Serviço indisponível.");
   }
 
+  if (pathname === "/pubpaid" || pathname === "/pubpaid/" || pathname === "/pubpaid.html") {
+    res.writeHead(302, {
+      Location: "/pubpaid-v2.html?v=20260517-pubpaid-fullfocus-onlinefix1",
+      "Cache-Control": "no-store"
+    });
+    return res.end();
+  }
+
+  if (pathname === "/pubpaid.js" || pathname === "/pubpaid.css") {
+    return sendText(res, 410, "Versao antiga encerrada. Use /pubpaid-v2.html.");
+  }
+
   if (
     pathname === "/pubpaid-admin" ||
     pathname === "/pubpaid-admin/" ||
@@ -17525,9 +17548,9 @@ function handleStatic(req, res, pathname, requestUrl) {
     });
   }
 
-  if (pathname === "/") {
-    return sendFile(req, res, INDEX_FILE, {
-      cacheControl: getStaticCacheControl(INDEX_FILE, false),
+  if (pathname === "/" || pathname === "/index.html") {
+    return sendFile(req, res, MAINTENANCE_FILE, {
+      cacheControl: "no-store",
       templateVars
     });
   }
@@ -17546,9 +17569,9 @@ function handleStatic(req, res, pathname, requestUrl) {
     });
   }
 
-  if (!path.extname(decodedPath) && fs.existsSync(INDEX_FILE)) {
-    return sendFile(req, res, INDEX_FILE, {
-      cacheControl: getStaticCacheControl(INDEX_FILE, false),
+  if (!path.extname(decodedPath) && fs.existsSync(MAINTENANCE_FILE)) {
+    return sendFile(req, res, MAINTENANCE_FILE, {
+      cacheControl: "no-store",
       templateVars: buildSeoTemplateVars(req, "/", requestUrl)
     });
   }
@@ -17748,9 +17771,28 @@ function releasePubpaidMatchEscrow(player = {}, amount = 0) {
   const walletKey = safeString(player?.walletKey || "", 180).toLowerCase();
   const wallet = getPubpaidWalletRecordByKey(walletKey);
   if (!wallet) return null;
+  const nextLocked = Math.max(0, normalizePubpaidMoney(wallet.lockedMatchCoins - normalizePubpaidMoney(amount)));
   return savePubpaidWalletRecordByKey(walletKey, {
     ...wallet,
-    lockedMatchCoins: Math.max(0, normalizePubpaidMoney(wallet.lockedMatchCoins - normalizePubpaidMoney(amount))),
+    availableCoins: Math.max(0, normalizePubpaidMoney(wallet.balanceCoins - nextLocked - wallet.lockedWithdrawalCoins)),
+    lockedMatchCoins: nextLocked,
+    playerName: player.name,
+  });
+}
+
+function consumePubpaidMatchEscrow(player = {}, amount = 0) {
+  const walletKey = safeString(player?.walletKey || "", 180).toLowerCase();
+  const wallet = getPubpaidWalletRecordByKey(walletKey);
+  if (!wallet) return null;
+  const stake = normalizePubpaidMoney(amount);
+  const nextBalance = Math.max(0, normalizePubpaidMoney(wallet.balanceCoins - stake));
+  const nextLocked = Math.max(0, normalizePubpaidMoney(wallet.lockedMatchCoins - stake));
+  return savePubpaidWalletRecordByKey(walletKey, {
+    ...wallet,
+    balanceCoins: nextBalance,
+    availableCoins: Math.max(0, normalizePubpaidMoney(nextBalance - nextLocked - wallet.lockedWithdrawalCoins)),
+    lockedMatchCoins: nextLocked,
+    matchSpentCoins: normalizePubpaidMoney((wallet.matchSpentCoins || 0) + stake),
     playerName: player.name,
   });
 }
@@ -17763,6 +17805,10 @@ function creditPubpaidMatchPayout(player = {}, amount = 0) {
   return savePubpaidWalletRecordByKey(walletKey, {
     ...wallet,
     balanceCoins: normalizePubpaidMoney(wallet.balanceCoins + payout),
+    availableCoins: Math.max(
+      0,
+      normalizePubpaidMoney(wallet.balanceCoins + payout - wallet.lockedMatchCoins - wallet.lockedWithdrawalCoins)
+    ),
     manualApprovedBalanceCoins: normalizePubpaidMoney((wallet.manualApprovedBalanceCoins || 0) + payout),
     playerName: player.name,
   });
@@ -17774,8 +17820,8 @@ function settlePubpaidPvpMatch(match = {}) {
   const pot = normalizePubpaidMoney(stake * 2);
   const houseFee = match.winner ? normalizePubpaidMoney(stake * 0.2) : 0;
   const payout = match.winner ? normalizePubpaidMoney(pot - houseFee) : stake;
-  releasePubpaidMatchEscrow(match.playerOne, stake);
-  releasePubpaidMatchEscrow(match.playerTwo, stake);
+  consumePubpaidMatchEscrow(match.playerOne, stake);
+  consumePubpaidMatchEscrow(match.playerTwo, stake);
   if (match.winner === "playerOne") {
     creditPubpaidMatchPayout(match.playerOne, payout);
   } else if (match.winner === "playerTwo") {

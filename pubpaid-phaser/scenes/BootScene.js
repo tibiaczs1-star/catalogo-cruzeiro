@@ -1,7 +1,7 @@
 import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260517-mobile-fix-stage-wallet1";
+const ASSET_VERSION = "20260517-pubpaid-fullfocus-onlinefix1";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {
@@ -40,11 +40,6 @@ export class BootScene extends Phaser.Scene {
     this.load.spritesheet("ppg-player-female-walk-sheet", versionedAsset("./assets/pubpaid/sprites/protagonist/protagonist-female-generated-walk-8dir-4f.png"), { frameWidth: 96, frameHeight: 144 });
     this.load.spritesheet("ppg-player-female-idle-breathe-sheet", versionedAsset("./assets/pubpaid/sprites/protagonist/protagonist-female-generated-idle-breathe-8dir-4f.png"), { frameWidth: 96, frameHeight: 144 });
     this.load.spritesheet("ppg-player-female-idle-phone-sheet", versionedAsset("./assets/pubpaid/sprites/protagonist/protagonist-female-generated-idle-phone-8dir-4f.png"), { frameWidth: 96, frameHeight: 144 });
-    this.load.image("ppg-singer-lobby-sprite", versionedAsset("./assets/pubpaid/characters/singer-lobby-v1.png"));
-    this.load.image("ppg-singer-sprite", versionedAsset("./assets/pubpaid/sprites/singer-stage-tight-v1.png"));
-    this.load.image("ppg-guest-a-sprite", versionedAsset("./assets/pubpaid/sprites/adult-standing-tight-v1.png"));
-    this.load.image("ppg-guest-b-sprite", versionedAsset("./assets/pubpaid/sprites/guest-seated-tight-v1.png"));
-    this.load.image("ppg-car-side-sprite", versionedAsset("./assets/pubpaid/vehicles/pubpaid-car-side-v1.png"));
     this.load.spritesheet("ppg-traffic-vehicles-4f", versionedAsset("./assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png"), {
       frameWidth: 256,
       frameHeight: 128

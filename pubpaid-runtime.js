@@ -182,6 +182,7 @@ function normalizeWallet(playerId, record = {}) {
   const balanceCoins = normalizeMoney(record.balanceCoins ?? record.balance ?? record.saldo);
   const lockedWithdrawalCoins = normalizeMoney(record.lockedWithdrawalCoins ?? record.locked ?? record.travado);
   const lockedMatchCoins = normalizeMoney(record.lockedMatchCoins ?? record.lockedPvpCoins ?? 0);
+  const matchSpentCoins = normalizeMoney(record.matchSpentCoins ?? record.matchDebitCoins ?? record.spentMatchCoins ?? 0);
   const totalApprovedDeposits = normalizeMoney(record.totalApprovedDeposits ?? record.approvedDeposits ?? record.depositosAprovados);
   const totalApprovedWithdrawals = normalizeMoney(record.totalApprovedWithdrawals ?? record.approvedWithdrawals ?? record.saquesAprovados);
   const explicitManualApproved =
@@ -201,6 +202,7 @@ function normalizeWallet(playerId, record = {}) {
     balanceCoins,
     lockedWithdrawalCoins,
     lockedMatchCoins,
+    matchSpentCoins,
     totalApprovedDeposits,
     totalApprovedWithdrawals,
     manualApprovedBalanceCoins,
@@ -247,6 +249,7 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
         balanceCoins: 0,
         lockedWithdrawalCoins: normalizeMoney(normalized.manualLockedWithdrawalCoins),
         lockedMatchCoins: normalizeMoney(normalized.lockedMatchCoins),
+        matchSpentCoins: normalizeMoney(normalized.matchSpentCoins),
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
         manualApprovedBalanceCoins: normalizeMoney(normalized.manualApprovedBalanceCoins),
@@ -269,6 +272,7 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
           balanceCoins: 0,
           lockedWithdrawalCoins: 0,
           lockedMatchCoins: 0,
+          matchSpentCoins: 0,
           totalApprovedDeposits: 0,
           totalApprovedWithdrawals: 0,
           manualApprovedBalanceCoins: 0,
@@ -313,7 +317,8 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
       normalizeMoney(wallet.totalApprovedDeposits) +
         normalizeMoney(wallet.manualApprovedBalanceCoins) -
         normalizeMoney(wallet.totalApprovedWithdrawals) -
-        normalizeMoney(wallet.lockedWithdrawalCoins)
+        normalizeMoney(wallet.lockedWithdrawalCoins) -
+        normalizeMoney(wallet.matchSpentCoins)
     );
   });
 
@@ -496,6 +501,12 @@ function reviewDeposit({ depositId, decision, reviewer, reason }) {
     const reviewed = {
       ...current,
       status: normalizedDecision,
+      payment: current.payment && typeof current.payment === "object"
+        ? {
+            ...current.payment,
+            status: normalizedDecision,
+          }
+        : current.payment,
       reviewedAt: new Date().toISOString(),
       reviewedBy: normalizeText(reviewer, "admin"),
       reviewReason: normalizeText(reason, ""),

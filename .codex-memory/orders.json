@@ -1,7 +1,60 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T03:10:00.000Z",
+  "lastUpdatedAt": "2026-05-17T03:55:00.000Z",
   "orders": [
+    {
+      "id": "2026-05-17-pubpaid-fullfocus-maintenance-onlinefix1",
+      "createdAt": "2026-05-17T03:55:00.000Z",
+      "updatedAt": "2026-05-17T03:55:00.000Z",
+      "status": "validated-local-pending-deploy",
+      "source": "chat",
+      "rawRequest": "Prioridade total PubPaid 2.0, pausar experiencia publica ativa do jornal, colocar CZS em manutencao, encerrar PubPaid 1.0 publico, corrigir Google gate, som, fullscreen, Damas, saldo, admin, cache, performance e validar local/Render.",
+      "summary": "Rodada full focus: manutencao publica leve, PubPaid 1.0 redirecionado/bloqueado, PubPaid 2.0 cache-busted, cache/SW/fullscreen/carteira/escrow/Damas corrigidos e validados localmente.",
+      "normalizedTasks": [
+        "servir pagina publica de manutencao em / e /index.html sem feeds pesados",
+        "redirecionar /pubpaid.html para pubpaid-v2 e bloquear pubpaid.js/pubpaid.css",
+        "aplicar versao 20260517-pubpaid-fullfocus-onlinefix1 em HTML, CSS, imports e assets alterados",
+        "limpar somente caches PubPaid/ppg e impedir service worker de servir PubPaid/home stale",
+        "corrigir carteira para Pagamento enviado. Aguardando confirmacao. e pendencia falsa apos aprovacao",
+        "corrigir escrow/payout consumindo stake via matchSpentCoins antes do payout",
+        "remover temporariamente cantora e convidados sentados; aumentar garcom",
+        "validar node --check, guard PubPaid, CSS, Playwright local e API isolada de wallet/escrow/Damas"
+      ],
+      "tags": [
+        "pubpaid",
+        "maintenance",
+        "wallet",
+        "escrow",
+        "checkers",
+        "render-pending"
+      ],
+      "filesTouched": [
+        "maintenance.html",
+        "pubpaid.html",
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid-runtime.js",
+        "catalogo-sw.js",
+        "server.js",
+        "escritorio-nerd.html",
+        "escritorio.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/maintenance-desktop.png",
+        ".codex-temp/pubpaid-desktop.png",
+        ".codex-temp/pubpaid-mobile.png"
+      ],
+      "notes": "Ainda falta commit/push/Render e validacao online cache-killed. Google/admin real dependem de sessao/credenciais reais no ambiente publicado."
+    },
     {
       "id": "2026-05-17-pubpaid-mobile-gate-wallet-stage-npcs",
       "createdAt": "2026-05-17T03:10:00.000Z",

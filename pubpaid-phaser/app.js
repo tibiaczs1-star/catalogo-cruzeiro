@@ -2,22 +2,23 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-mobile-fix-stage-wallet1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-mobile-fix-stage-wallet1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-pubpaid-fullfocus-onlinefix1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-pubpaid-fullfocus-onlinefix1";
 import { closePanel } from "./ui/panelActions.js";
-import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-mobile-fix-stage-wallet1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-mobile-fix-stage-wallet1";
+import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-pubpaid-fullfocus-onlinefix1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-pubpaid-fullfocus-onlinefix1";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-mobile-fix-stage-wallet1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-pubpaid-fullfocus-onlinefix1";
 import { GameLobbyScene } from "./scenes/GameLobbyScene.js";
 import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260517-mobile-fix-stage-wallet1";
+const PUBPAID_BUILD_VERSION = "20260517-pubpaid-fullfocus-onlinefix1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
+void refreshPubpaidRuntimeCache();
 
 bindOverlay();
 
@@ -78,6 +79,24 @@ let currentStep = "intro";
 let gameStarted = false;
 let introStarted = false;
 let orientationLocked = false;
+
+async function refreshPubpaidRuntimeCache() {
+  try {
+    const previousVersion = window.localStorage?.getItem("pubpaid_v2_build_version") || "";
+    if (previousVersion === PUBPAID_BUILD_VERSION) return;
+    window.localStorage?.setItem("pubpaid_v2_build_version", PUBPAID_BUILD_VERSION);
+    if (!("caches" in window)) return;
+    const keys = await window.caches.keys();
+    await Promise.all(
+      keys
+        .filter((key) => /pubpaid|ppg/i.test(key))
+        .map((key) => window.caches.delete(key))
+    );
+  } catch (_error) {
+    // Cache refresh must never block login, wallet, lobby, or Damas.
+  }
+}
+
 const mobileInputState = {
   x: 0,
   y: 0,
@@ -103,7 +122,14 @@ function getAuthApi() {
 
 function isAuthRequired() {
   const auth = getAuthApi();
-  return Boolean(auth?.isEnabled?.());
+  if (!auth) return false;
+  if (typeof auth.isAuthRequired === "function") {
+    return Boolean(auth.isAuthRequired());
+  }
+  if (typeof auth.isEnabled === "function") {
+    return Boolean(auth.isEnabled());
+  }
+  return true;
 }
 
 function hasAcceptedTerms() {
@@ -221,7 +247,8 @@ function syncOrientationGate() {
 }
 
 function syncFullscreenWarning() {
-  const shouldWarn = Boolean(gameStarted && !isTouchDevice && !document.fullscreenElement);
+  const fullscreenSupported = Boolean(document.fullscreenEnabled && (refs.gameShell || document.documentElement)?.requestFullscreen);
+  const shouldWarn = Boolean(gameStarted && !isTouchDevice && fullscreenSupported && !document.fullscreenElement);
   refs.body?.classList.toggle("is-fullscreen-warning", shouldWarn);
   if (refs.fullscreenWarning) {
     refs.fullscreenWarning.hidden = !shouldWarn;
@@ -375,15 +402,16 @@ function bindMobileControls() {
 async function syncAuthUi() {
   const auth = getAuthApi();
   const signedIn = Boolean(auth?.isSignedIn?.());
+  const authRequired = isAuthRequired();
   const user = auth?.getUser?.() || null;
   refs.googleSlot?.toggleAttribute("hidden", signedIn);
   refs.googleLogout?.toggleAttribute("hidden", !signedIn);
   if (refs.openGame) {
-    refs.openGame.disabled = !signedIn;
-    refs.openGame.textContent = signedIn ? "Continuar" : "Entrar para jogar";
+    refs.openGame.disabled = authRequired && !signedIn;
+    refs.openGame.textContent = signedIn || !authRequired ? "Continuar" : "Entrar para jogar";
   }
   if (refs.authTitle) {
-    refs.authTitle.textContent = signedIn ? "Tudo pronto" : "Entre para jogar";
+    refs.authTitle.textContent = signedIn || !authRequired ? "Tudo pronto" : "Entre para jogar";
   }
   if (signedIn) {
     updateGameState({
@@ -422,7 +450,8 @@ function openSplash(step = "intro") {
 }
 
 function startGame() {
-  if (!getAuthApi()?.isSignedIn?.()) {
+  const auth = getAuthApi();
+  if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");
     return;
   }
@@ -447,7 +476,8 @@ function startGame() {
 }
 
 function resolveEntryStep() {
-  return getAuthApi()?.isSignedIn?.() ? "terms" : "auth";
+  const auth = getAuthApi();
+  return !isAuthRequired() || auth?.isSignedIn?.() ? "terms" : "auth";
 }
 
 function tryEnterFlow() {
@@ -497,14 +527,15 @@ function bindSplash() {
 
     if (event.target.closest("[data-exit-game]")) {
       event.preventDefault();
-      openSplash(getAuthApi()?.isSignedIn?.() ? "terms" : "auth");
+      openSplash(resolveEntryStep());
       return;
     }
 
     if (event.target.closest("[data-accept-terms]")) {
-      if (!getAuthApi()?.isSignedIn?.()) {
+      const auth = getAuthApi();
+      if (isAuthRequired() && !auth?.isSignedIn?.()) {
         setStep("auth");
-        await getAuthApi()?.promptSignIn?.();
+        await auth?.promptSignIn?.();
         return;
       }
       if (refs.termsCheckbox) {
@@ -518,7 +549,7 @@ function bindSplash() {
 
     if (event.target.closest("[data-open-game]")) {
       const auth = getAuthApi();
-      if (!auth?.isSignedIn?.()) {
+      if (isAuthRequired() && !auth?.isSignedIn?.()) {
         await auth?.promptSignIn?.();
         return;
       }
@@ -545,7 +576,8 @@ function bindSplash() {
   });
 
   window.addEventListener("keydown", () => {
-    if (!getAuthApi()?.isSignedIn?.() || refs.permissionGate?.hasAttribute("hidden")) {
+    const auth = getAuthApi();
+    if ((isAuthRequired() && !auth?.isSignedIn?.()) || refs.permissionGate?.hasAttribute("hidden")) {
       return;
     }
     if (!introStarted) {
@@ -561,7 +593,7 @@ function bindSplash() {
       target instanceof HTMLElement &&
       (target.matches("input, textarea, select") || target.isContentEditable);
     if (
-      event.key === "Enter" &&
+      event.key?.toLowerCase() === "w" &&
       !isTyping &&
       !refs.body?.classList.contains("game-is-locked") &&
       gameState.currentScene !== "intro" &&
@@ -618,7 +650,8 @@ window.addEventListener("focus", () => {
 });
 
 game.events.on("pubpaid:intro-ready", () => {
-  if (!getAuthApi()?.isSignedIn?.()) {
+  const auth = getAuthApi();
+  if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");
     return;
   }
@@ -628,7 +661,8 @@ game.events.on("pubpaid:intro-ready", () => {
 });
 
 game.events.on("pubpaid:intro-enter", () => {
-  if (!getAuthApi()?.isSignedIn?.()) {
+  const auth = getAuthApi();
+  if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");
     return;
   }

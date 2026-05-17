@@ -1,19 +1,13 @@
 "use strict";
 
-const VERSION = "20260513-intro-hotfix1";
+const VERSION = "20260517-pubpaid-fullfocus-onlinefix1";
 const STATIC_CACHE = `catalogo-static-${VERSION}`;
 const RUNTIME_CACHE = `catalogo-runtime-${VERSION}`;
 const STATIC_ASSETS = [
-  "./",
-  "./index.html",
-  "./styles.css?v=20260513-intro-hotfix1",
-  "./premium-home-redesign.css?v=20260513-founder-premium1",
-  "./mobile-home-final.css?v=20260430-public-sync1",
-  "./assets/logo-czs.svg?v=20260513-intro-hotfix1",
+  "./maintenance.html",
   "./assets/favicon.svg",
   "./assets/icon-192.png",
-  "./assets/icon-512.png",
-  "./catalogo-app-core.js?v=20260513-intro-hotfix1"
+  "./assets/icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
@@ -46,6 +40,8 @@ function isCacheable(request) {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return false;
   if (url.pathname.startsWith("/api/")) return false;
+  if (url.pathname === "/" || url.pathname === "/index.html") return false;
+  if (url.pathname.includes("pubpaid") || url.pathname.startsWith("/assets/pubpaid")) return false;
   return true;
 }
 

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-mobile-fix-stage-wallet1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pubpaid-fullfocus-onlinefix1";
 import { fetchPvpState, moveCheckers } from "../services/pvpService.js";
 
 const CHECKERS_SIZE = 8;

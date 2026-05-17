@@ -1,5 +1,17 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-17 - PubPaid full focus e CZS em manutencao
+
+- Usuario colocou prioridade total em PubPaid 2.0 e pediu desligar temporariamente a experiencia publica ativa do jornal sem apagar dados/backend.
+- `maintenance.html` virou a pagina publica leve em construcao; `server.js` agora serve manutencao em `/`, `/index.html` e fallback sem extensao, sem carregar feeds/editorial pesado.
+- PubPaid 1.0 foi encerrado como rota publica ativa: `/pubpaid.html` redireciona para `pubpaid-v2.html?v=20260517-pubpaid-fullfocus-onlinefix1`, e `/pubpaid.js`/`/pubpaid.css` respondem 410.
+- PubPaid 2.0 recebeu versao `20260517-pubpaid-fullfocus-onlinefix1`, limpeza de cache PubPaid por Cache API, service worker sem cache de PubPaid/home, fullscreen nao bloqueante e auth sem deadlock quando Google estiver desabilitado localmente.
+- Carteira/admin: copia corrigida para `Pagamento enviado. Aguardando confirmacao.`, CSV de carteiras corrigido, aprovacao tambem atualiza `payment.status` para nao manter pendencia falsa, e saldo aprovado fica preso ao `walletKey` Google.
+- PvP/escrow: settlement agora consome a aposta via `matchSpentCoins` antes de creditar payout, evitando duplicar saldo apos partida; fila e Damas foram validadas localmente com dois usuarios Google falsos isolados.
+- Visual/performance: cantora e convidados sentados foram removidos temporariamente do salao; garcom aumentado/reposicionado; Boot deixou de carregar assets decorativos de cantora/convidados/carro lateral.
+- Validacoes locais: `node --check` nos JS tocados, CSS brace balance, `npm run guard:pubpaid`, Playwright desktop/mobile basico e testes API isolados de deposito pendente, aprovacao, saldo persistente, escrow e movimento de Damas.
+- Falta validar online no Render apos commit/push/publicacao; Google real/admin real dependem de sessao/credenciais reais do ambiente publicado.
+
 ## Atualizacao rapida 2026-05-17 - PubPaid mobile gate, carteira e NPCs do salao
 
 - Usuario testou no celular e encontrou travamento na etapa "som/tela cheia"; `pubpaid-phaser/app.js` agora inicia a intro direto apos Google/termos e deixa som/tela cheia como opcional, sem abrir a permissao redundante no fluxo normal.
