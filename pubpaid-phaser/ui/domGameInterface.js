@@ -1,13 +1,13 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-real-pvp-checkers1";
-import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-real-pvp-checkers1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pubpaid-canon1";
+import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-pubpaid-canon1";
 import {
   CHECKERS_SIZE,
   countCheckersPieces,
   getCheckersLegalMoves,
   getCheckersOwner,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260517-real-pvp-checkers1";
+} from "../core/checkersRules.js?v=20260517-pubpaid-canon1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";

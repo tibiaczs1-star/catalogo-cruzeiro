@@ -64,7 +64,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260517-real-pvp-checkers1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-pubpaid-canon1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -563,18 +563,6 @@ const STATIC_PAGE_SEO = {
     changefreq: "daily",
     fileName: "lifestile.html"
   },
-  "/sprites-check-change.html": {
-    title: `SPRTIS CHECK & CHANGE | ${SITE_NAME}`,
-    description:
-      "Painel administrativo para revisar sprites, itens, cenarios e assets capturados pela equipe Ninja antes de aplicar mudancas nos jogos.",
-    themeColor: "#101827",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    priority: "0.48",
-    changefreq: "weekly",
-    fileName: "sprites-check-change.html"
-  },
   "/games.html": {
     title: `Canal Tech Gamer | ${SITE_NAME}`,
     description:
@@ -659,30 +647,16 @@ const STATIC_PAGE_SEO = {
     fileName: "pesquisa-acre-2026.html"
   },
   "/pubpaid.html": {
-    title: `PubPaid 2.0 | ${SITE_NAME}`,
-    description:
-      "A versao publica ativa do PubPaid agora fica na experiencia 2.0.",
-    themeColor: "#120C24",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "WebPage",
-    priority: "0.63",
-    changefreq: "weekly",
-    robots: "noindex,nofollow",
-    sitemap: false,
-    fileName: "pubpaid.html"
-  },
-  "/pubpaid-v2.html": {
     title: `PubPaid 2.0 | Rua Viva e PvP`,
     description:
       "PubPaid 2.0 com rua viva, carteira real, Damas PvP e partidas confirmadas entre dois jogadores.",
-    robots: "noindex,nofollow",
     themeColor: "#070A18",
     colorScheme: "dark",
     ogType: "website",
     schemaType: "Game",
+    robots: "noindex,nofollow",
     sitemap: false,
-    fileName: "pubpaid-v2.html"
+    fileName: "pubpaid.html"
   },
   "/palavras-da-rosa.html": {
     title: `Palavras da Rosa | ${SITE_NAME}`,
@@ -3981,7 +3955,7 @@ function buildCollectionInventory({
       key: "pubpaidDeposits",
       label: "Depositos PubPaid",
       total: pubpaidDeposits.length,
-      source: "pubpaid-v2.html -> /api/pubpaid/deposits",
+      source: "pubpaid.html -> /api/pubpaid/deposits",
       purpose: "Controla depositos em QR Code, conta Google, referencia e confirmacao manual.",
       readyForDb: true
     },
@@ -7828,7 +7802,6 @@ const SPRITE_CONTEXT_FILES = [
   "escritorio.html",
   "escritorio-nerd.html",
   "escritorio-arte.html",
-  "sprites-check-change.html",
   "escritorio.js",
   "escritorio-arte-config.js"
 ];
@@ -8697,7 +8670,7 @@ function inferEcosystemFocus(instruction = "") {
   }
   if (/pubpaid|jogo|phaser|sprite|rua|trafego|dama|dardos/.test(text)) {
     add("PubPaid 2.0", "ordem menciona jogo, Phaser, sprites ou trafego", [
-      "pubpaid-v2.html",
+      "pubpaid.html",
       "pubpaid-phaser/app.js",
       "pubpaid-phaser/scenes/StreetScene.js",
       "pubpaid-phaser/scenes/InteriorScene.js"
@@ -17166,7 +17139,7 @@ async function handleApi(req, res, pathname, searchParams) {
         confirmationMode: "manual"
       },
       reviewDeadlineAt,
-      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid-v2.html", 260),
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid.html", 260),
       visitorId: tracking.visitorId || tracking.cookieVisitorId,
       sessionId: tracking.sessionId || tracking.cookieSessionId,
       city: tracking.city,
@@ -17234,7 +17207,7 @@ async function handleApi(req, res, pathname, searchParams) {
         confirmationMode: "manual"
       },
       reviewDeadlineAt,
-      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid-v2.html", 260),
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid.html", 260),
       visitorId: tracking.visitorId || tracking.cookieVisitorId,
       sessionId: tracking.sessionId || tracking.cookieSessionId,
       city: tracking.city,
@@ -17714,9 +17687,9 @@ function handleStatic(req, res, pathname, requestUrl) {
     return sendText(res, 410, "Serviço indisponível.");
   }
 
-  if (pathname === "/pubpaid" || pathname === "/pubpaid/" || pathname === "/pubpaid.html") {
+  if (pathname === "/pubpaid" || pathname === "/pubpaid/") {
     res.writeHead(302, {
-      Location: `/pubpaid-v2.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
+      Location: `/pubpaid.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
       "Cache-Control": "no-store",
       Pragma: "no-cache",
       Expires: "0",
@@ -17726,7 +17699,7 @@ function handleStatic(req, res, pathname, requestUrl) {
   }
 
   if (pathname === "/pubpaid.js" || pathname === "/pubpaid.css") {
-    return sendText(res, 410, "Versao antiga encerrada. Use /pubpaid-v2.html.");
+    return sendText(res, 410, "Versao antiga encerrada. Use /pubpaid.html.");
   }
 
   if (
@@ -17766,7 +17739,18 @@ function handleStatic(req, res, pathname, requestUrl) {
   }
 
   if (pathname === "/pubpaid-v2.html") {
-    return sendFile(req, res, path.join(ROOT_DIR, "pubpaid-v2.html"), {
+    res.writeHead(302, {
+      Location: `/pubpaid.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
+      "Cache-Control": "no-store",
+      Pragma: "no-cache",
+      Expires: "0",
+      ...pubpaidNoStoreHeaders()
+    });
+    return res.end();
+  }
+
+  if (pathname === "/pubpaid.html") {
+    return sendFile(req, res, path.join(ROOT_DIR, "pubpaid.html"), {
       cacheControl: "no-store",
       templateVars,
       headers: pubpaidNoStoreHeaders()

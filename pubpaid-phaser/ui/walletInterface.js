@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js?v=20260517-pubpaid-unified2";
+} from "../services/accountService.js?v=20260517-pubpaid-canon1";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);
@@ -237,7 +237,7 @@ export function bindWalletInterface() {
         amount: local.amount || getDepositAmount(refs.depositAmount),
         paymentTxid: local.txid,
         receiptName,
-        sourcePage: "/pubpaid-v2.html"
+        sourcePage: "/pubpaid.html"
       });
       html(refs.qr, `<p><strong>Pagamento enviado.</strong></p><p>Aguardando confirmação. Referência ${escapeHtml(local.txid)} enviada com o nome do comprovante.</p>`);
       local.qrReady = false;
@@ -260,7 +260,7 @@ export function bindWalletInterface() {
     try {
       const payload = await requestPubpaidWithdrawal({
         amount,
-        sourcePage: "/pubpaid-v2.html"
+        sourcePage: "/pubpaid.html"
       });
       setFeedback(payload.message || "Saque solicitado. Valor travado ate revisao manual.");
     } catch (error) {

@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-real-pvp-checkers1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-real-pvp-checkers1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-pubpaid-canon1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-pubpaid-canon1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-real-pvp-checkers1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-real-pvp-checkers1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-pubpaid-canon1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-pubpaid-canon1";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-real-pvp-checkers1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-real-pvp-checkers1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-pubpaid-canon1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-pubpaid-canon1";
 import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260517-real-pvp-checkers1";
+const PUBPAID_BUILD_VERSION = "20260517-pubpaid-canon1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -50,6 +50,7 @@ const soundtrack = createPubPaidSoundtrack();
 
 const TERMS_KEY = "pubpaid_v2_terms_accepted";
 const PROFILE_KEY = "pubpaid_v2_player_profile";
+const BUILD_KEY = "pubpaid_canon_build_version";
 let cachedPlayerProfile = null;
 const refs = {
   body: document.body,
@@ -100,7 +101,7 @@ function setUpdateStatus(message) {
 
 function pubpaidVersionedUrl(version = PUBPAID_BUILD_VERSION) {
   const url = new URL(window.location.href);
-  url.pathname = url.pathname.replace(/\/?[^/]*$/, "/pubpaid-v2.html");
+  url.pathname = url.pathname.replace(/\/?[^/]*$/, "/pubpaid.html");
   url.searchParams.set("v", version);
   url.searchParams.set("sync", String(Date.now()));
   return url.toString();
@@ -138,12 +139,13 @@ async function clearPubpaidCachesAndWorkers() {
 
 async function refreshPubpaidRuntimeCache() {
   try {
-    const previousVersion = window.localStorage?.getItem("pubpaid_v2_build_version") || "";
+    window.localStorage?.removeItem("pubpaid_v2_build_version");
+    const previousVersion = window.localStorage?.getItem(BUILD_KEY) || "";
     if (previousVersion === PUBPAID_BUILD_VERSION) {
       await clearPubpaidCachesAndWorkers();
       return;
     }
-    window.localStorage?.setItem("pubpaid_v2_build_version", PUBPAID_BUILD_VERSION);
+    window.localStorage?.setItem(BUILD_KEY, PUBPAID_BUILD_VERSION);
     await clearPubpaidCachesAndWorkers();
   } catch (_error) {
     // Cache refresh must never block login, wallet, lobby, or Damas.
@@ -178,7 +180,8 @@ async function runPubpaidUpdateGate() {
     setUpdateStatus("Atualizacao nova encontrada. Reabrindo o PubPaid...");
     await clearPubpaidCachesAndWorkers();
     try {
-      window.localStorage?.setItem("pubpaid_v2_build_version", serverVersion);
+      window.localStorage?.removeItem("pubpaid_v2_build_version");
+      window.localStorage?.setItem(BUILD_KEY, serverVersion);
     } catch (_error) {
       // ignore storage failures
     }
@@ -190,7 +193,8 @@ async function runPubpaidUpdateGate() {
     setUpdateStatus("Aplicando versao correta antes de entrar...");
     await clearPubpaidCachesAndWorkers();
     try {
-      window.localStorage?.setItem("pubpaid_v2_build_version", targetVersion);
+      window.localStorage?.removeItem("pubpaid_v2_build_version");
+      window.localStorage?.setItem(BUILD_KEY, targetVersion);
     } catch (_error) {
       // ignore storage failures
     }
@@ -515,7 +519,7 @@ function syncOrientationGate() {
 function syncFullscreenWarning() {
   const fullscreenSupported = Boolean(document.fullscreenEnabled && (refs.gameShell || document.documentElement)?.requestFullscreen);
   if (document.fullscreenElement) fullscreenWasActive = true;
-  const shouldWarn = Boolean(gameStarted && !isTouchDevice && fullscreenSupported && fullscreenWasActive && !document.fullscreenElement);
+  const shouldWarn = Boolean(gameStarted && !isTouchDevice && fullscreenSupported && !document.fullscreenElement);
   refs.body?.classList.toggle("is-fullscreen-warning", shouldWarn);
   if (refs.fullscreenWarning) {
     refs.fullscreenWarning.hidden = !shouldWarn;
@@ -523,7 +527,7 @@ function syncFullscreenWarning() {
   if (refs.fullscreenWarningCopy) {
     refs.fullscreenWarningCopy.textContent = needsLandscape()
       ? "No celular, deixe em horizontal e volte para tela cheia para melhor visualização."
-      : "Aperte F11 ou volte para tela cheia para jogar com melhor leitura.";
+      : "A tela cheia e obrigatoria no desktop. Clique para voltar ao jogo em tela cheia.";
   }
 }
 
@@ -1102,6 +1106,13 @@ window.render_game_to_text = () => {
     `panelTitle=${gameState.panel.title}`
   ].join("\n");
 };
+
+window.pubpaidDebugState = () => ({
+  ...JSON.parse(JSON.stringify(gameState)),
+  buildVersion: PUBPAID_BUILD_VERSION,
+  fullscreen: Boolean(document.fullscreenElement),
+  updateGateOpen: Boolean(refs.updateGate && !refs.updateGate.hidden)
+});
 
 window.advanceTime = (ms = 250) => {
   const activeScenes = game.scene.getScenes(true);

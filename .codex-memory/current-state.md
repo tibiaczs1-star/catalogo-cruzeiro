@@ -1,20 +1,39 @@
 # Current State
 
-Updated: 2026-05-17T08:20:00.000Z
+Updated: 2026-05-17T09:00:00.000Z
 
 ## Active Goal
 
-- PubPaid 2.0 PvP real, cache sem aba anonima e Damas refeita
+Unificar PubPaid em um unico caminho canonico e fazer PvP real funcionar.
 
-## Summary
+## Operating Mode
 
-Rodada atual criou build `20260517-real-pvp-checkers1`, removeu restos de demo/local de Damas, salvou nick no backend por conta Google, preservou perfil no `pubpaid-runtime`, reforcou headers/limpeza de cache para evitar depender de aba anonima e reconstruiu regras/visual de Damas com PvP autoritativo.
+- Modo economico por padrao.
+- Ler so o necessario para a tarefa atual.
+- Responder curto quando bastar.
+- Validar de forma proporcional ao risco.
+- Escalar contexto apenas para PubPaid, homepage/CZS, deploy, revisao grande ou mudanca arriscada.
+- Separar frentes: jogo e site ficam no mesmo repo, mas nao devem herdar contexto um do outro.
+- Para jogo, nao usar agentes do site, revisao editorial, cards, homepage ou CZS, salvo pedido explicito.
 
-Validado localmente com API e browser: URL velha redireciona para build nova; HTML PubPaid sai com `no-store` + `Clear-Site-Data: "cache"`; perfil/nick persiste apos recalculo da carteira; PvP Damas faz `waiting -> readying -> active` so depois dos dois prontos; captura obrigatoria, captura em cadeia/`forcedPiece` e dama voadora passam no servidor.
+## Canon
+
+- URL: `/pubpaid.html`
+- Runtime: `pubpaid-phaser/`
+- CSS: `pubpaid-phaser.css`
+- Backend: `server.js`
+- Carteira: `pubpaid-runtime.js` + `data/pubpaid-store.json`
+- PvP: `data/pubpaid-pvp.json`
+
+## Current Work
+
+- PubPaid antigo descartado.
+- `/pubpaid-v2.html` deixou de ser caminho oficial e deve apenas redirecionar para `/pubpaid.html`.
+- Artefatos conceituais e validacoes antigas foram removidos/quarentenados.
 
 ## Next
 
-- Stage apenas arquivos PubPaid/memoria desta rodada.
-- Commit/push.
-- Validar online no Render em `https://catalogo-cruzeiro-web.onrender.com/pubpaid.html` e testar dois aparelhos/contas reais.
-- Risco separado: `npm run review:team` apontou 4 textos publicos em ingles em feeds de dados fora do escopo PubPaid.
+1. Validar backend PvP em duas sessoes.
+2. Validar frontend PvP em dois contextos reais de navegador.
+3. Corrigir cache/SW e fullscreen/scroll.
+4. Subir online e testar com duas contas Google reais.

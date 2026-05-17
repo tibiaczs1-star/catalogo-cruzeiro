@@ -1647,7 +1647,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-entry-sync-nick1") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-pubpaid-canon1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -2024,7 +2024,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-entry-sync-nick1");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-pubpaid-canon1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 
@@ -3781,4 +3781,75 @@ body.pubpaid-phaser-page.is-touch:not(.game-is-locked) .ppg-audio-toggle {
     width: min(100%, calc(100dvh - 168px));
     margin-inline: auto;
   }
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #02050d;
+}
+
+body.pubpaid-phaser-page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+body.pubpaid-phaser-page--official .ppg-shell--official {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body.pubpaid-phaser-page--official .ppg-stage--official,
+body.pubpaid-phaser-page--official .ppg-game-shell--official,
+body.pubpaid-phaser-page--official .ppg-game {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  aspect-ratio: auto;
+}
+
+body.pubpaid-phaser-page--official .ppg-game canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.pubpaid-phaser-page .ppg-splash,
+body.pubpaid-phaser-page .ppg-update-gate,
+body.pubpaid-phaser-page .ppg-permission-gate,
+body.pubpaid-phaser-page .ppg-fullscreen-warning,
+body.pubpaid-phaser-page .ppg-orientation-gate {
+  position: fixed;
+  inset: 0;
+}
+
+body.pubpaid-phaser-page .ppg-dom-wallet,
+body.pubpaid-phaser-page .ppg-dom-checkers,
+body.pubpaid-phaser-page .ppg-panel {
+  touch-action: pan-y;
 }

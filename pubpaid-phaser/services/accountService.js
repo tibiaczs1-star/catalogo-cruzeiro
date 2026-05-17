@@ -104,7 +104,7 @@ export async function registerPubpaidDeposit({
   amount = 10,
   paymentTxid = "",
   receiptName = "",
-  sourcePage = "/pubpaid-v2.html"
+  sourcePage = "/pubpaid.html"
 } = {}) {
   const payload = await requestPubpaidJson("./api/pubpaid/deposits", {
     method: "POST",
@@ -119,7 +119,7 @@ export async function registerPubpaidDeposit({
   return payload;
 }
 
-export async function requestPubpaidWithdrawal({ amount = 0, sourcePage = "/pubpaid-v2.html" } = {}) {
+export async function requestPubpaidWithdrawal({ amount = 0, sourcePage = "/pubpaid.html" } = {}) {
   const payload = await requestPubpaidJson("./api/pubpaid/withdrawals", {
     method: "POST",
     body: JSON.stringify({

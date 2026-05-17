@@ -1,23 +1,10 @@
 "use strict";
 
-const VERSION = "20260517-real-pvp-checkers1";
-const STATIC_CACHE = `catalogo-static-${VERSION}`;
-const RUNTIME_CACHE = `catalogo-runtime-${VERSION}`;
-const STATIC_ASSETS = [
-  "./maintenance.html",
-  "./assets/favicon.svg",
-  "./assets/icon-192.png",
-  "./assets/icon-512.png"
-];
+const VERSION = "20260517-pubpaid-canon1";
+const CACHE_PREFIXES = ["catalogo-", "pubpaid", "ppg"];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(STATIC_ASSETS))
-      .then(() => self.skipWaiting())
-      .catch(() => self.skipWaiting())
-  );
+  event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener("activate", (event) => {
@@ -27,39 +14,19 @@ self.addEventListener("activate", (event) => {
       .then((keys) =>
         Promise.all(
           keys
-            .filter((key) => key.startsWith("catalogo-") && ![STATIC_CACHE, RUNTIME_CACHE].includes(key))
+            .filter((key) => CACHE_PREFIXES.some((prefix) => key.toLowerCase().startsWith(prefix)))
             .map((key) => caches.delete(key))
         )
       )
       .then(() => self.clients.claim())
+      .then(() => self.registration.unregister())
+      .catch(() => self.registration.unregister())
   );
 });
 
-function isCacheable(request) {
-  if (request.method !== "GET") return false;
-  const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return false;
-  if (url.pathname.startsWith("/api/")) return false;
-  if (url.pathname === "/" || url.pathname === "/index.html") return false;
-  if (url.pathname.includes("pubpaid") || url.pathname.startsWith("/assets/pubpaid")) return false;
-  return true;
-}
-
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request);
-  const network = fetch(request)
-    .then((response) => {
-      if (response && response.ok) {
-        cache.put(request, response.clone()).catch(() => {});
-      }
-      return response;
-    })
-    .catch(() => cached);
-  return cached || network;
-}
-
 self.addEventListener("fetch", (event) => {
-  if (!isCacheable(event.request)) return;
-  event.respondWith(staleWhileRevalidate(event.request));
+  if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+  event.respondWith(fetch(event.request));
 });

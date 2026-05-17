@@ -1,89 +1,36 @@
-# PubPaid 2.0 - Retomada Global
+# PubPaid - Handoff Canonico
 
-Este arquivo existe para qualquer conta, agente ou sessao conseguir continuar a PubPaid 2.0 mesmo que o projeto/thread antigo nao apareca mais na lista do app.
+Este arquivo manteve o nome antigo porque `AGENTS.md` manda le-lo antes de mexer no jogo. O conteudo atual substitui a historia anterior: existe um unico PubPaid vivo.
 
-## Entrada oficial
+## Canon
 
-- Pagina: `pubpaid-v2.html`
-- Runtime: `pubpaid-phaser/`
-- Estilo principal: `pubpaid-phaser.css`
-- Assets: `assets/pubpaid/`
-- Memoria viva: `CODEX_MEMORY.md` e `.codex-memory/`
+- URL publica e de teste: `/pubpaid.html`
+- Runtime do jogo: `pubpaid-phaser/`
+- HTML shell unico: `pubpaid.html`
+- CSS principal: `pubpaid-phaser.css`
+- Backend: `server.js`
+- Carteira canonica: `pubpaid-runtime.js` + `data/pubpaid-store.json`
+- PvP canonico: `data/pubpaid-pvp.json`
 
-## Como retomar em qualquer conta
+`/pubpaid-v2.html` e qualquer rota antiga sao apenas compatibilidade/redirect para `/pubpaid.html`. Nao usar como caminho de trabalho.
 
-1. Abrir o workspace `C:\Users\junio\projeto codex`.
-2. Ler este arquivo.
-3. Ler `.codex-memory/current-state.md` e `.codex-memory/handoff.md`.
-4. Procurar no `CODEX_MEMORY.md` por `PubPaid 2.0`.
-5. Rodar `npm start`.
-6. Abrir `http://127.0.0.1:3000/pubpaid-v2.html`.
+## Regras duras
 
-Se outro agente assumir, a primeira frase de comando recomendada e:
+- Nao recriar PubPaid 1.0.
+- Nao usar demo money, IA local ou modo teste para validar PvP real.
+- Nao promover laboratorio, prompt, screenshot ou arte conceitual para o runtime.
+- Antes de validar: `npm run guard:pubpaid`.
+- Runtime `pubpaid-phaser/` e `pubpaid.html` nao podem usar `spriteFactory`, `document.createElement`, `canvas`, `createCanvas` ou `addCanvas`.
 
-```text
-Continue a PubPaid 2.0 lendo PUBPAID_2_GLOBAL_HANDOFF.md, CODEX_MEMORY.md e .codex-memory/ antes de editar.
-```
+## Fluxo esperado
 
-## Estado atual
+1. Abrir `http://127.0.0.1:3000/pubpaid.html`.
+2. Checagem de build/cache antes do jogo.
+3. Google autentica e entra sem botao intermediario.
+4. Nick persistido por conta, com opcao de alterar.
+5. Damas abre somente com saldo real aprovado.
+6. PvP: jogador A espera, jogador B entra, ambos confirmam `Estou pronto`, servidor ativa a partida e cada lado move no proprio tabuleiro.
 
-A frente correta e a PubPaid 2.0 em Phaser/canvas com UI DOM, nao a `pubpaid.html` antiga.
+## Foco atual
 
-Fluxo atual:
-
-```text
-Intro -> Rua -> Porta -> Salao -> Garcom -> Lobby DOM -> Oponente IA -> Aposta -> Confirmacao -> Tela do jogo
-```
-
-Primeiros jogos:
-
-- Dardos: cena Phaser com comando/resultado via UI DOM.
-- Dama: tabuleiro DOM com selecao, captura obrigatoria simples, IA local e resultado.
-
-## Direcao visual fixa
-
-- Pixel art bitmap semi-realista.
-- Nada de personagem final desenhado por canvas/procedural.
-- Adultos no mundo: 105-130 px no primeiro plano, 75-100 px no meio e 50-75 px no fundo.
-- Carros, moto e cachorro antigos continuam fora do runtime ate existir pacote visual coerente.
-- Reintroduzir vida aos poucos, sempre com escala aprovada.
-
-## Ultima retomada aplicada
-
-Foram criados sprites recortados em:
-
-- `assets/pubpaid/sprites/adult-standing-tight-v1.png`
-- `assets/pubpaid/sprites/guest-seated-tight-v1.png`
-- `assets/pubpaid/sprites/singer-stage-tight-v1.png`
-
-Arquivos ligados a essa retomada:
-
-- `pubpaid-phaser/scenes/BootScene.js`
-- `pubpaid-phaser/scenes/StreetScene.js`
-- `pubpaid-phaser/scenes/InteriorScene.js`
-- `pubpaid-v2.html`
-- `assets/pubpaid/PUBPAID_ASSET_SOURCES.md`
-- `PUBPAID_VISUAL_SCALE_GUIDE.md`
-
-## Proximos passos
-
-- Validar visualmente no navegador real se player, pedestres, cantora e clientes estao em escala correta.
-- Fazer o fluxo completo: intro -> rua -> salao -> garcom -> lobby -> Dardos -> resultado.
-- Fazer o fluxo completo da Dama.
-- Criar pacote coerente para veiculos/cachorro antes de religar trafego e animal.
-- Depois da validacao, atualizar `CODEX_MEMORY.md`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md`, `.codex-memory/orders.json` e `.codex-memory/assets.json`.
-
-## Validacoes rapidas
-
-```powershell
-node --check pubpaid-phaser\app.js
-node --check pubpaid-phaser\scenes\BootScene.js
-node --check pubpaid-phaser\scenes\StreetScene.js
-node --check pubpaid-phaser\scenes\InteriorScene.js
-node --check pubpaid-phaser\scenes\GameLobbyScene.js
-node -e "JSON.parse(require('fs').readFileSync('.codex-memory/orders.json','utf8')); console.log('orders ok')"
-```
-
-## Regra de seguranca
-
-Nao apagar a versao antiga `pubpaid.html`; ela e historica/demo. A evolucao oficial continua em `pubpaid-v2.html`.
+Corrigir e provar o PvP real em duas sessoes, eliminar cache que exige aba anonima, travar fullscreen/sem scroll e manter apenas o caminho canonico `/pubpaid.html`.
