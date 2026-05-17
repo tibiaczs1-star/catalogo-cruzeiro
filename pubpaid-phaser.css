@@ -713,6 +713,98 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   }
 }
 
+@keyframes ppgLoginStreetDrift {
+  from {
+    transform: scale(1.02) translate3d(-1.2%, -0.6%, 0);
+  }
+
+  to {
+    transform: scale(1.06) translate3d(1.2%, 0.7%, 0);
+  }
+}
+
+@keyframes ppgLoginSweep {
+  0% {
+    transform: translateX(-54%);
+    opacity: 0;
+  }
+
+  18%,
+  62% {
+    opacity: 0.46;
+  }
+
+  100% {
+    transform: translateX(54%);
+    opacity: 0;
+  }
+}
+
+@keyframes ppgLoginNeonBlink {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scaleX(0.88);
+  }
+
+  45%,
+  70% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ppgLoginWaitLine {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0) scaleX(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-4px) scaleX(1.08);
+  }
+}
+
+@keyframes ppgMatchPlayerReady {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes ppgMatchRivalSearch {
+  0% {
+    transform: translateX(10px);
+    opacity: 0.26;
+  }
+
+  45%,
+  70% {
+    opacity: 0.72;
+  }
+
+  100% {
+    transform: translateX(-10px);
+    opacity: 0.36;
+  }
+}
+
+@keyframes ppgMatchSignal {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(320%);
+  }
+}
+
 .ppg-dom-lobby-foot {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
@@ -741,6 +833,107 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-matchmaking {
   border-color: rgba(255, 208, 109, 0.52);
+}
+
+.ppg-match-arena {
+  position: relative;
+  height: 108px;
+  margin: 14px 0 8px;
+  overflow: hidden;
+  border: 1px solid rgba(80, 239, 255, 0.22);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(5, 10, 24, 0.82), rgba(2, 5, 13, 0.92));
+  background-size: 10px 10px, 10px 10px, auto;
+  box-shadow: inset 0 0 26px rgba(80, 239, 255, 0.08);
+}
+
+.ppg-match-avatar {
+  position: absolute;
+  bottom: 16px;
+  width: 34px;
+  height: 48px;
+  border: 2px solid rgba(255, 246, 220, 0.38);
+  background:
+    linear-gradient(180deg, rgba(255, 208, 109, 0.86) 0 28%, rgba(30, 43, 68, 0.95) 28% 100%);
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.32);
+  clip-path: polygon(28% 0, 72% 0, 82% 26%, 100% 100%, 0 100%, 18% 26%);
+}
+
+.ppg-match-avatar::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -15px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 246, 220, 0.38);
+  border-radius: 50%;
+  background: #ffd8a0;
+  transform: translateX(-50%);
+}
+
+.ppg-match-avatar.is-you {
+  left: 22px;
+  animation: ppgMatchPlayerReady 1.6s ease-in-out infinite;
+}
+
+.ppg-match-avatar.is-rival {
+  right: 22px;
+  opacity: 0.5;
+  filter: grayscale(0.35) brightness(0.84);
+  animation: ppgMatchRivalSearch 2.4s ease-in-out infinite;
+}
+
+.ppg-dom-matchmaking[data-match-state="waiting"] .ppg-match-avatar.is-rival {
+  opacity: 0.68;
+  animation-duration: 1.4s;
+}
+
+.ppg-dom-matchmaking[data-match-state="matched"] .ppg-match-avatar.is-rival {
+  opacity: 1;
+  filter: none;
+}
+
+.ppg-match-route {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  top: 50%;
+  height: 4px;
+  background: rgba(80, 239, 255, 0.16);
+  transform: translateY(-50%);
+}
+
+.ppg-match-route i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 32%;
+  background: linear-gradient(90deg, transparent, rgba(80, 239, 255, 0.92), rgba(255, 208, 109, 0.76), transparent);
+  box-shadow: 0 0 18px rgba(80, 239, 255, 0.36);
+  animation: ppgMatchSignal 1.5s linear infinite;
+}
+
+.ppg-match-board {
+  position: absolute;
+  left: 50%;
+  bottom: 13px;
+  display: grid;
+  grid-template-columns: repeat(2, 16px);
+  grid-template-rows: repeat(2, 16px);
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 0 0 18px rgba(255, 208, 109, 0.22);
+}
+
+.ppg-match-board i:nth-child(1),
+.ppg-match-board i:nth-child(4) {
+  background: rgba(255, 208, 109, 0.86);
+}
+
+.ppg-match-board i:nth-child(2),
+.ppg-match-board i:nth-child(3) {
+  background: rgba(80, 239, 255, 0.64);
 }
 
 .ppg-dom-match-lights {
@@ -1247,12 +1440,106 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   display: block;
   padding: 0;
   pointer-events: auto;
-  background: transparent;
+  overflow: hidden;
+  background: #030712;
 }
 
 .ppg-splash[hidden] {
   display: none;
 }
+
+.ppg-login-ambience {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
+    url("./assets/pubpaid-v2-street-bg-v1.png") center / cover no-repeat;
+  filter: saturate(1.04) contrast(1.03);
+  transform: scale(1.02);
+  animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
+}
+
+.ppg-login-ambience::before,
+.ppg-login-ambience::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.ppg-login-ambience::before {
+  background:
+    linear-gradient(90deg, transparent 0 16%, rgba(80, 239, 255, 0.12) 48%, transparent 84%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: auto, 100% 4px;
+  mix-blend-mode: screen;
+  opacity: 0.46;
+  animation: ppgLoginSweep 4.6s ease-in-out infinite;
+}
+
+.ppg-login-ambience::after {
+  background:
+    linear-gradient(180deg, rgba(2, 5, 12, 0.08), rgba(2, 5, 12, 0.3)),
+    linear-gradient(90deg, rgba(255, 208, 109, 0.18), transparent 18% 76%, rgba(80, 239, 255, 0.18));
+  opacity: 0.7;
+}
+
+.ppg-login-neon {
+  position: absolute;
+  left: 50%;
+  top: clamp(38px, 14vh, 118px);
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  min-width: min(360px, 74vw);
+  transform: translateX(-50%);
+  color: rgba(255, 246, 220, 0.92);
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px rgba(80, 239, 255, 0.55),
+    0 0 30px rgba(255, 79, 184, 0.24);
+}
+
+.ppg-login-neon span {
+  display: block;
+  width: min(210px, 42vw);
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(80, 239, 255, 0.92), rgba(255, 79, 184, 0.84), transparent);
+  box-shadow: 0 0 22px rgba(80, 239, 255, 0.42);
+  animation: ppgLoginNeonBlink 2.6s steps(4, end) infinite;
+}
+
+.ppg-login-neon strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+}
+
+.ppg-login-waitline {
+  position: absolute;
+  left: 50%;
+  bottom: max(24px, calc(18px + var(--ppg-safe-bottom)));
+  display: flex;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.ppg-login-waitline i {
+  width: 24px;
+  height: 4px;
+  background: rgba(255, 208, 109, 0.7);
+  box-shadow: 0 0 12px rgba(255, 208, 109, 0.28);
+  animation: ppgLoginWaitLine 1.4s steps(3, end) infinite;
+}
+
+.ppg-login-waitline i:nth-child(2) { animation-delay: 0.12s; }
+.ppg-login-waitline i:nth-child(3) { animation-delay: 0.24s; }
+.ppg-login-waitline i:nth-child(4) { animation-delay: 0.36s; }
+.ppg-login-waitline i:nth-child(5) { animation-delay: 0.48s; }
 
 .ppg-permission-gate {
   position: absolute;
@@ -1339,6 +1626,20 @@ body.pubpaid-phaser-page.is-ios .ppg-permission-card {
 
 body.pubpaid-phaser-page.is-touch .ppg-mobile-controls {
   display: flex;
+}
+
+body.pubpaid-phaser-page.game-is-locked .ppg-mobile-controls,
+body.pubpaid-phaser-page.is-fullscreen-warning .ppg-mobile-controls,
+body.pubpaid-phaser-page.is-orientation-blocked .ppg-mobile-controls,
+.ppg-dom-game-ui.is-lobby + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-matchmaking + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-access-block + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-wallet-open + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-pool + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-checkers + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-result + .ppg-mobile-controls {
+  display: none !important;
+  pointer-events: none;
 }
 
 body.pubpaid-phaser-page.is-touch .ppg-hud {
@@ -1597,6 +1898,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 
 .ppg-splash-card {
   position: absolute;
+  z-index: 1;
   left: 50%;
   bottom: max(clamp(54px, 9vh, 96px), calc(42px + var(--ppg-safe-bottom)));
   width: min(360px, 42vw);
@@ -2981,6 +3283,91 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
   .ppg-audio-toggle {
     min-width: 96px;
     font-size: 0.64rem;
+  }
+}
+
+body.pubpaid-phaser-page.is-touch:not(.game-is-locked) .ppg-audio-toggle {
+  top: calc(10px + var(--ppg-safe-top));
+  right: calc(10px + var(--ppg-safe-right));
+  bottom: auto;
+  left: auto;
+  z-index: 19;
+  min-width: 86px;
+  min-height: 34px;
+}
+
+@media (max-width: 760px) and (orientation: portrait) {
+  .ppg-dom-game-ui.is-lobby .ppg-dom-topline,
+  .ppg-dom-game-ui.is-matchmaking .ppg-dom-topline,
+  .ppg-dom-game-ui.is-access-block .ppg-dom-topline,
+  .ppg-dom-game-ui.is-pool .ppg-dom-topline,
+  .ppg-dom-game-ui.is-checkers .ppg-dom-topline,
+  .ppg-dom-game-ui.is-result .ppg-dom-topline {
+    display: none;
+  }
+
+  .ppg-dom-topline {
+    left: calc(10px + var(--ppg-safe-left));
+    right: calc(10px + var(--ppg-safe-right));
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 6px;
+  }
+
+  .ppg-dom-topline strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ppg-dom-lobby,
+  .ppg-dom-matchmaking,
+  .ppg-dom-access-block,
+  .ppg-dom-pool,
+  .ppg-dom-result {
+    left: calc(10px + var(--ppg-safe-left));
+    right: calc(10px + var(--ppg-safe-right));
+    bottom: calc(10px + var(--ppg-safe-bottom));
+    width: auto;
+    max-height: calc(100svh - 24px - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+    max-height: calc(100dvh - 24px - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+    overflow: auto;
+    transform: none;
+  }
+
+  .ppg-dom-game-cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .ppg-dom-game-card {
+    min-height: 72px;
+    padding: 12px;
+  }
+
+  .ppg-dom-game-card span {
+    font-size: 22px;
+  }
+
+  .ppg-dom-lobby-foot {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ppg-dom-lobby-foot button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .ppg-match-arena {
+    height: 96px;
+  }
+
+  .ppg-dom-checkers {
+    inset: calc(58px + var(--ppg-safe-top)) calc(8px + var(--ppg-safe-right)) calc(10px + var(--ppg-safe-bottom)) calc(8px + var(--ppg-safe-left));
+    width: auto;
+    max-height: calc(100svh - 76px - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+    max-height: calc(100dvh - 76px - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+    overflow: auto;
   }
 }
 

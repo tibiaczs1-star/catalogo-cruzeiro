@@ -180,7 +180,8 @@ export function bindDomGameInterface(game) {
     matchmakingTimer: null,
     pvpPollTimer: null,
     pvpSelected: null,
-    pvpLegalMoves: []
+    pvpLegalMoves: [],
+    pvpRenderBusy: false
   };
 
   const setPanel = (name) => {
@@ -197,6 +198,10 @@ export function bindDomGameInterface(game) {
     refs.checkers.hidden = name !== "checkers";
     refs.result.hidden = name !== "result";
     refs.root.classList.toggle("is-playing", name === "pool" || name === "checkers");
+  };
+
+  const setMatchmakingState = (state = "searching") => {
+    if (refs.matchmaking) refs.matchmaking.dataset.matchState = state;
   };
 
   const showLobby = () => {
@@ -246,6 +251,7 @@ export function bindDomGameInterface(game) {
     const gameName = gameId === "checkers" ? "Damas" : "Sinuca";
     refs.matchmakingGame.textContent = gameName;
     refs.matchmakingStatus.textContent = `Procurando oponente real para ${gameName}.`;
+    setMatchmakingState("searching");
     setPanel("matchmaking");
     updateGameState({
       activeGameId: gameId,
@@ -356,66 +362,72 @@ export function bindDomGameInterface(game) {
   };
 
   const renderPvpCheckers = () => {
+    if (local.pvpRenderBusy) return;
     const match = gameState.pvpMatch;
     const seat = gameState.pvpSeat;
     const board = Array.isArray(match?.board) ? match.board : [];
     if (!board.length || !seat) return;
+    local.pvpRenderBusy = true;
     const targetKeys = new Set(local.pvpLegalMoves.map((move) => `${move.to.row}-${move.to.col}`));
-    refs.checkersBoard.innerHTML = board.flatMap((row, rowIndex) => (
-      row.map((piece, colIndex) => {
-        const dark = (rowIndex + colIndex) % 2 === 1;
-        const owner = getPvpOwner(piece);
-        const own = owner && owner === seat;
-        const className = [
-          "ppg-dom-cell",
-          dark ? "is-dark" : "is-light",
-          local.pvpSelected?.row === rowIndex && local.pvpSelected?.col === colIndex ? "is-selected" : "",
-          targetKeys.has(`${rowIndex}-${colIndex}`) ? "is-target" : ""
-        ].filter(Boolean).join(" ");
-        const disabled = match.status !== "active" || match.turn !== seat ? " disabled" : "";
-        const checker = piece
-          ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${piece === piece.toUpperCase() ? " is-king" : ""}">${piece === piece.toUpperCase() ? "K" : ""}</span>`
-          : "";
-        return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}"${disabled}>${checker}</button>`;
-      })
-    )).join("");
-    const ownPieces = board.flat().filter((piece) => getPvpOwner(piece) === seat).length;
-    const rivalPieces = board.flat().filter((piece) => getPvpOwner(piece) && getPvpOwner(piece) !== seat).length;
-    refs.checkersTitle.textContent = match.status === "finished" ? "Mesa encerrada" : match.turn === seat ? "Sua vez" : "Vez do rival";
-    refs.checkersScore.textContent = `${ownPieces} x ${rivalPieces}`;
-    refs.checkersStatus.textContent =
-      match.status === "finished"
-        ? match.resultSummary || "Partida encerrada."
-        : match.turn === seat
-          ? "Sua vez. Escolha uma peça."
-          : "Aguardando jogada do rival.";
-    updateGameState({
-      activeGameId: "checkers",
-      lobbyPhase: match.status === "finished" ? "finished" : "playing",
-      checkersGame: {
-        phase: match.status,
-        turn: match.turn,
-        playerPieces: ownPieces,
-        aiPieces: rivalPieces,
-        selected: local.pvpSelected,
-        legalMoves: local.pvpLegalMoves.map((move) => ({ to: move.to, capture: Boolean(move.capture) })),
-        moveCount: match.moveCount || 0,
-        realPvp: true
-      },
-      objective: "Vencer a Dama real",
-      focus: "tabuleiro PvP de dama",
-      prompt: refs.checkersStatus.textContent
-    });
-    if (match.status === "finished") {
-      const won = match.winner && match.winner === seat;
-      const result = match.winner ? (won ? "win" : "loss") : "draw";
-      const settlement = match.settlement || {};
-      const payout = Number(settlement.payout || 0);
-      const fee = Number(settlement.houseFee || 0);
-      const body = match.winner
-        ? `${match.resultSummary || "Partida encerrada."} ${won ? `Você recebeu ${payout} créditos reais.` : "Você perdeu a mesa."} Casa: ${fee}.`
-        : `${match.resultSummary || "Empate."} Entrada devolvida.`;
-      showResult("checkers", result, body);
+    try {
+      refs.checkersBoard.innerHTML = board.flatMap((row, rowIndex) => (
+        row.map((piece, colIndex) => {
+          const dark = (rowIndex + colIndex) % 2 === 1;
+          const owner = getPvpOwner(piece);
+          const own = owner && owner === seat;
+          const className = [
+            "ppg-dom-cell",
+            dark ? "is-dark" : "is-light",
+            local.pvpSelected?.row === rowIndex && local.pvpSelected?.col === colIndex ? "is-selected" : "",
+            targetKeys.has(`${rowIndex}-${colIndex}`) ? "is-target" : ""
+          ].filter(Boolean).join(" ");
+          const disabled = match.status !== "active" || match.turn !== seat ? " disabled" : "";
+          const checker = piece
+            ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${piece === piece.toUpperCase() ? " is-king" : ""}">${piece === piece.toUpperCase() ? "K" : ""}</span>`
+            : "";
+          return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}"${disabled}>${checker}</button>`;
+        })
+      )).join("");
+      const ownPieces = board.flat().filter((piece) => getPvpOwner(piece) === seat).length;
+      const rivalPieces = board.flat().filter((piece) => getPvpOwner(piece) && getPvpOwner(piece) !== seat).length;
+      refs.checkersTitle.textContent = match.status === "finished" ? "Mesa encerrada" : match.turn === seat ? "Sua vez" : "Vez do rival";
+      refs.checkersScore.textContent = `${ownPieces} x ${rivalPieces}`;
+      refs.checkersStatus.textContent =
+        match.status === "finished"
+          ? match.resultSummary || "Partida encerrada."
+          : match.turn === seat
+            ? "Sua vez. Escolha uma peça."
+            : "Aguardando jogada do rival.";
+      updateGameState({
+        activeGameId: "checkers",
+        lobbyPhase: match.status === "finished" ? "finished" : "playing",
+        checkersGame: {
+          phase: match.status,
+          turn: match.turn,
+          playerPieces: ownPieces,
+          aiPieces: rivalPieces,
+          selected: local.pvpSelected,
+          legalMoves: local.pvpLegalMoves.map((move) => ({ to: move.to, capture: Boolean(move.capture) })),
+          moveCount: match.moveCount || 0,
+          realPvp: true
+        },
+        objective: "Vencer a Dama real",
+        focus: "tabuleiro PvP de dama",
+        prompt: refs.checkersStatus.textContent
+      });
+      if (match.status === "finished") {
+        const won = match.winner && match.winner === seat;
+        const result = match.winner ? (won ? "win" : "loss") : "draw";
+        const settlement = match.settlement || {};
+        const payout = Number(settlement.payout || 0);
+        const fee = Number(settlement.houseFee || 0);
+        const body = match.winner
+          ? `${match.resultSummary || "Partida encerrada."} ${won ? `Você recebeu ${payout} créditos reais.` : "Você perdeu a mesa."} Casa: ${fee}.`
+          : `${match.resultSummary || "Empate."} Entrada devolvida.`;
+        showResult("checkers", result, body);
+      }
+    } finally {
+      local.pvpRenderBusy = false;
     }
   };
 
@@ -423,14 +435,24 @@ export function bindDomGameInterface(game) {
     window.clearInterval(local.pvpPollTimer);
     local.pvpPollTimer = window.setInterval(async () => {
       const payload = await fetchPvpState("checkers");
-      if (payload?.ok) renderPvpCheckers();
+      if (payload?.ok) {
+        if (payload.state === "waiting") {
+          setMatchmakingState("waiting");
+          refs.matchmakingStatus.textContent = "Mesa aberta. Estamos aguardando outro jogador real.";
+        } else if (payload?.match?.status) {
+          setMatchmakingState("matched");
+          refs.matchmakingStatus.textContent = "Jogador encontrado. Abrindo o tabuleiro.";
+        }
+        renderPvpCheckers();
+      }
     }, 1200);
   };
 
   const startRealCheckers = async () => {
     local.selectedGame = "checkers";
     refs.matchmakingGame.textContent = "Damas";
-    refs.matchmakingStatus.textContent = "Procurando jogador real com aposta equivalente.";
+    refs.matchmakingStatus.textContent = "Abrindo mesa real e procurando outro jogador.";
+    setMatchmakingState("searching");
     setPanel("matchmaking");
     updateGameState({
       activeGameId: "checkers",
@@ -442,15 +464,18 @@ export function bindDomGameInterface(game) {
     });
     const payload = await joinPubpaidPvpQueue("checkers", gameState.lobbyStake || 10);
     if (!payload?.ok) {
+      setMatchmakingState("error");
       refs.matchmakingStatus.textContent = payload?.error || "Nao foi possivel abrir a fila real.";
       updateGameState({ prompt: refs.matchmakingStatus.textContent });
       return;
     }
     if (payload.state === "waiting") {
-      refs.matchmakingStatus.textContent = "Aguardando outro jogador real.";
+      setMatchmakingState("waiting");
+      refs.matchmakingStatus.textContent = "Mesa aberta. Estamos aguardando outro jogador real.";
       startPvpPolling();
       return;
     }
+    setMatchmakingState("matched");
     setPanel("checkers");
     game.scene.stop("game-lobby-scene");
     game.scene.stop("pool-game-scene");

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T23:35:19.262Z",
+  "lastUpdatedAt": "2026-05-17T01:37:14.454Z",
   "assets": [
     {
       "id": "pubpaid-main-character-rua-alta-v1",
@@ -2299,6 +2299,15 @@
         "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
       ],
       "createdAt": "2026-05-16T23:35:19.262Z"
+    },
+    {
+      "id": "pubpaid-mobile-matchmaking",
+      "kind": "image-set",
+      "path": ".codex-temp/pubpaid-mobile-matchmaking/",
+      "source": "workspace",
+      "note": "Capturas Playwright da correção mobile PubPaid 2.0: Google gate animado, carteira autenticada, lobby mobile limpo, bloqueio sem saldo, matchmaking esperando e Damas PvP ativo.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T01:37:14.454Z"
     }
   ]
 }

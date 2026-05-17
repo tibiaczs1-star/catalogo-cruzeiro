@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-17 - PubPaid mobile matchmaking destravado
+
+- Usuario pediu finalizar a correcao do mobile: menus sobrepostos, botao de musica atrapalhando controles, tela preta no login Google e espera de oponente sem vida visual.
+- `pubpaid-v2.html` e `pubpaid-phaser.css` ganharam fundo animado no Google gate e uma arena animada de matchmaking para Damas enquanto aguarda outro jogador real.
+- Mobile: controles touch agora somem quando lobby, carteira, bloqueio, matchmaking, sinuca, Damas ou resultado estao abertos; o botao de som foi movido para o topo e a barra superior some nos paineis em retrato para nao sobrepor o fluxo.
+- `pubpaid-phaser/app.js` deixou de bloquear mobile em retrato/fullscreen; a permissao de entrada usa copia mobile e segue sem exigir tela cheia quando o navegador nao permite.
+- `domGameInterface.js` agora marca estados de matchmaking (`searching`, `waiting`, `matched`, `error`) e corrige a recursao do render PvP de Damas que causava `Maximum call stack size exceeded` ao abrir partida pareada.
+- Validacao local: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS brace balance e Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-mobile-matchmaking/`.
+
 ## Atualizacao rapida 2026-05-16 - Damas real PvP preparada para online
 
 - Usuario pediu subir PubPaid 2.0 online com login Google e finalmente permitir dois jogadores reais jogarem Damas entre si.

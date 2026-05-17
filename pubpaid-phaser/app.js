@@ -16,7 +16,7 @@ import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260516-google-wallet-invitecopy2";
+const PUBPAID_BUILD_VERSION = "20260516-mobile-matchmaking-flow1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -208,7 +208,7 @@ function setPermissionStatus(message) {
 function syncOrientationGate() {
   const blocked = isOrientationBlocked();
   const permissionGateVisible = Boolean(refs.permissionGate && !refs.permissionGate.hasAttribute("hidden"));
-  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible);
+  const shouldShowGate = blocked && !isTouchDevice && (gameStarted || introStarted || permissionGateVisible);
   refs.body?.classList.toggle("is-orientation-blocked", shouldShowGate);
   if (refs.orientationGate) {
     refs.orientationGate.hidden = !shouldShowGate;
@@ -221,7 +221,7 @@ function syncOrientationGate() {
 }
 
 function syncFullscreenWarning() {
-  const shouldWarn = Boolean(gameStarted && !document.fullscreenElement);
+  const shouldWarn = Boolean(gameStarted && !isTouchDevice && !document.fullscreenElement);
   refs.body?.classList.toggle("is-fullscreen-warning", shouldWarn);
   if (refs.fullscreenWarning) {
     refs.fullscreenWarning.hidden = !shouldWarn;
@@ -245,13 +245,13 @@ function startIntroScene() {
 function openPermissionGate() {
   refs.splash?.setAttribute("hidden", "");
   refs.permissionGate?.removeAttribute("hidden");
-  setPermissionStatus("Som 16-bit + fullscreen");
+  setPermissionStatus(isTouchDevice ? "Som 16-bit + entrada mobile" : "Som 16-bit + fullscreen");
 }
 
 async function activateExperience() {
   if (isOrientationBlocked()) {
     syncOrientationGate();
-    setPermissionStatus("Modo retrato detectado. Iniciando mesmo assim para teste.");
+    setPermissionStatus("Modo retrato detectado. Vamos seguir em fluxo mobile.");
   }
   if (refs.startExperience) {
     refs.startExperience.disabled = true;
@@ -269,7 +269,9 @@ async function activateExperience() {
       ? "Tela cheia ativa."
       : isIOS
         ? "Som ativo. No iPhone/iPad, continue em tela ampla no Safari."
-        : "Som ativo."
+        : isTouchDevice
+          ? "Som ativo. Fluxo mobile liberado."
+          : "Som ativo."
   );
   if (refs.startExperience) {
     refs.startExperience.disabled = false;

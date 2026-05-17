@@ -1,26 +1,10 @@
 # Handoff
 
-Updated: 2026-05-16T23:35:19.380Z
+Updated: 2026-05-17T01:37:14.553Z
 
-PubPaid 2.0 receipt-name/admin verification change is locally validated in the clean deploy worktree. Version string is 20260516-google-wallet-invitecopy2. Remaining: commit, push to origin main, poll Render, and run online checks/screenshots.
+PubPaid 2.0 mobile/matchmaking corrigido e validado localmente no worktree limpo. Corrigida recursão do render PvP de Damas que causava Maximum call stack size exceeded quando o pareamento vinha ativo.
 
 ## Next
 
-- Deploy and online validation
-
-## Files In Focus
-
-- pubpaid-v2.html
-- site-google-auth.js
-- pubpaid-admin.html
-- pubpaid-runtime.js
-- server.js
-- pubpaid-phaser/app.js
-- pubpaid-phaser/scenes/BootScene.js
-- pubpaid-phaser/services/accountService.js
-- pubpaid-phaser/ui/walletInterface.js
-- pubpaid-phaser/ui/domGameInterface.js
-
-## Related Orders
-
-- 2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po
+- Deploy em origin/main
+- aguardar Render e verificar online /pubpaid-v2.html?v=20260516-mobile-matchmaking-flow1.

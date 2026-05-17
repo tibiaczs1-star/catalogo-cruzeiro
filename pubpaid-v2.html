@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516-google-wallet-invitecopy2" />
-    <script defer src="./site-google-auth.js?v=20260516-google-wallet-invitecopy2"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516-mobile-matchmaking-flow1" />
+    <script defer src="./site-google-auth.js?v=20260516-mobile-matchmaking-flow1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260516-google-wallet-invitecopy2"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260516-mobile-matchmaking-flow1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -83,19 +83,26 @@
             <section class="ppg-permission-card" aria-label="Permissões para iniciar PubPaid 2.0">
               <p class="ppg-kicker">antes da abertura</p>
               <h2>Ative som e tela cheia.</h2>
-              <p>
-                A música entra no primeiro frame. Toque para liberar áudio, pedir tela cheia e começar a intro.
-              </p>
+              <p>Toque para liberar o som e começar a abertura. No celular, o jogo segue mesmo sem tela cheia.</p>
               <button class="ppg-button primary" type="button" data-start-experience>
                 Ativar e começar
               </button>
               <button class="ppg-button" type="button" data-dom-open-wallet>
                 Abrir carteira
               </button>
-              <span data-permission-status>Som 16-bit + fullscreen</span>
+              <span data-permission-status>Som 16-bit + entrada</span>
             </section>
           </div>
           <div class="ppg-splash" data-splash-screen aria-live="polite">
+            <div class="ppg-login-ambience" aria-hidden="true">
+              <div class="ppg-login-neon">
+                <span></span>
+                <strong>PubPaid</strong>
+              </div>
+              <div class="ppg-login-waitline">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
             <section class="ppg-splash-card ppg-splash-step is-active" data-splash-step="auth" data-google-auth-card>
               <p class="ppg-kicker">bem-vindo</p>
               <h2 data-auth-title>Entre para jogar</h2>
@@ -211,6 +218,14 @@
                 <span class="ppg-kicker">matchmaking</span>
                 <h2 data-dom-matchmaking-game>Sinuca</h2>
               </header>
+              <div class="ppg-match-arena" aria-hidden="true">
+                <span class="ppg-match-avatar is-you"></span>
+                <span class="ppg-match-route"><i></i></span>
+                <span class="ppg-match-avatar is-rival"></span>
+                <span class="ppg-match-board">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </div>
               <div class="ppg-dom-match-lights" aria-hidden="true">
                 <i></i><i></i><i></i><i></i>
               </div>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T23:35:18.774Z",
+  "lastUpdatedAt": "2026-05-17T01:37:14.398Z",
   "orders": [
     {
       "id": "2026-05-16-pubpaid-main-character-rua-alta-v1",
@@ -10002,6 +10002,21 @@
         "admin",
         "copy"
       ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-17-corrigir-fluxo-mobile-pubpaid-2-0-login-animado-matchmaking-com-animacao-control",
+      "createdAt": "2026-05-17T01:37:14.398Z",
+      "updatedAt": "2026-05-17T01:37:14.398Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok agora realize / termine a task: corrigir mobile PubPaid, animação de espera de oponente, animação no login Google, menus sem sobreposição e Damas entrando no PvP real quando pareado.",
+      "summary": "Corrigir fluxo mobile PubPaid 2.0: login animado, matchmaking com animação, controles sem sobreposição e Damas PvP sem travar ao parear.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
       "nextSteps": [],
       "notes": ""
     }

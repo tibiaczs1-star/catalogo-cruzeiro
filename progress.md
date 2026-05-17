@@ -1,5 +1,14 @@
 Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com responsividade e estrutura definitiva.
 
+## 2026-05-17 mobile matchmaking realflow
+
+- Corrigido o fluxo mobile do PubPaid 2.0: os controles touch somem quando lobby, carteira, bloqueio, matchmaking ou Damas estao abertos, e o botao de som foi movido para um canto sem disputar espaco com as setas.
+- Adicionado fundo animado no Google gate para evitar tela preta/vazia durante o login.
+- Adicionada arena animada no matchmaking de Damas, com estado visual para busca/espera/pareamento.
+- Corrigida recursao do render PvP de Damas que travava a entrada no tabuleiro pareado com `Maximum call stack size exceeded`.
+- Versao de cache atualizada para `20260516-mobile-matchmaking-flow1`.
+- Validacoes locais: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS brace balance e Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-mobile-matchmaking/`.
+
 ## 2026-04-28 encerramento diario
 
 - Home/mosaico aprovado pelo usuario foi publicado no `origin/main` no commit `b2b8609`.
