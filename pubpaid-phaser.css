@@ -243,6 +243,17 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
     linear-gradient(145deg, rgba(18, 28, 34, 0.9), rgba(5, 9, 20, 0.94));
 }
 
+.ppg-dom-game-card.is-demo {
+  border-color: rgba(112, 255, 214, 0.58);
+  background:
+    radial-gradient(circle at 74% 22%, rgba(112, 255, 214, 0.22), transparent 32%),
+    linear-gradient(145deg, rgba(12, 42, 37, 0.92), rgba(5, 9, 20, 0.95));
+}
+
+.ppg-dom-game-card.is-demo strong {
+  color: #9dffdf;
+}
+
 .ppg-dom-game-card.is-chess,
 .ppg-dom-game-card.is-poker,
 .ppg-dom-game-card.is-truco,
@@ -1992,7 +2003,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-checkersarena1") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-checkersdemo1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -2369,7 +2380,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-checkersarena1");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-checkersdemo1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 
@@ -4611,6 +4622,8 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
 .ppg-checkers-statline strong {
   color: #fff6dc;
   font-size: clamp(22px, 2.3vw, 34px);
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .ppg-checkers-hints {

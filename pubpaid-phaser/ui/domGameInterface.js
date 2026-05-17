@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-checkersarena1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-checkersdemo1";
 import {
   confirmPvpReady,
   drawPoker,
@@ -9,14 +9,17 @@ import {
   moveChess,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260517-checkersarena1";
+} from "../services/pvpService.js?v=20260517-checkersdemo1";
 import {
   CHECKERS_SIZE,
+  applyCheckersMove,
   countCheckersPieces,
+  createInitialCheckersBoard,
   getCheckersLegalMoves,
   getCheckersOwner,
+  getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260517-checkersarena1";
+} from "../core/checkersRules.js?v=20260517-checkersdemo1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -72,6 +75,7 @@ export function bindDomGameInterface(game) {
     poolStatus: document.querySelector("[data-dom-pool-status]"),
     checkers: document.querySelector("[data-dom-checkers]"),
     checkersBoard: document.querySelector("[data-dom-checkers-board]"),
+    checkersKicker: document.querySelector("[data-dom-checkers-kicker]"),
     checkersTitle: document.querySelector("[data-dom-checkers-title]"),
     checkersScore: document.querySelector("[data-dom-checkers-score]"),
     checkersStatus: document.querySelector("[data-dom-checkers-status]"),
@@ -113,6 +117,10 @@ export function bindDomGameInterface(game) {
     pvpSelected: null,
     pvpLegalMoves: [],
     pvpDragFrom: null,
+    demoCheckers: null,
+    demoSelected: null,
+    demoLegalMoves: [],
+    demoAiTimer: null,
     pvpHeld: [true, true, true, true, true],
     chessSelected: "",
     poolAim: 0,
@@ -149,12 +157,17 @@ export function bindDomGameInterface(game) {
   const showLobby = () => {
     window.clearInterval(local.pvpPollTimer);
     window.clearTimeout(local.resultReturnTimer);
+    window.clearTimeout(local.demoAiTimer);
     local.pvpPollTimer = null;
     local.resultReturnTimer = null;
+    local.demoAiTimer = null;
     local.resultHandledMatchId = "";
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
     local.pvpDragFrom = null;
+    local.demoCheckers = null;
+    local.demoSelected = null;
+    local.demoLegalMoves = [];
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
     local.poolAim = 0;
@@ -242,6 +255,8 @@ export function bindDomGameInterface(game) {
 
   const gameIdIsCheckers = (gameId) => gameId === "checkers";
 
+  const isCheckersDemoActive = () => local.selectedGame === "checkers-demo" && Boolean(local.demoCheckers);
+
   const gameLabel = (gameId = "") => GAME_LABELS[gameId] || "Mesa";
 
   const displayNameFor = (player = {}) =>
@@ -286,6 +301,143 @@ export function bindDomGameInterface(game) {
     }
     refsForPlayer.root?.classList.toggle("is-active", active);
     refsForPlayer.root?.classList.toggle("is-offline", !connected);
+  };
+
+  const createDemoCheckersMatch = () => ({
+    id: `demo-checkers-${Date.now()}`,
+    gameId: "checkers-demo",
+    status: "active",
+    board: createInitialCheckersBoard(),
+    turn: "playerOne",
+    winner: "",
+    resultSummary: "",
+    ready: { playerOne: true, playerTwo: true },
+    presence: {
+      playerOne: { connected: true },
+      playerTwo: { connected: true }
+    },
+    playerOne: currentPvpPlayer() || {
+      name: "Você",
+      email: "demo@pubpaid.local"
+    },
+    playerTwo: {
+      name: "Máquina",
+      email: "treino@pubpaid.local"
+    },
+    forcedPiece: null,
+    lastMove: null,
+    checkersHistory: [],
+    moveCount: 0,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    coinFlip: {
+      face: "demo",
+      firstSeat: "playerOne"
+    }
+  });
+
+  const pickDemoAiMove = (moves = [], board = []) => {
+    const scored = moves.map((move, index) => {
+      const piece = board?.[move.from?.row]?.[move.from?.col] || "";
+      const landingPiece = board?.[move.to?.row]?.[move.to?.col] || piece;
+      const promotion = String(piece).toLowerCase() === "o" && move.to?.row === CHECKERS_SIZE - 1 ? 1 : 0;
+      const centerBonus = 4 - Math.abs(3.5 - Number(move.to?.col || 0));
+      const progress = Number(move.to?.row || 0);
+      return {
+        move,
+        score:
+          (move.capture ? 100 : 0) +
+          Number(move.chainLength || 0) * 20 +
+          promotion * 14 +
+          (isCheckersKing(landingPiece) ? 4 : 0) +
+          centerBonus +
+          progress * 0.25 -
+          index * 0.01
+      };
+    });
+    scored.sort((a, b) => b.score - a.score);
+    return scored[0]?.move || moves[0] || null;
+  };
+
+  const applyDemoCheckersMove = (move, seat = local.demoCheckers?.turn || "playerOne") => {
+    const match = local.demoCheckers;
+    if (!match || match.status !== "active" || !move) return;
+    const board = applyCheckersMove(match.board, move);
+    const nextPiece = board?.[move.to?.row]?.[move.to?.col] || "";
+    const continuation = move.capture
+      ? getCheckersLegalMoves(board, seat, move.to).filter((entry) => entry.capture && getCheckersOwner(nextPiece) === seat)
+      : [];
+    const outcome = getCheckersOutcome(board);
+    const now = new Date().toISOString();
+    const historyEntry = {
+      index: Number(match.moveCount || 0) + 1,
+      playerName: displayNameFor(match[seat]),
+      seat,
+      from: move.from,
+      to: move.to,
+      capture: move.capture || null,
+      crowned: isCheckersKing(nextPiece),
+      at: now
+    };
+    Object.assign(match, {
+      board,
+      lastMove: historyEntry,
+      checkersHistory: match.checkersHistory.concat(historyEntry).slice(-80),
+      moveCount: historyEntry.index,
+      forcedPiece: continuation.length ? { ...move.to } : null,
+      turn: continuation.length ? seat : seat === "playerOne" ? "playerTwo" : "playerOne",
+      updatedAt: now
+    });
+    if (outcome) {
+      match.status = "finished";
+      match.winner = outcome;
+      match.resultSummary = outcome === "playerOne" ? "Você venceu o treino." : "A máquina venceu o treino.";
+      match.turn = "";
+      match.forcedPiece = null;
+    }
+  };
+
+  const scheduleDemoAiMove = () => {
+    window.clearTimeout(local.demoAiTimer);
+    if (!isCheckersDemoActive() || local.demoCheckers.status !== "active" || local.demoCheckers.turn !== "playerTwo") return;
+    local.demoAiTimer = window.setTimeout(() => {
+      if (!isCheckersDemoActive() || local.demoCheckers.status !== "active") return;
+      const moves = getCheckersLegalMoves(local.demoCheckers.board, "playerTwo", local.demoCheckers.forcedPiece || null);
+      const move = pickDemoAiMove(moves, local.demoCheckers.board);
+      if (!move) {
+        local.demoCheckers.status = "finished";
+        local.demoCheckers.winner = "playerOne";
+        local.demoCheckers.resultSummary = "Máquina sem movimentos. Você venceu o treino.";
+      } else {
+        applyDemoCheckersMove(move, "playerTwo");
+      }
+      local.demoSelected = null;
+      local.demoLegalMoves = [];
+      renderPvpCheckers();
+      if (local.demoCheckers?.turn === "playerTwo") scheduleDemoAiMove();
+    }, 650);
+  };
+
+  const startDemoCheckers = () => {
+    window.clearInterval(local.pvpPollTimer);
+    window.clearTimeout(local.demoAiTimer);
+    local.pvpPollTimer = null;
+    local.selectedGame = "checkers-demo";
+    local.demoCheckers = createDemoCheckersMatch();
+    local.demoSelected = null;
+    local.demoLegalMoves = [];
+    local.pvpSelected = null;
+    local.pvpLegalMoves = [];
+    setPanel("checkers");
+    updateGameState({
+      pvpStatus: "idle",
+      pvpGameId: "",
+      pvpSeat: "",
+      pvpMatchId: "",
+      pvpMatch: null,
+      pvpQueue: null
+    });
+    renderPvpCheckers();
   };
 
   const setPlayerSlot = ({ picture, initial, name, state }, player = null, fallback = {}) => {
@@ -364,28 +516,32 @@ export function bindDomGameInterface(game) {
 
   const renderPvpCheckers = () => {
     if (local.pvpRenderBusy) return;
-    const match = gameState.pvpMatch;
-    const seat = gameState.pvpSeat;
+    const demoMode = isCheckersDemoActive();
+    const match = demoMode ? local.demoCheckers : gameState.pvpMatch;
+    const seat = demoMode ? "playerOne" : gameState.pvpSeat;
     const board = Array.isArray(match?.board) ? match.board : [];
-    if (match?.status === "readying") {
+    if (!demoMode && match?.status === "readying") {
       setPanel("matchmaking");
       renderMatchmakingState();
       return;
     }
     if (!board.length || !seat) return;
     local.pvpRenderBusy = true;
+    const selected = demoMode ? local.demoSelected : local.pvpSelected;
+    const legalMoves = demoMode ? local.demoLegalMoves : local.pvpLegalMoves;
     const boardToDisplay = (row, col) =>
       seat === "playerTwo" ? { row: CHECKERS_SIZE - 1 - row, col: CHECKERS_SIZE - 1 - col } : { row, col };
     const displayToBoard = (row, col) =>
       seat === "playerTwo" ? { row: CHECKERS_SIZE - 1 - row, col: CHECKERS_SIZE - 1 - col } : { row, col };
     const targetKeys = new Set(
-      local.pvpLegalMoves.map((move) => {
+      legalMoves.map((move) => {
         const display = boardToDisplay(move.to.row, move.to.col);
         return `${display.row}-${display.col}`;
       })
     );
     refs.checkersBoard.dataset.orientation = seat === "playerTwo" ? "flipped" : "normal";
     refs.checkersBoard.dataset.seat = seat;
+    refs.checkersBoard.dataset.mode = demoMode ? "demo" : "pvp";
     try {
       const cellsMarkup = Array.from({ length: CHECKERS_SIZE * CHECKERS_SIZE }, (_, index) => {
           const displayRow = Math.floor(index / CHECKERS_SIZE);
@@ -402,7 +558,7 @@ export function bindDomGameInterface(game) {
             dark ? "is-dark" : "is-light",
             own ? "is-own" : "",
             owner && !own ? "is-rival" : "",
-            local.pvpSelected?.row === rowIndex && local.pvpSelected?.col === colIndex ? "is-selected" : "",
+            selected?.row === rowIndex && selected?.col === colIndex ? "is-selected" : "",
             targetKeys.has(`${displayRow}-${displayCol}`) ? "is-target" : "",
             forcedPiece?.row === rowIndex && forcedPiece?.col === colIndex ? "is-forced" : "",
             lastMove?.from?.row === rowIndex && lastMove?.from?.col === colIndex ? "is-last-from" : "",
@@ -430,13 +586,18 @@ export function bindDomGameInterface(game) {
       const coin = match.coinFlip || {};
       const firstSeat = coin.firstSeat || "";
       const firstName = firstSeat ? displayNameFor(match[firstSeat]) : "";
-      const coinLine = coin.face && firstName ? ` Moeda ${coin.face}: ${firstName} começa.` : "";
+      const coinLine = demoMode ? " Treino contra máquina: não usa saldo." : coin.face && firstName ? ` Moeda ${coin.face}: ${firstName} começa.` : "";
       const isAbandoned = match.status === "abandoned";
       const abandonedBySelf = isAbandoned && match.abandonedBy === seat;
       const abandonSeconds = secondsUntil(match.deadlineAt);
+      if (refs.checkersKicker) refs.checkersKicker.textContent = demoMode ? "treino local" : "ranked pvp";
       refs.checkersTitle.textContent =
         match.status === "finished"
           ? "Mesa encerrada"
+          : demoMode && match.turn === "playerTwo"
+            ? "Máquina pensando"
+            : demoMode
+              ? "Treino livre"
           : isAbandoned
             ? abandonedBySelf ? "Reconectando mesa" : "Rival desconectou"
             : match.turn === seat ? "Sua vez" : "Vez do rival";
@@ -444,6 +605,10 @@ export function bindDomGameInterface(game) {
       refs.checkersStatus.textContent =
         match.status === "finished"
           ? match.resultSummary || "Partida encerrada."
+          : demoMode && match.turn === "playerTwo"
+            ? "A máquina vai responder automaticamente."
+            : demoMode
+              ? `Sua vez no treino. Escolha uma peça.${coinLine}`
           : isAbandoned
             ? abandonedBySelf
               ? "Voce voltou a tempo. Reabrindo a mesa..."
@@ -452,8 +617,8 @@ export function bindDomGameInterface(game) {
             ? `Sua vez. Escolha uma peça.${coinLine}`
             : `Aguardando jogada do rival.${coinLine}`;
       if (refs.forfeitCheckers) {
-        refs.forfeitCheckers.disabled = match.status !== "active" && match.status !== "abandoned";
-        refs.forfeitCheckers.textContent = match.status === "finished" ? "Mesa encerrada" : "Desistir";
+        refs.forfeitCheckers.disabled = demoMode ? false : match.status !== "active" && match.status !== "abandoned";
+        refs.forfeitCheckers.textContent = demoMode ? "Reiniciar demo" : match.status === "finished" ? "Mesa encerrada" : "Desistir";
       }
       setCheckersPlayerCard({
         root: refs.checkersSelf,
@@ -465,7 +630,7 @@ export function bindDomGameInterface(game) {
         pieces: ownPieces,
         active: match.status === "active" && match.turn === seat,
         connected: Boolean(match.presence?.[seat]?.connected ?? true),
-        label: "sua mesa"
+        label: demoMode ? "treino" : "sua mesa"
       });
       setCheckersPlayerCard({
         root: refs.checkersRival,
@@ -477,11 +642,11 @@ export function bindDomGameInterface(game) {
         pieces: rivalPieces,
         active: match.status === "active" && match.turn === rivalSeat,
         connected: Boolean(match.presence?.[rivalSeat]?.connected ?? true),
-        label: "online"
+        label: demoMode ? "máquina local" : "online"
       });
       if (refs.checkersTimer) {
         const turnLeft = Math.max(0, 45 - secondsSince(match.updatedAt || match.startedAt || match.createdAt));
-        refs.checkersTimer.textContent = match.status === "abandoned" ? `${abandonSeconds}s` : match.status === "active" ? `${turnLeft}s` : "--";
+        refs.checkersTimer.textContent = demoMode ? "demo" : match.status === "abandoned" ? `${abandonSeconds}s` : match.status === "active" ? `${turnLeft}s` : "--";
       }
       if (refs.checkersMoves) refs.checkersMoves.textContent = String(match.moveCount || 0);
       if (refs.checkersHints) {
@@ -513,15 +678,16 @@ export function bindDomGameInterface(game) {
           aiPieces: rivalPieces,
           rivalPieces,
           coinFlip: match.coinFlip || null,
-          selected: local.pvpSelected,
-          legalMoves: local.pvpLegalMoves.map((move) => ({ to: move.to, capture: Boolean(move.capture) })),
+          selected,
+          legalMoves: legalMoves.map((move) => ({ to: move.to, capture: Boolean(move.capture) })),
           forcedPiece: match.forcedPiece || null,
           lastMove: match.lastMove || null,
           moveCount: match.moveCount || 0,
-          realPvp: true
+          realPvp: !demoMode,
+          demo: demoMode
         },
-        objective: "Vencer a Dama real",
-        focus: "tabuleiro PvP de dama",
+        objective: demoMode ? "Treinar Damas" : "Vencer a Dama real",
+        focus: demoMode ? "tabuleiro demo de dama" : "tabuleiro PvP de dama",
         prompt: refs.checkersStatus.textContent
       });
       if (match.status === "finished") {
@@ -532,7 +698,9 @@ export function bindDomGameInterface(game) {
         const settlement = match.settlement || {};
         const payout = Number(settlement.payout || 0);
         const fee = Number(settlement.houseFee || 0);
-        const body = match.winner
+        const body = demoMode
+          ? `${match.resultSummary || "Treino encerrado."} Nada foi apostado e a carteira nao foi alterada.`
+          : match.winner
           ? `${match.resultSummary || "Partida encerrada."} ${won ? `Você recebeu ${payout} créditos reais.` : "Você perdeu a mesa."} Casa: ${fee}.`
           : `${match.resultSummary || "Empate."} Entrada devolvida.`;
         const resultKey = `${match.id}:${match.updatedAt || match.finishedAt || ""}`;
@@ -835,6 +1003,17 @@ export function bindDomGameInterface(game) {
   const startRealCheckers = () => startRealPvpGame("checkers");
 
   document.addEventListener("click", async (event) => {
+    const demoButton = event.target.closest("[data-dom-start-demo]");
+    if (demoButton) {
+      const demoGame = demoButton.dataset.domStartDemo || "checkers";
+      if (demoGame === "checkers") {
+        startDemoCheckers();
+      } else {
+        showAccessBlock("unavailable");
+      }
+      return;
+    }
+
     const startButton = event.target.closest("[data-dom-start-game]");
     if (startButton) {
       const nextGame = startButton.dataset.domStartGame || "pool";
@@ -904,6 +1083,10 @@ export function bindDomGameInterface(game) {
     }
     if (event.target.closest("[data-dom-forfeit-checkers]")) {
       const button = event.target.closest("[data-dom-forfeit-checkers]");
+      if (isCheckersDemoActive()) {
+        startDemoCheckers();
+        return;
+      }
       button.disabled = true;
       button.textContent = "Desistindo...";
       leavePubpaidPvpQueue("checkers", { reason: "forfeit", forfeit: true }).then((payload) => {
@@ -994,6 +1177,31 @@ export function bindDomGameInterface(game) {
     if (cell) {
       const row = Number(cell.dataset.row);
       const col = Number(cell.dataset.col);
+      if (isCheckersDemoActive()) {
+        const match = local.demoCheckers;
+        if (!match || match.status !== "active" || match.turn !== "playerOne") return;
+        const target = local.demoLegalMoves.find((move) => move.to.row === row && move.to.col === col);
+        if (target) {
+          applyDemoCheckersMove(target, "playerOne");
+          local.demoSelected = null;
+          local.demoLegalMoves = [];
+          renderPvpCheckers();
+          scheduleDemoAiMove();
+          return;
+        }
+        const piece = match.board?.[row]?.[col];
+        if (getCheckersOwner(piece) !== "playerOne") {
+          local.demoSelected = null;
+          local.demoLegalMoves = [];
+          renderPvpCheckers();
+          return;
+        }
+        local.demoSelected = { row, col };
+        local.demoLegalMoves = getCheckersLegalMoves(match.board, "playerOne", match.forcedPiece || null)
+          .filter((move) => move.from.row === row && move.from.col === col);
+        renderPvpCheckers();
+        return;
+      }
       if (gameState.pvpGameId === "checkers" && gameState.pvpMatch?.status) {
         const match = gameState.pvpMatch;
         const seat = gameState.pvpSeat;
@@ -1028,9 +1236,10 @@ export function bindDomGameInterface(game) {
 
   document.addEventListener("dragstart", (event) => {
     const cell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
-    if (!cell || gameState.pvpGameId !== "checkers") return;
-    const match = gameState.pvpMatch;
-    const seat = gameState.pvpSeat;
+    if (!cell || (!isCheckersDemoActive() && gameState.pvpGameId !== "checkers")) return;
+    const demoMode = isCheckersDemoActive();
+    const match = demoMode ? local.demoCheckers : gameState.pvpMatch;
+    const seat = demoMode ? "playerOne" : gameState.pvpSeat;
     const row = Number(cell.dataset.row);
     const col = Number(cell.dataset.col);
     const piece = match?.board?.[row]?.[col];
@@ -1039,9 +1248,12 @@ export function bindDomGameInterface(game) {
       return;
     }
     local.pvpDragFrom = { row, col };
-    local.pvpSelected = { row, col };
-    local.pvpLegalMoves = getCheckersLegalMoves(match.board, seat, match.forcedPiece || null)
+    if (demoMode) local.demoSelected = { row, col };
+    else local.pvpSelected = { row, col };
+    const moves = getCheckersLegalMoves(match.board, seat, match.forcedPiece || null)
       .filter((move) => move.from.row === row && move.from.col === col);
+    if (demoMode) local.demoLegalMoves = moves;
+    else local.pvpLegalMoves = moves;
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", `${row}-${col}`);
     renderPvpCheckers();
@@ -1053,12 +1265,23 @@ export function bindDomGameInterface(game) {
 
   document.addEventListener("drop", (event) => {
     const cell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
-    if (!cell || gameState.pvpGameId !== "checkers") return;
+    if (!cell || (!isCheckersDemoActive() && gameState.pvpGameId !== "checkers")) return;
     event.preventDefault();
-    const match = gameState.pvpMatch;
+    const demoMode = isCheckersDemoActive();
+    const match = demoMode ? local.demoCheckers : gameState.pvpMatch;
     const row = Number(cell.dataset.row);
     const col = Number(cell.dataset.col);
-    const target = local.pvpLegalMoves.find((move) => move.to.row === row && move.to.col === col);
+    const legalMoves = demoMode ? local.demoLegalMoves : local.pvpLegalMoves;
+    const target = legalMoves.find((move) => move.to.row === row && move.to.col === col);
+    if (demoMode && target) {
+      applyDemoCheckersMove(target, "playerOne");
+      local.pvpDragFrom = null;
+      local.demoSelected = null;
+      local.demoLegalMoves = [];
+      renderPvpCheckers();
+      scheduleDemoAiMove();
+      return;
+    }
     if (match?.id && target) {
       moveCheckers(match.id, target).then((payload) => {
         if (payload?.ok) {
@@ -1071,6 +1294,10 @@ export function bindDomGameInterface(game) {
       return;
     }
     local.pvpDragFrom = null;
+    if (demoMode) {
+      local.demoSelected = null;
+      local.demoLegalMoves = [];
+    }
     renderPvpCheckers();
   });
 

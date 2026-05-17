@@ -43,3 +43,10 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Removido bloqueio duro de orientacao mobile; retrato agora entra no jogo em vez de travar no aviso.
 - Corrigido o bug visual da mao animada deformando o grid 8x8.
 - Validacao: backend com duas contas/cookies e Chrome CDP com dois perfis separados em desktop e mobile retrato, sem scroll e com casas quadradas.
+
+## Atualizacao 2026-05-17 - checkersdemo1
+
+- Adicionado `Damas Demo` no lobby como treino local contra maquina.
+- Demo nao chama carteira, nao entra em fila, nao usa escrow, nao registra aposta e nao altera saldo.
+- Demo reaproveita as regras oficiais de Damas: captura obrigatoria, combo, dama e fim por falta de peca/movimento.
+- Objetivo: permitir teste visual e de fluxo de Damas sem precisar de segundo jogador real.

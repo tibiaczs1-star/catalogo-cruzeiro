@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js?v=20260517-checkersarena1";
+} from "../services/accountService.js?v=20260517-checkersdemo1";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);

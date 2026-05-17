@@ -34,6 +34,7 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Tratar jogo como jogo e site como site: estao no mesmo repo, mas sao frentes diferentes.
 - Nao aplicar agentes, regras editoriais, revisao de cards/homepage ou contexto do site ao jogo, exceto se o usuario pedir explicitamente.
 - Nao usar demo money nem IA local como prova de PvP.
+- Demo local e permitido apenas como treino/teste visual separado, sem ficha, sem escrow, sem carteira e sem alterar saldo.
 - Nao considerar teste API isolado como prova de jogo real.
 - Validar PvP em duas sessoes autenticadas diferentes sempre que mexer no fluxo.
 - Nao usar laboratorio, criador de imagem, prompt antigo ou screenshot antiga como fonte de verdade.
@@ -41,15 +42,16 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Publicar e conferir online o deploy `20260517-checkersarena1`.
+1. Publicar e conferir online o deploy `20260517-checkersdemo1`.
 2. Confirmar online com duas contas Google reais: Damas abre no novo layout, pareia, confirma, move, registra historico e nao deforma mobile.
 3. Continuar polimento visual por jogo, sempre preservando o fluxo financeiro/PvP real.
 4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
 
 ## Ultima Rodada Validada
 
-- Build local: `20260517-checkersarena1`.
+- Build local: `20260517-checkersdemo1`.
 - Damas foi recriada como arena dedicada premium no DOM PvP, com header, cards dos jogadores, timer, historico, hints, drag/tap e botao Desistir.
+- Lobby ganhou `Damas Demo`: treino local contra maquina, sem ficha, sem backend financeiro e sem alterar saldo.
 - Historico de lances de Damas passou a ser persistido no match pelo backend.
 - Mobile nao bloqueia mais por orientacao obrigatoria; o teste em retrato entrou na mesa e manteve tabuleiro quadrado.
 - Teste local isolado com duas contas/sessoes Chrome via CDP: pareamento, ready duplo, lance backend, historico e render desktop/mobile sem scroll.

@@ -8,8 +8,9 @@ Updated: 2026-05-17T11:22:00-05:00
 
 ## Summary
 
-- Build local atual: `20260517-checkersarena1`.
+- Build local atual: `20260517-checkersdemo1`.
 - Damas foi refeita como arena DOM dedicada: header de partida, timer, cards dos jogadores, tabuleiro premium, hints, historico de lances, drag/tap e botao Desistir.
+- Lobby ganhou `Damas Demo`: treino local contra maquina, sem ficha, sem fila PvP, sem escrow e sem alterar saldo.
 - Backend passou a persistir `checkersHistory` por match; o frontend mostra o ultimo historico sem depender de estado local.
 - A mao animada do ultimo lance virou overlay absoluto para nao deformar o grid 8x8.
 - Mobile retrato nao fica mais preso em gate de orientacao; a mesa abre sem scroll e com casas quadradas.
@@ -40,6 +41,8 @@ Updated: 2026-05-17T11:22:00-05:00
 - `node --check pubpaid-phaser/app.js`
 - `node --check pubpaid-phaser/scenes/PoolGameScene.js`
 - `npm run guard:pubpaid`
+- Browser local em Damas Demo: clique no card, lance `A3-B4`, resposta da maquina `D6-E5`, `realPvp=false`, `demo=true`, saldo 0 e sem erros de console.
+- Browser mobile 390x844 em Damas Demo: tabuleiro 332x332, 64 casas, sem scroll e sem bloqueio de orientacao.
 - `git diff --check`
 - Teste backend isolado com duas contas/cookies: Damas `waiting -> readying -> active`, lance legal validado e `checkersHistory[0]` persistido.
 - Teste Chrome via CDP com dois perfis separados:
@@ -83,6 +86,6 @@ Updated: 2026-05-17T11:22:00-05:00
 
 ## Next
 
-- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-checkersarena1`.
+- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-checkersdemo1`.
 - Testar online com duas contas Google reais quando o deploy novo estiver ativo nas duas janelas.
 - Continuar polimento visual por jogo sem quebrar escrow, ready duplo, W.O. e saldo real.

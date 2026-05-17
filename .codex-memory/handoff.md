@@ -2,7 +2,9 @@
 
 Updated: 2026-05-17T11:22:00-05:00
 
-PubPaid 2.0 esta na rodada `20260517-checkersarena1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
+PubPaid 2.0 esta na rodada `20260517-checkersdemo1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
+
+Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visual/fluxo sem ficha, sem fila, sem escrow, sem carteira e sem alterar saldo.
 
 ## What Changed
 
@@ -20,6 +22,7 @@ PubPaid 2.0 esta na rodada `20260517-checkersarena1`. O trabalho atual focou Dam
   - Refeito com bola branca, 15 bolas em triangulo, mira/forca, colisao, parede, caçapas e reposicao da branca.
 - `pubpaid-phaser/ui/domGameInterface.js`
   - Lobby canonico mostra Sinuca, Damas, Xadrez, Poker, Truco e Dados.
+  - Lobby tambem mostra `Damas Demo`, que cria uma partida local contra maquina usando as mesmas regras de Damas, sem backend financeiro.
   - Damas renderiza `abandoned`, resultado, desistir e mao animada.
   - Damas renderiza arena dedicada com timer, cards dos jogadores, hints, historico e suporte a drag/drop alem de tap.
   - Mesa generica renderiza sinuca/xadrez/poker/truco/dados e chama endpoints reais.
@@ -37,6 +40,8 @@ PubPaid 2.0 esta na rodada `20260517-checkersarena1`. O trabalho atual focou Dam
 
 - Syntax checks para `server.js`, `domGameInterface.js`, `pvpService.js`, `accountService.js`, `app.js`, `PoolGameScene.js`.
 - `npm run guard:pubpaid`.
+- Browser local em Damas Demo: card abriu treino, lance `A3-B4`, maquina respondeu `D6-E5`, `realPvp=false`, `demo=true`, saldo 0 e sem console errors.
+- Browser mobile 390x844 em Damas Demo: 64 casas, tabuleiro 332x332, sem scroll.
 - `git diff --check`.
 - Teste backend local isolado com duas contas/cookies confirmou Damas `waiting -> readying -> active`, lance legal e `checkersHistory`.
 - Chrome via CDP com dois perfis separados:
@@ -60,7 +65,7 @@ PubPaid 2.0 esta na rodada `20260517-checkersarena1`. O trabalho atual focou Dam
 ## Next
 
 1. Deploy/sync online.
-2. Confirmar `/api/pubpaid/build` online retornando `20260517-checkersarena1`.
+2. Confirmar `/api/pubpaid/build` online retornando `20260517-checkersdemo1`.
 3. Validar com duas contas Google reais nas janelas do usuario.
 4. Continuar polimento visual por jogo sem quebrar o financeiro.
 
