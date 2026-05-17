@@ -1,6 +1,6 @@
 # Current State
 
-Updated: 2026-05-17T09:00:00.000Z
+Updated: 2026-05-17T04:55:46.0376474-05:00
 
 ## Active Goal
 
@@ -30,10 +30,14 @@ Unificar PubPaid em um unico caminho canonico e fazer PvP real funcionar.
 - PubPaid antigo descartado.
 - `/pubpaid-v2.html` deixou de ser caminho oficial e deve apenas redirecionar para `/pubpaid.html`.
 - Artefatos conceituais e validacoes antigas foram removidos/quarentenados.
+- Patch `20260517-avatarfix1` corrige entrada antes dos assets, escolha de avatar sem placeholder verde, bloqueio de retrato no mobile, tela sem scroll e fila PvP de Damas sem reentrar em mesa ativa antiga.
+- Backend PvP local validado: waiting -> readying -> readying -> active -> finished; entrada fresh durante mesa ativa retorna 409; sair da mesa ativa da vitoria ao outro jogador.
+- Playwright mobile validado: retrato mostra gate horizontal; paisagem fica sem scroll e sem alerta falso de fullscreen.
+- Chrome real ainda nao foi controlado pelo Codex porque o native host do plugin esta sem chave no registro do Windows.
 
 ## Next
 
-1. Validar backend PvP em duas sessoes.
-2. Validar frontend PvP em dois contextos reais de navegador.
-3. Corrigir cache/SW e fullscreen/scroll.
-4. Subir online e testar com duas contas Google reais.
+1. Fazer commit/push do patch.
+2. Aguardar deploy online do build `20260517-avatarfix1`.
+3. Usuario testar nas duas janelas Chrome reais com contas Google diferentes.
+4. Se o online ainda pular a espera PvP, investigar estado real em `data/pubpaid-pvp.json` e fluxo do cliente autenticado.

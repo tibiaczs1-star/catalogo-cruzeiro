@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-pubpaid-canon1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-pubpaid-canon1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-avatarfix1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-avatarfix1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-pubpaid-canon1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-pubpaid-canon1";
-import { IntroScene } from "./scenes/IntroScene.js";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
-import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-pubpaid-canon1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-pubpaid-canon1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
-import { UIScene } from "./scenes/UIScene.js";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-avatarfix1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-avatarfix1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260517-avatarfix1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-avatarfix1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260517-avatarfix1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-avatarfix1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-avatarfix1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-avatarfix1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-avatarfix1";
+import { UIScene } from "./scenes/UIScene.js?v=20260517-avatarfix1";
 
-const PUBPAID_BUILD_VERSION = "20260517-pubpaid-canon1";
+const PUBPAID_BUILD_VERSION = "20260517-avatarfix1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -92,11 +92,19 @@ let gameStarted = false;
 let introStarted = false;
 let orientationLocked = false;
 let bootGateReady = false;
+let assetsReady = false;
 let pendingAutoEntry = false;
+let pendingIntroStart = false;
+let pendingStartGameOptions = null;
 let fullscreenWasActive = false;
 
 function setUpdateStatus(message) {
   if (refs.updateStatus) refs.updateStatus.textContent = message;
+}
+
+function areAssetsReady() {
+  if (window.pubpaidAssetsReady) assetsReady = true;
+  return assetsReady;
 }
 
 function pubpaidVersionedUrl(version = PUBPAID_BUILD_VERSION) {
@@ -504,7 +512,7 @@ function setPermissionStatus(message) {
 function syncOrientationGate() {
   const blocked = isOrientationBlocked();
   const permissionGateVisible = Boolean(refs.permissionGate && !refs.permissionGate.hasAttribute("hidden"));
-  const shouldShowGate = blocked && !isTouchDevice && (gameStarted || introStarted || permissionGateVisible);
+  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible);
   refs.body?.classList.toggle("is-orientation-blocked", shouldShowGate);
   if (refs.orientationGate) {
     refs.orientationGate.hidden = !shouldShowGate;
@@ -519,7 +527,7 @@ function syncOrientationGate() {
 function syncFullscreenWarning() {
   const fullscreenSupported = Boolean(document.fullscreenEnabled && (refs.gameShell || document.documentElement)?.requestFullscreen);
   if (document.fullscreenElement) fullscreenWasActive = true;
-  const shouldWarn = Boolean(gameStarted && !isTouchDevice && fullscreenSupported && !document.fullscreenElement);
+  const shouldWarn = Boolean(gameStarted && fullscreenWasActive && !isTouchDevice && fullscreenSupported && !document.fullscreenElement);
   refs.body?.classList.toggle("is-fullscreen-warning", shouldWarn);
   if (refs.fullscreenWarning) {
     refs.fullscreenWarning.hidden = !shouldWarn;
@@ -532,6 +540,10 @@ function syncFullscreenWarning() {
 }
 
 function startIntroScene() {
+  if (!areAssetsReady()) {
+    pendingIntroStart = true;
+    return;
+  }
   if (introStarted) return;
   introStarted = true;
   refs.permissionGate?.setAttribute("hidden", "");
@@ -543,13 +555,17 @@ function startIntroScene() {
 function openPermissionGate() {
   refs.splash?.setAttribute("hidden", "");
   refs.permissionGate?.removeAttribute("hidden");
-  setPermissionStatus(isTouchDevice ? "Som 16-bit + entrada mobile" : "Som 16-bit + fullscreen");
+  setPermissionStatus(isTouchDevice ? "Som 16-bit + tela horizontal" : "Som 16-bit + fullscreen");
 }
 
 async function activateExperience() {
   if (isOrientationBlocked()) {
     syncOrientationGate();
-    setPermissionStatus("Modo retrato detectado. Vamos seguir em fluxo mobile.");
+    setPermissionStatus("Gire o aparelho para horizontal para continuar.");
+    if (refs.startExperience) {
+      refs.startExperience.disabled = false;
+    }
+    return;
   }
   if (refs.startExperience) {
     refs.startExperience.disabled = true;
@@ -566,7 +582,7 @@ async function activateExperience() {
     setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
   syncAudioButton();
-  const fullscreenTask = isTouchDevice ? Promise.resolve(false) : withTimeout(requestFullscreen(), false, 900);
+  const fullscreenTask = withTimeout(requestFullscreen(), false, 900);
   const [fullscreenOk, orientationOk] = await Promise.all([
     fullscreenTask,
     withTimeout(requestLandscapeLock(), false, 900)
@@ -577,9 +593,9 @@ async function activateExperience() {
       : fullscreenOk || orientationOk
       ? "Tela cheia ativa."
       : isIOS
-        ? "Som ativo. No iPhone/iPad, continue em tela ampla no Safari."
+        ? "Som ativo. No iPhone/iPad, mantenha em horizontal."
         : isTouchDevice
-          ? "Som ativo. Fluxo mobile liberado."
+          ? "Som ativo. Mantenha o jogo em horizontal."
           : "Som ativo."
   );
   if (refs.startExperience) {
@@ -766,6 +782,14 @@ async function startGame({ allowProfilePrompt = true } = {}) {
     openSplash("terms");
     return;
   }
+  if (!areAssetsReady()) {
+    pendingStartGameOptions = { allowProfilePrompt };
+    updateGameState({
+      objective: "Carregar personagens",
+      prompt: "Preparando sprites e cenario antes de abrir o jogo."
+    });
+    return;
+  }
   refs.body?.classList.remove("game-is-locked");
   refs.splash?.setAttribute("hidden", "");
   if (game.scene.isActive("intro-scene")) {
@@ -783,6 +807,7 @@ async function startGame({ allowProfilePrompt = true } = {}) {
   }
   gameStarted = true;
   syncEnterExitButtons();
+  syncOrientationGate();
   syncFullscreenWarning();
 }
 
@@ -1040,6 +1065,24 @@ game.events.on("pubpaid:intro-start", () => {
     setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
   syncAudioButton();
+});
+
+game.events.on("pubpaid:assets-ready", () => {
+  if (assetsReady) return;
+  assetsReady = true;
+  if (pendingIntroStart) {
+    pendingIntroStart = false;
+    startIntroScene();
+  }
+  if (pendingStartGameOptions) {
+    const options = pendingStartGameOptions;
+    pendingStartGameOptions = null;
+    void startGame(options);
+  }
+});
+
+game.events.on("pubpaid:request-fullscreen", () => {
+  void Promise.all([requestFullscreen(), requestLandscapeLock()]).then(syncFullscreenWarning);
 });
 
 game.events.on("pubpaid:intro-frame", ({ index = 0, totalFrames = 1 } = {}) => {

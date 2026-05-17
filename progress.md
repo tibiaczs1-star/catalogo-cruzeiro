@@ -19,7 +19,8 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 
 ## Em Andamento
 
-- Reproduzir PvP real com duas sessoes autenticadas.
-- Corrigir cache/SW para nao depender de aba anonima.
-- Forcar experiencia fullscreen/sem scroll.
-- Validar local e online em `/pubpaid.html`.
+- Patch `20260517-avatarfix1` pronto para deploy.
+- Validado backend PvP com duas sessoes autenticadas de teste: espera, pareamento, dupla confirmacao, partida ativa e abandono com vitoria do outro jogador.
+- Validado frontend local: selecao de avatar com sprites reais, sem placeholder verde, sem texto feio em cima dos personagens e sem alerta falso de fullscreen.
+- Validado mobile por Playwright: retrato bloqueia para horizontal; paisagem fica sem scroll.
+- Pendente: teste online nas duas contas Google reais do usuario, porque o conector Chrome do Codex ainda nao consegue controlar as janelas reais sem o native host registrado no Windows.

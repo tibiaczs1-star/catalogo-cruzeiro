@@ -1,7 +1,7 @@
 import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260517-pubpaid-canon1";
+const ASSET_VERSION = "20260517-avatarfix1";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {
@@ -48,11 +48,13 @@ export class BootScene extends Phaser.Scene {
 
   create() {
     applyPixelTextureFilters(this);
+    window.pubpaidAssetsReady = true;
     updateGameState({
       currentScene: "intro",
       focus: "placa PUB PAID",
       objective: "Entrar no PubPaid",
       prompt: "Entre com Google e comece. O som pode ser ligado depois."
     });
+    this.game.events.emit("pubpaid:assets-ready");
   }
 }

@@ -64,7 +64,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260517-pubpaid-canon1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-avatarfix1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16421,6 +16421,7 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 400, { ok: false, error: "Mesa PvP ainda nao liberada para esse jogo." });
     }
     const stake = normalizePubpaidAmount(body.stake, 10);
+    const wantsFreshQueue = body.fresh !== false && !body.reconnect;
     const walletKey = getPubpaidWalletKey(authUser);
     let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
     const previousWaiting = store.waiting.filter((entry) => entry?.player?.walletKey === walletKey);
@@ -16436,15 +16437,42 @@ async function handleApi(req, res, pathname, searchParams) {
       [entry?.playerOne?.walletKey, entry?.playerTwo?.walletKey].includes(walletKey)
     );
     if (existingMatch) {
-      if (existingMatch.status === "abandoned" && existingMatch.abandonedBy) {
+      if (wantsFreshQueue && gameId === "checkers") {
+        const oldMatchAgeMs = Date.now() - new Date(existingMatch.updatedAt || existingMatch.startedAt || existingMatch.createdAt || 0).getTime();
+        const canCloseWithoutResult = existingMatch.status === "readying" ||
+          existingMatch.status === "abandoned" ||
+          (existingMatch.status === "active" && clampInteger(existingMatch.moveCount) === 0 && oldMatchAgeMs > 15000);
+        if (!canCloseWithoutResult) {
+          return sendJson(res, 409, {
+            ok: false,
+            error: "Voce tem uma mesa de Damas em andamento. Termine ou abandone essa mesa antes de buscar uma nova."
+          });
+        }
+        if (existingMatch.status === "readying") {
+          releasePubpaidMatchEscrow(existingMatch.playerOne, existingMatch.stake);
+          releasePubpaidMatchEscrow(existingMatch.playerTwo, existingMatch.stake);
+          existingMatch.status = "canceled";
+          existingMatch.resultSummary = "Mesa antiga cancelada antes da confirmacao dupla. Escrow liberado.";
+        } else {
+          existingMatch.status = "finished";
+          existingMatch.winner = "";
+          existingMatch.resultSummary = "Mesa antiga encerrada sem jogadas para iniciar uma nova fila.";
+        }
+        existingMatch.finishedAt = new Date().toISOString();
+        existingMatch.updatedAt = new Date().toISOString();
+        store = cleanupPubpaidPvpStore(writePubpaidPvpStore(store));
+      } else if (existingMatch.status === "abandoned" && existingMatch.abandonedBy) {
         existingMatch.status = "active";
         existingMatch.abandonedBy = "";
         existingMatch.deadlineAt = "";
         existingMatch.resultSummary = "Jogador reconectou antes dos 60 segundos. A mesa voltou ao estado ativo.";
         existingMatch.updatedAt = new Date().toISOString();
+        store = writePubpaidPvpStore(store);
+        return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
+      } else {
+        store = writePubpaidPvpStore(store);
+        return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
       }
-      store = writePubpaidPvpStore(store);
-      return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
     }
 
     const player = createPubpaidPvpPlayer(authUser, body.profile || {});
@@ -16525,12 +16553,14 @@ async function handleApi(req, res, pathname, searchParams) {
       }
       return {
         ...entry,
-        status: "abandoned",
+        status: "finished",
         abandonedBy,
-        deadlineAt: new Date(Date.now() + PUBPAID_PVP_ABANDON_MS).toISOString(),
+        winner: isPlayerOne ? "playerTwo" : "playerOne",
+        deadlineAt: "",
         resultSummary: isPlayerOne
-          ? `${entry?.playerOne?.name || "Jogador"} saiu da mesa. Tem 60 segundos para voltar antes de perder por abandono.`
-          : `${entry?.playerTwo?.name || "Jogador"} saiu da mesa. Tem 60 segundos para voltar antes de perder por abandono.`,
+          ? `${entry?.playerOne?.name || "Jogador 1"} saiu da mesa. ${entry?.playerTwo?.name || "Jogador 2"} venceu por abandono.`
+          : `${entry?.playerTwo?.name || "Jogador 2"} saiu da mesa. ${entry?.playerOne?.name || "Jogador 1"} venceu por abandono.`,
+        finishedAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
     });

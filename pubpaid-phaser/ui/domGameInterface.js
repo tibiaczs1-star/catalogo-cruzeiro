@@ -1,13 +1,13 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pubpaid-canon1";
-import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-pubpaid-canon1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-avatarfix1";
+import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-avatarfix1";
 import {
   CHECKERS_SIZE,
   countCheckersPieces,
   getCheckersLegalMoves,
   getCheckersOwner,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260517-pubpaid-canon1";
+} from "../core/checkersRules.js?v=20260517-avatarfix1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -421,7 +421,7 @@ export function bindDomGameInterface(game) {
       name: profile.nick || profile.name || gameState.googleUser?.name || "",
       archetype: gameState.selectedCharacter?.id || "neon",
       favorite: "checkers"
-    });
+    }, { fresh: true });
     if (!payload?.ok) {
       setMatchmakingState("error");
       refs.matchmakingStatus.textContent = payload?.error || "Nao foi possivel abrir a fila real.";
@@ -543,6 +543,22 @@ export function bindDomGameInterface(game) {
       }
       showAccessBlock("pvp-only");
     }
+  });
+
+  window.addEventListener("pagehide", () => {
+    if (gameState.pvpGameId !== "checkers" || gameState.pvpMatch?.status !== "active") return;
+    const body = JSON.stringify({ gameId: "checkers", reason: "pagehide" });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("./api/pubpaid/pvp/leave", new Blob([body], { type: "application/json" }));
+      return;
+    }
+    fetch("./api/pubpaid/pvp/leave", {
+      method: "POST",
+      credentials: "same-origin",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body
+    }).catch(() => {});
   });
 
   refs.cancelAccessBlock?.addEventListener("click", () => {

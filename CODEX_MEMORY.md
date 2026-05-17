@@ -41,8 +41,7 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Provar o backend PvP com duas sessoes autenticadas.
-2. Provar o frontend PvP com dois contextos de navegador.
-3. Corrigir cache/service worker para acabar com dependencia de aba anonima.
-4. Travar o jogo em experiencia fullscreen/sem scroll.
-5. Subir online e testar com duas contas Google reais.
+1. Testar online com duas contas Google reais depois do deploy `20260517-avatarfix1`.
+2. Confirmar no navegador real: jogador A fica aguardando, jogador B pareia, ambos confirmam `Estou pronto`, e so entao Damas abre.
+3. Confirmar em mobile real: retrato bloqueia pedindo horizontal, paisagem nao tem scroll e a escolha de avatar mostra personagens.
+4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.

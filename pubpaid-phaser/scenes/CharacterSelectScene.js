@@ -6,15 +6,15 @@ import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 const CHARACTER_OPTIONS = [
   {
     id: "male",
-    label: "MASCULINO",
-    title: "Masculino",
+    label: "AVATAR 1",
+    title: "Avatar 1",
     spriteKey: PUBPAID_TEXTURE_KEYS.playerMaleIdlePhone,
     accent: 0x50efff
   },
   {
     id: "female",
-    label: "FEMININO",
-    title: "Feminino",
+    label: "AVATAR 2",
+    title: "Avatar 2",
     spriteKey: PUBPAID_TEXTURE_KEYS.playerFemaleIdlePhone,
     accent: 0xff4fb8
   }
@@ -115,20 +115,15 @@ export class CharacterSelectScene extends Phaser.Scene {
       .setStrokeStyle(2, option.accent, 0.2);
     const floor = this.add.ellipse(0, 162, 208, 34, option.accent, 0.12)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const sprite = this.add.sprite(0, 158, option.spriteKey, 1)
-      .setOrigin(0.5, 1);
-    fitImageToHeight(sprite, spriteHeight);
-    const title = this.add.text(0, this.mobilePortraitLayout ? -190 : -220, option.title, this.titleStyle(this.mobilePortraitLayout ? 18 : 22, "#fff6dc"))
-      .setOrigin(0.5)
-      .setLetterSpacing(0);
-    const selectedBadge = this.add.text(0, this.mobilePortraitLayout ? -150 : -176, "SELECIONADO", this.pixelStyle(this.mobilePortraitLayout ? 9 : 11, "#07101c"))
+    const sprite = this.buildAvatarPreview(option, spriteHeight);
+    const avatarLabel = this.add.text(0, this.mobilePortraitLayout ? 204 : 234, option.label, this.avatarLabelStyle(this.mobilePortraitLayout ? 12 : 14, "#fff6dc"))
       .setOrigin(0.5)
       .setPadding(10, 5, 10, 4)
-      .setBackgroundColor("#ffd06d")
-      .setAlpha(0);
+      .setBackgroundColor("#07101c")
+      .setLetterSpacing(1);
     const marker = this.add.rectangle(0, this.mobilePortraitLayout ? 184 : 218, 108, 5, option.accent, 0.95)
       .setAlpha(0);
-    card.add([shadow, glow, bg, floor, sprite, title, selectedBadge, marker]);
+    card.add([shadow, glow, bg, floor, sprite, marker, avatarLabel]);
     card.setSize(cardWidth, cardHeight);
     card.setInteractive(new Phaser.Geom.Rectangle(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight), Phaser.Geom.Rectangle.Contains);
     card.on("pointerover", () => this.setSelected(index));
@@ -136,8 +131,26 @@ export class CharacterSelectScene extends Phaser.Scene {
       this.setSelected(index);
       this.chooseSelected();
     });
-    card.ppgOption = { option, bg, glow, marker, selectedBadge, sprite, floor };
+    card.ppgOption = { option, bg, glow, marker, avatarLabel, sprite, floor };
     return card;
+  }
+
+  buildAvatarPreview(option, spriteHeight) {
+    if (this.textures.exists(option.spriteKey)) {
+      const sprite = this.add.sprite(0, 158, option.spriteKey, 1)
+        .setOrigin(0.5, 1);
+      fitImageToHeight(sprite, spriteHeight);
+      return sprite;
+    }
+    const fallback = this.add.container(0, 160);
+    const shine = this.add.rectangle(0, -64, 92, 168, option.accent, 0.12)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const body = this.add.rectangle(0, -62, 58, 118, option.accent, 0.42)
+      .setStrokeStyle(3, option.accent, 0.78);
+    const head = this.add.circle(0, -144, 28, 0xffd8a0, 0.9)
+      .setStrokeStyle(3, 0xfff6dc, 0.55);
+    fallback.add([shine, body, head]);
+    return fallback;
   }
 
   setSelected(index) {
@@ -148,7 +161,8 @@ export class CharacterSelectScene extends Phaser.Scene {
       card.ppgOption.glow.setAlpha(active ? 0.13 : 0.035);
       card.ppgOption.floor.setAlpha(active ? 0.2 : 0.1);
       card.ppgOption.marker.setAlpha(active ? 1 : 0);
-      card.ppgOption.selectedBadge.setAlpha(active ? 1 : 0);
+      card.ppgOption.avatarLabel.setBackgroundColor(active ? "#ffd06d" : "#07101c");
+      card.ppgOption.avatarLabel.setColor(active ? "#07101c" : "#fff6dc");
       this.tweens.add({
         targets: card,
         scaleX: active ? 1.055 : 0.965,
@@ -168,7 +182,7 @@ export class CharacterSelectScene extends Phaser.Scene {
       prompt: `${option.title} selecionado.`
     });
     if (this.confirmButtonText) {
-      this.confirmButtonText.text = `JOGAR COM ${option.title.toUpperCase()}`;
+      this.confirmButtonText.text = "JOGAR";
     }
   }
 
@@ -187,6 +201,7 @@ export class CharacterSelectScene extends Phaser.Scene {
       focus: "rua viva",
       prompt: `${option.title} confirmado. Boa noite.`
     });
+    this.game.events.emit("pubpaid:request-fullscreen");
     this.cameras.main.fadeOut(260, 5, 7, 14);
     this.cameras.main.once("camerafadeoutcomplete", () => {
       this.scene.start("street-scene");
@@ -260,6 +275,15 @@ export class CharacterSelectScene extends Phaser.Scene {
       color,
       stroke: "#05070d",
       strokeThickness: 3
+    };
+  }
+
+  avatarLabelStyle(size, color) {
+    return {
+      fontFamily: "Arial, Verdana, sans-serif",
+      fontSize: `${size}px`,
+      fontStyle: "bold",
+      color
     };
   }
 }
