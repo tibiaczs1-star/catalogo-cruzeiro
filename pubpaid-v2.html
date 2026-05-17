@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-pubpaid-fullfocus-onlinefix1" />
-    <script defer src="./site-google-auth.js?v=20260517-pubpaid-fullfocus-onlinefix1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-damas-ready-online1" />
+    <script defer src="./site-google-auth.js?v=20260517-damas-ready-online1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-pubpaid-fullfocus-onlinefix1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-damas-ready-online1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -218,19 +218,23 @@
                 <span class="ppg-kicker">matchmaking</span>
                 <h2 data-dom-matchmaking-game>Sinuca</h2>
               </header>
-              <div class="ppg-match-arena" aria-hidden="true">
-                <span class="ppg-match-avatar is-you"></span>
-                <span class="ppg-match-route"><i></i></span>
-                <span class="ppg-match-avatar is-rival"></span>
-                <span class="ppg-match-board">
-                  <i></i><i></i><i></i><i></i>
-                </span>
-              </div>
-              <div class="ppg-dom-match-lights" aria-hidden="true">
-                <i></i><i></i><i></i><i></i>
+              <div class="ppg-dom-match-players">
+                <article class="ppg-dom-match-player is-self">
+                  <img alt="" data-dom-match-self-picture hidden>
+                  <span data-dom-match-self-initial>?</span>
+                  <strong data-dom-match-self-name>Você</strong>
+                  <small data-dom-match-self-state>na fila</small>
+                </article>
+                <article class="ppg-dom-match-player is-rival" data-dom-match-rival>
+                  <img alt="" data-dom-match-rival-picture hidden>
+                  <span data-dom-match-rival-initial>?</span>
+                  <strong data-dom-match-rival-name>Waiting for player</strong>
+                  <small data-dom-match-rival-state>outro dispositivo</small>
+                </article>
               </div>
               <p data-dom-matchmaking-status>Procurando oponente real.</p>
               <div class="ppg-dom-actions">
+                <button type="button" class="primary" data-dom-pvp-ready hidden>Iniciar partida</button>
                 <button type="button" data-dom-open-lobby>Cancelar</button>
               </div>
             </aside>

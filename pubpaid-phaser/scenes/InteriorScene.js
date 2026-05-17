@@ -216,9 +216,10 @@ export class InteriorScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "interior-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientFx();
 
-    const waiterNpc = this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 500, 0.128, 2400, 0xfff0c0, {
-      depth: 2.62,
+    const waiterNpc = this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 506, 0.078, 2400, 0xfff0c0, {
+      depth: 2.52,
       glowDepth: 2.49,
+      fitHeight: 118,
       alpha: 0.98
     });
     waiterNpc.ppgNpc = { id: "waiter-host", zone: "waiter", role: "lobby-host" };
@@ -226,7 +227,7 @@ export class InteriorScene extends Phaser.Scene {
     this.actors = [
       waiterNpc
     ];
-    this.waiterIndicator = this.buildWaiterIndicator(704, 336);
+    this.waiterIndicator = this.buildWaiterIndicator(704, 404);
 
     this.player = this.buildPlayer(606, 392);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -246,7 +247,7 @@ export class InteriorScene extends Phaser.Scene {
       .setDepth(1.4);
 
     this.zones = [
-      { id: "waiter", x: 704, y: 506, radius: 88, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter, labelOffsetY: -150 },
+      { id: "waiter", x: 704, y: 506, radius: 78, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter, labelOffsetY: -136 },
       { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", promptLabel: "Palco da dançarina", hideLabel: true, objective: "Ativar o palco", approach: INTERIOR_MAP.interactionPoints.stage },
       { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua", approach: INTERIOR_MAP.interactionPoints.exit }
     ];
@@ -1593,6 +1594,7 @@ export class InteriorScene extends Phaser.Scene {
     const actor = this.add.image(x, y, textureKey)
       .setOrigin(0.5, 1)
       .setScale(scale);
+    if (options.fitHeight) fitImageToHeight(actor, options.fitHeight);
     actor.setDepth(options.depth || 2.45);
     if (options.alpha) actor.setAlpha(options.alpha);
     this.tweens.add({

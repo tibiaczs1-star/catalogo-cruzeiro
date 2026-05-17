@@ -480,7 +480,7 @@ export class GameLobbyScene extends Phaser.Scene {
       this.waiterSprite = this.add.image(x, y, PUBPAID_TEXTURE_KEYS.waiterLobby)
         .setOrigin(0.5, 1)
         .setDepth(2.2);
-      fitImageToHeight(this.waiterSprite, 178);
+      fitImageToHeight(this.waiterSprite, 88);
       this.tableLayer.add(shadow);
       this.tableLayer.add(this.waiterSprite);
       this.startWaiterTalking();

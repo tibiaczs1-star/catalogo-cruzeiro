@@ -16315,7 +16315,7 @@ async function handleApi(req, res, pathname, searchParams) {
     store.waiting = store.waiting.filter((entry) => entry?.player?.walletKey !== walletKey);
     const existingMatch = store.matches.find((entry) =>
       entry?.gameId === gameId &&
-      ["active", "abandoned"].includes(entry?.status) &&
+      ["readying", "active", "abandoned"].includes(entry?.status) &&
       [entry?.playerOne?.walletKey, entry?.playerTwo?.walletKey].includes(walletKey)
     );
     if (existingMatch) {
@@ -16389,11 +16389,23 @@ async function handleApi(req, res, pathname, searchParams) {
       .forEach((entry) => releasePubpaidMatchEscrow(entry.player, entry.stake));
     store.waiting = store.waiting.filter((entry) => !(entry?.gameId === gameId && entry?.player?.walletKey === walletKey));
     store.matches = store.matches.map((entry) => {
-      if (entry?.gameId !== gameId || entry?.status !== "active") return entry;
+      if (entry?.gameId !== gameId || !["readying", "active"].includes(entry?.status)) return entry;
       const isPlayerOne = entry?.playerOne?.walletKey === walletKey;
       const isPlayerTwo = entry?.playerTwo?.walletKey === walletKey;
       if (!isPlayerOne && !isPlayerTwo) return entry;
       const abandonedBy = isPlayerOne ? "playerOne" : "playerTwo";
+      if (entry.status === "readying") {
+        releasePubpaidMatchEscrow(entry.playerOne, entry.stake);
+        releasePubpaidMatchEscrow(entry.playerTwo, entry.stake);
+        return {
+          ...entry,
+          status: "canceled",
+          abandonedBy,
+          resultSummary: "Mesa cancelada antes da confirmacao dupla. Escrow liberado.",
+          finishedAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+      }
       return {
         ...entry,
         status: "abandoned",
@@ -16405,6 +16417,52 @@ async function handleApi(req, res, pathname, searchParams) {
         updatedAt: new Date().toISOString(),
       };
     });
+    store = writePubpaidPvpStore(store);
+    return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/pvp/ready") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para confirmar a mesa PvP." });
+    }
+    const body = await parseBody(req);
+    const gameId = normalizePubpaidPvpGameId(body.gameId);
+    const matchId = cleanShortText(body.matchId || "", 120);
+    if (!gameId || !matchId) {
+      return sendJson(res, 400, { ok: false, error: "Informe a mesa PvP para confirmar." });
+    }
+    let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    const matchIndex = store.matches.findIndex((entry) => entry?.id === matchId && entry?.gameId === gameId);
+    if (matchIndex < 0) {
+      return sendJson(res, 404, { ok: false, error: "Mesa PvP nao encontrada." });
+    }
+    const match = store.matches[matchIndex];
+    const walletKey = getPubpaidWalletKey(authUser);
+    const seat = match?.playerOne?.walletKey === walletKey ? "playerOne" : match?.playerTwo?.walletKey === walletKey ? "playerTwo" : "";
+    if (!seat) {
+      return sendJson(res, 403, { ok: false, error: "Essa mesa pertence a outros jogadores." });
+    }
+    if (match.status !== "readying") {
+      return sendJson(res, 409, { ok: false, error: "Essa mesa nao esta aguardando confirmacao." });
+    }
+    const ready = {
+      playerOne: Boolean(match.ready?.playerOne),
+      playerTwo: Boolean(match.ready?.playerTwo),
+      [seat]: true,
+    };
+    const bothReady = ready.playerOne && ready.playerTwo;
+    store.matches[matchIndex] = {
+      ...match,
+      ready,
+      status: bothReady ? "active" : "readying",
+      startedAt: bothReady ? new Date().toISOString() : match.startedAt,
+      turn: bothReady ? (match.turn || "playerOne") : match.turn,
+      resultSummary: bothReady
+        ? `${match?.playerOne?.name || "Jogador 1"} e ${match?.playerTwo?.name || "Jogador 2"} confirmaram. Damas liberada.`
+        : `${seat === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} confirmou. Aguardando o outro jogador.`,
+      updatedAt: new Date().toISOString(),
+    };
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
   }
@@ -17509,7 +17567,7 @@ function handleStatic(req, res, pathname, requestUrl) {
 
   if (pathname === "/pubpaid" || pathname === "/pubpaid/" || pathname === "/pubpaid.html") {
     res.writeHead(302, {
-      Location: "/pubpaid-v2.html?v=20260517-pubpaid-fullfocus-onlinefix1",
+      Location: "/pubpaid-v2.html?v=20260517-damas-ready-online1",
       "Cache-Control": "no-store"
     });
     return res.end();
@@ -18129,8 +18187,13 @@ function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
   if (gameId === "checkers") {
     return {
       ...match,
+      status: "readying",
       board: createCheckersPvPBoard(),
+      ready: { playerOne: false, playerTwo: false },
+      matchedAt: new Date().toISOString(),
+      startedAt: "",
       turn: "playerOne",
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar.",
     };
   }
 
@@ -18326,7 +18389,7 @@ function buildPubpaidPvpStatePayload(store, authUser, gameId) {
   const waitingEntry = store.waiting.find((entry) => entry?.gameId === gameId && entry?.player?.walletKey === walletKey) || null;
   const matchEntry = store.matches.find((entry) =>
     entry?.gameId === gameId &&
-    ["active", "abandoned", "finished"].includes(entry?.status) &&
+    ["readying", "active", "abandoned", "finished"].includes(entry?.status) &&
     [entry?.playerOne?.walletKey, entry?.playerTwo?.walletKey].includes(walletKey)
   ) || null;
   const seat = matchEntry

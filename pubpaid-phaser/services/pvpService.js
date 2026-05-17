@@ -53,6 +53,10 @@ export async function moveCheckers(matchId, move) {
   return requestPvp("./api/pubpaid/pvp/checkers/move", { matchId, move });
 }
 
+export async function confirmPvpReady(matchId, gameId = "checkers") {
+  return requestPvp("./api/pubpaid/pvp/ready", { matchId, gameId });
+}
+
 export function syncPvpState(payload = {}) {
   updateGameState({
     pvpStatus: payload.state || "idle",

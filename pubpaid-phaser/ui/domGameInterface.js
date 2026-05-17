@@ -1,6 +1,6 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pubpaid-fullfocus-onlinefix1";
-import { fetchPvpState, moveCheckers } from "../services/pvpService.js";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-damas-ready-online1";
+import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-damas-ready-online1";
 
 const CHECKERS_SIZE = 8;
 const MATCH_OPPONENTS = {
@@ -151,6 +151,16 @@ export function bindDomGameInterface(game) {
     matchmaking: document.querySelector("[data-dom-matchmaking]"),
     matchmakingGame: document.querySelector("[data-dom-matchmaking-game]"),
     matchmakingStatus: document.querySelector("[data-dom-matchmaking-status]"),
+    matchSelfPicture: document.querySelector("[data-dom-match-self-picture]"),
+    matchSelfInitial: document.querySelector("[data-dom-match-self-initial]"),
+    matchSelfName: document.querySelector("[data-dom-match-self-name]"),
+    matchSelfState: document.querySelector("[data-dom-match-self-state]"),
+    matchRival: document.querySelector("[data-dom-match-rival]"),
+    matchRivalPicture: document.querySelector("[data-dom-match-rival-picture]"),
+    matchRivalInitial: document.querySelector("[data-dom-match-rival-initial]"),
+    matchRivalName: document.querySelector("[data-dom-match-rival-name]"),
+    matchRivalState: document.querySelector("[data-dom-match-rival-state]"),
+    pvpReady: document.querySelector("[data-dom-pvp-ready]"),
     accessBlock: document.querySelector("[data-dom-access-block]"),
     accessBlockTitle: document.querySelector("[data-dom-access-block-title]"),
     accessBlockBody: document.querySelector("[data-dom-access-block-body]"),
@@ -179,6 +189,8 @@ export function bindDomGameInterface(game) {
     matchCounter: { pool: 0, checkers: 0 },
     matchmakingTimer: null,
     pvpPollTimer: null,
+    resultReturnTimer: null,
+    resultHandledMatchId: "",
     pvpSelected: null,
     pvpLegalMoves: [],
     pvpRenderBusy: false
@@ -207,13 +219,27 @@ export function bindDomGameInterface(game) {
   const showLobby = () => {
     window.clearTimeout(local.matchmakingTimer);
     window.clearInterval(local.pvpPollTimer);
+    window.clearTimeout(local.resultReturnTimer);
     local.matchmakingTimer = null;
     local.pvpPollTimer = null;
+    local.resultReturnTimer = null;
+    local.resultHandledMatchId = "";
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
     local.selectedGame = gameState.activeGameId || local.selectedGame || "pool";
     setPanel("lobby");
+    const resetFinishedPvp = gameState.pvpStatus === "finished"
+      ? {
+          pvpStatus: "idle",
+          pvpGameId: "",
+          pvpSeat: "",
+          pvpMatchId: "",
+          pvpMatch: null,
+          pvpQueue: null
+        }
+      : {};
     updateGameState({
+      ...resetFinishedPvp,
       lobbyPhase: "selecting",
       objective: "Escolher Sinuca ou Damas",
       prompt: "Lobby aberto. Mesas pagas exigem saldo real aprovado."
@@ -221,12 +247,31 @@ export function bindDomGameInterface(game) {
   };
 
   const showResult = (gameId, result, body) => {
+    window.clearTimeout(local.resultReturnTimer);
     local.selectedGame = gameId;
     refs.resultGame.textContent = gameId === "checkers" ? "damas" : "sinuca";
     refs.resultTitle.textContent = resultTitle(result);
     refs.resultBody.textContent = body;
     refs.result.dataset.result = result;
     setPanel("result");
+    if (gameId === "checkers" && gameState.pvpGameId === "checkers") {
+      syncPubpaidAccount().finally(() => {
+        local.resultReturnTimer = window.setTimeout(() => {
+          updateGameState({
+            activeGameId: "",
+            lobbyPhase: "selecting",
+            pvpStatus: "idle",
+            pvpGameId: "",
+            pvpSeat: "",
+            pvpMatchId: "",
+            pvpMatch: null,
+            pvpQueue: null,
+            prompt: "Saldos reais atualizados. Voltando ao lobby."
+          });
+          showLobby();
+        }, 4200);
+      });
+    }
   };
 
   const pickOpponent = (gameId) => {
@@ -313,6 +358,82 @@ export function bindDomGameInterface(game) {
 
   const gameIdIsCheckers = (gameId) => gameId === "checkers";
 
+  const displayNameFor = (player = {}) =>
+    player?.name || player?.email?.split?.("@")?.[0] || "Jogador";
+
+  const initialFor = (player = {}) => displayNameFor(player).trim().charAt(0).toUpperCase() || "?";
+
+  const setPlayerSlot = ({ picture, initial, name, state }, player = null, fallback = {}) => {
+    const source = player || fallback;
+    if (name) name.textContent = displayNameFor(source);
+    if (state) state.textContent = fallback.state || "aguardando";
+    if (initial) initial.textContent = initialFor(source);
+    if (picture) {
+      const pictureUrl = source?.picture || "";
+      picture.hidden = !pictureUrl;
+      if (pictureUrl) picture.src = pictureUrl;
+    }
+  };
+
+  const currentPvpPlayer = () => {
+    const match = gameState.pvpMatch;
+    if (match && gameState.pvpSeat) return match[gameState.pvpSeat] || null;
+    return gameState.pvpQueue?.player || gameState.googleUser || window.CatalogoGoogleAuth?.getUser?.() || null;
+  };
+
+  const rivalPvpPlayer = () => {
+    const match = gameState.pvpMatch;
+    if (!match || !gameState.pvpSeat) return null;
+    return gameState.pvpSeat === "playerOne" ? match.playerTwo : match.playerOne;
+  };
+
+  const renderMatchmakingState = () => {
+    const match = gameState.pvpMatch;
+    const seat = gameState.pvpSeat;
+    const ready = match?.ready || {};
+    const ownReady = Boolean(seat && ready[seat]);
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const rivalReady = Boolean(rivalSeat && ready[rivalSeat]);
+    refs.matchmakingGame.textContent = "Damas";
+    setPlayerSlot({
+      picture: refs.matchSelfPicture,
+      initial: refs.matchSelfInitial,
+      name: refs.matchSelfName,
+      state: refs.matchSelfState
+    }, currentPvpPlayer(), {
+      name: "Você",
+      state: match?.status === "readying" ? (ownReady ? "pronto" : "confirme inicio") : "na fila"
+    });
+    const rival = rivalPvpPlayer();
+    setPlayerSlot({
+      picture: refs.matchRivalPicture,
+      initial: refs.matchRivalInitial,
+      name: refs.matchRivalName,
+      state: refs.matchRivalState
+    }, rival, {
+      name: "Waiting for player",
+      state: rival ? (rivalReady ? "pronto" : "precisa confirmar") : "outro dispositivo"
+    });
+    refs.matchRival?.classList.toggle("is-pending", !rival);
+    if (match?.status === "readying") {
+      refs.matchmakingStatus.textContent = ownReady
+        ? "Voce confirmou. Aguardando o outro jogador iniciar."
+        : "Jogador real encontrado. Os dois precisam confirmar para iniciar.";
+      if (refs.pvpReady) {
+        refs.pvpReady.hidden = false;
+        refs.pvpReady.disabled = ownReady;
+        refs.pvpReady.textContent = ownReady ? "Aguardando rival" : "Iniciar partida";
+      }
+      return;
+    }
+    refs.matchmakingStatus.textContent = "Waiting for player";
+    if (refs.pvpReady) {
+      refs.pvpReady.hidden = true;
+      refs.pvpReady.disabled = false;
+      refs.pvpReady.textContent = "Iniciar partida";
+    }
+  };
+
   const getPvpOwner = (piece = "") => {
     if (!piece) return "";
     return piece.toLowerCase() === "p" ? "playerOne" : "playerTwo";
@@ -366,6 +487,11 @@ export function bindDomGameInterface(game) {
     const match = gameState.pvpMatch;
     const seat = gameState.pvpSeat;
     const board = Array.isArray(match?.board) ? match.board : [];
+    if (match?.status === "readying") {
+      setPanel("matchmaking");
+      renderMatchmakingState();
+      return;
+    }
     if (!board.length || !seat) return;
     local.pvpRenderBusy = true;
     const targetKeys = new Set(local.pvpLegalMoves.map((move) => `${move.to.row}-${move.to.col}`));
@@ -416,6 +542,8 @@ export function bindDomGameInterface(game) {
         prompt: refs.checkersStatus.textContent
       });
       if (match.status === "finished") {
+        window.clearInterval(local.pvpPollTimer);
+        local.pvpPollTimer = null;
         const won = match.winner && match.winner === seat;
         const result = match.winner ? (won ? "win" : "loss") : "draw";
         const settlement = match.settlement || {};
@@ -424,34 +552,45 @@ export function bindDomGameInterface(game) {
         const body = match.winner
           ? `${match.resultSummary || "Partida encerrada."} ${won ? `Você recebeu ${payout} créditos reais.` : "Você perdeu a mesa."} Casa: ${fee}.`
           : `${match.resultSummary || "Empate."} Entrada devolvida.`;
-        showResult("checkers", result, body);
+        const resultKey = `${match.id}:${match.updatedAt || match.finishedAt || ""}`;
+        if (local.resultHandledMatchId !== resultKey) {
+          local.resultHandledMatchId = resultKey;
+          showResult("checkers", result, body);
+        }
       }
     } finally {
       local.pvpRenderBusy = false;
     }
   };
 
+  const routePvpState = (payload = {}) => {
+    if (payload.state === "waiting" || payload.state === "readying") {
+      setPanel("matchmaking");
+      renderMatchmakingState();
+      return;
+    }
+    if (payload.state === "active" || payload.state === "finished") {
+      setPanel("checkers");
+      game.scene.stop("game-lobby-scene");
+      game.scene.stop("pool-game-scene");
+      renderPvpCheckers();
+      return;
+    }
+    if (payload.state === "idle") showLobby();
+  };
+
   const startPvpPolling = () => {
     window.clearInterval(local.pvpPollTimer);
     local.pvpPollTimer = window.setInterval(async () => {
       const payload = await fetchPvpState("checkers");
-      if (payload?.ok) {
-        if (payload.state === "waiting") {
-          setMatchmakingState("waiting");
-          refs.matchmakingStatus.textContent = "Mesa aberta. Estamos aguardando outro jogador real.";
-        } else if (payload?.match?.status) {
-          setMatchmakingState("matched");
-          refs.matchmakingStatus.textContent = "Jogador encontrado. Abrindo o tabuleiro.";
-        }
-        renderPvpCheckers();
-      }
+      if (payload?.ok) routePvpState(payload);
     }, 1200);
   };
 
   const startRealCheckers = async () => {
     local.selectedGame = "checkers";
     refs.matchmakingGame.textContent = "Damas";
-    refs.matchmakingStatus.textContent = "Abrindo mesa real e procurando outro jogador.";
+    refs.matchmakingStatus.textContent = "Procurando jogador real com aposta equivalente.";
     setMatchmakingState("searching");
     setPanel("matchmaking");
     updateGameState({
@@ -469,17 +608,7 @@ export function bindDomGameInterface(game) {
       updateGameState({ prompt: refs.matchmakingStatus.textContent });
       return;
     }
-    if (payload.state === "waiting") {
-      setMatchmakingState("waiting");
-      refs.matchmakingStatus.textContent = "Mesa aberta. Estamos aguardando outro jogador real.";
-      startPvpPolling();
-      return;
-    }
-    setMatchmakingState("matched");
-    setPanel("checkers");
-    game.scene.stop("game-lobby-scene");
-    game.scene.stop("pool-game-scene");
-    renderPvpCheckers();
+    routePvpState(payload);
     startPvpPolling();
   };
 
@@ -621,7 +750,8 @@ export function bindDomGameInterface(game) {
     if (event.target.closest("[data-dom-open-lobby]")) {
       window.clearTimeout(local.matchmakingTimer);
       window.clearInterval(local.pvpPollTimer);
-      if (gameState.pvpStatus === "waiting") leavePubpaidPvpQueue("checkers");
+      window.clearTimeout(local.resultReturnTimer);
+      if (gameState.pvpStatus === "waiting" || gameState.pvpStatus === "readying") leavePubpaidPvpQueue("checkers");
       game.scene.stop("pool-game-scene");
       game.scene.stop("checkers-game-scene");
       game.scene.start("game-lobby-scene", { gameId: local.selectedGame });
@@ -631,7 +761,8 @@ export function bindDomGameInterface(game) {
     if (event.target.closest("[data-dom-return-salon]")) {
       window.clearTimeout(local.matchmakingTimer);
       window.clearInterval(local.pvpPollTimer);
-      if (gameState.pvpStatus === "waiting") leavePubpaidPvpQueue("checkers");
+      window.clearTimeout(local.resultReturnTimer);
+      if (gameState.pvpStatus === "waiting" || gameState.pvpStatus === "readying") leavePubpaidPvpQueue("checkers");
       game.scene.stop("pool-game-scene");
       game.scene.stop("checkers-game-scene");
       game.scene.stop("game-lobby-scene");
@@ -642,6 +773,21 @@ export function bindDomGameInterface(game) {
     }
     if (event.target.closest("[data-dom-pool-shot]")) {
       game.events.emit("pubpaid:pool-dom-shot");
+      return;
+    }
+    if (event.target.closest("[data-dom-pvp-ready]")) {
+      const matchId = gameState.pvpMatch?.id || "";
+      if (!matchId) return;
+      refs.pvpReady.disabled = true;
+      refs.pvpReady.textContent = "Confirmando...";
+      confirmPvpReady(matchId, "checkers").then((payload) => {
+        if (payload?.ok) routePvpState(payload);
+        else {
+          refs.matchmakingStatus.textContent = payload?.error || "Nao foi possivel confirmar agora.";
+          refs.pvpReady.disabled = false;
+          refs.pvpReady.textContent = "Iniciar partida";
+        }
+      });
       return;
     }
     const resetButton = event.target.closest("[data-dom-game-reset]");
@@ -743,9 +889,16 @@ export function bindDomGameInterface(game) {
       refs.poolTitle.textContent = state.poolGame.phase === "finished" ? "Mesa encerrada" : "Mira e força";
       refs.poolStatus.textContent = state.prompt || "Trave mira e força para tacar.";
     }
-    if (state.pvpGameId === "checkers" && state.pvpMatch) {
-      if (refs.checkers.hidden && state.pvpMatch.status !== "waiting") setPanel("checkers");
-      renderPvpCheckers();
+    if (state.pvpGameId === "checkers" && (state.pvpMatch || state.pvpQueue)) {
+      if (state.pvpMatch?.status === "readying" || state.pvpStatus === "waiting") {
+        if (refs.matchmaking.hidden) setPanel("matchmaking");
+        renderMatchmakingState();
+        return;
+      }
+      if (state.pvpMatch && ["active", "finished"].includes(state.pvpMatch.status)) {
+        if (refs.checkers.hidden) setPanel("checkers");
+        renderPvpCheckers();
+      }
     }
   });
 }
