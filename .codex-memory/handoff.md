@@ -1,10 +1,12 @@
 # Handoff
 
-Updated: 2026-05-17T11:22:00-05:00
+Updated: 2026-05-17T18:35:00-05:00
 
-PubPaid 2.0 esta na rodada `20260517-checkersdemo1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
+PubPaid 2.0 esta na rodada `20260517-mobilefix1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
 
 Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visual/fluxo sem ficha, sem fila, sem escrow, sem carteira e sem alterar saldo.
+
+Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `Ligar som` nao abre mais o jogo; conta Google confirmada mostra `Tocar para intro`; Damas Demo removeu grafico de mao, ganhou fundo, pecas quadradas, score visual, som curto de movimento/captura e layout landscape compacto.
 
 ## What Changed
 
@@ -23,7 +25,7 @@ Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visua
 - `pubpaid-phaser/ui/domGameInterface.js`
   - Lobby canonico mostra Sinuca, Damas, Xadrez, Poker, Truco e Dados.
   - Lobby tambem mostra `Damas Demo`, que cria uma partida local contra maquina usando as mesmas regras de Damas, sem backend financeiro.
-  - Damas renderiza `abandoned`, resultado, desistir e mao animada.
+  - Damas renderiza `abandoned`, resultado e desistir.
   - Damas renderiza arena dedicada com timer, cards dos jogadores, hints, historico e suporte a drag/drop alem de tap.
   - Mesa generica renderiza sinuca/xadrez/poker/truco/dados e chama endpoints reais.
   - Render de mesa generica tem trava contra recursao e nao recria botoes a cada polling de presenca.
@@ -32,7 +34,7 @@ Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visua
 - `assets/pubpaid/lobby/icons/*.svg`
   - Icones de lobby para as seis mesas.
 - `pubpaid-phaser.css`
-  - Damas recebeu arena premium fullscreen, grid 8x8 fixo, overlay da mao sem deformar casas e layout mobile retrato.
+  - Damas recebeu arena premium fullscreen, grid 8x8 fixo, pecas quadradas, score visual, fundo de arena, layout mobile landscape compacto e gate portrait.
   - Mesa generica e cards novos adicionados.
   - Mobile/orientacao ajustados para nao travar por lock API.
 
@@ -60,12 +62,17 @@ Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visua
   - lobby com 6 mesas;
   - Sinuca abre e bolas colidem apos tacada;
   - sem erros de console no teste local.
+- Browser local `20260517-mobilefix1`:
+  - desktop 1366x768: audio nao abriu intro, Damas Demo moveu/respondeu, 64 casas, sem mao, sem scroll;
+  - mobile landscape 844x390: toque abriu intro sem depender de audio, Damas Demo respondeu a tap, 64 casas, sem overflow;
+  - mobile portrait 390x844: gate horizontal visivel, intro nao iniciou;
+  - Google mockado: `Tocar para intro` apareceu, audio nao abriu intro, toque no card abriu intro.
 - Usuario confirmou a direcao: primeiro tudo precisa funcionar; arte final fica como reposicao/substituicao posterior.
 
 ## Next
 
 1. Deploy/sync online.
-2. Confirmar `/api/pubpaid/build` online retornando `20260517-checkersdemo1`.
+2. Confirmar `/api/pubpaid/build` online retornando `20260517-mobilefix1`.
 3. Validar com duas contas Google reais nas janelas do usuario.
 4. Continuar polimento visual por jogo sem quebrar o financeiro.
 

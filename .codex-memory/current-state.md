@@ -1,6 +1,6 @@
 # Current State
 
-Updated: 2026-05-17T11:22:00-05:00
+Updated: 2026-05-17T18:35:00-05:00
 
 ## Active Goal
 
@@ -8,19 +8,20 @@ Updated: 2026-05-17T11:22:00-05:00
 
 ## Summary
 
-- Build local atual: `20260517-checkersdemo1`.
+- Build local atual: `20260517-mobilefix1`.
 - Damas foi refeita como arena DOM dedicada: header de partida, timer, cards dos jogadores, tabuleiro premium, hints, historico de lances, drag/tap e botao Desistir.
 - Lobby ganhou `Damas Demo`: treino local contra maquina, sem ficha, sem fila PvP, sem escrow e sem alterar saldo.
 - Backend passou a persistir `checkersHistory` por match; o frontend mostra o ultimo historico sem depender de estado local.
-- A mao animada do ultimo lance virou overlay absoluto para nao deformar o grid 8x8.
-- Mobile retrato nao fica mais preso em gate de orientacao; a mesa abre sem scroll e com casas quadradas.
+- O grafico de mao do ultimo lance foi removido.
+- Mobile agora deve jogar em horizontal: portrait mostra gate de orientacao e nao inicia a intro/jogo.
+- Botao `Ligar som` nao abre mais o jogo; conta Google confirmada fica em `Tocar para intro`.
 - Damas PvP agora diferencia desconexao e desistência:
   - fechar navegador/pagehide marca mesa como `abandoned`;
   - jogador tem 60 segundos para voltar;
   - voltar via polling/state reativa a mesa;
   - botão `Desistir` finaliza por W.O. imediatamente.
-- Damas recebeu ajuste geometrico de fullscreen: grid 8x8 com linhas fixas, visual mais limpo e mao animada no ultimo lance.
-- Mobile: removida tentativa de lock de orientacao em aparelho touch; gate passa a orientar e observar rotacao sem travar.
+- Damas recebeu ajuste geometrico de fullscreen: grid 8x8 com linhas fixas, fundo de arena, pecas quadradas, score visual e som curto ao mover/capturar.
+- Mobile landscape foi compactado para manter tabuleiro, score e botoes sem overflow.
 - Sinuca foi reconstruida como cena fisica local: bola branca, 15 bolas em triangulo, mira, força, colisao bola-bola, paredes, caçapas e reposicao da branca.
 - Xadrez, poker, truco e dados foram adicionados como mesas canonicas PvP:
   - xadrez usa `chess.js` no servidor para validar lance legal;
@@ -43,6 +44,11 @@ Updated: 2026-05-17T11:22:00-05:00
 - `npm run guard:pubpaid`
 - Browser local em Damas Demo: clique no card, lance `A3-B4`, resposta da maquina `D6-E5`, `realPvp=false`, `demo=true`, saldo 0 e sem erros de console.
 - Browser mobile 390x844 em Damas Demo: tabuleiro 332x332, 64 casas, sem scroll e sem bloqueio de orientacao.
+- Browser local `20260517-mobilefix1`:
+  - desktop 1366x768: botao `Ligar som` nao inicia intro, Damas Demo moveu uma peca, maquina respondeu, 64 casas, sem grafico de mao, sem scroll;
+  - mobile landscape 844x390: `Tocar para intro` abriu intro sem precisar do botao de som, Damas Demo respondeu a tap, 64 casas, sem overflow;
+  - mobile portrait 390x844: gate horizontal visivel, `introStarted=no`, `orientationBlocked=yes`;
+  - Google mockado: conta confirmada mostrou `Tocar para intro`; audio nao abriu intro; toque no card abriu intro.
 - `git diff --check`
 - Teste backend isolado com duas contas/cookies: Damas `waiting -> readying -> active`, lance legal validado e `checkersHistory[0]` persistido.
 - Teste Chrome via CDP com dois perfis separados:

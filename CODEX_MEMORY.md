@@ -42,16 +42,16 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Publicar e conferir online o deploy `20260517-checkersdemo1`.
-2. Confirmar online com duas contas Google reais: Damas abre no novo layout, pareia, confirma, move, registra historico e nao deforma mobile.
+1. Publicar e conferir online o deploy `20260517-mobilefix1`.
+2. Confirmar online com duas contas Google reais: Damas abre no novo layout, pareia, confirma, move, registra historico e respeita horizontal no mobile.
 3. Continuar polimento visual por jogo, sempre preservando o fluxo financeiro/PvP real.
 4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
 
 ## Ultima Rodada Validada
 
-- Build local: `20260517-checkersdemo1`.
-- Damas foi recriada como arena dedicada premium no DOM PvP, com header, cards dos jogadores, timer, historico, hints, drag/tap e botao Desistir.
-- Lobby ganhou `Damas Demo`: treino local contra maquina, sem ficha, sem backend financeiro e sem alterar saldo.
-- Historico de lances de Damas passou a ser persistido no match pelo backend.
-- Mobile nao bloqueia mais por orientacao obrigatoria; o teste em retrato entrou na mesa e manteve tabuleiro quadrado.
-- Teste local isolado com duas contas/sessoes Chrome via CDP: pareamento, ready duplo, lance backend, historico e render desktop/mobile sem scroll.
+- Build local: `20260517-mobilefix1`.
+- Mobile voltou a ter regra horizontal: portrait mostra gate de orientacao e nao abre intro/jogo antes de virar.
+- Botao `Ligar som` deixou de abrir o jogo; com Google confirmado, o fluxo esperado e tocar no card/botao para abrir a intro.
+- Damas Demo manteve treino local sem ficha/saldo, removeu grafico de mao, ganhou fundo de arena, pecas quadradas, placar mais visual, som de movimento e suporte melhor a tap.
+- Layout de Damas em mobile landscape foi compactado para manter tabuleiro, score e botoes dentro do viewport, sem scroll.
+- Teste Playwright local validou desktop, mobile landscape e mobile portrait; teste com Google mockado confirmou `Tocar para intro` e que audio nao inicia a intro.

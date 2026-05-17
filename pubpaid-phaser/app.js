@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-checkersdemo1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-checkersdemo1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-mobilefix1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-mobilefix1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-checkersdemo1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-checkersdemo1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260517-checkersdemo1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-checkersdemo1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260517-checkersdemo1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-checkersdemo1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-checkersdemo1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-checkersdemo1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-checkersdemo1";
-import { UIScene } from "./scenes/UIScene.js?v=20260517-checkersdemo1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-mobilefix1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-mobilefix1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260517-mobilefix1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-mobilefix1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260517-mobilefix1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-mobilefix1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-mobilefix1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-mobilefix1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-mobilefix1";
+import { UIScene } from "./scenes/UIScene.js?v=20260517-mobilefix1";
 
-const PUBPAID_BUILD_VERSION = "20260517-checkersdemo1";
+const PUBPAID_BUILD_VERSION = "20260517-mobilefix1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -224,7 +224,7 @@ const mobileInputState = {
 };
 
 function needsLandscape() {
-  return false;
+  return Boolean(isTouchDevice);
 }
 
 function isPortraitOrientation() {
@@ -482,7 +482,7 @@ async function requestFullscreen() {
 }
 
 async function requestLandscapeLock() {
-  if (!needsLandscape() || orientationLocked || isTouchDevice) return false;
+  if (!needsLandscape() || orientationLocked) return false;
   const orientationApi = window.screen?.orientation;
   if (!orientationApi?.lock) return false;
   try {
@@ -512,7 +512,10 @@ function setPermissionStatus(message) {
 function syncOrientationGate() {
   const blocked = isOrientationBlocked();
   const permissionGateVisible = Boolean(refs.permissionGate && !refs.permissionGate.hasAttribute("hidden"));
-  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible);
+  const splashVisible = Boolean(refs.splash && !refs.splash.hasAttribute("hidden"));
+  const signedIn = Boolean(getAuthApi()?.isSignedIn?.());
+  const readyToPlay = signedIn || !isAuthRequired();
+  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible || (splashVisible && readyToPlay));
   refs.body?.classList.toggle("is-orientation-blocked", shouldShowGate);
   if (refs.orientationGate) {
     refs.orientationGate.hidden = !shouldShowGate;
@@ -582,11 +585,8 @@ async function activateExperience() {
     setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
   syncAudioButton();
-  const fullscreenTask = withTimeout(requestFullscreen(), false, 900);
-  const [fullscreenOk, orientationOk] = await Promise.all([
-    fullscreenTask,
-    withTimeout(requestLandscapeLock(), false, 900)
-  ]);
+  const fullscreenOk = await withTimeout(requestFullscreen(), false, 900);
+  const orientationOk = await withTimeout(requestLandscapeLock(), false, 900);
   setPermissionStatus(
     !audioStarted
       ? "Jogo liberado. O som pode ser ligado depois."
@@ -694,9 +694,9 @@ async function syncAuthUi({ autoEnter = false } = {}) {
   refs.googleSlot?.toggleAttribute("hidden", signedIn);
   refs.googleLogout?.toggleAttribute("hidden", !signedIn);
   if (refs.openGame) {
-    refs.openGame.hidden = signedIn || authRequired;
+    refs.openGame.hidden = authRequired && !signedIn;
     refs.openGame.disabled = authRequired && !signedIn;
-    refs.openGame.textContent = signedIn || !authRequired ? "Jogar agora" : "Entrar para jogar";
+    refs.openGame.textContent = signedIn ? "Tocar para intro" : !authRequired ? "Jogar agora" : "Entrar para jogar";
   }
   if (refs.authTitle) {
     refs.authTitle.textContent = signedIn || !authRequired ? "Entrada confirmada" : "Entre para jogar";
@@ -707,7 +707,7 @@ async function syncAuthUi({ autoEnter = false } = {}) {
       walletFeedback: user?.email ? `Carteira pronta para ${user.email}.` : "Carteira pronta para jogar."
     });
     if (refs.authStatus) {
-      refs.authStatus.textContent = `Que bom ter você aqui, ${user?.name || user?.email || "jogador"}.`;
+      refs.authStatus.textContent = `Conta confirmada, ${user?.name || user?.email || "jogador"}. Toque para abrir a intro.`;
     }
     if (refs.authEmail) {
       refs.authEmail.textContent = user?.email || "Conta confirmada.";
@@ -728,7 +728,8 @@ async function syncAuthUi({ autoEnter = false } = {}) {
   }
   syncProfileUi();
   if (autoEnter && signedIn && bootGateReady && !gameStarted) {
-    await continueAfterAuth({ syncFirst: false });
+    pendingAutoEntry = false;
+    syncOrientationGate();
   } else if (autoEnter && signedIn && !bootGateReady) {
     pendingAutoEntry = true;
   }
@@ -821,10 +822,31 @@ function resolveEntryStep() {
 function tryEnterFlow() {
   const auth = getAuthApi();
   if (!isAuthRequired() || auth?.isSignedIn?.()) {
-    void continueAfterAuth();
+    void enterIntroAfterAuth();
     return;
   }
   openSplash(resolveEntryStep());
+}
+
+async function enterIntroAfterAuth({ syncFirst = true } = {}) {
+  if (!bootGateReady) {
+    pendingAutoEntry = true;
+    return;
+  }
+  const auth = getAuthApi();
+  if (isAuthRequired() && !auth?.isSignedIn?.()) {
+    openSplash("auth");
+    return;
+  }
+  if (auth?.isSignedIn?.() && syncFirst) {
+    await syncAuthUi({ autoEnter: false });
+  }
+  if (auth?.isSignedIn?.() && !getPlayerProfile()?.nick) {
+    openSplash("profile");
+    return;
+  }
+  setAcceptedTerms(true);
+  await activateExperience();
 }
 
 function bindSplash() {
@@ -837,11 +859,7 @@ function bindSplash() {
 
     if (event.target.closest("[data-audio-toggle]")) {
       event.preventDefault();
-      if (!introStarted) {
-        await activateExperience();
-      } else {
-        soundtrack.toggle();
-      }
+      soundtrack.toggle();
       syncAudioButton();
       return;
     }
@@ -895,7 +913,14 @@ function bindSplash() {
         await auth?.promptSignIn?.();
         return;
       }
-      await continueAfterAuth();
+      await enterIntroAfterAuth();
+      return;
+    }
+
+    const authCard = event.target.closest("[data-google-auth-card]");
+    if (authCard && getAuthApi()?.isSignedIn?.()) {
+      event.preventDefault();
+      await enterIntroAfterAuth();
       return;
     }
 
@@ -1002,7 +1027,7 @@ void (async () => {
   await syncAuthUi({ autoEnter: true });
   if (pendingAutoEntry) {
     pendingAutoEntry = false;
-    await continueAfterAuth({ syncFirst: false });
+    await syncAuthUi({ autoEnter: true });
   }
 })();
 window.setTimeout(() => {
