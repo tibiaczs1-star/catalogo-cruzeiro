@@ -8,7 +8,7 @@ Updated: 2026-05-17T01:37:14.506Z
 
 ## Summary
 
-Fluxo mobile local corrigido: login Google tem fundo animado, controles touch somem quando menus/painéis abrem, botão de som fica isolado no topo, matchmaking mostra animação de espera e Damas PvP ativo não recursa mais ao renderizar o tabuleiro. Versão: 20260516-mobile-matchmaking-flow1.
+Fluxo mobile local corrigido: login Google tem fundo animado, controles touch somem quando menus/painéis abrem, botão de som fica isolado no topo, matchmaking mostra animação de espera, Damas sincroniza a carteira antes de bloquear/entrar e PvP ativo não recursa mais ao renderizar o tabuleiro. Versão: 20260517-mobile-matchmaking-flow2.
 
 ## Next
 

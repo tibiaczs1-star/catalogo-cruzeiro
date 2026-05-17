@@ -7,6 +7,7 @@
 - Mobile: controles touch agora somem quando lobby, carteira, bloqueio, matchmaking, sinuca, Damas ou resultado estao abertos; o botao de som foi movido para o topo e a barra superior some nos paineis em retrato para nao sobrepor o fluxo.
 - `pubpaid-phaser/app.js` deixou de bloquear mobile em retrato/fullscreen; a permissao de entrada usa copia mobile e segue sem exigir tela cheia quando o navegador nao permite.
 - `domGameInterface.js` agora marca estados de matchmaking (`searching`, `waiting`, `matched`, `error`) e corrige a recursao do render PvP de Damas que causava `Maximum call stack size exceeded` ao abrir partida pareada.
+- O clique em Damas agora sincroniza rapidamente a carteira antes de decidir bloquear/entrar, evitando falso "sem saldo" quando o jogador toca antes do saldo aprovado terminar de carregar.
 - Validacao local: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS brace balance e Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-mobile-matchmaking/`.
 
 ## Atualizacao rapida 2026-05-16 - Damas real PvP preparada para online

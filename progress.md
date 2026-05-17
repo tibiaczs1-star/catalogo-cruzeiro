@@ -6,7 +6,8 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Adicionado fundo animado no Google gate para evitar tela preta/vazia durante o login.
 - Adicionada arena animada no matchmaking de Damas, com estado visual para busca/espera/pareamento.
 - Corrigida recursao do render PvP de Damas que travava a entrada no tabuleiro pareado com `Maximum call stack size exceeded`.
-- Versao de cache atualizada para `20260516-mobile-matchmaking-flow1`.
+- Clique em Damas passou a sincronizar a carteira antes de decidir, evitando falso bloqueio quando o saldo aprovado ainda estava carregando.
+- Versao de cache atualizada para `20260517-mobile-matchmaking-flow2`.
 - Validacoes locais: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS brace balance e Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-mobile-matchmaking/`.
 
 ## 2026-04-28 encerramento diario

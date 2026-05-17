@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue } from "../services/accountService.js";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js";
 import { fetchPvpState, moveCheckers } from "../services/pvpService.js";
 
 const CHECKERS_SIZE = 8;
@@ -591,7 +591,7 @@ export function bindDomGameInterface(game) {
     renderCheckers();
   };
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", async (event) => {
     const startButton = event.target.closest("[data-dom-start-game]");
     if (startButton) {
       const nextGame = startButton.dataset.domStartGame === "checkers" ? "checkers" : "pool";
@@ -599,7 +599,20 @@ export function bindDomGameInterface(game) {
       if (nextGame === "checkers" && isRealCheckersEligible()) {
         startRealCheckers();
       } else if (nextGame === "checkers") {
-        showAccessBlock();
+        if (!isLoggedIn()) {
+          showAccessBlock();
+          return;
+        }
+        startButton.disabled = true;
+        if (refs.lobbyState) refs.lobbyState.textContent = "sincronizando";
+        updateGameState({ prompt: "Conferindo saldo aprovado antes de abrir Damas." });
+        await syncPubpaidAccount();
+        startButton.disabled = false;
+        if (isRealCheckersEligible()) {
+          startRealCheckers();
+        } else {
+          showAccessBlock();
+        }
       } else {
         showAccessBlock("unavailable");
       }
