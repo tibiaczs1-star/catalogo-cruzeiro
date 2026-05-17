@@ -4,7 +4,9 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT_DIR = __dirname;
-const CANONICAL_DATA_DIR = path.join(ROOT_DIR, "data");
+const CANONICAL_DATA_DIR = process.env.DATA_DIR
+  ? path.resolve(process.env.DATA_DIR)
+  : path.join(ROOT_DIR, "data");
 const PUBPAID_STORE_FILE = path.join(CANONICAL_DATA_DIR, "pubpaid-store.json");
 
 const emptyStore = () => ({
@@ -14,6 +16,56 @@ const emptyStore = () => ({
   withdrawals: [],
   wallets: {},
 });
+
+function legacyPubpaidCandidates() {
+  return {
+    deposits: [
+      path.join(ROOT_DIR, "backend", "data", "pubpaidDeposits.json"),
+      path.join(ROOT_DIR, "data", "pubpaid-deposits.json"),
+      path.join(CANONICAL_DATA_DIR, "pubpaid-deposits.json"),
+    ],
+    withdrawals: [
+      path.join(ROOT_DIR, "backend", "data", "pubpaidWithdrawals.json"),
+      path.join(ROOT_DIR, "data", "pubpaid-withdrawals.json"),
+      path.join(CANONICAL_DATA_DIR, "pubpaid-withdrawals.json"),
+    ],
+    wallets: [
+      path.join(ROOT_DIR, "backend", "data", "pubpaidWallets.json"),
+      path.join(ROOT_DIR, "data", "pubpaid-wallets.json"),
+      path.join(CANONICAL_DATA_DIR, "pubpaid-wallets.json"),
+    ],
+  };
+}
+
+function normalizeLegacyWalletMap(input) {
+  if (Array.isArray(input)) {
+    return Object.fromEntries(
+      input
+        .map((item) => {
+          if (!item || typeof item !== "object") return null;
+          const key = normalizeText(
+            item.walletKey ?? item.playerId ?? item.userId ?? item.user?.sub ?? item.user?.email ?? item.email,
+            ""
+          );
+          return key ? [key, item] : null;
+        })
+        .filter(Boolean)
+    );
+  }
+  return input && typeof input === "object" ? input : {};
+}
+
+function readLegacyPubpaidStore() {
+  const candidates = legacyPubpaidCandidates();
+  return {
+    deposits: candidates.deposits.flatMap((file) => readJsonIfExists(file, [])),
+    withdrawals: candidates.withdrawals.flatMap((file) => readJsonIfExists(file, [])),
+    wallets: Object.assign(
+      {},
+      ...candidates.wallets.map((file) => normalizeLegacyWalletMap(readJsonIfExists(file, {})))
+    ),
+  };
+}
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -183,8 +235,12 @@ function normalizeWallet(playerId, record = {}) {
   const lockedWithdrawalCoins = normalizeMoney(record.lockedWithdrawalCoins ?? record.locked ?? record.travado);
   const lockedMatchCoins = normalizeMoney(record.lockedMatchCoins ?? record.lockedPvpCoins ?? 0);
   const matchSpentCoins = normalizeMoney(record.matchSpentCoins ?? record.matchDebitCoins ?? record.spentMatchCoins ?? 0);
-  const totalApprovedDeposits = normalizeMoney(record.totalApprovedDeposits ?? record.approvedDeposits ?? record.depositosAprovados);
-  const totalApprovedWithdrawals = normalizeMoney(record.totalApprovedWithdrawals ?? record.approvedWithdrawals ?? record.saquesAprovados);
+  const totalApprovedDeposits = normalizeMoney(
+    record.totalApprovedDeposits ?? record.approvedDeposits ?? record.depositsApproved ?? record.depositosAprovados
+  );
+  const totalApprovedWithdrawals = normalizeMoney(
+    record.totalApprovedWithdrawals ?? record.approvedWithdrawals ?? record.withdrawalsApproved ?? record.saquesAprovados
+  );
   const explicitManualApproved =
     record.manualApprovedBalanceCoins ??
     record.manualApprovedCoins ??
@@ -326,35 +382,26 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
 }
 
 function migrateLegacyStore() {
-  const legacyCandidates = [
-    path.join(ROOT_DIR, "backend", "data", "pubpaid-deposits.json"),
-    path.join(ROOT_DIR, "backend", "data", "pubpaid-withdrawals.json"),
-    path.join(ROOT_DIR, "backend", "data", "pubpaid-wallets.json"),
-    path.join(ROOT_DIR, "data", "pubpaid-deposits.json"),
-    path.join(ROOT_DIR, "data", "pubpaid-withdrawals.json"),
-    path.join(ROOT_DIR, "data", "pubpaid-wallets.json"),
-  ];
-
   const canonicalExists = fs.existsSync(PUBPAID_STORE_FILE);
   if (canonicalExists) {
     return;
   }
 
-  const legacyDeposits = []
-    .concat(readJsonIfExists(legacyCandidates[0], []))
-    .concat(readJsonIfExists(legacyCandidates[3], []));
-  const legacyWithdrawals = []
-    .concat(readJsonIfExists(legacyCandidates[1], []))
-    .concat(readJsonIfExists(legacyCandidates[4], []));
-  const legacyWallets = Object.assign(
-    {},
-    readJsonIfExists(legacyCandidates[2], {}),
-    readJsonIfExists(legacyCandidates[5], {})
-  );
+  const repoDataDir = path.join(ROOT_DIR, "data");
+  const repoCanonicalStore = path.resolve(CANONICAL_DATA_DIR) === path.resolve(repoDataDir)
+    ? emptyStore()
+    : readJsonIfExists(path.join(repoDataDir, "pubpaid-store.json"), emptyStore());
+  const legacy = readLegacyPubpaidStore();
 
-  const deposits = mergeUnique(legacyDeposits, normalizeDeposit);
-  const withdrawals = mergeUnique(legacyWithdrawals, normalizeWithdrawal);
-  const wallets = rebuildWalletProjection(deposits, withdrawals, legacyWallets);
+  const deposits = mergeUnique([...(repoCanonicalStore.deposits || []), ...(legacy.deposits || [])], normalizeDeposit);
+  const withdrawals = mergeUnique(
+    [...(repoCanonicalStore.withdrawals || []), ...(legacy.withdrawals || [])],
+    normalizeWithdrawal
+  );
+  const wallets = rebuildWalletProjection(deposits, withdrawals, {
+    ...(repoCanonicalStore.wallets || {}),
+    ...(legacy.wallets || {}),
+  });
 
   atomicWriteJson(PUBPAID_STORE_FILE, {
     schemaVersion: 1,
@@ -368,9 +415,13 @@ function migrateLegacyStore() {
 function readStore() {
   migrateLegacyStore();
   const parsed = readJsonIfExists(PUBPAID_STORE_FILE, emptyStore());
-  const deposits = mergeUnique(parsed.deposits || [], normalizeDeposit);
-  const withdrawals = mergeUnique(parsed.withdrawals || [], normalizeWithdrawal);
-  const wallets = rebuildWalletProjection(deposits, withdrawals, parsed.wallets || {});
+  const legacy = readLegacyPubpaidStore();
+  const deposits = mergeUnique([...(legacy.deposits || []), ...(parsed.deposits || [])], normalizeDeposit);
+  const withdrawals = mergeUnique([...(legacy.withdrawals || []), ...(parsed.withdrawals || [])], normalizeWithdrawal);
+  const wallets = rebuildWalletProjection(deposits, withdrawals, {
+    ...(legacy.wallets || {}),
+    ...(parsed.wallets || {}),
+  });
   return {
     schemaVersion: 1,
     updatedAt: parsed.updatedAt || null,

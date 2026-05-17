@@ -1,6 +1,6 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-damas-ready-online1";
-import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-damas-ready-online1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pubpaid-unified2";
+import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-pubpaid-unified2";
 
 const CHECKERS_SIZE = 8;
 const MATCH_OPPONENTS = {

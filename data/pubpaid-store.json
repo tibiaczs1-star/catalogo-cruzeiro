@@ -1,13 +1,111 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-04-20T08:15:15.795Z",
+  "updatedAt": "2026-05-17T06:39:39.780Z",
   "deposits": [
+    {
+      "id": "pubdep_meeting_test",
+      "playerId": "meeting-sub",
+      "playerName": "Meeting User",
+      "walletKey": "meeting-sub",
+      "googleSub": "meeting-sub",
+      "googleEmail": "meeting@test.com",
+      "googleName": "Meeting Test",
+      "googlePicture": "",
+      "user": {
+        "sub": "meeting-sub",
+        "email": "meeting@test.com",
+        "name": "Meeting Test",
+        "picture": ""
+      },
+      "depositorName": "Meeting User",
+      "receiptName": "",
+      "amountCoins": 5,
+      "reference": "MEET505",
+      "payment": {
+        "method": "pix-qr-code",
+        "txid": "MEET505",
+        "depositorName": "Meeting User",
+        "receiptName": "",
+        "googleSub": "meeting-sub",
+        "googleEmail": "meeting@test.com",
+        "googleName": "Meeting Test",
+        "status": "confirmado-manual",
+        "confirmationMode": "manual"
+      },
+      "notes": "",
+      "status": "approved",
+      "createdAt": "2026-04-20T06:45:36.439Z",
+      "reviewedAt": "2026-04-20T06:45:38.972Z",
+      "reviewedBy": "admin",
+      "reviewReason": ""
+    },
+    {
+      "id": "pubdep_fake_r5_test",
+      "playerId": "email:teste.pubpaid@example.com",
+      "playerName": "Ana Maria Teste",
+      "walletKey": "email:teste.pubpaid@example.com",
+      "googleSub": "fake-sub",
+      "googleEmail": "teste.pubpaid@example.com",
+      "googleName": "Jogador Teste",
+      "googlePicture": "",
+      "user": {
+        "sub": "fake-sub",
+        "email": "teste.pubpaid@example.com",
+        "name": "Jogador Teste",
+        "picture": ""
+      },
+      "depositorName": "Ana Maria Teste",
+      "receiptName": "",
+      "amountCoins": 5,
+      "reference": "PUBFAKE5",
+      "payment": {
+        "method": "pix-qr-code",
+        "txid": "PUBFAKE5",
+        "depositorName": "Ana Maria Teste",
+        "receiptName": "",
+        "googleSub": "fake-sub",
+        "googleEmail": "teste.pubpaid@example.com",
+        "googleName": "Jogador Teste",
+        "status": "confirmado-manual",
+        "confirmationMode": "manual"
+      },
+      "notes": "",
+      "status": "approved",
+      "createdAt": "2026-04-20T06:17:14.7950735Z",
+      "reviewedAt": "2026-04-20T06:19:50.781Z",
+      "reviewedBy": "admin",
+      "reviewReason": ""
+    },
     {
       "id": "real-shape-1",
       "playerId": "raiane@example.com",
       "playerName": "RAIANE LEONCIO",
+      "walletKey": "raiane@example.com",
+      "googleSub": "",
+      "googleEmail": "",
+      "googleName": "",
+      "googlePicture": "",
+      "user": {
+        "sub": "",
+        "email": "",
+        "name": "",
+        "picture": ""
+      },
+      "depositorName": "",
+      "receiptName": "",
       "amountCoins": 5,
       "reference": "PUBTESTE123",
+      "payment": {
+        "method": "pix-qr-code",
+        "txid": "PUBTESTE123",
+        "depositorName": "",
+        "receiptName": "",
+        "googleSub": "",
+        "googleEmail": "",
+        "googleName": "",
+        "status": "pending",
+        "confirmationMode": "manual"
+      },
       "notes": "",
       "status": "pending",
       "createdAt": "2026-04-20T08:15:15.795Z",
@@ -18,15 +116,53 @@
   ],
   "withdrawals": [],
   "wallets": {
+    "email:teste.pubpaid@example.com": {
+      "playerId": "email:teste.pubpaid@example.com",
+      "playerName": "Ana Maria Teste",
+      "balanceCoins": 5,
+      "lockedWithdrawalCoins": 0,
+      "lockedMatchCoins": 0,
+      "matchSpentCoins": 0,
+      "totalApprovedDeposits": 5,
+      "totalApprovedWithdrawals": 0,
+      "manualApprovedBalanceCoins": 0,
+      "manualLockedWithdrawalCoins": 0
+    },
     "raiane@example.com": {
       "playerId": "raiane@example.com",
       "playerName": "RAIANE LEONCIO",
       "balanceCoins": 0,
       "lockedWithdrawalCoins": 0,
+      "lockedMatchCoins": 0,
+      "matchSpentCoins": 0,
       "totalApprovedDeposits": 0,
-      "totalApprovedWithdrawals": 0
+      "totalApprovedWithdrawals": 0,
+      "manualApprovedBalanceCoins": 0,
+      "manualLockedWithdrawalCoins": 0
+    },
+    "u1": {
+      "playerId": "u1",
+      "playerName": "Jogador Um",
+      "balanceCoins": 0,
+      "lockedWithdrawalCoins": 0,
+      "lockedMatchCoins": 0,
+      "matchSpentCoins": 0,
+      "totalApprovedDeposits": 0,
+      "totalApprovedWithdrawals": 0,
+      "manualApprovedBalanceCoins": 0,
+      "manualLockedWithdrawalCoins": 0
+    },
+    "meeting-sub": {
+      "playerId": "meeting-sub",
+      "playerName": "Meeting User",
+      "balanceCoins": 5,
+      "lockedWithdrawalCoins": 0,
+      "lockedMatchCoins": 0,
+      "matchSpentCoins": 0,
+      "totalApprovedDeposits": 5,
+      "totalApprovedWithdrawals": 0,
+      "manualApprovedBalanceCoins": 0,
+      "manualLockedWithdrawalCoins": 0
     }
   }
 }
-
-

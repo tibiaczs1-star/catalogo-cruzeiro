@@ -7819,7 +7819,6 @@ const SPRITE_CONTEXT_FILES = [
   "escritorio-nerd.html",
   "escritorio-arte.html",
   "sprites-check-change.html",
-  "pubpaid.js",
   "escritorio.js",
   "escritorio-arte-config.js"
 ];
@@ -13722,6 +13721,16 @@ function getPubpaidWalletKey(user = {}) {
   return safeString(user?.sub || user?.email || "", 180).toLowerCase();
 }
 
+function getPubpaidWalletAliases(user = {}) {
+  const sub = safeString(user?.sub || "", 180).toLowerCase();
+  const email = cleanEmail(user?.email || "").toLowerCase();
+  return Array.from(new Set([
+    sub,
+    email,
+    email ? `email:${email}` : "",
+  ].filter(Boolean)));
+}
+
 function normalizePubpaidAmount(value, fallback = 10) {
   const parsed = Number(parseCurrency(value, fallback));
   return PUBPAID_ALLOWED_AMOUNTS.includes(parsed) ? parsed : fallback;
@@ -13821,7 +13830,11 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
 
   const walletStore = getPubpaidWalletStore();
   const wallets = walletStore && typeof walletStore === "object" ? walletStore : {};
+  const walletAliases = getPubpaidWalletAliases(authUser);
   let walletRecord = wallets[key] || null;
+  if (!walletRecord) {
+    walletRecord = walletAliases.map((alias) => wallets[alias]).find(Boolean) || null;
+  }
   let wallet = walletRecord
     ? {
         id: safeString(walletRecord.id || "", 120) || createRecordId("pubwallet"),
@@ -13952,6 +13965,7 @@ function isPubpaidPendingStatus(value = "") {
 function buildPubpaidAccountPayload(authUser = {}) {
   const wallet = getPubpaidWallet(authUser);
   const walletKey = getPubpaidWalletKey(authUser);
+  const walletAliases = getPubpaidWalletAliases(authUser);
   const matchesPubpaidWallet = (item = {}) => {
     const candidates = [
       item.walletKey,
@@ -13959,9 +13973,16 @@ function buildPubpaidAccountPayload(authUser = {}) {
       item.userId,
       item.email,
       item?.user?.email,
-      item?.user?.sub
+      item?.user?.sub,
+      item.googleEmail,
+      item.googleSub,
+      item?.payment?.googleEmail,
+      item?.payment?.googleSub,
+      item?.user?.email ? `email:${item.user.email}` : "",
+      item.googleEmail ? `email:${item.googleEmail}` : "",
+      item?.payment?.googleEmail ? `email:${item.payment.googleEmail}` : ""
     ].map((value) => safeString(value || "", 180).toLowerCase()).filter(Boolean);
-    return candidates.includes(walletKey);
+    return candidates.includes(walletKey) || walletAliases.some((alias) => candidates.includes(alias));
   };
   const deposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE).filter(matchesPubpaidWallet);
   const withdrawals = getPubpaidWithdrawals().filter(matchesPubpaidWallet);
@@ -17574,7 +17595,7 @@ function handleStatic(req, res, pathname, requestUrl) {
 
   if (pathname === "/pubpaid" || pathname === "/pubpaid/" || pathname === "/pubpaid.html") {
     res.writeHead(302, {
-      Location: "/pubpaid-v2.html?v=20260517-damas-ready-online1",
+      Location: "/pubpaid-v2.html?v=20260517-pubpaid-unified2",
       "Cache-Control": "no-store"
     });
     return res.end();

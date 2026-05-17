@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T03:55:00.000Z",
+  "lastUpdatedAt": "2026-05-17T06:47:50.009Z",
   "assets": [
     {
       "id": "pubpaid-fullfocus-local-screens-20260517",
@@ -2352,6 +2352,15 @@
       "note": "Capturas Playwright da correção mobile PubPaid 2.0: Google gate animado, carteira autenticada, lobby mobile limpo, bloqueio sem saldo, matchmaking esperando e Damas PvP ativo.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-17T01:37:14.454Z"
+    },
+    {
+      "id": "pubpaid-unified2-final-smoke-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-unified2-final-smoke.png",
+      "source": "workspace",
+      "note": "Smoke visual PubPaid 2.0 unificado: build 20260517-pubpaid-unified2, sem titulo branco duplicado sobre o letreiro, sem versoes antigas no HTML.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T06:47:50.009Z"
     }
   ]
 }

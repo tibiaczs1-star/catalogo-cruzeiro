@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T03:55:00.000Z",
+  "lastUpdatedAt": "2026-05-17T06:53:39.017Z",
   "orders": [
     {
       "id": "2026-05-17-pubpaid-fullfocus-maintenance-onlinefix1",
@@ -10111,6 +10111,36 @@
       "source": "chat",
       "rawRequest": "ok agora realize / termine a task: corrigir mobile PubPaid, animação de espera de oponente, animação no login Google, menus sem sobreposição e Damas entrando no PvP real quando pareado.",
       "summary": "Corrigir fluxo mobile PubPaid 2.0: login animado, matchmaking com animação, controles sem sobreposição e Damas PvP sem travar ao parear.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-17-unificar-pubpaid-como-unico-projeto-2-0-consolidando-rotas-runtime-carteira-dado",
+      "createdAt": "2026-05-17T06:34:57.413Z",
+      "updatedAt": "2026-05-17T06:34:57.413Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Faça o merge de tudo do PubPaid: só existe PubPaid 2.0; tudo que restar do 1.0 deve ser deletado, alterado, refeito para caber em um só projeto, ou ter dados/conceitos unidos em uma coisa só funcional.",
+      "summary": "Unificar PubPaid como único projeto 2.0, consolidando rotas, runtime, carteira, dados legados e cache para não haver 1.0 vivo nem edição em alvo errado.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-17-subir-pubpaid-2-0-unificado-online-para-testar-no-render",
+      "createdAt": "2026-05-17T06:53:39.017Z",
+      "updatedAt": "2026-05-17T06:53:39.017Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "suba online vamos texta",
+      "summary": "Subir PubPaid 2.0 unificado online para testar no Render.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

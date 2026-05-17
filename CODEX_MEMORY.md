@@ -1,5 +1,17 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-17 - PubPaid 2.0 unificado e 1.0 removido do runtime
+
+- Usuario mandou juntar tudo: agora so existe PubPaid 2.0 como projeto ativo; restos 1.0 devem redirecionar, retornar 410, ou virar dados/conceitos dentro do 2.0.
+- Backup antes da rodada: `.codex-backups/pubpaid-unify-20260517-013457`.
+- `pubpaid.js` e `pubpaid.css` foram removidos; `/pubpaid.html` redireciona para `pubpaid-v2.html?v=20260517-pubpaid-unified2`; `/pubpaid.js` e `/pubpaid.css` seguem 410.
+- Cache-bust unificado em `pubpaid-v2.html`, `pubpaid-phaser/app.js`, imports de UI/servicos, `BootScene.js`, `pubpaid-phaser.css`, `catalogo-sw.js`, `maintenance.html` e redirect do servidor: `20260517-pubpaid-unified2`.
+- Carteira: dados legados de `backend/data/pubpaidDeposits.json`/`pubpaidWallets.json` e `data/pubpaid-*.json` foram mesclados em `data/pubpaid-store.json`; arquivos legados esvaziados para nao serem segunda fonte ativa.
+- Backend agora reconhece aliases de carteira `sub`, `email` e `email:<email>`, evitando que deposito aprovado em formato antigo apareca como saldo zero para a conta Google nova.
+- Validacao local: `node --check` nos JS tocados, `npm run guard:pubpaid`, `/pubpaid.html` 302 para unified2, `/pubpaid.js` e `/pubpaid.css` 410, `/api/pubpaid/account` com sessao falsa `fake-sub` + `teste.pubpaid@example.com` retornou saldo 5.
+- Visual: removida a camada textual branca `PubPaid` do splash (`.ppg-login-neon strong`), deixando apenas o letreiro bitmap original da fachada; captura em `.codex-temp/pubpaid-unified2-final-smoke.png`.
+- Falta validar online no Render com Google real/admin real; se saldo ainda zerar online, checar primeiro o `DATA_DIR` persistente do Render e migrar o `pubpaid-store.json` do disco online.
+
 ## Atualizacao rapida 2026-05-17 - PubPaid full focus e CZS em manutencao
 
 - Usuario colocou prioridade total em PubPaid 2.0 e pediu desligar temporariamente a experiencia publica ativa do jornal sem apagar dados/backend.
