@@ -1,5 +1,1434 @@
-window.NEWS_ARCHIVE_TOTAL = 1144;
+window.NEWS_ARCHIVE_TOTAL = 1123;
 window.NEWS_DATA = [
+  {
+    "id": "https://batelao.com/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda",
+    "slug": "governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a",
+    "title": "Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+    "eyebrow": "governadora mailza",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:07:06.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda",
+    "sourceLabel": "Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+    "lede": "Por Felipe Souza A governadora do Acre, Mailza Assis, cumpre agenda institucional em Rio Branco nesta segunda-feira, 18, com ações voltadas às áreas de infraestrutura urbana e assistência social.",
+    "summary": "Por Felipe Souza A governadora do Acre, Mailza Assis, cumpre agenda institucional em Rio Branco nesta segunda-feira, 18, com ações voltadas às áreas de infraestrutura urbana e assistência social.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/b8816b7b-abad-4f2c-ae60-72cb1a4a77c5-1024x681.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/b8816b7b-abad-4f2c-ae60-72cb1a4a77c5-1024x681.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/b8816b7b-abad-4f2c-ae60-72cb1a4a77c5-1024x681.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a-assistencia-social-nesta-segunda"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda.",
+      "Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://juruacomunicacao.com.br/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul/",
+    "slug": "incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul",
+    "title": "Incêndio atinge área próxima ao antigo Farinhada em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T02:39:48.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul/",
+    "sourceLabel": "Incêndio atinge área próxima ao antigo Farinhada em Cruzeiro do Sul",
+    "lede": "Um incêndio foi registrado na noite deste sábado (16) ao lado do antigo Farinhada, em Cruzeiro do Sul, no Acre. Segundo informações iniciais, as chamas atingiram parte de um campo localizado próximo ao espaço.",
+    "summary": "Um incêndio foi registrado na noite deste sábado (16) ao lado do antigo Farinhada, em Cruzeiro do Sul, no Acre. Segundo informações iniciais, as chamas atingiram parte de um campo localizado próximo ao espaço.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul.svg",
+    "feedImageUrl": "/assets/news-fallbacks/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "incendio-atinge-area-proxima-ao-antigo-farinhada-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Incêndio atinge área próxima ao antigo Farinhada em Cruzeiro do Sul.",
+      "Incêndio atinge área próxima ao antigo Farinhada em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://juruacomunicacao.com.br/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/",
+    "slug": "1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso",
+    "title": "1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:43:35.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/",
+    "sourceLabel": "1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso",
+    "lede": "A 1ª edição do Corre Acre realizada nessa sexta, 15, de maneira simultânea em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá foi um sucesso e com grande participação de atletas de corredores de fins de semana.",
+    "summary": "A 1ª edição do Corre Acre realizada nessa sexta, 15, de maneira simultânea em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá foi um sucesso e com grande participação de atletas de corredores de fins de semana.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso.svg",
+    "feedImageUrl": "/assets/news-fallbacks/1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso"
+    ],
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre 1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso.",
+      "1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital",
+    "slug": "prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-amb",
+    "title": "Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:20:34.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital",
+    "sourceLabel": "Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital",
+    "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Assistência Social e Cidadania, realizou nesta sexta-feira, 15, o seminário “ECA Digital: Proteção Integral às Crianças e Adolescentes no Ambiente Digital”...",
+    "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Assistência Social e Cidadania, realizou nesta sexta-feira, 15, o seminário “ECA Digital: Proteção Integral às Crianças e Adolescentes no Ambiente Digital”...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.42.35.jpeg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.42.35.jpeg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.42.35.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-amb"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital.",
+      "Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva",
+    "slug": "prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da",
+    "title": "Prefeitura de Cruzeiro do Sul participa de Ação de Cidadania em Saúde no Presidio Manoel Neri da Silva",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:12:46.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva",
+    "sourceLabel": "Prefeitura de Cruzeiro do Sul participa de Ação de Cidadania em Saúde no Presidio Manoel Neri da Silva",
+    "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Saúde, participou nesta sexta-feira ,15,da Ação de Cidadania em Saúde realizada na Unidade Penitenciária Manoel Neri da Silva e garantiu atendimento aos 837...",
+    "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Saúde, participou nesta sexta-feira ,15,da Ação de Cidadania em Saúde realizada na Unidade Penitenciária Manoel Neri da Silva e garantiu atendimento aos 837...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-21.12.05.jpeg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-21.12.05.jpeg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-21.12.05.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da-silva"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "prefeitura-de-cruzeiro-do-sul-participa-de-acao-de-cidadania-em-saude-no-presidio-manoel-neri-da"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul participa de Ação de Cidadania em Saúde no Presidio Manoel Neri da Silva.",
+      "Prefeitura de Cruzeiro do Sul participa de Ação de Cidadania em Saúde no Presidio Manoel Neri da Silva e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/apos-intercambio-nos-estados-unidos-estudantes-da-rede-municipal-retornam-a-rio-branco/",
+    "slug": "apos-intercambio-nos-estados-unidos-estudantes-da-rede-municipal-retornam-a-rio-branco",
+    "title": "Após intercâmbio nos Estados Unidos, estudantes da rede municipal retornam a Rio Branco",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T03:05:07.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/apos-intercambio-nos-estados-unidos-estudantes-da-rede-municipal-retornam-a-rio-branco/",
+    "sourceLabel": "Após intercâmbio nos Estados Unidos, estudantes da rede municipal retornam a Rio Branco",
+    "lede": "Experiência incluiu visitas à NASA, parques da Disney e atividades voltadas à tecnologia, cultura e educação “Se você pode sonhar, você pode realizar.",
+    "summary": "Experiência incluiu visitas à NASA, parques da Disney e atividades voltadas à tecnologia, cultura e educação “Se você pode sonhar, você pode realizar.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.21.39-1-1200x900.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.21.39-1-1200x900.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.21.39-1-1200x900.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/apos-intercambio-nos-estados-unidos-estudantes-da-rede-municipal-retornam-a-rio-branco/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/apos-intercambio-nos-estados-unidos-estudantes-da-rede-municipal-retornam-a-rio-branco/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "apos-intercambio-nos-estados-unidos-estudantes-da-rede-municipal-retornam-a-rio-branco"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Após intercâmbio nos Estados Unidos, estudantes da rede municipal retornam a Rio Branco.",
+      "Após intercâmbio nos Estados Unidos, estudantes da rede municipal retornam a Rio Branco e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/16/melly-tem-iuri-rio-branco-na-producao-musical-do-segundo-album-de-estudio.ghtml",
+    "slug": "melly-tem-iuri-rio-branco-na-producao-musical-do-segundo-album-de-estudio",
+    "title": "Melly tem Iuri Rio Branco na produção musical do segundo álbum de estúdio",
+    "eyebrow": "Cultura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:15:17.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "G1 Pop & Arte",
+    "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/16/melly-tem-iuri-rio-branco-na-producao-musical-do-segundo-album-de-estudio.ghtml",
+    "sourceLabel": "Melly tem Iuri Rio Branco na produção musical do segundo álbum de estúdio",
+    "lede": "Melly lança o segundo álbum de estúdio no fim do mês de maio Vitor Cipriano / Divulgação ♫ NOTÍCIA ♬ Encerrado o ciclo do álbum de estreia “Amaríssima” (2025), a cantora e compositora baiana Melly se prepara para lançar o...",
+    "summary": "Melly lança o segundo álbum de estúdio no fim do mês de maio Vitor Cipriano / Divulgação ♫ NOTÍCIA ♬ Encerrado o ciclo do álbum de estreia “Amaríssima” (2025), a cantora e compositora baiana Melly se prepara para lançar o...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/Hu9QV5a7sYPDsoKqX2TyHCVvhhU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/L/E/ty70ARTFSRVIJsSM4bBQ/melly-vitor-cipriano.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/Hu9QV5a7sYPDsoKqX2TyHCVvhhU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/L/E/ty70ARTFSRVIJsSM4bBQ/melly-vitor-cipriano.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/Hu9QV5a7sYPDsoKqX2TyHCVvhhU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/L/E/ty70ARTFSRVIJsSM4bBQ/melly-vitor-cipriano.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/16/melly-tem-iuri-rio-branco-na-producao-musical-do-segundo-album-de-estudio.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/16/melly-tem-iuri-rio-branco-na-producao-musical-do-segundo-album-de-estudio.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "melly-tem-iuri-rio-branco-na-producao-musical-do-segundo-album-de-estudio"
+    ],
+    "body": [
+      "G1 Pop & Arte publicou em 16 de mai de 2026 a base desta noticia sobre Melly tem Iuri Rio Branco na produção musical do segundo álbum de estúdio.",
+      "Melly tem Iuri Rio Branco na produção musical do segundo álbum de estúdio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/saude/seis-tipos-de-canceres-abdominais-somam-74-mil-mortes-por-ano-no-brasil/",
+    "slug": "seis-tipos-de-canceres-abdominais-somam-74-mil-mortes-por-ano-no-brasil",
+    "title": "Seis tipos de cânceres abdominais somam 74 mil mortes por ano no Brasil",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T01:22:50.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/saude/seis-tipos-de-canceres-abdominais-somam-74-mil-mortes-por-ano-no-brasil/",
+    "sourceLabel": "Seis tipos de cânceres abdominais somam 74 mil mortes por ano no Brasil",
+    "lede": "CNN Brasil publicou uma atualização sobre Seis tipos de cânceres abdominais somam 74 mil mortes por ano no Brasil. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Seis tipos de cânceres abdominais somam 74 mil mortes por ano no Brasil. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/03/marco-azul-cancer-de-intestino.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/03/marco-azul-cancer-de-intestino.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/03/marco-azul-cancer-de-intestino.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/saude/seis-tipos-de-canceres-abdominais-somam-74-mil-mortes-por-ano-no-brasil/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/saude/seis-tipos-de-canceres-abdominais-somam-74-mil-mortes-por-ano-no-brasil/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "seis-tipos-de-canceres-abdominais-somam-74-mil-mortes-por-ano-no-brasil"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Seis tipos de cânceres abdominais somam 74 mil mortes por ano no Brasil.",
+      "Seis tipos de cânceres abdominais somam 74 mil mortes por ano no Brasil e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/shakira-fala-pela-1a-vez-sobre-internacao-do-pai-antes-de-show-no-brasil/",
+    "slug": "shakira-fala-pela-1-vez-sobre-internacao-do-pai-antes-de-show-no-brasil",
+    "title": "Shakira fala pela 1ª vez sobre internação do pai antes de show no Brasil",
+    "eyebrow": "Cultura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T01:53:47.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/shakira-fala-pela-1a-vez-sobre-internacao-do-pai-antes-de-show-no-brasil/",
+    "sourceLabel": "Shakira fala pela 1ª vez sobre internação do pai antes de show no Brasil",
+    "lede": "CNN Brasil publicou uma atualização sobre Shakira fala pela 1ª vez sobre internação do pai antes de show no Brasil. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Shakira fala pela 1ª vez sobre internação do pai antes de show no Brasil. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Shakira-2-3-1-e1777807909239.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Shakira-2-3-1-e1777807909239.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Shakira-2-3-1-e1777807909239.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/shakira-fala-pela-1a-vez-sobre-internacao-do-pai-antes-de-show-no-brasil/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/shakira-fala-pela-1a-vez-sobre-internacao-do-pai-antes-de-show-no-brasil/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "shakira-fala-pela-1-vez-sobre-internacao-do-pai-antes-de-show-no-brasil"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Shakira fala pela 1ª vez sobre internação do pai antes de show no Brasil.",
+      "Shakira fala pela 1ª vez sobre internação do pai antes de show no Brasil e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio",
+    "slug": "cotacao-de-precos-fornecimento-de-veiculos-de-passeio",
+    "title": "COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO",
+    "eyebrow": "Prefeitura",
+    "date": "17 de mai de 2026",
+    "publishedAt": "2026-05-17T05:56:49.053Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Prefeitura de CZS",
+    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio",
+    "sourceLabel": "COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO",
+    "lede": "Contratação de Pessoa Jurídica para o Fornecimento de Veículos de Passeio e Utilitários para atender as demandas e as Necessidades da Secretaria Municipal de Assistência Social e Cidadania e das Unidades Socioassistenciais...",
+    "summary": "Contratação de Pessoa Jurídica para o Fornecimento de Veículos de Passeio e Utilitários para atender as demandas e as Necessidades da Secretaria Municipal de Assistência Social e Cidadania e das Unidades Socioassistenciais...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://static.wixstatic.com/media/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg",
+    "feedImageUrl": "https://static.wixstatic.com/media/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg",
+    "sourceImageUrl": "https://static.wixstatic.com/media/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 1000,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Prefeitura de CZS",
+        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Prefeitura de CZS",
+        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "cotacao-de-precos-fornecimento-de-veiculos-de-passeio"
+    ],
+    "body": [
+      "Prefeitura de CZS publicou em 17 de mai de 2026 a base desta noticia sobre COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO.",
+      "COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/internacional/oms-declara-surto-de-ebola-em-paises-africanos-emergencia-de-saude-global/",
+    "slug": "oms-declara-surto-de-ebola-em-paises-africanos-emergencia-de-saude-global",
+    "title": "OMS declara surto de Ebola em países africanos emergência de saúde global",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:16:31.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/oms-declara-surto-de-ebola-em-paises-africanos-emergencia-de-saude-global/",
+    "sourceLabel": "OMS declara surto de Ebola em países africanos emergência de saúde global",
+    "lede": "Oitenta pessoas morreram em Ituri, na República Democrática do Congo",
+    "summary": "Oitenta pessoas morreram em Ituri, na República Democrática do Congo",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/06/dengue-aedes-aegypti.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/06/dengue-aedes-aegypti.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/06/dengue-aedes-aegypti.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/oms-declara-surto-de-ebola-em-paises-africanos-emergencia-de-saude-global/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/oms-declara-surto-de-ebola-em-paises-africanos-emergencia-de-saude-global/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "oms-declara-surto-de-ebola-em-paises-africanos-emergencia-de-saude-global"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre OMS declara surto de Ebola em países africanos emergência de saúde global.",
+      "OMS declara surto de Ebola em países africanos emergência de saúde global e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/galvez-derrota-o-humaita-e-soma-pontos-importantes-na-luta-pela-classificacao/",
+    "slug": "galvez-derrota-o-humaita-e-soma-pontos-importantes-na-luta-pela-classificacao",
+    "title": "Galvez derrota o Humaitá e soma pontos importantes na luta pela classificação",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T01:57:15.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/galvez-derrota-o-humaita-e-soma-pontos-importantes-na-luta-pela-classificacao/",
+    "sourceLabel": "Galvez derrota o Humaitá e soma pontos importantes na luta pela classificação",
+    "lede": "Foto Sueli Rodrigues: Galvez não fez um grande jogo, mas conseguiu vencer \" O Galvez derrotou o Humaitá por 4 a 2 neste sábado, 16, no Tonicão, e somou pontos importantes na luta pela classificação para a segunda fase do...",
+    "summary": "Foto Sueli Rodrigues: Galvez não fez um grande jogo, mas conseguiu vencer \" O Galvez derrotou o Humaitá por 4 a 2 neste sábado, 16, no Tonicão, e somou pontos importantes na luta pela classificação para a segunda fase do...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T205636.437.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T205636.437.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T205636.437.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/galvez-derrota-o-humaita-e-soma-pontos-importantes-na-luta-pela-classificacao/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/galvez-derrota-o-humaita-e-soma-pontos-importantes-na-luta-pela-classificacao/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "galvez-derrota-o-humaita-e-soma-pontos-importantes-na-luta-pela-classificacao"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Galvez derrota o Humaitá e soma pontos importantes na luta pela classificação.",
+      "Galvez derrota o Humaitá e soma pontos importantes na luta pela classificação e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-portugues/benfica-termina-liga-portuguesa-invicto-com-mourinho-mas-fora-da-champions/",
+    "slug": "benfica-termina-liga-portuguesa-invicto-com-mourinho-mas-fora-da-champions",
+    "title": "Benfica termina Liga Portuguesa invicto com Mourinho, mas fora da Champions",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T01:02:21.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-portugues/benfica-termina-liga-portuguesa-invicto-com-mourinho-mas-fora-da-champions/",
+    "sourceLabel": "Benfica termina Liga Portuguesa invicto com Mourinho, mas fora da Champions",
+    "lede": "CNN Brasil publicou uma atualização sobre Benfica termina Liga Portuguesa invicto com Mourinho, mas fora da Champions. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Benfica termina Liga Portuguesa invicto com Mourinho, mas fora da Champions. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GettyImages-2276596142-e1778964885714.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GettyImages-2276596142-e1778964885714.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GettyImages-2276596142-e1778964885714.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-portugues/benfica-termina-liga-portuguesa-invicto-com-mourinho-mas-fora-da-champions/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-portugues/benfica-termina-liga-portuguesa-invicto-com-mourinho-mas-fora-da-champions/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "benfica-termina-liga-portuguesa-invicto-com-mourinho-mas-fora-da-champions"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Benfica termina Liga Portuguesa invicto com Mourinho, mas fora da Champions.",
+      "Benfica termina Liga Portuguesa invicto com Mourinho, mas fora da Champions e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/atletico-mg-vence-mirassol-com-golacos-e-redencao-de-cisse/",
+    "slug": "atletico-mg-vence-mirassol-com-golacos-e-redencao-de-cisse",
+    "title": "Atlético-MG vence Mirassol com golaços e redenção de Cissé",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:28:58.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/atletico-mg-vence-mirassol-com-golacos-e-redencao-de-cisse/",
+    "sourceLabel": "Atlético-MG vence Mirassol com golaços e redenção de Cissé",
+    "lede": "O Atlético-MG venceu o Mirassol por 3 a 1 neste sábado (16), em confronto pela 16ª rodada da Série A do Brasileirão. A partida foi disputada na Arena MRV.",
+    "summary": "O Atlético-MG venceu o Mirassol por 3 a 1 neste sábado (16), em confronto pela 16ª rodada da Série A do Brasileirão. A partida foi disputada na Arena MRV.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192755.657.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192755.657.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192755.657.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/atletico-mg-vence-mirassol-com-golacos-e-redencao-de-cisse/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/atletico-mg-vence-mirassol-com-golacos-e-redencao-de-cisse/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "atletico-mg-vence-mirassol-com-golacos-e-redencao-de-cisse"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Atlético-MG vence Mirassol com golaços e redenção de Cissé.",
+      "Atlético-MG vence Mirassol com golaços e redenção de Cissé e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/com-homenagem-a-fernandao-inter-goleia-vasco-por-4-a-1-e-sonha-com-g6/",
+    "slug": "com-homenagem-a-fernandao-inter-goleia-vasco-por-4-a-1-e-sonha-com-g6",
+    "title": "Com homenagem a Fernandão, Inter goleia Vasco por 4 a 1 e sonha com G6",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:24:37.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/com-homenagem-a-fernandao-inter-goleia-vasco-por-4-a-1-e-sonha-com-g6/",
+    "sourceLabel": "Com homenagem a Fernandão, Inter goleia Vasco por 4 a 1 e sonha com G6",
+    "lede": "O Internacional venceu o Vasco da Gama por 4 a 1, no Beira-Rio, em jogo válido pela 16ª rodada do Campeonato Brasileiro. Carbonero, Alerrandro e Bernabei marcaram os gols do Inter. Andrés Gómez marcou para o Vasco.",
+    "summary": "O Internacional venceu o Vasco da Gama por 4 a 1, no Beira-Rio, em jogo válido pela 16ª rodada do Campeonato Brasileiro. Carbonero, Alerrandro e Bernabei marcaram os gols do Inter. Andrés Gómez marcou para o Vasco.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192430.184.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192430.184.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192430.184.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/com-homenagem-a-fernandao-inter-goleia-vasco-por-4-a-1-e-sonha-com-g6/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/com-homenagem-a-fernandao-inter-goleia-vasco-por-4-a-1-e-sonha-com-g6/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "com-homenagem-a-fernandao-inter-goleia-vasco-por-4-a-1-e-sonha-com-g6"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Com homenagem a Fernandão, Inter goleia Vasco por 4 a 1 e sonha com G6.",
+      "Com homenagem a Fernandão, Inter goleia Vasco por 4 a 1 e sonha com G6 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/com-presenca-de-hulk-fluminense-vence-sao-paulo-e-encosta-no-flamengo/",
+    "slug": "com-presenca-de-hulk-fluminense-vence-sao-paulo-e-encosta-no-flamengo",
+    "title": "Com presença de Hulk, Fluminense vence São Paulo e encosta no Flamengo",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:22:50.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/com-presenca-de-hulk-fluminense-vence-sao-paulo-e-encosta-no-flamengo/",
+    "sourceLabel": "Com presença de Hulk, Fluminense vence São Paulo e encosta no Flamengo",
+    "lede": "Em noite de festa no Maracanã para a apresentação de Hulk, o Fluminense venceu o São Paulo por 2 a 1 e se igualou em pontos ao vice-líder Flamengo, ficando atrás apenas pelos critérios de desempate.",
+    "summary": "Em noite de festa no Maracanã para a apresentação de Hulk, o Fluminense venceu o São Paulo por 2 a 1 e se igualou em pontos ao vice-líder Flamengo, ficando atrás apenas pelos critérios de desempate.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192130.437.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192130.437.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T192130.437.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/com-presenca-de-hulk-fluminense-vence-sao-paulo-e-encosta-no-flamengo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/com-presenca-de-hulk-fluminense-vence-sao-paulo-e-encosta-no-flamengo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "com-presenca-de-hulk-fluminense-vence-sao-paulo-e-encosta-no-flamengo"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Com presença de Hulk, Fluminense vence São Paulo e encosta no Flamengo.",
+      "Com presença de Hulk, Fluminense vence São Paulo e encosta no Flamengo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/politica/noticia/2026/05/16/datafolha-39percent-avaliam-governo-lula-como-ruim-ou-pessimo-30percent-como-otimo-ou-bom.ghtml",
+    "slug": "datafolha-39-avaliam-governo-lula-como-ruim-ou-pessimo-30-como-otimo-ou-bom",
+    "title": "Datafolha: 39% avaliam governo Lula como ruim ou péssimo; 30% como ótimo ou bom",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T02:31:58.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/16/datafolha-39percent-avaliam-governo-lula-como-ruim-ou-pessimo-30percent-como-otimo-ou-bom.ghtml",
+    "sourceLabel": "Datafolha: 39% avaliam governo Lula como ruim ou péssimo; 30% como ótimo ou bom",
+    "lede": "Datafolha 2º turno: Lula e Flávio têm 45% das intenções de voto Pesquisa Datafolha divulgada neste sábado (16) pelo jornal \"Folha de S.",
+    "summary": "Datafolha 2º turno: Lula e Flávio têm 45% das intenções de voto Pesquisa Datafolha divulgada neste sábado (16) pelo jornal \"Folha de S.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/QBTAADThY9r0Z1Ad7FTE89PIyQs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/w/W/F0udgGRWuBb22CE9aDcA/55195371739-a6083464fd-k.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/QBTAADThY9r0Z1Ad7FTE89PIyQs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/w/W/F0udgGRWuBb22CE9aDcA/55195371739-a6083464fd-k.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/QBTAADThY9r0Z1Ad7FTE89PIyQs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/w/W/F0udgGRWuBb22CE9aDcA/55195371739-a6083464fd-k.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/noticia/2026/05/16/datafolha-39percent-avaliam-governo-lula-como-ruim-ou-pessimo-30percent-como-otimo-ou-bom.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/noticia/2026/05/16/datafolha-39percent-avaliam-governo-lula-como-ruim-ou-pessimo-30percent-como-otimo-ou-bom.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "datafolha-39-avaliam-governo-lula-como-ruim-ou-pessimo-30-como-otimo-ou-bom"
+    ],
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha: 39% avaliam governo Lula como ruim ou péssimo; 30% como ótimo ou bom.",
+      "Datafolha: 39% avaliam governo Lula como ruim ou péssimo; 30% como ótimo ou bom e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/?utm_source=rss&utm_medium=rss&utm_campaign=com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre",
+    "slug": "com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-",
+    "title": "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:05:10.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/?utm_source=rss&utm_medium=rss&utm_campaign=com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre",
+    "sourceLabel": "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre",
+    "lede": "Por Felipe Souza Com foco na promoção da saúde, bem-estar e qualidade de vida da população por meio do esporte, o governo estadual tem fortalecido o apoio a iniciativas públicas de incentivo à atividade física.",
+    "summary": "Por Felipe Souza Com foco na promoção da saúde, bem-estar e qualidade de vida da população por meio do esporte, o governo estadual tem fortalecido o apoio a iniciativas públicas de incentivo à atividade física.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/477a1a76-b6f0-4a4d-8e1b-5935b7b731fe-1024x704.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/477a1a76-b6f0-4a4d-8e1b-5935b7b731fe-1024x704.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/477a1a76-b6f0-4a4d-8e1b-5935b7b731fe-1024x704.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/?utm_source=rss&utm_medium=rss&utm_campaign=com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/?utm_source=rss&utm_medium=rss&utm_campaign=com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre.",
+      "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao",
+    "slug": "governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao",
+    "title": "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:03:18.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao",
+    "sourceLabel": "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão",
+    "lede": "Por Crislei Souza Depois de 15 dias de missão pelo interior do Acre, o governo do Estado, por meio da Secretaria de Estado de Segurança Pública (Sejusp), em parceria com a Polícia Civil, por meio do Instituto de identificação...",
+    "summary": "Por Crislei Souza Depois de 15 dias de missão pelo interior do Acre, o governo do Estado, por meio da Secretaria de Estado de Segurança Pública (Sejusp), em parceria com a Polícia Civil, por meio do Instituto de identificação...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão.",
+      "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o",
+    "slug": "cotacao-de-preco",
+    "title": "COTAÇÃO DE PREÇO",
+    "eyebrow": "Utilidade Publica",
+    "date": "17 de mai de 2026",
+    "publishedAt": "2026-05-17T05:56:49.052Z",
+    "category": "Utilidade Publica",
+    "categoryKey": "utilidade publica cotacao de preco materiais de construcao",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Prefeitura de CZS",
+    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o",
+    "sourceLabel": "COTAÇÃO DE PREÇO",
+    "lede": "Materiais de Construção",
+    "summary": "Materiais de Construção",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://static.wixstatic.com/media/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg",
+    "feedImageUrl": "https://static.wixstatic.com/media/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg",
+    "sourceImageUrl": "https://static.wixstatic.com/media/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 1000,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Prefeitura de CZS",
+        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Prefeitura de CZS",
+        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "cotacao-de-preco"
+    ],
+    "body": [
+      "Prefeitura de CZS publicou em 17 de mai de 2026 a base desta noticia sobre COTAÇÃO DE PREÇO.",
+      "COTAÇÃO DE PREÇO e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais",
+    "slug": "ce-n-007-2026-aviso-de-licitacao",
+    "title": "CE N°007/2026 - Aviso de Licitação",
+    "eyebrow": "Utilidade Publica",
+    "date": "17 de mai de 2026",
+    "publishedAt": "2026-05-17T05:56:49.052Z",
+    "category": "Utilidade Publica",
+    "categoryKey": "utilidade publica ce n 007 2026 aviso de licitacao pavimentacao de estradas vicinais",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Prefeitura de CZS",
+    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais",
+    "sourceLabel": "CE N°007/2026 - Aviso de Licitação",
+    "lede": "Pavimentação de Estradas Vicinais",
+    "summary": "Pavimentação de Estradas Vicinais",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
+    "feedImageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
+    "sourceImageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 1000,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Prefeitura de CZS",
+        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Prefeitura de CZS",
+        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "ce-n-007-2026-aviso-de-licitacao"
+    ],
+    "body": [
+      "Prefeitura de CZS publicou em 17 de mai de 2026 a base desta noticia sobre CE N°007/2026 - Aviso de Licitação.",
+      "CE N°007/2026 - Aviso de Licitação e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/lutas/ufc-anuncia-volta-de-mcgregor-para-revanche-contra-holloway-apos-cinco-anos/",
+    "slug": "ufc-anuncia-volta-de-mcgregor-para-revanche-contra-holloway-apos-cinco-anos",
+    "title": "UFC anuncia volta de McGregor para revanche contra Holloway após cinco anos",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T03:30:34.000Z",
+    "category": "Nacional",
+    "categoryKey": "lutas nacional ufc anuncia volta de mcgregor para revanche contra holloway apos cinco anos ex campeao de duas categorias irlandes volta ao octogono na luta principal do ufc 329 em las vegas durante a international fight week",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/lutas/ufc-anuncia-volta-de-mcgregor-para-revanche-contra-holloway-apos-cinco-anos/",
+    "sourceLabel": "UFC anuncia volta de McGregor para revanche contra Holloway após cinco anos",
+    "lede": "CNN Brasil publicou uma atualização sobre UFC anuncia volta de McGregor para revanche contra Holloway após cinco anos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre UFC anuncia volta de McGregor para revanche contra Holloway após cinco anos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/confusao_poatan_coletiva-e1778330181887.webp?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/confusao_poatan_coletiva-e1778330181887.webp?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/confusao_poatan_coletiva-e1778330181887.webp?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/lutas/ufc-anuncia-volta-de-mcgregor-para-revanche-contra-holloway-apos-cinco-anos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/lutas/ufc-anuncia-volta-de-mcgregor-para-revanche-contra-holloway-apos-cinco-anos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "ufc-anuncia-volta-de-mcgregor-para-revanche-contra-holloway-apos-cinco-anos"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre UFC anuncia volta de McGregor para revanche contra Holloway após cinco anos.",
+      "UFC anuncia volta de McGregor para revanche contra Holloway após cinco anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/palmeiras-empata-com-cruzeiro-e-chega-a-3o-jogo-sem-vitoria-no-brasileirao/",
+    "slug": "palmeiras-empata-com-cruzeiro-e-chega-a-3-jogo-sem-vitoria-no-brasileirao",
+    "title": "Palmeiras empata com Cruzeiro e chega a 3º jogo sem vitória no Brasileirão",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T01:59:50.000Z",
+    "category": "Nacional",
+    "categoryKey": "brasileirao nacional palmeiras empata com cruzeiro e chega a 3 jogo sem vitoria no brasileirao equipes ficaram no 1 a 1 na arena barueri em sao paulo",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/palmeiras-empata-com-cruzeiro-e-chega-a-3o-jogo-sem-vitoria-no-brasileirao/",
+    "sourceLabel": "Palmeiras empata com Cruzeiro e chega a 3º jogo sem vitória no Brasileirão",
+    "lede": "Equipes ficaram no 1 a 1 na Arena Barueri, em São Paulo",
+    "summary": "Equipes ficaram no 1 a 1 na Arena Barueri, em São Paulo",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/IMG_45451-1-e1778878164606.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/IMG_45451-1-e1778878164606.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/IMG_45451-1-e1778878164606.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/palmeiras-empata-com-cruzeiro-e-chega-a-3o-jogo-sem-vitoria-no-brasileirao/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/palmeiras-empata-com-cruzeiro-e-chega-a-3o-jogo-sem-vitoria-no-brasileirao/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "palmeiras-empata-com-cruzeiro-e-chega-a-3-jogo-sem-vitoria-no-brasileirao"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Palmeiras empata com Cruzeiro e chega a 3º jogo sem vitória no Brasileirão.",
+      "Palmeiras empata com Cruzeiro e chega a 3º jogo sem vitória no Brasileirão e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/internacional/o-que-esta-por-tras-da-imagem-reluzente-da-nova-venezuela/",
+    "slug": "o-que-esta-por-tras-da-imagem-reluzente-da-nova-venezuela",
+    "title": "O que está por trás da imagem reluzente da “nova” Venezuela",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T01:54:10.000Z",
+    "category": "Nacional",
+    "categoryKey": "internacional nacional o que esta por tras da imagem reluzente da nova venezuela geladeiras vazias e salarios insuficientes contrastam com a retorica de renascimento apoiada pelos eua",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/o-que-esta-por-tras-da-imagem-reluzente-da-nova-venezuela/",
+    "sourceLabel": "O que está por trás da imagem reluzente da “nova” Venezuela",
+    "lede": "CNN Brasil publicou uma atualização sobre O que está por trás da imagem reluzente da “nova” Venezuela. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre O que está por trás da imagem reluzente da “nova” Venezuela. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Delcy-Rodriguez.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Delcy-Rodriguez.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Delcy-Rodriguez.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/o-que-esta-por-tras-da-imagem-reluzente-da-nova-venezuela/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/o-que-esta-por-tras-da-imagem-reluzente-da-nova-venezuela/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "o-que-esta-por-tras-da-imagem-reluzente-da-nova-venezuela"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre O que está por trás da imagem reluzente da “nova” Venezuela.",
+      "O que está por trás da imagem reluzente da “nova” Venezuela e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/nordeste/ba/desabamento-de-imovel-deixa-dois-mortos-e-tres-feridos-em-salvador/",
+    "slug": "desabamento-de-imovel-deixa-dois-mortos-e-tres-feridos-em-salvador",
+    "title": "Desabamento de imóvel deixa dois mortos e três feridos em Salvador",
+    "eyebrow": "Policia",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:48:26.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/nordeste/ba/desabamento-de-imovel-deixa-dois-mortos-e-tres-feridos-em-salvador/",
+    "sourceLabel": "Desabamento de imóvel deixa dois mortos e três feridos em Salvador",
+    "lede": "CNN Brasil publicou uma atualização sobre Desabamento de imóvel deixa dois mortos e três feridos em Salvador. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Desabamento de imóvel deixa dois mortos e três feridos em Salvador. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-27-at-15.05.04.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-27-at-15.05.04.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-27-at-15.05.04.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/nordeste/ba/desabamento-de-imovel-deixa-dois-mortos-e-tres-feridos-em-salvador/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/nordeste/ba/desabamento-de-imovel-deixa-dois-mortos-e-tres-feridos-em-salvador/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "desabamento-de-imovel-deixa-dois-mortos-e-tres-feridos-em-salvador"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Desabamento de imóvel deixa dois mortos e três feridos em Salvador.",
+      "Desabamento de imóvel deixa dois mortos e três feridos em Salvador e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/padre-mostra-papa-leao-xiv-reproduzindo-trend-six-seven-ao-som-de-funk/",
+    "slug": "padre-mostra-papa-leao-xiv-reproduzindo-trend-six-seven-ao-som-de-funk",
+    "title": "Padre mostra Papa Leão XIV reproduzindo trend “six seven” ao som de funk",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:38:28.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional padre mostra papa leao xiv reproduzindo trend six seven ao som de funk don roberto fiscer mostrou felicidade de criancas durante interacao com o pontifice no vaticano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/padre-mostra-papa-leao-xiv-reproduzindo-trend-six-seven-ao-som-de-funk/",
+    "sourceLabel": "Padre mostra Papa Leão XIV reproduzindo trend “six seven” ao som de funk",
+    "lede": "CNN Brasil publicou uma atualização sobre Padre mostra Papa Leão XIV reproduzindo trend “six seven” ao som de funk. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Padre mostra Papa Leão XIV reproduzindo trend “six seven” ao som de funk. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Basilica-de-Sao-Pedro-no-Vaticano.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Basilica-de-Sao-Pedro-no-Vaticano.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Basilica-de-Sao-Pedro-no-Vaticano.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/padre-mostra-papa-leao-xiv-reproduzindo-trend-six-seven-ao-som-de-funk/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/padre-mostra-papa-leao-xiv-reproduzindo-trend-six-seven-ao-som-de-funk/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "padre-mostra-papa-leao-xiv-reproduzindo-trend-six-seven-ao-som-de-funk"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Padre mostra Papa Leão XIV reproduzindo trend “six seven” ao som de funk.",
+      "Padre mostra Papa Leão XIV reproduzindo trend “six seven” ao som de funk e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/agro/rio-grande-do-sul-autoriza-primeira-fabrica-de-fertilizante-fosfato-natural/",
+    "slug": "rio-grande-do-sul-autoriza-primeira-fabrica-de-fertilizante-fosfato-natural",
+    "title": "Rio Grande do Sul autoriza primeira fábrica de fertilizante fosfato natural",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:29:36.000Z",
+    "category": "Nacional",
+    "categoryKey": "agro nacional rio grande do sul autoriza primeira fabrica de fertilizante fosfato natural producao inicial no estado deve atingir ate 150 mil toneladas de fertilizantes fosfatados por ano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/agro/rio-grande-do-sul-autoriza-primeira-fabrica-de-fertilizante-fosfato-natural/",
+    "sourceLabel": "Rio Grande do Sul autoriza primeira fábrica de fertilizante fosfato natural",
+    "lede": "CNN Brasil publicou uma atualização sobre Rio Grande do Sul autoriza primeira fábrica de fertilizante fosfato natural. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Rio Grande do Sul autoriza primeira fábrica de fertilizante fosfato natural. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/frisia.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/frisia.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/frisia.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/rio-grande-do-sul-autoriza-primeira-fabrica-de-fertilizante-fosfato-natural/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/rio-grande-do-sul-autoriza-primeira-fabrica-de-fertilizante-fosfato-natural/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "rio-grande-do-sul-autoriza-primeira-fabrica-de-fertilizante-fosfato-natural"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Rio Grande do Sul autoriza primeira fábrica de fertilizante fosfato natural.",
+      "Rio Grande do Sul autoriza primeira fábrica de fertilizante fosfato natural e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/rio-de-janeiro-registra-20-feminicidios-no-1-trimestre-de-2026/",
+    "slug": "rio-de-janeiro-registra-20-feminicidios-no-1-trimestre-de-2026",
+    "title": "Rio de Janeiro registra 20 feminicídios no 1° trimestre de 2026",
+    "eyebrow": "Policia",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:24:56.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/rio-de-janeiro-registra-20-feminicidios-no-1-trimestre-de-2026/",
+    "sourceLabel": "Rio de Janeiro registra 20 feminicídios no 1° trimestre de 2026",
+    "lede": "CNN Brasil publicou uma atualização sobre Rio de Janeiro registra 20 feminicídios no 1° trimestre de 2026. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Rio de Janeiro registra 20 feminicídios no 1° trimestre de 2026. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/PCPR.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/PCPR.png?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/PCPR.png?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/rio-de-janeiro-registra-20-feminicidios-no-1-trimestre-de-2026/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/rio-de-janeiro-registra-20-feminicidios-no-1-trimestre-de-2026/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "rio-de-janeiro-registra-20-feminicidios-no-1-trimestre-de-2026"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Rio de Janeiro registra 20 feminicídios no 1° trimestre de 2026.",
+      "Rio de Janeiro registra 20 feminicídios no 1° trimestre de 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/selecao-brasileira/nao-vejo-o-neymar-focado-diz-rivellino-a-cnn-antes-da-copa-do-mundo/",
+    "slug": "nao-vejo-o-neymar-focado-diz-rivellino-a-cnn-antes-da-copa-do-mundo",
+    "title": "“Não vejo o Neymar focado”, diz Rivellino à CNN antes da Copa do Mundo",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-17T00:10:49.000Z",
+    "category": "Nacional",
+    "categoryKey": "selecao brasileira nacional nao vejo o neymar focado diz rivellino a cnn antes da copa do mundo campeao mundial pela selecao brasileira questiona momento do camisa 10 e admite preocupacao com equipe de carlo ancelotti antes da convocacao para o mundial de 2026",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/selecao-brasileira/nao-vejo-o-neymar-focado-diz-rivellino-a-cnn-antes-da-copa-do-mundo/",
+    "sourceLabel": "“Não vejo o Neymar focado”, diz Rivellino à CNN antes da Copa do Mundo",
+    "lede": "CNN Brasil publicou uma atualização sobre “Não vejo o Neymar focado”, diz Rivellino à CNN antes da Copa do Mundo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre “Não vejo o Neymar focado”, diz Rivellino à CNN antes da Copa do Mundo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Neymar-Santos-2-e1778517958146.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Neymar-Santos-2-e1778517958146.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Neymar-Santos-2-e1778517958146.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/selecao-brasileira/nao-vejo-o-neymar-focado-diz-rivellino-a-cnn-antes-da-copa-do-mundo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/selecao-brasileira/nao-vejo-o-neymar-focado-diz-rivellino-a-cnn-antes-da-copa-do-mundo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "nao-vejo-o-neymar-focado-diz-rivellino-a-cnn-antes-da-copa-do-mundo"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre “Não vejo o Neymar focado”, diz Rivellino à CNN antes da Copa do Mundo.",
+      "“Não vejo o Neymar focado”, diz Rivellino à CNN antes da Copa do Mundo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
   {
     "id": "https://ac24horas.com/2026/05/16/prefeito-de-feijo-enfrenta-tensao-com-governo-apos-tentar-audiencia-com-mailza/",
     "slug": "prefeito-de-feijo-enfrenta-tensao-com-governo-apos-tentar-audiencia-com-mailza",
@@ -16,11 +1445,16 @@ window.NEWS_DATA = [
     "lede": "Durante o programa Boa Conversa da Redação, foi debatida a tentativa do prefeito de Feijó, Railson Ferreira, de conseguir uma audiência com a governadora Mailza Assis acompanhado de vereadores do município.",
     "summary": "Durante o programa Boa Conversa da Redação, foi debatida a tentativa do prefeito de Feijó, Railson Ferreira, de conseguir uma audiência com a governadora Mailza Assis acompanhado de vereadores do município.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Prefeito de Feijó enfrenta tensão com governo após tentar audiência com Mailza.",
+      "Prefeito de Feijó enfrenta tensão com governo após tentar audiência com Mailza e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-65.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-65.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-65.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-65.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -42,11 +1476,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "prefeito-de-feijo-enfrenta-tensao-com-governo-apos-tentar-audiencia-com-mailza"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Prefeito de Feijó enfrenta tensão com governo após tentar audiência com Mailza.",
-      "Prefeito de Feijó enfrenta tensão com governo após tentar audiência com Mailza e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -65,11 +1494,16 @@ window.NEWS_DATA = [
     "lede": "A governadora do Acre, Mailza Assis, cumpre agenda institucional em Rio Branco nesta segunda-feira, 18, com ações voltadas às áreas de infraestrutura urbana e assistência social.",
     "summary": "A governadora do Acre, Mailza Assis, cumpre agenda institucional em Rio Branco nesta segunda-feira, 18, com ações voltadas às áreas de infraestrutura urbana e assistência social.",
     "analysis": "",
+    "body": [
+      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda.",
+      "Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortal.svg",
-    "feedImageUrl": "/assets/news-fallbacks/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortal.svg",
     "sourceImageUrl": "/assets/news-fallbacks/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortal.svg",
+    "feedImageUrl": "/assets/news-fallbacks/governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortal.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -91,11 +1525,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "governadora-mailza-cumpre-agenda-com-assinatura-de-ordens-de-servico-e-entrega-para-fortalecer-a"
-    ],
-    "body": [
-      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda.",
-      "Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -250,6 +1679,153 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://ac24horas.com/2026/05/16/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/",
+    "slug": "1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso",
+    "title": "1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:36:48.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/",
+    "sourceLabel": "1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso",
+    "lede": "A 1ª edição do Corre Acre realizada nessa sexta, 15, de maneira simultânea em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá foi um sucesso e com grande participação de atletas de corredores de fins de semana.",
+    "summary": "A 1ª edição do Corre Acre realizada nessa sexta, 15, de maneira simultânea em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá foi um sucesso e com grande participação de atletas de corredores de fins de semana.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-18.01.00-1200x801.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-18.01.00-1200x801.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-18.01.00-1200x801.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/1a-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "1-edicao-do-corre-acre-em-rio-branco-cruzeiro-do-sul-feijo-e-tarauaca-e-um-sucesso"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre 1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso.",
+      "1ª edição do Corre Acre em Rio Branco, Cruzeiro do Sul, Feijó e Tarauacá é um sucesso e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/caminhao-atola-na-saida-da-balsa-em-cruzeiro-do-sul/",
+    "slug": "caminhao-atola-na-saida-da-balsa-em-cruzeiro-do-sul",
+    "title": "Caminhão atola na saída da balsa em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:33:41.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/caminhao-atola-na-saida-da-balsa-em-cruzeiro-do-sul/",
+    "sourceLabel": "Caminhão atola na saída da balsa em Cruzeiro do Sul",
+    "lede": "Neste sábado, 16, um caminhão carregado com sacas de farinha atolou na saída da balsa do lado de Cruzeiro do Sul.",
+    "summary": "Neste sábado, 16, um caminhão carregado com sacas de farinha atolou na saída da balsa do lado de Cruzeiro do Sul.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T183202.176.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T183202.176.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T183202.176.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/caminhao-atola-na-saida-da-balsa-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/caminhao-atola-na-saida-da-balsa-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "caminhao-atola-na-saida-da-balsa-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Caminhão atola na saída da balsa em Cruzeiro do Sul.",
+      "Caminhão atola na saída da balsa em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade/?utm_source=rss&utm_medium=rss&utm_campaign=acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade",
+    "slug": "acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-d",
+    "title": "Ação de Cidadania chega em Cruzeiro do Sul e contempla 100% dos reeducandos do Acre com saúde e dignidade",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:31:26.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade/?utm_source=rss&utm_medium=rss&utm_campaign=acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade",
+    "sourceLabel": "Ação de Cidadania chega em Cruzeiro do Sul e contempla 100% dos reeducandos do Acre com saúde e dignidade",
+    "lede": "Por James Rodrigues “Foi um marco, foi histórico essa ação de hoje!",
+    "summary": "Por James Rodrigues “Foi um marco, foi histórico essa ação de hoje!",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-15.47.45-1-1024x683.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-15.47.45-1-1024x683.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-15.47.45-1-1024x683.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade/?utm_source=rss&utm_medium=rss&utm_campaign=acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade/?utm_source=rss&utm_medium=rss&utm_campaign=acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-dignidade"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "acao-de-cidadania-chega-em-cruzeiro-do-sul-e-contempla-100-dos-reeducandos-do-acre-com-saude-e-d"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Ação de Cidadania chega em Cruzeiro do Sul e contempla 100% dos reeducandos do Acre com saúde e dignidade.",
+      "Ação de Cidadania chega em Cruzeiro do Sul e contempla 100% dos reeducandos do Acre com saúde e dignidade e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
     "id": "https://jurua24horas.com/2026/05/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-ambiente-digital/",
     "slug": "prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-amb",
     "title": "Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital",
@@ -265,11 +1841,16 @@ window.NEWS_DATA = [
     "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Assistência Social e Cidadania, realizou nesta sexta-feira, 15, o seminário “ECA Digital: Proteção Integral às Crianças e Adolescentes no Ambiente Digital”...",
     "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Assistência Social e Cidadania, realizou nesta sexta-feira, 15, o seminário “ECA Digital: Proteção Integral às Crianças e Adolescentes no Ambiente Digital”...",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital.",
+      "Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-.svg",
-    "feedImageUrl": "/assets/news-fallbacks/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-.svg",
     "sourceImageUrl": "/assets/news-fallbacks/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-.svg",
+    "feedImageUrl": "/assets/news-fallbacks/prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -292,11 +1873,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "prefeitura-de-cruzeiro-do-sul-realiza-seminario-sobre-protecao-de-criancas-e-adolescentes-no-amb"
     ],
-    "body": [
-      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital.",
-      "Prefeitura de Cruzeiro do Sul realiza seminário sobre proteção de crianças e adolescentes no ambiente digital e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -318,11 +1894,16 @@ window.NEWS_DATA = [
     "lede": "Durante a travessia de balsa no trecho que liga Rodrigues Alves a Cruzeiro do Sul, um incidente chamou a atenção dos passageiros e trabalhadores da embarcação.",
     "summary": "Durante a travessia de balsa no trecho que liga Rodrigues Alves a Cruzeiro do Sul, um incidente chamou a atenção dos passageiros e trabalhadores da embarcação.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Caminhão fica preso em área de acesso à balsa no Juruá.",
+      "Caminhão fica preso em área de acesso à balsa no Juruá e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/caminhao-fica-preso-em-area-de-acesso-a-balsa-no-jurua.svg",
-    "feedImageUrl": "/assets/news-fallbacks/caminhao-fica-preso-em-area-de-acesso-a-balsa-no-jurua.svg",
     "sourceImageUrl": "/assets/news-fallbacks/caminhao-fica-preso-em-area-de-acesso-a-balsa-no-jurua.svg",
+    "feedImageUrl": "/assets/news-fallbacks/caminhao-fica-preso-em-area-de-acesso-a-balsa-no-jurua.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -345,11 +1926,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "caminhao-fica-preso-em-area-de-acesso-a-balsa-no-jurua"
     ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Caminhão fica preso em área de acesso à balsa no Juruá.",
-      "Caminhão fica preso em área de acesso à balsa no Juruá e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -371,11 +1947,16 @@ window.NEWS_DATA = [
     "lede": "Na tarde da última quinta-feira, 15/05, a Secretaria de Estado de Justiça e Segurança Pública, por meio do GEFRON, durante ações no município de Mâncio Lima, realizou a recuperação de uma motocicleta furtada.",
     "summary": "Na tarde da última quinta-feira, 15/05, a Secretaria de Estado de Justiça e Segurança Pública, por meio do GEFRON, durante ações no município de Mâncio Lima, realizou a recuperação de uma motocicleta furtada.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre GEFRON recupera motocicleta furtada durante operação em Mâncio Lima.",
+      "GEFRON recupera motocicleta furtada durante operação em Mâncio Lima e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/05/gefronacre_2456368103.jpg?fit=1080%2C1350&ssl=1",
-    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/05/gefronacre_2456368103.jpg?fit=1080%2C1350&ssl=1",
     "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/05/gefronacre_2456368103.jpg?fit=1080%2C1350&ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/05/gefronacre_2456368103.jpg?fit=1080%2C1350&ssl=1",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -397,11 +1978,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "gefron-recupera-motocicleta-furtada-durante-operacao-em-mancio-lima"
-    ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre GEFRON recupera motocicleta furtada durante operação em Mâncio Lima.",
-      "GEFRON recupera motocicleta furtada durante operação em Mâncio Lima e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -420,11 +1996,16 @@ window.NEWS_DATA = [
     "lede": "O presidente da Câmara Municipal de Porto Walter, Rosildo Cassiano, encaminhou um ofício às autoridades de segurança pública solicitando o aumento do efetivo da Polícia Civil no município.",
     "summary": "O presidente da Câmara Municipal de Porto Walter, Rosildo Cassiano, encaminhou um ofício às autoridades de segurança pública solicitando o aumento do efetivo da Polícia Civil no município.",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Presidente da Câmara de Porto Walter cobra reforço da Polícia Civil diante de onda de furtos e roubos.",
+      "Presidente da Câmara de Porto Walter cobra reforço da Polícia Civil diante de onda de furtos e roubos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/presidente-da-camara-de-porto-walter-cobra-reforco-da-policia-civil-diante-de-onda-de-furt.svg",
-    "feedImageUrl": "/assets/news-fallbacks/presidente-da-camara-de-porto-walter-cobra-reforco-da-policia-civil-diante-de-onda-de-furt.svg",
     "sourceImageUrl": "/assets/news-fallbacks/presidente-da-camara-de-porto-walter-cobra-reforco-da-policia-civil-diante-de-onda-de-furt.svg",
+    "feedImageUrl": "/assets/news-fallbacks/presidente-da-camara-de-porto-walter-cobra-reforco-da-policia-civil-diante-de-onda-de-furt.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -446,11 +2027,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "presidente-da-camara-de-porto-walter-cobra-reforco-da-policia-civil-diante-de-onda-de-furtos-e-r"
-    ],
-    "body": [
-      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Presidente da Câmara de Porto Walter cobra reforço da Polícia Civil diante de onda de furtos e roubos.",
-      "Presidente da Câmara de Porto Walter cobra reforço da Polícia Civil diante de onda de furtos e roubos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -609,55 +2185,6 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/",
-    "slug": "servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia",
-    "title": "Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia",
-    "eyebrow": "Prefeitura",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:56:16.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/",
-    "sourceLabel": "Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia",
-    "lede": "Foto: Jayne Castro- Secom/Prefeitura de Brasiléia \" Pesquisadores do Serviço Geológico do Brasil (SGB), José Luiz e Marcos Oliveira, estiveram em Brasiléia realizando uma série de visitas técnicas para mapeamento de áreas de...",
-    "summary": "Foto: Jayne Castro- Secom/Prefeitura de Brasiléia \" Pesquisadores do Serviço Geológico do Brasil (SGB), José Luiz e Marcos Oliveira, estiveram em Brasiléia realizando uma série de visitas técnicas para mapeamento de áreas de...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.52.00-3-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.52.00-3-1200x675.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.52.00-3-1200x675.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia.",
-      "Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
     "id": "https://jurua24horas.com/2026/05/universidade-federal-do-acre-divulga-3a-chamada-do-sisu-2026-para-cursos-de-graduacao-no-acre/",
     "slug": "universidade-federal-do-acre-divulga-3-chamada-do-sisu-2026-para-cursos-de-graduacao-no-acre",
     "title": "Universidade Federal do Acre divulga 3ª chamada do Sisu 2026 para cursos de graduação no Acre",
@@ -673,11 +2200,16 @@ window.NEWS_DATA = [
     "lede": "A Universidade Federal do Acre divulgou a 3ª chamada do Sistema de Seleção Unificada (Sisu) 2026 para preenchimento de vagas em cursos de graduação ofertados nos campi de Rio Branco e Cruzeiro do Sul.",
     "summary": "A Universidade Federal do Acre divulgou a 3ª chamada do Sistema de Seleção Unificada (Sisu) 2026 para preenchimento de vagas em cursos de graduação ofertados nos campi de Rio Branco e Cruzeiro do Sul.",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Universidade Federal do Acre divulga 3ª chamada do Sisu 2026 para cursos de graduação no Acre.",
+      "Universidade Federal do Acre divulga 3ª chamada do Sisu 2026 para cursos de graduação no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/universidade-federal-do-acre-divulga-3-chamada-do-sisu-2026-para-cursos-de-graduacao-no-ac.svg",
-    "feedImageUrl": "/assets/news-fallbacks/universidade-federal-do-acre-divulga-3-chamada-do-sisu-2026-para-cursos-de-graduacao-no-ac.svg",
     "sourceImageUrl": "/assets/news-fallbacks/universidade-federal-do-acre-divulga-3-chamada-do-sisu-2026-para-cursos-de-graduacao-no-ac.svg",
+    "feedImageUrl": "/assets/news-fallbacks/universidade-federal-do-acre-divulga-3-chamada-do-sisu-2026-para-cursos-de-graduacao-no-ac.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -700,37 +2232,37 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "universidade-federal-do-acre-divulga-3-chamada-do-sisu-2026-para-cursos-de-graduacao-no-acre"
     ],
-    "body": [
-      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Universidade Federal do Acre divulga 3ª chamada do Sisu 2026 para cursos de graduação no Acre.",
-      "Universidade Federal do Acre divulga 3ª chamada do Sisu 2026 para cursos de graduação no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/",
-    "slug": "governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico",
-    "title": "Governo do Acre retoma obras estruturantes durante o verão amazônico",
+    "id": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/",
+    "slug": "servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia",
+    "title": "Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia",
     "eyebrow": "Prefeitura",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T14:43:06.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "publishedAt": "2026-05-16T15:56:16.000Z",
+    "category": "Utilidade Pública",
+    "categoryKey": "utilidade publica",
     "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/",
-    "sourceLabel": "Governo do Acre retoma obras estruturantes durante o verão amazônico",
-    "lede": "Com colaboração de Gabriel Freire Com mais de R$ 350 milhões em investimentos em infraestrutura, mobilidade urbana e saúde pública, o governo do Acre intensifica, durante o verão amazônico, a retomada e aceleração de...",
-    "summary": "Com colaboração de Gabriel Freire Com mais de R$ 350 milhões em investimentos em infraestrutura, mobilidade urbana e saúde pública, o governo do Acre intensifica, durante o verão amazônico, a retomada e aceleração de...",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/",
+    "sourceLabel": "Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia",
+    "lede": "Foto: Jayne Castro- Secom/Prefeitura de Brasiléia \" Pesquisadores do Serviço Geológico do Brasil (SGB), José Luiz e Marcos Oliveira, estiveram em Brasiléia realizando uma série de visitas técnicas para mapeamento de áreas de...",
+    "summary": "Foto: Jayne Castro- Secom/Prefeitura de Brasiléia \" Pesquisadores do Serviço Geológico do Brasil (SGB), José Luiz e Marcos Oliveira, estiveram em Brasiléia realizando uma série de visitas técnicas para mapeamento de áreas de...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia.",
+      "Serviço Geológico do Brasil realiza mapeamento de áreas de risco em Brasiléia e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ilustracao-grafica-da-Orla-do-Quinze-Render-Marcos-Haluen-Seop.jpg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ilustracao-grafica-da-Orla-do-Quinze-Render-Marcos-Haluen-Seop.jpg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ilustracao-grafica-da-Orla-do-Quinze-Render-Marcos-Haluen-Seop.jpg",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.52.00-3-1200x675.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.52.00-3-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.52.00-3-1200x675.jpeg",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -739,24 +2271,19 @@ window.NEWS_DATA = [
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/"
       }
     ],
     "alternateSources": [
       {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico"
-    ],
-    "body": [
-      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Acre retoma obras estruturantes durante o verão amazônico.",
-      "Governo do Acre retoma obras estruturantes durante o verão amazônico e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      "servico-geologico-do-brasil-realiza-mapeamento-de-areas-de-risco-em-brasileia"
     ]
   },
   {
@@ -815,7 +2342,7 @@ window.NEWS_DATA = [
     "eyebrow": "Saude",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:19:09.000Z",
-    "category": "Saude",
+    "category": "Saúde",
     "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "Jurua Comunicacao",
@@ -824,11 +2351,16 @@ window.NEWS_DATA = [
     "lede": "O Acre registrou 4.",
     "summary": "O Acre registrou 4.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Acre registra 4,2 mil sinistros em rodovias ligados à saúde de motoristas em dez anos.",
+      "Acre registra 4,2 mil sinistros em rodovias ligados à saúde de motoristas em dez anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/acre-registra-4-2-mil-sinistros-em-rodovias-ligados-a-saude-de-motoristas-em-dez-anos.svg",
-    "feedImageUrl": "/assets/news-fallbacks/acre-registra-4-2-mil-sinistros-em-rodovias-ligados-a-saude-de-motoristas-em-dez-anos.svg",
     "sourceImageUrl": "/assets/news-fallbacks/acre-registra-4-2-mil-sinistros-em-rodovias-ligados-a-saude-de-motoristas-em-dez-anos.svg",
+    "feedImageUrl": "/assets/news-fallbacks/acre-registra-4-2-mil-sinistros-em-rodovias-ligados-a-saude-de-motoristas-em-dez-anos.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -851,68 +2383,59 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "acre-registra-4-2-mil-sinistros-em-rodovias-ligados-a-saude-de-motoristas-em-dez-anos"
     ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Acre registra 4,2 mil sinistros em rodovias ligados à saúde de motoristas em dez anos.",
-      "Acre registra 4,2 mil sinistros em rodovias ligados à saúde de motoristas em dez anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://juruacomunicacao.com.br/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/",
-    "slug": "internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus",
-    "title": "Internet e telemedicina devem ampliar atendimento em 24 UBSs do Acre e reduzir filas no SUS",
-    "eyebrow": "Saude",
+    "id": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/",
+    "slug": "governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico",
+    "title": "Governo do Acre retoma obras estruturantes durante o verão amazônico",
+    "eyebrow": "Prefeitura",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:17:35.000Z",
-    "category": "Saude",
+    "publishedAt": "2026-05-16T14:43:06.000Z",
+    "category": "Saúde",
     "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/",
-    "sourceLabel": "Internet e telemedicina devem ampliar atendimento em 24 UBSs do Acre e reduzir filas no SUS",
-    "lede": "exames e atendimento especializado com a chegada de internet de alta qualidade a até 24 Unidades Básicas de Saúde (UBSs) em 14 municípios acreanos.",
-    "summary": "exames e atendimento especializado com a chegada de internet de alta qualidade a até 24 Unidades Básicas de Saúde (UBSs) em 14 municípios acreanos.",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/",
+    "sourceLabel": "Governo do Acre retoma obras estruturantes durante o verão amazônico",
+    "lede": "Com colaboração de Gabriel Freire Com mais de R$ 350 milhões em investimentos em infraestrutura, mobilidade urbana e saúde pública, o governo do Acre intensifica, durante o verão amazônico, a retomada e aceleração de...",
+    "summary": "Com colaboração de Gabriel Freire Com mais de R$ 350 milhões em investimentos em infraestrutura, mobilidade urbana e saúde pública, o governo do Acre intensifica, durante o verão amazônico, a retomada e aceleração de...",
     "analysis": "",
+    "body": [
+      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Acre retoma obras estruturantes durante o verão amazônico.",
+      "Governo do Acre retoma obras estruturantes durante o verão amazônico e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
-    "imageUrl": "/assets/news-fallbacks/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-su.svg",
-    "feedImageUrl": "/assets/news-fallbacks/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-su.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-su.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 42%",
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ilustracao-grafica-da-Orla-do-Quinze-Render-Marcos-Haluen-Seop.jpg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ilustracao-grafica-da-Orla-do-Quinze-Render-Marcos-Haluen-Seop.jpg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ilustracao-grafica-da-Orla-do-Quinze-Render-Marcos-Haluen-Seop.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
     "imageFit": "",
     "media": null,
     "priority": 0,
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/"
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/"
       }
     ],
     "alternateSources": [
       {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/"
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus"
-    ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Internet e telemedicina devem ampliar atendimento em 24 UBSs do Acre e reduzir filas no SUS.",
-      "Internet e telemedicina devem ampliar atendimento em 24 UBSs do Acre e reduzir filas no SUS e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+      "governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico"
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/05/acre-registra-mais-de-4-mil-sinistros-em-rodovias-ligados-a-saude-de-motoristas-em-dez-anos/",
@@ -1003,17 +2526,74 @@ window.NEWS_DATA = [
       {
         "name": "ac24horas",
         "url": "https://ac24horas.com/2026/05/16/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/"
+      },
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/"
       }
     ],
     "alternateSources": [
       {
         "name": "ac24horas",
         "url": "https://ac24horas.com/2026/05/16/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/"
+      },
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus/"
+      }
+    ],
+    "sourceCount": 2,
+    "alternateSlugs": [
+      "internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus"
+    ]
+  },
+  {
+    "id": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/",
+    "slug": "crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira",
+    "title": "Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T14:36:04.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/",
+    "sourceLabel": "Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira",
+    "lede": "Um naufrágio registrado na manhã deste sábado (16) mobilizou moradores e equipes de apoio em Sena Madureira. Um barco afundou nas águas do Rio Iaco e, segundo as primeiras informações, uma criança está desaparecida.",
+    "summary": "Um naufrágio registrado na manhã deste sábado (16) mobilizou moradores e equipes de apoio em Sena Madureira. Um barco afundou nas águas do Rio Iaco e, segundo as primeiras informações, uma criança está desaparecida.",
+    "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira.",
+      "Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T093533.690.jpg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T093533.690.jpg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T093533.690.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 980,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "internet-e-telemedicina-devem-ampliar-atendimento-em-24-ubss-do-acre-e-reduzir-filas-no-sus"
+      "crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira"
     ]
   },
   {
@@ -1081,11 +2661,16 @@ window.NEWS_DATA = [
     "lede": "Um jovem foi morto com um tiro na cabeça ao sair de casa para comprar pão no Acre. O crime ocorreu em via pública e causou grande comoção entre moradores da região, que ficaram assustados com a violência registrada no local.",
     "summary": "Um jovem foi morto com um tiro na cabeça ao sair de casa para comprar pão no Acre. O crime ocorreu em via pública e causou grande comoção entre moradores da região, que ficaram assustados com a violência registrada no local.",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Jovem é morto com tiro na cabeça ao sair para comprar pão no Acre.",
+      "Jovem é morto com tiro na cabeça ao sair para comprar pão no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/jovem-e-morto-com-tiro-na-cabeca-ao-sair-para-comprar-pao-no-acre.svg",
-    "feedImageUrl": "/assets/news-fallbacks/jovem-e-morto-com-tiro-na-cabeca-ao-sair-para-comprar-pao-no-acre.svg",
     "sourceImageUrl": "/assets/news-fallbacks/jovem-e-morto-com-tiro-na-cabeca-ao-sair-para-comprar-pao-no-acre.svg",
+    "feedImageUrl": "/assets/news-fallbacks/jovem-e-morto-com-tiro-na-cabeca-ao-sair-para-comprar-pao-no-acre.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -1108,11 +2693,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "jovem-e-morto-com-tiro-na-cabeca-ao-sair-para-comprar-pao-no-acre"
     ],
-    "body": [
-      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Jovem é morto com tiro na cabeça ao sair para comprar pão no Acre.",
-      "Jovem é morto com tiro na cabeça ao sair para comprar pão no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -1134,11 +2714,16 @@ window.NEWS_DATA = [
     "lede": "Dados divulgados pelo Instituto Brasileiro de Geografia e Estatística (IBGE) revelam que mais de 10% da população acreana com 15 anos ou mais ainda não sabe ler nem escrever.",
     "summary": "Dados divulgados pelo Instituto Brasileiro de Geografia e Estatística (IBGE) revelam que mais de 10% da população acreana com 15 anos ou mais ainda não sabe ler nem escrever.",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Mais de 10% da população do Acre acima de 15 anos não sabe ler nem escrever, aponta Instituto Brasileiro de Geografia e Estatística.",
+      "Mais de 10% da população do Acre acima de 15 anos não sabe ler nem escrever, aponta Instituto Brasileiro de Geografia e Estatística e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/mais-de-10-da-populacao-do-acre-acima-de-15-anos-nao-sabe-ler-nem-escrever-aponta-institut.svg",
-    "feedImageUrl": "/assets/news-fallbacks/mais-de-10-da-populacao-do-acre-acima-de-15-anos-nao-sabe-ler-nem-escrever-aponta-institut.svg",
     "sourceImageUrl": "/assets/news-fallbacks/mais-de-10-da-populacao-do-acre-acima-de-15-anos-nao-sabe-ler-nem-escrever-aponta-institut.svg",
+    "feedImageUrl": "/assets/news-fallbacks/mais-de-10-da-populacao-do-acre-acima-de-15-anos-nao-sabe-ler-nem-escrever-aponta-institut.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -1160,11 +2745,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "mais-de-10-da-populacao-do-acre-acima-de-15-anos-nao-sabe-ler-nem-escrever-aponta-instituto-bras"
-    ],
-    "body": [
-      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Mais de 10% da população do Acre acima de 15 anos não sabe ler nem escrever, aponta Instituto Brasileiro de Geografia e Estatística.",
-      "Mais de 10% da população do Acre acima de 15 anos não sabe ler nem escrever, aponta Instituto Brasileiro de Geografia e Estatística e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -1429,6 +3009,55 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://ac24horas.com/2026/05/16/andira-bate-o-placido-de-castro-e-vence-a-1a-vitoria-no-estadual-sub-20/",
+    "slug": "andira-bate-o-placido-de-castro-e-vence-a-1-vitoria-no-estadual-sub-20",
+    "title": "Andirá bate o Plácido de Castro e vence a 1ª vitória no Estadual Sub-20",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:40:13.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/andira-bate-o-placido-de-castro-e-vence-a-1a-vitoria-no-estadual-sub-20/",
+    "sourceLabel": "Andirá bate o Plácido de Castro e vence a 1ª vitória no Estadual Sub-20",
+    "lede": "Foto Sueli Rodrigues: Andirá conquistou uma vitória importante na luta pela classificação \" O Andirá derrotou o Plácido de Castro por 4 a 2 neste sábado, 16, no Tonicão, e conquistou a primeira vitória no Campeonato Estadual...",
+    "summary": "Foto Sueli Rodrigues: Andirá conquistou uma vitória importante na luta pela classificação \" O Andirá derrotou o Plácido de Castro por 4 a 2 neste sábado, 16, no Tonicão, e conquistou a primeira vitória no Campeonato Estadual...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T183929.339.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T183929.339.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T183929.339.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/andira-bate-o-placido-de-castro-e-vence-a-1a-vitoria-no-estadual-sub-20/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/andira-bate-o-placido-de-castro-e-vence-a-1a-vitoria-no-estadual-sub-20/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "andira-bate-o-placido-de-castro-e-vence-a-1-vitoria-no-estadual-sub-20"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Andirá bate o Plácido de Castro e vence a 1ª vitória no Estadual Sub-20.",
+      "Andirá bate o Plácido de Castro e vence a 1ª vitória no Estadual Sub-20 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
     "id": "https://juruacomunicacao.com.br/acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto/",
     "slug": "acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto",
     "title": "Acre vai receber Taça Brasil de Vôlei de Praia Sub-17 em agosto",
@@ -1444,11 +3073,16 @@ window.NEWS_DATA = [
     "lede": "A Confederação Brasileira de Voleibol(CBV) e a Federação Acreana de Voleibol(FEAV) promovem entre os dias 13 e 16 de agosto, nas quadras da Praça do Juventus, a Taça Brasil de Vôlei de Praia Sub-17.",
     "summary": "A Confederação Brasileira de Voleibol(CBV) e a Federação Acreana de Voleibol(FEAV) promovem entre os dias 13 e 16 de agosto, nas quadras da Praça do Juventus, a Taça Brasil de Vôlei de Praia Sub-17.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Acre vai receber Taça Brasil de Vôlei de Praia Sub-17 em agosto.",
+      "Acre vai receber Taça Brasil de Vôlei de Praia Sub-17 em agosto e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto.svg",
-    "feedImageUrl": "/assets/news-fallbacks/acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto.svg",
     "sourceImageUrl": "/assets/news-fallbacks/acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto.svg",
+    "feedImageUrl": "/assets/news-fallbacks/acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -1470,11 +3104,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "acre-vai-receber-taca-brasil-de-volei-de-praia-sub-17-em-agosto"
-    ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Acre vai receber Taça Brasil de Vôlei de Praia Sub-17 em agosto.",
-      "Acre vai receber Taça Brasil de Vôlei de Praia Sub-17 em agosto e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -1531,13 +3160,111 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://batelao.com/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico",
+    "slug": "governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico",
+    "title": "Governo do Acre retoma obras estruturantes durante o verão amazônico",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:41:50.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico",
+    "sourceLabel": "Governo do Acre retoma obras estruturantes durante o verão amazônico",
+    "lede": "Por Felipe Hid Com colaboração de Gabriel Freire Com mais de R$ 350 milhões em investimentos em infraestrutura, mobilidade urbana e saúde pública, o governo do Acre intensifica, durante o verão amazônico, a retomada e...",
+    "summary": "Por Felipe Hid Com colaboração de Gabriel Freire Com mais de R$ 350 milhões em investimentos em infraestrutura, mobilidade urbana e saúde pública, o governo do Acre intensifica, durante o verão amazônico, a retomada e...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/DJI_20260516005533_0026_D-scaled.jpg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/DJI_20260516005533_0026_D-scaled.jpg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/DJI_20260516005533_0026_D-scaled.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-do-acre-retoma-obras-estruturantes-durante-o-verao-amazonico"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Acre retoma obras estruturantes durante o verão amazônico.",
+      "Governo do Acre retoma obras estruturantes durante o verão amazônico e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac",
+    "slug": "governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac",
+    "title": "Governo do Acre entrega proposta da Lei de Diretrizes Orçamentárias 2027 à Aleac",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:36:20.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac",
+    "sourceLabel": "Governo do Acre entrega proposta da Lei de Diretrizes Orçamentárias 2027 à Aleac",
+    "lede": "Por Elynalia Lima O governo do Acre, por meio da Secretaria de Estado de Planejamento (Seplan), entregou nesta sexta-feira, 15, à Assembleia Legislativa do Estado (Aleac), a proposta da Lei de Diretrizes Orçamentárias (PLDO)...",
+    "summary": "Por Elynalia Lima O governo do Acre, por meio da Secretaria de Estado de Planejamento (Seplan), entregou nesta sexta-feira, 15, à Assembleia Legislativa do Estado (Aleac), a proposta da Lei de Diretrizes Orçamentárias (PLDO)...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_1459.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_1459.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_1459.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-do-acre-entrega-proposta-da-lei-de-diretrizes-orcamentarias-2027-a-aleac"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Acre entrega proposta da Lei de Diretrizes Orçamentárias 2027 à Aleac.",
+      "Governo do Acre entrega proposta da Lei de Diretrizes Orçamentárias 2027 à Aleac e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
     "id": "https://ac24horas.com/2026/05/16/michelle-melo-leva-consultas-oftalmologicas-e-entrega-de-oculos-a-alunos-em-xapuri/",
     "slug": "michelle-melo-leva-consultas-oftalmologicas-e-entrega-de-oculos-a-alunos-em-xapuri",
     "title": "Michelle Melo leva consultas oftalmológicas e entrega de óculos a alunos em Xapuri",
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:07:00.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
@@ -1546,11 +3273,16 @@ window.NEWS_DATA = [
     "lede": "A deputada estadual Michelle Melo (União Brasil) realizou, nesta sexta-feira (15), mais uma etapa do projeto “Ver para Aprender”, com atendimento a estudantes da Escola Madri Gabriela Nardi, no município de Xapuri.",
     "summary": "A deputada estadual Michelle Melo (União Brasil) realizou, nesta sexta-feira (15), mais uma etapa do projeto “Ver para Aprender”, com atendimento a estudantes da Escola Madri Gabriela Nardi, no município de Xapuri.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Michelle Melo leva consultas oftalmológicas e entrega de óculos a alunos em Xapuri.",
+      "Michelle Melo leva consultas oftalmológicas e entrega de óculos a alunos em Xapuri e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.05.00-1200x798.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.05.00-1200x798.jpeg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.05.00-1200x798.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-10.05.00-1200x798.jpeg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -1572,11 +3304,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "michelle-melo-leva-consultas-oftalmologicas-e-entrega-de-oculos-a-alunos-em-xapuri"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Michelle Melo leva consultas oftalmológicas e entrega de óculos a alunos em Xapuri.",
-      "Michelle Melo leva consultas oftalmológicas e entrega de óculos a alunos em Xapuri e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -1731,62 +3458,13 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/",
-    "slug": "crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira",
-    "title": "Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira",
-    "eyebrow": "Cotidiano",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T14:36:04.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano crianca desaparece apos barco naufragar no rio iaco em sena madureira um naufragio registrado na manha deste sabado 16 mobilizou moradores e equipes de apoio em sena madureira um barco afundou nas aguas do rio iaco e segundo as primeiras informacoes uma crianca esta desaparecida",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/",
-    "sourceLabel": "Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira",
-    "lede": "Um naufrágio registrado na manhã deste sábado (16) mobilizou moradores e equipes de apoio em Sena Madureira. Um barco afundou nas águas do Rio Iaco e, segundo as primeiras informações, uma criança está desaparecida.",
-    "summary": "Um naufrágio registrado na manhã deste sábado (16) mobilizou moradores e equipes de apoio em Sena Madureira. Um barco afundou nas águas do Rio Iaco e, segundo as primeiras informações, uma criança está desaparecida.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T093533.690.jpg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T093533.690.jpg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T093533.690.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "crianca-desaparece-apos-barco-naufragar-no-rio-iaco-em-sena-madureira"
-    ],
-    "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira.",
-      "Criança desaparece após barco naufragar no Rio Iaco, em Sena Madureira e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
     "id": "https://jurua24horas.com/2026/05/urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre/",
     "slug": "urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre",
     "title": "Urgente: criança desaparece após naufrágio de barco no interior do Acre",
     "eyebrow": "Policia",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:09:14.000Z",
-    "category": "Policia",
+    "category": "Polícia",
     "categoryKey": "policia",
     "previewClass": "thumb-policia",
     "sourceName": "Jurua 24 Horas",
@@ -1795,11 +3473,16 @@ window.NEWS_DATA = [
     "lede": "Um barco naufragou na manhã deste sábado (16) no Rio Iaco, em Sena Madureira, no interior do Acre. De acordo com as primeiras informações, uma criança está desaparecida após o acidente.",
     "summary": "Um barco naufragou na manhã deste sábado (16) no Rio Iaco, em Sena Madureira, no interior do Acre. De acordo com as primeiras informações, uma criança está desaparecida após o acidente.",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Urgente: criança desaparece após naufrágio de barco no interior do Acre.",
+      "Urgente: criança desaparece após naufrágio de barco no interior do Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre.svg",
-    "feedImageUrl": "/assets/news-fallbacks/urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre.svg",
     "sourceImageUrl": "/assets/news-fallbacks/urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre.svg",
+    "feedImageUrl": "/assets/news-fallbacks/urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -1822,15 +3505,157 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "urgente-crianca-desaparece-apos-naufragio-de-barco-no-interior-do-acre"
     ],
-    "body": [
-      "Jurua 24 Horas publicou em 16 de mai de 2026 a base desta noticia sobre Urgente: criança desaparece após naufrágio de barco no interior do Acre.",
-      "Urgente: criança desaparece após naufrágio de barco no interior do Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/",
+    "slug": "ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos",
+    "title": "Ypê: principais dúvidas e respostas sobre polêmica dos produtos",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:28:15.000Z",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/",
+    "sourceLabel": "Ypê: principais dúvidas e respostas sobre polêmica dos produtos",
+    "lede": "CNN Brasil publicou uma atualização sobre Ypê: principais dúvidas e respostas sobre polêmica dos produtos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Ypê: principais dúvidas e respostas sobre polêmica dos produtos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Ypê: principais dúvidas e respostas sobre polêmica dos produtos.",
+      "Ypê: principais dúvidas e respostas sobre polêmica dos produtos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/ype-google-trends-2.png?w=1024",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/ype-google-trends-2.png?w=1024",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/ype-google-trends-2.png?w=1024",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/",
+    "slug": "produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista",
+    "title": "Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:23:11.000Z",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/",
+    "sourceLabel": "Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista",
+    "lede": "CNN Brasil publicou uma atualização sobre Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista.",
+      "Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/FTA20260507091.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/FTA20260507091.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/FTA20260507091.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/",
+    "slug": "familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados",
+    "title": "Famílias em Gaza lutam contra infestação de ratos em campos de refugiados",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T18:56:49.000Z",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/",
+    "sourceLabel": "Famílias em Gaza lutam contra infestação de ratos em campos de refugiados",
+    "lede": "CNN Brasil publicou uma atualização sobre Famílias em Gaza lutam contra infestação de ratos em campos de refugiados. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Famílias em Gaza lutam contra infestação de ratos em campos de refugiados. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Famílias em Gaza lutam contra infestação de ratos em campos de refugiados.",
+      "Famílias em Gaza lutam contra infestação de ratos em campos de refugiados e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.develop.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXMPEL6L0YI-BASEIMAGE-e1761343007435.jpg?w=200",
+    "sourceImageUrl": "https://admin.develop.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXMPEL6L0YI-BASEIMAGE-e1761343007435.jpg?w=200",
+    "feedImageUrl": "https://admin.develop.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXMPEL6L0YI-BASEIMAGE-e1761343007435.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados"
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/dezenas-de-pessoas-morreram-em-novo-surto-de-ebola-na-rd-congo/",
@@ -1977,6 +3802,55 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "segunda-etapa-do-revalida-ocorre-neste-fim-de-semana"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/",
+    "slug": "joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo",
+    "title": "João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:03:48.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/",
+    "sourceLabel": "João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo",
+    "lede": "CNN Brasil publicou uma atualização sobre João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo.",
+      "João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Jannik-Sinner-e1778946167803.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Jannik-Sinner-e1778946167803.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Jannik-Sinner-e1778946167803.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo"
     ]
   },
   {
@@ -2617,6 +4491,157 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/",
+    "slug": "cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito",
+    "title": "Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:52:10.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/",
+    "sourceLabel": "Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito",
+    "lede": "CNN Brasil publicou uma atualização sobre Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito.",
+      "Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito.svg",
+    "feedImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/",
+    "slug": "copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira",
+    "title": "Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:38:48.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/",
+    "sourceLabel": "Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã",
+    "lede": "CNN Brasil publicou uma atualização sobre Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã.",
+      "Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/GettyImages-2220271981-e1778945596684.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/GettyImages-2220271981-e1778945596684.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/GettyImages-2220271981-e1778945596684.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/",
+    "slug": "svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma",
+    "title": "Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:37:57.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/",
+    "sourceLabel": "Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma",
+    "lede": "CNN Brasil publicou uma atualização sobre Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma.",
+      "Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/joao_fonseca_roma-e1778353330982.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/joao_fonseca_roma-e1778353330982.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/joao_fonseca_roma-e1778353330982.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma"
+    ]
+  },
+  {
     "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem",
     "slug": "brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem",
     "title": "Brasil leva dois ouros na Copa do Mundo de canoagem e paracanoagem",
@@ -2632,11 +4657,16 @@ window.NEWS_DATA = [
     "lede": "O Brasil marcou presença duas vezes no topo do pódio na etapa de Brandemburgo, na Alemanha, da Copa do Mundo de canoagem e paracanoagem.",
     "summary": "O Brasil marcou presença duas vezes no topo do pódio na etapa de Brandemburgo, na Alemanha, da Copa do Mundo de canoagem e paracanoagem.",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Brasil leva dois ouros na Copa do Mundo de canoagem e paracanoagem.",
+      "Brasil leva dois ouros na Copa do Mundo de canoagem e paracanoagem e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem.svg",
-    "feedImageUrl": "/assets/news-fallbacks/brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem.svg",
     "sourceImageUrl": "/assets/news-fallbacks/brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem.svg",
+    "feedImageUrl": "/assets/news-fallbacks/brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -2658,11 +4688,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "brasil-leva-dois-ouros-na-copa-do-mundo-de-canoagem-e-paracanoagem"
-    ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Brasil leva dois ouros na Copa do Mundo de canoagem e paracanoagem.",
-      "Brasil leva dois ouros na Copa do Mundo de canoagem e paracanoagem e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -2734,11 +4759,16 @@ window.NEWS_DATA = [
     "lede": "Reality show gastronômico estreia na noite do dia 26 de maio, às 22h30",
     "summary": "Reality show gastronômico estreia na noite do dia 26 de maio, às 22h30",
     "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre MasterChef Brasil 2026: conheça os participantes da disputa culinária.",
+      "MasterChef Brasil 2026: conheça os participantes da disputa culinária e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/7T9A4356-2-1.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/7T9A4356-2-1.jpg?w=200",
     "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/7T9A4356-2-1.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/7T9A4356-2-1.jpg?w=200",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -2760,11 +4790,104 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "masterchef-brasil-2026-conheca-os-participantes-da-disputa-culinaria"
-    ],
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/",
+    "slug": "final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual",
+    "title": "Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:13:54.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/",
+    "sourceLabel": "Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual",
+    "lede": "CNN Brasil publicou uma atualização sobre Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
     "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre MasterChef Brasil 2026: conheça os participantes da disputa culinária.",
-      "MasterChef Brasil 2026: conheça os participantes da disputa culinária e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual.",
+      "Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/tres-gracas-elenco.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/tres-gracas-elenco.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/tres-gracas-elenco.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/",
+    "slug": "alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata",
+    "title": "Além de Porchat: veja famosos que já receberam título “persona non grata”",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:02:44.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/",
+    "sourceLabel": "Além de Porchat: veja famosos que já receberam título “persona non grata”",
+    "lede": "CNN Brasil publicou uma atualização sobre Além de Porchat: veja famosos que já receberam título “persona non grata”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Além de Porchat: veja famosos que já receberam título “persona non grata”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Além de Porchat: veja famosos que já receberam título “persona non grata”.",
+      "Além de Porchat: veja famosos que já receberam título “persona non grata” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Atriz-Sharon-Stone-na-premiacao-Astra-Film-Awards-2026.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Atriz-Sharon-Stone-na-premiacao-Astra-Film-Awards-2026.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Atriz-Sharon-Stone-na-premiacao-Astra-Film-Awards-2026.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata"
     ]
   },
   {
@@ -2872,7 +4995,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T12:50:38.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "Jurua Online",
@@ -2881,11 +5004,16 @@ window.NEWS_DATA = [
     "lede": "A maioria dos ministros do Supremo Tribunal Federal (STF) decidiu nesta sexta-feira (15) manter a decisão da Corte que rejeitou a revisão da vida toda das aposentadorias do Instituto Nacional do Seguro Social (INSS).",
     "summary": "A maioria dos ministros do Supremo Tribunal Federal (STF) decidiu nesta sexta-feira (15) manter a decisão da Corte que rejeitou a revisão da vida toda das aposentadorias do Instituto Nacional do Seguro Social (INSS).",
     "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre STF mantém decisão que rejeitou revisão da vida toda do INSS.",
+      "STF mantém decisão que rejeitou revisão da vida toda do INSS e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T075011.892.jpg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T075011.892.jpg",
     "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T075011.892.jpg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T075011.892.jpg",
     "imageCredit": "",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -2896,22 +5024,221 @@ window.NEWS_DATA = [
       {
         "name": "Jurua Online",
         "url": "https://juruaonline.com.br/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss/"
+      },
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
       }
     ],
     "alternateSources": [
       {
         "name": "Jurua Online",
         "url": "https://juruaonline.com.br/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss/"
+      },
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
+      }
+    ],
+    "sourceCount": 2,
+    "alternateSlugs": [
+      "stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/",
+    "slug": "analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar",
+    "title": "Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:32:33.000Z",
+    "category": "Política",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/",
+    "sourceLabel": "Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
+    "lede": "CNN Brasil publicou uma atualização sobre Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar.",
+      "Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Navios-no-Estreito-de-Ormuz-em-Musandam-Oma.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Navios-no-Estreito-de-Ormuz-em-Musandam-Oma.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Navios-no-Estreito-de-Ormuz-em-Musandam-Oma.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
-    ],
+      "analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/",
+    "slug": "caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai",
+    "title": "Caso Master: foragido de operação da PF é preso em Dubai",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:20:11.000Z",
+    "category": "Política",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/",
+    "sourceLabel": "Caso Master: foragido de operação da PF é preso em Dubai",
+    "lede": "CNN Brasil publicou uma atualização sobre Caso Master: foragido de operação da PF é preso em Dubai. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Caso Master: foragido de operação da PF é preso em Dubai. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
     "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre STF mantém decisão que rejeitou revisão da vida toda do INSS.",
-      "STF mantém decisão que rejeitou revisão da vida toda do INSS e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Caso Master: foragido de operação da PF é preso em Dubai.",
+      "Caso Master: foragido de operação da PF é preso em Dubai e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://img.youtube.com/vi/5eZHNQkLb5o/sddefault.jpg",
+    "sourceImageUrl": "https://img.youtube.com/vi/5eZHNQkLb5o/sddefault.jpg",
+    "feedImageUrl": "https://img.youtube.com/vi/5eZHNQkLb5o/sddefault.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/",
+    "slug": "vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista",
+    "title": "Vorcaro tem de revelar provas novas para garantir delação, diz especialista",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T18:48:34.000Z",
+    "category": "Política",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/",
+    "sourceLabel": "Vorcaro tem de revelar provas novas para garantir delação, diz especialista",
+    "lede": "CNN Brasil publicou uma atualização sobre Vorcaro tem de revelar provas novas para garantir delação, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Vorcaro tem de revelar provas novas para garantir delação, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Vorcaro tem de revelar provas novas para garantir delação, diz especialista.",
+      "Vorcaro tem de revelar provas novas para garantir delação, diz especialista e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Daniel-Vorcaro.png?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Daniel-Vorcaro.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Daniel-Vorcaro.png?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/",
+    "slug": "flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez",
+    "title": "Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez",
+    "eyebrow": "Politica",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T18:45:16.000Z",
+    "category": "Política",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/",
+    "sourceLabel": "Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez",
+    "lede": "CNN Brasil publicou uma atualização sobre Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez.",
+      "Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/claudio-castro_729b85.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/claudio-castro_729b85.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/claudio-castro_729b85.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez"
     ]
   },
   {
@@ -2921,7 +5248,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T16:33:18.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
@@ -2930,11 +5257,16 @@ window.NEWS_DATA = [
     "lede": "Derrite fala sobre campanha e CPI que apura caso do Banco Master O ex-secretário de Segurança Pública, Guilherme Derrite (PP), lançou sua pré-candidatura ao Senado durante um evento em Sorocaba (SP), neste sábado (16).",
     "summary": "Derrite fala sobre campanha e CPI que apura caso do Banco Master O ex-secretário de Segurança Pública, Guilherme Derrite (PP), lançou sua pré-candidatura ao Senado durante um evento em Sorocaba (SP), neste sábado (16).",
     "analysis": "",
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Guilherme Derrite lança pré-candidatura ao Senado por SP durante evento com Flávio Bolsonaro em Sorocaba.",
+      "Guilherme Derrite lança pré-candidatura ao Senado por SP durante evento com Flávio Bolsonaro em Sorocaba e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://s2-g1.glbimg.com/---XdanjnYvVdUjogJnwduJXgzk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/g/nUtOyiQtqD8KGQIgKwBA/derrite-flavio.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/---XdanjnYvVdUjogJnwduJXgzk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/g/nUtOyiQtqD8KGQIgKwBA/derrite-flavio.jpg",
     "sourceImageUrl": "https://s2-g1.glbimg.com/---XdanjnYvVdUjogJnwduJXgzk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/g/nUtOyiQtqD8KGQIgKwBA/derrite-flavio.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/---XdanjnYvVdUjogJnwduJXgzk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/g/nUtOyiQtqD8KGQIgKwBA/derrite-flavio.jpg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -2956,11 +5288,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "guilherme-derrite-lanca-pre-candidatura-ao-senado-por-sp-durante-evento-com-flavio-bolsonaro-em-"
-    ],
-    "body": [
-      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Guilherme Derrite lança pré-candidatura ao Senado por SP durante evento com Flávio Bolsonaro em Sorocaba.",
-      "Guilherme Derrite lança pré-candidatura ao Senado por SP durante evento com Flávio Bolsonaro em Sorocaba e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -2970,7 +5297,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T14:50:00.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "Agencia Brasil",
@@ -2979,11 +5306,16 @@ window.NEWS_DATA = [
     "lede": "A Empresa Brasil de Comunicação (EBC) aprovou, na reunião da Diretoria Executiva desta sexta-feira (15), a sua Política de Inovação, um documento estratégico para as políticas de inovação da empresa.",
     "summary": "A Empresa Brasil de Comunicação (EBC) aprovou, na reunião da Diretoria Executiva desta sexta-feira (15), a sua Política de Inovação, um documento estratégico para as políticas de inovação da empresa.",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre EBC reforça aposta no futuro com Política de Inovação.",
+      "EBC reforça aposta no futuro com Política de Inovação e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/ebc-reforca-aposta-no-futuro-com-politica-de-inovacao.svg",
-    "feedImageUrl": "/assets/news-fallbacks/ebc-reforca-aposta-no-futuro-com-politica-de-inovacao.svg",
     "sourceImageUrl": "/assets/news-fallbacks/ebc-reforca-aposta-no-futuro-com-politica-de-inovacao.svg",
+    "feedImageUrl": "/assets/news-fallbacks/ebc-reforca-aposta-no-futuro-com-politica-de-inovacao.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -3005,11 +5337,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "ebc-reforca-aposta-no-futuro-com-politica-de-inovacao"
-    ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre EBC reforça aposta no futuro com Política de Inovação.",
-      "EBC reforça aposta no futuro com Política de Inovação e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -3213,57 +5540,53 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss",
-    "slug": "stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss",
-    "title": "STF mantém decisão que rejeitou revisão da vida toda do INSS",
-    "eyebrow": "Politica",
-    "date": "15 de mai de 2026",
-    "publishedAt": "2026-05-16T00:40:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss",
-    "sourceLabel": "STF mantém decisão que rejeitou revisão da vida toda do INSS",
-    "lede": "A maioria dos ministros do Supremo Tribunal Federal (STF) decidiu nesta sexta-feira (15) manter a decisão da Corte que rejeitou a revisão da vida toda das aposentadorias do Instituto Nacional do Seguro Social (INSS) .",
-    "summary": "A maioria dos ministros do Supremo Tribunal Federal (STF) decidiu nesta sexta-feira (15) manter a decisão da Corte que rejeitou a revisão da vida toda das aposentadorias do Instituto Nacional do Seguro Social (INSS) .",
+    "id": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/",
+    "slug": "dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845",
+    "title": "DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:07:46.000Z",
+    "category": "Festas & Social",
+    "categoryKey": "festas & social",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/",
+    "sourceLabel": "DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845",
+    "lede": "CNN Brasil publicou uma atualização sobre DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
-      "Agencia Brasil publicou em 15 de mai de 2026 a base desta noticia sobre STF mantém decisão que rejeitou revisão da vida toda do INSS.",
-      "STF mantém decisão que rejeitou revisão da vida toda do INSS e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845.",
+      "DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "/assets/news-fallbacks/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss.svg",
-    "feedImageUrl": "/assets/news-fallbacks/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/francois-musin-the-search-for-sir-john-franklin-in-the-arctic-e9b056.jpeg?w=640",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/francois-musin-the-search-for-sir-john-franklin-in-the-arctic-e9b056.jpeg?w=640",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/francois-musin-the-search-for-sir-john-franklin-in-the-arctic-e9b056.jpeg?w=640",
+    "imageCredit": "",
+    "imageFocus": "",
     "imageFit": "",
     "media": null,
     "priority": 0,
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/"
       }
     ],
     "alternateSources": [
       {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "stf-mantem-decisao-que-rejeitou-revisao-da-vida-toda-do-inss"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+      "dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845"
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/branded-content/economia/negocios/bar-em-casa-como-integrar-lazer-e-sofisticacao/",
@@ -3609,55 +5932,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio",
-    "slug": "cotacao-de-precos-fornecimento-de-veiculos-de-passeio",
-    "title": "COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO",
-    "eyebrow": "Prefeitura",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T05:35:11.390Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Prefeitura de CZS",
-    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio",
-    "sourceLabel": "COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO",
-    "lede": "Contratação de Pessoa Jurídica para o Fornecimento de Veículos de Passeio e Utilitários para atender as demandas e as Necessidades da Secretaria Municipal de Assistência Social e Cidadania e das Unidades Socioassistenciais...",
-    "summary": "Contratação de Pessoa Jurídica para o Fornecimento de Veículos de Passeio e Utilitários para atender as demandas e as Necessidades da Secretaria Municipal de Assistência Social e Cidadania e das Unidades Socioassistenciais...",
-    "analysis": "",
-    "body": [
-      "Prefeitura de CZS publicou em 16 de mai de 2026 a base desta noticia sobre COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO.",
-      "COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://static.wixstatic.com/media/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg",
-    "sourceImageUrl": "https://static.wixstatic.com/media/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg",
-    "feedImageUrl": "https://static.wixstatic.com/media/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_55ac1eae00d345a5a44b75b23474224c~mv2.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 1000,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Prefeitura de CZS",
-        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Prefeitura de CZS",
-        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7os---fornecimento-de-ve%C3%ADculos-de-passeio"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "cotacao-de-precos-fornecimento-de-veiculos-de-passeio"
-    ]
-  },
-  {
     "id": "https://juruaonline.com.br/bebe-de-3-meses-e-diagnosticada-com-tumor-na-cabeca-e-familia-pede-ajuda-em-cruzeiro-do-sul/",
     "slug": "bebe-de-3-meses-e-diagnosticada-com-tumor-na-cabeca-e-familia-pede-ajuda-em-cruzeiro-do-sul",
     "title": "Bebê de 3 meses é diagnosticada com tumor na cabeça e família pede ajuda em Cruzeiro do Sul",
@@ -3707,28 +5981,28 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/",
-    "slug": "alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores",
-    "title": "Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores",
+    "id": "https://ac24horas.com/2026/05/16/44-agentes-de-seguranca-concluem-curso-de-atendimento-a-tentativas-de-suicidio/",
+    "slug": "44-agentes-de-seguranca-concluem-curso-de-atendimento-a-tentativas-de-suicidio",
+    "title": "44 agentes de segurança concluem Curso de Atendimento a Tentativas de Suicídio",
     "eyebrow": "Prefeitura",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T16:47:10.000Z",
+    "publishedAt": "2026-05-16T23:38:23.000Z",
     "category": "Prefeitura",
     "categoryKey": "prefeitura",
     "previewClass": "thumb-prefeitura",
     "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/",
-    "sourceLabel": "Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores",
-    "lede": "Novo espaço conta com bancas padronizadas, estrutura moderna e internet, fortalecendo a comercialização de produtos locais em Rio Branco O prefeito de Rio Branco, Alysson Bestene, visitou na manhã deste sábado (16), o Mercado...",
-    "summary": "Novo espaço conta com bancas padronizadas, estrutura moderna e internet, fortalecendo a comercialização de produtos locais em Rio Branco O prefeito de Rio Branco, Alysson Bestene, visitou na manhã deste sábado (16), o Mercado...",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/44-agentes-de-seguranca-concluem-curso-de-atendimento-a-tentativas-de-suicidio/",
+    "sourceLabel": "44 agentes de segurança concluem Curso de Atendimento a Tentativas de Suicídio",
+    "lede": "Screenshot \" Em Cruzeiro do Sul nesta sexta-feira, 15, a Polícia Militar do Acre (PMAC), em conjunto com instituições parceiras, realizou a solenidade de formatura do Curso de Atendimento a Tentativas de Suicídio (CATS).",
+    "summary": "Screenshot \" Em Cruzeiro do Sul nesta sexta-feira, 15, a Polícia Militar do Acre (PMAC), em conjunto com instituições parceiras, realizou a solenidade de formatura do Curso de Atendimento a Tentativas de Suicídio (CATS).",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T114449.073.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T114449.073.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T114449.073.jpg",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_5970-1200x837.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_5970-1200x837.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_5970-1200x837.jpeg",
     "imageCredit": "",
-    "imageFocus": "center 38%",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
@@ -3736,101 +6010,48 @@ window.NEWS_DATA = [
     "crossSources": [
       {
         "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/"
+        "url": "https://ac24horas.com/2026/05/16/44-agentes-de-seguranca-concluem-curso-de-atendimento-a-tentativas-de-suicidio/"
       }
     ],
     "alternateSources": [
       {
         "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/"
+        "url": "https://ac24horas.com/2026/05/16/44-agentes-de-seguranca-concluem-curso-de-atendimento-a-tentativas-de-suicidio/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores"
+      "44-agentes-de-seguranca-concluem-curso-de-atendimento-a-tentativas-de-suicidio"
     ],
     "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores.",
-      "Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre 44 agentes de segurança concluem Curso de Atendimento a Tentativas de Suicídio.",
+      "44 agentes de segurança concluem Curso de Atendimento a Tentativas de Suicídio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/",
-    "slug": "com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-",
-    "title": "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre",
+    "id": "https://ac24horas.com/2026/05/16/carlinhos-do-pelado-realiza-festa-para-as-maes-com-dezenas-de-premios/",
+    "slug": "carlinhos-do-pelado-realiza-festa-para-as-maes-com-dezenas-de-premios",
+    "title": "Carlinhos do Pelado realiza festa para as mães com dezenas de prêmios",
     "eyebrow": "Prefeitura",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T16:31:47.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/",
-    "sourceLabel": "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre",
-    "lede": "Com foco na promoção da saúde, bem-estar e qualidade de vida da população por meio do esporte, o governo estadual tem fortalecido o apoio a iniciativas públicas de incentivo à atividade física.",
-    "summary": "Com foco na promoção da saúde, bem-estar e qualidade de vida da população por meio do esporte, o governo estadual tem fortalecido o apoio a iniciativas públicas de incentivo à atividade física.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de.svg",
-    "feedImageUrl": "/assets/news-fallbacks/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-"
-    ],
-    "body": [
-      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre.",
-      "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/",
-    "slug": "no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana",
-    "title": "No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana",
-    "eyebrow": "Prefeitura",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T16:22:37.000Z",
+    "publishedAt": "2026-05-16T21:17:44.000Z",
     "category": "Prefeitura",
     "categoryKey": "prefeitura",
     "previewClass": "thumb-prefeitura",
     "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/",
-    "sourceLabel": "No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana",
-    "lede": "O presidente da Câmara Municipal de Rio Branco, vereador Joabe Lira (União Brasil), prestou homenagem neste sábado, 16, data em que é celebrado o Dia do Gari, e destacou a importância dos profissionais da limpeza urbana para o...",
-    "summary": "O presidente da Câmara Municipal de Rio Branco, vereador Joabe Lira (União Brasil), prestou homenagem neste sábado, 16, data em que é celebrado o Dia do Gari, e destacou a importância dos profissionais da limpeza urbana para o...",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/carlinhos-do-pelado-realiza-festa-para-as-maes-com-dezenas-de-premios/",
+    "sourceLabel": "Carlinhos do Pelado realiza festa para as mães com dezenas de prêmios",
+    "lede": "A Prefeitura de Brasiléia realizou na noite desta sexta-feira (15), na Praça Hugo Poli, o tradicional “Dia das Mães Premiado”, reunindo centenas de mães da cidade e da zona rural em uma grande celebração marcada por homenagens...",
+    "summary": "A Prefeitura de Brasiléia realizou na noite desta sexta-feira (15), na Praça Hugo Poli, o tradicional “Dia das Mães Premiado”, reunindo centenas de mães da cidade e da zona rural em uma grande celebração marcada por homenagens...",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T112203.274.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T112203.274.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T112203.274.jpg",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-16.00.37.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-16.00.37.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-16.00.37.jpeg",
     "imageCredit": "",
-    "imageFocus": "center 38%",
+    "imageFocus": "",
     "imageFit": "",
     "media": null,
     "priority": 0,
@@ -3838,22 +6059,22 @@ window.NEWS_DATA = [
     "crossSources": [
       {
         "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/"
+        "url": "https://ac24horas.com/2026/05/16/carlinhos-do-pelado-realiza-festa-para-as-maes-com-dezenas-de-premios/"
       }
     ],
     "alternateSources": [
       {
         "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/"
+        "url": "https://ac24horas.com/2026/05/16/carlinhos-do-pelado-realiza-festa-para-as-maes-com-dezenas-de-premios/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana"
+      "carlinhos-do-pelado-realiza-festa-para-as-maes-com-dezenas-de-premios"
     ],
     "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana.",
-      "No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Carlinhos do Pelado realiza festa para as mães com dezenas de prêmios.",
+      "Carlinhos do Pelado realiza festa para as mães com dezenas de prêmios e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -3873,11 +6094,16 @@ window.NEWS_DATA = [
     "lede": "A prisão do último integrante foragido de uma associação criminosa encerrou, na quinta-feira (14), as investigações conduzidas pelo Núcleo Especializado em Investigações de Crimes Patrimoniais (Nepatr) da Polícia Civil do Acre...",
     "summary": "A prisão do último integrante foragido de uma associação criminosa encerrou, na quinta-feira (14), as investigações conduzidas pelo Núcleo Especializado em Investigações de Crimes Patrimoniais (Nepatr) da Polícia Civil do Acre...",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Quadrilha especializada em roubos violentos é desarticulada com prisão do último foragido em Cruzeiro do Sul.",
+      "Quadrilha especializada em roubos violentos é desarticulada com prisão do último foragido em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/quadrilha-especializada-em-roubos-violentos-e-desarticulada-com-prisao-do-ultimo-foragido-.svg",
-    "feedImageUrl": "/assets/news-fallbacks/quadrilha-especializada-em-roubos-violentos-e-desarticulada-com-prisao-do-ultimo-foragido-.svg",
     "sourceImageUrl": "/assets/news-fallbacks/quadrilha-especializada-em-roubos-violentos-e-desarticulada-com-prisao-do-ultimo-foragido-.svg",
+    "feedImageUrl": "/assets/news-fallbacks/quadrilha-especializada-em-roubos-violentos-e-desarticulada-com-prisao-do-ultimo-foragido-.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -3900,11 +6126,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "quadrilha-especializada-em-roubos-violentos-e-desarticulada-com-prisao-do-ultimo-foragido-em-cru"
     ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Quadrilha especializada em roubos violentos é desarticulada com prisão do último foragido em Cruzeiro do Sul.",
-      "Quadrilha especializada em roubos violentos é desarticulada com prisão do último foragido em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -3926,11 +6147,16 @@ window.NEWS_DATA = [
     "lede": "Os 837 detentos do presídio Manoel Neri em Cruzeiro do Sul, Policiais Penais e demais servidores do Instituto de Administração Penitenciária ( Iapen), foram atendidos nesta sexta-feira , 15, por médicos, dentistas e outros...",
     "summary": "Os 837 detentos do presídio Manoel Neri em Cruzeiro do Sul, Policiais Penais e demais servidores do Instituto de Administração Penitenciária ( Iapen), foram atendidos nesta sexta-feira , 15, por médicos, dentistas e outros...",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul.",
+      "Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/05/954a0131-0158-4448-8a26-3a315904f360-2-scaled.jpeg?resize=800%2C1067&ssl=1",
-    "feedImageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/05/954a0131-0158-4448-8a26-3a315904f360-2-scaled.jpeg?resize=800%2C1067&ssl=1",
     "sourceImageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/05/954a0131-0158-4448-8a26-3a315904f360-2-scaled.jpeg?resize=800%2C1067&ssl=1",
+    "feedImageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/05/954a0131-0158-4448-8a26-3a315904f360-2-scaled.jpeg?resize=800%2C1067&ssl=1",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -3941,125 +6167,26 @@ window.NEWS_DATA = [
       {
         "name": "Jurua Comunicacao",
         "url": "https://juruacomunicacao.com.br/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/"
+      },
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/15/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/"
       }
     ],
     "alternateSources": [
       {
         "name": "Jurua Comunicacao",
         "url": "https://juruacomunicacao.com.br/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/"
+      },
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/15/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/"
       }
     ],
-    "sourceCount": 1,
+    "sourceCount": 2,
     "alternateSlugs": [
       "mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul"
-    ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul.",
-      "Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
-  },
-  {
-    "id": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/",
-    "slug": "governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao",
-    "title": "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão",
-    "eyebrow": "Prefeitura",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T14:55:39.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/",
-    "sourceLabel": "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão",
-    "lede": "Depois de 15 dias de missão pelo interior do Acre, o governo do Estado, por meio da Secretaria de Estado de Segurança Pública (Sejusp), em parceria com a Polícia Civil, por meio do Instituto de identificação, finalizou nessa...",
-    "summary": "Depois de 15 dias de missão pelo interior do Acre, o governo do Estado, por meio da Secretaria de Estado de Segurança Pública (Sejusp), em parceria com a Polícia Civil, por meio do Instituto de identificação, finalizou nessa...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao"
-    ],
-    "body": [
-      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão.",
-      "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/",
-    "slug": "estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrad",
-    "title": "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda",
-    "eyebrow": "Prefeitura",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T14:48:50.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/",
-    "sourceLabel": "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda",
-    "lede": "O acolhimento de crianças e adolescentes vítimas de violência no Acre dá um novo passo na garantia de direitos com a implantação do Centro de Atendimento Integrado à Criança e ao Adolescente (CAICA), que será entregue nesta...",
-    "summary": "O acolhimento de crianças e adolescentes vítimas de violência no Acre dá um novo passo na garantia de direitos com a implantação do Centro de Atendimento Integrado à Criança e ao Adolescente (CAICA), que será entregue nesta...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-in.svg",
-    "feedImageUrl": "/assets/news-fallbacks/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-in.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-in.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrad"
-    ],
-    "body": [
-      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda.",
-      "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://jurua24horas.com/2026/05/bebe-de-tres-meses-e-diagnosticada-com-tumor-na-cabeca-familia-pede-ajuda-para-tratamento-fora-do-domicilio/",
@@ -4168,160 +6295,13 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://ac24horas.com/2026/05/15/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/",
-    "slug": "mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul",
-    "title": "Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul",
-    "eyebrow": "Prefeitura",
-    "date": "15 de mai de 2026",
-    "publishedAt": "2026-05-16T00:30:14.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/15/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/",
-    "sourceLabel": "Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul",
-    "lede": "Os 837 detentos do presídio Manoel Neri em Cruzeiro do Sul, Policiais Penais e demais servidores do Instituto de Administração Penitenciária ( Iapen), foram atendidos nesta sexta-feira , 15, por médicos, dentistas e outros...",
-    "summary": "Os 837 detentos do presídio Manoel Neri em Cruzeiro do Sul, Policiais Penais e demais servidores do Instituto de Administração Penitenciária ( Iapen), foram atendidos nesta sexta-feira , 15, por médicos, dentistas e outros...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 15 de mai de 2026 a base desta noticia sobre Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul.",
-      "Mais de 800 detentos e servidores do Iapen são atendidos na Ação de Cidadania em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/f817ba7c-ae5e-4db9-be23-5ad219455f38-1200x900.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/f817ba7c-ae5e-4db9-be23-5ad219455f38-1200x900.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/f817ba7c-ae5e-4db9-be23-5ad219455f38-1200x900.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/15/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/15/mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mais-de-800-detentos-e-servidores-do-iapen-sao-atendidos-na-acao-de-cidadania-em-cruzeiro-do-sul"
-    ]
-  },
-  {
-    "id": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o",
-    "slug": "cotacao-de-preco",
-    "title": "COTAÇÃO DE PREÇO",
-    "eyebrow": "Utilidade Publica",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T05:35:11.389Z",
-    "category": "Utilidade Pública",
-    "categoryKey": "utilidade publica",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Prefeitura de CZS",
-    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o",
-    "sourceLabel": "COTAÇÃO DE PREÇO",
-    "lede": "Materiais de Construção",
-    "summary": "Materiais de Construção",
-    "analysis": "",
-    "body": [
-      "Prefeitura de CZS publicou em 16 de mai de 2026 a base desta noticia sobre COTAÇÃO DE PREÇO.",
-      "COTAÇÃO DE PREÇO e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://static.wixstatic.com/media/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg",
-    "sourceImageUrl": "https://static.wixstatic.com/media/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg",
-    "feedImageUrl": "https://static.wixstatic.com/media/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ed5c4bd5d04a461dbc194d9643102498~mv2.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 1000,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Prefeitura de CZS",
-        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Prefeitura de CZS",
-        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/cota%C3%A7%C3%A3o-de-pre%C3%A7o---materiais-de-constru%C3%A7%C3%A3o"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "cotacao-de-preco"
-    ]
-  },
-  {
-    "id": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais",
-    "slug": "ce-n-007-2026-aviso-de-licitacao",
-    "title": "CE N°007/2026 - Aviso de Licitação",
-    "eyebrow": "Utilidade Publica",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T05:35:11.389Z",
-    "category": "Utilidade Pública",
-    "categoryKey": "utilidade publica",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Prefeitura de CZS",
-    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais",
-    "sourceLabel": "CE N°007/2026 - Aviso de Licitação",
-    "lede": "Pavimentação de Estradas Vicinais",
-    "summary": "Pavimentação de Estradas Vicinais",
-    "analysis": "",
-    "body": [
-      "Prefeitura de CZS publicou em 16 de mai de 2026 a base desta noticia sobre CE N°007/2026 - Aviso de Licitação.",
-      "CE N°007/2026 - Aviso de Licitação e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
-    "sourceImageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
-    "feedImageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 1000,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Prefeitura de CZS",
-        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Prefeitura de CZS",
-        "url": "https://www.cruzeirodosul.ac.gov.br/publicacoes-transparencia/ce-n%C2%B0007%2F2026---pavimenta%C3%A7%C3%A3o-de-estradas-vicinais"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "ce-n-007-2026-aviso-de-licitacao"
-    ]
-  },
-  {
     "id": "https://juruaonline.com.br/cientistas-alertam-para-risco-de-calor-extremo-na-copa-do-mundo-de-2026/",
     "slug": "cientistas-alertam-para-risco-de-calor-extremo-na-copa-do-mundo-de-2026",
     "title": "Cientistas alertam para risco de calor extremo na Copa do Mundo de 2026",
     "eyebrow": "Saude",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:44:33.000Z",
-    "category": "Saude",
+    "category": "Saúde",
     "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "Jurua Online",
@@ -4330,11 +6310,16 @@ window.NEWS_DATA = [
     "lede": "Um grupo internacional de cientistas enviou uma carta aberta à Fifa alertando que as atuais medidas de proteção contra o calor para a Copa do Mundo de 2026 são insuficientes e podem colocar jogadores em risco de graves...",
     "summary": "Um grupo internacional de cientistas enviou uma carta aberta à Fifa alertando que as atuais medidas de proteção contra o calor para a Copa do Mundo de 2026 são insuficientes e podem colocar jogadores em risco de graves...",
     "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Cientistas alertam para risco de calor extremo na Copa do Mundo de 2026.",
+      "Cientistas alertam para risco de calor extremo na Copa do Mundo de 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/03/investimento-para-a-copa-femenina.jpg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/03/investimento-para-a-copa-femenina.jpg",
     "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/03/investimento-para-a-copa-femenina.jpg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/03/investimento-para-a-copa-femenina.jpg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -4356,10 +6341,103 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "cientistas-alertam-para-risco-de-calor-extremo-na-copa-do-mundo-de-2026"
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/nordeste/rn/suspeita-de-contaminacao-por-detergente-saiba-quadro-de-crianca-internada/",
+    "slug": "suspeita-de-contaminacao-por-detergente-saiba-quadro-de-crianca-internada",
+    "title": "Suspeita de contaminação por detergente: saiba quadro de criança internada",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:52:16.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/nordeste/rn/suspeita-de-contaminacao-por-detergente-saiba-quadro-de-crianca-internada/",
+    "sourceLabel": "Suspeita de contaminação por detergente: saiba quadro de criança internada",
+    "lede": "CNN Brasil publicou uma atualização sobre Suspeita de contaminação por detergente: saiba quadro de criança internada. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Suspeita de contaminação por detergente: saiba quadro de criança internada. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Design-sem-nome-2-1.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Design-sem-nome-2-1.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Design-sem-nome-2-1.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/nordeste/rn/suspeita-de-contaminacao-por-detergente-saiba-quadro-de-crianca-internada/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/nordeste/rn/suspeita-de-contaminacao-por-detergente-saiba-quadro-de-crianca-internada/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "suspeita-de-contaminacao-por-detergente-saiba-quadro-de-crianca-internada"
     ],
     "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Cientistas alertam para risco de calor extremo na Copa do Mundo de 2026.",
-      "Cientistas alertam para risco de calor extremo na Copa do Mundo de 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Suspeita de contaminação por detergente: saiba quadro de criança internada.",
+      "Suspeita de contaminação por detergente: saiba quadro de criança internada e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/projeto-da-familia-couto-leva-saude-esperanca-e-autoestima-ao-interior-do-acre/",
+    "slug": "projeto-da-familia-couto-leva-saude-esperanca-e-autoestima",
+    "title": "Projeto da família Couto leva saúde, esperança e autoestima",
+    "eyebrow": "Saude",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T21:10:03.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/projeto-da-familia-couto-leva-saude-esperanca-e-autoestima-ao-interior-do-acre/",
+    "sourceLabel": "Projeto da família Couto leva saúde, esperança e autoestima",
+    "lede": "No beiradão dos rios Envira e Jurupari, onde o acesso é difícil e a distância da cidade transforma direitos básicos em desafios diários, uma ação social realizada pela família Couto vem mudando vidas há quase 14 anos no...",
+    "summary": "No beiradão dos rios Envira e Jurupari, onde o acesso é difícil e a distância da cidade transforma direitos básicos em desafios diários, uma ação social realizada pela família Couto vem mudando vidas há quase 14 anos no...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-15.51.01-1200x800.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-15.51.01-1200x800.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-15.51.01-1200x800.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/projeto-da-familia-couto-leva-saude-esperanca-e-autoestima-ao-interior-do-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/projeto-da-familia-couto-leva-saude-esperanca-e-autoestima-ao-interior-do-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "projeto-da-familia-couto-leva-saude-esperanca-e-autoestima"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Projeto da família Couto leva saúde, esperança e autoestima.",
+      "Projeto da família Couto leva saúde, esperança e autoestima e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -4370,7 +6448,7 @@ window.NEWS_DATA = [
     "eyebrow": "Saude",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T19:34:57.000Z",
-    "category": "Saude",
+    "category": "Saúde",
     "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "CNN Brasil",
@@ -4379,11 +6457,16 @@ window.NEWS_DATA = [
     "lede": "Influenciadora contou qual procedimento ainda não tinha contado para a mídia",
     "summary": "Influenciadora contou qual procedimento ainda não tinha contado para a mídia",
     "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Andressa Urach entrega cirurgia íntima que nunca revelou publicamente.",
+      "Andressa Urach entrega cirurgia íntima que nunca revelou publicamente e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/maira-cardi.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/maira-cardi.jpg?w=200",
     "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/maira-cardi.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/maira-cardi.jpg?w=200",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -4405,158 +6488,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "andressa-urach-entrega-cirurgia-intima-que-nunca-revelou-publicamente"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Andressa Urach entrega cirurgia íntima que nunca revelou publicamente.",
-      "Andressa Urach entrega cirurgia íntima que nunca revelou publicamente e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/",
-    "slug": "ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos",
-    "title": "Ypê: principais dúvidas e respostas sobre polêmica dos produtos",
-    "eyebrow": "Saude",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:28:15.000Z",
-    "category": "Saude",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/",
-    "sourceLabel": "Ypê: principais dúvidas e respostas sobre polêmica dos produtos",
-    "lede": "CNN Brasil publicou uma atualização sobre Ypê: principais dúvidas e respostas sobre polêmica dos produtos. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Ypê: principais dúvidas e respostas sobre polêmica dos produtos. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/ype-google-trends-2.png?w=1024",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/ype-google-trends-2.png?w=1024",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/ype-google-trends-2.png?w=1024",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/saude/ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "ype-principais-duvidas-e-respostas-sobre-polemica-dos-produtos"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Ypê: principais dúvidas e respostas sobre polêmica dos produtos.",
-      "Ypê: principais dúvidas e respostas sobre polêmica dos produtos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/",
-    "slug": "produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista",
-    "title": "Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista",
-    "eyebrow": "Saude",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:23:11.000Z",
-    "category": "Saude",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/",
-    "sourceLabel": "Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista",
-    "lede": "CNN Brasil publicou uma atualização sobre Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/FTA20260507091.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/FTA20260507091.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/FTA20260507091.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/saude/produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "produtos-ype-contato-com-pele-lesionada-tem-maior-risco-diz-especialista"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista.",
-      "Produtos Ypê: contato com pele lesionada tem maior risco, diz especialista e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/",
-    "slug": "familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados",
-    "title": "Famílias em Gaza lutam contra infestação de ratos em campos de refugiados",
-    "eyebrow": "Saude",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T18:56:49.000Z",
-    "category": "Saude",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/",
-    "sourceLabel": "Famílias em Gaza lutam contra infestação de ratos em campos de refugiados",
-    "lede": "CNN Brasil publicou uma atualização sobre Famílias em Gaza lutam contra infestação de ratos em campos de refugiados. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Famílias em Gaza lutam contra infestação de ratos em campos de refugiados. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.develop.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXMPEL6L0YI-BASEIMAGE-e1761343007435.jpg?w=200",
-    "feedImageUrl": "https://admin.develop.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXMPEL6L0YI-BASEIMAGE-e1761343007435.jpg?w=200",
-    "sourceImageUrl": "https://admin.develop.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXMPEL6L0YI-BASEIMAGE-e1761343007435.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/internacional/familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "familias-em-gaza-lutam-contra-infestacao-de-ratos-em-campos-de-refugiados"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Famílias em Gaza lutam contra infestação de ratos em campos de refugiados.",
-      "Famílias em Gaza lutam contra infestação de ratos em campos de refugiados e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -4566,7 +6497,7 @@ window.NEWS_DATA = [
     "eyebrow": "Saude",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T18:43:00.000Z",
-    "category": "Saude",
+    "category": "Saúde",
     "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "Agencia Brasil",
@@ -4575,11 +6506,16 @@ window.NEWS_DATA = [
     "lede": "A criança de 8 anos , atacada por uma onça-parda na Chapada dos Veadeiros (GO), passou por procedimento cirúrgico e segue estável, acompanhada pela equipe médica.",
     "summary": "A criança de 8 anos , atacada por uma onça-parda na Chapada dos Veadeiros (GO), passou por procedimento cirúrgico e segue estável, acompanhada pela equipe médica.",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Criança atacada por onça passa por cirurgia e segue estável.",
+      "Criança atacada por onça passa por cirurgia e segue estável e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/crianca-atacada-por-onca-passa-por-cirurgia-e-segue-estavel.svg",
-    "feedImageUrl": "/assets/news-fallbacks/crianca-atacada-por-onca-passa-por-cirurgia-e-segue-estavel.svg",
     "sourceImageUrl": "/assets/news-fallbacks/crianca-atacada-por-onca-passa-por-cirurgia-e-segue-estavel.svg",
+    "feedImageUrl": "/assets/news-fallbacks/crianca-atacada-por-onca-passa-por-cirurgia-e-segue-estavel.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -4602,10 +6538,111 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "crianca-atacada-por-onca-passa-por-cirurgia-e-segue-estavel"
     ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/",
+    "slug": "com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-",
+    "title": "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T16:31:47.000Z",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/",
+    "sourceLabel": "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre",
+    "lede": "Com foco na promoção da saúde, bem-estar e qualidade de vida da população por meio do esporte, o governo estadual tem fortalecido o apoio a iniciativas públicas de incentivo à atividade física.",
+    "summary": "Com foco na promoção da saúde, bem-estar e qualidade de vida da população por meio do esporte, o governo estadual tem fortalecido o apoio a iniciativas públicas de incentivo à atividade física.",
+    "analysis": "",
     "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Criança atacada por onça passa por cirurgia e segue estável.",
-      "Criança atacada por onça passa por cirurgia e segue estável e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre.",
+      "Com incentivo do Estado, corrida gratuita de rua fortalece prática esportiva e qualidade de vida no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de.svg",
+    "feedImageUrl": "/assets/news-fallbacks/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "com-incentivo-do-estado-corrida-gratuita-de-rua-fortalece-pratica-esportiva-e-qualidade-de-vida-"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/",
+    "slug": "estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrad",
+    "title": "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T14:48:50.000Z",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/",
+    "sourceLabel": "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda",
+    "lede": "O acolhimento de crianças e adolescentes vítimas de violência no Acre dá um novo passo na garantia de direitos com a implantação do Centro de Atendimento Integrado à Criança e ao Adolescente (CAICA), que será entregue nesta...",
+    "summary": "O acolhimento de crianças e adolescentes vítimas de violência no Acre dá um novo passo na garantia de direitos com a implantação do Centro de Atendimento Integrado à Criança e ao Adolescente (CAICA), que será entregue nesta...",
+    "analysis": "",
+    "body": [
+      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda.",
+      "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-in.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-in.svg",
+    "feedImageUrl": "/assets/news-fallbacks/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-in.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrad"
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -4619,7 +6656,7 @@ window.NEWS_DATA = [
     "eyebrow": "Saude",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T13:54:00.000Z",
-    "category": "Saude",
+    "category": "Saúde",
     "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "Agencia Brasil",
@@ -4628,11 +6665,16 @@ window.NEWS_DATA = [
     "lede": "Com a decisão da Agência Nacional de Vigilância Sanitária (Anvisa) de manter a suspensão da fabricação, distribuição e venda de lotes de produtos da marca Ypê, com final 1, a empresa de itens de limpeza emitiu comunicado, nesta...",
     "summary": "Com a decisão da Agência Nacional de Vigilância Sanitária (Anvisa) de manter a suspensão da fabricação, distribuição e venda de lotes de produtos da marca Ypê, com final 1, a empresa de itens de limpeza emitiu comunicado, nesta...",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Saiba como pedir reembolso de produtos Ypê suspensos pela Anvisa.",
+      "Saiba como pedir reembolso de produtos Ypê suspensos pela Anvisa e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/saiba-como-pedir-reembolso-de-produtos-ype-suspensos-pela-anvisa.svg",
-    "feedImageUrl": "/assets/news-fallbacks/saiba-como-pedir-reembolso-de-produtos-ype-suspensos-pela-anvisa.svg",
     "sourceImageUrl": "/assets/news-fallbacks/saiba-como-pedir-reembolso-de-produtos-ype-suspensos-pela-anvisa.svg",
+    "feedImageUrl": "/assets/news-fallbacks/saiba-como-pedir-reembolso-de-produtos-ype-suspensos-pela-anvisa.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -4654,11 +6696,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "saiba-como-pedir-reembolso-de-produtos-ype-suspensos-pela-anvisa"
-    ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Saiba como pedir reembolso de produtos Ypê suspensos pela Anvisa.",
-      "Saiba como pedir reembolso de produtos Ypê suspensos pela Anvisa e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -4774,7 +6811,7 @@ window.NEWS_DATA = [
     "eyebrow": "Educacao",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T20:02:00.000Z",
-    "category": "Educacao",
+    "category": "Educação",
     "categoryKey": "educacao",
     "previewClass": "thumb-educacao",
     "sourceName": "ac24horas",
@@ -4783,11 +6820,16 @@ window.NEWS_DATA = [
     "lede": "Foto Manoel Façanha: Competição movimenta o futsal de base em Rio Branco \" A primeira fase da Copa Casquinha de Futsal terá mais uma rodada neste domingo, 17, a partir das 8 horas, na quadra da escola Armando Nogueira.",
     "summary": "Foto Manoel Façanha: Competição movimenta o futsal de base em Rio Branco \" A primeira fase da Copa Casquinha de Futsal terá mais uma rodada neste domingo, 17, a partir das 8 horas, na quadra da escola Armando Nogueira.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Copa Casquinha de Futsal tem partidas programadas no Armando Nogueira.",
+      "Copa Casquinha de Futsal tem partidas programadas no Armando Nogueira e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.57.53-1200x800.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.57.53-1200x800.jpeg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.57.53-1200x800.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.57.53-1200x800.jpeg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -4809,11 +6851,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "copa-casquinha-de-futsal-tem-partidas-programadas-no-armando-nogueira"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Copa Casquinha de Futsal tem partidas programadas no Armando Nogueira.",
-      "Copa Casquinha de Futsal tem partidas programadas no Armando Nogueira e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -4915,6 +6952,210 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/",
+    "slug": "romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito",
+    "title": "Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito”",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T15:55:58.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/",
+    "sourceLabel": "Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito”",
+    "lede": "O ex-jogador Romário afirmou que continua sendo mulherengo aos 60 anos e não descartou a possibilidade de um quarto casamento.",
+    "summary": "O ex-jogador Romário afirmou que continua sendo mulherengo aos 60 anos e não descartou a possibilidade de um quarto casamento.",
+    "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito”.",
+      "Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7838.jpeg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7838.jpeg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7838.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 980,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito"
+    ]
+  },
+  {
+    "id": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/",
+    "slug": "tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca",
+    "title": "Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T15:51:05.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/",
+    "sourceLabel": "Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França",
+    "lede": "O técnico Paulo Fonseca confirmou nesta sexta-feira (16) que o atacante brasileiro Endrick retornará ao Real Madrid após o fim da temporada europeia.",
+    "summary": "O técnico Paulo Fonseca confirmou nesta sexta-feira (16) que o atacante brasileiro Endrick retornará ao Real Madrid após o fim da temporada europeia.",
+    "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França.",
+      "Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7837.jpeg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7837.jpeg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7837.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 980,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca"
+    ]
+  },
+  {
+    "id": "https://juruaonline.com.br/251736-2/",
+    "slug": "datafolha-lula-tem-38-e-flavio-bolsonaro-35-das-intencoes-de-voto-para-presidente",
+    "title": "Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T15:38:19.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/251736-2/",
+    "sourceLabel": "Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente",
+    "lede": "Pesquisa Datafolha divulgada neste sábado (16) pela Folha de S.Paulo mostra o presidente Luiz Inácio Lula da Silva (PT) liderando a corrida presidencial com 38% das intenções de voto no primeiro turno.",
+    "summary": "Pesquisa Datafolha divulgada neste sábado (16) pela Folha de S.Paulo mostra o presidente Luiz Inácio Lula da Silva (PT) liderando a corrida presidencial com 38% das intenções de voto no primeiro turno.",
+    "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente.",
+      "Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7835.jpeg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7835.jpeg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7835.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 980,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/251736-2/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/251736-2/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "datafolha-lula-tem-38-e-flavio-bolsonaro-35-das-intencoes-de-voto-para-presidente"
+    ]
+  },
+  {
+    "id": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/",
+    "slug": "mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado",
+    "title": "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T13:33:46.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/",
+    "sourceLabel": "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado",
+    "lede": "As seis dezenas do concurso 3. 009 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo.",
+    "summary": "As seis dezenas do concurso 3. 009 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo.",
+    "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado.",
+      "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/04/Novo-Projeto-8.jpg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/04/Novo-Projeto-8.jpg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/04/Novo-Projeto-8.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 980,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/"
+      },
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/"
+      },
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
+      }
+    ],
+    "sourceCount": 2,
+    "alternateSlugs": [
+      "mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
+    ]
+  },
+  {
     "id": "https://juruaonline.com.br/israel-e-libano-concordam-em-estender-cessar-fogo-por-45-dias-afirmam-eua/",
     "slug": "israel-e-libano-concordam-em-estender-cessar-fogo-por-45-dias-afirmam-eua",
     "title": "Israel e Líbano concordam em estender cessar-fogo por 45 dias, afirmam EUA",
@@ -5010,6 +7251,357 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "ministerio-lanca-simulador-de-renegociacoes-do-novo-desenrola"
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/",
+    "slug": "bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026",
+    "title": "Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T20:00:10.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/",
+    "sourceLabel": "Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026",
+    "lede": "Durante o programa Boa Conversa da Redação, os comentaristas repercutiram a defesa feita pelo prefeito de Rio Branco, Tião Bocalom, sobre o uso de concreto armado como solução definitiva para a BR-364.",
+    "summary": "Durante o programa Boa Conversa da Redação, os comentaristas repercutiram a defesa feita pelo prefeito de Rio Branco, Tião Bocalom, sobre o uso de concreto armado como solução definitiva para a BR-364.",
+    "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026.",
+      "Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-66.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-66.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-66.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026"
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/",
+    "slug": "nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana",
+    "title": "Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:18:16.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/",
+    "sourceLabel": "Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana",
+    "lede": "Unidade industrial emprega diretamente 450 funcionários e, desde dezembro, procura 50 profissionais para ampliar a produção.",
+    "summary": "Unidade industrial emprega diretamente 450 funcionários e, desde dezembro, procura 50 profissionais para ampliar a produção.",
+    "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana.",
+      "Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-718-5.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-718-5.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-718-5.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana"
+    ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas",
+    "slug": "sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas",
+    "title": "Sabesp suspende obras que possam interferir em rede de gás",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:01:00.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas",
+    "sourceLabel": "Sabesp suspende obras que possam interferir em rede de gás",
+    "lede": "A Companhia de Saneamento Básico do Estado de São Paulo (Sabesp) decidiu paralisar temporariamente todas as obras que estiverem sendo realizadas nas ruas e espaços públicos e que possam interferir diretamente nas redes do...",
+    "summary": "A Companhia de Saneamento Básico do Estado de São Paulo (Sabesp) decidiu paralisar temporariamente todas as obras que estiverem sendo realizadas nas ruas e espaços públicos e que possam interferir diretamente nas redes do...",
+    "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Sabesp suspende obras que possam interferir em rede de gás.",
+      "Sabesp suspende obras que possam interferir em rede de gás e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas.svg",
+    "feedImageUrl": "/assets/news-fallbacks/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/",
+    "slug": "russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca",
+    "title": "Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca",
+    "eyebrow": "Cotidiano",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T15:41:06.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/",
+    "sourceLabel": "Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca",
+    "lede": "“Após esforços de repatriação, os corpos de 528 indivíduos falecidos foram devolvidos à Ucrânia; segundo o lado russo, podem ser militares ucranianos”, afirmou o Centro Ucraniano para Prisioneiros de Guerra nas redes sociais...",
+    "summary": "“Após esforços de repatriação, os corpos de 528 indivíduos falecidos foram devolvidos à Ucrânia; segundo o lado russo, podem ser militares ucranianos”, afirmou o Centro Ucraniano para Prisioneiros de Guerra nas redes sociais...",
+    "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca.",
+      "Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca.svg",
+    "feedImageUrl": "/assets/news-fallbacks/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant",
+    "slug": "sony-tries-to-explain-that-its-ai-camera-assistant-doesn-t-suck",
+    "title": "Atualização internacional de The Verge - 10:37",
+    "eyebrow": "Novidades",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T15:37:05.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant",
+    "sourceLabel": "Atualização internacional de The Verge - 10:37",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:37. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:37. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "body": [
+      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre Sony tries to explain that its AI Camera Assistant doesn’t suck.",
+      "Sony tries to explain that its AI Camera Assistant doesn’t suck e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/HIW4oV0XgAEmtI2.jpeg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/HIW4oV0XgAEmtI2.jpeg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/HIW4oV0XgAEmtI2.jpeg?quality=90&strip=all&crop=0,0,100,100",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "sony-tries-to-explain-that-its-ai-camera-assistant-doesn-t-suck"
+    ]
+  },
+  {
+    "id": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire",
+    "slug": "npr-s-manoush-zomorodi-talks-about-living-with-too-much-tech",
+    "title": "Atualização internacional de The Verge - 10:00",
+    "eyebrow": "Novidades",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T15:00:00.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire",
+    "sourceLabel": "Atualização internacional de The Verge - 10:00",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "body": [
+      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre NPR’s Manoush Zomorodi talks about living with too much tech.",
+      "NPR’s Manoush Zomorodi talks about living with too much tech e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ManoushZomorodi4.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ManoushZomorodi4.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ManoushZomorodi4.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "npr-s-manoush-zomorodi-talks-about-living-with-too-much-tech"
+    ]
+  },
+  {
+    "id": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on",
+    "slug": "turtle-beach-made-a-good-steelseries-headset-clone-that-s-50-less",
+    "title": "Atualização internacional de The Verge - 09:00",
+    "eyebrow": "Novidades",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T14:00:00.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on",
+    "sourceLabel": "Atualização internacional de The Verge - 09:00",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 09:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 09:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "body": [
+      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre Turtle Beach made a good SteelSeries headset clone that’s $50 less.",
+      "Turtle Beach made a good SteelSeries headset clone that’s $50 less e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/omniversusstealthpro2.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/omniversusstealthpro2.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/omniversusstealthpro2.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "turtle-beach-made-a-good-steelseries-headset-clone-that-s-50-less"
     ]
   },
   {
@@ -5157,59 +7749,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "projeto-mapeia-fauna-marinha-da-bahia-por-meio-do-dna-ambiental"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado",
-    "slug": "mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado",
-    "title": "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado",
-    "eyebrow": "Nacional",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T11:30:00.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado",
-    "sourceLabel": "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado",
-    "lede": "As seis dezenas do concurso 3. 009 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo.",
-    "summary": "As seis dezenas do concurso 3. 009 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo.",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado.",
-      "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado.svg",
-    "feedImageUrl": "/assets/news-fallbacks/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -5466,6 +8005,153 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
+    "id": "https://batelao.com/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda",
+    "slug": "estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrad",
+    "title": "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:47:52.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda",
+    "sourceLabel": "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda",
+    "lede": "Por Carolina Torres O acolhimento de crianças e adolescentes vítimas de violência no Acre dá um novo passo na garantia de direitos com a implantação do Centro de Atendimento Integrado à Criança e ao Adolescente (CAICA), que...",
+    "summary": "Por Carolina Torres O acolhimento de crianças e adolescentes vítimas de violência no Acre dá um novo passo na garantia de direitos com a implantação do Centro de Atendimento Integrado à Criança e ao Adolescente (CAICA), que...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/c7f7cc64-b70d-4ed3-a1a0-97b02fa27876-scaled.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/c7f7cc64-b70d-4ed3-a1a0-97b02fa27876-scaled.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/c7f7cc64-b70d-4ed3-a1a0-97b02fa27876-scaled.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda/?utm_source=rss&utm_medium=rss&utm_campaign=estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrado-de-atendimento-nesta-segunda"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "estado-avanca-na-protecao-de-criancas-e-adolescentes-com-implantacao-do-primeiro-centro-integrad"
+    ],
+    "body": [
+      "Batelao publicou em 16 de mai de 2026 a base desta noticia sobre Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda.",
+      "Estado avança na proteção de crianças e adolescentes com implantação do primeiro Centro Integrado de Atendimento nesta segunda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/tartaruga-e-capturada-por-pescador-na-gameleira-e-impressiona-pelo-tamanho/",
+    "slug": "tartaruga-e-capturada-por-pescador-na-gameleira-e-impressiona-pelo-tamanho",
+    "title": "Tartaruga é capturada por pescador na Gameleira e impressiona pelo tamanho",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:05:20.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/tartaruga-e-capturada-por-pescador-na-gameleira-e-impressiona-pelo-tamanho/",
+    "sourceLabel": "Tartaruga é capturada por pescador na Gameleira e impressiona pelo tamanho",
+    "lede": "Screenshot \" Uma tartaruga de aproximadamente 30 quilos foi capturada por um pescador às margens do rio Acre, na região da Gameleira, em Rio Branco, neste sábado, 16.",
+    "summary": "Screenshot \" Uma tartaruga de aproximadamente 30 quilos foi capturada por um pescador às margens do rio Acre, na região da Gameleira, em Rio Branco, neste sábado, 16.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1414.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1414.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1414.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/tartaruga-e-capturada-por-pescador-na-gameleira-e-impressiona-pelo-tamanho/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/tartaruga-e-capturada-por-pescador-na-gameleira-e-impressiona-pelo-tamanho/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tartaruga-e-capturada-por-pescador-na-gameleira-e-impressiona-pelo-tamanho"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Tartaruga é capturada por pescador na Gameleira e impressiona pelo tamanho.",
+      "Tartaruga é capturada por pescador na Gameleira e impressiona pelo tamanho e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/gladson-anuncia-reducao-na-tarifa-de-energia-eletrica-para-consumidores-acreanos-a-partir-de-julho/",
+    "slug": "gladson-anuncia-reducao-na-tarifa-de-energia-eletrica-para-consumidores-acreanos-a-partir-de-jul",
+    "title": "Gladson anuncia redução na tarifa de energia elétrica para consumidores acreanos a partir de julho",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T22:52:47.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/gladson-anuncia-reducao-na-tarifa-de-energia-eletrica-para-consumidores-acreanos-a-partir-de-julho/",
+    "sourceLabel": "Gladson anuncia redução na tarifa de energia elétrica para consumidores acreanos a partir de julho",
+    "lede": "Screenshot \" O ex-governador do Acre, Gladson Cameli, anunciou neste sábado (16) uma redução na tarifa de energia elétrica para os consumidores acreanos a partir de julho de 2026.",
+    "summary": "Screenshot \" O ex-governador do Acre, Gladson Cameli, anunciou neste sábado (16) uma redução na tarifa de energia elétrica para os consumidores acreanos a partir de julho de 2026.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1411.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1411.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1411.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/gladson-anuncia-reducao-na-tarifa-de-energia-eletrica-para-consumidores-acreanos-a-partir-de-julho/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/gladson-anuncia-reducao-na-tarifa-de-energia-eletrica-para-consumidores-acreanos-a-partir-de-julho/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "gladson-anuncia-reducao-na-tarifa-de-energia-eletrica-para-consumidores-acreanos-a-partir-de-jul"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Gladson anuncia redução na tarifa de energia elétrica para consumidores acreanos a partir de julho.",
+      "Gladson anuncia redução na tarifa de energia elétrica para consumidores acreanos a partir de julho e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
     "id": "https://ac24horas.com/2026/05/16/homem-e-atingido-por-galho-de-arvore-e-sofre-traumatismo-craniano/",
     "slug": "homem-e-atingido-por-galho-de-arvore-e-sofre-traumatismo-craniano",
     "title": "Homem é atingido por galho de árvore e sofre traumatismo craniano",
@@ -5481,11 +8167,16 @@ window.NEWS_DATA = [
     "lede": "Jorge Manuel Gonçalves dos Santos, de 34 anos, ficou ferido na manhã deste sábado (16) após ser atingido na cabeça por um galho de árvore enquanto realizava um serviço em uma propriedade rural localizada no km 40 do Ramal dos...",
     "summary": "Jorge Manuel Gonçalves dos Santos, de 34 anos, ficou ferido na manhã deste sábado (16) após ser atingido na cabeça por um galho de árvore enquanto realizava um serviço em uma propriedade rural localizada no km 40 do Ramal dos...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Homem é atingido por galho de árvore e sofre traumatismo craniano.",
+      "Homem é atingido por galho de árvore e sofre traumatismo craniano e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.56.19-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.56.19-1200x675.jpeg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.56.19-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-14.56.19-1200x675.jpeg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -5507,11 +8198,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "homem-e-atingido-por-galho-de-arvore-e-sofre-traumatismo-craniano"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Homem é atingido por galho de árvore e sofre traumatismo craniano.",
-      "Homem é atingido por galho de árvore e sofre traumatismo craniano e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -5530,11 +8216,16 @@ window.NEWS_DATA = [
     "lede": "Menos de 24 horas após moradores denunciarem um grande vazamento de água na Travessa Jasmim, no bairro Montanhês, equipes do Serviço de Água e Esgoto de Rio Branco (SAERB) iniciaram os trabalhos de reparo na manhã deste sábado...",
     "summary": "Menos de 24 horas após moradores denunciarem um grande vazamento de água na Travessa Jasmim, no bairro Montanhês, equipes do Serviço de Água e Esgoto de Rio Branco (SAERB) iniciaram os trabalhos de reparo na manhã deste sábado...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Após denúncia, SAERB envia máquinas para reparar vazamento no Montanhês.",
+      "Após denúncia, SAERB envia máquinas para reparar vazamento no Montanhês e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/1000141797-1200x675.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/1000141797-1200x675.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/1000141797-1200x675.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/1000141797-1200x675.jpg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -5556,11 +8247,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "apos-denuncia-saerb-envia-maquinas-para-reparar-vazamento-no-montanhes"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Após denúncia, SAERB envia máquinas para reparar vazamento no Montanhês.",
-      "Após denúncia, SAERB envia máquinas para reparar vazamento no Montanhês e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -5579,11 +8265,16 @@ window.NEWS_DATA = [
     "lede": "Na noite desta sexta-feira, o líder político Manoel Moraes realizou, em Rio Branco, o 4º Encontro de Líderes, evento que reuniu mais de 600 lideranças comunitárias de diversos bairros e regiões da capital acreana.",
     "summary": "Na noite desta sexta-feira, o líder político Manoel Moraes realizou, em Rio Branco, o 4º Encontro de Líderes, evento que reuniu mais de 600 lideranças comunitárias de diversos bairros e regiões da capital acreana.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Manoel Moraes reúne mais de 600 lideranças durante 4º Encontro de Líderes.",
+      "Manoel Moraes reúne mais de 600 lideranças durante 4º Encontro de Líderes e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-08.05.13-1200x800.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-08.05.13-1200x800.jpeg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-08.05.13-1200x800.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-08.05.13-1200x800.jpeg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -5605,11 +8296,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "manoel-moraes-reune-mais-de-600-liderancas-durante-4-encontro-de-lideres"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Manoel Moraes reúne mais de 600 lideranças durante 4º Encontro de Líderes.",
-      "Manoel Moraes reúne mais de 600 lideranças durante 4º Encontro de Líderes e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -5813,79 +8499,26 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/",
-    "slug": "cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito",
-    "title": "Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito",
+    "id": "https://ac24horas.com/2026/05/16/fluminense-da-bahia-e-amigos-do-gerson-sao-semifinalistas-do-sub-15/",
+    "slug": "fluminense-da-bahia-e-amigos-do-gerson-sao-semifinalistas-do-sub-15",
+    "title": "Fluminense da Bahia e Amigos do Gerson são semifinalistas do Sub-15",
     "eyebrow": "Esporte",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:52:10.000Z",
+    "publishedAt": "2026-05-16T22:58:36.000Z",
     "category": "Esporte",
     "categoryKey": "esporte",
     "previewClass": "thumb-esporte",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/",
-    "sourceLabel": "Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito",
-    "lede": "CNN Brasil publicou uma atualização sobre Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito. O portal mantém o link da fonte original para acompanhamento completo.",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/fluminense-da-bahia-e-amigos-do-gerson-sao-semifinalistas-do-sub-15/",
+    "sourceLabel": "Fluminense da Bahia e Amigos do Gerson são semifinalistas do Sub-15",
+    "lede": "Screenshot \" Fluminense da Bahia e Amigos do Gerson conquistaram neste sábado, 16, na quadra do Instituto Lourenço Filho, as classificações para as semifinais do Campeonato Estadual Sub-15 de Futsal.",
+    "summary": "Screenshot \" Fluminense da Bahia e Amigos do Gerson conquistaram neste sábado, 16, na quadra do Instituto Lourenço Filho, as classificações para as semifinais do Campeonato Estadual Sub-15 de Futsal.",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "/assets/news-fallbacks/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito.svg",
-    "feedImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "cristiano-ronaldo-perde-mais-uma-final-e-gamba-osaka-impede-titulo-inedito"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito.",
-      "Cristiano Ronaldo perde mais uma final, e Gamba Osaka impede título inédito e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/",
-    "slug": "svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma",
-    "title": "Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma",
-    "eyebrow": "Esporte",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:37:57.000Z",
-    "category": "Esporte",
-    "categoryKey": "esporte",
-    "previewClass": "thumb-esporte",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/",
-    "sourceLabel": "Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma",
-    "lede": "CNN Brasil publicou uma atualização sobre Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/joao_fonseca_roma-e1778353330982.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/joao_fonseca_roma-e1778353330982.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/joao_fonseca_roma-e1778353330982.jpg?w=200",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1413.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1413.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_1413.jpeg",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -5894,25 +8527,237 @@ window.NEWS_DATA = [
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/fluminense-da-bahia-e-amigos-do-gerson-sao-semifinalistas-do-sub-15/"
       }
     ],
     "alternateSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/tenis/svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/fluminense-da-bahia-e-amigos-do-gerson-sao-semifinalistas-do-sub-15/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "svitolina-supera-gauff-em-final-dramatica-e-conquista-tricampeonato-em-roma"
+      "fluminense-da-bahia-e-amigos-do-gerson-sao-semifinalistas-do-sub-15"
     ],
     "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma.",
-      "Svitolina supera Gauff em final dramática e conquista tricampeonato em Roma e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Fluminense da Bahia e Amigos do Gerson são semifinalistas do Sub-15.",
+      "Fluminense da Bahia e Amigos do Gerson são semifinalistas do Sub-15 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua",
+    "slug": "marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua",
+    "title": "Marina Dias vence etapa da Copa do Mundo de paraescalada nos EUA",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T22:04:00.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua",
+    "sourceLabel": "Marina Dias vence etapa da Copa do Mundo de paraescalada nos EUA",
+    "lede": "A paulista Marina Dias venceu a etapa de Salt Lake City, nos Estados Unidos, da Copa do Mundo de Paraescalada na classe RP3 (atletas com limitações de alcance, força e potência).",
+    "summary": "A paulista Marina Dias venceu a etapa de Salt Lake City, nos Estados Unidos, da Copa do Mundo de Paraescalada na classe RP3 (atletas com limitações de alcance, força e potência).",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua.svg",
+    "feedImageUrl": "/assets/news-fallbacks/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "marina-dias-vence-etapa-da-copa-do-mundo-de-paraescalada-nos-eua"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Marina Dias vence etapa da Copa do Mundo de paraescalada nos EUA.",
+      "Marina Dias vence etapa da Copa do Mundo de paraescalada nos EUA e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/bahia-decide-no-1o-tempo-e-vence-o-inter-pelo-brasileirao-feminino",
+    "slug": "bahia-decide-no-1-tempo-e-vence-o-inter-pelo-brasileirao-feminino",
+    "title": "Bahia decide no 1º tempo e vence o Inter pelo Brasileirão Feminino",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T21:32:00.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/bahia-decide-no-1o-tempo-e-vence-o-inter-pelo-brasileirao-feminino",
+    "sourceLabel": "Bahia decide no 1º tempo e vence o Inter pelo Brasileirão Feminino",
+    "lede": "Em confronto direto por um lugar entre os quatro melhores times da Série A1 (primeira divisão) do Campeonato Brasileiro Feminino de futebol, melhor para o Bahia.",
+    "summary": "Em confronto direto por um lugar entre os quatro melhores times da Série A1 (primeira divisão) do Campeonato Brasileiro Feminino de futebol, melhor para o Bahia.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/bahia-decide-no-1-tempo-e-vence-o-inter-pelo-brasileirao-feminino.svg",
+    "feedImageUrl": "/assets/news-fallbacks/bahia-decide-no-1-tempo-e-vence-o-inter-pelo-brasileirao-feminino.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/bahia-decide-no-1-tempo-e-vence-o-inter-pelo-brasileirao-feminino.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/bahia-decide-no-1o-tempo-e-vence-o-inter-pelo-brasileirao-feminino"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/bahia-decide-no-1o-tempo-e-vence-o-inter-pelo-brasileirao-feminino"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bahia-decide-no-1-tempo-e-vence-o-inter-pelo-brasileirao-feminino"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Bahia decide no 1º tempo e vence o Inter pelo Brasileirão Feminino.",
+      "Bahia decide no 1º tempo e vence o Inter pelo Brasileirão Feminino e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos",
+    "slug": "icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos",
+    "title": "Ícone do rádio esportivo mineiro, Milton Naves morre aos 70 anos",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T20:24:00.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos",
+    "sourceLabel": "Ícone do rádio esportivo mineiro, Milton Naves morre aos 70 anos",
+    "lede": "Um dos mais importantes nomes do rádio esportivo de Minas Gerais, o narrador e apresentador Milton Naves morreu neste sábado (16), aos 70 anos de idade.",
+    "summary": "Um dos mais importantes nomes do rádio esportivo de Minas Gerais, o narrador e apresentador Milton Naves morreu neste sábado (16), aos 70 anos de idade.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos.svg",
+    "feedImageUrl": "/assets/news-fallbacks/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "icone-do-radio-esportivo-mineiro-milton-naves-morre-aos-70-anos"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Ícone do rádio esportivo mineiro, Milton Naves morre aos 70 anos.",
+      "Ícone do rádio esportivo mineiro, Milton Naves morre aos 70 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial",
+    "slug": "alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial",
+    "title": "Alison dos Santos abre Diamond League vencendo recordista mundial",
+    "eyebrow": "Esporte",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:39:00.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial",
+    "sourceLabel": "Alison dos Santos abre Diamond League vencendo recordista mundial",
+    "lede": "A primeira etapa da Diamond League (Liga Diamante, na tradução livre do inglês), principal circuito mundial de atletismo, teve dobradinha brasileira no pódio de Xangai, na China.",
+    "summary": "A primeira etapa da Diamond League (Liga Diamante, na tradução livre do inglês), principal circuito mundial de atletismo, teve dobradinha brasileira no pódio de Xangai, na China.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial.svg",
+    "feedImageUrl": "/assets/news-fallbacks/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-05/alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "alison-dos-santos-abre-diamond-league-vencendo-recordista-mundial"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Alison dos Santos abre Diamond League vencendo recordista mundial.",
+      "Alison dos Santos abre Diamond League vencendo recordista mundial e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://juruacomunicacao.com.br/cristiano-ronaldo-pode-ganhar-dois-titulos-no-mesmo-dia-com-al-nassr-entenda/",
@@ -5930,11 +8775,16 @@ window.NEWS_DATA = [
     "lede": "Cristiano Ronaldo pode ter um sábado (16/5) histórico. Isso porque o jogador português, assim como o Al-Nassr, pode ser campeão de dois campeonatos diferentes no mesmo dia.",
     "summary": "Cristiano Ronaldo pode ter um sábado (16/5) histórico. Isso porque o jogador português, assim como o Al-Nassr, pode ser campeão de dois campeonatos diferentes no mesmo dia.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Cristiano Ronaldo pode ganhar dois títulos no mesmo dia com Al-Nassr; entenda.",
+      "Cristiano Ronaldo pode ganhar dois títulos no mesmo dia com Al-Nassr; entenda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/cristiano-ronaldo-pode-ganhar-dois-titulos-no-mesmo-dia-com-al-nassr-entenda.svg",
-    "feedImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-pode-ganhar-dois-titulos-no-mesmo-dia-com-al-nassr-entenda.svg",
     "sourceImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-pode-ganhar-dois-titulos-no-mesmo-dia-com-al-nassr-entenda.svg",
+    "feedImageUrl": "/assets/news-fallbacks/cristiano-ronaldo-pode-ganhar-dois-titulos-no-mesmo-dia-com-al-nassr-entenda.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -5957,11 +8807,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "cristiano-ronaldo-pode-ganhar-dois-titulos-no-mesmo-dia-com-al-nassr-entenda"
     ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Cristiano Ronaldo pode ganhar dois títulos no mesmo dia com Al-Nassr; entenda.",
-      "Cristiano Ronaldo pode ganhar dois títulos no mesmo dia com Al-Nassr; entenda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -5983,11 +8828,16 @@ window.NEWS_DATA = [
     "lede": "Foto João Valente: Equipes lutam por vagas nas semifinais do Estadual \" Serão disputadas neste sábado, 16, a partir das 14 horas, na quadra do Instituto Lourenço Filho, os duelos da fase de quartas de final do Campeonato...",
     "summary": "Foto João Valente: Equipes lutam por vagas nas semifinais do Estadual \" Serão disputadas neste sábado, 16, a partir das 14 horas, na quadra do Instituto Lourenço Filho, os duelos da fase de quartas de final do Campeonato...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Estadual de Futsal terá duelos pelas quartas no Lourenço Filho.",
+      "Estadual de Futsal terá duelos pelas quartas no Lourenço Filho e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-100.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-100.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-100.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-100.jpg",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -6009,11 +8859,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "estadual-de-futsal-tera-duelos-pelas-quartas-no-lourenco-filho"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Estadual de Futsal terá duelos pelas quartas no Lourenço Filho.",
-      "Estadual de Futsal terá duelos pelas quartas no Lourenço Filho e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -6115,6 +8960,104 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://g1.globo.com/pop-arte/noticia/2026/05/16/eurovision-2026-bulgaria.ghtml",
+    "slug": "eurovision-2026-bulgaria-ganha-festival-com-musica-bangaranga-da-cantora-pop-dara",
+    "title": "Eurovision 2026: Bulgária ganha festival com música 'Bangaranga', da cantora pop Dara",
+    "eyebrow": "Cultura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:34:51.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "G1 Pop & Arte",
+    "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/05/16/eurovision-2026-bulgaria.ghtml",
+    "sourceLabel": "Eurovision 2026: Bulgária ganha festival com música 'Bangaranga', da cantora pop Dara",
+    "lede": "DARA, representando a Bulgária, vencedora do Eurovision Song Contest 2026, segura o troféu durante a Grande Final em Viena, na Áustria.",
+    "summary": "DARA, representando a Bulgária, vencedora do Eurovision Song Contest 2026, segura o troféu durante a Grande Final em Viena, na Áustria.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/zKPb85mRVio-UVatcvNpj-ZL2tc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/J/ziKoQjTJm8Wp9KAsFBvw/2026-05-16t233055z-1436013307-rc2naladu7ig-rtrmadp-3-music-eurovision.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/zKPb85mRVio-UVatcvNpj-ZL2tc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/J/ziKoQjTJm8Wp9KAsFBvw/2026-05-16t233055z-1436013307-rc2naladu7ig-rtrmadp-3-music-eurovision.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/zKPb85mRVio-UVatcvNpj-ZL2tc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/J/ziKoQjTJm8Wp9KAsFBvw/2026-05-16t233055z-1436013307-rc2naladu7ig-rtrmadp-3-music-eurovision.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/16/eurovision-2026-bulgaria.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/16/eurovision-2026-bulgaria.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "eurovision-2026-bulgaria-ganha-festival-com-musica-bangaranga-da-cantora-pop-dara"
+    ],
+    "body": [
+      "G1 Pop & Arte publicou em 16 de mai de 2026 a base desta noticia sobre Eurovision 2026: Bulgária ganha festival com música 'Bangaranga', da cantora pop Dara.",
+      "Eurovision 2026: Bulgária ganha festival com música 'Bangaranga', da cantora pop Dara e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/mundo/noticia/2026/05/16/padre-viraliza-postando-video-de-papa-leao-xiv-fazendo-67.ghtml",
+    "slug": "six-seven-padre-viraliza-com-video-do-papa-leao-xiv-fazendo-a-trend-veja",
+    "title": "'Six seven': Padre viraliza com vídeo do Papa Leão XIV fazendo a trend; veja",
+    "eyebrow": "Cultura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T21:12:45.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "G1 Pop & Arte",
+    "sourceUrl": "https://g1.globo.com/mundo/noticia/2026/05/16/padre-viraliza-postando-video-de-papa-leao-xiv-fazendo-67.ghtml",
+    "sourceLabel": "'Six seven': Padre viraliza com vídeo do Papa Leão XIV fazendo a trend; veja",
+    "lede": "Um vídeo do Papa Leão XIV fazendo a trend do “six seven” viralizou nas redes sociais neste sábado (16). O conteúdo, publicado pelo padre genovês Don Roberto Fiscer, já acumula mais de 4,9 milhões de visualizações no TikTok.",
+    "summary": "Um vídeo do Papa Leão XIV fazendo a trend do “six seven” viralizou nas redes sociais neste sábado (16). O conteúdo, publicado pelo padre genovês Don Roberto Fiscer, já acumula mais de 4,9 milhões de visualizações no TikTok.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/rZTOWVAA39T8sYLkCJRyuomgD30=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/J/7jwtYBRkWQyX4UQwOaYA/2026-04-23t174545z-451931351-rc20vkatvj2h-rtrmadp-3-iran-crisis-pope.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/rZTOWVAA39T8sYLkCJRyuomgD30=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/J/7jwtYBRkWQyX4UQwOaYA/2026-04-23t174545z-451931351-rc20vkatvj2h-rtrmadp-3-iran-crisis-pope.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/rZTOWVAA39T8sYLkCJRyuomgD30=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/N/J/7jwtYBRkWQyX4UQwOaYA/2026-04-23t174545z-451931351-rc20vkatvj2h-rtrmadp-3-iran-crisis-pope.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/mundo/noticia/2026/05/16/padre-viraliza-postando-video-de-papa-leao-xiv-fazendo-67.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/mundo/noticia/2026/05/16/padre-viraliza-postando-video-de-papa-leao-xiv-fazendo-67.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "six-seven-padre-viraliza-com-video-do-papa-leao-xiv-fazendo-a-trend-veja"
+    ],
+    "body": [
+      "G1 Pop & Arte publicou em 16 de mai de 2026 a base desta noticia sobre 'Six seven': Padre viraliza com vídeo do Papa Leão XIV fazendo a trend; veja.",
+      "'Six seven': Padre viraliza com vídeo do Papa Leão XIV fazendo a trend; veja e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
     "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/rio-celebra-80-anos-de-atelies-da-psiquiatra-nise-da-silveira",
     "slug": "atelies-de-nise-da-silveira-completam-80-anos",
     "title": "Ateliês de Nise da Silveira completam 80 anos",
@@ -6130,11 +9073,16 @@ window.NEWS_DATA = [
     "lede": "Experiência pioneira que transformou a história da psiquiatria no Brasil, os ateliês terapêuticos criados por Nise da Silveira completam, neste dia 18 de maio, 80 anos.",
     "summary": "Experiência pioneira que transformou a história da psiquiatria no Brasil, os ateliês terapêuticos criados por Nise da Silveira completam, neste dia 18 de maio, 80 anos.",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Ateliês de Nise da Silveira completam 80 anos.",
+      "Ateliês de Nise da Silveira completam 80 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/atelies-de-nise-da-silveira-completam-80-anos.svg",
-    "feedImageUrl": "/assets/news-fallbacks/atelies-de-nise-da-silveira-completam-80-anos.svg",
     "sourceImageUrl": "/assets/news-fallbacks/atelies-de-nise-da-silveira-completam-80-anos.svg",
+    "feedImageUrl": "/assets/news-fallbacks/atelies-de-nise-da-silveira-completam-80-anos.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -6157,15 +9105,59 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "atelies-de-nise-da-silveira-completam-80-anos"
     ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Ateliês de Nise da Silveira completam 80 anos.",
-      "Ateliês de Nise da Silveira completam 80 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/",
+    "slug": "tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida",
+    "title": "Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida”",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T18:45:22.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/",
+    "sourceLabel": "Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida”",
+    "lede": "Atriz fará parte do elenco da nova novela das nove, \"Quem Ama Cuida\"",
+    "summary": "Atriz fará parte do elenco da nova novela das nove, \"Quem Ama Cuida\"",
+    "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida”.",
+      "Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/zenilda-tres-gracas.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/zenilda-tres-gracas.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/zenilda-tres-gracas.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida"
+    ]
   },
   {
     "id": "https://www.theverge.com/tech/932153/snap-youtube-tiktok-lawsuit-social-media-addiction-schools",
@@ -6183,13 +9175,18 @@ window.NEWS_DATA = [
     "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 13:34. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 13:34. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
+    "body": [
+      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre Snap, YouTube, and TikTok settle suit over harm to students.",
+      "Snap, YouTube, and TikTok settle suit over harm to students e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS526_SOCIAL_MEDIA_TRIAL_CVIRGINIA_D_1b4bb5.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS526_SOCIAL_MEDIA_TRIAL_CVIRGINIA_D_1b4bb5.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS526_SOCIAL_MEDIA_TRIAL_CVIRGINIA_D_1b4bb5.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "imageCredit": "",
-    "imageFocus": "",
+    "imageUrl": "/assets/news-fallbacks/snap-youtube-and-tiktok-settle-suit-over-harm-to-students.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/snap-youtube-and-tiktok-settle-suit-over-harm-to-students.svg",
+    "feedImageUrl": "/assets/news-fallbacks/snap-youtube-and-tiktok-settle-suit-over-harm-to-students.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
     "imageFit": "",
     "media": null,
     "priority": 0,
@@ -6210,11 +9207,10 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "snap-youtube-and-tiktok-settle-suit-over-harm-to-students"
     ],
-    "body": [
-      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre Snap, YouTube, and TikTok settle suit over harm to students.",
-      "Snap, YouTube, and TikTok settle suit over harm to students e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
+    "originalImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS526_SOCIAL_MEDIA_TRIAL_CVIRGINIA_D_1b4bb5.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "originalFeedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS526_SOCIAL_MEDIA_TRIAL_CVIRGINIA_D_1b4bb5.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "originalSourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS526_SOCIAL_MEDIA_TRIAL_CVIRGINIA_D_1b4bb5.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/fundacao-casa-de-jorge-amado-inicia-comemoracoes-de-seus-40-anos",
@@ -6232,11 +9228,16 @@ window.NEWS_DATA = [
     "lede": "Com programação especial e gratuita ao longo de 2026, a Fundação Casa de Jorge Amado, em Salvador, vem antecipando as celebrações de seus 40 anos de existência, que se completam em março de 2027.",
     "summary": "Com programação especial e gratuita ao longo de 2026, a Fundação Casa de Jorge Amado, em Salvador, vem antecipando as celebrações de seus 40 anos de existência, que se completam em março de 2027.",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Fundação Casa de Jorge Amado inicia comemorações de seus 40 anos.",
+      "Fundação Casa de Jorge Amado inicia comemorações de seus 40 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/fundacao-casa-de-jorge-amado-inicia-comemoracoes-de-seus-40-anos.svg",
-    "feedImageUrl": "/assets/news-fallbacks/fundacao-casa-de-jorge-amado-inicia-comemoracoes-de-seus-40-anos.svg",
     "sourceImageUrl": "/assets/news-fallbacks/fundacao-casa-de-jorge-amado-inicia-comemoracoes-de-seus-40-anos.svg",
+    "feedImageUrl": "/assets/news-fallbacks/fundacao-casa-de-jorge-amado-inicia-comemoracoes-de-seus-40-anos.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -6259,11 +9260,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "fundacao-casa-de-jorge-amado-inicia-comemoracoes-de-seus-40-anos"
     ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Fundação Casa de Jorge Amado inicia comemorações de seus 40 anos.",
-      "Fundação Casa de Jorge Amado inicia comemorações de seus 40 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -6285,11 +9281,16 @@ window.NEWS_DATA = [
     "lede": "Os amantes da boa música e da nostalgia têm encontro marcado neste sábado, 16, em mais uma edição do evento “Melhor do Flashback & Rock”, que promete reunir clássicos inesquecíveis e muita animação. O evento acontece na Confraria.",
     "summary": "Os amantes da boa música e da nostalgia têm encontro marcado neste sábado, 16, em mais uma edição do evento “Melhor do Flashback & Rock”, que promete reunir clássicos inesquecíveis e muita animação. O evento acontece na Confraria.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre “Melhor do Flashback & Rock” agita a noite deste sábado com show de Mário Portuga.",
+      "“Melhor do Flashback & Rock” agita a noite deste sábado com show de Mário Portuga e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T104709.788.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T104709.788.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T104709.788.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T104709.788.jpg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -6311,11 +9312,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "melhor-do-flashback-rock-agita-a-noite-deste-sabado-com-show-de-mario-portuga"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre “Melhor do Flashback & Rock” agita a noite deste sábado com show de Mário Portuga.",
-      "“Melhor do Flashback & Rock” agita a noite deste sábado com show de Mário Portuga e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -6334,11 +9330,16 @@ window.NEWS_DATA = [
     "lede": "O Instituto Nacional do Seguro Social (INSS) e o Ministério da Previdência Social iniciaram neste sábado (16) um mutirão de dois dias que oferece quase 26 mil vagas de atendimentos relacionados à concessão de benefícios...",
     "summary": "O Instituto Nacional do Seguro Social (INSS) e o Ministério da Previdência Social iniciaram neste sábado (16) um mutirão de dois dias que oferece quase 26 mil vagas de atendimentos relacionados à concessão de benefícios...",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre INSS inicia mutirão de dois dias com quase 26 mil vagas de atendimento.",
+      "INSS inicia mutirão de dois dias com quase 26 mil vagas de atendimento e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/inss-inicia-mutirao-de-dois-dias-com-quase-26-mil-vagas-de-atendimento.svg",
-    "feedImageUrl": "/assets/news-fallbacks/inss-inicia-mutirao-de-dois-dias-com-quase-26-mil-vagas-de-atendimento.svg",
     "sourceImageUrl": "/assets/news-fallbacks/inss-inicia-mutirao-de-dois-dias-com-quase-26-mil-vagas-de-atendimento.svg",
+    "feedImageUrl": "/assets/news-fallbacks/inss-inicia-mutirao-de-dois-dias-com-quase-26-mil-vagas-de-atendimento.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -6360,11 +9361,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "inss-inicia-mutirao-de-dois-dias-com-quase-26-mil-vagas-de-atendimento"
-    ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre INSS inicia mutirão de dois dias com quase 26 mil vagas de atendimento.",
-      "INSS inicia mutirão de dois dias com quase 26 mil vagas de atendimento e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -6535,10 +9531,10 @@ window.NEWS_DATA = [
       "these-are-the-laptops-i-recommend-for-pretty-much-anyone",
       "the-app-you-need-to-clean-up-your-computer"
     ],
-    "originalImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ss_207625ae80acf9b85f7ab91e0e806cabb892c69f.1920x1080.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "originalFeedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ss_207625ae80acf9b85f7ab91e0e806cabb892c69f.1920x1080.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "originalSourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ss_207625ae80acf9b85f7ab91e0e806cabb892c69f.1920x1080.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/05/16/a-viagem-saiba-quem-e-quem-no-filme-baseado-em-classica-novela-de-1994.ghtml",
@@ -6743,7 +9739,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:15:07.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "Jurua Comunicacao",
@@ -6752,11 +9748,16 @@ window.NEWS_DATA = [
     "lede": "Relatório médico apresentado hoje ao STF (Supremo Tribunal Federal) diz que o ex-presidente Jair Bolsonaro apresenta quadro persistente de desequilíbrio corporal.",
     "summary": "Relatório médico apresentado hoje ao STF (Supremo Tribunal Federal) diz que o ex-presidente Jair Bolsonaro apresenta quadro persistente de desequilíbrio corporal.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos.",
+      "Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos.svg",
-    "feedImageUrl": "/assets/news-fallbacks/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos.svg",
     "sourceImageUrl": "/assets/news-fallbacks/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos.svg",
+    "feedImageUrl": "/assets/news-fallbacks/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -6767,22 +9768,25 @@ window.NEWS_DATA = [
       {
         "name": "Jurua Comunicacao",
         "url": "https://juruacomunicacao.com.br/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos/"
+      },
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos/"
       }
     ],
     "alternateSources": [
       {
         "name": "Jurua Comunicacao",
         "url": "https://juruacomunicacao.com.br/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos/"
+      },
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos/"
       }
     ],
-    "sourceCount": 1,
+    "sourceCount": 2,
     "alternateSlugs": [
       "bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos"
-    ],
-    "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos.",
-      "Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -6845,7 +9849,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T12:47:42.000Z",
-    "category": "Política",
+    "category": "Politica",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "Jurua Online",
@@ -6854,16 +9858,11 @@ window.NEWS_DATA = [
     "lede": "Relatório médico apresentado hoje ao STF (Supremo Tribunal Federal) diz que o ex-presidente Jair Bolsonaro apresenta quadro persistente de desequilíbrio corporal.",
     "summary": "Relatório médico apresentado hoje ao STF (Supremo Tribunal Federal) diz que o ex-presidente Jair Bolsonaro apresenta quadro persistente de desequilíbrio corporal.",
     "analysis": "",
-    "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos.",
-      "Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T074655.269.jpg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T074655.269.jpg",
     "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T074655.269.jpg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-16T074655.269.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -6885,29 +9884,34 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "bolsonaro-tem-quadro-persistente-de-desequilibrio-corporal-dizem-medicos"
+    ],
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos.",
+      "Bolsonaro tem quadro persistente de desequilíbrio corporal, dizem médicos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/",
-    "slug": "analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar",
-    "title": "Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
+    "id": "https://g1.globo.com/sp/sao-paulo/noticia/2026/05/16/foragido-de-operacao-sobre-o-master-chega-a-sp-apos-ser-preso-em-dubai.ghtml",
+    "slug": "foragido-de-operacao-sobre-o-master-chega-a-sp-apos-ser-preso-em-dubai",
+    "title": "Foragido de operação sobre o Master chega a SP após ser preso em Dubai",
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:32:33.000Z",
+    "publishedAt": "2026-05-16T21:29:42.000Z",
     "category": "Politica",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/",
-    "sourceLabel": "Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
-    "lede": "CNN Brasil publicou uma atualização sobre Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar. O portal mantém o link da fonte original para acompanhamento completo.",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/sp/sao-paulo/noticia/2026/05/16/foragido-de-operacao-sobre-o-master-chega-a-sp-apos-ser-preso-em-dubai.ghtml",
+    "sourceLabel": "Foragido de operação sobre o Master chega a SP após ser preso em Dubai",
+    "lede": "Preso em Dubai, hacker que atuava em esquema de Vorcaro chega a São Paulo Um dos alvos da 6ª fase da Operação Compliance Zero, que estava foragido desde quinta-feira (14) e foi preso neste sábado (16) em Dubai, nos Emirados...",
+    "summary": "Preso em Dubai, hacker que atuava em esquema de Vorcaro chega a São Paulo Um dos alvos da 6ª fase da Operação Compliance Zero, que estava foragido desde quinta-feira (14) e foi preso neste sábado (16) em Dubai, nos Emirados...",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Navios-no-Estreito-de-Ormuz-em-Musandam-Oma.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Navios-no-Estreito-de-Ormuz-em-Musandam-Oma.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Navios-no-Estreito-de-Ormuz-em-Musandam-Oma.jpg?w=200",
+    "imageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -6916,121 +9920,72 @@ window.NEWS_DATA = [
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/"
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/sp/sao-paulo/noticia/2026/05/16/foragido-de-operacao-sobre-o-master-chega-a-sp-apos-ser-preso-em-dubai.ghtml"
       }
     ],
     "alternateSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/internacional/analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar/"
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/sp/sao-paulo/noticia/2026/05/16/foragido-de-operacao-sobre-o-master-chega-a-sp-apos-ser-preso-em-dubai.ghtml"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "analise-trump-volta-da-china-sem-avanco-sobre-ira-e-com-decisao-a-tomar"
+      "foragido-de-operacao-sobre-o-master-chega-a-sp-apos-ser-preso-em-dubai"
     ],
     "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar.",
-      "Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Foragido de operação sobre o Master chega a SP após ser preso em Dubai.",
+      "Foragido de operação sobre o Master chega a SP após ser preso em Dubai e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/",
-    "slug": "caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai",
-    "title": "Caso Master: foragido de operação da PF é preso em Dubai",
+    "id": "https://ac24horas.com/2026/05/16/motorista-perde-controle-de-caminhonete-e-colide-contra-barranco-na-ac-40-duas-pessoas-ficam-feridas/",
+    "slug": "motorista-perde-controle-de-caminhonete-e-colide-contra-barranco-na-ac-40-duas-pessoas-ficam-fer",
+    "title": "Motorista perde controle de caminhonete e colide contra barranco na AC-40; duas pessoas ficam feridas",
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:20:11.000Z",
+    "publishedAt": "2026-05-16T21:13:28.000Z",
     "category": "Politica",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/",
-    "sourceLabel": "Caso Master: foragido de operação da PF é preso em Dubai",
-    "lede": "CNN Brasil publicou uma atualização sobre Caso Master: foragido de operação da PF é preso em Dubai. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Caso Master: foragido de operação da PF é preso em Dubai. O portal mantém o link da fonte original para acompanhamento completo.",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/motorista-perde-controle-de-caminhonete-e-colide-contra-barranco-na-ac-40-duas-pessoas-ficam-feridas/",
+    "sourceLabel": "Motorista perde controle de caminhonete e colide contra barranco na AC-40; duas pessoas ficam feridas",
+    "lede": "Um acidente de trânsito envolvendo uma caminhonete Chevrolet S10 deixou dois homens feridos na manhã deste sábado (16) na rodovia AC-40, nas proximidades da entrada do município de Senador Guiomard, no interior do Acre.",
+    "summary": "Um acidente de trânsito envolvendo uma caminhonete Chevrolet S10 deixou dois homens feridos na manhã deste sábado (16) na rodovia AC-40, nas proximidades da entrada do município de Senador Guiomard, no interior do Acre.",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://img.youtube.com/vi/5eZHNQkLb5o/sddefault.jpg",
-    "feedImageUrl": "https://img.youtube.com/vi/5eZHNQkLb5o/sddefault.jpg",
-    "sourceImageUrl": "https://img.youtube.com/vi/5eZHNQkLb5o/sddefault.jpg",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T161307.466.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T161307.466.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T161307.466.jpg",
     "imageCredit": "",
-    "imageFocus": "",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/motorista-perde-controle-de-caminhonete-e-colide-contra-barranco-na-ac-40-duas-pessoas-ficam-feridas/"
       }
     ],
     "alternateSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/motorista-perde-controle-de-caminhonete-e-colide-contra-barranco-na-ac-40-duas-pessoas-ficam-feridas/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "caso-master-foragido-de-operacao-da-pf-e-preso-em-dubai"
+      "motorista-perde-controle-de-caminhonete-e-colide-contra-barranco-na-ac-40-duas-pessoas-ficam-fer"
     ],
     "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Caso Master: foragido de operação da PF é preso em Dubai.",
-      "Caso Master: foragido de operação da PF é preso em Dubai e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/",
-    "slug": "vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista",
-    "title": "Vorcaro tem de revelar provas novas para garantir delação, diz especialista",
-    "eyebrow": "Politica",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T18:48:34.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/",
-    "sourceLabel": "Vorcaro tem de revelar provas novas para garantir delação, diz especialista",
-    "lede": "CNN Brasil publicou uma atualização sobre Vorcaro tem de revelar provas novas para garantir delação, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Vorcaro tem de revelar provas novas para garantir delação, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Daniel-Vorcaro.png?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Daniel-Vorcaro.png?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Daniel-Vorcaro.png?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "vorcaro-tem-de-revelar-provas-novas-para-garantir-delacao-diz-especialista"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Vorcaro tem de revelar provas novas para garantir delação, diz especialista.",
-      "Vorcaro tem de revelar provas novas para garantir delação, diz especialista e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Motorista perde controle de caminhonete e colide contra barranco na AC-40; duas pessoas ficam feridas.",
+      "Motorista perde controle de caminhonete e colide contra barranco na AC-40; duas pessoas ficam feridas e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -7041,7 +9996,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T18:48:19.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
@@ -7050,13 +10005,18 @@ window.NEWS_DATA = [
     "lede": "Hacker que atuava em esquema de Vorcaro é preso em Dubai Um dos alvos da 6ª fase da Operação Compliance Zero, que estava foragido desde quinta-feira (14), foi preso neste sábado (16) em Dubai, nos Emirados Árabes Unidos...",
     "summary": "Hacker que atuava em esquema de Vorcaro é preso em Dubai Um dos alvos da 6ª fase da Operação Compliance Zero, que estava foragido desde quinta-feira (14), foi preso neste sábado (16) em Dubai, nos Emirados Árabes Unidos...",
     "analysis": "",
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Foragido de operação sobre o Master é preso em Dubai, diz diretor da PF.",
+      "Foragido de operação sobre o Master é preso em Dubai, diz diretor da PF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
+    "imageUrl": "/assets/news-fallbacks/foragido-de-operacao-sobre-o-master-e-preso-em-dubai-diz-diretor-da-pf.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/foragido-de-operacao-sobre-o-master-e-preso-em-dubai-diz-diretor-da-pf.svg",
+    "feedImageUrl": "/assets/news-fallbacks/foragido-de-operacao-sobre-o-master-e-preso-em-dubai-diz-diretor-da-pf.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
     "imageFit": "",
     "media": null,
     "priority": 0,
@@ -7077,60 +10037,10 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "foragido-de-operacao-sobre-o-master-e-preso-em-dubai-diz-diretor-da-pf"
     ],
-    "body": [
-      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Foragido de operação sobre o Master é preso em Dubai, diz diretor da PF.",
-      "Foragido de operação sobre o Master é preso em Dubai, diz diretor da PF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/",
-    "slug": "flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez",
-    "title": "Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez",
-    "eyebrow": "Politica",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T18:45:16.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/",
-    "sourceLabel": "Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez",
-    "lede": "CNN Brasil publicou uma atualização sobre Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/claudio-castro_729b85.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/claudio-castro_729b85.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/claudio-castro_729b85.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-tem-papel-de-preservar-influencia-familiar-diz-cortez"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez.",
-      "Flávio Bolsonaro tem papel de preservar influência familiar, diz Cortez e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
+    "originalImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
+    "originalFeedImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
+    "originalSourceImageUrl": "https://s2-g1.glbimg.com/BBO7QfYs51RmtjzqOhxRlo5YAKA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/z/YgrxcuTLObKr9dBZJTvA/banco-master.jpg",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/05/16/presidente-da-oab-rr-negocia-acordo-apos-investigacao-sobre-suposto-cargo-fantasma/",
@@ -7139,7 +10049,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T18:15:04.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
@@ -7148,11 +10058,16 @@ window.NEWS_DATA = [
     "lede": "O presidente da Ordem dos Advogados do Brasil em Roraima (OAB-RR), Ednaldo Gomes Vidal, passou a negociar um possível Acordo de Não Persecução Penal (ANPP) após ser investigado por supostamente receber R$ 756,3 mil em salários...",
     "summary": "O presidente da Ordem dos Advogados do Brasil em Roraima (OAB-RR), Ednaldo Gomes Vidal, passou a negociar um possível Acordo de Não Persecução Penal (ANPP) após ser investigado por supostamente receber R$ 756,3 mil em salários...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Presidente da OAB-RR negocia acordo após investigação sobre suposto cargo fantasma.",
+      "Presidente da OAB-RR negocia acordo após investigação sobre suposto cargo fantasma e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T131423.334.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T131423.334.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T131423.334.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T131423.334.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7174,11 +10089,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "presidente-da-oab-rr-negocia-acordo-apos-investigacao-sobre-suposto-cargo-fantasma"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Presidente da OAB-RR negocia acordo após investigação sobre suposto cargo fantasma.",
-      "Presidente da OAB-RR negocia acordo após investigação sobre suposto cargo fantasma e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -7188,7 +10098,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T16:43:27.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
@@ -7197,11 +10107,16 @@ window.NEWS_DATA = [
     "lede": "A programação em comemoração aos 50 anos de Senador Guiomard, o Quinari, seguiu movimentando a Praça Fontenele de Castro na sexta-feira (16), com uma série de ações voltadas ao atendimento da população e atrações culturais que...",
     "summary": "A programação em comemoração aos 50 anos de Senador Guiomard, o Quinari, seguiu movimentando a Praça Fontenele de Castro na sexta-feira (16), com uma série de ações voltadas ao atendimento da população e atrações culturais que...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Quinari celebra 50 anos com serviços gratuitos e shows na Praça Fontenele de Castro.",
+      "Quinari celebra 50 anos com serviços gratuitos e shows na Praça Fontenele de Castro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.41.45-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.41.45-1200x675.jpeg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.41.45-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-11.41.45-1200x675.jpeg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7223,11 +10138,55 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "quinari-celebra-50-anos-com-servicos-gratuitos-e-shows-na-praca-fontenele-de-castro"
-    ],
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/",
+    "slug": "no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana",
+    "title": "No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana",
+    "eyebrow": "Prefeitura",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T16:22:37.000Z",
+    "category": "Política",
+    "categoryKey": "politica",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/",
+    "sourceLabel": "No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana",
+    "lede": "O presidente da Câmara Municipal de Rio Branco, vereador Joabe Lira (União Brasil), prestou homenagem neste sábado, 16, data em que é celebrado o Dia do Gari, e destacou a importância dos profissionais da limpeza urbana para o...",
+    "summary": "O presidente da Câmara Municipal de Rio Branco, vereador Joabe Lira (União Brasil), prestou homenagem neste sábado, 16, data em que é celebrado o Dia do Gari, e destacou a importância dos profissionais da limpeza urbana para o...",
+    "analysis": "",
     "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Quinari celebra 50 anos com serviços gratuitos e shows na Praça Fontenele de Castro.",
-      "Quinari celebra 50 anos com serviços gratuitos e shows na Praça Fontenele de Castro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana.",
+      "No Dia do Gari, Joabe Lira reconhece dedicação de trabalhadores da limpeza urbana e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T112203.274.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T112203.274.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T112203.274.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "no-dia-do-gari-joabe-lira-reconhece-dedicacao-de-trabalhadores-da-limpeza-urbana"
     ]
   },
   {
@@ -7237,7 +10196,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:55:00.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "Agencia Brasil",
@@ -7246,11 +10205,16 @@ window.NEWS_DATA = [
     "lede": "O governo do estado do Rio de Janeiro fechou um acordo com a Petrobras e com a Naturgy ─ concessionária de distribuição de gás ─ para baixar o preço do gás natural veicular (GNV) em cerca de 6,5%.",
     "summary": "O governo do estado do Rio de Janeiro fechou um acordo com a Petrobras e com a Naturgy ─ concessionária de distribuição de gás ─ para baixar o preço do gás natural veicular (GNV) em cerca de 6,5%.",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Rio, Petrobras e concessionária fecham acordo para baixar preço do gás.",
+      "Rio, Petrobras e concessionária fecham acordo para baixar preço do gás e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/rio-petrobras-e-concessionaria-fecham-acordo-para-baixar-preco-do-gas.svg",
-    "feedImageUrl": "/assets/news-fallbacks/rio-petrobras-e-concessionaria-fecham-acordo-para-baixar-preco-do-gas.svg",
     "sourceImageUrl": "/assets/news-fallbacks/rio-petrobras-e-concessionaria-fecham-acordo-para-baixar-preco-do-gas.svg",
+    "feedImageUrl": "/assets/news-fallbacks/rio-petrobras-e-concessionaria-fecham-acordo-para-baixar-preco-do-gas.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -7273,11 +10237,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "rio-petrobras-e-concessionaria-fecham-acordo-para-baixar-preco-do-gas"
     ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Rio, Petrobras e concessionária fecham acordo para baixar preço do gás.",
-      "Rio, Petrobras e concessionária fecham acordo para baixar preço do gás e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
@@ -7290,7 +10249,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:51:28.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
@@ -7299,11 +10258,16 @@ window.NEWS_DATA = [
     "lede": "Ciro diz que convidará Roberto Cláudio para ser candidato à vice-governador O ex-ministro Ciro Gomes (PSDB) lançou, neste sábado (16), a pré-candidatura ao Governo do Ceará nas eleições de 2026.",
     "summary": "Ciro diz que convidará Roberto Cláudio para ser candidato à vice-governador O ex-ministro Ciro Gomes (PSDB) lançou, neste sábado (16), a pré-candidatura ao Governo do Ceará nas eleições de 2026.",
     "analysis": "",
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Ciro Gomes lança pré-candidatura ao governo do Ceará e diz que vai convidar Roberto Cláudio para vice.",
+      "Ciro Gomes lança pré-candidatura ao governo do Ceará e diz que vai convidar Roberto Cláudio para vice e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://s2-g1.glbimg.com/xV883aXe_1XtvVx0cSmh9k7u7H4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/A/TLRly6RYar8uqVDAOOYg/whatsapp-image-2026-05-16-at-12.46.20-easy-resize.com.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/xV883aXe_1XtvVx0cSmh9k7u7H4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/A/TLRly6RYar8uqVDAOOYg/whatsapp-image-2026-05-16-at-12.46.20-easy-resize.com.jpg",
     "sourceImageUrl": "https://s2-g1.glbimg.com/xV883aXe_1XtvVx0cSmh9k7u7H4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/A/TLRly6RYar8uqVDAOOYg/whatsapp-image-2026-05-16-at-12.46.20-easy-resize.com.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/xV883aXe_1XtvVx0cSmh9k7u7H4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/A/TLRly6RYar8uqVDAOOYg/whatsapp-image-2026-05-16-at-12.46.20-easy-resize.com.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7325,11 +10289,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "ciro-gomes-lanca-pre-candidatura-ao-governo-do-ceara-e-diz-que-vai-convidar-roberto-claudio-para"
-    ],
-    "body": [
-      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Ciro Gomes lança pré-candidatura ao governo do Ceará e diz que vai convidar Roberto Cláudio para vice.",
-      "Ciro Gomes lança pré-candidatura ao governo do Ceará e diz que vai convidar Roberto Cláudio para vice e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -7339,7 +10298,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:05:29.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
@@ -7348,11 +10307,16 @@ window.NEWS_DATA = [
     "lede": "Valdo Cruz analisa nova pesquisa Datafolha; Lula e Flávio Bolsonaro empatam com 45% Pesquisa Datafolha divulgada neste sábado (16) pelo jornal \"Folha de S.",
     "summary": "Valdo Cruz analisa nova pesquisa Datafolha; Lula e Flávio Bolsonaro empatam com 45% Pesquisa Datafolha divulgada neste sábado (16) pelo jornal \"Folha de S.",
     "analysis": "",
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha 2º turno: Lula e Flávio têm 45% das intenções de voto.",
+      "Datafolha 2º turno: Lula e Flávio têm 45% das intenções de voto e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://s2-g1.glbimg.com/zmrQ-uiG8sqOzlKuIc3d7Ma7XDM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/x/KGg5B2TuOJgcZt2E8sww/lulax-flaviobolsonaro.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/zmrQ-uiG8sqOzlKuIc3d7Ma7XDM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/x/KGg5B2TuOJgcZt2E8sww/lulax-flaviobolsonaro.jpg",
     "sourceImageUrl": "https://s2-g1.glbimg.com/zmrQ-uiG8sqOzlKuIc3d7Ma7XDM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/x/KGg5B2TuOJgcZt2E8sww/lulax-flaviobolsonaro.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/zmrQ-uiG8sqOzlKuIc3d7Ma7XDM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/x/KGg5B2TuOJgcZt2E8sww/lulax-flaviobolsonaro.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7374,11 +10338,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "datafolha-2-turno-lula-e-flavio-tem-45-das-intencoes-de-voto"
-    ],
-    "body": [
-      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha 2º turno: Lula e Flávio têm 45% das intenções de voto.",
-      "Datafolha 2º turno: Lula e Flávio têm 45% das intenções de voto e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -7388,7 +10347,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:03:34.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
@@ -7397,11 +10356,16 @@ window.NEWS_DATA = [
     "lede": "Datafolha: Lula 38%; Flávio Bolsonaro 35%; Zema 3%; Caiado 3%. Pesquisa Datafolha divulgada neste sábado (16) pelo jornal \"Folha de S.",
     "summary": "Datafolha: Lula 38%; Flávio Bolsonaro 35%; Zema 3%; Caiado 3%. Pesquisa Datafolha divulgada neste sábado (16) pelo jornal \"Folha de S.",
     "analysis": "",
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha: Lula tem 38%, e Flávio, 35% das intenções de voto no 1º turno.",
+      "Datafolha: Lula tem 38%, e Flávio, 35% das intenções de voto no 1º turno e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://s2-g1.glbimg.com/hzmr9wd5I6RVoxKLFlMkpVDUmOE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/H/I/pnpcmQQDmcobAB0ZU0Cw/lula-flavio.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/hzmr9wd5I6RVoxKLFlMkpVDUmOE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/H/I/pnpcmQQDmcobAB0ZU0Cw/lula-flavio.jpg",
     "sourceImageUrl": "https://s2-g1.glbimg.com/hzmr9wd5I6RVoxKLFlMkpVDUmOE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/H/I/pnpcmQQDmcobAB0ZU0Cw/lula-flavio.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/hzmr9wd5I6RVoxKLFlMkpVDUmOE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/H/I/pnpcmQQDmcobAB0ZU0Cw/lula-flavio.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7423,11 +10387,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "datafolha-lula-tem-38-e-flavio-35-das-intencoes-de-voto-no-1-turno"
-    ],
-    "body": [
-      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha: Lula tem 38%, e Flávio, 35% das intenções de voto no 1º turno.",
-      "Datafolha: Lula tem 38%, e Flávio, 35% das intenções de voto no 1º turno e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -7437,7 +10396,7 @@ window.NEWS_DATA = [
     "eyebrow": "Politica",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T14:39:38.000Z",
-    "category": "Politica",
+    "category": "Política",
     "categoryKey": "politica",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
@@ -7446,11 +10405,16 @@ window.NEWS_DATA = [
     "lede": "O ministro Joaquim Barbosa durante sessão no STF, em Brasília, para a 34ª sessão de julgamento do mensalão nesta quarta (10). Antes da retomada do julgamento, os ministros elegeram presidente da Corte a partir de novembro.",
     "summary": "O ministro Joaquim Barbosa durante sessão no STF, em Brasília, para a 34ª sessão de julgamento do mensalão nesta quarta (10). Antes da retomada do julgamento, os ministros elegeram presidente da Corte a partir de novembro.",
     "analysis": "",
+    "body": [
+      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Joaquim Barbosa se filia ao Democracia Cristã e se torna aposta da legenda para o Planalto.",
+      "Joaquim Barbosa se filia ao Democracia Cristã e se torna aposta da legenda para o Planalto e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://s2-g1.glbimg.com/wXnF52GWdGSUufcY7BS76e8INvs=/s.glbimg.com/jo/g1/f/original/2012/10/10/age20121010137.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/wXnF52GWdGSUufcY7BS76e8INvs=/s.glbimg.com/jo/g1/f/original/2012/10/10/age20121010137.jpg",
     "sourceImageUrl": "https://s2-g1.glbimg.com/wXnF52GWdGSUufcY7BS76e8INvs=/s.glbimg.com/jo/g1/f/original/2012/10/10/age20121010137.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/wXnF52GWdGSUufcY7BS76e8INvs=/s.glbimg.com/jo/g1/f/original/2012/10/10/age20121010137.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7472,11 +10436,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "joaquim-barbosa-se-filia-ao-democracia-crista-e-se-torna-aposta-da-legenda-para-o-planalto"
-    ],
-    "body": [
-      "G1 Politica publicou em 16 de mai de 2026 a base desta noticia sobre Joaquim Barbosa se filia ao Democracia Cristã e se torna aposta da legenda para o Planalto.",
-      "Joaquim Barbosa se filia ao Democracia Cristã e se torna aposta da legenda para o Planalto e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -7827,111 +10786,13 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/",
-    "slug": "romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito",
-    "title": "Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito”",
-    "eyebrow": "Cotidiano",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:55:58.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano romario diz que continua mulherengo aos 60 anos estou solteiro tenho esse direito o ex jogador romario afirmou que continua sendo mulherengo aos 60 anos e nao descartou a possibilidade de um quarto casamento",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/",
-    "sourceLabel": "Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito”",
-    "lede": "O ex-jogador Romário afirmou que continua sendo mulherengo aos 60 anos e não descartou a possibilidade de um quarto casamento.",
-    "summary": "O ex-jogador Romário afirmou que continua sendo mulherengo aos 60 anos e não descartou a possibilidade de um quarto casamento.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7838.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7838.jpeg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7838.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "romario-diz-que-continua-mulherengo-aos-60-anos-estou-solteiro-tenho-esse-direito"
-    ],
-    "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito”.",
-      "Romário diz que continua mulherengo aos 60 anos: “Estou solteiro, tenho esse direito” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/",
-    "slug": "tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca",
-    "title": "Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França",
-    "eyebrow": "Cotidiano",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:51:05.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano tecnico do lyon confirma retorno de endrick ao real madrid apos temporada na franca o tecnico paulo fonseca confirmou nesta sexta feira 16 que o atacante brasileiro endrick retornara ao real madrid apos o fim da temporada europeia",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/",
-    "sourceLabel": "Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França",
-    "lede": "O técnico Paulo Fonseca confirmou nesta sexta-feira (16) que o atacante brasileiro Endrick retornará ao Real Madrid após o fim da temporada europeia.",
-    "summary": "O técnico Paulo Fonseca confirmou nesta sexta-feira (16) que o atacante brasileiro Endrick retornará ao Real Madrid após o fim da temporada europeia.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7837.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7837.jpeg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7837.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tecnico-do-lyon-confirma-retorno-de-endrick-ao-real-madrid-apos-temporada-na-franca"
-    ],
-    "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França.",
-      "Técnico do Lyon confirma retorno de Endrick ao Real Madrid após temporada na França e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
     "id": "https://juruaonline.com.br/israel-mata-principal-lider-militar-do-hamas-em-ataque-na-faixa-de-gaza/",
     "slug": "israel-mata-principal-lider-militar-do-hamas-em-ataque-na-faixa-de-gaza",
     "title": "Israel mata principal líder militar do Hamas em ataque na Faixa de Gaza",
     "eyebrow": "Policia",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T15:49:07.000Z",
-    "category": "Policia",
+    "category": "Polícia",
     "categoryKey": "policia",
     "previewClass": "thumb-policia",
     "sourceName": "Jurua Online",
@@ -7940,11 +10801,16 @@ window.NEWS_DATA = [
     "lede": "Israel anunciou neste sábado (16) a morte de Izz al-Din al-Haddad, apontado como o principal líder militar do Hamas na Faixa de Gaza.",
     "summary": "Israel anunciou neste sábado (16) a morte de Izz al-Din al-Haddad, apontado como o principal líder militar do Hamas na Faixa de Gaza.",
     "analysis": "",
+    "body": [
+      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Israel mata principal líder militar do Hamas em ataque na Faixa de Gaza.",
+      "Israel mata principal líder militar do Hamas em ataque na Faixa de Gaza e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7836.webp",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7836.webp",
     "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7836.webp",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7836.webp",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -7966,279 +10832,274 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "israel-mata-principal-lider-militar-do-hamas-em-ataque-na-faixa-de-gaza"
-    ],
-    "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Israel mata principal líder militar do Hamas em ataque na Faixa de Gaza.",
-      "Israel mata principal líder militar do Hamas em ataque na Faixa de Gaza e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://juruaonline.com.br/251736-2/",
-    "slug": "datafolha-lula-tem-38-e-flavio-bolsonaro-35-das-intencoes-de-voto-para-presidente",
-    "title": "Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente",
-    "eyebrow": "Cotidiano",
+    "id": "https://www.cnnbrasil.com.br/entretenimento/eurovision-2026-bulgaria-vence-o-concurso-pela-primeira-vez/",
+    "slug": "eurovision-2026-bulgaria-vence-o-concurso-pela-primeira-vez",
+    "title": "Eurovision 2026: Bulgária vence o concurso pela primeira vez",
+    "eyebrow": "Nacional",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:38:19.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano datafolha lula tem 38 e flavio bolsonaro 35 das intencoes de voto para presidente pesquisa datafolha divulgada neste sabado 16 pela folha de s paulo mostra o presidente luiz inacio lula da silva pt liderando a corrida presidencial com 38 das intencoes de voto no primeiro turno",
+    "publishedAt": "2026-05-16T23:58:20.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional eurovision 2026 bulgaria vence o concurso pela primeira vez edicao foi marcada pelo boicote de varios paises devido a participacao continua de israel que garantiu o 2 lugar",
     "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/251736-2/",
-    "sourceLabel": "Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente",
-    "lede": "Pesquisa Datafolha divulgada neste sábado (16) pela Folha de S.Paulo mostra o presidente Luiz Inácio Lula da Silva (PT) liderando a corrida presidencial com 38% das intenções de voto no primeiro turno.",
-    "summary": "Pesquisa Datafolha divulgada neste sábado (16) pela Folha de S.Paulo mostra o presidente Luiz Inácio Lula da Silva (PT) liderando a corrida presidencial com 38% das intenções de voto no primeiro turno.",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/eurovision-2026-bulgaria-vence-o-concurso-pela-primeira-vez/",
+    "sourceLabel": "Eurovision 2026: Bulgária vence o concurso pela primeira vez",
+    "lede": "CNN Brasil publicou uma atualização sobre Eurovision 2026: Bulgária vence o concurso pela primeira vez. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Eurovision 2026: Bulgária vence o concurso pela primeira vez. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7835.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7835.jpeg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7835.jpeg",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/05/israel-eurovision.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/05/israel-eurovision.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/05/israel-eurovision.jpg?w=200",
     "imageCredit": "",
-    "imageFocus": "center 38%",
+    "imageFocus": "",
     "imageFit": "",
     "media": null,
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
+    "priority": 0,
+    "editorialPriority": "",
     "crossSources": [
       {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/251736-2/"
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/eurovision-2026-bulgaria-vence-o-concurso-pela-primeira-vez/"
       }
     ],
     "alternateSources": [
       {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/251736-2/"
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/eurovision-2026-bulgaria-vence-o-concurso-pela-primeira-vez/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "datafolha-lula-tem-38-e-flavio-bolsonaro-35-das-intencoes-de-voto-para-presidente"
+      "eurovision-2026-bulgaria-vence-o-concurso-pela-primeira-vez"
     ],
     "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente.",
-      "Datafolha: Lula tem 38% e Flávio Bolsonaro 35% das intenções de voto para presidente e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Eurovision 2026: Bulgária vence o concurso pela primeira vez.",
+      "Eurovision 2026: Bulgária vence o concurso pela primeira vez e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/",
-    "slug": "mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado",
-    "title": "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado",
-    "eyebrow": "Cotidiano",
+    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/fluminense-vence-sao-paulo-no-maracana-e-encosta-na-lideranca-do-brasileiro/",
+    "slug": "fluminense-vence-sao-paulo-no-maracana-e-encosta-na-lideranca-do-brasileiro",
+    "title": "Fluminense vence São Paulo no Maracanã e encosta na liderança do Brasileiro",
+    "eyebrow": "Nacional",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T13:33:46.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano mega sena sorteia premio de r 65 milhoes neste sabado as seis dezenas do concurso 3 009 da mega sena serao sorteadas a partir das 21h horario de brasilia no espaco da sorte localizado na avenida paulista n 750 em sao paulo o premio da faixa principal esta acumulado e estimado em r 65 milhoes",
+    "publishedAt": "2026-05-16T23:57:40.000Z",
+    "category": "Nacional",
+    "categoryKey": "brasileirao nacional fluminense vence sao paulo no maracana e encosta na lideranca do brasileiro john kennedy e canobbio marcam na vitoria tricolor por 2 a 1 equipe carioca controla o jogo e segura reacao paulista no segundo tempo",
     "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/",
-    "sourceLabel": "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado",
-    "lede": "As seis dezenas do concurso 3. 009 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo.",
-    "summary": "As seis dezenas do concurso 3. 009 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo.",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/fluminense-vence-sao-paulo-no-maracana-e-encosta-na-lideranca-do-brasileiro/",
+    "sourceLabel": "Fluminense vence São Paulo no Maracanã e encosta na liderança do Brasileiro",
+    "lede": "CNN Brasil publicou uma atualização sobre Fluminense vence São Paulo no Maracanã e encosta na liderança do Brasileiro. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Fluminense vence São Paulo no Maracanã e encosta na liderança do Brasileiro. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/04/Novo-Projeto-8.jpg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/04/Novo-Projeto-8.jpg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/04/Novo-Projeto-8.jpg",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-25-at-14.25.57-2-e1778635457386.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-25-at-14.25.57-2-e1778635457386.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-25-at-14.25.57-2-e1778635457386.jpeg?w=200",
     "imageCredit": "",
-    "imageFocus": "center 50%",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
+    "priority": 0,
+    "editorialPriority": "",
     "crossSources": [
       {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/"
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/fluminense-vence-sao-paulo-no-maracana-e-encosta-na-lideranca-do-brasileiro/"
       }
     ],
     "alternateSources": [
       {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado/"
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/fluminense-vence-sao-paulo-no-maracana-e-encosta-na-lideranca-do-brasileiro/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "mega-sena-sorteia-premio-de-r-65-milhoes-neste-sabado"
+      "fluminense-vence-sao-paulo-no-maracana-e-encosta-na-lideranca-do-brasileiro"
     ],
     "body": [
-      "Jurua Online publicou em 16 de mai de 2026 a base desta noticia sobre Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado.",
-      "Mega-Sena sorteia prêmio de R$ 65 milhões neste sábado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Fluminense vence São Paulo no Maracanã e encosta na liderança do Brasileiro.",
+      "Fluminense vence São Paulo no Maracanã e encosta na liderança do Brasileiro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/",
-    "slug": "bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026",
-    "title": "Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026",
+    "id": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/policia-identifica-suspeitos-por-morte-de-mulher-encontrada-em-parque-de-sp/",
+    "slug": "policia-identifica-suspeitos-por-morte-de-mulher-encontrada-em-parque-de-sp",
+    "title": "Polícia identifica suspeitos por morte de mulher encontrada em parque de SP",
+    "eyebrow": "Policia",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:56:43.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/policia-identifica-suspeitos-por-morte-de-mulher-encontrada-em-parque-de-sp/",
+    "sourceLabel": "Polícia identifica suspeitos por morte de mulher encontrada em parque de SP",
+    "lede": "CNN Brasil publicou uma atualização sobre Polícia identifica suspeitos por morte de mulher encontrada em parque de SP. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Polícia identifica suspeitos por morte de mulher encontrada em parque de SP. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/APURACAO-CNN-5.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/APURACAO-CNN-5.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/APURACAO-CNN-5.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/policia-identifica-suspeitos-por-morte-de-mulher-encontrada-em-parque-de-sp/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/policia-identifica-suspeitos-por-morte-de-mulher-encontrada-em-parque-de-sp/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "policia-identifica-suspeitos-por-morte-de-mulher-encontrada-em-parque-de-sp"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Polícia identifica suspeitos por morte de mulher encontrada em parque de SP.",
+      "Polícia identifica suspeitos por morte de mulher encontrada em parque de SP e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/internacional/analise-cuba-se-prepara-para-invasao-enquanto-tensao-com-os-eua-aumenta/",
+    "slug": "analise-cuba-se-prepara-para-invasao-enquanto-tensao-com-os-eua-aumenta",
+    "title": "Análise: Cuba se prepara para invasão enquanto tensão com os EUA aumenta",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:53:46.000Z",
+    "category": "Nacional",
+    "categoryKey": "internacional nacional analise cuba se prepara para invasao enquanto tensao com os eua aumenta populacao recebeu guia familiar sobre como agir durante uma possivel agressao militar",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/analise-cuba-se-prepara-para-invasao-enquanto-tensao-com-os-eua-aumenta/",
+    "sourceLabel": "Análise: Cuba se prepara para invasão enquanto tensão com os EUA aumenta",
+    "lede": "CNN Brasil publicou uma atualização sobre Análise: Cuba se prepara para invasão enquanto tensão com os EUA aumenta. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Análise: Cuba se prepara para invasão enquanto tensão com os EUA aumenta. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2024binary_LYNXMPEK4R0NO-FILEDIMAGE-e1770342324235.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2024binary_LYNXMPEK4R0NO-FILEDIMAGE-e1770342324235.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2024binary_LYNXMPEK4R0NO-FILEDIMAGE-e1770342324235.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/analise-cuba-se-prepara-para-invasao-enquanto-tensao-com-os-eua-aumenta/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/analise-cuba-se-prepara-para-invasao-enquanto-tensao-com-os-eua-aumenta/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "analise-cuba-se-prepara-para-invasao-enquanto-tensao-com-os-eua-aumenta"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Análise: Cuba se prepara para invasão enquanto tensão com os EUA aumenta.",
+      "Análise: Cuba se prepara para invasão enquanto tensão com os EUA aumenta e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/web-reage-a-aparencia-de-john-travolta-em-cannes-irreconhecivel/",
+    "slug": "web-reage-a-aparencia-de-john-travolta-em-cannes-irreconhecivel",
+    "title": "Web reage à aparência de John Travolta em Cannes: “Irreconhecível”",
+    "eyebrow": "Nacional",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T23:32:24.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional web reage a aparencia de john travolta em cannes irreconhecivel famoso fez estreia como diretor em evento e acabou chamando atencao por outro motivo",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/web-reage-a-aparencia-de-john-travolta-em-cannes-irreconhecivel/",
+    "sourceLabel": "Web reage à aparência de John Travolta em Cannes: “Irreconhecível”",
+    "lede": "CNN Brasil publicou uma atualização sobre Web reage à aparência de John Travolta em Cannes: “Irreconhecível”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Web reage à aparência de John Travolta em Cannes: “Irreconhecível”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/anna-wintour-anne-hathaway-oscar.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/anna-wintour-anne-hathaway-oscar.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/anna-wintour-anne-hathaway-oscar.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/web-reage-a-aparencia-de-john-travolta-em-cannes-irreconhecivel/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/web-reage-a-aparencia-de-john-travolta-em-cannes-irreconhecivel/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "web-reage-a-aparencia-de-john-travolta-em-cannes-irreconhecivel"
+    ],
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Web reage à aparência de John Travolta em Cannes: “Irreconhecível”.",
+      "Web reage à aparência de John Travolta em Cannes: “Irreconhecível” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/a-margem-do-tempo-no-bar-do-ze-do-branco/",
+    "slug": "a-margem-do-tempo-no-bar-do-ze-do-branco",
+    "title": "À margem do tempo no bar do Zé do Branco…",
     "eyebrow": "Cotidiano",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T20:00:10.000Z",
+    "publishedAt": "2026-05-16T23:30:34.000Z",
     "category": "Cotidiano",
-    "categoryKey": "ac24horas play cotidiano bocalom defende concreto armado na br 364 e mantem discurso otimista sobre 2026 durante o programa boa conversa da redacao os comentaristas repercutiram a defesa feita pelo prefeito de rio branco tiao bocalom sobre o uso de concreto armado como solucao definitiva para a br 364",
+    "categoryKey": "blogs colunas cotidiano a margem do tempo no bar do ze do branco o rio nem precisava pensar para existir corria so isso corria e talvez fosse isso que doia porque alvaro antonio precisava pensar precisava sentir o peso de estar ali sentado a mesa de fora na calcada a beira do barranco do bar do ze do branco no",
     "previewClass": "thumb-cotidiano",
     "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/",
-    "sourceLabel": "Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026",
-    "lede": "Durante o programa Boa Conversa da Redação, os comentaristas repercutiram a defesa feita pelo prefeito de Rio Branco, Tião Bocalom, sobre o uso de concreto armado como solução definitiva para a BR-364.",
-    "summary": "Durante o programa Boa Conversa da Redação, os comentaristas repercutiram a defesa feita pelo prefeito de Rio Branco, Tião Bocalom, sobre o uso de concreto armado como solução definitiva para a BR-364.",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/a-margem-do-tempo-no-bar-do-ze-do-branco/",
+    "sourceLabel": "À margem do tempo no bar do Zé do Branco…",
+    "lede": "O rio nem precisava pensar para existir, corria, só isso, corria, e talvez fosse isso que doía, porque Álvaro Antônio precisava pensar, precisava sentir o peso de estar ali, sentado à mesa de fora, na calçada à beira do...",
+    "summary": "O rio nem precisava pensar para existir, corria, só isso, corria, e talvez fosse isso que doía, porque Álvaro Antônio precisava pensar, precisava sentir o peso de estar ali, sentado à mesa de fora, na calçada à beira do...",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-66.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-66.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-66.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "bocalom-defende-concreto-armado-na-br-364-e-mantem-discurso-otimista-sobre-2026"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026.",
-      "Bocalom defende concreto armado na BR-364 e mantém discurso otimista sobre 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/",
-    "slug": "copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira",
-    "title": "Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã",
-    "eyebrow": "Nacional",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:38:48.000Z",
-    "category": "Nacional",
-    "categoryKey": "copa do mundo nacional copa do mundo fifa diz ter tido conversa positiva com federacao do ira secretario geral se encontrou com presidente da ffiri para conversar sobre a participacao do pais no mundial",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/",
-    "sourceLabel": "Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã",
-    "lede": "CNN Brasil publicou uma atualização sobre Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/GettyImages-2220271981-e1778945596684.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/GettyImages-2220271981-e1778945596684.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/GettyImages-2220271981-e1778945596684.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "copa-do-mundo-fifa-diz-ter-tido-conversa-positiva-com-federacao-do-ira"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã.",
-      "Copa do Mundo: Fifa diz ter tido conversa “positiva” com Federação do Irã e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/",
-    "slug": "nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana",
-    "title": "Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana",
-    "eyebrow": "Cotidiano",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:18:16.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "destaque 1 cotidiano nosso frigorifico embarca primeiro container para singapura com apoio de jorge viana unidade industrial emprega diretamente 450 funcionarios e desde dezembro procura 50 profissionais para ampliar a producao o cenario mudou apos a atuacao de jorge viana a frente da apex e da diplomacia presidencial executada pelo presidente lula",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/",
-    "sourceLabel": "Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana",
-    "lede": "Unidade industrial emprega diretamente 450 funcionários e, desde dezembro, procura 50 profissionais para ampliar a produção.",
-    "summary": "Unidade industrial emprega diretamente 450 funcionários e, desde dezembro, procura 50 profissionais para ampliar a produção.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-718-5.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-718-5.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-718-5.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/16/nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "nosso-frigorifico-embarca-primeiro-container-para-singapura-com-apoio-de-jorge-viana"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana.",
-      "Nosso Frigorífico embarca primeiro container para Singapura com apoio de Jorge Viana e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/",
-    "slug": "final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual",
-    "title": "Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual",
-    "eyebrow": "Nacional",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:13:54.000Z",
-    "category": "Nacional",
-    "categoryKey": "entretenimento nacional final de tres gracas faz referencia a filme classico de 1950 saiba qual cena ja havia sido homenageada por aguinaldo silva no final de outra vila na novela duas caras",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/",
-    "sourceLabel": "Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual",
-    "lede": "CNN Brasil publicou uma atualização sobre Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/tres-gracas-elenco.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/tres-gracas-elenco.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/tres-gracas-elenco.jpg?w=200",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/BCBDEDC8-3EDC-4ECC-9584-599051ED5946.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/BCBDEDC8-3EDC-4ECC-9584-599051ED5946.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/BCBDEDC8-3EDC-4ECC-9584-599051ED5946.jpeg",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -8247,194 +11108,47 @@ window.NEWS_DATA = [
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/a-margem-do-tempo-no-bar-do-ze-do-branco/"
       }
     ],
     "alternateSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/a-margem-do-tempo-no-bar-do-ze-do-branco/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "final-de-tres-gracas-faz-referencia-a-filme-classico-de-1950-saiba-qual"
+      "a-margem-do-tempo-no-bar-do-ze-do-branco"
     ],
     "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual.",
-      "Final de “Três Graças” faz referência a filme clássico de 1950; saiba qual e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre À margem do tempo no bar do Zé do Branco….",
+      "À margem do tempo no bar do Zé do Branco… e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/",
-    "slug": "dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845",
-    "title": "DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845",
-    "eyebrow": "Nacional",
+    "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/em-acao-com-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master",
+    "slug": "em-acao-com-a-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master",
+    "title": "Em ação com a Interpol, PF prende em Dubai hacker do caso Banco Master",
+    "eyebrow": "Policia",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:07:46.000Z",
-    "category": "Nacional",
-    "categoryKey": "ciencia nacional dna revela identidade de marinheiros da famosa expedicao ao artico de 1845 a missao do sir john franklin era encontrar a passagem noroeste dois navios transportavam 129 tripulantes quando ficaram presos no gelo do artico historia tragica foi inspiracao para uma temporada da serie the terror",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/",
-    "sourceLabel": "DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845",
-    "lede": "CNN Brasil publicou uma atualização sobre DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/francois-musin-the-search-for-sir-john-franklin-in-the-arctic-e9b056.jpeg?w=640",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/francois-musin-the-search-for-sir-john-franklin-in-the-arctic-e9b056.jpeg?w=640",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/francois-musin-the-search-for-sir-john-franklin-in-the-arctic-e9b056.jpeg?w=640",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/ciencia/dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "dna-revela-identidade-de-marinheiros-da-famosa-expedicao-ao-artico-de-1845"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845.",
-      "DNA revela identidade de marinheiros da famosa expedição ao Ártico de 1845 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/",
-    "slug": "joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo",
-    "title": "João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo",
-    "eyebrow": "Nacional",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:03:48.000Z",
-    "category": "Nacional",
-    "categoryKey": "tenis nacional joao fonseca sofre lesao e desiste de disputar o atp 500 de hamburgo tenista brasileiro enfrentaria o alemao yannick hanfmann mas sentiu um leve desconforto no punho direito",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/",
-    "sourceLabel": "João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo",
-    "lede": "CNN Brasil publicou uma atualização sobre João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Jannik-Sinner-e1778946167803.jpeg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Jannik-Sinner-e1778946167803.jpeg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Jannik-Sinner-e1778946167803.jpeg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/tenis/joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "joao-fonseca-sofre-lesao-e-desiste-de-disputar-o-atp-500-de-hamburgo"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo.",
-      "João Fonseca sofre lesão e desiste de disputar o ATP 500 de Hamburgo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/",
-    "slug": "alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata",
-    "title": "Além de Porchat: veja famosos que já receberam título “persona non grata”",
-    "eyebrow": "Nacional",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:02:44.000Z",
-    "category": "Nacional",
-    "categoryKey": "entretenimento nacional alem de porchat veja famosos que ja receberam titulo persona non grata declaracao significa que alguem passa a ser considerado indesejado e nao e mais bem vindo em determinado lugar",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/",
-    "sourceLabel": "Além de Porchat: veja famosos que já receberam título “persona non grata”",
-    "lede": "CNN Brasil publicou uma atualização sobre Além de Porchat: veja famosos que já receberam título “persona non grata”. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Além de Porchat: veja famosos que já receberam título “persona non grata”. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Atriz-Sharon-Stone-na-premiacao-Astra-Film-Awards-2026.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Atriz-Sharon-Stone-na-premiacao-Astra-Film-Awards-2026.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Atriz-Sharon-Stone-na-premiacao-Astra-Film-Awards-2026.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "alem-de-porchat-veja-famosos-que-ja-receberam-titulo-persona-non-grata"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Além de Porchat: veja famosos que já receberam título “persona non grata”.",
-      "Além de Porchat: veja famosos que já receberam título “persona non grata” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas",
-    "slug": "sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas",
-    "title": "Sabesp suspende obras que possam interferir em rede de gás",
-    "eyebrow": "Nacional",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T19:01:00.000Z",
-    "category": "Nacional",
-    "categoryKey": "geral nacional sabesp suspende obras que possam interferir em rede de gas a companhia de saneamento basico do estado de sao paulo sabesp decidiu paralisar temporariamente todas as obras que estiverem sendo realizadas nas ruas e espacos publicos e que possam interferir diretamente nas redes do sistema publico de gas",
-    "previewClass": "thumb-cotidiano",
+    "publishedAt": "2026-05-16T21:31:00.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
     "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas",
-    "sourceLabel": "Sabesp suspende obras que possam interferir em rede de gás",
-    "lede": "A Companhia de Saneamento Básico do Estado de São Paulo (Sabesp) decidiu paralisar temporariamente todas as obras que estiverem sendo realizadas nas ruas e espaços públicos e que possam interferir diretamente nas redes do...",
-    "summary": "A Companhia de Saneamento Básico do Estado de São Paulo (Sabesp) decidiu paralisar temporariamente todas as obras que estiverem sendo realizadas nas ruas e espaços públicos e que possam interferir diretamente nas redes do...",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/em-acao-com-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master",
+    "sourceLabel": "Em ação com a Interpol, PF prende em Dubai hacker do caso Banco Master",
+    "lede": "A Polícia Federal (PF) prendeu hoje (16) o hacker Victor Lima Sedlmaier, um dos investigados na Operação Compliance Zero , que apura o escândalo financeiro bilionário envolvendo o Banco Master e seu ex-dono Daniel Vorcaro.",
+    "summary": "A Polícia Federal (PF) prendeu hoje (16) o hacker Victor Lima Sedlmaier, um dos investigados na Operação Compliance Zero , que apura o escândalo financeiro bilionário envolvendo o Banco Master e seu ex-dono Daniel Vorcaro.",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "/assets/news-fallbacks/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas.svg",
-    "feedImageUrl": "/assets/news-fallbacks/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas.svg",
+    "imageUrl": "/assets/news-fallbacks/em-acao-com-a-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master.svg",
+    "feedImageUrl": "/assets/news-fallbacks/em-acao-com-a-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/em-acao-com-a-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -8444,22 +11158,226 @@ window.NEWS_DATA = [
     "crossSources": [
       {
         "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas"
+        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/em-acao-com-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master"
       }
     ],
     "alternateSources": [
       {
         "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-05/sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas"
+        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/em-acao-com-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "sabesp-suspende-obras-que-possam-interferir-em-rede-de-gas"
+      "em-acao-com-a-interpol-pf-prende-em-dubai-hacker-do-caso-banco-master"
     ],
     "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Sabesp suspende obras que possam interferir em rede de gás.",
-      "Sabesp suspende obras que possam interferir em rede de gás e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Em ação com a Interpol, PF prende em Dubai hacker do caso Banco Master.",
+      "Em ação com a Interpol, PF prende em Dubai hacker do caso Banco Master e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-05/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio",
+    "slug": "cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio",
+    "title": "Cordão da Mentira faz ato na Paulista para lembrar Crimes de Maio",
+    "eyebrow": "Policia",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T21:18:00.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-05/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio",
+    "sourceLabel": "Cordão da Mentira faz ato na Paulista para lembrar Crimes de Maio",
+    "lede": "Um ato na tarde deste sábado (16) na Avenida Paulista, em São Paulo, relembrou os 20 anos dos chamados Crimes de Maio , uma série de ataques realizados pelo Primeiro Comando da Capital (PCC) e que terminou com uma grande...",
+    "summary": "Um ato na tarde deste sábado (16) na Avenida Paulista, em São Paulo, relembrou os 20 anos dos chamados Crimes de Maio , uma série de ataques realizados pelo Primeiro Comando da Capital (PCC) e que terminou com uma grande...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio.svg",
+    "feedImageUrl": "/assets/news-fallbacks/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-05/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-05/cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "cordao-da-mentira-faz-ato-na-paulista-para-lembrar-crimes-de-maio"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Cordão da Mentira faz ato na Paulista para lembrar Crimes de Maio.",
+      "Cordão da Mentira faz ato na Paulista para lembrar Crimes de Maio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/policia-civil-analisa-versao-de-legitima-defesa-apresentada-por-policial-penal-em-caso-de-homem-baleado-no-aviario/",
+    "slug": "policia-civil-analisa-versao-de-legitima-defesa-apresentada-por-policial-penal-em-caso-de-homem-",
+    "title": "Polícia Civil analisa versão de legítima defesa apresentada por policial penal em caso de homem baleado no Aviário",
+    "eyebrow": "Policia",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T21:06:12.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/policia-civil-analisa-versao-de-legitima-defesa-apresentada-por-policial-penal-em-caso-de-homem-baleado-no-aviario/",
+    "sourceLabel": "Polícia Civil analisa versão de legítima defesa apresentada por policial penal em caso de homem baleado no Aviário",
+    "lede": "A Delegacia de Homicídios e Proteção à Pessoa (DHPP) ouviu o policial penal investigado por balear Emerson Iason Lima da Silva, de 40 anos, durante uma confusão registrada na madrugada do último dia 10, em uma distribuidora de...",
+    "summary": "A Delegacia de Homicídios e Proteção à Pessoa (DHPP) ouviu o policial penal investigado por balear Emerson Iason Lima da Silva, de 40 anos, durante uma confusão registrada na madrugada do último dia 10, em uma distribuidora de...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T160541.673.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T160541.673.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T160541.673.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/policia-civil-analisa-versao-de-legitima-defesa-apresentada-por-policial-penal-em-caso-de-homem-baleado-no-aviario/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/policia-civil-analisa-versao-de-legitima-defesa-apresentada-por-policial-penal-em-caso-de-homem-baleado-no-aviario/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "policia-civil-analisa-versao-de-legitima-defesa-apresentada-por-policial-penal-em-caso-de-homem-"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Polícia Civil analisa versão de legítima defesa apresentada por policial penal em caso de homem baleado no Aviário.",
+      "Polícia Civil analisa versão de legítima defesa apresentada por policial penal em caso de homem baleado no Aviário e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/16/policia-civil-localiza-e-prende-foragido-condenado-por-homicidio-em-regiao-do-calafate/",
+    "slug": "policia-civil-localiza-e-prende-foragido-condenado-por-homicidio",
+    "title": "Polícia Civil localiza e prende foragido condenado por homicídio",
+    "eyebrow": "Policia",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T20:16:48.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/policia-civil-localiza-e-prende-foragido-condenado-por-homicidio-em-regiao-do-calafate/",
+    "sourceLabel": "Polícia Civil localiza e prende foragido condenado por homicídio",
+    "lede": "Uma operação realizada pela Polícia Civil do Acre resultou na prisão de Alexandre Barroso Chaves, de 33 anos, conhecido como “Nani”, no Ramal da Lebre, localizado na região chacareira do Calafate, em Rio Branco.",
+    "summary": "Uma operação realizada pela Polícia Civil do Acre resultou na prisão de Alexandre Barroso Chaves, de 33 anos, conhecido como “Nani”, no Ramal da Lebre, localizado na região chacareira do Calafate, em Rio Branco.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-15.13.54-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-15.13.54-1200x675.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-16-at-15.13.54-1200x675.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/policia-civil-localiza-e-prende-foragido-condenado-por-homicidio-em-regiao-do-calafate/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/policia-civil-localiza-e-prende-foragido-condenado-por-homicidio-em-regiao-do-calafate/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "policia-civil-localiza-e-prende-foragido-condenado-por-homicidio"
+    ],
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Polícia Civil localiza e prende foragido condenado por homicídio.",
+      "Polícia Civil localiza e prende foragido condenado por homicídio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares",
+    "slug": "china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares",
+    "title": "China diz que acordos firmados em visita de Trump são \"preliminares\"",
+    "eyebrow": "Negocios",
+    "date": "16 de mai de 2026",
+    "publishedAt": "2026-05-16T19:36:00.000Z",
+    "category": "Negocios",
+    "categoryKey": "negocios",
+    "previewClass": "thumb-negocios",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares",
+    "sourceLabel": "China diz que acordos firmados em visita de Trump são \"preliminares\"",
+    "lede": "O Ministério do Comércio da China descreveu neste sábado como \"preliminares\" os acordos tarifários, agrícolas e aeronáuticos firmados durante a visita do presidente dos Estados Unidos (EUA), Donald Trump, nesta semana.",
+    "summary": "O Ministério do Comércio da China descreveu neste sábado como \"preliminares\" os acordos tarifários, agrícolas e aeronáuticos firmados durante a visita do presidente dos Estados Unidos (EUA), Donald Trump, nesta semana.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares.svg",
+    "feedImageUrl": "/assets/news-fallbacks/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "china-diz-que-acordos-firmados-em-visita-de-trump-sao-preliminares"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre China diz que acordos firmados em visita de Trump são \"preliminares\".",
+      "China diz que acordos firmados em visita de Trump são \"preliminares\" e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
@@ -8474,8 +11392,8 @@ window.NEWS_DATA = [
     "eyebrow": "Nacional",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T18:58:51.000Z",
-    "category": "Nacional",
-    "categoryKey": "mercado nacional mercado de acoes do ira deve reabrir na terca feira diz midia estatal atividades estao suspensas desde o inicio do conflito com eua e israel",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-cotidiano",
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/mercado/mercado-de-acoes-do-ira-deve-reabrir-na-terca-feira-diz-midia-estatal/",
@@ -8483,11 +11401,16 @@ window.NEWS_DATA = [
     "lede": "Atividades estão suspensas desde o início do conflito com EUA e Israel",
     "summary": "Atividades estão suspensas desde o início do conflito com EUA e Israel",
     "analysis": "",
+    "body": [
+      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Mercado de ações do Irã deve reabrir na terça-feira, diz mídia estatal.",
+      "Mercado de ações do Irã deve reabrir na terça-feira, diz mídia estatal e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/ChatGPT-Image-4-de-mar.-de-2026-23_33_39_cleanup.png?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/ChatGPT-Image-4-de-mar.-de-2026-23_33_39_cleanup.png?w=200",
     "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/ChatGPT-Image-4-de-mar.-de-2026-23_33_39_cleanup.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/ChatGPT-Image-4-de-mar.-de-2026-23_33_39_cleanup.png?w=200",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -8509,34 +11432,34 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "mercado-de-acoes-do-ira-deve-reabrir-na-terca-feira-diz-midia-estatal"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Mercado de ações do Irã deve reabrir na terça-feira, diz mídia estatal.",
-      "Mercado de ações do Irã deve reabrir na terça-feira, diz mídia estatal e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/",
-    "slug": "tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida",
-    "title": "Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida”",
-    "eyebrow": "Nacional",
+    "id": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/",
+    "slug": "alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores",
+    "title": "Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores",
+    "eyebrow": "Prefeitura",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T18:45:22.000Z",
-    "category": "Nacional",
-    "categoryKey": "entretenimento nacional tata werneck publica homenagem para walcyr carrasco mudou minha vida atriz fara parte do elenco da nova novela das nove quem ama cuida",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/",
-    "sourceLabel": "Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida”",
-    "lede": "Atriz fará parte do elenco da nova novela das nove, \"Quem Ama Cuida\"",
-    "summary": "Atriz fará parte do elenco da nova novela das nove, \"Quem Ama Cuida\"",
+    "publishedAt": "2026-05-16T16:47:10.000Z",
+    "category": "Negócios",
+    "categoryKey": "negocios",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/",
+    "sourceLabel": "Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores",
+    "lede": "Novo espaço conta com bancas padronizadas, estrutura moderna e internet, fortalecendo a comercialização de produtos locais em Rio Branco O prefeito de Rio Branco, Alysson Bestene, visitou na manhã deste sábado (16), o Mercado...",
+    "summary": "Novo espaço conta com bancas padronizadas, estrutura moderna e internet, fortalecendo a comercialização de produtos locais em Rio Branco O prefeito de Rio Branco, Alysson Bestene, visitou na manhã deste sábado (16), o Mercado...",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores.",
+      "Alysson Bestene visita Mercado Municipal São Francisco e destaca valorização dos produtores e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/zenilda-tres-gracas.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/zenilda-tres-gracas.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/zenilda-tres-gracas.jpg?w=200",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T114449.073.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T114449.073.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T114449.073.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -8545,24 +11468,19 @@ window.NEWS_DATA = [
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/"
       }
     ],
     "alternateSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida/"
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/16/alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "tata-werneck-publica-homenagem-para-walcyr-carrasco-mudou-minha-vida"
-    ],
-    "body": [
-      "CNN Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida”.",
-      "Tatá Werneck publica homenagem para Walcyr Carrasco: “Mudou minha vida” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      "alysson-bestene-visita-mercado-municipal-sao-francisco-e-destaca-valorizacao-dos-produtores"
     ]
   },
   {
@@ -8572,7 +11490,7 @@ window.NEWS_DATA = [
     "eyebrow": "Policia",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T16:19:29.000Z",
-    "category": "Policia",
+    "category": "Polícia",
     "categoryKey": "policia",
     "previewClass": "thumb-policia",
     "sourceName": "ac24horas",
@@ -8581,11 +11499,16 @@ window.NEWS_DATA = [
     "lede": "Investigadores da 9ª Delegacia Regional de Extrema, na divisa entre os estados do Acre e Rondônia, não descartam a hipótese de que o assassinato de Nayara Narrane Gomes de Jesus, de 31 anos, tenha sido motivado por vingança.",
     "summary": "Investigadores da 9ª Delegacia Regional de Extrema, na divisa entre os estados do Acre e Rondônia, não descartam a hipótese de que o assassinato de Nayara Narrane Gomes de Jesus, de 31 anos, tenha sido motivado por vingança.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Mulher assassinada na Ponta do Abunã havia sido presa por homicídio após briga em balneário.",
+      "Mulher assassinada na Ponta do Abunã havia sido presa por homicídio após briga em balneário e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T111822.726.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T111822.726.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T111822.726.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-2026-05-16T111822.726.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -8607,211 +11530,55 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "mulher-assassinada-na-ponta-do-abuna-havia-sido-presa-por-homicidio-apos-briga-em-balneario"
-    ],
-    "body": [
-      "ac24horas publicou em 16 de mai de 2026 a base desta noticia sobre Mulher assassinada na Ponta do Abunã havia sido presa por homicídio após briga em balneário.",
-      "Mulher assassinada na Ponta do Abunã havia sido presa por homicídio após briga em balneário e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
-    "id": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/",
-    "slug": "russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca",
-    "title": "Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca",
-    "eyebrow": "Cotidiano",
+    "id": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/",
+    "slug": "governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao",
+    "title": "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão",
+    "eyebrow": "Prefeitura",
     "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:41:06.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "mundo cotidiano russia devolve 528 corpos a ucrania em meio a acordo de troca apos esforcos de repatriacao os corpos de 528 individuos falecidos foram devolvidos a ucrania segundo o lado russo podem ser militares ucranianos afirmou o centro ucraniano para prisioneiros de guerra nas redes sociais sem especificar a data em que",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/",
-    "sourceLabel": "Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca",
-    "lede": "“Após esforços de repatriação, os corpos de 528 indivíduos falecidos foram devolvidos à Ucrânia; segundo o lado russo, podem ser militares ucranianos”, afirmou o Centro Ucraniano para Prisioneiros de Guerra nas redes sociais...",
-    "summary": "“Após esforços de repatriação, os corpos de 528 indivíduos falecidos foram devolvidos à Ucrânia; segundo o lado russo, podem ser militares ucranianos”, afirmou o Centro Ucraniano para Prisioneiros de Guerra nas redes sociais...",
+    "publishedAt": "2026-05-16T14:55:39.000Z",
+    "category": "Polícia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/",
+    "sourceLabel": "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão",
+    "lede": "Depois de 15 dias de missão pelo interior do Acre, o governo do Estado, por meio da Secretaria de Estado de Segurança Pública (Sejusp), em parceria com a Polícia Civil, por meio do Instituto de identificação, finalizou nessa...",
+    "summary": "Depois de 15 dias de missão pelo interior do Acre, o governo do Estado, por meio da Secretaria de Estado de Segurança Pública (Sejusp), em parceria com a Polícia Civil, por meio do Instituto de identificação, finalizou nessa...",
     "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca.svg",
-    "feedImageUrl": "/assets/news-fallbacks/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "russia-devolve-528-corpos-a-ucrania-em-meio-a-acordo-de-troca"
-    ],
     "body": [
-      "Jurua Comunicacao publicou em 16 de mai de 2026 a base desta noticia sobre Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca.",
-      "Rússia devolve 528 corpos à Ucrânia em meio a acordo de troca e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "Agencia Acre publicou em 16 de mai de 2026 a base desta noticia sobre Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão.",
+      "Governo do Estado finaliza ação com mais de mil identidades emitidas no Jordão e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant",
-    "slug": "sony-tries-to-explain-that-its-ai-camera-assistant-doesn-t-suck",
-    "title": "Atualização internacional de The Verge - 10:37",
-    "eyebrow": "Novidades",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:37:05.000Z",
-    "category": "Novidades",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant",
-    "sourceLabel": "Atualização internacional de The Verge - 10:37",
-    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:37. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:37. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/HIW4oV0XgAEmtI2.jpeg?quality=90&strip=all&crop=0,0,100,100",
-    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/HIW4oV0XgAEmtI2.jpeg?quality=90&strip=all&crop=0,0,100,100",
-    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/HIW4oV0XgAEmtI2.jpeg?quality=90&strip=all&crop=0,0,100,100",
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-15-at-11.14.31-1024x682.jpeg",
     "imageCredit": "",
-    "imageFocus": "",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant"
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/"
       }
     ],
     "alternateSources": [
       {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/tech/932133/sony-xperia-1-xiii-ai-camera-assistant"
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "sony-tries-to-explain-that-its-ai-camera-assistant-doesn-t-suck"
-    ],
-    "body": [
-      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre Sony tries to explain that its AI Camera Assistant doesn’t suck.",
-      "Sony tries to explain that its AI Camera Assistant doesn’t suck e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire",
-    "slug": "npr-s-manoush-zomorodi-talks-about-living-with-too-much-tech",
-    "title": "Atualização internacional de The Verge - 10:00",
-    "eyebrow": "Novidades",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T15:00:00.000Z",
-    "category": "Novidades",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire",
-    "sourceLabel": "Atualização internacional de The Verge - 10:00",
-    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 10:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ManoushZomorodi4.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ManoushZomorodi4.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/ManoushZomorodi4.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/report/930171/manoush-zomorodi-body-electric-npr-questionnaire"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "npr-s-manoush-zomorodi-talks-about-living-with-too-much-tech"
-    ],
-    "body": [
-      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre NPR’s Manoush Zomorodi talks about living with too much tech.",
-      "NPR’s Manoush Zomorodi talks about living with too much tech e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on",
-    "slug": "turtle-beach-made-a-good-steelseries-headset-clone-that-s-50-less",
-    "title": "Atualização internacional de The Verge - 09:00",
-    "eyebrow": "Novidades",
-    "date": "16 de mai de 2026",
-    "publishedAt": "2026-05-16T14:00:00.000Z",
-    "category": "Novidades",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on",
-    "sourceLabel": "Atualização internacional de The Verge - 09:00",
-    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 09:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 09:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/omniversusstealthpro2.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/omniversusstealthpro2.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/omniversusstealthpro2.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/gadgets/930828/turtle-beach-stealth-pro-2-steelseries-arctis-nova-pro-omni-gaming-headset-hands-on"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "turtle-beach-made-a-good-steelseries-headset-clone-that-s-50-less"
-    ],
-    "body": [
-      "The Verge publicou em 16 de mai de 2026 a base desta noticia sobre Turtle Beach made a good SteelSeries headset clone that’s $50 less.",
-      "Turtle Beach made a good SteelSeries headset clone that’s $50 less e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      "governo-do-estado-finaliza-acao-com-mais-de-mil-identidades-emitidas-no-jordao"
     ]
   },
   {
@@ -8821,7 +11588,7 @@ window.NEWS_DATA = [
     "eyebrow": "Negocios",
     "date": "16 de mai de 2026",
     "publishedAt": "2026-05-16T13:42:00.000Z",
-    "category": "Negocios",
+    "category": "Negócios",
     "categoryKey": "negocios",
     "previewClass": "thumb-negocios",
     "sourceName": "Agencia Brasil",
@@ -8830,11 +11597,16 @@ window.NEWS_DATA = [
     "lede": "Pesquisadores do Instituto Alberto Luiz Coimbra de Pós-Graduação e Pesquisa em Engenharia (Coppe/UFRJ) estão à frente de um projeto com potencial para transformar a cadeia produtiva do lúpulo no Brasil e posicionar o país como...",
     "summary": "Pesquisadores do Instituto Alberto Luiz Coimbra de Pós-Graduação e Pesquisa em Engenharia (Coppe/UFRJ) estão à frente de um projeto com potencial para transformar a cadeia produtiva do lúpulo no Brasil e posicionar o país como...",
     "analysis": "",
+    "body": [
+      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Projeto pode reposicionar país no mercado de lúpulo.",
+      "Projeto pode reposicionar país no mercado de lúpulo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "/assets/news-fallbacks/projeto-pode-reposicionar-pais-no-mercado-de-lupulo.svg",
-    "feedImageUrl": "/assets/news-fallbacks/projeto-pode-reposicionar-pais-no-mercado-de-lupulo.svg",
     "sourceImageUrl": "/assets/news-fallbacks/projeto-pode-reposicionar-pais-no-mercado-de-lupulo.svg",
+    "feedImageUrl": "/assets/news-fallbacks/projeto-pode-reposicionar-pais-no-mercado-de-lupulo.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -8856,11 +11628,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "projeto-pode-reposicionar-pais-no-mercado-de-lupulo"
-    ],
-    "body": [
-      "Agencia Brasil publicou em 16 de mai de 2026 a base desta noticia sobre Projeto pode reposicionar país no mercado de lúpulo.",
-      "Projeto pode reposicionar país no mercado de lúpulo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -10917,6 +13684,55 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://agencia.ac.gov.br/governo-leva-assistencia-a-familias-atingidas-por-desbarrancamento-em-rodrigues-alves/",
+    "slug": "governo-leva-assistencia-a-familias-atingidas-por-desbarrancamento-em-rodrigues-alves",
+    "title": "Governo leva assistência a famílias atingidas por desbarrancamento em Rodrigues Alves",
+    "eyebrow": "Prefeitura",
+    "date": "15 de mai de 2026",
+    "publishedAt": "2026-05-15T20:49:05.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/governo-leva-assistencia-a-familias-atingidas-por-desbarrancamento-em-rodrigues-alves/",
+    "sourceLabel": "Governo leva assistência a famílias atingidas por desbarrancamento em Rodrigues Alves",
+    "lede": "O governo do Acre, por meio da Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e da Casa Civil, realizou na tarde desta quinta-feira, 14, a entrega de 20 cestas básicas para famílias que tiveram suas...",
+    "summary": "O governo do Acre, por meio da Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e da Casa Civil, realizou na tarde desta quinta-feira, 14, a entrega de 20 cestas básicas para famílias que tiveram suas...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_3777.JPG-300x225.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_3777.JPG-300x225.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_3777.JPG-300x225.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-leva-assistencia-a-familias-atingidas-por-desbarrancamento-em-rodrigues-alves/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-leva-assistencia-a-familias-atingidas-por-desbarrancamento-em-rodrigues-alves/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-leva-assistencia-a-familias-atingidas-por-desbarrancamento-em-rodrigues-alves"
+    ],
+    "body": [
+      "Agencia Acre publicou em 15 de mai de 2026 a base desta noticia sobre Governo leva assistência a famílias atingidas por desbarrancamento em Rodrigues Alves.",
+      "Governo leva assistência a famílias atingidas por desbarrancamento em Rodrigues Alves e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
     "id": "https://jurua24horas.com/2026/05/prefeitura-de-rodrigues-alves-promove-homenagem-ao-dia-do-gari-com-programacao-especial-no-parque-municipal/",
     "slug": "prefeitura-de-rodrigues-alves-promove-homenagem-ao-dia-do-gari-com-programacao-especial-no-parqu",
     "title": "Prefeitura de Rodrigues Alves promove homenagem ao Dia do Gari com programação especial no Parque Municipal",
@@ -11583,6 +14399,55 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "justica-define-regras-para-entrada-e-permanencia-de-menores-em-eventos-no-interior-do-acre"
+    ]
+  },
+  {
+    "id": "https://agencia.ac.gov.br/governo-do-acre-acompanha-retomada-das-obras-do-arco-viario-de-rio-branco/",
+    "slug": "governo-do-acre-acompanha-retomada-das-obras-do-arco-viario-de-rio-branco",
+    "title": "Governo do Acre acompanha retomada das obras do Arco Viário de Rio Branco",
+    "eyebrow": "Prefeitura",
+    "date": "15 de mai de 2026",
+    "publishedAt": "2026-05-15T20:59:44.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/governo-do-acre-acompanha-retomada-das-obras-do-arco-viario-de-rio-branco/",
+    "sourceLabel": "Governo do Acre acompanha retomada das obras do Arco Viário de Rio Branco",
+    "lede": "O governo do Acre, por meio do Departamento de Estradas de Rodagem, Infraestrutura Hidroviária e Aeroportuária (Deracre), acompanha a retomada das obras do Arco Viário de Rio Branco, importante projeto voltado à melhoraria do...",
+    "summary": "O governo do Acre, por meio do Departamento de Estradas de Rodagem, Infraestrutura Hidroviária e Aeroportuária (Deracre), acompanha a retomada das obras do Arco Viário de Rio Branco, importante projeto voltado à melhoraria do...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-14-at-17.43.01-1-1024x683.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-14-at-17.43.01-1-1024x683.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-14-at-17.43.01-1-1024x683.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-do-acre-acompanha-retomada-das-obras-do-arco-viario-de-rio-branco/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governo-do-acre-acompanha-retomada-das-obras-do-arco-viario-de-rio-branco/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-do-acre-acompanha-retomada-das-obras-do-arco-viario-de-rio-branco"
+    ],
+    "body": [
+      "Agencia Acre publicou em 15 de mai de 2026 a base desta noticia sobre Governo do Acre acompanha retomada das obras do Arco Viário de Rio Branco.",
+      "Governo do Acre acompanha retomada das obras do Arco Viário de Rio Branco e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -13548,10 +16413,10 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "xi-jinping-visitara-eua-apos-reuniao-historica-com-trump-diz-china"
     ],
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GettyImages-2275744300.jpg?w=200",
-    "originalFeedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GettyImages-2275744300.jpg?w=200",
-    "originalSourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GettyImages-2275744300.jpg?w=200",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/jardim-secreto-na-china-saiba-por-que-xi-jinping-convidou-trump-ao-local/",
@@ -15810,11 +18675,16 @@ window.NEWS_DATA = [
     "lede": "A resposta rápida da Polícia Civil do Acre, por meio do NEPATRI, resultou na prisão em flagrante de F.M.B.",
     "summary": "A resposta rápida da Polícia Civil do Acre, por meio do NEPATRI, resultou na prisão em flagrante de F.M.B.",
     "analysis": "",
+    "body": [
+      "Jurua Online publicou em 15 de mai de 2026 a base desta noticia sobre POLÍCIA CIVIL AGE RÁPIDO E NEPATRI PRENDE AUTOR DE FURTOS EM VEÍCULOS HORAS APÓS OS CRIMES EM CRUZEIRO DO SUL.",
+      "POLÍCIA CIVIL AGE RÁPIDO E NEPATRI PRENDE AUTOR DE FURTOS EM VEÍCULOS HORAS APÓS OS CRIMES EM CRUZEIRO DO SUL e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/a7970511-a225-4dcf-8236-07b638393c6b.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/a7970511-a225-4dcf-8236-07b638393c6b.jpeg",
     "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/a7970511-a225-4dcf-8236-07b638393c6b.jpeg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/a7970511-a225-4dcf-8236-07b638393c6b.jpeg",
     "imageCredit": "",
     "imageFocus": "center 42%",
     "imageFit": "",
@@ -15825,22 +18695,25 @@ window.NEWS_DATA = [
       {
         "name": "Jurua Online",
         "url": "https://juruaonline.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/"
+      },
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/"
       }
     ],
     "alternateSources": [
       {
         "name": "Jurua Online",
         "url": "https://juruaonline.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/"
+      },
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/"
       }
     ],
-    "sourceCount": 1,
+    "sourceCount": 2,
     "alternateSlugs": [
       "policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cr"
-    ],
-    "body": [
-      "Jurua Online publicou em 15 de mai de 2026 a base desta noticia sobre POLÍCIA CIVIL AGE RÁPIDO E NEPATRI PRENDE AUTOR DE FURTOS EM VEÍCULOS HORAS APÓS OS CRIMES EM CRUZEIRO DO SUL.",
-      "POLÍCIA CIVIL AGE RÁPIDO E NEPATRI PRENDE AUTOR DE FURTOS EM VEÍCULOS HORAS APÓS OS CRIMES EM CRUZEIRO DO SUL e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -16044,52 +18917,52 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://juruacomunicacao.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/",
-    "slug": "policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cr",
-    "title": "Policia civil age rápido e Nepatri prende autor de furtos em veículos horas após os crimes em Cruzeiro do Sul",
+    "id": "https://agencia.ac.gov.br/processo-seletivo-para-brigadistas-comunitarios-entra-na-fase-final-com-curso-de-formacao-e-simulacao-de-combate-a-incendio/",
+    "slug": "processo-seletivo-para-brigadistas-comunitarios-entra-na-fase-final-com-curso-de-formacao-e-simu",
+    "title": "Processo seletivo para brigadistas comunitários entra na fase final com curso de formação e simulação de combate a incêndio",
     "eyebrow": "Prefeitura",
     "date": "15 de mai de 2026",
-    "publishedAt": "2026-05-15T22:09:18.000Z",
+    "publishedAt": "2026-05-15T20:28:37.000Z",
     "category": "Prefeitura",
     "categoryKey": "prefeitura",
     "previewClass": "thumb-prefeitura",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/",
-    "sourceLabel": "Policia civil age rápido e Nepatri prende autor de furtos em veículos horas após os crimes em Cruzeiro do Sul",
-    "lede": "A resposta rápida da Polícia Civil do Acre, por meio do NEPATRI, resultou na prisão em flagrante de F.M.B.",
-    "summary": "A resposta rápida da Polícia Civil do Acre, por meio do NEPATRI, resultou na prisão em flagrante de F.M.B.",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/processo-seletivo-para-brigadistas-comunitarios-entra-na-fase-final-com-curso-de-formacao-e-simulacao-de-combate-a-incendio/",
+    "sourceLabel": "Processo seletivo para brigadistas comunitários entra na fase final com curso de formação e simulação de combate a incêndio",
+    "lede": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), em parceria com o Corpo de Bombeiros Militar do Estado do Acre (CBMAC), concluiu nesta sexta-feira, 15, uma das etapas mais decisivas do processo...",
+    "summary": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), em parceria com o Corpo de Bombeiros Militar do Estado do Acre (CBMAC), concluiu nesta sexta-feira, 15, uma das etapas mais decisivas do processo...",
     "analysis": "",
-    "body": [
-      "Jurua Comunicacao publicou em 15 de mai de 2026 a base desta noticia sobre Policia civil age rápido e Nepatri prende autor de furtos em veículos horas após os crimes em Cruzeiro do Sul.",
-      "Policia civil age rápido e Nepatri prende autor de furtos em veículos horas após os crimes em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/05/VID-20260515-WA0228.mp4",
-    "sourceImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/05/VID-20260515-WA0228.mp4",
-    "feedImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/05/VID-20260515-WA0228.mp4",
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/A7408973-scaled.jpg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/A7408973-scaled.jpg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/A7408973-scaled.jpg",
     "imageCredit": "",
-    "imageFocus": "center 42%",
+    "imageFocus": "center 38%",
     "imageFit": "",
     "media": null,
     "priority": 0,
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/"
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/processo-seletivo-para-brigadistas-comunitarios-entra-na-fase-final-com-curso-de-formacao-e-simulacao-de-combate-a-incendio/"
       }
     ],
     "alternateSources": [
       {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cruzeiro-do-sul/"
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/processo-seletivo-para-brigadistas-comunitarios-entra-na-fase-final-com-curso-de-formacao-e-simulacao-de-combate-a-incendio/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "policia-civil-age-rapido-e-nepatri-prende-autor-de-furtos-em-veiculos-horas-apos-os-crimes-em-cr"
+      "processo-seletivo-para-brigadistas-comunitarios-entra-na-fase-final-com-curso-de-formacao-e-simu"
+    ],
+    "body": [
+      "Agencia Acre publicou em 15 de mai de 2026 a base desta noticia sobre Processo seletivo para brigadistas comunitários entra na fase final com curso de formação e simulação de combate a incêndio.",
+      "Processo seletivo para brigadistas comunitários entra na fase final com curso de formação e simulação de combate a incêndio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -26117,10 +28990,10 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "sol-forte-e-tempo-firme-predominam-no-vale-do-jurua-nesta-quinta-feira"
     ],
-    "originalImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-04T072233.026.jpg",
-    "originalFeedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-04T072233.026.jpg",
-    "originalSourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-04T072233.026.jpg",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/governo-do-acre-realiza-capacitacao-sobre-hipertensao-e-pe-diabetico-na-regional-tarauaca-envira/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-realiza-capacitacao-sobre-hipertensao-e-pe-diabetico-na-regional-tarauaca-envira",
@@ -44957,104 +47830,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/realities/casa-do-patrao-jp-luiza-morena-e-nikita-estao-no-terceiro-ta-na-reta/",
-    "slug": "casa-do-patrao-jp-luiza-morena-e-nikita-estao-no-terceiro-ta-na-reta",
-    "title": "“Casa do Patrão”: JP, Luiza, Morena e Nikita estão no terceiro Tá Na Reta",
-    "eyebrow": "Cultura",
-    "date": "12 de mai de 2026",
-    "publishedAt": "2026-05-13T03:15:17.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/realities/casa-do-patrao-jp-luiza-morena-e-nikita-estao-no-terceiro-ta-na-reta/",
-    "sourceLabel": "“Casa do Patrão”: JP, Luiza, Morena e Nikita estão no terceiro Tá Na Reta",
-    "lede": "CNN Brasil publicou uma atualização sobre “Casa do Patrão”: JP, Luiza, Morena e Nikita estão no terceiro Tá Na Reta. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre “Casa do Patrão”: JP, Luiza, Morena e Nikita estão no terceiro Tá Na Reta. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 12 de mai de 2026 a base desta noticia sobre “Casa do Patrão”: JP, Luiza, Morena e Nikita estão no terceiro Tá Na Reta.",
-      "“Casa do Patrão”: JP, Luiza, Morena e Nikita estão no terceiro Tá Na Reta e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.preprod.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/eliminados-a-fazenda-e1765938958836.png?w=200",
-    "sourceImageUrl": "https://admin.preprod.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/eliminados-a-fazenda-e1765938958836.png?w=200",
-    "feedImageUrl": "https://admin.preprod.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/eliminados-a-fazenda-e1765938958836.png?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/realities/casa-do-patrao-jp-luiza-morena-e-nikita-estao-no-terceiro-ta-na-reta/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/realities/casa-do-patrao-jp-luiza-morena-e-nikita-estao-no-terceiro-ta-na-reta/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "casa-do-patrao-jp-luiza-morena-e-nikita-estao-no-terceiro-ta-na-reta"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/conan-obrien-retorna-para-apresentar-o-oscar-2027/",
-    "slug": "conan-o-brien-retorna-para-apresentar-o-oscar-2027",
-    "title": "Conan O’Brien retorna para apresentar o Oscar 2027",
-    "eyebrow": "Nacional",
-    "date": "12 de mai de 2026",
-    "publishedAt": "2026-05-13T02:10:06.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/conan-obrien-retorna-para-apresentar-o-oscar-2027/",
-    "sourceLabel": "Conan O’Brien retorna para apresentar o Oscar 2027",
-    "lede": "CNN Brasil publicou uma atualização sobre Conan O’Brien retorna para apresentar o Oscar 2027. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Conan O’Brien retorna para apresentar o Oscar 2027. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 12 de mai de 2026 a base desta noticia sobre Conan O’Brien retorna para apresentar o Oscar 2027.",
-      "Conan O’Brien retorna para apresentar o Oscar 2027 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/24668_9A9DBBCFB1EB7D6C-1.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/24668_9A9DBBCFB1EB7D6C-1.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/24668_9A9DBBCFB1EB7D6C-1.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/conan-obrien-retorna-para-apresentar-o-oscar-2027/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/conan-obrien-retorna-para-apresentar-o-oscar-2027/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "conan-o-brien-retorna-para-apresentar-o-oscar-2027"
-    ]
-  },
-  {
     "id": "https://juruaonline.com.br/senado-aprova-renovacao-automatica-da-cnh-para-bons-condutores-veja-quem-tera-direito/",
     "slug": "senado-aprova-renovacao-automatica-da-cnh-para-bons-condutores-veja-quem-tera-direito",
     "title": "Senado aprova renovação automática da CNH para “bons condutores”; veja quem terá direito",
@@ -45101,508 +47876,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "senado-aprova-renovacao-automatica-da-cnh-para-bons-condutores-veja-quem-tera-direito"
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher",
-    "slug": "stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher",
-    "title": "STF julga validade de lei da igualdade salarial entre homem e mulher",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T22:40:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher",
-    "sourceLabel": "STF julga validade de lei da igualdade salarial entre homem e mulher",
-    "lede": "O Supremo Tribunal Federal (STF) iniciou nesta quinta-feira (13) o julgamento sobre a constitucionalidade da lei que garantiu igualdade salarial entre homens e mulheres.",
-    "summary": "O Supremo Tribunal Federal (STF) iniciou nesta quinta-feira (13) o julgamento sobre a constitucionalidade da lei que garantiu igualdade salarial entre homens e mulheres.",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre STF julga validade de lei da igualdade salarial entre homem e mulher.",
-      "STF julga validade de lei da igualdade salarial entre homem e mulher e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher.svg",
-    "feedImageUrl": "/assets/news-fallbacks/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "stf-julga-validade-de-lei-da-igualdade-salarial-entre-homem-e-mulher"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-prepara-resposta-sobre-conversa-com-daniel-vorcaro/",
-    "slug": "flavio-bolsonaro-prepara-resposta-sobre-conversa-com-daniel-vorcaro",
-    "title": "Flávio Bolsonaro prepara resposta sobre conversa com Daniel Vorcaro",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:36:58.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-prepara-resposta-sobre-conversa-com-daniel-vorcaro/",
-    "sourceLabel": "Flávio Bolsonaro prepara resposta sobre conversa com Daniel Vorcaro",
-    "lede": "CNN Brasil publicou uma atualização sobre Flávio Bolsonaro prepara resposta sobre conversa com Daniel Vorcaro. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Flávio Bolsonaro prepara resposta sobre conversa com Daniel Vorcaro. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro prepara resposta sobre conversa com Daniel Vorcaro.",
-      "Flávio Bolsonaro prepara resposta sobre conversa com Daniel Vorcaro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/O-senador-Flavio-Bolsonaro-e1765906268178.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/O-senador-Flavio-Bolsonaro-e1765906268178.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/O-senador-Flavio-Bolsonaro-e1765906268178.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-prepara-resposta-sobre-conversa-com-daniel-vorcaro/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/flavio-bolsonaro-prepara-resposta-sobre-conversa-com-daniel-vorcaro/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-prepara-resposta-sobre-conversa-com-daniel-vorcaro"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado/",
-    "slug": "missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado",
-    "title": "Missão vai pedir cassação de Flávio no Conselho de Ética do Senado",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:32:08.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado/",
-    "sourceLabel": "Missão vai pedir cassação de Flávio no Conselho de Ética do Senado",
-    "lede": "CNN Brasil publicou uma atualização sobre Missão vai pedir cassação de Flávio no Conselho de Ética do Senado. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Missão vai pedir cassação de Flávio no Conselho de Ética do Senado. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Missão vai pedir cassação de Flávio no Conselho de Ética do Senado.",
-      "Missão vai pedir cassação de Flávio no Conselho de Ética do Senado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado.svg",
-    "feedImageUrl": "/assets/news-fallbacks/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "missao-vai-pedir-cassacao-de-flavio-no-conselho-de-etica-do-senado"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/eua-retiram-exigencia-de-caucao-para-torcedores-da-copa-do-mundo/",
-    "slug": "eua-retira-exigencia-de-caucao-para-torcedores-da-copa-com-fifa-pass",
-    "title": "EUA retira exigência de caução para torcedores da Copa com Fifa Pass",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:23:21.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/eua-retiram-exigencia-de-caucao-para-torcedores-da-copa-do-mundo/",
-    "sourceLabel": "EUA retira exigência de caução para torcedores da Copa com Fifa Pass",
-    "lede": "CNN Brasil publicou uma atualização sobre EUA retira exigência de caução para torcedores da Copa com Fifa Pass. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre EUA retira exigência de caução para torcedores da Copa com Fifa Pass. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre EUA retira exigência de caução para torcedores da Copa com Fifa Pass.",
-      "EUA retira exigência de caução para torcedores da Copa com Fifa Pass e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/GettyImages-2272730379-e1777322414315.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/GettyImages-2272730379-e1777322414315.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/GettyImages-2272730379-e1777322414315.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/eua-retiram-exigencia-de-caucao-para-torcedores-da-copa-do-mundo/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/eua-retiram-exigencia-de-caucao-para-torcedores-da-copa-do-mundo/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "eua-retira-exigencia-de-caucao-para-torcedores-da-copa-com-fifa-pass"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/empresario-confirma-ter-intermediado-negociacao-entre-vorcaro-e-flavio/",
-    "slug": "empresario-confirma-ter-intermediado-negociacao-entre-vorcaro-e-flavio",
-    "title": "Empresário confirma ter intermediado negociação entre Vorcaro e Flávio",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:22:05.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/empresario-confirma-ter-intermediado-negociacao-entre-vorcaro-e-flavio/",
-    "sourceLabel": "Empresário confirma ter intermediado negociação entre Vorcaro e Flávio",
-    "lede": "CNN Brasil publicou uma atualização sobre Empresário confirma ter intermediado negociação entre Vorcaro e Flávio. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Empresário confirma ter intermediado negociação entre Vorcaro e Flávio. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Empresário confirma ter intermediado negociação entre Vorcaro e Flávio.",
-      "Empresário confirma ter intermediado negociação entre Vorcaro e Flávio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/WhatsApp-Image-2026-03-24-at-19.06.41.jpeg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/WhatsApp-Image-2026-03-24-at-19.06.41.jpeg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/WhatsApp-Image-2026-03-24-at-19.06.41.jpeg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/empresario-confirma-ter-intermediado-negociacao-entre-vorcaro-e-flavio/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/empresario-confirma-ter-intermediado-negociacao-entre-vorcaro-e-flavio/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "empresario-confirma-ter-intermediado-negociacao-entre-vorcaro-e-flavio"
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/governo-cria-subsidio-de-ate-r-089-para-segurar-preco-da-gasolina",
-    "slug": "governo-cria-subsidio-de-ate-r-0-89-para-segurar-preco-da-gasolina",
-    "title": "Governo cria subsídio de até R$ 0,89 para segurar preço da gasolina",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T19:59:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/governo-cria-subsidio-de-ate-r-089-para-segurar-preco-da-gasolina",
-    "sourceLabel": "Governo cria subsídio de até R$ 0,89 para segurar preço da gasolina",
-    "lede": "O governo federal anunciou nesta quarta-feira (13) uma nova medida para tentar conter a alta dos combustíveis no país.",
-    "summary": "O governo federal anunciou nesta quarta-feira (13) uma nova medida para tentar conter a alta dos combustíveis no país.",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Governo cria subsídio de até R$ 0,89 para segurar preço da gasolina.",
-      "Governo cria subsídio de até R$ 0,89 para segurar preço da gasolina e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/governo-cria-subsidio-de-ate-r-0-89-para-segurar-preco-da-gasolina.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/governo-cria-subsidio-de-ate-r-0-89-para-segurar-preco-da-gasolina.svg",
-    "feedImageUrl": "/assets/news-fallbacks/governo-cria-subsidio-de-ate-r-0-89-para-segurar-preco-da-gasolina.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/governo-cria-subsidio-de-ate-r-089-para-segurar-preco-da-gasolina"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/governo-cria-subsidio-de-ate-r-089-para-segurar-preco-da-gasolina"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-cria-subsidio-de-ate-r-0-89-para-segurar-preco-da-gasolina"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/governo-medida-combustiveis-gasolina.ghtml",
-    "slug": "governo-federal-anuncia-medida-para-conter-aumento-do-preco-da-gasolina-e-do-diesel",
-    "title": "Governo federal anuncia medida para conter aumento do preço da gasolina e do diesel",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T18:19:58.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/governo-medida-combustiveis-gasolina.ghtml",
-    "sourceLabel": "Governo federal anuncia medida para conter aumento do preço da gasolina e do diesel",
-    "lede": "Governo anuncia medida para conter aumento do preço da gasolina e do diesel O governo federal anunciou, nesta quarta-feira (13), mais uma medida provisória (MP) com ações para conter a alta dos combustíveis, mais...",
-    "summary": "Governo anuncia medida para conter aumento do preço da gasolina e do diesel O governo federal anunciou, nesta quarta-feira (13), mais uma medida provisória (MP) com ações para conter a alta dos combustíveis, mais...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Governo federal anuncia medida para conter aumento do preço da gasolina e do diesel.",
-      "Governo federal anuncia medida para conter aumento do preço da gasolina e do diesel e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/6iwrv-ME9Xmg2l2vPXEfoREf1u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/5/F/cshCx1SziPw8sTAEnamQ/edicao-imagens-g1-12-.png",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/6iwrv-ME9Xmg2l2vPXEfoREf1u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/5/F/cshCx1SziPw8sTAEnamQ/edicao-imagens-g1-12-.png",
-    "feedImageUrl": "https://s2-g1.glbimg.com/6iwrv-ME9Xmg2l2vPXEfoREf1u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/5/F/cshCx1SziPw8sTAEnamQ/edicao-imagens-g1-12-.png",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/governo-medida-combustiveis-gasolina.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/governo-medida-combustiveis-gasolina.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-federal-anuncia-medida-para-conter-aumento-do-preco-da-gasolina-e-do-diesel"
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/13/pre-candidato-ao-senado-chama-joao-paulo-bittar-de-nepo-baby-e-lembra-voto-de-bittar-pela-taxa-das-blusinhas/",
-    "slug": "pre-candidato-ao-senado-chama-joao-paulo-bittar-de-nepo-baby-e-lembra-voto-de-bittar-pela-taxa-d",
-    "title": "Pré-candidato ao Senado chama João Paulo Bittar de “Nepo Baby” e lembra voto de Bittar pela taxa das blusinhas",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T17:41:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/13/pre-candidato-ao-senado-chama-joao-paulo-bittar-de-nepo-baby-e-lembra-voto-de-bittar-pela-taxa-das-blusinhas/",
-    "sourceLabel": "Pré-candidato ao Senado chama João Paulo Bittar de “Nepo Baby” e lembra voto de Bittar pela taxa das blusinhas",
-    "lede": "O pré-candidato ao Senado pela federação formada por Rede Sustentabilidade e Partido Socialismo e Liberdade, Inácio Moreira, divulgou nesta quarta-feira (13) um vídeo nas redes sociais em que faz críticas a João Paulo Bittar...",
-    "summary": "O pré-candidato ao Senado pela federação formada por Rede Sustentabilidade e Partido Socialismo e Liberdade, Inácio Moreira, divulgou nesta quarta-feira (13) um vídeo nas redes sociais em que faz críticas a João Paulo Bittar...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 13 de mai de 2026 a base desta noticia sobre Pré-candidato ao Senado chama João Paulo Bittar de “Nepo Baby” e lembra voto de Bittar pela taxa das blusinhas.",
-      "Pré-candidato ao Senado chama João Paulo Bittar de “Nepo Baby” e lembra voto de Bittar pela taxa das blusinhas e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/NEPO_BA.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/NEPO_BA.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/NEPO_BA.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/pre-candidato-ao-senado-chama-joao-paulo-bittar-de-nepo-baby-e-lembra-voto-de-bittar-pela-taxa-das-blusinhas/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/pre-candidato-ao-senado-chama-joao-paulo-bittar-de-nepo-baby-e-lembra-voto-de-bittar-pela-taxa-das-blusinhas/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "pre-candidato-ao-senado-chama-joao-paulo-bittar-de-nepo-baby-e-lembra-voto-de-bittar-pela-taxa-d"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/economia/agronegocios/noticia/2026/05/13/brasil-vai-enviar-informacoes-para-ue-para-resolver-veto-a-carne-diz-ministerio.ghtml",
-    "slug": "brasil-vai-enviar-informacoes-para-ue-para-resolver-veto-a-carne-diz-ministerio",
-    "title": "Brasil vai enviar informações para UE para resolver veto à carne, diz Ministério",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T16:44:37.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/agronegocios/noticia/2026/05/13/brasil-vai-enviar-informacoes-para-ue-para-resolver-veto-a-carne-diz-ministerio.ghtml",
-    "sourceLabel": "Brasil vai enviar informações para UE para resolver veto à carne, diz Ministério",
-    "lede": "Miriam Leitão: reação a veto da UE contra carne brasileira está sendo imediata O secretário de Comércio e Relações Internacionais do Ministério da Agricultura, Luis Rua disse nesta quarta-feira (13) que a União Europeia vai...",
-    "summary": "Miriam Leitão: reação a veto da UE contra carne brasileira está sendo imediata O secretário de Comércio e Relações Internacionais do Ministério da Agricultura, Luis Rua disse nesta quarta-feira (13) que a União Europeia vai...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Brasil vai enviar informações para UE para resolver veto à carne, diz Ministério.",
-      "Brasil vai enviar informações para UE para resolver veto à carne, diz Ministério e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/o2Y1Y7x2MQtsLfUQqBBqpuZMjMo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/V/m/MEBMN6SjOxGsYsxWqPGA/carne-bovina-0-1.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/o2Y1Y7x2MQtsLfUQqBBqpuZMjMo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/V/m/MEBMN6SjOxGsYsxWqPGA/carne-bovina-0-1.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/o2Y1Y7x2MQtsLfUQqBBqpuZMjMo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/V/m/MEBMN6SjOxGsYsxWqPGA/carne-bovina-0-1.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/agronegocios/noticia/2026/05/13/brasil-vai-enviar-informacoes-para-ue-para-resolver-veto-a-carne-diz-ministerio.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/agronegocios/noticia/2026/05/13/brasil-vai-enviar-informacoes-para-ue-para-resolver-veto-a-carne-diz-ministerio.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "brasil-vai-enviar-informacoes-para-ue-para-resolver-veto-a-carne-diz-ministerio"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/aumento-de-prazo-para-mulher-denunciar-violencia-domestica-avanca-no-senado/",
-    "slug": "aumento-de-prazo-para-mulher-denunciar-violencia-domestica-avanca-no-senado",
-    "title": "Aumento de prazo para mulher denunciar violência doméstica avança no Senado",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:56:58.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/aumento-de-prazo-para-mulher-denunciar-violencia-domestica-avanca-no-senado/",
-    "sourceLabel": "Aumento de prazo para mulher denunciar violência doméstica avança no Senado",
-    "lede": "CNN Brasil publicou uma atualização sobre Aumento de prazo para mulher denunciar violência doméstica avança no Senado. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Aumento de prazo para mulher denunciar violência doméstica avança no Senado. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Aumento de prazo para mulher denunciar violência doméstica avança no Senado.",
-      "Aumento de prazo para mulher denunciar violência doméstica avança no Senado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/BR_CNN_110526_360_CLEAN_frame_203567.jpeg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/BR_CNN_110526_360_CLEAN_frame_203567.jpeg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/BR_CNN_110526_360_CLEAN_frame_203567.jpeg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/aumento-de-prazo-para-mulher-denunciar-violencia-domestica-avanca-no-senado/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/aumento-de-prazo-para-mulher-denunciar-violencia-domestica-avanca-no-senado/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "aumento-de-prazo-para-mulher-denunciar-violencia-domestica-avanca-no-senado"
     ]
   },
   {
@@ -45657,504 +47930,6 @@ window.NEWS_DATA = [
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/eleicoes/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf/",
-    "slug": "flavio-bolsonaro-se-reune-com-edson-fachin-no-stf",
-    "title": "Flávio Bolsonaro se reúne com Edson Fachin no STF",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:52:24.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf/",
-    "sourceLabel": "Flávio Bolsonaro se reúne com Edson Fachin no STF",
-    "lede": "Encontro ocorreu a pedido do filho mais velho de Jair Bolsonaro (PL)",
-    "summary": "Encontro ocorreu a pedido do filho mais velho de Jair Bolsonaro (PL)",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro se reúne com Edson Fachin no STF.",
-      "Flávio Bolsonaro se reúne com Edson Fachin no STF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf.svg",
-    "feedImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/eleicoes/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/eleicoes/flavio-bolsonaro-se-reune-com-edson-fachin-no-stf/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-se-reune-com-edson-fachin-no-stf"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino/",
-    "slug": "temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino",
-    "title": "Temos que ter cuidado se até detergente vira confusão, diz Dino",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:49:53.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino/",
-    "sourceLabel": "Temos que ter cuidado se até detergente vira confusão, diz Dino",
-    "lede": "CNN Brasil publicou uma atualização sobre Temos que ter cuidado se até detergente vira confusão, diz Dino. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Temos que ter cuidado se até detergente vira confusão, diz Dino. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Temos que ter cuidado se até detergente vira confusão, diz Dino.",
-      "Temos que ter cuidado se até detergente vira confusão, diz Dino e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino.svg",
-    "feedImageUrl": "/assets/news-fallbacks/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "temos-que-ter-cuidado-se-ate-detergente-vira-confusao-diz-dino"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-de-investigacoes-de-ciro-nogueira-no-caso-master/",
-    "slug": "quaest-maioria-nao-sabia-de-investigacoes-de-ciro-nogueira-no-caso-master",
-    "title": "Quaest: maioria não sabia de investigações de Ciro Nogueira no caso Master",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:49:08.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-de-investigacoes-de-ciro-nogueira-no-caso-master/",
-    "sourceLabel": "Quaest: maioria não sabia de investigações de Ciro Nogueira no caso Master",
-    "lede": "CNN Brasil publicou uma atualização sobre Quaest: maioria não sabia de investigações de Ciro Nogueira no caso Master. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Quaest: maioria não sabia de investigações de Ciro Nogueira no caso Master. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: maioria não sabia de investigações de Ciro Nogueira no caso Master.",
-      "Quaest: maioria não sabia de investigações de Ciro Nogueira no caso Master e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/imagens-cn-11.png?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/imagens-cn-11.png?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/imagens-cn-11.png?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-de-investigacoes-de-ciro-nogueira-no-caso-master/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-de-investigacoes-de-ciro-nogueira-no-caso-master/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-maioria-nao-sabia-de-investigacoes-de-ciro-nogueira-no-caso-master"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/fachin-nao-ha-jurisdicao-sem-que-juizes-possam-decidir-livres-de-pressoes/",
-    "slug": "fachin-nao-ha-jurisdicao-sem-que-juizes-possam-decidir-livres-de-pressoes",
-    "title": "Fachin: não há jurisdição sem que juízes possam decidir livres de pressões",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:39:29.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/fachin-nao-ha-jurisdicao-sem-que-juizes-possam-decidir-livres-de-pressoes/",
-    "sourceLabel": "Fachin: não há jurisdição sem que juízes possam decidir livres de pressões",
-    "lede": "CNN Brasil publicou uma atualização sobre Fachin: não há jurisdição sem que juízes possam decidir livres de pressões. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Fachin: não há jurisdição sem que juízes possam decidir livres de pressões. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Fachin: não há jurisdição sem que juízes possam decidir livres de pressões.",
-      "Fachin: não há jurisdição sem que juízes possam decidir livres de pressões e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/2-bir.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/2-bir.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/2-bir.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/fachin-nao-ha-jurisdicao-sem-que-juizes-possam-decidir-livres-de-pressoes/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/fachin-nao-ha-jurisdicao-sem-que-juizes-possam-decidir-livres-de-pressoes/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "fachin-nao-ha-jurisdicao-sem-que-juizes-possam-decidir-livres-de-pressoes"
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/13/flavio-visita-fachin-em-aceno-de-pacificacao-ao-stf/",
-    "slug": "flavio-visita-fachin-em-aceno-de-pacificacao-ao-stf",
-    "title": "Flavio visita Fachin em aceno de pacificação ao STF",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:38:33.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/13/flavio-visita-fachin-em-aceno-de-pacificacao-ao-stf/",
-    "sourceLabel": "Flavio visita Fachin em aceno de pacificação ao STF",
-    "lede": "Flávio foi escolhido pelo pai, Jair Bolsonaro, para ser o candidato do PL à presidência em 2026 \" O pré-candidato do PL à sucessão presidencial, Flávio Bolsonaro, fará uma visita institucional nesta quarta-feira (13) ao...",
-    "summary": "Flávio foi escolhido pelo pai, Jair Bolsonaro, para ser o candidato do PL à presidência em 2026 \" O pré-candidato do PL à sucessão presidencial, Flávio Bolsonaro, fará uma visita institucional nesta quarta-feira (13) ao...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 13 de mai de 2026 a base desta noticia sobre Flavio visita Fachin em aceno de pacificação ao STF.",
-      "Flavio visita Fachin em aceno de pacificação ao STF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/61126e30-0e01-11f1-9972-d3f265c101c6.jpg.webp",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/61126e30-0e01-11f1-9972-d3f265c101c6.jpg.webp",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/61126e30-0e01-11f1-9972-d3f265c101c6.jpg.webp",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/flavio-visita-fachin-em-aceno-de-pacificacao-ao-stf/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/flavio-visita-fachin-em-aceno-de-pacificacao-ao-stf/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-visita-fachin-em-aceno-de-pacificacao-ao-stf"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-que-senado-rejeitou-nome-de-messias-ao-stf/",
-    "slug": "quaest-maioria-nao-sabia-que-senado-rejeitou-nome-de-messias-ao-stf",
-    "title": "Quaest: maioria não sabia que Senado rejeitou nome de Messias ao STF",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:32:50.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-que-senado-rejeitou-nome-de-messias-ao-stf/",
-    "sourceLabel": "Quaest: maioria não sabia que Senado rejeitou nome de Messias ao STF",
-    "lede": "CNN Brasil publicou uma atualização sobre Quaest: maioria não sabia que Senado rejeitou nome de Messias ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Quaest: maioria não sabia que Senado rejeitou nome de Messias ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: maioria não sabia que Senado rejeitou nome de Messias ao STF.",
-      "Quaest: maioria não sabia que Senado rejeitou nome de Messias ao STF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://public.flourish.studio/visualisation/28957048/thumbnail",
-    "sourceImageUrl": "https://public.flourish.studio/visualisation/28957048/thumbnail",
-    "feedImageUrl": "https://public.flourish.studio/visualisation/28957048/thumbnail",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-que-senado-rejeitou-nome-de-messias-ao-stf/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/quaest-maioria-nao-sabia-que-senado-rejeitou-nome-de-messias-ao-stf/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-maioria-nao-sabia-que-senado-rejeitou-nome-de-messias-ao-stf"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/quaest-53-acreditam-que-senado-nao-traiu-governo-ao-rejeitar-messias/",
-    "slug": "quaest-53-acreditam-que-senado-nao-traiu-governo-ao-rejeitar-messias",
-    "title": "Quaest: 53% acreditam que Senado não traiu governo ao rejeitar Messias",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:28:06.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/quaest-53-acreditam-que-senado-nao-traiu-governo-ao-rejeitar-messias/",
-    "sourceLabel": "Quaest: 53% acreditam que Senado não traiu governo ao rejeitar Messias",
-    "lede": "CNN Brasil publicou uma atualização sobre Quaest: 53% acreditam que Senado não traiu governo ao rejeitar Messias. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Quaest: 53% acreditam que Senado não traiu governo ao rejeitar Messias. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: 53% acreditam que Senado não traiu governo ao rejeitar Messias.",
-      "Quaest: 53% acreditam que Senado não traiu governo ao rejeitar Messias e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://public.flourish.studio/visualisation/28957110/thumbnail",
-    "sourceImageUrl": "https://public.flourish.studio/visualisation/28957110/thumbnail",
-    "feedImageUrl": "https://public.flourish.studio/visualisation/28957110/thumbnail",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/quaest-53-acreditam-que-senado-nao-traiu-governo-ao-rejeitar-messias/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/quaest-53-acreditam-que-senado-nao-traiu-governo-ao-rejeitar-messias/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-53-acreditam-que-senado-nao-traiu-governo-ao-rejeitar-messias"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/pre-candidato-do-pl-flavio-bolsonaro-se-reune-com-fachin-na-presidencia-do-stf.ghtml",
-    "slug": "flavio-bolsonaro-se-reune-com-fachin-no-stf-e-diz-nao-querer-atrito-entre-os-poderes",
-    "title": "Flávio Bolsonaro se reúne com Fachin no STF e diz não querer 'atrito' entre os Poderes",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:19:39.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/pre-candidato-do-pl-flavio-bolsonaro-se-reune-com-fachin-na-presidencia-do-stf.ghtml",
-    "sourceLabel": "Flávio Bolsonaro se reúne com Fachin no STF e diz não querer 'atrito' entre os Poderes",
-    "lede": "O presidente do Supremo Tribunal Federal, Edson Fachin, em reunião com o pré-candidato do PL à Presidência, Flávio Bolsonaro Gustavo Moreno/STF O pré-candidato do PL à Presidência da República, senador Flávio Bolsonaro (RJ), se...",
-    "summary": "O presidente do Supremo Tribunal Federal, Edson Fachin, em reunião com o pré-candidato do PL à Presidência, Flávio Bolsonaro Gustavo Moreno/STF O pré-candidato do PL à Presidência da República, senador Flávio Bolsonaro (RJ), se...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro se reúne com Fachin no STF e diz não querer 'atrito' entre os Poderes.",
-      "Flávio Bolsonaro se reúne com Fachin no STF e diz não querer 'atrito' entre os Poderes e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/5_RWiEEQQfWffJPTBFfWSyl-Pdg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/p/h/AnAjvVS62CbAApEu6Zeg/55267685103-5ac665cf6d-k.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/5_RWiEEQQfWffJPTBFfWSyl-Pdg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/p/h/AnAjvVS62CbAApEu6Zeg/55267685103-5ac665cf6d-k.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/5_RWiEEQQfWffJPTBFfWSyl-Pdg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/p/h/AnAjvVS62CbAApEu6Zeg/55267685103-5ac665cf6d-k.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/pre-candidato-do-pl-flavio-bolsonaro-se-reune-com-fachin-na-presidencia-do-stf.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/pre-candidato-do-pl-flavio-bolsonaro-se-reune-com-fachin-na-presidencia-do-stf.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-se-reune-com-fachin-no-stf-e-diz-nao-querer-atrito-entre-os-poderes"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-para-43percent-lula-saiu-mais-forte-apos-encontro-com-trump.ghtml",
-    "slug": "quaest-para-43-lula-saiu-mais-forte-apos-encontro-com-trump",
-    "title": "Quaest: para 43%, Lula saiu mais forte após encontro com Trump",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:00:06.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-para-43percent-lula-saiu-mais-forte-apos-encontro-com-trump.ghtml",
-    "sourceLabel": "Quaest: para 43%, Lula saiu mais forte após encontro com Trump",
-    "lede": "G1 Politica publicou uma atualização sobre Quaest: para 43%, Lula saiu mais forte após encontro com Trump. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "G1 Politica publicou uma atualização sobre Quaest: para 43%, Lula saiu mais forte após encontro com Trump. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: para 43%, Lula saiu mais forte após encontro com Trump.",
-      "Quaest: para 43%, Lula saiu mais forte após encontro com Trump e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/eCdqshFTi1zC1J58RvSQsbM2Lmk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/p/JjTGfpSBiHYgYL6ARwTA/globo-canal-4-20260507-2000-frame-119711.jpeg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/eCdqshFTi1zC1J58RvSQsbM2Lmk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/p/JjTGfpSBiHYgYL6ARwTA/globo-canal-4-20260507-2000-frame-119711.jpeg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/eCdqshFTi1zC1J58RvSQsbM2Lmk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/p/JjTGfpSBiHYgYL6ARwTA/globo-canal-4-20260507-2000-frame-119711.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-para-43percent-lula-saiu-mais-forte-apos-encontro-com-trump.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-para-43percent-lula-saiu-mais-forte-apos-encontro-com-trump.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-para-43-lula-saiu-mais-forte-apos-encontro-com-trump"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/dosimetria-o-que-se-sabe-sobre-a-aplicacao-da-lei-e-os-proximos-passos-no-stf.ghtml",
-    "slug": "dosimetria-o-que-se-sabe-sobre-a-aplicacao-da-lei-e-os-proximos-passos-no-stf",
-    "title": "Dosimetria: o que se sabe sobre a aplicação da lei e os próximos passos no STF",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T05:01:04.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/dosimetria-o-que-se-sabe-sobre-a-aplicacao-da-lei-e-os-proximos-passos-no-stf.ghtml",
-    "sourceLabel": "Dosimetria: o que se sabe sobre a aplicação da lei e os próximos passos no STF",
-    "lede": "A lei que permite a redução das penas de condenados por atos antidemocráticos será analisada pelo Supremo Tribunal Federal (STF). A Corte vai avaliar se ela está de acordo com a Constituição.",
-    "summary": "A lei que permite a redução das penas de condenados por atos antidemocráticos será analisada pelo Supremo Tribunal Federal (STF). A Corte vai avaliar se ela está de acordo com a Constituição.",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Dosimetria: o que se sabe sobre a aplicação da lei e os próximos passos no STF.",
-      "Dosimetria: o que se sabe sobre a aplicação da lei e os próximos passos no STF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/GsXNcWEcm0tEYUoTYSEWuLx2Ajk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/z/m/sHHlC9SUSdGBvEalcG1A/globo-canal-5-20250108-1800-frame-361681.jpeg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/GsXNcWEcm0tEYUoTYSEWuLx2Ajk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/z/m/sHHlC9SUSdGBvEalcG1A/globo-canal-5-20250108-1800-frame-361681.jpeg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/GsXNcWEcm0tEYUoTYSEWuLx2Ajk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/z/m/sHHlC9SUSdGBvEalcG1A/globo-canal-5-20250108-1800-frame-361681.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/dosimetria-o-que-se-sabe-sobre-a-aplicacao-da-lei-e-os-proximos-passos-no-stf.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/dosimetria-o-que-se-sabe-sobre-a-aplicacao-da-lei-e-os-proximos-passos-no-stf.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "dosimetria-o-que-se-sabe-sobre-a-aplicacao-da-lei-e-os-proximos-passos-no-stf"
-    ]
   },
   {
     "id": "https://juruaonline.com.br/apos-dias-de-transtornos-deracre-inicia-construcao-de-novo-acesso-para-travessia-entre-cruzeiro-do-sul-e-rodrigues-alves-no-rio-jurua/",
@@ -50895,1585 +52670,6 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes",
-    "slug": "filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes",
-    "title": "Filme brasileiro sobre violência doméstica será apresentado em Cannes",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T18:03:00.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes",
-    "sourceLabel": "Filme brasileiro sobre violência doméstica será apresentado em Cannes",
-    "lede": "Fatos reais de violência contra as mulheres no Brasil inspiraram o roteiro do filme A Versão da Lei , da diretora Nina Fachinello.",
-    "summary": "Fatos reais de violência contra as mulheres no Brasil inspiraram o roteiro do filme A Versão da Lei , da diretora Nina Fachinello.",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Filme brasileiro sobre violência doméstica será apresentado em Cannes.",
-      "Filme brasileiro sobre violência doméstica será apresentado em Cannes e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes.svg",
-    "feedImageUrl": "/assets/news-fallbacks/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "filme-brasileiro-sobre-violencia-domestica-sera-apresentado-em-cannes"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/13/apos-protesto-empresa-afirma-que-folha-da-impetus-esta-quase-100-regularizada/",
-    "slug": "apos-protesto-empresa-afirma-que-folha-esta-quase-100-regularizada",
-    "title": "Após protesto, empresa afirma que folha está “quase 100% regularizada”",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T17:45:29.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/13/apos-protesto-empresa-afirma-que-folha-da-impetus-esta-quase-100-regularizada/",
-    "sourceLabel": "Após protesto, empresa afirma que folha está “quase 100% regularizada”",
-    "lede": "Foto: David Medeiros/ac24horas \" O proprietário da Impetus Engenharia, Alessio Rainier Araujo Marques, afirmou nesta quarta-feira (13) que a empresa já iniciou a regularização dos pagamentos atrasados aos funcionários que...",
-    "summary": "Foto: David Medeiros/ac24horas \" O proprietário da Impetus Engenharia, Alessio Rainier Araujo Marques, afirmou nesta quarta-feira (13) que a empresa já iniciou a regularização dos pagamentos atrasados aos funcionários que...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 13 de mai de 2026 a base desta noticia sobre Após protesto, empresa afirma que folha está “quase 100% regularizada”.",
-      "Após protesto, empresa afirma que folha está “quase 100% regularizada” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-13-at-10.56.53-1-1-1200x675.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-13-at-10.56.53-1-1-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-13-at-10.56.53-1-1-1200x675.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/apos-protesto-empresa-afirma-que-folha-da-impetus-esta-quase-100-regularizada/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/apos-protesto-empresa-afirma-que-folha-da-impetus-esta-quase-100-regularizada/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "apos-protesto-empresa-afirma-que-folha-esta-quase-100-regularizada"
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado",
-    "slug": "salvador-festeja-mais-uma-edicao-do-bembe-do-mercado",
-    "title": "Salvador festeja mais uma edição do Bembé do Mercado",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T17:30:00.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado",
-    "sourceLabel": "Salvador festeja mais uma edição do Bembé do Mercado",
-    "lede": "A tradicional festa do Bembé do Mercado terá mais uma edição nesta quarta-feira (13), em Salvador.",
-    "summary": "A tradicional festa do Bembé do Mercado terá mais uma edição nesta quarta-feira (13), em Salvador.",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Salvador festeja mais uma edição do Bembé do Mercado.",
-      "Salvador festeja mais uma edição do Bembé do Mercado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado.svg",
-    "feedImageUrl": "/assets/news-fallbacks/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/salvador-festeja-mais-uma-edicao-do-bembe-do-mercado"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "salvador-festeja-mais-uma-edicao-do-bembe-do-mercado"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/noticia/2026/05/13/donald-gibb-de-o-grande-dragao-branco-morre-aos-71-anos.ghtml",
-    "slug": "donald-gibb-de-o-grande-dragao-branco-morre-aos-71-anos",
-    "title": "Donald Gibb, de 'O Grande Dragão Branco', morre aos 71 anos",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T17:14:17.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/05/13/donald-gibb-de-o-grande-dragao-branco-morre-aos-71-anos.ghtml",
-    "sourceLabel": "Donald Gibb, de 'O Grande Dragão Branco', morre aos 71 anos",
-    "lede": "Morre o ator Donald Gibb, famoso pelo papel de Ray Jackson em 'O Grande Dragão Branco'. Divulgação O ator Donald Gibb morreu aos 71 anos na noite desta terça-feira (12).",
-    "summary": "Morre o ator Donald Gibb, famoso pelo papel de Ray Jackson em 'O Grande Dragão Branco'. Divulgação O ator Donald Gibb morreu aos 71 anos na noite desta terça-feira (12).",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 13 de mai de 2026 a base desta noticia sobre Donald Gibb, de 'O Grande Dragão Branco', morre aos 71 anos.",
-      "Donald Gibb, de 'O Grande Dragão Branco', morre aos 71 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/swh8HgN5Ow0AScxSCCektcmAJ04=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Q/v/AxERcZQ6qANcq6Gr9XBw/design-sem-nome-52-.png",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/swh8HgN5Ow0AScxSCCektcmAJ04=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Q/v/AxERcZQ6qANcq6Gr9XBw/design-sem-nome-52-.png",
-    "feedImageUrl": "https://s2-g1.glbimg.com/swh8HgN5Ow0AScxSCCektcmAJ04=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Q/v/AxERcZQ6qANcq6Gr9XBw/design-sem-nome-52-.png",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/13/donald-gibb-de-o-grande-dragao-branco-morre-aos-71-anos.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/13/donald-gibb-de-o-grande-dragao-branco-morre-aos-71-anos.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "donald-gibb-de-o-grande-dragao-branco-morre-aos-71-anos"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/cinema/noticia/2026/05/13/demi-moore-avalia-que-lutar-contra-a-ia-e-batalha-perdida.ghtml",
-    "slug": "demi-moore-avalia-que-lutar-contra-a-ia-e-batalha-perdida",
-    "title": "Demi Moore avalia que lutar contra a IA é batalha perdida",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T15:11:23.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/cinema/noticia/2026/05/13/demi-moore-avalia-que-lutar-contra-a-ia-e-batalha-perdida.ghtml",
-    "sourceLabel": "Demi Moore avalia que lutar contra a IA é batalha perdida",
-    "lede": "Demi Moore na cerimônia de abertura do 79º festival de Cannes REUTERS/Gonzalo Fuentes TPX IMAGES OF THE DAY Demi Moore pediu, antes da cerimônia de abertura do Festival de Cinema de Cannes nesta terça-feira (12), que a...",
-    "summary": "Demi Moore na cerimônia de abertura do 79º festival de Cannes REUTERS/Gonzalo Fuentes TPX IMAGES OF THE DAY Demi Moore pediu, antes da cerimônia de abertura do Festival de Cinema de Cannes nesta terça-feira (12), que a...",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 13 de mai de 2026 a base desta noticia sobre Demi Moore avalia que lutar contra a IA é batalha perdida.",
-      "Demi Moore avalia que lutar contra a IA é batalha perdida e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/E5v4-r5_orojNb9Mu6MMXHl0eV8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/A/bCh4LLSnaWD2Hm0BJ8jQ/2026-05-12t191952z-258620884-up1em5c1b5g3w-rtrmadp-3-filmfestival-cannes-opening-red-carpet.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/E5v4-r5_orojNb9Mu6MMXHl0eV8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/A/bCh4LLSnaWD2Hm0BJ8jQ/2026-05-12t191952z-258620884-up1em5c1b5g3w-rtrmadp-3-filmfestival-cannes-opening-red-carpet.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/E5v4-r5_orojNb9Mu6MMXHl0eV8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/A/bCh4LLSnaWD2Hm0BJ8jQ/2026-05-12t191952z-258620884-up1em5c1b5g3w-rtrmadp-3-filmfestival-cannes-opening-red-carpet.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/cinema/noticia/2026/05/13/demi-moore-avalia-que-lutar-contra-a-ia-e-batalha-perdida.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/cinema/noticia/2026/05/13/demi-moore-avalia-que-lutar-contra-a-ia-e-batalha-perdida.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "demi-moore-avalia-que-lutar-contra-a-ia-e-batalha-perdida"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/julie-wein-faz-feat-com-francis-hime-e-grava-arnaldo-baptista-e-benito-di-paula-em-album-de-voz-piano-e-cancoes.ghtml",
-    "slug": "julie-wein-faz-feat-com-francis-hime-e-grava-arnaldo-baptista-e-benito-di-paula-em-album-de-voz-",
-    "title": "Julie Wein faz feat com Francis Hime e grava Arnaldo Baptista e Benito Di Paula em álbum de voz, piano e canções",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:36:08.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/julie-wein-faz-feat-com-francis-hime-e-grava-arnaldo-baptista-e-benito-di-paula-em-album-de-voz-piano-e-cancoes.ghtml",
-    "sourceLabel": "Julie Wein faz feat com Francis Hime e grava Arnaldo Baptista e Benito Di Paula em álbum de voz, piano e canções",
-    "lede": "Julie Wein canta com Francis Hime a música 'Trocando em miúdos' (1977), parceria de Francis com Chico Isabela Espíndola / Divulgação ♫ NOTÍCIA ♬ Cantora, compositora, atriz e pianista, Julie Wein une as habilidades como...",
-    "summary": "Julie Wein canta com Francis Hime a música 'Trocando em miúdos' (1977), parceria de Francis com Chico Isabela Espíndola / Divulgação ♫ NOTÍCIA ♬ Cantora, compositora, atriz e pianista, Julie Wein une as habilidades como...",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 13 de mai de 2026 a base desta noticia sobre Julie Wein faz feat com Francis Hime e grava Arnaldo Baptista e Benito Di Paula em álbum de voz, piano e canções.",
-      "Julie Wein faz feat com Francis Hime e grava Arnaldo Baptista e Benito Di Paula em álbum de voz, piano e canções e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/ecvQlxinHXf1KN8xkKbkoRF0Pe0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/P/NavuHYQMKXlyggnMSsKQ/julie-e-francis-foto-isabea-espindola-4-de-1-.jpg.jpeg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/ecvQlxinHXf1KN8xkKbkoRF0Pe0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/P/NavuHYQMKXlyggnMSsKQ/julie-e-francis-foto-isabea-espindola-4-de-1-.jpg.jpeg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/ecvQlxinHXf1KN8xkKbkoRF0Pe0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/P/NavuHYQMKXlyggnMSsKQ/julie-e-francis-foto-isabea-espindola-4-de-1-.jpg.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/julie-wein-faz-feat-com-francis-hime-e-grava-arnaldo-baptista-e-benito-di-paula-em-album-de-voz-piano-e-cancoes.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/julie-wein-faz-feat-com-francis-hime-e-grava-arnaldo-baptista-e-benito-di-paula-em-album-de-voz-piano-e-cancoes.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "julie-wein-faz-feat-com-francis-hime-e-grava-arnaldo-baptista-e-benito-di-paula-em-album-de-voz-"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/noticia/2026/05/13/o-dia-em-que-guimaraes-rosa-escapou-da-morte-porque-saiu-para-comprar-cigarro.ghtml",
-    "slug": "o-dia-em-que-guimaraes-rosa-escapou-da-morte-porque-saiu-para-comprar-cigarro",
-    "title": "O dia em que Guimarães Rosa escapou da morte porque saiu para comprar cigarro",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T13:32:34.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/05/13/o-dia-em-que-guimaraes-rosa-escapou-da-morte-porque-saiu-para-comprar-cigarro.ghtml",
-    "sourceLabel": "O dia em que Guimarães Rosa escapou da morte porque saiu para comprar cigarro",
-    "lede": "Guimarães Rosa durante expedição ao sertão de Minas Gerais, em 1952 Eugênio Silva/Acervo do Museu Casa Guimarães Rosa Numa madrugada de 1941, Guimarães Rosa acordou com vontade de fumar.",
-    "summary": "Guimarães Rosa durante expedição ao sertão de Minas Gerais, em 1952 Eugênio Silva/Acervo do Museu Casa Guimarães Rosa Numa madrugada de 1941, Guimarães Rosa acordou com vontade de fumar.",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 13 de mai de 2026 a base desta noticia sobre O dia em que Guimarães Rosa escapou da morte porque saiu para comprar cigarro.",
-      "O dia em que Guimarães Rosa escapou da morte porque saiu para comprar cigarro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/0u1cCw30am9FLWIlUcG7vQEadK4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/y/q/R7DiPcTAWzrLN2LXcBHA/4f96cc10-43cf-11f1-bf3e-3d07e81b01ce.jpg.webp",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/0u1cCw30am9FLWIlUcG7vQEadK4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/y/q/R7DiPcTAWzrLN2LXcBHA/4f96cc10-43cf-11f1-bf3e-3d07e81b01ce.jpg.webp",
-    "feedImageUrl": "https://s2-g1.glbimg.com/0u1cCw30am9FLWIlUcG7vQEadK4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/y/q/R7DiPcTAWzrLN2LXcBHA/4f96cc10-43cf-11f1-bf3e-3d07e81b01ce.jpg.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/13/o-dia-em-que-guimaraes-rosa-escapou-da-morte-porque-saiu-para-comprar-cigarro.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/13/o-dia-em-que-guimaraes-rosa-escapou-da-morte-porque-saiu-para-comprar-cigarro.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "o-dia-em-que-guimaraes-rosa-escapou-da-morte-porque-saiu-para-comprar-cigarro"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/album-que-fez-maria-bethania-alcar-voo-nas-radios-passaro-proibido-faz-50-anos-com-a-altivez-e-a-imponencia-de-1976.ghtml",
-    "slug": "album-que-fez-maria-bethania-alcar-voo-nas-radios-passaro-proibido-faz-50-anos-com-a-altivez-e-a",
-    "title": "Álbum que fez Maria Bethânia alçar voo nas rádios, 'Pássaro proibido' faz 50 anos com a altivez e a imponência de 1976",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T13:19:53.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/album-que-fez-maria-bethania-alcar-voo-nas-radios-passaro-proibido-faz-50-anos-com-a-altivez-e-a-imponencia-de-1976.ghtml",
-    "sourceLabel": "Álbum que fez Maria Bethânia alçar voo nas rádios, 'Pássaro proibido' faz 50 anos com a altivez e a imponência de 1976",
-    "lede": "G1 Pop & Arte publicou uma atualização sobre Álbum que fez Maria Bethânia alçar voo nas rádios, 'Pássaro proibido' faz 50 anos com a altivez e a imponência de 1976.",
-    "summary": "G1 Pop & Arte publicou uma atualização sobre Álbum que fez Maria Bethânia alçar voo nas rádios, 'Pássaro proibido' faz 50 anos com a altivez e a imponência de 1976.",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 13 de mai de 2026 a base desta noticia sobre Álbum que fez Maria Bethânia alçar voo nas rádios, 'Pássaro proibido' faz 50 anos com a altivez e a imponência de 1976.",
-      "Álbum que fez Maria Bethânia alçar voo nas rádios, 'Pássaro proibido' faz 50 anos com a altivez e a imponência de 1976 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/2zq3vtlh1CakvDmv0cNjMQjYrnQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/s/5I46c1RtG9TZHflTdbsA/bethaniapassarofotocapa.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/2zq3vtlh1CakvDmv0cNjMQjYrnQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/s/5I46c1RtG9TZHflTdbsA/bethaniapassarofotocapa.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/2zq3vtlh1CakvDmv0cNjMQjYrnQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/s/5I46c1RtG9TZHflTdbsA/bethaniapassarofotocapa.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/album-que-fez-maria-bethania-alcar-voo-nas-radios-passaro-proibido-faz-50-anos-com-a-altivez-e-a-imponencia-de-1976.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/13/album-que-fez-maria-bethania-alcar-voo-nas-radios-passaro-proibido-faz-50-anos-com-a-altivez-e-a-imponencia-de-1976.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "album-que-fez-maria-bethania-alcar-voo-nas-radios-passaro-proibido-faz-50-anos-com-a-altivez-e-a"
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec",
-    "slug": "jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec",
-    "title": "Jazz Livre recebe trombonista Felipe Brito para live na Rádio MEC",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T12:00:00.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec",
-    "sourceLabel": "Jazz Livre recebe trombonista Felipe Brito para live na Rádio MEC",
-    "lede": "O trombonista Felipe Brito é a atração da live em formato multiplataforma do Jazz Livre que a Rádio MEC apresenta nesta quarta-feira (13).",
-    "summary": "O trombonista Felipe Brito é a atração da live em formato multiplataforma do Jazz Livre que a Rádio MEC apresenta nesta quarta-feira (13).",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Jazz Livre recebe trombonista Felipe Brito para live na Rádio MEC.",
-      "Jazz Livre recebe trombonista Felipe Brito para live na Rádio MEC e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec.svg",
-    "feedImageUrl": "/assets/news-fallbacks/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "jazz-livre-recebe-trombonista-felipe-brito-para-live-na-radio-mec"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/simone-mendes-explica-defesa-das-mulheres-no-palco-e-distanciamento-das-redes-sociais.ghtml",
-    "slug": "simone-mendes-explica-defesa-das-mulheres-no-palco-e-distanciamento-das-redes-sociais",
-    "title": "Simone Mendes explica 'defesa das mulheres' no palco e distanciamento das redes sociais",
-    "eyebrow": "Cultura",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T07:00:59.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/simone-mendes-explica-defesa-das-mulheres-no-palco-e-distanciamento-das-redes-sociais.ghtml",
-    "sourceLabel": "Simone Mendes explica 'defesa das mulheres' no palco e distanciamento das redes sociais",
-    "lede": "A cantora Simone Mendes durante gravação do seu novo DVD Divulgação/Dani Valverde Simone Mendes tem como um dos seus maiores objetivos inspirar mulheres. A música mais ouvida da cantora atualmente se chama “Direitos Iguais”.",
-    "summary": "A cantora Simone Mendes durante gravação do seu novo DVD Divulgação/Dani Valverde Simone Mendes tem como um dos seus maiores objetivos inspirar mulheres. A música mais ouvida da cantora atualmente se chama “Direitos Iguais”.",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 13 de mai de 2026 a base desta noticia sobre Simone Mendes explica 'defesa das mulheres' no palco e distanciamento das redes sociais.",
-      "Simone Mendes explica 'defesa das mulheres' no palco e distanciamento das redes sociais e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/GgYumRms0rNHn3INhQ-_BKEN16o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/x/ue6caIQ4CqqwAkQAZTvg/fotos-g1-1920-x-1080-px-57-.png",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/GgYumRms0rNHn3INhQ-_BKEN16o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/x/ue6caIQ4CqqwAkQAZTvg/fotos-g1-1920-x-1080-px-57-.png",
-    "feedImageUrl": "https://s2-g1.glbimg.com/GgYumRms0rNHn3INhQ-_BKEN16o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/x/ue6caIQ4CqqwAkQAZTvg/fotos-g1-1920-x-1080-px-57-.png",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/simone-mendes-explica-defesa-das-mulheres-no-palco-e-distanciamento-das-redes-sociais.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/simone-mendes-explica-defesa-das-mulheres-no-palco-e-distanciamento-das-redes-sociais.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "simone-mendes-explica-defesa-das-mulheres-no-palco-e-distanciamento-das-redes-sociais"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/foi-curtir-desabafo-de-rafa-kalimann-sobre-ausencia-de-nattan-na-gravidez-repercute-entenda-o-caso.ghtml",
-    "slug": "foi-curtir-desabafo-de-rafa-kalimann-sobre-ausencia-de-nattan-na-gravidez-repercute-entenda-o-ca",
-    "title": "'Foi curtir': desabafo de Rafa Kalimann sobre ausência de Nattan na gravidez repercute; entenda o caso",
-    "eyebrow": "Cultura",
-    "date": "12 de mai de 2026",
-    "publishedAt": "2026-05-13T03:01:07.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/foi-curtir-desabafo-de-rafa-kalimann-sobre-ausencia-de-nattan-na-gravidez-repercute-entenda-o-caso.ghtml",
-    "sourceLabel": "'Foi curtir': desabafo de Rafa Kalimann sobre ausência de Nattan na gravidez repercute; entenda o caso",
-    "lede": "Rafa Kalimann no documentário 'Tempo Para Amar'",
-    "summary": "Rafa Kalimann no documentário 'Tempo Para Amar'",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 12 de mai de 2026 a base desta noticia sobre 'Foi curtir': desabafo de Rafa Kalimann sobre ausência de Nattan na gravidez repercute; entenda o caso.",
-      "Foi curtir': desabafo de Rafa Kalimann sobre ausência de Nattan na gravidez repercute; entenda o caso e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/Zh_5DDvl3W8Atl1YumInevDgqT4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/e/Bt9GAMR529AJhh5L3hZQ/captura-de-tela-2026-05-12-151652.png",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/Zh_5DDvl3W8Atl1YumInevDgqT4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/e/Bt9GAMR529AJhh5L3hZQ/captura-de-tela-2026-05-12-151652.png",
-    "feedImageUrl": "https://s2-g1.glbimg.com/Zh_5DDvl3W8Atl1YumInevDgqT4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/e/Bt9GAMR529AJhh5L3hZQ/captura-de-tela-2026-05-12-151652.png",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/foi-curtir-desabafo-de-rafa-kalimann-sobre-ausencia-de-nattan-na-gravidez-repercute-entenda-o-caso.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/sertanejo/noticia/2026/05/13/foi-curtir-desabafo-de-rafa-kalimann-sobre-ausencia-de-nattan-na-gravidez-repercute-entenda-o-caso.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "foi-curtir-desabafo-de-rafa-kalimann-sobre-ausencia-de-nattan-na-gravidez-repercute-entenda-o-ca"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/confira-os-looks-das-celebridades-na-abertura-do-festival-de-cannes-de-2026/",
-    "slug": "confira-os-looks-das-celebridades-na-abertura-do-festival-de-cannes-de-2026",
-    "title": "Confira os looks das celebridades na abertura do Festival de Cannes de 2026",
-    "eyebrow": "Cultura",
-    "date": "12 de mai de 2026",
-    "publishedAt": "2026-05-13T01:50:23.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/confira-os-looks-das-celebridades-na-abertura-do-festival-de-cannes-de-2026/",
-    "sourceLabel": "Confira os looks das celebridades na abertura do Festival de Cannes de 2026",
-    "lede": "Celebridades do cinema cruzam o tapete vermelho em abertura de gala do evento",
-    "summary": "Celebridades do cinema cruzam o tapete vermelho em abertura de gala do evento",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 12 de mai de 2026 a base desta noticia sobre Confira os looks das celebridades na abertura do Festival de Cannes de 2026.",
-      "Confira os looks das celebridades na abertura do Festival de Cannes de 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/05/palma-de-ouro-cannes.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/05/palma-de-ouro-cannes.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/05/palma-de-ouro-cannes.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/confira-os-looks-das-celebridades-na-abertura-do-festival-de-cannes-de-2026/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/confira-os-looks-das-celebridades-na-abertura-do-festival-de-cannes-de-2026/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "confira-os-looks-das-celebridades-na-abertura-do-festival-de-cannes-de-2026"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/entretenimento/shania-twain-fala-sobre-sua-primeira-vez-apresentando-o-acm-awards/",
-    "slug": "shania-twain-fala-sobre-sua-primeira-vez-apresentando-o-acm-awards",
-    "title": "Shania Twain fala sobre sua primeira vez apresentando o ACM Awards",
-    "eyebrow": "Nacional",
-    "date": "12 de mai de 2026",
-    "publishedAt": "2026-05-13T01:39:28.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/shania-twain-fala-sobre-sua-primeira-vez-apresentando-o-acm-awards/",
-    "sourceLabel": "Shania Twain fala sobre sua primeira vez apresentando o ACM Awards",
-    "lede": "Artista revelou que está animada para se divertir como apresentadora do prêmio",
-    "summary": "Artista revelou que está animada para se divertir como apresentadora do prêmio",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 12 de mai de 2026 a base desta noticia sobre Shania Twain fala sobre sua primeira vez apresentando o ACM Awards.",
-      "Shania Twain fala sobre sua primeira vez apresentando o ACM Awards e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/bonnie-tyler.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/bonnie-tyler.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/bonnie-tyler.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/shania-twain-fala-sobre-sua-primeira-vez-apresentando-o-acm-awards/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/entretenimento/shania-twain-fala-sobre-sua-primeira-vez-apresentando-o-acm-awards/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "shania-twain-fala-sobre-sua-primeira-vez-apresentando-o-acm-awards"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/pop-arte/musica/noticia/2026/05/12/rock-in-rio-2026-anuncia-twenty-one-pilots-e-zara-larsson.ghtml",
-    "slug": "rock-in-rio-2026-anuncia-twenty-one-pilots-e-zara-larsson",
-    "title": "Rock in Rio 2026 anuncia Twenty One Pilots e Zara Larsson",
-    "eyebrow": "Cultura",
-    "date": "12 de mai de 2026",
-    "publishedAt": "2026-05-13T00:30:33.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "G1 Pop & Arte",
-    "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/05/12/rock-in-rio-2026-anuncia-twenty-one-pilots-e-zara-larsson.ghtml",
-    "sourceLabel": "Rock in Rio 2026 anuncia Twenty One Pilots e Zara Larsson",
-    "lede": "Twenty One Pilots se apresenta no Lollapalooza 2023 Luiz Gabriel Franco/g1 Twenty One Pilots e Zara Larsson são os headliners de 13 de setembro do Rock in Rio 2026, último dia da edição.",
-    "summary": "Twenty One Pilots se apresenta no Lollapalooza 2023 Luiz Gabriel Franco/g1 Twenty One Pilots e Zara Larsson são os headliners de 13 de setembro do Rock in Rio 2026, último dia da edição.",
-    "analysis": "",
-    "body": [
-      "G1 Pop & Arte publicou em 12 de mai de 2026 a base desta noticia sobre Rock in Rio 2026 anuncia Twenty One Pilots e Zara Larsson.",
-      "Rock in Rio 2026 anuncia Twenty One Pilots e Zara Larsson e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/go07VrRKtZAowDxSVhr3fcRqFCs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/g/j/HpGSVCRSqrrvhFsyKuAQ/bds00147.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/go07VrRKtZAowDxSVhr3fcRqFCs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/g/j/HpGSVCRSqrrvhFsyKuAQ/bds00147.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/go07VrRKtZAowDxSVhr3fcRqFCs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/g/j/HpGSVCRSqrrvhFsyKuAQ/bds00147.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/musica/noticia/2026/05/12/rock-in-rio-2026-anuncia-twenty-one-pilots-e-zara-larsson.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Pop & Arte",
-        "url": "https://g1.globo.com/pop-arte/musica/noticia/2026/05/12/rock-in-rio-2026-anuncia-twenty-one-pilots-e-zara-larsson.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "rock-in-rio-2026-anuncia-twenty-one-pilots-e-zara-larsson"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/e-mentira-de-onde-voce-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro-antes-de-divulgacao-das-mensagens.ghtml",
-    "slug": "e-mentira-de-onde-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro-antes",
-    "title": "'É mentira, de onde tirou isso?': Flávio Bolsonaro chegou a negar ter pedido dinheiro a Vorcaro antes de vazamento",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T21:50:01.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/e-mentira-de-onde-voce-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro-antes-de-divulgacao-das-mensagens.ghtml",
-    "sourceLabel": "'É mentira, de onde tirou isso?': Flávio Bolsonaro chegou a negar ter pedido dinheiro a Vorcaro antes de vazamento",
-    "lede": "'É mentira', disse Flávio Bolsonaro mais cedo sobre dinheiro de Vorcaro em filme O senador e pré-candidato à Presidência da República Flávio Bolsonaro negou, na manhã desta quarta-feira (13), antes dos vazamentos das mensagens...",
-    "summary": "'É mentira', disse Flávio Bolsonaro mais cedo sobre dinheiro de Vorcaro em filme O senador e pré-candidato à Presidência da República Flávio Bolsonaro negou, na manhã desta quarta-feira (13), antes dos vazamentos das mensagens...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre 'É mentira, de onde tirou isso?': Flávio Bolsonaro chegou a negar ter pedido dinheiro a Vorcaro antes de vazamento.",
-      "É mentira, de onde tirou isso?': Flávio Bolsonaro chegou a negar ter pedido dinheiro a Vorcaro antes de vazamento e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/e-mentira-de-onde-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/e-mentira-de-onde-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro.svg",
-    "feedImageUrl": "/assets/news-fallbacks/e-mentira-de-onde-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/e-mentira-de-onde-voce-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro-antes-de-divulgacao-das-mensagens.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/e-mentira-de-onde-voce-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro-antes-de-divulgacao-das-mensagens.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "e-mentira-de-onde-tirou-isso-flavio-bolsonaro-chegou-a-negar-ter-pedido-dinheiro-a-vorcaro-antes"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/mundo/noticia/2026/05/13/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.ghtml",
-    "slug": "relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional",
-    "title": "Relação entre Flávio Bolsonaro e Vorcaro repercute na imprensa internacional",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T23:39:01.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/mundo/noticia/2026/05/13/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.ghtml",
-    "sourceLabel": "Relação entre Flávio Bolsonaro e Vorcaro repercute na imprensa internacional",
-    "lede": "'Estou e sempre estarei contigo', diz Flávio Bolsonaro em mensagem para Vorcaro O senador Flávio Bolsonaro (PL-RJ) pediu dinheiro ao banqueiro Daniel Vorcaro para financiar um filme sobre o ex-presidente Jair Bolsonaro.",
-    "summary": "'Estou e sempre estarei contigo', diz Flávio Bolsonaro em mensagem para Vorcaro O senador Flávio Bolsonaro (PL-RJ) pediu dinheiro ao banqueiro Daniel Vorcaro para financiar um filme sobre o ex-presidente Jair Bolsonaro.",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Relação entre Flávio Bolsonaro e Vorcaro repercute na imprensa internacional.",
-      "Relação entre Flávio Bolsonaro e Vorcaro repercute na imprensa internacional e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.svg",
-    "feedImageUrl": "/assets/news-fallbacks/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/mundo/noticia/2026/05/13/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/mundo/noticia/2026/05/13/relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "relacao-entre-flavio-bolsonaro-e-vorcaro-repercute-na-imprensa-internacional"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/flavio-bolsonaro-admite-cobranca-vorcaro-mas-nega-crime",
-    "slug": "flavio-bolsonaro-admite-cobranca-a-vorcaro-mas-nega-crime",
-    "title": "Flávio Bolsonaro admite cobrança a Vorcaro, mas nega crime",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T23:16:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/flavio-bolsonaro-admite-cobranca-vorcaro-mas-nega-crime",
-    "sourceLabel": "Flávio Bolsonaro admite cobrança a Vorcaro, mas nega crime",
-    "lede": "O senador Flávio Bolsonaro (PL-RJ), pré-candidato a presidente da República, admitiu ter mantido contato por quase um ano com o banqueiro Daniel Vorcaro, ex-controlador do Banco Master, período durante o qual articulou um apoio...",
-    "summary": "O senador Flávio Bolsonaro (PL-RJ), pré-candidato a presidente da República, admitiu ter mantido contato por quase um ano com o banqueiro Daniel Vorcaro, ex-controlador do Banco Master, período durante o qual articulou um apoio...",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro admite cobrança a Vorcaro, mas nega crime.",
-      "Flávio Bolsonaro admite cobrança a Vorcaro, mas nega crime e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/flavio-bolsonaro-admite-cobranca-a-vorcaro-mas-nega-crime.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-admite-cobranca-a-vorcaro-mas-nega-crime.svg",
-    "feedImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-admite-cobranca-a-vorcaro-mas-nega-crime.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/flavio-bolsonaro-admite-cobranca-vorcaro-mas-nega-crime"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/flavio-bolsonaro-admite-cobranca-vorcaro-mas-nega-crime"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-admite-cobranca-a-vorcaro-mas-nega-crime"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/caiado-cobra-explicacoes-de-flavio-sobre-suposto-financiamento-de-filme-por-dono-do-banco-master.ghtml",
-    "slug": "caiado-cobra-explicacoes-de-flavio-bolsonaro-sobre-conversas-com-vorcaro-mas-diz-que-foco-e-derr",
-    "title": "Caiado cobra explicações de Flávio Bolsonaro sobre conversas com Vorcaro, mas diz que foco é derrotar Lula",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T23:02:05.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/caiado-cobra-explicacoes-de-flavio-sobre-suposto-financiamento-de-filme-por-dono-do-banco-master.ghtml",
-    "sourceLabel": "Caiado cobra explicações de Flávio Bolsonaro sobre conversas com Vorcaro, mas diz que foco é derrotar Lula",
-    "lede": "Caiado cobra explicações de Flávio sobre suposto financiamento de filme por Vorcaro O ex-governador de Goiás Ronaldo Caiado, pré-candidato à Presidência da República pelo PSD, afirmou nesta quarta-feira (13) que o senador...",
-    "summary": "Caiado cobra explicações de Flávio sobre suposto financiamento de filme por Vorcaro O ex-governador de Goiás Ronaldo Caiado, pré-candidato à Presidência da República pelo PSD, afirmou nesta quarta-feira (13) que o senador...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Caiado cobra explicações de Flávio Bolsonaro sobre conversas com Vorcaro, mas diz que foco é derrotar Lula.",
-      "Caiado cobra explicações de Flávio Bolsonaro sobre conversas com Vorcaro, mas diz que foco é derrotar Lula e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/caiado-cobra-explicacoes-de-flavio-bolsonaro-sobre-conversas-com-vorcaro-mas-diz-que-foco-.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/caiado-cobra-explicacoes-de-flavio-bolsonaro-sobre-conversas-com-vorcaro-mas-diz-que-foco-.svg",
-    "feedImageUrl": "/assets/news-fallbacks/caiado-cobra-explicacoes-de-flavio-bolsonaro-sobre-conversas-com-vorcaro-mas-diz-que-foco-.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/caiado-cobra-explicacoes-de-flavio-sobre-suposto-financiamento-de-filme-por-dono-do-banco-master.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/caiado-cobra-explicacoes-de-flavio-sobre-suposto-financiamento-de-filme-por-dono-do-banco-master.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "caiado-cobra-explicacoes-de-flavio-bolsonaro-sobre-conversas-com-vorcaro-mas-diz-que-foco-e-derr"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-familia-bolsonaro-diz-paulo-teixeira.ghtml",
-    "slug": "nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-famili",
-    "title": "Nas redes, políticos repercutem denúncia sobre filme financiado por Vorcaro: 'Lei Rouanet da família Bolsonaro', diz Paulo Teixeira",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T22:55:59.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-familia-bolsonaro-diz-paulo-teixeira.ghtml",
-    "sourceLabel": "Nas redes, políticos repercutem denúncia sobre filme financiado por Vorcaro: 'Lei Rouanet da família Bolsonaro', diz Paulo Teixeira",
-    "lede": "Parlamentares e figuras ligadas ao governo Lula (PT) e oposição repercutiram nas redes sociais as revelações sobre os supostos repasses milionários do banqueiro Daniel Vorcaro, dono do Banco Master, para financiar o filme “Dark...",
-    "summary": "Parlamentares e figuras ligadas ao governo Lula (PT) e oposição repercutiram nas redes sociais as revelações sobre os supostos repasses milionários do banqueiro Daniel Vorcaro, dono do Banco Master, para financiar o filme “Dark...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Nas redes, políticos repercutem denúncia sobre filme financiado por Vorcaro: 'Lei Rouanet da família Bolsonaro', diz Paulo Teixeira.",
-      "Nas redes, políticos repercutem denúncia sobre filme financiado por Vorcaro: 'Lei Rouanet da família Bolsonaro', diz Paulo Teixeira e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-.svg",
-    "feedImageUrl": "/assets/news-fallbacks/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-familia-bolsonaro-diz-paulo-teixeira.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-familia-bolsonaro-diz-paulo-teixeira.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "nas-redes-politicos-repercutem-denuncia-sobre-filme-financiado-por-vorcaro-lei-rouanet-da-famili"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-coloca-candidatura-em-xeque-dizem-colunistas.ghtml",
-    "slug": "analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-colocam-candidatur",
-    "title": "Análise: mensagens entre Flávio Bolsonaro e Vorcaro deixam aliados perplexos e colocam candidatura em xeque, dizem colunistas",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T22:52:56.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-coloca-candidatura-em-xeque-dizem-colunistas.ghtml",
-    "sourceLabel": "Análise: mensagens entre Flávio Bolsonaro e Vorcaro deixam aliados perplexos e colocam candidatura em xeque, dizem colunistas",
-    "lede": "Mensagens entre Flávio Bolsonaro e Vorcaro deixaram oposição perplexa A informação de que o senador e pré-candidato à Presidência da República, Flávio Bolsonaro (PL-RJ), pressionou o banqueiro Daniel Vorcaro por pagamentos para...",
-    "summary": "Mensagens entre Flávio Bolsonaro e Vorcaro deixaram oposição perplexa A informação de que o senador e pré-candidato à Presidência da República, Flávio Bolsonaro (PL-RJ), pressionou o banqueiro Daniel Vorcaro por pagamentos para...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Análise: mensagens entre Flávio Bolsonaro e Vorcaro deixam aliados perplexos e colocam candidatura em xeque, dizem colunistas.",
-      "Análise: mensagens entre Flávio Bolsonaro e Vorcaro deixam aliados perplexos e colocam candidatura em xeque, dizem colunistas e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-colocam-cand.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-colocam-cand.svg",
-    "feedImageUrl": "/assets/news-fallbacks/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-colocam-cand.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-coloca-candidatura-em-xeque-dizem-colunistas.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-coloca-candidatura-em-xeque-dizem-colunistas.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "analise-mensagens-entre-flavio-bolsonaro-e-vorcaro-deixam-aliados-perplexos-e-colocam-candidatur"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/05/13/a-lacuna-na-versao-de-flavio-bolsonaro-sobre-audio-para-daniel-vorcaro.ghtml",
-    "slug": "a-lacuna-na-versao-de-flavio-bolsonaro-sobre-audio-para-daniel-vorcaro",
-    "title": "A lacuna na versão de Flávio Bolsonaro sobre áudio para Daniel Vorcaro",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T22:38:17.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/05/13/a-lacuna-na-versao-de-flavio-bolsonaro-sobre-audio-para-daniel-vorcaro.ghtml",
-    "sourceLabel": "A lacuna na versão de Flávio Bolsonaro sobre áudio para Daniel Vorcaro",
-    "lede": "A lacuna na versão de Flávio Bolsonaro sobre áudio para Daniel Vorcaro A nota do senador Flávio Bolsonaro, divulgada após vir a público um áudio em que ele pede recursos a Daniel Vorcaro para um filme sobre seu pai, não aborda...",
-    "summary": "A lacuna na versão de Flávio Bolsonaro sobre áudio para Daniel Vorcaro A nota do senador Flávio Bolsonaro, divulgada após vir a público um áudio em que ele pede recursos a Daniel Vorcaro para um filme sobre seu pai, não aborda...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre A lacuna na versão de Flávio Bolsonaro sobre áudio para Daniel Vorcaro.",
-      "A lacuna na versão de Flávio Bolsonaro sobre áudio para Daniel Vorcaro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/jeMesidH-QUzz48ACpQZ46sDj4I=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/H/u9tvH1SU2nriAc6JEF1g/46038615415-51dc76447d-3k.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/jeMesidH-QUzz48ACpQZ46sDj4I=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/H/u9tvH1SU2nriAc6JEF1g/46038615415-51dc76447d-3k.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/jeMesidH-QUzz48ACpQZ46sDj4I=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/H/u9tvH1SU2nriAc6JEF1g/46038615415-51dc76447d-3k.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/05/13/a-lacuna-na-versao-de-flavio-bolsonaro-sobre-audio-para-daniel-vorcaro.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/05/13/a-lacuna-na-versao-de-flavio-bolsonaro-sobre-audio-para-daniel-vorcaro.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "a-lacuna-na-versao-de-flavio-bolsonaro-sobre-audio-para-daniel-vorcaro"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-surpresos.ghtml",
-    "slug": "relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-traidos",
-    "title": "Relação de Flávio com Vorcaro é vista como 'bomba' na pré-campanha; aliados se dizem traídos",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T22:05:26.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-surpresos.ghtml",
-    "sourceLabel": "Relação de Flávio com Vorcaro é vista como 'bomba' na pré-campanha; aliados se dizem traídos",
-    "lede": "Mensagens ligam Flávio a Vorcaro em pedido de dinheiro O entorno mais próximo do senador Flávio Bolsonaro (PL-RJ) avalia que a divulgação da informação que o banqueiro Daniel Vorcaro financiou filme sobre o ex-presidente Jair...",
-    "summary": "Mensagens ligam Flávio a Vorcaro em pedido de dinheiro O entorno mais próximo do senador Flávio Bolsonaro (PL-RJ) avalia que a divulgação da informação que o banqueiro Daniel Vorcaro financiou filme sobre o ex-presidente Jair...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Relação de Flávio com Vorcaro é vista como 'bomba' na pré-campanha; aliados se dizem traídos.",
-      "Relação de Flávio com Vorcaro é vista como 'bomba' na pré-campanha; aliados se dizem traídos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-traidos.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-traidos.svg",
-    "feedImageUrl": "/assets/news-fallbacks/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-traidos.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-surpresos.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-surpresos.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "relacao-de-flavio-com-vorcaro-e-vista-como-bomba-na-pre-campanha-aliados-se-dizem-traidos"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio",
-    "slug": "deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio",
-    "title": "Deputados pedem investigação sobre relação entre Vorcaro e Flávio",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T22:04:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio",
-    "sourceLabel": "Deputados pedem investigação sobre relação entre Vorcaro e Flávio",
-    "lede": "Deputados federais do PT, PSOL e PCdoB anunciaram nesta quarta-feira (13) que vão apresentar uma denúncia à Polícia Federal (PF), bem como um requerimento à Receita Federal e um pedido de abertura de uma comissão parlamentar de...",
-    "summary": "Deputados federais do PT, PSOL e PCdoB anunciaram nesta quarta-feira (13) que vão apresentar uma denúncia à Polícia Federal (PF), bem como um requerimento à Receita Federal e um pedido de abertura de uma comissão parlamentar de...",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Deputados pedem investigação sobre relação entre Vorcaro e Flávio.",
-      "Deputados pedem investigação sobre relação entre Vorcaro e Flávio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio.svg",
-    "feedImageUrl": "/assets/news-fallbacks/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "deputados-pedem-investigacao-sobre-relacao-entre-vorcaro-e-flavio"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/sp/sao-paulo/eleicoes/2026/noticia/2026/05/13/questionado-sobre-audio-em-que-flavio-bolsonaro-pede-dinheiro-a-vorcaro-tarcisio-nao-responde.ghtml",
-    "slug": "questionado-sobre-audio-em-que-flavio-bolsonaro-pede-dinheiro-a-vorcaro-tarcisio-nao-responde",
-    "title": "Questionado sobre áudio em que Flávio Bolsonaro pede dinheiro a Vorcaro, Tarcísio não responde",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T21:47:10.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/sp/sao-paulo/eleicoes/2026/noticia/2026/05/13/questionado-sobre-audio-em-que-flavio-bolsonaro-pede-dinheiro-a-vorcaro-tarcisio-nao-responde.ghtml",
-    "sourceLabel": "Questionado sobre áudio em que Flávio Bolsonaro pede dinheiro a Vorcaro, Tarcísio não responde",
-    "lede": "Tarcísio não responde sobre mensagens trocadas por Flávio Bolsonaro e Vorcaro O governador Tarcísio de Freitas (Republicanos) foi questionado nesta quarta-feira (13), mas não quis responder sobre a divulgação de mensagens em...",
-    "summary": "Tarcísio não responde sobre mensagens trocadas por Flávio Bolsonaro e Vorcaro O governador Tarcísio de Freitas (Republicanos) foi questionado nesta quarta-feira (13), mas não quis responder sobre a divulgação de mensagens em...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Questionado sobre áudio em que Flávio Bolsonaro pede dinheiro a Vorcaro, Tarcísio não responde.",
-      "Questionado sobre áudio em que Flávio Bolsonaro pede dinheiro a Vorcaro, Tarcísio não responde e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/IOFpa2wYr_FxrHDKZLci0mOgFE4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/H/cgDEfEQFm8sEiBZ6AzvA/sp2-jorn05-suite-jaguare-20260513-1525-frame-171534.jpeg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/IOFpa2wYr_FxrHDKZLci0mOgFE4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/H/cgDEfEQFm8sEiBZ6AzvA/sp2-jorn05-suite-jaguare-20260513-1525-frame-171534.jpeg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/IOFpa2wYr_FxrHDKZLci0mOgFE4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/H/cgDEfEQFm8sEiBZ6AzvA/sp2-jorn05-suite-jaguare-20260513-1525-frame-171534.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/sp/sao-paulo/eleicoes/2026/noticia/2026/05/13/questionado-sobre-audio-em-que-flavio-bolsonaro-pede-dinheiro-a-vorcaro-tarcisio-nao-responde.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/sp/sao-paulo/eleicoes/2026/noticia/2026/05/13/questionado-sobre-audio-em-que-flavio-bolsonaro-pede-dinheiro-a-vorcaro-tarcisio-nao-responde.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "questionado-sobre-audio-em-que-flavio-bolsonaro-pede-dinheiro-a-vorcaro-tarcisio-nao-responde"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-forte-na-campanha.ghtml",
-    "slug": "flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-forte-na-",
-    "title": "Flavio Bolsonaro se defende, mas aliados admitem que proximidade com Vorcaro é um 'golpe forte' na campanha",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T21:42:38.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-forte-na-campanha.ghtml",
-    "sourceLabel": "Flavio Bolsonaro se defende, mas aliados admitem que proximidade com Vorcaro é um 'golpe forte' na campanha",
-    "lede": "Ouça áudio enviado por Flávio Bolsonaro a Vorcaro em que ele chama banqueiro de 'irmão' A cúpula da pré-campanha do senador Flavio Bolsonaro (PL-RJ) à Presidência da República decidiu se defender partindo para o ataque...",
-    "summary": "Ouça áudio enviado por Flávio Bolsonaro a Vorcaro em que ele chama banqueiro de 'irmão' A cúpula da pré-campanha do senador Flavio Bolsonaro (PL-RJ) à Presidência da República decidiu se defender partindo para o ataque...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Flavio Bolsonaro se defende, mas aliados admitem que proximidade com Vorcaro é um 'golpe forte' na campanha.",
-      "Flavio Bolsonaro se defende, mas aliados admitem que proximidade com Vorcaro é um 'golpe forte' na campanha e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-for.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-for.svg",
-    "feedImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-for.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-forte-na-campanha.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-forte-na-campanha.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-se-defende-mas-aliados-admitem-que-proximidade-com-vorcaro-e-um-golpe-forte-na-"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-filme-sobre-o-pai.ghtml",
-    "slug": "estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-filme-so",
-    "title": "'Estarei contigo sempre': ouça ÁUDIO em que Flávio Bolsonaro pede dinheiro de Vorcaro para filme sobre o pai",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:50:04.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-filme-sobre-o-pai.ghtml",
-    "sourceLabel": "'Estarei contigo sempre': ouça ÁUDIO em que Flávio Bolsonaro pede dinheiro de Vorcaro para filme sobre o pai",
-    "lede": "Áudio de Flávio Bolsonaro para Daniel Vorcaro; ouça O banqueiro Daniel Vorcaro ajudou a financiar um filme sobre Jair Bolsonaro – e as negociações envolveram contatos diretos com o filho do ex-presidente, o senador e...",
-    "summary": "Áudio de Flávio Bolsonaro para Daniel Vorcaro; ouça O banqueiro Daniel Vorcaro ajudou a financiar um filme sobre Jair Bolsonaro – e as negociações envolveram contatos diretos com o filho do ex-presidente, o senador e...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre 'Estarei contigo sempre': ouça ÁUDIO em que Flávio Bolsonaro pede dinheiro de Vorcaro para filme sobre o pai.",
-      "Estarei contigo sempre': ouça ÁUDIO em que Flávio Bolsonaro pede dinheiro de Vorcaro para filme sobre o pai e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-fi.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-fi.svg",
-    "feedImageUrl": "/assets/news-fallbacks/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-fi.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-filme-sobre-o-pai.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-filme-sobre-o-pai.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "estarei-contigo-sempre-ouca-audio-em-que-flavio-bolsonaro-pede-dinheiro-de-vorcaro-para-filme-so"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-irregularidades.ghtml",
-    "slug": "flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-irregul",
-    "title": "Flávio Bolsonaro confirma pedido para que Vorcaro financiasse filme sobre o pai, mas nega irregularidades",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:49:53.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-irregularidades.ghtml",
-    "sourceLabel": "Flávio Bolsonaro confirma pedido para que Vorcaro financiasse filme sobre o pai, mas nega irregularidades",
-    "lede": "O senador e pré-candidato a presidente da República, Flávio Bolsonaro (PL-RJ), divulgou nesta quarta-feira nota em confirma ter solicitado que o banqueiro Daniel Vorcaro financiasse o filme sobre o ex-presidente Jair Bolsonaro...",
-    "summary": "O senador e pré-candidato a presidente da República, Flávio Bolsonaro (PL-RJ), divulgou nesta quarta-feira nota em confirma ter solicitado que o banqueiro Daniel Vorcaro financiasse o filme sobre o ex-presidente Jair Bolsonaro...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro confirma pedido para que Vorcaro financiasse filme sobre o pai, mas nega irregularidades.",
-      "Flávio Bolsonaro confirma pedido para que Vorcaro financiasse filme sobre o pai, mas nega irregularidades e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-i.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-i.svg",
-    "feedImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-i.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-irregularidades.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-irregularidades.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-confirma-pedido-para-que-vorcaro-financiasse-filme-sobre-o-pai-mas-nega-irregul"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/13/apos-votar-favoravel-bittar-acusa-lula-de-oportunismo-ao-revogar-taxacao-das-blusinhas/",
-    "slug": "apos-votar-favoravel-bittar-acusa-lula-de-oportunismo-ao-revogar-taxacao-das-blusinhas",
-    "title": "Após votar favorável, Bittar acusa Lula de oportunismo ao revogar ‘taxação das blusinhas’",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:47:57.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/13/apos-votar-favoravel-bittar-acusa-lula-de-oportunismo-ao-revogar-taxacao-das-blusinhas/",
-    "sourceLabel": "Após votar favorável, Bittar acusa Lula de oportunismo ao revogar ‘taxação das blusinhas’",
-    "lede": "O senador Márcio Bittar (PL) voltou a criticar nesta quarta-feira (13) a chamada “taxa das blusinhas”, ao divulgar vídeo nas redes sociais em que acusa o presidente Lula (PT) de agir por conveniência eleitoral ao anunciar o fim...",
-    "summary": "O senador Márcio Bittar (PL) voltou a criticar nesta quarta-feira (13) a chamada “taxa das blusinhas”, ao divulgar vídeo nas redes sociais em que acusa o presidente Lula (PT) de agir por conveniência eleitoral ao anunciar o fim...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 13 de mai de 2026 a base desta noticia sobre Após votar favorável, Bittar acusa Lula de oportunismo ao revogar ‘taxação das blusinhas’.",
-      "Após votar favorável, Bittar acusa Lula de oportunismo ao revogar ‘taxação das blusinhas’ e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Captura-de-tela-2026-05-13-154547.png",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Captura-de-tela-2026-05-13-154547.png",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Captura-de-tela-2026-05-13-154547.png",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/apos-votar-favoravel-bittar-acusa-lula-de-oportunismo-ao-revogar-taxacao-das-blusinhas/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/apos-votar-favoravel-bittar-acusa-lula-de-oportunismo-ao-revogar-taxacao-das-blusinhas/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "apos-votar-favoravel-bittar-acusa-lula-de-oportunismo-ao-revogar-taxacao-das-blusinhas"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/zema-critica-flavio-bolsonaro-ouvir-voce-cobrando-dinheiro-do-vorcaro-e-imperdoavel.ghtml",
-    "slug": "zema-critica-flavio-bolsonaro-ouvir-voce-cobrando-dinheiro-do-vorcaro-e-imperdoavel",
-    "title": "Zema critica Flávio Bolsonaro: 'Ouvir você cobrando dinheiro do Vorcaro é imperdoável'",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:44:36.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/zema-critica-flavio-bolsonaro-ouvir-voce-cobrando-dinheiro-do-vorcaro-e-imperdoavel.ghtml",
-    "sourceLabel": "Zema critica Flávio Bolsonaro: 'Ouvir você cobrando dinheiro do Vorcaro é imperdoável'",
-    "lede": "O ex-governador de Minas Gerais e pré-candidato à Presidência da República, Romeu Zema (Novo), criticou nesta quarta-feira (13) o senador Flávio Bolsonaro (PL-SP) após a divulgação de reportagens sobre supostos repasses do...",
-    "summary": "O ex-governador de Minas Gerais e pré-candidato à Presidência da República, Romeu Zema (Novo), criticou nesta quarta-feira (13) o senador Flávio Bolsonaro (PL-SP) após a divulgação de reportagens sobre supostos repasses do...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Zema critica Flávio Bolsonaro: 'Ouvir você cobrando dinheiro do Vorcaro é imperdoável'.",
-      "Zema critica Flávio Bolsonaro: 'Ouvir você cobrando dinheiro do Vorcaro é imperdoável' e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/qovQT9H0Q-3FAXsCemYRouBTV5I=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/R/1/wrh7iBSBWKopdqbuA9Rw/zema.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/qovQT9H0Q-3FAXsCemYRouBTV5I=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/R/1/wrh7iBSBWKopdqbuA9Rw/zema.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/qovQT9H0Q-3FAXsCemYRouBTV5I=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/R/1/wrh7iBSBWKopdqbuA9Rw/zema.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/zema-critica-flavio-bolsonaro-ouvir-voce-cobrando-dinheiro-do-vorcaro-e-imperdoavel.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/zema-critica-flavio-bolsonaro-ouvir-voce-cobrando-dinheiro-do-vorcaro-e-imperdoavel.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "zema-critica-flavio-bolsonaro-ouvir-voce-cobrando-dinheiro-do-vorcaro-e-imperdoavel"
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/13/audio-flavio-pediu-r-134-milhoes-a-vorcaro-para-filme-de-bolsonaro-diz-intercept/",
-    "slug": "audio-flavio-pediu-r-134-milhoes-a-vorcaro-para-filme-de-bolsonaro-diz-intercept",
-    "title": "Áudio: Flávio pediu R$ 134 milhões a Vorcaro para filme de Bolsonaro, diz Intercept",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:42:54.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/13/audio-flavio-pediu-r-134-milhoes-a-vorcaro-para-filme-de-bolsonaro-diz-intercept/",
-    "sourceLabel": "Áudio: Flávio pediu R$ 134 milhões a Vorcaro para filme de Bolsonaro, diz Intercept",
-    "lede": "O senador e pré-candidato à Presidência da República, Flávio Bolsonaro (PL-RJ), negociou um repasse de US$ 24 milhões, cerca de R$ 134 milhões, diretamente com o ex-banqueiro Daniel Vorcaro, dono do Banco Master, para financiar...",
-    "summary": "O senador e pré-candidato à Presidência da República, Flávio Bolsonaro (PL-RJ), negociou um repasse de US$ 24 milhões, cerca de R$ 134 milhões, diretamente com o ex-banqueiro Daniel Vorcaro, dono do Banco Master, para financiar...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 13 de mai de 2026 a base desta noticia sobre Áudio: Flávio pediu R$ 134 milhões a Vorcaro para filme de Bolsonaro, diz Intercept.",
-      "Áudio: Flávio pediu R$ 134 milhões a Vorcaro para filme de Bolsonaro, diz Intercept e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Renata-15.webp",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Renata-15.webp",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Renata-15.webp",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/audio-flavio-pediu-r-134-milhoes-a-vorcaro-para-filme-de-bolsonaro-diz-intercept/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/audio-flavio-pediu-r-134-milhoes-a-vorcaro-para-filme-de-bolsonaro-diz-intercept/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "audio-flavio-pediu-r-134-milhoes-a-vorcaro-para-filme-de-bolsonaro-diz-intercept"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-pediu-dinheiro-de-vorcaro-para-filme-sobre-o-pai-mostram-mensagens-divulgadas-por-site.ghtml",
-    "slug": "flavio-bolsonaro-pediu-dinheiro-a-vorcaro-para-filme-sobre-o-pai-banqueiro-chegou-a-pagar-r-61-m",
-    "title": "Flávio Bolsonaro pediu dinheiro a Vorcaro para filme sobre o pai; banqueiro chegou a pagar R$ 61 milhões para a produção, diz site",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:41:36.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-pediu-dinheiro-de-vorcaro-para-filme-sobre-o-pai-mostram-mensagens-divulgadas-por-site.ghtml",
-    "sourceLabel": "Flávio Bolsonaro pediu dinheiro a Vorcaro para filme sobre o pai; banqueiro chegou a pagar R$ 61 milhões para a produção, diz site",
-    "lede": "Áudio de Flávio Bolsonaro para Daniel Vorcaro; ouça O banqueiro Daniel Vorcaro ajudou a financiar um filme sobre Jair Bolsonaro – e as negociações envolveram contatos diretos com o filho do ex-presidente, o senador e...",
-    "summary": "Áudio de Flávio Bolsonaro para Daniel Vorcaro; ouça O banqueiro Daniel Vorcaro ajudou a financiar um filme sobre Jair Bolsonaro – e as negociações envolveram contatos diretos com o filho do ex-presidente, o senador e...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Flávio Bolsonaro pediu dinheiro a Vorcaro para filme sobre o pai; banqueiro chegou a pagar R$ 61 milhões para a produção, diz site.",
-      "Flávio Bolsonaro pediu dinheiro a Vorcaro para filme sobre o pai; banqueiro chegou a pagar R$ 61 milhões para a produção, diz site e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/flavio-bolsonaro-pediu-dinheiro-a-vorcaro-para-filme-sobre-o-pai-banqueiro-chegou-a-pagar-.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-pediu-dinheiro-a-vorcaro-para-filme-sobre-o-pai-banqueiro-chegou-a-pagar-.svg",
-    "feedImageUrl": "/assets/news-fallbacks/flavio-bolsonaro-pediu-dinheiro-a-vorcaro-para-filme-sobre-o-pai-banqueiro-chegou-a-pagar-.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-pediu-dinheiro-de-vorcaro-para-filme-sobre-o-pai-mostram-mensagens-divulgadas-por-site.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/flavio-bolsonaro-pediu-dinheiro-de-vorcaro-para-filme-sobre-o-pai-mostram-mensagens-divulgadas-por-site.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-pediu-dinheiro-a-vorcaro-para-filme-sobre-o-pai-banqueiro-chegou-a-pagar-r-61-m"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
     "id": "https://ac24horas.com/2026/05/13/desenrola-fies-pode-beneficiar-78-mil-estudantes-inadimplentes-no-ac/",
     "slug": "desenrola-fies-pode-beneficiar-7-8-mil-estudantes-inadimplentes-no-ac",
     "title": "Desenrola Fies pode beneficiar 7,8 mil estudantes inadimplentes no AC",
@@ -52569,312 +52765,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "policia-civil-inicia-treinamento-para-adaptacao-e-manuseio-de-pistolas-glock"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro/",
-    "slug": "flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro",
-    "title": "Flávio faz reunião de emergência após site revelar diálogo com Vorcaro",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T20:03:26.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro/",
-    "sourceLabel": "Flávio faz reunião de emergência após site revelar diálogo com Vorcaro",
-    "lede": "Encontro ocorre no QG da pré-campanha em Brasília",
-    "summary": "Encontro ocorre no QG da pré-campanha em Brasília",
-    "analysis": "",
-    "body": [
-      "CNN Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Flávio faz reunião de emergência após site revelar diálogo com Vorcaro.",
-      "Flávio faz reunião de emergência após site revelar diálogo com Vorcaro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro.svg",
-    "feedImageUrl": "/assets/news-fallbacks/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-faz-reuniao-de-emergencia-apos-site-revelar-dialogo-com-vorcaro"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec",
-    "slug": "revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec",
-    "title": "Revogação da taxa das blusinhas corrige distorções, diz Amobitec",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T19:19:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec",
-    "sourceLabel": "Revogação da taxa das blusinhas corrige distorções, diz Amobitec",
-    "lede": "A decisão de revogar a tributação sobre compras internacionais de pequeno valor – a chamada taxa das blusinhas – corrige uma política que não atingiu os objetivos propostos quando foi criada, segundo avaliação da Associação...",
-    "summary": "A decisão de revogar a tributação sobre compras internacionais de pequeno valor – a chamada taxa das blusinhas – corrige uma política que não atingiu os objetivos propostos quando foi criada, segundo avaliação da Associação...",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Revogação da taxa das blusinhas corrige distorções, diz Amobitec.",
-      "Revogação da taxa das blusinhas corrige distorções, diz Amobitec e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec.svg",
-    "feedImageUrl": "/assets/news-fallbacks/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "revogacao-da-taxa-das-blusinhas-corrige-distorcoes-diz-amobitec"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/estudantes-que-aderirem-ao-desenrola-fies-ficarao-proibidos-de-fazer-apostas-online-diz-fazenda.ghtml",
-    "slug": "estudantes-que-aderirem-ao-desenrola-fies-ficarao-proibidos-de-fazer-apostas-online-diz-fazenda",
-    "title": "Estudantes que aderirem ao Desenrola Fies ficarão proibidos de fazer apostas online, diz Fazenda",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T19:04:21.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/estudantes-que-aderirem-ao-desenrola-fies-ficarao-proibidos-de-fazer-apostas-online-diz-fazenda.ghtml",
-    "sourceLabel": "Estudantes que aderirem ao Desenrola Fies ficarão proibidos de fazer apostas online, diz Fazenda",
-    "lede": "Desenrola Fies renegocia dívidas de parcelas atrasadas O secretário-executivo da Fazenda, Rogério Ceron, afirmou nesta quarta-feira (13) que estudantes que aderirem ao programa de renegociação de dívidas do Fundo de...",
-    "summary": "Desenrola Fies renegocia dívidas de parcelas atrasadas O secretário-executivo da Fazenda, Rogério Ceron, afirmou nesta quarta-feira (13) que estudantes que aderirem ao programa de renegociação de dívidas do Fundo de...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Estudantes que aderirem ao Desenrola Fies ficarão proibidos de fazer apostas online, diz Fazenda.",
-      "Estudantes que aderirem ao Desenrola Fies ficarão proibidos de fazer apostas online, diz Fazenda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/dD9ohEzFlHc-bMU_-VzmXmNx4T0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/A/A/zFDgBlR8CBSsXjNbBVeg/54538670938-222686b5fc-o.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/dD9ohEzFlHc-bMU_-VzmXmNx4T0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/A/A/zFDgBlR8CBSsXjNbBVeg/54538670938-222686b5fc-o.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/dD9ohEzFlHc-bMU_-VzmXmNx4T0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/A/A/zFDgBlR8CBSsXjNbBVeg/54538670938-222686b5fc-o.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/estudantes-que-aderirem-ao-desenrola-fies-ficarao-proibidos-de-fazer-apostas-online-diz-fazenda.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/estudantes-que-aderirem-ao-desenrola-fies-ficarao-proibidos-de-fazer-apostas-online-diz-fazenda.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "estudantes-que-aderirem-ao-desenrola-fies-ficarao-proibidos-de-fazer-apostas-online-diz-fazenda"
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/13/tadeu-anuncia-r-1-milhao-para-cafe-clonal-e-reforca-apoio-aos-produtores-de-capixaba/",
-    "slug": "tadeu-anuncia-r-1-milhao-para-cafe-clonal-e-reforca-apoio-aos-produtores",
-    "title": "Tadeu anuncia R$ 1 milhão para café clonal e reforça apoio aos produtores",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T18:34:38.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/13/tadeu-anuncia-r-1-milhao-para-cafe-clonal-e-reforca-apoio-aos-produtores-de-capixaba/",
-    "sourceLabel": "Tadeu anuncia R$ 1 milhão para café clonal e reforça apoio aos produtores",
-    "lede": "O deputado estadual Tadeu Hassem participou nesta quarta-feira (13) de uma capacitação sobre implantação do café clonal na comunidade PA São Luís do Remanso, em Capixaba, e anunciou um investimento de aproximadamente R$ 1...",
-    "summary": "O deputado estadual Tadeu Hassem participou nesta quarta-feira (13) de uma capacitação sobre implantação do café clonal na comunidade PA São Luís do Remanso, em Capixaba, e anunciou um investimento de aproximadamente R$ 1...",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 13 de mai de 2026 a base desta noticia sobre Tadeu anuncia R$ 1 milhão para café clonal e reforça apoio aos produtores.",
-      "Tadeu anuncia R$ 1 milhão para café clonal e reforça apoio aos produtores e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-13-at-13.23.50-1200x801.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-13-at-13.23.50-1200x801.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-13-at-13.23.50-1200x801.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/tadeu-anuncia-r-1-milhao-para-cafe-clonal-e-reforca-apoio-aos-produtores-de-capixaba/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/13/tadeu-anuncia-r-1-milhao-para-cafe-clonal-e-reforca-apoio-aos-produtores-de-capixaba/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tadeu-anuncia-r-1-milhao-para-cafe-clonal-e-reforca-apoio-aos-produtores"
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos",
-    "slug": "ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos",
-    "title": "Há 100 anos, Ford instituía jornada de 40 horas nos Estados Unidos",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T18:04:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos",
-    "sourceLabel": "Há 100 anos, Ford instituía jornada de 40 horas nos Estados Unidos",
-    "lede": "Em maio de 1926, há exatos 100 anos, a montadora de veículos Ford adotou, por conta própria, a jornada de trabalho de 40 horas semanais nas fábricas que representavam o modelo da indústria dos Estados Unidos (EUA), chegando a...",
-    "summary": "Em maio de 1926, há exatos 100 anos, a montadora de veículos Ford adotou, por conta própria, a jornada de trabalho de 40 horas semanais nas fábricas que representavam o modelo da indústria dos Estados Unidos (EUA), chegando a...",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Há 100 anos, Ford instituía jornada de 40 horas nos Estados Unidos.",
-      "Há 100 anos, Ford instituía jornada de 40 horas nos Estados Unidos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos.svg",
-    "feedImageUrl": "/assets/news-fallbacks/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "ha-100-anos-ford-instituia-jornada-de-40-horas-nos-estados-unidos"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/taxa-das-blusinhas-pesquisa-interna-que-apontou-rejeicao-de-70percent-foi-determinante-para-revogacao-improvisada-por-lula.ghtml",
-    "slug": "taxa-das-blusinhas-pesquisa-interna-que-apontou-rejeicao-de-70-foi-determinante-para-revogacao-i",
-    "title": "'Taxa das blusinhas': pesquisa interna que apontou rejeição de 70% foi determinante para revogação improvisada por Lula",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T16:26:53.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/taxa-das-blusinhas-pesquisa-interna-que-apontou-rejeicao-de-70percent-foi-determinante-para-revogacao-improvisada-por-lula.ghtml",
-    "sourceLabel": "'Taxa das blusinhas': pesquisa interna que apontou rejeição de 70% foi determinante para revogação improvisada por Lula",
-    "lede": "'Taxa das blusinhas': pesquisa interna que apontou rejeição de 70% foi determinante para revogação improvisada por Lula Uma pesquisa interna realizada pelo Palácio do Planalto foi o estopim para a mudança repentina de postura...",
-    "summary": "'Taxa das blusinhas': pesquisa interna que apontou rejeição de 70% foi determinante para revogação improvisada por Lula Uma pesquisa interna realizada pelo Palácio do Planalto foi o estopim para a mudança repentina de postura...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre 'Taxa das blusinhas': pesquisa interna que apontou rejeição de 70% foi determinante para revogação improvisada por Lula.",
-      "Taxa das blusinhas': pesquisa interna que apontou rejeição de 70% foi determinante para revogação improvisada por Lula e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/DYcu-dEfzCpqYCmryRHqMBwvrcQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/s/N59JidRZepkWiwxeCviw/55224931305-2057b9d2d8-k.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/DYcu-dEfzCpqYCmryRHqMBwvrcQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/s/N59JidRZepkWiwxeCviw/55224931305-2057b9d2d8-k.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/DYcu-dEfzCpqYCmryRHqMBwvrcQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/s/N59JidRZepkWiwxeCviw/55224931305-2057b9d2d8-k.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/taxa-das-blusinhas-pesquisa-interna-que-apontou-rejeicao-de-70percent-foi-determinante-para-revogacao-improvisada-por-lula.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/gerson-camarotti/post/2026/05/13/taxa-das-blusinhas-pesquisa-interna-que-apontou-rejeicao-de-70percent-foi-determinante-para-revogacao-improvisada-por-lula.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "taxa-das-blusinhas-pesquisa-interna-que-apontou-rejeicao-de-70-foi-determinante-para-revogacao-i"
     ]
   },
   {
@@ -52977,961 +52867,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "educacao-e-assistencia-social-debatem-politicas-publicas-para-a-infancia-com-conselho-dos-direit"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/relator-apresenta-parecer-favoravel-a-indicacao-de-benedito-goncalves-para-corregedor-do-cnj.ghtml",
-    "slug": "relator-apresenta-parecer-favoravel-a-indicacao-de-benedito-goncalves-para-corregedor-do-cnj",
-    "title": "Relator apresenta parecer favorável à indicação de Benedito Gonçalves para corregedor do CNJ",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:24:45.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/relator-apresenta-parecer-favoravel-a-indicacao-de-benedito-goncalves-para-corregedor-do-cnj.ghtml",
-    "sourceLabel": "Relator apresenta parecer favorável à indicação de Benedito Gonçalves para corregedor do CNJ",
-    "lede": "O senador Cid Gomes (PSB-CE) apresentou na Comissão de Constituição Justiça (CCJ) do Senado parecer favorável à indicação do ministro Benedito Gonçalves, do Superior Tribunal de Justiça (STJ), ao cargo de corregedor Nacional de...",
-    "summary": "O senador Cid Gomes (PSB-CE) apresentou na Comissão de Constituição Justiça (CCJ) do Senado parecer favorável à indicação do ministro Benedito Gonçalves, do Superior Tribunal de Justiça (STJ), ao cargo de corregedor Nacional de...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Relator apresenta parecer favorável à indicação de Benedito Gonçalves para corregedor do CNJ.",
-      "Relator apresenta parecer favorável à indicação de Benedito Gonçalves para corregedor do CNJ e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/nV332Bp0k4KdwM1ebqFHKf0ZzPQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/C/g/4PooSrRneiS6rOBABWXg/53006778824-37545d48f1-c.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/nV332Bp0k4KdwM1ebqFHKf0ZzPQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/C/g/4PooSrRneiS6rOBABWXg/53006778824-37545d48f1-c.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/nV332Bp0k4KdwM1ebqFHKf0ZzPQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/C/g/4PooSrRneiS6rOBABWXg/53006778824-37545d48f1-c.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/relator-apresenta-parecer-favoravel-a-indicacao-de-benedito-goncalves-para-corregedor-do-cnj.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/relator-apresenta-parecer-favoravel-a-indicacao-de-benedito-goncalves-para-corregedor-do-cnj.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "relator-apresenta-parecer-favoravel-a-indicacao-de-benedito-goncalves-para-corregedor-do-cnj"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/taxa-das-blusinhas-veja-quanto-cada-estado-cobra-em-icms-na-importacao-aliquotas-variam-de-17percent-a-20percent.ghtml",
-    "slug": "taxa-das-blusinhas-veja-quanto-cada-estado-cobra-em-icms-na-importacao-aliquotas-variam-de-17-a-",
-    "title": "Taxa das blusinhas: veja quanto cada estado cobra em ICMS na importação; alíquotas variam de 17% a 20%",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:12:15.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/taxa-das-blusinhas-veja-quanto-cada-estado-cobra-em-icms-na-importacao-aliquotas-variam-de-17percent-a-20percent.ghtml",
-    "sourceLabel": "Taxa das blusinhas: veja quanto cada estado cobra em ICMS na importação; alíquotas variam de 17% a 20%",
-    "lede": "O que é a 'taxa das blusinhas', que Lula cancelou após quase dois anos?",
-    "summary": "O que é a 'taxa das blusinhas', que Lula cancelou após quase dois anos?",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Taxa das blusinhas: veja quanto cada estado cobra em ICMS na importação; alíquotas variam de 17% a 20%.",
-      "Taxa das blusinhas: veja quanto cada estado cobra em ICMS na importação; alíquotas variam de 17% a 20% e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/2QS6js0O0Ag5nNeLi8D07dH_DUM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/t/C95dV1TFaQbe6WbqxxHg/e56cf2d0-45ac-11f1-b552-73094d4d31d4.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/2QS6js0O0Ag5nNeLi8D07dH_DUM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/t/C95dV1TFaQbe6WbqxxHg/e56cf2d0-45ac-11f1-b552-73094d4d31d4.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/2QS6js0O0Ag5nNeLi8D07dH_DUM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/t/C95dV1TFaQbe6WbqxxHg/e56cf2d0-45ac-11f1-b552-73094d4d31d4.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/taxa-das-blusinhas-veja-quanto-cada-estado-cobra-em-icms-na-importacao-aliquotas-variam-de-17percent-a-20percent.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/taxa-das-blusinhas-veja-quanto-cada-estado-cobra-em-icms-na-importacao-aliquotas-variam-de-17percent-a-20percent.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "taxa-das-blusinhas-veja-quanto-cada-estado-cobra-em-icms-na-importacao-aliquotas-variam-de-17-a-"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/analise-pesquisa-quaest-presidencial-lula-bolsonaro.ghtml",
-    "slug": "analise-pesquisa-mostra-melhora-na-avaliacao-do-governo-e-eleicao-apertada-entre-lula-e-flavio-b",
-    "title": "ANÁLISE: pesquisa mostra melhora na avaliação do governo e eleição apertada entre Lula e Flávio Bolsonaro, diz diretor da Quaest",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T14:03:54.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/analise-pesquisa-quaest-presidencial-lula-bolsonaro.ghtml",
-    "sourceLabel": "ANÁLISE: pesquisa mostra melhora na avaliação do governo e eleição apertada entre Lula e Flávio Bolsonaro, diz diretor da Quaest",
-    "lede": "Quaest: 49% desaprovam e 46% aprovam o governo Lula A nova pesquisa Quaest, divulgada nesta quarta-feira (13), mostra que houve uma melhora na percepção dos brasileiros sobre o governo Lula, sob o impacto de notícias como o...",
-    "summary": "Quaest: 49% desaprovam e 46% aprovam o governo Lula A nova pesquisa Quaest, divulgada nesta quarta-feira (13), mostra que houve uma melhora na percepção dos brasileiros sobre o governo Lula, sob o impacto de notícias como o...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre ANÁLISE: pesquisa mostra melhora na avaliação do governo e eleição apertada entre Lula e Flávio Bolsonaro, diz diretor da Quaest.",
-      "ANÁLISE: pesquisa mostra melhora na avaliação do governo e eleição apertada entre Lula e Flávio Bolsonaro, diz diretor da Quaest e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/fecRcq1t22wCUdHEc9DGE_1XlO0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/q/V/Qvu0vBSNmfbGyeTdESpA/copia-de-foto.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/fecRcq1t22wCUdHEc9DGE_1XlO0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/q/V/Qvu0vBSNmfbGyeTdESpA/copia-de-foto.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/fecRcq1t22wCUdHEc9DGE_1XlO0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/q/V/Qvu0vBSNmfbGyeTdESpA/copia-de-foto.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/analise-pesquisa-quaest-presidencial-lula-bolsonaro.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/analise-pesquisa-quaest-presidencial-lula-bolsonaro.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "analise-pesquisa-mostra-melhora-na-avaliacao-do-governo-e-eleicao-apertada-entre-lula-e-flavio-b"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/alckmin-diz-que-veto-a-carnes-deve-se-equacionar-e-defende-padrao-sanitario-do-pais.ghtml",
-    "slug": "alckmin-diz-que-veto-a-carnes-deve-se-equacionar-e-defende-padrao-sanitario-brasileiro",
-    "title": "Alckmin diz que veto a carnes deve 'se equacionar' e defende padrão sanitário brasileiro",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T13:57:37.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/alckmin-diz-que-veto-a-carnes-deve-se-equacionar-e-defende-padrao-sanitario-do-pais.ghtml",
-    "sourceLabel": "Alckmin diz que veto a carnes deve 'se equacionar' e defende padrão sanitário brasileiro",
-    "lede": "O vice-presidente Geraldo Alckmin defendeu nesta quarta-feira (13) o padrão sanitário do Brasil e afirmou acreditar que o veto à importação de carne brasileira pela União Europeia (UE) deve \"se equacionar\".",
-    "summary": "O vice-presidente Geraldo Alckmin defendeu nesta quarta-feira (13) o padrão sanitário do Brasil e afirmou acreditar que o veto à importação de carne brasileira pela União Europeia (UE) deve \"se equacionar\".",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Alckmin diz que veto a carnes deve 'se equacionar' e defende padrão sanitário brasileiro.",
-      "Alckmin diz que veto a carnes deve 'se equacionar' e defende padrão sanitário brasileiro e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/tMtWpSwCfnogZcw87nMV3aaEFWw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/s/AoY30KRECOqvDjoSaKyg/55212136799-76e9b6593d-k.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/tMtWpSwCfnogZcw87nMV3aaEFWw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/s/AoY30KRECOqvDjoSaKyg/55212136799-76e9b6593d-k.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/tMtWpSwCfnogZcw87nMV3aaEFWw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/s/AoY30KRECOqvDjoSaKyg/55212136799-76e9b6593d-k.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/alckmin-diz-que-veto-a-carnes-deve-se-equacionar-e-defende-padrao-sanitario-do-pais.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/alckmin-diz-que-veto-a-carnes-deve-se-equacionar-e-defende-padrao-sanitario-do-pais.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "alckmin-diz-que-veto-a-carnes-deve-se-equacionar-e-defende-padrao-sanitario-brasileiro"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.ghtml",
-    "slug": "entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada",
-    "title": "Entenda a reviravolta na \"taxa das blusinhas\", agora zerada",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T13:31:37.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.ghtml",
-    "sourceLabel": "Entenda a reviravolta na \"taxa das blusinhas\", agora zerada",
-    "lede": "O que é a 'taxa das blusinhas', que Lula cancelou após quase dois anos? Chegou ao fim a apelidada \"taxa das blusinhas\", conforme Medida Provisória (MP) assinada pela presidente Luiz Inácio Lula da Silva na terça-feira (12).",
-    "summary": "O que é a 'taxa das blusinhas', que Lula cancelou após quase dois anos? Chegou ao fim a apelidada \"taxa das blusinhas\", conforme Medida Provisória (MP) assinada pela presidente Luiz Inácio Lula da Silva na terça-feira (12).",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Entenda a reviravolta na \"taxa das blusinhas\", agora zerada.",
-      "Entenda a reviravolta na \"taxa das blusinhas\", agora zerada e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.svg",
-    "feedImageUrl": "/assets/news-fallbacks/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "entenda-a-reviravolta-na-taxa-das-blusinhas-agora-zerada"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-opoe-varejo-nacional-e-importadores-veja-argumentos-a-favor-e-contra.ghtml",
-    "slug": "fim-da-taxa-das-blusinhas-opoe-varejo-nacional-e-importadores-veja-argumentos-a-favor-e-contra",
-    "title": "Fim da taxa das blusinhas opõe varejo nacional e importadores; veja argumentos a favor e contra",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T13:00:27.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-opoe-varejo-nacional-e-importadores-veja-argumentos-a-favor-e-contra.ghtml",
-    "sourceLabel": "Fim da taxa das blusinhas opõe varejo nacional e importadores; veja argumentos a favor e contra",
-    "lede": "Governo Federal anuncia fim da taxa das blusinhas A revogação da chamada \"taxa das blusinhas\" pelo presidente Luiz Inácio Lula da Silva (PT) abriu nova frente de batalha entre os representantes do varejo nacional e os...",
-    "summary": "Governo Federal anuncia fim da taxa das blusinhas A revogação da chamada \"taxa das blusinhas\" pelo presidente Luiz Inácio Lula da Silva (PT) abriu nova frente de batalha entre os representantes do varejo nacional e os...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Fim da taxa das blusinhas opõe varejo nacional e importadores; veja argumentos a favor e contra.",
-      "Fim da taxa das blusinhas opõe varejo nacional e importadores; veja argumentos a favor e contra e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/wEIYXaAE_SiKE_FLjzl4yj2UvFY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/1/6/Dn19MMSh65tErikQMuBQ/bbc-3.webp",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/wEIYXaAE_SiKE_FLjzl4yj2UvFY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/1/6/Dn19MMSh65tErikQMuBQ/bbc-3.webp",
-    "feedImageUrl": "https://s2-g1.glbimg.com/wEIYXaAE_SiKE_FLjzl4yj2UvFY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/1/6/Dn19MMSh65tErikQMuBQ/bbc-3.webp",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-opoe-varejo-nacional-e-importadores-veja-argumentos-a-favor-e-contra.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-opoe-varejo-nacional-e-importadores-veja-argumentos-a-favor-e-contra.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "fim-da-taxa-das-blusinhas-opoe-varejo-nacional-e-importadores-veja-argumentos-a-favor-e-contra"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/pesquisa-quaest-mostra-acerto-nas-acoes-do-governo-para-recuperar-imagem-de-lula-avaliam-assessores.ghtml",
-    "slug": "pesquisa-quaest-mostra-acerto-nas-acoes-do-governo-para-recuperar-imagem-de-lula-avaliam-assesso",
-    "title": "Pesquisa Quaest mostra acerto nas ações do governo para recuperar imagem de Lula, avaliam assessores",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T12:26:23.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/pesquisa-quaest-mostra-acerto-nas-acoes-do-governo-para-recuperar-imagem-de-lula-avaliam-assessores.ghtml",
-    "sourceLabel": "Pesquisa Quaest mostra acerto nas ações do governo para recuperar imagem de Lula, avaliam assessores",
-    "lede": "Quaest 2º turno: Lula tem 42%; Flávio Bolsonaro, 41%, em empate técnico A nova pesquisa Quaest, divulgada nesta quarta-feira (13), mostra acerto nas ações do governo para recuperar a imagem do presidente Luiz Inácio Lula da...",
-    "summary": "Quaest 2º turno: Lula tem 42%; Flávio Bolsonaro, 41%, em empate técnico A nova pesquisa Quaest, divulgada nesta quarta-feira (13), mostra acerto nas ações do governo para recuperar a imagem do presidente Luiz Inácio Lula da...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Pesquisa Quaest mostra acerto nas ações do governo para recuperar imagem de Lula, avaliam assessores.",
-      "Pesquisa Quaest mostra acerto nas ações do governo para recuperar imagem de Lula, avaliam assessores e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/B3UU0F6VLH6pijEW1M-ttcJLm8A=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/O/k/TrqXV0RIAuR5AGnACHAg/montagem-flavio-bolsonaro-lula-g1.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/B3UU0F6VLH6pijEW1M-ttcJLm8A=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/O/k/TrqXV0RIAuR5AGnACHAg/montagem-flavio-bolsonaro-lula-g1.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/B3UU0F6VLH6pijEW1M-ttcJLm8A=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/O/k/TrqXV0RIAuR5AGnACHAg/montagem-flavio-bolsonaro-lula-g1.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/pesquisa-quaest-mostra-acerto-nas-acoes-do-governo-para-recuperar-imagem-de-lula-avaliam-assessores.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/13/pesquisa-quaest-mostra-acerto-nas-acoes-do-governo-para-recuperar-imagem-de-lula-avaliam-assessores.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "pesquisa-quaest-mostra-acerto-nas-acoes-do-governo-para-recuperar-imagem-de-lula-avaliam-assesso"
-    ]
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/myrian-pereira-e-nova-diretora-de-jornalismo-da-ebc",
-    "slug": "myrian-pereira-e-a-nova-diretora-de-jornalismo-da-ebc",
-    "title": "Myrian Pereira é a nova diretora de Jornalismo da EBC",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:31:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/myrian-pereira-e-nova-diretora-de-jornalismo-da-ebc",
-    "sourceLabel": "Myrian Pereira é a nova diretora de Jornalismo da EBC",
-    "lede": "O presidente Luiz Inácio Lula da Silva nomeou a jornalista Myrian Pereira como nova diretora de Jornalismo da Empresa Brasil de Comunicação (EBC). O decreto está publicado no Diário Oficial da União desta quarta-feira (13).",
-    "summary": "O presidente Luiz Inácio Lula da Silva nomeou a jornalista Myrian Pereira como nova diretora de Jornalismo da Empresa Brasil de Comunicação (EBC). O decreto está publicado no Diário Oficial da União desta quarta-feira (13).",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Myrian Pereira é a nova diretora de Jornalismo da EBC.",
-      "Myrian Pereira é a nova diretora de Jornalismo da EBC e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/myrian-pereira-e-a-nova-diretora-de-jornalismo-da-ebc.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/myrian-pereira-e-a-nova-diretora-de-jornalismo-da-ebc.svg",
-    "feedImageUrl": "/assets/news-fallbacks/myrian-pereira-e-a-nova-diretora-de-jornalismo-da-ebc.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/myrian-pereira-e-nova-diretora-de-jornalismo-da-ebc"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/myrian-pereira-e-nova-diretora-de-jornalismo-da-ebc"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "myrian-pereira-e-a-nova-diretora-de-jornalismo-da-ebc"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-presidencial-primeiro-turno.ghtml",
-    "slug": "quaest-1-turno-lula-lidera-com-39-seguido-por-flavio-bolsonaro-com-33-caiado-e-zema-tem-4-cada",
-    "title": "Quaest 1º turno: Lula lidera com 39%, seguido por Flávio Bolsonaro com 33%; Caiado e Zema têm 4% cada",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:00:08.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-presidencial-primeiro-turno.ghtml",
-    "sourceLabel": "Quaest 1º turno: Lula lidera com 39%, seguido por Flávio Bolsonaro com 33%; Caiado e Zema têm 4% cada",
-    "lede": "Pesquisa Quaest divulgada nesta quarta-feira (13) mostra as intenções de voto para o 1º turno da eleição presidencial de 2026.",
-    "summary": "Pesquisa Quaest divulgada nesta quarta-feira (13) mostra as intenções de voto para o 1º turno da eleição presidencial de 2026.",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Quaest 1º turno: Lula lidera com 39%, seguido por Flávio Bolsonaro com 33%; Caiado e Zema têm 4% cada.",
-      "Quaest 1º turno: Lula lidera com 39%, seguido por Flávio Bolsonaro com 33%; Caiado e Zema têm 4% cada e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/quaest-1-turno-lula-lidera-com-39-seguido-por-flavio-bolsonaro-com-33-caiado-e-zema-tem-4-.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/quaest-1-turno-lula-lidera-com-39-seguido-por-flavio-bolsonaro-com-33-caiado-e-zema-tem-4-.svg",
-    "feedImageUrl": "/assets/news-fallbacks/quaest-1-turno-lula-lidera-com-39-seguido-por-flavio-bolsonaro-com-33-caiado-e-zema-tem-4-.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-presidencial-primeiro-turno.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-presidencial-primeiro-turno.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-1-turno-lula-lidera-com-39-seguido-por-flavio-bolsonaro-com-33-caiado-e-zema-tem-4-cada"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-master.ghtml",
-    "slug": "quaest-para-46-escandalo-do-master-afeta-negativamente-governos-lula-e-bolsonaro-supremo-congres",
-    "title": "Quaest: para 46%, escândalo do Master afeta negativamente governos Lula e Bolsonaro, Supremo, Congresso e BC",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:00:05.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-master.ghtml",
-    "sourceLabel": "Quaest: para 46%, escândalo do Master afeta negativamente governos Lula e Bolsonaro, Supremo, Congresso e BC",
-    "lede": "Quaest: 49% desaprovam e 46% aprovam o governo Lula Pesquisa Quaest divulgada nesta quarta-feira (13) mostra que 46% dos entrevistados avaliam que o escândalo do banco Master afetou negativamente, de forma semelhante, a imagem...",
-    "summary": "Quaest: 49% desaprovam e 46% aprovam o governo Lula Pesquisa Quaest divulgada nesta quarta-feira (13) mostra que 46% dos entrevistados avaliam que o escândalo do banco Master afetou negativamente, de forma semelhante, a imagem...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: para 46%, escândalo do Master afeta negativamente governos Lula e Bolsonaro, Supremo, Congresso e BC.",
-      "Quaest: para 46%, escândalo do Master afeta negativamente governos Lula e Bolsonaro, Supremo, Congresso e BC e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/Xlazbb61FzRPOI5UliPBCYF9chI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/9/nFWoXqQAiBynsdDC3nGQ/quaest-master-final-1-.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/Xlazbb61FzRPOI5UliPBCYF9chI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/9/nFWoXqQAiBynsdDC3nGQ/quaest-master-final-1-.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/Xlazbb61FzRPOI5UliPBCYF9chI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/9/nFWoXqQAiBynsdDC3nGQ/quaest-master-final-1-.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-master.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-master.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-para-46-escandalo-do-master-afeta-negativamente-governos-lula-e-bolsonaro-supremo-congres"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-2o-turno-lula-tem-42percent-e-flavio-bolsonaro-41percent.ghtml",
-    "slug": "quaest-2-turno-lula-tem-42-e-flavio-bolsonaro-41",
-    "title": "Quaest 2º turno: Lula tem 42%, e Flávio Bolsonaro, 41%",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:00:04.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-2o-turno-lula-tem-42percent-e-flavio-bolsonaro-41percent.ghtml",
-    "sourceLabel": "Quaest 2º turno: Lula tem 42%, e Flávio Bolsonaro, 41%",
-    "lede": "Quaest 2º turno: Lula tem 42%; Flávio Bolsonaro, 41%, em empate técnico Pesquisa Quaest divulgada nesta quarta-feira (13) mostra o presidente Lula (PT) e o senador Flávio Bolsonaro (PL) empatados tecnicamente em um cenário de...",
-    "summary": "Quaest 2º turno: Lula tem 42%; Flávio Bolsonaro, 41%, em empate técnico Pesquisa Quaest divulgada nesta quarta-feira (13) mostra o presidente Lula (PT) e o senador Flávio Bolsonaro (PL) empatados tecnicamente em um cenário de...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Quaest 2º turno: Lula tem 42%, e Flávio Bolsonaro, 41%.",
-      "Quaest 2º turno: Lula tem 42%, e Flávio Bolsonaro, 41% e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/NrhvAXUHufKFNRl11WrV2zoI6QE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/x/0po3v8RE6WYJl3DOAEmg/lula-flavio.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/NrhvAXUHufKFNRl11WrV2zoI6QE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/x/0po3v8RE6WYJl3DOAEmg/lula-flavio.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/NrhvAXUHufKFNRl11WrV2zoI6QE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/1/x/0po3v8RE6WYJl3DOAEmg/lula-flavio.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-2o-turno-lula-tem-42percent-e-flavio-bolsonaro-41percent.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/13/quaest-2o-turno-lula-tem-42percent-e-flavio-bolsonaro-41percent.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-2-turno-lula-tem-42-e-flavio-bolsonaro-41"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/quaest-desenrola-20.ghtml",
-    "slug": "quaest-38-consideram-que-desenrola-vai-ajudar-muito-as-familias-endividadas-e-27-acham-que-vai-a",
-    "title": "Quaest: 38% consideram que Desenrola vai ajudar muito as famílias endividadas e 27% acham que vai ajudar pouco",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:00:03.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/quaest-desenrola-20.ghtml",
-    "sourceLabel": "Quaest: 38% consideram que Desenrola vai ajudar muito as famílias endividadas e 27% acham que vai ajudar pouco",
-    "lede": "Quaest 2º turno: Lula tem 42%; Flávio Bolsonaro, 41%, em empate técnico Pesquisa Quaest divulgada nesta quarta-feira (13) mostra que 38% dos brasileiros avaliam que o novo programa Desenrola do governo federal vai ajudar muito...",
-    "summary": "Quaest 2º turno: Lula tem 42%; Flávio Bolsonaro, 41%, em empate técnico Pesquisa Quaest divulgada nesta quarta-feira (13) mostra que 38% dos brasileiros avaliam que o novo programa Desenrola do governo federal vai ajudar muito...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: 38% consideram que Desenrola vai ajudar muito as famílias endividadas e 27% acham que vai ajudar pouco.",
-      "Quaest: 38% consideram que Desenrola vai ajudar muito as famílias endividadas e 27% acham que vai ajudar pouco e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/LRgcqLkdYatmn4QKxqP_abmRcx0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/Q/zlEAvhS4SyCdgA9ZKnpA/55248672156-65507f6947-k.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/LRgcqLkdYatmn4QKxqP_abmRcx0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/Q/zlEAvhS4SyCdgA9ZKnpA/55248672156-65507f6947-k.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/LRgcqLkdYatmn4QKxqP_abmRcx0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/Q/zlEAvhS4SyCdgA9ZKnpA/55248672156-65507f6947-k.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/quaest-desenrola-20.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/quaest-desenrola-20.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-38-consideram-que-desenrola-vai-ajudar-muito-as-familias-endividadas-e-27-acham-que-vai-a"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-49percent-desaprovam-e-46percent-aprovam-o-governo-lula.ghtml",
-    "slug": "quaest-49-desaprovam-e-46-aprovam-o-governo-lula",
-    "title": "Quaest: 49% desaprovam e 46% aprovam o governo Lula",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T11:00:03.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-49percent-desaprovam-e-46percent-aprovam-o-governo-lula.ghtml",
-    "sourceLabel": "Quaest: 49% desaprovam e 46% aprovam o governo Lula",
-    "lede": "Quaest: 49% desaprovam e 46% aprovam o governo Lula Pesquisa Quaest divulgada nesta quarta-feira (13) mostra que 49% desaprovam o governo Lula (PT), enquanto 46% aprovam.",
-    "summary": "Quaest: 49% desaprovam e 46% aprovam o governo Lula Pesquisa Quaest divulgada nesta quarta-feira (13) mostra que 49% desaprovam o governo Lula (PT), enquanto 46% aprovam.",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Quaest: 49% desaprovam e 46% aprovam o governo Lula.",
-      "Quaest: 49% desaprovam e 46% aprovam o governo Lula e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/ZLW_3JHlvJctanx3QXRLVZ4Wjl8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/f/PKphGaS7AT5UjRhEFaTQ/260513-quaest-aprovacao-governo-lula-3.png",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/ZLW_3JHlvJctanx3QXRLVZ4Wjl8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/f/PKphGaS7AT5UjRhEFaTQ/260513-quaest-aprovacao-governo-lula-3.png",
-    "feedImageUrl": "https://s2-g1.glbimg.com/ZLW_3JHlvJctanx3QXRLVZ4Wjl8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/f/PKphGaS7AT5UjRhEFaTQ/260513-quaest-aprovacao-governo-lula-3.png",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-49percent-desaprovam-e-46percent-aprovam-o-governo-lula.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/quaest-49percent-desaprovam-e-46percent-aprovam-o-governo-lula.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "quaest-49-desaprovam-e-46-aprovam-o-governo-lula"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/nunes-marques-canta-com-artistas-no-palco-de-festa-apos-posse-no-tse-veja-video.ghtml",
-    "slug": "nunes-marques-canta-com-artistas-no-palco-de-festa-apos-posse-no-tse-veja-video",
-    "title": "Nunes Marques canta com artistas no palco de festa após posse no TSE; veja vídeo",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T10:59:07.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/nunes-marques-canta-com-artistas-no-palco-de-festa-apos-posse-no-tse-veja-video.ghtml",
-    "sourceLabel": "Nunes Marques canta com artistas no palco de festa após posse no TSE; veja vídeo",
-    "lede": "Ministro Nunes Marques canta em festa após posse no TSE Após tomar posse como presidente do Tribunal Superior Eleitoral (TSE), o ministro Nunes Marques participou de uma festa em Brasília marcada por shows de samba e pela...",
-    "summary": "Ministro Nunes Marques canta em festa após posse no TSE Após tomar posse como presidente do Tribunal Superior Eleitoral (TSE), o ministro Nunes Marques participou de uma festa em Brasília marcada por shows de samba e pela...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Nunes Marques canta com artistas no palco de festa após posse no TSE; veja vídeo.",
-      "Nunes Marques canta com artistas no palco de festa após posse no TSE; veja vídeo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/ccqFlukQyewwZOpJPOqVQIZeeeg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/W/J/Dt2VYzTwm6ZwMPp4WdsQ/nunesmarques.png",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/ccqFlukQyewwZOpJPOqVQIZeeeg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/W/J/Dt2VYzTwm6ZwMPp4WdsQ/nunesmarques.png",
-    "feedImageUrl": "https://s2-g1.glbimg.com/ccqFlukQyewwZOpJPOqVQIZeeeg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/W/J/Dt2VYzTwm6ZwMPp4WdsQ/nunesmarques.png",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/nunes-marques-canta-com-artistas-no-palco-de-festa-apos-posse-no-tse-veja-video.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/nunes-marques-canta-com-artistas-no-palco-de-festa-apos-posse-no-tse-veja-video.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "nunes-marques-canta-com-artistas-no-palco-de-festa-apos-posse-no-tse-veja-video"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/julia-duailibi/noticia/2026/05/13/falo-para-homens-que-ouvem-que-sao-toxicos-apenas-por-serem-homens-juliano-cazarre-rebate-criticas-a-curso-sobre-masculinidade.ghtml",
-    "slug": "juliano-cazarre-defende-curso-sobre-homens-enfraquecidos-e-psicologa-rebate-pensam-que-tudo-e-ac",
-    "title": "Juliano Cazarré defende curso sobre 'homens enfraquecidos', e psicóloga rebate: 'pensam que tudo é acusação'; VÍDEO",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T10:12:35.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/julia-duailibi/noticia/2026/05/13/falo-para-homens-que-ouvem-que-sao-toxicos-apenas-por-serem-homens-juliano-cazarre-rebate-criticas-a-curso-sobre-masculinidade.ghtml",
-    "sourceLabel": "Juliano Cazarré defende curso sobre 'homens enfraquecidos', e psicóloga rebate: 'pensam que tudo é acusação'; VÍDEO",
-    "lede": "Ator Juliano Cazarré comenta educação e papel dos homens O ator Juliano Cazarré, a psicanalista Vera Iaconelli e o consultor sobre equidade e gênero e raça Ismael dos Anjos discutiram a educação e o papel dos homens no programa...",
-    "summary": "Ator Juliano Cazarré comenta educação e papel dos homens O ator Juliano Cazarré, a psicanalista Vera Iaconelli e o consultor sobre equidade e gênero e raça Ismael dos Anjos discutiram a educação e o papel dos homens no programa...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Juliano Cazarré defende curso sobre 'homens enfraquecidos', e psicóloga rebate: 'pensam que tudo é acusação'; VÍDEO.",
-      "Juliano Cazarré defende curso sobre 'homens enfraquecidos', e psicóloga rebate: 'pensam que tudo é acusação'; VÍDEO e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/juliano-cazarre-defende-curso-sobre-homens-enfraquecidos-e-psicologa-rebate-pensam-que-tud.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/juliano-cazarre-defende-curso-sobre-homens-enfraquecidos-e-psicologa-rebate-pensam-que-tud.svg",
-    "feedImageUrl": "/assets/news-fallbacks/juliano-cazarre-defende-curso-sobre-homens-enfraquecidos-e-psicologa-rebate-pensam-que-tud.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/julia-duailibi/noticia/2026/05/13/falo-para-homens-que-ouvem-que-sao-toxicos-apenas-por-serem-homens-juliano-cazarre-rebate-criticas-a-curso-sobre-masculinidade.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/julia-duailibi/noticia/2026/05/13/falo-para-homens-que-ouvem-que-sao-toxicos-apenas-por-serem-homens-juliano-cazarre-rebate-criticas-a-curso-sobre-masculinidade.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "juliano-cazarre-defende-curso-sobre-homens-enfraquecidos-e-psicologa-rebate-pensam-que-tudo-e-ac"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira",
-    "slug": "trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira",
-    "title": "Trump visita Xi Jinping na China em meio ao atoleiro da guerra no Irã",
-    "eyebrow": "Nacional",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T10:05:00.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Agencia Brasil",
-    "sourceUrl": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira",
-    "sourceLabel": "Trump visita Xi Jinping na China em meio ao atoleiro da guerra no Irã",
-    "lede": "A visita do presidente dos Estados Unidos (EUA), Donald Trump, à China, para encontro com o presidente Xi Jinping, na noite desta quarta-feira (13), no horário de Brasília, captura a atenção do planeta em meio a guerra no Irã...",
-    "summary": "A visita do presidente dos Estados Unidos (EUA), Donald Trump, à China, para encontro com o presidente Xi Jinping, na noite desta quarta-feira (13), no horário de Brasília, captura a atenção do planeta em meio a guerra no Irã...",
-    "analysis": "",
-    "body": [
-      "Agencia Brasil publicou em 13 de mai de 2026 a base desta noticia sobre Trump visita Xi Jinping na China em meio ao atoleiro da guerra no Irã.",
-      "Trump visita Xi Jinping na China em meio ao atoleiro da guerra no Irã e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira.svg",
-    "feedImageUrl": "/assets/news-fallbacks/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Brasil",
-        "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "trump-visita-xi-jinping-na-china-em-meio-ao-atoleiro-da-guerra-no-ira"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/airbnb-em-condominios-entenda-a-decisao-do-stj-que-exige-aprovacao-de-dois-tercos-dos-moradores.ghtml",
-    "slug": "airbnb-em-condominios-entenda-a-decisao-do-stj-que-exige-aprovacao-de-dois-tercos-dos-moradores",
-    "title": "Airbnb em condomínios: entenda a decisão do STJ que exige aprovação de dois terços dos moradores",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T07:02:07.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/airbnb-em-condominios-entenda-a-decisao-do-stj-que-exige-aprovacao-de-dois-tercos-dos-moradores.ghtml",
-    "sourceLabel": "Airbnb em condomínios: entenda a decisão do STJ que exige aprovação de dois terços dos moradores",
-    "lede": "Uma nova decisão do Superior Tribunal de Justiça (STJ) impôs um novo obstáculo a quem utiliza o próprio imóvel para gerar renda: agora, quem quiser alugar sua residência para estadias curtas — como as realizadas por plataformas...",
-    "summary": "Uma nova decisão do Superior Tribunal de Justiça (STJ) impôs um novo obstáculo a quem utiliza o próprio imóvel para gerar renda: agora, quem quiser alugar sua residência para estadias curtas — como as realizadas por plataformas...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Airbnb em condomínios: entenda a decisão do STJ que exige aprovação de dois terços dos moradores.",
-      "Airbnb em condomínios: entenda a decisão do STJ que exige aprovação de dois terços dos moradores e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/cE0wjnvyjfiQpDiLZr_gNY04KI8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/G/WvBg8fStiFy0t909AH6Q/design-sem-nome.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/cE0wjnvyjfiQpDiLZr_gNY04KI8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/G/WvBg8fStiFy0t909AH6Q/design-sem-nome.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/cE0wjnvyjfiQpDiLZr_gNY04KI8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/G/WvBg8fStiFy0t909AH6Q/design-sem-nome.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/airbnb-em-condominios-entenda-a-decisao-do-stj-que-exige-aprovacao-de-dois-tercos-dos-moradores.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/airbnb-em-condominios-entenda-a-decisao-do-stj-que-exige-aprovacao-de-dois-tercos-dos-moradores.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "airbnb-em-condominios-entenda-a-decisao-do-stj-que-exige-aprovacao-de-dois-tercos-dos-moradores"
-    ]
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/05/13/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-informacoes.ghtml",
-    "slug": "empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-informacoes",
-    "title": "Empresa diz que desembargador ganhou quadriciclo em troca de decisão; CNJ pediu mais informações",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T07:01:10.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/13/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-informacoes.ghtml",
-    "sourceLabel": "Empresa diz que desembargador ganhou quadriciclo em troca de decisão; CNJ pediu mais informações",
-    "lede": "Em meio ao debate público sobre os limites das punições a juízes, uma empresa comunicou ao Conselho Nacional de Justiça (CNJ) que fez uma investigação particular e reuniu indícios de que um desembargador do Tribunal de Justiça...",
-    "summary": "Em meio ao debate público sobre os limites das punições a juízes, uma empresa comunicou ao Conselho Nacional de Justiça (CNJ) que fez uma investigação particular e reuniu indícios de que um desembargador do Tribunal de Justiça...",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Empresa diz que desembargador ganhou quadriciclo em troca de decisão; CNJ pediu mais informações.",
-      "Empresa diz que desembargador ganhou quadriciclo em troca de decisão; CNJ pediu mais informações e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-inform.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-inform.svg",
-    "feedImageUrl": "/assets/news-fallbacks/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-inform.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-informacoes.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/05/13/empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-informacoes.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "empresa-diz-que-desembargador-ganhou-quadriciclo-em-troca-de-decisao-cnj-pediu-mais-informacoes"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-ameaca-empregos-e-cria-concorrencia-desleal-dizem-entidades-da-industria.ghtml",
-    "slug": "fim-da-taxa-das-blusinhas-ameaca-empregos-e-cria-concorrencia-desleal-dizem-entidades-da-industr",
-    "title": "Fim da taxa das blusinhas ameaça empregos e cria concorrência desleal, dizem entidades da indústria",
-    "eyebrow": "Politica",
-    "date": "13 de mai de 2026",
-    "publishedAt": "2026-05-13T05:37:45.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-ameaca-empregos-e-cria-concorrencia-desleal-dizem-entidades-da-industria.ghtml",
-    "sourceLabel": "Fim da taxa das blusinhas ameaça empregos e cria concorrência desleal, dizem entidades da indústria",
-    "lede": "O que é a 'taxa das blusinhas', que Lula cancelou após quase dois anos?",
-    "summary": "O que é a 'taxa das blusinhas', que Lula cancelou após quase dois anos?",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 13 de mai de 2026 a base desta noticia sobre Fim da taxa das blusinhas ameaça empregos e cria concorrência desleal, dizem entidades da indústria.",
-      "Fim da taxa das blusinhas ameaça empregos e cria concorrência desleal, dizem entidades da indústria e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/B0lwuRXf9ju2qZ-ws4-Yk-mom9o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/F/wgW6kCTAOjymjjLvtAoA/55157023726-d77c7390b6-k.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/B0lwuRXf9ju2qZ-ws4-Yk-mom9o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/F/wgW6kCTAOjymjjLvtAoA/55157023726-d77c7390b6-k.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/B0lwuRXf9ju2qZ-ws4-Yk-mom9o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/F/wgW6kCTAOjymjjLvtAoA/55157023726-d77c7390b6-k.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-ameaca-empregos-e-cria-concorrencia-desleal-dizem-entidades-da-industria.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/13/fim-da-taxa-das-blusinhas-ameaca-empregos-e-cria-concorrencia-desleal-dizem-entidades-da-industria.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "fim-da-taxa-das-blusinhas-ameaca-empregos-e-cria-concorrencia-desleal-dizem-entidades-da-industr"
     ]
   },
   {
@@ -54655,55 +53590,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://g1.globo.com/economia/noticia/2026/05/05/durigan-revisao-de-gastos-juros-desenrola.ghtml",
-    "slug": "durigan-afirma-que-eleicao-dificulta-revisao-de-gastos-e-nega-pressao-fiscal-nos-juros",
-    "title": "Durigan afirma que eleição dificulta revisão de gastos e nega pressão fiscal nos juros",
-    "eyebrow": "educacao",
-    "date": "5 de mai. de 2026",
-    "publishedAt": "2026-05-05T14:09:24.000Z",
-    "category": "Educação",
-    "categoryKey": "educacao",
-    "previewClass": "thumb-educacao",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/05/durigan-revisao-de-gastos-juros-desenrola.ghtml",
-    "sourceLabel": "Durigan afirma que eleição dificulta revisão de gastos e nega pressão fiscal nos juros",
-    "lede": "G1 Politica publicou uma atualização sobre Durigan afirma que eleição dificulta revisão de gastos e nega pressão fiscal nos juros.",
-    "summary": "G1 Politica publicou uma atualização sobre Durigan afirma que eleição dificulta revisão de gastos e nega pressão fiscal nos juros.",
-    "analysis": "",
-    "body": [
-      "G1 Politica publicou em 5 de mai. de 2026 a base desta noticia sobre Durigan afirma que eleição dificulta revisão de gastos e nega pressão fiscal nos juros. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Durigan afirma que eleição dificulta revisão de gastos e nega pressão fiscal nos juros e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/_cRBljKgtgH2OO5TpoNEa-Jcp-o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/e/s/eXwLJ2QmWVeFtDivEA8w/55199249110-8d099d956c-o.jpg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://s2-g1.glbimg.com/_cRBljKgtgH2OO5TpoNEa-Jcp-o=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/e/s/eXwLJ2QmWVeFtDivEA8w/55199249110-8d099d956c-o.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/05/durigan-revisao-de-gastos-juros-desenrola.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/05/05/durigan-revisao-de-gastos-juros-desenrola.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "durigan-afirma-que-eleicao-dificulta-revisao-de-gastos-e-nega-pressao-fiscal-nos-juros"
-    ]
-  },
-  {
     "id": "https://www.portaldojurua.com.br/2026/05/policia-civil-se-infiltra-durante-show.html",
     "slug": "policia-civil-se-infiltra-durante-show-de-joelma-e-recupera-celulares-roubados-em-cruzeiro-do-su",
     "title": "Polícia Civil se infiltra durante show de Joelma e recupera celulares roubados em Cruzeiro do Sul",
@@ -54800,6 +53686,39 @@ window.NEWS_DATA = [
       "Investigadores do NEPATRI da Polícia civil apreende três adolescentes por roubo em menos de 48 horas em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
+  },
+  {
+    "id": "https://www.theverge.com/gadgets/907032/best-mothers-day-gift-ideas-2026-mom-tech-gadgets",
+    "slug": "the-verge-s-2026-mother-s-day-gift-guide",
+    "title": "Ideias de presentes tecnológicos para o Dia das Mães em 2026",
+    "eyebrow": "Esporte",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T14:09:03.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/gadgets/907032/best-mothers-day-gift-ideas-2026-mom-tech-gadgets",
+    "sourceLabel": "Ideias de presentes tecnológicos para o Dia das Mães em 2026",
+    "lede": "The Verge publicou uma atualização sobre Ideias de presentes tecnológicos para o Dia das Mães em 2026. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Ideias de presentes tecnológicos para o Dia das Mães em 2026. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "body": [
+      "The Verge publicou em 01 de mai de 2026 a base desta noticia sobre The Verge’s 2026 Mother’s Day gift guide.",
+      "The Verge’s 2026 Mother’s Day gift guide e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/the-verge-s-2026-mother-s-day-gift-guide.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/the-verge-s-2026-mother-s-day-gift-guide.svg",
+    "feedImageUrl": "/assets/news-fallbacks/the-verge-s-2026-mother-s-day-gift-guide.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": ""
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-associacao-de-jovens-guerreiros-guardioes-da-floresta/",
