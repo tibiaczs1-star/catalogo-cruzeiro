@@ -61,6 +61,19 @@
       tbody tr:last-child td { border-bottom: none; }
       .truncate { max-width: 320px; word-break: break-word; }
       .mono { font-family: ui-monospace, Consolas, monospace; font-size: 0.84rem; }
+      .money-stack { display: grid; gap: 4px; }
+      .money-main { font-size: 1.08rem; font-weight: 800; color: #fff4dc; }
+      .money-sub { color: var(--muted); font-size: 0.78rem; }
+      .ledger-pill {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 76px; padding: 6px 8px; border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.12); font-weight: 800;
+      }
+      .ledger-pill.gain { color: #08251f; background: #27d1b0; }
+      .ledger-pill.loss { color: #2b0a0a; background: #ff9b8f; }
+      .ledger-pill.net-positive { color: #08251f; background: #a7f070; }
+      .ledger-pill.net-negative { color: #2b0a0a; background: #ff6f7d; }
+      .ledger-pill.net-zero { color: var(--ink); background: rgba(255,255,255,0.08); }
       .status { padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--ink); }
       .auth-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
       label { display: grid; gap: 6px; color: var(--muted); font-size: 0.86rem; }
@@ -128,7 +141,7 @@
         <h2>Carteiras do jogo</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Jogador</th><th>Saldo</th><th>Travado</th><th>Depósitos aprovados</th><th>Saques aprovados</th><th>Atualizada</th></tr></thead>
+            <thead><tr><th>Jogador</th><th>Saldo atual</th><th>Livre / travado</th><th>Ganho PvP</th><th>Perdido PvP</th><th>Líquido PvP</th><th>Depósitos</th><th>Saques</th><th>Atualizada</th></tr></thead>
             <tbody id="walletBody"></tbody>
           </table>
         </div>
@@ -153,6 +166,16 @@
         if (!value) return "-";
         const date = new Date(value);
         return Number.isNaN(date.getTime()) ? "-" : date.toLocaleString("pt-BR");
+      }
+      function formatCoins(value) {
+        const numeric = Number(value || 0);
+        return Number.isFinite(numeric) ? numeric.toLocaleString("pt-BR", { maximumFractionDigits: 2 }) : "0";
+      }
+      function netClass(value) {
+        const numeric = Number(value || 0);
+        if (numeric > 0) return "net-positive";
+        if (numeric < 0) return "net-negative";
+        return "net-zero";
       }
       function escapeHtml(value) {
         return String(value || "").replace(/[&<>"']/g, (char) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[char]));
@@ -250,6 +273,15 @@
             ...row,
             name: row.name || row.playerName || row.player || "-",
             email: row.email || row.playerId || "-",
+            availableCoins: row.availableCoins ?? Math.max(0, Number(row.balanceCoins || 0) - Number(row.lockedWithdrawalCoins || 0) - Number(row.lockedMatchCoins || 0)),
+            lockedMatchCoins: row.lockedMatchCoins || 0,
+            matchWonCoins: row.matchWonCoins || 0,
+            matchLostCoins: row.matchLostCoins || 0,
+            matchNetCoins: row.matchNetCoins ?? ((row.matchWonCoins || 0) - (row.matchLostCoins || 0)),
+            matchPayoutCoins: row.matchPayoutCoins || 0,
+            matchHouseFeeCoins: row.matchHouseFeeCoins || 0,
+            matchWonCount: row.matchWonCount || 0,
+            matchLostCount: row.matchLostCount || 0,
             updatedAt: row.updatedAt || root.updatedAt || dashboard.updatedAt || dashboard.generatedAt || "",
           })),
         };
@@ -265,7 +297,10 @@
           ["Saques", totals.pubpaidWithdrawals || 0],
           ["Carteiras", totals.pubpaidWallets || 0],
           ["Pend. depósitos", totals.pubpaidPendingDeposits || 0],
-          ["Pend. saques", totals.pubpaidPendingWithdrawals || 0]
+          ["Pend. saques", totals.pubpaidPendingWithdrawals || 0],
+          ["Ganho PvP", formatCoins(totals.pubpaidPvpWonCoins || 0)],
+          ["Perdido PvP", formatCoins(totals.pubpaidPvpLostCoins || 0)],
+          ["Líquido PvP", formatCoins(totals.pubpaidPvpNetCoins || 0)]
         ].map(([label, value]) => `<article class="card"><p class="kpi-label">${escapeHtml(label)}</p><p class="kpi-value">${escapeHtml(String(value))}</p></article>`).join("");
 
         renderTableRows(
@@ -287,8 +322,8 @@
         renderTableRows(
           document.getElementById("walletBody"),
           normalized.pubpaidWalletBoard || [],
-          (row) => `<tr><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><strong>${escapeHtml(String(row.balanceCoins || 0))}</strong></td><td>${escapeHtml(String(row.lockedWithdrawalCoins || 0))}</td><td>${escapeHtml(String(row.totalApprovedDeposits || 0))}</td><td>${escapeHtml(String(row.totalApprovedWithdrawals || 0))}</td><td>${formatDateTime(row.updatedAt)}</td></tr>`,
-          6,
+          (row) => `<tr><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><span class="money-main">${escapeHtml(formatCoins(row.balanceCoins))}</span><br><span class="money-sub">saldo real atual</span></td><td><span class="money-stack"><span>livre: <strong>${escapeHtml(formatCoins(row.availableCoins))}</strong></span><span class="money-sub">mesa: ${escapeHtml(formatCoins(row.lockedMatchCoins))} / saque: ${escapeHtml(formatCoins(row.lockedWithdrawalCoins))}</span></span></td><td><span class="ledger-pill gain">+${escapeHtml(formatCoins(row.matchWonCoins))}</span><br><span class="money-sub">${escapeHtml(String(row.matchWonCount || 0))} vitória(s), payout ${escapeHtml(formatCoins(row.matchPayoutCoins))}</span></td><td><span class="ledger-pill loss">-${escapeHtml(formatCoins(row.matchLostCoins))}</span><br><span class="money-sub">${escapeHtml(String(row.matchLostCount || 0))} derrota(s)</span></td><td><span class="ledger-pill ${netClass(row.matchNetCoins)}">${Number(row.matchNetCoins || 0) > 0 ? "+" : ""}${escapeHtml(formatCoins(row.matchNetCoins))}</span><br><span class="money-sub">taxa casa ${escapeHtml(formatCoins(row.matchHouseFeeCoins))}</span></td><td>${escapeHtml(formatCoins(row.totalApprovedDeposits || 0))}</td><td>${escapeHtml(formatCoins(row.totalApprovedWithdrawals || 0))}</td><td>${formatDateTime(row.updatedAt)}</td></tr>`,
+          9,
           "Sem carteiras PubPaid ainda."
         );
       }

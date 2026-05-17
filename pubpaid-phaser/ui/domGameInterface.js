@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pvpgames1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-poolpvp-ledger1";
 import {
   confirmPvpReady,
   drawPoker,
@@ -7,15 +7,16 @@ import {
   guessDicecups,
   moveCheckers,
   moveChess,
-  playTrucoCard
-} from "../services/pvpService.js?v=20260517-pvpgames1";
+  playTrucoCard,
+  shootPool
+} from "../services/pvpService.js?v=20260517-poolpvp-ledger1";
 import {
   CHECKERS_SIZE,
   countCheckersPieces,
   getCheckersLegalMoves,
   getCheckersOwner,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260517-pvpgames1";
+} from "../core/checkersRules.js?v=20260517-poolpvp-ledger1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -23,7 +24,7 @@ function resultTitle(result) {
   return "Empate";
 }
 
-const PVP_GAMES = new Set(["checkers", "chess", "poker", "truco", "dicecups"]);
+const PVP_GAMES = new Set(["pool", "checkers", "chess", "poker", "truco", "dicecups"]);
 const GAME_LABELS = {
   pool: "Sinuca",
   checkers: "Damas",
@@ -99,7 +100,11 @@ export function bindDomGameInterface(game) {
     pvpLegalMoves: [],
     pvpHeld: [true, true, true, true, true],
     chessSelected: "",
-    pvpRenderBusy: false
+    poolAim: 0,
+    poolPower: 0.56,
+    pvpRenderBusy: false,
+    pvpTableRenderBusy: false,
+    tableRenderKey: ""
   };
 
   const setPanel = (name) => {
@@ -134,6 +139,9 @@ export function bindDomGameInterface(game) {
     local.pvpLegalMoves = [];
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
+    local.poolAim = 0;
+    local.poolPower = 0.56;
+    local.tableRenderKey = "";
     local.selectedGame = gameState.activeGameId || local.selectedGame || "pool";
     setPanel("lobby");
     const resetFinishedPvp = gameState.pvpStatus === "finished"
@@ -149,7 +157,7 @@ export function bindDomGameInterface(game) {
     updateGameState({
       ...resetFinishedPvp,
       lobbyPhase: "selecting",
-      objective: "Escolher Sinuca ou Damas",
+      objective: "Escolher mesa PvP",
       prompt: "Lobby aberto. Mesas pagas exigem saldo real aprovado."
     });
   };
@@ -488,6 +496,59 @@ export function bindDomGameInterface(game) {
     }).join("");
   };
 
+  const clampUiNumber = (value, min, max, fallback = min) => {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) return fallback;
+    return Math.max(min, Math.min(max, numeric));
+  };
+
+  const safeBallColor = (value = "") =>
+    /^#[0-9a-f]{3,8}$/i.test(String(value || "")) ? String(value) : "#fff6dc";
+
+  const renderPoolTableMarkup = (match, seat) => {
+    const state = match.poolState || {};
+    const balls = Array.isArray(state.balls) ? state.balls : [];
+    const disabled = match.status !== "active" || match.turn !== seat ? "disabled" : "";
+    const cue = balls.find((ball) => ball.cue || Number(ball.id) === 0) || { x: 25, y: 25 };
+    const pockets = [
+      ["p1", 0, 0], ["p2", 50, 0], ["p3", 100, 0],
+      ["p4", 0, 100], ["p5", 50, 100], ["p6", 100, 100]
+    ].map(([className, x, y]) => `<span class="ppg-pool-pocket ${className}" style="left:${x}%;top:${y}%"></span>`).join("");
+    const ballMarkup = balls
+      .filter((ball) => !ball.pocketed)
+      .map((ball) => {
+        const x = clampUiNumber(ball.x, 0, 100, 50);
+        const y = clampUiNumber(Number(ball.y) * 2, 0, 100, 50);
+        const id = Number(ball.id) || 0;
+        const label = ball.cue || id === 0 ? "" : id;
+        return `<span class="ppg-pool-ball${ball.cue || id === 0 ? " is-cue" : ""}" style="left:${x}%;top:${y}%;background:${safeBallColor(ball.color)}">${label}</span>`;
+      }).join("");
+    const aimX = clampUiNumber(cue.x, 0, 100, 25);
+    const aimY = clampUiNumber(Number(cue.y) * 2, 0, 100, 50);
+    const last = state.lastShot || {};
+    return `
+      <div class="ppg-dom-pvp-pool">
+        <div class="ppg-dom-pvp-pool-table" style="--pool-aim:${local.poolAim}deg;--cue-x:${aimX}%;--cue-y:${aimY}%">
+          ${pockets}
+          <span class="ppg-pool-aim-line"></span>
+          ${ballMarkup}
+        </div>
+        <div class="ppg-pool-controls">
+          <label><span>Mira ${local.poolAim}°</span><input type="range" min="-180" max="180" step="5" value="${local.poolAim}" data-pool-aim ${disabled}></label>
+          <label><span>Força ${Math.round(local.poolPower * 100)}%</span><input type="range" min="10" max="100" step="5" value="${Math.round(local.poolPower * 100)}" data-pool-power ${disabled}></label>
+          <button type="button" class="primary" data-pool-shoot ${disabled}>Tacada PvP</button>
+        </div>
+        <p class="ppg-table-note">${last.at ? `Ultima tacada: ${last.pocketed?.length || 0} bola(s), ${last.remaining ?? 0} restantes.` : "Tacada calculada no servidor, com turno e placar compartilhados."}</p>
+      </div>
+    `;
+  };
+
+  const renderStableTableBody = (key = "", markup = "") => {
+    if (local.tableRenderKey === key) return;
+    refs.tableBody.innerHTML = markup;
+    local.tableRenderKey = key;
+  };
+
   const finishGenericMatchIfNeeded = (match, gameId, seat) => {
     if (match?.status !== "finished") return;
     window.clearInterval(local.pvpPollTimer);
@@ -508,10 +569,13 @@ export function bindDomGameInterface(game) {
   };
 
   const renderPvpTable = () => {
+    if (local.pvpTableRenderBusy) return;
     const match = gameState.pvpMatch;
     const seat = gameState.pvpSeat;
     const gameId = gameState.pvpGameId || local.selectedGame;
     if (!match || !seat || !refs.table) return;
+    local.pvpTableRenderBusy = true;
+    try {
     if (match.status === "readying") {
       setPanel("matchmaking");
       renderMatchmakingState();
@@ -538,36 +602,55 @@ export function bindDomGameInterface(game) {
           : match.turn === seat ? `${myName}, jogue em ${gameLabel(gameId)}.` : "Aguardando jogada do rival.";
     refs.genericForfeit.disabled = match.status !== "active" && match.status !== "abandoned";
 
-    if (gameId === "poker") {
+    if (gameId === "pool") {
+      const state = match.poolState || {};
+      const ballsKey = Array.isArray(state.balls)
+        ? state.balls.map((ball) => [ball.id, ball.x, ball.y, ball.pocketed ? 1 : 0].join(":")).join("|")
+        : "";
+      refs.tableScore.textContent = `${state.playerOneScore || 0} x ${state.playerTwoScore || 0}`;
+      renderStableTableBody(
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolAim}:${local.poolPower}`,
+        renderPoolTableMarkup(match, seat)
+      );
+    } else if (gameId === "poker") {
       const state = match.pokerState || {};
       const cardsKey = seat === "playerOne" ? "playerOneCards" : "playerTwoCards";
       const usedKey = seat === "playerOne" ? "playerOneDrawUsed" : "playerTwoDrawUsed";
       const cards = Array.isArray(state[cardsKey]) ? state[cardsKey] : [];
       refs.tableScore.textContent = state[usedKey] ? "troca usada" : "troca aberta";
-      refs.tableBody.innerHTML = `
+      renderStableTableBody(
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${JSON.stringify(cards)}:${state[usedKey] ? 1 : 0}:${local.pvpHeld.join("")}`,
+        `
         <div class="ppg-card-row">${cards.map((card, index) => `<button type="button" class="ppg-playing-card${local.pvpHeld[index] ? " is-held" : ""}" data-poker-card="${index}"><strong>${cardLabel(card)}</strong><small>${local.pvpHeld[index] ? "segura" : "troca"}</small></button>`).join("")}</div>
         <button type="button" class="primary" data-poker-draw ${match.status !== "active" || match.turn !== seat || state[usedKey] ? "disabled" : ""}>Trocar cartas soltas</button>
-      `;
+      `);
     } else if (gameId === "dicecups") {
       const state = match.diceState || {};
       refs.tableScore.textContent = `${state.playerOneScore || 0} x ${state.playerTwoScore || 0}`;
-      refs.tableBody.innerHTML = `
+      renderStableTableBody(
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${JSON.stringify(state.dice || [])}`,
+        `
         <div class="ppg-dice-cups"><span>${state.dice?.[0] || "?"}</span><span>${state.dice?.[1] || "?"}</span></div>
         <div class="ppg-number-grid">${Array.from({ length: 11 }, (_, index) => index + 2).map((value) => `<button type="button" data-dice-guess="${value}" ${match.status !== "active" || match.turn !== seat ? "disabled" : ""}>${value}</button>`).join("")}</div>
-      `;
+      `);
     } else if (gameId === "truco") {
       const state = match.trucoState || {};
       const cardsKey = seat === "playerOne" ? "playerOneCards" : "playerTwoCards";
       const cards = Array.isArray(state[cardsKey]) ? state[cardsKey] : [];
       refs.tableScore.textContent = `${state.playerOneScore || 0} x ${state.playerTwoScore || 0}`;
-      refs.tableBody.innerHTML = `
+      renderStableTableBody(
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${state.round || 1}:${JSON.stringify(cards)}:${JSON.stringify(state.table || [])}`,
+        `
         <div class="ppg-card-row">${cards.map((card, index) => card ? `<button type="button" class="ppg-playing-card" data-truco-card="${index}" ${match.status !== "active" || match.turn !== seat ? "disabled" : ""}><strong>${cardLabel(card)}</strong><small>jogar</small></button>` : `<span class="ppg-playing-card is-empty"><strong>-</strong><small>mesa</small></span>`).join("")}</div>
         <p class="ppg-table-note">Mao ${state.round || 1}/${state.maxRounds || 3}. ${state.table?.length ? "Carta na mesa aguardando resposta." : "Escolha uma carta quando for sua vez."}</p>
-      `;
+      `);
     } else if (gameId === "chess") {
       const state = match.chessState || {};
       refs.tableScore.textContent = `${match.moveCount || 0} lances`;
-      refs.tableBody.innerHTML = `<div class="ppg-dom-chess-board">${renderChessBoardMarkup(match, seat)}</div><p class="ppg-table-note">${state.history?.slice?.(-1)?.[0]?.san ? `Ultimo lance: ${state.history.slice(-1)[0].san}` : "Selecione uma peça e depois o destino."}</p>`;
+      renderStableTableBody(
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount || 0}:${state.fen || ""}:${local.chessSelected}`,
+        `<div class="ppg-dom-chess-board">${renderChessBoardMarkup(match, seat)}</div><p class="ppg-table-note">${state.history?.slice?.(-1)?.[0]?.san ? `Ultimo lance: ${state.history.slice(-1)[0].san}` : "Selecione uma peça e depois o destino."}</p>`
+      );
     }
 
     updateGameState({
@@ -578,6 +661,9 @@ export function bindDomGameInterface(game) {
       prompt: refs.tableStatus.textContent
     });
     finishGenericMatchIfNeeded(match, gameId, seat);
+    } finally {
+      local.pvpTableRenderBusy = false;
+    }
   };
 
   const routePvpState = (payload = {}) => {
@@ -611,6 +697,8 @@ export function bindDomGameInterface(game) {
     local.selectedGame = gameId;
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
+    local.poolAim = 0;
+    local.poolPower = 0.56;
     refs.matchmakingGame.textContent = gameLabel(gameId);
     refs.matchmakingStatus.textContent = "Procurando jogador real com aposta equivalente.";
     setMatchmakingState("searching");
@@ -646,12 +734,6 @@ export function bindDomGameInterface(game) {
     if (startButton) {
       const nextGame = startButton.dataset.domStartGame || "pool";
       local.selectedGame = nextGame;
-      if (nextGame === "pool") {
-        game.scene.stop("game-lobby-scene");
-        game.scene.start("pool-game-scene", { stake: gameState.lobbyStake || 10 });
-        setPanel("pool");
-        return;
-      }
       if (PVP_GAMES.has(nextGame) && isRealPvpEligible(nextGame)) {
         startRealPvpGame(nextGame);
       } else if (PVP_GAMES.has(nextGame)) {
@@ -744,6 +826,13 @@ export function bindDomGameInterface(game) {
       });
       return;
     }
+    if (event.target.closest("[data-pool-shoot]")) {
+      const match = gameState.pvpMatch;
+      if (match?.id) {
+        shootPool(match.id, local.poolAim, local.poolPower).then((payload) => payload?.ok && routePvpState(payload));
+      }
+      return;
+    }
     const pokerCard = event.target.closest("[data-poker-card]");
     if (pokerCard) {
       const index = Number(pokerCard.dataset.pokerCard);
@@ -829,6 +918,20 @@ export function bindDomGameInterface(game) {
         return;
       }
       showAccessBlock("pvp-only");
+    }
+  });
+
+  document.addEventListener("input", (event) => {
+    const aimInput = event.target.closest?.("[data-pool-aim]");
+    if (aimInput) {
+      local.poolAim = clampUiNumber(aimInput.value, -180, 180, 0);
+      renderPvpTable();
+      return;
+    }
+    const powerInput = event.target.closest?.("[data-pool-power]");
+    if (powerInput) {
+      local.poolPower = clampUiNumber(Number(powerInput.value) / 100, 0.1, 1, 0.56);
+      renderPvpTable();
     }
   });
 

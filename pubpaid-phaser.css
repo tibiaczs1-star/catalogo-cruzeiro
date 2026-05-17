@@ -190,7 +190,9 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-game-card {
   display: grid;
-  align-content: end;
+  grid-template-columns: 66px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: end;
   gap: 4px;
   min-height: 92px;
   padding: 12px 14px;
@@ -202,7 +204,18 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   clip-path: polygon(3% 0, 97% 0, 100% 18%, 100% 82%, 97% 100%, 3% 100%, 0 82%, 0 18%);
 }
 
+.ppg-dom-game-card img {
+  grid-row: 1 / 3;
+  align-self: center;
+  width: 58px;
+  height: 46px;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.35));
+}
+
 .ppg-dom-game-card span {
+  min-width: 0;
   color: #fff0cf;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(20px, 2.5vw, 28px);
@@ -211,6 +224,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-game-card strong {
+  min-width: 0;
   color: #9fb0ca;
   font-size: 11px;
 }
@@ -1474,6 +1488,105 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   box-shadow: inset 0 0 0 4px #ffd06d;
 }
 
+.ppg-dom-pvp-pool {
+  display: grid;
+  gap: 10px;
+}
+
+.ppg-dom-pvp-pool-table {
+  position: relative;
+  width: min(100%, 460px);
+  aspect-ratio: 2 / 1;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 12px solid #4a230f;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(142, 240, 163, 0.16), transparent 42%),
+    linear-gradient(135deg, #0f8558, #0a5c42);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 208, 109, 0.18),
+    inset 0 0 34px rgba(0, 0, 0, 0.26),
+    0 14px 24px rgba(0, 0, 0, 0.28);
+}
+
+.ppg-dom-pvp-pool-table::before {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border: 1px solid rgba(255, 246, 220, 0.16);
+  pointer-events: none;
+}
+
+.ppg-pool-pocket,
+.ppg-pool-ball,
+.ppg-pool-aim-line {
+  position: absolute;
+  display: block;
+}
+
+.ppg-pool-pocket {
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  border: 3px solid rgba(255, 208, 109, 0.58);
+  border-radius: 999px;
+  background: #02050d;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.ppg-pool-ball {
+  display: grid;
+  place-items: center;
+  width: clamp(16px, 4vw, 24px);
+  height: clamp(16px, 4vw, 24px);
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(5, 7, 13, 0.78);
+  border-radius: 999px;
+  color: #07101c;
+  font-size: 10px;
+  font-weight: 900;
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.22), 0 5px 8px rgba(0, 0, 0, 0.25);
+}
+
+.ppg-pool-ball.is-cue {
+  color: transparent;
+  background: #fff6dc !important;
+}
+
+.ppg-pool-aim-line {
+  left: var(--cue-x);
+  top: var(--cue-y);
+  width: 32%;
+  height: 3px;
+  transform: rotate(var(--pool-aim));
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(255, 246, 220, 0.88), rgba(142, 240, 163, 0));
+  pointer-events: none;
+}
+
+.ppg-pool-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.ppg-pool-controls label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  color: rgba(213, 223, 242, 0.82);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ppg-pool-controls input {
+  width: 100%;
+  accent-color: #8ef0a3;
+}
+
 .ppg-table-note {
   margin: 10px 0 0;
   color: #d5dff2;
@@ -1877,7 +1990,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-pvpgames1") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-poolpvp-ledger1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -2254,7 +2367,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-pvpgames1");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-poolpvp-ledger1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 
@@ -3964,12 +4077,22 @@ body.pubpaid-phaser-page.is-touch:not(.game-is-locked) .ppg-audio-toggle {
   }
 
   .ppg-dom-game-card {
+    grid-template-columns: 56px minmax(0, 1fr);
     min-height: 72px;
     padding: 12px;
   }
 
+  .ppg-dom-game-card img {
+    width: 48px;
+    height: 38px;
+  }
+
   .ppg-dom-game-card span {
     font-size: 22px;
+  }
+
+  .ppg-pool-controls {
+    grid-template-columns: 1fr;
   }
 
   .ppg-dom-lobby-foot {

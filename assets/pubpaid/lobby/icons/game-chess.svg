@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 112" role="img" aria-label="Xadrez">
+  <rect width="160" height="112" rx="10" fill="#11131b"/>
+  <rect x="28" y="22" width="104" height="70" rx="5" fill="#e8c995"/>
+  <g fill="#3b735d">
+    <rect x="28" y="22" width="26" height="17.5"/><rect x="80" y="22" width="26" height="17.5"/>
+    <rect x="54" y="39.5" width="26" height="17.5"/><rect x="106" y="39.5" width="26" height="17.5"/>
+    <rect x="28" y="57" width="26" height="17.5"/><rect x="80" y="57" width="26" height="17.5"/>
+    <rect x="54" y="74.5" width="26" height="17.5"/><rect x="106" y="74.5" width="26" height="17.5"/>
+  </g>
+  <path d="M74 72h32l-5-36h-8l-3-13-7 13h-8z" fill="#fff5d9" stroke="#07101c" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M56 80h50v9H52z" fill="#c48b3a" stroke="#07101c" stroke-width="3"/>
+</svg>

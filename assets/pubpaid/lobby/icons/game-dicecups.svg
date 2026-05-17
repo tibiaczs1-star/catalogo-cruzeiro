@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 112" role="img" aria-label="Dados">
+  <rect width="160" height="112" rx="10" fill="#081426"/>
+  <path d="M42 26h34l-7 48H49z" fill="#7a2238" stroke="#ffd06d" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M84 26h34l-7 48H91z" fill="#1f6ad4" stroke="#ffd06d" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="54" y="70" width="28" height="28" rx="5" fill="#fff5d9" stroke="#07101c" stroke-width="4"/>
+  <rect x="88" y="70" width="28" height="28" rx="5" fill="#fff5d9" stroke="#07101c" stroke-width="4"/>
+  <g fill="#07101c">
+    <circle cx="62" cy="78" r="3"/><circle cx="74" cy="90" r="3"/>
+    <circle cx="96" cy="78" r="3"/><circle cx="102" cy="84" r="3"/><circle cx="108" cy="90" r="3"/>
+  </g>
+</svg>

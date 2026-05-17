@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260517-pvpgames1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-poolpvp-ledger1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -13767,6 +13767,10 @@ function normalizePubpaidWalletRecord(item = {}) {
   const lockedWithdrawalCoins = coerceMoney(item.lockedWithdrawalCoins ?? lockedLegacy);
   const lockedMatchCoins = coerceMoney(item.lockedMatchCoins ?? item.lockedPvpCoins ?? 0);
   const matchSpentCoins = coerceMoney(item.matchSpentCoins ?? item.matchDebitCoins ?? item.spentMatchCoins ?? 0);
+  const matchPayoutCoins = coerceMoney(item.matchPayoutCoins ?? item.pvpPayoutCoins ?? 0);
+  const matchWonCoins = coerceMoney(item.matchWonCoins ?? item.pvpWonCoins ?? 0);
+  const matchLostCoins = coerceMoney(item.matchLostCoins ?? item.pvpLostCoins ?? 0);
+  const matchHouseFeeCoins = coerceMoney(item.matchHouseFeeCoins ?? item.pvpHouseFeeCoins ?? 0);
   const balanceCoins = coerceMoney(item.balanceCoins ?? item.balance ?? 0);
   const manualApprovedBalanceCoins = coerceMoney(
     item.manualApprovedBalanceCoins ?? item.manualApprovedCoins ?? item.matchPayoutCoins ?? item.bonusCoins ?? 0
@@ -13777,6 +13781,10 @@ function normalizePubpaidWalletRecord(item = {}) {
     availableCoins: Math.max(0, coerceMoney(item.availableCoins ?? (balanceCoins - lockedWithdrawalCoins - lockedMatchCoins))),
     lockedMatchCoins,
     matchSpentCoins,
+    matchPayoutCoins,
+    matchWonCoins,
+    matchLostCoins,
+    matchHouseFeeCoins,
     lockedWithdrawalCoins,
     totalApprovedDeposits: coerceMoney(item.totalApprovedDeposits ?? item.depositsApproved ?? 0),
     totalApprovedWithdrawals: coerceMoney(item.totalApprovedWithdrawals ?? item.withdrawalsApproved ?? 0),
@@ -13838,6 +13846,10 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
         ),
         lockedMatchCoins: normalizePubpaidMoney(walletRecord.lockedMatchCoins ?? 0),
         matchSpentCoins: normalizePubpaidMoney(walletRecord.matchSpentCoins ?? 0),
+        matchPayoutCoins: normalizePubpaidMoney(walletRecord.matchPayoutCoins ?? 0),
+        matchWonCoins: normalizePubpaidMoney(walletRecord.matchWonCoins ?? 0),
+        matchLostCoins: normalizePubpaidMoney(walletRecord.matchLostCoins ?? 0),
+        matchHouseFeeCoins: normalizePubpaidMoney(walletRecord.matchHouseFeeCoins ?? 0),
         lockedWithdrawalCoins: normalizePubpaidMoney(walletRecord.lockedWithdrawalCoins ?? walletRecord.locked),
         totalApprovedDeposits: normalizePubpaidMoney(walletRecord.totalApprovedDeposits ?? walletRecord.approvedDeposits),
         totalApprovedWithdrawals: normalizePubpaidMoney(walletRecord.totalApprovedWithdrawals ?? walletRecord.approvedWithdrawals),
@@ -13856,6 +13868,10 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
       availableCoins: 0,
       lockedMatchCoins: 0,
       matchSpentCoins: 0,
+      matchPayoutCoins: 0,
+      matchWonCoins: 0,
+      matchLostCoins: 0,
+      matchHouseFeeCoins: 0,
       lockedWithdrawalCoins: 0,
       totalApprovedDeposits: 0,
       totalApprovedWithdrawals: 0,
@@ -13875,6 +13891,10 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
         availableCoins: 0,
         lockedMatchCoins: 0,
         matchSpentCoins: 0,
+        matchPayoutCoins: 0,
+        matchWonCoins: 0,
+        matchLostCoins: 0,
+        matchHouseFeeCoins: 0,
         lockedWithdrawalCoins: 0,
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
@@ -13904,6 +13924,10 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
     availableCoins: 0,
     lockedMatchCoins: 0,
     matchSpentCoins: 0,
+    matchPayoutCoins: 0,
+    matchWonCoins: 0,
+    matchLostCoins: 0,
+    matchHouseFeeCoins: 0,
     lockedWithdrawalCoins: 0,
     totalApprovedDeposits: 0,
     totalApprovedWithdrawals: 0,
@@ -13917,6 +13941,10 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
   next.balanceCoins = Math.max(0, normalizePubpaidMoney(next.balanceCoins));
   next.lockedMatchCoins = Math.max(0, normalizePubpaidMoney(next.lockedMatchCoins));
   next.matchSpentCoins = Math.max(0, normalizePubpaidMoney(next.matchSpentCoins ?? 0));
+  next.matchPayoutCoins = Math.max(0, normalizePubpaidMoney(next.matchPayoutCoins ?? 0));
+  next.matchWonCoins = Math.max(0, normalizePubpaidMoney(next.matchWonCoins ?? 0));
+  next.matchLostCoins = Math.max(0, normalizePubpaidMoney(next.matchLostCoins ?? 0));
+  next.matchHouseFeeCoins = Math.max(0, normalizePubpaidMoney(next.matchHouseFeeCoins ?? 0));
   next.lockedWithdrawalCoins = Math.max(0, normalizePubpaidMoney(next.lockedWithdrawalCoins));
   next.manualApprovedBalanceCoins = Math.max(0, normalizePubpaidMoney(next.manualApprovedBalanceCoins ?? 0));
   next.availableCoins = Math.max(0, normalizePubpaidMoney(next.balanceCoins - next.lockedMatchCoins - next.lockedWithdrawalCoins));
@@ -13935,6 +13963,10 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
       availableCoins: next.availableCoins,
       lockedMatchCoins: next.lockedMatchCoins,
       matchSpentCoins: next.matchSpentCoins,
+      matchPayoutCoins: next.matchPayoutCoins,
+      matchWonCoins: next.matchWonCoins,
+      matchLostCoins: next.matchLostCoins,
+      matchHouseFeeCoins: next.matchHouseFeeCoins,
       lockedWithdrawalCoins: next.lockedWithdrawalCoins,
       totalApprovedDeposits: next.totalApprovedDeposits,
       totalApprovedWithdrawals: next.totalApprovedWithdrawals,
@@ -16666,6 +16698,75 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
   }
 
+  if (req.method === "POST" && pathname === "/api/pubpaid/pvp/pool/shot") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para jogar a sinuca PvP." });
+    }
+    const body = await parseBody(req);
+    const matchId = cleanShortText(body.matchId || "", 120);
+    const angle = clampPoolNumber(body.angle, -180, 180, 0);
+    const power = clampPoolNumber(body.power, 0.1, 1, 0.5);
+    if (!matchId) {
+      return sendJson(res, 400, { ok: false, error: "Informe a mesa PvP." });
+    }
+
+    let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    const matchIndex = store.matches.findIndex((entry) => entry?.id === matchId && entry?.gameId === "pool");
+    if (matchIndex < 0) {
+      return sendJson(res, 404, { ok: false, error: "Mesa de sinuca PvP nao encontrada." });
+    }
+    const match = store.matches[matchIndex];
+    const walletKey = getPubpaidWalletKey(authUser);
+    const seat = match?.playerOne?.walletKey === walletKey ? "playerOne" : match?.playerTwo?.walletKey === walletKey ? "playerTwo" : "";
+    if (!seat) {
+      return sendJson(res, 403, { ok: false, error: "Essa mesa pertence a outros jogadores." });
+    }
+    if (match.status !== "active") {
+      return sendJson(res, 400, { ok: false, error: "Essa mesa PvP nao esta mais ativa." });
+    }
+    if (match.turn !== seat) {
+      return sendJson(res, 409, { ok: false, error: "Espere a vez do outro jogador." });
+    }
+
+    const simulation = simulatePoolPvPShot(match.poolState || createPoolPvPState(), seat, angle, power);
+    const poolState = simulation.poolState;
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    let winner = "";
+    let finished = Boolean(simulation.finished);
+    let resultSummary =
+      simulation.pocketedCount > 0
+        ? `${match?.[seat]?.name || "Jogador"} encaçapou ${simulation.pocketedCount} bola${simulation.pocketedCount > 1 ? "s" : ""}.`
+        : `${match?.[seat]?.name || "Jogador"} tacou sem encaçapar.`;
+    if (simulation.cuePocketed) {
+      resultSummary = `${resultSummary} A branca caiu e voltou para a marca.`;
+    }
+    if (finished) {
+      winner = resolvePoolPvPWinner(poolState);
+      if (winner) {
+        resultSummary = `${match?.[winner]?.name || "Jogador"} venceu a sinuca por ${poolState.playerOneScore || 0} a ${poolState.playerTwoScore || 0}.`;
+      } else {
+        resultSummary = `A sinuca empatou em ${poolState.playerOneScore || 0} a ${poolState.playerTwoScore || 0}. Entrada devolvida.`;
+      }
+    } else {
+      resultSummary = `${resultSummary} ${match?.[rivalSeat]?.name || "Rival"} joga agora.`;
+    }
+
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
+      ...match,
+      poolState,
+      turn: finished ? match.turn : rivalSeat,
+      winner,
+      resultSummary,
+      moveCount: clampInteger(match.moveCount) + 1,
+      status: finished ? "finished" : "active",
+      finishedAt: finished ? nowIso : "",
+    }, seat, nowIso);
+    store = writePubpaidPvpStore(store);
+    return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "pool"));
+  }
+
   if (req.method === "POST" && pathname === "/api/pubpaid/pvp/checkers/move") {
     const authUser = readCatalogoAuthSession(req);
     if (!authUser) {
@@ -17625,17 +17726,26 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-wallets.csv") {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
-    const rows = Object.values(getPubpaidWalletStore() || {}).map((item) => ({
+    const rows = (buildPubpaidAdminPayload().pubpaidWalletBoard || []).map((item) => ({
       updatedAt: item.updatedAt || item.createdAt || "",
-      player: item?.user?.name || "",
-      email: item?.user?.email || "",
+      player: item.name || item.playerName || item?.user?.name || "",
+      email: item.email || item?.user?.email || "",
       walletKey: item.walletKey || "",
       balanceCoins: normalizePubpaidMoney(item.balanceCoins),
+      availableCoins: normalizePubpaidMoney(item.availableCoins),
       lockedWithdrawalCoins: normalizePubpaidMoney(item.lockedWithdrawalCoins),
+      lockedMatchCoins: normalizePubpaidMoney(item.lockedMatchCoins),
       totalApprovedDeposits: normalizePubpaidMoney(item.totalApprovedDeposits),
-      totalApprovedWithdrawals: normalizePubpaidMoney(item.totalApprovedWithdrawals)
+      totalApprovedWithdrawals: normalizePubpaidMoney(item.totalApprovedWithdrawals),
+      matchWonCoins: normalizePubpaidMoney(item.matchWonCoins),
+      matchLostCoins: normalizePubpaidMoney(item.matchLostCoins),
+      matchNetCoins: normalizePubpaidMoney(item.matchNetCoins),
+      matchPayoutCoins: normalizePubpaidMoney(item.matchPayoutCoins),
+      matchHouseFeeCoins: normalizePubpaidMoney(item.matchHouseFeeCoins),
+      matchWonCount: clampInteger(item.matchWonCount),
+      matchLostCount: clampInteger(item.matchLostCount),
     }));
-    return sendCsv(res, 200, toCsv(rows) || "updatedAt,player,email,walletKey,balanceCoins,lockedWithdrawalCoins,totalApprovedDeposits,totalApprovedWithdrawals\n", "pubpaid_carteiras.csv");
+    return sendCsv(res, 200, toCsv(rows) || "updatedAt,player,email,walletKey,balanceCoins,availableCoins,lockedWithdrawalCoins,lockedMatchCoins,totalApprovedDeposits,totalApprovedWithdrawals,matchWonCoins,matchLostCoins,matchNetCoins,matchPayoutCoins,matchHouseFeeCoins,matchWonCount,matchLostCount\n", "pubpaid_carteiras.csv");
   }
 
   if (req.method === "GET" && pathname === "/api/admin/dashboard") {
@@ -18089,12 +18199,100 @@ server.listen(PORT, HOST, () => {
   startArticleIntegrityAutoRunner();
   startTopicFeedAutoRunner();
 });
+
+function emptyPubpaidWalletLedger() {
+  return {
+    matchPlayedCount: 0,
+    matchWonCount: 0,
+    matchLostCount: 0,
+    matchDrawCount: 0,
+    matchStakedCoins: 0,
+    matchPayoutCoins: 0,
+    matchWonCoins: 0,
+    matchLostCoins: 0,
+    matchHouseFeeCoins: 0,
+  };
+}
+
+function ensurePubpaidWalletLedger(map, player = {}) {
+  const key = safeString(player?.walletKey || player?.email || player?.sub || "", 180).toLowerCase();
+  if (!key) return null;
+  if (!map.has(key)) map.set(key, emptyPubpaidWalletLedger());
+  return map.get(key);
+}
+
+function buildPubpaidPvpLedgerByWallet(matches = []) {
+  const ledgerByWallet = new Map();
+  (Array.isArray(matches) ? matches : []).forEach((match) => {
+    if (match?.status !== "finished" || match?.settlement?.status !== "settled") return;
+    const stake = normalizePubpaidMoney(match.stake);
+    const payout = normalizePubpaidMoney(match?.settlement?.payout ?? (match.winner ? stake * 1.8 : stake));
+    const houseFee = normalizePubpaidMoney(match?.settlement?.houseFee ?? (match.winner ? stake * 0.2 : 0));
+    PUBPAID_PVP_SEATS.forEach((seat) => {
+      const entry = ensurePubpaidWalletLedger(ledgerByWallet, match[seat]);
+      if (!entry) return;
+      entry.matchPlayedCount += 1;
+      entry.matchStakedCoins = normalizePubpaidMoney(entry.matchStakedCoins + stake);
+      if (!match.winner) {
+        entry.matchDrawCount += 1;
+        entry.matchPayoutCoins = normalizePubpaidMoney(entry.matchPayoutCoins + stake);
+        return;
+      }
+      if (match.winner === seat) {
+        entry.matchWonCount += 1;
+        entry.matchPayoutCoins = normalizePubpaidMoney(entry.matchPayoutCoins + payout);
+        entry.matchWonCoins = normalizePubpaidMoney(entry.matchWonCoins + Math.max(0, payout - stake));
+        entry.matchHouseFeeCoins = normalizePubpaidMoney(entry.matchHouseFeeCoins + houseFee);
+        return;
+      }
+      entry.matchLostCount += 1;
+      entry.matchLostCoins = normalizePubpaidMoney(entry.matchLostCoins + stake);
+    });
+  });
+  return ledgerByWallet;
+}
+
 function buildPubpaidAdminPayload() {
   const store = readCanonicalPubpaidStore();
   const pvpStore = readPubpaidPvpStore();
   const dashboard = buildCanonicalPubpaidAdminPayload(store);
   const activePvpMatches = (Array.isArray(pvpStore.matches) ? pvpStore.matches : []).filter((item) => item.status === "active");
   const settledPvpMatches = (Array.isArray(pvpStore.matches) ? pvpStore.matches : []).filter((item) => item.settlement?.status === "settled");
+  const pvpLedger = buildPubpaidPvpLedgerByWallet(settledPvpMatches);
+  const walletBoard = (Array.isArray(dashboard.walletBoard) ? dashboard.walletBoard : []).map((wallet) => {
+    const key = safeString(wallet.walletKey || wallet.playerId || wallet.email || "", 180).toLowerCase();
+    const ledger = pvpLedger.get(key) || emptyPubpaidWalletLedger();
+    const matchPayoutCoins = Math.max(normalizePubpaidMoney(wallet.matchPayoutCoins), normalizePubpaidMoney(ledger.matchPayoutCoins));
+    const matchWonCoins = Math.max(normalizePubpaidMoney(wallet.matchWonCoins), normalizePubpaidMoney(ledger.matchWonCoins));
+    const matchLostCoins = Math.max(normalizePubpaidMoney(wallet.matchLostCoins), normalizePubpaidMoney(ledger.matchLostCoins));
+    const matchHouseFeeCoins = Math.max(normalizePubpaidMoney(wallet.matchHouseFeeCoins), normalizePubpaidMoney(ledger.matchHouseFeeCoins));
+    const matchWonCount = Math.max(clampInteger(wallet.matchWonCount), clampInteger(ledger.matchWonCount));
+    const matchLostCount = Math.max(clampInteger(wallet.matchLostCount), clampInteger(ledger.matchLostCount));
+    const matchPlayedCount = Math.max(clampInteger(wallet.matchPlayedCount), clampInteger(ledger.matchPlayedCount));
+    return {
+      ...wallet,
+      matchPlayedCount,
+      matchWonCount,
+      matchLostCount,
+      matchDrawCount: Math.max(clampInteger(wallet.matchDrawCount), clampInteger(ledger.matchDrawCount)),
+      matchStakedCoins: Math.max(normalizePubpaidMoney(wallet.matchStakedCoins), normalizePubpaidMoney(ledger.matchStakedCoins)),
+      matchPayoutCoins,
+      matchWonCoins,
+      matchLostCoins,
+      matchHouseFeeCoins,
+      matchNetCoins: normalizePubpaidMoney(matchWonCoins - matchLostCoins),
+    };
+  });
+  const enhancedDashboard = {
+    ...dashboard,
+    walletBoard,
+    stats: {
+      ...(dashboard.stats || {}),
+      totalMatchWonCoins: walletBoard.reduce((sum, item) => sum + normalizePubpaidMoney(item.matchWonCoins), 0),
+      totalMatchLostCoins: walletBoard.reduce((sum, item) => sum + normalizePubpaidMoney(item.matchLostCoins), 0),
+      totalMatchNetCoins: walletBoard.reduce((sum, item) => sum + normalizePubpaidMoney(item.matchNetCoins), 0),
+    },
+  };
   return {
     ok: true,
     updatedAt: dashboard.generatedAt,
@@ -18105,27 +18303,30 @@ function buildPubpaidAdminPayload() {
     totals: {
       pubpaidDeposits: Array.isArray(store.deposits) ? store.deposits.length : 0,
       pubpaidWithdrawals: Array.isArray(store.withdrawals) ? store.withdrawals.length : 0,
-      pubpaidWallets: Array.isArray(dashboard.walletBoard) ? dashboard.walletBoard.length : 0,
+      pubpaidWallets: Array.isArray(enhancedDashboard.walletBoard) ? enhancedDashboard.walletBoard.length : 0,
       pubpaidPendingDeposits: Array.isArray(dashboard.pendingDeposits) ? dashboard.pendingDeposits.length : 0,
       pubpaidPendingWithdrawals: Array.isArray(dashboard.pendingWithdrawals) ? dashboard.pendingWithdrawals.length : 0,
       pubpaidPvpWaiting: Array.isArray(pvpStore.waiting) ? pvpStore.waiting.length : 0,
       pubpaidPvpActive: activePvpMatches.length,
       pubpaidPvpSettled: settledPvpMatches.length,
+      pubpaidPvpWonCoins: enhancedDashboard.stats.totalMatchWonCoins,
+      pubpaidPvpLostCoins: enhancedDashboard.stats.totalMatchLostCoins,
+      pubpaidPvpNetCoins: enhancedDashboard.stats.totalMatchNetCoins,
     },
-    dashboard,
+    dashboard: enhancedDashboard,
     pubpaidPvp: {
       updatedAt: pvpStore.updatedAt,
       waiting: pvpStore.waiting,
       activeMatches: activePvpMatches,
       settledMatches: settledPvpMatches.slice(-50),
     },
-    pendingPubpaidDeposits: dashboard.pendingDeposits,
-    pendingPubpaidWithdrawals: dashboard.pendingWithdrawals,
-    pubpaidWalletBoard: dashboard.walletBoard,
+    pendingPubpaidDeposits: enhancedDashboard.pendingDeposits,
+    pendingPubpaidWithdrawals: enhancedDashboard.pendingWithdrawals,
+    pubpaidWalletBoard: enhancedDashboard.walletBoard,
   };
 }
 
-const PUBPAID_PVP_ENABLED_GAMES = new Set(["checkers", "chess", "cards21", "poker", "truco", "darts", "dicecups"]);
+const PUBPAID_PVP_ENABLED_GAMES = new Set(["pool", "checkers", "chess", "cards21", "poker", "truco", "darts", "dicecups"]);
 const PUBPAID_PVP_WAIT_MS = 1000 * 60 * 15;
 const PUBPAID_PVP_MATCH_MS = 1000 * 60 * 60 * 6;
 const PUBPAID_PVP_ABANDON_MS = 1000 * 60;
@@ -18309,11 +18510,13 @@ function consumePubpaidMatchEscrow(player = {}, amount = 0) {
   });
 }
 
-function creditPubpaidMatchPayout(player = {}, amount = 0) {
+function creditPubpaidMatchPayout(player = {}, amount = 0, meta = {}) {
   const walletKey = safeString(player?.walletKey || "", 180).toLowerCase();
   const wallet = getPubpaidWalletRecordByKey(walletKey);
   if (!wallet) return null;
   const payout = normalizePubpaidMoney(amount);
+  const netWin = Math.max(0, normalizePubpaidMoney(meta.netWin || 0));
+  const houseFee = Math.max(0, normalizePubpaidMoney(meta.houseFee || 0));
   return savePubpaidWalletRecordByKey(walletKey, {
     ...wallet,
     balanceCoins: normalizePubpaidMoney(wallet.balanceCoins + payout),
@@ -18322,6 +18525,23 @@ function creditPubpaidMatchPayout(player = {}, amount = 0) {
       normalizePubpaidMoney(wallet.balanceCoins + payout - wallet.lockedMatchCoins - wallet.lockedWithdrawalCoins)
     ),
     manualApprovedBalanceCoins: normalizePubpaidMoney((wallet.manualApprovedBalanceCoins || 0) + payout),
+    matchPayoutCoins: normalizePubpaidMoney((wallet.matchPayoutCoins || 0) + payout),
+    matchWonCoins: normalizePubpaidMoney((wallet.matchWonCoins || 0) + netWin),
+    matchHouseFeeCoins: normalizePubpaidMoney((wallet.matchHouseFeeCoins || 0) + houseFee),
+    matchWonCount: clampInteger(wallet.matchWonCount) + (meta.win ? 1 : 0),
+    playerName: player.name,
+  });
+}
+
+function markPubpaidMatchLoss(player = {}, amount = 0) {
+  const walletKey = safeString(player?.walletKey || "", 180).toLowerCase();
+  const wallet = getPubpaidWalletRecordByKey(walletKey);
+  if (!wallet) return null;
+  const loss = Math.max(0, normalizePubpaidMoney(amount));
+  return savePubpaidWalletRecordByKey(walletKey, {
+    ...wallet,
+    matchLostCoins: normalizePubpaidMoney((wallet.matchLostCoins || 0) + loss),
+    matchLostCount: clampInteger(wallet.matchLostCount) + 1,
     playerName: player.name,
   });
 }
@@ -18335,9 +18555,11 @@ function settlePubpaidPvpMatch(match = {}) {
   consumePubpaidMatchEscrow(match.playerOne, stake);
   consumePubpaidMatchEscrow(match.playerTwo, stake);
   if (match.winner === "playerOne") {
-    creditPubpaidMatchPayout(match.playerOne, payout);
+    creditPubpaidMatchPayout(match.playerOne, payout, { win: true, netWin: payout - stake, houseFee });
+    markPubpaidMatchLoss(match.playerTwo, stake);
   } else if (match.winner === "playerTwo") {
-    creditPubpaidMatchPayout(match.playerTwo, payout);
+    creditPubpaidMatchPayout(match.playerTwo, payout, { win: true, netWin: payout - stake, houseFee });
+    markPubpaidMatchLoss(match.playerOne, stake);
   } else {
     creditPubpaidMatchPayout(match.playerOne, stake);
     creditPubpaidMatchPayout(match.playerTwo, stake);
@@ -18369,6 +18591,7 @@ function normalizePubpaidPvpGameId(value = "") {
 
 function getPubpaidPvpGameLabel(gameId = "") {
   return {
+    pool: "Sinuca",
     checkers: "Damas",
     chess: "Xadrez",
     cards21: "21",
@@ -18636,6 +18859,239 @@ function createChessPvPState() {
   };
 }
 
+const PVP_POOL_TABLE = {
+  width: 100,
+  height: 50,
+  radius: 1.55,
+  pocketRadius: 4.15,
+  cueStart: { x: 25, y: 25 },
+};
+const PVP_POOL_MAX_SHOTS = 24;
+const PVP_POOL_COLORS = [
+  "#f0c742", "#1f6ad4", "#c93645", "#6b49ba", "#e17a2d",
+  "#2d8f72", "#7a2238", "#10131a", "#f0c742", "#1f6ad4",
+  "#c93645", "#6b49ba", "#e17a2d", "#2d8f72", "#7a2238",
+];
+const PVP_POOL_POCKETS = [
+  { x: 0, y: 0 },
+  { x: 50, y: 0 },
+  { x: 100, y: 0 },
+  { x: 0, y: 50 },
+  { x: 50, y: 50 },
+  { x: 100, y: 50 },
+];
+
+function clampPoolNumber(value, min, max, fallback = min) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return fallback;
+  return Math.max(min, Math.min(max, numeric));
+}
+
+function createPoolPvPBalls() {
+  const balls = [{
+    id: 0,
+    label: "branca",
+    cue: true,
+    color: "#fff6dc",
+    x: PVP_POOL_TABLE.cueStart.x,
+    y: PVP_POOL_TABLE.cueStart.y,
+    vx: 0,
+    vy: 0,
+    pocketed: false,
+  }];
+  const apex = { x: 63, y: 25 };
+  let id = 1;
+  for (let row = 0; row < 5; row += 1) {
+    for (let offset = 0; offset <= row; offset += 1) {
+      balls.push({
+        id,
+        label: String(id),
+        cue: false,
+        color: PVP_POOL_COLORS[(id - 1) % PVP_POOL_COLORS.length],
+        x: apex.x + row * 3.05,
+        y: apex.y + (offset - row / 2) * 3.35,
+        vx: 0,
+        vy: 0,
+        pocketed: false,
+      });
+      id += 1;
+    }
+  }
+  return balls;
+}
+
+function createPoolPvPState() {
+  return {
+    shot: 1,
+    maxShots: PVP_POOL_MAX_SHOTS,
+    playerOneScore: 0,
+    playerTwoScore: 0,
+    balls: createPoolPvPBalls(),
+    lastShot: null,
+    history: [],
+  };
+}
+
+function clonePoolPvPBalls(balls = []) {
+  const source = Array.isArray(balls) && balls.length ? balls : createPoolPvPBalls();
+  return source.map((ball) => ({
+    id: clampInteger(ball.id),
+    label: safeString(ball.label || ball.id || "", 20),
+    cue: Boolean(ball.cue || clampInteger(ball.id) === 0),
+    color: safeString(ball.color || "#fff6dc", 20),
+    x: clampPoolNumber(ball.x, 0, PVP_POOL_TABLE.width, ball.cue ? PVP_POOL_TABLE.cueStart.x : 50),
+    y: clampPoolNumber(ball.y, 0, PVP_POOL_TABLE.height, ball.cue ? PVP_POOL_TABLE.cueStart.y : 25),
+    vx: clampPoolNumber(ball.vx, -250, 250, 0),
+    vy: clampPoolNumber(ball.vy, -250, 250, 0),
+    pocketed: Boolean(ball.pocketed),
+  }));
+}
+
+function getPoolPvPSeatScoreKey(seat = "") {
+  return seat === "playerOne" ? "playerOneScore" : "playerTwoScore";
+}
+
+function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne", angle = 0, power = 0.5) {
+  const state = {
+    ...createPoolPvPState(),
+    ...poolState,
+    balls: clonePoolPvPBalls(poolState.balls),
+    history: Array.isArray(poolState.history) ? poolState.history.slice(-24) : [],
+  };
+  const cue = state.balls.find((ball) => ball.cue || ball.id === 0) || state.balls[0];
+  const shotAngle = clampPoolNumber(angle, -180, 180, 0);
+  const shotPower = clampPoolNumber(power, 0.1, 1, 0.5);
+  const radians = (shotAngle * Math.PI) / 180;
+  const speed = 58 + shotPower * 122;
+  const pocketedBefore = new Set(state.balls.filter((ball) => ball.pocketed && !ball.cue).map((ball) => ball.id));
+  cue.pocketed = false;
+  cue.x = clampPoolNumber(cue.x, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.x);
+  cue.y = clampPoolNumber(cue.y, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.y);
+  cue.vx = Math.cos(radians) * speed;
+  cue.vy = Math.sin(radians) * speed;
+
+  let cuePocketed = false;
+  let stillFrames = 0;
+  const dt = 1 / 60;
+  for (let frame = 0; frame < 3600; frame += 1) {
+    state.balls.forEach((ball) => {
+      if (ball.pocketed) return;
+      ball.x += ball.vx * dt;
+      ball.y += ball.vy * dt;
+      ball.vx *= 0.9915;
+      ball.vy *= 0.9915;
+      if (Math.hypot(ball.vx, ball.vy) < 0.72) {
+        ball.vx = 0;
+        ball.vy = 0;
+      }
+      if (ball.x < PVP_POOL_TABLE.radius) {
+        ball.x = PVP_POOL_TABLE.radius;
+        ball.vx = Math.abs(ball.vx) * 0.88;
+      }
+      if (ball.x > PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius) {
+        ball.x = PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius;
+        ball.vx = -Math.abs(ball.vx) * 0.88;
+      }
+      if (ball.y < PVP_POOL_TABLE.radius) {
+        ball.y = PVP_POOL_TABLE.radius;
+        ball.vy = Math.abs(ball.vy) * 0.88;
+      }
+      if (ball.y > PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius) {
+        ball.y = PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius;
+        ball.vy = -Math.abs(ball.vy) * 0.88;
+      }
+    });
+
+    for (let left = 0; left < state.balls.length; left += 1) {
+      const a = state.balls[left];
+      if (a.pocketed) continue;
+      for (let right = left + 1; right < state.balls.length; right += 1) {
+        const b = state.balls[right];
+        if (b.pocketed) continue;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const distance = Math.hypot(dx, dy) || 0.0001;
+        const minDistance = PVP_POOL_TABLE.radius * 2;
+        if (distance >= minDistance) continue;
+        const nx = dx / distance;
+        const ny = dy / distance;
+        const overlap = minDistance - distance;
+        a.x -= nx * overlap * 0.5;
+        a.y -= ny * overlap * 0.5;
+        b.x += nx * overlap * 0.5;
+        b.y += ny * overlap * 0.5;
+        const closing = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+        if (closing <= 0) continue;
+        const impulse = closing * 0.94;
+        a.vx -= impulse * nx;
+        a.vy -= impulse * ny;
+        b.vx += impulse * nx;
+        b.vy += impulse * ny;
+      }
+    }
+
+    state.balls.forEach((ball) => {
+      if (ball.pocketed) return;
+      const inPocket = PVP_POOL_POCKETS.some((pocket) => Math.hypot(ball.x - pocket.x, ball.y - pocket.y) <= PVP_POOL_TABLE.pocketRadius);
+      if (!inPocket) return;
+      if (ball.cue || ball.id === 0) {
+        cuePocketed = true;
+        ball.x = PVP_POOL_TABLE.cueStart.x;
+        ball.y = PVP_POOL_TABLE.cueStart.y;
+        ball.vx = 0;
+        ball.vy = 0;
+        return;
+      }
+      ball.pocketed = true;
+      ball.vx = 0;
+      ball.vy = 0;
+    });
+
+    const moving = state.balls.some((ball) => !ball.pocketed && Math.hypot(ball.vx, ball.vy) > 0);
+    stillFrames = moving ? 0 : stillFrames + 1;
+    if (stillFrames > 24) break;
+  }
+
+  state.balls.forEach((ball) => {
+    ball.x = Number(ball.x.toFixed(2));
+    ball.y = Number(ball.y.toFixed(2));
+    ball.vx = 0;
+    ball.vy = 0;
+  });
+  const pocketedNow = state.balls.filter((ball) => !ball.cue && ball.pocketed && !pocketedBefore.has(ball.id));
+  const scoreKey = getPoolPvPSeatScoreKey(seat);
+  state[scoreKey] = clampInteger(state[scoreKey]) + pocketedNow.length;
+  const nextShot = clampInteger(state.shot, 1) + 1;
+  const remaining = state.balls.filter((ball) => !ball.cue && !ball.pocketed).length;
+  const lastShot = {
+    seat,
+    angle: Number(shotAngle.toFixed(1)),
+    power: Number(shotPower.toFixed(2)),
+    pocketed: pocketedNow.map((ball) => ball.id),
+    cuePocketed,
+    remaining,
+    at: new Date().toISOString(),
+  };
+  state.lastShot = lastShot;
+  state.history.push(lastShot);
+  state.shot = nextShot;
+  return {
+    poolState: state,
+    pocketedCount: pocketedNow.length,
+    cuePocketed,
+    remaining,
+    finished: remaining <= 0 || nextShot > clampInteger(state.maxShots, PVP_POOL_MAX_SHOTS),
+  };
+}
+
+function resolvePoolPvPWinner(poolState = {}) {
+  const playerOneScore = clampInteger(poolState.playerOneScore);
+  const playerTwoScore = clampInteger(poolState.playerTwoScore);
+  if (playerOneScore > playerTwoScore) return "playerOne";
+  if (playerTwoScore > playerOneScore) return "playerTwo";
+  return "";
+}
+
 function clampDartsAimValue(value, fallback = 50) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return fallback;
@@ -18756,6 +19212,14 @@ function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
       forcedPiece: null,
       lastMove: null,
       resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar.",
+    };
+  }
+
+  if (gameId === "pool") {
+    return {
+      ...match,
+      poolState: createPoolPvPState(),
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar a sinuca.",
     };
   }
 
@@ -19110,11 +19574,23 @@ function createPubpaidPvpPlayer(authUser = {}, profile = {}) {
 function buildPubpaidPvpStatePayload(store, authUser, gameId) {
   const walletKey = getPubpaidWalletKey(authUser);
   const waitingEntry = store.waiting.find((entry) => entry?.gameId === gameId && entry?.player?.walletKey === walletKey) || null;
-  const matchEntry = store.matches.find((entry) =>
+  const playerMatches = store.matches.filter((entry) =>
     entry?.gameId === gameId &&
     ["readying", "active", "abandoned", "finished"].includes(entry?.status) &&
     [entry?.playerOne?.walletKey, entry?.playerTwo?.walletKey].includes(walletKey)
-  ) || null;
+  );
+  const byLatestUpdate = (left, right) =>
+    new Date(right?.updatedAt || right?.finishedAt || right?.startedAt || right?.createdAt || 0).getTime() -
+    new Date(left?.updatedAt || left?.finishedAt || left?.startedAt || left?.createdAt || 0).getTime();
+  const liveMatch =
+    playerMatches
+      .filter((entry) => ["readying", "active", "abandoned"].includes(entry?.status))
+      .sort(byLatestUpdate)[0] || null;
+  const latestFinishedMatch =
+    playerMatches
+      .filter((entry) => entry?.status === "finished")
+      .sort(byLatestUpdate)[0] || null;
+  const matchEntry = liveMatch || (waitingEntry ? null : latestFinishedMatch);
   const seat = matchEntry
     ? matchEntry.playerOne?.walletKey === walletKey
       ? "playerOne"

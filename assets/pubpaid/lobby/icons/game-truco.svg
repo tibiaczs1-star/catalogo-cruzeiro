@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 112" role="img" aria-label="Truco">
+  <rect width="160" height="112" rx="10" fill="#071915"/>
+  <rect x="20" y="24" width="120" height="64" rx="16" fill="#0f7a55" stroke="#ffd06d" stroke-width="4"/>
+  <rect x="46" y="30" width="36" height="52" rx="5" fill="#fff5d9" stroke="#07101c" stroke-width="3" transform="rotate(-9 64 56)"/>
+  <rect x="78" y="30" width="36" height="52" rx="5" fill="#fff5d9" stroke="#07101c" stroke-width="3" transform="rotate(9 96 56)"/>
+  <path d="M61 49h10v20H61zM55 49h22v8H55z" fill="#c93645"/>
+  <path d="M91 47h12l6 22H97z" fill="#07101c"/>
+  <circle cx="35" cy="56" r="8" fill="#ffd06d"/><circle cx="125" cy="56" r="8" fill="#ff4f7d"/>
+</svg>

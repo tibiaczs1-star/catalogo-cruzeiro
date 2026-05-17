@@ -242,6 +242,10 @@ function normalizeWallet(playerId, record = {}) {
   const lockedWithdrawalCoins = normalizeMoney(record.lockedWithdrawalCoins ?? record.locked ?? record.travado);
   const lockedMatchCoins = normalizeMoney(record.lockedMatchCoins ?? record.lockedPvpCoins ?? 0);
   const matchSpentCoins = normalizeMoney(record.matchSpentCoins ?? record.matchDebitCoins ?? record.spentMatchCoins ?? 0);
+  const matchPayoutCoins = normalizeMoney(record.matchPayoutCoins ?? record.pvpPayoutCoins ?? 0);
+  const matchWonCoins = normalizeMoney(record.matchWonCoins ?? record.pvpWonCoins ?? 0);
+  const matchLostCoins = normalizeMoney(record.matchLostCoins ?? record.pvpLostCoins ?? 0);
+  const matchHouseFeeCoins = normalizeMoney(record.matchHouseFeeCoins ?? record.pvpHouseFeeCoins ?? 0);
   const totalApprovedDeposits = normalizeMoney(
     record.totalApprovedDeposits ?? record.approvedDeposits ?? record.depositsApproved ?? record.depositosAprovados
   );
@@ -270,6 +274,12 @@ function normalizeWallet(playerId, record = {}) {
     lockedWithdrawalCoins,
     lockedMatchCoins,
     matchSpentCoins,
+    matchPayoutCoins,
+    matchWonCoins,
+    matchLostCoins,
+    matchHouseFeeCoins,
+    matchWonCount: Number(record.matchWonCount || 0),
+    matchLostCount: Number(record.matchLostCount || 0),
     totalApprovedDeposits,
     totalApprovedWithdrawals,
     manualApprovedBalanceCoins,
@@ -323,6 +333,12 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
         lockedWithdrawalCoins: normalizeMoney(normalized.manualLockedWithdrawalCoins),
         lockedMatchCoins: normalizeMoney(normalized.lockedMatchCoins),
         matchSpentCoins: normalizeMoney(normalized.matchSpentCoins),
+        matchPayoutCoins: normalizeMoney(normalized.matchPayoutCoins),
+        matchWonCoins: normalizeMoney(normalized.matchWonCoins),
+        matchLostCoins: normalizeMoney(normalized.matchLostCoins),
+        matchHouseFeeCoins: normalizeMoney(normalized.matchHouseFeeCoins),
+        matchWonCount: Number(normalized.matchWonCount || 0),
+        matchLostCount: Number(normalized.matchLostCount || 0),
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
         manualApprovedBalanceCoins: normalizeMoney(normalized.manualApprovedBalanceCoins),
@@ -348,6 +364,12 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
           lockedWithdrawalCoins: 0,
           lockedMatchCoins: 0,
           matchSpentCoins: 0,
+          matchPayoutCoins: 0,
+          matchWonCoins: 0,
+          matchLostCoins: 0,
+          matchHouseFeeCoins: 0,
+          matchWonCount: 0,
+          matchLostCount: 0,
           totalApprovedDeposits: 0,
           totalApprovedWithdrawals: 0,
           manualApprovedBalanceCoins: 0,
@@ -513,12 +535,28 @@ function buildDashboardPayload(storeInput) {
     .map((wallet) => ({
       playerId: wallet.playerId,
       playerName: wallet.playerName,
+      walletKey: wallet.walletKey || wallet.playerId,
       balanceCoins: wallet.balanceCoins,
       balance: wallet.balanceCoins,
       saldo: wallet.balanceCoins,
+      availableCoins: Math.max(
+        0,
+        normalizeMoney(wallet.balanceCoins) -
+          normalizeMoney(wallet.lockedWithdrawalCoins) -
+          normalizeMoney(wallet.lockedMatchCoins)
+      ),
       lockedWithdrawalCoins: wallet.lockedWithdrawalCoins,
       locked: wallet.lockedWithdrawalCoins,
       travado: wallet.lockedWithdrawalCoins,
+      lockedMatchCoins: wallet.lockedMatchCoins || 0,
+      matchSpentCoins: wallet.matchSpentCoins || 0,
+      matchPayoutCoins: wallet.matchPayoutCoins || 0,
+      matchWonCoins: wallet.matchWonCoins || 0,
+      matchLostCoins: wallet.matchLostCoins || 0,
+      matchHouseFeeCoins: wallet.matchHouseFeeCoins || 0,
+      matchNetCoins: normalizeMoney((wallet.matchWonCoins || 0) - (wallet.matchLostCoins || 0)),
+      matchWonCount: Number(wallet.matchWonCount || 0),
+      matchLostCount: Number(wallet.matchLostCount || 0),
       totalApprovedDeposits: wallet.totalApprovedDeposits,
       approvedDeposits: wallet.totalApprovedDeposits,
       totalApprovedWithdrawals: wallet.totalApprovedWithdrawals,
@@ -538,6 +576,9 @@ function buildDashboardPayload(storeInput) {
       walletCount: walletBoard.length,
       totalPlayerBalanceCoins: walletBoard.reduce((sum, item) => sum + normalizeMoney(item.balanceCoins), 0),
       totalLockedWithdrawalCoins: walletBoard.reduce((sum, item) => sum + normalizeMoney(item.lockedWithdrawalCoins), 0),
+      totalMatchWonCoins: walletBoard.reduce((sum, item) => sum + normalizeMoney(item.matchWonCoins), 0),
+      totalMatchLostCoins: walletBoard.reduce((sum, item) => sum + normalizeMoney(item.matchLostCoins), 0),
+      totalMatchNetCoins: walletBoard.reduce((sum, item) => sum + normalizeMoney(item.matchNetCoins), 0),
     },
   };
 }

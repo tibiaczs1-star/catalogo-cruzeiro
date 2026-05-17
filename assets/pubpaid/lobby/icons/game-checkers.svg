@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 112" role="img" aria-label="Damas">
+  <rect width="160" height="112" rx="10" fill="#08131f"/>
+  <rect x="30" y="14" width="100" height="84" rx="6" fill="#6b4326"/>
+  <g transform="translate(38 22)">
+    <rect width="84" height="68" fill="#e8c995"/>
+    <g fill="#245944">
+      <rect x="0" y="0" width="21" height="17"/><rect x="42" y="0" width="21" height="17"/>
+      <rect x="21" y="17" width="21" height="17"/><rect x="63" y="17" width="21" height="17"/>
+      <rect x="0" y="34" width="21" height="17"/><rect x="42" y="34" width="21" height="17"/>
+      <rect x="21" y="51" width="21" height="17"/><rect x="63" y="51" width="21" height="17"/>
+    </g>
+    <g stroke="#07101c" stroke-width="3">
+      <circle cx="10.5" cy="8.5" r="8" fill="#50efff"/><circle cx="52.5" cy="8.5" r="8" fill="#50efff"/>
+      <circle cx="31.5" cy="59.5" r="8" fill="#ff4f7d"/><circle cx="73.5" cy="59.5" r="8" fill="#ff4f7d"/>
+    </g>
+  </g>
+</svg>

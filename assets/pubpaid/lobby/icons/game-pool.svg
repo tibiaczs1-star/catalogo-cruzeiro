@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 112" role="img" aria-label="Sinuca">
+  <rect width="160" height="112" rx="10" fill="#0a1220"/>
+  <rect x="14" y="18" width="132" height="76" rx="12" fill="#5a2b14"/>
+  <rect x="24" y="28" width="112" height="56" rx="8" fill="#0f7a55"/>
+  <g fill="#02060c">
+    <circle cx="27" cy="31" r="8"/><circle cx="80" cy="27" r="7"/><circle cx="133" cy="31" r="8"/>
+    <circle cx="27" cy="81" r="8"/><circle cx="80" cy="85" r="7"/><circle cx="133" cy="81" r="8"/>
+  </g>
+  <circle cx="52" cy="57" r="9" fill="#fff5d9"/>
+  <circle cx="92" cy="48" r="9" fill="#f0c742"/>
+  <circle cx="108" cy="57" r="9" fill="#c93645"/>
+  <circle cx="92" cy="66" r="9" fill="#1f6ad4"/>
+  <path d="M34 88 126 26" stroke="#d4934b" stroke-width="5" stroke-linecap="round"/>
+</svg>

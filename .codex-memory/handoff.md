@@ -1,34 +1,64 @@
 # Handoff
 
-Updated: 2026-05-17T04:55:46.0376474-05:00
+Updated: 2026-05-17T07:27:46-05:00
 
-Regra de operacao ativa: modo economico por padrao. Usar leitura minima, resposta curta e validacao proporcional. Nao gastar contexto com memorias extensas, docs grandes, auditorias ou varreduras amplas sem necessidade clara. Escalar apenas em PubPaid, homepage/CZS, deploy, revisao grande ou mudanca com risco real.
+PubPaid 2.0 esta na rodada `20260517-poolpvp-ledger1`. O trabalho ativo deixou o jogo mais canonico e funcional: PvP com reconexao/W.O., Damas corrigida visualmente, Sinuca agora em PvP real, novas mesas PvP simples para Xadrez, Poker, Truco e Dados, e ledger de ganhos/perdas no dashboard.
 
-Separacao obrigatoria: tratar jogo como jogo e site como site. Eles estao no mesmo repo, mas sao frentes diferentes. O jogo nao deve puxar agentes do site, revisao editorial, homepage, cards, CZS ou contexto publico, salvo pedido explicito.
+## What Changed
 
-O PubPaid agora tem um unico canon: `/pubpaid.html`.
-
-Nao retomar por `pubpaid-v2.html`, `pubpaid-v2.js`, `pubpaid-v2.css`, `pubpaid-phaser.html`, prompts antigos, relatorios antigos, screenshots antigas ou jogo externo. Esses itens eram conceito/teste e foram descartados ou removidos.
-
-Arquivos vivos:
-
-- `pubpaid.html`
-- `pubpaid-phaser/`
-- `pubpaid-phaser.css`
-- `pubpaid-runtime.js`
-- `pubpaid-admin.html`
 - `server.js`
-- `catalogo-sw.js`
-- `data/pubpaid-store.json`
-- `data/pubpaid-pvp.json`
+  - PvP aceita `pool`, `checkers`, `chess`, `poker`, `truco`, `dicecups`, `cards21`, `darts`.
+  - Todas as mesas criadas entram em `readying`; os dois jogadores precisam confirmar `ready`.
+  - Presenca por assento controla desconexao.
+  - Desconexao abre janela de 60s (`abandoned`); retorno reativa a mesa.
+  - Desistir usa `forfeit` e finaliza por W.O.
+  - Sinuca, xadrez, poker, truco e dados tem endpoints de acao autoritativos.
+  - Resultado `finished` antigo nao bloqueia nova fila do mesmo jogo.
+  - Carteira registra ganho PvP, perda PvP, payout, fee e contadores.
+- `pubpaid-phaser/scenes/PoolGameScene.js`
+  - Refeito com bola branca, 15 bolas em triangulo, mira/forca, colisao, parede, caçapas e reposicao da branca.
+- `pubpaid-phaser/ui/domGameInterface.js`
+  - Lobby canonico mostra Sinuca, Damas, Xadrez, Poker, Truco e Dados.
+  - Damas renderiza `abandoned`, resultado, desistir e mao animada.
+  - Mesa generica renderiza sinuca/xadrez/poker/truco/dados e chama endpoints reais.
+  - Render de mesa generica tem trava contra recursao e nao recria botoes a cada polling de presenca.
+- `pubpaid-admin.html` e `pubpaid-runtime.js`
+  - Dashboard separa saldo atual, livre/travado, ganho PvP, perdido PvP e liquido PvP.
+- `assets/pubpaid/lobby/icons/*.svg`
+  - Icones de lobby para as seis mesas.
+- `pubpaid-phaser.css`
+  - Damas recebeu grid 8x8 fixo.
+  - Mesa generica e cards novos adicionados.
+  - Mobile/orientacao ajustados para nao travar por lock API.
 
-Proxima etapa: provar o PvP real em duas sessoes autenticadas e corrigir qualquer falha de sincronizacao, cache ou tela cheia.
+## Validation Done
 
-Estado do patch atual `20260517-avatarfix1`:
+- Syntax checks para `server.js`, `domGameInterface.js`, `pvpService.js`, `accountService.js`, `app.js`, `PoolGameScene.js`.
+- `npm run guard:pubpaid`.
+- `git diff --check`.
+- Teste replay/backend local confirmou que um match `finished` antigo nao impede novo `waiting`.
+- Chromium local com duas sessoes/cookies:
+  - Sinuca, Damas, Xadrez, Poker e Truco passaram em uma bateria completa.
+  - Dados passou em bateria focada com dois palpites, rodada registrada, W.O. e saldo atualizado.
+- Backend local com duas sessoes/cookies:
+  - Damas reconecta e desiste corretamente.
+  - Xadrez valida lance.
+  - Poker, Dados e Truco executam a primeira logica de partida.
+- Browser local:
+  - desktop 1280x720 sem scroll;
+  - lobby com 6 mesas;
+  - Sinuca abre e bolas colidem apos tacada;
+  - sem erros de console no teste local.
+- Usuario confirmou a direcao: primeiro tudo precisa funcionar; arte final fica como reposicao/substituicao posterior.
 
-- Corrigido o race de assets que deixava avatar/preview como placeholder verde.
-- Corrigida a escolha de avatar: sem texto masculino/feminino, sem badge feio em cima do personagem, labels `AVATAR 1` e `AVATAR 2`.
-- Corrigido mobile: body/shell/stage em `100dvh`, overflow hidden, retrato bloqueado com gate para horizontal e paisagem liberada sem scroll.
-- Corrigido PvP de Damas: join fresh nao reaproveita mesa ativa antiga sem controle; mesa active recente bloqueia nova fila com 409; readying antiga cancela e libera escrow; fechar/sair de partida ativa finaliza com vitoria do outro jogador.
-- Validado localmente por `node --check`, `npm run guard:pubpaid`, teste backend PvP com duas sessoes autenticadas de teste e Playwright mobile/desktop.
-- Nao validado nas janelas Chrome reais do usuario pelo Codex: a extensao esta instalada, mas `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.openai.codexextension` nao existe.
+## Next
+
+1. Rodar validacao mobile/landscape.
+2. Deploy/sync online.
+3. Confirmar `/api/pubpaid/build` online retornando `20260517-poolpvp-ledger1`.
+4. Validar com duas contas Google reais nas janelas do usuario.
+
+## Caution
+
+- Sinuca/poker/truco/dados/xadrez ja tem backend autoritativo basico, mas ainda sao versoes simples. Arte final e regras premium entram depois.
+- Nao chamar estas mesas de produto final ate passarem no teste online com duas contas reais.

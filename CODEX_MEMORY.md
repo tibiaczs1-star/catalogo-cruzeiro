@@ -41,7 +41,17 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Testar online com duas contas Google reais depois do deploy `20260517-avatarfix1`.
-2. Confirmar no navegador real: jogador A fica aguardando, jogador B pareia, ambos confirmam `Estou pronto`, e so entao Damas abre.
-3. Confirmar em mobile real: retrato bloqueia pedindo horizontal, paisagem nao tem scroll e a escolha de avatar mostra personagens.
-4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
+1. Publicar e conferir online o deploy `20260517-poolpvp-ledger1`.
+2. Confirmar no navegador real: jogador A fica aguardando, jogador B pareia, ambos confirmam `Estou pronto`, e so entao a mesa escolhida abre.
+3. Confirmar que Sinuca, Damas, Xadrez, Poker, Truco e Dados aparecem no lobby e fecham resultado com saldo real.
+4. Confirmar em mobile real: retrato bloqueia pedindo horizontal, paisagem nao tem scroll e a escolha de avatar mostra personagens.
+5. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
+
+## Ultima Rodada Validada
+
+- Build local: `20260517-poolpvp-ledger1`.
+- Sinuca foi movida para PvP real com endpoint autoritativo de tacada.
+- Dashboard PubPaid separa saldo atual, livre/travado, ganho PvP, perdido PvP e liquido PvP.
+- Corrigido estado sujo em que partida `finished` antiga podia sobrepor nova fila do mesmo jogo.
+- Corrigida recursao/render instavel da mesa generica PvP; polling nao recria botoes se o estado jogavel nao mudou.
+- Teste local com duas sessoes Chromium autenticadas passou em Sinuca, Damas, Xadrez, Poker, Truco e Dados.

@@ -1,43 +1,80 @@
 # Current State
 
-Updated: 2026-05-17T04:55:46.0376474-05:00
+Updated: 2026-05-17T07:27:46-05:00
 
 ## Active Goal
 
-Unificar PubPaid em um unico caminho canonico e fazer PvP real funcionar.
+- PubPaid 2.0 canonico: PvP real, reconexao/W.O., sinuca fisica e novas mesas funcionais.
 
-## Operating Mode
+## Summary
 
-- Modo economico por padrao.
-- Ler so o necessario para a tarefa atual.
-- Responder curto quando bastar.
-- Validar de forma proporcional ao risco.
-- Escalar contexto apenas para PubPaid, homepage/CZS, deploy, revisao grande ou mudanca arriscada.
-- Separar frentes: jogo e site ficam no mesmo repo, mas nao devem herdar contexto um do outro.
-- Para jogo, nao usar agentes do site, revisao editorial, cards, homepage ou CZS, salvo pedido explicito.
+- Build local atual: `20260517-poolpvp-ledger1`.
+- Damas PvP agora diferencia desconexao e desistência:
+  - fechar navegador/pagehide marca mesa como `abandoned`;
+  - jogador tem 60 segundos para voltar;
+  - voltar via polling/state reativa a mesa;
+  - botão `Desistir` finaliza por W.O. imediatamente.
+- Damas recebeu ajuste geometrico de fullscreen: grid 8x8 com linhas fixas, visual mais limpo e mao animada no ultimo lance.
+- Mobile: removida tentativa de lock de orientacao em aparelho touch; gate passa a orientar e observar rotacao sem travar.
+- Sinuca foi reconstruida como cena fisica local: bola branca, 15 bolas em triangulo, mira, força, colisao bola-bola, paredes, caçapas e reposicao da branca.
+- Xadrez, poker, truco e dados foram adicionados como mesas canonicas PvP:
+  - xadrez usa `chess.js` no servidor para validar lance legal;
+  - poker troca 5 cartas e resolve mao no backend;
+  - truco simples melhor de 3 maos;
+  - dados por palpite de soma em rodadas.
+- Sinuca agora tambem usa o fluxo PvP real no DOM: fila, pareamento, dupla confirmacao e endpoint autoritativo de tacada.
+- Dashboard PubPaid separa saldo atual, livre/travado, ganho PvP, perdido PvP e liquido PvP.
+- Corrigido estado sujo: resultado `finished` antigo nao bloqueia nova fila do mesmo jogo.
+- Corrigida recursao/render instavel da mesa generica: polling de presenca nao recria botoes enquanto o estado jogavel nao muda.
 
-## Canon
+## Validation
 
-- URL: `/pubpaid.html`
-- Runtime: `pubpaid-phaser/`
-- CSS: `pubpaid-phaser.css`
-- Backend: `server.js`
-- Carteira: `pubpaid-runtime.js` + `data/pubpaid-store.json`
-- PvP: `data/pubpaid-pvp.json`
+- `node --check server.js`
+- `node --check pubpaid-phaser/ui/domGameInterface.js`
+- `node --check pubpaid-phaser/services/pvpService.js`
+- `node --check pubpaid-phaser/services/accountService.js`
+- `node --check pubpaid-phaser/app.js`
+- `node --check pubpaid-phaser/scenes/PoolGameScene.js`
+- `npm run guard:pubpaid`
+- `git diff --check`
+- Teste replay/backend local: depois de finalizar uma sinuca, novo join do mesmo jogador retorna `waiting` em vez de reaproveitar match `finished`.
+- Teste Chromium local com duas sessoes autenticadas:
+  - Sinuca: card do lobby, pareamento, ready duplo, tacada PvP e W.O.
+  - Damas: card do lobby, pareamento, ready duplo, movimento e W.O.
+  - Xadrez: card do lobby, pareamento, ready duplo, lance e W.O.
+  - Poker: card do lobby, pareamento, ready duplo, duas trocas e resultado natural.
+  - Truco: card do lobby, pareamento, ready duplo, carta jogada e W.O.
+  - Dados: card do lobby, pareamento, ready duplo, dois palpites, rodada registrada e W.O.
+- Teste backend local com duas sessoes/cookies:
+  - Damas: join, ready duplo, desconexao -> `abandoned`, reconexao -> `active`, desistir -> `finished` com rival vencedor.
+  - Xadrez: lance `e2-e4` validado pelo motor.
+  - Poker: duas trocas concluem a mesa.
+  - Dados: rodada registrada.
+  - Truco: mao registrada.
+- Browser local em build `20260517-poolpvp-ledger1`:
+  - sem scroll em desktop 1280x720;
+  - lobby mostra Sinuca, Damas, Xadrez, Poker, Truco e Dados;
+  - Sinuca abre com 15 bolas em triangulo e tacada movimenta/colide bolas sem console errors.
+- Observacao do usuario durante a rodada: o objetivo principal e tudo funcionar; arte pode ser reposicionada/substituida depois.
 
-## Current Work
+## Files In Focus
 
-- PubPaid antigo descartado.
-- `/pubpaid-v2.html` deixou de ser caminho oficial e deve apenas redirecionar para `/pubpaid.html`.
-- Artefatos conceituais e validacoes antigas foram removidos/quarentenados.
-- Patch `20260517-avatarfix1` corrige entrada antes dos assets, escolha de avatar sem placeholder verde, bloqueio de retrato no mobile, tela sem scroll e fila PvP de Damas sem reentrar em mesa ativa antiga.
-- Backend PvP local validado: waiting -> readying -> readying -> active -> finished; entrada fresh durante mesa ativa retorna 409; sair da mesa ativa da vitoria ao outro jogador.
-- Playwright mobile validado: retrato mostra gate horizontal; paisagem fica sem scroll e sem alerta falso de fullscreen.
-- Chrome real ainda nao foi controlado pelo Codex porque o native host do plugin esta sem chave no registro do Windows.
+- `server.js`
+- `pubpaid.html`
+- `pubpaid-phaser.css`
+- `pubpaid-phaser/app.js`
+- `pubpaid-phaser/ui/domGameInterface.js`
+- `pubpaid-phaser/services/accountService.js`
+- `pubpaid-phaser/services/pvpService.js`
+- `pubpaid-phaser/scenes/PoolGameScene.js`
+- `pubpaid-runtime.js`
+- `pubpaid-admin.html`
+- `assets/pubpaid/lobby/icons/*.svg`
+- `package.json`
+- `package-lock.json`
 
 ## Next
 
-1. Fazer commit/push do patch.
-2. Aguardar deploy online do build `20260517-avatarfix1`.
-3. Usuario testar nas duas janelas Chrome reais com contas Google diferentes.
-4. Se o online ainda pular a espera PvP, investigar estado real em `data/pubpaid-pvp.json` e fluxo do cliente autenticado.
+- Rodar validacao visual mobile/landscape com Playwright/Chrome.
+- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-poolpvp-ledger1`.
+- Testar online com duas contas Google reais quando o deploy novo estiver ativo nas duas janelas.

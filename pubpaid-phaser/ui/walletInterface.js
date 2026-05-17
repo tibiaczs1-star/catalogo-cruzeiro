@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js?v=20260517-pvpgames1";
+} from "../services/accountService.js?v=20260517-poolpvp-ledger1";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);
