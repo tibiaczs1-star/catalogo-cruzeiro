@@ -1,8 +1,8 @@
 # Handoff
 
-Updated: 2026-05-17T07:27:46-05:00
+Updated: 2026-05-17T11:22:00-05:00
 
-PubPaid 2.0 esta na rodada `20260517-poolpvp-ledger1`. O trabalho ativo deixou o jogo mais canonico e funcional: PvP com reconexao/W.O., Damas corrigida visualmente, Sinuca agora em PvP real, novas mesas PvP simples para Xadrez, Poker, Truco e Dados, e ledger de ganhos/perdas no dashboard.
+PubPaid 2.0 esta na rodada `20260517-checkersarena1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
 
 ## What Changed
 
@@ -15,11 +15,13 @@ PubPaid 2.0 esta na rodada `20260517-poolpvp-ledger1`. O trabalho ativo deixou o
   - Sinuca, xadrez, poker, truco e dados tem endpoints de acao autoritativos.
   - Resultado `finished` antigo nao bloqueia nova fila do mesmo jogo.
   - Carteira registra ganho PvP, perda PvP, payout, fee e contadores.
+  - Damas agora grava `checkersHistory` no match a cada lance.
 - `pubpaid-phaser/scenes/PoolGameScene.js`
   - Refeito com bola branca, 15 bolas em triangulo, mira/forca, colisao, parede, caçapas e reposicao da branca.
 - `pubpaid-phaser/ui/domGameInterface.js`
   - Lobby canonico mostra Sinuca, Damas, Xadrez, Poker, Truco e Dados.
   - Damas renderiza `abandoned`, resultado, desistir e mao animada.
+  - Damas renderiza arena dedicada com timer, cards dos jogadores, hints, historico e suporte a drag/drop alem de tap.
   - Mesa generica renderiza sinuca/xadrez/poker/truco/dados e chama endpoints reais.
   - Render de mesa generica tem trava contra recursao e nao recria botoes a cada polling de presenca.
 - `pubpaid-admin.html` e `pubpaid-runtime.js`
@@ -27,7 +29,7 @@ PubPaid 2.0 esta na rodada `20260517-poolpvp-ledger1`. O trabalho ativo deixou o
 - `assets/pubpaid/lobby/icons/*.svg`
   - Icones de lobby para as seis mesas.
 - `pubpaid-phaser.css`
-  - Damas recebeu grid 8x8 fixo.
+  - Damas recebeu arena premium fullscreen, grid 8x8 fixo, overlay da mao sem deformar casas e layout mobile retrato.
   - Mesa generica e cards novos adicionados.
   - Mobile/orientacao ajustados para nao travar por lock API.
 
@@ -36,6 +38,10 @@ PubPaid 2.0 esta na rodada `20260517-poolpvp-ledger1`. O trabalho ativo deixou o
 - Syntax checks para `server.js`, `domGameInterface.js`, `pvpService.js`, `accountService.js`, `app.js`, `PoolGameScene.js`.
 - `npm run guard:pubpaid`.
 - `git diff --check`.
+- Teste backend local isolado com duas contas/cookies confirmou Damas `waiting -> readying -> active`, lance legal e `checkersHistory`.
+- Chrome via CDP com dois perfis separados:
+  - desktop 1365x768: Damas ativa, sem scroll, casas quadradas;
+  - mobile retrato 390x844: Damas ativa, sem gate de orientacao, sem scroll, casas quadradas.
 - Teste replay/backend local confirmou que um match `finished` antigo nao impede novo `waiting`.
 - Chromium local com duas sessoes/cookies:
   - Sinuca, Damas, Xadrez, Poker e Truco passaram em uma bateria completa.
@@ -53,10 +59,10 @@ PubPaid 2.0 esta na rodada `20260517-poolpvp-ledger1`. O trabalho ativo deixou o
 
 ## Next
 
-1. Rodar validacao mobile/landscape.
-2. Deploy/sync online.
-3. Confirmar `/api/pubpaid/build` online retornando `20260517-poolpvp-ledger1`.
-4. Validar com duas contas Google reais nas janelas do usuario.
+1. Deploy/sync online.
+2. Confirmar `/api/pubpaid/build` online retornando `20260517-checkersarena1`.
+3. Validar com duas contas Google reais nas janelas do usuario.
+4. Continuar polimento visual por jogo sem quebrar o financeiro.
 
 ## Caution
 

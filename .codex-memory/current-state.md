@@ -1,14 +1,18 @@
 # Current State
 
-Updated: 2026-05-17T07:27:46-05:00
+Updated: 2026-05-17T11:22:00-05:00
 
 ## Active Goal
 
-- PubPaid 2.0 canonico: PvP real, reconexao/W.O., sinuca fisica e novas mesas funcionais.
+- PubPaid 2.0 canonico: Damas PvP como arena dedicada premium, preservando financeiro real.
 
 ## Summary
 
-- Build local atual: `20260517-poolpvp-ledger1`.
+- Build local atual: `20260517-checkersarena1`.
+- Damas foi refeita como arena DOM dedicada: header de partida, timer, cards dos jogadores, tabuleiro premium, hints, historico de lances, drag/tap e botao Desistir.
+- Backend passou a persistir `checkersHistory` por match; o frontend mostra o ultimo historico sem depender de estado local.
+- A mao animada do ultimo lance virou overlay absoluto para nao deformar o grid 8x8.
+- Mobile retrato nao fica mais preso em gate de orientacao; a mesa abre sem scroll e com casas quadradas.
 - Damas PvP agora diferencia desconexao e desistência:
   - fechar navegador/pagehide marca mesa como `abandoned`;
   - jogador tem 60 segundos para voltar;
@@ -37,6 +41,10 @@ Updated: 2026-05-17T07:27:46-05:00
 - `node --check pubpaid-phaser/scenes/PoolGameScene.js`
 - `npm run guard:pubpaid`
 - `git diff --check`
+- Teste backend isolado com duas contas/cookies: Damas `waiting -> readying -> active`, lance legal validado e `checkersHistory[0]` persistido.
+- Teste Chrome via CDP com dois perfis separados:
+  - desktop 1365x768: Damas ativa, tabuleiro 440x440, casas 55x55, sem scroll, `orientationBlocked=false`;
+  - mobile retrato 390x844: Damas ativa, tabuleiro 332x332, casas 41.5x41.5, sem scroll, `orientationBlocked=false`.
 - Teste replay/backend local: depois de finalizar uma sinuca, novo join do mesmo jogador retorna `waiting` em vez de reaproveitar match `finished`.
 - Teste Chromium local com duas sessoes autenticadas:
   - Sinuca: card do lobby, pareamento, ready duplo, tacada PvP e W.O.
@@ -75,6 +83,6 @@ Updated: 2026-05-17T07:27:46-05:00
 
 ## Next
 
-- Rodar validacao visual mobile/landscape com Playwright/Chrome.
-- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-poolpvp-ledger1`.
+- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-checkersarena1`.
 - Testar online com duas contas Google reais quando o deploy novo estiver ativo nas duas janelas.
+- Continuar polimento visual por jogo sem quebrar escrow, ready duplo, W.O. e saldo real.

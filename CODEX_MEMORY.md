@@ -41,17 +41,15 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Publicar e conferir online o deploy `20260517-poolpvp-ledger1`.
-2. Confirmar no navegador real: jogador A fica aguardando, jogador B pareia, ambos confirmam `Estou pronto`, e so entao a mesa escolhida abre.
-3. Confirmar que Sinuca, Damas, Xadrez, Poker, Truco e Dados aparecem no lobby e fecham resultado com saldo real.
-4. Confirmar em mobile real: retrato bloqueia pedindo horizontal, paisagem nao tem scroll e a escolha de avatar mostra personagens.
-5. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
+1. Publicar e conferir online o deploy `20260517-checkersarena1`.
+2. Confirmar online com duas contas Google reais: Damas abre no novo layout, pareia, confirma, move, registra historico e nao deforma mobile.
+3. Continuar polimento visual por jogo, sempre preservando o fluxo financeiro/PvP real.
+4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
 
 ## Ultima Rodada Validada
 
-- Build local: `20260517-poolpvp-ledger1`.
-- Sinuca foi movida para PvP real com endpoint autoritativo de tacada.
-- Dashboard PubPaid separa saldo atual, livre/travado, ganho PvP, perdido PvP e liquido PvP.
-- Corrigido estado sujo em que partida `finished` antiga podia sobrepor nova fila do mesmo jogo.
-- Corrigida recursao/render instavel da mesa generica PvP; polling nao recria botoes se o estado jogavel nao mudou.
-- Teste local com duas sessoes Chromium autenticadas passou em Sinuca, Damas, Xadrez, Poker, Truco e Dados.
+- Build local: `20260517-checkersarena1`.
+- Damas foi recriada como arena dedicada premium no DOM PvP, com header, cards dos jogadores, timer, historico, hints, drag/tap e botao Desistir.
+- Historico de lances de Damas passou a ser persistido no match pelo backend.
+- Mobile nao bloqueia mais por orientacao obrigatoria; o teste em retrato entrou na mesa e manteve tabuleiro quadrado.
+- Teste local isolado com duas contas/sessoes Chrome via CDP: pareamento, ready duplo, lance backend, historico e render desktop/mobile sem scroll.

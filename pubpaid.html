@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-poolpvp-ledger1" />
-    <script defer src="./site-google-auth.js?v=20260517-poolpvp-ledger1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-checkersarena1" />
+    <script defer src="./site-google-auth.js?v=20260517-checkersarena1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-poolpvp-ledger1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-checkersarena1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -227,32 +227,32 @@
               </header>
               <div class="ppg-dom-game-cards">
                 <button type="button" class="ppg-dom-game-card is-pool" data-dom-start-game="pool">
-                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260517-poolpvp-ledger1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260517-checkersarena1" alt="" loading="lazy" />
                   <span>Sinuca</span>
                   <strong>PvP real</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-checkers" data-dom-start-game="checkers">
-                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260517-poolpvp-ledger1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260517-checkersarena1" alt="" loading="lazy" />
                   <span>Damas</span>
                   <strong>saldo real</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-chess" data-dom-start-game="chess">
-                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260517-poolpvp-ledger1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260517-checkersarena1" alt="" loading="lazy" />
                   <span>Xadrez</span>
                   <strong>PvP real</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-poker" data-dom-start-game="poker">
-                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260517-poolpvp-ledger1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260517-checkersarena1" alt="" loading="lazy" />
                   <span>Poker</span>
                   <strong>troca 5 cartas</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-truco" data-dom-start-game="truco">
-                  <img src="./assets/pubpaid/lobby/icons/game-truco.svg?v=20260517-poolpvp-ledger1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-truco.svg?v=20260517-checkersarena1" alt="" loading="lazy" />
                   <span>Truco</span>
                   <strong>melhor de 3</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-dicecups" data-dom-start-game="dicecups">
-                  <img src="./assets/pubpaid/lobby/icons/game-dicecups.svg?v=20260517-poolpvp-ledger1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-dicecups.svg?v=20260517-checkersarena1" alt="" loading="lazy" />
                   <span>Dados</span>
                   <strong>soma PvP</strong>
                 </button>
@@ -330,18 +330,60 @@
             </aside>
 
             <aside class="ppg-dom-checkers" data-dom-checkers hidden>
-              <header>
-                <span class="ppg-kicker">dama</span>
-                <h2 data-dom-checkers-title>Sua vez</h2>
-              </header>
-              <div class="ppg-dom-checkers-board" data-dom-checkers-board aria-label="Tabuleiro de dama"></div>
-              <div class="ppg-dom-score">
-                <strong data-dom-checkers-score>12 x 12</strong>
-                <span data-dom-checkers-status>Escolha uma peça.</span>
-              </div>
-              <div class="ppg-dom-actions">
-                <button type="button" class="danger" data-dom-forfeit-checkers>Desistir</button>
-                <button type="button" data-dom-open-lobby>Lobby</button>
+              <div class="ppg-checkers-arena">
+                <header class="ppg-checkers-hero">
+                  <div>
+                    <span class="ppg-kicker">ranked pvp</span>
+                    <h2 data-dom-checkers-title>Sua vez</h2>
+                    <p data-dom-checkers-status>Escolha uma peça.</p>
+                  </div>
+                  <div class="ppg-checkers-clock" aria-live="polite">
+                    <span>turno</span>
+                    <strong data-dom-checkers-timer>45s</strong>
+                  </div>
+                </header>
+
+                <section class="ppg-checkers-player-row" aria-label="Jogadores da partida">
+                  <article class="ppg-checkers-player is-self" data-dom-checkers-self>
+                    <span data-dom-checkers-self-initial>?</span>
+                    <div>
+                      <strong data-dom-checkers-self-name>Você</strong>
+                      <small data-dom-checkers-self-meta>conectado</small>
+                    </div>
+                    <b data-dom-checkers-self-pieces>12</b>
+                  </article>
+                  <article class="ppg-checkers-player is-rival" data-dom-checkers-rival>
+                    <span data-dom-checkers-rival-initial>?</span>
+                    <div>
+                      <strong data-dom-checkers-rival-name>Rival</strong>
+                      <small data-dom-checkers-rival-meta>aguardando</small>
+                    </div>
+                    <b data-dom-checkers-rival-pieces>12</b>
+                  </article>
+                </section>
+
+                <div class="ppg-checkers-board-stage">
+                  <div class="ppg-checkers-board-frame">
+                    <div class="ppg-dom-checkers-board" data-dom-checkers-board aria-label="Tabuleiro de dama"></div>
+                  </div>
+                </div>
+
+                <aside class="ppg-checkers-sidecar">
+                  <div class="ppg-checkers-statline">
+                    <span>peças</span>
+                    <strong data-dom-checkers-score>12 x 12</strong>
+                  </div>
+                  <div class="ppg-checkers-statline">
+                    <span>lances</span>
+                    <strong data-dom-checkers-moves>0</strong>
+                  </div>
+                  <div class="ppg-checkers-hints" data-dom-checkers-hints></div>
+                  <div class="ppg-checkers-history" data-dom-checkers-history aria-label="Histórico de lances"></div>
+                  <div class="ppg-dom-actions">
+                    <button type="button" class="danger" data-dom-forfeit-checkers>Desistir</button>
+                    <button type="button" data-dom-open-lobby>Lobby</button>
+                  </div>
+                </aside>
               </div>
             </aside>
 

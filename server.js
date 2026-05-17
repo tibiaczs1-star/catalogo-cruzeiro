@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260517-poolpvp-ledger1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-checkersarena1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16835,6 +16835,22 @@ async function handleApi(req, res, pathname, searchParams) {
     }
 
     const nowIso = new Date().toISOString();
+    const historyEntry = {
+      index: clampInteger(match.moveCount) + 1,
+      seat,
+      playerName: seat === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2",
+      from: chosenMove.from,
+      to: chosenMove.to,
+      capture: chosenMove.capture || null,
+      piece: board?.[chosenMove.from.row]?.[chosenMove.from.col] || "",
+      crowned: Boolean(
+        (board?.[chosenMove.from.row]?.[chosenMove.from.col] || "") !==
+          (nextBoard?.[chosenMove.to.row]?.[chosenMove.to.col] || "") &&
+          (board?.[chosenMove.from.row]?.[chosenMove.from.col] || "").toLowerCase() ===
+            (nextBoard?.[chosenMove.to.row]?.[chosenMove.to.col] || "").toLowerCase()
+      ),
+      at: nowIso,
+    };
     store.matches[matchIndex] = {
       ...match,
       presence: {
@@ -16849,10 +16865,13 @@ async function handleApi(req, res, pathname, searchParams) {
       lastMove: {
         ...chosenMove,
         seat,
-        piece: board?.[chosenMove.from.row]?.[chosenMove.from.col] || "",
+        piece: historyEntry.piece,
         capturedPiece: chosenMove.capture ? board?.[chosenMove.capture.row]?.[chosenMove.capture.col] || "" : "",
         at: nowIso,
       },
+      checkersHistory: Array.isArray(match.checkersHistory)
+        ? match.checkersHistory.concat(historyEntry).slice(-80)
+        : [historyEntry],
       turn: nextTurn,
       forcedPiece: finished ? null : forcedPiece,
       winner: winner || "",
@@ -19211,6 +19230,7 @@ function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
       board: createCheckersPvPBoard(),
       forcedPiece: null,
       lastMove: null,
+      checkersHistory: [],
       resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar.",
     };
   }

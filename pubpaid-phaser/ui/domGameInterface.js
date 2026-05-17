@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-poolpvp-ledger1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-checkersarena1";
 import {
   confirmPvpReady,
   drawPoker,
@@ -9,14 +9,14 @@ import {
   moveChess,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260517-poolpvp-ledger1";
+} from "../services/pvpService.js?v=20260517-checkersarena1";
 import {
   CHECKERS_SIZE,
   countCheckersPieces,
   getCheckersLegalMoves,
   getCheckersOwner,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260517-poolpvp-ledger1";
+} from "../core/checkersRules.js?v=20260517-checkersarena1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -75,6 +75,20 @@ export function bindDomGameInterface(game) {
     checkersTitle: document.querySelector("[data-dom-checkers-title]"),
     checkersScore: document.querySelector("[data-dom-checkers-score]"),
     checkersStatus: document.querySelector("[data-dom-checkers-status]"),
+    checkersTimer: document.querySelector("[data-dom-checkers-timer]"),
+    checkersMoves: document.querySelector("[data-dom-checkers-moves]"),
+    checkersSelf: document.querySelector("[data-dom-checkers-self]"),
+    checkersSelfInitial: document.querySelector("[data-dom-checkers-self-initial]"),
+    checkersSelfName: document.querySelector("[data-dom-checkers-self-name]"),
+    checkersSelfMeta: document.querySelector("[data-dom-checkers-self-meta]"),
+    checkersSelfPieces: document.querySelector("[data-dom-checkers-self-pieces]"),
+    checkersRival: document.querySelector("[data-dom-checkers-rival]"),
+    checkersRivalInitial: document.querySelector("[data-dom-checkers-rival-initial]"),
+    checkersRivalName: document.querySelector("[data-dom-checkers-rival-name]"),
+    checkersRivalMeta: document.querySelector("[data-dom-checkers-rival-meta]"),
+    checkersRivalPieces: document.querySelector("[data-dom-checkers-rival-pieces]"),
+    checkersHints: document.querySelector("[data-dom-checkers-hints]"),
+    checkersHistory: document.querySelector("[data-dom-checkers-history]"),
     forfeitCheckers: document.querySelector("[data-dom-forfeit-checkers]"),
     table: document.querySelector("[data-dom-table]"),
     tableKicker: document.querySelector("[data-dom-table-kicker]"),
@@ -98,6 +112,7 @@ export function bindDomGameInterface(game) {
     resultHandledMatchId: "",
     pvpSelected: null,
     pvpLegalMoves: [],
+    pvpDragFrom: null,
     pvpHeld: [true, true, true, true, true],
     chessSelected: "",
     poolAim: 0,
@@ -115,6 +130,8 @@ export function bindDomGameInterface(game) {
     refs.root.classList.toggle("is-checkers", name === "checkers");
     refs.root.classList.toggle("is-table", name === "table");
     refs.root.classList.toggle("is-result", name === "result");
+    document.body?.classList.toggle("ppg-dom-playing", name === "pool" || name === "checkers" || name === "table");
+    document.body?.classList.toggle("ppg-dom-checkers-active", name === "checkers");
     refs.lobby.hidden = name !== "lobby";
     refs.matchmaking.hidden = name !== "matchmaking";
     refs.accessBlock.hidden = name !== "access-block";
@@ -137,6 +154,7 @@ export function bindDomGameInterface(game) {
     local.resultHandledMatchId = "";
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
+    local.pvpDragFrom = null;
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
     local.poolAim = 0;
@@ -235,6 +253,39 @@ export function bindDomGameInterface(game) {
     const deadline = new Date(isoValue || 0).getTime();
     if (!deadline) return 0;
     return Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+  };
+
+  const secondsSince = (isoValue = "") => {
+    const timestamp = new Date(isoValue || 0).getTime();
+    if (!timestamp) return 0;
+    return Math.max(0, Math.floor((Date.now() - timestamp) / 1000));
+  };
+
+  const formatCheckersSquare = (position = {}) => {
+    const row = Number(position.row);
+    const col = Number(position.col);
+    if (!Number.isInteger(row) || !Number.isInteger(col)) return "--";
+    return `${String.fromCharCode(65 + col)}${CHECKERS_SIZE - row}`;
+  };
+
+  const formatCheckersMove = (move = {}) => {
+    const connector = move.capture ? "x" : "-";
+    return `${formatCheckersSquare(move.from)}${connector}${formatCheckersSquare(move.to)}`;
+  };
+
+  const setCheckersPlayerCard = (refsForPlayer = {}, player = {}, { pieces = 0, active = false, connected = true, label = "" } = {}) => {
+    if (refsForPlayer.name) refsForPlayer.name.textContent = displayNameFor(player);
+    if (refsForPlayer.initial) refsForPlayer.initial.textContent = initialFor(player);
+    if (refsForPlayer.pieces) refsForPlayer.pieces.textContent = String(pieces);
+    if (refsForPlayer.meta) {
+      refsForPlayer.meta.textContent = active
+        ? "em turno"
+        : connected
+          ? label || "conectado"
+          : "reconectando";
+    }
+    refsForPlayer.root?.classList.toggle("is-active", active);
+    refsForPlayer.root?.classList.toggle("is-offline", !connected);
   };
 
   const setPlayerSlot = ({ picture, initial, name, state }, player = null, fallback = {}) => {
@@ -349,6 +400,8 @@ export function bindDomGameInterface(game) {
           const className = [
             "ppg-dom-cell",
             dark ? "is-dark" : "is-light",
+            own ? "is-own" : "",
+            owner && !own ? "is-rival" : "",
             local.pvpSelected?.row === rowIndex && local.pvpSelected?.col === colIndex ? "is-selected" : "",
             targetKeys.has(`${displayRow}-${displayCol}`) ? "is-target" : "",
             forcedPiece?.row === rowIndex && forcedPiece?.col === colIndex ? "is-forced" : "",
@@ -358,18 +411,22 @@ export function bindDomGameInterface(game) {
           ].filter(Boolean).join(" ");
           const disabled = match.status !== "active" || match.turn !== seat ? " disabled" : "";
           const checker = piece
-            ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${isCheckersKing(piece) ? " is-king" : ""}">${isCheckersKing(piece) ? "D" : ""}</span>`
+            ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${isCheckersKing(piece) ? " is-king" : ""}" ${own ? "draggable=\"true\"" : ""}>${isCheckersKing(piece) ? "D" : ""}</span>`
             : "";
           const aria = `linha ${rowIndex + 1}, coluna ${colIndex + 1}${piece ? own ? ", sua peça" : ", peça rival" : ""}`;
           return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}" data-display-row="${displayRow}" data-display-col="${displayCol}" aria-label="${aria}"${disabled}>${checker}</button>`;
       }).join("");
       const lastMoveTarget = match.lastMove?.to ? boardToDisplay(match.lastMove.to.row, match.lastMove.to.col) : null;
       const handMarkup = lastMoveTarget
-        ? `<span class="ppg-dom-move-hand" style="grid-row:${lastMoveTarget.row + 1};grid-column:${lastMoveTarget.col + 1};" aria-hidden="true"></span>`
+        ? `<span class="ppg-dom-move-hand" style="--ppg-hand-row:${lastMoveTarget.row};--ppg-hand-col:${lastMoveTarget.col};" aria-hidden="true"></span>`
         : "";
       refs.checkersBoard.innerHTML = `${cellsMarkup}${handMarkup}`;
       const ownPieces = countCheckersPieces(board, seat);
       const rivalPieces = board.flat().filter((piece) => getCheckersOwner(piece) && getCheckersOwner(piece) !== seat).length;
+      const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+      const availableMoves = getCheckersLegalMoves(board, seat, match.forcedPiece || null);
+      const captureMoves = availableMoves.filter((move) => move.capture);
+      const recentHistory = Array.isArray(match.checkersHistory) ? match.checkersHistory.slice(-5).reverse() : [];
       const coin = match.coinFlip || {};
       const firstSeat = coin.firstSeat || "";
       const firstName = firstSeat ? displayNameFor(match[firstSeat]) : "";
@@ -397,6 +454,54 @@ export function bindDomGameInterface(game) {
       if (refs.forfeitCheckers) {
         refs.forfeitCheckers.disabled = match.status !== "active" && match.status !== "abandoned";
         refs.forfeitCheckers.textContent = match.status === "finished" ? "Mesa encerrada" : "Desistir";
+      }
+      setCheckersPlayerCard({
+        root: refs.checkersSelf,
+        initial: refs.checkersSelfInitial,
+        name: refs.checkersSelfName,
+        meta: refs.checkersSelfMeta,
+        pieces: refs.checkersSelfPieces
+      }, match[seat] || currentPvpPlayer() || {}, {
+        pieces: ownPieces,
+        active: match.status === "active" && match.turn === seat,
+        connected: Boolean(match.presence?.[seat]?.connected ?? true),
+        label: "sua mesa"
+      });
+      setCheckersPlayerCard({
+        root: refs.checkersRival,
+        initial: refs.checkersRivalInitial,
+        name: refs.checkersRivalName,
+        meta: refs.checkersRivalMeta,
+        pieces: refs.checkersRivalPieces
+      }, match[rivalSeat] || rivalPvpPlayer() || {}, {
+        pieces: rivalPieces,
+        active: match.status === "active" && match.turn === rivalSeat,
+        connected: Boolean(match.presence?.[rivalSeat]?.connected ?? true),
+        label: "online"
+      });
+      if (refs.checkersTimer) {
+        const turnLeft = Math.max(0, 45 - secondsSince(match.updatedAt || match.startedAt || match.createdAt));
+        refs.checkersTimer.textContent = match.status === "abandoned" ? `${abandonSeconds}s` : match.status === "active" ? `${turnLeft}s` : "--";
+      }
+      if (refs.checkersMoves) refs.checkersMoves.textContent = String(match.moveCount || 0);
+      if (refs.checkersHints) {
+        const hintItems = [];
+        if (match.status === "active" && match.turn === seat && captureMoves.length) hintItems.push(`<b>${captureMoves.length}</b><span>captura obrigatoria</span>`);
+        if (match.forcedPiece) hintItems.push(`<b>combo</b><span>continue com ${formatCheckersSquare(match.forcedPiece)}</span>`);
+        if (match.lastMove?.to) hintItems.push(`<b>ultimo</b><span>${formatCheckersMove(match.lastMove)}</span>`);
+        if (!hintItems.length) hintItems.push(`<b>${availableMoves.length}</b><span>movimentos disponiveis</span>`);
+        refs.checkersHints.innerHTML = hintItems.map((item) => `<article>${item}</article>`).join("");
+      }
+      if (refs.checkersHistory) {
+        refs.checkersHistory.innerHTML = recentHistory.length
+          ? recentHistory.map((entry) => `
+              <article>
+                <span>${entry.index || ""}</span>
+                <strong>${formatCheckersMove(entry)}</strong>
+                <small>${entry.capture ? "captura" : entry.crowned ? "dama" : entry.playerName || "lance"}</small>
+              </article>
+            `).join("")
+          : `<article><span>0</span><strong>abertura</strong><small>sem lances ainda</small></article>`;
       }
       updateGameState({
         activeGameId: "checkers",
@@ -919,6 +1024,54 @@ export function bindDomGameInterface(game) {
       }
       showAccessBlock("pvp-only");
     }
+  });
+
+  document.addEventListener("dragstart", (event) => {
+    const cell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
+    if (!cell || gameState.pvpGameId !== "checkers") return;
+    const match = gameState.pvpMatch;
+    const seat = gameState.pvpSeat;
+    const row = Number(cell.dataset.row);
+    const col = Number(cell.dataset.col);
+    const piece = match?.board?.[row]?.[col];
+    if (!match || match.status !== "active" || match.turn !== seat || getCheckersOwner(piece) !== seat) {
+      event.preventDefault();
+      return;
+    }
+    local.pvpDragFrom = { row, col };
+    local.pvpSelected = { row, col };
+    local.pvpLegalMoves = getCheckersLegalMoves(match.board, seat, match.forcedPiece || null)
+      .filter((move) => move.from.row === row && move.from.col === col);
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", `${row}-${col}`);
+    renderPvpCheckers();
+  });
+
+  document.addEventListener("dragover", (event) => {
+    if (event.target.closest?.("[data-dom-checkers-board] [data-row]")) event.preventDefault();
+  });
+
+  document.addEventListener("drop", (event) => {
+    const cell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
+    if (!cell || gameState.pvpGameId !== "checkers") return;
+    event.preventDefault();
+    const match = gameState.pvpMatch;
+    const row = Number(cell.dataset.row);
+    const col = Number(cell.dataset.col);
+    const target = local.pvpLegalMoves.find((move) => move.to.row === row && move.to.col === col);
+    if (match?.id && target) {
+      moveCheckers(match.id, target).then((payload) => {
+        if (payload?.ok) {
+          local.pvpDragFrom = null;
+          local.pvpSelected = null;
+          local.pvpLegalMoves = [];
+          renderPvpCheckers();
+        }
+      });
+      return;
+    }
+    local.pvpDragFrom = null;
+    renderPvpCheckers();
   });
 
   document.addEventListener("input", (event) => {

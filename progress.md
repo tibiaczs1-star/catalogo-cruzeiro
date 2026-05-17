@@ -1,5 +1,7 @@
 # Progress - PubPaid Canonico
 
+Original prompt: criar uma Damas PvP premium, moderna e responsiva, adaptada ao PubPaid 2.0 sem quebrar o fluxo financeiro real.
+
 Atualizado: 2026-05-17
 
 ## Estado Atual
@@ -33,3 +35,11 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Corrigido estado sujo: uma partida `finished` antiga nao bloqueia nova fila do mesmo jogo.
 - Corrigida recursao da mesa generica PvP e estabilizado o DOM para polling nao recriar botoes durante clique.
 - Validacao local: duas sessoes Chromium autenticadas passaram em Sinuca, Damas, Xadrez, Poker, Truco e Dados; Dados foi validado em rodada focada porque a partida tem multiplas rodadas antes de finalizar naturalmente.
+
+## Atualizacao 2026-05-17 - checkersarena1
+
+- Damas virou uma arena dedicada no PubPaid 2.0: header, timer, cards dos jogadores, tabuleiro premium, hints, historico, drag/tap e desistir.
+- Backend grava `checkersHistory` em cada lance de Damas.
+- Removido bloqueio duro de orientacao mobile; retrato agora entra no jogo em vez de travar no aviso.
+- Corrigido o bug visual da mao animada deformando o grid 8x8.
+- Validacao: backend com duas contas/cookies e Chrome CDP com dois perfis separados em desktop e mobile retrato, sem scroll e com casas quadradas.
