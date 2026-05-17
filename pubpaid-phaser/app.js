@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-damas-ready-online1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-damas-ready-online1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-pvp-clean-online2";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-pvp-clean-online2";
 import { closePanel } from "./ui/panelActions.js";
-import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-damas-ready-online1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-damas-ready-online1";
+import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-pvp-clean-online2";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-pvp-clean-online2";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-damas-ready-online1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-damas-ready-online1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-pvp-clean-online2";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-pvp-clean-online2";
 import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260517-damas-ready-online1";
+const PUBPAID_BUILD_VERSION = "20260517-pvp-clean-online2";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 void refreshPubpaidRuntimeCache();
 
@@ -449,11 +449,14 @@ function openSplash(step = "intro") {
   syncEnterExitButtons();
 }
 
-function startGame() {
+async function startGame() {
   const auth = getAuthApi();
   if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");
     return;
+  }
+  if (auth?.isSignedIn?.()) {
+    await syncAuthUi();
   }
   refs.body?.classList.remove("game-is-locked");
   refs.splash?.setAttribute("hidden", "");

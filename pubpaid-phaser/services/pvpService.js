@@ -28,7 +28,8 @@ export async function fetchPvpState(gameId = "pool") {
     const response = await fetch(`./api/pubpaid/pvp/state?gameId=${encodeURIComponent(gameId)}`, {
       method: "GET",
       credentials: "same-origin",
-      headers: { Accept: "application/json" }
+      cache: "no-store",
+      headers: { Accept: "application/json", "Cache-Control": "no-store" }
     });
     const payload = await response.json().catch(() => null);
     if (!response.ok || !payload?.ok) {

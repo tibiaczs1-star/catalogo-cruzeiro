@@ -20,6 +20,7 @@ node_modules/
 
 # Artefatos temporários / automação local
 .chrome-headless-codex/
+.codex-backups/
 .codex-temp/
 .arquivo-morto/
 .codex-memory/archive/
@@ -28,6 +29,11 @@ __pycache__/
 *.py[cod]
 *.tmp
 output/playwright/
+output/chrome/
+output/instagram/
+output/tv-ad/
+output/video-reference/
+output/web-game/pubpaid-*/
 data/real-agents-memory.json
 data/real-agents-run-history.json
 data/real-agents-ecosystem-study.json

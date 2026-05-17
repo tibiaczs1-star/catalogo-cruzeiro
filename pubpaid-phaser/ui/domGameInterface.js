@@ -313,7 +313,7 @@ export function bindDomGameInterface(game) {
         lobbyOpponent: opponent,
         prompt: `${opponent.name} encontrado. Abrindo mesa.`
       });
-      gameId === "checkers" ? showAccessBlock() : showAccessBlock("unavailable");
+      gameId === "checkers" ? showAccessBlock("pvp-only") : showAccessBlock("unavailable");
     }, 980);
   };
 
@@ -337,6 +337,10 @@ export function bindDomGameInterface(game) {
     if (reason === "unavailable") {
       copy.title = "Mesa real indisponível";
       copy.body = "Esta mesa ainda precisa do backend real de partida, escrow e pagamento antes de abrir.";
+    }
+    if (reason === "pvp-only") {
+      copy.title = "Damas é PvP real";
+      copy.body = "A mesa só inicia com dois jogadores reais conectados, pareados e confirmados no botão Iniciar partida.";
     }
     refs.accessBlockTitle.textContent = copy.title;
     refs.accessBlockBody.textContent = copy.body;
@@ -411,7 +415,7 @@ export function bindDomGameInterface(game) {
       name: refs.matchRivalName,
       state: refs.matchRivalState
     }, rival, {
-      name: "Waiting for player",
+      name: "Aguardando jogador",
       state: rival ? (rivalReady ? "pronto" : "precisa confirmar") : "outro dispositivo"
     });
     refs.matchRival?.classList.toggle("is-pending", !rival);
@@ -426,7 +430,7 @@ export function bindDomGameInterface(game) {
       }
       return;
     }
-    refs.matchmakingStatus.textContent = "Waiting for player";
+    refs.matchmakingStatus.textContent = "Aguardando jogador real";
     if (refs.pvpReady) {
       refs.pvpReady.hidden = true;
       refs.pvpReady.disabled = false;
@@ -516,14 +520,18 @@ export function bindDomGameInterface(game) {
       )).join("");
       const ownPieces = board.flat().filter((piece) => getPvpOwner(piece) === seat).length;
       const rivalPieces = board.flat().filter((piece) => getPvpOwner(piece) && getPvpOwner(piece) !== seat).length;
+      const coin = match.coinFlip || {};
+      const firstSeat = coin.firstSeat || "";
+      const firstName = firstSeat ? displayNameFor(match[firstSeat]) : "";
+      const coinLine = coin.face && firstName ? ` Moeda ${coin.face}: ${firstName} começa.` : "";
       refs.checkersTitle.textContent = match.status === "finished" ? "Mesa encerrada" : match.turn === seat ? "Sua vez" : "Vez do rival";
       refs.checkersScore.textContent = `${ownPieces} x ${rivalPieces}`;
       refs.checkersStatus.textContent =
         match.status === "finished"
           ? match.resultSummary || "Partida encerrada."
           : match.turn === seat
-            ? "Sua vez. Escolha uma peça."
-            : "Aguardando jogada do rival.";
+            ? `Sua vez. Escolha uma peça.${coinLine}`
+            : `Aguardando jogada do rival.${coinLine}`;
       updateGameState({
         activeGameId: "checkers",
         lobbyPhase: match.status === "finished" ? "finished" : "playing",
@@ -532,6 +540,8 @@ export function bindDomGameInterface(game) {
           turn: match.turn,
           playerPieces: ownPieces,
           aiPieces: rivalPieces,
+          rivalPieces,
+          coinFlip: match.coinFlip || null,
           selected: local.pvpSelected,
           legalMoves: local.pvpLegalMoves.map((move) => ({ to: move.to, capture: Boolean(move.capture) })),
           moveCount: match.moveCount || 0,
@@ -710,14 +720,13 @@ export function bindDomGameInterface(game) {
     renderCheckers();
   };
 
-  const startCheckers = (opponent = pickOpponent("checkers")) => {
+  const startCheckers = () => {
     local.selectedGame = "checkers";
-    local.checkers = initialCheckersState();
-    setPanel("checkers");
-    game.scene.stop("game-lobby-scene");
-    game.scene.stop("pool-game-scene");
-    game.scene.start("checkers-game-scene", { stake: gameState.lobbyStake || 10, opponent });
-    renderCheckers();
+    if (isRealCheckersEligible()) {
+      startRealCheckers();
+      return;
+    }
+    showAccessBlock("pvp-only");
   };
 
   document.addEventListener("click", async (event) => {
@@ -729,7 +738,7 @@ export function bindDomGameInterface(game) {
         startRealCheckers();
       } else if (nextGame === "checkers") {
         if (!isLoggedIn()) {
-          showAccessBlock();
+          showAccessBlock("pvp-only");
           return;
         }
         startButton.disabled = true;
@@ -740,7 +749,7 @@ export function bindDomGameInterface(game) {
         if (isRealCheckersEligible()) {
           startRealCheckers();
         } else {
-          showAccessBlock();
+          showAccessBlock("pvp-only");
         }
       } else {
         showAccessBlock("unavailable");
@@ -792,11 +801,11 @@ export function bindDomGameInterface(game) {
     }
     const resetButton = event.target.closest("[data-dom-game-reset]");
     if (resetButton) {
-      resetButton.dataset.domGameReset === "checkers" ? showAccessBlock() : showAccessBlock("unavailable");
+      resetButton.dataset.domGameReset === "checkers" ? showAccessBlock("pvp-only") : showAccessBlock("unavailable");
       return;
     }
     if (event.target.closest("[data-dom-result-again]")) {
-      local.selectedGame === "checkers" && isRealCheckersEligible() ? startRealCheckers() : showAccessBlock();
+      local.selectedGame === "checkers" && isRealCheckersEligible() ? startRealCheckers() : showAccessBlock("pvp-only");
       return;
     }
     const cell = event.target.closest("[data-dom-checkers-board] [data-row]");
@@ -830,7 +839,7 @@ export function bindDomGameInterface(game) {
         renderPvpCheckers();
         return;
       }
-      handleCheckersCell(row, col);
+      showAccessBlock("pvp-only");
     }
   });
 

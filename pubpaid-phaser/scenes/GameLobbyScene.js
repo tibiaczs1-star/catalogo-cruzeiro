@@ -12,8 +12,7 @@ const GAME_META = {
     strap: "Mira, força e mesa viva",
     panelA: 0x10241c,
     panelB: 0x0a111b,
-    chip: 0x1c8f5e,
-    ai: ["Nando Giz Azul", "Lia Caçapa", "Caio Tabela"]
+    chip: 0x1c8f5e
   },
   checkers: {
     title: "Dama",
@@ -24,8 +23,7 @@ const GAME_META = {
     strap: "Leitura, tática e controle",
     panelA: 0x2a0f13,
     panelB: 0x1d1720,
-    chip: 0xd4a33e,
-    ai: ["Dona Coroa", "Caio Diagonal", "Lia Rainha"]
+    chip: 0xd4a33e
   }
 };
 
@@ -264,16 +262,13 @@ export class GameLobbyScene extends Phaser.Scene {
     }
     if (this.gameId === "checkers") {
       updateGameState({
-        currentScene: "checkers-game",
+        currentScene: "game-lobby",
         activeGameId: "checkers",
-        lobbyPhase: "playing",
-        objective: "Jogar Dama",
-        prompt: `Partida de Dama aberta contra ${this.opponent.name}.`
+        lobbyPhase: "matching",
+        objective: "Aguardar jogador real",
+        prompt: "Damas local/IA foi desligada. A mesa só abre com dois jogadores reais e confirmação dupla."
       });
-      this.scene.start("checkers-game-scene", {
-        stake: this.stake,
-        opponent: this.opponent
-      });
+      this.game.events.emit("pubpaid:start-real-checkers");
       return;
     }
     updateGameState({
@@ -333,7 +328,7 @@ export class GameLobbyScene extends Phaser.Scene {
   drawCheckersMatch() {
     this.drawCheckersBoard(850, 392, 44);
     this.tableLayer.add(this.add.text(118, 310, "Tela própria da Dama", this.textStyle(20, "#50efff")));
-    this.tableLayer.add(this.add.text(118, 350, "Aqui entram tabuleiro grande, seleção de peça e IA de teste.", this.textStyle(14, "#d5dff2")));
+    this.tableLayer.add(this.add.text(118, 350, "Damas abre somente em PvP real com dois dispositivos.", this.textStyle(14, "#d5dff2")));
   }
 
   switchGame() {

@@ -1,16 +1,7 @@
 import { GAME_HEIGHT, GAME_WIDTH, STREET_BOUNDS } from "../config/gameConfig.js";
 import { PUBPAID_TEXTURE_KEYS, PUBPAID_WORLD_SCALE, fitImageToHeight } from "../core/assetRegistry.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
-import { openPanel } from "../ui/panelActions.js";
 import { gameState, updateGameState } from "../core/gameState.js";
-
-const TERMINAL_PANEL = {
-  kicker: "terminal",
-  title: "Missões locais",
-  body: "Terminal pronto para receber missões, contratos rápidos e chamadas de carteira. Por enquanto ele marca o ponto principal no mapa da rua.",
-  chips: ["missoes", "atalho rapido", "carteira em seguida"],
-  actions: [{ id: "close-panel", label: "Fechar", primary: true }]
-};
 
 const STREET_RAIN_DROPS = [
   { x: 72, y: 318, length: 30, speed: 7.2, alpha: 0.1 },
@@ -55,7 +46,6 @@ const STREET_MAP = {
   ],
   blockedAreas: [
     { id: "building-front", kind: "building", x: 0, y: 0, width: 1280, height: 386 },
-    { id: "terminal-kiosk", kind: "prop", x: 46, y: 386, width: 132, height: 118 },
     { id: "bus-shelter", kind: "prop", x: 936, y: 360, width: 226, height: 142 },
     { id: "door-threshold", kind: "door", x: 254, y: 398, width: 92, height: 116 }
   ],
@@ -83,7 +73,6 @@ export class StreetScene extends Phaser.Scene {
     this.cursors = null;
     this.interactionCooldown = 0;
     this.doorHotspot = null;
-    this.terminalHotspot = null;
     this.activeHotspot = null;
     this.hotspots = [];
     this.neonWash = null;
@@ -128,16 +117,7 @@ export class StreetScene extends Phaser.Scene {
       color: 0xffd06d,
       label: "ENTRADA"
     });
-    this.terminalHotspot = this.buildHotspot({
-      id: "terminal",
-      x: 108,
-      y: 446,
-      width: 106,
-      height: 132,
-      color: 0x50efff,
-      label: "TERMINAL"
-    });
-    this.hotspots = [this.doorHotspot, this.terminalHotspot];
+    this.hotspots = [this.doorHotspot];
     this.validateStreetMap();
 
     this.player = this.buildPlayer(176, 560);
@@ -485,22 +465,10 @@ export class StreetScene extends Phaser.Scene {
         focus: "entrada",
         objective: "Entrar no salão",
         nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-        prompt: "Entrada marcada. Chegue perto e aperte Enter para atravessar."
+        prompt: "Entrada marcada. Chegue na área da porta para atravessar."
       });
       return;
     }
-
-    if (id === "terminal") {
-      openPanel(TERMINAL_PANEL);
-      updateGameState({
-        focus: "terminal de missoes",
-        objective: "Preparar missões locais",
-        nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-        prompt: "Terminal local aberto. A camada de missões entra aqui."
-      });
-      return;
-    }
-
   }
 
   buildPlayer(x, y) {
@@ -710,13 +678,17 @@ export class StreetScene extends Phaser.Scene {
       this.doorReadyGlow.setAlpha(nearDoor ? 0.18 + Math.sin(this.time.now / 140) * 0.04 : 0.03);
       this.doorReadyGlow.setScale(1 + (nearDoor ? 0.04 : 0));
     }
+    if (nearDoor) {
+      this.enterInterior();
+      return;
+    }
     updateGameState({
       currentScene: "street",
       focus: nearDoor ? "porta principal" : "rua viva",
-      objective: nearDoor ? "Apertar Enter para entrar" : "Entrar no PubPaid pela porta principal",
+      objective: nearDoor ? "Entrando no salão" : "Entrar no PubPaid pela porta principal",
       nerdAgent: formatNerdAgent(nearDoor ? NERD_TEAM.engine : NERD_TEAM.physics),
       prompt: nearDoor
-        ? "Porta encontrada. Aperte Enter para entrar no salão em Phaser."
+        ? "Porta encontrada. Entrando no salão."
         : nearestHotspot?.distance < 120
           ? "Ponto ativo perto. Aperte E ou clique para interagir."
           : "Rua viva carregada no núcleo definitivo. Explore ou siga para a porta."

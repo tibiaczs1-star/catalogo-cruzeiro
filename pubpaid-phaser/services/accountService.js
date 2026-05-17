@@ -3,9 +3,11 @@ import { updateGameState } from "../core/gameState.js";
 async function requestPubpaidJson(path, options = {}) {
   const response = await fetch(path, {
     credentials: "same-origin",
+    cache: "no-store",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "Cache-Control": "no-store",
       ...(options.headers || {})
     },
     ...options
@@ -36,7 +38,8 @@ export function normalizePubpaidWalletAmount(value, fallback = 0) {
 
 export async function syncPubpaidAccount() {
   try {
-    const payload = await requestPubpaidJson("./api/pubpaid/account", { method: "GET" });
+    const buildVersion = window.pubpaidBuildVersion || window.PUBPAID_BUILD_VERSION || String(Date.now());
+    const payload = await requestPubpaidJson(`./api/pubpaid/account?v=${encodeURIComponent(buildVersion)}&t=${Date.now()}`, { method: "GET" });
     const realBalance = Number(payload?.wallet?.balanceCoins || 0);
     const availableBalance = Number(payload?.wallet?.availableCoins ?? realBalance);
     const lockedMatchBalance = Number(payload?.wallet?.lockedMatchCoins || 0);

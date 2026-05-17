@@ -18,7 +18,7 @@ export class CheckersGameScene extends Phaser.Scene {
   constructor() {
     super("checkers-game-scene");
     this.stake = 10;
-    this.opponent = { name: "Dona Coroa", rating: 760, style: "jogo posicional" };
+    this.opponent = { name: "Jogador real", rating: 0, style: "PvP" };
     this.board = [];
     this.turn = "player";
     this.phase = "select";
@@ -48,11 +48,26 @@ export class CheckersGameScene extends Phaser.Scene {
 
   create() {
     this.game.events.emit("pubpaid:music-zone", "game");
+    this.blockLocalCheckers();
+    return;
     this.drawBackdrop();
     this.drawHud();
     this.boardLayer = this.add.container(0, 0).setDepth(3);
     this.renderBoard();
     this.syncState(this.message);
+  }
+
+  blockLocalCheckers() {
+    updateGameState({
+      currentScene: "game-lobby",
+      activeGameId: "checkers",
+      lobbyPhase: "matching",
+      objective: "Aguardar jogador real",
+      focus: "Damas PvP real",
+      prompt: "Damas local/IA foi desligada. Entre na fila e espere outro jogador real confirmar."
+    });
+    this.game.events.emit("pubpaid:start-real-checkers");
+    this.scene.stop();
   }
 
   drawBackdrop() {
@@ -212,7 +227,7 @@ export class CheckersGameScene extends Phaser.Scene {
     }
     if (this.moveCount >= 40) {
       if (playerPieces > aiPieces) this.finishMatch("win", "Você venceu por vantagem material.");
-      else if (aiPieces > playerPieces) this.finishMatch("loss", "A IA venceu por vantagem material.");
+      else if (aiPieces > playerPieces) this.finishMatch("loss", "O rival venceu por vantagem material.");
       else this.finishMatch("draw", "A mesa travou empatada.");
       return true;
     }

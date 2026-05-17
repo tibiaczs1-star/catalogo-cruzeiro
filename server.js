@@ -147,6 +147,9 @@ const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_IN
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   : 5 * 60 * 1000;
 const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
+const NEWS_REFRESH_AUTO_DISABLED = String(process.env.NEWS_REFRESH_AUTO_DISABLED || "true").toLowerCase() !== "false";
+const ARTICLE_INTEGRITY_AUTO_RUN_DISABLED = String(process.env.ARTICLE_INTEGRITY_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
+const TOPIC_FEED_AUTO_REFRESH_DISABLED = String(process.env.TOPIC_FEED_AUTO_REFRESH_DISABLED || "true").toLowerCase() !== "false";
 const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_INTERVAL_MS || 30 * 60 * 1000);
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
@@ -12969,6 +12972,7 @@ function runArticleIntegrityAudit(trigger = "manual") {
 }
 
 function startArticleIntegrityAutoRunner() {
+  if (ARTICLE_INTEGRITY_AUTO_RUN_DISABLED) return;
   if (articleIntegrityAutoState.timer) return;
 
   articleIntegrityAutoState.timer = setInterval(() => {
@@ -12981,6 +12985,7 @@ function startArticleIntegrityAutoRunner() {
 }
 
 function startTopicFeedAutoRunner() {
+  if (TOPIC_FEED_AUTO_REFRESH_DISABLED) return;
   if (topicFeedAutoState.timer) return;
 
   topicFeedAutoState.timer = setInterval(() => {
@@ -16452,14 +16457,16 @@ async function handleApi(req, res, pathname, searchParams) {
       [seat]: true,
     };
     const bothReady = ready.playerOne && ready.playerTwo;
+    const coinFlip = bothReady ? match.coinFlip || createPubpaidPvpCoinFlip(match) : match.coinFlip || null;
     store.matches[matchIndex] = {
       ...match,
       ready,
+      coinFlip,
       status: bothReady ? "active" : "readying",
       startedAt: bothReady ? new Date().toISOString() : match.startedAt,
-      turn: bothReady ? (match.turn || "playerOne") : match.turn,
+      turn: bothReady ? coinFlip.firstSeat : match.turn,
       resultSummary: bothReady
-        ? `${match?.playerOne?.name || "Jogador 1"} e ${match?.playerTwo?.name || "Jogador 2"} confirmaram. Damas liberada.`
+        ? `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} começa. Damas liberada.`
         : `${seat === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} confirmou. Aguardando o outro jogador.`,
       updatedAt: new Date().toISOString(),
     };
@@ -17639,7 +17646,7 @@ function handleStatic(req, res, pathname, requestUrl) {
 
 ensureDataDir();
 loadImagePreviewCache();
-if (RSS_SOURCES.length) {
+if (RSS_SOURCES.length && !NEWS_REFRESH_AUTO_DISABLED) {
   refreshRssRuntime().catch(() => {});
   setInterval(() => {
     refreshRssRuntime().catch(() => {});
@@ -18190,9 +18197,10 @@ function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
       status: "readying",
       board: createCheckersPvPBoard(),
       ready: { playerOne: false, playerTwo: false },
+      coinFlip: null,
       matchedAt: new Date().toISOString(),
       startedAt: "",
-      turn: "playerOne",
+      turn: "",
       resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar.",
     };
   }
@@ -18234,6 +18242,18 @@ function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
   }
 
   return match;
+}
+
+function createPubpaidPvpCoinFlip(match = {}) {
+  const playerOneStarts = Math.random() < 0.5;
+  const firstSeat = playerOneStarts ? "playerOne" : "playerTwo";
+  const firstPlayer = match[firstSeat] || {};
+  return {
+    face: playerOneStarts ? "cara" : "coroa",
+    firstSeat,
+    firstPlayerName: firstPlayer.name || firstPlayer.email || (firstSeat === "playerOne" ? "Jogador 1" : "Jogador 2"),
+    decidedAt: new Date().toISOString()
+  };
 }
 
 function resolveCards21PvpMatch(match) {

@@ -25,6 +25,8 @@ export class CharacterSelectScene extends Phaser.Scene {
     super("character-select-scene");
     this.selectedIndex = 0;
     this.optionCards = [];
+    this.mobileSelectCooldown = 0;
+    this.confirmLocked = false;
   }
 
   create() {
@@ -47,7 +49,7 @@ export class CharacterSelectScene extends Phaser.Scene {
 
     this.input.keyboard.on("keydown-LEFT", () => this.setSelected(0));
     this.input.keyboard.on("keydown-RIGHT", () => this.setSelected(1));
-    this.input.keyboard.on("keydown-A", () => this.setSelected(0));
+    this.input.keyboard.on("keydown-A", () => this.chooseSelected());
     this.input.keyboard.on("keydown-D", () => this.setSelected(1));
     this.input.keyboard.on("keydown-ENTER", () => this.chooseSelected());
     this.setSelected(0);
@@ -59,6 +61,18 @@ export class CharacterSelectScene extends Phaser.Scene {
       nerdAgent: formatNerdAgent(NERD_TEAM.sprite),
       prompt: "Escolha seu avatar e confirme."
     });
+  }
+
+  update(time) {
+    const mobile = window.pubpaidMobileInput;
+    const vector = mobile?.getVector?.() || { x: 0, y: 0 };
+    if (Math.abs(vector.x || 0) > 0.55 && time > this.mobileSelectCooldown) {
+      this.setSelected(vector.x < 0 ? 0 : 1);
+      this.mobileSelectCooldown = time + 220;
+    }
+    if (mobile?.consumeAction?.()) {
+      this.chooseSelected();
+    }
   }
 
   buildOption(option, index) {
@@ -121,6 +135,8 @@ export class CharacterSelectScene extends Phaser.Scene {
   }
 
   chooseSelected() {
+    if (this.confirmLocked) return;
+    this.confirmLocked = true;
     const option = CHARACTER_OPTIONS[this.selectedIndex] || CHARACTER_OPTIONS[0];
     updateGameState({
       selectedCharacter: {
@@ -154,7 +170,17 @@ export class CharacterSelectScene extends Phaser.Scene {
     container.add([bg, text]);
     container.setSize(width, height);
     container.setInteractive(new Phaser.Geom.Rectangle(-width / 2, -height / 2, width, height), Phaser.Geom.Rectangle.Contains);
-    container.on("pointerdown", onClick);
+    if (container.input) container.input.cursor = "pointer";
+    container.on("pointerdown", () => {
+      bg.setScale(0.98, 0.96);
+    });
+    container.on("pointerup", () => {
+      bg.setScale(1, 1);
+      onClick();
+    });
+    container.on("pointerout", () => {
+      bg.setScale(1, 1);
+    });
     return container;
   }
 
