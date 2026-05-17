@@ -67,14 +67,16 @@ Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `
   - mobile landscape 844x390: toque abriu intro sem depender de audio, Damas Demo respondeu a tap, 64 casas, sem overflow;
   - mobile portrait 390x844: gate horizontal visivel, intro nao iniciou;
   - Google mockado: `Tocar para intro` apareceu, audio nao abriu intro, toque no card abriu intro.
+- Online Render:
+  - `/api/pubpaid/build` retornou `20260517-mobilefix1`;
+  - smoke mobile landscape com Google mockado abriu intro pelo botao, manteve audio separado e rodou Damas Demo por tap sem overflow.
 - Usuario confirmou a direcao: primeiro tudo precisa funcionar; arte final fica como reposicao/substituicao posterior.
 
 ## Next
 
-1. Deploy/sync online.
-2. Confirmar `/api/pubpaid/build` online retornando `20260517-mobilefix1`.
-3. Validar com duas contas Google reais nas janelas do usuario.
-4. Continuar polimento visual por jogo sem quebrar o financeiro.
+1. Validar com duas contas Google reais nas janelas do usuario.
+2. Confirmar em aparelho real que portrait mostra gate e landscape entra.
+3. Continuar polimento visual por jogo sem quebrar o financeiro.
 
 ## Caution
 

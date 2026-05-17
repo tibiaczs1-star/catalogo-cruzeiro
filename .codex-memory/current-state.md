@@ -49,6 +49,7 @@ Updated: 2026-05-17T18:35:00-05:00
   - mobile landscape 844x390: `Tocar para intro` abriu intro sem precisar do botao de som, Damas Demo respondeu a tap, 64 casas, sem overflow;
   - mobile portrait 390x844: gate horizontal visivel, `introStarted=no`, `orientationBlocked=yes`;
   - Google mockado: conta confirmada mostrou `Tocar para intro`; audio nao abriu intro; toque no card abriu intro.
+- Online Render: `/api/pubpaid/build` respondeu `20260517-mobilefix1`; smoke online mobile landscape com Google mockado abriu intro pelo botao, audio nao abriu intro, Damas Demo respondeu a tap, 64 casas, sem mao e sem overflow.
 - `git diff --check`
 - Teste backend isolado com duas contas/cookies: Damas `waiting -> readying -> active`, lance legal validado e `checkersHistory[0]` persistido.
 - Teste Chrome via CDP com dois perfis separados:
