@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260518-withdrawpix1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260518-withdrawpix1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260518-entryclean1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260518-entryclean1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260518-withdrawpix1";
-import { BootScene } from "./scenes/BootScene.js?v=20260518-withdrawpix1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260518-withdrawpix1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260518-withdrawpix1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260518-withdrawpix1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260518-withdrawpix1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260518-withdrawpix1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260518-withdrawpix1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260518-withdrawpix1";
-import { UIScene } from "./scenes/UIScene.js?v=20260518-withdrawpix1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260518-entryclean1";
+import { BootScene } from "./scenes/BootScene.js?v=20260518-entryclean1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260518-entryclean1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260518-entryclean1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260518-entryclean1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260518-entryclean1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260518-entryclean1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260518-entryclean1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260518-entryclean1";
+import { UIScene } from "./scenes/UIScene.js?v=20260518-entryclean1";
 
-const PUBPAID_BUILD_VERSION = "20260518-withdrawpix1";
+const PUBPAID_BUILD_VERSION = "20260518-entryclean1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -696,7 +696,7 @@ async function syncAuthUi({ autoEnter = false } = {}) {
   if (refs.openGame) {
     refs.openGame.hidden = authRequired && !signedIn;
     refs.openGame.disabled = authRequired && !signedIn;
-    refs.openGame.textContent = signedIn ? "Tocar para intro" : !authRequired ? "Jogar agora" : "Entrar para jogar";
+    refs.openGame.textContent = signedIn ? "Enter Game" : !authRequired ? "Enter Game" : "Entrar para jogar";
   }
   if (refs.authTitle) {
     refs.authTitle.textContent = signedIn || !authRequired ? "Entrada confirmada" : "Entre para jogar";
@@ -707,7 +707,7 @@ async function syncAuthUi({ autoEnter = false } = {}) {
       walletFeedback: user?.email ? `Carteira pronta para ${user.email}.` : "Carteira pronta para jogar."
     });
     if (refs.authStatus) {
-      refs.authStatus.textContent = `Conta confirmada, ${user?.name || user?.email || "jogador"}. Toque para abrir a intro.`;
+      refs.authStatus.textContent = `Conta confirmada, ${user?.name || user?.email || "jogador"}.`;
     }
     if (refs.authEmail) {
       refs.authEmail.textContent = user?.email || "Conta confirmada.";

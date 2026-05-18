@@ -1,8 +1,10 @@
 # Handoff
 
-Updated: 2026-05-18T12:27:12.8478437-05:00
+Updated: 2026-05-18T13:24:58.7213427-05:00
 
-PubPaid 2.0 esta na rodada local `20260518-withdrawpix1`. O trabalho atual adicionou chave Pix obrigatoria ao pedido de saque: valor + Pix sao enviados juntos, o backend rejeita pedido sem Pix e a chave aparece no historico da carteira e no admin.
+PubPaid 2.0 esta na rodada local `20260518-entryclean1`. O trabalho atual limpou a entrada visual e corrigiu a caçapa da Sinuca Demo.
+
+Rodada anterior: `20260518-withdrawpix1` adicionou chave Pix obrigatoria ao pedido de saque: valor + Pix sao enviados juntos, o backend rejeita pedido sem Pix e a chave aparece no historico da carteira e no admin.
 
 Rodada anterior: `20260518-poolspace3` focou Sinuca como uma unica mesa com dois modos isolados, controle funcional por `Espaco` no desktop, toque lateral no mobile e mesa centralizada.
 
@@ -12,6 +14,16 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## What Changed
 
+- `pubpaid.html` e `pubpaid-phaser.css`
+  - Prompt/objetivo visual removido da interface em desktop e mobile.
+- `pubpaid-phaser/app.js`
+  - Botao de entrada passa a mostrar `Enter Game`; removida copia `Tocar para intro`.
+- `pubpaid-phaser/scenes/IntroScene.js`
+  - Removido overlay textual final `ENTER GAME` e hints da intro.
+- `pubpaid-phaser/scenes/StreetScene.js`
+  - Hotspot da entrada movido para a porta principal sob o letreiro PubPaid; label textual removido da arte.
+- `pubpaid-phaser/scenes/PoolGameScene.js`
+  - Caçapas detectam antes da colisao com parede e com raio maior para evitar rebote na boca.
 - `pubpaid.html`
   - Formulario de retirada ganhou campo `Chave Pix para receber`.
 - `pubpaid-phaser/ui/walletInterface.js`
@@ -60,6 +72,13 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
   - Mobile/orientacao ajustados para nao travar por lock API.
 
 ## Validation Done
+
+- `20260518-entryclean1` local:
+  - syntax checks em app, BootScene, IntroScene, StreetScene, PoolGameScene, domGameInterface, walletInterface e server;
+  - `npm run guard:pubpaid`;
+  - HTTP local sem `Tocar para intro` e sem `objetivo`, prompt hidden e build correto;
+  - screenshot local da entrada e intro sem overlay `ENTER GAME`;
+  - regressao matematica confirmou as 6 caçapas aceitando bola na boca em vez de rebater.
 
 - `20260518-withdrawpix1` local:
   - `node --check server.js`;
@@ -127,7 +146,7 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## Next
 
-1. Quando o usuario autorizar, reiniciar/deployar `20260518-withdrawpix1`.
+1. Quando o usuario autorizar, reiniciar/deployar `20260518-entryclean1`.
 1. Quando o usuario autorizar, subir `20260518-poolspace3`.
 2. Validar online com duas contas Google reais a Sinuca `PvP real`.
 3. Confirmar em aparelho real que Damas Demo landscape mostra a captura encadeada sem falsa trava.

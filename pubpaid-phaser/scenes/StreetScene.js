@@ -39,6 +39,15 @@ const STREET_RAIN_RESET_POINTS = [
   { x: 1192, y: 316 }
 ];
 
+const MAIN_DOOR = {
+  x: 670,
+  y: 448,
+  approach: { x: 670, y: 526 },
+  width: 128,
+  height: 186,
+  interactionRadius: 86
+};
+
 const STREET_MAP = {
   walkableAreas: [
     { id: "main-sidewalk", x: 34, y: 394, width: 1212, height: 168 },
@@ -47,10 +56,10 @@ const STREET_MAP = {
   blockedAreas: [
     { id: "building-front", kind: "building", x: 0, y: 0, width: 1280, height: 386 },
     { id: "bus-shelter", kind: "prop", x: 936, y: 360, width: 226, height: 142 },
-    { id: "door-threshold", kind: "door", x: 254, y: 398, width: 92, height: 116 }
+    { id: "door-threshold", kind: "door", x: MAIN_DOOR.x - 54, y: 392, width: 108, height: 126 }
   ],
   doors: [
-    { id: "pubpaid-main-door", x: 300, y: 486, approach: { x: 300, y: 526 } }
+    { id: "pubpaid-main-door", x: MAIN_DOOR.x, y: MAIN_DOOR.y, approach: { ...MAIN_DOOR.approach } }
   ],
   pedestrianRoutes: [],
   trafficLanes: [
@@ -110,12 +119,12 @@ export class StreetScene extends Phaser.Scene {
     }).setOrigin(0.5).setLetterSpacing(4).setDepth(21).setScrollFactor(0).setAlpha(0);
     this.doorHotspot = this.buildHotspot({
       id: "door",
-      x: 300,
-      y: 486,
-      width: 118,
-      height: 178,
+      x: MAIN_DOOR.x,
+      y: MAIN_DOOR.y,
+      width: MAIN_DOOR.width,
+      height: MAIN_DOOR.height,
       color: 0xffd06d,
-      label: "ENTRADA"
+      label: ""
     });
     this.hotspots = [this.doorHotspot];
     this.validateStreetMap();
@@ -143,7 +152,7 @@ export class StreetScene extends Phaser.Scene {
       this.pendingDoorEntry = false;
       const target = this.resolveStreetPoint(worldPoint.x, worldPoint.y);
       this.targetPoint = new Phaser.Math.Vector2(target.x, target.y);
-      this.pendingDoorEntry = Phaser.Math.Distance.Between(this.targetPoint.x, this.targetPoint.y, 300, 486) < 88;
+      this.pendingDoorEntry = Phaser.Math.Distance.Between(this.targetPoint.x, this.targetPoint.y, MAIN_DOOR.x, MAIN_DOOR.y) < MAIN_DOOR.interactionRadius;
       this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
       updateGameState({
         currentScene: "street",
@@ -281,14 +290,16 @@ export class StreetScene extends Phaser.Scene {
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const outline = this.add.graphics();
     this.drawPixelFrame(outline, width, height, color, 0.42);
-    const text = this.add.text(0, -height / 2 - 18, label, {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "12px",
-      fontStyle: "bold",
-      color: "#fff6dc",
-      stroke: "#03050b",
-      strokeThickness: 3
-    }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0.9);
+    const text = label
+      ? this.add.text(0, -height / 2 - 18, label, {
+          fontFamily: "Courier New, Lucida Console, monospace",
+          fontSize: "12px",
+          fontStyle: "bold",
+          color: "#fff6dc",
+          stroke: "#03050b",
+          strokeThickness: 3
+        }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0.9)
+      : null;
     const pulse = this.add.rectangle(0, 0, width - 14, height - 14, color, 0.02)
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const doorReadyGlow = id === "door"
@@ -297,7 +308,7 @@ export class StreetScene extends Phaser.Scene {
         .setAlpha(0.03)
       : null;
 
-    container.add([softGlow, glow, pulse, outline, text]);
+    container.add([softGlow, glow, pulse, outline].concat(text ? [text] : []));
     if (doorReadyGlow) {
       this.doorReadyGlow = doorReadyGlow;
       container.addAt(doorReadyGlow, 0);
@@ -453,7 +464,7 @@ export class StreetScene extends Phaser.Scene {
     if (this.isTransitioning) return;
     const id = hotspot.ppgHotspot?.id;
     if (id === "door") {
-      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486) < 74) {
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, MAIN_DOOR.x, MAIN_DOOR.y) < MAIN_DOOR.interactionRadius) {
         this.enterInterior();
         return;
       }
@@ -577,8 +588,8 @@ export class StreetScene extends Phaser.Scene {
     if (this.isTransitioning || now < this.interactionCooldown) return;
     this.interactionCooldown = now + 250;
 
-    const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486);
-    if (distance < 74) {
+    const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, MAIN_DOOR.x, MAIN_DOOR.y);
+    if (distance < MAIN_DOOR.interactionRadius) {
       this.enterInterior();
       return;
     }
@@ -661,7 +672,7 @@ export class StreetScene extends Phaser.Scene {
     }
     this.updatePlayerMotion(motionVector.x, motionVector.y, playerMoved);
 
-    const nearDoor = Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486) < 74;
+    const nearDoor = Phaser.Math.Distance.Between(this.player.x, this.player.y, MAIN_DOOR.x, MAIN_DOOR.y) < MAIN_DOOR.interactionRadius;
     const nearestHotspot = this.hotspots
       .map((hotspot) => ({
         hotspot,

@@ -59,6 +59,11 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Ultima Rodada Validada
 
+- Build local: `20260518-entryclean1`.
+- UI de entrada limpa: removido o bloco visual de objetivo/prompt em desktop e mobile, removido o texto `Tocar para intro`, removido o overlay `ENTER GAME` da intro e movida a zona de entrada da rua para a porta real sob o letreiro PubPaid.
+- Sinuca Demo: caçapas ficaram mais tolerantes e a detecção agora acontece antes da parede rebater a bola; regressao matematica confirmou as 6 bocas encaçapando no ponto de borda que antes rebatia.
+- Validacao local: `node --check` em app, BootScene, IntroScene, StreetScene, PoolGameScene, domGameInterface, walletInterface e server; `npm run guard:pubpaid`; HTML local sem `Tocar para intro`/`objetivo`; screenshot local sem overlay `ENTER GAME`.
+
 - Build local: `20260518-withdrawpix1`.
 - Saque PubPaid agora exige chave Pix alem do valor: o formulario coleta a chave, o cliente bloqueia pedido sem Pix, o backend rejeita falta de Pix com `400`, grava `pixKey` no saque/campo `destination`/campo `payment` e devolve a chave no historico da carteira e na dashboard admin.
 - Validacao local: `node --check` em `server.js`, `pubpaid-runtime.js`, `accountService.js` e `walletInterface.js`; `npm run guard:pubpaid`; `git diff --check`; teste API isolado em servidor temporario confirmou `400` sem Pix, `201` com Pix, chave no historico e saldo travado corretamente.

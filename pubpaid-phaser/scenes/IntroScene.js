@@ -98,6 +98,7 @@ export class IntroScene extends Phaser.Scene {
     this.caption = null;
     this.progressMarks = [];
     this.finalPulse = null;
+    this.finalHitZone = null;
     this.sequenceDone = false;
   }
 
@@ -116,9 +117,9 @@ export class IntroScene extends Phaser.Scene {
     updateGameState({
       currentScene: "intro",
       focus: "intro cinematica PubPaid",
-      objective: "Assistir a abertura cinematica",
+      objective: "",
       nerdAgent: formatNerdAgent(NERD_TEAM.sprite),
-      prompt: "Abertura cinematica em pixel art: rua, neon, porta, salao cheio e entrada direta."
+      prompt: ""
     });
   }
 
@@ -143,10 +144,11 @@ export class IntroScene extends Phaser.Scene {
       color: "#fff6dc",
       stroke: "#050711",
       strokeThickness: 5
-    }).setAlpha(0.72).setLetterSpacing(3);
+    }).setAlpha(0).setVisible(false).setLetterSpacing(3);
 
     for (let index = 0; index < INTRO_FRAMES.length; index += 1) {
-      const mark = this.add.rectangle(48 + index * 28, 38, 18, 4, 0xffd06d, 0.2);
+      const mark = this.add.rectangle(48 + index * 28, 38, 18, 4, 0xffd06d, 0)
+        .setVisible(false);
       this.progressMarks.push(mark);
     }
   }
@@ -181,7 +183,7 @@ export class IntroScene extends Phaser.Scene {
     target.setDepth(1);
     if (previous) previous.setDepth(0);
 
-    this.caption.setText(`${String(index + 1).padStart(2, "0")} / ${String(INTRO_TOTAL).padStart(2, "0")} - ${frame.label.toUpperCase()}`);
+    this.caption.setText("");
     this.progressMarks.forEach((mark, markIndex) => {
       mark.setAlpha(markIndex <= index ? 0.86 : 0.2);
       mark.setFillStyle(markIndex <= index ? 0xffd06d : 0x5f5a6b, markIndex <= index ? 0.86 : 0.22);
@@ -281,30 +283,13 @@ export class IntroScene extends Phaser.Scene {
       });
     }
 
-    if (frame.final) {
-      const plaque = this.add.rectangle(GAME_WIDTH / 2, 560, 360, 78, 0x060912, 0.78)
-        .setStrokeStyle(3, 0xffd06d, 0.58);
-      const enter = this.add.text(GAME_WIDTH / 2, 548, "ENTER GAME", {
-        fontFamily: "Georgia, Times New Roman, serif",
-        fontSize: "34px",
-        fontStyle: "bold",
-        color: "#fff0cf",
-        stroke: "#120904",
-        strokeThickness: 5
-      }).setOrigin(0.5).setLetterSpacing(2);
-      const hint = this.add.text(GAME_WIDTH / 2, 586, "clique ou aperte enter", {
-        fontFamily: "Courier New, Lucida Console, monospace",
-        fontSize: "11px",
-        color: "#9fb0ca"
-      }).setOrigin(0.5).setLetterSpacing(2);
-      this.cinematicOverlay.add([plaque, enter, hint]);
-    }
+    if (frame.final) return;
   }
 
   freezeFinalFrame() {
     if (this.sequenceDone) return;
     this.sequenceDone = true;
-    this.caption.setText("PUBPAID 2.0 - ENTER GAME");
+    this.caption.setText("").setVisible(false);
     this.currentImage
       .setTexture(INTRO_FRAMES[INTRO_TOTAL - 1].key)
       .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
@@ -313,6 +298,10 @@ export class IntroScene extends Phaser.Scene {
     this.drawCinematicOverlays(INTRO_TOTAL - 1, INTRO_FRAMES[INTRO_TOTAL - 1]);
     this.finalPulse = this.add.rectangle(GAME_WIDTH / 2, 560, 420, 88, 0xffd06d, 0)
       .setBlendMode(Phaser.BlendModes.SCREEN);
+    this.finalHitZone = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT)
+      .setInteractive()
+      .setDepth(7);
+    this.finalHitZone.on("pointerdown", () => this.game.events.emit("pubpaid:intro-enter"));
     this.tweens.add({
       targets: this.finalPulse,
       alpha: { from: 0.04, to: 0.22 },
@@ -325,9 +314,9 @@ export class IntroScene extends Phaser.Scene {
     updateGameState({
       currentScene: "intro",
       focus: "frame final congelado",
-      objective: "Apertar Enter ou clicar no letreiro",
+      objective: "",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Frame final congelado. Clique no Enter Game da imagem ou aperte Enter para entrar direto."
+      prompt: ""
     });
   }
 

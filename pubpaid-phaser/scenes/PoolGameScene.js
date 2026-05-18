@@ -10,7 +10,7 @@ const TABLE = {
 };
 
 const BALL_RADIUS = 11.5;
-const POCKET_RADIUS = 22;
+const POCKET_RADIUS = 34;
 const WALL_RESTITUTION = 0.88;
 const BALL_RESTITUTION = 0.94;
 const FRICTION = 0.987;
@@ -388,8 +388,9 @@ export class PoolGameScene extends Phaser.Scene {
         ball.vx = 0;
         ball.vy = 0;
       }
-      this.resolveWall(ball);
     });
+    this.resolvePockets();
+    this.activeBalls().forEach((ball) => this.resolveWall(ball));
     this.resolveBallCollisions();
     this.resolvePockets();
     this.syncBallSprites();

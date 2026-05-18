@@ -1,10 +1,10 @@
 # Current State
 
-Updated: 2026-05-18T12:27:12.8478437-05:00
+Updated: 2026-05-18T13:24:58.7213427-05:00
 
 ## Active Goal
 
-- PubPaid 2.0 canonico: saque com chave Pix obrigatoria alem do valor.
+- PubPaid 2.0 canonico: entrada limpa e caçapas da Sinuca corrigidas.
 
 ## Summary
 
@@ -12,6 +12,10 @@ Updated: 2026-05-18T12:27:12.8478437-05:00
 - Retirada PubPaid agora exige a chave Pix para envio do dinheiro.
 - O formulario de carteira tem campo `Chave Pix para receber`, o cliente bloqueia pedido sem Pix, o backend rejeita falta de Pix com `400`, e o Pix fica persistido em `pixKey`, `destination.pixKey` e `payment.pixKey`.
 - Historico da carteira e dashboard admin exibem a chave Pix do saque.
+- Build local atual: `20260518-entryclean1`.
+- Bloco visual de objetivo/prompt removido de desktop e mobile; `Tocar para intro` removido; overlay textual `ENTER GAME` da intro removido.
+- Entrada da rua reposicionada para a porta principal abaixo do letreiro PubPaid, sem label textual por cima da arte.
+- Sinuca Demo detecta caçapa antes da colisao com parede e com raio maior, para a bola cair ao entrar na boca.
 
 - Build local atual: `20260518-poolspace3`.
 - Sinuca Demo e Sinuca PvP real agora usam o mesmo modelo de acao em 3 etapas:
@@ -58,6 +62,20 @@ Updated: 2026-05-18T12:27:12.8478437-05:00
   - `npm run guard:pubpaid`
   - `git diff --check`
   - Teste API isolado em servidor temporario: saque sem Pix retornou `400`; saque com Pix retornou `201`; historico voltou com `pixKey`; carteira passou de `25` para `18` e `lockedWithdrawalCoins=7`.
+
+- Build `20260518-entryclean1`:
+  - `node --check pubpaid-phaser/app.js`
+  - `node --check pubpaid-phaser/scenes/BootScene.js`
+  - `node --check pubpaid-phaser/scenes/IntroScene.js`
+  - `node --check pubpaid-phaser/scenes/StreetScene.js`
+  - `node --check pubpaid-phaser/scenes/PoolGameScene.js`
+  - `node --check pubpaid-phaser/ui/domGameInterface.js`
+  - `node --check pubpaid-phaser/ui/walletInterface.js`
+  - `node --check server.js`
+  - `npm run guard:pubpaid`
+  - HTTP local confirmou build novo, sem `Tocar para intro`, sem texto `objetivo`, prompt hidden e campo Pix preservado.
+  - Playwright local gerou screenshot da entrada e da intro sem overlay `ENTER GAME`.
+  - Regressao matematica das 6 caçapas confirmou que pontos na boca agora entram em vez de rebater na parede.
 
 - Build `20260518-poolspace3`:
   - `node --check pubpaid-phaser/ui/domGameInterface.js`
@@ -148,7 +166,7 @@ Updated: 2026-05-18T12:27:12.8478437-05:00
 
 ## Next
 
-- Reiniciar/deployar para servir `20260518-withdrawpix1` quando o usuario pedir.
+- Reiniciar/deployar para servir `20260518-entryclean1` quando o usuario pedir.
 - Nao subir online ate nova permissao do usuario.
 - Quando autorizado, publicar `20260518-poolspace3` e confirmar `/api/pubpaid/build` online.
 - Testar Sinuca com duas contas Google reais e Damas Demo em aparelho real mobile landscape.

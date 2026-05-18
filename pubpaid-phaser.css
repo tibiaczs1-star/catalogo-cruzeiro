@@ -46,6 +46,10 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   display: none;
 }
 
+body.pubpaid-phaser-page .ppg-prompt {
+  display: none !important;
+}
+
 .ppg-dom-game-ui.is-lobby .ppg-dom-topline,
 .ppg-dom-game-ui.is-result .ppg-dom-topline {
   display: none;
