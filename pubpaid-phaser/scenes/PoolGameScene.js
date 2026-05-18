@@ -10,7 +10,7 @@ const TABLE = {
 };
 
 const BALL_RADIUS = 11.5;
-const POCKET_RADIUS = 34;
+const POCKET_RADIUS = 46;
 const WALL_RESTITUTION = 0.88;
 const BALL_RESTITUTION = 0.94;
 const FRICTION = 0.987;
@@ -48,6 +48,15 @@ const BALL_COLORS = [
   0x2d8f72, 0x7a2238, 0x10131a, 0xf0c742, 0x1f6ad4,
   0xc93645, 0x6b49ba, 0xe17a2d, 0x2d8f72, 0x7a2238
 ];
+
+function distancePointToSegment(px, py, ax, ay, bx, by) {
+  const abx = bx - ax;
+  const aby = by - ay;
+  const lengthSquared = abx * abx + aby * aby;
+  if (lengthSquared <= 0.0001) return Math.hypot(px - bx, py - by);
+  const t = Math.max(0, Math.min(1, ((px - ax) * abx + (py - ay) * aby) / lengthSquared));
+  return Math.hypot(px - (ax + abx * t), py - (ay + aby * t));
+}
 
 function textStyle(size, color, family = "Georgia, Times New Roman, serif") {
   return {
@@ -379,20 +388,28 @@ export class PoolGameScene extends Phaser.Scene {
   simulate(delta) {
     const step = Math.min(2, Math.max(0.5, delta / 16.67));
     const dt = step / 60;
-    this.activeBalls().forEach((ball) => {
-      ball.x += ball.vx * dt;
-      ball.y += ball.vy * dt;
-      ball.vx *= Math.pow(FRICTION, step);
-      ball.vy *= Math.pow(FRICTION, step);
-      if (Math.hypot(ball.vx, ball.vy) < STOP_SPEED) {
-        ball.vx = 0;
-        ball.vy = 0;
-      }
-    });
-    this.resolvePockets();
-    this.activeBalls().forEach((ball) => this.resolveWall(ball));
-    this.resolveBallCollisions();
-    this.resolvePockets();
+    const fastest = this.activeBalls().reduce((max, ball) => Math.max(max, Math.hypot(ball.vx, ball.vy)), 0);
+    const subSteps = Math.min(8, Math.max(1, Math.ceil((fastest * dt) / (POCKET_RADIUS * 0.35))));
+    const subDt = dt / subSteps;
+    const subFriction = Math.pow(FRICTION, step / subSteps);
+    for (let subStep = 0; subStep < subSteps; subStep += 1) {
+      this.activeBalls().forEach((ball) => {
+        ball.prevX = ball.x;
+        ball.prevY = ball.y;
+        ball.x += ball.vx * subDt;
+        ball.y += ball.vy * subDt;
+        ball.vx *= subFriction;
+        ball.vy *= subFriction;
+        if (Math.hypot(ball.vx, ball.vy) < STOP_SPEED) {
+          ball.vx = 0;
+          ball.vy = 0;
+        }
+      });
+      this.resolvePockets();
+      this.activeBalls().forEach((ball) => this.resolveWall(ball));
+      this.resolveBallCollisions();
+      this.resolvePockets();
+    }
     this.syncBallSprites();
   }
 
@@ -450,9 +467,11 @@ export class PoolGameScene extends Phaser.Scene {
 
   resolvePockets() {
     this.activeBalls().forEach((ball) => {
-      const pocket = POCKETS.find((entry) => Math.hypot(ball.x - entry.x, ball.y - entry.y) < POCKET_RADIUS);
+      const pocket = POCKETS.find((entry) => this.ballReachedPocket(ball, entry));
       if (!pocket) return;
       ball.pocketed = true;
+      ball.x = pocket.x;
+      ball.y = pocket.y;
       ball.vx = 0;
       ball.vy = 0;
       ball.sprite.setVisible(false);
@@ -463,6 +482,12 @@ export class PoolGameScene extends Phaser.Scene {
         this.playerScore += 1;
       }
     });
+  }
+
+  ballReachedPocket(ball, pocket) {
+    if (Math.hypot(ball.x - pocket.x, ball.y - pocket.y) <= POCKET_RADIUS) return true;
+    if (!Number.isFinite(ball.prevX) || !Number.isFinite(ball.prevY)) return false;
+    return distancePointToSegment(pocket.x, pocket.y, ball.prevX, ball.prevY, ball.x, ball.y) <= POCKET_RADIUS;
   }
 
   syncBallSprites() {

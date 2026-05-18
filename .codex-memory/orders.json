@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-18T13:24:58.7213427-05:00",
+  "lastUpdatedAt": "2026-05-18T18:40:34.960Z",
   "orders": [
     {
       "id": "2026-05-18-pubpaid-entrada-limpa-e-cacapas-sinuca",
@@ -9,13 +9,14 @@
       "status": "completed-local",
       "source": "chat",
       "rawRequest": "esses objetivos so atrapalham, retire eles de mobile e de desktop e retire tocar para intro para começar; enter gamer para entra no jogo; essa entrada vai pra baixo do letreiro pub paid q la q e a porta do bar; retire essas informações; as bolas da sinuca n estão entrando na caçapa",
-      "summary": "Limpar textos de entrada/objetivo, reposicionar a entrada na porta principal e corrigir caçapas da Sinuca Demo.",
+      "summary": "Limpar textos de entrada/objetivo, deixar o botao principal como Entrar, remover marcador da porta e corrigir caçapas da Sinuca Demo/PvP.",
       "normalizedTasks": [
         "remover prompt visual de objetivo em desktop e mobile",
-        "trocar Tocar para intro por Enter Game",
+        "trocar Tocar para intro por Entrar",
         "remover overlay textual ENTER GAME da intro",
         "mover hotspot de entrada para porta principal sob o letreiro PubPaid",
-        "corrigir detecção de caçapa da Sinuca Demo"
+        "remover circulo/marcador visual do chao na entrada",
+        "corrigir detecção de caçapa da Sinuca Demo e PvP"
       ],
       "filesTouched": [
         "pubpaid.html",
@@ -46,10 +47,10 @@
         "ui-cleanup"
       ],
       "nextSteps": [
-        "subir build 20260518-entryclean1",
+        "subir build 20260518-enterpt1",
         "validar online em desktop e mobile"
       ],
-      "notes": "Validado localmente por node --check, guard PubPaid, HTTP/DOM, screenshots locais e regressao matematica das caçapas."
+      "notes": "Validado localmente por node --check, guard PubPaid, HTTP/DOM, screenshots locais e regressao matematica/runtime das caçapas."
     },
     {
       "id": "2026-05-18-pubpaid-saque-chave-pix-obrigatoria",
@@ -481,6 +482,21 @@
       "source": "chat",
       "rawRequest": "Completar estudo de 20 minutos do sistema de jogos incluindo camadas/layers, padroes de programacao, tipos de programador, tipos de desenhista, fluxo de desenho para jogos e direcao de jogos.",
       "summary": "Expandir estudo do Sistema Diretor de Jogos com arquitetura, papeis, pipeline e sub-subagentes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-18-rodada-complementar-de-estudo-do-diretor-de-jogos-salva-no-relatorio-e-fluxo",
+      "createdAt": "2026-05-18T18:40:34.960Z",
+      "updatedAt": "2026-05-18T18:40:34.960Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Continuar aprendizado do Sistema Diretor de Jogos depois da correcao do usuario; consolidar arquitetura web/Phaser, servidor autoritativo, padroes de codigo, papeis de equipe e checklists por tipo de mudanca.",
+      "summary": "Rodada complementar de estudo do Diretor de Jogos salva no relatorio e fluxo.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

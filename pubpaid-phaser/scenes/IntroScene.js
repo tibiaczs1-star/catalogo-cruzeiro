@@ -75,7 +75,7 @@ const INTRO_FRAMES = [
   },
   {
     key: "game-lobby-bg",
-    label: "enter game",
+    label: "entrar",
     hold: 820,
     fromScale: 1.04,
     toScale: 1,

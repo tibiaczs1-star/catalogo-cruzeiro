@@ -130,7 +130,7 @@ export class StreetScene extends Phaser.Scene {
     this.validateStreetMap();
 
     this.player = this.buildPlayer(176, 560);
-    this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
+    this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0).setAlpha(0).setVisible(false);
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
@@ -284,12 +284,17 @@ export class StreetScene extends Phaser.Scene {
 
   buildHotspot({ id, x, y, width, height, color, label }) {
     const container = this.add.container(x, y).setDepth(2);
-    const glow = this.add.rectangle(0, 0, width + 10, height + 10, color, 0.06)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
-    const softGlow = this.add.ellipse(0, 0, width + 36, height + 28, color, 0.03)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
-    const outline = this.add.graphics();
-    this.drawPixelFrame(outline, width, height, color, 0.42);
+    const isInvisibleDoor = id === "door";
+    const glow = isInvisibleDoor
+      ? null
+      : this.add.rectangle(0, 0, width + 10, height + 10, color, 0.06)
+        .setBlendMode(Phaser.BlendModes.SCREEN);
+    const softGlow = isInvisibleDoor
+      ? null
+      : this.add.ellipse(0, 0, width + 36, height + 28, color, 0.03)
+        .setBlendMode(Phaser.BlendModes.SCREEN);
+    const outline = isInvisibleDoor ? null : this.add.graphics();
+    if (outline) this.drawPixelFrame(outline, width, height, color, 0.42);
     const text = label
       ? this.add.text(0, -height / 2 - 18, label, {
           fontFamily: "Courier New, Lucida Console, monospace",
@@ -300,15 +305,13 @@ export class StreetScene extends Phaser.Scene {
           strokeThickness: 3
         }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0.9)
       : null;
-    const pulse = this.add.rectangle(0, 0, width - 14, height - 14, color, 0.02)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
-    const doorReadyGlow = id === "door"
-      ? this.add.ellipse(0, height / 2 - 4, width + 32, 28, color, 0.02)
-        .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setAlpha(0.03)
-      : null;
+    const pulse = isInvisibleDoor
+      ? null
+      : this.add.rectangle(0, 0, width - 14, height - 14, color, 0.02)
+        .setBlendMode(Phaser.BlendModes.SCREEN);
+    const doorReadyGlow = null;
 
-    container.add([softGlow, glow, pulse, outline].concat(text ? [text] : []));
+    container.add([softGlow, glow, pulse, outline].concat(text ? [text] : []).filter(Boolean));
     if (doorReadyGlow) {
       this.doorReadyGlow = doorReadyGlow;
       container.addAt(doorReadyGlow, 0);
@@ -451,7 +454,7 @@ export class StreetScene extends Phaser.Scene {
     this.hotspots.forEach((item) => {
       const data = item.ppgHotspot;
       if (!data?.glow) return;
-      data.glow.setAlpha(item === hotspot ? 0.22 : 0.08);
+      data.glow?.setAlpha(item === hotspot ? 0.22 : 0.08);
       data.softGlow?.setAlpha(item === hotspot ? 0.12 : 0.03);
       data.pulse?.setAlpha(item === hotspot ? 0.22 : 0.04);
       data.text?.setAlpha(item === hotspot ? 1 : 0.9);

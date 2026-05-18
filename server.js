@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260518-entryclean1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260518-enterpt1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -18904,7 +18904,7 @@ const PVP_POOL_TABLE = {
   width: 100,
   height: 50,
   radius: 1.55,
-  pocketRadius: 4.15,
+  pocketRadius: 6.25,
   cueStart: { x: 25, y: 25 },
 };
 const PVP_POOL_MAX_SHOTS = 24;
@@ -18926,6 +18926,21 @@ function clampPoolNumber(value, min, max, fallback = min) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return fallback;
   return Math.max(min, Math.min(max, numeric));
+}
+
+function distancePointToPoolSegment(px, py, ax, ay, bx, by) {
+  const abx = bx - ax;
+  const aby = by - ay;
+  const lengthSquared = abx * abx + aby * aby;
+  if (lengthSquared <= 0.0001) return Math.hypot(px - bx, py - by);
+  const t = Math.max(0, Math.min(1, ((px - ax) * abx + (py - ay) * aby) / lengthSquared));
+  return Math.hypot(px - (ax + abx * t), py - (ay + aby * t));
+}
+
+function poolBallReachedPocket(ball, pocket) {
+  if (Math.hypot(ball.x - pocket.x, ball.y - pocket.y) <= PVP_POOL_TABLE.pocketRadius) return true;
+  if (!Number.isFinite(ball.prevX) || !Number.isFinite(ball.prevY)) return false;
+  return distancePointToPoolSegment(pocket.x, pocket.y, ball.prevX, ball.prevY, ball.x, ball.y) <= PVP_POOL_TABLE.pocketRadius;
 }
 
 function createPoolPvPBalls() {
@@ -19017,6 +19032,8 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
   for (let frame = 0; frame < 3600; frame += 1) {
     state.balls.forEach((ball) => {
       if (ball.pocketed) return;
+      ball.prevX = ball.x;
+      ball.prevY = ball.y;
       ball.x += ball.vx * dt;
       ball.y += ball.vy * dt;
       ball.vx *= 0.9915;
@@ -19024,6 +19041,23 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
       if (Math.hypot(ball.vx, ball.vy) < 0.72) {
         ball.vx = 0;
         ball.vy = 0;
+      }
+      const pocket = PVP_POOL_POCKETS.find((entry) => poolBallReachedPocket(ball, entry));
+      if (pocket) {
+        if (ball.cue || ball.id === 0) {
+          cuePocketed = true;
+          ball.x = PVP_POOL_TABLE.cueStart.x;
+          ball.y = PVP_POOL_TABLE.cueStart.y;
+          ball.vx = 0;
+          ball.vy = 0;
+          return;
+        }
+        ball.pocketed = true;
+        ball.x = pocket.x;
+        ball.y = pocket.y;
+        ball.vx = 0;
+        ball.vy = 0;
+        return;
       }
       if (ball.x < PVP_POOL_TABLE.radius) {
         ball.x = PVP_POOL_TABLE.radius;
@@ -19073,8 +19107,8 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
 
     state.balls.forEach((ball) => {
       if (ball.pocketed) return;
-      const inPocket = PVP_POOL_POCKETS.some((pocket) => Math.hypot(ball.x - pocket.x, ball.y - pocket.y) <= PVP_POOL_TABLE.pocketRadius);
-      if (!inPocket) return;
+      const pocket = PVP_POOL_POCKETS.find((entry) => poolBallReachedPocket(ball, entry));
+      if (!pocket) return;
       if (ball.cue || ball.id === 0) {
         cuePocketed = true;
         ball.x = PVP_POOL_TABLE.cueStart.x;
@@ -19084,6 +19118,8 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
         return;
       }
       ball.pocketed = true;
+      ball.x = pocket.x;
+      ball.y = pocket.y;
       ball.vx = 0;
       ball.vy = 0;
     });
@@ -19098,6 +19134,8 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
     ball.y = Number(ball.y.toFixed(2));
     ball.vx = 0;
     ball.vy = 0;
+    delete ball.prevX;
+    delete ball.prevY;
   });
   const pocketedNow = state.balls.filter((ball) => !ball.cue && ball.pocketed && !pocketedBefore.has(ball.id));
   const scoreKey = getPoolPvPSeatScoreKey(seat);

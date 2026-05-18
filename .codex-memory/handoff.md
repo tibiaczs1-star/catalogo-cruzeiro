@@ -2,7 +2,9 @@
 
 Updated: 2026-05-18T13:24:58.7213427-05:00
 
-PubPaid 2.0 esta na rodada local `20260518-entryclean1`. O trabalho atual limpou a entrada visual e corrigiu a caçapa da Sinuca Demo.
+PubPaid 2.0 esta na rodada local `20260518-enterpt1`. O trabalho atual limpou a entrada visual e corrigiu a caçapa da Sinuca Demo.
+
+Validacao nova desta rodada: Playwright local confirmou botao `Entrar`, nenhum marcador visual na porta da rua e as 6 caçapas encaçapando tacada rapida na cena real da Sinuca.
 
 Rodada anterior: `20260518-withdrawpix1` adicionou chave Pix obrigatoria ao pedido de saque: valor + Pix sao enviados juntos, o backend rejeita pedido sem Pix e a chave aparece no historico da carteira e no admin.
 
@@ -17,13 +19,13 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 - `pubpaid.html` e `pubpaid-phaser.css`
   - Prompt/objetivo visual removido da interface em desktop e mobile.
 - `pubpaid-phaser/app.js`
-  - Botao de entrada passa a mostrar `Enter Game`; removida copia `Tocar para intro`.
+  - Botao de entrada passa a mostrar `Entrar`; removida copia `Tocar para intro`.
 - `pubpaid-phaser/scenes/IntroScene.js`
   - Removido overlay textual final `ENTER GAME` e hints da intro.
 - `pubpaid-phaser/scenes/StreetScene.js`
-  - Hotspot da entrada movido para a porta principal sob o letreiro PubPaid; label textual removido da arte.
+  - Hotspot da entrada movido para a porta principal sob o letreiro PubPaid; label textual, moldura e circulo no chao removidos da arte.
 - `pubpaid-phaser/scenes/PoolGameScene.js`
-  - Caçapas detectam antes da colisao com parede e com raio maior para evitar rebote na boca.
+  - Caçapas detectam antes da colisao com parede, com raio maior e com teste de caminho entre frames para evitar rebote ou travessia em tacada rapida.
 - `pubpaid.html`
   - Formulario de retirada ganhou campo `Chave Pix para receber`.
 - `pubpaid-phaser/ui/walletInterface.js`
@@ -73,7 +75,7 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## Validation Done
 
-- `20260518-entryclean1` local:
+- `20260518-enterpt1` local:
   - syntax checks em app, BootScene, IntroScene, StreetScene, PoolGameScene, domGameInterface, walletInterface e server;
   - `npm run guard:pubpaid`;
   - HTTP local sem `Tocar para intro` e sem `objetivo`, prompt hidden e build correto;
@@ -146,7 +148,7 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## Next
 
-1. Quando o usuario autorizar, reiniciar/deployar `20260518-entryclean1`.
+1. Quando o usuario autorizar, reiniciar/deployar `20260518-enterpt1`.
 1. Quando o usuario autorizar, subir `20260518-poolspace3`.
 2. Validar online com duas contas Google reais a Sinuca `PvP real`.
 3. Confirmar em aparelho real que Damas Demo landscape mostra a captura encadeada sem falsa trava.
