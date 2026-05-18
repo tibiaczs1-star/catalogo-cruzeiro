@@ -58,6 +58,10 @@ export async function shootPool(matchId, angle = 0, power = 0.5) {
   return requestPvp("./api/pubpaid/pvp/pool/shot", { matchId, angle, power });
 }
 
+export async function playCards21Action(matchId, action = "stand") {
+  return requestPvp("./api/pubpaid/pvp/cards21/action", { matchId, action });
+}
+
 export async function drawPoker(matchId, held = []) {
   return requestPvp("./api/pubpaid/pvp/poker/draw", { matchId, held });
 }

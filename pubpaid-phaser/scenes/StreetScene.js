@@ -131,6 +131,18 @@ export class StreetScene extends Phaser.Scene {
 
     this.player = this.buildPlayer(176, 560);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0).setAlpha(0).setVisible(false);
+    const doorDot = this.add.circle(MAIN_DOOR.approach.x, MAIN_DOOR.approach.y + 8, 5, 0xffd06d, 0.68)
+      .setStrokeStyle(1, 0x05070d, 0.72)
+      .setDepth(2.36);
+    this.tweens.add({
+      targets: doorDot,
+      alpha: { from: 0.42, to: 0.72 },
+      scale: { from: 0.92, to: 1.08 },
+      duration: 1180,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);

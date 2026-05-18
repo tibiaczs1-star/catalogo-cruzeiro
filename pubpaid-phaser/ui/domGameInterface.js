@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-entryflow1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-gamescomplete3";
 import {
   confirmPvpReady,
   drawPoker,
@@ -7,9 +7,10 @@ import {
   guessDicecups,
   moveCheckers,
   moveChess,
+  playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260518-entryflow1";
+} from "../services/pvpService.js?v=20260518-gamescomplete3";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -19,7 +20,7 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260518-entryflow1";
+} from "../core/checkersRules.js?v=20260518-gamescomplete3";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -27,12 +28,13 @@ function resultTitle(result) {
   return "Empate";
 }
 
-const PVP_GAMES = new Set(["pool", "checkers", "chess", "poker", "truco", "dicecups"]);
+const PVP_GAMES = new Set(["pool", "checkers", "chess", "cards21", "poker", "truco", "dicecups"]);
 const GAME_LABELS = {
   pool: "Sinuca",
   checkers: "Damas",
   chess: "Xadrez",
-  poker: "Poker",
+  cards21: "21",
+  poker: "Pôquer",
   truco: "Truco",
   dicecups: "Dados"
 };
@@ -136,6 +138,7 @@ export function bindDomGameInterface(game) {
     pvpLegalMoves: [],
     pvpDragFrom: null,
     demoCheckers: null,
+    demoTable: null,
     demoSelected: null,
     demoLegalMoves: [],
     demoAiTimer: null,
@@ -221,6 +224,7 @@ export function bindDomGameInterface(game) {
     local.pvpLegalMoves = [];
     local.pvpDragFrom = null;
     local.demoCheckers = null;
+    local.demoTable = null;
     local.demoSelected = null;
     local.demoLegalMoves = [];
     local.pvpHeld = [true, true, true, true, true];
@@ -248,7 +252,7 @@ export function bindDomGameInterface(game) {
       ...resetFinishedPvp,
       lobbyPhase: "selecting",
       objective: "Escolher mesa PvP",
-      prompt: "Lobby aberto. Mesas pagas exigem saldo real aprovado."
+      prompt: "Mesas abertas. Mesas pagas exigem saldo real aprovado."
     });
   };
 
@@ -304,10 +308,10 @@ export function bindDomGameInterface(game) {
           };
     if (reason === "unavailable") {
       copy.title = "Mesa real indisponível";
-      copy.body = "Esta mesa ainda precisa do backend real de partida, escrow e pagamento antes de abrir.";
+      copy.body = "Esta mesa ainda precisa do servidor real de partida, saldo travado e pagamento antes de abrir.";
     }
     if (reason === "pvp-only") {
-      copy.title = "Mesa PvP real";
+      copy.title = "Mesa real";
       copy.body = "A mesa só inicia com dois jogadores reais conectados, pareados e confirmados no botão Estou pronto.";
     }
     refs.accessBlockTitle.textContent = copy.title;
@@ -334,6 +338,7 @@ export function bindDomGameInterface(game) {
 
   const isCheckersDemoActive = () => local.selectedGame === "checkers-demo" && Boolean(local.demoCheckers);
   const isPoolDemoActive = () => local.selectedGame === "pool-demo";
+  const isTableDemoActive = () => Boolean(local.demoTable);
 
   const gameLabel = (gameId = "") => GAME_LABELS[gameId] || "Mesa";
 
@@ -543,6 +548,106 @@ export function bindDomGameInterface(game) {
     if (game.scene.isActive("pool-game-scene")) game.scene.stop("pool-game-scene");
     local.poolRenderKey = "";
     updateGameState({ poolGame: null });
+  };
+
+  const demoPokerDeck = () => ([
+    { suit: "hearts", rank: 14 }, { suit: "spades", rank: 13 }, { suit: "diamonds", rank: 10 },
+    { suit: "clubs", rank: 12 }, { suit: "hearts", rank: 7 }, { suit: "spades", rank: 9 },
+    { suit: "diamonds", rank: 5 }, { suit: "clubs", rank: 3 }, { suit: "hearts", rank: 11 },
+    { suit: "spades", rank: 2 }, { suit: "diamonds", rank: 14 }, { suit: "clubs", rank: 8 }
+  ]);
+
+  const demoTrucoDeck = () => ([
+    { suit: "ouros", rank: "3", strength: 10 }, { suit: "espadas", rank: "A", strength: 8 }, { suit: "copas", rank: "7", strength: 4 },
+    { suit: "paus", rank: "2", strength: 9 }, { suit: "ouros", rank: "Q", strength: 5 }, { suit: "espadas", rank: "5", strength: 2 }
+  ]);
+
+  const createDemoTableMatch = (gameId = "poker") => {
+    const base = {
+      id: `demo-${gameId}-${Date.now()}`,
+      gameId,
+      status: "active",
+      turn: "playerOne",
+      moveCount: 0,
+      playerOne: currentPvpPlayer() || { name: "Você", email: "treino@pubpaid.local" },
+      playerTwo: { name: "Treino", email: "mesa@pubpaid.local" },
+      presence: { playerOne: { connected: true }, playerTwo: { connected: true } },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    if (gameId === "cards21") {
+      return {
+        ...base,
+        cardsState: {
+          drawCount: 4,
+          playerOneCards: [11, 7],
+          playerTwoCards: [10, 8],
+          playerOneState: "active",
+          playerTwoState: "stood"
+        }
+      };
+    }
+    if (gameId === "poker") {
+      const deck = demoPokerDeck();
+      return {
+        ...base,
+        pokerState: {
+          deck: deck.slice(10),
+          playerOneCards: deck.slice(0, 5),
+          playerTwoCards: deck.slice(5, 10),
+          playerOneDrawUsed: false,
+          playerTwoDrawUsed: false
+        }
+      };
+    }
+    if (gameId === "truco") {
+      const deck = demoTrucoDeck();
+      return {
+        ...base,
+        trucoState: {
+          deck: [],
+          round: 1,
+          maxRounds: 3,
+          playerOneScore: 0,
+          playerTwoScore: 0,
+          playerOneCards: deck.slice(0, 3),
+          playerTwoCards: deck.slice(3, 6),
+          table: [],
+          history: []
+        }
+      };
+    }
+    if (gameId === "dicecups") {
+      return { ...base, diceState: { playerOneScore: 0, playerTwoScore: 0, dice: [0, 0], total: 0, round: 1, maxRounds: 3 } };
+    }
+    return {
+      ...base,
+      chessState: {
+        fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        whiteSeat: "playerOne",
+        history: []
+      }
+    };
+  };
+
+  const startDemoTable = (gameId = "poker") => {
+    window.clearInterval(local.pvpPollTimer);
+    resetDemoPoolState();
+    resetDemoCheckersState();
+    local.pvpPollTimer = null;
+    local.selectedGame = `${gameId}-demo`;
+    local.demoTable = createDemoTableMatch(gameId);
+    local.pvpHeld = [true, true, true, true, true];
+    local.tableRenderKey = "";
+    setPanel("table");
+    updateGameState({
+      activeGameId: gameId,
+      lobbyPhase: "playing",
+      objective: `Treinar ${gameLabel(gameId)}`,
+      focus: `treino de ${gameLabel(gameId)}`,
+      prompt: "Treino local: sem ficha, sem saldo travado e sem mexer na carteira."
+    });
+    renderPvpTable();
   };
 
   const startDemoCheckers = () => {
@@ -887,21 +992,94 @@ export function bindDomGameInterface(game) {
     }
   };
 
-  const cardLabel = (card = {}) => {
-    if (!card) return "";
-    const suit = card.suit || "";
-    const rank = card.rank || "";
-    const suitIcon = {
-      hearts: "♥",
-      diamonds: "♦",
-      clubs: "♣",
-      spades: "♠",
-      ouros: "♦",
-      espadas: "♠",
-      copas: "♥",
-      paus: "♣"
-    }[suit] || suit;
-    return `${rank}${suitIcon}`;
+  const escapeHtml = (value = "") => String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+  const cardMeta = (card = {}, fallbackIndex = 0) => {
+    const fallbackSuits = ["hearts", "spades", "diamonds", "clubs", "spades"];
+    const rankLabel = (rank) => ({
+      11: "J",
+      12: "Q",
+      13: "K",
+      14: "A"
+    }[rank] || String(rank));
+    if (typeof card === "number") {
+      return {
+        rank: card === 11 ? "A" : String(card),
+        suit: fallbackSuits[fallbackIndex % fallbackSuits.length],
+        value: card
+      };
+    }
+    const rawSuit = card?.suit || fallbackSuits[fallbackIndex % fallbackSuits.length];
+    return {
+      rank: typeof card?.rank === "number" ? rankLabel(card.rank) : card?.rank ?? "",
+      suit: rawSuit,
+      value: card?.rank ?? ""
+    };
+  };
+
+  const cardSuitIcon = (suit = "") => ({
+    hearts: "♥",
+    diamonds: "♦",
+    clubs: "♣",
+    spades: "♠",
+    ouros: "♦",
+    espadas: "♠",
+    copas: "♥",
+    paus: "♣"
+  }[suit] || suit || "♦");
+
+  const cardSuitClass = (suit = "") => /heart|diamond|ouro|copa/i.test(suit) ? " is-red" : " is-black";
+
+  const cardLabel = (card = {}, fallbackIndex = 0) => {
+    if (!card && card !== 0) return "";
+    const meta = cardMeta(card, fallbackIndex);
+    return `${meta.rank}${cardSuitIcon(meta.suit)}`;
+  };
+
+  const renderPlayingCard = (card, index = 0, options = {}) => {
+    const {
+      dataset = "",
+      disabled = false,
+      empty = false,
+      faceDown = false,
+      held = false,
+      note = "",
+      tag = "button"
+    } = options;
+    if (empty) {
+      return `<span class="ppg-playing-card is-empty"><span class="ppg-card-pip">+</span><small>${escapeHtml(note || "mesa")}</small></span>`;
+    }
+    const meta = cardMeta(card, index);
+    const suitIcon = cardSuitIcon(meta.suit);
+    const label = escapeHtml(meta.rank);
+    const attrs = tag === "button"
+      ? `type="button" ${dataset} ${disabled ? "disabled" : ""}`
+      : "";
+    const className = `ppg-playing-card${cardSuitClass(meta.suit)}${held ? " is-held" : ""}${faceDown ? " is-back" : ""}`;
+    const body = faceDown
+      ? `<span class="ppg-card-back-mark">PP</span><small>${escapeHtml(note || "rival")}</small>`
+      : `
+        <span class="ppg-card-corner is-top"><b>${label}</b><i>${suitIcon}</i></span>
+        <span class="ppg-card-pip">${suitIcon}</span>
+        <span class="ppg-card-corner is-bottom"><b>${label}</b><i>${suitIcon}</i></span>
+        <small>${escapeHtml(note)}</small>
+      `;
+    return `<${tag} class="${className}" ${attrs}>${body}</${tag}>`;
+  };
+
+  const sumCards21 = (cards = []) => {
+    let total = (Array.isArray(cards) ? cards : []).reduce((sum, card) => sum + Number(card || 0), 0);
+    let aces = (Array.isArray(cards) ? cards : []).filter((card) => Number(card || 0) === 11).length;
+    while (total > 21 && aces > 0) {
+      total -= 10;
+      aces -= 1;
+    }
+    return total;
   };
 
   const chessBoardFromFen = (fen = "") => {
@@ -1058,11 +1236,7 @@ export function bindDomGameInterface(game) {
           ? "Fim"
           : state.phase === "rolling"
             ? "..."
-          : state.lockStage === "power"
-            ? "Tacar"
-            : state.lockStage === "locked"
-              ? "Força"
-              : "Mira";
+          : "Jogar";
     }
   };
 
@@ -1158,11 +1332,9 @@ export function bindDomGameInterface(game) {
     if (refs.poolTouchShot) {
       refs.poolTouchShot.disabled = match.status !== "active" || match.turn !== seat;
       refs.poolTouchShot.textContent =
-        local.poolControlStage === "power"
-          ? "Tacar"
-          : local.poolControlStage === "locked"
-            ? "Força"
-            : "Mira";
+        match.status === "finished"
+          ? "Fim"
+          : "Jogar";
     }
     updateGameState({
       activeGameId: "pool",
@@ -1233,9 +1405,10 @@ export function bindDomGameInterface(game) {
 
   const renderPvpTable = () => {
     if (local.pvpTableRenderBusy) return;
-    const match = gameState.pvpMatch;
-    const seat = gameState.pvpSeat;
-    const gameId = gameState.pvpGameId || local.selectedGame;
+    const demoMode = isTableDemoActive();
+    const match = demoMode ? local.demoTable : gameState.pvpMatch;
+    const seat = demoMode ? "playerOne" : gameState.pvpSeat;
+    const gameId = demoMode ? local.demoTable?.gameId : gameState.pvpGameId || local.selectedGame;
     if (!match || !seat || !refs.table) return;
     if (match.status === "finished") {
       finishGenericMatchIfNeeded(match, gameId, seat);
@@ -1252,13 +1425,13 @@ export function bindDomGameInterface(game) {
     const abandonedBySelf = isAbandoned && match.abandonedBy === seat;
     const abandonSeconds = secondsUntil(match.deadlineAt);
     const myName = displayNameFor(match[seat]);
-    refs.tableKicker.textContent = "mesa PvP";
+    refs.tableKicker.textContent = demoMode ? "treino local" : "mesa PvP";
     refs.tableTitle.textContent =
       match.status === "finished"
         ? `${gameLabel(gameId)} encerrado`
         : isAbandoned
           ? abandonedBySelf ? "Reconectando mesa" : "Rival desconectou"
-          : match.turn === seat ? "Sua vez" : "Vez do rival";
+          : demoMode ? `Treino de ${gameLabel(gameId)}` : match.turn === seat ? "Sua vez" : "Vez do rival";
     refs.tableStatus.textContent =
       match.status === "finished"
         ? match.resultSummary || "Partida encerrada."
@@ -1266,8 +1439,9 @@ export function bindDomGameInterface(game) {
           ? abandonedBySelf
             ? "Voce voltou a tempo. Reabrindo a mesa..."
             : `Rival caiu. Vitoria por W.O. em ${abandonSeconds}s se ele nao voltar.`
-          : match.turn === seat ? `${myName}, jogue em ${gameLabel(gameId)}.` : "Aguardando jogada do rival.";
-    refs.genericForfeit.disabled = match.status !== "active" && match.status !== "abandoned";
+          : demoMode ? "Treino livre, sem saldo e sem fila real." : match.turn === seat ? `${myName}, jogue em ${gameLabel(gameId)}.` : "Aguardando jogada do rival.";
+    refs.genericForfeit.disabled = !demoMode && match.status !== "active" && match.status !== "abandoned";
+    refs.genericForfeit.textContent = demoMode ? "Sair do treino" : "Desistir";
 
     if (gameId === "pool") {
       const state = match.poolState || {};
@@ -1279,17 +1453,80 @@ export function bindDomGameInterface(game) {
         `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolAim}:${local.poolPower}:${local.poolControlStage}`,
         renderPoolTableMarkup(match, seat)
       );
+    } else if (gameId === "cards21") {
+      const state = match.cardsState || {};
+      const cardsKey = seat === "playerOne" ? "playerOneCards" : "playerTwoCards";
+      const rivalCardsKey = seat === "playerOne" ? "playerTwoCards" : "playerOneCards";
+      const stateKey = seat === "playerOne" ? "playerOneState" : "playerTwoState";
+      const rivalStateKey = seat === "playerOne" ? "playerTwoState" : "playerOneState";
+      const cards = Array.isArray(state[cardsKey]) ? state[cardsKey] : [];
+      const rivalCards = Array.isArray(state[rivalCardsKey]) ? state[rivalCardsKey] : [];
+      const total = sumCards21(cards);
+      const rivalClosed = state[rivalStateKey] && state[rivalStateKey] !== "active";
+      const canAct = match.status === "active" && state[stateKey] === "active";
+      refs.tableScore.textContent = `${total} / 21`;
+      renderStableTableBody(
+        `${gameId}:${match.id}:${seat}:${match.status}:${state[stateKey]}:${state[rivalStateKey]}:${JSON.stringify(cards)}:${JSON.stringify(rivalCards)}`,
+        `
+        <section class="ppg-card-table is-cards21">
+          <div class="ppg-card-table-felt">
+            <div class="ppg-card-seat is-rival">
+              <span>Rival</span>
+              <div class="ppg-card-row is-rival-hand">
+                ${rivalCards.map((card, index) => renderPlayingCard(card, index, { tag: "span", faceDown: !rivalClosed && index > 0, note: rivalClosed ? "fechou" : "oculta" })).join("")}
+              </div>
+              <small>${rivalClosed ? `total ${sumCards21(rivalCards)}` : "mão em jogo"}</small>
+            </div>
+            <div class="ppg-card-center">
+              <strong>21</strong>
+              <span>${state[stateKey] === "busted" ? "voce estourou" : state[stateKey] === "stood" ? "voce parou" : "compre ou pare"}</span>
+            </div>
+            <div class="ppg-card-seat is-self">
+              <span>Sua mão</span>
+              <div class="ppg-card-row">${cards.map((card, index) => renderPlayingCard(card, index, { tag: "span", note: "valor" })).join("")}</div>
+              <small>${total} pontos</small>
+            </div>
+          </div>
+          <div class="ppg-card-controls">
+            <button type="button" class="primary" data-cards21-action="hit" ${canAct ? "" : "disabled"}>Comprar carta</button>
+            <button type="button" data-cards21-action="stand" ${canAct ? "" : "disabled"}>Parar</button>
+          </div>
+        </section>
+      `);
     } else if (gameId === "poker") {
       const state = match.pokerState || {};
       const cardsKey = seat === "playerOne" ? "playerOneCards" : "playerTwoCards";
+      const rivalCardsKey = seat === "playerOne" ? "playerTwoCards" : "playerOneCards";
       const usedKey = seat === "playerOne" ? "playerOneDrawUsed" : "playerTwoDrawUsed";
+      const rivalUsedKey = seat === "playerOne" ? "playerTwoDrawUsed" : "playerOneDrawUsed";
       const cards = Array.isArray(state[cardsKey]) ? state[cardsKey] : [];
+      const rivalCards = Array.isArray(state[rivalCardsKey]) ? state[rivalCardsKey] : [];
       refs.tableScore.textContent = state[usedKey] ? "troca usada" : "troca aberta";
       renderStableTableBody(
         `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${JSON.stringify(cards)}:${state[usedKey] ? 1 : 0}:${local.pvpHeld.join("")}`,
         `
-        <div class="ppg-card-row">${cards.map((card, index) => `<button type="button" class="ppg-playing-card${local.pvpHeld[index] ? " is-held" : ""}" data-poker-card="${index}"><strong>${cardLabel(card)}</strong><small>${local.pvpHeld[index] ? "segura" : "troca"}</small></button>`).join("")}</div>
-        <button type="button" class="primary" data-poker-draw ${match.status !== "active" || match.turn !== seat || state[usedKey] ? "disabled" : ""}>Trocar cartas soltas</button>
+        <section class="ppg-card-table is-poker">
+          <div class="ppg-card-table-felt">
+            <div class="ppg-card-seat is-rival">
+              <span>Rival</span>
+              <div class="ppg-card-row is-rival-hand">
+                ${rivalCards.map((card, index) => renderPlayingCard(card, index, { tag: "span", faceDown: !state[rivalUsedKey], note: state[rivalUsedKey] ? "pronto" : "oculta" })).join("")}
+              </div>
+              <small>${state[rivalUsedKey] ? "rival fechou a troca" : "rival decidindo"}</small>
+            </div>
+            <div class="ppg-card-center">
+              <strong>Pôquer de troca</strong>
+              <span>${state[usedKey] ? "sua mão está fechada" : "marque as cartas que quer segurar"}</span>
+            </div>
+            <div class="ppg-card-seat is-self">
+              <span>Sua mão</span>
+              <div class="ppg-card-row">${cards.map((card, index) => renderPlayingCard(card, index, { dataset: `data-poker-card="${index}"`, held: local.pvpHeld[index], note: local.pvpHeld[index] ? "segura" : "troca" })).join("")}</div>
+            </div>
+          </div>
+          <div class="ppg-card-controls">
+            <button type="button" class="primary" data-poker-draw ${match.status !== "active" || match.turn !== seat || state[usedKey] ? "disabled" : ""}>Trocar cartas soltas</button>
+          </div>
+        </section>
       `);
     } else if (gameId === "dicecups") {
       const state = match.diceState || {};
@@ -1304,12 +1541,29 @@ export function bindDomGameInterface(game) {
       const state = match.trucoState || {};
       const cardsKey = seat === "playerOne" ? "playerOneCards" : "playerTwoCards";
       const cards = Array.isArray(state[cardsKey]) ? state[cardsKey] : [];
+      const tableCards = Array.isArray(state.table) ? state.table : [];
       refs.tableScore.textContent = `${state.playerOneScore || 0} x ${state.playerTwoScore || 0}`;
       renderStableTableBody(
         `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${state.round || 1}:${JSON.stringify(cards)}:${JSON.stringify(state.table || [])}`,
         `
-        <div class="ppg-card-row">${cards.map((card, index) => card ? `<button type="button" class="ppg-playing-card" data-truco-card="${index}" ${match.status !== "active" || match.turn !== seat ? "disabled" : ""}><strong>${cardLabel(card)}</strong><small>jogar</small></button>` : `<span class="ppg-playing-card is-empty"><strong>-</strong><small>mesa</small></span>`).join("")}</div>
-        <p class="ppg-table-note">Mao ${state.round || 1}/${state.maxRounds || 3}. ${state.table?.length ? "Carta na mesa aguardando resposta." : "Escolha uma carta quando for sua vez."}</p>
+        <section class="ppg-card-table is-truco">
+          <div class="ppg-card-table-felt">
+            <div class="ppg-truco-score">
+              <span>Mão ${state.round || 1}/${state.maxRounds || 3}</span>
+              <strong>${state.playerOneScore || 0} x ${state.playerTwoScore || 0}</strong>
+            </div>
+            <div class="ppg-card-center is-table-pot">
+              ${tableCards.length
+                ? tableCards.map((play, index) => renderPlayingCard(play.card, index, { tag: "span", note: play.seat === seat ? "sua mesa" : "rival" })).join("")
+                : `<span class="ppg-playing-card is-empty"><span class="ppg-card-pip">+</span><small>mesa vazia</small></span>`}
+            </div>
+            <div class="ppg-card-seat is-self">
+              <span>Sua mão</span>
+              <div class="ppg-card-row is-truco-hand">${cards.map((card, index) => card ? renderPlayingCard(card, index, { dataset: `data-truco-card="${index}"`, disabled: match.status !== "active" || match.turn !== seat, note: "jogar" }) : renderPlayingCard(null, index, { empty: true, note: "jogada" })).join("")}</div>
+            </div>
+          </div>
+          <p class="ppg-table-note">${tableCards.length ? "Carta na mesa aguardando resposta." : "Escolha uma carta quando for sua vez."}</p>
+        </section>
       `);
     } else if (gameId === "chess") {
       const state = match.chessState || {};
@@ -1323,8 +1577,8 @@ export function bindDomGameInterface(game) {
     updateGameState({
       activeGameId: gameId,
       lobbyPhase: match.status === "finished" ? "finished" : "playing",
-      objective: `Vencer ${gameLabel(gameId)} real`,
-      focus: `mesa PvP de ${gameLabel(gameId)}`,
+      objective: demoMode ? `Treinar ${gameLabel(gameId)}` : `Vencer ${gameLabel(gameId)} real`,
+      focus: demoMode ? `treino de ${gameLabel(gameId)}` : `mesa real de ${gameLabel(gameId)}`,
       prompt: refs.tableStatus.textContent
     });
     } finally {
@@ -1479,6 +1733,8 @@ export function bindDomGameInterface(game) {
         startDemoCheckers();
       } else if (demoGame === "pool") {
         startDemoPool();
+      } else if (PVP_GAMES.has(demoGame)) {
+        startDemoTable(demoGame);
       } else {
         showAccessBlock("unavailable");
       }
@@ -1610,6 +1866,11 @@ export function bindDomGameInterface(game) {
       return;
     }
     if (event.target.closest("[data-dom-generic-forfeit]")) {
+      if (isTableDemoActive()) {
+        local.demoTable = null;
+        showLobby();
+        return;
+      }
       const gameId = gameState.pvpGameId || local.selectedGame || "checkers";
       const button = event.target.closest("[data-dom-generic-forfeit]");
       button.disabled = true;
@@ -1638,18 +1899,80 @@ export function bindDomGameInterface(game) {
     }
     if (event.target.closest("[data-poker-draw]")) {
       const matchId = gameState.pvpMatch?.id || "";
+      if (isTableDemoActive() && local.demoTable?.gameId === "poker") {
+        const state = local.demoTable.pokerState || {};
+        const deck = Array.isArray(state.deck) ? state.deck : [];
+        state.playerOneCards = (Array.isArray(state.playerOneCards) ? state.playerOneCards : []).map((card, index) =>
+          local.pvpHeld[index] ? card : deck.shift() || card
+        );
+        state.playerOneDrawUsed = true;
+        state.playerTwoDrawUsed = true;
+        state.deck = deck;
+        local.demoTable.updatedAt = new Date().toISOString();
+        renderPvpTable();
+        return;
+      }
       if (matchId) drawPoker(matchId, local.pvpHeld).then((payload) => payload?.ok && routePvpState(payload));
+      return;
+    }
+    const cards21Button = event.target.closest("[data-cards21-action]");
+    if (cards21Button) {
+      const matchId = gameState.pvpMatch?.id || "";
+      const action = cards21Button.dataset.cards21Action || "stand";
+      if (isTableDemoActive() && local.demoTable?.gameId === "cards21") {
+        const state = local.demoTable.cardsState || {};
+        state.playerOneCards = Array.isArray(state.playerOneCards) ? state.playerOneCards : [];
+        if (action === "hit") {
+          const nextCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+          state.playerOneCards.push(nextCards[(state.drawCount || 0) % nextCards.length]);
+          state.drawCount = Number(state.drawCount || 0) + 1;
+          if (sumCards21(state.playerOneCards) > 21) state.playerOneState = "busted";
+        } else {
+          state.playerOneState = "stood";
+        }
+        local.demoTable.updatedAt = new Date().toISOString();
+        renderPvpTable();
+        return;
+      }
+      if (matchId) playCards21Action(matchId, action).then((payload) => payload?.ok && routePvpState(payload));
       return;
     }
     const diceButton = event.target.closest("[data-dice-guess]");
     if (diceButton) {
       const matchId = gameState.pvpMatch?.id || "";
+      if (isTableDemoActive() && local.demoTable?.gameId === "dicecups") {
+        const guess = Number(diceButton.dataset.diceGuess);
+        const state = local.demoTable.diceState || {};
+        const a = 1 + Math.floor(Math.random() * 6);
+        const b = 1 + Math.floor(Math.random() * 6);
+        state.dice = [a, b];
+        state.total = a + b;
+        state.playerOneScore = Number(state.playerOneScore || 0) + (guess === state.total ? 1 : 0);
+        local.demoTable.updatedAt = new Date().toISOString();
+        renderPvpTable();
+        refs.tableStatus.textContent = guess === state.total ? "Você acertou a soma dos dados." : `Deu ${state.total}. Tente outra soma.`;
+        return;
+      }
       if (matchId) guessDicecups(matchId, Number(diceButton.dataset.diceGuess)).then((payload) => payload?.ok && routePvpState(payload));
       return;
     }
     const trucoButton = event.target.closest("[data-truco-card]");
     if (trucoButton) {
       const matchId = gameState.pvpMatch?.id || "";
+      if (isTableDemoActive() && local.demoTable?.gameId === "truco") {
+        const index = Number(trucoButton.dataset.trucoCard);
+        const state = local.demoTable.trucoState || {};
+        const cards = Array.isArray(state.playerOneCards) ? state.playerOneCards : [];
+        const card = cards[index] || null;
+        if (card) {
+          cards[index] = null;
+          state.table = [{ seat: "playerOne", card, at: new Date().toISOString() }];
+          state.playerOneScore = Number(state.playerOneScore || 0) + 1;
+          local.demoTable.updatedAt = new Date().toISOString();
+          renderPvpTable();
+        }
+        return;
+      }
       if (matchId) playTrucoCard(matchId, Number(trucoButton.dataset.trucoCard)).then((payload) => payload?.ok && routePvpState(payload));
       return;
     }
@@ -1657,6 +1980,10 @@ export function bindDomGameInterface(game) {
     if (chessSquare) {
       const square = chessSquare.dataset.chessSquare || "";
       const match = gameState.pvpMatch;
+      if (isTableDemoActive() && local.demoTable?.gameId === "chess") {
+        refs.tableStatus.textContent = "Treino visual de xadrez: use a mesa real para validar lances contra outro jogador.";
+        return;
+      }
       if (!match || match.status !== "active" || match.turn !== gameState.pvpSeat) return;
       if (!local.chessSelected) {
         local.chessSelected = square;

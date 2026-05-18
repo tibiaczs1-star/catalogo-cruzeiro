@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js?v=20260518-entryflow1";
+} from "../services/accountService.js?v=20260518-gamescomplete3";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);
@@ -55,8 +55,9 @@ function buildHistory(items = [], emptyLabel = "Sem movimento recente.") {
     const amount = Number(item.creditsRequested || item.amount || 0);
     const status = item.paymentStatus || item.status || "pendente";
     const pixKey = String(item.pixKey || "").trim();
+    const pixAccountName = String(item.pixAccountName || item.destination?.pixAccountName || item.payment?.pixAccountName || "").trim();
     const date = item.createdAt ? new Date(item.createdAt).toLocaleDateString("pt-BR") : "";
-    return `<li><strong>${formatCoins(amount)}</strong><span>${escapeHtml(status)}${date ? ` · ${escapeHtml(date)}` : ""}${pixKey ? ` · Pix ${escapeHtml(pixKey)}` : ""}</span></li>`;
+    return `<li><strong>${formatCoins(amount)}</strong><span>${escapeHtml(status)}${date ? ` · ${escapeHtml(date)}` : ""}${pixKey ? ` · Pix ${escapeHtml(pixKey)}` : ""}${pixAccountName ? ` · Nome ${escapeHtml(pixAccountName)}` : ""}</span></li>`;
   }).join("");
 }
 
@@ -82,6 +83,7 @@ export function bindWalletInterface() {
     qr: document.querySelector("[data-wallet-pix-qr]"),
     withdrawalAmount: document.querySelector("[data-wallet-withdrawal-amount]"),
     withdrawalPixKey: document.querySelector("[data-wallet-withdrawal-pix-key]"),
+    withdrawalPixName: document.querySelector("[data-wallet-withdrawal-pix-name]"),
     requestWithdrawal: document.querySelector("[data-wallet-request-withdrawal]"),
     deposits: document.querySelector("[data-wallet-recent-deposits]"),
     withdrawals: document.querySelector("[data-wallet-recent-withdrawals]"),
@@ -143,6 +145,7 @@ export function bindWalletInterface() {
 
   const getReceiptName = () => String(refs.receiptName?.value || "").trim();
   const getWithdrawalPixKey = () => String(refs.withdrawalPixKey?.value || "").replace(/\s+/g, " ").trim();
+  const getWithdrawalPixName = () => String(refs.withdrawalPixName?.value || "").replace(/\s+/g, " ").trim();
 
   const syncRegisterDepositButton = () => {
     if (!refs.registerDeposit) return;
@@ -258,21 +261,34 @@ export function bindWalletInterface() {
       setFeedback("Informe um valor valido para retirada.");
       return;
     }
+    const available = Number(gameState.availableBalance || 0);
+    if (amount > available + 0.0001) {
+      setFeedback(`O saque maximo agora e ${formatCoins(available)} creditos, que e seu saldo livre.`);
+      refs.withdrawalAmount?.focus?.();
+      return;
+    }
     const pixKey = getWithdrawalPixKey();
     if (pixKey.length < 3) {
       setFeedback("Informe a chave Pix para receber a retirada.");
       refs.withdrawalPixKey?.focus?.();
       return;
     }
+    const pixAccountName = getWithdrawalPixName();
+    if (pixAccountName.length < 3) {
+      setFeedback("Informe o nome do titular da conta Pix para o admin conferir antes do pagamento.");
+      refs.withdrawalPixName?.focus?.();
+      return;
+    }
     refs.requestWithdrawal.disabled = true;
-    setFeedback("Enviando pedido de saque para o admin...");
+    setFeedback("Enviando pedido de saque para o admin conferir nome e chave Pix...");
     try {
       const payload = await requestPubpaidWithdrawal({
         amount,
         pixKey,
+        pixAccountName,
         sourcePage: "/pubpaid.html"
       });
-      setFeedback(payload.message || "Saque solicitado com Pix informado. Valor travado ate revisao manual.");
+      setFeedback(payload.message || "Pedido enviado ao admin. Aguarde ate 2 horas; o Pix cai depois da conferencia do nome da conta.");
     } catch (error) {
       setFeedback(error?.message || "Falha ao solicitar saque.");
     } finally {

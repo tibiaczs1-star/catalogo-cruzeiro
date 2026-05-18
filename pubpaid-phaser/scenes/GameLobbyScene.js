@@ -7,7 +7,7 @@ const GAME_META = {
     title: "Sinuca",
     accent: 0xffd06d,
     alt: 0x8ef0a3,
-    description: "Mesa paga em preparação para backend real.",
+    description: "Mesa paga em preparação para servidor real.",
     badge: "CONTROLE",
     strap: "Mira, força e mesa viva",
     panelA: 0x10241c,
@@ -28,7 +28,7 @@ const GAME_META = {
 };
 
 const LOBBY_META = {
-  title: "Lobby",
+  title: "Mesas",
   accent: 0xffd06d,
   alt: 0x50efff,
     description: "Escolha Sinuca ou Damas. Mesas pagas exigem saldo real aprovado."
@@ -221,12 +221,12 @@ export class GameLobbyScene extends Phaser.Scene {
       this.game.events.emit("pubpaid:block-paid-game");
       return;
     }
-    this.statusText?.setText("Esta mesa paga ainda precisa do backend real antes de abrir.");
+    this.statusText?.setText("Esta mesa paga ainda precisa do servidor real antes de abrir.");
     updateGameState({
       lobbyPhase: "blocked",
       activeGameId: "",
       objective: "Mesa real indisponível",
-      prompt: "Esta mesa ainda precisa do backend real de partida, escrow e pagamento antes de abrir."
+      prompt: "Esta mesa ainda precisa do servidor real de partida, saldo travado e pagamento antes de abrir."
     });
     this.game.events.emit("pubpaid:block-paid-game", "unavailable");
     return;

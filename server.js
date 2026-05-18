@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260518-entryflow1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260518-gamescomplete3";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -292,7 +292,7 @@ const NINJAS_MERCHANT_NAME = String(
 ).trim();
 const NINJAS_MERCHANT_CITY = String(process.env.NINJAS_MERCHANT_CITY || "CRUZEIRO DO SUL").trim();
 const PUBPAID_ALLOWED_AMOUNTS = [5, 10, 20, 50, 100];
-const PUBPAID_PENDING_WINDOW_MS = 3 * 60 * 60 * 1000;
+const PUBPAID_PENDING_WINDOW_MS = 2 * 60 * 60 * 1000;
 const PREVIEW_CLASS_BY_CATEGORY = {
   cotidiano: "thumb-cheia",
   saude: "thumb-saude",
@@ -14750,6 +14750,7 @@ function buildPubpaidAdminPayload() {
     amount: item.amount || item.amountCoins || 0,
     creditsRequested: item.creditsRequested || item.amountCoins || item.amount || 0,
     pixKey: item.pixKey || item?.payment?.pixKey || item?.destination?.pixKey || "",
+    pixAccountName: item.pixAccountName || item?.payment?.pixAccountName || item?.destination?.pixAccountName || "",
     status: item.status || "",
     paymentStatus: item?.payment?.status || "",
     txid: item?.payment?.txid || "",
@@ -17591,6 +17592,16 @@ async function handleApi(req, res, pathname, searchParams) {
         error: "Informe a chave Pix para receber a retirada."
       });
     }
+    const pixAccountName = cleanShortText(
+      body.pixAccountName || body.pixName || body.pixHolderName || body.destinationName || body.accountName || "",
+      120
+    );
+    if (pixAccountName.length < 3) {
+      return sendJson(res, 400, {
+        ok: false,
+        error: "Informe o nome da conta Pix para conferencia do admin."
+      });
+    }
     const wallet = getPubpaidWallet(authUser);
     if (!wallet) {
       return sendJson(res, 400, {
@@ -17599,10 +17610,13 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    if (normalizePubpaidMoney(wallet.balanceCoins) + 0.0001 < amount) {
+    const availableCoins = normalizePubpaidMoney(
+      wallet.availableCoins ?? (wallet.balanceCoins - wallet.lockedMatchCoins - wallet.lockedWithdrawalCoins)
+    );
+    if (availableCoins + 0.0001 < amount) {
       return sendJson(res, 400, {
         ok: false,
-        error: "Saldo insuficiente para solicitar esse saque."
+        error: `Saldo livre insuficiente. Voce pode retirar no maximo ${availableCoins.toLocaleString("pt-BR", { minimumFractionDigits: Number.isInteger(availableCoins) ? 0 : 2, maximumFractionDigits: 2 })} creditos agora.`
       });
     }
 
@@ -17617,15 +17631,18 @@ async function handleApi(req, res, pathname, searchParams) {
       amount: Number(amount.toFixed(2)),
       creditsRequested: Number(amount.toFixed(2)),
       pixKey,
+      pixAccountName,
       destination: {
         method: "pix",
-        pixKey
+        pixKey,
+        pixAccountName
       },
       status: "aguardando-confirmacao-saque",
       payment: {
         method: "pix-manual",
         txid,
         pixKey,
+        pixAccountName,
         status: "pendente-manual",
         confirmationMode: "manual"
       },
@@ -17651,7 +17668,7 @@ async function handleApi(req, res, pathname, searchParams) {
       ok: true,
       item: nextItem,
       wallet: buildPubpaidAccountPayload(authUser).wallet,
-      message: "Saque solicitado com chave Pix. O valor fica travado por ate 3 horas ou ate revisao manual no admin."
+      message: "Pedido de retirada enviado ao admin. Aguarde ate 2 horas; o valor sera depositado no Pix apos a conferencia do nome da conta Pix."
     });
   }
 

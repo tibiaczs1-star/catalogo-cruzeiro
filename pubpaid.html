@@ -6,7 +6,7 @@
     <title>PubPaid 2.0 | Jogo Oficial</title>
     <meta
       name="description"
-      content="Linha oficial da PubPaid 2.0, agora centrada no núcleo Phaser com rua, salão, HUD e base para carteira e PvP real."
+      content="Linha oficial da PubPaid 2.0, agora centrada no núcleo Phaser com rua, salão, interface e base para carteira e mesa real."
     />
     <meta name="robots" content="noindex,nofollow" />
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260518-entryflow1" />
-    <script defer src="./site-google-auth.js?v=20260518-entryflow1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260518-gamescomplete3" />
+    <script defer src="./site-google-auth.js?v=20260518-gamescomplete3"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260518-entryflow1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260518-gamescomplete3"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -222,48 +222,73 @@
 
             <aside class="ppg-dom-lobby" data-dom-lobby hidden>
               <header>
-                <span class="ppg-kicker">lobby</span>
+                <span class="ppg-kicker">mesas</span>
                 <h2>Escolha a mesa</h2>
               </header>
               <div class="ppg-dom-game-cards">
                 <article class="ppg-dom-game-card is-pool is-multi" data-dom-game-card="pool">
-                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260518-entryflow1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
                   <span>Sinuca</span>
-                  <strong>demo livre ou PvP real</strong>
+                  <strong>treino livre ou mesa real</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Sinuca">
-                    <button type="button" data-dom-start-demo="pool">Demo</button>
-                    <button type="button" data-dom-start-game="pool">PvP real</button>
+                    <button type="button" data-dom-start-demo="pool">Treino</button>
+                    <button type="button" data-dom-start-game="pool">Real</button>
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-checkers is-multi" data-dom-game-card="checkers">
-                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260518-entryflow1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
                   <span>Damas</span>
-                  <strong>demo livre ou PvP real</strong>
+                  <strong>treino livre ou mesa real</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Damas">
-                    <button type="button" data-dom-start-demo="checkers">Demo</button>
-                    <button type="button" data-dom-start-game="checkers">PvP real</button>
+                    <button type="button" data-dom-start-demo="checkers">Treino</button>
+                    <button type="button" data-dom-start-game="checkers">Real</button>
                   </div>
                 </article>
-                <button type="button" class="ppg-dom-game-card is-chess" data-dom-start-game="chess">
-                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260518-entryflow1" alt="" loading="lazy" />
+                <article class="ppg-dom-game-card is-chess is-multi" data-dom-game-card="chess">
+                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
                   <span>Xadrez</span>
-                  <strong>PvP real</strong>
-                </button>
-                <button type="button" class="ppg-dom-game-card is-poker" data-dom-start-game="poker">
-                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260518-entryflow1" alt="" loading="lazy" />
-                  <span>Poker</span>
-                  <strong>troca 5 cartas</strong>
-                </button>
-                <button type="button" class="ppg-dom-game-card is-truco" data-dom-start-game="truco">
-                  <img src="./assets/pubpaid/lobby/icons/game-truco.svg?v=20260518-entryflow1" alt="" loading="lazy" />
+                  <strong>treino livre ou mesa real</strong>
+                  <div class="ppg-dom-game-card-actions" aria-label="Modos de Xadrez">
+                    <button type="button" data-dom-start-demo="chess">Treino</button>
+                    <button type="button" data-dom-start-game="chess">Real</button>
+                  </div>
+                </article>
+                <article class="ppg-dom-game-card is-cards21 is-multi" data-dom-game-card="cards21">
+                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
+                  <span>21</span>
+                  <strong>treino livre ou mesa real</strong>
+                  <div class="ppg-dom-game-card-actions" aria-label="Modos de 21">
+                    <button type="button" data-dom-start-demo="cards21">Treino</button>
+                    <button type="button" data-dom-start-game="cards21">Real</button>
+                  </div>
+                </article>
+                <article class="ppg-dom-game-card is-poker is-multi" data-dom-game-card="poker">
+                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
+                  <span>Pôquer</span>
+                  <strong>treino livre ou mesa real</strong>
+                  <div class="ppg-dom-game-card-actions" aria-label="Modos de Pôquer">
+                    <button type="button" data-dom-start-demo="poker">Treino</button>
+                    <button type="button" data-dom-start-game="poker">Real</button>
+                  </div>
+                </article>
+                <article class="ppg-dom-game-card is-truco is-multi" data-dom-game-card="truco">
+                  <img src="./assets/pubpaid/lobby/icons/game-truco.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
                   <span>Truco</span>
-                  <strong>melhor de 3</strong>
-                </button>
-                <button type="button" class="ppg-dom-game-card is-dicecups" data-dom-start-game="dicecups">
-                  <img src="./assets/pubpaid/lobby/icons/game-dicecups.svg?v=20260518-entryflow1" alt="" loading="lazy" />
+                  <strong>treino livre ou mesa real</strong>
+                  <div class="ppg-dom-game-card-actions" aria-label="Modos de Truco">
+                    <button type="button" data-dom-start-demo="truco">Treino</button>
+                    <button type="button" data-dom-start-game="truco">Real</button>
+                  </div>
+                </article>
+                <article class="ppg-dom-game-card is-dicecups is-multi" data-dom-game-card="dicecups">
+                  <img src="./assets/pubpaid/lobby/icons/game-dicecups.svg?v=20260518-gamescomplete3" alt="" loading="lazy" />
                   <span>Dados</span>
-                  <strong>soma PvP</strong>
-                </button>
+                  <strong>treino livre ou mesa real</strong>
+                  <div class="ppg-dom-game-card-actions" aria-label="Modos de Dados">
+                    <button type="button" data-dom-start-demo="dicecups">Treino</button>
+                    <button type="button" data-dom-start-game="dicecups">Real</button>
+                  </div>
+                </article>
               </div>
               <div class="ppg-dom-lobby-foot">
                 <span>saldo livre <strong data-dom-lobby-balance>0</strong></span>
@@ -348,7 +373,8 @@
 
                 <aside class="ppg-pool-howto" aria-label="Como jogar sinuca">
                   <span>como jogar</span>
-                  <strong>Espaço é ação</strong>
+                  <strong>Use Espaço para jogar</strong>
+                  <small>Celular: toque em Jogar</small>
                   <small>1. trava a mira</small>
                   <small>2. inicia a força</small>
                   <small>3. solta o taco</small>
@@ -356,7 +382,7 @@
 
                 <div class="ppg-pool-touch-controls" aria-label="Controles de sinuca por toque">
                   <button type="button" data-dom-pool-aim-step="-5" aria-label="Girar mira para esquerda">‹</button>
-                  <button type="button" class="primary" data-dom-pool-touch-shot>Mira</button>
+                  <button type="button" class="primary" data-dom-pool-touch-shot aria-label="Jogar sinuca">Jogar</button>
                   <button type="button" data-dom-pool-aim-step="5" aria-label="Girar mira para direita">›</button>
                 </div>
 
@@ -372,7 +398,7 @@
                   <div class="ppg-dom-actions ppg-pool-actions">
                     <button type="button" class="primary" data-dom-pool-shot>Travar mira</button>
                     <button type="button" class="danger" data-dom-forfeit-pool>Desistir</button>
-                    <button type="button" data-dom-open-lobby>Lobby</button>
+                    <button type="button" data-dom-open-lobby>Mesas</button>
                   </div>
                 </aside>
               </div>
@@ -430,7 +456,7 @@
                   <div class="ppg-checkers-history" data-dom-checkers-history aria-label="Histórico de lances"></div>
                   <div class="ppg-dom-actions">
                     <button type="button" class="danger" data-dom-forfeit-checkers>Desistir</button>
-                    <button type="button" data-dom-open-lobby>Lobby</button>
+                    <button type="button" data-dom-open-lobby>Mesas</button>
                   </div>
                 </aside>
               </div>
@@ -448,7 +474,7 @@
               </div>
               <div class="ppg-dom-actions" data-dom-table-actions>
                 <button type="button" class="danger" data-dom-generic-forfeit>Desistir</button>
-                <button type="button" data-dom-open-lobby>Lobby</button>
+                <button type="button" data-dom-open-lobby>Mesas</button>
               </div>
             </aside>
 
@@ -460,7 +486,7 @@
                 <p data-dom-result-body></p>
                 <small data-dom-result-next>Voltando ao lobby em 5s.</small>
                 <div class="ppg-dom-actions">
-                  <button type="button" data-dom-open-lobby>Lobby agora</button>
+                  <button type="button" data-dom-open-lobby>Voltar às mesas</button>
                   <button type="button" data-dom-return-salon>Salão</button>
                 </div>
               </div>
@@ -472,11 +498,9 @@
                 <h2>Caixa PubPaid</h2>
                 <button type="button" data-dom-close-wallet aria-label="Fechar carteira">Fechar</button>
               </header>
-              <div class="ppg-wallet-phone" aria-hidden="true">
-                <span></span>
-                <strong>PubPaid Pay</strong>
-                <small>carteira</small>
-              </div>
+              <p class="ppg-wallet-note">
+                Saques passam pelo admin e caem no Pix informado depois da conferência do nome da conta.
+              </p>
               <section class="ppg-wallet-identity" data-wallet-identity>
                 <img alt="" data-wallet-user-picture hidden />
                 <div>
@@ -556,6 +580,18 @@
                     data-wallet-withdrawal-pix-key
                   />
                 </label>
+                <label>
+                  <span>Nome da conta Pix</span>
+                  <input
+                    type="text"
+                    autocomplete="name"
+                    placeholder="Nome do titular que aparece no Pix"
+                    data-wallet-withdrawal-pix-name
+                  />
+                </label>
+                <p class="ppg-wallet-rules">
+                  O saque máximo é o saldo livre da carteira. Depois de pedir, o admin é informado e você deve aguardar até 2 horas. O valor só é depositado no Pix depois da conferência do nome da conta Pix.
+                </p>
                 <div class="ppg-wallet-actions">
                   <button type="button" data-wallet-request-withdrawal>Pedir retirada</button>
                   <button type="button" data-dom-refresh-wallet>Atualizar saldo</button>
@@ -584,8 +620,8 @@
               <button type="button" data-mobile-dir="down" aria-label="Mover para baixo">▼</button>
             </div>
             <div class="ppg-mobile-actions">
-              <button type="button" class="is-wallet" data-mobile-action="wallet" aria-label="Abrir carteira">Pay</button>
-              <button type="button" class="is-action" data-mobile-action="primary" aria-label="Interagir">A</button>
+              <button type="button" class="is-wallet" data-mobile-action="wallet" aria-label="Abrir carteira">Caixa</button>
+              <button type="button" class="is-action" data-mobile-action="primary" aria-label="Jogar ou interagir">Jogar</button>
             </div>
           </section>
         </div>

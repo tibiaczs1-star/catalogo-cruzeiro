@@ -59,3 +59,18 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Hotspot de entrada da rua movido para a porta principal sob o letreiro PubPaid sem label textual, moldura ou circulo no chao.
 - Sinuca Demo e PvP: caçapas detectam a bola antes da parede rebater, usam raio maior e testam o caminho da bola entre frames para evitar que tacadas rapidas atravessem a boca.
 - Fluxo do botao `Entrar`: reinicia a intro mesmo se ela ja tiver rodado e avanca automaticamente para a tela inicial do jogo ao terminar.
+
+## Atualizacao 2026-05-18 - game-director-demo1
+
+- Criada demo separada `game-director-demo.html`, fora do runtime PubPaid.
+- Jogo 2D simples: loading, intro e uma fase unica com tilemap, colisao AABB, HUD, timer, patrulha inimiga, coleta de 3 pacotes e saida.
+- Incluidos hooks de teste `window.render_game_to_text` e `window.advanceTime(ms)`.
+- Proximos passos: validar em browser/Playwright, checar screenshot e ajustar controles/legibilidade se necessario.
+
+## Atualizacao 2026-05-18 - rua-viva1
+
+- Demo refeita como `Correio do Jurua: Rua Viva`, seguindo a cadeia Diretor Geral -> Diretor do Jogo -> subagentes.
+- Removido visual de labirinto/cubos; fase agora e rua 2.5D com fachadas, banca, mercado, radio, lanches, moto, barracas, postes, poças, pistas e carrinho movel.
+- HUD virou prancheta/etiqueta de ronda, com pistas, tempo, confianca e estado da encomenda.
+- Personagem Lia desenhado em camadas pixel art, com mochila/colete, rosto simples, passo e pacote.
+- Proximos passos: validar screenshot e fluxo de coleta/chegada.

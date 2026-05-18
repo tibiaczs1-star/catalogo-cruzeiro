@@ -267,6 +267,7 @@
             email: row.email || row.playerId || "-",
             amount: row.amount ?? row.amountCoins ?? row.value ?? 0,
             pixKey: row.pixKey || row.payment?.pixKey || row.destination?.pixKey || row.key || "-",
+            pixAccountName: row.pixAccountName || row.payment?.pixAccountName || row.destination?.pixAccountName || "",
             txid: row.txid || row.reference || row.referenceLabel || row.payment?.txid || "-",
             reviewDeadlineAt: row.reviewDeadlineAt || row.reviewedAt || row.createdAt || "",
           })),
@@ -315,7 +316,7 @@
         renderTableRows(
           document.getElementById("pendingWithdrawalsBody"),
           normalized.pendingPubpaidWithdrawals || [],
-          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td class="mono">${escapeHtml(row.pixKey || "-")}</td><td class="mono">${escapeHtml(row.txid || "-")}</td><td>${formatDateTime(row.reviewDeadlineAt)}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
+          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td class="mono">${escapeHtml(row.pixKey || "-")}<br><small>${escapeHtml(row.pixAccountName || row.destination?.pixAccountName || row.payment?.pixAccountName || "conferir nome")}</small></td><td class="mono">${escapeHtml(row.txid || "-")}</td><td>${formatDateTime(row.reviewDeadlineAt)}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
           7,
           "Sem retiradas pendentes."
         );

@@ -259,6 +259,7 @@ body.pubpaid-phaser-page .ppg-prompt {
 }
 
 .ppg-dom-game-card.is-chess,
+.ppg-dom-game-card.is-cards21,
 .ppg-dom-game-card.is-poker,
 .ppg-dom-game-card.is-truco,
 .ppg-dom-game-card.is-dicecups {
@@ -269,6 +270,13 @@ body.pubpaid-phaser-page .ppg-prompt {
   background:
     radial-gradient(circle at 76% 24%, rgba(255, 246, 220, 0.16), transparent 30%),
     linear-gradient(145deg, rgba(38, 34, 30, 0.9), rgba(5, 9, 20, 0.94));
+}
+
+.ppg-dom-game-card.is-cards21 {
+  background:
+    radial-gradient(circle at 26% 22%, rgba(255, 246, 220, 0.2), transparent 28%),
+    radial-gradient(circle at 76% 34%, rgba(198, 40, 66, 0.22), transparent 34%),
+    linear-gradient(145deg, rgba(38, 16, 18, 0.92), rgba(5, 9, 20, 0.94));
 }
 
 .ppg-dom-game-card.is-poker {
@@ -387,6 +395,24 @@ body.pubpaid-phaser-page .ppg-prompt {
   padding: 8px;
   border: 1px solid rgba(255, 208, 109, 0.2);
   background: rgba(255, 208, 109, 0.06);
+}
+
+.ppg-wallet-note,
+.ppg-wallet-rules {
+  margin-top: 10px;
+  padding: 9px 10px;
+  border: 1px solid rgba(142, 240, 163, 0.22);
+  background: rgba(142, 240, 163, 0.055);
+  color: #cfe7d7;
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.ppg-wallet-rules {
+  margin-top: 0;
+  border-color: rgba(255, 208, 109, 0.24);
+  background: rgba(255, 208, 109, 0.055);
+  color: #f0d9a7;
 }
 
 .ppg-wallet-identity {
@@ -1422,44 +1448,219 @@ body.pubpaid-phaser-page .ppg-prompt {
   overflow: hidden;
 }
 
-.ppg-card-row {
+.ppg-card-table {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px;
+  min-height: 0;
+  gap: 10px;
 }
 
-.ppg-playing-card {
+.ppg-card-table-felt {
+  position: relative;
   display: grid;
-  place-items: center;
-  gap: 4px;
-  min-height: 92px;
-  padding: 8px 4px;
-  border: 2px solid rgba(255, 246, 220, 0.3);
-  border-radius: 5px;
-  color: #07101c;
-  background: #fff6dc;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  gap: 10px;
+  min-height: 0;
+  padding: 12px;
+  border: 2px solid rgba(196, 139, 58, 0.5);
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(142, 240, 163, 0.11), transparent 46%),
+    linear-gradient(135deg, rgba(18, 78, 58, 0.92), rgba(8, 28, 28, 0.95));
+  box-shadow: inset 0 0 0 2px rgba(255, 246, 220, 0.08), inset 0 -18px 34px rgba(0, 0, 0, 0.28);
 }
 
-.ppg-playing-card strong {
-  font-size: 21px;
-  line-height: 1;
+.ppg-card-seat {
+  display: grid;
+  gap: 6px;
 }
 
-.ppg-playing-card small {
-  font-size: 9px;
+.ppg-card-seat > span,
+.ppg-card-seat > small,
+.ppg-truco-score span,
+.ppg-card-center span {
+  color: #d5dff2;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
-.ppg-playing-card.is-held {
-  transform: translateY(-8px);
-  border-color: rgba(142, 240, 163, 0.72);
-  box-shadow: 0 10px 22px rgba(142, 240, 163, 0.16);
+.ppg-card-seat > small {
+  color: #9fb0ca;
+  text-align: center;
 }
 
-.ppg-playing-card.is-empty {
+.ppg-card-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(4px, 1vw, 8px);
+  min-width: 0;
+}
+
+.ppg-card-row.is-truco-hand {
+  max-width: 270px;
+  margin-inline: auto;
+}
+
+.ppg-playing-card {
+  position: relative;
+  display: grid;
+  flex: 0 1 72px;
+  place-items: center;
+  width: min(72px, 18vw);
+  min-width: 48px;
+  aspect-ratio: 0.68;
+  padding: 7px 5px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 246, 220, 0.72);
+  border-radius: 7px;
+  color: #07101c;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 246, 220, 0.96)),
+    #fff6dc;
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.36);
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.ppg-playing-card::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(7, 16, 28, 0.1);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.ppg-playing-card:not([disabled]):is(button):hover,
+.ppg-playing-card:not([disabled]):is(button):focus-visible {
+  transform: translateY(-6px);
+  border-color: rgba(255, 208, 109, 0.95);
+}
+
+.ppg-playing-card.is-red {
+  color: #b91d35;
+}
+
+.ppg-playing-card.is-black {
+  color: #101827;
+}
+
+.ppg-playing-card.is-held {
+  transform: translateY(-10px);
+  border-color: rgba(142, 240, 163, 0.92);
+  box-shadow: 0 12px 24px rgba(142, 240, 163, 0.18), inset 0 0 0 2px rgba(142, 240, 163, 0.12);
+}
+
+.ppg-playing-card.is-empty,
+.ppg-playing-card.is-back {
   color: #9fb0ca;
-  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(80, 239, 255, 0.28);
+  background:
+    repeating-linear-gradient(45deg, rgba(80, 239, 255, 0.1) 0 5px, rgba(255, 208, 109, 0.08) 5px 10px),
+    linear-gradient(145deg, #11182b, #060914);
+}
+
+.ppg-card-corner {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  line-height: 1;
+}
+
+.ppg-card-corner b {
+  font-size: clamp(12px, 1.45vw, 16px);
+}
+
+.ppg-card-corner i {
+  font-style: normal;
+  font-size: clamp(11px, 1.3vw, 15px);
+}
+
+.ppg-card-corner.is-top {
+  top: 6px;
+  left: 7px;
+}
+
+.ppg-card-corner.is-bottom {
+  right: 7px;
+  bottom: 6px;
+  transform: rotate(180deg);
+}
+
+.ppg-card-pip {
+  font-size: clamp(24px, 3.1vw, 34px);
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.ppg-card-back-mark {
+  display: grid;
+  place-items: center;
+  width: 64%;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 208, 109, 0.28);
+  border-radius: 50%;
+  color: #ffd06d;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.ppg-playing-card small {
+  align-self: end;
+  min-height: 10px;
+  color: currentColor;
+  font-size: 8px;
+  font-weight: 900;
+  opacity: 0.68;
+  text-transform: uppercase;
+}
+
+.ppg-card-center {
+  display: grid;
+  place-items: center;
+  min-height: 76px;
+  padding: 8px;
+  border: 1px dashed rgba(255, 246, 220, 0.24);
+  border-radius: 8px;
+  background: rgba(4, 7, 16, 0.32);
+  text-align: center;
+}
+
+.ppg-card-center strong,
+.ppg-truco-score strong {
+  color: #ffd06d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.ppg-card-center.is-table-pot {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ppg-card-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ppg-card-controls button {
+  min-height: 44px;
+}
+
+.ppg-truco-score {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 208, 109, 0.22);
+  border-radius: 6px;
+  background: rgba(4, 7, 16, 0.42);
 }
 
 .ppg-dice-cups {

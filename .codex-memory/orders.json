@@ -1,7 +1,49 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-18T18:40:34.960Z",
+  "lastUpdatedAt": "2026-05-18T23:18:00.000Z",
   "orders": [
+    {
+      "id": "2026-05-18-ajustar-copy-controles-jogar-pubpaid",
+      "createdAt": "2026-05-18T18:18:00-05:00",
+      "updatedAt": "2026-05-18T18:18:00-05:00",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "mude esvez de espaço e ação, para utilize o botão espeaço para jogar, e adpter isso pro mobile ou seja qual texto usar la? nao sei crie",
+      "summary": "Trocar copy de acao por orientacao clara de jogar no teclado e no celular.",
+      "normalizedTasks": [
+        "trocar Espaco e acao por Use Espaco para jogar",
+        "criar texto mobile Celular: toque em Jogar",
+        "renomear botao touch da sinuca para Jogar",
+        "trocar botoes mobile Pay/A por Caixa/Jogar"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "server.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-gamescomplete3-pool-controls.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "controles",
+        "mobile",
+        "sinuca",
+        "copy"
+      ],
+      "nextSteps": [
+        "validar visualmente no aparelho real se o usuario pedir"
+      ],
+      "notes": "Validado localmente com node --check, npm run guard:pubpaid, servidor 20260518-gamescomplete3 e Playwright confirmando os textos e botoes."
+    },
     {
       "id": "2026-05-18-pubpaid-entrada-limpa-e-cacapas-sinuca",
       "createdAt": "2026-05-18T13:24:58.7213427-05:00",
@@ -408,16 +450,33 @@
       "id": "2026-05-18-criar-candidato-visual-premium-de-damas-e-entregar-previews-mobile-desktop-sem-d",
       "createdAt": "2026-05-18T00:15:53.960Z",
       "updatedAt": "2026-05-18T00:15:53.960Z",
-      "status": "open",
+      "status": "completed-local",
       "source": "chat",
       "rawRequest": "Trabalho local de arte/interface da Damas PubPaid: botoes, pecas, cenario, background e previews PNG mobile/desktop para aprovacao antes de subir.",
       "summary": "Criar candidato visual premium de Damas e entregar previews mobile/desktop sem deploy.",
-      "normalizedTasks": [],
-      "filesTouched": [],
-      "assetRefs": [],
-      "tags": [],
-      "nextSteps": [],
-      "notes": ""
+      "normalizedTasks": [
+        "criar candidato visual premium de Damas PubPaid",
+        "entregar previews desktop e mobile",
+        "nao publicar sem aprovacao"
+      ],
+      "filesTouched": [
+        ".codex-temp/pubpaid-art-candidate-desktop.png",
+        ".codex-temp/pubpaid-art-candidate-mobile.png"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-art-candidate-desktop.png",
+        ".codex-temp/pubpaid-art-candidate-mobile.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "damas",
+        "arte",
+        "preview"
+      ],
+      "nextSteps": [
+        "aguardar aprovacao visual do usuario"
+      ],
+      "notes": "Previews locais registrados para aprovacao; nao publicar sem permissao."
     },
     {
       "id": "2026-05-18-corrigir-controle-sinuca-espaco-e-centralizar-mesa",
@@ -504,6 +563,290 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-18-investigar-tela-preta-depois-de-apertar-entrar-no-pubpaid",
+      "createdAt": "2026-05-18T19:12:36.951Z",
+      "updatedAt": "2026-05-18T19:12:36.951Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "ok verifique a tela preta que ta aprecendo depois de aperta entrar no pub paid",
+      "summary": "Investigar tela preta depois de apertar Entrar no PubPaid.",
+      "normalizedTasks": [
+        "reproduzir fluxo apos botao Entrar",
+        "identificar origem do bloco/tela preta na intro",
+        "remover mascara preta antiga da IntroScene",
+        "atualizar build/cache para 20260518-blackfix1",
+        "validar Entrar -> intro -> character-select sem erros"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid.html",
+        "server.js",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/assets.json",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-black-screen-debug-fixed/02-after-open-game-click.png",
+        ".codex-temp/pubpaid-black-screen-debug-fixed/03-after-6s.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "entrada",
+        "intro",
+        "tela-preta",
+        "blackfix"
+      ],
+      "nextSteps": [
+        "publicar build 20260518-blackfix1 se o usuario autorizar",
+        "validar online o fluxo Entrar em desktop/mobile"
+      ],
+      "notes": "Tela preta/bloco preto vinha de titleMask antigo na IntroScene. Validado localmente por node --check, npm run guard:pubpaid e Playwright com Chrome: Entrar mostra intro limpa e avanca para character-select sem console errors."
+    },
+    {
+      "id": "2026-05-18-estudo-literal-de-30-minutos-concluido-e-consolidado-no-sistema-diretor-de-jogos",
+      "createdAt": "2026-05-18T19:13:58.975Z",
+      "updatedAt": "2026-05-18T19:13:58.975Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Rodada literal de 30 minutos para estudar producao real de jogos, GDD/TDD, level design, game feel, audio, balanceamento, multiplayer, telemetria, pipeline, QA, monetizacao/etica, mapeamento e colisao 2D/3D.",
+      "summary": "Estudo literal de 30 minutos concluido e consolidado no Sistema Diretor de Jogos.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-18-remover-nomes-circulos-e-marcadores-do-chao-na-selecao-salao-pubpaid",
+      "createdAt": "2026-05-18T19:27:56.855Z",
+      "updatedAt": "2026-05-18T19:27:56.855Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "tire essa bolas e esses nomes do chão; tire tambem esses ciruculos e bola no chão",
+      "summary": "Remover nomes, circulos e marcadores do chão na seleção/salão PubPaid.",
+      "normalizedTasks": [
+        "remover nomes e piso visual da seleção de avatar",
+        "remover circulos/textos de hotspots do salão",
+        "remover indicador visual do garçom",
+        "validar salão limpo localmente"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/CharacterSelectScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid.html",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-cleanselect1/02-interior-clean.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "interior",
+        "avatar",
+        "visual-cleanup"
+      ],
+      "nextSteps": [
+        "publicar 20260518-cleanselect1 se o usuario autorizar"
+      ],
+      "notes": "Build local 20260518-cleanselect1 validada: hotspots visuais do salão e labels no chão removidos; node --check, guard PubPaid e Playwright sem console errors."
+    },
+    {
+      "id": "2026-05-18-criar-skill-game-director-general-e-registrar-workflow-de-jogos-com-conselho-ner",
+      "createdAt": "2026-05-18T19:35:05.499Z",
+      "updatedAt": "2026-05-18T19:35:05.499Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Consolidar a cadeia completa antes de voltar ao jogo: Codex/Hermes como ferramentas finais, Diretor Geral, Conselho Tecnico Nerd, Diretor do Jogo, subagentes e sub-subagentes; criar skill completa com loop de aprender/reaprender por erros e acertos.",
+      "summary": "Criar skill game-director-general e registrar workflow de jogos com conselho nerd e loop de aprendizado.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-18-ajustar-indicadores-discretos-e-regras-de-saque-pubpaid",
+      "createdAt": "2026-05-18T19:38:08.515Z",
+      "updatedAt": "2026-05-18T19:38:08.515Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "Na porta da estrada onde entra no bar, ilustrar com bolinha de interação pequena e discreta; fazer igual com o garçom. No saque, só permitir retirar até o saldo livre, informar o admin, aguardar até 2 horas e depositar no Pix depois de verificar o nome da conta Pix. Remover visual feio do cartão PubPaid Pay.",
+      "summary": "Adicionar indicadores discretos de interação e deixar saque PubPaid explicito, limitado ao saldo livre e dependente de conferencia admin/Pix.",
+      "normalizedTasks": [
+        "adicionar bolinha discreta na porta de entrada da rua",
+        "adicionar bolinha discreta no garçom dentro do bar",
+        "remover o cartão inclinado PubPaid Pay da carteira",
+        "exigir nome da conta Pix no pedido de saque",
+        "limitar saque ao saldo livre disponivel",
+        "explicar admin, prazo de ate 2 horas e conferencia do nome Pix"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid-runtime.js",
+        "pubpaid-admin.html",
+        "server.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-withdrawrules1/01-wallet-clean-withdraw-rules.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "wallet",
+        "withdrawal",
+        "pix",
+        "interaction-dot"
+      ],
+      "nextSteps": [
+        "se o usuario aprovar, publicar 20260518-withdrawrules1 e validar online carteira/salão/rua"
+      ],
+      "notes": "Build local 20260518-withdrawrules1 validada com node --check, npm run guard:pubpaid, git diff --check e Playwright: carteira sem cartão inclinado, regra de saque bloqueia valor acima do saldo livre e informa prazo/admin/conferencia do nome Pix."
+    },
+    {
+      "id": "2026-05-18-reformular-jogos-de-cartas-pubpaid-com-mesa-grafica",
+      "createdAt": "2026-05-18T19:55:52.395Z",
+      "updatedAt": "2026-05-18T19:55:52.395Z",
+      "status": "completed-local-first-pass",
+      "source": "chat",
+      "rawRequest": "Puxar a equipe de agentes do jogo para reformular os jogos de cartas; precisam ter grafico de cartas e fluxo de jogo de cartas mesmo, nao parecer canvas mal feito.",
+      "summary": "Primeira reforma dos jogos de cartas PubPaid com mesa grafica DOM para 21, Poker e Truco.",
+      "normalizedTasks": [
+        "mapear jogos de cartas ativos no PubPaid",
+        "adicionar 21/cards21 ao lobby de jogos",
+        "trocar cartas textuais por cartas visuais com naipe, canto, pip e verso",
+        "renderizar mesa de Poker com rival, centro e mao do jogador",
+        "renderizar mesa de Truco com rodada, placar, cartas na mesa e mao",
+        "renderizar mesa de 21 com total, cartas do rival e acoes comprar/parar"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/services/pvpService.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-cardtables1-preview.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "cards",
+        "poker",
+        "truco",
+        "cards21",
+        "game-ui"
+      ],
+      "nextSteps": [
+        "validar PvP real de 21/Poker/Truco com duas contas quando houver saldo/contas disponiveis",
+        "polir mobile landscape se o usuario aprovar a direcao visual"
+      ],
+      "notes": "Subagentes falharam por limite de uso, entao a implementacao seguiu localmente. Build local 20260518-cardtables1 validada com node --check, npm run guard:pubpaid, git diff --check e screenshot Playwright da mesa de cartas sem console errors."
+    },
+    {
+      "id": "2026-05-18-fixar-realistic-host-spritesheet-como-anchor-oficial-de-arte-pubpaid",
+      "createdAt": "2026-05-18T20:18:00.000Z",
+      "updatedAt": "2026-05-18T20:18:00.000Z",
+      "status": "active",
+      "source": "chat",
+      "rawRequest": "Anchor oficial: realistic-host-spritesheet.png. Tudo novo deve parecer da mesma familia desse personagem: pixel art com leitura de sprite, mas super realista no volume, roupa, luz, proporcao e presenca. Nao chibi simples, nao cubo, nao cartoon infantil, nao flat demais, nao pintura HD borrada. Assets precisam funcionar em spritesheet/animacao.",
+      "summary": "Fixar realistic-host-spritesheet.png como anchor oficial e obrigatorio da direcao de arte PubPaid.",
+      "normalizedTasks": [
+        "usar realistic-host-spritesheet.png como base visual obrigatoria",
+        "rejeitar arte chibi simples, cubo, cartoon infantil, flat demais ou HD borrada",
+        "garantir pixel art realista com contorno, sombra, roupa detalhada e corpo humano crivel",
+        "manter personagens e NPCs adultos, expressivos, naturais e na escala do anchor",
+        "criar rua, cenario e props com luz, textura, profundidade, volume e material",
+        "manter HUD premium e especifico do PubPaid",
+        "planejar animacoes com poucos frames, peso realista e pes bem ancorados"
+      ],
+      "filesTouched": [
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "arte",
+        "pixel-art",
+        "spritesheet",
+        "anchor-oficial",
+        "realismo"
+      ],
+      "nextSteps": [
+        "antes de criar novo asset, comparar com o anchor oficial",
+        "manter novas propostas pequenas e revisaveis antes de escalar packs"
+      ],
+      "notes": "Esta ordem substitui leituras anteriores mais frouxas de chibi-realista: o foco agora e pixel art realista com leitura de sprite e aptidao para animacao."
+    },
+    {
+      "id": "2026-05-18-finalizar-textos-e-treinos-de-todos-os-jogos-pubpaid",
+      "createdAt": "2026-05-18T20:06:32.849Z",
+      "updatedAt": "2026-05-18T20:06:32.849Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "Traduzir tudo, terminar textos dos jogos todos, incluir demo/treino para todos e encerrar a parte de jogos salvo correcoes pontuais.",
+      "summary": "Textos publicos do PubPaid revisados para portugues e todos os jogos ganharam botao Treino.",
+      "normalizedTasks": [
+        "trocar termos ingleses visiveis por portugues",
+        "adicionar Treino em todos os cards do lobby",
+        "criar treinos locais para 21, Poquer, Truco, Dados e Xadrez",
+        "validar lobby e treino de Poquer sem vazamento de ingles"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/scenes/CharacterSelectScene.js",
+        "pubpaid-phaser/scenes/GameLobbyScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/scenes/CheckersGameScene.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-gamescomplete2-lobby.png",
+        ".codex-temp/pubpaid-gamescomplete2-poker-demo.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "games",
+        "translation",
+        "demo",
+        "treino"
+      ],
+      "nextSteps": [
+        "somente corrigir erros pontuais reportados pelo usuario antes de publicar/deployar"
+      ],
+      "notes": "Build local 20260518-gamescomplete2. Playwright confirmou 7 botoes Treino, textos sem Lobby/Demo/Draw Poker/Desktop/Mobile/PvP real/backend/escrow e treino de Poquer abriu sem console errors."
     }
   ]
 }

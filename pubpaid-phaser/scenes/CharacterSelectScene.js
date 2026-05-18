@@ -52,7 +52,7 @@ export class CharacterSelectScene extends Phaser.Scene {
     this.add.text(
       GAME_WIDTH / 2,
       96,
-      this.mobilePortraitLayout ? "Toque no avatar ou use A no controle mobile" : "Desktop: setas ou A/D + Enter  |  Mobile: toque ou direcional + A",
+      this.mobilePortraitLayout ? "Toque no avatar ou use A no controle do celular" : "Computador: setas ou A/D + Enter  |  Celular: toque ou direcional + A",
       this.pixelStyle(12, "#d5dff2")
     )
       .setOrigin(0.5)
@@ -69,8 +69,6 @@ export class CharacterSelectScene extends Phaser.Scene {
       true
     );
     this.confirmButtonText = confirmButton.ppgLabel;
-    if (!this.mobilePortraitLayout) this.drawControlStrip();
-
     this.input.keyboard.on("keydown-LEFT", () => this.setSelected(0));
     this.input.keyboard.on("keydown-RIGHT", () => this.setSelected(1));
     this.input.keyboard.on("keydown-A", () => this.chooseSelected());
@@ -113,17 +111,8 @@ export class CharacterSelectScene extends Phaser.Scene {
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const bg = this.add.rectangle(0, 6, cardWidth, cardHeight, 0x07101c, 0.78)
       .setStrokeStyle(2, option.accent, 0.2);
-    const floor = this.add.ellipse(0, 162, 208, 34, option.accent, 0.12)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
     const sprite = this.buildAvatarPreview(option, spriteHeight);
-    const avatarLabel = this.add.text(0, this.mobilePortraitLayout ? 204 : 234, option.label, this.avatarLabelStyle(this.mobilePortraitLayout ? 12 : 14, "#fff6dc"))
-      .setOrigin(0.5)
-      .setPadding(10, 5, 10, 4)
-      .setBackgroundColor("#07101c")
-      .setLetterSpacing(1);
-    const marker = this.add.rectangle(0, this.mobilePortraitLayout ? 184 : 218, 108, 5, option.accent, 0.95)
-      .setAlpha(0);
-    card.add([shadow, glow, bg, floor, sprite, marker, avatarLabel]);
+    card.add([shadow, glow, bg, sprite]);
     card.setSize(cardWidth, cardHeight);
     card.setInteractive(new Phaser.Geom.Rectangle(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight), Phaser.Geom.Rectangle.Contains);
     card.on("pointerover", () => this.setSelected(index));
@@ -131,7 +120,7 @@ export class CharacterSelectScene extends Phaser.Scene {
       this.setSelected(index);
       this.chooseSelected();
     });
-    card.ppgOption = { option, bg, glow, marker, avatarLabel, sprite, floor };
+    card.ppgOption = { option, bg, glow, sprite };
     return card;
   }
 
@@ -159,10 +148,6 @@ export class CharacterSelectScene extends Phaser.Scene {
       const active = cardIndex === index;
       card.ppgOption.bg.setStrokeStyle(active ? 4 : 2, card.ppgOption.option.accent, active ? 0.82 : 0.2);
       card.ppgOption.glow.setAlpha(active ? 0.13 : 0.035);
-      card.ppgOption.floor.setAlpha(active ? 0.2 : 0.1);
-      card.ppgOption.marker.setAlpha(active ? 1 : 0);
-      card.ppgOption.avatarLabel.setBackgroundColor(active ? "#ffd06d" : "#07101c");
-      card.ppgOption.avatarLabel.setColor(active ? "#07101c" : "#fff6dc");
       this.tweens.add({
         targets: card,
         scaleX: active ? 1.055 : 0.965,

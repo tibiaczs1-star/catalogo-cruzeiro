@@ -223,6 +223,10 @@ function normalizeWithdrawal(item = {}, index = 0) {
     item.pixKey ?? item.withdrawalPixKey ?? item.destinationPixKey ?? item.pix ?? payment.pixKey ?? destination.pixKey ?? item.key,
     ""
   );
+  const pixAccountName = normalizeText(
+    item.pixAccountName ?? item.pixName ?? item.pixHolderName ?? destination.pixAccountName ?? payment.pixAccountName ?? "",
+    ""
+  );
   const playerId = normalizeText(
     item.playerId ?? walletKey ?? item.userId ?? item.playerSlug ?? googleSub ?? item.email ?? item.whatsApp,
     ""
@@ -248,15 +252,18 @@ function normalizeWithdrawal(item = {}, index = 0) {
     amount,
     creditsRequested: amount,
     pixKey: pixKey || normalizeText(item.walletKey ?? item.key, "-"),
+    pixAccountName,
     destination: {
       method: normalizeText(destination.method ?? "pix", "pix"),
       pixKey: pixKey || normalizeText(destination.pixKey ?? item.walletKey ?? item.key, "-"),
+      pixAccountName,
     },
     reference,
     payment: {
       method: normalizeText(payment.method ?? item.paymentMethod, "pix-manual"),
       txid: reference,
       pixKey: pixKey || normalizeText(payment.pixKey ?? item.walletKey ?? item.key, "-"),
+      pixAccountName,
       status: normalizeText(payment.status ?? item.paymentStatus ?? item.status, "pending"),
       confirmationMode: normalizeText(payment.confirmationMode, "manual"),
     },

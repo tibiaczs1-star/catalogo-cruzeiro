@@ -227,10 +227,22 @@ export class InteriorScene extends Phaser.Scene {
     this.actors = [
       waiterNpc
     ];
-    this.waiterIndicator = this.buildWaiterIndicator(704, 404);
+    this.waiterIndicator = null;
 
     this.player = this.buildPlayer(606, 392);
-    this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
+    this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0).setVisible(false);
+    const waiterDot = this.add.circle(INTERIOR_MAP.interactionPoints.waiter.x, INTERIOR_MAP.interactionPoints.waiter.y + 52, 5, 0xffd06d, 0.68)
+      .setStrokeStyle(1, 0x05070d, 0.72)
+      .setDepth(2.52);
+    this.tweens.add({
+      targets: waiterDot,
+      alpha: { from: 0.42, to: 0.72 },
+      scale: { from: 0.92, to: 1.08 },
+      duration: 1180,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
     this.transitionVeil = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x04060d, 0)
       .setDepth(20)
       .setScrollFactor(0);
@@ -283,7 +295,7 @@ export class InteriorScene extends Phaser.Scene {
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
         interiorMap: this.getInteriorMapSnapshot(),
         interiorMapWarnings: this.interiorMapWarnings,
-        prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir o lobby."
+        prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir as mesas."
       });
     });
 
@@ -1417,13 +1429,12 @@ export class InteriorScene extends Phaser.Scene {
 
   buildZoneHotspot(zone) {
     const container = this.add.container(zone.x, zone.y).setDepth(2.1);
-    const baseGlow = this.add.ellipse(0, 0, zone.radius * 1.9, zone.radius * 1.35, zone.color, 0.03)
+    const baseGlow = this.add.ellipse(0, 0, zone.radius * 1.9, zone.radius * 1.35, zone.color, 0)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const shell = this.add.ellipse(0, 0, zone.radius * 1.45, zone.radius * 1.1, zone.color, 0.05)
+    const shell = this.add.ellipse(0, 0, zone.radius * 1.45, zone.radius * 1.1, zone.color, 0)
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const frame = this.add.graphics();
-    this.drawZoneFrame(frame, zone.radius, zone.color, 0.4);
-    const pulse = this.add.ellipse(0, 0, zone.radius * 1.15, zone.radius * 0.88, zone.color, 0.02)
+    const pulse = this.add.ellipse(0, 0, zone.radius * 1.15, zone.radius * 0.88, zone.color, 0)
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const text = this.add.text(0, zone.labelOffsetY ?? -zone.radius * 0.88, zone.label, {
       fontFamily: "Courier New, Lucida Console, monospace",
@@ -1432,8 +1443,7 @@ export class InteriorScene extends Phaser.Scene {
       color: "#fff5de",
       stroke: "#04060b",
       strokeThickness: 4
-    }).setOrigin(0.5).setLetterSpacing(3).setAlpha(zone.hideLabel ? 0 : 0.9);
-    if (zone.hideLabel) text.setVisible(false);
+    }).setOrigin(0.5).setLetterSpacing(3).setAlpha(0).setVisible(false);
     const chip = this.add.text(0, zone.radius * 0.62, "ENTER", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "10px",
@@ -1441,12 +1451,10 @@ export class InteriorScene extends Phaser.Scene {
       color: "#d5dff2",
       stroke: "#04060b",
       strokeThickness: 3
-    }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0.82);
+    }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0).setVisible(false);
 
     container.add([baseGlow, shell, pulse, frame, text, chip]);
-    if (zone.id === "exit") {
-      [baseGlow, shell, pulse, frame, text, chip].forEach((item) => item.setVisible(false));
-    }
+    [baseGlow, shell, pulse, frame, text, chip].forEach((item) => item.setVisible(false));
     container.ppgZone = { ...zone, baseGlow, shell, pulse, frame, text, chip };
     container.setSize(zone.radius * 2, zone.radius * 2);
     container.setInteractive(new Phaser.Geom.Circle(0, 0, zone.radius), Phaser.Geom.Circle.Contains);
@@ -1793,12 +1801,11 @@ export class InteriorScene extends Phaser.Scene {
     this.activeZone = zoneId ? this.zones.find((zone) => zone.id === zoneId) || null : null;
     this.zoneHotspots.forEach((hotspot) => {
       const active = hotspot.ppgZone.id === zoneId;
-      hotspot.ppgZone.baseGlow.setAlpha(active ? 0.12 : 0.03);
-      hotspot.ppgZone.shell.setAlpha(active ? 0.18 : 0.05);
-      hotspot.ppgZone.pulse.setAlpha(active ? 0.16 : 0.02);
-      hotspot.ppgZone.text.setVisible(!hotspot.ppgZone.hideLabel);
-      hotspot.ppgZone.text.setAlpha(hotspot.ppgZone.hideLabel ? 0 : active ? 1 : 0.9);
-      hotspot.ppgZone.chip.setAlpha(active ? 1 : 0.82);
+      hotspot.ppgZone.baseGlow.setVisible(false).setAlpha(0);
+      hotspot.ppgZone.shell.setVisible(false).setAlpha(0);
+      hotspot.ppgZone.pulse.setVisible(false).setAlpha(0);
+      hotspot.ppgZone.text.setVisible(false).setAlpha(0);
+      hotspot.ppgZone.chip.setVisible(false).setAlpha(0);
     });
   }
 
@@ -2010,7 +2017,7 @@ export class InteriorScene extends Phaser.Scene {
         ? zone.id === "exit"
           ? "Voltar para a rua"
           : zone.id === "waiter"
-            ? "Apertar Enter para abrir o lobby"
+          ? "Apertar Enter para abrir as mesas"
             : "Apertar Enter para interagir"
         : "Falar com o garçom no corredor",
       nerdAgent: formatNerdAgent(zone ? zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud : NERD_TEAM.physics),
@@ -2018,7 +2025,7 @@ export class InteriorScene extends Phaser.Scene {
         ? zone.id === "exit"
           ? "Saída localizada. Aperte Enter para voltar para a rua."
           : zone.id === "waiter"
-            ? "Garçom localizado. Aperte Enter para abrir o lobby de jogos."
+            ? "Garçom localizado. Aperte Enter para abrir as mesas de jogos."
             : `${zone.promptLabel || zone.label || this.getZoneLabel(zone.id)} ativo. Aperte Enter para interagir.`
         : "Explore o salão. O garçom no corredor abre todos os jogos."
     });

@@ -11,8 +11,8 @@ export class CheckersGameScene extends Phaser.Scene {
       activeGameId: "checkers",
       lobbyPhase: "matching",
       objective: "Aguardar jogador real",
-      focus: "Damas PvP real",
-      prompt: "Damas PvP real: a mesa so abre com dois jogadores, saldo aprovado, escrow e confirmacao dupla."
+      focus: "Damas em mesa real",
+      prompt: "Damas em mesa real: a mesa so abre com dois jogadores, saldo aprovado, saldo travado e confirmacao dupla."
     });
     this.game.events.emit("pubpaid:start-real-checkers");
     this.scene.stop();

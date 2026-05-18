@@ -258,12 +258,6 @@ export class IntroScene extends Phaser.Scene {
     const letterBottom = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT - 34, GAME_WIDTH, 68, 0x02030a, 0.42);
     this.cinematicOverlay.add([letterTop, letterBottom]);
 
-    if (frame.key === "street-bg") {
-      const titleMask = this.add.rectangle(350, 118, 610, 104, 0x07101c, 0.96)
-        .setStrokeStyle(0, 0x07101c, 0);
-      this.cinematicOverlay.add(titleMask);
-    }
-
     if (frame.label.includes("carros")) {
       const headlightA = this.add.rectangle(-120, 592, 220, 18, 0xffd06d, 0.18)
         .setBlendMode(Phaser.BlendModes.SCREEN);

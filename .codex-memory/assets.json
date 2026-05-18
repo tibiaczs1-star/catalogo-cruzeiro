@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-18T16:09:44.000Z",
+  "lastUpdatedAt": "2026-05-18T23:18:00.000Z",
   "assets": [
+    {
+      "id": "pubpaid-gamescomplete3-pool-controls-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-gamescomplete3-pool-controls.png",
+      "source": "workspace",
+      "note": "Captura local da Sinuca com copy Use Espaco para jogar, texto mobile toque em Jogar e botoes Caixa/Jogar.",
+      "linkedOrderIds": [
+        "2026-05-18-ajustar-copy-controles-jogar-pubpaid"
+      ],
+      "createdAt": "2026-05-18T18:18:00-05:00"
+    },
     {
       "id": "pubpaid-pool-room-v1",
       "kind": "image",
@@ -98,8 +109,10 @@
       "kind": "approved-spritesheet",
       "path": ".codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png",
       "source": "workspace",
-      "note": "Unico exemplo confirmado como aprovado na correcao mais recente do usuario; usar como ancora positiva de estilo/qualidade.",
-      "linkedOrderIds": [],
+      "note": "Anchor oficial obrigatorio da arte PubPaid: pixel art com leitura de sprite, realista em volume, roupa, luz, proporcao e presenca; usar como base para personagens, NPCs, cenario, props, HUD e animacoes.",
+      "linkedOrderIds": [
+        "2026-05-18-fixar-realistic-host-spritesheet-como-anchor-oficial-de-arte-pubpaid"
+      ],
       "createdAt": "2026-05-17T10:46:14.201Z"
     },
     {
@@ -161,6 +174,83 @@
         "2026-05-18-corrigir-controle-sinuca-espaco-e-centralizar-mesa"
       ],
       "createdAt": "2026-05-18T11:09:44-05:00"
+    },
+    {
+      "id": "pubpaid-blackfix1-after-enter-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-black-screen-debug-fixed/02-after-open-game-click.png",
+      "source": "workspace",
+      "note": "Validacao local da build 20260518-blackfix1 logo apos Entrar: intro sem retangulo preto no topo/esquerda.",
+      "linkedOrderIds": [
+        "2026-05-18-investigar-tela-preta-depois-de-apertar-entrar-no-pubpaid"
+      ],
+      "createdAt": "2026-05-18T19:18:45.420Z"
+    },
+    {
+      "id": "pubpaid-blackfix1-after-intro-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-black-screen-debug-fixed/03-after-6s.png",
+      "source": "workspace",
+      "note": "Validacao local da build 20260518-blackfix1 apos a intro: chegou em character-select sem console errors.",
+      "linkedOrderIds": [
+        "2026-05-18-investigar-tela-preta-depois-de-apertar-entrar-no-pubpaid"
+      ],
+      "createdAt": "2026-05-18T19:18:45.491Z"
+    },
+    {
+      "id": "pubpaid-cleanselect1-interior-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-cleanselect1/02-interior-clean.png",
+      "source": "workspace",
+      "note": "Salão PubPaid sem nomes/círculos/bolas de hotspot no chão na build 20260518-cleanselect1.",
+      "linkedOrderIds": [
+        "2026-05-18-remover-nomes-circulos-e-marcadores-do-chao-na-selecao-salao-pubpaid"
+      ],
+      "createdAt": "2026-05-18T19:27:56.937Z"
+    },
+    {
+      "id": "pubpaid-withdrawrules1-wallet-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-withdrawrules1/01-wallet-clean-withdraw-rules.png",
+      "source": "workspace",
+      "note": "Carteira PubPaid na build 20260518-withdrawrules1 sem cartão inclinado, com aviso simples e regras explicitas de saque/Pix/admin.",
+      "linkedOrderIds": [
+        "2026-05-18-ajustar-indicadores-discretos-e-regras-de-saque-pubpaid"
+      ],
+      "createdAt": "2026-05-18T19:38:08.515Z"
+    },
+    {
+      "id": "pubpaid-cardtables1-preview-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-cardtables1-preview.png",
+      "source": "workspace",
+      "note": "Preview local da primeira mesa grafica de cartas PubPaid na build 20260518-cardtables1.",
+      "linkedOrderIds": [
+        "2026-05-18-reformular-jogos-de-cartas-pubpaid-com-mesa-grafica"
+      ],
+      "createdAt": "2026-05-18T19:55:52.395Z"
+    },
+    {
+      "id": "pubpaid-gamescomplete2-lobby-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-gamescomplete2-lobby.png",
+      "source": "workspace",
+      "note": "Lobby/Mesas PubPaid com Treino e Real em todos os 7 jogos na build 20260518-gamescomplete2.",
+      "linkedOrderIds": [
+        "2026-05-18-finalizar-textos-e-treinos-de-todos-os-jogos-pubpaid"
+      ],
+      "createdAt": "2026-05-18T20:06:32.849Z"
+    },
+    {
+      "id": "pubpaid-gamescomplete2-poker-demo-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-gamescomplete2-poker-demo.png",
+      "source": "workspace",
+      "note": "Treino de Poquer PubPaid em portugues na build 20260518-gamescomplete2.",
+      "linkedOrderIds": [
+        "2026-05-18-finalizar-textos-e-treinos-de-todos-os-jogos-pubpaid"
+      ],
+      "createdAt": "2026-05-18T20:06:32.849Z"
     }
   ]
 }
