@@ -1,6 +1,6 @@
 # Current State
 
-Updated: 2026-05-17T18:35:00-05:00
+Updated: 2026-05-17T19:02:00-05:00
 
 ## Active Goal
 
@@ -8,7 +8,7 @@ Updated: 2026-05-17T18:35:00-05:00
 
 ## Summary
 
-- Build local atual: `20260517-mobilefix1`.
+- Build local atual: `20260517-artpass1`.
 - Damas foi refeita como arena DOM dedicada: header de partida, timer, cards dos jogadores, tabuleiro premium, hints, historico de lances, drag/tap e botao Desistir.
 - Lobby ganhou `Damas Demo`: treino local contra maquina, sem ficha, sem fila PvP, sem escrow e sem alterar saldo.
 - Backend passou a persistir `checkersHistory` por match; o frontend mostra o ultimo historico sem depender de estado local.
@@ -21,7 +21,8 @@ Updated: 2026-05-17T18:35:00-05:00
   - voltar via polling/state reativa a mesa;
   - botão `Desistir` finaliza por W.O. imediatamente.
 - Damas recebeu ajuste geometrico de fullscreen: grid 8x8 com linhas fixas, fundo de arena, pecas quadradas, score visual e som curto ao mover/capturar.
-- Mobile landscape foi compactado para manter tabuleiro, score e botoes sem overflow.
+- Mobile landscape foi redirigido como cena de jogo: tabuleiro protagonista, placas pixel/neon menores, score compacto, texto lateral reduzido e botoes dentro da cena.
+- Portrait mobile continua bloqueando entrada, mas sem travar: o botao `Ja virei` apenas revalida a orientacao detectada; nao usa `orientation.lock()` em touch.
 - Sinuca foi reconstruida como cena fisica local: bola branca, 15 bolas em triangulo, mira, força, colisao bola-bola, paredes, caçapas e reposicao da branca.
 - Xadrez, poker, truco e dados foram adicionados como mesas canonicas PvP:
   - xadrez usa `chess.js` no servidor para validar lance legal;
@@ -50,6 +51,10 @@ Updated: 2026-05-17T18:35:00-05:00
   - mobile portrait 390x844: gate horizontal visivel, `introStarted=no`, `orientationBlocked=yes`;
   - Google mockado: conta confirmada mostrou `Tocar para intro`; audio nao abriu intro; toque no card abriu intro.
 - Online Render: `/api/pubpaid/build` respondeu `20260517-mobilefix1`; smoke online mobile landscape com Google mockado abriu intro pelo botao, audio nao abriu intro, Damas Demo respondeu a tap, 64 casas, sem mao e sem overflow.
+- Browser local `20260517-artpass1`:
+  - portrait mobile: gate continua visivel, `introStarted=no`, `orientationBlocked=yes`; tocar em `Ja virei` enquanto ainda vertical nao inicia o jogo;
+  - depois de simular landscape, gate libera entrada;
+  - Damas Demo mobile landscape: 64 casas, sem mao, sem overflow, score `12 x 12`, tabuleiro central e HUD em placas compactas.
 - `git diff --check`
 - Teste backend isolado com duas contas/cookies: Damas `waiting -> readying -> active`, lance legal validado e `checkersHistory[0]` persistido.
 - Teste Chrome via CDP com dois perfis separados:
@@ -93,6 +98,6 @@ Updated: 2026-05-17T18:35:00-05:00
 
 ## Next
 
-- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-checkersdemo1`.
+- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-artpass1`.
 - Testar online com duas contas Google reais quando o deploy novo estiver ativo nas duas janelas.
 - Continuar polimento visual por jogo sem quebrar escrow, ready duplo, W.O. e saldo real.
