@@ -208,21 +208,59 @@ function normalizeDeposit(item = {}, index = 0) {
 }
 
 function normalizeWithdrawal(item = {}, index = 0) {
+  const user = item.user && typeof item.user === "object" ? item.user : {};
+  const payment = item.payment && typeof item.payment === "object" ? item.payment : {};
+  const destination = item.destination && typeof item.destination === "object" ? item.destination : {};
   const amount = normalizeMoney(
-    item.amountCoins ?? item.amount ?? item.valueCoins ?? item.value ?? item.coins
+    item.amountCoins ?? item.amount ?? item.valueCoins ?? item.value ?? item.coins ?? item.creditsRequested
   );
-  const playerId = normalizeText(
-    item.playerId ?? item.walletKey ?? item.userId ?? item.playerSlug ?? item.user?.sub ?? item.email ?? item.whatsApp,
+  const googleSub = normalizeText(item.googleSub ?? payment.googleSub ?? user.sub, "");
+  const googleEmail = normalizeText(item.googleEmail ?? payment.googleEmail ?? user.email ?? item.email, "");
+  const googleName = normalizeText(item.googleName ?? payment.googleName ?? user.name, "");
+  const googlePicture = normalizeText(item.googlePicture ?? user.picture, "");
+  const walletKey = normalizeText(item.walletKey ?? item.playerId ?? googleSub ?? googleEmail, "");
+  const pixKey = normalizeText(
+    item.pixKey ?? item.withdrawalPixKey ?? item.destinationPixKey ?? item.pix ?? payment.pixKey ?? destination.pixKey ?? item.key,
     ""
   );
-  const playerName = normalizeText(item.playerName ?? item.player ?? item.name ?? item.solicitante, "Jogador");
+  const playerId = normalizeText(
+    item.playerId ?? walletKey ?? item.userId ?? item.playerSlug ?? googleSub ?? item.email ?? item.whatsApp,
+    ""
+  );
+  const playerName = normalizeText(item.playerName ?? item.player ?? item.name ?? item.solicitante ?? googleName, "Jogador");
+  const reference = normalizeText(item.reference ?? item.txid ?? payment.txid ?? item.comprovante ?? "-", "-");
   return {
     id: normalizeId("withdrawal", item.id, index),
     playerId,
     playerName,
+    walletKey,
+    googleSub,
+    googleEmail,
+    googleName,
+    googlePicture,
+    user: {
+      sub: googleSub,
+      email: googleEmail,
+      name: googleName,
+      picture: googlePicture,
+    },
     amountCoins: amount,
-    pixKey: normalizeText(item.pixKey ?? item.walletKey ?? item.key, "-"),
-    status: normalizeStatus(item.status, "pending"),
+    amount,
+    creditsRequested: amount,
+    pixKey: pixKey || normalizeText(item.walletKey ?? item.key, "-"),
+    destination: {
+      method: normalizeText(destination.method ?? "pix", "pix"),
+      pixKey: pixKey || normalizeText(destination.pixKey ?? item.walletKey ?? item.key, "-"),
+    },
+    reference,
+    payment: {
+      method: normalizeText(payment.method ?? item.paymentMethod, "pix-manual"),
+      txid: reference,
+      pixKey: pixKey || normalizeText(payment.pixKey ?? item.walletKey ?? item.key, "-"),
+      status: normalizeText(payment.status ?? item.paymentStatus ?? item.status, "pending"),
+      confirmationMode: normalizeText(payment.confirmationMode, "manual"),
+    },
+    status: normalizeStatus(item.status ?? payment.status, "pending"),
     createdAt: normalizeText(item.createdAt ?? item.requestedAt ?? item.date ?? item.when, new Date().toISOString()),
     reviewedAt: normalizeText(item.reviewedAt ?? item.updatedAt, ""),
     reviewedBy: normalizeText(item.reviewedBy ?? item.adminUser, ""),
@@ -663,6 +701,12 @@ function reviewWithdrawal({ withdrawalId, decision, reviewer, reason }) {
     const reviewed = {
       ...current,
       status: normalizedDecision,
+      payment: current.payment && typeof current.payment === "object"
+        ? {
+            ...current.payment,
+            status: normalizedDecision,
+          }
+        : current.payment,
       reviewedAt: new Date().toISOString(),
       reviewedBy: normalizeText(reviewer, "admin"),
       reviewReason: normalizeText(reason, ""),

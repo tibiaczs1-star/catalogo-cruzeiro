@@ -1,8 +1,10 @@
 # Handoff
 
-Updated: 2026-05-18T11:09:44-05:00
+Updated: 2026-05-18T12:27:12.8478437-05:00
 
-PubPaid 2.0 esta na rodada local `20260518-poolspace3`. O trabalho atual focou Sinuca como uma unica mesa com dois modos isolados, agora com controle funcional por `Espaco` no desktop e toque lateral no mobile.
+PubPaid 2.0 esta na rodada local `20260518-withdrawpix1`. O trabalho atual adicionou chave Pix obrigatoria ao pedido de saque: valor + Pix sao enviados juntos, o backend rejeita pedido sem Pix e a chave aparece no historico da carteira e no admin.
+
+Rodada anterior: `20260518-poolspace3` focou Sinuca como uma unica mesa com dois modos isolados, controle funcional por `Espaco` no desktop, toque lateral no mobile e mesa centralizada.
 
 Adicao desta rodada: Sinuca Demo e Sinuca PvP real usam o mesmo fluxo de acao em 3 etapas: `Espaco` trava a mira, `Espaco` inicia a barra de forca, `Espaco` solta o taco. A mesa foi centralizada, recebeu instrucao lateral `como jogar`, e o mobile recebeu botoes laterais de toque para mirar/acionar sem depender do botao inferior.
 
@@ -10,6 +12,18 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## What Changed
 
+- `pubpaid.html`
+  - Formulario de retirada ganhou campo `Chave Pix para receber`.
+- `pubpaid-phaser/ui/walletInterface.js`
+  - Valida Pix antes de enviar, mostra feedback se faltar e exibe Pix no historico de saques.
+- `pubpaid-phaser/services/accountService.js`
+  - Envia `pixKey` para `/api/pubpaid/withdrawals`.
+- `server.js`
+  - Endpoint de saque exige Pix, grava `pixKey`, `destination.pixKey` e `payment.pixKey`, e devolve Pix para conta/admin/export.
+- `pubpaid-runtime.js`
+  - Normalizacao canonica preserva Pix em saques e atualiza status de pagamento na revisao de saque.
+- `pubpaid-admin.html`
+  - Tabela de saques pendentes mostra a chave Pix.
 - `server.js`
   - PvP aceita `pool`, `checkers`, `chess`, `poker`, `truco`, `dicecups`, `cards21`, `darts`.
   - Todas as mesas criadas entram em `readying`; os dois jogadores precisam confirmar `ready`.
@@ -46,6 +60,15 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
   - Mobile/orientacao ajustados para nao travar por lock API.
 
 ## Validation Done
+
+- `20260518-withdrawpix1` local:
+  - `node --check server.js`;
+  - `node --check pubpaid-runtime.js`;
+  - `node --check pubpaid-phaser/services/accountService.js`;
+  - `node --check pubpaid-phaser/ui/walletInterface.js`;
+  - `npm run guard:pubpaid`;
+  - `git diff --check`;
+  - API isolada em servidor temporario: saque sem Pix retornou `400`, saque com Pix retornou `201`, historico trouxe `pixKey` e saldo ficou travado corretamente.
 
 - `20260518-poolspace3` local:
   - `node --check pubpaid-phaser/ui/domGameInterface.js`;
@@ -104,6 +127,7 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## Next
 
+1. Quando o usuario autorizar, reiniciar/deployar `20260518-withdrawpix1`.
 1. Quando o usuario autorizar, subir `20260518-poolspace3`.
 2. Validar online com duas contas Google reais a Sinuca `PvP real`.
 3. Confirmar em aparelho real que Damas Demo landscape mostra a captura encadeada sem falsa trava.

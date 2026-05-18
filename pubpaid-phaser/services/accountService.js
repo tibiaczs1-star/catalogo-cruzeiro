@@ -119,11 +119,12 @@ export async function registerPubpaidDeposit({
   return payload;
 }
 
-export async function requestPubpaidWithdrawal({ amount = 0, sourcePage = "/pubpaid.html" } = {}) {
+export async function requestPubpaidWithdrawal({ amount = 0, pixKey = "", sourcePage = "/pubpaid.html" } = {}) {
   const payload = await requestPubpaidJson("./api/pubpaid/withdrawals", {
     method: "POST",
     body: JSON.stringify({
       amount,
+      pixKey,
       sourcePage
     })
   });

@@ -40,6 +40,16 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Nao usar laboratorio, criador de imagem, prompt antigo ou screenshot antiga como fonte de verdade.
 - Antes de validar PubPaid: `npm run guard:pubpaid`.
 
+## Sistema Diretor De Jogos
+
+- Prompt mestre: `.codex-agents/game-director-system/master-prompt.md`
+- Fluxo: `.codex-agents/game-director-system/flow.md`
+- Estudo inicial: `.codex-agents/game-director-system/study-report-2026-05-18.md`
+- Manifestos: `.codex-agents/agents/game-*.md`
+- Hierarquia: usuario acima; Codex/Hermes como ferramentas finais de decisao operacional; Diretor do Jogo coordena subagentes.
+- Subagentes diretos: arte/design de games, interfaces/HUD, teste/seguranca gamer e linha final.
+- Escritorio Nerd pode alimentar conhecimento tecnico, mas nao mistura direcao de jornal/CZS com direcao de jogos.
+
 ## Proximo Foco
 
 1. Com permissao do usuario, publicar `20260518-poolspace3` e confirmar online com duas contas Google reais a Sinuca unificada: `Demo` local isolada e `PvP real` com fila, ready duplo, tacada por `Espaco`, tacada autoritativa e saldo real.
@@ -48,6 +58,10 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
 
 ## Ultima Rodada Validada
+
+- Build local: `20260518-withdrawpix1`.
+- Saque PubPaid agora exige chave Pix alem do valor: o formulario coleta a chave, o cliente bloqueia pedido sem Pix, o backend rejeita falta de Pix com `400`, grava `pixKey` no saque/campo `destination`/campo `payment` e devolve a chave no historico da carteira e na dashboard admin.
+- Validacao local: `node --check` em `server.js`, `pubpaid-runtime.js`, `accountService.js` e `walletInterface.js`; `npm run guard:pubpaid`; `git diff --check`; teste API isolado em servidor temporario confirmou `400` sem Pix, `201` com Pix, chave no historico e saldo travado corretamente.
 
 - Build local: `20260518-poolspace3`.
 - Sinuca Demo e Sinuca PvP real agora usam o mesmo controle: no desktop, `Espaco` trava a mira, `Espaco` inicia a barra de forca e `Espaco` solta o taco; no mobile, controles laterais fazem as mesmas etapas por toque.

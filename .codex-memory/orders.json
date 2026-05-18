@@ -1,7 +1,47 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-18T16:09:44.000Z",
+  "lastUpdatedAt": "2026-05-18T17:31:55.544Z",
   "orders": [
+    {
+      "id": "2026-05-18-pubpaid-saque-chave-pix-obrigatoria",
+      "createdAt": "2026-05-18T12:27:12.8478437-05:00",
+      "updatedAt": "2026-05-18T12:27:12.8478437-05:00",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "ok vc tem que incluir quando a pessoa for pedir uma retirada, alem do valor da retirada o pix para enviar o dinheiro",
+      "summary": "Exigir chave Pix junto com valor no pedido de saque PubPaid.",
+      "normalizedTasks": [
+        "adicionar campo Pix no formulario de retirada",
+        "validar Pix no cliente antes de enviar",
+        "rejeitar saque sem Pix no backend",
+        "persistir Pix no saque, destino e pagamento",
+        "mostrar Pix no historico da carteira e no admin"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "server.js",
+        "pubpaid-runtime.js",
+        "pubpaid-admin.html",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "tags": [
+        "pubpaid",
+        "wallet",
+        "saque",
+        "pix",
+        "financeiro"
+      ],
+      "nextSteps": [
+        "reiniciar servidor local ou deploy para servir build 20260518-withdrawpix1",
+        "validar visualmente o formulario no navegador real"
+      ],
+      "notes": "Teste API isolado confirmou 400 sem Pix, 201 com Pix, pixKey no historico e saldo travado em lockedWithdrawalCoins."
+    },
     {
       "id": "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura",
       "createdAt": "2026-05-17T22:41:45-05:00",
@@ -368,6 +408,36 @@
         "testar com duas contas Google reais apos deploy autorizado"
       ],
       "notes": "Build local validado: 20260518-poolspace3. Nao publicar sem permissao."
+    },
+    {
+      "id": "2026-05-18-sistema-diretor-de-jogos-com-hierarquia-prompt-mestre-fluxo-e-estudo-inicial-par",
+      "createdAt": "2026-05-18T17:26:39.544Z",
+      "updatedAt": "2026-05-18T17:26:39.544Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Criar sistema de jogos separado do jornal: Diretor do Jogo no topo, subagentes de arte/design, UI/HUD, teste/seguranca gamer e linha final; Escritorio Nerd alimenta conhecimento tecnico; Codex e Hermes ficam como ferramentas finais de decisao operacional, usuario acima de tudo.",
+      "summary": "Sistema Diretor de Jogos com hierarquia, prompt mestre, fluxo e estudo inicial para Codex/Hermes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-18-expandir-estudo-do-sistema-diretor-de-jogos-com-arquitetura-papeis-pipeline-e-su",
+      "createdAt": "2026-05-18T17:31:55.544Z",
+      "updatedAt": "2026-05-18T17:31:55.544Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Completar estudo de 20 minutos do sistema de jogos incluindo camadas/layers, padroes de programacao, tipos de programador, tipos de desenhista, fluxo de desenho para jogos e direcao de jogos.",
+      "summary": "Expandir estudo do Sistema Diretor de Jogos com arquitetura, papeis, pipeline e sub-subagentes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

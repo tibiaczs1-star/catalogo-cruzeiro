@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-poolspace3";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-withdrawpix1";
 import {
   confirmPvpReady,
   drawPoker,
@@ -9,7 +9,7 @@ import {
   moveChess,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260518-poolspace3";
+} from "../services/pvpService.js?v=20260518-withdrawpix1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -19,7 +19,7 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260518-poolspace3";
+} from "../core/checkersRules.js?v=20260518-withdrawpix1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";

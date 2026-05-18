@@ -1,12 +1,17 @@
 # Current State
 
-Updated: 2026-05-18T11:09:44-05:00
+Updated: 2026-05-18T12:27:12.8478437-05:00
 
 ## Active Goal
 
-- PubPaid 2.0 canonico: Sinuca Demo/PvP com controle funcional por Espaco no desktop, toque lateral no mobile e mesa centralizada.
+- PubPaid 2.0 canonico: saque com chave Pix obrigatoria alem do valor.
 
 ## Summary
+
+- Build local atual: `20260518-withdrawpix1`.
+- Retirada PubPaid agora exige a chave Pix para envio do dinheiro.
+- O formulario de carteira tem campo `Chave Pix para receber`, o cliente bloqueia pedido sem Pix, o backend rejeita falta de Pix com `400`, e o Pix fica persistido em `pixKey`, `destination.pixKey` e `payment.pixKey`.
+- Historico da carteira e dashboard admin exibem a chave Pix do saque.
 
 - Build local atual: `20260518-poolspace3`.
 - Sinuca Demo e Sinuca PvP real agora usam o mesmo modelo de acao em 3 etapas:
@@ -44,6 +49,15 @@ Updated: 2026-05-18T11:09:44-05:00
 - Corrigida recursao/render instavel da mesa generica: polling de presenca nao recria botoes enquanto o estado jogavel nao muda.
 
 ## Validation
+
+- Build `20260518-withdrawpix1`:
+  - `node --check server.js`
+  - `node --check pubpaid-runtime.js`
+  - `node --check pubpaid-phaser/services/accountService.js`
+  - `node --check pubpaid-phaser/ui/walletInterface.js`
+  - `npm run guard:pubpaid`
+  - `git diff --check`
+  - Teste API isolado em servidor temporario: saque sem Pix retornou `400`; saque com Pix retornou `201`; historico voltou com `pixKey`; carteira passou de `25` para `18` e `lockedWithdrawalCoins=7`.
 
 - Build `20260518-poolspace3`:
   - `node --check pubpaid-phaser/ui/domGameInterface.js`
@@ -134,6 +148,7 @@ Updated: 2026-05-18T11:09:44-05:00
 
 ## Next
 
+- Reiniciar/deployar para servir `20260518-withdrawpix1` quando o usuario pedir.
 - Nao subir online ate nova permissao do usuario.
 - Quando autorizado, publicar `20260518-poolspace3` e confirmar `/api/pubpaid/build` online.
 - Testar Sinuca com duas contas Google reais e Damas Demo em aparelho real mobile landscape.

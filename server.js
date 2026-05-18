@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260518-poolspace3";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260518-withdrawpix1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -3686,6 +3686,10 @@ function normalizePixToken(value, maxLength = 25) {
     .trim()
     .toUpperCase()
     .slice(0, maxLength);
+}
+
+function cleanPubpaidWithdrawalPixKey(value) {
+  return cleanShortText(value, 120).replace(/[<>]/g, "").trim();
 }
 
 function buildPixField(id, value) {
@@ -14125,6 +14129,7 @@ function buildPubpaidAccountPayload(authUser = {}) {
       id: item.id,
       amount: item.amount || item.amountCoins || 0,
       creditsRequested: item.creditsRequested || item.amountCoins || item.amount || 0,
+      pixKey: item.pixKey || item?.payment?.pixKey || item?.destination?.pixKey || "",
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
       txid: item?.payment?.txid || item.reference || "",
@@ -14742,8 +14747,9 @@ function buildPubpaidAdminPayload() {
     name: item?.user?.name || "",
     googleSub: item?.user?.sub || "",
     walletKey: item.walletKey || "",
-    amount: item.amount || 0,
-    creditsRequested: item.creditsRequested || 0,
+    amount: item.amount || item.amountCoins || 0,
+    creditsRequested: item.creditsRequested || item.amountCoins || item.amount || 0,
+    pixKey: item.pixKey || item?.payment?.pixKey || item?.destination?.pixKey || "",
     status: item.status || "",
     paymentStatus: item?.payment?.status || "",
     txid: item?.payment?.txid || "",
@@ -17576,6 +17582,15 @@ async function handleApi(req, res, pathname, searchParams) {
         error: "Informe um valor valido para a retirada."
       });
     }
+    const pixKey = cleanPubpaidWithdrawalPixKey(
+      body.pixKey || body.withdrawalPixKey || body.destinationPixKey || body.pix || body.key || ""
+    );
+    if (pixKey.length < 3) {
+      return sendJson(res, 400, {
+        ok: false,
+        error: "Informe a chave Pix para receber a retirada."
+      });
+    }
     const wallet = getPubpaidWallet(authUser);
     if (!wallet) {
       return sendJson(res, 400, {
@@ -17601,10 +17616,16 @@ async function handleApi(req, res, pathname, searchParams) {
       walletKey: wallet.walletKey,
       amount: Number(amount.toFixed(2)),
       creditsRequested: Number(amount.toFixed(2)),
+      pixKey,
+      destination: {
+        method: "pix",
+        pixKey
+      },
       status: "aguardando-confirmacao-saque",
       payment: {
         method: "pix-manual",
         txid,
+        pixKey,
         status: "pendente-manual",
         confirmationMode: "manual"
       },
@@ -17630,7 +17651,7 @@ async function handleApi(req, res, pathname, searchParams) {
       ok: true,
       item: nextItem,
       wallet: buildPubpaidAccountPayload(authUser).wallet,
-      message: "Saque solicitado. O valor fica travado por ate 3 horas ou ate revisao manual no admin."
+      message: "Saque solicitado com chave Pix. O valor fica travado por ate 3 horas ou ate revisao manual no admin."
     });
   }
 
@@ -17735,12 +17756,13 @@ async function handleApi(req, res, pathname, searchParams) {
       createdAt: item.createdAt || "",
       player: item?.user?.name || "",
       email: item?.user?.email || "",
-      amount: item.amount || 0,
+      amount: item.amount || item.amountCoins || 0,
+      pixKey: item.pixKey || item?.payment?.pixKey || item?.destination?.pixKey || "",
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
       txid: item?.payment?.txid || ""
     }));
-    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,amount,status,paymentStatus,txid\n", "pubpaid_retiradas.csv");
+    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,amount,pixKey,status,paymentStatus,txid\n", "pubpaid_retiradas.csv");
   }
 
   if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-wallets.csv") {
