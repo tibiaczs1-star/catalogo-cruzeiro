@@ -1,6 +1,6 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-05-17
+Atualizado: 2026-05-18
 
 ## Regra De Existencia
 
@@ -42,12 +42,31 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Publicar e conferir online o deploy `20260517-mobilefix1`.
-2. Confirmar online com duas contas Google reais: Damas abre no novo layout, pareia, confirma, move, registra historico e respeita horizontal no mobile.
+1. Com permissao do usuario, publicar `20260518-poolspace3` e confirmar online com duas contas Google reais a Sinuca unificada: `Demo` local isolada e `PvP real` com fila, ready duplo, tacada por `Espaco`, tacada autoritativa e saldo real.
+2. Testar Damas Demo em aparelho real mobile landscape depois da correcao de captura encadeada: a peça forcada deve permanecer selecionada e a UI deve dizer `Continue a captura`.
 3. Continuar polimento visual por jogo, sempre preservando o fluxo financeiro/PvP real.
 4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
 
 ## Ultima Rodada Validada
+
+- Build local: `20260518-poolspace3`.
+- Sinuca Demo e Sinuca PvP real agora usam o mesmo controle: no desktop, `Espaco` trava a mira, `Espaco` inicia a barra de forca e `Espaco` solta o taco; no mobile, controles laterais fazem as mesmas etapas por toque.
+- Mesa da Sinuca foi centralizada e recebeu instrucao lateral `como jogar`; o mobile nao depende do botao inferior para tacar.
+- Validacao local: `node --check` em `domGameInterface.js` e `PoolGameScene.js`, `npm run guard:pubpaid`, Playwright da Demo em desktop/mobile e PvP real com duas sessoes autenticadas. O PvP registrou `moveCount=1`, W.O. e settlement `108 x 90` a partir de `100 x 100`.
+
+- Build local: `20260518-poolmodes1`.
+- Sinuca virou uma unica mesa no lobby com dois caminhos internos: `Demo` e `PvP real`.
+- `Demo` da Sinuca usa a cena fisica local, sem ficha, sem escrow e sem tocar na carteira; `PvP real` usa arena DOM dedicada, fila real, ready duplo e tacada calculada no backend.
+- Validacao local com backend real isolado e duas sessoes autenticadas: Sinuca passou `waiting -> readying -> active`, aceitou tacada `/api/pubpaid/pvp/pool/shot`, finalizou por W.O. e liquidou carteiras em `108 x 90` a partir de `100 x 100`.
+- Damas Demo mobile nao estava quebrando o motor: a falsa trava vinha de captura obrigatoria em cadeia sem feedback suficiente. Agora a peça forcada e auto-selecionada, a jogada legal fica destacada e a tela mostra `Continue a captura`.
+- Playwright mobile landscape reproduziu 35 lances de Damas Demo depois da correcao sem travar; no ponto da captura em cadeia havia `forcedPiece`, 1 alvo valido e status explicito de continuidade.
+
+- Build online: `20260518-checkersmodes2`.
+- Damas agora e um unico card no lobby com dois caminhos internos: `Demo` e `PvP real`.
+- `Demo` cria treino local contra maquina sem backend PvP, sem ficha, sem escrow, sem carteira e sem alterar saldo.
+- `PvP real` limpa qualquer estado da demo antes de entrar na fila real; smoke online confirmou `checkersGame=none`, `pvpStatus=waiting`, `pvpGameId=checkers` e `join` chamado uma unica vez para Damas.
+- Validado local e online com Google/carteira mockados: lobby tem 1 card de Damas, 1 botao Demo, 1 botao PvP real, 0 cards antigos separados, 64 casas no tabuleiro, sem overflow e sem erros de console.
+- Commits publicados: `3715a553` unificou Damas Demo/PvP; `f237a3a5` limpou o estado da demo antes do PvP.
 
 - Build local: `20260517-mobilefix1`.
 - Mobile voltou a ter regra horizontal: portrait mostra gate de orientacao e nao abre intro/jogo antes de virar.

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-checkersmodes2";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-poolspace3";
 import {
   confirmPvpReady,
   drawPoker,
@@ -9,7 +9,7 @@ import {
   moveChess,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260518-checkersmodes2";
+} from "../services/pvpService.js?v=20260518-poolspace3";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -19,7 +19,7 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260518-checkersmodes2";
+} from "../core/checkersRules.js?v=20260518-poolspace3";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -69,10 +69,26 @@ export function bindDomGameInterface(game) {
     accessBlockBody: document.querySelector("[data-dom-access-block-body]"),
     cancelAccessBlock: document.querySelector("[data-dom-cancel-access-block]"),
     pool: document.querySelector("[data-dom-pool]"),
+    poolKicker: document.querySelector("[data-dom-pool-kicker]"),
     poolTitle: document.querySelector("[data-dom-pool-title]"),
     poolScore: document.querySelector("[data-dom-pool-score]"),
     poolRound: document.querySelector("[data-dom-pool-round]"),
     poolStatus: document.querySelector("[data-dom-pool-status]"),
+    poolLast: document.querySelector("[data-dom-pool-last]"),
+    poolStage: document.querySelector("[data-dom-pool-stage]"),
+    poolSelf: document.querySelector("[data-dom-pool-self]"),
+    poolSelfInitial: document.querySelector("[data-dom-pool-self-initial]"),
+    poolSelfName: document.querySelector("[data-dom-pool-self-name]"),
+    poolSelfMeta: document.querySelector("[data-dom-pool-self-meta]"),
+    poolSelfBalls: document.querySelector("[data-dom-pool-self-balls]"),
+    poolRival: document.querySelector("[data-dom-pool-rival]"),
+    poolRivalInitial: document.querySelector("[data-dom-pool-rival-initial]"),
+    poolRivalName: document.querySelector("[data-dom-pool-rival-name]"),
+    poolRivalMeta: document.querySelector("[data-dom-pool-rival-meta]"),
+    poolRivalBalls: document.querySelector("[data-dom-pool-rival-balls]"),
+    poolShot: document.querySelector("[data-dom-pool-shot]"),
+    poolTouchShot: document.querySelector("[data-dom-pool-touch-shot]"),
+    forfeitPool: document.querySelector("[data-dom-forfeit-pool]"),
     checkers: document.querySelector("[data-dom-checkers]"),
     checkersBoard: document.querySelector("[data-dom-checkers-board]"),
     checkersKicker: document.querySelector("[data-dom-checkers-kicker]"),
@@ -104,7 +120,9 @@ export function bindDomGameInterface(game) {
     result: document.querySelector("[data-dom-result]"),
     resultGame: document.querySelector("[data-dom-result-game]"),
     resultTitle: document.querySelector("[data-dom-result-title]"),
+    resultAmount: document.querySelector("[data-dom-result-amount]"),
     resultBody: document.querySelector("[data-dom-result-body]"),
+    resultNext: document.querySelector("[data-dom-result-next]"),
     resultAgain: document.querySelector("[data-dom-result-again]")
   };
   if (!refs.root) return;
@@ -125,9 +143,13 @@ export function bindDomGameInterface(game) {
     chessSelected: "",
     poolAim: 0,
     poolPower: 0.56,
+    poolControlStage: "aim",
+    poolPowerDirection: 1,
+    poolPowerTimer: null,
     pvpRenderBusy: false,
     pvpTableRenderBusy: false,
     tableRenderKey: "",
+    poolRenderKey: "",
     checkersSound: null,
     lastCheckersSoundKey: "",
     lastCheckersTouchAt: 0
@@ -157,10 +179,40 @@ export function bindDomGameInterface(game) {
     if (refs.matchmaking) refs.matchmaking.dataset.matchState = state;
   };
 
+  const stopPvpPoolPowerMeter = () => {
+    window.clearInterval(local.poolPowerTimer);
+    local.poolPowerTimer = null;
+  };
+
+  const resetPvpPoolControls = () => {
+    stopPvpPoolPowerMeter();
+    local.poolAim = 0;
+    local.poolPower = 0.18;
+    local.poolControlStage = "aim";
+    local.poolPowerDirection = 1;
+  };
+
+  const startPvpPoolPowerMeter = () => {
+    stopPvpPoolPowerMeter();
+    local.poolPowerTimer = window.setInterval(() => {
+      local.poolPower += local.poolPowerDirection * 0.055;
+      if (local.poolPower >= 0.96) {
+        local.poolPower = 0.96;
+        local.poolPowerDirection = -1;
+      } else if (local.poolPower <= 0.18) {
+        local.poolPower = 0.18;
+        local.poolPowerDirection = 1;
+      }
+      renderPvpPool();
+    }, 70);
+  };
+
   const showLobby = () => {
     window.clearInterval(local.pvpPollTimer);
     window.clearTimeout(local.resultReturnTimer);
     window.clearTimeout(local.demoAiTimer);
+    stopPvpPoolPowerMeter();
+    if (isPoolDemoActive()) resetDemoPoolState();
     local.pvpPollTimer = null;
     local.resultReturnTimer = null;
     local.demoAiTimer = null;
@@ -176,8 +228,11 @@ export function bindDomGameInterface(game) {
     local.poolAim = 0;
     local.poolPower = 0.56;
     local.tableRenderKey = "";
+    local.poolRenderKey = "";
     local.lastCheckersSoundKey = "";
-    local.selectedGame = gameState.activeGameId || local.selectedGame || "pool";
+    local.selectedGame = local.selectedGame === "pool-demo"
+      ? "pool"
+      : gameState.activeGameId || local.selectedGame || "pool";
     setPanel("lobby");
     const resetFinishedPvp = gameState.pvpStatus === "finished"
       ? {
@@ -197,19 +252,37 @@ export function bindDomGameInterface(game) {
     });
   };
 
-  const showResult = (gameId, result, body) => {
+  const formatResultAmount = (delta = 0) => {
+    const amount = Number(delta || 0);
+    if (!Number.isFinite(amount) || amount === 0) return "saldo mantido";
+    return `${amount > 0 ? "+" : ""}${amount} créditos`;
+  };
+
+  const showResult = (gameId, result, body, details = {}) => {
     window.clearTimeout(local.resultReturnTimer);
     local.selectedGame = gameId;
     refs.resultGame.textContent = gameLabel(gameId).toLowerCase();
     refs.resultTitle.textContent = resultTitle(result);
+    if (refs.resultAmount) refs.resultAmount.textContent = formatResultAmount(details.delta || 0);
     refs.resultBody.textContent = body;
+    if (refs.resultNext) refs.resultNext.textContent = "Voltando ao lobby em 5s.";
     refs.result.dataset.result = result;
+    updateGameState({
+      activeGameId: gameId,
+      lobbyPhase: "finished",
+      objective: resultTitle(result),
+      focus: `resultado de ${gameLabel(gameId)}`,
+      prompt: body
+    });
     setPanel("result");
     if (PVP_GAMES.has(gameId) && gameState.pvpGameId === gameId) {
       syncPubpaidAccount().finally(() => {
         updateGameState({ prompt: "Resultado confirmado. Saldo real atualizado." });
       });
     }
+    local.resultReturnTimer = window.setTimeout(() => {
+      showLobby();
+    }, 5000);
   };
 
   const showAccessBlock = (reason = "deposit") => {
@@ -260,6 +333,7 @@ export function bindDomGameInterface(game) {
   const gameIdIsCheckers = (gameId) => gameId === "checkers";
 
   const isCheckersDemoActive = () => local.selectedGame === "checkers-demo" && Boolean(local.demoCheckers);
+  const isPoolDemoActive = () => local.selectedGame === "pool-demo";
 
   const gameLabel = (gameId = "") => GAME_LABELS[gameId] || "Mesa";
 
@@ -465,6 +539,12 @@ export function bindDomGameInterface(game) {
     updateGameState({ checkersGame: null });
   };
 
+  const resetDemoPoolState = () => {
+    if (game.scene.isActive("pool-game-scene")) game.scene.stop("pool-game-scene");
+    local.poolRenderKey = "";
+    updateGameState({ poolGame: null });
+  };
+
   const startDemoCheckers = () => {
     window.clearInterval(local.pvpPollTimer);
     resetDemoCheckersState();
@@ -484,6 +564,27 @@ export function bindDomGameInterface(game) {
       pvpQueue: null
     });
     renderPvpCheckers();
+  };
+
+  const startDemoPool = () => {
+    window.clearInterval(local.pvpPollTimer);
+    local.pvpPollTimer = null;
+    resetDemoPoolState();
+    local.selectedGame = "pool-demo";
+    resetPvpPoolControls();
+    local.poolRenderKey = "";
+    refs.pool.dataset.mode = "demo";
+    setPanel("pool");
+    updateGameState({
+      pvpStatus: "idle",
+      pvpGameId: "",
+      pvpSeat: "",
+      pvpMatchId: "",
+      pvpMatch: null,
+      pvpQueue: null
+    });
+    game.scene.stop("game-lobby-scene");
+    game.scene.start("pool-game-scene", { stake: 0, mode: "demo" });
   };
 
   const setPlayerSlot = ({ picture, initial, name, state }, player = null, fallback = {}) => {
@@ -573,8 +674,20 @@ export function bindDomGameInterface(game) {
     }
     if (!board.length || !seat) return;
     local.pvpRenderBusy = true;
-    const selected = demoMode ? local.demoSelected : local.pvpSelected;
-    const legalMoves = demoMode ? local.demoLegalMoves : local.pvpLegalMoves;
+    let selected = demoMode ? local.demoSelected : local.pvpSelected;
+    let legalMoves = demoMode ? local.demoLegalMoves : local.pvpLegalMoves;
+    if (match.forcedPiece && match.status === "active" && match.turn === seat && !selected) {
+      selected = { ...match.forcedPiece };
+      legalMoves = getCheckersLegalMoves(board, seat, match.forcedPiece || null)
+        .filter((move) => move.from.row === match.forcedPiece.row && move.from.col === match.forcedPiece.col);
+      if (demoMode) {
+        local.demoSelected = selected;
+        local.demoLegalMoves = legalMoves;
+      } else {
+        local.pvpSelected = selected;
+        local.pvpLegalMoves = legalMoves;
+      }
+    }
     const boardToDisplay = (row, col) =>
       seat === "playerTwo" ? { row: CHECKERS_SIZE - 1 - row, col: CHECKERS_SIZE - 1 - col } : { row, col };
     const displayToBoard = (row, col) =>
@@ -613,7 +726,7 @@ export function bindDomGameInterface(game) {
           ].filter(Boolean).join(" ");
           const disabled = match.status !== "active" || match.turn !== seat ? " disabled" : "";
           const checker = piece
-            ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${isCheckersKing(piece) ? " is-king" : ""}" ${own ? "draggable=\"true\"" : ""}>${isCheckersKing(piece) ? "D" : ""}</span>`
+            ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${isCheckersKing(piece) ? " is-king" : ""}" ${own ? "draggable=\"true\"" : ""}>${isCheckersKing(piece) ? `<span class="ppg-dom-crown" aria-hidden="true"></span>` : ""}</span>`
             : "";
           const aria = `linha ${rowIndex + 1}, coluna ${colIndex + 1}${piece ? own ? ", sua peça" : ", peça rival" : ""}`;
           return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}" data-display-row="${displayRow}" data-display-col="${displayCol}" aria-label="${aria}"${disabled}>${checker}</button>`;
@@ -645,10 +758,12 @@ export function bindDomGameInterface(game) {
           : demoMode && match.turn === "playerTwo"
             ? "Máquina pensando"
             : demoMode
-              ? "Treino livre"
+              ? match.forcedPiece ? "Continue a captura" : "Treino livre"
           : isAbandoned
             ? abandonedBySelf ? "Reconectando mesa" : "Rival desconectou"
-            : match.turn === seat ? "Sua vez" : "Vez do rival";
+            : match.turn === seat
+              ? match.forcedPiece ? "Continue a captura" : "Sua vez"
+              : "Vez do rival";
       refs.checkersScore.innerHTML = `
         <span class="ppg-checkers-score-token is-self">${ownPieces}</span>
         <i>x</i>
@@ -660,13 +775,17 @@ export function bindDomGameInterface(game) {
           : demoMode && match.turn === "playerTwo"
             ? "A máquina vai responder automaticamente."
             : demoMode
-              ? `Sua vez no treino. Escolha uma peça.${coinLine}`
+              ? match.forcedPiece
+                ? `Captura em cadeia: continue com a peça destacada.${coinLine}`
+                : `Sua vez no treino. Escolha uma peça.${coinLine}`
           : isAbandoned
             ? abandonedBySelf
               ? "Voce voltou a tempo. Reabrindo a mesa..."
               : `Rival caiu. Vitoria por W.O. em ${abandonSeconds}s se ele nao voltar.`
           : match.turn === seat
-            ? `Sua vez. Escolha uma peça.${coinLine}`
+            ? match.forcedPiece
+              ? `Captura em cadeia: continue com a peça destacada.${coinLine}`
+              : `Sua vez. Escolha uma peça.${coinLine}`
             : `Aguardando jogada do rival.${coinLine}`;
       if (refs.forfeitCheckers) {
         refs.forfeitCheckers.disabled = demoMode ? false : match.status !== "active" && match.status !== "abandoned";
@@ -748,8 +867,10 @@ export function bindDomGameInterface(game) {
         const won = match.winner && match.winner === seat;
         const result = match.winner ? (won ? "win" : "loss") : "draw";
         const settlement = match.settlement || {};
+        const stake = Number(settlement.stake || match.stake || 0);
         const payout = Number(settlement.payout || 0);
         const fee = Number(settlement.houseFee || 0);
+        const delta = match.winner ? (won ? payout - stake : -stake) : 0;
         const body = demoMode
           ? `${match.resultSummary || "Treino encerrado."} Nada foi apostado e a carteira nao foi alterada.`
           : match.winner
@@ -758,7 +879,7 @@ export function bindDomGameInterface(game) {
         const resultKey = `${match.id}:${match.updatedAt || match.finishedAt || ""}`;
         if (local.resultHandledMatchId !== resultKey) {
           local.resultHandledMatchId = resultKey;
-          showResult("checkers", result, body);
+          showResult("checkers", result, body, { delta });
         }
       }
     } finally {
@@ -834,6 +955,13 @@ export function bindDomGameInterface(game) {
     const state = match.poolState || {};
     const balls = Array.isArray(state.balls) ? state.balls : [];
     const disabled = match.status !== "active" || match.turn !== seat ? "disabled" : "";
+    const aimDisabled = disabled || local.poolControlStage !== "aim" ? "disabled" : "";
+    const shotLabel =
+      local.poolControlStage === "power"
+        ? "Tacar"
+        : local.poolControlStage === "locked"
+          ? "Iniciar força"
+          : "Travar mira";
     const cue = balls.find((ball) => ball.cue || Number(ball.id) === 0) || { x: 25, y: 25 };
     const pockets = [
       ["p1", 0, 0], ["p2", 50, 0], ["p3", 100, 0],
@@ -855,23 +983,231 @@ export function bindDomGameInterface(game) {
       <div class="ppg-dom-pvp-pool">
         <div class="ppg-dom-pvp-pool-table" style="--pool-aim:${local.poolAim}deg;--cue-x:${aimX}%;--cue-y:${aimY}%">
           ${pockets}
+          <span class="ppg-pool-cue" aria-hidden="true"></span>
           <span class="ppg-pool-aim-line"></span>
           ${ballMarkup}
         </div>
         <div class="ppg-pool-controls">
-          <label><span>Mira ${local.poolAim}°</span><input type="range" min="-180" max="180" step="5" value="${local.poolAim}" data-pool-aim ${disabled}></label>
-          <label><span>Força ${Math.round(local.poolPower * 100)}%</span><input type="range" min="10" max="100" step="5" value="${Math.round(local.poolPower * 100)}" data-pool-power ${disabled}></label>
-          <button type="button" class="primary" data-pool-shoot ${disabled}>Tacada PvP</button>
+          <label><span>Mira ${local.poolAim}°</span><input type="range" min="-180" max="180" step="5" value="${local.poolAim}" data-pool-aim ${aimDisabled}></label>
+          <label><span>Força ${Math.round(local.poolPower * 100)}%</span><input type="range" min="10" max="100" step="5" value="${Math.round(local.poolPower * 100)}" data-pool-power disabled></label>
+          <button type="button" class="primary" data-pool-shoot ${disabled}>${shotLabel}</button>
         </div>
         <p class="ppg-table-note">${last.at ? `Ultima tacada: ${last.pocketed?.length || 0} bola(s), ${last.remaining ?? 0} restantes.` : "Tacada calculada no servidor, com turno e placar compartilhados."}</p>
       </div>
     `;
   };
 
+  const renderDemoPool = (state = gameState.poolGame || {}) => {
+    if (!refs.pool || !state) return;
+    refs.pool.dataset.mode = "demo";
+    if (refs.poolKicker) refs.poolKicker.textContent = "treino livre";
+    if (refs.poolTitle) refs.poolTitle.textContent = state.phase === "finished" ? "Mesa encerrada" : "Sinuca demo";
+    if (refs.poolStatus) refs.poolStatus.textContent = gameState.prompt || "Trave mira e força para tacar.";
+    if (refs.poolScore) refs.poolScore.textContent = `${state.playerScore || 0} x ${state.aiScore || 0}`;
+    if (refs.poolRound) refs.poolRound.textContent = `tacada ${Math.min(state.round || 1, state.maxRounds || 12)}/${state.maxRounds || 12}`;
+    if (refs.poolLast) refs.poolLast.textContent = state.phase === "finished" ? "Série encerrada." : "Mesa física ativa no salão.";
+    if (refs.poolStage) refs.poolStage.innerHTML = "";
+    local.poolRenderKey = "";
+    setCheckersPlayerCard({
+      root: refs.poolSelf,
+      initial: refs.poolSelfInitial,
+      name: refs.poolSelfName,
+      meta: refs.poolSelfMeta,
+      pieces: refs.poolSelfBalls
+    }, currentPvpPlayer() || { name: "Você" }, {
+      pieces: state.playerScore || 0,
+      active: state.phase !== "finished",
+      connected: true,
+      label: "treino"
+    });
+    setCheckersPlayerCard({
+      root: refs.poolRival,
+      initial: refs.poolRivalInitial,
+      name: refs.poolRivalName,
+      meta: refs.poolRivalMeta,
+      pieces: refs.poolRivalBalls
+    }, { name: "Mesa" }, {
+      pieces: state.aiScore || 0,
+      active: false,
+      connected: true,
+      label: "bolas restantes"
+    });
+    if (refs.forfeitPool) {
+      refs.forfeitPool.hidden = false;
+      refs.forfeitPool.disabled = false;
+      refs.forfeitPool.textContent = "Reiniciar demo";
+    }
+    if (refs.poolShot) {
+      refs.poolShot.hidden = false;
+      refs.poolShot.disabled = state.phase !== "aim";
+      refs.poolShot.textContent =
+        state.phase === "finished"
+          ? "Mesa encerrada"
+          : state.phase === "rolling"
+            ? "Bolas rolando"
+          : state.lockStage === "power"
+            ? "Tacar"
+            : state.lockStage === "locked"
+              ? "Iniciar força"
+            : "Travar mira";
+    }
+    if (refs.poolTouchShot) {
+      refs.poolTouchShot.disabled = state.phase !== "aim";
+      refs.poolTouchShot.textContent =
+        state.phase === "finished"
+          ? "Fim"
+          : state.phase === "rolling"
+            ? "..."
+          : state.lockStage === "power"
+            ? "Tacar"
+            : state.lockStage === "locked"
+              ? "Força"
+              : "Mira";
+    }
+  };
+
+  const renderPvpPool = () => {
+    const match = gameState.pvpMatch;
+    const seat = gameState.pvpSeat;
+    if (!match || !seat || !refs.pool) return;
+    if (match.status === "finished") {
+      finishGenericMatchIfNeeded(match, "pool", seat);
+      return;
+    }
+    if (match.status === "readying") {
+      setPanel("matchmaking");
+      renderMatchmakingState();
+      return;
+    }
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const state = match.poolState || {};
+    if (match.status !== "active" || match.turn !== seat) {
+      if (local.poolControlStage !== "aim" || local.poolPowerTimer) resetPvpPoolControls();
+    }
+    const isAbandoned = match.status === "abandoned";
+    const abandonedBySelf = isAbandoned && match.abandonedBy === seat;
+    const abandonSeconds = secondsUntil(match.deadlineAt);
+    const ownScore = Number(state[`${seat}Score`] || 0);
+    const rivalScore = Number(state[`${rivalSeat}Score`] || 0);
+    refs.pool.dataset.mode = "pvp";
+    if (refs.poolKicker) refs.poolKicker.textContent = "ranked pvp";
+    if (refs.poolTitle) {
+      refs.poolTitle.textContent =
+        match.status === "finished"
+          ? "Mesa encerrada"
+          : isAbandoned
+            ? abandonedBySelf ? "Reconectando mesa" : "Rival desconectou"
+            : match.turn === seat ? "Sua vez" : "Vez do rival";
+    }
+    if (refs.poolStatus) {
+      refs.poolStatus.textContent =
+        match.status === "finished"
+          ? match.resultSummary || "Partida encerrada."
+          : isAbandoned
+            ? abandonedBySelf
+              ? "Voce voltou a tempo. Reabrindo a mesa..."
+              : `Rival caiu. Vitoria por W.O. em ${abandonSeconds}s se ele nao voltar.`
+            : match.turn === seat
+              ? `${displayNameFor(match[seat])}, escolha mira e força.`
+              : "Aguardando tacada do rival.";
+    }
+    if (refs.poolScore) refs.poolScore.textContent = `${ownScore} x ${rivalScore}`;
+    if (refs.poolRound) refs.poolRound.textContent = `${match.moveCount || 0} tacadas`;
+    if (refs.poolLast) {
+      refs.poolLast.textContent = state.lastShot?.at
+        ? `${state.lastShot.pocketed?.length || 0} bola(s) na ultima tacada.`
+        : "Triangulo montado.";
+    }
+    const ballsKey = Array.isArray(state.balls)
+      ? state.balls.map((ball) => [ball.id, ball.x, ball.y, ball.pocketed ? 1 : 0].join(":")).join("|")
+      : "";
+    renderStablePoolStage(
+      `pool:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolAim}:${local.poolPower}:${local.poolControlStage}`,
+      renderPoolTableMarkup(match, seat)
+    );
+    setCheckersPlayerCard({
+      root: refs.poolSelf,
+      initial: refs.poolSelfInitial,
+      name: refs.poolSelfName,
+      meta: refs.poolSelfMeta,
+      pieces: refs.poolSelfBalls
+    }, match[seat] || currentPvpPlayer() || {}, {
+      pieces: ownScore,
+      active: match.status === "active" && match.turn === seat,
+      connected: Boolean(match.presence?.[seat]?.connected ?? true),
+      label: "sua mesa"
+    });
+    setCheckersPlayerCard({
+      root: refs.poolRival,
+      initial: refs.poolRivalInitial,
+      name: refs.poolRivalName,
+      meta: refs.poolRivalMeta,
+      pieces: refs.poolRivalBalls
+    }, match[rivalSeat] || rivalPvpPlayer() || {}, {
+      pieces: rivalScore,
+      active: match.status === "active" && match.turn === rivalSeat,
+      connected: Boolean(match.presence?.[rivalSeat]?.connected ?? true),
+      label: "online"
+    });
+    if (refs.forfeitPool) {
+      refs.forfeitPool.hidden = false;
+      refs.forfeitPool.disabled = match.status !== "active" && match.status !== "abandoned";
+      refs.forfeitPool.textContent = match.status === "finished" ? "Mesa encerrada" : "Desistir";
+    }
+    if (refs.poolShot) refs.poolShot.hidden = true;
+    if (refs.poolTouchShot) {
+      refs.poolTouchShot.disabled = match.status !== "active" || match.turn !== seat;
+      refs.poolTouchShot.textContent =
+        local.poolControlStage === "power"
+          ? "Tacar"
+          : local.poolControlStage === "locked"
+            ? "Força"
+            : "Mira";
+    }
+    updateGameState({
+      activeGameId: "pool",
+      lobbyPhase: match.status === "finished" ? "finished" : "playing",
+      objective: "Vencer Sinuca real",
+      focus: "mesa PvP de Sinuca",
+      prompt: refs.poolStatus?.textContent || "Mesa de Sinuca"
+    });
+  };
+
   const renderStableTableBody = (key = "", markup = "") => {
     if (local.tableRenderKey === key) return;
     refs.tableBody.innerHTML = markup;
     local.tableRenderKey = key;
+  };
+
+  const renderStablePoolStage = (key = "", markup = "") => {
+    if (!refs.poolStage || local.poolRenderKey === key) return;
+    refs.poolStage.innerHTML = markup;
+    local.poolRenderKey = key;
+  };
+
+  const handlePvpPoolShot = (match) => {
+    if (!match?.id || match.status !== "active" || match.turn !== gameState.pvpSeat) return;
+    if (local.poolControlStage === "aim") {
+      local.poolControlStage = "locked";
+      local.poolPower = 0.18;
+      renderPvpPool();
+      return;
+    }
+    if (local.poolControlStage === "locked") {
+      local.poolControlStage = "power";
+      local.poolPower = 0.18;
+      local.poolPowerDirection = 1;
+      startPvpPoolPowerMeter();
+      renderPvpPool();
+      return;
+    }
+    stopPvpPoolPowerMeter();
+    shootPool(match.id, local.poolAim, local.poolPower).then((payload) => {
+      if (payload?.ok) {
+        resetPvpPoolControls();
+        routePvpState(payload);
+      }
+    });
   };
 
   const finishGenericMatchIfNeeded = (match, gameId, seat) => {
@@ -881,15 +1217,17 @@ export function bindDomGameInterface(game) {
     const won = match.winner && match.winner === seat;
     const result = match.winner ? (won ? "win" : "loss") : "draw";
     const settlement = match.settlement || {};
+    const stake = Number(settlement.stake || match.stake || 0);
     const payout = Number(settlement.payout || 0);
     const fee = Number(settlement.houseFee || 0);
+    const delta = match.winner ? (won ? payout - stake : -stake) : 0;
     const body = match.winner
       ? `${match.resultSummary || "Partida encerrada."} ${won ? `Você recebeu ${payout} créditos reais.` : "Você perdeu a mesa."} Casa: ${fee}.`
       : `${match.resultSummary || "Empate."} Entrada devolvida.`;
     const resultKey = `${match.id}:${match.updatedAt || match.finishedAt || ""}`;
     if (local.resultHandledMatchId !== resultKey) {
       local.resultHandledMatchId = resultKey;
-      showResult(gameId, result, body);
+      showResult(gameId, result, body, { delta });
     }
   };
 
@@ -899,6 +1237,10 @@ export function bindDomGameInterface(game) {
     const seat = gameState.pvpSeat;
     const gameId = gameState.pvpGameId || local.selectedGame;
     if (!match || !seat || !refs.table) return;
+    if (match.status === "finished") {
+      finishGenericMatchIfNeeded(match, gameId, seat);
+      return;
+    }
     local.pvpTableRenderBusy = true;
     try {
     if (match.status === "readying") {
@@ -934,7 +1276,7 @@ export function bindDomGameInterface(game) {
         : "";
       refs.tableScore.textContent = `${state.playerOneScore || 0} x ${state.playerTwoScore || 0}`;
       renderStableTableBody(
-        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolAim}:${local.poolPower}`,
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolAim}:${local.poolPower}:${local.poolControlStage}`,
         renderPoolTableMarkup(match, seat)
       );
     } else if (gameId === "poker") {
@@ -985,7 +1327,6 @@ export function bindDomGameInterface(game) {
       focus: `mesa PvP de ${gameLabel(gameId)}`,
       prompt: refs.tableStatus.textContent
     });
-    finishGenericMatchIfNeeded(match, gameId, seat);
     } finally {
       local.pvpTableRenderBusy = false;
     }
@@ -998,12 +1339,19 @@ export function bindDomGameInterface(game) {
       renderMatchmakingState();
       return;
     }
-    if (payload.state === "active" || payload.state === "abandoned" || payload.state === "finished") {
+    if (payload.state === "finished") {
       const gameId = payload.gameId || gameState.pvpGameId || local.selectedGame;
-      setPanel(gameId === "checkers" ? "checkers" : "table");
+      const seat = payload.seat || gameState.pvpSeat;
+      if (payload.match && seat) finishGenericMatchIfNeeded(payload.match, gameId, seat);
+      return;
+    }
+    if (payload.state === "active" || payload.state === "abandoned") {
+      const gameId = payload.gameId || gameState.pvpGameId || local.selectedGame;
+      setPanel(gameId === "checkers" ? "checkers" : gameId === "pool" ? "pool" : "table");
       game.scene.stop("game-lobby-scene");
       game.scene.stop("pool-game-scene");
       if (gameId === "checkers") renderPvpCheckers();
+      else if (gameId === "pool") renderPvpPool();
       else renderPvpTable();
       return;
     }
@@ -1021,10 +1369,10 @@ export function bindDomGameInterface(game) {
   const startRealPvpGame = async (gameId = "checkers") => {
     local.selectedGame = gameId;
     if (gameId === "checkers") resetDemoCheckersState();
+    if (gameId === "pool") resetDemoPoolState();
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
-    local.poolAim = 0;
-    local.poolPower = 0.56;
+    resetPvpPoolControls();
     refs.matchmakingGame.textContent = gameLabel(gameId);
     refs.matchmakingStatus.textContent = "Procurando jogador real com aposta equivalente.";
     setMatchmakingState("searching");
@@ -1129,6 +1477,8 @@ export function bindDomGameInterface(game) {
       const demoGame = demoButton.dataset.domStartDemo || "checkers";
       if (demoGame === "checkers") {
         startDemoCheckers();
+      } else if (demoGame === "pool") {
+        startDemoPool();
       } else {
         showAccessBlock("unavailable");
       }
@@ -1187,6 +1537,26 @@ export function bindDomGameInterface(game) {
       game.events.emit("pubpaid:pool-dom-shot");
       return;
     }
+    if (event.target.closest("[data-dom-pool-touch-shot]")) {
+      if (isPoolDemoActive()) {
+        game.events.emit("pubpaid:pool-dom-shot");
+        return;
+      }
+      const match = gameState.pvpMatch;
+      if (gameState.pvpGameId === "pool" && match?.id) handlePvpPoolShot(match);
+      return;
+    }
+    const poolAimStep = event.target.closest("[data-dom-pool-aim-step]");
+    if (poolAimStep) {
+      const step = Number(poolAimStep.dataset.domPoolAimStep || 0);
+      if (isPoolDemoActive()) {
+        game.events.emit("pubpaid:pool-dom-aim-step", step);
+      } else if (gameState.pvpGameId === "pool" && local.poolControlStage === "aim") {
+        local.poolAim = clampUiNumber(local.poolAim + step, -180, 180, 0);
+        renderPvpPool();
+      }
+      return;
+    }
     if (event.target.closest("[data-dom-pvp-ready]")) {
       const matchId = gameState.pvpMatch?.id || "";
       if (!matchId) return;
@@ -1220,6 +1590,25 @@ export function bindDomGameInterface(game) {
       });
       return;
     }
+    if (event.target.closest("[data-dom-forfeit-pool]")) {
+      const button = event.target.closest("[data-dom-forfeit-pool]");
+      if (isPoolDemoActive()) {
+        game.scene.stop("pool-game-scene");
+        game.scene.start("pool-game-scene", { stake: 0, mode: "demo" });
+        return;
+      }
+      button.disabled = true;
+      button.textContent = "Desistindo...";
+      leavePubpaidPvpQueue("pool", { reason: "forfeit", forfeit: true }).then((payload) => {
+        if (payload?.ok) routePvpState(payload);
+        else {
+          button.disabled = false;
+          button.textContent = "Desistir";
+          updateGameState({ prompt: payload?.error || "Nao foi possivel desistir agora." });
+        }
+      });
+      return;
+    }
     if (event.target.closest("[data-dom-generic-forfeit]")) {
       const gameId = gameState.pvpGameId || local.selectedGame || "checkers";
       const button = event.target.closest("[data-dom-generic-forfeit]");
@@ -1237,9 +1626,7 @@ export function bindDomGameInterface(game) {
     }
     if (event.target.closest("[data-pool-shoot]")) {
       const match = gameState.pvpMatch;
-      if (match?.id) {
-        shootPool(match.id, local.poolAim, local.poolPower).then((payload) => payload?.ok && routePvpState(payload));
-      }
+      if (match?.id) handlePvpPoolShot(match);
       return;
     }
     const pokerCard = event.target.closest("[data-poker-card]");
@@ -1298,6 +1685,19 @@ export function bindDomGameInterface(game) {
     if (cell) {
       if (Date.now() - local.lastCheckersTouchAt < 360) return;
       handleCheckersCell(cell);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code !== "Space" || event.repeat) return;
+    if (isPoolDemoActive()) {
+      event.preventDefault();
+      game.events.emit("pubpaid:pool-dom-shot");
+      return;
+    }
+    if (gameState.pvpGameId === "pool" && gameState.pvpMatch?.status === "active") {
+      event.preventDefault();
+      handlePvpPoolShot(gameState.pvpMatch);
     }
   });
 
@@ -1371,15 +1771,45 @@ export function bindDomGameInterface(game) {
   document.addEventListener("input", (event) => {
     const aimInput = event.target.closest?.("[data-pool-aim]");
     if (aimInput) {
+      if (local.poolControlStage !== "aim") return;
       local.poolAim = clampUiNumber(aimInput.value, -180, 180, 0);
-      renderPvpTable();
+      gameState.pvpGameId === "pool" ? renderPvpPool() : renderPvpTable();
       return;
     }
     const powerInput = event.target.closest?.("[data-pool-power]");
     if (powerInput) {
       local.poolPower = clampUiNumber(Number(powerInput.value) / 100, 0.1, 1, 0.56);
-      renderPvpTable();
+      gameState.pvpGameId === "pool" ? renderPvpPool() : renderPvpTable();
     }
+  });
+
+  const updatePoolAimFromPointer = (event) => {
+    const table = event.target.closest?.(".ppg-dom-pvp-pool-table");
+    if (!table || gameState.pvpGameId !== "pool") return false;
+    const match = gameState.pvpMatch;
+    if (!match || match.status !== "active" || match.turn !== gameState.pvpSeat || local.poolControlStage !== "aim") return false;
+    const rect = table.getBoundingClientRect();
+    const cue = Array.isArray(match.poolState?.balls)
+      ? match.poolState.balls.find((ball) => ball.cue || Number(ball.id) === 0)
+      : null;
+    if (!cue || !rect.width || !rect.height) return false;
+    const cueX = rect.left + (clampUiNumber(cue.x, 0, 100, 25) / 100) * rect.width;
+    const cueY = rect.top + (clampUiNumber(Number(cue.y) * 2, 0, 100, 50) / 100) * rect.height;
+    const dx = Number(event.clientX) - cueX;
+    const dy = Number(event.clientY) - cueY;
+    if (Math.hypot(dx, dy) < 8) return false;
+    local.poolAim = Math.round((Math.atan2(dy, dx) * 180) / Math.PI);
+    renderPvpPool();
+    return true;
+  };
+
+  document.addEventListener("pointerdown", (event) => {
+    updatePoolAimFromPointer(event);
+  });
+
+  document.addEventListener("pointermove", (event) => {
+    if (!(event.buttons & 1)) return;
+    updatePoolAimFromPointer(event);
   });
 
   window.addEventListener("pagehide", () => {
@@ -1406,6 +1836,7 @@ export function bindDomGameInterface(game) {
   game.events.on("pubpaid:block-paid-game", showAccessBlock);
   game.events.on("pubpaid:start-real-checkers", startRealCheckers);
   game.events.on("pubpaid:pool-result", ({ result, body } = {}) => {
+    if (isPoolDemoActive()) return;
     showResult("pool", result || "draw", body || "Partida encerrada.");
   });
   game.events.on("pubpaid:checkers-result", ({ result, body } = {}) => {
@@ -1437,6 +1868,10 @@ export function bindDomGameInterface(game) {
         state.lobbyPhase === "finished" ? "resultado" :
         "pronto";
     }
+    if (PVP_GAMES.has(state.pvpGameId) && state.pvpMatch?.status === "finished" && state.pvpSeat) {
+      finishGenericMatchIfNeeded(state.pvpMatch, state.pvpGameId, state.pvpSeat);
+      if (!refs.result.hidden) return;
+    }
     if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
     if (state.lobbyPhase === "blocked" && !refs.accessBlock.hidden) return;
     if (state.lobbyPhase === "blocked") {
@@ -1447,12 +1882,11 @@ export function bindDomGameInterface(game) {
     if (state.currentScene === "game-lobby" || state.lobbyPhase === "selecting") {
       if (refs.pool.hidden && refs.checkers.hidden && refs.table?.hidden !== false && refs.result.hidden && refs.matchmaking.hidden) setPanel("lobby");
     }
-    if (state.activeGameId === "pool" && state.poolGame) {
-      refs.poolScore.textContent = `${state.poolGame.playerScore || 0} x ${state.poolGame.aiScore || 0}`;
-      refs.poolRound.textContent = `rodada ${Math.min(state.poolGame.round || 1, state.poolGame.maxRounds || 4)}/${state.poolGame.maxRounds || 4}`;
-      refs.poolTitle.textContent = state.poolGame.phase === "finished" ? "Mesa encerrada" : "Mira e força";
-      refs.poolStatus.textContent = state.prompt || "Trave mira e força para tacar.";
+    if (state.activeGameId === "pool" && state.poolGame && isPoolDemoActive()) {
+      if (refs.pool.hidden) setPanel("pool");
+      renderDemoPool(state.poolGame);
     }
+    if (state.lobbyPhase === "finished" && !refs.result.hidden) return;
     if (PVP_GAMES.has(state.pvpGameId) && (state.pvpMatch || state.pvpQueue)) {
       if (state.pvpMatch?.status === "readying" || state.pvpStatus === "waiting") {
         if (refs.matchmaking.hidden) setPanel("matchmaking");
@@ -1463,6 +1897,9 @@ export function bindDomGameInterface(game) {
         if (state.pvpGameId === "checkers") {
           if (refs.checkers.hidden) setPanel("checkers");
           renderPvpCheckers();
+        } else if (state.pvpGameId === "pool") {
+          if (refs.pool.hidden) setPanel("pool");
+          renderPvpPool();
         } else {
           if (refs.table?.hidden) setPanel("table");
           renderPvpTable();

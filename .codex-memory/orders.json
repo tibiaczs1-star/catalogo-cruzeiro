@@ -1,7 +1,109 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T08:50:32.213Z",
+  "lastUpdatedAt": "2026-05-18T16:09:44.000Z",
   "orders": [
+    {
+      "id": "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura",
+      "createdAt": "2026-05-17T22:41:45-05:00",
+      "updatedAt": "2026-05-17T22:41:45-05:00",
+      "status": "in-progress",
+      "source": "chat",
+      "rawRequest": "continue a fazer o jogo de sinuca, quando termina cheque se ta funcionando e depis valide o pvp- e mais uma coisa o jogo de damas travou no meio numa demo mobile, veja o que acoteceu.",
+      "summary": "Unificar Sinuca em Demo/PvP, validar o PvP real e corrigir a falsa trava da Damas Demo mobile.",
+      "normalizedTasks": [
+        "transformar Sinuca em card unico com Demo e PvP real",
+        "dar arena visual dedicada para Demo e PvP de Sinuca",
+        "validar Sinuca Demo em desktop e mobile landscape",
+        "validar Sinuca PvP contra backend real com duas sessoes",
+        "investigar a aparente trava da Damas Demo mobile",
+        "corrigir feedback de captura obrigatoria em cadeia"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/PoolGameScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "server.js",
+        "assets/pubpaid/pool/pubpaid-pool-room-v1.png",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/pool/pubpaid-pool-room-v1.png",
+        ".codex-temp/pubpaid-pool-demo-desktop.png",
+        ".codex-temp/pubpaid-pool-pvp-desktop.png",
+        ".codex-temp/pubpaid-pool-demo-mobile.png",
+        ".codex-temp/pubpaid-checkersdemo-mobile-regression.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "demo",
+        "pvp",
+        "damas",
+        "mobile",
+        "captura-encadeada"
+      ],
+      "nextSteps": [
+        "aguardar autorizacao para deploy",
+        "validar online com duas contas Google reais",
+        "confirmar Damas Demo em aparelho real"
+      ],
+      "notes": "Build local 20260518-poolmodes1. Sinuca real passou waiting -> readying -> active, tacada backend, W.O. e settlement. Damas mobile nao congelava o motor; faltava indicar a captura obrigatoria em cadeia."
+    },
+    {
+      "id": "2026-05-17-pubpaid-pvpgames-sinuca-xadrez-poker-truco-dados",
+      "createdAt": "2026-05-17T06:12:30-05:00",
+      "updatedAt": "2026-05-17T06:18:00-05:00",
+      "status": "in-progress",
+      "source": "chat",
+      "rawRequest": "Recriar sinuca com mira/forca/fisica/triangulo e adicionar xadrez, poker, truco e dados, mantendo tudo funcional no canon PubPaid 2.0.",
+      "summary": "Implementar mesas canonicas PubPaid 2.0 com backend autoritativo basico, reconexao/W.O. e sinuca fisica.",
+      "normalizedTasks": [
+        "corrigir PvP com reconexao de 60 segundos e W.O.",
+        "adicionar botao Desistir",
+        "reconstruir Damas visualmente com grid correto e mao animada",
+        "reconstruir Sinuca com fisica local, mira, forca, 15 bolas e triangulo",
+        "adicionar Xadrez PvP com chess.js",
+        "adicionar Poker, Truco e Dados como mesas PvP simples",
+        "validar guard PubPaid e fluxo backend com duas sessoes"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/services/pvpService.js",
+        "pubpaid-phaser/scenes/PoolGameScene.js",
+        "package.json",
+        "package-lock.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "pvp",
+        "sinuca",
+        "xadrez",
+        "poker",
+        "truco",
+        "dados",
+        "fullscreen"
+      ],
+      "nextSteps": [
+        "validar mobile/landscape",
+        "deploy online",
+        "testar com duas contas Google reais"
+      ],
+      "notes": "Build local 20260517-pvpgames1. Backend local passou em checkers reconnect/forfeit, chess move, poker, dicecups e truco. Usuario reforcou: desde que tudo funcione, arte e reposicao posterior."
+    },
     {
       "id": "2026-05-17-separar-jogo-e-site",
       "createdAt": "2026-05-17T12:05:00.000Z",
@@ -140,6 +242,132 @@
         "avaliar demo e decidir se vira briefing PixelLab para assets finais"
       ],
       "notes": ""
+    },
+    {
+      "id": "2026-05-17-retomar-personagem-pixellab-do-pubpaid-e-gerar-animacoes-basicas-de-avatar",
+      "createdAt": "2026-05-17T10:10:21.480Z",
+      "updatedAt": "2026-05-17T10:46:14.201Z",
+      "status": "superseded",
+      "source": "chat",
+      "rawRequest": "continuar desenhando o personagem do PubPaid",
+      "summary": "Retomar personagem PixelLab do PubPaid e gerar animacoes basicas de avatar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Substituido pela retomada dos anchors locais aprovados: handmade pixel, pet azul e realistic-host-walk-demo."
+    },
+    {
+      "id": "2026-05-17-criar-pacote-local-de-arte-pixel-com-pelo-menos-10-veiculos-entre-carros-e-motos",
+      "createdAt": "2026-05-17T10:17:08.927Z",
+      "updatedAt": "2026-05-17T10:46:14.201Z",
+      "status": "rejected",
+      "source": "chat",
+      "rawRequest": "agora carros quero pelo menos 10 modelos entre carros e motos ja com motoristas",
+      "summary": "Criar pacote local de arte pixel com pelo menos 10 veiculos entre carros e motos, todos com motoristas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Rejeitado pelo usuario; nao usar como referencia de estilo ou asset ativo."
+    },
+    {
+      "id": "2026-05-17-refinar-pacote-de-veiculos-para-arte-pixel-em-estilo-chibi-realista-preservando-",
+      "createdAt": "2026-05-17T10:37:57.511Z",
+      "updatedAt": "2026-05-17T10:46:14.201Z",
+      "status": "rejected",
+      "source": "chat",
+      "rawRequest": "chibi mais realista",
+      "summary": "Refinar pacote de veiculos para arte pixel em estilo chibi realista, preservando motoristas e leitura premium.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Rejeitado pelo usuario; nao usar como referencia de estilo ou asset ativo."
+    },
+    {
+      "id": "2026-05-17-corrigir-direcao-de-arte-pixel-abandonar-tentativa-de-veiculos-blockout-e-retoma",
+      "createdAt": "2026-05-17T10:39:46.763Z",
+      "updatedAt": "2026-05-17T10:46:14.201Z",
+      "status": "active",
+      "source": "chat",
+      "rawRequest": "abandonar os veiculos gerados; retornar ao modelo de conceito: orc feliz, homem feliz chibi e personagem em 4 direcoes",
+      "summary": "Corrigir direcao de arte pixel: abandonar tentativa de veiculos blockout e retomar modelo conceitual chibi feliz em 4 direcoes.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".codex-temp/pixellab-tests/codex-handmade-pixel",
+        ".codex-temp/pixellab-tests/realistic-host-walk-demo",
+        ".codex-temp/pixel-art-discarded/2026-05-17-bad-detour",
+        "C:/Users/junio/.codex/skills/pixel-art-director/SKILL.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/pixellab-tests/codex-handmade-pixel",
+        ".codex-temp/pixellab-tests/codex-handmade-pixel/codex-blue-pet-v1.bmp",
+        ".codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png",
+        ".codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-vertical-spritesheet.png"
+      ],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Direcao corrigida: lixo removido da area ativa, anchors aprovados preservados e skill pixel-art-director criada."
+    },
+    {
+      "id": "2026-05-18-criar-candidato-visual-premium-de-damas-e-entregar-previews-mobile-desktop-sem-d",
+      "createdAt": "2026-05-18T00:15:53.960Z",
+      "updatedAt": "2026-05-18T00:15:53.960Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Trabalho local de arte/interface da Damas PubPaid: botoes, pecas, cenario, background e previews PNG mobile/desktop para aprovacao antes de subir.",
+      "summary": "Criar candidato visual premium de Damas e entregar previews mobile/desktop sem deploy.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-18-corrigir-controle-sinuca-espaco-e-centralizar-mesa",
+      "createdAt": "2026-05-18T11:09:44-05:00",
+      "updatedAt": "2026-05-18T11:09:44-05:00",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "No desktop, Espaco deve ser sempre o botao de acao da Sinuca: primeiro trava mira, depois inicia forca, depois solta o taco. Aplicar na Demo e no PvP real, colocar instrucao do lado esquerdo e centralizar a mesa.",
+      "summary": "Corrigir controle da Sinuca por Espaco, aplicar em Demo/PvP real, adicionar painel de instrucoes e centralizar mesa.",
+      "normalizedTasks": [
+        "fazer Espaco travar mira na Sinuca Demo e PvP real",
+        "fazer Espaco iniciar barra de forca",
+        "fazer Espaco soltar o taco com a forca atual",
+        "adicionar instrucao lateral de como jogar",
+        "centralizar a mesa de sinuca",
+        "validar Demo e PvP real"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/PoolGameScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-pool-demo-desktop.png",
+        ".codex-temp/pubpaid-pool-pvp-desktop.png",
+        ".codex-temp/pubpaid-pool-demo-mobile.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "Sinuca",
+        "PvP",
+        "demo",
+        "controls"
+      ],
+      "nextSteps": [
+        "aguardar aprovacao do usuario antes de subir online",
+        "testar com duas contas Google reais apos deploy autorizado"
+      ],
+      "notes": "Build local validado: 20260518-poolspace3. Nao publicar sem permissao."
     }
   ]
 }

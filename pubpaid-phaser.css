@@ -1370,14 +1370,30 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-piece.is-king::before {
-  content: "";
+  content: none;
+}
+
+.ppg-dom-crown {
   position: absolute;
   top: 16%;
-  width: 48%;
+  left: 50%;
+  width: 54%;
+  height: 36%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #fff2b6, #ffd06d 58%, #bb7628);
+  clip-path: polygon(0 100%, 8% 26%, 27% 58%, 50% 0, 73% 58%, 92% 26%, 100% 100%);
+  filter: drop-shadow(0 2px 0 rgba(62, 28, 8, 0.5));
+}
+
+.ppg-dom-crown::after {
+  content: "";
+  position: absolute;
+  right: 10%;
+  bottom: 6%;
+  left: 10%;
   height: 18%;
-  border-radius: 0 0 999px 999px;
-  background: rgba(255, 208, 109, 0.96);
-  box-shadow: 0 -4px 0 rgba(255, 246, 220, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 246, 220, 0.82);
 }
 
 .ppg-dom-table {
@@ -1598,6 +1614,26 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   accent-color: #8ef0a3;
 }
 
+.ppg-pool-cue {
+  position: absolute;
+  left: var(--cue-x);
+  top: var(--cue-y);
+  width: clamp(128px, 24vw, 220px);
+  height: 10px;
+  transform:
+    translate(calc(-100% - 16px), -50%)
+    rotate(var(--pool-aim));
+  transform-origin: right center;
+  border: 1px solid rgba(49, 24, 10, 0.92);
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, #4d2412 0 18%, #8b4a22 18% 28%, #c58a42 28% 88%, #f1ddae 88% 96%, #4d7f95 96% 100%);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 246, 220, 0.3);
+  pointer-events: none;
+}
+
 .ppg-table-note {
   margin: 10px 0 0;
   color: #d5dff2;
@@ -1606,23 +1642,67 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-result {
-  top: 74px;
-  right: 18px;
-  left: auto;
-  width: min(340px, calc(100% - 36px));
-  padding: 18px;
-  transform: none;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: auto;
+  padding: clamp(14px, 2vw, 26px);
+  border: 0;
+  background: rgba(2, 5, 12, 0.76);
+  box-shadow: none;
   text-align: center;
 }
 
 .ppg-dom-result[data-result="win"] {
-  border-color: rgba(142, 240, 163, 0.75);
-  animation: ppgResultWin 1.2s ease-in-out infinite alternate;
+  animation: ppgResultBackdropWin 1.2s ease-in-out infinite alternate;
 }
 
 .ppg-dom-result[data-result="loss"] {
-  border-color: rgba(255, 79, 184, 0.75);
-  animation: ppgResultLoss 1.2s ease-in-out infinite alternate;
+  animation: ppgResultBackdropLoss 1.2s ease-in-out infinite alternate;
+}
+
+.ppg-dom-result-card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  width: min(520px, 100%);
+  padding: clamp(18px, 2.4vw, 28px);
+  border: 2px solid rgba(255, 208, 109, 0.38);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    rgba(4, 7, 16, 0.94);
+  background-size: 12px 12px;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.52);
+}
+
+.ppg-dom-result-card h2 {
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.ppg-dom-result-card strong {
+  color: #ffd06d;
+  font-size: clamp(20px, 2.4vw, 30px);
+}
+
+.ppg-dom-result-card p {
+  margin: 0;
+  color: #d5dff2;
+}
+
+.ppg-dom-result-card small {
+  color: #8aa0ba;
+  font-size: 12px;
+}
+
+.ppg-dom-result[data-result="win"] .ppg-dom-result-card {
+  border-color: rgba(142, 240, 163, 0.76);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.52), 0 0 44px rgba(142, 240, 163, 0.18);
+}
+
+.ppg-dom-result[data-result="loss"] .ppg-dom-result-card {
+  border-color: rgba(255, 79, 184, 0.72);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.52), 0 0 44px rgba(255, 79, 184, 0.16);
 }
 
 @media (max-width: 760px) {
@@ -1676,11 +1756,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   }
 
   .ppg-dom-result {
-    top: auto;
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
-    width: auto;
+    inset: 0;
   }
 
   .ppg-dom-game-cards {
@@ -1964,7 +2040,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260518-checkersmodes2") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260518-poolmodes1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -2341,7 +2417,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260518-checkersmodes2");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260518-poolmodes1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 
@@ -4200,6 +4276,495 @@ body.pubpaid-phaser-page .ppg-panel {
   touch-action: pan-y;
 }
 
+/* Premium Pool arena */
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
+  position: fixed;
+  inset: 0;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.ppg-dom-game-ui.is-pool .ppg-dom-pool:not([hidden]) {
+  inset: var(--ppg-safe-top) var(--ppg-safe-right) var(--ppg-safe-bottom) var(--ppg-safe-left);
+  width: auto;
+  height: calc(100dvh - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+  max-height: none;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #02050d;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.ppg-dom-game-ui.is-pool .ppg-dom-pool[data-mode="demo"]:not([hidden]) {
+  background: transparent;
+  pointer-events: none;
+}
+
+.ppg-pool-arena {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(210px, 0.6fr) minmax(360px, 1.52fr) minmax(220px, 0.68fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    "hero hero hero"
+    "players stage side";
+  gap: clamp(10px, 1.35vw, 20px);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(12px, 1.5vw, 22px);
+  isolation: isolate;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(2, 5, 12, 0.9), rgba(2, 5, 12, 0.38) 34%, rgba(2, 5, 12, 0.38) 66%, rgba(2, 5, 12, 0.9)),
+    linear-gradient(180deg, rgba(2, 5, 12, 0.18), rgba(2, 5, 12, 0.88)),
+    radial-gradient(circle at 54% 22%, rgba(255, 208, 109, 0.16), transparent 26%),
+    radial-gradient(circle at 72% 68%, rgba(80, 239, 255, 0.12), transparent 30%),
+    linear-gradient(135deg, rgba(18, 13, 10, 0.92), rgba(3, 7, 16, 0.96));
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-arena {
+  background:
+    linear-gradient(90deg, rgba(2, 5, 12, 0.82), rgba(2, 5, 12, 0.18) 28%, rgba(2, 5, 12, 0.18) 72%, rgba(2, 5, 12, 0.82)),
+    radial-gradient(circle at 50% 18%, rgba(255, 208, 109, 0.11), transparent 28%),
+    transparent;
+}
+
+.ppg-pool-arena::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 50% 44%, transparent 0 30%, rgba(2, 5, 12, 0.18) 66%, rgba(2, 5, 12, 0.58) 100%);
+  background-size: 28px 28px;
+}
+
+.ppg-pool-hero,
+.ppg-pool-player,
+.ppg-pool-sidecar {
+  pointer-events: auto;
+  border: 1px solid rgba(255, 246, 220, 0.13);
+  background: rgba(8, 12, 22, 0.62);
+  backdrop-filter: blur(18px);
+}
+
+.ppg-dom-game-ui.is-pool .ppg-dom-pool header.ppg-pool-hero {
+  position: relative;
+  z-index: 1;
+  grid-area: hero;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  padding: clamp(14px, 1.4vw, 20px);
+}
+
+.ppg-pool-hero h2 {
+  margin: 4px 0 8px;
+  color: #fff6dc;
+  font-size: clamp(24px, 2.8vw, 40px);
+  line-height: 1;
+}
+
+.ppg-pool-hero p {
+  margin: 0;
+  color: #d9e7ef;
+  font-size: clamp(12px, 1.2vw, 15px);
+  line-height: 1.45;
+}
+
+.ppg-pool-score {
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  min-width: clamp(86px, 9vw, 120px);
+  min-height: 74px;
+  padding: 10px 12px;
+  border: 1px solid rgba(142, 240, 163, 0.32);
+  background:
+    radial-gradient(circle, rgba(142, 240, 163, 0.16), transparent 64%),
+    rgba(1, 7, 12, 0.72);
+  text-align: center;
+}
+
+.ppg-pool-score span,
+.ppg-pool-statline span {
+  color: #8aa0ba;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.ppg-pool-score strong {
+  color: #8ef0a3;
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+
+.ppg-pool-player-row {
+  position: relative;
+  z-index: 1;
+  grid-area: players;
+  display: grid;
+  align-self: center;
+  gap: 10px;
+}
+
+.ppg-pool-player {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+}
+
+.ppg-pool-player.is-active {
+  border-color: rgba(142, 240, 163, 0.72);
+  box-shadow: 0 0 0 1px rgba(142, 240, 163, 0.18), 0 0 26px rgba(142, 240, 163, 0.1);
+}
+
+.ppg-pool-player.is-offline {
+  border-color: rgba(255, 79, 184, 0.45);
+}
+
+.ppg-pool-player > span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 208, 109, 0.38);
+  border-radius: 50%;
+  color: #27170f;
+  background: linear-gradient(135deg, #fff6dc, #d99b53);
+  font-weight: 900;
+}
+
+.ppg-pool-player strong,
+.ppg-pool-player small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ppg-pool-player strong {
+  color: #fff6dc;
+  font-size: 14px;
+}
+
+.ppg-pool-player small {
+  color: #9fb0ca;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.ppg-pool-player b {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 34px;
+  color: #8ef0a3;
+  border: 1px solid rgba(80, 239, 255, 0.24);
+  background: rgba(80, 239, 255, 0.06);
+}
+
+.ppg-pool-stage {
+  position: relative;
+  z-index: 1;
+  grid-area: stage;
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+.ppg-pool-howto {
+  display: none;
+}
+
+.ppg-pool-touch-controls {
+  display: none;
+}
+
+.ppg-dom-pool[data-mode="pvp"] .ppg-pool-stage {
+  padding: clamp(10px, 1vw, 18px);
+  border: 1px solid rgba(255, 246, 220, 0.12);
+  background: rgba(4, 8, 16, 0.42);
+  backdrop-filter: blur(14px);
+}
+
+.ppg-pool-demo-stage {
+  justify-self: center;
+  display: grid;
+  gap: 8px;
+  width: min(420px, 100%);
+  padding: clamp(14px, 1.6vw, 22px);
+  border: 1px solid rgba(255, 246, 220, 0.14);
+  background: rgba(4, 8, 16, 0.44);
+  backdrop-filter: blur(14px);
+  text-align: center;
+}
+
+.ppg-pool-demo-stage span {
+  color: #8ef0a3;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.ppg-pool-demo-stage strong {
+  color: #fff6dc;
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+.ppg-pool-demo-stage small {
+  color: #d5dff2;
+  font-size: 12px;
+}
+
+.ppg-pool-sidecar {
+  position: relative;
+  z-index: 1;
+  grid-area: side;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(12px, 1.25vw, 16px);
+}
+
+.ppg-pool-statline {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(2, 7, 15, 0.48);
+}
+
+.ppg-pool-statline strong {
+  color: #fff6dc;
+  font-size: clamp(16px, 1.6vw, 24px);
+}
+
+.ppg-pool-actions {
+  align-content: end;
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-actions button.primary {
+  min-width: 150px;
+  background: linear-gradient(135deg, #ffd06d, #fff0bb);
+  color: #07101c;
+  box-shadow: 0 0 0 1px rgba(255, 246, 220, 0.28), 0 10px 24px rgba(255, 208, 109, 0.18);
+}
+
+.ppg-pool-stage .ppg-dom-pvp-pool {
+  pointer-events: auto;
+  align-content: center;
+  justify-items: center;
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-arena {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "hero"
+    "stage"
+    "side";
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-player-row {
+  display: none;
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-howto {
+  position: absolute;
+  z-index: 2;
+  left: clamp(14px, 2vw, 26px);
+  top: clamp(168px, 22vh, 210px);
+  display: grid;
+  gap: 7px;
+  width: min(240px, 22vw);
+  padding: 12px;
+  border: 1px solid rgba(255, 246, 220, 0.12);
+  background: rgba(5, 8, 16, 0.72);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.ppg-pool-howto span {
+  color: #50efff;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ppg-pool-howto strong {
+  color: #fff6dc;
+  font-size: clamp(17px, 1.8vw, 22px);
+}
+
+.ppg-pool-howto small {
+  color: #d5dff2;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-sidecar {
+  grid-template-columns: minmax(110px, 0.7fr) minmax(180px, 1fr) minmax(250px, 1.1fr);
+  grid-template-rows: auto;
+  align-items: stretch;
+}
+
+.ppg-dom-pool[data-mode="demo"] .ppg-pool-actions {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: stretch;
+}
+
+.ppg-pool-stage .ppg-dom-pvp-pool-table {
+  width: min(100%, 840px);
+}
+
+@media (max-width: 1100px) {
+  .ppg-pool-arena {
+    grid-template-columns: minmax(180px, 0.56fr) minmax(320px, 1.44fr) minmax(190px, 0.62fr);
+  }
+}
+
+@keyframes ppgResultBackdropWin {
+  0% {
+    background: rgba(2, 5, 12, 0.72);
+  }
+  100% {
+    background: rgba(2, 5, 12, 0.82);
+  }
+}
+
+@keyframes ppgResultBackdropLoss {
+  0% {
+    background: rgba(2, 5, 12, 0.72);
+  }
+  100% {
+    background: rgba(9, 3, 12, 0.84);
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .ppg-pool-arena {
+    grid-template-columns: minmax(150px, 0.56fr) minmax(280px, 1.42fr) minmax(160px, 0.62fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .ppg-dom-game-ui.is-pool .ppg-dom-pool header.ppg-pool-hero {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .ppg-pool-hero h2 {
+    margin-bottom: 4px;
+    font-size: 21px;
+  }
+
+  .ppg-pool-hero p,
+  .ppg-pool-player strong,
+  .ppg-pool-player small,
+  .ppg-pool-statline strong {
+    font-size: 11px;
+  }
+
+  .ppg-pool-score {
+    min-width: 74px;
+    min-height: 54px;
+    padding: 6px 8px;
+  }
+
+  .ppg-pool-score strong {
+    font-size: 18px;
+  }
+
+  .ppg-pool-player {
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .ppg-pool-player > span {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ppg-pool-player b {
+    min-width: 28px;
+    height: 28px;
+  }
+
+  .ppg-pool-sidecar {
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .ppg-pool-statline {
+    padding: 7px;
+  }
+
+  .ppg-pool-actions {
+    gap: 6px;
+  }
+
+  .ppg-pool-actions button {
+    min-height: 30px;
+    font-size: 10px;
+  }
+
+  .ppg-pool-touch-controls {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    right: 10px;
+    display: grid;
+    gap: 8px;
+    transform: translateY(-50%);
+    pointer-events: auto;
+  }
+
+  .ppg-dom-pool[data-mode="demo"] .ppg-pool-howto {
+    display: none;
+  }
+
+  .ppg-pool-touch-controls button {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    min-width: 58px;
+    height: 48px;
+    padding: 0;
+    border-radius: 8px;
+    font-size: 24px;
+  }
+
+  .ppg-pool-touch-controls button.primary {
+    height: 58px;
+    font-size: 12px;
+  }
+
+  .ppg-dom-pool[data-mode="demo"] .ppg-pool-sidecar {
+    padding-right: 76px;
+  }
+
+  .ppg-dom-pool[data-mode="demo"] [data-dom-pool-shot] {
+    display: none;
+  }
+
+  .ppg-dom-pool[data-mode="demo"] .ppg-pool-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* Premium PvP Checkers arena */
 body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   position: fixed;
@@ -4241,7 +4806,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   background:
     linear-gradient(90deg, rgba(2, 5, 12, 0.9), rgba(2, 5, 12, 0.42) 38%, rgba(2, 5, 12, 0.9)),
     linear-gradient(180deg, rgba(2, 5, 12, 0.28), rgba(2, 5, 12, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260518-checkersmodes2") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260518-poolmodes1") center / cover no-repeat,
     radial-gradient(circle at 50% 10%, rgba(255, 208, 109, 0.16), transparent 28%),
     radial-gradient(circle at 78% 72%, rgba(80, 239, 255, 0.11), transparent 30%),
     linear-gradient(135deg, rgba(18, 13, 10, 0.92), rgba(3, 7, 16, 0.96) 46%, rgba(11, 32, 35, 0.9));
@@ -4991,7 +5556,7 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
     radial-gradient(ellipse at 50% 46%, rgba(255, 204, 103, 0.2), transparent 22%),
     radial-gradient(ellipse at 49% 56%, rgba(0, 0, 0, 0) 0 30%, rgba(1, 3, 9, 0.38) 56%, rgba(1, 3, 9, 0.86) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.32) 38%, rgba(0, 0, 0, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260518-checkersmodes2") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260518-poolmodes1") center / cover no-repeat,
     linear-gradient(135deg, #100a08, #02060e 48%, #061a1c);
   border: 0;
   box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.68);

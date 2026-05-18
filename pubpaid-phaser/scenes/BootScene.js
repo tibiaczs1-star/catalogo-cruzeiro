@@ -1,7 +1,7 @@
 import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260518-checkersmodes2";
+const ASSET_VERSION = "20260518-poolspace3";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {
@@ -17,7 +17,6 @@ export class BootScene extends Phaser.Scene {
     this.load.image("street-bg", versionedAsset("./assets/pubpaid-v2-street-bg-v1.png"));
     this.load.image("interior-bg", versionedAsset("./assets/pubpaid-interior-v5.png"));
     this.load.image("game-lobby-bg", versionedAsset("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png"));
-    this.load.image("game-pool-room", versionedAsset("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png"));
     this.load.image("game-darts-room", versionedAsset("./assets/pubpaid/lobby/pubpaid-darts-room-v1.png"));
     this.load.image("game-checkers-room", versionedAsset("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png"));
     this.load.image("game-menu-damas-card", versionedAsset("./assets/pubpaid/lobby/pubpaid-menu-damas-card-v1.png"));

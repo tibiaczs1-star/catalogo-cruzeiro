@@ -1,12 +1,12 @@
 # Handoff
 
-Updated: 2026-05-17T18:35:00-05:00
+Updated: 2026-05-18T11:09:44-05:00
 
-PubPaid 2.0 esta na rodada `20260517-mobilefix1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
+PubPaid 2.0 esta na rodada local `20260518-poolspace3`. O trabalho atual focou Sinuca como uma unica mesa com dois modos isolados, agora com controle funcional por `Espaco` no desktop e toque lateral no mobile.
 
-Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visual/fluxo sem ficha, sem fila, sem escrow, sem carteira e sem alterar saldo.
+Adicao desta rodada: Sinuca Demo e Sinuca PvP real usam o mesmo fluxo de acao em 3 etapas: `Espaco` trava a mira, `Espaco` inicia a barra de forca, `Espaco` solta o taco. A mesa foi centralizada, recebeu instrucao lateral `como jogar`, e o mobile recebeu botoes laterais de toque para mirar/acionar sem depender do botao inferior.
 
-Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `Ligar som` nao abre mais o jogo; conta Google confirmada mostra `Tocar para intro`; Damas Demo removeu grafico de mao, ganhou fundo, pecas quadradas, score visual, som curto de movimento/captura e layout landscape compacto.
+Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## What Changed
 
@@ -21,12 +21,17 @@ Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `
   - Carteira registra ganho PvP, perda PvP, payout, fee e contadores.
   - Damas agora grava `checkersHistory` no match a cada lance.
 - `pubpaid-phaser/scenes/PoolGameScene.js`
-  - Refeito com bola branca, 15 bolas em triangulo, mira/forca, colisao, parede, caçapas e reposicao da branca.
+  - Refeito com bola branca, 15 bolas em triangulo, mira/forca, colisao, parede, caçapas, reposicao da branca e fundo proprio de salao.
+  - Controle da demo mudou para maquina de estados `aim -> locked -> power -> rolling`, com barra de forca automatica e `Espaco` como acao unica no desktop.
+  - Mesa centralizada no palco da Sinuca.
 - `pubpaid-phaser/ui/domGameInterface.js`
   - Lobby canonico mostra Sinuca, Damas, Xadrez, Poker, Truco e Dados.
-  - Lobby tambem mostra `Damas Demo`, que cria uma partida local contra maquina usando as mesmas regras de Damas, sem backend financeiro.
+  - Sinuca e Damas usam card unico com `Demo` e `PvP real`.
+  - Demo de Sinuca fica isolada do PvP real, sem ficha e sem carteira.
+  - PvP real de Sinuca usa a mesma regra de acao por `Espaco`: trava mira, inicia forca e dispara tacada autoritativa.
   - Damas renderiza `abandoned`, resultado e desistir.
   - Damas renderiza arena dedicada com timer, cards dos jogadores, hints, historico e suporte a drag/drop alem de tap.
+  - Damas Demo mobile auto-seleciona a peça de captura encadeada e mostra o texto de continuidade.
   - Mesa generica renderiza sinuca/xadrez/poker/truco/dados e chama endpoints reais.
   - Render de mesa generica tem trava contra recursao e nao recria botoes a cada polling de presenca.
 - `pubpaid-admin.html` e `pubpaid-runtime.js`
@@ -34,11 +39,36 @@ Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `
 - `assets/pubpaid/lobby/icons/*.svg`
   - Icones de lobby para as seis mesas.
 - `pubpaid-phaser.css`
+  - Sinuca recebeu arena fullscreen premium com fundo proprio, placar, sidecar e responsividade landscape.
+  - Sinuca recebeu painel esquerdo `como jogar` e controles laterais mobile; o botao principal inferior nao disputa espaco no mobile.
   - Damas recebeu arena premium fullscreen, grid 8x8 fixo, pecas quadradas, score visual, fundo de arena, layout mobile landscape compacto e gate portrait.
   - Mesa generica e cards novos adicionados.
   - Mobile/orientacao ajustados para nao travar por lock API.
 
 ## Validation Done
+
+- `20260518-poolspace3` local:
+  - `node --check pubpaid-phaser/ui/domGameInterface.js`;
+  - `node --check pubpaid-phaser/scenes/PoolGameScene.js`;
+  - `npm run guard:pubpaid`;
+  - Sinuca Demo validada com `Espaco` em desktop: trava mira, inicia forca, solta taco e entra em `Bolas rolando`;
+  - Sinuca Demo validada em mobile landscape com controles laterais;
+  - Sinuca PvP real validada contra backend real isolado com duas contas: ready duplo, tacada enviada por `Espaco`, `moveCount=1`, W.O. e settlement `100/100 -> 108/90`.
+
+- `20260518-poolmodes1` local:
+  - syntax checks de `server.js`, `app.js`, `domGameInterface.js`, `walletInterface.js`, `BootScene.js`, `PoolGameScene.js`;
+  - `npm run guard:pubpaid`;
+  - Sinuca Demo validada em desktop e mobile landscape, sem overflow;
+  - PvP real de Sinuca validado contra backend real isolado com duas contas: `waiting -> readying -> active`, ready duplo, tacada autoritativa, W.O. e settlement `100/100 -> 108/90`;
+  - Damas Demo mobile rodada por 35 lances; captura encadeada exibiu `Continue a captura`, alvo valido e nao travou.
+
+- `20260518-checkersmodes2` local e online:
+  - `node --check server.js`, `app.js`, `domGameInterface.js`, `walletInterface.js`, `BootScene.js`;
+  - `npm run guard:pubpaid`;
+  - lobby tem 1 card Damas, 1 botao Demo, 1 botao PvP real e 0 cards antigos separados;
+  - demo abre 64 casas, `pvpStatus=idle`, `pvpGameId=` e nao chama `/api/pubpaid/pvp/join`;
+  - PvP real chama `/api/pubpaid/pvp/join` uma vez com `gameId=checkers`, entra em `waiting` e deixa `checkersGame=none`;
+  - online Render confirmou build `20260518-checkersmodes2` e repetiu o smoke sem overflow/console errors.
 
 - Syntax checks para `server.js`, `domGameInterface.js`, `pvpService.js`, `accountService.js`, `app.js`, `PoolGameScene.js`.
 - `npm run guard:pubpaid`.
@@ -74,9 +104,10 @@ Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `
 
 ## Next
 
-1. Validar com duas contas Google reais nas janelas do usuario.
-2. Confirmar em aparelho real que portrait mostra gate e landscape entra.
-3. Continuar polimento visual por jogo sem quebrar o financeiro.
+1. Quando o usuario autorizar, subir `20260518-poolspace3`.
+2. Validar online com duas contas Google reais a Sinuca `PvP real`.
+3. Confirmar em aparelho real que Damas Demo landscape mostra a captura encadeada sem falsa trava.
+4. Continuar polimento visual por jogo sem quebrar o financeiro.
 
 ## Caution
 

@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260518-checkersmodes2" />
-    <script defer src="./site-google-auth.js?v=20260518-checkersmodes2"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260518-poolspace3" />
+    <script defer src="./site-google-auth.js?v=20260518-poolspace3"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260518-checkersmodes2"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260518-poolspace3"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -226,13 +226,17 @@
                 <h2>Escolha a mesa</h2>
               </header>
               <div class="ppg-dom-game-cards">
-                <button type="button" class="ppg-dom-game-card is-pool" data-dom-start-game="pool">
-                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260518-checkersmodes2" alt="" loading="lazy" />
+                <article class="ppg-dom-game-card is-pool is-multi" data-dom-game-card="pool">
+                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260518-poolspace3" alt="" loading="lazy" />
                   <span>Sinuca</span>
-                  <strong>PvP real</strong>
-                </button>
+                  <strong>demo livre ou PvP real</strong>
+                  <div class="ppg-dom-game-card-actions" aria-label="Modos de Sinuca">
+                    <button type="button" data-dom-start-demo="pool">Demo</button>
+                    <button type="button" data-dom-start-game="pool">PvP real</button>
+                  </div>
+                </article>
                 <article class="ppg-dom-game-card is-checkers is-multi" data-dom-game-card="checkers">
-                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260518-checkersmodes2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260518-poolspace3" alt="" loading="lazy" />
                   <span>Damas</span>
                   <strong>demo livre ou PvP real</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Damas">
@@ -241,22 +245,22 @@
                   </div>
                 </article>
                 <button type="button" class="ppg-dom-game-card is-chess" data-dom-start-game="chess">
-                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260518-checkersmodes2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260518-poolspace3" alt="" loading="lazy" />
                   <span>Xadrez</span>
                   <strong>PvP real</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-poker" data-dom-start-game="poker">
-                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260518-checkersmodes2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-poker.svg?v=20260518-poolspace3" alt="" loading="lazy" />
                   <span>Poker</span>
                   <strong>troca 5 cartas</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-truco" data-dom-start-game="truco">
-                  <img src="./assets/pubpaid/lobby/icons/game-truco.svg?v=20260518-checkersmodes2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-truco.svg?v=20260518-poolspace3" alt="" loading="lazy" />
                   <span>Truco</span>
                   <strong>melhor de 3</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-dicecups" data-dom-start-game="dicecups">
-                  <img src="./assets/pubpaid/lobby/icons/game-dicecups.svg?v=20260518-checkersmodes2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-dicecups.svg?v=20260518-poolspace3" alt="" loading="lazy" />
                   <span>Dados</span>
                   <strong>soma PvP</strong>
                 </button>
@@ -308,28 +312,69 @@
             </aside>
 
             <aside class="ppg-dom-pool" data-dom-pool hidden>
-              <header>
-                <span class="ppg-kicker">sinuca</span>
-                <h2 data-dom-pool-title>Mesa aberta</h2>
-              </header>
-              <div class="ppg-dom-pool-table" aria-hidden="true">
-                <span class="pocket p1"></span>
-                <span class="pocket p2"></span>
-                <span class="pocket p3"></span>
-                <span class="pocket p4"></span>
-                <span class="ball cue"></span>
-                <span class="ball b1"></span>
-                <span class="ball b2"></span>
-                <span class="cue-stick"></span>
-              </div>
-              <div class="ppg-dom-score">
-                <strong data-dom-pool-score>0 x 0</strong>
-                <span data-dom-pool-round>rodada 1/4</span>
-              </div>
-              <p data-dom-pool-status>Trave mira e força para tacar.</p>
-              <div class="ppg-dom-actions">
-                <button type="button" class="primary" data-dom-pool-shot>Tacada</button>
-                <button type="button" data-dom-open-lobby>Lobby</button>
+              <div class="ppg-pool-arena">
+                <header class="ppg-pool-hero">
+                  <div>
+                    <span class="ppg-kicker" data-dom-pool-kicker>sinuca</span>
+                    <h2 data-dom-pool-title>Mesa aberta</h2>
+                    <p data-dom-pool-status>Trave a mira, inicie a barra e toque no ponto certo para tacar.</p>
+                  </div>
+                  <div class="ppg-pool-score" aria-live="polite">
+                    <span>placar</span>
+                    <strong data-dom-pool-score>0 x 0</strong>
+                  </div>
+                </header>
+
+                <section class="ppg-pool-player-row" aria-label="Jogadores da mesa">
+                  <article class="ppg-pool-player is-self" data-dom-pool-self>
+                    <span data-dom-pool-self-initial>?</span>
+                    <div>
+                      <strong data-dom-pool-self-name>Você</strong>
+                      <small data-dom-pool-self-meta>na mesa</small>
+                    </div>
+                    <b data-dom-pool-self-balls>0</b>
+                  </article>
+                  <article class="ppg-pool-player is-rival" data-dom-pool-rival>
+                    <span data-dom-pool-rival-initial>?</span>
+                    <div>
+                      <strong data-dom-pool-rival-name>Rival</strong>
+                      <small data-dom-pool-rival-meta>aguardando</small>
+                    </div>
+                    <b data-dom-pool-rival-balls>0</b>
+                  </article>
+                </section>
+
+                <div class="ppg-pool-stage" data-dom-pool-stage aria-live="polite"></div>
+
+                <aside class="ppg-pool-howto" aria-label="Como jogar sinuca">
+                  <span>como jogar</span>
+                  <strong>Espaço é ação</strong>
+                  <small>1. trava a mira</small>
+                  <small>2. inicia a força</small>
+                  <small>3. solta o taco</small>
+                </aside>
+
+                <div class="ppg-pool-touch-controls" aria-label="Controles de sinuca por toque">
+                  <button type="button" data-dom-pool-aim-step="-5" aria-label="Girar mira para esquerda">‹</button>
+                  <button type="button" class="primary" data-dom-pool-touch-shot>Mira</button>
+                  <button type="button" data-dom-pool-aim-step="5" aria-label="Girar mira para direita">›</button>
+                </div>
+
+                <aside class="ppg-pool-sidecar">
+                  <div class="ppg-pool-statline">
+                    <span>andamento</span>
+                    <strong data-dom-pool-round>tacada 1</strong>
+                  </div>
+                  <div class="ppg-pool-statline">
+                    <span>última tacada</span>
+                    <strong data-dom-pool-last>Triângulo montado.</strong>
+                  </div>
+                  <div class="ppg-dom-actions ppg-pool-actions">
+                    <button type="button" class="primary" data-dom-pool-shot>Travar mira</button>
+                    <button type="button" class="danger" data-dom-forfeit-pool>Desistir</button>
+                    <button type="button" data-dom-open-lobby>Lobby</button>
+                  </div>
+                </aside>
               </div>
             </aside>
 
@@ -408,12 +453,16 @@
             </aside>
 
             <aside class="ppg-dom-result" data-dom-result hidden>
-              <span class="ppg-kicker" data-dom-result-game>resultado</span>
-              <h2 data-dom-result-title>Partida encerrada</h2>
-              <p data-dom-result-body></p>
-              <div class="ppg-dom-actions">
-                <button type="button" data-dom-open-lobby>Lobby</button>
-                <button type="button" data-dom-return-salon>Salão</button>
+              <div class="ppg-dom-result-card">
+                <span class="ppg-kicker" data-dom-result-game>resultado</span>
+                <h2 data-dom-result-title>Partida encerrada</h2>
+                <strong data-dom-result-amount></strong>
+                <p data-dom-result-body></p>
+                <small data-dom-result-next>Voltando ao lobby em 5s.</small>
+                <div class="ppg-dom-actions">
+                  <button type="button" data-dom-open-lobby>Lobby agora</button>
+                  <button type="button" data-dom-return-salon>Salão</button>
+                </div>
               </div>
             </aside>
 

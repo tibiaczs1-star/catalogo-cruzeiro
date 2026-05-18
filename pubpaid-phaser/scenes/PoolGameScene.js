@@ -3,7 +3,7 @@ import { gameState, updateGameState } from "../core/gameState.js";
 import { fitImageToHeight } from "../core/assetRegistry.js";
 
 const TABLE = {
-  x: 452,
+  x: Math.round((GAME_WIDTH - 668) / 2),
   y: 150,
   width: 668,
   height: 334
@@ -70,6 +70,7 @@ export class PoolGameScene extends Phaser.Scene {
     this.aimDirection = 1;
     this.currentPower = 0.42;
     this.powerDirection = 1;
+    this.powerSyncElapsed = 0;
     this.shotCount = 0;
     this.playerScore = 0;
     this.aiScore = 15;
@@ -87,12 +88,14 @@ export class PoolGameScene extends Phaser.Scene {
 
   init(data = {}) {
     this.stake = Number(data.stake || 10);
+    this.mode = data.mode || "demo";
     this.phase = "aim";
     this.lockStage = "aim";
     this.aimAngle = 0;
     this.aimDirection = 1;
     this.currentPower = 0.42;
     this.powerDirection = 1;
+    this.powerSyncElapsed = 0;
     this.shotCount = 0;
     this.playerScore = 0;
     this.aiScore = 15;
@@ -105,8 +108,14 @@ export class PoolGameScene extends Phaser.Scene {
   create() {
     this.game.events.emit("pubpaid:music-zone", "game");
     this.game.events.on("pubpaid:pool-dom-shot", this.handleDomShot, this);
+    this.game.events.on("pubpaid:pool-dom-aim-step", this.handleDomAimStep, this);
+    this.input.on("pointermove", this.handlePointerMove, this);
+    this.input.on("pointerdown", this.handlePointerDown, this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.game.events.off("pubpaid:pool-dom-shot", this.handleDomShot, this);
+      this.game.events.off("pubpaid:pool-dom-aim-step", this.handleDomAimStep, this);
+      this.input.off("pointermove", this.handlePointerMove, this);
+      this.input.off("pointerdown", this.handlePointerDown, this);
     });
     this.drawBackdrop();
     this.drawTable();
@@ -114,23 +123,16 @@ export class PoolGameScene extends Phaser.Scene {
     this.ballLayer = this.add.container(0, 0).setDepth(5);
     this.createRack();
     this.updateAimVisual();
-    this.syncState("Trave a mira, depois trave a força.");
+    this.syncState("1: trave a mira. 2: inicie a barra. 3: toque no ponto certo para tacar.");
   }
 
   drawBackdrop() {
     this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x02050d, 1);
-    if (this.textures.exists("interior-bg")) {
-      this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "interior-bg")
-        .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
-        .setAlpha(0.48);
-      this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x02050d, 0.52);
-    }
     this.add.rectangle(TABLE.x + TABLE.width / 2, 82, 560, 46, 0x120907, 0.78)
       .setStrokeStyle(3, 0xffd06d, 0.34);
     this.add.text(TABLE.x + TABLE.width / 2, 82, "SINUCA BRASILEIRA", textStyle(17, "#ffd06d", "Courier New, Lucida Console, monospace"))
       .setOrigin(0.5)
       .setLetterSpacing(3);
-    this.drawPoolActors();
   }
 
   drawPoolActors() {
@@ -197,12 +199,27 @@ export class PoolGameScene extends Phaser.Scene {
     this.aimLine = this.add.line(0, 0, 0, 0, 0, 0, 0x8ef0a3, 0.62)
       .setLineWidth(3)
       .setDepth(6.1);
-    this.cueStick = this.add.rectangle(0, 0, 168, 7, 0xc58a42, 0.98)
-      .setStrokeStyle(1, 0x4b2110, 0.92)
-      .setDepth(6.2);
+    this.cueStick = this.add.container(0, 0).setDepth(6.2);
+    const shaft = this.add.rectangle(-98, 0, 210, 10, 0xc58a42, 0.98)
+      .setStrokeStyle(2, 0x4b2110, 0.92);
+    const butt = this.add.rectangle(-210, 0, 44, 12, 0x5f2d16, 1)
+      .setStrokeStyle(2, 0x2a1208, 0.92);
+    const ferrule = this.add.rectangle(12, 0, 16, 8, 0xf1ddae, 1)
+      .setStrokeStyle(1, 0x8a5a2d, 0.72);
+    const tip = this.add.rectangle(24, 0, 8, 9, 0x4d7f95, 1)
+      .setStrokeStyle(1, 0x102531, 0.72);
+    this.cueStick.add([butt, shaft, ferrule, tip]);
   }
 
   drawHud() {
+    if (this.mode === "demo") {
+      this.add.rectangle(TABLE.x + TABLE.width / 2 - 160, TABLE.y + TABLE.height + 78, 320, 18, 0x07101c, 0.96)
+        .setOrigin(0, 0.5)
+        .setStrokeStyle(2, 0x50efff, 0.22);
+      this.powerFill = this.add.rectangle(TABLE.x + TABLE.width / 2 - 155, TABLE.y + TABLE.height + 78, 1, 10, 0xffd06d, 0.92)
+        .setOrigin(0, 0.5);
+      return;
+    }
     this.add.text(76, 70, "SINUCA", textStyle(44, "#fff6dc")).setLetterSpacing(5);
     this.hud.subtitle = this.add.text(80, 130, `entrada ${this.stake} / mesa fisica`, textStyle(15, "#d5dff2"));
     this.hud.score = this.add.text(92, 202, "", textStyle(24, "#ffd06d")).setLetterSpacing(1);
@@ -288,12 +305,51 @@ export class PoolGameScene extends Phaser.Scene {
   handleDomShot() {
     if (this.phase !== "aim") return;
     if (this.lockStage === "aim") {
+      this.lockStage = "locked";
+      this.currentPower = 0.18;
+      this.powerDirection = 1;
+      this.updateHud("Mira travada. Aperte Iniciar força.");
+      this.syncState("Mira travada. Aperte Iniciar força.");
+      return;
+    }
+    if (this.lockStage === "locked") {
       this.lockStage = "power";
-      this.updateHud("Mira travada. Toque de novo para soltar a força.");
-      this.syncState("Mira travada. Agora escolha a força.");
+      this.currentPower = 0.18;
+      this.powerDirection = 1;
+      this.updateHud("Barra correndo. Aperte Tacar no ponto certo.");
+      this.syncState("Barra correndo. Aperte Tacar no ponto certo.");
       return;
     }
     this.shootCueBall();
+  }
+
+  handleDomAimStep(step = 0) {
+    if (this.phase !== "aim" || this.lockStage !== "aim") return;
+    const amount = Phaser.Math.DegToRad(Number(step) || 0);
+    if (!amount) return;
+    this.aimAngle = Phaser.Math.Angle.Normalize(this.aimAngle + amount);
+    this.updateAimVisual();
+    this.syncState("Ajuste a mira e toque para travar.");
+  }
+
+  handlePointerMove(pointer) {
+    if (this.phase !== "aim") return;
+    if (this.lockStage === "aim") this.updateAimFromPointer(pointer);
+  }
+
+  handlePointerDown(pointer) {
+    if (this.phase !== "aim") return;
+    if (this.lockStage === "aim") this.updateAimFromPointer(pointer);
+  }
+
+  updateAimFromPointer(pointer) {
+    const cue = this.getCueBall();
+    if (!cue) return;
+    const dx = Number(pointer.worldX) - cue.x;
+    const dy = Number(pointer.worldY) - cue.y;
+    if (Math.hypot(dx, dy) < 8) return;
+    this.aimAngle = Phaser.Math.Angle.Normalize(Math.atan2(dy, dx));
+    this.updateAimVisual();
   }
 
   shootCueBall() {
@@ -301,6 +357,7 @@ export class PoolGameScene extends Phaser.Scene {
     if (!cue) return;
     this.phase = "rolling";
     this.lockStage = "rolling";
+    this.cueStick?.setVisible(false);
     this.pocketedThisShot = [];
     this.settleSince = 0;
     this.shotCount += 1;
@@ -447,7 +504,8 @@ export class PoolGameScene extends Phaser.Scene {
     this.phase = "aim";
     this.lockStage = "aim";
     this.currentPower = 0.34;
-    this.aimAngle = Phaser.Math.Clamp(this.aimAngle + 0.18, -0.82, 0.82);
+    this.powerDirection = 1;
+    this.cueStick?.setVisible(true);
     this.updateHud(this.lastShotSummary);
     this.syncState(this.lastShotSummary);
   }
@@ -497,10 +555,13 @@ export class PoolGameScene extends Phaser.Scene {
     const targetY = cue.y + Math.sin(this.aimAngle) * lineLength;
     this.aimLine?.setTo(cue.x, cue.y, targetX, targetY);
     this.ghostLine?.setTo(cue.x, cue.y, cue.x + Math.cos(this.aimAngle) * 460, cue.y + Math.sin(this.aimAngle) * 460);
-    this.cueStick?.setPosition(
-      cue.x - Math.cos(this.aimAngle) * 96,
-      cue.y - Math.sin(this.aimAngle) * 96
-    ).setRotation(this.aimAngle);
+    const pullback = this.lockStage === "power" ? 34 + this.currentPower * 88 : 42;
+    this.cueStick?.setVisible(this.phase === "aim")
+      .setPosition(
+        cue.x - Math.cos(this.aimAngle) * pullback,
+        cue.y - Math.sin(this.aimAngle) * pullback
+      )
+      .setRotation(this.aimAngle);
     if (this.powerFill) this.powerFill.width = 260 * this.currentPower;
   }
 
@@ -508,7 +569,13 @@ export class PoolGameScene extends Phaser.Scene {
     const left = this.balls.filter((ball) => !ball.cue && !ball.pocketed).length;
     this.hud.score?.setText(`BOLAS ${this.playerScore} / RESTAM ${left}`);
     this.hud.round?.setText(`Tacada ${Math.min(this.shotCount + 1, MAX_SHOTS)} de ${MAX_SHOTS}`);
-    this.hud.target?.setText(this.lockStage === "power" ? "Força" : "Mira");
+    this.hud.target?.setText(
+      this.lockStage === "power"
+        ? "Tacar"
+        : this.lockStage === "locked"
+          ? "Força"
+          : "Mira"
+    );
     if (message) this.hud.status?.setText(message);
     this.hud.last?.setText(this.lastShotSummary || "Triangulo montado. Quebre a mesa.");
     this.updateAimVisual();
@@ -523,6 +590,8 @@ export class PoolGameScene extends Phaser.Scene {
       objective: "Vencer a mesa de Sinuca",
       focus: "mesa de sinuca",
       poolGame: {
+        demo: this.mode === "demo",
+        realPvp: false,
         round: Math.min(this.shotCount + 1, MAX_SHOTS),
         maxRounds: MAX_SHOTS,
         playerScore: this.playerScore,
@@ -552,7 +621,7 @@ export class PoolGameScene extends Phaser.Scene {
   }
 
   restartMatch() {
-    this.scene.restart({ stake: this.stake });
+    this.scene.restart({ stake: this.stake, mode: this.mode });
   }
 
   backToLobby() {
@@ -600,17 +669,19 @@ export class PoolGameScene extends Phaser.Scene {
       return;
     }
     if (this.phase !== "aim") return;
-    if (this.lockStage === "aim") {
-      this.aimAngle += this.aimDirection * 0.0095;
-      if (this.aimAngle >= 0.74 || this.aimAngle <= -0.74) {
-        this.aimDirection *= -1;
-        this.aimAngle = Phaser.Math.Clamp(this.aimAngle, -0.74, 0.74);
+    if (this.lockStage === "power") {
+      this.currentPower += this.powerDirection * delta * 0.00115;
+      if (this.currentPower >= 0.96) {
+        this.currentPower = 0.96;
+        this.powerDirection = -1;
+      } else if (this.currentPower <= 0.18) {
+        this.currentPower = 0.18;
+        this.powerDirection = 1;
       }
-    } else if (this.lockStage === "power") {
-      this.currentPower += this.powerDirection * 0.012;
-      if (this.currentPower >= 0.96 || this.currentPower <= 0.18) {
-        this.powerDirection *= -1;
-        this.currentPower = Phaser.Math.Clamp(this.currentPower, 0.18, 0.96);
+      this.powerSyncElapsed += delta;
+      if (this.powerSyncElapsed >= 90) {
+        this.powerSyncElapsed = 0;
+        this.syncState("Barra correndo. Aperte Tacar no ponto certo.");
       }
     }
     this.updateAimVisual();

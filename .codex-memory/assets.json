@@ -1,7 +1,62 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T08:50:32.213Z",
+  "lastUpdatedAt": "2026-05-18T16:09:44.000Z",
   "assets": [
+    {
+      "id": "pubpaid-pool-room-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/pool/pubpaid-pool-room-v1.png",
+      "source": "workspace",
+      "note": "Fundo aprovado para a nova arena premium da Sinuca.",
+      "linkedOrderIds": [
+        "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura"
+      ],
+      "createdAt": "2026-05-17T22:41:45-05:00"
+    },
+    {
+      "id": "pubpaid-pool-demo-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-pool-demo-desktop.png",
+      "source": "workspace",
+      "note": "Captura local da Sinuca Demo desktop na arena nova.",
+      "linkedOrderIds": [
+        "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura"
+      ],
+      "createdAt": "2026-05-17T22:41:45-05:00"
+    },
+    {
+      "id": "pubpaid-pool-pvp-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-pool-pvp-desktop.png",
+      "source": "workspace",
+      "note": "Captura local da Sinuca PvP desktop com arena dedicada.",
+      "linkedOrderIds": [
+        "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura"
+      ],
+      "createdAt": "2026-05-17T22:41:45-05:00"
+    },
+    {
+      "id": "pubpaid-pool-demo-mobile-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-pool-demo-mobile.png",
+      "source": "workspace",
+      "note": "Captura local da Sinuca Demo mobile landscape responsiva.",
+      "linkedOrderIds": [
+        "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura"
+      ],
+      "createdAt": "2026-05-17T22:41:45-05:00"
+    },
+    {
+      "id": "pubpaid-checkersdemo-mobile-regression-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-checkersdemo-mobile-regression.png",
+      "source": "workspace",
+      "note": "Captura da Damas Demo mobile depois da correcao de captura encadeada.",
+      "linkedOrderIds": [
+        "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura"
+      ],
+      "createdAt": "2026-05-17T22:41:45-05:00"
+    },
     {
       "id": "pubpaid-intro-night-viva-demo",
       "kind": "local-html-demo",
@@ -19,6 +74,93 @@
       "note": "Demo premium animada da intro PubPaid: salao vivo com luzes, pessoas dancando, Damas, Sinuca, cerveja, moedas e menu inicial. Rodando em http://127.0.0.1:4177/.codex-temp/pixellab-tests/pubpaid-premium-animated-intro-demo.html.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-17T08:50:32.213Z"
+    },
+    {
+      "id": "codex-handmade-pixel-folder",
+      "kind": "study-reference-folder",
+      "path": ".codex-temp/pixellab-tests/codex-handmade-pixel",
+      "source": "workspace",
+      "note": "Arquivo historico/de estudo. Nao usar como ancora positiva sem nova aprovacao explicita do usuario.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T10:46:14.201Z"
+    },
+    {
+      "id": "codex-blue-pet-v1",
+      "kind": "negative-example",
+      "path": ".codex-temp/pixellab-tests/codex-handmade-pixel/codex-blue-pet-v1.bmp",
+      "source": "workspace",
+      "note": "Nao aprovado; usar como exemplo do que nao fazer, conforme correcao do usuario em 2026-05-17.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T10:46:14.201Z"
+    },
+    {
+      "id": "realistic-host-spritesheet",
+      "kind": "approved-spritesheet",
+      "path": ".codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png",
+      "source": "workspace",
+      "note": "Unico exemplo confirmado como aprovado na correcao mais recente do usuario; usar como ancora positiva de estilo/qualidade.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T10:46:14.201Z"
+    },
+    {
+      "id": "realistic-host-vertical-spritesheet",
+      "kind": "related-unconfirmed-spritesheet",
+      "path": ".codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-vertical-spritesheet.png",
+      "source": "workspace",
+      "note": "Relacionado ao realistic-host, mas nao confirmado individualmente na correcao mais recente; nao tratar como ancora positiva sem confirmacao.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T10:46:14.201Z"
+    },
+    {
+      "id": "pubpaid-art-candidate-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-art-candidate-desktop.png",
+      "source": "workspace",
+      "note": "Preview desktop local da candidata visual premium de Damas PubPaid.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-18T00:15:54.019Z"
+    },
+    {
+      "id": "pubpaid-art-candidate-mobile-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-art-candidate-mobile.png",
+      "source": "workspace",
+      "note": "Preview mobile landscape local da candidata visual premium de Damas PubPaid.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-18T00:15:54.077Z"
+    },
+    {
+      "id": "pubpaid-poolspace3-demo-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-pool-demo-desktop.png",
+      "source": "workspace",
+      "note": "Sinuca Demo desktop na build 20260518-poolspace3, com mesa centralizada e painel esquerdo de como jogar.",
+      "linkedOrderIds": [
+        "2026-05-18-corrigir-controle-sinuca-espaco-e-centralizar-mesa"
+      ],
+      "createdAt": "2026-05-18T11:09:44-05:00"
+    },
+    {
+      "id": "pubpaid-poolspace3-demo-mobile-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-pool-demo-mobile.png",
+      "source": "workspace",
+      "note": "Sinuca Demo mobile landscape na build 20260518-poolspace3, com controles laterais por toque.",
+      "linkedOrderIds": [
+        "2026-05-18-corrigir-controle-sinuca-espaco-e-centralizar-mesa"
+      ],
+      "createdAt": "2026-05-18T11:09:44-05:00"
+    },
+    {
+      "id": "pubpaid-poolspace3-pvp-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-pool-pvp-desktop.png",
+      "source": "workspace",
+      "note": "Sinuca PvP desktop na build 20260518-poolspace3, validada com mesa dedicada.",
+      "linkedOrderIds": [
+        "2026-05-18-corrigir-controle-sinuca-espaco-e-centralizar-mesa"
+      ],
+      "createdAt": "2026-05-18T11:09:44-05:00"
     }
   ]
 }

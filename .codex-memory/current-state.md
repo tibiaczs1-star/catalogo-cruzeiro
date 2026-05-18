@@ -1,14 +1,24 @@
 # Current State
 
-Updated: 2026-05-17T18:35:00-05:00
+Updated: 2026-05-18T11:09:44-05:00
 
 ## Active Goal
 
-- PubPaid 2.0 canonico: Damas PvP como arena dedicada premium, preservando financeiro real.
+- PubPaid 2.0 canonico: Sinuca Demo/PvP com controle funcional por Espaco no desktop, toque lateral no mobile e mesa centralizada.
 
 ## Summary
 
-- Build local atual: `20260517-mobilefix1`.
+- Build local atual: `20260518-poolspace3`.
+- Sinuca Demo e Sinuca PvP real agora usam o mesmo modelo de acao em 3 etapas:
+  - `Espaco` trava a mira;
+  - `Espaco` inicia a barra de forca;
+  - `Espaco` solta o taco.
+- Mobile usa controles laterais por toque para mirar e acionar as mesmas 3 etapas.
+- A mesa da Sinuca foi centralizada e ganhou painel esquerdo `como jogar`, sem fundo pesado de salao ocupando a area de jogo.
+- Sinuca agora e um unico card no lobby com `Demo` e `PvP real`.
+- Demo da Sinuca usa a cena fisica local dentro de uma arena dedicada; PvP real usa fila, ready duplo, tacada autoritativa no backend e botao proprio de desistir.
+- A arte da Sinuca ganhou fundo proprio de salao, painel fullscreen dedicado, placar, cards de jogadores e responsividade landscape.
+- A falsa trava da Damas Demo mobile foi rastreada ate captura obrigatoria em cadeia sem feedback claro; quando existe `forcedPiece`, a peça agora e auto-selecionada e a UI mostra `Continue a captura`.
 - Damas foi refeita como arena DOM dedicada: header de partida, timer, cards dos jogadores, tabuleiro premium, hints, historico de lances, drag/tap e botao Desistir.
 - Lobby ganhou `Damas Demo`: treino local contra maquina, sem ficha, sem fila PvP, sem escrow e sem alterar saldo.
 - Backend passou a persistir `checkersHistory` por match; o frontend mostra o ultimo historico sem depender de estado local.
@@ -34,6 +44,37 @@ Updated: 2026-05-17T18:35:00-05:00
 - Corrigida recursao/render instavel da mesa generica: polling de presenca nao recria botoes enquanto o estado jogavel nao muda.
 
 ## Validation
+
+- Build `20260518-poolspace3`:
+  - `node --check pubpaid-phaser/ui/domGameInterface.js`
+  - `node --check pubpaid-phaser/scenes/PoolGameScene.js`
+  - `npm run guard:pubpaid`
+  - Playwright local: Sinuca Demo abriu em desktop/mobile; desktop mostra instrucao lateral, mesa centralizada e sem scroll.
+  - Playwright local: fluxo desktop da Sinuca com `Espaco` passou por `Travar mira -> Iniciar forca -> Tacar -> Bolas rolando`.
+  - Backend real isolado com duas sessoes autenticadas: Sinuca PvP `waiting -> readying -> active`, `Espaco` gerou tacada real, `moveCount=1`, W.O. e settlement `100/100 -> 108/90`.
+
+- Build `20260518-poolmodes1`:
+  - `node --check server.js`
+  - `node --check pubpaid-phaser/app.js`
+  - `node --check pubpaid-phaser/ui/domGameInterface.js`
+  - `node --check pubpaid-phaser/scenes/BootScene.js`
+  - `node --check pubpaid-phaser/scenes/PoolGameScene.js`
+  - `node --check pubpaid-phaser/ui/walletInterface.js`
+  - `npm run guard:pubpaid`
+  - Playwright local: lobby tem 1 card Sinuca com `Demo` e `PvP real`; demo abre em desktop/mobile landscape sem overflow; PvP abre arena dedicada em vez da mesa generica.
+  - Backend real isolado com duas sessoes autenticadas: Sinuca `waiting -> readying -> active`, ready duplo, tacada real em `/api/pubpaid/pvp/pool/shot`, W.O. e settlement de carteira `100/100 -> 108/90`.
+  - Playwright mobile landscape em Damas Demo: 35 lances rodados; captura encadeada agora manteve `forcedPiece`, 1 alvo valido e texto `Continue a captura`, sem travar.
+
+- Build `20260518-checkersmodes2`:
+  - `node --check server.js`
+  - `node --check pubpaid-phaser/app.js`
+  - `node --check pubpaid-phaser/ui/domGameInterface.js`
+  - `node --check pubpaid-phaser/ui/walletInterface.js`
+  - `node --check pubpaid-phaser/scenes/BootScene.js`
+  - `npm run guard:pubpaid`
+  - Playwright local com Google/carteira mockados: lobby tem 1 card Damas com `Demo` e `PvP real`; demo abriu 64 casas e nao chamou `/api/pubpaid/pvp/join`; PvP chamou join uma vez com `gameId=checkers` e entrou em `waiting`; estado demo nao vazou para PvP (`checkersGame=none`).
+  - Online Render confirmou `/api/pubpaid/build` em `20260518-checkersmodes2`.
+  - Playwright online repetiu o fluxo local: `pvpJoinAfterDemo=0`, `pvpJoinCount=1`, `pvpGameId=checkers`, `checkersGame=none`, sem overflow e sem erros de console.
 
 - `node --check server.js`
 - `node --check pubpaid-phaser/ui/domGameInterface.js`
@@ -93,6 +134,7 @@ Updated: 2026-05-17T18:35:00-05:00
 
 ## Next
 
-- Commit/push e confirmar `/api/pubpaid/build` online com `20260517-checkersdemo1`.
-- Testar online com duas contas Google reais quando o deploy novo estiver ativo nas duas janelas.
+- Nao subir online ate nova permissao do usuario.
+- Quando autorizado, publicar `20260518-poolspace3` e confirmar `/api/pubpaid/build` online.
+- Testar Sinuca com duas contas Google reais e Damas Demo em aparelho real mobile landscape.
 - Continuar polimento visual por jogo sem quebrar escrow, ready duplo, W.O. e saldo real.
