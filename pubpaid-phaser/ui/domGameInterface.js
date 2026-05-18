@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-mobilefix1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-checkersmodes1";
 import {
   confirmPvpReady,
   drawPoker,
@@ -9,7 +9,7 @@ import {
   moveChess,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260517-mobilefix1";
+} from "../services/pvpService.js?v=20260518-checkersmodes1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -19,7 +19,7 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260517-mobilefix1";
+} from "../core/checkersRules.js?v=20260518-checkersmodes1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -456,14 +456,20 @@ export function bindDomGameInterface(game) {
     }, 650);
   };
 
+  const resetDemoCheckersState = () => {
+    window.clearTimeout(local.demoAiTimer);
+    local.demoAiTimer = null;
+    local.demoCheckers = null;
+    local.demoSelected = null;
+    local.demoLegalMoves = [];
+  };
+
   const startDemoCheckers = () => {
     window.clearInterval(local.pvpPollTimer);
-    window.clearTimeout(local.demoAiTimer);
+    resetDemoCheckersState();
     local.pvpPollTimer = null;
     local.selectedGame = "checkers-demo";
     local.demoCheckers = createDemoCheckersMatch();
-    local.demoSelected = null;
-    local.demoLegalMoves = [];
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
     local.lastCheckersSoundKey = "";
@@ -1013,6 +1019,7 @@ export function bindDomGameInterface(game) {
 
   const startRealPvpGame = async (gameId = "checkers") => {
     local.selectedGame = gameId;
+    if (gameId === "checkers") resetDemoCheckersState();
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
     local.poolAim = 0;

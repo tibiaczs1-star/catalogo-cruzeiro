@@ -1964,7 +1964,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-mobilefix1") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260518-checkersmodes1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -2341,7 +2341,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-mobilefix1");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260518-checkersmodes1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 
@@ -4241,7 +4241,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   background:
     linear-gradient(90deg, rgba(2, 5, 12, 0.9), rgba(2, 5, 12, 0.42) 38%, rgba(2, 5, 12, 0.9)),
     linear-gradient(180deg, rgba(2, 5, 12, 0.28), rgba(2, 5, 12, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260517-mobilefix1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260518-checkersmodes1") center / cover no-repeat,
     radial-gradient(circle at 50% 10%, rgba(255, 208, 109, 0.16), transparent 28%),
     radial-gradient(circle at 78% 72%, rgba(80, 239, 255, 0.11), transparent 30%),
     linear-gradient(135deg, rgba(18, 13, 10, 0.92), rgba(3, 7, 16, 0.96) 46%, rgba(11, 32, 35, 0.9));
@@ -4952,5 +4952,681 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active #pubpaid-phaser-root canvas {
     padding: 9px 6px;
     font-size: 10px;
     line-height: 1.1;
+  }
+}
+
+/* Art-directed premium checkers arena. */
+body.pubpaid-phaser-page.ppg-dom-checkers-active {
+  overscroll-behavior: none;
+}
+
+body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 16%, rgba(255, 218, 142, 0.12), transparent 26%),
+    linear-gradient(180deg, #05070d 0%, #020308 100%);
+}
+
+.ppg-dom-game-ui.is-checkers .ppg-dom-checkers:not([hidden]) {
+  color: #fff9e9;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.ppg-checkers-arena,
+.ppg-checkers-arena * {
+  box-sizing: border-box;
+}
+
+.ppg-checkers-arena {
+  --ppg-checkers-cream: #fff3d0;
+  --ppg-checkers-gold: #f2bc61;
+  --ppg-checkers-teal: #5ce6de;
+  --ppg-checkers-green: #8ef0a3;
+  --ppg-checkers-red: #ff6d88;
+  --ppg-checkers-panel: rgba(8, 11, 17, 0.72);
+  --ppg-checkers-line: rgba(255, 243, 208, 0.18);
+  padding: clamp(12px, 1.6vw, 24px);
+  gap: clamp(12px, 1.45vw, 22px);
+  background:
+    radial-gradient(ellipse at 50% 46%, rgba(255, 204, 103, 0.2), transparent 22%),
+    radial-gradient(ellipse at 49% 56%, rgba(0, 0, 0, 0) 0 30%, rgba(1, 3, 9, 0.38) 56%, rgba(1, 3, 9, 0.86) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.32) 38%, rgba(0, 0, 0, 0.88)),
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260518-checkersmodes1") center / cover no-repeat,
+    linear-gradient(135deg, #100a08, #02060e 48%, #061a1c);
+  border: 0;
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.68);
+}
+
+.ppg-checkers-arena::before {
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 52%, rgba(255, 218, 142, 0.14), transparent 31%),
+    linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.58));
+  background-size: auto, 28px 28px, 28px 28px, auto;
+  opacity: 0.78;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.ppg-checkers-arena::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  width: min(86vmin, 820px);
+  aspect-ratio: 1.42;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 219, 146, 0.17), transparent 47%),
+    radial-gradient(ellipse at 50% 54%, rgba(0, 0, 0, 0.4), transparent 72%);
+  filter: blur(10px);
+  transform: translate(-50%, -50%);
+}
+
+.ppg-checkers-hero,
+.ppg-checkers-player,
+.ppg-checkers-sidecar,
+.ppg-checkers-statline,
+.ppg-checkers-hints article,
+.ppg-checkers-history article {
+  clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
+}
+
+.ppg-checkers-hero,
+.ppg-checkers-player,
+.ppg-checkers-sidecar {
+  border: 1px solid var(--ppg-checkers-line);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(14, 17, 25, 0.84), rgba(3, 5, 10, 0.72));
+  backdrop-filter: blur(16px) saturate(130%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 20px 42px rgba(0, 0, 0, 0.32);
+}
+
+.ppg-dom-game-ui.is-checkers .ppg-dom-checkers header.ppg-checkers-hero {
+  min-width: 0;
+  align-items: center;
+}
+
+.ppg-checkers-hero .ppg-kicker {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid rgba(92, 230, 222, 0.26);
+  color: var(--ppg-checkers-teal);
+  background: rgba(92, 230, 222, 0.07);
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ppg-checkers-hero h2 {
+  color: var(--ppg-checkers-cream);
+  text-shadow: 0 0 24px rgba(242, 188, 97, 0.18), 0 2px 0 rgba(0, 0, 0, 0.44);
+  letter-spacing: 0;
+}
+
+.ppg-checkers-hero p {
+  max-width: 64ch;
+  color: rgba(255, 249, 233, 0.76);
+  overflow-wrap: anywhere;
+}
+
+.ppg-checkers-clock,
+.ppg-checkers-player > span,
+.ppg-checkers-player b,
+.ppg-checkers-score-token {
+  clip-path: polygon(9px 0, calc(100% - 9px) 0, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0 calc(100% - 9px), 0 9px);
+  border-radius: 0;
+}
+
+.ppg-checkers-clock {
+  border-color: rgba(142, 240, 163, 0.38);
+  background:
+    radial-gradient(circle at 50% 34%, rgba(142, 240, 163, 0.23), transparent 58%),
+    linear-gradient(180deg, rgba(13, 29, 24, 0.9), rgba(3, 8, 10, 0.9));
+}
+
+.ppg-checkers-clock strong {
+  color: var(--ppg-checkers-green);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 900;
+}
+
+.ppg-checkers-player-row {
+  align-self: stretch;
+  align-content: center;
+}
+
+.ppg-checkers-player {
+  min-height: 82px;
+}
+
+.ppg-checkers-player.is-active {
+  transform: translateX(4px);
+}
+
+.ppg-checkers-player > span {
+  width: clamp(40px, 4.5vw, 54px);
+  height: clamp(40px, 4.5vw, 54px);
+  border: 1px solid rgba(242, 188, 97, 0.46);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 31%),
+    linear-gradient(145deg, #ffe49c, #b96a36 63%, #39170e);
+}
+
+.ppg-checkers-board-stage {
+  perspective: 1100px;
+}
+
+.ppg-checkers-board-frame {
+  --ppg-board-pad: clamp(12px, 1.15vw, 20px);
+  width: min(calc(100dvh - 150px), calc(100dvw - 500px), 780px);
+  min-width: min(420px, calc(100dvw - 38px));
+  border: 1px solid rgba(255, 233, 180, 0.36);
+  background:
+    linear-gradient(135deg, rgba(255, 248, 221, 0.22), transparent 24%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 17px),
+    linear-gradient(145deg, #7a4627 0%, #42200f 44%, #160906 100%);
+  box-shadow:
+    0 42px 80px rgba(0, 0, 0, 0.58),
+    0 0 0 5px rgba(0, 0, 0, 0.16),
+    0 0 44px rgba(242, 188, 97, 0.12),
+    inset 0 0 0 2px rgba(255, 246, 220, 0.1),
+    inset 0 24px 42px rgba(255, 229, 172, 0.08);
+}
+
+.ppg-checkers-board-frame::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--ppg-board-pad) * -0.35);
+  pointer-events: none;
+  border: 1px solid rgba(92, 230, 222, 0.12);
+  box-shadow: 0 0 28px rgba(92, 230, 222, 0.08);
+}
+
+.ppg-dom-game-ui.is-checkers .ppg-checkers-board-frame .ppg-dom-checkers-board {
+  background:
+    linear-gradient(135deg, rgba(255, 246, 220, 0.08), transparent 35%),
+    #130b08;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 246, 220, 0.12),
+    inset 0 0 46px rgba(0, 0, 0, 0.42);
+}
+
+.ppg-dom-cell {
+  border: 1px solid rgba(11, 6, 4, 0.34);
+}
+
+.ppg-dom-cell.is-light {
+  background:
+    radial-gradient(circle at 17% 16%, rgba(255, 255, 255, 0.38), transparent 33%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 9px),
+    linear-gradient(135deg, #f0c88a 0%, #b9773e 100%);
+}
+
+.ppg-dom-cell.is-dark {
+  background:
+    radial-gradient(circle at 77% 76%, rgba(92, 230, 222, 0.12), transparent 42%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 10px),
+    linear-gradient(135deg, #3b1f14 0%, #120806 100%);
+}
+
+.ppg-dom-cell.is-target::before {
+  inset: 31%;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+  border-color: rgba(142, 240, 163, 0.78);
+}
+
+.ppg-dom-piece {
+  width: 70%;
+  border-radius: 0;
+  clip-path: polygon(13% 0, 87% 0, 100% 13%, 100% 87%, 87% 100%, 13% 100%, 0 87%, 0 13%);
+  transform: translateY(-5%);
+  box-shadow:
+    0 8px 0 rgba(0, 0, 0, 0.26),
+    0 16px 22px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.13);
+}
+
+.ppg-dom-piece::before {
+  inset: 12%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  clip-path: inherit;
+}
+
+.ppg-dom-piece::after {
+  inset: 27%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.09);
+  filter: none;
+  clip-path: inherit;
+}
+
+.ppg-dom-piece.is-player {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 28%),
+    linear-gradient(150deg, #ffe19a 0%, #d88b3d 52%, #6f2d17 100%);
+}
+
+.ppg-dom-piece.is-ai {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.28), transparent 28%),
+    linear-gradient(150deg, #90f8ef 0%, #2a9aa5 54%, #0a3540 100%);
+}
+
+.ppg-dom-piece.is-king {
+  color: #27170f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+.ppg-checkers-sidecar {
+  align-self: stretch;
+  background:
+    linear-gradient(135deg, rgba(92, 230, 222, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(11, 14, 22, 0.84), rgba(3, 5, 10, 0.74));
+}
+
+.ppg-checkers-statline,
+.ppg-checkers-hints article,
+.ppg-checkers-history article {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 38%),
+    rgba(2, 7, 15, 0.62);
+}
+
+.ppg-checkers-statline strong {
+  overflow-wrap: anywhere;
+}
+
+.ppg-checkers-sidecar .ppg-dom-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.ppg-checkers-sidecar .ppg-dom-actions button {
+  min-width: 0;
+  width: 100%;
+  min-height: 42px;
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 243, 208, 0.2);
+  border-radius: 0;
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  color: #07100d;
+  background: linear-gradient(135deg, #baffc3, #52e2cc);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28), inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ppg-checkers-sidecar .ppg-dom-actions button.danger {
+  color: #fff9e9;
+  background: linear-gradient(135deg, #ff788e, #a82345);
+}
+
+.ppg-checkers-sidecar .ppg-dom-actions button:disabled {
+  opacity: 0.58;
+  filter: grayscale(0.35);
+}
+
+@media (min-width: 961px) {
+  .ppg-checkers-arena {
+    grid-template-columns: minmax(210px, 0.48fr) minmax(440px, 1.42fr) minmax(238px, 0.54fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "hero hero hero"
+      "players board side";
+  }
+
+  .ppg-dom-game-ui.is-checkers .ppg-dom-checkers header.ppg-checkers-hero {
+    padding: clamp(12px, 1.05vw, 18px) clamp(16px, 1.4vw, 24px);
+  }
+
+  .ppg-checkers-hero h2 {
+    margin: 4px 0 5px;
+    font-size: clamp(26px, 2.25vw, 38px);
+  }
+
+  .ppg-checkers-hero p {
+    font-size: clamp(12px, 1vw, 14px);
+  }
+}
+
+@media (max-width: 960px) and (orientation: landscape) {
+  .ppg-dom-game-ui.is-checkers .ppg-dom-checkers:not([hidden]) {
+    inset: calc(5px + var(--ppg-safe-top)) calc(6px + var(--ppg-safe-right)) calc(5px + var(--ppg-safe-bottom)) calc(6px + var(--ppg-safe-left));
+    height: calc(100dvh - 10px - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+  }
+
+  .ppg-checkers-arena {
+    display: block;
+    padding: 0;
+  }
+
+  .ppg-checkers-arena::after {
+    width: min(78dvw, 680px);
+    opacity: 0.9;
+  }
+
+  .ppg-checkers-board-stage {
+    position: absolute;
+    inset: 7px clamp(142px, 20dvw, 176px) 7px clamp(122px, 18dvw, 154px);
+    display: grid;
+    place-items: center;
+  }
+
+  .ppg-checkers-board-frame {
+    --ppg-board-pad: 6px;
+    width: min(calc(100dvh - 16px), calc(100dvw - 300px));
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .ppg-dom-game-ui.is-checkers .ppg-dom-checkers header.ppg-checkers-hero {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: clamp(116px, 17dvw, 150px);
+    min-height: 108px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 7px;
+    padding: 9px;
+  }
+
+  .ppg-checkers-hero .ppg-kicker {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+
+  .ppg-checkers-hero h2 {
+    max-width: 100%;
+    margin: 0;
+    font-size: clamp(19px, 6.5dvh, 27px);
+    line-height: 0.94;
+    overflow-wrap: anywhere;
+  }
+
+  .ppg-checkers-hero p {
+    display: block;
+    max-height: 46px;
+    color: rgba(255, 249, 233, 0.66);
+    font-size: 9px;
+    line-height: 1.18;
+    overflow: hidden;
+  }
+
+  .ppg-checkers-clock {
+    display: none;
+  }
+
+  .ppg-checkers-player-row {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    width: clamp(116px, 17dvw, 150px);
+    display: grid;
+    gap: 6px;
+  }
+
+  .ppg-checkers-player {
+    min-height: 48px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .ppg-checkers-player > span {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .ppg-checkers-player strong {
+    max-width: 72px;
+    font-size: 10px;
+  }
+
+  .ppg-checkers-player small {
+    font-size: 8px;
+  }
+
+  .ppg-checkers-player b {
+    min-width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .ppg-checkers-sidecar {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: clamp(134px, 19dvw, 170px);
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 6px;
+    padding: 7px;
+    overflow: hidden;
+  }
+
+  .ppg-checkers-statline {
+    gap: 3px;
+    padding: 7px;
+  }
+
+  .ppg-checkers-statline span {
+    font-size: 8px;
+  }
+
+  .ppg-checkers-statline strong {
+    font-size: clamp(17px, 5.4dvh, 22px);
+  }
+
+  [data-dom-checkers-score] {
+    gap: 4px;
+  }
+
+  .ppg-checkers-score-token {
+    min-width: 25px;
+    min-height: 25px;
+    padding: 0 3px;
+  }
+
+  [data-dom-checkers-score] i {
+    font-size: 14px;
+  }
+
+  .ppg-checkers-hints {
+    gap: 6px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .ppg-checkers-hints article {
+    grid-template-columns: 1fr;
+    gap: 3px;
+    min-height: 0;
+    padding: 7px;
+  }
+
+  .ppg-checkers-hints article:nth-child(n+3) {
+    display: none;
+  }
+
+  .ppg-checkers-hints b {
+    font-size: 13px;
+  }
+
+  .ppg-checkers-hints span {
+    max-height: 28px;
+    font-size: 8px;
+    line-height: 1.1;
+    overflow: hidden;
+    text-transform: none;
+  }
+
+  .ppg-checkers-history {
+    display: none;
+  }
+
+  .ppg-checkers-sidecar .ppg-dom-actions button {
+    min-height: 34px;
+    padding: 8px 6px;
+    font-size: 9px;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) {
+  .ppg-checkers-board-stage {
+    left: 112px;
+    right: 128px;
+  }
+
+  .ppg-checkers-board-frame {
+    width: min(calc(100dvh - 14px), calc(100dvw - 256px));
+  }
+
+  .ppg-dom-game-ui.is-checkers .ppg-dom-checkers header.ppg-checkers-hero,
+  .ppg-checkers-player-row {
+    width: 108px;
+  }
+
+  .ppg-checkers-sidecar {
+    width: 124px;
+  }
+}
+
+/* Unified Checkers lobby card: one game, two isolated modes. */
+.ppg-dom-game-card {
+  border-width: 2px;
+  border-style: solid;
+}
+
+button.ppg-dom-game-card {
+  cursor: pointer;
+}
+
+article.ppg-dom-game-card {
+  cursor: default;
+}
+
+.ppg-dom-game-card.is-multi {
+  grid-template-rows: auto auto auto;
+  align-items: center;
+}
+
+.ppg-dom-game-card.is-multi img {
+  grid-row: 1 / 4;
+}
+
+.ppg-dom-game-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  min-width: 0;
+  margin-top: 7px;
+}
+
+.ppg-dom-game-card-actions button {
+  min-width: 0;
+  min-height: 34px;
+  padding: 8px 7px;
+  border: 1px solid rgba(255, 243, 208, 0.22);
+  border-radius: 0;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+  color: #07100d;
+  background: linear-gradient(135deg, #baffc3, #52e2cc);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ppg-dom-game-card-actions button[data-dom-start-game] {
+  color: #fff9e9;
+  background: linear-gradient(135deg, #4ee9f2, #17677d);
+}
+
+.ppg-dom-game-card-actions button:disabled {
+  opacity: 0.62;
+}
+
+@media (min-width: 761px) {
+  .ppg-dom-game-card.is-multi {
+    min-height: 112px;
+  }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
+  .ppg-dom-lobby {
+    left: 50%;
+    right: auto;
+    bottom: max(7px, calc(7px + var(--ppg-safe-bottom)));
+    width: min(620px, calc(100dvw - 18px - var(--ppg-safe-left) - var(--ppg-safe-right)));
+    max-height: calc(100dvh - 14px - var(--ppg-safe-top) - var(--ppg-safe-bottom));
+    padding: 8px;
+    overflow: hidden;
+    transform: translateX(-50%);
+  }
+
+  .ppg-dom-lobby header,
+  .ppg-dom-lobby-foot {
+    display: none;
+  }
+
+  .ppg-dom-game-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 0;
+  }
+
+  .ppg-dom-game-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    min-height: 58px;
+    padding: 7px;
+  }
+
+  .ppg-dom-game-card img {
+    width: 30px;
+    height: 26px;
+  }
+
+  .ppg-dom-game-card span {
+    font-size: 15px;
+    line-height: 0.95;
+  }
+
+  .ppg-dom-game-card strong {
+    font-size: 8px;
+    line-height: 1.1;
+  }
+
+  .ppg-dom-game-card.is-multi {
+    min-height: 78px;
+  }
+
+  .ppg-dom-game-card-actions {
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .ppg-dom-game-card-actions button {
+    min-height: 24px;
+    padding: 5px 3px;
+    font-size: 8px;
   }
 }
