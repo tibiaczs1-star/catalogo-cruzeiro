@@ -51,10 +51,11 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Demo reaproveita as regras oficiais de Damas: captura obrigatoria, combo, dama e fim por falta de peca/movimento.
 - Objetivo: permitir teste visual e de fluxo de Damas sem precisar de segundo jogador real.
 
-## Atualizacao 2026-05-18 - enterpt1
+## Atualizacao 2026-05-18 - entryflow1
 
 - Removido o prompt visual de objetivo da interface PubPaid em desktop e mobile.
 - Removido o texto `Tocar para intro`; o botao de entrada passa a ser `Entrar`.
 - Removido o overlay textual `ENTER GAME` da intro, mantendo clique/Enter funcionais.
 - Hotspot de entrada da rua movido para a porta principal sob o letreiro PubPaid sem label textual, moldura ou circulo no chao.
 - Sinuca Demo e PvP: caçapas detectam a bola antes da parede rebater, usam raio maior e testam o caminho da bola entre frames para evitar que tacadas rapidas atravessem a boca.
+- Fluxo do botao `Entrar`: reinicia a intro mesmo se ela ja tiver rodado e avanca automaticamente para a tela inicial do jogo ao terminar.

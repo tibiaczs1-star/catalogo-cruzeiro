@@ -99,10 +99,14 @@ export class IntroScene extends Phaser.Scene {
     this.progressMarks = [];
     this.finalPulse = null;
     this.finalHitZone = null;
+    this.finalAutoEnterTimer = null;
+    this.enterEmitted = false;
     this.sequenceDone = false;
   }
 
   create() {
+    this.enterEmitted = false;
+    this.finalAutoEnterTimer = null;
     this.buildStageLayers();
     this.input.keyboard.on("keydown-ENTER", () => this.skipOrContinue());
     this.input.on("pointerdown", () => this.skipOrContinue());
@@ -301,7 +305,7 @@ export class IntroScene extends Phaser.Scene {
     this.finalHitZone = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT)
       .setInteractive()
       .setDepth(7);
-    this.finalHitZone.on("pointerdown", () => this.game.events.emit("pubpaid:intro-enter"));
+    this.finalHitZone.on("pointerdown", () => this.enterGame());
     this.tweens.add({
       targets: this.finalPulse,
       alpha: { from: 0.04, to: 0.22 },
@@ -310,6 +314,7 @@ export class IntroScene extends Phaser.Scene {
       repeat: -1,
       ease: "Sine.easeInOut"
     });
+    this.finalAutoEnterTimer = this.time.delayedCall(780, () => this.enterGame());
 
     updateGameState({
       currentScene: "intro",
@@ -320,9 +325,16 @@ export class IntroScene extends Phaser.Scene {
     });
   }
 
+  enterGame() {
+    if (this.enterEmitted) return;
+    this.enterEmitted = true;
+    this.finalAutoEnterTimer?.remove(false);
+    this.game.events.emit("pubpaid:intro-enter");
+  }
+
   skipOrContinue() {
     if (this.sequenceDone) {
-      this.game.events.emit("pubpaid:intro-enter");
+      this.enterGame();
       return;
     }
     this.tweens.killTweensOf([this.currentImage, this.nextImage, this.flashLayer]);

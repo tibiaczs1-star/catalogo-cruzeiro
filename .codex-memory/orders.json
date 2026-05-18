@@ -8,15 +8,16 @@
       "updatedAt": "2026-05-18T13:24:58.7213427-05:00",
       "status": "completed-local",
       "source": "chat",
-      "rawRequest": "esses objetivos so atrapalham, retire eles de mobile e de desktop e retire tocar para intro para começar; enter gamer para entra no jogo; essa entrada vai pra baixo do letreiro pub paid q la q e a porta do bar; retire essas informações; as bolas da sinuca n estão entrando na caçapa",
-      "summary": "Limpar textos de entrada/objetivo, deixar o botao principal como Entrar, remover marcador da porta e corrigir caçapas da Sinuca Demo/PvP.",
+      "rawRequest": "esses objetivos so atrapalham, retire eles de mobile e de desktop e retire tocar para intro para começar; enter gamer para entra no jogo; essa entrada vai pra baixo do letreiro pub paid q la q e a porta do bar; retire essas informações; as bolas da sinuca n estão entrando na caçapa; ok funcionou, mais quando aperta em entrar, não vai pra introdução depois tela inicial do jogo, concerte isso",
+      "summary": "Limpar textos de entrada/objetivo, deixar o botao principal como Entrar, remover marcador da porta, corrigir caçapas e garantir Entrar -> intro -> tela inicial.",
       "normalizedTasks": [
         "remover prompt visual de objetivo em desktop e mobile",
         "trocar Tocar para intro por Entrar",
         "remover overlay textual ENTER GAME da intro",
         "mover hotspot de entrada para porta principal sob o letreiro PubPaid",
         "remover circulo/marcador visual do chao na entrada",
-        "corrigir detecção de caçapa da Sinuca Demo e PvP"
+        "corrigir detecção de caçapa da Sinuca Demo e PvP",
+        "corrigir fluxo do botao Entrar para abrir a intro e seguir para a tela inicial"
       ],
       "filesTouched": [
         "pubpaid.html",
@@ -47,7 +48,7 @@
         "ui-cleanup"
       ],
       "nextSteps": [
-        "subir build 20260518-enterpt1",
+        "subir build 20260518-entryflow1",
         "validar online em desktop e mobile"
       ],
       "notes": "Validado localmente por node --check, guard PubPaid, HTTP/DOM, screenshots locais e regressao matematica/runtime das caçapas."

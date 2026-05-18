@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260518-enterpt1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260518-enterpt1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260518-entryflow1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260518-entryflow1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260518-enterpt1";
-import { BootScene } from "./scenes/BootScene.js?v=20260518-enterpt1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260518-enterpt1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260518-enterpt1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260518-enterpt1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260518-enterpt1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260518-enterpt1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260518-enterpt1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260518-enterpt1";
-import { UIScene } from "./scenes/UIScene.js?v=20260518-enterpt1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260518-entryflow1";
+import { BootScene } from "./scenes/BootScene.js?v=20260518-entryflow1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260518-entryflow1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260518-entryflow1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260518-entryflow1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260518-entryflow1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260518-entryflow1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260518-entryflow1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260518-entryflow1";
+import { UIScene } from "./scenes/UIScene.js?v=20260518-entryflow1";
 
-const PUBPAID_BUILD_VERSION = "20260518-enterpt1";
+const PUBPAID_BUILD_VERSION = "20260518-entryflow1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -542,17 +542,19 @@ function syncFullscreenWarning() {
   }
 }
 
-function startIntroScene() {
+function startIntroScene({ restart = false } = {}) {
   if (!areAssetsReady()) {
     pendingIntroStart = true;
     return;
   }
-  if (introStarted) return;
+  const introActive = game.scene.isActive("intro-scene");
+  if (introStarted && introActive && !restart) return;
+  if (introActive) {
+    game.scene.stop("intro-scene");
+  }
   introStarted = true;
   refs.permissionGate?.setAttribute("hidden", "");
-  if (!game.scene.isActive("intro-scene")) {
-    game.scene.start("intro-scene");
-  }
+  game.scene.start("intro-scene");
 }
 
 function openPermissionGate() {
@@ -577,7 +579,7 @@ async function activateExperience() {
   refs.splash?.setAttribute("hidden", "");
   refs.permissionGate?.setAttribute("hidden", "");
   setPermissionStatus("Abrindo o PubPaid...");
-  startIntroScene();
+  startIntroScene({ restart: true });
   let audioStarted = false;
   try {
     audioStarted = Boolean(soundtrack.startIntro());
@@ -741,6 +743,10 @@ function openSplash(step = "intro") {
   refs.splash?.removeAttribute("hidden");
   setStep(step);
   gameStarted = false;
+  introStarted = false;
+  if (game.scene.isActive("intro-scene")) {
+    game.scene.stop("intro-scene");
+  }
   closePanel();
   syncEnterExitButtons();
 }
@@ -796,6 +802,7 @@ async function startGame({ allowProfilePrompt = true } = {}) {
   if (game.scene.isActive("intro-scene")) {
     game.scene.stop("intro-scene");
   }
+  introStarted = false;
   if (
     !game.scene.isActive("character-select-scene") &&
     !game.scene.isActive("street-scene") &&
@@ -1073,6 +1080,7 @@ game.events.on("pubpaid:intro-ready", () => {
 });
 
 game.events.on("pubpaid:intro-enter", () => {
+  if (gameStarted) return;
   const auth = getAuthApi();
   if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");

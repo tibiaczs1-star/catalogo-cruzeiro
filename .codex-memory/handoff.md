@@ -2,9 +2,11 @@
 
 Updated: 2026-05-18T13:24:58.7213427-05:00
 
-PubPaid 2.0 esta na rodada local `20260518-enterpt1`. O trabalho atual limpou a entrada visual e corrigiu a caçapa da Sinuca Demo.
+PubPaid 2.0 esta na rodada local `20260518-entryflow1`. O trabalho atual limpou a entrada visual e corrigiu a caçapa da Sinuca Demo.
 
 Validacao nova desta rodada: Playwright local confirmou botao `Entrar`, nenhum marcador visual na porta da rua e as 6 caçapas encaçapando tacada rapida na cena real da Sinuca.
+
+Correcao adicional: o botao `Entrar` agora abre/reabre a intro e a intro avanca automaticamente para a tela inicial do jogo ao terminar, sem precisar de um segundo clique no frame final. Playwright local validou `Entrar -> intro -> character-select` e reentrada `Entrar -> intro -> street`.
 
 Rodada anterior: `20260518-withdrawpix1` adicionou chave Pix obrigatoria ao pedido de saque: valor + Pix sao enviados juntos, o backend rejeita pedido sem Pix e a chave aparece no historico da carteira e no admin.
 
@@ -75,7 +77,7 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## Validation Done
 
-- `20260518-enterpt1` local:
+- `20260518-entryflow1` local:
   - syntax checks em app, BootScene, IntroScene, StreetScene, PoolGameScene, domGameInterface, walletInterface e server;
   - `npm run guard:pubpaid`;
   - HTTP local sem `Tocar para intro` e sem `objetivo`, prompt hidden e build correto;
@@ -148,7 +150,7 @@ Estado de deploy: nao publicar online sem nova permissao do usuario.
 
 ## Next
 
-1. Quando o usuario autorizar, reiniciar/deployar `20260518-enterpt1`.
+1. Quando o usuario autorizar, reiniciar/deployar `20260518-entryflow1`.
 1. Quando o usuario autorizar, subir `20260518-poolspace3`.
 2. Validar online com duas contas Google reais a Sinuca `PvP real`.
 3. Confirmar em aparelho real que Damas Demo landscape mostra a captura encadeada sem falsa trava.
