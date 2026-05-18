@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-artpass1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-artpass1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-mobilefix1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-mobilefix1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-artpass1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-artpass1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260517-artpass1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-artpass1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260517-artpass1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-artpass1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-artpass1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-artpass1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-artpass1";
-import { UIScene } from "./scenes/UIScene.js?v=20260517-artpass1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-mobilefix1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-mobilefix1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260517-mobilefix1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-mobilefix1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260517-mobilefix1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-mobilefix1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-mobilefix1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-mobilefix1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-mobilefix1";
+import { UIScene } from "./scenes/UIScene.js?v=20260517-mobilefix1";
 
-const PUBPAID_BUILD_VERSION = "20260517-artpass1";
+const PUBPAID_BUILD_VERSION = "20260517-mobilefix1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -76,7 +76,6 @@ const refs = {
   audioToggle: document.querySelector("[data-audio-toggle]"),
   orientationGate: document.querySelector("[data-orientation-gate]"),
   orientationStatus: document.querySelector("[data-orientation-status]"),
-  orientationLandscape: document.querySelector("[data-orientation-landscape]"),
   fullscreenWarning: document.querySelector("[data-fullscreen-warning]"),
   fullscreenWarningCopy: document.querySelector("[data-fullscreen-warning-copy]"),
   returnFullscreen: document.querySelector("[data-return-fullscreen]"),
@@ -483,7 +482,7 @@ async function requestFullscreen() {
 }
 
 async function requestLandscapeLock() {
-  if (!needsLandscape() || orientationLocked || isTouchDevice) return false;
+  if (!needsLandscape() || orientationLocked) return false;
   const orientationApi = window.screen?.orientation;
   if (!orientationApi?.lock) return false;
   try {
@@ -523,11 +522,8 @@ function syncOrientationGate() {
   }
   if (refs.orientationStatus) {
     refs.orientationStatus.textContent = blocked
-      ? "Vire o aparelho manualmente. Quando a tela girar, toque em Já virei."
-      : "Horizontal pronto. Toque para continuar.";
-  }
-  if (refs.orientationLandscape) {
-    refs.orientationLandscape.hidden = !blocked;
+      ? "Gire o aparelho para horizontal para continuar."
+      : "Modo horizontal pronto.";
   }
 }
 
@@ -853,33 +849,8 @@ async function enterIntroAfterAuth({ syncFirst = true } = {}) {
   await activateExperience();
 }
 
-async function continueAfterManualLandscape() {
-  syncOrientationGate();
-  if (isOrientationBlocked()) {
-    if (refs.orientationStatus) {
-      refs.orientationStatus.textContent = "Ainda estou vendo o aparelho em vertical. Vire para horizontal e toque de novo.";
-    }
-    return;
-  }
-  if (!introStarted && !gameStarted) {
-    await enterIntroAfterAuth({ syncFirst: false });
-    return;
-  }
-  if (!gameStarted && refs.permissionGate && !refs.permissionGate.hasAttribute("hidden")) {
-    await activateExperience();
-    return;
-  }
-  syncFullscreenWarning();
-}
-
 function bindSplash() {
   document.addEventListener("click", async (event) => {
-    if (event.target.closest("[data-orientation-landscape]")) {
-      event.preventDefault();
-      await continueAfterManualLandscape();
-      return;
-    }
-
     if (event.target.closest("[data-start-experience]")) {
       event.preventDefault();
       await activateExperience();

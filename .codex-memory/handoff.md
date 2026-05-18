@@ -1,12 +1,12 @@
 # Handoff
 
-Updated: 2026-05-17T19:02:00-05:00
+Updated: 2026-05-17T18:35:00-05:00
 
-PubPaid 2.0 esta na rodada `20260517-artpass1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
+PubPaid 2.0 esta na rodada `20260517-mobilefix1`. O trabalho atual focou Damas como arena PvP dedicada e premium, mantendo o fluxo canonico de Google, saldo real, escrow, ready duplo, W.O. e backend autoritativo.
 
 Adicao desta rodada: `Damas Demo` e treino local contra maquina para teste visual/fluxo sem ficha, sem fila, sem escrow, sem carteira e sem alterar saldo.
 
-Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `Ligar som` nao abre mais o jogo; conta Google confirmada mostra `Tocar para intro`; Damas Demo removeu grafico de mao, ganhou fundo, pecas quadradas, score visual, som curto de movimento/captura e layout landscape compacto. A rodada `20260517-artpass1` deixou o mobile mais jogo e menos computador: tabuleiro protagonista, placas pixel/neon compactas, menos texto lateral e botao `Ja virei` que apenas revalida orientacao sem forcar lock no celular.
+Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `Ligar som` nao abre mais o jogo; conta Google confirmada mostra `Tocar para intro`; Damas Demo removeu grafico de mao, ganhou fundo, pecas quadradas, score visual, som curto de movimento/captura e layout landscape compacto.
 
 ## What Changed
 
@@ -67,10 +67,6 @@ Patch mais recente: mobile voltou a exigir horizontal antes de entrar no jogo; `
   - mobile landscape 844x390: toque abriu intro sem depender de audio, Damas Demo respondeu a tap, 64 casas, sem overflow;
   - mobile portrait 390x844: gate horizontal visivel, intro nao iniciou;
   - Google mockado: `Tocar para intro` apareceu, audio nao abriu intro, toque no card abriu intro.
-- Browser local `20260517-artpass1`:
-  - portrait mobile: gate visivel, `Ja virei` nao inicia enquanto ainda vertical;
-  - apos simular landscape, o gate libera entrada;
-  - Damas Demo mobile landscape: 64 casas, sem mao, sem overflow, HUD em placas compactas e tabuleiro central.
 - Online Render:
   - `/api/pubpaid/build` retornou `20260517-mobilefix1`;
   - smoke mobile landscape com Google mockado abriu intro pelo botao, manteve audio separado e rodou Damas Demo por tap sem overflow.

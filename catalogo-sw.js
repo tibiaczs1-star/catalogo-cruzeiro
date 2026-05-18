@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20260517-artpass1";
+const VERSION = "20260517-mobilefix1";
 const CACHE_PREFIXES = ["catalogo-", "pubpaid", "ppg"];
 
 self.addEventListener("install", (event) => {

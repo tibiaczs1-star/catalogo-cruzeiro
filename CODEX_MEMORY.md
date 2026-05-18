@@ -49,11 +49,10 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Ultima Rodada Validada
 
-- Build local: `20260517-artpass1`.
+- Build local: `20260517-mobilefix1`.
 - Mobile voltou a ter regra horizontal: portrait mostra gate de orientacao e nao abre intro/jogo antes de virar.
 - Botao `Ligar som` deixou de abrir o jogo; com Google confirmado, o fluxo esperado e tocar no card/botao para abrir a intro.
 - Damas Demo manteve treino local sem ficha/saldo, removeu grafico de mao, ganhou fundo de arena, pecas quadradas, placar mais visual, som de movimento e suporte melhor a tap.
 - Layout de Damas em mobile landscape foi compactado para manter tabuleiro, score e botoes dentro do viewport, sem scroll.
 - Teste Playwright local validou desktop, mobile landscape e mobile portrait; teste com Google mockado confirmou `Tocar para intro` e que audio nao inicia a intro.
 - Online Render confirmou `/api/pubpaid/build` em `20260517-mobilefix1`; smoke online mobile landscape com Google mockado abriu intro pelo botao, manteve audio separado, moveu Damas Demo por tap, sem mao e sem overflow.
-- Rodada de arte mobile `20260517-artpass1`: Damas mobile landscape foi dirigida como cena de jogo, com tabuleiro protagonista, placas pixel/neon menores, score compacto, texto lateral reduzido e botao `Ja virei` que apenas revalida a orientacao sem forcar lock no celular.

@@ -1,7 +1,7 @@
 import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260517-artpass1";
+const ASSET_VERSION = "20260517-mobilefix1";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {
