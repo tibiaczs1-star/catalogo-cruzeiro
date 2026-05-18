@@ -74,3 +74,11 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - HUD virou prancheta/etiqueta de ronda, com pistas, tempo, confianca e estado da encomenda.
 - Personagem Lia desenhado em camadas pixel art, com mochila/colete, rosto simples, passo e pacote.
 - Proximos passos: validar screenshot e fluxo de coleta/chegada.
+
+## Atualizacao 2026-05-18 - sinuca-premium1
+
+- Criada primeira versao jogavel local de `Mesa de Ouro: Sinuca Brasileira` em `.codex-temp/sinuca-premium/`.
+- O jogo roda via servidor Node local, com canvas 1280x720, mesa premium, bola branca, 7 bolas da regra brasileira, mira pontilhada, taco, medidor de forca, caçapas, caçapa bonus, tentativas, combo e pontuacao arcade.
+- Incluidos hooks `window.render_game_to_text` e `window.advanceTime(ms)` para teste automatizado.
+- Esta versao e um prototipo premium isolado: nao mexe em carteira, saldo, PvP real ou runtime canonico PubPaid.
+- Proximos passos: validar screenshot/playtest, ajustar peso da fisica, caçapas e controles mobile antes de integrar ao `/pubpaid.html`.
