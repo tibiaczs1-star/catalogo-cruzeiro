@@ -2,6 +2,26 @@
 
 Atualizado: 2026-05-20
 
+## Rodada Atual - 20260520-poolhand1
+
+- Sinuca/Vale Pool recebeu correção de fim de mesa no modo Livre: quando acabam as bolas de ataque e fica só a branca, o jogo entra em `FIM` e mostra vencedor/empate.
+- Falta de bola branca agora aplica `bola na mão`: o adversário ganha a vez e pode posicionar a branca antes de tacar.
+- Na Demo, quando a IA ganha bola na mão ela posiciona automaticamente; quando o jogador ganha, o primeiro clique na mesa posiciona a branca e o clique seguinte joga.
+- No PvP, o servidor grava `ballInHandSeat`; o cliente envia `cueX/cueY` para a próxima tacada e bloqueia o tiro até o jogador posicionar a branca.
+- Build local: `20260520-poolhand1`.
+- Validação: `node --check` em `games/vale-pool/game.js`, `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/services/pvpService.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `/api/pubpaid/build` respondeu `20260520-poolhand1` na porta 3001; Playwright direcionado confirmou `bolaNaMao: player -> ""` após posicionar e modo Livre vazio encerrando em `FIM`.
+- Evidências: `.codex-temp/vale-pool-poolhand1/ball-in-hand-placed.png` e `.codex-temp/vale-pool-poolhand1/free-mode-finished.png`.
+
+## Rodada Atual - 20260520-checkerscam1
+
+- Damas PubPaid recebeu a direção do CSV `C:\Users\junio\Downloads\table-1779287972054.csv`.
+- Mantido o fluxo padrão: card único de Damas, `Demo` como treino local sem ficha/carteira e `PvP` pelo matchmaking/ready real.
+- Arena de Damas ganhou intro cinematica em DOM/CSS, moeda de abertura, controles de câmera, zoom por wheel, rotação/pan pela moldura, virada suave da câmera para o adversário quando a vez muda, luzes/colunas e SFX extra para moeda/coroação.
+- Correção posterior: textos centralizados e a moeda agora bloqueia só durante a abertura; ao terminar, ela some, re-renderiza o tabuleiro e libera a partida. O fim de jogo continua no fluxo normal de resultado.
+- Build local: `20260520-checkerscam1`.
+- Validação: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; servidor local na porta 3002 respondeu `/api/pubpaid/build=20260520-checkerscam1`; Playwright smoke passou em desktop 1280x720 e mobile landscape 844x390 com `cells=64`, `enabledCells=64`, `coinHidden=true` e painel dentro do viewport.
+- Observação: revisar visual manualmente em `http://127.0.0.1:3002/pubpaid.html?v=20260520-checkerscam1&review=damas` e validar PvP real em duas sessões autenticadas antes de fechar fluxo financeiro.
+
 ## Rodada Atual - 20260520-poolturn1
 
 - Sinuca/Vale Pool manteve a arte aprovada e recebeu correção de execução no Par/Impar.

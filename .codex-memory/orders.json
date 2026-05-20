@@ -1,7 +1,58 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T08:39:00-05:00",
+  "lastUpdatedAt": "2026-05-20T09:58:00-05:00",
   "orders": [
+    {
+      "id": "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca",
+      "createdAt": "2026-05-20T09:58:00-05:00",
+      "updatedAt": "2026-05-20T09:58:00-05:00",
+      "status": "poolhand1-implemented-validated",
+      "source": "chat",
+      "rawRequest": "Corrigir modo Livre que ficava preso quando sobrava so a branca e implementar bola na mao quando alguem derruba a branca.",
+      "summary": "Finalizar mesa Livre sem bolas de ataque e aplicar bola na mao apos falta da branca.",
+      "normalizedTasks": [
+        "encerrar modo Livre quando nao houver bolas de ataque",
+        "declarar vencedor ou empate pelo placar atual",
+        "dar bola na mao ao adversario quando a branca cair",
+        "permitir posicionamento da branca antes da tacada na Demo e no PvP",
+        "validar com Playwright e guard PubPaid"
+      ],
+      "filesTouched": [
+        "games/vale-pool/game.js",
+        "games/vale-pool/index.html",
+        "games/vale-pool/progress.md",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/services/pvpService.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js",
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        ".codex-agents/game-director-system/projects/vale-pool.md",
+        "C:/Users/junio/.codex/skills/game-director-general/references/pool-modalities.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-poolhand1/ball-in-hand-placed.png",
+        ".codex-temp/vale-pool-poolhand1/free-mode-finished.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "bola-na-mao",
+        "livre",
+        "pvp",
+        "demo"
+      ],
+      "nextSteps": [
+        "validar PvP real em duas sessoes autenticadas diferentes quando houver contas/sessoes disponiveis"
+      ],
+      "notes": "Build local 20260520-poolhand1 validado na porta 3001."
+    },
     {
       "id": "2026-05-20-corrigir-turno-parimpar-e-animacao-modo-sinuca",
       "createdAt": "2026-05-20T08:39:00-05:00",
@@ -1519,6 +1570,36 @@
         "validar PvP real com duas sessoes autenticadas"
       ],
       "notes": "A regra agora acompanha a partida: Livre informa alvo livre 1-9, Brasileira informa bola da vez, Par/Impar informa definicao/grupo e servidor devolve mensagem de grupo definido."
+    },
+    {
+      "id": "2026-05-20-aplicar-na-damas-pubpaid-as-metas-do-csv-intro-cinematica-coin-flip-camera-livre",
+      "createdAt": "2026-05-20T14:54:06.052Z",
+      "updatedAt": "2026-05-20T14:54:06.052Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "\\",
+      "summary": "Aplicar na Damas PubPaid as metas do CSV: intro cinematica, coin flip, camera livre, virada de camera por turno, luz/arena e SFX, mantendo Demo/PvP padrão.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-corrigir-responsividade-textos-da-damas-pubpaid-centralizar-textos-e-fazer-a-moe",
+      "createdAt": "2026-05-20T15:04:17.297Z",
+      "updatedAt": "2026-05-20T15:04:17.297Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "n esqueça de levar em conta resposividade; ok so centralize os textos, e depois que a moeda rola, ela tem que liberar o jogo, por isso travou, depois de o jogo acabar contninua o fliuxo normal",
+      "summary": "Corrigir responsividade/textos da Damas PubPaid, centralizar textos e fazer a moeda liberar automaticamente o jogo depois da abertura.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

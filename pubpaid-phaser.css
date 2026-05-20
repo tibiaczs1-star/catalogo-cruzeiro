@@ -6604,6 +6604,34 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active #pubpaid-phaser-root canvas {
   }
 }
 
+@keyframes ppgCheckersCinematicOrbit {
+  0% {
+    transform: translate3d(0, -10px, 0) rotateX(66deg) rotateZ(-42deg) scale(0.82);
+  }
+  52% {
+    transform: translate3d(0, 2px, 0) rotateX(62deg) rotateZ(124deg) scale(1.08);
+  }
+  100% {
+    transform:
+      translate3d(var(--ppg-checkers-pan-x), var(--ppg-checkers-pan-y), 0)
+      rotateX(var(--ppg-checkers-tilt))
+      rotateZ(calc(var(--ppg-checkers-turn-yaw) + var(--ppg-checkers-user-yaw)))
+      scale(var(--ppg-checkers-zoom));
+  }
+}
+
+@keyframes ppgCheckersCoinFlip {
+  0% {
+    transform: translateY(0) rotateY(0deg) rotateZ(-8deg);
+  }
+  42% {
+    transform: translateY(-42px) rotateY(720deg) rotateZ(18deg);
+  }
+  100% {
+    transform: translateY(0) rotateY(1080deg) rotateZ(0deg);
+  }
+}
+
 @media (max-width: 1100px) {
   .ppg-checkers-arena {
     grid-template-columns: minmax(260px, 1fr) minmax(220px, 0.68fr);
@@ -6821,6 +6849,8 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
   --ppg-checkers-red: #ff6d88;
   --ppg-checkers-panel: rgba(8, 11, 17, 0.72);
   --ppg-checkers-line: rgba(255, 243, 208, 0.18);
+  position: relative;
+  overflow: hidden;
   padding: clamp(12px, 1.6vw, 24px);
   gap: clamp(12px, 1.45vw, 22px);
   background:
@@ -6886,10 +6916,12 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 .ppg-dom-game-ui.is-checkers .ppg-dom-checkers header.ppg-checkers-hero {
   min-width: 0;
   align-items: center;
+  text-align: center;
 }
 
 .ppg-checkers-hero .ppg-kicker {
   display: inline-flex;
+  justify-content: center;
   width: fit-content;
   max-width: 100%;
   padding: 5px 8px;
@@ -6910,8 +6942,11 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 
 .ppg-checkers-hero p {
   max-width: 64ch;
+  margin-right: auto;
+  margin-left: auto;
   color: rgba(255, 249, 233, 0.76);
   overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .ppg-checkers-clock,
@@ -6959,9 +6994,16 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 
 .ppg-checkers-board-stage {
   perspective: 1100px;
+  perspective-origin: 50% 42%;
 }
 
 .ppg-checkers-board-frame {
+  --ppg-checkers-turn-yaw: 0deg;
+  --ppg-checkers-user-yaw: 0deg;
+  --ppg-checkers-zoom: 1;
+  --ppg-checkers-pan-x: 0px;
+  --ppg-checkers-pan-y: 0px;
+  --ppg-checkers-tilt: 56deg;
   --ppg-board-pad: clamp(12px, 1.15vw, 20px);
   width: min(calc(100dvh - 150px), calc(100dvw - 500px), 780px);
   min-width: min(420px, calc(100dvw - 38px));
@@ -6976,6 +7018,14 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
     0 0 44px rgba(242, 188, 97, 0.12),
     inset 0 0 0 2px rgba(255, 246, 220, 0.1),
     inset 0 24px 42px rgba(255, 229, 172, 0.08);
+  transform:
+    translate3d(var(--ppg-checkers-pan-x), var(--ppg-checkers-pan-y), 0)
+    rotateX(var(--ppg-checkers-tilt))
+    rotateZ(calc(var(--ppg-checkers-turn-yaw) + var(--ppg-checkers-user-yaw)))
+    scale(var(--ppg-checkers-zoom));
+  transform-style: preserve-3d;
+  transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1), filter 0.42s ease;
+  will-change: transform;
 }
 
 .ppg-checkers-board-frame::before {
@@ -6994,6 +7044,116 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
   box-shadow:
     inset 0 0 0 1px rgba(255, 246, 220, 0.12),
     inset 0 0 46px rgba(0, 0, 0, 0.42);
+  transform: translateZ(10px);
+  transform-style: preserve-3d;
+}
+
+.ppg-checkers-arena.is-cinematic .ppg-checkers-board-frame {
+  animation: ppgCheckersCinematicOrbit 5.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  filter: saturate(1.18) contrast(1.08);
+}
+
+.ppg-checkers-orbit-lights {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ppg-checkers-orbit-lights::before {
+  content: "";
+  position: absolute;
+  inset: 5% 4% 9%;
+  opacity: 0.58;
+  background:
+    linear-gradient(180deg, rgba(255, 221, 139, 0.4), rgba(126, 68, 24, 0.2) 44%, transparent 78%) left 6% top / 18px 100% no-repeat,
+    linear-gradient(180deg, rgba(255, 221, 139, 0.4), rgba(126, 68, 24, 0.2) 44%, transparent 78%) right 6% top / 18px 100% no-repeat,
+    linear-gradient(180deg, rgba(255, 221, 139, 0.34), rgba(126, 68, 24, 0.16) 44%, transparent 78%) left 18% top / 14px 88% no-repeat,
+    linear-gradient(180deg, rgba(255, 221, 139, 0.34), rgba(126, 68, 24, 0.16) 44%, transparent 78%) right 18% top / 14px 88% no-repeat;
+}
+
+.ppg-checkers-orbit-lights i {
+  position: absolute;
+  width: clamp(90px, 12vw, 170px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 226, 154, 0.38), rgba(255, 226, 154, 0.06) 44%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.54;
+  filter: blur(1px);
+}
+
+.ppg-checkers-orbit-lights i:nth-child(1) { left: 6%; top: 10%; }
+.ppg-checkers-orbit-lights i:nth-child(2) { right: 8%; top: 12%; background: radial-gradient(circle, rgba(92, 230, 222, 0.28), transparent 68%); }
+.ppg-checkers-orbit-lights i:nth-child(3) { left: 14%; bottom: 10%; background: radial-gradient(circle, rgba(142, 240, 163, 0.24), transparent 68%); }
+.ppg-checkers-orbit-lights i:nth-child(4) { right: 12%; bottom: 12%; background: radial-gradient(circle, rgba(255, 109, 136, 0.24), transparent 68%); }
+.ppg-checkers-orbit-lights i:nth-child(5) { left: 44%; top: 2%; background: radial-gradient(circle, rgba(255, 255, 255, 0.28), transparent 64%); }
+
+.ppg-checkers-coinflip {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+  min-width: 132px;
+  padding: 14px 16px 13px;
+  border: 1px solid rgba(255, 236, 177, 0.38);
+  color: var(--ppg-checkers-cream);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 232, 158, 0.28), transparent 48%),
+    rgba(4, 7, 12, 0.72);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.44), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+  text-align: center;
+}
+
+.ppg-checkers-coinflip[hidden] {
+  display: none;
+}
+
+.ppg-checkers-coinflip span {
+  width: 46px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 26%, rgba(255, 255, 255, 0.58), transparent 22%),
+    radial-gradient(circle at 50% 56%, #ffe29c 0 28%, #ca7d30 30% 64%, #5f2a12 66% 100%);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.34), inset 0 0 0 3px rgba(255, 244, 198, 0.28);
+}
+
+.ppg-checkers-coinflip.is-flipping span {
+  animation: ppgCheckersCoinFlip 1.15s ease-in-out 4;
+}
+
+.ppg-checkers-coinflip strong {
+  font-size: 18px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ppg-checkers-coinflip small {
+  color: rgba(255, 249, 233, 0.72);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.ppg-checkers-camera {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.ppg-checkers-camera button {
+  min-width: 0;
+  min-height: 32px;
+  border: 1px solid rgba(92, 230, 222, 0.22);
+  color: var(--ppg-checkers-cream);
+  background: rgba(92, 230, 222, 0.08);
+  font-weight: 900;
 }
 
 .ppg-dom-cell {
@@ -7079,6 +7239,20 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 
 .ppg-checkers-statline strong {
   overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.ppg-checkers-statline,
+.ppg-checkers-hints article,
+.ppg-checkers-history article,
+.ppg-checkers-player {
+  text-align: center;
+}
+
+.ppg-checkers-hints span,
+.ppg-checkers-history small,
+.ppg-checkers-player small {
+  text-align: center;
 }
 
 .ppg-checkers-sidecar .ppg-dom-actions {
@@ -7323,6 +7497,36 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
     padding: 8px 6px;
     font-size: 9px;
     line-height: 1;
+  }
+
+  .ppg-checkers-camera {
+    gap: 3px;
+  }
+
+  .ppg-checkers-camera button {
+    min-height: 26px;
+    padding: 3px 2px;
+    font-size: 10px;
+  }
+
+  .ppg-checkers-coinflip {
+    min-width: 96px;
+    padding: 9px 10px;
+  }
+
+  .ppg-checkers-coinflip span {
+    width: 32px;
+  }
+
+  .ppg-checkers-coinflip strong {
+    font-size: 13px;
+  }
+
+  .ppg-checkers-coinflip small {
+    max-width: 82px;
+    font-size: 8px;
+    line-height: 1.05;
+    text-align: center;
   }
 }
 
@@ -8457,6 +8661,15 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
     min-height: 31px;
     padding: 6px;
     font-size: 9px;
+  }
+
+  .ppg-checkers-camera {
+    grid-column: 1 / -1;
+  }
+
+  .ppg-checkers-camera button {
+    min-height: 28px;
+    font-size: 10px;
   }
 }
 

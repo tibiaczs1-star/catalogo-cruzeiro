@@ -1,7 +1,29 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T08:39:00-05:00",
+  "lastUpdatedAt": "2026-05-20T09:58:00-05:00",
   "assets": [
+    {
+      "id": "vale-pool-poolhand1-ball-in-hand-placed",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-poolhand1/ball-in-hand-placed.png",
+      "note": "Vale Pool poolhand1: branca reposicionada por bola na mao antes da tacada.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca"
+      ],
+      "createdAt": "2026-05-20T09:58:00-05:00"
+    },
+    {
+      "id": "vale-pool-poolhand1-free-mode-finished",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-poolhand1/free-mode-finished.png",
+      "note": "Vale Pool poolhand1: modo Livre encerra em FIM quando sobra so a branca.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca"
+      ],
+      "createdAt": "2026-05-20T09:58:00-05:00"
+    },
     {
       "id": "vale-pool-poolturn1-mode-reveal",
       "kind": "image",
@@ -712,6 +734,15 @@
         "2026-05-20-clarear-regras-vivas-sinuca-pubpaid-e-commitar"
       ],
       "createdAt": "2026-05-20T05:46:47.000Z"
+    },
+    {
+      "id": "table-1779287972054-csv",
+      "kind": "csv-reference",
+      "path": "C:\\\\Users\\\\junio\\\\Downloads\\\\table-1779287972054.csv",
+      "source": "workspace",
+      "note": "Referencia enviada para transformar Damas PubPaid: intro cinematica, coin flip, camera livre, transicao de turno, iluminacao/arena e SFX.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T14:54:06.038Z"
     }
   ]
 }

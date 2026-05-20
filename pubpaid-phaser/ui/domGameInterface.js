@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-poolturn1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-checkerscam1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-poolturn1";
+} from "../services/pvpService.js?v=20260520-checkerscam1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-poolturn1";
-import { Chess } from "../vendor/chess.js?v=20260520-poolturn1";
+} from "../core/checkersRules.js?v=20260520-checkerscam1";
+import { Chess } from "../vendor/chess.js?v=20260520-checkerscam1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -244,6 +244,10 @@ export function bindDomGameInterface(game) {
     poolTouchShot: document.querySelector("[data-dom-pool-touch-shot]"),
     forfeitPool: document.querySelector("[data-dom-forfeit-pool]"),
     checkers: document.querySelector("[data-dom-checkers]"),
+    checkersArena: document.querySelector("[data-dom-checkers] .ppg-checkers-arena"),
+    checkersStage: document.querySelector("[data-dom-checkers-stage]"),
+    checkersFrame: document.querySelector("[data-dom-checkers-frame]"),
+    checkersCoinFlip: document.querySelector("[data-dom-checkers-coinflip]"),
     checkersBoard: document.querySelector("[data-dom-checkers-board]"),
     checkersKicker: document.querySelector("[data-dom-checkers-kicker]"),
     checkersTitle: document.querySelector("[data-dom-checkers-title]"),
@@ -316,7 +320,20 @@ export function bindDomGameInterface(game) {
     poolDemoState: null,
     checkersSound: null,
     lastCheckersSoundKey: "",
-    lastCheckersTouchAt: 0
+    lastCheckersTouchAt: 0,
+    reviewModeBooted: false,
+    checkersIntroMatchKey: "",
+    checkersIntroTimer: null,
+    checkersIntroLocked: false,
+    checkersCamera: {
+      yaw: 0,
+      zoom: 1,
+      panX: 0,
+      panY: 0,
+      dragId: null,
+      dragX: 0,
+      dragY: 0
+    }
   };
 
   const setPanel = (name) => {
@@ -618,6 +635,72 @@ export function bindDomGameInterface(game) {
     return `${formatCheckersSquare(move.from)}${connector}${formatCheckersSquare(move.to)}`;
   };
 
+  const resetCheckersCamera = () => {
+    Object.assign(local.checkersCamera, {
+      yaw: 0,
+      zoom: 1,
+      panX: 0,
+      panY: 0,
+      dragId: null,
+      dragX: 0,
+      dragY: 0
+    });
+  };
+
+  const clampCheckersCamera = () => {
+    local.checkersCamera.zoom = clampUiNumber(local.checkersCamera.zoom, 0.82, 1.28, 1);
+    local.checkersCamera.yaw = clampUiNumber(local.checkersCamera.yaw, -32, 32, 0);
+    local.checkersCamera.panX = clampUiNumber(local.checkersCamera.panX, -42, 42, 0);
+    local.checkersCamera.panY = clampUiNumber(local.checkersCamera.panY, -30, 30, 0);
+  };
+
+  const applyCheckersCamera = (match = {}, seat = "playerOne") => {
+    if (!refs.checkersFrame) return;
+    clampCheckersCamera();
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const turnYaw = match.status === "active" && match.turn === rivalSeat ? 180 : 0;
+    const cinematic = refs.checkersArena?.classList.contains("is-cinematic");
+    refs.checkersFrame.style.setProperty("--ppg-checkers-turn-yaw", `${turnYaw}deg`);
+    refs.checkersFrame.style.setProperty("--ppg-checkers-user-yaw", `${local.checkersCamera.yaw}deg`);
+    refs.checkersFrame.style.setProperty("--ppg-checkers-zoom", `${local.checkersCamera.zoom}`);
+    refs.checkersFrame.style.setProperty("--ppg-checkers-pan-x", `${local.checkersCamera.panX}px`);
+    refs.checkersFrame.style.setProperty("--ppg-checkers-pan-y", `${local.checkersCamera.panY}px`);
+    refs.checkersFrame.style.setProperty("--ppg-checkers-tilt", cinematic ? "64deg" : "56deg");
+  };
+
+  const startCheckersCinematic = (match = {}) => {
+    const key = match.id || "";
+    if (!key || local.checkersIntroMatchKey === key) return;
+    local.checkersIntroMatchKey = key;
+    local.checkersIntroLocked = true;
+    refs.checkersArena?.classList.add("is-cinematic");
+    refs.checkersCoinFlip?.classList.add("is-flipping");
+    playCheckersMoveSound("coin");
+    window.clearTimeout(local.checkersIntroTimer);
+    local.checkersIntroTimer = window.setTimeout(() => {
+      local.checkersIntroLocked = false;
+      refs.checkersArena?.classList.remove("is-cinematic");
+      refs.checkersCoinFlip?.classList.remove("is-flipping");
+      if (refs.checkersCoinFlip) refs.checkersCoinFlip.hidden = true;
+      applyCheckersCamera(local.demoCheckers || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+      renderPvpCheckers();
+    }, 5200);
+  };
+
+  const renderCheckersCoinFlip = (match = {}, demoMode = false) => {
+    if (!refs.checkersCoinFlip) return;
+    const coin = match.coinFlip || {};
+    const firstSeat = coin.firstSeat || "playerOne";
+    const face = demoMode ? "cara" : coin.face || "cara";
+    const firstName = displayNameFor(match[firstSeat] || (firstSeat === "playerOne" ? currentPvpPlayer() : rivalPvpPlayer()) || {});
+    const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
+    refs.checkersCoinFlip.hidden = !opening;
+    if (opening) {
+      refs.checkersCoinFlip.querySelector("strong").textContent = face === "coroa" ? "Coroa" : "Cara";
+      refs.checkersCoinFlip.querySelector("small").textContent = `${firstName || "Jogador"} comeca`;
+    }
+  };
+
   const chessSeatForColor = (state = {}, color = "white") =>
     color === "black" ? state.blackSeat || "playerTwo" : state.whiteSeat || "playerOne";
 
@@ -679,22 +762,25 @@ export function bindDomGameInterface(game) {
       const gain = context.createGain();
       const hit = context.createOscillator();
       const shine = context.createOscillator();
+      const isCapture = kind === "capture";
+      const isCoin = kind === "coin";
+      const isCrown = kind === "crown";
       hit.type = "triangle";
       shine.type = "sine";
-      hit.frequency.setValueAtTime(kind === "capture" ? 176 : 220, now);
-      hit.frequency.exponentialRampToValueAtTime(kind === "capture" ? 92 : 132, now + 0.12);
-      shine.frequency.setValueAtTime(kind === "capture" ? 520 : 660, now);
-      shine.frequency.exponentialRampToValueAtTime(kind === "capture" ? 260 : 440, now + 0.08);
+      hit.frequency.setValueAtTime(isCoin ? 720 : isCrown ? 392 : isCapture ? 176 : 220, now);
+      hit.frequency.exponentialRampToValueAtTime(isCoin ? 280 : isCrown ? 740 : isCapture ? 92 : 132, now + 0.12);
+      shine.frequency.setValueAtTime(isCoin ? 1180 : isCrown ? 980 : isCapture ? 520 : 660, now);
+      shine.frequency.exponentialRampToValueAtTime(isCoin ? 620 : isCrown ? 1320 : isCapture ? 260 : 440, now + 0.08);
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(kind === "capture" ? 0.13 : 0.075, now + 0.012);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + (kind === "capture" ? 0.18 : 0.12));
+      gain.gain.exponentialRampToValueAtTime(isCapture || isCoin || isCrown ? 0.13 : 0.075, now + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + (isCoin || isCrown ? 0.28 : isCapture ? 0.18 : 0.12));
       hit.connect(gain);
       shine.connect(gain);
       gain.connect(context.destination);
       hit.start(now);
       shine.start(now);
-      hit.stop(now + 0.2);
-      shine.stop(now + 0.14);
+      hit.stop(now + (isCoin || isCrown ? 0.32 : 0.2));
+      shine.stop(now + (isCoin || isCrown ? 0.26 : 0.14));
     } catch (_error) {
       // Sound is cosmetic; gameplay must continue silently if the browser blocks it.
     }
@@ -728,7 +814,7 @@ export function bindDomGameInterface(game) {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     coinFlip: {
-      face: "demo",
+      face: "cara",
       firstSeat: "playerOne"
     }
   });
@@ -817,7 +903,14 @@ export function bindDomGameInterface(game) {
 
   const resetDemoCheckersState = () => {
     window.clearTimeout(local.demoAiTimer);
+    window.clearTimeout(local.checkersIntroTimer);
     local.demoAiTimer = null;
+    local.checkersIntroTimer = null;
+    local.checkersIntroLocked = false;
+    local.checkersIntroMatchKey = "";
+    refs.checkersArena?.classList.remove("is-cinematic");
+    refs.checkersCoinFlip?.classList.remove("is-flipping");
+    if (refs.checkersCoinFlip) refs.checkersCoinFlip.hidden = true;
     local.demoCheckers = null;
     local.demoSelected = null;
     local.demoLegalMoves = [];
@@ -998,6 +1091,7 @@ export function bindDomGameInterface(game) {
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
     local.lastCheckersSoundKey = "";
+    resetCheckersCamera();
     game.events.emit("pubpaid:music-zone", gameAudioZone("checkers"));
     setPanel("checkers");
     updateGameState({
@@ -1157,6 +1251,11 @@ export function bindDomGameInterface(game) {
     refs.checkersBoard.dataset.orientation = seat === "playerTwo" ? "flipped" : "normal";
     refs.checkersBoard.dataset.seat = seat;
     refs.checkersBoard.dataset.mode = demoMode ? "demo" : "pvp";
+    refs.checkersArena?.setAttribute("data-turn-seat", match.turn || "idle");
+    refs.checkersArena?.setAttribute("data-checkers-mode", demoMode ? "demo" : "pvp");
+    startCheckersCinematic(match);
+    renderCheckersCoinFlip(match, demoMode);
+    applyCheckersCamera(match, seat);
     try {
       const cellsMarkup = Array.from({ length: CHECKERS_SIZE * CHECKERS_SIZE }, (_, index) => {
           const displayRow = Math.floor(index / CHECKERS_SIZE);
@@ -1180,7 +1279,7 @@ export function bindDomGameInterface(game) {
             lastMove?.to?.row === rowIndex && lastMove?.to?.col === colIndex ? "is-last-to" : "",
             lastMove?.capture?.row === rowIndex && lastMove?.capture?.col === colIndex ? "is-last-capture" : ""
           ].filter(Boolean).join(" ");
-          const disabled = match.status !== "active" || match.turn !== seat ? " disabled" : "";
+          const disabled = local.checkersIntroLocked || match.status !== "active" || match.turn !== seat ? " disabled" : "";
           const checker = piece
             ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${isCheckersKing(piece) ? " is-king" : ""}" ${own ? "draggable=\"true\"" : ""}>${isCheckersKing(piece) ? `<span class="ppg-dom-crown" aria-hidden="true"></span>` : ""}</span>`
             : "";
@@ -1191,7 +1290,7 @@ export function bindDomGameInterface(game) {
       const soundKey = match.lastMove?.at ? `${match.id}:${match.lastMove.index || ""}:${match.lastMove.at}` : "";
       if (soundKey && soundKey !== local.lastCheckersSoundKey) {
         local.lastCheckersSoundKey = soundKey;
-        playCheckersMoveSound(match.lastMove?.capture ? "capture" : "move");
+        playCheckersMoveSound(match.lastMove?.crowned ? "crown" : match.lastMove?.capture ? "capture" : "move");
       }
       const ownPieces = countCheckersPieces(board, seat);
       const rivalPieces = board.flat().filter((piece) => getCheckersOwner(piece) && getCheckersOwner(piece) !== seat).length;
@@ -1209,7 +1308,9 @@ export function bindDomGameInterface(game) {
       const abandonSeconds = secondsUntil(match.deadlineAt);
       if (refs.checkersKicker) refs.checkersKicker.textContent = demoMode ? "treino local" : "ranked pvp";
       refs.checkersTitle.textContent =
-        match.status === "finished"
+        local.checkersIntroLocked
+          ? "Moeda no ar"
+        : match.status === "finished"
           ? "Mesa encerrada"
           : demoMode && match.turn === "playerTwo"
             ? "Máquina pensando"
@@ -1226,7 +1327,9 @@ export function bindDomGameInterface(game) {
         <span class="ppg-checkers-score-token is-rival">${rivalPieces}</span>
       `;
       refs.checkersStatus.textContent =
-        match.status === "finished"
+        local.checkersIntroLocked
+          ? "Aguarde a moeda cair. A partida libera automaticamente."
+        : match.status === "finished"
           ? match.resultSummary || "Partida encerrada."
           : demoMode && match.turn === "playerTwo"
             ? "A máquina vai responder automaticamente."
@@ -2675,7 +2778,10 @@ export function bindDomGameInterface(game) {
   const startRealPvpGame = async (gameId = "checkers") => {
     local.selectedGame = gameId;
     game.events.emit("pubpaid:music-zone", gameAudioZone(gameId));
-    if (gameId === "checkers") resetDemoCheckersState();
+    if (gameId === "checkers") {
+      resetDemoCheckersState();
+      resetCheckersCamera();
+    }
     if (gameId === "pool") resetDemoPoolState();
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
@@ -2752,9 +2858,19 @@ export function bindDomGameInterface(game) {
     }
   };
 
+  const bootReviewMode = () => {
+    const params = new URLSearchParams(window.location.search || "");
+    if (params.get("review") !== "damas" || local.reviewModeBooted) return;
+    local.reviewModeBooted = true;
+    window.setTimeout(() => {
+      if (!local.demoCheckers && !gameState.pvpMatch) startDemoFlow("checkers");
+    }, 600);
+  };
+
   const handleCheckersCell = (cell) => {
     const row = Number(cell.dataset.row);
     const col = Number(cell.dataset.col);
+    if (local.checkersIntroLocked) return true;
     if (isCheckersDemoActive()) {
       const match = local.demoCheckers;
       if (!match || match.status !== "active" || match.turn !== "playerOne") return true;
@@ -2820,6 +2936,39 @@ export function bindDomGameInterface(game) {
     handleCheckersCell(cell);
   }, { passive: false });
 
+  refs.checkersStage?.addEventListener("wheel", (event) => {
+    if (!isCheckersDemoActive() && gameState.pvpGameId !== "checkers") return;
+    event.preventDefault();
+    local.checkersCamera.zoom += event.deltaY > 0 ? -0.06 : 0.06;
+    applyCheckersCamera(local.demoCheckers || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+  }, { passive: false });
+
+  refs.checkersFrame?.addEventListener("pointerdown", (event) => {
+    if (!isCheckersDemoActive() && gameState.pvpGameId !== "checkers") return;
+    if (event.target.closest?.("[data-row], .ppg-dom-piece")) return;
+    local.checkersCamera.dragId = event.pointerId;
+    local.checkersCamera.dragX = event.clientX;
+    local.checkersCamera.dragY = event.clientY;
+    refs.checkersFrame.setPointerCapture?.(event.pointerId);
+  });
+
+  refs.checkersFrame?.addEventListener("pointermove", (event) => {
+    if (local.checkersCamera.dragId !== event.pointerId) return;
+    const dx = event.clientX - local.checkersCamera.dragX;
+    const dy = event.clientY - local.checkersCamera.dragY;
+    local.checkersCamera.dragX = event.clientX;
+    local.checkersCamera.dragY = event.clientY;
+    local.checkersCamera.yaw += dx * 0.18;
+    local.checkersCamera.panY += dy * 0.16;
+    applyCheckersCamera(local.demoCheckers || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+  });
+
+  refs.checkersFrame?.addEventListener("pointerup", (event) => {
+    if (local.checkersCamera.dragId !== event.pointerId) return;
+    local.checkersCamera.dragId = null;
+    refs.checkersFrame.releasePointerCapture?.(event.pointerId);
+  });
+
   window.addEventListener("message", (event) => {
     if (event.origin !== window.location.origin) return;
     if (event.data?.type !== "vale-pool:demo-state") return;
@@ -2827,6 +2976,18 @@ export function bindDomGameInterface(game) {
   });
 
   document.addEventListener("click", async (event) => {
+    const cameraButton = event.target.closest("[data-checkers-camera]");
+    if (cameraButton) {
+      const action = cameraButton.dataset.checkersCamera || "reset";
+      if (action === "left") local.checkersCamera.yaw -= 10;
+      if (action === "right") local.checkersCamera.yaw += 10;
+      if (action === "zoom-in") local.checkersCamera.zoom += 0.08;
+      if (action === "zoom-out") local.checkersCamera.zoom -= 0.08;
+      if (action === "reset") resetCheckersCamera();
+      applyCheckersCamera(local.demoCheckers || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+      return;
+    }
+
     const demoButton = event.target.closest("[data-dom-start-demo]");
     if (demoButton) {
       const demoGame = demoButton.dataset.domStartDemo || "checkers";
@@ -3239,7 +3400,7 @@ export function bindDomGameInterface(game) {
     const row = Number(cell.dataset.row);
     const col = Number(cell.dataset.col);
     const piece = match?.board?.[row]?.[col];
-    if (!match || match.status !== "active" || match.turn !== seat || getCheckersOwner(piece) !== seat) {
+    if (local.checkersIntroLocked || !match || match.status !== "active" || match.turn !== seat || getCheckersOwner(piece) !== seat) {
       event.preventDefault();
       return;
     }
@@ -3263,6 +3424,7 @@ export function bindDomGameInterface(game) {
     const cell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
     if (!cell || (!isCheckersDemoActive() && gameState.pvpGameId !== "checkers")) return;
     event.preventDefault();
+    if (local.checkersIntroLocked) return;
     const demoMode = isCheckersDemoActive();
     const match = demoMode ? local.demoCheckers : gameState.pvpMatch;
     const row = Number(cell.dataset.row);
@@ -3405,6 +3567,7 @@ export function bindDomGameInterface(game) {
       finishGenericMatchIfNeeded(state.pvpMatch, state.pvpGameId, state.pvpSeat);
       if (!refs.result.hidden) return;
     }
+    bootReviewMode();
     if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
     if (state.lobbyPhase === "mode-select" && refs.modePicker && !refs.modePicker.hidden) return;
     if (state.lobbyPhase === "loading" && refs.loading && !refs.loading.hidden) return;
