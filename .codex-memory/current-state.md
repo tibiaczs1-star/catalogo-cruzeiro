@@ -1,17 +1,27 @@
 # Current State
 
-Updated: 2026-05-20T16:29:27.803Z
+Updated: 2026-05-20T16:33:32.019Z
 
 ## Active Goal
 
-- Rotina geral de divulgacao Catálogo CZS
+- Xadrez PubPaid online no Render
 
 ## Summary
 
-Base de noticias local atualizada em 20/05/2026: capture-latest-news trouxe 199 itens, 130 de hoje, com runtime-news/news-data renovados. Rotina externa deve combinar noticias resumidas, vendas GGMAX/produtos, convite do Catálogo CZS, WhatsApp, Facebook e Instagram via BlueStacks apenas quando o usuario liberar.
+Build 20260520-chessstyle1 publicado no Render. Xadrez Demo esta no estilo aprovado da Damas, com arena cinematica, IA pensando por 3 segundos, preview de origem/alvo e desbloqueio correto da vez apos o lance. A ordem de postagem no grupo de vendas foi cancelada e ignorada.
 
 ## Next
 
-- Aguardar link/arroba oficial do Instagram do Catálogo e ordem explicita de liberar; ao liberar
-- usar BlueStacks aberto (HD-Player) para Instagram e Chrome para WhatsApp/Facebook
-- renovando vendas no Facebook.
+- Ainda falta validar PvP real em duas sessoes autenticadas antes de fechar fluxo financeiro.
+
+## Files In Focus
+
+- pubpaid-phaser/ui/domGameInterface.js
+- pubpaid-phaser.css
+- pubpaid-phaser/app.js
+- pubpaid.html
+- server.js
+
+## Assets In Focus
+
+- .codex-temp/chessstyle-mobile-render.png

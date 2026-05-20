@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T16:26:46.798Z",
+  "lastUpdatedAt": "2026-05-20T16:33:31.951Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -765,6 +765,17 @@
         "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e"
       ],
       "createdAt": "2026-05-20T16:26:46.798Z"
+    },
+    {
+      "id": "pubpaid-chessstyle1-render-mobile-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/chessstyle-mobile-render.png",
+      "source": "render",
+      "note": "Xadrez PubPaid chessstyle1 validado no Render em mobile landscape: build online, IA pensa 3 segundos com preview e devolve a vez.",
+      "linkedOrderIds": [
+        "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e"
+      ],
+      "createdAt": "2026-05-20T16:33:31.951Z"
     }
   ]
 }
