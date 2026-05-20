@@ -1,20 +1,18 @@
 # Current State
 
-Updated: 2026-05-20T16:52:44.323Z
+Updated: 2026-05-20T16:56:40.789Z
 
 ## Active Goal
 
-- Xadrez PubPaid 3D estilo Damas
+- Xadrez PubPaid 3D online
 
 ## Summary
 
-Build local 20260520-chess3d1 corrige a direcao visual do Xadrez: mesa grande em perspectiva, pecas 3D, luzes de arena, rotacao/zoom/arrasto de camera e IA da Demo ainda pensando 3 segundos antes de jogar.
+Build 20260520-chess3d1 publicado no Render. Xadrez agora segue o modelo 3D da Damas: mesa grande em perspectiva, pecas volumosas, luzes, camera com rotacao/zoom/arrasto e IA da Demo pensando 3 segundos antes do lance.
 
 ## Next
 
-- Subir commit e confirmar Render /api/pubpaid/build=20260520-chess3d1.
-- Depois do deploy
-- repetir smoke mobile no Render.
+- PvP real ainda deve ser validado em duas sessoes autenticadas se for fechar fluxo financeiro.
 
 ## Files In Focus
 
@@ -26,5 +24,5 @@ Build local 20260520-chess3d1 corrige a direcao visual do Xadrez: mesa grande em
 
 ## Assets In Focus
 
-- .codex-temp/chess3d-mobile.png
+- .codex-temp/chess3d-render-mobile.png
 - .codex-temp/chess3d-desktop.png

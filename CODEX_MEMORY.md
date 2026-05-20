@@ -29,7 +29,8 @@ Atualizado: 2026-05-20
 - Mantido o comportamento que ja estava aprovado: IA da Demo pensa por 3 segundos, destaca origem/alvo, executa o lance e libera a vez do jogador.
 - Build local: `20260520-chess3d1`.
 - Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, smoke Playwright mobile landscape com frame 3D/camera/IA e smoke desktop com mesa grande.
-- Evidencias locais: `.codex-temp/chess3d-mobile.png` e `.codex-temp/chess3d-desktop.png`.
+- Online: Render respondeu `/api/pubpaid/build=20260520-chess3d1` e o smoke mobile landscape online tambem passou com frame 3D, 5 controles de camera, rotacao aplicada, 64 casas, 32 pecas e IA com pausa de 3 segundos.
+- Evidencias: `.codex-temp/chess3d-mobile.png`, `.codex-temp/chess3d-desktop.png` e `.codex-temp/chess3d-render-mobile.png`.
 
 ## Rodada Atual - 20260520-checkersai1
 

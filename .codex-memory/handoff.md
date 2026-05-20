@@ -1,16 +1,18 @@
 # Handoff
 
-Updated: 2026-05-20T16:52:44.385Z
+Updated: 2026-05-20T16:56:40.850Z
 
-Xadrez PubPaid esta em correcao 20260520-chess3d1. Usuario rejeitou a versao anterior por ser janela pequena; criterio atualizado: precisa seguir o modelo 3D da Damas, com mesa grande, perspectiva, rotacao de camera, zoom/arrasto e visual cinematografico. Local ja validou mobile e desktop; falta subir e confirmar Render.
+Xadrez PubPaid publicado em 20260520-chess3d1. Render /api/pubpaid/build confirmou o build e o smoke mobile landscape online passou com frame 3D, 5 controles de camera, rotacao aplicada, 64 casas, 32 pecas, IA pensando 3 segundos, preview de origem/alvo e lance aplicado depois. Criterio atualizado: para Xadrez estilo Damas, preservar mesa grande 3D e camera, nao voltar para janela pequena.
 
 ## Next
 
-- Validacoes locais feitas: node --check
+- Validacoes feitas: node --check
 - npm run guard:pubpaid
 - git diff --check
-- Playwright mobile landscape e desktop.
-- Evidencias locais: .codex-temp/chess3d-mobile.png e .codex-temp/chess3d-desktop.png.
+- Playwright mobile local
+- desktop local e mobile no Render.
+- Evidencias: .codex-temp/chess3d-mobile.png
+- .codex-temp/chess3d-desktop.png e .codex-temp/chess3d-render-mobile.png.
 
 ## Files In Focus
 
