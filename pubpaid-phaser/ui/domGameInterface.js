@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam2";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-polishcam1";
+} from "../services/pvpService.js?v=20260520-polishcam2";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-polishcam1";
-import { Chess } from "../vendor/chess.js?v=20260520-polishcam1";
+} from "../core/checkersRules.js?v=20260520-polishcam2";
+import { Chess } from "../vendor/chess.js?v=20260520-polishcam2";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";

@@ -7,6 +7,7 @@ Atualizado: 2026-05-20
 - Damas e Xadrez PubPaid receberam acabamento visual sem mudar o fluxo aprovado: Damas manteve a arena 3D, mas as pedras agora sao redondas e com contraste forte contra o tabuleiro.
 - Xadrez manteve fullscreen e mesa 3D, trocou a antiga maozinha por seta, recebeu setas na porta de entrada e nos hotspots do salao, pecas mais altas e contraste melhor entre brancas e pretas.
 - Controles de camera de Damas e Xadrez viraram uma bolinha direcional com icone de camera no centro, botoes de giro, subir/descer e zoom, preservando arrasto/toque na mesa.
+- Ajuste posterior `20260520-polishcam2`: reduziu o tamanho/altura das pecas do Xadrez depois da captura mostrar que ficaram grandes demais.
 - Build local: `20260520-polishcam1`.
 - Validacao local: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js`, `pubpaid-phaser/scenes/StreetScene.js`, `pubpaid-phaser/scenes/InteriorScene.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; smoke Xadrez mobile e desktop; smoke Damas desktop e mobile.
 - Evidencias locais: `.codex-temp/chess3d-mobile.png`, `.codex-temp/chess3d-desktop.png`, `.codex-temp/checkerscam-desktop.png` e `.codex-temp/checkerscam-mobile.png`.
