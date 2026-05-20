@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-chessstyle1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-chess3d1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-chessstyle1";
+} from "../services/pvpService.js?v=20260520-chess3d1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-chessstyle1";
-import { Chess } from "../vendor/chess.js?v=20260520-chessstyle1";
+} from "../core/checkersRules.js?v=20260520-chess3d1";
+import { Chess } from "../vendor/chess.js?v=20260520-chess3d1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -331,6 +331,15 @@ export function bindDomGameInterface(game) {
     demoChessAiThinking: false,
     demoChessAiPreviewMove: null,
     checkersCamera: {
+      yaw: 0,
+      zoom: 1,
+      panX: 0,
+      panY: 0,
+      dragId: null,
+      dragX: 0,
+      dragY: 0
+    },
+    chessCamera: {
       yaw: 0,
       zoom: 1,
       panX: 0,
@@ -671,6 +680,43 @@ export function bindDomGameInterface(game) {
     refs.checkersFrame.style.setProperty("--ppg-checkers-pan-x", `${local.checkersCamera.panX}px`);
     refs.checkersFrame.style.setProperty("--ppg-checkers-pan-y", `${local.checkersCamera.panY}px`);
     refs.checkersFrame.style.setProperty("--ppg-checkers-tilt", cinematic ? "64deg" : "56deg");
+  };
+
+  const resetChessCamera = () => {
+    Object.assign(local.chessCamera, {
+      yaw: 0,
+      zoom: 1,
+      panX: 0,
+      panY: 0,
+      dragId: null,
+      dragX: 0,
+      dragY: 0
+    });
+  };
+
+  const clampChessCamera = () => {
+    local.chessCamera.zoom = clampUiNumber(local.chessCamera.zoom, 0.82, 1.34, 1);
+    local.chessCamera.yaw = clampUiNumber(local.chessCamera.yaw, -38, 38, 0);
+    local.chessCamera.panX = clampUiNumber(local.chessCamera.panX, -46, 46, 0);
+    local.chessCamera.panY = clampUiNumber(local.chessCamera.panY, -34, 34, 0);
+  };
+
+  const applyChessCamera = (match = {}, seat = "playerOne") => {
+    const frame = refs.tableBody?.querySelector?.("[data-chess-frame]");
+    if (!frame) return;
+    clampChessCamera();
+    const state = decorateChessState(match.chessState || {});
+    const turnSeat = chessSeatForColor(state, state.turnColor || "white");
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const turnYaw = match.status === "active" && turnSeat === rivalSeat ? 180 : 0;
+    const cinematic = frame.closest?.(".ppg-chess-arena")?.classList.contains("is-ai-thinking");
+    const compactLandscape = window.matchMedia?.("(max-width: 760px) and (orientation: landscape)")?.matches;
+    frame.style.setProperty("--ppg-chess-turn-yaw", `${turnYaw}deg`);
+    frame.style.setProperty("--ppg-chess-user-yaw", `${local.chessCamera.yaw}deg`);
+    frame.style.setProperty("--ppg-chess-zoom", `${local.chessCamera.zoom}`);
+    frame.style.setProperty("--ppg-chess-pan-x", `${local.chessCamera.panX}px`);
+    frame.style.setProperty("--ppg-chess-pan-y", `${local.chessCamera.panY}px`);
+    frame.style.setProperty("--ppg-chess-tilt", compactLandscape ? (cinematic ? "52deg" : "46deg") : (cinematic ? "60deg" : "52deg"));
   };
 
   const startCheckersCinematic = (match = {}) => {
@@ -1143,6 +1189,7 @@ export function bindDomGameInterface(game) {
     resetDemoPoolState();
     resetDemoCheckersState();
     clearDemoChessAi();
+    resetChessCamera();
     local.pvpPollTimer = null;
     local.selectedGame = `${gameId}-demo`;
     local.demoTable = createDemoTableMatch(gameId);
@@ -2801,12 +2848,22 @@ export function bindDomGameInterface(game) {
         `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}`,
         `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}">
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="ppg-chess-board-stage">
-            <div class="ppg-dom-chess-board" data-ai-thinking="${demoMode && local.demoChessAiThinking ? "true" : "false"}">${renderChessBoardMarkup(match, seat)}</div>
+          <div class="ppg-chess-board-stage" data-chess-stage>
+            <div class="ppg-chess-board-frame" data-chess-frame>
+              <div class="ppg-dom-chess-board" data-ai-thinking="${demoMode && local.demoChessAiThinking ? "true" : "false"}">${renderChessBoardMarkup(match, seat)}</div>
+            </div>
+            <div class="ppg-checkers-camera ppg-chess-camera" aria-label="Controle da câmera do xadrez">
+              <button type="button" data-chess-camera="left" aria-label="Girar câmera para esquerda">↺</button>
+              <button type="button" data-chess-camera="right" aria-label="Girar câmera para direita">↻</button>
+              <button type="button" data-chess-camera="zoom-in" aria-label="Aproximar câmera">+</button>
+              <button type="button" data-chess-camera="zoom-out" aria-label="Afastar câmera">-</button>
+              <button type="button" data-chess-camera="reset" aria-label="Resetar câmera">0</button>
+            </div>
           </div>
           <aside class="ppg-chess-sidecar">${renderChessGuidanceMarkup(match, seat, demoMode)}</aside>
         </section>`
       );
+      applyChessCamera(match, seat);
     }
 
     updateGameState({
@@ -3067,6 +3124,42 @@ export function bindDomGameInterface(game) {
     refs.checkersFrame.releasePointerCapture?.(event.pointerId);
   });
 
+  document.addEventListener("wheel", (event) => {
+    const stage = event.target.closest?.("[data-chess-stage]");
+    if (!stage || gameState.pvpGameId !== "chess") return;
+    event.preventDefault();
+    local.chessCamera.zoom += event.deltaY > 0 ? -0.06 : 0.06;
+    applyChessCamera(local.demoTable || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+  }, { passive: false });
+
+  document.addEventListener("pointerdown", (event) => {
+    const frame = event.target.closest?.("[data-chess-frame]");
+    if (!frame || gameState.pvpGameId !== "chess") return;
+    if (event.target.closest?.("[data-chess-square], .ppg-chess-piece, .ppg-chess-camera button")) return;
+    local.chessCamera.dragId = event.pointerId;
+    local.chessCamera.dragX = event.clientX;
+    local.chessCamera.dragY = event.clientY;
+    frame.setPointerCapture?.(event.pointerId);
+  });
+
+  document.addEventListener("pointermove", (event) => {
+    if (local.chessCamera.dragId !== event.pointerId) return;
+    const dx = event.clientX - local.chessCamera.dragX;
+    const dy = event.clientY - local.chessCamera.dragY;
+    local.chessCamera.dragX = event.clientX;
+    local.chessCamera.dragY = event.clientY;
+    local.chessCamera.yaw += dx * 0.18;
+    local.chessCamera.panY += dy * 0.16;
+    applyChessCamera(local.demoTable || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+  });
+
+  document.addEventListener("pointerup", (event) => {
+    if (local.chessCamera.dragId !== event.pointerId) return;
+    const frame = refs.tableBody?.querySelector?.("[data-chess-frame]");
+    local.chessCamera.dragId = null;
+    frame?.releasePointerCapture?.(event.pointerId);
+  });
+
   window.addEventListener("message", (event) => {
     if (event.origin !== window.location.origin) return;
     if (event.data?.type !== "vale-pool:demo-state") return;
@@ -3083,6 +3176,18 @@ export function bindDomGameInterface(game) {
       if (action === "zoom-out") local.checkersCamera.zoom -= 0.08;
       if (action === "reset") resetCheckersCamera();
       applyCheckersCamera(local.demoCheckers || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
+      return;
+    }
+
+    const chessCameraButton = event.target.closest("[data-chess-camera]");
+    if (chessCameraButton) {
+      const action = chessCameraButton.dataset.chessCamera || "reset";
+      if (action === "left") local.chessCamera.yaw -= 10;
+      if (action === "right") local.chessCamera.yaw += 10;
+      if (action === "zoom-in") local.chessCamera.zoom += 0.08;
+      if (action === "zoom-out") local.chessCamera.zoom -= 0.08;
+      if (action === "reset") resetChessCamera();
+      applyChessCamera(local.demoTable || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
       return;
     }
 

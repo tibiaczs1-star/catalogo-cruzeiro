@@ -2,6 +2,15 @@
 
 Atualizado: 2026-05-20
 
+## Rodada Atual - 20260520-poolmobileintro1
+
+- Sinuca/Vale Pool manteve a arte aprovada e recebeu entrada curta com taco batendo na bola branca, explosao de pixels e revelacao da mesa.
+- Mobile/touch agora joga em duas etapas: o primeiro toque depois de mirar abre a força, e o segundo toque solta a tacada.
+- Mantidas as correcoes de `poolhand1`: fim correto do modo Livre quando sobram apenas a branca e `bola na mão` com posicionamento da branca antes da tacada.
+- Build local: `20260520-poolmobileintro1`.
+- Validacao: `node --check` em `games/vale-pool/game.js`, `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/services/pvpService.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; `/api/pubpaid/build` na porta 3001 respondeu `20260520-poolmobileintro1`; Playwright mobile landscape confirmou `MIRANDO` + etapa `forca` no primeiro toque e `TACANDO` no segundo.
+- Evidencias: `.codex-temp/vale-pool-poolmobileintro1/intro.png`, `.codex-temp/vale-pool-poolmobileintro1/mobile-power-stage.png` e `.codex-temp/vale-pool-poolmobileintro1/mobile-shot-released.png`.
+
 ## Rodada Atual - 20260520-chessstyle1
 
 - Xadrez PubPaid recebeu o mesmo ritmo visual aprovado na Damas: arena mais cinematica, mesa com luzes, texto centralizado no fluxo existente e leitura mais clara da vez do adversario.
@@ -12,6 +21,15 @@ Atualizado: 2026-05-20
 - Online: Render respondeu `/api/pubpaid/build=20260520-chessstyle1` e o smoke mobile landscape tambem passou no Render.
 - Evidencias: `.codex-temp/chessstyle-mobile.png` e `.codex-temp/chessstyle-mobile-render.png`.
 - Observacao: a ordem posterior sobre postar noticias em grupo de vendas foi cancelada pelo usuario e deve ser ignorada.
+
+## Rodada Atual - 20260520-chess3d1
+
+- Correcao de direcao: o usuario rejeitou a primeira versao do Xadrez por parecer uma janela pequena; o objetivo correto era replicar o modelo visual 3D aprovado na Damas.
+- Xadrez Demo agora usa mesa grande em perspectiva, frame 3D, pecas volumosas, luzes de arena, rotação automatica para a vez adversaria, botões de camera e suporte a zoom/arrasto.
+- Mantido o comportamento que ja estava aprovado: IA da Demo pensa por 3 segundos, destaca origem/alvo, executa o lance e libera a vez do jogador.
+- Build local: `20260520-chess3d1`.
+- Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, smoke Playwright mobile landscape com frame 3D/camera/IA e smoke desktop com mesa grande.
+- Evidencias locais: `.codex-temp/chess3d-mobile.png` e `.codex-temp/chess3d-desktop.png`.
 
 ## Rodada Atual - 20260520-checkersai1
 

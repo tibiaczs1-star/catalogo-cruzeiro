@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T16:33:31.951Z",
+  "lastUpdatedAt": "2026-05-20T16:52:44.258Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -776,6 +776,28 @@
         "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e"
       ],
       "createdAt": "2026-05-20T16:33:31.951Z"
+    },
+    {
+      "id": "pubpaid-chess3d1-mobile-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/chess3d-mobile.png",
+      "source": "workspace",
+      "note": "Xadrez PubPaid chess3d1 em mobile landscape: mesa 3D grande, camera rotativa e IA com pausa de 3 segundos validada.",
+      "linkedOrderIds": [
+        "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat"
+      ],
+      "createdAt": "2026-05-20T16:52:44.197Z"
+    },
+    {
+      "id": "pubpaid-chess3d1-desktop-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/chess3d-desktop.png",
+      "source": "workspace",
+      "note": "Xadrez PubPaid chess3d1 em desktop: mesa grande em perspectiva com painel lateral e controles de camera.",
+      "linkedOrderIds": [
+        "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat"
+      ],
+      "createdAt": "2026-05-20T16:52:44.258Z"
     }
   ]
 }

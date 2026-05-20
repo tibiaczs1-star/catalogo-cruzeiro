@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T16:29:27.609Z",
+  "lastUpdatedAt": "2026-05-20T16:52:20.492Z",
   "orders": [
     {
       "id": "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca",
@@ -1698,6 +1698,38 @@
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat",
+      "createdAt": "2026-05-20T16:52:20.492Z",
+      "updatedAt": "2026-05-20T16:52:20.492Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nao era isso que eu queria nao eu queria aqueles modelos 3d que usamos nas damas, com rotação de camera e tudo muito legal, vc fez uma janeçlinha feia de bsota",
+      "summary": "Corrigir Xadrez PubPaid para usar modelo visual 3D estilo Damas, com camera rotativa, zoom e mesa grande.",
+      "normalizedTasks": [
+        "refazer visual 3D do Xadrez",
+        "adicionar controles de camera",
+        "validar mobile",
+        "subir online"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "PubPaid",
+        "Xadrez",
+        "3D",
+        "mobile",
+        "Render"
+      ],
       "nextSteps": [],
       "notes": ""
     }
