@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-checkersai1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-chessstyle1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-checkersai1";
+} from "../services/pvpService.js?v=20260520-chessstyle1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-checkersai1";
-import { Chess } from "../vendor/chess.js?v=20260520-checkersai1";
+} from "../core/checkersRules.js?v=20260520-chessstyle1";
+import { Chess } from "../vendor/chess.js?v=20260520-chessstyle1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -327,6 +327,9 @@ export function bindDomGameInterface(game) {
     checkersIntroLocked: false,
     demoAiThinking: false,
     demoAiPreviewMove: null,
+    demoChessAiTimer: null,
+    demoChessAiThinking: false,
+    demoChessAiPreviewMove: null,
     checkersCamera: {
       yaw: 0,
       zoom: 1,
@@ -1014,6 +1017,63 @@ export function bindDomGameInterface(game) {
     return entry;
   };
 
+  const pickDemoChessAiMove = (moves = []) => {
+    const scored = moves.map((move, index) => ({
+      move,
+      score:
+        (move.capture ? 100 : 0) +
+        (move.checkmate ? 500 : 0) +
+        (move.check ? 90 : 0) +
+        (move.promotion ? 60 : 0) +
+        (move.castle ? 24 : 0) -
+        index * 0.01
+    }));
+    scored.sort((a, b) => b.score - a.score);
+    return scored[0]?.move || moves[0] || null;
+  };
+
+  const clearDemoChessAi = () => {
+    window.clearTimeout(local.demoChessAiTimer);
+    local.demoChessAiTimer = null;
+    local.demoChessAiThinking = false;
+    local.demoChessAiPreviewMove = null;
+  };
+
+  const scheduleDemoChessAiMove = () => {
+    clearDemoChessAi();
+    const match = local.demoTable;
+    if (!match || match.gameId !== "chess" || match.status !== "active") return;
+    const state = decorateChessState(match.chessState || {});
+    match.chessState = state;
+    if (chessSeatForColor(state, state.turnColor) !== "playerTwo") return;
+    const previewMove = pickDemoChessAiMove(state.legalMoves || []);
+    local.demoChessAiThinking = true;
+    local.demoChessAiPreviewMove = previewMove || null;
+    renderPvpTable();
+    local.demoChessAiTimer = window.setTimeout(() => {
+      const activeMatch = local.demoTable;
+      if (!activeMatch || activeMatch.gameId !== "chess" || activeMatch.status !== "active") {
+        clearDemoChessAi();
+        renderPvpTable();
+        return;
+      }
+      const activeState = decorateChessState(activeMatch.chessState || {});
+      const move = local.demoChessAiPreviewMove || pickDemoChessAiMove(activeState.legalMoves || []);
+      clearDemoChessAi();
+      if (!move) {
+        activeMatch.status = "finished";
+        activeMatch.winner = "playerOne";
+        activeMatch.turn = "";
+        activeMatch.resultSummary = "Máquina sem lances legais. Você venceu o treino.";
+        updateGameState({ prompt: activeMatch.resultSummary });
+      } else {
+        const moveEntry = applyDemoChessMove(move.from, move.to, move.promotion || "q");
+        if (moveEntry) emitGameSound(chessMoveCue(moveEntry), "chess");
+      }
+      renderPvpTable();
+    }, 3000);
+  };
+
   const createDemoTableMatch = (gameId = "poker") => {
     const base = {
       id: `demo-${gameId}-${Date.now()}`,
@@ -1082,6 +1142,7 @@ export function bindDomGameInterface(game) {
     window.clearInterval(local.pvpPollTimer);
     resetDemoPoolState();
     resetDemoCheckersState();
+    clearDemoChessAi();
     local.pvpPollTimer = null;
     local.selectedGame = `${gameId}-demo`;
     local.demoTable = createDemoTableMatch(gameId);
@@ -1609,7 +1670,8 @@ export function bindDomGameInterface(game) {
     const perspectiveColor = chessColorForSeat(state, seat);
     const activeColor = state.turnColor || "white";
     const activeSeat = chessSeatForColor(state, activeColor);
-    const canAct = match.status === "active" && (demoMode || activeSeat === seat);
+    const demoPlayerTurn = demoMode && activeSeat === "playerOne" && !local.demoChessAiThinking;
+    const canAct = match.status === "active" && (demoPlayerTurn || (!demoMode && activeSeat === seat));
     const legalMoves = canAct ? state.legalMoves || [] : [];
     const forcedMoves = canAct ? state.forcedMoves || [] : [];
     const selectedMoves = local.chessSelected
@@ -1621,6 +1683,7 @@ export function bindDomGameInterface(game) {
     const lastMove = state.lastMove || state.history?.slice?.(-1)?.[0] || null;
     const lastFrom = lastMove?.from || "";
     const lastTo = lastMove?.to || "";
+    const aiPreview = demoMode && local.demoChessAiThinking ? local.demoChessAiPreviewMove : null;
     const checkedKingToken = state.inCheck ? activeColor === "black" ? "k" : "K" : "";
     const guideFrom = forcedMoves[0]?.from || legalMoves[0]?.from || "";
     const guideTo = selectedMoves[0]?.to || "";
@@ -1634,7 +1697,7 @@ export function bindDomGameInterface(game) {
       const piece = board.get(square) || "";
       const pieceMeta = CHESS_PIECES[piece] || null;
       const pieceColor = pieceMeta?.side || "";
-      const ownPiece = pieceColor && (demoMode ? pieceColor === activeColor : pieceColor === perspectiveColor);
+      const ownPiece = pieceColor && pieceColor === perspectiveColor;
       const dark = (displayRow + displayCol) % 2 === 1;
       const selected = local.chessSelected === square;
       const legalOrigin = legalFromSet.has(square);
@@ -1642,6 +1705,9 @@ export function bindDomGameInterface(game) {
       const legalTarget = selectedTargetSet.has(square);
       const lastSource = lastFrom === square;
       const lastTarget = lastTo === square;
+      const aiPreviewFrom = aiPreview?.from === square;
+      const aiPreviewTo = aiPreview?.to === square;
+      const aiPreviewCapture = Boolean(aiPreview?.capture && aiPreviewTo);
       const inCheck = Boolean(checkedKingToken && piece === checkedKingToken);
       const guided = handSquare === square;
       const label = pieceMeta ? `${square}: ${pieceMeta.name}` : square;
@@ -1657,7 +1723,7 @@ export function bindDomGameInterface(game) {
         `
         : "";
       const handMarkup = guided && canAct ? `<span class="ppg-chess-hand" aria-hidden="true"><span></span></span>` : "";
-      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${handMarkup}</button>`;
+      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${aiPreviewFrom ? " is-ai-preview-from" : ""}${aiPreviewTo ? " is-ai-preview-to" : ""}${aiPreviewCapture ? " is-ai-preview-capture" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${handMarkup}</button>`;
     }).join("");
   };
 
@@ -1678,7 +1744,9 @@ export function bindDomGameInterface(game) {
   const renderChessGuidanceMarkup = (match = {}, seat = "playerOne", demoMode = false) => {
     const state = decorateChessState(match.chessState || {});
     const turnSeat = chessSeatForColor(state, state.turnColor);
-    const canAct = match.status === "active" && (demoMode || turnSeat === seat);
+    const canAct = match.status === "active" && (
+      demoMode ? turnSeat === "playerOne" && !local.demoChessAiThinking : turnSeat === seat
+    );
     const forcedMoves = canAct ? state.forcedMoves || [] : [];
     const selectedMoves = canAct && local.chessSelected
       ? (state.legalMoves || []).filter((move) => move.from === local.chessSelected)
@@ -1686,6 +1754,8 @@ export function bindDomGameInterface(game) {
     const guideMoves = selectedMoves.length ? selectedMoves : forcedMoves.length ? forcedMoves : canAct ? (state.legalMoves || []).slice(0, 6) : [];
     const guideTitle = state.inCheck
       ? "Lances obrigatorios"
+      : demoMode && local.demoChessAiThinking
+        ? "Máquina pensando"
       : forcedMoves.length === 1
         ? "Unico lance legal"
         : selectedMoves.length
@@ -1695,6 +1765,8 @@ export function bindDomGameInterface(game) {
             : "Aguardando";
     const guideCopy = state.inCheck
       ? "Voce precisa sair do xeque. A maozinha marca a prioridade."
+      : demoMode && local.demoChessAiThinking
+        ? "A máquina pensa por 3 segundos. A origem e o alvo piscam antes do lance."
       : forcedMoves.length === 1
         ? "So existe um lance legal nesta posicao."
         : selectedMoves.length
@@ -2722,12 +2794,15 @@ export function bindDomGameInterface(game) {
       match.chessState = state;
       const turnSeat = chessSeatForColor(state, state.turnColor);
       refs.tableScore.textContent = `${state.history?.length || match.moveCount || 0} lances`;
-      refs.tableStatus.textContent = getChessTurnSummary(match, seat, demoMode);
+      refs.tableStatus.textContent = demoMode && local.demoChessAiThinking
+        ? "Máquina pensando por 3 segundos."
+        : getChessTurnSummary(match, seat, demoMode);
       renderStableTableBody(
-        `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}`,
-        `<section class="ppg-chess-arena">
+        `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}`,
+        `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}">
+          <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <div class="ppg-chess-board-stage">
-            <div class="ppg-dom-chess-board">${renderChessBoardMarkup(match, seat)}</div>
+            <div class="ppg-dom-chess-board" data-ai-thinking="${demoMode && local.demoChessAiThinking ? "true" : "false"}">${renderChessBoardMarkup(match, seat)}</div>
           </div>
           <aside class="ppg-chess-sidecar">${renderChessGuidanceMarkup(match, seat, demoMode)}</aside>
         </section>`
@@ -3329,7 +3404,7 @@ export function bindDomGameInterface(game) {
       const state = decorateChessState(match.chessState || {});
       match.chessState = state;
       const turnSeat = chessSeatForColor(state, state.turnColor);
-      const canAct = demoChess || turnSeat === gameState.pvpSeat;
+      const canAct = demoChess ? turnSeat === "playerOne" && !local.demoChessAiThinking : turnSeat === gameState.pvpSeat;
       if (!canAct) return;
       const legalMoves = state.legalMoves || [];
       if (!local.chessSelected) {
@@ -3366,6 +3441,7 @@ export function bindDomGameInterface(game) {
         const moveEntry = applyDemoChessMove(from, square, legalMove.promotion || "q");
         if (moveEntry) emitGameSound(chessMoveCue(moveEntry), "chess");
         renderPvpTable();
+        scheduleDemoChessAiMove();
         return;
       }
       moveChess(match.id, from, square, legalMove.promotion || "q").then((payload) => {

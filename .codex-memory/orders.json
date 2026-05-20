@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T15:56:14.384Z",
+  "lastUpdatedAt": "2026-05-20T16:29:27.609Z",
   "orders": [
     {
       "id": "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca",
@@ -1628,6 +1628,76 @@
         "mobile",
         "loading"
       ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e",
+      "createdAt": "2026-05-20T16:13:42.904Z",
+      "updatedAt": "2026-05-20T16:13:42.904Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora faça o mesmo estilo de jogo pra xadrez",
+      "summary": "Aplicar no Xadrez PubPaid o mesmo estilo aprovado da Damas, com mesa cinematica e adversario Demo pensando 3 segundos.",
+      "normalizedTasks": [
+        "dar ritmo visivel ao adversario do Xadrez Demo",
+        "adicionar destaque de origem e alvo no lance da maquina",
+        "polir arena visual do Xadrez",
+        "validar mobile"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "PubPaid",
+        "Xadrez",
+        "Damas",
+        "mobile"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-usar-copy-curta-para-postar-noticias-no-grupo-de-vendas-com-link-do-instagram-do",
+      "createdAt": "2026-05-20T16:23:36.374Z",
+      "updatedAt": "2026-05-20T16:24:39.100Z",
+      "status": "canceled",
+      "source": "chat",
+      "rawRequest": "pode posta as noticias no grupo de vendas tambem so pegue e faça resumido e ponha o link do instgran do catalogo e peça siga agente",
+      "summary": "Usar copy curta para postar noticias no grupo de vendas com link do Instagram do Catalogo e pedido para seguir.",
+      "normalizedTasks": [
+        "resumir noticia para grupo de vendas",
+        "incluir link do Instagram do Catalogo",
+        "pedir para seguir a gente"
+      ],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "noticias",
+        "vendas",
+        "instagram",
+        "distribuicao"
+      ],
+      "nextSteps": [],
+      "notes": "Cancelado pelo usuario: pedido foi enviado no contexto errado e deve ser ignorado."
+    },
+    {
+      "id": "2026-05-20-incluir-noticias-resumidas-instagram-via-bluestacks-e-renovacao-de-vendas-no-fac",
+      "createdAt": "2026-05-20T16:29:27.609Z",
+      "updatedAt": "2026-05-20T16:29:27.609Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Adicionar noticias do Catalogo CZS em manutencao a rotina geral: pegar noticias novas/fechadas, resumir, postar tambem nos grupos de venda, incluir link do Instagram do Catalogo e pedir para seguir, publicar no Instagram via BlueStacks quando o usuario liberar; no Facebook renovar todas as vendas.",
+      "summary": "Incluir noticias resumidas, Instagram via BlueStacks e renovacao de vendas no Facebook na rotina geral de divulgacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
       "nextSteps": [],
       "notes": ""
     }

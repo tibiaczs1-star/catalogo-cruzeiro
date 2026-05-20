@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T15:59:59.490Z",
+  "lastUpdatedAt": "2026-05-20T16:26:46.798Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -754,6 +754,17 @@
         "2026-05-20-melhorar-damas-demo-com-ia-pensando-3-segundos-e-adicionar-carregamento-0-100-an"
       ],
       "createdAt": "2026-05-20T15:59:59.490Z"
+    },
+    {
+      "id": "pubpaid-chessstyle1-mobile-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/chessstyle-mobile.png",
+      "source": "workspace",
+      "note": "Xadrez PubPaid chessstyle1 em mobile landscape: IA da Demo pensa 3 segundos, destaca origem/alvo e libera a vez do jogador apos o lance.",
+      "linkedOrderIds": [
+        "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e"
+      ],
+      "createdAt": "2026-05-20T16:26:46.798Z"
     }
   ]
 }

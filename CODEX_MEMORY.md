@@ -2,6 +2,16 @@
 
 Atualizado: 2026-05-20
 
+## Rodada Atual - 20260520-chessstyle1
+
+- Xadrez PubPaid recebeu o mesmo ritmo visual aprovado na Damas: arena mais cinematica, mesa com luzes, texto centralizado no fluxo existente e leitura mais clara da vez do adversario.
+- Na Demo, o jogador fica com as brancas; a maquina joga de pretas, pensa por 3 segundos, destaca origem/alvo do lance e so depois executa o movimento, liberando a vez do jogador novamente.
+- Mantido o fluxo padrao PubPaid: Demo como treino local sem ficha/carteira e PvP pelo matchmaking/ready real.
+- Build local: `20260520-chessstyle1`.
+- Validacao: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; servidor local na porta 3002 respondeu `/api/pubpaid/build=20260520-chessstyle1`; Playwright mobile landscape confirmou 64 casas, 32 pecas, IA pensando com preview, `moveCount` parado no meio da pausa e lance aplicado depois.
+- Evidencia: `.codex-temp/chessstyle-mobile.png`.
+- Observacao: a ordem posterior sobre postar noticias em grupo de vendas foi cancelada pelo usuario e deve ser ignorada.
+
 ## Rodada Atual - 20260520-checkersai1
 
 - Damas Demo ficou mais legivel na vez da IA: a maquina entra em estado `Máquina pensando...`, segura a jogada por 3 segundos, destaca a peça de origem e a casa alvo, e só depois executa o movimento.
