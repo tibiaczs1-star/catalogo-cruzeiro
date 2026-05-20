@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260520-chess3d1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260520-poolmobileintro1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16924,6 +16924,12 @@ async function handleApi(req, res, pathname, searchParams) {
     const angle = clampPoolNumber(body.angle, -180, 180, 0);
     const power = clampPoolNumber(body.power, 0.1, 1, 0.5);
     const spin = normalizePoolSpin(body.spin || "centro");
+    const cuePlace = Number.isFinite(Number(body.cueX)) && Number.isFinite(Number(body.cueY))
+      ? {
+          x: clampPoolNumber(body.cueX, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.x),
+          y: clampPoolNumber(body.cueY, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.y),
+        }
+      : null;
     if (!matchId) {
       return sendJson(res, 400, { ok: false, error: "Informe a mesa PvP." });
     }
@@ -16951,7 +16957,11 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 409, { ok: false, error: "A partida ainda esta na escolha da moeda/modalidade." });
     }
 
-    const simulation = simulatePoolPvPShot(currentPoolState, seat, angle, power, spin);
+    if (currentPoolState.ballInHandSeat === seat && !cuePlace) {
+      return sendJson(res, 400, { ok: false, error: "Bola na mao: posicione a branca antes de tacar." });
+    }
+
+    const simulation = simulatePoolPvPShot(currentPoolState, seat, angle, power, spin, cuePlace);
     const poolState = simulation.poolState;
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
     const nextTurn = rivalSeat;
@@ -16966,10 +16976,12 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary = `${resultSummary} ${groupSummary}`;
     }
     if (simulation.cuePocketed) {
-      resultSummary = `${resultSummary} A branca caiu e voltou para a marca; falta, ${match?.[nextTurn]?.name || "rival"} joga agora.`;
+      resultSummary = `${resultSummary} A branca caiu; falta, ${match?.[nextTurn]?.name || "rival"} fica com bola na mao e pode posicionar a branca.`;
     }
     if (finished) {
       winner = simulation.winner || resolvePoolPvPWinner(poolState);
+      poolState.finished = true;
+      poolState.winner = winner || "draw";
       if (winner) {
         resultSummary = `${match?.[winner]?.name || "Jogador"} venceu a sinuca por ${poolState.playerOneScore || 0} a ${poolState.playerTwoScore || 0}.`;
       } else {
@@ -19450,6 +19462,7 @@ function createPoolPvPState(ruleMode = "livre", setup = {}) {
     playerTwoScore: 0,
     playerOneGroup: "",
     playerTwoGroup: "",
+    ballInHandSeat: "",
     nextBall: mode === "brasileira" ? 1 : 0,
     balls: createPoolPvPBalls(mode),
     lastShot: null,
@@ -19547,6 +19560,10 @@ function scorePoolPvPShot(state = createPoolPvPState(), seat = "playerOne", pock
   message = pocketedNow.length
     ? `${pocketedNow.length} bola${pocketedNow.length === 1 ? "" : "s"} no modo Livre.`
     : "Sem encaçapar no modo Livre.";
+  finished = state.balls.filter((ball) => !ball.cue && !ball.pocketed).length <= 0;
+  if (finished) {
+    message = `${message} Mesa limpa.`;
+  }
   return { message, winner, finished };
 }
 
@@ -19560,7 +19577,7 @@ function describePoolGroupOwners(match = {}, poolState = {}) {
   return `Grupos: ${oneName} joga ${playerOneGroup || "a definir"}; ${twoName} joga ${playerTwoGroup || "a definir"}.`;
 }
 
-function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne", angle = 0, power = 0.5, spinValue = "centro") {
+function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne", angle = 0, power = 0.5, spinValue = "centro", cuePlace = null) {
   const ruleMode = normalizePoolRuleMode(poolState.ruleMode || "livre");
   const baseState = createPoolPvPState(ruleMode, poolState.setup || { complete: true, phase: "done" });
   const state = {
@@ -19583,8 +19600,20 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
   const pocketedBefore = new Set(state.balls.filter((ball) => ball.pocketed && !ball.cue).map((ball) => ball.id));
   const targetBefore = ruleMode === "brasileira" ? getNextBrazilianPoolBall(state.balls) : 0;
   cue.pocketed = false;
-  cue.x = clampPoolNumber(cue.x, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.x);
-  cue.y = clampPoolNumber(cue.y, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.y);
+  const wasBallInHand = state.ballInHandSeat === seat;
+  cue.x = clampPoolNumber(
+    wasBallInHand && cuePlace ? cuePlace.x : cue.x,
+    PVP_POOL_TABLE.radius,
+    PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius,
+    PVP_POOL_TABLE.cueStart.x
+  );
+  cue.y = clampPoolNumber(
+    wasBallInHand && cuePlace ? cuePlace.y : cue.y,
+    PVP_POOL_TABLE.radius,
+    PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius,
+    PVP_POOL_TABLE.cueStart.y
+  );
+  if (wasBallInHand) state.ballInHandSeat = "";
   cue.vx = Math.cos(radians) * speed + spin.vx * 190;
   cue.vy = Math.sin(radians) * speed + spin.vy * 190;
   cue.spin = shotSpin;
@@ -19711,6 +19740,7 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
   });
   const pocketedNow = state.balls.filter((ball) => !ball.cue && ball.pocketed && !pocketedBefore.has(ball.id));
   const score = scorePoolPvPShot(state, seat, pocketedNow, cuePocketed, targetBefore);
+  if (cuePocketed) state.ballInHandSeat = getPoolPvPRivalSeat(seat);
   const nextShot = clampInteger(state.shot, 1) + 1;
   const remaining = state.balls.filter((ball) => !ball.cue && !ball.pocketed).length;
   const lastShot = {
@@ -19721,6 +19751,7 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
     spin: shotSpin,
     pocketed: pocketedNow.map((ball) => ball.id),
     cuePocketed,
+    ballInHand: wasBallInHand,
     remaining,
     message: score.message,
     at: new Date().toISOString(),

@@ -26,5 +26,8 @@
 - Cada modalidade precisa de regra viva durante a partida, nao só tutorial antes da mesa: informar alvo permitido, formula de pontuação, falta/vitória e grupo do jogador quando existir.
 - Em Par/Impar, o cartao do jogador deve dizer PAR ou IMPAR assim que a primeira bola valida cair; antes disso, a leitura correta é `1a bola define PAR/IMPAR`.
 - Em Par/Impar, a UI deve nomear os donos dos grupos (`VOCE`, `RIVAL` ou `IA`) e nao apenas mostrar PAR/IMPAR solto.
-- Falta de bola branca precisa trocar a vez para o rival/IA explicitamente; nunca pode ficar presa no jogador 1.
+- Falta de bola branca precisa trocar a vez para o rival/IA explicitamente; nunca pode ficar presa no jogador 1. Quem ganha a vez recebe `bola na mão` e pode posicionar a branca em qualquer ponto legal da mesa antes da tacada.
+- No modo Livre, quando acabam todas as bolas de ataque e fica so a branca, a mesa deve encerrar imediatamente com vencedor/empate pelo placar atual.
 - Depois das escolhas da moeda, mostrar uma animacao curta de `MODO ESCOLHIDO` antes do tutorial, mantendo a mesa travada ate o tutorial começar.
+- Em mobile/touch a Sinuca precisa de tacada em duas etapas: mirar primeiro, tocar para abrir a força e tocar de novo para soltar o taco. Nao disparar a tacada no primeiro toque de mira.
+- A entrada aprovada para Vale Pool e uma animacao curta: taco bate na bola branca, explode pixels e revela a mesa antes da moeda/tutorial.

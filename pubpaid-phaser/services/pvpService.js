@@ -54,8 +54,15 @@ export async function moveCheckers(matchId, move) {
   return requestPvp("./api/pubpaid/pvp/checkers/move", { matchId, move });
 }
 
-export async function shootPool(matchId, angle = 0, power = 0.5, spin = "centro") {
-  return requestPvp("./api/pubpaid/pvp/pool/shot", { matchId, angle, power, spin });
+export async function shootPool(matchId, angle = 0, power = 0.5, spin = "centro", cuePlace = null) {
+  return requestPvp("./api/pubpaid/pvp/pool/shot", {
+    matchId,
+    angle,
+    power,
+    spin,
+    cueX: cuePlace?.x,
+    cueY: cuePlace?.y,
+  });
 }
 
 export async function choosePoolSetup(matchId, action = "start", mode = "livre", starter = "") {

@@ -8,6 +8,7 @@
   const H = canvas.height;
   const HUD_H = 96;
   const BALL_R = 10;
+  const INTRO_DURATION = 2.05;
   const query = new URLSearchParams(window.location.search);
   const embeddedMode = query.get("mode") === "pvp" ? "pvp" : "demo";
   const table = { x: 58, y: 124, w: 844, h: 354 };
@@ -132,10 +133,12 @@
       aim: 0,
       power: 0.72,
       powerDir: 1,
+      shotStage: "aim",
       spinIndex: 0,
       shots: 0,
       next: 1,
       message: "JOGUE A MOEDA",
+      introTimer: INTRO_DURATION,
       turn: "player",
       currentShooter: "player",
       ruleMode: "livre",
@@ -167,6 +170,7 @@
       shotHistory: [],
       cueImpactCooldown: 0,
       cuePocketedThisTurn: false,
+      ballInHandFor: "",
       externalControlled: embeddedMode === "pvp",
       balls: buildRack("livre", rackY),
     };
@@ -298,12 +302,21 @@
   function shoot(actor = "player") {
     if (state.mode !== "MIRANDO") return;
     if (!setupComplete()) return;
+    if (state.winner || objectBallsLeft() <= 0) {
+      finalizeTableIfComplete();
+      return;
+    }
+    if (actor !== "ia" && state.ballInHandFor === "player") {
+      state.message = "BOLA NA MAO: CLIQUE NA MESA";
+      return;
+    }
     if (state.externalControlled) return;
     if (actor !== "ia" && state.turn !== "player") return;
     const cue = cueBall();
     if (!cue || cue.pocketed) return;
     state.currentShooter = actor;
     state.mode = "TACANDO";
+    state.shotStage = "aim";
     state.cuePocketedThisTurn = false;
     state.strikeTimer = 0.34;
     state.shots += 1;
@@ -338,6 +351,7 @@
 
   function update(dt) {
     dt = Math.min(dt, 1 / 20);
+    if (state.introTimer > 0) state.introTimer = Math.max(0, state.introTimer - dt);
 
     if (state.mode === "MOEDA" && state.setupPhase === "coin-flip") {
       state.coinTimer -= dt;
@@ -356,7 +370,7 @@
       if (state.modeRevealTimer <= 0) continueModeReveal();
     }
 
-    if (state.mode === "MIRANDO" && !state.externalControlled && state.turn === "player") {
+    if (state.mode === "MIRANDO" && !state.externalControlled && state.turn === "player" && state.shotStage === "power") {
       state.power += state.powerDir * dt * 0.65;
       if (state.power >= 1) {
         state.power = 1;
@@ -563,6 +577,64 @@
     state.message = "BRANCA REPOSTA";
   }
 
+  function pointInField(x, y) {
+    return x >= field.x + BALL_R && x <= field.x + field.w - BALL_R
+      && y >= field.y + BALL_R && y <= field.y + field.h - BALL_R;
+  }
+
+  function cuePlacementIsClear(x, y) {
+    return state.balls.every((b) => b.cue || b.pocketed || Math.hypot(b.x - x, b.y - y) >= BALL_R * 2.25);
+  }
+
+  function placeCueAtCanvas(x, y, owner = "player", notifyParent = true) {
+    const cue = cueBall();
+    if (!cue) return false;
+    const px = Math.max(field.x + BALL_R, Math.min(field.x + field.w - BALL_R, x));
+    const py = Math.max(field.y + BALL_R, Math.min(field.y + field.h - BALL_R, y));
+    if (!pointInField(px, py) || !cuePlacementIsClear(px, py)) {
+      state.message = owner === "ia" ? "IA PROCURA ESPACO" : "POSICAO OCUPADA";
+      return false;
+    }
+    cue.pocketed = false;
+    cue.x = px;
+    cue.y = py;
+    cue.vx = 0;
+    cue.vy = 0;
+    state.ballInHandFor = "";
+    state.message = owner === "ia" ? "IA POSICIONOU A BRANCA" : "BRANCA POSICIONADA";
+    if (notifyParent && state.externalControlled && owner === "player") {
+      window.parent.postMessage({
+        type: "vale-pool:cue-place",
+        x: Number((((px - field.x) / field.w) * 100).toFixed(2)),
+        y: Number((((py - field.y) / field.h) * 50).toFixed(2)),
+      }, window.location.origin);
+    }
+    syncAimFromMouse();
+    return true;
+  }
+
+  function autoPlaceCueForAi(target) {
+    const candidates = [
+      [target.x - 220, target.y],
+      [target.x - 190, target.y - 48],
+      [target.x - 190, target.y + 48],
+      [field.x + 170, field.y + field.h * 0.42],
+      [field.x + 170, field.y + field.h * 0.66],
+      [field.x + field.w * 0.42, field.y + field.h * 0.5],
+    ];
+    for (const [x, y] of candidates) {
+      if (placeCueAtCanvas(x, y, "ia")) return true;
+    }
+    const cue = cueBall();
+    cue.x = field.x + 185;
+    cue.y = field.y + field.h * 0.58;
+    cue.pocketed = false;
+    cue.vx = 0;
+    cue.vy = 0;
+    state.ballInHandFor = "";
+    return true;
+  }
+
   function objectBallsLeft() {
     return state.balls.filter((b) => !b.cue && !b.pocketed).length;
   }
@@ -654,20 +726,39 @@
   }
 
   function winnerMessage() {
+    if (state.winner === "draw") return "EMPATE";
     if (state.winner === "ia") return state.ruleMode === "parimpar" ? "IA VENCEU NA 15" : "IA VENCEU";
     if (state.winner === "player") return state.ruleMode === "parimpar" ? "VOCE VENCEU NA 15" : "VOCE VENCEU";
     if (state.playerBalls === state.aiBalls) return "EMPATE";
     return state.playerBalls > state.aiBalls ? "VOCE VENCEU" : "IA VENCEU";
   }
 
+  function finalizeTableIfComplete() {
+    if (!state.winner && objectBallsLeft() <= 0) {
+      state.winner = state.playerBalls === state.aiBalls
+        ? "draw"
+        : state.playerBalls > state.aiBalls ? "player" : "ia";
+    }
+    if (!state.winner) return false;
+    state.mode = "FIM";
+    state.turn = state.winner === "ia" ? "ia" : "player";
+    state.currentShooter = state.turn;
+    state.message = winnerMessage();
+    state.cuePocketedThisTurn = false;
+    return true;
+  }
+
   function prepareAiTurn(message = "") {
-    if (!setupComplete() || state.externalControlled || objectBallsLeft() <= 0 || state.winner) {
-      preparePlayerTurn("FIM DA MESA");
+    if (!setupComplete() || state.externalControlled) {
+      return;
+    }
+    if (finalizeTableIfComplete()) {
       return;
     }
     chooseAiShot();
     state.turn = "ia";
     state.mode = "MIRANDO";
+    state.shotStage = "aim";
     state.aiTimer = 0.76;
     state.message = message || (state.lastPocket ? `BOLA ${state.lastPocket} CAIU | IA` : "IA MIRANDO");
   }
@@ -677,6 +768,9 @@
     state.turn = "player";
     state.currentShooter = "player";
     state.mode = "MIRANDO";
+    state.shotStage = "aim";
+    state.power = 0.18;
+    state.powerDir = 1;
     state.message = message || (state.lastPocket ? `BOLA ${state.lastPocket} CAIU` : "SUA VEZ");
   }
 
@@ -733,6 +827,9 @@
     state.mode = "MIRANDO";
     state.turn = normalizedStarter;
     state.currentShooter = normalizedStarter === "ia" ? "ia" : normalizedStarter === "rival" ? "rival" : "player";
+    state.shotStage = "aim";
+    state.power = 0.18;
+    state.powerDir = 1;
     state.message = message;
     if (normalizedStarter === "ia") {
       chooseAiShot();
@@ -873,19 +970,17 @@
 
   function finishRollingTurn() {
     const cueFoul = state.cuePocketedThisTurn;
-    if (state.winner || objectBallsLeft() <= 0) {
-      state.mode = "MIRANDO";
-      state.turn = "player";
-      state.message = winnerMessage();
-      state.cuePocketedThisTurn = false;
+    if (finalizeTableIfComplete()) {
       return;
     }
     if (!state.externalControlled && state.currentShooter === "player") {
-      prepareAiTurn(cueFoul ? "FALTA: BRANCA CAIU | IA JOGA" : "");
+      if (cueFoul) state.ballInHandFor = "ia";
+      prepareAiTurn(cueFoul ? "FALTA: BRANCA CAIU | BOLA NA MAO DA IA" : "");
       state.cuePocketedThisTurn = false;
       return;
     }
-    preparePlayerTurn(cueFoul ? "FALTA DA IA: BRANCA CAIU | SUA VEZ" : "");
+    if (cueFoul) state.ballInHandFor = "player";
+    preparePlayerTurn(cueFoul ? "FALTA DA IA: BOLA NA MAO | CLIQUE NA MESA" : "");
     state.cuePocketedThisTurn = false;
   }
 
@@ -903,8 +998,12 @@
       preparePlayerTurn("SEM ALVO");
       return;
     }
+    if (state.ballInHandFor === "ia") {
+      autoPlaceCueForAi(target);
+    }
+    const placedCue = cueBall();
     const wobble = ((state.shots % 5) - 2) * 0.035;
-    state.aim = Math.atan2(target.y - cue.y, target.x - cue.x) + wobble;
+    state.aim = Math.atan2(target.y - placedCue.y, target.x - placedCue.x) + wobble;
     state.power = 0.42 + (state.shots % 3) * 0.08;
     state.spinIndex = 0;
   }
@@ -946,6 +1045,9 @@
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
     state.playerGroup = pool[`${seat}Group`] || "";
     state.aiGroup = pool[`${rivalSeat}Group`] || "";
+    state.ballInHandFor = pool.ballInHandSeat
+      ? pool.ballInHandSeat === seat ? "player" : "rival"
+      : "";
     state.shots = Number(payload.moveCount || pool.shot || 0);
     state.power = Math.max(0.08, Math.min(1, Number(payload.power || state.power || 0.56)));
     state.aim = (Number(payload.aim || 0) * Math.PI) / 180;
@@ -972,6 +1074,10 @@
       b.vy = 0;
       b.pocketed = Boolean(source.pocketed);
     });
+    if (state.ballInHandFor === "player" && payload.cuePlace) {
+      placeCueAtCanvas(canvasXFromServer(payload.cuePlace.x), canvasYFromServer(payload.cuePlace.y), "player", false);
+      state.ballInHandFor = "player";
+    }
     state.next = nextLiveNumber();
     render();
   }
@@ -988,6 +1094,7 @@
     drawTableLights();
     drawGameplay();
     ctx.restore();
+    drawIntroOverlay();
     postDemoState();
   }
 
@@ -1012,6 +1119,7 @@
       tutorialStarter: state.tutorialStarter,
       turn: state.turn,
       mode: state.mode,
+      ballInHandFor: state.ballInHandFor,
       shots: state.shots,
       ballsInside: objectBallsLeft(),
       ballsOutside: state.pocketedLog.length,
@@ -1312,14 +1420,79 @@
       if (!b.pocketed) drawBall(b);
     }
     drawFx();
+    if (state.winner) {
+      ctx.fillStyle = "rgba(2,6,10,.78)";
+      ctx.fillRect(304, 224, 352, 92);
+      ctx.strokeStyle = palette.goldDark;
+      ctx.lineWidth = 4;
+      ctx.strokeRect(306, 226, 348, 88);
+      ctx.strokeStyle = palette.goldHi;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(318.5, 238.5, 323, 63);
+      text("FIM DA MESA", 394, 260, 18, palette.goldHi);
+      text(winnerMessage(), 386, 292, 22, state.winner === "draw" ? palette.white : palette.greenText);
+    } else if (state.ballInHandFor) {
+      const label = state.ballInHandFor === "player"
+        ? "BOLA NA MAO: CLIQUE NA MESA"
+        : state.ballInHandFor === "ia" ? "BOLA NA MAO DA IA" : "BOLA NA MAO";
+      ctx.fillStyle = "rgba(2,6,10,.68)";
+      ctx.fillRect(318, 224, 324, 50);
+      ctx.strokeStyle = palette.goldHi;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(318.5, 224.5, 323, 49);
+      text(label, 344, 256, 16, palette.greenText);
+    }
     drawSetupOverlay();
     ctx.fillStyle = "rgba(5,12,17,.86)";
     ctx.fillRect(70, 490, 820, 38);
     ctx.strokeStyle = palette.goldDark;
     ctx.strokeRect(70.5, 490.5, 819, 37);
     text("ESTADO", 92, 513, 13, palette.goldHi);
-    const info = `${state.message} | ${currentRule().label} | ${ruleActionText()} | DENTRO ${objectBallsLeft()} FORA ${state.pocketedLog.length} JOGADAS ${state.shots}`;
+    const shotHint = state.mode === "MIRANDO" && state.turn === "player" && !state.ballInHandFor
+      ? state.shotStage === "power" ? "TOQUE PARA TACAR" : "MIRE E TOQUE PARA FORCA"
+      : "";
+    const info = `${state.message}${shotHint ? ` | ${shotHint}` : ""} | ${currentRule().label} | ${ruleActionText()} | DENTRO ${objectBallsLeft()} FORA ${state.pocketedLog.length} JOGADAS ${state.shots}`;
     text(info.slice(0, 78), 170, 514, 14, state.mode === "MIRANDO" ? palette.greenText : palette.goldHi);
+  }
+
+  function drawIntroOverlay() {
+    if (!state?.introTimer) return;
+    const t = Math.max(0, Math.min(1, 1 - state.introTimer / INTRO_DURATION));
+    const hitT = Math.max(0, Math.min(1, (t - 0.38) / 0.18));
+    const revealT = Math.max(0, Math.min(1, (t - 0.62) / 0.38));
+    ctx.save();
+    ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = `rgba(1, 5, 8, ${Math.max(0, 0.94 - revealT * 0.94).toFixed(3)})`;
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalAlpha = Math.max(0, 1 - revealT * 0.85);
+    const ballX = 530;
+    const ballY = 280;
+    const cueTipX = 110 + 350 * Math.min(1, t / 0.38);
+    const cueTipY = ballY + 52 - 52 * Math.min(1, t / 0.38);
+    drawPixelLine(cueTipX - 240, cueTipY + 66, cueTipX, cueTipY, 8, "#3a1b0d");
+    drawPixelLine(cueTipX - 236, cueTipY + 63, cueTipX - 2, cueTipY - 1, 4, "#b86c24");
+    drawPixelLine(cueTipX - 14, cueTipY + 3, cueTipX + 16, cueTipY - 5, 3, "#efe1c0");
+    ctx.fillStyle = "#f4e5c4";
+    ctx.beginPath();
+    ctx.arc(ballX + hitT * 42, ballY - hitT * 20, 22 - hitT * 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(ballX - 8 + hitT * 42, ballY - 12 - hitT * 20, 7, 4);
+    const burstPower = Math.max(0, Math.min(1, (t - 0.42) / 0.3));
+    for (let i = 0; i < 34; i += 1) {
+      const a = i * 2.399 + 0.4;
+      const d = burstPower * (18 + (i % 7) * 11);
+      const s = 2 + (i % 3) * 2;
+      const x = ballX + Math.cos(a) * d;
+      const y = ballY + Math.sin(a) * d;
+      ctx.fillStyle = i % 4 === 0 ? "#fff0b5" : i % 3 === 0 ? "#f5b544" : "#8fff5b";
+      ctx.fillRect(Math.round(x), Math.round(y), s, s);
+    }
+    ctx.globalAlpha = Math.max(0, 1 - revealT);
+    text("VALE POOL", 330, 188, 46, palette.goldHi);
+    text("CLUBE DE SINUCA", 354, 222, 18, palette.greenText);
+    text("toque para pular", 410, 438, 13, palette.white);
+    ctx.restore();
   }
 
   function drawSetupCoin(cx, cy) {
@@ -1691,9 +1864,35 @@
   }
 
   function syncAimFromMouse() {
-    if (!mouse.inside || state.mode !== "MIRANDO" || state.turn !== "player") return;
+    if (!mouse.inside || state.mode !== "MIRANDO" || state.turn !== "player" || state.ballInHandFor === "player" || state.shotStage === "power") return;
     const cue = cueBall();
     state.aim = Math.atan2(mouse.y - cue.y, mouse.x - cue.x);
+  }
+
+  function startPlayerPowerStage() {
+    if (state.mode !== "MIRANDO" || state.turn !== "player" || state.externalControlled) return false;
+    if (state.ballInHandFor === "player") {
+      state.message = "BOLA NA MAO: CLIQUE NA MESA";
+      return true;
+    }
+    if (state.winner || objectBallsLeft() <= 0) {
+      finalizeTableIfComplete();
+      return true;
+    }
+    state.shotStage = "power";
+    state.power = 0.08;
+    state.powerDir = 1;
+    state.message = "FORCA ABRINDO | TOQUE PARA TACAR";
+    playTone(520, 0.045, "square", 0.025);
+    return true;
+  }
+
+  function handlePlayerShotPress() {
+    if (state.shotStage !== "power") {
+      startPlayerPowerStage();
+      return;
+    }
+    shoot();
   }
 
   canvas.setAttribute("tabindex", "0");
@@ -1720,6 +1919,10 @@
     const rect = canvas.getBoundingClientRect();
     const x = (event.clientX - rect.left) * canvas.width / rect.width;
     const y = (event.clientY - rect.top) * canvas.height / rect.height;
+    if (state.introTimer > 0) {
+      state.introTimer = 0;
+      return;
+    }
     if (handleSetupClick(x, y)) return;
     const control = spinControls.find((item) => hit(x, y, item));
     if (control) {
@@ -1728,11 +1931,20 @@
     }
     if (setSpinFromPoint(x, y)) return;
     if (y < HUD_H) return;
-    shoot();
+    if (state.mode === "MIRANDO" && state.turn === "player" && state.ballInHandFor === "player") {
+      placeCueAtCanvas(x, y, "player");
+      return;
+    }
+    handlePlayerShotPress();
   });
 
   window.addEventListener("keydown", (event) => {
     unlockAudio();
+    if (state.introTimer > 0 && (event.code === "Space" || event.key === "Enter")) {
+      event.preventDefault();
+      state.introTimer = 0;
+      return;
+    }
     if (!setupComplete()) {
       if (event.code === "Space" || event.key === "Enter") {
         event.preventDefault();
@@ -1761,7 +1973,7 @@
     else if (["1", "2", "3", "4", "5"].includes(event.key)) setSpin(Number(event.key) - 1);
     else if (event.code === "Space") {
       event.preventDefault();
-      shoot();
+      handlePlayerShotPress();
     } else if (event.key.toLowerCase() === "r") reset();
   });
 
@@ -1812,6 +2024,8 @@
       escolhaVencedorMoeda: state.setupWinnerChoice,
       tutorialStarter: state.tutorialStarter,
       tacadas: state.shots,
+      etapaTacada: state.shotStage === "power" ? "forca" : "mira",
+      intro: state.introTimer > 0 ? "abertura" : "",
       proxima: state.next,
       forca: Number(state.power.toFixed(2)),
       efeito: spinStates[state.spinIndex].label,
@@ -1820,6 +2034,7 @@
       bolasDentro: objectBallsLeft(),
       jogadas: state.shots,
       mensagem: state.message,
+      bolaNaMao: state.ballInHandFor,
     },
     demo: {
       jogador: "VOCE",
