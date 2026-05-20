@@ -5426,6 +5426,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
 }
 
 .ppg-vale-pool-shell {
+  position: relative;
   display: grid;
   place-items: center;
   width: min(calc(100dvw - 24px), 1840px);
@@ -5451,6 +5452,18 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
 
 .ppg-vale-pool-frame:focus {
   outline: none;
+}
+
+.ppg-vale-pool-exit {
+  position: absolute;
+  z-index: 6;
+  top: clamp(6px, .8vw, 12px);
+  right: clamp(62px, 6vw, 102px);
+  min-height: 30px;
+  padding: 4px 10px;
+  border-width: 2px;
+  font-size: clamp(9px, .85vw, 12px);
+  pointer-events: auto;
 }
 
 .ppg-vale-pool-shell.is-pvp .ppg-vale-pool-frame,
@@ -9359,14 +9372,17 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-stage {
   inset: 0;
   display: grid;
   place-items: center;
-  padding: clamp(8px, 1vw, 16px);
+  padding:
+    max(54px, calc(var(--ppg-safe-top) + 42px))
+    clamp(10px, 1vw, 18px)
+    max(94px, calc(var(--ppg-safe-bottom) + 80px));
   perspective: 1280px;
-  perspective-origin: 50% 40%;
+  perspective-origin: 50% 48%;
 }
 
 body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-frame {
-  width: min(calc(100dvw - 400px), calc(100dvh - 24px) * 1.58, 1600px);
-  min-width: min(calc(100dvw - 24px), 420px);
+  width: min(calc(100dvw - 430px), calc(100dvh - 128px) * 1.18, 980px);
+  min-width: min(calc(100dvw - 44px), 340px);
 }
 
 body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-sidecar {
@@ -9389,7 +9405,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess
 
 @media (max-width: 900px), (max-height: 520px) {
   body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-frame {
-    width: min(calc(100dvw - 24px), calc(100dvh - 24px) * 1.58, 980px);
+    width: min(calc(100dvw - 44px), calc(100dvh - 124px) * 1.16, 620px);
   }
 
   body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-sidecar {

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam3";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam4";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-polishcam3";
+} from "../services/pvpService.js?v=20260520-polishcam4";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-polishcam3";
-import { Chess } from "../vendor/chess.js?v=20260520-polishcam3";
+} from "../core/checkersRules.js?v=20260520-polishcam4";
+import { Chess } from "../vendor/chess.js?v=20260520-polishcam4";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -718,7 +718,7 @@ export function bindDomGameInterface(game) {
     frame.style.setProperty("--ppg-chess-zoom", `${local.chessCamera.zoom}`);
     frame.style.setProperty("--ppg-chess-pan-x", `${local.chessCamera.panX}px`);
     frame.style.setProperty("--ppg-chess-pan-y", `${local.chessCamera.panY}px`);
-    frame.style.setProperty("--ppg-chess-tilt", compactLandscape ? (cinematic ? "52deg" : "46deg") : (cinematic ? "60deg" : "52deg"));
+    frame.style.setProperty("--ppg-chess-tilt", compactLandscape ? (cinematic ? "42deg" : "38deg") : (cinematic ? "50deg" : "44deg"));
   };
 
   const startCheckersCinematic = (match = {}) => {
