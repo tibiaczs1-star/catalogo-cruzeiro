@@ -9221,6 +9221,28 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   width: min(360px, 100%);
 }
 
+.ppg-chess-exit {
+  position: absolute;
+  z-index: 8;
+  top: max(12px, var(--ppg-safe-top));
+  left: max(12px, var(--ppg-safe-left));
+  min-width: 82px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 246, 220, 0.34);
+  border-radius: 999px;
+  color: #fff6dc;
+  background:
+    linear-gradient(135deg, rgba(255, 208, 109, 0.18), transparent 38%),
+    rgba(4, 8, 16, 0.74);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), inset 0 0 16px rgba(80, 239, 255, 0.08);
+  backdrop-filter: blur(12px);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 @keyframes ppg-chess-3d-land {
   0% { transform: translateZ(38px) translateY(-14%) scale(1.06, 1.08); }
   100% { transform: translateZ(26px) translateY(0) scale(1, 1.04); }

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam2";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam3";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-polishcam2";
+} from "../services/pvpService.js?v=20260520-polishcam3";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-polishcam2";
-import { Chess } from "../vendor/chess.js?v=20260520-polishcam2";
+} from "../core/checkersRules.js?v=20260520-polishcam3";
+import { Chess } from "../vendor/chess.js?v=20260520-polishcam3";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -2870,6 +2870,7 @@ export function bindDomGameInterface(game) {
         `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}`,
         `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}">
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <button type="button" class="ppg-chess-exit" data-dom-open-lobby>Mesas</button>
           <div class="ppg-chess-board-stage" data-chess-stage>
             <div class="ppg-chess-board-frame" data-chess-frame>
               <div class="ppg-dom-chess-board" data-ai-thinking="${demoMode && local.demoChessAiThinking ? "true" : "false"}">${renderChessBoardMarkup(match, seat)}</div>
