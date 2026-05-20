@@ -148,6 +148,10 @@
       setupAiTask: "",
       pendingStarter: "",
       tutorialStarter: "",
+      modeRevealTimer: 0,
+      modeRevealStarter: "",
+      modeRevealMessage: "",
+      revealedTutorialKey: "",
       playerBalls: 0,
       aiBalls: 0,
       playerGroup: "",
@@ -162,6 +166,7 @@
       pocketedLog: [],
       shotHistory: [],
       cueImpactCooldown: 0,
+      cuePocketedThisTurn: false,
       externalControlled: embeddedMode === "pvp",
       balls: buildRack("livre", rackY),
     };
@@ -299,6 +304,7 @@
     if (!cue || cue.pocketed) return;
     state.currentShooter = actor;
     state.mode = "TACANDO";
+    state.cuePocketedThisTurn = false;
     state.strikeTimer = 0.34;
     state.shots += 1;
     state.shotHistory.push({
@@ -342,6 +348,12 @@
     if (state.mode === "MOEDA" && state.setupPhase === "ia-thinking") {
       state.aiTimer -= dt;
       if (state.aiTimer <= 0) resolveAiSetupChoice();
+    }
+
+    if (state.mode === "MOEDA" && state.setupPhase === "mode-reveal") {
+      state.modeRevealTimer -= dt;
+      state.coinSpin += dt * 9;
+      if (state.modeRevealTimer <= 0) continueModeReveal();
     }
 
     if (state.mode === "MIRANDO" && !state.externalControlled && state.turn === "player") {
@@ -519,6 +531,7 @@
         state.shake = Math.max(state.shake, 3.2);
         burst(p.x, p.y, b.cue ? "#fff2ca" : b.color, 22, 230);
         playTone(b.cue ? 190 : 760, 0.12, "square", 0.045);
+        if (b.cue) state.cuePocketedThisTurn = true;
         if (!b.cue) {
           const target = state.next;
           state.pocketedLog.push({
@@ -591,24 +604,25 @@
       return;
     }
     if (state.ruleMode === "parimpar") {
+      const actorName = actor === "ia" ? "IA" : "VOCE";
       if (b.number === 15) {
         if (groupCleared(actor)) {
           state.winner = actor;
-          state.message = `${actor === "ia" ? "IA" : "VOCE"} FECHOU NA 15`;
+          state.message = `${actorName} FECHOU NA 15`;
         } else {
           state.winner = opponent;
           state.message = "15 ANTES DA HORA";
         }
         return;
       }
-      assignGroupsIfNeeded(actor, b.number);
+      const groupMessage = assignGroupsIfNeeded(actor, b.number);
       const ownGroup = state[groupKeyFor(actor)];
       if (!ownGroup || groupForNumber(b.number) === ownGroup) {
         state[actorScore] += 1;
-        state.message = `${actor === "ia" ? "IA" : "VOCE"} FEZ ${ownGroup || groupForNumber(b.number)}`;
+        state.message = `${groupMessage ? `${groupMessage} | ` : ""}${actorName} FEZ ${ownGroup || groupForNumber(b.number)}`;
       } else {
         state[opponentScore] += 1;
-        state.message = `FALTA: BOLA ${groupForNumber(b.number)}`;
+        state.message = `${groupMessage ? `${groupMessage} | ` : ""}FALTA: BOLA ${groupForNumber(b.number)}`;
       }
       return;
     }
@@ -617,15 +631,17 @@
   }
 
   function assignGroupsIfNeeded(actor, number) {
-    if (state.playerGroup || state.aiGroup || number === 15) return;
+    if (state.playerGroup || state.aiGroup || number === 15) return "";
     const group = groupForNumber(number);
     const other = group === "PAR" ? "IMPAR" : "PAR";
     if (actor === "ia") {
       state.aiGroup = group;
       state.playerGroup = other;
+      return `GRUPOS: IA ${group} | VOCE ${other}`;
     } else {
       state.playerGroup = group;
       state.aiGroup = other;
+      return `GRUPOS: VOCE ${group} | IA ${other}`;
     }
   }
 
@@ -644,7 +660,7 @@
     return state.playerBalls > state.aiBalls ? "VOCE VENCEU" : "IA VENCEU";
   }
 
-  function prepareAiTurn() {
+  function prepareAiTurn(message = "") {
     if (!setupComplete() || state.externalControlled || objectBallsLeft() <= 0 || state.winner) {
       preparePlayerTurn("FIM DA MESA");
       return;
@@ -653,7 +669,7 @@
     state.turn = "ia";
     state.mode = "MIRANDO";
     state.aiTimer = 0.76;
-    state.message = state.lastPocket ? `BOLA ${state.lastPocket} CAIU | IA` : "IA MIRANDO";
+    state.message = message || (state.lastPocket ? `BOLA ${state.lastPocket} CAIU | IA` : "IA MIRANDO");
   }
 
   function preparePlayerTurn(message = "") {
@@ -677,6 +693,7 @@
   }
 
   function actorLabel(actor) {
+    if (actor === "rival") return "RIVAL";
     return actor === "ia" ? "IA" : "VOCE";
   }
 
@@ -711,23 +728,43 @@
   }
 
   function startAfterSetup(starter, message) {
+    const normalizedStarter = starter === "ia" ? "ia" : starter === "rival" ? "rival" : "player";
     state.setupPhase = "done";
     state.mode = "MIRANDO";
-    state.turn = starter;
-    state.currentShooter = starter === "ia" ? "ia" : "player";
+    state.turn = normalizedStarter;
+    state.currentShooter = normalizedStarter === "ia" ? "ia" : normalizedStarter === "rival" ? "rival" : "player";
     state.message = message;
-    if (starter === "ia") {
+    if (normalizedStarter === "ia") {
       chooseAiShot();
       state.aiTimer = 0.92;
     }
   }
 
   function startTutorial(starter, message) {
-    state.tutorialStarter = starter === "ia" ? "ia" : "player";
+    state.tutorialStarter = starter === "ia" ? "ia" : starter === "rival" ? "rival" : "player";
     state.pendingStarter = state.tutorialStarter;
     state.setupPhase = "tutorial";
     state.mode = "MOEDA";
     state.message = message || `${actorLabel(state.tutorialStarter)} COMECA | ${currentRule().label}`;
+  }
+
+  function startModeReveal(starter, message) {
+    state.modeRevealStarter = starter === "ia" ? "ia" : starter === "rival" ? "rival" : "player";
+    state.modeRevealMessage = message || `${actorLabel(state.modeRevealStarter)} COMECA | ${currentRule().label}`;
+    state.tutorialStarter = state.modeRevealStarter;
+    state.pendingStarter = state.modeRevealStarter;
+    state.modeRevealTimer = 1.35;
+    state.setupPhase = "mode-reveal";
+    state.mode = "MOEDA";
+    state.message = `MODO ESCOLHIDO: ${currentRule().label}`;
+    playTone(720, 0.1, "square", 0.04);
+  }
+
+  function continueModeReveal() {
+    startTutorial(
+      state.modeRevealStarter || state.tutorialStarter || state.pendingStarter || "player",
+      state.modeRevealMessage || `${actorLabel(state.pendingStarter || "player")} COMECA | ${currentRule().label}`
+    );
   }
 
   function resolveAiSetupChoice() {
@@ -750,15 +787,15 @@
       state.message = "IA ESCOLHEU COMECAR | VOCE ESCOLHE MODO";
       return;
     }
-    if (state.setupAiTask === "loser-mode") {
+      if (state.setupAiTask === "loser-mode") {
       const ruleMode = aiRuleChoice();
       setRuleMode(ruleMode);
       const starter = state.pendingStarter || "player";
-      startTutorial(starter, `IA ESCOLHEU ${currentRule().label} | ${actorLabel(starter)} COMECA`);
+      startModeReveal(starter, `IA ESCOLHEU ${currentRule().label} | ${actorLabel(starter)} COMECA`);
       return;
     }
     if (state.setupAiTask === "loser-starter") {
-      startTutorial("ia", `IA ESCOLHEU COMECAR | ${currentRule().label}`);
+      startModeReveal("ia", `IA ESCOLHEU COMECAR | ${currentRule().label}`);
     }
   }
 
@@ -820,12 +857,12 @@
         state.message = `VOCE ESCOLHEU ${currentRule().label} | IA ESCOLHE SAIDA`;
       } else {
         const starter = state.pendingStarter || "ia";
-        startTutorial(starter, `VOCE ESCOLHEU ${currentRule().label} | ${actorLabel(starter)} COMECA`);
+        startModeReveal(starter, `VOCE ESCOLHEU ${currentRule().label} | ${actorLabel(starter)} COMECA`);
       }
     }
     if (button.action.startsWith("starter:")) {
       const starter = button.action.slice(8) === "ia" ? "ia" : "player";
-      startTutorial(starter, `${actorLabel(starter)} COMECA | ${currentRule().label}`);
+      startModeReveal(starter, `${actorLabel(starter)} COMECA | ${currentRule().label}`);
     }
     if (button.action === "tutorial-start") {
       const starter = state.tutorialStarter || state.pendingStarter || "player";
@@ -835,17 +872,21 @@
   }
 
   function finishRollingTurn() {
+    const cueFoul = state.cuePocketedThisTurn;
     if (state.winner || objectBallsLeft() <= 0) {
       state.mode = "MIRANDO";
       state.turn = "player";
       state.message = winnerMessage();
+      state.cuePocketedThisTurn = false;
       return;
     }
     if (!state.externalControlled && state.currentShooter === "player") {
-      prepareAiTurn();
+      prepareAiTurn(cueFoul ? "FALTA: BRANCA CAIU | IA JOGA" : "");
+      state.cuePocketedThisTurn = false;
       return;
     }
-    preparePlayerTurn();
+    preparePlayerTurn(cueFoul ? "FALTA DA IA: BRANCA CAIU | SUA VEZ" : "");
+    state.cuePocketedThisTurn = false;
   }
 
   function chooseAiShot() {
@@ -887,8 +928,16 @@
     const balls = Array.isArray(pool.balls) ? pool.balls : [];
     state.externalControlled = true;
     state.ruleMode = ruleModes[pool.ruleMode || payload.ruleMode] ? (pool.ruleMode || payload.ruleMode) : "livre";
-    state.setupPhase = payload.setupPhase || pool.setup?.phase || "done";
-    state.mode = payload.canAct ? "MIRANDO" : "AGUARDANDO";
+    const incomingSetupPhase = payload.setupPhase || pool.setup?.phase || "done";
+    const previousSetupPhase = state.setupPhase;
+    state.setupPhase = incomingSetupPhase;
+    if (state.setupPhase === "mode-reveal" && previousSetupPhase !== "mode-reveal") {
+      state.modeRevealTimer = 1.35;
+      state.modeRevealStarter = pool.setup?.starterSeat === payload.seat ? "player" : "rival";
+      state.modeRevealMessage = `MODO ESCOLHIDO: ${currentRule().label}`;
+      state.coinSpin = 0;
+    }
+    state.mode = state.setupPhase === "done" ? (payload.canAct ? "MIRANDO" : "AGUARDANDO") : "MOEDA";
     state.turn = payload.canAct ? "player" : "rival";
     state.message = payload.message || (payload.canAct ? "SUA VEZ" : "VEZ DO RIVAL");
     state.playerBalls = Number(payload.ownScore || 0);
@@ -1059,7 +1108,7 @@
     if (state.ruleMode === "brasileira" && state.next !== "-") {
       smallBall(137, 58, ballColor(state.next, state.ruleMode), state.next);
     } else {
-      text(currentRule().short, 116, 62, 13, palette.goldHi);
+      text(groupStatusText(), 116, 62, state.ruleMode === "parimpar" && (state.playerGroup || state.aiGroup) ? 8 : 13, palette.goldHi);
     }
 
     panel(172, 10, 120, 76, "TACADAS");
@@ -1094,15 +1143,24 @@
       return state.next && state.next !== "-" ? `ALVO BOLA ${state.next}` : "MESA LIMPA";
     }
     if (state.ruleMode === "parimpar") {
-      const group = state.turn === "ia" || state.turn === "rival" ? state.aiGroup : state.playerGroup;
+      const actor = state.turn === "ia" || state.turn === "rival" ? "rival" : "player";
+      const group = actor === "rival" ? state.aiGroup : state.playerGroup;
+      const owner = actor === "rival" ? (embeddedMode === "pvp" ? "RIVAL" : "IA") : "VOCE";
       if (!group) return "1a BOLA DEFINE PAR/IMPAR";
       const left = state.balls
         .filter((b) => !b.cue && !b.pocketed && b.number !== 15 && groupForNumber(b.number) === group)
         .map((b) => b.number)
         .sort((a, b) => a - b);
-      return left.length ? `${group}: ${left.join(",")}` : "GRUPO LIMPO: MIRE 15";
+      return left.length ? `${owner} ${group}: ${left.join(",")}` : `${owner} ${group} LIMPO: MIRE 15`;
     }
     return "LIVRE: QUALQUER BOLA 1-9";
+  }
+
+  function groupStatusText() {
+    if (state.ruleMode !== "parimpar") return currentRule().short;
+    if (!state.playerGroup && !state.aiGroup) return "DEFINE";
+    const rivalLabel = embeddedMode === "pvp" ? "RIVAL" : "IA";
+    return `VOCE ${state.playerGroup || "?"} | ${rivalLabel} ${state.aiGroup || "?"}`;
   }
 
   function panel(x, y, w, h, title) {
@@ -1283,9 +1341,12 @@
   function drawSetupOverlay() {
     if (setupComplete()) return;
     const tutorial = state.setupPhase === "tutorial";
+    const reveal = state.setupPhase === "mode-reveal";
     const panel = tutorial
       ? { x: 150, y: 140, w: 660, h: 300 }
-      : { x: 190, y: 198, w: 580, h: 152 };
+      : reveal
+        ? { x: 170, y: 160, w: 620, h: 236 }
+        : { x: 190, y: 198, w: 580, h: 152 };
     ctx.fillStyle = "rgba(2,6,10,.82)";
     ctx.fillRect(panel.x, panel.y, panel.w, panel.h);
     ctx.strokeStyle = palette.goldDark;
@@ -1295,7 +1356,21 @@
     ctx.lineWidth = 1;
     ctx.strokeRect(panel.x + 14, panel.y + 14, panel.w - 28, panel.h - 28);
 
-    if (tutorial) {
+    if (reveal) {
+      const pulse = 0.5 + Math.sin(state.coinSpin * 2.4) * 0.5;
+      text("MODO ESCOLHIDO", panel.x + 178, panel.y + 48, 18, palette.greenText);
+      const revealTitle = (ruleTutorials[state.ruleMode]?.title || currentRule().label || "MODO").toUpperCase();
+      text(revealTitle, panel.x + 86, panel.y + 104, 32, palette.goldHi);
+      text(`SAIDA: ${actorLabel(state.modeRevealStarter || state.tutorialStarter || state.pendingStarter || "player")}`, panel.x + 232, panel.y + 146, 17, palette.white);
+      for (let index = 0; index < 9; index += 1) {
+        const x = panel.x + 142 + index * 42;
+        const y = panel.y + 184 + Math.sin(state.coinSpin + index) * 6;
+        smallBall(x, y, ballColor(index + 1, state.ruleMode), state.ruleMode === "parimpar" ? index + 2 : index + 1);
+      }
+      ctx.strokeStyle = `rgba(255, 208, 109, ${0.35 + pulse * 0.45})`;
+      ctx.strokeRect(panel.x + 42.5, panel.y + 70.5, panel.w - 85, 58);
+      text("Abrindo tutorial...", panel.x + 244, panel.y + 216, 13, palette.greenText);
+    } else if (tutorial) {
       const tutorialInfo = ruleTutorials[state.ruleMode] || ruleTutorials.livre;
       text(tutorialInfo.title, panel.x + 36, panel.y + 52, 23, palette.goldHi);
       text(`SAIDA: ${actorLabel(state.tutorialStarter || state.pendingStarter || "player")}`, panel.x + 410, panel.y + 52, 16, palette.greenText);
@@ -1672,6 +1747,8 @@
         } else if (state.setupPhase === "tutorial") {
           const starter = state.tutorialStarter || state.pendingStarter || "player";
           startAfterSetup(starter, `${actorLabel(starter)} COMECA | ${currentRule().label}`);
+        } else if (state.setupPhase === "mode-reveal") {
+          continueModeReveal();
         }
       }
       return;

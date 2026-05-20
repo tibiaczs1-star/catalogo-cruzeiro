@@ -2,6 +2,16 @@
 
 Atualizado: 2026-05-20
 
+## Rodada Atual - 20260520-poolturn1
+
+- Sinuca/Vale Pool manteve a arte aprovada e recebeu correção de execução no Par/Impar.
+- Quando a bola branca cai, Demo e PvP passam a vez para IA/rival de forma explícita, sem prender a vez no jogador 1.
+- Par/Impar agora comunica melhor os grupos: antes da primeira bola aparece `DEFINE GRUPO`; depois os cartões/HUD mostram `VOCE/RIVAL/IA: PAR` ou `IMPAR`.
+- Após as escolhas da moeda, Demo e PvP exibem uma animação de `MODO ESCOLHIDO` antes do tutorial da modalidade.
+- Build local: `20260520-poolturn1`.
+- Validação: `node --check` em `games/vale-pool/game.js`, `pubpaid-phaser/ui/domGameInterface.js`, `server.js` e `pubpaid-phaser/app.js`; `npm run guard:pubpaid`; `/api/pubpaid/build` respondeu `20260520-poolturn1` na porta 3001; Playwright capturou animação e tutorial Par/Impar sem erro.
+- Evidências: `.codex-temp/vale-pool-poolturn1/mode-reveal.png` e `.codex-temp/vale-pool-poolturn1/tutorial.png`.
+
 ## Rodada Atual - 20260520-poolrules1
 
 - Sinuca/Vale Pool manteve a arte aprovada e recebeu clareza jogavel das regras dentro da HUD.

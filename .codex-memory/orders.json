@@ -1,7 +1,57 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-19T22:05:00-05:00",
+  "lastUpdatedAt": "2026-05-20T08:39:00-05:00",
   "orders": [
+    {
+      "id": "2026-05-20-corrigir-turno-parimpar-e-animacao-modo-sinuca",
+      "createdAt": "2026-05-20T08:39:00-05:00",
+      "updatedAt": "2026-05-20T08:39:00-05:00",
+      "status": "poolturn1-implemented-validated",
+      "source": "chat",
+      "rawRequest": "Corrigir erro de execucao no Par/Impar quando a bola branca cai, explicitar quem joga com pares ou impares e criar animacao do modo escolhido antes do tutorial.",
+      "summary": "Corrigir troca de vez e leitura de grupos no Par/Impar e inserir animacao de modo escolhido antes do tutorial.",
+      "normalizedTasks": [
+        "passar a vez para IA/rival quando a branca cair",
+        "mostrar explicitamente VOCE/RIVAL/IA como donos de PAR/IMPAR",
+        "adicionar fase visual de modo escolhido antes do tutorial",
+        "validar sintaxe, guard PubPaid e captura visual"
+      ],
+      "filesTouched": [
+        "games/vale-pool/game.js",
+        "games/vale-pool/index.html",
+        "games/vale-pool/progress.md",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js",
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        ".codex-agents/game-director-system/projects/vale-pool.md",
+        "C:/Users/junio/.codex/skills/game-director-general/references/pool-modalities.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-poolturn1/mode-reveal.png",
+        ".codex-temp/vale-pool-poolturn1/tutorial.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "par-impar",
+        "pvp",
+        "demo",
+        "game-director"
+      ],
+      "nextSteps": [
+        "validar PvP real em duas sessoes autenticadas diferentes quando houver contas/sessoes disponiveis"
+      ],
+      "notes": "Build local 20260520-poolturn1. Porta 3000 estava ocupada por outro app; servidor do projeto validado na porta 3001."
+    },
     {
       "id": "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp",
       "createdAt": "2026-05-19T21:10:00-05:00",

@@ -5470,6 +5470,48 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
   gap: 7px;
 }
 
+.ppg-vale-pool-setup.is-mode-reveal {
+  overflow: hidden;
+  border-color: #ffe39d;
+  box-shadow: 0 0 18px rgba(255, 208, 109, 0.24);
+}
+
+.ppg-vale-pool-mode-orbit {
+  position: relative;
+  height: 24px;
+  margin: 1px auto;
+  width: 132px;
+}
+
+.ppg-vale-pool-mode-orbit i {
+  position: absolute;
+  top: 7px;
+  left: 54px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #07101c;
+  border-radius: 999px;
+  background: #ffd06d;
+  box-shadow: 0 0 0 1px #ffe39d;
+  animation: ppg-pool-mode-orbit 1.1s steps(8) infinite;
+}
+
+.ppg-vale-pool-mode-orbit i:nth-child(2) {
+  background: #8fff5b;
+  animation-delay: .14s;
+}
+
+.ppg-vale-pool-mode-orbit i:nth-child(3) {
+  background: #d94848;
+  animation-delay: .28s;
+}
+
+@keyframes ppg-pool-mode-orbit {
+  0% { transform: translateX(-48px); }
+  50% { transform: translateX(48px); }
+  100% { transform: translateX(-48px); }
+}
+
 .ppg-vale-pool-setup-actions button {
   min-height: 34px;
   padding: 4px 6px;

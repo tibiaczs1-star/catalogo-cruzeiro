@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260520-poolrules1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260520-poolturn1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16754,10 +16754,39 @@ async function handleApi(req, res, pathname, searchParams) {
     const chooseMode = action === "mode";
     const chooseStart = action === "start" || action === "starter";
     const confirmTutorial = action === "tutorial";
+    const revealMode = action === "reveal" || action === "continue";
     const rivalSeat = getPoolPvPRivalSeat(seat);
     const nowIso = new Date().toISOString();
 
+    if (currentSetup.phase === "mode-reveal") {
+      if (!revealMode) {
+        return sendJson(res, 400, { ok: false, error: "Aguarde a animacao do modo escolhido." });
+      }
+      const nextSetup = createPoolPvPSetup({
+        ...currentSetup,
+        complete: false,
+        phase: "tutorial",
+        chooserSeat: "",
+        tutorialReady: currentSetup.tutorialReady || { playerOne: false, playerTwo: false },
+      });
+      const poolState = {
+        ...(match.poolState || createPoolPvPState(currentSetup.ruleMode || "livre", nextSetup)),
+        setup: nextSetup,
+      };
+      store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
+        ...match,
+        poolState,
+        turn: nextSetup.starterSeat || match.turn,
+        resultSummary: `Modo ${getPoolRuleMode(poolState.ruleMode).label} revelado. Leia o tutorial antes da primeira tacada.`,
+      }, seat, nowIso);
+      store = writePubpaidPvpStore(store);
+      return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "pool"));
+    }
+
     if (currentSetup.phase === "tutorial") {
+      if (revealMode) {
+        return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "pool"));
+      }
       if (!confirmTutorial) {
         return sendJson(res, 400, { ok: false, error: "Leia o tutorial e confirme para comecar." });
       }
@@ -16841,14 +16870,14 @@ async function handleApi(req, res, pathname, searchParams) {
       poolState = createPoolPvPState(rule.id, {
         ...currentSetup,
         complete: false,
-        phase: "tutorial",
+        phase: "mode-reveal",
         chooserSeat: "",
         starterSeat: currentSetup.starterSeat || rivalSeat,
         ruleMode: rule.id,
         tutorialReady: { playerOne: false, playerTwo: false },
       });
       nextTurn = poolState.setup.starterSeat;
-      resultSummary = `${chooserName} escolheu ${rule.label}. Tutorial aberto antes da mesa.`;
+      resultSummary = `${chooserName} escolheu ${rule.label}. Animacao do modo antes do tutorial.`;
     } else if (currentSetup.phase === "loser-start") {
       if (!chooseStart) {
         return sendJson(res, 400, { ok: false, error: "Agora escolha quem começa a partida." });
@@ -16863,14 +16892,14 @@ async function handleApi(req, res, pathname, searchParams) {
       poolState = createPoolPvPState(rule.id, {
         ...currentSetup,
         complete: false,
-        phase: "tutorial",
+        phase: "mode-reveal",
         chooserSeat: "",
         starterSeat,
         ruleMode: rule.id,
         tutorialReady: { playerOne: false, playerTwo: false },
       });
       nextTurn = starterSeat;
-      resultSummary = `${chooserName} escolheu quem comeca. Tutorial de ${rule.label} aberto antes da mesa.`;
+      resultSummary = `${chooserName} escolheu quem comeca. Animacao de ${rule.label} antes do tutorial.`;
     } else {
       return sendJson(res, 409, { ok: false, error: "Estado da moeda invalido. Reabra a mesa." });
     }
@@ -16925,14 +16954,19 @@ async function handleApi(req, res, pathname, searchParams) {
     const simulation = simulatePoolPvPShot(currentPoolState, seat, angle, power, spin);
     const poolState = simulation.poolState;
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const nextTurn = rivalSeat;
     let winner = "";
     let finished = Boolean(simulation.finished);
     let resultSummary =
       simulation.pocketedCount > 0
         ? `${match?.[seat]?.name || "Jogador"} encaçapou ${simulation.pocketedCount} bola${simulation.pocketedCount > 1 ? "s" : ""}. ${simulation.message || ""}`.trim()
         : `${match?.[seat]?.name || "Jogador"} tacou sem encaçapar.`;
+    const groupSummary = describePoolGroupOwners(match, poolState);
+    if (groupSummary) {
+      resultSummary = `${resultSummary} ${groupSummary}`;
+    }
     if (simulation.cuePocketed) {
-      resultSummary = `${resultSummary} A branca caiu e voltou para a marca.`;
+      resultSummary = `${resultSummary} A branca caiu e voltou para a marca; falta, ${match?.[nextTurn]?.name || "rival"} joga agora.`;
     }
     if (finished) {
       winner = simulation.winner || resolvePoolPvPWinner(poolState);
@@ -16941,15 +16975,15 @@ async function handleApi(req, res, pathname, searchParams) {
       } else {
         resultSummary = `A sinuca empatou em ${poolState.playerOneScore || 0} a ${poolState.playerTwoScore || 0}. Entrada devolvida.`;
       }
-    } else {
-      resultSummary = `${resultSummary} ${match?.[rivalSeat]?.name || "Rival"} joga agora.`;
+    } else if (!simulation.cuePocketed) {
+      resultSummary = `${resultSummary} ${match?.[nextTurn]?.name || "Rival"} joga agora.`;
     }
 
     const nowIso = new Date().toISOString();
     store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
       ...match,
       poolState,
-      turn: finished ? match.turn : rivalSeat,
+      turn: finished ? match.turn : nextTurn,
       winner,
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
@@ -19514,6 +19548,16 @@ function scorePoolPvPShot(state = createPoolPvPState(), seat = "playerOne", pock
     ? `${pocketedNow.length} bola${pocketedNow.length === 1 ? "" : "s"} no modo Livre.`
     : "Sem encaçapar no modo Livre.";
   return { message, winner, finished };
+}
+
+function describePoolGroupOwners(match = {}, poolState = {}) {
+  if (normalizePoolRuleMode(poolState.ruleMode || "") !== "parimpar") return "";
+  const playerOneGroup = safeString(poolState.playerOneGroup || "", 20).toUpperCase();
+  const playerTwoGroup = safeString(poolState.playerTwoGroup || "", 20).toUpperCase();
+  if (!playerOneGroup && !playerTwoGroup) return "Par/Impar: a primeira bola valida ainda vai definir os grupos.";
+  const oneName = match?.playerOne?.name || "Jogador 1";
+  const twoName = match?.playerTwo?.name || "Jogador 2";
+  return `Grupos: ${oneName} joga ${playerOneGroup || "a definir"}; ${twoName} joga ${playerTwoGroup || "a definir"}.`;
 }
 
 function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne", angle = 0, power = 0.5, spinValue = "centro") {

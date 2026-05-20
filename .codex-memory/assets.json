@@ -1,7 +1,29 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-19T22:05:00-05:00",
+  "lastUpdatedAt": "2026-05-20T08:39:00-05:00",
   "assets": [
+    {
+      "id": "vale-pool-poolturn1-mode-reveal",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-poolturn1/mode-reveal.png",
+      "note": "Demo Vale Pool poolturn1: animacao MODO ESCOLHIDO antes do tutorial Par/Impar.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-20-corrigir-turno-parimpar-e-animacao-modo-sinuca"
+      ],
+      "createdAt": "2026-05-20T08:39:00-05:00"
+    },
+    {
+      "id": "vale-pool-poolturn1-tutorial",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-poolturn1/tutorial.png",
+      "note": "Demo Vale Pool poolturn1: tutorial Par/Impar apos animacao do modo escolhido.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-20-corrigir-turno-parimpar-e-animacao-modo-sinuca"
+      ],
+      "createdAt": "2026-05-20T08:39:00-05:00"
+    },
     {
       "id": "vale-pool-pool10-mesa-liberada",
       "kind": "image",

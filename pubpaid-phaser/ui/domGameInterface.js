@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-poolrules1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-poolturn1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-poolrules1";
+} from "../services/pvpService.js?v=20260520-poolturn1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-poolrules1";
-import { Chess } from "../vendor/chess.js?v=20260520-poolrules1";
+} from "../core/checkersRules.js?v=20260520-poolturn1";
+import { Chess } from "../vendor/chess.js?v=20260520-poolturn1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -306,6 +306,8 @@ export function bindDomGameInterface(game) {
     pvpIntroTimer: null,
     pvpIntroMatchKey: "",
     pvpIntroPendingKey: "",
+    poolRevealKey: "",
+    poolRevealTimer: null,
     pvpRenderBusy: false,
     pvpTableRenderBusy: false,
     tableRenderKey: "",
@@ -1792,9 +1794,10 @@ export function bindDomGameInterface(game) {
     return poolRuleFormula({ demo: local.poolDemoState || { ruleModeId: "livre", scoreLabel: "BOLAS" } });
   };
 
-  const poolPlayerRuleLabel = (formula = poolRuleFormula(), group = "") => {
+  const poolPlayerRuleLabel = (formula = poolRuleFormula(), group = "", owner = "") => {
     const currentGroup = String(group || "").toUpperCase();
-    if (formula.mode === "parimpar") return currentGroup || "DEFINE GRUPO";
+    const prefix = owner ? `${owner}: ` : "";
+    if (formula.mode === "parimpar") return currentGroup ? `${prefix}${currentGroup}` : `${prefix}DEFINE GRUPO`;
     if (formula.mode === "brasileira") return formula.badge;
     return "QUALQUER BOLA";
   };
@@ -1858,7 +1861,7 @@ export function bindDomGameInterface(game) {
       const rule = playerCard.querySelector("[data-vale-pool-rule]");
       if (score) score.textContent = String(playerScore);
       if (scoreLabelNode) scoreLabelNode.textContent = scoreLabel;
-      if (rule) rule.textContent = formula.badge;
+      if (rule) rule.textContent = poolPlayerRuleLabel(formula, payload.playerGroup, "VOCE");
       if (status) status.textContent = payload.winner
         ? (payload.winner === "player" ? "venceu" : "fim")
         : payload.setupPhase && payload.setupPhase !== "done" ? "moeda"
@@ -1872,7 +1875,7 @@ export function bindDomGameInterface(game) {
       const rule = iaCard.querySelector("[data-vale-pool-rule]");
       if (score) score.textContent = String(aiScore);
       if (scoreLabelNode) scoreLabelNode.textContent = scoreLabel;
-      if (rule) rule.textContent = payload.aiGroup || (formula.mode === "parimpar" && payload.playerGroup ? (payload.playerGroup === "PAR" ? "IMPAR" : "PAR") : formula.title);
+      if (rule) rule.textContent = poolPlayerRuleLabel(formula, payload.aiGroup, "IA");
       if (status) status.textContent = payload.winner
         ? (payload.winner === "ia" ? "venceu" : "fim")
         : payload.setupPhase && payload.setupPhase !== "done" ? "moeda"
@@ -1911,6 +1914,19 @@ export function bindDomGameInterface(game) {
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
     const rivalName = displayNameFor(match[rivalSeat] || {}) || "Rival";
     const tutorial = poolRuleTutorial(setup.ruleMode || match?.poolState?.ruleMode || "livre");
+    if (setup.phase === "mode-reveal") {
+      return `
+        <div class="ppg-vale-pool-setup is-mode-reveal" data-pool-setup>
+          <strong>MODO ESCOLHIDO</strong>
+          <span>${escapeHtml(tutorial.title)}</span>
+          <small>Animacao antes do tutorial. A mesa ainda esta travada.</small>
+          <div class="ppg-vale-pool-mode-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="ppg-vale-pool-setup-actions is-compact">
+            <button type="button" class="primary" data-dom-pool-setup-action="reveal">Ver tutorial</button>
+          </div>
+        </div>
+      `;
+    }
     if (setup.phase === "tutorial") {
       const ready = Boolean(setup.tutorialReady?.[seat]);
       return `
@@ -1970,6 +1986,9 @@ export function bindDomGameInterface(game) {
   };
 
   const poolSetupStatusText = (setup = {}, seat = "", match = {}) => {
+    if (setup.phase === "mode-reveal") {
+      return "Modo escolhido. Animação rápida antes de abrir o tutorial.";
+    }
     if (setup.phase === "tutorial") {
       const ready = Boolean(setup.tutorialReady?.[seat]);
       return ready
@@ -1983,6 +2002,21 @@ export function bindDomGameInterface(game) {
     }
     const chooserName = displayNameFor(match[setup.chooserSeat] || {}) || "Rival";
     return `${chooserName} esta decidindo a parte que falta.`;
+  };
+
+  const maybeAdvancePoolModeReveal = (match = {}, setup = {}) => {
+    if (setup.phase !== "mode-reveal" || setup.complete || !match?.id) {
+      return;
+    }
+    const key = `${match.id}:${setup.ruleMode}:${setup.starterSeat || ""}`;
+    if (local.poolRevealKey === key) return;
+    window.clearTimeout(local.poolRevealTimer);
+    local.poolRevealKey = key;
+    local.poolRevealTimer = window.setTimeout(() => {
+      choosePoolSetup(match.id, "reveal").then((payload) => {
+        if (payload?.ok) routePvpState(payload);
+      }).catch(() => {});
+    }, 1500);
   };
 
   const renderValePoolPrototypeMarkup = ({ mode = "demo", match = null, seat = "" } = {}) => {
@@ -1999,11 +2033,11 @@ export function bindDomGameInterface(game) {
       ? poolRuleFormula({ state, seat, rivalSeat })
       : poolRuleFormula({ demo: local.poolDemoState || { ruleModeId: "livre", scoreLabel: "BOLAS" } });
     const ownRuleLabel = pvp
-      ? poolPlayerRuleLabel(formula, state[`${seat}Group`])
-      : poolPlayerRuleLabel(formula, local.poolDemoState?.playerGroup);
+      ? poolPlayerRuleLabel(formula, state[`${seat}Group`], "VOCE")
+      : poolPlayerRuleLabel(formula, local.poolDemoState?.playerGroup, "VOCE");
     const rivalRuleLabel = pvp
-      ? poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`])
-      : poolPlayerRuleLabel(formula, local.poolDemoState?.aiGroup);
+      ? poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`], "RIVAL")
+      : poolPlayerRuleLabel(formula, local.poolDemoState?.aiGroup, "IA");
     const shotLabel =
       local.poolControlStage === "power"
         ? "Tacar"
@@ -2067,7 +2101,9 @@ export function bindDomGameInterface(game) {
       scoreLabel: state.scoreLabel || "BOLAS",
       setupPhase: setup.complete ? "done" : setup.phase || "choice",
       message: !setup.complete
-        ? setup.phase === "tutorial" ? "TUTORIAL: APERTE COMEÇAR" : setup.chooserSeat === seat ? "MOEDA: SUA ESCOLHA" : "MOEDA: AGUARDANDO RIVAL"
+        ? setup.phase === "mode-reveal"
+          ? "MODO ESCOLHIDO"
+          : setup.phase === "tutorial" ? "TUTORIAL: APERTE COMEÇAR" : setup.chooserSeat === seat ? "MOEDA: SUA ESCOLHA" : "MOEDA: AGUARDANDO RIVAL"
         : match.status === "active" && match.turn === seat ? "SUA VEZ" : "VEZ DO RIVAL"
     };
     const deliver = () => frame.contentWindow?.postMessage(payload, window.location.origin);
@@ -2211,6 +2247,7 @@ export function bindDomGameInterface(game) {
     const state = match.poolState || {};
     const setup = poolSetupInfo(match);
     const setupPending = !setup.complete;
+    maybeAdvancePoolModeReveal(match, setup);
     if (match.status !== "active" || match.turn !== seat || setupPending) {
       if (local.poolControlStage !== "aim" || local.poolPowerTimer) resetPvpPoolControls();
     }
@@ -2220,8 +2257,8 @@ export function bindDomGameInterface(game) {
     const ownScore = Number(state[`${seat}Score`] || 0);
     const rivalScore = Number(state[`${rivalSeat}Score`] || 0);
     const formula = poolRuleFormula({ state, seat, rivalSeat });
-    const ownRuleLabel = poolPlayerRuleLabel(formula, state[`${seat}Group`]);
-    const rivalRuleLabel = poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`]);
+    const ownRuleLabel = poolPlayerRuleLabel(formula, state[`${seat}Group`], "VOCE");
+    const rivalRuleLabel = poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`], "RIVAL");
     refs.pool.dataset.mode = "pvp";
     refs.pool.dataset.render = "prototype";
     if (refs.poolKicker) refs.poolKicker.textContent = "ranked pvp";

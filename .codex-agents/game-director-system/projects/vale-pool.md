@@ -25,3 +25,6 @@
 - Caçapa boa precisa parecer aberta para o lado do pano e ser generosa na física: detectar a bola pelo trajeto entre frames antes do repique no trilho, não só pela posição final.
 - Cada modalidade precisa de regra viva durante a partida, nao só tutorial antes da mesa: informar alvo permitido, formula de pontuação, falta/vitória e grupo do jogador quando existir.
 - Em Par/Impar, o cartao do jogador deve dizer PAR ou IMPAR assim que a primeira bola valida cair; antes disso, a leitura correta é `1a bola define PAR/IMPAR`.
+- Em Par/Impar, a UI deve nomear os donos dos grupos (`VOCE`, `RIVAL` ou `IA`) e nao apenas mostrar PAR/IMPAR solto.
+- Falta de bola branca precisa trocar a vez para o rival/IA explicitamente; nunca pode ficar presa no jogador 1.
+- Depois das escolhas da moeda, mostrar uma animacao curta de `MODO ESCOLHIDO` antes do tutorial, mantendo a mesa travada ate o tutorial começar.
