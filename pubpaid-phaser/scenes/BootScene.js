@@ -10,6 +10,10 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.on("progress", (progress = 0) => {
+      window.pubpaidAssetProgress = Math.max(0, Math.min(1, progress));
+      this.game.events.emit("pubpaid:assets-progress", { progress: window.pubpaidAssetProgress });
+    });
     for (let index = 1; index <= 16; index += 1) {
       const padded = String(index).padStart(2, "0");
       this.load.image(`intro-frame-${padded}`, versionedAsset(`./assets/pubpaid/intro/pubpaid-intro-seq-${padded}.jpeg`));
@@ -48,6 +52,7 @@ export class BootScene extends Phaser.Scene {
   create() {
     applyPixelTextureFilters(this);
     window.pubpaidAssetsReady = true;
+    window.pubpaidAssetProgress = 1;
     updateGameState({
       currentScene: "intro",
       focus: "placa PUB PAID",

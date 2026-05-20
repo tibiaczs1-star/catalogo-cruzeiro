@@ -2,6 +2,14 @@
 
 Atualizado: 2026-05-20
 
+## Rodada Atual - 20260520-checkersai1
+
+- Damas Demo ficou mais legivel na vez da IA: a maquina entra em estado `Máquina pensando...`, segura a jogada por 3 segundos, destaca a peça de origem e a casa alvo, e só depois executa o movimento.
+- Entrada PubPaid recebeu loader antes da intro: ao tocar para entrar, a tela mostra carregamento de 0 a 100% e só então abre a intro, reduzindo risco de tela preta entre splash e Phaser.
+- Build local: `20260520-checkersai1`.
+- Validação: `node --check` em `pubpaid-phaser/app.js`, `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/scenes/BootScene.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; Playwright mobile landscape confirmou loader `100%`, IA com status de 3 segundos, preview visual e `moveCount` parado no meio/avançando após a pausa.
+- Evidência: `.codex-temp/checkersai-mobile.png`.
+
 ## Rodada Atual - 20260520-poolhand1
 
 - Sinuca/Vale Pool recebeu correção de fim de mesa no modo Livre: quando acabam as bolas de ataque e fica só a branca, o jogo entra em `FIM` e mostra vencedor/empate.

@@ -1,17 +1,17 @@
 # Current State
 
-Updated: 2026-05-20T10:24:00-05:00
+Updated: 2026-05-20T10:58:00-05:00
 
 ## Active Goal
 
-- Damas PubPaid com abertura cinematica e mobile validado
+- Damas PubPaid com IA mais legivel e loader antes da intro
 
 ## Summary
 
-Build local 20260520-checkerscam1: Damas PubPaid recebeu intro cinematica, moeda de abertura, camera/zoom, virada para o adversario, arena com luzes e textos centralizados. A moeda bloqueia apenas a abertura; apos 5.2s ela some, re-renderiza o tabuleiro e libera a partida normal. O fluxo padrao foi preservado: Demo segue treino local sem ficha/carteira e PvP continua no matchmaking/ready real.
+Build local 20260520-checkersai1: Damas PubPaid preserva a abertura cinematica e agora deixa a IA da Demo pensar por 3 segundos, com origem/alvo destacados antes do movimento. A entrada do PubPaid ganhou loader antes da intro, indo ate 100% antes de liberar a cena, para evitar tela preta entre splash e Phaser.
 
 ## Next
 
-- Usuario revisar Damas em http://127.0.0.1:3002/pubpaid.html?v=20260520-checkerscam1&review=damas.
-- Validado em Playwright desktop 1280x720 e mobile landscape 844x390: build correto, 64 casas, moeda escondida apos abertura, 64 casas liberadas e sem overflow do painel.
+- Usuario revisar Damas em http://127.0.0.1:3002/pubpaid.html?v=20260520-checkersai1&review=damas.
+- Validado em Playwright mobile landscape: loader chegou a 100%, IA ficou pensando com destaque visual, `moveCount` nao mudou no meio da pausa e avancou depois dos 3 segundos.
 - Ainda falta validar PvP real em duas sessoes autenticadas antes de fechar fluxo financeiro.

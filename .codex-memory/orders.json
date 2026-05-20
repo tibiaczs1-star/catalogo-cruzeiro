@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T09:58:00-05:00",
+  "lastUpdatedAt": "2026-05-20T15:56:14.384Z",
   "orders": [
     {
       "id": "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca",
@@ -1598,6 +1598,36 @@
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-melhorar-damas-demo-com-ia-pensando-3-segundos-e-adicionar-carregamento-0-100-an",
+      "createdAt": "2026-05-20T15:56:14.384Z",
+      "updatedAt": "2026-05-20T15:56:14.384Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ta otimo damas, mais na ves do adversario n ta ficando claro o movimento dele porque ta muito rapido faça uma animação tipo no demo, vez da i,a ela pensa por 3 segundos... e depois de entra no jogo pub paid, antes da intro coloque uma tela de carregamento pra ter certesza que nao vai ficar uma tela preta, ponha ate 100 por cento e carregue tudo",
+      "summary": "Melhorar Damas Demo com IA pensando 3 segundos e adicionar carregamento 0-100 antes da intro PubPaid.",
+      "normalizedTasks": [
+        "pausar IA da Damas por 3 segundos com destaque visual",
+        "mostrar tela de carregamento 0-100 antes da intro",
+        "validar mobile"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid.html",
+        "pubpaid-phaser.css"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "PubPaid",
+        "Damas",
+        "mobile",
+        "loading"
+      ],
       "nextSteps": [],
       "notes": ""
     }

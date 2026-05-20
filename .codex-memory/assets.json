@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T09:58:00-05:00",
+  "lastUpdatedAt": "2026-05-20T15:59:59.490Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -743,6 +743,17 @@
       "note": "Referencia enviada para transformar Damas PubPaid: intro cinematica, coin flip, camera livre, transicao de turno, iluminacao/arena e SFX.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-20T14:54:06.038Z"
+    },
+    {
+      "id": "pubpaid-checkersai-mobile-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/checkersai-mobile.png",
+      "source": "workspace",
+      "note": "Damas PubPaid checkersai1 em mobile landscape: IA pensando 3 segundos com destaque visual e loader pre-intro validado no smoke.",
+      "linkedOrderIds": [
+        "2026-05-20-melhorar-damas-demo-com-ia-pensando-3-segundos-e-adicionar-carregamento-0-100-an"
+      ],
+      "createdAt": "2026-05-20T15:59:59.490Z"
     }
   ]
 }

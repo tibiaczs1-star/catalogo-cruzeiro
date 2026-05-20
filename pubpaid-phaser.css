@@ -2931,6 +2931,77 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   color: rgba(213, 223, 242, 0.82);
 }
 
+.ppg-preintro-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 33;
+  display: grid;
+  place-items: center;
+  padding: calc(18px + var(--ppg-safe-top)) calc(18px + var(--ppg-safe-right)) calc(18px + var(--ppg-safe-bottom)) calc(18px + var(--ppg-safe-left));
+  color: #fff6dc;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(80, 239, 255, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(4, 8, 18, 0.96), rgba(2, 5, 13, 0.98));
+}
+
+.ppg-preintro-loader[hidden] {
+  display: none;
+}
+
+.ppg-preintro-card {
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  width: min(420px, calc(100vw - 34px));
+  padding: clamp(22px, 5vw, 34px);
+  border: 2px solid rgba(255, 208, 109, 0.44);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    rgba(6, 10, 20, 0.93);
+  background-size: 10px 10px, 10px 10px, auto;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(80, 239, 255, 0.18), 0 24px 68px rgba(0, 0, 0, 0.5);
+}
+
+.ppg-preintro-card h2,
+.ppg-preintro-card p,
+.ppg-preintro-card strong {
+  margin: 0;
+}
+
+.ppg-preintro-card h2 {
+  font-size: clamp(1.45rem, 5vw, 2rem);
+}
+
+.ppg-preintro-card p {
+  max-width: 28ch;
+  color: rgba(213, 223, 242, 0.86);
+  font-size: 0.92rem;
+}
+
+.ppg-preintro-meter {
+  width: min(280px, 100%);
+  height: 12px;
+  padding: 2px;
+  border: 1px solid rgba(255, 208, 109, 0.42);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.ppg-preintro-meter span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #52e2cc, #ffd06d);
+  box-shadow: 0 0 18px rgba(82, 226, 204, 0.34);
+  transition: width 180ms ease;
+}
+
+.ppg-preintro-card strong {
+  font-size: 1.4rem;
+  letter-spacing: 0;
+}
+
 .ppg-orientation-gate {
   position: absolute;
   inset: 0;
@@ -5008,6 +5079,7 @@ body.pubpaid-phaser-page--official .ppg-game canvas {
 
 body.pubpaid-phaser-page .ppg-splash,
 body.pubpaid-phaser-page .ppg-update-gate,
+body.pubpaid-phaser-page .ppg-preintro-loader,
 body.pubpaid-phaser-page .ppg-permission-gate,
 body.pubpaid-phaser-page .ppg-fullscreen-warning,
 body.pubpaid-phaser-page .ppg-orientation-gate {
@@ -6353,6 +6425,34 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   animation: ppgCheckersPulse 920ms ease-in-out infinite alternate;
 }
 
+.ppg-dom-checkers-board[data-ai-thinking="true"] .ppg-dom-cell.is-ai-preview-from {
+  box-shadow: inset 0 0 0 3px rgba(92, 230, 222, 0.72), 0 0 24px rgba(92, 230, 222, 0.24);
+}
+
+.ppg-dom-checkers-board[data-ai-thinking="true"] .ppg-dom-cell.is-ai-preview-from .ppg-dom-piece {
+  animation: ppgCheckersAiThink 820ms ease-in-out infinite alternate;
+}
+
+.ppg-dom-checkers-board[data-ai-thinking="true"] .ppg-dom-cell.is-ai-preview-to::before {
+  content: "";
+  position: absolute;
+  inset: 27%;
+  border: 2px solid rgba(255, 208, 109, 0.74);
+  background: rgba(255, 208, 109, 0.14);
+  box-shadow: 0 0 20px rgba(255, 208, 109, 0.26);
+  pointer-events: none;
+  animation: ppgCheckersTargetPing 860ms ease-in-out infinite alternate;
+}
+
+.ppg-dom-checkers-board[data-ai-thinking="true"] .ppg-dom-cell.is-ai-preview-capture::after {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border: 2px solid rgba(255, 109, 136, 0.72);
+  pointer-events: none;
+  animation: ppgCheckersCaptureFlash 860ms ease-in-out infinite alternate;
+}
+
 .ppg-dom-piece {
   position: relative;
   display: grid;
@@ -6573,6 +6673,16 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active #pubpaid-phaser-root canvas {
 @keyframes ppgCheckersPulse {
   from { filter: brightness(1); }
   to { filter: brightness(1.32); }
+}
+
+@keyframes ppgCheckersAiThink {
+  from { transform: translateY(-5%) scale(1); filter: brightness(1); }
+  to { transform: translateY(-12%) scale(1.08); filter: brightness(1.22); }
+}
+
+@keyframes ppgCheckersTargetPing {
+  from { opacity: 0.5; transform: scale(0.88); }
+  to { opacity: 1; transform: scale(1.08); }
 }
 
 @keyframes ppgCheckersPieceLand {

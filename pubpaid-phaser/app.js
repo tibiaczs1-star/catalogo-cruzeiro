@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260520-checkerscam1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260520-checkerscam1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260520-checkersai1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260520-checkersai1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260520-checkerscam1";
-import { BootScene } from "./scenes/BootScene.js?v=20260520-checkerscam1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260520-checkerscam1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260520-checkerscam1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260520-checkerscam1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260520-checkerscam1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260520-checkerscam1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260520-checkerscam1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260520-checkerscam1";
-import { UIScene } from "./scenes/UIScene.js?v=20260520-checkerscam1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260520-checkersai1";
+import { BootScene } from "./scenes/BootScene.js?v=20260520-checkersai1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260520-checkersai1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260520-checkersai1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260520-checkersai1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260520-checkersai1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260520-checkersai1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260520-checkersai1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260520-checkersai1";
+import { UIScene } from "./scenes/UIScene.js?v=20260520-checkersai1";
 
-const PUBPAID_BUILD_VERSION = "20260520-checkerscam1";
+const PUBPAID_BUILD_VERSION = "20260520-checkersai1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -56,6 +56,10 @@ const refs = {
   updateGate: document.querySelector("[data-update-gate]"),
   updateStatus: document.querySelector("[data-update-status]"),
   updateReload: document.querySelector("[data-update-reload]"),
+  preintroLoader: document.querySelector("[data-preintro-loader]"),
+  preintroStatus: document.querySelector("[data-preintro-status]"),
+  preintroFill: document.querySelector("[data-preintro-fill]"),
+  preintroPercent: document.querySelector("[data-preintro-percent]"),
   splash: document.querySelector("[data-splash-screen]"),
   enterButtons: Array.from(document.querySelectorAll("[data-enter-game]")),
   exitButtons: Array.from(document.querySelectorAll("[data-exit-game]")),
@@ -97,6 +101,7 @@ let pendingIntroStart = false;
 let pendingStartGameOptions = null;
 let fullscreenWasActive = false;
 let userAudioMuted = true;
+let preintroLoadingBusy = false;
 
 function setUpdateStatus(message) {
   if (refs.updateStatus) refs.updateStatus.textContent = message;
@@ -105,6 +110,62 @@ function setUpdateStatus(message) {
 function areAssetsReady() {
   if (window.pubpaidAssetsReady) assetsReady = true;
   return assetsReady;
+}
+
+function setPreintroProgress(value = 0, message = "") {
+  const progress = Math.max(0, Math.min(100, Math.round(value)));
+  if (refs.preintroLoader) refs.preintroLoader.hidden = false;
+  if (refs.preintroFill) refs.preintroFill.style.width = `${progress}%`;
+  if (refs.preintroPercent) refs.preintroPercent.textContent = `${progress}%`;
+  const meter = refs.preintroLoader?.querySelector?.("[role='progressbar']");
+  meter?.setAttribute("aria-valuenow", String(progress));
+  if (message && refs.preintroStatus) refs.preintroStatus.textContent = message;
+}
+
+function waitForAssetsReady(timeoutMs = 3600) {
+  if (areAssetsReady()) return Promise.resolve(true);
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = (ready) => {
+      if (settled) return;
+      settled = true;
+      game.events.off("pubpaid:assets-ready", onReady);
+      window.clearTimeout(timer);
+      resolve(ready);
+    };
+    const onReady = () => finish(true);
+    const timer = window.setTimeout(() => finish(areAssetsReady()), timeoutMs);
+    game.events.once("pubpaid:assets-ready", onReady);
+  });
+}
+
+async function runPreintroLoader() {
+  if (preintroLoadingBusy) return;
+  preintroLoadingBusy = true;
+  const startedAt = performance.now();
+  setPreintroProgress(0, "Conferindo imagens, som e entrada da intro.");
+  const assetPromise = waitForAssetsReady();
+  const steps = [
+    [18, "Separando imagens da entrada."],
+    [36, "Carregando cenário e personagens."],
+    [58, "Preparando controles e tela cheia."],
+    [78, "Sincronizando som e efeitos."],
+    [92, "Finalizando abertura."]
+  ];
+  for (const [progress, message] of steps) {
+    await new Promise((resolve) => window.setTimeout(resolve, 190));
+    const assetProgress = Math.floor(Number(window.pubpaidAssetProgress || 0) * 100);
+    setPreintroProgress(Math.max(progress, assetProgress), message);
+  }
+  await assetPromise;
+  const elapsed = performance.now() - startedAt;
+  if (elapsed < 1050) {
+    await new Promise((resolve) => window.setTimeout(resolve, 1050 - elapsed));
+  }
+  setPreintroProgress(100, "Tudo pronto. Abrindo intro.");
+  await new Promise((resolve) => window.setTimeout(resolve, 230));
+  refs.preintroLoader?.setAttribute("hidden", "");
+  preintroLoadingBusy = false;
 }
 
 function pubpaidVersionedUrl(version = PUBPAID_BUILD_VERSION) {
@@ -578,7 +639,6 @@ async function activateExperience() {
   refs.splash?.setAttribute("hidden", "");
   refs.permissionGate?.setAttribute("hidden", "");
   setPermissionStatus("Abrindo o PubPaid...");
-  startIntroScene({ restart: true });
   let audioStarted = false;
   try {
     audioStarted = userAudioMuted ? false : Boolean(soundtrack.startIntro());
@@ -586,8 +646,12 @@ async function activateExperience() {
     setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
   syncAudioButton();
-  const fullscreenOk = await withTimeout(requestFullscreen(), false, 900);
-  const orientationOk = await withTimeout(requestLandscapeLock(), false, 900);
+  const fullscreenPromise = withTimeout(requestFullscreen(), false, 900);
+  const orientationPromise = withTimeout(requestLandscapeLock(), false, 900);
+  await runPreintroLoader();
+  startIntroScene({ restart: true });
+  const fullscreenOk = await fullscreenPromise;
+  const orientationOk = await orientationPromise;
   setPermissionStatus(
     !audioStarted
       ? "Jogo liberado. O som pode ser ligado depois."

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-checkerscam1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-checkersai1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-checkerscam1";
+} from "../services/pvpService.js?v=20260520-checkersai1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-checkerscam1";
-import { Chess } from "../vendor/chess.js?v=20260520-checkerscam1";
+} from "../core/checkersRules.js?v=20260520-checkersai1";
+import { Chess } from "../vendor/chess.js?v=20260520-checkersai1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -325,6 +325,8 @@ export function bindDomGameInterface(game) {
     checkersIntroMatchKey: "",
     checkersIntroTimer: null,
     checkersIntroLocked: false,
+    demoAiThinking: false,
+    demoAiPreviewMove: null,
     checkersCamera: {
       yaw: 0,
       zoom: 1,
@@ -883,10 +885,24 @@ export function bindDomGameInterface(game) {
   const scheduleDemoAiMove = () => {
     window.clearTimeout(local.demoAiTimer);
     if (!isCheckersDemoActive() || local.demoCheckers.status !== "active" || local.demoCheckers.turn !== "playerTwo") return;
+    const moves = getCheckersLegalMoves(local.demoCheckers.board, "playerTwo", local.demoCheckers.forcedPiece || null);
+    const previewMove = pickDemoAiMove(moves, local.demoCheckers.board);
+    local.demoAiThinking = true;
+    local.demoAiPreviewMove = previewMove || null;
+    renderPvpCheckers();
     local.demoAiTimer = window.setTimeout(() => {
-      if (!isCheckersDemoActive() || local.demoCheckers.status !== "active") return;
-      const moves = getCheckersLegalMoves(local.demoCheckers.board, "playerTwo", local.demoCheckers.forcedPiece || null);
-      const move = pickDemoAiMove(moves, local.demoCheckers.board);
+      if (!isCheckersDemoActive() || local.demoCheckers.status !== "active") {
+        local.demoAiThinking = false;
+        local.demoAiPreviewMove = null;
+        renderPvpCheckers();
+        return;
+      }
+      const move = local.demoAiPreviewMove || pickDemoAiMove(
+        getCheckersLegalMoves(local.demoCheckers.board, "playerTwo", local.demoCheckers.forcedPiece || null),
+        local.demoCheckers.board
+      );
+      local.demoAiThinking = false;
+      local.demoAiPreviewMove = null;
       if (!move) {
         local.demoCheckers.status = "finished";
         local.demoCheckers.winner = "playerOne";
@@ -898,13 +914,15 @@ export function bindDomGameInterface(game) {
       local.demoLegalMoves = [];
       renderPvpCheckers();
       if (local.demoCheckers?.turn === "playerTwo") scheduleDemoAiMove();
-    }, 650);
+    }, 3000);
   };
 
   const resetDemoCheckersState = () => {
     window.clearTimeout(local.demoAiTimer);
     window.clearTimeout(local.checkersIntroTimer);
     local.demoAiTimer = null;
+    local.demoAiThinking = false;
+    local.demoAiPreviewMove = null;
     local.checkersIntroTimer = null;
     local.checkersIntroLocked = false;
     local.checkersIntroMatchKey = "";
@@ -1251,6 +1269,7 @@ export function bindDomGameInterface(game) {
     refs.checkersBoard.dataset.orientation = seat === "playerTwo" ? "flipped" : "normal";
     refs.checkersBoard.dataset.seat = seat;
     refs.checkersBoard.dataset.mode = demoMode ? "demo" : "pvp";
+    refs.checkersBoard.dataset.aiThinking = demoMode && local.demoAiThinking ? "true" : "false";
     refs.checkersArena?.setAttribute("data-turn-seat", match.turn || "idle");
     refs.checkersArena?.setAttribute("data-checkers-mode", demoMode ? "demo" : "pvp");
     startCheckersCinematic(match);
@@ -1267,6 +1286,7 @@ export function bindDomGameInterface(game) {
           const own = owner && owner === seat;
           const lastMove = match.lastMove || {};
           const forcedPiece = match.forcedPiece || null;
+          const aiPreview = demoMode && local.demoAiThinking ? local.demoAiPreviewMove : null;
           const className = [
             "ppg-dom-cell",
             dark ? "is-dark" : "is-light",
@@ -1275,6 +1295,9 @@ export function bindDomGameInterface(game) {
             selected?.row === rowIndex && selected?.col === colIndex ? "is-selected" : "",
             targetKeys.has(`${displayRow}-${displayCol}`) ? "is-target" : "",
             forcedPiece?.row === rowIndex && forcedPiece?.col === colIndex ? "is-forced" : "",
+            aiPreview?.from?.row === rowIndex && aiPreview?.from?.col === colIndex ? "is-ai-preview-from" : "",
+            aiPreview?.to?.row === rowIndex && aiPreview?.to?.col === colIndex ? "is-ai-preview-to" : "",
+            aiPreview?.capture?.row === rowIndex && aiPreview?.capture?.col === colIndex ? "is-ai-preview-capture" : "",
             lastMove?.from?.row === rowIndex && lastMove?.from?.col === colIndex ? "is-last-from" : "",
             lastMove?.to?.row === rowIndex && lastMove?.to?.col === colIndex ? "is-last-to" : "",
             lastMove?.capture?.row === rowIndex && lastMove?.capture?.col === colIndex ? "is-last-capture" : ""
@@ -1313,7 +1336,7 @@ export function bindDomGameInterface(game) {
         : match.status === "finished"
           ? "Mesa encerrada"
           : demoMode && match.turn === "playerTwo"
-            ? "Máquina pensando"
+            ? "Máquina pensando..."
             : demoMode
               ? match.forcedPiece ? "Continue a captura" : "Treino livre"
           : isAbandoned
@@ -1332,7 +1355,7 @@ export function bindDomGameInterface(game) {
         : match.status === "finished"
           ? match.resultSummary || "Partida encerrada."
           : demoMode && match.turn === "playerTwo"
-            ? "A máquina vai responder automaticamente."
+            ? "A máquina pensa por 3 segundos. Observe a peça e a casa piscando antes do movimento."
             : demoMode
               ? match.forcedPiece
                 ? `Captura em cadeia: continue com a peça destacada.${coinLine}`
