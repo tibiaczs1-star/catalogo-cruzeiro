@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-poolmobileintro1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-polishcam1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260520-poolmobileintro1";
+} from "../services/pvpService.js?v=20260520-polishcam1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -21,8 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260520-poolmobileintro1";
-import { Chess } from "../vendor/chess.js?v=20260520-poolmobileintro1";
+} from "../core/checkersRules.js?v=20260520-polishcam1";
+import { Chess } from "../vendor/chess.js?v=20260520-polishcam1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -1771,8 +1771,8 @@ export function bindDomGameInterface(game) {
           </span>
         `
         : "";
-      const handMarkup = guided && canAct ? `<span class="ppg-chess-hand" aria-hidden="true"><span></span></span>` : "";
-      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${aiPreviewFrom ? " is-ai-preview-from" : ""}${aiPreviewTo ? " is-ai-preview-to" : ""}${aiPreviewCapture ? " is-ai-preview-capture" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${handMarkup}</button>`;
+      const arrowMarkup = guided && canAct ? `<span class="ppg-chess-arrow" aria-hidden="true"><span></span></span>` : "";
+      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${aiPreviewFrom ? " is-ai-preview-from" : ""}${aiPreviewTo ? " is-ai-preview-to" : ""}${aiPreviewCapture ? " is-ai-preview-capture" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${arrowMarkup}</button>`;
     }).join("");
   };
 
@@ -1813,7 +1813,7 @@ export function bindDomGameInterface(game) {
             ? "Guia do turno"
             : "Aguardando";
     const guideCopy = state.inCheck
-      ? "Voce precisa sair do xeque. A maozinha marca a prioridade."
+      ? "Voce precisa sair do xeque. A seta marca a prioridade."
       : demoMode && local.demoChessAiThinking
         ? "A máquina pensa por 3 segundos. A origem e o alvo piscam antes do lance."
       : forcedMoves.length === 1
@@ -1821,7 +1821,7 @@ export function bindDomGameInterface(game) {
         : selectedMoves.length
           ? "Escolha um destes destinos para concluir o lance."
           : canAct
-            ? "A maozinha indica uma peca com lance legal."
+            ? "A seta indica uma peca com lance legal."
             : "O rival esta pensando.";
     const moveItems = guideMoves.slice(0, 6).map((move) => `<li>${formatChessMove(move)}</li>`).join("");
     return `
@@ -2874,12 +2874,14 @@ export function bindDomGameInterface(game) {
             <div class="ppg-chess-board-frame" data-chess-frame>
               <div class="ppg-dom-chess-board" data-ai-thinking="${demoMode && local.demoChessAiThinking ? "true" : "false"}">${renderChessBoardMarkup(match, seat)}</div>
             </div>
-            <div class="ppg-checkers-camera ppg-chess-camera" aria-label="Controle da câmera do xadrez">
-              <button type="button" data-chess-camera="left" aria-label="Girar câmera para esquerda">↺</button>
-              <button type="button" data-chess-camera="right" aria-label="Girar câmera para direita">↻</button>
-              <button type="button" data-chess-camera="zoom-in" aria-label="Aproximar câmera">+</button>
+            <div class="ppg-checkers-camera ppg-chess-camera ppg-camera-orb" aria-label="Controle da câmera do xadrez">
+              <button type="button" data-chess-camera="up" aria-label="Subir câmera">↑</button>
+              <button type="button" data-chess-camera="left" aria-label="Girar câmera para esquerda">‹</button>
+              <button type="button" class="is-camera-core" data-chess-camera="reset" aria-label="Resetar câmera"><span aria-hidden="true"></span></button>
+              <button type="button" data-chess-camera="right" aria-label="Girar câmera para direita">›</button>
               <button type="button" data-chess-camera="zoom-out" aria-label="Afastar câmera">-</button>
-              <button type="button" data-chess-camera="reset" aria-label="Resetar câmera">0</button>
+              <button type="button" data-chess-camera="down" aria-label="Baixar câmera">↓</button>
+              <button type="button" data-chess-camera="zoom-in" aria-label="Aproximar câmera">+</button>
             </div>
           </div>
           <aside class="ppg-chess-sidecar">${renderChessGuidanceMarkup(match, seat, demoMode)}</aside>
@@ -3204,6 +3206,8 @@ export function bindDomGameInterface(game) {
       const action = cameraButton.dataset.checkersCamera || "reset";
       if (action === "left") local.checkersCamera.yaw -= 10;
       if (action === "right") local.checkersCamera.yaw += 10;
+      if (action === "up") local.checkersCamera.panY -= 12;
+      if (action === "down") local.checkersCamera.panY += 12;
       if (action === "zoom-in") local.checkersCamera.zoom += 0.08;
       if (action === "zoom-out") local.checkersCamera.zoom -= 0.08;
       if (action === "reset") resetCheckersCamera();
@@ -3216,6 +3220,8 @@ export function bindDomGameInterface(game) {
       const action = chessCameraButton.dataset.chessCamera || "reset";
       if (action === "left") local.chessCamera.yaw -= 10;
       if (action === "right") local.chessCamera.yaw += 10;
+      if (action === "up") local.chessCamera.panY -= 12;
+      if (action === "down") local.chessCamera.panY += 12;
       if (action === "zoom-in") local.chessCamera.zoom += 0.08;
       if (action === "zoom-out") local.chessCamera.zoom -= 0.08;
       if (action === "reset") resetChessCamera();
@@ -3546,7 +3552,7 @@ export function bindDomGameInterface(game) {
       const legalMoves = state.legalMoves || [];
       if (!local.chessSelected) {
         if (!legalMoves.some((move) => move.from === square)) {
-          updateGameState({ prompt: "Escolha uma peca com lance legal. A maozinha mostra uma opcao." });
+          updateGameState({ prompt: "Escolha uma peca com lance legal. A seta mostra uma opcao." });
           renderPvpTable();
           return;
         }

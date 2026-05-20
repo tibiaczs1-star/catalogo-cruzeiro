@@ -1452,10 +1452,16 @@ export class InteriorScene extends Phaser.Scene {
       stroke: "#04060b",
       strokeThickness: 3
     }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0).setVisible(false);
+    const arrow = this.buildZoneArrowMarker(
+      0,
+      (zone.labelOffsetY ?? -zone.radius * 0.88) - 26,
+      zone.label || this.getZoneLabel(zone.id),
+      zone.color
+    );
 
-    container.add([baseGlow, shell, pulse, frame, text, chip]);
+    container.add([baseGlow, shell, pulse, frame, text, chip, arrow]);
     [baseGlow, shell, pulse, frame, text, chip].forEach((item) => item.setVisible(false));
-    container.ppgZone = { ...zone, baseGlow, shell, pulse, frame, text, chip };
+    container.ppgZone = { ...zone, baseGlow, shell, pulse, frame, text, chip, arrow };
     container.setSize(zone.radius * 2, zone.radius * 2);
     container.setInteractive(new Phaser.Geom.Circle(0, 0, zone.radius), Phaser.Geom.Circle.Contains);
     container.on("pointerover", () => this.setActiveZone(zone.id));
@@ -1465,6 +1471,39 @@ export class InteriorScene extends Phaser.Scene {
     container.on("pointerdown", (_pointer, _localX, _localY, event) => {
       event?.stopPropagation?.();
       this.moveToZone(zone);
+    });
+    return container;
+  }
+
+  buildZoneArrowMarker(x, y, label, color) {
+    const container = this.add.container(x, y).setDepth(0.4);
+    const glow = this.add.ellipse(0, 46, 72, 28, color, 0.13)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const arrow = this.add.graphics();
+    arrow.fillStyle(color, 0.96);
+    arrow.fillRect(-5, -14, 10, 31);
+    arrow.fillTriangle(-20, 12, 20, 12, 0, 36);
+    arrow.lineStyle(2, 0x05070d, 0.58);
+    arrow.strokeRect(-5, -14, 10, 31);
+    arrow.strokeTriangle(-20, 12, 20, 12, 0, 36);
+    const labelBack = this.add.rectangle(0, -34, 92, 24, 0x05070d, 0.74)
+      .setStrokeStyle(1, color, 0.54);
+    const labelText = this.add.text(0, -35, label, {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "11px",
+      fontStyle: "bold",
+      color: "#fff6dc",
+      stroke: "#03050b",
+      strokeThickness: 3
+    }).setOrigin(0.5).setLetterSpacing(2);
+    container.add([glow, arrow, labelBack, labelText]);
+    this.tweens.add({
+      targets: container,
+      y: y + 8,
+      duration: 780,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
     });
     return container;
   }

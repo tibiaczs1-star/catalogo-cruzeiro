@@ -143,6 +143,7 @@ export class StreetScene extends Phaser.Scene {
       repeat: -1,
       ease: "Sine.easeInOut"
     });
+    this.doorArrow = this.buildWorldArrowMarker(MAIN_DOOR.x, MAIN_DOOR.y - MAIN_DOOR.height / 2 - 18, "ENTRADA", 0xffd06d, 2.72);
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
@@ -292,6 +293,39 @@ export class StreetScene extends Phaser.Scene {
         }
       });
     });
+  }
+
+  buildWorldArrowMarker(x, y, label, color, depth = 2.7) {
+    const container = this.add.container(x, y).setDepth(depth);
+    const halo = this.add.ellipse(0, 44, 78, 30, color, 0.14)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const arrow = this.add.graphics();
+    arrow.fillStyle(color, 0.96);
+    arrow.fillRect(-5, -18, 10, 34);
+    arrow.fillTriangle(-22, 12, 22, 12, 0, 38);
+    arrow.lineStyle(2, 0x05070d, 0.56);
+    arrow.strokeRect(-5, -18, 10, 34);
+    arrow.strokeTriangle(-22, 12, 22, 12, 0, 38);
+    const textBack = this.add.rectangle(0, -37, 96, 25, 0x05070d, 0.72)
+      .setStrokeStyle(1, color, 0.52);
+    const text = this.add.text(0, -38, label, {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "12px",
+      fontStyle: "bold",
+      color: "#fff6dc",
+      stroke: "#03050b",
+      strokeThickness: 3
+    }).setOrigin(0.5).setLetterSpacing(2);
+    container.add([halo, arrow, textBack, text]);
+    this.tweens.add({
+      targets: container,
+      y: y + 9,
+      duration: 760,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+    return container;
   }
 
   buildHotspot({ id, x, y, width, height, color, label }) {

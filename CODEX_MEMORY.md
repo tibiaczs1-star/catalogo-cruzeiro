@@ -2,6 +2,15 @@
 
 Atualizado: 2026-05-20
 
+## Rodada Atual - 20260520-polishcam1
+
+- Damas e Xadrez PubPaid receberam acabamento visual sem mudar o fluxo aprovado: Damas manteve a arena 3D, mas as pedras agora sao redondas e com contraste forte contra o tabuleiro.
+- Xadrez manteve fullscreen e mesa 3D, trocou a antiga maozinha por seta, recebeu setas na porta de entrada e nos hotspots do salao, pecas mais altas e contraste melhor entre brancas e pretas.
+- Controles de camera de Damas e Xadrez viraram uma bolinha direcional com icone de camera no centro, botoes de giro, subir/descer e zoom, preservando arrasto/toque na mesa.
+- Build local: `20260520-polishcam1`.
+- Validacao local: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js`, `pubpaid-phaser/scenes/StreetScene.js`, `pubpaid-phaser/scenes/InteriorScene.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; smoke Xadrez mobile e desktop; smoke Damas desktop e mobile.
+- Evidencias locais: `.codex-temp/chess3d-mobile.png`, `.codex-temp/chess3d-desktop.png`, `.codex-temp/checkerscam-desktop.png` e `.codex-temp/checkerscam-mobile.png`.
+
 ## Rodada Atual - 20260520-poolmobileintro1
 
 - Sinuca/Vale Pool manteve a arte aprovada e recebeu entrada curta com taco batendo na bola branca, explosao de pixels e revelacao da mesa.
@@ -31,6 +40,14 @@ Atualizado: 2026-05-20
 - Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, smoke Playwright mobile landscape com frame 3D/camera/IA e smoke desktop com mesa grande.
 - Online: Render respondeu `/api/pubpaid/build=20260520-chess3d1` e o smoke mobile landscape online tambem passou com frame 3D, 5 controles de camera, rotacao aplicada, 64 casas, 32 pecas e IA com pausa de 3 segundos.
 - Evidencias: `.codex-temp/chess3d-mobile.png`, `.codex-temp/chess3d-desktop.png` e `.codex-temp/chess3d-render-mobile.png`.
+
+## Rodada Atual - 20260520-chessfull1
+
+- Nova regra do usuario: Xadrez deve ser sempre tela cheia, sem aparecer como quadro dentro de pagina.
+- O modo chess agora fixa a arena em `100dvw x 100dvh`, esconde header/placar/acoes externas e deixa o painel lateral como overlay; em mobile landscape a mesa 3D toma o viewport inteiro.
+- Build local: `20260520-chessfull1`.
+- Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, smoke Playwright mobile landscape e smoke desktop.
+- Evidencias locais: `.codex-temp/chess3d-mobile.png` e `.codex-temp/chess3d-desktop.png`.
 
 ## Rodada Atual - 20260520-checkersai1
 

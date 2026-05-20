@@ -1,28 +1,33 @@
 # Current State
 
-Updated: 2026-05-20T16:56:40.789Z
+Updated: 2026-05-20T18:18:00.000Z
 
 ## Active Goal
 
-- Xadrez PubPaid 3D online
+- Acabamento visual de Damas e Xadrez PubPaid com contraste, pecas e camera
 
 ## Summary
 
-Build 20260520-chess3d1 publicado no Render. Xadrez agora segue o modelo 3D da Damas: mesa grande em perspectiva, pecas volumosas, luzes, camera com rotacao/zoom/arrasto e IA da Demo pensando 3 segundos antes do lance.
+Build local 20260520-polishcam1: Damas manteve a arena aprovada, agora com pedras redondas e cores separadas do tabuleiro. Xadrez segue fullscreen 3D, com pecas mais altas, contraste reforcado, seta no lugar da maozinha, setas na porta/NPCs e controle de camera em bolinha direcional para desktop/mobile.
 
 ## Next
 
-- PvP real ainda deve ser validado em duas sessoes autenticadas se for fechar fluxo financeiro.
+- Subir commit e confirmar Render /api/pubpaid/build=20260520-polishcam1.
+- Repetir smoke mobile de Xadrez e Damas no Render.
 
 ## Files In Focus
 
-- pubpaid-phaser/ui/domGameInterface.js
 - pubpaid-phaser.css
-- pubpaid-phaser/app.js
 - pubpaid.html
+- pubpaid-phaser/app.js
+- pubpaid-phaser/ui/domGameInterface.js
+- pubpaid-phaser/scenes/StreetScene.js
+- pubpaid-phaser/scenes/InteriorScene.js
 - server.js
 
 ## Assets In Focus
 
-- .codex-temp/chess3d-render-mobile.png
+- .codex-temp/chess3d-mobile.png
 - .codex-temp/chess3d-desktop.png
+- .codex-temp/checkerscam-desktop.png
+- .codex-temp/checkerscam-mobile.png

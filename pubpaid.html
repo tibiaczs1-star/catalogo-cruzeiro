@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260520-poolmobileintro1" />
-    <script defer src="./site-google-auth.js?v=20260520-poolmobileintro1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260520-polishcam1" />
+    <script defer src="./site-google-auth.js?v=20260520-polishcam1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260520-poolmobileintro1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260520-polishcam1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -238,7 +238,7 @@
               </header>
               <div class="ppg-dom-game-cards">
                 <article class="ppg-dom-game-card is-pool is-multi" data-dom-game-card="pool" tabindex="0" aria-label="Escolher modo de Sinuca">
-                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260520-poolmobileintro1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260520-polishcam1" alt="" loading="lazy" />
                   <span>Sinuca</span>
                   <strong>clube premium com mira e tacada</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Sinuca">
@@ -247,7 +247,7 @@
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-checkers is-multi" data-dom-game-card="checkers" tabindex="0" aria-label="Escolher modo de Damas">
-                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260520-poolmobileintro1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260520-polishcam1" alt="" loading="lazy" />
                   <span>Damas</span>
                   <strong>arena com captura e pressão de turno</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Damas">
@@ -256,7 +256,7 @@
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-chess is-multi" data-dom-game-card="chess" tabindex="0" aria-label="Escolher modo de Xadrez">
-                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260520-poolmobileintro1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260520-polishcam1" alt="" loading="lazy" />
                   <span>Xadrez</span>
                   <strong>tabuleiro de salão com leitura limpa</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Xadrez">
@@ -503,12 +503,14 @@
                     <span>lances</span>
                     <strong data-dom-checkers-moves>0</strong>
                   </div>
-                  <div class="ppg-checkers-camera" aria-label="Camera da mesa">
+                  <div class="ppg-checkers-camera ppg-camera-orb" aria-label="Camera da mesa">
+                    <button type="button" data-checkers-camera="up" aria-label="Subir camera">↑</button>
                     <button type="button" data-checkers-camera="left" aria-label="Girar camera para esquerda">‹</button>
-                    <button type="button" data-checkers-camera="zoom-out" aria-label="Afastar camera">-</button>
-                    <button type="button" data-checkers-camera="reset" aria-label="Resetar camera">R</button>
-                    <button type="button" data-checkers-camera="zoom-in" aria-label="Aproximar camera">+</button>
+                    <button type="button" class="is-camera-core" data-checkers-camera="reset" aria-label="Resetar camera"><span aria-hidden="true"></span></button>
                     <button type="button" data-checkers-camera="right" aria-label="Girar camera para direita">›</button>
+                    <button type="button" data-checkers-camera="zoom-out" aria-label="Afastar camera">-</button>
+                    <button type="button" data-checkers-camera="down" aria-label="Baixar camera">↓</button>
+                    <button type="button" data-checkers-camera="zoom-in" aria-label="Aproximar camera">+</button>
                   </div>
                   <div class="ppg-checkers-hints" data-dom-checkers-hints></div>
                   <div class="ppg-checkers-history" data-dom-checkers-history aria-label="Histórico de lances"></div>
