@@ -1,6 +1,76 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-05-18
+Atualizado: 2026-05-20
+
+## Rodada Atual - 20260520-poolrules1
+
+- Sinuca/Vale Pool manteve a arte aprovada e recebeu clareza jogavel das regras dentro da HUD.
+- Cartoes laterais do jogador/Robo IA/PvP agora mostram a regra ativa do modo: Livre, Brasileira ou Par/Impar.
+- Botao `REGRAS` nos cartoes abre manual pop-up com alvo permitido, pontuacao, faltas e condicao de vitoria; fechar retorna direto para a partida.
+- Livre mostra regra viva `qualquer bola 1-9`; Brasileira mostra a menor bola viva como `bola da vez`; Par/Impar mostra `1a bola define PAR/IMPAR`, depois grupo PAR/IMPAR e bolas restantes do grupo.
+- Servidor PvP ja define grupo PAR/IMPAR pela primeira bola encaçapada valida e agora devolve mensagem explicita de grupo definido.
+- Build local: `20260520-poolrules1`.
+
+## Rodada Atual - 20260519-standalone-pool11
+
+- Sinuca/Vale Pool deixou de ser tratada como teste e foi promovida como build ativo do PubPaid.
+- Caçapas abertas visualmente para o lado do pano, removendo o fechamento superior que dificultava a leitura da boca.
+- Captura real ampliada no prototipo e no PvP do servidor; a detecção agora considera o trajeto entre frames para a bola cair em vez de bater na boca e voltar.
+- Build local: `20260519-standalone-pool11`.
+
+## Rodada Atual - 20260519-standalone-pool10
+
+- Sinuca/Vale Pool recebeu moeda animada e fluxo complementar: vencedor da moeda escolhe apenas `ser primeiro` ou `modalidade`; perdedor escolhe a parte restante.
+- Depois das escolhas, Demo/IA e PvP mostram tutorial curto da modalidade antes da mesa.
+- Demo/IA só começa depois de `COMEÇAR PARTIDA`; PvP só libera tacada depois que os dois jogadores confirmam o tutorial.
+- Conhecimento repassado para a equipe de jogos em `.codex-agents/game-director-system/projects/vale-pool.md` e para a skill `game-director-general/references/pool-modalities.md`.
+- Build local: `20260519-standalone-pool10`.
+
+## Rodada Atual - 20260519-standalone-pool8
+
+- Sinuca/Vale Pool recebeu modalidades jogaveis: Livre, Brasileira e Par/Impar.
+- Fluxo inicial consolidado para Demo/IA e PvP: joga moeda; vencedor escolhe comecar ou escolher modalidade; quem escolhe modalidade joga por segundo.
+- Livre usa branca + bolas 1-9 e placar `BOLAS`.
+- Brasileira usa branca + sete coloridas oficiais (1 vermelha, 2 amarela, 3 verde, 4 marrom, 5 azul, 6 rosa, 7 preta), bola da vez menor em mesa e placar `PONTOS`; bola 9 nao entra neste modo.
+- Par/Impar usa branca + bolas 2-15, primeiro encaçape define grupo PAR/IMPAR e a 15 fecha/castiga.
+- PvP ganhou endpoint `/api/pubpaid/pvp/pool/setup`, estado de escolha inicial no servidor, rack por modalidade e bloqueio de tacada antes de finalizar a moeda/modalidade.
+- Conhecimento consolidado na skill `game-director-general`: `C:\Users\junio\.codex\skills\game-director-general\references\pool-modalities.md`.
+- Build local: `20260519-standalone-pool8`.
+- Validacao: `node --check` em `games/vale-pool/game.js`, `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/services/pvpService.js` e `server.js`; `npm run guard:pubpaid`; servidor local respondeu `/api/pubpaid/build=20260519-standalone-pool8`; capturas no in-app browser confirmaram moeda, escolha inicial, menu de modalidades e modo Brasileira com 7 bolas.
+- Evidencias: `.codex-temp/vale-pool-pool8-moeda.png`, `.codex-temp/vale-pool-pool8-moeda-tentativa2.png`, `.codex-temp/vale-pool-pool8-modalidades.png`, `.codex-temp/vale-pool-pool8-brasileira.png`.
+
+## Rodada Atual - 20260519-standalone-pool5
+
+- Sinuca PubPaid substituida pelo prototipo aprovado `Vale Pool Round2`, agora promovido para `games/vale-pool/` e embutido no PubPaid por iframe controlado.
+- Fluxo Demo preservado: entra no prototipo sem ficha, sem escrow e sem carteira. Fluxo PvP preservado: servidor continua dono do estado, com fotos/nomes Google dos dois jogadores em paineis laterais fora do jogo.
+- O jogo tem 1 bola branca e 9 bolas de jogo em rack compacto, todas do mesmo tamanho, e lista `BOLAS FORA` no HUD.
+- Musica relaxante 16-bit estilo Super Nintendo adicionada ao prototipo; por politica do navegador ela inicia apos interacao do jogador.
+- Correção funcional: Demo recebeu eventos de mouse/teclado no iframe, jogador vs Robo IA, fotos/avatares externos, mira por mouse/teclado, ponto de batida na bola branca por HUD/teclas 1-5, historico de jogadas e fisica de efeito relativa a tacada.
+- Corte de HUD: bloco superior esquerdo agora mostra `VEZ` em vez de pontuacao; placar do single player fica nos cartoes laterais Jogador/Robo IA, atualizados por `vale-pool:demo-state`.
+- Controle de efeito: ponto vermelho clicavel livremente dentro da bola branca do HUD; ao voltar para `CENTRO` ele recentraliza, e o vetor do ponto de impacto altera a fisica da tacada.
+- Correção rápida: pontuação abstrata removida da leitura principal; cartões laterais agora mostram explicitamente `BOLAS` encaçapadas e a regra declarada e Bola 9.
+- Fisica de caçapa corrigida no prototipo: a boca captura antes do repique no trilho e teste dirigido confirmou a branca caindo/respawnando.
+- Responsividade ampliada: iframe/jogo usam mais largura em desktop e mantem proporcao 16:9 para mobile horizontal.
+- Força reforçada: velocidade base e pico da tacada aumentados para a barra ter impacto perceptivel.
+- Build local: `20260519-standalone-pool5`.
+- Validacao: `node --check` em `games/vale-pool/game.js`, `pubpaid-phaser/ui/domGameInterface.js` e `server.js`; `npm run guard:pubpaid`; teste funcional Playwright no PubPaid com `pointerEvents=auto`, efeito `DIR`, mira mudando, tacada do jogador, resposta da IA, cartoes laterais atualizados e retorno para `MIRANDO`; teste dirigido de caçapa com branca caindo/respawnando; cliente `develop-web-game` com screenshot e estado direto do prototipo.
+- Evidencias: `.codex-temp/pubpaid-vale-pool-effect-control.png`, `.codex-temp/pubpaid-vale-pool-demo-functional.png`, `.codex-temp/pubpaid-vale-pool-pocket-test.png`, `.codex-temp/web-game-vale-pool/shot-1.png`, `.codex-temp/vale-pool-public-demo.png`, `.codex-temp/pubpaid-vale-pool-demo.png` e `.codex-temp/pubpaid-vale-pool-pvp.png`.
+
+## Rodada Atual - 20260519-poolreal1
+
+- Sinuca PubPaid refeita pela referencia de mesa real enviada pelo usuario: caçapas agora aparecem como bocas integradas na madeira/borracha, nao como circulos soltos no feltro.
+- A faixa `Sinuca demo`/treino livre foi removida de cima da mesa em todos os tamanhos; informacao fica no painel inferior.
+- Painel inferior ganhou lista `bolas encaçapadas`, preenchida pelas bolas que caem durante a partida.
+- Build local: `20260519-poolreal1`.
+- Validacao: `/api/pubpaid/build=20260519-poolreal1`, `node --check`, `npm run guard:pubpaid`, `node .codex-temp/pubpaid-mobileopt-check.mjs` com `failed=[]`, `demoPoolHeroVisible=false`, `demoPoolPocketedVisible=true` e `music=off`.
+- Evidencias: `.codex-temp/pubpaid-mobileopt-pool-844x390.png` e `.codex-temp/pubpaid-poolreal1-pocketed-list.png`.
+
+## Rodada Atual - 20260519-poolfix2
+
+- Sinuca PubPaid ajustada pelo PNG de revisao: caçapas fisicas e DOM ficaram embutidas na mesa, mesa centralizada em mobile landscape e topbar global escondida durante Sinuca para nao haver informacao em cima da mesa.
+- Build local: `20260519-poolfix2`.
+- Validacao: servidor reiniciado na porta 3000, `/api/pubpaid/build` respondeu `20260519-poolfix2`; `node --check` em `PoolGameScene.js`, `domGameInterface.js`, `app.js` e `.codex-temp/pubpaid-mobileopt-check.mjs`; `npm run guard:pubpaid`; `node .codex-temp/pubpaid-mobileopt-check.mjs` passou com `failed=[]`, `music=off`, retrato bloqueado e paisagem responsiva.
+- Evidencias: `.codex-temp/pubpaid-mobileopt-pool-844x390.png` e `.codex-temp/pubpaid-mobileopt-report.json`.
 
 ## Regra De Existencia
 
@@ -65,12 +135,25 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Proximo Foco
 
-1. Com permissao do usuario, publicar `20260518-poolspace3` e confirmar online com duas contas Google reais a Sinuca unificada: `Demo` local isolada e `PvP real` com fila, ready duplo, tacada por `Espaco`, tacada autoritativa e saldo real.
-2. Testar Damas Demo em aparelho real mobile landscape depois da correcao de captura encadeada: a peça forcada deve permanecer selecionada e a UI deve dizer `Continue a captura`.
-3. Continuar polimento visual por jogo, sempre preservando o fluxo financeiro/PvP real.
-4. Corrigir o conector Chrome do Codex fora do runtime: extensao instalada, mas falta a chave Windows do native host.
+1. Usuario revisar o PubPaid `20260519-mobileland1`; regra final mobile atual: celular deve jogar em horizontal, retrato bloqueia com gate.
+2. Se o usuario quiser mais realismo no Xadrez, proximo corte natural e relogio de xadrez, promocao com escolha de peca e mais refinamento visual das pecas.
+3. Manter PubPaid focado em Sinuca, Damas e Xadrez; os outros jogos continuam apenas no backup `backups/pubpaid-disabled-games-20260519-1235`.
+4. Validar PvP em duas sessoes autenticadas diferentes sempre que mexer no fluxo real de carteira/fila.
 
 ## Ultima Rodada Validada
+
+- Build local: `20260519-mobileland1`.
+- Otimizacao PubPaid mobile: BootScene deixou de pre-carregar frames de intro nao usados e imagens grandes de jogos/salas fora do corte atual; o app evita limpar caches/service workers quando a build local ja coincide; URLs de assets da rua/damas foram alinhadas para evitar download duplicado.
+- Regra de orientacao final: em celular/touch, retrato volta a bloquear com `Mude para horizontal`; o jogo so segue em paisagem. A Sinuca nao deve ser jogada em retrato.
+- Responsividade em paisagem mantida para Lobby, Xadrez, Damas e Sinuca; o botao de audio fica oculto durante mesas para nao cobrir HUD/placar.
+- Validacao local: servidor reiniciado na porta 3000, `/api/pubpaid/build` respondeu `20260519-mobileland1`; `node --check` em `app.js`, `BootScene.js`, `domGameInterface.js` e script de validacao; `npm run guard:pubpaid`; Playwright confirmou bloqueio em retrato 375x667, lobby em 667x375, Xadrez em 667x375, Damas em 640x360 e Sinuca em 844x390, todos com `music=off` e sem overflow.
+- Evidencias: `.codex-temp/pubpaid-mobileopt-portrait-gate-375x667.png`, `.codex-temp/pubpaid-mobileopt-pool-844x390.png`, `.codex-temp/pubpaid-mobileopt-report.json` e `.codex-temp/web-game-mobileland/state-1.json`.
+
+- Build local: `20260519-chesspro1`.
+- Xadrez PubPaid profissionalizado com `chess.js` no Demo e no PvP: lances legais, SAN, xeque/mate/empate, roque, en passant, promocao, lista de lances legais e lances obrigatorios quando ha xeque ou lance unico.
+- UI do Xadrez ganhou maozinha animada, destaque de origem/destino legal, rei em xeque, ultimo lance, historico lateral e cues sonoros de movimento/captura/xeque/mate. Audio permanece desligado por padrao.
+- Validacao local: servidor reiniciado na porta 3000, `/api/pubpaid/build` respondeu `20260519-chesspro1`; `node --check` em `server.js`, `domGameInterface.js` e `chipTechSoundtrack.js`; `npm run guard:pubpaid`; Playwright confirmou 32 pecas, 10 origens legais no inicio, historico `e4`, cenario de xeque `Qh5+` com lance obrigatorio `g7-g6`, `LIGAR SOM` e `music=off`.
+- Evidencias: `.codex-temp/pubpaid-chesspro1-after-e4.png` e `.codex-temp/pubpaid-chesspro1-forced-check.png`.
 
 - Build local: `20260518-gamescomplete3`.
 - Ajuste pontual de controles PubPaid: a Sinuca agora mostra `Use Espaço para jogar`; no celular mostra `Celular: toque em Jogar`; o botão touch da Sinuca ficou `Jogar`; os botões mobile globais ficaram `Caixa` e `Jogar`.

@@ -1,47 +1,32 @@
 # Current State
 
-Updated: 2026-05-18T23:18:00.000Z
+Updated: 2026-05-20T00:46:47-05:00
 
 ## Active Goal
 
-- PubPaid 2.0 canonico: parte de jogos fechada localmente, pendente apenas de correções pontuais.
+- Sinuca PubPaid usando o prototipo aprovado Vale Pool com modalidades reais e HUD explicando a regra viva
 
 ## Summary
 
-Build local atual: 20260518-gamescomplete3. Textos visiveis do PubPaid revisados para portugues; `Lobby`, `Demo`, `Draw Poker`, `Desktop/Mobile`, `PvP real`, `backend` e `escrow` foram removidos dos textos publicos do jogo. Todos os 7 jogos do lobby agora têm `Treino` e `Real`; treinos locais foram adicionados para Xadrez, 21, Pôquer, Truco e Dados, sem ficha, sem saldo travado e sem mexer na carteira. Ultimo ajuste pontual: Sinuca orienta `Use Espaço para jogar`, mobile diz `Celular: toque em Jogar`, o botao touch da Sinuca e `Jogar`, e os botoes mobile globais sao `Caixa` e `Jogar`.
-
-Direcao de arte canonicamente definida: `realistic-host-spritesheet.png` e o anchor oficial. Tudo novo do jogo deve seguir pixel art realista com leitura de sprite, corpo humano crivel, contorno, sombra, roupa detalhada, volume, luz e presenca, pronto para spritesheet/animacao.
+O prototipo isolado `.codex-temp/vale-pool-round2` foi promovido para `games/vale-pool/` e substitui a Sinuca antiga do PubPaid via iframe. Build atual `20260520-poolrules1`. Demo abre o prototipo sem ficha/carteira, com jogador vs Robo IA, controles funcionais por mouse/teclado, ponto de batida livre na branca do HUD, bolas dentro/fora, historico de jogadas, bloco `VEZ`, cartões laterais, taco/pontilhado voltando ao estado `MIRANDO`, escala maior/responsiva e caçapas abertas visualmente para o lado do pano. A captura das caçapas foi ampliada no prototipo e no PvP do servidor, considerando tambem o trajeto entre frames para a bola cair sem rebater na boca. Demo/IA e PvP têm moeda animada: vencedor escolhe apenas uma parte (`ser primeiro` ou `modalidade`) e perdedor escolhe a parte restante. Depois das escolhas, abre tutorial da modalidade; Demo só começa ao apertar `COMEÇAR PARTIDA` e PvP só libera tacada quando os dois jogadores confirmam o tutorial. Modalidades implementadas: Livre, Brasileira e Par/Ímpar. A HUD agora informa a regra viva de cada modo durante a partida e os cartoes laterais têm botao `REGRAS` com manual em pop-up. PvP usa endpoint `/api/pubpaid/pvp/pool/setup`.
 
 ## Next
 
-- Se o usuario aprovar
-- publicar/deployar 20260518-gamescomplete3.
-- Depois do deploy
-- validar online rua, salão, carteira/saque e jogos; corrigir apenas problemas pontuais que aparecerem.
-
-## Files In Focus
-
-- pubpaid-phaser/scenes/CharacterSelectScene.js
-- pubpaid-phaser/scenes/InteriorScene.js
-- pubpaid-phaser/scenes/StreetScene.js
-- pubpaid-phaser/services/accountService.js
-- pubpaid-phaser/services/pvpService.js
-- pubpaid-runtime.js
-- pubpaid-admin.html
-- pubpaid-phaser.css
-- pubpaid-phaser/app.js
-- pubpaid-phaser/scenes/BootScene.js
-- pubpaid-phaser/ui/domGameInterface.js
-- pubpaid-phaser/ui/walletInterface.js
-- pubpaid.html
-- server.js
+- Usuario testar `http://127.0.0.1:3000/pubpaid.html?v=20260520-poolrules1` e a Demo direta `http://127.0.0.1:3000/games/vale-pool/index.html?mode=demo&v=20260520-poolrules1`.
+- Validar PvP real em duas sessoes autenticadas quando houver dois usuarios/sessoes disponiveis.
+- Manter Sinuca em mobile sempre horizontal e full width.
 
 ## Assets In Focus
 
-- .codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png
-- .codex-temp/pubpaid-cleanselect1/02-interior-clean.png
-- .codex-temp/pubpaid-withdrawrules1/01-wallet-clean-withdraw-rules.png
-- .codex-temp/pubpaid-cardtables1-preview.png
-- .codex-temp/pubpaid-gamescomplete2-lobby.png
-- .codex-temp/pubpaid-gamescomplete2-poker-demo.png
-- .codex-temp/pubpaid-gamescomplete3-pool-controls.png
+- games/vale-pool/index.html
+- games/vale-pool/game.js
+- games/vale-pool/styles.css
+- .codex-temp/pubpaid-vale-pool-demo.png
+- .codex-temp/pubpaid-vale-pool-pvp.png
+- .codex-temp/pubpaid-vale-pool-demo-functional.png
+- .codex-temp/pubpaid-vale-pool-effect-control.png
+- .codex-temp/vale-pool-pool8-moeda.png
+- .codex-temp/vale-pool-pool8-modalidades.png
+- .codex-temp/vale-pool-pool8-brasileira.png
+- .codex-temp/vale-pool-pool11-pocket-subtle.png
+- .codex-temp/vale-pool-poolrules1-rule-live.png

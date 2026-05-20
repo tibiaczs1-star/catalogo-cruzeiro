@@ -1,6 +1,7 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260518-gamescomplete3";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260520-poolrules1";
 import {
+  choosePoolSetup,
   confirmPvpReady,
   drawPoker,
   fetchPvpState,
@@ -10,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260518-gamescomplete3";
+} from "../services/pvpService.js?v=20260520-poolrules1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -20,7 +21,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260518-gamescomplete3";
+} from "../core/checkersRules.js?v=20260520-poolrules1";
+import { Chess } from "../vendor/chess.js?v=20260520-poolrules1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -28,7 +30,8 @@ function resultTitle(result) {
   return "Empate";
 }
 
-const PVP_GAMES = new Set(["pool", "checkers", "chess", "cards21", "poker", "truco", "dicecups"]);
+const ACTIVE_PUBPAID_GAMES = ["pool", "checkers", "chess"];
+const PVP_GAMES = new Set(ACTIVE_PUBPAID_GAMES);
 const GAME_LABELS = {
   pool: "Sinuca",
   checkers: "Damas",
@@ -39,10 +42,144 @@ const GAME_LABELS = {
   dicecups: "Dados"
 };
 
-const CHESS_PIECES = {
-  p: "♟", r: "♜", n: "♞", b: "♝", q: "♛", k: "♚",
-  P: "♙", R: "♖", N: "♘", B: "♗", Q: "♕", K: "♔"
+const GAME_LAUNCH_COPY = {
+  pool: {
+    promise: "Mira, força e tacada em mesa de clube.",
+    loading: "Acendendo a mesa, conferindo as caçapas internas e montando o triângulo da Sinuca."
+  },
+  checkers: {
+    promise: "Arena de captura com leitura clara de turno.",
+    loading: "Montando tabuleiro, peças e tensão de rodada de Damas."
+  },
+  chess: {
+    promise: "Tabuleiro clássico em tela cheia, com foco em decisão.",
+    loading: "Acendendo o salão de Xadrez e alinhando as peças."
+  },
+  cards21: {
+    promise: "Mesa de 21 com cartas grandes e risco visível.",
+    loading: "Embaralhando o 21, separando cartas e calibrando o HUD."
+  },
+  poker: {
+    promise: "Pôquer de troca com mão, rival e decisão de cartas.",
+    loading: "Abrindo a mesa de Pôquer e aquecendo o baralho."
+  },
+  truco: {
+    promise: "Truco rápido, mesa viva e leitura de rodada.",
+    loading: "Chamando a mesa de Truco e separando as cartas da mão."
+  },
+  dicecups: {
+    promise: "Dados visíveis, copos e palpite de soma.",
+    loading: "Sacudindo os copos e colocando os dados no centro da mesa."
+  }
 };
+
+const GAME_AUDIO_ZONES = {
+  pool: "game-pool",
+  checkers: "game-checkers",
+  chess: "game-chess",
+  cards21: "game-cards21",
+  poker: "game-poker",
+  truco: "game-truco",
+  dicecups: "game-dicecups"
+};
+
+const CHESS_PIECES = {
+  p: { side: "black", role: "pawn", name: "Peão preto" },
+  r: { side: "black", role: "rook", name: "Torre preta" },
+  n: { side: "black", role: "knight", name: "Cavalo preto" },
+  b: { side: "black", role: "bishop", name: "Bispo preto" },
+  q: { side: "black", role: "queen", name: "Rainha preta" },
+  k: { side: "black", role: "king", name: "Rei preto" },
+  P: { side: "white", role: "pawn", name: "Peão branco" },
+  R: { side: "white", role: "rook", name: "Torre branca" },
+  N: { side: "white", role: "knight", name: "Cavalo branco" },
+  B: { side: "white", role: "bishop", name: "Bispo branco" },
+  Q: { side: "white", role: "queen", name: "Rainha branca" },
+  K: { side: "white", role: "king", name: "Rei branco" }
+};
+
+const CHESS_START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+const CHESS_ROLE_NAMES = {
+  p: "Peão",
+  r: "Torre",
+  n: "Cavalo",
+  b: "Bispo",
+  q: "Rainha",
+  k: "Rei"
+};
+const CHESS_COLOR_NAMES = {
+  white: "brancas",
+  black: "pretas"
+};
+
+function callChessFlag(move, methodName) {
+  try {
+    return Boolean(move && typeof move[methodName] === "function" && move[methodName]());
+  } catch (_error) {
+    return false;
+  }
+}
+
+function normalizeChessMove(move = {}) {
+  const promotion = move.promotion || "";
+  const capture = Boolean(move.captured) || callChessFlag(move, "isCapture");
+  return {
+    color: move.color === "b" ? "black" : "white",
+    from: String(move.from || "").toLowerCase(),
+    to: String(move.to || "").toLowerCase(),
+    piece: String(move.piece || "").toLowerCase(),
+    captured: String(move.captured || "").toLowerCase(),
+    promotion: String(promotion || "").toLowerCase(),
+    flags: String(move.flags || ""),
+    san: String(move.san || ""),
+    lan: String(move.lan || `${move.from || ""}${move.to || ""}${promotion || ""}`),
+    capture,
+    castle: callChessFlag(move, "isCastle") || callChessFlag(move, "isKingsideCastle") || callChessFlag(move, "isQueensideCastle"),
+    enPassant: callChessFlag(move, "isEnPassant"),
+    bigPawn: callChessFlag(move, "isBigPawn")
+  };
+}
+
+function createChessFromFen(fen = CHESS_START_FEN) {
+  try {
+    return new Chess(fen || CHESS_START_FEN);
+  } catch (_error) {
+    return new Chess(CHESS_START_FEN);
+  }
+}
+
+function decorateChessState(state = {}) {
+  const chess = createChessFromFen(state.fen || CHESS_START_FEN);
+  const legalMoves = chess.moves({ verbose: true }).map(normalizeChessMove);
+  const inCheck = Boolean(chess.isCheck?.() || chess.inCheck?.());
+  const checkmate = Boolean(chess.isCheckmate?.());
+  const draw = Boolean(chess.isDraw?.());
+  const gameOver = Boolean(chess.isGameOver?.()) || checkmate || draw;
+  const forcedMoves = inCheck || legalMoves.length === 1 ? legalMoves : [];
+  return {
+    ...state,
+    fen: chess.fen(),
+    whiteSeat: state.whiteSeat || "playerOne",
+    blackSeat: state.blackSeat || "playerTwo",
+    history: Array.isArray(state.history) ? state.history : [],
+    lastMove: state.lastMove || null,
+    turnColor: chess.turn() === "b" ? "black" : "white",
+    legalMoves,
+    forcedMoves,
+    inCheck,
+    checkmate,
+    stalemate: Boolean(chess.isStalemate?.()),
+    draw,
+    gameOver
+  };
+}
+
+function chessMoveCue(move = {}) {
+  if (move.checkmate) return "chess-mate";
+  if (move.check) return "chess-check";
+  if (move.capture) return "chess-capture";
+  return "chess-move";
+}
 
 export function bindDomGameInterface(game) {
   const refs = {
@@ -53,6 +190,16 @@ export function bindDomGameInterface(game) {
     lobbyBalance: document.querySelector("[data-dom-lobby-balance]"),
     lobbyStake: document.querySelector("[data-dom-lobby-stake]"),
     lobbyState: document.querySelector("[data-dom-lobby-state]"),
+    modePicker: document.querySelector("[data-dom-mode-picker]"),
+    modeKicker: document.querySelector("[data-dom-mode-kicker]"),
+    modeTitle: document.querySelector("[data-dom-mode-title]"),
+    modeCopy: document.querySelector("[data-dom-mode-copy]"),
+    modeDemo: document.querySelector("[data-dom-mode-demo]"),
+    modePvp: document.querySelector("[data-dom-mode-pvp]"),
+    loading: document.querySelector("[data-dom-loading]"),
+    loadingKicker: document.querySelector("[data-dom-loading-kicker]"),
+    loadingTitle: document.querySelector("[data-dom-loading-title]"),
+    loadingCopy: document.querySelector("[data-dom-loading-copy]"),
     matchmaking: document.querySelector("[data-dom-matchmaking]"),
     matchmakingGame: document.querySelector("[data-dom-matchmaking-game]"),
     matchmakingStatus: document.querySelector("[data-dom-matchmaking-status]"),
@@ -77,6 +224,11 @@ export function bindDomGameInterface(game) {
     poolRound: document.querySelector("[data-dom-pool-round]"),
     poolStatus: document.querySelector("[data-dom-pool-status]"),
     poolLast: document.querySelector("[data-dom-pool-last]"),
+    poolPocketed: document.querySelector("[data-dom-pool-pocketed]"),
+    poolRuleCard: document.querySelector("[data-dom-pool-rule-card]"),
+    poolRuleModal: document.querySelector("[data-dom-pool-rule-modal]"),
+    poolRuleModalBody: document.querySelector("[data-dom-pool-rule-modal-body]"),
+    poolEffect: document.querySelector("[data-dom-pool-effect]"),
     poolStage: document.querySelector("[data-dom-pool-stage]"),
     poolSelf: document.querySelector("[data-dom-pool-self]"),
     poolSelfInitial: document.querySelector("[data-dom-pool-self-initial]"),
@@ -133,6 +285,7 @@ export function bindDomGameInterface(game) {
     selectedGame: "pool",
     pvpPollTimer: null,
     resultReturnTimer: null,
+    launchTimer: null,
     resultHandledMatchId: "",
     pvpSelected: null,
     pvpLegalMoves: [],
@@ -146,13 +299,19 @@ export function bindDomGameInterface(game) {
     chessSelected: "",
     poolAim: 0,
     poolPower: 0.56,
+    poolSpin: "centro",
     poolControlStage: "aim",
     poolPowerDirection: 1,
     poolPowerTimer: null,
+    pvpIntroTimer: null,
+    pvpIntroMatchKey: "",
+    pvpIntroPendingKey: "",
     pvpRenderBusy: false,
     pvpTableRenderBusy: false,
     tableRenderKey: "",
     poolRenderKey: "",
+    poolRulesOpen: false,
+    poolDemoState: null,
     checkersSound: null,
     lastCheckersSoundKey: "",
     lastCheckersTouchAt: 0
@@ -160,6 +319,8 @@ export function bindDomGameInterface(game) {
 
   const setPanel = (name) => {
     refs.root.classList.toggle("is-lobby", name === "lobby");
+    refs.root.classList.toggle("is-mode-picker", name === "mode-picker");
+    refs.root.classList.toggle("is-loading", name === "loading");
     refs.root.classList.toggle("is-matchmaking", name === "matchmaking");
     refs.root.classList.toggle("is-access-block", name === "access-block");
     refs.root.classList.toggle("is-pool", name === "pool");
@@ -167,8 +328,11 @@ export function bindDomGameInterface(game) {
     refs.root.classList.toggle("is-table", name === "table");
     refs.root.classList.toggle("is-result", name === "result");
     document.body?.classList.toggle("ppg-dom-playing", name === "pool" || name === "checkers" || name === "table");
+    document.body?.classList.toggle("ppg-dom-launching", name === "loading");
     document.body?.classList.toggle("ppg-dom-checkers-active", name === "checkers");
-    refs.lobby.hidden = name !== "lobby";
+    refs.lobby.hidden = name !== "lobby" && name !== "mode-picker";
+    if (refs.modePicker) refs.modePicker.hidden = name !== "mode-picker";
+    if (refs.loading) refs.loading.hidden = name !== "loading";
     refs.matchmaking.hidden = name !== "matchmaking";
     refs.accessBlock.hidden = name !== "access-block";
     refs.pool.hidden = name !== "pool";
@@ -180,6 +344,78 @@ export function bindDomGameInterface(game) {
 
   const setMatchmakingState = (state = "searching") => {
     if (refs.matchmaking) refs.matchmaking.dataset.matchState = state;
+  };
+
+  const gameAudioZone = (gameId = "") => GAME_AUDIO_ZONES[gameId] || "salon";
+
+  const gameLaunchCopy = (gameId = "") => GAME_LAUNCH_COPY[gameId] || {
+    promise: "Mesa em tela cheia com visual e som dedicados.",
+    loading: "Preparando tela cheia, som e controles da mesa."
+  };
+
+  const emitGameSound = (cue = "select", gameId = local.selectedGame || "pool") => {
+    game.events.emit("pubpaid:sound-cue", { cue, gameId });
+  };
+
+  const syncSelectedGameCard = (gameId = "") => {
+    refs.lobby?.querySelectorAll("[data-dom-game-card]").forEach((card) => {
+      card.classList.toggle("is-selected", card.dataset.domGameCard === gameId);
+    });
+  };
+
+  const showModePicker = (gameId = "pool") => {
+    local.selectedGame = gameId;
+    const copy = gameLaunchCopy(gameId);
+    syncSelectedGameCard(gameId);
+    if (refs.modePicker) refs.modePicker.dataset.game = gameId;
+    if (refs.modeKicker) refs.modeKicker.textContent = "modo de jogo";
+    if (refs.modeTitle) refs.modeTitle.textContent = `${gameLabel(gameId)} em tela cheia`;
+    if (refs.modeCopy) refs.modeCopy.textContent = copy.promise;
+    if (refs.modeDemo) refs.modeDemo.dataset.domModeDemo = gameId;
+    if (refs.modePvp) refs.modePvp.dataset.domModePvp = gameId;
+    setPanel("mode-picker");
+    emitGameSound("select", gameId);
+    updateGameState({
+      activeGameId: gameId,
+      selectedTable: gameId,
+      lobbyPhase: "mode-select",
+      objective: `Escolher Demo ou PvP de ${gameLabel(gameId)}`,
+      focus: "seletor de modo",
+      prompt: copy.promise
+    });
+  };
+
+  const showGameLoading = (gameId = "pool", mode = "demo") => {
+    const copy = gameLaunchCopy(gameId);
+    local.selectedGame = gameId;
+    if (refs.loading) refs.loading.dataset.game = gameId;
+    if (refs.loading) refs.loading.dataset.mode = mode;
+    if (refs.loadingKicker) refs.loadingKicker.textContent = mode === "pvp" ? "abrindo PvP" : "abrindo Demo";
+    if (refs.loadingTitle) refs.loadingTitle.textContent = `${gameLabel(gameId)} em tela cheia`;
+    if (refs.loadingCopy) refs.loadingCopy.textContent = copy.loading;
+    setPanel("loading");
+    game.events.emit("pubpaid:request-fullscreen");
+    game.events.emit("pubpaid:music-zone", gameAudioZone(gameId));
+    emitGameSound(mode === "pvp" ? "pvp" : "launch", gameId);
+    updateGameState({
+      activeGameId: gameId,
+      selectedTable: gameId,
+      lobbyPhase: "loading",
+      objective: `Carregar ${gameLabel(gameId)}`,
+      focus: mode === "pvp" ? "PvP real" : "Demo local",
+      prompt: copy.loading
+    });
+  };
+
+  const launchGame = (gameId = "pool", mode = "demo", starter = () => {}) => {
+    window.clearTimeout(local.launchTimer);
+    showGameLoading(gameId, mode);
+    local.launchTimer = window.setTimeout(() => {
+      local.launchTimer = null;
+      game.events.emit("pubpaid:music-zone", gameAudioZone(gameId));
+      starter();
+      emitGameSound("ready", gameId);
+    }, 520);
   };
 
   const stopPvpPoolPowerMeter = () => {
@@ -214,11 +450,17 @@ export function bindDomGameInterface(game) {
     window.clearInterval(local.pvpPollTimer);
     window.clearTimeout(local.resultReturnTimer);
     window.clearTimeout(local.demoAiTimer);
+    window.clearTimeout(local.launchTimer);
+    window.clearTimeout(local.pvpIntroTimer);
     stopPvpPoolPowerMeter();
     if (isPoolDemoActive()) resetDemoPoolState();
     local.pvpPollTimer = null;
     local.resultReturnTimer = null;
     local.demoAiTimer = null;
+    local.launchTimer = null;
+    local.pvpIntroTimer = null;
+    local.pvpIntroPendingKey = "";
+    local.pvpIntroMatchKey = "";
     local.resultHandledMatchId = "";
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
@@ -231,6 +473,7 @@ export function bindDomGameInterface(game) {
     local.chessSelected = "";
     local.poolAim = 0;
     local.poolPower = 0.56;
+    local.poolSpin = "centro";
     local.tableRenderKey = "";
     local.poolRenderKey = "";
     local.lastCheckersSoundKey = "";
@@ -238,6 +481,8 @@ export function bindDomGameInterface(game) {
       ? "pool"
       : gameState.activeGameId || local.selectedGame || "pool";
     setPanel("lobby");
+    syncSelectedGameCard(local.selectedGame);
+    game.events.emit("pubpaid:music-zone", "salon");
     const resetFinishedPvp = gameState.pvpStatus === "finished"
       ? {
           pvpStatus: "idle",
@@ -266,7 +511,7 @@ export function bindDomGameInterface(game) {
     window.clearTimeout(local.resultReturnTimer);
     local.selectedGame = gameId;
     refs.resultGame.textContent = gameLabel(gameId).toLowerCase();
-    refs.resultTitle.textContent = resultTitle(result);
+    refs.resultTitle.textContent = `${gameLabel(gameId)}: ${resultTitle(result)}`;
     if (refs.resultAmount) refs.resultAmount.textContent = formatResultAmount(details.delta || 0);
     refs.resultBody.textContent = body;
     if (refs.resultNext) refs.resultNext.textContent = "Voltando ao lobby em 5s.";
@@ -371,16 +616,49 @@ export function bindDomGameInterface(game) {
     return `${formatCheckersSquare(move.from)}${connector}${formatCheckersSquare(move.to)}`;
   };
 
+  const chessSeatForColor = (state = {}, color = "white") =>
+    color === "black" ? state.blackSeat || "playerTwo" : state.whiteSeat || "playerOne";
+
+  const chessColorForSeat = (state = {}, seat = "playerOne") =>
+    state.blackSeat === seat ? "black" : "white";
+
+  const chessMovePieceName = (move = {}) => CHESS_ROLE_NAMES[move.piece] || "Peça";
+
+  const formatChessMove = (move = {}) => {
+    const connector = move.capture ? "x" : "-";
+    const san = move.san ? ` ${move.san}` : "";
+    const promotion = move.promotion ? `=${String(move.promotion).toUpperCase()}` : "";
+    return `${chessMovePieceName(move)} ${String(move.from || "").toUpperCase()}${connector}${String(move.to || "").toUpperCase()}${promotion}${san}`;
+  };
+
+  const getChessTurnSummary = (match = {}, seat = "playerOne", demoMode = false) => {
+    const state = decorateChessState(match.chessState || {});
+    const turnSeat = chessSeatForColor(state, state.turnColor);
+    if (match.status !== "active") return match.resultSummary || "Mesa encerrada.";
+    if (state.checkmate) return "Xeque-mate.";
+    if (state.draw) return "Empate por regra.";
+    if (state.inCheck) {
+      return demoMode || turnSeat === seat
+        ? "Xeque: responda com um lance legal."
+        : "Rival em xeque: aguardando resposta.";
+    }
+    return demoMode
+      ? `${CHESS_COLOR_NAMES[state.turnColor] || "lado"} jogam agora.`
+      : turnSeat === seat
+        ? "Sua vez: escolha uma peça com lance legal."
+        : "Vez do rival.";
+  };
+
   const setCheckersPlayerCard = (refsForPlayer = {}, player = {}, { pieces = 0, active = false, connected = true, label = "" } = {}) => {
     if (refsForPlayer.name) refsForPlayer.name.textContent = displayNameFor(player);
     if (refsForPlayer.initial) refsForPlayer.initial.textContent = initialFor(player);
     if (refsForPlayer.pieces) refsForPlayer.pieces.textContent = String(pieces);
     if (refsForPlayer.meta) {
-      refsForPlayer.meta.textContent = active
+      refsForPlayer.meta.textContent = label || (active
         ? "em turno"
         : connected
-          ? label || "conectado"
-          : "reconectando";
+          ? "conectado"
+          : "reconectando");
     }
     refsForPlayer.root?.classList.toggle("is-active", active);
     refsForPlayer.root?.classList.toggle("is-offline", !connected);
@@ -547,6 +825,8 @@ export function bindDomGameInterface(game) {
   const resetDemoPoolState = () => {
     if (game.scene.isActive("pool-game-scene")) game.scene.stop("pool-game-scene");
     local.poolRenderKey = "";
+    if (refs.poolStage) refs.poolStage.innerHTML = "";
+    if (refs.pool) refs.pool.dataset.render = "";
     updateGameState({ poolGame: null });
   };
 
@@ -561,6 +841,65 @@ export function bindDomGameInterface(game) {
     { suit: "ouros", rank: "3", strength: 10 }, { suit: "espadas", rank: "A", strength: 8 }, { suit: "copas", rank: "7", strength: 4 },
     { suit: "paus", rank: "2", strength: 9 }, { suit: "ouros", rank: "Q", strength: 5 }, { suit: "espadas", rank: "5", strength: 2 }
   ]);
+
+  const createDemoChessState = () => decorateChessState({
+    fen: CHESS_START_FEN,
+    whiteSeat: "playerOne",
+    blackSeat: "playerTwo",
+    history: [],
+    lastMove: null
+  });
+
+  const applyDemoChessMove = (from = "", to = "", promotion = "q") => {
+    const match = local.demoTable;
+    if (!match || match.gameId !== "chess" || match.status !== "active") return null;
+    const chess = createChessFromFen(match.chessState?.fen || CHESS_START_FEN);
+    const move = chess.move({ from, to, promotion });
+    if (!move) {
+      updateGameState({ prompt: "Lance invalido: escolha uma origem e destino legais." });
+      return null;
+    }
+    const nextColor = chess.turn() === "b" ? "black" : "white";
+    const rawEntry = normalizeChessMove(move);
+    const entry = {
+      index: Number(match.moveCount || 0) + 1,
+      seat: rawEntry.color === "black" ? match.chessState.blackSeat || "playerTwo" : match.chessState.whiteSeat || "playerOne",
+      playerName: displayNameFor(match[rawEntry.color === "black" ? match.chessState.blackSeat || "playerTwo" : match.chessState.whiteSeat || "playerOne"]),
+      ...rawEntry,
+      check: Boolean(chess.isCheck?.() || chess.inCheck?.()),
+      checkmate: Boolean(chess.isCheckmate?.()),
+      draw: Boolean(chess.isDraw?.()),
+      at: new Date().toISOString()
+    };
+    const nextState = decorateChessState({
+      ...(match.chessState || createDemoChessState()),
+      fen: chess.fen(),
+      history: (Array.isArray(match.chessState?.history) ? match.chessState.history : []).concat(entry).slice(-120),
+      lastMove: entry
+    });
+    Object.assign(match, {
+      chessState: nextState,
+      moveCount: entry.index,
+      turn: chessSeatForColor(nextState, nextColor),
+      resultSummary: `${entry.playerName || "Jogador"} jogou ${entry.san || entry.lan}.`,
+      updatedAt: new Date().toISOString()
+    });
+    if (nextState.checkmate) {
+      match.status = "finished";
+      match.winner = entry.seat;
+      match.turn = "";
+      match.resultSummary = `${entry.playerName || "Jogador"} deu xeque-mate com ${entry.san || entry.lan}.`;
+    } else if (nextState.draw) {
+      match.status = "finished";
+      match.winner = "";
+      match.turn = "";
+      match.resultSummary = "Treino de xadrez empatado por regra.";
+    } else if (nextState.inCheck) {
+      match.resultSummary = `${match.resultSummary} Xeque.`;
+    }
+    updateGameState({ prompt: match.resultSummary });
+    return entry;
+  };
 
   const createDemoTableMatch = (gameId = "poker") => {
     const base = {
@@ -622,11 +961,7 @@ export function bindDomGameInterface(game) {
     }
     return {
       ...base,
-      chessState: {
-        fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-        whiteSeat: "playerOne",
-        history: []
-      }
+      chessState: createDemoChessState()
     };
   };
 
@@ -638,7 +973,9 @@ export function bindDomGameInterface(game) {
     local.selectedGame = `${gameId}-demo`;
     local.demoTable = createDemoTableMatch(gameId);
     local.pvpHeld = [true, true, true, true, true];
+    local.chessSelected = "";
     local.tableRenderKey = "";
+    game.events.emit("pubpaid:music-zone", gameAudioZone(gameId));
     setPanel("table");
     updateGameState({
       activeGameId: gameId,
@@ -659,6 +996,7 @@ export function bindDomGameInterface(game) {
     local.pvpSelected = null;
     local.pvpLegalMoves = [];
     local.lastCheckersSoundKey = "";
+    game.events.emit("pubpaid:music-zone", gameAudioZone("checkers"));
     setPanel("checkers");
     updateGameState({
       pvpStatus: "idle",
@@ -678,9 +1016,20 @@ export function bindDomGameInterface(game) {
     local.selectedGame = "pool-demo";
     resetPvpPoolControls();
     local.poolRenderKey = "";
+    refs.pool.dataset.render = "prototype";
     refs.pool.dataset.mode = "demo";
+    game.events.emit("pubpaid:music-zone", gameAudioZone("pool"));
     setPanel("pool");
+    renderStablePoolStage("vale-pool:demo", renderValePoolPrototypeMarkup({ mode: "demo" }));
+    local.poolDemoState = { ruleModeId: "livre", ruleMode: "Livre", scoreLabel: "BOLAS", liveNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9] };
+    syncPoolRuleUi(poolRuleFormula({ demo: local.poolDemoState }));
     updateGameState({
+      activeGameId: "pool",
+      currentScene: "vale-pool",
+      lobbyPhase: "playing",
+      objective: "Treinar Vale Pool",
+      focus: "prototipo aprovado de sinuca",
+      prompt: "Vale Pool demo aberto com 1 bola branca e bolas 1 a 9.",
       pvpStatus: "idle",
       pvpGameId: "",
       pvpSeat: "",
@@ -689,7 +1038,7 @@ export function bindDomGameInterface(game) {
       pvpQueue: null
     });
     game.scene.stop("game-lobby-scene");
-    game.scene.start("pool-game-scene", { stake: 0, mode: "demo" });
+    game.scene.stop("pool-game-scene");
   };
 
   const setPlayerSlot = ({ picture, initial, name, state }, player = null, fallback = {}) => {
@@ -1072,6 +1421,30 @@ export function bindDomGameInterface(game) {
     return `<${tag} class="${className}" ${attrs}>${body}</${tag}>`;
   };
 
+  const dicePipsFor = (value = 0) => ({
+    1: [5],
+    2: [1, 9],
+    3: [1, 5, 9],
+    4: [1, 3, 7, 9],
+    5: [1, 3, 5, 7, 9],
+    6: [1, 3, 4, 6, 7, 9]
+  }[Number(value)] || []);
+
+  const renderDieFace = (value = 0, index = 0) => {
+    const face = Number(value || 0);
+    const pips = dicePipsFor(face);
+    const cells = Array.from({ length: 9 }, (_, cellIndex) => {
+      const position = cellIndex + 1;
+      return `<i class="${pips.includes(position) ? "is-on" : ""}"></i>`;
+    }).join("");
+    return `
+      <span class="ppg-die-face${face ? "" : " is-hidden-face"}" aria-label="${face ? `Dado ${index + 1}: ${face}` : `Dado ${index + 1} oculto`}">
+        ${cells}
+        <b>${face || "?"}</b>
+      </span>
+    `;
+  };
+
   const sumCards21 = (cards = []) => {
     let total = (Array.isArray(cards) ? cards : []).reduce((sum, card) => sum + Number(card || 0), 0);
     let aces = (Array.isArray(cards) ? cards : []).filter((card) => Number(card || 0) === 11).length;
@@ -1102,22 +1475,122 @@ export function bindDomGameInterface(game) {
   };
 
   const renderChessBoardMarkup = (match, seat) => {
-    const state = match.chessState || {};
+    const state = decorateChessState(match.chessState || {});
     const board = chessBoardFromFen(state.fen || "");
-    const ownColor = state.whiteSeat === seat ? "white" : "black";
+    const demoMode = local.demoTable === match;
+    const perspectiveColor = chessColorForSeat(state, seat);
+    const activeColor = state.turnColor || "white";
+    const activeSeat = chessSeatForColor(state, activeColor);
+    const canAct = match.status === "active" && (demoMode || activeSeat === seat);
+    const legalMoves = canAct ? state.legalMoves || [] : [];
+    const forcedMoves = canAct ? state.forcedMoves || [] : [];
+    const selectedMoves = local.chessSelected
+      ? legalMoves.filter((move) => move.from === local.chessSelected)
+      : [];
+    const legalFromSet = new Set(legalMoves.map((move) => move.from));
+    const forcedFromSet = new Set(forcedMoves.map((move) => move.from));
+    const selectedTargetSet = new Set(selectedMoves.map((move) => move.to));
+    const lastMove = state.lastMove || state.history?.slice?.(-1)?.[0] || null;
+    const lastFrom = lastMove?.from || "";
+    const lastTo = lastMove?.to || "";
+    const checkedKingToken = state.inCheck ? activeColor === "black" ? "k" : "K" : "";
+    const guideFrom = forcedMoves[0]?.from || legalMoves[0]?.from || "";
+    const guideTo = selectedMoves[0]?.to || "";
+    const handSquare = guideTo || guideFrom;
     return Array.from({ length: 64 }, (_, index) => {
       const displayRow = Math.floor(index / 8);
       const displayCol = index % 8;
-      const file = ownColor === "black" ? "abcdefgh"[7 - displayCol] : "abcdefgh"[displayCol];
-      const rank = ownColor === "black" ? displayRow + 1 : 8 - displayRow;
+      const file = perspectiveColor === "black" ? "abcdefgh"[7 - displayCol] : "abcdefgh"[displayCol];
+      const rank = perspectiveColor === "black" ? displayRow + 1 : 8 - displayRow;
       const square = `${file}${rank}`;
       const piece = board.get(square) || "";
-      const pieceColor = piece ? piece === piece.toUpperCase() ? "white" : "black" : "";
-      const ownPiece = pieceColor && pieceColor === ownColor;
+      const pieceMeta = CHESS_PIECES[piece] || null;
+      const pieceColor = pieceMeta?.side || "";
+      const ownPiece = pieceColor && (demoMode ? pieceColor === activeColor : pieceColor === perspectiveColor);
       const dark = (displayRow + displayCol) % 2 === 1;
       const selected = local.chessSelected === square;
-      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}" data-chess-square="${square}" aria-label="${square}">${piece ? `<span>${CHESS_PIECES[piece] || piece}</span>` : ""}</button>`;
+      const legalOrigin = legalFromSet.has(square);
+      const forcedOrigin = forcedFromSet.has(square);
+      const legalTarget = selectedTargetSet.has(square);
+      const lastSource = lastFrom === square;
+      const lastTarget = lastTo === square;
+      const inCheck = Boolean(checkedKingToken && piece === checkedKingToken);
+      const guided = handSquare === square;
+      const label = pieceMeta ? `${square}: ${pieceMeta.name}` : square;
+      const pieceMarkup = pieceMeta
+        ? `
+          <span class="ppg-chess-piece is-${pieceMeta.side} is-${pieceMeta.role}" aria-hidden="true">
+            <span class="ppg-chess-piece-crown"></span>
+            <span class="ppg-chess-piece-head"></span>
+            <span class="ppg-chess-piece-neck"></span>
+            <span class="ppg-chess-piece-body"></span>
+            <span class="ppg-chess-piece-base"></span>
+          </span>
+        `
+        : "";
+      const handMarkup = guided && canAct ? `<span class="ppg-chess-hand" aria-hidden="true"><span></span></span>` : "";
+      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${handMarkup}</button>`;
     }).join("");
+  };
+
+  const renderChessHistoryMarkup = (state = {}) => {
+    const history = Array.isArray(state.history) ? state.history.slice(-10) : [];
+    if (!history.length) {
+      return `<article class="ppg-chess-empty"><strong>Partida pronta</strong><span>As brancas fazem o primeiro lance.</span></article>`;
+    }
+    return history.map((move) => `
+      <article>
+        <span>${move.index || ""}</span>
+        <strong>${move.san || move.lan || `${move.from}-${move.to}`}</strong>
+        <small>${formatChessMove(move)}</small>
+      </article>
+    `).join("");
+  };
+
+  const renderChessGuidanceMarkup = (match = {}, seat = "playerOne", demoMode = false) => {
+    const state = decorateChessState(match.chessState || {});
+    const turnSeat = chessSeatForColor(state, state.turnColor);
+    const canAct = match.status === "active" && (demoMode || turnSeat === seat);
+    const forcedMoves = canAct ? state.forcedMoves || [] : [];
+    const selectedMoves = canAct && local.chessSelected
+      ? (state.legalMoves || []).filter((move) => move.from === local.chessSelected)
+      : [];
+    const guideMoves = selectedMoves.length ? selectedMoves : forcedMoves.length ? forcedMoves : canAct ? (state.legalMoves || []).slice(0, 6) : [];
+    const guideTitle = state.inCheck
+      ? "Lances obrigatorios"
+      : forcedMoves.length === 1
+        ? "Unico lance legal"
+        : selectedMoves.length
+          ? "Destinos legais"
+          : canAct
+            ? "Guia do turno"
+            : "Aguardando";
+    const guideCopy = state.inCheck
+      ? "Voce precisa sair do xeque. A maozinha marca a prioridade."
+      : forcedMoves.length === 1
+        ? "So existe um lance legal nesta posicao."
+        : selectedMoves.length
+          ? "Escolha um destes destinos para concluir o lance."
+          : canAct
+            ? "A maozinha indica uma peca com lance legal."
+            : "O rival esta pensando.";
+    const moveItems = guideMoves.slice(0, 6).map((move) => `<li>${formatChessMove(move)}</li>`).join("");
+    return `
+      <div class="ppg-chess-status-card${state.inCheck ? " is-check" : ""}">
+        <span>${CHESS_COLOR_NAMES[state.turnColor] || "lado"} em turno</span>
+        <strong>${getChessTurnSummary(match, seat, demoMode)}</strong>
+        <small>${state.legalMoves?.length || 0} lances legais</small>
+      </div>
+      <div class="ppg-chess-guidance">
+        <span>${guideTitle}</span>
+        <strong>${guideCopy}</strong>
+        <ol>${moveItems || "<li>Sem lance legal disponivel.</li>"}</ol>
+      </div>
+      <div class="ppg-chess-history">
+        <span>Planilha de lances</span>
+        ${renderChessHistoryMarkup(state)}
+      </div>
+    `;
   };
 
   const clampUiNumber = (value, min, max, fallback = min) => {
@@ -1128,6 +1601,483 @@ export function bindDomGameInterface(game) {
 
   const safeBallColor = (value = "") =>
     /^#[0-9a-f]{3,8}$/i.test(String(value || "")) ? String(value) : "#fff6dc";
+
+  const poolPocketedItems = (state = {}) => {
+    if (Array.isArray(state.pocketedBalls) && state.pocketedBalls.length) {
+      return state.pocketedBalls.map((ball) => ({
+        label: ball.label || ball.id || "?",
+        color: safeBallColor(ball.color),
+        shot: ball.shot || ""
+      }));
+    }
+    return (Array.isArray(state.balls) ? state.balls : [])
+      .filter((ball) => ball.pocketed && !ball.cue && Number(ball.id) !== 0)
+      .map((ball) => ({
+        label: ball.label || ball.id || "?",
+        color: safeBallColor(ball.color),
+        shot: ""
+      }));
+  };
+
+  const renderPoolPocketedMarkup = (state = {}) => {
+    const items = poolPocketedItems(state);
+    return `
+      <span>bolas fora da mesa <em>${items.length}</em></span>
+      <div class="ppg-pool-pocketed-list">
+        ${items.length
+          ? items.map((ball) => `<b title="Bola ${ball.label}${ball.shot ? ` - tacada ${ball.shot}` : ""}" style="--ball:${ball.color}">${ball.label}</b>`).join("")
+          : "<small>Nenhuma bola fora.</small>"}
+      </div>
+    `;
+  };
+
+  const POOL_SPINS = [
+    { id: "centro", label: "Centro", mark: "•" },
+    { id: "segue", label: "Segue", mark: "↑" },
+    { id: "puxa", label: "Puxa", mark: "↓" },
+    { id: "esq", label: "Esq", mark: "←" },
+    { id: "dir", label: "Dir", mark: "→" }
+  ];
+
+  const normalizePoolSpin = (value = "centro") =>
+    POOL_SPINS.some((spin) => spin.id === value) ? value : "centro";
+
+  const POOL_RULE_TUTORIALS = {
+    livre: {
+      title: "Modo Livre",
+      lines: [
+        "Branca + bolas 1 a 9 em diamante.",
+        "Encaçape qualquer bola de jogo.",
+        "Vence quem derrubar mais bolas."
+      ]
+    },
+    brasileira: {
+      title: "Sinuca Brasileira",
+      lines: [
+        "Branca + sete bolas coloridas oficiais.",
+        "A bola da vez e sempre a menor na mesa.",
+        "Falta entrega pontos ao rival."
+      ]
+    },
+    parimpar: {
+      title: "Par ou Impar",
+      lines: [
+        "Branca + bolas 2 a 15.",
+        "Primeira bola valida define PAR ou IMPAR.",
+        "A 15 fecha a partida depois do grupo."
+      ]
+    }
+  };
+
+  const normalizePoolRuleModeUi = (value = "livre") => {
+    const mode = String(value || "livre").toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (mode === "brasileira" || mode === "sinucabrasileira" || mode === "br") return "brasileira";
+    if (mode === "parimpar" || mode === "parouimpar" || mode === "tacoforte") return "parimpar";
+    return "livre";
+  };
+
+  const poolRuleTutorial = (mode = "livre") => POOL_RULE_TUTORIALS[mode] || POOL_RULE_TUTORIALS.livre;
+
+  const poolGroupForNumber = (number = 0) => Number(number) % 2 === 0 ? "PAR" : "IMPAR";
+
+  const poolLiveNumbers = (state = {}) => (Array.isArray(state.balls) ? state.balls : [])
+    .filter((ball) => !ball.cue && Number(ball.id) > 0 && !ball.pocketed)
+    .map((ball) => Number(ball.id))
+    .sort((a, b) => a - b);
+
+  const poolRuleFormula = ({ state = {}, seat = "", rivalSeat = "", demo = null } = {}) => {
+    const mode = normalizePoolRuleModeUi(state.ruleMode || demo?.ruleModeId || demo?.ruleMode || "livre");
+    const demoLive = Array.isArray(demo?.liveNumbers)
+      ? demo.liveNumbers.map(Number).filter((n) => Number.isFinite(n)).sort((a, b) => a - b)
+      : [];
+    const live = poolLiveNumbers(state);
+    const liveNumbers = live.length ? live : demoLive;
+    const scoreLabel = String(state.scoreLabel || demo?.scoreLabel || (mode === "brasileira" ? "PONTOS" : "BOLAS")).toUpperCase();
+    const ownGroup = String((seat && state[`${seat}Group`]) || demo?.playerGroup || "").toUpperCase();
+    const rivalGroup = String((rivalSeat && state[`${rivalSeat}Group`]) || demo?.aiGroup || "").toUpperCase();
+    const nextBall = Number(state.nextBall || demo?.next || liveNumbers[0] || 0);
+    if (mode === "brasileira") {
+      return {
+        mode,
+        title: "Sinuca Brasileira",
+        badge: nextBall ? `BOLA ${nextBall}` : "LIMPE A MESA",
+        target: nextBall ? `Mire primeiro na bola ${nextBall}.` : "Todas as bolas oficiais caíram.",
+        score: "Cada bola vale seu número. Falta entrega 7 pontos ao rival.",
+        win: "Vence quem somar mais pontos depois da última bola.",
+        manual: [
+          "Bolas: branca + 1 vermelha, 2 amarela, 3 verde, 4 marrom, 5 azul, 6 rosa, 7 preta.",
+          "A bola da vez é sempre a menor bola ainda na mesa.",
+          "A tacada correta precisa atingir a bola da vez antes das outras.",
+          "Se derrubar a branca ou errar a bola da vez, o rival recebe 7 pontos.",
+          "A pontuação vem do valor das bolas encaçapadas."
+        ],
+        scoreLabel,
+      };
+    }
+    if (mode === "parimpar") {
+      const ownRemaining = ownGroup ? liveNumbers.filter((n) => n !== 15 && poolGroupForNumber(n) === ownGroup) : [];
+      return {
+        mode,
+        title: "Par ou Ímpar",
+        badge: ownGroup ? ownGroup : "GRUPO ABERTO",
+        target: ownGroup
+          ? ownRemaining.length ? `Mire suas bolas ${ownGroup}: ${ownRemaining.join(", ")}.` : "Seu grupo acabou: agora mire a bola 15."
+          : "Primeira bola válida que cair define PAR ou ÍMPAR para quem derrubou.",
+        score: ownGroup
+          ? `Você é ${ownGroup}; rival é ${rivalGroup || (ownGroup === "PAR" ? "ÍMPAR" : "PAR")}. Bola do rival pontua para ele.`
+          : "Ainda não existe dono dos grupos. A primeira bola válida decide.",
+        win: "Depois de limpar seu grupo, encaçape a 15 para vencer. Se a 15 cair antes, perde.",
+        manual: [
+          "Bolas: branca + bolas 2 a 15.",
+          "A primeira bola válida encaçapada define o grupo de quem derrubou: par ou ímpar.",
+          "Depois disso, cada jogador mira nas bolas do próprio grupo.",
+          "Bola do rival que cair conta para o rival.",
+          "A bola 15 só pode cair depois que seu grupo acabar; antes disso ela castiga e entrega a vitória."
+        ],
+        scoreLabel,
+      };
+    }
+    return {
+      mode,
+      title: "Modo Livre",
+      badge: "QUALQUER BOLA",
+      target: liveNumbers.length ? `Mire qualquer bola de jogo: ${liveNumbers.join(", ")}.` : "Mesa limpa.",
+      score: "Cada bola encaçapada soma 1 para quem derrubou.",
+      win: "Vence quem derrubar mais bolas até o fim da mesa.",
+      manual: [
+        "Bolas: branca + bolas 1 a 9 em diamante.",
+        "Qualquer bola de jogo pode ser escolhida e encaçapada.",
+        "Cada bola vale 1 no placar.",
+        "A branca cair apenas reposiciona a tacadeira.",
+        "Vence quem tiver mais bolas encaçapadas quando a mesa acabar."
+      ],
+      scoreLabel,
+    };
+  };
+
+  const renderPoolRuleCardMarkup = (formula = poolRuleFormula()) => `
+    <span>regra viva</span>
+    <strong>${escapeHtml(formula.badge)}</strong>
+    <small>${escapeHtml(formula.target)}</small>
+    <small>${escapeHtml(formula.score)}</small>
+    <button type="button" data-pool-rules-toggle>Manual</button>
+  `;
+
+  const renderPoolRuleModalMarkup = (formula = poolRuleFormula()) => `
+    <span class="ppg-kicker">${escapeHtml(formula.title)}</span>
+    <h3>${escapeHtml(formula.badge)}</h3>
+    <p>${escapeHtml(formula.target)}</p>
+    <ul>
+      ${formula.manual.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}
+    </ul>
+    <p><strong>Pontuação:</strong> ${escapeHtml(formula.score)}</p>
+    <p><strong>Vitória:</strong> ${escapeHtml(formula.win)}</p>
+  `;
+
+  const syncPoolRuleUi = (formula = poolRuleFormula()) => {
+    if (refs.poolRuleCard) refs.poolRuleCard.innerHTML = renderPoolRuleCardMarkup(formula);
+    if (refs.poolRuleModalBody) refs.poolRuleModalBody.innerHTML = renderPoolRuleModalMarkup(formula);
+    if (refs.poolRuleModal) refs.poolRuleModal.hidden = !local.poolRulesOpen;
+  };
+
+  const currentPoolRuleFormula = () => {
+    if (gameState.pvpGameId === "pool" && gameState.pvpMatch?.poolState) {
+      const seat = gameState.pvpSeat || "playerOne";
+      return poolRuleFormula({
+        state: gameState.pvpMatch.poolState,
+        seat,
+        rivalSeat: seat === "playerOne" ? "playerTwo" : "playerOne",
+      });
+    }
+    return poolRuleFormula({ demo: local.poolDemoState || { ruleModeId: "livre", scoreLabel: "BOLAS" } });
+  };
+
+  const poolPlayerRuleLabel = (formula = poolRuleFormula(), group = "") => {
+    const currentGroup = String(group || "").toUpperCase();
+    if (formula.mode === "parimpar") return currentGroup || "DEFINE GRUPO";
+    if (formula.mode === "brasileira") return formula.badge;
+    return "QUALQUER BOLA";
+  };
+
+  const renderPoolEffectMarkup = (active = "centro") => {
+    const current = normalizePoolSpin(active);
+    return `
+      <span>efeito</span>
+      <div class="ppg-pool-effect-pad" role="group" aria-label="Efeito da bola branca">
+        ${POOL_SPINS.map((spin) => `
+          <button type="button" class="${spin.id === current ? "is-active" : ""}" data-dom-pool-spin="${spin.id}" aria-label="Efeito ${spin.label}">
+            <b>${spin.mark}</b><small>${spin.label}</small>
+          </button>
+        `).join("")}
+      </div>
+    `;
+  };
+
+  const valePoolFrameSrc = (mode = "demo", matchId = "") => {
+    const params = new URLSearchParams({
+      mode: mode === "pvp" ? "pvp" : "demo",
+      source: "pubpaid",
+      v: window.pubpaidBuildVersion || "dev"
+    });
+    if (matchId) params.set("match", matchId);
+    return `./games/vale-pool/index.html?${params.toString()}`;
+  };
+
+  const renderValePoolPlayerBadge = (player = {}, label = "", score = 0, active = false, side = "", ruleLabel = "") => {
+    const picture = String(player?.picture || "");
+    return `
+      <aside class="ppg-vale-pool-player${active ? " is-active" : ""}" ${side ? `data-vale-pool-side="${escapeHtml(side)}"` : ""}>
+        ${player?.robot
+          ? `<span class="ppg-vale-pool-robot" aria-hidden="true"><i></i></span>`
+          : picture
+          ? `<img src="${escapeHtml(picture)}" alt="">`
+          : `<span>${escapeHtml(initialFor(player))}</span>`}
+        <strong>${escapeHtml(displayNameFor(player))}</strong>
+        <small data-vale-pool-status>${escapeHtml(label)}</small>
+        <small class="ppg-vale-pool-rule-tag" data-vale-pool-rule>${escapeHtml(ruleLabel)}</small>
+        <b class="ppg-vale-pool-count"><em data-vale-pool-score>${Number(score || 0)}</em><small data-vale-pool-score-label>BOLAS</small></b>
+        <button type="button" data-pool-rules-toggle>REGRAS</button>
+      </aside>
+    `;
+  };
+
+  const updateValePoolDemoChrome = (payload = {}) => {
+    if (!isPoolDemoActive() || refs.pool?.dataset.render !== "prototype") return;
+    local.poolDemoState = payload;
+    const formula = poolRuleFormula({ demo: payload });
+    const playerCard = refs.poolStage?.querySelector('[data-vale-pool-side="player"]');
+    const iaCard = refs.poolStage?.querySelector('[data-vale-pool-side="ia"]');
+    const playerScore = Number(payload.playerBalls ?? payload.playerScore ?? 0);
+    const aiScore = Number(payload.aiBalls ?? payload.aiScore ?? 0);
+    const scoreLabel = String(payload.scoreLabel || "BOLAS").toUpperCase();
+    if (playerCard) {
+      playerCard.classList.toggle("is-active", payload.turn !== "ia");
+      const score = playerCard.querySelector("[data-vale-pool-score]");
+      const scoreLabelNode = playerCard.querySelector("[data-vale-pool-score-label]");
+      const status = playerCard.querySelector("[data-vale-pool-status]");
+      const rule = playerCard.querySelector("[data-vale-pool-rule]");
+      if (score) score.textContent = String(playerScore);
+      if (scoreLabelNode) scoreLabelNode.textContent = scoreLabel;
+      if (rule) rule.textContent = formula.badge;
+      if (status) status.textContent = payload.winner
+        ? (payload.winner === "player" ? "venceu" : "fim")
+        : payload.setupPhase && payload.setupPhase !== "done" ? "moeda"
+        : payload.turn === "ia" ? "aguardando" : "sua vez";
+    }
+    if (iaCard) {
+      iaCard.classList.toggle("is-active", payload.turn === "ia");
+      const score = iaCard.querySelector("[data-vale-pool-score]");
+      const scoreLabelNode = iaCard.querySelector("[data-vale-pool-score-label]");
+      const status = iaCard.querySelector("[data-vale-pool-status]");
+      const rule = iaCard.querySelector("[data-vale-pool-rule]");
+      if (score) score.textContent = String(aiScore);
+      if (scoreLabelNode) scoreLabelNode.textContent = scoreLabel;
+      if (rule) rule.textContent = payload.aiGroup || (formula.mode === "parimpar" && payload.playerGroup ? (payload.playerGroup === "PAR" ? "IMPAR" : "PAR") : formula.title);
+      if (status) status.textContent = payload.winner
+        ? (payload.winner === "ia" ? "venceu" : "fim")
+        : payload.setupPhase && payload.setupPhase !== "done" ? "moeda"
+        : payload.turn === "ia" ? "mirando" : "ia treino";
+    }
+    updateGameState({
+      prompt: `${payload.message || "Treino Vale Pool"} | dentro ${payload.ballsInside ?? "-"} fora ${payload.ballsOutside ?? "-"} jogadas ${payload.shots ?? "-"}`
+    });
+    syncPoolRuleUi(formula);
+  };
+
+  const poolSetupInfo = (match = {}) => {
+    const setup = match?.poolState?.setup || {};
+    return {
+      complete: Boolean(setup.complete),
+      phase: String(setup.phase || ""),
+      winnerSeat: String(setup.winnerSeat || ""),
+      chooserSeat: String(setup.chooserSeat || ""),
+      starterSeat: String(setup.starterSeat || ""),
+      winnerChoice: String(setup.winnerChoice || setup.choice || ""),
+      ruleMode: String(setup.ruleMode || match?.poolState?.ruleMode || "livre"),
+      tutorialReady: {
+        playerOne: Boolean(setup.tutorialReady?.playerOne),
+        playerTwo: Boolean(setup.tutorialReady?.playerTwo),
+      },
+      choice: String(setup.choice || ""),
+    };
+  };
+
+  const renderPoolSetupControls = (match = {}, seat = "") => {
+    const setup = poolSetupInfo(match);
+    if (!match?.id || setup.complete) return "";
+    const canChoose = match.status === "active" && setup.chooserSeat === seat;
+    const chooserName = displayNameFor(match[setup.chooserSeat] || {});
+    const ownName = displayNameFor(match[seat] || {}) || "Voce";
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const rivalName = displayNameFor(match[rivalSeat] || {}) || "Rival";
+    const tutorial = poolRuleTutorial(setup.ruleMode || match?.poolState?.ruleMode || "livre");
+    if (setup.phase === "tutorial") {
+      const ready = Boolean(setup.tutorialReady?.[seat]);
+      return `
+        <div class="ppg-vale-pool-setup is-tutorial" data-pool-setup>
+          <strong>${escapeHtml(tutorial.title)}</strong>
+          <span>${escapeHtml(`Saida: ${displayNameFor(match[setup.starterSeat] || {}) || "jogador"}`)}</span>
+          <small>${tutorial.lines.map(escapeHtml).join("<br>")}</small>
+          ${ready ? `<small>Voce ja confirmou. Aguardando o outro jogador.</small>` : `
+            <div class="ppg-vale-pool-setup-actions is-compact">
+              <button type="button" class="primary" data-dom-pool-setup-action="tutorial">Começar</button>
+            </div>
+          `}
+        </div>
+      `;
+    }
+    let actions = "";
+    let helper = "";
+    let lead = canChoose
+      ? "Voce ganhou: escolha uma parte."
+      : `${chooserName || "Rival"} esta escolhendo.`;
+    if (canChoose && setup.phase === "winner-choice") {
+      actions = `
+        <button type="button" class="primary" data-dom-pool-setup-action="start">Ser primeiro</button>
+        <button type="button" data-dom-pool-setup-action="mode" data-dom-pool-setup-mode="livre">Livre</button>
+        <button type="button" data-dom-pool-setup-action="mode" data-dom-pool-setup-mode="brasileira">Brasileira</button>
+        <button type="button" data-dom-pool-setup-action="mode" data-dom-pool-setup-mode="parimpar">Par/Impar</button>
+      `;
+      helper = "Se escolher ser primeiro, o rival escolhe o modo. Se escolher modo, o rival escolhe quem sai.";
+    } else if (canChoose && setup.phase === "loser-mode") {
+      lead = "O vencedor escolheu ser primeiro. Escolha o modo.";
+      actions = `
+        <button type="button" data-dom-pool-setup-action="mode" data-dom-pool-setup-mode="livre">Livre</button>
+        <button type="button" data-dom-pool-setup-action="mode" data-dom-pool-setup-mode="brasileira">Brasileira</button>
+        <button type="button" data-dom-pool-setup-action="mode" data-dom-pool-setup-mode="parimpar">Par/Impar</button>
+      `;
+      helper = "Depois abre o tutorial antes da mesa.";
+    } else if (canChoose && setup.phase === "loser-start") {
+      lead = "O vencedor escolheu o modo. Escolha quem começa.";
+      actions = `
+        <button type="button" class="primary" data-dom-pool-setup-action="starter" data-dom-pool-setup-starter="${escapeHtml(seat)}">${escapeHtml(ownName)} começa</button>
+        <button type="button" data-dom-pool-setup-action="starter" data-dom-pool-setup-starter="${escapeHtml(rivalSeat)}">${escapeHtml(rivalName)} começa</button>
+      `;
+      helper = "Depois abre o tutorial antes da mesa.";
+    }
+    return `
+      <div class="ppg-vale-pool-setup" data-pool-setup>
+        <strong>Moeda da saida</strong>
+        <span>${escapeHtml(lead)}</span>
+        ${canChoose && actions ? `
+          <div class="ppg-vale-pool-setup-actions">
+            ${actions}
+          </div>
+          <small>${escapeHtml(helper)}</small>
+        ` : `<small>Aguardando a decisao da moeda.</small>`}
+      </div>
+    `;
+  };
+
+  const poolSetupStatusText = (setup = {}, seat = "", match = {}) => {
+    if (setup.phase === "tutorial") {
+      const ready = Boolean(setup.tutorialReady?.[seat]);
+      return ready
+        ? "Tutorial confirmado. Aguardando o outro jogador apertar começar."
+        : "Leia o tutorial do modo e aperte Começar para liberar a mesa.";
+    }
+    if (setup.chooserSeat === seat) {
+      if (setup.phase === "loser-mode") return "O vencedor escolheu sair primeiro. Escolha a modalidade.";
+      if (setup.phase === "loser-start") return "O vencedor escolheu a modalidade. Escolha quem começa.";
+      return "Moeda sua: escolha ser primeiro ou escolher a modalidade.";
+    }
+    const chooserName = displayNameFor(match[setup.chooserSeat] || {}) || "Rival";
+    return `${chooserName} esta decidindo a parte que falta.`;
+  };
+
+  const renderValePoolPrototypeMarkup = ({ mode = "demo", match = null, seat = "" } = {}) => {
+    const pvp = mode === "pvp" && match && seat;
+    const demo = !pvp;
+    const state = match?.poolState || {};
+    const setup = pvp ? poolSetupInfo(match) : { complete: true };
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const ownScore = Number(state[`${seat}Score`] || 0);
+    const rivalScore = Number(state[`${rivalSeat}Score`] || 0);
+    const demoPlayer = currentPvpPlayer() || gameState.googleUser || window.CatalogoGoogleAuth?.getUser?.() || { name: "Jogador" };
+    const demoRobot = { name: "Robo IA", robot: true };
+    const formula = pvp
+      ? poolRuleFormula({ state, seat, rivalSeat })
+      : poolRuleFormula({ demo: local.poolDemoState || { ruleModeId: "livre", scoreLabel: "BOLAS" } });
+    const ownRuleLabel = pvp
+      ? poolPlayerRuleLabel(formula, state[`${seat}Group`])
+      : poolPlayerRuleLabel(formula, local.poolDemoState?.playerGroup);
+    const rivalRuleLabel = pvp
+      ? poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`])
+      : poolPlayerRuleLabel(formula, local.poolDemoState?.aiGroup);
+    const shotLabel =
+      local.poolControlStage === "power"
+        ? "Tacar"
+        : local.poolControlStage === "locked"
+          ? "Iniciar força"
+          : "Travar mira";
+    const disabled = pvp && match.status === "active" && match.turn === seat ? "" : "disabled";
+    return `
+      <div class="ppg-vale-pool-shell${pvp ? " is-pvp" : " is-demo"}">
+        ${pvp ? renderValePoolPlayerBadge(match[seat], "voce", ownScore, match.turn === seat, "player", ownRuleLabel) : renderValePoolPlayerBadge(demoPlayer, "sua vez", 0, true, "player", ownRuleLabel)}
+        <iframe
+          class="ppg-vale-pool-frame"
+          data-vale-pool-frame
+          title="Vale Pool"
+          src="${escapeHtml(valePoolFrameSrc(pvp ? "pvp" : "demo", match?.id || ""))}"
+          allow="autoplay; fullscreen"
+        ></iframe>
+        ${pvp ? renderValePoolPlayerBadge(match[rivalSeat], "rival", rivalScore, match.turn === rivalSeat, "rival", rivalRuleLabel) : renderValePoolPlayerBadge(demoRobot, "ia treino", 0, false, "ia", rivalRuleLabel)}
+        ${demo ? `
+          <div class="ppg-vale-pool-controls is-demo-help">
+            <span>Mouse mira</span>
+            <span>1-5 ou bola de efeito</span>
+            <span>Clique para tacar</span>
+          </div>
+        ` : ""}
+        ${pvp && !setup.complete ? renderPoolSetupControls(match, seat) : ""}
+        ${pvp && setup.complete ? `
+          <div class="ppg-vale-pool-controls">
+            <button type="button" data-dom-pool-aim-step="-5" ${disabled}>‹</button>
+            <input type="range" min="-180" max="180" step="5" value="${local.poolAim}" data-pool-aim ${local.poolControlStage === "aim" ? disabled : "disabled"}>
+            <button type="button" data-dom-pool-aim-step="5" ${disabled}>›</button>
+            <div class="ppg-vale-pool-spin">
+              ${POOL_SPINS.map((spin) => `<button type="button" class="${spin.id === local.poolSpin ? "is-active" : ""}" data-dom-pool-spin="${spin.id}" ${local.poolControlStage === "aim" ? disabled : "disabled"}>${spin.mark}</button>`).join("")}
+            </div>
+            <button type="button" class="primary" data-pool-shoot ${disabled}>${shotLabel}</button>
+          </div>
+        ` : ""}
+      </div>
+    `;
+  };
+
+  const syncValePoolPrototypeFrame = (match = null, seat = "") => {
+    const frame = refs.poolStage?.querySelector("[data-vale-pool-frame]");
+    if (!frame || !match || !seat) return;
+    const state = match.poolState || {};
+    const setup = poolSetupInfo(match);
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const canAct = match.status === "active" && match.turn === seat && setup.complete;
+    const payload = {
+      type: "vale-pool:state",
+      poolState: state,
+      seat,
+      canAct,
+      ownScore: Number(state[`${seat}Score`] || 0),
+      rivalScore: Number(state[`${rivalSeat}Score`] || 0),
+      moveCount: Number(match.moveCount || 0),
+      aim: local.poolAim,
+      power: local.poolPower,
+      spin: local.poolSpin,
+      ruleMode: state.ruleMode || "livre",
+      scoreLabel: state.scoreLabel || "BOLAS",
+      setupPhase: setup.complete ? "done" : setup.phase || "choice",
+      message: !setup.complete
+        ? setup.phase === "tutorial" ? "TUTORIAL: APERTE COMEÇAR" : setup.chooserSeat === seat ? "MOEDA: SUA ESCOLHA" : "MOEDA: AGUARDANDO RIVAL"
+        : match.status === "active" && match.turn === seat ? "SUA VEZ" : "VEZ DO RIVAL"
+    };
+    const deliver = () => frame.contentWindow?.postMessage(payload, window.location.origin);
+    if (frame.dataset.valePoolBound !== "1") {
+      frame.dataset.valePoolBound = "1";
+      frame.addEventListener("load", deliver, { once: true });
+    }
+    window.setTimeout(deliver, 30);
+    window.setTimeout(deliver, 180);
+  };
 
   const renderPoolTableMarkup = (match, seat) => {
     const state = match.poolState || {};
@@ -1142,25 +2092,27 @@ export function bindDomGameInterface(game) {
           : "Travar mira";
     const cue = balls.find((ball) => ball.cue || Number(ball.id) === 0) || { x: 25, y: 25 };
     const pockets = [
-      ["p1", 0, 0], ["p2", 50, 0], ["p3", 100, 0],
-      ["p4", 0, 100], ["p5", 50, 100], ["p6", 100, 100]
+      ["p1", 7.5, 12], ["p2", 50, 10], ["p3", 92.5, 12],
+      ["p4", 7.5, 88], ["p5", 50, 90], ["p6", 92.5, 88]
     ].map(([className, x, y]) => `<span class="ppg-pool-pocket ${className}" style="left:${x}%;top:${y}%"></span>`).join("");
     const ballMarkup = balls
       .filter((ball) => !ball.pocketed)
       .map((ball) => {
-        const x = clampUiNumber(ball.x, 0, 100, 50);
-        const y = clampUiNumber(Number(ball.y) * 2, 0, 100, 50);
+        const x = 8 + clampUiNumber(ball.x, 0, 100, 50) * 0.84;
+        const y = 12 + clampUiNumber(Number(ball.y) * 2, 0, 100, 50) * 0.76;
         const id = Number(ball.id) || 0;
         const label = ball.cue || id === 0 ? "" : id;
-        return `<span class="ppg-pool-ball${ball.cue || id === 0 ? " is-cue" : ""}" style="left:${x}%;top:${y}%;background:${safeBallColor(ball.color)}">${label}</span>`;
+        return `<span class="ppg-pool-ball${ball.cue || id === 0 ? " is-cue" : ""}" style="left:${x.toFixed(2)}%;top:${y.toFixed(2)}%;background:${safeBallColor(ball.color)}">${label}</span>`;
       }).join("");
-    const aimX = clampUiNumber(cue.x, 0, 100, 25);
-    const aimY = clampUiNumber(Number(cue.y) * 2, 0, 100, 50);
+    const aimX = 8 + clampUiNumber(cue.x, 0, 100, 25) * 0.84;
+    const aimY = 12 + clampUiNumber(Number(cue.y) * 2, 0, 100, 50) * 0.76;
     const last = state.lastShot || {};
+    const spin = normalizePoolSpin(local.poolSpin);
     return `
       <div class="ppg-dom-pvp-pool">
-        <div class="ppg-dom-pvp-pool-table" style="--pool-aim:${local.poolAim}deg;--cue-x:${aimX}%;--cue-y:${aimY}%">
+        <div class="ppg-dom-pvp-pool-table${last.pocketed?.length ? " has-pocket-fx" : ""}" data-spin="${spin}" style="--pool-aim:${local.poolAim}deg;--cue-x:${aimX.toFixed(2)}%;--cue-y:${aimY.toFixed(2)}%">
           ${pockets}
+          <span class="ppg-pool-fx-ring" aria-hidden="true"></span>
           <span class="ppg-pool-cue" aria-hidden="true"></span>
           <span class="ppg-pool-aim-line"></span>
           ${ballMarkup}
@@ -1184,6 +2136,8 @@ export function bindDomGameInterface(game) {
     if (refs.poolScore) refs.poolScore.textContent = `${state.playerScore || 0} x ${state.aiScore || 0}`;
     if (refs.poolRound) refs.poolRound.textContent = `tacada ${Math.min(state.round || 1, state.maxRounds || 12)}/${state.maxRounds || 12}`;
     if (refs.poolLast) refs.poolLast.textContent = state.phase === "finished" ? "Série encerrada." : "Mesa física ativa no salão.";
+    if (refs.poolPocketed) refs.poolPocketed.innerHTML = renderPoolPocketedMarkup(state);
+    if (refs.poolEffect) refs.poolEffect.innerHTML = renderPoolEffectMarkup(state.spin || "centro");
     if (refs.poolStage) refs.poolStage.innerHTML = "";
     local.poolRenderKey = "";
     setCheckersPlayerCard({
@@ -1255,7 +2209,9 @@ export function bindDomGameInterface(game) {
     }
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
     const state = match.poolState || {};
-    if (match.status !== "active" || match.turn !== seat) {
+    const setup = poolSetupInfo(match);
+    const setupPending = !setup.complete;
+    if (match.status !== "active" || match.turn !== seat || setupPending) {
       if (local.poolControlStage !== "aim" || local.poolPowerTimer) resetPvpPoolControls();
     }
     const isAbandoned = match.status === "abandoned";
@@ -1263,7 +2219,11 @@ export function bindDomGameInterface(game) {
     const abandonSeconds = secondsUntil(match.deadlineAt);
     const ownScore = Number(state[`${seat}Score`] || 0);
     const rivalScore = Number(state[`${rivalSeat}Score`] || 0);
+    const formula = poolRuleFormula({ state, seat, rivalSeat });
+    const ownRuleLabel = poolPlayerRuleLabel(formula, state[`${seat}Group`]);
+    const rivalRuleLabel = poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`]);
     refs.pool.dataset.mode = "pvp";
+    refs.pool.dataset.render = "prototype";
     if (refs.poolKicker) refs.poolKicker.textContent = "ranked pvp";
     if (refs.poolTitle) {
       refs.poolTitle.textContent =
@@ -1271,6 +2231,8 @@ export function bindDomGameInterface(game) {
           ? "Mesa encerrada"
           : isAbandoned
             ? abandonedBySelf ? "Reconectando mesa" : "Rival desconectou"
+            : setupPending
+              ? setup.chooserSeat === seat ? "Sua escolha na moeda" : "Moeda decidindo regra"
             : match.turn === seat ? "Sua vez" : "Vez do rival";
     }
     if (refs.poolStatus) {
@@ -1281,6 +2243,8 @@ export function bindDomGameInterface(game) {
             ? abandonedBySelf
               ? "Voce voltou a tempo. Reabrindo a mesa..."
               : `Rival caiu. Vitoria por W.O. em ${abandonSeconds}s se ele nao voltar.`
+            : setupPending
+              ? poolSetupStatusText(setup, seat, match)
             : match.turn === seat
               ? `${displayNameFor(match[seat])}, escolha mira e força.`
               : "Aguardando tacada do rival.";
@@ -1290,15 +2254,21 @@ export function bindDomGameInterface(game) {
     if (refs.poolLast) {
       refs.poolLast.textContent = state.lastShot?.at
         ? `${state.lastShot.pocketed?.length || 0} bola(s) na ultima tacada.`
-        : "Triangulo montado.";
+        : setupPending
+          ? setup.phase === "tutorial" ? "Tutorial antes da mesa." : "Moeda: escolha inicial."
+          : `${state.ruleLabel || "Livre"} montado.`;
     }
+    if (refs.poolPocketed) refs.poolPocketed.innerHTML = renderPoolPocketedMarkup(state);
+    if (refs.poolEffect) refs.poolEffect.innerHTML = renderPoolEffectMarkup(local.poolSpin);
+    syncPoolRuleUi(formula);
     const ballsKey = Array.isArray(state.balls)
       ? state.balls.map((ball) => [ball.id, ball.x, ball.y, ball.pocketed ? 1 : 0].join(":")).join("|")
       : "";
     renderStablePoolStage(
-      `pool:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolAim}:${local.poolPower}:${local.poolControlStage}`,
-      renderPoolTableMarkup(match, seat)
+      `pool-prototype:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.ruleMode || "livre"}:${setup.complete ? 1 : 0}:${setup.phase}:${setup.chooserSeat}:${setup.winnerChoice}:${setup.tutorialReady.playerOne ? 1 : 0}:${setup.tutorialReady.playerTwo ? 1 : 0}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${ballsKey}:${local.poolSpin}:${local.poolControlStage}`,
+      renderValePoolPrototypeMarkup({ mode: "pvp", match, seat })
     );
+    syncValePoolPrototypeFrame(match, seat);
     setCheckersPlayerCard({
       root: refs.poolSelf,
       initial: refs.poolSelfInitial,
@@ -1307,9 +2277,9 @@ export function bindDomGameInterface(game) {
       pieces: refs.poolSelfBalls
     }, match[seat] || currentPvpPlayer() || {}, {
       pieces: ownScore,
-      active: match.status === "active" && match.turn === seat,
+      active: match.status === "active" && match.turn === seat && !setupPending,
       connected: Boolean(match.presence?.[seat]?.connected ?? true),
-      label: "sua mesa"
+      label: setupPending && setup.chooserSeat === seat ? `moeda | ${ownRuleLabel}` : ownRuleLabel
     });
     setCheckersPlayerCard({
       root: refs.poolRival,
@@ -1319,9 +2289,9 @@ export function bindDomGameInterface(game) {
       pieces: refs.poolRivalBalls
     }, match[rivalSeat] || rivalPvpPlayer() || {}, {
       pieces: rivalScore,
-      active: match.status === "active" && match.turn === rivalSeat,
+      active: match.status === "active" && match.turn === rivalSeat && !setupPending,
       connected: Boolean(match.presence?.[rivalSeat]?.connected ?? true),
-      label: "online"
+      label: setupPending && setup.chooserSeat === rivalSeat ? `moeda | ${rivalRuleLabel}` : rivalRuleLabel
     });
     if (refs.forfeitPool) {
       refs.forfeitPool.hidden = false;
@@ -1330,7 +2300,7 @@ export function bindDomGameInterface(game) {
     }
     if (refs.poolShot) refs.poolShot.hidden = true;
     if (refs.poolTouchShot) {
-      refs.poolTouchShot.disabled = match.status !== "active" || match.turn !== seat;
+      refs.poolTouchShot.disabled = setupPending || match.status !== "active" || match.turn !== seat;
       refs.poolTouchShot.textContent =
         match.status === "finished"
           ? "Fim"
@@ -1359,6 +2329,7 @@ export function bindDomGameInterface(game) {
 
   const handlePvpPoolShot = (match) => {
     if (!match?.id || match.status !== "active" || match.turn !== gameState.pvpSeat) return;
+    if (!poolSetupInfo(match).complete) return;
     if (local.poolControlStage === "aim") {
       local.poolControlStage = "locked";
       local.poolPower = 0.18;
@@ -1374,7 +2345,7 @@ export function bindDomGameInterface(game) {
       return;
     }
     stopPvpPoolPowerMeter();
-    shootPool(match.id, local.poolAim, local.poolPower).then((payload) => {
+    shootPool(match.id, local.poolAim, local.poolPower, local.poolSpin).then((payload) => {
       if (payload?.ok) {
         resetPvpPoolControls();
         routePvpState(payload);
@@ -1410,6 +2381,7 @@ export function bindDomGameInterface(game) {
     const seat = demoMode ? "playerOne" : gameState.pvpSeat;
     const gameId = demoMode ? local.demoTable?.gameId : gameState.pvpGameId || local.selectedGame;
     if (!match || !seat || !refs.table) return;
+    refs.table.dataset.game = gameId || "";
     if (match.status === "finished") {
       finishGenericMatchIfNeeded(match, gameId, seat);
       return;
@@ -1530,12 +2502,29 @@ export function bindDomGameInterface(game) {
       `);
     } else if (gameId === "dicecups") {
       const state = match.diceState || {};
+      const dice = Array.isArray(state.dice) ? state.dice : [0, 0];
+      const total = Number(state.total || dice.reduce((sum, value) => sum + Number(value || 0), 0));
       refs.tableScore.textContent = `${state.playerOneScore || 0} x ${state.playerTwoScore || 0}`;
       renderStableTableBody(
-        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${JSON.stringify(state.dice || [])}`,
+        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${JSON.stringify(dice)}:${total}`,
         `
-        <div class="ppg-dice-cups"><span>${state.dice?.[0] || "?"}</span><span>${state.dice?.[1] || "?"}</span></div>
-        <div class="ppg-number-grid">${Array.from({ length: 11 }, (_, index) => index + 2).map((value) => `<button type="button" data-dice-guess="${value}" ${match.status !== "active" || match.turn !== seat ? "disabled" : ""}>${value}</button>`).join("")}</div>
+        <section class="ppg-dice-table">
+          <div class="ppg-dice-backdrop">
+            <div class="ppg-dice-cup is-left"><span></span></div>
+            <div class="ppg-dice-cups" aria-live="polite">
+              ${renderDieFace(dice[0], 0)}
+              ${renderDieFace(dice[1], 1)}
+            </div>
+            <div class="ppg-dice-cup is-right"><span></span></div>
+          </div>
+          <div class="ppg-dice-total">
+            <span>soma revelada</span>
+            <strong>${total || "?"}</strong>
+          </div>
+          <div class="ppg-number-grid" aria-label="Escolha a soma dos dados">
+            ${Array.from({ length: 11 }, (_, index) => index + 2).map((value) => `<button type="button" data-dice-guess="${value}" ${match.status !== "active" || match.turn !== seat ? "disabled" : ""}>${value}</button>`).join("")}
+          </div>
+        </section>
       `);
     } else if (gameId === "truco") {
       const state = match.trucoState || {};
@@ -1566,11 +2555,19 @@ export function bindDomGameInterface(game) {
         </section>
       `);
     } else if (gameId === "chess") {
-      const state = match.chessState || {};
-      refs.tableScore.textContent = `${match.moveCount || 0} lances`;
+      const state = decorateChessState(match.chessState || {});
+      match.chessState = state;
+      const turnSeat = chessSeatForColor(state, state.turnColor);
+      refs.tableScore.textContent = `${state.history?.length || match.moveCount || 0} lances`;
+      refs.tableStatus.textContent = getChessTurnSummary(match, seat, demoMode);
       renderStableTableBody(
-        `${gameId}:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount || 0}:${state.fen || ""}:${local.chessSelected}`,
-        `<div class="ppg-dom-chess-board">${renderChessBoardMarkup(match, seat)}</div><p class="ppg-table-note">${state.history?.slice?.(-1)?.[0]?.san ? `Ultimo lance: ${state.history.slice(-1)[0].san}` : "Selecione uma peça e depois o destino."}</p>`
+        `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}`,
+        `<section class="ppg-chess-arena">
+          <div class="ppg-chess-board-stage">
+            <div class="ppg-dom-chess-board">${renderChessBoardMarkup(match, seat)}</div>
+          </div>
+          <aside class="ppg-chess-sidecar">${renderChessGuidanceMarkup(match, seat, demoMode)}</aside>
+        </section>`
       );
     }
 
@@ -1601,12 +2598,30 @@ export function bindDomGameInterface(game) {
     }
     if (payload.state === "active" || payload.state === "abandoned") {
       const gameId = payload.gameId || gameState.pvpGameId || local.selectedGame;
-      setPanel(gameId === "checkers" ? "checkers" : gameId === "pool" ? "pool" : "table");
-      game.scene.stop("game-lobby-scene");
-      game.scene.stop("pool-game-scene");
-      if (gameId === "checkers") renderPvpCheckers();
-      else if (gameId === "pool") renderPvpPool();
-      else renderPvpTable();
+      const matchKey = `${gameId}:${payload.match?.id || gameState.pvpMatch?.id || ""}:${payload.seat || gameState.pvpSeat || ""}`;
+      const enterPanel = () => {
+        setPanel(gameId === "checkers" ? "checkers" : gameId === "pool" ? "pool" : "table");
+        game.scene.stop("game-lobby-scene");
+        game.scene.stop("pool-game-scene");
+        if (gameId === "checkers") renderPvpCheckers();
+        else if (gameId === "pool") renderPvpPool();
+        else renderPvpTable();
+      };
+      if (payload.state === "active" && matchKey && local.pvpIntroMatchKey !== matchKey) {
+        local.pvpIntroMatchKey = matchKey;
+        local.pvpIntroPendingKey = matchKey;
+        window.clearTimeout(local.pvpIntroTimer);
+        showGameLoading(gameId, "pvp");
+        local.pvpIntroTimer = window.setTimeout(() => {
+          local.pvpIntroTimer = null;
+          local.pvpIntroPendingKey = "";
+          enterPanel();
+          emitGameSound("ready", gameId);
+        }, 920);
+        return;
+      }
+      if (local.pvpIntroPendingKey === matchKey) return;
+      enterPanel();
       return;
     }
     if (payload.state === "idle") showLobby();
@@ -1622,10 +2637,15 @@ export function bindDomGameInterface(game) {
 
   const startRealPvpGame = async (gameId = "checkers") => {
     local.selectedGame = gameId;
+    game.events.emit("pubpaid:music-zone", gameAudioZone(gameId));
     if (gameId === "checkers") resetDemoCheckersState();
     if (gameId === "pool") resetDemoPoolState();
     local.pvpHeld = [true, true, true, true, true];
     local.chessSelected = "";
+    local.pvpIntroMatchKey = "";
+    local.pvpIntroPendingKey = "";
+    window.clearTimeout(local.pvpIntroTimer);
+    local.pvpIntroTimer = null;
     resetPvpPoolControls();
     refs.matchmakingGame.textContent = gameLabel(gameId);
     refs.matchmakingStatus.textContent = "Procurando jogador real com aposta equivalente.";
@@ -1656,6 +2676,44 @@ export function bindDomGameInterface(game) {
   };
 
   const startRealCheckers = () => startRealPvpGame("checkers");
+
+  const startDemoFlow = (gameId = "checkers") => {
+    if (gameId === "checkers") {
+      launchGame(gameId, "demo", startDemoCheckers);
+    } else if (gameId === "pool") {
+      launchGame(gameId, "demo", startDemoPool);
+    } else if (PVP_GAMES.has(gameId)) {
+      launchGame(gameId, "demo", () => startDemoTable(gameId));
+    } else {
+      showAccessBlock("unavailable");
+    }
+  };
+
+  const startPvpFlow = async (gameId = "pool", sourceButton = null) => {
+    local.selectedGame = gameId;
+    if (PVP_GAMES.has(gameId) && isRealPvpEligible(gameId)) {
+      void startRealPvpGame(gameId);
+      return;
+    }
+    if (!PVP_GAMES.has(gameId)) {
+      showAccessBlock("unavailable");
+      return;
+    }
+    if (!isLoggedIn()) {
+      showAccessBlock("pvp-only");
+      return;
+    }
+    if (sourceButton) sourceButton.disabled = true;
+    if (refs.lobbyState) refs.lobbyState.textContent = "atualizando saldo";
+    updateGameState({ prompt: `Atualizando saldo aprovado antes de abrir ${gameLabel(gameId)}.` });
+    await syncPubpaidAccount();
+    if (sourceButton) sourceButton.disabled = false;
+    if (isRealPvpEligible(gameId)) {
+      void startRealPvpGame(gameId);
+    } else {
+      showAccessBlock("pvp-only");
+    }
+  };
 
   const handleCheckersCell = (cell) => {
     const row = Number(cell.dataset.row);
@@ -1725,46 +2783,42 @@ export function bindDomGameInterface(game) {
     handleCheckersCell(cell);
   }, { passive: false });
 
+  window.addEventListener("message", (event) => {
+    if (event.origin !== window.location.origin) return;
+    if (event.data?.type !== "vale-pool:demo-state") return;
+    updateValePoolDemoChrome(event.data);
+  });
+
   document.addEventListener("click", async (event) => {
     const demoButton = event.target.closest("[data-dom-start-demo]");
     if (demoButton) {
       const demoGame = demoButton.dataset.domStartDemo || "checkers";
-      if (demoGame === "checkers") {
-        startDemoCheckers();
-      } else if (demoGame === "pool") {
-        startDemoPool();
-      } else if (PVP_GAMES.has(demoGame)) {
-        startDemoTable(demoGame);
-      } else {
-        showAccessBlock("unavailable");
-      }
+      startDemoFlow(demoGame);
       return;
     }
 
     const startButton = event.target.closest("[data-dom-start-game]");
     if (startButton) {
       const nextGame = startButton.dataset.domStartGame || "pool";
-      local.selectedGame = nextGame;
-      if (PVP_GAMES.has(nextGame) && isRealPvpEligible(nextGame)) {
-        startRealPvpGame(nextGame);
-      } else if (PVP_GAMES.has(nextGame)) {
-        if (!isLoggedIn()) {
-          showAccessBlock("pvp-only");
-          return;
-        }
-        startButton.disabled = true;
-        if (refs.lobbyState) refs.lobbyState.textContent = "atualizando saldo";
-        updateGameState({ prompt: `Atualizando saldo aprovado antes de abrir ${gameLabel(nextGame)}.` });
-        await syncPubpaidAccount();
-        startButton.disabled = false;
-        if (isRealPvpEligible(nextGame)) {
-          startRealPvpGame(nextGame);
-        } else {
-          showAccessBlock("pvp-only");
-        }
-      } else {
-        showAccessBlock("unavailable");
-      }
+      await startPvpFlow(nextGame, startButton);
+      return;
+    }
+
+    const modeDemoButton = event.target.closest("[data-dom-mode-demo]");
+    if (modeDemoButton) {
+      startDemoFlow(modeDemoButton.dataset.domModeDemo || refs.modePicker?.dataset.game || "pool");
+      return;
+    }
+
+    const modePvpButton = event.target.closest("[data-dom-mode-pvp]");
+    if (modePvpButton) {
+      await startPvpFlow(modePvpButton.dataset.domModePvp || refs.modePicker?.dataset.game || "pool", modePvpButton);
+      return;
+    }
+
+    const gameCard = event.target.closest("[data-dom-game-card]");
+    if (gameCard && !event.target.closest("button")) {
+      showModePicker(gameCard.dataset.domGameCard || "pool");
       return;
     }
     if (event.target.closest("[data-dom-open-lobby]")) {
@@ -1790,23 +2844,71 @@ export function bindDomGameInterface(game) {
       return;
     }
     if (event.target.closest("[data-dom-pool-shot]")) {
+      if (isPoolDemoActive()) return;
+      emitGameSound("action", "pool");
       game.events.emit("pubpaid:pool-dom-shot");
+      return;
+    }
+    if (event.target.closest("[data-pool-rules-toggle]")) {
+      local.poolRulesOpen = true;
+      syncPoolRuleUi(currentPoolRuleFormula());
+      emitGameSound("select", "pool");
+      return;
+    }
+    if (event.target.closest("[data-pool-rules-close]") || (event.target === refs.poolRuleModal && refs.poolRuleModal)) {
+      local.poolRulesOpen = false;
+      syncPoolRuleUi(currentPoolRuleFormula());
+      emitGameSound("select", "pool");
+      return;
+    }
+    const poolSetupButton = event.target.closest("[data-dom-pool-setup-action]");
+    if (poolSetupButton) {
+      const match = gameState.pvpMatch;
+      if (!match?.id || gameState.pvpGameId !== "pool") return;
+      const action = String(poolSetupButton.dataset.domPoolSetupAction || "start");
+      const mode = String(poolSetupButton.dataset.domPoolSetupMode || "livre");
+      const starter = String(poolSetupButton.dataset.domPoolSetupStarter || "");
+      emitGameSound("ready", "pool");
+      poolSetupButton.disabled = true;
+      choosePoolSetup(match.id, action, mode, starter).then((payload) => {
+        if (payload?.ok) {
+          resetPvpPoolControls();
+          routePvpState(payload);
+        } else {
+          poolSetupButton.disabled = false;
+          if (refs.poolStatus) refs.poolStatus.textContent = payload?.error || "Nao foi possivel escolher agora.";
+        }
+      });
+      return;
+    }
+    const poolSpinButton = event.target.closest("[data-dom-pool-spin]");
+    if (poolSpinButton) {
+      const spin = normalizePoolSpin(poolSpinButton.dataset.domPoolSpin || "centro");
+      emitGameSound("select", "pool");
+      if (isPoolDemoActive()) {
+        return;
+      } else if (gameState.pvpGameId === "pool" && local.poolControlStage === "aim") {
+        local.poolSpin = spin;
+        renderPvpPool();
+      }
       return;
     }
     if (event.target.closest("[data-dom-pool-touch-shot]")) {
       if (isPoolDemoActive()) {
-        game.events.emit("pubpaid:pool-dom-shot");
         return;
       }
       const match = gameState.pvpMatch;
-      if (gameState.pvpGameId === "pool" && match?.id) handlePvpPoolShot(match);
+      if (gameState.pvpGameId === "pool" && match?.id) {
+        emitGameSound("action", "pool");
+        handlePvpPoolShot(match);
+      }
       return;
     }
     const poolAimStep = event.target.closest("[data-dom-pool-aim-step]");
     if (poolAimStep) {
       const step = Number(poolAimStep.dataset.domPoolAimStep || 0);
       if (isPoolDemoActive()) {
-        game.events.emit("pubpaid:pool-dom-aim-step", step);
+        return;
       } else if (gameState.pvpGameId === "pool" && local.poolControlStage === "aim") {
         local.poolAim = clampUiNumber(local.poolAim + step, -180, 180, 0);
         renderPvpPool();
@@ -1816,6 +2918,7 @@ export function bindDomGameInterface(game) {
     if (event.target.closest("[data-dom-pvp-ready]")) {
       const matchId = gameState.pvpMatch?.id || "";
       if (!matchId) return;
+      emitGameSound("ready", gameState.pvpGameId || local.selectedGame || "pool");
       refs.pvpReady.disabled = true;
       refs.pvpReady.textContent = "Confirmando...";
       confirmPvpReady(matchId, gameState.pvpGameId || local.selectedGame || "checkers").then((payload) => {
@@ -1849,8 +2952,8 @@ export function bindDomGameInterface(game) {
     if (event.target.closest("[data-dom-forfeit-pool]")) {
       const button = event.target.closest("[data-dom-forfeit-pool]");
       if (isPoolDemoActive()) {
-        game.scene.stop("pool-game-scene");
-        game.scene.start("pool-game-scene", { stake: 0, mode: "demo" });
+        local.poolRenderKey = "";
+        renderStablePoolStage(`vale-pool:demo:${Date.now()}`, renderValePoolPrototypeMarkup({ mode: "demo" }));
         return;
       }
       button.disabled = true;
@@ -1887,13 +2990,17 @@ export function bindDomGameInterface(game) {
     }
     if (event.target.closest("[data-pool-shoot]")) {
       const match = gameState.pvpMatch;
-      if (match?.id) handlePvpPoolShot(match);
+      if (match?.id) {
+        emitGameSound("action", "pool");
+        handlePvpPoolShot(match);
+      }
       return;
     }
     const pokerCard = event.target.closest("[data-poker-card]");
     if (pokerCard) {
       const index = Number(pokerCard.dataset.pokerCard);
       local.pvpHeld[index] = !local.pvpHeld[index];
+      emitGameSound("select", "poker");
       renderPvpTable();
       return;
     }
@@ -1909,10 +3016,14 @@ export function bindDomGameInterface(game) {
         state.playerTwoDrawUsed = true;
         state.deck = deck;
         local.demoTable.updatedAt = new Date().toISOString();
+        emitGameSound("action", "poker");
         renderPvpTable();
         return;
       }
-      if (matchId) drawPoker(matchId, local.pvpHeld).then((payload) => payload?.ok && routePvpState(payload));
+      if (matchId) {
+        emitGameSound("action", "poker");
+        drawPoker(matchId, local.pvpHeld).then((payload) => payload?.ok && routePvpState(payload));
+      }
       return;
     }
     const cards21Button = event.target.closest("[data-cards21-action]");
@@ -1931,10 +3042,14 @@ export function bindDomGameInterface(game) {
           state.playerOneState = "stood";
         }
         local.demoTable.updatedAt = new Date().toISOString();
+        emitGameSound(action === "hit" ? "card" : "ready", "cards21");
         renderPvpTable();
         return;
       }
-      if (matchId) playCards21Action(matchId, action).then((payload) => payload?.ok && routePvpState(payload));
+      if (matchId) {
+        emitGameSound(action === "hit" ? "card" : "ready", "cards21");
+        playCards21Action(matchId, action).then((payload) => payload?.ok && routePvpState(payload));
+      }
       return;
     }
     const diceButton = event.target.closest("[data-dice-guess]");
@@ -1949,11 +3064,15 @@ export function bindDomGameInterface(game) {
         state.total = a + b;
         state.playerOneScore = Number(state.playerOneScore || 0) + (guess === state.total ? 1 : 0);
         local.demoTable.updatedAt = new Date().toISOString();
+        emitGameSound(guess === state.total ? "win" : "dice", "dicecups");
         renderPvpTable();
         refs.tableStatus.textContent = guess === state.total ? "Você acertou a soma dos dados." : `Deu ${state.total}. Tente outra soma.`;
         return;
       }
-      if (matchId) guessDicecups(matchId, Number(diceButton.dataset.diceGuess)).then((payload) => payload?.ok && routePvpState(payload));
+      if (matchId) {
+        emitGameSound("dice", "dicecups");
+        guessDicecups(matchId, Number(diceButton.dataset.diceGuess)).then((payload) => payload?.ok && routePvpState(payload));
+      }
       return;
     }
     const trucoButton = event.target.closest("[data-truco-card]");
@@ -1969,34 +3088,74 @@ export function bindDomGameInterface(game) {
           state.table = [{ seat: "playerOne", card, at: new Date().toISOString() }];
           state.playerOneScore = Number(state.playerOneScore || 0) + 1;
           local.demoTable.updatedAt = new Date().toISOString();
+          emitGameSound("card", "truco");
           renderPvpTable();
         }
         return;
       }
-      if (matchId) playTrucoCard(matchId, Number(trucoButton.dataset.trucoCard)).then((payload) => payload?.ok && routePvpState(payload));
+      if (matchId) {
+        emitGameSound("card", "truco");
+        playTrucoCard(matchId, Number(trucoButton.dataset.trucoCard)).then((payload) => payload?.ok && routePvpState(payload));
+      }
       return;
     }
     const chessSquare = event.target.closest("[data-chess-square]");
     if (chessSquare) {
       const square = chessSquare.dataset.chessSquare || "";
-      const match = gameState.pvpMatch;
-      if (isTableDemoActive() && local.demoTable?.gameId === "chess") {
-        refs.tableStatus.textContent = "Treino visual de xadrez: use a mesa real para validar lances contra outro jogador.";
-        return;
-      }
-      if (!match || match.status !== "active" || match.turn !== gameState.pvpSeat) return;
+      const demoChess = isTableDemoActive() && local.demoTable?.gameId === "chess";
+      const match = demoChess ? local.demoTable : gameState.pvpMatch;
+      if (!match || match.status !== "active") return;
+      const state = decorateChessState(match.chessState || {});
+      match.chessState = state;
+      const turnSeat = chessSeatForColor(state, state.turnColor);
+      const canAct = demoChess || turnSeat === gameState.pvpSeat;
+      if (!canAct) return;
+      const legalMoves = state.legalMoves || [];
       if (!local.chessSelected) {
+        if (!legalMoves.some((move) => move.from === square)) {
+          updateGameState({ prompt: "Escolha uma peca com lance legal. A maozinha mostra uma opcao." });
+          renderPvpTable();
+          return;
+        }
         local.chessSelected = square;
+        emitGameSound("select", "chess");
         renderPvpTable();
         return;
       }
       const from = local.chessSelected;
-      local.chessSelected = "";
       if (from === square) {
+        local.chessSelected = "";
         renderPvpTable();
         return;
       }
-      moveChess(match.id, from, square, "q").then((payload) => payload?.ok ? routePvpState(payload) : renderPvpTable());
+      const selectedMoves = legalMoves.filter((move) => move.from === from);
+      const legalMove = selectedMoves.find((move) => move.to === square);
+      if (!legalMove) {
+        if (legalMoves.some((move) => move.from === square)) {
+          local.chessSelected = square;
+          emitGameSound("select", "chess");
+        } else {
+          updateGameState({ prompt: "Destino invalido. Use os pontos verdes ou escolha outra peca." });
+        }
+        renderPvpTable();
+        return;
+      }
+      local.chessSelected = "";
+      if (demoChess) {
+        const moveEntry = applyDemoChessMove(from, square, legalMove.promotion || "q");
+        if (moveEntry) emitGameSound(chessMoveCue(moveEntry), "chess");
+        renderPvpTable();
+        return;
+      }
+      moveChess(match.id, from, square, legalMove.promotion || "q").then((payload) => {
+        if (payload?.ok) {
+          emitGameSound(chessMoveCue(payload.match?.chessState?.lastMove || legalMove), "chess");
+          routePvpState(payload);
+        } else {
+          updateGameState({ prompt: payload?.error || "Nao foi possivel jogar esse lance." });
+          renderPvpTable();
+        }
+      });
       return;
     }
     const resetButton = event.target.closest("[data-dom-game-reset]");
@@ -2016,10 +3175,16 @@ export function bindDomGameInterface(game) {
   });
 
   document.addEventListener("keydown", (event) => {
+    if (!event.repeat && (event.code === "Enter" || event.code === "Space")) {
+      const gameCard = event.target.closest?.("[data-dom-game-card]");
+      if (gameCard && !event.target.closest?.("button")) {
+        event.preventDefault();
+        showModePicker(gameCard.dataset.domGameCard || "pool");
+        return;
+      }
+    }
     if (event.code !== "Space" || event.repeat) return;
     if (isPoolDemoActive()) {
-      event.preventDefault();
-      game.events.emit("pubpaid:pool-dom-shot");
       return;
     }
     if (gameState.pvpGameId === "pool" && gameState.pvpMatch?.status === "active") {
@@ -2120,8 +3285,8 @@ export function bindDomGameInterface(game) {
       ? match.poolState.balls.find((ball) => ball.cue || Number(ball.id) === 0)
       : null;
     if (!cue || !rect.width || !rect.height) return false;
-    const cueX = rect.left + (clampUiNumber(cue.x, 0, 100, 25) / 100) * rect.width;
-    const cueY = rect.top + (clampUiNumber(Number(cue.y) * 2, 0, 100, 50) / 100) * rect.height;
+    const cueX = rect.left + ((8 + clampUiNumber(cue.x, 0, 100, 25) * 0.84) / 100) * rect.width;
+    const cueY = rect.top + ((12 + clampUiNumber(Number(cue.y) * 2, 0, 100, 50) * 0.76) / 100) * rect.height;
     const dx = Number(event.clientX) - cueX;
     const dy = Number(event.clientY) - cueY;
     if (Math.hypot(dx, dy) < 8) return false;
@@ -2178,6 +3343,8 @@ export function bindDomGameInterface(game) {
       state.activeGameId === "pool" ||
       PVP_GAMES.has(state.activeGameId) ||
       state.lobbyPhase === "selecting" ||
+      state.lobbyPhase === "mode-select" ||
+      state.lobbyPhase === "loading" ||
       state.lobbyPhase === "blocked" ||
       state.lobbyPhase === "matching" ||
       state.lobbyPhase === "matched" ||
@@ -2191,6 +3358,8 @@ export function bindDomGameInterface(game) {
       refs.lobbyState.textContent =
         state.lobbyPhase === "matching" ? "buscando" :
         state.lobbyPhase === "matched" ? "oponente encontrado" :
+        state.lobbyPhase === "mode-select" ? "escolha de modo" :
+        state.lobbyPhase === "loading" ? "carregando" :
         state.lobbyPhase === "playing" ? "em mesa" :
         state.lobbyPhase === "finished" ? "resultado" :
         "pronto";
@@ -2200,6 +3369,8 @@ export function bindDomGameInterface(game) {
       if (!refs.result.hidden) return;
     }
     if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
+    if (state.lobbyPhase === "mode-select" && refs.modePicker && !refs.modePicker.hidden) return;
+    if (state.lobbyPhase === "loading" && refs.loading && !refs.loading.hidden) return;
     if (state.lobbyPhase === "blocked" && !refs.accessBlock.hidden) return;
     if (state.lobbyPhase === "blocked") {
       setPanel("access-block");
@@ -2207,7 +3378,7 @@ export function bindDomGameInterface(game) {
     }
     if (state.lobbyPhase === "matching" && !refs.matchmaking.hidden) return;
     if (state.currentScene === "game-lobby" || state.lobbyPhase === "selecting") {
-      if (refs.pool.hidden && refs.checkers.hidden && refs.table?.hidden !== false && refs.result.hidden && refs.matchmaking.hidden) setPanel("lobby");
+      if (refs.pool.hidden && refs.checkers.hidden && refs.table?.hidden !== false && refs.result.hidden && refs.matchmaking.hidden && refs.modePicker?.hidden !== false && refs.loading?.hidden !== false) setPanel("lobby");
     }
     if (state.activeGameId === "pool" && state.poolGame && isPoolDemoActive()) {
       if (refs.pool.hidden) setPanel("pool");

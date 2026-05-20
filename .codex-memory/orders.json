@@ -1,7 +1,276 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-18T23:18:00.000Z",
+  "lastUpdatedAt": "2026-05-19T22:05:00-05:00",
   "orders": [
+    {
+      "id": "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp",
+      "createdAt": "2026-05-19T21:10:00-05:00",
+      "updatedAt": "2026-05-19T22:05:00-05:00",
+      "status": "pool10-coin-complementary-tutorial-implemented",
+      "source": "chat",
+      "rawRequest": "Criar modos de jogo da sinuca, finalizar e entregar demo; salvar conhecimento nas skills de jogos.",
+      "summary": "Finalizar modalidades Livre, Brasileira e Par/Impar no Vale Pool/PubPaid com moeda inicial e escolha de comecar ou modalidade.",
+      "normalizedTasks": [
+        "implementar moeda inicial em Demo/IA e PvP",
+        "permitir ao vencedor escolher apenas uma parte: ser primeiro ou modalidade",
+        "permitir ao perdedor escolher a parte restante",
+        "abrir tutorial do modo antes da mesa",
+        "exigir confirmacao de tutorial dos dois jogadores no PvP",
+        "implementar Livre com bolas 1-9",
+        "implementar Brasileira com branca e sete coloridas oficiais",
+        "implementar Par/Impar com grupo e bola 15",
+        "bloquear tacada PvP ate escolha inicial acabar",
+        "salvar regras na skill game-director-general",
+        "validar build e capturar demo"
+      ],
+      "filesTouched": [
+        "games/vale-pool/game.js",
+        "games/vale-pool/progress.md",
+        "pubpaid-phaser/services/pvpService.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js",
+        ".codex-agents/game-director-system/projects/vale-pool.md",
+        "C:/Users/junio/.codex/skills/game-director-general/SKILL.md",
+        "C:/Users/junio/.codex/skills/game-director-general/references/pool-modalities.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-pool10-moeda.png",
+        ".codex-temp/vale-pool-pool10-tutorial.png",
+        ".codex-temp/vale-pool-pool10-mesa-liberada.png",
+        ".codex-temp/vale-pool-pool8-moeda.png",
+        ".codex-temp/vale-pool-pool8-moeda-tentativa2.png",
+        ".codex-temp/vale-pool-pool8-modalidades.png",
+        ".codex-temp/vale-pool-pool8-brasileira.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "modalidades",
+        "pvp",
+        "demo",
+        "game-director"
+      ],
+      "nextSteps": [
+        "validar PvP real em duas sessoes autenticadas diferentes quando houver contas/sessoes disponiveis",
+        "se o usuario aprovar, seguir para Damas sem redesenhar Sinuca"
+      ],
+      "notes": "Build local 20260519-standalone-pool10. Moeda animada e fluxo complementar implementados: vencedor escolhe uma parte, perdedor escolhe a restante; tutorial obrigatorio antes da mesa em Demo e PvP; PvP exige confirmacao dos dois jogadores antes de liberar tacada. PvP real ainda precisa validacao com duas sessoes autenticadas."
+    },
+    {
+      "id": "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool",
+      "createdAt": "2026-05-19T20:27:00-05:00",
+      "updatedAt": "2026-05-19T19:50:00-05:00",
+      "status": "standalone-pool5-pocket-score-responsive-validated",
+      "source": "chat",
+      "rawRequest": "Ache o prototipo fora de PubPaid, substitua o jogo velho de sinuca no PubPaid pelo novo, preserve Demo/PvP, adicione uma bola para branca + 9, mostre fotos Google no PvP e insira musica 16 bits relaxante estilo Super Nintendo.",
+      "summary": "Promover o prototipo Vale Pool Round2 aprovado para o PubPaid, sem redesenhar o jogo, mantendo Demo e PvP e adicionando musica 16-bit relaxante.",
+      "normalizedTasks": [
+        "localizar o prototipo aprovado fora de PubPaid",
+        "promover o prototipo para games/vale-pool",
+        "substituir a Sinuca antiga do PubPaid por iframe do prototipo",
+        "manter Demo sem ficha/carteira e PvP com estado do servidor",
+        "garantir 1 bola branca e 9 bolas de jogo",
+        "exibir fotos e nomes Google dos jogadores fora do jogo no PvP",
+        "adicionar musica relaxante 16-bit estilo SNES",
+        "validar com guard PubPaid e capturas Demo/PvP",
+        "corrigir iframe para aceitar mouse teclado e toque na Demo",
+        "adicionar Robo IA na Demo",
+        "mostrar jogador/IA fora do jogo sem interferir na arte",
+        "restaurar taco e pontilhado no retorno para MIRANDO",
+        "fazer ponto de batida da branca influenciar a fisica da tacada",
+        "trocar painel superior de pontuacao por painel de vez",
+        "mover placar do single player para os cartoes laterais",
+        "sincronizar cartoes laterais com estado da Demo",
+        "permitir ponto vermelho livre dentro da bola branca do HUD",
+        "recentralizar ponto vermelho no CENTRO",
+        "usar vetor do ponto vermelho na fisica da tacada",
+        "trocar pontuacao abstrata por contador explicito de bolas encaçapadas",
+        "corrigir caçapas para capturar antes do repique no trilho",
+        "aumentar escala responsiva do jogo no PubPaid desktop e mobile horizontal",
+        "reforçar força da tacada para a barra ter impacto visivel"
+      ],
+      "filesTouched": [
+        "games/vale-pool/index.html",
+        "games/vale-pool/styles.css",
+        "games/vale-pool/game.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-public-demo.png",
+        ".codex-temp/pubpaid-vale-pool-demo.png",
+        ".codex-temp/pubpaid-vale-pool-pvp.png",
+        ".codex-temp/pubpaid-vale-pool-demo-functional.png",
+        ".codex-temp/web-game-vale-pool/shot-1.png",
+        ".codex-temp/pubpaid-vale-pool-effect-control.png",
+        ".codex-temp/pubpaid-vale-pool-pocket-test.png"
+      ],
+      "tags": [
+        "jogo",
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "pvp",
+        "audio"
+      ],
+      "nextSteps": [
+        "usuario revisar pool5 no link local e capturas",
+        "validar PvP real em duas sessoes autenticadas se o fluxo financeiro for fechado"
+      ],
+      "notes": "Build 20260519-standalone-pool1. O PubPaid carrega o prototipo aprovado por iframe; PvP envia estado ao iframe por postMessage e mostra jogadores fora da area do jogo. Musica 16-bit inicia apos interacao por politica do navegador. Atualizacao standalone-pool3: Demo funcional com pointer-events auto, mira por mouse/teclado, efeito por HUD/teclas, tacada do jogador, resposta Robo IA, historico de jogadas, bolas dentro/fora e retorno para MIRANDO com taco/pontilhado visiveis. Fisica do efeito agora usa a direcao da tacada. Atualizacao standalone-pool4: painel PONTOS virou VEZ; placar fica nos cartoes laterais Jogador/Robo IA; iframe envia vale-pool:demo-state ao wrapper; ponto vermelho do efeito e livre dentro da branca do HUD, recentraliza no CENTRO e influencia fisica da tacada. Atualizacao standalone-pool5: pontuacao abstrata saiu da leitura principal; cartoes laterais mostram BOLAS encaçapadas; regra Bola 9 declarada; caçapas capturam antes do repique e teste dirigido confirmou a branca caindo/respawnando; escala/responsividade ampliada; força da tacada reforçada."
+    },
+    {
+      "id": "2026-05-19-vale-pool-round2-equipe-inteira-e-construcao",
+      "createdAt": "2026-05-19T18:40:51.142Z",
+      "updatedAt": "2026-05-19T14:39:08-05:00",
+      "status": "prototype-rack-pocket-floor-corrected",
+      "source": "chat",
+      "rawRequest": "NAO VC CHAMA TODOS, TODOS QUE ESDURAM PRA ISSO INCLUSIVE O AS 2 QUE NAO SAO AS PRINCIPAIS, AGORA PASSE TODO ESTUDO PRA ELAS E INICIE A CONTRUÇÃO ME DANDO UM RELATORIO DO QUE E POSSIVEL FAZER OU N; continue",
+      "summary": "Acionar a equipe inteira de jogos, repassar o estudo Side Pocket e iniciar a construcao do Vale Pool Round2 como prototipo isolado, com relatorio de possibilidades e limites.",
+      "normalizedTasks": [
+        "acionar game-director-general e equipe local de jogos por cadeiras",
+        "repassar study-notes do video Side Pocket para direcao, arte/HUD, gameplay/fisica, QA e conselho tecnico",
+        "construir prototipo isolado em .codex-temp/vale-pool-round2 sem tocar PubPaid",
+        "implementar HUD superior, mesa, mira, forca, spin, taco/mao, colisao, cacapa e estado textual",
+        "validar uma tacada completa com validate-round2.js",
+        "registrar o que e possivel agora e o que nao deve ser prometido ainda",
+        "corrigir caçapas grandes para caçapas menores dentro da mesa",
+        "tornar efeito configuravel por clique e teclas 1-5",
+        "trocar mao/taco vetoriais por blocos pixelados e adicionar feedback de jogo",
+        "corrigir comentarios do browser: caçapa fora, objeto sobreposto, faltam bolas, taco feio, efeito direcional e background",
+        "corrigir nova critica: rack inicial branca + bolas 1-9 em arranjo compacto",
+        "empurrar caçapas para dentro do feltro e reduzir boca visual",
+        "remover marcadores BONUS/NAO, estrela, garrafas, luminarias e props do background",
+        "separar texto do efeito da bola de efeito e colocar mensagem PRONTO em faixa propria",
+        "remover a mao ruim do taco e preservar taco pixelado aceitavel",
+        "corrigir caçapas para a borda interna/borracha da mesa, nao no verde",
+        "normalizar todas as bolas com o mesmo raio para o rack ficar coerente",
+        "empurrar o centro das caçapas mais para a parte marrom interna da mesa e validar que nao estao no verde nem fora"
+      ],
+      "filesTouched": [
+        ".codex-temp/vale-pool-round2/index.html",
+        ".codex-temp/vale-pool-round2/styles.css",
+        ".codex-temp/vale-pool-round2/game.js",
+        ".codex-temp/vale-pool-round2/validate-round2.js",
+        ".codex-temp/vale-pool-round2/progress.md",
+        ".codex-temp/vale-pool-round2/team-report.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-round2/team-report.md",
+        ".codex-temp/vale-pool-round2/index.html"
+      ],
+      "tags": [
+        "jogo",
+        "laboratorio",
+        "vale-pool",
+        "side-pocket",
+        "round2",
+        "equipe-jogos",
+        "sinuca"
+      ],
+      "nextSteps": [
+        "recarregar o navegador aberto no index.html",
+        "avaliar visual do rack 1-9 com bolas do mesmo tamanho e caçapas na parte marrom interna",
+        "decidir se o taco atual basta ou se precisa spritesheet desenhado em arquivo separado",
+        "seguir para touch/mobile depois da aprovação visual da mesa"
+      ],
+      "notes": "Nova critica do browser corrigida no prototipo isolado: branca + bolas 1-9 em rack compacto, caçapas mais internas, sem marcadores/props/plateia, efeito legivel no alto do painel, PRONTO em faixa propria, mao removida e background como piso de madeira. Corte extra: caçapas foram movidas para a parte marrom interna da mesa, nao no verde nem fora, com validacao de mesa.cacapas[].parte='marrom-interna'; todas as bolas usam o mesmo raio BALL_R=10 com validacao textual de r. Validação completa passou; revisar visual recarregando a aba aberta."
+    },
+    {
+      "id": "2026-05-19-side-pocket-video-study-resto-video",
+      "createdAt": "2026-05-19T18:03:52.341Z",
+      "updatedAt": "2026-05-19T18:03:52.341Z",
+      "status": "study-completed-local",
+      "source": "chat",
+      "rawRequest": "VEJA O RESTO DO VIDEO",
+      "summary": "Analisar o restante do video Side Pocket/SNES para corrigir a direcao visual e mecanica do laboratorio Vale Pool Club antes de reconstruir o jogo.",
+      "normalizedTasks": [
+        "extrair amostras do video inteiro",
+        "recortar a tela do jogo removendo overlay do video",
+        "montar prancha minuto a minuto",
+        "extrair sequencias curtas de tacadas para estudar taco, mira, forca, efeito e colisao",
+        "registrar criterios para a proxima reconstrucao funcional"
+      ],
+      "filesTouched": [
+        ".codex-temp/video-tools/package.json",
+        ".codex-temp/vale-pool-video-study/probe.json",
+        ".codex-temp/vale-pool-video-study/study-notes.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-video-study/contact-sheet-video-samples.png",
+        ".codex-temp/vale-pool-video-study/contact-sheet-game-crops.png",
+        ".codex-temp/vale-pool-video-study/contact-sheet-minute-crops.png",
+        ".codex-temp/vale-pool-video-study/seq-16m-cue-hand-contact.png",
+        ".codex-temp/vale-pool-video-study/seq-35m-cue-hand-contact.png",
+        ".codex-temp/vale-pool-video-study/seq-47m-end-shot-contact.png"
+      ],
+      "tags": [
+        "jogo",
+        "laboratorio",
+        "vale-pool-club",
+        "side-pocket",
+        "video-study",
+        "sinuca"
+      ],
+      "nextSteps": [
+        "reconstruir uma fatia pequena com HUD superior funcional e mesa limpa",
+        "implementar uma tacada real com mira pontilhada, forca cheia, taco/mao animados e colisao/pocket basica",
+        "comparar screenshot do prototipo com as pranchas do video antes de expandir arte"
+      ],
+      "notes": "A versao V3 anterior continua rejeitada. O estudo mostra que a proxima rodada deve priorizar objetos dinamicos e layout disciplinado antes de ornamento."
+    },
+    {
+      "id": "2026-05-18-vale-pool-club-game-por-layers-graficos-animacoes",
+      "createdAt": "2026-05-19T00:13:51.785Z",
+      "updatedAt": "2026-05-19T00:13:51.785Z",
+      "status": "in-progress-lab",
+      "source": "chat",
+      "rawRequest": "crie o jogo por partes, o background, os botoes animacoes tudo por sua vez, sempre bonito",
+      "summary": "Montar laboratorio Vale Pool Club como jogo por partes: layers bonitos, componentes recortados da arte-alvo e animacoes por cima sem perder semelhanca visual.",
+      "normalizedTasks": [
+        "separar layers grandes: fundo, HUD, mesa e controles",
+        "gerar componentes pequenos: bolas, botoes, paineis, bonus e patch de feltro",
+        "montar tela de jogo com camadas sobrepostas",
+        "adicionar animacoes bonitas de mira, bonus, power e botoes",
+        "gerar imagens de validacao por etapa"
+      ],
+      "filesTouched": [
+        ".codex-temp/vale-pool-club-art/index.html",
+        ".codex-temp/vale-pool-club-art/parts.html",
+        ".codex-temp/vale-pool-club-art/styles.css",
+        ".codex-temp/vale-pool-club-art/game.js",
+        ".codex-temp/vale-pool-club-art/build-components.mjs",
+        ".codex-temp/vale-pool-club-art/manifest.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-club-art/shots/step-01-background-room.png",
+        ".codex-temp/vale-pool-club-art/shots/step-02-background-plus-table.png",
+        ".codex-temp/vale-pool-club-art/shots/step-03-all-static-layers.png",
+        ".codex-temp/vale-pool-club-art/shots/step-04-animated-game-frame.png",
+        ".codex-temp/vale-pool-club-art/shots/components-contact-sheet.png"
+      ],
+      "tags": [
+        "jogo",
+        "laboratorio",
+        "vale-pool-club",
+        "pixel-art",
+        "layers",
+        "sinuca"
+      ],
+      "nextSteps": [
+        "separar mesa limpa sem bolas para fisica real",
+        "animar bolas e taco como sprites independentes",
+        "adicionar colisao/cacapas mantendo visual aprovado"
+      ],
+      "notes": "Validado por render de screenshots em etapas, manifest com 24 componentes e syntax check do game.js via Function constructor."
+    },
     {
       "id": "2026-05-18-ajustar-copy-controles-jogar-pubpaid",
       "createdAt": "2026-05-18T18:18:00-05:00",
@@ -847,6 +1116,359 @@
         "somente corrigir erros pontuais reportados pelo usuario antes de publicar/deployar"
       ],
       "notes": "Build local 20260518-gamescomplete2. Playwright confirmou 7 botoes Treino, textos sem Lobby/Demo/Draw Poker/Desktop/Mobile/PvP real/backend/escrow e treino de Poquer abriu sem console errors."
+    },
+    {
+      "id": "2026-05-18-criar-laboratorio-isolado-retro-pool-hall-para-demonstrar-capacidade-tecnica-vis",
+      "createdAt": "2026-05-18T23:45:32.436Z",
+      "updatedAt": "2026-05-18T23:45:32.436Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nao e pra mexer no pub paid; trabalhar demonstracoes tecnicas da equipe; estudar Side Pocket SNES e criar mockup/grafico; fazer loops de aprendizado fotografando evolucao ate ficar parecido",
+      "summary": "Criar laboratorio isolado Retro Pool Hall para demonstrar capacidade tecnica/visual da equipe de jogos, sem tocar no PubPaid.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-19-focar-pubpaid-em-sinuca-damas-xadrez-e-melhorar-xadrez-com-pecas-reais",
+      "createdAt": "2026-05-19T17:56:58.051Z",
+      "updatedAt": "2026-05-19T17:56:58.051Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "VAMOS DEIXAR SO XADREZ - DAMAS - SINUCA, GUARDE TODO O RESTO EM BACKUP. MELHORES O XADREZ, DE PEÇAS REAIS PRA ELE USE O SKILLS QUE FIZEMOS PARA DIREÇÃO DE GAMMER",
+      "summary": "Focar PubPaid em Sinuca Damas Xadrez e melhorar Xadrez com peças reais",
+      "normalizedTasks": [
+        "criar backup dos jogos removidos",
+        "remover 21 poker truco dados da superficie ativa",
+        "limitar PvP ativo a sinuca damas xadrez",
+        "melhorar xadrez com pecas visuais",
+        "validar build mudo"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/audio/chipTechSoundtrack.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "server.js",
+        "backups/pubpaid-disabled-games-20260519-1235/README.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-chessfocus4-lobby-playwright.png",
+        ".codex-temp/pubpaid-chessfocus4-board-playwright.png",
+        "backups/pubpaid-disabled-games-20260519-1235"
+      ],
+      "tags": [
+        "pubpaid",
+        "games",
+        "game-director",
+        "xadrez",
+        "backup"
+      ],
+      "nextSteps": [
+        "revisar visualmente o Xadrez com o usuario e entao aplicar o mesmo nivel em Damas e Sinuca"
+      ],
+      "notes": "Build local 20260519-chessfocus4. Validado por Playwright: cards ativos pool/checkers/chess, 32 pecas CSS no xadrez, audio LIGAR SOM/music=off, sem console errors."
+    },
+    {
+      "id": "2026-05-19-profissionalizar-xadrez-pubpaid-com-regras-reais-historico-maozinha-e-lances-obr",
+      "createdAt": "2026-05-19T18:16:49.674Z",
+      "updatedAt": "2026-05-19T18:16:49.674Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "EU QUERO UM XADREZ MAIS PROFICIONAL, tipo os realmente jogados profissionais, com cada lance, manual, maozinha como nas Damas, sons, animacoes e lances obrigatorios.",
+      "summary": "Profissionalizar Xadrez PubPaid com regras reais, historico, maozinha e lances obrigatorios",
+      "normalizedTasks": [
+        "usar chess.js",
+        "mostrar lances legais",
+        "mostrar lances obrigatorios",
+        "adicionar historico SAN",
+        "animar guia visual",
+        "manter som desligado em teste"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/audio/chipTechSoundtrack.js",
+        "pubpaid-phaser/vendor/chess.js",
+        "pubpaid-phaser.css",
+        "server.js",
+        "pubpaid.html"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-chesspro1-after-e4.png",
+        ".codex-temp/pubpaid-chesspro1-forced-check.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "chess",
+        "game-director"
+      ],
+      "nextSteps": [],
+      "notes": "Build 20260519-chesspro1 validada localmente com guard PubPaid e Playwright; som permaneceu off."
+    },
+    {
+      "id": "2026-05-19-otimizar-pubpaid-para-abrir-mais-rapido-reduzir-preloads-validar-responsividade-",
+      "createdAt": "2026-05-19T19:17:16.214Z",
+      "updatedAt": "2026-05-19T19:17:16.214Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok agora rode uma rodada de optmização, pro jogo abrir mais rapido, e principalmente resposividade, para abrir em todos os tamanhos; depois corrigido: sinuca deve impedir retrato e sempre jogar em horizontal",
+      "summary": "Otimizar PubPaid para abrir mais rapido, reduzir preloads, validar responsividade e aplicar regra final de mobile: jogo sempre horizontal, com retrato bloqueado por orientação.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-19-testar-pixellab-mcp-usando-diretor-de-jogos-arte-e-gerar-um-asset-pequeno-de-sin",
+      "createdAt": "2026-05-19T19:22:18.103Z",
+      "updatedAt": "2026-05-19T19:22:18.103Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "teste e crie algo usando nosso diretor ate e esse mcp",
+      "summary": "Testar PixelLab MCP usando diretor de jogos/arte e gerar um asset pequeno de sinuca para avaliacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-19-corrigir-captura-da-sinuca-pubpaid-cacapas-dentro-mesa-centralizada-e-sem-inform",
+      "createdAt": "2026-05-19T19:34:05.602Z",
+      "updatedAt": "2026-05-19T19:34:05.602Z",
+      "status": "closed",
+      "source": "chat",
+      "rawRequest": "pelo png, as caçapas estão pra fora da mesa, a mesa nao ta centralizada, e tem informação em cima da mesa",
+      "summary": "Corrigir captura da Sinuca PubPaid: caçapas dentro, mesa centralizada e sem informação sobre a mesa",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/PoolGameScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-mobileopt-pool-844x390.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "mobile",
+        "layout",
+        "poolfix2"
+      ],
+      "nextSteps": [],
+      "notes": "Build local 20260519-poolfix2 validado com audio off e Playwright sem falhas."
+    },
+    {
+      "id": "2026-05-19-refazer-sinuca-pubpaid-para-parecer-mesa-real-remover-faixa-sobre-a-mesa-e-adici",
+      "createdAt": "2026-05-19T19:48:47.179Z",
+      "updatedAt": "2026-05-19T19:48:47.179Z",
+      "status": "closed",
+      "source": "chat",
+      "rawRequest": "isso ta errado ainda; referencia de mesa de sinuca real; faixa sinuca demo cobre a mesa; precisa lista das bolas que cairam",
+      "summary": "Refazer Sinuca PubPaid para parecer mesa real, remover faixa sobre a mesa e adicionar lista de bolas encaçapadas",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/PoolGameScene.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        ".codex-temp/pubpaid-mobileopt-check.mjs"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-mobileopt-pool-844x390.png",
+        ".codex-temp/pubpaid-poolreal1-pocketed-list.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "poolreal1",
+        "game-director",
+        "layout",
+        "hud"
+      ],
+      "nextSteps": [],
+      "notes": "Build 20260519-poolreal1 validado com hero demo escondido, lista de bolas visivel e music=off."
+    },
+    {
+      "id": "2026-05-19-testar-nexsprite-como-ferramenta-de-assets-para-jogo-apos-bom-resultado-no-sprit",
+      "createdAt": "2026-05-19T20:01:57.811Z",
+      "updatedAt": "2026-05-19T20:01:57.811Z",
+      "status": "tested-free-assets-credit-blocked",
+      "source": "chat",
+      "rawRequest": "ok agora vamos la, ai sprites sheets e um meio vamos texta o nexsprite ta aberto ja",
+      "summary": "Testar Nexsprite como ferramenta de assets para jogo apos bom resultado no Spritesheets.ai",
+      "normalizedTasks": [
+        "abrir Nexsprite no Chrome",
+        "verificar creditos",
+        "tentar preparar prompt pequeno",
+        "baixar asset gratuito",
+        "avaliar papel no pipeline"
+      ],
+      "filesTouched": [],
+      "assetRefs": [
+        ".codex-temp/nexsprite-tests/20260519-free-assets/nexsprite-stack-coins.png"
+      ],
+      "tags": [
+        "jogo",
+        "arte",
+        "nexsprite",
+        "pixel-art",
+        "assets",
+        "teste"
+      ],
+      "nextSteps": [
+        "comprar/obter creditos se quiser testar geracao nova",
+        "comparar free assets com props do PubPaid/vale-pool",
+        "registrar Nexsprite como ferramenta de props se aprovado"
+      ],
+      "notes": "Nexsprite esta logado no Chrome, mas a conta mostra 0 credits; Create fica desabilitado. O fluxo gratuito baixou um PNG isometrico de moedas para teste local."
+    },
+    {
+      "id": "2026-05-19-adotar-assets-prontos-como-primeira-linha-do-pipeline-de-arte-do-jogo",
+      "createdAt": "2026-05-19T20:02:53.448Z",
+      "updatedAt": "2026-05-19T20:02:53.448Z",
+      "status": "direction-note",
+      "source": "chat",
+      "rawRequest": "ok acho que vamos começar a uisar arsets pronotos; ok por enquanto faça aniotações",
+      "summary": "Adotar assets prontos como primeira linha do pipeline de arte do jogo",
+      "normalizedTasks": [
+        "priorizar assets prontos bons antes de gerar do zero",
+        "salvar candidatos em area temporaria",
+        "comparar com anchors aprovados",
+        "usar IA apenas para lacunas especificas",
+        "integrar no jogo somente apos aprovacao"
+      ],
+      "filesTouched": [],
+      "assetRefs": [
+        ".codex-temp/spritesheets-ai-tests/20260519-billiards-host/billiards-host-walk-side.gif",
+        ".codex-temp/nexsprite-tests/20260519-free-assets/nexsprite-stack-coins.png"
+      ],
+      "tags": [
+        "jogo",
+        "arte",
+        "pipeline",
+        "assets-prontos",
+        "spritesheets",
+        "nexsprite",
+        "pixel-art"
+      ],
+      "nextSteps": [
+        "montar uma biblioteca local de candidatos aprovaveis",
+        "separar personagens animados de props/itens",
+        "criar criterio de promocao para assets reais do jogo"
+      ],
+      "notes": "Decisao provisoria: usar assets prontos como meio principal para acelerar. Spritesheets.ai fica forte para personagem/animacao; Nexsprite/free assets para props isometricos pequenos; geracao nova entra so quando faltar asset especifico."
+    },
+    {
+      "id": "2026-05-19-retomar-apos-travamento-da-sessao-conferir-estado-da-correcao-da-sinuca-pubpaid-",
+      "createdAt": "2026-05-19T20:04:06.790Z",
+      "updatedAt": "2026-05-19T20:04:06.790Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vc travou",
+      "summary": "Retomar apos travamento da sessao; conferir estado da correcao da Sinuca PubPaid e responder com status claro.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-19-ajustar-cacapa-da-sinuca-pubpaid-e-ativar-build-real",
+      "createdAt": "2026-05-20T04:10:00.000Z",
+      "updatedAt": "2026-05-20T04:10:00.000Z",
+      "status": "done-local",
+      "source": "chat",
+      "rawRequest": "tem que tirar essa parte de cima da caçapa e deixa ela mais livre pra entra a bola ta muito dificil faça isso depois suba pro pubpaid o jogo novo de sinuca ja pra texte / n e mais texte e real ageite e bote pra rodar",
+      "summary": "Ajustar a boca da caçapa da Sinuca sem estragar a arte e deixar o build real do PubPaid rodando.",
+      "normalizedTasks": [
+        "manter o desenho aprovado da caçapa",
+        "abrir apenas uma pequena entrada visual para o pano",
+        "ampliar a captura fisica das caçapas no prototipo e no PvP",
+        "subir build ativo do PubPaid"
+      ],
+      "filesTouched": [
+        "games/vale-pool/game.js",
+        "server.js",
+        "pubpaid.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/scenes/PoolGameScene.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-pool11-pocket-subtle.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "cacapa",
+        "fisica",
+        "build-real"
+      ],
+      "nextSteps": [
+        "usuario testar em http://127.0.0.1:3000/pubpaid.html?v=20260519-standalone-pool11",
+        "validar PvP real em duas sessoes autenticadas"
+      ],
+      "notes": "A fisica da caçapa foi ampliada sem depender de buraco preto visual; o desenho voltou ao estilo aprovado, com abertura sutil."
+    },
+    {
+      "id": "2026-05-20-clarear-regras-vivas-sinuca-pubpaid-e-commitar",
+      "createdAt": "2026-05-20T05:46:47.000Z",
+      "updatedAt": "2026-05-20T05:46:47.000Z",
+      "status": "done-local",
+      "source": "chat",
+      "rawRequest": "nao so par ou imapa de instruiçoes equivalentes pra cada modo de jogo tipo qual bola teria que acerta ou qual tipo de bola seja inteligente e crie uma formula; depois disso ja faça o comit; substituindo a sinuca atual por essa nova",
+      "summary": "Adicionar regra viva e manual por modalidade na Sinuca/Vale Pool, manter arte aprovada, substituir a sinuca atual no PubPaid e preparar commit.",
+      "normalizedTasks": [
+        "mostrar regra ativa equivalente para Livre, Brasileira e Par/Impar",
+        "mostrar grupo PAR/IMPAR quando definido e explicar primeira bola",
+        "abrir manual de regras em pop-up pelos cartoes dos jogadores",
+        "manter a arte aprovada e a responsividade do jogo",
+        "validar e commitar a substituicao da Sinuca PubPaid"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "games/vale-pool/index.html",
+        "games/vale-pool/game.js",
+        "server.js",
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-poolrules1-rule-live.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "regras",
+        "pvp",
+        "commit"
+      ],
+      "nextSteps": [
+        "usuario testar em http://127.0.0.1:3000/pubpaid.html?v=20260520-poolrules1",
+        "validar PvP real com duas sessoes autenticadas"
+      ],
+      "notes": "A regra agora acompanha a partida: Livre informa alvo livre 1-9, Brasileira informa bola da vez, Par/Impar informa definicao/grupo e servidor devolve mensagem de grupo definido."
     }
   ]
 }

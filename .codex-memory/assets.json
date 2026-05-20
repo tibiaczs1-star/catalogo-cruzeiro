@@ -1,7 +1,271 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-18T23:18:00.000Z",
+  "lastUpdatedAt": "2026-05-19T22:05:00-05:00",
   "assets": [
+    {
+      "id": "vale-pool-pool10-mesa-liberada",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool10-mesa-liberada.png",
+      "note": "Demo Vale Pool pool10: mesa liberada depois da confirmacao do tutorial.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T22:05:00-05:00"
+    },
+    {
+      "id": "vale-pool-pool10-tutorial",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool10-tutorial.png",
+      "note": "Demo Vale Pool pool10: tutorial obrigatorio do modo antes de liberar a mesa.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T22:05:00-05:00"
+    },
+    {
+      "id": "vale-pool-pool10-moeda",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool10-moeda.png",
+      "note": "Demo Vale Pool pool10: tela de moeda inicial com moeda visivel.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T22:05:00-05:00"
+    },
+    {
+      "id": "vale-pool-pool8-brasileira",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool8-brasileira.png",
+      "note": "Demo Vale Pool pool8: modo Brasileira com branca e sete coloridas oficiais.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T21:10:00-05:00"
+    },
+    {
+      "id": "vale-pool-pool8-modalidades",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool8-modalidades.png",
+      "note": "Demo Vale Pool pool8: menu de modalidades Livre, Brasileira e Par/Impar.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T21:10:00-05:00"
+    },
+    {
+      "id": "vale-pool-pool8-moeda-player-choice",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool8-moeda-tentativa2.png",
+      "note": "Demo Vale Pool pool8: jogador ganhou a moeda e pode escolher comecar ou modalidade.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T21:10:00-05:00"
+    },
+    {
+      "id": "vale-pool-pool8-moeda",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool8-moeda.png",
+      "note": "Demo Vale Pool pool8: tela inicial de moeda antes da escolha.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-finalizar-modalidades-sinuca-pubpaid-moeda-demo-pvp"
+      ],
+      "createdAt": "2026-05-19T21:10:00-05:00"
+    },
+    {
+      "id": "pubpaid-vale-pool-pocket-test-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-vale-pool-pocket-test.png",
+      "note": "Teste dirigido standalone-pool5: a branca caiu na caçapa e foi respawnada, confirmando que a boca nao repele mais a bola.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T19:50:00-05:00"
+    },
+    {
+      "id": "pubpaid-vale-pool-effect-control-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-vale-pool-effect-control.png",
+      "note": "Captura do controle de efeito com ponto vermelho deslocado para DIR e painel VEZ no topo.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T18:48:00-05:00"
+    },
+    {
+      "id": "pubpaid-vale-pool-demo-functional-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-vale-pool-demo-functional.png",
+      "note": "Captura funcional da Demo PubPaid com taco e pontilhado visiveis apos jogador e Robo IA jogarem.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T18:36:00-05:00"
+    },
+    {
+      "id": "web-game-vale-pool-shot-1-png",
+      "kind": "image",
+      "path": ".codex-temp/web-game-vale-pool/shot-1.png",
+      "note": "Captura do cliente develop-web-game confirmando prototipo direto em MIRANDO com taco e pontilhado.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T18:36:00-05:00"
+    },
+    {
+      "id": "vale-pool-public-game-folder",
+      "kind": "game-prototype-promoted",
+      "path": "games/vale-pool/index.html",
+      "note": "Copia promovida do prototipo aprovado Vale Pool Round2 para uso no PubPaid Demo/PvP.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T20:27:00-05:00"
+    },
+    {
+      "id": "pubpaid-vale-pool-demo-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-vale-pool-demo.png",
+      "note": "Captura do PubPaid Demo carregando o prototipo Vale Pool aprovado.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T20:27:00-05:00"
+    },
+    {
+      "id": "pubpaid-vale-pool-pvp-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-vale-pool-pvp.png",
+      "note": "Captura do PubPaid PvP com prototipo Vale Pool e paineis externos dos jogadores Google.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool"
+      ],
+      "createdAt": "2026-05-19T20:27:00-05:00"
+    },
+    {
+      "id": "vale-pool-round2-html",
+      "kind": "local-html-demo",
+      "path": ".codex-temp/vale-pool-round2/index.html",
+      "note": "Protótipo isolado Vale Pool Round2 com HUD superior, mesa, mira, força, spin, taco/mao, colisao e cacapa.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-vale-pool-round2-equipe-inteira-e-construcao"
+      ],
+      "createdAt": "2026-05-19T18:40:51.142Z"
+    },
+    {
+      "id": "vale-pool-round2-team-report",
+      "kind": "study-note",
+      "path": ".codex-temp/vale-pool-round2/team-report.md",
+      "note": "Relatorio da equipe inteira de jogos sobre o que e possivel fazer agora e o que nao prometer ainda.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-vale-pool-round2-equipe-inteira-e-construcao"
+      ],
+      "createdAt": "2026-05-19T18:40:51.142Z"
+    },
+    {
+      "id": "vale-pool-round2-validator",
+      "kind": "test-script",
+      "path": ".codex-temp/vale-pool-round2/validate-round2.js",
+      "note": "Validador Node que simula uma tacada completa e checa render_game_to_text/advanceTime.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-05-19-vale-pool-round2-equipe-inteira-e-construcao"
+      ],
+      "createdAt": "2026-05-19T18:40:51.142Z"
+    },
+    {
+      "id": "vale-pool-video-minute-crops",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-video-study/contact-sheet-minute-crops.png",
+      "source": "workspace",
+      "note": "Prancha minuto a minuto do video Side Pocket, recortada para a tela do jogo.",
+      "linkedOrderIds": [
+        "2026-05-19-side-pocket-video-study-resto-video"
+      ],
+      "createdAt": "2026-05-19T18:03:52.341Z"
+    },
+    {
+      "id": "vale-pool-video-game-crops",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-video-study/contact-sheet-game-crops.png",
+      "source": "workspace",
+      "note": "Amostras amplas do video com foco na tela do jogo: abertura, trick game, mesa, bonus e try again.",
+      "linkedOrderIds": [
+        "2026-05-19-side-pocket-video-study-resto-video"
+      ],
+      "createdAt": "2026-05-19T18:03:52.341Z"
+    },
+    {
+      "id": "vale-pool-video-cue-hand-35m",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-video-study/seq-35m-cue-hand-contact.png",
+      "source": "workspace",
+      "note": "Sequencia de tacada com mao/taco, bolas em movimento e retorno da mira.",
+      "linkedOrderIds": [
+        "2026-05-19-side-pocket-video-study-resto-video"
+      ],
+      "createdAt": "2026-05-19T18:03:52.341Z"
+    },
+    {
+      "id": "vale-pool-video-end-shot-47m",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-video-study/seq-47m-end-shot-contact.png",
+      "source": "workspace",
+      "note": "Sequencia final com mira, taco entrando pela lateral e colisao/rebote.",
+      "linkedOrderIds": [
+        "2026-05-19-side-pocket-video-study-resto-video"
+      ],
+      "createdAt": "2026-05-19T18:03:52.341Z"
+    },
+    {
+      "id": "vale-pool-video-study-notes",
+      "kind": "study-note",
+      "path": ".codex-temp/vale-pool-video-study/study-notes.md",
+      "source": "workspace",
+      "note": "Regras de aprendizado extraidas do video para guiar a proxima reconstrucao.",
+      "linkedOrderIds": [
+        "2026-05-19-side-pocket-video-study-resto-video"
+      ],
+      "createdAt": "2026-05-19T18:03:52.341Z"
+    },
+    {
+      "id": "vale-pool-components-contact-sheet-png",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-club-art/shots/components-contact-sheet.png",
+      "source": "workspace",
+      "note": "Folha de componentes recortados: bolas, botoes, power, spin, bonus e trick shot.",
+      "linkedOrderIds": [
+        "2026-05-18-vale-pool-club-game-por-layers-graficos-animacoes"
+      ],
+      "createdAt": "2026-05-19T00:13:51.785Z"
+    },
+    {
+      "id": "vale-pool-step-04-animated-game-frame-png",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-club-art/shots/step-04-animated-game-frame.png",
+      "source": "workspace",
+      "note": "Frame final do Vale Pool Club montado por layers com mira, power, botoes e bonus animado.",
+      "linkedOrderIds": [
+        "2026-05-18-vale-pool-club-game-por-layers-graficos-animacoes"
+      ],
+      "createdAt": "2026-05-19T00:13:51.785Z"
+    },
     {
       "id": "pubpaid-gamescomplete3-pool-controls-png",
       "kind": "image",
@@ -251,6 +515,181 @@
         "2026-05-18-finalizar-textos-e-treinos-de-todos-os-jogos-pubpaid"
       ],
       "createdAt": "2026-05-18T20:06:32.849Z"
+    },
+    {
+      "id": "loop-3-v3-png",
+      "kind": "image",
+      "path": ".codex-temp/retro-pool-lab/shots/loop-3-v3.png",
+      "source": "workspace",
+      "note": "Loop 3 da demo tecnica Retro Pool Hall, mockup visual 16-bit de sinuca inspirado em referencia SNES sem tocar PubPaid.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-18T23:45:38.561Z"
+    },
+    {
+      "id": "pubpaid-chessfocus4-lobby-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-chessfocus4-lobby-playwright.png",
+      "source": "workspace",
+      "note": "Lobby PubPaid focado em tres mesas ativas: Sinuca, Damas e Xadrez na build 20260519-chessfocus4.",
+      "linkedOrderIds": [
+        "2026-05-19-focar-pubpaid-em-sinuca-damas-xadrez-e-melhorar-xadrez-com-pecas-reais"
+      ],
+      "createdAt": "2026-05-19T17:57:15.125Z"
+    },
+    {
+      "id": "pubpaid-chessfocus4-board-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-chessfocus4-board-playwright.png",
+      "source": "workspace",
+      "note": "Xadrez PubPaid em tela cheia com 32 pecas CSS visuais, tabuleiro sem corte e audio desligado na build 20260519-chessfocus4.",
+      "linkedOrderIds": [
+        "2026-05-19-focar-pubpaid-em-sinuca-damas-xadrez-e-melhorar-xadrez-com-pecas-reais"
+      ],
+      "createdAt": "2026-05-19T17:57:15.127Z"
+    },
+    {
+      "id": "pubpaid-disabled-games-backup-20260519",
+      "kind": "backup",
+      "path": "backups/pubpaid-disabled-games-20260519-1235",
+      "source": "workspace",
+      "note": "Backup restauravel do estado PubPaid antes de desativar 21, Poker, Truco e Dados da superficie ativa.",
+      "linkedOrderIds": [
+        "2026-05-19-focar-pubpaid-em-sinuca-damas-xadrez-e-melhorar-xadrez-com-pecas-reais"
+      ],
+      "createdAt": "2026-05-19T17:57:15.146Z"
+    },
+    {
+      "id": "pubpaid-chesspro1-after-e4",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-chesspro1-after-e4.png",
+      "source": "playwright",
+      "note": "Xadrez Demo depois de e2-e4: 32 pecas, historico SAN, ultimo lance e som off.",
+      "linkedOrderIds": [
+        "2026-05-19-profissionalizar-xadrez-pubpaid-com-regras-reais-historico-maozinha-e-lances-obr"
+      ],
+      "createdAt": "2026-05-19T18:17:00.640Z"
+    },
+    {
+      "id": "pubpaid-chesspro1-forced-check",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-chesspro1-forced-check.png",
+      "source": "playwright",
+      "note": "Cenario de xeque Qh5+: lances obrigatorios, rei destacado, maozinha em g7 e music off.",
+      "linkedOrderIds": [
+        "2026-05-19-profissionalizar-xadrez-pubpaid-com-regras-reais-historico-maozinha-e-lances-obr"
+      ],
+      "createdAt": "2026-05-19T18:17:00.656Z"
+    },
+    {
+      "id": "pubpaid-mobileopt-pool-844x390-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobileopt-pool-844x390.png",
+      "source": "workspace",
+      "note": "Validacao mobileland1: Sinuca demo em paisagem 844x390, sem som e sem overflow.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-19T19:17:32.300Z"
+    },
+    {
+      "id": "pubpaid-mobileopt-report-json",
+      "kind": "test-report",
+      "path": ".codex-temp/pubpaid-mobileopt-report.json",
+      "source": "workspace",
+      "note": "Relatorio Playwright mobileland1: bloqueio retrato e lobby/xadrez/damas/sinuca em paisagem passaram.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-19T19:17:32.310Z"
+    },
+    {
+      "id": "pubpaid-mobileopt-portrait-gate-375x667-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobileopt-portrait-gate-375x667.png",
+      "source": "workspace",
+      "note": "Validacao mobileland1: em celular retrato o PubPaid bloqueia e exige horizontal.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-19T19:17:32.336Z"
+    },
+    {
+      "id": "state-1-json",
+      "kind": "test-report",
+      "path": ".codex-temp/web-game-mobileland/state-1.json",
+      "source": "workspace",
+      "note": "Cliente develop-web-game em mobileland1: render_game_to_text com musica off e build correta.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-19T19:17:32.444Z"
+    },
+    {
+      "id": "pool-chalk-cue-tip-png",
+      "kind": "image",
+      "path": ".codex-temp/pixellab-mcp-tests/20260519-pool-chalk/pool-chalk-cue-tip.png",
+      "source": "workspace",
+      "note": "Experimento PixelLab MCP: prop de giz/ponta de taco para Vale Pool/PubPaid; nao aprovado como canon ainda.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-19T19:22:18.161Z"
+    },
+    {
+      "id": "pubpaid-poolfix2-landscape",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobileopt-pool-844x390.png",
+      "source": "workspace",
+      "note": "Sinuca PubPaid 20260519-poolfix2: caçapas dentro da mesa, mesa centralizada em paisagem 844x390 e sem topbar sobre a mesa.",
+      "linkedOrderIds": [
+        "2026-05-19-corrigir-captura-da-sinuca-pubpaid-cacapas-dentro-mesa-centralizada-e-sem-inform"
+      ],
+      "createdAt": "2026-05-19T19:34:17.210Z"
+    },
+    {
+      "id": "pubpaid-poolreal1-landscape",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobileopt-pool-844x390.png",
+      "source": "workspace",
+      "note": "Sinuca PubPaid 20260519-poolreal1: faixa demo removida, mesa redesenhada com caçapas integradas e painel inferior com lista de bolas encaçapadas.",
+      "linkedOrderIds": [
+        "2026-05-19-refazer-sinuca-pubpaid-para-parecer-mesa-real-remover-faixa-sobre-a-mesa-e-adici"
+      ],
+      "createdAt": "2026-05-19T19:48:56.103Z"
+    },
+    {
+      "id": "pubpaid-poolreal1-pocketed-list",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-poolreal1-pocketed-list.png",
+      "source": "workspace",
+      "note": "Preview forçado da lista de bolas encaçapadas da Sinuca PubPaid 20260519-poolreal1 mostrando bola 1 no painel.",
+      "linkedOrderIds": [
+        "2026-05-19-refazer-sinuca-pubpaid-para-parecer-mesa-real-remover-faixa-sobre-a-mesa-e-adici"
+      ],
+      "createdAt": "2026-05-19T19:49:24.000Z"
+    },
+    {
+      "id": "nexsprite-stack-coins-free-20260519",
+      "kind": "image",
+      "path": ".codex-temp/nexsprite-tests/20260519-free-assets/nexsprite-stack-coins.png",
+      "source": "nexsprite-free-assets",
+      "note": "Asset gratuito Nexsprite baixado durante teste: pilha de moedas isometrica 64x32-ish, util como referencia de props, nao gerado pela conta atual por falta de creditos.",
+      "linkedOrderIds": [
+        "2026-05-19-testar-nexsprite-como-ferramenta-de-assets-para-jogo-apos-bom-resultado-no-sprit"
+      ],
+      "createdAt": "2026-05-19T20:02:05.754Z"
+    },
+    {
+      "id": "vale-pool-pool11-pocket-subtle",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pool11-pocket-subtle.png",
+      "source": "workspace",
+      "note": "Sinuca PubPaid 20260519-standalone-pool11: caçapa voltou ao desenho aprovado com abertura visual sutil; fisica ampliada para facilitar encaçapada.",
+      "linkedOrderIds": [
+        "2026-05-19-ajustar-cacapa-da-sinuca-pubpaid-e-ativar-build-real"
+      ],
+      "createdAt": "2026-05-20T04:10:00.000Z"
+    },
+    {
+      "id": "vale-pool-poolrules1-rule-live",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-poolrules1-rule-live.png",
+      "source": "workspace",
+      "note": "Sinuca PubPaid 20260520-poolrules1: HUD do Vale Pool mostrando regra viva do modo Livre durante a partida, sem mudar a arte aprovada da mesa.",
+      "linkedOrderIds": [
+        "2026-05-20-clarear-regras-vivas-sinuca-pubpaid-e-commitar"
+      ],
+      "createdAt": "2026-05-20T05:46:47.000Z"
     }
   ]
 }

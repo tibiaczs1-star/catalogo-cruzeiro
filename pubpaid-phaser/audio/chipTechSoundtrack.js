@@ -79,6 +79,72 @@ const SAMBA_PLUCKS = [
   [NOTE.G3, NOTE.B3, NOTE.E4, NOTE.G4, NOTE.B4, NOTE.G4, NOTE.E4, NOTE.B3]
 ];
 
+const GAME_THEMES = {
+  "game-pool": {
+    label: "sinuca lounge bass com tacada brilhante",
+    bass: [[NOTE.F2, null, NOTE.C3, null, NOTE.F2, NOTE.G2, null, NOTE.A2]],
+    lead: [[NOTE.A3, NOTE.C4, NOTE.F4, NOTE.G4, NOTE.A4, NOTE.G4, NOTE.F4, NOTE.C4]],
+    chords: [[NOTE.F3, NOTE.A3, NOTE.C4], [NOTE.G3, NOTE.B3, NOTE.D4]],
+    accent: NOTE.F5,
+    filter: 5600,
+    swing: 0.72
+  },
+  "game-checkers": {
+    label: "damas tática com pulso marcial",
+    bass: [[NOTE.D2, null, NOTE.D2, NOTE.A2, null, NOTE.C3, NOTE.D3, null]],
+    lead: [[NOTE.D4, NOTE.F4, NOTE.A4, NOTE.C5, NOTE.A4, NOTE.F4, NOTE.E4, NOTE.D4]],
+    chords: [[NOTE.D3, NOTE.F3, NOTE.A3], [NOTE.C3, NOTE.E3, NOTE.G3]],
+    accent: NOTE.A5,
+    filter: 5000,
+    swing: 0.55
+  },
+  "game-chess": {
+    label: "xadrez cerebral com pad escuro",
+    bass: [[NOTE.C2, null, null, NOTE.G2, NOTE.C3, null, NOTE.B2, null]],
+    lead: [[NOTE.E4, NOTE.G4, NOTE.B4, NOTE.C5, NOTE.B4, NOTE.G4, NOTE.E4, NOTE.D4]],
+    chords: [[NOTE.C3, NOTE.G3, NOTE.E4], [NOTE.B2, NOTE.F3, NOTE.D4]],
+    accent: NOTE.E5,
+    filter: 4600,
+    swing: 0.38
+  },
+  "game-cards21": {
+    label: "21 neon com batida curta de cassino",
+    bass: [[NOTE.A2, null, NOTE.A2, NOTE.E3, null, NOTE.G2, NOTE.A2, NOTE.C3]],
+    lead: [[NOTE.C4, NOTE.E4, NOTE.A4, NOTE.B4, NOTE.C5, NOTE.B4, NOTE.A4, NOTE.E4]],
+    chords: [[NOTE.A3, NOTE.C4, NOTE.E4], [NOTE.G3, NOTE.B3, NOTE.D4]],
+    accent: NOTE.C5,
+    filter: 6900,
+    swing: 0.84
+  },
+  "game-poker": {
+    label: "pôquer noturno com baixo e tensão",
+    bass: [[NOTE.E2, null, NOTE.B2, null, NOTE.D3, null, NOTE.B2, NOTE.G2]],
+    lead: [[NOTE.G3, NOTE.B3, NOTE.D4, NOTE.F4, NOTE.G4, NOTE.F4, NOTE.D4, NOTE.B3]],
+    chords: [[NOTE.E3, NOTE.G3, NOTE.B3], [NOTE.D3, NOTE.F3, NOTE.A3]],
+    accent: NOTE.G5,
+    filter: 5200,
+    swing: 0.64
+  },
+  "game-truco": {
+    label: "truco brasileiro com síncope de mesa",
+    bass: [[NOTE.G2, null, NOTE.D3, NOTE.G2, null, NOTE.F2, NOTE.G2, NOTE.B2]],
+    lead: [[NOTE.B3, NOTE.D4, NOTE.G4, NOTE.B4, NOTE.D5, NOTE.B4, NOTE.G4, NOTE.D4]],
+    chords: [[NOTE.G3, NOTE.B3, NOTE.D4], [NOTE.E3, NOTE.G3, NOTE.B3]],
+    accent: NOTE.D5,
+    filter: 7200,
+    swing: 0.96
+  },
+  "game-dicecups": {
+    label: "dados com copos, metal e pulso de sorte",
+    bass: [[NOTE.B2, null, NOTE.F2, NOTE.B2, null, NOTE.A2, NOTE.B2, NOTE.D3]],
+    lead: [[NOTE.D4, NOTE.F4, NOTE.B4, NOTE.D5, NOTE.F5, NOTE.D5, NOTE.B4, NOTE.F4]],
+    chords: [[NOTE.B2, NOTE.F3, NOTE.D4], [NOTE.A2, NOTE.E3, NOTE.C4]],
+    accent: NOTE.B5,
+    filter: 8000,
+    swing: 1.08
+  }
+};
+
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
@@ -314,9 +380,48 @@ export function createPubPaidSoundtrack() {
     step += 1;
   }
 
+  function playGameStep(when) {
+    const theme = GAME_THEMES[musicZone] || GAME_THEMES["game-pool"];
+    const stepInBar = step % STEPS_PER_BAR;
+    const bar = Math.floor(step / STEPS_PER_BAR);
+    const phrase = Math.floor(bar / 2) % theme.lead.length;
+    const lead = theme.lead[phrase];
+    const bass = theme.bass[phrase % theme.bass.length];
+    const chord = theme.chords[bar % theme.chords.length];
+    const swingOffset = stepInBar % 2 ? theme.swing * 0.012 : 0;
+    const hitTime = when + swingOffset;
+
+    if (stepInBar === 0) {
+      playPad(chord, hitTime, bar);
+      playKick(hitTime, 1.05);
+      playTone(theme.accent, hitTime + 0.026, 0.065, "square", 0.022, bar % 2 ? 9 : -6, 0.28);
+    }
+    if ([4, 12].includes(stepInBar)) playNoise(hitTime, 0.075, 0.045, 2600 + theme.swing * 900);
+    if ([2, 6, 10, 14].includes(stepInBar)) playRim(hitTime, 0.028 + theme.swing * 0.008);
+    if (musicZone === "game-dicecups" && [3, 7, 11, 15].includes(stepInBar)) playNoise(hitTime, 0.025, 0.022, 7200);
+    if (musicZone === "game-truco" && [5, 13].includes(stepInBar)) playTone(NOTE.G5, hitTime, 0.04, "triangle", 0.026, 24, 0.2);
+
+    const bassNote = bass[stepInBar % bass.length];
+    if (bassNote) {
+      playTone(bassNote, hitTime, 0.15, musicZone === "game-chess" ? "triangle" : "square", 0.045, -4, 0.06);
+      if (stepInBar === 0 || stepInBar === 8) playTone(bassNote / 2, hitTime, 0.18, "sine", 0.024, 0, 0.03);
+    }
+
+    const leadNote = lead[stepInBar % lead.length];
+    if (leadNote && ![4, 12].includes(stepInBar)) {
+      const type = musicZone === "game-poker" || musicZone === "game-chess" ? "triangle" : "square";
+      playTone(leadNote, hitTime, 0.082, type, 0.024, stepInBar % 3 ? 7 : -9, 0.26);
+    }
+
+    filter.frequency.setTargetAtTime(clamp(theme.filter + Math.sin(step / 8) * 900, 3200, 9200), hitTime, 0.04);
+    step += 1;
+  }
+
   function scheduleStep(when) {
     if (musicZone === "salon") {
       playSambaStep(when);
+    } else if (GAME_THEMES[musicZone]) {
+      playGameStep(when);
     } else {
       playStreetStep(when);
     }
@@ -363,13 +468,18 @@ export function createPubPaidSoundtrack() {
   }
 
   function setZone(zone) {
-    const nextZone = zone === "salon" ? "salon" : "street";
+    const nextZone = zone === "salon" ? "salon" : GAME_THEMES[zone] ? zone : "street";
     if (musicZone === nextZone) return;
     musicZone = nextZone;
     step = 0;
     if (ctx && enabled && !muted) {
       nextNoteTime = ctx.currentTime + 0.045;
-      if (nextZone === "salon") {
+      if (GAME_THEMES[nextZone]) {
+        const theme = GAME_THEMES[nextZone];
+        playKick(nextNoteTime, 1.16);
+        playTone(theme.accent, nextNoteTime + 0.025, 0.11, "square", 0.036, 0, 0.28);
+        playNoise(nextNoteTime + 0.06, 0.08, 0.04, 3600);
+      } else if (nextZone === "salon") {
         playSambaKick(nextNoteTime, 1.18);
         playRim(nextNoteTime + 0.05, 0.052);
       } else {
@@ -393,6 +503,54 @@ export function createPubPaidSoundtrack() {
       playKick(when, 0.88);
       playNoise(when + 0.04, 0.11, 0.045, 2600);
     }
+  }
+
+  function playCue(cue = "select", gameId = "") {
+    const audio = ensureContext();
+    if (!audio) return false;
+    if (!enabled || muted) {
+      return false;
+    }
+    const theme = GAME_THEMES[`game-${gameId}`] || GAME_THEMES[musicZone] || GAME_THEMES["game-pool"];
+    const when = audio.currentTime + 0.012;
+    if (cue === "dice") {
+      playNoise(when, 0.065, 0.075, 6200);
+      playTone(NOTE.B4, when + 0.018, 0.05, "square", 0.028, 0, 0.16);
+      playTone(NOTE.D5, when + 0.054, 0.055, "square", 0.026, 8, 0.18);
+    } else if (cue === "card") {
+      playNoise(when, 0.028, 0.038, 4800);
+      playTone(theme.accent, when + 0.018, 0.05, "triangle", 0.022, -10, 0.18);
+    } else if (cue === "win") {
+      playKick(when, 1.12);
+      playTone(theme.accent, when + 0.02, 0.09, "square", 0.036, 0, 0.28);
+      playTone(theme.accent * 1.25, when + 0.08, 0.11, "triangle", 0.03, 6, 0.32);
+    } else if (cue === "pvp") {
+      playKick(when, 1.22);
+      playRim(when + 0.05, 0.052);
+      playTone(theme.accent, when + 0.09, 0.08, "sawtooth", 0.03, 12, 0.28);
+    } else if (cue === "launch" || cue === "ready") {
+      playKick(when, cue === "launch" ? 1.02 : 0.88);
+      playTone(theme.accent, when + 0.025, 0.075, "square", 0.026, cue === "ready" ? 12 : -8, 0.24);
+      playNoise(when + 0.05, 0.055, 0.026, 3600);
+    } else if (cue === "chess-move") {
+      playTone(NOTE.E4, when, 0.038, "triangle", 0.024, -6, 0.08);
+      playTone(NOTE.B4, when + 0.038, 0.042, "sine", 0.018, 4, 0.12);
+    } else if (cue === "chess-capture") {
+      playNoise(when, 0.055, 0.052, 2100);
+      playKick(when + 0.018, 0.62);
+      playTone(NOTE.E3, when + 0.052, 0.05, "triangle", 0.022, -8, 0.08);
+    } else if (cue === "chess-check" || cue === "chess-mate") {
+      playTone(theme.accent, when, 0.06, "triangle", 0.03, cue === "chess-mate" ? 12 : 0, 0.24);
+      playTone(theme.accent * 1.25, when + 0.062, 0.075, "square", cue === "chess-mate" ? 0.034 : 0.024, 6, 0.28);
+      if (cue === "chess-mate") playKick(when + 0.09, 0.95);
+    } else if (cue === "action") {
+      playTone(theme.accent * 0.75, when, 0.055, "square", 0.026, -5, 0.16);
+      playTone(theme.accent, when + 0.045, 0.045, "triangle", 0.02, 7, 0.2);
+    } else {
+      playTone(theme.accent, when, 0.042, "square", 0.018, 0, 0.18);
+    }
+    scheduler();
+    return true;
   }
 
   function stop() {
@@ -428,6 +586,7 @@ export function createPubPaidSoundtrack() {
     stop,
     toggle,
     accentFrame,
+    playCue,
     isPlaying,
     getState: () => ({
       available: Boolean(AudioContextClass),
@@ -436,7 +595,7 @@ export function createPubPaidSoundtrack() {
       zone: musicZone,
       step,
       tempo: TEMPO,
-      style: musicZone === "salon" ? "16-bit samba brasileiro hip-hop" : "16-bit techno layered"
+      style: GAME_THEMES[musicZone]?.label || (musicZone === "salon" ? "16-bit samba brasileiro hip-hop" : "16-bit techno layered")
     })
   };
 }

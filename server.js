@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260518-gamescomplete3";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260520-poolrules1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16664,12 +16664,24 @@ async function handleApi(req, res, pathname, searchParams) {
     const coinFlip = bothReady ? match.coinFlip || createPubpaidPvpCoinFlip(match) : match.coinFlip || null;
     const nowIso = new Date().toISOString();
     const nextChessState = gameId === "chess" && bothReady
-      ? {
+      ? decorateChessPvPState({
           ...(match.chessState || createChessPvPState()),
           whiteSeat: coinFlip.firstSeat,
           blackSeat: coinFlip.firstSeat === "playerOne" ? "playerTwo" : "playerOne",
-        }
+        })
       : match.chessState || null;
+    const nextPoolState = gameId === "pool" && bothReady
+      ? createPoolPvPState("livre", {
+          complete: false,
+          phase: "winner-choice",
+          winnerSeat: coinFlip.firstSeat,
+          chooserSeat: coinFlip.firstSeat,
+          starterSeat: "",
+          ruleMode: "",
+          winnerChoice: "",
+          tutorialReady: { playerOne: false, playerTwo: false },
+        })
+      : match.poolState || null;
     const nextPresence = {
       ...(match.presence || createPubpaidPvpPresence(nowIso)),
       [seat]: {
@@ -16692,17 +16704,185 @@ async function handleApi(req, res, pathname, searchParams) {
       ready,
       coinFlip,
       ...(nextChessState ? { chessState: nextChessState } : {}),
+      ...(nextPoolState ? { poolState: nextPoolState } : {}),
       presence: nextPresence,
       status: bothReady ? "active" : "readying",
       startedAt: bothReady ? nowIso : match.startedAt,
       turn: bothReady ? coinFlip.firstSeat : match.turn,
       resultSummary: bothReady
-        ? `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} começa. ${getPubpaidPvpGameLabel(gameId)} liberado.`
+        ? gameId === "pool"
+          ? `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} escolhe uma parte; o rival escolhe a outra.`
+          : `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} começa. ${getPubpaidPvpGameLabel(gameId)} liberado.`
         : `${seat === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} confirmou. Aguardando o outro jogador.`,
       updatedAt: nowIso,
     };
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/pvp/pool/setup") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para escolher a modalidade." });
+    }
+    const body = await parseBody(req);
+    const matchId = cleanShortText(body.matchId || "", 120);
+    const action = safeString(body.action || "", 40).toLowerCase();
+    const requestedMode = normalizePoolRuleMode(body.mode || "livre");
+    if (!matchId) {
+      return sendJson(res, 400, { ok: false, error: "Informe a mesa PvP." });
+    }
+
+    let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    const matchIndex = store.matches.findIndex((entry) => entry?.id === matchId && entry?.gameId === "pool");
+    if (matchIndex < 0) {
+      return sendJson(res, 404, { ok: false, error: "Mesa de sinuca PvP nao encontrada." });
+    }
+    const match = store.matches[matchIndex];
+    const walletKey = getPubpaidWalletKey(authUser);
+    const seat = match?.playerOne?.walletKey === walletKey ? "playerOne" : match?.playerTwo?.walletKey === walletKey ? "playerTwo" : "";
+    if (!seat) {
+      return sendJson(res, 403, { ok: false, error: "Essa mesa pertence a outros jogadores." });
+    }
+    if (match.status !== "active") {
+      return sendJson(res, 409, { ok: false, error: "Essa mesa ainda nao esta pronta para escolha." });
+    }
+    const currentSetup = createPoolPvPSetup(match.poolState?.setup || {});
+    if (currentSetup.complete) {
+      return sendJson(res, 409, { ok: false, error: "A modalidade ja foi escolhida." });
+    }
+    const chooseMode = action === "mode";
+    const chooseStart = action === "start" || action === "starter";
+    const confirmTutorial = action === "tutorial";
+    const rivalSeat = getPoolPvPRivalSeat(seat);
+    const nowIso = new Date().toISOString();
+
+    if (currentSetup.phase === "tutorial") {
+      if (!confirmTutorial) {
+        return sendJson(res, 400, { ok: false, error: "Leia o tutorial e confirme para comecar." });
+      }
+      const tutorialReady = {
+        ...(currentSetup.tutorialReady || { playerOne: false, playerTwo: false }),
+        [seat]: true,
+      };
+      const bothTutorialReady = Boolean(tutorialReady.playerOne && tutorialReady.playerTwo);
+      const nextSetup = createPoolPvPSetup({
+        ...currentSetup,
+        complete: bothTutorialReady,
+        phase: bothTutorialReady ? "done" : "tutorial",
+        chooserSeat: "",
+        tutorialReady,
+        decidedAt: bothTutorialReady ? nowIso : currentSetup.decidedAt,
+      });
+      const poolState = {
+        ...(match.poolState || createPoolPvPState(currentSetup.ruleMode || "livre", nextSetup)),
+        setup: nextSetup,
+      };
+      const starterName = match?.[nextSetup.starterSeat]?.name || "Jogador";
+      store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
+        ...match,
+        poolState,
+        turn: nextSetup.starterSeat || match.turn,
+        resultSummary: bothTutorialReady
+          ? `Tutorial confirmado. ${starterName} abre a sinuca ${getPoolRuleMode(poolState.ruleMode).label}.`
+          : `${match?.[seat]?.name || "Jogador"} confirmou o tutorial. Aguardando o outro jogador.`,
+      }, seat, nowIso);
+      store = writePubpaidPvpStore(store);
+      return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "pool"));
+    }
+
+    if (currentSetup.chooserSeat !== seat) {
+      return sendJson(res, 403, { ok: false, error: "Aguarde: a escolha da moeda esta com o outro jogador." });
+    }
+    if (!chooseMode && !chooseStart) {
+      return sendJson(res, 400, { ok: false, error: "Escolha comecar ou escolher a modalidade." });
+    }
+    const chooserName = match?.[seat]?.name || "Jogador";
+    let poolState = match.poolState || createPoolPvPState();
+    let nextTurn = match.turn;
+    let resultSummary = "";
+
+    if (currentSetup.phase === "winner-choice") {
+      if (chooseStart) {
+        const nextSetup = createPoolPvPSetup({
+          ...currentSetup,
+          phase: "loser-mode",
+          chooserSeat: rivalSeat,
+          starterSeat: seat,
+          modeChooserSeat: rivalSeat,
+          winnerChoice: "start",
+          choice: "start",
+          ruleMode: "",
+        });
+        poolState = { ...poolState, setup: nextSetup };
+        nextTurn = rivalSeat;
+        resultSummary = `${chooserName} ganhou a moeda e escolheu comecar. O rival escolhe a modalidade.`;
+      } else {
+        const rule = getPoolRuleMode(requestedMode);
+        const nextSetup = createPoolPvPSetup({
+          ...currentSetup,
+          phase: "loser-start",
+          chooserSeat: rivalSeat,
+          starterSeat: "",
+          starterChooserSeat: rivalSeat,
+          winnerChoice: "mode",
+          choice: "mode",
+          ruleMode: rule.id,
+        });
+        poolState = { ...poolState, ruleMode: rule.id, ruleLabel: rule.label, scoreLabel: rule.scoreLabel, setup: nextSetup };
+        nextTurn = rivalSeat;
+        resultSummary = `${chooserName} ganhou a moeda e escolheu ${rule.label}. O rival escolhe quem comeca.`;
+      }
+    } else if (currentSetup.phase === "loser-mode") {
+      if (!chooseMode) {
+        return sendJson(res, 400, { ok: false, error: "Agora escolha a modalidade que faltou." });
+      }
+      const rule = getPoolRuleMode(requestedMode);
+      poolState = createPoolPvPState(rule.id, {
+        ...currentSetup,
+        complete: false,
+        phase: "tutorial",
+        chooserSeat: "",
+        starterSeat: currentSetup.starterSeat || rivalSeat,
+        ruleMode: rule.id,
+        tutorialReady: { playerOne: false, playerTwo: false },
+      });
+      nextTurn = poolState.setup.starterSeat;
+      resultSummary = `${chooserName} escolheu ${rule.label}. Tutorial aberto antes da mesa.`;
+    } else if (currentSetup.phase === "loser-start") {
+      if (!chooseStart) {
+        return sendJson(res, 400, { ok: false, error: "Agora escolha quem começa a partida." });
+      }
+      const starterPreference = safeString(body.starter || "", 20);
+      const starterSeat = starterPreference === "rival"
+        ? rivalSeat
+        : starterPreference === "playerOne" || starterPreference === "playerTwo"
+          ? starterPreference
+          : seat;
+      const rule = getPoolRuleMode(currentSetup.ruleMode || requestedMode);
+      poolState = createPoolPvPState(rule.id, {
+        ...currentSetup,
+        complete: false,
+        phase: "tutorial",
+        chooserSeat: "",
+        starterSeat,
+        ruleMode: rule.id,
+        tutorialReady: { playerOne: false, playerTwo: false },
+      });
+      nextTurn = starterSeat;
+      resultSummary = `${chooserName} escolheu quem comeca. Tutorial de ${rule.label} aberto antes da mesa.`;
+    } else {
+      return sendJson(res, 409, { ok: false, error: "Estado da moeda invalido. Reabra a mesa." });
+    }
+
+    store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
+      ...match,
+      poolState,
+      turn: nextTurn,
+      resultSummary,
+    }, seat, nowIso);
+    store = writePubpaidPvpStore(store);
+    return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "pool"));
   }
 
   if (req.method === "POST" && pathname === "/api/pubpaid/pvp/pool/shot") {
@@ -16714,6 +16894,7 @@ async function handleApi(req, res, pathname, searchParams) {
     const matchId = cleanShortText(body.matchId || "", 120);
     const angle = clampPoolNumber(body.angle, -180, 180, 0);
     const power = clampPoolNumber(body.power, 0.1, 1, 0.5);
+    const spin = normalizePoolSpin(body.spin || "centro");
     if (!matchId) {
       return sendJson(res, 400, { ok: false, error: "Informe a mesa PvP." });
     }
@@ -16735,21 +16916,26 @@ async function handleApi(req, res, pathname, searchParams) {
     if (match.turn !== seat) {
       return sendJson(res, 409, { ok: false, error: "Espere a vez do outro jogador." });
     }
+    const currentPoolState = match.poolState || createPoolPvPState();
+    const setup = createPoolPvPSetup(currentPoolState.setup || { complete: true, phase: "done" });
+    if (!setup.complete) {
+      return sendJson(res, 409, { ok: false, error: "A partida ainda esta na escolha da moeda/modalidade." });
+    }
 
-    const simulation = simulatePoolPvPShot(match.poolState || createPoolPvPState(), seat, angle, power);
+    const simulation = simulatePoolPvPShot(currentPoolState, seat, angle, power, spin);
     const poolState = simulation.poolState;
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
     let winner = "";
     let finished = Boolean(simulation.finished);
     let resultSummary =
       simulation.pocketedCount > 0
-        ? `${match?.[seat]?.name || "Jogador"} encaçapou ${simulation.pocketedCount} bola${simulation.pocketedCount > 1 ? "s" : ""}.`
+        ? `${match?.[seat]?.name || "Jogador"} encaçapou ${simulation.pocketedCount} bola${simulation.pocketedCount > 1 ? "s" : ""}. ${simulation.message || ""}`.trim()
         : `${match?.[seat]?.name || "Jogador"} tacou sem encaçapar.`;
     if (simulation.cuePocketed) {
       resultSummary = `${resultSummary} A branca caiu e voltou para a marca.`;
     }
     if (finished) {
-      winner = resolvePoolPvPWinner(poolState);
+      winner = simulation.winner || resolvePoolPvPWinner(poolState);
       if (winner) {
         resultSummary = `${match?.[winner]?.name || "Jogador"} venceu a sinuca por ${poolState.playerOneScore || 0} a ${poolState.playerTwoScore || 0}.`;
       } else {
@@ -17433,7 +17619,7 @@ async function handleApi(req, res, pathname, searchParams) {
     if (match.status !== "active") {
       return sendJson(res, 400, { ok: false, error: "Essa mesa PvP nao esta mais ativa." });
     }
-    const chessState = match?.chessState || createChessPvPState();
+    const chessState = decorateChessPvPState(match?.chessState || createChessPvPState());
     const ownColor = chessState.whiteSeat === seat ? "w" : "b";
     const chess = new Chess(chessState.fen || undefined);
     if (chess.turn() !== ownColor) {
@@ -17443,9 +17629,23 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!move) {
       return sendJson(res, 400, { ok: false, error: "Lance invalido para o xadrez atual." });
     }
-    chessState.fen = chess.fen();
-    chessState.history = Array.isArray(chessState.history) ? chessState.history : [];
-    chessState.history.push({ seat, from, to, san: move.san, at: new Date().toISOString() });
+    const moveStatus = getChessStatus(chess);
+    const moveEntry = {
+      index: clampInteger(match.moveCount) + 1,
+      seat,
+      playerName: match?.[seat]?.name || "Jogador",
+      ...normalizeChessMoveDescriptor(move),
+      check: moveStatus.inCheck,
+      checkmate: moveStatus.checkmate,
+      draw: moveStatus.draw,
+      at: new Date().toISOString(),
+    };
+    const nextChessState = decorateChessPvPState({
+      ...chessState,
+      fen: chess.fen(),
+      history: (Array.isArray(chessState.history) ? chessState.history : []).concat(moveEntry).slice(-160),
+      lastMove: moveEntry,
+    });
 
     const whiteSeat = chessState.whiteSeat || "playerOne";
     const blackSeat = chessState.blackSeat || "playerTwo";
@@ -17453,21 +17653,21 @@ async function handleApi(req, res, pathname, searchParams) {
     let winner = "";
     let finished = false;
     let resultSummary = `${match?.[seat]?.name || "Jogador"} jogou ${move.san}.`;
-    if (chess.isCheckmate()) {
+    if (moveStatus.checkmate) {
       finished = true;
       winner = seat;
       resultSummary = `${match?.[seat]?.name || "Jogador"} deu xeque-mate com ${move.san}.`;
-    } else if (chess.isDraw()) {
+    } else if (moveStatus.draw) {
       finished = true;
       resultSummary = "A mesa de xadrez terminou empatada.";
-    } else if (chess.inCheck()) {
+    } else if (moveStatus.inCheck) {
       resultSummary = `${resultSummary} Xeque.`;
     }
 
     const nowIso = new Date().toISOString();
     store.matches[matchIndex] = {
       ...match,
-      chessState,
+      chessState: nextChessState,
       presence: {
         ...(match.presence || {}),
         [seat]: {
@@ -18384,7 +18584,7 @@ function buildPubpaidAdminPayload() {
   };
 }
 
-const PUBPAID_PVP_ENABLED_GAMES = new Set(["pool", "checkers", "chess", "cards21", "poker", "truco", "darts", "dicecups"]);
+const PUBPAID_PVP_ENABLED_GAMES = new Set(["pool", "checkers", "chess"]);
 const PUBPAID_PVP_WAIT_MS = 1000 * 60 * 15;
 const PUBPAID_PVP_MATCH_MS = 1000 * 60 * 60 * 6;
 const PUBPAID_PVP_ABANDON_MS = 1000 * 60;
@@ -18907,21 +19107,114 @@ function createTrucoPvPState() {
   };
 }
 
+function callChessMoveFlag(move, methodName) {
+  try {
+    return Boolean(move && typeof move[methodName] === "function" && move[methodName]());
+  } catch (_error) {
+    return false;
+  }
+}
+
+function normalizeChessMoveDescriptor(move = {}) {
+  const capture = Boolean(move.captured) || callChessMoveFlag(move, "isCapture");
+  const promotion = move.promotion || "";
+  return {
+    color: move.color === "b" ? "black" : "white",
+    from: cleanShortText(move.from || "", 4).toLowerCase(),
+    to: cleanShortText(move.to || "", 4).toLowerCase(),
+    piece: cleanShortText(move.piece || "", 2).toLowerCase(),
+    captured: cleanShortText(move.captured || "", 2).toLowerCase(),
+    promotion: cleanShortText(promotion, 2).toLowerCase(),
+    flags: cleanShortText(move.flags || "", 12),
+    san: cleanShortText(move.san || "", 24),
+    lan: cleanShortText(move.lan || `${move.from || ""}${move.to || ""}${promotion || ""}`, 12),
+    capture,
+    castle: callChessMoveFlag(move, "isCastle") || callChessMoveFlag(move, "isKingsideCastle") || callChessMoveFlag(move, "isQueensideCastle"),
+    enPassant: callChessMoveFlag(move, "isEnPassant"),
+    bigPawn: callChessMoveFlag(move, "isBigPawn"),
+  };
+}
+
+function getChessStatus(chess) {
+  const inCheck = Boolean(chess?.isCheck?.() || chess?.inCheck?.());
+  const checkmate = Boolean(chess?.isCheckmate?.());
+  const stalemate = Boolean(chess?.isStalemate?.());
+  const insufficient = Boolean(chess?.isInsufficientMaterial?.());
+  const repetition = Boolean(chess?.isThreefoldRepetition?.());
+  const fiftyMoves = Boolean(chess?.isDrawByFiftyMoves?.());
+  const draw = Boolean(chess?.isDraw?.());
+  const gameOver = Boolean(chess?.isGameOver?.()) || checkmate || draw;
+  return {
+    inCheck,
+    checkmate,
+    stalemate,
+    insufficient,
+    repetition,
+    fiftyMoves,
+    draw,
+    gameOver,
+  };
+}
+
+function decorateChessPvPState(state = {}) {
+  const baseFen = state.fen || "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+  if (!Chess) {
+    return {
+      ...state,
+      fen: baseFen,
+      turnColor: String(baseFen).split(" ")[1] === "b" ? "black" : "white",
+      legalMoves: [],
+      forcedMoves: [],
+      inCheck: false,
+      checkmate: false,
+      draw: false,
+      gameOver: false,
+    };
+  }
+  try {
+    const chess = new Chess(baseFen);
+    const legalMoves = chess.moves({ verbose: true }).map(normalizeChessMoveDescriptor);
+    const status = getChessStatus(chess);
+    const forcedMoves = status.inCheck || legalMoves.length === 1 ? legalMoves : [];
+    return {
+      ...state,
+      fen: chess.fen(),
+      whiteSeat: state.whiteSeat || "playerOne",
+      blackSeat: state.blackSeat || "playerTwo",
+      history: Array.isArray(state.history) ? state.history.slice(-160) : [],
+      lastMove: state.lastMove || null,
+      turnColor: chess.turn() === "b" ? "black" : "white",
+      legalMoves,
+      forcedMoves,
+      ...status,
+    };
+  } catch (_error) {
+    const chess = new Chess();
+    return decorateChessPvPState({
+      ...state,
+      fen: chess.fen(),
+      history: [],
+      lastMove: null,
+    });
+  }
+}
+
 function createChessPvPState() {
   const chess = Chess ? new Chess() : null;
-  return {
+  return decorateChessPvPState({
     fen: chess ? chess.fen() : "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
     whiteSeat: "playerOne",
     blackSeat: "playerTwo",
     history: [],
-  };
+    lastMove: null,
+  });
 }
 
 const PVP_POOL_TABLE = {
   width: 100,
   height: 50,
   radius: 1.55,
-  pocketRadius: 6.25,
+  pocketRadius: 8.35,
   cueStart: { x: 25, y: 25 },
 };
 const PVP_POOL_MAX_SHOTS = 24;
@@ -18930,6 +19223,20 @@ const PVP_POOL_COLORS = [
   "#2d8f72", "#7a2238", "#10131a", "#f0c742", "#1f6ad4",
   "#c93645", "#6b49ba", "#e17a2d", "#2d8f72", "#7a2238",
 ];
+const PVP_POOL_BRAZILIAN_COLORS = {
+  1: "#c8242c",
+  2: "#f0b12d",
+  3: "#1f8c4f",
+  4: "#7a4b29",
+  5: "#2a63c7",
+  6: "#d766aa",
+  7: "#181819",
+};
+const PVP_POOL_RULE_MODES = {
+  livre: { id: "livre", label: "LIVRE", scoreLabel: "BOLAS" },
+  brasileira: { id: "brasileira", label: "BRASILEIRA", scoreLabel: "PONTOS" },
+  parimpar: { id: "parimpar", label: "PAR/IMPAR", scoreLabel: "BOLAS" },
+};
 const PVP_POOL_POCKETS = [
   { x: 0, y: 0 },
   { x: 50, y: 0 },
@@ -18938,11 +19245,65 @@ const PVP_POOL_POCKETS = [
   { x: 50, y: 50 },
   { x: 100, y: 50 },
 ];
+const PVP_POOL_SPINS = {
+  centro: { vx: 0, vy: 0, turn: 0 },
+  segue: { vx: 0, vy: 0.04, turn: 0 },
+  puxa: { vx: 0, vy: -0.04, turn: 0 },
+  esq: { vx: -0.035, vy: 0, turn: -0.01 },
+  dir: { vx: 0.035, vy: 0, turn: 0.01 },
+};
+
+function normalizePoolSpin(value = "centro") {
+  const spin = safeString(value || "centro", 20).toLowerCase();
+  return Object.prototype.hasOwnProperty.call(PVP_POOL_SPINS, spin) ? spin : "centro";
+}
 
 function clampPoolNumber(value, min, max, fallback = min) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return fallback;
   return Math.max(min, Math.min(max, numeric));
+}
+
+function normalizePoolRuleMode(value = "livre") {
+  const mode = safeString(value || "livre", 40).toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (mode === "brasileira" || mode === "sinucabrasileira" || mode === "br") return "brasileira";
+  if (mode === "parimpar" || mode === "parouimpar" || mode === "tacoforte") return "parimpar";
+  return "livre";
+}
+
+function getPoolRuleMode(mode = "livre") {
+  return PVP_POOL_RULE_MODES[normalizePoolRuleMode(mode)] || PVP_POOL_RULE_MODES.livre;
+}
+
+function getPoolBallColor(id, mode = "livre") {
+  const number = clampInteger(id);
+  if (normalizePoolRuleMode(mode) === "brasileira") {
+    return PVP_POOL_BRAZILIAN_COLORS[number] || PVP_POOL_COLORS[(number - 1) % PVP_POOL_COLORS.length] || "#f0c742";
+  }
+  return PVP_POOL_COLORS[(number - 1) % PVP_POOL_COLORS.length] || "#f0c742";
+}
+
+function getPoolGroupForNumber(number = 0) {
+  return clampInteger(number) % 2 === 0 ? "PAR" : "IMPAR";
+}
+
+function getPoolPvPRivalSeat(seat = "playerOne") {
+  return seat === "playerOne" ? "playerTwo" : "playerOne";
+}
+
+function getNextBrazilianPoolBall(balls = []) {
+  return (Array.isArray(balls) ? balls : [])
+    .filter((ball) => !ball.cue && clampInteger(ball.id) > 0 && !ball.pocketed)
+    .map((ball) => clampInteger(ball.id))
+    .sort((a, b) => a - b)[0] || 0;
+}
+
+function isPoolGroupCleared(state = {}, seat = "playerOne") {
+  const group = safeString(state[`${seat}Group`] || "", 20).toUpperCase();
+  if (!group) return false;
+  return (Array.isArray(state.balls) ? state.balls : [])
+    .filter((ball) => !ball.cue && clampInteger(ball.id) !== 15 && getPoolGroupForNumber(ball.id) === group)
+    .every((ball) => Boolean(ball.pocketed));
 }
 
 function distancePointToPoolSegment(px, py, ax, ay, bx, by) {
@@ -18960,7 +19321,36 @@ function poolBallReachedPocket(ball, pocket) {
   return distancePointToPoolSegment(pocket.x, pocket.y, ball.prevX, ball.prevY, ball.x, ball.y) <= PVP_POOL_TABLE.pocketRadius;
 }
 
-function createPoolPvPBalls() {
+function createPoolRackRows(rowCounts = [1, 2, 3, 2, 1]) {
+  const apex = { x: 63, y: 25 };
+  const positions = [];
+  rowCounts.forEach((rowCount, column) => {
+    for (let row = 0; row < rowCount; row += 1) {
+      positions.push({
+        x: Number((apex.x + column * 3.05).toFixed(2)),
+        y: Number((apex.y + (row - (rowCount - 1) / 2) * 3.35).toFixed(2)),
+      });
+    }
+  });
+  return positions;
+}
+
+function getPoolRackOrder(ruleMode = "livre") {
+  const mode = normalizePoolRuleMode(ruleMode);
+  if (mode === "brasileira") return [1, 2, 3, 4, 7, 5, 6];
+  if (mode === "parimpar") return [2, 3, 4, 5, 15, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  return [1, 2, 3, 4, 9, 5, 6, 7, 8];
+}
+
+function getPoolRackPositions(ruleMode = "livre") {
+  const mode = normalizePoolRuleMode(ruleMode);
+  if (mode === "parimpar") return createPoolRackRows([1, 2, 3, 4, 4]);
+  if (mode === "brasileira") return createPoolRackRows([1, 2, 3, 1]);
+  return createPoolRackRows([1, 2, 3, 2, 1]);
+}
+
+function createPoolPvPBalls(ruleMode = "livre") {
+  const mode = normalizePoolRuleMode(ruleMode);
   const balls = [{
     id: 0,
     label: "branca",
@@ -18972,51 +19362,80 @@ function createPoolPvPBalls() {
     vy: 0,
     pocketed: false,
   }];
-  const apex = { x: 63, y: 25 };
-  let id = 1;
-  for (let row = 0; row < 5; row += 1) {
-    for (let offset = 0; offset <= row; offset += 1) {
-      balls.push({
-        id,
-        label: String(id),
-        cue: false,
-        color: PVP_POOL_COLORS[(id - 1) % PVP_POOL_COLORS.length],
-        x: apex.x + row * 3.05,
-        y: apex.y + (offset - row / 2) * 3.35,
-        vx: 0,
-        vy: 0,
-        pocketed: false,
-      });
-      id += 1;
-    }
-  }
+  const numbers = getPoolRackOrder(mode);
+  const positions = getPoolRackPositions(mode);
+  numbers.forEach((id, index) => {
+    const position = positions[index] || { x: 63, y: 25 };
+    balls.push({
+      id,
+      label: String(id),
+      cue: false,
+      color: getPoolBallColor(id, mode),
+      x: position.x,
+      y: position.y,
+      vx: 0,
+      vy: 0,
+      pocketed: false,
+    });
+  });
   return balls;
 }
 
-function createPoolPvPState() {
+function createPoolPvPSetup(setup = {}) {
+  const tutorialReady = setup?.tutorialReady || {};
+  return {
+    complete: Boolean(setup.complete),
+    phase: safeString(setup.phase || (setup.complete ? "done" : "waiting-ready"), 40),
+    winnerSeat: safeString(setup.winnerSeat || "", 20),
+    chooserSeat: safeString(setup.chooserSeat || "", 20),
+    starterSeat: safeString(setup.starterSeat || "", 20),
+    modeChooserSeat: safeString(setup.modeChooserSeat || "", 20),
+    starterChooserSeat: safeString(setup.starterChooserSeat || "", 20),
+    ruleMode: normalizePoolRuleMode(setup.ruleMode || ""),
+    winnerChoice: safeString(setup.winnerChoice || setup.choice || "", 20),
+    choice: safeString(setup.choice || "", 20),
+    tutorialReady: {
+      playerOne: Boolean(tutorialReady.playerOne),
+      playerTwo: Boolean(tutorialReady.playerTwo),
+    },
+    decidedAt: safeString(setup.decidedAt || "", 40),
+  };
+}
+
+function createPoolPvPState(ruleMode = "livre", setup = {}) {
+  const mode = normalizePoolRuleMode(ruleMode);
+  const rule = getPoolRuleMode(mode);
   return {
     shot: 1,
     maxShots: PVP_POOL_MAX_SHOTS,
+    ruleMode: mode,
+    ruleLabel: rule.label,
+    scoreLabel: rule.scoreLabel,
+    setup: createPoolPvPSetup(setup),
     playerOneScore: 0,
     playerTwoScore: 0,
-    balls: createPoolPvPBalls(),
+    playerOneGroup: "",
+    playerTwoGroup: "",
+    nextBall: mode === "brasileira" ? 1 : 0,
+    balls: createPoolPvPBalls(mode),
     lastShot: null,
     history: [],
   };
 }
 
-function clonePoolPvPBalls(balls = []) {
-  const source = Array.isArray(balls) && balls.length ? balls : createPoolPvPBalls();
+function clonePoolPvPBalls(balls = [], ruleMode = "livre") {
+  const source = Array.isArray(balls) && balls.length ? balls : createPoolPvPBalls(ruleMode);
   return source.map((ball) => ({
     id: clampInteger(ball.id),
     label: safeString(ball.label || ball.id || "", 20),
     cue: Boolean(ball.cue || clampInteger(ball.id) === 0),
-    color: safeString(ball.color || "#fff6dc", 20),
+    color: safeString(ball.color || (clampInteger(ball.id) === 0 ? "#fff6dc" : getPoolBallColor(ball.id, ruleMode)), 20),
     x: clampPoolNumber(ball.x, 0, PVP_POOL_TABLE.width, ball.cue ? PVP_POOL_TABLE.cueStart.x : 50),
     y: clampPoolNumber(ball.y, 0, PVP_POOL_TABLE.height, ball.cue ? PVP_POOL_TABLE.cueStart.y : 25),
     vx: clampPoolNumber(ball.vx, -250, 250, 0),
     vy: clampPoolNumber(ball.vy, -250, 250, 0),
     pocketed: Boolean(ball.pocketed),
+    spin: normalizePoolSpin(ball.spin || "centro"),
   }));
 }
 
@@ -19024,24 +19443,107 @@ function getPoolPvPSeatScoreKey(seat = "") {
   return seat === "playerOne" ? "playerOneScore" : "playerTwoScore";
 }
 
-function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne", angle = 0, power = 0.5) {
+function scorePoolPvPShot(state = createPoolPvPState(), seat = "playerOne", pocketedNow = [], cuePocketed = false, targetBefore = 0) {
+  const ruleMode = normalizePoolRuleMode(state.ruleMode || "livre");
+  const scoreKey = getPoolPvPSeatScoreKey(seat);
+  const rivalSeat = getPoolPvPRivalSeat(seat);
+  const rivalScoreKey = getPoolPvPSeatScoreKey(rivalSeat);
+  let message = "";
+  let winner = "";
+  let finished = false;
+  if (ruleMode === "brasileira") {
+    const target = targetBefore || getNextBrazilianPoolBall(state.balls);
+    const wrongBall = pocketedNow.find((ball) => clampInteger(ball.id) !== target);
+    if (cuePocketed || wrongBall) {
+      state[rivalScoreKey] = clampInteger(state[rivalScoreKey]) + 7;
+      message = cuePocketed ? "Falta: branca caiu. 7 pontos ao rival." : `Falta: bola da vez era ${target}. 7 pontos ao rival.`;
+    } else if (pocketedNow.length) {
+      const made = pocketedNow.reduce((sum, ball) => sum + clampInteger(ball.id), 0);
+      state[scoreKey] = clampInteger(state[scoreKey]) + made;
+      message = `${made} ponto${made === 1 ? "" : "s"} na Sinuca Brasileira.`;
+    } else {
+      message = "Sem encaçapar na Sinuca Brasileira.";
+    }
+    state.nextBall = getNextBrazilianPoolBall(state.balls);
+    finished = state.nextBall <= 0;
+    return { message, winner, finished };
+  }
+
+  if (ruleMode === "parimpar") {
+    let groupAssignedMessage = "";
+    if (cuePocketed) message = "Falta: branca caiu. Rival fica com bola na mao.";
+    for (const ball of pocketedNow) {
+      const id = clampInteger(ball.id);
+      if (id === 15) {
+        if (isPoolGroupCleared(state, seat)) {
+          winner = seat;
+          message = "Bola 15 fechou a partida.";
+        } else {
+          winner = rivalSeat;
+          message = "Bola 15 caiu antes da hora. Rival venceu.";
+        }
+        finished = true;
+        break;
+      }
+      if (!state.playerOneGroup && !state.playerTwoGroup) {
+        const group = getPoolGroupForNumber(id);
+        const other = group === "PAR" ? "IMPAR" : "PAR";
+        state[`${seat}Group`] = group;
+        state[`${rivalSeat}Group`] = other;
+        groupAssignedMessage = `Grupo definido: jogador ${group}, rival ${other}.`;
+      }
+      const ownGroup = safeString(state[`${seat}Group`] || "", 20).toUpperCase();
+      if (!ownGroup || getPoolGroupForNumber(id) === ownGroup) {
+        state[scoreKey] = clampInteger(state[scoreKey]) + 1;
+        message = `Bola ${id} do grupo ${ownGroup || getPoolGroupForNumber(id)}.`;
+      } else {
+        state[rivalScoreKey] = clampInteger(state[rivalScoreKey]) + 1;
+        message = `Bola ${id} era do rival.`;
+      }
+      if (groupAssignedMessage) {
+        message = `${groupAssignedMessage} ${message}`;
+        groupAssignedMessage = "";
+      }
+    }
+    if (!message) message = "Sem encaçapar no Par/Impar.";
+    return { message, winner, finished };
+  }
+
+  state[scoreKey] = clampInteger(state[scoreKey]) + pocketedNow.length;
+  message = pocketedNow.length
+    ? `${pocketedNow.length} bola${pocketedNow.length === 1 ? "" : "s"} no modo Livre.`
+    : "Sem encaçapar no modo Livre.";
+  return { message, winner, finished };
+}
+
+function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne", angle = 0, power = 0.5, spinValue = "centro") {
+  const ruleMode = normalizePoolRuleMode(poolState.ruleMode || "livre");
+  const baseState = createPoolPvPState(ruleMode, poolState.setup || { complete: true, phase: "done" });
   const state = {
-    ...createPoolPvPState(),
+    ...baseState,
     ...poolState,
-    balls: clonePoolPvPBalls(poolState.balls),
+    ruleMode,
+    ruleLabel: getPoolRuleMode(ruleMode).label,
+    scoreLabel: getPoolRuleMode(ruleMode).scoreLabel,
+    setup: createPoolPvPSetup(poolState.setup || { complete: true, phase: "done" }),
+    balls: clonePoolPvPBalls(poolState.balls, ruleMode),
     history: Array.isArray(poolState.history) ? poolState.history.slice(-24) : [],
   };
   const cue = state.balls.find((ball) => ball.cue || ball.id === 0) || state.balls[0];
   const shotAngle = clampPoolNumber(angle, -180, 180, 0);
   const shotPower = clampPoolNumber(power, 0.1, 1, 0.5);
+  const shotSpin = normalizePoolSpin(spinValue);
+  const spin = PVP_POOL_SPINS[shotSpin] || PVP_POOL_SPINS.centro;
   const radians = (shotAngle * Math.PI) / 180;
   const speed = 58 + shotPower * 122;
   const pocketedBefore = new Set(state.balls.filter((ball) => ball.pocketed && !ball.cue).map((ball) => ball.id));
+  const targetBefore = ruleMode === "brasileira" ? getNextBrazilianPoolBall(state.balls) : 0;
   cue.pocketed = false;
   cue.x = clampPoolNumber(cue.x, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.width - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.x);
   cue.y = clampPoolNumber(cue.y, PVP_POOL_TABLE.radius, PVP_POOL_TABLE.height - PVP_POOL_TABLE.radius, PVP_POOL_TABLE.cueStart.y);
-  cue.vx = Math.cos(radians) * speed;
-  cue.vy = Math.sin(radians) * speed;
+  cue.vx = Math.cos(radians) * speed + spin.vx * 190;
+  cue.vy = Math.sin(radians) * speed + spin.vy * 190;
+  cue.spin = shotSpin;
 
   let cuePocketed = false;
   let stillFrames = 0;
@@ -19049,6 +19551,15 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
   for (let frame = 0; frame < 3600; frame += 1) {
     state.balls.forEach((ball) => {
       if (ball.pocketed) return;
+      if ((ball.cue || ball.id === 0) && ball.spin && ball.spin !== "centro") {
+        const activeSpin = PVP_POOL_SPINS[ball.spin] || PVP_POOL_SPINS.centro;
+        const ballSpeed = Math.hypot(ball.vx, ball.vy);
+        if (ballSpeed > 12 && activeSpin.turn) {
+          const curveAngle = Math.atan2(ball.vy, ball.vx) + activeSpin.turn * dt * 7;
+          ball.vx = Math.cos(curveAngle) * ballSpeed;
+          ball.vy = Math.sin(curveAngle) * ballSpeed;
+        }
+      }
       ball.prevX = ball.x;
       ball.prevY = ball.y;
       ball.x += ball.vx * dt;
@@ -19155,17 +19666,19 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
     delete ball.prevY;
   });
   const pocketedNow = state.balls.filter((ball) => !ball.cue && ball.pocketed && !pocketedBefore.has(ball.id));
-  const scoreKey = getPoolPvPSeatScoreKey(seat);
-  state[scoreKey] = clampInteger(state[scoreKey]) + pocketedNow.length;
+  const score = scorePoolPvPShot(state, seat, pocketedNow, cuePocketed, targetBefore);
   const nextShot = clampInteger(state.shot, 1) + 1;
   const remaining = state.balls.filter((ball) => !ball.cue && !ball.pocketed).length;
   const lastShot = {
     seat,
+    ruleMode,
     angle: Number(shotAngle.toFixed(1)),
     power: Number(shotPower.toFixed(2)),
+    spin: shotSpin,
     pocketed: pocketedNow.map((ball) => ball.id),
     cuePocketed,
     remaining,
+    message: score.message,
     at: new Date().toISOString(),
   };
   state.lastShot = lastShot;
@@ -19176,7 +19689,9 @@ function simulatePoolPvPShot(poolState = createPoolPvPState(), seat = "playerOne
     pocketedCount: pocketedNow.length,
     cuePocketed,
     remaining,
-    finished: remaining <= 0 || nextShot > clampInteger(state.maxShots, PVP_POOL_MAX_SHOTS),
+    winner: score.winner,
+    message: score.message,
+    finished: Boolean(score.finished) || remaining <= 0 || nextShot > clampInteger(state.maxShots, PVP_POOL_MAX_SHOTS),
   };
 }
 
@@ -19693,13 +20208,19 @@ function buildPubpaidPvpStatePayload(store, authUser, gameId) {
       ? "playerOne"
       : "playerTwo"
     : "";
+  const matchPayload = matchEntry?.gameId === "chess" && matchEntry?.chessState
+    ? {
+        ...matchEntry,
+        chessState: decorateChessPvPState(matchEntry.chessState),
+      }
+    : matchEntry;
   return {
     ok: true,
     gameId,
-    state: matchEntry ? matchEntry.status : waitingEntry ? "waiting" : "idle",
+    state: matchPayload ? matchPayload.status : waitingEntry ? "waiting" : "idle",
     seat,
     queue: waitingEntry,
-    match: matchEntry,
+    match: matchPayload,
   };
 }
 

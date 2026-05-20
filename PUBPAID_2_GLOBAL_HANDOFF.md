@@ -28,9 +28,12 @@ Este arquivo manteve o nome antigo porque `AGENTS.md` manda le-lo antes de mexer
 2. Checagem de build/cache antes do jogo.
 3. Google autentica e entra sem botao intermediario.
 4. Nick persistido por conta, com opcao de alterar.
-5. Damas abre somente com saldo real aprovado.
-6. PvP: jogador A espera, jogador B entra, ambos confirmam `Estou pronto`, servidor ativa a partida e cada lado move no proprio tabuleiro.
+5. Em celular/touch, o jogo deve ser jogado em horizontal; retrato bloqueia com o gate `Mude para horizontal`.
+6. Mesas ativas atuais: Sinuca, Damas e Xadrez. Treino/Demo nao mexe em saldo; PvP real exige saldo real aprovado.
+7. PvP: jogador A espera, jogador B entra, ambos confirmam `Estou pronto`, servidor ativa a partida e cada lado move no proprio tabuleiro.
 
 ## Foco atual
 
-Corrigir e provar o PvP real em duas sessoes, eliminar cache que exige aba anonima, travar fullscreen/sem scroll e manter apenas o caminho canonico `/pubpaid.html`.
+Build local atual: `20260520-poolrules1`.
+
+Foco vivo: PubPaid canonico com Sinuca/Damas/Xadrez, abertura mais leve, mobile horizontal obrigatorio e Sinuca usando o prototipo Vale Pool aprovado. A Sinuca tem modalidades Livre, Brasileira e Par/Impar. Abertura em Demo/IA e PvP: moeda animada; vencedor escolhe apenas uma parte (`ser primeiro` ou `modalidade`); perdedor escolhe a parte restante. Depois das escolhas, abre tutorial do modo antes da mesa; no PvP os dois jogadores precisam confirmar o tutorial antes da primeira tacada. PvP usa `/api/pubpaid/pvp/pool/setup`, rack por modalidade e bloqueio de tacada ate a escolha/tutorial acabar. Em `20260520-poolrules1`, a HUD e os cartoes laterais mostram regra viva por modalidade: Livre informa que qualquer bola 1-9 vale, Brasileira informa a bola da vez menor em mesa e Par/Impar mostra grupo PAR/IMPAR ou que a primeira bola define o grupo. O botao `REGRAS` em cada cartao abre um manual pop-up e fecha de volta para a partida. Validar com `node --check`, `npm run guard:pubpaid` e `/api/pubpaid/build=20260520-poolrules1`. PvP real ainda deve ser testado em duas sessoes autenticadas antes de fechar fluxo financeiro.

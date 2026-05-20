@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260518-gamescomplete3";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260518-gamescomplete3";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260520-poolrules1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260520-poolrules1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260518-gamescomplete3";
-import { BootScene } from "./scenes/BootScene.js?v=20260518-gamescomplete3";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260518-gamescomplete3";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260518-gamescomplete3";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260518-gamescomplete3";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260518-gamescomplete3";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260518-gamescomplete3";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260518-gamescomplete3";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260518-gamescomplete3";
-import { UIScene } from "./scenes/UIScene.js?v=20260518-gamescomplete3";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260520-poolrules1";
+import { BootScene } from "./scenes/BootScene.js?v=20260520-poolrules1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260520-poolrules1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260520-poolrules1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260520-poolrules1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260520-poolrules1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260520-poolrules1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260520-poolrules1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260520-poolrules1";
+import { UIScene } from "./scenes/UIScene.js?v=20260520-poolrules1";
 
-const PUBPAID_BUILD_VERSION = "20260518-gamescomplete3";
+const PUBPAID_BUILD_VERSION = "20260520-poolrules1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -27,7 +27,6 @@ const isIOS =
 const isTouchDevice =
   window.matchMedia?.("(pointer: coarse)")?.matches || window.navigator.maxTouchPoints > 0;
 const isSmallScreen = window.matchMedia?.("(max-width: 960px)")?.matches ?? window.innerWidth <= 960;
-const isTouchPortraitAtBoot = Boolean(isTouchDevice && window.innerHeight > window.innerWidth);
 
 const config = {
   type: Phaser.AUTO,
@@ -35,7 +34,7 @@ const config = {
   transparent: true,
   backgroundColor: "#02050d",
   scale: {
-    mode: isTouchPortraitAtBoot ? Phaser.Scale.ENVELOP : Phaser.Scale.FIT,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: GAME_WIDTH,
     height: GAME_HEIGHT
@@ -97,6 +96,7 @@ let pendingAutoEntry = false;
 let pendingIntroStart = false;
 let pendingStartGameOptions = null;
 let fullscreenWasActive = false;
+let userAudioMuted = true;
 
 function setUpdateStatus(message) {
   if (refs.updateStatus) refs.updateStatus.textContent = message;
@@ -150,7 +150,6 @@ async function refreshPubpaidRuntimeCache() {
     window.localStorage?.removeItem("pubpaid_v2_build_version");
     const previousVersion = window.localStorage?.getItem(BUILD_KEY) || "";
     if (previousVersion === PUBPAID_BUILD_VERSION) {
-      await clearPubpaidCachesAndWorkers();
       return;
     }
     window.localStorage?.setItem(BUILD_KEY, PUBPAID_BUILD_VERSION);
@@ -212,7 +211,7 @@ async function runPubpaidUpdateGate() {
 
   await refreshPubpaidRuntimeCache();
   setUpdateStatus("Versao conferida. Abrindo entrada...");
-  window.setTimeout(() => refs.updateGate?.setAttribute("hidden", ""), 260);
+  window.setTimeout(() => refs.updateGate?.setAttribute("hidden", ""), isSmallScreen ? 90 : 140);
   return true;
 }
 
@@ -456,6 +455,7 @@ function syncAudioButton() {
 }
 
 function startSoundtrackFromGesture() {
+  if (userAudioMuted) return;
   if (soundtrack.isPlaying()) return;
   soundtrack.start();
   syncAudioButton();
@@ -513,17 +513,16 @@ function syncOrientationGate() {
   const blocked = isOrientationBlocked();
   const permissionGateVisible = Boolean(refs.permissionGate && !refs.permissionGate.hasAttribute("hidden"));
   const splashVisible = Boolean(refs.splash && !refs.splash.hasAttribute("hidden"));
-  const signedIn = Boolean(getAuthApi()?.isSignedIn?.());
-  const readyToPlay = signedIn || !isAuthRequired();
-  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible || (splashVisible && readyToPlay));
+  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible || splashVisible);
   refs.body?.classList.toggle("is-orientation-blocked", shouldShowGate);
+  refs.body?.classList.toggle("is-touch-portrait", blocked);
   if (refs.orientationGate) {
     refs.orientationGate.hidden = !shouldShowGate;
   }
   if (refs.orientationStatus) {
     refs.orientationStatus.textContent = blocked
       ? "Gire o aparelho para horizontal para continuar."
-      : "Modo horizontal pronto.";
+      : "Horizontal pronto.";
   }
 }
 
@@ -582,7 +581,7 @@ async function activateExperience() {
   startIntroScene({ restart: true });
   let audioStarted = false;
   try {
-    audioStarted = Boolean(soundtrack.startIntro());
+    audioStarted = userAudioMuted ? false : Boolean(soundtrack.startIntro());
   } catch (_error) {
     setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
@@ -866,7 +865,8 @@ function bindSplash() {
 
     if (event.target.closest("[data-audio-toggle]")) {
       event.preventDefault();
-      soundtrack.toggle();
+      const playing = soundtrack.toggle();
+      userAudioMuted = !playing;
       syncAudioButton();
       return;
     }
@@ -1092,7 +1092,7 @@ game.events.on("pubpaid:intro-enter", () => {
 game.events.on("pubpaid:intro-start", () => {
   soundtrack.setZone("street");
   try {
-    if (!soundtrack.isPlaying()) {
+    if (!userAudioMuted && !soundtrack.isPlaying()) {
       soundtrack.startIntro();
     }
   } catch (_error) {
@@ -1129,6 +1129,11 @@ game.events.on("pubpaid:intro-frame", ({ index = 0, totalFrames = 1 } = {}) => {
 
 game.events.on("pubpaid:music-zone", (zone) => {
   soundtrack.setZone(zone);
+});
+
+game.events.on("pubpaid:sound-cue", ({ cue = "select", gameId = "" } = {}) => {
+  soundtrack.playCue(cue, gameId);
+  syncAudioButton();
 });
 
 window.pubpaidPhaserGame = game;

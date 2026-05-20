@@ -1,39 +1,31 @@
 # Handoff
 
-Updated: 2026-05-18T23:18:00.000Z
+Updated: 2026-05-20T00:46:47-05:00
 
-PubPaid 2.0 esta na build local 20260518-gamescomplete3. Parte de jogos fechada localmente: todos os 7 jogos têm `Treino` e `Real`; textos visiveis foram revisados para portugues; treinos locais novos existem para Xadrez, 21, Pôquer, Truco e Dados. Ultimo ajuste pontual: a copy antiga de acao virou `Use Espaço para jogar`, mobile usa `Celular: toque em Jogar`, o botao touch da Sinuca ficou `Jogar`, e os botoes mobile globais ficaram `Caixa` e `Jogar`. Servidor local reiniciado e respondendo 20260518-gamescomplete3. Validado com node --check, npm run guard:pubpaid e Playwright confirmando os textos/botoes sem erros de console.
-
-Direcao de arte obrigatoria registrada: o anchor oficial e `.codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png`. Proximos personagens, NPCs, rua, cenario, props, HUD e animacoes devem parecer da mesma familia: pixel art realista, com leitura de sprite, volume, luz, roupa detalhada, corpo crivel, contorno, sombra e uso real em spritesheet/animacao.
+PubPaid Sinuca atualizada em 20260520-poolrules1. O prototipo aprovado `.codex-temp/vale-pool-round2` foi promovido para `games/vale-pool/` e substitui a Sinuca antiga dentro do PubPaid. Demo abre por iframe sem ficha/carteira, com jogador vs Robo IA, controles por mouse/teclado, ponto de batida livre na bola branca do HUD, bolas dentro/fora, historico de jogadas, bloco superior `VEZ`, cartões laterais, taco/pontilhado e caçapas abertas visualmente para o lado do pano. A captura das caçapas foi ampliada no prototipo e no servidor PvP, incluindo checagem do trajeto entre frames para a bola cair sem rebater na boca. Modalidades implementadas: `Livre` (branca + bolas 1-9, placar por bolas), `Brasileira` (branca + 7 coloridas oficiais, bola da vez menor em mesa, placar por pontos) e `Par/Impar` (branca + 2-15, primeiro encaçape define grupo, 15 fecha/castiga). A abertura em Demo/IA e PvP segue: moeda animada; vencedor escolhe uma parte (`ser primeiro` ou `modalidade`); perdedor escolhe a parte restante. Depois disso abre tutorial da modalidade antes da mesa. Demo só começa ao apertar `COMEÇAR PARTIDA`; PvP só libera tacada quando os dois jogadores confirmam o tutorial. A HUD informa a regra viva durante a partida: Livre mostra alvo livre 1-9, Brasileira mostra a bola da vez, Par/Impar mostra definicao ou grupo PAR/IMPAR. Os cartoes laterais têm botao `REGRAS` para abrir manual pop-up e fechar sem sair da partida. PvP usa endpoint `/api/pubpaid/pvp/pool/setup`, monta rack por modalidade no servidor e bloqueia tacada ate escolha/tutorial acabar. Conhecimento consolidado em `.codex-agents/game-director-system/projects/vale-pool.md` e `C:\Users\junio\.codex\skills\game-director-general\references\pool-modalities.md`.
 
 ## Next
 
-- Nao publicar online sem permissao do usuario.
-- Se publicar
-- validar build online se o usuario pedir; a partir daqui tratar como correções pontuais em vez de nova reforma ampla dos jogos.
+- Nao redesenhar a mesa aprovada sem pedido explicito; manter o prototipo como fonte visual.
+- Se houver ajuste visual, mexer primeiro em `games/vale-pool/` e so depois no wrapper PubPaid.
+- Validar PvP real em duas sessoes autenticadas diferentes antes de considerar fluxo financeiro fechado; a logica de setup/shot ja esta no servidor, mas a validacao visual feita nesta rodada foi na Demo.
+- Manter jogos PubPaid em celular sempre horizontais e full width.
 
 ## Files In Focus
 
-- pubpaid-phaser/scenes/CharacterSelectScene.js
-- pubpaid-phaser/scenes/InteriorScene.js
-- pubpaid-phaser/scenes/StreetScene.js
-- pubpaid-phaser/services/accountService.js
-- pubpaid-phaser/services/pvpService.js
-- pubpaid-runtime.js
-- pubpaid-admin.html
-- pubpaid-phaser.css
-- pubpaid-phaser/app.js
-- pubpaid-phaser/scenes/BootScene.js
+- games/vale-pool/index.html
+- games/vale-pool/styles.css
+- games/vale-pool/game.js
 - pubpaid-phaser/ui/domGameInterface.js
-- pubpaid-phaser/ui/walletInterface.js
-- pubpaid.html
+- pubpaid-phaser.css
 - server.js
+- pubpaid.html
+- .codex-memory/current-state.md
+- .codex-memory/handoff.md
+- .codex-memory/orders.json
+- .codex-memory/assets.json
 
 ## Related Orders
 
-- 2026-05-18-fixar-realistic-host-spritesheet-como-anchor-oficial-de-arte-pubpaid
-- 2026-05-18-remover-nomes-circulos-e-marcadores-do-chao-na-selecao-salao-pubpaid
-- 2026-05-18-ajustar-indicadores-discretos-e-regras-de-saque-pubpaid
-- 2026-05-18-reformular-jogos-de-cartas-pubpaid-com-mesa-grafica
-- 2026-05-18-finalizar-textos-e-treinos-de-todos-os-jogos-pubpaid
-- 2026-05-18-ajustar-copy-controles-jogar-pubpaid
+- 2026-05-19-substituir-sinuca-pubpaid-pelo-prototipo-vale-pool
+- 2026-05-19-refazer-sinuca-pubpaid-para-parecer-mesa-real-remover-faixa-sobre-a-mesa-e-adici
