@@ -1,93 +1,108 @@
 {
   "ok": true,
-  "startedAt": "2026-04-30T14:06:11.554Z",
-  "finishedAt": "2026-04-30T14:06:13.307Z",
-  "capturedItems": 203,
-  "capturedToday": 124,
+  "startedAt": "2026-05-20T16:28:14.517Z",
+  "finishedAt": "2026-05-20T16:28:18.307Z",
+  "capturedItems": 199,
+  "capturedToday": 130,
   "activeWindowItems": 420,
-  "archiveItems": 790,
+  "archiveItems": 1000,
   "reports": [
     {
       "source": "ac24horas",
       "ok": true,
-      "count": 20
+      "count": 20,
+      "mode": "rss"
     },
     {
       "source": "agencia-acre",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     },
     {
       "source": "agencia-brasil-ultimas",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     },
     {
       "source": "batelao",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     },
     {
       "source": "cnn-brasil",
       "ok": true,
-      "count": 30
+      "count": 18,
+      "mode": "rss"
     },
     {
       "source": "g1-brasil",
       "ok": true,
-      "count": 30
+      "count": 18,
+      "mode": "rss"
     },
     {
       "source": "g1-politica",
       "ok": true,
-      "count": 30
+      "count": 18,
+      "mode": "rss"
     },
     {
       "source": "g1-pop-arte",
       "ok": true,
-      "count": 30
+      "count": 14,
+      "mode": "rss"
     },
     {
       "source": "jurua-24-horas",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     },
     {
       "source": "jurua-comunicacao",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     },
     {
       "source": "jurua-online",
       "ok": true,
-      "count": 0
+      "count": 24,
+      "mode": "wordpress-json"
     },
     {
       "source": "portal-do-jurua",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP 404"
+      "ok": true,
+      "count": 25,
+      "mode": "rss"
     },
     {
       "source": "prefeitura-czs",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP 404"
+      "ok": true,
+      "count": 3,
+      "mode": "prefeitura-wix-home"
     },
     {
       "source": "terra-diversao",
       "ok": true,
-      "count": 0
+      "count": 0,
+      "skipped": true,
+      "reason": "Canal web ativo, mas RSS monitorado retornou 0 itens; usar como referência manual até trocar integração."
     },
     {
       "source": "the-verge",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     },
     {
       "source": "tribuna-do-jurua",
       "ok": true,
-      "count": 10
+      "count": 10,
+      "mode": "rss"
     }
   ]
 }

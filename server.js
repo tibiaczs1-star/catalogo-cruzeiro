@@ -18592,7 +18592,7 @@ function handleStatic(req, res, pathname, requestUrl) {
   }
 
   if (pathname === "/" || pathname === "/index.html") {
-    return sendFile(req, res, MAINTENANCE_FILE, {
+    return sendFile(req, res, INDEX_FILE, {
       cacheControl: "no-store",
       templateVars
     });

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-18T23:15:45.910Z",
+  "updatedAt": "2026-05-22T07:11:25.645Z",
   "actions": [
     {
       "id": "act-esttiles-fashion-fashion-lead-1",
@@ -10,11 +10,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/01-esttiles-fashion-fashion-lead.md",
-      "createdAt": "2026-05-18T23:15:45.884Z"
+      "createdAt": "2026-05-22T07:11:25.619Z"
     },
     {
       "id": "act-esttiles-fashion-trend-lead-2",
@@ -24,11 +24,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/02-esttiles-fashion-trend-lead.md",
-      "createdAt": "2026-05-18T23:15:45.885Z"
+      "createdAt": "2026-05-22T07:11:25.620Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-producer-3",
@@ -38,11 +38,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/03-esttiles-fashion-fashion-producer.md",
-      "createdAt": "2026-05-18T23:15:45.885Z"
+      "createdAt": "2026-05-22T07:11:25.620Z"
     },
     {
       "id": "act-esttiles-fashion-street-style-4",
@@ -52,11 +52,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/04-esttiles-fashion-street-style.md",
-      "createdAt": "2026-05-18T23:15:45.886Z"
+      "createdAt": "2026-05-22T07:11:25.621Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-reporter-5",
@@ -66,11 +66,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/05-esttiles-fashion-fashion-reporter.md",
-      "createdAt": "2026-05-18T23:15:45.886Z"
+      "createdAt": "2026-05-22T07:11:25.621Z"
     },
     {
       "id": "act-esttiles-fashion-fabric-editor-6",
@@ -80,11 +80,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/06-esttiles-fashion-fabric-editor.md",
-      "createdAt": "2026-05-18T23:15:45.887Z"
+      "createdAt": "2026-05-22T07:11:25.621Z"
     },
     {
       "id": "act-esttiles-fashion-culture-fashion-7",
@@ -94,11 +94,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/07-esttiles-fashion-culture-fashion.md",
-      "createdAt": "2026-05-18T23:15:45.887Z"
+      "createdAt": "2026-05-22T07:11:25.622Z"
     },
     {
       "id": "act-esttiles-fashion-photo-brief-8",
@@ -108,11 +108,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/08-esttiles-fashion-photo-brief.md",
-      "createdAt": "2026-05-18T23:15:45.888Z"
+      "createdAt": "2026-05-22T07:11:25.623Z"
     },
     {
       "id": "act-esttiles-fashion-menswear-9",
@@ -122,11 +122,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/09-esttiles-fashion-menswear.md",
-      "createdAt": "2026-05-18T23:15:45.888Z"
+      "createdAt": "2026-05-22T07:11:25.623Z"
     },
     {
       "id": "act-esttiles-fashion-womenswear-10",
@@ -136,11 +136,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/10-esttiles-fashion-womenswear.md",
-      "createdAt": "2026-05-18T23:15:45.889Z"
+      "createdAt": "2026-05-22T07:11:25.624Z"
     },
     {
       "id": "act-esttiles-fashion-kids-fashion-11",
@@ -150,11 +150,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/11-esttiles-fashion-kids-fashion.md",
-      "createdAt": "2026-05-18T23:15:45.889Z"
+      "createdAt": "2026-05-22T07:11:25.625Z"
     },
     {
       "id": "act-esttiles-fashion-plus-style-12",
@@ -164,11 +164,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/12-esttiles-fashion-plus-style.md",
-      "createdAt": "2026-05-18T23:15:45.890Z"
+      "createdAt": "2026-05-22T07:11:25.625Z"
     },
     {
       "id": "act-esttiles-fashion-ecommerce-13",
@@ -178,11 +178,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/13-esttiles-fashion-ecommerce.md",
-      "createdAt": "2026-05-18T23:15:45.890Z"
+      "createdAt": "2026-05-22T07:11:25.626Z"
     },
     {
       "id": "act-esttiles-fashion-photo-editor-14",
@@ -192,11 +192,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/14-esttiles-fashion-photo-editor.md",
-      "createdAt": "2026-05-18T23:15:45.891Z"
+      "createdAt": "2026-05-22T07:11:25.626Z"
     },
     {
       "id": "act-esttiles-fashion-layout-editor-15",
@@ -206,11 +206,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/15-esttiles-fashion-layout-editor.md",
-      "createdAt": "2026-05-18T23:15:45.891Z"
+      "createdAt": "2026-05-22T07:11:25.627Z"
     },
     {
       "id": "act-esttiles-fashion-accessibility-style-16",
@@ -220,11 +220,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/16-esttiles-fashion-accessibility-style.md",
-      "createdAt": "2026-05-18T23:15:45.892Z"
+      "createdAt": "2026-05-22T07:11:25.627Z"
     },
     {
       "id": "act-esttiles-fashion-campaign-qa-17",
@@ -234,11 +234,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/17-esttiles-fashion-campaign-qa.md",
-      "createdAt": "2026-05-18T23:15:45.892Z"
+      "createdAt": "2026-05-22T07:11:25.627Z"
     },
     {
       "id": "act-esttiles-fashion-retouch-watch-18",
@@ -248,11 +248,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/18-esttiles-fashion-retouch-watch.md",
-      "createdAt": "2026-05-18T23:15:45.893Z"
+      "createdAt": "2026-05-22T07:11:25.628Z"
     },
     {
       "id": "act-esttiles-fashion-cms-fashion-19",
@@ -262,11 +262,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/19-esttiles-fashion-cms-fashion.md",
-      "createdAt": "2026-05-18T23:15:45.893Z"
+      "createdAt": "2026-05-22T07:11:25.628Z"
     },
     {
       "id": "act-esttiles-fashion-data-fashion-20",
@@ -276,11 +276,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/20-esttiles-fashion-data-fashion.md",
-      "createdAt": "2026-05-18T23:15:45.893Z"
+      "createdAt": "2026-05-22T07:11:25.629Z"
     },
     {
       "id": "act-esttiles-fashion-photo-pipeline-21",
@@ -290,11 +290,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/21-esttiles-fashion-photo-pipeline.md",
-      "createdAt": "2026-05-18T23:15:45.894Z"
+      "createdAt": "2026-05-22T07:11:25.629Z"
     },
     {
       "id": "act-esttiles-fashion-calendar-fashion-22",
@@ -304,11 +304,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/22-esttiles-fashion-calendar-fashion.md",
-      "createdAt": "2026-05-18T23:15:45.894Z"
+      "createdAt": "2026-05-22T07:11:25.630Z"
     },
     {
       "id": "act-esttiles-fashion-trend-ai-23",
@@ -318,11 +318,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/23-esttiles-fashion-trend-ai.md",
-      "createdAt": "2026-05-18T23:15:45.895Z"
+      "createdAt": "2026-05-22T07:11:25.630Z"
     },
     {
       "id": "act-esttiles-fashion-shop-guide-24",
@@ -332,11 +332,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/24-esttiles-fashion-shop-guide.md",
-      "createdAt": "2026-05-18T23:15:45.895Z"
+      "createdAt": "2026-05-22T07:11:25.631Z"
     },
     {
       "id": "act-esttiles-fashion-ethics-fashion-25",
@@ -346,11 +346,11 @@
       "role": "review",
       "kind": "auditoria",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "corrigir texto com cara de texto temporario de carregamento em game-director-demo.js",
+      "title": "corrigir texto publico em ingles em data/news-archive.json",
       "artifact": ".codex-temp/real-agents/artifacts/25-esttiles-fashion-ethics-fashion.md",
-      "createdAt": "2026-05-18T23:15:45.896Z"
+      "createdAt": "2026-05-22T07:11:25.631Z"
     },
     {
       "id": "act-esttiles-fashion-beauty-copy-26",
@@ -360,11 +360,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
       "title": "reescrever titulo, apoio e gancho de clique para Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar",
       "artifact": ".codex-temp/real-agents/artifacts/26-esttiles-fashion-beauty-copy.md",
-      "createdAt": "2026-05-18T23:15:45.896Z"
+      "createdAt": "2026-05-22T07:11:25.631Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-deploy-27",
@@ -374,11 +374,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 6367,
+      "points": 7843,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1123 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/27-esttiles-fashion-fashion-deploy.md",
-      "createdAt": "2026-05-18T23:15:45.896Z"
+      "createdAt": "2026-05-22T07:11:25.632Z"
     },
     {
       "id": "act-esttiles-fashion-beauty-watch-28",
@@ -388,11 +388,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/28-esttiles-fashion-beauty-watch.md",
-      "createdAt": "2026-05-18T23:15:45.897Z"
+      "createdAt": "2026-05-22T07:11:25.632Z"
     },
     {
       "id": "act-esttiles-fashion-trend-scout-29",
@@ -402,11 +402,11 @@
       "role": "sources",
       "kind": "checagem-fonte",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
       "title": "expandir a malha de fontes de study",
       "artifact": ".codex-temp/real-agents/artifacts/29-esttiles-fashion-trend-scout.md",
-      "createdAt": "2026-05-18T23:15:45.897Z"
+      "createdAt": "2026-05-22T07:11:25.633Z"
     },
     {
       "id": "act-esttiles-fashion-color-stylist-30",
@@ -416,11 +416,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/30-esttiles-fashion-color-stylist.md",
-      "createdAt": "2026-05-18T23:15:45.898Z"
+      "createdAt": "2026-05-22T07:11:25.633Z"
     },
     {
       "id": "act-esttiles-fashion-styling-lead-31",
@@ -430,11 +430,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/31-esttiles-fashion-styling-lead.md",
-      "createdAt": "2026-05-18T23:15:45.898Z"
+      "createdAt": "2026-05-22T07:11:25.634Z"
     },
     {
       "id": "act-esttiles-fashion-casting-director-32",
@@ -444,11 +444,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/32-esttiles-fashion-casting-director.md",
-      "createdAt": "2026-05-18T23:15:45.899Z"
+      "createdAt": "2026-05-22T07:11:25.634Z"
     },
     {
       "id": "act-esttiles-fashion-lookbook-editor-33",
@@ -458,11 +458,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/33-esttiles-fashion-lookbook-editor.md",
-      "createdAt": "2026-05-18T23:15:45.899Z"
+      "createdAt": "2026-05-22T07:11:25.635Z"
     },
     {
       "id": "act-esttiles-fashion-wardrobe-editor-34",
@@ -472,11 +472,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/34-esttiles-fashion-wardrobe-editor.md",
-      "createdAt": "2026-05-18T23:15:45.900Z"
+      "createdAt": "2026-05-22T07:11:25.635Z"
     },
     {
       "id": "act-esttiles-fashion-beauty-director-35",
@@ -486,11 +486,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/35-esttiles-fashion-beauty-director.md",
-      "createdAt": "2026-05-18T23:15:45.900Z"
+      "createdAt": "2026-05-22T07:11:25.636Z"
     },
     {
       "id": "act-esttiles-fashion-makeup-artist-36",
@@ -500,11 +500,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 6361,
+      "points": 7837,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Governadora Mailza cumpre agenda com assinatura de ordens de serviço e entrega para fortalecer a Assistência Social nesta segunda",
+      "title": "reforcar a embalagem visual de Governadora Mailza entrega mais de 10 mil kits escolares e autoriza manutenção em escolas rurais de Sena Madureira",
       "artifact": ".codex-temp/real-agents/artifacts/36-esttiles-fashion-makeup-artist.md",
-      "createdAt": "2026-05-18T23:15:45.901Z"
+      "createdAt": "2026-05-22T07:11:25.636Z"
     }
   ]
 }

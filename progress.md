@@ -8,6 +8,17 @@ Atualizado: 2026-05-17
 
 O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 
+## Atualizacao 2026-05-22 - gameux2
+
+English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX without redesigning the games: on mobile, remove intrusive camera UI and rely on native gestures such as pinch-to-zoom and edge dragging; on desktop, allow dragging the table/frame edges with the mouse; cut the last two seconds from the Checkers intro video flow; and update Pool, Checkers, and Chess with original 32-bit Brazilian-inspired game themes without copying protected melodies."
+
+- Damas e Xadrez: mobile sem controles-orbe/controles touch globais interferindo; hint mobile agora orienta pinch + arrasto de borda.
+- Damas e Xadrez: camera aceita pinch para zoom e arrasto de borda/frame, com drag por mouse no desktop e roda para zoom.
+- Damas: intro encurtada em 2 segundos no tempo padrao e no modo `intro=1`.
+- Audio: temas de Sinuca, Damas e Xadrez atualizados para 32-bit brasileiro original.
+- Build/cache-bust: `20260522-gameux2`.
+- Validacao: `node --check`, `npm run guard:pubpaid`, `/api/pubpaid/build`, smoke mobile Damas/Xadrez sem controles intrusivos e sem erros de console.
+
 ## Atualizacao 2026-05-22 - poolpvpfix2
 
 - Corrigido travamento/repeticao da Sinuca PvP: o `iframe` do prototipo nao e mais remontado a cada mudanca de turno/tacada.
