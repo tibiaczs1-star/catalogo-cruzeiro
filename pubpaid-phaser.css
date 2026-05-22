@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --ppg-bg: #060814;
   --ppg-line: rgba(80, 239, 255, 0.22);
   --ppg-text: #fff6dc;
@@ -977,10 +977,41 @@ body.pubpaid-phaser-page .ppg-prompt {
 
 .ppg-tournament-entry {
   display: grid;
-  grid-template-columns: minmax(160px, 1.1fr) minmax(160px, 1fr) auto auto;
+  grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) minmax(130px, 0.85fr) auto auto;
   gap: 10px;
   align-items: end;
   margin: 12px 0;
+}
+
+.ppg-tournament-pix {
+  display: grid;
+  grid-template-columns: minmax(96px, 132px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid rgba(255, 208, 109, 0.32);
+  background: rgba(255, 208, 109, 0.08);
+}
+
+.ppg-tournament-pix svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #fff;
+}
+
+.ppg-tournament-pix strong,
+.ppg-tournament-pix span {
+  display: block;
+  min-width: 0;
+}
+
+.ppg-tournament-pix span {
+  overflow-wrap: anywhere;
+  color: #d5dff2;
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .ppg-tournament-entry label {
@@ -1217,6 +1248,10 @@ body.pubpaid-phaser-page .ppg-prompt {
   .ppg-tournament-entry button,
   .ppg-dom-checkers-tournament .ppg-dom-actions button {
     width: 100%;
+  }
+
+  .ppg-tournament-pix {
+    grid-template-columns: 1fr;
   }
 
   .ppg-tournament-keys,
@@ -6576,7 +6611,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   background:
     linear-gradient(90deg, rgba(2, 5, 12, 0.9), rgba(2, 5, 12, 0.42) 38%, rgba(2, 5, 12, 0.9)),
     linear-gradient(180deg, rgba(2, 5, 12, 0.28), rgba(2, 5, 12, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-poolreturn1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-gameux1") center / cover no-repeat,
     radial-gradient(circle at 50% 10%, rgba(255, 208, 109, 0.16), transparent 28%),
     radial-gradient(circle at 78% 72%, rgba(80, 239, 255, 0.11), transparent 30%),
     linear-gradient(135deg, rgba(18, 13, 10, 0.92), rgba(3, 7, 16, 0.96) 46%, rgba(11, 32, 35, 0.9));
@@ -7429,7 +7464,7 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
     radial-gradient(ellipse at 50% 46%, rgba(255, 204, 103, 0.2), transparent 22%),
     radial-gradient(ellipse at 49% 56%, rgba(0, 0, 0, 0) 0 30%, rgba(1, 3, 9, 0.38) 56%, rgba(1, 3, 9, 0.86) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.32) 38%, rgba(0, 0, 0, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-poolreturn1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-gameux1") center / cover no-repeat,
     linear-gradient(135deg, #100a08, #02060e 48%, #061a1c);
   border: 0;
   box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.68);
@@ -7916,6 +7951,15 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
   pointer-events: none;
 }
 
+.ppg-checkers-board-stage > .ppg-camera-hint,
+.ppg-chess-board-stage > .ppg-camera-hint {
+  bottom: clamp(68px, 9dvh, 92px);
+  max-width: min(430px, calc(100% - 28px));
+  min-height: 24px;
+  padding: 5px 10px;
+  font-size: 10px;
+}
+
 .ppg-camera-hint:hover {
   color: rgba(255, 246, 220, 0.94);
   opacity: 1;
@@ -8082,6 +8126,8 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 .ppg-camera-orb button[data-chess-camera="down"] { grid-area: down; }
 .ppg-camera-orb button[data-checkers-camera="zoom-in"],
 .ppg-camera-orb button[data-chess-camera="zoom-in"] { grid-area: zoomin; }
+.ppg-camera-orb button[data-checkers-camera="lock"],
+.ppg-camera-orb button[data-chess-camera="lock"] { grid-area: lock; }
 
 .ppg-camera-orb .is-camera-core {
   grid-area: core;
@@ -8126,6 +8172,115 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
   border: 2px solid #fff6dc;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+}
+
+.ppg-camera-hint .is-mobile-copy {
+  display: none;
+}
+
+.ppg-camera-edge {
+  position: absolute;
+  z-index: 6;
+  display: block;
+  opacity: 0.5;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: grab;
+}
+
+.ppg-camera-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(92, 230, 222, 0.08);
+  background: linear-gradient(90deg, transparent, rgba(92, 230, 222, 0.08), transparent);
+  box-shadow: 0 0 20px rgba(92, 230, 222, 0.08);
+}
+
+.ppg-camera-edge.is-top,
+.ppg-camera-edge.is-bottom {
+  left: 12%;
+  right: 12%;
+  height: 36px;
+}
+
+.ppg-camera-edge.is-top {
+  top: 0;
+}
+
+.ppg-camera-edge.is-bottom {
+  bottom: 0;
+}
+
+.ppg-camera-edge.is-left,
+.ppg-camera-edge.is-right {
+  top: 12%;
+  bottom: 12%;
+  width: 36px;
+}
+
+.ppg-camera-edge.is-left {
+  left: 0;
+}
+
+.ppg-camera-edge.is-right {
+  right: 0;
+}
+
+.ppg-checkers-camera.ppg-camera-orb {
+  grid-template-columns: repeat(3, 32px);
+  grid-template-areas:
+    ". up ."
+    "left core right"
+    "zoomout down zoomin"
+    "lock lock lock";
+  gap: 3px;
+  padding: 5px;
+  transform-origin: 50% 100%;
+}
+
+.ppg-checkers-camera.ppg-camera-orb button {
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  font-size: 16px;
+}
+
+.ppg-camera-orb .is-camera-lock {
+  grid-area: lock;
+  width: auto !important;
+  min-height: 24px !important;
+  height: 24px !important;
+  padding: 0 8px !important;
+  color: rgba(255, 246, 220, 0.84);
+  font-size: 9px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ppg-camera-orb .is-camera-lock.is-active {
+  border-color: rgba(142, 240, 163, 0.46);
+  color: #fff6dc;
+  background: rgba(142, 240, 163, 0.14);
+}
+
+.ppg-checkers-board-stage > .ppg-checkers-camera,
+.ppg-chess-board-stage > .ppg-chess-camera {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  bottom: clamp(8px, 2dvh, 18px);
+  opacity: 0.46;
+  transform: translateX(-50%) scale(0.78);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.ppg-checkers-board-stage:hover > .ppg-checkers-camera,
+.ppg-checkers-board-stage:focus-within > .ppg-checkers-camera,
+.ppg-chess-board-stage:hover > .ppg-chess-camera,
+.ppg-chess-board-stage:focus-within > .ppg-chess-camera {
+  opacity: 0.9;
+  transform: translateX(-50%) scale(0.86);
 }
 
 .ppg-dom-cell {
@@ -10051,11 +10206,11 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   width: min(360px, 100%);
 }
 
-.ppg-chess-exit {
+.ppg-chess-exit,
+.ppg-chess-resign {
   position: absolute;
   z-index: 8;
   top: max(12px, var(--ppg-safe-top));
-  left: max(12px, var(--ppg-safe-left));
   min-width: 82px;
   min-height: 38px;
   padding: 8px 12px;
@@ -10071,6 +10226,19 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.ppg-chess-exit {
+  left: max(12px, var(--ppg-safe-left));
+}
+
+.ppg-chess-resign {
+  left: max(104px, calc(var(--ppg-safe-left) + 104px));
+  border-color: rgba(255, 111, 129, 0.42);
+  color: #ffe1e6;
+  background:
+    linear-gradient(135deg, rgba(255, 111, 129, 0.18), transparent 38%),
+    rgba(4, 8, 16, 0.74);
 }
 
 @keyframes ppg-chess-3d-land {
@@ -10197,7 +10365,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="che
     radial-gradient(circle at 50% 5%, rgba(255, 208, 109, 0.34), transparent 25%),
     radial-gradient(circle at 8% 76%, rgba(92, 230, 222, 0.17), transparent 30%),
     radial-gradient(circle at 92% 56%, rgba(255, 79, 184, 0.12), transparent 34%),
-    url("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png?v=20260522-poolreturn1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png?v=20260522-gameux1") center / cover no-repeat,
     linear-gradient(145deg, #07101c 0%, #141021 44%, #071912 100%);
   background-size: auto, auto, auto, 28px 28px, 28px 28px, auto, auto, auto, auto, auto, auto;
   overflow: hidden;
@@ -10684,5 +10852,185 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
 
   .ppg-checkers-sidecar .ppg-dom-actions {
     margin-top: 0;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 760px) {
+  .ppg-checkers-board-stage > .ppg-camera-hint,
+  .ppg-chess-board-stage > .ppg-camera-hint {
+    display: none;
+  }
+
+  .ppg-checkers-camera.ppg-camera-orb {
+    grid-template-areas:
+      "hint hint hint"
+      ". up ."
+      "left core right"
+      "zoomout down zoomin"
+      "lock lock lock";
+  }
+
+  .ppg-checkers-camera.ppg-camera-orb::before {
+    content: "Toque na borda para girar. + e - fazem zoom.";
+    grid-area: hint;
+    padding: 2px 5px 4px;
+    color: rgba(255, 246, 220, 0.78);
+    font-size: 8px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .ppg-camera-hint .is-desktop-copy {
+    display: none;
+  }
+
+  .ppg-camera-hint .is-mobile-copy {
+    display: inline;
+  }
+
+  .ppg-camera-edge.is-top,
+  .ppg-camera-edge.is-bottom {
+    left: 6%;
+    right: 6%;
+    height: 44px;
+  }
+
+  .ppg-camera-edge.is-left,
+  .ppg-camera-edge.is-right {
+    top: 8%;
+    bottom: 8%;
+    width: 44px;
+  }
+
+  .ppg-checkers-board-stage > .ppg-checkers-camera,
+  .ppg-chess-board-stage > .ppg-chess-camera {
+    opacity: 0.78;
+    transform: translateX(-50%) scale(0.78);
+  }
+}
+
+/* Final board-camera pass: compact HUD, visible exit/resign, and no turn card on top of the board. */
+.ppg-checkers-board-stage > .ppg-checkers-camera,
+.ppg-chess-board-stage > .ppg-chess-camera {
+  position: absolute !important;
+  z-index: 9;
+  left: 50%;
+  bottom: clamp(8px, 2dvh, 18px);
+  width: max-content !important;
+  opacity: 0.48;
+  transform: translateX(-50%) scale(0.78);
+}
+
+.ppg-checkers-board-stage:hover > .ppg-checkers-camera,
+.ppg-checkers-board-stage:focus-within > .ppg-checkers-camera,
+.ppg-chess-board-stage:hover > .ppg-chess-camera,
+.ppg-chess-board-stage:focus-within > .ppg-chess-camera {
+  opacity: 0.9;
+  transform: translateX(-50%) scale(0.86);
+}
+
+.ppg-checkers-camera.ppg-camera-orb button {
+  width: 32px;
+  min-width: 0;
+  height: 32px;
+  min-height: 32px;
+}
+
+@media (min-width: 901px) and (min-height: 521px) {
+  body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-stage {
+    padding:
+      max(58px, calc(var(--ppg-safe-top) + 44px))
+      max(310px, calc(var(--ppg-safe-right) + 286px))
+      max(84px, calc(var(--ppg-safe-bottom) + 74px))
+      max(24px, calc(var(--ppg-safe-left) + 18px));
+  }
+
+  body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-stage .ppg-camera-edge.is-right {
+    right: max(292px, calc(var(--ppg-safe-right) + 278px));
+  }
+
+  body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-stage .ppg-camera-edge.is-top,
+  body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-board-stage .ppg-camera-edge.is-bottom {
+    right: max(292px, calc(var(--ppg-safe-right) + 278px));
+  }
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-sidecar {
+  top: max(58px, calc(var(--ppg-safe-top) + 44px));
+  right: max(12px, var(--ppg-safe-right));
+  width: min(258px, calc(100dvw - 24px));
+  gap: 6px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-game-avatar-row {
+  gap: 6px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-game-avatar {
+  min-height: 38px;
+  padding: 5px 7px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-game-avatar span {
+  width: 24px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-game-avatar strong,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-status-card span,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-guidance span,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-history > span {
+  font-size: 9px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-status-card,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-guidance,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-captured-tray article,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-history article {
+  padding: 7px 9px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-status-card strong,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-guidance strong {
+  font-size: 13px;
+  line-height: 1.18;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-status-card small {
+  font-size: 9px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-guidance ol {
+  gap: 3px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-guidance li {
+  padding: 4px 6px;
+  font-size: 10px;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-guidance li:nth-child(n+4),
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess-history article:nth-of-type(n+3) {
+  display: none;
+}
+
+@media (max-width: 900px), (max-height: 520px) {
+  .ppg-chess-resign {
+    top: max(12px, var(--ppg-safe-top));
+    left: max(96px, calc(var(--ppg-safe-left) + 96px));
+    min-width: 78px;
+    min-height: 34px;
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 760px) {
+  .ppg-checkers-board-stage > .ppg-checkers-camera,
+  .ppg-chess-board-stage > .ppg-chess-camera {
+    opacity: 0.78;
+    bottom: 2px;
+    transform: translateX(-50%) scale(0.64);
   }
 }

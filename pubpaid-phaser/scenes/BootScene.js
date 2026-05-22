@@ -1,7 +1,7 @@
-﻿import { applyPixelTextureFilters } from "../core/assetRegistry.js";
+import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = window.pubpaidBuildVersion || "20260522-checkerstourney1";
+const ASSET_VERSION = window.pubpaidBuildVersion || "20260522-gameux1";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {

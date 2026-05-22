@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-poolreturn1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-poolreturn1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-gameux1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-gameux1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-poolreturn1";
-import { BootScene } from "./scenes/BootScene.js?v=20260522-poolreturn1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260522-poolreturn1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-poolreturn1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260522-poolreturn1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-poolreturn1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-poolreturn1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-poolreturn1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-poolreturn1";
-import { UIScene } from "./scenes/UIScene.js?v=20260522-poolreturn1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-gameux1";
+import { BootScene } from "./scenes/BootScene.js?v=20260522-gameux1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260522-gameux1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-gameux1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260522-gameux1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-gameux1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-gameux1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-gameux1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-gameux1";
+import { UIScene } from "./scenes/UIScene.js?v=20260522-gameux1";
 
-const PUBPAID_BUILD_VERSION = "20260522-poolreturn1";
+const PUBPAID_BUILD_VERSION = "20260522-gameux1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -126,6 +126,7 @@ let pendingStartGameOptions = null;
 let fullscreenWasActive = false;
 let userAudioMuted = false;
 let preintroLoadingBusy = false;
+let runtimeCacheWarmPromise = null;
 
 function setUpdateStatus(message) {
   if (refs.updateStatus) refs.updateStatus.textContent = message;
@@ -146,7 +147,7 @@ function setPreintroProgress(value = 0, message = "") {
   if (message && refs.preintroStatus) refs.preintroStatus.textContent = message;
 }
 
-function waitForAssetsReady(timeoutMs = 3600) {
+function waitForAssetsReady(timeoutMs = 12000) {
   if (areAssetsReady()) return Promise.resolve(true);
   return new Promise((resolve) => {
     let settled = false;
@@ -154,39 +155,71 @@ function waitForAssetsReady(timeoutMs = 3600) {
       if (settled) return;
       settled = true;
       game.events.off("pubpaid:assets-ready", onReady);
-      window.clearTimeout(timer);
+      if (timer) window.clearTimeout(timer);
       resolve(ready);
     };
     const onReady = () => finish(true);
-    const timer = window.setTimeout(() => finish(areAssetsReady()), timeoutMs);
+    const timer = timeoutMs > 0 ? window.setTimeout(() => finish(areAssetsReady()), timeoutMs) : null;
     game.events.once("pubpaid:assets-ready", onReady);
   });
+}
+
+function waitForDomImages(timeoutMs = 7000) {
+  const images = Array.from(document.images || []).filter((image) => image && !image.complete);
+  if (!images.length) return Promise.resolve(true);
+  const imagePromises = images.map((image) => {
+    if (typeof image.decode === "function") return image.decode().catch(() => null);
+    return new Promise((resolve) => {
+      image.addEventListener("load", resolve, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    });
+  });
+  return Promise.race([
+    Promise.allSettled(imagePromises).then(() => true),
+    new Promise((resolve) => window.setTimeout(() => resolve(false), timeoutMs))
+  ]);
+}
+
+function ensureRuntimeCacheWarm() {
+  if (!runtimeCacheWarmPromise) runtimeCacheWarmPromise = warmPubpaidSafeRuntimeCache();
+  return runtimeCacheWarmPromise;
+}
+
+async function waitForPreintroReadiness() {
+  const readiness = [
+    waitForAssetsReady(0),
+    ensureRuntimeCacheWarm(),
+    waitForDomImages()
+  ];
+  if (document.fonts?.ready) readiness.push(document.fonts.ready.catch(() => null));
+  await Promise.allSettled(readiness);
+  return areAssetsReady();
 }
 
 async function runPreintroLoader() {
   if (preintroLoadingBusy) return;
   preintroLoadingBusy = true;
   const startedAt = performance.now();
-  setPreintroProgress(0, "Conferindo imagens, som e entrada da intro.");
-  const assetPromise = waitForAssetsReady();
+  setPreintroProgress(0, "Conferindo imagens, som e entrada.");
+  const readinessPromise = waitForPreintroReadiness();
   const steps = [
-    [18, "Separando imagens da entrada."],
-    [36, "Carregando cenário e personagens."],
-    [58, "Preparando controles e tela cheia."],
-    [78, "Sincronizando som e efeitos."],
-    [92, "Finalizando abertura."]
+    [16, "Carregando imagens principais."],
+    [34, "Preparando cenário e personagens."],
+    [56, "Conferindo controles de mesa."],
+    [74, "Sincronizando som e efeitos."],
+    [90, "Guardando assets para entrada limpa."]
   ];
   for (const [progress, message] of steps) {
-    await new Promise((resolve) => window.setTimeout(resolve, 190));
+    await new Promise((resolve) => window.setTimeout(resolve, 220));
     const assetProgress = Math.floor(Number(window.pubpaidAssetProgress || 0) * 100);
     setPreintroProgress(Math.max(progress, assetProgress), message);
   }
-  await assetPromise;
+  await readinessPromise;
   const elapsed = performance.now() - startedAt;
   if (elapsed < 1050) {
     await new Promise((resolve) => window.setTimeout(resolve, 1050 - elapsed));
   }
-  setPreintroProgress(100, "Tudo pronto. Abrindo intro.");
+  setPreintroProgress(100, "Tudo pronto. Entrando.");
   await new Promise((resolve) => window.setTimeout(resolve, 230));
   refs.preintroLoader?.setAttribute("hidden", "");
   preintroLoadingBusy = false;
@@ -273,12 +306,13 @@ async function refreshPubpaidRuntimeCache() {
     window.localStorage?.removeItem("pubpaid_v2_build_version");
     const previousVersion = window.localStorage?.getItem(BUILD_KEY) || "";
     if (previousVersion === PUBPAID_BUILD_VERSION) {
-      void warmPubpaidSafeRuntimeCache();
+      runtimeCacheWarmPromise = ensureRuntimeCacheWarm();
       return;
     }
     window.localStorage?.setItem(BUILD_KEY, PUBPAID_BUILD_VERSION);
     await clearPubpaidCachesAndWorkers();
-    await warmPubpaidSafeRuntimeCache();
+    runtimeCacheWarmPromise = warmPubpaidSafeRuntimeCache();
+    await runtimeCacheWarmPromise;
   } catch (_error) {
     // Cache refresh must never block login, wallet, lobby, or Damas.
   }

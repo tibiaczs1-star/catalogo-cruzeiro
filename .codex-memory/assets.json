@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T03:45:04.035Z",
+  "lastUpdatedAt": "2026-05-22T04:25:24.096Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -916,6 +916,61 @@
         "2026-05-22-modo-damas-torneio-testavel-sem-financeiro"
       ],
       "createdAt": "2026-05-22T03:45:04.035Z"
+    },
+    {
+      "id": "tourney-reg-desktop-fixed",
+      "kind": "screenshot",
+      "path": ".codex-temp/tourney-reg-desktop-fixed.png",
+      "source": "playwright",
+      "note": "Painel de Torneio Damas depois da reserva: mostra Pix/referencia, status pendente e vaga aguardando admin.",
+      "linkedOrderIds": [
+        "2026-05-22-fluxo-real-de-inscricao-do-torneio-damas-com-pix-e-admin"
+      ],
+      "createdAt": "2026-05-22T04:25:24.096Z"
+    },
+    {
+      "id": "gameux-final-checkers-desktop",
+      "kind": "screenshot",
+      "path": ".codex-temp/gameux-final-checkers-desktop.png",
+      "source": "playwright",
+      "note": "Damas desktop: loader finalizado, mesa fixa, controle por borda, 64 casas, 24 pecas e sem erros de console.",
+      "linkedOrderIds": [
+        "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud"
+      ],
+      "createdAt": "2026-05-22T05:18:00.000Z"
+    },
+    {
+      "id": "gameux-final-chess-desktop",
+      "kind": "screenshot",
+      "path": ".codex-temp/gameux-final-chess-desktop.png",
+      "source": "playwright",
+      "note": "Xadrez desktop: mesa fixa, controle por borda, HUD lateral sem sobrepor, botao sair/desistir e 32 pecas.",
+      "linkedOrderIds": [
+        "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud"
+      ],
+      "createdAt": "2026-05-22T05:18:00.000Z"
+    },
+    {
+      "id": "gameux-final-checkers-mobile",
+      "kind": "screenshot",
+      "path": ".codex-temp/gameux-final-checkers-mobile.png",
+      "source": "playwright",
+      "note": "Damas mobile landscape: texto mobile de camera, controles de toque, loader encerrado e botoes visiveis.",
+      "linkedOrderIds": [
+        "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud"
+      ],
+      "createdAt": "2026-05-22T05:18:00.000Z"
+    },
+    {
+      "id": "gameux-final-chess-mobile",
+      "kind": "screenshot",
+      "path": ".codex-temp/gameux-final-chess-mobile.png",
+      "source": "playwright",
+      "note": "Xadrez mobile landscape: texto mobile de camera, mesa fixa, botao sair/desistir e tabuleiro completo.",
+      "linkedOrderIds": [
+        "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud"
+      ],
+      "createdAt": "2026-05-22T05:18:00.000Z"
     }
   ]
 }

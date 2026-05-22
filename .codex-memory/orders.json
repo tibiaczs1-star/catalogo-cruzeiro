@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T03:44:50.353Z",
+  "lastUpdatedAt": "2026-05-22T04:24:58.052Z",
   "orders": [
     {
       "id": "2026-05-21-atualizar-link-catalogo-czs-whatsapp",
@@ -1991,6 +1991,82 @@
         "Damas",
         "torneio",
         "checkers"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-fluxo-real-de-inscricao-do-torneio-damas-com-pix-e-admin",
+      "createdAt": "2026-05-22T04:24:58.052Z",
+      "updatedAt": "2026-05-22T04:24:58.052Z",
+      "status": "implemented",
+      "source": "chat",
+      "rawRequest": "Ajustar torneio: pessoa se inscreve, confirma Google e WhatsApp, aparece Pix, admin aprova pagamento, e so entao a vaga fica presa a conta Google; confirmacoes fecham 1 hora antes/ate 20h.",
+      "summary": "Fluxo real de inscricao do Torneio Damas com Pix e admin",
+      "normalizedTasks": [
+        "reserva com Google WhatsApp",
+        "Pix de inscricao",
+        "aprovacao admin",
+        "vaga vinculada a conta Google",
+        "check-in de aprovados"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pubpaid.html",
+        "pubpaid-admin.html",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/services/tournamentService.js",
+        "pubpaid-phaser.css"
+      ],
+      "assetRefs": [
+        ".codex-temp/tourney-reg-desktop-fixed.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "Damas",
+        "torneio",
+        "Pix",
+        "admin"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud",
+      "createdAt": "2026-05-22T05:18:00.000Z",
+      "updatedAt": "2026-05-22T05:18:00.000Z",
+      "status": "implemented",
+      "source": "chat",
+      "rawRequest": "Criar loading de abertura que so para quando tudo carregar, opcao de desligar rotacao do adversario, camera pela borda/toque, remover copy explicando abertura premium, copy mobile correta, botao desistir no Xadrez e HUD sem sobrepor tabuleiro; corrigir Damas e Xadrez e subir online.",
+      "summary": "UX final Damas/Xadrez: loading, camera, mesa fixa e HUD",
+      "normalizedTasks": [
+        "loader antes da intro",
+        "mesa fixa e toggle rotacao rival",
+        "camera por borda desktop mobile",
+        "copy mobile propria",
+        "botao desistir xadrez",
+        "hud xadrez compacto",
+        "deploy render"
+      ],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "server.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/gameux-final-checkers-desktop.png",
+        ".codex-temp/gameux-final-chess-desktop.png",
+        ".codex-temp/gameux-final-checkers-mobile.png",
+        ".codex-temp/gameux-final-chess-mobile.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "Damas",
+        "Xadrez",
+        "camera",
+        "loading"
       ],
       "nextSteps": [],
       "notes": ""

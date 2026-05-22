@@ -135,6 +135,15 @@
             </table>
           </div>
         </article>
+        <article class="card">
+          <h2>Torneio de Damas</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Reserva</th><th>Conta Google</th><th>WhatsApp</th><th>Vaga</th><th>Valor Pix</th><th>Status</th><th>Referência</th><th>Ação</th></tr></thead>
+              <tbody id="pendingTournamentBody"></tbody>
+            </table>
+          </div>
+        </article>
       </section>
 
       <section class="card">
@@ -238,6 +247,9 @@
         const walletBoard = Array.isArray(root.pubpaidWalletBoard)
           ? root.pubpaidWalletBoard
           : Array.isArray(dashboard.walletBoard) ? dashboard.walletBoard : [];
+        const pendingTournament = Array.isArray(root.pendingCheckersTournamentReservations)
+          ? root.pendingCheckersTournamentReservations
+          : Array.isArray(dashboard.pendingCheckersTournamentReservations) ? dashboard.pendingCheckersTournamentReservations : [];
         const stats = dashboard.stats || {};
 
         return {
@@ -249,7 +261,20 @@
             pubpaidWallets: walletBoard.length,
             pubpaidPendingDeposits: stats.pendingDepositCount ?? pendingDeposits.length,
             pubpaidPendingWithdrawals: stats.pendingWithdrawalCount ?? pendingWithdrawals.length,
+            pubpaidPendingTournamentReservations: stats.pendingTournamentReservations ?? pendingTournament.length,
           },
+          pendingCheckersTournamentReservations: pendingTournament.map((row) => ({
+            ...row,
+            name: row.googleName || row.name || "-",
+            email: row.googleEmail || row.email || "-",
+            whatsapp: row.whatsapp || "-",
+            amount: row.amount ?? row.paymentAmount ?? 0,
+            status: row.paymentStatus || row.status || "-",
+            txid: row.txid || row.paymentTxid || row.reference || "-",
+            reservationId: row.reservationId || row.id || "",
+            key: row.key || "",
+            createdAt: row.createdAt || row.reservedAt || ""
+          })),
           pendingPubpaidDeposits: pendingDeposits.map((row) => ({
             ...row,
             name: row.googleName || row.name || row.playerName || row.player || "-",
@@ -300,6 +325,7 @@
           ["Carteiras", totals.pubpaidWallets || 0],
           ["Pend. depósitos", totals.pubpaidPendingDeposits || 0],
           ["Pend. saques", totals.pubpaidPendingWithdrawals || 0],
+          ["Pend. torneio", totals.pubpaidPendingTournamentReservations || 0],
           ["Ganho PvP", formatCoins(totals.pubpaidPvpWonCoins || 0)],
           ["Perdido PvP", formatCoins(totals.pubpaidPvpLostCoins || 0)],
           ["Líquido PvP", formatCoins(totals.pubpaidPvpNetCoins || 0)]
@@ -319,6 +345,14 @@
           (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td class="mono">${escapeHtml(row.pixKey || "-")}<br><small>${escapeHtml(row.pixAccountName || row.destination?.pixAccountName || row.payment?.pixAccountName || "conferir nome")}</small></td><td class="mono">${escapeHtml(row.txid || "-")}</td><td>${formatDateTime(row.reviewDeadlineAt)}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
           7,
           "Sem retiradas pendentes."
+        );
+
+        renderTableRows(
+          document.getElementById("pendingTournamentBody"),
+          normalized.pendingCheckersTournamentReservations || [],
+          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td class="mono">${escapeHtml(row.whatsapp || "-")}</td><td><strong>${escapeHtml(String(row.seed || "-"))}</strong><br><small>${escapeHtml(row.key || "-")}</small></td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td>${escapeHtml(row.status || "-")}</td><td class="mono">${escapeHtml(row.txid || "-")}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/tournaments/checkers/review" data-id="${escapeHtml(row.reservationId || row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/tournaments/checkers/review" data-id="${escapeHtml(row.reservationId || row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
+          8,
+          "Sem inscricoes pendentes."
         );
 
         renderTableRows(

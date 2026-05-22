@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260522-poolreturn1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260522-gameux1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -286,6 +286,10 @@ const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
 const NINJAS_PIX_DEFAULT_AMOUNT = 5;
+const PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT = Math.max(
+  1,
+  Number(process.env.PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT || NINJAS_PIX_DEFAULT_AMOUNT) || NINJAS_PIX_DEFAULT_AMOUNT
+);
 const NINJAS_PIX_RECEIVER_NAME = String(
   process.env.NINJAS_PIX_RECEIVER_NAME || "CATALOGO CRUZEIRO"
 ).trim();
@@ -16446,27 +16450,70 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/pubpaid/tournaments/checkers/state") {
+    const authUser = readCatalogoAuthSession(req);
     const key = cleanTournamentKey(searchParams.get("key") || "");
     const testMode = searchParams.get("test") === "1";
     let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
     store = writePubpaidTournamentStore(store);
-    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { authUser, testMode }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/register") {
+    const authUser = readCatalogoAuthSession(req);
+    const body = await parseBody(req);
+    const testMode = Boolean(body.testMode);
+    const testUser = testMode ? {
+      sub: cleanShortText(body.googleSub || body.email || "test-google", 120),
+      email: cleanEmail(body.email || "teste@pubpaid.local"),
+      name: cleanShortText(body.name || "Jogador Teste", 120),
+      picture: ""
+    } : null;
+    const effectiveUser = authUser || testUser;
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
+    const result = await reserveCheckersTournamentParticipant(store, effectiveUser, {
+      name: body.name,
+      whatsapp: body.whatsapp,
+      slotKey: body.key || body.slotKey,
+      testMode
+    });
+    if (!result.ok) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, body.key || "", {
+        authUser: effectiveUser,
+        testMode,
+        error: result.error
+      }));
+    }
+    store = writePubpaidTournamentStore(result.store);
+    return sendJson(res, 201, buildCheckersTournamentPayload(store, result.participant?.key || body.key || "", {
+      authUser: effectiveUser,
+      testMode,
+      pix: result.pix
+    }));
   }
 
   if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/join") {
+    const authUser = readCatalogoAuthSession(req);
     const body = await parseBody(req);
     const key = cleanTournamentKey(body.key || "");
     const testMode = Boolean(body.testMode);
+    const testUser = testMode && body.email ? {
+      sub: cleanShortText(body.googleSub || body.email, 120),
+      email: cleanEmail(body.email),
+      name: cleanShortText(body.name || body.email, 120),
+      picture: ""
+    } : null;
+    const effectiveUser = authUser || testUser;
     const name = cleanShortText(body.name || "", 80);
     let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
-    const result = checkInCheckersTournamentParticipant(store, key, { name, testMode });
+    const result = checkInCheckersTournamentParticipant(store, { key, authUser: effectiveUser, name, testMode });
     if (!result.ok) {
       store = writePubpaidTournamentStore(store);
-      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { testMode, error: result.error }));
+      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { authUser: effectiveUser, testMode, error: result.error }));
     }
     store = result.store;
     store = writePubpaidTournamentStore(store);
-    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { authUser: effectiveUser, testMode }));
   }
 
   if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/start") {
@@ -16493,18 +16540,19 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/move") {
+    const authUser = readCatalogoAuthSession(req);
     const body = await parseBody(req);
     const key = cleanTournamentKey(body.key || "");
     const matchId = cleanShortText(body.matchId || "", 120);
     const testMode = Boolean(body.testMode);
     let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
-    const result = moveCheckersTournamentMatch(store, key, matchId, body.move || {});
+    const result = moveCheckersTournamentMatch(store, { key, authUser, matchId, move: body.move || {} });
     if (!result.ok) {
       store = writePubpaidTournamentStore(store);
-      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { testMode, error: result.error }));
+      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { authUser, testMode, error: result.error }));
     }
     store = writePubpaidTournamentStore(result.store);
-    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { authUser, testMode }));
   }
 
   if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/test/advance") {
@@ -18076,6 +18124,34 @@ async function handleApi(req, res, pathname, searchParams) {
     }
   }
 
+  if (req.method === "POST" && pathname === "/api/pubpaid-admin/tournaments/checkers/review") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const body = await parseBody(req);
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode: false });
+    const result = reviewCheckersTournamentReservation(
+      store,
+      body.reservationId || body.participantId || body.id,
+      body.decision || body.status || "",
+      cleanShortText(body.reviewer || body.adminUser || body.username || SUPER_ADMIN_USER, 120),
+      cleanShortText(body.reason || body.reviewReason || body.note || "", 280)
+    );
+    if (!result.ok) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, result.status || 400, { ok: false, error: result.error });
+    }
+    writePubpaidTournamentStore(result.store);
+    const payload = buildPubpaidAdminPayload();
+    return sendJson(res, 200, {
+      ok: true,
+      item: result.participant,
+      dashboard: payload.dashboard,
+      pendingPubpaidDeposits: payload.pendingPubpaidDeposits,
+      pendingPubpaidWithdrawals: payload.pendingPubpaidWithdrawals,
+      pendingCheckersTournamentReservations: payload.pendingCheckersTournamentReservations,
+      pubpaidWalletBoard: payload.pubpaidWalletBoard
+    });
+  }
+
   if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-deposits.csv") {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
     const rows = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE).map((item) => ({
@@ -18640,6 +18716,8 @@ function buildPubpaidPvpLedgerByWallet(matches = []) {
 function buildPubpaidAdminPayload() {
   const store = readCanonicalPubpaidStore();
   const pvpStore = readPubpaidPvpStore();
+  const tournamentReservations = buildCheckersTournamentAdminReservations();
+  const pendingTournamentReservations = tournamentReservations.filter((item) => item.status === "payment-pending" || item.paymentStatus === "pending-admin");
   const dashboard = buildCanonicalPubpaidAdminPayload(store);
   const activePvpMatches = (Array.isArray(pvpStore.matches) ? pvpStore.matches : []).filter((item) => item.status === "active");
   const settledPvpMatches = (Array.isArray(pvpStore.matches) ? pvpStore.matches : []).filter((item) => item.settlement?.status === "settled");
@@ -18691,6 +18769,7 @@ function buildPubpaidAdminPayload() {
       pubpaidWallets: Array.isArray(enhancedDashboard.walletBoard) ? enhancedDashboard.walletBoard.length : 0,
       pubpaidPendingDeposits: Array.isArray(dashboard.pendingDeposits) ? dashboard.pendingDeposits.length : 0,
       pubpaidPendingWithdrawals: Array.isArray(dashboard.pendingWithdrawals) ? dashboard.pendingWithdrawals.length : 0,
+      pubpaidPendingTournamentReservations: pendingTournamentReservations.length,
       pubpaidPvpWaiting: Array.isArray(pvpStore.waiting) ? pvpStore.waiting.length : 0,
       pubpaidPvpActive: activePvpMatches.length,
       pubpaidPvpSettled: settledPvpMatches.length,
@@ -18707,6 +18786,8 @@ function buildPubpaidAdminPayload() {
     },
     pendingPubpaidDeposits: enhancedDashboard.pendingDeposits,
     pendingPubpaidWithdrawals: enhancedDashboard.pendingWithdrawals,
+    pendingCheckersTournamentReservations: pendingTournamentReservations,
+    checkersTournamentReservations: tournamentReservations,
     pubpaidWalletBoard: enhancedDashboard.walletBoard,
   };
 }
@@ -20443,8 +20524,9 @@ function getAcreClock(now = new Date()) {
   const dateKey = `${year}-${month}-${day}`;
   const compactDate = `${year}${month}${day}`;
   const minuteOfDay = hour * 60 + minute;
+  const checkinStartMinute = 19 * 60;
   const startMinute = 20 * 60;
-  const closeMinute = startMinute + 20;
+  const closeMinute = startMinute;
   return {
     timeZone: "America/Rio_Branco",
     dateKey,
@@ -20453,12 +20535,13 @@ function getAcreClock(now = new Date()) {
     minute,
     second,
     minuteOfDay,
+    checkinStartsAtLocal: `${dateKey} 19:00`,
     startsAtLocal: `${dateKey} 20:00`,
-    closesAtLocal: `${dateKey} 20:20`,
-    officialOpen: minuteOfDay >= startMinute && minuteOfDay < closeMinute,
-    beforeOpen: minuteOfDay < startMinute,
+    closesAtLocal: `${dateKey} 20:00`,
+    officialOpen: minuteOfDay >= checkinStartMinute && minuteOfDay < closeMinute,
+    beforeOpen: minuteOfDay < checkinStartMinute,
     afterClose: minuteOfDay >= closeMinute,
-    secondsUntilOpen: Math.max(0, ((startMinute - minuteOfDay) * 60) - second),
+    secondsUntilOpen: Math.max(0, ((checkinStartMinute - minuteOfDay) * 60) - second),
     secondsUntilClose: Math.max(0, ((closeMinute - minuteOfDay) * 60) - second)
   };
 }
@@ -20470,8 +20553,23 @@ function createDailyCheckersTournament(clock = getAcreClock()) {
       id: `damas-${clock.compactDate}-${String(number).padStart(2, "0")}`,
       seed: number,
       key: `DAMAS-${clock.compactDate}-${String(number).padStart(2, "0")}`,
-      name: `Participante ${String(number).padStart(2, "0")}`,
-      status: "invited",
+      name: `Vaga ${String(number).padStart(2, "0")}`,
+      status: "open",
+      reservationId: "",
+      walletKey: "",
+      googleSub: "",
+      googleEmail: "",
+      googleName: "",
+      googlePicture: "",
+      whatsapp: "",
+      paymentTxid: "",
+      paymentAmount: PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT,
+      paymentStatus: "none",
+      reservedAt: "",
+      approvedAt: "",
+      approvedBy: "",
+      rejectedAt: "",
+      reviewReason: "",
       checkedInAt: "",
       eliminatedAt: "",
       championAt: ""
@@ -20483,8 +20581,10 @@ function createDailyCheckersTournament(clock = getAcreClock()) {
     title: `Torneio de Damas ${clock.dateKey}`,
     dateKey: clock.dateKey,
     timeZone: clock.timeZone,
+    checkinStartsAtLocal: clock.checkinStartsAtLocal,
     startsAtLocal: clock.startsAtLocal,
     closesAtLocal: clock.closesAtLocal,
+    entryAmount: PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT,
     status: "scheduled",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -20509,6 +20609,40 @@ function findCheckersTournamentParticipant(tournament = {}, key = "") {
     .find((participant) => cleanTournamentKey(participant?.key) === cleanKey) || null;
 }
 
+function getCheckersTournamentParticipantByAuth(tournament = {}, authUser = {}) {
+  const walletKey = getPubpaidWalletKey(authUser);
+  const googleSub = safeString(authUser?.sub || "", 160).toLowerCase();
+  const googleEmail = cleanEmail(authUser?.email || "").toLowerCase();
+  return (Array.isArray(tournament?.participants) ? tournament.participants : [])
+    .find((participant) => {
+      const candidateWallet = safeString(participant?.walletKey || "", 180).toLowerCase();
+      const candidateSub = safeString(participant?.googleSub || "", 160).toLowerCase();
+      const candidateEmail = cleanEmail(participant?.googleEmail || "").toLowerCase();
+      return Boolean(
+        (walletKey && candidateWallet === walletKey) ||
+        (googleSub && candidateSub === googleSub) ||
+        (googleEmail && candidateEmail === googleEmail)
+      );
+    }) || null;
+}
+
+function getCheckersTournamentParticipantForRequest(tournament = {}, { key = "", authUser = null } = {}) {
+  return findCheckersTournamentParticipant(tournament, key) ||
+    (authUser ? getCheckersTournamentParticipantByAuth(tournament, authUser) : null);
+}
+
+function cleanTournamentWhatsApp(value = "") {
+  return cleanPhone(value || "").slice(0, 24);
+}
+
+function isTournamentParticipantApproved(participant = {}) {
+  return Boolean(participant?.approvedAt || participant?.paymentStatus === "approved" || participant?.status === "approved" || participant?.status === "checked-in" || participant?.status === "champion");
+}
+
+function isTournamentParticipantOpen(participant = {}) {
+  return !participant?.reservedAt && !participant?.googleSub && !participant?.googleEmail && (!participant?.status || participant.status === "open");
+}
+
 function ensureDailyCheckersTournament(store = emptyPubpaidTournamentStore(), { testMode = false } = {}) {
   const clock = getAcreClock();
   const events = Array.isArray(store?.checkers?.events) ? store.checkers.events.slice() : [];
@@ -20519,6 +20653,7 @@ function ensureDailyCheckersTournament(store = emptyPubpaidTournamentStore(), { 
   }
   tournament.window = {
     timeZone: clock.timeZone,
+    checkinStartsAtLocal: clock.checkinStartsAtLocal,
     startsAtLocal: clock.startsAtLocal,
     closesAtLocal: clock.closesAtLocal,
     officialOpen: clock.officialOpen,
@@ -20529,7 +20664,16 @@ function ensureDailyCheckersTournament(store = emptyPubpaidTournamentStore(), { 
     secondsUntilClose: clock.secondsUntilClose,
     testMode: Boolean(testMode)
   };
-  const checkedInCount = tournament.participants.filter((item) => item?.checkedInAt).length;
+  tournament.entryAmount = normalizePubpaidMoney(tournament.entryAmount || PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT);
+  const participants = Array.isArray(tournament.participants) ? tournament.participants : [];
+  participants.forEach((participant) => {
+    participant.paymentAmount = normalizePubpaidMoney(participant.paymentAmount || tournament.entryAmount);
+    participant.paymentStatus = participant.paymentStatus || (participant.approvedAt ? "approved" : participant.reservedAt ? "pending" : "none");
+    if (!participant.status || participant.status === "invited") {
+      participant.status = participant.approvedAt ? "approved" : participant.reservedAt ? "payment-pending" : "open";
+    }
+  });
+  const checkedInCount = participants.filter((item) => item?.checkedInAt).length;
   const canAutoStartByTime = !testMode && clock.afterClose;
   if (!tournament.rounds?.length && checkedInCount >= 2 && (canAutoStartByTime || checkedInCount >= tournament.participants.length)) {
     startCheckersTournamentBracket(tournament, { force: true });
@@ -20708,23 +20852,145 @@ function advanceCheckersTournamentIfRoundComplete(tournament = {}) {
   }
 }
 
-function checkInCheckersTournamentParticipant(store = emptyPubpaidTournamentStore(), key = "", { name = "", testMode = false } = {}) {
+async function reserveCheckersTournamentParticipant(store = emptyPubpaidTournamentStore(), authUser = null, {
+  name = "",
+  whatsapp = "",
+  slotKey = "",
+  testMode = false
+} = {}) {
+  if (!authUser?.email || !authUser?.sub) {
+    return { ok: false, status: 401, error: "Entre com Google para reservar sua vaga no torneio.", store };
+  }
   const tournament = getActiveCheckersTournament(store);
-  const participant = findCheckersTournamentParticipant(tournament, key);
+  if (Array.isArray(tournament?.rounds) && tournament.rounds.length) {
+    return { ok: false, status: 409, error: "As chaves ja foram fechadas para este torneio.", store };
+  }
+  const existing = getCheckersTournamentParticipantByAuth(tournament, authUser);
+  if (existing && !["open", "rejected"].includes(existing.status)) {
+    return { ok: true, store, participant: existing, alreadyReserved: true };
+  }
+  const selected = findCheckersTournamentParticipant(tournament, slotKey);
+  const participant = selected && isTournamentParticipantOpen(selected)
+    ? selected
+    : (Array.isArray(tournament?.participants) ? tournament.participants : []).find(isTournamentParticipantOpen);
   if (!participant) {
-    return { ok: false, status: 404, error: "Chave de torneio nao encontrada para o dia atual.", store };
+    return { ok: false, status: 409, error: "Todas as vagas do torneio ja foram reservadas.", store };
+  }
+  const cleanWhatsApp = cleanTournamentWhatsApp(whatsapp);
+  if (!cleanWhatsApp && !testMode) {
+    return { ok: false, status: 400, error: "Informe seu WhatsApp para o admin confirmar a inscricao.", store };
+  }
+  const playerName = cleanShortText(name || authUser.name || authUser.email, 80);
+  const amount = normalizePubpaidMoney(tournament.entryAmount || PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT);
+  const txid = normalizePixToken(`DMT${tournament.dateKey.replace(/-/g, "")}${String(participant.seed).padStart(2, "0")}`, 25);
+  let pix = null;
+  try {
+    pix = await buildNinjasPixConfig({
+      amount,
+      txid,
+      description: `Damas Torneio ${participant.seed}`,
+      minAmount: 1,
+      maxAmount: 100,
+      defaultAmount: amount
+    });
+  } catch (_error) {
+    pix = {
+      amount,
+      txid,
+      pixKey: cleanShortText(NINJAS_PIX_KEY, 77),
+      copyCode: "",
+      qrSvg: "",
+      confirmationMode: "manual"
+    };
+  }
+  const nowIso = new Date().toISOString();
+  participant.name = playerName;
+  participant.status = "payment-pending";
+  participant.reservationId = participant.reservationId || createRecordId("dmt");
+  participant.walletKey = getPubpaidWalletKey(authUser);
+  participant.googleSub = safeString(authUser.sub, 160);
+  participant.googleEmail = cleanEmail(authUser.email);
+  participant.googleName = safeString(authUser.name || playerName, 120);
+  participant.googlePicture = safeString(authUser.picture || "", 360);
+  participant.whatsapp = cleanWhatsApp;
+  participant.paymentTxid = pix.txid || txid;
+  participant.paymentAmount = amount;
+  participant.paymentStatus = "pending-admin";
+  participant.reservedAt = participant.reservedAt || nowIso;
+  participant.reviewReason = "";
+  tournament.status = tournament.window?.open ? "checkin" : "scheduled";
+  tournament.updatedAt = nowIso;
+  return { ok: true, store, participant, pix };
+}
+
+function reviewCheckersTournamentReservation(store = emptyPubpaidTournamentStore(), reservationId = "", decision = "", reviewer = "admin", reason = "") {
+  const tournament = getActiveCheckersTournament(store);
+  const id = cleanShortText(reservationId || "", 120);
+  const participant = (Array.isArray(tournament?.participants) ? tournament.participants : [])
+    .find((entry) => entry?.reservationId === id || entry?.id === id || cleanTournamentKey(entry?.key) === cleanTournamentKey(id));
+  if (!participant) return { ok: false, status: 404, error: "Inscricao de torneio nao encontrada.", store };
+  const normalizedDecision = normalizeText(decision);
+  const nowIso = new Date().toISOString();
+  if (normalizedDecision === "approved" || normalizedDecision === "approve" || normalizedDecision === "aprovado" || normalizedDecision === "aprovar") {
+    if (!participant.googleEmail || !participant.googleSub) {
+      return { ok: false, status: 400, error: "A inscricao precisa de Google confirmado antes da aprovacao.", store };
+    }
+    participant.status = "approved";
+    participant.paymentStatus = "approved";
+    participant.approvedAt = participant.approvedAt || nowIso;
+    participant.approvedBy = cleanShortText(reviewer || "admin", 120);
+    participant.reviewReason = cleanShortText(reason || "", 280);
+    participant.rejectedAt = "";
+  } else if (normalizedDecision === "rejected" || normalizedDecision === "reject" || normalizedDecision === "rejeitado" || normalizedDecision === "rejeitar") {
+    participant.status = "open";
+    participant.paymentStatus = "rejected";
+    participant.reviewReason = cleanShortText(reason || "", 280);
+    participant.rejectedAt = nowIso;
+    participant.approvedAt = "";
+    participant.approvedBy = "";
+    participant.checkedInAt = "";
+    participant.reservationId = "";
+    participant.walletKey = "";
+    participant.googleSub = "";
+    participant.googleEmail = "";
+    participant.googleName = "";
+    participant.googlePicture = "";
+    participant.whatsapp = "";
+    participant.paymentTxid = "";
+    participant.name = `Vaga ${String(participant.seed || "").padStart(2, "0")}`;
+  } else {
+    return { ok: false, status: 400, error: "Decisao invalida para inscricao de torneio.", store };
+  }
+  tournament.updatedAt = nowIso;
+  return { ok: true, store, participant };
+}
+
+function checkInCheckersTournamentParticipant(store = emptyPubpaidTournamentStore(), {
+  key = "",
+  authUser = null,
+  name = "",
+  testMode = false
+} = {}) {
+  const tournament = getActiveCheckersTournament(store);
+  const participant = getCheckersTournamentParticipantForRequest(tournament, { key, authUser });
+  if (!participant) {
+    return { ok: false, status: 404, error: "Inscricao aprovada nao encontrada para esta conta Google.", store };
   }
   if (!tournament?.window?.open && !testMode) {
-    return { ok: false, status: 409, error: "Check-in oficial abre as 20:00 e fecha as 20:20 no horario do Acre.", store };
+    return { ok: false, status: 409, error: "Check-in oficial abre 1 hora antes e fecha as 20:00 no horario do Acre.", store };
   }
   if (Array.isArray(tournament.rounds) && tournament.rounds.length) {
     return { ok: false, status: 409, error: "As chaves ja foram fechadas para este torneio.", store };
   }
+  if (!isTournamentParticipantApproved(participant) && !testMode) {
+    return { ok: false, status: 402, error: "A vaga so libera depois do Pix aprovado pelo admin.", store };
+  }
   if (name) participant.name = name;
   participant.status = "checked-in";
   participant.checkedInAt = participant.checkedInAt || new Date().toISOString();
+  const approvedCount = tournament.participants.filter(isTournamentParticipantApproved).length;
   const checkedInCount = tournament.participants.filter((item) => item?.checkedInAt).length;
-  if (checkedInCount >= tournament.participants.length) {
+  if (approvedCount > 0 && checkedInCount >= approvedCount) {
     startCheckersTournamentBracket(tournament, { force: true });
   } else {
     tournament.status = "checkin";
@@ -20747,10 +21013,10 @@ function tournamentMoveMatchesLegalMove(candidate = {}, move = {}) {
   return sameFrom && sameTo && sameCapture;
 }
 
-function moveCheckersTournamentMatch(store = emptyPubpaidTournamentStore(), key = "", matchId = "", move = {}) {
+function moveCheckersTournamentMatch(store = emptyPubpaidTournamentStore(), { key = "", authUser = null, matchId = "", move = {} } = {}) {
   const tournament = getActiveCheckersTournament(store);
-  const participant = findCheckersTournamentParticipant(tournament, key);
-  if (!participant) return { ok: false, status: 404, error: "Chave invalida para este torneio.", store };
+  const participant = getCheckersTournamentParticipantForRequest(tournament, { key, authUser });
+  if (!participant) return { ok: false, status: 404, error: "Inscricao invalida para este torneio.", store };
   const { match } = findCheckersTournamentMatch(tournament, matchId);
   if (!match) return { ok: false, status: 404, error: "Confronto de torneio nao encontrado.", store };
   if (match.status !== "active") return { ok: false, status: 409, error: "Esse confronto nao esta ativo.", store };
@@ -20811,6 +21077,15 @@ function publicCheckersTournamentParticipant(participant = {}, { includeKey = fa
     seed: clampInteger(participant.seed),
     name: participant.name || "Participante",
     status: participant.status || "invited",
+    reservationId: participant.reservationId || "",
+    googleEmail: participant.googleEmail || "",
+    googleName: participant.googleName || "",
+    whatsapp: participant.whatsapp || "",
+    paymentAmount: normalizePubpaidMoney(participant.paymentAmount || 0),
+    paymentStatus: participant.paymentStatus || "none",
+    paymentTxid: participant.paymentTxid || "",
+    reservedAt: participant.reservedAt || "",
+    approvedAt: participant.approvedAt || "",
     checkedIn: Boolean(participant.checkedInAt),
     checkedInAt: participant.checkedInAt || "",
     ...(includeKey ? { key: participant.key || "" } : {})
@@ -20845,9 +21120,9 @@ function publicCheckersTournamentMatch(match = {}, tournament = {}, { includeBoa
   };
 }
 
-function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), key = "", { testMode = false, error = "" } = {}) {
+function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), key = "", { authUser = null, testMode = false, error = "", pix = null } = {}) {
   const tournament = getActiveCheckersTournament(store);
-  const participant = findCheckersTournamentParticipant(tournament, key);
+  const participant = getCheckersTournamentParticipantForRequest(tournament, { key, authUser });
   let currentMatch = null;
   if (participant) {
     const activeMatches = [];
@@ -20865,10 +21140,14 @@ function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), k
     status: tournament.status || "scheduled",
     dateKey: tournament.dateKey || "",
     timeZone: tournament.timeZone || "America/Rio_Branco",
+    checkinStartsAtLocal: tournament.checkinStartsAtLocal || "",
     startsAtLocal: tournament.startsAtLocal || "",
     closesAtLocal: tournament.closesAtLocal || "",
+    entryAmount: normalizePubpaidMoney(tournament.entryAmount || PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT),
     window: tournament.window || null,
     checkedInCount: (Array.isArray(tournament.participants) ? tournament.participants : []).filter((item) => item?.checkedInAt).length,
+    approvedCount: (Array.isArray(tournament.participants) ? tournament.participants : []).filter(isTournamentParticipantApproved).length,
+    pendingPaymentCount: (Array.isArray(tournament.participants) ? tournament.participants : []).filter((item) => item?.status === "payment-pending").length,
     participantCount: (Array.isArray(tournament.participants) ? tournament.participants : []).length,
     championParticipantId: tournament.championParticipantId || "",
     champion: tournament.championParticipantId
@@ -20888,9 +21167,11 @@ function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), k
     ok: !error,
     error,
     testMode: Boolean(testMode),
+    user: authUser ? publicAuthUser(authUser) : null,
     tournament: publicTournament,
     participant: participant ? publicCheckersTournamentParticipant(participant, { includeKey: true }) : null,
     currentMatch: currentMatch ? publicCheckersTournamentMatch(currentMatch, tournament, { includeBoard: true }) : null,
+    pix: pix || null,
     testKeys: testMode && tournament
       ? tournament.participants.map((participantItem) => ({
           key: participantItem.key,
@@ -20900,6 +21181,23 @@ function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), k
         }))
       : []
   };
+}
+
+function buildCheckersTournamentAdminReservations(store = readPubpaidTournamentStore()) {
+  const ensured = ensureDailyCheckersTournament(store, { testMode: false });
+  const tournament = getActiveCheckersTournament(ensured);
+  const participants = Array.isArray(tournament?.participants) ? tournament.participants : [];
+  return participants
+    .filter((participant) => participant?.reservedAt || participant?.paymentStatus === "pending-admin")
+    .map((participant) => ({
+      ...publicCheckersTournamentParticipant(participant, { includeKey: true }),
+      tournamentId: tournament.id,
+      tournamentTitle: tournament.title,
+      createdAt: participant.reservedAt,
+      amount: normalizePubpaidMoney(participant.paymentAmount || tournament.entryAmount || PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT),
+      txid: participant.paymentTxid || "",
+      status: participant.status || "payment-pending"
+    }));
 }
 
 async function appendCanonicalPubpaidItem(collectionKey, item) {

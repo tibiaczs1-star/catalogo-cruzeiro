@@ -10,6 +10,15 @@ Atualizado: 2026-05-22
 - Validação: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --cached --check`; servidor local respondeu `/api/pubpaid/build=20260522-poolreturn1`; online Render respondeu `/api/pubpaid/build=20260522-poolreturn1`.
 - Observação: ficaram mudanças locais não relacionadas em dados/notícias/automação e em um trecho solto de torneio de Damas no `server.js`; elas não entraram no commit de cache-bust da sinuca.
 
+## Rodada Atual - 20260522-gameux1
+
+- PubPaid Damas/Xadrez recebeu loader de abertura que espera assets/cache/fontes/imagens antes de soltar a intro.
+- Damas e Xadrez entram com mesa fixa por padrao (`turnYaw=0deg`) e botao para alternar `Mesa fixa/Girar rival`.
+- Camera agora aceita arrasto na borda da mesa, zoom por roda no desktop e controles de toque compactos no mobile, com copy diferente para cada contexto.
+- Xadrez recebeu botao `Sair/Desistir` dentro da arena fullscreen e HUD lateral reduzido para nao sobrepor o tabuleiro.
+- Torneio de Damas mantem fluxo real: reserva com Google/WhatsApp, Pix/referencia, aprovacao manual no admin e check-in apenas para vaga aprovada.
+- Validacao local: `node --check` em arquivos tocados, `npm run guard:pubpaid`, `/api/pubpaid/build=20260522-gameux1`, Playwright desktop/mobile para Damas e Xadrez sem erros de console.
+
 ## Protocolo Comercial - Propagandas
 
 - Para automacoes de WhatsApp/Facebook/Instagram, usar o protocolo local `.codex-memory/propaganda-automation-protocol.md`.
@@ -340,3 +349,9 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - UI nova em `pubpaid.html`/`domGameInterface.js`: botao `Torneio` no card de Damas, painel com chave/nome, lista de chaves de teste, bracket, confronto atual e retorno ao painel apos a partida.
 - Responsividade: painel de torneio mobile portrait agora fica acima do gate de orientacao, sem overflow horizontal, com rolagem interna e botoes empilhados.
 - Validacao local: `node --check` em JS tocado, `npm run guard:pubpaid`, `/api/pubpaid/build` em `20260522-checkerstourney1`, smoke API com 10 participantes -> 4 rodadas -> campeao, Playwright desktop/mobile e clique real na UI de chave/entrada sem erros de console. Nao versionar `data/pubpaid-tournaments.json`; ele e gerado em runtime.
+
+- Build local: `20260522-gameux1`.
+- Torneio de Damas agora tem inscricao real: reserva com Google confirmado, nome e WhatsApp, Pix/referencia de inscricao, pendencia no admin e aprovacao manual antes de liberar a vaga.
+- A vaga fica presa a conta Google/WhatsApp aprovada; check-in abre uma hora antes e fecha as 20:00 no Acre. Apenas aprovados/confirmados entram no chaveamento.
+- Admin PubPaid recebeu lista de inscricoes pendentes de torneio e rota `/api/pubpaid-admin/tournaments/checkers/review` para aprovar/rejeitar.
+- Validacao local: `node --check`, `npm run guard:pubpaid`, `/api/pubpaid/build` em `20260522-gameux1`, smoke API `register -> admin dashboard -> approve -> join`, e Playwright com bloco de Pix/status visivel no painel.

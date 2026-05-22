@@ -45,6 +45,19 @@ export async function joinCheckersTournament({ key = "", name = "", testMode = t
   });
 }
 
+export async function registerCheckersTournament({
+  key = "",
+  name = "",
+  whatsapp = "",
+  email = "",
+  testMode = tournamentTestEnabled()
+} = {}) {
+  return requestTournamentJson("./api/pubpaid/tournaments/checkers/register", {
+    method: "POST",
+    body: JSON.stringify({ key, slotKey: key, name, whatsapp, email, testMode })
+  });
+}
+
 export async function startCheckersTournamentTest({ key = "", testMode = tournamentTestEnabled() } = {}) {
   return requestTournamentJson("./api/pubpaid/tournaments/checkers/start", {
     method: "POST",

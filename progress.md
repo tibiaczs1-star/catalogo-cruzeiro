@@ -125,3 +125,19 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Frontend ganhou painel de torneio no lobby de Damas, entrada por chave/nome, bracket, estado do confronto atual e retorno ao painel apos partida.
 - Responsividade ajustada: painel de torneio em retrato mobile fica por cima do gate de orientacao, sem overflow horizontal e com rolagem interna.
 - Validacao: `node --check` em `server.js`, `domGameInterface.js`, `tournamentService.js`, `app.js` e `BootScene.js`; `npm run guard:pubpaid`; `/api/pubpaid/build` em `20260522-checkerstourney1`; smoke backend com 10 participantes -> 4 rodadas -> 1 campeao; Playwright desktop/mobile e clique real de chave + entrada pela UI sem erros de console.
+
+## Atualizacao 2026-05-22 - tourneyreg1
+
+- Fluxo do Torneio de Damas virou inscricao real: jogador reserva vaga com conta Google, nome e WhatsApp, recebe Pix/referencia e fica pendente.
+- Admin PubPaid agora enxerga inscricoes pendentes do torneio e pode aprovar/rejeitar; a vaga so entra no chaveamento depois da aprovacao manual.
+- A vaga aprovada fica vinculada a conta Google/WhatsApp da reserva; o check-in abre 1 hora antes e fecha as 20:00 no Acre.
+- Painel publico mostra status `Pix pendente`, bloco do Pix/referencia e instrucao de aguardar aprovacao do admin.
+- Validacao: `node --check`, `npm run guard:pubpaid`, `/api/pubpaid/build` em `20260522-gameux1`, smoke API `reserva -> admin pending -> aprovacao -> checked-in`, Playwright desktop mostrando Pix/status e mobile sem overflow/gate por cima.
+
+## Atualizacao 2026-05-22 - gameux1
+
+- Abertura do PubPaid ganhou loader que segura ate assets/cache/fontes/imagens estarem prontos antes da intro.
+- Damas e Xadrez agora entram com mesa fixa por padrao; o jogador pode ligar/desligar a rotacao do rival pelo botao `Mesa fixa/Girar rival`.
+- Camera recebeu arrasto pela borda da mesa, zoom por roda no desktop, controles de toque no mobile e copy diferente para mobile/desktop.
+- Xadrez recebeu botao `Sair/Desistir` dentro da arena fullscreen e HUD lateral compacto, sem sobrepor o tabuleiro.
+- Validacao visual: Playwright desktop/mobile confirmou 64 casas, 24 pecas em Damas, 32 pecas em Xadrez, loader escondido apos carregar, `turnYaw=0deg` com mesa fixa, botao de desistir visivel e sem erros de console.

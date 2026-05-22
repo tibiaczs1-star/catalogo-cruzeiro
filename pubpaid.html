@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260522-poolreturn1" />
-    <script defer src="./site-google-auth.js?v=20260522-poolreturn1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260522-gameux1" />
+    <script defer src="./site-google-auth.js?v=20260522-gameux1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260522-poolreturn1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260522-gameux1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -46,10 +46,9 @@
       <header class="ppg-topbar" aria-label="Barra do PubPaid 2.0">
         <div class="ppg-topbar-copy">
           <p class="ppg-kicker">pubpaid 2.0 oficial</p>
-          <h1>A abertura agora é uma sequência bitmap dentro do jogo.</h1>
+          <h1>PubPaid em tela cheia.</h1>
           <p>
-            Seis frames montam a chegada, o celular, o toque, o neon e o frame final congelado.
-            Entre com sua conta para liberar a carteira, a abertura, a rua e as mesas pagas com segurança.
+            Entre com sua conta para liberar a carteira, a rua e as mesas pagas com segurança.
           </p>
         </div>
         <div class="ppg-topbar-actions">
@@ -110,7 +109,7 @@
             <section class="ppg-preintro-card">
               <p class="ppg-kicker">carregando</p>
               <h2>Preparando PubPaid</h2>
-              <p data-preintro-status>Conferindo imagens, som e entrada da intro.</p>
+              <p data-preintro-status>Conferindo imagens, som e entrada.</p>
               <div class="ppg-preintro-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                 <span data-preintro-fill></span>
               </div>
@@ -238,7 +237,7 @@
               </header>
               <div class="ppg-dom-game-cards">
                 <article class="ppg-dom-game-card is-pool is-multi" data-dom-game-card="pool" tabindex="0" aria-label="Escolher modo de Sinuca">
-                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260522-poolreturn1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260522-gameux1" alt="" loading="lazy" />
                   <span>Sinuca</span>
                   <strong>clube premium com mira e tacada</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Sinuca">
@@ -247,7 +246,7 @@
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-checkers is-multi" data-dom-game-card="checkers" tabindex="0" aria-label="Escolher modo de Damas">
-                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260522-poolreturn1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260522-gameux1" alt="" loading="lazy" />
                   <span>Damas</span>
                   <strong>arena com captura e pressão de turno</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Damas">
@@ -257,7 +256,7 @@
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-chess is-multi" data-dom-game-card="chess" tabindex="0" aria-label="Escolher modo de Xadrez">
-                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260522-poolreturn1" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260522-gameux1" alt="" loading="lazy" />
                   <span>Xadrez</span>
                   <strong>tabuleiro de salão com leitura limpa</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Xadrez">
@@ -360,10 +359,15 @@
                   <span>nome na chave</span>
                   <input type="text" data-tournament-name placeholder="Seu nome no torneio" maxlength="40">
                 </label>
-                <button type="button" class="primary" data-tournament-join>Entrar</button>
+                <label>
+                  <span>WhatsApp</span>
+                  <input type="tel" data-tournament-whatsapp placeholder="(68) 99999-9999" autocomplete="tel">
+                </label>
+                <button type="button" class="primary" data-tournament-join>Reservar vaga</button>
                 <button type="button" data-tournament-start-test hidden>Fechar chaves teste</button>
               </div>
-              <p data-tournament-status>Entre com sua chave para confirmar presenca.</p>
+              <p data-tournament-status>Entre com Google, informe WhatsApp e reserve sua vaga. O Pix libera a vaga depois da aprovacao do admin.</p>
+              <div class="ppg-tournament-pix" data-tournament-pix hidden></div>
               <div class="ppg-tournament-keys" data-tournament-keys></div>
               <div class="ppg-tournament-current-slot" data-tournament-current></div>
               <div class="ppg-tournament-bracket" data-tournament-bracket></div>
@@ -522,10 +526,25 @@
                   <div class="ppg-checkers-board-frame" data-dom-checkers-frame>
                     <div class="ppg-dom-checkers-board" data-dom-checkers-board aria-label="Tabuleiro de dama"></div>
                   </div>
+                  <span class="ppg-camera-edge is-top" data-checkers-camera-edge data-camera-edge="top" aria-hidden="true"></span>
+                  <span class="ppg-camera-edge is-right" data-checkers-camera-edge data-camera-edge="right" aria-hidden="true"></span>
+                  <span class="ppg-camera-edge is-bottom" data-checkers-camera-edge data-camera-edge="bottom" aria-hidden="true"></span>
+                  <span class="ppg-camera-edge is-left" data-checkers-camera-edge data-camera-edge="left" aria-hidden="true"></span>
                   <div class="ppg-move-toast" data-dom-checkers-move-toast hidden>Movimento feito...</div>
                   <div class="ppg-camera-hint" aria-hidden="true">
                     <i></i>
-                    <span>Botão do meio: girar | roda: aproximar</span>
+                    <span class="is-desktop-copy">Botão do meio na borda: girar | roda: zoom</span>
+                    <span class="is-mobile-copy">Toque na borda da mesa para girar; use + e - para zoom</span>
+                  </div>
+                  <div class="ppg-checkers-camera ppg-camera-orb" aria-label="Controles de câmera de Damas">
+                    <button type="button" data-checkers-camera="up" aria-label="Mover câmera para cima">↑</button>
+                    <button type="button" data-checkers-camera="left" aria-label="Girar câmera para esquerda">‹</button>
+                    <button type="button" class="is-camera-core" data-checkers-camera="reset" aria-label="Centralizar câmera"><span></span></button>
+                    <button type="button" data-checkers-camera="right" aria-label="Girar câmera para direita">›</button>
+                    <button type="button" data-checkers-camera="zoom-out" aria-label="Afastar câmera">−</button>
+                    <button type="button" data-checkers-camera="down" aria-label="Mover câmera para baixo">↓</button>
+                    <button type="button" data-checkers-camera="zoom-in" aria-label="Aproximar câmera">+</button>
+                    <button type="button" class="is-camera-lock is-active" data-checkers-camera="lock" aria-pressed="true">Mesa fixa</button>
                   </div>
                 </div>
 
