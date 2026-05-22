@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T08:13:09.349Z",
+  "lastUpdatedAt": "2026-05-22T08:46:03.571Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2199,6 +2199,33 @@
         "xadrez",
         "camera",
         "mobile"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-corrigir-xadrez-mobile-pubpaid-intro-deve-mostrar-instrucao-creditos-e-moeda-pec",
+      "createdAt": "2026-05-22T08:46:03.571Z",
+      "updatedAt": "2026-05-22T08:46:03.571Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o xadrez nao funciono no mobile, ele deveria esta igual damas, tudo funcionando mais nem a moeda foi jogada, nem apareceu instruções de camera ou posição fixa, e no mobile as peças tão fora do escorpo do jogo, ou seja do tabuleiro, faça uma verificação total depois comit, e online]",
+      "summary": "Corrigir Xadrez mobile PubPaid: intro deve mostrar instrução, créditos e moeda; peças precisam ficar dentro do tabuleiro; controles de câmera devem ficar apenas com Mesa fixa; validar e subir online.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        "pubpaid-phaser/app.js",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "xadrez",
+        "mobile",
+        "qa",
+        "deploy"
       ],
       "nextSteps": [],
       "notes": ""

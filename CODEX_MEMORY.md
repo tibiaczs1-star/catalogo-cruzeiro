@@ -397,3 +397,9 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - A vaga fica presa a conta Google/WhatsApp aprovada; check-in abre uma hora antes e fecha as 20:00 no Acre. Apenas aprovados/confirmados entram no chaveamento.
 - Admin PubPaid recebeu lista de inscricoes pendentes de torneio e rota `/api/pubpaid-admin/tournaments/checkers/review` para aprovar/rejeitar.
 - Validacao local: `node --check`, `npm run guard:pubpaid`, `/api/pubpaid/build` em `20260522-gameux1`, smoke API `register -> admin dashboard -> approve -> join`, e Playwright com bloco de Pix/status visivel no painel.
+
+- Build local: `20260522-chessmobile3`.
+- Xadrez mobile corrigido para seguir a intro completa: preparacao, creditos e moeda visivel antes de liberar o tabuleiro.
+- A chave de renderizacao do Xadrez agora inclui a fase da intro, evitando que o mobile fique preso em `Prepare-se` e esconda a moeda.
+- Peças do Xadrez foram ajustadas no breakpoint mobile para ficarem dentro das casas; camera overlay continua sem setas/zoom, com apenas `Mesa fixa` visivel.
+- Validacao local: `node --check` em `domGameInterface.js`, `app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; browser mobile 740x420 com 64 casas, 32 pecas, `outCount=0`, instrucao de toque, moeda visivel e jogada por toque/click de `b8` para `c6`.

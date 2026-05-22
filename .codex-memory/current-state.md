@@ -1,15 +1,17 @@
 # Current State
 
-Updated: 2026-05-22T08:25:00.000Z
+Updated: 2026-05-22T08:44:00.000Z
 
 ## Active Goal
 
-- PubPaid Damas/Xadrez sem overlay de camera
+- PubPaid Xadrez mobile corrigido
 
 ## Summary
 
-PubPaid Damas e Xadrez tiveram a camera-orb removida do meio do tabuleiro. Agora fica apenas o botao `Mesa fixa/Girar rival`; ajuste de camera segue por gestos/touch/bordas e o desktop recebe so uma dica discreta.
+PubPaid Xadrez mobile agora segue a intro completa: preparacao, creditos e moeda visivel antes de liberar a mesa. A chave de renderizacao inclui a fase da intro, evitando a tela presa em `Prepare-se`.
+
+No mobile horizontal, o tabuleiro de Xadrez mantem 64 casas e 32 pecas dentro do escopo das casas, mostra a instrucao `Use toque na mesa e pinca para zoom`, deixa visivel apenas `Mesa fixa` nos controles de camera e aceita jogada por toque/click.
 
 ## Next
 
-- Conferir online em mobile horizontal que Damas/Xadrez nao mostram mais setas/zoom/camera sobre o tabuleiro.
+- Subir build `20260522-chessmobile3` online e confirmar `/api/pubpaid/build`.
