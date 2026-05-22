@@ -10,6 +10,7 @@ dxdiag_gpu.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+debug.log
 
 # Dependências e ambiente
 node_modules/
@@ -34,6 +35,7 @@ output/instagram/
 output/tv-ad/
 output/video-reference/
 output/web-game/pubpaid-*/
+output/web-game/
 data/real-agents-memory.json
 data/real-agents-run-history.json
 data/real-agents-ecosystem-study.json

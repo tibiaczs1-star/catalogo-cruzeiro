@@ -8,6 +8,17 @@ Atualizado: 2026-05-17
 
 O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 
+## Atualizacao 2026-05-22 - final-sweep1
+
+English execution prompt used: "Finish the current Projeto Codex workspace by separating the public CZS site and PubPaid as two products in the same repository; scan recent changes and open orders, implement only missing fixes, validate locally and in-browser, clean safe temporary artifacts, preserve rollback and approved PubPaid evidence, update agent/team handoffs, then commit and push for online synchronization."
+
+- Projeto Codex/CZS e PubPaid ficaram explicitamente separados na memoria e no handoff: mesmo repo/endereco, produtos diferentes.
+- Backup de rollback criado em `.codex-backups/final-sweep-20260522-132315`.
+- Xadrez PubPaid recebeu ajuste final para preservar intro `video -> creditos -> moeda -> tabuleiro` antes de liberar a mesa.
+- Limpeza segura: removidos `output/`, `debug.log`, `scripts/__pycache__/`, `backend/node_modules/pngjs/coverage` e `data/pubpaid-tournaments.json` local de runtime; `.gitignore` agora cobre `debug.log` e `output/web-game/`.
+- Validacao local: `node --check`, `git diff --check`, `npm run cleanup:audit`, `npm run review:team`, HTTP local `:3062` e Browser desktop/mobile sem console errors.
+- Pendente real: commit/push e confirmar Render online depois do deploy.
+
 ## Atualizacao 2026-05-22 - gameux2
 
 English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX without redesigning the games: on mobile, remove intrusive camera UI and rely on native gestures such as pinch-to-zoom and edge dragging; on desktop, allow dragging the table/frame edges with the mouse; cut the last two seconds from the Checkers intro video flow; and update Pool, Checkers, and Chess with original 32-bit Brazilian-inspired game themes without copying protected melodies."
@@ -18,6 +29,19 @@ English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX wit
 - Audio: temas de Sinuca, Damas e Xadrez atualizados para 32-bit brasileiro original.
 - Build/cache-bust: `20260522-gameux2`.
 - Validacao: `node --check`, `npm run guard:pubpaid`, `/api/pubpaid/build`, smoke mobile Damas/Xadrez sem controles intrusivos e sem erros de console.
+
+## Atualizacao 2026-05-22 - chessintrofix
+
+- Xadrez PubPaid corrigido para nao disparar a moeda antes do fim da intro: removido o salto de video para o fim e protegido o `onended` para avancar apenas quando a fase ainda e `video`.
+- Fluxo ficou alinhado com Damas: video -> creditos -> moeda -> tabuleiro liberado, com timer fallback sem chamada dupla.
+- Validacao local em `20260522-lobbywaiter1`: mobile landscape e desktop com 64 casas, 32 pecas, moeda apos creditos e tabuleiro liberado; warnings vistos foram apenas `ReadPixels` do WebGL headless.
+
+## Atualizacao 2026-05-22 - boardfit1
+
+- Xadrez: pecas reduzidas e presas dentro das casas, com geometria 3D mais baixa, sem animacao de pouso mudando a transformacao e sem regra mobile que alterna para visual chapado.
+- Xadrez e Damas: clique/drag no miolo do tabuleiro fica reservado para jogo; camera agora entra por bordas, botao do meio e pinch.
+- Cursores estabilizados: frame `default`, casas/pecas `pointer`, bordas de camera `grab`.
+- Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, browser in-app e Playwright mobile landscape 844x390.
 
 ## Atualizacao 2026-05-22 - poolpvpfix2
 

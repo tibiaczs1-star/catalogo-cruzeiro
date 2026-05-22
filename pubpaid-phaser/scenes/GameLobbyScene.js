@@ -70,7 +70,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.game.events.emit("pubpaid:music-zone", "game");
     this.buildBackdrop();
     this.tableLayer = this.add.container(0, 0).setDepth(1);
-    this.drawLobbyWaiter(GAME_WIDTH / 2, 684, "Escolha a mesa.");
+    this.drawLobbyWaiter(1110, 720, "Escolha a mesa.");
     this.game.events.emit("pubpaid:open-dom-lobby");
     updateGameState({
       currentScene: "game-lobby",
@@ -164,9 +164,9 @@ export class GameLobbyScene extends Phaser.Scene {
     this.drawGameChoiceCard(410, 394, "pool");
     this.drawGameChoiceCard(742, 394, "checkers");
     if (this.gameId) {
-      this.drawLobbyWaiter(GAME_WIDTH / 2, 684, "Pronto para a mesa.");
+      this.drawLobbyWaiter(1110, 720, "Pronto para a mesa.");
     } else {
-      this.drawLobbyWaiter(GAME_WIDTH / 2, 684, "Escolha seu jogo.");
+      this.drawLobbyWaiter(1110, 720, "Escolha seu jogo.");
     }
 
     if (this.gameId) {
@@ -370,32 +370,19 @@ export class GameLobbyScene extends Phaser.Scene {
 
   drawLobbyWaiter(x, y, message) {
     if (this.textures.exists(PUBPAID_TEXTURE_KEYS.waiterLobby)) {
-      const shadow = this.add.ellipse(x, y - 16, 360, 54, 0x000000, 0.32)
+      const shadow = this.add.ellipse(x, y - 18, 480, 66, 0x000000, 0.34)
         .setBlendMode(Phaser.BlendModes.MULTIPLY)
         .setDepth(2.05);
       this.waiterSprite = this.add.image(x, y, PUBPAID_TEXTURE_KEYS.waiterLobby)
         .setOrigin(0.5, 1)
         .setDepth(2.2);
-      fitImageToHeight(this.waiterSprite, 440);
+      fitImageToHeight(this.waiterSprite, 620);
       this.tableLayer.add(shadow);
       this.tableLayer.add(this.waiterSprite);
       this.startWaiterTalking();
     } else {
       return;
     }
-    const panelX = 938;
-    const panelY = 188;
-    this.tableLayer.add(this.add.rectangle(panelX, panelY, 276, 54, 0x120c08, 0.88)
-      .setStrokeStyle(2, 0xffd06d, 0.34)
-      .setDepth(2.45));
-    this.tableLayer.add(this.add.text(panelX, panelY, message, {
-      fontFamily: "Georgia, Times New Roman, serif",
-      fontSize: "14px",
-      fontStyle: "bold",
-      color: "#fff0cf",
-      stroke: "#120904",
-      strokeThickness: 2
-    }).setOrigin(0.5).setDepth(2.5));
   }
 
   startWaiterTalking() {

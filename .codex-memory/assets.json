@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T07:41:38.914Z",
+  "lastUpdatedAt": "2026-05-22T18:04:40.064Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -980,6 +980,33 @@
       "note": "Home homecatch1: popup PubPaid/Enquete visivel apos intro, hero com CTA Ler materia e noticias reais.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-22T07:41:38.914Z"
+    },
+    {
+      "id": "demo-touch-controlled-png",
+      "kind": "image",
+      "path": ".codex-temp/vale-pool-pooltouchaim1/demo-touch-controlled.png",
+      "source": "workspace",
+      "note": "Vale Pool pooltouchaim1: validacao mobile touch mostrando etapa de forca apos toque curto; antes, arrasto permaneceu em mira sem disparar forca.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T16:11:50.794Z"
+    },
+    {
+      "id": "chess-mobile-png",
+      "kind": "image",
+      "path": ".codex-temp/boardfit1-smoke/chess-mobile.png",
+      "source": "workspace",
+      "note": "boardfit1: Xadrez mobile landscape com pecas dentro das casas e da mesa.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T18:04:40.064Z"
+    },
+    {
+      "id": "checkers-mobile-png",
+      "kind": "image",
+      "path": ".codex-temp/boardstable1-smoke/checkers-mobile.png",
+      "source": "workspace",
+      "note": "boardstable1: Damas mobile landscape com cursor de jogo separado da camera.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T16:48:47.453Z"
     }
   ]
 }

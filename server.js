@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260522-mobilehud2";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260522-boardfit1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -289,7 +289,7 @@ const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
 const NINJAS_PIX_DEFAULT_AMOUNT = 5;
 const PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT = Math.max(
   1,
-  Number(process.env.PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT || NINJAS_PIX_DEFAULT_AMOUNT) || NINJAS_PIX_DEFAULT_AMOUNT
+  Number(process.env.PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT || 50) || 50
 );
 const NINJAS_PIX_RECEIVER_NAME = String(
   process.env.NINJAS_PIX_RECEIVER_NAME || "CATALOGO CRUZEIRO"
@@ -16480,6 +16480,7 @@ async function handleApi(req, res, pathname, searchParams) {
     const result = await reserveCheckersTournamentParticipant(store, effectiveUser, {
       name: body.name,
       whatsapp: body.whatsapp,
+      depositorName: body.depositorName || body.pixDepositorName || body.receiptName,
       slotKey: body.key || body.slotKey,
       testMode
     });
@@ -20569,6 +20570,7 @@ function createDailyCheckersTournament(clock = getAcreClock()) {
       googleName: "",
       googlePicture: "",
       whatsapp: "",
+      depositorName: "",
       paymentTxid: "",
       paymentAmount: PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT,
       paymentStatus: "none",
@@ -20862,6 +20864,7 @@ function advanceCheckersTournamentIfRoundComplete(tournament = {}) {
 async function reserveCheckersTournamentParticipant(store = emptyPubpaidTournamentStore(), authUser = null, {
   name = "",
   whatsapp = "",
+  depositorName = "",
   slotKey = "",
   testMode = false
 } = {}) {
@@ -20886,6 +20889,10 @@ async function reserveCheckersTournamentParticipant(store = emptyPubpaidTourname
   const cleanWhatsApp = cleanTournamentWhatsApp(whatsapp);
   if (!cleanWhatsApp && !testMode) {
     return { ok: false, status: 400, error: "Informe seu WhatsApp para o admin confirmar a inscricao.", store };
+  }
+  const cleanDepositorName = cleanShortText(depositorName || "", 80);
+  if (!cleanDepositorName && !testMode) {
+    return { ok: false, status: 400, error: "Informe o nome do depositante que aparece no Pix.", store };
   }
   const playerName = cleanShortText(name || authUser.name || authUser.email, 80);
   const amount = normalizePubpaidMoney(tournament.entryAmount || PUBPAID_CHECKERS_TOURNAMENT_ENTRY_AMOUNT);
@@ -20920,6 +20927,7 @@ async function reserveCheckersTournamentParticipant(store = emptyPubpaidTourname
   participant.googleName = safeString(authUser.name || playerName, 120);
   participant.googlePicture = safeString(authUser.picture || "", 360);
   participant.whatsapp = cleanWhatsApp;
+  participant.depositorName = cleanDepositorName;
   participant.paymentTxid = pix.txid || txid;
   participant.paymentAmount = amount;
   participant.paymentStatus = "pending-admin";
@@ -20963,6 +20971,7 @@ function reviewCheckersTournamentReservation(store = emptyPubpaidTournamentStore
     participant.googleName = "";
     participant.googlePicture = "";
     participant.whatsapp = "";
+    participant.depositorName = "";
     participant.paymentTxid = "";
     participant.name = `Vaga ${String(participant.seed || "").padStart(2, "0")}`;
   } else {
@@ -21088,6 +21097,7 @@ function publicCheckersTournamentParticipant(participant = {}, { includeKey = fa
     googleEmail: participant.googleEmail || "",
     googleName: participant.googleName || "",
     whatsapp: participant.whatsapp || "",
+    depositorName: participant.depositorName || participant.pixDepositorName || "",
     paymentAmount: normalizePubpaidMoney(participant.paymentAmount || 0),
     paymentStatus: participant.paymentStatus || "none",
     paymentTxid: participant.paymentTxid || "",
@@ -21176,7 +21186,9 @@ function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), k
     testMode: Boolean(testMode),
     user: authUser ? publicAuthUser(authUser) : null,
     tournament: publicTournament,
-    participant: participant ? publicCheckersTournamentParticipant(participant, { includeKey: true }) : null,
+    participant: participant ? publicCheckersTournamentParticipant(participant, {
+      includeKey: Boolean(testMode || isTournamentParticipantApproved(participant))
+    }) : null,
     currentMatch: currentMatch ? publicCheckersTournamentMatch(currentMatch, tournament, { includeBoard: true }) : null,
     pix: pix || null,
     testKeys: testMode && tournament

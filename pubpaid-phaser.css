@@ -977,21 +977,31 @@ body.pubpaid-phaser-page .ppg-prompt {
 
 .ppg-tournament-entry {
   display: grid;
-  grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) minmax(130px, 0.85fr) auto auto;
+  grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) minmax(170px, 1fr) minmax(92px, 0.45fr) auto auto;
   gap: 10px;
   align-items: end;
   margin: 12px 0;
 }
 
 .ppg-tournament-pix {
-  display: grid;
-  grid-template-columns: minmax(96px, 132px) minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
+  display: block;
   margin: 12px 0;
   padding: 12px;
   border: 1px solid rgba(255, 208, 109, 0.32);
   background: rgba(255, 208, 109, 0.08);
+}
+
+.ppg-tournament-payment-window {
+  display: grid;
+  grid-template-columns: minmax(96px, 132px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(255, 208, 109, 0.52);
+  background:
+    radial-gradient(circle at 10% 18%, rgba(255, 208, 109, 0.16), transparent 42%),
+    rgba(5, 8, 16, 0.96);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.38);
 }
 
 .ppg-tournament-pix svg {
@@ -1034,6 +1044,28 @@ body.pubpaid-phaser-page .ppg-prompt {
   font-weight: 900;
   letter-spacing: 0;
   outline: 0;
+}
+
+.ppg-tournament-amount {
+  display: grid;
+  gap: 5px;
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 208, 109, 0.34);
+  background: rgba(255, 208, 109, 0.08);
+}
+
+.ppg-tournament-amount span {
+  color: #8aa0ba;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ppg-tournament-amount strong {
+  color: #ffd06d;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .ppg-tournament-keys {
@@ -1251,6 +1283,10 @@ body.pubpaid-phaser-page .ppg-prompt {
   }
 
   .ppg-tournament-pix {
+    grid-template-columns: 1fr;
+  }
+
+  .ppg-tournament-payment-window {
     grid-template-columns: 1fr;
   }
 
@@ -2284,21 +2320,6 @@ body.pubpaid-phaser-page .ppg-prompt {
   text-align: center;
   transform: translate(-50%, -50%) scale(0.96);
   pointer-events: none;
-}
-
-.ppg-chess-intro::before {
-  content: "";
-  width: 56px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.66), transparent 22%),
-    radial-gradient(circle at 50% 58%, #ffe8a8 0 29%, #c68134 31% 66%, #4b210f 68% 100%);
-  box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.36),
-    0 0 28px rgba(255, 208, 109, 0.28),
-    inset 0 0 0 4px rgba(255, 244, 198, 0.24);
-  animation: ppgCheckersCoinFlip 1.05s ease-in-out 2;
 }
 
 .ppg-chess-intro[hidden] {
@@ -11091,6 +11112,75 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
   min-width: 0;
   height: 32px;
   min-height: 32px;
+}
+
+/* Final board-control pass: keep play clicks and camera gestures visually separate. */
+.ppg-checkers-board-frame,
+.ppg-chess-board-frame {
+  cursor: default;
+}
+
+.ppg-checkers-board-frame:active,
+.ppg-chess-board-frame:active {
+  cursor: default;
+}
+
+.ppg-checkers-board-frame .ppg-dom-cell,
+.ppg-checkers-board-frame .ppg-dom-piece,
+.ppg-chess-board-frame .ppg-dom-chess-cell {
+  cursor: pointer;
+}
+
+.ppg-checkers-board-frame .ppg-dom-piece:active {
+  cursor: pointer;
+}
+
+.ppg-checkers-board-stage .ppg-camera-edge,
+.ppg-chess-board-stage .ppg-camera-edge {
+  opacity: 0.16;
+  cursor: grab;
+}
+
+.ppg-checkers-board-stage .ppg-camera-edge:active,
+.ppg-chess-board-stage .ppg-camera-edge:active {
+  cursor: grabbing;
+}
+
+.ppg-camera-edge.is-top,
+.ppg-camera-edge.is-bottom {
+  height: clamp(18px, 3.8dvh, 30px);
+}
+
+.ppg-camera-edge.is-left,
+.ppg-camera-edge.is-right {
+  width: clamp(18px, 3.8dvh, 30px);
+}
+
+.ppg-chess-board-frame .ppg-dom-chess-cell {
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.ppg-chess-board-frame .ppg-chess-piece {
+  width: 54%;
+  height: 68%;
+  transform: translateZ(12px) translateY(9%) rotateX(-24deg) scaleY(0.96);
+  transform-origin: 50% 92%;
+  transform-style: preserve-3d;
+  transition: filter 140ms ease;
+  animation: none;
+  filter:
+    drop-shadow(0 10px 5px rgba(0, 0, 0, 0.4))
+    drop-shadow(0 0 7px var(--piece-glow));
+}
+
+.ppg-chess-board-frame .ppg-chess-piece.is-pawn {
+  width: 46%;
+  height: 58%;
+}
+
+.ppg-chess-board-frame .ppg-dom-chess-cell.is-last-to .ppg-chess-piece {
+  animation: none;
 }
 
 @media (min-width: 901px) and (min-height: 521px) {

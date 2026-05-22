@@ -139,7 +139,7 @@
           <h2>Torneio de Damas</h2>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Reserva</th><th>Conta Google</th><th>WhatsApp</th><th>Vaga</th><th>Valor Pix</th><th>Status</th><th>Referência</th><th>Ação</th></tr></thead>
+              <thead><tr><th>Reserva</th><th>Conta Google</th><th>WhatsApp</th><th>Depositante</th><th>Vaga</th><th>Valor Pix</th><th>Status</th><th>Referência</th><th>Ação</th></tr></thead>
               <tbody id="pendingTournamentBody"></tbody>
             </table>
           </div>
@@ -268,6 +268,7 @@
             name: row.googleName || row.name || "-",
             email: row.googleEmail || row.email || "-",
             whatsapp: row.whatsapp || "-",
+            depositorName: row.depositorName || row.pixDepositorName || row.receiptName || "-",
             amount: row.amount ?? row.paymentAmount ?? 0,
             status: row.paymentStatus || row.status || "-",
             txid: row.txid || row.paymentTxid || row.reference || "-",
@@ -350,8 +351,8 @@
         renderTableRows(
           document.getElementById("pendingTournamentBody"),
           normalized.pendingCheckersTournamentReservations || [],
-          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td class="mono">${escapeHtml(row.whatsapp || "-")}</td><td><strong>${escapeHtml(String(row.seed || "-"))}</strong><br><small>${escapeHtml(row.key || "-")}</small></td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td>${escapeHtml(row.status || "-")}</td><td class="mono">${escapeHtml(row.txid || "-")}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/tournaments/checkers/review" data-id="${escapeHtml(row.reservationId || row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/tournaments/checkers/review" data-id="${escapeHtml(row.reservationId || row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
-          8,
+          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td class="mono">${escapeHtml(row.whatsapp || "-")}</td><td class="truncate"><strong>${escapeHtml(row.depositorName || "-")}</strong></td><td><strong>${escapeHtml(String(row.seed || "-"))}</strong><br><small>${escapeHtml(row.key || "-")}</small></td><td><strong>R$ ${escapeHtml(String(row.amount || 0))},00</strong></td><td>${escapeHtml(row.status || "-")}</td><td class="mono">${escapeHtml(row.txid || "-")}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/tournaments/checkers/review" data-id="${escapeHtml(row.reservationId || row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/tournaments/checkers/review" data-id="${escapeHtml(row.reservationId || row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
+          9,
           "Sem inscricoes pendentes."
         );
 

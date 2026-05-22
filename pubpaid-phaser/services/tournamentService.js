@@ -49,12 +49,13 @@ export async function registerCheckersTournament({
   key = "",
   name = "",
   whatsapp = "",
+  depositorName = "",
   email = "",
   testMode = tournamentTestEnabled()
 } = {}) {
   return requestTournamentJson("./api/pubpaid/tournaments/checkers/register", {
     method: "POST",
-    body: JSON.stringify({ key, slotKey: key, name, whatsapp, email, testMode })
+    body: JSON.stringify({ key, slotKey: key, name, whatsapp, depositorName, email, testMode })
   });
 }
 

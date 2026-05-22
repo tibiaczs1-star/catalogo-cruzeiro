@@ -35,6 +35,8 @@ canvas {
   image-rendering: crisp-edges;
   background: #07100c;
   border: 2px solid #9a6828;
+  touch-action: none;
+  user-select: none;
 }
 
 canvas:focus {

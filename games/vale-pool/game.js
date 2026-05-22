@@ -14,6 +14,8 @@
   const table = { x: 58, y: 124, w: 844, h: 354 };
   const field = { x: 102, y: 156, w: 756, h: 286 };
   const POCKET = { railOffset: 14, rim: 13, throat: 9, catch: 46 };
+  const TOUCH_AIM_MOVE_THRESHOLD = 12;
+  const TOUCH_AIM_HOLD_MS = 240;
   const pockets = [
     { name: "sup-esq", x: field.x - POCKET.railOffset, y: field.y - POCKET.railOffset },
     { name: "sup", x: field.x + field.w / 2, y: field.y - POCKET.railOffset },
@@ -125,6 +127,15 @@
   let musicTimer = 0;
   let musicStep = 0;
   let lastDemoStatePost = 0;
+  let touchAim = {
+    id: 0,
+    active: false,
+    moved: false,
+    suppressNextClick: false,
+    startX: 0,
+    startY: 0,
+    startTime: 0,
+  };
 
   function reset() {
     const rackY = field.y + field.h / 2;
@@ -1907,9 +1918,49 @@
 
   canvas.addEventListener("mousemove", updatePointer);
   canvas.addEventListener("pointermove", updatePointer);
+  canvas.addEventListener("pointermove", (event) => {
+    if (!touchAim.active || event.pointerId !== touchAim.id) return;
+    const dx = event.clientX - touchAim.startX;
+    const dy = event.clientY - touchAim.startY;
+    if (Math.hypot(dx, dy) >= TOUCH_AIM_MOVE_THRESHOLD) {
+      touchAim.moved = true;
+    }
+  });
   canvas.addEventListener("pointerdown", (event) => {
     canvas.focus({ preventScroll: true });
+    if (event.pointerType === "touch" || event.pointerType === "pen") {
+      touchAim = {
+        id: event.pointerId,
+        active: true,
+        moved: false,
+        suppressNextClick: false,
+        startX: event.clientX,
+        startY: event.clientY,
+        startTime: performance.now(),
+      };
+      try {
+        canvas.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Some synthetic touch events do not have an active pointer capture target.
+      }
+    }
     updatePointer(event);
+  });
+  canvas.addEventListener("pointerup", (event) => {
+    if (!touchAim.active || event.pointerId !== touchAim.id) return;
+    const heldLongEnough = performance.now() - touchAim.startTime >= TOUCH_AIM_HOLD_MS;
+    touchAim.suppressNextClick = touchAim.moved || heldLongEnough;
+    touchAim.active = false;
+    try {
+      canvas.releasePointerCapture?.(event.pointerId);
+    } catch {
+      // Some synthetic touch events do not have an active pointer capture target.
+    }
+  });
+  canvas.addEventListener("pointercancel", (event) => {
+    if (!touchAim.active || event.pointerId !== touchAim.id) return;
+    touchAim.suppressNextClick = true;
+    touchAim.active = false;
   });
 
   canvas.addEventListener("mouseleave", () => { mouse.inside = false; });
@@ -1919,6 +1970,13 @@
     const rect = canvas.getBoundingClientRect();
     const x = (event.clientX - rect.left) * canvas.width / rect.width;
     const y = (event.clientY - rect.top) * canvas.height / rect.height;
+    if (touchAim.suppressNextClick) {
+      touchAim.suppressNextClick = false;
+      if (state.mode === "MIRANDO" && state.turn === "player") {
+        state.message = state.shotStage === "power" ? "AJUSTE A MIRA | TOQUE PARA TACAR" : "MIRA AJUSTADA | TOQUE PARA FORCA";
+      }
+      return;
+    }
     if (state.introTimer > 0) {
       state.introTimer = 0;
       return;

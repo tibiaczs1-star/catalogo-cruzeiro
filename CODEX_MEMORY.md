@@ -2,6 +2,54 @@
 
 Atualizado: 2026-05-22
 
+## Rodada Final - 20260522-final-sweep1
+
+- Frentes separadas: Projeto Codex/CZS e PubPaid continuam no mesmo repo, mas devem ser tratados como sistemas diferentes; nao puxar regras de jogo para home/editorial nem puxar CZS para runtime PubPaid sem pedido explicito.
+- Backup de rollback criado antes da limpeza: `.codex-backups/final-sweep-20260522-132315`.
+- Ajuste final aplicado: Xadrez PubPaid voltou ao fluxo correto `video -> creditos -> moeda -> tabuleiro`, alinhado com Damas e evitando moeda antes da intro.
+- Limpeza segura executada: removidos `output/`, `debug.log`, `scripts/__pycache__/`, `backend/node_modules/pngjs/coverage` e `data/pubpaid-tournaments.json` local de runtime; `.gitignore` passou a ignorar `debug.log` e `output/web-game/`.
+- O audit de limpeza restante aponta apenas `backend/node_modules/qs/dist`; foi preservado por ser parte de dependencia instalada.
+- Validacao local: `node --check` em arquivos tocados, `git diff --check`, `npm run cleanup:audit`, `npm run review:team` com PubPaid guard OK e `totalIssues: 0`, HTTP local em `:3062`, Browser desktop/mobile sem console errors.
+- Browser QA: home desktop/mobile carregou conteudo sem overlay; PubPaid Xadrez mobile landscape mostrou creditos, depois liberou tabuleiro com 64 casas/32 pecas, sem overflow horizontal.
+- Pendente real antes de dizer "fechado online": commit/push e conferir Render servindo `20260522-boardfit1` no PubPaid e `20260522-homegate3` na home.
+
+## Rodada Atual - 20260522-homegate3
+
+- Home CZS: carrossel de manchetes manteve 15 fotos e ganhou setas visiveis mais arrasto/puxar no trilho para ver as fotos que ficam fora da area inicial.
+- Hero: CTA `Ler matéria` segue apontando para a noticia real em destaque.
+- Cache-bust local: `20260522-homegate3`.
+- Validacao: `node --check` em `script.js` e `scripts/review-team-audit.js`; `git diff --check`; `npm run review:team` com PubPaid guard OK e `totalIssues: 0`; Playwright desktop 1366x768 e mobile 390x844 confirmou carregamento sem overlay, 15 fotos, setas funcionando, arrasto funcionando e console limpo.
+
+## Rodada Atual - 20260522-lobbywaiter1
+
+- Build local atual: `20260522-boardfit1`.
+- Xadrez/Damas PubPaid: estabilizado o controle de tabuleiro para nao alternar visualmente entre camera e jogo; clique/arrasto no miolo nao gira mais a mesa, camera fica nas bordas, botao do meio e pinch.
+- Xadrez: pecas reduzidas e travadas dentro das casas, com geometria 3D mais baixa, sem animacao de pouso alterando transform/altura entre lances e sem alternar para versao chapada em viewport mobile.
+- Validacao: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; HTTP local em `:3036`; browser in-app confirmou 64 casas/32 pecas no Xadrez, frame `default`, casas/pecas `pointer`, borda `grab`; Damas confirmou 64 casas/24 pecas e mesmo isolamento de controle; Playwright mobile landscape 844x390 confirmou Xadrez e Damas fora de cinematic, pecas com cursor `pointer`, frame `default` e bordas de camera reduzidas.
+
+- Xadrez PubPaid: intro corrigida para nao disparar moeda antes do video terminar; removido salto de `onloadedmetadata` para o fim do video e `onended` agora so avanca se a fase ainda for `video`.
+- Fluxo validado como Damas: video -> creditos -> moeda -> tabuleiro liberado; fallback do Xadrez segura tempo suficiente para o video de 5s e evita chamada dupla.
+- Validacao local: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; `web_game_playwright_client`; Playwright mobile landscape e desktop no servidor `:3047` com 64 casas, 32 pecas, moeda apos creditos e tabuleiro liberado.
+- Evidencias: `.codex-temp/chessintrofix/mobile-final-01-video.png`, `.codex-temp/chessintrofix/desktop-final-coin.png` e `.codex-temp/chessintrofix/desktop-final-board.png`.
+
+## Rodada Atual - 20260522-pooltouchaim1
+
+- Sinuca/Vale Pool mobile recebeu correcao de controle: arrastar/segurar no canvas agora apenas ajusta a mira e nao dispara o click sintetico que iniciava a força.
+- Toque curto/parado continua avancando para a etapa de força; toque seguinte taca.
+- Canvas do prototipo recebeu `touch-action: none` para o navegador nao roubar o gesto no celular.
+- Build/cache-bust local: `20260522-pooltouchaim1`.
+- Validacao: `node --check` em `games/vale-pool/game.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `web_game_playwright_client`; Playwright touch controlado em 844x390 confirmou arrasto permanecendo em `mira` e toque curto indo para `forca`; servidor local em `:3038` respondeu `/api/pubpaid/build=20260522-pooltouchaim1`.
+- Revalidacao apos cache-bust paralelo: servidor local em `:3039` respondeu `/api/pubpaid/build=20260522-lobbywaiter1` e o mesmo teste touch confirmou `mira` apos arrasto e `forca` apos toque curto, sem erros de console.
+- Evidencia: `.codex-temp/vale-pool-pooltouchaim1/demo-touch-controlled.png`.
+
+## Rodada Atual - 20260522-tournamentpay1
+
+- Torneio de Damas PubPaid: cadastro corrigido para abrir uma janela de pagamento separada com nome, WhatsApp, nome do depositante e valor fixo de R$ 50,00.
+- Fluxo mantido: jogador toca em `Ja paguei`, aguarda aprovacao manual do admin, e a chave da vaga so e devolvida para a conta Google depois da aprovacao.
+- Admin PubPaid agora mostra o nome do depositante nas reservas pendentes do torneio.
+- Build/cache-bust local: `20260522-tournamentpay1`.
+- Validacao: `node --check` em `server.js`, `pubpaid-phaser/ui/domGameInterface.js` e `pubpaid-phaser/services/tournamentService.js`; `npm run guard:pubpaid`; `git diff --check`; smoke HTTP local em `:3056` confirmou `/api/pubpaid/build=20260522-tournamentpay1`, campo do depositante, valor R$ 50,00 e chave escondida antes da aprovacao.
+
 ## Rodada Atual - 20260522-boardtouch1
 
 - PubPaid Damas/Xadrez: removida a camera-orb com setas, zoom e icone de camera que ficava sobrepondo o tabuleiro.

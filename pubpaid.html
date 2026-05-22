@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260522-mobilehud2" />
-    <script defer src="./site-google-auth.js?v=20260522-mobilehud2"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260522-boardfit1" />
+    <script defer src="./site-google-auth.js?v=20260522-boardfit1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260522-mobilehud2"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260522-boardfit1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -232,12 +232,11 @@
 
             <aside class="ppg-dom-lobby" data-dom-lobby hidden>
               <header>
-                <span class="ppg-kicker">mesas</span>
-                <h2>Escolha a mesa</h2>
+                <h2>Mesas</h2>
               </header>
               <div class="ppg-dom-game-cards">
                 <article class="ppg-dom-game-card is-pool is-multi" data-dom-game-card="pool" tabindex="0" aria-label="Escolher modo de Sinuca">
-                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260522-mobilehud2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-pool.svg?v=20260522-boardfit1" alt="" loading="lazy" />
                   <span>Sinuca</span>
                   <strong>clube premium com mira e tacada</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Sinuca">
@@ -246,7 +245,7 @@
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-checkers is-multi" data-dom-game-card="checkers" tabindex="0" aria-label="Escolher modo de Damas">
-                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260522-mobilehud2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-checkers.svg?v=20260522-boardfit1" alt="" loading="lazy" />
                   <span>Damas</span>
                   <strong>arena com captura e pressão de turno</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Damas">
@@ -256,7 +255,7 @@
                   </div>
                 </article>
                 <article class="ppg-dom-game-card is-chess is-multi" data-dom-game-card="chess" tabindex="0" aria-label="Escolher modo de Xadrez">
-                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260522-mobilehud2" alt="" loading="lazy" />
+                  <img src="./assets/pubpaid/lobby/icons/game-chess.svg?v=20260522-boardfit1" alt="" loading="lazy" />
                   <span>Xadrez</span>
                   <strong>tabuleiro de salão com leitura limpa</strong>
                   <div class="ppg-dom-game-card-actions" aria-label="Modos de Xadrez">
@@ -351,22 +350,30 @@
               </header>
               <p data-tournament-window>Horario oficial: 20:00 ate 20:20 no Acre.</p>
               <div class="ppg-tournament-entry">
-                <label>
+                <label data-tournament-key-field hidden>
                   <span>chave do dia</span>
-                  <input type="text" data-tournament-key placeholder="DAMAS-AAAAMMDD-01" autocomplete="one-time-code">
+                  <input type="text" data-tournament-key placeholder="Liberada apos aprovacao" autocomplete="one-time-code" readonly>
                 </label>
                 <label>
-                  <span>nome na chave</span>
+                  <span>nome</span>
                   <input type="text" data-tournament-name placeholder="Seu nome no torneio" maxlength="40">
                 </label>
                 <label>
                   <span>WhatsApp</span>
                   <input type="tel" data-tournament-whatsapp placeholder="(68) 99999-9999" autocomplete="tel">
                 </label>
-                <button type="button" class="primary" data-tournament-join>Reservar vaga</button>
+                <label>
+                  <span>nome do depositante</span>
+                  <input type="text" data-tournament-depositor placeholder="Nome de quem fez o Pix" maxlength="80" autocomplete="name">
+                </label>
+                <div class="ppg-tournament-amount">
+                  <span>valor</span>
+                  <strong>R$ 50,00</strong>
+                </div>
+                <button type="button" class="primary" data-tournament-join>Abrir pagamento</button>
                 <button type="button" data-tournament-start-test hidden>Fechar chaves teste</button>
               </div>
-              <p data-tournament-status>Entre com Google, informe WhatsApp e reserve sua vaga. O Pix libera a vaga depois da aprovacao do admin.</p>
+              <p data-tournament-status>Entre com Google, informe nome, WhatsApp e nome do depositante. Depois do Pix, toque em Ja paguei e aguarde o admin aprovar.</p>
               <div class="ppg-tournament-pix" data-tournament-pix hidden></div>
               <div class="ppg-tournament-keys" data-tournament-keys></div>
               <div class="ppg-tournament-current-slot" data-tournament-current></div>

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-mobilehud2";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-boardfit1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260522-mobilehud2";
+} from "../services/pvpService.js?v=20260522-boardfit1";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -20,7 +20,7 @@ import {
   moveCheckersTournament,
   registerCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260522-mobilehud2";
+} from "../services/tournamentService.js?v=20260522-boardfit1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -30,8 +30,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260522-mobilehud2";
-import { Chess } from "../vendor/chess.js?v=20260522-mobilehud2";
+} from "../core/checkersRules.js?v=20260522-boardfit1";
+import { Chess } from "../vendor/chess.js?v=20260522-boardfit1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -227,9 +227,11 @@ export function bindDomGameInterface(game) {
     tournamentTitle: document.querySelector("[data-tournament-title]"),
     tournamentWindow: document.querySelector("[data-tournament-window]"),
     tournamentStatus: document.querySelector("[data-tournament-status]"),
+    tournamentKeyField: document.querySelector("[data-tournament-key-field]"),
     tournamentKey: document.querySelector("[data-tournament-key]"),
     tournamentName: document.querySelector("[data-tournament-name]"),
     tournamentWhatsapp: document.querySelector("[data-tournament-whatsapp]"),
+    tournamentDepositor: document.querySelector("[data-tournament-depositor]"),
     tournamentPix: document.querySelector("[data-tournament-pix]"),
     tournamentJoin: document.querySelector("[data-tournament-join]"),
     tournamentStartTest: document.querySelector("[data-tournament-start-test]"),
@@ -955,6 +957,7 @@ export function bindDomGameInterface(game) {
   const finishCheckersCinematic = () => {
     if (!local.checkersIntroLocked) return;
     if (local.checkersIntroPhase === "video") {
+      window.clearTimeout(local.checkersIntroTimer);
       local.checkersIntroPhase = "credits";
       local.checkersIntroCredits = true;
       renderPvpCheckers();
@@ -988,6 +991,7 @@ export function bindDomGameInterface(game) {
   const finishChessCinematic = () => {
     if (!local.chessIntroLocked) return;
     if (local.chessIntroPhase === "video") {
+      window.clearTimeout(local.chessIntroTimer);
       local.chessIntroPhase = "credits";
       local.chessIntroCredits = true;
       renderPvpTable();
@@ -1005,7 +1009,7 @@ export function bindDomGameInterface(game) {
       window.clearTimeout(local.chessIntroCreditsTimer);
       local.chessIntroCreditsTimer = window.setTimeout(() => {
         finishChessCinematic();
-      }, 3600);
+      }, 2400);
       return;
     }
     local.chessIntroPhase = "";
@@ -1029,8 +1033,7 @@ export function bindDomGameInterface(game) {
     window.clearTimeout(local.chessIntroTimer);
     window.clearTimeout(local.chessIntroCreditsTimer);
     const urlParams = new URLSearchParams(window.location.search || "");
-    const compactIntro = window.matchMedia?.("(max-width: 860px), (max-height: 430px)")?.matches;
-    const introDuration = urlParams.get("intro") === "1" ? 11500 : compactIntro ? 4400 : 7600;
+    const introDuration = urlParams.get("intro") === "1" ? 8500 : 5600;
     local.chessIntroTimer = window.setTimeout(() => {
       finishChessCinematic();
     }, introDuration);
@@ -1045,7 +1048,7 @@ export function bindDomGameInterface(game) {
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260522-mobilehud2";
+      const buildVersion = window.pubpaidBuildVersion || "20260522-boardfit1";
       const phase = local.checkersIntroPhase || "coin";
       refs.checkersCoinFlip.innerHTML = `
         ${phase === "video" ? `<video data-checkers-intro-video src="./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1069,7 +1072,9 @@ export function bindDomGameInterface(game) {
       video.muted = directReview ? true : false;
       video.volume = 0.9;
       video.currentTime = 0;
-      video.onended = () => finishCheckersCinematic();
+      video.onended = () => {
+        if (local.checkersIntroPhase === "video") finishCheckersCinematic();
+      };
       const promise = video.play?.();
       promise?.catch?.(() => {
         video.muted = true;
@@ -1093,7 +1098,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260522-mobilehud2";
+    const buildVersion = window.pubpaidBuildVersion || "20260522-boardfit1";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1117,11 +1122,8 @@ export function bindDomGameInterface(game) {
       video.muted = directReview ? true : false;
       video.volume = 0.9;
       video.currentTime = 0;
-      video.onended = () => finishChessCinematic();
-      video.onloadedmetadata = () => {
-        if (video.paused && Number(video.duration || 0) > 1) {
-          video.currentTime = Math.min(0.75, Math.max(0.1, Number(video.duration || 1) - 0.2));
-        }
+      video.onended = () => {
+        if (local.chessIntroPhase === "video") finishChessCinematic();
       };
       const promise = video.play?.();
       promise?.catch?.(() => {
@@ -1795,11 +1797,16 @@ export function bindDomGameInterface(game) {
   const currentTournamentKey = () => String(refs.tournamentKey?.value || local.tournamentKey || "").trim().toUpperCase();
 
   const setTournamentSession = (payload = {}, key = currentTournamentKey()) => {
-    local.tournamentKey = key || payload?.participant?.key || local.tournamentKey || "";
+    local.tournamentKey = payload?.participant?.key || key || local.tournamentKey || "";
     local.tournamentSession = payload || null;
     local.tournamentMatch = payload?.currentMatch || null;
     local.tournamentPix = payload?.pix || local.tournamentPix || null;
-    if (refs.tournamentKey && local.tournamentKey) refs.tournamentKey.value = local.tournamentKey;
+    const hasReleasedKey = Boolean(payload?.participant?.key);
+    if (refs.tournamentKeyField) refs.tournamentKeyField.hidden = !hasReleasedKey && !payload?.testMode;
+    if (refs.tournamentKey) {
+      refs.tournamentKey.readOnly = !payload?.testMode;
+      refs.tournamentKey.value = hasReleasedKey ? payload.participant.key : "";
+    }
   };
 
   const tournamentPlayerName = (match = {}, participantId = "") => {
@@ -1839,13 +1846,19 @@ export function bindDomGameInterface(game) {
     }
     refs.tournamentPix.hidden = false;
     refs.tournamentPix.innerHTML = `
-      <div>${pix.qrSvg || ""}</div>
-      <div>
-        <strong>Pix da inscricao</strong>
-        <span>Valor: ${escapeHtml(String(pix.amount || payload.tournament?.entryAmount || ""))} creditos</span>
-        <span>Referencia: ${escapeHtml(pix.txid || participant?.paymentTxid || "")}</span>
-        ${pix.pixKey ? `<span>Chave: ${escapeHtml(pix.pixKey)}</span>` : ""}
-        <span>${escapeHtml(pix.copyCode || "Pix reservado. Envie o pagamento e aguarde o admin aprovar.")}</span>
+      <div class="ppg-tournament-payment-window" role="dialog" aria-label="Pagamento do torneio">
+        <div>${pix.qrSvg || ""}</div>
+        <div>
+          <strong>Pagamento da inscricao</strong>
+          <span>Nome: ${escapeHtml(participant?.name || "")}</span>
+          <span>WhatsApp: ${escapeHtml(participant?.whatsapp || "")}</span>
+          <span>Depositante: ${escapeHtml(participant?.depositorName || participant?.pixDepositorName || "")}</span>
+          <span>Valor: R$ ${escapeHtml(String(pix.amount || payload.tournament?.entryAmount || "50"))},00</span>
+          <span>Referencia: ${escapeHtml(pix.txid || participant?.paymentTxid || "")}</span>
+          ${pix.pixKey ? `<span>Chave Pix: ${escapeHtml(pix.pixKey)}</span>` : ""}
+          <span>${escapeHtml(pix.copyCode || "Pix reservado. Envie o pagamento e aguarde o admin aprovar.")}</span>
+          <button type="button" class="primary" data-tournament-paid>Ja paguei</button>
+        </div>
       </div>
     `;
   };
@@ -1907,19 +1920,25 @@ export function bindDomGameInterface(game) {
       return;
     }
     if (!participant) {
-      refs.tournamentCurrent.innerHTML = `<article class="ppg-tournament-current"><span>inscricao</span><strong>Reserve com Google e WhatsApp</strong><small>O admin libera sua vaga depois do Pix.</small></article>`;
-      if (refs.tournamentJoin) refs.tournamentJoin.textContent = "Reservar vaga";
+      refs.tournamentCurrent.innerHTML = `<article class="ppg-tournament-current"><span>inscricao</span><strong>Abra o pagamento de R$ 50</strong><small>A chave so aparece para a conta Google depois da aprovacao do admin.</small></article>`;
+      if (refs.tournamentJoin) {
+        refs.tournamentJoin.disabled = false;
+        refs.tournamentJoin.textContent = "Abrir pagamento";
+      }
       return;
     }
     if (participant.status === "payment-pending") {
       refs.tournamentCurrent.innerHTML = `
         <article class="ppg-tournament-current">
-          <span>pix pendente</span>
+          <span>aguardando admin</span>
           <strong>${escapeHtml(participant.name)}</strong>
-          <small>Vaga reservada para ${escapeHtml(participant.googleEmail || "sua conta Google")}. Aguarde o admin aprovar o pagamento.</small>
+          <small>Pagamento de R$ ${escapeHtml(String(participant.paymentAmount || 50))},00 vinculado a ${escapeHtml(participant.googleEmail || "sua conta Google")}. A chave sera liberada apos aprovacao.</small>
         </article>
       `;
-      if (refs.tournamentJoin) refs.tournamentJoin.textContent = "Atualizar inscricao";
+      if (refs.tournamentJoin) {
+        refs.tournamentJoin.disabled = true;
+        refs.tournamentJoin.textContent = "Aguardando aprovacao";
+      }
       return;
     }
     if (participant.status === "approved" && !participant.checkedIn) {
@@ -1927,10 +1946,13 @@ export function bindDomGameInterface(game) {
         <article class="ppg-tournament-current is-ready">
           <span>vaga aprovada</span>
           <strong>${escapeHtml(participant.name)}</strong>
-          <small>Entre no horario de confirmacao para ficar no chaveamento.</small>
+          <small>Chave liberada para esta conta Google: ${escapeHtml(participant.key || "aguarde atualizar")}.</small>
         </article>
       `;
-      if (refs.tournamentJoin) refs.tournamentJoin.textContent = "Confirmar presenca";
+      if (refs.tournamentJoin) {
+        refs.tournamentJoin.disabled = false;
+        refs.tournamentJoin.textContent = "Confirmar presenca";
+      }
       return;
     }
     if (!match) {
@@ -1941,7 +1963,10 @@ export function bindDomGameInterface(game) {
           <small>Aguarde o fechamento das chaves.</small>
         </article>
       `;
-      if (refs.tournamentJoin) refs.tournamentJoin.textContent = "Atualizar torneio";
+      if (refs.tournamentJoin) {
+        refs.tournamentJoin.disabled = false;
+        refs.tournamentJoin.textContent = "Atualizar torneio";
+      }
       return;
     }
     const seat = match.playerOneId === participant.id ? "playerOne" : "playerTwo";
@@ -1954,7 +1979,10 @@ export function bindDomGameInterface(game) {
         <button type="button" class="primary" data-tournament-play>Jogar confronto</button>
       </article>
     `;
-    if (refs.tournamentJoin) refs.tournamentJoin.textContent = "Atualizar torneio";
+    if (refs.tournamentJoin) {
+      refs.tournamentJoin.disabled = false;
+      refs.tournamentJoin.textContent = "Atualizar torneio";
+    }
   };
 
   const renderCheckersTournament = (payload = local.tournamentSession || {}) => {
@@ -1976,7 +2004,7 @@ export function bindDomGameInterface(game) {
               ? "Pix enviado para conferencia. A vaga so libera apos aprovacao do admin."
               : payload.participant?.status === "approved"
                 ? "Vaga aprovada. Confirme presenca no horario para entrar no chaveamento."
-                : "Entre com Google, WhatsApp e reserve sua vaga. O Pix libera a vaga depois da aprovacao do admin.");
+                : "Entre com Google, informe nome, WhatsApp e nome do depositante. Depois do Pix, toque em Ja paguei e aguarde o admin aprovar.");
     }
     if (refs.tournamentStartTest) refs.tournamentStartTest.hidden = !payload.testMode;
     renderTournamentKeys(payload);
@@ -3665,6 +3693,7 @@ export function bindDomGameInterface(game) {
       const state = decorateChessState(match.chessState || {});
       match.chessState = state;
       startChessCinematic(match);
+      const chessCinematicActive = local.chessIntroLocked && local.chessIntroPhase !== "coin";
       const turnSeat = chessSeatForColor(state, state.turnColor);
       const chessMoveFeedback = syncChessMoveFeedback(match);
       refs.tableScore.textContent = `${state.history?.length || match.moveCount || 0} lances`;
@@ -3675,7 +3704,7 @@ export function bindDomGameInterface(game) {
         : getChessTurnSummary(match, seat, demoMode);
       renderStableTableBody(
         `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}:${chessMoveFeedback}:${local.chessIntroLocked}:${local.chessIntroPhase}:${local.chessIntroCredits}:${local.chessBoardFixed}`,
-        `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}${local.chessIntroLocked ? " is-cinematic" : ""}">
+        `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}${chessCinematicActive ? " is-cinematic" : ""}">
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <button type="button" class="ppg-chess-exit" data-dom-open-lobby>Mesas</button>
           ${demoMode ? "" : `<button type="button" class="ppg-chess-resign" data-dom-generic-forfeit>Desistir</button>`}
@@ -3988,8 +4017,7 @@ export function bindDomGameInterface(game) {
       event.preventDefault();
       return;
     }
-    const primaryFrameDrag = event.pointerType === "mouse" && event.button === 0 && frame && !boardCell;
-    if (!edge && !(frame && isMiddleMouseCameraDrag(event)) && !primaryFrameDrag) return;
+    if (!edge && !(frame && isMiddleMouseCameraDrag(event))) return;
     event.preventDefault();
     local.checkersCamera.dragId = event.pointerId;
     local.checkersCamera.dragX = event.clientX;
@@ -4052,8 +4080,7 @@ export function bindDomGameInterface(game) {
       event.preventDefault();
       return;
     }
-    const primaryFrameDrag = event.pointerType === "mouse" && event.button === 0 && frame && !square;
-    if (!edge && !isMiddleMouseCameraDrag(event) && !primaryFrameDrag) return;
+    if (!edge && !isMiddleMouseCameraDrag(event)) return;
     event.preventDefault();
     local.chessCamera.dragId = event.pointerId;
     local.chessCamera.dragX = event.clientX;
@@ -4163,6 +4190,7 @@ export function bindDomGameInterface(game) {
       const key = currentTournamentKey();
       const name = String(refs.tournamentName?.value || "").trim();
       const whatsapp = String(refs.tournamentWhatsapp?.value || "").trim();
+      const depositorName = String(refs.tournamentDepositor?.value || "").trim();
       const testMode = isCheckersTournamentTestMode();
       const currentParticipant = local.tournamentSession?.participant || null;
       if (!testMode && !window.CatalogoGoogleAuth?.getUser?.()?.email) {
@@ -4176,11 +4204,19 @@ export function bindDomGameInterface(game) {
             key,
             name,
             whatsapp,
+            depositorName,
             email: testMode ? `teste-${Date.now()}@pubpaid.local` : "",
             testMode
           });
       setTournamentSession(payload, key);
       renderCheckersTournament(payload);
+      return;
+    }
+
+    if (event.target.closest("[data-tournament-paid]")) {
+      if (refs.tournamentStatus) {
+        refs.tournamentStatus.textContent = "Pagamento informado. Agora aguarde o admin aprovar para liberar sua chave nesta conta Google.";
+      }
       return;
     }
 

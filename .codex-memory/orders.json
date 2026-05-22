@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T15:28:50.840Z",
+  "lastUpdatedAt": "2026-05-22T18:28:41.311Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2119,8 +2119,8 @@
     {
       "id": "2026-05-22-reativar-catalogo-czs-com-popup-para-pubpaid-e-enquete-eleitoral-reabrir-rodada-",
       "createdAt": "2026-05-22T07:06:51.653Z",
-      "updatedAt": "2026-05-22T07:06:51.653Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "catalogreactivate1-implemented-validated",
       "source": "chat",
       "rawRequest": "Reativar o site Catalogo CZS, atualizar online, colocar popup convidando pessoas a conhecer o jogo e participar da pesquisa eleitoral, fazer a pesquisa voltar a funcionar, e viabilizar limpeza extrema em PubPaid, jogos, gift, Render e site principal para ficar rapido.",
       "summary": "Reativar Catalogo CZS com popup para PubPaid e enquete eleitoral, reabrir rodada da pesquisa e iniciar plano seguro de limpeza/performance.",
@@ -2129,13 +2129,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
     },
     {
       "id": "2026-05-22-corrigir-popup-pubpaid-pesquisa-apos-intro-da-home-preparar-hero-e-primeiras-sec",
       "createdAt": "2026-05-22T07:29:58.277Z",
-      "updatedAt": "2026-05-22T07:29:58.277Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "homecatch1-implemented-validated",
       "source": "chat",
       "rawRequest": "quero que mude duas coisas, primeiro o pop up do pub paid e da pesquisa apos a intro do site nao apareceu, segundo carregue bem a parte hero antes de inciar o site e pelos 3 seções depois dela ja com as noticias no lugar, porque ele fica demorando ali, e a pessoa desisti de ver e adicione ler materia no hero, pra pessoa ler a materia que ta vendo a foto, mais uma coisa, o mobile recarrega quando agente volta toda vez a intro denovo, eu quero um botão de voltar da pateria no proprio web app que faça ele so recarrega a pagina home denovo, e veja se o arquivo ta funcioando e todas as outras funções, - faça um prompt, execulte e comite",
       "summary": "Corrigir popup PubPaid/pesquisa após intro da home, preparar hero e primeiras seções com notícias antes de abrir, adicionar CTA Ler matéria no hero, e criar retorno de matéria para home sem intro no mobile.",
@@ -2144,13 +2144,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
     },
     {
       "id": "2026-05-22-rodar-captacao-de-noticias-do-dia-ate-hoje-ampliar-veiculos-fontes-do-vale-do-ju",
       "createdAt": "2026-05-22T07:30:30.654Z",
-      "updatedAt": "2026-05-22T07:30:30.654Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "homecatch1-news-capture-implemented",
       "source": "chat",
       "rawRequest": "faça uma rodada de capotção de todas as noticias do dia que parou ate hoje e procure mais veiculos de informação do vale do jurua... todo, temos poucos ainda... depois disso coloque o nosso instagram a qual vc ja sabe qual e , como destaque pra seguir em algum canto que seja viavel",
       "summary": "Rodar captação de notícias do dia até hoje, ampliar veículos/fontes do Vale do Juruá e adicionar destaque viável para seguir o Instagram do projeto.",
@@ -2159,13 +2159,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
     },
     {
       "id": "2026-05-22-deixar-entrada-e-retorno-da-materia-mais-explicitos-com-loader-e-animacao-de-vir",
       "createdAt": "2026-05-22T07:48:44.677Z",
-      "updatedAt": "2026-05-22T07:48:44.677Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "articleturn1-implemented-validated",
       "source": "chat",
       "rawRequest": "tambem quero na quando a pessoa entra na materia seja mais explicito que ela ta carregando depois que carrega vc faz uma animação de passagem de folha tipo livro, e tambem pra voltar, a mesma coisa",
       "summary": "Deixar entrada e retorno da materia mais explicitos com loader e animacao de virada de folha tipo livro/jornal.",
@@ -2174,13 +2174,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
     },
     {
       "id": "2026-05-22-remover-overlay-de-camera-de-damas-e-xadrez-pubpaid-manter-so-trava-de-mesa-e-us",
       "createdAt": "2026-05-22T08:13:09.349Z",
-      "updatedAt": "2026-05-22T08:13:09.349Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "boardtouch1-implemented-validated",
       "source": "chat",
       "rawRequest": "os jogos manos, vc deixou essa camera no meio do jogo no xadrez e nas damas, nem prescisa mais dela ali, e pra usar so o touch, e no caso do desktop, e so pra dizer como faz, ou seja, isso nem deveria ta ali, so obotão de trava mesa, essa sobreposição, vc tem que aprender a nao fazer essas coisas corrija e suba direto pro online denovo",
       "summary": "Remover overlay de camera de Damas e Xadrez PubPaid, manter so trava de mesa e usar gestos/touch.",
@@ -2201,13 +2201,13 @@
         "mobile"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
     },
     {
       "id": "2026-05-22-corrigir-xadrez-mobile-pubpaid-intro-deve-mostrar-instrucao-creditos-e-moeda-pec",
       "createdAt": "2026-05-22T08:46:03.571Z",
-      "updatedAt": "2026-05-22T08:46:03.571Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "chessmobile3-implemented-validated",
       "source": "chat",
       "rawRequest": "o xadrez nao funciono no mobile, ele deveria esta igual damas, tudo funcionando mais nem a moeda foi jogada, nem apareceu instruções de camera ou posição fixa, e no mobile as peças tão fora do escorpo do jogo, ou seja do tabuleiro, faça uma verificação total depois comit, e online]",
       "summary": "Corrigir Xadrez mobile PubPaid: intro deve mostrar instrução, créditos e moeda; peças precisam ficar dentro do tabuleiro; controles de câmera devem ficar apenas com Mesa fixa; validar e subir online.",
@@ -2228,13 +2228,13 @@
         "deploy"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
     },
     {
       "id": "2026-05-22-corrigir-sobreposicao-de-hud-nos-jogos-pubpaid-mobile-remover-redundancia-sair-m",
       "createdAt": "2026-05-22T15:28:50.840Z",
-      "updatedAt": "2026-05-22T15:28:50.840Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "mobilehud2-implemented-validated",
       "source": "chat",
       "rawRequest": "porra nessa autura do campeonato tem sobreposições de informações no xadrez mobile, sair e e mesas fazem a mesma coisa e redudante e ainda estão em cima da porra das instruções de uso da camera, cheque todos os jogos pra achar sobreposições nos mobiles",
       "summary": "Corrigir sobreposição de HUD nos jogos PubPaid mobile: remover redundância Sair/Mesas no Xadrez treino, reposicionar instrução de câmera e varrer Xadrez, Damas e Sinuca em mobile landscape.",
@@ -2257,7 +2257,172 @@
         "qa"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-corrigir-controle-mobile-da-sinuca-vale-pool-para-permitir-arrastar-a-direcao-da",
+      "createdAt": "2026-05-22T16:02:30.513Z",
+      "updatedAt": "2026-05-22T16:11:44.906Z",
+      "status": "pooltouchaim1-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "corrija controle sicuna mobile, ainda esta impossivel controla a direção ta tacada sem começar a contar a força muito travado o movimento, de uma forma de poder mover melhor a direção da tacada por favor,",
+      "summary": "Corrigir controle mobile da Sinuca/Vale Pool para permitir arrastar a direção da tacada sem iniciar a contagem de força.",
+      "normalizedTasks": [
+        "separar arrasto de mira e toque de força no mobile",
+        "impedir click sintetico apos arrasto/segurar iniciar a força",
+        "manter toque curto para iniciar força e tacada",
+        "validar sintaxe, guard PubPaid e controle touch em Playwright"
+      ],
+      "filesTouched": [
+        "games/vale-pool/game.js",
+        "games/vale-pool/styles.css",
+        "games/vale-pool/index.html",
+        "games/vale-pool/progress.md",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/vale-pool-pooltouchaim1/demo-touch-controlled.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sinuca",
+        "vale-pool",
+        "mobile",
+        "touch",
+        "mira",
+        "forca"
+      ],
+      "nextSteps": [
+        "testar em celular real a sensacao fina do arrasto de mira durante partida longa"
+      ],
+      "notes": "Build local 20260522-pooltouchaim1. Validado node --check, npm run guard:pubpaid, web_game_playwright_client e Playwright touch controlado: arrasto ficou em mira; toque curto foi para forca; sem console errors."
+    },
+    {
+      "id": "2026-05-22-corrigir-72-vazamentos-de-texto-publico-em-ingles-da-captura-de-noticias-de-20-d",
+      "createdAt": "2026-05-22T16:05:08.208Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "language-review-clean-implemented",
+      "source": "chat",
+      "rawRequest": "Corrija os 72 vazamentos de texto publico em ingles gerados na captura de noticias de 20 de maio em news-data.js, data/runtime-news.json e data/news-archive.json, preserve as fontes e rode npm run review:team ate a trava de idioma ficar limpa.",
+      "summary": "Corrigir 72 vazamentos de texto publico em ingles da captura de noticias de 20 de maio preservando fontes e validar language-review limpo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-refazer-pacote-editorial-de-materia-cnn-sobre-trump-china-e-ira-usando-artefatos",
+      "createdAt": "2026-05-22T16:05:50.537Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "editorial-package-implemented",
+      "source": "chat",
+      "rawRequest": "Use os artefatos mais fortes de .codex-temp/real-agents/artifacts/ para refazer o pacote editorial da matéria 'Análise: Trump volta da China sem avanço sobre Irã e com decisão a tomar', substitua o lede/summary genéricos em news-data.js e nos JSONs derivados, e deixe uma versão pronta para revisão final.",
+      "summary": "Refazer pacote editorial de materia CNN sobre Trump, China e Ira usando artefatos real-agents e atualizar news-data.js/JSONs derivados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-corrigir-fluxo-de-cadastro-pagamento-do-torneio-de-damas-janela-de-pagamento-sep",
+      "createdAt": "2026-05-22T16:08:15.090Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "tournamentpay1-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "erro no cadastro do torneio, o pagamento deveria abrir como outra janela com nome, WhatsApp, nome do depositante e valor de 50 reais; depois Ja paguei, aguarda admin aprovar e so entao libera a chave para a conta Google que pagou",
+      "summary": "Corrigir fluxo de cadastro/pagamento do Torneio de Damas: janela de pagamento separada, depositante, R$ 50 e chave apenas apos aprovacao admin.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-corrigir-fluxo-de-intro-do-xadrez-pubpaid-para-a-moeda-tocar-somente-depois-da-i",
+      "createdAt": "2026-05-22T16:13:39.504Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "chessintrofix-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "corrija xadrezm antes da intro termina ele ja toca a moeda pra rodar, causando travamento e instabilidades, verifique mobile e verifique desktop use o mesmo fluxpo de damas que ja ta perfeito",
+      "summary": "Corrigir fluxo de intro do Xadrez PubPaid para a moeda tocar somente depois da intro/creditos, validando mobile e desktop.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-estabilizar-pecas-3d-do-xadrez-e-separar-cursor-drag-de-camera-do-cursor-de-jogo",
+      "createdAt": "2026-05-22T16:45:31.908Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "boardfit1-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "Corrigir Xadrez: pecas alternando entre chapadas e 3D; separar a maozinha/controle de camera do controle do jogo; verificar a mesma questao nas Damas.",
+      "summary": "Estabilizar pecas 3D do Xadrez e separar cursor/drag de camera do cursor de jogo no Xadrez e Damas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-adicionar-controles-e-arrasto-ao-carrossel-de-manchetes-da-home-zerar-review-tea",
+      "createdAt": "2026-05-22T18:15:21.307Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "homegate3-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "Carrossel: 15 fotos visiveis; adicionar forma de mexer/puxar para ver as fotos espremidas; rodar agentes; corrigir erros apontados; sincronizar online e terminar para testar.",
+      "summary": "Adicionar controles e arrasto ao carrossel de manchetes da home, zerar review team e publicar cache-bust homegate3.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Fechado na rodada final: validacoes sintaxe/guard/review e smoke local passaram; sem pendencia aberta nesta ordem."
+    },
+    {
+      "id": "2026-05-22-rodada-final-de-fechamento-varrer-pendencias-validar-projeto-codex-e-pubpaid-sep",
+      "createdAt": "2026-05-22T18:23:27.862Z",
+      "updatedAt": "2026-05-22T18:28:41.311Z",
+      "status": "final-sweep-in-progress-validated-local",
+      "source": "chat",
+      "rawRequest": "vamos termina agora? varra tudo que foi atualizado e falta implementar, implemente depois limpe o workspace os temporarios e lixo, deixe online sincronizado, compacte contextos, trate PubPaid separado do Projeto Codex, delete duplicatas/backups nao usados, mande aprendizados aos agentes/equipes e entregue relatorio geral com pontuacao dos dois sistemas.",
+      "summary": "Rodada final de fechamento: varrer pendencias, validar Projeto Codex e PubPaid separadamente, limpar temporarios seguros, atualizar handoffs/agentes e relatar erros/acertos.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".gitignore",
+        "CODEX_MEMORY.md",
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "final-sweep",
+        "pubpaid",
+        "projeto-codex",
+        "cleanup",
+        "handoff"
+      ],
+      "nextSteps": [
+        "commit e push",
+        "validar online apos deploy Render"
+      ],
+      "notes": "Backup criado em .codex-backups/final-sweep-20260522-132315; limpeza segura removeu output, debug.log, __pycache__, coverage de node_modules e runtime local data/pubpaid-tournaments.json."
     }
   ]
 }
