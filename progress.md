@@ -27,6 +27,13 @@ English execution prompt used: "Fix three focused PubPaid gameplay issues withou
 - Build/cache-bust local: `20260522-pubpaidfix5`.
 - Usuario pediu para nao rodar testes automatizados; rodada preparada para subir e o usuario testar online.
 
+## Atualizacao 2026-05-22 - pubpaidfix6
+
+- Corrigido erro do botao mobile da Sinuca: o botao grande `FORCA/TACAR` ficava em cima da cacapa inferior direita.
+- Botao virou circulo pequeno no canto inferior direito do canvas, fora da mesa, mantendo a mira livre e sem bloquear bolas/cacapas.
+- Damas mobile landscape: removido texto/janela de status abaixo de `Treino livre`, deixando o topo compacto.
+- Build/cache-bust local: `20260522-pubpaidfix7`.
+
 ## Atualizacao 2026-05-22 - final-sweep1
 
 English execution prompt used: "Finish the current Projeto Codex workspace by separating the public CZS site and PubPaid as two products in the same repository; scan recent changes and open orders, implement only missing fixes, validate locally and in-browser, clean safe temporary artifacts, preserve rollback and approved PubPaid evidence, update agent/team handoffs, then commit and push for online synchronization."
@@ -203,3 +210,9 @@ English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX wit
 - Camera recebeu arrasto pela borda da mesa, zoom por roda no desktop, controles de toque no mobile e copy diferente para mobile/desktop.
 - Xadrez recebeu botao `Sair/Desistir` dentro da arena fullscreen e HUD lateral compacto, sem sobrepor o tabuleiro.
 - Validacao visual: Playwright desktop/mobile confirmou 64 casas, 24 pecas em Damas, 32 pecas em Xadrez, loader escondido apos carregar, `turnYaw=0deg` com mesa fixa, botao de desistir visivel e sem erros de console.
+
+## Atualizacao 2026-05-22 - pubpaidfix8
+
+- Xadrez agora usa a mesma etapa de moeda para treino e mesa real: intro curta, credito rapido, moeda central clicavel e so depois libera o tabuleiro.
+- O clique em `Jogar moeda` deixou de ser exclusivo do Demo, evitando a tela travada sem entrar no jogo.
+- A camada cinematica do Xadrez aceita toque/clique na moeda central, com cache-bust local em `20260522-pubpaidfix8`.

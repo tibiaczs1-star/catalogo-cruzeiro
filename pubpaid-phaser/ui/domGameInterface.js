@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-pubpaidfix5";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-pubpaidfix8";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260522-pubpaidfix5";
+} from "../services/pvpService.js?v=20260522-pubpaidfix8";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -20,7 +20,7 @@ import {
   moveCheckersTournament,
   registerCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260522-pubpaidfix5";
+} from "../services/tournamentService.js?v=20260522-pubpaidfix8";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -30,8 +30,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260522-pubpaidfix5";
-import { Chess } from "../vendor/chess.js?v=20260522-pubpaidfix5";
+} from "../core/checkersRules.js?v=20260522-pubpaidfix8";
+import { Chess } from "../vendor/chess.js?v=20260522-pubpaidfix8";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -1001,25 +1001,14 @@ export function bindDomGameInterface(game) {
       window.clearTimeout(local.chessIntroCreditsTimer);
       local.chessIntroCreditsTimer = window.setTimeout(() => {
         finishChessCinematic();
-      }, 3200);
+      }, 1100);
       return;
     }
     if (local.chessIntroPhase === "credits") {
-      if (isTableDemoActive() && local.demoTable?.gameId === "chess") {
-        local.chessIntroPhase = "coin-ready";
-        local.demoChessAwaitingCoin = true;
-        local.chessIntroCredits = false;
-        renderPvpTable();
-        return;
-      }
-      local.chessIntroPhase = "coin";
+      local.chessIntroPhase = "coin-ready";
+      local.demoChessAwaitingCoin = isTableDemoActive() && local.demoTable?.gameId === "chess";
       local.chessIntroCredits = false;
-      playCheckersMoveSound("coin");
       renderPvpTable();
-      window.clearTimeout(local.chessIntroCreditsTimer);
-      local.chessIntroCreditsTimer = window.setTimeout(() => {
-        finishChessCinematic();
-      }, 2400);
       return;
     }
     local.chessIntroPhase = "";
@@ -1043,7 +1032,7 @@ export function bindDomGameInterface(game) {
     window.clearTimeout(local.chessIntroTimer);
     window.clearTimeout(local.chessIntroCreditsTimer);
     const urlParams = new URLSearchParams(window.location.search || "");
-    const introDuration = urlParams.get("intro") === "1" ? 8500 : 4300;
+    const introDuration = urlParams.get("intro") === "1" ? 8500 : 1700;
     local.chessIntroTimer = window.setTimeout(() => {
       finishChessCinematic();
     }, introDuration);
@@ -1058,7 +1047,7 @@ export function bindDomGameInterface(game) {
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260522-pubpaidfix5";
+      const buildVersion = window.pubpaidBuildVersion || "20260522-pubpaidfix8";
       const phase = local.checkersIntroPhase || "coin";
       refs.checkersCoinFlip.innerHTML = `
         ${phase === "video" ? `<video data-checkers-intro-video src="./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1108,7 +1097,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260522-pubpaidfix5";
+    const buildVersion = window.pubpaidBuildVersion || "20260522-pubpaidfix8";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1116,7 +1105,7 @@ export function bindDomGameInterface(game) {
         ${phase === "credits"
           ? `<b>Inside Trade Mark</b><strong>Antonio Clovis</strong><small>Programador e criador</small>`
           : phase === "coin" || phase === "coin-ready"
-            ? `<b>Moeda</b><span aria-hidden="true"></span><strong>${phase === "coin-ready" ? "Jogar moeda" : face === "coroa" ? "Coroa" : "Cara"}</strong><small>${phase === "coin-ready" ? "Clique para sortear quem começa." : `${firstName} começa de ${colorName}`}</small>${phase === "coin-ready" ? `<button type="button" class="ppg-button primary" data-chess-toss-coin>Jogar moeda</button>` : ""}`
+            ? `<button type="button" class="ppg-chess-coin-button" ${phase === "coin-ready" ? "data-chess-toss-coin" : "disabled"}><span aria-hidden="true"></span><strong>${phase === "coin-ready" ? "Jogar moeda" : face === "coroa" ? "Coroa" : "Cara"}</strong><small>${phase === "coin-ready" ? "Toque na moeda para começar." : `${firstName} começa de ${colorName}`}</small></button>`
             : `<b>Xadrez</b><strong>PubPaid</strong><small>Prepare-se</small>`}
       </div>
     `;
@@ -3706,17 +3695,17 @@ export function bindDomGameInterface(game) {
       const state = decorateChessState(match.chessState || {});
       match.chessState = state;
       startChessCinematic(match);
-      const awaitingDemoCoin = demoMode && local.demoChessAwaitingCoin;
+      const awaitingChessCoin = local.chessIntroLocked && local.chessIntroPhase === "coin-ready";
       const chessCinematicActive = local.chessIntroLocked;
       const turnSeat = chessSeatForColor(state, state.turnColor);
       const chessMoveFeedback = syncChessMoveFeedback(match);
-      const chessTurnText = awaitingDemoCoin
+      const chessTurnText = awaitingChessCoin
         ? "Clique para jogar a moeda."
         : chessMoveFeedback
         ? "Movimento feito..."
         : getChessTurnSummary(match, seat, demoMode);
       refs.tableScore.textContent = `${state.history?.length || match.moveCount || 0} lances`;
-      refs.tableStatus.textContent = awaitingDemoCoin
+      refs.tableStatus.textContent = awaitingChessCoin
         ? "Intro pronta. Clique em Jogar moeda para começar."
         : demoMode && local.demoChessAiThinking
         ? "Máquina pensando por 3 segundos."
@@ -3724,7 +3713,7 @@ export function bindDomGameInterface(game) {
           ? "Movimento feito. Virando a mesa..."
           : getChessTurnSummary(match, seat, demoMode);
       renderStableTableBody(
-        `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}:${chessMoveFeedback}:${local.chessIntroLocked}:${local.chessIntroPhase}:${local.chessIntroCredits}:${local.chessBoardFixed}:${awaitingDemoCoin}`,
+        `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}:${chessMoveFeedback}:${local.chessIntroLocked}:${local.chessIntroPhase}:${local.chessIntroCredits}:${local.chessBoardFixed}:${awaitingChessCoin}`,
         `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}${chessCinematicActive ? " is-cinematic" : ""}">
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <button type="button" class="ppg-chess-exit" data-dom-open-lobby>Mesas</button>
@@ -4525,7 +4514,7 @@ export function bindDomGameInterface(game) {
       return;
     }
     if (event.target.closest("[data-chess-toss-coin]")) {
-      if (isTableDemoActive() && local.demoTable?.gameId === "chess") {
+      if (local.chessIntroLocked && local.chessIntroPhase === "coin-ready") {
         local.demoChessAwaitingCoin = false;
         local.chessIntroPhase = "coin";
         local.chessIntroCredits = false;
@@ -4535,7 +4524,7 @@ export function bindDomGameInterface(game) {
         window.clearTimeout(local.chessIntroCreditsTimer);
         local.chessIntroCreditsTimer = window.setTimeout(() => {
           finishChessCinematic();
-        }, 1900);
+        }, 850);
       }
       return;
     }

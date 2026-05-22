@@ -41,7 +41,7 @@
     { index: 4, key: "5", label: "→", title: "DIR", x: 447, y: 56, w: 18, h: 18 },
   ];
   const spinBallHud = { x: 384, y: 60, r: 22 };
-  const mobileShotButton = { x: 792, y: 414, w: 132, h: 48 };
+  const mobileShotButton = { x: 902, y: 508, r: 27 };
 
   const ballPalette = {
     1: "#f0b12d",
@@ -1264,19 +1264,24 @@
   function drawMobileShotButton() {
     if (!mobileShotButtonVisible()) return;
     const label = state.shotStage === "power" ? "TACAR" : "FORCA";
-    const hint = state.shotStage === "power" ? "mira travada" : "mire na mesa";
-    const { x, y, w, h } = mobileShotButton;
+    const { x, y, r } = mobileShotButton;
     ctx.save();
-    ctx.fillStyle = state.shotStage === "power" ? "rgba(142, 240, 163, .92)" : "rgba(255, 208, 109, .94)";
-    ctx.fillRect(x, y, w, h);
+    ctx.globalAlpha = 0.96;
+    ctx.fillStyle = state.shotStage === "power" ? "#8ef0a3" : "#ffd06d";
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
     ctx.strokeStyle = "#07101c";
-    ctx.lineWidth = 4;
-    ctx.strokeRect(x + 2, y + 2, w - 4, h - 4);
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(x, y, r - 2, 0, Math.PI * 2);
+    ctx.stroke();
     ctx.strokeStyle = "#fff6dc";
     ctx.lineWidth = 1;
-    ctx.strokeRect(x + 8, y + 8, w - 16, h - 16);
-    text(label, x + 28, y + 27, 18, "#07101c");
-    text(hint, x + 22, y + 40, 9, "#07101c");
+    ctx.beginPath();
+    ctx.arc(x, y, r - 7, 0, Math.PI * 2);
+    ctx.stroke();
+    text(label, x - (label.length > 5 ? 22 : 18), y + 5, 11, "#07101c");
     ctx.restore();
   }
 
@@ -2034,7 +2039,7 @@
       return;
     }
     if (mobileShotButtonVisible()) {
-      if (hit(x, y, mobileShotButton)) {
+      if (Math.hypot(x - mobileShotButton.x, y - mobileShotButton.y) <= mobileShotButton.r + 8) {
         handlePlayerShotPress();
       } else {
         state.message = state.shotStage === "power" ? "MIRA TRAVADA | USE BOTAO TACAR" : "MIRA AJUSTADA | USE BOTAO FORCA";

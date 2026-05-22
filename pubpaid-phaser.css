@@ -10185,6 +10185,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   overflow: hidden;
   background: #02050d;
   box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.8);
+  pointer-events: auto;
   transform: translate(-50%, -50%);
 }
 
@@ -10259,6 +10260,31 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
 
 .ppg-chess-intro-copy.is-coin button {
   pointer-events: auto;
+}
+
+.ppg-chess-coin-button {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: min(260px, 72vw);
+  min-height: 220px;
+  margin: 0 auto;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.ppg-chess-coin-button:disabled {
+  cursor: default;
+  pointer-events: none;
 }
 
 .ppg-chess-intro-copy.is-coin span {
@@ -11243,6 +11269,22 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
 }
 
 @media (max-height: 430px) and (orientation: landscape) {
+  .ppg-checkers-hero {
+    align-self: start;
+    min-height: 0;
+    padding: 8px 10px;
+  }
+
+  .ppg-checkers-hero p,
+  .ppg-checkers-hero .ppg-kicker {
+    display: none !important;
+  }
+
+  .ppg-checkers-hero h2 {
+    font-size: clamp(22px, 7dvh, 32px);
+    line-height: 1;
+  }
+
   .ppg-chess-turn-chip {
     display: grid !important;
     top: calc(max(8px, var(--ppg-safe-top)) + 44px) !important;
