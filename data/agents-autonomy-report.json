@@ -1,8 +1,8 @@
 {
   "ok": true,
   "trigger": "once",
-  "startedAt": "2026-05-22T19:42:28.201Z",
-  "finishedAt": "2026-05-22T19:42:32.023Z",
+  "startedAt": "2026-05-22T19:50:48.693Z",
+  "finishedAt": "2026-05-22T19:50:51.295Z",
   "actions": [
     {
       "id": "news-editorial-body",
@@ -18,7 +18,7 @@
       "status": "done",
       "totalAgents": 181,
       "totalOffices": 5,
-      "newsItems": 1000
+      "newsItems": 480
     },
     {
       "id": "review-team",

@@ -2,13 +2,13 @@
   "version": 1,
   "kind": "editorial-health-report",
   "status": "ok",
-  "generatedAt": "2026-05-22T19:41:13.284Z",
+  "generatedAt": "2026-05-22T19:52:00.330Z",
   "files": {
     "json": "data/editorial-health-report.json",
     "markdown": "data/editorial-health-report.md"
   },
   "scope": {
-    "totalItems": 993,
+    "totalItems": 505,
     "reviewedItems": 360,
     "sources": {
       "runtimeNews": "data/runtime-news.json",
@@ -17,16 +17,16 @@
     }
   },
   "summary": {
-    "humanApprovalRequired": 95,
-    "sourceIssues": 95,
+    "humanApprovalRequired": 96,
+    "sourceIssues": 96,
     "visualIssues": 281,
     "titleAlternativeCount": 240,
     "specialCandidates": 60,
-    "actionQueueTotal": 458
+    "actionQueueTotal": 460
   },
   "gates": {
-    "P0": 95,
-    "P1": 174,
+    "P0": 96,
+    "P1": 173,
     "P2": 91
   },
   "byCategory": {
@@ -37,9 +37,9 @@
     "Cultura": 31,
     "Nacional": 22,
     "Esporte": 21,
-    "Policia": 48,
+    "Policia": 49,
     "Acre / Governo": 22,
-    "Prefeitura": 64,
+    "Prefeitura": 63,
     "Política Regional": 11,
     "Educacao": 3,
     "Cotidiano": 24
@@ -56,11 +56,15 @@
       },
       {
         "name": "juruaonline.com.br",
-        "total": 45
+        "total": 44
       },
       {
         "name": "ac24horas.com",
         "total": 35
+      },
+      {
+        "name": "folhadoacre.com.br",
+        "total": 24
       },
       {
         "name": "juruaemtempo.com.br",
@@ -69,10 +73,6 @@
       {
         "name": "acreinfoco.com",
         "total": 24
-      },
-      {
-        "name": "folhadoacre.com.br",
-        "total": 23
       },
       {
         "name": "agenciabrasil.ebc.com.br",
@@ -88,7 +88,7 @@
       },
       {
         "name": "batelao.com",
-        "total": 16
+        "total": 17
       },
       {
         "name": "vozdonorte.com.br",
@@ -780,7 +780,7 @@
         "editorialHealthSource": "runtime-news"
       },
       {
-        "index": 95,
+        "index": 96,
         "slug": "acre-e-o-2-estado-que-mais-esconde-mortes-no-pais-aponta-ibge",
         "title": "Acre é o 2º estado que mais “esconde” mortes no país, aponta IBGE",
         "category": "Acre / Governo",
@@ -806,7 +806,7 @@
         "editorialHealthSource": "runtime-news"
       },
       {
-        "index": 98,
+        "index": 99,
         "slug": "professor-de-escolinha-de-futebol-e-preso-por-exploracao-sexual-virtual-de-adolescentes",
         "title": "Professor de escolinha de futebol é preso por exploração sexual virtual de adolescentes",
         "category": "Policia",
@@ -832,7 +832,7 @@
         "editorialHealthSource": "runtime-news"
       },
       {
-        "index": 99,
+        "index": 100,
         "slug": "bombeiros-encerram-buscas-por-homem-desaparecido-no-rio-iaco-em-sena-madureira",
         "title": "Bombeiros encerram buscas por homem desaparecido no rio Iaco em Sena Madureira",
         "category": "Policia",
@@ -858,7 +858,7 @@
         "editorialHealthSource": "runtime-news"
       },
       {
-        "index": 103,
+        "index": 104,
         "slug": "operacao-mute-policia-penal-apreende-7-celulares-em-presidios-do-acre",
         "title": "Operação Mute: Polícia Penal apreende 7 celulares em presídios do Acre",
         "category": "Policia",
@@ -884,7 +884,7 @@
         "editorialHealthSource": "runtime-news"
       },
       {
-        "index": 105,
+        "index": 106,
         "slug": "policia-militar-cumpre-dois-mandados-de-prisao-em-cruzeiro-do-sul-e-mancio-lima",
         "title": "Polícia Militar cumpre dois mandados de prisão em Cruzeiro do Sul e Mâncio Lima",
         "category": "Prefeitura",
@@ -910,7 +910,7 @@
         "editorialHealthSource": "runtime-news"
       },
       {
-        "index": 108,
+        "index": 109,
         "slug": "caso-master-defesa-pede-que-daniel-vorcaro-seja-transferido-da-policia-federal-para-a-papudinha",
         "title": "Caso Master: defesa pede que Daniel Vorcaro seja transferido da Polícia Federal para a Papudinha",
         "category": "Politica",
@@ -9527,6 +9527,37 @@
     },
     {
       "index": 94,
+      "slug": "caravana-de-alan-rick-desembarca-em-feijo-com-aeroporto-lotado-e-carreata-movimenta-ruas-da-cida",
+      "title": "Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade",
+      "category": "Politica",
+      "publishedAt": "2026-05-22T00:11:16.000Z",
+      "gate": "P1",
+      "approval": "editor-review",
+      "gateReason": "Cobertura civica, politica, governo, economia publica ou impacto local.",
+      "sourceDomain": "folhadoacre.com.br",
+      "sourceCount": 1,
+      "sourceIssues": [],
+      "imageLabel": "imagem-de-fonte",
+      "visualIssues": [
+        "p0-p1-sem-credito-visual"
+      ],
+      "titleAlternatives": [
+        "Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade: veja os po",
+        "Entenda caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade",
+        "Folha do Acre informa: Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta rua"
+      ],
+      "specialFormat": {
+        "slug": "caravana-de-alan-rick-desembarca-em-feijo-com-aeroporto-lotado-e-carreata-movimenta-ruas-da-cida",
+        "title": "Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade",
+        "gate": "P1",
+        "format": "agenda visual",
+        "why": "Tema permite formato explicativo sem aumentar risco editorial.",
+        "guardrail": "Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado."
+      },
+      "editorialHealthSource": "runtime-news"
+    },
+    {
+      "index": 95,
       "slug": "governadora-mailza-assis-destaca-obras-investimentos-e-compromisso-social-durante-participacao-n",
       "title": "Governadora Mailza Assis destaca obras, investimentos e compromisso social durante participação no Papo Informal",
       "category": "Política Regional",
@@ -9557,7 +9588,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 95,
+      "index": 96,
       "slug": "acre-e-o-2-estado-que-mais-esconde-mortes-no-pais-aponta-ibge",
       "title": "Acre é o 2º estado que mais “esconde” mortes no país, aponta IBGE",
       "category": "Acre / Governo",
@@ -9583,7 +9614,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 96,
+      "index": 97,
       "slug": "socorro-neri-defende-o-fim-da-escala-6-1-e-critica-propostas-que-alteram-pec",
       "title": "Socorro Neri defende o fim da escala 6×1 e critica propostas que alteram PEC",
       "category": "Politica",
@@ -9612,7 +9643,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 97,
+      "index": 98,
       "slug": "denuncia-detenta-dorme-no-chao-de-pedra-ha-seis-dias-na-delegacia-de-cruzeiro-do-sul",
       "title": "Denúncia: detenta dorme no chão de pedra há seis dias na delegacia de Cruzeiro do Sul",
       "category": "Prefeitura",
@@ -9643,7 +9674,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 98,
+      "index": 99,
       "slug": "professor-de-escolinha-de-futebol-e-preso-por-exploracao-sexual-virtual-de-adolescentes",
       "title": "Professor de escolinha de futebol é preso por exploração sexual virtual de adolescentes",
       "category": "Policia",
@@ -9669,7 +9700,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 99,
+      "index": 100,
       "slug": "bombeiros-encerram-buscas-por-homem-desaparecido-no-rio-iaco-em-sena-madureira",
       "title": "Bombeiros encerram buscas por homem desaparecido no rio Iaco em Sena Madureira",
       "category": "Policia",
@@ -9695,7 +9726,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 100,
+      "index": 101,
       "slug": "apos-polemica-deputada-meire-serafim-diz-que-assinatura-contra-pec-da-escala-6-1-ocorreu-por-equ",
       "title": "Após polêmica, deputada Meire Serafim diz que assinatura contra PEC da escala 6×1 ocorreu por “equívoco”",
       "category": "Politica",
@@ -9726,7 +9757,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 101,
+      "index": 102,
       "slug": "municipios-ja-podem-manifestar-interesse-em-executar-paa-em-2026",
       "title": "Municípios já podem manifestar interesse em executar PAA em 2026",
       "category": "Politica",
@@ -9757,7 +9788,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 102,
+      "index": 103,
       "slug": "goleiro-manuel-neuer-e-convocado-pela-alemanha-para-a-copa-do-mundo",
       "title": "Goleiro Manuel Neuer é convocado pela Alemanha para a Copa do Mundo",
       "category": "Esporte",
@@ -9786,7 +9817,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 103,
+      "index": 104,
       "slug": "operacao-mute-policia-penal-apreende-7-celulares-em-presidios-do-acre",
       "title": "Operação Mute: Polícia Penal apreende 7 celulares em presídios do Acre",
       "category": "Policia",
@@ -9812,7 +9843,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 104,
+      "index": 105,
       "slug": "desenrola-2-0-trabalhadores-poderao-usar-saldo-do-fgts-para-quitar-dividas-a-partir-do-dia-26",
       "title": "Desenrola 2.0: trabalhadores poderão usar saldo do FGTS para quitar dívidas a partir do dia 26",
       "category": "Cotidiano",
@@ -9841,7 +9872,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 105,
+      "index": 106,
       "slug": "policia-militar-cumpre-dois-mandados-de-prisao-em-cruzeiro-do-sul-e-mancio-lima",
       "title": "Polícia Militar cumpre dois mandados de prisão em Cruzeiro do Sul e Mâncio Lima",
       "category": "Prefeitura",
@@ -9867,7 +9898,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 106,
+      "index": 107,
       "slug": "com-anitta-no-time-de-interpretes-e-o-duo-tropkillaz-na-coproducao-goals-poe-funk-pop-e-afrobeat",
       "title": "Com Anitta no time de intérpretes e o duo Tropkillaz na coprodução, 'Goals' põe funk, pop e afrobeat em campo",
       "category": "Esporte",
@@ -9896,7 +9927,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 107,
+      "index": 108,
       "slug": "flavio-bolsonaro-deve-se-reunir-com-donald-trump-na-casa-branca-na-proxima-semana",
       "title": "Flávio Bolsonaro deve se reunir com Donald Trump na Casa Branca na próxima semana",
       "category": "Politica",
@@ -9927,7 +9958,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 108,
+      "index": 109,
       "slug": "caso-master-defesa-pede-que-daniel-vorcaro-seja-transferido-da-policia-federal-para-a-papudinha",
       "title": "Caso Master: defesa pede que Daniel Vorcaro seja transferido da Polícia Federal para a Papudinha",
       "category": "Politica",
@@ -9953,7 +9984,7 @@
       "editorialHealthSource": "runtime-news"
     },
     {
-      "index": 109,
+      "index": 110,
       "slug": "secretaria-da-saude-de-sp-reforca-vigilancia-sobre-ebola-no-estado",
       "title": "Secretaria da Saúde de SP reforça vigilância sobre ebola no estado",
       "category": "Saude",
@@ -9975,37 +10006,6 @@
         "slug": "secretaria-da-saude-de-sp-reforca-vigilancia-sobre-ebola-no-estado",
         "title": "Secretaria da Saúde de SP reforça vigilância sobre ebola no estado",
         "gate": "P2",
-        "format": "agenda visual",
-        "why": "Tema permite formato explicativo sem aumentar risco editorial.",
-        "guardrail": "Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado."
-      },
-      "editorialHealthSource": "runtime-news"
-    },
-    {
-      "index": 110,
-      "slug": "caravana-de-alan-rick-desembarca-em-feijo-com-aeroporto-lotado-e-carreata-movimenta-ruas-da-cida",
-      "title": "Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade",
-      "category": "Politica",
-      "publishedAt": "2026-05-21T22:43:21.000Z",
-      "gate": "P1",
-      "approval": "editor-review",
-      "gateReason": "Cobertura civica, politica, governo, economia publica ou impacto local.",
-      "sourceDomain": "juruaonline.com.br",
-      "sourceCount": 1,
-      "sourceIssues": [],
-      "imageLabel": "imagem-de-fonte",
-      "visualIssues": [
-        "p0-p1-sem-credito-visual"
-      ],
-      "titleAlternatives": [
-        "Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade: veja os po",
-        "Entenda caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade",
-        "Jurua Online informa: Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas"
-      ],
-      "specialFormat": {
-        "slug": "caravana-de-alan-rick-desembarca-em-feijo-com-aeroporto-lotado-e-carreata-movimenta-ruas-da-cida",
-        "title": "Caravana de Alan Rick desembarca em Feijó com aeroporto lotado e carreata movimenta ruas da cidade",
-        "gate": "P1",
         "format": "agenda visual",
         "why": "Tema permite formato explicativo sem aumentar risco editorial.",
         "guardrail": "Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado."

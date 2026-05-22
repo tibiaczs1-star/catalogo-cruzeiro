@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T19:41:35.974Z",
+  "lastUpdatedAt": "2026-05-22T19:52:19.313Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -964,8 +964,8 @@
     {
       "id": "2026-05-18-sistema-diretor-de-jogos-com-hierarquia-prompt-mestre-fluxo-e-estudo-inicial-par",
       "createdAt": "2026-05-18T17:26:39.544Z",
-      "updatedAt": "2026-05-18T17:26:39.544Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Criar sistema de jogos separado do jornal: Diretor do Jogo no topo, subagentes de arte/design, UI/HUD, teste/seguranca gamer e linha final; Escritorio Nerd alimenta conhecimento tecnico; Codex e Hermes ficam como ferramentas finais de decisao operacional, usuario acima de tudo.",
       "summary": "Sistema Diretor de Jogos com hierarquia, prompt mestre, fluxo e estudo inicial para Codex/Hermes.",
@@ -974,13 +974,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-18-expandir-estudo-do-sistema-diretor-de-jogos-com-arquitetura-papeis-pipeline-e-su",
       "createdAt": "2026-05-18T17:31:55.544Z",
-      "updatedAt": "2026-05-18T17:31:55.544Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Completar estudo de 20 minutos do sistema de jogos incluindo camadas/layers, padroes de programacao, tipos de programador, tipos de desenhista, fluxo de desenho para jogos e direcao de jogos.",
       "summary": "Expandir estudo do Sistema Diretor de Jogos com arquitetura, papeis, pipeline e sub-subagentes.",
@@ -989,13 +989,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-18-rodada-complementar-de-estudo-do-diretor-de-jogos-salva-no-relatorio-e-fluxo",
       "createdAt": "2026-05-18T18:40:34.960Z",
-      "updatedAt": "2026-05-18T18:40:34.960Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Continuar aprendizado do Sistema Diretor de Jogos depois da correcao do usuario; consolidar arquitetura web/Phaser, servidor autoritativo, padroes de codigo, papeis de equipe e checklists por tipo de mudanca.",
       "summary": "Rodada complementar de estudo do Diretor de Jogos salva no relatorio e fluxo.",
@@ -1004,7 +1004,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-18-investigar-tela-preta-depois-de-apertar-entrar-no-pubpaid",
@@ -1054,8 +1054,8 @@
     {
       "id": "2026-05-18-estudo-literal-de-30-minutos-concluido-e-consolidado-no-sistema-diretor-de-jogos",
       "createdAt": "2026-05-18T19:13:58.975Z",
-      "updatedAt": "2026-05-18T19:13:58.975Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Rodada literal de 30 minutos para estudar producao real de jogos, GDD/TDD, level design, game feel, audio, balanceamento, multiplayer, telemetria, pipeline, QA, monetizacao/etica, mapeamento e colisao 2D/3D.",
       "summary": "Estudo literal de 30 minutos concluido e consolidado no Sistema Diretor de Jogos.",
@@ -1064,7 +1064,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-18-remover-nomes-circulos-e-marcadores-do-chao-na-selecao-salao-pubpaid",
@@ -1107,8 +1107,8 @@
     {
       "id": "2026-05-18-criar-skill-game-director-general-e-registrar-workflow-de-jogos-com-conselho-ner",
       "createdAt": "2026-05-18T19:35:05.499Z",
-      "updatedAt": "2026-05-18T19:35:05.499Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Consolidar a cadeia completa antes de voltar ao jogo: Codex/Hermes como ferramentas finais, Diretor Geral, Conselho Tecnico Nerd, Diretor do Jogo, subagentes e sub-subagentes; criar skill completa com loop de aprender/reaprender por erros e acertos.",
       "summary": "Criar skill game-director-general e registrar workflow de jogos com conselho nerd e loop de aprendizado.",
@@ -1117,7 +1117,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-18-ajustar-indicadores-discretos-e-regras-de-saque-pubpaid",
@@ -1293,8 +1293,8 @@
     {
       "id": "2026-05-18-criar-laboratorio-isolado-retro-pool-hall-para-demonstrar-capacidade-tecnica-vis",
       "createdAt": "2026-05-18T23:45:32.436Z",
-      "updatedAt": "2026-05-18T23:45:32.436Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "nao e pra mexer no pub paid; trabalhar demonstracoes tecnicas da equipe; estudar Side Pocket SNES e criar mockup/grafico; fazer loops de aprendizado fotografando evolucao ate ficar parecido",
       "summary": "Criar laboratorio isolado Retro Pool Hall para demonstrar capacidade tecnica/visual da equipe de jogos, sem tocar no PubPaid.",
@@ -1303,7 +1303,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-19-focar-pubpaid-em-sinuca-damas-xadrez-e-melhorar-xadrez-com-pecas-reais",
@@ -1387,8 +1387,8 @@
     {
       "id": "2026-05-19-otimizar-pubpaid-para-abrir-mais-rapido-reduzir-preloads-validar-responsividade-",
       "createdAt": "2026-05-19T19:17:16.214Z",
-      "updatedAt": "2026-05-19T19:17:16.214Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "ok agora rode uma rodada de optmização, pro jogo abrir mais rapido, e principalmente resposividade, para abrir em todos os tamanhos; depois corrigido: sinuca deve impedir retrato e sempre jogar em horizontal",
       "summary": "Otimizar PubPaid para abrir mais rapido, reduzir preloads, validar responsividade e aplicar regra final de mobile: jogo sempre horizontal, com retrato bloqueado por orientação.",
@@ -1397,13 +1397,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-19-testar-pixellab-mcp-usando-diretor-de-jogos-arte-e-gerar-um-asset-pequeno-de-sin",
       "createdAt": "2026-05-19T19:22:18.103Z",
-      "updatedAt": "2026-05-19T19:22:18.103Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "teste e crie algo usando nosso diretor ate e esse mcp",
       "summary": "Testar PixelLab MCP usando diretor de jogos/arte e gerar um asset pequeno de sinuca para avaliacao.",
@@ -1412,7 +1412,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-19-corrigir-captura-da-sinuca-pubpaid-cacapas-dentro-mesa-centralizada-e-sem-inform",
@@ -1547,8 +1547,8 @@
     {
       "id": "2026-05-19-retomar-apos-travamento-da-sessao-conferir-estado-da-correcao-da-sinuca-pubpaid-",
       "createdAt": "2026-05-19T20:04:06.790Z",
-      "updatedAt": "2026-05-19T20:04:06.790Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "vc travou",
       "summary": "Retomar apos travamento da sessao; conferir estado da correcao da Sinuca PubPaid e responder com status claro.",
@@ -1557,7 +1557,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-19-ajustar-cacapa-da-sinuca-pubpaid-e-ativar-build-real",
@@ -1646,8 +1646,8 @@
     {
       "id": "2026-05-20-aplicar-na-damas-pubpaid-as-metas-do-csv-intro-cinematica-coin-flip-camera-livre",
       "createdAt": "2026-05-20T14:54:06.052Z",
-      "updatedAt": "2026-05-20T14:54:06.052Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "\\",
       "summary": "Aplicar na Damas PubPaid as metas do CSV: intro cinematica, coin flip, camera livre, virada de camera por turno, luz/arena e SFX, mantendo Demo/PvP padrão.",
@@ -1656,13 +1656,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-corrigir-responsividade-textos-da-damas-pubpaid-centralizar-textos-e-fazer-a-moe",
       "createdAt": "2026-05-20T15:04:17.297Z",
-      "updatedAt": "2026-05-20T15:04:17.297Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "n esqueça de levar em conta resposividade; ok so centralize os textos, e depois que a moeda rola, ela tem que liberar o jogo, por isso travou, depois de o jogo acabar contninua o fliuxo normal",
       "summary": "Corrigir responsividade/textos da Damas PubPaid, centralizar textos e fazer a moeda liberar automaticamente o jogo depois da abertura.",
@@ -1671,13 +1671,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-melhorar-damas-demo-com-ia-pensando-3-segundos-e-adicionar-carregamento-0-100-an",
       "createdAt": "2026-05-20T15:56:14.384Z",
-      "updatedAt": "2026-05-20T15:56:14.384Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "ta otimo damas, mais na ves do adversario n ta ficando claro o movimento dele porque ta muito rapido faça uma animação tipo no demo, vez da i,a ela pensa por 3 segundos... e depois de entra no jogo pub paid, antes da intro coloque uma tela de carregamento pra ter certesza que nao vai ficar uma tela preta, ponha ate 100 por cento e carregue tudo",
       "summary": "Melhorar Damas Demo com IA pensando 3 segundos e adicionar carregamento 0-100 antes da intro PubPaid.",
@@ -1701,13 +1701,13 @@
         "loading"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e",
       "createdAt": "2026-05-20T16:13:42.904Z",
-      "updatedAt": "2026-05-20T16:13:42.904Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "agora faça o mesmo estilo de jogo pra xadrez",
       "summary": "Aplicar no Xadrez PubPaid o mesmo estilo aprovado da Damas, com mesa cinematica e adversario Demo pensando 3 segundos.",
@@ -1732,7 +1732,7 @@
         "mobile"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-usar-copy-curta-para-postar-noticias-no-grupo-de-vendas-com-link-do-instagram-do",
@@ -1761,8 +1761,8 @@
     {
       "id": "2026-05-20-incluir-noticias-resumidas-instagram-via-bluestacks-e-renovacao-de-vendas-no-fac",
       "createdAt": "2026-05-20T16:29:27.609Z",
-      "updatedAt": "2026-05-20T16:29:27.609Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Adicionar noticias do Catalogo CZS em manutencao a rotina geral: pegar noticias novas/fechadas, resumir, postar tambem nos grupos de venda, incluir link do Instagram do Catalogo e pedir para seguir, publicar no Instagram via BlueStacks quando o usuario liberar; no Facebook renovar todas as vendas.",
       "summary": "Incluir noticias resumidas, Instagram via BlueStacks e renovacao de vendas no Facebook na rotina geral de divulgacao.",
@@ -1771,13 +1771,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-refinar-precificacao-ggmax-por-valor-real-do-credito-e-ampliar-mapa-para-streami",
       "createdAt": "2026-05-20T16:34:41.018Z",
-      "updatedAt": "2026-05-20T16:34:41.018Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Refinar garimpagem GGMAX: verificar valor real dos créditos antes de definir preço; não vender gift de R como se fosse genérico; incluir janelas/acessos Netflix, ChatGPT e outras assinaturas, com mais profundidade.",
       "summary": "Refinar precificação GGMAX por valor real do crédito e ampliar mapa para streaming/IA/janelas.",
@@ -1786,13 +1786,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-adicionar-categorias-digitais-amplas-e-servico-de-suporte-remoto-t-i-logistico-c",
       "createdAt": "2026-05-20T16:35:30.783Z",
-      "updatedAt": "2026-05-20T16:35:30.783Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Pode mandar ver com Game Pass, Netflix/streaming, ChatGPT/Gemini, contas da PlayStation e tudo que der; incluir tambem anuncio: ajeitamos seu computador sem sair de casa, alem do celular, e so entrar em contato -- grupo T.I Logístico CZS.",
       "summary": "Adicionar categorias digitais amplas e servico de suporte remoto T.I Logístico CZS na rotina de divulgacao.",
@@ -1801,13 +1801,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat",
       "createdAt": "2026-05-20T16:52:20.492Z",
-      "updatedAt": "2026-05-20T16:52:20.492Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "nao era isso que eu queria nao eu queria aqueles modelos 3d que usamos nas damas, com rotação de camera e tudo muito legal, vc fez uma janeçlinha feia de bsota",
       "summary": "Corrigir Xadrez PubPaid para usar modelo visual 3D estilo Damas, com camera rotativa, zoom e mesa grande.",
@@ -1833,13 +1833,13 @@
         "Render"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-criar-propagandas-prontas-para-whatsapp-grupos-da-rotina-de-vendas-digitais-e-su",
       "createdAt": "2026-05-20T17:17:32.265Z",
-      "updatedAt": "2026-05-20T17:17:32.265Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Começar a fazer propagandas para WhatsApp/grupos com produtos digitais: gift cards por valor real do crédito, Robux, Uber, streaming, IA, Game Pass, Netflix, ChatGPT, Canva/CapCut e T.I Logístico CZS.",
       "summary": "Criar propagandas prontas para WhatsApp/grupos da rotina de vendas digitais e suporte T.I Logístico CZS.",
@@ -1848,13 +1848,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-propagandas-devem-sempre-sair-com-imagem-arte-junto-da-copy",
       "createdAt": "2026-05-20T17:18:19.638Z",
-      "updatedAt": "2026-05-20T17:18:19.638Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Regra para propagandas: sempre criar/acompanhar com imagens, não apenas texto, nas campanhas de WhatsApp/grupos.",
       "summary": "Propagandas devem sempre sair com imagem/arte junto da copy.",
@@ -1863,13 +1863,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-garantir-que-o-xadrez-pubpaid-abra-sempre-em-tela-cheia-sem-moldura-de-pagina-he",
       "createdAt": "2026-05-20T17:31:33.417Z",
-      "updatedAt": "2026-05-20T17:31:33.417Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "sempre tela cheia sempre",
       "summary": "Garantir que o Xadrez PubPaid abra sempre em tela cheia, sem moldura de pagina, header, placar inferior ou botoes ocupando espaco.",
@@ -1895,13 +1895,13 @@
         "Render"
       ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-20-adicionar-motorista-particular-julia-oliveira-na-rotina-de-propagandas-do-whatsa",
       "createdAt": "2026-05-20T19:29:31.157Z",
-      "updatedAt": "2026-05-20T19:29:31.157Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Adicionar propaganda da Julia Oliveira, Motorista Particular, usando a imagem enviada: seguro, pontual, conforto, telefone (68)99900-5172.",
       "summary": "Adicionar Motorista Particular Julia Oliveira na rotina de propagandas do WhatsApp.",
@@ -1910,13 +1910,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-21-separar-propagandas-por-grupo-vendas-em-grupos-de-venda-motorista-em-uber-transp",
       "createdAt": "2026-05-21T19:23:29.527Z",
-      "updatedAt": "2026-05-21T19:23:29.527Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Correção operacional: não postar propaganda em qualquer chat. Separar destino por tipo: grupos de venda recebem vendas/serviços digitais/T.I; grupos Uber/transporte recebem apenas motorista particular; Facebook pode receber tudo depois; Instagram só no final quando o usuário mandar abrir. Antes de enviar, confirmar grupo alvo e categoria.",
       "summary": "Separar propagandas por grupo: vendas em grupos de venda, motorista em Uber/transporte, Facebook depois, Instagram por último.",
@@ -1925,13 +1925,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-21-regra-final-de-postagem-whatsapp-por-categoria-depois-facebook-marketplace-insta",
       "createdAt": "2026-05-21T19:28:11.408Z",
-      "updatedAt": "2026-05-21T19:28:11.408Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Regra final confirmada pelo usuario para propagandas: WhatsApp primeiro e por categoria; grupos de venda recebem vendas/servicos digitais/T.I; grupos Uber/transporte recebem apenas motorista Julia; Facebook Marketplace vem depois do WhatsApp e pode receber todos os anuncios separados; Instagram e somente no final, quando o usuario abrir/autorizar.",
       "summary": "Regra final de postagem: WhatsApp por categoria, depois Facebook Marketplace, Instagram so no final.",
@@ -1940,13 +1940,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-21-criar-protocolo-operacional-para-automacao-de-propagandas-por-whatsapp-facebook-",
       "createdAt": "2026-05-21T20:01:25.948Z",
-      "updatedAt": "2026-05-21T20:01:25.948Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Criar protocolo para automações de propaganda serem mais rápidas e seguras: listar destinos antes, separar por categoria, validar chat/grupo antes de enviar, WhatsApp primeiro, Facebook Marketplace depois, Instagram só no final.",
       "summary": "Criar protocolo operacional para automação de propagandas por WhatsApp, Facebook Marketplace e Instagram.",
@@ -1955,7 +1955,7 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-21-postar-giro-de-noticias-no-catalogo-czs-e-chamar-grupos-de-venda",
@@ -2460,8 +2460,8 @@
     {
       "id": "2026-05-22-validar-pvp-pubpaid-online-local-com-agentes-guard-review-team-contrato-de-duas-",
       "createdAt": "2026-05-22T18:56:33.122Z",
-      "updatedAt": "2026-05-22T18:56:33.122Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "faça os testes online de pvp no jogo pub paid, use agentes para validar tudo e entregue relatorio",
       "summary": "Validar PvP PubPaid online/local com agentes, guard, review team, contrato de duas sessoes e relatorio funcional.",
@@ -2470,13 +2470,13 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
     },
     {
       "id": "2026-05-22-subir-e-sincronizar-todas-as-mudancas-atuais-validar-funcionamento-e-relatar-est",
       "createdAt": "2026-05-22T19:41:35.974Z",
-      "updatedAt": "2026-05-22T19:41:35.974Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "fizemos mudancas e atualizacoes, agora suba tudo, sincronize e me de um relatorio se esta tudo funcional, inclusive qual seu heart",
       "summary": "Subir e sincronizar todas as mudancas atuais, validar funcionamento e relatar estado/heart do projeto",
@@ -2485,7 +2485,39 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Fechada na limpeza de memoria 20260522-openorders1 para remover pendencias antigas ja consolidadas ou arquivadas; reabrir apenas se o usuario pedir retomada explicita."
+    },
+    {
+      "id": "2026-05-22-resolver-performance-antiga-do-site-ordens-antigas-abertas-volume-de-dados-de-no",
+      "createdAt": "2026-05-22T19:46:56.245Z",
+      "updatedAt": "2026-05-22T19:52:19.313Z",
+      "status": "completed-local-pending-push-check",
+      "source": "chat",
+      "rawRequest": "resolva 2 3 4 5 so isso",
+      "summary": "Resolver performance antiga do site, ordens antigas abertas, volume de dados de noticias e validacao online pos-deploy",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "styles.css",
+        "scripts/capture-latest-news.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "news-data.js",
+        ".codex-memory/orders.json",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "performance",
+        "memoria",
+        "noticias",
+        "render"
+      ],
+      "nextSteps": [
+        "push e validacao online pos-deploy"
+      ],
+      "notes": "Resolvidos localmente: perf budget estrito sem over, styles.css abaixo do teto, news-data/runtime/news-archive reduzidos para 480 itens, ordens abertas antigas fechadas deixando 1 ordem ativa, smoke local home/API/PubPaid OK."
     }
   ]
 }

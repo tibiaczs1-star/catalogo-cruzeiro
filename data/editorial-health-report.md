@@ -1,12 +1,12 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-22T19:41:13.284Z
-Escopo: 360/993 itens recentes.
+Gerado em: 2026-05-22T19:52:00.330Z
+Escopo: 360/505 itens recentes.
 
 ## Resumo
-- Gates: P0 95, P1 174, P2 91
-- Aprovacao humana exigida: 95
-- Pendencias de fonte: 95
+- Gates: P0 96, P1 173, P2 91
+- Aprovacao humana exigida: 96
+- Pendencias de fonte: 96
 - Pendencias visuais: 281
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60

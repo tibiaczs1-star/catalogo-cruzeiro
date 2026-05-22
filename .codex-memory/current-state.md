@@ -1,34 +1,27 @@
 # Current State
 
-Updated: 2026-05-22T19:43:16.990Z
+Updated: 2026-05-22T19:52:31.707Z
 
 ## Active Goal
 
-- Mudancas validadas e prontas para sincronizacao
+- Itens 2-5 resolvidos localmente
 
 ## Summary
 
-Rodada de sincronizacao validou o pacote atual de CZS/editorial, PubPaid e memoria local. Sintaxe passou nos arquivos tocados, PubPaid guard passou, agents:cycle passou, review:team ficou com totalIssues 0, editorial:health OK, perf:budget OK nao estrito com divida antiga em styles.css, codex:health OK e smoke local em :3092 confirmou home 200, /api/news?limit=10&lite=1 com 10 itens e /api/pubpaid/build=20260522-boardfit1.
+Performance antiga: styles.css compactado de 716692 para cerca de 614 KB e perf budget passou em modo estrito sem arquivos over. Noticias: runtime-news, news-archive e news-data reduzidos de 1000 para 480 itens, com janela ativa de 360; agents:cycle confirmou newsItems 480. Memoria: ordens abertas antigas foram arquivadas, removendo o aviso de 26 pendencias antigas; ordem atual ficou marcada como concluida localmente aguardando push/check online. Validacao local: node --check, JSON OK, perf estrito OK, agents:cycle OK, review:team totalIssues 0, editorial:health OK e smoke local home/API/PubPaid OK.
 
 ## Next
 
-- Apos push
-- conferir Render se precisar validar producao ao vivo.
-- PvP real com dinheiro ainda recomenda duas contas reais/autenticadas antes de operar usuario final.
+- Fazer commit/push e validar Render online.
 
 ## Files In Focus
 
-- server.js
-- script.js
-- scripts/agents-autonomy-cycle.js
+- styles.css
 - scripts/capture-latest-news.js
 - data/runtime-news.json
+- data/news-archive.json
 - news-data.js
-- pubpaid.html
-- pubpaid-phaser.css
-- pubpaid-phaser/ui/domGameInterface.js
-- games/vale-pool/game.js
+- .codex-memory/orders.json
 - CODEX_MEMORY.md
 - .codex-memory/current-state.md
 - .codex-memory/handoff.md
-- .codex-memory/orders.json

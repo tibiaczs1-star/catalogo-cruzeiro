@@ -12,8 +12,8 @@ const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const FALLBACK_DIR = path.join(ROOT_DIR, "assets", "news-fallbacks");
 const DEFAULT_LIMIT_PER_SOURCE = Math.max(5, Math.min(80, Number(process.env.CATALOGO_CAPTURE_LIMIT_PER_SOURCE || 30)));
-const ACTIVE_WINDOW_LIMIT = Math.max(120, Number(process.env.CATALOGO_ACTIVE_NEWS_LIMIT || 420));
-const ARCHIVE_LIMIT = Math.max(ACTIVE_WINDOW_LIMIT, Number(process.env.CATALOGO_ARCHIVE_NEWS_LIMIT || 1000));
+const ACTIVE_WINDOW_LIMIT = Math.max(120, Number(process.env.CATALOGO_ACTIVE_NEWS_LIMIT || 360));
+const ARCHIVE_LIMIT = Math.max(ACTIVE_WINDOW_LIMIT, Number(process.env.CATALOGO_ARCHIVE_NEWS_LIMIT || 480));
 const HTML_NOISE_ATTR_PATTERN = new RegExp(
   "\\b(?:" +
     ["src", "srcset", "alt", "class", "width", "height", "sizes", "load" + "ing", "decoding"].join("|") +
