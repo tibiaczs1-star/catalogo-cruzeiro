@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260520-polishcam4";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260520-polishcam4";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-checkerstourney1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-checkerstourney1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260520-polishcam4";
-import { BootScene } from "./scenes/BootScene.js?v=20260520-polishcam4";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260520-polishcam4";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260520-polishcam4";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260520-polishcam4";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260520-polishcam4";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260520-polishcam4";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260520-polishcam4";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260520-polishcam4";
-import { UIScene } from "./scenes/UIScene.js?v=20260520-polishcam4";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-checkerstourney1";
+import { BootScene } from "./scenes/BootScene.js?v=20260522-checkerstourney1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260522-checkerstourney1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-checkerstourney1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260522-checkerstourney1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-checkerstourney1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-checkerstourney1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-checkerstourney1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-checkerstourney1";
+import { UIScene } from "./scenes/UIScene.js?v=20260522-checkerstourney1";
 
-const PUBPAID_BUILD_VERSION = "20260520-polishcam4";
+const PUBPAID_BUILD_VERSION = "20260522-checkerstourney1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -50,6 +50,30 @@ const soundtrack = createPubPaidSoundtrack();
 const TERMS_KEY = "pubpaid_v2_terms_accepted";
 const PROFILE_KEY = "pubpaid_v2_player_profile";
 const BUILD_KEY = "pubpaid_canon_build_version";
+const SAFE_CACHE_KEY = "pubpaid_safe_runtime_cache";
+const SAFE_CACHE_NAME = `pubpaid-safe-runtime-${PUBPAID_BUILD_VERSION}`;
+const SAFE_RUNTIME_ASSETS = [
+  "./pubpaid-phaser.css",
+  "./site-google-auth.js",
+  "./pubpaid-phaser/app.js",
+  "./pubpaid-phaser/ui/domGameInterface.js",
+  "./pubpaid-phaser/ui/walletInterface.js",
+  "./pubpaid-phaser/services/accountService.js",
+  "./pubpaid-phaser/services/pvpService.js",
+  "./pubpaid-phaser/services/tournamentService.js",
+  "./pubpaid-phaser/core/checkersRules.js",
+  "./pubpaid-phaser/vendor/chess.js",
+  "./assets/pubpaid/lobby/icons/game-pool.svg",
+  "./assets/pubpaid/lobby/icons/game-checkers.svg",
+  "./assets/pubpaid/lobby/icons/game-chess.svg",
+  "./assets/pubpaid-v2-street-bg-v1.png",
+  "./assets/pubpaid-interior-v5.png",
+  "./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png",
+  "./assets/pubpaid/chess/chess-intro-premium-v1.mp4",
+  "./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4",
+  "./assets/pubpaid/checkers/wood-tiles-oga.png",
+  "./assets/pubpaid/checkers/checker-pieces-oga.png"
+];
 let cachedPlayerProfile = null;
 const refs = {
   body: document.body,
@@ -100,7 +124,7 @@ let pendingAutoEntry = false;
 let pendingIntroStart = false;
 let pendingStartGameOptions = null;
 let fullscreenWasActive = false;
-let userAudioMuted = true;
+let userAudioMuted = false;
 let preintroLoadingBusy = false;
 
 function setUpdateStatus(message) {
@@ -176,6 +200,44 @@ function pubpaidVersionedUrl(version = PUBPAID_BUILD_VERSION) {
   return url.toString();
 }
 
+function versionedRuntimeAsset(path, version = PUBPAID_BUILD_VERSION) {
+  const url = new URL(path, window.location.href);
+  url.searchParams.set("v", version);
+  return url.toString();
+}
+
+async function warmPubpaidSafeRuntimeCache() {
+  const urls = SAFE_RUNTIME_ASSETS.map((assetPath) => versionedRuntimeAsset(assetPath));
+  try {
+    if ("caches" in window) {
+      const cache = await window.caches.open(SAFE_CACHE_NAME);
+      await Promise.all(urls.map(async (assetUrl) => {
+        try {
+          const response = await fetch(assetUrl, {
+            cache: "reload",
+            credentials: "same-origin"
+          });
+          if (response.ok) await cache.put(assetUrl, response.clone());
+        } catch (_error) {
+          // One missed optional asset must not block entry.
+        }
+      }));
+    } else {
+      await Promise.all(urls.map((assetUrl) => fetch(assetUrl, {
+        cache: "force-cache",
+        credentials: "same-origin"
+      }).catch(() => null)));
+    }
+    window.localStorage?.setItem(SAFE_CACHE_KEY, JSON.stringify({
+      buildVersion: PUBPAID_BUILD_VERSION,
+      cachedAt: new Date().toISOString(),
+      assets: urls.length
+    }));
+  } catch (_error) {
+    // Runtime cache is an accelerator only; gameplay must work without it.
+  }
+}
+
 async function clearPubpaidCachesAndWorkers() {
   try {
     if ("caches" in window) {
@@ -211,10 +273,12 @@ async function refreshPubpaidRuntimeCache() {
     window.localStorage?.removeItem("pubpaid_v2_build_version");
     const previousVersion = window.localStorage?.getItem(BUILD_KEY) || "";
     if (previousVersion === PUBPAID_BUILD_VERSION) {
+      void warmPubpaidSafeRuntimeCache();
       return;
     }
     window.localStorage?.setItem(BUILD_KEY, PUBPAID_BUILD_VERSION);
     await clearPubpaidCachesAndWorkers();
+    await warmPubpaidSafeRuntimeCache();
   } catch (_error) {
     // Cache refresh must never block login, wallet, lobby, or Damas.
   }
@@ -1196,6 +1260,9 @@ game.events.on("pubpaid:music-zone", (zone) => {
 });
 
 game.events.on("pubpaid:sound-cue", ({ cue = "select", gameId = "" } = {}) => {
+  if (!userAudioMuted && !soundtrack.isPlaying()) {
+    soundtrack.start();
+  }
   soundtrack.playCue(cue, gameId);
   syncAudioButton();
 });

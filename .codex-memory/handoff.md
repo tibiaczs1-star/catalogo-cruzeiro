@@ -1,29 +1,25 @@
 # Handoff
 
-Updated: 2026-05-20T18:18:00.000Z
+Updated: 2026-05-22T03:45:34.364Z
 
-Damas/Xadrez PubPaid em correcao 20260520-polishcam1: manter o visual aprovado, mas melhorar leitura. Damas recebeu pedras redondas com contraste forte contra o tabuleiro. Xadrez segue fullscreen 3D, recebeu pecas mais altas e contrastadas, seta no lugar da maozinha, setas na porta/NPCs e controle de camera em bolinha direcional.
+PubPaid Damas Torneio esta implementado e validado localmente na build 20260522-checkerstourney1. Nao ha financeiro no modo torneio; as chaves sao DAMAS-AAAAMMDD-01..10 e o modo teste e ativado por tournamentTest=1. O arquivo data/pubpaid-tournaments.json foi removido apos smoke test para nao versionar dados locais.
 
 ## Next
 
-- Validacoes locais feitas: node --check
-- npm run guard:pubpaid
-- git diff --check
-- Playwright Xadrez mobile/desktop e Damas mobile/desktop.
-- Evidencias locais: .codex-temp/chess3d-mobile.png, .codex-temp/chess3d-desktop.png, .codex-temp/checkerscam-desktop.png e .codex-temp/checkerscam-mobile.png.
-- Proximo passo: commit, push e smoke no Render para /api/pubpaid/build=20260520-polishcam1.
+- Commitar somente os arquivos do modo torneio e assets PubPaid pendentes
+- rodar npm run guard:pubpaid antes do commit se houver nova alteracao
+- validar Render depois do push
 
 ## Files In Focus
 
-- pubpaid-phaser.css
-- pubpaid.html
-- pubpaid-phaser/app.js
-- pubpaid-phaser/ui/domGameInterface.js
-- pubpaid-phaser/scenes/StreetScene.js
-- pubpaid-phaser/scenes/InteriorScene.js
 - server.js
+- pubpaid.html
+- pubpaid-phaser.css
+- pubpaid-phaser/app.js
+- pubpaid-phaser/scenes/BootScene.js
+- pubpaid-phaser/ui/domGameInterface.js
+- pubpaid-phaser/services/tournamentService.js
 
 ## Related Orders
 
-- 2026-05-20-garantir-que-o-xadrez-pubpaid-abra-sempre-em-tela-cheia-sem-moldura-de-pagina-he
-- 2026-05-20-polir-pecas-contraste-setas-e-camera-damas-xadrez
+- 2026-05-22-modo-damas-torneio-testavel-sem-financeiro

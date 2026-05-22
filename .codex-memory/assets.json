@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T16:56:40.726Z",
+  "lastUpdatedAt": "2026-05-22T03:45:04.035Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -809,6 +809,113 @@
         "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat"
       ],
       "createdAt": "2026-05-20T16:56:40.726Z"
+    },
+    {
+      "id": "pubpaid-chessfull1-mobile-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/chess3d-mobile.png",
+      "source": "workspace",
+      "note": "Xadrez PubPaid chessfull1 em mobile landscape: cena fullscreen, sem header/placar/acoes externas, tabuleiro ocupando o viewport.",
+      "linkedOrderIds": [
+        "2026-05-20-garantir-que-o-xadrez-pubpaid-abra-sempre-em-tela-cheia-sem-moldura-de-pagina-header"
+      ],
+      "createdAt": "2026-05-20T17:31:33.482Z"
+    },
+    {
+      "id": "pubpaid-chessfull1-desktop-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/chess3d-desktop.png",
+      "source": "workspace",
+      "note": "Xadrez PubPaid chessfull1 em desktop: arena fullscreen com mesa 3D ocupando o viewport e painel overlay.",
+      "linkedOrderIds": [
+        "2026-05-20-garantir-que-o-xadrez-pubpaid-abra-sempre-em-tela-cheia-sem-moldura-de-pagina-header"
+      ],
+      "createdAt": "2026-05-20T17:31:33.546Z"
+    },
+    {
+      "id": "01-geral-gift-streaming-ia-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/01-geral-gift-streaming-ia.png",
+      "source": "workspace",
+      "note": "Propaganda WhatsApp geral: gift cards, streaming e IA sob consulta.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T17:33:00.602Z"
+    },
+    {
+      "id": "02-gift-cards-jogos-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/02-gift-cards-jogos.png",
+      "source": "workspace",
+      "note": "Propaganda WhatsApp de gift cards e jogos sob consulta.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T17:33:11.378Z"
+    },
+    {
+      "id": "03-streaming-sob-consulta-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/03-streaming-sob-consulta.png",
+      "source": "workspace",
+      "note": "Propaganda WhatsApp de streaming sob consulta.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T17:33:11.388Z"
+    },
+    {
+      "id": "04-ia-apps-premium-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/04-ia-apps-premium.png",
+      "source": "workspace",
+      "note": "Propaganda WhatsApp de IA e apps premium sob consulta.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T17:33:11.425Z"
+    },
+    {
+      "id": "05-ti-logistico-czs-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/05-ti-logistico-czs.png",
+      "source": "workspace",
+      "note": "Propaganda WhatsApp T.I Logístico CZS para suporte remoto de celular e computador.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T17:33:11.542Z"
+    },
+    {
+      "id": "05-ti-logistico-czs-remoto-retirada-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/05-ti-logistico-czs-remoto-retirada.png",
+      "source": "workspace",
+      "note": "Propaganda atualizada T.I Logístico CZS: atendimento remoto e retirada do aparelho em casa.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T17:35:52.425Z"
+    },
+    {
+      "id": "06-motorista-julia-oliveira-png",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-propagandas-20260520/06-motorista-julia-oliveira.png",
+      "source": "workspace",
+      "note": "Propaganda WhatsApp Motorista Particular Julia Oliveira com telefone (68) 99900-5172.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-20T19:38:09.903Z"
+    },
+    {
+      "id": "tourney-mobile-fixed",
+      "kind": "screenshot",
+      "path": ".codex-temp/tourney-mobile-fixed.png",
+      "source": "playwright",
+      "note": "Painel Damas Torneio em mobile portrait, sem gate de orientacao por cima e com scroll interno.",
+      "linkedOrderIds": [
+        "2026-05-22-modo-damas-torneio-testavel-sem-financeiro"
+      ],
+      "createdAt": "2026-05-22T03:45:03.970Z"
+    },
+    {
+      "id": "tourney-join-ui",
+      "kind": "screenshot",
+      "path": ".codex-temp/tourney-join-ui.png",
+      "source": "playwright",
+      "note": "UI desktop do torneio apos selecionar chave e confirmar 1/10 participante.",
+      "linkedOrderIds": [
+        "2026-05-22-modo-damas-torneio-testavel-sem-financeiro"
+      ],
+      "createdAt": "2026-05-22T03:45:04.035Z"
     }
   ]
 }

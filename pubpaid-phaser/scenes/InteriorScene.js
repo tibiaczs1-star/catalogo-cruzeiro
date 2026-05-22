@@ -231,13 +231,13 @@ export class InteriorScene extends Phaser.Scene {
 
     this.player = this.buildPlayer(606, 392);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0).setVisible(false);
-    const waiterDot = this.add.circle(INTERIOR_MAP.interactionPoints.waiter.x, INTERIOR_MAP.interactionPoints.waiter.y + 52, 5, 0xffd06d, 0.68)
-      .setStrokeStyle(1, 0x05070d, 0.72)
+    const waiterDot = this.add.circle(INTERIOR_MAP.interactionPoints.waiter.x, INTERIOR_MAP.interactionPoints.waiter.y + 52, 7, 0xffd06d, 0.54)
+      .setBlendMode(Phaser.BlendModes.ADD)
       .setDepth(2.52);
     this.tweens.add({
       targets: waiterDot,
-      alpha: { from: 0.42, to: 0.72 },
-      scale: { from: 0.92, to: 1.08 },
+      alpha: { from: 0.34, to: 0.76 },
+      scale: { from: 0.82, to: 1.24 },
       duration: 1180,
       yoyo: true,
       repeat: -1,
@@ -1452,16 +1452,16 @@ export class InteriorScene extends Phaser.Scene {
       stroke: "#04060b",
       strokeThickness: 3
     }).setOrigin(0.5).setLetterSpacing(2).setAlpha(0).setVisible(false);
-    const arrow = this.buildZoneArrowMarker(
+    const actionGlow = this.buildZoneGlowMarker(
       0,
-      (zone.labelOffsetY ?? -zone.radius * 0.88) - 26,
+      (zone.labelOffsetY ?? -zone.radius * 0.88) - 12,
       zone.label || this.getZoneLabel(zone.id),
       zone.color
     );
 
-    container.add([baseGlow, shell, pulse, frame, text, chip, arrow]);
+    container.add([baseGlow, shell, pulse, frame, text, chip, actionGlow]);
     [baseGlow, shell, pulse, frame, text, chip].forEach((item) => item.setVisible(false));
-    container.ppgZone = { ...zone, baseGlow, shell, pulse, frame, text, chip, arrow };
+    container.ppgZone = { ...zone, baseGlow, shell, pulse, frame, text, chip, actionGlow };
     container.setSize(zone.radius * 2, zone.radius * 2);
     container.setInteractive(new Phaser.Geom.Circle(0, 0, zone.radius), Phaser.Geom.Circle.Contains);
     container.on("pointerover", () => this.setActiveZone(zone.id));
@@ -1475,32 +1475,32 @@ export class InteriorScene extends Phaser.Scene {
     return container;
   }
 
-  buildZoneArrowMarker(x, y, label, color) {
+  buildZoneGlowMarker(x, y, label, color) {
     const container = this.add.container(x, y).setDepth(0.4);
-    const glow = this.add.ellipse(0, 46, 72, 28, color, 0.13)
+    const floorGlow = this.add.ellipse(0, 42, 76, 28, color, 0.13)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const arrow = this.add.graphics();
-    arrow.fillStyle(color, 0.96);
-    arrow.fillRect(-5, -14, 10, 31);
-    arrow.fillTriangle(-20, 12, 20, 12, 0, 36);
-    arrow.lineStyle(2, 0x05070d, 0.58);
-    arrow.strokeRect(-5, -14, 10, 31);
-    arrow.strokeTriangle(-20, 12, 20, 12, 0, 36);
-    const labelBack = this.add.rectangle(0, -34, 92, 24, 0x05070d, 0.74)
-      .setStrokeStyle(1, color, 0.54);
-    const labelText = this.add.text(0, -35, label, {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "11px",
-      fontStyle: "bold",
-      color: "#fff6dc",
-      stroke: "#03050b",
-      strokeThickness: 3
-    }).setOrigin(0.5).setLetterSpacing(2);
-    container.add([glow, arrow, labelBack, labelText]);
+    const aura = this.add.ellipse(0, 2, 54, 66, color, 0.12)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const core = this.add.circle(0, 4, 12, color, 0.52)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    const spark = this.add.circle(0, 4, 5, 0xfff6dc, 0.82)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    const wash = this.add.ellipse(0, 4, 86, 94, color, 0.06)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    container.add([floorGlow, wash, aura, core, spark]);
     this.tweens.add({
       targets: container,
-      y: y + 8,
-      duration: 780,
+      y: y + 6,
+      duration: 900,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+    this.tweens.add({
+      targets: [floorGlow, aura, core, spark],
+      alpha: { from: 0.14, to: 0.58 },
+      scale: { from: 0.92, to: 1.12 },
+      duration: 1120,
       yoyo: true,
       repeat: -1,
       ease: "Sine.easeInOut"
@@ -1845,6 +1845,7 @@ export class InteriorScene extends Phaser.Scene {
       hotspot.ppgZone.pulse.setVisible(false).setAlpha(0);
       hotspot.ppgZone.text.setVisible(false).setAlpha(0);
       hotspot.ppgZone.chip.setVisible(false).setAlpha(0);
+      hotspot.ppgZone.actionGlow?.setVisible(true).setAlpha(active ? 1 : hotspot.ppgZone.id === "waiter" ? 0.78 : 0.46);
     });
   }
 

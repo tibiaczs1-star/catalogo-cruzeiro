@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260520-polishcam4";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260522-checkerstourney1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -211,6 +211,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".jpg",
   ".jpeg",
   ".webp",
+  ".mp4",
   ".ico",
   ".webmanifest"
 ]);
@@ -258,6 +259,7 @@ const PUBPAID_DEPOSITS_FILE = path.join(DATA_DIR, "pubpaid-deposits.json");
 const PUBPAID_WITHDRAWALS_FILE = path.join(DATA_DIR, "pubpaid-withdrawals.json");
 const PUBPAID_WALLETS_FILE = path.join(DATA_DIR, "pubpaid-wallets.json");
 const PUBPAID_PVP_FILE = path.join(DATA_DIR, "pubpaid-pvp.json");
+const PUBPAID_TOURNAMENTS_FILE = path.join(DATA_DIR, "pubpaid-tournaments.json");
 const LEGACY_BACKEND_DATA_DIR = path.join(ROOT_DIR, "backend", "data");
 const LEGACY_PUBPAID_DEPOSITS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidDeposits.json");
 const LEGACY_PUBPAID_WITHDRAWALS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWithdrawals.json");
@@ -6483,6 +6485,8 @@ function mimeFor(filePath) {
       return "image/webp";
     case ".gif":
       return "image/gif";
+    case ".mp4":
+      return "video/mp4";
     case ".ico":
       return "image/x-icon";
     case ".txt":
@@ -6623,7 +6627,6 @@ function sendFile(req, res, filePath, options = {}) {
 
 function pubpaidNoStoreHeaders() {
   return {
-    "Clear-Site-Data": '"cache"',
     "Service-Worker-Allowed": "/",
     "X-PubPaid-Build": PUBPAID_CLIENT_BUILD_VERSION
   };
@@ -16442,6 +16445,84 @@ async function handleApi(req, res, pathname, searchParams) {
     );
   }
 
+  if (req.method === "GET" && pathname === "/api/pubpaid/tournaments/checkers/state") {
+    const key = cleanTournamentKey(searchParams.get("key") || "");
+    const testMode = searchParams.get("test") === "1";
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
+    store = writePubpaidTournamentStore(store);
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/join") {
+    const body = await parseBody(req);
+    const key = cleanTournamentKey(body.key || "");
+    const testMode = Boolean(body.testMode);
+    const name = cleanShortText(body.name || "", 80);
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
+    const result = checkInCheckersTournamentParticipant(store, key, { name, testMode });
+    if (!result.ok) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { testMode, error: result.error }));
+    }
+    store = result.store;
+    store = writePubpaidTournamentStore(store);
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/start") {
+    const body = await parseBody(req);
+    const key = cleanTournamentKey(body.key || "");
+    const testMode = Boolean(body.testMode);
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
+    const tournament = getActiveCheckersTournament(store);
+    const participant = findCheckersTournamentParticipant(tournament, key);
+    if (!testMode || !participant) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, 403, buildCheckersTournamentPayload(store, key, {
+        testMode,
+        error: "A largada manual fica liberada apenas no modo teste com uma chave valida."
+      }));
+    }
+    const started = startCheckersTournamentBracket(tournament, { force: true });
+    if (!started.ok) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, started.status || 409, buildCheckersTournamentPayload(store, key, { testMode, error: started.error }));
+    }
+    store = writePubpaidTournamentStore(store);
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/move") {
+    const body = await parseBody(req);
+    const key = cleanTournamentKey(body.key || "");
+    const matchId = cleanShortText(body.matchId || "", 120);
+    const testMode = Boolean(body.testMode);
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
+    const result = moveCheckersTournamentMatch(store, key, matchId, body.move || {});
+    if (!result.ok) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { testMode, error: result.error }));
+    }
+    store = writePubpaidTournamentStore(result.store);
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/tournaments/checkers/test/advance") {
+    const body = await parseBody(req);
+    const key = cleanTournamentKey(body.key || "");
+    const matchId = cleanShortText(body.matchId || "", 120);
+    const winnerKey = cleanTournamentKey(body.winnerKey || key);
+    const testMode = Boolean(body.testMode);
+    let store = ensureDailyCheckersTournament(readPubpaidTournamentStore(), { testMode });
+    const result = advanceCheckersTournamentMatchForTest(store, key, matchId, winnerKey, { testMode });
+    if (!result.ok) {
+      store = writePubpaidTournamentStore(store);
+      return sendJson(res, result.status || 400, buildCheckersTournamentPayload(store, key, { testMode, error: result.error }));
+    }
+    store = writePubpaidTournamentStore(result.store);
+    return sendJson(res, 200, buildCheckersTournamentPayload(store, key, { testMode }));
+  }
+
   if (req.method === "GET" && pathname === "/api/pubpaid/pvp/state") {
     const authUser = readCatalogoAuthSession(req);
     if (!authUser) {
@@ -20296,6 +20377,528 @@ function buildPubpaidPvpStatePayload(store, authUser, gameId) {
     seat,
     queue: waitingEntry,
     match: matchPayload,
+  };
+}
+
+function cleanTournamentKey(value = "") {
+  return safeString(value, 80)
+    .toUpperCase()
+    .replace(/[^A-Z0-9-]/g, "")
+    .slice(0, 48);
+}
+
+function emptyPubpaidTournamentStore() {
+  return {
+    updatedAt: null,
+    checkers: {
+      activeDateKey: "",
+      events: []
+    }
+  };
+}
+
+function readPubpaidTournamentStore() {
+  const parsed = readJson(PUBPAID_TOURNAMENTS_FILE, emptyPubpaidTournamentStore());
+  return {
+    updatedAt: parsed?.updatedAt || null,
+    checkers: {
+      activeDateKey: parsed?.checkers?.activeDateKey || "",
+      events: Array.isArray(parsed?.checkers?.events) ? parsed.checkers.events : []
+    }
+  };
+}
+
+function writePubpaidTournamentStore(store = emptyPubpaidTournamentStore()) {
+  const nextStore = {
+    updatedAt: new Date().toISOString(),
+    checkers: {
+      activeDateKey: store?.checkers?.activeDateKey || "",
+      events: Array.isArray(store?.checkers?.events) ? store.checkers.events : []
+    }
+  };
+  writeJson(PUBPAID_TOURNAMENTS_FILE, nextStore);
+  return nextStore;
+}
+
+function getAcreClock(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Rio_Branco",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(now).reduce((acc, part) => {
+    if (part.type !== "literal") acc[part.type] = part.value;
+    return acc;
+  }, {});
+  const year = parts.year || "2026";
+  const month = parts.month || "01";
+  const day = parts.day || "01";
+  const hour = clampInteger(parts.hour, 0);
+  const minute = clampInteger(parts.minute, 0);
+  const second = clampInteger(parts.second, 0);
+  const dateKey = `${year}-${month}-${day}`;
+  const compactDate = `${year}${month}${day}`;
+  const minuteOfDay = hour * 60 + minute;
+  const startMinute = 20 * 60;
+  const closeMinute = startMinute + 20;
+  return {
+    timeZone: "America/Rio_Branco",
+    dateKey,
+    compactDate,
+    hour,
+    minute,
+    second,
+    minuteOfDay,
+    startsAtLocal: `${dateKey} 20:00`,
+    closesAtLocal: `${dateKey} 20:20`,
+    officialOpen: minuteOfDay >= startMinute && minuteOfDay < closeMinute,
+    beforeOpen: minuteOfDay < startMinute,
+    afterClose: minuteOfDay >= closeMinute,
+    secondsUntilOpen: Math.max(0, ((startMinute - minuteOfDay) * 60) - second),
+    secondsUntilClose: Math.max(0, ((closeMinute - minuteOfDay) * 60) - second)
+  };
+}
+
+function createDailyCheckersTournament(clock = getAcreClock()) {
+  const participants = Array.from({ length: 10 }, (_, index) => {
+    const number = index + 1;
+    return {
+      id: `damas-${clock.compactDate}-${String(number).padStart(2, "0")}`,
+      seed: number,
+      key: `DAMAS-${clock.compactDate}-${String(number).padStart(2, "0")}`,
+      name: `Participante ${String(number).padStart(2, "0")}`,
+      status: "invited",
+      checkedInAt: "",
+      eliminatedAt: "",
+      championAt: ""
+    };
+  });
+  return {
+    id: `checkers-${clock.dateKey}`,
+    gameId: "checkers",
+    title: `Torneio de Damas ${clock.dateKey}`,
+    dateKey: clock.dateKey,
+    timeZone: clock.timeZone,
+    startsAtLocal: clock.startsAtLocal,
+    closesAtLocal: clock.closesAtLocal,
+    status: "scheduled",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    participants,
+    rounds: [],
+    championParticipantId: "",
+    championAt: "",
+    testMode: true
+  };
+}
+
+function getActiveCheckersTournament(store = emptyPubpaidTournamentStore()) {
+  const activeDateKey = store?.checkers?.activeDateKey || getAcreClock().dateKey;
+  return (Array.isArray(store?.checkers?.events) ? store.checkers.events : [])
+    .find((entry) => entry?.dateKey === activeDateKey) || null;
+}
+
+function findCheckersTournamentParticipant(tournament = {}, key = "") {
+  const cleanKey = cleanTournamentKey(key);
+  if (!cleanKey) return null;
+  return (Array.isArray(tournament?.participants) ? tournament.participants : [])
+    .find((participant) => cleanTournamentKey(participant?.key) === cleanKey) || null;
+}
+
+function ensureDailyCheckersTournament(store = emptyPubpaidTournamentStore(), { testMode = false } = {}) {
+  const clock = getAcreClock();
+  const events = Array.isArray(store?.checkers?.events) ? store.checkers.events.slice() : [];
+  let tournament = events.find((entry) => entry?.dateKey === clock.dateKey);
+  if (!tournament) {
+    tournament = createDailyCheckersTournament(clock);
+    events.push(tournament);
+  }
+  tournament.window = {
+    timeZone: clock.timeZone,
+    startsAtLocal: clock.startsAtLocal,
+    closesAtLocal: clock.closesAtLocal,
+    officialOpen: clock.officialOpen,
+    open: Boolean(clock.officialOpen || testMode),
+    beforeOpen: clock.beforeOpen,
+    afterClose: clock.afterClose,
+    secondsUntilOpen: clock.secondsUntilOpen,
+    secondsUntilClose: clock.secondsUntilClose,
+    testMode: Boolean(testMode)
+  };
+  const checkedInCount = tournament.participants.filter((item) => item?.checkedInAt).length;
+  const canAutoStartByTime = !testMode && clock.afterClose;
+  if (!tournament.rounds?.length && checkedInCount >= 2 && (canAutoStartByTime || checkedInCount >= tournament.participants.length)) {
+    startCheckersTournamentBracket(tournament, { force: true });
+  } else if (!tournament.rounds?.length) {
+    tournament.status = tournament.window.open ? "checkin" : clock.afterClose ? "closed" : "scheduled";
+  }
+  tournament.updatedAt = new Date().toISOString();
+  return {
+    updatedAt: store?.updatedAt || null,
+    checkers: {
+      activeDateKey: clock.dateKey,
+      events
+    }
+  };
+}
+
+function participantToTournamentPlayer(participant = {}) {
+  return {
+    walletKey: participant.id || "",
+    name: participant.name || `Jogador ${participant.seed || ""}`.trim(),
+    email: "",
+    picture: "",
+    archetype: "tournament",
+    favorite: "checkers"
+  };
+}
+
+function createCheckersTournamentMatch(playerOne = null, playerTwo = null, roundNumber = 1, index = 0) {
+  const nowIso = new Date().toISOString();
+  const hasBoth = Boolean(playerOne && playerTwo);
+  const playerOneStarts = Math.random() < 0.5;
+  const firstSeat = playerOneStarts ? "playerOne" : "playerTwo";
+  const firstPlayer = firstSeat === "playerOne" ? playerOne : playerTwo;
+  const match = {
+    id: createRecordId("ctm"),
+    gameId: "checkers",
+    mode: "tournament",
+    round: roundNumber,
+    index,
+    status: hasBoth ? "active" : "finished",
+    createdAt: nowIso,
+    startedAt: hasBoth ? nowIso : "",
+    finishedAt: hasBoth ? "" : nowIso,
+    updatedAt: nowIso,
+    playerOneId: playerOne?.id || "",
+    playerTwoId: playerTwo?.id || "",
+    playerOne: playerOne ? participantToTournamentPlayer(playerOne) : null,
+    playerTwo: playerTwo ? participantToTournamentPlayer(playerTwo) : null,
+    board: hasBoth ? createCheckersPvPBoard() : [],
+    forcedPiece: null,
+    lastMove: null,
+    checkersHistory: [],
+    moveCount: 0,
+    turn: hasBoth ? firstSeat : "",
+    coinFlip: hasBoth ? {
+      face: playerOneStarts ? "cara" : "coroa",
+      firstSeat,
+      firstPlayerName: firstPlayer?.name || "Jogador",
+      decidedAt: nowIso
+    } : null,
+    winner: hasBoth ? "" : playerOne ? "playerOne" : playerTwo ? "playerTwo" : "",
+    winnerParticipantId: hasBoth ? "" : playerOne?.id || playerTwo?.id || "",
+    resultSummary: hasBoth
+      ? "Confronto de torneio liberado. Sem saldo, sem deposito e sem escrow."
+      : `${playerOne?.name || playerTwo?.name || "Participante"} avancou por bye.`
+  };
+  return match;
+}
+
+function startCheckersTournamentBracket(tournament = {}, { force = false } = {}) {
+  if (Array.isArray(tournament.rounds) && tournament.rounds.length) return { ok: true, tournament };
+  const checkedPlayers = (Array.isArray(tournament.participants) ? tournament.participants : [])
+    .filter((participant) => participant?.checkedInAt)
+    .sort((left, right) => clampInteger(left.seed) - clampInteger(right.seed));
+  if (checkedPlayers.length < 2) {
+    return { ok: false, status: 409, error: "O torneio precisa de pelo menos 2 participantes confirmados." };
+  }
+  const canStart = force || checkedPlayers.length >= 10 || tournament?.window?.afterClose;
+  if (!canStart) {
+    return { ok: false, status: 409, error: "As chaves fecham as 20:20 ou quando os 10 participantes confirmarem." };
+  }
+  tournament.status = "active";
+  tournament.rounds = [];
+  addCheckersTournamentRound(tournament, checkedPlayers);
+  advanceCheckersTournamentIfRoundComplete(tournament);
+  tournament.updatedAt = new Date().toISOString();
+  return { ok: true, tournament };
+}
+
+function nextPowerOfTwo(value = 2) {
+  let size = 2;
+  while (size < value) size *= 2;
+  return size;
+}
+
+function addCheckersTournamentRound(tournament = {}, players = []) {
+  const roundNumber = (Array.isArray(tournament.rounds) ? tournament.rounds.length : 0) + 1;
+  const size = nextPowerOfTwo(players.length);
+  const byes = size - players.length;
+  const queue = players.slice();
+  const matches = [];
+  for (let index = 0; index < size / 2; index += 1) {
+    let playerOne = null;
+    let playerTwo = null;
+    if (index < byes) {
+      playerOne = queue.shift() || null;
+    } else {
+      playerOne = queue.shift() || null;
+      playerTwo = queue.shift() || null;
+    }
+    matches.push(createCheckersTournamentMatch(playerOne, playerTwo, roundNumber, index));
+  }
+  tournament.rounds.push({
+    round: roundNumber,
+    name: roundNumber === 1 ? "Abertura" : players.length === 2 ? "Final" : `${players.length} classificados`,
+    createdAt: new Date().toISOString(),
+    matches
+  });
+}
+
+function getCheckersTournamentParticipantById(tournament = {}, participantId = "") {
+  return (Array.isArray(tournament.participants) ? tournament.participants : [])
+    .find((participant) => participant?.id === participantId) || null;
+}
+
+function findCheckersTournamentMatch(tournament = {}, matchId = "") {
+  for (const round of Array.isArray(tournament.rounds) ? tournament.rounds : []) {
+    const match = (Array.isArray(round.matches) ? round.matches : []).find((entry) => entry?.id === matchId);
+    if (match) return { round, match };
+  }
+  return { round: null, match: null };
+}
+
+function finishCheckersTournamentMatch(tournament = {}, match = {}, winnerSeat = "") {
+  const winnerParticipantId = winnerSeat === "playerOne" ? match.playerOneId : match.playerTwoId;
+  const loserParticipantId = winnerSeat === "playerOne" ? match.playerTwoId : match.playerOneId;
+  const winner = getCheckersTournamentParticipantById(tournament, winnerParticipantId);
+  const loser = getCheckersTournamentParticipantById(tournament, loserParticipantId);
+  const nowIso = new Date().toISOString();
+  match.status = "finished";
+  match.winner = winnerSeat;
+  match.winnerParticipantId = winnerParticipantId;
+  match.finishedAt = nowIso;
+  match.updatedAt = nowIso;
+  match.resultSummary = `${winner?.name || "Vencedor"} venceu ${loser?.name || "rival"} no torneio.`;
+  if (loser) {
+    loser.status = "eliminated";
+    loser.eliminatedAt = nowIso;
+  }
+  if (winner && winner.status !== "champion") winner.status = "checked-in";
+  advanceCheckersTournamentIfRoundComplete(tournament);
+}
+
+function advanceCheckersTournamentIfRoundComplete(tournament = {}) {
+  while (Array.isArray(tournament.rounds) && tournament.rounds.length) {
+    const lastRound = tournament.rounds[tournament.rounds.length - 1];
+    const matches = Array.isArray(lastRound.matches) ? lastRound.matches : [];
+    if (!matches.length || matches.some((match) => match.status !== "finished")) break;
+    const winners = matches
+      .map((match) => getCheckersTournamentParticipantById(tournament, match.winnerParticipantId))
+      .filter(Boolean);
+    if (winners.length <= 1) {
+      const champion = winners[0] || null;
+      const nowIso = new Date().toISOString();
+      if (champion) {
+        champion.status = "champion";
+        champion.championAt = nowIso;
+        tournament.championParticipantId = champion.id;
+        tournament.championAt = nowIso;
+        tournament.status = "finished";
+      }
+      tournament.updatedAt = nowIso;
+      break;
+    }
+    addCheckersTournamentRound(tournament, winners);
+  }
+}
+
+function checkInCheckersTournamentParticipant(store = emptyPubpaidTournamentStore(), key = "", { name = "", testMode = false } = {}) {
+  const tournament = getActiveCheckersTournament(store);
+  const participant = findCheckersTournamentParticipant(tournament, key);
+  if (!participant) {
+    return { ok: false, status: 404, error: "Chave de torneio nao encontrada para o dia atual.", store };
+  }
+  if (!tournament?.window?.open && !testMode) {
+    return { ok: false, status: 409, error: "Check-in oficial abre as 20:00 e fecha as 20:20 no horario do Acre.", store };
+  }
+  if (Array.isArray(tournament.rounds) && tournament.rounds.length) {
+    return { ok: false, status: 409, error: "As chaves ja foram fechadas para este torneio.", store };
+  }
+  if (name) participant.name = name;
+  participant.status = "checked-in";
+  participant.checkedInAt = participant.checkedInAt || new Date().toISOString();
+  const checkedInCount = tournament.participants.filter((item) => item?.checkedInAt).length;
+  if (checkedInCount >= tournament.participants.length) {
+    startCheckersTournamentBracket(tournament, { force: true });
+  } else {
+    tournament.status = "checkin";
+  }
+  tournament.updatedAt = new Date().toISOString();
+  return { ok: true, store };
+}
+
+function tournamentMoveMatchesLegalMove(candidate = {}, move = {}) {
+  const sameFrom = clampInteger(candidate?.from?.row, -1) === clampInteger(move?.from?.row, -2) &&
+    clampInteger(candidate?.from?.col, -1) === clampInteger(move?.from?.col, -2);
+  const sameTo = clampInteger(candidate?.to?.row, -1) === clampInteger(move?.to?.row, -2) &&
+    clampInteger(candidate?.to?.col, -1) === clampInteger(move?.to?.col, -2);
+  const candidateCapture = candidate.capture || null;
+  const moveCapture = move.capture || null;
+  const sameCapture = !candidateCapture && !moveCapture ||
+    Boolean(candidateCapture && moveCapture &&
+      clampInteger(candidateCapture.row, -1) === clampInteger(moveCapture.row, -2) &&
+      clampInteger(candidateCapture.col, -1) === clampInteger(moveCapture.col, -2));
+  return sameFrom && sameTo && sameCapture;
+}
+
+function moveCheckersTournamentMatch(store = emptyPubpaidTournamentStore(), key = "", matchId = "", move = {}) {
+  const tournament = getActiveCheckersTournament(store);
+  const participant = findCheckersTournamentParticipant(tournament, key);
+  if (!participant) return { ok: false, status: 404, error: "Chave invalida para este torneio.", store };
+  const { match } = findCheckersTournamentMatch(tournament, matchId);
+  if (!match) return { ok: false, status: 404, error: "Confronto de torneio nao encontrado.", store };
+  if (match.status !== "active") return { ok: false, status: 409, error: "Esse confronto nao esta ativo.", store };
+  const seat = match.playerOneId === participant.id ? "playerOne" : match.playerTwoId === participant.id ? "playerTwo" : "";
+  if (!seat) return { ok: false, status: 403, error: "Essa chave nao pertence a este confronto.", store };
+  if (match.turn !== seat) return { ok: false, status: 409, error: "Aguarde sua vez no torneio.", store };
+  const board = Array.isArray(match.board) ? match.board : createCheckersPvPBoard();
+  const legalMoves = getAllPvpCheckersMoves(board, seat, match.forcedPiece || null);
+  const legalMove = legalMoves.find((candidate) => tournamentMoveMatchesLegalMove(candidate, move));
+  if (!legalMove) return { ok: false, status: 400, error: "Lance invalido para esta chave de Damas.", store };
+  const nextBoard = applyPvpCheckersMove(board, legalMove);
+  const continuingCaptures = legalMove.capture
+    ? getAllPvpCheckersMoves(nextBoard, seat, legalMove.to).filter((entry) => entry.capture)
+    : [];
+  const winnerSeat = getPvpCheckersOutcome(nextBoard);
+  const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+  const nowIso = new Date().toISOString();
+  const moveEntry = {
+    ...legalMove,
+    seat,
+    playerName: participant.name || "Jogador",
+    index: clampInteger(match.moveCount) + 1,
+    at: nowIso,
+    crowned: Boolean(nextBoard?.[legalMove.to.row]?.[legalMove.to.col]) &&
+      nextBoard[legalMove.to.row][legalMove.to.col] !== board?.[legalMove.from.row]?.[legalMove.from.col]
+  };
+  match.board = nextBoard;
+  match.lastMove = moveEntry;
+  match.checkersHistory = (Array.isArray(match.checkersHistory) ? match.checkersHistory : []).concat(moveEntry).slice(-120);
+  match.moveCount = clampInteger(match.moveCount) + 1;
+  match.forcedPiece = continuingCaptures.length && !winnerSeat ? { ...legalMove.to } : null;
+  match.turn = winnerSeat ? "" : continuingCaptures.length ? seat : rivalSeat;
+  match.updatedAt = nowIso;
+  if (winnerSeat) finishCheckersTournamentMatch(tournament, match, winnerSeat);
+  tournament.updatedAt = new Date().toISOString();
+  return { ok: true, store };
+}
+
+function advanceCheckersTournamentMatchForTest(store = emptyPubpaidTournamentStore(), key = "", matchId = "", winnerKey = "", { testMode = false } = {}) {
+  if (!testMode) return { ok: false, status: 403, error: "Avanco manual so existe no modo teste.", store };
+  const tournament = getActiveCheckersTournament(store);
+  const participant = findCheckersTournamentParticipant(tournament, key);
+  const winner = findCheckersTournamentParticipant(tournament, winnerKey);
+  if (!participant || !winner) return { ok: false, status: 404, error: "Chave teste invalida.", store };
+  const { match } = findCheckersTournamentMatch(tournament, matchId);
+  if (!match) return { ok: false, status: 404, error: "Confronto teste nao encontrado.", store };
+  if (match.status !== "active") return { ok: false, status: 409, error: "Esse confronto ja foi resolvido.", store };
+  const winnerSeat = match.playerOneId === winner.id ? "playerOne" : match.playerTwoId === winner.id ? "playerTwo" : "";
+  if (!winnerSeat) return { ok: false, status: 403, error: "A chave vencedora nao pertence a este confronto.", store };
+  finishCheckersTournamentMatch(tournament, match, winnerSeat);
+  tournament.updatedAt = new Date().toISOString();
+  return { ok: true, store };
+}
+
+function publicCheckersTournamentParticipant(participant = {}, { includeKey = false } = {}) {
+  return {
+    id: participant.id || "",
+    seed: clampInteger(participant.seed),
+    name: participant.name || "Participante",
+    status: participant.status || "invited",
+    checkedIn: Boolean(participant.checkedInAt),
+    checkedInAt: participant.checkedInAt || "",
+    ...(includeKey ? { key: participant.key || "" } : {})
+  };
+}
+
+function publicCheckersTournamentMatch(match = {}, tournament = {}, { includeBoard = false } = {}) {
+  const playerOne = getCheckersTournamentParticipantById(tournament, match.playerOneId);
+  const playerTwo = getCheckersTournamentParticipantById(tournament, match.playerTwoId);
+  return {
+    id: match.id || "",
+    round: clampInteger(match.round),
+    index: clampInteger(match.index),
+    status: match.status || "scheduled",
+    playerOneId: match.playerOneId || "",
+    playerTwoId: match.playerTwoId || "",
+    playerOne: playerOne ? participantToTournamentPlayer(playerOne) : null,
+    playerTwo: playerTwo ? participantToTournamentPlayer(playerTwo) : null,
+    winnerParticipantId: match.winnerParticipantId || "",
+    winner: match.winner || "",
+    turn: match.turn || "",
+    coinFlip: match.coinFlip || null,
+    moveCount: clampInteger(match.moveCount),
+    lastMove: match.lastMove || null,
+    forcedPiece: match.forcedPiece || null,
+    resultSummary: match.resultSummary || "",
+    updatedAt: match.updatedAt || "",
+    ...(includeBoard ? {
+      board: Array.isArray(match.board) ? match.board : [],
+      checkersHistory: Array.isArray(match.checkersHistory) ? match.checkersHistory : []
+    } : {})
+  };
+}
+
+function buildCheckersTournamentPayload(store = emptyPubpaidTournamentStore(), key = "", { testMode = false, error = "" } = {}) {
+  const tournament = getActiveCheckersTournament(store);
+  const participant = findCheckersTournamentParticipant(tournament, key);
+  let currentMatch = null;
+  if (participant) {
+    const activeMatches = [];
+    (Array.isArray(tournament?.rounds) ? tournament.rounds : []).forEach((round) => {
+      (Array.isArray(round.matches) ? round.matches : []).forEach((match) => {
+        if (match.status === "active" && [match.playerOneId, match.playerTwoId].includes(participant.id)) activeMatches.push(match);
+      });
+    });
+    currentMatch = activeMatches[0] || null;
+  }
+  const publicTournament = tournament ? {
+    id: tournament.id || "",
+    title: tournament.title || "Torneio de Damas",
+    gameId: "checkers",
+    status: tournament.status || "scheduled",
+    dateKey: tournament.dateKey || "",
+    timeZone: tournament.timeZone || "America/Rio_Branco",
+    startsAtLocal: tournament.startsAtLocal || "",
+    closesAtLocal: tournament.closesAtLocal || "",
+    window: tournament.window || null,
+    checkedInCount: (Array.isArray(tournament.participants) ? tournament.participants : []).filter((item) => item?.checkedInAt).length,
+    participantCount: (Array.isArray(tournament.participants) ? tournament.participants : []).length,
+    championParticipantId: tournament.championParticipantId || "",
+    champion: tournament.championParticipantId
+      ? publicCheckersTournamentParticipant(getCheckersTournamentParticipantById(tournament, tournament.championParticipantId) || {})
+      : null,
+    participants: (Array.isArray(tournament.participants) ? tournament.participants : [])
+      .map((item) => publicCheckersTournamentParticipant(item, { includeKey: testMode })),
+    rounds: (Array.isArray(tournament.rounds) ? tournament.rounds : []).map((round) => ({
+      round: round.round,
+      name: round.name || "",
+      matches: (Array.isArray(round.matches) ? round.matches : []).map((match) =>
+        publicCheckersTournamentMatch(match, tournament, { includeBoard: currentMatch?.id === match.id })
+      )
+    }))
+  } : null;
+  return {
+    ok: !error,
+    error,
+    testMode: Boolean(testMode),
+    tournament: publicTournament,
+    participant: participant ? publicCheckersTournamentParticipant(participant, { includeKey: true }) : null,
+    currentMatch: currentMatch ? publicCheckersTournamentMatch(currentMatch, tournament, { includeBoard: true }) : null,
+    testKeys: testMode && tournament
+      ? tournament.participants.map((participantItem) => ({
+          key: participantItem.key,
+          name: participantItem.name,
+          checkedIn: Boolean(participantItem.checkedInAt),
+          status: participantItem.status
+        }))
+      : []
   };
 }
 

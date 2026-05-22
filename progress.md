@@ -82,3 +82,46 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Incluidos hooks `window.render_game_to_text` e `window.advanceTime(ms)` para teste automatizado.
 - Esta versao e um prototipo premium isolado: nao mexe em carteira, saldo, PvP real ou runtime canonico PubPaid.
 - Proximos passos: validar screenshot/playtest, ajustar peso da fisica, caçapas e controles mobile antes de integrar ao `/pubpaid.html`.
+
+## Atualizacao 2026-05-19 - chessfocus4
+
+- PubPaid foi reduzido para tres mesas ativas: Sinuca, Damas e Xadrez.
+- 21, Poker, Truco e Dados foram preservados em backup restauravel: backups/pubpaid-disabled-games-20260519-1235.
+- Xadrez recebeu pecas visuais em CSS por tipo/cor no lugar dos glifos unicode, com 32 pecas renderizadas no tabuleiro.
+- Audio agora inicia desligado e os testes foram feitos com estado music=off / LIGAR SOM.
+- Validacao: node --check em app/dom/server, npm run guard:pubpaid, Playwright screenshot do lobby e do Xadrez sem console errors. Primeira tentativa do web_game_client falhou por redirect de versao; segunda passou com URL versionada.
+- Proximo: usuario revisar se o visual das pecas do Xadrez esta aprovado antes de repetir o padrao em Damas e Sinuca.
+
+## Atualizacao 2026-05-19 - chesspro1
+
+- Xadrez PubPaid virou uma mesa mais profissional: `chess.js` foi levado para o cliente Demo e reforcado no servidor PvP para lances legais reais, SAN, xeque, mate, empate, roque, en passant e promocao.
+- A interface agora mostra maozinha animada, origem/destino legal, ultimo lance, rei em xeque, historico lateral e painel de guia.
+- Lances obrigatorios aparecem quando ha xeque ou quando existe so um lance legal; o cenario `e4, f6, Qh5+` validou destaque obrigatorio em `g7-g6`.
+- Sons novos foram adicionados para lance, captura, xeque e mate, mantendo o som desligado por padrao durante testes.
+- Validacao: `/api/pubpaid/build` em `20260519-chesspro1`, `node --check` em `server.js`, `domGameInterface.js` e `chipTechSoundtrack.js`, `npm run guard:pubpaid`, Playwright com `music=off` e screenshots `.codex-temp/pubpaid-chesspro1-after-e4.png` / `.codex-temp/pubpaid-chesspro1-forced-check.png`.
+
+## Atualizacao 2026-05-19 - mobileland1
+
+- Rodada de performance/responsividade do PubPaid: BootScene deixou de pre-carregar frames de intro nao usados e imagens grandes de jogos/salas que nao entram no corte atual.
+- O gate de update ficou mais curto e o cache/service worker nao e limpo quando a versao local ja coincide, reduzindo custo de reabrir o jogo.
+- URLs de assets repetidos foram alinhadas para evitar download duplicado da rua; build atual: `20260519-mobileland1`.
+- Decisao final do usuario: Sinuca e jogos PubPaid em celular devem ser sempre horizontais. Retrato mobile agora bloqueia com `Mude para horizontal` e nao deixa a partida prosseguir.
+- Paisagem estreita recebeu ajustes para Xadrez, Damas e Sinuca; o botao de audio some durante mesas para nao cobrir placar/HUD.
+- Validacao: `/api/pubpaid/build` em `20260519-mobileland1`, `node --check`, `npm run guard:pubpaid`, Playwright confirmou retrato 375x667 bloqueado e paisagem 667x375/640x360/844x390 sem overflow e com `music=off`.
+
+## Atualizacao 2026-05-19 - poolfix2
+
+- Correção direta do PNG de Sinuca: caçapas fisicas e DOM foram colocadas para dentro da mesa e reduzidas para nao parecerem fora da borda.
+- A topbar global fica escondida durante a Sinuca, removendo `POOL-GAME / Carteira` de cima da mesa.
+- O layout demo em mobile landscape mantém a mesa centralizada e deixa informacoes somente no painel inferior.
+- Build atual: `20260519-poolfix2`.
+- Validacao: servidor reiniciado na porta 3000, `/api/pubpaid/build` em `20260519-poolfix2`, `node --check`, `npm run guard:pubpaid` e `node .codex-temp/pubpaid-mobileopt-check.mjs` com `failed=[]`, `music=off` e captura `.codex-temp/pubpaid-mobileopt-pool-844x390.png`.
+
+## Atualizacao 2026-05-22 - checkerstourney1
+
+- Damas ganhou modo separado `Torneio`, sem deposito, sem saldo travado, sem escrow e sem backend financeiro.
+- Backend cria torneio diario no horario do Acre com 10 chaves `DAMAS-AAAAMMDD-01..10`, check-in, fechamento de chaves e chaveamento single elimination ate 1 campeao.
+- Modo teste `tournamentTest=1` mostra as 10 chaves, permite fechar chaves manualmente e simular vencedores para validar o bracket.
+- Frontend ganhou painel de torneio no lobby de Damas, entrada por chave/nome, bracket, estado do confronto atual e retorno ao painel apos partida.
+- Responsividade ajustada: painel de torneio em retrato mobile fica por cima do gate de orientacao, sem overflow horizontal e com rolagem interna.
+- Validacao: `node --check` em `server.js`, `domGameInterface.js`, `tournamentService.js`, `app.js` e `BootScene.js`; `npm run guard:pubpaid`; `/api/pubpaid/build` em `20260522-checkerstourney1`; smoke backend com 10 participantes -> 4 rodadas -> 1 campeao; Playwright desktop/mobile e clique real de chave + entrada pela UI sem erros de console.

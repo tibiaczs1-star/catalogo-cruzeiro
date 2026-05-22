@@ -143,7 +143,7 @@ export class StreetScene extends Phaser.Scene {
       repeat: -1,
       ease: "Sine.easeInOut"
     });
-    this.doorArrow = this.buildWorldArrowMarker(MAIN_DOOR.x, MAIN_DOOR.y - MAIN_DOOR.height / 2 - 18, "ENTRADA", 0xffd06d, 2.72);
+    this.doorArrow = this.buildWorldGlowMarker(MAIN_DOOR.x, MAIN_DOOR.y - MAIN_DOOR.height / 2 + 10, "ENTRADA", 0xffd06d, 2.72);
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
@@ -295,32 +295,32 @@ export class StreetScene extends Phaser.Scene {
     });
   }
 
-  buildWorldArrowMarker(x, y, label, color, depth = 2.7) {
+  buildWorldGlowMarker(x, y, label, color, depth = 2.7) {
     const container = this.add.container(x, y).setDepth(depth);
-    const halo = this.add.ellipse(0, 44, 78, 30, color, 0.14)
+    const floorGlow = this.add.ellipse(0, 54, 92, 34, color, 0.16)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const arrow = this.add.graphics();
-    arrow.fillStyle(color, 0.96);
-    arrow.fillRect(-5, -18, 10, 34);
-    arrow.fillTriangle(-22, 12, 22, 12, 0, 38);
-    arrow.lineStyle(2, 0x05070d, 0.56);
-    arrow.strokeRect(-5, -18, 10, 34);
-    arrow.strokeTriangle(-22, 12, 22, 12, 0, 38);
-    const textBack = this.add.rectangle(0, -37, 96, 25, 0x05070d, 0.72)
-      .setStrokeStyle(1, color, 0.52);
-    const text = this.add.text(0, -38, label, {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "12px",
-      fontStyle: "bold",
-      color: "#fff6dc",
-      stroke: "#03050b",
-      strokeThickness: 3
-    }).setOrigin(0.5).setLetterSpacing(2);
-    container.add([halo, arrow, textBack, text]);
+    const aura = this.add.ellipse(0, 8, 58, 76, color, 0.12)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const core = this.add.circle(0, 12, 13, color, 0.56)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    const spark = this.add.circle(0, 12, 5, 0xfff6dc, 0.82)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    const wash = this.add.ellipse(0, 6, 92, 112, color, 0.06)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    container.add([floorGlow, wash, aura, core, spark]);
     this.tweens.add({
       targets: container,
-      y: y + 9,
-      duration: 760,
+      y: y + 6,
+      duration: 920,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+    this.tweens.add({
+      targets: [aura, core, spark, floorGlow],
+      alpha: { from: 0.12, to: 0.48 },
+      scale: { from: 0.92, to: 1.12 },
+      duration: 1180,
       yoyo: true,
       repeat: -1,
       ease: "Sine.easeInOut"
@@ -500,9 +500,9 @@ export class StreetScene extends Phaser.Scene {
     this.hotspots.forEach((item) => {
       const data = item.ppgHotspot;
       if (!data?.glow) return;
-      data.glow?.setAlpha(item === hotspot ? 0.22 : 0.08);
-      data.softGlow?.setAlpha(item === hotspot ? 0.12 : 0.03);
-      data.pulse?.setAlpha(item === hotspot ? 0.22 : 0.04);
+      data.glow?.setAlpha(item === hotspot ? 0.12 : 0.035);
+      data.softGlow?.setAlpha(item === hotspot ? 0.16 : 0.055);
+      data.pulse?.setAlpha(item === hotspot ? 0.16 : 0.035);
       data.text?.setAlpha(item === hotspot ? 1 : 0.9);
       data.label?.setAlpha(item === hotspot ? 1 : 0.92);
       data.status?.setAlpha(item === hotspot ? 0.96 : 0.82);

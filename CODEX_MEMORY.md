@@ -2,6 +2,12 @@
 
 Atualizado: 2026-05-20
 
+## Protocolo Comercial - Propagandas
+
+- Para automacoes de WhatsApp/Facebook/Instagram, usar o protocolo local `.codex-memory/propaganda-automation-protocol.md`.
+- Regra curta: WhatsApp primeiro por categoria; grupos de venda recebem gift cards/servicos digitais/T.I; grupos Uber/transporte recebem somente motorista particular; Facebook Marketplace vem depois com anuncios separados; Instagram fica sempre por ultimo e so quando o usuario mandar abrir.
+- Usar sempre plugin/controle direto quando a tarefa envolver apps abertos; nunca postar por clique cego em conversa individual.
+
 ## Rodada Atual - 20260520-polishcam1
 
 - Damas e Xadrez PubPaid receberam acabamento visual sem mudar o fluxo aprovado: Damas manteve a arena 3D, mas as pedras agora sao redondas e com contraste forte contra o tabuleiro.
@@ -231,6 +237,14 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Build local: `20260519-mobileland1`.
 - Otimizacao PubPaid mobile: BootScene deixou de pre-carregar frames de intro nao usados e imagens grandes de jogos/salas fora do corte atual; o app evita limpar caches/service workers quando a build local ja coincide; URLs de assets da rua/damas foram alinhadas para evitar download duplicado.
 - Regra de orientacao final: em celular/touch, retrato volta a bloquear com `Mude para horizontal`; o jogo so segue em paisagem. A Sinuca nao deve ser jogada em retrato.
+- Build local: `20260521-premiumgames2`.
+- Damas/Xadrez PubPaid: xadrez ganhou moeda/coin toss visual tambem no treino, com quem comeca e cor das pecas; Damas/Xadrez mostram `Movimento feito...` por 1,5s antes da virada/IA; botoes `Mesas` voltam ao lobby e timers de IA/intro sao limpos ao sair.
+- Cache/entrada PubPaid: removido `Clear-Site-Data` do header PubPaid, build atualizado para `20260521-premiumgames2`, assets do BootScene agora usam `window.pubpaidBuildVersion`, e o app aquece cache local seguro (`pubpaid_safe_runtime_cache`) de CSS/JS/assets nao sensiveis enquanto continua checando `/api/pubpaid/build` com `no-store`.
+- UI premium: camera ficou discreta por drag/touch/mouse, sem bolinha grande; Xadrez recebeu avatares, intro com moeda, fundo mais rico e tabuleiro reduzido para nao cobrir sidecar; Damas foi reduzida no desktop, manteve pedras redondas/contraste e esconde o gate de orientacao quando a mesa ja esta ativa.
+- Indicadores PubPaid: porta/garcom/NPCs seguem como brilho premium sem setas ou caixas duras; brilho do garcom fica visivel mesmo sem chegar perto.
+- Validacao local: servidor `PORT=3002`, `/api/pubpaid/build` respondeu `20260521-premiumgames2`; `node --check` em `domGameInterface.js`, `app.js`, `BootScene.js`, `StreetScene.js`, `InteriorScene.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; Playwright desktop/mobile landscape para Damas e Xadrez sem erros de console, 64 casas, loading 100%, cache local preenchido, `Mesas` visivel e retorno ao lobby confirmado.
+- Evidencias: `.codex-temp/premiumgames2-checkers-desktop.png`, `.codex-temp/premiumgames2-checkers-mobile-landscape.png`, `.codex-temp/premiumgames2-chess-desktop.png`, `.codex-temp/premiumgames2-chess-mobile-landscape.png`, `.codex-temp/premiumgames2-chess-desktop-intro.png`.
+
 - Responsividade em paisagem mantida para Lobby, Xadrez, Damas e Sinuca; o botao de audio fica oculto durante mesas para nao cobrir HUD/placar.
 - Validacao local: servidor reiniciado na porta 3000, `/api/pubpaid/build` respondeu `20260519-mobileland1`; `node --check` em `app.js`, `BootScene.js`, `domGameInterface.js` e script de validacao; `npm run guard:pubpaid`; Playwright confirmou bloqueio em retrato 375x667, lobby em 667x375, Xadrez em 667x375, Damas em 640x360 e Sinuca em 844x390, todos com `music=off` e sem overflow.
 - Evidencias: `.codex-temp/pubpaid-mobileopt-portrait-gate-375x667.png`, `.codex-temp/pubpaid-mobileopt-pool-844x390.png`, `.codex-temp/pubpaid-mobileopt-report.json` e `.codex-temp/web-game-mobileland/state-1.json`.
@@ -311,3 +325,10 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Layout de Damas em mobile landscape foi compactado para manter tabuleiro, score e botoes dentro do viewport, sem scroll.
 - Teste Playwright local validou desktop, mobile landscape e mobile portrait; teste com Google mockado confirmou `Tocar para intro` e que audio nao inicia a intro.
 - Online Render confirmou `/api/pubpaid/build` em `20260517-mobilefix1`; smoke online mobile landscape com Google mockado abriu intro pelo botao, manteve audio separado, moveu Damas Demo por tap, sem mao e sem overflow.
+
+- Build local: `20260522-checkerstourney1`.
+- Damas recebeu modo `Torneio` separado do Demo/PvP real. O torneio usa chaves diarias, 10 participantes de teste, check-in, chaveamento single elimination e partida de Damas com as regras oficiais, mas nao chama carteira, saldo, deposito, escrow ou backend financeiro.
+- Horario oficial configurado no backend para 20:00-20:20 em `America/Rio_Branco`; em modo teste `tournamentTest=1`, as 10 chaves aparecem no painel e o fechamento pode ser simulado.
+- UI nova em `pubpaid.html`/`domGameInterface.js`: botao `Torneio` no card de Damas, painel com chave/nome, lista de chaves de teste, bracket, confronto atual e retorno ao painel apos a partida.
+- Responsividade: painel de torneio mobile portrait agora fica acima do gate de orientacao, sem overflow horizontal, com rolagem interna e botoes empilhados.
+- Validacao local: `node --check` em JS tocado, `npm run guard:pubpaid`, `/api/pubpaid/build` em `20260522-checkerstourney1`, smoke API com 10 participantes -> 4 rodadas -> campeao, Playwright desktop/mobile e clique real na UI de chave/entrada sem erros de console. Nao versionar `data/pubpaid-tournaments.json`; ele e gerado em runtime.

@@ -1,33 +1,32 @@
 # Current State
 
-Updated: 2026-05-20T18:18:00.000Z
+Updated: 2026-05-22T03:45:18.114Z
 
 ## Active Goal
 
-- Acabamento visual de Damas e Xadrez PubPaid com contraste, pecas e camera
+- PubPaid Damas Torneio sem financeiro
 
 ## Summary
 
-Build local 20260520-polishcam1: Damas manteve a arena aprovada, agora com pedras redondas e cores separadas do tabuleiro. Xadrez segue fullscreen 3D, com pecas mais altas, contraste reforcado, seta no lugar da maozinha, setas na porta/NPCs e controle de camera em bolinha direcional para desktop/mobile.
+Build 20260522-checkerstourney1 adiciona modo Torneio de Damas separado: 10 chaves diarias de teste, check-in, chaveamento single elimination, confronto de Damas reaproveitando as regras oficiais e sem saldo/deposito/escrow. Backend smoke validou 10 participantes -> 4 rodadas -> 1 campeao; UI validada em desktop e mobile.
 
 ## Next
 
-- Subir commit e confirmar Render /api/pubpaid/build=20260520-polishcam1.
-- Repetir smoke mobile de Xadrez e Damas no Render.
+- Antes de deploy
+- stage apenas arquivos PubPaid relacionados e assets de intro ja aprovados se ainda nao estiverem no Git
+- evitar stage de news/output/test-results/backups
+- apos push verificar Render em /api/pubpaid/build
 
 ## Files In Focus
 
-- pubpaid-phaser.css
+- server.js
 - pubpaid.html
+- pubpaid-phaser.css
 - pubpaid-phaser/app.js
 - pubpaid-phaser/ui/domGameInterface.js
-- pubpaid-phaser/scenes/StreetScene.js
-- pubpaid-phaser/scenes/InteriorScene.js
-- server.js
+- pubpaid-phaser/services/tournamentService.js
 
 ## Assets In Focus
 
-- .codex-temp/chess3d-mobile.png
-- .codex-temp/chess3d-desktop.png
-- .codex-temp/checkerscam-desktop.png
-- .codex-temp/checkerscam-mobile.png
+- .codex-temp/tourney-mobile-fixed.png
+- .codex-temp/tourney-join-ui.png

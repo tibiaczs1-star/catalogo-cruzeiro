@@ -1,7 +1,34 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-20T16:52:20.492Z",
+  "lastUpdatedAt": "2026-05-22T03:44:50.353Z",
   "orders": [
+    {
+      "id": "2026-05-21-atualizar-link-catalogo-czs-whatsapp",
+      "createdAt": "2026-05-21T17:05:00-05:00",
+      "updatedAt": "2026-05-21T17:05:00-05:00",
+      "status": "whatsapp-link-updated",
+      "source": "chat",
+      "rawRequest": "apague de cada grupo do whats depois o link para o catalogo czs e ponnha o novo  https://chat.whatsapp.com/BBRbkVPfdDYF7Gxgr8pgvV q e esse",
+      "summary": "Atualizar grupos de venda do WhatsApp com o novo link ativo do Catalogo CZS.",
+      "normalizedTasks": [
+        "validar cada grupo antes de enviar",
+        "nao apagar mensagens que nao sejam do usuario ou que nao estejam visiveis com seguranca",
+        "postar novo link do Catalogo CZS nos grupos de venda usados na campanha"
+      ],
+      "filesTouched": [
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "whatsapp",
+        "catalogo-czs",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "usar este link como link ativo do Catalogo CZS em proximas postagens: https://chat.whatsapp.com/BBRbkVPfdDYF7Gxgr8pgvV"
+      ],
+      "notes": "Link novo enviado em VENDE-SE TUDO EM CZS, R.ALVES E REGIAO VENDAS, VENDAS E ALUGUEL CZS e GRUPO DE DESAPEGO. Link antigo nao foi apagado quando nao apareceu como mensagem segura do usuario."
+    },
     {
       "id": "2026-05-20-corrigir-fim-livre-e-bola-na-mao-sinuca",
       "createdAt": "2026-05-20T09:58:00-05:00",
@@ -1702,6 +1729,36 @@
       "notes": ""
     },
     {
+      "id": "2026-05-20-refinar-precificacao-ggmax-por-valor-real-do-credito-e-ampliar-mapa-para-streami",
+      "createdAt": "2026-05-20T16:34:41.018Z",
+      "updatedAt": "2026-05-20T16:34:41.018Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Refinar garimpagem GGMAX: verificar valor real dos créditos antes de definir preço; não vender gift de R como se fosse genérico; incluir janelas/acessos Netflix, ChatGPT e outras assinaturas, com mais profundidade.",
+      "summary": "Refinar precificação GGMAX por valor real do crédito e ampliar mapa para streaming/IA/janelas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-adicionar-categorias-digitais-amplas-e-servico-de-suporte-remoto-t-i-logistico-c",
+      "createdAt": "2026-05-20T16:35:30.783Z",
+      "updatedAt": "2026-05-20T16:35:30.783Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Pode mandar ver com Game Pass, Netflix/streaming, ChatGPT/Gemini, contas da PlayStation e tudo que der; incluir tambem anuncio: ajeitamos seu computador sem sair de casa, alem do celular, e so entrar em contato -- grupo T.I Logístico CZS.",
+      "summary": "Adicionar categorias digitais amplas e servico de suporte remoto T.I Logístico CZS na rotina de divulgacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
       "id": "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat",
       "createdAt": "2026-05-20T16:52:20.492Z",
       "updatedAt": "2026-05-20T16:52:20.492Z",
@@ -1729,6 +1786,211 @@
         "3D",
         "mobile",
         "Render"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-criar-propagandas-prontas-para-whatsapp-grupos-da-rotina-de-vendas-digitais-e-su",
+      "createdAt": "2026-05-20T17:17:32.265Z",
+      "updatedAt": "2026-05-20T17:17:32.265Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Começar a fazer propagandas para WhatsApp/grupos com produtos digitais: gift cards por valor real do crédito, Robux, Uber, streaming, IA, Game Pass, Netflix, ChatGPT, Canva/CapCut e T.I Logístico CZS.",
+      "summary": "Criar propagandas prontas para WhatsApp/grupos da rotina de vendas digitais e suporte T.I Logístico CZS.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-propagandas-devem-sempre-sair-com-imagem-arte-junto-da-copy",
+      "createdAt": "2026-05-20T17:18:19.638Z",
+      "updatedAt": "2026-05-20T17:18:19.638Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Regra para propagandas: sempre criar/acompanhar com imagens, não apenas texto, nas campanhas de WhatsApp/grupos.",
+      "summary": "Propagandas devem sempre sair com imagem/arte junto da copy.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-garantir-que-o-xadrez-pubpaid-abra-sempre-em-tela-cheia-sem-moldura-de-pagina-he",
+      "createdAt": "2026-05-20T17:31:33.417Z",
+      "updatedAt": "2026-05-20T17:31:33.417Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "sempre tela cheia sempre",
+      "summary": "Garantir que o Xadrez PubPaid abra sempre em tela cheia, sem moldura de pagina, header, placar inferior ou botoes ocupando espaco.",
+      "normalizedTasks": [
+        "forcar Xadrez fullscreen",
+        "ocultar barras externas",
+        "validar mobile e desktop",
+        "subir online"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "PubPaid",
+        "Xadrez",
+        "fullscreen",
+        "mobile",
+        "Render"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-20-adicionar-motorista-particular-julia-oliveira-na-rotina-de-propagandas-do-whatsa",
+      "createdAt": "2026-05-20T19:29:31.157Z",
+      "updatedAt": "2026-05-20T19:29:31.157Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Adicionar propaganda da Julia Oliveira, Motorista Particular, usando a imagem enviada: seguro, pontual, conforto, telefone (68)99900-5172.",
+      "summary": "Adicionar Motorista Particular Julia Oliveira na rotina de propagandas do WhatsApp.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-21-separar-propagandas-por-grupo-vendas-em-grupos-de-venda-motorista-em-uber-transp",
+      "createdAt": "2026-05-21T19:23:29.527Z",
+      "updatedAt": "2026-05-21T19:23:29.527Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Correção operacional: não postar propaganda em qualquer chat. Separar destino por tipo: grupos de venda recebem vendas/serviços digitais/T.I; grupos Uber/transporte recebem apenas motorista particular; Facebook pode receber tudo depois; Instagram só no final quando o usuário mandar abrir. Antes de enviar, confirmar grupo alvo e categoria.",
+      "summary": "Separar propagandas por grupo: vendas em grupos de venda, motorista em Uber/transporte, Facebook depois, Instagram por último.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-21-regra-final-de-postagem-whatsapp-por-categoria-depois-facebook-marketplace-insta",
+      "createdAt": "2026-05-21T19:28:11.408Z",
+      "updatedAt": "2026-05-21T19:28:11.408Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Regra final confirmada pelo usuario para propagandas: WhatsApp primeiro e por categoria; grupos de venda recebem vendas/servicos digitais/T.I; grupos Uber/transporte recebem apenas motorista Julia; Facebook Marketplace vem depois do WhatsApp e pode receber todos os anuncios separados; Instagram e somente no final, quando o usuario abrir/autorizar.",
+      "summary": "Regra final de postagem: WhatsApp por categoria, depois Facebook Marketplace, Instagram so no final.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-21-criar-protocolo-operacional-para-automacao-de-propagandas-por-whatsapp-facebook-",
+      "createdAt": "2026-05-21T20:01:25.948Z",
+      "updatedAt": "2026-05-21T20:01:25.948Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Criar protocolo para automações de propaganda serem mais rápidas e seguras: listar destinos antes, separar por categoria, validar chat/grupo antes de enviar, WhatsApp primeiro, Facebook Marketplace depois, Instagram só no final.",
+      "summary": "Criar protocolo operacional para automação de propagandas por WhatsApp, Facebook Marketplace e Instagram.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-21-postar-giro-de-noticias-no-catalogo-czs-e-chamar-grupos-de-venda",
+      "createdAt": "2026-05-21T17:16:10.5451289-05:00",
+      "updatedAt": "2026-05-21T18:13:15.4032249-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Pegar noticias de hoje e ontem, postar no Catálogo CZS e chamar os grupos de venda, excluindo grupos de Uber.",
+      "summary": "Postar giro de noticias no Catálogo CZS e CTA nos grupos de venda validados.",
+      "normalizedTasks": [
+        "Publicar giro de noticias 21/05 e 20/05 no Catálogo CZS",
+        "Enviar CTA do Catálogo CZS nos grupos VENDE-SE TUDO EM CZS, R.ALVES E REGIÃO VENDAS, VENDAS E ALUGUEL CZS e GRUPO DE DESAPEGO",
+        "Excluir grupos Uber, Gazin e grupos travados por admin"
+      ],
+      "filesTouched": [
+        ".codex-temp/whatsapp-news-catalogo-final.png",
+        ".codex-temp/news-cards/manifest.json",
+        ".codex-temp/news-cards/01-caps-centro-idoso.png",
+        ".codex-temp/news-cards/02-ifac-professor.png",
+        ".codex-temp/news-cards/03-desbarrancamento-jurua.png",
+        ".codex-temp/news-cards/04-ramal-praia-grande.png",
+        ".codex-temp/news-cards/05-operacao-mute.png",
+        ".codex-temp/news-cards/06-seca-el-nino.png",
+        ".codex-temp/news-cards/07-cavalgada-mancio-lima.png",
+        ".codex-temp/news-cards/08-ufac-jurua.png",
+        ".codex-temp/news-cards/09-senac-cursos.png",
+        ".codex-temp/whatsapp-news-cards-final-check.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "WhatsApp",
+        "Catálogo CZS",
+        "noticias",
+        "grupos de venda"
+      ],
+      "nextSteps": [
+        "Instagram somente quando o usuario abrir/autorizar"
+      ],
+      "notes": "Giro em texto e CTA dos grupos de venda foram enviados antes. Depois da correcao do usuario, os 9 cards PNG foram postados no Catálogo CZS com legenda individual. Conferencia final confirmou todos os titulos no snapshot do WhatsApp."
+    },
+    {
+      "id": "2026-05-21-memory-cleanup-diagnosis",
+      "date": "2026-05-21",
+      "source": "user",
+      "text": "limpe sua memoria e fique melhor se diagnostique e se ageite",
+      "status": "registered",
+      "notes": "Criada nota ad_hoc de limpeza: reduzir ruido historico, priorizar frame ativo do Projeto Codex, modo economico e separacao jogo/site."
+    },
+    {
+      "id": "2026-05-22-modo-damas-torneio-testavel-sem-financeiro",
+      "createdAt": "2026-05-22T03:44:50.353Z",
+      "updatedAt": "2026-05-22T03:44:50.353Z",
+      "status": "implemented",
+      "source": "chat",
+      "rawRequest": "Criar modo Damas Torneio separado, com chaves no dia, 10 participantes de teste, chaveamento ate 1 vencedor, sem deposito/escrow/backend financeiro.",
+      "summary": "Modo Damas Torneio testavel sem financeiro",
+      "normalizedTasks": [
+        "backend torneio diario",
+        "10 chaves teste",
+        "frontend painel torneio",
+        "validacao desktop mobile"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pubpaid.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/services/tournamentService.js"
+      ],
+      "assetRefs": [
+        ".codex-temp/tourney-playwright/shot-3.png",
+        ".codex-temp/tourney-mobile-fixed.png",
+        ".codex-temp/tourney-join-ui.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "Damas",
+        "torneio",
+        "checkers"
       ],
       "nextSteps": [],
       "notes": ""

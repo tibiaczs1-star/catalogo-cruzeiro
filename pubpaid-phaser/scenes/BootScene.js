@@ -1,7 +1,7 @@
-import { applyPixelTextureFilters } from "../core/assetRegistry.js";
+﻿import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260518-gamescomplete3";
+const ASSET_VERSION = window.pubpaidBuildVersion || "20260522-checkerstourney1";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {
@@ -14,17 +14,13 @@ export class BootScene extends Phaser.Scene {
       window.pubpaidAssetProgress = Math.max(0, Math.min(1, progress));
       this.game.events.emit("pubpaid:assets-progress", { progress: window.pubpaidAssetProgress });
     });
-    for (let index = 1; index <= 16; index += 1) {
+    [13, 16].forEach((index) => {
       const padded = String(index).padStart(2, "0");
       this.load.image(`intro-frame-${padded}`, versionedAsset(`./assets/pubpaid/intro/pubpaid-intro-seq-${padded}.jpeg`));
-    }
+    });
     this.load.image("street-bg", versionedAsset("./assets/pubpaid-v2-street-bg-v1.png"));
     this.load.image("interior-bg", versionedAsset("./assets/pubpaid-interior-v5.png"));
     this.load.image("game-lobby-bg", versionedAsset("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png"));
-    this.load.image("game-darts-room", versionedAsset("./assets/pubpaid/lobby/pubpaid-darts-room-v1.png"));
-    this.load.image("game-checkers-room", versionedAsset("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png"));
-    this.load.image("game-menu-damas-card", versionedAsset("./assets/pubpaid/lobby/pubpaid-menu-damas-card-v1.png"));
-    this.load.image("game-menu-dardos-card", versionedAsset("./assets/pubpaid/lobby/pubpaid-menu-dardos-card-v1.png"));
     this.load.spritesheet("checkers-wood-tiles", versionedAsset("./assets/pubpaid/checkers/wood-tiles-oga.png"), {
       frameWidth: 32,
       frameHeight: 32
