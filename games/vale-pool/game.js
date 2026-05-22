@@ -136,8 +136,10 @@
     startY: 0,
     startTime: 0,
   };
+  let lockedShotAim = null;
 
   function reset() {
+    lockedShotAim = null;
     const rackY = field.y + field.h / 2;
     state = {
       mode: "MOEDA",
@@ -312,6 +314,7 @@
 
   function shoot(actor = "player") {
     if (state.mode !== "MIRANDO") return;
+    if (actor !== "ia" && lockedShotAim !== null) state.aim = lockedShotAim;
     if (!setupComplete()) return;
     if (state.winner || objectBallsLeft() <= 0) {
       finalizeTableIfComplete();
@@ -328,6 +331,7 @@
     state.currentShooter = actor;
     state.mode = "TACANDO";
     state.shotStage = "aim";
+    if (actor !== "ia") lockedShotAim = null;
     state.cuePocketedThisTurn = false;
     state.strikeTimer = 0.34;
     state.shots += 1;
@@ -1890,6 +1894,7 @@
       finalizeTableIfComplete();
       return true;
     }
+    lockedShotAim = state.aim;
     state.shotStage = "power";
     state.power = 0.08;
     state.powerDir = 1;
@@ -1903,6 +1908,7 @@
       startPlayerPowerStage();
       return;
     }
+    if (lockedShotAim !== null) state.aim = lockedShotAim;
     shoot();
   }
 
@@ -1973,7 +1979,7 @@
     if (touchAim.suppressNextClick) {
       touchAim.suppressNextClick = false;
       if (state.mode === "MIRANDO" && state.turn === "player") {
-        state.message = state.shotStage === "power" ? "AJUSTE A MIRA | TOQUE PARA TACAR" : "MIRA AJUSTADA | TOQUE PARA FORCA";
+        state.message = state.shotStage === "power" ? "MIRA TRAVADA | TOQUE PARA TACAR" : "MIRA AJUSTADA | TOQUE PARA FORCA";
       }
       return;
     }
@@ -2023,8 +2029,8 @@
       }
       return;
     }
-    if (event.key === "ArrowLeft") state.aim -= 0.08;
-    else if (event.key === "ArrowRight") state.aim += 0.08;
+    if (event.key === "ArrowLeft" && state.shotStage !== "power") state.aim -= 0.08;
+    else if (event.key === "ArrowRight" && state.shotStage !== "power") state.aim += 0.08;
     else if (event.key === "ArrowUp") state.power = Math.min(1, state.power + 0.08);
     else if (event.key === "ArrowDown") state.power = Math.max(0.08, state.power - 0.08);
     else if (event.key.toLowerCase() === "e") cycleSpin(1);

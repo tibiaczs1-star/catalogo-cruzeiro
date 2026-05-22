@@ -8,6 +8,17 @@ Atualizado: 2026-05-17
 
 O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 
+## Atualizacao 2026-05-22 - pubpaidfix3
+
+English execution prompt used: "Fix three focused PubPaid gameplay issues without redesigning the games: hide the mobile sound button while Checkers/Chess/Pool tables are active; make Chess Demo show clear lobby and exit controls, require an explicit player click before the coin/intro starts, and prevent overlap in mobile landscape; lock Vale Pool aim as soon as the player enters power measurement so later taps or pointer movement only affect shot power; add a waiter speech bubble inside the bar saying 'Click me to start betting.'"
+
+- Damas mobile: botao global de som agora fica oculto durante qualquer mesa ativa, evitando sobreposicao com o painel de turno.
+- Xadrez Demo: abre com tela `Comecar mesa`; a moeda/intro so roda apos clique do jogador; botoes `Mesas` e `Sair do treino` ficam visiveis e separados no mobile.
+- Sinuca/Vale Pool: mira congela ao iniciar a etapa de forca; mover o dedo/mouse depois disso nao altera o angulo da tacada.
+- Bar: garcom ganhou balao de fala em portugues: `Clique em mim para começar a apostar.`
+- Build/cache-bust local: `20260522-pubpaidfix3`.
+- Validacao: `node --check` nos JS tocados, `npm run guard:pubpaid`, `git diff --check`, `web_game_playwright_client` no Vale Pool e Playwright mobile em Xadrez/Damas/Sinuca sem console errors. Evidencias em `.codex-temp/pubpaidfix3/`.
+
 ## Atualizacao 2026-05-22 - final-sweep1
 
 English execution prompt used: "Finish the current Projeto Codex workspace by separating the public CZS site and PubPaid as two products in the same repository; scan recent changes and open orders, implement only missing fixes, validate locally and in-browser, clean safe temporary artifacts, preserve rollback and approved PubPaid evidence, update agent/team handoffs, then commit and push for online synchronization."

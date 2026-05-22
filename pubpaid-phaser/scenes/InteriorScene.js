@@ -234,6 +234,34 @@ export class InteriorScene extends Phaser.Scene {
     const waiterDot = this.add.circle(INTERIOR_MAP.interactionPoints.waiter.x, INTERIOR_MAP.interactionPoints.waiter.y + 52, 7, 0xffd06d, 0.54)
       .setBlendMode(Phaser.BlendModes.ADD)
       .setDepth(2.52);
+    this.waiterSpeechBubble = this.add.container(770, 378).setDepth(2.82);
+    const speechBg = this.add.graphics();
+    speechBg.fillStyle(0x07101c, 0.86);
+    speechBg.fillRoundedRect(-108, -42, 216, 72, 12);
+    speechBg.lineStyle(2, 0xffd06d, 0.72);
+    speechBg.strokeRoundedRect(-108, -42, 216, 72, 12);
+    speechBg.fillStyle(0x07101c, 0.86);
+    speechBg.fillTriangle(-22, 30, -6, 30, -18, 48);
+    speechBg.lineStyle(2, 0xffd06d, 0.58);
+    speechBg.lineBetween(-22, 30, -18, 48);
+    speechBg.lineBetween(-6, 30, -18, 48);
+    const speechText = this.add.text(0, -6, "Clique em mim para começar a apostar.", {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "15px",
+      fontStyle: "bold",
+      color: "#fff6dc",
+      align: "center",
+      wordWrap: { width: 176 }
+    }).setOrigin(0.5);
+    this.waiterSpeechBubble.add([speechBg, speechText]);
+    this.tweens.add({
+      targets: this.waiterSpeechBubble,
+      y: 372,
+      duration: 1120,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
     this.tweens.add({
       targets: waiterDot,
       alpha: { from: 0.34, to: 0.76 },

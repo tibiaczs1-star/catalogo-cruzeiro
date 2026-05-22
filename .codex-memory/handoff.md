@@ -1,18 +1,9 @@
 # Handoff
 
-Updated: 2026-05-22T19:55:45.306Z
+Updated: 2026-05-22T20:25:18.839Z
 
-Itens 2, 3, 4 e 5 encerrados: budget estrito sem over, ordens abertas antigas fechadas, acervo versionado de noticias reduzido para 480 itens, e Render validado apos deploy com arquivos estaticos novos e endpoints principais OK.
+PubPaid pubpaidfix3: Damas mobile sem botao de som sobreposto; Xadrez Demo exige Comecar antes da moeda, tem Mesas e Sair do treino sem sobreposicao; Vale Pool trava mira ao medir forca; garcom mostra 'Clique em mim para comecar a apostar.' Validado com node --check, guard PubPaid, git diff --check, web_game_client e Playwright.
 
 ## Next
 
-- Sem pendencia aberta para esses itens; PvP real continua fora deste pedido e ainda exige duas contas reais se for operar dinheiro.
-
-## Files In Focus
-
-- styles.css
-- scripts/capture-latest-news.js
-- data/runtime-news.json
-- data/news-archive.json
-- news-data.js
-- .codex-memory/orders.json
+- Revisar visual em celular real se disponivel; manter build 20260522-pubpaidfix3 e nao redesenhar as mesas.

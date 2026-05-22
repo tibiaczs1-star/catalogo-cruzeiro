@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T19:55:34.318Z",
+  "lastUpdatedAt": "2026-05-22T20:21:09.591Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2516,6 +2516,55 @@
       ],
       "nextSteps": [],
       "notes": "Concluido local e online: perf budget estrito sem over; styles.css ~614 KB local/~614579 bytes online; news-data.js ~1.61 MB local/1607717 bytes online; runtime/news-archive/news-data podados para 480 itens; codex:health open 0; Render validado com home 200, API news lite 10 itens sem body, PubPaid build 20260522-boardfit1 e pubpaid.html 200."
+    },
+    {
+      "id": "2026-05-22-iniciar-automacao-de-noticias-e-vendas-no-whatsapp-e-facebook-usando-plugin-what",
+      "createdAt": "2026-05-22T20:06:28.192Z",
+      "updatedAt": "2026-05-22T20:06:28.192Z",
+      "status": "partial-safe",
+      "source": "chat",
+      "rawRequest": "whatas app aberto inicie, o sistema de vendas e de noticias automaticos no face e no whats / lembre-se vc usa o plugin",
+      "summary": "Iniciar automacao de noticias e vendas no WhatsApp e Facebook usando plugin, WhatsApp primeiro por grupos validados",
+      "normalizedTasks": [
+        "iniciar daemon de noticias",
+        "usar plugin Chrome WhatsApp",
+        "validar grupo antes de enviar",
+        "pausar lote apos comportamento inesperado de legenda"
+      ],
+      "filesTouched": [
+        ".codex-memory/propaganda-automation-protocol.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "propaganda",
+        "WhatsApp",
+        "Facebook",
+        "plugin",
+        "noticias",
+        "vendas"
+      ],
+      "nextSteps": [
+        "continuar somente em grupos whitelisted validados usando imagem e legenda separadas",
+        "abrir Facebook Marketplace se o usuario confirmar continuidade"
+      ],
+      "notes": "Daemon automatico iniciado; WhatsApp Business aberto via plugin; primeiro envio validado em grupo whitelisted; lote pausado para evitar disparo errado."
+    },
+    {
+      "id": "2026-05-22-corrigir-sobreposicao-mobile-no-pubpaid-damas-fluxo-botoes-do-xadrez-demo-trava-",
+      "createdAt": "2026-05-22T20:21:09.591Z",
+      "updatedAt": "2026-05-22T20:21:09.591Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "temos 3 erros no pub paid - primeiro - nas damas mobile o botão de som ainda ta sobreposto em cima da janela da vez do jogaor - segundo no xadrez demo nao tem nem desistir nem voltar pro lobby e ainda ta travando a opem, e a moeda ta jogando sem nenhuma ação do jogador para começar - terceiro no mobile e dificil vc mirar e depois aperta qualquer coisa pra começar a medir força e muda a mira do taco trave a mira quando for pra medir força - crie o prompt em ingles, adicione um balão de conversa no garçon da cena dentro do bar click em min algo assim para começar a apostar.....  agora comece",
+      "summary": "Corrigir sobreposicao mobile no PubPaid Damas, fluxo/botoes do Xadrez Demo, trava de mira da Sinuca mobile e balao do garcom.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

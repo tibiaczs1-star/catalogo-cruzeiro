@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T18:04:40.064Z",
+  "lastUpdatedAt": "2026-05-22T20:22:11.920Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -835,11 +835,13 @@
     {
       "id": "01-geral-gift-streaming-ia-png",
       "kind": "image",
-      "path": ".codex-temp/whatsapp-propagandas-20260520/01-geral-gift-streaming-ia.png",
-      "source": "workspace",
-      "note": "Propaganda WhatsApp geral: gift cards, streaming e IA sob consulta.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-05-20T17:33:00.602Z"
+      "path": ".codex-temp/whatsapp-propagandas-20260522/01-geral-gift-streaming-ia.png",
+      "source": "generated",
+      "note": "Arte operacional recriada para grupos de vendas WhatsApp: gift cards, streaming, jogos, apps premium e IA sob consulta.",
+      "linkedOrderIds": [
+        "2026-05-22-iniciar-automacao-de-noticias-e-vendas-no-whatsapp-e-facebook-usando-plugin-what"
+      ],
+      "createdAt": "2026-05-22T20:06:39.140Z"
     },
     {
       "id": "02-gift-cards-jogos-png",
@@ -880,20 +882,24 @@
     {
       "id": "05-ti-logistico-czs-remoto-retirada-png",
       "kind": "image",
-      "path": ".codex-temp/whatsapp-propagandas-20260520/05-ti-logistico-czs-remoto-retirada.png",
-      "source": "workspace",
-      "note": "Propaganda atualizada T.I Logístico CZS: atendimento remoto e retirada do aparelho em casa.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-05-20T17:35:52.425Z"
+      "path": ".codex-temp/whatsapp-propagandas-20260522/05-ti-logistico-czs-remoto-retirada.png",
+      "source": "generated",
+      "note": "Arte operacional recriada para grupos de vendas WhatsApp: T.I Logistico CZS com remoto e retirada.",
+      "linkedOrderIds": [
+        "2026-05-22-iniciar-automacao-de-noticias-e-vendas-no-whatsapp-e-facebook-usando-plugin-what"
+      ],
+      "createdAt": "2026-05-22T20:06:39.145Z"
     },
     {
       "id": "06-motorista-julia-oliveira-png",
       "kind": "image",
-      "path": ".codex-temp/whatsapp-propagandas-20260520/06-motorista-julia-oliveira.png",
-      "source": "workspace",
-      "note": "Propaganda WhatsApp Motorista Particular Julia Oliveira com telefone (68) 99900-5172.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-05-20T19:38:09.903Z"
+      "path": ".codex-temp/whatsapp-propagandas-20260522/06-motorista-julia-oliveira.png",
+      "source": "generated",
+      "note": "Arte operacional recriada para grupos Uber/transportes WhatsApp: motorista particular Julia Oliveira.",
+      "linkedOrderIds": [
+        "2026-05-22-iniciar-automacao-de-noticias-e-vendas-no-whatsapp-e-facebook-usando-plugin-what"
+      ],
+      "createdAt": "2026-05-22T20:06:39.305Z"
     },
     {
       "id": "tourney-mobile-fixed",
@@ -1007,6 +1013,33 @@
       "note": "boardstable1: Damas mobile landscape com cursor de jogo separado da camera.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-22T16:48:47.453Z"
+    },
+    {
+      "id": "chess-demo-after-start-fixed-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaidfix3/chess-demo-after-start-fixed.png",
+      "source": "workspace",
+      "note": "PubPaid pubpaidfix3: Xadrez Demo mobile com Mesas, Sair do treino separado e 64 casas/32 pecas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T20:22:11.748Z"
+    },
+    {
+      "id": "checkers-mobile-board-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaidfix3/checkers-mobile-board.png",
+      "source": "workspace",
+      "note": "PubPaid pubpaidfix3: Damas mobile landscape com audio global oculto e painel de turno sem botao de som sobreposto.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T20:22:11.754Z"
+    },
+    {
+      "id": "pool-aim-lock-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaidfix3/pool-aim-lock.png",
+      "source": "workspace",
+      "note": "Vale Pool pubpaidfix3: etapa de forca com mira travada apos iniciar medidor.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T20:22:11.920Z"
     }
   ]
 }

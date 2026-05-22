@@ -7232,6 +7232,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
 }
 
 body.pubpaid-phaser-page.ppg-dom-playing .ppg-controls-guide,
+body.pubpaid-phaser-page.ppg-dom-playing .ppg-audio-toggle,
 body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-audio-toggle,
 body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-hud,
 body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-prompt {
@@ -10248,6 +10249,14 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   animation: ppg-chess-intro-hold 3.45s ease both;
 }
 
+.ppg-chess-intro-copy.is-start {
+  gap: 14px;
+}
+
+.ppg-chess-intro-copy.is-start button {
+  pointer-events: auto;
+}
+
 .ppg-chess-intro-copy.is-coin span {
   display: block;
   width: clamp(72px, 14vw, 126px);
@@ -10501,7 +10510,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
     position: absolute;
     z-index: 12;
     left: max(10px, var(--ppg-safe-left));
-    top: max(10px, var(--ppg-safe-top));
+    top: calc(max(10px, var(--ppg-safe-top)) + 46px);
     display: grid;
     gap: 2px;
     max-width: min(250px, calc(100dvw - 150px));
@@ -10529,6 +10538,23 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
     line-height: 1.05;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .ppg-chess-exit,
+  .ppg-chess-resign {
+    top: max(8px, var(--ppg-safe-top));
+    min-width: 78px;
+    min-height: 34px;
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .ppg-chess-resign {
+    top: auto;
+    right: max(8px, var(--ppg-safe-right));
+    bottom: max(8px, var(--ppg-safe-bottom));
+    left: auto;
+    max-width: min(150px, calc(100dvw - 18px));
   }
 }
 
@@ -11215,10 +11241,32 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
 @media (max-height: 430px) and (orientation: landscape) {
   .ppg-chess-turn-chip {
     display: grid !important;
+    top: calc(max(8px, var(--ppg-safe-top)) + 44px) !important;
+    max-width: min(270px, calc(100dvw - 22px));
   }
 
   .ppg-chess-board-stage > .ppg-camera-hint {
     display: none !important;
+  }
+
+  .ppg-chess-exit,
+  .ppg-chess-resign {
+    min-height: 34px;
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .ppg-chess-exit {
+    top: max(8px, var(--ppg-safe-top)) !important;
+  }
+
+  .ppg-chess-resign {
+    top: auto !important;
+    right: max(8px, var(--ppg-safe-right)) !important;
+    bottom: max(8px, var(--ppg-safe-bottom)) !important;
+    left: auto !important;
+    max-width: min(150px, calc(100dvw - 18px));
+    white-space: nowrap;
   }
 }
 
