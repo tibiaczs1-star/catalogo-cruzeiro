@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-22T08:15:00.000Z
+Updated: 2026-05-22T08:25:00.000Z
 
 ## Active Goal
 
-- Popup e entrada/volta da materia refinados
+- PubPaid Damas/Xadrez sem overlay de camera
 
 ## Summary
 
-Popup da home recebeu copy premium para PubPaid e Enquete Acre 2026, com cards, icones e botoes claros. Pagina de materia agora mostra carregamento explicito, animacao de virada de folha ao abrir/voltar e botao de voltar dentro do artigo tambem no desktop.
+PubPaid Damas e Xadrez tiveram a camera-orb removida do meio do tabuleiro. Agora fica apenas o botao `Mesa fixa/Girar rival`; ajuste de camera segue por gestos/touch/bordas e o desktop recebe so uma dica discreta.
 
 ## Next
 
-- Revisar em aparelho mobile real a sensacao da virada de folha e do retorno para a home.
+- Conferir online em mobile horizontal que Damas/Xadrez nao mostram mais setas/zoom/camera sobre o tabuleiro.

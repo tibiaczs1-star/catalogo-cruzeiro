@@ -2,6 +2,14 @@
 
 Atualizado: 2026-05-22
 
+## Rodada Atual - 20260522-boardtouch1
+
+- PubPaid Damas/Xadrez: removida a camera-orb com setas, zoom e icone de camera que ficava sobrepondo o tabuleiro.
+- Mantido apenas o botao `Mesa fixa/Girar rival`, posicionado como pill discreto no canto do tabuleiro.
+- Mobile/touch continua por gesto na mesa; desktop recebe apenas dica discreta para borda/roda, sem painel de controles no meio do jogo.
+- Build/cache-bust local: `20260522-boardtouch1`.
+- Validacao: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; HTTP local em `:3034` confirmou `/api/pubpaid/build=20260522-boardtouch1`, `pubpaid.html` sem botoes de seta/zoom/camera e auditoria com CTA/UI/idioma publico 0.
+
 ## Rodada Atual - 20260522-articleturn1
 
 - Popup da home: copy refeita para anunciar PubPaid e Enquete Acre 2026 como duas escolhas claras, com icones, descricao e botoes dedicados.

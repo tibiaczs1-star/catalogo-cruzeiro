@@ -911,8 +911,8 @@ export function bindDomGameInterface(game) {
   const cameraHintMarkup = () => `
     <div class="ppg-camera-hint ppg-chess-camera-hint" aria-hidden="true">
       <i></i>
-      <span class="is-desktop-copy">Arraste as bordas: girar | roda: zoom</span>
-      <span class="is-mobile-copy">Pinçe para zoom e arraste a borda da mesa</span>
+      <span class="is-desktop-copy">Arraste a borda para ajustar a mesa. Roda aproxima.</span>
+      <span class="is-mobile-copy">Use toque na mesa e pinça para zoom.</span>
     </div>
   `;
 
@@ -927,14 +927,7 @@ export function bindDomGameInterface(game) {
     const attr = game === "checkers" ? "data-checkers-camera" : "data-chess-camera";
     const label = game === "checkers" ? "Damas" : "Xadrez";
     return `
-      <div class="ppg-${game}-camera ppg-checkers-camera ppg-camera-orb" aria-label="Controles opcionais de câmera de ${label}">
-        <button type="button" ${attr}="up" aria-label="Mover câmera para cima">↑</button>
-        <button type="button" ${attr}="left" aria-label="Girar câmera para esquerda">‹</button>
-        <button type="button" class="is-camera-core" ${attr}="reset" aria-label="Centralizar câmera"><span></span></button>
-        <button type="button" ${attr}="right" aria-label="Girar câmera para direita">›</button>
-        <button type="button" ${attr}="zoom-out" aria-label="Afastar câmera">−</button>
-        <button type="button" ${attr}="down" aria-label="Mover câmera para baixo">↓</button>
-        <button type="button" ${attr}="zoom-in" aria-label="Aproximar câmera">+</button>
+      <div class="ppg-${game}-camera ppg-checkers-camera ppg-camera-orb is-lock-only" aria-label="Trava de mesa de ${label}">
         <button type="button" class="is-camera-lock${fixed ? " is-active" : ""}" ${attr}="lock" aria-pressed="${fixed ? "true" : "false"}">${fixed ? "Mesa fixa" : "Girar rival"}</button>
       </div>
     `;
@@ -4119,18 +4112,13 @@ export function bindDomGameInterface(game) {
     const cameraButton = event.target.closest("[data-checkers-camera]");
     if (cameraButton) {
       const action = cameraButton.dataset.checkersCamera || "reset";
-      if (action === "left") local.checkersCamera.yaw -= 10;
-      if (action === "right") local.checkersCamera.yaw += 10;
-      if (action === "up") local.checkersCamera.panY -= 12;
-      if (action === "down") local.checkersCamera.panY += 12;
-      if (action === "zoom-in") local.checkersCamera.zoom += 0.08;
-      if (action === "zoom-out") local.checkersCamera.zoom -= 0.08;
-      if (action === "reset") resetCheckersCamera();
       if (action === "lock") {
         local.checkersBoardFixed = !local.checkersBoardFixed;
         cameraButton.classList.toggle("is-active", local.checkersBoardFixed);
         cameraButton.setAttribute("aria-pressed", local.checkersBoardFixed ? "true" : "false");
         cameraButton.textContent = local.checkersBoardFixed ? "Mesa fixa" : "Girar rival";
+      } else {
+        resetCheckersCamera();
       }
       applyCheckersCamera(local.tournamentMatch || local.demoCheckers || gameState.pvpMatch || {}, tournamentSeatForCurrentParticipant() || gameState.pvpSeat || "playerOne");
       return;
@@ -4139,18 +4127,13 @@ export function bindDomGameInterface(game) {
     const chessCameraButton = event.target.closest("[data-chess-camera]");
     if (chessCameraButton) {
       const action = chessCameraButton.dataset.chessCamera || "reset";
-      if (action === "left") local.chessCamera.yaw -= 10;
-      if (action === "right") local.chessCamera.yaw += 10;
-      if (action === "up") local.chessCamera.panY -= 12;
-      if (action === "down") local.chessCamera.panY += 12;
-      if (action === "zoom-in") local.chessCamera.zoom += 0.08;
-      if (action === "zoom-out") local.chessCamera.zoom -= 0.08;
-      if (action === "reset") resetChessCamera();
       if (action === "lock") {
         local.chessBoardFixed = !local.chessBoardFixed;
         chessCameraButton.classList.toggle("is-active", local.chessBoardFixed);
         chessCameraButton.setAttribute("aria-pressed", local.chessBoardFixed ? "true" : "false");
         chessCameraButton.textContent = local.chessBoardFixed ? "Mesa fixa" : "Girar rival";
+      } else {
+        resetChessCamera();
       }
       applyChessCamera(local.demoTable || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne");
       return;

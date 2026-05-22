@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T07:48:44.677Z",
+  "lastUpdatedAt": "2026-05-22T08:13:09.349Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2173,6 +2173,33 @@
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-remover-overlay-de-camera-de-damas-e-xadrez-pubpaid-manter-so-trava-de-mesa-e-us",
+      "createdAt": "2026-05-22T08:13:09.349Z",
+      "updatedAt": "2026-05-22T08:13:09.349Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "os jogos manos, vc deixou essa camera no meio do jogo no xadrez e nas damas, nem prescisa mais dela ali, e pra usar so o touch, e no caso do desktop, e so pra dizer como faz, ou seja, isso nem deveria ta ali, so obotão de trava mesa, essa sobreposição, vc tem que aprender a nao fazer essas coisas corrija e suba direto pro online denovo",
+      "summary": "Remover overlay de camera de Damas e Xadrez PubPaid, manter so trava de mesa e usar gestos/touch.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid.html",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "damas",
+        "xadrez",
+        "camera",
+        "mobile"
+      ],
       "nextSteps": [],
       "notes": ""
     }
