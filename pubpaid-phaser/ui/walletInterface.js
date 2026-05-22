@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js?v=20260522-pubpaidfix3";
+} from "../services/accountService.js?v=20260522-pubpaidfix5";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);

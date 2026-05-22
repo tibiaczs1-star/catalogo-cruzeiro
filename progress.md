@@ -19,6 +19,14 @@ English execution prompt used: "Fix three focused PubPaid gameplay issues withou
 - Build/cache-bust local: `20260522-pubpaidfix3`.
 - Validacao: `node --check` nos JS tocados, `npm run guard:pubpaid`, `git diff --check`, `web_game_playwright_client` no Vale Pool e Playwright mobile em Xadrez/Damas/Sinuca sem console errors. Evidencias em `.codex-temp/pubpaidfix3/`.
 
+## Atualizacao 2026-05-22 - pubpaidfix5
+
+- Xadrez Demo ajustado para seguir a ordem pedida: intro primeiro, creditos depois, entao botao central `Jogar moeda`; a moeda nao dispara sozinha antes do clique.
+- Intro do Xadrez encurtada no fallback para aliviar a espera quando o video nao encerra bem.
+- Sinuca/Vale Pool mobile ganhou botao proprio no canvas para `FORCA` e depois `TACAR`; toques fora desse botao apenas ajustam a mira e nao disparam a medicao.
+- Build/cache-bust local: `20260522-pubpaidfix5`.
+- Usuario pediu para nao rodar testes automatizados; rodada preparada para subir e o usuario testar online.
+
 ## Atualizacao 2026-05-22 - final-sweep1
 
 English execution prompt used: "Finish the current Projeto Codex workspace by separating the public CZS site and PubPaid as two products in the same repository; scan recent changes and open orders, implement only missing fixes, validate locally and in-browser, clean safe temporary artifacts, preserve rollback and approved PubPaid evidence, update agent/team handoffs, then commit and push for online synchronization."

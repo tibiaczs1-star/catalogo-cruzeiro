@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-05-22T20:25:18.839Z
+Updated: 2026-05-22T20:35:04.213Z
 
 ## Active Goal
 
-- PubPaid pubpaidfix3 validado local
+- PubPaid pubpaidfix5 pronto para teste do usuario
 
 ## Summary
 
-Correcoes pontuais aplicadas: som oculto durante mesas, Xadrez Demo com clique antes da moeda e botoes separados, Sinuca com mira travada na etapa de forca, garcom com balao em portugues. Build local 20260522-pubpaidfix3.
+Ajustes finais pedidos: Xadrez Demo agora roda intro/creditos antes de exibir botao central Jogar moeda; moeda so dispara com clique. Sinuca mobile ganhou botao proprio FORCA/TACAR para nao misturar mira com inicio da medicao. Build 20260522-pubpaidfix5.
 
 ## Next
 
-- Se continuar
-- revisar no aparelho real mobile o Xadrez Demo e a sensacao da mira travada na Sinuca; PvP real ainda requer duas sessoes autenticadas antes de dinheiro de usuario.
+- Subir online e deixar o usuario testar; nao rodar testes automatizados porque ele pediu para testar pessoalmente.

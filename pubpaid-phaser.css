@@ -10257,6 +10257,10 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   pointer-events: auto;
 }
 
+.ppg-chess-intro-copy.is-coin button {
+  pointer-events: auto;
+}
+
 .ppg-chess-intro-copy.is-coin span {
   display: block;
   width: clamp(72px, 14vw, 126px);

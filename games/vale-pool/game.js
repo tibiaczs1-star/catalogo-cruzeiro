@@ -41,6 +41,7 @@
     { index: 4, key: "5", label: "→", title: "DIR", x: 447, y: 56, w: 18, h: 18 },
   ];
   const spinBallHud = { x: 384, y: 60, r: 22 };
+  const mobileShotButton = { x: 792, y: 414, w: 132, h: 48 };
 
   const ballPalette = {
     1: "#f0b12d",
@@ -1247,6 +1248,38 @@
     drawPocketedHud(800, 47);
   }
 
+  function shouldUseMobileShotButton() {
+    return Boolean(window.matchMedia?.("(pointer: coarse), (max-width: 760px)")?.matches);
+  }
+
+  function mobileShotButtonVisible() {
+    return shouldUseMobileShotButton()
+      && setupComplete()
+      && state.mode === "MIRANDO"
+      && state.turn === "player"
+      && !state.ballInHandFor
+      && !state.externalControlled;
+  }
+
+  function drawMobileShotButton() {
+    if (!mobileShotButtonVisible()) return;
+    const label = state.shotStage === "power" ? "TACAR" : "FORCA";
+    const hint = state.shotStage === "power" ? "mira travada" : "mire na mesa";
+    const { x, y, w, h } = mobileShotButton;
+    ctx.save();
+    ctx.fillStyle = state.shotStage === "power" ? "rgba(142, 240, 163, .92)" : "rgba(255, 208, 109, .94)";
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = "#07101c";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(x + 2, y + 2, w - 4, h - 4);
+    ctx.strokeStyle = "#fff6dc";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x + 8, y + 8, w - 16, h - 16);
+    text(label, x + 28, y + 27, 18, "#07101c");
+    text(hint, x + 22, y + 40, 9, "#07101c");
+    ctx.restore();
+  }
+
   function turnHudLabel() {
     if (!setupComplete()) return "MOEDA";
     if (state.mode === "ROLANDO") return state.currentShooter === "ia" ? "IA" : "JOGADA";
@@ -1458,6 +1491,7 @@
       text(label, 344, 256, 16, palette.greenText);
     }
     drawSetupOverlay();
+    drawMobileShotButton();
     ctx.fillStyle = "rgba(5,12,17,.86)";
     ctx.fillRect(70, 490, 820, 38);
     ctx.strokeStyle = palette.goldDark;
@@ -1997,6 +2031,14 @@
     if (y < HUD_H) return;
     if (state.mode === "MIRANDO" && state.turn === "player" && state.ballInHandFor === "player") {
       placeCueAtCanvas(x, y, "player");
+      return;
+    }
+    if (mobileShotButtonVisible()) {
+      if (hit(x, y, mobileShotButton)) {
+        handlePlayerShotPress();
+      } else {
+        state.message = state.shotStage === "power" ? "MIRA TRAVADA | USE BOTAO TACAR" : "MIRA AJUSTADA | USE BOTAO FORCA";
+      }
       return;
     }
     handlePlayerShotPress();

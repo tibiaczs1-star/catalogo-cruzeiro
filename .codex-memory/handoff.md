@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-22T20:25:18.839Z
+Updated: 2026-05-22T20:35:04.231Z
 
-PubPaid pubpaidfix3: Damas mobile sem botao de som sobreposto; Xadrez Demo exige Comecar antes da moeda, tem Mesas e Sair do treino sem sobreposicao; Vale Pool trava mira ao medir forca; garcom mostra 'Clique em mim para comecar a apostar.' Validado com node --check, guard PubPaid, git diff --check, web_game_client e Playwright.
+PubPaid pubpaidfix5: Xadrez Demo corrigido para intro -> creditos -> Jogar moeda central clicavel -> moeda -> tabuleiro; fallback da intro ficou mais curto. Vale Pool mobile usa botao FORCA/TACAR no canvas, e toques fora dele so ajustam mira.
 
 ## Next
 
-- Revisar visual em celular real se disponivel; manter build 20260522-pubpaidfix3 e nao redesenhar as mesas.
+- Usuario quer testar online; evitar testes automatizados nesta rodada.
