@@ -75,7 +75,7 @@ body.fx-lite .pro-orbital-field {
 
 .home-activation-card {
   position: relative;
-  width: min(720px, 100%);
+  width: min(680px, 100%);
   padding: clamp(22px, 4vw, 30px);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
@@ -123,9 +123,11 @@ body.fx-lite .pro-orbital-field {
 
 .home-activation-card h2 {
   margin: 12px 0 10px;
-  max-width: 18ch;
-  font-size: clamp(1.65rem, 5vw, 2.45rem);
-  line-height: 1;
+  max-width: 22ch;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 4.5vw, 2.18rem);
+  line-height: 1.05;
+  letter-spacing: 0;
 }
 
 .home-activation-card p,
@@ -141,32 +143,29 @@ body.fx-lite .pro-orbital-field {
 
 .home-activation-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
   margin: 18px 0 12px;
 }
 
 .home-activation-option {
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 12px;
-  min-height: 238px;
-  padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 0;
+  padding: 12px 0;
+  border: 0;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.09);
+  background: transparent;
 }
 
 .home-activation-option.is-game {
-  background:
-    linear-gradient(145deg, rgba(247, 201, 122, 0.18), rgba(255, 255, 255, 0.08)),
-    rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(247, 201, 122, 0.28);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .home-activation-option.is-poll {
-  background:
-    linear-gradient(145deg, rgba(120, 195, 255, 0.18), rgba(255, 255, 255, 0.08)),
-    rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(120, 195, 255, 0.24);
 }
 
 .home-activation-icon {
@@ -187,6 +186,7 @@ body.fx-lite .pro-orbital-field {
 }
 
 .home-activation-option p {
+  color: rgba(244, 251, 255, 0.84);
   font-size: 0.95rem;
 }
 
@@ -221,7 +221,13 @@ body.fx-lite .pro-orbital-field {
   }
 
   .home-activation-option {
+    grid-template-columns: auto minmax(0, 1fr);
     min-height: 0;
+  }
+
+  .home-activation-btn {
+    grid-column: 2;
+    justify-self: start;
   }
 }
 
@@ -28250,6 +28256,25 @@ html body.editorial-home .founder-slot-card a {
   font-size: 0.82rem !important;
   font-weight: 900 !important;
   text-decoration: none !important;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-actions .solid-button {
+  border: 1px solid rgba(255, 227, 154, 0.72) !important;
+  background: #f0b429 !important;
+  color: #081827 !important;
+  box-shadow: 0 12px 26px rgba(240, 180, 41, 0.2) !important;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-actions .solid-button::before {
+  content: ">";
+  margin-right: 0.46rem;
+  font-weight: 950;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-actions .solid-button:hover,
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-actions .solid-button:focus-visible {
+  background: #ffd66f !important;
+  color: #06111d !important;
 }
 
 @media (max-width: 980px) {

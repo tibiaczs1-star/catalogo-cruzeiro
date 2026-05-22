@@ -231,9 +231,30 @@
     LoaderManager.setInstantSplashCopy();
     PerformanceMonitor.observe();
     MemoryCleaner.init();
-    RoutePreloader.init();
-    scheduleIdle(() => AssetManager.warmCriticalImages(), 1900);
-    scheduleIdle(() => CacheManager.register(), 2400);
+    const afterFirstScreen = (callback, delay = 0) => {
+      if (!compact) {
+        scheduleIdle(callback, delay);
+        return;
+      }
+
+      let didRun = false;
+      const run = () => {
+        if (didRun) return;
+        didRun = true;
+        window.setTimeout(() => scheduleIdle(callback, 1600), delay);
+      };
+      if (document.body.classList.contains("site-loaded")) {
+        run();
+        return;
+      }
+
+      window.addEventListener("catalogo:logo-splash-finished", run, { once: true });
+      window.setTimeout(run, 14000);
+    };
+
+    afterFirstScreen(() => RoutePreloader.init(), compact ? 6200 : 0);
+    afterFirstScreen(() => AssetManager.warmCriticalImages(), compact ? 7800 : 1900);
+    afterFirstScreen(() => CacheManager.register(), compact ? 9600 : 2400);
     window.dispatchEvent(new CustomEvent("catalogo:core-ready", { detail: { version: VERSION } }));
   }
 

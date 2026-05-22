@@ -84,9 +84,9 @@
           }
           window.setTimeout(callback, timeout);
         };
-        scheduleBootPreload(window.__CATALOGO_START_NEWS_PRELOAD__, window.__CATALOGO_COMPACT_BOOT__ ? 1200 : 800);
+        window.__CATALOGO_START_NEWS_PRELOAD__();
         if (!window.__CATALOGO_COMPACT_BOOT__) {
-          scheduleBootPreload(window.__CATALOGO_START_SOCIAL_TRENDS_PRELOAD__, 1800);
+          scheduleBootPreload(window.__CATALOGO_START_SOCIAL_TRENDS_PRELOAD__, 900);
         }
       } else {
         window.__CATALOGO_NEWS_PRELOAD__ = Promise.resolve(null);
@@ -154,14 +154,14 @@
         }
       </style>
     </noscript>
-  <link rel="stylesheet" href="./styles.css?v=20260522-homecatch1" />
+  <link rel="stylesheet" href="./styles.css?v=20260522-homegate1" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homecatch1" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homegate1" />
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
@@ -627,14 +627,14 @@
               Manchete local, contexto curto e caminho direto para ler.
             </p>
             <div class="hero-newsroom-actions">
-              <a class="solid-button" href="#radar">Ler matéria</a>
+              <a class="solid-button" href="#radar">Ler matéria da foto</a>
               <a class="outline-button" href="#painel-do-dia">Como está hoje</a>
             </div>
             <a class="hero-tourism-meta" href="#radar" data-hero-tourism-meta-link aria-label="Ler notícia em destaque">
               <span class="hero-tourism-kicker" data-hero-tourism-kicker>destaque principal</span>
               <strong data-hero-tourism-title>Notícias locais</strong>
               <small data-hero-tourism-note>Resumo da notícia principal da área selecionada.</small>
-              <span class="hero-tourism-readmore">Ler matéria</span>
+              <span class="hero-tourism-readmore">Ler matéria da foto</span>
             </a>
             <nav class="hero-newsroom-notes" aria-label="Rotas da home">
               <a href="#linha-viva">Linha viva</a>
@@ -702,8 +702,8 @@
               <span class="hero-panel-icon hero-panel-icon-star" aria-hidden="true"></span>
               <span class="hero-panel-copy">
                 <small>Manchetes</small>
-                <strong class="hero-panel-copy-desktop">Escolha uma foto para destacar a manchete. Clique para abrir a matéria.</strong>
-                <strong class="hero-panel-copy-mobile">Toque numa foto para ver a manchete e abrir a matéria.</strong>
+                <strong class="hero-panel-copy-desktop">Escolha uma foto e abra a matéria pelo botão do hero.</strong>
+                <strong class="hero-panel-copy-mobile">Toque numa foto e leia pelo botão do destaque.</strong>
               </span>
               <span class="hero-panel-media hero-panel-thumbs" aria-label="Manchetes com foto">
                 <a class="hero-panel-photo" href="./arquivo.html?busca=pol%C3%ADtica" data-headline="Decisões públicas entram quando afetam Cruzeiro do Sul e o Vale do Juruá" data-summary="Acompanhe decisões da prefeitura, governo e câmaras quando elas mudam serviços, obras, saúde ou rotina da cidade." style="--thumb:url('./assets/home-cache/fallback-cotidiano.jpg')"><span><b>Política regional</b><strong>Decisões públicas com impacto local</strong><small>Abrir matéria</small></span></a>
@@ -2030,12 +2030,12 @@
 
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, window.__CATALOGO_COMPACT_BOOT__ ? 7000 : 8500);
+        }, window.__CATALOGO_COMPACT_BOOT__ ? 18000 : 22000);
       })();
     </script>
-    <script defer src="./catalogo-app-core.js?v=20260513-layout-order1"></script>
+    <script defer src="./catalogo-app-core.js?v=20260522-homegate1"></script>
     <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
-    <script defer src="./script.js?v=20260522-homecatch1"></script>
+    <script defer src="./script.js?v=20260522-homegate1"></script>
     <script>
       (function () {
         const styles = [
@@ -2056,7 +2056,7 @@
           "./modern-launch.css?v=20260415d",
           "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homecatch1";
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homegate1";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =

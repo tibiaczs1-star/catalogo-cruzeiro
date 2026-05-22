@@ -138,9 +138,9 @@ const splashCompactViewportQuery =
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
 const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 850 : 1100;
-const splashCinematicDurationMs = splashCompactViewportQuery.matches ? 3600 : 4600;
+const splashCinematicDurationMs = splashCompactViewportQuery.matches ? 1800 : 4600;
 const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 1300 : 1700;
-const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 1600 : 2100;
+const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 1000 : 2100;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 320 : 460;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 520 : 760;
 const tickerDesktopStaticMedia =
@@ -483,8 +483,8 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260522-homecatch1";
-const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522";
+const portalWarmCacheName = "catalogo-portal-shell-v20260522-homegate1";
+const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522_homegate1";
 const homeFirstFoldReadyState = {
   resolved: false,
   resolve: null
@@ -496,11 +496,11 @@ window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__ = new Promise((resolve) => {
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260522-homecatch1",
-  "./premium-home-redesign.css?v=20260522-homecatch1",
+  "./styles.css?v=20260522-homegate1",
+  "./premium-home-redesign.css?v=20260522-homegate1",
   "./startup-experience.css?v=20260513-tv-communityfix1",
   "./early-home-surfaces.js?v=20260513-tv-communityfix1",
-  "./script.js?v=20260522-homecatch1",
+  "./script.js?v=20260522-homegate1",
   "./startup-experience.js?v=20260513-tv-communityfix1",
   "./noticia.html",
   "./arquivo.html",
@@ -1774,13 +1774,27 @@ const hydrateStaticThumbs = (newsMap = {}) => {
   });
 };
 
-if (window.NEWS_DATA) {
-  hydrateStaticThumbs(
-    {
-      ...homepageStaticPreviewBySlug,
-      ...Object.fromEntries(window.NEWS_DATA.map((item) => [item.slug, item]))
-    }
+const hydrateInitialStaticThumbs = () => {
+  if (!window.NEWS_DATA || hydrateInitialStaticThumbs.done) {
+    return;
+  }
+
+  hydrateInitialStaticThumbs.done = true;
+  hydrateStaticThumbs({
+    ...homepageStaticPreviewBySlug,
+    ...Object.fromEntries(window.NEWS_DATA.map((item) => [item.slug, item]))
+  });
+};
+
+if (splashCompactViewportQuery.matches) {
+  window.addEventListener(
+    "catalogo:logo-splash-finished",
+    () => window.setTimeout(hydrateInitialStaticThumbs, 7600),
+    { once: true }
   );
+  window.setTimeout(hydrateInitialStaticThumbs, 18000);
+} else {
+  hydrateInitialStaticThumbs();
 }
 
 const formatSplashStamp = () => {
@@ -1845,7 +1859,10 @@ const runAfterSplashFinished = (callback, timeout = 1200) => {
   };
 
   window.addEventListener("catalogo:logo-splash-finished", runOnce, { once: true });
-  window.setTimeout(runOnce, splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600);
+  window.setTimeout(
+    runOnce,
+    splashCompactViewportQuery.matches ? 18000 : splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600
+  );
 };
 
 const runIdleStepQueue = (steps = [], timeout = 900, gap = 360) => {
@@ -2031,7 +2048,7 @@ const waitForSplashFontsReady = (timeoutMs = splashGateStepTimeoutMs) => {
   return waitForSplashTimeout(fontsReady, timeoutMs);
 };
 
-const waitForSplashPreloads = (timeoutMs = splashGateStepTimeoutMs) => {
+const waitForSplashPreloads = (timeoutMs = splashCompactViewportQuery.matches ? 9000 : 11000) => {
   const preloadPromises = [
     window.__CATALOGO_NEWS_PRELOAD__,
     splashCompactViewportQuery.matches ? null : window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__
@@ -2047,7 +2064,7 @@ const waitForSplashPreloads = (timeoutMs = splashGateStepTimeoutMs) => {
   );
 };
 
-const waitForSplashDeferredBoot = (timeoutMs = splashDeferredBootTimeoutMs) => {
+const waitForSplashDeferredBoot = (timeoutMs = splashCompactViewportQuery.matches ? 8500 : 10000) => {
   if (
     window.__CATALOGO_DEFERRED_BOOT_DONE__ ||
     window.__CATALOGO_DEFERRED_BOOT_STATE__?.done
@@ -2076,21 +2093,84 @@ const markHomeFirstFoldReady = (reason = "ready") => {
   if (typeof homeFirstFoldReadyState.resolve === "function") {
     homeFirstFoldReadyState.resolve({ reason });
   }
+  if (
+    splashCompactViewportQuery.matches &&
+    isSplashHoldingPage() &&
+    isHomeFirstFoldVisiblyReady() &&
+    typeof window.__CATALOGO_SPLASH_FORCE_RELEASE__ === "function"
+  ) {
+    updateSplashProgress(100, "Portal pronto para abrir");
+    window.setTimeout(() => {
+      if (isSplashHoldingPage()) {
+        window.__CATALOGO_SPLASH_FORCE_RELEASE__("mobile-first-fold-ready");
+      }
+    }, 180);
+  }
   window.dispatchEvent(new CustomEvent("catalogo:home-first-fold-ready", { detail: { reason } }));
 };
 
-const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 1800 : 1400) => {
+const isHomeFirstFoldVisiblyReady = () => {
+  const heroTitle = heroTourismShell?.querySelector(".hero-newsroom-copy h1")?.textContent?.trim() || "";
+  const heroCta = heroTourismShell?.querySelector(".hero-newsroom-actions .solid-button");
+  const heroHref = String(heroCta?.getAttribute("href") || "").trim();
+  const hasHeroStory = heroTitle.length > 12 && heroHref && heroHref !== "#radar" && heroHref !== "#topo";
+  const hasHeroImage =
+    Boolean(heroTourismShell?.dataset.heroBackdropReady) ||
+    heroTourismSlides.some((slide) => slide?.dataset.heroBackdropReady === "true") ||
+    heroTourismSlides.some((slide) => {
+      const background = slide ? window.getComputedStyle(slide).backgroundImage : "";
+      return background && background !== "none" && background.includes("url(");
+    });
+  const flowCards = document.querySelectorAll(
+    ".editorial-retention-flow [data-flow-live-title], .editorial-retention-flow .day-panel-card strong, #o-que-importa a, #radar a"
+  );
+  const readyCards = [...flowCards].filter((node) => (node.textContent || "").trim().length > 8).length;
+
+  return hasHeroStory && hasHeroImage && readyCards >= 3;
+};
+
+const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 12000 : 14000) => {
   if (window.__CATALOGO_HOME_FIRST_FOLD_READY__) {
-    return Promise.resolve();
+    if (isHomeFirstFoldVisiblyReady()) {
+      return Promise.resolve();
+    }
   }
 
   const readyPromise = window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__;
   if (readyPromise && typeof readyPromise.then === "function") {
-    return waitForSplashTimeout(readyPromise, timeoutMs);
+    return waitForSplashTimeout(
+      readyPromise.then(() => waitForHomeVisibleSurface(timeoutMs)),
+      timeoutMs
+    );
   }
 
-  return waitForSplashEvent("catalogo:home-first-fold-ready", timeoutMs);
+  return waitForSplashTimeout(
+    waitForSplashEvent("catalogo:home-first-fold-ready", timeoutMs).then(() =>
+      waitForHomeVisibleSurface(timeoutMs)
+    ),
+    timeoutMs
+  );
 };
+
+const waitForHomeVisibleSurface = (timeoutMs = splashCompactViewportQuery.matches ? 12000 : 14000) =>
+  new Promise((resolve) => {
+    if (isHomeFirstFoldVisiblyReady()) {
+      resolve();
+      return;
+    }
+
+    const startedAt = Date.now();
+    const tick = () => {
+      if (isHomeFirstFoldVisiblyReady() || Date.now() - startedAt >= timeoutMs) {
+        resolve();
+        return;
+      }
+
+      window.setTimeout(tick, 120);
+    };
+
+    tick();
+  });
 
 const waitForSplashImage = (image, timeoutMs = 5000) =>
   new Promise((resolve) => {
@@ -2196,6 +2276,30 @@ const updateSplashProgress = (progress, status = "") => {
   if (splashCopy && status) {
     splashCopy.textContent = status;
   }
+
+  if (
+    splashCompactViewportQuery.matches &&
+    safeProgress >= 100 &&
+    window.__CATALOGO_HOME_FIRST_FOLD_READY__ &&
+    isHomeFirstFoldVisiblyReady() &&
+    isSplashHoldingPage() &&
+    !window.__CATALOGO_MOBILE_PROGRESS_RELEASE_TIMER__
+  ) {
+    window.__CATALOGO_MOBILE_PROGRESS_RELEASE_TIMER__ = window.setTimeout(() => {
+      if (!isSplashHoldingPage()) {
+        return;
+      }
+
+      if (typeof window.__CATALOGO_SPLASH_FORCE_RELEASE__ === "function") {
+        window.__CATALOGO_SPLASH_FORCE_RELEASE__("mobile-progress-100");
+        return;
+      }
+
+      splashRoot?.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
+      document.body.classList.add("site-loaded", "mobile-intro-ready");
+    }, 360);
+  }
 };
 
 const collectSplashNewsPhrases = () => {
@@ -2275,25 +2379,32 @@ const waitForSplashReadiness = async () => {
     {
       label: "Lendo títulos e fontes locais",
       progress: 52,
-      wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
+      timeout: splashCompactViewportQuery.matches ? 9000 : 11000,
+      wait: () => waitForSplashPreloads(splashCompactViewportQuery.matches ? 9000 : 11000)
     },
     {
       label: "Resumindo matérias e cards",
       progress: 72,
-      wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
+      timeout: splashCompactViewportQuery.matches ? 8500 : 10000,
+      wait: () =>
+        splashCompactViewportQuery.matches
+          ? Promise.resolve()
+          : waitForSplashDeferredBoot(10000)
     },
     {
       label: "Montando hero e primeiras seções",
       progress: 84,
-      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 1900 : 1500)
+      timeout: splashCompactViewportQuery.matches ? 12000 : 14000,
+      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 12000 : 14000)
     },
     {
       label: "Conferindo imagens da primeira dobra",
       progress: 92,
+      timeout: splashCompactViewportQuery.matches ? 3500 : 6500,
       wait: () =>
         splashCompactViewportQuery.matches
-          ? waitForSplashFontsReady(splashGateStepTimeoutMs)
-          : waitForSplashCriticalImages(splashGateStepTimeoutMs)
+          ? waitForSplashFontsReady(3500)
+          : waitForSplashCriticalImages(6500)
     },
     {
       label: "Home pronta para abrir",
@@ -2329,7 +2440,6 @@ const setupSplashExperience = () => {
     splashRoot.dataset.releaseReason = "disabled-nonblocking";
     updateSplashProgress(100, "Portal pronto");
     window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
-    warmPortalCacheInBackground();
     window.dispatchEvent(new CustomEvent("catalogo:logo-splash-finished"));
     rememberSplashToday();
     return;
@@ -2442,20 +2552,35 @@ const setupSplashExperience = () => {
     splashRoot.classList.remove("is-shell-preparing", "is-broadcast-started", "is-loader-active");
     splashRoot.classList.add("is-completing");
     window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
-    warmPortalCacheInBackground();
     window.dispatchEvent(new CustomEvent("catalogo:logo-splash-finished"));
 
-    requestAnimationFrame(() => {
+    let finalizedRelease = false;
+    const finalizeRelease = () => {
+      if (finalizedRelease) {
+        return;
+      }
+
+      finalizedRelease = true;
+      splashRoot.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
+      document.body.classList.add("site-loaded", "mobile-intro-ready");
+      warmPortalCacheInBackground();
+    };
+
+    const startLeaving = () => {
       splashRoot.classList.add("is-leaving");
       window.setTimeout(
-        () => {
-          splashRoot.setAttribute("aria-hidden", "true");
-          document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
-          document.body.classList.add("site-loaded", "mobile-intro-ready");
-        },
-        splashMotionQuery.matches ? 120 : splashCompactViewportQuery.matches ? 240 : 640
+        finalizeRelease,
+        splashMotionQuery.matches ? 120 : splashCompactViewportQuery.matches ? 180 : 640
       );
-    });
+    };
+
+    if (splashCompactViewportQuery.matches) {
+      window.setTimeout(startLeaving, 0);
+    } else {
+      requestAnimationFrame(startLeaving);
+      window.setTimeout(startLeaving, 240);
+    }
 
     rememberSplashToday();
   };
@@ -2464,7 +2589,7 @@ const setupSplashExperience = () => {
     if (!splashReleased) {
       releaseSplash();
     }
-  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 4200 : 5600));
+  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 18000 : 22000));
 
   const currentTime =
     typeof performance !== "undefined" && typeof performance.now === "function"
@@ -2495,15 +2620,12 @@ const setupSplashExperience = () => {
     }
     rememberSplashToday();
     updateSplashProgress(18, "Notícias subindo para a capa");
-    warmPortalCacheInBackground();
+    const readinessPromise = waitForSplashReadiness().catch(() => undefined);
     await waitForSplashDelay(splashCinematicDurationMs);
     splashRoot.classList.remove("is-broadcast-started");
     splashRoot.classList.add("is-loader-active");
     updateSplashProgress(24, "Agora carregando a home completa");
-    await waitForSplashTimeout(
-      waitForSplashReadiness().catch(() => undefined),
-      splashCompactViewportQuery.matches ? 3200 : 4600
-    );
+    await readinessPromise;
     releaseSplash();
   };
 
@@ -2538,25 +2660,25 @@ const setupHomeActivationPopup = () => {
   overlay.innerHTML = `
     <div class="home-activation-card">
       <button class="home-activation-close" type="button" data-home-popup-close aria-label="Fechar convite">×</button>
-      <span class="home-activation-eyebrow">novidade no Catálogo</span>
-      <h2>Escolha sua próxima parada.</h2>
-      <p class="home-activation-lead">Tem jogo para testar e pesquisa rápida para participar. Dois atalhos abertos para a comunidade do Juruá.</p>
+      <span class="home-activation-eyebrow">Convite rápido</span>
+      <h2>Jogue, opine e ajude o Juruá a aparecer melhor.</h2>
+      <p class="home-activation-lead">Abrimos duas experiências leves para quem chegou agora: uma partida PubPaid para testar e uma pesquisa curta sobre o Acre.</p>
       <div class="home-activation-options">
         <article class="home-activation-option is-game">
           <span class="home-activation-icon" aria-hidden="true">🎱</span>
           <div>
-            <strong>PubPaid</strong>
-            <p>Entre nas mesas, teste Sinuca, Damas e Xadrez e ajude a calibrar o jogo antes da rodada real.</p>
+            <strong>PubPaid: jogo rápido</strong>
+            <p>Entre na mesa, jogue pelo toque ou mouse e teste a nova área de jogos do Catálogo.</p>
           </div>
-          <a class="home-activation-btn primary" href="./pubpaid.html">Jogar agora</a>
+          <a class="home-activation-btn primary" href="./pubpaid.html">Jogar PubPaid</a>
         </article>
         <article class="home-activation-option is-poll">
-          <span class="home-activation-icon" aria-hidden="true">📊</span>
+          <span class="home-activation-icon" aria-hidden="true">🗳️</span>
           <div>
-            <strong>Enquete Acre 2026</strong>
-            <p>Dê seu sinal sobre o cenário político e veja como a comunidade está respondendo.</p>
+            <strong>Pesquisa do Acre</strong>
+            <p>Responda em poucos cliques e ajude a medir o que a comunidade quer acompanhar.</p>
           </div>
-          <a class="home-activation-btn" href="./pesquisa-acre-2026.html">Responder pesquisa</a>
+          <a class="home-activation-btn" href="./pesquisa-acre-2026.html">Responder agora</a>
         </article>
       </div>
       <small>Participação voluntária. A enquete não é pesquisa eleitoral registrada nem científica.</small>
@@ -6649,14 +6771,18 @@ const updateHeroMainStory = (photo = {}) => {
 
   if (primaryLink) {
     primaryLink.href = href;
-    primaryLink.textContent = "Ler matéria";
+    primaryLink.textContent = href.startsWith("#") ? "Ver destaque" : "Ler matéria da foto";
+    primaryLink.setAttribute(
+      "aria-label",
+      href.startsWith("#") ? `Ver destaque: ${title}` : `Ler matéria da foto: ${title}`
+    );
     applyArticleLinkAttrs(primaryLink, href);
   }
 
   if (metaLink) {
     metaLink.href = href;
-    metaLink.textContent = href.startsWith("#") ? "Ver seção" : "Ler matéria";
-    metaLink.setAttribute("aria-label", href.startsWith("#") ? `Ver seção: ${title}` : `Ler matéria: ${title}`);
+    metaLink.textContent = href.startsWith("#") ? "Ver seção" : "Ler matéria da foto";
+    metaLink.setAttribute("aria-label", href.startsWith("#") ? `Ver seção: ${title}` : `Ler matéria da foto: ${title}`);
     applyArticleLinkAttrs(metaLink, href);
   }
 
@@ -6817,7 +6943,7 @@ const syncHeroPanelThumbContent = (photo = {}, index = 0) => {
   }
 
   thumb.dataset.articleHref = href;
-  thumb.href = "#topo";
+  thumb.href = href;
   thumb.dataset.headline = title;
   thumb.dataset.summary = summary;
   thumb.dataset.heroStoryKey = getHeroStoryKey(photo);
@@ -8027,7 +8153,6 @@ const initializeHeroTourismHero = () => {
     const originalHref = String(thumb.getAttribute("href") || "").trim();
     if (originalHref && originalHref !== "#" && originalHref !== "#topo") {
       thumb.dataset.articleHref = originalHref;
-      thumb.href = "#topo";
       thumb.setAttribute("role", "button");
     }
     const bubble = thumb.querySelector("span");
@@ -8079,6 +8204,15 @@ const initializeHeroTourismHero = () => {
     });
     thumb.addEventListener("click", (event) => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) {
+        hideHeroPanelFloatingBubble();
+        stopHeroPanelAutoRotation();
+        return;
+      }
+
+      const storyHref = String(thumb.dataset.articleHref || thumb.getAttribute("href") || "").trim();
+      const alreadySelected =
+        thumb.classList.contains("is-active") || thumb.classList.contains("is-previewing");
+      if (alreadySelected && storyHref && !storyHref.startsWith("#")) {
         hideHeroPanelFloatingBubble();
         stopHeroPanelAutoRotation();
         return;
@@ -18781,23 +18915,47 @@ const hydrateDynamicNews = async () => {
     hydrateMosaicHero(merged);
     renderEditorialUtilityFlow(merged);
     renderWhatMattersNow(merged);
-    void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
     initializeHeroTourismHero();
-    renderRegionalPoliticsHighlights(merged);
-    renderSidebarWidgets();
-    renderRadar(activeFilter);
-    updateLiveFeedItems(merged, { resetFilter: false });
-    initializeLiveTicker();
     applyGlobalClosedCardGrids();
     markHomeFirstFoldReady("runtime-news");
 
+    const hydrateAfterFirstPaint = () => {
+      void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
+      runIdleStepQueue(
+        [
+          () => renderRegionalPoliticsHighlights(merged),
+          () => renderSidebarWidgets(),
+          () => renderRadar(activeFilter),
+          () => updateLiveFeedItems(merged, { resetFilter: false }),
+          () => initializeLiveTicker(),
+          () => {
+            void Promise.allSettled([
+              renderDailyTrendingBuzz({ forceRefresh: true, runtimeArticles: merged }),
+              renderDynamicMonthlyBuzz({ runtimeArticles: merged }),
+              renderCommunityTrendCard(),
+              renderGlobalPoliticsHighlights()
+            ]);
+          },
+          () => applyGlobalClosedCardGrids()
+        ],
+        splashCompactViewportQuery.matches ? 1200 : 800,
+        splashCompactViewportQuery.matches ? 420 : 180
+      );
+    };
+
+    runAfterSplashFinished(
+      () => {
+        if (splashCompactViewportQuery.matches) {
+          window.setTimeout(hydrateAfterFirstPaint, 6500);
+          return;
+        }
+
+        hydrateAfterFirstPaint();
+      },
+      splashCompactViewportQuery.matches ? 4200 : 900
+    );
+
     window.setTimeout(() => {
-      void Promise.allSettled([
-        renderDailyTrendingBuzz({ forceRefresh: true, runtimeArticles: merged }),
-        renderDynamicMonthlyBuzz({ runtimeArticles: merged }),
-        renderCommunityTrendCard(),
-        renderGlobalPoliticsHighlights()
-      ]);
       applyGlobalClosedCardGrids();
     }, 120);
   } catch (error) {
@@ -19464,13 +19622,26 @@ window.setTimeout(() => {
   markHomeFirstFoldReady("static-news");
 }, 1800);
 scheduleHomeActivationPopup();
-window.setTimeout(() => {
+const scheduleHomeSecondaryStartup = (callback, desktopDelay = 320, mobileDelay = 7200) => {
+  if (splashCompactViewportQuery.matches && isSplashHoldingPage()) {
+    runAfterSplashFinished(() => {
+      window.setTimeout(callback, mobileDelay);
+    }, 4200);
+    return;
+  }
+
+  window.setTimeout(callback, desktopDelay);
+};
+
+scheduleHomeSecondaryStartup(() => {
   void renderDailyTrendingBuzz();
   void renderDynamicMonthlyBuzz();
   void renderCommunityTrendCard();
-}, 320);
-scheduleTopicSurfaceRefresh();
-initializeLiveTicker();
-window.setTimeout(() => {
+});
+scheduleHomeSecondaryStartup(() => {
+  scheduleTopicSurfaceRefresh();
+  initializeLiveTicker();
+}, 420, 7600);
+scheduleHomeSecondaryStartup(() => {
   void hydrateFoundersWallFromApi();
-}, 1600);
+}, 1600, 8600);
