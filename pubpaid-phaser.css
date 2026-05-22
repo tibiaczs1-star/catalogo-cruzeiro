@@ -11003,20 +11003,9 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
   text-align: center;
 }
 
-@media (max-width: 700px) and (orientation: landscape) {
+@media (max-width: 760px) and (orientation: landscape), (max-height: 430px) and (orientation: landscape) {
   .ppg-checkers-sidecar {
-    align-content: end;
-    padding: 7px;
-  }
-
-  .ppg-checkers-sidecar .ppg-checkers-statline,
-  .ppg-checkers-sidecar .ppg-camera-hint,
-  .ppg-checkers-sidecar .ppg-captured-tray {
-    display: none;
-  }
-
-  .ppg-checkers-sidecar .ppg-dom-actions {
-    margin-top: 0;
+    display: none !important;
   }
 }
 
@@ -11028,11 +11017,11 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
 
   .ppg-chess-board-stage > .ppg-camera-hint {
     display: inline-flex;
-    top: 6px;
-    left: 6px;
+    top: auto;
+    left: 8px;
     right: auto;
-    bottom: auto;
-    max-width: calc(100% - 132px);
+    bottom: 8px;
+    max-width: min(320px, calc(100% - 118px));
     min-height: 28px;
     padding: 5px 7px;
     opacity: 0.78;

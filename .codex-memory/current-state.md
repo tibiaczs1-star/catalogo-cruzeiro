@@ -1,17 +1,19 @@
 # Current State
 
-Updated: 2026-05-22T08:44:00.000Z
+Updated: 2026-05-22T15:30:00.000Z
 
 ## Active Goal
 
-- PubPaid Xadrez mobile corrigido
+- PubPaid HUD mobile sem sobreposicao
 
 ## Summary
 
-PubPaid Xadrez mobile agora segue a intro completa: preparacao, creditos e moeda visivel antes de liberar a mesa. A chave de renderizacao inclui a fase da intro, evitando a tela presa em `Prepare-se`.
+PubPaid mobile recebeu correcao de HUD no build `20260522-mobilehud2`.
 
-No mobile horizontal, o tabuleiro de Xadrez mantem 64 casas e 32 pecas dentro do escopo das casas, mostra a instrucao `Use toque na mesa e pinca para zoom`, deixa visivel apenas `Mesa fixa` nos controles de camera e aceita jogada por toque/click.
+- Xadrez treino mobile removeu o botao redundante `Sair`; fica `Mesas`, `Mesa fixa` e a instrucao de toque em area separada no rodape.
+- Damas mobile landscape esconde a sidecar para nao invadir o tabuleiro nem duplicar `Mesas`.
+- Sinuca mobile foi varrida junto e nao apresentou overlap de HUD essencial no viewport 740x420.
 
 ## Next
 
-- Subir build `20260522-chessmobile3` online e confirmar `/api/pubpaid/build`.
+- Commitar, subir online e confirmar `/api/pubpaid/build` em `20260522-mobilehud2`.

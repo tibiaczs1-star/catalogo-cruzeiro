@@ -403,3 +403,9 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - A chave de renderizacao do Xadrez agora inclui a fase da intro, evitando que o mobile fique preso em `Prepare-se` e esconda a moeda.
 - Peças do Xadrez foram ajustadas no breakpoint mobile para ficarem dentro das casas; camera overlay continua sem setas/zoom, com apenas `Mesa fixa` visivel.
 - Validacao local: `node --check` em `domGameInterface.js`, `app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; browser mobile 740x420 com 64 casas, 32 pecas, `outCount=0`, instrucao de toque, moeda visivel e jogada por toque/click de `b8` para `c6`.
+
+- Build local: `20260522-mobilehud2`.
+- HUD mobile dos jogos PubPaid revisado contra sobreposicao: no Xadrez treino, `Sair` foi removido por ser redundante com `Mesas`; a instrucao de camera/toque foi movida para o rodape esquerdo, sem disputar o topo com `Mesas` e `Mesa fixa`.
+- Damas mobile landscape agora esconde a sidecar em telas ate 760px/430px, evitando invadir o tabuleiro e duplicar `Mesas`.
+- Validacao Browser 740x420: Xadrez, Damas e Sinuca sem overlap de HUD essencial; Xadrez manteve 32 pecas dentro do tabuleiro; console sem erros.
+- Validacao local: `node --check` em `domGameInterface.js`, `app.js`, `server.js`; `npm run guard:pubpaid`; `git diff --check`; `npm run review:team` com 42 apontamentos gerais existentes.

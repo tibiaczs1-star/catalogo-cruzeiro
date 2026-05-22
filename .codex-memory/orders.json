@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T08:46:03.571Z",
+  "lastUpdatedAt": "2026-05-22T15:28:50.840Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2226,6 +2226,35 @@
         "mobile",
         "qa",
         "deploy"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-corrigir-sobreposicao-de-hud-nos-jogos-pubpaid-mobile-remover-redundancia-sair-m",
+      "createdAt": "2026-05-22T15:28:50.840Z",
+      "updatedAt": "2026-05-22T15:28:50.840Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "porra nessa autura do campeonato tem sobreposições de informações no xadrez mobile, sair e e mesas fazem a mesma coisa e redudante e ainda estão em cima da porra das instruções de uso da camera, cheque todos os jogos pra achar sobreposições nos mobiles",
+      "summary": "Corrigir sobreposição de HUD nos jogos PubPaid mobile: remover redundância Sair/Mesas no Xadrez treino, reposicionar instrução de câmera e varrer Xadrez, Damas e Sinuca em mobile landscape.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        "pubpaid-phaser/app.js",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "mobile",
+        "hud",
+        "xadrez",
+        "damas",
+        "sinuca",
+        "qa"
       ],
       "nextSteps": [],
       "notes": ""
