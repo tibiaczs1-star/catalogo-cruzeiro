@@ -483,15 +483,24 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260513-tv-communityfix1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260522-homecatch1";
+const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522";
+const homeFirstFoldReadyState = {
+  resolved: false,
+  resolve: null
+};
+window.__CATALOGO_HOME_FIRST_FOLD_READY__ = false;
+window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__ = new Promise((resolve) => {
+  homeFirstFoldReadyState.resolve = resolve;
+});
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260513-tv-communityfix1",
-  "./premium-home-redesign.css?v=20260513-tv-communityfix1",
+  "./styles.css?v=20260522-homecatch1",
+  "./premium-home-redesign.css?v=20260522-homecatch1",
   "./startup-experience.css?v=20260513-tv-communityfix1",
   "./early-home-surfaces.js?v=20260513-tv-communityfix1",
-  "./script.js?v=20260513-tv-communityfix1",
+  "./script.js?v=20260522-homecatch1",
   "./startup-experience.js?v=20260513-tv-communityfix1",
   "./noticia.html",
   "./arquivo.html",
@@ -2056,6 +2065,33 @@ const waitForSplashDeferredBoot = (timeoutMs = splashDeferredBootTimeoutMs) => {
   return eventPromise;
 };
 
+const markHomeFirstFoldReady = (reason = "ready") => {
+  if (homeFirstFoldReadyState.resolved) {
+    return;
+  }
+
+  homeFirstFoldReadyState.resolved = true;
+  window.__CATALOGO_HOME_FIRST_FOLD_READY__ = true;
+  window.__CATALOGO_HOME_FIRST_FOLD_REASON__ = reason;
+  if (typeof homeFirstFoldReadyState.resolve === "function") {
+    homeFirstFoldReadyState.resolve({ reason });
+  }
+  window.dispatchEvent(new CustomEvent("catalogo:home-first-fold-ready", { detail: { reason } }));
+};
+
+const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 1800 : 1400) => {
+  if (window.__CATALOGO_HOME_FIRST_FOLD_READY__) {
+    return Promise.resolve();
+  }
+
+  const readyPromise = window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__;
+  if (readyPromise && typeof readyPromise.then === "function") {
+    return waitForSplashTimeout(readyPromise, timeoutMs);
+  }
+
+  return waitForSplashEvent("catalogo:home-first-fold-ready", timeoutMs);
+};
+
 const waitForSplashImage = (image, timeoutMs = 5000) =>
   new Promise((resolve) => {
     if (!image) {
@@ -2245,6 +2281,11 @@ const waitForSplashReadiness = async () => {
       label: "Resumindo matérias e cards",
       progress: 72,
       wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
+    },
+    {
+      label: "Montando hero e primeiras seções",
+      progress: 84,
+      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 1900 : 1500)
     },
     {
       label: "Conferindo imagens da primeira dobra",
@@ -2468,6 +2509,97 @@ const setupSplashExperience = () => {
 
   void introGate.then(runCinematicOpening).catch(runCinematicOpening);
   void waitForSplashDelay(splashBroadcastStartMaximumMs).then(runCinematicOpening).catch(releaseSplash);
+};
+
+const setupHomeActivationPopup = () => {
+  if (document.querySelector("[data-home-activation-popup]")) {
+    return;
+  }
+
+  const dayKey = getSplashDayKey();
+  let dismissed = false;
+  try {
+    dismissed = window.localStorage.getItem(homeActivationPopupKey) === dayKey;
+  } catch (_error) {
+    dismissed = false;
+  }
+
+  if (dismissed) {
+    return;
+  }
+
+  const overlay = document.createElement("div");
+  overlay.className = "home-activation-popup";
+  overlay.setAttribute("data-home-activation-popup", "");
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Convite para PubPaid e Enquete Acre 2026");
+  overlay.hidden = true;
+  overlay.innerHTML = `
+    <div class="home-activation-card">
+      <button class="home-activation-close" type="button" data-home-popup-close aria-label="Fechar convite">×</button>
+      <span class="home-activation-eyebrow">abriu agora</span>
+      <h2>PubPaid e Enquete Acre 2026 estão ativos.</h2>
+      <p>Depois da capa carregar, teste as mesas da PubPaid ou responda a enquete aberta para a comunidade.</p>
+      <div class="home-activation-actions">
+        <a class="home-activation-btn primary" href="./pubpaid.html">Entrar no PubPaid</a>
+        <a class="home-activation-btn" href="./pesquisa-acre-2026.html">Responder enquete</a>
+      </div>
+      <small>Participação voluntária. A enquete não é pesquisa eleitoral registrada nem científica.</small>
+    </div>
+  `;
+
+  const closePopup = () => {
+    overlay.classList.remove("is-visible");
+    try {
+      window.localStorage.setItem(homeActivationPopupKey, dayKey);
+    } catch (_error) {
+      // Ignora ambientes sem storage.
+    }
+    window.setTimeout(() => overlay.remove(), 180);
+  };
+
+  overlay.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target === overlay || target?.closest?.("[data-home-popup-close]")) {
+      closePopup();
+    }
+  });
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (event.key === "Escape" && document.body.contains(overlay)) {
+        closePopup();
+      }
+    },
+    { once: true }
+  );
+
+  document.body.appendChild(overlay);
+  window.setTimeout(() => {
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add("is-visible"));
+  }, 360);
+};
+
+const scheduleHomeActivationPopup = () => {
+  const show = () => {
+    if (document.body.classList.contains("catalogo-site-booting")) {
+      window.setTimeout(show, 220);
+      return;
+    }
+    setupHomeActivationPopup();
+  };
+
+  if (window.__CATALOGO_LOGO_SPLASH_DONE__ || document.body.classList.contains("site-loaded")) {
+    window.setTimeout(show, 520);
+    return;
+  }
+
+  window.addEventListener("catalogo:logo-splash-finished", () => window.setTimeout(show, 520), {
+    once: true
+  });
 };
 
 const clearMobilePageTransitionState = () => {
@@ -6503,7 +6635,7 @@ const updateHeroMainStory = (photo = {}) => {
 
   if (primaryLink) {
     primaryLink.href = href;
-    primaryLink.textContent = "Ler destaque";
+    primaryLink.textContent = "Ler matéria";
     applyArticleLinkAttrs(primaryLink, href);
   }
 
@@ -18624,6 +18756,7 @@ const hydrateDynamicNews = async () => {
     const runtimeItems = Array.isArray(payload?.items) ? payload.items : [];
 
     if (runtimeItems.length === 0) {
+      markHomeFirstFoldReady("empty-runtime-news");
       return;
     }
 
@@ -18632,6 +18765,7 @@ const hydrateDynamicNews = async () => {
       document.querySelector("#radar .chip-button.is-active[data-filter]")?.dataset.filter ||
       "todos";
     hydrateMosaicHero(merged);
+    renderEditorialUtilityFlow(merged);
     renderWhatMattersNow(merged);
     void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
     initializeHeroTourismHero();
@@ -18641,6 +18775,7 @@ const hydrateDynamicNews = async () => {
     updateLiveFeedItems(merged, { resetFilter: false });
     initializeLiveTicker();
     applyGlobalClosedCardGrids();
+    markHomeFirstFoldReady("runtime-news");
 
     window.setTimeout(() => {
       void Promise.allSettled([
@@ -18653,6 +18788,9 @@ const hydrateDynamicNews = async () => {
     }, 120);
   } catch (error) {
     // Mantem o fallback estatico quando a API nao estiver ligada.
+    renderEditorialUtilityFlow(window.NEWS_DATA || []);
+    renderWhatMattersNow(window.NEWS_DATA || []);
+    markHomeFirstFoldReady("fallback-news");
   }
 };
 
@@ -18699,10 +18837,6 @@ const scheduleHomeBackgroundHydration = () => {
   };
 
   const runSoon = () => {
-    if (splashCompactViewportQuery.matches) {
-      window.setTimeout(execute, 900);
-      return;
-    }
     execute();
   };
 
@@ -19312,6 +19446,10 @@ initializeFloatingPanelToggles();
 initializeFoundersAutoCarousel();
 renderEditorialUtilityFlow(window.NEWS_DATA || []);
 renderWhatMattersNow(window.NEWS_DATA || []);
+window.setTimeout(() => {
+  markHomeFirstFoldReady("static-news");
+}, 1800);
+scheduleHomeActivationPopup();
 window.setTimeout(() => {
   void renderDailyTrendingBuzz();
   void renderDynamicMonthlyBuzz();

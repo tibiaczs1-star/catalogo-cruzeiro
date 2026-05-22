@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-05-20T16:28:14.517Z",
-  "finishedAt": "2026-05-20T16:28:18.307Z",
-  "capturedItems": 199,
-  "capturedToday": 130,
+  "startedAt": "2026-05-22T07:38:02.067Z",
+  "finishedAt": "2026-05-22T07:38:06.669Z",
+  "capturedItems": 269,
+  "capturedToday": 95,
   "activeWindowItems": 420,
   "archiveItems": 1000,
   "reports": [
@@ -12,6 +12,12 @@
       "ok": true,
       "count": 20,
       "mode": "rss"
+    },
+    {
+      "source": "acre-in-foco",
+      "ok": true,
+      "count": 24,
+      "mode": "wordpress-json"
     },
     {
       "source": "agencia-acre",
@@ -36,6 +42,12 @@
       "ok": true,
       "count": 18,
       "mode": "rss"
+    },
+    {
+      "source": "folha-do-acre",
+      "ok": true,
+      "count": 24,
+      "mode": "wordpress-json"
     },
     {
       "source": "g1-brasil",
@@ -68,6 +80,12 @@
       "mode": "rss"
     },
     {
+      "source": "jurua-em-tempo",
+      "ok": true,
+      "count": 24,
+      "mode": "wordpress-json"
+    },
+    {
       "source": "jurua-online",
       "ok": true,
       "count": 24,
@@ -95,11 +113,18 @@
     {
       "source": "the-verge",
       "ok": true,
+      "count": 0,
+      "skipped": true,
+      "reason": "Desativado na rodada 20260522-homecatch1: textos em ingles nao podem vazar para a area publica antes de uma etapa de traducao editorial."
+    },
+    {
+      "source": "tribuna-do-jurua",
+      "ok": true,
       "count": 10,
       "mode": "rss"
     },
     {
-      "source": "tribuna-do-jurua",
+      "source": "voz-do-norte",
       "ok": true,
       "count": 10,
       "mode": "rss"

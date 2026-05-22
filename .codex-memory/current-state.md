@@ -1,16 +1,16 @@
 # Current State
 
-Updated: 2026-05-22T07:12:27.812Z
+Updated: 2026-05-22T07:41:47.232Z
 
 ## Active Goal
 
-- Catalogo CZS reativado com popup PubPaid + pesquisa
+- Home corrigida com popup, primeira dobra carregada e novas fontes
 
 ## Summary
 
-Catalogo de servicos recebeu popup com CTA para PubPaid e Enquete Acre 2026. Rodada manual da pesquisa reaberta como 2026-W21-czs1 ate 2026-06-06 e backend protege Render persistente antigo usando reopen settings. Auditoria de limpeza extrema criada em scripts/cleanup-extreme-audit.js, sem apagar areas protegidas.
+Home recebeu popup PubPaid + Enquete apos intro, gate de primeira dobra esperando hero/primeiras secoes com noticias, CTA Ler materia, botao flutuante de voltar da materia para index.html?skipIntro=1, novas fontes regionais e captacao 2026-05-22.
 
 ## Next
 
-- Commitar somente arquivos da entrega e publicar; depois verificar Render em /catalogo-servicos.html
-- /api/pesquisa-acre-2026/summary e /api/pubpaid/build.
+- Revisar em aparelho mobile real a sensacao do retorno de materia; se o Instagram correto tiver outro handle
+- trocar o link do card.

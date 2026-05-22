@@ -19,6 +19,17 @@ module.exports = [
     priorityReason: "Fonte regional prioritaria do Vale do Jurua; usar REST do WordPress quando RSS redirecionar para HTML."
   },
   {
+    id: "jurua-em-tempo",
+    name: "Jurua em Tempo",
+    feedUrl: "https://www.juruaemtempo.com.br/wp-json/wp/v2/posts?per_page=24&_embed=1",
+    feedType: "wordpress-json",
+    siteUrl: "https://www.juruaemtempo.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 45,
+    priority: 975,
+    priorityReason: "Fonte regional do Vale do Jurua com WordPress REST ativo; amplia cobertura local de CZS, Mancio Lima, Rodrigues Alves e entorno."
+  },
+  {
     id: "agencia-acre",
     name: "Agencia Acre",
     feedUrl: "https://agencia.ac.gov.br/feed/",
@@ -80,6 +91,38 @@ module.exports = [
     priorityReason: "Fonte regional prioritaria; o feed valido e Atom/Blogger em /feeds/posts/default."
   },
   {
+    id: "voz-do-norte",
+    name: "Voz do Norte",
+    feedUrl: "https://www.vozdonorte.com.br/feed/",
+    siteUrl: "https://www.vozdonorte.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 45,
+    priority: 965,
+    priorityReason: "Jornal regional do Jurua com RSS ativo e cobertura direta de Cruzeiro do Sul."
+  },
+  {
+    id: "acre-in-foco",
+    name: "Acre in Foco",
+    feedUrl: "https://acreinfoco.com/wp-json/wp/v2/posts?per_page=24&_embed=1",
+    feedType: "wordpress-json",
+    siteUrl: "https://acreinfoco.com/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 35,
+    priority: 840,
+    priorityReason: "Fonte acreana com editoria do Vale do Jurua; usada para reforcar lacunas regionais quando houver impacto local."
+  },
+  {
+    id: "folha-do-acre",
+    name: "Folha do Acre",
+    feedUrl: "https://folhadoacre.com.br/wp-json/wp/v2/posts?per_page=24&_embed=1",
+    feedType: "wordpress-json",
+    siteUrl: "https://folhadoacre.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 35,
+    priority: 830,
+    priorityReason: "Fonte estadual com cobertura frequente de Cruzeiro do Sul, seguranca, politica e servicos do interior."
+  },
+  {
     id: "agencia-brasil-ultimas",
     name: "Agencia Brasil",
     feedUrl: "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml",
@@ -135,6 +178,8 @@ module.exports = [
     feedUrl: "https://www.theverge.com/rss/index.xml",
     siteUrl: "https://www.theverge.com/",
     defaultCategory: "Novidades",
-    limitPerSource: 10
+    limitPerSource: 10,
+    disabled: true,
+    disabledReason: "Desativado na rodada 20260522-homecatch1: textos em ingles nao podem vazar para a area publica antes de uma etapa de traducao editorial."
   }
 ];

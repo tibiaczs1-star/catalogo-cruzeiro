@@ -110,6 +110,45 @@ body.editorial-home .parallax-southern-cross i:nth-child(5) { left: 132px; top: 
 body.editorial-home #catalogo-telefonico { order: 290; }
 body.editorial-home #escritorios { order: 190; }
 
+body.editorial-home .home-instagram-follow-card {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 16px;
+  border: 1px solid rgba(216, 169, 67, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(216, 169, 67, 0.16), rgba(55, 126, 181, 0.13)),
+    rgba(255, 255, 255, 0.94);
+  color: var(--ph-ink);
+}
+
+body.editorial-home .home-instagram-follow-card span {
+  color: #9d6f13;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.editorial-home .home-instagram-follow-card strong {
+  font-size: clamp(1rem, 2vw, 1.22rem);
+  line-height: 1.22;
+}
+
+body.editorial-home .home-instagram-follow-card a {
+  width: fit-content;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: #102033;
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 body.editorial-home .hero-newsroom-panel.hero-office-panel,
 body.editorial-home .hero-panel-row-gallery,
 body.editorial-home .hero-panel-thumbs {

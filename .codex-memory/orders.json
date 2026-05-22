@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T07:05:00.000Z",
+  "lastUpdatedAt": "2026-05-22T07:30:30.654Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2124,6 +2124,36 @@
       "source": "chat",
       "rawRequest": "Reativar o site Catalogo CZS, atualizar online, colocar popup convidando pessoas a conhecer o jogo e participar da pesquisa eleitoral, fazer a pesquisa voltar a funcionar, e viabilizar limpeza extrema em PubPaid, jogos, gift, Render e site principal para ficar rapido.",
       "summary": "Reativar Catalogo CZS com popup para PubPaid e enquete eleitoral, reabrir rodada da pesquisa e iniciar plano seguro de limpeza/performance.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-corrigir-popup-pubpaid-pesquisa-apos-intro-da-home-preparar-hero-e-primeiras-sec",
+      "createdAt": "2026-05-22T07:29:58.277Z",
+      "updatedAt": "2026-05-22T07:29:58.277Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quero que mude duas coisas, primeiro o pop up do pub paid e da pesquisa apos a intro do site nao apareceu, segundo carregue bem a parte hero antes de inciar o site e pelos 3 seções depois dela ja com as noticias no lugar, porque ele fica demorando ali, e a pessoa desisti de ver e adicione ler materia no hero, pra pessoa ler a materia que ta vendo a foto, mais uma coisa, o mobile recarrega quando agente volta toda vez a intro denovo, eu quero um botão de voltar da pateria no proprio web app que faça ele so recarrega a pagina home denovo, e veja se o arquivo ta funcioando e todas as outras funções, - faça um prompt, execulte e comite",
+      "summary": "Corrigir popup PubPaid/pesquisa após intro da home, preparar hero e primeiras seções com notícias antes de abrir, adicionar CTA Ler matéria no hero, e criar retorno de matéria para home sem intro no mobile.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-rodar-captacao-de-noticias-do-dia-ate-hoje-ampliar-veiculos-fontes-do-vale-do-ju",
+      "createdAt": "2026-05-22T07:30:30.654Z",
+      "updatedAt": "2026-05-22T07:30:30.654Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça uma rodada de capotção de todas as noticias do dia que parou ate hoje e procure mais veiculos de informação do vale do jurua... todo, temos poucos ainda... depois disso coloque o nosso instagram a qual vc ja sabe qual e , como destaque pra seguir em algum canto que seja viavel",
+      "summary": "Rodar captação de notícias do dia até hoje, ampliar veículos/fontes do Vale do Juruá e adicionar destaque viável para seguir o Instagram do projeto.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

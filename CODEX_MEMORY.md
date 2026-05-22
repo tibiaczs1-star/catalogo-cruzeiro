@@ -9,6 +9,16 @@ Atualizado: 2026-05-22
 - Criado `npm run cleanup:audit` para viabilizar limpeza extrema com areas protegidas (`data/`, `.codex-memory/`, `.codex-backups/`, `assets/pubpaid/`, `games/vale-pool/`, `pubpaid-phaser/` e `render-data/`) antes de qualquer remocao destrutiva.
 - Validacao local: `node --check` em `server.js`, `catalogo-servicos.js` e `scripts/cleanup-extreme-audit.js`; `npm run guard:pubpaid`; `npm run cleanup:audit`; servidor local em `:3017` respondeu `catalogo-servicos.html`, `pesquisa-acre-2026.html`, `/api/pesquisa-acre-2026/summary`, `/api/pesquisa-acre-2026/me` e `/api/pubpaid/build`; Playwright-core validou popup desktop/mobile sem erros de console.
 
+## Rodada Atual - 20260522-homecatch1
+
+- Home: popup PubPaid + Enquete Acre 2026 agora aparece na home apos a intro, com trava diaria por `localStorage`.
+- Primeira dobra: intro espera hero e primeiras secoes receberem noticias via `/api/news` ou fallback seguro; `renderEditorialUtilityFlow` tambem roda com os dados dinamicos.
+- Hero: CTA principal virou `Ler matéria` e aponta para a materia da foto/noticia exibida.
+- Materia: adicionado botao flutuante `Voltar para a home` usando `index.html?skipIntro=1`, para evitar repetir a intro no retorno mobile.
+- Fontes/captacao: adicionadas `Jurua em Tempo`, `Voz do Norte`, `Acre in Foco` e `Folha do Acre`; `The Verge` foi desativado por risco de texto publico em ingles.
+- Captacao 2026-05-22: `node scripts/capture-latest-news.js` captou 269 itens, 95 de hoje, com fontes novas OK.
+- Validacao: `node --check` em `backend/source-config.js`, `script.js`, `noticia.js` e `server.js`; `node scripts/guard-pubpaid-no-canvas.js`; `node scripts/review-team-audit.js` zerou vazamento de ingles publico, restando apenas achados medios antigos/false-positive de loading em PubPaid/game demo; HTTP local em `:3022` respondeu home, noticia, `/api/news?limit=5` e `/api/pubpaid/build`; navegador confirmou popup visivel, CTA `Ler matéria`, Instagram e hero/noticias reais sem console errors.
+
 ## Rodada Atual - 20260522-gameux2
 
 - Damas/Xadrez: camera mobile saiu dos controles-orbe e passou a priorizar gesto nativo, com pinch para zoom e arrasto pelas bordas da mesa; controles touch globais ficam ocultos nessas mesas.

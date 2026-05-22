@@ -1,11 +1,10 @@
 # Handoff
 
-Updated: 2026-05-22T07:12:27.869Z
+Updated: 2026-05-22T07:41:47.289Z
 
-Catalogo CZS: popup de reativacao criado em catalogo-servicos.js/css/html com links para PubPaid e pesquisa. Pesquisa Acre 2026 reaberta no backend e em data/acre-2026-poll-settings.json. cleanup:audit criado e validado, report em .codex-temp/cleanup/latest-extreme-audit.md.
+Home recebeu popup PubPaid + Enquete apos intro, gate de primeira dobra esperando hero/primeiras secoes com noticias, CTA Ler materia, botao flutuante de voltar da materia para index.html?skipIntro=1, novas fontes regionais e captacao 2026-05-22.
 
 ## Next
 
-- Stage seletivo
-- commit
-- push main e aguardar Render; nao incluir news-data/runtime-news/data massivos nem limpeza destrutiva sem nova confirmacao.
+- Revisar em aparelho mobile real a sensacao do retorno de materia; se o Instagram correto tiver outro handle
+- trocar o link do card.

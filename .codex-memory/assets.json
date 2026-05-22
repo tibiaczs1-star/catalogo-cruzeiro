@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T04:25:24.096Z",
+  "lastUpdatedAt": "2026-05-22T07:41:38.914Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -971,6 +971,15 @@
         "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud"
       ],
       "createdAt": "2026-05-22T05:18:00.000Z"
+    },
+    {
+      "id": "desktop-home-popup-png",
+      "kind": "image",
+      "path": ".codex-temp/homecatch1/desktop-home-popup.png",
+      "source": "workspace",
+      "note": "Home homecatch1: popup PubPaid/Enquete visivel apos intro, hero com CTA Ler materia e noticias reais.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-22T07:41:38.914Z"
     }
   ]
 }
