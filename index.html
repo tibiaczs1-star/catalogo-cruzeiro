@@ -154,14 +154,14 @@
         }
       </style>
     </noscript>
-  <link rel="stylesheet" href="./styles.css?v=20260522-homegate2" />
+  <link rel="stylesheet" href="./styles.css?v=20260522-homegate3" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homegate2" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homegate3" />
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
@@ -718,8 +718,12 @@
                 <small>Manchetes</small>
                 <strong class="hero-panel-copy-desktop">Escolha uma foto e abra a matéria pelo botão do hero.</strong>
                 <strong class="hero-panel-copy-mobile">Toque numa foto e leia pelo botão do destaque.</strong>
+                <span class="hero-panel-scroll-controls" aria-label="Mover carrossel de manchetes">
+                  <button type="button" class="hero-panel-scroll-button" data-hero-carousel-prev aria-label="Ver fotos anteriores">‹</button>
+                  <button type="button" class="hero-panel-scroll-button" data-hero-carousel-next aria-label="Ver próximas fotos">›</button>
+                </span>
               </span>
-              <span class="hero-panel-media hero-panel-thumbs" aria-label="Manchetes com foto">
+              <span class="hero-panel-media hero-panel-thumbs" data-hero-carousel-track aria-label="Manchetes com foto">
                 <a class="hero-panel-photo" href="./arquivo.html?busca=pol%C3%ADtica" data-headline="Decisões públicas entram quando afetam Cruzeiro do Sul e o Vale do Juruá" data-summary="Acompanhe decisões da prefeitura, governo e câmaras quando elas mudam serviços, obras, saúde ou rotina da cidade." style="--thumb:url('./assets/home-cache/fallback-cotidiano.jpg')"><span><b>Política regional</b><strong>Decisões públicas com impacto local</strong><small>Abrir matéria</small></span></a>
                 <a class="hero-panel-photo" href="./arquivo.html?busca=tr%C3%A2nsito" data-headline="Mudanças no trânsito e nas ruas entram no radar da cidade" data-summary="Obras, desvios, BRs, transporte e movimentação urbana aparecem em resumo rápido para quem precisa sair de casa informado." style="--thumb:url('./assets/home-cache/buzz-via-cruzeiro.jpg')"><span><b>Trânsito</b><strong>Mudanças na rota e nas ruas</strong><small>Abrir matéria</small></span></a>
                 <a class="hero-panel-photo" href="./arquivo.html?busca=sa%C3%BAde" data-headline="Atendimento, prazos e avisos de saúde ficam separados por área" data-summary="Hospitais, UPA, campanhas, atendimentos e informações de saúde entram com caminho claro para o leitor confirmar o serviço." style="--thumb:url('./assets/home-cache/fallback-cheia.jpg')"><span><b>Saúde</b><strong>Serviços e atendimento no Juruá</strong><small>Abrir matéria</small></span></a>
@@ -2047,9 +2051,9 @@
         }, window.__CATALOGO_COMPACT_BOOT__ ? 45000 : 60000);
       })();
     </script>
-    <script defer src="./catalogo-app-core.js?v=20260522-homegate2"></script>
+    <script defer src="./catalogo-app-core.js?v=20260522-homegate3"></script>
     <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
-    <script defer src="./script.js?v=20260522-homegate2"></script>
+    <script defer src="./script.js?v=20260522-homegate3"></script>
     <script>
       (function () {
         const styles = [
@@ -2070,7 +2074,7 @@
           "./modern-launch.css?v=20260415d",
           "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homegate2";
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homegate3";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =

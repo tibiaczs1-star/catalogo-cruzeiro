@@ -102,7 +102,8 @@ const INTERNAL_COPY_PATTERNS = [
   {
     id: "demo",
     label: "linguagem de demo ou teste",
-    regex: /\b(modo demo|teste local|ambiente de teste|prot[oó]tipo)\b/i
+    regex: /\b(modo demo|teste local|ambiente de teste|prot[oó]tipo)\b/i,
+    ignore: [/^\s*focus\s*:/i]
   }
 ];
 
@@ -478,6 +479,20 @@ function auditInternalCopy(filePath, source, issues) {
     INTERNAL_COPY_PATTERNS.forEach((pattern) => {
       if (/^\s*"(id|url|link|sourceUrl|sourceImageUrl|feedImageUrl|imageUrl)"\s*:/i.test(lineText)) {
         return;
+      }
+
+      const visibleLoadingCopy =
+        />\s*(?:loading|carregando(?:\.\.\.|…))\s*</i.test(lineText) ||
+        /\b(?:textContent|innerText|innerHTML)\s*=\s*(["'])\s*(?:loading|carregando(?:\.\.\.|…))\s*\1/i.test(lineText);
+      if (pattern.id === "loading" && !visibleLoadingCopy) {
+        const loadingOnlyAppearsAsHook =
+          /\b(?:data-[a-z0-9:_-]*loading|classList|class=|querySelector|dataset|refs\.[a-z0-9_]*loading|loading[A-Z][a-zA-Z0-9_]*|[a-z0-9_-]*loading[a-z0-9_-]*|state\.loading|\.loading|--[a-z0-9_-]*loading|ppg-[a-z0-9_-]*loading|mode:\s*(["'])loading\1|name\s*={2,3}\s*(["'])loading\2|setPanel\((["'])loading\3|lobbyPhase:\s*(["'])loading\4)\b/i.test(
+            lineText
+          ) ||
+          /^\s*(?:if|const|let|var|return|document\.body|\w+\.addEventListener)\b/i.test(lineText);
+        if (loadingOnlyAppearsAsHook) {
+          return;
+        }
       }
 
       if (Array.isArray(pattern.ignore) && pattern.ignore.some((ignorePattern) => ignorePattern.test(lineText))) {

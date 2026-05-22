@@ -27774,6 +27774,39 @@ html body.editorial-home .hero-story-switcher-panel .hero-panel-copy strong {
   line-height: 1.12 !important;
 }
 
+html body.editorial-home .hero-story-switcher-panel .hero-panel-scroll-controls {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.38rem !important;
+  margin-top: 0.35rem !important;
+}
+
+html body.editorial-home .hero-story-switcher-panel .hero-panel-scroll-button {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255, 213, 122, 0.64) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 208, 91, 0.95), rgba(202, 138, 4, 0.92)) !important;
+  color: #071321 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 10px 22px rgba(0, 0, 0, 0.24) !important;
+  cursor: pointer !important;
+  font: 950 1.35rem/1 "Sora", system-ui, sans-serif !important;
+}
+
+html body.editorial-home .hero-story-switcher-panel .hero-panel-scroll-button:hover,
+html body.editorial-home .hero-story-switcher-panel .hero-panel-scroll-button:focus-visible {
+  transform: translateY(-1px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 14px 28px rgba(0, 0, 0, 0.32) !important;
+}
+
 html body.editorial-home .hero-story-switcher-panel .hero-panel-copy-mobile {
   display: none !important;
 }
@@ -27787,7 +27820,20 @@ html body.editorial-home .hero-story-switcher-panel .hero-panel-thumbs {
   overflow-x: auto !important;
   overscroll-behavior-inline: contain !important;
   padding: 0.08rem 0.08rem 0.38rem !important;
+  scroll-behavior: smooth !important;
+  touch-action: pan-y !important;
+  cursor: grab !important;
   scrollbar-width: thin !important;
+}
+
+html body.editorial-home .hero-story-switcher-panel .hero-panel-thumbs.is-dragging {
+  cursor: grabbing !important;
+  scroll-snap-type: none !important;
+  user-select: none !important;
+}
+
+html body.editorial-home .hero-story-switcher-panel .hero-panel-thumbs.is-dragging .hero-panel-photo {
+  pointer-events: none !important;
 }
 
 html body.editorial-home .hero-story-switcher-panel .hero-panel-photo {
@@ -27981,6 +28027,7 @@ html body.editorial-home .dominant-topic-main span {
     align-items: baseline !important;
     justify-content: space-between !important;
     gap: 0.6rem !important;
+    flex-wrap: wrap !important;
   }
 
   html body.editorial-home .hero-story-switcher-panel .hero-panel-copy-desktop {
@@ -27993,6 +28040,16 @@ html body.editorial-home .dominant-topic-main span {
 
   html body.editorial-home .hero-story-switcher-panel .hero-panel-thumbs {
     grid-auto-columns: minmax(158px, 72vw) !important;
+  }
+
+  html body.editorial-home .hero-story-switcher-panel .hero-panel-scroll-controls {
+    margin-top: 0 !important;
+    margin-left: auto !important;
+  }
+
+  html body.editorial-home .hero-story-switcher-panel .hero-panel-scroll-button {
+    width: 2.35rem !important;
+    height: 2.35rem !important;
   }
 }
 

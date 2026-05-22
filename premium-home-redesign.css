@@ -15539,7 +15539,31 @@ html body.editorial-home .hero-panel-photo.is-active {
     grid-auto-rows: 104px !important;
   }
 
-  html body.editorial-home .hero-panel-photo {
+html body.editorial-home .hero-panel-photo {
     min-width: 160px !important;
   }
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs[data-hero-carousel-track] {
+  display: grid !important;
+  grid-template-columns: none !important;
+  grid-auto-flow: column !important;
+  grid-auto-columns: clamp(154px, 10.5vw, 210px) !important;
+  grid-auto-rows: clamp(112px, 8vw, 136px) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x proximity !important;
+  touch-action: pan-y !important;
+  cursor: grab !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs[data-hero-carousel-track].is-dragging {
+  cursor: grabbing !important;
+  scroll-snap-type: none !important;
+  user-select: none !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs[data-hero-carousel-track].is-dragging .hero-panel-photo {
+  pointer-events: none !important;
 }

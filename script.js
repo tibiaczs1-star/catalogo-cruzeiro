@@ -483,8 +483,8 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260522-homegate2";
-const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522_homegate2";
+const portalWarmCacheName = "catalogo-portal-shell-v20260522-homegate3";
+const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522_homegate3";
 const homeFirstFoldReadyState = {
   resolved: false,
   resolve: null
@@ -496,11 +496,11 @@ window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__ = new Promise((resolve) => {
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260522-homegate2",
-  "./premium-home-redesign.css?v=20260522-homegate2",
+  "./styles.css?v=20260522-homegate3",
+  "./premium-home-redesign.css?v=20260522-homegate3",
   "./startup-experience.css?v=20260513-tv-communityfix1",
   "./early-home-surfaces.js?v=20260513-tv-communityfix1",
-  "./script.js?v=20260522-homegate2",
+  "./script.js?v=20260522-homegate3",
   "./startup-experience.js?v=20260513-tv-communityfix1",
   "./noticia.html",
   "./arquivo.html",
@@ -7713,12 +7713,111 @@ const renderHeroTourismBackground = (photoIndex = 0, { initial = false } = {}) =
   });
 };
 
+const setupHeroPanelCarouselControls = () => {
+  const track = document.querySelector("[data-hero-carousel-track]");
+  if (!track || track._heroCarouselControlsBound) {
+    return;
+  }
+
+  track._heroCarouselControlsBound = true;
+  const previousButton = document.querySelector("[data-hero-carousel-prev]");
+  const nextButton = document.querySelector("[data-hero-carousel-next]");
+
+  const scrollCarousel = (direction = 1) => {
+    const step = Math.max(220, Math.round(track.clientWidth * 0.72));
+    track.scrollBy({
+      left: direction >= 0 ? step : -step,
+      behavior: "smooth"
+    });
+  };
+
+  previousButton?.addEventListener("click", () => scrollCarousel(-1));
+  nextButton?.addEventListener("click", () => scrollCarousel(1));
+
+  let pointerId = null;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let dragMoved = false;
+
+  const endDrag = () => {
+    if (pointerId === null) {
+      return;
+    }
+
+    const activePointerId = pointerId;
+    pointerId = null;
+    track.classList.remove("is-dragging");
+
+    try {
+      track.releasePointerCapture?.(activePointerId);
+    } catch {
+      // Pointer capture can already be released by the browser.
+    }
+
+    if (dragMoved) {
+      track.dataset.heroCarouselDragged = "true";
+      window.setTimeout(() => {
+        delete track.dataset.heroCarouselDragged;
+      }, 120);
+    }
+  };
+
+  track.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    pointerId = event.pointerId;
+    startX = event.clientX;
+    startScrollLeft = track.scrollLeft;
+    dragMoved = false;
+    track.classList.add("is-dragging");
+    track.setPointerCapture?.(pointerId);
+  });
+
+  track.addEventListener(
+    "pointermove",
+    (event) => {
+      if (pointerId === null || event.pointerId !== pointerId) {
+        return;
+      }
+
+      const deltaX = event.clientX - startX;
+      if (Math.abs(deltaX) < 4) {
+        return;
+      }
+
+      dragMoved = true;
+      track.scrollLeft = startScrollLeft - deltaX;
+      event.preventDefault();
+    },
+    { passive: false }
+  );
+
+  track.addEventListener("pointerup", endDrag);
+  track.addEventListener("pointercancel", endDrag);
+  track.addEventListener("lostpointercapture", endDrag);
+  track.addEventListener(
+    "click",
+    (event) => {
+      if (track.dataset.heroCarouselDragged !== "true") {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    true
+  );
+};
+
 const initializeHeroTourismHero = () => {
   if (!heroTourismShell || !heroTourismSlides.length) {
     return;
   }
 
   const liteRuntime = shouldUseLiteHomeRuntime();
+  setupHeroPanelCarouselControls();
 
   const dailyPool = getHeroTourismDailyPool();
   reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(dailyPool));
