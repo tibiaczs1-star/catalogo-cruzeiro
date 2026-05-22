@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T07:30:30.654Z",
+  "lastUpdatedAt": "2026-05-22T07:48:44.677Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2154,6 +2154,21 @@
       "source": "chat",
       "rawRequest": "faça uma rodada de capotção de todas as noticias do dia que parou ate hoje e procure mais veiculos de informação do vale do jurua... todo, temos poucos ainda... depois disso coloque o nosso instagram a qual vc ja sabe qual e , como destaque pra seguir em algum canto que seja viavel",
       "summary": "Rodar captação de notícias do dia até hoje, ampliar veículos/fontes do Vale do Juruá e adicionar destaque viável para seguir o Instagram do projeto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-deixar-entrada-e-retorno-da-materia-mais-explicitos-com-loader-e-animacao-de-vir",
+      "createdAt": "2026-05-22T07:48:44.677Z",
+      "updatedAt": "2026-05-22T07:48:44.677Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tambem quero na quando a pessoa entra na materia seja mais explicito que ela ta carregando depois que carrega vc faz uma animação de passagem de folha tipo livro, e tambem pra voltar, a mesma coisa",
+      "summary": "Deixar entrada e retorno da materia mais explicitos com loader e animacao de virada de folha tipo livro/jornal.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

@@ -5,7 +5,8 @@ const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
 const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
 const PUBLIC_CORRECTION_FOCUS_KEY = "catalogo_public_correction_focus_v1";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
-const ARTICLE_NAVIGATION_LOADER_MS = 650;
+const ARTICLE_NAVIGATION_LOADER_MS = 920;
+const ARTICLE_PAGE_TURN_MS = 680;
 const DETAIL_FALLBACK_IMAGES = [];
 
 const articleNavigationLoaderState = {
@@ -31,38 +32,69 @@ const rememberPageActionLoaderFlag = () => {
   }
 };
 
-const createArticleNavigationLoader = (label = "Abrindo matéria") => {
+const setArticleLoaderContent = (loader, label, options = {}) => {
+  const direction = options.direction === "back" ? "back" : "in";
+  const percent = options.percent || (direction === "back" ? "76%" : "42%");
+  const note =
+    options.note ||
+    (direction === "back"
+      ? "Fechando a matéria e reabrindo a capa sem repetir a intro."
+      : "Organizando foto, título e fonte antes de abrir a leitura.");
+  loader.dataset.direction = direction;
+  loader.setAttribute("aria-label", label);
+  const textNode = loader.querySelector("[data-navigation-loader-status]");
+  if (textNode) textNode.textContent = label;
+  const noteNode = loader.querySelector("[data-navigation-loader-note]");
+  if (noteNode) noteNode.textContent = note;
+  const percentNode = loader.querySelector("[data-navigation-loader-percent]");
+  if (percentNode) percentNode.textContent = percent;
+  const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
+  if (barNode) barNode.style.width = percent;
+};
+
+const createArticleNavigationLoader = (label = "Carregando matéria", options = {}) => {
   const loader = document.createElement("div");
-  loader.className = "catalogo-top-return-loader is-navigation-action-loader is-visible";
+  loader.className = "catalogo-top-return-loader is-article-page-loader is-visible";
   loader.setAttribute("role", "status");
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", label);
   loader.innerHTML = `
-    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width: 42%"></i></span>
+    <span class="catalogo-page-loader-book" aria-hidden="true"><i></i><b></b></span>
     <span class="catalogo-top-return-loader-row">
       <span class="catalogo-top-return-loader-text" data-navigation-loader-status>${label}</span>
       <strong data-navigation-loader-percent>42%</strong>
     </span>
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width: 42%"></i></span>
+    <span class="catalogo-page-loader-note" data-navigation-loader-note>Organizando foto, título e fonte antes de abrir a leitura.</span>
   `;
+  setArticleLoaderContent(loader, label, options);
   return loader;
 };
 
-const showArticleNavigationLoader = (label = "Abrindo matéria", options = {}) => {
+const playArticlePageTurn = (direction = "in") => {
+  const className = direction === "back" ? "article-page-turning-out" : "article-page-turning-in";
+  document.body.classList.remove("article-page-turning-in", "article-page-turning-out");
+  document.body.classList.add(className);
+  window.setTimeout(() => {
+    document.body.classList.remove(className);
+  }, ARTICLE_PAGE_TURN_MS);
+};
+
+const showArticleNavigationLoader = (label = "Carregando matéria", options = {}) => {
   if (options.remember) {
     rememberPageActionLoaderFlag();
   }
   if (articleNavigationLoaderState.loader) {
-    const textNode = articleNavigationLoaderState.loader.querySelector("[data-navigation-loader-status]");
-    if (textNode) textNode.textContent = label;
-    const percentNode = articleNavigationLoaderState.loader.querySelector("[data-navigation-loader-percent]");
-    if (percentNode) percentNode.textContent = "74%";
-    const barNode = articleNavigationLoaderState.loader.querySelector(".catalogo-top-return-loader-track i");
-    if (barNode) barNode.style.width = "74%";
+    setArticleLoaderContent(articleNavigationLoaderState.loader, label, {
+      ...options,
+      percent: options.percent || "74%"
+    });
     return articleNavigationLoaderState.loader;
   }
-  const loader = createArticleNavigationLoader(label);
+  const loader = createArticleNavigationLoader(label, options);
   articleNavigationLoaderState.loader = loader;
   articleNavigationLoaderState.startedAt = Date.now();
+  document.body.classList.add("article-loading-active");
   document.body.appendChild(loader);
   return loader;
 };
@@ -81,6 +113,7 @@ const hideArticleNavigationLoader = () => {
         loader.remove();
         articleNavigationLoaderState.loader = null;
         articleNavigationLoaderState.startedAt = 0;
+        document.body.classList.remove("article-loading-active");
         resolve();
       }, 220);
     }, remaining);
@@ -94,16 +127,26 @@ const shouldHandleLoaderNavigation = (event, link) => {
   return !target || target === "_self";
 };
 
-if (consumePageActionLoaderFlag()) {
-  showArticleNavigationLoader("Abrindo matéria");
-}
+const cameFromPageAction = consumePageActionLoaderFlag();
+showArticleNavigationLoader(cameFromPageAction ? "Abrindo matéria" : "Carregando matéria", {
+  note: cameFromPageAction
+    ? "Virando a folha para mostrar a matéria escolhida."
+    : "Preparando título, foto e fonte da notícia.",
+  percent: cameFromPageAction ? "48%" : "38%"
+});
 
 document.addEventListener("click", (event) => {
   const link = event.target instanceof Element ? event.target.closest("a[data-home-return]") : null;
   if (!shouldHandleLoaderNavigation(event, link)) return;
   const href = link.getAttribute("href") || HOME_RETURN_URL;
   event.preventDefault();
-  showArticleNavigationLoader("Voltando para a home", { remember: true });
+  playArticlePageTurn("back");
+  showArticleNavigationLoader("Voltando para a home", {
+    direction: "back",
+    note: "Fechando a matéria e reabrindo a home sem repetir a intro.",
+    percent: "78%",
+    remember: true
+  });
   window.setTimeout(() => {
     window.location.href = new URL(href, window.location.href).href;
   }, ARTICLE_NAVIGATION_LOADER_MS);
@@ -2028,6 +2071,7 @@ loadArticle()
     console.error("[noticia] falha ao carregar materia", error);
     renderNotFound();
   })
-  .finally(() => {
-    hideArticleNavigationLoader();
+  .finally(async () => {
+    await hideArticleNavigationLoader();
+    playArticlePageTurn("in");
   });

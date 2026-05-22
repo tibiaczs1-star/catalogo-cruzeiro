@@ -2538,12 +2538,26 @@ const setupHomeActivationPopup = () => {
   overlay.innerHTML = `
     <div class="home-activation-card">
       <button class="home-activation-close" type="button" data-home-popup-close aria-label="Fechar convite">×</button>
-      <span class="home-activation-eyebrow">abriu agora</span>
-      <h2>PubPaid e Enquete Acre 2026 estão ativos.</h2>
-      <p>Depois da capa carregar, teste as mesas da PubPaid ou responda a enquete aberta para a comunidade.</p>
-      <div class="home-activation-actions">
-        <a class="home-activation-btn primary" href="./pubpaid.html">Entrar no PubPaid</a>
-        <a class="home-activation-btn" href="./pesquisa-acre-2026.html">Responder enquete</a>
+      <span class="home-activation-eyebrow">novidade no Catálogo</span>
+      <h2>Escolha sua próxima parada.</h2>
+      <p class="home-activation-lead">Tem jogo para testar e pesquisa rápida para participar. Dois atalhos abertos para a comunidade do Juruá.</p>
+      <div class="home-activation-options">
+        <article class="home-activation-option is-game">
+          <span class="home-activation-icon" aria-hidden="true">🎱</span>
+          <div>
+            <strong>PubPaid</strong>
+            <p>Entre nas mesas, teste Sinuca, Damas e Xadrez e ajude a calibrar o jogo antes da rodada real.</p>
+          </div>
+          <a class="home-activation-btn primary" href="./pubpaid.html">Jogar agora</a>
+        </article>
+        <article class="home-activation-option is-poll">
+          <span class="home-activation-icon" aria-hidden="true">📊</span>
+          <div>
+            <strong>Enquete Acre 2026</strong>
+            <p>Dê seu sinal sobre o cenário político e veja como a comunidade está respondendo.</p>
+          </div>
+          <a class="home-activation-btn" href="./pesquisa-acre-2026.html">Responder pesquisa</a>
+        </article>
       </div>
       <small>Participação voluntária. A enquete não é pesquisa eleitoral registrada nem científica.</small>
     </div>

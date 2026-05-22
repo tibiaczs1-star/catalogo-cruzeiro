@@ -75,7 +75,7 @@ body.fx-lite .pro-orbital-field {
 
 .home-activation-card {
   position: relative;
-  width: min(520px, 100%);
+  width: min(720px, 100%);
   padding: clamp(22px, 4vw, 30px);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
@@ -123,22 +123,71 @@ body.fx-lite .pro-orbital-field {
 
 .home-activation-card h2 {
   margin: 12px 0 10px;
-  max-width: 14ch;
+  max-width: 18ch;
   font-size: clamp(1.65rem, 5vw, 2.45rem);
   line-height: 1;
 }
 
-.home-activation-card p {
+.home-activation-card p,
+.home-activation-lead {
   margin: 0;
   color: rgba(244, 251, 255, 0.82);
   line-height: 1.58;
 }
 
-.home-activation-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.home-activation-lead {
+  max-width: 56ch;
+}
+
+.home-activation-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   margin: 18px 0 12px;
+}
+
+.home-activation-option {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  min-height: 238px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.home-activation-option.is-game {
+  background:
+    linear-gradient(145deg, rgba(247, 201, 122, 0.18), rgba(255, 255, 255, 0.08)),
+    rgba(255, 255, 255, 0.08);
+}
+
+.home-activation-option.is-poll {
+  background:
+    linear-gradient(145deg, rgba(120, 195, 255, 0.18), rgba(255, 255, 255, 0.08)),
+    rgba(255, 255, 255, 0.08);
+}
+
+.home-activation-icon {
+  display: inline-grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 1.65rem;
+}
+
+.home-activation-option strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.home-activation-option p {
+  font-size: 0.95rem;
 }
 
 .home-activation-btn {
@@ -159,6 +208,21 @@ body.fx-lite .pro-orbital-field {
   border-color: rgba(247, 201, 122, 0.64);
   background: #f7c97a;
   color: #102c49;
+}
+
+@media (max-width: 640px) {
+  .home-activation-card {
+    max-height: min(86vh, 720px);
+    overflow: auto;
+  }
+
+  .home-activation-options {
+    grid-template-columns: 1fr;
+  }
+
+  .home-activation-option {
+    min-height: 0;
+  }
 }
 
 body.fx-lite .page-shell,

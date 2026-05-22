@@ -2,6 +2,14 @@
 
 Atualizado: 2026-05-22
 
+## Rodada Atual - 20260522-articleturn1
+
+- Popup da home: copy refeita para anunciar PubPaid e Enquete Acre 2026 como duas escolhas claras, com icones, descricao e botoes dedicados.
+- Materia: carregamento de entrada ficou explicito e a abertura/volta ganharam animacao de virada de folha.
+- Retorno da materia: alem do botao flutuante, a pagina agora tem botao de voltar dentro do artigo, visivel tambem no desktop, sempre usando `index.html?skipIntro=1`.
+- Cache-bust local: `20260522-articleturn1`.
+- Validacao: `node --check` em `noticia.js` e `script.js`; `git diff --check`; HTTP local em `:3033` respondeu home, materia e `/api/news?limit=3`; auditoria local com idioma publico 0 e achados restantes medios/pre-existentes de loading/controles.
+
 ## Rodada Atual - 20260522-catalogreactivate1
 
 - Catalogo CZS reativado no fluxo publico de `catalogo-servicos.html` com popup de entrada chamando para `PubPaid` e para a Enquete Acre 2026.

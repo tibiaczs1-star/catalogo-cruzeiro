@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-05-22T07:41:47.232Z
+Updated: 2026-05-22T08:15:00.000Z
 
 ## Active Goal
 
-- Home corrigida com popup, primeira dobra carregada e novas fontes
+- Popup e entrada/volta da materia refinados
 
 ## Summary
 
-Home recebeu popup PubPaid + Enquete apos intro, gate de primeira dobra esperando hero/primeiras secoes com noticias, CTA Ler materia, botao flutuante de voltar da materia para index.html?skipIntro=1, novas fontes regionais e captacao 2026-05-22.
+Popup da home recebeu copy premium para PubPaid e Enquete Acre 2026, com cards, icones e botoes claros. Pagina de materia agora mostra carregamento explicito, animacao de virada de folha ao abrir/voltar e botao de voltar dentro do artigo tambem no desktop.
 
 ## Next
 
-- Revisar em aparelho mobile real a sensacao do retorno de materia; se o Instagram correto tiver outro handle
-- trocar o link do card.
+- Revisar em aparelho mobile real a sensacao da virada de folha e do retorno para a home.
