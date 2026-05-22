@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T18:41:27.513Z",
+  "lastUpdatedAt": "2026-05-22T19:41:35.974Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2427,11 +2427,59 @@
     {
       "id": "2026-05-22-refinar-editorial-e-velocidade-do-czs-para-aproximar-10-10-sem-mexer-no-pubpaid",
       "createdAt": "2026-05-22T18:41:27.513Z",
-      "updatedAt": "2026-05-22T18:41:27.513Z",
-      "status": "open",
+      "updatedAt": "2026-05-22T19:23:45.891Z",
+      "status": "editorial10b-implemented-validated-local",
       "source": "chat",
       "rawRequest": "entao refine o editorial, para alcaçar 10 de 10 em velocidade e editorial",
       "summary": "Refinar editorial e velocidade do CZS para aproximar 10/10 sem mexer no PubPaid.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "server.js",
+        "script.js",
+        "scripts/agents-autonomy-cycle.js",
+        "scripts/capture-latest-news.js",
+        "data/runtime-news.json",
+        "news-data.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "czs",
+        "editorial",
+        "performance",
+        "home",
+        "news-api"
+      ],
+      "nextSteps": [
+        "publicar e validar Render se o usuario pedir deploy"
+      ],
+      "notes": "Rodada editorial10b: templates genericos zerados, gate de destaque aplicado, ranking hiperlocal priorizando Jurua/Cruzeiro e smoke local :3081 passou."
+    },
+    {
+      "id": "2026-05-22-validar-pvp-pubpaid-online-local-com-agentes-guard-review-team-contrato-de-duas-",
+      "createdAt": "2026-05-22T18:56:33.122Z",
+      "updatedAt": "2026-05-22T18:56:33.122Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça os testes online de pvp no jogo pub paid, use agentes para validar tudo e entregue relatorio",
+      "summary": "Validar PvP PubPaid online/local com agentes, guard, review team, contrato de duas sessoes e relatorio funcional.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-subir-e-sincronizar-todas-as-mudancas-atuais-validar-funcionamento-e-relatar-est",
+      "createdAt": "2026-05-22T19:41:35.974Z",
+      "updatedAt": "2026-05-22T19:41:35.974Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "fizemos mudancas e atualizacoes, agora suba tudo, sincronize e me de um relatorio se esta tudo funcional, inclusive qual seu heart",
+      "summary": "Subir e sincronizar todas as mudancas atuais, validar funcionamento e relatar estado/heart do projeto",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

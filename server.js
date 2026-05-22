@@ -6709,6 +6709,75 @@ function normalizeEditorialFingerprint(value = "") {
     .trim();
 }
 
+function stripLegacyEditorialSummary(value = "") {
+  return cleanShortText(stripHtml(value), 500)
+    .replace(
+      /\s*A fonte(?:\s+[\wÀ-ÿ-]+)?\s+consultada\s+traz\s+a\s+base\s+da\s+publica[cç][aã]o,?\s+e\s+(?:o\s+)?portal\s+acompanha\s+novas\s+atualiza[cç][oõ]es\s+antes\s+de\s+ampliar\s+o\s+texto\.?$/i,
+      ""
+    )
+    .replace(
+      /\s*A fonte(?:\s+[\wÀ-ÿ-]+)?\s+traz\s+a\s+base\s+da\s+publica[cç][aã]o,?\s+e\s+(?:o\s+)?portal\s+acompanha\s+novas\s+atualiza[cç][oõ]es\s+antes\s+de\s+ampliar\s+o\s+texto\.?$/i,
+      ""
+    )
+    .replace(/\s+A fonte consultada traz a base da publica[cç][aã]o.*$/i, "")
+    .trim();
+}
+
+const SENSITIVE_EDITORIAL_PATTERN =
+  /\b(ataque|atentado|tiroteio|morte|mortes|morre|morreu|morto|morta|mortos|mortas|falece|faleceu|falecimento|velado|velorio|corpo|assassin|homicidio|feminicidio|estupro|abuso|violencia|violent|crianca|criancas|bebe|bebes|adolescente|adolescentes|menor|menores|escola|escolas|instituto|aluno|alunos|policia|prisao|presidio|presidios|preso|presa|suspeito|suspeita|delegacia|tornozeleira|arma|tiro|ferido|hospital|tumor|cancer|suicidio|tragedia|acidente|desastre|enchente|incendio|ameaca|crime|faccao|mpac|gaeco)\b/i;
+const ROUTINE_NOTICE_PATTERN =
+  /\b(cotacao de preco|cotacao de precos|aviso de licitacao|pregao|concorrencia eletronica|chamada publica|credenciamento|dispensa de licitacao|extrato de contrato|diario oficial)\b/i;
+const LOCAL_IMPACT_PATTERN =
+  /\b(cruzeiro do sul|czs|jurua|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|acre|rio branco|sena madureira|feijo|xapuri|brasileia|assis brasil|placido de castro)\b/i;
+const JURUA_IMPACT_PATTERN =
+  /\b(cruzeiro do sul|czs|jurua|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca)\b/i;
+const ACRE_IMPACT_PATTERN =
+  /\b(acre|rio branco|sena madureira|feijo|xapuri|brasileia|assis brasil|placido de castro)\b/i;
+const NATIONAL_SERVICE_PATTERN =
+  /\b(fgts|pis|pasep|imposto de renda|receita federal|inss|anvisa|enem|concurso|calendario|prazo|renegociacao|desenrola|mega sena)\b/i;
+const REMOTE_LOW_PRIORITY_PATTERN =
+  /\b(trump|israel|ira|iraque|russia|china|putin|xi jinping|ebola|flamengo|corinthians|neymar|real madrid|fifa|copa do mundo|faria lima|bolsonaro|lula|stf|senado|camara|congresso|celebridade|famoso|famosa|globo|sbt|record)\b/i;
+
+function buildEditorialGate(item = {}) {
+  const contentText = normalizeEditorialFingerprint(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+  const localSignalText = normalizeEditorialFingerprint(
+    [item.title, item.summary, item.lede, item.description, item.location].join(" ")
+  );
+  const sourceCount = getArticleSourceEntries(item).length;
+  const hasVisualCredit = Boolean(cleanShortText(item.imageCredit || item.credit || item.media?.credit || "", 220));
+  const isSensitive = SENSITIVE_EDITORIAL_PATTERN.test(contentText);
+  const isRoutineNotice = ROUTINE_NOTICE_PATTERN.test(contentText);
+  const isRemoteLowPriority =
+    REMOTE_LOW_PRIORITY_PATTERN.test(contentText) && !LOCAL_IMPACT_PATTERN.test(localSignalText);
+  const editorialLocalTier = JURUA_IMPACT_PATTERN.test(localSignalText)
+    ? 3
+    : ACRE_IMPACT_PATTERN.test(localSignalText)
+      ? 2
+      : NATIONAL_SERVICE_PATTERN.test(contentText)
+        ? 1
+        : 0;
+  const editorialSpotlightReady =
+    !isRoutineNotice && !isRemoteLowPriority && (!isSensitive || (sourceCount >= 2 && hasVisualCredit));
+
+  return {
+    editorialGate: isSensitive ? "P0" : "P1",
+    editorialApproval: isSensitive ? "human-required" : "auto-check",
+    editorialSpotlightReady,
+    editorialSurfaceTier: isRoutineNotice ? "service-notice" : isRemoteLowPriority ? "remote-secondary" : "news",
+    editorialLocalTier,
+    sourceCount
+  };
+}
+
 function isRepeatedEditorialText(paragraph = "", reference = "") {
   const paragraphKey = normalizeEditorialFingerprint(paragraph);
   const referenceKey = normalizeEditorialFingerprint(reference);
@@ -6828,6 +6897,11 @@ function normalizeArticleRecord(item) {
   const sourceUrl = item.sourceUrl || item.url || item.link || "#";
   const publishedAt = item.publishedAt || item.date || item.createdAt || new Date().toISOString();
   const slug = String(item.slug || slugify(title) || item.id || "").trim();
+  const cleanSummary =
+    stripLegacyEditorialSummary(item.summary || item.lede || item.description || "") || "Sem resumo.";
+  const cleanLede =
+    stripLegacyEditorialSummary(item.lede || item.summary || item.description || "") || cleanSummary;
+  const editorialGate = buildEditorialGate({ ...item, sourceName, sourceUrl, title });
 
   return {
     id: item.id || slug || sourceUrl || title,
@@ -6842,8 +6916,9 @@ function normalizeArticleRecord(item) {
     sourceName,
     sourceUrl,
     sourceLabel: item.sourceLabel || title,
-    lede: item.lede || item.summary || item.description || "Sem resumo.",
-    summary: item.summary || item.lede || item.description || "Sem resumo.",
+    ...editorialGate,
+    lede: cleanLede,
+    summary: cleanSummary,
     analysis: item.analysis || "",
     body: normalizeEditorialBody({ ...item, title, sourceName, sourceLabel: item.sourceLabel || title }),
     highlights: Array.isArray(item.highlights) ? item.highlights.filter(Boolean) : [],
@@ -7009,6 +7084,17 @@ function sortArticleItems(left, right) {
   const dateLayerDiff = getPublicNewsDayTimestamp(right) - getPublicNewsDayTimestamp(left);
   if (dateLayerDiff !== 0) {
     return dateLayerDiff;
+  }
+
+  const spotlightReadyDiff =
+    Number(right.editorialSpotlightReady !== false) - Number(left.editorialSpotlightReady !== false);
+  if (spotlightReadyDiff !== 0) {
+    return spotlightReadyDiff;
+  }
+
+  const localTierDiff = Number(right.editorialLocalTier || 0) - Number(left.editorialLocalTier || 0);
+  if (localTierDiff !== 0) {
+    return localTierDiff;
   }
 
   const rightFocus = getEditorialFocusScore(right);
@@ -7220,6 +7306,12 @@ function buildLiteArticleNewsApiItem(item = {}) {
     media: item.media,
     priority: item.priority,
     editorialPriority: item.editorialPriority,
+    editorialGate: item.editorialGate,
+    editorialApproval: item.editorialApproval,
+    editorialSpotlightReady: item.editorialSpotlightReady,
+    editorialSurfaceTier: item.editorialSurfaceTier,
+    editorialLocalTier: item.editorialLocalTier,
+    sourceCount: item.sourceCount,
     crossSources: item.crossSources,
     alternateSlugs: item.alternateSlugs
   };

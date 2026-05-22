@@ -47,6 +47,20 @@ function cleanText(value = "", limit = 0) {
   return limit && text.length > limit ? `${text.slice(0, limit - 1).trim()}...` : text;
 }
 
+function stripLegacySummaryTail(value = "") {
+  return cleanText(value)
+    .replace(
+      /\s*A fonte(?:\s+[\wÀ-ÿ-]+)?\s+consultada\s+traz\s+a\s+base\s+da\s+publica[cç][aã]o,?\s+e\s+(?:o\s+)?portal\s+acompanha\s+novas\s+atualiza[cç][oõ]es\s+antes\s+de\s+ampliar\s+o\s+texto\.?$/i,
+      ""
+    )
+    .replace(
+      /\s*A fonte(?:\s+[\wÀ-ÿ-]+)?\s+traz\s+a\s+base\s+da\s+publica[cç][aã]o,?\s+e\s+(?:o\s+)?portal\s+acompanha\s+novas\s+atualiza[cç][oõ]es\s+antes\s+de\s+ampliar\s+o\s+texto\.?$/i,
+      ""
+    )
+    .replace(/\s+A fonte consultada traz a base da publica[cç][aã]o.*$/i, "")
+    .trim();
+}
+
 function formatDate(value) {
   const date = new Date(value || Date.now());
   if (Number.isNaN(date.getTime())) return "data recente";
@@ -123,9 +137,74 @@ const REVIEW_COPY_BLOCKLIST = [
   "o diferencial " + "editorial aqui"
 ];
 
+const SENSITIVE_EDITORIAL_PATTERN =
+  /\b(ataque|atentado|tiroteio|morte|mortes|morre|morreu|morto|morta|mortos|mortas|falece|faleceu|falecimento|velado|velorio|corpo|assassin|homicidio|feminicidio|estupro|abuso|violencia|violent|crianca|criancas|bebe|bebes|adolescente|adolescentes|menor|menores|escola|escolas|instituto|aluno|alunos|policia|prisao|presidio|presidios|preso|presa|suspeito|suspeita|delegacia|tornozeleira|arma|tiro|ferido|hospital|tumor|cancer|suicidio|tragedia|acidente|desastre|enchente|incendio|ameaca|crime|fac[cç][aã]o|mpac|gaeco)\b/i;
+const ROUTINE_NOTICE_PATTERN =
+  /\b(cotacao de preco|cotacao de precos|aviso de licitacao|pregao|concorrencia eletronica|chamada publica|credenciamento|dispensa de licitacao|extrato de contrato|diario oficial)\b/i;
+const LOCAL_IMPACT_PATTERN =
+  /\b(cruzeiro do sul|czs|jurua|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|acre|rio branco|sena madureira|feijo|xapuri|brasileia|assis brasil|placido de castro)\b/i;
+const JURUA_IMPACT_PATTERN =
+  /\b(cruzeiro do sul|czs|jurua|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca)\b/i;
+const ACRE_IMPACT_PATTERN =
+  /\b(acre|rio branco|sena madureira|feijo|xapuri|brasileia|assis brasil|placido de castro)\b/i;
+const NATIONAL_SERVICE_PATTERN =
+  /\b(fgts|pis|pasep|imposto de renda|receita federal|inss|anvisa|enem|concurso|calendario|prazo|renegociacao|desenrola|mega sena)\b/i;
+const REMOTE_LOW_PRIORITY_PATTERN =
+  /\b(trump|israel|ira|iraque|russia|china|putin|xi jinping|ebola|flamengo|corinthians|neymar|real madrid|fifa|copa do mundo|faria lima|bolsonaro|lula|stf|senado|camara|congresso|celebridade|famos[ao]|globo|sbt|record)\b/i;
+
 function hasReviewBlockedCopy(value = "") {
   const text = cleanText(value).toLowerCase();
   return REVIEW_COPY_BLOCKLIST.some((fragment) => text.includes(fragment));
+}
+
+function getSourceCount(item = {}) {
+  const entries = new Set();
+  [item.sourceUrl, item.url, item.link].filter(Boolean).forEach((url) => entries.add(String(url)));
+  [item.crossSources, item.alternateSources, item.sources].forEach((collection) => {
+    if (!Array.isArray(collection)) return;
+    collection.forEach((source) => {
+      if (source?.url || source?.name) entries.add(String(source.url || source.name));
+    });
+  });
+  return Math.max(Number(item.sourceCount || 0), entries.size, item.sourceUrl ? 1 : 0);
+}
+
+function getEditorialGate(item = {}) {
+  const contentText = fingerprint(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+  const localSignalText = fingerprint([item.title, item.summary, item.lede, item.description, item.location].join(" "));
+  const isSensitive = SENSITIVE_EDITORIAL_PATTERN.test(contentText);
+  const isRoutineNotice = ROUTINE_NOTICE_PATTERN.test(contentText);
+  const isRemoteLowPriority =
+    REMOTE_LOW_PRIORITY_PATTERN.test(contentText) && !LOCAL_IMPACT_PATTERN.test(localSignalText);
+  const editorialLocalTier = JURUA_IMPACT_PATTERN.test(localSignalText)
+    ? 3
+    : ACRE_IMPACT_PATTERN.test(localSignalText)
+      ? 2
+      : NATIONAL_SERVICE_PATTERN.test(contentText)
+        ? 1
+        : 0;
+  const sourceCount = getSourceCount(item);
+  const hasVisualCredit = Boolean(cleanText(item.imageCredit || item.credit || item.media?.credit || ""));
+  const spotlightReady =
+    !isRoutineNotice && !isRemoteLowPriority && (!isSensitive || (sourceCount >= 2 && hasVisualCredit));
+
+  return {
+    editorialGate: isSensitive ? "P0" : "P1",
+    editorialApproval: isSensitive ? "human-required" : "auto-check",
+    editorialSpotlightReady: spotlightReady,
+    editorialSurfaceTier: isRoutineNotice ? "service-notice" : isRemoteLowPriority ? "remote-secondary" : "news",
+    editorialLocalTier,
+    sourceCount
+  };
 }
 
 function sanitizeReviewCopy(item = {}) {
@@ -139,12 +218,13 @@ function sanitizeReviewCopy(item = {}) {
   const sanitizedDevelopment = Array.isArray(item.development)
     ? item.development.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
     : item.development;
-  const fallbackSummary = `${title}. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.`;
-  const summary = trimToCompleteSentence(item.summary || item.lede || "", fallbackSummary);
-  const lede = trimToCompleteSentence(item.lede || item.summary || "", summary || fallbackSummary);
+  const fallbackSummary = title;
+  const summary = trimToCompleteSentence(stripLegacySummaryTail(item.summary || item.lede || ""), fallbackSummary);
+  const lede = trimToCompleteSentence(stripLegacySummaryTail(item.lede || item.summary || ""), summary || fallbackSummary);
 
   return {
     ...item,
+    ...getEditorialGate(item),
     lede: isLongTheaterFeed
       ? `${title}. A publicacao do G1 Pop & Arte traz os principais detalhes do espetaculo e da temporada.`
       : lede,
@@ -315,7 +395,21 @@ function normalizeNewsItems(items = []) {
     return { ...item, body: nextBody };
   });
 
-  return { items: applyMailzaPriority(nextItems).map(sanitizeReviewCopy), addedBody, removedRepeated };
+  return {
+    items: applyMailzaPriority(nextItems)
+      .map(sanitizeReviewCopy)
+      .sort((left, right) => {
+        const readyDiff = Number(right.editorialSpotlightReady !== false) - Number(left.editorialSpotlightReady !== false);
+        if (readyDiff !== 0) return readyDiff;
+        const localTierDiff = Number(right.editorialLocalTier || 0) - Number(left.editorialLocalTier || 0);
+        if (localTierDiff !== 0) return localTierDiff;
+        const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
+        if (priorityDiff !== 0) return priorityDiff;
+        return getNewsTimestamp(right) - getNewsTimestamp(left);
+      }),
+    addedBody,
+    removedRepeated
+  };
 }
 
 function readStaticNewsData() {

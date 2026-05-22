@@ -5430,6 +5430,17 @@ const compareEditorialFlowArticles = (
     return dateLayerDiff;
   }
 
+  const spotlightReadyDiff =
+    Number(right?.editorialSpotlightReady !== false) - Number(left?.editorialSpotlightReady !== false);
+  if (spotlightReadyDiff !== 0) {
+    return spotlightReadyDiff;
+  }
+
+  const localTierDiff = Number(right?.editorialLocalTier || 0) - Number(left?.editorialLocalTier || 0);
+  if (localTierDiff !== 0) {
+    return localTierDiff;
+  }
+
   const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);
   if (mailzaDiff !== 0) {
     return mailzaDiff;

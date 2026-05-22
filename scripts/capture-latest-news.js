@@ -348,7 +348,8 @@ function hasFeedMarkupNoise(value = "") {
 function fallbackSummaryFor(item = {}) {
   const title = cleanText(item.title || item.sourceLabel || "Atualizacao monitorada", 180);
   const sourceName = cleanText(item.sourceName || "Fonte monitorada", 80);
-  return `${title}. A fonte ${sourceName} traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.`;
+  const sourceSuffix = sourceName && sourceName !== "Fonte monitorada" ? ` Fonte: ${sourceName}.` : "";
+  return `${title}.${sourceSuffix}`;
 }
 
 function normalizeFeedMarkupNoise(item = {}) {

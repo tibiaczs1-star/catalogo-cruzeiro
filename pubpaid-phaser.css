@@ -10496,6 +10496,40 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   .ppg-dom-game-ui.is-table .ppg-chess-sidecar {
     display: none !important;
   }
+
+  .ppg-chess-turn-chip {
+    position: absolute;
+    z-index: 12;
+    left: max(10px, var(--ppg-safe-left));
+    top: max(10px, var(--ppg-safe-top));
+    display: grid;
+    gap: 2px;
+    max-width: min(250px, calc(100dvw - 150px));
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 219, 132, 0.34);
+    color: #fff7df;
+    background: linear-gradient(135deg, rgba(5, 9, 14, 0.92), rgba(22, 18, 8, 0.84));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    text-transform: uppercase;
+  }
+
+  .ppg-chess-turn-chip span {
+    color: rgba(255, 222, 151, 0.82);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .ppg-chess-turn-chip strong {
+    overflow: hidden;
+    color: #fff7df;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.05;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 /* Xadrez fullscreen law: the board is the game, not a panel inside the page. */
@@ -10760,9 +10794,15 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess
 
 .ppg-checkers-sidecar .ppg-dom-actions button,
 .ppg-chess-exit,
-.ppg-checkers-exit {
+.ppg-checkers-exit,
+.ppg-checkers-mobile-resign {
   clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
   border-radius: 0;
+}
+
+.ppg-checkers-mobile-resign,
+.ppg-chess-turn-chip {
+  display: none;
 }
 
 body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-sidecar {
@@ -11028,6 +11068,28 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
   .ppg-checkers-sidecar {
     display: none !important;
   }
+
+  .ppg-checkers-mobile-resign {
+    position: absolute;
+    z-index: 12;
+    right: max(12px, var(--ppg-safe-right));
+    bottom: max(8px, var(--ppg-safe-bottom));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 78px;
+    min-height: 28px;
+    padding: 7px 12px;
+    border: 1px solid rgba(255, 243, 208, 0.22);
+    color: #fff9e9;
+    background: linear-gradient(135deg, rgba(255, 120, 142, 0.96), rgba(168, 35, 69, 0.95));
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
 }
 
 @media (hover: none), (pointer: coarse), (max-width: 760px) {
@@ -11062,6 +11124,40 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
 
   .ppg-camera-hint .is-mobile-copy {
     display: inline;
+  }
+
+  .ppg-chess-turn-chip {
+    position: absolute;
+    z-index: 12;
+    left: max(10px, var(--ppg-safe-left));
+    top: max(10px, var(--ppg-safe-top));
+    display: grid;
+    gap: 2px;
+    max-width: min(250px, calc(100dvw - 150px));
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 219, 132, 0.34);
+    color: #fff7df;
+    background: linear-gradient(135deg, rgba(5, 9, 14, 0.92), rgba(22, 18, 8, 0.84));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    text-transform: uppercase;
+  }
+
+  .ppg-chess-turn-chip span {
+    color: rgba(255, 222, 151, 0.82);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .ppg-chess-turn-chip strong {
+    overflow: hidden;
+    color: #fff7df;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.05;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .ppg-camera-edge.is-top,
@@ -11108,10 +11204,22 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
 }
 
 .ppg-checkers-camera.ppg-camera-orb button {
-  width: 32px;
+  width: auto;
   min-width: 0;
   height: 32px;
   min-height: 32px;
+  padding-inline: 10px;
+  white-space: nowrap;
+}
+
+@media (max-height: 430px) and (orientation: landscape) {
+  .ppg-chess-turn-chip {
+    display: grid !important;
+  }
+
+  .ppg-chess-board-stage > .ppg-camera-hint {
+    display: none !important;
+  }
 }
 
 /* Final board-control pass: keep play clicks and camera gestures visually separate. */

@@ -929,9 +929,10 @@ export function bindDomGameInterface(game) {
   const cameraOrbMarkup = (game = "chess", fixed = true) => {
     const attr = game === "checkers" ? "data-checkers-camera" : "data-chess-camera";
     const label = game === "checkers" ? "Damas" : "Xadrez";
+    const copy = fixed ? "Mesa fixa" : "Girar rival";
     return `
       <div class="ppg-${game}-camera ppg-checkers-camera ppg-camera-orb is-lock-only" aria-label="Trava de mesa de ${label}">
-        <button type="button" class="is-camera-lock${fixed ? " is-active" : ""}" ${attr}="lock" aria-pressed="${fixed ? "true" : "false"}">${fixed ? "Mesa fixa" : "Girar rival"}</button>
+        <button type="button" class="is-camera-lock${fixed ? " is-active" : ""}" ${attr}="lock" aria-pressed="${fixed ? "true" : "false"}" title="${copy}">${copy}</button>
       </div>
     `;
   };
@@ -2201,10 +2202,12 @@ export function bindDomGameInterface(game) {
               ? `Captura em cadeia: continue com a peça destacada.${coinLine}`
               : `Sua vez. Escolha uma peça.${coinLine}`
             : `Aguardando jogada do rival.${coinLine}`;
-      if (refs.forfeitCheckers) {
-        refs.forfeitCheckers.disabled = tournamentMode ? false : demoMode ? false : match.status !== "active" && match.status !== "abandoned";
-        refs.forfeitCheckers.textContent = tournamentMode ? "Voltar ao torneio" : demoMode ? "Reiniciar demo" : match.status === "finished" ? "Mesa encerrada" : "Desistir";
-      }
+      const checkersForfeitDisabled = tournamentMode ? false : demoMode ? false : match.status !== "active" && match.status !== "abandoned";
+      const checkersForfeitText = tournamentMode ? "Voltar ao torneio" : demoMode ? "Reiniciar demo" : match.status === "finished" ? "Mesa encerrada" : "Desistir";
+      document.querySelectorAll("[data-dom-forfeit-checkers]").forEach((button) => {
+        button.disabled = checkersForfeitDisabled;
+        button.textContent = checkersForfeitText;
+      });
       setCheckersPlayerCard({
         root: refs.checkersSelf,
         initial: refs.checkersSelfInitial,
@@ -3063,15 +3066,15 @@ export function bindDomGameInterface(game) {
   } = {}) => `
     ${demo ? `
       <div class="ppg-vale-pool-controls is-demo-help">
-        <span>Mouse mira</span>
+        <span>Mire na mesa</span>
         <span>1-5 ou bola de efeito</span>
-        <span>Clique para tacar</span>
+        <span>Toque ou clique para tacar</span>
       </div>
     ` : ""}
     ${ballInHandOwn ? `
       <div class="ppg-vale-pool-controls is-demo-help">
         <span>Bola na mão</span>
-        <span>Clique na mesa para posicionar a branca</span>
+        <span>Escolha na mesa onde repor a branca</span>
       </div>
     ` : ""}
     ${pvp && !setup.complete ? renderPoolSetupControls(match, seat) : ""}
@@ -3696,6 +3699,9 @@ export function bindDomGameInterface(game) {
       const chessCinematicActive = local.chessIntroLocked && local.chessIntroPhase !== "coin";
       const turnSeat = chessSeatForColor(state, state.turnColor);
       const chessMoveFeedback = syncChessMoveFeedback(match);
+      const chessTurnText = chessMoveFeedback
+        ? "Movimento feito..."
+        : getChessTurnSummary(match, seat, demoMode);
       refs.tableScore.textContent = `${state.history?.length || match.moveCount || 0} lances`;
       refs.tableStatus.textContent = demoMode && local.demoChessAiThinking
         ? "Máquina pensando por 3 segundos."
@@ -3708,6 +3714,10 @@ export function bindDomGameInterface(game) {
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <button type="button" class="ppg-chess-exit" data-dom-open-lobby>Mesas</button>
           ${demoMode ? "" : `<button type="button" class="ppg-chess-resign" data-dom-generic-forfeit>Desistir</button>`}
+          <div class="ppg-chess-turn-chip" aria-live="polite">
+            <span>${demoMode ? "treino" : "turno"}</span>
+            <strong>${escapeHtml(chessTurnText)}</strong>
+          </div>
           <div class="ppg-chess-board-stage" data-chess-stage>
             <div class="ppg-chess-intro${local.chessIntroLocked ? " is-visible" : ""}" ${local.chessIntroLocked ? "" : "hidden"}>
               ${renderChessIntroMarkup(match)}

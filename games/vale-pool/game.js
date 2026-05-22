@@ -1563,7 +1563,7 @@
       });
       text("Leia o modo antes da mesa. A partida so libera depois de COMEÇAR.", panel.x + 44, panel.y + 226, 13, palette.greenText);
     } else {
-      text("MOEDA DA SAIDA", 372, 234, 22, palette.goldHi);
+      text("MOEDA", 412, 234, 22, palette.goldHi);
       drawSetupCoin(228, 306);
       const line = state.setupPhase === "coin-flip"
         ? "MOEDA GIRANDO..."

@@ -2,6 +2,28 @@
 
 Atualizado: 2026-05-22
 
+## Rodada Atual - 20260522-sync1
+
+- Ordem atual registrada: subir/sincronizar todas as mudancas e entregar relatorio de funcionalidade/heart.
+- Validacao local antes de subir: `node --check` nos JS tocados, `git diff --check`, `npm run guard:pubpaid`, `npm run agents:cycle`, `npm run review:team` com `totalIssues: 0`, `npm run editorial:health` OK, `npm run perf:budget` OK nao estrito e `npm run codex:health` OK.
+- Smoke HTTP local em `:3092`: home HTTP 200, `/api/news?limit=10&lite=1` com 10 itens e `/api/pubpaid/build=20260522-boardfit1`.
+- Heart atual: memoria local viva, ultima ordem reconhecida pelo `codex:health`, worktree pronto para commit/push; pendencia funcional apenas a recomendacao recorrente de validar PvP real com duas contas reais/autenticadas antes de dinheiro de usuario.
+
+## Rodada Atual - 20260522-editorial10b
+
+- CZS/editorial refinado rumo a 10/10 sem tocar no runtime PubPaid: removidos templates antigos de resumo/lede (`A fonte consultada traz a base...`, `redacao automatica`, `ponto principal...`) de `data/runtime-news.json` e `news-data.js`.
+- Captura, servidor e ciclo dos agentes agora evitam recriar esse texto generico; fallback fica no fato confirmado, impacto pratico e acompanhamento.
+- Adicionado gate editorial automatico: `editorialGate`, `editorialApproval`, `editorialSpotlightReady`, `editorialSurfaceTier`, `editorialLocalTier` e `sourceCount`; materias sensiveis, avisos burocraticos e remoto secundario seguem no acervo, mas nao competem pela primeira dobra.
+- Ranking da home/API passou a priorizar Juruá/Cruzeiro do Sul primeiro, Acre depois, serviço nacional util depois e remoto secundario no fundo.
+- Validacao local: `node --check` em `server.js`, `script.js`, `scripts/agents-autonomy-cycle.js` e `scripts/capture-latest-news.js`; `npm run agents:cycle`; `npm run review:team` com PubPaid guard OK e `totalIssues: 0`; `npm run editorial:health` OK; `npm run perf:budget` OK nao estrito com divida antiga em `styles.css`; smoke local em `:3081` confirmou home 200, `/api/news?limit=10&lite=1`, build PubPaid `20260522-boardfit1` e top 10 com `tier=3`, `ready=true`, `surface=news`.
+
+## Rodada Atual - 20260522-pvpqa1
+
+- PubPaid PvP validado sem alterar runtime: build online Render `20260522-boardfit1` confirmado em `/api/pubpaid/build` e `/pubpaid.html` HTTP 200 contendo o mesmo build.
+- Travas locais: `node --check` em `server.js`, `pubpaid-phaser/app.js`, `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/services/pvpService.js`, `pubpaid-phaser/services/accountService.js` e `games/vale-pool/game.js`; `npm run guard:pubpaid`; `npm run review:team` com `totalIssues: 0`.
+- Contrato PvP em `DATA_DIR` isolado: duas sessoes autenticadas sinteticas passaram por auth obrigatoria, saldo, escrow, pareamento, `Estou pronto` dos dois lados, setup/tacada da Sinuca, lance de Damas, lance de Xadrez e settlement financeiro.
+- Browser local carregou PubPaid sem console errors na tela inicial; login Google real em navegador e partida completa com duas contas reais ainda ficam como recomendacao antes de operar dinheiro de usuario em producao.
+
 ## Rodada Atual - 20260522-editorial10a
 
 - CZS/editorial refinado sem misturar com PubPaid: home passou a pre-carregar `/api/news?limit=60&lite=1`, enquanto materias por slug continuam com corpo completo.
@@ -332,7 +354,7 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 
 ## Direcao De Arte PubPaid
 
-- Anchor oficial de arte: `.codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png`.
+- Anchor oficial de arte: `assets/game-director-demo/realistic-host-spritesheet.png`. O caminho antigo em `.codex-temp/pixellab-tests/realistic-host-walk-demo/assets/realistic-host-spritesheet.png` ficou apenas como origem historica e pode nao existir em retomadas novas.
 - Tudo novo deve parecer da mesma familia desse personagem: pixel art com leitura de sprite, mas volume, roupa, luz, proporcao e presenca super realistas.
 - Nao aceitar arte chibi simples, cubo, cartoon infantil, pixel art flat demais ou pintura HD borrada.
 - Criterio pratico: pixel art realista com contorno, sombra, roupa detalhada, corpo humano crivel e estrutura pronta para spritesheet/animacao.

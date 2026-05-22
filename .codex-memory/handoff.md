@@ -1,10 +1,29 @@
 # Handoff
 
-Updated: 2026-05-22T18:48:17.517Z
+Updated: 2026-05-22T19:43:17.155Z
 
-Fechamento anterior completo preservado. Rodada atual refinou CZS/editorial sem mexer no PubPaid: home agora pre-carrega `/api/news?limit=60&lite=1`; o endpoint lite nao inclui `body`; medicao local reduziu o fetch inicial antigo `limit=80` completo de 233112 bytes para 121138 bytes (-48,0%). O fallback editorial do servidor e dos agentes agora gera corpo com fato confirmado, impacto pratico e acompanhamento; `activeWindowItems`, `items` e `news-data.js` foram cobertos pela rotina.
+Sincronizacao final desta rodada: pacote atual validado localmente antes de subir. Checks executados: node --check nos JS tocados, git diff --check, npm run guard:pubpaid, npm run agents:cycle, npm run review:team com totalIssues 0, npm run editorial:health OK, npm run perf:budget OK nao estrito, npm run codex:health OK e smoke HTTP local :3092 para home/API/PubPaid.
 
 ## Next
 
-- Proximo trabalho deve comecar por este handoff; manter Projeto Codex e PubPaid separados no raciocinio e no escopo.
-- Para CZS, validar primeiro `npm run review:team`, `npm run perf:budget`, `/api/news?limit=60&lite=1` e uma materia por slug.
+- Se o usuario pedir prova online
+- checar Render apos deploy com /
+- /api/news?limit=10&lite=1 e /api/pubpaid/build.
+- Manter CZS e PubPaid separados; nao redesenhar mesas/tabuleiros sem pedido explicito.
+
+## Files In Focus
+
+- server.js
+- script.js
+- scripts/agents-autonomy-cycle.js
+- scripts/capture-latest-news.js
+- data/runtime-news.json
+- news-data.js
+- pubpaid.html
+- pubpaid-phaser.css
+- pubpaid-phaser/ui/domGameInterface.js
+- games/vale-pool/game.js
+- CODEX_MEMORY.md
+- .codex-memory/current-state.md
+- .codex-memory/handoff.md
+- .codex-memory/orders.json

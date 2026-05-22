@@ -1,16 +1,34 @@
 # Current State
 
-Updated: 2026-05-22T18:48:17.517Z
+Updated: 2026-05-22T19:43:16.990Z
 
 ## Active Goal
 
-- Refinamento editorial e velocidade do CZS, separado do PubPaid
+- Mudancas validadas e prontas para sincronizacao
 
 ## Summary
 
-Projeto Codex/CZS e PubPaid seguem como frentes separadas. Rodada editorial aplicou `/api/news?limit=60&lite=1` para a home, removendo `body` do primeiro fetch e reduzindo localmente o payload inicial de noticias de 233112 para 121138 bytes (-48,0%). Fallback editorial novo troca texto generico por fato confirmado, impacto pratico e o que acompanhar; `data/runtime-news.json` e `news-data.js` ficaram sem os padroes antigos `base desta noticia`, `redacao automatica acompanha` e `ponto principal da atualizacao captada automaticamente`.
+Rodada de sincronizacao validou o pacote atual de CZS/editorial, PubPaid e memoria local. Sintaxe passou nos arquivos tocados, PubPaid guard passou, agents:cycle passou, review:team ficou com totalIssues 0, editorial:health OK, perf:budget OK nao estrito com divida antiga em styles.css, codex:health OK e smoke local em :3092 confirmou home 200, /api/news?limit=10&lite=1 com 10 itens e /api/pubpaid/build=20260522-boardfit1.
 
 ## Next
 
-- Retomar CZS por correcoes pontuais/editorial, usando payload lite na home e detalhe completo por slug.
-- PubPaid: Sinuca, Damas, Xadrez e PvP real quando houver duas sessoes autenticadas.
+- Apos push
+- conferir Render se precisar validar producao ao vivo.
+- PvP real com dinheiro ainda recomenda duas contas reais/autenticadas antes de operar usuario final.
+
+## Files In Focus
+
+- server.js
+- script.js
+- scripts/agents-autonomy-cycle.js
+- scripts/capture-latest-news.js
+- data/runtime-news.json
+- news-data.js
+- pubpaid.html
+- pubpaid-phaser.css
+- pubpaid-phaser/ui/domGameInterface.js
+- games/vale-pool/game.js
+- CODEX_MEMORY.md
+- .codex-memory/current-state.md
+- .codex-memory/handoff.md
+- .codex-memory/orders.json

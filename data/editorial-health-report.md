@@ -1,162 +1,162 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-12T20:25:13.274Z
-Escopo: 360/1167 itens recentes.
+Gerado em: 2026-05-22T19:41:13.284Z
+Escopo: 360/993 itens recentes.
 
 ## Resumo
-- Gates: P0 76, P1 146, P2 138
-- Aprovacao humana exigida: 76
-- Pendencias de fonte: 76
-- Pendencias visuais: 183
+- Gates: P0 95, P1 174, P2 91
+- Aprovacao humana exigida: 95
+- Pendencias de fonte: 95
+- Pendencias visuais: 281
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
+- P0 human-approval: STF julga nesta sexta prisão preventiva de primo de Vorcaro
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
+- P0 ide-fix: STF julga nesta sexta prisão preventiva de primo de Vorcaro
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
+- P0 ide-fix: STF julga nesta sexta prisão preventiva de primo de Vorcaro
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
+- P0 human-approval: Polícia pede informações relacionadas à investigação do ex-príncipe Andrew
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
+- P0 ide-fix: Polícia pede informações relacionadas à investigação do ex-príncipe Andrew
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
+- P0 ide-fix: Polícia pede informações relacionadas à investigação do ex-príncipe Andrew
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
+- P0 human-approval: Deolane ligada ao PCC: o que se sabe e quais são os próximos passos
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
+- P0 ide-fix: Deolane ligada ao PCC: o que se sabe e quais são os próximos passos
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
+- P0 ide-fix: Deolane ligada ao PCC: o que se sabe e quais são os próximos passos
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
+- P0 human-approval: Deolane e PCC: polícia aponta relação antiga entre influenciadora e facção
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
+- P0 ide-fix: Deolane e PCC: polícia aponta relação antiga entre influenciadora e facção
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
+- P0 ide-fix: Deolane e PCC: polícia aponta relação antiga entre influenciadora e facção
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
+- P0 human-approval: Com mais de R$ 6 milhões destinados por Coronel Ulysses, iniciaram hoje os atendimentos do programa “Enxerga Mais Rio Branco” na Escola Mariano da Silva
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
+- P0 ide-fix: Com mais de R$ 6 milhões destinados por Coronel Ulysses, iniciaram hoje os atendimentos do programa “Enxerga Mais Rio Branco” na Escola Mariano da Silva
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
+- P0 ide-fix: Com mais de R$ 6 milhões destinados por Coronel Ulysses, iniciaram hoje os atendimentos do programa “Enxerga Mais Rio Branco” na Escola Mariano da Silva
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Acre registra queda de 21,56% nos furtos em 2026, aponta Sejusp
+- P0 human-approval: Suspeita de envolvimento em assalto a motorista de app é presa no Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Acre registra queda de 21,56% nos furtos em 2026, aponta Sejusp
+- P0 ide-fix: Suspeita de envolvimento em assalto a motorista de app é presa no Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acre registra queda de 21,56% nos furtos em 2026, aponta Sejusp
+- P0 ide-fix: Suspeita de envolvimento em assalto a motorista de app é presa no Acre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Urgente: homem é encontrado morto debaixo de ponte em Rio Branco
+- P0 human-approval: PRF apreende 90 kg de skunk em fiscalização na BR-317, no Acre; motorista confessou transporte de droga
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Urgente: homem é encontrado morto debaixo de ponte em Rio Branco
+- P0 ide-fix: PRF apreende 90 kg de skunk em fiscalização na BR-317, no Acre; motorista confessou transporte de droga
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Urgente: homem é encontrado morto debaixo de ponte em Rio Branco
-  Motivo: Pendencia visual: p0-com-ilustracao-generica.
+- P0 ide-fix: PRF apreende 90 kg de skunk em fiscalização na BR-317, no Acre; motorista confessou transporte de droga
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual, p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Caminhonete da Polícia Penal sofre acidente após tentativa de desviar de buraco em estrada de Cruzeiro do Sul
+- P0 human-approval: Polícia Federal recusa proposta de delação premiada de Vorcaro
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Caminhonete da Polícia Penal sofre acidente após tentativa de desviar de buraco em estrada de Cruzeiro do Sul
+- P0 ide-fix: Polícia Federal recusa proposta de delação premiada de Vorcaro
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Caminhonete da Polícia Penal sofre acidente após tentativa de desviar de buraco em estrada de Cruzeiro do Sul
-  Motivo: Pendencia visual: p0-com-ilustracao-generica.
+- P0 ide-fix: Polícia Federal recusa proposta de delação premiada de Vorcaro
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
-  - Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul: veja
-  - O que se sabe sobre caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de C
-  - Jurua Online informa: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de
-- Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
-  - Operação nacional da PF mira facções criminosas e cumpre mandados no Acre: veja os pontos principais
-  - O que se sabe sobre operação nacional da PF mira facções criminosas e cumpre mandados no Acre
-  - Jurua Online informa: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
-- Câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por enchentes
-  - Câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por enchentes: veja os pon
-  - Entenda câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por enchentes
-  - Jurua Online informa: Câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por
-- Após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa Civil fará laudo técnico
-  - Após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa Civil fará laudo técnic
-  - Entenda após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa Civil fará laud
-  - Jurua Online informa: Após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa C
-- Suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul
-  - Suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul: veja os pontos principais
-  - Entenda suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul
-  - Jurua Online informa: Suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul
-- Frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Juruá
-  - Frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Juruá: veja os pontos pri
-  - Entenda frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Juruá
-  - Jurua Online informa: Frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Jur
-- Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
-  - Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual: veja os pontos princip
-  - O que se sabe sobre cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
-  - Jurua Online informa: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
-- Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
-  - Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual: veja
-  - O que se sabe sobre aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a
-  - Jurua Online informa: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda
-- Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
-  - Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica: veja os pontos
-  - O que se sabe sobre detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência domést
-  - Jurua Online informa: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência domé
-- Acre tem um dos maiores números de mães solo do país, aponta IBGE
-  - Acre tem um dos maiores números de mães solo do país, aponta IBGE: veja os pontos principais
-  - Entenda acre tem um dos maiores números de mães solo do país, aponta IBGE
-  - Jurua Online informa: Acre tem um dos maiores números de mães solo do país, aponta IBGE
-- Governo do Acre amplia prazo de adesão ao Refis
-  - Governo do Acre amplia prazo de adesão ao Refis: veja os pontos principais
-  - Entenda governo do Acre amplia prazo de adesão ao Refis
-  - Jurua Online informa: Governo do Acre amplia prazo de adesão ao Refis
-- COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO
-  - COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO: veja os pontos principais
-  - Entenda cOTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO
-  - Prefeitura de CZS informa: COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO
+- COTAÇÃO DE PREÇO
+  - COTAÇÃO DE PREÇO: veja os pontos principais
+  - Entenda cOTAÇÃO DE PREÇO
+  - Prefeitura de CZS informa: COTAÇÃO DE PREÇO
+- COTAÇÃO DE PREÇOS
+  - COTAÇÃO DE PREÇOS: veja os pontos principais
+  - Entenda cOTAÇÃO DE PREÇOS
+  - Prefeitura de CZS informa: COTAÇÃO DE PREÇOS
+- PE N°010/2026 - Aviso de Licitação
+  - PE N°010/2026 - Aviso de Licitação: veja os pontos principais
+  - Entenda pE N°010/2026 - Aviso de Licitação
+  - Prefeitura de CZS informa: PE N°010/2026 - Aviso de Licitação
+- Q10: o que é essa coenzima e quando tomar
+  - Q10: o que é essa coenzima e quando tomar: veja os pontos principais
+  - Entenda q10: o que é essa coenzima e quando tomar
+  - CNN Brasil informa: Q10: o que é essa coenzima e quando tomar
+- Governo anuncia novo bloqueio no orçamento nesta sexta (22)
+  - Governo anuncia novo bloqueio no orçamento nesta sexta (22): veja os pontos principais
+  - Entenda governo anuncia novo bloqueio no orçamento nesta sexta (22)
+  - CNN Brasil informa: Governo anuncia novo bloqueio no orçamento nesta sexta (22)
+- Análise: Como a guerra no Oriente Médio afetou a economia dos EUA?
+  - Análise: Como a guerra no Oriente Médio afetou a economia dos EUA: veja os pontos principais
+  - Entenda análise: Como a guerra no Oriente Médio afetou a economia dos EUA
+  - CNN Brasil informa: Análise: Como a guerra no Oriente Médio afetou a economia dos EUA
+- STF começa julgamento sobre mudanças na Lei da Ficha Limpa
+  - STF começa julgamento sobre mudanças na Lei da Ficha Limpa: veja os pontos principais
+  - Entenda sTF começa julgamento sobre mudanças na Lei da Ficha Limpa
+  - CNN Brasil informa: STF começa julgamento sobre mudanças na Lei da Ficha Limpa
+- 6×1 tem último seminário enquanto espera por relatório final de Prates
+  - 6×1 tem último seminário enquanto espera por relatório final de Prates: veja os pontos principais
+  - Entenda 6×1 tem último seminário enquanto espera por relatório final de Prates
+  - CNN Brasil informa: 6×1 tem último seminário enquanto espera por relatório final de Prates
+- É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios
+  - É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios: veja os pontos princ
+  - Entenda é o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios
+  - G1 Pop & Arte informa: É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafio
+- Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu
+  - Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu: veja o
+  - Entenda almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu
+  - G1 Pop & Arte informa: Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativ
+- STF julga nesta sexta prisão preventiva de primo de Vorcaro
+  - STF julga nesta sexta prisão preventiva de primo de Vorcaro: veja os pontos principais
+  - O que se sabe sobre sTF julga nesta sexta prisão preventiva de primo de Vorcaro
+  - CNN Brasil informa: STF julga nesta sexta prisão preventiva de primo de Vorcaro
+- Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
+  - Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22): veja os pontos principais
+  - Entenda imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
+  - CNN Brasil informa: Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
 
 ## Formatos especiais seguros
-- agenda visual: Jogos e eventos para não perder nesta terça-feira (12)
+- agenda visual: COTAÇÃO DE PREÇO
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Clima adverso nos EUA eleva cotações do trigo em chicago
+- agenda visual: COTAÇÃO DE PREÇOS
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Professores bolivianos bloqueiam ponte na fronteira com o Acre em protesto por reajuste salarial
+- agenda visual: PE N°010/2026 - Aviso de Licitação
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Irmã do traficante Abelha é presa por tráfico e ligação com CV no Rio
+- agenda visual: Q10: o que é essa coenzima e quando tomar
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Porto Walter conquista 3º lugar em evolução da Alfabetização no Acre
+- agenda visual: Governo anuncia novo bloqueio no orçamento nesta sexta (22)
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Possível convocado, Bento sofre falha bizarra e adia título saudita de CR7
+- agenda visual: Análise: Como a guerra no Oriente Médio afetou a economia dos EUA?
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Bento tem falha bisonha, Al-Nassr empata e não confirma título saudita
+- agenda visual: STF começa julgamento sobre mudanças na Lei da Ficha Limpa
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Autoridades de defesa e comércio viajam com Trump à China; veja lista
+- agenda visual: 6×1 tem último seminário enquanto espera por relatório final de Prates
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Copa do Mundo: veja os jogadores que estão na pré-lista da seleção brasileira
+- agenda visual: É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Mansão bloqueada de Renato Aragão tem heliponto e campo de futebol; veja
+- agenda visual: Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Cantor de “Lose Control” revela perrengue ao se ouvir no rádio pela 1ª vez
+- agenda visual: Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Lupita Nyong’o interpretará duas personagens em filme de Christopher Nolan
+- agenda visual: Renault Niagara é confirmada: picape feita na Argentina mira Toro e Tukan
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

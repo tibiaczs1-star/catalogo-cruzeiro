@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-22T18:47:44.674Z",
+  "updatedAt": "2026-05-22T19:42:30.774Z",
   "actions": [
     {
       "id": "act-esttiles-fashion-ecommerce-1",
@@ -10,11 +10,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/01-esttiles-fashion-ecommerce.md",
-      "createdAt": "2026-05-22T18:47:44.646Z"
+      "createdAt": "2026-05-22T19:42:30.737Z"
     },
     {
       "id": "act-esttiles-fashion-cms-fashion-2",
@@ -24,11 +24,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/02-esttiles-fashion-cms-fashion.md",
-      "createdAt": "2026-05-22T18:47:44.646Z"
+      "createdAt": "2026-05-22T19:42:30.738Z"
     },
     {
       "id": "act-esttiles-fashion-data-fashion-3",
@@ -38,11 +38,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/03-esttiles-fashion-data-fashion.md",
-      "createdAt": "2026-05-22T18:47:44.647Z"
+      "createdAt": "2026-05-22T19:42:30.739Z"
     },
     {
       "id": "act-esttiles-fashion-photo-pipeline-4",
@@ -52,11 +52,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/04-esttiles-fashion-photo-pipeline.md",
-      "createdAt": "2026-05-22T18:47:44.647Z"
+      "createdAt": "2026-05-22T19:42:30.739Z"
     },
     {
       "id": "act-esttiles-fashion-calendar-fashion-5",
@@ -66,11 +66,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/05-esttiles-fashion-calendar-fashion.md",
-      "createdAt": "2026-05-22T18:47:44.648Z"
+      "createdAt": "2026-05-22T19:42:30.740Z"
     },
     {
       "id": "act-esttiles-fashion-trend-ai-6",
@@ -80,11 +80,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/06-esttiles-fashion-trend-ai.md",
-      "createdAt": "2026-05-22T18:47:44.648Z"
+      "createdAt": "2026-05-22T19:42:30.741Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-deploy-7",
@@ -94,11 +94,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8611,
+      "points": 8863,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/07-esttiles-fashion-fashion-deploy.md",
-      "createdAt": "2026-05-22T18:47:44.649Z"
+      "createdAt": "2026-05-22T19:42:30.742Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-lead-8",
@@ -108,11 +108,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 8607,
+      "points": 8859,
       "outcome": "success",
       "title": "redistribuir foco entre Prefeitura, Política, Cotidiano",
       "artifact": ".codex-temp/real-agents/artifacts/08-esttiles-fashion-fashion-lead.md",
-      "createdAt": "2026-05-22T18:47:44.649Z"
+      "createdAt": "2026-05-22T19:42:30.742Z"
     },
     {
       "id": "act-esttiles-fashion-trend-lead-9",
@@ -122,11 +122,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/09-esttiles-fashion-trend-lead.md",
-      "createdAt": "2026-05-22T18:47:44.650Z"
+      "createdAt": "2026-05-22T19:42:30.743Z"
     },
     {
       "id": "act-esttiles-fashion-street-style-10",
@@ -136,11 +136,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/10-esttiles-fashion-street-style.md",
-      "createdAt": "2026-05-22T18:47:44.650Z"
+      "createdAt": "2026-05-22T19:42:30.744Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-reporter-11",
@@ -150,11 +150,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/11-esttiles-fashion-fashion-reporter.md",
-      "createdAt": "2026-05-22T18:47:44.650Z"
+      "createdAt": "2026-05-22T19:42:30.745Z"
     },
     {
       "id": "act-esttiles-fashion-fabric-editor-12",
@@ -164,11 +164,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/12-esttiles-fashion-fabric-editor.md",
-      "createdAt": "2026-05-22T18:47:44.651Z"
+      "createdAt": "2026-05-22T19:42:30.745Z"
     },
     {
       "id": "act-esttiles-fashion-culture-fashion-13",
@@ -178,11 +178,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/13-esttiles-fashion-culture-fashion.md",
-      "createdAt": "2026-05-22T18:47:44.651Z"
+      "createdAt": "2026-05-22T19:42:30.746Z"
     },
     {
       "id": "act-esttiles-fashion-menswear-14",
@@ -192,11 +192,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/14-esttiles-fashion-menswear.md",
-      "createdAt": "2026-05-22T18:47:44.652Z"
+      "createdAt": "2026-05-22T19:42:30.747Z"
     },
     {
       "id": "act-esttiles-fashion-womenswear-15",
@@ -206,11 +206,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/15-esttiles-fashion-womenswear.md",
-      "createdAt": "2026-05-22T18:47:44.652Z"
+      "createdAt": "2026-05-22T19:42:30.748Z"
     },
     {
       "id": "act-esttiles-fashion-kids-fashion-16",
@@ -220,11 +220,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/16-esttiles-fashion-kids-fashion.md",
-      "createdAt": "2026-05-22T18:47:44.653Z"
+      "createdAt": "2026-05-22T19:42:30.749Z"
     },
     {
       "id": "act-esttiles-fashion-plus-style-17",
@@ -234,11 +234,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/17-esttiles-fashion-plus-style.md",
-      "createdAt": "2026-05-22T18:47:44.653Z"
+      "createdAt": "2026-05-22T19:42:30.750Z"
     },
     {
       "id": "act-esttiles-fashion-shop-guide-18",
@@ -248,11 +248,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/18-esttiles-fashion-shop-guide.md",
-      "createdAt": "2026-05-22T18:47:44.654Z"
+      "createdAt": "2026-05-22T19:42:30.751Z"
     },
     {
       "id": "act-esttiles-fashion-beauty-copy-19",
@@ -262,11 +262,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 8602,
+      "points": 8854,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Cursos de qualificação em assistência social formam profissionais de 7 municípios acreanos em Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/19-esttiles-fashion-beauty-copy.md",
-      "createdAt": "2026-05-22T18:47:44.654Z"
+      "createdAt": "2026-05-22T19:42:30.752Z"
     },
     {
       "id": "act-editorial-hq-dev-automacao-20",
@@ -276,11 +276,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/20-editorial-hq-dev-automacao.md",
-      "createdAt": "2026-05-22T18:47:44.654Z"
+      "createdAt": "2026-05-22T19:42:30.752Z"
     },
     {
       "id": "act-editorial-hq-otto-physics-21",
@@ -290,11 +290,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/21-editorial-hq-otto-physics.md",
-      "createdAt": "2026-05-22T18:47:44.655Z"
+      "createdAt": "2026-05-22T19:42:30.753Z"
     },
     {
       "id": "act-nerd-studio-zed-engine-22",
@@ -304,11 +304,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/22-nerd-studio-zed-engine.md",
-      "createdAt": "2026-05-22T18:47:44.655Z"
+      "createdAt": "2026-05-22T19:42:30.754Z"
     },
     {
       "id": "act-arte-game-design-collision-23",
@@ -318,11 +318,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/23-arte-game-design-collision.md",
-      "createdAt": "2026-05-22T18:47:44.656Z"
+      "createdAt": "2026-05-22T19:42:30.755Z"
     },
     {
       "id": "act-arte-game-design-physics-24",
@@ -332,11 +332,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/24-arte-game-design-physics.md",
-      "createdAt": "2026-05-22T18:47:44.657Z"
+      "createdAt": "2026-05-22T19:42:30.755Z"
     },
     {
       "id": "act-arte-game-design-controls-25",
@@ -346,11 +346,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/25-arte-game-design-controls.md",
-      "createdAt": "2026-05-22T18:47:44.658Z"
+      "createdAt": "2026-05-22T19:42:30.756Z"
     },
     {
       "id": "act-arte-game-design-engine-arch-26",
@@ -360,11 +360,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/26-arte-game-design-engine-arch.md",
-      "createdAt": "2026-05-22T18:47:44.658Z"
+      "createdAt": "2026-05-22T19:42:30.757Z"
     },
     {
       "id": "act-arte-game-design-npc-ai-27",
@@ -374,11 +374,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/27-arte-game-design-npc-ai.md",
-      "createdAt": "2026-05-22T18:47:44.659Z"
+      "createdAt": "2026-05-22T19:42:30.757Z"
     },
     {
       "id": "act-arte-game-design-pool-physics-28",
@@ -388,11 +388,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/28-arte-game-design-pool-physics.md",
-      "createdAt": "2026-05-22T18:47:44.659Z"
+      "createdAt": "2026-05-22T19:42:30.758Z"
     },
     {
       "id": "act-arte-game-design-spritesheet-export-29",
@@ -402,11 +402,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/29-arte-game-design-spritesheet-export.md",
-      "createdAt": "2026-05-22T18:47:44.660Z"
+      "createdAt": "2026-05-22T19:42:30.759Z"
     },
     {
       "id": "act-arte-game-design-optimizer-30",
@@ -416,11 +416,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/30-arte-game-design-optimizer.md",
-      "createdAt": "2026-05-22T18:47:44.661Z"
+      "createdAt": "2026-05-22T19:42:30.759Z"
     },
     {
       "id": "act-arte-game-design-deploy-games-31",
@@ -430,11 +430,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 1000 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/31-arte-game-design-deploy-games.md",
-      "createdAt": "2026-05-22T18:47:44.661Z"
+      "createdAt": "2026-05-22T19:42:30.760Z"
     },
     {
       "id": "act-esttiles-fashion-beauty-watch-32",
@@ -444,11 +444,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Mailza comenta silêncio de Jéssica e diz que MDB só deve indicar vice perto das convenções",
+      "title": "reforcar a embalagem visual de Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/32-esttiles-fashion-beauty-watch.md",
-      "createdAt": "2026-05-22T18:47:44.662Z"
+      "createdAt": "2026-05-22T19:42:30.760Z"
     },
     {
       "id": "act-esttiles-fashion-color-stylist-33",
@@ -458,11 +458,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Mailza comenta silêncio de Jéssica e diz que MDB só deve indicar vice perto das convenções",
+      "title": "reforcar a embalagem visual de Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/33-esttiles-fashion-color-stylist.md",
-      "createdAt": "2026-05-22T18:47:44.663Z"
+      "createdAt": "2026-05-22T19:42:30.761Z"
     },
     {
       "id": "act-esttiles-fashion-styling-lead-34",
@@ -472,11 +472,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Mailza comenta silêncio de Jéssica e diz que MDB só deve indicar vice perto das convenções",
+      "title": "reforcar a embalagem visual de Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/34-esttiles-fashion-styling-lead.md",
-      "createdAt": "2026-05-22T18:47:44.663Z"
+      "createdAt": "2026-05-22T19:42:30.762Z"
     },
     {
       "id": "act-esttiles-fashion-casting-director-35",
@@ -486,11 +486,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Mailza comenta silêncio de Jéssica e diz que MDB só deve indicar vice perto das convenções",
+      "title": "reforcar a embalagem visual de Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/35-esttiles-fashion-casting-director.md",
-      "createdAt": "2026-05-22T18:47:44.664Z"
+      "createdAt": "2026-05-22T19:42:30.763Z"
     },
     {
       "id": "act-esttiles-fashion-lookbook-editor-36",
@@ -500,11 +500,11 @@
       "role": "design",
       "kind": "melhoria-visual",
       "status": "aguardando-aprovacao",
-      "points": 8599,
+      "points": 8851,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Mailza comenta silêncio de Jéssica e diz que MDB só deve indicar vice perto das convenções",
+      "title": "reforcar a embalagem visual de Carretinha com cavalos se desprende de caminhonete em ponte de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/36-esttiles-fashion-lookbook-editor.md",
-      "createdAt": "2026-05-22T18:47:44.665Z"
+      "createdAt": "2026-05-22T19:42:30.763Z"
     }
   ]
 }
