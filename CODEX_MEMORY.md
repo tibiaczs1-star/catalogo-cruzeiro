@@ -11,7 +11,7 @@ Atualizado: 2026-05-22
 - O audit de limpeza restante aponta apenas `backend/node_modules/qs/dist`; foi preservado por ser parte de dependencia instalada.
 - Validacao local: `node --check` em arquivos tocados, `git diff --check`, `npm run cleanup:audit`, `npm run review:team` com PubPaid guard OK e `totalIssues: 0`, HTTP local em `:3062`, Browser desktop/mobile sem console errors.
 - Browser QA: home desktop/mobile carregou conteudo sem overlay; PubPaid Xadrez mobile landscape mostrou creditos, depois liberou tabuleiro com 64 casas/32 pecas, sem overflow horizontal.
-- Pendente real antes de dizer "fechado online": commit/push e conferir Render servindo `20260522-boardfit1` no PubPaid e `20260522-homegate3` na home.
+- Online confirmado apos push: Render respondeu `/api/pubpaid/build=20260522-boardfit1`, `/pubpaid.html` contem `20260522-boardfit1`, home HTTP 200 contem `20260522-homegate3`, e `/api/news?limit=1` respondeu OK.
 
 ## Rodada Atual - 20260522-homegate3
 
