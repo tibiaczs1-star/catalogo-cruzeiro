@@ -216,3 +216,9 @@ English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX wit
 - Xadrez agora usa a mesma etapa de moeda para treino e mesa real: intro curta, credito rapido, moeda central clicavel e so depois libera o tabuleiro.
 - O clique em `Jogar moeda` deixou de ser exclusivo do Demo, evitando a tela travada sem entrar no jogo.
 - A camada cinematica do Xadrez aceita toque/clique na moeda central, com cache-bust local em `20260522-pubpaidfix8`.
+
+## Atualizacao 2026-05-22 - pubpaidfix9
+
+- Moeda do Xadrez virou overlay central de tela cheia durante a cinematica, tanto no Demo quanto no PvP.
+- Texto da moeda deixa claro que o toque decide quem começa; depois do sorteio mostra face, jogador e cor inicial.
+- Cache-bust local atualizado para `20260522-pubpaidfix9`.
