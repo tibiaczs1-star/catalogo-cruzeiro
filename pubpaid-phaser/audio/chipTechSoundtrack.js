@@ -81,31 +81,49 @@ const SAMBA_PLUCKS = [
 
 const GAME_THEMES = {
   "game-pool": {
-    label: "sinuca lounge bass com tacada brilhante",
-    bass: [[NOTE.F2, null, NOTE.C3, null, NOTE.F2, NOTE.G2, null, NOTE.A2]],
-    lead: [[NOTE.A3, NOTE.C4, NOTE.F4, NOTE.G4, NOTE.A4, NOTE.G4, NOTE.F4, NOTE.C4]],
-    chords: [[NOTE.F3, NOTE.A3, NOTE.C4], [NOTE.G3, NOTE.B3, NOTE.D4]],
-    accent: NOTE.F5,
-    filter: 5600,
-    swing: 0.72
+    label: "32-bit sinuca brasileira com samba-rock e pagode neon",
+    bass: [
+      [NOTE.A2, null, NOTE.E2, NOTE.A2, null, NOTE.G2, NOTE.C3, null],
+      [NOTE.F2, null, NOTE.C3, NOTE.F2, null, NOTE.E2, NOTE.A2, NOTE.C3]
+    ],
+    lead: [
+      [NOTE.C4, NOTE.E4, NOTE.A4, NOTE.C5, NOTE.B4, NOTE.A4, NOTE.E4, NOTE.C4],
+      [NOTE.A3, NOTE.C4, NOTE.F4, NOTE.A4, NOTE.G4, NOTE.F4, NOTE.E4, NOTE.C4]
+    ],
+    chords: [[NOTE.A3, NOTE.C4, NOTE.E4], [NOTE.F3, NOTE.A3, NOTE.C4], [NOTE.G3, NOTE.B3, NOTE.D4]],
+    accent: NOTE.C5,
+    filter: 6800,
+    swing: 0.94
   },
   "game-checkers": {
-    label: "damas tática com pulso marcial",
-    bass: [[NOTE.D2, null, NOTE.D2, NOTE.A2, null, NOTE.C3, NOTE.D3, null]],
-    lead: [[NOTE.D4, NOTE.F4, NOTE.A4, NOTE.C5, NOTE.A4, NOTE.F4, NOTE.E4, NOTE.D4]],
-    chords: [[NOTE.D3, NOTE.F3, NOTE.A3], [NOTE.C3, NOTE.E3, NOTE.G3]],
-    accent: NOTE.A5,
-    filter: 5000,
-    swing: 0.55
+    label: "32-bit damas brasileira com forró eletrônico e axé tático",
+    bass: [
+      [NOTE.D2, null, NOTE.A2, NOTE.D3, null, NOTE.C3, NOTE.A2, null],
+      [NOTE.G2, null, NOTE.D3, NOTE.G2, null, NOTE.F2, NOTE.B2, null]
+    ],
+    lead: [
+      [NOTE.F4, NOTE.A4, NOTE.D5, NOTE.C5, NOTE.A4, NOTE.G4, NOTE.F4, NOTE.D4],
+      [NOTE.G4, NOTE.B4, NOTE.D5, NOTE.B4, NOTE.A4, NOTE.G4, NOTE.E4, NOTE.D4]
+    ],
+    chords: [[NOTE.D3, NOTE.F3, NOTE.A3], [NOTE.G3, NOTE.B3, NOTE.D4], [NOTE.C3, NOTE.E3, NOTE.G3]],
+    accent: NOTE.D5,
+    filter: 6400,
+    swing: 0.82
   },
   "game-chess": {
-    label: "xadrez cerebral com pad escuro",
-    bass: [[NOTE.C2, null, null, NOTE.G2, NOTE.C3, null, NOTE.B2, null]],
-    lead: [[NOTE.E4, NOTE.G4, NOTE.B4, NOTE.C5, NOTE.B4, NOTE.G4, NOTE.E4, NOTE.D4]],
-    chords: [[NOTE.C3, NOTE.G3, NOTE.E4], [NOTE.B2, NOTE.F3, NOTE.D4]],
-    accent: NOTE.E5,
-    filter: 4600,
-    swing: 0.38
+    label: "32-bit xadrez brasileiro com bossa, funk leve e tensão elegante",
+    bass: [
+      [NOTE.C2, null, NOTE.G2, NOTE.B2, null, NOTE.A2, NOTE.G2, null],
+      [NOTE.E2, null, NOTE.B2, NOTE.D3, null, NOTE.C3, NOTE.B2, null]
+    ],
+    lead: [
+      [NOTE.E4, NOTE.G4, NOTE.B4, NOTE.D5, NOTE.C5, NOTE.B4, NOTE.G4, NOTE.E4],
+      [NOTE.G3, NOTE.B3, NOTE.E4, NOTE.G4, NOTE.F4, NOTE.E4, NOTE.D4, NOTE.B3]
+    ],
+    chords: [[NOTE.C3, NOTE.E3, NOTE.B3], [NOTE.E3, NOTE.G3, NOTE.D4], [NOTE.A2, NOTE.E3, NOTE.C4]],
+    accent: NOTE.B4,
+    filter: 5600,
+    swing: 0.68
   },
   "game-cards21": {
     label: "21 neon com batida curta de cassino",
@@ -595,7 +613,7 @@ export function createPubPaidSoundtrack() {
       zone: musicZone,
       step,
       tempo: TEMPO,
-      style: GAME_THEMES[musicZone]?.label || (musicZone === "salon" ? "16-bit samba brasileiro hip-hop" : "16-bit techno layered")
+      style: GAME_THEMES[musicZone]?.label || (musicZone === "salon" ? "32-bit samba brasileiro hip-hop" : "32-bit techno layered")
     })
   };
 }

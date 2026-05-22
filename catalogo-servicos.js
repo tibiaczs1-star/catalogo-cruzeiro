@@ -350,6 +350,81 @@
     });
   }
 
+  function setupActivationPopup() {
+    const popupKey = "catalogo_czs_activation_popup_20260522";
+    const dismissed =
+      (() => {
+        try {
+          return window.localStorage.getItem(popupKey) === "1";
+        } catch (_error) {
+          return false;
+        }
+      })();
+
+    if (dismissed || document.querySelector("[data-svc-activation-popup]")) {
+      return;
+    }
+
+    const overlay = document.createElement("section");
+    overlay.className = "svc-activation-popup";
+    overlay.setAttribute("data-svc-activation-popup", "");
+    overlay.setAttribute("aria-label", "Convite do Catalogo CZS");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("role", "dialog");
+    overlay.hidden = true;
+    overlay.innerHTML = `
+      <div class="svc-activation-card">
+        <button class="svc-activation-close" type="button" data-svc-popup-close aria-label="Fechar convite">×</button>
+        <span class="svc-activation-eyebrow">Catalogo CZS reativado</span>
+        <h2>Conheça o PubPaid e participe da nossa enquete eleitoral.</h2>
+        <p>
+          Estamos reabrindo o fluxo do Catalogo CZS: jogos da PubPaid para testar com a comunidade
+          e uma enquete espontânea do Acre 2026 para ouvir quem acompanha a região.
+        </p>
+        <div class="svc-activation-actions">
+          <a class="svc-activation-btn primary" href="./pubpaid.html">Entrar no jogo</a>
+          <a class="svc-activation-btn" href="./pesquisa-acre-2026.html">Responder enquete</a>
+        </div>
+        <small>Participação voluntária. A enquete não é pesquisa eleitoral registrada nem científica.</small>
+      </div>
+    `;
+
+    const close = () => {
+      overlay.classList.remove("is-visible");
+      window.setTimeout(() => {
+        overlay.hidden = true;
+      }, 180);
+      try {
+        window.localStorage.setItem(popupKey, "1");
+      } catch (_error) {
+        // Persistencia local e opcional.
+      }
+    };
+
+    overlay.addEventListener("click", (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target === overlay || target?.closest("[data-svc-popup-close]")) {
+        close();
+      }
+    });
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape" && !overlay.hidden) {
+          close();
+        }
+      },
+      { passive: true }
+    );
+
+    document.body.appendChild(overlay);
+    window.setTimeout(() => {
+      overlay.hidden = false;
+      window.requestAnimationFrame(() => overlay.classList.add("is-visible"));
+    }, 900);
+  }
+
   function init() {
     const modules = Array.isArray(DATA.modules) ? DATA.modules : [];
     if (!modules.length) return;
@@ -362,6 +437,7 @@
     renderModule(defaultModule);
     setupTabs(modules, state);
     setupSearch(modules, () => state.activeId);
+    setupActivationPopup();
   }
 
   if (document.readyState === "loading") {

@@ -1,11 +1,19 @@
 {
   "version": 1,
   "mode": "manual-week",
-  "baseWeekKey": "2026-W17",
-  "activeWeekKey": "2026-W17",
-  "activeWeekStartedAt": "2026-04-25T05:00:00.000Z",
-  "activeWeekExpiresAt": "2026-05-03T04:59:59.999Z",
-  "resetReason": "Extensao administrativa: manter a rodada Acre 2026 aberta por mais 7 dias sem mexer nos votos atuais.",
-  "updatedAt": "2026-04-25T18:00:00.000Z",
-  "history": []
+  "baseWeekKey": "2026-W21",
+  "activeWeekKey": "2026-W21-czs1",
+  "activeWeekStartedAt": "2026-05-22T05:00:00.000Z",
+  "activeWeekExpiresAt": "2026-06-06T04:59:59.999Z",
+  "resetReason": "Reativacao do Catalogo CZS: rodada aberta para fluxo do popup PubPaid e pesquisa eleitoral.",
+  "updatedAt": "2026-05-22T05:00:00.000Z",
+  "history": [
+    {
+      "activeWeekKey": "2026-W17",
+      "effectiveWeekKey": "2026-W17",
+      "startedAt": "2026-04-25T05:00:00.000Z",
+      "expiresAt": "2026-05-03T04:59:59.999Z",
+      "closedAt": "2026-05-22T05:00:00.000Z"
+    }
+  ]
 }

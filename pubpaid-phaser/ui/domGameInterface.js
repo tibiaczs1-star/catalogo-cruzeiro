@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-poolpvpfix2";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-gameux2";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260522-poolpvpfix2";
+} from "../services/pvpService.js?v=20260522-gameux2";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -20,7 +20,7 @@ import {
   moveCheckersTournament,
   registerCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260522-poolpvpfix2";
+} from "../services/tournamentService.js?v=20260522-gameux2";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -30,8 +30,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260522-poolpvpfix2";
-import { Chess } from "../vendor/chess.js?v=20260522-poolpvpfix2";
+} from "../core/checkersRules.js?v=20260522-gameux2";
+import { Chess } from "../vendor/chess.js?v=20260522-gameux2";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -381,7 +381,11 @@ export function bindDomGameInterface(game) {
       dragId: null,
       dragX: 0,
       dragY: 0,
-      dragCapture: null
+      dragCapture: null,
+      pinchDistance: 0,
+      pinchZoom: 1,
+      pointers: new Map(),
+      suppressUntil: 0
     },
     chessCamera: {
       yaw: 0,
@@ -391,7 +395,11 @@ export function bindDomGameInterface(game) {
       dragId: null,
       dragX: 0,
       dragY: 0,
-      dragCapture: null
+      dragCapture: null,
+      pinchDistance: 0,
+      pinchZoom: 1,
+      pointers: new Map(),
+      suppressUntil: 0
     },
     checkersBoardFixed: true,
     chessBoardFixed: true,
@@ -790,7 +798,11 @@ export function bindDomGameInterface(game) {
       dragId: null,
       dragX: 0,
       dragY: 0,
-      dragCapture: null
+      dragCapture: null,
+      pinchDistance: 0,
+      pinchZoom: 1,
+      pointers: new Map(),
+      suppressUntil: 0
     });
   };
 
@@ -825,7 +837,11 @@ export function bindDomGameInterface(game) {
       dragId: null,
       dragX: 0,
       dragY: 0,
-      dragCapture: null
+      dragCapture: null,
+      pinchDistance: 0,
+      pinchZoom: 1,
+      pointers: new Map(),
+      suppressUntil: 0
     });
   };
 
@@ -839,6 +855,39 @@ export function bindDomGameInterface(game) {
   const isChessDemoActive = () => isTableDemoActive() && local.demoTable?.gameId === "chess";
   const isChessCameraActive = () => gameState.pvpGameId === "chess" || isChessDemoActive();
   const isMiddleMouseCameraDrag = (event) => event.pointerType === "mouse" && event.button === 1;
+  const cameraPointerDistance = (camera) => {
+    const points = Array.from(camera.pointers.values());
+    if (points.length < 2) return 0;
+    return Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+  };
+
+  const rememberCameraPointer = (camera, event) => {
+    if (event.pointerType !== "touch") return;
+    camera.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (camera.pointers.size >= 2) {
+      camera.pinchDistance = cameraPointerDistance(camera);
+      camera.pinchZoom = camera.zoom;
+      camera.suppressUntil = Date.now() + 420;
+    }
+  };
+
+  const forgetCameraPointer = (camera, event) => {
+    camera.pointers.delete(event.pointerId);
+    if (camera.pointers.size < 2) camera.pinchDistance = 0;
+  };
+
+  const updatePinchCamera = (camera, event, apply) => {
+    if (event.pointerType !== "touch" || !camera.pointers.has(event.pointerId)) return false;
+    camera.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (camera.pointers.size < 2 || !camera.pinchDistance) return false;
+    const distance = cameraPointerDistance(camera);
+    if (!distance) return false;
+    camera.zoom = camera.pinchZoom * (distance / camera.pinchDistance);
+    camera.suppressUntil = Date.now() + 420;
+    event.preventDefault();
+    apply();
+    return true;
+  };
 
   const applyChessCamera = (match = {}, seat = "playerOne") => {
     const frame = refs.tableBody?.querySelector?.("[data-chess-frame]");
@@ -862,8 +911,8 @@ export function bindDomGameInterface(game) {
   const cameraHintMarkup = () => `
     <div class="ppg-camera-hint ppg-chess-camera-hint" aria-hidden="true">
       <i></i>
-      <span class="is-desktop-copy">Botão do meio na borda: girar | roda: zoom</span>
-      <span class="is-mobile-copy">Toque na borda da mesa para girar; use + e - para zoom</span>
+      <span class="is-desktop-copy">Arraste as bordas: girar | roda: zoom</span>
+      <span class="is-mobile-copy">Pinçe para zoom e arraste a borda da mesa</span>
     </div>
   `;
 
@@ -878,7 +927,7 @@ export function bindDomGameInterface(game) {
     const attr = game === "checkers" ? "data-checkers-camera" : "data-chess-camera";
     const label = game === "checkers" ? "Damas" : "Xadrez";
     return `
-      <div class="ppg-${game}-camera ppg-checkers-camera ppg-camera-orb" aria-label="Controles de câmera de ${label}">
+      <div class="ppg-${game}-camera ppg-checkers-camera ppg-camera-orb" aria-label="Controles opcionais de câmera de ${label}">
         <button type="button" ${attr}="up" aria-label="Mover câmera para cima">↑</button>
         <button type="button" ${attr}="left" aria-label="Girar câmera para esquerda">‹</button>
         <button type="button" class="is-camera-core" ${attr}="reset" aria-label="Centralizar câmera"><span></span></button>
@@ -903,7 +952,7 @@ export function bindDomGameInterface(game) {
     window.clearTimeout(local.checkersIntroTimer);
     window.clearTimeout(local.checkersIntroCreditsTimer);
     const urlParams = new URLSearchParams(window.location.search || "");
-    const introDuration = urlParams.get("intro") === "1" ? 10500 : 6600;
+    const introDuration = urlParams.get("intro") === "1" ? 8500 : 4600;
     local.checkersIntroTimer = window.setTimeout(() => {
       finishCheckersCinematic();
     }, introDuration);
@@ -999,7 +1048,7 @@ export function bindDomGameInterface(game) {
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260522-poolpvpfix2";
+      const buildVersion = window.pubpaidBuildVersion || "20260522-gameux2";
       const phase = local.checkersIntroPhase || "coin";
       refs.checkersCoinFlip.innerHTML = `
         ${phase === "video" ? `<video data-checkers-intro-video src="./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1047,7 +1096,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260522-poolpvpfix2";
+    const buildVersion = window.pubpaidBuildVersion || "20260522-gameux2";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -3917,6 +3966,7 @@ export function bindDomGameInterface(game) {
   document.addEventListener("pointerup", (event) => {
     const cell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
     if (!cell || event.pointerType === "mouse") return;
+    if (Date.now() < local.checkersCamera.suppressUntil) return;
     event.preventDefault();
     local.lastCheckersTouchAt = Date.now();
     handleCheckersCell(cell);
@@ -3933,7 +3983,14 @@ export function bindDomGameInterface(game) {
     if (!isTournamentCheckersActive() && !isCheckersDemoActive() && gameState.pvpGameId !== "checkers") return;
     const edge = event.target.closest?.("[data-checkers-camera-edge]");
     const frame = event.target.closest?.("[data-dom-checkers-frame]");
-    if (!edge && !(frame && isMiddleMouseCameraDrag(event))) return;
+    const boardCell = event.target.closest?.("[data-dom-checkers-board] [data-row]");
+    rememberCameraPointer(local.checkersCamera, event);
+    if (event.pointerType === "touch" && local.checkersCamera.pointers.size >= 2) {
+      event.preventDefault();
+      return;
+    }
+    const primaryFrameDrag = event.pointerType === "mouse" && event.button === 0 && frame && !boardCell;
+    if (!edge && !(frame && isMiddleMouseCameraDrag(event)) && !primaryFrameDrag) return;
     event.preventDefault();
     local.checkersCamera.dragId = event.pointerId;
     local.checkersCamera.dragX = event.clientX;
@@ -3943,6 +4000,7 @@ export function bindDomGameInterface(game) {
   });
 
   refs.checkersStage?.addEventListener("pointermove", (event) => {
+    if (updatePinchCamera(local.checkersCamera, event, () => applyCheckersCamera(local.tournamentMatch || local.demoCheckers || gameState.pvpMatch || {}, tournamentSeatForCurrentParticipant() || gameState.pvpSeat || "playerOne"))) return;
     if (local.checkersCamera.dragId !== event.pointerId) return;
     const dx = event.clientX - local.checkersCamera.dragX;
     const dy = event.clientY - local.checkersCamera.dragY;
@@ -3955,9 +4013,17 @@ export function bindDomGameInterface(game) {
   });
 
   refs.checkersStage?.addEventListener("pointerup", (event) => {
+    forgetCameraPointer(local.checkersCamera, event);
     if (local.checkersCamera.dragId !== event.pointerId) return;
     local.checkersCamera.dragId = null;
     local.checkersCamera.dragCapture?.releasePointerCapture?.(event.pointerId);
+    local.checkersCamera.dragCapture = null;
+  });
+
+  refs.checkersStage?.addEventListener("pointercancel", (event) => {
+    forgetCameraPointer(local.checkersCamera, event);
+    if (local.checkersCamera.dragId !== event.pointerId) return;
+    local.checkersCamera.dragId = null;
     local.checkersCamera.dragCapture = null;
   });
 
@@ -3980,8 +4046,15 @@ export function bindDomGameInterface(game) {
   document.addEventListener("pointerdown", (event) => {
     const edge = event.target.closest?.("[data-chess-camera-edge]");
     const frame = event.target.closest?.("[data-chess-frame]");
+    const square = event.target.closest?.("[data-chess-square]");
     if ((!edge && !frame) || !isChessCameraActive()) return;
-    if (!edge && !isMiddleMouseCameraDrag(event)) return;
+    rememberCameraPointer(local.chessCamera, event);
+    if (event.pointerType === "touch" && local.chessCamera.pointers.size >= 2) {
+      event.preventDefault();
+      return;
+    }
+    const primaryFrameDrag = event.pointerType === "mouse" && event.button === 0 && frame && !square;
+    if (!edge && !isMiddleMouseCameraDrag(event) && !primaryFrameDrag) return;
     event.preventDefault();
     local.chessCamera.dragId = event.pointerId;
     local.chessCamera.dragX = event.clientX;
@@ -3991,6 +4064,7 @@ export function bindDomGameInterface(game) {
   });
 
   document.addEventListener("pointermove", (event) => {
+    if (updatePinchCamera(local.chessCamera, event, () => applyChessCamera(local.demoTable || gameState.pvpMatch || {}, gameState.pvpSeat || "playerOne"))) return;
     if (local.chessCamera.dragId !== event.pointerId) return;
     const dx = event.clientX - local.chessCamera.dragX;
     const dy = event.clientY - local.chessCamera.dragY;
@@ -4003,9 +4077,17 @@ export function bindDomGameInterface(game) {
   });
 
   document.addEventListener("pointerup", (event) => {
+    forgetCameraPointer(local.chessCamera, event);
     if (local.chessCamera.dragId !== event.pointerId) return;
     local.chessCamera.dragId = null;
     local.chessCamera.dragCapture?.releasePointerCapture?.(event.pointerId);
+    local.chessCamera.dragCapture = null;
+  });
+
+  document.addEventListener("pointercancel", (event) => {
+    forgetCameraPointer(local.chessCamera, event);
+    if (local.chessCamera.dragId !== event.pointerId) return;
+    local.chessCamera.dragId = null;
     local.chessCamera.dragCapture = null;
   });
 

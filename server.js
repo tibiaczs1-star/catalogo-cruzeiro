@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260522-poolpvpfix2";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260522-gameux2";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -238,14 +238,15 @@ const ACRE_2026_POLL_SETTINGS_FILE = path.join(DATA_DIR, "acre-2026-poll-setting
 const ACRE_2026_POLL_EXTENSION_SETTINGS = {
   version: 1,
   mode: "manual-week",
-  baseWeekKey: "2026-W17",
-  activeWeekKey: "2026-W17",
-  activeWeekStartedAt: "2026-04-25T05:00:00.000Z",
-  activeWeekExpiresAt: "2026-05-03T04:59:59.999Z",
-  resetReason: "Extensao administrativa: manter a rodada Acre 2026 aberta por mais 7 dias sem mexer nos votos atuais.",
-  updatedAt: "2026-04-25T18:00:00.000Z",
+  baseWeekKey: "2026-W21",
+  activeWeekKey: "2026-W21-czs1",
+  activeWeekStartedAt: "2026-05-22T05:00:00.000Z",
+  activeWeekExpiresAt: "2026-06-06T04:59:59.999Z",
+  resetReason: "Reativacao do Catalogo CZS: rodada aberta para fluxo do popup PubPaid e pesquisa eleitoral.",
+  updatedAt: "2026-05-22T05:00:00.000Z",
   history: []
 };
+const ACRE_2026_POLL_REOPEN_SETTINGS = ACRE_2026_POLL_EXTENSION_SETTINGS;
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
@@ -13243,7 +13244,13 @@ function recordMatchesWeeklyDevice(item = {}, currentWeekKey = "", fingerprints 
 function getAcre2026PollRoundSettings(now = new Date()) {
   const currentDate = now instanceof Date && !Number.isNaN(now.getTime()) ? now : new Date();
   const baseWeekKey = getWeekBucketKey(currentDate.toISOString());
-  const settings = readJson(ACRE_2026_POLL_SETTINGS_FILE, ACRE_2026_POLL_EXTENSION_SETTINGS);
+  const storedSettings = readJson(ACRE_2026_POLL_SETTINGS_FILE, ACRE_2026_POLL_EXTENSION_SETTINGS);
+  const storedUpdatedAt = new Date(safeString(storedSettings?.updatedAt || "", 80)).getTime();
+  const reopenUpdatedAt = new Date(ACRE_2026_POLL_REOPEN_SETTINGS.updatedAt).getTime();
+  const settings =
+    Number.isFinite(storedUpdatedAt) && storedUpdatedAt >= reopenUpdatedAt
+      ? storedSettings
+      : ACRE_2026_POLL_REOPEN_SETTINGS;
   const activeWeekKey = safeString(settings?.activeWeekKey || "", 24);
   const activeWeekExpiresAt = safeString(settings?.activeWeekExpiresAt || "", 80);
   const expiresAtMs = activeWeekExpiresAt ? new Date(activeWeekExpiresAt).getTime() : 0;

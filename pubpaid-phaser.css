@@ -3530,6 +3530,7 @@ body.pubpaid-phaser-page.is-orientation-blocked .ppg-mobile-controls,
 .ppg-dom-game-ui.is-wallet-open + .ppg-mobile-controls,
 .ppg-dom-game-ui.is-pool + .ppg-mobile-controls,
 .ppg-dom-game-ui.is-checkers + .ppg-mobile-controls,
+.ppg-dom-game-ui.is-table + .ppg-mobile-controls,
 .ppg-dom-game-ui.is-result + .ppg-mobile-controls {
   display: none !important;
   pointer-events: none;
@@ -8263,9 +8264,9 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 
 .ppg-camera-edge.is-top,
 .ppg-camera-edge.is-bottom {
-  left: 12%;
-  right: 12%;
-  height: 36px;
+  left: 8%;
+  right: 8%;
+  height: clamp(34px, 6dvh, 54px);
 }
 
 .ppg-camera-edge.is-top {
@@ -8278,9 +8279,9 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 
 .ppg-camera-edge.is-left,
 .ppg-camera-edge.is-right {
-  top: 12%;
-  bottom: 12%;
-  width: 36px;
+  top: 8%;
+  bottom: 8%;
+  width: clamp(34px, 6dvh, 54px);
 }
 
 .ppg-camera-edge.is-left {
@@ -8345,6 +8346,34 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
 .ppg-chess-board-stage:focus-within > .ppg-chess-camera {
   opacity: 0.9;
   transform: translateX(-50%) scale(0.86);
+}
+
+body.pubpaid-phaser-page.is-touch .ppg-checkers-board-stage > .ppg-checkers-camera,
+body.pubpaid-phaser-page.is-touch .ppg-chess-board-stage > .ppg-chess-camera {
+  display: none !important;
+}
+
+body.pubpaid-phaser-page.is-touch .ppg-camera-hint .is-desktop-copy {
+  display: none;
+}
+
+body.pubpaid-phaser-page.is-touch .ppg-camera-hint .is-mobile-copy {
+  display: inline;
+}
+
+@media (max-width: 760px), (max-height: 430px) {
+  .ppg-checkers-board-stage > .ppg-checkers-camera,
+  .ppg-chess-board-stage > .ppg-chess-camera {
+    display: none !important;
+  }
+
+  .ppg-camera-hint .is-desktop-copy {
+    display: none;
+  }
+
+  .ppg-camera-hint .is-mobile-copy {
+    display: inline;
+  }
 }
 
 .ppg-dom-cell {

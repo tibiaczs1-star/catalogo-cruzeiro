@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-poolpvpfix2";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-poolpvpfix2";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-gameux2";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-gameux2";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-poolpvpfix2";
-import { BootScene } from "./scenes/BootScene.js?v=20260522-poolpvpfix2";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260522-poolpvpfix2";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-poolpvpfix2";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260522-poolpvpfix2";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-poolpvpfix2";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-poolpvpfix2";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-poolpvpfix2";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-poolpvpfix2";
-import { UIScene } from "./scenes/UIScene.js?v=20260522-poolpvpfix2";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-gameux2";
+import { BootScene } from "./scenes/BootScene.js?v=20260522-gameux2";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260522-gameux2";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-gameux2";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260522-gameux2";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-gameux2";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-gameux2";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-gameux2";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-gameux2";
+import { UIScene } from "./scenes/UIScene.js?v=20260522-gameux2";
 
-const PUBPAID_BUILD_VERSION = "20260522-poolpvpfix2";
+const PUBPAID_BUILD_VERSION = "20260522-gameux2";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 const startupParams = new URLSearchParams(window.location.search || "");
 const silentAudioParam = String(startupParams.get("silent") || startupParams.get("mute") || startupParams.get("audio") || "").toLowerCase();
@@ -723,7 +723,7 @@ function startIntroScene({ restart = false } = {}) {
 function openPermissionGate() {
   refs.splash?.setAttribute("hidden", "");
   refs.permissionGate?.removeAttribute("hidden");
-  setPermissionStatus(isTouchDevice ? "Som 16-bit + tela horizontal" : "Som 16-bit + fullscreen");
+  setPermissionStatus(isTouchDevice ? "Som 32-bit + tela horizontal" : "Som 32-bit + fullscreen");
 }
 
 async function activateExperience() {

@@ -2,6 +2,22 @@
 
 Atualizado: 2026-05-22
 
+## Rodada Atual - 20260522-catalogreactivate1
+
+- Catalogo CZS reativado no fluxo publico de `catalogo-servicos.html` com popup de entrada chamando para `PubPaid` e para a Enquete Acre 2026.
+- Enquete Acre 2026 reaberta como rodada manual `2026-W21-czs1`, ativa ate `2026-06-06T04:59:59.999Z`; o backend ignora configuracao persistente mais antiga do Render quando ela for anterior a `2026-05-22T05:00:00.000Z`.
+- Criado `npm run cleanup:audit` para viabilizar limpeza extrema com areas protegidas (`data/`, `.codex-memory/`, `.codex-backups/`, `assets/pubpaid/`, `games/vale-pool/`, `pubpaid-phaser/` e `render-data/`) antes de qualquer remocao destrutiva.
+- Validacao local: `node --check` em `server.js`, `catalogo-servicos.js` e `scripts/cleanup-extreme-audit.js`; `npm run guard:pubpaid`; `npm run cleanup:audit`; servidor local em `:3017` respondeu `catalogo-servicos.html`, `pesquisa-acre-2026.html`, `/api/pesquisa-acre-2026/summary`, `/api/pesquisa-acre-2026/me` e `/api/pubpaid/build`; Playwright-core validou popup desktop/mobile sem erros de console.
+
+## Rodada Atual - 20260522-gameux2
+
+- Damas/Xadrez: camera mobile saiu dos controles-orbe e passou a priorizar gesto nativo, com pinch para zoom e arrasto pelas bordas da mesa; controles touch globais ficam ocultos nessas mesas.
+- Desktop: bordas/frame da mesa de Damas e Xadrez aceitam arrasto com mouse para girar/panar, alem de roda para zoom.
+- Damas: intro de abertura encurtada em 2 segundos no tempo padrao e no modo `intro=1`, mantendo transicao para creditos/moeda.
+- Audio: temas de Sinuca, Damas e Xadrez viraram 32-bit brasileiros originais, inspirados em samba-rock/pagode, forro/axe e bossa/funk leve sem copiar melodias protegidas.
+- Build/cache-bust local: `20260522-gameux2`.
+- Validacao: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/audio/chipTechSoundtrack.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `/api/pubpaid/build=20260522-gameux2`; smoke mobile Damas e Xadrez com 64 casas, sem controles intrusivos e sem erros de console; smoke desktop Xadrez com arrasto na borda direita mudando `--ppg-chess-user-yaw` para `-11.68deg`.
+
 ## Rodada Atual - 20260522-poolreturn1
 
 - Sinuca aprovada mantida sem redesenho e PubPaid recebeu retorno claro para o lobby: no treino aparece `Voltar ao lobby`, no PvP continua `Desistir`, e o fim da demo abre o painel de resultado com `Voltar às mesas`.

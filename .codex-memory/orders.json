@@ -1,7 +1,52 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T04:24:58.052Z",
+  "lastUpdatedAt": "2026-05-22T07:05:00.000Z",
   "orders": [
+    {
+      "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
+      "createdAt": "2026-05-22T02:05:00-05:00",
+      "updatedAt": "2026-05-22T02:05:00-05:00",
+      "status": "gameux2-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "Corrigir camera mobile de Damas/Xadrez para gestos nativos de pinch/arrasto, cortar os ultimos 2 segundos do video de introducao das Damas, permitir arrastar a mesa pelas bordas no desktop e criar musica 32 bits brasileira para Sinuca, Damas e Xadrez.",
+      "summary": "Ajustar camera Damas/Xadrez, encurtar intro de Damas e trocar temas dos tres jogos para musica brasileira 32-bit original.",
+      "normalizedTasks": [
+        "remover controles de camera intrusivos no mobile de Damas e Xadrez",
+        "habilitar pinch para zoom e arrasto por borda/mesa sem bloquear jogadas",
+        "habilitar drag de mesa pelas bordas com mouse no desktop",
+        "cortar 2 segundos do final da intro de Damas",
+        "criar temas 32-bit brasileiros originais para Sinuca, Damas e Xadrez",
+        "validar sintaxe, guard PubPaid e smoke mobile Damas/Xadrez"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/audio/chipTechSoundtrack.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid.html",
+        "server.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        "progress.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "damas",
+        "xadrez",
+        "sinuca",
+        "camera",
+        "mobile",
+        "intro",
+        "musica-32bit"
+      ],
+      "nextSteps": [
+        "testar em aparelho touch real a sensacao do pinch/arrasto durante partida longa"
+      ],
+      "notes": "Build local 20260522-gameux2. Validado node --check, npm run guard:pubpaid via npm.cmd, /api/pubpaid/build, smoke mobile Damas e Xadrez sem controles intrusivos e sem console errors."
+    },
     {
       "id": "2026-05-21-atualizar-link-catalogo-czs-whatsapp",
       "createdAt": "2026-05-21T17:05:00-05:00",
@@ -2068,6 +2113,21 @@
         "camera",
         "loading"
       ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-22-reativar-catalogo-czs-com-popup-para-pubpaid-e-enquete-eleitoral-reabrir-rodada-",
+      "createdAt": "2026-05-22T07:06:51.653Z",
+      "updatedAt": "2026-05-22T07:06:51.653Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Reativar o site Catalogo CZS, atualizar online, colocar popup convidando pessoas a conhecer o jogo e participar da pesquisa eleitoral, fazer a pesquisa voltar a funcionar, e viabilizar limpeza extrema em PubPaid, jogos, gift, Render e site principal para ficar rapido.",
+      "summary": "Reativar Catalogo CZS com popup para PubPaid e enquete eleitoral, reabrir rodada da pesquisa e iniciar plano seguro de limpeza/performance.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
       "nextSteps": [],
       "notes": ""
     }

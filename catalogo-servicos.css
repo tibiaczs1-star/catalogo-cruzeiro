@@ -83,6 +83,121 @@ body.catalogo-servicos-page {
   font-weight: 700;
 }
 
+.svc-activation-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(10, 22, 36, 0.58);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.svc-activation-popup.is-visible {
+  opacity: 1;
+}
+
+.svc-activation-popup[hidden] {
+  display: none !important;
+}
+
+.svc-activation-card {
+  position: relative;
+  width: min(520px, 100%);
+  padding: clamp(22px, 4vw, 30px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(15, 49, 82, 0.98), rgba(18, 77, 92, 0.96)),
+    #103152;
+  color: #f4fbff;
+  box-shadow: 0 30px 80px rgba(5, 14, 28, 0.36);
+  transform: translateY(10px) scale(0.98);
+  transition: transform 180ms ease;
+}
+
+.svc-activation-popup.is-visible .svc-activation-card {
+  transform: translateY(0) scale(1);
+}
+
+.svc-activation-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.svc-activation-eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 26px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(247, 201, 122, 0.16);
+  color: #f7c97a;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.svc-activation-card h2 {
+  margin: 12px 0 10px;
+  max-width: 13ch;
+  font-size: clamp(1.75rem, 5vw, 2.6rem);
+  line-height: 0.98;
+}
+
+.svc-activation-card p {
+  margin: 0;
+  color: rgba(244, 251, 255, 0.82);
+  line-height: 1.58;
+}
+
+.svc-activation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 12px;
+}
+
+.svc-activation-btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.svc-activation-btn.primary {
+  border-color: rgba(247, 201, 122, 0.64);
+  background: #f7c97a;
+  color: #102c49;
+}
+
+.svc-activation-card small {
+  display: block;
+  color: rgba(244, 251, 255, 0.68);
+  line-height: 1.45;
+}
+
 .svc-hero {
   position: relative;
   overflow: hidden;
