@@ -8,6 +8,14 @@ Atualizado: 2026-05-17
 
 O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 
+## Atualizacao 2026-05-22 - poolpvpfix2
+
+- Corrigido travamento/repeticao da Sinuca PvP: o `iframe` do prototipo nao e mais remontado a cada mudanca de turno/tacada.
+- O prototipo `games/vale-pool` nao executa a intro interna quando aberto em `mode=pvp`.
+- Ajustado layout lateral da Sinuca para manter o perfil do rival dentro da viewport em desktop e mobile horizontal.
+- O modo de revisao/teste aceita `review`/`silent=1` e nao liga audio automaticamente.
+- Build/cache-bust preparado como `20260522-poolpvpfix2`.
+
 - Caminho unico: `/pubpaid.html`
 - Runtime unico: `pubpaid-phaser/`
 - Dados reais: `pubpaid-runtime.js`, `data/pubpaid-store.json`, `data/pubpaid-pvp.json`

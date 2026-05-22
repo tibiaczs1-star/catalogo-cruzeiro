@@ -5787,16 +5787,19 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(calc(100dvw - 24px), 1840px);
+  box-sizing: border-box;
+  width: min(100%, calc(100dvw - 18px), 1840px);
+  max-width: 100%;
   min-width: 0;
 }
 
 .ppg-vale-pool-shell.is-pvp,
 .ppg-vale-pool-shell.is-demo {
-  grid-template-columns: clamp(54px, 5.4vw, 88px) minmax(0, 1fr) clamp(54px, 5.4vw, 88px);
+  grid-template-columns: clamp(46px, 4.8vw, 78px) minmax(0, 1fr) clamp(46px, 4.8vw, 78px);
   grid-template-rows: minmax(0, 1fr) auto;
   gap: clamp(4px, .8vw, 10px);
   align-items: center;
+  justify-items: stretch;
 }
 
 .ppg-vale-pool-frame {
@@ -5832,10 +5835,14 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
 }
 
 .ppg-vale-pool-player {
+  box-sizing: border-box;
   display: grid;
   justify-items: center;
   gap: 5px;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   padding: 8px 5px;
   border: 2px solid rgba(126, 78, 24, 0.9);
   background: rgba(7, 19, 26, 0.92);
@@ -6071,6 +6078,63 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-pool {
 .ppg-vale-pool-spin button.is-active {
   color: #07101c;
   background: #ffd06d;
+}
+
+@media (max-width: 900px), (max-height: 480px) {
+  .ppg-dom-pool[data-render="prototype"] .ppg-pool-stage {
+    padding: 3px;
+  }
+
+  .ppg-vale-pool-shell {
+    width: min(100%, calc(100dvw - 8px));
+  }
+
+  .ppg-vale-pool-shell.is-pvp,
+  .ppg-vale-pool-shell.is-demo {
+    grid-template-columns: clamp(38px, 8vw, 54px) minmax(0, 1fr) clamp(38px, 8vw, 54px);
+    gap: 3px;
+  }
+
+  .ppg-vale-pool-shell.is-pvp .ppg-vale-pool-frame,
+  .ppg-vale-pool-shell.is-demo .ppg-vale-pool-frame {
+    max-height: calc(100dvh - 58px);
+  }
+
+  .ppg-vale-pool-player {
+    gap: 2px;
+    padding: 5px 2px;
+    border-width: 1px;
+  }
+
+  .ppg-vale-pool-player img,
+  .ppg-vale-pool-player > span {
+    width: clamp(28px, 7vw, 40px);
+    height: clamp(28px, 7vw, 40px);
+    border-width: 1px;
+  }
+
+  .ppg-vale-pool-player strong {
+    font-size: 8px;
+  }
+
+  .ppg-vale-pool-player small,
+  .ppg-vale-pool-count small,
+  .ppg-vale-pool-player button,
+  .ppg-pool-rules-mini {
+    font-size: 6px;
+  }
+
+  .ppg-vale-pool-count em {
+    font-size: 13px;
+  }
+
+  .ppg-vale-pool-exit {
+    top: 4px;
+    right: clamp(44px, 9vw, 62px);
+    min-height: 24px;
+    padding: 2px 6px;
+    font-size: 8px;
+  }
 }
 
 .ppg-pool-howto {
@@ -6611,7 +6675,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   background:
     linear-gradient(90deg, rgba(2, 5, 12, 0.9), rgba(2, 5, 12, 0.42) 38%, rgba(2, 5, 12, 0.9)),
     linear-gradient(180deg, rgba(2, 5, 12, 0.28), rgba(2, 5, 12, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-gameux1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-poolpvpfix2") center / cover no-repeat,
     radial-gradient(circle at 50% 10%, rgba(255, 208, 109, 0.16), transparent 28%),
     radial-gradient(circle at 78% 72%, rgba(80, 239, 255, 0.11), transparent 30%),
     linear-gradient(135deg, rgba(18, 13, 10, 0.92), rgba(3, 7, 16, 0.96) 46%, rgba(11, 32, 35, 0.9));
@@ -7464,7 +7528,7 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
     radial-gradient(ellipse at 50% 46%, rgba(255, 204, 103, 0.2), transparent 22%),
     radial-gradient(ellipse at 49% 56%, rgba(0, 0, 0, 0) 0 30%, rgba(1, 3, 9, 0.38) 56%, rgba(1, 3, 9, 0.86) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.32) 38%, rgba(0, 0, 0, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-gameux1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-poolpvpfix2") center / cover no-repeat,
     linear-gradient(135deg, #100a08, #02060e 48%, #061a1c);
   border: 0;
   box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.68);
@@ -10365,7 +10429,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="che
     radial-gradient(circle at 50% 5%, rgba(255, 208, 109, 0.34), transparent 25%),
     radial-gradient(circle at 8% 76%, rgba(92, 230, 222, 0.17), transparent 30%),
     radial-gradient(circle at 92% 56%, rgba(255, 79, 184, 0.12), transparent 34%),
-    url("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png?v=20260522-gameux1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png?v=20260522-poolpvpfix2") center / cover no-repeat,
     linear-gradient(145deg, #07101c 0%, #141021 44%, #071912 100%);
   background-size: auto, auto, auto, 28px 28px, 28px 28px, auto, auto, auto, auto, auto, auto;
   overflow: hidden;

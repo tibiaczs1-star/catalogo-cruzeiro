@@ -2,22 +2,27 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-gameux1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-gameux1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260522-poolpvpfix2";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260522-poolpvpfix2";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-gameux1";
-import { BootScene } from "./scenes/BootScene.js?v=20260522-gameux1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260522-gameux1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-gameux1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260522-gameux1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-gameux1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-gameux1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-gameux1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-gameux1";
-import { UIScene } from "./scenes/UIScene.js?v=20260522-gameux1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260522-poolpvpfix2";
+import { BootScene } from "./scenes/BootScene.js?v=20260522-poolpvpfix2";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260522-poolpvpfix2";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260522-poolpvpfix2";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260522-poolpvpfix2";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260522-poolpvpfix2";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260522-poolpvpfix2";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260522-poolpvpfix2";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260522-poolpvpfix2";
+import { UIScene } from "./scenes/UIScene.js?v=20260522-poolpvpfix2";
 
-const PUBPAID_BUILD_VERSION = "20260522-gameux1";
+const PUBPAID_BUILD_VERSION = "20260522-poolpvpfix2";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
+const startupParams = new URLSearchParams(window.location.search || "");
+const silentAudioParam = String(startupParams.get("silent") || startupParams.get("mute") || startupParams.get("audio") || "").toLowerCase();
+const forceSilentAudio =
+  startupParams.has("review") ||
+  ["1", "true", "yes", "on", "off", "muted"].includes(silentAudioParam);
 
 bindOverlay();
 
@@ -124,7 +129,7 @@ let pendingAutoEntry = false;
 let pendingIntroStart = false;
 let pendingStartGameOptions = null;
 let fullscreenWasActive = false;
-let userAudioMuted = false;
+let userAudioMuted = forceSilentAudio;
 let preintroLoadingBusy = false;
 let runtimeCacheWarmPromise = null;
 
@@ -614,7 +619,7 @@ function syncAudioButton() {
 }
 
 function startSoundtrackFromGesture() {
-  if (userAudioMuted) return;
+  if (forceSilentAudio || userAudioMuted) return;
   if (soundtrack.isPlaying()) return;
   soundtrack.start();
   syncAudioButton();
@@ -739,7 +744,7 @@ async function activateExperience() {
   setPermissionStatus("Abrindo o PubPaid...");
   let audioStarted = false;
   try {
-    audioStarted = userAudioMuted ? false : Boolean(soundtrack.startIntro());
+    audioStarted = forceSilentAudio || userAudioMuted ? false : Boolean(soundtrack.startIntro());
   } catch (_error) {
     setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
@@ -1027,6 +1032,11 @@ function bindSplash() {
 
     if (event.target.closest("[data-audio-toggle]")) {
       event.preventDefault();
+      if (forceSilentAudio) {
+        soundtrack.stop();
+        syncAudioButton();
+        return;
+      }
       const playing = soundtrack.toggle();
       userAudioMuted = !playing;
       syncAudioButton();
@@ -1254,7 +1264,7 @@ game.events.on("pubpaid:intro-enter", () => {
 game.events.on("pubpaid:intro-start", () => {
   soundtrack.setZone("street");
   try {
-    if (!userAudioMuted && !soundtrack.isPlaying()) {
+    if (!forceSilentAudio && !userAudioMuted && !soundtrack.isPlaying()) {
       soundtrack.startIntro();
     }
   } catch (_error) {
@@ -1294,6 +1304,11 @@ game.events.on("pubpaid:music-zone", (zone) => {
 });
 
 game.events.on("pubpaid:sound-cue", ({ cue = "select", gameId = "" } = {}) => {
+  if (forceSilentAudio || userAudioMuted) {
+    soundtrack.stop();
+    syncAudioButton();
+    return;
+  }
   if (!userAudioMuted && !soundtrack.isPlaying()) {
     soundtrack.start();
   }

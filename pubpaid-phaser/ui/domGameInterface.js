@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-gameux1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-poolpvpfix2";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260522-gameux1";
+} from "../services/pvpService.js?v=20260522-poolpvpfix2";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -20,7 +20,7 @@ import {
   moveCheckersTournament,
   registerCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260522-gameux1";
+} from "../services/tournamentService.js?v=20260522-poolpvpfix2";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -30,8 +30,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260522-gameux1";
-import { Chess } from "../vendor/chess.js?v=20260522-gameux1";
+} from "../core/checkersRules.js?v=20260522-poolpvpfix2";
+import { Chess } from "../vendor/chess.js?v=20260522-poolpvpfix2";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -999,7 +999,7 @@ export function bindDomGameInterface(game) {
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260522-gameux1";
+      const buildVersion = window.pubpaidBuildVersion || "20260522-poolpvpfix2";
       const phase = local.checkersIntroPhase || "coin";
       refs.checkersCoinFlip.innerHTML = `
         ${phase === "video" ? `<video data-checkers-intro-video src="./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1047,7 +1047,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260522-gameux1";
+    const buildVersion = window.pubpaidBuildVersion || "20260522-poolpvpfix2";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -2975,6 +2975,43 @@ export function bindDomGameInterface(game) {
     }, 1500);
   };
 
+  const renderValePoolControlsMarkup = ({
+    pvp = false,
+    demo = false,
+    match = null,
+    seat = "",
+    setup = { complete: true },
+    ballInHandOwn = false,
+    shotLabel = "Travar mira",
+    disabled = "disabled"
+  } = {}) => `
+    ${demo ? `
+      <div class="ppg-vale-pool-controls is-demo-help">
+        <span>Mouse mira</span>
+        <span>1-5 ou bola de efeito</span>
+        <span>Clique para tacar</span>
+      </div>
+    ` : ""}
+    ${ballInHandOwn ? `
+      <div class="ppg-vale-pool-controls is-demo-help">
+        <span>Bola na mão</span>
+        <span>Clique na mesa para posicionar a branca</span>
+      </div>
+    ` : ""}
+    ${pvp && !setup.complete ? renderPoolSetupControls(match, seat) : ""}
+    ${pvp && setup.complete ? `
+      <div class="ppg-vale-pool-controls">
+        <button type="button" data-dom-pool-aim-step="-5" ${disabled}>‹</button>
+        <input type="range" min="-180" max="180" step="5" value="${local.poolAim}" data-pool-aim ${local.poolControlStage === "aim" ? disabled : "disabled"}>
+        <button type="button" data-dom-pool-aim-step="5" ${disabled}>›</button>
+        <div class="ppg-vale-pool-spin">
+          ${POOL_SPINS.map((spin) => `<button type="button" class="${spin.id === local.poolSpin ? "is-active" : ""}" data-dom-pool-spin="${spin.id}" ${local.poolControlStage === "aim" ? disabled : "disabled"}>${spin.mark}</button>`).join("")}
+        </div>
+        <button type="button" class="primary" data-pool-shoot ${disabled}>${shotLabel}</button>
+      </div>
+    ` : ""}
+  `;
+
   const renderValePoolPrototypeMarkup = ({ mode = "demo", match = null, seat = "" } = {}) => {
     const pvp = mode === "pvp" && match && seat;
     const demo = !pvp;
@@ -3005,6 +3042,7 @@ export function bindDomGameInterface(game) {
           ? "Iniciar força"
           : "Travar mira";
     const disabled = pvp && match.status === "active" && match.turn === seat && (!ballInHandOwn || local.poolCuePlace) ? "" : "disabled";
+    const controlsMarkup = renderValePoolControlsMarkup({ pvp, demo, match, seat, setup, ballInHandOwn, shotLabel, disabled });
     return `
       <div class="ppg-vale-pool-shell${pvp ? " is-pvp" : " is-demo"}">
         ${pvp ? renderValePoolPlayerBadge(match[seat], "voce", ownScore, match.turn === seat, "player", ownRuleLabel) : renderValePoolPlayerBadge(demoPlayer, "sua vez", 0, true, "player", ownRuleLabel)}
@@ -3019,33 +3057,40 @@ export function bindDomGameInterface(game) {
           allow="autoplay; fullscreen"
         ></iframe>
         ${pvp ? renderValePoolPlayerBadge(match[rivalSeat], "rival", rivalScore, match.turn === rivalSeat, "rival", rivalRuleLabel) : renderValePoolPlayerBadge(demoRobot, "ia treino", 0, false, "ia", rivalRuleLabel)}
-        ${demo ? `
-          <div class="ppg-vale-pool-controls is-demo-help">
-            <span>Mouse mira</span>
-            <span>1-5 ou bola de efeito</span>
-            <span>Clique para tacar</span>
-          </div>
-        ` : ""}
-        ${ballInHandOwn ? `
-          <div class="ppg-vale-pool-controls is-demo-help">
-            <span>Bola na mão</span>
-            <span>Clique na mesa para posicionar a branca</span>
-          </div>
-        ` : ""}
-        ${pvp && !setup.complete ? renderPoolSetupControls(match, seat) : ""}
-        ${pvp && setup.complete ? `
-          <div class="ppg-vale-pool-controls">
-            <button type="button" data-dom-pool-aim-step="-5" ${disabled}>‹</button>
-            <input type="range" min="-180" max="180" step="5" value="${local.poolAim}" data-pool-aim ${local.poolControlStage === "aim" ? disabled : "disabled"}>
-            <button type="button" data-dom-pool-aim-step="5" ${disabled}>›</button>
-            <div class="ppg-vale-pool-spin">
-              ${POOL_SPINS.map((spin) => `<button type="button" class="${spin.id === local.poolSpin ? "is-active" : ""}" data-dom-pool-spin="${spin.id}" ${local.poolControlStage === "aim" ? disabled : "disabled"}>${spin.mark}</button>`).join("")}
-            </div>
-            <button type="button" class="primary" data-pool-shoot ${disabled}>${shotLabel}</button>
-          </div>
-        ` : ""}
+        ${controlsMarkup}
       </div>
     `;
+  };
+
+  const refreshValePoolPrototypeChrome = ({ mode = "demo", match = null, seat = "" } = {}) => {
+    const shell = refs.poolStage?.querySelector(".ppg-vale-pool-shell");
+    if (!shell) return;
+    const pvp = mode === "pvp" && match && seat;
+    if (!pvp) return;
+    const state = match.poolState || {};
+    const setup = poolSetupInfo(match);
+    const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
+    const ownScore = Number(state[`${seat}Score`] || 0);
+    const rivalScore = Number(state[`${rivalSeat}Score`] || 0);
+    const formula = poolRuleFormula({ state, seat, rivalSeat });
+    const ownRuleLabel = poolPlayerRuleLabel(formula, state[`${seat}Group`], "VOCE");
+    const rivalRuleLabel = poolPlayerRuleLabel(formula, state[`${rivalSeat}Group`], "RIVAL");
+    const ballInHandOwn = state.ballInHandSeat === seat;
+    const shotLabel =
+      ballInHandOwn && !local.poolCuePlace
+        ? "Posicione a branca"
+        : local.poolControlStage === "power"
+          ? "Tacar"
+          : local.poolControlStage === "locked"
+            ? "Iniciar força"
+            : "Travar mira";
+    const disabled = match.status === "active" && match.turn === seat && (!ballInHandOwn || local.poolCuePlace) ? "" : "disabled";
+    const playerCard = shell.querySelector('[data-vale-pool-side="player"]');
+    if (playerCard) playerCard.outerHTML = renderValePoolPlayerBadge(match[seat], "voce", ownScore, match.turn === seat, "player", ownRuleLabel);
+    const rivalCard = shell.querySelector('[data-vale-pool-side="rival"]');
+    if (rivalCard) rivalCard.outerHTML = renderValePoolPlayerBadge(match[rivalSeat], "rival", rivalScore, match.turn === rivalSeat, "rival", rivalRuleLabel);
+    shell.querySelectorAll(".ppg-vale-pool-controls, [data-pool-setup]").forEach((node) => node.remove());
+    shell.insertAdjacentHTML("beforeend", renderValePoolControlsMarkup({ pvp, match, seat, setup, ballInHandOwn, shotLabel, disabled }));
   };
 
   const syncValePoolPrototypeFrame = (match = null, seat = "") => {
@@ -3271,13 +3316,11 @@ export function bindDomGameInterface(game) {
     if (refs.poolPocketed) refs.poolPocketed.innerHTML = renderPoolPocketedMarkup(state);
     if (refs.poolEffect) refs.poolEffect.innerHTML = renderPoolEffectMarkup(local.poolSpin);
     syncPoolRuleUi(formula);
-    const ballsKey = Array.isArray(state.balls)
-      ? state.balls.map((ball) => [ball.id, ball.x, ball.y, ball.pocketed ? 1 : 0].join(":")).join("|")
-      : "";
     renderStablePoolStage(
-      `pool-prototype:${match.id}:${seat}:${match.status}:${match.turn}:${match.moveCount}:${state.ruleMode || "livre"}:${setup.complete ? 1 : 0}:${setup.phase}:${setup.chooserSeat}:${setup.winnerChoice}:${setup.tutorialReady.playerOne ? 1 : 0}:${setup.tutorialReady.playerTwo ? 1 : 0}:${state.playerOneScore || 0}:${state.playerTwoScore || 0}:${state.ballInHandSeat || ""}:${local.poolCuePlace?.x || ""}:${local.poolCuePlace?.y || ""}:${ballsKey}:${local.poolSpin}:${local.poolControlStage}`,
+      `pool-prototype:${match.id}:${seat}:${match.status}:${state.ruleMode || "livre"}:${state[`${seat}Group`] || ""}:${state[`${rivalSeat}Group`] || ""}:${setup.complete ? 1 : 0}:${setup.phase}:${setup.chooserSeat}:${setup.winnerChoice}:${setup.starterSeat}:${setup.tutorialReady.playerOne ? 1 : 0}:${setup.tutorialReady.playerTwo ? 1 : 0}`,
       renderValePoolPrototypeMarkup({ mode: "pvp", match, seat })
     );
+    refreshValePoolPrototypeChrome({ mode: "pvp", match, seat });
     syncValePoolPrototypeFrame(match, seat);
     setCheckersPlayerCard({
       root: refs.poolSelf,

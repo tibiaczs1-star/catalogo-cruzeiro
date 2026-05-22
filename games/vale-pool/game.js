@@ -138,7 +138,7 @@
       shots: 0,
       next: 1,
       message: "JOGUE A MOEDA",
-      introTimer: INTRO_DURATION,
+      introTimer: embeddedMode === "pvp" ? 0 : INTRO_DURATION,
       turn: "player",
       currentShooter: "player",
       ruleMode: "livre",
