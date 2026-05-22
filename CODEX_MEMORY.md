@@ -1,6 +1,14 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-05-20
+Atualizado: 2026-05-22
+
+## Rodada Atual - 20260522-poolreturn1
+
+- Sinuca aprovada mantida sem redesenho e PubPaid recebeu retorno claro para o lobby: no treino aparece `Voltar ao lobby`, no PvP continua `Desistir`, e o fim da demo abre o painel de resultado com `Voltar às mesas`.
+- `review=pool`, `review=sinuca` e `review=vale-pool` agora inicializam o fluxo de treino da sinuca para revisão direta.
+- Build/cache-bust publicado como `20260522-poolreturn1`.
+- Validação: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --cached --check`; servidor local respondeu `/api/pubpaid/build=20260522-poolreturn1`; online Render respondeu `/api/pubpaid/build=20260522-poolreturn1`.
+- Observação: ficaram mudanças locais não relacionadas em dados/notícias/automação e em um trecho solto de torneio de Damas no `server.js`; elas não entraram no commit de cache-bust da sinuca.
 
 ## Protocolo Comercial - Propagandas
 
