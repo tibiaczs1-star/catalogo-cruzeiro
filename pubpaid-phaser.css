@@ -6576,7 +6576,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers {
   background:
     linear-gradient(90deg, rgba(2, 5, 12, 0.9), rgba(2, 5, 12, 0.42) 38%, rgba(2, 5, 12, 0.9)),
     linear-gradient(180deg, rgba(2, 5, 12, 0.28), rgba(2, 5, 12, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-checkerstourney1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-poolreturn1") center / cover no-repeat,
     radial-gradient(circle at 50% 10%, rgba(255, 208, 109, 0.16), transparent 28%),
     radial-gradient(circle at 78% 72%, rgba(80, 239, 255, 0.11), transparent 30%),
     linear-gradient(135deg, rgba(18, 13, 10, 0.92), rgba(3, 7, 16, 0.96) 46%, rgba(11, 32, 35, 0.9));
@@ -7429,7 +7429,7 @@ body.pubpaid-phaser-page.ppg-dom-checkers-active .ppg-game-shell {
     radial-gradient(ellipse at 50% 46%, rgba(255, 204, 103, 0.2), transparent 22%),
     radial-gradient(ellipse at 49% 56%, rgba(0, 0, 0, 0) 0 30%, rgba(1, 3, 9, 0.38) 56%, rgba(1, 3, 9, 0.86) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.32) 38%, rgba(0, 0, 0, 0.88)),
-    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-checkerstourney1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png?v=20260522-poolreturn1") center / cover no-repeat,
     linear-gradient(135deg, #100a08, #02060e 48%, #061a1c);
   border: 0;
   box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.68);
@@ -10197,7 +10197,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="che
     radial-gradient(circle at 50% 5%, rgba(255, 208, 109, 0.34), transparent 25%),
     radial-gradient(circle at 8% 76%, rgba(92, 230, 222, 0.17), transparent 30%),
     radial-gradient(circle at 92% 56%, rgba(255, 79, 184, 0.12), transparent 34%),
-    url("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png?v=20260522-checkerstourney1") center / cover no-repeat,
+    url("./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png?v=20260522-poolreturn1") center / cover no-repeat,
     linear-gradient(145deg, #07101c 0%, #141021 44%, #071912 100%);
   background-size: auto, auto, auto, 28px 28px, 28px 28px, auto, auto, auto, auto, auto, auto;
   overflow: hidden;

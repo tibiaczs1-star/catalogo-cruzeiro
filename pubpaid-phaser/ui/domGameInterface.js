@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-checkerstourney1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260522-poolreturn1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260522-checkerstourney1";
+} from "../services/pvpService.js?v=20260522-poolreturn1";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -19,7 +19,7 @@ import {
   joinCheckersTournament,
   moveCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260522-checkerstourney1";
+} from "../services/tournamentService.js?v=20260522-poolreturn1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -29,8 +29,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260522-checkerstourney1";
-import { Chess } from "../vendor/chess.js?v=20260522-checkerstourney1";
+} from "../core/checkersRules.js?v=20260522-poolreturn1";
+import { Chess } from "../vendor/chess.js?v=20260522-poolreturn1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -958,7 +958,7 @@ export function bindDomGameInterface(game) {
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260522-checkerstourney1";
+      const buildVersion = window.pubpaidBuildVersion || "20260522-poolreturn1";
       const phase = local.checkersIntroPhase || "coin";
       refs.checkersCoinFlip.innerHTML = `
         ${phase === "video" ? `<video data-checkers-intro-video src="./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1006,7 +1006,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260522-checkerstourney1";
+    const buildVersion = window.pubpaidBuildVersion || "20260522-poolreturn1";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
