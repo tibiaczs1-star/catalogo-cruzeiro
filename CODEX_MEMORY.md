@@ -9,6 +9,7 @@ Atualizado: 2026-05-22
 - Noticias: `scripts/capture-latest-news.js` agora usa janela ativa padrao de 360 e arquivo padrao de 480 itens; `data/runtime-news.json`, `data/news-archive.json` e `news-data.js` foram podados de 1000 para 480 itens, com `news-data.js` em cerca de 1,56 MB.
 - Memoria: 26 ordens antigas abertas foram marcadas como `closed-memory-cleanup`, restando apenas a ordem atual durante a rodada; reabrir alguma delas somente se o usuario pedir retomada explicita.
 - Validacao local: `node --check`, JSON OK, `PERF_BUDGET_STRICT=1 npm run perf:budget`, `npm run agents:cycle` com `newsItems: 480`, `npm run review:team` com `totalIssues: 0`, `npm run editorial:health` OK e smoke local em `:3094` com home 200, `/api/news?limit=10&lite=1` sem `body`, `/api/pubpaid/build=20260522-boardfit1` e `/pubpaid.html` 200.
+- Online apos deploy: Render primeiro retornou 502 durante troca de build, depois estabilizou com `news-data.js=1607717` bytes, `styles.css=614579` bytes, home 200, `/api/news?limit=10&lite=1` com 10 itens sem `body`, `/api/pubpaid/build=20260522-boardfit1` e `/pubpaid.html` 200.
 
 ## Rodada Atual - 20260522-sync1
 

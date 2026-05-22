@@ -1,18 +1,18 @@
 # Current State
 
-Updated: 2026-05-22T19:52:31.707Z
+Updated: 2026-05-22T19:55:45.339Z
 
 ## Active Goal
 
-- Itens 2-5 resolvidos localmente
+- Itens 2-5 resolvidos e publicados
 
 ## Summary
 
-Performance antiga: styles.css compactado de 716692 para cerca de 614 KB e perf budget passou em modo estrito sem arquivos over. Noticias: runtime-news, news-archive e news-data reduzidos de 1000 para 480 itens, com janela ativa de 360; agents:cycle confirmou newsItems 480. Memoria: ordens abertas antigas foram arquivadas, removendo o aviso de 26 pendencias antigas; ordem atual ficou marcada como concluida localmente aguardando push/check online. Validacao local: node --check, JSON OK, perf estrito OK, agents:cycle OK, review:team totalIssues 0, editorial:health OK e smoke local home/API/PubPaid OK.
+Performance, memoria, volume de noticias e validacao online concluidos. styles.css saiu do over e esta em ~614 KB; news-data/runtime/news-archive foram reduzidos para 480 itens; codex:health ficou com open 0; Render confirmou pacote novo com news-data.js 1607717 bytes e styles.css 614579 bytes, home 200, API news lite com 10 itens sem body e PubPaid build 20260522-boardfit1.
 
 ## Next
 
-- Fazer commit/push e validar Render online.
+- Manter acompanhamento normal; nenhuma pendencia dos itens 2-5 ficou aberta.
 
 ## Files In Focus
 

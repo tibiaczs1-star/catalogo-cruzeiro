@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T19:52:19.313Z",
+  "lastUpdatedAt": "2026-05-22T19:55:34.318Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2490,8 +2490,8 @@
     {
       "id": "2026-05-22-resolver-performance-antiga-do-site-ordens-antigas-abertas-volume-de-dados-de-no",
       "createdAt": "2026-05-22T19:46:56.245Z",
-      "updatedAt": "2026-05-22T19:52:19.313Z",
-      "status": "completed-local-pending-push-check",
+      "updatedAt": "2026-05-22T19:55:34.318Z",
+      "status": "completed-online",
       "source": "chat",
       "rawRequest": "resolva 2 3 4 5 so isso",
       "summary": "Resolver performance antiga do site, ordens antigas abertas, volume de dados de noticias e validacao online pos-deploy",
@@ -2514,10 +2514,8 @@
         "noticias",
         "render"
       ],
-      "nextSteps": [
-        "push e validacao online pos-deploy"
-      ],
-      "notes": "Resolvidos localmente: perf budget estrito sem over, styles.css abaixo do teto, news-data/runtime/news-archive reduzidos para 480 itens, ordens abertas antigas fechadas deixando 1 ordem ativa, smoke local home/API/PubPaid OK."
+      "nextSteps": [],
+      "notes": "Concluido local e online: perf budget estrito sem over; styles.css ~614 KB local/~614579 bytes online; news-data.js ~1.61 MB local/1607717 bytes online; runtime/news-archive/news-data podados para 480 itens; codex:health open 0; Render validado com home 200, API news lite 10 itens sem body, PubPaid build 20260522-boardfit1 e pubpaid.html 200."
     }
   ]
 }
