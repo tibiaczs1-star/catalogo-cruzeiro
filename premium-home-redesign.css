@@ -15341,13 +15341,6 @@ body.editorial-home #founders .founder-slot-card a {
   text-decoration: none !important;
 }
 
-/* 2026-05-13: manchetes com foto embaixo da hero, com troca manual. */
-html body.editorial-home .main-layout > .hero-newsroom-panel.hero-office-panel.hero-story-switcher-panel,
-html body.editorial-home .hero-newsroom-panel.hero-office-panel.hero-story-switcher-panel,
-html body.editorial-home .hero-newsroom-panel.hero-story-switcher-panel {
-  display: none !important;
-}
-
 html body.editorial-home .hero-newsroom-shell.hero-restored-shell {
   grid-template-columns: minmax(0, 1fr) !important;
   grid-template-rows: minmax(506px, auto) !important;

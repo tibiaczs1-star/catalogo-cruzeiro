@@ -483,8 +483,8 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260522-homegate1";
-const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522_homegate1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260522-homegate2";
+const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522_homegate2";
 const homeFirstFoldReadyState = {
   resolved: false,
   resolve: null
@@ -496,11 +496,11 @@ window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__ = new Promise((resolve) => {
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260522-homegate1",
-  "./premium-home-redesign.css?v=20260522-homegate1",
+  "./styles.css?v=20260522-homegate2",
+  "./premium-home-redesign.css?v=20260522-homegate2",
   "./startup-experience.css?v=20260513-tv-communityfix1",
   "./early-home-surfaces.js?v=20260513-tv-communityfix1",
-  "./script.js?v=20260522-homegate1",
+  "./script.js?v=20260522-homegate2",
   "./startup-experience.js?v=20260513-tv-communityfix1",
   "./noticia.html",
   "./arquivo.html",
@@ -1786,13 +1786,18 @@ const hydrateInitialStaticThumbs = () => {
   });
 };
 
-if (splashCompactViewportQuery.matches) {
+const initialSplashIsHoldingPage =
+  document.body.classList.contains("catalogo-site-booting") &&
+  !document.body.classList.contains("site-loaded");
+
+if (initialSplashIsHoldingPage) {
+  const staticThumbDelay = splashCompactViewportQuery.matches ? 7600 : 3600;
   window.addEventListener(
     "catalogo:logo-splash-finished",
-    () => window.setTimeout(hydrateInitialStaticThumbs, 7600),
+    () => window.setTimeout(hydrateInitialStaticThumbs, staticThumbDelay),
     { once: true }
   );
-  window.setTimeout(hydrateInitialStaticThumbs, 18000);
+  window.setTimeout(hydrateInitialStaticThumbs, splashCompactViewportQuery.matches ? 18000 : 22000);
 } else {
   hydrateInitialStaticThumbs();
 }
@@ -2093,18 +2098,13 @@ const markHomeFirstFoldReady = (reason = "ready") => {
   if (typeof homeFirstFoldReadyState.resolve === "function") {
     homeFirstFoldReadyState.resolve({ reason });
   }
-  if (
-    splashCompactViewportQuery.matches &&
-    isSplashHoldingPage() &&
-    isHomeFirstFoldVisiblyReady() &&
-    typeof window.__CATALOGO_SPLASH_FORCE_RELEASE__ === "function"
-  ) {
+  if (isSplashHoldingPage() && isHomeFirstFoldVisiblyReady()) {
     updateSplashProgress(100, "Portal pronto para abrir");
     window.setTimeout(() => {
-      if (isSplashHoldingPage()) {
-        window.__CATALOGO_SPLASH_FORCE_RELEASE__("mobile-first-fold-ready");
+      if (isSplashHoldingPage() && typeof window.__CATALOGO_SPLASH_FORCE_RELEASE__ === "function") {
+        window.__CATALOGO_SPLASH_FORCE_RELEASE__("first-fold-ready");
       }
-    }, 180);
+    }, splashCompactViewportQuery.matches ? 220 : 320);
   }
   window.dispatchEvent(new CustomEvent("catalogo:home-first-fold-ready", { detail: { reason } }));
 };
@@ -2129,7 +2129,7 @@ const isHomeFirstFoldVisiblyReady = () => {
   return hasHeroStory && hasHeroImage && readyCards >= 3;
 };
 
-const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 12000 : 14000) => {
+const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 45000 : 60000) => {
   if (window.__CATALOGO_HOME_FIRST_FOLD_READY__) {
     if (isHomeFirstFoldVisiblyReady()) {
       return Promise.resolve();
@@ -2152,7 +2152,7 @@ const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.ma
   );
 };
 
-const waitForHomeVisibleSurface = (timeoutMs = splashCompactViewportQuery.matches ? 12000 : 14000) =>
+const waitForHomeVisibleSurface = (timeoutMs = splashCompactViewportQuery.matches ? 45000 : 60000) =>
   new Promise((resolve) => {
     if (isHomeFirstFoldVisiblyReady()) {
       resolve();
@@ -2394,8 +2394,8 @@ const waitForSplashReadiness = async () => {
     {
       label: "Montando hero e primeiras seções",
       progress: 84,
-      timeout: splashCompactViewportQuery.matches ? 12000 : 14000,
-      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 12000 : 14000)
+      timeout: splashCompactViewportQuery.matches ? 45000 : 60000,
+      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 45000 : 60000)
     },
     {
       label: "Conferindo imagens da primeira dobra",
@@ -2589,7 +2589,7 @@ const setupSplashExperience = () => {
     if (!splashReleased) {
       releaseSplash();
     }
-  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 18000 : 22000));
+  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 45000 : 60000));
 
   const currentTime =
     typeof performance !== "undefined" && typeof performance.now === "function"
@@ -6752,6 +6752,7 @@ const updateHeroMainStory = (photo = {}) => {
     heroTourismShell.querySelector("[data-hero-tourism-summary-copy]") ||
     heroTourismShell.querySelector(".hero-newsroom-copy > p:not(.eyebrow)");
   const primaryLink = heroTourismShell.querySelector(".hero-newsroom-actions .solid-button");
+  const readLinks = [...heroTourismShell.querySelectorAll("[data-hero-read-current]")];
   const metaLink = heroTourismShell.querySelector("[data-hero-tourism-meta-link]");
   const title = photo.articleTitle || photo.title || "";
   const summary =
@@ -6769,14 +6770,18 @@ const updateHeroMainStory = (photo = {}) => {
     summaryNode.textContent = truncateCopy(summary, 176);
   }
 
-  if (primaryLink) {
-    primaryLink.href = href;
-    primaryLink.textContent = href.startsWith("#") ? "Ver destaque" : "Ler matéria da foto";
-    primaryLink.setAttribute(
+  readLinks.forEach((link) => {
+    link.href = href;
+    link.textContent = href.startsWith("#") ? "Ver destaque" : "Ler matéria";
+    link.setAttribute(
       "aria-label",
-      href.startsWith("#") ? `Ver destaque: ${title}` : `Ler matéria da foto: ${title}`
+      href.startsWith("#") ? `Ver destaque: ${title}` : `Ler matéria: ${title}`
     );
-    applyArticleLinkAttrs(primaryLink, href);
+    applyArticleLinkAttrs(link, href);
+  });
+
+  if (primaryLink) {
+    primaryLink.classList.toggle("is-article-ready", !href.startsWith("#"));
   }
 
   if (metaLink) {
@@ -18915,11 +18920,16 @@ const hydrateDynamicNews = async () => {
     hydrateMosaicHero(merged);
     renderEditorialUtilityFlow(merged);
     renderWhatMattersNow(merged);
-    initializeHeroTourismHero();
-    applyGlobalClosedCardGrids();
+    const firstHeroPhoto = getHeroTourismPhoto(heroTourismRotation.photoIndex || 0);
+    if (firstHeroPhoto) {
+      updateHeroMainStory(firstHeroPhoto);
+      paintHeroShellImage(firstHeroPhoto.proxyUrl || firstHeroPhoto.fallbackUrl || "");
+    }
     markHomeFirstFoldReady("runtime-news");
 
     const hydrateAfterFirstPaint = () => {
+      initializeHeroTourismHero();
+      applyGlobalClosedCardGrids();
       void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
       runIdleStepQueue(
         [

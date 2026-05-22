@@ -154,14 +154,14 @@
         }
       </style>
     </noscript>
-  <link rel="stylesheet" href="./styles.css?v=20260522-homegate1" />
+  <link rel="stylesheet" href="./styles.css?v=20260522-homegate2" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homegate1" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homegate2" />
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
@@ -607,8 +607,18 @@
             <img src="./assets/logo-czs.svg?v=20260513-layout-order1" alt="" />
           </div>
           <div class="hero-tourism-backdrop" aria-hidden="true">
-            <span class="hero-tourism-slide is-active" data-hero-tourism-slide></span>
-            <span class="hero-tourism-slide" data-hero-tourism-slide></span>
+            <span
+              class="hero-tourism-slide is-active"
+              data-hero-tourism-slide
+              data-hero-backdrop-ready="true"
+              style="background-image: linear-gradient(90deg, rgba(3, 18, 31, 0.86), rgba(3, 18, 31, 0.2)), url('./assets/home-cache/rio-jurua-panorama.jpg')"
+            ></span>
+            <span
+              class="hero-tourism-slide"
+              data-hero-tourism-slide
+              data-hero-backdrop-ready="true"
+              style="background-image: linear-gradient(90deg, rgba(3, 18, 31, 0.86), rgba(3, 18, 31, 0.2)), url('./assets/home-cache/rio-jurua-panorama.jpg')"
+            ></span>
           </div>
 
           <div class="hero-tourism-controls" aria-label="Controles do destaque principal">
@@ -627,7 +637,7 @@
               Manchete local, contexto curto e caminho direto para ler.
             </p>
             <div class="hero-newsroom-actions">
-              <a class="solid-button" href="#radar">Ler matéria da foto</a>
+              <a class="solid-button" href="#radar" data-hero-read-current>Ler matéria</a>
               <a class="outline-button" href="#painel-do-dia">Como está hoje</a>
             </div>
             <a class="hero-tourism-meta" href="#radar" data-hero-tourism-meta-link aria-label="Ler notícia em destaque">
@@ -650,6 +660,10 @@
               rel="noopener noreferrer"
             >Foto: Rio Juruá / Wikimedia Commons</a>
           </div>
+
+          <a class="hero-current-story-button" href="#radar" data-hero-read-current aria-label="Ler a matéria em destaque">
+            Ler matéria
+          </a>
 
           <section class="hero-desktop-topic-carousel" aria-label="Destaques do dia por assunto">
             <div class="hero-desktop-topic-carousel-head">
@@ -2030,12 +2044,12 @@
 
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, window.__CATALOGO_COMPACT_BOOT__ ? 18000 : 22000);
+        }, window.__CATALOGO_COMPACT_BOOT__ ? 45000 : 60000);
       })();
     </script>
-    <script defer src="./catalogo-app-core.js?v=20260522-homegate1"></script>
+    <script defer src="./catalogo-app-core.js?v=20260522-homegate2"></script>
     <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
-    <script defer src="./script.js?v=20260522-homegate1"></script>
+    <script defer src="./script.js?v=20260522-homegate2"></script>
     <script>
       (function () {
         const styles = [
@@ -2056,7 +2070,7 @@
           "./modern-launch.css?v=20260415d",
           "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homegate1";
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homegate2";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =

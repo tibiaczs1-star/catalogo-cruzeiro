@@ -35,7 +35,7 @@
       const slowConnection = /(^slow-2g$|^2g$|^3g$)/i.test(this.state.connection);
       const weakHardware = this.state.memoryGb <= 2 || this.state.cores <= 4;
       const lite = this.state.reducedMotion || this.state.lowData || slowConnection || (compact && weakHardware);
-      this.state.tier = lite ? "lite" : compact ? "balanced" : "cinematic";
+      this.state.tier = lite ? "lite" : "balanced";
       document.documentElement.dataset.qualityTier = this.state.tier;
       document.body?.classList.toggle("fx-lite", lite);
       document.body?.classList.toggle("catalogo-quality-balanced", this.state.tier === "balanced");
@@ -232,16 +232,11 @@
     PerformanceMonitor.observe();
     MemoryCleaner.init();
     const afterFirstScreen = (callback, delay = 0) => {
-      if (!compact) {
-        scheduleIdle(callback, delay);
-        return;
-      }
-
       let didRun = false;
       const run = () => {
         if (didRun) return;
         didRun = true;
-        window.setTimeout(() => scheduleIdle(callback, 1600), delay);
+        window.setTimeout(() => scheduleIdle(callback, compact ? 1600 : 900), delay);
       };
       if (document.body.classList.contains("site-loaded")) {
         run();
@@ -249,7 +244,7 @@
       }
 
       window.addEventListener("catalogo:logo-splash-finished", run, { once: true });
-      window.setTimeout(run, 14000);
+      window.setTimeout(run, compact ? 14000 : 18000);
     };
 
     afterFirstScreen(() => RoutePreloader.init(), compact ? 6200 : 0);

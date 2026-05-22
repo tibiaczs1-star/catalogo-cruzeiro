@@ -28079,7 +28079,6 @@ html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom
 }
 
 html body.editorial-home .hero-newsroom-panel.hero-story-switcher-panel[hidden],
-html body.editorial-home .hero-newsroom-panel.hero-story-switcher-panel,
 html body.editorial-home .hero-daily-news-band {
   display: none !important;
 }
@@ -28277,6 +28276,37 @@ html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom
   color: #06111d !important;
 }
 
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-current-story-button {
+  position: absolute !important;
+  right: clamp(1rem, 3vw, 2rem) !important;
+  bottom: clamp(1rem, 3vw, 1.8rem) !important;
+  z-index: 14 !important;
+  display: inline-flex !important;
+  min-height: 48px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 1.15rem !important;
+  border: 1px solid rgba(255, 227, 154, 0.82) !important;
+  border-radius: 8px !important;
+  background: #f0b429 !important;
+  color: #06111d !important;
+  font-size: 0.92rem !important;
+  font-weight: 950 !important;
+  text-decoration: none !important;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(240, 180, 41, 0.18) !important;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-current-story-button::before {
+  content: ">";
+  margin-right: 0.48rem;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-current-story-button:hover,
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-current-story-button:focus-visible {
+  background: #ffd66f !important;
+  color: #020d18 !important;
+}
+
 @media (max-width: 980px) {
   html body.editorial-home .editorial-retention-flow,
   html body.editorial-home .day-panel-grid,
@@ -28297,6 +28327,14 @@ html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom
 
   html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-actions {
     grid-template-columns: 1fr !important;
+  }
+
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-current-story-button {
+    right: 1rem !important;
+    bottom: 0.92rem !important;
+    min-height: 44px !important;
+    padding: 0 0.92rem !important;
+    font-size: 0.84rem !important;
   }
 
   html body.editorial-home .live-line-card {
