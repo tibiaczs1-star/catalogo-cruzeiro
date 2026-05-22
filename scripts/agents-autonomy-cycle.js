@@ -240,19 +240,67 @@ function buildFallbackBody(item = {}) {
   const category = cleanText(item.category || "noticia local", 80).toLowerCase();
   const dateLabel = item.date || formatDate(item.publishedAt || item.createdAt);
   const sourceLabel = cleanText(item.sourceLabel || title, 180);
+  const searchable = fingerprint([title, sourceLabel, category, item.location, item.sourceUrl].join(" "));
+  const territory = /\b(cruzeiro do sul|jurua|juru[aá]|mancio|porto walter|marechal thaumaturgo|tarauaca|rodrigues alves)\b/.test(
+    searchable
+  )
+    ? "o Vale do Jurua"
+    : /\b(acre|rio branco|xapuri|brasileia|sena madureira|feijo|placido de castro)\b/.test(searchable)
+      ? "o Acre"
+      : "a rotina local";
+  const impactByCategory = {
+    prefeitura: "medir se ha efeito direto em bairro, atendimento publico, obra, prazo ou servico municipal",
+    servicos: "verificar prazo, endereco, telefone, documento exigido ou mudanca que afete o dia do leitor",
+    "utilidade-publica": "identificar quem precisa agir agora, qual servico consultar e que informacao ainda falta",
+    saude: "acompanhar atendimento, unidade envolvida, orientacao oficial e possivel impacto para familias",
+    seguranca: "separar fato confirmado, local, autoridade citada e cuidado necessario para nao espalhar boato",
+    educacao: "observar escola, calendario, matricula, transporte, bolsa ou decisao que alcance estudantes e familias",
+    agenda: "confirmar data, horario, local e utilidade para quem pretende participar",
+    politica: "entender decisao, cargo, fonte e consequencia pratica antes de transformar disputa em ruido",
+    economia: "avaliar preco, renda, emprego, comercio e servico que possam alterar a vida da cidade",
+    cultura: "localizar data, espaco, realizadores e acesso do publico sem perder o contexto regional"
+  };
+  const impactSentence =
+    impactByCategory[fingerprint(category)] ||
+    "entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao";
 
   return [
-    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.`,
-    `${sourceLabel} e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.`,
-    `Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre ${category}, mostra a base consultada e mantem o acesso direto para a fonte completa.`
+    `${sourceName} registrou em ${dateLabel}: ${sourceLabel}. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.`,
+    `Impacto pratico: ${impactSentence}. Para quem acompanha ${territory}, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.`,
+    "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
   ];
 }
 
 function normalizeBody(item = {}) {
   const reference = item.lede || item.summary || item.description || "";
   const body = Array.isArray(item.body) ? item.body.map((line) => cleanText(line)).filter(Boolean) : [];
-  const unique = removeDanglingTail(body.filter((paragraph) => !isRepeated(paragraph, reference)));
+  const unique = removeDanglingTail(
+    body.filter((paragraph) => !isRepeated(paragraph, reference) && !isLegacyFallbackBody(paragraph))
+  );
   return unique.length ? unique : buildFallbackBody(item);
+}
+
+function isLegacyFallbackBody(paragraph = "") {
+  const key = fingerprint(paragraph);
+  if (!key) return false;
+
+  return (
+    key.includes("publicou em") &&
+    key.includes("a base desta noticia") &&
+    (key.includes("como o tema se conecta ao cotidiano") || key.includes("sobre "))
+  ) || (
+    key.includes("e o eixo mais concreto da publicacao consultada") &&
+    key.includes("impacto imediato")
+  ) || (
+    key.includes("material original ainda nao trouxe desenvolvimento suficiente") &&
+    key.includes("fonte completa")
+  ) || (
+    key.includes("ponto principal da atualizacao captada automaticamente") &&
+    key.includes("link da fonte original")
+  ) || (
+    key.includes("redacao automatica acompanha") &&
+    key.includes("novas atualizacoes")
+  );
 }
 
 function normalizeNewsItems(items = []) {
@@ -306,11 +354,15 @@ function runAutonomyCycle({ trigger = "manual" } = {}) {
   const startedAt = new Date().toISOString();
   const runtimeNews = readJson(RUNTIME_NEWS_FILE, { items: [] });
   const runtimeResult = normalizeNewsItems(Array.isArray(runtimeNews.items) ? runtimeNews.items : []);
+  const activeWindowResult = normalizeNewsItems(
+    Array.isArray(runtimeNews.activeWindowItems) ? runtimeNews.activeWindowItems : []
+  );
   const staticResult = normalizeNewsItems(readStaticNewsData());
 
   writeJson(RUNTIME_NEWS_FILE, {
     ...runtimeNews,
     lastAutonomyFixAt: startedAt,
+    activeWindowItems: activeWindowResult.items,
     items: runtimeResult.items
   });
   writeStaticNewsData(staticResult.items);
@@ -327,7 +379,11 @@ function runAutonomyCycle({ trigger = "manual" } = {}) {
         id: "news-editorial-body",
         agentGroup: "copy/editor/review/sources",
         status: "done",
-        changedRuntimeItems: runtimeResult.addedBody + runtimeResult.removedRepeated,
+        changedRuntimeItems:
+          runtimeResult.addedBody +
+          runtimeResult.removedRepeated +
+          activeWindowResult.addedBody +
+          activeWindowResult.removedRepeated,
         changedStaticItems: staticResult.addedBody + staticResult.removedRepeated,
         detail:
           "Garantiu body editorial proprio em noticias captadas e removeu repeticao entre resumo e corpo."

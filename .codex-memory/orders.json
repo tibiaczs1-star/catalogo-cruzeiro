@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T18:28:41.311Z",
+  "lastUpdatedAt": "2026-05-22T18:41:27.513Z",
   "orders": [
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
@@ -2423,6 +2423,21 @@
         "validar online apos deploy Render"
       ],
       "notes": "Backup criado em .codex-backups/final-sweep-20260522-132315; limpeza segura removeu output, debug.log, __pycache__, coverage de node_modules e runtime local data/pubpaid-tournaments.json."
+    },
+    {
+      "id": "2026-05-22-refinar-editorial-e-velocidade-do-czs-para-aproximar-10-10-sem-mexer-no-pubpaid",
+      "createdAt": "2026-05-22T18:41:27.513Z",
+      "updatedAt": "2026-05-22T18:41:27.513Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "entao refine o editorial, para alcaçar 10 de 10 em velocidade e editorial",
+      "summary": "Refinar editorial e velocidade do CZS para aproximar 10/10 sem mexer no PubPaid.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

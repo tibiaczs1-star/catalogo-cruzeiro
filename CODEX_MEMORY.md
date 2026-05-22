@@ -2,6 +2,15 @@
 
 Atualizado: 2026-05-22
 
+## Rodada Atual - 20260522-editorial10a
+
+- CZS/editorial refinado sem misturar com PubPaid: home passou a pre-carregar `/api/news?limit=60&lite=1`, enquanto materias por slug continuam com corpo completo.
+- API `/api/news` ganhou modo `lite=1`, removendo `body`, `highlights` e `development` do payload inicial da home e mantendo campos de capa, fonte, imagem, prioridade e slug.
+- Medicao local: fetch antigo `limit=80` completo = 233112 bytes; novo `limit=60&lite=1` = 121138 bytes; economia de 48,0% no primeiro carregamento de noticias.
+- Fallback editorial do servidor e dos agentes trocado para o padrao `fato confirmado -> impacto pratico -> o que seguir`, sem copy antiga de `redacao automatica`, `base desta noticia` ou `ponto principal da atualizacao captada automaticamente`.
+- `scripts/agents-autonomy-cycle.js` agora normaliza tambem `activeWindowItems`, evitando que a janela ativa de noticias mantenha texto editorial antigo quando `items` ja esta limpo.
+- Validacao local: `node --check` em `server.js` e `scripts/agents-autonomy-cycle.js`; `npm run agents:cycle`; `npm run review:team` com PubPaid guard OK e `totalIssues: 0`; `npm run perf:budget` OK em modo nao estrito, com divida antiga ainda marcada em `styles.css`; HTTP local em `:3064` confirmou home 200, preload lite, payload sem `body` e materia por slug com novo corpo editorial.
+
 ## Rodada Final - 20260522-final-sweep1
 
 - Frentes separadas: Projeto Codex/CZS e PubPaid continuam no mesmo repo, mas devem ser tratados como sistemas diferentes; nao puxar regras de jogo para home/editorial nem puxar CZS para runtime PubPaid sem pedido explicito.

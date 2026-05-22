@@ -46,7 +46,7 @@
         window.__CATALOGO_NEWS_PRELOAD_STARTED__ = true;
         window.__CATALOGO_NEWS_PRELOAD__ =
           window.__CATALOGO_NEWS_PRELOAD__ ||
-          fetch("./api/news?limit=80", {
+          fetch("./api/news?limit=60&lite=1", {
             method: "GET",
             credentials: "same-origin"
           })

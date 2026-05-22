@@ -6727,20 +6727,68 @@ function buildFallbackEditorialBody(item = {}) {
   const publishedAt = item.publishedAt || item.date || item.createdAt || new Date().toISOString();
   const dateLabel = item.date || formatDisplayDate(publishedAt);
   const sourceLabel = cleanShortText(stripHtml(item.sourceLabel || title), 180);
+  const searchable = normalizeText([title, sourceLabel, category, item.location, item.sourceUrl].join(" "));
+  const territory = /\b(cruzeiro do sul|jurua|juru[aá]|mancio|porto walter|marechal thaumaturgo|tarauaca|rodrigues alves)\b/.test(
+    searchable
+  )
+    ? "o Vale do Jurua"
+    : /\b(acre|rio branco|xapuri|brasileia|sena madureira|feijo|placido de castro)\b/.test(searchable)
+      ? "o Acre"
+      : "a rotina local";
+  const impactByCategory = {
+    prefeitura: "medir se ha efeito direto em bairro, atendimento publico, obra, prazo ou servico municipal",
+    servicos: "verificar prazo, endereco, telefone, documento exigido ou mudanca que afete o dia do leitor",
+    "utilidade-publica": "identificar quem precisa agir agora, qual servico consultar e que informacao ainda falta",
+    saude: "acompanhar atendimento, unidade envolvida, orientacao oficial e possivel impacto para familias",
+    seguranca: "separar fato confirmado, local, autoridade citada e cuidado necessario para nao espalhar boato",
+    educacao: "observar escola, calendario, matricula, transporte, bolsa ou decisao que alcance estudantes e familias",
+    agenda: "confirmar data, horario, local e utilidade para quem pretende participar",
+    politica: "entender decisao, cargo, fonte e consequencia pratica antes de transformar disputa em ruido",
+    economia: "avaliar preco, renda, emprego, comercio e servico que possam alterar a vida da cidade",
+    cultura: "localizar data, espaco, realizadores e acesso do publico sem perder o contexto regional"
+  };
+  const impactSentence =
+    impactByCategory[normalizeText(category)] ||
+    "entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao";
 
   return [
-    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.`,
-    `${sourceLabel} e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.`,
-    "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    `${sourceName} registrou em ${dateLabel}: ${sourceLabel}. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.`,
+    `Impacto pratico: ${impactSentence}. Para quem acompanha ${territory}, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.`,
+    "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
   ];
 }
 
 function normalizeEditorialBody(item = {}) {
   const lede = item.lede || item.summary || item.description || "";
   const body = Array.isArray(item.body) ? item.body.map((line) => cleanFeedText(line)).filter(Boolean) : [];
-  const uniqueBody = body.filter((paragraph) => !isRepeatedEditorialText(paragraph, lede));
+  const uniqueBody = body.filter(
+    (paragraph) => !isRepeatedEditorialText(paragraph, lede) && !isLegacyFallbackEditorialBody(paragraph)
+  );
 
   return uniqueBody.length ? uniqueBody : buildFallbackEditorialBody(item);
+}
+
+function isLegacyFallbackEditorialBody(paragraph = "") {
+  const key = normalizeEditorialFingerprint(paragraph);
+  if (!key) return false;
+
+  return (
+    key.includes("publicou em") &&
+    key.includes("a base desta noticia") &&
+    (key.includes("como o tema se conecta ao cotidiano") || key.includes("sobre "))
+  ) || (
+    key.includes("e o eixo mais concreto da publicacao consultada") &&
+    key.includes("impacto imediato")
+  ) || (
+    key.includes("material original ainda nao trouxe desenvolvimento suficiente") &&
+    key.includes("fonte completa")
+  ) || (
+    key.includes("ponto principal da atualizacao captada automaticamente") &&
+    key.includes("link da fonte original")
+  ) || (
+    key.includes("redacao automatica acompanha") &&
+    key.includes("novas atualizacoes")
+  );
 }
 
 function isMailzaPriorityArticle(item = {}) {
@@ -7146,16 +7194,57 @@ function buildArticleNewsApiPayload(limit = 1000) {
   };
 }
 
-function getCachedArticleNewsApiPayload(limit = 1000) {
+function buildLiteArticleNewsApiItem(item = {}) {
+  return {
+    id: item.id,
+    slug: item.slug,
+    title: item.title,
+    eyebrow: item.eyebrow,
+    date: item.date,
+    publishedAt: item.publishedAt,
+    category: item.category,
+    categoryKey: item.categoryKey,
+    previewClass: item.previewClass,
+    sourceName: item.sourceName,
+    sourceUrl: item.sourceUrl,
+    sourceLabel: item.sourceLabel,
+    lede: item.lede,
+    summary: item.summary,
+    analysis: item.analysis,
+    imageUrl: item.imageUrl,
+    sourceImageUrl: item.sourceImageUrl,
+    feedImageUrl: item.feedImageUrl,
+    imageCredit: item.imageCredit,
+    imageFocus: item.imageFocus,
+    imageFit: item.imageFit,
+    media: item.media,
+    priority: item.priority,
+    editorialPriority: item.editorialPriority,
+    crossSources: item.crossSources,
+    alternateSlugs: item.alternateSlugs
+  };
+}
+
+function buildLiteArticleNewsApiPayload(limit = 80) {
+  const payload = buildArticleNewsApiPayload(Math.max(1, Math.min(120, Number(limit) || 80)));
+  return {
+    ...payload,
+    lite: true,
+    items: payload.items.map(buildLiteArticleNewsApiItem)
+  };
+}
+
+function getCachedArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
-  const key = `limit:${safeLimit}`;
+  const lite = Boolean(options.lite);
+  const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
 
   if (cached && cached.expiresAt > Date.now()) {
     return cached.payload;
   }
 
-  const payload = buildArticleNewsApiPayload(safeLimit);
+  const payload = lite ? buildLiteArticleNewsApiPayload(safeLimit) : buildArticleNewsApiPayload(safeLimit);
   newsApiResponseCache.set(key, {
     expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
     payload
@@ -15409,7 +15498,8 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 1000);
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
+    const lite = /^(1|true|yes|sim)$/i.test(String(searchParams.get("lite") || ""));
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { lite }));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
