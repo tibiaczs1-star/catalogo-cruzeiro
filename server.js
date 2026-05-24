@@ -1372,6 +1372,8 @@ const newsApiResponseCache = new Map();
 const newsCollectionCache = new Map();
 const staticNewsItemsCache = { key: "", items: [] };
 const articleNewsBaseCache = { key: "", total: 0, items: [] };
+const articleNewsLookupCache = { key: "", map: new Map() };
+const newsArchiveResponseCache = new Map();
 const NINJAS_OPPORTUNITIES_UPDATED_AT = "2026-04-14";
 const NINJAS_OPPORTUNITIES = [
   {
@@ -7303,17 +7305,8 @@ function getArticleStorageKey(item = {}) {
 }
 
 function getArticleNews(limit = 30) {
-  const items = getRawNewsItems().map(normalizeArticleRecord);
-  const map = new Map();
-
-  items.forEach((item) => {
-    const key = getArticleStorageKey(item);
-    if (key) {
-      upsertCrossedArticleRecord(map, key, item);
-    }
-  });
-
-  return repairNewsImagesForDisplay(Array.from(map.values()).sort(sortArticleItems).slice(0, limit));
+  const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 30));
+  return getArticleNewsApiBasePayload().items.slice(0, safeLimit);
 }
 
 function getArticleNewsApiBasePayload() {
@@ -7361,6 +7354,29 @@ function buildArticleNewsApiPayload(limit = 1000) {
     returned: visibleItems.length,
     items: visibleItems
   };
+}
+
+function getArticleNewsLookupMap() {
+  const key = getNewsDataCacheKey();
+
+  if (articleNewsLookupCache.key === key) {
+    return articleNewsLookupCache.map;
+  }
+
+  const lookup = new Map();
+  getArticleNewsApiBasePayload().items.forEach((item) => {
+    const slugs = [item.slug].concat(Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []);
+    slugs.forEach((candidate) => {
+      const normalizedSlug = normalizeLookupSlug(candidate);
+      if (normalizedSlug && !lookup.has(normalizedSlug)) {
+        lookup.set(normalizedSlug, item);
+      }
+    });
+  });
+
+  articleNewsLookupCache.key = key;
+  articleNewsLookupCache.map = lookup;
+  return lookup;
 }
 
 function buildLiteArticleNewsApiItem(item = {}) {
@@ -7485,41 +7501,36 @@ function getArticleBySlug(slug) {
     return staticDetailFallbacks[targetSlug];
   }
 
-  return (
-    getArticleNews(1000).find((item) => {
-      if (normalizeLookupSlug(item.slug) === targetSlug) {
-        return true;
-      }
-
-      return (Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []).some(
-        (alternateSlug) => normalizeLookupSlug(alternateSlug) === targetSlug
-      );
-    }) || null
-  );
+  return getArticleNewsLookupMap().get(targetSlug) || null;
 }
 
 function buildNewsArchivePayload(limit = 500) {
-  const safeLimit = Math.max(1, Math.min(1000, limit));
-  const items = getRawNewsItems().map(normalizeArticleRecord);
-  const map = new Map();
+  const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 500));
+  const key = `${getNewsDataCacheKey()}|limit:${safeLimit}`;
+  const cached = newsArchiveResponseCache.get(key);
 
-  items.forEach((item) => {
-    const key = getArticleStorageKey(item);
-    if (key) {
-      upsertCrossedArticleRecord(map, key, item);
-    }
-  });
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.payload;
+  }
 
-  const sorted = Array.from(map.values()).sort(sortArticleItems);
-
-  const archiveItems = repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
-
-  return {
-    total: sorted.length,
-    archiveTotal: sorted.length,
+  const basePayload = getArticleNewsApiBasePayload();
+  const archiveItems = diversifyArchiveStories(basePayload.items, safeLimit).slice(0, safeLimit);
+  const payload = {
+    total: basePayload.total,
+    archiveTotal: basePayload.total,
     returned: archiveItems.length,
     items: archiveItems
   };
+
+  if (newsArchiveResponseCache.size > 20) {
+    newsArchiveResponseCache.clear();
+  }
+  newsArchiveResponseCache.set(key, {
+    expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
+    payload
+  });
+
+  return payload;
 }
 
 function getNewsArchive(limit = 500) {
