@@ -1374,6 +1374,7 @@ const staticNewsItemsCache = { key: "", items: [] };
 const articleNewsBaseCache = { key: "", total: 0, items: [] };
 const articleNewsLookupCache = { key: "", map: new Map() };
 const newsArchiveResponseCache = new Map();
+const staticFileResponseCache = new Map();
 const NINJAS_OPPORTUNITIES_UPDATED_AT = "2026-04-14";
 const NINJAS_OPPORTUNITIES = [
   {
@@ -6638,12 +6639,51 @@ function maybeCompressBuffer(req, mimeType, buffer) {
   return { buffer, encoding: "" };
 }
 
+function getStaticResponseEncodingKey(req) {
+  const acceptEncoding = String(req?.headers?.["accept-encoding"] || "").toLowerCase();
+
+  if (acceptEncoding.includes("br")) return "br";
+  if (acceptEncoding.includes("gzip")) return "gzip";
+  return "identity";
+}
+
+function getStableJsonCacheKey(value) {
+  try {
+    return JSON.stringify(value || {});
+  } catch (_error) {
+    return "";
+  }
+}
+
+function rememberStaticFileResponse(key, value) {
+  if (staticFileResponseCache.size > 80) {
+    staticFileResponseCache.clear();
+  }
+  staticFileResponseCache.set(key, value);
+}
+
 function sendFile(req, res, filePath, options = {}) {
+  const mimeType = mimeFor(filePath);
+  const cacheControl = options.cacheControl || getStaticCacheControl(filePath);
+  const responseCacheKey = [
+    getFileCacheSignature(filePath),
+    mimeType,
+    cacheControl,
+    getStaticResponseEncodingKey(req),
+    getStableJsonCacheKey(options.headers),
+    getStableJsonCacheKey(options.templateVars)
+  ].join("|");
+  const cachedResponse = staticFileResponseCache.get(responseCacheKey);
+
+  if (cachedResponse) {
+    res.writeHead(200, { ...cachedResponse.headers });
+    return res.end(cachedResponse.buffer);
+  }
+
   fs.readFile(filePath, (err, buffer) => {
     if (err) {
       return sendText(res, 404, "Arquivo não encontrado.");
     }
-    const mimeType = mimeFor(filePath);
     let fileBuffer = buffer;
 
     if (mimeType.startsWith("text/html") && options.templateVars) {
@@ -6666,7 +6706,6 @@ function sendFile(req, res, filePath, options = {}) {
     }
 
     const { buffer: finalBuffer, encoding } = maybeCompressBuffer(req, mimeType, fileBuffer);
-    const cacheControl = options.cacheControl || getStaticCacheControl(filePath);
     const headers = {
       "Content-Type": mimeType,
       "Cache-Control": cacheControl,
@@ -6684,6 +6723,11 @@ function sendFile(req, res, filePath, options = {}) {
       headers["Content-Encoding"] = encoding;
       headers.Vary = "Accept-Encoding";
     }
+
+    rememberStaticFileResponse(responseCacheKey, {
+      buffer: finalBuffer,
+      headers
+    });
 
     res.writeHead(200, {
       ...headers
@@ -18946,6 +18990,9 @@ server.listen(PORT, HOST, () => {
   setTimeout(() => {
     try {
       getCachedArticleNewsApiPayload(60, { lite: true });
+      buildNewsArchivePayload(20);
+      buildNewsArchivePayload(100);
+      getArticleNewsLookupMap();
     } catch (_error) {
       // Best-effort warmup only; the request path can rebuild the cache if this fails.
     }
