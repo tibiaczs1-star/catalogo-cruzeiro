@@ -36,6 +36,7 @@
     <script>
       window.__CATALOGO_COMPACT_BOOT__ =
         typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
+      window.__CATALOGO_FORCE_LITE_BOOT__ = true;
       window.__CATALOGO_START_NEWS_PRELOAD__ = function () {
         if (window.location.protocol === "file:") {
           return Promise.resolve(null);
@@ -154,16 +155,20 @@
         }
       </style>
     </noscript>
-  <link rel="stylesheet" href="./styles.css?v=20260522-homegate3" />
+  <link rel="preload" as="style" href="./styles.css?v=20260524-fastboot2" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260522-homegate3" />
+  <link rel="preload" as="style" href="./premium-home-redesign.css?v=20260524-fastboot2" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="./styles.css?v=20260524-fastboot2" />
+    <link rel="stylesheet" href="./premium-home-redesign.css?v=20260524-fastboot2" />
+  </noscript>
 </head>
-  <body class="editorial-home founder-prelude-pending catalogo-site-booting">
+  <body class="editorial-home founder-prelude-pending catalogo-site-booting fx-lite">
     <div
       class="logo-splash is-logo-primer catalogo-cinematic-live"
       role="status"
@@ -2016,6 +2021,8 @@
     <script>
       (function () {
         window.__CATALOGO_SPLASH_FORCE_RELEASE__ = function (reason) {
+          window.__CATALOGO_FAST_BOOT_RELEASED__ = true;
+          window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
           document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
           document.body.classList.add("site-loaded", "mobile-intro-ready");
 
@@ -2044,16 +2051,81 @@
           if (bar) {
             bar.style.width = "100%";
           }
+
+          window.dispatchEvent(new CustomEvent("catalogo:logo-splash-finished", {
+            detail: { reason: reason || "fast-boot" }
+          }));
         };
 
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, window.__CATALOGO_COMPACT_BOOT__ ? 45000 : 60000);
+        }, window.__CATALOGO_COMPACT_BOOT__ ? 900 : 1200);
       })();
     </script>
-    <script defer src="./catalogo-app-core.js?v=20260522-homegate3"></script>
-    <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
-    <script defer src="./script.js?v=20260522-homegate3"></script>
+    <script>
+      (function () {
+        const bootScripts = [
+          "./catalogo-app-core.js?v=20260524-fastboot2",
+          "./early-home-surfaces.js?v=20260513-tv-communityfix1"
+        ];
+        const mainScriptSrc = "./script.js?v=20260524-fastboot2";
+        const loadScriptOnce = (src, flag) =>
+          new Promise((resolve) => {
+            if (window[flag]) {
+              resolve();
+              return;
+            }
+            window[flag] = true;
+            const script = document.createElement("script");
+            script.src = src;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = resolve;
+            document.body.appendChild(script);
+          });
+        const loadBootScripts = async () => {
+          if (window.__CATALOGO_BOOT_SCRIPTS_STARTED__) {
+            return;
+          }
+
+          window.__CATALOGO_BOOT_SCRIPTS_STARTED__ = true;
+          for (const src of bootScripts) {
+            await loadScriptOnce(src, `__CATALOGO_SCRIPT_${src.replace(/[^a-z0-9]/gi, "_")}`);
+          }
+          window.setTimeout(loadMainScript, 180);
+        };
+        const loadMainScript = () => {
+          if (window.__CATALOGO_MAIN_SCRIPT_STARTED__) {
+            return;
+          }
+
+          window.__CATALOGO_MAIN_SCRIPT_STARTED__ = true;
+          const script = document.createElement("script");
+          script.src = mainScriptSrc;
+          script.async = true;
+          document.body.appendChild(script);
+        };
+        const revealShell = () => {
+          if (typeof window.__CATALOGO_SPLASH_FORCE_RELEASE__ === "function") {
+            window.__CATALOGO_SPLASH_FORCE_RELEASE__("fast-boot-shell");
+          }
+        };
+        const start = () => {
+          window.setTimeout(revealShell, window.__CATALOGO_COMPACT_BOOT__ ? 420 : 560);
+          const scheduleScript = () => window.setTimeout(loadBootScripts, window.__CATALOGO_COMPACT_BOOT__ ? 980 : 820);
+          if (typeof window.requestIdleCallback === "function") {
+            window.requestIdleCallback(scheduleScript, { timeout: 1100 });
+            return;
+          }
+          scheduleScript();
+        };
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", start, { once: true });
+        } else {
+          start();
+        }
+      })();
+    </script>
     <script>
       (function () {
         const styles = [
@@ -2089,8 +2161,7 @@
           "./site-google-auth.js?v=20260510-file-authfix1",
           "deferred-home-boot.js?v=20260511-no-ninjas1"
         ];
-        const deferredBootDelayMs = isCompactBoot ? 900 : 650;
-        const deferredBootIdleTimeoutMs = isCompactBoot ? 1800 : 1400;
+        const deferredBootDelayMs = isCompactBoot ? 6200 : 5200;
         const totalSteps = styles.length + queue.length + 2;
         const bootState = (window.__CATALOGO_DEFERRED_BOOT_STATE__ = {
           completed: 0,
@@ -2228,12 +2299,25 @@
           resolveDeferredBoot(bootState);
         };
         const start = () => {
+          let launchQueued = false;
           const launch = () => window.setTimeout(run, deferredBootDelayMs);
-          if ("requestIdleCallback" in window) {
-            window.requestIdleCallback(launch, { timeout: deferredBootIdleTimeoutMs });
+          const queueLaunch = () => {
+            if (launchQueued) {
+              return;
+            }
+
+            launchQueued = true;
+            launch();
+          };
+          if (
+            window.__CATALOGO_LOGO_SPLASH_DONE__ ||
+            document.body.classList.contains("site-loaded")
+          ) {
+            queueLaunch();
             return;
           }
-          launch();
+          window.addEventListener("catalogo:logo-splash-finished", queueLaunch, { once: true });
+          window.setTimeout(queueLaunch, isCompactBoot ? 9000 : 10000);
         };
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", start, { once: true });

@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-  const VERSION = "20260513-intro-hotfix1";
+  const VERSION = "20260524-fastboot1";
   const ROOT = window.__CATALOGO_APP__ || {};
   const supportsIdle = typeof window.requestIdleCallback === "function";
   const scheduleIdle = (task, timeout = 1400) => {
@@ -34,7 +34,8 @@
     detect() {
       const slowConnection = /(^slow-2g$|^2g$|^3g$)/i.test(this.state.connection);
       const weakHardware = this.state.memoryGb <= 2 || this.state.cores <= 4;
-      const lite = this.state.reducedMotion || this.state.lowData || slowConnection || (compact && weakHardware);
+      const forcedLiteBoot = Boolean(window.__CATALOGO_FORCE_LITE_BOOT__ || document.body?.classList.contains("fx-lite"));
+      const lite = forcedLiteBoot || this.state.reducedMotion || this.state.lowData || slowConnection || (compact && weakHardware);
       this.state.tier = lite ? "lite" : "balanced";
       document.documentElement.dataset.qualityTier = this.state.tier;
       document.body?.classList.toggle("fx-lite", lite);

@@ -137,10 +137,10 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 850 : 1100;
-const splashCinematicDurationMs = splashCompactViewportQuery.matches ? 1800 : 4600;
-const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 1300 : 1700;
-const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 1000 : 2100;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 360 : 520;
+const splashCinematicDurationMs = splashCompactViewportQuery.matches ? 760 : 1250;
+const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 700 : 900;
+const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 520 : 780;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 320 : 460;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 520 : 760;
 const tickerDesktopStaticMedia =
@@ -483,7 +483,7 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260522-homegate3";
+const portalWarmCacheName = "catalogo-portal-shell-v20260524-fastboot2";
 const homeActivationPopupKey = "catalogo_czs_home_activation_popup_20260522_homegate3";
 const homeFirstFoldReadyState = {
   resolved: false,
@@ -500,7 +500,7 @@ const portalWarmStaticUrls = [
   "./premium-home-redesign.css?v=20260522-homegate3",
   "./startup-experience.css?v=20260513-tv-communityfix1",
   "./early-home-surfaces.js?v=20260513-tv-communityfix1",
-  "./script.js?v=20260522-homegate3",
+  "./script.js?v=20260524-fastboot2",
   "./startup-experience.js?v=20260513-tv-communityfix1",
   "./noticia.html",
   "./arquivo.html",
@@ -2129,7 +2129,7 @@ const isHomeFirstFoldVisiblyReady = () => {
   return hasHeroStory && hasHeroImage && readyCards >= 3;
 };
 
-const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 45000 : 60000) => {
+const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.matches ? 2600 : 3400) => {
   if (window.__CATALOGO_HOME_FIRST_FOLD_READY__) {
     if (isHomeFirstFoldVisiblyReady()) {
       return Promise.resolve();
@@ -2152,7 +2152,7 @@ const waitForHomeFirstFoldReadiness = (timeoutMs = splashCompactViewportQuery.ma
   );
 };
 
-const waitForHomeVisibleSurface = (timeoutMs = splashCompactViewportQuery.matches ? 45000 : 60000) =>
+const waitForHomeVisibleSurface = (timeoutMs = splashCompactViewportQuery.matches ? 2600 : 3400) =>
   new Promise((resolve) => {
     if (isHomeFirstFoldVisiblyReady()) {
       resolve();
@@ -2386,16 +2386,13 @@ const waitForSplashReadiness = async () => {
       label: "Resumindo matérias e cards",
       progress: 72,
       timeout: splashCompactViewportQuery.matches ? 8500 : 10000,
-      wait: () =>
-        splashCompactViewportQuery.matches
-          ? Promise.resolve()
-          : waitForSplashDeferredBoot(10000)
+      wait: () => Promise.resolve()
     },
     {
       label: "Montando hero e primeiras seções",
       progress: 84,
-      timeout: splashCompactViewportQuery.matches ? 45000 : 60000,
-      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 45000 : 60000)
+      timeout: splashCompactViewportQuery.matches ? 2600 : 3400,
+      wait: () => waitForHomeFirstFoldReadiness(splashCompactViewportQuery.matches ? 2600 : 3400)
     },
     {
       label: "Conferindo imagens da primeira dobra",
@@ -2423,6 +2420,19 @@ const waitForSplashReadiness = async () => {
 const setupSplashExperience = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
   const liveSplashMode = splashRoot?.classList.contains("catalogo-cinematic-live");
+
+  if (window.__CATALOGO_FAST_BOOT_RELEASED__) {
+    clearSplashFailsafe();
+    document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
+    document.body.classList.add("site-loaded", "mobile-intro-ready");
+    if (splashRoot) {
+      splashRoot.hidden = true;
+      splashRoot.setAttribute("aria-hidden", "true");
+      splashRoot.classList.add("is-released");
+    }
+    window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
+    return;
+  }
 
   if (!liveSplashMode && splashRoot?.classList.contains("catalogo-cinematic-safe")) {
     clearSplashFailsafe();
@@ -2589,7 +2599,7 @@ const setupSplashExperience = () => {
     if (!splashReleased) {
       releaseSplash();
     }
-  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 45000 : 60000));
+  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 2600 : 3400));
 
   const currentTime =
     typeof performance !== "undefined" && typeof performance.now === "function"
