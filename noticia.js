@@ -5,13 +5,15 @@ const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
 const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
 const PUBLIC_CORRECTION_FOCUS_KEY = "catalogo_public_correction_focus_v1";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
-const ARTICLE_NAVIGATION_LOADER_MS = 920;
+const ARTICLE_NAVIGATION_LOADER_MS = 1360;
 const ARTICLE_PAGE_TURN_MS = 680;
 const DETAIL_FALLBACK_IMAGES = [];
 
 const articleNavigationLoaderState = {
   loader: null,
-  startedAt: 0
+  startedAt: 0,
+  progress: 0,
+  progressTimer: 0
 };
 
 const consumePageActionLoaderFlag = () => {
@@ -34,7 +36,7 @@ const rememberPageActionLoaderFlag = () => {
 
 const setArticleLoaderContent = (loader, label, options = {}) => {
   const direction = options.direction === "back" ? "back" : "in";
-  const percent = options.percent || (direction === "back" ? "76%" : "42%");
+  const percent = options.percent || (direction === "back" ? "76%" : "8%");
   const note =
     options.note ||
     (direction === "back"
@@ -50,6 +52,59 @@ const setArticleLoaderContent = (loader, label, options = {}) => {
   if (percentNode) percentNode.textContent = percent;
   const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
   if (barNode) barNode.style.width = percent;
+  const parsedProgress = Number.parseInt(String(percent), 10);
+  if (Number.isFinite(parsedProgress)) {
+    const clampedProgress = Math.max(0, Math.min(100, parsedProgress));
+    articleNavigationLoaderState.progress = clampedProgress;
+    loader.dataset.progress = String(clampedProgress);
+    loader.style.setProperty("--article-loader-progress", String(clampedProgress / 100));
+    const turnSign = direction === "back" ? 1 : -1;
+    const turnAngle = Math.round(turnSign * Math.min(178, 10 + clampedProgress * 1.68));
+    loader.style.setProperty("--article-loader-turn-angle", `${turnAngle}deg`);
+    loader.style.setProperty("--article-loader-stack-shift", `${Math.round(clampedProgress * 0.09)}px`);
+    loader.style.setProperty("--article-loader-stack-opacity", String(Math.max(0.62, 0.88 - clampedProgress * 0.0022).toFixed(3)));
+    loader.style.setProperty("--article-loader-shadow-alpha", String(Math.min(0.32, 0.08 + clampedProgress * 0.0022).toFixed(3)));
+  }
+};
+
+const stopArticleLoaderProgress = () => {
+  if (articleNavigationLoaderState.progressTimer) {
+    window.clearInterval(articleNavigationLoaderState.progressTimer);
+    articleNavigationLoaderState.progressTimer = 0;
+  }
+};
+
+const startArticleLoaderProgress = (loader) => {
+  stopArticleLoaderProgress();
+  articleNavigationLoaderState.progress = Math.max(6, articleNavigationLoaderState.progress || 0);
+  articleNavigationLoaderState.progressTimer = window.setInterval(() => {
+    if (!loader || !document.body.contains(loader)) {
+      stopArticleLoaderProgress();
+      return;
+    }
+    const next = Math.min(96, articleNavigationLoaderState.progress + (articleNavigationLoaderState.progress < 78 ? 8 : 4));
+    setArticleLoaderContent(loader, "Virando páginas da matéria", {
+      direction: loader.dataset.direction === "back" ? "back" : "in",
+      note: loader.dataset.direction === "back"
+        ? "Fechando a matéria e voltando para a capa."
+        : "Abrindo o livro da notícia enquanto a leitura chega a 100%.",
+      percent: `${next}%`
+    });
+  }, 120);
+};
+
+const adoptEarlyArticleLoader = () => {
+  const loader = document.querySelector("[data-article-boot-loader]");
+  if (!loader) {
+    return null;
+  }
+  const earlyLoader = window.__CATALOGO_ARTICLE_BOOT_LOADER__;
+  if (earlyLoader?.timer) {
+    window.clearInterval(earlyLoader.timer);
+    earlyLoader.timer = 0;
+  }
+  loader.removeAttribute("data-article-boot-loader");
+  return loader;
 };
 
 const createArticleNavigationLoader = (label = "Carregando matéria", options = {}) => {
@@ -62,9 +117,9 @@ const createArticleNavigationLoader = (label = "Carregando matéria", options = 
     <span class="catalogo-page-loader-book" aria-hidden="true"><i></i><b></b></span>
     <span class="catalogo-top-return-loader-row">
       <span class="catalogo-top-return-loader-text" data-navigation-loader-status>${label}</span>
-      <strong data-navigation-loader-percent>42%</strong>
+      <strong data-navigation-loader-percent>8%</strong>
     </span>
-    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width: 42%"></i></span>
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width: 8%"></i></span>
     <span class="catalogo-page-loader-note" data-navigation-loader-note>Organizando foto, título e fonte antes de abrir a leitura.</span>
   `;
   setArticleLoaderContent(loader, label, options);
@@ -91,11 +146,23 @@ const showArticleNavigationLoader = (label = "Carregando matéria", options = {}
     });
     return articleNavigationLoaderState.loader;
   }
-  const loader = createArticleNavigationLoader(label, options);
+  const loader = adoptEarlyArticleLoader() || createArticleNavigationLoader(label, options);
   articleNavigationLoaderState.loader = loader;
-  articleNavigationLoaderState.startedAt = Date.now();
+  articleNavigationLoaderState.startedAt = Number(loader.dataset.startedAt || 0) || Date.now();
   document.body.classList.add("article-loading-active");
-  document.body.appendChild(loader);
+  if (!loader.parentElement) {
+    document.body.appendChild(loader);
+  }
+  const currentProgress = Number.parseInt(String(loader.dataset.progress || ""), 10);
+  const requestedProgress = Number.parseInt(String(options.percent || ""), 10);
+  const stablePercent = Number.isFinite(currentProgress)
+    ? Math.max(currentProgress, Number.isFinite(requestedProgress) ? requestedProgress : currentProgress)
+    : requestedProgress;
+  setArticleLoaderContent(loader, label, {
+    ...options,
+    percent: Number.isFinite(stablePercent) ? `${Math.min(96, stablePercent)}%` : options.percent
+  });
+  startArticleLoaderProgress(loader);
   return loader;
 };
 
@@ -107,6 +174,16 @@ const hideArticleNavigationLoader = () => {
   const elapsed = Date.now() - articleNavigationLoaderState.startedAt;
   const remaining = Math.max(0, ARTICLE_NAVIGATION_LOADER_MS - elapsed);
   return new Promise((resolve) => {
+    window.setTimeout(() => {
+      stopArticleLoaderProgress();
+      setArticleLoaderContent(loader, "Matéria pronta", {
+        direction: loader.dataset.direction === "back" ? "back" : "in",
+        note: loader.dataset.direction === "back"
+          ? "Capa pronta para reabrir."
+          : "Livro aberto: a notícia está pronta.",
+        percent: "100%"
+      });
+    }, Math.max(0, remaining - 260));
     window.setTimeout(() => {
       loader.classList.add("is-leaving");
       window.setTimeout(() => {
@@ -132,7 +209,7 @@ showArticleNavigationLoader(cameFromPageAction ? "Abrindo matéria" : "Carregand
   note: cameFromPageAction
     ? "Virando a folha para mostrar a matéria escolhida."
     : "Preparando título, foto e fonte da notícia.",
-  percent: cameFromPageAction ? "48%" : "38%"
+  percent: cameFromPageAction ? "10%" : "6%"
 });
 
 document.addEventListener("click", (event) => {

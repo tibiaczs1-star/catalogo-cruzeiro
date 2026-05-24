@@ -526,6 +526,94 @@ body.detail-body .detail-fact-panel {
   }
 }
 
+@media (max-width: 640px) {
+  body.detail-body .page-shell {
+    width: 100% !important;
+    padding: 0.5rem 0.5rem 5.4rem !important;
+  }
+
+  body.detail-body .top-strip,
+  body.detail-body .masthead {
+    border-radius: 16px !important;
+  }
+
+  body.detail-body .top-strip {
+    display: grid !important;
+    gap: 0.48rem !important;
+    padding: 0.78rem !important;
+  }
+
+  body.detail-body .masthead {
+    padding: 0.86rem 0.74rem !important;
+  }
+
+  body.detail-body .brand {
+    gap: 0.56rem !important;
+    min-width: 0 !important;
+  }
+
+  body.detail-body .brand img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  body.detail-body .brand strong {
+    font-size: clamp(1.35rem, 8vw, 1.82rem) !important;
+    line-height: 0.96 !important;
+  }
+
+  body.detail-body .brand-kicker {
+    font-size: 0.7rem !important;
+  }
+
+  body.detail-body .detail-main {
+    padding: 0.86rem 0 1.4rem !important;
+  }
+
+  body.detail-body .detail-shell {
+    gap: 0.82rem !important;
+    padding: 1rem 0.9rem !important;
+    border-radius: 16px !important;
+  }
+
+  body.detail-body #detail-title {
+    font-size: clamp(1.5rem, 6.8vw, 2rem) !important;
+    line-height: 1.04 !important;
+    text-wrap: balance !important;
+  }
+
+  body.detail-body .detail-meta,
+  body.detail-body .detail-lede {
+    font-size: 0.96rem !important;
+    line-height: 1.45 !important;
+  }
+
+  body.detail-body .detail-toolbar,
+  body.detail-body .detail-article-toolbar {
+    display: grid !important;
+    gap: 0.54rem !important;
+  }
+
+  body.detail-body .detail-back-button {
+    width: fit-content !important;
+    max-width: 100% !important;
+  }
+
+  body.detail-body .detail-hero-thumb {
+    min-height: clamp(220px, 72vw, 340px) !important;
+    border-radius: 16px !important;
+  }
+
+  body.detail-body .detail-home-return-fab {
+    left: 0.72rem !important;
+    right: auto !important;
+    bottom: calc(0.8rem + env(safe-area-inset-bottom)) !important;
+    max-width: calc(100vw - 1.44rem) !important;
+    min-height: 42px !important;
+    border-radius: 999px !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body.detail-body.article-page-turning-in .detail-shell,
   body.detail-body.article-page-turning-out .detail-shell {

@@ -124,6 +124,55 @@
       body.catalogo-site-booting .logo-splash.is-broadcast-started { background: transparent; }
       body.catalogo-site-booting .logo-splash.is-broadcast-started > * { opacity: revert; visibility: revert; }
       body.catalogo-site-booting .logo-splash.is-broadcast-started::before { display: none; }
+      body.catalogo-site-booting .logo-splash.is-fast-intro {
+        background:
+          radial-gradient(circle at 50% 22%, rgba(240, 180, 41, 0.22), transparent 28%),
+          linear-gradient(145deg, #020d18, #061b2d 62%, #020d18);
+      }
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-card {
+        width: min(460px, calc(100vw - 36px));
+        padding: clamp(1.1rem, 4vw, 2rem);
+        border: 1px solid rgba(240, 180, 41, 0.34);
+        border-radius: 24px;
+        background: rgba(2, 13, 24, 0.78);
+        color: #fff;
+        text-align: center;
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+      }
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-compass img {
+        width: clamp(64px, 14vw, 96px);
+        height: auto;
+        filter: drop-shadow(0 0 18px rgba(240, 180, 41, 0.58));
+      }
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-brand-copy strong {
+        display: block;
+        font-family: Georgia, serif;
+        font-size: clamp(1.8rem, 5vw, 3.2rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-kicker,
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-label,
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-brand-copy small,
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-copy,
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-meta {
+        color: rgba(248, 251, 255, 0.78);
+      }
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-progress {
+        height: 8px;
+        margin-top: 1rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+      }
+      body.catalogo-site-booting .logo-splash.is-fast-intro .logo-splash-progress span {
+        display: block;
+        width: var(--splash-progress, 0%);
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #f0b429, #ffd66a);
+        transition: width 220ms ease;
+      }
       @keyframes initialLogoBreath {
         0%, 100% { transform: scale(1); opacity: 0.82; }
         50% { transform: scale(1.04); opacity: 1; }
@@ -155,17 +204,17 @@
         }
       </style>
     </noscript>
-  <link rel="preload" as="style" href="./styles.css?v=20260524-fastboot2" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" as="style" href="./styles.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="preload" as="style" href="./premium-home-redesign.css?v=20260524-fastboot2" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" as="style" href="./premium-home-redesign.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260524-fastboot2" />
-    <link rel="stylesheet" href="./premium-home-redesign.css?v=20260524-fastboot2" />
+    <link rel="stylesheet" href="./styles.css?v=20260524-mobilebook1" />
+    <link rel="stylesheet" href="./premium-home-redesign.css?v=20260524-mobilebook1" />
   </noscript>
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting fx-lite">
@@ -2020,6 +2069,22 @@
     </script>
     <script>
       (function () {
+        const articleLoaderFlag = "catalogo_page_action_loader_pending_v1";
+        document.addEventListener("click", function (event) {
+          const link = event.target instanceof Element
+            ? event.target.closest('a[href*="noticia.html?slug="]')
+            : null;
+          if (!link || event.defaultPrevented) return;
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          const target = String(link.getAttribute("target") || "").trim();
+          if (target && target !== "_self") return;
+          try {
+            sessionStorage.setItem(articleLoaderFlag, "1");
+          } catch (_error) {
+            // optional navigation hint only
+          }
+        }, true);
+
         window.__CATALOGO_SPLASH_FORCE_RELEASE__ = function (reason) {
           window.__CATALOGO_FAST_BOOT_RELEASED__ = true;
           window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
@@ -2057,9 +2122,46 @@
           }));
         };
 
+        window.__CATALOGO_START_FAST_INTRO__ = function () {
+          if (window.__CATALOGO_FAST_INTRO_STARTED__) {
+            return;
+          }
+          window.__CATALOGO_FAST_INTRO_STARTED__ = true;
+          const splash = document.querySelector(".logo-splash");
+          const status = document.querySelector("#logo-splash-status");
+          const percent = document.querySelector("#logo-splash-percent");
+          const bar = document.querySelector(".logo-splash-progress span");
+          if (!splash) {
+            window.__CATALOGO_SPLASH_FORCE_RELEASE__("fast-intro-missing");
+            return;
+          }
+          splash.hidden = false;
+          splash.setAttribute("aria-hidden", "false");
+          splash.classList.remove("is-logo-primer", "is-released");
+          splash.classList.add("is-broadcast-started", "is-fast-intro");
+          const steps = [
+            [22, "Abrindo o Catálogo"],
+            [58, "Trazendo notícias para a capa"],
+            [86, "Preparando a leitura"],
+            [100, "Portal pronto para abrir"]
+          ];
+          steps.forEach(([value, label], index) => {
+            window.setTimeout(function () {
+              splash.dataset.progress = String(value);
+              splash.style.setProperty("--splash-progress", value + "%");
+              if (bar) bar.style.width = value + "%";
+              if (percent) percent.textContent = value + "%";
+              if (status) status.textContent = label;
+            }, index * (window.__CATALOGO_COMPACT_BOOT__ ? 260 : 340));
+          });
+          window.setTimeout(function () {
+            window.__CATALOGO_SPLASH_FORCE_RELEASE__("fast-intro-complete");
+          }, window.__CATALOGO_COMPACT_BOOT__ ? 1350 : 1850);
+        };
+
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, window.__CATALOGO_COMPACT_BOOT__ ? 900 : 1200);
+        }, window.__CATALOGO_COMPACT_BOOT__ ? 3200 : 3800);
       })();
     </script>
     <script>
@@ -2111,7 +2213,13 @@
           }
         };
         const start = () => {
-          window.setTimeout(revealShell, window.__CATALOGO_COMPACT_BOOT__ ? 420 : 560);
+          window.setTimeout(function () {
+            if (typeof window.__CATALOGO_START_FAST_INTRO__ === "function") {
+              window.__CATALOGO_START_FAST_INTRO__();
+              return;
+            }
+            revealShell();
+          }, window.__CATALOGO_COMPACT_BOOT__ ? 180 : 240);
           const scheduleScript = () => window.setTimeout(loadBootScripts, window.__CATALOGO_COMPACT_BOOT__ ? 980 : 820);
           if (typeof window.requestIdleCallback === "function") {
             window.requestIdleCallback(scheduleScript, { timeout: 1100 });
@@ -2146,7 +2254,7 @@
           "./modern-launch.css?v=20260415d",
           "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260522-homegate3";
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260524-mobilebook1";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =

@@ -15567,3 +15567,62 @@ html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs[data-hero-ca
 html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs[data-hero-carousel-track].is-dragging .hero-panel-photo {
   pointer-events: none !important;
 }
+
+/* Mobile app pass: avoid the desktop hero being squeezed into a phone viewport. */
+@media (max-width: 640px) {
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell {
+    grid-template-rows: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 18px !important;
+  }
+
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-copy.hero-restored-copy {
+    min-height: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0.95rem 0.94rem 1rem !important;
+    gap: 0.54rem !important;
+    border-radius: 0 !important;
+    background: linear-gradient(180deg, rgba(3, 18, 31, 0.04), rgba(3, 18, 31, 0.88) 28%, rgba(3, 18, 31, 0.96)) !important;
+    box-shadow: none !important;
+  }
+
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-copy.hero-restored-copy h1,
+  html body.editorial-home .hero-newsroom-copy.hero-restored-copy h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.18rem !important;
+    font-size: clamp(1.46rem, 6.8vw, 1.88rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: 0 !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-copy.hero-restored-copy .hero-tourism-summary-copy {
+    max-width: 100% !important;
+    font-size: 0.92rem !important;
+    line-height: 1.34 !important;
+  }
+
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-current-story-button {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    justify-self: start !important;
+    align-self: start !important;
+    min-height: 44px !important;
+    margin: 0 0 0.94rem 0.94rem !important;
+    padding: 0 0.92rem !important;
+    border-radius: 999px !important;
+    font-size: 0.84rem !important;
+  }
+
+  html body.editorial-home .hero-tourism-dots,
+  html body.editorial-home .hero-newsroom-notes {
+    display: none !important;
+  }
+}

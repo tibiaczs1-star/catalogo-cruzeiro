@@ -12594,6 +12594,14 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
 }
 
 .catalogo-top-return-loader.is-article-page-loader {
+  --article-loader-progress: 0.08;
+  --article-loader-turn-angle: -24deg;
+  left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100vw !important;
+  max-width: none !important;
+  transform: none !important;
   align-content: center !important;
   justify-items: center !important;
   gap: 0.8rem !important;
@@ -12603,6 +12611,14 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
     linear-gradient(135deg, rgba(2, 13, 24, 0.96), rgba(6, 22, 38, 0.92)) !important;
 }
 
+.catalogo-top-return-loader.is-article-page-loader.is-visible {
+  transform: none !important;
+}
+
+.catalogo-top-return-loader.is-article-page-loader.is-leaving {
+  transform: none !important;
+}
+
 .catalogo-top-return-loader.is-article-page-loader::before {
   display: none !important;
 }
@@ -12610,11 +12626,13 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
 .catalogo-page-loader-book {
   position: relative;
   z-index: 1;
-  width: min(180px, 48vw);
-  aspect-ratio: 1.42;
-  margin-bottom: 0.3rem;
-  perspective: 860px;
-  filter: drop-shadow(0 26px 42px rgba(0, 0, 0, 0.34));
+  width: min(270px, 76vw);
+  aspect-ratio: 1.58;
+  margin-bottom: 0.45rem;
+  perspective: 1100px;
+  transform: rotateX(3deg);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 30px 48px rgba(0, 0, 0, 0.38));
 }
 
 .catalogo-page-loader-book::before,
@@ -12627,37 +12645,59 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   border: 1px solid rgba(240, 180, 41, 0.34);
   border-radius: 14px;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.86), rgba(255, 245, 215, 0.96) 48%, rgba(234, 221, 191, 0.82) 50%, rgba(255, 248, 226, 0.92));
+    repeating-linear-gradient(180deg, transparent 0 10px, rgba(74, 52, 26, 0.08) 11px 12px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.88), rgba(255, 245, 215, 0.98) 48%, rgba(221, 198, 154, 0.82) 50%, rgba(255, 248, 226, 0.94));
   transform-origin: left center;
   backface-visibility: hidden;
+}
+
+.catalogo-page-loader-book::before {
+  right: 50%;
+  border-radius: 16px 0 0 16px;
+  box-shadow:
+    inset -8px 0 16px rgba(91, 67, 34, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 
 .catalogo-page-loader-book::after {
   left: 50%;
   border-left: 0;
-  border-radius: 0 14px 14px 0;
-  background: linear-gradient(90deg, rgba(217, 202, 168, 0.72), rgba(255, 248, 226, 0.94));
+  border-radius: 0 16px 16px 0;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 10px, rgba(74, 52, 26, 0.08) 11px 12px),
+    linear-gradient(90deg, rgba(217, 202, 168, 0.74), rgba(255, 248, 226, 0.96));
+  box-shadow:
+    inset 10px 0 18px rgba(91, 67, 34, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
 .catalogo-page-loader-book i {
   width: 50%;
+  left: 50%;
   right: auto;
-  border-radius: 14px 0 0 14px;
-  transform-origin: right center;
-  animation: catalogoArticlePageFlip 1.24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  border-left: 0;
+  border-radius: 0 16px 16px 0;
+  transform-origin: left center;
+  transform: rotateY(var(--article-loader-turn-angle)) translateZ(5px);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms ease;
+  animation: none !important;
+  box-shadow:
+    -18px 0 28px rgba(45, 29, 12, var(--article-loader-shadow-alpha, 0.16)),
+    inset 10px 0 18px rgba(91, 67, 34, 0.18);
 }
 
 .catalogo-page-loader-book b {
   width: 50%;
   left: 50%;
   border-left: 0;
-  border-radius: 0 14px 14px 0;
-  opacity: 0.82;
+  border-radius: 0 16px 16px 0;
+  opacity: var(--article-loader-stack-opacity, 0.84);
+  transform: translateX(var(--article-loader-stack-shift, 0px)) translateZ(1px);
+  transition: transform 150ms ease, opacity 150ms ease;
 }
 
 .catalogo-top-return-loader[data-direction="back"] .catalogo-page-loader-book i {
   transform-origin: left center;
-  animation-name: catalogoArticlePageFlipBack;
 }
 
 .catalogo-page-loader-note {

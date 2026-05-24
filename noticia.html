@@ -54,10 +54,73 @@
   <link rel="stylesheet" href="newspaper-gradient-balance.css?v=20260411r" />
   <link rel="stylesheet" href="agentes-newsroom-hero.css?v=20260414c" />
   <link rel="stylesheet" href="./modern-launch.css?v=20260428footerflow" />
-  <link rel="stylesheet" href="./startup-experience.css?v=20260522-articleturn1" />
-  <link rel="stylesheet" href="./noticia-premium.css?v=20260522-articleturn1" />
+  <link rel="stylesheet" href="./startup-experience.css?v=20260524-bookloader4" />
+  <link rel="stylesheet" href="./noticia-premium.css?v=20260524-mobilebook2" />
 </head>
   <body class="detail-body">
+    <script>
+      (function () {
+        const flagKey = "catalogo_page_action_loader_pending_v1";
+        let cameFromPageAction = false;
+        try {
+          cameFromPageAction = sessionStorage.getItem(flagKey) === "1";
+        } catch (_error) {
+          cameFromPageAction = false;
+        }
+        const loader = document.createElement("div");
+        const startedAt = Date.now();
+        loader.className = "catalogo-top-return-loader is-article-page-loader is-visible";
+        loader.dataset.articleBootLoader = "1";
+        loader.dataset.startedAt = String(startedAt);
+        loader.setAttribute("role", "status");
+        loader.setAttribute("aria-live", "polite");
+        loader.setAttribute("aria-label", cameFromPageAction ? "Abrindo matéria" : "Carregando matéria");
+        loader.innerHTML = `
+          <span class="catalogo-page-loader-book" aria-hidden="true"><i></i><b></b></span>
+          <span class="catalogo-top-return-loader-row">
+            <span class="catalogo-top-return-loader-text" data-navigation-loader-status>${cameFromPageAction ? "Abrindo matéria" : "Carregando matéria"}</span>
+            <strong data-navigation-loader-percent>${cameFromPageAction ? "10%" : "6%"}</strong>
+          </span>
+          <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width: ${cameFromPageAction ? "10%" : "6%"}"></i></span>
+          <span class="catalogo-page-loader-note" data-navigation-loader-note>${cameFromPageAction ? "Virando a folha para mostrar a matéria escolhida." : "Preparando título, foto e fonte da notícia."}</span>
+        `;
+        const setProgress = (nextProgress, label, note) => {
+          const progress = Math.max(0, Math.min(100, Math.round(nextProgress)));
+          loader.dataset.progress = String(progress);
+          loader.style.setProperty("--article-loader-progress", String(progress / 100));
+          loader.style.setProperty("--article-loader-turn-angle", `${-Math.round(Math.min(178, 10 + progress * 1.68))}deg`);
+          loader.style.setProperty("--article-loader-stack-shift", `${Math.round(progress * 0.09)}px`);
+          loader.style.setProperty("--article-loader-stack-opacity", String(Math.max(0.62, 0.88 - progress * 0.0022).toFixed(3)));
+          loader.style.setProperty("--article-loader-shadow-alpha", String(Math.min(0.32, 0.08 + progress * 0.0022).toFixed(3)));
+          const textNode = loader.querySelector("[data-navigation-loader-status]");
+          const noteNode = loader.querySelector("[data-navigation-loader-note]");
+          const percentNode = loader.querySelector("[data-navigation-loader-percent]");
+          const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
+          if (textNode) textNode.textContent = label;
+          if (noteNode) noteNode.textContent = note;
+          if (percentNode) percentNode.textContent = `${progress}%`;
+          if (barNode) barNode.style.width = `${progress}%`;
+        };
+        let progress = cameFromPageAction ? 10 : 6;
+        setProgress(
+          progress,
+          cameFromPageAction ? "Abrindo matéria" : "Carregando matéria",
+          cameFromPageAction ? "Virando a folha para mostrar a matéria escolhida." : "Preparando título, foto e fonte da notícia."
+        );
+        document.body.classList.add("article-loading-active");
+        document.body.appendChild(loader);
+        const timer = window.setInterval(function () {
+          progress = Math.min(82, progress + (progress < 54 ? 7 : 4));
+          setProgress(progress, "Virando páginas da matéria", "Abrindo o livro da notícia enquanto a leitura chega a 100%.");
+        }, 120);
+        window.__CATALOGO_ARTICLE_BOOT_LOADER__ = {
+          loader,
+          startedAt,
+          timer,
+          setProgress
+        };
+      })();
+    </script>
     <a class="detail-home-return-fab" href="./index.html?skipIntro=1" data-home-return aria-label="Voltar para a home sem repetir a intro">
       <span aria-hidden="true">←</span>
       Voltar para a home
@@ -263,7 +326,7 @@
     <script defer src="./news-data.js?v=20260424pixelart1"></script>
     <script defer src="runtime-config.js?v=20260413d"></script>
     <script defer src="./navigation-loader.js?v=20260513-review-photo-cta1"></script>
-    <script defer src="./noticia.js?v=20260522-articleturn1"></script>
+    <script defer src="./noticia.js?v=20260524-bookloader3"></script>
   <script defer src="analytics-client.js?v=20260428consent1"></script>
   <script defer src="engagement-api.js?v=20260411j"></script>
   <script defer src="servicos-menu.js?v=20260511-no-ninjas1"></script>
