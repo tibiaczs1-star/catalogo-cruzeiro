@@ -1261,6 +1261,19 @@
       && !state.externalControlled;
   }
 
+  function getCanvasPoint(event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (event.clientX - rect.left) * canvas.width / rect.width,
+      y: (event.clientY - rect.top) * canvas.height / rect.height,
+    };
+  }
+
+  function hitsMobileShotButton(x, y) {
+    return mobileShotButtonVisible()
+      && Math.hypot(x - mobileShotButton.x, y - mobileShotButton.y) <= mobileShotButton.r + 10;
+  }
+
   function drawMobileShotButton() {
     if (!mobileShotButtonVisible()) return;
     const label = state.shotStage === "power" ? "TACAR" : "FORCA";
@@ -1954,9 +1967,10 @@
   canvas.setAttribute("tabindex", "0");
 
   function updatePointer(event) {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = (event.clientX - rect.left) * canvas.width / rect.width;
-    mouse.y = (event.clientY - rect.top) * canvas.height / rect.height;
+    if (touchAim.active && touchAim.startedOnShotButton && event.pointerId === touchAim.id) return;
+    const point = getCanvasPoint(event);
+    mouse.x = point.x;
+    mouse.y = point.y;
     mouse.inside = true;
     syncAimFromMouse();
   }
@@ -1973,12 +1987,15 @@
   });
   canvas.addEventListener("pointerdown", (event) => {
     canvas.focus({ preventScroll: true });
+    const point = getCanvasPoint(event);
+    const startedOnShotButton = hitsMobileShotButton(point.x, point.y);
     if (event.pointerType === "touch" || event.pointerType === "pen") {
       touchAim = {
         id: event.pointerId,
         active: true,
         moved: false,
         suppressNextClick: false,
+        startedOnShotButton,
         startX: event.clientX,
         startY: event.clientY,
         startTime: performance.now(),
@@ -1989,6 +2006,7 @@
         // Some synthetic touch events do not have an active pointer capture target.
       }
     }
+    if (startedOnShotButton) return;
     updatePointer(event);
   });
   canvas.addEventListener("pointerup", (event) => {
@@ -2012,9 +2030,7 @@
   canvas.addEventListener("click", (event) => {
     unlockAudio();
     canvas.focus({ preventScroll: true });
-    const rect = canvas.getBoundingClientRect();
-    const x = (event.clientX - rect.left) * canvas.width / rect.width;
-    const y = (event.clientY - rect.top) * canvas.height / rect.height;
+    const { x, y } = getCanvasPoint(event);
     if (touchAim.suppressNextClick) {
       touchAim.suppressNextClick = false;
       if (state.mode === "MIRANDO" && state.turn === "player") {
@@ -2039,7 +2055,7 @@
       return;
     }
     if (mobileShotButtonVisible()) {
-      if (Math.hypot(x - mobileShotButton.x, y - mobileShotButton.y) <= mobileShotButton.r + 8) {
+      if (hitsMobileShotButton(x, y)) {
         handlePlayerShotPress();
       } else {
         state.message = state.shotStage === "power" ? "MIRA TRAVADA | USE BOTAO TACAR" : "MIRA AJUSTADA | USE BOTAO FORCA";

@@ -70,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260522-pubpaidfix9";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260524-pieces3d1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -1367,8 +1367,11 @@ const DYNAMIC_ASSET_BASENAMES = new Set([
   "runtime-config.js"
 ]);
 const VERSIONED_STATIC_CACHE_CONTROL = "public, max-age=31536000, immutable";
-const NEWS_API_CACHE_TTL_MS = 30 * 1000;
+const NEWS_API_CACHE_TTL_MS = 5 * 60 * 1000;
 const newsApiResponseCache = new Map();
+const newsCollectionCache = new Map();
+const staticNewsItemsCache = { key: "", items: [] };
+const articleNewsBaseCache = { key: "", total: 0, items: [] };
 const NINJAS_OPPORTUNITIES_UPDATED_AT = "2026-04-14";
 const NINJAS_OPPORTUNITIES = [
   {
@@ -1552,15 +1555,68 @@ function normalizeJsonArrayPayload(payload) {
   return [];
 }
 
-function readMergedNewsCollection(fileName) {
-  const liveItems = normalizeJsonArrayPayload(readJson(path.join(DATA_DIR, fileName), []));
+function getFileCacheSignature(filePath) {
+  try {
+    const stats = fs.statSync(filePath);
+    return `${path.resolve(filePath)}:${stats.mtimeMs}:${stats.size}`;
+  } catch (_error) {
+    return `${path.resolve(filePath)}:missing`;
+  }
+}
 
-  if (path.resolve(DATA_DIR) === path.resolve(DEFAULT_DATA_DIR)) {
-    return liveItems;
+function getNewsDataCacheKey() {
+  const files = [
+    path.join(DATA_DIR, "runtime-news.json"),
+    path.join(DATA_DIR, "news-archive.json"),
+    STATIC_NEWS_FILE
+  ];
+
+  if (path.resolve(DATA_DIR) !== path.resolve(DEFAULT_DATA_DIR)) {
+    files.push(path.join(DEFAULT_DATA_DIR, "runtime-news.json"));
+    files.push(path.join(DEFAULT_DATA_DIR, "news-archive.json"));
   }
 
-  const defaultItems = normalizeJsonArrayPayload(readJson(path.join(DEFAULT_DATA_DIR, fileName), []));
-  return liveItems.concat(defaultItems);
+  return files.map(getFileCacheSignature).join("|");
+}
+
+function readMergedNewsCollection(fileName) {
+  const livePath = path.join(DATA_DIR, fileName);
+  const defaultPath = path.join(DEFAULT_DATA_DIR, fileName);
+  const useDefault = path.resolve(DATA_DIR) !== path.resolve(DEFAULT_DATA_DIR);
+  const key = [
+    fileName,
+    getFileCacheSignature(livePath),
+    useDefault ? getFileCacheSignature(defaultPath) : ""
+  ].join("|");
+  const cached = newsCollectionCache.get(key);
+
+  if (cached) {
+    return cached;
+  }
+
+  const liveItems = normalizeJsonArrayPayload(readJson(livePath, []));
+  const items = useDefault
+    ? liveItems.concat(normalizeJsonArrayPayload(readJson(defaultPath, [])))
+    : liveItems;
+
+  if (newsCollectionCache.size > 20) {
+    newsCollectionCache.clear();
+  }
+  newsCollectionCache.set(key, items);
+  return items;
+}
+
+function getCachedStaticNewsItems() {
+  const key = getFileCacheSignature(STATIC_NEWS_FILE);
+
+  if (staticNewsItemsCache.key === key) {
+    return staticNewsItemsCache.items;
+  }
+
+  const items = getStaticNewsItemsUncached();
+  staticNewsItemsCache.key = key;
+  staticNewsItemsCache.items = items;
+  return items;
 }
 
 function mutateJsonFile(filePath, fallback, mutator) {
@@ -1760,7 +1816,7 @@ function writeStaticNewsData(items = []) {
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
 
-function getStaticNewsItems() {
+function getStaticNewsItemsUncached() {
   try {
     if (!fs.existsSync(STATIC_NEWS_FILE)) return [];
 
@@ -1775,6 +1831,10 @@ function getStaticNewsItems() {
   } catch (_error) {
     return [];
   }
+}
+
+function getStaticNewsItems() {
+  return getCachedStaticNewsItems();
 }
 
 function getElectionConfig() {
@@ -7256,8 +7316,16 @@ function getArticleNews(limit = 30) {
   return repairNewsImagesForDisplay(Array.from(map.values()).sort(sortArticleItems).slice(0, limit));
 }
 
-function buildArticleNewsApiPayload(limit = 1000) {
-  const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
+function getArticleNewsApiBasePayload() {
+  const key = getNewsDataCacheKey();
+
+  if (articleNewsBaseCache.key === key) {
+    return {
+      total: articleNewsBaseCache.total,
+      items: articleNewsBaseCache.items
+    };
+  }
+
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
 
@@ -7269,12 +7337,27 @@ function buildArticleNewsApiPayload(limit = 1000) {
   });
 
   const sorted = Array.from(map.values()).sort(sortArticleItems);
-  const visibleItems = repairNewsImagesForDisplay(sorted.slice(0, safeLimit));
+  const visibleItems = repairNewsImagesForDisplay(sorted.slice(0, 1000));
+
+  articleNewsBaseCache.key = key;
+  articleNewsBaseCache.total = sorted.length;
+  articleNewsBaseCache.items = visibleItems;
+
+  return {
+    total: sorted.length,
+    items: visibleItems
+  };
+}
+
+function buildArticleNewsApiPayload(limit = 1000) {
+  const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
+  const basePayload = getArticleNewsApiBasePayload();
+  const visibleItems = basePayload.items.slice(0, safeLimit);
 
   return {
     ok: true,
-    total: sorted.length,
-    archiveTotal: sorted.length,
+    total: basePayload.total,
+    archiveTotal: basePayload.total,
     returned: visibleItems.length,
     items: visibleItems
   };
@@ -18849,6 +18932,13 @@ server.listen(PORT, HOST, () => {
   startRealAgentsAutoRunner();
   startArticleIntegrityAutoRunner();
   startTopicFeedAutoRunner();
+  setTimeout(() => {
+    try {
+      getCachedArticleNewsApiPayload(60, { lite: true });
+    } catch (_error) {
+      // Best-effort warmup only; the request path can rebuild the cache if this fails.
+    }
+  }, 1000);
 });
 
 function emptyPubpaidWalletLedger() {
