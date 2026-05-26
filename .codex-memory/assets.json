@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-26T22:02:45.441Z",
+  "lastUpdatedAt": "2026-05-26T22:29:14.150Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1091,6 +1091,39 @@
         "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
       ],
       "createdAt": "2026-05-26T22:02:45.441Z"
+    },
+    {
+      "id": "pubpaid-boardhud3-chess-score-final",
+      "kind": "screenshot",
+      "path": ".codex-temp/boardhud3/chess-score-after-real-move-final.png",
+      "source": "playwright",
+      "note": "boardhud3: Xadrez mobile apos lance real e2-e4, placar 1 lance visivel e cabendo no HUD.",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T22:29:13.872Z"
+    },
+    {
+      "id": "pubpaid-boardhud3-checkers-score-final",
+      "kind": "screenshot",
+      "path": ".codex-temp/boardhud3/checkers-hud-score-capture-preview.png",
+      "source": "playwright",
+      "note": "boardhud3: Damas mobile com placar 12 x 12 visivel, sem Treino livre e com HUD separado.",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T22:29:13.874Z"
+    },
+    {
+      "id": "pubpaid-boardhud3-chess-coin-fit",
+      "kind": "screenshot",
+      "path": ".codex-temp/boardhud3/chess-coin-ready-fit.png",
+      "source": "playwright",
+      "note": "boardhud3: Xadrez mobile moeda pronta centralizada e sem corte no landscape 844x390.",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T22:29:14.150Z"
     }
   ]
 }

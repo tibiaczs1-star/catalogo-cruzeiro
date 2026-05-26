@@ -230,3 +230,11 @@ English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX wit
 - HUD mobile de Damas reorganizado para evitar menu sobre menu: jogadores/sidecar somem no landscape estreito e controles ficam em cantos separados.
 - Sinuca foi escondida/desabilitada no lobby online enquanto a revisao offline fica pendente.
 - Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, `npm run review:team`, Playwright mobile 844x390 com screenshots de Damas HUD, moeda do Xadrez e tabuleiro do Xadrez apos moeda.
+
+## Atualizacao 2026-05-26 - boardhud3
+
+- Removidos os textos de `Treino livre`/`treino local` do fluxo visivel de Damas/Xadrez; o botao redundante virou `Sair`.
+- Placar do Xadrez e das Damas voltou para o HUD mobile, com Xadrez contando `0 lances`/`1 lance` e Damas mostrando pecas restantes.
+- Damas e Xadrez foram alinhados no mesmo fluxo de moeda: depois da intro/creditos, a mesa espera toque em `Jogar moeda`, mostra quem comeca e so entao libera o tabuleiro.
+- Adicionados efeitos visuais para captura no Xadrez/Damas e estado de checkmate no Xadrez.
+- Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, `npm run review:team` com `totalIssues=0`, Playwright mobile 844x390 sem texto proibido/overlaps; lance real `e2-e4` computou `1 lance` e coube no HUD.

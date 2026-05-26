@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260526-boardhud2";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260526-boardhud3";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260526-boardhud2";
+} from "../services/pvpService.js?v=20260526-boardhud3";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -20,7 +20,7 @@ import {
   moveCheckersTournament,
   registerCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260526-boardhud2";
+} from "../services/tournamentService.js?v=20260526-boardhud3";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -30,8 +30,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260526-boardhud2";
-import { Chess } from "../vendor/chess.js?v=20260526-boardhud2";
+} from "../core/checkersRules.js?v=20260526-boardhud3";
+import { Chess } from "../vendor/chess.js?v=20260526-boardhud3";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -279,6 +279,7 @@ export function bindDomGameInterface(game) {
     checkersKicker: document.querySelector("[data-dom-checkers-kicker]"),
     checkersTitle: document.querySelector("[data-dom-checkers-title]"),
     checkersScore: document.querySelector("[data-dom-checkers-score]"),
+    checkersScoreMobile: document.querySelector("[data-dom-checkers-score-mobile]"),
     checkersStatus: document.querySelector("[data-dom-checkers-status]"),
     checkersTimer: document.querySelector("[data-dom-checkers-timer]"),
     checkersMoves: document.querySelector("[data-dom-checkers-moves]"),
@@ -975,7 +976,7 @@ export function bindDomGameInterface(game) {
     local.checkersIntroCredits = false;
     local.checkersIntroPhase = "video";
     refs.checkersArena?.classList.add("is-cinematic");
-    refs.checkersCoinFlip?.classList.add("is-flipping");
+    refs.checkersCoinFlip?.classList.remove("is-flipping", "is-awaiting-toss", "is-coin-result");
     window.clearTimeout(local.checkersIntroTimer);
     window.clearTimeout(local.checkersIntroCreditsTimer);
     const urlParams = new URLSearchParams(window.location.search || "");
@@ -999,21 +1000,16 @@ export function bindDomGameInterface(game) {
       return;
     }
     if (local.checkersIntroPhase === "credits") {
-      local.checkersIntroPhase = "coin";
+      local.checkersIntroPhase = "coin-ready";
       local.checkersIntroCredits = false;
-      playCheckersMoveSound("coin");
       renderPvpCheckers();
-      window.clearTimeout(local.checkersIntroCreditsTimer);
-      local.checkersIntroCreditsTimer = window.setTimeout(() => {
-        finishCheckersCinematic();
-      }, 2600);
       return;
     }
     local.checkersIntroPhase = "";
     local.checkersIntroCredits = false;
     local.checkersIntroLocked = false;
     refs.checkersArena?.classList.remove("is-cinematic");
-    refs.checkersCoinFlip?.classList.remove("is-flipping");
+    refs.checkersCoinFlip?.classList.remove("is-flipping", "is-awaiting-toss", "is-coin-result");
     if (refs.checkersCoinFlip) refs.checkersCoinFlip.hidden = true;
     applyCheckersCamera(local.tournamentMatch || local.demoCheckers || gameState.pvpMatch || {}, tournamentSeatForCurrentParticipant() || gameState.pvpSeat || "playerOne");
     renderPvpCheckers();
@@ -1071,24 +1067,29 @@ export function bindDomGameInterface(game) {
     if (!refs.checkersCoinFlip) return;
     const coin = match.coinFlip || {};
     const firstSeat = coin.firstSeat || "playerOne";
-    const face = demoMode ? "cara" : coin.face || "cara";
+    const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = displayNameFor(match[firstSeat] || (firstSeat === "playerOne" ? currentPvpPlayer() : rivalPvpPlayer()) || {});
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260526-boardhud2";
+      const buildVersion = window.pubpaidBuildVersion || "20260526-boardhud3";
       const phase = local.checkersIntroPhase || "coin";
+      refs.checkersCoinFlip.classList.toggle("is-flipping", phase === "coin");
+      refs.checkersCoinFlip.classList.toggle("is-awaiting-toss", phase === "coin-ready");
+      refs.checkersCoinFlip.classList.toggle("is-coin-result", phase === "coin");
       refs.checkersCoinFlip.innerHTML = `
         ${phase === "video" ? `<video data-checkers-intro-video src="./assets/pubpaid/checkers/checkers-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
-        <div class="ppg-checkers-intro-copy${phase === "credits" ? " is-credits" : ""}${phase === "coin" ? " is-coin" : ""}">
+        <div class="ppg-checkers-intro-copy${phase === "credits" ? " is-credits" : ""}${phase === "coin" || phase === "coin-ready" ? " is-coin" : ""}${phase === "coin-ready" ? " is-coin-ready" : ""}${phase === "coin" ? " is-coin-result" : ""}">
           ${phase === "credits"
             ? `<b>Inside Trade Mark</b><strong>Antonio Clovis</strong><small>Programador e criador</small>`
-            : phase === "coin"
-              ? `<b>Moeda</b><span></span><strong>${face === "coroa" ? "Coroa" : "Cara"}</strong><small>${firstName || "Jogador"} começa</small>`
+            : phase === "coin" || phase === "coin-ready"
+              ? `<button type="button" class="ppg-chess-coin-button ppg-checkers-coin-button" ${phase === "coin-ready" ? "data-checkers-toss-coin" : "disabled"} aria-label="${phase === "coin-ready" ? "Jogar moeda de Damas" : `Resultado da moeda: ${firstName || "Jogador"} começa`}"><span aria-hidden="true"></span><b>${phase === "coin-ready" ? "Moeda" : "Resultado"}</b><strong>${phase === "coin-ready" ? "Jogar moeda" : face === "coroa" ? "Coroa" : "Cara"}</strong><small>${phase === "coin-ready" ? "Toque para ver quem começa." : `${firstName || "Jogador"} começa`}</small></button>`
               : `<b>Damas</b><strong>PubPaid</strong><small>Prepare-se</small>`}
         </div>
       `;
       playCheckersIntroVideo();
+    } else {
+      refs.checkersCoinFlip.classList.remove("is-flipping", "is-awaiting-toss", "is-coin-result");
     }
   };
 
@@ -1126,7 +1127,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260526-boardhud2";
+    const buildVersion = window.pubpaidBuildVersion || "20260526-boardhud3";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1286,38 +1287,40 @@ export function bindDomGameInterface(game) {
     }
   };
 
-  const createDemoCheckersMatch = () => ({
-    id: `demo-checkers-${Date.now()}`,
-    gameId: "checkers-demo",
-    status: "active",
-    board: createInitialCheckersBoard(),
-    turn: "playerOne",
-    winner: "",
-    resultSummary: "",
-    ready: { playerOne: true, playerTwo: true },
-    presence: {
-      playerOne: { connected: true },
-      playerTwo: { connected: true }
-    },
-    playerOne: currentPvpPlayer() || {
+  const createDemoCheckersMatch = () => {
+    const playerOne = currentPvpPlayer() || {
       name: "Você",
       email: "demo@pubpaid.local"
-    },
-    playerTwo: {
+    };
+    const playerTwo = {
       name: "Máquina",
       email: "treino@pubpaid.local"
-    },
-    forcedPiece: null,
-    lastMove: null,
-    checkersHistory: [],
-    moveCount: 0,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    coinFlip: {
-      face: "cara",
-      firstSeat: "playerOne"
-    }
-  });
+    };
+    const coinFlip = createLocalCoinFlip(playerOne, playerTwo);
+    return {
+      id: `demo-checkers-${Date.now()}`,
+      gameId: "checkers-demo",
+      status: "active",
+      board: createInitialCheckersBoard(),
+      turn: coinFlip.firstSeat,
+      winner: "",
+      resultSummary: `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} começa.`,
+      ready: { playerOne: true, playerTwo: true },
+      presence: {
+        playerOne: { connected: true },
+        playerTwo: { connected: true }
+      },
+      playerOne,
+      playerTwo,
+      forcedPiece: null,
+      lastMove: null,
+      checkersHistory: [],
+      moveCount: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coinFlip
+    };
+  };
 
   const createLocalCoinFlip = (playerOne = {}, playerTwo = {}) => {
     const playerOneStarts = Math.random() >= 0.5;
@@ -2180,14 +2183,14 @@ export function bindDomGameInterface(game) {
       const firstName = firstSeat ? displayNameFor(match[firstSeat]) : "";
       const coinLine = tournamentMode
         ? " Torneio: sem depósito, sem escrow e sem mexer na carteira."
-        : demoMode ? " Treino contra máquina: não usa saldo." : coin.face && firstName ? ` Moeda ${coin.face}: ${firstName} começa.` : "";
+        : demoMode ? " Mesa local contra a máquina." : coin.face && firstName ? ` Moeda ${coin.face}: ${firstName} começa.` : "";
       const isAbandoned = match.status === "abandoned";
       const abandonedBySelf = isAbandoned && match.abandonedBy === seat;
       const abandonSeconds = secondsUntil(match.deadlineAt);
-      if (refs.checkersKicker) refs.checkersKicker.textContent = tournamentMode ? "torneio" : demoMode ? "treino local" : "ranked pvp";
+      if (refs.checkersKicker) refs.checkersKicker.textContent = tournamentMode ? "torneio" : demoMode ? "mesa local" : "ranked pvp";
       refs.checkersTitle.textContent =
         local.checkersIntroLocked
-          ? "Moeda no ar"
+          ? local.checkersIntroPhase === "coin-ready" ? "Jogue a moeda" : "Moeda"
         : match.status === "finished"
           ? "Mesa encerrada"
           : tournamentMode
@@ -2195,7 +2198,7 @@ export function bindDomGameInterface(game) {
           : demoMode && match.turn === "playerTwo"
             ? "Máquina pensando..."
             : demoMode
-              ? match.forcedPiece ? "Continue a captura" : "Treino livre"
+              ? match.forcedPiece ? "Continue a captura" : "Sua vez"
           : isAbandoned
             ? abandonedBySelf ? "Reconectando mesa" : "Rival desconectou"
             : match.turn === seat
@@ -2206,9 +2209,12 @@ export function bindDomGameInterface(game) {
         <i>x</i>
         <span class="ppg-checkers-score-token is-rival">${rivalPieces}</span>
       `;
+      if (refs.checkersScoreMobile) {
+        refs.checkersScoreMobile.innerHTML = `<span>peças</span><strong>${ownPieces} x ${rivalPieces}</strong>`;
+      }
       refs.checkersStatus.textContent =
         local.checkersIntroLocked
-          ? "Aguarde a moeda cair. A partida libera automaticamente."
+          ? local.checkersIntroPhase === "coin-ready" ? "Toque em Jogar moeda para começar." : "Moeda decidiu o primeiro lance. Liberando tabuleiro..."
         : match.status === "finished"
           ? match.resultSummary || "Partida encerrada."
           : tournamentMode
@@ -2220,7 +2226,7 @@ export function bindDomGameInterface(game) {
             : demoMode
               ? match.forcedPiece
                 ? `Captura em cadeia: continue com a peça destacada.${coinLine}`
-                : `Sua vez no treino. Escolha uma peça.${coinLine}`
+                : `Sua vez. Escolha uma peça.${coinLine}`
           : isAbandoned
             ? abandonedBySelf
               ? "Voce voltou a tempo. Reabrindo a mesa..."
@@ -2496,6 +2502,7 @@ export function bindDomGameInterface(game) {
     const lastMove = state.lastMove || state.history?.slice?.(-1)?.[0] || null;
     const lastFrom = lastMove?.from || "";
     const lastTo = lastMove?.to || "";
+    const lastCapture = Boolean(lastMove?.capture);
     const aiPreview = demoMode && local.demoChessAiThinking ? local.demoChessAiPreviewMove : null;
     const checkedKingToken = state.inCheck ? activeColor === "black" ? "k" : "K" : "";
     const guideFrom = forcedMoves[0]?.from || legalMoves[0]?.from || "";
@@ -2518,6 +2525,7 @@ export function bindDomGameInterface(game) {
       const legalTarget = selectedTargetSet.has(square);
       const lastSource = lastFrom === square;
       const lastTarget = lastTo === square;
+      const lastCaptureTarget = lastCapture && lastTarget;
       const aiPreviewFrom = aiPreview?.from === square;
       const aiPreviewTo = aiPreview?.to === square;
       const aiPreviewCapture = Boolean(aiPreview?.capture && aiPreviewTo);
@@ -2532,7 +2540,7 @@ export function bindDomGameInterface(game) {
         `
         : "";
       const glowMarkup = guided && canAct ? `<span class="ppg-chess-guide-glow" aria-hidden="true"></span>` : "";
-      return `<button type="button" class="ppg-dom-chess-cell ${dark ? "is-dark" : "is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${aiPreviewFrom ? " is-ai-preview-from" : ""}${aiPreviewTo ? " is-ai-preview-to" : ""}${aiPreviewCapture ? " is-ai-preview-capture" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${glowMarkup}</button>`;
+      return `<button type="button" class="ppg-dom-chess-cell ${dark ? " is-dark" : " is-light"}${selected ? " is-selected" : ""}${ownPiece ? " is-own" : ""}${legalOrigin ? " is-legal-origin" : ""}${forcedOrigin ? " is-forced-origin" : ""}${legalTarget ? " is-legal-target" : ""}${aiPreviewFrom ? " is-ai-preview-from" : ""}${aiPreviewTo ? " is-ai-preview-to" : ""}${aiPreviewCapture ? " is-ai-preview-capture" : ""}${lastSource ? " is-last-from" : ""}${lastTarget ? " is-last-to" : ""}${lastCaptureTarget ? " is-last-capture" : ""}${inCheck ? " is-in-check" : ""}${guided ? " is-guided" : ""}" data-chess-square="${square}" aria-label="${label}">${pieceMarkup}${glowMarkup}</button>`;
     }).join("");
   };
 
@@ -3288,7 +3296,7 @@ export function bindDomGameInterface(game) {
   const renderDemoPool = (state = gameState.poolGame || {}) => {
     if (!refs.pool || !state) return;
     refs.pool.dataset.mode = "demo";
-    if (refs.poolKicker) refs.poolKicker.textContent = "treino livre";
+    if (refs.poolKicker) refs.poolKicker.textContent = "mesa local";
     if (refs.poolTitle) refs.poolTitle.textContent = state.phase === "finished" ? "Mesa encerrada" : "Sinuca demo";
     if (refs.poolStatus) refs.poolStatus.textContent = gameState.prompt || "Trave mira e força para tacar.";
     if (refs.poolScore) refs.poolScore.textContent = `${state.playerScore || 0} x ${state.aiScore || 0}`;
@@ -3563,7 +3571,7 @@ export function bindDomGameInterface(game) {
     const abandonedBySelf = isAbandoned && match.abandonedBy === seat;
     const abandonSeconds = secondsUntil(match.deadlineAt);
     const myName = displayNameFor(match[seat]);
-    refs.tableKicker.textContent = demoMode ? "treino local" : "mesa PvP";
+    refs.tableKicker.textContent = demoMode ? "mesa local" : "mesa PvP";
     refs.tableTitle.textContent =
       match.status === "finished"
         ? `${gameLabel(gameId)} encerrado`
@@ -3577,9 +3585,9 @@ export function bindDomGameInterface(game) {
           ? abandonedBySelf
             ? "Voce voltou a tempo. Reabrindo a mesa..."
             : `Rival caiu. Vitoria por W.O. em ${abandonSeconds}s se ele nao voltar.`
-          : demoMode ? "Treino livre, sem saldo e sem fila real." : match.turn === seat ? `${myName}, jogue em ${gameLabel(gameId)}.` : "Aguardando jogada do rival.";
+          : demoMode ? "Mesa local, sem saldo e sem fila real." : match.turn === seat ? `${myName}, jogue em ${gameLabel(gameId)}.` : "Aguardando jogada do rival.";
     refs.genericForfeit.disabled = !demoMode && match.status !== "active" && match.status !== "abandoned";
-    refs.genericForfeit.textContent = demoMode ? "Sair do treino" : "Desistir";
+    refs.genericForfeit.textContent = demoMode ? "Sair" : "Desistir";
 
     if (gameId === "pool") {
       const state = match.poolState || {};
@@ -3729,6 +3737,8 @@ export function bindDomGameInterface(game) {
       const chessCinematicActive = local.chessIntroLocked;
       const turnSeat = chessSeatForColor(state, state.turnColor);
       const chessMoveFeedback = syncChessMoveFeedback(match);
+      const chessMoveCount = state.history?.length || match.moveCount || 0;
+      const chessScoreText = `${chessMoveCount} ${chessMoveCount === 1 ? "lance" : "lances"}`;
       const chessTurnText = awaitingChessCoin
         ? "Toque para jogar a moeda."
         : chessCoinResolving
@@ -3736,7 +3746,7 @@ export function bindDomGameInterface(game) {
           : chessMoveFeedback
             ? "Movimento feito..."
             : getChessTurnSummary(match, seat, demoMode);
-      refs.tableScore.textContent = `${state.history?.length || match.moveCount || 0} lances`;
+      refs.tableScore.textContent = chessScoreText;
       refs.tableStatus.textContent = awaitingChessCoin
         ? "Intro pronta. Toque em Jogar moeda para começar."
         : chessCoinResolving
@@ -3748,12 +3758,16 @@ export function bindDomGameInterface(game) {
               : getChessTurnSummary(match, seat, demoMode);
       renderStableTableBody(
         `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}:${chessMoveFeedback}:${local.chessIntroLocked}:${local.chessIntroPhase}:${local.chessIntroCredits}:${local.chessBoardFixed}:${awaitingChessCoin}`,
-        `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}${chessCinematicActive ? " is-cinematic" : ""}">
+        `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}${chessCinematicActive ? " is-cinematic" : ""}${state.checkmate ? " is-checkmate" : ""}">
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <button type="button" class="ppg-chess-exit" data-dom-open-lobby>Mesas</button>
-          <button type="button" class="ppg-chess-resign" data-dom-generic-forfeit>${demoMode ? "Sair do treino" : "Desistir"}</button>
+          <button type="button" class="ppg-chess-resign" data-dom-generic-forfeit>${demoMode ? "Sair" : "Desistir"}</button>
+          <div class="ppg-board-score-chip ppg-chess-score-chip" aria-live="polite">
+            <span>xadrez</span>
+            <strong>${escapeHtml(chessScoreText)}</strong>
+          </div>
           <div class="ppg-chess-turn-chip" aria-live="polite">
-            <span>${demoMode ? "treino" : "turno"}</span>
+            <span>${demoMode ? "mesa local" : "turno"}</span>
             <strong>${escapeHtml(chessTurnText)}</strong>
           </div>
           <div class="ppg-chess-board-stage" data-chess-stage>
@@ -4554,6 +4568,21 @@ export function bindDomGameInterface(game) {
           updateGameState({ prompt: payload?.error || "Nao foi possivel desistir agora." });
         }
       });
+      return;
+    }
+    if (event.target.closest("[data-checkers-toss-coin]")) {
+      if (local.checkersIntroLocked && local.checkersIntroPhase === "coin-ready") {
+        local.checkersIntroPhase = "coin";
+        local.checkersIntroCredits = false;
+        refs.checkersCoinFlip?.classList.add("is-flipping", "is-coin-result");
+        refs.checkersCoinFlip?.classList.remove("is-awaiting-toss");
+        renderPvpCheckers();
+        playCheckersMoveSound("coin");
+        window.clearTimeout(local.checkersIntroCreditsTimer);
+        local.checkersIntroCreditsTimer = window.setTimeout(() => {
+          finishCheckersCinematic();
+        }, 2300);
+      }
       return;
     }
     if (event.target.closest("[data-chess-toss-coin]")) {

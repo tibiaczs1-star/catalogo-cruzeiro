@@ -1,18 +1,19 @@
 # Current State
 
-Updated: 2026-05-26T21:54:25.488Z
+Updated: 2026-05-26T22:29:57.648Z
 
 ## Active Goal
 
-- PubPaid mobile board HUD fix pronto para publicar
+- PubPaid mobile boardhud3
 
 ## Summary
 
-Build 20260526-boardhud2: Xadrez mobile segura moeda central clicavel, mostra quem comeca e libera o tabuleiro; pecas 3D mobile foram centralizadas nas casas; Damas mobile landscape reorganizada sem menus sobrepostos; Sinuca removida do online ate revisao offline.
+Build 20260526-boardhud3: Xadrez mobile com moeda clicavel centralizada, tabuleiro liberado apos resultado, placar de lances restaurado e computando lance real; Damas com placar de pecas, moeda no mesmo fluxo e HUD sem sobreposicao; captura/checkmate ganharam feedback visual; Sinuca continua fora do online.
 
 ## Next
 
-- Publicar e confirmar /api/pubpaid/build online em 20260526-boardhud2
+- Publicar e confirmar /api/pubpaid/build online em 20260526-boardhud3
+- Abrir teste mobile online no Xadrez com placar visivel
 
 ## Files In Focus
 
@@ -24,6 +25,6 @@ Build 20260526-boardhud2: Xadrez mobile segura moeda central clicavel, mostra qu
 
 ## Assets In Focus
 
-- .codex-temp/boardhud1/checkers-mobile-hud-afterintro-final.png
-- .codex-temp/boardhud1/chess-mobile-coin-result-final3.png
-- .codex-temp/boardhud1/chess-mobile-hud-final3.png
+- pubpaid-boardhud3-chess-score-final
+- pubpaid-boardhud3-checkers-score-final
+- pubpaid-boardhud3-chess-coin-fit
