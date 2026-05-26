@@ -498,12 +498,15 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Validacao Browser 740x420: Xadrez, Damas e Sinuca sem overlap de HUD essencial; Xadrez manteve 32 pecas dentro do tabuleiro; console sem erros.
 - Validacao local: `node --check` em `domGameInterface.js`, `app.js`, `server.js`; `npm run guard:pubpaid`; `git diff --check`; `npm run review:team` com 42 apontamentos gerais existentes.
 
-- Build local: `20260526-boardhud3`.
+- Build local: `20260526-checkersai1`.
 - Xadrez mobile: a moeda nao roda sozinha depois dos creditos; fica centralizada e clicavel, mostra face + quem comeca + cor inicial, e so entao libera o tabuleiro.
 - Xadrez mobile: o tabuleiro volta a aparecer apos a moeda, com 64 casas e 32 pecas; as pecas 3D CSS foram centralizadas nas casas no breakpoint mobile, com volume por luz/sombra sem parecerem soltas.
 - Xadrez mobile: placar visivel voltou ao HUD e computou lance real `e2-e4` como `1 lance`, cabendo em 844x390 sem sobrepor menus.
 - Xadrez recebeu animacao visual de captura e estado de checkmate; Damas recebeu efeito de captura no ultimo destino.
 - Damas e Xadrez agora usam o mesmo padrao de moeda clicavel antes de liberar a mesa, inclusive no demo local.
+- Damas demo: quando a moeda escolhe a Maquina, o AI agora agenda e executa o primeiro lance logo que o tabuleiro e liberado; intro de Damas encurtada em 0,5s.
+- Lobby dos jogos: cards visiveis centralizados no menu apos Sinuca sair do online.
+- Audio: Phaser interno fica sem AudioContext proprio; o som customizado do PubPaid continua iniciando por gesto do jogador.
 - Damas mobile landscape: HUD revisado para evitar menu sobre menu; `Mesas`, `Reiniciar demo`, `Mesa fixa` e painel de status ficam em cantos/zonas separadas, sem sobreposicao no teste.
 - Sinuca foi retirada do online temporariamente: card escondido no lobby, botoes desabilitados e guardas no runtime bloqueando acesso direto.
 - Validacao local: `node --check` em `domGameInterface.js`, `app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; `npm run review:team` com `totalIssues=0`; Playwright mobile 844x390 confirmou lobby sem Sinuca online, Damas sem overlaps, Xadrez com moeda e tabuleiro pos-moeda.

@@ -1,14 +1,13 @@
 # Handoff
 
-Updated: 2026-05-26T22:29:57.648Z
+Updated: 2026-05-26T22:47:26.328Z
 
-Rodada PubPaid boardhud3 validada localmente: Treino livre removido, Xadrez/Damas com placar visivel, moeda unificada e clicavel antes da mesa, captura/checkmate com animacao; Xadrez computou e2-e4 como 1 lance em mobile 844x390. Guard PubPaid, node --check, diff --check e review:team passaram.
+Rodada PubPaid checkersai1 validada: Damas demo agora dispara primeiro lance automatico quando a moeda escolhe Maquina; teste natural confirmou Maquina pensando -> Sua vez, sem AudioContext blocked e sem Texture key error. Cards do lobby centralizados e intro da Damas encurtada 0,5s.
 
 ## Next
 
-- Depois do push
-- poll do Render ate a API retornar build 20260526-boardhud3
-- Abrir Xadrez online em modo celular e confirmar placar/encaixe
+- Commit/push
+- poll Render ate 20260526-checkersai1 e abrir Chrome Default mobile online
 
 ## Files In Focus
 

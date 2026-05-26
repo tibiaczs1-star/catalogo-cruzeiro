@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-26T22:29:14.150Z",
+  "lastUpdatedAt": "2026-05-26T22:47:10.258Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1124,6 +1124,39 @@
         "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
       ],
       "createdAt": "2026-05-26T22:29:14.150Z"
+    },
+    {
+      "id": "pubpaid-checkersai1-machine-thinking",
+      "kind": "screenshot",
+      "path": ".codex-temp/checkersai1/natural-machine-thinking.png",
+      "source": "playwright",
+      "note": "checkersai1: Damas mobile com moeda escolhendo a Maquina; AI entra em Maquina pensando antes do primeiro lance.",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T22:47:10.059Z"
+    },
+    {
+      "id": "pubpaid-checkersai1-lobby-centered",
+      "kind": "screenshot",
+      "path": ".codex-temp/checkersai1/lobby-cards-centered.png",
+      "source": "playwright",
+      "note": "checkersai1: cards Damas/Xadrez centralizados no lobby mobile apos Sinuca sair do online.",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T22:47:10.245Z"
+    },
+    {
+      "id": "pubpaid-checkersai1-after-machine-first",
+      "kind": "screenshot",
+      "path": ".codex-temp/checkersai1/natural-after-machine-first-move.png",
+      "source": "playwright",
+      "note": "checkersai1: apos primeiro lance automatico da Maquina, Damas volta para Sua vez no mobile.",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T22:47:10.258Z"
     }
   ]
 }

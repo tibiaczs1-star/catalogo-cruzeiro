@@ -193,7 +193,8 @@ body.pubpaid-phaser-page .ppg-prompt {
 
 .ppg-dom-game-cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 260px));
+  justify-content: center;
   gap: 12px;
   margin-top: 12px;
 }
@@ -8915,7 +8916,9 @@ article.ppg-dom-game-card {
   }
 
   .ppg-dom-game-cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(136px, 176px));
+    justify-content: center;
+    align-content: center;
     gap: 6px;
     margin-top: 0;
   }
@@ -9748,7 +9751,8 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   }
 
   .ppg-dom-game-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, min(100%, 260px));
+    justify-content: center;
     gap: 7px;
   }
 

@@ -238,3 +238,10 @@ English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX wit
 - Damas e Xadrez foram alinhados no mesmo fluxo de moeda: depois da intro/creditos, a mesa espera toque em `Jogar moeda`, mostra quem comeca e so entao libera o tabuleiro.
 - Adicionados efeitos visuais para captura no Xadrez/Damas e estado de checkmate no Xadrez.
 - Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, `npm run review:team` com `totalIssues=0`, Playwright mobile 844x390 sem texto proibido/overlaps; lance real `e2-e4` computou `1 lance` e coube no HUD.
+
+## Atualizacao 2026-05-26 - checkersai1
+
+- Corrigido o inicio da Damas demo quando a moeda escolhe a Maquina: apos a moeda liberar o tabuleiro, o AI entra em `Maquina pensando...` e faz o primeiro lance sozinho.
+- Intro de Damas encurtada em 0,5s no fluxo normal.
+- Menu de cards dos jogos centralizado para Damas/Xadrez depois da Sinuca sair do online.
+- Phaser interno nao cria mais AudioContext; o audio customizado do PubPaid continua destravando somente apos gesto do jogador.
