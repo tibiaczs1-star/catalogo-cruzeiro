@@ -1,15 +1,29 @@
 # Current State
 
-Updated: 2026-05-22T20:35:04.213Z
+Updated: 2026-05-26T21:54:25.488Z
 
 ## Active Goal
 
-- PubPaid pubpaidfix5 pronto para teste do usuario
+- PubPaid mobile board HUD fix pronto para publicar
 
 ## Summary
 
-Ajustes finais pedidos: Xadrez Demo agora roda intro/creditos antes de exibir botao central Jogar moeda; moeda so dispara com clique. Sinuca mobile ganhou botao proprio FORCA/TACAR para nao misturar mira com inicio da medicao. Build 20260522-pubpaidfix5.
+Build 20260526-boardhud1: Xadrez mobile segura moeda central clicavel, mostra quem comeca e libera o tabuleiro; pecas 3D mobile foram centralizadas nas casas; Damas mobile landscape reorganizada sem menus sobrepostos; Sinuca removida do online ate revisao offline.
 
 ## Next
 
-- Subir online e deixar o usuario testar; nao rodar testes automatizados porque ele pediu para testar pessoalmente.
+- Publicar e confirmar /api/pubpaid/build online em 20260526-boardhud1
+
+## Files In Focus
+
+- pubpaid.html
+- pubpaid-phaser.css
+- pubpaid-phaser/app.js
+- pubpaid-phaser/ui/domGameInterface.js
+- server.js
+
+## Assets In Focus
+
+- .codex-temp/boardhud1/checkers-mobile-hud-afterintro-final.png
+- .codex-temp/boardhud1/chess-mobile-coin-result-final3.png
+- .codex-temp/boardhud1/chess-mobile-hud-final3.png

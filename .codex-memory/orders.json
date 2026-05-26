@@ -1,7 +1,54 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T20:21:09.591Z",
+  "lastUpdatedAt": "2026-05-26T21:16:56.376Z",
   "orders": [
+    {
+      "id": "2026-05-26-hermes-propaganda-loop-wife-profile-delegation",
+      "createdAt": "2026-05-26T09:20:23-05:00",
+      "updatedAt": "2026-05-26T09:20:23-05:00",
+      "status": "loop-updated-restart-pending-auth-warning",
+      "source": "chat",
+      "rawRequest": "Tratar C:/Users/junio/projeto codex/HERMES_PROPAGANDA_DAILY_JOB.md como caminho do job do ciclo de propagandas ja programado, seguir instrucoes, reiniciar loop e deixar tarefas delegadas a agentes/subagentes para o perfil da esposa; lembrar proximo passo de reautenticar tudo e revisar continuidade/LLMs publicos.",
+      "summary": "Atualizar loops Rayxpx/Hermes para job diario de propagandas e handoff seguro do perfil @ray_ofc_czs.",
+      "normalizedTasks": [
+        "ler HERMES_PROPAGANDA_DAILY_JOB.md e arquivos citados",
+        "injetar o MD no contexto dos loops Rayxpx Core e P3",
+        "ajustar cron jobs para entrega correta em telegram:Silca Jr",
+        "habilitar/deixar instrucao de delegacao para perfil @ray_ofc_czs",
+        "criar handoffs locais de agentes para midia, conteudo e checklist",
+        "reiniciar/rodar loop programado",
+        "lembrar que o proximo passo e reautenticar tudo e revisar continuidade/LLMs publicos"
+      ],
+      "filesTouched": [
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        "C:/Users/junio/AppData/Local/hermes/cron/jobs.json",
+        "C:/Users/junio/AppData/Local/hermes/scripts/rayxpxp_core_probe.py",
+        "C:/Users/junio/AppData/Local/hermes/scripts/rayxpxp_p3_outer_loop.py",
+        "C:/Users/junio/AppData/Local/hermes/rayxpxp/RAYXPX_CORE_MASTER.md",
+        "C:/Users/junio/AppData/Local/hermes/rayxpxp/RAYXPX_CORE_MASTER_PROMPT.en.md",
+        "C:/Users/junio/Desktop/instagram-ray-ofc-czs/agents/2026-05-26_AGENTE_1_MAPA_MIDIA.md",
+        "C:/Users/junio/Desktop/instagram-ray-ofc-czs/agents/2026-05-26_AGENTE_2_PLANO_CONTEUDO.md",
+        "C:/Users/junio/Desktop/instagram-ray-ofc-czs/agents/2026-05-26_AGENTE_3_CHECKLIST_LOOP.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "hermes",
+        "cron",
+        "propaganda",
+        "instagram",
+        "ray-ofc-czs",
+        "delegation",
+        "reauth"
+      ],
+      "nextSteps": [
+        "reautenticar OpenAI Codex/Hermes e demais provedores",
+        "revisar formas de manter sessoes vivas e fallback de LLMs publicos/baratos",
+        "rodar pacote de aprovacao visual para @ray_ofc_czs antes de qualquer postagem"
+      ],
+      "notes": "Tentativas de delegate_task e hermes chat falharam por auth/API; cron/prompt/scripts ficaram preparados para delegar apos reautenticacao."
+    },
     {
       "id": "2026-05-22-ajustar-camera-damas-xadrez-intro-musica-32bit",
       "createdAt": "2026-05-22T02:05:00-05:00",
@@ -2559,6 +2606,36 @@
       "source": "chat",
       "rawRequest": "temos 3 erros no pub paid - primeiro - nas damas mobile o botão de som ainda ta sobreposto em cima da janela da vez do jogaor - segundo no xadrez demo nao tem nem desistir nem voltar pro lobby e ainda ta travando a opem, e a moeda ta jogando sem nenhuma ação do jogador para começar - terceiro no mobile e dificil vc mirar e depois aperta qualquer coisa pra começar a medir força e muda a mira do taco trave a mira quando for pra medir força - crie o prompt em ingles, adicione um balão de conversa no garçon da cena dentro do bar click em min algo assim para começar a apostar.....  agora comece",
       "summary": "Corrigir sobreposicao mobile no PubPaid Damas, fluxo/botoes do Xadrez Demo, trava de mira da Sinuca mobile e balao do garcom.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-26-criar-index2-html-como-previa-visual-publica-do-czs-mantendo-o-site-atual-intact",
+      "createdAt": "2026-05-26T16:56:24.555Z",
+      "updatedAt": "2026-05-26T16:56:24.555Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Criar uma prévia index2 do site online com novo design, preservando tudo que já existe e sem expor a chave enviada no chat.",
+      "summary": "Criar index2.html como prévia visual pública do CZS mantendo o site atual intacto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi",
+      "createdAt": "2026-05-26T21:16:56.376Z",
+      "updatedAt": "2026-05-26T21:16:56.376Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Corrigir PubPaid Xadrez mobile: depois da introducao a cena da moeda nao aparece centralizada no landscape, roda sozinha sem dizer o resultado/quem comeca, o jogo nao comeca, e melhorar pecas 3D no mobile; testar e subir.",
+      "summary": "Corrigir fluxo da moeda e inicio do Xadrez PubPaid mobile, melhorar pecas 3D mobile, testar e publicar.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

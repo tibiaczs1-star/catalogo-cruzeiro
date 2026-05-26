@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-22T20:22:11.920Z",
+  "lastUpdatedAt": "2026-05-26T21:54:25.425Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1040,6 +1040,57 @@
       "note": "Vale Pool pubpaidfix3: etapa de forca com mira travada apos iniciar medidor.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-22T20:22:11.920Z"
+    },
+    {
+      "id": "index2-mobile-png",
+      "kind": "image",
+      "path": ".codex-temp/index2-mobile.png",
+      "source": "workspace",
+      "note": "Captura mobile da prévia index2 do CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-26T17:03:25.490Z"
+    },
+    {
+      "id": "index2-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/index2-desktop.png",
+      "source": "workspace",
+      "note": "Captura desktop da prévia index2 do CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-26T17:03:25.495Z"
+    },
+    {
+      "id": "pubpaid-boardhud-checkers-mobile-final",
+      "kind": "screenshot",
+      "path": ".codex-temp/boardhud1/checkers-mobile-hud-afterintro-final.png",
+      "source": "playwright",
+      "note": "Damas mobile landscape sem menus sobrepostos apos intro",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T21:54:25.298Z"
+    },
+    {
+      "id": "pubpaid-boardhud-chess-coin-final",
+      "kind": "screenshot",
+      "path": ".codex-temp/boardhud1/chess-mobile-coin-result-final3.png",
+      "source": "playwright",
+      "note": "Xadrez mobile moeda central mostra resultado e quem comeca",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T21:54:25.358Z"
+    },
+    {
+      "id": "pubpaid-boardhud-chess-mobile-final",
+      "kind": "screenshot",
+      "path": ".codex-temp/boardhud1/chess-mobile-hud-final3.png",
+      "source": "playwright",
+      "note": "Xadrez mobile tabuleiro aparece apos moeda com pecas centralizadas",
+      "linkedOrderIds": [
+        "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
+      ],
+      "createdAt": "2026-05-26T21:54:25.425Z"
     }
   ]
 }

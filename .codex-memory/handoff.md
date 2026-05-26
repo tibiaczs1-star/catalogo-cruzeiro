@@ -1,9 +1,22 @@
 # Handoff
 
-Updated: 2026-05-22T20:35:04.231Z
+Updated: 2026-05-26T21:54:25.549Z
 
-PubPaid pubpaidfix5: Xadrez Demo corrigido para intro -> creditos -> Jogar moeda central clicavel -> moeda -> tabuleiro; fallback da intro ficou mais curto. Vale Pool mobile usa botao FORCA/TACAR no canvas, e toques fora dele so ajustam mira.
+Rodada PubPaid mobile concluida localmente: guard PubPaid, node --check, git diff --check, review:team e Playwright mobile passaram. Sinuca esta escondida/desabilitada no lobby online; Damas/Xadrez seguem visiveis.
 
 ## Next
 
-- Usuario quer testar online; evitar testes automatizados nesta rodada.
+- Depois do push
+- poll do Render ate a API retornar build 20260526-boardhud1
+
+## Files In Focus
+
+- pubpaid.html
+- pubpaid-phaser.css
+- pubpaid-phaser/app.js
+- pubpaid-phaser/ui/domGameInterface.js
+- server.js
+
+## Related Orders
+
+- 2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi

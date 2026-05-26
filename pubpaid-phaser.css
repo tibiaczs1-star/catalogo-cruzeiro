@@ -52,6 +52,8 @@ body.pubpaid-phaser-page .ppg-prompt {
 
 .ppg-dom-game-ui.is-lobby .ppg-dom-topline,
 .ppg-dom-game-ui.is-pool .ppg-dom-topline,
+.ppg-dom-game-ui.is-checkers .ppg-dom-topline,
+.ppg-dom-game-ui.is-table .ppg-dom-topline,
 .ppg-dom-game-ui.is-result .ppg-dom-topline {
   display: none;
 }
@@ -10185,7 +10187,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
 }
 
 .ppg-chess-arena.is-cinematic .ppg-chess-intro {
-  position: absolute;
+  position: fixed;
   z-index: 31;
   inset: 0;
   width: 100dvw;
@@ -10260,7 +10262,7 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 208, 109, 0.28), transparent 58%),
     linear-gradient(145deg, rgba(2, 5, 12, 0.62), rgba(10, 4, 18, 0.48));
-  animation: ppg-chess-intro-hold 3.45s ease both;
+  animation: ppg-chess-intro-hold 420ms ease both;
 }
 
 .ppg-chess-intro-copy.is-start {
@@ -10281,8 +10283,8 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   display: grid;
   justify-items: center;
   gap: 10px;
-  width: min(260px, 72vw);
-  min-height: 220px;
+  width: min(280px, 76vw);
+  min-height: clamp(210px, 50dvh, 246px);
   margin: 0 auto;
   border: 0;
   color: inherit;
@@ -10300,9 +10302,27 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   pointer-events: none;
 }
 
+.ppg-chess-coin-button b {
+  color: rgba(92, 230, 222, 0.94);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.ppg-chess-coin-button strong {
+  font-size: clamp(34px, 8.5dvh, 58px);
+  line-height: 0.92;
+}
+
+.ppg-chess-coin-button small {
+  display: block;
+  max-width: min(260px, 74vw);
+  font-size: clamp(13px, 3.2dvh, 20px);
+  line-height: 1.1;
+}
+
 .ppg-chess-intro-copy.is-coin span {
   display: block;
-  width: clamp(72px, 14vw, 126px);
+  width: clamp(72px, 18dvh, 118px);
   aspect-ratio: 1;
   border: 3px solid rgba(255, 246, 220, 0.5);
   border-radius: 50%;
@@ -10313,7 +10333,39 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
     inset -10px -12px 0 rgba(0, 0, 0, 0.2),
     0 0 26px rgba(255, 208, 109, 0.44),
     0 24px 44px rgba(0, 0, 0, 0.42);
-  animation: ppg-chess-coin-flip 960ms cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.ppg-chess-intro-copy.is-coin-ready span {
+  animation: ppg-chess-coin-ready 1.7s ease-in-out infinite;
+}
+
+.ppg-chess-intro-copy.is-coin-result span {
+  animation: ppg-chess-coin-settle 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (max-height: 430px) and (orientation: landscape) {
+  .ppg-chess-intro-copy.is-coin {
+    gap: 7px;
+    padding: 10px 14px;
+  }
+
+  .ppg-chess-coin-button {
+    gap: 7px;
+    min-height: 188px;
+  }
+
+  .ppg-chess-intro-copy.is-coin span {
+    width: clamp(58px, 17dvh, 76px);
+  }
+
+  .ppg-chess-coin-button strong {
+    font-size: clamp(30px, 10dvh, 46px);
+  }
+
+  .ppg-chess-coin-button small {
+    max-width: min(260px, 78vw);
+    font-size: clamp(12px, 3.8dvh, 16px);
+  }
 }
 
 .ppg-chess-intro-copy.is-credits strong {
@@ -10357,10 +10409,8 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
 }
 
 @keyframes ppg-chess-intro-hold {
-  0% { opacity: 0; transform: translate(-50%, -46%) scale(0.92); filter: blur(8px); }
-  14% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
-  82% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
-  100% { opacity: 0; transform: translate(-50%, -54%) scale(1.04); filter: blur(6px); }
+  0% { opacity: 0; transform: translateY(14px) scale(0.92); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
 @keyframes ppg-chess-credit-glow {
@@ -10374,6 +10424,17 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   0% { transform: rotateY(0deg) translateY(0); }
   45% { transform: rotateY(180deg) translateY(-10px); }
   100% { transform: rotateY(360deg) translateY(0); }
+}
+
+@keyframes ppg-chess-coin-ready {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.04); }
+}
+
+@keyframes ppg-chess-coin-settle {
+  0% { transform: rotateY(0deg) translateY(-8px) scale(0.94); }
+  58% { transform: rotateY(540deg) translateY(-14px) scale(1.08); }
+  100% { transform: rotateY(720deg) translateY(0) scale(1); }
 }
 
 .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-board-frame .ppg-dom-chess-board {
@@ -10531,11 +10592,6 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
 }
 
 @media (max-height: 430px) and (orientation: landscape) {
-  .ppg-checkers-exit {
-    right: max(12px, var(--ppg-safe-right)) !important;
-    left: auto !important;
-  }
-
   .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-arena {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
@@ -10715,6 +10771,47 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess
 
   body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-sidecar {
     display: none !important;
+  }
+}
+
+/* Board HUD anti-overlap pass: mobile landscape corners stay reserved for controls only. */
+@media (max-width: 960px) and (orientation: landscape), (max-height: 430px) and (orientation: landscape) {
+  .ppg-checkers-player-row {
+    display: none !important;
+  }
+
+  .ppg-checkers-exit {
+    top: auto !important;
+    right: auto !important;
+    bottom: max(8px, var(--ppg-safe-bottom)) !important;
+    left: max(12px, var(--ppg-safe-left)) !important;
+  }
+
+  .ppg-checkers-mobile-resign {
+    right: max(12px, var(--ppg-safe-right)) !important;
+    bottom: max(8px, var(--ppg-safe-bottom)) !important;
+  }
+
+  .ppg-checkers-board-stage > .ppg-checkers-camera {
+    top: max(8px, var(--ppg-safe-top)) !important;
+    right: max(8px, var(--ppg-safe-right)) !important;
+  }
+}
+
+@media (max-width: 900px), (max-height: 520px) {
+  .ppg-chess-board-frame .ppg-dom-chess-cell {
+    overflow: hidden;
+  }
+
+  .ppg-chess-board-frame .ppg-chess-piece {
+    width: 68%;
+    height: 82%;
+    transform: translateZ(26px) translateY(-3%) rotateX(-22deg) scaleY(1.08);
+  }
+
+  .ppg-chess-board-frame .ppg-chess-piece.is-pawn {
+    width: 58%;
+    height: 70%;
   }
 }
 
@@ -11138,6 +11235,18 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
     display: none !important;
   }
 
+  .ppg-checkers-exit {
+    top: auto !important;
+    right: auto !important;
+    bottom: max(8px, var(--ppg-safe-bottom)) !important;
+    left: max(12px, var(--ppg-safe-left)) !important;
+    min-width: 74px;
+    min-height: 28px;
+    padding: 7px 12px;
+    font-size: 10px;
+    line-height: 1;
+  }
+
   .ppg-checkers-mobile-resign {
     position: absolute;
     z-index: 12;
@@ -11158,6 +11267,13 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg
     letter-spacing: 0;
     line-height: 1;
     text-transform: uppercase;
+  }
+
+  .ppg-checkers-board-stage > .ppg-checkers-camera {
+    top: max(8px, var(--ppg-safe-top)) !important;
+    right: max(8px, var(--ppg-safe-right)) !important;
+    bottom: auto !important;
+    left: auto !important;
   }
 }
 
@@ -11533,5 +11649,169 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-chess-sidecar .ppg-chess
   .ppg-chess-board-frame .ppg-chess-piece.is-pawn {
     width: 50%;
     height: 64%;
+  }
+}
+
+
+/* Rayxpx chessflow2: mobile gate, clean HUD, and stronger 3D chess pieces. */
+body.pubpaid-phaser-page .ppg-orientation-gate {
+  z-index: 90;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(80, 239, 255, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(2, 5, 13, 0.94), rgba(2, 5, 13, 0.98));
+}
+
+body.pubpaid-phaser-page.is-orientation-blocked .ppg-dom-game-ui {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.pubpaid-phaser-page.is-orientation-blocked .ppg-orientation-gate {
+  display: grid;
+  pointer-events: auto;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-exit,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-camera {
+  display: none !important;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-resign {
+  top: auto;
+  right: max(12px, var(--ppg-safe-right));
+  bottom: max(12px, var(--ppg-safe-bottom));
+  left: auto;
+  min-width: 0;
+  min-height: 32px;
+  padding: 7px 12px;
+  border-color: rgba(92, 230, 222, 0.46);
+  color: #fff6dc;
+  background: rgba(3, 8, 17, 0.72);
+  opacity: 0.82;
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-resign:hover,
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-resign:focus-visible {
+  opacity: 1;
+}
+
+.ppg-chess-board-frame .ppg-chess-piece {
+  --piece-main: #fff9e9;
+  --piece-mid: #e8c98a;
+  --piece-edge: #8f5f2b;
+  --piece-rim: rgba(255, 246, 220, 0.36);
+  --piece-glow: rgba(255, 239, 188, 0.72);
+  width: 64%;
+  height: 82%;
+  transform: translateZ(26px) translateY(-7%) rotateX(-34deg) scaleY(1.14);
+  filter:
+    drop-shadow(0 18px 8px rgba(0, 0, 0, 0.46))
+    drop-shadow(0 0 11px var(--piece-glow));
+}
+
+.ppg-chess-board-frame .ppg-chess-piece.is-black {
+  --piece-main: #263f72;
+  --piece-mid: #14284f;
+  --piece-edge: #06111f;
+  --piece-rim: rgba(92, 230, 222, 0.4);
+  --piece-glow: rgba(80, 239, 255, 0.48);
+  filter:
+    drop-shadow(0 18px 8px rgba(0, 0, 0, 0.54))
+    drop-shadow(0 0 12px rgba(80, 239, 255, 0.42));
+}
+
+.ppg-chess-board-frame .ppg-chess-piece.is-pawn {
+  width: 54%;
+  height: 70%;
+}
+
+.ppg-chess-piece-shape {
+  border-width: 2px;
+  background:
+    radial-gradient(circle at 28% 14%, rgba(255, 255, 255, 0.52), transparent 15%),
+    linear-gradient(90deg, transparent 0 12%, rgba(255, 255, 255, 0.18) 13% 22%, transparent 23% 100%),
+    radial-gradient(ellipse at 50% 12%, var(--piece-main) 0 17%, transparent 18%),
+    radial-gradient(ellipse at 50% 36%, var(--piece-main) 0 22%, transparent 23%),
+    linear-gradient(90deg, transparent 0 13%, var(--piece-mid) 14% 86%, transparent 87% 100%),
+    linear-gradient(180deg, var(--piece-main), var(--piece-mid) 48%, var(--piece-edge));
+  box-shadow:
+    inset -9px -12px 0 rgba(0, 0, 0, 0.2),
+    inset 5px 6px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.ppg-chess-piece.is-rook .ppg-chess-piece-shape::after,
+.ppg-chess-piece.is-queen .ppg-chess-piece-shape::after,
+.ppg-chess-piece.is-king .ppg-chess-piece-shape::after {
+  width: 48%;
+  border-radius: 20% 20% 44% 44%;
+}
+
+.ppg-chess-piece.is-knight .ppg-chess-piece-shape::after {
+  width: 54%;
+  height: 40%;
+}
+
+@media (max-width: 900px), (max-height: 520px) {
+  .ppg-chess-turn-chip {
+    display: none !important;
+  }
+
+  .ppg-chess-board-stage {
+    padding: max(36px, calc(var(--ppg-safe-top) + 28px)) 10px max(52px, calc(var(--ppg-safe-bottom) + 42px));
+  }
+
+  .ppg-chess-board-frame .ppg-chess-piece {
+    width: 72%;
+    height: 84%;
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 0;
+    transform: translateY(0) rotateX(-4deg) scaleY(1.02);
+    transform-origin: 50% 72%;
+    filter:
+      drop-shadow(0 6px 3px rgba(0, 0, 0, 0.5))
+      drop-shadow(0 0 8px var(--piece-glow));
+  }
+
+  .ppg-chess-board-frame .ppg-chess-piece::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    bottom: -1%;
+    width: 78%;
+    height: 10%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.48), transparent 68%);
+    transform: translateX(-50%) skewX(-10deg);
+    pointer-events: none;
+  }
+
+  .ppg-chess-board-frame .ppg-chess-piece-shape {
+    z-index: 1;
+    bottom: 3%;
+    height: 90%;
+    box-shadow:
+      inset -7px -10px 0 rgba(0, 0, 0, 0.24),
+      inset 4px 5px 0 rgba(255, 255, 255, 0.2),
+      0 3px 0 rgba(60, 36, 16, 0.36),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .ppg-chess-board-frame .ppg-chess-piece.is-pawn {
+    width: 60%;
+    height: 72%;
+  }
+
+  body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-resign {
+    right: max(8px, var(--ppg-safe-right)) !important;
+    bottom: max(8px, var(--ppg-safe-bottom)) !important;
+    left: auto !important;
+    max-width: min(138px, calc(100dvw - 18px));
+    min-height: 30px;
+    padding: 6px 9px;
+    font-size: 10px;
   }
 }

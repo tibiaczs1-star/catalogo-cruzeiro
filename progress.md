@@ -222,3 +222,11 @@ English execution prompt used: "Fix the PubPaid Checkers and Chess camera UX wit
 - Moeda do Xadrez virou overlay central de tela cheia durante a cinematica, tanto no Demo quanto no PvP.
 - Texto da moeda deixa claro que o toque decide quem começa; depois do sorteio mostra face, jogador e cor inicial.
 - Cache-bust local atualizado para `20260522-pubpaidfix9`.
+
+## Atualizacao 2026-05-26 - boardhud1
+
+- Xadrez mobile corrigido no fluxo pos-introducao: a moeda fica centralizada, espera toque, mostra quem começa e libera o tabuleiro depois do resultado.
+- Peças 3D do Xadrez em mobile foram recentralizadas dentro das casas, com sombra de contato para manter volume sem parecerem flutuando.
+- HUD mobile de Damas reorganizado para evitar menu sobre menu: jogadores/sidecar somem no landscape estreito e controles ficam em cantos separados.
+- Sinuca foi escondida/desabilitada no lobby online enquanto a revisao offline fica pendente.
+- Validacao local: `node --check`, `npm run guard:pubpaid`, `git diff --check`, `npm run review:team`, Playwright mobile 844x390 com screenshots de Damas HUD, moeda do Xadrez e tabuleiro do Xadrez apos moeda.
