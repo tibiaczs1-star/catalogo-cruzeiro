@@ -10346,12 +10346,12 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
 @media (max-height: 430px) and (orientation: landscape) {
   .ppg-chess-intro-copy.is-coin {
     gap: 7px;
-    padding: 10px 14px;
+    padding: 10px 14px 22px;
   }
 
   .ppg-chess-coin-button {
     gap: 7px;
-    min-height: 188px;
+    min-height: 204px;
   }
 
   .ppg-chess-intro-copy.is-coin span {
@@ -10359,12 +10359,13 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table:not([hidden]) 
   }
 
   .ppg-chess-coin-button strong {
-    font-size: clamp(30px, 10dvh, 46px);
+    font-size: clamp(28px, 9dvh, 40px);
   }
 
   .ppg-chess-coin-button small {
-    max-width: min(260px, 78vw);
-    font-size: clamp(12px, 3.8dvh, 16px);
+    max-width: min(320px, 80vw);
+    font-size: clamp(12px, 3.4dvh, 15px);
+    line-height: 1.05;
   }
 }
 

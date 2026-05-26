@@ -498,7 +498,7 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Validacao Browser 740x420: Xadrez, Damas e Sinuca sem overlap de HUD essencial; Xadrez manteve 32 pecas dentro do tabuleiro; console sem erros.
 - Validacao local: `node --check` em `domGameInterface.js`, `app.js`, `server.js`; `npm run guard:pubpaid`; `git diff --check`; `npm run review:team` com 42 apontamentos gerais existentes.
 
-- Build local: `20260526-boardhud1`.
+- Build local: `20260526-boardhud2`.
 - Xadrez mobile: a moeda nao roda sozinha depois dos creditos; fica centralizada e clicavel, mostra face + quem comeca + cor inicial, e so entao libera o tabuleiro.
 - Xadrez mobile: o tabuleiro volta a aparecer apos a moeda, com 64 casas e 32 pecas; as pecas 3D CSS foram centralizadas nas casas no breakpoint mobile, com volume por luz/sombra sem parecerem soltas.
 - Damas mobile landscape: HUD revisado para evitar menu sobre menu; `Mesas`, `Reiniciar demo`, `Mesa fixa` e painel de status ficam em cantos/zonas separadas, sem sobreposicao no teste.

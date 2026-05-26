@@ -8,11 +8,11 @@ Updated: 2026-05-26T21:54:25.488Z
 
 ## Summary
 
-Build 20260526-boardhud1: Xadrez mobile segura moeda central clicavel, mostra quem comeca e libera o tabuleiro; pecas 3D mobile foram centralizadas nas casas; Damas mobile landscape reorganizada sem menus sobrepostos; Sinuca removida do online ate revisao offline.
+Build 20260526-boardhud2: Xadrez mobile segura moeda central clicavel, mostra quem comeca e libera o tabuleiro; pecas 3D mobile foram centralizadas nas casas; Damas mobile landscape reorganizada sem menus sobrepostos; Sinuca removida do online ate revisao offline.
 
 ## Next
 
-- Publicar e confirmar /api/pubpaid/build online em 20260526-boardhud1
+- Publicar e confirmar /api/pubpaid/build online em 20260526-boardhud2
 
 ## Files In Focus
 

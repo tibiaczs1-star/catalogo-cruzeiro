@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-26T21:54:25.425Z",
+  "lastUpdatedAt": "2026-05-26T22:02:45.441Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1073,24 +1073,24 @@
     {
       "id": "pubpaid-boardhud-chess-coin-final",
       "kind": "screenshot",
-      "path": ".codex-temp/boardhud1/chess-mobile-coin-result-final3.png",
+      "path": ".codex-temp/boardhud1/chess-mobile-coin-result-final4.png",
       "source": "playwright",
-      "note": "Xadrez mobile moeda central mostra resultado e quem comeca",
+      "note": "Xadrez mobile moeda central com respiro no resultado e quem comeca",
       "linkedOrderIds": [
         "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
       ],
-      "createdAt": "2026-05-26T21:54:25.358Z"
+      "createdAt": "2026-05-26T22:02:45.367Z"
     },
     {
       "id": "pubpaid-boardhud-chess-mobile-final",
       "kind": "screenshot",
-      "path": ".codex-temp/boardhud1/chess-mobile-hud-final3.png",
+      "path": ".codex-temp/boardhud1/chess-mobile-hud-final4.png",
       "source": "playwright",
-      "note": "Xadrez mobile tabuleiro aparece apos moeda com pecas centralizadas",
+      "note": "Xadrez mobile tabuleiro aparece apos moeda com pecas 3D centralizadas",
       "linkedOrderIds": [
         "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
       ],
-      "createdAt": "2026-05-26T21:54:25.425Z"
+      "createdAt": "2026-05-26T22:02:45.441Z"
     }
   ]
 }

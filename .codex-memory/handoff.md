@@ -7,7 +7,7 @@ Rodada PubPaid mobile concluida localmente: guard PubPaid, node --check, git dif
 ## Next
 
 - Depois do push
-- poll do Render ate a API retornar build 20260526-boardhud1
+- poll do Render ate a API retornar build 20260526-boardhud2
 
 ## Files In Focus
 
