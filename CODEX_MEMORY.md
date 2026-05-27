@@ -2,6 +2,20 @@
 
 Atualizado: 2026-05-26
 
+## Rodada Atual - 20260527-home-sliced-loading1
+
+- Home CZS otimizada com carregamento fatiado real: `home-critical.css` novo, `home-main-loader.js` no lugar de `script.js` direto, preload de noticias reduzido para `limit=18&lite=1&firstFold=1`, CSS/JS premium e modulos auxiliares atras de rolagem/clique/secao perto da viewport ou fallback tardio.
+- Mantida intro cinematografica com minimo aproximado de 3s; depois da intro, a primeira tela hidrata com dados leves via `early-home-surfaces.js`.
+- Validacao local: desktop no Browser e mobile via Playwright fallback confirmaram que aos 5.6s e 12.6s nao entram `script.js`, `premium-home-redesign.css`, arquivo/admin/Cheffe ou rotas antigas; rolagem aciona o modo completo por `reader-intent`.
+- `npm run review:team` passou com PubPaid guard OK; restaram 3 achados preexistentes em `cruzeiro-do-sul-barzinho/index.html`, fora da home.
+
+## Rodada Atual - 20260527-pubpaid3-local-slice1
+
+- PubPaid 3.0 / Cruzeiro do Sul Barzinho retomado como projeto separado em `cruzeiro-do-sul-barzinho/`, sem substituir o PubPaid canônico (`/pubpaid.html`, `pubpaid-phaser/`, `pubpaid-phaser.css`, `pubpaid-runtime.js`, `games/vale-pool/`).
+- Fatia local criada: intro, lobby com 10 slots, seleção de 10 personagens, chat/emotes, Sinuca com 3 modos, Damas base e Xadrez visual/base, além de `window.renderGameToText()` para QA.
+- Documentos criados: `docs/GAME_BIBLE.md` e `docs/CHATGPT_IMAGE_PROMPTS.md` com trava de arte final via ChatGPT Imagem quando controlável.
+- Validação: `npm run check` dentro de `cruzeiro-do-sul-barzinho` OK e `npm run guard:pubpaid` no repo canônico OK. Browser/CDP não estava disponível nesta sessão; validação visual headless ficou pendente.
+
 ## Rodada Atual - 20260527-pubpaid-publish1
 
 - Subida PubPaid retomada após janela fechada: pacote legal `docs/pubpaid/legal/` mais correção visual `chesshudfix1` do Xadrez/Damas preparados para commit/push.

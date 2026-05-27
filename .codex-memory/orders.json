@@ -1,7 +1,50 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-27T01:46:57.855Z",
+  "lastUpdatedAt": "2026-05-27T18:13:10.997Z",
   "orders": [
+    {
+      "id": "2026-05-27-pubpaid3-cruzeiro-barzinho-local-slice1",
+      "createdAt": "2026-05-27T05:27:46Z",
+      "updatedAt": "2026-05-27T05:27:46Z",
+      "status": "local-slice-created-validated-static-visual-pending",
+      "source": "chat",
+      "rawRequest": "Continuar o trabalho do jogo PubPaid 3.0 / Cruzeiro do Sul Barzinho, usando local LLM/fallback e sem parar.",
+      "summary": "Criar fatia local separada do PubPaid 3.0 sem substituir o PubPaid canônico.",
+      "normalizedTasks": [
+        "retomar handoff PubPaid",
+        "não tocar no PubPaid canônico",
+        "criar protótipo separado",
+        "validar npm check e guard PubPaid",
+        "deixar próximo passo de validação visual e assets ChatGPT Imagem"
+      ],
+      "filesTouched": [
+        "cruzeiro-do-sul-barzinho/index.html",
+        "cruzeiro-do-sul-barzinho/src/app.js",
+        "cruzeiro-do-sul-barzinho/src/styles.css",
+        "cruzeiro-do-sul-barzinho/package.json",
+        "cruzeiro-do-sul-barzinho/docs/GAME_BIBLE.md",
+        "cruzeiro-do-sul-barzinho/docs/CHATGPT_IMAGE_PROMPTS.md",
+        "cruzeiro-do-sul-barzinho/scripts/smoke.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid3",
+        "cruzeiro-do-sul-barzinho",
+        "game",
+        "prototype",
+        "local"
+      ],
+      "nextSteps": [
+        "validar visualmente no Chrome",
+        "gerar assets finais no ChatGPT Imagem",
+        "implementar regras completas/online só após QA e aprovação"
+      ],
+      "notes": "Sem deploy/push/publicação. Browser/CDP indisponível na sessão; validação visual pendente."
+    },
     {
       "id": "2026-05-26-hermes-propaganda-loop-wife-profile-delegation",
       "createdAt": "2026-05-26T09:20:23-05:00",
@@ -2735,6 +2778,157 @@
         "confirmar deploy se disparar"
       ],
       "notes": "Retomada apos janela fechada; escopo separado de mudancas editoriais/dados locais."
+    },
+    {
+      "id": "2026-05-27-preparar-pacote-premium-de-propagandas-noticias-stories-fotos-para-executar-aman",
+      "createdAt": "2026-05-27T05:17:34.296Z",
+      "updatedAt": "2026-05-27T05:17:34.296Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Fazer propagandas no WhatsApp e Facebook, captacao de noticias para jornal e grupos, convites Telegram/Catalogo CZS, stories de manha e preparar 5 fotos cinematograficas da esposa; usar janela default do plugin sem mover; artes e legendas premium; executar somente com confirmacao.",
+      "summary": "Preparar pacote premium de propagandas/noticias/stories/fotos para executar amanha com validacao de destino.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-priorizar-pacote-premium-de-servicos-produtos-sites-e-pubpaid-para-envio-imediat",
+      "createdAt": "2026-05-27T05:20:46.318Z",
+      "updatedAt": "2026-05-27T05:20:46.318Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Saltar agora para frente a parte de propaganda de servicos, produtos, nossos sites e jogos; fazer anuncio do PubPaid com links e tudo.",
+      "summary": "Priorizar pacote premium de servicos, produtos, sites e PubPaid para envio imediato com links verificados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-execucao-de-propagandas-tentou-iniciar-no-whatsapp-mas-foi-bloqueada-por-travame",
+      "createdAt": "2026-05-27T08:45:13.285Z",
+      "updatedAt": "2026-05-27T08:45:13.285Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Tentar executar agora as propagandas no Chrome aberto; WhatsApp Business estava logado em VENDE-SE TUDO EM CZS, mas plugin/aba travou apos tentativa de envio longo e outra janela pediu QR.",
+      "summary": "Execucao de propagandas tentou iniciar no WhatsApp, mas foi bloqueada por travamento da aba e login/QR em outra janela.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-implementar-lazy-loading-real-e-investigar-carregamento-inicial-lento-da-home-pu",
+      "createdAt": "2026-05-27T13:07:48.809Z",
+      "updatedAt": "2026-05-27T13:07:48.809Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Otimizar carregamento real fatiado do website: intro cinematografica primeiro, barra depois, minimo 3s, preload maximo de cerca de 30% do conteudo relevante, carregar apenas o que esta no viewport/near viewport, nao carregar arquivos antigos/admin/backends/Cheffe Call fora do inicial, investigar Chrome aguardando resposta, testar mobile/desktop.",
+      "summary": "Implementar lazy loading real e investigar carregamento inicial lento da home publica.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-criar-listona-de-noticias-recentes-do-vale-do-jurua-cruzeiro-do-sul-com-copy-pro",
+      "createdAt": "2026-05-27T14:28:37.213Z",
+      "updatedAt": "2026-05-27T14:28:37.213Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "pegar todas as fontes possiveis e todas as noticias de ontem e hoje do Vale do Jurua/Cruzeiro do Sul, criar listona com legenda, site Catalogo CZS, promo veja tudo isso em um so lugar, fonte discreta, copy bacana, guardar para feed e story",
+      "summary": "Criar listona de noticias recentes do Vale do Jurua/Cruzeiro do Sul com copy promocional do Catalogo CZS e assets para feed/story.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-postar-anuncio-de-ventilador-usado-e-criar-anuncio-novo-de-servicos-digitais-par",
+      "createdAt": "2026-05-27T14:43:26.755Z",
+      "updatedAt": "2026-05-27T14:43:26.755Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "postar venda de ventilador usado e criar/divulgar nova propaganda de serviços digitais como websites, criação de jogos, sistemas para lojas, automações comerciais e divulgadores automáticos de Instagram/Facebook nos grupos de venda",
+      "summary": "Postar anúncio de ventilador usado e criar anúncio novo de serviços digitais para grupos de venda do WhatsApp.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-instalar-superpowers-obra-para-codex-e-hermes",
+      "createdAt": "2026-05-27T13:11:37.6593625-05:00",
+      "updatedAt": "2026-05-27T13:11:37.6593625-05:00",
+      "status": "closed-done",
+      "source": "chat",
+      "rawRequest": "Instalar/reaproveitar a skill Superpowers do obra/superpowers para Codex e Hermes.",
+      "summary": "Instalar pacote Superpowers oficial para Codex e completar skills Superpowers ausentes no Hermes sem sobrescrever adaptacoes locais.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "C:\\Users\\junio\\.codex\\skills\\brainstorming\\SKILL.md",
+        "C:\\Users\\junio\\.codex\\skills\\using-superpowers\\SKILL.md",
+        "C:\\Users\\junio\\AppData\\Local\\hermes\\skills\\software-development\\using-superpowers\\SKILL.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "skills",
+        "superpowers",
+        "codex",
+        "hermes"
+      ],
+      "nextSteps": [],
+      "notes": "Fonte oficial local reaproveitada de C:\\Users\\junio\\.codex\\.tmp\\plugins\\plugins\\superpowers; Hermes manteve as 5 adaptacoes existentes e recebeu apenas as 9 ausentes."
+    },
+    {
+      "id": "2026-05-27-otimizar-carregamento-fatiado-real-da-home-czs-mantendo-intro-cinematografica-e-",
+      "createdAt": "2026-05-27T18:13:10.997Z",
+      "updatedAt": "2026-05-27T18:13:10.997Z",
+      "status": "closed-done",
+      "source": "chat",
+      "rawRequest": "ok faça e vamos ver como fica",
+      "summary": "Otimizar carregamento fatiado real da home CZS mantendo intro cinematografica e evitando módulos fora da primeira tela",
+      "normalizedTasks": [
+        "split loading",
+        "critical css",
+        "first fold only",
+        "delay archive admin cheffe",
+        "desktop mobile qa"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "catalogo-app-core.js",
+        "early-home-surfaces.js",
+        "home-main-loader.js",
+        "home-critical.css"
+      ],
+      "assetRefs": [
+        "C:/Users/junio/AppData/Local/Temp/czs-desktop-final-gate-5600.png",
+        "C:/Users/junio/AppData/Local/Temp/czs-desktop-page-after-close.png",
+        "C:/Users/junio/AppData/Local/Temp/czs-mobile-final-fixed-5600.png"
+      ],
+      "tags": [
+        "czs",
+        "performance",
+        "lazy-loading",
+        "home"
+      ],
+      "nextSteps": [],
+      "notes": "Validado em desktop com Browser e mobile via Playwright fallback; aos 5.6s e 12.6s nao carrega script.js, arquivo/admin/cheffe ou premium-home; rolagem aciona modo completo por reader-intent."
     }
   ]
 }

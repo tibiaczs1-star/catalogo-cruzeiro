@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-27T01:36:48.329Z",
+  "lastUpdatedAt": "2026-05-27T18:13:24.094Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1190,6 +1190,136 @@
         "2026-05-27-corrigir-hud-e-intro-do-xadrez-pubpaid"
       ],
       "createdAt": "2026-05-27T01:36:48.329Z"
+    },
+    {
+      "id": "roteiro-premium-amanha-md",
+      "kind": "text",
+      "path": ".codex-temp/propaganda-20260527/ROTEIRO_PREMIUM_AMANHA.md",
+      "source": "workspace",
+      "note": "Roteiro premium para execucao amanha: WhatsApp, Facebook Marketplace, noticias, convites, stories e cinco conceitos cinematograficos da esposa.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T05:17:34.313Z"
+    },
+    {
+      "id": "pacote-saltar-agora-servicos-produtos-pubpaid-md",
+      "kind": "text",
+      "path": ".codex-temp/propaganda-20260527/PACOTE_SALTAR_AGORA_SERVICOS_PRODUTOS_PUBPAID.md",
+      "source": "workspace",
+      "note": "Pacote premium imediato para servicos, produtos, sites, Catalogo CZS e anuncio PubPaid com links verificados.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T05:20:46.326Z"
+    },
+    {
+      "id": "listona-jurua-atual",
+      "kind": "document",
+      "path": ".codex-temp/propaganda-20260527/listona-jurua-atual",
+      "source": "workspace",
+      "note": "Pacote listona Juruá/Cruzeiro do Sul 2026-05-27: 10 notícias com imagem, legenda, copy individual, feed/story e log de WhatsApp.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T14:40:08.566Z"
+    },
+    {
+      "id": "vendas-novas",
+      "kind": "document",
+      "path": ".codex-temp/propaganda-20260527/vendas-novas",
+      "source": "workspace",
+      "note": "Pacote de vendas novas 2026-05-27: ventilador usado e serviços digitais; 8 envios WhatsApp confirmados em grupos de venda.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T14:47:57.477Z"
+    },
+    {
+      "id": "sliced-loading-desktop-final-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-desktop-final.png",
+      "source": "workspace",
+      "note": "Smoke desktop da home apos otimizacao de carregamento fatiado: intro liberada, sem Cheffe/arquivo/manifest no boot.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T15:44:46.180Z"
+    },
+    {
+      "id": "sliced-loading-mobile-final-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-mobile-final.png",
+      "source": "workspace",
+      "note": "Smoke mobile da home apos otimizacao de carregamento fatiado: intro liberada, sem Cheffe/arquivo/manifest no boot.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T15:44:46.248Z"
+    },
+    {
+      "id": "sliced-loading-desktop-split2-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-desktop-split2.png",
+      "source": "workspace",
+      "note": "Smoke desktop apos split do script.js: hero real na primeira dobra e script.js pesado ausente ate interacao.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T16:00:53.129Z"
+    },
+    {
+      "id": "sliced-loading-mobile-split2-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-mobile-split2.png",
+      "source": "workspace",
+      "note": "Smoke mobile apos split do script.js: hero real na primeira dobra e script.js pesado ausente no boot inicial.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T16:00:53.197Z"
+    },
+    {
+      "id": "sliced-loading-desktop-csssplit-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-desktop-csssplit.png",
+      "source": "workspace",
+      "note": "Smoke desktop apos CSS escalonado: hero real, estilos aplicados, script.js ausente no boot.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T17:49:43.684Z"
+    },
+    {
+      "id": "sliced-loading-mobile-csssplit-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-mobile-csssplit.png",
+      "source": "workspace",
+      "note": "Smoke mobile apos CSS escalonado: hero real, estilos aplicados, script.js ausente no boot.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T17:49:43.751Z"
+    },
+    {
+      "id": "sliced-loading-desktop-criticalcss-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-desktop-criticalcss.png",
+      "source": "workspace",
+      "note": "Smoke desktop apos CSS critico: home-critical.css no boot, CSS grande depois de 5s, hero real e script.js ausente.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T17:54:32.109Z"
+    },
+    {
+      "id": "sliced-loading-mobile-criticalcss-png",
+      "kind": "image",
+      "path": ".codex-temp/sliced-loading-mobile-criticalcss.png",
+      "source": "workspace",
+      "note": "Smoke mobile apos CSS critico: home-critical.css no boot, CSS grande depois de 4.7s, hero real e script.js ausente.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-27T17:54:32.177Z"
+    },
+    {
+      "id": "czs-desktop-final-gate-5600",
+      "kind": "screenshot",
+      "path": "C:/Users/junio/AppData/Local/Temp/czs-desktop-final-gate-5600.png",
+      "source": "qa",
+      "note": "Desktop 5.6s: intro/first fold leve sem script.js, premium-home, arquivo, admin ou Cheffe.",
+      "linkedOrderIds": [
+        "2026-05-27-otimizar-carregamento-fatiado-real-da-home-czs-mantendo-intro-cinematografica-e-"
+      ],
+      "createdAt": "2026-05-27T18:13:24.069Z"
+    },
+    {
+      "id": "czs-desktop-page-after-close",
+      "kind": "screenshot",
+      "path": "C:/Users/junio/AppData/Local/Temp/czs-desktop-page-after-close.png",
+      "source": "qa",
+      "note": "Desktop depois de interação real: home visível e modo completo acionado por clique.",
+      "linkedOrderIds": [
+        "2026-05-27-otimizar-carregamento-fatiado-real-da-home-czs-mantendo-intro-cinematografica-e-"
+      ],
+      "createdAt": "2026-05-27T18:13:24.094Z"
     }
   ]
 }

@@ -1,25 +1,31 @@
 # Current State
 
-Updated: 2026-05-27T01:46:57.795Z
+Updated: 2026-05-27T18:13:36.241Z
 
 ## Active Goal
 
-- Sem titulo
+- Home CZS com carregamento fatiado real aplicado
 
 ## Summary
 
-Retomada de publicacao PubPaid: pacote legal docs/pubpaid/legal e chesshudfix1 do Xadrez/Damas revisados. Validacao local passou em node --check, git diff --check, JSON OK e npm run review:team com totalIssues 0.
+A home agora inicia com payload leve: preload de noticias limitado a 18 itens firstFold, CSS critico separado, home-main-loader no lugar de script.js direto, estilos premium/modulos auxiliares atras de viewport/intent/fallback tardio, e cinematic-parallax oculto no CSS critico para nao empurrar a home no mobile. Validacao: desktop Browser e mobile Playwright mostram que aos 5.6s/12.6s nao entram script.js, arquivo/admin/Cheffe ou premium-home; rolagem aciona modo completo por reader-intent.
 
 ## Next
 
-- Acompanhar push/deploy e confirmar /api/pubpaid/build online se Render iniciar novo deploy.
+- Testar em Chrome real do usuario se ainda aparecer aguardando resposta
+- Se for para publicar rodar fluxo de deploy normal
 
 ## Files In Focus
 
-- docs/pubpaid/legal
-- pubpaid-phaser/ui/domGameInterface.js
-- pubpaid-phaser.css
-- pubpaid.html
-- progress.md
-- CODEX_MEMORY.md
-- .codex-memory/orders.json
+- index.html
+- script.js
+- catalogo-app-core.js
+- early-home-surfaces.js
+- home-main-loader.js
+- home-critical.css
+
+## Assets In Focus
+
+- czs-desktop-final-gate-5600
+- czs-desktop-page-after-close
+- czs-mobile-final-fixed-5600
