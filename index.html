@@ -2085,7 +2085,7 @@
           }
         }, true);
 
-        const shellVersion = "20260527-fullpreload1";
+        const shellVersion = "20260527-visiblepreload1";
         const preloadStartedAt = Date.now();
         const firstLoadNotice = "Primeiro carregamento pode demorar; preparando 100% do jornal.";
         const versionStorageKey = "catalogo_shell_version";
@@ -2142,6 +2142,100 @@
 
         clearOldOnlineCaches();
 
+        const extractCssUrls = (value) => {
+          const urls = [];
+          String(value || "").replace(/url\((['"]?)(.*?)\1\)/gi, (_match, _quote, url) => {
+            const cleanUrl = String(url || "").trim();
+            if (cleanUrl && !cleanUrl.startsWith("data:")) urls.push(cleanUrl);
+            return _match;
+          });
+          return urls;
+        };
+
+        const isNearFirstViewport = (node) => {
+          if (!node || typeof node.getBoundingClientRect !== "function") return false;
+          const rect = node.getBoundingClientRect();
+          const height = window.innerHeight || document.documentElement.clientHeight || 800;
+          return rect.bottom >= -80 && rect.top <= height + Math.round(height * 0.35);
+        };
+
+        const collectVisibleAssetUrls = () => {
+          const urls = new Set();
+          const nodes = [
+            ...document.querySelectorAll(
+              ".page-shell, .site-header, .hero-newsroom-shell, .hero-tourism-backdrop, .hero-tourism-slide, .hero-newsroom-copy, .portal-status-ribbon, .main-layout, img, [style]"
+            )
+          ];
+
+          nodes.forEach((node) => {
+            if (!isNearFirstViewport(node)) return;
+            if (node.tagName === "IMG") {
+              const src = node.currentSrc || node.getAttribute("src");
+              if (src) urls.add(src);
+            }
+            const inlineStyle = node.getAttribute("style") || "";
+            extractCssUrls(inlineStyle).forEach((url) => urls.add(url));
+            try {
+              const computed = window.getComputedStyle(node);
+              ["backgroundImage", "borderImageSource", "listStyleImage"].forEach((prop) => {
+                extractCssUrls(computed[prop]).forEach((url) => urls.add(url));
+              });
+            } catch (_error) {
+              // Computed style can fail on detached nodes; ignore.
+            }
+          });
+
+          return [...urls]
+            .map((url) => {
+              try {
+                return new URL(url, window.location.href).href;
+              } catch (_error) {
+                return "";
+              }
+            })
+            .filter(Boolean)
+            .slice(0, 28);
+        };
+
+        const preloadImageUrl = (url, timeoutMs = 8500) =>
+          new Promise((resolve) => {
+            const image = new Image();
+            let done = false;
+            const finish = () => {
+              if (done) return;
+              done = true;
+              resolve();
+            };
+            window.setTimeout(finish, timeoutMs);
+            image.onload = () => {
+              if (typeof image.decode === "function") {
+                image.decode().then(finish).catch(finish);
+                return;
+              }
+              finish();
+            };
+            image.onerror = finish;
+            image.decoding = "async";
+            image.src = url;
+            if (image.complete) finish();
+          });
+
+        const waitForVisibleAssets = () =>
+          new Promise((resolve) => {
+            window.setTimeout(() => {
+              const urls = collectVisibleAssetUrls();
+              if (!urls.length) {
+                resolve();
+                return;
+              }
+              setSplashProgress(98, "Carregando a primeira tela visível");
+              Promise.race([
+                Promise.allSettled(urls.map((url) => preloadImageUrl(url))),
+                new Promise((done) => window.setTimeout(done, 10000))
+              ]).then(resolve);
+            }, 180);
+          });
+
         const waitForFullPreload = () => {
           if (window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__) return;
           window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__ = true;
@@ -2156,6 +2250,10 @@
             }
             window.addEventListener("load", resolve, { once: true });
           });
+          const waitForSoftPageLoad = Promise.race([
+            waitForPageLoad,
+            new Promise((resolve) => window.setTimeout(resolve, 6500))
+          ]);
           const waitForMinimum = new Promise((resolve) => {
             window.setTimeout(resolve, Math.max(0, minimumMs - (Date.now() - preloadStartedAt)));
           });
@@ -2178,7 +2276,7 @@
           const hardStop = new Promise((resolve) => window.setTimeout(resolve, maximumMs));
 
           Promise.race([
-            Promise.allSettled([waitForPageLoad, waitForKnownBoot, waitForMinimum]),
+            Promise.allSettled([waitForSoftPageLoad, waitForKnownBoot, waitForVisibleAssets(), waitForMinimum]),
             hardStop
           ]).then(() => {
             try {

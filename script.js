@@ -5979,11 +5979,11 @@ const resolveApiBases = () => {
   }
 
   configuredBases.forEach((base) => {
-    if (isFileMode || base === currentOrigin || (!isLocalHttp && isLocalLikeBase(base))) {
+    if (isFileMode || base === currentOrigin || (isLocalHttp && isLocalLikeBase(base))) {
       addBase(base);
     }
   });
-  if (isFileMode || configuredBase === currentOrigin || (!isLocalHttp && isLocalLikeBase(configuredBase))) {
+  if (isFileMode || configuredBase === currentOrigin || (isLocalHttp && isLocalLikeBase(configuredBase))) {
     addBase(configuredBase);
   }
 
