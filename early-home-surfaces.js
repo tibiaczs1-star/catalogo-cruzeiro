@@ -177,63 +177,6 @@
       getArticleText(item)
     );
 
-  const hydrateHero = (items) => {
-    const hero = document.querySelector(".hero-newsroom-shell");
-    if (!hero) {
-      return 0;
-    }
-
-    const [lead, ...secondary] = pick(items, null, 5);
-    if (!lead) {
-      return 0;
-    }
-
-    const href = getHref(lead);
-    const title = truncate(lead.title, 96);
-    const summary = getSummary(lead, 152);
-    const category = lead.category || lead.sourceName || "Destaque local";
-
-    const titleNode = hero.querySelector(".hero-newsroom-copy h1");
-    const summaryNode = hero.querySelector("[data-hero-tourism-summary-copy]");
-    const kickerNode = hero.querySelector("[data-hero-tourism-kicker]");
-    const metaTitleNode = hero.querySelector("[data-hero-tourism-title]");
-    const metaNoteNode = hero.querySelector("[data-hero-tourism-note]");
-    const metaLinkNode = hero.querySelector("[data-hero-tourism-meta-link]");
-
-    if (titleNode) titleNode.textContent = title;
-    if (summaryNode) summaryNode.textContent = summary;
-    if (kickerNode) kickerNode.textContent = category;
-    if (metaTitleNode) metaTitleNode.textContent = title;
-    if (metaNoteNode) metaNoteNode.textContent = summary;
-    if (metaLinkNode) metaLinkNode.setAttribute("href", href);
-    hero.querySelectorAll("[data-hero-read-current]").forEach((link) => {
-      link.setAttribute("href", href);
-      link.setAttribute("aria-label", `Ler a matéria em destaque: ${title}`);
-    });
-
-    const topicCards = [...document.querySelectorAll("[data-hero-topic-card]")];
-    secondary.slice(0, topicCards.length).forEach((item, index) => {
-      const card = topicCards[index];
-      const itemHref = getHref(item);
-      card.setAttribute("href", itemHref);
-      const photo = card.querySelector("[data-hero-topic-photo]");
-      const imageStyle = getSafeImageStyle(item).match(/style="([^"]+)"/)?.[1] || "";
-      if (photo && imageStyle) {
-        photo.setAttribute("style", imageStyle);
-      }
-      const categoryNode = card.querySelector("[data-hero-topic-category]");
-      const cardTitleNode = card.querySelector("[data-hero-topic-title]");
-      const cardSummaryNode = card.querySelector("[data-hero-topic-summary]");
-      if (categoryNode) categoryNode.textContent = item.category || item.sourceName || "Destaque local";
-      if (cardTitleNode) cardTitleNode.textContent = truncate(item.title, 64);
-      if (cardSummaryNode) cardSummaryNode.textContent = getSummary(item, 88);
-    });
-
-    window.dispatchEvent(new CustomEvent("catalogo:home-first-fold-ready", { detail: { reason: "early-hero" } }));
-    window.__CATALOGO_HOME_FIRST_FOLD_READY__ = true;
-    return 1 + secondary.length;
-  };
-
   const hydrateClimate = (items) => {
     const section = document.querySelector("#clima-alertas");
     const stack = section?.querySelector(".premium-alert-stack");
@@ -332,7 +275,7 @@
       return;
     }
 
-    const updated = hydrateHero(items) + hydrateClimate(items) + hydrateAgenda(items) + hydrateBottomNews(items);
+    const updated = hydrateClimate(items) + hydrateAgenda(items) + hydrateBottomNews(items);
     window.__CATALOGO_EARLY_SURFACES_READY__ = {
       at: Date.now(),
       items: items.length,

@@ -153,13 +153,7 @@
     },
     warmCriticalImages() {
       const urls = new Set();
-      const nearViewportLimit = Math.max(window.innerHeight || 720, 720) * 1.35;
       document.querySelectorAll("[style*='--thumb'], img[src]").forEach((node) => {
-        const rect = typeof node.getBoundingClientRect === "function" ? node.getBoundingClientRect() : null;
-        if (rect && rect.top > nearViewportLimit) {
-          return;
-        }
-
         if (node.tagName === "IMG") {
           urls.add(node.getAttribute("src"));
           return;
@@ -168,12 +162,12 @@
         const match = style.match(/--thumb\s*:\s*url\(['"]?([^'")]+)['"]?\)/i);
         if (match?.[1]) urls.add(match[1]);
       });
-      [...urls].slice(0, compact ? 3 : 5).forEach((src) => this.preloadImage(src));
+      [...urls].slice(0, compact ? 6 : 12).forEach((src) => this.preloadImage(src));
     }
   };
 
   const RoutePreloader = {
-    routes: [],
+    routes: ["./arquivo.html", "./catalogo-servicos.html", "./noticia.html", "./lifestile.html"],
     seen: new Set(),
     prefetch(href) {
       if (!href || this.seen.has(href) || location.protocol === "file:") return;
@@ -185,7 +179,7 @@
       document.head.appendChild(link);
     },
     init() {
-      scheduleIdle(() => this.routes.forEach((href) => this.prefetch(href)), 2600);
+      scheduleIdle(() => this.routes.slice(0, compact ? 2 : 4).forEach((href) => this.prefetch(href)), 2600);
       document.addEventListener(
         "pointerover",
         (event) => {
@@ -256,7 +250,7 @@
 
     afterFirstScreen(() => RoutePreloader.init(), compact ? 6200 : 0);
     afterFirstScreen(() => AssetManager.warmCriticalImages(), compact ? 7800 : 1900);
-    afterFirstScreen(() => CacheManager.register(), compact ? 16000 : 15000);
+    afterFirstScreen(() => CacheManager.register(), compact ? 9600 : 2400);
     window.dispatchEvent(new CustomEvent("catalogo:core-ready", { detail: { version: VERSION } }));
   }
 
