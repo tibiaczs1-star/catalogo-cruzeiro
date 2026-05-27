@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-26T22:47:10.258Z",
+  "lastUpdatedAt": "2026-05-27T01:36:48.329Z",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1157,6 +1157,39 @@
         "2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi"
       ],
       "createdAt": "2026-05-26T22:47:10.258Z"
+    },
+    {
+      "id": "hudfix-board-chess-compact",
+      "kind": "image",
+      "path": ".codex-temp/hudfix-board-chess-compact.png",
+      "source": "workspace",
+      "note": "Xadrez compacto: chip de lances sem sobreposicao, dica oculta e sem Mesas duplicado.",
+      "linkedOrderIds": [
+        "2026-05-27-corrigir-hud-e-intro-do-xadrez-pubpaid"
+      ],
+      "createdAt": "2026-05-27T01:36:47.941Z"
+    },
+    {
+      "id": "hudfix-board-chess-desktop",
+      "kind": "image",
+      "path": ".codex-temp/hudfix-board-chess-desktop.png",
+      "source": "workspace",
+      "note": "Xadrez desktop: dica de camera abaixo do chip de lances, sem sobreposicao.",
+      "linkedOrderIds": [
+        "2026-05-27-corrigir-hud-e-intro-do-xadrez-pubpaid"
+      ],
+      "createdAt": "2026-05-27T01:36:48.152Z"
+    },
+    {
+      "id": "hudfix-board-checkers-actions",
+      "kind": "image",
+      "path": ".codex-temp/hudfix-board-checkers-actions.png",
+      "source": "workspace",
+      "note": "Damas compacto: Mesas unico no canto inferior e Reiniciar demo separado.",
+      "linkedOrderIds": [
+        "2026-05-27-corrigir-hud-e-intro-do-xadrez-pubpaid"
+      ],
+      "createdAt": "2026-05-27T01:36:48.329Z"
     }
   ]
 }

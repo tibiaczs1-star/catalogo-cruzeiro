@@ -945,7 +945,7 @@ export function bindDomGameInterface(game) {
   const cameraHintMarkup = () => `
     <div class="ppg-camera-hint ppg-chess-camera-hint" aria-hidden="true">
       <i></i>
-      <span class="is-desktop-copy">Arraste a borda para ajustar a mesa. Roda aproxima.</span>
+      <span class="is-desktop-copy">Borda ajusta. Roda aproxima.</span>
       <span class="is-mobile-copy">Use toque na mesa e pinça para zoom.</span>
     </div>
   `;
@@ -1060,7 +1060,7 @@ export function bindDomGameInterface(game) {
     window.clearTimeout(local.chessIntroTimer);
     window.clearTimeout(local.chessIntroCreditsTimer);
     const urlParams = new URLSearchParams(window.location.search || "");
-    const introDuration = urlParams.get("intro") === "1" ? 8500 : 4600;
+    const introDuration = urlParams.get("intro") === "1" ? 7500 : 3600;
     local.chessIntroTimer = window.setTimeout(() => {
       finishChessCinematic();
     }, introDuration);
@@ -3763,7 +3763,6 @@ export function bindDomGameInterface(game) {
         `${gameId}:${match.id}:${seat}:${match.status}:${turnSeat}:${match.moveCount || 0}:${state.fen || ""}:${state.inCheck}:${state.legalMoves?.length || 0}:${local.chessSelected}:${state.lastMove?.lan || ""}:${local.demoChessAiThinking}:${local.demoChessAiPreviewMove?.from || ""}:${local.demoChessAiPreviewMove?.to || ""}:${chessMoveFeedback}:${local.chessIntroLocked}:${local.chessIntroPhase}:${local.chessIntroCredits}:${local.chessBoardFixed}:${awaitingChessCoin}`,
         `<section class="ppg-chess-arena${demoMode && local.demoChessAiThinking ? " is-ai-thinking" : ""}${chessCinematicActive ? " is-cinematic" : ""}${state.checkmate ? " is-checkmate" : ""}">
           <div class="ppg-chess-orbit-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-          <button type="button" class="ppg-chess-exit" data-dom-open-lobby>Mesas</button>
           <button type="button" class="ppg-chess-resign" data-dom-generic-forfeit>${demoMode ? "Sair" : "Desistir"}</button>
           <div class="ppg-board-score-chip ppg-chess-score-chip" aria-live="polite">
             <span>xadrez</span>

@@ -1,22 +1,21 @@
 # Handoff
 
-Updated: 2026-05-26T22:47:26.328Z
+Updated: 2026-05-27T01:46:57.844Z
 
-Rodada PubPaid checkersai1 validada: Damas demo agora dispara primeiro lance automatico quando a moeda escolhe Maquina; teste natural confirmou Maquina pensando -> Sua vez, sem AudioContext blocked e sem Texture key error. Cards do lobby centralizados e intro da Damas encurtada 0,5s.
+Subida PubPaid publish1 retomada: inclui pacote legal assinavel e chesshudfix1 do HUD Xadrez/Damas. Validacoes de retomada OK: node --check, git diff --check, JSON OK e review:team totalIssues 0. Mudancas editoriais/dados paralelas nao fazem parte do escopo PubPaid desta subida.
 
 ## Next
 
-- Commit/push
-- poll Render ate 20260526-checkersai1 e abrir Chrome Default mobile online
+- Depois do push
+- se houver deploy automatico
+- confirmar Render online e /api/pubpaid/build.
 
 ## Files In Focus
 
-- pubpaid.html
-- pubpaid-phaser.css
-- pubpaid-phaser/app.js
+- docs/pubpaid/legal
 - pubpaid-phaser/ui/domGameInterface.js
-- server.js
-
-## Related Orders
-
-- 2026-05-26-corrigir-fluxo-da-moeda-e-inicio-do-xadrez-pubpaid-mobile-melhorar-pecas-3d-mobi
+- pubpaid-phaser.css
+- pubpaid.html
+- progress.md
+- CODEX_MEMORY.md
+- .codex-memory/orders.json

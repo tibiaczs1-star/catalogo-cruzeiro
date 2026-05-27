@@ -8,6 +8,13 @@ Atualizado: 2026-05-17
 
 O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 
+## Atualizacao 2026-05-26 - chesshudfix1
+
+- Xadrez: dica de camera encurtada e deslocada para nao sobrepor o chip de lances; em paisagem compacta ela fica oculta.
+- Xadrez: intro reduzida em 1 segundo no fallback (`4600 -> 3600`, `8500 -> 7500`).
+- Xadrez/Damas: removido `Mesas` duplicado do HUD; Damas mantém um unico `Mesas` no canto inferior e `Reiniciar demo` no canto oposto.
+- Validacao: `node --check`, `npm run guard:pubpaid`, `git diff --check`, Playwright em Xadrez compacto/desktop e Damas compacto sem erros de console; evidencias em `.codex-temp/hudfix-board-*.png`.
+
 ## Atualizacao 2026-05-22 - pubpaidfix3
 
 English execution prompt used: "Fix three focused PubPaid gameplay issues without redesigning the games: hide the mobile sound button while Checkers/Chess/Pool tables are active; make Chess Demo show clear lobby and exit controls, require an explicit player click before the coin/intro starts, and prevent overlap in mobile landscape; lock Vale Pool aim as soon as the player enters power measurement so later taps or pointer movement only affect shot power; add a waiter speech bubble inside the bar saying 'Click me to start betting.'"

@@ -11996,3 +11996,22 @@ body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="che
     left: max(8px, var(--ppg-safe-left));
   }
 }
+
+/* Chess/checkers HUD cleanup: no stacked menus over the score chip. */
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-board-stage > .ppg-camera-hint {
+  top: calc(max(10px, var(--ppg-safe-top)) + 52px);
+  left: max(10px, var(--ppg-safe-left));
+  max-width: min(280px, calc(100dvw - 20px));
+}
+
+body.pubpaid-phaser-page .ppg-dom-game-ui.is-checkers .ppg-checkers-sidecar .ppg-dom-actions {
+  justify-self: center;
+  width: min(190px, 100%);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 760px), (max-height: 430px) {
+  body.pubpaid-phaser-page .ppg-dom-game-ui.is-table .ppg-dom-table[data-game="chess"] .ppg-chess-board-stage > .ppg-camera-hint {
+    display: none !important;
+  }
+}

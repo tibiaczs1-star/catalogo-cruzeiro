@@ -1,6 +1,19 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-05-22
+Atualizado: 2026-05-26
+
+## Rodada Atual - 20260527-pubpaid-publish1
+
+- Subida PubPaid retomada após janela fechada: pacote legal `docs/pubpaid/legal/` mais correção visual `chesshudfix1` do Xadrez/Damas preparados para commit/push.
+- Validação de retomada: `node --check pubpaid-phaser/ui/domGameInterface.js`, `git diff --check`, JSON local OK e `npm run review:team` com PubPaid guard OK e `totalIssues: 0`.
+- Arquivos de runtime em foco: `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser.css`, `pubpaid.html` e `progress.md`; mudanças grandes de dados/editorial ficaram fora do escopo desta subida.
+
+## Rodada Atual - 20260526-pubpaid-legal1
+
+- PubPaid recebeu pacote legal assinável em `docs/pubpaid/legal/`: manifesto, documento operacional/termo de responsabilidade, matriz de questões legais e go/no-go, mais README de uso.
+- O pacote foi escrito como minuta operacional pronta para assinatura interna, mas com trava expressa: dinheiro real, prêmio, taxa/rake, torneio pago, saque automatizado ou publicidade de ganho ficam bloqueados até parecer jurídico, contábil, fiscal, LGPD e pagamento.
+- Fontes oficiais consultadas: Planalto, Ministério da Fazenda/SPA para apostas de quota fixa e Banco Central para Pix.
+- Estado operacional refletido no documento: Damas e Xadrez podem seguir em teste/demonstração, Sinuca permanece fora do online até correção e nova validação.
 
 ## Rodada Atual - 20260522-fix245
 

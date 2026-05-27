@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-26T21:16:56.376Z",
+  "lastUpdatedAt": "2026-05-27T01:46:57.855Z",
   "orders": [
     {
       "id": "2026-05-26-hermes-propaganda-loop-wife-profile-delegation",
@@ -2642,6 +2642,99 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-26-criar-pacote-legal-assinavel-do-pubpaid",
+      "createdAt": "2026-05-26T23:06:57.658Z",
+      "updatedAt": "2026-05-26T23:06:57.658Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "me entregue o documento e o manisfesto e as questoes legais desse jogo prontas pra assinar",
+      "summary": "Criar pacote legal assinavel do PubPaid",
+      "normalizedTasks": [
+        "manifesto legal PubPaid",
+        "documento operacional assinavel",
+        "mapa legal go no-go",
+        "trava dinheiro real ate parecer"
+      ],
+      "filesTouched": [
+        "docs/pubpaid/legal/README.md",
+        "docs/pubpaid/legal/PUBPAID_MANIFESTO.md",
+        "docs/pubpaid/legal/PUBPAID_DOCUMENTO_OPERACIONAL_ASSINATURA.md",
+        "docs/pubpaid/legal/PUBPAID_QUESTOES_LEGAIS_E_GO_NO_GO.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "legal",
+        "manifesto",
+        "lgpd",
+        "pix",
+        "apostas"
+      ],
+      "nextSteps": [],
+      "notes": "Pacote criado como minuta pronta para assinatura interna; operacao com dinheiro real segue bloqueada ate parecer juridico contabil e revisao de pagamento."
+    },
+    {
+      "id": "2026-05-27-corrigir-hud-e-intro-do-xadrez-pubpaid",
+      "createdAt": "2026-05-27T01:36:30.446Z",
+      "updatedAt": "2026-05-27T01:36:30.446Z",
+      "status": "chesshudfix1-implemented-validated-local",
+      "source": "chat",
+      "rawRequest": "corrija essa sobreposicao de menus; tire 1 segundo da introducao do xadrez; remover Mesas duplicado e melhorar posicao dos botoes",
+      "summary": "Corrigir HUD e intro do Xadrez PubPaid",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        "progress.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/hudfix-board-chess-compact.png",
+        ".codex-temp/hudfix-board-chess-desktop.png",
+        ".codex-temp/hudfix-board-checkers-actions.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "xadrez",
+        "damas",
+        "hud",
+        "intro",
+        "menus"
+      ],
+      "nextSteps": [],
+      "notes": "Xadrez sem sobreposicao entre chip de lances e dica de camera; intro fallback 1s menor; Damas sem Mesas duplicado."
+    },
+    {
+      "id": "2026-05-27-subir-alteracoes-recentes-do-pubpaid",
+      "createdAt": "2026-05-27T01:45:18.102Z",
+      "updatedAt": "2026-05-27T01:46:57.855Z",
+      "status": "validated-for-push",
+      "source": "chat",
+      "rawRequest": "opa suba as alterações no pub paid, porque eu fechei a janela sem querer",
+      "summary": "Subir alteracoes recentes do PubPaid",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser.css",
+        "pubpaid.html",
+        "progress.md",
+        "docs/pubpaid/legal"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "publish",
+        "deploy",
+        "git"
+      ],
+      "nextSteps": [
+        "commitar escopo PubPaid",
+        "push origin/main",
+        "confirmar deploy se disparar"
+      ],
+      "notes": "Retomada apos janela fechada; escopo separado de mudancas editoriais/dados locais."
     }
   ]
 }
