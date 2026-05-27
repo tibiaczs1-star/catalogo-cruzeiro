@@ -1,162 +1,162 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-22T19:52:00.330Z
-Escopo: 360/505 itens recentes.
+Gerado em: 2026-05-27T19:25:38.604Z
+Escopo: 360/709 itens recentes.
 
 ## Resumo
-- Gates: P0 96, P1 173, P2 91
-- Aprovacao humana exigida: 96
-- Pendencias de fonte: 96
-- Pendencias visuais: 281
+- Gates: P0 92, P1 186, P2 82
+- Aprovacao humana exigida: 92
+- Pendencias de fonte: 92
+- Pendencias visuais: 294
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: STF julga nesta sexta prisão preventiva de primo de Vorcaro
+- P0 human-approval: Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no interior do Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: STF julga nesta sexta prisão preventiva de primo de Vorcaro
+- P0 ide-fix: Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no interior do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: STF julga nesta sexta prisão preventiva de primo de Vorcaro
+- P0 ide-fix: Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no interior do Acre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Polícia pede informações relacionadas à investigação do ex-príncipe Andrew
+- P0 human-approval: SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Polícia pede informações relacionadas à investigação do ex-príncipe Andrew
+- P0 ide-fix: SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Polícia pede informações relacionadas à investigação do ex-príncipe Andrew
+- P0 ide-fix: SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Deolane ligada ao PCC: o que se sabe e quais são os próximos passos
+- P0 human-approval: Carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-feira
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Deolane ligada ao PCC: o que se sabe e quais são os próximos passos
+- P0 ide-fix: Carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-feira
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Deolane ligada ao PCC: o que se sabe e quais são os próximos passos
+- P0 ide-fix: Carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-feira
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Deolane e PCC: polícia aponta relação antiga entre influenciadora e facção
+- P0 human-approval: Menina de 14 anos com deficiência intelectual é estuprada por 12 em SP
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Deolane e PCC: polícia aponta relação antiga entre influenciadora e facção
+- P0 ide-fix: Menina de 14 anos com deficiência intelectual é estuprada por 12 em SP
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Deolane e PCC: polícia aponta relação antiga entre influenciadora e facção
+- P0 ide-fix: Menina de 14 anos com deficiência intelectual é estuprada por 12 em SP
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Com mais de R$ 6 milhões destinados por Coronel Ulysses, iniciaram hoje os atendimentos do programa “Enxerga Mais Rio Branco” na Escola Mariano da Silva
+- P0 human-approval: Médico é preso em Roraima suspeito de ligação com organização criminosa
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Com mais de R$ 6 milhões destinados por Coronel Ulysses, iniciaram hoje os atendimentos do programa “Enxerga Mais Rio Branco” na Escola Mariano da Silva
+- P0 ide-fix: Médico é preso em Roraima suspeito de ligação com organização criminosa
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Com mais de R$ 6 milhões destinados por Coronel Ulysses, iniciaram hoje os atendimentos do programa “Enxerga Mais Rio Branco” na Escola Mariano da Silva
+- P0 ide-fix: Médico é preso em Roraima suspeito de ligação com organização criminosa
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Suspeita de envolvimento em assalto a motorista de app é presa no Acre
+- P0 human-approval: Governo coloca mais de 30 PMs à disposição do TJAC até 2027; entenda
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Suspeita de envolvimento em assalto a motorista de app é presa no Acre
+- P0 ide-fix: Governo coloca mais de 30 PMs à disposição do TJAC até 2027; entenda
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Suspeita de envolvimento em assalto a motorista de app é presa no Acre
+- P0 ide-fix: Governo coloca mais de 30 PMs à disposição do TJAC até 2027; entenda
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: PRF apreende 90 kg de skunk em fiscalização na BR-317, no Acre; motorista confessou transporte de droga
+- P0 human-approval: Polícia cumpre mandado de prisão preventiva de investigado por roubos em farmácia no Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: PRF apreende 90 kg de skunk em fiscalização na BR-317, no Acre; motorista confessou transporte de droga
+- P0 ide-fix: Polícia cumpre mandado de prisão preventiva de investigado por roubos em farmácia no Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: PRF apreende 90 kg de skunk em fiscalização na BR-317, no Acre; motorista confessou transporte de droga
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual, p0-com-ilustracao-generica.
+- P0 ide-fix: Polícia cumpre mandado de prisão preventiva de investigado por roubos em farmácia no Acre
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Polícia Federal recusa proposta de delação premiada de Vorcaro
+- P0 human-approval: Polícia Civil prende autor de vários roubos em Cruzeiro do Sul durante cumprimento de mandado
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Polícia Federal recusa proposta de delação premiada de Vorcaro
+- P0 ide-fix: Polícia Civil prende autor de vários roubos em Cruzeiro do Sul durante cumprimento de mandado
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Polícia Federal recusa proposta de delação premiada de Vorcaro
+- P0 ide-fix: Polícia Civil prende autor de vários roubos em Cruzeiro do Sul durante cumprimento de mandado
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- COTAÇÃO DE PREÇO
-  - COTAÇÃO DE PREÇO: veja os pontos principais
-  - Entenda cOTAÇÃO DE PREÇO
-  - Prefeitura de CZS informa: COTAÇÃO DE PREÇO
-- COTAÇÃO DE PREÇOS
-  - COTAÇÃO DE PREÇOS: veja os pontos principais
-  - Entenda cOTAÇÃO DE PREÇOS
-  - Prefeitura de CZS informa: COTAÇÃO DE PREÇOS
-- PE N°010/2026 - Aviso de Licitação
-  - PE N°010/2026 - Aviso de Licitação: veja os pontos principais
-  - Entenda pE N°010/2026 - Aviso de Licitação
-  - Prefeitura de CZS informa: PE N°010/2026 - Aviso de Licitação
-- Q10: o que é essa coenzima e quando tomar
-  - Q10: o que é essa coenzima e quando tomar: veja os pontos principais
-  - Entenda q10: o que é essa coenzima e quando tomar
-  - CNN Brasil informa: Q10: o que é essa coenzima e quando tomar
-- Governo anuncia novo bloqueio no orçamento nesta sexta (22)
-  - Governo anuncia novo bloqueio no orçamento nesta sexta (22): veja os pontos principais
-  - Entenda governo anuncia novo bloqueio no orçamento nesta sexta (22)
-  - CNN Brasil informa: Governo anuncia novo bloqueio no orçamento nesta sexta (22)
-- Análise: Como a guerra no Oriente Médio afetou a economia dos EUA?
-  - Análise: Como a guerra no Oriente Médio afetou a economia dos EUA: veja os pontos principais
-  - Entenda análise: Como a guerra no Oriente Médio afetou a economia dos EUA
-  - CNN Brasil informa: Análise: Como a guerra no Oriente Médio afetou a economia dos EUA
-- STF começa julgamento sobre mudanças na Lei da Ficha Limpa
-  - STF começa julgamento sobre mudanças na Lei da Ficha Limpa: veja os pontos principais
-  - Entenda sTF começa julgamento sobre mudanças na Lei da Ficha Limpa
-  - CNN Brasil informa: STF começa julgamento sobre mudanças na Lei da Ficha Limpa
-- 6×1 tem último seminário enquanto espera por relatório final de Prates
-  - 6×1 tem último seminário enquanto espera por relatório final de Prates: veja os pontos principais
-  - Entenda 6×1 tem último seminário enquanto espera por relatório final de Prates
-  - CNN Brasil informa: 6×1 tem último seminário enquanto espera por relatório final de Prates
-- É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios
-  - É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios: veja os pontos princ
-  - Entenda é o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios
-  - G1 Pop & Arte informa: É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafio
-- Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu
-  - Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu: veja o
-  - Entenda almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu
-  - G1 Pop & Arte informa: Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativ
-- STF julga nesta sexta prisão preventiva de primo de Vorcaro
-  - STF julga nesta sexta prisão preventiva de primo de Vorcaro: veja os pontos principais
-  - O que se sabe sobre sTF julga nesta sexta prisão preventiva de primo de Vorcaro
-  - CNN Brasil informa: STF julga nesta sexta prisão preventiva de primo de Vorcaro
-- Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
-  - Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22): veja os pontos principais
-  - Entenda imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
-  - CNN Brasil informa: Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
+- Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca
+  - Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca: veja os pontos principais
+  - Entenda trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca
+  - Jurua Online informa: Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca
+- Colisão entre motos deixa três pessoas feridas na Baixada da Sobral, em Rio Branco
+  - Colisão entre motos deixa três pessoas feridas na Baixada da Sobral, em Rio Branco: veja os pontos principais
+  - Entenda colisão entre motos deixa três pessoas feridas na Baixada da Sobral, em Rio Branco
+  - Folha do Acre informa: Colisão entre motos deixa três pessoas feridas na Baixada da Sobral, em Rio Branco
+- Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no interior do Acre
+  - Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no interior do Acre: veja
+  - O que se sabe sobre confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no int
+  - Folha do Acre informa: Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no
+- Ex-prefeito de Xapuri é intimado pelo TCE em investigação sobre despesas com combustível
+  - Ex-prefeito de Xapuri é intimado pelo TCE em investigação sobre despesas com combustível: veja os pontos princ
+  - Entenda ex-prefeito de Xapuri é intimado pelo TCE em investigação sobre despesas com combustível
+  - Folha do Acre informa: Ex-prefeito de Xapuri é intimado pelo TCE em investigação sobre despesas com combustíve
+- SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul
+  - SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul: veja os pontos principais
+  - O que se sabe sobre sEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul
+  - Folha do Acre informa: SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul
+- Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter
+  - Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter: veja os pontos princ
+  - Entenda comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter
+  - Jurua Online informa: Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter
+- Carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-feira
+  - Carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-feira: veja os pontos p
+  - O que se sabe sobre carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-fei
+  - Folha do Acre informa: Carreta tomba e interdita a BR-364 próximo à divisa entre Rondônia e Acre nesta quarta-
+- Menina de 14 anos com deficiência intelectual é estuprada por 12 em SP
+  - Menina de 14 anos com deficiência intelectual é estuprada por 12 em SP: veja os pontos principais
+  - O que se sabe sobre menina de 14 anos com deficiência intelectual é estuprada por 12 em SP
+  - Jurua Online informa: Menina de 14 anos com deficiência intelectual é estuprada por 12 em SP
+- Médico é preso em Roraima suspeito de ligação com organização criminosa
+  - Médico é preso em Roraima suspeito de ligação com organização criminosa: veja os pontos principais
+  - O que se sabe sobre médico é preso em Roraima suspeito de ligação com organização criminosa
+  - Jurua em Tempo informa: Médico é preso em Roraima suspeito de ligação com organização criminosa
+- Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no município
+  - Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no município: veja
+  - Entenda prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no municíp
+  - Folha do Acre informa: Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem
+- Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão
+  - Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão: veja os
+  - Entenda prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão
+  - Folha do Acre informa: Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentã
+- Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia
+  - Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia: veja os pontos
+  - Entenda deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia
+  - Folha do Acre informa: Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da B
 
 ## Formatos especiais seguros
-- agenda visual: COTAÇÃO DE PREÇO
+- agenda visual: Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: COTAÇÃO DE PREÇOS
+- agenda visual: Colisão entre motos deixa três pessoas feridas na Baixada da Sobral, em Rio Branco
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: PE N°010/2026 - Aviso de Licitação
+- agenda visual: Ex-prefeito de Xapuri é intimado pelo TCE em investigação sobre despesas com combustível
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Q10: o que é essa coenzima e quando tomar
+- agenda visual: Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Governo anuncia novo bloqueio no orçamento nesta sexta (22)
+- agenda visual: Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no município
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Análise: Como a guerra no Oriente Médio afetou a economia dos EUA?
+- agenda visual: Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: STF começa julgamento sobre mudanças na Lei da Ficha Limpa
+- agenda visual: Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: 6×1 tem último seminário enquanto espera por relatório final de Prates
+- agenda visual: Assembleia Legislativa altera tabela salarial de servidores efetivos
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: É o fim das gravadoras? Modelo independente cresce no mercado musical, mas traz desafios
+- agenda visual: Governador Mailza Assis lança programa de R$ 2,5 milhões para fortalecer agricultura familiar e combater fome
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Almodóvar pensa os limites da criação em 'Natal Amargo', filme 'truncado' e pouco cativante; g1 já viu
+- agenda visual: “Estamos dando reajuste acima da inflação”, diz Alysson sobre greve dos servidores da Educação em Rio Branco
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Imposto de Renda: Receita abre consulta ao 1º lote de restituição hoje (22)
+- agenda visual: Longo apela ao TCE para tratar com prioridade convocação do concurso dos Bombeiros
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Renault Niagara é confirmada: picape feita na Argentina mira Toro e Tukan
+- agenda visual: Estado anuncia R$ 2 milhões para executar melhorias no Parque Industrial de Rio Branco
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

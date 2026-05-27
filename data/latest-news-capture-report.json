@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-05-22T07:38:02.067Z",
-  "finishedAt": "2026-05-22T07:38:06.669Z",
-  "capturedItems": 269,
-  "capturedToday": 95,
-  "activeWindowItems": 420,
-  "archiveItems": 1000,
+  "startedAt": "2026-05-27T19:25:13.647Z",
+  "finishedAt": "2026-05-27T19:25:19.209Z",
+  "capturedItems": 258,
+  "capturedToday": 193,
+  "activeWindowItems": 480,
+  "archiveItems": 698,
   "reports": [
     {
       "source": "ac24horas",
@@ -100,7 +100,7 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "mode": "prefeitura-wix-home"
     },
     {
