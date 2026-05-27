@@ -15,6 +15,15 @@ O workspace foi limpo para tratar PubPaid como um unico jogo canonico.
 - Xadrez/Damas: removido `Mesas` duplicado do HUD; Damas mantém um unico `Mesas` no canto inferior e `Reiniciar demo` no canto oposto.
 - Validacao: `node --check`, `npm run guard:pubpaid`, `git diff --check`, Playwright em Xadrez compacto/desktop e Damas compacto sem erros de console; evidencias em `.codex-temp/hudfix-board-*.png`.
 
+## Atualizacao 2026-05-27 - chessfast1
+
+- Xadrez: abertura encurtada no fluxo `video -> creditos -> moeda -> tabuleiro`, com creditos e resultado de moeda mais rápidos.
+- Xadrez Demo: resposta da maquina reduzida de 3s para 0,9s e textos ajustados para nao prometer espera longa.
+- Botao de camera/mesa: copy trocada de `Mesa fixa/Girar rival` para `Mesa normal/Mesa livre`; regra final que escondia o botao no Xadrez foi removida.
+- `Mesa livre` agora da feedback visual imediato no Xadrez e libera a mesa para rotacao; smoke local confirmou `Mesa normal -> Mesa livre`, `turnYaw 0deg -> 42deg`, 64 casas e 32 pecas.
+- Build/cache-bust local: `20260527-chessfast1`.
+- Validacao: `node --check` em `domGameInterface.js`, `app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; `/api/pubpaid/build`; Playwright local com evidencias em `.codex-temp/chessfast1-board-after-free.png`.
+
 ## Atualizacao 2026-05-22 - pubpaidfix3
 
 English execution prompt used: "Fix three focused PubPaid gameplay issues without redesigning the games: hide the mobile sound button while Checkers/Chess/Pool tables are active; make Chess Demo show clear lobby and exit controls, require an explicit player click before the coin/intro starts, and prevent overlap in mobile landscape; lock Vale Pool aim as soon as the player enters power measurement so later taps or pointer movement only affect shot power; add a waiter speech bubble inside the bar saying 'Click me to start betting.'"

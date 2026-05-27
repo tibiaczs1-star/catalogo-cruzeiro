@@ -2,6 +2,22 @@
 
 Atualizado: 2026-05-27
 
+## Rodada Atual - 20260527-chessfast1
+
+- Xadrez PubPaid corrigido em escopo pontual: abertura acelerada, creditos/moeda mais rapidos, IA Demo reduzida para resposta em 0,9s e transicoes 3D menos lentas.
+- Botao de mesa do Xadrez voltou a aparecer: regra final que escondia `.ppg-chess-camera` foi removida.
+- Copy trocada de `Mesa fixa/Girar rival` para `Mesa normal/Mesa livre`; no smoke local o botao mudou corretamente e a mesa livre deu feedback visual (`turnYaw 0deg -> 42deg`).
+- Build/cache-bust local: `20260527-chessfast1`.
+- Validacao local: `node --check` em `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser/app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; `/api/pubpaid/build`; Playwright em Xadrez mobile landscape com 64 casas/32 pecas. Evidencia: `.codex-temp/chessfast1-board-after-free.png`.
+
+## Rodada Atual - 20260527-hermes-nvidia-stability1
+
+- Hermes foi corrigido para manter `openai-codex/gpt-5.5` como rota principal de chat/contexto e usar NVIDIA apenas como fallback validado, nao como modelo principal.
+- Varrida NVIDIA registrada em `.codex-temp/hermes-nvidia-stability-20260527.json`: melhores candidatos foram `nvidia/llama-3.3-nemotron-super-49b-v1.5` (6/6, media 1,23s), `meta/llama-3.2-3b-instruct` (6/6, media 1,85s) e `nvidia/llama-3.3-nemotron-super-49b-v1` (6/6, media 1,88s).
+- `qwen/qwen3-coder-480b-a35b-instruct` tambem respondeu 6/6 na varrida, mas segue fora do chat normal pela regra do usuario: Qwen/Coder e apenas para instrucao explicita de codigo/background.
+- `C:\Users\junio\AppData\Local\hermes\config.yaml` agora usa fallback: NVIDIA v1.5 -> NVIDIA llama 3.2 3b -> NVIDIA v1 -> Gemini -> Ollama local `llama3.2:3b`.
+- Backup da configuracao antes da troca: `C:\Users\junio\AppData\Local\hermes\backups\codex-nvidia-stable-fallback-20260527_162121-config.yaml`.
+
 ## Rodada Atual - 20260527-editorial-politica1
 
 - Diretriz CZS atualizada: linha editorial regional/conservadora, cetica com propaganda estatal e manchete militante, priorizando impacto real no Vale do Jurua.

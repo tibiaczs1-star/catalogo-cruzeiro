@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-27T19:52:59.805Z",
+  "lastUpdatedAt": "2026-05-27T21:39:16.171Z",
   "orders": [
     {
       "id": "2026-05-27-pubpaid3-cruzeiro-barzinho-local-slice1",
@@ -2967,6 +2967,66 @@
         "validar online apos deploy"
       ],
       "notes": "Filtro preserva utilidade publica local, como calendario/cadastro/prazo, e bloqueia chamadas opinativas/sensacionalistas como picareta, Pinoquio, tapa na cara, jogo duplo, ato falho e propaganda Bolsa Familia/IDH."
+    },
+    {
+      "id": "2026-05-27-fazer-diagnostico-geral-de-continuidade-local-hermes-e-separar-relatorio-real-de",
+      "createdAt": "2026-05-27T20:36:35.545Z",
+      "updatedAt": "2026-05-27T20:36:35.545Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuario questiona estado real do PubPaid 3.0 e relata que Hermes/local nao esta funcionando de forma confiavel por API/comunicacao; pede estudo geral para evitar ficar off.",
+      "summary": "Fazer diagnostico geral de continuidade local/Hermes e separar relatorio real de PubPaid 3.0.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-criar-fila-de-stories-por-prioridade-geografica-com-propaganda-a-cada-5-stories-",
+      "createdAt": "2026-05-27T20:39:49.098Z",
+      "updatedAt": "2026-05-27T20:39:49.098Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "A cada 5 stories, colocar 1 propaganda. Comecar com noticias de Cruzeiro do Sul, depois subir para regiao/Jurua, depois Acre/estado e por fim Brasil. Fazer triagem e postar nossos servicos, incluindo divulgacao 24h por dia, criacao de avatares, musicas e outros servicos tecnologicos vendaveis para financiar o projeto.",
+      "summary": "Criar fila de stories por prioridade geografica com propaganda a cada 5 stories e novos servicos digitais.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-validar-estabilidade-nvidia-e-atualizar-fallback-hermes-sem-trocar-contexto-prin",
+      "createdAt": "2026-05-27T21:22:48.436Z",
+      "updatedAt": "2026-05-27T21:22:48.436Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Fazer nova varrida de testes na NVIDIA, gastar chamadas se precisar, descobrir modelos estáveis e configurar Hermes para verificar/trocar pelos mais estáveis mantendo contexto.",
+      "summary": "Validar estabilidade NVIDIA e atualizar fallback Hermes sem trocar contexto principal.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-27-corrigir-velocidade-abertura-do-xadrez-pubpaid-e-botao-mesa-normal-mesa-livre",
+      "createdAt": "2026-05-27T21:39:16.171Z",
+      "updatedAt": "2026-05-27T21:39:16.171Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o xadrez ta travando muito e a abertura tambem, e o botão de mesa livre nao funciona; trocar copy Girar rival por Mesa livre/normal e corrigir velocidade",
+      "summary": "Corrigir velocidade/abertura do Xadrez PubPaid e botão Mesa normal/Mesa livre",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260526-checkersai1";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260527-chessfast1";
 import {
   choosePoolSetup,
   confirmPvpReady,
@@ -11,7 +11,7 @@ import {
   playCards21Action,
   playTrucoCard,
   shootPool
-} from "../services/pvpService.js?v=20260526-checkersai1";
+} from "../services/pvpService.js?v=20260527-chessfast1";
 import {
   advanceCheckersTournamentTest,
   fetchCheckersTournamentState,
@@ -20,7 +20,7 @@ import {
   moveCheckersTournament,
   registerCheckersTournament,
   startCheckersTournamentTest
-} from "../services/tournamentService.js?v=20260526-checkersai1";
+} from "../services/tournamentService.js?v=20260527-chessfast1";
 import {
   CHECKERS_SIZE,
   applyCheckersMove,
@@ -30,8 +30,8 @@ import {
   getCheckersOwner,
   getCheckersOutcome,
   isCheckersKing
-} from "../core/checkersRules.js?v=20260526-checkersai1";
-import { Chess } from "../vendor/chess.js?v=20260526-checkersai1";
+} from "../core/checkersRules.js?v=20260527-chessfast1";
+import { Chess } from "../vendor/chess.js?v=20260527-chessfast1";
 
 function resultTitle(result) {
   if (result === "win") return "Vitória";
@@ -931,7 +931,9 @@ export function bindDomGameInterface(game) {
     const turnSeat = chessSeatForColor(state, state.turnColor || "white");
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
     const visibleTurnSeat = heldTurnSeat("chess", turnSeat);
-    const turnYaw = !local.chessBoardFixed && match.status === "active" && visibleTurnSeat === rivalSeat ? 42 : 0;
+    const turnYaw = !local.chessBoardFixed && match.status === "active"
+      ? (visibleTurnSeat === rivalSeat ? 42 : -14)
+      : 0;
     const cinematic = frame.closest?.(".ppg-chess-arena")?.classList.contains("is-ai-thinking") || frame.closest?.(".ppg-chess-arena")?.classList.contains("is-cinematic");
     const compactLandscape = window.matchMedia?.("(max-width: 760px) and (orientation: landscape)")?.matches;
     frame.style.setProperty("--ppg-chess-turn-yaw", `${turnYaw}deg`);
@@ -957,10 +959,12 @@ export function bindDomGameInterface(game) {
     <span class="ppg-camera-edge is-left" data-${game}-camera-edge data-camera-edge="left" aria-hidden="true"></span>
   `;
 
+  const cameraModeCopy = (fixed = true) => fixed ? "Mesa normal" : "Mesa livre";
+
   const cameraOrbMarkup = (game = "chess", fixed = true) => {
     const attr = game === "checkers" ? "data-checkers-camera" : "data-chess-camera";
     const label = game === "checkers" ? "Damas" : "Xadrez";
-    const copy = fixed ? "Mesa fixa" : "Girar rival";
+    const copy = cameraModeCopy(fixed);
     return `
       <div class="ppg-${game}-camera ppg-checkers-camera ppg-camera-orb is-lock-only" aria-label="Trava de mesa de ${label}">
         <button type="button" class="is-camera-lock${fixed ? " is-active" : ""}" ${attr}="lock" aria-pressed="${fixed ? "true" : "false"}" title="${copy}">${copy}</button>
@@ -1028,7 +1032,7 @@ export function bindDomGameInterface(game) {
       window.clearTimeout(local.chessIntroCreditsTimer);
       local.chessIntroCreditsTimer = window.setTimeout(() => {
         finishChessCinematic();
-      }, 2200);
+      }, 900);
       return;
     }
     if (local.chessIntroPhase === "credits") {
@@ -1060,7 +1064,7 @@ export function bindDomGameInterface(game) {
     window.clearTimeout(local.chessIntroTimer);
     window.clearTimeout(local.chessIntroCreditsTimer);
     const urlParams = new URLSearchParams(window.location.search || "");
-    const introDuration = urlParams.get("intro") === "1" ? 7500 : 3600;
+    const introDuration = urlParams.get("intro") === "1" ? 4200 : 1700;
     local.chessIntroTimer = window.setTimeout(() => {
       finishChessCinematic();
     }, introDuration);
@@ -1075,7 +1079,7 @@ export function bindDomGameInterface(game) {
     const opening = local.checkersIntroLocked && match.status === "active" && Number(match.moveCount || 0) === 0;
     refs.checkersCoinFlip.hidden = !opening;
     if (opening) {
-      const buildVersion = window.pubpaidBuildVersion || "20260526-checkersai1";
+      const buildVersion = window.pubpaidBuildVersion || "20260527-chessfast1";
       const phase = local.checkersIntroPhase || "coin";
       refs.checkersCoinFlip.classList.toggle("is-flipping", phase === "coin");
       refs.checkersCoinFlip.classList.toggle("is-awaiting-toss", phase === "coin-ready");
@@ -1130,7 +1134,7 @@ export function bindDomGameInterface(game) {
     const face = coin.face || (firstSeat === "playerTwo" ? "coroa" : "cara");
     const firstName = coin.firstPlayerName || displayNameFor(firstPlayer) || (firstSeat === "playerOne" ? "Você" : "Máquina");
     const colorName = state.whiteSeat === firstSeat ? "brancas" : "pretas";
-    const buildVersion = window.pubpaidBuildVersion || "20260526-checkersai1";
+    const buildVersion = window.pubpaidBuildVersion || "20260527-chessfast1";
     const phase = local.chessIntroPhase || "coin";
     return `
       ${phase === "video" ? `<video data-chess-intro-video src="./assets/pubpaid/chess/chess-intro-premium-v1.mp4?v=${buildVersion}" autoplay muted playsinline preload="auto"></video>` : ""}
@@ -1586,7 +1590,7 @@ export function bindDomGameInterface(game) {
         if (moveEntry) emitGameSound(chessMoveCue(moveEntry), "chess");
       }
       renderPvpTable();
-    }, 3000);
+    }, 900);
   };
 
   const createDemoTableMatch = (gameId = "poker") => {
@@ -2625,13 +2629,13 @@ export function bindDomGameInterface(game) {
     const guideCopy = state.inCheck
       ? "Voce precisa sair do xeque. O brilho marca a prioridade."
       : demoMode && local.demoChessAiThinking
-        ? "A máquina pensa por 3 segundos. A origem e o alvo piscam antes do lance."
-      : forcedMoves.length === 1
-        ? "So existe um lance legal nesta posicao."
-        : selectedMoves.length
-          ? "Escolha um destes destinos para concluir o lance."
-          : canAct
-            ? "O brilho indica uma peca com lance legal."
+        ? "A máquina responde rápido. A origem e o alvo piscam antes do lance."
+        : forcedMoves.length === 1
+          ? "So existe um lance legal nesta posicao."
+          : selectedMoves.length
+            ? "Escolha um destes destinos para concluir o lance."
+            : canAct
+              ? "O brilho indica uma peca com lance legal."
             : "O rival esta pensando.";
     const moveItems = guideMoves.slice(0, 6).map((move) => `<li>${formatChessMove(move)}</li>`).join("");
     const rivalSeat = seat === "playerOne" ? "playerTwo" : "playerOne";
@@ -3755,7 +3759,7 @@ export function bindDomGameInterface(game) {
         : chessCoinResolving
           ? "Moeda decidiu o primeiro lance. Liberando tabuleiro..."
           : demoMode && local.demoChessAiThinking
-            ? "Máquina pensando por 3 segundos."
+            ? "Máquina pensando rápido."
             : chessMoveFeedback
               ? "Movimento feito. Virando a mesa..."
               : getChessTurnSummary(match, seat, demoMode);
@@ -4146,14 +4150,14 @@ export function bindDomGameInterface(game) {
   document.addEventListener("pointerdown", (event) => {
     const edge = event.target.closest?.("[data-chess-camera-edge]");
     const frame = event.target.closest?.("[data-chess-frame]");
-    const square = event.target.closest?.("[data-chess-square]");
     if ((!edge && !frame) || !isChessCameraActive()) return;
+    const square = event.target.closest?.("[data-chess-square]");
     rememberCameraPointer(local.chessCamera, event);
     if (event.pointerType === "touch" && local.chessCamera.pointers.size >= 2) {
       event.preventDefault();
       return;
     }
-    if (!edge && !isMiddleMouseCameraDrag(event)) return;
+    if (!edge && !isMiddleMouseCameraDrag(event) && (local.chessBoardFixed || square)) return;
     event.preventDefault();
     local.chessCamera.dragId = event.pointerId;
     local.chessCamera.dragX = event.clientX;
@@ -4222,7 +4226,8 @@ export function bindDomGameInterface(game) {
         local.checkersBoardFixed = !local.checkersBoardFixed;
         cameraButton.classList.toggle("is-active", local.checkersBoardFixed);
         cameraButton.setAttribute("aria-pressed", local.checkersBoardFixed ? "true" : "false");
-        cameraButton.textContent = local.checkersBoardFixed ? "Mesa fixa" : "Girar rival";
+        cameraButton.textContent = cameraModeCopy(local.checkersBoardFixed);
+        cameraButton.title = cameraModeCopy(local.checkersBoardFixed);
       } else {
         resetCheckersCamera();
       }
@@ -4237,7 +4242,8 @@ export function bindDomGameInterface(game) {
         local.chessBoardFixed = !local.chessBoardFixed;
         chessCameraButton.classList.toggle("is-active", local.chessBoardFixed);
         chessCameraButton.setAttribute("aria-pressed", local.chessBoardFixed ? "true" : "false");
-        chessCameraButton.textContent = local.chessBoardFixed ? "Mesa fixa" : "Girar rival";
+        chessCameraButton.textContent = cameraModeCopy(local.chessBoardFixed);
+        chessCameraButton.title = cameraModeCopy(local.chessBoardFixed);
       } else {
         resetChessCamera();
       }
@@ -4583,7 +4589,7 @@ export function bindDomGameInterface(game) {
         window.clearTimeout(local.checkersIntroCreditsTimer);
         local.checkersIntroCreditsTimer = window.setTimeout(() => {
           finishCheckersCinematic();
-        }, 2300);
+        }, 1000);
       }
       return;
     }
@@ -4598,7 +4604,7 @@ export function bindDomGameInterface(game) {
         window.clearTimeout(local.chessIntroCreditsTimer);
         local.chessIntroCreditsTimer = window.setTimeout(() => {
           finishChessCinematic();
-        }, 2300);
+        }, 1000);
       }
       return;
     }
