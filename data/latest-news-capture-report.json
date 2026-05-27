@@ -1,106 +1,121 @@
 {
   "ok": true,
-  "startedAt": "2026-05-27T19:25:13.647Z",
-  "finishedAt": "2026-05-27T19:25:19.209Z",
-  "capturedItems": 258,
-  "capturedToday": 193,
+  "startedAt": "2026-05-27T19:52:25.973Z",
+  "finishedAt": "2026-05-27T19:52:30.479Z",
+  "capturedItems": 239,
+  "capturedToday": 172,
   "activeWindowItems": 480,
-  "archiveItems": 698,
+  "archiveItems": 720,
   "reports": [
     {
       "source": "ac24horas",
       "ok": true,
       "count": 20,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 24,
+      "count": 20,
+      "blocked": 4,
       "mode": "wordpress-json"
     },
     {
       "source": "agencia-acre",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "agencia-brasil-ultimas",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "batelao",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "cnn-brasil",
-      "ok": true,
-      "count": 18,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "HTTP 403"
     },
     {
       "source": "folha-do-acre",
       "ok": true,
       "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
       "source": "g1-brasil",
       "ok": true,
       "count": 18,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "g1-politica",
       "ok": true,
       "count": 18,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "g1-pop-arte",
       "ok": true,
       "count": 14,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "jurua-24-horas",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "jurua-comunicacao",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "jurua-em-tempo",
       "ok": true,
       "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
       "source": "jurua-online",
       "ok": true,
       "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
       "source": "portal-do-jurua",
       "ok": true,
       "count": 25,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "prefeitura-czs",
       "ok": true,
       "count": 2,
+      "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
@@ -121,12 +136,14 @@
       "source": "tribuna-do-jurua",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
       "source": "voz-do-norte",
       "ok": true,
       "count": 10,
+      "blocked": 0,
       "mode": "rss"
     }
   ]

@@ -1,6 +1,14 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-05-26
+Atualizado: 2026-05-27
+
+## Rodada Atual - 20260527-editorial-politica1
+
+- Diretriz CZS atualizada: linha editorial regional/conservadora, cetica com propaganda estatal e manchete militante, priorizando impacto real no Vale do Jurua.
+- `scripts/capture-latest-news.js` agora bloqueia chamadas politicas sensacionalistas/opinativas com insulto, deboche, humilhacao, apelido ou propaganda de programa federal sem utilidade publica local.
+- Preservada utilidade publica local mesmo quando envolver programa de governo: calendario, cadastro, prazo, atendimento, beneficiarios e servico verificavel continuam permitidos.
+- Noticias regeneradas com a trava: exemplos como "picareta", "Pinoquio", "Tapa na cara", "jogo duplo", "ato falho", "de queixo caido", "ativo toxico" e propaganda Bolsa Familia/IDH sairam de `runtime-news`, `news-archive` e `news-data.js`.
+- Validacao parcial: `node --check scripts/capture-latest-news.js`, captura RSS OK e `node scripts/performance-budget-check.js` OK. Falta rodar `npm run review:team`, commit/push e validacao online.
 
 ## Rodada Atual - 20260527-home-sliced-loading1
 

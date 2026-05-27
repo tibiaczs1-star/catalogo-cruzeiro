@@ -57,6 +57,18 @@ Nenhum modulo deve quebrar esta ordem:
 
 Todo conteudo deve reforcar: "Pesamos fontes. Procuramos a verdade."
 
+## Linha Editorial E Curadoria Politica
+
+O CZS tem linha editorial regional, conservadora no sentido de desconfiar de propaganda estatal, promessa facil e manchete militante. A prioridade nao e agradar governo, partido, imprensa nacional ou algoritmo; a prioridade e o leitor do Vale do Jurua.
+
+Regras obrigatorias:
+
+- Nao transformar briga nacional em destaque se nao houver impacto claro no Acre ou no Vale do Jurua.
+- Bloquear manchetes sensacionalistas com apelido, insulto, humilhacao, deboche, torcida politica ou opiniao vendida como fato.
+- Nao priorizar texto promocional de governo, programa federal ou autoridade quando a chamada parece propaganda em vez de servico publico verificavel.
+- Preservar utilidade publica mesmo quando envolver programa de governo, desde que seja calendario, cadastro, prazo, direito, servico ou impacto local concreto.
+- Em politica, preferir fatos verificaveis, documentos, votacoes, decisoes, consequencias praticas e contraponto honesto.
+
 Manter formato editorial para versoes em conflito:
 
 - O que disseram

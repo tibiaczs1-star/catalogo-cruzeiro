@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-27T18:13:10.997Z",
+  "lastUpdatedAt": "2026-05-27T19:52:59.805Z",
   "orders": [
     {
       "id": "2026-05-27-pubpaid3-cruzeiro-barzinho-local-slice1",
@@ -2872,16 +2872,17 @@
     {
       "id": "2026-05-27-instalar-superpowers-obra-para-codex-e-hermes",
       "createdAt": "2026-05-27T13:11:37.6593625-05:00",
-      "updatedAt": "2026-05-27T13:11:37.6593625-05:00",
+      "updatedAt": "2026-05-27T13:24:11-05:00",
       "status": "closed-done",
       "source": "chat",
-      "rawRequest": "Instalar/reaproveitar a skill Superpowers do obra/superpowers para Codex e Hermes.",
-      "summary": "Instalar pacote Superpowers oficial para Codex e completar skills Superpowers ausentes no Hermes sem sobrescrever adaptacoes locais.",
+      "rawRequest": "Instalar/reaproveitar a skill Superpowers do obra/superpowers para Codex e Hermes. Depois adaptar todas as Superpowers para o Hermes.",
+      "summary": "Instalar e adaptar todas as 14 skills Superpowers oficiais para Codex e para os homes do Hermes.",
       "normalizedTasks": [],
       "filesTouched": [
-        "C:\\Users\\junio\\.codex\\skills\\brainstorming\\SKILL.md",
         "C:\\Users\\junio\\.codex\\skills\\using-superpowers\\SKILL.md",
-        "C:\\Users\\junio\\AppData\\Local\\hermes\\skills\\software-development\\using-superpowers\\SKILL.md"
+        "C:\\Users\\junio\\AppData\\Local\\hermes\\skills\\software-development\\using-superpowers\\SKILL.md",
+        "C:\\Users\\junio\\.hermes\\skills\\software-development\\using-superpowers\\SKILL.md",
+        "C:\\Users\\junio\\AppData\\Local\\hermes\\hermes-agent\\skills\\software-development\\using-superpowers\\SKILL.md"
       ],
       "assetRefs": [],
       "tags": [
@@ -2891,7 +2892,7 @@
         "hermes"
       ],
       "nextSteps": [],
-      "notes": "Fonte oficial local reaproveitada de C:\\Users\\junio\\.codex\\.tmp\\plugins\\plugins\\superpowers; Hermes manteve as 5 adaptacoes existentes e recebeu apenas as 9 ausentes."
+      "notes": "Fonte oficial local reaproveitada de C:\\Users\\junio\\.codex\\.tmp\\plugins\\plugins\\superpowers. Todas as 14 skills foram copiadas/adaptadas com frontmatter Hermes 5.1.0-superpowers e notas de mapeamento de ferramentas em AppData\\Local\\hermes, .hermes e hermes-agent builtin. Backups criados antes da substituicao."
     },
     {
       "id": "2026-05-27-otimizar-carregamento-fatiado-real-da-home-czs-mantendo-intro-cinematografica-e-",
@@ -2929,6 +2930,43 @@
       ],
       "nextSteps": [],
       "notes": "Validado em desktop com Browser e mobile via Playwright fallback; aos 5.6s e 12.6s nao carrega script.js, arquivo/admin/cheffe ou premium-home; rolagem aciona modo completo por reader-intent."
+    },
+    {
+      "id": "2026-05-27-diretriz-curadoria-politica-conservadora-czs",
+      "createdAt": "2026-05-27T19:52:59.805Z",
+      "updatedAt": "2026-05-27T19:52:59.805Z",
+      "status": "implemented-local-validation-pending-deploy",
+      "source": "chat",
+      "rawRequest": "Retirar materias politicas sensacionalistas/pro-governo, preferir curadoria de direita/conservadora quando nao for sensacionalista, e incluir isso como diretriz do site.",
+      "summary": "Adicionar diretriz editorial conservadora regional e bloquear chamadas politicas sensacionalistas ou propaganda estatal nos feeds CZS.",
+      "normalizedTasks": [
+        "adicionar diretriz no CZS_PRODUCT_MASTER_RULES",
+        "bloquear manchetes com insulto/deboche/opiniao politica sensacionalista",
+        "bloquear propaganda de programa federal quando nao for utilidade publica local",
+        "regenerar noticias removendo exemplos citados"
+      ],
+      "filesTouched": [
+        "docs/CZS_PRODUCT_MASTER_RULES.md",
+        "scripts/capture-latest-news.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "news-data.js",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "czs",
+        "editorial",
+        "politica",
+        "curadoria",
+        "noticias"
+      ],
+      "nextSteps": [
+        "rodar review:team",
+        "commit/push",
+        "validar online apos deploy"
+      ],
+      "notes": "Filtro preserva utilidade publica local, como calendario/cadastro/prazo, e bloqueia chamadas opinativas/sensacionalistas como picareta, Pinoquio, tapa na cara, jogo duplo, ato falho e propaganda Bolsa Familia/IDH."
     }
   ]
 }

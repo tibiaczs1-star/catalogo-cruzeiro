@@ -1,25 +1,27 @@
 # Handoff
 
-Updated: 2026-05-27T18:13:45.501Z
+Updated: 2026-05-27T19:52:45Z
 
-Rodada de performance concluida: carregamento fatiado real aplicado na home CZS. A intro cinematografica permanece, mas primeira tela usa CSS critico e dados leves; o JS principal, CSS premium pesado, arquivo/admin/Cheffe e scripts auxiliares so entram com rolagem/clique, secao perto da viewport (30%) ou fallback tardio. Browser desktop OK; Browser mobile travou na runtime, entao mobile foi validado por Playwright headless. review:team passou com 3 achados preexistentes em cruzeiro-do-sul-barzinho/index.html.
+Rodada atual: CZS restaurado do experimento de split-loading e ajustado para preload da primeira tela visivel antes de liberar o site. A pedido do usuario, a curadoria politica agora e regional/conservadora no sentido editorial: rejeita chamada politica com insulto/deboche/opiniao vendida como fato e bloqueia propaganda estatal sem utilidade publica local. `scripts/capture-latest-news.js` remove os itens bloqueados em captura, merge, arquivo e janela ativa. Captura regenerada removeu exemplos como "picareta", "Pinoquio", "Tapa na cara", "jogo duplo", "ato falho" e propaganda Bolsa Familia/IDH dos dados atuais.
 
 ## Next
 
-- Se o usuario pedir proximo passo
-- medir Chrome real/DevTools ou atacar reducao de index.html/styles.css
-- Se houver deploy
-- rodar validacoes de build/deploy
+- Rodar `npm run review:team`
+- Commit/push
+- Validar online home e `/api/news`
+- Continuar investigacao de Chrome aguardando resposta se persistir
 
 ## Files In Focus
 
 - index.html
-- home-main-loader.js
-- home-critical.css
 - script.js
-- catalogo-app-core.js
-- early-home-surfaces.js
+- docs/CZS_PRODUCT_MASTER_RULES.md
+- scripts/capture-latest-news.js
+- data/runtime-news.json
+- data/news-archive.json
+- news-data.js
 
 ## Related Orders
 
-- 2026-05-27-otimizar-carregamento-fatiado-real-da-home-czs-mantendo-intro-cinematografica-e-
+- 2026-05-27-diretriz-curadoria-politica-conservadora-czs
+- 2026-05-27-implementar-lazy-loading-real-e-investigar-carregamento-inicial-lento-da-home-pu

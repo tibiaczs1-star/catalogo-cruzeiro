@@ -1,13 +1,13 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-27T19:25:38.604Z
-Escopo: 360/709 itens recentes.
+Gerado em: 2026-05-27T19:53:53.017Z
+Escopo: 360/731 itens recentes.
 
 ## Resumo
-- Gates: P0 92, P1 186, P2 82
-- Aprovacao humana exigida: 92
-- Pendencias de fonte: 92
-- Pendencias visuais: 294
+- Gates: P0 94, P1 177, P2 89
+- Aprovacao humana exigida: 94
+- Pendencias de fonte: 94
+- Pendencias visuais: 287
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
@@ -86,6 +86,18 @@ Escopo: 360/709 itens recentes.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
+- Tesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio
+  - Tesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio: veja os pontos principais
+  - Entenda tesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio
+  - Folha do Acre informa: Tesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio
+- Comissão da Câmara aprova texto-base da PEC que acaba com escala 6×1 e reduz jornada de trabalho
+  - Comissão da Câmara aprova texto-base da PEC que acaba com escala 6×1 e reduz jornada de trabalho: veja os pont
+  - Entenda comissão da Câmara aprova texto-base da PEC que acaba com escala 6×1 e reduz jornada de trabalho
+  - Jurua Online informa: Comissão da Câmara aprova texto-base da PEC que acaba com escala 6×1 e reduz jornada de
+- A pedido do MPF, Justiça afasta chefe da Funai em Feijó por irregularidades envolvendo benefícios indígenas
+  - A pedido do MPF, Justiça afasta chefe da Funai em Feijó por irregularidades envolvendo benefícios indígenas: v
+  - Entenda a pedido do MPF, Justiça afasta chefe da Funai em Feijó por irregularidades envolvendo benefícios indí
+  - Folha do Acre informa: A pedido do MPF, Justiça afasta chefe da Funai em Feijó por irregularidades envolvendo
 - Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca
   - Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca: veja os pontos principais
   - Entenda trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca
@@ -122,18 +134,6 @@ Escopo: 360/709 itens recentes.
   - Médico é preso em Roraima suspeito de ligação com organização criminosa: veja os pontos principais
   - O que se sabe sobre médico é preso em Roraima suspeito de ligação com organização criminosa
   - Jurua em Tempo informa: Médico é preso em Roraima suspeito de ligação com organização criminosa
-- Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no município
-  - Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no município: veja
-  - Entenda prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem Fome no municíp
-  - Folha do Acre informa: Prefeitura de Cruzeiro do Sul e Governo do Estado alinham ações do programa Brasil Sem
-- Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão
-  - Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão: veja os
-  - Entenda prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentão no Cruzeirão
-  - Folha do Acre informa: Prefeitura de Cruzeiro do Sul abre no sábado a primeira edição da Copa Master Cinquentã
-- Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia
-  - Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia: veja os pontos
-  - Entenda deputado Calegário anuncia audiência pública sobre residência médica de estudantes da Bolívia
-  - Folha do Acre informa: Deputado Calegário anuncia audiência pública sobre residência médica de estudantes da B
 
 ## Formatos especiais seguros
 - agenda visual: Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca

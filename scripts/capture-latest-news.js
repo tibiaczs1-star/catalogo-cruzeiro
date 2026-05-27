@@ -662,6 +662,48 @@ function isMailzaPriorityArticle(item = {}) {
   );
 }
 
+function getEditorialBlockReason(item = {}) {
+  const haystack = normalizeText(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  if (!haystack) return "";
+
+  const localUtility =
+    /\b(cruzeiro do sul|vale do jurua|jurua|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|acre)\b/.test(
+      haystack
+    ) &&
+    /\b(calendario|pagamento|nis|cadastro|inscricao|prazo|atendimento|beneficiarios|servico|mutirao|busca ativa)\b/.test(
+      haystack
+    );
+
+  if (!localUtility && /\bbolsa familia\b.*\b(recorde|idh|deu certo|sucesso|eficiente|funciona|bateu|celebra|comemora)\b/.test(haystack)) {
+    return "propaganda-politica-programa-federal";
+  }
+
+  if (
+    /\b(picaret[a-z]*|pinoqui[a-z]*|tapa na cara|humilhacao|humilhante|ativo toxico|esqueletos|assombram|ato falho|de queixo caido|jogo duplo|mentiras|mentiroso|desmente versao)\b/.test(
+      haystack
+    )
+  ) {
+    return "politica-sensacionalista-opinativa";
+  }
+
+  return "";
+}
+
 function getCategoryFlowScore(item = {}) {
   const categoryKey = normalizeText(item.categoryKey || item.category || "");
   const scores = {
@@ -753,6 +795,7 @@ function mergeNewsItems(...collections) {
 
   collections.flat().filter(Boolean).forEach((rawItem) => {
     const item = normalizeFeedMarkupNoise(rawItem);
+    if (getEditorialBlockReason(item)) return;
     const key = dedupeKey(item);
     if (!key) return;
     const existing = map.get(key);
@@ -809,11 +852,13 @@ async function collectLatestNewsItems({ limitPerSource = DEFAULT_LIMIT_PER_SOURC
         const sourceLimitRaw = Number(source.limitPerSource || source.limit || 0);
         const effectiveLimit = sourceLimitRaw > 0 ? sourceLimitRaw : limitPerSource;
         const rawText = await fetchText(source.feedUrl);
-        const items = parseSourceItems(rawText, source, effectiveLimit);
+        const parsedItems = parseSourceItems(rawText, source, effectiveLimit);
+        const items = parsedItems.filter((item) => !getEditorialBlockReason(item));
         reports.push({
           source: source.id,
           ok: true,
           count: items.length,
+          blocked: parsedItems.length - items.length,
           mode: source.feedType || "rss"
         });
         return items;
@@ -837,7 +882,7 @@ async function collectLatestNewsItems({ limitPerSource = DEFAULT_LIMIT_PER_SOURC
 }
 
 function buildCuratedActiveWindow(items = [], limit = ACTIVE_WINDOW_LIMIT) {
-  const normalizedItems = Array.isArray(items) ? items : [];
+  const normalizedItems = (Array.isArray(items) ? items : []).filter((item) => !getEditorialBlockReason(item));
   const target = Math.max(120, Number(limit || 0) || 0);
   const pool = normalizedItems.slice(0, Math.min(normalizedItems.length, target * 3));
   const picked = new Map();

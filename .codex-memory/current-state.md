@@ -1,31 +1,31 @@
 # Current State
 
-Updated: 2026-05-27T18:13:36.241Z
+Updated: 2026-05-27T19:52:45Z
 
 ## Active Goal
 
-- Home CZS com carregamento fatiado real aplicado
+- Home CZS com preload visivel + curadoria politica regional conservadora
 
 ## Summary
 
-A home agora inicia com payload leve: preload de noticias limitado a 18 itens firstFold, CSS critico separado, home-main-loader no lugar de script.js direto, estilos premium/modulos auxiliares atras de viewport/intent/fallback tardio, e cinematic-parallax oculto no CSS critico para nao empurrar a home no mobile. Validacao: desktop Browser e mobile Playwright mostram que aos 5.6s/12.6s nao entram script.js, arquivo/admin/Cheffe ou premium-home; rolagem aciona modo completo por reader-intent.
+A home foi restaurada para preservar menu/background/sistemas visuais e agora segura a liberacao na intro ate carregar a primeira tela visivel. Noticias foram atualizadas e a curadoria ganhou diretriz regional conservadora: bloquear chamada politica sensacionalista/opinativa e propaganda estatal sem utilidade local, preservando servico publico verificavel.
 
 ## Next
 
-- Testar em Chrome real do usuario se ainda aparecer aguardando resposta
-- Se for para publicar rodar fluxo de deploy normal
+- Rodar review:team completo
+- Commit/push e validar online apos deploy
+- Conferir Chrome real se ainda aparecer aguardando resposta
 
 ## Files In Focus
 
 - index.html
 - script.js
-- catalogo-app-core.js
-- early-home-surfaces.js
-- home-main-loader.js
-- home-critical.css
+- docs/CZS_PRODUCT_MASTER_RULES.md
+- scripts/capture-latest-news.js
+- data/runtime-news.json
+- data/news-archive.json
+- news-data.js
 
 ## Assets In Focus
 
-- czs-desktop-final-gate-5600
-- czs-desktop-page-after-close
-- czs-mobile-final-fixed-5600
+- none
