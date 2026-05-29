@@ -46,6 +46,132 @@ rayx-companion
   -> atalhos de observar, pausar e abrir painel
 ```
 
+## RayX Desktop Controller
+
+RayX deve nascer como aplicativo proprio, mas pode usar Hermes Desktop como referencia de produto e como alvo controlavel.
+
+O estudo local em `C:\Users\junio\AppData\Local\Programs\hermes-desktop` mostra um padrao util:
+
+- app Windows empacotado em Electron/Chromium;
+- processo main em Node;
+- bridge preload para IPC controlado;
+- UI React no renderer;
+- SQLite local via `better-sqlite3`;
+- configuracao em `C:\Users\junio\AppData\Local\hermes`;
+- profiles, logs, memoria, modelos, ferramentas, cron, kanban e gateway;
+- atualizador apontando para GitHub `fathah/hermes-desktop`.
+
+RayX nao deve copiar codigo, marca, assets ou CSS do Hermes Desktop. Ela deve copiar a licao arquitetural: um console local de agente com UI, processo controlador, configuracao local, diagnostico, logs e gateway visivel.
+
+### Adaptador Hermes
+
+Hermes entra como sistema legado controlavel, nao como corpo principal da RayX.
+
+O adaptador Hermes deve:
+
+- detectar `hermes` no PATH;
+- detectar `hermes-agent.exe` em `C:\Users\junio\AppData\Local\Programs\hermes-desktop`;
+- ler status com comandos conhecidos, como `hermes status`;
+- mapear `HERMES_HOME`, profiles, gateway, logs e configuracoes;
+- iniciar, parar e reiniciar Hermes por caminhos explicitos;
+- registrar versao, processo, porta, rota LLM e ultimos erros;
+- exibir na UI se Hermes esta pronto, parcial, quebrado ou nao encontrado;
+- nunca editar arquivos internos do app instalado sem backup e plano claro.
+
+Primeiro corte do adaptador:
+
+```text
+rayx hermes status
+rayx hermes doctor
+rayx hermes start
+rayx hermes stop
+rayx hermes logs
+```
+
+### Decisao Electron, Tauri Ou Hibrido
+
+Hermes Desktop prova que Electron resolve rapido: UI rica, Chromium embutido, Node no main, instalador Windows e integracao com processos. O custo e peso: o app instalado ocupa centenas de MB.
+
+Para RayX:
+
+- Electron e melhor para MVP rapido, dashboard rico, companion e uso de bibliotecas web;
+- Tauri ou core nativo podem ser avaliados depois para reduzir peso;
+- o core deve ficar desacoplado da UI para permitir trocar a casca no futuro;
+- qualquer browser/controlador deve ficar em processo isolado, com logs e restart.
+
+Decisao inicial: MVP em arquitetura compativel com Electron, mas com `rayx-core` separado para nao virar um app monolitico.
+
+## Referencias De Produto
+
+### Antigravity
+
+Google Antigravity reforca a direcao de RayX como superficie de gerenciamento de agentes, nao apenas chat ou editor. Ideias que entram na RayX:
+
+- Manager Surface: painel para criar, observar e coordenar agentes;
+- Editor/terminal/browser como ferramentas de execucao, nao como unica interface;
+- agentes trabalhando de forma assincrona;
+- artefatos verificaveis: plano, tarefas, capturas, gravacoes, diffs e relatorios;
+- memoria operacional/knowledge base;
+- modelo opcional e varias rotas de provedor.
+
+Regra para RayX: o usuario precisa acompanhar trabalho por artefatos e estado, nao por parede de logs.
+
+### Codex
+
+Codex entra como referencia primaria de engenharia:
+
+- CLI local e app desktop como superficies complementares;
+- subagentes e workflows;
+- skills, plugins, MCP, shell, apply patch e browser;
+- comandos slash;
+- worktrees, automacoes, appshots e computer use;
+- sandbox/permissions como camada de politica;
+- output final em portugues para o Junio, mesmo quando prompts internos forem em ingles.
+
+RayX deve herdar capacidades Codex por catalogo e adaptadores, nao por acoplamento invisivel.
+
+### Video Das 6 IAs Gratis
+
+O video enviado pelo Junio, `https://www.youtube.com/watch?v=a0OQNN1Z1E0`, nao muda o core da RayX; ele muda o catalogo de rotas.
+
+Ferramentas citadas e papel na RayX:
+
+- Google Antigravity: ambiente externo de agentes, referencia de UX e possivel host;
+- OpenCode: candidato forte a agente externo benchmarkavel;
+- FreeBuff: candidato a teste rapido gratuito via terminal;
+- Kilo: candidato a agente CLI multi-modelo com comandos, MCP, agents e benchmarks de latencia;
+- Kiro: candidato a CLI com chat, automacoes, MCP, hooks e headless;
+- Codex CLI: rota primaria ou quase primaria quando a conta estiver saudavel;
+- OpenRouter: provedor/catalogo de modelos, nao agente;
+- NVIDIA Build: provedor experimental;
+- DeepSeek API: rota economica paga, nunca tratada como gratis;
+- OpenDesign: referencia/auxiliar visual, nao runtime essencial.
+
+RayX deve transformar essas ferramentas em entradas de catalogo:
+
+```json
+{
+  "tool": "opencode",
+  "role": "fallback_coding_agent",
+  "status": "candidate",
+  "install_command": "manual_or_detected",
+  "run_command": "opencode",
+  "auth_types": ["chatgpt", "copilot", "openrouter", "nvidia", "deepseek"],
+  "benchmarks": ["hello_patch", "bugfix_one_file", "json_exactness"],
+  "core_policy": "never_required_for_runtime"
+}
+```
+
+Regras:
+
+- detectar antes de instalar;
+- pedir permissao antes de instalar qualquer CLI nova;
+- testar em laboratorio pequeno;
+- normalizar resultado em JSON;
+- marcar falha, rate limit ou cota como estado temporario;
+- nunca depender de uma CLI externa para o core ligar;
+- Codex e Hermes ficam acima das rotas experimentais.
+
 ## Interface
 
 ### Shell
@@ -546,6 +672,7 @@ RayX deve catalogar e herdar capacidades de:
 - scripts locais;
 - PowerShell, Python, Node, Git, Playwright e Ollama;
 - ferramentas que aparecem como comandos slash.
+- CLIs externas estudadas: OpenCode, FreeBuff, Kilo, Kiro, OpenDesign e similares.
 
 Cada capacidade entra no catalogo com:
 
@@ -557,6 +684,36 @@ Cada capacidade entra no catalogo com:
 - risco;
 - ultimo teste;
 - observacoes.
+
+### Bench Lane Para CLIs Externas
+
+Toda CLI externa deve passar por um banco pequeno de provas antes de virar fallback real:
+
+- `detect`: comando existe, versao responde e autenticacao e conhecida;
+- `hello_patch`: editar arquivo descartavel em workspace temporario;
+- `json_exactness`: responder JSON valido conforme schema;
+- `bugfix_one_file`: corrigir bug simples com diff pequeno;
+- `repo_read_only_triage`: analisar sem editar;
+- `latency_and_cost`: medir duracao, falhas, cota e custo;
+- `permission_probe`: confirmar se a CLI tenta pedir aprovacao, executar comandos ou editar arquivos.
+
+Saida normalizada minima:
+
+```json
+{
+  "ok": true,
+  "tool": "kilo",
+  "version": "...",
+  "model": "...",
+  "duration_ms": 0,
+  "changed_files": [],
+  "stdout_excerpt": "...",
+  "error_class": null,
+  "promotion": "candidate|quarantine|promoted|rejected"
+}
+```
+
+CLIs externas podem ajudar RayX a continuar trabalhando, mas nao podem instalar dependencias, alterar repositorios reais ou mexer em contas reais sem passar pelo laboratorio.
 
 ## Agentes
 
@@ -694,20 +851,23 @@ O MVP deve conter:
 
 ## Ordem De Construcao
 
-1. Criar identidade visual, assets e estados da RayX.
-2. Criar shell e dashboard mockados.
-3. Criar companion flutuante.
-4. Criar rayx-core minimo.
-5. Ligar interface ao estado real.
-6. Criar roteador de LLMs.
-7. Criar capability registry.
-8. Criar boot transparente e timers de satisfacao.
-9. Criar loops 24h em dry-run.
-10. Integrar Chrome/CDP.
-11. Integrar agentes dinamicos.
-12. Integrar controle visual de maquina.
-13. Integrar laboratorio de absorcao universal.
-14. Integrar autoescrita.
+1. Fechar estudo de referencias: Hermes Desktop, Codex, Antigravity e video das CLIs.
+2. Criar identidade visual, assets e estados da RayX.
+3. Criar shell e dashboard mockados.
+4. Criar companion flutuante.
+5. Criar rayx-core minimo.
+6. Criar adaptador Hermes em modo status/doctor.
+7. Ligar interface ao estado real.
+8. Criar roteador de LLMs.
+9. Criar capability registry.
+10. Criar boot transparente e timers de satisfacao.
+11. Criar loops 24h em dry-run.
+12. Criar bench lane para CLIs externas.
+13. Integrar Chrome/CDP.
+14. Integrar agentes dinamicos.
+15. Integrar controle visual de maquina.
+16. Integrar laboratorio de absorcao universal.
+17. Integrar autoescrita.
 
 ## Criterio De Sucesso Do Primeiro Corte
 
@@ -752,3 +912,16 @@ Esta versao da spec foi fechada consultando documentacao primaria/oficial dos pr
 - Ollama Llama 3.2: https://ollama.com/library/llama3.2
 - OpenRouter Model Fallbacks: https://openrouter.ai/docs/guides/routing/model-fallbacks
 - OpenRouter Provider Selection: https://openrouter.ai/docs/guides/routing/provider-selection
+
+## Fontes Do Estudo De Produto
+
+- Hermes Desktop local: `C:\Users\junio\AppData\Local\Programs\hermes-desktop`
+- YouTube, Guilherme Lazarotto: https://www.youtube.com/watch?v=a0OQNN1Z1E0
+- Google Antigravity docs: https://www.antigravity.google/docs/home
+- Google Developers Blog, Antigravity: https://developers.googleblog.com/en/build-with-google-antigravity-our-new-agentic-development-platform/
+- OpenAI Codex CLI: https://developers.openai.com/codex/cli/
+- OpenCode: https://dev.opencode.ai/
+- FreeBuff: https://freebuff.ai/
+- Kilo CLI: https://kilo.ai/docs/code-with-ai/platforms/cli
+- Kiro CLI: https://kiro.dev/docs/cli/
+- OpenRouter Models API: https://openrouter.ai/docs/guides/overview/models
