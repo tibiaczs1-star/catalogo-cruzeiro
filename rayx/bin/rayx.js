@@ -5,6 +5,7 @@ const { generateCompanion } = require("../core/companion");
 const { syncProfiles, listProfiles, updateProfile } = require("../core/chrome-profiles");
 const { generateDashboard } = require("../core/dashboard");
 const { buildReport } = require("../core/doctor");
+const { openRayX } = require("../core/open");
 const { runCommand, startShell } = require("../core/shell");
 const { renderStatus } = require("../core/status");
 
@@ -17,6 +18,7 @@ Uso:
   rayx shell
   rayx dashboard
   rayx companion
+  rayx open dashboard|companion|all
   rayx profiles
   rayx profiles set <name> --alias <alias> --permission ask|allow|deny|observe --purpose <texto>
 
@@ -72,6 +74,24 @@ function main(argv = process.argv.slice(2)) {
   if (command === "companion") {
     const result = generateCompanion();
     process.stdout.write(`Companion gerado:\n${result.file}\n`);
+    return;
+  }
+
+  if (command === "open") {
+    const named = parseNamedArgs(rest);
+    const results = openRayX(subcommand || "dashboard", {
+      dryRun: argv.includes("--dry-run")
+    });
+
+    if (named.json !== undefined || argv.includes("--json")) {
+      process.stdout.write(`${JSON.stringify(results, null, 2)}\n`);
+      return;
+    }
+
+    for (const result of results) {
+      const verb = result.opened ? "aberto" : "preparado";
+      process.stdout.write(`${result.target} ${verb}: ${result.file}\n`);
+    }
     return;
   }
 
