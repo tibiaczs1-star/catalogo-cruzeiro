@@ -2,6 +2,7 @@
 "use strict";
 
 const readline = require("node:readline");
+const { listProfiles, syncProfiles } = require("./chrome-profiles");
 const { buildReport } = require("./doctor");
 const { renderStatus } = require("./status");
 
@@ -11,6 +12,7 @@ const COMMANDS = [
   ["/hermes", "Estado do Hermes local"],
   ["/ollama", "Modelos locais e politica"],
   ["/chrome", "Chrome e perfis detectados"],
+  ["/profiles", "Sincroniza apelidos/permissoes dos perfis Chrome"],
   ["/help", "Lista comandos"],
   ["/exit", "Sair"]
 ];
@@ -118,6 +120,12 @@ function runCommand(input) {
 
   if (command === "/chrome") {
     printChrome(report);
+    return false;
+  }
+
+  if (command === "/profiles" || command === "/chrome-profiles") {
+    const result = syncProfiles();
+    process.stdout.write(`${listProfiles(result.payload)}\n\nArquivo: ${result.file}\n`);
     return false;
   }
 
