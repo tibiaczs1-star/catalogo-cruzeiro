@@ -50,6 +50,10 @@ rayx-companion
 
 RayX deve nascer como aplicativo proprio, mas pode usar Hermes Desktop como referencia de produto e como alvo controlavel.
 
+RayX e local-first. O core, a UI, o companion, logs, memoria, catalogo, filas e adaptadores rodam no PC do Junio. Provedores remotos entram apenas como rotas plugaveis de inteligencia, nunca como dependencia obrigatoria para o sistema ligar.
+
+Perfil nativo atual do PC: `docs/superpowers/specs/2026-05-29-rayx-local-native-profile.md`.
+
 O estudo local em `C:\Users\junio\AppData\Local\Programs\hermes-desktop` mostra um padrao util:
 
 - app Windows empacotado em Electron/Chromium;
