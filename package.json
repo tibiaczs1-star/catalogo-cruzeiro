@@ -5,6 +5,9 @@
   "description": "Catálogo Cruzeiro do Sul - portal local com agregador e serviços",
   "main": "server.js",
   "type": "commonjs",
+  "bin": {
+    "rayx": "rayx/bin/rayx.js"
+  },
   "scripts": {
     "agents:cycle": "node scripts/agents-autonomy-cycle.js --once",
     "agents:daemon": "node scripts/agents-autonomy-cycle.js --daemon",
@@ -20,7 +23,10 @@
     "perf:budget": "node scripts/performance-budget-check.js",
     "guard:pubpaid": "node scripts/guard-pubpaid-no-canvas.js",
     "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
+    "rayx": "node rayx/bin/rayx.js",
     "rayx:chrome:profiles": "node rayx/core/chrome-profiles.js",
+    "rayx:build:exe": "powershell -NoProfile -ExecutionPolicy Bypass -File rayx/launcher/build-launcher.ps1",
+    "rayx:companion": "node rayx/core/companion.js",
     "rayx:dashboard": "node rayx/core/dashboard.js",
     "rayx:doctor": "node rayx/core/doctor.js --pretty",
     "rayx:doctor:save": "node rayx/core/doctor.js --pretty --out .codex-temp/rayx-doctor/latest.json",

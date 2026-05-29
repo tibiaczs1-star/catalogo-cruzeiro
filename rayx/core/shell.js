@@ -164,7 +164,10 @@ function parseArgs(argv) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  startShell(args);
+}
 
+function startShell(args = { command: null, once: false }) {
   printHeader();
 
   if (args.command || args.once) {
@@ -195,5 +198,6 @@ if (require.main === module) {
 }
 
 module.exports = {
-  runCommand
+  runCommand,
+  startShell
 };
