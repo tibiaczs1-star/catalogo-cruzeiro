@@ -415,8 +415,8 @@ function buildReport() {
     processes,
     recommendation,
     nextSteps: [
-      "Criar rayx status usando este mesmo contrato JSON.",
-      "Ligar o resultado ao shell/dashboard.",
+      "Criar rayx shell usando este mesmo contrato JSON.",
+      "Ligar o status ao dashboard.",
       "Adicionar apelidos e permissoes para perfis Chrome.",
       "Criar benchmarks pequenos para modelos Ollama e CLIs externas."
     ]
@@ -456,4 +456,10 @@ function main() {
   process.stdout.write(`${json}\n`);
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  buildReport
+};

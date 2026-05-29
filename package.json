@@ -22,6 +22,7 @@
     "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
     "rayx:doctor": "node rayx/core/doctor.js --pretty",
     "rayx:doctor:save": "node rayx/core/doctor.js --pretty --out .codex-temp/rayx-doctor/latest.json",
+    "rayx:status": "node rayx/core/status.js",
     "start": "node server.js",
     "sync:online-local": "node scripts/sync-online-local.js"
   },
