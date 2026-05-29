@@ -70,6 +70,42 @@ function syncProfiles() {
   return { file, payload };
 }
 
+function updateProfile(args) {
+  const { file, payload } = syncProfiles();
+  const target = String(args.set || "").trim();
+
+  if (!target) {
+    throw new Error("Use --set \"Profile Name\" para escolher um perfil.");
+  }
+
+  const profile = payload.profiles.find((item) => item.name === target || item.alias === target);
+
+  if (!profile) {
+    throw new Error(`Perfil nao encontrado: ${target}`);
+  }
+
+  if (args.alias) profile.alias = String(args.alias).trim();
+  if (args.permission) profile.permission = normalizePermission(args.permission);
+  if (args.purpose !== undefined) profile.purpose = String(args.purpose).trim();
+  if (args.notes !== undefined) profile.notes = String(args.notes).trim();
+
+  payload.updatedAt = new Date().toISOString();
+  writeJson(file, payload);
+
+  return { file, profile, payload };
+}
+
+function normalizePermission(value) {
+  const permission = String(value || "").trim().toLowerCase();
+  const allowed = new Set(["ask", "allow", "deny", "observe"]);
+
+  if (!allowed.has(permission)) {
+    throw new Error("Permissao invalida. Use: ask, allow, deny ou observe.");
+  }
+
+  return permission;
+}
+
 function listProfiles(payload) {
   const lines = [
     "RayX Chrome Profiles",
@@ -87,15 +123,55 @@ function listProfiles(payload) {
 }
 
 function parseArgs(argv) {
-  return {
+  const args = {
     json: argv.includes("--json"),
-    pathOnly: argv.includes("--path")
+    pathOnly: argv.includes("--path"),
+    set: null,
+    alias: null,
+    permission: null,
+    purpose: undefined,
+    notes: undefined
   };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const token = argv[index];
+    if (token === "--set") {
+      args.set = argv[index + 1] || "";
+      index += 1;
+      continue;
+    }
+
+    if (token === "--alias") {
+      args.alias = argv[index + 1] || "";
+      index += 1;
+      continue;
+    }
+
+    if (token === "--permission") {
+      args.permission = argv[index + 1] || "";
+      index += 1;
+      continue;
+    }
+
+    if (token === "--purpose") {
+      args.purpose = argv[index + 1] || "";
+      index += 1;
+      continue;
+    }
+
+    if (token === "--notes") {
+      args.notes = argv[index + 1] || "";
+      index += 1;
+    }
+  }
+
+  return args;
 }
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
-  const { file, payload } = syncProfiles();
+  const result = args.set ? updateProfile(args) : syncProfiles();
+  const { file, payload } = result;
 
   if (args.pathOnly) {
     process.stdout.write(`${file}\n`);
@@ -103,8 +179,14 @@ function main() {
   }
 
   if (args.json) {
-    process.stdout.write(`${JSON.stringify({ file, ...payload }, null, 2)}\n`);
+    process.stdout.write(`${JSON.stringify({ file, updatedProfile: result.profile || null, ...payload }, null, 2)}\n`);
     return;
+  }
+
+  if (result.profile) {
+    process.stdout.write(
+      `Perfil atualizado: ${result.profile.name} alias=${result.profile.alias} permissao=${result.profile.permission}\n\n`
+    );
   }
 
   process.stdout.write(`${listProfiles(payload)}\n\nArquivo: ${file}\n`);
@@ -117,5 +199,6 @@ if (require.main === module) {
 module.exports = {
   profileConfigPath,
   syncProfiles,
+  updateProfile,
   listProfiles
 };
