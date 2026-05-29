@@ -115,6 +115,352 @@ Rotas iniciais:
 
 RayX deve testar periodicamente latencia, erro, limite, custo e qualidade de cada rota.
 
+## Modelo E Provedor Como Arquitetura
+
+RayX nao deve tratar LLMs como strings de configuracao. Cada modelo precisa ser registrado com capacidades, limites e modo de uso.
+
+Campos minimos por modelo:
+
+- provider;
+- model id;
+- contexto maximo;
+- saida maxima;
+- suporte a ferramentas;
+- suporte a computer use;
+- suporte a multimodalidade;
+- suporte a prompt/cache/context editing;
+- modo de raciocinio: automatico, effort, thinking, fast;
+- custo estimado;
+- latencia media;
+- confiabilidade recente;
+- melhor uso: codigo, navegador, analise, escrita, visao, roteamento, fallback.
+
+### Claude Opus 4.8
+
+Claude Opus 4.8 deve ser tratado como modelo de alta autonomia quando disponivel. Caracteristicas relevantes para RayX:
+
+- modelo `claude-opus-4-8`;
+- foco em raciocinio complexo, agentic coding e trabalho autonomo longo;
+- contexto de ate 1M tokens em superficies suportadas;
+- saida maxima alta;
+- mid-conversation system messages para atualizar instrucao em loops longos sem reenviar todo o prompt;
+- effort padrao alto;
+- fast mode para velocidade quando custo permitir;
+- adaptive thinking para gastar raciocinio quando a tarefa exigir;
+- melhor tool triggering e melhor recuperacao apos compaction.
+
+Uso recomendado:
+
+- planejamento de arquitetura;
+- migracoes grandes;
+- revisao de autoescrita;
+- analise de repositorios baixados no laboratorio;
+- tarefas longas de agentes/subagentes;
+- browser/computer use quando custo e acesso permitirem.
+
+RayX deve encapsular as diferencas de Opus 4.8 em adaptador proprio. Nao assumir que parametros como `temperature`, `top_p`, `top_k` ou thinking budgets funcionam igualmente entre versoes.
+
+### OpenAI/Codex E Computer Use
+
+OpenAI/Codex deve ser rota principal quando estiver saudavel, especialmente para coding, shell, agentes locais e integracao com ferramentas Codex.
+
+Caracteristicas relevantes:
+
+- modelos fortes recentes devem ser cadastrados com effort configuravel;
+- snapshots devem ser preferidos quando estabilidade for mais importante que novidade;
+- function calling, structured outputs e tool choice devem ser tratados como capacidades formais;
+- custos de ferramentas como search e computer use devem entrar no calculo de rota;
+- Agents SDK serve como referencia de orquestracao: agentes planejam, chamam ferramentas, colaboram com especialistas e preservam estado suficiente para trabalho multi-etapa.
+
+O loop de computer use deve seguir a forma generica:
+
+```text
+enviar tarefa com ferramenta de computador
+-> receber chamada de acao
+-> executar acoes em ordem no ambiente controlado
+-> capturar tela/estado atualizado
+-> devolver observacao
+-> repetir ate parar
+```
+
+RayX deve implementar esse loop como camada propria, nao preso a um unico provedor.
+
+### MiniMax M2.7
+
+MiniMax M2.7 deve ser avaliado como rota de nuvem para trabalho agentico e coding longo, nao como modelo local leve.
+
+Caracteristicas relevantes:
+
+- modelos `MiniMax-M2.7` e `MiniMax-M2.7-highspeed`;
+- contexto de 204.800 tokens, contando entrada e saida;
+- `MiniMax-M2.7-highspeed` deve ser tratado como rota rapida de aproximadamente 100 tps quando acesso/custo permitirem;
+- uso por API, incluindo endpoint OpenAI-compatible `https://api.minimax.io/v1` e Anthropic-compatible `https://api.minimax.io/anthropic`;
+- foco em software engineering, debugging, seguranca de codigo, ML, documentos e tarefas agenticas;
+- bom candidato para tool loops, agent teams, log analysis e refatoracao multi-arquivo;
+- janela de contexto grande o bastante para repositorios e historicos longos;
+- highspeed deve ser tratado como rota de throughput, nao como rota barata por padrao.
+
+Limitacoes:
+
+- nao e fallback offline para PC modesto;
+- o modelo aberto aparece com 229B parametros, entao self-host local fica fora do caminho normal;
+- self-host deve ficar em pesquisa/laboratorio com infraestrutura propria ate prova de viabilidade;
+- tool calls precisam preservar a resposta completa, inclusive `tool_calls`, `thinking` e `reasoning_details` quando o provedor exigir;
+- deve passar por benchmark proprio antes de entrar em rota automatica.
+
+Uso recomendado:
+
+- `cloud-agentic-coding`;
+- analise de logs e bugs;
+- refactor supervisionado;
+- revisao de codigo e docs;
+- tarefas com muitas etapas independentes;
+- comparacao contra OpenAI/Codex e Opus em tarefas reais do Junio.
+
+Teste minimo antes de promocao:
+
+- 10 tarefas reais do Projeto Codex/RayX;
+- tool call com resposta completa preservada;
+- taxa de erro de JSON/schema;
+- latencia, custo e tokens;
+- qualidade de patch;
+- recuperacao apos falha;
+- comparacao contra rota primaria.
+
+### Gemini
+
+Gemini deve entrar como rota de fallback e pesquisa quando houver chave ou acesso. Pontos relevantes:
+
+- function calling com schemas claros;
+- modos AUTO, ANY e NONE para controlar chamada de ferramentas;
+- parallel function calling para chamadas independentes;
+- compositional function calling para cadeia de funcoes;
+- suporte a thinking em familias recentes;
+- thought signatures devem ser preservadas em conversas multi-turn quando a API exigir;
+- suporte a contexto longo em modelos selecionados;
+- bom uso para busca, analise multimodal, estruturacao e fallback.
+
+RayX deve aproveitar Gemini principalmente quando precisar de funcao estruturada, grounding/pesquisa ou alternativa a OpenAI/Anthropic.
+
+### Gemma E Modelos Google Locais
+
+Gemma deve entrar como familia local/edge, especialmente Gemma 3n quando o PC precisar de modelos pequenos e uteis.
+
+Caracteristicas relevantes:
+
+- Gemma 3n foi desenhado para laptops, tablets e celulares;
+- modelos efetivos E2B/E4B permitem menor carga de memoria;
+- contexto de 32K tokens;
+- PLE caching e carregamento condicional ajudam a reduzir memoria;
+- pode lidar com texto, visao e audio em variantes/capacidades suportadas.
+
+Uso recomendado na RayX:
+
+- chat local de emergencia;
+- sumarizacao local;
+- leitura rapida de capturas/OCR quando suportado;
+- classificacao de tarefas;
+- resposta em portugues quando a nuvem cair;
+- lane leve para manter RayX viva durante falhas de rede.
+
+Gemma nao deve ser tratado como substituto de modelo frontier para arquitetura, autoescrita critica ou refactor complexo sem revisao de um modelo maior.
+
+### LLMs Locais Pequenas
+
+RayX deve manter uma cesta local pequena, cada modelo com funcao clara. Para PC modesto, a selecao inicial de laboratorio deve ser pragmatica:
+
+- `llama3.2:3b`: fallback geral, triagem e modo offline;
+- `gemma3:4b`: sumarizacao, texto cotidiano e visao leve quando suportada;
+- `qwen3:4b`: JSON, tool calling e pequenos agentes;
+- `qwen2.5-coder:3b`: code-only background helper padrao;
+- `qwen3:1.7b`: reserva se `qwen3:4b` ficar pesado;
+- `gemma3n:e2b`: experimental para emergencia multimodal futura;
+- `gemma3n:e4b`: experimental para multimodal local melhor quando houver memoria;
+- `qwen2.5-coder:1.5b`: auxilio rapido em codigo simples;
+- `qwen2.5-coder:7b`: codigo melhor quando houver memoria suficiente;
+- `qwen3-vl:2b`: OCR/GUI/visao em laboratorio se backend suportar;
+- `qwen3:8b`: raciocinio geral melhor, apenas se o PC aguentar;
+- `deepseek-r1:1.5b`: raciocinio local curto, nao executor final;
+- `deepseek-r1:7b` ou `deepseek-r1:8b`: raciocinio local melhor quando houver memoria;
+- `phi4-mini`: resumo/instrucao longa quando o hardware permitir;
+- `llama3.2:1b`: reserva ultra leve.
+
+Comandos iniciais sugeridos:
+
+```powershell
+ollama pull llama3.2:3b
+ollama pull gemma3:4b
+ollama pull qwen3:4b
+ollama pull qwen2.5-coder:3b
+```
+
+Se `qwen3:4b` ficar lento:
+
+```powershell
+ollama pull qwen3:1.7b
+```
+
+Regras:
+
+- modelo local pequeno nunca decide acao sensivel sozinho;
+- todo modelo local deve passar por smoke de portugues, JSON, resumo, codigo e latencia;
+- se falhar em JSON/tool output, fica fora de automacao;
+- Qwen coder local deve continuar preferencialmente code-only, nao chat principal;
+- RayX deve carregar no maximo um modelo local quente por vez em PC fraco, salvo Modo Total.
+
+### OpenRouter E Rotas Livres
+
+OpenRouter deve ser tratado como camada de roteamento, nao como garantia unica. RayX deve:
+
+- consultar modelos e provedores disponiveis;
+- usar fallback model routing quando fizer sentido;
+- medir falhas, rate limits e truncamentos;
+- nao confiar apenas em sucesso HTTP como sucesso de tarefa;
+- manter fallback direto fora do OpenRouter quando possivel;
+- registrar qual provedor real respondeu.
+
+OpenRouter e util para descoberta, benchmarking e continuidade, mas RayX deve validar qualidade por tarefa.
+
+### Ollama Como Barramento Local
+
+Ollama deve ser o primeiro barramento local da RayX.
+
+Capacidades relevantes:
+
+- API local em `localhost:11434`;
+- chat, generate e streaming;
+- structured outputs por schema/`response_format` em API compativel;
+- tool calling em modelos que suportam;
+- biblioteca de modelos com tamanhos diferentes.
+
+RayX deve usar Ollama para:
+
+- health check local;
+- modelo de emergencia;
+- benchmark de modelos pequenos;
+- tarefas offline;
+- workers locais de baixo risco;
+- comparacao contra respostas de nuvem.
+
+### Politica De Selecao
+
+RayX escolhe modelo por tarefa:
+
+- simples/rapida: modelo barato ou local;
+- codigo pequeno: Codex ou modelo coder validado;
+- arquitetura longa: Opus 4.8, OpenAI forte ou Gemini Pro;
+- navegador/computer use: modelo com capacidade comprovada de UI;
+- emergencia/offline: Ollama local;
+- verificacao cruzada: segundo modelo diferente;
+- autoescrita: pelo menos executor + revisor separados.
+
+Toda decisao de modelo deve ficar logada com motivo curto.
+
+### Fatoracao De Tarefas Entre LLMs
+
+RayX deve decompor trabalho em sub-tarefas paralelas quando isso aumentar velocidade, qualidade ou resiliencia.
+
+Multiagente e acelerador seletivo, nao modo padrao. RayX so abre varios agentes quando eles reduzem tempo real, aumentam cobertura independente ou capturam erros que um teste/revisor unico provavelmente nao pegaria.
+
+Papeis padrao:
+
+- classificador: entende pedido e escolhe estrategia;
+- planejador: quebra a tarefa;
+- buscador: pesquisa/documenta;
+- executor: aplica mudanca;
+- verificador: testa e encontra falhas;
+- revisor: revisa risco, codigo e coerencia;
+- sintetizador: junta resultados em portugues.
+
+Padroes de execucao:
+
+- simples: um modelo rapido resolve;
+- medio: executor + verificador;
+- complexo: planejador + workers paralelos + revisor + sintetizador;
+- sensivel: executor + revisor de outro provedor + log detalhado;
+- incerto: dois modelos opinam, um sintetiza;
+- longo: long-context planner acompanha memoria e workers menores executam partes.
+
+Politicas iniciais:
+
+- `simple`: um agente, sem paralelismo;
+- `research_breadth`: 2 a 4 pesquisadores paralelos e um sintetizador;
+- `code_change`: executor + revisor; paralelismo so para leitura/diagnostico por area;
+- `high_risk`: executor + revisor + teste/validador;
+- `bulk_independent`: fan-out com limite de concorrencia e cache;
+- `ambiguous`: orquestrador faz plano curto antes de abrir workers;
+- `local_low_resource`: no maximo um modelo local conversacional quente; Qwen coder apenas helper de codigo.
+
+Regras de eficiencia:
+
+- nao paralelizar tarefas dependentes;
+- nao pedir a tres modelos a mesma coisa se um smoke barato basta;
+- usar consenso so quando ha incerteza real ou risco;
+- dividir por arquivos, ferramentas, dominios ou fases;
+- cada worker recebe escopo fechado e criterio de saida;
+- resultados entram em memoria com origem, modelo, custo, latencia e confianca;
+- se dois agentes discordarem, RayX registra conflito e sobe para revisor ou usuario conforme risco.
+- usar orquestracao deterministica quando o workflow for conhecido;
+- usar roteamento por LLM quando a intencao for aberta ou especialistas precisarem ser escolhidos dinamicamente.
+
+Freios obrigatorios:
+
+- `task_fingerprint`: hash de objetivo, arquivos/fontes e tipo de saida;
+- `scope_key`: evita dois agentes mexendo no mesmo escopo;
+- cache por subtarefa;
+- limite de agentes por classe de tarefa;
+- deduplicacao de fontes/arquivos antes de spawn;
+- handoff compacto em vez de historico inteiro;
+- cancelamento quando criterio de pronto ja foi satisfeito;
+- fail-fast para provedor em rate limit;
+- orquestrador como dono do orcamento.
+
+Metadados obrigatorios por subtarefa:
+
+- objetivo;
+- modelo/provedor;
+- papel;
+- ferramentas permitidas;
+- arquivos/escopo;
+- custo estimado;
+- deadline;
+- resultado;
+- score de confianca;
+- decisao: aceito, rejeitado, precisa revisao, precisa usuario.
+
+Evento estruturado minimo:
+
+```json
+{
+  "run_id": "...",
+  "task_id": "...",
+  "parent_task_id": "...",
+  "agent_role": "orchestrator|executor|reviewer|judge|researcher",
+  "model": "...",
+  "provider": "...",
+  "route_reason": "...",
+  "task_fingerprint": "...",
+  "scope_key": "...",
+  "input_refs": ["..."],
+  "output_ref": "...",
+  "handoff_summary": "...",
+  "constraints": ["..."],
+  "started_at": "...",
+  "ended_at": "...",
+  "latency_ms": 0,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "estimated_cost": 0,
+  "tool_calls": [],
+  "status": "success|failed|cancelled|needs_review",
+  "failure_type": "timeout|rate_limit|validation|tool_error|low_confidence",
+  "confidence": 0.0,
+  "review_result": "pass|fail|warn",
+  "dedupe_hit": false,
+  "cache_hit": false
+}
+```
+
 ## Protocolos 24h
 
 ### Protocolo Sistema Vivo
@@ -378,3 +724,31 @@ RayX esta pronta para avancar quando:
 - conhece ferramentas herdadas iniciais;
 - sobrevive a falha simulada de uma rota LLM;
 - entrega relatorio claro em portugues.
+
+## Fontes De Pesquisa Do Roteador
+
+Esta versao da spec foi fechada consultando documentacao primaria/oficial dos provedores e modelos:
+
+- Anthropic Claude Opus 4.8: https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8
+- OpenAI GPT-5.1: https://platform.openai.com/docs/models/gpt-5.1/
+- OpenAI Function Calling: https://platform.openai.com/docs/guides/function-calling
+- OpenAI Agents SDK: https://platform.openai.com/docs/guides/agents-sdk/
+- MiniMax M2.7: https://www.minimax.io/models/text/m27
+- MiniMax API Overview: https://platform.minimax.io/docs/api-reference/api-overview
+- MiniMax AI Coding Tools: https://platform.minimax.io/docs/guides/text-ai-coding-tools
+- MiniMax Tool Use: https://platform.minimax.io/docs/guides/text-m2-function-call
+- MiniMax M2.7 Hugging Face: https://huggingface.co/MiniMaxAI/MiniMax-M2.7
+- Google Gemini Function Calling: https://ai.google.dev/gemini-api/docs/function-calling
+- Google Gemini Thinking: https://ai.google.dev/gemini-api/docs/thinking
+- Google Gemma 3n: https://ai.google.dev/gemma/docs/gemma-3n
+- Ollama API: https://docs.ollama.com/api
+- Ollama Tool Calling: https://docs.ollama.com/capabilities/tool-calling
+- Ollama Structured Outputs: https://docs.ollama.com/capabilities/structured-outputs
+- Ollama Gemma 3n: https://ollama.com/library/gemma3n
+- Ollama Qwen2.5 Coder: https://ollama.com/library/qwen2.5-coder
+- Ollama Qwen3: https://ollama.com/library/qwen3
+- Ollama DeepSeek-R1: https://ollama.com/library/deepseek-r1
+- Ollama Phi4 Mini: https://ollama.com/library/phi4-mini
+- Ollama Llama 3.2: https://ollama.com/library/llama3.2
+- OpenRouter Model Fallbacks: https://openrouter.ai/docs/guides/routing/model-fallbacks
+- OpenRouter Provider Selection: https://openrouter.ai/docs/guides/routing/provider-selection
