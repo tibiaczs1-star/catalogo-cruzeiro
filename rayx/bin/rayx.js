@@ -4,8 +4,10 @@
 const { generateCompanion } = require("../core/companion");
 const { syncProfiles, listProfiles, updateProfile } = require("../core/chrome-profiles");
 const { generateDashboard } = require("../core/dashboard");
+const { checkDesktop, openDesktop } = require("../core/desktop");
 const { buildReport } = require("../core/doctor");
 const { openRayX } = require("../core/open");
+const { getOperationalState, runCycle } = require("../core/orchestrator");
 const { runCommand, startShell } = require("../core/shell");
 const { renderStatus } = require("../core/status");
 
@@ -15,6 +17,8 @@ function printHelp() {
 Uso:
   rayx status
   rayx doctor
+  rayx desktop
+  rayx orchestrator [cycle]
   rayx shell
   rayx dashboard
   rayx companion
@@ -57,6 +61,26 @@ function main(argv = process.argv.slice(2)) {
 
   if (command === "doctor") {
     process.stdout.write(`${JSON.stringify(buildReport(), null, 2)}\n`);
+    return;
+  }
+
+  if (command === "desktop") {
+    if (argv.includes("--check") || argv.includes("--dry-run")) {
+      process.stdout.write(`${JSON.stringify(checkDesktop(), null, 2)}\n`);
+      return;
+    }
+
+    const result = openDesktop({
+      wait: argv.includes("--wait"),
+      dev: argv.includes("--dev")
+    });
+    process.stdout.write(`RayX desktop aberto. PID ${result.pid}\n`);
+    return;
+  }
+
+  if (command === "orchestrator") {
+    const payload = subcommand === "cycle" ? runCycle() : getOperationalState();
+    process.stdout.write(`${JSON.stringify(payload, null, 2)}\n`);
     return;
   }
 

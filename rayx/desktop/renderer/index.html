@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RayX</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="mark">RX</div>
+          <div>
+            <div class="brand">RayX</div>
+            <div class="brand-subtitle">operacao local</div>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="RayX">
+          <a class="nav-item active" href="#operacao">Operacao</a>
+          <a class="nav-item" href="#agentes">Agentes</a>
+          <a class="nav-item" href="#chrome">Chrome</a>
+          <a class="nav-item" href="#sistema">Sistema</a>
+        </nav>
+
+        <div class="side-status">
+          <span class="status-dot" id="modeDot"></span>
+          <div>
+            <div class="side-label">modo atual</div>
+            <div id="modeText">carregando</div>
+          </div>
+        </div>
+
+        <div class="side-note">
+          <div class="side-label">regra operacional</div>
+          <p>RayX deve mostrar o que esta fazendo e nao ficar mudo em operacoes longas.</p>
+        </div>
+      </aside>
+
+      <main class="workspace" id="operacao">
+        <header class="topbar">
+          <div>
+            <h1>Centro RayX</h1>
+            <p id="subtitle">iniciando leitura do computador</p>
+          </div>
+          <div class="actions">
+            <button id="refreshButton" type="button">Atualizar</button>
+            <button id="cycleButton" type="button" class="primary">Rodar ciclo</button>
+            <button id="dashboardButton" type="button">Dashboard</button>
+            <button id="companionButton" type="button">Companion</button>
+          </div>
+        </header>
+
+        <section class="metrics" aria-label="Resumo">
+          <article class="metric">
+            <span class="metric-label">Codex</span>
+            <strong id="codexMetric">--</strong>
+            <small id="codexDetail">aguardando</small>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Hermes</span>
+            <strong id="hermesMetric">--</strong>
+            <small id="hermesDetail">aguardando</small>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Ollama</span>
+            <strong id="ollamaMetric">--</strong>
+            <small id="ollamaDetail">aguardando</small>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Chrome</span>
+            <strong id="chromeMetric">--</strong>
+            <small id="chromeDetail">aguardando</small>
+          </article>
+        </section>
+
+        <section class="grid two" id="agentes">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Adaptadores</h2>
+              <span id="adapterCount">0 linhas</span>
+            </div>
+            <div class="table" id="adaptersTable"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Workers paralelos</h2>
+              <span id="workerCount">0 ativos</span>
+            </div>
+            <div class="table" id="workersTable"></div>
+          </div>
+        </section>
+
+        <section class="grid two">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Fila interna</h2>
+              <span id="taskCount">0 tarefas</span>
+            </div>
+            <div class="list" id="tasksList"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Eventos</h2>
+              <span id="eventCount">0 eventos</span>
+            </div>
+            <div class="list compact" id="eventsList"></div>
+          </div>
+        </section>
+
+        <section class="grid two" id="chrome">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Perfis do Chrome</h2>
+              <span id="profileCount">0 perfis</span>
+            </div>
+            <div class="table" id="profilesTable"></div>
+          </div>
+
+          <div class="panel" id="sistema">
+            <div class="panel-head">
+              <h2>Status bruto</h2>
+              <span id="statePath">sem arquivo</span>
+            </div>
+            <pre id="statusText">Carregando RayX...</pre>
+          </div>
+        </section>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

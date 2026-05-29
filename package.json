@@ -28,9 +28,12 @@
     "rayx:build:exe": "powershell -NoProfile -ExecutionPolicy Bypass -File rayx/launcher/build-launcher.ps1",
     "rayx:companion": "node rayx/core/companion.js",
     "rayx:dashboard": "node rayx/core/dashboard.js",
+    "rayx:desktop": "node rayx/core/desktop.js",
     "rayx:doctor": "node rayx/core/doctor.js --pretty",
     "rayx:doctor:save": "node rayx/core/doctor.js --pretty --out .codex-temp/rayx-doctor/latest.json",
     "rayx:open": "node rayx/core/open.js all",
+    "rayx:orchestrator": "node rayx/core/orchestrator.js",
+    "rayx:cycle": "node rayx/core/orchestrator.js cycle",
     "rayx:shell": "node rayx/core/shell.js",
     "rayx:status": "node rayx/core/status.js",
     "start": "node server.js",
@@ -44,5 +47,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "electron": "^42.3.0"
   }
 }

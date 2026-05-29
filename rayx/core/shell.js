@@ -4,8 +4,10 @@
 const readline = require("node:readline");
 const { listProfiles, syncProfiles } = require("./chrome-profiles");
 const { generateDashboard } = require("./dashboard");
+const { openDesktop } = require("./desktop");
 const { buildReport } = require("./doctor");
 const { openRayX } = require("./open");
+const { runCycle } = require("./orchestrator");
 const { renderStatus } = require("./status");
 
 const COMMANDS = [
@@ -14,6 +16,8 @@ const COMMANDS = [
   ["/hermes", "Estado do Hermes local"],
   ["/ollama", "Modelos locais e politica"],
   ["/chrome", "Chrome e perfis detectados"],
+  ["/desktop", "Abre o app desktop RayX"],
+  ["/cycle", "Roda um ciclo local do orquestrador"],
   ["/dashboard", "Gera dashboard HTML local"],
   ["/open", "Abre dashboard e companion"],
   ["/profiles", "Sincroniza apelidos/permissoes dos perfis Chrome"],
@@ -98,6 +102,19 @@ function runCommand(input) {
 
   if (command === "/exit" || command === "/quit") {
     return true;
+  }
+
+  if (command === "/desktop") {
+    const result = openDesktop();
+    process.stdout.write(`RayX desktop aberto. PID ${result.pid}\n`);
+    return false;
+  }
+
+  if (command === "/cycle") {
+    const state = runCycle();
+    const cycle = state.lastCycle || {};
+    process.stdout.write(`Ciclo concluido: ${cycle.adapters?.ready ?? 0} ready, ${cycle.adapters?.partial ?? 0} partial, ${cycle.adapters?.missing ?? 0} missing\n`);
+    return false;
   }
 
   const report = buildReport();

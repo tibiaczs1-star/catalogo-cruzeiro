@@ -31,7 +31,7 @@ public static class RayXLauncher
             return 1;
         }
 
-        string[] forwarded = args.Length == 0 ? new[] { "shell" } : args;
+        string[] forwarded = args.Length == 0 ? new[] { "desktop" } : args;
         string arguments = Quote(script) + " " + string.Join(" ", forwarded.Select(Quote));
 
         var start = new ProcessStartInfo

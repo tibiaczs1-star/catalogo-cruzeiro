@@ -232,3 +232,17 @@ O proximo corte de construcao deve criar um `rayx doctor` local que gere um JSON
 - proximos passos.
 
 Esse `doctor` deve ser a primeira prova de natividade da RayX neste PC.
+
+## Corte Implementado No MVP Local
+
+O MVP local agora nasce com:
+
+- `rayx doctor` para diagnostico bruto;
+- `rayx status` para resumo em portugues;
+- `rayx profiles` para registrar perfis do Chrome e permissoes;
+- `rayx dashboard` e `rayx companion` como saidas locais auxiliares;
+- `rayx orchestrator` e `rayx orchestrator cycle` para estado, eventos, workers e fila;
+- `rayx desktop` para abrir o console operacional Electron;
+- `dist/rayx/RayX.exe` como launcher Windows, abrindo o desktop quando executado sem argumentos.
+
+O app desktop e a primeira interface operacional real da RayX. Ele mostra adaptadores, workers paralelos, fila interna, eventos, perfis Chrome e status bruto do sistema sem depender da nuvem para iniciar.
