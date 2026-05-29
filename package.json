@@ -21,6 +21,7 @@
     "guard:pubpaid": "node scripts/guard-pubpaid-no-canvas.js",
     "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
     "rayx:chrome:profiles": "node rayx/core/chrome-profiles.js",
+    "rayx:dashboard": "node rayx/core/dashboard.js",
     "rayx:doctor": "node rayx/core/doctor.js --pretty",
     "rayx:doctor:save": "node rayx/core/doctor.js --pretty --out .codex-temp/rayx-doctor/latest.json",
     "rayx:shell": "node rayx/core/shell.js",
