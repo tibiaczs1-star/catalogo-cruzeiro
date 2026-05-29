@@ -246,3 +246,40 @@ O MVP local agora nasce com:
 - `dist/rayx/RayX.exe` como launcher Windows, abrindo o desktop quando executado sem argumentos.
 
 O app desktop e a primeira interface operacional real da RayX. Ele mostra adaptadores, workers paralelos, fila interna, eventos, perfis Chrome e status bruto do sistema sem depender da nuvem para iniciar.
+
+## Corte Funcional Seguinte
+
+Depois da critica de que o primeiro console ainda parecia pouco acionavel, o RayX recebeu contratos e comandos reais:
+
+- `rayx boot` executa uma sequencia visivel: doctor, perfis, catalogo, Hermes, Chrome/CDP, orquestrador e desktop check;
+- `rayx catalog` lista CLIs herdadas, grupos de ferramentas, skills Codex e prompts locais;
+- `rayx hermes status|open|logs` opera o Hermes como adaptador separado;
+- `rayx chrome-bridge status|launch|tabs` cria a ponte CDP e lista abas controlaveis;
+- `rayx profiles trust-local --permission allow` aplica a autorizacao local aos perfis Chrome existentes;
+- o Chrome/CDP ganhou modo sidecar RayX para controle imediato sem depender de uma janela Chrome ja aberta com debug remoto.
+
+## Correcao Conceitual Do Chat
+
+RayX nao deve operar como um chat isolado. O chat e apenas a entrada humana do fluxo unico:
+
+```text
+pedido do usuario
+  -> missao RayX
+  -> coleta paralela: doctor + catalogo + Hermes + Chrome/CDP
+  -> lanes: Codex + Hermes + Ollama + Chrome + shell + skills/agentes
+  -> sintese unica em portugues
+```
+
+O comando `rayx mission "..."` e o `rayx chat "..."` agora usam esse barramento. A resposta deve mostrar evidencia coletada, lanes acionadas e resultado unico; quando possivel, Ollama local entra como lane de sintese/fallback, enquanto Codex continua sendo a lane principal para implementacao e decisao.
+
+## Area De Trabalho Desktop
+
+A UI desktop nao deve chamar diagnosticos pesados diretamente no processo visual. Chamadas como doctor, boot, catalogo, Hermes, Chrome/CDP e chat devem rodar em subprocessos RayX, mantendo a janela responsiva.
+
+A area principal deve se comportar como workspace de trabalho:
+
+- conversa RayX com historico visivel;
+- compositor de missao;
+- painel de evidencias coletadas por lane;
+- painel de atividade/progresso;
+- botoes de boot, catalogo, Hermes e Chrome como atalhos, nao como substitutos do fluxo conversacional.

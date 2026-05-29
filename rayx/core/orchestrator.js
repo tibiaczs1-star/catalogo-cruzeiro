@@ -4,7 +4,10 @@
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
+const { getChromeBridgeStatus } = require("../adapters/chrome");
+const { getHermesStatus } = require("../adapters/hermes");
 const { syncProfiles } = require("./chrome-profiles");
+const { scanCatalog } = require("./catalog");
 const { buildReport } = require("./doctor");
 
 function rayxStateDir() {
@@ -153,34 +156,38 @@ function seedTasks(state) {
   state.tasks.push(
     {
       id: "task_hermes_adapter",
-      title: "Finalizar adaptador Hermes",
+      title: "Operar adaptador Hermes",
       status: "ready",
       priority: "P0",
       lane: "legacy",
-      detail: "start, stop, logs e doctor"
+      detail: "status, desktop e logs via rayx hermes"
     },
     {
-      id: "task_boot",
-      title: "Boot transparente",
-      status: "planned",
+      id: "task_chrome_bridge",
+      title: "Liberar ponte Chrome/CDP",
+      status: "ready",
       priority: "P1",
-      lane: "core",
-      detail: "etapas, tempo decorrido e satisfacao obrigatoria"
+      lane: "browser",
+      detail: "perfis com permissao allow e listagem de abas CDP"
     },
     {
-      id: "task_cli_bench",
-      title: "Bench lane de CLIs externas",
+      id: "task_boot_catalog",
+      title: "Boot e catalogo funcional",
       status: "planned",
       priority: "P2",
-      lane: "cloud",
-      detail: "OpenCode, Kilo, Kiro e FreeBuff em laboratorio"
+      lane: "core",
+      detail: "rayx boot e rayx catalog com resultados visiveis"
     }
   );
 }
 
 function getOperationalState() {
   const report = buildReport();
-  const profiles = syncProfiles().payload;
+  const profileResult = syncProfiles(report);
+  const profiles = profileResult.payload;
+  const catalog = scanCatalog({ report });
+  const hermesAdapter = getHermesStatus({ report });
+  const chromeBridge = getChromeBridgeStatus({ report, profileResult });
   const state = readState();
   seedTasks(state);
   state.mode = report.recommendation?.mode || state.mode || "trabalho";
@@ -193,6 +200,23 @@ function getOperationalState() {
     mode: state.mode,
     report,
     profiles,
+    catalog: {
+      toolsFound: catalog.tools.filter((tool) => tool.found).length,
+      toolsTotal: catalog.tools.length,
+      skills: catalog.skills.total,
+      prompts: catalog.prompts.total,
+      groups: catalog.groups
+    },
+    hermesAdapter,
+    chromeBridge: {
+      found: chromeBridge.found,
+      chromeExePath: chromeBridge.chromeExePath,
+      remoteDebuggingPort: chromeBridge.remoteDebuggingPort,
+      cdpReachable: chromeBridge.cdpReachable,
+      tabs: chromeBridge.tabs,
+      policy: chromeBridge.policy,
+      actions: chromeBridge.actions
+    },
     adapters: adapterStatus(report, profiles),
     workers: defaultWorkers(report),
     tasks: state.tasks,

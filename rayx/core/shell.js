@@ -2,6 +2,10 @@
 "use strict";
 
 const readline = require("node:readline");
+const { getChromeBridgeStatus, renderChromeBridge } = require("../adapters/chrome");
+const { getHermesStatus, renderHermesStatus } = require("../adapters/hermes");
+const { renderBootResult, runBoot } = require("./boot");
+const { scanCatalog } = require("./catalog");
 const { listProfiles, syncProfiles } = require("./chrome-profiles");
 const { generateDashboard } = require("./dashboard");
 const { openDesktop } = require("./desktop");
@@ -13,9 +17,12 @@ const { renderStatus } = require("./status");
 const COMMANDS = [
   ["/status", "Resumo local em portugues"],
   ["/doctor", "Diagnostico JSON completo"],
+  ["/boot", "Executa boot operacional com etapas visiveis"],
+  ["/catalog", "Cataloga CLIs, skills e prompts herdados"],
   ["/hermes", "Estado do Hermes local"],
   ["/ollama", "Modelos locais e politica"],
   ["/chrome", "Chrome e perfis detectados"],
+  ["/chrome-bridge", "Estado da ponte Chrome/CDP"],
   ["/desktop", "Abre o app desktop RayX"],
   ["/cycle", "Roda um ciclo local do orquestrador"],
   ["/dashboard", "Gera dashboard HTML local"],
@@ -114,6 +121,34 @@ function runCommand(input) {
     const state = runCycle();
     const cycle = state.lastCycle || {};
     process.stdout.write(`Ciclo concluido: ${cycle.adapters?.ready ?? 0} ready, ${cycle.adapters?.partial ?? 0} partial, ${cycle.adapters?.missing ?? 0} missing\n`);
+    return false;
+  }
+
+  if (command === "/boot") {
+    const result = runBoot({
+      onProgress: (event) => {
+        if (event.type === "start") process.stdout.write(`> ${event.step.id}: ${event.step.title}\n`);
+        if (event.type === "finish") process.stdout.write(`  ${event.step.ok ? "OK" : "NO"} ${event.step.summary}\n`);
+      }
+    });
+    process.stdout.write(`${renderBootResult(result)}\n`);
+    return false;
+  }
+
+  if (command === "/catalog") {
+    const catalog = scanCatalog();
+    const found = catalog.tools.filter((tool) => tool.found).length;
+    process.stdout.write(`Catalogo RayX: ${found}/${catalog.tools.length} ferramentas, ${catalog.skills.total} skills, ${catalog.prompts.total} prompts.\n`);
+    return false;
+  }
+
+  if (command === "/hermes") {
+    process.stdout.write(`${renderHermesStatus(getHermesStatus())}\n`);
+    return false;
+  }
+
+  if (command === "/chrome-bridge") {
+    process.stdout.write(`${renderChromeBridge(getChromeBridgeStatus())}\n`);
     return false;
   }
 

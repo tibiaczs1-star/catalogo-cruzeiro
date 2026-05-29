@@ -57,6 +57,24 @@ button:disabled {
   opacity: 0.62;
 }
 
+textarea {
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  padding: 10px 12px;
+  font: inherit;
+  line-height: 1.4;
+}
+
+textarea:focus {
+  outline: 2px solid rgb(47 108 163 / 24%);
+  border-color: var(--info);
+}
+
 .app-shell {
   display: grid;
   grid-template-columns: 260px minmax(720px, 1fr);
@@ -191,6 +209,128 @@ h2 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+}
+
+.workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+  gap: 12px;
+  min-height: 480px;
+}
+
+.conversation,
+.compact-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.conversation {
+  display: grid;
+  grid-template-rows: 48px minmax(260px, 1fr) auto;
+}
+
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  max-height: 540px;
+  overflow: auto;
+  padding: 14px;
+}
+
+.message {
+  display: grid;
+  gap: 6px;
+  max-width: 88%;
+  border: 1px solid #e1e6ee;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 11px 12px;
+}
+
+.message.user {
+  align-self: flex-end;
+  border-color: #bfd2e4;
+  background: #f7fbff;
+}
+
+.message.rayx {
+  align-self: flex-start;
+}
+
+.message.system {
+  align-self: stretch;
+  max-width: none;
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.message-meta {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.message-body {
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding: 12px;
+}
+
+.composer textarea {
+  min-height: 76px;
+}
+
+.workspace-side {
+  display: grid;
+  gap: 12px;
+  grid-template-rows: 1fr 1fr;
+  min-height: 0;
+}
+
+.compact-panel {
+  min-height: 0;
+}
+
+.evidence-list,
+.activity-list {
+  display: grid;
+  align-content: start;
+  max-height: 205px;
+  overflow: auto;
+}
+
+.evidence,
+.activity {
+  border-bottom: 1px solid #edf0f4;
+  padding: 10px 12px;
+}
+
+.evidence:last-child,
+.activity:last-child {
+  border-bottom: 0;
+}
+
+.evidence strong,
+.activity strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.evidence small,
+.activity small {
+  color: var(--muted);
+  line-height: 1.35;
 }
 
 .metric,

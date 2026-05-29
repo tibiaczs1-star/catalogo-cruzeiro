@@ -46,11 +46,47 @@
           </div>
           <div class="actions">
             <button id="refreshButton" type="button">Atualizar</button>
+            <button id="bootButton" type="button" class="primary">Boot</button>
             <button id="cycleButton" type="button" class="primary">Rodar ciclo</button>
+            <button id="catalogButton" type="button">Catalogo</button>
+            <button id="hermesButton" type="button">Hermes</button>
+            <button id="chromeBridgeButton" type="button">Chrome/CDP</button>
             <button id="dashboardButton" type="button">Dashboard</button>
             <button id="companionButton" type="button">Companion</button>
           </div>
         </header>
+
+        <section class="workbench">
+          <div class="conversation">
+            <div class="panel-head">
+              <h2>Conversa RayX</h2>
+              <span id="conversationState">pronto</span>
+            </div>
+            <div class="chat-thread" id="chatThread" aria-live="polite"></div>
+            <div class="composer">
+              <textarea id="missionInput" rows="3" placeholder="Digite a missao: investigar, abrir Chrome/CDP, revisar Hermes, dividir tarefa entre lanes..."></textarea>
+              <button id="missionButton" type="button" class="primary">Enviar</button>
+            </div>
+          </div>
+
+          <div class="workspace-side">
+            <div class="panel compact-panel">
+              <div class="panel-head">
+                <h2>Evidencias</h2>
+                <span id="evidenceCount">0 itens</span>
+              </div>
+              <div class="evidence-list" id="evidenceList"></div>
+            </div>
+
+            <div class="panel compact-panel">
+              <div class="panel-head">
+                <h2>Atividade</h2>
+                <span id="activityCount">0 passos</span>
+              </div>
+              <div class="activity-list" id="activityList"></div>
+            </div>
+          </div>
+        </section>
 
         <section class="metrics" aria-label="Resumo">
           <article class="metric">

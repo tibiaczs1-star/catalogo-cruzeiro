@@ -26,8 +26,20 @@ const refs = {
   eventsList: $("#eventsList"),
   profilesTable: $("#profilesTable"),
   statusText: $("#statusText"),
+  missionInput: $("#missionInput"),
+  missionButton: $("#missionButton"),
+  conversationState: $("#conversationState"),
+  chatThread: $("#chatThread"),
+  evidenceCount: $("#evidenceCount"),
+  evidenceList: $("#evidenceList"),
+  activityCount: $("#activityCount"),
+  activityList: $("#activityList"),
   refreshButton: $("#refreshButton"),
+  bootButton: $("#bootButton"),
   cycleButton: $("#cycleButton"),
+  catalogButton: $("#catalogButton"),
+  hermesButton: $("#hermesButton"),
+  chromeBridgeButton: $("#chromeBridgeButton"),
   dashboardButton: $("#dashboardButton"),
   companionButton: $("#companionButton"),
   toast: $("#toast")
@@ -35,6 +47,7 @@ const refs = {
 
 let latestState = null;
 let toastTimer = null;
+let activityItems = [];
 
 function text(value, fallback = "--") {
   if (value === null || value === undefined || value === "") return fallback;
@@ -81,9 +94,62 @@ function showToast(message) {
   toastTimer = setTimeout(() => refs.toast.classList.remove("visible"), 3800);
 }
 
-function setBusy(isBusy) {
-  refs.refreshButton.disabled = isBusy;
-  refs.cycleButton.disabled = isBusy;
+function setButtonBusy(button, isBusy) {
+  if (!button) return;
+  button.disabled = isBusy;
+}
+
+function appendActivity(title, detail = "") {
+  activityItems.unshift({
+    title,
+    detail,
+    at: new Date().toISOString()
+  });
+  activityItems = activityItems.slice(0, 40);
+  renderActivity();
+}
+
+function renderActivity() {
+  refs.activityCount.textContent = `${activityItems.length} passos`;
+  if (!activityItems.length) {
+    refs.activityList.innerHTML = `<div class="activity"><small>Nenhuma atividade ainda.</small></div>`;
+    return;
+  }
+
+  refs.activityList.innerHTML = activityItems.map((item) => `
+    <div class="activity">
+      <strong>${escapeHtml(item.title)}</strong>
+      <small>${escapeHtml(formatDate(item.at))}${item.detail ? ` - ${escapeHtml(item.detail)}` : ""}</small>
+    </div>
+  `).join("");
+}
+
+function addMessage(role, body, meta = "") {
+  const message = document.createElement("div");
+  message.className = `message ${role}`;
+  message.innerHTML = `
+    <div class="message-meta">${escapeHtml(meta || role)}</div>
+    <div class="message-body">${escapeHtml(body)}</div>
+  `;
+  refs.chatThread.appendChild(message);
+  refs.chatThread.scrollTop = refs.chatThread.scrollHeight;
+}
+
+function renderMissionEvidence(turn) {
+  const jobs = turn?.mission?.jobs || [];
+  refs.evidenceCount.textContent = `${jobs.length} itens`;
+
+  if (!jobs.length) {
+    refs.evidenceList.innerHTML = `<div class="evidence"><small>Sem evidencias de missao.</small></div>`;
+    return;
+  }
+
+  refs.evidenceList.innerHTML = jobs.map((job) => `
+    <div class="evidence">
+      <strong>${escapeHtml(job.id)} ${job.ok ? "ok" : "falhou"}</strong>
+      <small>${escapeHtml(job.lane)} - ${escapeHtml(job.command)} - ${escapeHtml(job.durationMs)}ms</small>
+    </div>
+  `).join("");
 }
 
 function adapterById(state, id) {
@@ -195,7 +261,16 @@ function renderState(state) {
   refs.subtitle.textContent = `ultima leitura ${formatDate(state.generatedAt)}`;
   refs.modeDot.style.background = state.mode === "economia" ? "var(--warn)" : "var(--good)";
   refs.statePath.textContent = text(state.statePath, "sem arquivo");
-  refs.statusText.textContent = state.statusText || JSON.stringify(state.report || {}, null, 2);
+  refs.statusText.textContent = [
+    state.statusText || JSON.stringify(state.report || {}, null, 2),
+    "",
+    state.catalog
+      ? `Catalogo: ${state.catalog.toolsFound}/${state.catalog.toolsTotal} ferramentas, ${state.catalog.skills} skills, ${state.catalog.prompts} prompts`
+      : "",
+    state.chromeBridge
+      ? `Chrome/CDP: porta ${state.chromeBridge.remoteDebuggingPort}, abas ${state.chromeBridge.tabs?.length || 0}, allow ${state.chromeBridge.policy?.allowCount || 0}`
+      : ""
+  ].filter(Boolean).join("\n");
 
   renderMetrics(state);
   renderAdapters(state);
@@ -206,31 +281,57 @@ function renderState(state) {
 }
 
 async function loadState() {
-  setBusy(true);
+  setButtonBusy(refs.refreshButton, true);
+  appendActivity("Atualizando estado", "orquestrador");
   try {
     const state = await window.rayx.getState();
     renderState(state);
     showToast("RayX atualizado.");
+    appendActivity("Estado atualizado", `${state.mode || "modo"} / ${state.adapters?.length || 0} adaptadores`);
   } catch (error) {
     refs.statusText.textContent = error.stack || error.message || String(error);
     showToast("Falha ao carregar estado RayX.");
+    appendActivity("Falha ao atualizar estado", error.message || String(error));
   } finally {
-    setBusy(false);
+    setButtonBusy(refs.refreshButton, false);
   }
 }
 
 async function runCycle() {
-  setBusy(true);
+  setButtonBusy(refs.cycleButton, true);
   showToast("Rodando ciclo local...");
+  appendActivity("Ciclo iniciado", "orquestrador");
   try {
     const state = await window.rayx.runCycle();
     renderState(state);
     showToast("Ciclo local concluido.");
+    appendActivity("Ciclo concluido", `${state.lastCycle?.adapters?.ready || 0} adaptadores ready`);
   } catch (error) {
     refs.statusText.textContent = error.stack || error.message || String(error);
     showToast("Falha no ciclo local.");
+    appendActivity("Falha no ciclo", error.message || String(error));
   } finally {
-    setBusy(false);
+    setButtonBusy(refs.cycleButton, false);
+  }
+}
+
+async function runPayloadAction(label, action, button = null) {
+  setButtonBusy(button, true);
+  showToast(`${label} em andamento...`);
+  appendActivity(`${label} iniciado`);
+  try {
+    const payload = await action();
+    refs.statusText.textContent = JSON.stringify(payload, null, 2);
+    showToast(`${label} concluido.`);
+    appendActivity(`${label} concluido`);
+    return payload;
+  } catch (error) {
+    refs.statusText.textContent = error.stack || error.message || String(error);
+    showToast(`${label} falhou.`);
+    appendActivity(`${label} falhou`, error.message || String(error));
+    return null;
+  } finally {
+    setButtonBusy(button, false);
   }
 }
 
@@ -244,11 +345,59 @@ async function openTarget(target) {
   }
 }
 
+async function sendMission() {
+  const message = refs.missionInput.value.trim();
+  if (!message) {
+    showToast("Digite uma missao para o RayX.");
+    return;
+  }
+
+  setButtonBusy(refs.missionButton, true);
+  refs.conversationState.textContent = "coletando";
+  addMessage("user", message, "voce");
+  addMessage("system", "RayX coletando doctor, catalogo, Hermes e Chrome/CDP em paralelo...", "missao");
+  appendActivity("Missao iniciada", message.slice(0, 80));
+  showToast("Missao RayX em andamento...");
+  try {
+    const turn = await window.rayx.ask(message);
+    addMessage("rayx", turn.answer, "RayX");
+    renderMissionEvidence(turn);
+    refs.missionInput.value = "";
+    refs.conversationState.textContent = "respondido";
+    showToast("Missao respondida.");
+    appendActivity("Missao respondida", `${turn.mission?.jobs?.length || 0} lanes`);
+    await loadState();
+  } catch (error) {
+    addMessage("system", error.stack || error.message || String(error), "erro");
+    refs.conversationState.textContent = "erro";
+    showToast("Missao falhou.");
+    appendActivity("Missao falhou", error.message || String(error));
+  } finally {
+    setButtonBusy(refs.missionButton, false);
+  }
+}
+
+refs.missionButton.addEventListener("click", sendMission);
+refs.missionInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+    sendMission();
+  }
+});
 refs.refreshButton.addEventListener("click", loadState);
+refs.bootButton.addEventListener("click", async () => {
+  await runPayloadAction("Boot RayX", () => window.rayx.runBoot(), refs.bootButton);
+  await loadState();
+});
 refs.cycleButton.addEventListener("click", runCycle);
+refs.catalogButton.addEventListener("click", () => runPayloadAction("Catalogo", () => window.rayx.scanCatalog(), refs.catalogButton));
+refs.hermesButton.addEventListener("click", () => runPayloadAction("Hermes", () => window.rayx.getHermes(), refs.hermesButton));
+refs.chromeBridgeButton.addEventListener("click", () => runPayloadAction("Chrome/CDP", () => window.rayx.getChromeBridge(), refs.chromeBridgeButton));
 refs.dashboardButton.addEventListener("click", () => openTarget("dashboard"));
 refs.companionButton.addEventListener("click", () => openTarget("companion"));
 
+addMessage("rayx", "Area de trabalho pronta. Escreva uma missao e eu coleto contexto nas lanes locais antes de responder.", "RayX");
+renderMissionEvidence(null);
+renderActivity();
 loadState();
 setInterval(() => {
   if (!document.hidden && latestState) loadState();

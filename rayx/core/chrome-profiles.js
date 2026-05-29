@@ -51,8 +51,8 @@ function mergeProfiles(detected, existing) {
   });
 }
 
-function syncProfiles() {
-  const report = buildReport();
+function syncProfiles(reportOverride = null) {
+  const report = reportOverride || buildReport();
   const file = profileConfigPath();
   const existing = readExistingConfig(file);
   const profiles = mergeProfiles(report.chrome?.profiles || [], existing);
@@ -93,6 +93,25 @@ function updateProfile(args) {
   writeJson(file, payload);
 
   return { file, profile, payload };
+}
+
+function trustProfiles(args = {}) {
+  const { file, payload } = syncProfiles();
+  const permission = normalizePermission(args.permission || "allow");
+  const purpose = args.purpose !== undefined
+    ? String(args.purpose).trim()
+    : "RayX local autorizado pelo usuario";
+
+  for (const profile of payload.profiles) {
+    profile.permission = permission;
+    if (purpose) profile.purpose = purpose;
+    profile.notes = args.notes !== undefined ? String(args.notes).trim() : profile.notes;
+  }
+
+  payload.updatedAt = new Date().toISOString();
+  writeJson(file, payload);
+
+  return { file, payload, permission };
 }
 
 function normalizePermission(value) {
@@ -170,7 +189,11 @@ function parseArgs(argv) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
-  const result = args.set ? updateProfile(args) : syncProfiles();
+  const result = process.argv.includes("trust-local")
+    ? trustProfiles(args)
+    : args.set
+      ? updateProfile(args)
+      : syncProfiles();
   const { file, payload } = result;
 
   if (args.pathOnly) {
@@ -199,6 +222,7 @@ if (require.main === module) {
 module.exports = {
   profileConfigPath,
   syncProfiles,
+  trustProfiles,
   updateProfile,
   listProfiles
 };

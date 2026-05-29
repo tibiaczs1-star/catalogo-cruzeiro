@@ -2,12 +2,18 @@
 "use strict";
 
 const { generateCompanion } = require("../core/companion");
-const { syncProfiles, listProfiles, updateProfile } = require("../core/chrome-profiles");
+const { getChromeBridgeStatus, launchChromeBridge, renderChromeBridge } = require("../adapters/chrome");
+const { getHermesStatus, openHermesDesktop, renderHermesStatus } = require("../adapters/hermes");
+const { renderBootResult, runBoot } = require("../core/boot");
+const { askRayX, startChat } = require("../core/chat");
+const { scanCatalog } = require("../core/catalog");
+const { syncProfiles, listProfiles, trustProfiles, updateProfile } = require("../core/chrome-profiles");
 const { generateDashboard } = require("../core/dashboard");
 const { checkDesktop, openDesktop } = require("../core/desktop");
 const { buildReport } = require("../core/doctor");
 const { openRayX } = require("../core/open");
 const { getOperationalState, runCycle } = require("../core/orchestrator");
+const { renderMissionResult, runMission } = require("../core/mission");
 const { runCommand, startShell } = require("../core/shell");
 const { renderStatus } = require("../core/status");
 
@@ -18,12 +24,19 @@ Uso:
   rayx status
   rayx doctor
   rayx desktop
+  rayx boot
+  rayx chat "sua missao"
+  rayx mission "sua missao"
+  rayx catalog
   rayx orchestrator [cycle]
+  rayx hermes status|open|logs
+  rayx chrome-bridge status|launch|tabs
   rayx shell
   rayx dashboard
   rayx companion
   rayx open dashboard|companion|all
   rayx profiles
+  rayx profiles trust-local --permission allow|observe
   rayx profiles set <name> --alias <alias> --permission ask|allow|deny|observe --purpose <texto>
 
 Atalhos:
@@ -46,7 +59,7 @@ function parseNamedArgs(argv) {
   return args;
 }
 
-function main(argv = process.argv.slice(2)) {
+async function main(argv = process.argv.slice(2)) {
   const [command, subcommand, ...rest] = argv;
 
   if (!command || command === "help" || command === "--help" || command === "-h") {
@@ -78,9 +91,95 @@ function main(argv = process.argv.slice(2)) {
     return;
   }
 
+  if (command === "boot") {
+    const json = argv.includes("--json");
+    const result = runBoot({
+      onProgress: json
+        ? null
+        : (event) => {
+            if (event.type === "start") process.stdout.write(`> ${event.step.id}: ${event.step.title}\n`);
+            if (event.type === "finish") process.stdout.write(`  ${event.step.ok ? "OK" : "NO"} ${event.step.summary}\n`);
+          }
+    });
+    process.stdout.write(json ? `${JSON.stringify(result, null, 2)}\n` : `${renderBootResult(result)}\n`);
+    return;
+  }
+
+  if (command === "mission") {
+    const message = argv.slice(1).filter((arg) => arg !== "--json" && arg !== "--no-llm").join(" ");
+    const result = await runMission(message, { skipLlm: argv.includes("--no-llm") });
+    process.stdout.write(argv.includes("--json") ? `${JSON.stringify(result, null, 2)}\n` : `${renderMissionResult(result)}\n`);
+    return;
+  }
+
+  if (command === "chat") {
+    const message = argv.slice(1).filter((arg) => arg !== "--json" && arg !== "--no-llm").join(" ");
+    if (!message) {
+      await startChat();
+      return;
+    }
+    const turn = await askRayX(message, { skipLlm: argv.includes("--no-llm") });
+    process.stdout.write(argv.includes("--json") ? `${JSON.stringify(turn, null, 2)}\n` : `${turn.answer}\n`);
+    return;
+  }
+
+  if (command === "catalog") {
+    process.stdout.write(`${JSON.stringify(scanCatalog(), null, 2)}\n`);
+    return;
+  }
+
   if (command === "orchestrator") {
     const payload = subcommand === "cycle" ? runCycle() : getOperationalState();
     process.stdout.write(`${JSON.stringify(payload, null, 2)}\n`);
+    return;
+  }
+
+  if (command === "hermes") {
+    if (subcommand === "open") {
+      process.stdout.write(`${JSON.stringify(openHermesDesktop(), null, 2)}\n`);
+      return;
+    }
+
+    const status = getHermesStatus();
+    if (subcommand === "logs") {
+      process.stdout.write(`${JSON.stringify(status.logs, null, 2)}\n`);
+      return;
+    }
+
+    if (argv.includes("--json")) {
+      process.stdout.write(`${JSON.stringify(status, null, 2)}\n`);
+      return;
+    }
+
+    process.stdout.write(`${renderHermesStatus(status)}\n`);
+    return;
+  }
+
+  if (command === "chrome-bridge") {
+    const named = parseNamedArgs(rest);
+    const options = {
+      profile: named.profile,
+      port: named.port ? Number(named.port) : undefined,
+      url: named.url
+    };
+
+    if (subcommand === "launch") {
+      process.stdout.write(`${JSON.stringify(launchChromeBridge(options), null, 2)}\n`);
+      return;
+    }
+
+    const status = getChromeBridgeStatus(options);
+    if (subcommand === "tabs") {
+      process.stdout.write(`${JSON.stringify(status.tabs, null, 2)}\n`);
+      return;
+    }
+
+    if (argv.includes("--json")) {
+      process.stdout.write(`${JSON.stringify(status, null, 2)}\n`);
+      return;
+    }
+
+    process.stdout.write(`${renderChromeBridge(status)}\n`);
     return;
   }
 
@@ -120,6 +219,17 @@ function main(argv = process.argv.slice(2)) {
   }
 
   if (command === "profiles") {
+    if (subcommand === "trust-local") {
+      const named = parseNamedArgs(rest);
+      const result = trustProfiles({
+        permission: named.permission || "allow",
+        purpose: named.purpose,
+        notes: named.notes
+      });
+      process.stdout.write(`${result.payload.profiles.length} perfis atualizados para permissao=${result.permission}\n\nArquivo: ${result.file}\n`);
+      return;
+    }
+
     if (subcommand === "set") {
       const name = rest[0] || "";
       const named = parseNamedArgs(rest.slice(1));
@@ -139,7 +249,7 @@ function main(argv = process.argv.slice(2)) {
     return;
   }
 
-  if (["hermes", "ollama", "chrome"].includes(command)) {
+  if (["ollama", "chrome"].includes(command)) {
     runCommand(`/${command}`);
     return;
   }
@@ -150,7 +260,10 @@ function main(argv = process.argv.slice(2)) {
 }
 
 if (require.main === module) {
-  main();
+  main().catch((error) => {
+    process.stderr.write(`${error.stack || error.message}\n`);
+    process.exitCode = 1;
+  });
 }
 
 module.exports = {
