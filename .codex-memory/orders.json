@@ -708,7 +708,7 @@
       "id": "2026-05-17-sinuca-unificada-demo-pvp-e-damas-mobile-captura",
       "createdAt": "2026-05-17T22:41:45-05:00",
       "updatedAt": "2026-05-17T22:41:45-05:00",
-      "status": "in-progress",
+      "status": "done-deployed",
       "source": "chat",
       "rawRequest": "continue a fazer o jogo de sinuca, quando termina cheque se ta funcionando e depis valide o pvp- e mais uma coisa o jogo de damas travou no meio numa demo mobile, veja o que acoteceu.",
       "summary": "Unificar Sinuca em Demo/PvP, validar o PvP real e corrigir a falsa trava da Damas Demo mobile.",
@@ -3367,7 +3367,8 @@
         "adicionar canonical OG Twitter JSON-LD e sitemap",
         "reforcar SEO do catalogo de servicos",
         "validar localmente",
-        "subir online via git push para Render"
+        "subir online via git push para Render",
+        "conferir URLs publicas no Render"
       ],
       "filesTouched": [
         "divulgue.html",
@@ -3390,12 +3391,11 @@
         "propaganda"
       ],
       "nextSteps": [
-        "validar SEO local",
-        "rodar review",
-        "commit e push",
-        "verificar URLs publicas no Render"
+        "monitorar indexacao pelo Google Search Console",
+        "enviar sitemap no Search Console",
+        "criar paginas/perfis mais especificos por nicho do catalogo"
       ],
-      "notes": "Usuario pediu para nao perguntar ate finalizar."
+      "notes": "Publicado em main e verificado online no Render: /divulgue.html, /, /catalogo-servicos.html, /robots.txt e /sitemap.xml."
     }
   ]
 }
