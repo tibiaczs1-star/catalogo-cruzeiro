@@ -449,13 +449,13 @@ const STATIC_PAGE_SEO = {
     fileName: "index.html"
   },
   "/divulgue.html": {
-    title: `Divulgue no Catalogo CZS | Jornal, Guia e SEO Local`,
+    title: `Apareca no Catalogo CZS | Anuncios e SEO em Cruzeiro do Sul`,
     description:
-      "Anuncie no Catalogo CZS: jornal local, catalogo de servicos, posts, stories, landing pages, PubPaid, SEO e divulgacao para negocios de Cruzeiro do Sul e Vale do Jurua.",
+      "Anuncie no Catalogo CZS e coloque sua empresa no jornal local, catalogo de servicos, Instagram, WhatsApp, landing pages e SEO local em Cruzeiro do Sul.",
     themeColor: "#143D66",
     colorScheme: "light",
     ogType: "website",
-    schemaType: "Service",
+    schemaType: "CommercialServicePage",
     priority: "0.86",
     changefreq: "weekly",
     fileName: "divulgue.html"
@@ -3099,47 +3099,59 @@ function buildStaticPageJsonLd(baseUrl, canonicalUrl, seoConfig = {}) {
     }
   };
 
-  if (seoConfig.schemaType === "Service") {
-    payload.provider = {
-      "@id": `${baseUrl}#organization`
-    };
-    payload.serviceType = [
-      "Publicidade local",
-      "Catalogo de servicos",
-      "SEO local",
-      "Landing pages",
-      "Conteudo para redes sociais"
-    ];
-    payload.areaServed = {
-      "@type": "AdministrativeArea",
-      name: SITE_REGION_NAME
-    };
-    payload.offers = {
-      "@type": "OfferCatalog",
-      name: "Servicos do Catalogo CZS",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Divulgacao no jornal e catalogo local"
+  if (seoConfig.schemaType === "CommercialServicePage") {
+    payload["@type"] = "WebPage";
+    payload.mainEntity = {
+      "@type": "Service",
+      name: "Divulgacao local no Catalogo CZS",
+      provider: {
+        "@id": `${baseUrl}#organization`
+      },
+      serviceType: [
+        "Publicidade local",
+        "Catalogo de servicos",
+        "SEO local",
+        "Landing pages",
+        "Conteudo para redes sociais"
+      ],
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: SITE_REGION_NAME
+      },
+      offers: {
+        "@type": "OfferCatalog",
+        name: "Formatos comerciais do Catalogo CZS",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Cadastro e chamada no catalogo local"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Divulgacao com arte, story e link no Catalogo CZS"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Landing page, SEO local e campanha de posts"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "PubPaid promocional e experiencias interativas"
+            }
           }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "SEO e landing pages para negocios locais"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Posts, stories, anuncios e videos curtos"
-          }
-        }
-      ]
+        ]
+      }
     };
   }
 
