@@ -43,7 +43,8 @@ WhatsApp:
 - Ordem atual: criar landing comercial para propagacao da proposta do Catalogo CZS/Jornal no Render, ajustar SEO do jornal e melhorar indexacao do catalogo em buscadores.
 - Implementacao em andamento: `divulgue.html`, `divulgue.css`, links internos em `index.html` e `catalogo-servicos.html`, SEO/schema/sitemap em `server.js`, reforco de texto em `catalogo-servicos-data.js`.
 - Regra publica: manter `https://catalogo-cruzeiro-web.onrender.com/` como canonical/base publica do jornal.
-- Proximo passo: validar localmente, fazer commit/push e conferir URLs publicas no Render.
+- Publicado em `main` e verificado online no Render: `/divulgue.html`, `/`, `/catalogo-servicos.html`, `/robots.txt` e `/sitemap.xml`.
+- Proximo passo: acompanhar indexacao no Google Search Console, enviar sitemap e evoluir paginas/perfis por nicho do catalogo.
 
 ## Relatorio Comercial CZS Jornal - 2026-05-31
 

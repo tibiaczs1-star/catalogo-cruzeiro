@@ -43,8 +43,9 @@ Retomar pela rotina Catálogo CZS. O lote principal do Instagram já foi conclu�
 
 - Foco atual: landing comercial `divulgue.html` para divulgar jornal, catalogo, SEO local, redes, sites, videos e PubPaid.
 - Arquivos em foco: `divulgue.html`, `divulgue.css`, `index.html`, `catalogo-servicos.html`, `catalogo-servicos.css`, `catalogo-servicos-data.js`, `server.js`.
-- SEO em andamento: home do jornal usa title/description/canonical/OG/JSON-LD via template vars, `SITE_URL` padrao aponta para `https://catalogo-cruzeiro-web.onrender.com`, landing entrou no `STATIC_PAGE_SEO` e sitemap.
-- Falta antes de encerrar: validar localmente, commit/push e conferir Render online.
+- SEO publicado: home do jornal usa title/description/canonical/OG/JSON-LD via template vars, `SITE_URL` padrao aponta para `https://catalogo-cruzeiro-web.onrender.com`, landing entrou no `STATIC_PAGE_SEO` e sitemap.
+- Verificacao online no Render OK para `/divulgue.html`, `/`, `/catalogo-servicos.html`, `/robots.txt` e `/sitemap.xml`.
+- Proximos passos: Google Search Console, envio de sitemap, inspeção de URLs e paginas/perfis por nicho do catalogo.
 
 ## Relatorio Comercial CZS Jornal - 2026-05-31
 
