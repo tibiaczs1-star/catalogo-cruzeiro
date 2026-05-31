@@ -1,0 +1,444 @@
+:root {
+  --ink: #10233d;
+  --muted: #53657a;
+  --paper: #fffaf1;
+  --line: rgba(16, 35, 61, 0.14);
+  --blue: #143d66;
+  --river: #1d766d;
+  --gold: #f2bf5e;
+  --red: #b84b40;
+  --shadow: 0 24px 70px rgba(16, 35, 61, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.promote-page {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(20, 61, 102, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 61, 102, 0.05) 1px, transparent 1px),
+    #f5ead7;
+  background-size: 48px 48px, 48px 48px, cover;
+  font-family: "Segoe UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.promote-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(245, 234, 215, 0.88);
+  backdrop-filter: blur(18px);
+}
+
+.brand-mark {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.72rem;
+  text-decoration: none;
+}
+
+.brand-mark img {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+}
+
+.brand-mark span {
+  display: grid;
+  line-height: 1.12;
+}
+
+.brand-mark strong {
+  font-size: 1rem;
+}
+
+.brand-mark small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.promote-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.promote-header nav a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.promote-header nav a:hover {
+  background: rgba(20, 61, 102, 0.08);
+}
+
+.promote-header .nav-cta {
+  background: var(--blue);
+  color: #fff;
+}
+
+.promote-hero {
+  min-height: calc(100svh - 70px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  align-items: stretch;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+  background:
+    linear-gradient(90deg, rgba(245, 234, 215, 0.97), rgba(245, 234, 215, 0.78) 44%, rgba(16, 35, 61, 0.42)),
+    url("./assets/cheffe-call-office-bg.jpg") center / cover no-repeat;
+}
+
+.hero-copy {
+  max-width: 760px;
+  align-self: center;
+}
+
+.hero-place,
+.section-intro p,
+.proof-band > div p {
+  margin: 0 0 0.7rem;
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  max-width: 9ch;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4rem, 12vw, 9.4rem);
+  line-height: 0.82;
+  letter-spacing: 0;
+}
+
+.hero-lede {
+  max-width: 660px;
+  margin: 1.25rem 0 0;
+  color: #263d56;
+  font-size: clamp(1.08rem, 2vw, 1.38rem);
+  line-height: 1.55;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.7rem;
+}
+
+.primary-action,
+.secondary-action,
+.final-cta a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.1rem;
+  border-radius: 12px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.primary-action,
+.final-cta a {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 18px 36px rgba(20, 61, 102, 0.22);
+}
+
+.secondary-action {
+  border: 1px solid var(--line);
+  background: rgba(255, 250, 241, 0.72);
+}
+
+.hero-panel {
+  align-self: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.86);
+  box-shadow: var(--shadow);
+}
+
+.hero-panel img {
+  width: 100%;
+  min-height: 220px;
+  display: block;
+  object-fit: cover;
+  background: var(--blue);
+}
+
+.hero-panel dl {
+  margin: 0;
+  display: grid;
+}
+
+.hero-panel div {
+  padding: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.hero-panel dt {
+  font-weight: 950;
+}
+
+.hero-panel dd {
+  margin: 0.24rem 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.signal-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: var(--blue);
+  color: #f7fbff;
+}
+
+.signal-strip span {
+  padding: 0.42rem 0.68rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(247, 251, 255, 0.88);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.section-grid,
+.seo-plan {
+  padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1rem, 6vw, 5rem);
+}
+
+.section-intro {
+  max-width: 800px;
+  margin-bottom: 1.4rem;
+}
+
+.section-intro h2,
+.proof-band h2,
+.final-cta h2 {
+  margin: 0;
+  max-width: 780px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.offer-grid article,
+.seo-columns > div {
+  min-height: 180px;
+  padding: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.74);
+  box-shadow: 0 16px 38px rgba(16, 35, 61, 0.08);
+}
+
+.offer-grid h3,
+.seo-columns h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.offer-grid p {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.proof-band {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(300px, 1fr);
+  gap: clamp(1rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1rem, 6vw, 5rem);
+  background: #10233d;
+  color: #fff;
+}
+
+.proof-band > div p {
+  color: var(--gold);
+}
+
+.proof-band h2 {
+  color: #fff;
+}
+
+.proof-band ol {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  counter-reset: proof;
+}
+
+.proof-band li {
+  position: relative;
+  padding: 1rem 1rem 1rem 3.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.proof-band li::before {
+  counter-increment: proof;
+  content: counter(proof);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 950;
+}
+
+.proof-band strong,
+.proof-band span {
+  display: block;
+}
+
+.proof-band span {
+  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
+.seo-plan {
+  background: #fffaf1;
+}
+
+.seo-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.seo-columns ul {
+  margin: 0.85rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.final-cta {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1rem, 6vw, 5rem);
+  background:
+    linear-gradient(120deg, rgba(20, 61, 102, 0.92), rgba(29, 118, 109, 0.86)),
+    url("./assets/cheffe-call-office-bg.jpg") center / cover no-repeat;
+  color: #fff;
+}
+
+.final-cta h2 {
+  color: #fff;
+}
+
+.final-cta p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.final-cta a {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .promote-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .promote-header nav {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 0.15rem;
+  }
+
+  .promote-hero,
+  .proof-band,
+  .seo-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .promote-hero {
+    min-height: auto;
+  }
+
+  .offer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .brand-mark small {
+    display: none;
+  }
+
+  .promote-header nav a {
+    padding: 0 0.62rem;
+    font-size: 0.86rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3.25rem, 18vw, 5.4rem);
+  }
+
+  .offer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-grid article,
+  .seo-columns > div {
+    min-height: auto;
+  }
+}

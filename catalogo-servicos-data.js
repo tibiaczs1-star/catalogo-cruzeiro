@@ -2,8 +2,99 @@
 
 window.CATALOGO_SERVICOS_DATA = {
   city: "Cruzeiro do Sul - AC",
-  updatedAt: "2026-04-11",
+  updatedAt: "2026-05-31",
   modules: [
+    {
+      id: "catalogo-czs-servicos",
+      title: "Servicos digitais e divulgacao em Cruzeiro do Sul",
+      subtitle: "IA, design, anuncios, sites, SEO local e apoio logistico digital para vender mais no Vale do Jurua",
+      photoUrl:
+        "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80",
+      featured: {
+        eyebrow: "orcamento rapido",
+        title: "Do post ao cliente: o Catalogo ajuda sua marca aparecer e vender",
+        description:
+          "Criacao de artes, avatares, videos curtos, paginas simples, catalogos, anuncios e apoio de postagem para negocios de Cruzeiro do Sul e Vale do Jurua.",
+        chips: ["IA", "design", "vendas", "anuncios"],
+        bullets: [
+          "Artes premium para Instagram, WhatsApp e Facebook",
+          "Avatares, fotos de perfil, modelos virtuais e identidade visual",
+          "Sites simples, catalogos online, landing pages e botoes de WhatsApp"
+        ],
+        miniCards: [
+          { title: "Instagram", text: "@catalogo_czs_" },
+          { title: "WhatsApp", text: "orcamento sob consulta" },
+          { title: "Site", text: "catalogo-cruzeiro-web.onrender.com" }
+        ],
+        accent: "czs"
+      },
+      items: [
+        {
+          name: "Artes e posts para marcas",
+          description:
+            "Pacotes de criativos para stories, feed, status, cardapio, promocao, anuncio e identidade visual em Cruzeiro do Sul.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/divulgue.html",
+          status: "sob consulta",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "Avatares e fotos com IA",
+          description:
+            "Criacao de avatar profissional, perfil estilizado, ensaio virtual e melhoria visual para redes sociais.",
+          website: "https://www.instagram.com/catalogo_czs_/",
+          status: "sob consulta",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "Sites, catalogos e paginas de venda",
+          description:
+            "Landing page, catalogo digital, pagina com link de WhatsApp, mapa, fotos, servicos, SEO local e chamada de venda.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/divulgue.html",
+          status: "sob consulta",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "Videos curtos, reels e chamadas",
+          description:
+            "Roteiro, edicao, legenda, chamada de impacto e versoes para story/reels com musica quando a plataforma permitir.",
+          website: "https://www.instagram.com/catalogo_czs_/",
+          status: "sob consulta",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "Anuncios para Marketplace e grupos",
+          description:
+            "Foto, legenda, preco, publicacao assistida e renovacao de oferta para produtos fisicos, servicos e desapegos.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/divulgue.html",
+          status: "sob consulta",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "Gift cards, jogos e creditos digitais",
+          description:
+            "Busca assistida de fornecedores confiaveis, comparacao de margem e oferta sob encomenda para jogos, apps e servicos digitais.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/",
+          status: "sob encomenda",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "Apoio logistico digital",
+          description:
+            "Organizacao de compra, retirada, entrega local combinada, controle de pedido e comunicacao com cliente para vendas pequenas.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/",
+          status: "sob consulta",
+          source: "Catalogo CZS"
+        },
+        {
+          name: "PubPaid e jogos promocionais",
+          description:
+            "Jogos simples, desafios, ranking, campanhas e experiencias interativas para divulgar marcas locais.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/pubpaid.html",
+          status: "em desenvolvimento",
+          source: "Catalogo CZS"
+        }
+      ]
+    },
     {
       id: "restaurantes",
       title: "Restaurantes",

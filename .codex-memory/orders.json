@@ -1,7 +1,44 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-27T21:39:16.171Z",
+  "lastUpdatedAt": "2026-05-31T13:32:00-05:00",
   "orders": [
+    {
+      "id": "2026-05-31-czs-jornal-relatorio-cotas-investidores",
+      "createdAt": "2026-05-31T13:26:00-05:00",
+      "updatedAt": "2026-05-31T13:32:00-05:00",
+      "status": "pitch-rewritten-with-online-instagram-verification-and-projections",
+      "source": "chat",
+      "rawRequest": "Executar apuracao total do website, Instagram e Catalogo CZS/Jornal no WhatsApp para criar relatorio vendedor com views, cliques, tempo de lancamento vs crescimento, graficos, funcoes atuais e prompt em ingles executado.",
+      "summary": "Criar relatorio comercial para possiveis compradores de cotas do Catálogo CZS Jornal, focado no site webonrender, Instagram e WhatsApp como canais de distribuicao.",
+      "normalizedTasks": [
+        "refazer pitch sem numero tecnico fraco de analytics local",
+        "verificar online site no Render e perfil Instagram publico",
+        "incluir 552 seguidores, 1.137 seguindo e 181 posts verificados online",
+        "usar 9.000 views em aproximadamente 3 dias como dado operacional informado pendente de Insights",
+        "incluir projecoes, graficos de pizza, total de modulos e servicos"
+      ],
+      "filesTouched": [
+        "docs/commercial/czs-jornal-investor-report-2026-05-31.md",
+        "docs/commercial/czs-jornal-investor-report-2026-05-31.html",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "jornal",
+        "investidores",
+        "cotas",
+        "relatorio-comercial",
+        "instagram",
+        "whatsapp"
+      ],
+      "nextSteps": [
+        "anexar prints do site e Instagram",
+        "coletar Instagram Insights e Render logs publicos",
+        "definir valor de cotas e direitos com orientacao juridica"
+      ],
+      "notes": "Versao revisada transformou o arquivo em pitch comercial: removeu a metrica tecnica fraca da vitrine, incluiu Instagram publico verificado online e projecoes de views/seguidores. Ainda precisa anexar print do Insights para provar as 9.000 views."
+    },
     {
       "id": "2026-05-27-pubpaid3-cruzeiro-barzinho-local-slice1",
       "createdAt": "2026-05-27T05:27:46Z",
@@ -3027,6 +3064,338 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-29-retomar-rotina-de-postagens-noticias-feed-story-propagandas-facebook-crescimento",
+      "createdAt": "2026-05-29T06:25:03.355Z",
+      "updatedAt": "2026-05-29T06:25:03.355Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok, hoje eu descansei cheguei agora, por favor faça tudo denovo posts propagandas renove as coisas do face book e coloque o storys do jornal e os posts de noticias e se poder adicionar mais camadas de nicho jornal e algumas pessoas eu agradeço",
+      "summary": "Retomar rotina de postagens: noticias feed/story, propagandas, Facebook, crescimento local/jornal com curadoria",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-criar-pacote-juridico-operacional-atualizado-do-pubpaid-com-pesquisa-legislativa",
+      "createdAt": "2026-05-29T15:51:36.452Z",
+      "updatedAt": "2026-05-29T15:51:36.452Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "analise o jogo pub paid - veja o que ee legalmente - procure na legislação tudo sobre como ele pode operar legalmente, ou seja um documento operacional, um documento sobre po funciomaneto um documento juridico pra analise, e etc, tudo que vc jugar ser presciso faça em formatos pdf",
+      "summary": "Criar pacote juridico-operacional atualizado do PubPaid com pesquisa legislativa e PDFs.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-criar-spec-mestre-da-rayx-e-preparar-primeiro-mvp-visual-operacional",
+      "createdAt": "2026-05-29T18:09:17.732Z",
+      "updatedAt": "2026-05-29T18:09:17.732Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Comecar o projeto RayX: sucessora local do Hermes com core autonomo, shell bonito, dashboard, companion flutuante, roteador de LLMs, heranca de ferramentas/skills/agentes, protocolos 24h, boot transparente, satisfacao obrigatoria e laboratorio de absorcao universal.",
+      "summary": "Criar spec mestre da RayX e preparar primeiro MVP visual/operacional.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-estudar-referencias-do-rayx-desktop-controller-antes-da-implementacao",
+      "createdAt": "2026-05-29T18:37:04.995Z",
+      "updatedAt": "2026-05-29T18:37:04.995Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Estudar sem pressa o RayX como aplicativo desktop controlador do Hermes usando C:\\Users\\junio\\AppData\\Local\\Programs\\hermes-desktop como referencia, junto com Codex, Google Antigravity e o video https://www.youtube.com/watch?v=a0OQNN1Z1E0 antes de implementar.",
+      "summary": "Estudar referencias do RayX Desktop Controller antes da implementacao",
+      "normalizedTasks": [
+        "estudar hermes-desktop",
+        "estudar antigravity e codex",
+        "estudar video e CLIs",
+        "atualizar spec RayX"
+      ],
+      "filesTouched": [
+        "docs/superpowers/specs/2026-05-29-rayx-master-design.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/rayx-study/youtube-a0OQNN1Z1E0.pt-orig.vtt"
+      ],
+      "tags": [
+        "rayx",
+        "hermes",
+        "desktop",
+        "antigravity",
+        "codex"
+      ],
+      "nextSteps": [
+        "Fechar conceito com usuario antes de implementar fases"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-criar-perfil-nativo-local-da-rayx-para-este-pc",
+      "createdAt": "2026-05-29T18:56:23.109Z",
+      "updatedAt": "2026-05-29T18:56:23.109Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Documentar e adaptar RayX ao PC local atual: natividade, ambiente, recursos, Hermes, Codex, Ollama, Chrome e limites locais antes da implementacao.",
+      "summary": "Criar perfil nativo local da RayX para este PC",
+      "normalizedTasks": [
+        "inventariar pc",
+        "documentar ferramentas locais",
+        "definir limites de recursos",
+        "definir proximo corte rayx doctor"
+      ],
+      "filesTouched": [
+        "docs/superpowers/specs/2026-05-29-rayx-local-native-profile.md",
+        "docs/superpowers/specs/2026-05-29-rayx-master-design.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "rayx",
+        "natividade",
+        "local-first",
+        "doctor"
+      ],
+      "nextSteps": [
+        "Implementar rayx doctor como primeira prova nativa"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-terminar-rayx-como-console-desktop-operacional-local",
+      "createdAt": "2026-05-29T20:49:22.766Z",
+      "updatedAt": "2026-05-29T20:49:22.766Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ta termine",
+      "summary": "Terminar RayX como console desktop operacional local",
+      "normalizedTasks": [
+        "desktop Electron",
+        "orquestrador local",
+        "launcher RayX.exe",
+        "validacao local"
+      ],
+      "filesTouched": [
+        "rayx/bin/rayx.js",
+        "rayx/core/desktop.js",
+        "rayx/core/orchestrator.js",
+        "rayx/desktop/main.js",
+        "rayx/desktop/preload.js",
+        "rayx/desktop/renderer/index.html",
+        "rayx/launcher/RayXLauncher.cs",
+        "dist/rayx/RayX.exe"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "rayx",
+        "desktop",
+        "local-native"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-tornar-rayx-funcional-com-boot-catalogo-hermes-e-chrome-cdp",
+      "createdAt": "2026-05-29T21:25:05.984Z",
+      "updatedAt": "2026-05-29T21:25:05.984Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ok n esta funcional e a maioria das coisas parece sem especificacao ou uso mesmo ... então va proceguindo ate agente chegar a perfeicao",
+      "summary": "Tornar RayX funcional com boot catalogo Hermes e Chrome CDP",
+      "normalizedTasks": [
+        "testes de contrato",
+        "boot funcional",
+        "catalogo de ferramentas",
+        "adaptador Hermes",
+        "ponte Chrome CDP",
+        "desktop acionavel"
+      ],
+      "filesTouched": [
+        "rayx/core/boot.js",
+        "rayx/core/catalog.js",
+        "rayx/adapters/hermes.js",
+        "rayx/adapters/chrome.js",
+        "rayx/bin/rayx.js",
+        "rayx/core/shell.js",
+        "rayx/desktop/renderer/app.js",
+        "rayx/test/rayx-contract.test.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "rayx",
+        "functional-phase",
+        "chrome-cdp",
+        "hermes"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-corrigir-rayx-para-fluxo-unico-multi-cli-multi-llm-multi-agente",
+      "createdAt": "2026-05-29T21:36:39.106Z",
+      "updatedAt": "2026-05-29T21:36:39.106Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ele deve se vc, o hermes todos juntos o mesmo fluxo de coleta de informação e entrega de resultados, um cli abrangente e com varios clis e llmas e agentes paralelos usando todo o pc",
+      "summary": "Corrigir RayX para fluxo unico multi-CLI multi-LLM multi-agente",
+      "normalizedTasks": [
+        "mission bus",
+        "chat como entrada",
+        "coleta paralela",
+        "lanes Codex Hermes Ollama Chrome shell skills",
+        "sintese unica"
+      ],
+      "filesTouched": [
+        "rayx/core/mission.js",
+        "rayx/core/chat.js",
+        "rayx/bin/rayx.js",
+        "rayx/desktop/main.js",
+        "rayx/desktop/preload.js",
+        "rayx/desktop/renderer/index.html",
+        "rayx/desktop/renderer/app.js",
+        "rayx/test/rayx-contract.test.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "rayx",
+        "mission-bus",
+        "unified-flow"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-29-destravar-desktop-rayx-e-criar-area-de-trabalho-conversacional",
+      "createdAt": "2026-05-29T21:43:43.945Z",
+      "updatedAt": "2026-05-29T21:43:43.945Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "alem de esta travando ele n tem um area de trabalho que possa ser util, como a sua aqui onde estamos falando",
+      "summary": "Destravar desktop RayX e criar area de trabalho conversacional",
+      "normalizedTasks": [
+        "IPC em subprocesso",
+        "chat thread",
+        "evidencias",
+        "atividade",
+        "workspace util"
+      ],
+      "filesTouched": [
+        "rayx/desktop/main.js",
+        "rayx/desktop/renderer/index.html",
+        "rayx/desktop/renderer/styles.css",
+        "rayx/desktop/renderer/app.js",
+        "rayx/test/rayx-contract.test.js",
+        "docs/superpowers/specs/2026-05-29-rayx-local-native-profile.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "rayx",
+        "desktop",
+        "workspace",
+        "nonblocking"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-31-rotina-catalogo-czs-instagram-whatsapp-servicos",
+      "createdAt": "2026-05-31T11:55:00-05:00",
+      "updatedAt": "2026-05-31T11:55:00-05:00",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "Atualizar Catálogo CZS com notícias de hoje/ontem, feed, stories com música, serviços/vendas, WhatsApp, Instagram e checagem pelo próprio WhatsApp a cada 15 minutos.",
+      "summary": "Rotina Catalogo CZS Instagram WhatsApp servicos",
+      "normalizedTasks": [
+        "capturar noticias recentes",
+        "refazer cards com fotos reais",
+        "postar 24 noticias no feed do Instagram",
+        "postar 12 stories de noticias com audio",
+        "postar 11 stories de servicos e convites com audio",
+        "enviar atualizacoes ao proprio WhatsApp",
+        "manter automacao de checagem a cada 15 minutos"
+      ],
+      "filesTouched": [
+        "news-data.js",
+        "data/runtime-news.json",
+        "catalogo-servicos-data.js",
+        "index.html",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/instagram/premium-news-pack/current-20260530-20260531/premium-real-photo/",
+        ".codex-temp/whatsapp-catalogo-20260531/",
+        ".codex-temp/instagram-check-after-stories.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "whatsapp",
+        "noticias",
+        "servicos",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "Checar WhatsApp antes da proxima acao",
+        "Renovar Facebook/Marketplace se navegador estiver disponivel",
+        "Continuar apenas em destinos validados"
+      ],
+      "notes": "Nao executar follow/unfollow em massa; manter apenas nichos de jornal/noticias/fofoca do Acre, Jurua e Cruzeiro."
+    },
+    {
+      "id": "2026-05-31-landing-divulgue-catalogo-czs-seo-render",
+      "createdAt": "2026-05-31T12:20:00-05:00",
+      "updatedAt": "2026-05-31T12:20:00-05:00",
+      "status": "in-progress",
+      "source": "chat",
+      "rawRequest": "Fazer uma landing page boa para propagacao da proposta do site jornal Catalogo CZS no Render e todos seus servicos; concluir SEO bom; depois melhorar o catalogo para aparecer no Google e outras ferramentas de indexacao; subir tudo online.",
+      "summary": "Criar landing Divulgue no Catalogo CZS, reforcar SEO do jornal no Render e preparar catalogo para indexacao.",
+      "normalizedTasks": [
+        "criar landing comercial indexavel",
+        "ajustar SEO da home do jornal no Render",
+        "adicionar canonical OG Twitter JSON-LD e sitemap",
+        "reforcar SEO do catalogo de servicos",
+        "validar localmente",
+        "subir online via git push para Render"
+      ],
+      "filesTouched": [
+        "divulgue.html",
+        "divulgue.css",
+        "index.html",
+        "catalogo-servicos.html",
+        "catalogo-servicos.css",
+        "catalogo-servicos-data.js",
+        "server.js",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "seo",
+        "render",
+        "landing-page",
+        "catalogo-servicos",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "validar SEO local",
+        "rodar review",
+        "commit e push",
+        "verificar URLs publicas no Render"
+      ],
+      "notes": "Usuario pediu para nao perguntar ate finalizar."
     }
   ]
 }

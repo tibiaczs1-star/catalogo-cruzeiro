@@ -3,31 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo Cruzeiro do Sul | Jornal Agregador Local</title>
+    <title>{{SEO_TITLE}}</title>
     <meta
       name="description"
-      content="Jornal local de Cruzeiro do Sul e Vale do Juruá, com notícias, arquivo mensal, resumos originais e links para as fontes."
+      content="{{SEO_DESCRIPTION}}"
     />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta name="theme-color" content="#1E3A5F" />
-    <meta name="color-scheme" content="light" />
-    <meta property="og:type" content="website" />
+    <meta name="robots" content="{{SEO_ROBOTS}}" />
+    <meta name="theme-color" content="{{SEO_THEME_COLOR}}" />
+    <meta name="color-scheme" content="{{SEO_COLOR_SCHEME}}" />
+    <meta property="og:type" content="{{SEO_OG_TYPE}}" />
     <meta property="og:site_name" content="Catálogo Cruzeiro do Sul" />
-    <meta property="og:title" content="Catálogo Cruzeiro do Sul | Jornal Agregador Local" />
+    <meta property="og:title" content="{{SEO_OG_TITLE}}" />
     <meta
       property="og:description"
-      content="Jornal local de Cruzeiro do Sul e Vale do Juruá, com notícias, arquivo mensal, resumos originais e links para as fontes."
+      content="{{SEO_OG_DESCRIPTION}}"
     />
-    <meta property="og:image" content="{{SITE_URL}}/assets/og-cover.svg" />
-    <meta property="og:url" content="{{SITE_URL}}/" />
+    <meta property="og:image" content="{{SEO_OG_IMAGE}}" />
+    <meta property="og:url" content="{{SEO_OG_URL}}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Catálogo Cruzeiro do Sul | Jornal Agregador Local" />
+    <meta name="twitter:title" content="{{SEO_TWITTER_TITLE}}" />
     <meta
       name="twitter:description"
-      content="Jornal local de Cruzeiro do Sul e Vale do Juruá, com notícias, arquivo mensal, resumos originais e links para as fontes."
+      content="{{SEO_TWITTER_DESCRIPTION}}"
     />
-    <meta name="twitter:image" content="{{SITE_URL}}/assets/og-cover.svg" />
-    <link rel="canonical" href="{{SITE_URL}}/" />
+    <meta name="twitter:image" content="{{SEO_TWITTER_IMAGE}}" />
+    <link rel="canonical" href="{{SEO_CANONICAL}}" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
@@ -453,6 +453,7 @@
                   <a href="#radar"><span class="premium-icon icon-news"></span>Notícias</a>
                   <a href="#o-que-importa"><span class="premium-icon icon-topics"></span>Assuntos</a>
                   <a href="./catalogo-servicos.html"><span class="premium-icon icon-services"></span>Serviços</a>
+                  <a href="./divulgue.html"><span class="premium-icon icon-commercial"></span>Divulgue</a>
                   <a href="#social"><span class="premium-icon icon-calendar"></span>Festas & Social</a>
                   <a href="#tv-catalogo"><span class="premium-icon icon-video"></span>TV</a>
                   <a href="#arquivo"><span class="premium-icon icon-archive"></span>Arquivo</a>
@@ -473,6 +474,7 @@
               <a href="#radar">Notícias</a>
               <a href="#o-que-importa">Assuntos</a>
               <a href="./catalogo-servicos.html">Serviços</a>
+              <a href="./divulgue.html">Divulgue</a>
               <a href="#social">Festas & Social</a>
               <a href="#arquivo">Arquivo</a>
               <a href="#participacao-comunitaria">Comunidade</a>
@@ -518,6 +520,7 @@
             <a class="outline-button" href="#radar">Notícias</a>
             <a class="outline-button" href="#o-que-importa">Assuntos</a>
             <a class="outline-button" href="./catalogo-servicos.html">Serviços</a>
+            <a class="outline-button" href="./divulgue.html">Divulgue no CZS</a>
             <a class="outline-button" href="#social">Festas & Social</a>
             <a class="outline-button" href="#arquivo">Arquivo</a>
             <a class="outline-button" href="#participacao-comunitaria">Comunidade</a>
@@ -940,13 +943,14 @@
                 <a href="./catalogo-servicos.html?busca=saude"><strong>Saúde perto</strong><small>Unidades, contatos e orientação</small></a>
                 <a href="#clima-alertas"><strong>Chuva e rio</strong><small>Defesa Civil e avisos do dia</small></a>
                 <a href="./catalogo-servicos.html?busca=farmacia"><strong>Farmácia</strong><small>Busca rápida no catálogo</small></a>
+                <a href="./catalogo-servicos.html?busca=catalogo"><strong>Serviços do Catálogo</strong><small>IA, artes, anúncios e páginas de venda</small></a>
               </div>
             </section>
 
             <aside class="home-instagram-follow-card reveal" aria-label="Siga o Catalogo no Instagram">
               <span>Instagram do Catálogo</span>
               <strong>Siga a gente para ver bastidores, chamadas rápidas e atualizações do Juruá.</strong>
-              <a href="https://www.instagram.com/catalogocruzeirodosul/" target="_blank" rel="noopener noreferrer">@catalogocruzeirodosul</a>
+              <a href="https://www.instagram.com/catalogo_czs_/" target="_blank" rel="noopener noreferrer">@catalogo_czs_</a>
             </aside>
 
             <section id="comunidade-prioritaria" class="retention-block community-priority-block" aria-label="Comunidade">
@@ -1342,7 +1346,7 @@
               <a href="tel:192"><span class="premium-icon icon-alert"></span><small>SAMU</small><strong>192</strong><em>Ligar</em></a>
               <a href="tel:193"><span class="premium-icon icon-alert"></span><small>Bombeiros</small><strong>193</strong><em>Ligar</em></a>
               <a href="tel:+556833220001"><span class="premium-icon icon-services"></span><small>UPA do Juruá</small><strong>Atendimento 24h</strong><em>Ligar</em></a>
-              <a href="https://wa.me/5568992269296" target="_blank" rel="noreferrer"><span class="premium-icon icon-community"></span><small>WhatsApp do portal</small><strong>(68) 99971-9876</strong><em>Chamar</em></a>
+              <a href="https://wa.me/5568992269296" target="_blank" rel="noreferrer"><span class="premium-icon icon-community"></span><small>WhatsApp do portal</small><strong>(68) 99226-9296</strong><em>Chamar</em></a>
             </div>
           </section>
 
