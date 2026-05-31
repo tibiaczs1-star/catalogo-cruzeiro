@@ -3396,6 +3396,179 @@
         "criar paginas/perfis mais especificos por nicho do catalogo"
       ],
       "notes": "Publicado em main e verificado online no Render: /divulgue.html, /, /catalogo-servicos.html, /robots.txt e /sitemap.xml."
+    },
+    {
+      "id": "2026-05-31-divulgar-jogos-pubpaid-enquete-todos-canais",
+      "createdAt": "2026-05-31T19:24:49.625Z",
+      "updatedAt": "2026-05-31T19:24:49.625Z",
+      "status": "partial-complete",
+      "source": "chat",
+      "rawRequest": "n esqueça de divulgar jogos e a pesquisa eleitoriais em todos os canais",
+      "summary": "Incluir PubPaid/jogos e enquete Acre 2026 na rotina premium de divulgacao multicanal.",
+      "normalizedTasks": [
+        "corrigir card premium da enquete",
+        "atualizar fila/manifesto com PubPaid e enquete",
+        "gerar stories/status com audio",
+        "publicar stories no Instagram",
+        "postar WhatsApp em destinos validados",
+        "preparar Facebook/Marketplace sem publicar em destino nao verificado",
+        "atualizar site local com atalhos"
+      ],
+      "filesTouched": [
+        "index.html",
+        ".codex-temp/catalogo-czs-premium-sales-20260531/manifest.json",
+        ".codex-temp/catalogo-czs-premium-sales-20260531/EXECUTION_QUEUE.md",
+        ".codex-temp/catalogo-czs-premium-sales-20260531/CHANNEL_POSTING_PACK.md",
+        ".codex-temp/catalogo-czs-premium-sales-20260531/whatsapp/11-enquete-acre-2026.png",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/catalogo-czs-premium-sales-20260531/",
+        ".codex-temp/instagram-after-concluir-pubpaid.png",
+        ".codex-temp/instagram-poll-final-screen.png",
+        ".codex-temp/whatsapp-pubpaid-sent.png",
+        ".codex-temp/whatsapp-poll-sent.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "pubpaid",
+        "jogos",
+        "enquete",
+        "instagram",
+        "whatsapp",
+        "facebook-pendente",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "postar pacote no Facebook/Page/Marketplace quando destino estiver confirmado",
+        "se for publicar em grupo de noticias, evitar grupos admin-only",
+        "subir alteracao da home para Render se ainda nao estiver em deploy"
+      ],
+      "notes": "Enquete sempre como espontanea sem carater cientifico, sem plano amostral, sem margem de erro e nao registrada no TSE. PubPaid sempre como beta/teste, sem promessa financeira."
+    },
+    {
+      "id": "2026-05-31-ordem-executiva-social-stories-crescimento-agentes",
+      "createdAt": "2026-05-31T20:20:00-05:00",
+      "updatedAt": "2026-05-31T20:20:00-05:00",
+      "status": "documented-ready-for-execution",
+      "source": "chat",
+      "rawRequest": "Corrigir stories/feed com musica jornalistica, videos das fontes, narracao, padronizacao visual, intercalar propaganda, parar de seguir perfis pessoais, criar destaques/carrosseis/editorias e promover agentes para equipes de aprendizado/crescimento.",
+      "summary": "Ordem executiva social do Catalogo CZS para padrao jornalistico premium e crescimento por nicho.",
+      "normalizedTasks": [
+        "padronizar stories video-first",
+        "trocar trilha terror por musica jornalistica",
+        "adicionar narracao/resumo",
+        "definir carrosseis e destaques",
+        "criar regra de limpeza de seguindo",
+        "organizar equipes de agentes",
+        "mandar WhatsApp e ligar ao concluir"
+      ],
+      "filesTouched": [
+        "docs/social/czs-executive-order-2026-05-31.md",
+        "docs/social/czs-instagram-news-standard-2026-05-31.md",
+        "docs/social/czs-growth-following-cleanup-2026-05-31.md",
+        "docs/social/czs-editorial-growth-formats-2026-05-31.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "stories",
+        "crescimento",
+        "agentes",
+        "editorial",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "aplicar novo padrao na proxima rodada de noticias",
+        "fazer limpeza de seguindo somente com conferencia visual perfil por perfil",
+        "criar capas de destaques quando Instagram estiver aberto para design",
+        "publicar carrosseis semanais e destaques do mes"
+      ],
+      "notes": "Nao executar unfollow em massa; manter nichos e registrar criterios. Videos de fonte devem vir antes de imagem sempre que existirem."
+    },
+    {
+      "id": "2026-05-31-refazer-landing-divulgue-apos-estudo",
+      "createdAt": "2026-05-31T20:45:00-05:00",
+      "updatedAt": "2026-05-31T20:45:00-05:00",
+      "status": "local-redesign-applied-publish-blocked-by-shell",
+      "source": "chat",
+      "rawRequest": "A landing ficou horrivel; fazer um estudo antes e agora aplicar o redesign.",
+      "summary": "Refazer landing Divulgue no Catalogo CZS com base no estudo comercial e visual.",
+      "normalizedTasks": [
+        "trocar hero generico por proposta regional clara",
+        "usar provas comerciais e numeros do pitch",
+        "organizar oferta em passos e formatos",
+        "explicar SEO local de forma simples",
+        "preservar SEO tecnico",
+        "validar e publicar quando shell/git estiver disponivel"
+      ],
+      "filesTouched": [
+        "divulgue.html",
+        "divulgue.css",
+        "server.js",
+        "docs/commercial/czs-divulgue-redesign-study-2026-05-31.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "landing-page",
+        "seo",
+        "redesign",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "rodar node --check server.js",
+        "rodar npm run review:team",
+        "capturar screenshots desktop/mobile",
+        "commit e push para main/Render"
+      ],
+      "notes": "Nesta retomada o ambiente bloqueou processos externos com EPERM/740; validacao completa e publicacao ficaram pendentes."
+    },
+    {
+      "id": "2026-05-31-corrigir-artes-premium-social",
+      "createdAt": "2026-05-31T20:55:00-05:00",
+      "updatedAt": "2026-05-31T20:55:00-05:00",
+      "status": "standard-created-current-assets-blocked-for-regeneration",
+      "source": "chat",
+      "rawRequest": "Reprovar artes chamadas de premium com logo cortado/sem nome do Catalogo, estudar composicoes de jornais grandes e criar padrao premium real.",
+      "summary": "Criar sistema visual premium para artes sociais do Catálogo CZS e bloquear repostagem de artes com logo/texto ruim.",
+      "normalizedTasks": [
+        "estudar referencias de composicao jornalistica",
+        "definir safe area para story/feed/whatsapp",
+        "obrigar marca inteira do Catalogo CZS",
+        "separar imagem gerada por IA de texto real aplicado em template",
+        "bloquear artes atuais ate regeneracao",
+        "refazer cada servico/produto como arte unica"
+      ],
+      "filesTouched": [
+        "docs/social/czs-premium-visual-system-2026-05-31.md",
+        "docs/social/czs-instagram-news-standard-2026-05-31.md",
+        ".codex-temp/catalogo-czs-premium-sales-20260531/VISUAL_REGENERATION_ORDER.md"
+      ],
+      "assetRefs": [
+        "2026-05-31-premium-visual-system-doc"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "whatsapp",
+        "propaganda",
+        "arte-premium",
+        "identidade-visual"
+      ],
+      "nextSteps": [
+        "regenerar imagens/fundos sem texto usando GPT Image",
+        "aplicar texto e logo via template seguro",
+        "validar safe area em preview antes de postar",
+        "substituir assets da fila WhatsApp antes de reenviar"
+      ],
+      "notes": "Regra nova: GPT Image nao deve gerar texto final; texto, logo, preco e CTA entram por template para evitar letras erradas e marca cortada."
     }
   ]
 }
