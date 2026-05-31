@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-31T13:32:00-05:00",
+  "lastUpdatedAt": "2026-05-31T22:18:00-05:00",
   "orders": [
     {
       "id": "2026-05-31-czs-jornal-relatorio-cotas-investidores",
@@ -3569,6 +3569,50 @@
         "substituir assets da fila WhatsApp antes de reenviar"
       ],
       "notes": "Regra nova: GPT Image nao deve gerar texto final; texto, logo, preco e CTA entram por template para evitar letras erradas e marca cortada."
+    },
+    {
+      "id": "2026-05-31-refazer-landing-divulgue-ate-vendavel",
+      "createdAt": "2026-05-31T22:18:00-05:00",
+      "updatedAt": "2026-05-31T22:18:00-05:00",
+      "status": "local-sales-redesign-validation-in-progress",
+      "source": "chat",
+      "rawRequest": "Refazer a landing ate ficar perfeita, sem procurar o usuario antes disso.",
+      "summary": "Refazer a pagina Divulgue como landing comercial real do Catalogo CZS, com hero forte, oferta clara, provas locais, pacotes e SEO preservado.",
+      "normalizedTasks": [
+        "trocar pagina institucional por pagina de venda",
+        "usar primeira dobra com imagem forte e CTA de anuncio",
+        "mostrar prova local ainda na primeira tela",
+        "organizar caminho jornal-catalogo-propaganda",
+        "exibir pacotes comerciais claros",
+        "validar desktop/mobile antes de publicar"
+      ],
+      "filesTouched": [
+        "divulgue.html",
+        "divulgue.css",
+        "server.js",
+        ".codex-memory/orders.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "assets/insiders-empty-street-v1.png",
+        "assets/insiders-crowd-street-v1.png",
+        "assets/logo-czs.svg"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "landing-page",
+        "seo",
+        "propaganda",
+        "vendas"
+      ],
+      "nextSteps": [
+        "rodar npm run review:team",
+        "publicar em main/Render",
+        "verificar HTML/CSS online",
+        "capturar ou revisar online se necessario"
+      ],
+      "notes": "Direcao visual aplicada: pagina de venda com fundo fotografico/ilustrativo de cidade, H1 Anuncie no Catalogo CZS, prova local na primeira dobra, pacotes Entrada/Mais vendido/Presenca forte e CTA direto para WhatsApp."
     }
   ]
 }
