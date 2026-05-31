@@ -90,3 +90,20 @@ WhatsApp:
 - Atualizado `docs/social/czs-instagram-news-standard-2026-05-31.md` para reprovar automaticamente logo cortado, marca pequena e texto gerado por IA.
 - Criado bloqueio em `.codex-temp/catalogo-czs-premium-sales-20260531/VISUAL_REGENERATION_ORDER.md`: nao repostar lote atual antes de regenerar cada arte/produto/servico como asset unico.
 - Regra nova: GPT Image deve gerar fundo/foto sem texto; texto real, logo, preco, CTA e fonte entram por template para evitar letras erradas.
+- Gerado lote V2 aprovado visualmente com 11 assets em `C:/Users/junio/.codex/generated_images/019e6a06-3376-7163-92d1-281acf33a0c1/` e manifest em `.codex-temp/catalogo-czs-premium-sales-20260531/premium-v2-approved-assets.json`.
+- Um teste com URL pequeno dentro da imagem foi reprovado porque a IA errou o dominio; regra reforcada: link fica na legenda/sticker/comentario, nao na imagem.
+- Fila WhatsApp V2 criada em `.codex-temp/catalogo-czs-premium-sales-20260531/WHATSAPP_PREMIUM_V2_QUEUE.md`.
+
+## Fechamento Pitch Comprador CZS Jornal - 2026-05-31
+
+- Pitch comercial fechado para falar ao comprador: inclui secao Funcionou apos o lancamento, mercado regional imediato, pacote de fechamento da cota e linguagem de ativo operando.
+- HTML, Markdown e PDF final criados em `docs/commercial/czs-jornal-investor-report-2026-05-31.*`.
+- Material verificado sem a metrica tecnica fraca, com 9.000 views informadas, 552 seguidores, 181 posts, 12 modulos e 49 itens/listagens.
+
+## Landing Divulgue Comercial Forte - 2026-05-31
+
+- Usuario voltou a reprovar a pagina publicada e pediu refazer ate ficar perfeita, sem consulta intermediaria.
+- Nova direcao aplicada localmente: landing de venda direta com H1 `Anuncie no Catalogo CZS`, fundo visual forte, prova local na primeira dobra, fluxo jornal/catalogo/propaganda, pacotes comerciais e CTA para WhatsApp.
+- Arquivos alterados: `divulgue.html`, `divulgue.css`, `server.js`, `.codex-memory/orders.json`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md`.
+- Validacao local ja feita: `node --check server.js`, `node scripts/guard-pubpaid-no-canvas.js`, `git diff --check`, HTTP local 200 e screenshots desktop/mobile em `.codex-temp/divulgue-sales3-*.png`.
+- Proximo passo: rodar `npm run review:team`, commit/push, publicar em `main` e verificar a URL do Render com marcadores `Anuncie no Catálogo CZS` e `20260531-sales3`.

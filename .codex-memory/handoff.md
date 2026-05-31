@@ -88,3 +88,16 @@ Retomar pela rotina Catálogo CZS. O lote principal do Instagram já foi conclu�
 - Novo sistema visual em `docs/social/czs-premium-visual-system-2026-05-31.md`.
 - Ordem de bloqueio/regeneracao em `.codex-temp/catalogo-czs-premium-sales-20260531/VISUAL_REGENERATION_ORDER.md`.
 - Proxima rodada de vendas/servicos deve regenerar cada asset antes de postar nos grupos WhatsApp; a fila de destinos continua util, mas as imagens precisam ser substituidas.
+- Lote V2 gerado e revisado visualmente: manifest em `.codex-temp/catalogo-czs-premium-sales-20260531/premium-v2-approved-assets.json`; fila em `.codex-temp/catalogo-czs-premium-sales-20260531/WHATSAPP_PREMIUM_V2_QUEUE.md`.
+- Nao usar o asset reprovado `04-compras-entregas-url-wrong`, pois o dominio saiu errado dentro da imagem.
+
+## Landing Divulgue Comercial Forte - 2026-05-31
+
+- Retomar por `divulgue.html`, `divulgue.css` e `server.js` se a publicacao cair no meio.
+- Nova versao local usa cache-bust `20260531-sales3` e hero comercial com imagem `assets/insiders-empty-street-v1.png`, prova na primeira dobra e pacotes comerciais.
+- Screenshots locais principais: `.codex-temp/divulgue-sales3-desktop-1366-v2.png`, `.codex-temp/divulgue-sales3-mobile-v2.png` e `.codex-temp/divulgue-sales3-mobile-full.png`.
+- Antes de encerrar: publicar em `main`, conferir `https://catalogo-cruzeiro-web.onrender.com/divulgue.html` e garantir que a pagina online contenha `Anuncie no Catálogo CZS` e `20260531-sales3`.
+## Apresentacao Premium CZS Jornal - 2026-05-31
+
+- HTML transformado em apresentacao premium cinematica para comprador: capa forte, prova pos-lancamento, mercado IBGE, sala de maquinas tecnologica, 108 rotas API, graficos de pizza e fechamento de cota.
+- PDF final regerado em `docs/commercial/czs-jornal-investor-report-2026-05-31.pdf`; preview da capa em `docs/commercial/czs-jornal-investor-report-2026-05-31-preview.png`.
