@@ -97,7 +97,24 @@ Retomar pela rotina Catálogo CZS. O lote principal do Instagram já foi conclu�
 - Nova versao local usa cache-bust `20260531-sales3` e hero comercial com imagem `assets/insiders-empty-street-v1.png`, prova na primeira dobra e pacotes comerciais.
 - Screenshots locais principais: `.codex-temp/divulgue-sales3-desktop-1366-v2.png`, `.codex-temp/divulgue-sales3-mobile-v2.png` e `.codex-temp/divulgue-sales3-mobile-full.png`.
 - Antes de encerrar: publicar em `main`, conferir `https://catalogo-cruzeiro-web.onrender.com/divulgue.html` e garantir que a pagina online contenha `Anuncie no Catálogo CZS` e `20260531-sales3`.
+
+## Landing Divulgue Cinematica + Relatorio - 2026-05-31
+
+- Pedido atual: juntar a landing com o projeto do chat `019e7f3c-c74e-7c43-96c8-b0e2138650c9` e transformar em landing/relatorio/forca de vendas premium.
+- Versao local agora usa `20260531-cinema4` e inclui console animado, radar, terminal, metricas de 3 dias, 108 rotas API, 200 agentes, graficos, nodes e cotas.
+- Validar/publicar a partir de `divulgue.html`, `divulgue.css`, `server.js` e materiais `docs/commercial/czs-jornal-investor-report-2026-05-31.*`.
+- Prints locais: `.codex-temp/divulgue-cinema4-desktop.png`, `.codex-temp/divulgue-cinema4-mobile.png`, `.codex-temp/divulgue-cinema4-mobile-full.png`.
+- Ao publicar, verificar online que `/divulgue.html` contem `20260531-cinema4`, `200 agentes`, `108` e `O anúncio entra. O sistema espalha.`
 ## Apresentacao Premium CZS Jornal - 2026-05-31
 
 - HTML transformado em apresentacao premium cinematica para comprador: capa forte, prova pos-lancamento, mercado IBGE, sala de maquinas tecnologica, 108 rotas API, graficos de pizza e fechamento de cota.
 - PDF final regerado em `docs/commercial/czs-jornal-investor-report-2026-05-31.pdf`; preview da capa em `docs/commercial/czs-jornal-investor-report-2026-05-31-preview.png`.
+
+## Retomada Divulgacao Premium - 2026-05-31
+
+- Usuario avisou que o sistema de divulgacao falhou e o chat fechou apos a criacao premium de imagens.
+- Estado recuperado: os assets premium estao preservados; logs indicam Instagram feed/stories completo, stories de servicos completo e WhatsApp parcialmente concluido.
+- Falha concreta registrada: `GRUPO VIP DONA` nao tinha caixa de mensagem acessivel no momento do envio; o fluxo abortou com erro de seletor e nao deve ser forçado.
+- Fila a retomar: `.codex-temp/catalogo-czs-premium-sales-20260531/WHATSAPP_PREMIUM_V2_QUEUE.md`; conferir tambem `.codex-temp/catalogo-czs-premium-sales-20260531/whatsapp-missing-ads-queue.json` e `whatsapp-execution-log.json`.
+- Heartbeat ativo criado para esta retomada: `retomar-divulgacao-czs-segura`.
+- Regra de retomada: somente grupos validados, sem chats individuais, sem noticias/enquete em grupo de venda, sem envio se o navegador/WhatsApp nao estiver controlavel com seguranca.

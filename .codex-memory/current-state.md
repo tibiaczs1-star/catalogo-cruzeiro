@@ -107,3 +107,19 @@ WhatsApp:
 - Arquivos alterados: `divulgue.html`, `divulgue.css`, `server.js`, `.codex-memory/orders.json`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md`.
 - Validacao local ja feita: `node --check server.js`, `node scripts/guard-pubpaid-no-canvas.js`, `git diff --check`, HTTP local 200 e screenshots desktop/mobile em `.codex-temp/divulgue-sales3-*.png`.
 - Proximo passo: rodar `npm run review:team`, commit/push, publicar em `main` e verificar a URL do Render com marcadores `Anuncie no Catálogo CZS` e `20260531-sales3`.
+
+## Landing Divulgue Cinematica + Relatorio - 2026-05-31
+
+- Usuario pediu fundir a landing com o projeto do chat `019e7f3c-c74e-7c43-96c8-b0e2138650c9`, que continha relatorio comercial para cotas/compradores.
+- Landing local transformada em apresentacao comercial/tecnologica: hero com console animado, radar, terminal, fluxo jornal/catalogo/Google/WhatsApp, relatorio de 3 dias, metricas, graficos, rede de nodes, 200 agentes, 108 rotas API, cotas e pacotes.
+- Cache-bust local: `20260531-cinema4`; arquivos principais: `divulgue.html`, `divulgue.css`, `server.js`.
+- Materiais do relatorio comercial do outro chat estao em `docs/commercial/czs-jornal-investor-report-2026-05-31.*` com evidencias `czs-live-site-evidence.png` e `czs-instagram-evidence.png`.
+- Validacao local desta etapa: `node --check server.js`, `git diff --check`, HTTP local 200 e screenshots `.codex-temp/divulgue-cinema4-desktop.png`, `.codex-temp/divulgue-cinema4-mobile.png`, `.codex-temp/divulgue-cinema4-mobile-full.png`.
+
+## Retomada Divulgacao Premium - 2026-05-31
+
+- Falha reportada pelo usuario: o sistema/chat fechou depois da criacao premium de imagens.
+- Diagnostico local: as artes e filas nao foram perdidas. Instagram feed/stories e stories de servicos aparecem completos nos logs; WhatsApp teve envios confirmados em grupos validados e falhou com seguranca no `GRUPO VIP DONA` por nao encontrar caixa de mensagem.
+- Fila pendente principal: `.codex-temp/catalogo-czs-premium-sales-20260531/WHATSAPP_PREMIUM_V2_QUEUE.md`, com manifest `premium-v2-approved-assets.json` e fila complementar `whatsapp-missing-ads-queue.json`.
+- Automacao heartbeat criada: `retomar-divulgacao-czs-segura`, a cada 15 minutos, para retomar sem recomecar do zero.
+- Proximo passo seguro: recuperar controle do WhatsApp/navegador, abrir somente grupos validados, conferir cabecalho e caixa de mensagem, evitar duplicar item ja registrado em `whatsapp-execution-log.json`, e pular destino sem caixa/admin-only.

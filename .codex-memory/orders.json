@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-31T22:18:00-05:00",
+  "lastUpdatedAt": "2026-05-31T23:05:00-05:00",
   "orders": [
     {
       "id": "2026-05-31-czs-jornal-relatorio-cotas-investidores",
@@ -3613,6 +3613,58 @@
         "capturar ou revisar online se necessario"
       ],
       "notes": "Direcao visual aplicada: pagina de venda com fundo fotografico/ilustrativo de cidade, H1 Anuncie no Catalogo CZS, prova local na primeira dobra, pacotes Entrada/Mais vendido/Presenca forte e CTA direto para WhatsApp."
+    },
+    {
+      "id": "2026-05-31-merge-landing-relatorio-cinematico",
+      "createdAt": "2026-05-31T23:05:00-05:00",
+      "updatedAt": "2026-05-31T23:05:00-05:00",
+      "status": "local-cinematic-report-landing-ready-for-publish",
+      "source": "chat",
+      "rawRequest": "Incluir o projeto do chat 019e7f3c-c74e-7c43-96c8-b0e2138650c9, fundir landing e relatorio, limpar bagunca e terminar uma apresentacao de site que funcione como landing, relatorio e forca de vendas premium com tecnologia, 200 agentes, numeros, graficos, 3D, parallax e nodes.",
+      "summary": "Transformar Divulgue em landing cinematografica e relatorio comercial publico, fundindo informacoes do relatorio de cotas com demonstracao visual de tecnologia.",
+      "normalizedTasks": [
+        "ler o chat de relatorio comercial",
+        "fundir numeros do relatorio com a landing publica",
+        "adicionar tecnologia visivel e animada",
+        "mostrar 108 rotas API e 200 agentes",
+        "adicionar graficos, nodes, cotas e metricas de 3 dias",
+        "validar desktop e mobile",
+        "publicar no Render"
+      ],
+      "filesTouched": [
+        "divulgue.html",
+        "divulgue.css",
+        "server.js",
+        "docs/commercial/czs-jornal-investor-report-2026-05-31.md",
+        "docs/commercial/czs-jornal-investor-report-2026-05-31.html",
+        "docs/commercial/czs-jornal-investor-report-2026-05-31.pdf",
+        ".codex-memory/orders.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "assets/insiders-empty-street-v1.png",
+        "assets/insiders-crowd-street-v1.png",
+        "docs/commercial/czs-live-site-evidence.png",
+        "docs/commercial/czs-instagram-evidence.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "landing-page",
+        "relatorio-comercial",
+        "tecnologia",
+        "agentes",
+        "cotas",
+        "seo",
+        "propaganda"
+      ],
+      "nextSteps": [
+        "rodar npm run review:team",
+        "commitar e publicar em main",
+        "verificar Render online com marcador cinema4",
+        "limpar worktree temporaria e servidor local"
+      ],
+      "notes": "Nova versao usa cache-bust 20260531-cinema4 e apresenta o CZS como motor de propagacao: console, radar, terminal, graficos, rede de nodes, relatorio de 3 dias, cotas e CTA de venda."
     }
   ]
 }
