@@ -21,319 +21,493 @@
     <link rel="canonical" href="{{SEO_CANONICAL}}" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preload" as="image" href="./assets/insiders-empty-street-v1.png" fetchpriority="high" />
-    <link rel="stylesheet" href="./divulgue.css?v=20260531-cinema4" />
+    <link rel="stylesheet" href="./divulgue.css?v=20260601-insights1" />
+    <script src="./divulgue.js?v=20260601-insights1" defer></script>
   </head>
-  <body class="tech-sales-page">
+  <body class="czs-sales-page" style="--mx: 50%; --my: 35%">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
     <header class="topbar" aria-label="Navegação principal">
-      <a class="brand" href="./index.html" aria-label="Ir para o Catálogo CZS">
+      <a class="brand" href="./index.html" aria-label="Ir para a home do Catálogo CZS">
         <img src="./assets/logo-czs.svg" alt="" />
         <span>
           <strong>Catálogo CZS</strong>
-          <small>Jornal + Catálogo + Propagação</small>
+          <small>Jornal local + tecnologia comercial</small>
         </span>
       </a>
-      <nav aria-label="Links da página">
-        <a href="#motor">Motor</a>
+      <nav aria-label="Seções da página">
+        <a href="#sistema">O sistema</a>
+        <a href="#ecossistema">Ecossistema</a>
+        <a href="#formatos">Formatos</a>
         <a href="#tecnologia">Tecnologia</a>
-        <a href="#pacotes">Pacotes</a>
-        <a class="nav-cta" href="https://wa.me/5568995667412?text=Quero%20anunciar%20no%20Catalogo%20CZS.%20Minha%20empresa%20e%3A" rel="noopener">Anunciar</a>
       </nav>
+      <a class="topbar-cta" href="https://wa.me/556896026649?text=Quero%20colocar%20minha%20empresa%20no%20sistema%20CZS" rel="noopener"><span>Entrar no sistema</span><b>Anunciar</b></a>
     </header>
 
-    <main>
-      <section class="cinema-hero" aria-labelledby="heroTitle">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="scanlines" aria-hidden="true"></div>
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Cruzeiro do Sul • Vale do Juruá • motor comercial local</p>
-            <h1 id="heroTitle">O anúncio entra. O sistema espalha.</h1>
-            <p class="hero-lede">
-              O Catálogo CZS transforma jornal, busca, Instagram, WhatsApp, páginas e SEO em uma máquina de presença local para empresas.
-            </p>
+    <main id="conteudo">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-photo" aria-hidden="true"></div>
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+
+        <div class="hero-inner">
+          <div class="hero-copy" data-reveal data-depth="0.02">
+            <p class="eyebrow"><i></i> Cruzeiro do Sul • Vale do Juruá • Acre</p>
+            <h1 id="hero-title">
+              Sua empresa<br />
+              dentro do<br />
+              <em>sistema.</em>
+            </h1>
+            <p class="hero-lede">Não é só um anúncio. É presença local conectada a jornal, catálogo, Google, Instagram, WhatsApp e Facebook.</p>
+            <p class="type-line" aria-label="Mensagem dinâmica da operação CZS"><span data-typewriter="O CZS transforma notícia em atenção, atenção em busca e busca em cliente no WhatsApp.">O CZS transforma notícia em atenção, atenção em busca e busca em cliente no WhatsApp.</span></p>
             <div class="hero-actions">
-              <a class="primary-action" href="https://wa.me/5568995667412?text=Quero%20anunciar%20no%20Catalogo%20CZS.%20Minha%20empresa%20e%3A" rel="noopener">Colocar minha empresa no motor</a>
-              <a class="ghost-action" href="#tecnologia">Ver a tecnologia</a>
-            </div>
-            <div class="hero-proof" aria-label="Provas comerciais">
-              <span><strong>9.000</strong> views informadas em cerca de 3 dias</span>
-              <span><strong>181</strong> posts verificados no Instagram</span>
-              <span><strong>480</strong> notícias no arquivo local</span>
+              <a class="action action-gold" href="https://wa.me/556896026649?text=Quero%20divulgar%20minha%20empresa%20no%20Catalogo%20CZS" rel="noopener">Quero divulgar minha empresa <span>↗</span></a>
+              <a class="action action-ghost" href="#sistema">Ver como funciona</a>
             </div>
           </div>
 
-          <div class="command-stage" aria-label="Demonstração visual do motor CZS">
-            <div class="stage-glow"></div>
-            <div class="orbit" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
+          <div class="hero-signal" data-reveal data-depth="-0.025">
+            <div class="signal-orbit" aria-hidden="true">
+              <span class="orbit-line orbit-one"></span>
+              <span class="orbit-line orbit-two"></span>
+              <span class="orbit-line orbit-three"></span>
+              <span class="signal-core">
+                <img src="./assets/logo-czs.svg" alt="" />
+              </span>
+              <b class="signal-node node-instagram">Instagram</b>
+              <b class="signal-node node-google">Google</b>
+              <b class="signal-node node-whatsapp">WhatsApp</b>
+              <b class="signal-node node-facebook">Facebook</b>
+              <b class="signal-node node-catalogo">Catálogo</b>
+              <b class="signal-node node-jornal">Jornal local</b>
             </div>
-            <div class="console main-console">
-              <div class="console-top">
-                <span class="dot green"></span>
-                <span class="dot gold"></span>
-                <span class="dot red"></span>
-                <strong>CZS PROPAGATION ENGINE</strong>
-              </div>
-              <div class="flow-line">
-                <span>Jornal</span>
-                <i></i>
-                <span>Catálogo</span>
-                <i></i>
-                <span>Google</span>
-                <i></i>
-                <span>WhatsApp</span>
-              </div>
-              <div class="console-body">
-                <div class="pulse-map">
-                  <b>CZS</b>
-                  <span class="pin p1">Centro</span>
-                  <span class="pin p2">Juruá</span>
-                  <span class="pin p3">Acre</span>
-                </div>
-                <div class="terminal">
-                  <p><span>01</span> empresa cadastrada</p>
-                  <p><span>02</span> página SEO gerada</p>
-                  <p><span>03</span> chamada social pronta</p>
-                  <p><span>04</span> link enviado ao WhatsApp</p>
-                </div>
-              </div>
-            </div>
-            <div class="mini-card search-card">
-              <small>Busca local</small>
-              <strong>“serviços em Cruzeiro do Sul”</strong>
-              <span class="progress"><i></i></span>
-            </div>
-            <div class="mini-card social-card">
-              <small>Propagação</small>
-              <strong>Story + post + status</strong>
-              <span>CTA para WhatsApp</span>
-            </div>
-            <div class="mini-card catalog-card">
-              <small>Catálogo</small>
-              <strong>Nome • telefone • link</strong>
-              <span>indexável e compartilhável</span>
-            </div>
+            <p class="signal-caption"><span></span> Operação regional conectada</p>
           </div>
         </div>
-      </section>
 
-      <section id="motor" class="engine-section" aria-labelledby="engineTitle">
-        <div class="section-heading">
-          <p class="section-kicker">O motor</p>
-          <h2 id="engineTitle">Não é uma arte solta. É uma esteira de atenção.</h2>
-        </div>
-        <div class="engine-steps">
-          <article>
-            <span>01</span>
-            <h3>Capta atenção</h3>
-            <p>O jornal local traz o público para dentro do CZS com notícia, serviço e contexto do Vale do Juruá.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Organiza busca</h3>
-            <p>O catálogo transforma a empresa em resultado: categoria, telefone, WhatsApp, link e página própria.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Propaga oferta</h3>
-            <p>Posts, stories, status, grupos permitidos, landing pages e SEO levam o cliente para a conversa.</p>
-          </article>
+        <div class="hero-proof" aria-label="Provas da operação CZS">
+          <div><strong data-count-to="480">480</strong><span>notícias no arquivo local</span></div>
+          <div><strong data-count-to="81">81</strong><span>contatos catalogados</span></div>
+          <div><strong data-count-to="26">26</strong><span>categorias locais</span></div>
+          <div><strong data-count-to="111">111</strong><span>rotas de tecnologia</span></div>
         </div>
       </section>
 
-      <section id="tecnologia" class="tech-section" aria-labelledby="techTitle">
-        <div class="tech-copy">
-          <p class="section-kicker">Tecnologia aplicada</p>
-          <h2 id="techTitle">O comerciante não compra “site”. Compra presença funcionando.</h2>
-          <p>
-            A camada técnica junta página pública, sitemap, schema, cache-bust, mídia social, catálogo, links rastreáveis e CTA para WhatsApp.
-          </p>
+      <section class="manifesto section-pad" aria-labelledby="manifesto-title">
+        <div class="manifesto-index">01 / POSICIONAMENTO</div>
+        <div class="manifesto-copy" data-reveal>
+          <p class="section-kicker">Um motor local de descoberta</p>
+          <h2 id="manifesto-title">Enquanto um post desaparece, o CZS constrói presença.</h2>
+          <p>Seu negócio entra em uma operação regional criada para transformar atenção em descoberta, descoberta em contato e contato em venda. A campanha circula nos canais certos e continua encontrável depois da publicação.</p>
         </div>
-        <div class="tech-stack" aria-label="Camadas de tecnologia">
-          <div><strong>SEO</strong><span>title, description, canonical, sitemap e dados estruturados</span></div>
-          <div><strong>Catálogo</strong><span>serviços, categorias, telefone, WhatsApp e links internos</span></div>
-          <div><strong>Social</strong><span>copy curta, story, status, arte e chamada por campanha</span></div>
-          <div><strong>Conversão</strong><span>página de oferta, botão direto e mensagem pré-preenchida</span></div>
-          <div><strong>Render</strong><span>site online, versionamento e publicação rápida</span></div>
-          <div><strong>PubPaid</strong><span>experiências interativas para atenção e comunidade</span></div>
-        </div>
+        <aside class="manifesto-note" data-reveal>
+          <span>O objetivo</span>
+          <strong>Ser encontrado no momento certo.</strong>
+          <p>Quando a cidade procura, pergunta, compara ou decide comprar.</p>
+        </aside>
       </section>
 
-      <section class="report-section" aria-labelledby="reportTitle">
-        <div class="report-head">
-          <p class="section-kicker">Relatório de 3 dias</p>
-          <h2 id="reportTitle">Tração, operação e capacidade técnica em uma apresentação pronta para comprador.</h2>
-          <p>
-            A proposta junta o jornal no Render, a distribuição social, a base do catálogo e a sala de máquinas do sistema em uma peça de venda.
-          </p>
-        </div>
-        <div class="metric-wall" aria-label="Números do CZS">
-          <article>
-            <span>views informadas</span>
-            <strong>9.000</strong>
-            <p>alcance de ativação em cerca de 3 dias</p>
-          </article>
-          <article>
-            <span>Instagram</span>
-            <strong>552</strong>
-            <p>seguidores verificados no pitch comercial</p>
-          </article>
-          <article>
-            <span>posts</span>
-            <strong>181</strong>
-            <p>publicações verificadas no perfil público</p>
-          </article>
-          <article>
-            <span>arquivo</span>
-            <strong>480</strong>
-            <p>notícias locais organizadas no sistema</p>
-          </article>
-          <article>
-            <span>backend</span>
-            <strong>108</strong>
-            <p>rotas API únicas apuradas no projeto</p>
-          </article>
-          <article>
-            <span>força operacional</span>
-            <strong>200</strong>
-            <p>agentes treinados por função e frente de trabalho</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="chart-section" aria-labelledby="chartTitle">
-        <div class="chart-copy">
-          <p class="section-kicker">Painel comercial</p>
-          <h2 id="chartTitle">O comprador vê números, canais e tecnologia trabalhando juntos.</h2>
-        </div>
-        <div class="chart-grid">
-          <article class="chart-card">
-            <div class="donut donut-a" aria-hidden="true"></div>
-            <strong>Distribuição</strong>
-            <p>Jornal, catálogo, Instagram, WhatsApp e landing pages formando presença local.</p>
-          </article>
-          <article class="chart-card">
-            <div class="bar-chart" aria-hidden="true">
-              <span style="--h: 42%"></span>
-              <span style="--h: 70%"></span>
-              <span style="--h: 92%"></span>
-              <span style="--h: 58%"></span>
-              <span style="--h: 80%"></span>
-            </div>
-            <strong>Ativação</strong>
-            <p>Conteúdo diário, serviços e propaganda intercalada para manter retorno.</p>
-          </article>
-          <article class="chart-card">
-            <div class="donut donut-b" aria-hidden="true"></div>
-            <strong>Receita</strong>
-            <p>Cotas, anúncios, páginas, campanhas, PubPaid e serviços digitais.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="agent-section" aria-labelledby="agentTitle">
-        <div class="agent-copy">
-          <p class="section-kicker">Rede de agentes</p>
-          <h2 id="agentTitle">200 agentes treinados para transformar operação em escala.</h2>
-          <p>
-            Cada frente tem função: editorial, SEO, revisão, captura, vendas, catálogo, automação, design, vídeos, PubPaid, atendimento e relatórios.
-          </p>
-        </div>
-        <div class="node-field" aria-label="Mapa de agentes e tecnologia">
-          <span class="core-node">CZS</span>
-          <span class="node n1">SEO</span>
-          <span class="node n2">Jornal</span>
-          <span class="node n3">Vendas</span>
-          <span class="node n4">Vídeo</span>
-          <span class="node n5">Catálogo</span>
-          <span class="node n6">PubPaid</span>
-          <span class="node n7">WhatsApp</span>
-          <span class="node n8">Relatórios</span>
-        </div>
-      </section>
-
-      <section class="investor-section" aria-labelledby="investorTitle">
+      <section class="proof-tape" aria-label="Capacidades comerciais">
         <div>
-          <p class="section-kicker">Força de vendas pronta</p>
-          <h2 id="investorTitle">A página também funciona como relatório para vender cota, anúncio e campanha.</h2>
-        </div>
-        <div class="offer-ladder" aria-label="Cotas e ofertas">
-          <article><span>R$ 250</span><strong>Entrada local</strong><p>cadastro, link e presença básica no catálogo.</p></article>
-          <article><span>R$ 500</span><strong>Divulgação</strong><p>chamada social, WhatsApp e vitrine local.</p></article>
-          <article><span>R$ 1.500</span><strong>Campanha</strong><p>landing, SEO, posts e relatório de execução.</p></article>
-          <article><span>R$ 5.000</span><strong>Cota estratégica</strong><p>presença forte, pacote premium e acompanhamento comercial.</p></article>
+          <span>JORNAL HIPERLOCAL</span>
+          <span>CATÁLOGO REGIONAL</span>
+          <span>GOOGLE + SEO</span>
+          <span>INSTAGRAM STORIES</span>
+          <span>WHATSAPP STATUS</span>
+          <span>FACEBOOK MARKETPLACE</span>
+          <span>PÁGINAS COMERCIAIS</span>
+          <span>CTA DIRETO</span>
         </div>
       </section>
 
-      <section class="live-demo" aria-labelledby="demoTitle">
-        <div class="demo-panel browser-panel">
-          <div class="browser-bar"><span></span><span></span><span></span><b>catalogo-cruzeiro-web.onrender.com</b></div>
-          <div class="browser-content">
-            <p>Resultado local</p>
-            <h3>Empresa aparece em notícia, catálogo e busca</h3>
-            <div class="result-row"><strong>WhatsApp</strong><span>contato imediato</span></div>
-            <div class="result-row"><strong>Google</strong><span>página rastreável</span></div>
-            <div class="result-row"><strong>Instagram</strong><span>chamada visual</span></div>
+      <section id="sistema" class="system section-pad dark" aria-labelledby="system-title">
+        <div class="section-head" data-reveal>
+          <p class="section-kicker">02 / PROPAGAÇÃO LOCAL</p>
+          <h2 id="system-title">Uma campanha.<br /><em>Vários caminhos até o cliente.</em></h2>
+        </div>
+
+        <div class="system-layout">
+          <div class="channel-stage" data-channel-stage>
+            <div class="stage-top">
+              <span>LIVE DISTRIBUTION</span>
+              <b>● CZS ONLINE</b>
+            </div>
+            <div class="stage-core">
+              <div class="stage-rings" aria-hidden="true"></div>
+              <div class="stage-brand">
+                <img src="./assets/logo-czs.svg" alt="" />
+                <strong>CATÁLOGO<br />CZS</strong>
+              </div>
+              <div class="stage-channel ch-site"><span>01</span><b>Página pública</b><small>presença permanente</small></div>
+              <div class="stage-channel ch-google"><span>02</span><b>Google</b><small>busca e indexação</small></div>
+              <div class="stage-channel ch-instagram"><span>03</span><b>Instagram</b><small>stories e campanha</small></div>
+              <div class="stage-channel ch-whatsapp"><span>04</span><b>WhatsApp</b><small>status e grupos validados</small></div>
+              <div class="stage-channel ch-facebook"><span>05</span><b>Facebook</b><small>página, grupos e marketplace</small></div>
+            </div>
+          </div>
+
+          <div class="system-copy">
+            <article data-reveal>
+              <span>01</span>
+              <div>
+                <h3>Sua oferta ganha uma página</h3>
+                <p>Texto comercial, chamada clara, contato direto e endereço próprio para compartilhar.</p>
+              </div>
+            </article>
+            <article data-reveal>
+              <span>02</span>
+              <div>
+                <h3>A divulgação encontra contexto</h3>
+                <p>Jornal, catálogo e canais sociais colocam a empresa perto da rotina de quem mora no Juruá.</p>
+              </div>
+            </article>
+            <article data-reveal>
+              <span>03</span>
+              <div>
+                <h3>O cliente chega sem labirinto</h3>
+                <p>Botões, links e WhatsApp reduzem o caminho entre interesse e conversa comercial.</p>
+              </div>
+            </article>
           </div>
         </div>
-        <div class="demo-copy">
-          <p class="section-kicker">Demonstração</p>
-          <h2 id="demoTitle">A tecnologia precisa aparecer para o cliente confiar.</h2>
-          <p>
-            Por isso a landing agora mostra o motor: não só promete divulgação, mas apresenta a operação como sistema vivo.
-          </p>
-        </div>
       </section>
 
-      <section id="pacotes" class="packages" aria-labelledby="packagesTitle">
-        <div class="section-heading">
-          <p class="section-kicker">Pacotes comerciais</p>
-          <h2 id="packagesTitle">Da vitrine simples à campanha completa.</h2>
+      <section id="ecossistema" class="ecosystem section-pad" aria-labelledby="ecosystem-title">
+        <div class="section-head centered" data-reveal>
+          <p class="section-kicker">03 / INVENTÁRIO OPERACIONAL</p>
+          <h2 id="ecosystem-title">Já existe uma cidade digital<br /><em>rodando por trás da propaganda.</em></h2>
+          <p>O anunciante entra em uma operação pronta: notícia, catálogo, serviços, canais sociais, WhatsApp e páginas públicas trabalhando juntos para gerar presença.</p>
         </div>
-        <div class="package-list">
-          <article class="package">
-            <p>Entrada</p>
-            <h3>Cadastro inteligente</h3>
-            <span>Para ser encontrado no catálogo.</span>
-            <ul>
-              <li>Nome, categoria, telefone e WhatsApp</li>
-              <li>Link interno no Catálogo CZS</li>
-              <li>Texto curto com serviço principal</li>
-            </ul>
-            <a href="https://wa.me/5568995667412?text=Quero%20cadastro%20inteligente%20no%20Catalogo%20CZS" rel="noopener">Pedir cadastro</a>
+
+        <div class="numbers-wall">
+          <article class="number-major" data-reveal>
+            <strong data-count-to="480">480</strong>
+            <span>assuntos para gerar atenção</span>
+            <p>conteúdo regional para a cidade buscar, comentar, compartilhar e voltar.</p>
           </article>
-          <article class="package featured">
-            <p>Mais vendido</p>
-            <h3>Propagação local</h3>
-            <span>Para aparecer e gerar conversa.</span>
-            <ul>
-              <li>Cadastro no catálogo</li>
-              <li>Story, status e chamada com link</li>
-              <li>Texto comercial com CTA para WhatsApp</li>
-            </ul>
-            <a href="https://wa.me/5568995667412?text=Quero%20propagacao%20local%20no%20Catalogo%20CZS" rel="noopener">Quero esse</a>
+          <article data-reveal>
+            <strong data-count-to="81">81</strong>
+            <span>contatos locais no mapa</span>
+            <p>telefones, endereços, categorias e caminhos de atendimento organizados.</p>
           </article>
-          <article class="package">
-            <p>Presença forte</p>
-            <h3>Landing + SEO + campanha</h3>
-            <span>Para vender uma oferta com página própria.</span>
-            <ul>
-              <li>Página comercial indexável</li>
-              <li>SEO local e schema estruturado</li>
-              <li>Distribuição social com link público</li>
-            </ul>
-            <a href="https://wa.me/5568995667412?text=Quero%20landing%20SEO%20e%20campanha%20no%20Catalogo%20CZS" rel="noopener">Montar campanha</a>
+          <article data-reveal>
+            <strong data-count-to="26">26</strong>
+            <span>categorias de compra</span>
+            <p>do serviço urgente ao comércio, alimentação, saúde e utilidade pública.</p>
+          </article>
+          <article data-reveal>
+            <strong data-count-to="12">12</strong>
+            <span>portas de entrada</span>
+            <p>áreas prontas para transformar procura em clique, ligação ou WhatsApp.</p>
+          </article>
+          <article data-reveal>
+            <strong data-count-to="40">40</strong>
+            <span>páginas para posicionar marcas</span>
+            <p>jornal, catálogo, jogos, pesquisa, serviços e vitrines comerciais.</p>
+          </article>
+          <article data-reveal>
+            <strong data-count-to="111">111</strong>
+            <span>recursos de tecnologia</span>
+            <p>base para relatórios, automações, busca, jogos e experiências digitais.</p>
+          </article>
+          <article data-reveal>
+            <strong data-count-to="11">11</strong>
+            <span>campanhas prontas</span>
+            <p>produtos, serviços, convites e ofertas preparados por canal.</p>
           </article>
         </div>
       </section>
 
-      <section class="closing" aria-labelledby="closingTitle">
-        <p class="section-kicker">Próximo passo</p>
-        <h2 id="closingTitle">Sua empresa entra no motor do CZS.</h2>
-        <p>Envie o nome da empresa, ramo, telefone e oferta principal. O CZS define o melhor caminho: catálogo, propaganda, landing, SEO ou campanha completa.</p>
-        <a class="primary-action" href="https://wa.me/5568995667412?text=Quero%20entrar%20no%20motor%20comercial%20do%20Catalogo%20CZS.%20Minha%20empresa%20e%3A" rel="noopener">Chamar no WhatsApp</a>
+      <section class="launches section-pad dark" aria-labelledby="launches-title">
+        <div class="section-head" data-reveal>
+          <p class="section-kicker">04 / PRODUTOS EM OPERAÇÃO</p>
+          <h2 id="launches-title">Mais que mídia.<br /><em>Um ecossistema lançando coisas.</em></h2>
+        </div>
+
+        <div class="launch-runway">
+          <article data-reveal>
+            <div class="launch-mark">A</div>
+            <small>INFORMAÇÃO LOCAL</small>
+            <h3>Jornal CZS</h3>
+            <p>Notícias, fontes, arquivo regional e leitura rápida para criar rotina e confiança.</p>
+            <a href="./index.html">Abrir jornal <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="launch-mark">B</div>
+            <small>DESCOBERTA COMERCIAL</small>
+            <h3>Catálogo de serviços</h3>
+            <p>Contatos, categorias e busca local para aproximar necessidade e solução.</p>
+            <a href="./catalogo-servicos.html">Abrir catálogo <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="launch-mark">C</div>
+            <small>RETENÇÃO E COMUNIDADE</small>
+            <h3>PubPaid beta</h3>
+            <p>Sinuca, Damas e Xadrez em teste: experiências de habilidade sem aposta e sem promessa de renda.</p>
+            <a href="./pubpaid.html">Conhecer beta <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="launch-mark">D</div>
+            <small>PARTICIPAÇÃO REGIONAL</small>
+            <h3>Enquete Acre 2026</h3>
+            <p>Sondagem espontânea voluntária, sem caráter científico e com transparência para o público.</p>
+            <a href="./pesquisa-acre-2026.html">Ver enquete <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="launch-mark">E</div>
+            <small>SERVIÇOS DIGITAIS</small>
+            <h3>Sites e chats automáticos</h3>
+            <p>Páginas comerciais, catálogos, links organizados e respostas frequentes para empresas.</p>
+            <a href="https://wa.me/556896026649?text=Quero%20saber%20sobre%20sites%20e%20chats%20automaticos" rel="noopener">Solicitar projeto <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="launch-mark">F</div>
+            <small>SUPORTE LOCAL</small>
+            <h3>T.I. Logístico CZS</h3>
+            <p>Configuração, limpeza, backup, apps, orientação e atendimento combinado.</p>
+            <a href="https://wa.me/556896026649?text=Quero%20atendimento%20de%20TI%20Logistico%20CZS" rel="noopener">Chamar suporte <span>↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="channel-reports command-section section-pad" aria-labelledby="reports-title">
+        <div class="od-command-shell" data-reveal>
+          <div class="od-command-header">
+            <p class="section-kicker">05 / OPERAÇÃO COMERCIAL</p>
+            <h2 id="reports-title">Distribuição real. Não promessa.</h2>
+            <p>O CZS já organiza notícia, venda, status, story, marketplace e link público. A empresa entra com oferta; o sistema entrega presença diária nos canais que a cidade realmente usa.</p>
+          </div>
+
+          <div class="od-command-stage">
+            <div class="od-command-copy">
+              <span>Catálogo CZS / Central de venda</span>
+              <h3>WhatsApp vende. Instagram lembra. Facebook espalha. Google deixa encontrável.</h3>
+              <p>Não é pacote bonito para ficar parado. É uma esteira de campanha: peça comercial, chamada local, destino de contato e distribuição até o cliente.</p>
+              <a href="https://wa.me/556896026649?text=Quero%20entrar%20na%20distribuicao%20comercial%20CZS" rel="noopener">Colocar minha empresa no fluxo <b>↗</b></a>
+            </div>
+
+            <div class="od-command-core" aria-hidden="true">
+              <span class="od-scan-line"></span>
+              <span class="od-orbit od-orbit-a"></span>
+              <span class="od-orbit od-orbit-b"></span>
+              <span class="od-orbit od-orbit-c"></span>
+              <b>CZS</b>
+              <i class="od-node od-node-wa">WhatsApp</i>
+              <i class="od-node od-node-ig">Instagram</i>
+              <i class="od-node od-node-fb">Facebook</i>
+              <i class="od-node od-node-g">Google</i>
+              <i class="od-node od-node-log">Logs</i>
+            </div>
+
+            <div class="od-command-ledger" aria-label="Números operacionais de distribuição CZS">
+              <article class="od-ledger-major">
+                <small>motor editorial</small>
+                <strong data-count-to="1610">1610</strong>
+                <span>notícias no snapshot local para transformar assunto da cidade em atenção comercial.</span>
+              </article>
+              <article>
+                <small>fila premium</small>
+                <strong data-count-to="12">12</strong>
+                <span>itens prontos para campanha, página, peça, canal e destino.</span>
+              </article>
+              <article>
+                <small>WhatsApp</small>
+                <strong data-count-to="24">24</strong>
+                <span>sinais somando vendas, notícias, status e peças comerciais.</span>
+              </article>
+              <article>
+                <small>Instagram</small>
+                <strong data-count-to="41">41</strong>
+                <span>peças e rotinas locais para feed, story e presença recorrente.</span>
+              </article>
+              <article>
+                <small>Facebook</small>
+                <strong data-count-to="10">10</strong>
+                <span>itens marcados para página, grupos e Marketplace.</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="od-channel-strip" aria-label="Detalhe dos canais comerciais">
+            <article data-reveal>
+              <span>01</span>
+              <h3>WhatsApp vira balcão.</h3>
+              <p>11 peças comerciais, 5 sinais de notícia e 8 sinais de vendas/serviços preparados para conversa direta.</p>
+            </article>
+            <article data-reveal>
+              <span>02</span>
+              <h3>Instagram vira lembrança.</h3>
+              <p>5 itens oficiais, 24 peças premium recentes e 12 rotinas hiperlocais para manter a marca aparecendo.</p>
+            </article>
+            <article data-reveal>
+              <span>03</span>
+              <h3>Facebook vira alcance.</h3>
+              <p>10 itens no pacote comercial, 8 com Marketplace no plano, além de página e grupos para convite institucional.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="insights-deck section-pad" aria-labelledby="insights-title">
+        <div class="insights-backdrop" aria-hidden="true"></div>
+        <div class="section-head" data-reveal>
+          <p class="section-kicker">06 / INSIGHTS CZS + INSTAGRAM</p>
+          <h2 id="insights-title">A vitrine social<br /><em>já saiu do zero.</em></h2>
+          <p>Sua marca não entra sozinha na internet. Ela entra em uma vitrine que já publica, circula, chama atenção e leva o cliente para o contato certo.</p>
+        </div>
+
+        <div class="cockpit-grid instagram-cockpit">
+          <article class="cockpit-main" data-reveal>
+            <div class="radial-meter" aria-hidden="true">
+              <span></span>
+              <b>IG</b>
+            </div>
+            <div>
+              <small>@catalogo_czs_ / atenção inicial</small>
+              <strong data-count-to="9000">9000</strong>
+              <p>views informadas em cerca de 3 dias. Para o anunciante, isso mostra que notícia local movimenta atenção rápido.</p>
+            </div>
+          </article>
+          <article data-reveal><span>Público inicial</span><strong data-count-to="552">552</strong><p>seguidores para receber chamada, story, notícia, oferta e convite comercial.</p></article>
+          <article data-reveal><span>Canal em movimento</span><strong data-count-to="181">181</strong><p>posts publicados: a marca aparece dentro de um canal que já tem histórico.</p></article>
+          <article data-reveal><span>Assuntos para virar campanha</span><strong data-count-to="51">51</strong><p>pautas e peças de 01/06 prontas para alimentar presença diária.</p></article>
+          <article data-reveal><span>Entrega premium</span><strong data-count-to="8">8</strong><p>notícia vira feed, story, áudio, legenda, comentário fixado e link público.</p></article>
+          <article class="insight-pending" data-reveal>
+            <span>Esteira de conteúdo</span>
+            <strong data-count-to="41">41</strong>
+            <p>peças mapeadas para Instagram entre oficial, premium recente e rotina hiperlocal.</p>
+          </article>
+        </div>
+
+        <div class="insights-proof-line" data-reveal>
+          <span>Para o cliente:</span>
+          <p>você não está comprando só uma arte. Você está comprando entrada em um canal local com público, rotina de publicação, stories, chamadas, links e caminho direto para WhatsApp.</p>
+        </div>
+      </section>
+
+      <section class="cinema-lab section-pad dark" aria-labelledby="lab-title">
+        <div class="lab-shell" data-reveal>
+          <div class="lab-copy">
+            <p class="section-kicker">07 / CINEMA INTERATIVO</p>
+            <h2 id="lab-title">A venda precisa parecer<br /><em>uma máquina viva.</em></h2>
+            <p>O CZS pode apresentar cada cliente como parte de uma operação: chamada que se escreve sozinha, mapa 3D de distribuição, cards com profundidade, relatórios por canal e projetos próprios no mesmo ecossistema.</p>
+          </div>
+          <div class="lab-stage" aria-hidden="true">
+            <div class="holo-card card-a"><span>Jornal</span><b>480</b></div>
+            <div class="holo-card card-b"><span>Catálogo</span><b>81</b></div>
+            <div class="holo-card card-c"><span>API</span><b>111</b></div>
+            <div class="holo-floor"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="formatos" class="formats section-pad" aria-labelledby="formats-title">
+        <div class="section-head centered" data-reveal>
+          <p class="section-kicker">08 / FORMAS DE ENTRAR</p>
+          <h2 id="formats-title">Não compre “um post”.<br /><em>Compre uma posição.</em></h2>
+        </div>
+
+        <div class="format-list">
+          <article data-reveal>
+            <div class="format-number">01</div>
+            <div>
+              <small>PORTA DE ENTRADA</small>
+              <h3>Cadastro inteligente</h3>
+              <p>Nome, categoria, telefone, WhatsApp, chamada curta e presença organizada no catálogo regional.</p>
+            </div>
+            <a href="https://wa.me/556896026649?text=Quero%20um%20cadastro%20inteligente%20no%20Catalogo%20CZS" rel="noopener">Pedir cadastro <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="format-number">02</div>
+            <div>
+              <small>DISTRIBUIÇÃO LOCAL</small>
+              <h3>Campanha de propagação</h3>
+              <p>Arte, copy, story, status, link e distribuição nos canais adequados para a sua oferta.</p>
+            </div>
+            <a href="https://wa.me/556896026649?text=Quero%20uma%20campanha%20de%20propagacao%20local%20no%20CZS" rel="noopener">Montar campanha <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="format-number">03</div>
+            <div>
+              <small>ATIVO DIGITAL</small>
+              <h3>Landing premium + SEO local</h3>
+              <p>Página comercial, metadados, sitemap, copy de venda e CTA rastreável para continuar sendo encontrado.</p>
+            </div>
+            <a href="https://wa.me/556896026649?text=Quero%20uma%20landing%20premium%20com%20SEO%20local" rel="noopener">Criar landing <span>↗</span></a>
+          </article>
+          <article data-reveal>
+            <div class="format-number">04</div>
+            <div>
+              <small>PROJETO SOB MEDIDA</small>
+              <h3>Sistema para sua empresa</h3>
+              <p>Site, catálogo, automação de atendimento e experiência digital desenhados para o seu negócio.</p>
+            </div>
+            <a href="https://wa.me/556896026649?text=Quero%20um%20sistema%20digital%20para%20minha%20empresa" rel="noopener">Conversar sobre sistema <span>↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section id="tecnologia" class="technology section-pad dark" aria-labelledby="technology-title">
+        <div class="technology-layout">
+          <div class="section-head" data-reveal>
+            <p class="section-kicker">09 / TECNOLOGIA VISÍVEL</p>
+            <h2 id="technology-title">A propaganda<br /><em>não trabalha sozinha.</em></h2>
+            <p>Existe uma arquitetura por trás da vitrine: dados locais, páginas públicas, indexação, distribuição e contato direto.</p>
+          </div>
+
+          <div class="tech-terminal" data-reveal>
+            <div class="terminal-bar">
+              <span></span><span></span><span></span>
+              <b>CZS / SALES ENGINE</b>
+            </div>
+            <ol>
+              <li><i>01</i><div><strong>SEO local</strong><small>title · description · canonical · sitemap · schema</small></div></li>
+              <li><i>02</i><div><strong>Catálogo estruturado</strong><small>categoria · telefone · endereço · tags · fonte</small></div></li>
+              <li><i>03</i><div><strong>Distribuição multicanal</strong><small>instagram · whatsapp · facebook · página pública</small></div></li>
+              <li><i>04</i><div><strong>Conteúdo regional</strong><small>notícias · arquivo · serviços · utilidade local</small></div></li>
+              <li><i>05</i><div><strong>Conversão direta</strong><small>cta · whatsapp · landing · atendimento</small></div></li>
+              <li><i>06</i><div><strong>Experiências próprias</strong><small>jogos beta · enquete · verticais · campanhas</small></div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="power-strip" aria-label="Superpoderes comerciais do CZS">
+          <span>SEO Local</span>
+          <span>Schema</span>
+          <span>API</span>
+          <span>Analytics</span>
+          <span>Stories</span>
+          <span>Marketplace</span>
+          <span>WhatsApp CTA</span>
+          <span>Jogos Beta</span>
+        </div>
+      </section>
+
+      <section class="truth section-pad" aria-labelledby="truth-title">
+        <div class="truth-layout">
+          <div data-reveal>
+            <p class="section-kicker">10 / VENDA COM TRANSPARÊNCIA</p>
+            <h2 id="truth-title">Número bom é número<br /><em>que aguenta pergunta.</em></h2>
+          </div>
+          <div data-reveal>
+            <p>Esta página apresenta estrutura real do projeto, produtos publicados e canais preparados. Métricas de audiência entram na proposta comercial quando houver relatório validado de alcance, origem e período.</p>
+            <strong>Sem número decorativo. Sem promessa vazia. Com tecnologia demonstrável.</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta" aria-labelledby="final-title">
+        <div class="final-photo" aria-hidden="true"></div>
+        <div class="final-copy" data-reveal>
+          <p class="section-kicker">CATÁLOGO CZS / CRUZEIRO DO SUL</p>
+          <h2 id="final-title">Sua empresa pode<br />entrar no sistema<br /><em>agora.</em></h2>
+          <p>Conte o que você vende. A gente organiza o melhor caminho para sua presença local.</p>
+          <a class="action action-gold" href="https://wa.me/556896026649?text=Quero%20entrar%20no%20sistema%20do%20Catalogo%20CZS.%20Minha%20empresa%20e%3A" rel="noopener">Falar no WhatsApp <span>↗</span></a>
+        </div>
+        <footer>
+          <a href="./index.html">Catálogo CZS</a>
+          <span>Cruzeiro do Sul • Vale do Juruá • Acre</span>
+          <a href="https://www.instagram.com/catalogo_czs_/" rel="noopener">Instagram ↗</a>
+        </footer>
       </section>
     </main>
   </body>

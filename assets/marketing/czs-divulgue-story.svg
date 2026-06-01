@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title id="title">Catálogo CZS - criativo de divulgação para story</title>
+  <desc id="desc">Story premium divulgando presença comercial no Catálogo CZS.</desc>
+  <defs>
+    <radialGradient id="g1" cx="30%" cy="24%" r="78%">
+      <stop offset="0%" stop-color="#f4d28b" stop-opacity=".36"/>
+      <stop offset="52%" stop-color="#d7aa57" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#05090e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="82%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#82e7f4" stop-opacity=".25"/>
+      <stop offset="100%" stop-color="#05090e" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .serif{font-family:Georgia,"Times New Roman",serif}
+      .sans{font-family:"Segoe UI",Arial,sans-serif}
+      .micro{font-size:24px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}
+      .gold{fill:#f4d28b}
+      .white{fill:#fff}
+      .muted{fill:#aab4bb}
+      .line{stroke:rgba(255,255,255,.13);stroke-width:1}
+    </style>
+  </defs>
+  <rect width="1080" height="1920" fill="#05090e"/>
+  <rect width="1080" height="1920" fill="url(#g1)"/>
+  <rect width="1080" height="1920" fill="url(#g2)"/>
+  <g opacity=".2">
+    <path d="M0 160H1080M0 320H1080M0 480H1080M0 640H1080M0 800H1080M0 960H1080M0 1120H1080M0 1280H1080M0 1440H1080M0 1600H1080M0 1760H1080" class="line"/>
+    <path d="M135 0V1920M270 0V1920M405 0V1920M540 0V1920M675 0V1920M810 0V1920M945 0V1920" class="line"/>
+  </g>
+  <g transform="translate(70 95)">
+    <text x="0" y="30" class="sans micro gold">CZS · Cruzeiro do Sul · Divulgue</text>
+    <text x="0" y="192" class="serif white" font-size="128" letter-spacing="-8">Sua marca</text>
+    <text x="0" y="314" class="serif white" font-size="128" letter-spacing="-8">não precisa</text>
+    <text x="0" y="438" class="serif gold" font-size="136" font-style="italic" letter-spacing="-8">gritar.</text>
+    <text x="4" y="520" class="sans muted" font-size="33">Ela precisa aparecer no caminho certo:</text>
+    <text x="4" y="568" class="sans muted" font-size="33">notícia, Instagram, Google e WhatsApp.</text>
+    <g transform="translate(70 700)">
+      <circle cx="400" cy="400" r="336" fill="none" stroke="rgba(244,210,139,.22)" stroke-width="2"/>
+      <circle cx="400" cy="400" r="224" fill="none" stroke="rgba(130,231,244,.25)" stroke-width="2"/>
+      <circle cx="400" cy="400" r="104" fill="#f4d28b"/>
+      <text x="400" y="422" text-anchor="middle" class="serif" font-size="72" fill="#081018">CZS</text>
+      <g class="sans micro">
+        <rect x="30" y="196" width="194" height="60" fill="#071017" stroke="rgba(255,255,255,.22)"/>
+        <text x="127" y="235" text-anchor="middle" fill="#ffb7f2" font-size="20">Instagram</text>
+        <rect x="592" y="224" width="184" height="60" fill="#071017" stroke="rgba(255,255,255,.22)"/>
+        <text x="684" y="263" text-anchor="middle" fill="#82f4aa" font-size="20">WhatsApp</text>
+        <rect x="116" y="572" width="154" height="60" fill="#071017" stroke="rgba(255,255,255,.22)"/>
+        <text x="193" y="611" text-anchor="middle" fill="#f4d28b" font-size="20">Google</text>
+        <rect x="544" y="602" width="188" height="60" fill="#071017" stroke="rgba(255,255,255,.22)"/>
+        <text x="638" y="641" text-anchor="middle" fill="#9ec5ff" font-size="20">Facebook</text>
+      </g>
+    </g>
+    <g transform="translate(0 1320)">
+      <rect x="0" y="0" width="940" height="236" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.16)"/>
+      <path d="M313 0V236M626 0V236" class="line"/>
+      <text x="32" y="58" class="sans micro gold">Views</text>
+      <text x="32" y="148" class="serif white" font-size="82" letter-spacing="-4">9.000</text>
+      <text x="32" y="188" class="sans muted" font-size="22">em cerca de 3 dias</text>
+      <text x="345" y="58" class="sans micro gold">Seguidores</text>
+      <text x="345" y="148" class="serif white" font-size="82" letter-spacing="-4">552</text>
+      <text x="345" y="188" class="sans muted" font-size="22">público inicial</text>
+      <text x="658" y="58" class="sans micro gold">Posts</text>
+      <text x="658" y="148" class="serif white" font-size="82" letter-spacing="-4">181</text>
+      <text x="658" y="188" class="sans muted" font-size="22">canal em movimento</text>
+    </g>
+    <g transform="translate(0 1620)">
+      <rect x="0" y="0" width="940" height="126" fill="#f4d28b"/>
+      <text x="36" y="52" class="sans" font-size="28" font-weight="950" letter-spacing=".06em" fill="#081018">COLOQUE SUA EMPRESA NO SISTEMA</text>
+      <text x="36" y="91" class="sans" font-size="23" font-weight="850" fill="#26343d">Chame no WhatsApp: +55 68 9602-6649</text>
+      <text x="890" y="80" text-anchor="middle" class="serif" font-size="54" fill="#081018">↗</text>
+    </g>
+  </g>
+</svg>
