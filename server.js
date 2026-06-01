@@ -212,6 +212,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".jpeg",
   ".webp",
   ".mp4",
+  ".pdf",
   ".ico",
   ".webmanifest"
 ]);
@@ -6629,6 +6630,8 @@ function mimeFor(filePath) {
       return "image/gif";
     case ".mp4":
       return "video/mp4";
+    case ".pdf":
+      return "application/pdf";
     case ".ico":
       return "image/x-icon";
     case ".txt":
