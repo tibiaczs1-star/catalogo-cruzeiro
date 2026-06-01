@@ -449,9 +449,9 @@ const STATIC_PAGE_SEO = {
     fileName: "index.html"
   },
   "/divulgue.html": {
-    title: `Anuncie no Catalogo CZS | Jornal, Catalogo e SEO Local`,
+    title: `Anuncie no Catalogo CZS | Motor de Propagacao e SEO Local`,
     description:
-      "Anuncie no Catalogo CZS: jornal local, catalogo de servicos, WhatsApp, Instagram, landing pages e SEO para empresas de Cruzeiro do Sul e Vale do Jurua.",
+      "Anuncie no Catalogo CZS com jornal local, catalogo de servicos, WhatsApp, Instagram, landing pages, SEO e motor de propagacao para empresas de Cruzeiro do Sul.",
     themeColor: "#143D66",
     colorScheme: "light",
     ogType: "website",
