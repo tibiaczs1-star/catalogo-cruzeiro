@@ -1,8 +1,8 @@
 # Catálogo CZS Jornal - Pitch Comercial Para Cotas
 
-Data: 31 de maio de 2026  
-Site publico: https://catalogo-cruzeiro-web.onrender.com/  
-Instagram: https://www.instagram.com/catalogo_czs_/  
+Data: 31 de maio de 2026
+Site publico: https://catalogo-cruzeiro-web.onrender.com/
+Instagram: https://www.instagram.com/catalogo_czs_/
 Produto: jornal local digital de Cruzeiro do Sul, Vale do Jurua e Acre
 
 ---
