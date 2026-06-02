@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-06-01T15:04:58.950Z",
+  "total": 3000,
+  "byCategory": {
+    "newspaper_landing": 500,
+    "technology_landing": 500,
+    "newspaper_media_kit_report": 1000,
+    "website_sales_report": 1000
+  },
+  "access": {
+    "ok": 2035,
+    "failed": 965
+  },
+  "byStatusCode": {
+    "0": 65,
+    "200": 2026,
+    "202": 9,
+    "400": 1,
+    "403": 123,
+    "404": 759,
+    "428": 1,
+    "429": 13,
+    "503": 3
+  },
+  "byCorpusStatus": {
+    "collected": 2000,
+    "candidate_unverified": 1000
+  },
+  "topSourceGroups": {
+    "newshomepages_sites_csv": 500,
+    "lapa_ninja_sitemap": 500,
+    "newshomepages_media_kit_candidate": 1000,
+    "empire_flippers_sold_api": 1000
+  },
+  "topSignals": {
+    "visual": {
+      "product_visible": 1862,
+      "cinematic": 1727,
+      "data_visual": 1626,
+      "local_identity": 1724,
+      "editorial_grid": 1623
+    },
+    "sales": {
+      "direct_cta": 1793,
+      "proof": 1292,
+      "pricing": 821,
+      "valuation": 1722,
+      "media_kit": 1386
+    },
+    "technical": {
+      "seo": 1657,
+      "analytics": 869,
+      "modern_frontend": 1082,
+      "conversion_stack": 130,
+      "media_delivery": 1695
+    }
+  },
+  "averageMetricsByCategory": {
+    "newspaper_landing": {
+      "count": 500,
+      "wordCount": 1911.58,
+      "linkCount": 223.2,
+      "imageCount": 55.92,
+      "scriptCount": 34.82,
+      "formCount": 1.76,
+      "buttonCount": 12.71,
+      "headingCount": 48.44
+    },
+    "technology_landing": {
+      "count": 500,
+      "wordCount": 681.91,
+      "linkCount": 196.27,
+      "imageCount": 18.49,
+      "scriptCount": 47.81,
+      "formCount": 2,
+      "buttonCount": 10.92,
+      "headingCount": 18.28
+    },
+    "newspaper_media_kit_report": {
+      "count": 1000,
+      "wordCount": 642.7,
+      "linkCount": 101.4,
+      "imageCount": 9.18,
+      "scriptCount": 28.24,
+      "formCount": 1.71,
+      "buttonCount": 8.84,
+      "headingCount": 6.52
+    },
+    "website_sales_report": {
+      "count": 1000,
+      "wordCount": 19,
+      "linkCount": 0,
+      "imageCount": 0,
+      "scriptCount": 0,
+      "formCount": 0,
+      "buttonCount": 0,
+      "headingCount": 0
+    }
+  }
+}

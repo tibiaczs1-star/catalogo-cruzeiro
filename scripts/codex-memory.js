@@ -88,6 +88,31 @@ function toList(value) {
     .filter(Boolean);
 }
 
+function normalizeOrdersPayload(payload) {
+  if (Array.isArray(payload)) {
+    return {
+      version: 1,
+      lastUpdatedAt: nowIso(),
+      orders: payload
+    };
+  }
+
+  if (payload && typeof payload === "object") {
+    return {
+      version: payload.version || 1,
+      lastUpdatedAt: payload.lastUpdatedAt || nowIso(),
+      ...payload,
+      orders: Array.isArray(payload.orders) ? payload.orders : []
+    };
+  }
+
+  return {
+    version: 1,
+    lastUpdatedAt: nowIso(),
+    orders: []
+  };
+}
+
 function slugify(value) {
   return String(value || "")
     .toLowerCase()
@@ -152,11 +177,11 @@ function addOrder(args) {
     throw new Error("Use --raw e --summary para registrar uma ordem.");
   }
 
-  const payload = readJson(ORDERS_FILE, {
+  const payload = normalizeOrdersPayload(readJson(ORDERS_FILE, {
     version: 1,
     lastUpdatedAt: nowIso(),
     orders: []
-  });
+  }));
 
   const createdAt = nowIso();
   const idBase = slugify(summary) || "ordem";

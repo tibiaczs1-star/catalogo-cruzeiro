@@ -1,0 +1,1062 @@
+{
+  "generated_at": "2026-06-01 15:56:30",
+  "base": "https://catalogo-cruzeiro-web.onrender.com/",
+  "results": [
+    {
+      "name": "home",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 10724,
+      "title": "Catalogo CZS | Jornal de Cruzeiro do Sul e Vale do Jurua",
+      "h1": [
+        "Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter"
+      ],
+      "links": 335,
+      "buttons": 104,
+      "inputs": 17,
+      "imgs": 7,
+      "img_missing_alt": 0,
+      "headings": [
+        "Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter",
+        "Como está Cruzeiro hoje",
+        "O que entrou agora",
+        "Política",
+        "Antes de compartilhar",
+        "Resolver agora",
+        "Mandar informação",
+        "4 MATÉRIAS DA SEMANA",
+        "Leitura contínua do dia",
+        "Mais notícias",
+        "Cadernos e Serviços",
+        "Resumo notícias",
+        "Vídeos do Juruá",
+        "Comunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter",
+        "Confusão em propriedade rural termina com prisão de homem suspeito de ameaçar o pai no interior do Acre",
+        "SEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul",
+        "Trump perguntou sobre Lula durante encontro com Flávio Bolsonaro na Casa Branca",
+        "Atualizações recentes do Vale do Juruá",
+        "Análises, bastidores e perspectivas do Juruá",
+        "Serviço, comunidade e novos formatos"
+      ],
+      "selector_counts": {
+        "article": 105,
+        ".card": 0,
+        ".news-card": 15,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 6,
+        ".catalog-card": 0,
+        "[data-category]": 23,
+        "form": 6,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://accounts.google.com/gsi/client",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        },
+        {
+          "url": "https://acreinfoco.com/wp-content/uploads/2026/05/br-65.jpeg",
+          "failure": "net::ERR_BLOCKED_BY_ORB"
+        }
+      ],
+      "console": [],
+      "text_sample": "Anuncie aqui\nChefe Call\nResumo grátis\nSeja fundador\nCATÁLOGO\nCRUZEIRO DO SUL\nCruzeiro do Sul • Vale do Juruá\nBuscar no portal\nBuscar\nInício\nNotícias\nAssuntos\nServiços\nDivulgue no CZS\nFestas & Social\nArquivo\nComunidade\nEntretenimento\nComercial\n\nCRUZEIRO DO SUL E VALE DO JURUA\n\nComunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter\n\nComunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter\n\nLinha viva\nServiços úteis\nChecagem\nEnviar pauta\nFoto: Rio Juruá / Wikimedia Commons\nLer matéria\nMANCHETES\nEscolha uma foto e abra a matéria pelo botão do hero.\n‹\n›\nPREFEITURA\nEx-prefeito de Xapuri é intimado pelo TCE em investigação sobre...\nO Tribunal de Contas do Estado do Acre determinou a citação do ex-prefeito de Xapuri, Márcio Pereira Miranda, em uma Tomada de Contas...\nAbrir matéria\nCOTIDIANO\nComunidades agrícolas são beneficiadas com reabertura de 200km de...\nComunidades agrícolas são beneficiadas com reabertura de 200km de ramais em Porto Walter\nAbrir matéria\nPREFEITURA\nConfusão em propriedade rural termina com prisão de homem suspeito de...\nUma discussão familiar registrada em uma área rural de Cruzeiro do Sul terminou com a prisão de um homem de 29 anos suspeito de ameaçar...\nAbrir matéria\nNEGOCIOS\nColisão entre motos deixa três pessoas feridas na Baixada da Sobral...\nUma colisão entre duas motocicletas no final da manhã desta quarta-feira (27), deixou três pessoas feridas na Rua Campo Grande, no...\nAbrir matéria\nPREFEITURA\nSEE acompanha caso de ameaça registrada em escola de Cruzeiro do Sul\nA Secretaria de Estado de Educação e Cultura do Acre informou nesta terça-feira (27) que acompanha uma situação registrada na Escola...\nAbrir matéria\nPOLITICA\nA pedido do MPF, Justiça afasta chefe da Funai em Feijó por...\nA",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\home-desktop.png"
+    },
+    {
+      "name": "catalogo-servicos",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/catalogo-servicos.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 1229,
+      "title": "Catalogo de Servicos em Cruzeiro do Sul | Telefones e WhatsApp",
+      "h1": [
+        "Servicos digitais e divulgacao em Cruzeiro do Sul"
+      ],
+      "links": 20,
+      "buttons": 13,
+      "inputs": 1,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Servicos digitais e divulgacao em Cruzeiro do Sul",
+        "Guia local de Cruzeiro do Sul para serviços, telefones e empresas",
+        "Do post ao cliente: o Catalogo ajuda sua marca aparecer e vender",
+        "Conheça o PubPaid e participe da nossa enquete eleitoral.",
+        "Artes e posts para marcas",
+        "Avatares e fotos com IA",
+        "Sites, catalogos e paginas de venda",
+        "Videos curtos, reels e chamadas",
+        "Anuncios para Marketplace e grupos",
+        "Gift cards, jogos e creditos digitais",
+        "Apoio logistico digital",
+        "PubPaid e jogos promocionais"
+      ],
+      "selector_counts": {
+        "article": 12,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [],
+      "text_sample": "Catálogo Cruzeiro do Sul • Serviços por módulo\nVoltar para home\nDivulgue sua empresa\nEM PREPARAÇÃO\nAlguns módulos ainda estão recebendo novas informações.\n\nO catálogo continua aberto para consulta; novas empresas e serviços serão adicionados conforme forem confirmados.\n\nServicos digitais e divulgacao em Cruzeiro do Sul\n\nIA, design, anuncios, sites, SEO local e apoio logistico digital para vender mais no Vale do Jurua\n\nServicos digitais e divulgacao em Cruzeiro do Sul\nRestaurantes\nFarmácias\nSaúde\nEmergência\nTransporte\nHospedagem\nLocação e Transporte\nUtilidade Pública\nPrefeitura de Cruzeiro do Sul\nAcre / Governo\nPets e Veterinário\nGuia local de Cruzeiro do Sul para serviços, telefones e empresas\n\nEncontre contatos úteis no Vale do Juruá por categoria: restaurantes, farmácias, saúde, emergência, transporte, hospedagem, serviços digitais e empresas locais. O catálogo organiza links, WhatsApp, telefones e fontes para ajudar moradores, visitantes e negócios a serem encontrados com mais facilidade.\n\nQuero aparecer no Catálogo CZS\nORCAMENTO RAPIDO\nDo post ao cliente: o Catalogo ajuda sua marca aparecer e vender\n\nCriacao de artes, avatares, videos curtos, paginas simples, catalogos, anuncios e apoio de postagem para negocios de Cruzeiro do Sul e Vale do Jurua.\n\nIA\ndesign\nvendas\nanuncios\nArtes premium para Instagram, WhatsApp e Facebook\nAvatares, fotos de perfil, modelos virtuais e identidade visual\nSites simples, catalogos online, landing pages e botoes de WhatsApp\nVer contatos do módulo\nVoltar para home\nINSTAGRAM\n@catalogo_czs_\nWHATSAPP\norcamento sob consulta\nSITE\ncatalogo-cruzeiro-web.onrender.com\nCZS\nArtes e posts para marcas\n\nPacotes de criativos para stories, feed, status, cardapio, promocao, anuncio e identidade visual em Cruzeiro do Sul.\n\nSOB CONSULTA\nAbrir site/app\nAvata",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\catalogo-servicos-desktop.png"
+    },
+    {
+      "name": "arquivo",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/arquivo.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 3514,
+      "title": "Pesquisa Completa | Catálogo Cruzeiro do Sul",
+      "h1": [
+        "Abra o arquivo inteiro, filtre por assunto e role com calma."
+      ],
+      "links": 19,
+      "buttons": 16,
+      "inputs": 1,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Abra o arquivo inteiro, filtre por assunto e role com calma.",
+        "Pesquisa de notícias, temas e fontes",
+        "Veja quando o assunto apareceu",
+        "Encontre por bairro, fonte ou tema",
+        "Leia com origem identificada",
+        "Tesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio",
+        "Comissão da Câmara aprova texto-base da PEC que acaba com escala 6×1 e reduz jornada de trabalho",
+        "A pedido do MPF, Justiça afasta chefe da Funai em Feijó por irregularidades envolvendo benefícios indígenas",
+        "Governador Mailza Assis lança programa de R$ 2,5 milhões para fortalecer agricultura familiar e combater fome",
+        "Tadeu Hassem entrega caminhão inédito para Brasiléia e afirma que investimentos já superam R$ 9 milhões",
+        "Alan Rick quer acabar com exigência repetitiva de laudos para pessoas com deficiência"
+      ],
+      "selector_counts": {
+        "article": 12,
+        ".card": 0,
+        ".news-card": 6,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 14,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [],
+      "text_sample": "CATÁLOGO\nCRUZEIRO DO SUL\nArquivo regional\nDestaques\nResumo CZS\nLinha do tempo\nFestas & Social\n\nPESQUISA COMPLETA\n\nAbra o arquivo inteiro, filtre por assunto e role com calma.\n\nEsta aba reúne a base de notícias verificadas em um ambiente próprio de consulta. Pesquise por bairro, órgão, tema, fonte, editoria ou palavra do resumo.\n\nVoltar para a home\nIr para o radar\n\nARQUIVO REGIONAL EM TELA CHEIA\n\nPesquisa de notícias, temas e fontes\n\nDigite um termo, use os filtros rápidos e percorra a base com espaço de leitura, sem espremimento e sem perder o contexto.\n\nBUSCAR NO ARQUIVO\nPERÍODO\nHoje\n7 dias\n30 dias\n3 meses\n6 meses\nTodo arquivo\n723\nnotícias já postadas\nArquivo local: 723 notícias cadastradas\n\nArquivo de notícias postadas pronto. Use o auto completar para buscar por título, fonte, editoria ou palavra do resumo.\n\nATUALIZADO ATÉ\n27 de mai de 2026\nTEMA DOMINANTE\nPolítica\nFONTES ATIVAS\n18 fontes\nPrefeitura\nPolítica\nAcre / Governo\nTudo\nCotidiano\nPolícia\nSaúde\nEducação\nLINHA DO TEMPO\nVeja quando o assunto apareceu\n\nO arquivo ajuda a acompanhar recorrência, mudanças e decisões públicas ao longo dos dias.\n\nBUSCA RÁPIDA\nEncontre por bairro, fonte ou tema\n\nDigite uma palavra e filtre a cobertura por serviço, política, saúde, cultura ou rotina local.\n\nFONTES ABERTAS\nLeia com origem identificada\n\nCada card mostra fonte consultada e caminho para análise, evitando notícia solta no portal.\n\nPOLÍTICA\nFOLHA DO ACRE • 27 DE MAI DE 2026\nTesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio\n\nTesouro confirma repasse milionário ao Acre na terceira cota do FPE de maio O Governo do Acre terá reforço de mais de R$ 213 milhões nos cofres estaduais com o pagamento da terceira parcela mensal do Fundo de Participação dos Estados (FPE), previsto para...\n\nFonte consultada: Folha",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\arquivo-desktop.png"
+    },
+    {
+      "name": "divulgue",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/divulgue.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 2886,
+      "title": "Anuncie no Catalogo CZS | Motor de Propagacao e SEO Local",
+      "h1": [
+        "Sua empresa\ndentro do\nsistema."
+      ],
+      "links": 23,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 3,
+      "img_missing_alt": 0,
+      "headings": [
+        "Sua empresa\ndentro do\nsistema.",
+        "Enquanto um post desaparece, o CZS constrói presença.",
+        "Uma campanha.\nVários caminhos até o cliente.",
+        "Já existe uma cidade digital\nrodando por trás da propaganda.",
+        "Mais que mídia.\nUm ecossistema lançando coisas.",
+        "Distribuição real. Não promessa.",
+        "A vitrine social\njá saiu do zero.",
+        "A venda precisa parecer\numa máquina viva.",
+        "Não compre “um post”.\nCompre uma posição.",
+        "A propaganda\nnão trabalha sozinha.",
+        "Número bom é número\nque aguenta pergunta.",
+        "Sua empresa pode\nentrar no sistema\nagora.",
+        "Sua oferta ganha uma página",
+        "A divulgação encontra contexto",
+        "O cliente chega sem labirinto",
+        "Jornal CZS",
+        "Catálogo de serviços",
+        "PubPaid beta",
+        "Enquete Acre 2026",
+        "Sites e chats automáticos"
+      ],
+      "selector_counts": {
+        "article": 34,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [],
+      "text_sample": "Pular para o conteúdo\nCATÁLOGO CZS\nJornal local + tecnologia comercial\nO SISTEMA\nECOSSISTEMA\nFORMATOS\nTECNOLOGIA\nENTRAR NO SISTEMA\n\nCRUZEIRO DO SUL • VALE DO JURUÁ • ACRE\n\nSua empresa\ndentro do\nsistema.\n\nNão é só um anúncio. É presença local conectada a jornal, catálogo, Google, Instagram, WhatsApp e Facebook.\n\nO CZS transforma notícia em atenção, atenção em busca e bu\n\nQUERO DIVULGAR MINHA EMPRESA\n↗\nVER COMO FUNCIONA\nINSTAGRAM\nGOOGLE\nWHATSAPP\nFACEBOOK\nCATÁLOGO\nJORNAL LOCAL\n\nOPERAÇÃO REGIONAL CONECTADA\n\n480\nNOTÍCIAS NO ARQUIVO LOCAL\n81\nCONTATOS CATALOGADOS\n26\nCATEGORIAS LOCAIS\n111\nROTAS DE TECNOLOGIA\n01 / POSICIONAMENTO\n\nUM MOTOR LOCAL DE DESCOBERTA\n\nEnquanto um post desaparece, o CZS constrói presença.\n\nSeu negócio entra em uma operação regional criada para transformar atenção em descoberta, descoberta em contato e contato em venda. A campanha circula nos canais certos e continua encontrável depois da publicação.\n\nO OBJETIVO\nSer encontrado no momento certo.\n\nQuando a cidade procura, pergunta, compara ou decide comprar.\n\nJORNAL HIPERLOCAL\nCATÁLOGO REGIONAL\nGOOGLE + SEO\nINSTAGRAM STORIES\nWHATSAPP STATUS\nFACEBOOK MARKETPLACE\nPÁGINAS COMERCIAIS\nCTA DIRETO\nJORNAL HIPERLOCAL\nCATÁLOGO REGIONAL\nGOOGLE + SEO\nINSTAGRAM STORIES\nWHATSAPP STATUS\nFACEBOOK MARKETPLACE\nPÁGINAS COMERCIAIS\nCTA DIRETO\n\n02 / PROPAGAÇÃO LOCAL\n\nUma campanha.\nVários caminhos até o cliente.\nLIVE DISTRIBUTION\n● CZS ONLINE\nCATÁLOGO\nCZS\n01\nPágina pública\npresença permanente\n02\nGoogle\nbusca e indexação\n03\nInstagram\nstories e campanha\n04\nWhatsApp\nstatus e grupos validados\n05\nFacebook\npágina, grupos e marketplace\n01\nSua oferta ganha uma página\n\nTexto comercial, chamada clara, contato direto e endereço próprio para compartilhar.\n\n02\nA divulgação encontra contexto\n\nJornal, catálogo e canais sociais colocam a empresa ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\divulgue-desktop.png"
+    },
+    {
+      "name": "noticia-rio-jurua",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/noticia.html?slug=rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 11125,
+      "title": "Catalogo Cruzeiro do Sul | Noticia",
+      "h1": [
+        "Notícia não encontrada"
+      ],
+      "links": 13,
+      "buttons": 6,
+      "inputs": 2,
+      "imgs": 1,
+      "img_missing_alt": 0,
+      "headings": [
+        "Notícia não encontrada",
+        "O que a fonte confirma, o que ainda pede atualização e quais pontos exigem cautela",
+        "Informar erro",
+        "Notícia completa, fonte preservada e navegação fácil"
+      ],
+      "selector_counts": {
+        "article": 1,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 1,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/api/news/rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
+          "status": 404
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 ()"
+        }
+      ],
+      "text_sample": "←\nVoltar para a home\n\nCatalogo Cruzeiro do Sul • leitura local com resumo próprio e saída para a fonte.\n\nVoltar para a home\nCRUZEIRO DO SUL E VALE DO JURUÁ\nCATALOGO CRUZEIRO DO SUL\n\nCATÁLOGO CRUZEIRO DO SUL\n\nNotícia não encontrada\n\nO link pode estar incompleto ou a notícia ainda não foi cadastrada.\n\n←\nVoltar para a home\nTexto, foto, título, fonte ou informação.\nNOTÍCIA\n\nVolte para a capa e escolha outra notícia.\n\nFONTE DA NOTÍCIA\nFonte principal\n\nVoltar para a home\nIMAGEM DA NOTÍCIA\nFoto real\n\nEsta capa é um apoio visual da página de leitura.\n\nVoltar para a home\nO QUE IMPORTA\nPUBLICAÇÃO PAGA\nEspaço de divulgação\n\nPublieditorial, agenda patrocinada ou campanha local com selo claro e chamada objetiva dentro da página da notícia.\n\nAnuncie aqui\n\nCATÁLOGO CRUZEIRO DO SUL\n\nNotícia completa, fonte preservada e navegação fácil\n\nAo terminar a leitura, você pode voltar para a home e seguir acompanhando as principais atualizações do dia.\n\nQuando a apuração usa material externo, o crédito permanece ligado à fonte original.\n\nVoltar para a home\nLGPD, Cookies e Direitos Autorais\nNavegação rápida\nRadar CZS\nArquivo\nComunidade\nAnuncie aqui\nAGENTES AO VIVO\n3 agentes cuidando da edicao\nApuracao, revisao e acabamento visual antes da publicacao.\nPortal oficial ok\nEquipe nas redes\nCafe e docs na mesa\nSALA ATIVA\nAlertas, cafe e monitoramento local\nChecando portal oficial agora",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\noticia-rio-jurua-desktop.png"
+    },
+    {
+      "name": "cheffe-call",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/cheffe-call.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 3891,
+      "title": "Cheffe Call • Catálogo Cruzeiro do Sul",
+      "h1": [
+        "Cheffe Call"
+      ],
+      "links": 9,
+      "buttons": 117,
+      "inputs": 25,
+      "imgs": 1,
+      "img_missing_alt": 0,
+      "headings": [
+        "Cheffe Call",
+        "Cheffe Call por cenas",
+        "Pop-up de pendencias",
+        "Tarefas e prompts",
+        "Comando geral do IDE",
+        "Pendências da revisão",
+        "Registro das falas",
+        "O que é o que na sala",
+        "Comando administrativo",
+        "Transformar ordem em ação real",
+        "Ordem direta e fila de ordens",
+        "Prompt Mestre da Cheffe Call",
+        "Opiniões dos agentes",
+        "Tarefas em andamento",
+        "Entrega e risco",
+        "Ações prontas",
+        "Últimos sinais",
+        "Item da fila"
+      ],
+      "selector_counts": {
+        "article": 131,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 2,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "verbose",
+          "text": "[DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o"
+        }
+      ],
+      "text_sample": "Jornal\nAgentes reais\nEscritório\nArte\nNinjas\nTela cheia\nHUD\nDecks\n\nSALA DE REUNIÃO\n\nCheffe Call\nRELATÓRIO REAL\nRelatório real aberto. Comandos exigem senha Full Admin.\nFLUXO REAL\nComo operar sem se perder\n1\nSenha\n2\nAbrir sala\n3\nOuvir\n4\nDecidir\n5\nTerminal\n6\nLiberar\nCHEFFE CALL\nESCRITORIO DE ARTE • REVIEW • 82%\nBento Producer\n\nEu atacaria repetição e frase genérica. Cada agente precisa dizer algo diferente ou sair da lista. Assunto: Executar apenas runCheffeSafeTempCleanup: remover .log ou nomes com smoke em .codex-temp, preservar data/assets/configuracoes/provas atuais..\n\nAprovar card\nImplementar card\nAjustar\nCriar tarefa\nTerminal\nFicha\nPróximo\nFILA DE FALA\nQuem levantou a mão\nPROXIMO\nCodex CEO\nFILA 2\nZed Engine\nFILA 3\nLia Foto\nFILA 4\nNina Texto\n\nROTEIRO DA REUNIÃO\n\nCheffe Call por cenas\n\n9 cenas operacionais. Finalize uma para avancar.\n\n1\nPop-up de pendencias\nATTENTION\n2\nAbertura da reuniao\nREADY\n3\nOpinioes dos agentes\nREADY\n4\nAceitar, implementar ou pular\nREADY\n5\nRelatorios\nREADY\n6\nOrdens do chefe\nWAITING\n7\nNumeros do website\nREADY\n8\nNumeros dos agentes\nREADY\n9\nPremiacao dos agentes\nWAITING\nCENA 1\nPop-up de pendencias\n\n167 pendencia(s) antes da reuniao: revisao, IDE ou correcoes.\n\nREVISÃO\n26\nIDE\n6\nCORREÇÕES\n2\nHUMAN APPROVAL\n133\nCena anterior\nFinalizar cena\nPróxima cena\nLÍDER AUTOMÁTICO\nSem rodada\n\nRode os agentes para calcular o destaque.\n\n0\nPLACAR\n0\nINTELIGÊNCIA\n0\nEXECUÇÃO\n0\nIMPACTO\n\nAguardando a próxima rodada para calcular quem resolveu melhor.\n\nAbrir ficha\nESCRITÓRIO DO DIA\nSem rodada\n\nAguardando pontuacao diaria.\n\nENTREGA VENCEDORA\nSem ação\n\nAs propostas aguardam aprovação do Full Admin.\n\nTERMINAL DA SALA\nExecução real\n\nO prompt roda aqui quando você envia ao terminal com senha Full Admin.\n\nCOMPETIÇÃO VIVA\nAgentes e escritórios em disputa real\n\nA evolução dos agent",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\cheffe-call-desktop.png"
+    },
+    {
+      "name": "galeria",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/galeria.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 1456,
+      "title": "Galeria de Fotos | Catálogo Cruzeiro do Sul",
+      "h1": [
+        "Fotos da cidade, do rio e da vida no Vale do Juruá."
+      ],
+      "links": 7,
+      "buttons": 16,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Fotos da cidade, do rio e da vida no Vale do Juruá.",
+        "Ruas, bairros e lugares conhecidos.",
+        "Juruá, clima e paisagem.",
+        "Festas, shows e encontros.",
+        "Vida local e memória."
+      ],
+      "selector_counts": {
+        "article": 4,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 9,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [],
+      "text_sample": "PORTAL\nCruzeiro do Sul\nVALE DO JURUÁ\nInício\nArquivo\nFontes\nEnviar foto\nGALERIA VISUAL\nFotos da cidade, do rio e da vida no Vale do Juruá.\n\nImagens organizadas por tema para preservar memória local, mostrar eventos, acompanhar o cotidiano e abrir caminho para novas publicações com fonte identificada.\n\nVer fotos\nEnviar imagem ou relato\nAcervo em organização\n5 seções\nCidade, Rio, Eventos, Cultura e Cotidiano.\nTUDO\nCIDADE\nRIO E NATUREZA\nEVENTOS\nCULTURA\nCOTIDIANO\nCIDADE\nTRÂNSITO\nRIO\nEVENTOS\nECONOMIA\nCULTURA\nCOTIDIANO\nCIDADE\nENTRETENIMENTO\nCIDADE\nRuas, bairros e lugares conhecidos.\n\nFotos para reconhecer a cidade e acompanhar mudanças urbanas.\n\nRIO E NATUREZA\nJuruá, clima e paisagem.\n\nRegistros que ajudam a contar a relação da região com o rio.\n\nEVENTOS\nFestas, shows e encontros.\n\nImagens com data, local e contexto quando houver fonte.\n\nCOTIDIANO\nVida local e memória.\n\nCenas simples também fazem parte da história visual do portal.",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\galeria-desktop.png"
+    },
+    {
+      "name": "fontes-monitoradas",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/fontes-monitoradas.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 1696,
+      "title": "Fontes Monitoradas | Catalogo Cruzeiro do Sul",
+      "h1": [
+        "Como lemos cada fonte antes de resumir"
+      ],
+      "links": 21,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 1,
+      "img_missing_alt": 0,
+      "headings": [
+        "Como lemos cada fonte antes de resumir",
+        "Mapa de leitura das fontes",
+        "Juruá Online",
+        "Juruá 24 Horas",
+        "Juruá Comunicação",
+        "ac24horas",
+        "Agência Acre",
+        "Batelão",
+        "Tribuna do Juruá",
+        "Prefeitura de CZS",
+        "Camada de alerta: útil para abrir leitura, insuficiente para fechar verdade sozinha",
+        "Exemplo de chamada para transparência",
+        "Exemplo de chamada para fonte oficial",
+        "Exemplo de chamada para radar regional"
+      ],
+      "selector_counts": {
+        "article": 26,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [],
+      "text_sample": "Leitura aberta das fontes que alimentam a curadoria local do portal.\n\nVOLTAR PARA A HOME\nCOMUNIDADE\nTRANSPARÊNCIA EDITORIAL\nFontes monitoradas\nVOLTAR AO RADAR\nABRIR FICHAS\n\nCURADORIA COM TRANSPARÊNCIA\n\nComo lemos cada fonte antes de resumir\n\nEsta página mostra critérios públicos para cruzar cobertura local, fonte oficial, tom de manchete e necessidade de checagem extra. Não é carimbo absoluto: é um mapa simples para o leitor entender de onde cada resumo parte.\n\nComo interpretar Como a fonte costuma enquadrar o assunto\n\nMostra o tipo de cobertura que mais aparece ali: factual, institucional, opinativa, veloz ou mais documental.\n\nConfiabilidade observada Quanto a curadoria depende dela sozinha\n\nAlta quando a fonte é forte no que publica; média quando pede contrapeso frequente; sempre cruzada em temas sensíveis.\n\nAlertas e checagens O que exige segunda leitura\n\nPressa, viés, ausência de contraponto, linguagem promocional ou temas oficiais que precisam de impacto real confirmado.\n\nCamadas do radar Fonte principal, apoio regional, blog e rede social não valem a mesma coisa\n\nO portal agora separa fonte-base, cruzamento regional e sinal inicial para não misturar alerta com prova fechada.\n\nRESUMO RÁPIDO\n\nMapa de leitura das fontes\n\nA matriz abaixo ajuda o leitor a entender rapidamente o papel de cada fonte antes de abrir a ficha completa.\n\nCAPTAÇÃO EXEMPLO\nExemplo de chamada para transparência\n\n\"Antes do resumo, o leitor pode ver como a redação pesa cada origem e cada tom de cobertura.\"\n\nCAPTAÇÃO EXEMPLO\nExemplo de chamada para fonte oficial\n\n\"A fonte confirma o ato, mas o portal ainda separa anúncio, execução e impacto real.\"\n\nCAPTAÇÃO EXEMPLO\nExemplo de chamada para radar regional\n\n\"Uma fonte local pode abrir a escuta, mas o fechamento pede cruzamento e leitura calma.\"\n\nJuruá",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\fontes-monitoradas-desktop.png"
+    },
+    {
+      "name": "legal",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/legal.html",
+      "viewport": "desktop",
+      "status": 200,
+      "error": null,
+      "elapsed_ms": 1276,
+      "title": "Catalogo Cruzeiro do Sul | Termos de Uso e Aviso de Privacidade",
+      "h1": [
+        "Termos de Uso, Privacidade e Regras da Plataforma"
+      ],
+      "links": 4,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 1,
+      "img_missing_alt": 0,
+      "headings": [
+        "Termos de Uso, Privacidade e Regras da Plataforma"
+      ],
+      "selector_counts": {
+        "article": 1,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [],
+      "request_failures": [],
+      "console": [],
+      "text_sample": "Catalogo Cruzeiro do Sul • termos legais e transparência.\n\nVoltar para a home\nCRUZEIRO DO SUL E VALE DO JURUA\nCatalogo Cruzeiro do Sul\n\nBASE LEGAL E EDITORIAL\n\nTermos de Uso, Privacidade e Regras da Plataforma\n\nEste documento apresenta, de forma clara, as condicoes de acesso e uso do Catalogo Cruzeiro do Sul, as regras basicas de privacidade, o tratamento de dados tecnicos e informados pelo usuario, os limites de responsabilidade da plataforma e os canais disponiveis para solicitacoes ligadas a dados, creditos, revisao editorial e remocao de conteudo.\n\nUltima atualizacao: 15 de abril de 2026. Escopo: home, paginas editoriais, modulos de servico, newsletter, mapas incorporados, agregacao de noticias e recursos de navegacao desta plataforma.\n\n1. ACEITACAO E ABRANGENCIA\n\nO acesso e o uso do Catalogo Cruzeiro do Sul dependem da leitura e da concordancia com estes termos e com o aviso de privacidade associado. Ao continuar navegando ou utilizar recursos interativos, o usuario declara estar ciente das condicoes aqui descritas.\n\nO aceite e solicitado a cada novo acesso, pois esta plataforma possui natureza editorial e informativa e pode receber ajustes visuais, tecnicos, operacionais e legais a qualquer momento.\n\n2. FINALIDADE E USO PERMITIDO\n\nO site organiza noticias, agenda regional, modulos de servico e blocos editoriais para leitura rapida, consulta publica e navegacao por temas de interesse local e regional.\n\nO uso permitido abrange a consulta do conteudo, interacao regular com formularios e recursos disponibilizados e acesso nao abusivo aos materiais publicados.\n\n3. CONDUTAS VEDADAS\n\nNao e permitido praticar atos que comprometam a seguranca do portal, tentativas de invasao, distribuicao de codigo malicioso, raspagem automatizada nao autorizada, fraude de uso ou qualquer ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\legal-desktop.png"
+    },
+    {
+      "name": "home",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1879,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511f5e48496396-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\home-mobile.png"
+    },
+    {
+      "name": "catalogo-servicos",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/catalogo-servicos.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1562,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/catalogo-servicos.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511f6f39d36396-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\catalogo-servicos-mobile.png"
+    },
+    {
+      "name": "arquivo",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/arquivo.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1674,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/arquivo.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511f7edc570c5f-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\arquivo-mobile.png"
+    },
+    {
+      "name": "divulgue",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/divulgue.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 2002,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/divulgue.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511f8f7bea0c5f-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\divulgue-mobile.png"
+    },
+    {
+      "name": "noticia-rio-jurua",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/noticia.html?slug=rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1492,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/noticia.html?slug=rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511fa228380c5f-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\noticia-rio-jurua-mobile.png"
+    },
+    {
+      "name": "cheffe-call",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/cheffe-call.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1836,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/cheffe-call.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511fb19e650c5f-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\cheffe-call-mobile.png"
+    },
+    {
+      "name": "galeria",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/galeria.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1690,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/galeria.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511fc33e340c5f-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\galeria-mobile.png"
+    },
+    {
+      "name": "fontes-monitoradas",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/fontes-monitoradas.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 1558,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/fontes-monitoradas.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511fd3dba10c5f-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\fontes-monitoradas-mobile.png"
+    },
+    {
+      "name": "legal",
+      "url": "https://catalogo-cruzeiro-web.onrender.com/legal.html",
+      "viewport": "mobile",
+      "status": 502,
+      "error": null,
+      "elapsed_ms": 4341,
+      "title": "502",
+      "h1": [
+        "Bad Gateway"
+      ],
+      "links": 2,
+      "buttons": 0,
+      "inputs": 0,
+      "imgs": 0,
+      "img_missing_alt": 0,
+      "headings": [
+        "Bad Gateway"
+      ],
+      "selector_counts": {
+        "article": 0,
+        ".card": 0,
+        ".news-card": 0,
+        ".service-card": 0,
+        ".story-card": 0,
+        ".archive-card": 0,
+        ".catalog-card": 0,
+        "[data-category]": 0,
+        "form": 0,
+        "video": 0,
+        "iframe": 0
+      },
+      "bad_responses": [
+        {
+          "url": "https://catalogo-cruzeiro-web.onrender.com/legal.html",
+          "status": 502
+        }
+      ],
+      "request_failures": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ],
+      "text_sample": "Bad Gateway\nRequest ID: a0511fe409a40c5f-SEA\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by ",
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\legal-mobile.png"
+    }
+  ],
+  "interactions": [
+    {
+      "viewport": "desktop",
+      "page": "home",
+      "actions": [
+        {
+          "action": "home search enter saúde",
+          "url_after": "https://catalogo-cruzeiro-web.onrender.com/",
+          "visible_text": "Bad Gateway\nRequest ID: a0511f353ac14fe0-GIG\nThis service is currently unavailable. Please try again in a few minutes.\nIf you are the site owner, refer to Render’s documentation for troubleshooting.\nPowered by "
+        }
+      ],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "page": "catalogo-servicos",
+      "actions": [
+        {
+          "action": "fill search farmacia",
+          "result": "no input found"
+        }
+      ],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "page": "arquivo",
+      "actions": [
+        {
+          "action": "fill archive search rio",
+          "result": "no input found"
+        }
+      ],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "page": "home",
+      "actions": [],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "page": "catalogo-servicos",
+      "actions": [
+        {
+          "action": "fill search farmacia",
+          "result": "no input found"
+        }
+      ],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "page": "arquivo",
+      "actions": [
+        {
+          "action": "fill archive search rio",
+          "result": "no input found"
+        }
+      ],
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 502 ()"
+        }
+      ]
+    }
+  ]
+}

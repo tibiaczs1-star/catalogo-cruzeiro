@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PubPaid 3.0 — Cruzeiro do Sul Barzinho</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <div class="matrix-rain" aria-hidden="true"></div>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Ambiente separado • PubPaid Barzinho</p>
+      <h1>PubPaid 3.0 <span>Cruzeiro do Sul Barzinho</span></h1>
+    </div>
+    <nav class="tabs" aria-label="Telas do jogo">
+      <button data-screen="intro" class="active">Intro</button>
+      <button data-screen="lobby">Lobby 10</button>
+      <button data-screen="games">Mesas</button>
+      <button data-screen="report">Relatório</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <section id="screen-intro" class="screen active hero-grid">
+      <article class="glass hero-card">
+        <p class="eyebrow">Bar amazônico premium • pixel art / neon / 3D fake depth</p>
+        <h2>Entrar no bar, escolher personagem, sentar com até 10 jogadores e jogar sinuca, damas ou xadrez.</h2>
+        <p>Esta fatia cria o esqueleto jogável/local do PubPaid 3.0: seleção de personagem, lobby com 10 slots, chat, emotes e três mesas em uma interface única.</p>
+        <div class="cta-row">
+          <button id="startBtn" class="primary">Abrir o bar</button>
+          <button id="quickReportBtn">Ver status técnico</button>
+        </div>
+      </article>
+      <aside class="glass poster" aria-label="Direção visual">
+        <div class="bar-sign">CZS</div>
+        <div class="street"></div>
+        <p>Direção: noite chuvosa em Cruzeiro do Sul, letreiros verdes, madeira escura, reflexo no asfalto, mesas com profundidade e HUD cinematográfico.</p>
+      </aside>
+    </section>
+
+    <section id="screen-lobby" class="screen">
+      <div class="layout-two">
+        <article class="glass">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Escolha de personagem</p>
+              <h2>10 personas para a mesma instância</h2>
+            </div>
+            <strong id="selectedCharacter">Nenhum selecionado</strong>
+          </div>
+          <div id="characterGrid" class="character-grid"></div>
+        </article>
+        <aside class="glass">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Sala online simulada</p>
+              <h2>Instância com 10 lugares</h2>
+            </div>
+            <span class="badge">10 slots</span>
+          </div>
+          <div id="slotGrid" class="slot-grid"></div>
+          <div class="chat-box">
+            <div id="chatLog" class="chat-log" aria-live="polite"></div>
+            <div class="emote-row" id="emoteRow"></div>
+            <form id="chatForm" class="chat-form">
+              <input id="chatInput" placeholder="Mensagem rápida no bar..." maxlength="90" />
+              <button type="submit">Publicar no chat do bar</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="screen-games" class="screen">
+      <div class="game-shell glass">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Mesas jogáveis/base</p>
+            <h2 id="gameTitle">Sinuca — modo Livre</h2>
+          </div>
+          <div class="game-switcher" aria-label="Escolha do jogo">
+            <button data-game="pool" class="active">Sinuca</button>
+            <button data-game="checkers">Damas</button>
+            <button data-game="chess">Xadrez</button>
+          </div>
+        </div>
+        <div id="poolPanel" class="game-panel active">
+          <div class="pool-toolbar">
+            <button data-pool-mode="Livre" class="active">Livre</button>
+            <button data-pool-mode="Brasileira">Brasileira</button>
+            <button data-pool-mode="Par/Ímpar">Par/Ímpar</button>
+            <span id="poolStatus">Arraste/aponte e solte para tacar.</span>
+          </div>
+          <canvas id="poolCanvas" width="920" height="430" aria-label="Mesa de sinuca jogável"></canvas>
+        </div>
+        <div id="checkersPanel" class="game-panel board-wrap">
+          <p class="hint">Damas base: clique em uma peça clara, depois em uma diagonal vazia. Esta fatia valida board, peças e input.</p>
+          <div id="checkersBoard" class="board checkers" role="grid"></div>
+        </div>
+        <div id="chessPanel" class="game-panel board-wrap">
+          <p class="hint">Xadrez base: peças 3D fake legíveis e movimento livre para validar seleção/mesa. Regras completas entram no próximo bloco.</p>
+          <div id="chessBoard" class="board chess" role="grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-report" class="screen">
+      <article class="glass report-card">
+        <p class="eyebrow">Relatório local da fatia</p>
+        <h2>Estado PubPaid 3.0</h2>
+        <pre id="reportText"></pre>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">Rayxpx Matrix Core • R0-R3 local • R5 publicação/dinheiro bloqueado até aprovação explícita</footer>
+  <script src="./src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2026-06-02-configurar-opendesign-para-usar-hermes-como-mesa-de-pedidos-de-design-com-llms-a",
+    "createdAt": "2026-06-02T08:59:59.090Z",
+    "updatedAt": "2026-06-02T08:59:59.090Z",
+    "status": "queued",
+    "source": "hermes-opendesign-bridge",
+    "request": "Configurar OpenDesign para usar Hermes como mesa de pedidos de design com LLMs, agentes locais, catalogo GitHub de referencias, exemplos e pacotes markdown/layouts.",
+    "kind": "system-setup",
+    "destination": "Hermes OpenDesign Desk",
+    "tags": [
+      "hermes",
+      "opendesign",
+      "design",
+      "github",
+      "layouts"
+    ],
+    "hierarchy": "ChatGPT/Codex -> Hermes -> OpenDesign Desk -> design/copy/review workers",
+    "primaryRule": "Codex e o diretor final; workers nao publicam sozinhos.",
+    "outputPreference": "HTML navegavel quando visual; Markdown compacto para especificacao ou catalogo."
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "created_at": "2026-06-01T11:15:36",
+  "frame_size": [
+    96,
+    144
+  ],
+  "target_sheet_size": [
+    384,
+    1152
+  ],
+  "row_order": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "anchor": [
+    48,
+    138
+  ],
+  "hitbox": {
+    "x": 34,
+    "y": 96,
+    "w": 30,
+    "h": 39
+  },
+  "note": "Concept options generated as master hyperreal images, then scaled into PubPaid 96x144 front frames. Do not replace runtime yet. Placeholder 8dir sheets repeat front frame for layout only.",
+  "characters": [
+    {
+      "id": "caio_pix_master",
+      "source": "C:/Users/junio/AppData/Local/hermes/cache/images/openai_codex_gpt-image-2-medium_20260601_111412_7785f326.png",
+      "master": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\caio_pix_master.png",
+      "front_96x144": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\caio_pix_master_front_96x144.png",
+      "placeholder_sheet": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\caio_pix_master_concept_idle_placeholder_8dir_4f.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "crop_size": [
+        1024,
+        1536
+      ],
+      "status": "hyperreal concept; 8dir sheet is placeholder layout only, not production animation"
+    },
+    {
+      "id": "rafa_dealer_master",
+      "source": "C:/Users/junio/AppData/Local/hermes/cache/images/openai_codex_gpt-image-2-medium_20260601_111515_d669e5dc.png",
+      "master": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\rafa_dealer_master.png",
+      "front_96x144": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\rafa_dealer_master_front_96x144.png",
+      "placeholder_sheet": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\rafa_dealer_master_concept_idle_placeholder_8dir_4f.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "crop_size": [
+        1024,
+        1536
+      ],
+      "status": "hyperreal concept; 8dir sheet is placeholder layout only, not production animation"
+    }
+  ],
+  "board": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\pubpaid_hyperreal_main_options_v1_board.png"
+}

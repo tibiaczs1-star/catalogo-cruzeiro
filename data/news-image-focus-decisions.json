@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-02T11:31:32.063Z",
+  "decisions": [
+    {
+      "id": "focusdec-mpwk3hxwamqt61",
+      "slug": "justica-determina-que-municipio-assuma-restauracao-do-palacete-dos-ruelas-apos-15-anos-de-disput",
+      "title": "Justiça determina que Município assuma restauração do Palacete dos Ruelas após 15 anos de disputa judicial",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-01-at-16.12.56.jpeg",
+      "articleUrl": "/noticia.html?slug=justica-determina-que-municipio-assuma-restauracao-do-palacete-dos-ruelas-apos-15-anos-de-disput",
+      "level": "manual-review",
+      "reasons": [
+        "frontend-manual-review"
+      ],
+      "reasonLabels": [
+        "revisão humana solicitada no frontend"
+      ],
+      "decision": "approve-focus",
+      "decisionLabel": "Aprovar foco",
+      "status": "aprovado-foco",
+      "focus": "center 42%",
+      "replacementImageUrl": "",
+      "note": "",
+      "requestedNextRuntime": true,
+      "nextRuntimeAction": "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual",
+      "createdBy": "Full Admin",
+      "createdAt": "2026-06-02T11:30:41.683Z",
+      "updatedAt": "2026-06-02T11:30:53.069Z"
+    },
+    {
+      "id": "focusdec-mpwk3ynb93e2vz",
+      "slug": "agro-tem-papel-estrategico-para-economia-nacional-diz-ceo-da-cnn-brasil",
+      "title": "Agro tem papel estratégico para economia nacional, diz CEO da CNN Brasil",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "imageUrl": "https://img.youtube.com/vi/RhSOTPRAKHY/sddefault.jpg",
+      "articleUrl": "/noticia.html?slug=agro-tem-papel-estrategico-para-economia-nacional-diz-ceo-da-cnn-brasil",
+      "level": "manual-review",
+      "reasons": [
+        "frontend-manual-review"
+      ],
+      "reasonLabels": [
+        "revisão humana solicitada no frontend"
+      ],
+      "decision": "approve-focus",
+      "decisionLabel": "Aprovar foco",
+      "status": "aprovado-foco",
+      "focus": "center 42%",
+      "replacementImageUrl": "",
+      "note": "",
+      "requestedNextRuntime": true,
+      "nextRuntimeAction": "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual",
+      "createdBy": "Full Admin",
+      "createdAt": "2026-06-02T11:31:03.335Z",
+      "updatedAt": "2026-06-02T11:31:03.335Z"
+    },
+    {
+      "id": "focusdec-mpwk47lcxy3gng",
+      "slug": "ir-2026-brasil-bate-recorde-com-44-3-milhoes-declaracoes",
+      "title": "IR 2026: Brasil bate recorde com 44,3 milhões declarações",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/PLENARIO-SENADO-08-05-26.jpg?w=200",
+      "articleUrl": "/noticia.html?slug=ir-2026-brasil-bate-recorde-com-44-3-milhoes-declaracoes",
+      "level": "manual-review",
+      "reasons": [
+        "frontend-manual-review"
+      ],
+      "reasonLabels": [
+        "revisão humana solicitada no frontend"
+      ],
+      "decision": "approve-focus",
+      "decisionLabel": "Aprovar foco",
+      "status": "aprovado-foco",
+      "focus": "center 42%",
+      "replacementImageUrl": "",
+      "note": "",
+      "requestedNextRuntime": true,
+      "nextRuntimeAction": "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual",
+      "createdBy": "Full Admin",
+      "createdAt": "2026-06-02T11:31:14.928Z",
+      "updatedAt": "2026-06-02T11:31:14.928Z"
+    },
+    {
+      "id": "focusdec-mpwk4aolh3ufbp",
+      "slug": "fim-da-6-1-ministerio-estuda-medidas-para-ajudar-meis-e-empreendedores",
+      "title": "Fim da 6×1: Ministério estuda medidas para ajudar MEIs e empreendedores",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/multa-por-nao-declarar-imposto-de-renda-1170x780.jpg.optimal-e1741807431602.webp?w=200",
+      "articleUrl": "/noticia.html?slug=fim-da-6-1-ministerio-estuda-medidas-para-ajudar-meis-e-empreendedores",
+      "level": "manual-review",
+      "reasons": [
+        "frontend-manual-review"
+      ],
+      "reasonLabels": [
+        "revisão humana solicitada no frontend"
+      ],
+      "decision": "approve-focus",
+      "decisionLabel": "Aprovar foco",
+      "status": "aprovado-foco",
+      "focus": "center 42%",
+      "replacementImageUrl": "",
+      "note": "",
+      "requestedNextRuntime": true,
+      "nextRuntimeAction": "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual",
+      "createdBy": "Full Admin",
+      "createdAt": "2026-06-02T11:31:18.933Z",
+      "updatedAt": "2026-06-02T11:31:18.933Z"
+    },
+    {
+      "id": "focusdec-mpwk4cl1cd7qlh",
+      "slug": "o-que-e-economia-domestica-e-como-ela-pode-te-ajudar-no-dia-a-dia",
+      "title": "O que é economia doméstica e como ela pode te ajudar no dia a dia?",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/o-que-faz-um-banco-negar-um-credito.jpeg?w=200",
+      "articleUrl": "/noticia.html?slug=o-que-e-economia-domestica-e-como-ela-pode-te-ajudar-no-dia-a-dia",
+      "level": "manual-review",
+      "reasons": [
+        "frontend-manual-review"
+      ],
+      "reasonLabels": [
+        "revisão humana solicitada no frontend"
+      ],
+      "decision": "approve-focus",
+      "decisionLabel": "Aprovar foco",
+      "status": "aprovado-foco",
+      "focus": "center 42%",
+      "replacementImageUrl": "",
+      "note": "",
+      "requestedNextRuntime": true,
+      "nextRuntimeAction": "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual",
+      "createdBy": "Full Admin",
+      "createdAt": "2026-06-02T11:31:21.397Z",
+      "updatedAt": "2026-06-02T11:31:32.062Z"
+    }
+  ]
+}

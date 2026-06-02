@@ -237,7 +237,33 @@
   let lowerDecksOpen = false;
   let currentMeetingSessionId = "";
   let latestCallPayload = null;
-  let cheffeAdminPassword = window.sessionStorage.getItem("cheffeCallFullAdminPassword") || "";
+  const CHEFFE_ADMIN_PASSWORD_KEY = "cheffeCallFullAdminPassword";
+  function readStoredAdminPassword() {
+    try {
+      return window.sessionStorage.getItem(CHEFFE_ADMIN_PASSWORD_KEY) || "";
+    } catch (_error) {
+      return "";
+    }
+  }
+  function storeAdminPassword(password) {
+    try {
+      window.sessionStorage.setItem(CHEFFE_ADMIN_PASSWORD_KEY, password);
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+  function clearAdminPassword() {
+    cheffeAdminPassword = "";
+    if (quickPasswordInput) quickPasswordInput.value = "";
+    const formPasswordInput = formEl?.querySelector('[name="password"]');
+    if (formPasswordInput) formPasswordInput.value = "";
+    try {
+      window.sessionStorage.removeItem(CHEFFE_ADMIN_PASSWORD_KEY);
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+  let cheffeAdminPassword = readStoredAdminPassword();
   let photoApprovalQueue = [];
   let photoApprovalIndex = 0;
   let photoApprovalBusy = false;
@@ -1370,11 +1396,7 @@
     if (quickPasswordInput && quickPasswordInput.value !== cleanPassword) quickPasswordInput.value = cleanPassword;
     const formPasswordInput = formEl?.querySelector('[name="password"]');
     if (formPasswordInput && formPasswordInput.value !== cleanPassword) formPasswordInput.value = cleanPassword;
-    try {
-      window.sessionStorage.setItem("cheffeCallFullAdminPassword", cleanPassword);
-    } catch (_error) {
-      // ignore storage failures
-    }
+    storeAdminPassword(cleanPassword);
     if (options.close !== false) closeAccessModal();
   }
 
@@ -5361,7 +5383,6 @@
   }
 
   async function postCall(path, body) {
-    if (body?.password) rememberAdminPassword(body.password);
     const response = await fetch(path, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -5369,6 +5390,7 @@
     });
     const payload = await response.json();
     if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha na Cheffe Call.");
+    if (body?.password) rememberAdminPassword(body.password, { close: false });
     render(payload);
     if (path === "/api/cheffe-call/action") {
       surfaceAutoExecution(payload, body?.title || body?.instruction || body?.command || "");
@@ -5716,7 +5738,6 @@
       formEl?.querySelector('[name="password"]')?.focus();
       return;
     }
-    rememberAdminPassword(password);
     setStatus("Abrindo Cheffe Call...");
     setActionFeedback({
       badge: "Rodada",
@@ -5895,12 +5916,7 @@
           : "Senha validada. Sem foto/foco pendente; confira as matérias online."
       });
     } catch (error) {
-      cheffeAdminPassword = "";
-      try {
-        window.sessionStorage.removeItem("cheffeCallFullAdminPassword");
-      } catch (_storageError) {
-        // ignore storage failures
-      }
+      clearAdminPassword();
       openAccessModal(error.message || "Senha recusada.", "bad");
       setPasswordStatus(error.message || "Senha recusada.", "bad");
       setStatus(error.message || "Senha Full Admin recusada.", "bad");
@@ -6896,22 +6912,16 @@
   if (quickPasswordInput && cheffeAdminPassword) {
     quickPasswordInput.value = cheffeAdminPassword;
   }
-  if (cheffeAdminPassword) {
-    closeAccessModal();
-    setPasswordStatus(
-      readPublicCorrectionFocus()
-        ? "Senha lembrada. Abrindo prioridade informada pelo leitor antes da sala."
-        : "Senha lembrada nesta sessão.",
-      "ok"
-    );
-  } else {
-    openAccessModal(
-      readPublicCorrectionFocus()
+  openAccessModal(
+    cheffeAdminPassword
+      ? readPublicCorrectionFocus()
+        ? "Senha lembrada. Clique em Entrar para validar e revisar a prioridade do leitor."
+        : "Senha lembrada. Clique em Entrar para validar e abrir a Cheffe Call."
+      : readPublicCorrectionFocus()
         ? "Correção do leitor recebida. Digite a senha para revisar essa matéria primeiro."
         : "Digite a senha Full Admin para entrar na Cheffe Call.",
-      readPublicCorrectionFocus() ? "pending" : ""
-    );
-  }
+    cheffeAdminPassword || readPublicCorrectionFocus() ? "pending" : ""
+  );
   formEl?.querySelector('[name="password"]')?.addEventListener("input", () => updateRealFlow());
   syncGameShellState();
 

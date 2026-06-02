@@ -22,6 +22,22 @@
     "memory:status": "node scripts/codex-memory.js status",
     "perf:budget": "node scripts/performance-budget-check.js",
     "guard:pubpaid": "node scripts/guard-pubpaid-no-canvas.js",
+    "hermes:office:brief": "node scripts/hermes-office-bridge.js brief",
+    "hermes:office:dispatch": "node scripts/hermes-office-bridge.js dispatch",
+    "hermes:office:render": "node scripts/hermes-office-bridge.js render",
+    "hermes:office:run": "node scripts/hermes-office-bridge.js run",
+    "hermes:office:status": "node scripts/hermes-office-bridge.js status",
+    "hermes:continuity": "node scripts/hermes-continuity-router.js",
+    "hermes:continuity:fast": "node scripts/hermes-continuity-router.js --support 4 --include-cloud=false --timeout 60000",
+    "hermes:continuity:watch": "node scripts/hermes-continuity-router.js --support 4 --watch --interval 300",
+    "hermes:opendesign:brief": "node scripts/hermes-opendesign-bridge.js brief",
+    "hermes:opendesign:request": "node scripts/hermes-opendesign-bridge.js request",
+    "hermes:opendesign:resources": "node scripts/hermes-opendesign-bridge.js resources",
+    "hermes:opendesign:status": "node scripts/hermes-opendesign-bridge.js status",
+    "hermes:render:deploy": "node scripts/render-api-bridge.js deploy",
+    "hermes:render:deploys": "node scripts/render-api-bridge.js deploys",
+    "hermes:render:services": "node scripts/render-api-bridge.js services",
+    "hermes:render:status": "node scripts/render-api-bridge.js status",
     "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
     "rayx": "node rayx/bin/rayx.js",
     "rayx:boot": "node rayx/core/boot.js",
@@ -57,5 +73,19 @@
   },
   "devDependencies": {
     "electron": "^42.3.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tibiaczs1-star/catalogo-cruzeiro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tibiaczs1-star/catalogo-cruzeiro/issues"
+  },
+  "homepage": "https://github.com/tibiaczs1-star/catalogo-cruzeiro#readme"
 }

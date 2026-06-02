@@ -10,12 +10,43 @@ Antes de postar, montar a rota:
 
 | Canal | Destino | O que enviar |
 | --- | --- | --- |
-| WhatsApp | Grupos de venda | Gift cards, servicos digitais, streaming/IA sob consulta, T.I Logistico CZS |
+| WhatsApp | Grupos de venda | Somente venda, servico, produto, classificado, oferta comercial ou pedido de links de grupos |
 | WhatsApp | Grupos de Uber/transporte | Apenas motorista particular / Julia Oliveira |
+| WhatsApp | Grupos/canais de noticia | Somente noticia, enquete editorial, atualizacao publica e chamada do jornal |
+| WhatsApp | Catálogo CZS | Noticias, enquete, avisos editoriais e chamadas do jornal |
 | Facebook | Marketplace | Tudo, mas em anuncios separados |
 | Instagram | Feed/stories/reels | Somente no final, quando o usuario mandar abrir |
 
 Nunca enviar propaganda em conversa individual, salvo ordem explicita com numero/nome.
+
+## Regra Dura De Separacao
+
+- Grupo de venda e grupo de vendas sao a mesma coisa: nao recebem noticia.
+- Grupo geral/de venda so recebe noticia se o usuario disser explicitamente que aquele grupo tambem aceita noticias.
+- Noticia, politica, enquete, alerta publico e jornalismo ficam apenas em grupo/canal de noticia confirmado.
+- Hoje o unico destino de noticia confirmado no WhatsApp e `Catálogo CZS`.
+- Se o destino tiver `VENDE`, `VENDAS`, `ALUGUEL`, `DESAPEGO`, `CLASSIFICADOS`, `COMPRA`, `TROCA`, `POSTAR QUE VENDE` ou similar no nome, tratar como grupo de vendas.
+- Se houver duvida sobre o tipo do grupo: nao postar; pedir/registrar classificacao primeiro.
+- Nunca usar grupo de vendas para testar alcance de noticia.
+- Antes de qualquer lote, separar a fila em: `vendas_servicos`, `noticias_editorial`, `pedir_links`, `status_proprio`, `pendente_classificacao`.
+
+## Pedido Para Encontrar Novos Grupos
+
+Quando a ordem for procurar mais grupos, postar apenas uma mensagem de pedido de links, sem noticia anexada:
+
+```text
+Pessoal, quem puder ajudar, manda aqui links de grupos ativos de vendas/classificados de Cruzeiro do Sul, Vale do Jurua e Acre.
+
+Tambem estamos procurando grupos/canais de noticias locais para acompanhar o que acontece na regiao.
+
+Se souber de algum, envie o link ou nome do grupo. Obrigado!
+```
+
+Versao curta para grupos gerais:
+
+```text
+Alguem tem links de grupos de vendas ou grupos/canais de noticias de Cruzeiro do Sul, Vale do Jurua e Acre? Pode mandar aqui ou no privado.
+```
 
 ## Uso Do Plugin/Controle Direto
 
@@ -44,10 +75,24 @@ Nunca enviar propaganda em conversa individual, salvo ordem explicita com numero
 
 Enviar:
 
-- `01-geral-gift-streaming-ia.png`
-- legenda de gift cards / servicos digitais
-- `05-ti-logistico-czs-remoto-retirada.png`
-- legenda do T.I Logistico CZS
+- produtos reais;
+- servicos digitais;
+- gift cards / streaming / IA sob consulta;
+- T.I Logistico CZS;
+- pedido de links para novos grupos;
+- nunca noticia, enquete, politica ou editorial.
+
+### Grupos/canais de noticia
+
+- `Catálogo CZS`
+
+Enviar:
+
+- noticias;
+- stories/editorial;
+- enquete editorial;
+- chamada do jornal;
+- pedidos de links para outros grupos/canais de noticia.
 
 ### Grupos de Uber/transporte
 
@@ -68,8 +113,10 @@ Para cada destino:
 1. Abrir o grupo.
 2. Conferir nome no cabecalho ou na linha aberta.
 3. Conferir se e grupo, nao contato individual.
-4. Conferir se a categoria combina.
-5. So entao anexar imagem e colar legenda.
+4. Classificar o destino: venda, noticia, transporte, geral, proprio ou desconhecido.
+5. Conferir se a categoria do conteudo combina com o destino.
+6. Se for grupo de venda, bloquear automaticamente noticia/enquete/politica/editorial.
+7. So entao anexar imagem e colar legenda.
 
 Se qualquer ponto falhar: pular destino e registrar no log.
 

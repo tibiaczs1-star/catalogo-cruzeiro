@@ -46,7 +46,100 @@ module.exports = [
     defaultCategory: "Utilidade Publica",
     limitPerSource: 60,
     priority: 1000,
-    priorityReason: "Fonte oficial municipal prioritaria; site Wix sem RSS confiavel, capturar cards publicos da home."
+    priorityReason: "Fonte oficial municipal prioritaria; site Wix sem RSS confiavel, capturar cards publicos da home.",
+    linkAllowPattern: "cruzeirodosul\\.ac\\.gov\\.br/publicacoes-transparencia/"
+  },
+  {
+    id: "prefeitura-mancio-lima",
+    name: "Prefeitura de Mancio Lima",
+    feedUrl: "https://www.manciolima.ac.gov.br/",
+    feedType: "prefeitura-wix-home",
+    siteUrl: "https://www.manciolima.ac.gov.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 20,
+    priority: 955,
+    priorityReason: "Fonte oficial municipal do Vale do Jurua; captura home Wix para ampliar cobertura hiperlocal.",
+    linkAllowPattern: "manciolima\\.ac\\.gov\\.br/publicacoes-transparencia/"
+  },
+  {
+    id: "prefeitura-rodrigues-alves",
+    name: "Prefeitura de Rodrigues Alves",
+    feedUrl: "https://www.rodriguesalves.ac.gov.br/",
+    feedType: "prefeitura-wix-home",
+    siteUrl: "https://www.rodriguesalves.ac.gov.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 20,
+    priority: 950,
+    priorityReason: "Fonte oficial municipal vizinha de CZS; importante para pauta de Rodrigues Alves sem depender de grupo de vendas.",
+    linkAllowPattern: "rodriguesalves\\.ac\\.gov\\.br/publicacoes-transparencia/"
+  },
+  {
+    id: "prefeitura-porto-walter",
+    name: "Prefeitura de Porto Walter",
+    feedUrl: "https://www.portowalter.ac.gov.br/",
+    feedType: "prefeitura-wix-home",
+    siteUrl: "https://www.portowalter.ac.gov.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 20,
+    priority: 945,
+    priorityReason: "Fonte oficial municipal do Jurua; reforca cobertura regional e utilidade publica.",
+    linkAllowPattern: "portowalter\\.ac\\.gov\\.br/publicacoes-transparencia/"
+  },
+  {
+    id: "prefeitura-marechal-thaumaturgo",
+    name: "Prefeitura de Marechal Thaumaturgo",
+    feedUrl: "https://www.marechalthaumaturgo.ac.gov.br/",
+    feedType: "prefeitura-wix-home",
+    siteUrl: "https://www.marechalthaumaturgo.ac.gov.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 20,
+    priority: 940,
+    priorityReason: "Fonte oficial municipal do Jurua; reforca cobertura de interior e servicos publicos.",
+    linkAllowPattern: "marechalthaumaturgo\\.ac\\.gov\\.br/publicacoes-transparencia/"
+  },
+  {
+    id: "pcac",
+    name: "Policia Civil do Acre",
+    feedUrl: "https://pc.ac.gov.br/feed/",
+    siteUrl: "https://pc.ac.gov.br/",
+    defaultCategory: "Policia",
+    limitPerSource: 20,
+    priority: 910,
+    priorityReason: "Fonte oficial de seguranca publica do Acre com RSS ativo; priorizar quando houver impacto no Jurua."
+  },
+  {
+    id: "detran-acre",
+    name: "Detran Acre",
+    feedUrl: "https://www.detran.ac.gov.br/feed/",
+    siteUrl: "https://www.detran.ac.gov.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 15,
+    priority: 875,
+    priorityReason: "Fonte oficial de transito do Acre com RSS ativo; boa para servico, alerta, CNH e fiscalizacao."
+  },
+  {
+    id: "mpac",
+    name: "Ministerio Publico do Acre",
+    feedUrl: "https://www.mpac.mp.br/",
+    feedType: "official-home-headlines",
+    siteUrl: "https://www.mpac.mp.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 12,
+    priority: 870,
+    priorityReason: "Fonte oficial sem RSS confiavel; captura manchetes publicas da home para pauta institucional e protecao social.",
+    linkAllowPattern: "mpac\\.mp\\.br/(?:[^\"'#]+/)?(?:mpac|a-pedido|noticias|2026|\\d{4})"
+  },
+  {
+    id: "tjac",
+    name: "Tribunal de Justica do Acre",
+    feedUrl: "https://www.tjac.jus.br/noticias/",
+    feedType: "official-home-headlines",
+    siteUrl: "https://www.tjac.jus.br/",
+    defaultCategory: "Utilidade Publica",
+    limitPerSource: 12,
+    priority: 860,
+    priorityReason: "Fonte oficial do Judiciario acreano; usar para servico publico e decisoes com impacto regional.",
+    linkAllowPattern: "tjac\\.jus\\.br/(?:noticias|.*\\d{4})"
   },
   {
     id: "jurua-24-horas",

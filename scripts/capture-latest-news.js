@@ -368,6 +368,52 @@ function normalizeFeedMarkupNoise(item = {}) {
   return next;
 }
 
+function buildNewsAudioNarrationText(item = {}) {
+  const title = cleanText(item.title || "Notícia do Catálogo CZS", 180);
+  const summary = cleanText(item.lede || item.summary || item.description || title, 520);
+  const source = cleanText(item.sourceName || "fonte monitorada", 80);
+  const category = cleanText(item.category || item.eyebrow || "noticia", 60);
+  return cleanText(
+    [
+      "Catálogo CZS.",
+      `Notícia de ${category}.`,
+      title,
+      summary && summary !== title ? summary : "",
+      `Fonte: ${source}.`
+    ]
+      .filter(Boolean)
+      .join(" "),
+    900
+  );
+}
+
+function buildNewsVideoCaptionText(item = {}) {
+  const title = cleanText(item.title || "", 170);
+  const summary = cleanText(item.lede || item.summary || item.description || "", 240);
+  const source = cleanText(item.sourceName || "fonte monitorada", 80);
+  const isVideo = /\b(v[ií]deo|video)\b/i.test([title, summary, item.sourceUrl].join(" "));
+  const prefix = isVideo ? "Vídeo da fonte" : "Imagem da notícia";
+  return cleanText(
+    `${prefix}: ${title}. ${summary && summary !== title ? summary : ""} Fonte: ${source}.`,
+    420
+  );
+}
+
+function applyAudioAndVideoMetadata(item = {}) {
+  item.audioNarrationText = item.audioNarrationText || buildNewsAudioNarrationText(item);
+  item.audioNarrationVoice = item.audioNarrationVoice || "pt-BR-female-browser-tts";
+  item.audioNarrationLanguage = item.audioNarrationLanguage || "pt-BR";
+  item.audioNarrationStatus = item.audioNarrationStatus || "ready-client-side";
+  item.videoCaptionText = item.videoCaptionText || buildNewsVideoCaptionText(item);
+  item.videoCaptionStatus = item.videoCaptionStatus || "ready";
+  item.accessibility = {
+    ...(item.accessibility || {}),
+    hasAudioNarrationText: Boolean(item.audioNarrationText),
+    hasVideoCaptionText: Boolean(item.videoCaptionText)
+  };
+  return item;
+}
+
 function buildFeedRecord(block = "", source = {}, options = {}) {
   const atom = Boolean(options.atom);
   const title = cleanText(pickFirstTag(block, ["title"]), 180);
@@ -433,6 +479,7 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
     alternateSlugs: [slug].filter(Boolean)
   };
 
+  applyAudioAndVideoMetadata(item);
   const safeImage = item.imageUrl || fallbackImageFor(item);
   item.imageUrl = safeImage;
   item.feedImageUrl = safeImage;
@@ -506,6 +553,7 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
     alternateSlugs: [slug].filter(Boolean)
   };
 
+  applyAudioAndVideoMetadata(item);
   const safeImage = item.imageUrl || fallbackImageFor(item);
   item.imageUrl = safeImage;
   item.feedImageUrl = safeImage;
@@ -541,6 +589,67 @@ function parseWordPressJsonItems(jsonText = "", source = {}, limit = DEFAULT_LIM
     .slice(0, limit);
 }
 
+function isAllowedDirectSourceLink(href = "", source = {}) {
+  const link = String(href || "");
+  if (!link || /^(#|mailto:|tel:|javascript:)/i.test(link)) return false;
+  if (/\.(?:pdf|jpg|jpeg|png|gif|webp|svg|zip|rar|docx?|xlsx?)(?:[?#]|$)/i.test(link)) return false;
+
+  if (source.linkAllowPattern) {
+    try {
+      return new RegExp(source.linkAllowPattern, "i").test(link);
+    } catch {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function parseOfficialHomeHeadlineItems(htmlText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
+  const html = String(htmlText || "");
+  const baseUrl = source.siteUrl || source.feedUrl || "";
+  const anchors = [];
+  const pattern = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+  while ((match = pattern.exec(html))) {
+    const href = decodeEntities(match[1] || "");
+    if (!isAllowedDirectSourceLink(href, source)) continue;
+
+    const block = match[0] || "";
+    const title =
+      cleanText(block.match(/<h[1-4]\b[^>]*>([\s\S]*?)<\/h[1-4]>/i)?.[1] || "", 180) ||
+      cleanText(block.match(/\b(?:aria-label|title)=["']([^"']+)["']/i)?.[1] || "", 180) ||
+      cleanText(block, 180);
+    if (!title || title.length < 28) continue;
+    if (/^(noticias|ver mais|leia mais|acesse|menu|inicio|portal|transparencia)$/i.test(title)) continue;
+
+    const description = cleanText(block.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i)?.[1] || "", 260) || title;
+    const imageUrl = extractImageFromMarkup(block, baseUrl);
+    const link = resolveUrl(baseUrl, href);
+    const item = buildDirectSourceRecord(
+      {
+        title,
+        link,
+        summary: description,
+        imageUrl,
+        publishedAt: new Date().toISOString()
+      },
+      source
+    );
+    if (item) anchors.push(item);
+  }
+
+  const seen = new Set();
+  return anchors
+    .filter((item) => {
+      const key = item.sourceUrl || item.title;
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, limit);
+}
+
 function parsePrefeituraWixHomeItems(htmlText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
   const html = String(htmlText || "");
   const anchors = [];
@@ -549,7 +658,7 @@ function parsePrefeituraWixHomeItems(htmlText = "", source = {}, limit = DEFAULT
   while ((match = pattern.exec(html))) {
     const href = decodeEntities(match[1] || "");
     const block = match[0] || "";
-    if (!/cruzeirodosul\.ac\.gov\.br\/publicacoes-transparencia\//i.test(href)) continue;
+    if (!isAllowedDirectSourceLink(href, source)) continue;
 
     const title =
       cleanText(block.match(/data-testid=["']gallery-item-title["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || "", 180) ||
@@ -596,6 +705,9 @@ function parseSourceItems(rawText = "", source = {}, limit = DEFAULT_LIMIT_PER_S
   }
   if (feedType === "prefeitura-wix-home") {
     return parsePrefeituraWixHomeItems(rawText, source, limit);
+  }
+  if (feedType === "official-home-headlines") {
+    return parseOfficialHomeHeadlineItems(rawText, source, limit);
   }
   return parseFeedItems(rawText, source, limit);
 }
@@ -910,13 +1022,19 @@ async function runCaptureLatestNews(options = {}) {
   const startedAt = new Date().toISOString();
   const capture = await collectLatestNewsItems(options);
   const existingItems = readExistingNewsItems();
-  const mergedItems = mergeNewsItems(capture.items, existingItems).slice(0, ARCHIVE_LIMIT);
-  const activeWindowItems = buildCuratedActiveWindow(mergedItems, ACTIVE_WINDOW_LIMIT);
+  const mergedItems = mergeNewsItems(capture.items, existingItems)
+    .map((item) => applyAudioAndVideoMetadata(item))
+    .slice(0, ARCHIVE_LIMIT);
+  const activeWindowItems = buildCuratedActiveWindow(mergedItems, ACTIVE_WINDOW_LIMIT).map((item) =>
+    applyAudioAndVideoMetadata(item)
+  );
   const activeKeys = new Set(activeWindowItems.map((item) => dedupeKey(item)).filter(Boolean));
   const mergedUiItems = [
     ...activeWindowItems,
     ...mergedItems.filter((item) => !activeKeys.has(dedupeKey(item)))
-  ].slice(0, ARCHIVE_LIMIT);
+  ]
+    .map((item) => applyAudioAndVideoMetadata(item))
+    .slice(0, ARCHIVE_LIMIT);
   const todayKey = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Rio_Branco",
     year: "numeric",

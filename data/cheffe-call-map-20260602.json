@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-06-02T04:10:00Z",
+  "workspace": "C:/Users/junio/projeto codex",
+  "files": {
+    "cheffe-call.html": {"lines": 947},
+    "cheffe-call.js": {"lines": 6944, "bug_zone": [240, 266]},
+    "cheffe-call.css": {"lines": 9878},
+    "cheffe-call-game.js": {"lines": 131},
+    "escritorio.html": {"lines": 603},
+    "escritorio.js": {"lines": 2948},
+    "escritorio.css": {"lines": 4934},
+    "escritorio-nerd.html": {"lines": 510},
+    "escritorio-arte.html": {"lines": 412},
+    "escritorio-ninjas.html": {"lines": 69, "status": "stub-unavailable"},
+    "server.js": {"lines": 21851, "api_routes": 77},
+    "scripts/real-agents-runtime.js": {"lines": 2118},
+    "scripts/agents-autonomy-cycle.js": {"lines": 526}
+  },
+  "agents": {
+    "total": 181,
+    "offices": [
+      {"name": "Escritorio de Ninjas", "count": 51, "public_page": false, "status": "stub"},
+      {"name": "Esttiles", "count": 51, "public_page": false},
+      {"name": "Escritorio de Arte", "count": 50, "public_page": true},
+      {"name": "Escritorio Principal", "count": 16, "public_page": "via-cheffe-call"},
+      {"name": "Escritorio Nerd", "count": 13, "public_page": true}
+    ],
+    "roles": {
+      "design": 39, "dev": 23, "review": 21, "sources": 21, "pixel": 20,
+      "games": 19, "copy": 15, "ceo": 10, "sales": 9, "social": 2,
+      "editor": 1, "kids": 1
+    }
+  },
+  "state_snapshot": {
+    "active": false,
+    "sessions": 12,
+    "last_session_logs": 3,
+    "last_session_decisions": 1,
+    "last_instruction": "Validar correcao do gate humano completo da Cena 1."
+  },
+  "gaps": [
+    "popup-auto-close-bug",
+    "photo-editor-runtime-unverified",
+    "frontend-review-persistence-unverified",
+    "ninjas-office-offline",
+    "esttiles-no-public-page",
+    "no-office-level-cheffe-call",
+    "no-agent-memory-files",
+    "no-self-model-json",
+    "no-inter-agent-inbox",
+    "no-scoreboard-json",
+    "state-no-phases-array",
+    "missing-8-flow-endpoints",
+    "missing-4-approval-endpoints"
+  ],
+  "syntax_check": "ok",
+  "next_prompt": 2
+}

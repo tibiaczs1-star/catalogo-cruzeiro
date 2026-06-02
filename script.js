@@ -143,6 +143,7 @@ const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 700 : 
 const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 520 : 780;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 320 : 460;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 520 : 760;
+const mobileFirstFoldMaximumMs = 3000;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -1791,13 +1792,13 @@ const initialSplashIsHoldingPage =
   !document.body.classList.contains("site-loaded");
 
 if (initialSplashIsHoldingPage) {
-  const staticThumbDelay = splashCompactViewportQuery.matches ? 7600 : 3600;
+  const staticThumbDelay = splashCompactViewportQuery.matches ? 900 : 1800;
   window.addEventListener(
     "catalogo:logo-splash-finished",
     () => window.setTimeout(hydrateInitialStaticThumbs, staticThumbDelay),
     { once: true }
   );
-  window.setTimeout(hydrateInitialStaticThumbs, splashCompactViewportQuery.matches ? 18000 : 22000);
+  window.setTimeout(hydrateInitialStaticThumbs, splashCompactViewportQuery.matches ? mobileFirstFoldMaximumMs : 5200);
 } else {
   hydrateInitialStaticThumbs();
 }
@@ -1866,7 +1867,7 @@ const runAfterSplashFinished = (callback, timeout = 1200) => {
   window.addEventListener("catalogo:logo-splash-finished", runOnce, { once: true });
   window.setTimeout(
     runOnce,
-    splashCompactViewportQuery.matches ? 18000 : splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600
+    splashCompactViewportQuery.matches ? mobileFirstFoldMaximumMs : splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600
   );
 };
 

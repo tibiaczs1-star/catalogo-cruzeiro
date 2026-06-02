@@ -1,7 +1,274 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-31T23:05:00-05:00",
+  "lastUpdatedAt": "2026-06-02T13:36:28.830Z",
   "orders": [
+    {
+      "id": "2026-06-02-hermes-continuity-router-language-switch",
+      "createdAt": "2026-06-02T01:30:32-05:00",
+      "updatedAt": "2026-06-02T01:30:32-05:00",
+      "status": "completed-validated",
+      "source": "chat",
+      "rawRequest": "Criar esquema para troca de linguagem/modelo: testar o mais rapido, deixar outras duas ou tres de suporte, avisar quando ChatGPT parar para reautenticar, e testar MiniMax junto com ChatGPT e outros para continuidade eterna.",
+      "summary": "Criado Hermes Continuity Router com teste vivo de Codex, MiniMax, Gemma, Llama, Qwen, Gemini e NVIDIA; seleciona suportes mais rapidos e alerta reauth do Codex.",
+      "normalizedTasks": [
+        "testar ChatGPT/Codex como autoridade primaria",
+        "testar MiniMax junto com Codex e outros workers",
+        "escolher 2 ou 3 suportes mais rapidos",
+        "avisar quando Codex falhar por autenticacao",
+        "oferecer modo watch para continuidade"
+      ],
+      "filesTouched": [
+        "scripts/hermes-continuity-router.js",
+        "docs/HERMES_CONTINUITY_ROUTER.md",
+        "package.json",
+        "C:\\Users\\junio\\AppData\\Local\\hermes\\docs\\HERMES_CODEX_SWARM_PROTOCOL.md"
+      ],
+      "tags": [
+        "hermes",
+        "continuity-router",
+        "openai-codex",
+        "minimax",
+        "fallback",
+        "watch"
+      ],
+      "nextSteps": [
+        "Para ciclo continuo, rodar npm run hermes:continuity:watch.",
+        "Se Codex falhar por auth, reautenticar com hermes auth add openai-codex.",
+        "Se MiniMax ficar lento, manter como worker long-context e deixar o warm set escolher os mais rapidos."
+      ],
+      "notes": "Validacao completa em .codex-temp/hermes-continuity/latest.md: Codex saudavel; MiniMax funcionou pela rota Hermes, mas no ciclo completo ficou mais lento que Llama/Gemma/Gemini."
+    },
+    {
+      "id": "2026-06-02-hermes-chatgpt-minimax-cdp-recovery",
+      "createdAt": "2026-06-02T00:59:18-05:00",
+      "updatedAt": "2026-06-02T00:59:18-05:00",
+      "status": "diagnosed-and-corrected-chatgpt-cdp-minimax-pending-credential",
+      "source": "chat",
+      "rawRequest": "Ver por que o Hermes nao esta seguindo com MiniMax 3 na nuvem ou ChatGPT/Codex durante ciclos de agentes/imagem; diagnosticar e corrigir o necessario.",
+      "summary": "Diagnostico Hermes: MiniMax nuvem sem credencial/login ativo; ChatGPT/Codex tinha pool poluido com credenciais mortas/duplicadas; Chrome CDP estava desligado.",
+      "normalizedTasks": [
+        "diagnosticar provider MiniMax/MiniMax OAuth",
+        "testar ChatGPT/Codex com chamada real",
+        "higienizar pool openai-codex sem trocar credenciais boas",
+        "reativar Chrome CDP em 127.0.0.1:9222",
+        "validar browser tool end-to-end"
+      ],
+      "filesTouched": [
+        "C:\\Users\\junio\\AppData\\Local\\hermes\\auth.json",
+        "C:\\Users\\junio\\AppData\\Local\\hermes\\auth.backup-20260602-005548.json",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "tags": [
+        "hermes",
+        "openai-codex",
+        "chatgpt",
+        "minimax",
+        "chrome-cdp",
+        "browser-tool"
+      ],
+      "nextSteps": [
+        "Se MiniMax nuvem for obrigatorio, configurar MiniMax API key ou executar hermes auth add minimax-oauth.",
+        "Para ciclos de navegador/imagem, manter Chrome CDP ativo em 127.0.0.1:9222.",
+        "Nao declarar Hermes saudavel apenas por hermes status; usar smoke real com hermes -z."
+      ],
+      "notes": "Backup de auth criado antes da higiene: C:\\Users\\junio\\AppData\\Local\\hermes\\auth.backup-20260602-005548.json. Validacoes finais: openai-codex retornou OK-HERMES-CODEX e browser tool retornou Example Domain."
+    },
+    {
+      "id": "2026-06-01-czs-social-safe-status-final",
+      "createdAt": "2026-06-01T15:26:45-05:00",
+      "updatedAt": "2026-06-01T15:26:45-05:00",
+      "status": "partial-complete-safe-blocked-by-ui-and-login",
+      "source": "chat",
+      "rawRequest": "Apos faca as vendas e anuncios e corrija destaques/audio/captacao social sem repetir erros.",
+      "summary": "Rodada final segura: destaque Noticias removido, anuncios prontos, captura atualizada, audio PT-BR validado, WhatsApp/Facebook bloqueados sem tela segura.",
+      "normalizedTasks": [
+        "remover destaque Noticias",
+        "preparar filas de vendas/anuncios",
+        "validar captura de noticias ampliada",
+        "validar audio PT-BR",
+        "bloquear postagem externa sem cabecalho confirmado"
+      ],
+      "filesTouched": [
+        ".codex-temp/social-total-correction-20260601/SOCIAL_PREMIUM_TOTAL_CORRECTION_STATUS.md",
+        ".codex-temp/social-total-correction-20260601/SAFE_DISTRIBUTION_MATRIX_V2.json",
+        ".codex-temp/social-total-correction-20260601/sales-ads-v2/sales-ads-v2-manifest.json",
+        ".codex-temp/social-total-correction-20260601/service-highlights-v2/service-highlights-v2-manifest.json",
+        "noticia.js",
+        "scripts/capture-latest-news.js"
+      ],
+      "assetRefs": [
+        "instagram-noticias-highlight-removed-20260601",
+        "instagram-servicos-preview-black-blocked-20260601",
+        "czs-sales-ads-v2-20260601",
+        "czs-video-first-safe-queue-20260601"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "social",
+        "instagram",
+        "whatsapp",
+        "facebook",
+        "destaques",
+        "anuncios",
+        "audio-pt-br",
+        "video-first"
+      ],
+      "nextSteps": [
+        "Criar destaques institucionais restantes somente com miniaturas corretas.",
+        "WhatsApp/Facebook: postar anuncios apenas apos confirmar cabecalho de grupo e permissao.",
+        "Noticias: postar somente em Catalogo CZS ou canal/grupo de noticia confirmado."
+      ],
+      "notes": "Sem postagem em WhatsApp/Facebook nesta rodada. Instagram teve correcao live: Noticias removido; criacao automatica dos novos destaques bloqueada com seguranca."
+    },
+    {
+      "id": "2026-06-01-czs-social-premium-total-correction-services",
+      "createdAt": "2026-06-01T13:35:00-05:00",
+      "updatedAt": "2026-06-01T15:26:45-05:00",
+      "status": "partial-live-corrected-safe-blocked-for-external-posting",
+      "source": "chat",
+      "rawRequest": "Corrigir frente social premium: destaques devem apresentar servicos do Catalogo CZS, nao noticias diarias; apagar/refazer erros; audio somente portugues brasileiro autentico; criativos melhores; captar videos/noticias de web, Facebook, Instagram e WhatsApp quando seguro; musicas jornalisticas melhores; trabalhar so essa frente ate terminar.",
+      "summary": "Correcao total social premium: destaques de servicos, audio PT-BR, captacao video-first multicanal e bloqueio de noticias em destaques/grupos de venda.",
+      "normalizedTasks": [
+        "remover destaque permanente de noticia diaria",
+        "criar destaques institucionais e de servicos",
+        "refazer criativos em padrao premium",
+        "bloquear narracao em portugues de Portugal",
+        "usar somente audio em portugues brasileiro autentico",
+        "captar videos/fontes da web, Facebook, Instagram e WhatsApp quando a tela/fonte for segura",
+        "manter noticia fora de grupos de venda"
+      ],
+      "linkedFiles": [
+        "docs/social/czs-social-premium-total-correction-prompt-2026-06-01.md"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "social",
+        "instagram",
+        "destaques",
+        "servicos",
+        "audio-pt-br",
+        "captacao-video-first"
+      ],
+      "filesTouched": [
+        ".codex-temp/social-total-correction-20260601/SOCIAL_PREMIUM_TOTAL_CORRECTION_STATUS.md",
+        ".codex-temp/social-total-correction-20260601/SAFE_DISTRIBUTION_MATRIX_V2.json",
+        "noticia.js",
+        "scripts/capture-latest-news.js"
+      ],
+      "nextSteps": [
+        "Criar destaques institucionais restantes manualmente/com tela segura.",
+        "Postar vendas/anuncios no WhatsApp/Facebook apenas com cabecalho confirmado.",
+        "Continuar captacao video-first, retendo conteudo sensivel para revisao."
+      ],
+      "notes": "Noticias highlight removido; audio PT-BR validado; captura atualizada; WhatsApp/Facebook bloqueados por falta de controle visual seguro."
+    },
+    {
+      "id": "2026-06-01-czs-social-routine-resume-now",
+      "createdAt": "2026-06-01T11:58:16.902Z",
+      "updatedAt": "2026-06-01T11:58:16.902Z",
+      "status": "active-safe-routing-started",
+      "source": "chat",
+      "rawRequest": "comece asa rotina agora",
+      "summary": "Retomar agora a rotina social premium do Catalogo CZS com destino seguro, sem noticia em grupo de venda e sem clique/postagem no escuro.",
+      "normalizedTasks": [
+        "reler memoria/protocolo antes de agir",
+        "separar noticia de venda por destino antes de postar",
+        "usar apenas destinos confirmados visualmente",
+        "preparar filas/logs quando nao houver controle seguro",
+        "nao enviar WhatsApp ao usuario como atualizacao automatica"
+      ],
+      "linkedFiles": [
+        ".codex-memory/propaganda-automation-protocol.md",
+        "docs/social/czs-social-corrections-2026-06-01.md",
+        "docs/social/czs-instagram-video-first-playbook-2026-06-01.md"
+      ]
+    },
+    {
+      "id": "2026-06-01-whatsapp-wife-contact-amor-coracao-ray",
+      "createdAt": "2026-06-01T05:08:35.43Z",
+      "updatedAt": "2026-06-01T05:08:35.43Z",
+      "status": "contact-name-recorded-no-message-sent",
+      "source": "chat",
+      "rawRequest": "O nome do WhatsApp da minha esposa pra vc mandar mensagem e amor coração ray.",
+      "summary": "Registrar que o contato individual autorizado da esposa no WhatsApp aparece como amor coração ray.",
+      "normalizedTasks": [
+        "usar o nome amor coração ray quando o usuario pedir mensagem para a esposa",
+        "nao confundir esse contato individual com grupos",
+        "so enviar se WhatsApp estiver controlavel e houver ordem explicita"
+      ],
+      "filesTouched": [
+        ".codex-memory/orders.json",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "whatsapp",
+        "contato-autorizado",
+        "esposa",
+        "ray"
+      ],
+      "nextSteps": [
+        "confirmar tela do WhatsApp antes de qualquer envio"
+      ],
+      "notes": "Nenhuma mensagem foi enviada nesta atualização; e apenas registro de nome/rota segura."
+    },
+    {
+      "id": "2026-06-01-czs-social-audio-caption-safe-routing",
+      "createdAt": "2026-06-01T00:35:00-05:00",
+      "updatedAt": "2026-06-01T00:35:00-05:00",
+      "status": "implemented-buildonly-validated-no-posting-without-safe-control",
+      "source": "chat",
+      "rawRequest": "Corrigir falhas de divulgacao: nao postar noticia em grupos de venda, recomeçar estrategia WhatsApp/Instagram com fontes melhores, captions de video, voz feminina nas noticias, audio no projeto online e limpeza do projeto para ficar mais rapido.",
+      "summary": "Rodada segura de noticias CZS com separacao de destinos, audio/caption no site, pacote Instagram story-first narrado e limpeza conservadora.",
+      "normalizedTasks": [
+        "separar grupos de noticia de grupos de venda/vendas/desapego/classificados",
+        "ampliar fontes de noticias hiperlocais e oficiais",
+        "adicionar texto de narracao e caption a todas as noticias capturadas",
+        "implementar ouvir noticia com voz feminina no detalhe da noticia",
+        "gerar pacote Instagram story-first com videos narrados por voz feminina",
+        "nao postar sem controle seguro de WhatsApp/Instagram",
+        "limpar apenas caches temporarios seguros para melhorar desempenho"
+      ],
+      "filesTouched": [
+        "backend/source-config.js",
+        "scripts/capture-latest-news.js",
+        "server.js",
+        "noticia.html",
+        "noticia.js",
+        "noticia-premium.css",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "news-data.js",
+        ".codex-temp/instagram/premium-news-pack/build_recent_news_batch.py",
+        ".codex-temp/instagram/premium-news-pack/run_daily_instagram_news.ps1",
+        ".codex-temp/social-studies/2026-06-01-madrugada/CZS_MADRUGADA_SOCIAL_STUDY.md",
+        ".codex-temp/maintenance/cleanup-run-20260601.json"
+      ],
+      "assetRefs": [
+        "czs-noticia-audio-caption-edge-20260601",
+        "instagram-czs-audio-buildonly-preview-20260601"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "social",
+        "instagram",
+        "whatsapp",
+        "noticias",
+        "audio",
+        "caption",
+        "tts",
+        "seguranca-destinos"
+      ],
+      "nextSteps": [
+        "revisar e deduplicar o pacote Instagram BuildOnly antes de publicar",
+        "abrir WhatsApp/WhatsApp Web em estado controlavel antes de qualquer envio",
+        "pedir links de grupos de noticias e vendas nos grupos gerais/vendas, sem anexar noticia",
+        "deployar/validar no Render se a publicacao online for solicitada"
+      ],
+      "notes": "Nada foi postado nesta rodada. WhatsApp nao estava controlavel; pacote Instagram foi gerado em modo BuildOnly. Site local validado com audio/caption."
+    },
     {
       "id": "2026-05-31-czs-jornal-relatorio-cotas-investidores",
       "createdAt": "2026-05-31T13:26:00-05:00",
@@ -808,8 +1075,8 @@
     },
     {
       "id": "2026-05-17-separar-jogo-e-site",
-      "createdAt": "2026-05-17T12:05:00.000Z",
-      "updatedAt": "2026-05-17T12:05:00.000Z",
+      "createdAt": "2026-05-17T12:05:00Z",
+      "updatedAt": "2026-05-17T12:05:00Z",
       "status": "active",
       "source": "chat",
       "rawRequest": "trate jogo cojo jogo e site como site ... estao no mesmo canto mais sao coisas diferentes, por exemplo o jogo nao tem agentes pra nada.",
@@ -835,8 +1102,8 @@
     },
     {
       "id": "2026-05-17-modo-economico-codex",
-      "createdAt": "2026-05-17T12:00:00.000Z",
-      "updatedAt": "2026-05-17T12:00:00.000Z",
+      "createdAt": "2026-05-17T12:00:00Z",
+      "updatedAt": "2026-05-17T12:00:00Z",
       "status": "active",
       "source": "chat",
       "rawRequest": "vc ta queimando token demais veja se tem algo que vc ta fazendo fora do contexto comendo tokens sem utilidade; isso faca isso; implemente",
@@ -861,8 +1128,8 @@
     },
     {
       "id": "2026-05-17-pubpaid-canonico-total",
-      "createdAt": "2026-05-17T09:00:00.000Z",
-      "updatedAt": "2026-05-17T09:00:00.000Z",
+      "createdAt": "2026-05-17T09:00:00Z",
+      "updatedAt": "2026-05-17T09:00:00Z",
       "status": "in-progress",
       "source": "chat",
       "rawRequest": "faca um merge total, so existe um canon, um caminho, para esse jogo, o resto descarte tudo",
@@ -947,7 +1214,7 @@
     },
     {
       "id": "2026-05-17-retomar-personagem-pixellab-do-pubpaid-e-gerar-animacoes-basicas-de-avatar",
-      "createdAt": "2026-05-17T10:10:21.480Z",
+      "createdAt": "2026-05-17T10:10:21.48Z",
       "updatedAt": "2026-05-17T10:46:14.201Z",
       "status": "superseded",
       "source": "chat",
@@ -1017,8 +1284,8 @@
     },
     {
       "id": "2026-05-18-criar-candidato-visual-premium-de-damas-e-entregar-previews-mobile-desktop-sem-d",
-      "createdAt": "2026-05-18T00:15:53.960Z",
-      "updatedAt": "2026-05-18T00:15:53.960Z",
+      "createdAt": "2026-05-18T00:15:53.96Z",
+      "updatedAt": "2026-05-18T00:15:53.96Z",
       "status": "completed-local",
       "source": "chat",
       "rawRequest": "Trabalho local de arte/interface da Damas PubPaid: botoes, pecas, cenario, background e previews PNG mobile/desktop para aprovacao antes de subir.",
@@ -1091,7 +1358,7 @@
     {
       "id": "2026-05-18-sistema-diretor-de-jogos-com-hierarquia-prompt-mestre-fluxo-e-estudo-inicial-par",
       "createdAt": "2026-05-18T17:26:39.544Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Criar sistema de jogos separado do jornal: Diretor do Jogo no topo, subagentes de arte/design, UI/HUD, teste/seguranca gamer e linha final; Escritorio Nerd alimenta conhecimento tecnico; Codex e Hermes ficam como ferramentas finais de decisao operacional, usuario acima de tudo.",
@@ -1106,7 +1373,7 @@
     {
       "id": "2026-05-18-expandir-estudo-do-sistema-diretor-de-jogos-com-arquitetura-papeis-pipeline-e-su",
       "createdAt": "2026-05-18T17:31:55.544Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Completar estudo de 20 minutos do sistema de jogos incluindo camadas/layers, padroes de programacao, tipos de programador, tipos de desenhista, fluxo de desenho para jogos e direcao de jogos.",
@@ -1120,8 +1387,8 @@
     },
     {
       "id": "2026-05-18-rodada-complementar-de-estudo-do-diretor-de-jogos-salva-no-relatorio-e-fluxo",
-      "createdAt": "2026-05-18T18:40:34.960Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "createdAt": "2026-05-18T18:40:34.96Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Continuar aprendizado do Sistema Diretor de Jogos depois da correcao do usuario; consolidar arquitetura web/Phaser, servidor autoritativo, padroes de codigo, papeis de equipe e checklists por tipo de mudanca.",
@@ -1181,7 +1448,7 @@
     {
       "id": "2026-05-18-estudo-literal-de-30-minutos-concluido-e-consolidado-no-sistema-diretor-de-jogos",
       "createdAt": "2026-05-18T19:13:58.975Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Rodada literal de 30 minutos para estudar producao real de jogos, GDD/TDD, level design, game feel, audio, balanceamento, multiplayer, telemetria, pipeline, QA, monetizacao/etica, mapeamento e colisao 2D/3D.",
@@ -1234,7 +1501,7 @@
     {
       "id": "2026-05-18-criar-skill-game-director-general-e-registrar-workflow-de-jogos-com-conselho-ner",
       "createdAt": "2026-05-18T19:35:05.499Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Consolidar a cadeia completa antes de voltar ao jogo: Codex/Hermes como ferramentas finais, Diretor Geral, Conselho Tecnico Nerd, Diretor do Jogo, subagentes e sub-subagentes; criar skill completa com loop de aprender/reaprender por erros e acertos.",
@@ -1336,8 +1603,8 @@
     },
     {
       "id": "2026-05-18-fixar-realistic-host-spritesheet-como-anchor-oficial-de-arte-pubpaid",
-      "createdAt": "2026-05-18T20:18:00.000Z",
-      "updatedAt": "2026-05-18T20:18:00.000Z",
+      "createdAt": "2026-05-18T20:18:00Z",
+      "updatedAt": "2026-05-18T20:18:00Z",
       "status": "active",
       "source": "chat",
       "rawRequest": "Anchor oficial: realistic-host-spritesheet.png. Tudo novo deve parecer da mesma familia desse personagem: pixel art com leitura de sprite, mas super realista no volume, roupa, luz, proporcao e presenca. Nao chibi simples, nao cubo, nao cartoon infantil, nao flat demais, nao pintura HD borrada. Assets precisam funcionar em spritesheet/animacao.",
@@ -1420,7 +1687,7 @@
     {
       "id": "2026-05-18-criar-laboratorio-isolado-retro-pool-hall-para-demonstrar-capacidade-tecnica-vis",
       "createdAt": "2026-05-18T23:45:32.436Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "nao e pra mexer no pub paid; trabalhar demonstracoes tecnicas da equipe; estudar Side Pocket SNES e criar mockup/grafico; fazer loops de aprendizado fotografando evolucao ate ficar parecido",
@@ -1514,7 +1781,7 @@
     {
       "id": "2026-05-19-otimizar-pubpaid-para-abrir-mais-rapido-reduzir-preloads-validar-responsividade-",
       "createdAt": "2026-05-19T19:17:16.214Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "ok agora rode uma rodada de optmização, pro jogo abrir mais rapido, e principalmente resposividade, para abrir em todos os tamanhos; depois corrigido: sinuca deve impedir retrato e sempre jogar em horizontal",
@@ -1529,7 +1796,7 @@
     {
       "id": "2026-05-19-testar-pixellab-mcp-usando-diretor-de-jogos-arte-e-gerar-um-asset-pequeno-de-sin",
       "createdAt": "2026-05-19T19:22:18.103Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "teste e crie algo usando nosso diretor ate e esse mcp",
@@ -1673,8 +1940,8 @@
     },
     {
       "id": "2026-05-19-retomar-apos-travamento-da-sessao-conferir-estado-da-correcao-da-sinuca-pubpaid-",
-      "createdAt": "2026-05-19T20:04:06.790Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "createdAt": "2026-05-19T20:04:06.79Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "vc travou",
@@ -1688,8 +1955,8 @@
     },
     {
       "id": "2026-05-19-ajustar-cacapa-da-sinuca-pubpaid-e-ativar-build-real",
-      "createdAt": "2026-05-20T04:10:00.000Z",
-      "updatedAt": "2026-05-20T04:10:00.000Z",
+      "createdAt": "2026-05-20T04:10:00Z",
+      "updatedAt": "2026-05-20T04:10:00Z",
       "status": "done-local",
       "source": "chat",
       "rawRequest": "tem que tirar essa parte de cima da caçapa e deixa ela mais livre pra entra a bola ta muito dificil faça isso depois suba pro pubpaid o jogo novo de sinuca ja pra texte / n e mais texte e real ageite e bote pra rodar",
@@ -1727,8 +1994,8 @@
     },
     {
       "id": "2026-05-20-clarear-regras-vivas-sinuca-pubpaid-e-commitar",
-      "createdAt": "2026-05-20T05:46:47.000Z",
-      "updatedAt": "2026-05-20T05:46:47.000Z",
+      "createdAt": "2026-05-20T05:46:47Z",
+      "updatedAt": "2026-05-20T05:46:47Z",
       "status": "done-local",
       "source": "chat",
       "rawRequest": "nao so par ou imapa de instruiçoes equivalentes pra cada modo de jogo tipo qual bola teria que acerta ou qual tipo de bola seja inteligente e crie uma formula; depois disso ja faça o comit; substituindo a sinuca atual por essa nova",
@@ -1773,7 +2040,7 @@
     {
       "id": "2026-05-20-aplicar-na-damas-pubpaid-as-metas-do-csv-intro-cinematica-coin-flip-camera-livre",
       "createdAt": "2026-05-20T14:54:06.052Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "\\",
@@ -1788,7 +2055,7 @@
     {
       "id": "2026-05-20-corrigir-responsividade-textos-da-damas-pubpaid-centralizar-textos-e-fazer-a-moe",
       "createdAt": "2026-05-20T15:04:17.297Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "n esqueça de levar em conta resposividade; ok so centralize os textos, e depois que a moeda rola, ela tem que liberar o jogo, por isso travou, depois de o jogo acabar contninua o fliuxo normal",
@@ -1803,7 +2070,7 @@
     {
       "id": "2026-05-20-melhorar-damas-demo-com-ia-pensando-3-segundos-e-adicionar-carregamento-0-100-an",
       "createdAt": "2026-05-20T15:56:14.384Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "ta otimo damas, mais na ves do adversario n ta ficando claro o movimento dele porque ta muito rapido faça uma animação tipo no demo, vez da i,a ela pensa por 3 segundos... e depois de entra no jogo pub paid, antes da intro coloque uma tela de carregamento pra ter certesza que nao vai ficar uma tela preta, ponha ate 100 por cento e carregue tudo",
@@ -1833,7 +2100,7 @@
     {
       "id": "2026-05-20-aplicar-no-xadrez-pubpaid-o-mesmo-estilo-aprovado-da-damas-com-mesa-cinematica-e",
       "createdAt": "2026-05-20T16:13:42.904Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "agora faça o mesmo estilo de jogo pra xadrez",
@@ -1864,7 +2131,7 @@
     {
       "id": "2026-05-20-usar-copy-curta-para-postar-noticias-no-grupo-de-vendas-com-link-do-instagram-do",
       "createdAt": "2026-05-20T16:23:36.374Z",
-      "updatedAt": "2026-05-20T16:24:39.100Z",
+      "updatedAt": "2026-05-20T16:24:39.1Z",
       "status": "canceled",
       "source": "chat",
       "rawRequest": "pode posta as noticias no grupo de vendas tambem so pegue e faça resumido e ponha o link do instgran do catalogo e peça siga agente",
@@ -1888,7 +2155,7 @@
     {
       "id": "2026-05-20-incluir-noticias-resumidas-instagram-via-bluestacks-e-renovacao-de-vendas-no-fac",
       "createdAt": "2026-05-20T16:29:27.609Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Adicionar noticias do Catalogo CZS em manutencao a rotina geral: pegar noticias novas/fechadas, resumir, postar tambem nos grupos de venda, incluir link do Instagram do Catalogo e pedir para seguir, publicar no Instagram via BlueStacks quando o usuario liberar; no Facebook renovar todas as vendas.",
@@ -1903,7 +2170,7 @@
     {
       "id": "2026-05-20-refinar-precificacao-ggmax-por-valor-real-do-credito-e-ampliar-mapa-para-streami",
       "createdAt": "2026-05-20T16:34:41.018Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Refinar garimpagem GGMAX: verificar valor real dos créditos antes de definir preço; não vender gift de R como se fosse genérico; incluir janelas/acessos Netflix, ChatGPT e outras assinaturas, com mais profundidade.",
@@ -1918,7 +2185,7 @@
     {
       "id": "2026-05-20-adicionar-categorias-digitais-amplas-e-servico-de-suporte-remoto-t-i-logistico-c",
       "createdAt": "2026-05-20T16:35:30.783Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Pode mandar ver com Game Pass, Netflix/streaming, ChatGPT/Gemini, contas da PlayStation e tudo que der; incluir tambem anuncio: ajeitamos seu computador sem sair de casa, alem do celular, e so entrar em contato -- grupo T.I Logístico CZS.",
@@ -1933,7 +2200,7 @@
     {
       "id": "2026-05-20-corrigir-xadrez-pubpaid-para-usar-modelo-visual-3d-estilo-damas-com-camera-rotat",
       "createdAt": "2026-05-20T16:52:20.492Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "nao era isso que eu queria nao eu queria aqueles modelos 3d que usamos nas damas, com rotação de camera e tudo muito legal, vc fez uma janeçlinha feia de bsota",
@@ -1965,7 +2232,7 @@
     {
       "id": "2026-05-20-criar-propagandas-prontas-para-whatsapp-grupos-da-rotina-de-vendas-digitais-e-su",
       "createdAt": "2026-05-20T17:17:32.265Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Começar a fazer propagandas para WhatsApp/grupos com produtos digitais: gift cards por valor real do crédito, Robux, Uber, streaming, IA, Game Pass, Netflix, ChatGPT, Canva/CapCut e T.I Logístico CZS.",
@@ -1980,7 +2247,7 @@
     {
       "id": "2026-05-20-propagandas-devem-sempre-sair-com-imagem-arte-junto-da-copy",
       "createdAt": "2026-05-20T17:18:19.638Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Regra para propagandas: sempre criar/acompanhar com imagens, não apenas texto, nas campanhas de WhatsApp/grupos.",
@@ -1995,7 +2262,7 @@
     {
       "id": "2026-05-20-garantir-que-o-xadrez-pubpaid-abra-sempre-em-tela-cheia-sem-moldura-de-pagina-he",
       "createdAt": "2026-05-20T17:31:33.417Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "sempre tela cheia sempre",
@@ -2027,7 +2294,7 @@
     {
       "id": "2026-05-20-adicionar-motorista-particular-julia-oliveira-na-rotina-de-propagandas-do-whatsa",
       "createdAt": "2026-05-20T19:29:31.157Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Adicionar propaganda da Julia Oliveira, Motorista Particular, usando a imagem enviada: seguro, pontual, conforto, telefone (68)99900-5172.",
@@ -2042,7 +2309,7 @@
     {
       "id": "2026-05-21-separar-propagandas-por-grupo-vendas-em-grupos-de-venda-motorista-em-uber-transp",
       "createdAt": "2026-05-21T19:23:29.527Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Correção operacional: não postar propaganda em qualquer chat. Separar destino por tipo: grupos de venda recebem vendas/serviços digitais/T.I; grupos Uber/transporte recebem apenas motorista particular; Facebook pode receber tudo depois; Instagram só no final quando o usuário mandar abrir. Antes de enviar, confirmar grupo alvo e categoria.",
@@ -2057,7 +2324,7 @@
     {
       "id": "2026-05-21-regra-final-de-postagem-whatsapp-por-categoria-depois-facebook-marketplace-insta",
       "createdAt": "2026-05-21T19:28:11.408Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Regra final confirmada pelo usuario para propagandas: WhatsApp primeiro e por categoria; grupos de venda recebem vendas/servicos digitais/T.I; grupos Uber/transporte recebem apenas motorista Julia; Facebook Marketplace vem depois do WhatsApp e pode receber todos os anuncios separados; Instagram e somente no final, quando o usuario abrir/autorizar.",
@@ -2072,7 +2339,7 @@
     {
       "id": "2026-05-21-criar-protocolo-operacional-para-automacao-de-propagandas-por-whatsapp-facebook-",
       "createdAt": "2026-05-21T20:01:25.948Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "Criar protocolo para automações de propaganda serem mais rápidas e seguras: listar destinos antes, separar por categoria, validar chat/grupo antes de enviar, WhatsApp primeiro, Facebook Marketplace depois, Instagram só no final.",
@@ -2205,8 +2472,8 @@
     },
     {
       "id": "2026-05-22-finalizar-ux-damas-xadrez-loading-camera-hud",
-      "createdAt": "2026-05-22T05:18:00.000Z",
-      "updatedAt": "2026-05-22T05:18:00.000Z",
+      "createdAt": "2026-05-22T05:18:00Z",
+      "updatedAt": "2026-05-22T05:18:00Z",
       "status": "implemented",
       "source": "chat",
       "rawRequest": "Criar loading de abertura que so para quando tudo carregar, opcao de desligar rotacao do adversario, camera pela borda/toque, remover copy explicando abertura premium, copy mobile correta, botao desistir no Xadrez e HUD sem sobrepor tabuleiro; corrigir Damas e Xadrez e subir online.",
@@ -2359,7 +2626,7 @@
     },
     {
       "id": "2026-05-22-corrigir-sobreposicao-de-hud-nos-jogos-pubpaid-mobile-remover-redundancia-sair-m",
-      "createdAt": "2026-05-22T15:28:50.840Z",
+      "createdAt": "2026-05-22T15:28:50.84Z",
       "updatedAt": "2026-05-22T18:28:41.311Z",
       "status": "mobilehud2-implemented-validated",
       "source": "chat",
@@ -2462,7 +2729,7 @@
     },
     {
       "id": "2026-05-22-corrigir-fluxo-de-cadastro-pagamento-do-torneio-de-damas-janela-de-pagamento-sep",
-      "createdAt": "2026-05-22T16:08:15.090Z",
+      "createdAt": "2026-05-22T16:08:15.09Z",
       "updatedAt": "2026-05-22T18:28:41.311Z",
       "status": "tournamentpay1-implemented-validated-local",
       "source": "chat",
@@ -2587,7 +2854,7 @@
     {
       "id": "2026-05-22-validar-pvp-pubpaid-online-local-com-agentes-guard-review-team-contrato-de-duas-",
       "createdAt": "2026-05-22T18:56:33.122Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "faça os testes online de pvp no jogo pub paid, use agentes para validar tudo e entregue relatorio",
@@ -2602,7 +2869,7 @@
     {
       "id": "2026-05-22-subir-e-sincronizar-todas-as-mudancas-atuais-validar-funcionamento-e-relatar-est",
       "createdAt": "2026-05-22T19:41:35.974Z",
-      "updatedAt": "2026-05-22T19:48:45.170Z",
+      "updatedAt": "2026-05-22T19:48:45.17Z",
       "status": "closed-memory-cleanup",
       "source": "chat",
       "rawRequest": "fizemos mudancas e atualizacoes, agora suba tudo, sincronize e me de um relatorio se esta tudo funcional, inclusive qual seu heart",
@@ -3665,6 +3932,582 @@
         "limpar worktree temporaria e servidor local"
       ],
       "notes": "Nova versao usa cache-bust 20260531-cinema4 e apresenta o CZS como motor de propagacao: console, radar, terminal, graficos, rede de nodes, relatorio de 3 dias, cotas e CTA de venda."
+    },
+    {
+      "id": "2026-06-01-pesquisa-premium-opendesign-corpus",
+      "createdAt": "2026-06-01T00:25:00-05:00",
+      "updatedAt": "2026-06-01T07:12:22-05:00",
+      "status": "corpus-count-complete",
+      "source": "chat",
+      "rawRequest": "Estudar a quantidade exata pedida, usar Open Design, baixar o que precisa, reunir escritorios e agentes online/offline, compartilhar conhecimentos, delegar IAs/subagentes, fazer estudo serio e depois reuniao.",
+      "summary": "Operacao de pesquisa premium para redesenho do CZS com Open Design preparado, agentes paralelos e corpus rastreavel de 3000 entradas unicas.",
+      "normalizedTasks": [
+        "preparar Open Design local",
+        "delegar pesquisa a agentes",
+        "consolidar benchmarks de landing tech e jornal",
+        "consolidar media kits e relatorios de venda",
+        "inventariar provas tecnicas do Projeto Codex",
+        "criar documento mestre",
+        "criar corpus CSV auditavel",
+        "criar coletor reproduzivel de corpus",
+        "criar auditor de contagem",
+        "ler operacionalmente as 3000 referencias",
+        "gerar sintese de conhecimento para redesign",
+        "preparar reuniao antes do redesign"
+      ],
+      "filesTouched": [
+        "docs/commercial/czs-premium-research-operation-2026-06-01.md",
+        "docs/commercial/czs-premium-redesign-meeting-2026-06-01.md",
+        "docs/commercial/czs-premium-research-synthesis-2026-06-01.md",
+        "docs/commercial/research/czs-premium-corpus-2026-06-01.csv",
+        "docs/commercial/research/screening/czs-premium-corpus-screening-2026-06-01.jsonl",
+        "docs/commercial/research/screening/czs-premium-corpus-screening-summary-2026-06-01.json",
+        "docs/commercial/research/screening/czs-premium-corpus-screening-report-2026-06-01.md",
+        "scripts/commercial-research-corpus-collect.js",
+        "scripts/commercial-research-corpus-screen.js",
+        "scripts/commercial-research-synthesis.js",
+        "scripts/commercial-research-corpus-audit.js",
+        ".codex-memory/orders.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "C:/Users/junio/open-design"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "open-design",
+        "benchmark",
+        "landing-page",
+        "media-kit",
+        "relatorio-comercial",
+        "agentes"
+      ],
+      "nextSteps": [
+        "validar visualmente candidatos de media kit",
+        "gerar prototipo isolado no Open Design",
+        "realizar reuniao de decisao",
+        "portar redesign final para divulgue.html"
+      ],
+      "notes": "Corpus atingiu a contagem exata: 500 newspaper_landing, 500 technology_landing, 1000 newspaper_media_kit_report e 1000 website_sales_report, total 3000 URLs unicas. Leitura operacional processou 3000 referencias: 2035 OK por HTML/API/dado estruturado e 965 falhas/bloqueios/rotas ausentes. 1000 media kits seguem candidate_unverified; nao usar esses candidatos como citacao visual sem triagem."
+    },
+    {
+      "id": "2026-06-01-verificar-minimax-m3-no-ollama-checar-gemma-e-outras-opcoes-locais-configurar-va",
+      "createdAt": "2026-06-01T15:02:13.6Z",
+      "updatedAt": "2026-06-01T15:02:13.6Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "parece que tem uma versão nova do minimax que acabou de sair pro ollama a m3, aproveite e veja se o google gemma e outras opções locais estão funcionais e entregue pra sua cli e pro hermes utilizar",
+      "summary": "Verificar MiniMax M3 no Ollama, checar Gemma e outras opções locais, configurar/validar uso pela CLI e pelo Hermes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-grupo-estudos-landing-czs-development",
+      "createdAt": "2026-06-01T10:28:35-05:00",
+      "updatedAt": "2026-06-01T10:28:35-05:00",
+      "status": "development-local-validated",
+      "source": "chat",
+      "rawRequest": "reuna todo mundo e faça um grupo de estudos com tudo refine delegue e me entregue seu melhor trabalho de desenvolvimento",
+      "summary": "Formar grupo de estudos com subagentes, consolidar pesquisa e entregar nova landing comercial premium do Catálogo CZS em desenvolvimento local.",
+      "normalizedTasks": [
+        "delegar bancadas de estudo para matriz, visual, SEO e auditoria",
+        "integrar achados ao redesign da landing",
+        "implementar nova divulgue.html premium",
+        "criar CSS responsivo e JS de rede/contadores",
+        "ajustar SEO/schema comercial no server.js",
+        "validar localmente HTML/CSS/JS/sitemap/JSON-LD",
+        "rodar review team e perf budget"
+      ],
+      "filesTouched": [
+        "divulgue.html",
+        "divulgue.css",
+        "divulgue.js",
+        "server.js",
+        "docs/commercial/czs-study-room-development-delivery-2026-06-01.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/divulgue-studyroom-desktop-v3.png",
+        ".codex-temp/divulgue-studyroom-mobile-v7.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "landing-page",
+        "grupo-de-estudos",
+        "seo",
+        "media-kit",
+        "open-design",
+        "agentes",
+        "render"
+      ],
+      "nextSteps": [
+        "revisar scroll completo em navegador real",
+        "publicar no Render",
+        "verificar /divulgue.html online com marcador 20260601-studyroom1",
+        "conferir JSON-LD e sitemap online"
+      ],
+      "notes": "Landing local agora apresenta sala de controle comercial do Vale do Jurua: jornal hiperlocal, tecnologia visivel, media kit vivo e relatorio de ativo digital. Validacao local passou; review team tem 3 achados fora da landing em cruzeiro-do-sul-barzinho/index.html."
+    },
+    {
+      "id": "2026-06-01-trocar-hermes-para-minimax-m3-como-padrao-geral-medir-limitacoes-praticas-do-min",
+      "createdAt": "2026-06-01T16:05:56.497Z",
+      "updatedAt": "2026-06-01T16:05:56.497Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok então vamos utilizar o minimax como padrão geral agora quero testa-lo quais as limitações dele e do gemma que estão rodando localmente e em nuvem, e principalmente é viável usar eles?",
+      "summary": "Trocar Hermes para MiniMax M3 como padrão geral, medir limitações práticas do MiniMax cloud e Gemma local, e avaliar viabilidade.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-refazer-divulgue-open-design-premium-cinematografico",
+      "createdAt": "2026-06-01T16:11:20.447Z",
+      "updatedAt": "2026-06-01T16:51:56.825Z",
+      "status": "distribution-command-local-validated",
+      "source": "chat",
+      "rawRequest": "usar Open Design para refazer http://127.0.0.1:3124/divulgue.html; carregar o maximo de informacoes vendiveis reais sobre sistemas, Instagram, WhatsApp, Facebook, propagandas, acessos, titulos, lancamentos, tecnologias e numeros comprovaveis; deixar a experiencia premium e cinematografica",
+      "summary": "Reconstruir a landing comercial Divulgue como experiencia premium cinematografica orientada a conversao, consolidando provas reais do ecossistema CZS sem inventar metricas.",
+      "normalizedTasks": [
+        "inventariar provas comerciais reais do projeto",
+        "separar metricas comprovadas de alegacoes nao verificadas",
+        "propor nova direcao premium cinematografica com Open Design",
+        "criar prompt mestre de execucao visual",
+        "refazer divulgue.html com direcao premium cinematografica",
+        "validar desktop e mobile"
+      ],
+      "filesTouched": [
+        ".codex-memory/orders.json",
+        "divulgue.html",
+        "divulgue.css",
+        "divulgue.js",
+        "docs/commercial/czs-divulgue-open-design-master-prompt-2026-06-01.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "C:/Users/junio/open-design",
+        "docs/commercial/czs-premium-research-synthesis-2026-06-01.md",
+        ".codex-temp/catalogo-czs-premium-sales-20260531",
+        ".codex-temp/divulgue-cinema-desktop.png",
+        ".codex-temp/divulgue-cinema-mobile-clean.png",
+        ".codex-temp/divulgue-cinema-v2-desktop.png",
+        ".codex-temp/divulgue-cinema-v2-mobile-fixed.png",
+        ".codex-temp/divulgue-superpowers-1920.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "divulgue",
+        "open-design",
+        "landing-page",
+        "premium",
+        "cinematografico",
+        "conversao",
+        "provas-reais"
+      ],
+      "nextSteps": [
+        "revisar scroll completo em navegador real",
+        "publicar no Render quando solicitado",
+        "validar /divulgue.html online apos deploy"
+      ],
+      "notes": "Pagina corrigida para destacar Catalogo CZS como central de distribuicao: 1610 noticias no snapshot do motor, 12 itens na fila premium, 11 assets WhatsApp, 11 stories/status, 5 sinais de noticia para WhatsApp/Instagram, 8 sinais de vendas/servicos WhatsApp, 10 itens Facebook e 8 Marketplace. Mantida integridade: producao/distribuicao operacional nao e o mesmo que insight oficial de alcance."
+    },
+    {
+      "id": "2026-06-01-manter-chatgpt-codex-como-mente-principal-do-hermes-receber-toda-informacao-deci",
+      "createdAt": "2026-06-01T16:14:43.099Z",
+      "updatedAt": "2026-06-01T16:14:43.099Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "chat gpt e a principal mente, ele deve receber toda informação decidir e delegar",
+      "summary": "Manter ChatGPT/Codex como mente principal do Hermes; receber toda informacao, decidir e delegar para MiniMax e Gemma como workers.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-analisar-video-sobre-atualizacoes-do-hermes-e-mapear-como-incluir-as-8-atualizac",
+      "createdAt": "2026-06-01T16:20:26.434Z",
+      "updatedAt": "2026-06-01T16:20:26.434Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "https://youtu.be/97IO4He9PPc depois eu quero saber como incluir essas 9 ferramentas descritas nesse video no hermes",
+      "summary": "Analisar video sobre atualizacoes do Hermes e mapear como incluir as 8 atualizacoes principais mais o bonus Kanban no Hermes local.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-rodar-teste-complexo-de-orquestracao-hermes-com-codex-mente-principal-workers-mi",
+      "createdAt": "2026-06-01T16:35:08.002Z",
+      "updatedAt": "2026-06-01T16:35:08.002Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça um teste de tarefa complexa pra ver se todas as ias llmas e recursos foram utilizados em conjunto sempre com agentes e subagentes e espalhando conhecimento e rotinas para ele sempre se lembrar",
+      "summary": "Rodar teste complexo de orquestracao Hermes com Codex mente principal, workers MiniMax/Gemma/Qwen/Llama, relatorio rastreavel e rotina persistida.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-aplicar-atualizacoes-do-hermes-mapeadas-no-video-update-toolsets-video-x-search-",
+      "createdAt": "2026-06-01T16:41:13.563Z",
+      "updatedAt": "2026-06-01T16:41:13.563Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "pois faça essas att",
+      "summary": "Aplicar atualizacoes do Hermes mapeadas no video: update, toolsets video/x_search/moa/context, gateway, auditoria e pendencias de chaves.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-finalizar-integracoes-hermes-pendentes-migrar-chaves-existentes-validar-gemini-f",
+      "createdAt": "2026-06-01T16:53:06.441Z",
+      "updatedAt": "2026-06-01T16:53:06.441Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "termine isso tudo",
+      "summary": "Finalizar integracoes Hermes pendentes: migrar chaves existentes, validar Gemini/FAL/browser/CDP/gateway e listar apenas bloqueios reais por credencial ausente.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-01-social-ready-capture-cotas",
+      "at": "2026-06-01T17:06:35.045Z",
+      "request": "Executar o que estava pronto, rodar nova captação, priorizar mídia real da fonte, criar propaganda de cotas das tecnologias e preparar publicação segura.",
+      "status": "assets_ready_publication_blocked_until_safe_destination_validation",
+      "files": [
+        "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/FINAL_EXECUTION_AND_CAPTURE_REPORT.md",
+        "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/PUBLICATION_READY_QUEUE.json",
+        "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/source-capture-round/source-capture-manifest.json",
+        "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/distribution-ads/seja-dono-cotas-tecnologias-manifest.json"
+      ]
+    },
+    {
+      "id": "2026-06-01-divulgue-open-design-command5-premium",
+      "at": "2026-06-01T17:18:57.464Z",
+      "request": "Refazer divulgue.html usando referencias Open Design e paginas prontas, deixando cinematografico premium com tecnologias, interatividade, relatorios WhatsApp/Instagram/Facebook e numeros vendaveis.",
+      "status": "implemented_validated_opened_external",
+      "files": [
+        "C:/Users/junio/projeto codex/divulgue.html",
+        "C:/Users/junio/projeto codex/divulgue.css",
+        "C:/Users/junio/projeto codex/divulgue.js",
+        "C:/Users/junio/projeto codex/.codex-temp/divulgue-command5-stage-adjusted-1920.png"
+      ]
+    },
+    {
+      "id": "2026-06-01-hermes-office-bridge-final-integration",
+      "createdAt": "2026-06-01T17:19:28.151Z",
+      "updatedAt": "2026-06-01T17:19:28.151Z",
+      "status": "implemented-local-validated-remote-render-blocked-by-key-cli",
+      "source": "chat",
+      "rawRequest": "resolva tudo que poder e so me retorne o que nao poder resolver, crie fluxos inteligentes pra tudo e se integra ao hermes finalmente com sua cli como dizia no video",
+      "summary": "Criar bridge Hermes/Codex para escritorios locais, agentes, web Exa/Firecrawl/Tavily, CLI hermes-project-codex-hq e status Render.",
+      "normalizedTasks": [
+        "integrar Hermes a CLI local do Projeto Codex",
+        "criar fluxo status/brief/dispatch/run/render",
+        "acionar escritorios reais locais e registrar ordem",
+        "validar Hermes usando terminal para chamar o wrapper",
+        "registrar bloqueios restantes por credencial ou ferramenta ausente"
+      ],
+      "filesTouched": [
+        "scripts/hermes-office-bridge.js",
+        "package.json",
+        ".codex-temp/hermes-office/latest-status.json",
+        ".codex-temp/hermes-office/latest-status.md",
+        "data/office-orders.json",
+        "C:/Users/junio/.hermes/.env",
+        "C:/Users/junio/AppData/Local/hermes/tools/hermes-project-codex-hq.ps1",
+        "C:/Users/junio/AppData/Local/hermes/hermes-agent/.venv/Scripts/hermes-project-codex-hq.cmd",
+        "C:/Users/junio/AppData/Local/hermes/docs/HERMES_PROJECT_CODEX_HQ.md"
+      ],
+      "tags": [
+        "hermes",
+        "codex-principal",
+        "agentes-locais",
+        "render",
+        "exa",
+        "firecrawl",
+        "tavily"
+      ],
+      "nextSteps": [
+        "instalar Render CLI e configurar RENDER_API_KEY para operacao remota",
+        "configurar OPENROUTER_API_KEY para MoA completo",
+        "configurar XAI_API_KEY ou OAuth para X/Grok"
+      ],
+      "notes": "Hermes terminal passou a chamar hermes-project-codex-hq.cmd depois de forcar HERMES_GIT_BASH_PATH para Git Bash real."
+    },
+    {
+      "id": "2026-06-01-instagram-highlights-stories-capture-final",
+      "createdAt": "2026-06-01T17:43:18.252Z",
+      "updatedAt": "2026-06-01T15:26:45-05:00",
+      "status": "corrected-news-highlight-removed-service-highlights-blocked-by-ui",
+      "source": "chat",
+      "rawRequest": "n esqueça de criar os destaques com essas que esta criando e seu objetivo termina destaques, captação noticias e storys como ordenado",
+      "summary": "Destaque Noticias removido; Cotas e PubPaid permanecem; destaques de servico prontos, mas criacao automatica bloqueada por seletor/preview preto.",
+      "normalizedTasks": [
+        "confirmar perfil Instagram antes de tocar",
+        "criar destaque Cotas com propaganda de cotas",
+        "criar destaque Noticias somente com stories editoriais/noticia",
+        "corrigir destaque PubPaid separado de Noticias",
+        "registrar evidencias e nao acionar WhatsApp/Facebook sem destino confirmado"
+      ],
+      "filesTouched": [
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlights-execution-log.json",
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\INSTAGRAM_HIGHLIGHTS_EXECUTION_LOG.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-cotas-confirm.png",
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-noticias-confirm.png",
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-pubpaid-confirm.png",
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-final-profile.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "stories",
+        "destaques",
+        "noticias",
+        "cotas",
+        "pubpaid"
+      ],
+      "nextSteps": [
+        "Criar Servicos, Anuncie, Ferramentas e Criador somente quando o Instagram mostrar miniaturas corretas.",
+        "Nao selecionar noticias antigas, quadro verde ou preview preto.",
+        "Manter noticias fora de grupos de venda."
+      ],
+      "notes": "Correcao aplicada em 2026-06-01: destaque Noticias removido com evidencia ig-profile-after-delete-noticias-highlight-confirmed.png. Repost Servicos abriu preview preto e foi descartado."
+    },
+    {
+      "id": "2026-06-01-divulgue-premium-layouts-instagram-insights",
+      "at": "2026-06-01T17:58:44.3576742Z",
+      "request": "Nova rodada de procura de layouts e recursos premium para sites e adicionar insights do Instagram/Catálogo CZS na landing divulgue.",
+      "status": "implemented_validated_opened_external",
+      "files": [
+        "C:/Users/junio/projeto codex/divulgue.html",
+        "C:/Users/junio/projeto codex/divulgue.css",
+        "C:/Users/junio/projeto codex/.codex-temp/divulgue-insights1-section-1920.png"
+      ]
+    },
+    {
+      "id": "2026-06-01-hermes-github-token-operational",
+      "createdAt": "2026-06-01T18:19:14.383Z",
+      "updatedAt": "2026-06-01T18:19:14.383Z",
+      "status": "implemented-validated",
+      "source": "chat",
+      "rawRequest": "github token fornecido para instalar no Hermes",
+      "summary": "Adicionar GITHUB_TOKEN/GH_TOKEN ao Hermes, validar API GitHub e repo catalogo-cruzeiro.",
+      "normalizedTasks": [
+        "instalar token nos dois .env do Hermes",
+        "validar usuario GitHub",
+        "validar permissao no repo",
+        "atualizar brief do Hermes Office Bridge"
+      ],
+      "filesTouched": [
+        "C:/Users/junio/.hermes/.env",
+        "C:/Users/junio/AppData/Local/hermes/.env",
+        "scripts/hermes-office-bridge.js",
+        "C:/Users/junio/AppData/Local/hermes/docs/HERMES_PROJECT_CODEX_HQ.md"
+      ],
+      "tags": [
+        "hermes",
+        "github",
+        "token",
+        "skills-hub"
+      ],
+      "notes": "Token validado sem expor segredo: API /user retornou tibiaczs1-star e repo tibiaczs1-star/catalogo-cruzeiro retornou permissoes pull/push/admin."
+    },
+    {
+      "id": "2026-06-02-czs-instagram-feed-12-real-news-final",
+      "createdAt": "2026-06-02T06:21:42.9219768Z",
+      "updatedAt": "2026-06-02T06:21:42.9219768Z",
+      "status": "completed-validated",
+      "source": "chat",
+      "rawRequest": "termine: finalizar publicacao/verificacao das 12 noticias no feed Instagram usando fotos/videos reais da fonte; print apenas como ultimo recurso; manter noticias fora de grupos de vendas",
+      "summary": "Feed Instagram finalizado com 12 noticias em cards de foto real da fonte; card antigo em print foi excluido.",
+      "normalizedTasks": [
+        "verificar grade do Instagram",
+        "publicar noticia 01 real que faltava",
+        "confirmar noticias 01 a 12 com fotos reais da fonte",
+        "excluir post antigo feito com print/fonte capturada",
+        "registrar evidencias locais"
+      ],
+      "filesTouched": [
+        ".codex-memory/orders.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\catalogo-czs-destaques-gpt-20260601\\final-check-20260602\\05-profile-after-real-01.png",
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\catalogo-czs-destaques-gpt-20260601\\final-check-20260602\\08-profile-grid-after-delete-old-print.png",
+        "C:\\Users\\junio\\projeto codex\\.codex-temp\\catalogo-czs-destaques-gpt-20260601\\final-check-20260602\\delete-old-print\\04-after-delete.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "feed",
+        "noticias",
+        "foto-real",
+        "sem-print"
+      ],
+      "nextSteps": [
+        "Para proximas noticias do feed, usar source_image/source_video; print apenas se nao houver midia real aproveitavel.",
+        "Noticias continuam proibidas em grupos de venda."
+      ],
+      "notes": "Validacao visual: grade mostrou 12 posts recentes com FOTO REAL DA MATERIA; post antigo com FONTE CAPTURADA foi aberto, confirmado e excluido."
+    },
+    {
+      "id": "2026-06-02-corrigir-cheffe-call-noticias-aprovadas-online-ficavam-presas-e-nao-eram-aplicad",
+      "createdAt": "2026-06-02T11:40:17.826Z",
+      "updatedAt": "2026-06-02T11:40:17.826Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "a chefe call tem 8-0 noticias faltando aprovação online e mesmo que vc aprove elas não saem pra ser publicadas, por favor corrija e faça acontecer cada noticia e depois conserte o funcionamento",
+      "summary": "Corrigir Cheffe Call: notícias aprovadas online ficavam presas e não eram aplicadas/publicadas.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "scripts/news-image-approval-queue.js",
+        "server.js",
+        "scripts/codex-memory.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "cheffe-call",
+        "noticias",
+        "aprovacao-online",
+        "bugfix"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-rodada-zap-executada-com-destino-seguro-vendas-servicos-convites-enviados-aos-gr",
+      "createdAt": "2026-06-02T12:26:03.319Z",
+      "updatedAt": "2026-06-02T12:26:03.319Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Retomar e fazer as devidas postagens da rodada do zap, sem esquecer vendas, servicos, noticias e convites.",
+      "summary": "Rodada Zap executada com destino seguro: vendas/servicos/convites enviados aos grupos liberados e noticias enviadas apenas ao Catalogo CZS; bloqueios registrados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-nova-arte-do-iphone-11-verde-r-950-criada-e-rodada-whatsapp-corrigida-para-artes",
+      "createdAt": "2026-06-02T12:44:59.926Z",
+      "updatedAt": "2026-06-02T12:44:59.926Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Adicionar outro iPhone 11 verde 64 GB, bateria 100%, sem Face ID, tela trocada com garantia, original de retirada de outra peca, preco R$ 950; continuar a rodada com artes e legendas individuais.",
+      "summary": "Nova arte do iPhone 11 verde R$ 950 criada e rodada WhatsApp corrigida para artes e legendas atomicas nos quatro grupos de venda liberados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-depois-de-concluir-pendencias-da-rodada-concentrar-o-restante-da-execucao-no-ins",
+      "createdAt": "2026-06-02T12:59:12.825Z",
+      "updatedAt": "2026-06-02T12:59:12.825Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quando acabar gaste todas suas fichas no Instagram",
+      "summary": "Depois de concluir pendencias da rodada, concentrar o restante da execucao no Instagram, mantendo validacao visual antes de publicar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-rodar-captacao-ampla-de-noticias-e-sinais-sociais-fontes-web-catalogo-czs-on-ren",
+      "createdAt": "2026-06-02T13:36:28.805Z",
+      "updatedAt": "2026-06-02T13:36:28.805Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quando termina quero mais captção em todo e qualquer lugar que existir noticia inclusive do catalogo czs, on render, e meta feed, meta compartilhamento meta storyys chegamos a 15 mil views",
+      "summary": "Rodar captação ampla de notícias e sinais sociais: fontes web, Catálogo CZS/on Render e Meta feed/compartilhamentos/stories quando acessível com segurança.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "captacao",
+        "noticias",
+        "render",
+        "meta",
+        "facebook",
+        "instagram",
+        "stories",
+        "views"
+      ],
+      "nextSteps": [
+        "Rodar captura web atualizada; verificar Catálogo CZS online/on Render; capturar sinais Meta acessíveis sem publicar; consolidar delta editorial seguro."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-correcao-do-catalogo-czs-feita-8-cards-imagens-de-noticias-publicados-no-whatsap",
+      "createdAt": "2026-06-02T13:36:28.830Z",
+      "updatedAt": "2026-06-02T13:36:28.830Z",
+      "status": "completed-validated",
+      "source": "chat",
+      "rawRequest": "Corrigir postagem do Catálogo CZS: texto foi enviado onde deveria haver imagens; refazer cards e publicar imagens no Catálogo CZS.",
+      "summary": "Correção do Catálogo CZS feita: 8 cards/imagens de notícias publicados no WhatsApp Catálogo CZS após validação de destino.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".codex-temp/zap-round-20260602/generate_news_correction_cards.py",
+        ".codex-temp/zap-round-20260602/post_news_cards_to_catalogo.js",
+        ".codex-temp/zap-round-20260602/news-catalogo-czs-cards-v4/manifest.json",
+        ".codex-temp/zap-round-20260602/news-catalogo-czs-cards-post-log.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/zap-round-20260602/news-catalogo-czs-cards-posted.png"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "whatsapp",
+        "noticias",
+        "cards",
+        "correcao-visual"
+      ],
+      "nextSteps": [],
+      "notes": "O envio textual anterior permaneceu como erro histórico; a correção visual entrou no Catálogo com 8 imagens/cards."
     }
   ]
 }

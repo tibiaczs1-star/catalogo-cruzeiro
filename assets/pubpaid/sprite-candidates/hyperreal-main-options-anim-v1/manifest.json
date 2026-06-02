@@ -1,0 +1,87 @@
+{
+  "created_at": "2026-06-01T11:23:45",
+  "status": "review draft; generated from hyperreal front concepts; not applied to runtime; side/back and gesture overlays need manual art pass before production",
+  "frame_size": [
+    96,
+    144
+  ],
+  "sheet_size": [
+    384,
+    1152
+  ],
+  "columns": 4,
+  "rows": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "animations": [
+    "idle_breathe",
+    "walk",
+    "idle_phone",
+    "wave",
+    "receive_item",
+    "win_pose"
+  ],
+  "anchor": [
+    48,
+    138
+  ],
+  "hitbox": {
+    "x": 34,
+    "y": 96,
+    "w": 30,
+    "h": 39
+  },
+  "hurtbox": {
+    "x": 25,
+    "y": 18,
+    "w": 46,
+    "h": 118
+  },
+  "interaction_box": {
+    "front": {
+      "x": 28,
+      "y": 92,
+      "w": 40,
+      "h": 42
+    }
+  },
+  "characters": {
+    "caio_pix": {
+      "name": "Caio Pix",
+      "role": "protagonista masculino / carteira digital / rua-bar",
+      "sheets": {
+        "idle_breathe": "caio_pix/caio_pix_idle_breathe_8dir_4f.png",
+        "walk": "caio_pix/caio_pix_walk_8dir_4f.png",
+        "idle_phone": "caio_pix/caio_pix_idle_phone_8dir_4f.png",
+        "wave": "caio_pix/caio_pix_wave_8dir_4f.png",
+        "receive_item": "caio_pix/caio_pix_receive_item_8dir_4f.png",
+        "win_pose": "caio_pix/caio_pix_win_pose_8dir_4f.png"
+      },
+      "quality_notes": [],
+      "contact_board": "caio_pix/caio_pix_animation_contact_board.png"
+    },
+    "rafa_dealer": {
+      "name": "Rafa Dealer",
+      "role": "protagonista feminina premium / dealer estrategista",
+      "sheets": {
+        "idle_breathe": "rafa_dealer/rafa_dealer_idle_breathe_8dir_4f.png",
+        "walk": "rafa_dealer/rafa_dealer_walk_8dir_4f.png",
+        "idle_phone": "rafa_dealer/rafa_dealer_idle_phone_8dir_4f.png",
+        "wave": "rafa_dealer/rafa_dealer_wave_8dir_4f.png",
+        "receive_item": "rafa_dealer/rafa_dealer_receive_item_8dir_4f.png",
+        "win_pose": "rafa_dealer/rafa_dealer_win_pose_8dir_4f.png"
+      },
+      "quality_notes": [],
+      "contact_board": "rafa_dealer/rafa_dealer_animation_contact_board.png"
+    }
+  },
+  "combined_contact_board": "combined_animation_contact_board.png",
+  "html": "index.html"
+}

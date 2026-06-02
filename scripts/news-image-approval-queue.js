@@ -321,13 +321,52 @@ function findAuditItem(slug = "") {
   return payload.allQueue.find((item) => item.slug === slug) || null;
 }
 
+function normalizeArticleApprovalItem(item = {}, slug = "") {
+  const normalized = {
+    slug: safeText(item.slug || slug, 220),
+    title: safeText(item.title || "Sem titulo", 260),
+    category: safeText(item.category, 120),
+    sourceName: safeText(item.sourceName || item.source || item.sourceLabel, 120),
+    publishedAt: safeText(item.publishedAt || item.date || item.createdAt, 80),
+    level: "manual-review",
+    reasons: ["frontend-manual-review"],
+    imageUrl: safeText(item.imageUrl || item.feedImageUrl || item.sourceImageUrl, 1200),
+    effectiveFocus: safeText(item.effectiveFocus || item.imageFocus, 80),
+    suggestedFocus: "",
+    hasManualFocus: Boolean(item.hasManualFocus || item.imageFocus || item.effectiveFocus),
+    isNewSinceLastAudit: false,
+    dimensionsFromUrl: null,
+    signals: {},
+    articleUrl: item.slug ? `/noticia.html?slug=${encodeURIComponent(item.slug)}` : "",
+    latestDecision: null,
+    decisionStatus: "pending",
+    decisionOpen: false,
+    pending: true
+  };
+  normalized.suggestedFocus = getSuggestedFocus(normalized);
+  return normalized;
+}
+
+function findArticleApprovalItem(slug = "") {
+  const targetSlug = safeText(slug, 220);
+  if (!targetSlug) return null;
+  const runtimePayload = readJson(RUNTIME_NEWS_FILE, null);
+  const runtimeItems = Array.isArray(runtimePayload?.items) ? runtimePayload.items : [];
+  const archiveItems = readJson(NEWS_ARCHIVE_FILE, []);
+  const staticItems = loadStaticNewsData();
+  const article = [runtimeItems, Array.isArray(archiveItems) ? archiveItems : [], staticItems]
+    .flat()
+    .find((item) => item?.slug === targetSlug);
+  return article ? normalizeArticleApprovalItem(article, targetSlug) : null;
+}
+
 function recordImageApprovalDecision(body = {}) {
   const slug = safeText(body.slug || body.id, 220);
   const action = normalizeDecision(body.decision || body.action || body.status);
   if (!slug) return { ok: false, status: 400, error: "Informe o slug da notícia." };
   if (!action) return { ok: false, status: 400, error: "Informe a decisão de foto/foco." };
 
-  const auditItem = findAuditItem(slug);
+  const auditItem = findAuditItem(slug) || findArticleApprovalItem(slug);
   if (!auditItem) return { ok: false, status: 404, error: "Item de foto/foco não encontrado na fila." };
 
   const replacementImageUrl = normalizeUrl(body.replacementImageUrl || body.imageUrl || "");
@@ -370,10 +409,12 @@ function recordImageApprovalDecision(body = {}) {
   });
   nextDecisions.push(decision);
   writeApprovalStore({ ...store, decisions: nextDecisions });
+  const applied = applyPendingImageApprovalDecisions({ source: body.source || "image-approval-decision" });
 
   return {
     ok: true,
     decision,
+    applied,
     queue: buildImageApprovalQueue({ newOnly: false })
   };
 }

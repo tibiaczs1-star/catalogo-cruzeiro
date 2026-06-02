@@ -124,6 +124,73 @@ body.detail-body .detail-back-button span {
   line-height: 1;
 }
 
+body.detail-body .detail-audio-reader,
+body.detail-body .detail-video-caption {
+  display: grid;
+  gap: 1rem;
+  margin: 1.15rem 0;
+  border: 1px solid rgba(240, 180, 41, 0.28);
+  border-radius: 12px;
+  padding: clamp(1rem, 2.4vw, 1.35rem);
+  background:
+    linear-gradient(135deg, rgba(240, 180, 41, 0.13), rgba(97, 183, 255, 0.08)),
+    rgba(5, 22, 38, 0.86);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+}
+
+body.detail-body .detail-audio-reader {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+body.detail-body .detail-audio-reader[hidden],
+body.detail-body .detail-video-caption[hidden] {
+  display: none !important;
+}
+
+body.detail-body .detail-audio-reader h2,
+body.detail-body .detail-video-caption h2 {
+  margin: 0.15rem 0 0.45rem;
+  color: #fff7dc;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.25rem, 2.8vw, 1.7rem);
+  line-height: 1.08;
+}
+
+body.detail-body .detail-audio-reader p,
+body.detail-body .detail-video-caption p {
+  margin: 0;
+  color: rgba(248, 251, 255, 0.84);
+}
+
+body.detail-body .detail-audio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+body.detail-body #detail-audio-play.is-playing {
+  background: #18c468;
+  color: #061220;
+}
+
+@media (max-width: 720px) {
+  body.detail-body .detail-audio-reader {
+    grid-template-columns: 1fr;
+  }
+
+  body.detail-body .detail-audio-actions {
+    justify-content: stretch;
+  }
+
+  body.detail-body .detail-audio-actions .solid-button,
+  body.detail-body .detail-audio-actions .outline-button {
+    flex: 1 1 120px;
+    justify-content: center;
+  }
+}
+
 body.detail-body .top-strip {
   display: flex;
   justify-content: space-between;

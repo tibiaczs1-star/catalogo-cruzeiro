@@ -2,6 +2,73 @@
 
 Atualizado: 2026-05-27
 
+## Rodada Atual - 20260602-hermes-opendesign-desk1
+
+- Configurado `OpenDesign Desk` como mesa de pedidos de design operada pelo Hermes, sem instalar runtime externo.
+- Criado `scripts/hermes-opendesign-bridge.js` com comandos `status`, `brief`, `resources` e `request`.
+- Comandos npm adicionados: `hermes:opendesign:status`, `hermes:opendesign:brief`, `hermes:opendesign:resources` e `hermes:opendesign:request`.
+- Regra operacional: Codex/openai-codex segue diretor final; Hermes coordena; workers pesquisam, rascunham e revisam; Qwen permanece code-only.
+- Catalogo GitHub inicial: Open CoDesign, OpenPencil, ZSeven-W OpenPencil, Open Design Framework, OpenGenerativeUI, Shadcn Space, Tailark Blocks, Flowbite, TypeUI, Onlook e LayoutPrompter.
+- Pedido inicial registrado em `data/opendesign-orders.json`; prompt operacional em `.codex-temp/hermes-opendesign/latest-request.md`; status em `.codex-temp/hermes-opendesign/latest-status.md`.
+- Validacao: `node --check scripts/hermes-opendesign-bridge.js`, `npm run hermes:opendesign:status`, `brief`, `resources`, `request` e `git diff --check` nos arquivos da frente.
+
+## Rodada Atual - 20260602-hermes-continuity-router1
+
+- Criado `scripts/hermes-continuity-router.js` para testar troca de modelo/linguagem no Hermes e escolher suportes vivos por latencia.
+- Comandos adicionados: `npm run hermes:continuity`, `npm run hermes:continuity:fast` e `npm run hermes:continuity:watch`.
+- Regra implementada: `openai-codex/gpt-5.5` segue autoridade quando saudavel; se falhar com sintoma de auth, o script avisa para reautenticar com `hermes auth add openai-codex`.
+- MiniMax e testado junto com Codex e demais workers; quando o teste direto do Ollama nao entrega resposta final confiavel, o router tenta MiniMax pela rota Hermes.
+- Validacao completa: Codex OK; MiniMax OK via Hermes; Llama/Gemma/Gemini foram os 3 suportes mais rapidos no ciclo completo; Qwen ficou code-only; NVIDIA respondeu mas mais lento.
+- Relatorio vivo: `.codex-temp/hermes-continuity/latest.md` e `C:\Users\junio\AppData\Local\hermes\state\hermes_continuity_router_latest.json`.
+
+## Rodada Atual - 20260601-czs-social-premium-correction-safe
+
+- Frente social premium corrigida com foco em seguranca de destino: o destaque `Noticias` foi removido do Instagram; `Cotas` e `PubPaid` permanecem.
+- Os novos destaques institucionais (`Servicos`, `Anuncie`, `Ferramentas`, `Criador`) estao prontos em arte, mas a criacao automatica ficou bloqueada: o seletor mostrava noticias antigas/Cotas/quadro verde, e o repost de `Servicos` abriu preview preto no compositor.
+- Captura de noticias atualizada: 283 itens, 185 de hoje, 360 ativos e 480 no arquivo. `pcac` abortou por timeout; demais fontes principais responderam.
+- Audio/caption: `noticia.js` e `scripts/capture-latest-news.js` agora mantem narracao `pt-BR` e bloqueiam fallback para portugues de Portugal.
+- Validacao: `node --check`, `py -m py_compile`, `node scripts/capture-latest-news.js` e `npm run review:team` OK. Os 3 achados restantes sao de `cruzeiro-do-sul-barzinho/index.html`, fora da frente social.
+- Relatorio da rodada: `.codex-temp/social-total-correction-20260601/SOCIAL_PREMIUM_TOTAL_CORRECTION_STATUS.md`.
+
+## Rodada Atual - 20260602-hermes-chatgpt-minimax-cdp-recovery
+
+- Hermes diagnosticado apos falha em ciclos de agentes/imagem: MiniMax nuvem nao estava disponivel porque `MiniMax` API key e `MiniMax OAuth` seguem sem configuracao/login no `hermes status`.
+- ChatGPT/Codex parecia logado, mas o pool `openai-codex` tinha entradas `dead 401`, uma `exhausted 429` e duplicatas `oauth-11`/`oauth-12`, causando falhas intermitentes em subagentes.
+- Backup criado antes da higiene: `C:\Users\junio\AppData\Local\hermes\auth.backup-20260602-005548.json`.
+- Removidas apenas as entradas ruins do pool; restaram 5 credenciais limpas (`openai-codex-oauth-2` a `openai-codex-oauth-6`) e `last_auth_error` foi limpo.
+- Chrome CDP estava desligado em `127.0.0.1:9222`; foi relancado com `--remote-debugging-port=9222`, `--remote-allow-origins=*` e perfil `C:\Users\junio\AppData\Local\hermes\chrome-cdp-profile`.
+- Validacao final: `hermes -z "Responda exatamente: OK-HERMES-CODEX" --provider openai-codex -m gpt-5.5` retornou `OK-HERMES-CODEX`; browser tool com `Example Domain` retornou `Example Domain`.
+- Pendencia: para MiniMax nuvem, configurar `MiniMax`/`MiniMax-CN` API key ou executar `hermes auth add minimax-oauth`; ate isso, o Hermes nao consegue usar MiniMax como worker cloud.
+
+## Rodada Atual - 20260601-hermes-minimax-gemma-local1
+
+- Hermes/Ollama atualizado em escopo local: Ollama 0.24.0 confirmou `minimax-m3:cloud` no catalogo, e `gemma3:1b`/`gemma3:4b` foram baixados para uso local.
+- Perfil ativo do Hermes nesta sessao: `C:\Users\junio\.hermes\config.yaml` via `C:\Users\junio\AppData\Local\hermes\hermes-agent\.venv\Scripts\hermes.exe`; o `hermes` nao estava no PATH da sessao.
+- Regra final do usuario: ChatGPT/Codex `openai-codex/gpt-5.5` e a mente principal; recebe tudo, decide, delega e sintetiza. MiniMax/Gemma/Qwen/Llama sao workers, nao autoridade final.
+- Config do Hermes preserva `openai-codex/gpt-5.5` como primary e adiciona fallback: `minimax-m3:cloud`, `gemma3:4b`, `gemma3:1b`, `qwen2.5:3b`, `llama3.2:3b`, todos via `custom:local-ollama`.
+- Foi adicionado `model.ollama_num_ctx: 65536` e declarados os modelos locais/cloud no provider `local-ollama`; backup criado em `C:\Users\junio\.hermes\config.yaml.bak-minimax-gemma-20260601T151632Z`.
+- Validacao: `hermes fallback list` mostrou primary/fallback corretos; smokes Hermes retornaram `OK-HERMES-GEMMA-1B`, `OK-HERMES-GEMMA-4B` e `OK-HERMES-MINIMAX-M3`.
+- Teste complexo validado em `C:\Users\junio\AppData\Local\hermes\state\hermes_complex_swarm_latest.json`: workers `minimax-m3:cloud`, `gemma3:4b`, `gemma3:1b`, `qwen2.5-coder:3b` e `llama3.2:3b` responderam com `run_id`, e Codex fez a decisao final. Codex aprovou MiniMax/Llama/Gemma4 como apoio, restringiu Qwen a codigo revisado e reprovou Gemma1 para validar dominio/credibilidade.
+- Rotina persistida em `C:\Users\junio\AppData\Local\hermes\docs\HERMES_CODEX_SWARM_PROTOCOL.md` e `C:\Users\junio\.hermes\memories\USER.md`; gateway Hermes iniciado e `moa`/`context_engine` habilitados no CLI.
+- Video `https://youtu.be/97IO4He9PPc` identificado como 8 atualizacoes principais + bonus Kanban: Session Recall, background tasks, Grok OAuth/X, PowerShell nativo, Codex CLI, computer use, video generation, `/goals`, e Kanban triage/decompose/swarm.
+- Atualizacoes aplicadas em 2026-06-01: `hermes update` deixou `Hermes Agent v0.15.1 (2026.5.29)` como up to date; `npm audit fix` no `hermes-agent` zerou vulnerabilidades Node; `video`, `video_gen`, `x_search`, `moa` e `context_engine` ficaram habilitados no CLI; gateway foi iniciado via scheduled task. Pendencias restantes dependem de credenciais/API keys: xAI/Grok (`XAI_API_KEY` ou OAuth), video providers (FAL/Runway/PixVerse), web search keys, Gemini/MiniMax OAuth e opcional `GITHUB_TOKEN`.
+- Finalizacao adicional: chaves existentes no `.env` antigo de `C:\Users\junio\AppData\Local\hermes` foram migradas para `C:\Users\junio\.hermes\.env` com backup `C:\Users\junio\.hermes\.env.bak-key-migrate-20260601T165046Z`. `GEMINI_API_KEY` foi reconhecida e smoke retornou `OK-GEMINI-KEY`; `image_gen` e `video_gen` ficaram disponiveis no `doctor`; Chrome CDP foi iniciado em `127.0.0.1:9222` e o browser smoke retornou `Example Domain`. Restam sem credencial local: `XAI_API_KEY`/xAI OAuth, `OPENROUTER_API_KEY` para MoA completo, e chaves EXA/Tavily/Firecrawl/Parallel para web avancado.
+- Web avancado concluido com chaves fornecidas pelo usuario: `FIRECRAWL_API_KEY`, `EXA_API_KEY` e `TAVILY_API_KEY` adicionadas em `C:\Users\junio\.hermes\.env`; `web.search_backend: exa` e `web.extract_backend: firecrawl`; smokes diretos Exa/Tavily/Firecrawl retornaram 200 e Hermes web retornou `Example Domain`.
+- Ponte Hermes/Codex para escritorios locais concluida em 2026-06-01: `scripts/hermes-office-bridge.js` cria fluxos `status`, `brief`, `dispatch`, `run` e `render`; comandos npm `hermes:office:*`; wrapper Hermes `C:\Users\junio\AppData\Local\hermes\hermes-agent\.venv\Scripts\hermes-project-codex-hq.cmd`; docs em `C:\Users\junio\AppData\Local\hermes\docs\HERMES_PROJECT_CODEX_HQ.md`.
+- Validacao da ponte: `npm run hermes:office:brief` mostra Codex principal, 181 agentes, Exa/Firecrawl, e Render bloqueado por CLI/chave; `npm run hermes:office:run` executou `scripts/real-agents-runtime.js` e gerou `.codex-temp/real-agents/latest-run.*`; Hermes via tool `terminal` executou `hermes-project-codex-hq.cmd brief` e retornou `Web: busca=exa; extracao=firecrawl; backend=firecrawl`.
+- Correcao terminal Hermes/Windows: `HERMES_GIT_BASH_PATH=C:\Program Files\Git\bin\bash.exe` foi adicionado ao `.env` porque o terminal do Hermes estava encontrando o `bash.exe` do WSL e falhava sem distro instalada.
+- Render CLI instalado localmente sem admin em `C:\Users\junio\AppData\Local\hermes\bin\render.exe`, versao `render v2.19.0`, baixada do release oficial `render-oss/cli` e validada contra `SHA256SUMS`; o bridge agora injeta `C:\Users\junio\AppData\Local\hermes\bin` no PATH. Render remoto ainda depende de `RENDER_API_KEY` ou login Render.
+- `RENDER_API_KEY` fornecida pelo usuario foi adicionada a `C:\Users\junio\.hermes\.env`; API REST Render validada com status 200 e servicos `catalogo-cruzeiro-web`/`catalogo-cruzeiro` listados. Criado `scripts/render-api-bridge.js`, npm `hermes:render:*`, wrapper `hermes-render-api.cmd`; Hermes executou `hermes-render-api.cmd status --service catalogo-cruzeiro-web` e retornou ultimo deploy `live`.
+- `OPENROUTER_API_KEY` fornecida pelo usuario foi adicionada e sincronizada entre `C:\Users\junio\.hermes\.env` e `C:\Users\junio\AppData\Local\hermes\.env`; OpenRouter `/api/v1/key` retornou 200, `hermes doctor` marcou `OpenRouter API`, `moa` e `web` como disponiveis. `npm audit fix` no `hermes-agent` zerou vulnerabilidades. MoA foi ajustado para modelos gratuitos disponiveis (`google/gemma-4-31b-it:free` como agregador) e smoke Hermes retornou `OK-MOA-OPENROUTER`.
+
+## Rodada Atual - 20260529-pubpaid-legal2
+
+- Criado e refeito pacote juridico-operacional atualizado em `docs/pubpaid/legal/2026-05-29/` com fontes oficiais e PDFs, agora com leitura pro-produto.
+- Documentos gerados: relatorio de analise juridica operacional, documento operacional de conformidade, documento de funcionamento do produto e matriz go/no-go.
+- Conclusao registrada: PubPaid e viavel como plataforma de jogos de habilidade, comunidade, ranking, treino, PvP gratuito, torneios gratuitos, assinatura, publicidade, patrocinio e cosmeticos nao resgataveis.
+- Camada financeira sensivel fica como fase futura: dinheiro de partida, premio, taxa/rake/comissao, saque, torneio pago e publicidade de ganho exigem parecer juridico, fiscal/contabil, LGPD, pagamento/antifraude, seguranca e go/no-go assinado.
+- Fontes oficiais usadas: Planalto, SPA/MF, BCB Pix, LGPD, CDC, Lei 5.768/1971 e Decreto-Lei 3.688/1941.
+
 ## Rodada Atual - 20260527-chessfast1
 
 - Xadrez PubPaid corrigido em escopo pontual: abertura acelerada, creditos/moeda mais rapidos, IA Demo reduzida para resposta em 0,9s e transicoes 3D menos lentas.
@@ -561,3 +628,23 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Damas mobile landscape: HUD revisado para evitar menu sobre menu; `Mesas`, `Reiniciar demo`, `Mesa fixa` e painel de status ficam em cantos/zonas separadas, sem sobreposicao no teste.
 - Sinuca foi retirada do online temporariamente: card escondido no lobby, botoes desabilitados e guardas no runtime bloqueando acesso direto.
 - Validacao local: `node --check` em `domGameInterface.js`, `app.js` e `server.js`; `npm run guard:pubpaid`; `git diff --check`; `npm run review:team` com `totalIssues=0`; Playwright mobile 844x390 confirmou lobby sem Sinuca online, Damas sem overlaps, Xadrez com moeda e tabuleiro pos-moeda.
+
+- Social CZS 2026-05-29.
+- Instagram: 28 posts de noticias 28/29 e 38 stories intercalando noticias/propagandas foram publicados; story extra Cheffe Call confirmado. Bug corrigido no publicador de stories: o toque antigo acertava `Amigos Proximos`; o fluxo correto toca em `Seu story` e depois na seta azul.
+- WhatsApp: 4 propagandas enviadas no grupo whitelisted `R.ALVES E REGIAO VENDAS...`, sem usar ventilador.
+- Crescimento: seguir apenas baixa cadencia e curadoria local/nicho; evitar massa aleatoria. Leva do dia incluiu Mailza, prefeituras do Jurua e paginas regionais quando o botao de seguir estava visivel.
+- Segunda rodada social CZS 2026-05-29 perto das 11h Acre: recaptura com 187 itens de hoje, 16 posts de feed limpos e 20 stories publicados.
+- Stories da segunda rodada intercalaram 16 noticias com produtos diretos: Redmi Note 13, iPhone 11, TV e aluguel Meta Quest. Evidencia: perfil em 169 posts e story ativo; logs em `.codex-temp/instagram/premium-news-pack/recent-20260529-noon/`.
+
+- RayX 2026-05-29: fase desktop operacional implementada. `dist/rayx/RayX.exe` agora abre o console Electron por padrao; `rayx desktop --check` valida Electron/preload/renderer; `rayx orchestrator cycle` atualiza estado local em `%LOCALAPPDATA%/RayX/state/orchestrator-state.json`; UI mostra adaptadores, workers, fila, eventos, perfis Chrome e status bruto.
+- Validacao RayX: `node --check` em core/desktop, core/orchestrator, desktop/main, preload e renderer/app; `RayX.exe desktop --check` pronto; `RayX.exe status` retornou PC PLAY, Hermes parcial, Codex ok, Ollama ok e Chrome ok; `RayX.exe` sem argumentos abriu processo Electron com titulo `RayX`.
+- RayX fase funcional: apos critica de que o console estava pouco acionavel, foram adicionados `rayx boot`, `rayx catalog`, `rayx hermes status|open|logs`, `rayx chrome-bridge status|launch|tabs`, `rayx profiles trust-local --permission allow`, testes Node `rayx:test` e botoes desktop para boot/catalogo/Hermes/Chrome-CDP.
+- Chrome/CDP RayX: perfis Chrome locais ficaram `allow` em `%LOCALAPPDATA%/RayX/config/chrome-profiles.local.json`; `rayx chrome-bridge launch` abre sidecar controlavel em `%LOCALAPPDATA%/RayX/chrome-cdp-profile` na porta 9222. Validacao: `RayX.exe chrome-bridge status` retornou `CDP ativo: sim`, 13 perfis `allow` e abas listadas.
+- RayX correcao conceitual: chat nao e camada separada; `rayx mission` e `rayx chat` agora usam um barramento unico que coleta doctor/catalogo/Hermes/Chrome em paralelo, declara lanes Codex/Hermes/Ollama/Chrome/shell/skills e devolve sintese unica em portugues. Validacao com `RayX.exe mission ... --no-llm` e com Ollama local (`llama3.2:3b`) respondeu em ~34s.
+- RayX desktop workspace: para reduzir travamento, `rayx/desktop/main.js` passou a chamar o CLI por subprocessos `execFile` em vez de rodar diagnosticos pesados no processo visual. A UI ganhou conversa, compositor de missao, painel de evidencias e painel de atividade (`chatThread`, `evidenceList`, `activityList`). Validacao: `npm run rayx:test` com 6 testes, `RayX.exe desktop --check`, `RayX.exe mission ... --no-llm` e processo Electron `RayX` aberto.
+
+## Ordem Executiva Social CZS - 2026-05-31
+
+- Criados `docs/social/czs-executive-order-2026-05-31.md`, `docs/social/czs-instagram-news-standard-2026-05-31.md`, `docs/social/czs-growth-following-cleanup-2026-05-31.md` e `docs/social/czs-editorial-growth-formats-2026-05-31.md`.
+- Nova regra do Instagram/Jornal: video de fonte primeiro, contexto claro, narracao curta quando util, imagem depois, propaganda intercalada e trilha jornalistica sem terror/suspense exagerado.
+- Crescimento: parar de seguir perfis pessoais comuns; manter apenas nichos de jornal, noticias, fofoca, radio, politica regional, Acre, Vale do Jurua e Cruzeiro do Sul; sem automacao de massa.
