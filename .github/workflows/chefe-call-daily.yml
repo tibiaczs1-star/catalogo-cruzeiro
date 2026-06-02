@@ -1,0 +1,54 @@
+name: Chefe Call — Daily Report
+
+on:
+  schedule:
+    # Todo dia às 9h (horário de Brasília)
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Daily Report
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node scripts/chefe-daily-report.js
+
+  uptime-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check site uptime
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://catalogo-cruzeiro.github.io/catalogo-cruzeiro/ || echo "000")
+          if [ "$STATUS" != "200" ]; then
+            echo "⚠️ Site retornou HTTP $STATUS"
+            exit 1
+          fi
+          echo "✅ Site online (HTTP $STATUS)"
+
+  lighthouse-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PageSpeed
+        run: |
+          # Usa API pública do PageSpeed (sem key, apenas indicative)
+          curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://catalogo-cruzeiro.github.io/catalogo-cruzeiro/&strategy=mobile&category=performance" \
+            | jq -r '.lighthouseResult.categories.performance.score // empty' \
+            | while read score; do
+                pct=$(( $(echo "$score * 100" | bc | cut -d. -f1) ))
+                echo "Performance: $pct/100"
+                if [ "$pct" -lt 70 ]; then
+                  echo "⚠️ PERFORMANCE BAIXA — ação necessária!"
+                  exit 1
+                fi
+              done || echo "PageSpeed check done"

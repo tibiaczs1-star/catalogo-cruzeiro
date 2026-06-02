@@ -225,10 +225,12 @@
     </noscript>
   <link rel="preload" as="style" href="./styles.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-home-redesign.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" as="style" href="./premium-effects.css?v=20260602-effects1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="./styles.css?v=20260524-mobilebook1" /></noscript>
   <script src="./catalogo-capture.js?v=20260602-capture1" defer></script>
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting fx-lite">
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <div
       class="logo-splash is-logo-primer catalogo-cinematic-live"
       role="status"
@@ -1635,6 +1637,73 @@
             </button>
           </article>
 
+          <!-- SEÇÃO DE MONETIZAÇÃO — Planos publicitários -->
+          <section id="monetizacao" class="section-block ad-pricing-section reveal">
+            <div class="section-heading">
+              <p class="eyebrow">para anunciantes</p>
+              <h2>Espaços publicitários no Catálogo Cruzeiro do Sul</h2>
+              <p>Visibilidade para sua marca junto ao público do Vale do Juruá e Acre.</p>
+            </div>
+            <div class="ad-pricing-grid">
+              <article class="ad-pricing-card" data-tier="bronze">
+                <span class="ad-pricing-tier">Bronze</span>
+                <span class="ad-pricing-price">R$ 800<span>/mês</span></span>
+                <ul class="ad-pricing-features">
+                  <li>Slot in-feed (300x250)</li>
+                  <li>Até 30 dias de exibição</li>
+                  <li>Relatório mensal de visualizações</li>
+                  <li>Badge "Patrocinador Bronze"</li>
+                </ul>
+                <button class="outline-button" type="button"
+                  data-open-agent-mail
+                  data-agent-subject="Anúncio Bronze"
+                  data-agent-message="Olá, quero anunciar no plano Bronze (R$ 800/mês) do Catálogo Cruzeiro do Sul. Minha marca é:">Quero anunciar</button>
+              </article>
+              <article class="ad-pricing-card featured" data-tier="prata">
+                <span class="ad-pricing-tier">Prata</span>
+                <span class="ad-pricing-price">R$ 1.500<span>/mês</span></span>
+                <ul class="ad-pricing-features">
+                  <li>Slot lateral premium (300x250)</li>
+                  <li>Badge "Patrocinador Prata"</li>
+                  <li>Relatório quinzenal</li>
+                  <li>Exposição em todas as páginas</li>
+                </ul>
+                <button class="solid-button" type="button"
+                  data-open-agent-mail
+                  data-agent-subject="Anúncio Prata"
+                  data-agent-message="Olá, quero anunciar no plano Prata (R$ 1.500/mês) do Catálogo Cruzeiro do Sul. Minha marca é:">Quero anunciar</button>
+              </article>
+              <article class="ad-pricing-card featured" data-tier="ouro">
+                <span class="ad-pricing-tier">Ouro</span>
+                <span class="ad-pricing-price">R$ 2.500<span>/mês</span></span>
+                <ul class="ad-pricing-features">
+                  <li>Leaderboard (970x250)</li>
+                  <li>Badge premium + logo no footer</li>
+                  <li>Relatório semanal + suporte prioritário</li>
+                  <li>Destaque no topo do site</li>
+                </ul>
+                <button class="solid-button" type="button"
+                  data-open-agent-mail
+                  data-agent-subject="Anúncio Ouro"
+                  data-agent-message="Olá, quero anunciar no plano Ouro (R$ 2.500/mês) do Catálogo Cruzeiro do Sul. Minha marca é:">Quero anunciar</button>
+              </article>
+              <article class="ad-pricing-card" data-tier="diamante">
+                <span class="ad-pricing-tier">Diamante</span>
+                <span class="ad-pricing-price">Sob consulta</span>
+                <ul class="ad-pricing-features">
+                  <li>Todos os formatos inclusos</li>
+                  <li>Presença em todas as páginas</li>
+                  <li>Relatório em tempo real</li>
+                  <li>Atendimento comercial dedicado</li>
+                </ul>
+                <button class="outline-button" type="button"
+                  data-open-agent-mail
+                  data-agent-subject="Anúncio Diamante"
+                  data-agent-message="Olá, quero saber mais sobre o plano Diamante (sob consulta) do Catálogo Cruzeiro do Sul. Minha marca é:">Falar com comercial</button>
+              </article>
+            </div>
+          </section>
+
           <article class="membership-card reveal delay-2" id="apoie">
             <span>fundadores do catalogo</span>
             <strong>Apoio leve para manter o portal vivo</strong>
@@ -1760,8 +1829,8 @@
             <span>apoie com qualquer valor a partir de R$ 1</span>
           </div>
           <div class="founders-banner-strip" aria-label="Fundadores em destaque">
-            <article class="founder-banner-card founder-banner-card-cafe">
-              <span>Apoio que impulsiona</span>
+            <article class="founder-banner-card founder-banner-card-cafe" data-tier="ouro">
+              <span>🏆 Patrocinador Ouro</span>
               <img
                 class="founder-banner-cafe-photo"
                 src="./assets/founders-cafe-pack-static.jpg"
@@ -1771,19 +1840,19 @@
               />
               <div class="founder-banner-copy">
                 <strong>Cafe Cruzeiro</strong>
-                <p>Parceiro de abertura com presenca visual na experiencia do portal.</p>
+                <p>Parceiro de abertura com presença visual na experiência do portal.</p>
               </div>
             </article>
-            <article class="founder-banner-card founder-banner-card-grupoas">
-              <span>Apoiador em destaque</span>
+            <article class="founder-banner-card founder-banner-card-grupoas" data-tier="ouro">
+              <span>🏆 Patrocinador Ouro</span>
               <img src="./assets/founders-grupo-as-logo.png" alt="Logo do Grupo A.S" loading="lazy" decoding="async" />
             </article>
-            <article class="founder-banner-card founder-banner-card-light">
-              <span>Fundadora em destaque</span>
+            <article class="founder-banner-card founder-banner-card-light" data-tier="prata">
+              <span>💎 Patrocinadora Prata</span>
               <img src="./assets/founders-geane-logo-optimized.png" alt="Logo da Dra. Geane Campo" loading="lazy" decoding="async" />
             </article>
-            <article class="founder-banner-card founder-banner-card-dark">
-              <span>Apoiador fundador</span>
+            <article class="founder-banner-card founder-banner-card-dark" data-tier="bronze">
+              <span>🥉 Patrocinadora Bronze</span>
               <img src="./assets/founders-recommencer-logo.png" alt="Logo da Recommencer" loading="lazy" decoding="async" />
             </article>
           </div>
@@ -1841,20 +1910,70 @@
         </section>
 
         <nav class="footer-sitemap" aria-label="Mapa do site">
-          <h3>Leitura rápida</h3>
-          <ul>
-            <li><a href="#radar">Últimas notícias</a></li>
-            <li><a href="#o-que-importa">Destaques do Juruá</a></li>
-            <li><a href="#radar">Cruzeiro do Sul</a></li>
-            <li><a href="#arquivo">Vale do Juruá</a></li>
-            <li><a href="#arquivo">Acre</a></li>
-            <li><a href="#entretenimento">Assuntos diversos</a></li>
-            <li><a href="#catalogo-telefonico">Catálogo telefônico</a></li>
-            <li><a href="./catalogo-servicos.html">Serviços locais</a></li>
-            <li><a href="#social">Festas & Social</a></li>
-            <li><a href="./legal.html">Correções e transparência</a></li>
-            <li><a href="./pubpaid-admin.html">PubPaid Pays</a></li>
-          </ul>
+          <h3>Leitura por região</h3>
+          <div class="footer-mega-grid">
+            <div class="footer-region-accordion" data-region="jurua">
+              <div class="footer-region-header">
+                <span class="footer-region-icon">☀️</span>
+                <span>Vale do Juruá</span>
+              </div>
+              <div class="footer-region-content">
+                <a href="#radar">Cruzeiro do Sul</a>
+                <a href="#radar">Mâncio Lima</a>
+                <a href="#radar">Rodrigues Alves</a>
+                <a href="#radar">Porto Walter</a>
+                <a href="#radar">Marechal Thaumaturgo</a>
+              </div>
+            </div>
+            <div class="footer-region-accordion" data-region="purus">
+              <div class="footer-region-header">
+                <span class="footer-region-icon">🌊</span>
+                <span>Purus</span>
+              </div>
+              <div class="footer-region-content">
+                <a href="#radar">Sena Madureira</a>
+                <a href="#radar">Manuel Urbano</a>
+                <a href="#radar">Santa Rosa do Purus</a>
+                <a href="#radar">Assis Brasil</a>
+              </div>
+            </div>
+            <div class="footer-region-accordion" data-region="acre">
+              <div class="footer-region-header">
+                <span class="footer-region-icon">🏛️</span>
+                <span>Acre</span>
+              </div>
+              <div class="footer-region-content">
+                <a href="#radar">Rio Branco</a>
+                <a href="#radar">Acre (estado)</a>
+                <a href="#radar">Interior do Acre</a>
+              </div>
+            </div>
+            <div class="footer-region-accordion" data-region="brasil">
+              <div class="footer-region-header">
+                <span class="footer-region-icon">🌎</span>
+                <span>Brasil &amp; Mundo</span>
+              </div>
+              <div class="footer-region-content">
+                <a href="#radar">Política</a>
+                <a href="#radar">Economia</a>
+                <a href="#radar">Tecnologia</a>
+                <a href="#radar">Internacional</a>
+              </div>
+            </div>
+            <div class="footer-region-accordion" data-region="servicos">
+              <div class="footer-region-header">
+                <span class="footer-region-icon">📡</span>
+                <span>Serviços</span>
+              </div>
+              <div class="footer-region-content">
+                <a href="./catalogo-servicos.html">Catálogo de Serviços</a>
+                <a href="#catalogo-telefonico">Catálogo Telefônico</a>
+                <a href="#social">Festas &amp; Social</a>
+                <a href="#radar">Agenda de Eventos</a>
+                <a href="./legal.html">Correções</a>
+              </div>
+            </div>
+          </div>
         </nav>
 
         <section class="footer-contact" aria-labelledby="footer-contact-title">
@@ -2655,6 +2774,102 @@
         } else {
           start();
         }
+      })();
+    </script>
+    <script>
+      // SCROLL PROGRESS BAR
+      (function() {
+        var bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        function updateProgress() {
+          var scrollTop = window.scrollY || document.documentElement.scrollTop;
+          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = docHeight > 0 ? (scrollTop / docHeight * 100) : 0;
+          bar.style.width = pct + '%';
+        }
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+      })();
+
+      // REVEAL ON SCROLL — IntersectionObserver
+      (function() {
+        if (!('IntersectionObserver' in window)) {
+          document.querySelectorAll('.reveal').forEach(function(el) {
+            el.classList.add('is-visible');
+          });
+          return;
+        }
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(function(el) {
+          observer.observe(el);
+        });
+      })();
+
+      // FOOTER ACCORDION TOGGLE
+      (function() {
+        document.querySelectorAll('.footer-region-accordion').forEach(function(acc) {
+          var header = acc.querySelector('.footer-region-header');
+          if (!header) return;
+          header.addEventListener('click', function() {
+            var isOpen = acc.classList.contains('is-open');
+            // close all
+            document.querySelectorAll('.footer-region-accordion').forEach(function(a) {
+              a.classList.remove('is-open');
+            });
+            // toggle this one
+            if (!isOpen) {
+              acc.classList.add('is-open');
+            }
+          });
+        });
+      })();
+
+      // SERVICE WORKER REGISTRATION
+      (function() {
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./sw.js').then(function(registration) {
+              console.log('[SW] Registrado, scope:', registration.scope);
+            }).catch(function(err) {
+              console.warn('[SW] Registro falhou:', err);
+            });
+          });
+        }
+      })();
+
+      // LAZY IFRAME LOADING — IntersectionObserver
+      (function() {
+        if (!('IntersectionObserver' in window)) {
+          document.querySelectorAll('iframe[data-src]').forEach(function(iframe) {
+            if (iframe.dataset.src) {
+              iframe.src = iframe.dataset.src;
+              delete iframe.dataset.src;
+            }
+          });
+          return;
+        }
+        var iframeObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var iframe = entry.target;
+              if (iframe.dataset.src) {
+                iframe.src = iframe.dataset.src;
+                delete iframe.dataset.src;
+              }
+              iframeObserver.unobserve(iframe);
+            }
+          });
+        }, { rootMargin: '200px' });
+        document.querySelectorAll('iframe[data-src]').forEach(function(iframe) {
+          iframeObserver.observe(iframe);
+        });
       })();
     </script>
 </body>
