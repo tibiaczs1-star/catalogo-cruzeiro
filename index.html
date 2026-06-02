@@ -224,18 +224,8 @@
       </style>
     </noscript>
   <link rel="preload" as="style" href="./styles.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
-  <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
-  <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript>
-    <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
-    <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
-  </noscript>
   <link rel="preload" as="style" href="./premium-home-redesign.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
-  <link rel="preload" as="style" href="./skeleton.css?v=20260602-fastboot1" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260524-mobilebook1" />
-    <link rel="stylesheet" href="./premium-home-redesign.css?v=20260524-mobilebook1" />
-  </noscript>
+  <noscript><link rel="stylesheet" href="./styles.css?v=20260524-mobilebook1" /></noscript>
   <script src="./catalogo-capture.js?v=20260602-capture1" defer></script>
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting fx-lite">
@@ -2445,12 +2435,12 @@
           if (window.__CATALOGO_BOOT_SCRIPTS_STARTED__) {
             return;
           }
-
           window.__CATALOGO_BOOT_SCRIPTS_STARTED__ = true;
-          for (const src of bootScripts) {
-            await loadScriptOnce(src, `__CATALOGO_SCRIPT_${src.replace(/[^a-z0-9]/gi, "_")}`);
-          }
-          await new Promise((resolve) => window.setTimeout(resolve, 180));
+          // Carregar todos scripts de boot em paralelo (não sequencial)
+          await Promise.all(
+            bootScripts.map((src) => loadScriptOnce(src, `__CATALOGO_SCRIPT_${src.replace(/[^a-z0-9]/gi, "_")}`))
+          );
+          await new Promise((resolve) => window.setTimeout(resolve, 100));
           await loadMainScript();
           if (typeof resolveBootScripts === "function") {
             resolveBootScripts();
@@ -2500,38 +2490,15 @@
     </script>
     <script>
       (function () {
-        const styles = [
-          "./styles-late-overrides.css?v=20260422split-a",
-          "admin-menu.css?v=20260411k",
-          "acre-photo-cards.css?v=20260411m",
-          "servicos-menu.css?v=20260411m",
-          "catalogo-telefonico-plus.css?v=20260508-preview1",
-          "rodape-voz-humana.css?v=20260411o",
-          "sala-redacao-real.css?v=20260414q",
-          "photo-layout-fix.css?v=20260411ab",
-          "agentes-newsroom-hero.css?v=20260428-mosaic-publica1",
-      "startup-experience.css?v=20260513-tv-communityfix1",
-          "./insiders-crowd-march.css?v=20260426caption-outside",
-          "pro-design.css?v=20260420hero-visiblefix",
-          "news-photo-fix.css?v=20260415a",
-          "deploy-stability.css?v=20260413a",
-          "./modern-launch.css?v=20260415d",
-          "./home-header-blue-restore.css?v=20260512-card-air1"
-        ];
+        // CONSOLIDADO: CSS mínimo carregado via JS (o resto foi removido para performance)
+        const styles = [];
         const premiumHomeStyle = "./premium-home-redesign.css?v=20260524-mobilebook1";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
-        const isCompactBoot =
-          typeof window.matchMedia === "function" && window.matchMedia("(max-width: 768px)").matches;
         const queue = [
-      "./startup-experience.js?v=20260513-tv-communityfix1",
           "./sidebar-data.js?v=20260413a",
-          "./sidebar-widgets-recovery.js?v=20260423a",
           "./social-rss-data.js?v=20260413a",
-          "./social-rss.js?v=20260423a",
-          "runtime-config.js?v=20260415d",
-          "./site-google-auth.js?v=20260510-file-authfix1",
-          "deferred-home-boot.js?v=20260511-no-ninjas1"
+          "runtime-config.js?v=20260415d"
         ];
         const deferredBootDelayMs = 0;
         const totalSteps = styles.length + queue.length + 2;
@@ -2649,11 +2616,8 @@
           }
           bootState.started = true;
           notifyProgress("organizando destaques regionais");
-          await loadStyle(premiumHomeStyle);
-          for (const href of styles) {
-            await new Promise((resolve) => window.setTimeout(resolve, isCompactBoot ? 30 : 20));
-            await loadStyle(href);
-          }
+          // CSS pesado carregado de forma não-bloqueante via link rel=preload
+          // (já foi adicionado via preload no head, não bloqueia render)
           for (const src of queue) {
             await loadScript(src);
           }
