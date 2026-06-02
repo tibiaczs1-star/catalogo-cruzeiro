@@ -1,0 +1,72 @@
+{
+  "version": "rayxpx-v1-draft-20260601",
+  "frame_size": [
+    96,
+    144
+  ],
+  "layout": {
+    "columns": 4,
+    "rows": 8,
+    "row_order": [
+      "down",
+      "down_right",
+      "right",
+      "up_right",
+      "up",
+      "up_left",
+      "left",
+      "down_left"
+    ]
+  },
+  "anchor": {
+    "x": 48,
+    "y": 138,
+    "meaning": "bottom-center feet anchor"
+  },
+  "hitbox": {
+    "x": 32,
+    "y": 96,
+    "w": 32,
+    "h": 42,
+    "meaning": "gameplay body/feet, not hair/arms"
+  },
+  "interaction_box": {
+    "front_w": 44,
+    "front_h": 28,
+    "offset_by_direction": "projected from feet toward facing row"
+  },
+  "quality_note": "Amostras v1/draft, desenhadas por clusters de pixel para avaliar direcao visual. Ainda nao sao producao final nem substituidas no runtime.",
+  "characters": [
+    {
+      "id": "lia_neon_vip",
+      "name": "Lia Neon VIP",
+      "role": "protagonista feminina / lobby VIP",
+      "hook": "mecha roxa/neon, blazer vinho, celular/carteira PubPaid",
+      "files": {
+        "idle_breathe": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_lia_neon_vip_idle_breathe_8dir_4f.png",
+        "walk": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_lia_neon_vip_walk_8dir_4f.png"
+      }
+    },
+    {
+      "id": "nando_bar_security",
+      "name": "Nando Seguranca",
+      "role": "protagonista masculino / entrada e PvP",
+      "hook": "jaqueta azul escura, detalhe dourado, oculos/seguranca de pub",
+      "files": {
+        "idle_breathe": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_nando_bar_security_idle_breathe_8dir_4f.png",
+        "walk": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_nando_bar_security_walk_8dir_4f.png"
+      }
+    },
+    {
+      "id": "sol_card_dealer",
+      "name": "Sol Dealer",
+      "role": "NPC jogavel / mesa de cartas e tutorial",
+      "hook": "colete verde cassino, carta na mao, rosto calmo de dealer",
+      "files": {
+        "idle_breathe": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_sol_card_dealer_idle_breathe_8dir_4f.png",
+        "walk": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_sol_card_dealer_walk_8dir_4f.png"
+      }
+    }
+  ],
+  "preview_board": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v1\\rayxpx_v1_pubpaid_sprite_candidates_preview_board.png"
+}

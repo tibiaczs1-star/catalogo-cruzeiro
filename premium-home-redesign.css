@@ -685,6 +685,9 @@ html body.editorial-home > .logo-splash.catalogo-cinematic-live {
     linear-gradient(180deg, #020811 0%, #041421 52%, #020911 100%) !important;
 }
 
+body.fx-lite .logo-splash.catalogo-cinematic-live {
+    animation: none !important;
+}
 html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-broadcast,
 html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-card,
 html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-news-bubbles {
@@ -775,6 +778,24 @@ html body.editorial-home > .logo-splash.catalogo-cinematic-live.is-loader-active
     animation: none !important;
     transform: none !important;
   }
+}
+
+/* ===== fx-lite: kill ALL splash animations — same treatment as prefers-reduced-motion ===== */
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-news-bubbles span,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-broadcast,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-card,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-news-bubbles,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-cruzeiro-constellation,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-clock,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-stars,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-cities,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-news-lines,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-cursor-glow,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-noise {
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
+  opacity: 0 !important;
 }
 
 html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-live {
@@ -7826,7 +7847,14 @@ body.editorial-home .community-report-list > * {
     background: rgba(4, 17, 31, 0.94);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     padding: 0.4rem;
+    /* Kill backdrop-filter on low-end mobile for performance */
+    animation: bottom-nav-safe 0.01s forwards;
+  }
+
+  @keyframes bottom-nav-safe {
+    to { backdrop-filter: blur(18px); }
   }
 
   body.editorial-home .premium-bottom-nav a {
@@ -7834,10 +7862,15 @@ body.editorial-home .community-report-list > * {
     justify-items: center;
     gap: 0.18rem;
     min-height: 50px;
+    min-width: 44px;
     border-radius: 12px;
     color: rgba(203, 213, 225, 0.78);
-    font-size: 0.67rem;
+    font-size: 0.7rem;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background 150ms ease, color 150ms ease;
   }
 
   body.editorial-home .premium-bottom-nav a.is-active {
@@ -15624,5 +15657,228 @@ html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs[data-hero-ca
   html body.editorial-home .hero-tourism-dots,
   html body.editorial-home .hero-newsroom-notes {
     display: none !important;
+  }
+}
+
+
+/* ================================================
+   FOOTER ENHANCEMENTS - CINEMATIC PREMIUM
+   Added: 2026-06-02
+   ================================================ */
+
+/* Animated gradient background for editorial footer */
+body.editorial-home .editorial-footer {
+  position: relative;
+  overflow: hidden;
+}
+
+body.editorial-home .editorial-footer::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(2, 13, 24, 0.95) 0deg,
+    rgba(20, 60, 90, 0.9) 60deg,
+    rgba(2, 13, 24, 0.95) 120deg,
+    rgba(4, 22, 38, 0.92) 180deg,
+    rgba(2, 13, 24, 0.95) 240deg,
+    rgba(30, 80, 120, 0.88) 300deg,
+    rgba(2, 13, 24, 0.95) 360deg
+  );
+  animation: footerAurora 20s linear infinite;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+@keyframes footerAurora {
+  0% { transform: rotate(0deg) scale(1.3); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1.3); }
+}
+
+body.editorial-home .editorial-footer > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glowing border animation */
+body.editorial-home .editorial-footer {
+  border: 1px solid rgba(126, 247, 255, 0.15) !important;
+  animation: footerBorderGlow 4s ease-in-out infinite;
+}
+
+@keyframes footerBorderGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(126, 247, 255, 0.08),
+      0 0 60px rgba(216, 169, 67, 0.05),
+      inset 0 0 30px rgba(0, 0, 0, 0.3) !important;
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(126, 247, 255, 0.15),
+      0 0 80px rgba(216, 169, 67, 0.1),
+      inset 0 0 30px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Social icons row */
+.footer-social-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(126, 247, 255, 0.12);
+}
+
+.footer-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(126, 247, 255, 0.18);
+  color: rgba(200, 220, 240, 0.85);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.footer-social-icon:hover {
+  background: rgba(126, 247, 255, 0.12);
+  border-color: rgba(126, 247, 255, 0.4);
+  color: #7ef4ff;
+  box-shadow: 0 0 20px rgba(126, 247, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.footer-social-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Stats bar */
+.footer-stats-bar {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(126, 247, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: rgba(200, 220, 240, 0.7);
+}
+
+.footer-stats-bar strong {
+  color: #7ef4ff;
+  font-weight: 800;
+}
+
+.stats-sep {
+  color: rgba(126, 247, 255, 0.3);
+  font-weight: 300;
+}
+
+/* Footer panels glassmorphism */
+body.editorial-home .editorial-footer .footer-brand,
+body.editorial-home .editorial-footer .footer-sitemap,
+body.editorial-home .editorial-footer .footer-contact,
+body.editorial-home .editorial-footer .footer-info-newsletter {
+  background: rgba(5, 18, 32, 0.75) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(126, 247, 255, 0.1) !important;
+}
+
+/* Live pulse indicator for footer */
+.footer-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7ef4ff;
+}
+
+.footer-live-indicator::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7ef4ff;
+  animation: livePulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 8px #7ef4ff;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* Video overlay effect */
+.footer-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(0, 20, 40, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 15, 30, 0.5) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(2, 13, 24, 0.7), rgba(2, 13, 24, 0.85));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating media panels */
+.footer-media-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(126, 247, 255, 0.12);
+  border-radius: 14px;
+  padding: 1rem;
+  animation: floatPanel 8s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.footer-media-panel:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(126, 247, 255, 0.25);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes floatPanel {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Footer grid glow effect */
+body.editorial-home .editorial-footer {
+  background: 
+    radial-gradient(ellipse at 0% 0%, rgba(126, 247, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(216, 169, 67, 0.04) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(18, 56, 82, 0.72), rgba(4, 22, 38, 0.96) 54%, rgba(4, 18, 31, 0.98)),
+    #051827 !important;
+}
+
+/* Mobile footer adjustments */
+@media (max-width: 768px) {
+  .footer-social-row {
+    justify-content: center;
+  }
+  
+  .footer-stats-bar {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .footer-live-indicator {
+    justify-content: center;
+    margin-bottom: 0.5rem;
   }
 }

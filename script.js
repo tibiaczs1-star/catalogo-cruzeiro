@@ -143,6 +143,7 @@ const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 700 : 
 const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 520 : 780;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 320 : 460;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 520 : 760;
+const mobileFirstFoldMaximumMs = 3000;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -1791,13 +1792,13 @@ const initialSplashIsHoldingPage =
   !document.body.classList.contains("site-loaded");
 
 if (initialSplashIsHoldingPage) {
-  const staticThumbDelay = splashCompactViewportQuery.matches ? 7600 : 3600;
+  const staticThumbDelay = splashCompactViewportQuery.matches ? 900 : 1800;
   window.addEventListener(
     "catalogo:logo-splash-finished",
     () => window.setTimeout(hydrateInitialStaticThumbs, staticThumbDelay),
     { once: true }
   );
-  window.setTimeout(hydrateInitialStaticThumbs, splashCompactViewportQuery.matches ? 18000 : 22000);
+  window.setTimeout(hydrateInitialStaticThumbs, splashCompactViewportQuery.matches ? mobileFirstFoldMaximumMs : 5200);
 } else {
   hydrateInitialStaticThumbs();
 }
@@ -1866,7 +1867,7 @@ const runAfterSplashFinished = (callback, timeout = 1200) => {
   window.addEventListener("catalogo:logo-splash-finished", runOnce, { once: true });
   window.setTimeout(
     runOnce,
-    splashCompactViewportQuery.matches ? 18000 : splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600
+    splashCompactViewportQuery.matches ? mobileFirstFoldMaximumMs : splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600
   );
 };
 
@@ -2118,8 +2119,9 @@ const isHomeFirstFoldVisiblyReady = () => {
     Boolean(heroTourismShell?.dataset.heroBackdropReady) ||
     heroTourismSlides.some((slide) => slide?.dataset.heroBackdropReady === "true") ||
     heroTourismSlides.some((slide) => {
-      const background = slide ? window.getComputedStyle(slide).backgroundImage : "";
-      return background && background !== "none" && background.includes("url(");
+      // Use dataset attribute instead of getComputedStyle to avoid forced relayout
+      const bg = slide?.dataset?.heroBg || slide?.style?.backgroundImage || "";
+      return bg && bg !== "none" && bg.includes("url(");
     });
   const flowCards = document.querySelectorAll(
     ".editorial-retention-flow [data-flow-live-title], .editorial-retention-flow .day-panel-card strong, #o-que-importa a, #radar a"
@@ -3320,18 +3322,15 @@ const getRenderedCardGridColumnCount = (grid, fallbackColumns = 1) => {
     return Math.max(1, Number(fallbackColumns) || 1);
   }
 
-  const computedColumns = window.getComputedStyle(grid).gridTemplateColumns || "";
-  const columnCount = computedColumns
-    .split(/\s+/)
-    .map((value) => value.trim())
-    .filter((value) => value && value !== "none").length;
-
-  if (columnCount > 0) {
-    return columnCount;
+  // Use cached grid-column-count attr set by CSS or resize observer
+  // instead of getComputedStyle which forces synchronous relayout
+  const cached = grid.dataset.gridColumnCount;
+  if (cached) {
+    return parseInt(cached, 10) || 1;
   }
 
+  // Fallback: derive from element width (same breakpoints as CSS grid)
   const width = grid.getBoundingClientRect().width || window.innerWidth || 0;
-  if (width >= 1680) return 4;
   if (width >= 1280) return 4;
   if (width >= 900) return 3;
   if (width >= 560) return 2;
@@ -3365,9 +3364,13 @@ const getVisibleGeometryCards = (grid, cardSelector = ":scope > *") => {
       delete card.dataset.geometryHidden;
     }
 
+    // Use hidden attribute and visibility CSS property check
+    // instead of getComputedStyle which forces synchronous relayout
+    if (card.hidden) return false;
+    const style = card.style;
+    if (style.display === "none" || style.visibility === "hidden") return false;
     const rect = card.getBoundingClientRect();
-    const style = window.getComputedStyle(card);
-    return !card.hidden && style.display !== "none" && style.visibility !== "hidden" && rect.width > 24 && rect.height > 24;
+    return rect.width > 24 && rect.height > 24;
   });
 };
 
@@ -3414,6 +3417,39 @@ const applyGlobalClosedCardGrids = () => {
     });
   });
 };
+
+// Update data-grid-column-count via ResizeObserver to avoid getComputedStyle relayout
+const setupGridColumnCountObserver = () => {
+  if (!("ResizeObserver" in window)) return;
+
+  const updateGrid = (grid) => {
+    const width = grid.getBoundingClientRect().width || 0;
+    let cols = 1;
+    if (width >= 1280) cols = 4;
+    else if (width >= 900) cols = 3;
+    else if (width >= 560) cols = 2;
+    grid.dataset.gridColumnCount = cols;
+  };
+
+  const observer = new ResizeObserver((entries) => {
+    entries.forEach((entry) => updateGrid(entry.target));
+  });
+
+  const grids = document.querySelectorAll(
+    "#radar .news-grid, .premium-social-grid.social-grid, .premium-timeline.archive-grid, .premium-caderno-grid.cadernos-grid, #live-feed-grid"
+  );
+  grids.forEach((grid) => {
+    updateGrid(grid);
+    observer.observe(grid);
+  });
+};
+
+// Setup after DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupGridColumnCountObserver, { once: true });
+} else {
+  setupGridColumnCountObserver();
+}
 
 let closedCardGridResizeTimer = 0;
 window.addEventListener("resize", () => {
@@ -4219,16 +4255,14 @@ const getLiveFeedColumnCount = () => {
     return 4;
   }
 
-  const computedColumns = window.getComputedStyle(liveFeedGrid).gridTemplateColumns || "";
-  const columnCount = computedColumns
-    .split(/\s+/)
-    .map((value) => value.trim())
-    .filter((value) => value && value !== "none").length;
-
-  if (columnCount > 0) {
-    return columnCount;
+  // Use cached grid-column-count attr instead of getComputedStyle
+  // to avoid forcing synchronous relayout on every call
+  const cached = liveFeedGrid.dataset.gridColumnCount;
+  if (cached) {
+    return parseInt(cached, 10) || 4;
   }
 
+  // Fallback: derive from element width (matches CSS breakpoints)
   const width = liveFeedGrid.getBoundingClientRect().width || window.innerWidth || 0;
   if (width >= 1280) return 4;
   if (width >= 900) return 3;
@@ -6820,10 +6854,8 @@ const extractHeroThumbUrl = (thumb) => {
     return "";
   }
 
-  const rawValue =
-    thumb.style.getPropertyValue("--thumb") ||
-    window.getComputedStyle(thumb).getPropertyValue("--thumb") ||
-    "";
+  // Read --thumb from inline style only (no getComputedStyle needed for CSS vars)
+  const rawValue = thumb.style.getPropertyValue("--thumb") || "";
   const match = String(rawValue).match(/url\((['"]?)(.*?)\1\)/i);
   return sanitizeImageUrl(match?.[2] || "");
 };

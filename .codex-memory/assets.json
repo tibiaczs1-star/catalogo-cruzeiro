@@ -1,7 +1,84 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-31T11:55:00-05:00",
+  "lastUpdatedAt": "2026-06-02T14:43:24.359Z",
   "assets": [
+    {
+      "id": "czs-video-first-safe-queue-20260601",
+      "kind": "manifest",
+      "path": ".codex-temp/social-total-correction-20260601/video-first-news-v2/VIDEO_FIRST_SAFE_QUEUE.md",
+      "note": "Fila video-first com fonte real e itens sensiveis retidos para revisao.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-safe-status-final"
+      ],
+      "createdAt": "2026-06-01T15:26:45-05:00"
+    },
+    {
+      "id": "czs-sales-ads-v2-20260601",
+      "kind": "manifest",
+      "path": ".codex-temp/social-total-correction-20260601/sales-ads-v2/sales-ads-v2-manifest.json",
+      "note": "Fila de anuncios/vendas com imagens e legendas separadas por destino seguro.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-safe-status-final"
+      ],
+      "createdAt": "2026-06-01T15:26:45-05:00"
+    },
+    {
+      "id": "instagram-servicos-preview-black-blocked-20260601",
+      "kind": "image",
+      "path": ".codex-temp/social-total-correction-20260601/ig-servicos-v2-composer-for-highlight.png",
+      "note": "Tentativa de repostar Servicos abriu preview preto; publicacao foi descartada para evitar erro publico.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-safe-status-final"
+      ],
+      "createdAt": "2026-06-01T15:26:45-05:00"
+    },
+    {
+      "id": "instagram-noticias-highlight-removed-20260601",
+      "kind": "image",
+      "path": ".codex-temp/social-total-correction-20260601/ig-profile-after-delete-noticias-highlight-confirmed.png",
+      "note": "Evidencia de que o destaque Noticias saiu do perfil; restaram Cotas e PubPaid.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-safe-status-final"
+      ],
+      "createdAt": "2026-06-01T15:26:45-05:00"
+    },
+    {
+      "id": "instagram-czs-audio-buildonly-first-video-20260601",
+      "kind": "video",
+      "path": ".codex-temp/instagram/premium-news-pack/night-20260601-czs-audio-buildonly/story-videos-approved/01-foragido-apontado-como-envolvido-em-homicidios-e-capturado-pela-policia-civil-em-cruzeiro-do-sul.mp4",
+      "note": "Primeiro video de story aprovado com audio AAC narrado por voz feminina; ffprobe confirmou audio e video.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-audio-caption-safe-routing"
+      ],
+      "createdAt": "2026-06-01T00:35:00-05:00"
+    },
+    {
+      "id": "instagram-czs-audio-buildonly-preview-20260601",
+      "kind": "image",
+      "path": ".codex-temp/instagram/premium-news-pack/night-20260601-czs-audio-buildonly/00-preview-initial-batch.jpg",
+      "note": "Preview do pacote Instagram BuildOnly story-first com narracao feminina gerada.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-audio-caption-safe-routing"
+      ],
+      "createdAt": "2026-06-01T00:35:00-05:00"
+    },
+    {
+      "id": "czs-noticia-audio-caption-edge-20260601",
+      "kind": "image",
+      "path": ".codex-temp/social-studies/2026-06-01-madrugada/noticia-audio-caption-edge-2.png",
+      "note": "Validacao mobile Edge mostrando bloco Ouvir noticia e caption pronta na pagina de noticia.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-01-czs-social-audio-caption-safe-routing"
+      ],
+      "createdAt": "2026-06-01T00:35:00-05:00"
+    },
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
       "kind": "image",
@@ -1392,6 +1469,188 @@
         "mobile",
         "validacao"
       ]
+    },
+    {
+      "id": "2026-05-31-premium-sales-pubpaid-poll-pack",
+      "type": "directory",
+      "path": ".codex-temp/catalogo-czs-premium-sales-20260531/",
+      "description": "Pacote premium de vendas/servicos/convite Catalogo/PubPaid/enquete com manifest, captions, imagens e videos 9:16 com audio.",
+      "createdAt": "2026-05-31T19:24:49.625Z",
+      "tags": [
+        "catalogo-czs",
+        "propaganda",
+        "pubpaid",
+        "enquete",
+        "vendas",
+        "stories"
+      ]
+    },
+    {
+      "id": "2026-05-31-whatsapp-pubpaid-poll-evidence",
+      "type": "image-set",
+      "path": ".codex-temp/whatsapp-pubpaid-sent.png; .codex-temp/whatsapp-poll-sent.png",
+      "description": "Evidencias de envio WhatsApp: PubPaid em 03 POSTAR QUE VENDE LOGO CZS e Enquete no Catalogo CZS.",
+      "createdAt": "2026-05-31T19:24:49.625Z",
+      "tags": [
+        "whatsapp",
+        "validacao",
+        "pubpaid",
+        "enquete"
+      ]
+    },
+    {
+      "id": "2026-05-31-instagram-pubpaid-poll-story-evidence",
+      "type": "image-set",
+      "path": ".codex-temp/instagram-after-concluir-pubpaid.png; .codex-temp/instagram-poll-final-screen.png",
+      "description": "Evidencias de stories Instagram publicados para PubPaid e Enquete Acre 2026.",
+      "createdAt": "2026-05-31T19:24:49.625Z",
+      "tags": [
+        "instagram",
+        "stories",
+        "pubpaid",
+        "enquete",
+        "validacao"
+      ]
+    },
+    {
+      "id": "2026-05-31-social-executive-order-docs",
+      "type": "document-set",
+      "path": "docs/social/czs-executive-order-2026-05-31.md; docs/social/czs-instagram-news-standard-2026-05-31.md; docs/social/czs-growth-following-cleanup-2026-05-31.md; docs/social/czs-editorial-growth-formats-2026-05-31.md",
+      "description": "Ordem executiva e padroes sociais do Catalogo CZS para stories, crescimento, seguindo, destaques e monetizacao.",
+      "createdAt": "2026-05-31T20:20:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "social",
+        "instagram",
+        "stories",
+        "crescimento"
+      ]
+    },
+    {
+      "id": "2026-05-31-premium-visual-system-doc",
+      "type": "document-set",
+      "path": "docs/social/czs-premium-visual-system-2026-05-31.md; .codex-temp/catalogo-czs-premium-sales-20260531/VISUAL_REGENERATION_ORDER.md",
+      "description": "Novo sistema visual premium para Catálogo CZS com safe area, logo inteiro, regra contra texto gerado por IA e bloqueio de artes atuais ate regeneracao.",
+      "createdAt": "2026-05-31T20:55:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "arte-premium",
+        "instagram",
+        "whatsapp",
+        "propaganda"
+      ]
+    },
+    {
+      "id": "czs-instagram-feed-12-real-final-20260602",
+      "kind": "image-set",
+      "path": "C:\\Users\\junio\\projeto codex\\.codex-temp\\catalogo-czs-destaques-gpt-20260601\\final-check-20260602\\05-profile-after-real-01.png; C:\\Users\\junio\\projeto codex\\.codex-temp\\catalogo-czs-destaques-gpt-20260601\\final-check-20260602\\08-profile-grid-after-delete-old-print.png; C:\\Users\\junio\\projeto codex\\.codex-temp\\catalogo-czs-destaques-gpt-20260601\\final-check-20260602\\delete-old-print\\04-after-delete.png",
+      "source": "workspace",
+      "note": "Evidencias finais: noticia 01 real publicada, grade com 12 noticias reais e post antigo em print excluido.",
+      "linkedOrderIds": [
+        "2026-06-02-czs-instagram-feed-12-real-news-final"
+      ],
+      "createdAt": "2026-06-02T06:22:30.877Z"
+    },
+    {
+      "id": "text-sales-vendas-e-aluguel-complete-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/text-sales-vendas-e-aluguel-complete.png",
+      "source": "workspace",
+      "note": "Evidencia final: rodada completa de vendas, servicos e convites enviada ao grupo VENDAS E ALUGUEL CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T12:26:03.322Z"
+    },
+    {
+      "id": "text-news-catalogo-czs-final-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/text-news-catalogo-czs-final.png",
+      "source": "workspace",
+      "note": "Evidencia: rodada de noticias/editorial enviada somente ao Catalogo CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T12:26:03.325Z"
+    },
+    {
+      "id": "media-full-r-alves-e-regiao-vendas-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/media-full-r-alves-e-regiao-vendas.png",
+      "source": "workspace",
+      "note": "Evidencia visual do lote atomico completo com artes e legendas em R.ALVESES E REGIAO VENDAS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T12:44:59.935Z"
+    },
+    {
+      "id": "03b-iphone-11-verde-950-png",
+      "kind": "image",
+      "path": "C:\\Users\\junio\\Desktop\\catalogo-czs-arte-forte-20260524\\posts\\03b-iphone-11-verde-950.png",
+      "source": "workspace",
+      "note": "Arte informativa do iPhone 11 verde 64 GB R$ 950: bateria 100%, sem Face ID, tela trocada com garantia, original de retirada; foto real no privado.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T12:44:59.955Z"
+    },
+    {
+      "id": "facebook-tv-ready-before-next-png",
+      "kind": "image-set",
+      "path": ".codex-temp/zap-round-20260602/instagram-final-profile-after-sales-stories.png; .codex-temp/zap-round-20260602/instagram-sales-stories-log.txt; .codex-temp/zap-round-20260602/news-catalogo-czs-delta-20260602.png; .codex-temp/zap-round-20260602/facebook-tv-ready-before-next.png",
+      "source": "workspace",
+      "note": "Evidencias finais da rodada: Instagram com 10 stories comerciais publicados, log do lote, delta de noticias no Catalogo CZS e bloqueio seguro do Facebook por categoria incorreta.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T13:20:31.338Z"
+    },
+    {
+      "id": "whatsapp-catalogo-news-cards-correction-20260602",
+      "kind": "screenshot",
+      "path": "C:/Users/junio/projeto codex/.codex-temp/zap-round-20260602/news-catalogo-czs-cards-posted.png",
+      "source": "workspace",
+      "note": "Evidência da correção: 8 cards de notícias enviados no WhatsApp Catálogo CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T13:36:28.804Z"
+    },
+    {
+      "id": "ig-latest-news-20260602-v3-final-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/ig-latest-news-20260602-v3-final.png",
+      "source": "workspace",
+      "note": "Evidência: Instagram perfil/story ativo após publicar stories 13 a 20 do lote novo de notícias.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T14:43:24.345Z"
+    },
+    {
+      "id": "news-latest-batch-cards-posted-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/news-latest-batch-cards-posted.png",
+      "source": "workspace",
+      "note": "Evidência: 8 cards novos de notícia publicados no WhatsApp Catálogo CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T14:43:24.359Z"
+    }
+  ],
+  "social": [
+    {
+      "id": "2026-06-01-capture-and-cotas-assets",
+      "at": "2026-06-01T17:06:35.047Z",
+      "type": "social_assets_and_queue",
+      "files": {
+        "report": "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/FINAL_EXECUTION_AND_CAPTURE_REPORT.md",
+        "queue": "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/PUBLICATION_READY_QUEUE.json",
+        "captureManifest": "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/source-capture-round/source-capture-manifest.json",
+        "cotasManifest": "C:/Users/junio/projeto codex/.codex-temp/social-total-correction-20260601/distribution-ads/seja-dono-cotas-tecnologias-manifest.json",
+        "cotasStory": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\distribution-ads\\seja-dono-cotas-tecnologias-story.png",
+        "cotasFeed": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\distribution-ads\\seja-dono-cotas-tecnologias-feed.png"
+      }
+    },
+    {
+      "id": "2026-06-01-instagram-highlights-stories-capture-final",
+      "at": "2026-06-01T17:43:18.252Z",
+      "type": "instagram_highlights_evidence",
+      "files": {
+        "logJson": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlights-execution-log.json",
+        "logMarkdown": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\INSTAGRAM_HIGHLIGHTS_EXECUTION_LOG.md",
+        "finalProfile": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-final-profile.png",
+        "cotas": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-cotas-confirm.png",
+        "noticias": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-noticias-confirm.png",
+        "pubpaid": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\instagram-highlight-pubpaid-confirm.png",
+        "highlightCovers": "C:\\Users\\junio\\projeto codex\\.codex-temp\\social-total-correction-20260601\\highlight-covers"
+      }
     }
   ]
 }

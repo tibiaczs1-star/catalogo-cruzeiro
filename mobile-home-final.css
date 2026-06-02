@@ -2188,3 +2188,94 @@ body.editorial-home .site-footer .footer-bottom-utility-buttons {
     display: none !important;
   }
 }
+
+
+/* ================================================
+   MOBILE PERFORMANCE FIXES - GPU ACCELERATION
+   ================================================ */
+
+/* GPU acceleration for mobile */
+@media (max-width: 768px) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Force GPU compositing for animated elements */
+  .premium-bottom-nav,
+  .mobile-menu-drawer,
+  .page-shell,
+  .editorial-footer {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Reduce motion on mobile for performance */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Faster scroll */
+  html {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+  }
+  
+  /* Prevent body scroll lock */
+  body.catalogo-site-booting {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+  
+  body.catalogo-site-booting.mobile-intro-ready,
+  body.site-loaded {
+    overflow: auto;
+    position: static;
+  }
+  
+  /* Lightweight skeleton loading */
+  .skeleton-pulse {
+    background: linear-gradient(90deg, 
+      rgba(255,255,255,0.03) 0%, 
+      rgba(255,255,255,0.08) 50%, 
+      rgba(255,255,255,0.03) 100%);
+    background-size: 200% 100%;
+    animation: skeletonWave 1.5s ease infinite;
+  }
+  
+  @keyframes skeletonWave {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  
+  /* Image lazy loading optimization */
+  img {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1px;
+  }
+  
+  /* Disable heavy backdrop-filter on low-end devices */
+  @media (max-width: 480px) {
+    .premium-bottom-nav {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    
+    .editorial-footer {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  }
+}
+
+/* Bottom nav performance */
+@media (max-width: 768px) {
+  .premium-bottom-nav {
+    contain: layout style paint;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}

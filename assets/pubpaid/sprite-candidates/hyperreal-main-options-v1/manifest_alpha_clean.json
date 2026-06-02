@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-06-01T11:16:14",
+  "frame_size": [
+    96,
+    144
+  ],
+  "target_sheet_size": [
+    384,
+    1152
+  ],
+  "row_order": [
+    "down",
+    "down-right",
+    "right",
+    "up-right",
+    "up",
+    "up-left",
+    "left",
+    "down-left"
+  ],
+  "anchor": [
+    48,
+    138
+  ],
+  "hitbox": {
+    "x": 34,
+    "y": 96,
+    "w": 30,
+    "h": 39
+  },
+  "quality_status": "concept v1, cleaned alpha, 96x144 front frame only; placeholder 8-dir sheets are layout tests, not final animation",
+  "characters": [
+    {
+      "id": "caio_pix_master",
+      "clean_master": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\caio_pix_master_alpha_clean.png",
+      "front_96x144": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\caio_pix_master_front_96x144_alpha.png",
+      "placeholder_sheet": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\caio_pix_master_concept_idle_placeholder_8dir_4f_alpha.png",
+      "crop_size": [
+        523,
+        1429
+      ]
+    },
+    {
+      "id": "rafa_dealer_master",
+      "clean_master": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\rafa_dealer_master_alpha_clean.png",
+      "front_96x144": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\rafa_dealer_master_front_96x144_alpha.png",
+      "placeholder_sheet": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\rafa_dealer_master_concept_idle_placeholder_8dir_4f_alpha.png",
+      "crop_size": [
+        469,
+        1408
+      ]
+    }
+  ],
+  "board": "C:/Users/junio/projeto codex/assets/pubpaid/sprite-candidates/hyperreal-main-options-v1\\pubpaid_hyperreal_main_options_v1_board_alpha_clean.png"
+}

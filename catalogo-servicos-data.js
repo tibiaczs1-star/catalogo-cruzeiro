@@ -2,7 +2,7 @@
 
 window.CATALOGO_SERVICOS_DATA = {
   city: "Cruzeiro do Sul - AC",
-  updatedAt: "2026-05-31",
+  updatedAt: "2026-06-02",
   modules: [
     {
       id: "catalogo-czs-servicos",
@@ -92,6 +92,14 @@ window.CATALOGO_SERVICOS_DATA = {
           website: "https://catalogo-cruzeiro-web.onrender.com/pubpaid.html",
           status: "em desenvolvimento",
           source: "Catalogo CZS"
+        },
+        {
+          name: "Design System com DESIGN.md e Stitch",
+          description:
+            "Especificacao visual open-source do Google para descrever identidade de marca a agentes de IA. O Catalogo exporta seu design system em formato DESIGN.md — tokens de cor, tipografia, espacamento e componentes prontos para agentes de design e codigo.",
+          website: "https://catalogo-cruzeiro-web.onrender.com/DESIGN.md",
+          status: "disponivel",
+          source: "Google Labs / Catalogo CZS"
         }
       ]
     },

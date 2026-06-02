@@ -1,125 +1,15 @@
 # Current State
 
-Updated: 2026-05-31T11:55:00-05:00
+Updated: 2026-06-02T15:17:31.932Z
 
 ## Active Goal
 
-- Rotina Catálogo CZS: notícias, stories, serviços e divulgação segura.
+- CZS social: publicando fila em lotes
 
 ## Summary
 
-Pacote de notícias de 30/05 e 31/05 foi refeito com fotos reais das fontes, sem cards vazios. O site recebeu imagens recuperadas em `news-data.js` e `data/runtime-news.json`, e o catálogo de serviços ganhou ofertas de IA, design, sites, vídeos, anúncios, gift cards, logística digital e PubPaid.
-
-Instagram `@catalogo_czs_`:
-
-- Feed concluído com 24 notícias revisadas e postadas em ordem para deixar Cruzeiro do Sul/Juruá no topo.
-- Stories concluídos com 12 vídeos de notícias com áudio embutido.
-- Stories de venda/convite concluídos com 11 vídeos verticais com áudio leve, sem postar produto no feed.
-
-WhatsApp:
-
-- Status enviado para o próprio número do usuário às 11:25 e 11:53 com o andamento.
-- Automação heartbeat ativa a cada 15 minutos para checar WhatsApp e captar ordens novas.
-- Grupos já usados nesta rodada: `VENDE-SE TUDO EM CZS`, `VENDAS E ALUGUEL! CZS` e `GRUPO DE DESAPEGO`.
+Depois da cobrança do usuário, saiu mais um lote: WhatsApp Catálogo CZS recebeu mais 4 cards de notícia; Instagram recebeu mais 5 stories (4 notícias + 1 serviço), chegando a 25 stories nesta execução. Fila de 500 segue como reservatório, mas execução está em andamento por lotes validados.
 
 ## Next
 
-- Renovar Facebook/Marketplace quando o navegador estiver estável.
-- Continuar divulgação em destinos validados, evitando chats individuais.
-- Seguir/curtir apenas perfis de nicho jornal/notícias/fofoca do Acre, Vale do Juruá e Cruzeiro do Sul; não executar rotina de seguir pessoas normais em massa.
-- Em nova rodada de notícias, usar apenas cards com foto real ou imagem premium revisada.
-
-## Files In Focus
-
-- news-data.js
-- data/runtime-news.json
-- catalogo-servicos-data.js
-- index.html
-- .codex-temp/instagram/premium-news-pack/current-20260530-20260531/premium-real-photo/
-- .codex-temp/whatsapp-catalogo-20260531/
-
-## Landing Divulgue + SEO Render - 2026-05-31
-
-- Ordem atual: criar landing comercial para propagacao da proposta do Catalogo CZS/Jornal no Render, ajustar SEO do jornal e melhorar indexacao do catalogo em buscadores.
-- Implementacao em andamento: `divulgue.html`, `divulgue.css`, links internos em `index.html` e `catalogo-servicos.html`, SEO/schema/sitemap em `server.js`, reforco de texto em `catalogo-servicos-data.js`.
-- Regra publica: manter `https://catalogo-cruzeiro-web.onrender.com/` como canonical/base publica do jornal.
-- Publicado em `main` e verificado online no Render: `/divulgue.html`, `/`, `/catalogo-servicos.html`, `/robots.txt` e `/sitemap.xml`.
-- Proximo passo: acompanhar indexacao no Google Search Console, enviar sitemap e evoluir paginas/perfis por nicho do catalogo.
-
-## Redesign Divulgue apos critica - 2026-05-31
-
-- Usuario rejeitou a versao visual da landing como horrivel e pediu estudo antes de refazer.
-- Estudo criado em `docs/commercial/czs-divulgue-redesign-study-2026-05-31.md`.
-- Redesign local aplicado em `divulgue.html` e `divulgue.css`: proposta mais regional, H1 `Apareca no Catalogo CZS`, provas comerciais, passos de divulgacao, formatos e SEO local explicado.
-- `server.js` ajustado localmente para `CommercialServicePage` com `mainEntity` de Service/OfferCatalog.
-- Pendencia: shell/processos externos bloquearam validacao e git com EPERM/740; conector GitHub bloqueou escrita com 403. Ainda falta validar com comandos, commitar/pushar e conferir Render online.
-
-## Relatorio Comercial CZS Jornal - 2026-05-31
-
-- Criados relatorios para compradores de cotas do Catálogo CZS Jornal em docs/commercial/czs-jornal-investor-report-2026-05-31.md e .html.
-- Apuracao confirmou site publico no Render, arquivo local de 480 noticias, logs de 24 posts de feed, 12 stories de noticias e 11 stories comerciais em 31/05.
-- Ressalva importante: analytics locais comprovam o motor de medicao, mas os acessos apurados sao majoritariamente locais/teste; para pitch final, anexar Instagram Insights, Render logs publicos e UTMs.
-
-## Revisao Pitch Comercial CZS Jornal - 2026-05-31
-
-- Relatorio comercial refeito como pitch para cotas: HTML e Markdown agora destacam 9.000 views informadas em aproximadamente 3 dias, 552 seguidores, 1.137 seguindo e 181 posts verificados online no Instagram.
-- Incluidos graficos de pizza, projecoes conservadora/realista/agressiva e inventario comercial de 12 modulos e 49 itens/listagens.
-- Metrica tecnica/local fraca foi removida da vitrine; para fechamento com comprador, anexar print do Instagram Insights.
-
-## Propaganda Premium Jogos + Enquete - 2026-05-31
-
-- Ordem atual incorporada: divulgar jogos/PubPaid e enquete eleitoral em todos os canais, usando somente link publico do Render.
-- Pacote premium fechado em `.codex-temp/catalogo-czs-premium-sales-20260531/`: 11 itens, captions, manifesto, preview, `CHANNEL_POSTING_PACK.md`, artes WhatsApp e videos story/status 9:16 com audio embutido.
-- Home local atualizada em `index.html` com cards para `./pubpaid.html` e `./pesquisa-acre-2026.html`.
-- Instagram/BlueStacks: PubPaid e Enquete Acre 2026 postados como stories com audio; evidencias em `.codex-temp/instagram-after-concluir-pubpaid.png` e `.codex-temp/instagram-poll-final-screen.png`.
-- WhatsApp: PubPaid enviado no grupo validado `03 POSTAR QUE VENDE LOGO CZS`; Enquete enviada no canal/grupo `Catalogo CZS`; grupo `FLORESTÃO AC NOTICIAS PREMIUM` estava admin-only e foi pulado. Log: `.codex-temp/catalogo-czs-premium-sales-20260531/whatsapp-execution-log.json`.
-- Facebook/Marketplace: pacote e captions prontos, mas nao houve postagem confirmada nesta rodada; usar `CHANNEL_POSTING_PACK.md` e evitar destino nao verificado.
-
-## Ordem Executiva Social CZS - 2026-05-31
-
-- Nova ordem do usuario: corrigir padrao de stories e feed, trocar trilha de terror por musica jornalistica, captar video das fontes primeiro, usar contexto/narracao, intercalar propaganda, criar carrosseis/destaques/editorias, limpar seguindo para manter apenas nichos e promover agentes para times de aprendizado/crescimento.
-- Documentos criados em `docs/social/`: `czs-executive-order-2026-05-31.md`, `czs-instagram-news-standard-2026-05-31.md`, `czs-growth-following-cleanup-2026-05-31.md`, `czs-editorial-growth-formats-2026-05-31.md`.
-- Regra nova: stories jornalisticos devem usar video real da fonte primeiro, contexto claro, narracao curta quando util, imagem depois e propaganda a cada 3 a 5 stories.
-- Regra de musica: sem terror/suspense exagerado; policia/acidente/luto com silencio ou base neutra baixa; politica institucional; servico leve; propaganda comercial limpa.
-- Regra de crescimento: parar de seguir perfis pessoais comuns; manter somente nichos de jornal, noticias, fofoca, radios, politica regional, Acre, Jurua e Cruzeiro; sem automacao de massa.
-
-## Correcao Arte Premium Social - 2026-05-31
-
-- Usuario reprovou artes atuais como nao premium, com exemplo de logo/assinatura do Catálogo CZS cortado e composicao fraca.
-- Criado `docs/social/czs-premium-visual-system-2026-05-31.md` com safe area, assinatura CZS, referencias de composicao jornalistica e prompt de regeneracao.
-- Atualizado `docs/social/czs-instagram-news-standard-2026-05-31.md` para reprovar automaticamente logo cortado, marca pequena e texto gerado por IA.
-- Criado bloqueio em `.codex-temp/catalogo-czs-premium-sales-20260531/VISUAL_REGENERATION_ORDER.md`: nao repostar lote atual antes de regenerar cada arte/produto/servico como asset unico.
-- Regra nova: GPT Image deve gerar fundo/foto sem texto; texto real, logo, preco, CTA e fonte entram por template para evitar letras erradas.
-- Gerado lote V2 aprovado visualmente com 11 assets em `C:/Users/junio/.codex/generated_images/019e6a06-3376-7163-92d1-281acf33a0c1/` e manifest em `.codex-temp/catalogo-czs-premium-sales-20260531/premium-v2-approved-assets.json`.
-- Um teste com URL pequeno dentro da imagem foi reprovado porque a IA errou o dominio; regra reforcada: link fica na legenda/sticker/comentario, nao na imagem.
-- Fila WhatsApp V2 criada em `.codex-temp/catalogo-czs-premium-sales-20260531/WHATSAPP_PREMIUM_V2_QUEUE.md`.
-
-## Fechamento Pitch Comprador CZS Jornal - 2026-05-31
-
-- Pitch comercial fechado para falar ao comprador: inclui secao Funcionou apos o lancamento, mercado regional imediato, pacote de fechamento da cota e linguagem de ativo operando.
-- HTML, Markdown e PDF final criados em `docs/commercial/czs-jornal-investor-report-2026-05-31.*`.
-- Material verificado sem a metrica tecnica fraca, com 9.000 views informadas, 552 seguidores, 181 posts, 12 modulos e 49 itens/listagens.
-
-## Landing Divulgue Comercial Forte - 2026-05-31
-
-- Usuario voltou a reprovar a pagina publicada e pediu refazer ate ficar perfeita, sem consulta intermediaria.
-- Nova direcao aplicada localmente: landing de venda direta com H1 `Anuncie no Catalogo CZS`, fundo visual forte, prova local na primeira dobra, fluxo jornal/catalogo/propaganda, pacotes comerciais e CTA para WhatsApp.
-- Arquivos alterados: `divulgue.html`, `divulgue.css`, `server.js`, `.codex-memory/orders.json`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md`.
-- Validacao local ja feita: `node --check server.js`, `node scripts/guard-pubpaid-no-canvas.js`, `git diff --check`, HTTP local 200 e screenshots desktop/mobile em `.codex-temp/divulgue-sales3-*.png`.
-- Proximo passo: rodar `npm run review:team`, commit/push, publicar em `main` e verificar a URL do Render com marcadores `Anuncie no Catálogo CZS` e `20260531-sales3`.
-
-## Landing Divulgue Cinematica + Relatorio - 2026-05-31
-
-- Usuario pediu fundir a landing com o projeto do chat `019e7f3c-c74e-7c43-96c8-b0e2138650c9`, que continha relatorio comercial para cotas/compradores.
-- Landing local transformada em apresentacao comercial/tecnologica: hero com console animado, radar, terminal, fluxo jornal/catalogo/Google/WhatsApp, relatorio de 3 dias, metricas, graficos, rede de nodes, 200 agentes, 108 rotas API, cotas e pacotes.
-- Cache-bust local: `20260531-cinema4`; arquivos principais: `divulgue.html`, `divulgue.css`, `server.js`.
-- Materiais do relatorio comercial do outro chat estao em `docs/commercial/czs-jornal-investor-report-2026-05-31.*` com evidencias `czs-live-site-evidence.png` e `czs-instagram-evidence.png`.
-- Validacao local desta etapa: `node --check server.js`, `git diff --check`, HTTP local 200 e screenshots `.codex-temp/divulgue-cinema4-desktop.png`, `.codex-temp/divulgue-cinema4-mobile.png`, `.codex-temp/divulgue-cinema4-mobile-full.png`.
-
-## Retomada Divulgacao Premium - 2026-05-31
-
-- Falha reportada pelo usuario: o sistema/chat fechou depois da criacao premium de imagens.
-- Diagnostico local: as artes e filas nao foram perdidas. Instagram feed/stories e stories de servicos aparecem completos nos logs; WhatsApp teve envios confirmados em grupos validados e falhou com seguranca no `GRUPO VIP DONA` por nao encontrar caixa de mensagem.
-- Fila pendente principal: `.codex-temp/catalogo-czs-premium-sales-20260531/WHATSAPP_PREMIUM_V2_QUEUE.md`, com manifest `premium-v2-approved-assets.json` e fila complementar `whatsapp-missing-ads-queue.json`.
-- Automacao heartbeat criada: `retomar-divulgacao-czs-segura`, a cada 15 minutos, para retomar sem recomecar do zero.
-- Proximo passo seguro: recuperar controle do WhatsApp/navegador, abrir somente grupos validados, conferir cabecalho e caixa de mensagem, evitar duplicar item ja registrado em `whatsapp-execution-log.json`, e pular destino sem caixa/admin-only.
+- Continuar gerando lotes filtrados por localidade real; bloquear notícia global/política opinativa e classificados no Instagram; publicar sem deixar apenas em fila.

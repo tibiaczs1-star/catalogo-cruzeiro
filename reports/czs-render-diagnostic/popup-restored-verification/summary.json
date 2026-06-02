@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-06-01 17:04:42",
+  "base": "http://127.0.0.1:3198/",
+  "results": [
+    {
+      "name": "home-popup-restored",
+      "url": "http://127.0.0.1:3198/?popup-check=1780351472",
+      "status": 200,
+      "title": "Catalogo CZS | Jornal de Cruzeiro do Sul e Vale do Jurua",
+      "popup_selector": "[data-home-activation-popup]",
+      "popup_count": 1,
+      "popup_visible": true,
+      "popup_state": {
+        "exists": true,
+        "hidden": false,
+        "className": "home-activation-popup is-visible",
+        "display": "grid",
+        "opacity": "1",
+        "width": 1366,
+        "height": 900
+      },
+      "body_class": "editorial-home fx-lite cookie-consent-visible pro-design-ready cinematic-parallax-lite site-loaded mobile-intro-ready",
+      "console": [],
+      "page_errors": [],
+      "bad_responses": [],
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\popup-restored-verification\\home-popup-restored.png"
+    },
+    {
+      "name": "catalogo-servicos-popup-restored",
+      "url": "http://127.0.0.1:3198/catalogo-servicos.html?popup-check=1780351480",
+      "status": 200,
+      "title": "Catalogo de Servicos em Cruzeiro do Sul | Telefones e WhatsApp",
+      "popup_selector": "[data-svc-activation-popup]",
+      "popup_count": 1,
+      "popup_visible": true,
+      "popup_state": {
+        "exists": true,
+        "hidden": false,
+        "className": "svc-activation-popup is-visible",
+        "display": "grid",
+        "opacity": "1",
+        "width": 1366,
+        "height": 900
+      },
+      "body_class": "catalogo-servicos-page",
+      "console": [],
+      "page_errors": [],
+      "bad_responses": [],
+      "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\popup-restored-verification\\catalogo-servicos-popup-restored.png"
+    }
+  ],
+  "ok": true
+}

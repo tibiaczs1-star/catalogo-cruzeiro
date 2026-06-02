@@ -1,0 +1,24 @@
+{
+  "version": "rayxpx-v2-handpaint-20260601",
+  "status": "single-frame art study, not runtime replacement yet",
+  "method": "literal hand-authored pixel spans in Python; no procedural body builder, no CSS/SVG/canvas primitives for the sprite",
+  "frame_size": [
+    96,
+    144
+  ],
+  "anchor": {
+    "x": 48,
+    "y": 136
+  },
+  "hitbox": {
+    "x": 31,
+    "y": 93,
+    "w": 34,
+    "h": 43
+  },
+  "files": {
+    "sprite": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v2-handpaint\\rayxpx_v2_lia_neon_handpaint_front_96x144.png",
+    "zoom": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v2-handpaint\\rayxpx_v2_lia_neon_handpaint_front_zoom5.png",
+    "board": "C:\\Users\\junio\\projeto codex\\assets\\pubpaid\\sprite-candidates\\rayxpx-v2-handpaint\\rayxpx_v2_handpaint_board.png"
+  }
+}

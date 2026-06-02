@@ -446,6 +446,12 @@ const reportSubmit = document.querySelector("#detail-report-submit");
 const thumbNode = document.querySelector("#detail-thumb");
 const categoryNode = document.querySelector("#detail-category");
 const ledeNode = document.querySelector("#detail-lede");
+const audioReaderNode = document.querySelector("#detail-audio-reader");
+const audioReaderTextNode = document.querySelector("#detail-audio-text");
+const audioPlayButton = document.querySelector("#detail-audio-play");
+const audioStopButton = document.querySelector("#detail-audio-stop");
+const videoCaptionNode = document.querySelector("#detail-video-caption");
+const videoCaptionTextNode = document.querySelector("#detail-video-caption-text");
 const contentNode = document.querySelector("#detail-content");
 const sourceNameNode = document.querySelector("#detail-source-name");
 const sourceLabelNode = document.querySelector("#detail-source-label");
@@ -1230,6 +1236,89 @@ const normalizeDetailArticle = (article = {}) => {
   };
 };
 
+const buildArticleNarrationText = (article = {}) => {
+  const title = normalizeEditorialText(article.audioNarrationText || "");
+  if (title) return title.slice(0, 950);
+
+  const parts = [
+    "Catálogo CZS.",
+    article.category ? `Notícia de ${article.category}.` : "Notícia local.",
+    article.title,
+    article.lede || article.summary,
+    article.sourceName ? `Fonte: ${article.sourceName}.` : ""
+  ]
+    .map(normalizeEditorialText)
+    .filter(Boolean);
+
+  return parts.join(" ").slice(0, 950);
+};
+
+const getFemalePortugueseVoice = () => {
+  if (!("speechSynthesis" in window)) return null;
+  const voices = window.speechSynthesis.getVoices?.() || [];
+  const ptBrVoices = voices.filter((voice) => /^pt[-_]BR$/i.test(voice.lang || ""));
+  const portugueseNonPortugalVoices = voices.filter((voice) => {
+    const lang = String(voice.lang || "");
+    return /^pt([-_]|$)/i.test(lang) && !/^pt[-_]PT$/i.test(lang);
+  });
+  const femaleNamePattern = /female|femin|maria|francisca|helena|luciana|vitoria|vitória|let[ií]cia|yara|camila/i;
+  return (
+    ptBrVoices.find((voice) => femaleNamePattern.test(voice.name || "")) ||
+    ptBrVoices[0] ||
+    portugueseNonPortugalVoices.find((voice) => femaleNamePattern.test(voice.name || "")) ||
+    portugueseNonPortugalVoices[0] ||
+    null
+  );
+};
+
+const stopArticleNarration = () => {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+  audioPlayButton?.classList.remove("is-playing");
+};
+
+const playArticleNarration = (text = "") => {
+  if (!("speechSynthesis" in window) || !text) return;
+  stopArticleNarration();
+  const utterance = new SpeechSynthesisUtterance(text);
+  const voice = getFemalePortugueseVoice();
+  if (voice) utterance.voice = voice;
+  utterance.lang = /^pt[-_]BR$/i.test(voice?.lang || "") ? voice.lang : "pt-BR";
+  utterance.rate = 0.94;
+  utterance.pitch = 1.08;
+  utterance.volume = 1;
+  utterance.onend = () => audioPlayButton?.classList.remove("is-playing");
+  utterance.onerror = () => audioPlayButton?.classList.remove("is-playing");
+  audioPlayButton?.classList.add("is-playing");
+  window.speechSynthesis.speak(utterance);
+};
+
+const renderArticleAudioAndCaption = (article = {}) => {
+  const narrationText = buildArticleNarrationText(article);
+  if (audioReaderNode && audioReaderTextNode && narrationText) {
+    audioReaderTextNode.textContent = narrationText;
+    audioReaderNode.hidden = false;
+    if (audioPlayButton) audioPlayButton.onclick = () => playArticleNarration(narrationText);
+    if (audioStopButton) audioStopButton.onclick = stopArticleNarration;
+  } else if (audioReaderNode) {
+    audioReaderNode.hidden = true;
+  }
+
+  const captionText = normalizeEditorialText(
+    article.videoCaptionText ||
+      article.media?.caption ||
+      article.media?.note ||
+      `${article.title || ""}. ${article.sourceName ? `Fonte: ${article.sourceName}.` : ""}`
+  );
+  if (videoCaptionNode && videoCaptionTextNode && captionText) {
+    videoCaptionTextNode.textContent = captionText;
+    videoCaptionNode.hidden = false;
+  } else if (videoCaptionNode) {
+    videoCaptionNode.hidden = true;
+  }
+};
+
 const getDetailArticleQualityScore = (article = {}) => {
   const imageUrl = String(
     article.imageUrl || article.feedImageUrl || article.sourceImageUrl || article.image || ""
@@ -1864,6 +1953,7 @@ const renderArticle = (article) => {
   resetDetailThumb();
   categoryNode.textContent = article.category || "Noticia";
   ledeNode.textContent = normalizeEditorialText(article.lede || article.summary || "");
+  renderArticleAudioAndCaption(article);
   sourceNameNode.textContent = article.sourceName || "Fonte local";
   sourceLabelNode.textContent = normalizeEditorialText(article.sourceLabel || article.title || "");
   sourceLinkNode.href = article.sourceUrl || HOME_RETURN_URL;

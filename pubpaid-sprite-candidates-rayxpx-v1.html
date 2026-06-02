@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PubPaid Sprite Candidates - Rayxpx v1</title>
+  <style>
+    :root { color-scheme: dark; --bg:#07090d; --panel:#10141d; --green:#30f2a2; --cyan:#2ee7e0; --pink:#f14496; --gold:#e7ae3d; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:radial-gradient(circle at 20% 0%, #14201c 0, #07090d 28rem); color:#e8f3ea; font-family: system-ui, Segoe UI, Arial, sans-serif; }
+    main { max-width: 1280px; margin: 0 auto; padding: 28px; }
+    h1 { color: var(--green); margin: 0 0 8px; font-size: 28px; letter-spacing: .03em; }
+    .note { color:#b7c8bf; max-width: 900px; line-height: 1.5; }
+    .warn { color:#ffd17a; border:1px solid #5b4316; background:#191306; padding:12px 14px; border-radius:12px; margin:18px 0; }
+    .board { width:100%; image-rendering: pixelated; border:1px solid #1a513e; background:#080a0f; border-radius:16px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:22px; }
+    .card { background:linear-gradient(180deg,#111823,#0c1018); border:1px solid #1b3b35; border-radius:18px; padding:16px; box-shadow:0 0 26px #00ff8820; }
+    .card h2 { margin:0 0 6px; color:#fff2c6; font-size:20px; }
+    .tag { display:inline-block; margin:0 6px 10px 0; padding:4px 8px; border:1px solid #2c6b56; border-radius:999px; color:#b9ffe3; font-size:12px; }
+    .sheet { width:100%; max-height:520px; object-fit:contain; image-rendering: pixelated; background:#07080c; border:1px dashed #294f43; border-radius:12px; padding:10px; }
+    code { color:#94ffd4; }
+    footer { margin:28px 0 8px; color:#8aa99a; font-size:13px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>PubPaid sprite candidates - Rayxpx v1</h1>
+  <p class="note">Amostras para substituir os sprites atuais sem tocar no runtime ainda. Contrato igual ao PubPaid atual: 96x144 por frame, 4 colunas, 8 direcoes, idle e walk, ancora nos pes e hitbox separado.</p>
+  <div class="warn">Status: v1/draft. Serve para Junior escolher direcao visual. Antes de aplicar no jogo, precisa refinamento de rosto/cabelo/roupa e teste lado a lado com os protagonistas atuais.</div>
+  <img class="board" src="assets/pubpaid/sprite-candidates/rayxpx-v1/rayxpx_v1_pubpaid_sprite_candidates_preview_board.png" alt="Preview board com tres candidatos PubPaid" />
+  <section class="grid">
+    <article class="card">
+      <h2>Lia Neon VIP</h2><span class="tag">protagonista feminina</span><span class="tag">lobby VIP</span><span class="tag">celular/carteira</span>
+      <img class="sheet" src="assets/pubpaid/sprite-candidates/rayxpx-v1/rayxpx_v1_lia_neon_vip_idle_breathe_8dir_4f.png" alt="Lia Neon idle sheet" />
+      <p><code>idle</code> + arquivo walk no mesmo diretorio.</p>
+    </article>
+    <article class="card">
+      <h2>Nando Seguranca</h2><span class="tag">protagonista masculino</span><span class="tag">entrada/PvP</span><span class="tag">radio</span>
+      <img class="sheet" src="assets/pubpaid/sprite-candidates/rayxpx-v1/rayxpx_v1_nando_bar_security_idle_breathe_8dir_4f.png" alt="Nando Seguranca idle sheet" />
+      <p><code>idle</code> + arquivo walk no mesmo diretorio.</p>
+    </article>
+    <article class="card">
+      <h2>Sol Dealer</h2><span class="tag">NPC jogavel</span><span class="tag">mesa/tutorial</span><span class="tag">cartas</span>
+      <img class="sheet" src="assets/pubpaid/sprite-candidates/rayxpx-v1/rayxpx_v1_sol_card_dealer_idle_breathe_8dir_4f.png" alt="Sol Dealer idle sheet" />
+      <p><code>idle</code> + arquivo walk no mesmo diretorio.</p>
+    </article>
+  </section>
+  <footer>Manifesto tecnico: assets/pubpaid/sprite-candidates/rayxpx-v1/rayxpx_v1_manifest.json</footer>
+</main>
+</body>
+</html>

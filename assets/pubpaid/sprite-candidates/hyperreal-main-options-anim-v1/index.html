@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PubPaid - Hyperreal Main Character Animation Review v1</title>
+<style>
+:root{--bg:#050705;--panel:#0b120e;--green:#00ff7a;--gold:#e6b84a;--red:#ff355d;--muted:#8fbf9f;}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top,#102018,#050705 50%);color:#dfffe9;font-family:Arial,Helvetica,sans-serif;}
+header{padding:18px 22px;border-bottom:1px solid #0f3;color:var(--green);background:#020402;position:sticky;top:0;z-index:2} h1{font-size:20px;margin:0 0 6px} p{margin:4px 0;color:#b8d8c0}.wrap{display:grid;grid-template-columns:360px 1fr;gap:18px;padding:18px}.panel{background:rgba(5,12,9,.92);border:1px solid rgba(0,255,122,.25);border-radius:14px;padding:14px;box-shadow:0 0 22px rgba(0,255,122,.08)}label{display:block;margin-top:12px;color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:.08em}select,button{width:100%;background:#07110b;color:#dfffe9;border:1px solid rgba(0,255,122,.45);border-radius:10px;padding:10px;margin-top:6px}button{cursor:pointer}button:hover{background:#0d1f14}.stage{min-height:520px;display:grid;grid-template-columns:1fr 330px;gap:14px}.scene{position:relative;min-height:520px;border-radius:14px;overflow:hidden;background:linear-gradient(#15100b,#20140c 62%,#0c0c0c 63%);border:1px solid rgba(230,184,74,.25)}.floor{position:absolute;left:0;right:0;bottom:0;height:38%;background:repeating-linear-gradient(90deg,#2b160b 0 70px,#241006 70px 140px);border-top:4px solid #5b3516}.neon{position:absolute;left:24px;top:24px;color:#00ff7a;text-shadow:0 0 10px #00ff7a;font-weight:bold}.bar{position:absolute;right:36px;top:130px;width:220px;height:90px;border-radius:14px;background:#4b210d;border:2px solid #b87826;box-shadow:0 10px 0 #1e0c04}.spriteWrap{position:absolute;left:50%;bottom:92px;width:96px;height:144px;transform:translateX(-50%) scale(3);transform-origin:bottom center;image-rendering:auto}.sprite{width:96px;height:144px;background-repeat:no-repeat;background-size:384px 1152px;image-rendering:auto;filter:drop-shadow(0 8px 3px rgba(0,0,0,.65))}.pixelated .sprite{image-rendering:pixelated}.box{position:absolute;pointer-events:none;display:none}.showBoxes .hitbox{display:block;left:34px;top:96px;width:30px;height:39px;border:1px solid #ff355d;background:rgba(255,53,93,.16)}.showBoxes .hurtbox{display:block;left:25px;top:18px;width:46px;height:118px;border:1px solid #00d1ff;background:rgba(0,209,255,.08)}.info code{color:#fff;background:#07110b;border:1px solid rgba(0,255,122,.18);padding:2px 4px;border-radius:4px}.sheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px}.sheet{width:100%;background:#111;border:1px solid rgba(0,255,122,.25);border-radius:10px;image-rendering:pixelated}.badge{display:inline-block;padding:3px 8px;border:1px solid rgba(0,255,122,.4);border-radius:999px;color:#00ff7a;margin-right:6px}.warn{color:#ffd36a;border-left:3px solid #e6b84a;padding-left:10px}.small{font-size:12px;color:#9db7a5}@media(max-width:900px){.wrap{grid-template-columns:1fr}.stage{grid-template-columns:1fr}.spriteWrap{transform:translateX(-50%) scale(2.4)}}
+</style>
+</head>
+<body>
+<header><h1>PubPaid - revisão de animações dos novos protagonistas v1</h1><p>Visualização local antes de aprovação geral. Não aplicado no runtime.</p></header>
+<div class="wrap">
+<section class="panel">
+  <div class="warn"><b>Status honesto:</b> animações draft feitas a partir dos conceitos hiper-realistas frontais. Idle/walk/gestos estão testáveis; lados/costas ainda precisam passe manual para produção final.</div>
+  <label>Personagem</label><select id="character"></select>
+  <label>Animação</label><select id="animation"></select>
+  <label>Direção</label><select id="direction"></select>
+  <label>Velocidade</label><select id="speed"><option value="260">lento</option><option value="180" selected>normal</option><option value="110">rápido</option></select>
+  <button id="toggleBoxes">Alternar hitbox/hurtbox</button>
+  <button id="togglePixels">Alternar pixelated/suave</button>
+  <button id="pause">Pausar/rodar</button>
+  <hr style="border-color:rgba(0,255,122,.18)">
+  <p><span class="badge">96x144</span><span class="badge">8 direções</span><span class="badge">4 frames</span></p>
+  <p class="small">Controles mudam background-position do PNG sheet real. Caminhos relativos são testados por JS.</p>
+</section>
+<section class="stage">
+  <div class="scene" id="scene"><div class="neon">PUBPAID BAR</div><div class="bar"></div><div class="floor"></div><div class="spriteWrap" id="spriteWrap"><div class="sprite" id="sprite"><div class="box hitbox"></div><div class="box hurtbox"></div></div></div></div>
+  <div class="panel info"><h2 id="charName"></h2><p id="charRole"></p><p><b>Animações:</b> idle_breathe, walk, idle_phone, wave, receive_item, win_pose.</p><p><b>Anchor:</b> <code>48,138</code></p><p><b>Hitbox:</b> <code>x34 y96 w30 h39</code></p><p><b>Próximo passe:</b> redesenhar direções laterais/costas e limpar braço/mão dos gestos.</p></div>
+</section>
+<section class="panel" style="grid-column:1/-1"><h2>Sprite sheets gerados</h2><div id="sheetList" class="sheets"></div></section>
+</div>
+<script>
+const DATA = {"rows": ["down", "down-right", "right", "up-right", "up", "up-left", "left", "down-left"], "animations": ["idle_breathe", "walk", "idle_phone", "wave", "receive_item", "win_pose"], "characters": {"caio_pix": {"name": "Caio Pix", "role": "protagonista masculino / carteira digital / rua-bar", "sheets": {"idle_breathe": "caio_pix/caio_pix_idle_breathe_8dir_4f.png", "walk": "caio_pix/caio_pix_walk_8dir_4f.png", "idle_phone": "caio_pix/caio_pix_idle_phone_8dir_4f.png", "wave": "caio_pix/caio_pix_wave_8dir_4f.png", "receive_item": "caio_pix/caio_pix_receive_item_8dir_4f.png", "win_pose": "caio_pix/caio_pix_win_pose_8dir_4f.png"}}, "rafa_dealer": {"name": "Rafa Dealer", "role": "protagonista feminina premium / dealer estrategista", "sheets": {"idle_breathe": "rafa_dealer/rafa_dealer_idle_breathe_8dir_4f.png", "walk": "rafa_dealer/rafa_dealer_walk_8dir_4f.png", "idle_phone": "rafa_dealer/rafa_dealer_idle_phone_8dir_4f.png", "wave": "rafa_dealer/rafa_dealer_wave_8dir_4f.png", "receive_item": "rafa_dealer/rafa_dealer_receive_item_8dir_4f.png", "win_pose": "rafa_dealer/rafa_dealer_win_pose_8dir_4f.png"}}}};
+const FW=96, FH=144;
+let frame=0, timer=null, paused=false;
+const $=id=>document.getElementById(id);
+function fill(){
+  for(const [id,c] of Object.entries(DATA.characters)){ $('character').insertAdjacentHTML('beforeend',`<option value="${id}">${c.name}</option>`); }
+  DATA.animations.forEach(a=>$('animation').insertAdjacentHTML('beforeend',`<option value="${a}">${a}</option>`));
+  DATA.rows.forEach((d,i)=>$('direction').insertAdjacentHTML('beforeend',`<option value="${i}">${d}</option>`));
+}
+function current(){ const cid=$('character').value, anim=$('animation').value, dir=Number($('direction').value); return {cid, anim, dir, c:DATA.characters[cid]}; }
+function render(){
+  const {anim,dir,c}=current();
+  const path=c.sheets[anim];
+  const spr=$('sprite');
+  spr.style.backgroundImage=`url('${path}')`;
+  spr.style.backgroundPosition=`-${frame*FW}px -${dir*FH}px`;
+  $('charName').textContent=c.name;
+  $('charRole').textContent=c.role;
+}
+function rebuildSheets(){
+ const {c}=current(); const box=$('sheetList'); box.innerHTML='';
+ for(const [anim,path] of Object.entries(c.sheets)){
+   const card=document.createElement('div'); card.innerHTML=`<p><b>${anim}</b><br><span class="small">${path}</span></p><img class="sheet" src="${path}" alt="${anim}">`; box.appendChild(card);
+ }
+}
+function tick(){ if(!paused){ frame=(frame+1)%4; render(); } }
+function restart(){ clearInterval(timer); timer=setInterval(tick, Number($('speed').value)); render(); rebuildSheets(); }
+fill(); restart();
+['character','animation','direction','speed'].forEach(id=>$(id).addEventListener('change',restart));
+$('toggleBoxes').onclick=()=>$('spriteWrap').classList.toggle('showBoxes');
+$('togglePixels').onclick=()=>document.body.classList.toggle('pixelated');
+$('pause').onclick=()=>{paused=!paused;};
+</script>
+</body></html>

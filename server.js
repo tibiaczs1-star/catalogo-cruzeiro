@@ -450,9 +450,9 @@ const STATIC_PAGE_SEO = {
     fileName: "index.html"
   },
   "/divulgue.html": {
-    title: `Anuncie no Catalogo CZS | Motor de Propagacao e SEO Local`,
+    title: `Anuncie em Cruzeiro do Sul | Catalogo CZS`,
     description:
-      "Anuncie no Catalogo CZS com jornal local, catalogo de servicos, WhatsApp, Instagram, landing pages, SEO e motor de propagacao para empresas de Cruzeiro do Sul.",
+      "Anuncie em Cruzeiro do Sul com o Catalogo CZS: jornal local, catalogo de servicos, SEO, WhatsApp, Instagram, landing pages e propaganda no Vale do Jurua.",
     themeColor: "#143D66",
     colorScheme: "light",
     ogType: "website",
@@ -3113,7 +3113,9 @@ function buildStaticPageJsonLd(baseUrl, canonicalUrl, seoConfig = {}) {
         "Catalogo de servicos",
         "SEO local",
         "Landing pages",
-        "Conteudo para redes sociais"
+        "Conteudo para redes sociais",
+        "Media kit local",
+        "Campanhas para WhatsApp e Instagram"
       ],
       areaServed: {
         "@type": "AdministrativeArea",
@@ -3149,6 +3151,20 @@ function buildStaticPageJsonLd(baseUrl, canonicalUrl, seoConfig = {}) {
             itemOffered: {
               "@type": "Service",
               name: "PubPaid promocional e experiencias interativas"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Media kit e relatorio comercial para cota premium"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Operacao completa de presenca local no Vale do Jurua"
             }
           }
         ]
@@ -7119,6 +7135,12 @@ function normalizeArticleRecord(item) {
     imageFocus: item.imageFocus || "",
     imageFit: item.imageFit || "",
     media: item.media || null,
+    audioNarrationText: item.audioNarrationText || "",
+    audioNarrationVoice: item.audioNarrationVoice || "",
+    audioNarrationStatus: item.audioNarrationStatus || "",
+    videoCaptionText: item.videoCaptionText || "",
+    videoCaptionStatus: item.videoCaptionStatus || "",
+    accessibility: item.accessibility || null,
     priority: Math.max(Number(item.priority || 0), isMailzaPriority ? 950 : 0),
     editorialPriority: isMailzaPriority ? "mailza-prioridade" : item.editorialPriority || ""
   };
@@ -7577,6 +7599,45 @@ function getArticleBySlug(slug) {
   }
 
   const staticDetailFallbacks = {
+    "rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul": normalizeArticleRecord({
+      id: "rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
+      slug: "rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
+      title: "Rio Juruá segue em atenção e exige monitoramento em Cruzeiro do Sul",
+      eyebrow: "Clima e cheia",
+      date: "27 de abril de 2026",
+      publishedAt: "2026-04-27T08:30:00-05:00",
+      category: "Clima e alertas",
+      sourceName: "Catálogo Cruzeiro do Sul",
+      sourceUrl: "./arquivo.html?busca=Rio%20Juru%C3%A1",
+      sourceLabel: "Acompanhamento local sobre nível do Rio Juruá e impactos na rotina.",
+      imageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+      feedImageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+      sourceImageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+      imageCredit: "Imagem de apoio do acervo visual do portal",
+      imageFocus: "center 48%",
+      lede:
+        "O nível do Rio Juruá continua como ponto de atenção para moradores, comerciantes e comunidades ribeirinhas de Cruzeiro do Sul.",
+      summary:
+        "A matéria mantém um caminho estável para leitores que chegaram por links antigos do Render e reúne orientação de acompanhamento, serviços úteis e arquivo local.",
+      analysis:
+        "Links antigos sobre a cheia precisam abrir uma página útil, mesmo quando a matéria original saiu do feed dinâmico. O portal deve preservar o acesso e direcionar o leitor para atualizações e serviços relacionados.",
+      body: [
+        "O acompanhamento do Rio Juruá exige leitura constante de avisos oficiais, previsão de chuva, pontos de transbordamento e orientação para famílias em área de risco.",
+        "Esta página funciona como fallback editorial para manter vivo o link público antigo e evitar erro 404 em buscas, redes sociais e compartilhamentos do catálogo.",
+        "Quando houver atualização nova, o leitor deve consultar o arquivo de notícias, os canais oficiais e a área de serviços do portal para endereços, contatos e avisos recentes.",
+        "A prioridade é transformar um link quebrado em uma página clara, com contexto local e caminho para informação útil."
+      ],
+      highlights: [
+        "Link antigo de notícia sobre o Rio Juruá volta a abrir com status 200",
+        "Conteúdo orienta o leitor para acompanhamento e serviços úteis",
+        "Fallback evita perda de tráfego em redes sociais e buscadores",
+        "Tema segue ligado ao arquivo climático e regional do portal"
+      ],
+      development: [
+        "Substituir este fallback por matéria atualizada quando houver fonte confirmada.",
+        "Conectar automaticamente links antigos de cheia ao painel de clima e serviços."
+      ]
+    }),
     "prefeitura-bairros-e-servicos-entram-na-leitura-principal": normalizeArticleRecord({
       id: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
       slug: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
@@ -10280,6 +10341,13 @@ function buildNewsImageFocusApprovalQueue() {
   const reviewQueue = Array.isArray(report.reviewQueue) ? report.reviewQueue : [];
   const itemsBySlug = new Map(fullItems.map((item) => [safeString(item.slug || "", 220), item]));
   const strictNewItems = fullItems.filter((item) => item.isNewSinceLastAudit && item.level !== "ok");
+  const runtimeApprovalQueue = buildImageApprovalQueue({ newOnly: false });
+  const runtimeApprovalBySlug = new Map(
+    (Array.isArray(runtimeApprovalQueue.allQueue) ? runtimeApprovalQueue.allQueue : [])
+      .filter((item) => item?.slug)
+      .map((item) => [safeString(item.slug || "", 220), item])
+  );
+  const finalRuntimeDecisionStatuses = new Set(["applied", "sent-to-agents", "superseded"]);
   const sourceItems = strictNewItems.length
     ? strictNewItems
     : fullItems.filter((item) => item.level !== "ok").length
@@ -10296,7 +10364,11 @@ function buildNewsImageFocusApprovalQueue() {
     .map((item) => normalizeNewsImageFocusAuditItem(item, itemsBySlug.get(safeString(item.slug || "", 220)) || {}))
     .filter((item) => item.slug)
     .map((item) => {
-      const decision = latestDecisionBySlug.get(item.slug) || null;
+      const runtimeApproval = runtimeApprovalBySlug.get(item.slug) || null;
+      const runtimeDecision = runtimeApproval?.latestDecision || null;
+      const decision = latestDecisionBySlug.get(item.slug) || runtimeDecision || null;
+      const runtimeDecisionStatus = safeString(runtimeDecision?.status || runtimeApproval?.decisionStatus || "", 80);
+      const isFinalRuntimeDecision = finalRuntimeDecisionStatuses.has(runtimeDecisionStatus);
       return {
         ...item,
         decision: decision
@@ -10304,18 +10376,21 @@ function buildNewsImageFocusApprovalQueue() {
               id: safeString(decision.id || "", 120),
               decision: safeString(decision.decision || "", 80),
               decisionLabel: safeString(decision.decisionLabel || "", 80),
-              status: safeString(decision.status || "", 80),
+              status: runtimeDecisionStatus || safeString(decision.status || "", 80),
               focus: safeString(decision.focus || "", 80),
               replacementImageUrl: safeString(decision.replacementImageUrl || "", 1200),
               note: safeString(decision.note || "", 600),
               nextRuntimeAction: safeString(decision.nextRuntimeAction || "", 260),
-              updatedAt: safeString(decision.updatedAt || decision.createdAt || "", 80)
+              appliedAt: safeString(runtimeDecision?.appliedAt || "", 80),
+              sentToAgentsAt: safeString(runtimeDecision?.sentToAgentsAt || "", 80),
+              updatedAt: safeString(runtimeDecision?.updatedAt || decision.updatedAt || decision.createdAt || "", 80)
             }
-          : null
+          : null,
+        pending: !decision || !isFinalRuntimeDecision
       };
     });
   const summary = report && typeof report.summary === "object" ? report.summary : {};
-  const pendingCount = queue.filter((item) => !item.decision).length;
+  const pendingCount = queue.filter((item) => item.pending).length;
 
   return {
     ok: true,
@@ -15306,6 +15381,27 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildStorageHealthPayload({ writeProbe: true }));
   }
 
+  // Serve catalogo-capture.js (exists on some branches, fall back to inline stub)
+  if (req.method === "GET" && pathname === "/api/catalogo-capture.js") {
+    const capturePath = path.join(ROOT_DIR, "catalogo-capture.js");
+    if (fs.existsSync(capturePath)) {
+      const content = fs.readFileSync(capturePath, "utf-8");
+      res.writeHead(200, {
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "public, max-age=3600",
+        "X-Content-Type-Options": "nosniff"
+      });
+      return res.end(content);
+    }
+    // Stub: minimal capture interface so the page doesn't break
+    const stub = `/* catalogo-capture stub - not available on this deployment */\n(window.CatalogoCapture={open:function(){alert("Captura nao disponivel neste momento.")}});`;
+    res.writeHead(200, {
+      "Content-Type": "application/javascript; charset=utf-8",
+      "Cache-Control": "public, max-age=60"
+    });
+    return res.end(stub);
+  }
+
   if (req.method === "GET" && pathname === "/api/auth/config") {
     return sendJson(res, 200, {
       ok: true,
@@ -15796,6 +15892,17 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const order = recordPubPaidSpriteScoutOrder(body);
     return sendJson(res, 201, { ok: true, order, ...buildPubPaidSpriteScoutPayload() });
+  }
+
+  if (req.method === "GET" && pathname === "/api/health") {
+    return sendJson(res, 200, {
+      ok: true,
+      service: "catalogo-czs-render",
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      newsItems: getNews(1).length,
+      build: PUBPAID_CLIENT_BUILD_VERSION
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/news/aggregator") {

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "home",
+    "status": 200,
+    "ms": 3748,
+    "title": "Catalogo CZS | Jornal de Cruzeiro do Sul e Vale do Jurua",
+    "h1": [
+      ""
+    ],
+    "inputs": 13,
+    "buttons": 56,
+    "bad": [],
+    "console": [],
+    "body": "PORTAL\n\nCRUZEIRO DO SUL\nCATÁLOGO CRUZEIRO DO SUL\nVALE DO JURUÁ\n\nInicializando experiência...\n\nCARREGANDO A PRIMEIRA TELA VISÍVEL\nLEITURA REGIONAL\n98%\nAnuncie aqui\nChefe Call",
+    "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\home-mobile-rerun.png",
+    "error": null
+  },
+  {
+    "name": "catalogo-servicos",
+    "status": 200,
+    "ms": 3156,
+    "title": "Catalogo de Servicos em Cruzeiro do Sul | Telefones e WhatsApp",
+    "h1": [
+      "Servicos digitais e divulgacao em Cruzeiro do Sul"
+    ],
+    "inputs": 1,
+    "buttons": 13,
+    "bad": [],
+    "console": [],
+    "body": "Catálogo Cruzeiro do Sul • Serviços por módulo\nVoltar para home\nDivulgue sua empresa\nEM PREPARAÇÃO\nAlguns módulos ainda estão recebendo novas informações.\n\nO catálogo continua aberto para consulta; novas empresas e serviços serão adicionados conforme forem confirmados.\n\nServicos digitais e divulgacao em Cruzeiro do Sul\n\nIA, design, anuncios, sites, SEO local e apoio logistico digital para vender mais no Vale do Jurua\n\nServicos digitais e divulgacao em Cruzeiro do Sul\nRestaurantes\nFarmácias\nSaúde\nEmergência\nTransporte\nHospedagem\nLocação e Transporte\nUtilidade Pública\nPrefeitura de Cruzeiro do Sul\nAcre / Governo\nPets e Veterinário\nGuia local de Cruzeiro do Sul para serviços, telefones e empresas\n\nEncontre contatos úteis no Vale do Juruá por categoria: restaurantes, farmácias, saúde, emergênc",
+    "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\catalogo-servicos-mobile-rerun.png",
+    "error": null
+  },
+  {
+    "name": "arquivo",
+    "status": 200,
+    "ms": 3868,
+    "title": "Pesquisa Completa | Catálogo Cruzeiro do Sul",
+    "h1": [
+      "Abra o arquivo inteiro, filtre por assunto e role com calma."
+    ],
+    "inputs": 1,
+    "buttons": 16,
+    "bad": [],
+    "console": [],
+    "body": "CATÁLOGO\nCRUZEIRO DO SUL\nArquivo regional\nDestaques\nResumo CZS\nLinha do tempo\nFestas & Social\n\nPESQUISA COMPLETA\n\nAbra o arquivo inteiro, filtre por assunto e role com calma.\n\nEsta aba reúne a base de notícias verificadas em um ambiente próprio de consulta. Pesquise por bairro, órgão, tema, fonte, editoria ou palavra do resumo.\n\nVoltar para a home\nIr para o radar\n\nARQUIVO REGIONAL EM TELA CHEIA\n\nPesquisa de notícias, temas e fontes\n\nDigite um termo, use os filtros rápidos e percorra a base com espaço de leitura, sem espremimento e sem perder o contexto.\n\nBUSCAR NO ARQUIVO\nPERÍODO\nHoje\n7 dias\n30 dias\n3 meses\n6 meses\nTodo arquivo\n723\nnotícias já postadas\nArquivo local: 723 notícias cadastradas\n\nArquivo de notícias postadas pronto. Use o auto completar para buscar por título, fonte, editoria ",
+    "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\arquivo-mobile-rerun.png",
+    "error": null
+  },
+  {
+    "name": "divulgue",
+    "status": 200,
+    "ms": 3682,
+    "title": "Anuncie no Catalogo CZS | Motor de Propagacao e SEO Local",
+    "h1": [
+      "Sua empresa\ndentro do\nsistema."
+    ],
+    "inputs": 0,
+    "buttons": 0,
+    "bad": [],
+    "console": [],
+    "body": "Pular para o conteúdo\nCATÁLOGO CZS\n\nCRUZEIRO DO SUL • VALE DO JURUÁ • ACRE\n\nSua empresa\ndentro do\nsistema.\n\nNão é só um anúncio. É presença local conectada a jornal, catálogo, Google, Instagram, WhatsApp e Facebook.\n\nO CZS transforma notícia \n\nQUERO DIVULGAR MINHA EMPRESA\n↗\nVER COMO FUNCIONA\nINSTAGRAM\nGOOGLE\nWHATSAPP\nFACEBOOK\nCATÁLOGO\nJORNAL LOCAL\n\nOPERAÇÃO REGIONAL CONECTADA\n\n480\nNOTÍCIAS NO ARQUIVO LOCAL\n81\nCONTATOS CATALOGADOS\n26\nCATEGORIAS LOCAIS\n111\nROTAS DE TECNOLOGIA\n\nUM MOTOR LOCAL DE DESCOBERTA\n\nEnquanto um post desaparece, o CZS constrói presença.\n\nSeu negócio entra em uma operação regional criada para transformar atenção em descoberta, descoberta em contato e contato em venda. A campanha circula nos canais certos e continua encontrável depois da publicação.\n\nO OBJETIVO\nSer encon",
+    "screenshot": "C:\\Users\\junio\\projeto codex\\reports\\czs-render-diagnostic\\screenshots\\divulgue-mobile-rerun.png",
+    "error": null
+  }
+]

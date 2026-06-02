@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-05-27T19:52:25.973Z",
-  "finishedAt": "2026-05-27T19:52:30.479Z",
-  "capturedItems": 239,
-  "capturedToday": 172,
-  "activeWindowItems": 480,
-  "archiveItems": 720,
+  "startedAt": "2026-06-02T16:15:41.186Z",
+  "finishedAt": "2026-06-02T16:15:47.420Z",
+  "capturedItems": 296,
+  "capturedToday": 204,
+  "activeWindowItems": 360,
+  "archiveItems": 480,
   "reports": [
     {
       "source": "ac24horas",
@@ -17,8 +17,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 20,
-      "blocked": 4,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -44,9 +44,17 @@
     },
     {
       "source": "cnn-brasil",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP 403"
+      "ok": true,
+      "count": 18,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "detran-acre",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "folha-do-acre",
@@ -72,8 +80,8 @@
     {
       "source": "g1-pop-arte",
       "ok": true,
-      "count": 14,
-      "blocked": 0,
+      "count": 13,
+      "blocked": 1,
       "mode": "rss"
     },
     {
@@ -105,6 +113,20 @@
       "mode": "wordpress-json"
     },
     {
+      "source": "mpac",
+      "ok": true,
+      "count": 6,
+      "blocked": 0,
+      "mode": "official-home-headlines"
+    },
+    {
+      "source": "pcac",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "portal-do-jurua",
       "ok": true,
       "count": 25,
@@ -114,7 +136,35 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 2,
+      "count": 1,
+      "blocked": 0,
+      "mode": "prefeitura-wix-home"
+    },
+    {
+      "source": "prefeitura-mancio-lima",
+      "ok": true,
+      "count": 1,
+      "blocked": 0,
+      "mode": "prefeitura-wix-home"
+    },
+    {
+      "source": "prefeitura-marechal-thaumaturgo",
+      "ok": true,
+      "count": 1,
+      "blocked": 0,
+      "mode": "prefeitura-wix-home"
+    },
+    {
+      "source": "prefeitura-porto-walter",
+      "ok": true,
+      "count": 0,
+      "blocked": 0,
+      "mode": "prefeitura-wix-home"
+    },
+    {
+      "source": "prefeitura-rodrigues-alves",
+      "ok": true,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -131,6 +181,13 @@
       "count": 0,
       "skipped": true,
       "reason": "Desativado na rodada 20260522-homecatch1: textos em ingles nao podem vazar para a area publica antes de uma etapa de traducao editorial."
+    },
+    {
+      "source": "tjac",
+      "ok": true,
+      "count": 1,
+      "blocked": 0,
+      "mode": "official-home-headlines"
     },
     {
       "source": "tribuna-do-jurua",
