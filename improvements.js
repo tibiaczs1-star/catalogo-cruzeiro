@@ -1232,6 +1232,9 @@
     document.head.appendChild(style);
   }
 
+  // Expose boot for manual invocation (CDP, testing)
+  window.__catalogoImprovementsBoot__ = boot;
+
   // Executa quando DOM estiver pronto
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);
