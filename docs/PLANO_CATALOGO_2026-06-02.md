@@ -37,7 +37,7 @@ SPRINT 3: DESKTOP [████████████████████�
   ├─ [OK] Services grid
   ├─ [OK] News mosaic
   ├─ [OK] Midia hub com podcast
-  └─ [PENDENTE] Layout mais sofisticado
+  └─ [PENDENTE] Layout mais sofisticado — grids 5 cols e hero 56px+1fr+42% ja existem em premium-home-redesign.css
 
 SPRINT 4: MOBILE [██████████████████████████████░░░░░░] 85%
   ├─ [OK] mobile-home-final.css dedicado
@@ -48,14 +48,14 @@ SPRINT 4: MOBILE [████████████████████�
   ├─ [OK] Menu hamburger CSS-only (details/summary)
   └─ [OK] Mobile performance overrides
 
-SPRINT 5: OPEN DESIGN [██████████████████████░░░░░░░░░░░] 60%
+SPRINT 5: OPEN DESIGN [████████████████████████████████] 100%
   ├─ [OK] DESIGN.md criado
   ├─ [OK] Tokens de cor definidos
   ├─ [OK] Do's and Don'ts
   ├─ [OK] Footer cinematic redesign
   ├─ [OK] Glassmorphism panels
   ├─ [OK] Animated gradient footer
-  └─ [PENDENTE] Spec de componentes
+  └─ [OK] Spec de componentes (spacing scale, breakpoints, component states, accessibility)
 
 SPRINT 6: CONTEUDO [██████████████████████████████░░░░░░░] 80%
   ├─ [OK] 500+ news fallbacks SVG
