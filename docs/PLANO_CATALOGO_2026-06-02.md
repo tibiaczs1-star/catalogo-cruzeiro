@@ -6,10 +6,10 @@
 ## GOAL TRACKER - STATUS EM TEMPO REAL
 
 ```
-SITUACAO ATUAL (02/06/2026)
+SITUACAO ATUAL (02/06/2026) - ATUALIZADO
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SPRINT 1: PERFORMANCE [████████████████░░░░░░░░░░░░░] 47% CONCLUIDO
+SPRINT 1: PERFORMANCE [██████████████░░░░░░░░░░░░░] 65% CONCLUIDO
   ├─ [OK] Corrigir maximumMs 52s → 15s
   ├─ [OK] waitForVisibleAssets 10s → 5s
   ├─ [OK] waitForSoftPageLoad 6.5s → 3.5s
@@ -18,17 +18,21 @@ SPRINT 1: PERFORMANCE [████████████████░░░
   ├─ [OK] Asset scan 28 → 12 URLs
   ├─ [OK] News preload 60 → 20
   ├─ [OK] CSS async preload ja existe
-  └─ [PENDENTE] Lazy loading de imagens abaixo do fold
+  ├─ [OK] loading="lazy" nativo nas imagens
+  ├─ [OK] skeleton.css criado
+  └─ [PENDENTE] IntersectionObserver para lazy load real
 
-SPRINT 2: CAPTACAO DE CONTEUDO [░░░░░░░░░░░░░░░░░░░░] 0%
-  ├─ [PENDENTE] Modulo de captura de fotos in-site
-  ├─ [PENDENTE] Modulo de captura de videos in-site
-  ├─ [PENDENTE] WebRTC setup para camera
-  ├─ [PENDENTE] ImageCapture API
-  ├─ [PENDENTE] MediaRecorder API
-  └─ [PENDENTE] Upload com preview
+SPRINT 2: CAPTACAO DE CONTEUDO [██████████████░░░░░░░░░░░░░] 40%
+  ├─ [OK] Modulo CatalogoCapture criado
+  ├─ [OK] Captura de foto (canvas API)
+  ├─ [OK] Gravacao de video (MediaRecorder)
+  ├─ [OK] Preview da midia antes do envio
+  ├─ [OK] Interface de captura modal
+  ├─ [OK] WhatsApp fallback
+  ├─ [OK] Botao "Enviar foto/video" integrado ao index.html
+  └─ [PENDENTE] Upload direto para backend (futuro)
 
-SPRINT 3: DESKTOP [██████████████████░░░░░░░░░░░░░] 50% CONCLUIDO
+SPRINT 3: DESKTOP [████████████████░░░░░░░░░░░░░] 50% CONCLUIDO
   ├─ [OK] CSS async preload
   ├─ [OK] Logo preloader critico
   ├─ [OK] Hero panels com thumb carousel
@@ -38,33 +42,35 @@ SPRINT 3: DESKTOP [██████████████████░░�
   ├─ [OK] Midia hub com podcast
   └─ [PENDENTE] Layout mais sofisticado desktop
 
-SPRINT 4: MOBILE [██████████████░░░░░░░░░░░░░░░░░░] 40% CONCLUIDO
+SPRINT 4: MOBILE [██████████████░░░░░░░░░░░░░░░░░] 40% CONCLUIDO
   ├─ [OK] mobile-home-final.css dedicado
-  ├─ [OK] CSS async (preload onload)
+  ├─ [OK] CSS async preload (preload onload)
   ├─ [OK] touch targets basicos
   ├─ [OK] Navbar responsivo
   └─ [PENDENTE] Menu hamburger CSS-only (remover JS)
 
-SPRINT 5: OPEN DESIGN [██████████████░░░░░░░░░░░░░░] 35% CONCLUIDO
+SPRINT 5: OPEN DESIGN [███████████████░░░░░░░░░░░░░] 40% CONCLUIDO
   ├─ [OK] DESIGN.md criado (cores, tipografia, espacamento)
   ├─ [OK] Tokens de cor definidos
   ├─ [OK] Do's and Don'ts
+  ├─ [OK] Plano de acao com matriz de correcoes
   ├─ [PENDENTE] Spec de componentes
   ├─ [PENDENTE] Breakpoints centralizados
   ├─ [PENDENTE] Tokens de estado (hover/focus/active)
   └─ [PENDENTE] Modo escuro
 
-SPRINT 6: CONTEUDO [████████████████░░░░░░░░░░░░░] 50% CONCLUIDO
+SPRINT 6: CONTEUDO [█████████████████░░░░░░░░░░░░] 55% CONCLUIDO
   ├─ [OK] 500+ news fallbacks SVG
   ├─ [OK] News archive com 500+ noticias
   ├─ [OK] Runtime news atualizado
   ├─ [OK] 20 news preload
-  ├─ [PENDENTE] Lazy loading nativo
-  ├─ [PENDENTE] Skeleton screens
-  └─ [PENDENTE] Progressive image loading
+  ├─ [OK] Skeleton CSS criado
+  ├─ [PENDENTE] Lazy loading nativo (IntersectionObserver)
+  ├─ [PENDENTE] Progressive image loading
+  └─ [PENDENTE] Skeleton screens no boot
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-OVERALL: [████████████████░░░░░░░░░░░░░░░░░] 29% CONCLUIDO
+OVERALL: [██████████████████░░░░░░░░░░░░░] 35% CONCLUIDO
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
