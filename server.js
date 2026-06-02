@@ -15381,6 +15381,27 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildStorageHealthPayload({ writeProbe: true }));
   }
 
+  // Serve catalogo-capture.js (exists on some branches, fall back to inline stub)
+  if (req.method === "GET" && pathname === "/api/catalogo-capture.js") {
+    const capturePath = path.join(ROOT_DIR, "catalogo-capture.js");
+    if (fs.existsSync(capturePath)) {
+      const content = fs.readFileSync(capturePath, "utf-8");
+      res.writeHead(200, {
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "public, max-age=3600",
+        "X-Content-Type-Options": "nosniff"
+      });
+      return res.end(content);
+    }
+    // Stub: minimal capture interface so the page doesn't break
+    const stub = `/* catalogo-capture stub - not available on this deployment */\n(window.CatalogoCapture={open:function(){alert("Captura nao disponivel neste momento.")}});`;
+    res.writeHead(200, {
+      "Content-Type": "application/javascript; charset=utf-8",
+      "Cache-Control": "public, max-age=60"
+    });
+    return res.end(stub);
+  }
+
   if (req.method === "GET" && pathname === "/api/auth/config") {
     return sendJson(res, 200, {
       ok: true,
