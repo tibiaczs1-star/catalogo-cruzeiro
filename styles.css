@@ -46,12 +46,26 @@ html body.fx-lite{
 scroll-behavior:auto;
 }
 
+/* fx-lite: completely disable splash — it is never shown but browser still parsed its HTML */
 body.fx-lite .logo-splash,
-body.fx-lite .pro-scroll-progress,
-body.fx-lite .pro-ambient-light,
-body.fx-lite .pro-orbital-field{
-display:none !important;
+body.fx-lite .logo-splash *,
+body.fx-lite .logo-splash-orbit,
+body.fx-lite .logo-splash-fragments,
+body.fx-lite .logo-splash-river,
+body.fx-lite .logo-splash-broadcast,
+body.fx-lite .logo-splash-noise,
+body.fx-lite .logo-splash-card,
+body.fx-lite .broadcast-cruzeiro-constellation,
+body.fx-lite .broadcast-clock,
+body.fx-lite .broadcast-stars,
+body.fx-lite .broadcast-cities,
+body.fx-lite .broadcast-news-lines,
+body.fx-lite .logo-splash-scene {
+  display: none !important;
+  animation: none !important;
+  transition: none !important;
 }
+
 
 .home-activation-popup{
 position:fixed;

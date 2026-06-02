@@ -2304,49 +2304,19 @@
           return urls;
         };
 
-        const isNearFirstViewport = (node) => {
-          if (!node || typeof node.getBoundingClientRect !== "function") return false;
-          const rect = node.getBoundingClientRect();
-          const height = window.innerHeight || document.documentElement.clientHeight || 800;
-          return rect.bottom >= -80 && rect.top <= height + Math.round(height * 0.35);
-        };
-
         const collectVisibleAssetUrls = () => {
+          // PERFORMANCE FIX: Only collect <img> src attributes, skip getComputedStyle
+          // which forces synchronous layout recalc on every element (extremely expensive)
           const urls = new Set();
-          const nodes = [
-            ...document.querySelectorAll(
-              ".page-shell, .site-header, .hero-newsroom-shell, .hero-tourism-backdrop, .hero-tourism-slide, .hero-newsroom-copy, .portal-status-ribbon, .main-layout, img, [style]"
-            )
-          ];
-
-          nodes.forEach((node) => {
-            if (!isNearFirstViewport(node)) return;
-            if (node.tagName === "IMG") {
-              const src = node.currentSrc || node.getAttribute("src");
-              if (src) urls.add(src);
-            }
-            const inlineStyle = node.getAttribute("style") || "";
-            extractCssUrls(inlineStyle).forEach((url) => urls.add(url));
-            try {
-              const computed = window.getComputedStyle(node);
-              ["backgroundImage", "borderImageSource", "listStyleImage"].forEach((prop) => {
-                extractCssUrls(computed[prop]).forEach((url) => urls.add(url));
-              });
-            } catch (_error) {
-              // Computed style can fail on detached nodes; ignore.
+          document.querySelectorAll("img[data-src], img[src]").forEach((img) => {
+            const src = img.currentSrc || img.getAttribute("src") || img.getAttribute("data-src");
+            if (src && !src.startsWith("data:")) {
+              try {
+                urls.add(new URL(src, window.location.href).href);
+              } catch (_) {}
             }
           });
-
-          return [...urls]
-            .map((url) => {
-              try {
-                return new URL(url, window.location.href).href;
-              } catch (_error) {
-                return "";
-              }
-            })
-            .filter(Boolean)
-            .slice(0, 12);
+          return [...urls].slice(0, 6);
         };
 
         const preloadImageUrl = (url, timeoutMs = 8500) =>
@@ -2375,24 +2345,24 @@
         const waitForVisibleAssets = () =>
           new Promise((resolve) => {
             window.setTimeout(() => {
-              const urls = collectVisibleAssetUrls().slice(0, 6);
+              const urls = collectVisibleAssetUrls().slice(0, 4);
               if (!urls.length) {
                 resolve();
                 return;
               }
-              setSplashProgress(98, "Carregando a primeira tela visível");
+              setSplashProgress(98, "Carregando a primeira tela vis\u00edvel");
               Promise.race([
-                Promise.allSettled(urls.map((url) => preloadImageUrl(url))),
-                new Promise((done) => window.setTimeout(done, 2000))
+                Promise.allSettled(urls.map((url) => preloadImageUrl(url, 4000))),
+                new Promise((done) => window.setTimeout(done, 1200))
               ]).then(resolve);
-            }, 180);
+            }, 80);
           });
 
         const waitForFullPreload = () => {
           if (window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__) return;
           window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__ = true;
-          const minimumMs = hasSeenCurrentPreload ? 600 : 1000;
-          const maximumMs = hasSeenCurrentPreload ? 8000 : 10000;
+          const minimumMs = hasSeenCurrentPreload ? 400 : 800;
+          const maximumMs = hasSeenCurrentPreload ? 2500 : 4000;
           setSplashProgress(92, firstLoadNotice);
 
           const waitForPageLoad = new Promise((resolve) => {
