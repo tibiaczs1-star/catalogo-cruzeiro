@@ -685,6 +685,9 @@ html body.editorial-home > .logo-splash.catalogo-cinematic-live {
     linear-gradient(180deg, #020811 0%, #041421 52%, #020911 100%) !important;
 }
 
+body.fx-lite .logo-splash.catalogo-cinematic-live {
+    animation: none !important;
+}
 html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-broadcast,
 html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-card,
 html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-news-bubbles {
@@ -775,6 +778,24 @@ html body.editorial-home > .logo-splash.catalogo-cinematic-live.is-loader-active
     animation: none !important;
     transform: none !important;
   }
+}
+
+/* ===== fx-lite: kill ALL splash animations — same treatment as prefers-reduced-motion ===== */
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-news-bubbles span,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-broadcast,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-card,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-news-bubbles,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-cruzeiro-constellation,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-clock,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-stars,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-cities,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .broadcast-news-lines,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-cursor-glow,
+body.fx-lite html body.editorial-home > .logo-splash.catalogo-cinematic-live .logo-splash-noise {
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
+  opacity: 0 !important;
 }
 
 html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-live {
@@ -7826,7 +7847,14 @@ body.editorial-home .community-report-list > * {
     background: rgba(4, 17, 31, 0.94);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     padding: 0.4rem;
+    /* Kill backdrop-filter on low-end mobile for performance */
+    animation: bottom-nav-safe 0.01s forwards;
+  }
+
+  @keyframes bottom-nav-safe {
+    to { backdrop-filter: blur(18px); }
   }
 
   body.editorial-home .premium-bottom-nav a {
@@ -7834,10 +7862,15 @@ body.editorial-home .community-report-list > * {
     justify-items: center;
     gap: 0.18rem;
     min-height: 50px;
+    min-width: 44px;
     border-radius: 12px;
     color: rgba(203, 213, 225, 0.78);
-    font-size: 0.67rem;
+    font-size: 0.7rem;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background 150ms ease, color 150ms ease;
   }
 
   body.editorial-home .premium-bottom-nav a.is-active {

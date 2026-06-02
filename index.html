@@ -196,6 +196,93 @@
         0%, 100% { transform: scale(1); opacity: 0.82; }
         50% { transform: scale(1.04); opacity: 1; }
       }
+      /* ===== fx-lite: kill ALL splash animations for mobile performance ===== */
+      body.fx-lite .logo-splash,
+      body.fx-lite .logo-splash *,
+      body.fx-lite .logo-splash-fragments,
+      body.fx-lite .logo-splash-river,
+      body.fx-lite .logo-splash-broadcast,
+      body.fx-lite .broadcast-cruzeiro-constellation,
+      body.fx-lite .broadcast-clock,
+      body.fx-lite .broadcast-stars,
+      body.fx-lite .broadcast-cities,
+      body.fx-lite .broadcast-news-lines,
+      body.fx-lite .logo-splash-news-bubbles,
+      body.fx-lite .logo-splash-noise,
+      body.fx-lite .logo-splash-cursor-glow,
+      body.fx-lite .logo-splash-card {
+        display: none !important;
+        animation: none !important;
+        transition: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+      body.fx-lite .logo-splash.is-fast-intro .logo-splash-card {
+        display: grid !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        animation: none !important;
+        transition: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        width: min(300px, 90vw) !important;
+      }
+      body.fx-lite .logo-splash.is-fast-intro .logo-splash-card * {
+        display: none !important;
+        animation: none !important;
+      }
+      body.fx-lite .logo-splash.is-fast-intro .logo-splash-progress {
+        display: block !important;
+        animation: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: 6px !important;
+        background: rgba(255,255,255,0.14) !important;
+        border-radius: 999px !important;
+        overflow: hidden !important;
+        margin-top: 0.5rem !important;
+      }
+      body.fx-lite .logo-splash.is-fast-intro .logo-splash-progress span {
+        display: block !important;
+        animation: none !important;
+        opacity: 1 !important;
+        background: linear-gradient(90deg, #f0b429, #ffd66a) !important;
+        border-radius: inherit !important;
+        height: 100% !important;
+        width: var(--splash-progress, 0%) !important;
+        transition: width 220ms ease !important;
+      }
+      body.fx-lite .cinematic-parallax {
+        display: none !important;
+        animation: none !important;
+      }
+      /* fx-lite: reduce backdrop-filter overhead on low-end devices */
+      body.fx-lite * {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+      }
+      body.fx-lite .premium-bottom-nav,
+      body.fx-lite .mobile-menu-panel {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+      }
+      /* fx-lite: use content-visibility to skip off-screen rendering */
+      body.fx-lite .section-block,
+      body.fx-lite .premium-climate-section,
+      body.fx-lite .premium-agenda-section,
+      body.fx-lite .premium-social-section,
+      body.fx-lite .premium-caderno-section,
+      body.fx-lite #founders,
+      body.fx-lite #monetizacao,
+      body.fx-lite .editorial-footer {
+        content-visibility: auto;
+        contain-intrinsic-size: 0 400px;
+      }
+      /* ===== end fx-lite splash kill ===== */
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

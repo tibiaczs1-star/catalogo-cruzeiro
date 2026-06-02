@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-02T14:42:20.351Z",
-  "finishedAt": "2026-06-02T14:42:25.362Z",
-  "capturedItems": 293,
-  "capturedToday": 182,
+  "startedAt": "2026-06-02T16:15:41.186Z",
+  "finishedAt": "2026-06-02T16:15:47.420Z",
+  "capturedItems": 296,
+  "capturedToday": 204,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -80,8 +80,8 @@
     {
       "source": "g1-pop-arte",
       "ok": true,
-      "count": 14,
-      "blocked": 0,
+      "count": 13,
+      "blocked": 1,
       "mode": "rss"
     },
     {
