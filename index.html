@@ -47,7 +47,7 @@
         window.__CATALOGO_NEWS_PRELOAD_STARTED__ = true;
         window.__CATALOGO_NEWS_PRELOAD__ =
           window.__CATALOGO_NEWS_PRELOAD__ ||
-          fetch("./api/news?limit=60&lite=1", {
+          fetch("./api/news?limit=20&lite=1", {
             method: "GET",
             credentials: "same-origin"
           })
@@ -1160,6 +1160,8 @@
                   <a class="special-card" href="#participacao-comunitaria"><span class="editorial-icon icon-gallery"></span><strong>Galeria da comunidade</strong><small>Momentos que mostram a nossa região</small></a>
                   <a class="special-card" href="#comentarios"><span class="editorial-icon icon-alert"></span><strong>Alertas da cidade</strong><small>Avisos importantes e informações rápidas</small></a>
                   <a class="special-card" href="./arquivo.html?busca=games"><span class="editorial-icon icon-commercial"></span><strong>Games e cultura pop</strong><small>Notícias de jogos, tecnologia e entretenimento</small></a>
+                  <a class="special-card" href="./pubpaid.html"><span class="editorial-icon icon-commercial"></span><strong>PubPaid em teste</strong><small>Sinuca, Damas e Xadrez para a comunidade testar</small></a>
+                  <a class="special-card" href="./pesquisa-acre-2026.html"><span class="editorial-icon icon-news"></span><strong>Enquete Acre 2026</strong><small>Participação espontânea, sem caráter científico</small></a>
                 </div>
               </section>
             </div>
@@ -2089,7 +2091,7 @@
           }
         }, true);
 
-        const shellVersion = "20260527-visiblepreload1";
+        const shellVersion = "20260602-fastboot1";
         const preloadStartedAt = Date.now();
         const firstLoadNotice = "Primeiro carregamento pode demorar; preparando 100% do jornal.";
         const versionStorageKey = "catalogo_shell_version";
@@ -2198,7 +2200,7 @@
               }
             })
             .filter(Boolean)
-            .slice(0, 28);
+            .slice(0, 12);
         };
 
         const preloadImageUrl = (url, timeoutMs = 8500) =>
@@ -2235,7 +2237,7 @@
               setSplashProgress(98, "Carregando a primeira tela visível");
               Promise.race([
                 Promise.allSettled(urls.map((url) => preloadImageUrl(url))),
-                new Promise((done) => window.setTimeout(done, 10000))
+                new Promise((done) => window.setTimeout(done, 4000))
               ]).then(resolve);
             }, 180);
           });
@@ -2243,8 +2245,8 @@
         const waitForFullPreload = () => {
           if (window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__) return;
           window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__ = true;
-          const minimumMs = hasSeenCurrentPreload ? 3200 : 5200;
-          const maximumMs = hasSeenCurrentPreload ? 26000 : 52000;
+          const minimumMs = hasSeenCurrentPreload ? 800 : 1200;
+          const maximumMs = hasSeenCurrentPreload ? 12000 : 15000;
           setSplashProgress(92, firstLoadNotice);
 
           const waitForPageLoad = new Promise((resolve) => {
@@ -2256,7 +2258,7 @@
           });
           const waitForSoftPageLoad = Promise.race([
             waitForPageLoad,
-            new Promise((resolve) => window.setTimeout(resolve, 6500))
+            new Promise((resolve) => window.setTimeout(resolve, 3000))
           ]);
           const waitForMinimum = new Promise((resolve) => {
             window.setTimeout(resolve, Math.max(0, minimumMs - (Date.now() - preloadStartedAt)));
@@ -2269,7 +2271,7 @@
                 window.__CATALOGO_DEFERRED_BOOT_PROMISE__,
                 document.fonts?.ready
               ].filter((task) => task && typeof task.then === "function");
-              if (tasks.length >= 2 || Date.now() - started > 1800) {
+              if (tasks.length >= 2 || Date.now() - started > 1200) {
                 Promise.allSettled(tasks).then(resolve);
                 return;
               }
