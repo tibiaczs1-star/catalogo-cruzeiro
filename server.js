@@ -15402,6 +15402,44 @@ async function handleApi(req, res, pathname, searchParams) {
     return res.end(stub);
   }
 
+  // API: feedback submission (public, no auth required)
+  if (req.method === "POST" && pathname === "/api/feedback") {
+    let body = "";
+    req.on("data", (chunk) => { body += chunk; });
+    req.on("end", () => {
+      try {
+        const data = JSON.parse(body || "{}");
+        const { type = "other", message = "", email = "", url = "" } = data;
+        if (!message.trim()) return sendJson(res, 400, { ok: false, error: "Mensagem obrigatoria." });
+        const FEEDBACK_FILE = path.join(DATA_DIR, "feedback.json");
+        const feedback = { id: Date.now(), type, message: String(message).slice(0, 1000), email, url, ts: new Date().toISOString(), ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress };
+        const existing = fs.existsSync(FEEDBACK_FILE) ? JSON.parse(fs.readFileSync(FEEDBACK_FILE, "utf-8")) : [];
+        existing.push(feedback);
+        fs.writeFileSync(FEEDBACK_FILE, JSON.stringify(existing.slice(-500), null, 2));
+        return sendJson(res, 200, { ok: true, id: feedback.id });
+      } catch {
+        return sendJson(res, 500, { ok: false, error: "Erro interno." });
+      }
+    });
+    return;
+  }
+
+  // API: weather (mock data for CZS region)
+  if (req.method === "GET" && pathname === "/api/weather") {
+    const temps = [28, 30, 29, 31, 27];
+    const conditions = ["cloud", "sun", "rain", "cloud", "sun"];
+    const pick = Math.floor(Math.random() * temps.length);
+    return sendJson(res, 200, {
+      ok: true,
+      temp: temps[pick],
+      condition: conditions[pick],
+      city: "Cruzeiro do Sul",
+      region: "Acre",
+      humidity: 75 + Math.floor(Math.random() * 20),
+      updated: new Date().toISOString()
+    });
+  }
+
   if (req.method === "GET" && pathname === "/api/auth/config") {
     return sendJson(res, 200, {
       ok: true,
