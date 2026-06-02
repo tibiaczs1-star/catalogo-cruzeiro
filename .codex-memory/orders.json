@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-02T13:36:28.830Z",
+  "lastUpdatedAt": "2026-06-02T14:09:03.984Z",
   "orders": [
     {
       "id": "2026-06-02-hermes-continuity-router-language-switch",
@@ -4508,6 +4508,36 @@
       ],
       "nextSteps": [],
       "notes": "O envio textual anterior permaneceu como erro histórico; a correção visual entrou no Catálogo com 8 imagens/cards."
+    },
+    {
+      "id": "2026-06-02-criar-fila-industrial-de-500-conteudos-instagram-com-noticia-servico-narracao-fe",
+      "createdAt": "2026-06-02T14:09:03.984Z",
+      "updatedAt": "2026-06-02T14:09:03.984Z",
+      "status": "queue-created",
+      "source": "chat",
+      "rawRequest": "Chegar a pelo menos 500 conteúdos entre stories, feeds, vídeos e compartilhamentos; sempre narrar vídeos ou imagens sem narração da notícia com voz feminina nova, imperativa e jornalística.",
+      "summary": "Criar fila industrial de 500 conteúdos Instagram com notícia/serviço, narração feminina jornalística obrigatória e bloqueio de objetos/classificados.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".codex-memory/czs-instagram-500-content-rule.md",
+        ".codex-temp/zap-round-20260602/build-instagram-500-queue.js",
+        ".codex-temp/zap-round-20260602/instagram-500-content-queue.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "500-conteudos",
+        "stories",
+        "feed",
+        "reels",
+        "narracao",
+        "voz-feminina"
+      ],
+      "nextSteps": [
+        "Publicar em lotes validados; gerar assets/cards/videos dos itens da fila; salvar evidencia e ultimo indice publicado."
+      ],
+      "notes": ""
     }
   ]
 }

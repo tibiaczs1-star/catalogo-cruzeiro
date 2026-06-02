@@ -1,26 +1,25 @@
 # Current State
 
-Updated: 2026-06-02T13:42:25.156Z
+Updated: 2026-06-02T14:09:39.510Z
 
 ## Active Goal
 
-- CZS social/captacao: WhatsApp corrigido e nova captacao ampla feita
+- Instagram CZS: meta 500 conteúdos em fila
 
 ## Summary
 
-O erro de texto no Catálogo CZS foi corrigido com 8 cards/imagens publicados. A captacao ampla retornou 287 itens, 146 de hoje na rodada, e detectou que o Render online esta atrasado sem 2026-06-02 no news-data.js. Meta/Instagram foi capturado apenas como observacao, sem publicar.
+Fila de 500 conteúdos criada para Instagram: notícias, serviços, stories/feed/vídeo, com narração feminina jornalística obrigatória para notícia sem áudio. Já foram publicados nesta rodada 12 stories permitidos: 8 notícias e 4 serviços. Objetos/classificados estão bloqueados no Instagram.
 
 ## Next
 
-- Preparar pacote editorial do delta novo; decidir sync/deploy do Render; validar visualmente qualquer novo post Instagram antes de publicar.
+- Continuar pelo arquivo instagram-500-content-queue.json; publicar em lotes validados; salvar último índice publicado; gerar narração pt-BR feminina para cada notícia silenciosa.
 
 ## Files In Focus
 
-- .codex-temp/zap-round-20260602/captacao-ampla-20260602.md
-- .codex-temp/zap-round-20260602/news-catalogo-czs-cards-post-log.json
-- data/runtime-news.json
+- .codex-memory/czs-instagram-500-content-rule.md
+- .codex-temp/zap-round-20260602/instagram-500-content-queue.json
+- .codex-temp/zap-round-20260602/instagram-news-service-stories-log.txt
 
 ## Assets In Focus
 
-- .codex-temp/zap-round-20260602/news-catalogo-czs-cards-posted.png
-- .codex-temp/zap-round-20260602/meta-instagram-feed-capture.png
+- .codex-temp/zap-round-20260602/ig-news-service-stories-final.png
