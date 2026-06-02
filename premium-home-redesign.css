@@ -6772,6 +6772,15 @@ body.editorial-home .premium-caderno-card {
   overflow: hidden;
 }
 
+body.editorial-home .caderno-card-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
 body.editorial-home .premium-caderno-card .premium-icon {
   margin-bottom: 0.25rem;
 }
