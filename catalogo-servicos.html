@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo Telefônico • Cruzeiro do Sul</title>
+    <title>{{SEO_TITLE}}</title>
+    <meta name="description" content="{{SEO_DESCRIPTION}}" />
+    <meta name="robots" content="{{SEO_ROBOTS}}" />
+    <meta name="theme-color" content="{{SEO_THEME_COLOR}}" />
+    <meta name="color-scheme" content="{{SEO_COLOR_SCHEME}}" />
+    <meta property="og:type" content="{{SEO_OG_TYPE}}" />
+    <meta property="og:site_name" content="Catálogo Cruzeiro do Sul" />
+    <meta property="og:title" content="{{SEO_OG_TITLE}}" />
+    <meta property="og:description" content="{{SEO_OG_DESCRIPTION}}" />
+    <meta property="og:image" content="{{SEO_OG_IMAGE}}" />
+    <meta property="og:url" content="{{SEO_OG_URL}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{SEO_TWITTER_TITLE}}" />
+    <meta name="twitter:description" content="{{SEO_TWITTER_DESCRIPTION}}" />
+    <meta name="twitter:image" content="{{SEO_TWITTER_IMAGE}}" />
+    <link rel="canonical" href="{{SEO_CANONICAL}}" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="stylesheet" href="catalogo-servicos.css?v=20260522-reactivate1" />
   </head>
   <body class="catalogo-servicos-page">
@@ -12,7 +28,10 @@
         <div>
           Catálogo Cruzeiro do Sul • Serviços por módulo
         </div>
-        <a href="index.html">Voltar para home</a>
+        <nav aria-label="Atalhos do catálogo">
+          <a href="index.html">Voltar para home</a>
+          <a href="divulgue.html">Divulgue sua empresa</a>
+        </nav>
       </header>
 
       <section class="site-demo-notice" aria-label="Aviso sobre módulos em preparação">
@@ -31,6 +50,16 @@
       <section class="svc-controls">
         <input id="svcSearch" class="svc-search" placeholder="Buscar por nome, serviço ou telefone..." />
         <div class="svc-tabs" id="svcTabs"></div>
+      </section>
+
+      <section class="svc-seo-local" aria-label="Busca local">
+        <h2>Guia local de Cruzeiro do Sul para serviços, telefones e empresas</h2>
+        <p>
+          Encontre contatos úteis no Vale do Juruá por categoria: restaurantes, farmácias, saúde, emergência,
+          transporte, hospedagem, serviços digitais e empresas locais. O catálogo organiza links, WhatsApp,
+          telefones e fontes para ajudar moradores, visitantes e negócios a serem encontrados com mais facilidade.
+        </p>
+        <a href="divulgue.html">Quero aparecer no Catálogo CZS</a>
       </section>
 
       <section class="svc-featured-shell" id="svcFeatured" hidden></section>

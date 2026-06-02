@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-27T18:13:24.094Z",
+  "lastUpdatedAt": "2026-05-31T11:55:00-05:00",
   "assets": [
     {
       "id": "vale-pool-poolhand1-ball-in-hand-placed",
@@ -1320,6 +1320,78 @@
         "2026-05-27-otimizar-carregamento-fatiado-real-da-home-czs-mantendo-intro-cinematografica-e-"
       ],
       "createdAt": "2026-05-27T18:13:24.094Z"
+    },
+    {
+      "id": "2026-05-29",
+      "kind": "document",
+      "path": "docs/pubpaid/legal/2026-05-29",
+      "source": "workspace",
+      "note": "Pacote juridico-operacional PubPaid 2026-05-29: relatorio juridico, documento operacional, funcionamento e matriz go/no-go em Markdown e PDF.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-29T15:51:36.441Z"
+    },
+    {
+      "id": "2026-05-31-instagram-realphoto-pack",
+      "type": "directory",
+      "path": ".codex-temp/instagram/premium-news-pack/current-20260530-20260531/premium-real-photo/",
+      "description": "Pacote Instagram com feed, stories, captions, comentarios e videos de noticias com fotos reais.",
+      "createdAt": "2026-05-31T11:55:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "noticias"
+      ]
+    },
+    {
+      "id": "2026-05-31-whatsapp-catalogo-pack",
+      "type": "directory",
+      "path": ".codex-temp/whatsapp-catalogo-20260531/",
+      "description": "Pacote WhatsApp/servicos/convites e stories verticais de venda.",
+      "createdAt": "2026-05-31T11:55:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "whatsapp",
+        "servicos",
+        "vendas"
+      ]
+    },
+    {
+      "id": "2026-05-31-instagram-after-stories-screenshot",
+      "type": "image",
+      "path": ".codex-temp/instagram-check-after-stories.png",
+      "description": "Captura de validacao do perfil Instagram apos feed e stories.",
+      "createdAt": "2026-05-31T11:55:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "instagram",
+        "validacao"
+      ]
+    },
+    {
+      "id": "2026-05-31-divulgue-desktop-v2",
+      "type": "image",
+      "path": ".codex-temp/divulgue-desktop-v2.png",
+      "description": "Captura desktop da landing Divulgue no Catalogo CZS apos ajuste visual e SEO.",
+      "createdAt": "2026-05-31T12:35:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "landing",
+        "seo",
+        "validacao"
+      ]
+    },
+    {
+      "id": "2026-05-31-divulgue-mobile",
+      "type": "image",
+      "path": ".codex-temp/divulgue-mobile.png",
+      "description": "Captura mobile da landing Divulgue no Catalogo CZS.",
+      "createdAt": "2026-05-31T12:35:00-05:00",
+      "tags": [
+        "catalogo-czs",
+        "landing",
+        "mobile",
+        "validacao"
+      ]
     }
   ]
 }

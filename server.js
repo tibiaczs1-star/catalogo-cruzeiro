@@ -212,6 +212,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".jpeg",
   ".webp",
   ".mp4",
+  ".pdf",
   ".ico",
   ".webmanifest"
 ]);
@@ -265,7 +266,9 @@ const LEGACY_BACKEND_DATA_DIR = path.join(ROOT_DIR, "backend", "data");
 const LEGACY_PUBPAID_DEPOSITS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidDeposits.json");
 const LEGACY_PUBPAID_WITHDRAWALS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWithdrawals.json");
 const LEGACY_PUBPAID_WALLETS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWallets.json");
-const SITE_URL = String(process.env.SITE_URL || "").trim().replace(/\/+$/, "");
+const SITE_URL = String(process.env.SITE_URL || "https://catalogo-cruzeiro-web.onrender.com")
+  .trim()
+  .replace(/\/+$/, "");
 const WHATSAPP_CHAT_ENABLED = String(process.env.WHATSAPP_CHAT_ENABLED || "").trim().toLowerCase() === "true";
 const WHATSAPP_CLOUD_TOKEN = String(process.env.WHATSAPP_CLOUD_TOKEN || "").trim();
 const WHATSAPP_CLOUD_PHONE_NUMBER_ID = String(process.env.WHATSAPP_CLOUD_PHONE_NUMBER_ID || "").trim();
@@ -435,8 +438,9 @@ const ACRE_2026_POLL_OPTIONS = {
 };
 const STATIC_PAGE_SEO = {
   "/": {
-    title: `${SITE_NAME} | Jornal Agregador Local`,
-    description: DEFAULT_SITE_DESCRIPTION,
+    title: `Catalogo CZS | Jornal de Cruzeiro do Sul e Vale do Jurua`,
+    description:
+      "Noticias de Cruzeiro do Sul, Vale do Jurua e Acre, com servicos uteis, arquivo local, fontes verificadas e catalogo de empresas da regiao.",
     themeColor: "#1E3A5F",
     colorScheme: "light",
     ogType: "website",
@@ -444,6 +448,18 @@ const STATIC_PAGE_SEO = {
     priority: "1.0",
     changefreq: "hourly",
     fileName: "index.html"
+  },
+  "/divulgue.html": {
+    title: `Anuncie no Catalogo CZS | Motor de Propagacao e SEO Local`,
+    description:
+      "Anuncie no Catalogo CZS com jornal local, catalogo de servicos, WhatsApp, Instagram, landing pages, SEO e motor de propagacao para empresas de Cruzeiro do Sul.",
+    themeColor: "#143D66",
+    colorScheme: "light",
+    ogType: "website",
+    schemaType: "CommercialServicePage",
+    priority: "0.86",
+    changefreq: "weekly",
+    fileName: "divulgue.html"
   },
   "/arquivo.html": {
     title: `Pesquisa Completa | ${SITE_NAME}`,
@@ -458,9 +474,9 @@ const STATIC_PAGE_SEO = {
     fileName: "arquivo.html"
   },
   "/catalogo-servicos.html": {
-    title: `Catalogo de Servicos | ${SITE_NAME}`,
+    title: `Catalogo de Servicos em Cruzeiro do Sul | Telefones e WhatsApp`,
     description:
-      "Guia local com telefones, WhatsApp, links e modulos de restaurantes, saude, emergencia, transporte, hospedagem e utilidade publica em Cruzeiro do Sul.",
+      "Guia local de Cruzeiro do Sul com telefones, WhatsApp, links, restaurantes, farmacias, saude, emergencia, transporte, hospedagem, empresas e servicos digitais.",
     themeColor: "#15304C",
     colorScheme: "light",
     ogType: "website",
@@ -3045,11 +3061,17 @@ function buildStaticPageJsonLd(baseUrl, canonicalUrl, seoConfig = {}) {
           "@type": "WebSite",
           "@id": `${baseUrl}#website`,
           name: SITE_NAME,
+          alternateName: ["Catalogo CZS", "Catalogo Cruzeiro do Sul"],
           url: baseUrl,
           inLanguage: LOCALE,
           description: seoConfig.description || DEFAULT_SITE_DESCRIPTION,
           publisher: {
             "@id": `${baseUrl}#organization`
+          },
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${baseUrl}/arquivo.html?busca={search_term_string}`,
+            "query-input": "required name=search_term_string"
           }
         }
       ]
@@ -3078,9 +3100,59 @@ function buildStaticPageJsonLd(baseUrl, canonicalUrl, seoConfig = {}) {
     }
   };
 
-  if (seoConfig.schemaType === "Service") {
-    payload.provider = {
-      "@id": `${baseUrl}#organization`
+  if (seoConfig.schemaType === "CommercialServicePage") {
+    payload["@type"] = "WebPage";
+    payload.mainEntity = {
+      "@type": "Service",
+      name: "Divulgacao local no Catalogo CZS",
+      provider: {
+        "@id": `${baseUrl}#organization`
+      },
+      serviceType: [
+        "Publicidade local",
+        "Catalogo de servicos",
+        "SEO local",
+        "Landing pages",
+        "Conteudo para redes sociais"
+      ],
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: SITE_REGION_NAME
+      },
+      offers: {
+        "@type": "OfferCatalog",
+        name: "Formatos comerciais do Catalogo CZS",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Cadastro e chamada no catalogo local"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Divulgacao com arte, story e link no Catalogo CZS"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Landing page, SEO local e campanha de posts"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "PubPaid promocional e experiencias interativas"
+            }
+          }
+        ]
+      }
     };
   }
 
@@ -3363,11 +3435,14 @@ function resolvePageSeo(req, pathname, requestUrl) {
 
     if (moduleConfig) {
       const city = cleanShortText(catalogConfig?.city || SITE_REGION_NAME, 80);
-      const title = `${moduleConfig.title} | Catalogo de Servicos | ${SITE_NAME}`;
+      const moduleTitle = cleanShortText(moduleConfig.title || "Servicos", 90);
+      const title = /cruzeiro do sul/i.test(moduleTitle)
+        ? `${moduleTitle} | Catalogo CZS`
+        : `${moduleTitle} em Cruzeiro do Sul | Catalogo CZS`;
       const description = cleanShortText(
         stripHtml(
           moduleConfig.subtitle ||
-            `Guia local de ${moduleConfig.title || "servicos"} em ${city}, com telefones, links e atalhos rapidos.`
+            `Guia local de ${moduleTitle} em ${city}, com telefones, WhatsApp, links, fontes e atalhos rapidos.`
         ),
         180
       );
@@ -6555,6 +6630,8 @@ function mimeFor(filePath) {
       return "image/gif";
     case ".mp4":
       return "video/mp4";
+    case ".pdf":
+      return "application/pdf";
     case ".ico":
       return "image/x-icon";
     case ".txt":

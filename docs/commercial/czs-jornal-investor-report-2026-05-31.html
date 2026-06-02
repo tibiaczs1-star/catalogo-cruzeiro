@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proposta de Cotas | Catálogo CZS Jornal</title>
+    <style>
+      :root {
+        --ink: #101820;
+        --muted: #53606d;
+        --line: #d9e0e7;
+        --paper: #f7f4ec;
+        --white: #ffffff;
+        --dark: #081827;
+        --blue: #155e91;
+        --green: #177245;
+        --gold: #b97813;
+        --red: #a93c35;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+        line-height: 1.48;
+      }
+
+      main {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+        background: var(--white);
+      }
+
+      section,
+      header {
+        padding: clamp(28px, 5vw, 58px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 34px;
+        align-items: center;
+        min-height: 720px;
+        color: #fff;
+        background: var(--dark);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        font-size: clamp(44px, 7vw, 82px);
+        line-height: 0.95;
+      }
+
+      h2 {
+        margin-bottom: 16px;
+        font-size: clamp(30px, 4.7vw, 54px);
+        line-height: 1.02;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+        font-size: 20px;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      header p {
+        color: #d5e8f6;
+      }
+
+      .eyebrow {
+        margin-bottom: 14px;
+        color: #ffd166;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin-top: 22px;
+        font-size: 21px;
+      }
+
+      .hero-proof {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .proof {
+        min-height: 132px;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .proof strong {
+        display: block;
+        color: #fff;
+        font-size: 38px;
+        line-height: 1;
+      }
+
+      .proof span {
+        display: block;
+        margin-top: 10px;
+        color: #c9d9e6;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .site-shot {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 14px;
+        background: #0a1825;
+        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34);
+      }
+
+      .site-shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .caption {
+        padding: 12px 14px;
+        color: #c8d7e5;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        align-items: start;
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .kpi,
+      .box {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .kpi strong {
+        display: block;
+        color: var(--blue);
+        font-size: 34px;
+        line-height: 1;
+      }
+
+      .kpi span,
+      .box span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .offer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .offer {
+        padding: 20px;
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .offer.featured {
+        border-color: var(--gold);
+        background: #fff7e6;
+      }
+
+      .offer strong {
+        display: block;
+        margin: 14px 0 10px;
+        color: var(--green);
+        font-size: 34px;
+      }
+
+      .offer ul,
+      .box ul {
+        margin: 12px 0 0;
+        padding-left: 18px;
+      }
+
+      li + li {
+        margin-top: 7px;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #edf4f8;
+      }
+
+      .bars {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: 150px 1fr 82px;
+        gap: 10px;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .track {
+        height: 24px;
+        overflow: hidden;
+        border-radius: 5px;
+        background: #e5edf3;
+      }
+
+      .fill {
+        height: 100%;
+        background: var(--blue);
+      }
+
+      .fill.green {
+        background: var(--green);
+      }
+
+      .fill.gold {
+        background: var(--gold);
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .tech {
+        min-height: 158px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #f8fbfd;
+      }
+
+      .tech b {
+        display: inline-block;
+        margin-bottom: 12px;
+        color: var(--gold);
+      }
+
+      .close {
+        color: #fff;
+        background: #071827;
+      }
+
+      .close p {
+        color: #d8e8f5;
+      }
+
+      .close .box {
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .close .box h3,
+      .close .box li {
+        color: #fff;
+      }
+
+      .small {
+        margin-top: 14px;
+        color: #7a8792;
+        font-size: 12px;
+      }
+
+      @media print {
+        main {
+          width: 100%;
+        }
+
+        header,
+        section {
+          break-inside: avoid;
+        }
+      }
+
+      @media (max-width: 900px) {
+        header,
+        .two,
+        .tech-grid,
+        .offer-grid,
+        .kpis {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-proof {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Rodada privada de cotas comerciais</p>
+          <h1>Catálogo CZS Jornal</h1>
+          <p class="lead">
+            Um jornal local digital já funcionando em Cruzeiro do Sul e Vale do Juruá.
+            A cota entra para manter a operação viva, ampliar audiência, vender publicidade
+            regional e transformar tecnologia própria em receita.
+          </p>
+          <div class="hero-proof">
+            <div class="proof"><strong>9.000</strong><span>views de ativação social em cerca de 3 dias</span></div>
+            <div class="proof"><strong>552</strong><span>seguidores verificados no Instagram público</span></div>
+            <div class="proof"><strong>181</strong><span>posts no perfil @catalogo_czs_</span></div>
+            <div class="proof"><strong>108</strong><span>rotas API únicas no backend do sistema</span></div>
+          </div>
+        </div>
+        <figure class="site-shot">
+          <img src="./czs-live-site-evidence.png" alt="Captura do site Catálogo CZS Jornal aberto no Render" />
+          <figcaption class="caption">Produto real no ar: site público do Catálogo CZS Jornal capturado em 31/05/2026.</figcaption>
+        </figure>
+      </header>
+
+      <section>
+        <div class="two">
+          <div>
+            <p class="eyebrow">O que está sendo comprado</p>
+            <h2>Uma posição inicial em uma mídia local que já saiu do zero.</h2>
+            <p>
+              A oportunidade não é financiar uma ideia solta. O ativo já tem site público,
+              canal social, arquivo editorial, operação de WhatsApp, módulos comerciais e
+              tecnologia própria. A entrada agora compra participação comercial antes da
+              audiência e dos patrocínios ficarem mais caros.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Resumo para decisão rápida</h3>
+            <ul>
+              <li>Site online e demonstrável para qualquer comprador.</li>
+              <li>Instagram ativo com seguidores e volume de posts.</li>
+              <li>9 mil views informadas na ativação inicial.</li>
+              <li>Estrutura técnica maior que a de um jornal local comum.</li>
+              <li>Receita possível em cotas, anúncios, serviços e classificados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <p class="eyebrow">Prova de funcionamento depois do lançamento</p>
+        <h2>O sistema funcionou, publicou e gerou sinais de mercado.</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Prova</th>
+              <th>Resultado</th>
+              <th>Por que importa para o cotista</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Site público</td>
+              <td>Catálogo CZS online no Render, capturado e verificado.</td>
+              <td>O produto pode ser mostrado hoje para comerciante, político, empresa e apoiador.</td>
+            </tr>
+            <tr>
+              <td>Instagram</td>
+              <td>552 seguidores, 1.142 seguindo e 181 posts verificados publicamente.</td>
+              <td>Existe canal visual para distribuir notícia, oferta, anúncio e prova social.</td>
+            </tr>
+            <tr>
+              <td>Ativação inicial</td>
+              <td>9.000 views informadas em cerca de 3 dias.</td>
+              <td>Mostra que o tema local consegue atenção rápida quando é distribuído.</td>
+            </tr>
+            <tr>
+              <td>Produção de conteúdo</td>
+              <td>24 posts de feed, 12 stories de notícias e 11 stories comerciais em uma rodada.</td>
+              <td>O projeto tem capacidade operacional, não apenas layout.</td>
+            </tr>
+            <tr>
+              <td>Inventário</td>
+              <td>480 notícias, 12 módulos e 49 itens/listagens de serviços.</td>
+              <td>A monetização pode vir de jornal, guia, anúncio, serviço e vitrine comercial.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <div class="two">
+          <div>
+            <p class="eyebrow">Mercado de base</p>
+            <h2>O anúncio local vale porque fala com gente perto.</h2>
+            <p>
+              Cruzeiro do Sul tem população estimada pelo IBGE em 98.382 pessoas em 2024.
+              Para o anunciante regional, isso vale mais que tráfego genérico: a audiência
+              mora, compra, vota, se desloca, trabalha e consome serviços no mesmo território.
+            </p>
+          </div>
+          <div>
+            <div class="bars">
+              <div class="bar-row"><span>Mercado CZS</span><div class="track"><div class="fill gold" style="width: 100%"></div></div><span>98.382</span></div>
+              <div class="bar-row"><span>Views ativação</span><div class="track"><div class="fill green" style="width: 91%"></div></div><span>9.000</span></div>
+              <div class="bar-row"><span>Seguidores</span><div class="track"><div class="fill" style="width: 55%"></div></div><span>552</span></div>
+              <div class="bar-row"><span>Posts</span><div class="track"><div class="fill" style="width: 44%"></div></div><span>181</span></div>
+            </div>
+            <p class="small">Base pública: IBGE, população estimada 2024 do município de Cruzeiro do Sul (AC).</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <p class="eyebrow">Capacidade tecnológica</p>
+        <h2>Por trás do jornal existe uma plataforma.</h2>
+        <div class="tech-grid">
+          <div class="tech"><b>108 APIs</b><h3>Backend próprio</h3><p>Notícias, arquivo, comentários, assinaturas, analytics, admin, pesquisas, serviços e PubPaid.</p></div>
+          <div class="tech"><b>Dados</b><h3>Analytics e CSV</h3><p>Visitas, permanência, dispositivos, origem, relatórios de acessos, comentários, votos e assinaturas.</p></div>
+          <div class="tech"><b>Automação</b><h3>Agentes e revisão</h3><p>Rotinas de captura, saúde editorial, revisão de imagens, guardas de linguagem e equipe de revisão local.</p></div>
+          <div class="tech"><b>Comercial</b><h3>Serviços e classificados</h3><p>Catálogo de serviços, vendas locais, anúncios, guias, vitrines e pacotes para empresas.</p></div>
+          <div class="tech"><b>PubPaid</b><h3>Jogos promocionais</h3><p>Phaser, chess.js, PVP, torneios, QR/Pix e experiências patrocináveis para engajamento.</p></div>
+          <div class="tech"><b>Operação</b><h3>WhatsApp e Instagram</h3><p>Distribuição social, status, stories, feed, grupos validados e funil de contato direto.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <p class="eyebrow">Projeção comercial</p>
+        <h2>O que a arrancada pode virar por mês.</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Cenário</th>
+              <th>Views/mês projetadas</th>
+              <th>O que já permite vender</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Conservador</td><td>31.500</td><td>Cotas pequenas, stories, banners e posts de apoio local.</td></tr>
+            <tr><td>Realista</td><td>54.000</td><td>Patrocínio mensal, editoria patrocinada e pacotes para empresas.</td></tr>
+            <tr><td>Agressivo</td><td>90.000</td><td>Cota premium, mídia kit regional e negociação por categoria.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <p class="eyebrow">Oferta objetiva</p>
+        <h2>Cotas comerciais para manter e acelerar o CZS.</h2>
+        <div class="offer-grid">
+          <div class="offer">
+            <h3>Cota Apoio</h3>
+            <strong>R$ 250</strong>
+            <ul>
+              <li>Nome/marca em apoiadores.</li>
+              <li>1 menção em story.</li>
+              <li>Relatório simples da rodada.</li>
+            </ul>
+          </div>
+          <div class="offer featured">
+            <h3>Cota Fundador</h3>
+            <strong>R$ 500</strong>
+            <ul>
+              <li>Destaque por 30 dias.</li>
+              <li>3 stories ou chamadas.</li>
+              <li>Prioridade em anúncio local.</li>
+            </ul>
+          </div>
+          <div class="offer">
+            <h3>Cota Comercial</h3>
+            <strong>R$ 1.500</strong>
+            <ul>
+              <li>Pacote de visibilidade.</li>
+              <li>Conteúdo institucional.</li>
+              <li>Relatório de alcance.</li>
+            </ul>
+          </div>
+          <div class="offer">
+            <h3>Cota Crescimento</h3>
+            <strong>R$ 5.000</strong>
+            <ul>
+              <li>Negociação direta de participação.</li>
+              <li>Plano de retorno mensal.</li>
+              <li>Prioridade em novas frentes.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="small">Participação societária, se houver, deve ser formalizada em contrato próprio. Esta página apresenta a proposta comercial e operacional do ativo.</p>
+      </section>
+
+      <section class="close">
+        <div class="two">
+          <div>
+            <p class="eyebrow">Fechamento</p>
+            <h2>O Catálogo CZS Jornal precisa de cotas agora para continuar crescendo.</h2>
+            <p>
+              A operação já mostrou que funciona: site no ar, rede social ativa, audiência
+              inicial, produção de conteúdo e tecnologia própria. A próxima etapa é transformar
+              essa base em receita recorrente para manter o jornal vivo, ampliar cobertura e
+              entregar resultado para anunciantes regionais.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Compra racional da cota</h3>
+            <ul>
+              <li>Entrada cedo em ativo local já lançado.</li>
+              <li>Exposição em mídia regional em crescimento.</li>
+              <li>Apoio direto à continuidade da operação.</li>
+              <li>Possibilidade de retorno em publicidade, influência local e receita futura.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
