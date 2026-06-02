@@ -2361,8 +2361,8 @@
         const waitForFullPreload = () => {
           if (window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__) return;
           window.__CATALOGO_FULL_PRELOAD_WAIT_STARTED__ = true;
-          const minimumMs = hasSeenCurrentPreload ? 400 : 800;
-          const maximumMs = hasSeenCurrentPreload ? 2500 : 4000;
+          const minimumMs = hasSeenCurrentPreload ? 300 : 600;
+          const maximumMs = hasSeenCurrentPreload ? 1800 : 3000;
           setSplashProgress(92, firstLoadNotice);
 
           const waitForPageLoad = new Promise((resolve) => {
@@ -2487,12 +2487,12 @@
           });
           window.setTimeout(function () {
             window.__CATALOGO_SPLASH_FORCE_RELEASE__("fast-intro-complete");
-          }, window.__CATALOGO_COMPACT_BOOT__ ? 1350 : 1850);
+          }, window.__CATALOGO_COMPACT_BOOT__ ? 900 : 1400);
         };
 
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, window.__CATALOGO_COMPACT_BOOT__ ? 3200 : 3800);
+        }, window.__CATALOGO_COMPACT_BOOT__ ? 2000 : 2800);
       })();
     </script>
     <script>
@@ -2563,7 +2563,7 @@
             }
             revealShell();
           }, window.__CATALOGO_COMPACT_BOOT__ ? 180 : 240);
-          const scheduleScript = () => window.setTimeout(loadBootScripts, window.__CATALOGO_COMPACT_BOOT__ ? 980 : 820);
+          const scheduleScript = () => window.setTimeout(loadBootScripts, window.__CATALOGO_COMPACT_BOOT__ ? 600 : 820);
           if (typeof window.requestIdleCallback === "function") {
             window.requestIdleCallback(scheduleScript, { timeout: 1100 });
             return;
@@ -2688,12 +2688,14 @@
             window.__CATALOGO_NEWS_PRELOAD__ && typeof window.__CATALOGO_NEWS_PRELOAD__.then === "function"
               ? await Promise.race([
                   window.__CATALOGO_NEWS_PRELOAD__.catch(() => null),
-                  new Promise((resolve) => window.setTimeout(() => resolve(null), isCompactBoot ? 800 : 1200))
+                  new Promise((resolve) => window.setTimeout(() => resolve(null), isCompactBoot ? 500 : 800))
                 ])
               : null;
 
           if (!Array.isArray(payload?.items) || payload.items.length === 0) {
-            await loadScript(staticNewsFallbackScript);
+            // Load news-data.js async — don't block boot
+            loadScript(staticNewsFallbackScript).catch(() => {});
+            completeStep("notícias leves da API prontas");
             return;
           }
 
@@ -2705,12 +2707,10 @@
           }
           bootState.started = true;
           notifyProgress("organizando destaques regionais");
-          // CSS pesado carregado de forma não-bloqueante via link rel=preload
-          // (já foi adicionado via preload no head, não bloqueia render)
-          for (const src of queue) {
-            await loadScript(src);
-          }
-          await loadStaticNewsFallbackIfNeeded();
+          // Load queue scripts in parallel (not sequentially)
+          await Promise.all(queue.map((src) => loadScript(src)));
+          // Load news fallback async — never blocks boot completion
+          loadStaticNewsFallbackIfNeeded().catch(() => {});
           bootState.done = true;
           window.__CATALOGO_DEFERRED_BOOT_DONE__ = true;
           bootState.completed = bootState.total;
