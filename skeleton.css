@@ -1,0 +1,437 @@
+/**
+ * SKELETON SCREENS - Loading States para Catálogo CZS
+ * 
+ *用法:
+ * Adicione a classe .skeleton a qualquer elemento para mostrar estado de loading.
+ * Estrutura: .skeleton-wrapper > .skeleton-content (elemento real) + .skeleton-overlay
+ * 
+ * Exemplo:
+ * <div class="skeleton-wrapper">
+ *   <img class="skeleton" data-skeleton-height="200px" src="..." />
+ *   <div class="skeleton-overlay"><div class="skeleton-shimmer"></div></div>
+ * </div>
+ */
+
+/* ============================================
+   SKELETON BASE
+   ============================================ */
+
+.skeleton-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.skeleton-wrapper.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.skeleton {
+  background: #e0e0e0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ============================================
+   SKELETON CARD - Para noticias
+   ============================================ */
+
+.skeleton-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.skeleton-card-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-card-body {
+  padding: 12px;
+}
+
+.skeleton-card-title {
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  width: 90%;
+}
+
+.skeleton-card-title.short {
+  width: 60%;
+}
+
+.skeleton-card-text {
+  height: 14px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.skeleton-card-text:last-child {
+  width: 70%;
+}
+
+/* ============================================
+   SKELETON NEWS GRID
+   ============================================ */
+
+.skeleton-news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.skeleton-news-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.skeleton-news-item.featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+  .skeleton-news-item.featured {
+    grid-column: span 1;
+  }
+}
+
+/* ============================================
+   SKELETON TEXT LINE
+   ============================================ */
+
+.skeleton-text {
+  height: 16px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.skeleton-text.title {
+  height: 24px;
+  width: 80%;
+  margin-bottom: 12px;
+}
+
+.skeleton-text.subtitle {
+  height: 18px;
+  width: 60%;
+  margin-bottom: 10px;
+}
+
+/* ============================================
+   SKELETON AVATAR / CIRCLE
+   ============================================ */
+
+.skeleton-circle {
+  border-radius: 50%;
+  background: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-circle.small {
+  width: 32px;
+  height: 32px;
+}
+
+.skeleton-circle.medium {
+  width: 48px;
+  height: 48px;
+}
+
+.skeleton-circle.large {
+  width: 64px;
+  height: 64px;
+}
+
+/* ============================================
+   SKELETON HERO / BANNER
+   ============================================ */
+
+.skeleton-hero {
+  width: 100%;
+  height: 300px;
+  background: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .skeleton-hero {
+    height: 200px;
+  }
+}
+
+.skeleton-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+
+.skeleton-hero-title {
+  height: 28px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.skeleton-hero-text {
+  height: 16px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  width: 50%;
+}
+
+/* ============================================
+   SKELETON NAV / MENU
+   ============================================ */
+
+.skeleton-nav-item {
+  display: inline-block;
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-right: 16px;
+  width: 60px;
+}
+
+.skeleton-nav-item.active {
+  width: 80px;
+  background: #d4af37;
+}
+
+/* ============================================
+   SKELETON BUTTON
+   ============================================ */
+
+.skeleton-button {
+  display: inline-block;
+  height: 40px;
+  width: 120px;
+  background: #e0e0e0;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================
+   SKELETON LIST
+   ============================================ */
+
+.skeleton-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skeleton-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.skeleton-list-item:last-child {
+  border-bottom: none;
+}
+
+.skeleton-list-item .skeleton-circle {
+  flex-shrink: 0;
+}
+
+.skeleton-list-item .skeleton-content {
+  flex: 1;
+}
+
+/* ============================================
+   SKELETON GALLERY THUMB
+   ============================================ */
+
+.skeleton-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.skeleton-gallery-thumb {
+  aspect-ratio: 1;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .skeleton-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   SKELETON SPLASH LOADER
+   ============================================ */
+
+.skeleton-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999998;
+}
+
+.skeleton-splash-logo {
+  width: 80px;
+  height: 80px;
+  background: #333;
+  border-radius: 50%;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-splash-logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.3),
+    transparent
+  );
+  animation: skeleton-logo-shimmer 2s infinite;
+}
+
+@keyframes skeleton-logo-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.skeleton-splash-text {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.skeleton-splash-bar {
+  width: 200px;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skeleton-splash-bar-fill {
+  height: 100%;
+  background: #D4AF37;
+  border-radius: 2px;
+  width: 30%;
+  animation: skeleton-splash-progress 2s ease-in-out infinite;
+}
+
+@keyframes skeleton-splash-progress {
+  0% { width: 0%; margin-left: 0; }
+  50% { width: 60%; margin-left: 20%; }
+  100% { width: 0%; margin-left: 100%; }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.skeleton-hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.skeleton-loaded .skeleton-overlay {
+  display: none;
+}
+
+.skeleton-loaded .skeleton {
+  background: transparent;
+}
+
+/* Modo escuro (se aplicavel) */
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2a2a2a;
+  }
+  
+  .skeleton-card {
+    background: #1e1e1e;
+  }
+  
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+  }
+  
+  .skeleton-splash {
+    background: #0a0a0a;
+  }
+  
+  .skeleton-splash-logo {
+    background: #1a1a1a;
+  }
+}

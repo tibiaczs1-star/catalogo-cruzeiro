@@ -212,10 +212,12 @@
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
   <link rel="preload" as="style" href="./premium-home-redesign.css?v=20260524-mobilebook1" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" as="style" href="./skeleton.css?v=20260602-fastboot1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./styles.css?v=20260524-mobilebook1" />
     <link rel="stylesheet" href="./premium-home-redesign.css?v=20260524-mobilebook1" />
   </noscript>
+  <script src="./catalogo-capture.js?v=20260602-capture1" defer></script>
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting fx-lite">
     <div
@@ -959,7 +961,7 @@
                 <h2>Mandar informação</h2>
               </div>
               <div class="community-priority-grid">
-                <a href="https://wa.me/5568992269296?text=Tenho%20uma%20foto%20ou%20video%20para%20o%20Catalogo%20Cruzeiro%20do%20Sul" target="_blank" rel="noopener noreferrer">Enviar foto/vídeo</a>
+                <button onclick="CatalogoCapture.open('photo')">Enviar foto/vídeo</button>
                 <a href="https://wa.me/5568992269296?text=Sugestao%20de%20pauta%20para%20o%20Catalogo%20Cruzeiro%20do%20Sul" target="_blank" rel="noopener noreferrer">Sugerir pauta</a>
                 <a href="./arquivo.html?busca=bairro">Ver bairro</a>
                 <a href="#comentarios">Comentar notícia</a>
