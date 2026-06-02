@@ -1,25 +1,15 @@
 # Current State
 
-Updated: 2026-06-02T14:09:39.510Z
+Updated: 2026-06-02T14:43:42.393Z
 
 ## Active Goal
 
-- Instagram CZS: meta 500 conteúdos em fila
+- CZS social: fila 500 completa e lote novo publicado
 
 ## Summary
 
-Fila de 500 conteúdos criada para Instagram: notícias, serviços, stories/feed/vídeo, com narração feminina jornalística obrigatória para notícia sem áudio. Já foram publicados nesta rodada 12 stories permitidos: 8 notícias e 4 serviços. Objetos/classificados estão bloqueados no Instagram.
+Em 2026-06-02 09:41 Acre: publicados 8 cards novos no WhatsApp Catálogo CZS e 8 stories de notícias no Instagram (índices 13-20). Captação rerodada: 293 itens, 182 de hoje. Fila Instagram regenerada com 500 conteúdos, 252 de hoje; Instagram continua bloqueado para classificados/objetos.
 
 ## Next
 
-- Continuar pelo arquivo instagram-500-content-queue.json; publicar em lotes validados; salvar último índice publicado; gerar narração pt-BR feminina para cada notícia silenciosa.
-
-## Files In Focus
-
-- .codex-memory/czs-instagram-500-content-rule.md
-- .codex-temp/zap-round-20260602/instagram-500-content-queue.json
-- .codex-temp/zap-round-20260602/instagram-news-service-stories-log.txt
-
-## Assets In Focus
-
-- .codex-temp/zap-round-20260602/ig-news-service-stories-final.png
+- Continuar em lotes validados a partir do progresso salvo em .codex-temp/zap-round-20260602/social-posting-progress.json; Instagram só notícia/serviço; Catálogo CZS WhatsApp só cards/imagens de notícias.

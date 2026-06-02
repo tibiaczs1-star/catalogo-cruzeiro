@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-02T14:09:03.984Z",
+  "lastUpdatedAt": "2026-06-02T14:43:24.350Z",
   "orders": [
     {
       "id": "2026-06-02-hermes-continuity-router-language-switch",
@@ -4537,6 +4537,21 @@
       "nextSteps": [
         "Publicar em lotes validados; gerar assets/cards/videos dos itens da fila; salvar evidencia e ultimo indice publicado."
       ],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-novo-lote-publicado-8-cards-no-whatsapp-catalogo-czs-e-8-stories-de-noticias-no-",
+      "createdAt": "2026-06-02T14:43:24.350Z",
+      "updatedAt": "2026-06-02T14:43:24.350Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Continuar rodada social: postar o novo captado, depois procurar até completar 500 conteúdos para Catálogo CZS, Instagram e WhatsApp.",
+      "summary": "Novo lote publicado: 8 cards no WhatsApp Catálogo CZS e 8 stories de notícias no Instagram; captação rerodada e fila de 500 regenerada.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
       "notes": ""
     }
   ]

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-02T13:36:28.804Z",
+  "lastUpdatedAt": "2026-06-02T14:43:24.359Z",
   "assets": [
     {
       "id": "czs-video-first-safe-queue-20260601",
@@ -1604,6 +1604,24 @@
       "note": "Evidência da correção: 8 cards de notícias enviados no WhatsApp Catálogo CZS.",
       "linkedOrderIds": [],
       "createdAt": "2026-06-02T13:36:28.804Z"
+    },
+    {
+      "id": "ig-latest-news-20260602-v3-final-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/ig-latest-news-20260602-v3-final.png",
+      "source": "workspace",
+      "note": "Evidência: Instagram perfil/story ativo após publicar stories 13 a 20 do lote novo de notícias.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T14:43:24.345Z"
+    },
+    {
+      "id": "news-latest-batch-cards-posted-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/news-latest-batch-cards-posted.png",
+      "source": "workspace",
+      "note": "Evidência: 8 cards novos de notícia publicados no WhatsApp Catálogo CZS.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T14:43:24.359Z"
     }
   ],
   "social": [
