@@ -1,11 +1,24 @@
 # Handoff
 
-Updated: 2026-06-04T20:26:40.000Z
+Updated: 2026-06-04T21:08:43.292Z
 
-IA local CZS/Render: backend agora e local-first com Ollama e fallback OpenAI desligado por padrao. Render publicou commit `f6d85d2a` e os endpoints publicos de Rayl, escritorios e Cheffe Call responderam via Ollama local (`qwen2.5:3b`) atraves de Cloudflare quick tunnel protegido por bearer token.
+V8 site finish 2026-06-04: CTA comercial fica apos Mapa do site com texto 'Oportunidade para vc e sua empresa'; intro tem html.czs-intro-lock ate release do loader; rodape social foi redesenhado; RAyL present usa rayl-v2-present-full.png limpo; chatbot RAyL minimizado virou janela circular de rosto sem fundo azul, dock lateral oculto e avatar pequeno some quando o painel abre. Smoke final v17 passou. Nao fazer deploy automatico sem revisao visual do usuario.
 
 ## Next
 
-- Processo atual ativo: `node scripts/ollama-render-tunnel.js --deploy`, proxy em `127.0.0.1:11435` e cloudflared apontando para o proxy.
-- Estado/logs: `.codex-temp/ollama-render-tunnel/latest.json`, `live.stdout.log`, `live.stderr.log`.
-- Se o PC reiniciar, o inicializador em `C:\Users\junio\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\czs-ollama-render-tunnel.vbs` relanca o fluxo e atualiza o Render com a nova URL do tunnel.
+- Abrir http://127.0.0.1:3000/?skipIntro=1 para revisao rapida
+- Testar intro com http://127.0.0.1:3000/?forceIntro=1 se houver duvida
+- Nao stagear mudancas antigas/deletions de assets fora desta rodada sem auditoria
+
+## Files In Focus
+
+- assets/v8-final/v8-merge-ready.js
+- assets/v8-final/v8-merge-ready.css
+- index.html
+- assets/aylla/rayl-v2-clean/rayl-v2-present-full.png
+- assets/aylla/rayl-v2-clean/rayl-v2-phone-like.png
+
+## Related Orders
+
+- 2026-06-04-rodada-final-de-acabamento-v8-limpar-recorte-branco-da-rayl-validar-cta-comercia
+- 2026-06-04-polir-chatbot-rayl-minimizado-como-janela-de-rosto-sem-fundo-azul-aberto-sem-ava

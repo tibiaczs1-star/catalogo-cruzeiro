@@ -1,16 +1,34 @@
 # Current State
 
-Updated: 2026-06-04T20:26:40.000Z
+Updated: 2026-06-04T21:08:43.285Z
 
 ## Active Goal
 
-- IA local Ollama ligada ao Render
+- V8 pronto para revisao visual local antes de subir
 
 ## Summary
 
-Render publicou `f6d85d2a` (`feat(ai): connect Render to local Ollama`) e os endpoints publicos de IA estao usando Ollama local via tunnel Cloudflare protegido por token. Validacao publica: `/api/rayl/chat`, `/api/office-ai/chat` e `/api/cheffe-call/ai` retornaram `ai.status=online`, `provider=ollama`, `model=qwen2.5:3b`.
+Rodada final do site V8: CTA comercial apos Mapa do site, rodape social redesenhado, intro anti-flash, RAyL comercial em rayl-v2-present-full.png recortado/limpo, e chatbot minimizado como janela de rosto sem fundo azul. Quando o chat abre, o avatar pequeno some e so o avatar grande fica no painel. Review-team totalIssues=0 e smoke final v17 passou.
 
 ## Next
 
-- Manter o PC e o processo `scripts/ollama-render-tunnel.js --deploy` ligados enquanto o Render precisar da IA local.
-- No proximo login do Windows, o inicializador em `Startup/czs-ollama-render-tunnel.vbs` deve relancar o tunnel, atualizar `OLLAMA_BASE_URL` no Render e disparar deploy.
+- Revisar visualmente no navegador local antes de deploy
+- Se aprovado
+- subir apenas commit seletivo desta rodada
+- Antes de deploy publico
+- considerar gates editoriais gerais e peso alto do index.html
+
+## Files In Focus
+
+- assets/v8-final/v8-merge-ready.js
+- assets/v8-final/v8-merge-ready.css
+- index.html
+- assets/aylla/rayl-v2-clean/rayl-v2-present-full.png
+- assets/aylla/rayl-v2-clean/rayl-v2-phone-like.png
+
+## Assets In Focus
+
+- .codex-temp/czs-v8-site-finish-qa-20260604/final-smoke-v17.json
+- .codex-temp/czs-v8-site-finish-qa-20260604/chatbot-minimized-face-v14.png
+- .codex-temp/czs-v8-site-finish-qa-20260604/chatbot-open-single-avatar-v13.png
+- .codex-temp/czs-v8-site-finish-qa-20260604/rayl-present-current-on-dark-v15.png

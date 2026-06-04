@@ -857,7 +857,7 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - CTA comercial perto do hero passou a entrar logo depois de `Mapa do site` com o texto pedido: `Oportunidade para vc e sua empresa`.
 - Rodape social foi refeito para substituir os quadrados cortados `IG/WA/E-mail/Anun/Apos` por cards com rotulo e descricao.
 - Intro recebeu trava anti-flash em `index.html` e release coordenado em `assets/v8-final/v8-merge-ready.js`, impedindo o site de aparecer atras do loader durante a hidratacao.
-- RAyL comercial passou a usar `assets/aylla/rayl-v2-clean/rayl-v2-present-full-clean.png`; a prova visual em fundo escuro removeu o branco entre braco e corpo.
+- RAyL comercial usa `assets/aylla/rayl-v2-clean/rayl-v2-present-full.png`, agora recortado/limpo; a prova visual em fundo escuro removeu o branco entre braco e corpo.
 - Chatbot RAyL recebeu acabamento final: minimizado como janela circular de rosto sem fundo azul/texto, dock lateral oculto e avatar pequeno do cabecalho escondido quando o painel abre com o avatar grande.
 - Validacao local: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check`, `npm run review:team` com `totalIssues=0`, `npm run codex:health`, `npm run perf:budget` nao estrito e smoke CDP em `http://127.0.0.1:3000`.
 - Relatorio interno: `.codex-temp/czs-v8-site-finish-qa-20260604/final-readiness-report.md`; decisao: pronto para revisao visual do usuario, sem deploy automatico antes de aprovacao porque o workspace segue com muitas mudancas paralelas e os gates editoriais gerais ainda existem.

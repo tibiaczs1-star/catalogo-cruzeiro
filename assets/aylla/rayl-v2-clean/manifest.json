@@ -3,88 +3,96 @@
     "name": "rayl-v2-neutral-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-neutral-full.png",
     "size": [
-      257,
-      742
+      251,
+      717
     ]
   },
   {
     "name": "rayl-v2-wave-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-wave-full.png",
     "size": [
-      312,
-      742
+      272,
+      707
     ]
   },
   {
     "name": "rayl-v2-point-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-point-full.png",
     "size": [
-      342,
-      742
+      329,
+      713
     ]
   },
   {
     "name": "rayl-v2-present-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-present-full.png",
     "size": [
-      297,
-      742
+      301,
+      711
     ]
   },
   {
     "name": "rayl-v2-confident-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-confident-full.png",
     "size": [
-      280,
-      742
+      250,
+      713
     ]
   },
   {
     "name": "rayl-v2-walk-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-walk-full.png",
     "size": [
-      257,
-      740
+      283,
+      680
     ]
   },
   {
     "name": "rayl-v2-heart-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-heart-full.png",
     "size": [
-      292,
-      743
+      258,
+      691
     ]
   },
   {
     "name": "rayl-v2-kiss-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-kiss-full.png",
     "size": [
-      317,
-      743
+      283,
+      682
     ]
   },
   {
     "name": "rayl-v2-laugh-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-laugh-full.png",
     "size": [
-      267,
-      741
+      252,
+      690
     ]
   },
   {
     "name": "rayl-v2-present-alt-full.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-present-alt-full.png",
     "size": [
-      280,
-      741
+      306,
+      689
+    ]
+  },
+  {
+    "name": "rayl-v2-phone-like.png",
+    "path": "assets/aylla/rayl-v2-clean/rayl-v2-phone-like.png",
+    "size": [
+      299,
+      635
     ]
   },
   {
     "name": "rayl-v2-seated-feature.png",
     "path": "assets/aylla/rayl-v2-clean/rayl-v2-seated-feature.png",
     "size": [
-      799,
-      1416
+      839,
+      1467
     ]
   }
 ]

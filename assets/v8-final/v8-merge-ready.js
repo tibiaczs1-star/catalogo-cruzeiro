@@ -2,11 +2,12 @@
   "use strict";
 
   const LIVE = "https://catalogo-cruzeiro-web.onrender.com";
-  const BRAND_INTRO = "assets/logo-czs.svg";
-  const BRAND_MAIN = "assets/logo-czs.svg";
-  const BRAND_HORIZONTAL = "assets/logo-czs.svg";
+  const BRAND_INTRO = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
+  const BRAND_MAIN = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
+  const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
-  const V8_BOOT_VERSION = "20260604-v8-stories-halfhour-v1";
+  const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
+  const V8_BOOT_VERSION = "20260604-rayl-crop-perfect-v2";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -25,6 +26,16 @@
   const VIDEO_FRAME_CACHE_KEY = "czs-v8-video-frame-cache";
   const REVIEWED_STORIES_KEY = "czs-v8-reviewed-stories";
   const ARCHIVE_PAGE_STEP = 24;
+
+  function releaseIntroLock() {
+    if (typeof window.__czsReleaseIntroLock === "function") {
+      window.__czsReleaseIntroLock();
+      return;
+    }
+    document.documentElement.classList.remove("czs-intro-lock");
+    document.documentElement.classList.add("czs-intro-release");
+  }
+
   const API = {
     archive: "/api/news/archive?limit=1000",
     authSession: "/api/auth/session",
@@ -93,15 +104,15 @@
     propsStool: "assets/aylla/rayl-v2-clean/rayl-v2-seated-feature.png",
     propsPeek: "assets/aylla/rayl-v2-clean/rayl-v2-point-full.png",
     propsPhone: "assets/aylla/rayl-v2-clean/rayl-v2-present-full.png",
-    chatNeutral: "assets/aylla/chatbot-poses/rayl-full-01-neutral.png",
-    chatWave: "assets/aylla/chatbot-poses/rayl-full-02-wave.png",
-    chatThink: "assets/aylla/chatbot-poses/rayl-full-03-thinking.png",
-    chatPoint: "assets/aylla/chatbot-poses/rayl-full-04-point-right.png",
-    chatPresent: "assets/aylla/chatbot-poses/rayl-full-05-present-both.png",
-    chatPointUp: "assets/aylla/chatbot-poses/rayl-full-06-point-up.png",
-    chatCelebrate: "assets/aylla/chatbot-poses/rayl-full-08-celebrate.png",
-    chatHoldCard: "assets/aylla/chatbot-poses/rayl-props-07-hold-card.png",
-    chatPhone: "assets/aylla/chatbot-poses/rayl-props-04-phone-panel.png",
+    chatNeutral: "assets/aylla/rayl-v2-clean/rayl-v2-neutral-full.png",
+    chatWave: "assets/aylla/rayl-v2-clean/rayl-v2-wave-full.png",
+    chatThink: "assets/aylla/rayl-v2-clean/rayl-v2-confident-full.png",
+    chatPoint: "assets/aylla/rayl-v2-clean/rayl-v2-point-full.png",
+    chatPresent: "assets/aylla/rayl-v2-clean/rayl-v2-present-full.png",
+    chatPointUp: "assets/aylla/rayl-v2-clean/rayl-v2-present-alt-full.png",
+    chatCelebrate: "assets/aylla/rayl-v2-clean/rayl-v2-heart-full.png",
+    chatHoldCard: "assets/aylla/rayl-v2-clean/rayl-v2-present-alt-full.png",
+    chatPhone: "assets/aylla/rayl-v2-clean/rayl-v2-phone-like.png",
   };
   const AYLLA_LOADER_POSES = [
     [RAYL_POSES.loaderWave, "Preparando a primeira dobra.", "wave"],
@@ -153,6 +164,20 @@
     })[char]);
   const cssEscape = (value) =>
     window.CSS?.escape ? CSS.escape(String(value || "")) : String(value || "").replace(/["\\]/g, "\\$&");
+  const cleanPublicAiText = (value, fallback = "Resposta local indisponível. Use um atalho seguro do CZS.") => {
+    const text = String(value || "")
+      .replace(/<think>[\s\S]*?<\/think>/gi, " ")
+      .replace(/<think>[\s\S]*/gi, " ")
+      .replace(/<\/think>/gi, " ")
+      .replace(/^\s*(assistant|model|ollama|ai|answer|resposta)\s*:\s*/i, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const normalized = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const englishHits = (normalized.match(/\b(the|and|you|your|please|click|open|answer|question|should|would|could|here|there|safe|sources|website|assistant|local news|next step)\b/g) || []).length;
+    const portugueseHits = (normalized.match(/\b(que|para|como|uma|um|com|noticia|noticias|servico|servicos|abrir|clique|fonte|vale|jurua|cruzeiro|atendimento|humano|pode|deve|cheffe|redacao|resposta|seguro|proximo|passo|aqui|estou)\b/g) || []).length;
+    const unsafe = !text || text.length < 18 || /[\u3040-\u30ff\u3400-\u9fff]/.test(text) || /\b(as an ai|i am|i'm|i cannot|i can|i don't|i do not|sure,|certainly,|hello,|hi,|please|click here|open the|let me|you can|your question|the answer)\b/i.test(text) || (englishHits >= 4 && englishHits > portugueseHits + 1);
+    return unsafe ? String(fallback || "Resposta local indisponível. Use um atalho seguro do CZS.") : text.slice(0, 900);
+  };
 
   function safeRead(key, fallback) {
     try {
@@ -727,10 +752,20 @@
       introBrand.className = "v8-loader-brand-logo";
       introBrand.src = BRAND_INTRO;
       introBrand.alt = "Catálogo CZS";
-      loaderCore.insertBefore(introBrand, loaderCore.querySelector("h2") || loaderCore.firstChild);
+      loaderCore.insertBefore(introBrand, loaderCore.querySelector(".southern-cross") || loaderCore.querySelector("h2") || loaderCore.firstChild);
     }
-    if (loaderTitle) loaderTitle.textContent = "CZS abrindo o dia";
-    if (loaderText) loaderText.textContent = "Notícias, serviços e alertas do Vale.";
+    if (loaderCore && !$(".v8-loader-video-scene", loaderCore)) {
+      const videoScene = document.createElement("div");
+      videoScene.className = "v8-loader-video-scene";
+      videoScene.setAttribute("aria-label", "Vídeo de abertura do Catálogo CZS");
+      videoScene.innerHTML = `
+        <video class="v8-loader-video" src="${INTRO_VIDEO}" muted playsinline autoplay loop preload="auto"></video>
+        <span class="v8-loader-video-label">carregando o jornal do vale</span>`;
+      const progressTrack = loaderCore.querySelector(".loader-track");
+      loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
+    }
+    if (loaderTitle) loaderTitle.textContent = "VALE DO JURUÁ ACORDA";
+    if (loaderText) loaderText.textContent = "NOTÍCIAS, SERVIÇOS E ALERTAS ENTRAM EM ÓRBITA.";
 
     const loader = $("#cinematicLoader");
     if (loader && !$(".v8-star-rush", loader)) {
@@ -1768,7 +1803,7 @@
       {
         title: "Agente visual",
         text: "abre galeria, TV CZS e registros do Vale do Juruá.",
-        img: "assets/aylla/chatbot-poses/rayl-close-06-walk.png",
+        img: "assets/aylla/rayl-v2-clean/rayl-v2-walk-full.png",
         href: "#galeriaFotos",
       },
     ];
@@ -1852,7 +1887,7 @@
     const answer = $("#v8OfficeAiAnswer");
     const def = getOfficeDefinitions().find((item) => item.id === officeId) || getOfficeDefinitions()[0];
     if (!def || !message) return;
-    if (answer) answer.textContent = `Consultando Ollama local para ${def.title}...`;
+    if (answer) answer.textContent = `Consultando IA local para ${def.title}...`;
     try {
       const result = await apiPostJson(API.officeAI, {
         officeKey: def.id,
@@ -1867,10 +1902,10 @@
       }, { timeout: 28000 });
       const payload = result.payload || {};
       if (!result.ok || !payload.ok) throw new Error(payload.error || `HTTP ${result.status}`);
-      if (answer) answer.innerHTML = `<b>${esc(payload.ai?.status === "online" ? "Ollama respondeu" : "Fallback local")}</b><span>${esc(payload.answer)}</span>`;
+      if (answer) answer.innerHTML = `<b>${esc(payload.ai?.status === "online" ? "IA local respondeu em português" : "Fallback local")}</b><span>${esc(cleanPublicAiText(payload.answer, "Fluxo seguro: registre na Cheffe Call, confirme fonte e execute só depois da revisão."))}</span>`;
       return payload;
     } catch (error) {
-      if (answer) answer.innerHTML = `<b>Ollama offline</b><span>${esc(error?.message || "Resposta local indisponível.")}</span>`;
+      if (answer) answer.innerHTML = `<b>IA local offline</b><span>${esc(error?.message || "Resposta local indisponível.")}</span>`;
       return null;
     }
   }
@@ -1878,7 +1913,7 @@
   async function askCheffeAI(message) {
     const answer = $("#v8CheffeAiAnswer");
     if (!message) return;
-    if (answer) answer.textContent = "Consultando Ollama local da Cheffe...";
+    if (answer) answer.textContent = "Consultando IA local da Cheffe...";
     try {
       const result = await apiPostJson(API.cheffeAI, {
         message,
@@ -1887,10 +1922,10 @@
       }, { timeout: 28000 });
       const payload = result.payload || {};
       if (!result.ok || !payload.ok) throw new Error(payload.error || `HTTP ${result.status}`);
-      if (answer) answer.innerHTML = `<b>${esc(payload.ai?.status === "online" ? "Ollama respondeu" : "Fallback local")}</b><span>${esc(payload.answer)}</span>`;
+      if (answer) answer.innerHTML = `<b>${esc(payload.ai?.status === "online" ? "IA local respondeu em português" : "Fallback local")}</b><span>${esc(cleanPublicAiText(payload.answer, "Cheffe local: confirme fonte/data, revise imagem ou vídeo e mantenha a fila registrada antes de publicar."))}</span>`;
       return payload;
     } catch (error) {
-      if (answer) answer.innerHTML = `<b>Ollama offline</b><span>${esc(error?.message || "Resposta local indisponível.")}</span>`;
+      if (answer) answer.innerHTML = `<b>IA local offline</b><span>${esc(error?.message || "Resposta local indisponível.")}</span>`;
       return null;
     }
   }
@@ -2574,11 +2609,11 @@
           <strong>Informação que conecta</strong>
         </a>
         <nav class="v8-footer-social" aria-label="Atalhos sociais e recursos do CZS">
-          <a class="ig" href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram do Catálogo CZS">IG</a>
-          <a class="wa" href="${SOCIAL_WHATSAPP}" target="_blank" rel="noopener" aria-label="WhatsApp do Catálogo CZS">WA</a>
-          <a class="mail" href="mailto:${SOCIAL_EMAIL}" aria-label="Enviar e-mail para o Catálogo CZS">E-mail</a>
-          <a class="ads" href="#monetizacao" aria-label="Anunciar no Catálogo CZS">Anunciar</a>
-          <a class="game" href="pubpaid.html" aria-label="Venha apostar no PubPaid">Apostar</a>
+          <a class="ig" href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram do Catálogo CZS"><b>Instagram</b><small>Bastidores e posts</small></a>
+          <a class="wa" href="${SOCIAL_WHATSAPP}" target="_blank" rel="noopener" aria-label="WhatsApp do Catálogo CZS"><b>WhatsApp</b><small>Atendimento direto</small></a>
+          <a class="mail" href="mailto:${SOCIAL_EMAIL}" aria-label="Enviar e-mail para o Catálogo CZS"><b>E-mail</b><small>Propostas e pautas</small></a>
+          <a class="ads" href="#monetizacao" aria-label="Anunciar no Catálogo CZS"><b>Anunciar</b><small>Planos para empresas</small></a>
+          <a class="game" href="pubpaid.html" aria-label="Conhecer o PubPaid"><b>PubPaid</b><small>Jogos e campanhas</small></a>
         </nav>
       </div>
       <div class="v8-footer-grid">
@@ -2939,8 +2974,8 @@
     betCta.id = "v8BetRailCTA";
     betCta.className = "v8-bet-cta-float";
     betCta.href = "pubpaid.html";
-    betCta.innerHTML = `${iconSvg("pool")}<span>Venha apostar</span>`;
-    betCta.setAttribute("aria-label", "Venha apostar no PubPaid");
+    betCta.innerHTML = `${iconSvg("pool")}<span>Conhecer PubPaid</span>`;
+    betCta.setAttribute("aria-label", "Conhecer o PubPaid");
     rail.innerHTML = `
       <button class="v8-context-close" type="button" aria-label="Fechar informações rápidas">×</button>
       <details open>
@@ -2968,7 +3003,7 @@
           <a href="#areaJovem">Shows do Acre</a>
           <a href="#areaJovem">Animes e games</a>
           <a href="#areaJovem">Filmes e TV</a>
-          <a href="pubpaid.html">Apostar</a>
+          <a href="pubpaid.html">Conhecer PubPaid</a>
         </div>
       </details>`;
     document.body.appendChild(rail);
@@ -2990,26 +3025,31 @@
   function installSalesLanding() {
     if ($("#v8SalesPortal")) return;
     const search = $(".search");
-    if (search && !$("#v8SalesOpenNearSearch")) {
+    const footerMapButton = $("#footerJumpTop");
+    if (!$("#v8SalesOpenNearSearch")) {
       const button = document.createElement("button");
       button.id = "v8SalesOpenNearSearch";
-      button.className = "v8-sales-search-btn";
+      button.className = "chip v8-sales-search-btn";
       button.type = "button";
-      button.innerHTML = `${iconSvg("bag")}<span>Números e ofertas</span>`;
-      search.insertAdjacentElement("afterend", button);
+      button.innerHTML = `${iconSvg("bag")}<span>Oportunidade para vc e sua empresa</span>`;
+      if (footerMapButton) {
+        footerMapButton.insertAdjacentElement("afterend", button);
+      } else if (search) {
+        search.insertAdjacentElement("afterend", button);
+      }
     }
 
     const portal = document.createElement("section");
     portal.id = "v8SalesPortal";
     portal.className = "v8-sales-portal";
     portal.hidden = true;
-    portal.setAttribute("aria-label", "Landing comercial do Catálogo CZS");
+    portal.setAttribute("aria-label", "Página comercial do Catálogo CZS");
     portal.innerHTML = `
-      <button class="v8-sales-close" type="button" aria-label="Fechar landing comercial">×</button>
+      <button class="v8-sales-close" type="button" aria-label="Fechar página comercial">×</button>
       <div class="v8-sales-intro">
         <img src="${RAYL_POSES.chatPresent}" alt="RAyL apresentando ofertas do CZS">
         <div>
-          <span>Conheça nossos números e ofertas</span>
+          <span>Oportunidade para vc e sua empresa</span>
           <h2>O CZS leva sua marca para o Vale do Juruá</h2>
           <p>Notícia, serviço, galeria, TV vertical, pesquisa e atendimento comercial em uma experiência só.</p>
           <button type="button" class="v8-sales-enter">Ver oportunidades</button>
@@ -3019,8 +3059,8 @@
         <header>
           <img src="${BRAND_HORIZONTAL}" alt="Catálogo CZS">
           <div>
-            <h2>Números, formatos e ofertas do Catálogo CZS</h2>
-            <p>Uma landing comercial para mostrar presença local, formatos de mídia e próximos passos de venda.</p>
+            <h2>Oportunidade para vc e sua empresa</h2>
+            <p>Presença local, formatos de mídia e próximos passos de venda para marcas do Vale do Juruá.</p>
           </div>
         </header>
         <div class="v8-sales-metrics">
@@ -3043,7 +3083,7 @@
           <span>1. Escolha o formato</span>
           <span>2. Envie foto/texto</span>
           <span>3. Publicamos com card, legenda, TV ou anúncio</span>
-          <span>4. Administração acompanha ajustes</span>
+          <span>4. A equipe acompanha resultados e ajustes</span>
         </div>
       </div>`;
     document.body.appendChild(portal);
@@ -3159,7 +3199,7 @@
       [/Preparar card/g, "Gerar chamada"],
       [/Triar/g, "Priorizar"],
       [/Acionar escritório/g, "Acionar equipe"],
-      [/Jogos CZS/g, "Venha apostar"],
+      [/Jogos CZS/g, "Conhecer PubPaid"],
       [/jogos CZS/g, "venha apostar"],
       [/Pesquisa e jogos/g, "Pesquisas políticas e dados"],
       [/pesquisa e jogos/g, "pesquisas políticas e dados"],
@@ -3224,6 +3264,7 @@
       BRAND_INTRO,
       BRAND_HORIZONTAL,
       BRAND_ICON,
+      INTRO_VIDEO,
       ...AYLLA_LOADER_POSES.map(([src]) => src),
       RAYL_POSES.seatedFeature,
       RAYL_POSES.fullWave,
@@ -3343,6 +3384,7 @@
       loader.setAttribute("aria-hidden", "true");
       loader.style.pointerEvents = "none";
       document.body.classList.remove("v8-intro-running");
+      releaseIntroLock();
       return;
     }
     document.body.classList.add("v8-intro-running");
@@ -3353,8 +3395,8 @@
     loader.dataset.stage = "swarm";
 
     const started = performance.now();
-    const fullSequenceMs = 5600;
-    const forcedFinishMs = 7200;
+    const fullSequenceMs = 7800;
+    const forcedFinishMs = 9800;
     let finished = false;
     let foldReady = false;
     let shellReady = false;
@@ -3370,6 +3412,8 @@
     }, 90);
 
     const status = $(".v8-loader-status", loader);
+    const introVideo = $(".v8-loader-video", loader);
+    let introVideoStarted = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
       if (status && status.textContent !== message) status.textContent = message;
@@ -3380,11 +3424,19 @@
       fill.style.width = `${p}%`;
       text.textContent = `${p}%`;
       loader.dataset.progress = String(p);
-      if (p < 28) loader.dataset.stage = "swarm";
-      else if (p < 50) loader.dataset.stage = "collision";
-      else if (p < 68) loader.dataset.stage = "blast";
-      else if (p < 94) loader.dataset.stage = "welcome";
+      if (p < 24) loader.dataset.stage = "swarm";
+      else if (p < 38) loader.dataset.stage = "collision";
+      else if (p < 94) loader.dataset.stage = "video";
       else loader.dataset.stage = "ready";
+      if (introVideo && p >= 38 && !introVideoStarted) {
+        introVideoStarted = true;
+        try {
+          introVideo.currentTime = 0;
+          introVideo.muted = true;
+          introVideo.loop = true;
+          introVideo.play?.().catch?.(() => {});
+        } catch (_) {}
+      }
     };
 
     const finish = () => {
@@ -3402,6 +3454,7 @@
         loader.hidden = true;
         loader.style.pointerEvents = "none";
         document.body.classList.remove("v8-intro-running");
+        releaseIntroLock();
         try {
           sessionStorage.setItem(INTRO_SESSION_KEY, V8_BOOT_VERSION);
         } catch (_) {}
@@ -3413,18 +3466,15 @@
     const tick = (now) => {
       const elapsed = now - started;
       let progress = 4;
-      if (elapsed < 1600) {
-        progress = 4 + (elapsed / 1600) * 24;
+      if (elapsed < 1500) {
+        progress = 4 + (elapsed / 1500) * 20;
         setStatus("Abrindo o céu do Vale.");
-      } else if (elapsed < 3000) {
-        progress = 28 + ((elapsed - 1600) / 1400) * 22;
-        setStatus("Sincronizando notícias e serviços.");
-      } else if (elapsed < 4200) {
-        progress = 50 + ((elapsed - 3000) / 1200) * 18;
-        setStatus("Renovando cache, fontes e imagens.");
+      } else if (elapsed < 2500) {
+        progress = 24 + ((elapsed - 1500) / 1000) * 14;
+        setStatus("Chamando a vinheta CZS.");
       } else if (elapsed < fullSequenceMs) {
-        progress = 68 + ((elapsed - 4200) / (fullSequenceMs - 4200)) * 26;
-        setStatus("RAyL prepara sua entrada.");
+        progress = 38 + ((elapsed - 2500) / (fullSequenceMs - 2500)) * 56;
+        setStatus("Rodando o vídeo enquanto a página carrega.");
       } else {
         progress = 94;
         setStatus(shellReady && foldReady ? "Tudo pronto. Abrindo o jornal." : "Sincronizando a primeira dobra.");
@@ -3666,7 +3716,7 @@
       body.innerHTML = `
         <div class="aylla-stage" aria-live="polite">
           <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="RAyL acenando">
-          <div class="aylla-speech"><b>Hey!</b> Eu sou a RAyL. Escolha uma opção abaixo.</div>
+          <div class="aylla-speech"><b>Oi!</b> Eu sou a RAyL. Escolha uma opção abaixo.</div>
         </div>
         <div class="aylla-faq" aria-label="Perguntas frequentes">
           <button type="button" data-aylla-faq="anunciar">Como anunciar?</button>
@@ -3674,7 +3724,7 @@
           <button type="button" data-aylla-faq="arquivo">Arquivo</button>
           <button type="button" data-aylla-faq="servicos">Serviços úteis</button>
           <button type="button" data-aylla-faq="escritorios">Escritórios</button>
-          <button type="button" data-aylla-faq="pubpaid">Apostar</button>
+          <button type="button" data-aylla-faq="pubpaid">Conhecer PubPaid</button>
           <button type="button" data-aylla-faq="pesquisa">Pesquisa</button>
           <button type="button" data-aylla-faq="correcao">Informar erro</button>
           <button type="button" data-aylla-faq="galeria">Galeria</button>
@@ -3689,7 +3739,7 @@
           <a class="small-btn" href="#comunidade" data-aylla-go="community">Enviar pauta</a>
         </div>
         <form class="aylla-ask" data-aylla-form>
-          <label for="ayllaQuestion">Tire uma duvida</label>
+          <label for="ayllaQuestion">Tire uma dúvida</label>
           <div>
             <input id="ayllaQuestion" type="search" name="question" autocomplete="off" placeholder="Ex: quero anunciar no CZS">
             <button type="submit">Perguntar</button>
@@ -3706,7 +3756,7 @@
     dock.innerHTML = `
       <button class="aylla-dock-close" type="button" aria-label="Trazer RAyL para o suporte">×</button>
       <img src="${RAYL_POSES.chatPoint}" alt="">
-      <span>Hey! Estou aqui.</span>`;
+      <span>Oi, estou aqui.</span>`;
     document.body.appendChild(dock);
 
     const poseMap = {
@@ -3775,7 +3825,7 @@
         title: "PubPaid",
         keywords: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "ranking", "torneio"],
         answer: "PubPaid fica como frente de apostas e jogos. Na home pública, este bloco prioriza pesquisa política, dados e resultados.",
-        route: ["pubpaid.html", "celebrate", "O botão vermelho Venha apostar abre o PubPaid."],
+        route: ["pubpaid.html", "celebrate", "O botão vermelho Conhecer PubPaid abre o PubPaid."],
       },
       {
         id: "pesquisa",
@@ -3818,14 +3868,14 @@
       },
     ];
 
-    const raylVoiceIntro = "Hey! Eu sou a RAyL.";
+    const raylVoiceIntro = "Oi, eu sou a RAyL.";
     const spokenFaq = {
       anunciar: "Como anunciar no CZS.",
       noticia: "Enviar notícia para a redação.",
       arquivo: "Abrir o arquivo.",
       servicos: "Serviços úteis.",
       escritorios: "Escritórios de agentes.",
-      pubpaid: "Venha apostar.",
+      pubpaid: "Conheça o PubPaid.",
       pesquisa: "Pesquisa e participação.",
       correcao: "Informar erro.",
       galeria: "Galeria de fotos.",
@@ -3834,8 +3884,22 @@
     };
 
     const speakRayl = () => {};
+    const idlePoseOrder = ["wave", "polite", "present-left", "point-right", "stand", "call-attention"];
+    let idlePoseIndex = 0;
+    let idlePoseTimer = 0;
 
-    const setPose = (pose, message) => {
+    const scheduleIdlePose = () => {
+      window.clearTimeout(idlePoseTimer);
+      idlePoseTimer = window.setTimeout(() => {
+        if (!document.body.contains(card)) return;
+        idlePoseIndex = (idlePoseIndex + 1) % idlePoseOrder.length;
+        const nextPose = idlePoseOrder[idlePoseIndex];
+        setPose(nextPose, poseMap[nextPose]?.[1], { idle: true, silent: true });
+        scheduleIdlePose();
+      }, card.classList.contains("open") ? 5200 : 6800);
+    };
+
+    const setPose = (pose, message, options = {}) => {
       const item = poseMap[pose] || poseMap.wave;
       card.className = card.className.replace(/\baylla-pose-[\w-]+/g, "").trim();
       card.classList.add(`aylla-pose-${pose}`);
@@ -3854,9 +3918,11 @@
         button.setAttribute("aria-pressed", active ? "true" : "false");
       });
       const speech = $(".aylla-speech", card);
-      if (speech) speech.innerHTML = `<b>Hey!</b> ${esc(message || item[1])}`;
+      const publicMessage = cleanPublicAiText(message || item[1], item[1]);
+      if (speech) speech.innerHTML = `<b>Oi!</b> ${esc(publicMessage)}`;
       const out = $("#assistantOut");
-      if (out && message) out.insertAdjacentHTML("beforeend", `<div class="chat bot">${esc(message)}</div>`);
+      if (out && message && !options.silent) out.insertAdjacentHTML("beforeend", `<div class="chat bot">${esc(publicMessage)}</div>`);
+      if (!options.idle) scheduleIdlePose();
     };
 
     const normalizeQuestion = (value) => String(value || "")
@@ -4003,7 +4069,7 @@
       dock.classList.toggle("is-pointing", pose !== "seat");
       dock.setAttribute("aria-hidden", "false");
       dock.querySelector("img").src = pose === "seat" ? RAYL_POSES.seatedFeature : RAYL_POSES.fullPoint;
-      dock.querySelector("span").textContent = label || "Hey! Estou aqui.";
+      dock.querySelector("span").textContent = label || "Oi, estou aqui.";
     };
 
     const guideTo = (selector, pose, message) => {

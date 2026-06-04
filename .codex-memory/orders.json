@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-04T20:09:35.723Z",
+  "lastUpdatedAt": "2026-06-04T21:03:25.103Z",
   "orders": [
     {
       "id": "2026-06-03-v8-rayl-commercial-popup-real-images",
@@ -5506,6 +5506,83 @@
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-rodada-final-de-acabamento-v8-limpar-recorte-branco-da-rayl-validar-cta-comercia",
+      "createdAt": "2026-06-04T20:50:59.836Z",
+      "updatedAt": "2026-06-04T20:50:59.836Z",
+      "status": "in-progress",
+      "source": "chat",
+      "rawRequest": "Corrigir branco no recorte da RAyL, gerar relatorio e capturas internas, reunir agentes/subagentes e decidir se a intro/site estao prontos antes de subir.",
+      "summary": "Rodada final de acabamento V8: limpar recorte branco da RAyL, validar CTA comercial, intro anti-flash, rodape social, relatorio e revisao por agentes antes de deploy.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "czs-v8",
+        "intro",
+        "rayl",
+        "relatorio",
+        "review-team",
+        "deploy-check"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-polir-chatbot-rayl-minimizado-como-janela-de-rosto-sem-fundo-azul-aberto-sem-ava",
+      "createdAt": "2026-06-04T21:02:04.711Z",
+      "updatedAt": "2026-06-04T21:02:04.711Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "Ajustar chatbot: tirar fundo azul do avatar minimizado, esconder avatar pequeno quando o avatar grande aparece e focar o rosto no estado minimizado.",
+      "summary": "Polir chatbot RAyL: minimizado como janela de rosto sem fundo azul, aberto sem avatar pequeno redundante e dock lateral oculto.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "assets/v8-final/v8-merge-ready.css"
+      ],
+      "assetRefs": [
+        ".codex-temp/czs-v8-site-finish-qa-20260604/chatbot-minimized-face-v14.png",
+        ".codex-temp/czs-v8-site-finish-qa-20260604/chatbot-open-single-avatar-v13.png",
+        ".codex-temp/czs-v8-site-finish-qa-20260604/chatbot-polish-v13.json"
+      ],
+      "tags": [
+        "czs-v8",
+        "chatbot",
+        "rayl",
+        "visual-polish"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-corrigir-pose-rayl-com-celular-que-podia-aparecer-sem-cabeca-por-recorte-e-encai",
+      "createdAt": "2026-06-04T21:03:25.103Z",
+      "updatedAt": "2026-06-04T21:03:25.103Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "saiu sem cabeça",
+      "summary": "Corrigir pose RAyL com celular que podia aparecer sem cabeça por recorte e encaixe cover.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "scripts/rayl-crop-fix.py",
+        "assets/v8-final/v8-merge-ready.js",
+        "index.html",
+        "prototype-redesign-v8-portal-inteligente.html",
+        "assets/aylla/rayl-v2-clean/rayl-v2-phone-like.png"
+      ],
+      "assetRefs": [
+        "assets/aylla/rayl-v2-clean/rayl-v2-phone-like.png",
+        ".codex-temp/rayl-crop-fix-20260604/rayl-crop-review-edge.png"
+      ],
+      "tags": [
+        "rayl",
+        "recorte",
+        "asset",
+        "chatbot"
+      ],
       "nextSteps": [],
       "notes": ""
     }

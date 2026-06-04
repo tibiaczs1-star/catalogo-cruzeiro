@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-04T13:05:38.639Z",
+  "lastUpdatedAt": "2026-06-04T21:02:30.942Z",
   "assets": [
     {
       "id": "v8-rayl-commercial-popup-real-images-20260603",
@@ -2149,6 +2149,72 @@
       "note": "QA V8 stories mobile: bolinhas e player vertical renderizados no viewport mobile",
       "linkedOrderIds": [],
       "createdAt": "2026-06-04T13:05:38.639Z"
+    },
+    {
+      "id": "czs-v8-site-finish-final-smoke-20260604",
+      "kind": "report",
+      "path": ".codex-temp/czs-v8-site-finish-qa-20260604/final-smoke-v11.json",
+      "source": "workspace",
+      "note": "Smoke final do V8: CTA comercial apos Mapa do site, portal comercial oculto por padrao, intro sem vazamento visual e pose RAyL limpa no modal.",
+      "linkedOrderIds": [
+        "2026-06-04-rodada-final-de-acabamento-v8-limpar-recorte-branco-da-rayl-validar-cta-comercia"
+      ],
+      "createdAt": "2026-06-04T20:54:07.000Z"
+    },
+    {
+      "id": "czs-v8-rayl-arm-clean-proof-20260604",
+      "kind": "screenshot",
+      "path": ".codex-temp/czs-v8-site-finish-qa-20260604/rayl-left-arm-clean-on-dark-v10.png",
+      "source": "workspace",
+      "note": "Prova visual interna da pose RAyL em fundo escuro apos remocao do recorte branco entre braco e corpo.",
+      "linkedOrderIds": [
+        "2026-06-04-rodada-final-de-acabamento-v8-limpar-recorte-branco-da-rayl-validar-cta-comercia"
+      ],
+      "createdAt": "2026-06-04T20:54:07.886Z"
+    },
+    {
+      "id": "czs-v8-commercial-modal-final-20260604",
+      "kind": "screenshot",
+      "path": ".codex-temp/czs-v8-site-finish-qa-20260604/desktop-opportunity-modal-final-v11.png",
+      "source": "workspace",
+      "note": "Captura interna final do CTA Oportunidade para vc e sua empresa abrindo a tela comercial com RAyL limpa.",
+      "linkedOrderIds": [
+        "2026-06-04-rodada-final-de-acabamento-v8-limpar-recorte-branco-da-rayl-validar-cta-comercia"
+      ],
+      "createdAt": "2026-06-04T20:54:07.000Z"
+    },
+    {
+      "id": "czs-v8-final-readiness-report-20260604",
+      "kind": "report",
+      "path": ".codex-temp/czs-v8-site-finish-qa-20260604/final-readiness-report.md",
+      "source": "workspace",
+      "note": "Relatorio interno final da rodada V8: decisao, evidencias, agentes, validacoes e pendencias antes de deploy publico.",
+      "linkedOrderIds": [
+        "2026-06-04-rodada-final-de-acabamento-v8-limpar-recorte-branco-da-rayl-validar-cta-comercia"
+      ],
+      "createdAt": "2026-06-04T20:55:24.576Z"
+    },
+    {
+      "id": "czs-v8-chatbot-face-minimized-20260604",
+      "kind": "screenshot",
+      "path": ".codex-temp/czs-v8-site-finish-qa-20260604/chatbot-minimized-face-v14.png",
+      "source": "workspace",
+      "note": "Chatbot RAyL minimizado como janela circular de rosto, sem fundo azul e sem texto redundante.",
+      "linkedOrderIds": [
+        "2026-06-04-polir-chatbot-rayl-minimizado-como-janela-de-rosto-sem-fundo-azul-aberto-sem-ava"
+      ],
+      "createdAt": "2026-06-04T21:02:18.284Z"
+    },
+    {
+      "id": "czs-v8-chatbot-open-single-avatar-20260604",
+      "kind": "screenshot",
+      "path": ".codex-temp/czs-v8-site-finish-qa-20260604/chatbot-open-single-avatar-v13.png",
+      "source": "workspace",
+      "note": "Chatbot RAyL aberto com avatar pequeno do cabecalho oculto e avatar grande como unico personagem visivel no painel.",
+      "linkedOrderIds": [
+        "2026-06-04-polir-chatbot-rayl-minimizado-como-janela-de-rosto-sem-fundo-azul-aberto-sem-ava"
+      ],
+      "createdAt": "2026-06-04T21:02:30.942Z"
     }
   ],
   "social": [
