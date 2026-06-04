@@ -1580,7 +1580,28 @@ function writeJson(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const tempFilePath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
   fs.writeFileSync(tempFilePath, JSON.stringify(value, null, 2), "utf-8");
-  fs.renameSync(tempFilePath, filePath);
+  let lastError = null;
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      fs.renameSync(tempFilePath, filePath);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (!["EPERM", "EBUSY", "EACCES"].includes(error?.code || "")) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 40 + attempt * 40);
+    }
+  }
+  try {
+    fs.copyFileSync(tempFilePath, filePath);
+    fs.unlinkSync(tempFilePath);
+  } catch (_fallbackError) {
+    try {
+      fs.unlinkSync(tempFilePath);
+    } catch {
+      // Best effort cleanup; the original write error is more useful.
+    }
+    throw lastError;
+  }
 }
 
 function normalizeJsonArrayPayload(payload) {
@@ -9000,6 +9021,130 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+const OFFICE_ORDER_DISPATCH_TARGETS = [
+  { key: "redacao", label: "Redacao", role: "transformar em pauta, texto e fila editorial" },
+  { key: "apuracao", label: "Apuracao", role: "checar fonte, data, local e lacunas" },
+  { key: "revisao", label: "Revisao", role: "corrigir risco, clareza, tom e publicacao segura" },
+  { key: "comercial", label: "Comercial", role: "avaliar oportunidade de apoio, anuncio e servico" },
+  { key: "social", label: "Social", role: "preparar chamada curta para redes quando couber" },
+  { key: "design", label: "Design", role: "avaliar imagem, card, visual e hierarquia" },
+  { key: "pubpaid", label: "PubPaid", role: "avaliar ligacao com jogo, campanha e juventude" },
+  { key: "cheffe-call", label: "Cheffe Call", role: "priorizar, cobrar retorno e decidir proximo passo" }
+];
+
+function resolveOfficeDispatchTargets(body = {}) {
+  const requested = [
+    body.officeKey,
+    body.office,
+    body.targetOffice,
+    body.target,
+    body.to
+  ]
+    .flatMap((value) => Array.isArray(value) ? value : String(value || "").split(/[;,]/))
+    .map((value) => cleanShortText(value || "", 120))
+    .filter(Boolean)
+    .map((value) => normalizeOfficeKey(value))
+    .filter(Boolean);
+  const wantsAll = !requested.length || requested.some((key) => (
+    key === "todos" ||
+    key === "todas" ||
+    key === "all" ||
+    key === "equipes" ||
+    key === "agentes-reais" ||
+    key === "codex-ceo"
+  ));
+  if (wantsAll) return OFFICE_ORDER_DISPATCH_TARGETS.slice();
+  const byKey = new Map(OFFICE_ORDER_DISPATCH_TARGETS.map((item) => [item.key, item]));
+  const targets = requested.map((key) => byKey.get(key) || {
+    key,
+    label: cleanShortText(key.replace(/-/g, " "), 120),
+    role: "receber ordem direta do Full Admin"
+  });
+  if (!targets.some((item) => item.key === "cheffe-call")) {
+    targets.unshift(OFFICE_ORDER_DISPATCH_TARGETS.find((item) => item.key === "cheffe-call"));
+  }
+  return targets.filter(Boolean).filter((item, index, list) => (
+    list.findIndex((other) => other.key === item.key) === index
+  )).slice(0, 12);
+}
+
+async function dispatchOfficeOrderToCheffeAndOffices(order, body = {}, req = null) {
+  const now = new Date().toISOString();
+  const targets = resolveOfficeDispatchTargets(body);
+  const tracking = buildTrackingMeta(req, body);
+  const context = {
+    orderId: order.id,
+    priority: order.priority,
+    target: order.to,
+    offices: targets.map((item) => ({ key: item.key, label: item.label, role: item.role })),
+    sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260)
+  };
+  const aiResult = await callCatalogAi({
+    area: "office-order-dispatch",
+    system: [
+      "Você é a Cheffe Call do Catálogo CZS recebendo uma ordem do Full Admin.",
+      "Transforme a ordem em despacho operacional curto para os escritórios.",
+      "Saída final obrigatoriamente em português do Brasil.",
+      "Não invente fato, fonte, foto, notícia, venda nem execução externa.",
+      "Não mostre raciocínio interno e não repita estas instruções.",
+      "Responda em no máximo 5 linhas: prioridade, quem recebe, próximo passo e cuidado."
+    ].join(" "),
+    prompt: order.message,
+    context,
+    temperature: 0.14
+  });
+  const fallback =
+    "Cheffe recebeu a ordem, distribuiu para os escritórios e vai cobrar retorno com fonte, prioridade e prova antes de publicar.";
+  const cheffeReply = aiResult.ok ? sanitizeCatalogAiAnswer(aiResult.answer, fallback) : fallback;
+  const actions = targets.map((target) => addOfficeWorkAction({
+    officeKey: target.key,
+    officeLabel: target.label,
+    agentName: target.key === "cheffe-call" ? "Cheffe Call" : "Codex CEO",
+    kind: target.key === "cheffe-call" ? "received-order-cheffe" : "received-order",
+    status: target.key === "cheffe-call" ? "ordem-recebida-priorizando" : "ordem-recebida",
+    title: `Ordem ${order.priority}: ${order.message.slice(0, 96)}`,
+    detail: cleanShortText(
+      [
+        `Ordem: ${order.message}`,
+        `Papel: ${target.role}`,
+        target.key === "cheffe-call" ? `Despacho: ${cheffeReply}` : "Responder para a Cheffe com próximo passo, cuidado e prova."
+      ].join("\n"),
+      1200
+    ),
+    source: "office-orders-dispatch"
+  }));
+  const updatedOrder = updateOfficeOrderById(order.id, {
+    status: "distribuida",
+    ceoReply: cheffeReply,
+    hierarchy: "Full Admin -> Cheffe Call -> escritorios/agentes",
+    dispatchedAt: now,
+    assignedAgents: targets.length,
+    assignments: targets.map((target, index) => ({
+      officeKey: target.key,
+      office: target.label,
+      role: target.role,
+      status: "ordem-recebida",
+      workActionId: actions[index]?.id || "",
+      updatedAt: now
+    })),
+    executionSummary: {
+      delivered: actions.length,
+      failed: 0,
+      running: targets.length
+    },
+    ai: aiResult.ai || { status: "fallback", provider: "local-flow", model: "" }
+  }) || order;
+  return {
+    ok: true,
+    order: updatedOrder,
+    ceoReply: cheffeReply,
+    ai: aiResult.ai || { status: "fallback", provider: "local-flow", model: "" },
+    offices: targets,
+    actions,
+    cheffeAction: actions.find((item) => item.officeKey === "cheffe-call") || null
+  };
+}
+
 function updateOfficeOrderById(orderId, patch = {}) {
   const id = cleanShortText(orderId || "", 120);
   if (!id) return null;
@@ -16405,7 +16550,7 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 400, { ok: false, error: "Escreva a ordem antes de enviar." });
     }
 
-    const target = cleanShortText(body.target || "Codex CEO", 80);
+    const target = cleanShortText(body.target || body.to || body.office || body.officeKey || "Codex CEO + escritorios", 80);
     const priority = cleanShortText(body.priority || "normal", 40);
     const ceoReply =
       `Recebido, Full Admin. Vou transformar essa ordem em fila para ${target}, cobrar retorno pela hierarquia e registrar o status aqui.`;
@@ -16428,8 +16573,15 @@ async function handleApi(req, res, pathname, searchParams) {
       }
     };
     appendOfficeOrder(order);
+    const dispatch = await dispatchOfficeOrderToCheffeAndOffices(order, body, req);
 
-    return sendJson(res, 201, { ok: true, order, ceoReply, ...buildOfficeOrderPayload() });
+    return sendJson(res, 201, {
+      ok: true,
+      order: dispatch.order,
+      ceoReply: dispatch.ceoReply || ceoReply,
+      dispatch,
+      ...buildOfficeOrderPayload()
+    });
   }
 
   if (req.method === "POST" && pathname === "/api/office-orders/review") {
