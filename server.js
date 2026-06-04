@@ -9876,7 +9876,7 @@ function raylIntentForQuestion(question = "") {
       title: "Como anunciar",
       words: ["anunciar", "anuncio", "divulgar", "propaganda", "publicidade", "vendas", "site", "app"],
       answer:
-        "Para anunciar no CZS, escolha o formato comercial e envie o contato. Posso abrir a pagina Divulgue ou registrar um pedido para retorno."
+        "Claro. Para anunciar no CZS, o caminho mais rapido e abrir a pagina Divulgue. La voce escolhe se quer card, materia patrocinada, video, site, app ou automacao. Se preferir, eu deixo o WhatsApp pronto."
     },
     {
       id: "noticia",
@@ -9885,7 +9885,7 @@ function raylIntentForQuestion(question = "") {
       title: "Enviar noticia",
       words: ["noticia", "pauta", "denuncia", "foto", "video", "bairro", "comunidade"],
       answer:
-        "Envie local, horario, foto ou video e explique o que aconteceu. O CZS deve checar denuncia, seguranca e saude antes de publicar como noticia."
+        "Pode mandar a pauta com local, horario, foto ou video e uma explicacao simples do que aconteceu. A redacao checa antes de publicar, principalmente quando envolve denuncia, seguranca ou saude."
     },
     {
       id: "escritorios",
@@ -9894,7 +9894,7 @@ function raylIntentForQuestion(question = "") {
       title: "Escritórios",
       words: ["escritorio", "escritorios", "office", "redacao", "cheffe", "equipe"],
       answer:
-        "Os escritorios ficam dentro da Cheffe Call. Abra Cheffe Call e use Ver escritorios para acionar Redacao, Comercial, Comunidade, Fotos, Servicos e Cheffe."
+        "Os escritorios trabalham pela Cheffe Call. Por ali a ordem chega para Redacao, Comercial, Comunidade, Fotos, Servicos e Cheffe, cada um cuidando da parte certa."
     },
     {
       id: "servicos",
@@ -9903,7 +9903,7 @@ function raylIntentForQuestion(question = "") {
       title: "Servicos uteis",
       words: ["servico", "farmacia", "hospital", "telefone", "energia", "agua", "clima", "rio"],
       answer:
-        "Servicos uteis ficam na area de hospitais, farmacias, clima, rio, energia, agua, telefones e alertas para Cruzeiro do Sul e Vale do Jurua."
+        "Vai em Servicos. Ali ficam hospitais, farmacias, clima, rio, energia, agua, telefones e alertas locais para resolver sem ficar procurando pelo site inteiro."
     },
     {
       id: "arquivo",
@@ -9912,7 +9912,7 @@ function raylIntentForQuestion(question = "") {
       title: "Arquivo",
       words: ["arquivo", "antiga", "mes", "ano", "semana", "dia", "buscar", "pesquisar"],
       answer:
-        "O arquivo usa o endpoint de noticias do servidor e permite buscar por termo, periodo, editoria, fonte e pasta mensal."
+        "O Arquivo e para achar noticia antiga sem sofrimento. Voce pode buscar por palavra, periodo, editoria, fonte ou pasta do mes."
     },
     {
       id: "pubpaid",
@@ -9921,7 +9921,7 @@ function raylIntentForQuestion(question = "") {
       title: "PubPaid",
       words: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "ranking", "torneio"],
       answer:
-        "PubPaid e a frente de jogos do projeto. Use os atalhos de Pesquisa e PubPaid para entrar nos jogos e acompanhar novidades."
+        "O PubPaid e a area de jogos, campanhas e participacao do CZS. Eu te levo pelo atalho para abrir os jogos, ranking e novidades."
     },
     {
       id: "pesquisa",
@@ -9930,7 +9930,7 @@ function raylIntentForQuestion(question = "") {
       title: "Pesquisa",
       words: ["pesquisa", "eleitoral", "enquete", "votar", "opiniao"],
       answer:
-        "Pesquisas e enquetes ficam no bloco de participacao. Quando houver rodada ativa, o CZS mostra o caminho direto."
+        "Pesquisas e enquetes ficam no bloco de participacao. Quando tiver rodada ativa, o CZS mostra o caminho direto para votar ou acompanhar o resultado."
     },
     {
       id: "correcao",
@@ -9939,7 +9939,7 @@ function raylIntentForQuestion(question = "") {
       title: "Informar erro",
       words: ["erro", "corrigir", "correcao", "errado", "denunciar erro"],
       answer:
-        "Para informar erro, mande o titulo da materia, o trecho incorreto e a fonte correta. A Cheffe Call registra a tarefa para revisao."
+        "Se viu algo errado, mande o titulo da materia, o trecho e a fonte correta. A Cheffe Call registra a correcao para a redacao revisar."
     },
     {
       id: "galeria",
@@ -9948,7 +9948,7 @@ function raylIntentForQuestion(question = "") {
       title: "Galeria",
       words: ["galeria", "foto", "fotos", "imagem", "turismo", "cruzeiro do sul", "mapa"],
       answer:
-        "A galeria organiza fotos e pontos de Cruzeiro do Sul com mapa, contexto e navegacao visual."
+        "A Galeria e o lugar das fotos do Vale do Jurua: pontos de Cruzeiro do Sul, imagens locais, mapa e contexto para navegar com calma."
     },
     {
       id: "mapa",
@@ -9957,7 +9957,7 @@ function raylIntentForQuestion(question = "") {
       title: "Mapa do site",
       words: ["mapa", "site", "onde fica", "rodape", "menu"],
       answer:
-        "O mapa do site fica no rodape e mostra noticias, arquivo, servicos, comunidade, comercial e redacao."
+        "O mapa fica no rodape. Ele junta noticias, arquivo, servicos, comunidade, comercial e redacao em um caminho so."
     }
   ];
 
@@ -9977,7 +9977,7 @@ function raylIntentForQuestion(question = "") {
       pose: "human",
       title: "Atendimento humano",
       human: true,
-      answer: "Atendimento humano liberado. Vou deixar o WhatsApp pronto para falar direto com o CZS."
+      answer: "Sem problema. Vou deixar o WhatsApp pronto para voce falar com uma pessoa do CZS."
     };
   }
 
@@ -9987,7 +9987,7 @@ function raylIntentForQuestion(question = "") {
     pose: "thinking",
     title: "Atalho CZS",
     answer:
-      "Ainda nao tenho uma resposta segura para essa pergunta. Posso te levar para as noticias recentes ou abrir atendimento humano se precisar."
+      "Essa eu nao quero chutar. Posso te levar para as noticias recentes ou deixar o WhatsApp pronto para alguem do CZS responder certinho."
   };
 }
 
@@ -9998,7 +9998,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/",
     routeKey: "news",
     keywords: ["inicio", "home", "capa", "principal", "ultimas", "noticias"],
-    answer: "A pagina inicial mostra as noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos do CZS."
+    answer: "A pagina inicial e o painel rapido do CZS: noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos importantes."
   },
   {
     id: "arquivo",
@@ -10006,7 +10006,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/arquivo.html",
     routeKey: "archive",
     keywords: ["arquivo", "buscar", "pesquisar", "antiga", "materia", "noticia antiga"],
-    answer: "O arquivo serve para buscar noticias por termo, periodo, fonte e categoria."
+    answer: "O Arquivo ajuda a encontrar noticia antiga por palavra, periodo, fonte ou categoria."
   },
   {
     id: "servicos",
@@ -10014,7 +10014,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/catalogo-servicos.html",
     routeKey: "services",
     keywords: ["servico", "servicos", "telefone", "farmacia", "hospital", "agua", "energia", "clima"],
-    answer: "A area de servicos reúne telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas."
+    answer: "A area de Servicos junta telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas do dia."
   },
   {
     id: "divulgue",
@@ -10022,7 +10022,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/divulgue.html",
     routeKey: "",
     keywords: ["anunciar", "anuncio", "divulgar", "propaganda", "publicidade", "comercial", "vender"],
-    answer: "Para anunciar, use a pagina Divulgue ou fale no WhatsApp. O CZS pode orientar formato, card, materia patrocinada, video, site, app ou automacao."
+    answer: "Para anunciar, abra a pagina Divulgue. O CZS orienta formato, card, materia patrocinada, video, site, app ou automacao; se preferir, eu levo ao WhatsApp."
   },
   {
     id: "galeria",
@@ -10030,7 +10030,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/galeria.html",
     routeKey: "gallery",
     keywords: ["galeria", "foto", "fotos", "imagem", "turismo", "mapa", "ponto turistico"],
-    answer: "A galeria reúne imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua."
+    answer: "A Galeria reune imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua."
   },
   {
     id: "pubpaid",
@@ -10038,7 +10038,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/pubpaid.html",
     routeKey: "games",
     keywords: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "dama", "torneio", "ranking"],
-    answer: "PubPaid e a frente de jogos e campanhas do CZS. Use o atalho PubPaid para abrir jogos, ranking e novidades."
+    answer: "PubPaid e a frente de jogos, ranking e campanhas do CZS. Use o atalho PubPaid para entrar nessa area."
   },
   {
     id: "cheffe",
@@ -10046,7 +10046,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/cheffe-call.html",
     routeKey: "cheffe",
     keywords: ["cheffe", "chefecall", "redacao", "escritorio", "escritorios", "equipe", "corrigir", "erro"],
-    answer: "Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios."
+    answer: "A Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios."
   },
   {
     id: "whatsapp",
@@ -10054,7 +10054,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "",
     routeKey: "",
     keywords: ["whatsapp", "zap", "atendente", "humano", "contato", "dono", "pessoa"],
-    answer: "Quando a RAyL nao tiver resposta segura, ela deve encaminhar para o WhatsApp com a duvida do visitante pronta."
+    answer: "Quando eu nao tiver resposta segura, deixo o WhatsApp pronto com a duvida do visitante para alguem do CZS responder direito."
   }
 ];
 
@@ -10540,7 +10540,8 @@ async function answerRaylChat(body = {}, req = null) {
       area: "rayl",
       system: [
         "Você é RAyL CZS, assistente local do Catálogo CZS.",
-        "Responda em português do Acre, de forma curta e prática.",
+        "Responda em português do Acre, de forma curta, humana e prática.",
+        "Fale como uma atendente simpática do Vale do Juruá: natural, acolhedora, sem soar como manual ou robô.",
         "Você estudou o site inteiro; use somente o estudo do site e a resposta segura fornecida.",
         "Se o modelo tentar responder em inglês, corrija para português do Brasil antes de finalizar.",
         "Não mostre raciocínio interno, tags <think>, logs, nomes de modelo ou texto de bastidor.",
@@ -10577,7 +10578,7 @@ async function answerRaylChat(body = {}, req = null) {
   }
   const humanFallback = !coveredByStudy || intent.human;
   const fallbackAnswer = humanFallback
-    ? "Ainda nao tenho resposta segura para isso no estudo do site. Vou deixar o WhatsApp pronto para atendimento humano."
+    ? "Essa eu prefiro nao chutar. Vou deixar o WhatsApp pronto com sua pergunta para alguem do CZS responder certinho."
     : intent.answer;
   const log = normalizeJsonArrayPayload(readJson(RAYL_CHAT_LOG_FILE, []));
   const item = {
@@ -10605,8 +10606,8 @@ async function answerRaylChat(body = {}, req = null) {
         : fallbackAnswer,
     pose: humanFallback ? "human" : intent.pose || "explain",
     title: humanFallback ? "Atendimento humano" : intent.title || "RAyL",
-    routeKey: intent.routeKey || "",
-    href: intent.href || "",
+    routeKey: humanFallback ? "" : intent.routeKey || "",
+    href: humanFallback ? "" : intent.href || "",
     human: Boolean(humanFallback),
     ai: aiResult?.ai || { status: "fallback", provider: "local-faq", model: "" },
     study: {

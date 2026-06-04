@@ -3784,7 +3784,7 @@
         pose: "present-both",
         title: "Como anunciar?",
         keywords: ["anunciar", "anuncio", "anúncio", "divulgar", "propaganda", "publicidade", "vendas", "site", "app"],
-        answer: "Para anunciar no CZS, a rota mais direta e falar sobre o formato: noticia patrocinada, card, servico, site, app ou automacao. Posso abrir a area de divulgacao ou chamar atendimento humano no WhatsApp.",
+        answer: "Claro. Para anunciar no CZS, o caminho mais rapido e abrir a pagina Divulgue. La voce escolhe card, materia patrocinada, video, site, app ou automacao. Se preferir, eu deixo o WhatsApp pronto.",
         href: "divulgue.html",
       },
       {
@@ -3792,7 +3792,7 @@
         pose: "community",
         title: "Enviar noticia",
         keywords: ["noticia", "notícia", "pauta", "denuncia", "denúncia", "foto", "video", "vídeo", "bairro", "comunidade"],
-        answer: "Pode enviar pauta com local, horario, foto/video e o que aconteceu. O CZS precisa confirmar antes de publicar, principalmente denuncia, seguranca e saude.",
+        answer: "Pode mandar a pauta com local, horario, foto ou video e uma explicacao simples do que aconteceu. A redacao checa antes de publicar, principalmente quando envolve denuncia, seguranca ou saude.",
         route: ["#comunidade", "community", "Aqui fica o caminho para pauta da comunidade."],
       },
       {
@@ -3800,7 +3800,7 @@
         pose: "point-right",
         title: "Servicos uteis",
         keywords: ["servico", "serviço", "farmacia", "farmácia", "hospital", "telefone", "energia", "agua", "água", "clima", "rio"],
-        answer: "Servicos uteis ficam na area de hospitais, farmacias, clima, rio, energia, agua, telefones e alertas. A prioridade e ajudar quem esta em Cruzeiro do Sul e Vale do Jurua agora.",
+        answer: "Vai em Servicos. Ali ficam hospitais, farmacias, clima, rio, energia, agua, telefones e alertas locais para resolver sem ficar procurando pelo site inteiro.",
         route: ["#servicos", "point-right", "Vou te levar para os servicos uteis."],
       },
       {
@@ -3808,7 +3808,7 @@
         pose: "call-attention",
         title: "Escritórios",
         keywords: ["escritorio", "escritórios", "escritorios", "office", "redacao", "redação", "cheffe", "equipe"],
-        answer: "Os escritórios de agentes são uma entrada visual para os agentes autônomos, com personagens e rotas públicas. O escritório operacional e o Cheffe Call ficam fora do site público.",
+        answer: "Os escritorios trabalham pela Cheffe Call. Por ali a ordem chega para Redacao, Comercial, Comunidade, Fotos, Servicos e Cheffe, cada um cuidando da parte certa.",
         route: ["#agentesAutonomos", "call-attention", "Entrada visual dos agentes autônomos."],
       },
       {
@@ -3816,7 +3816,7 @@
         pose: "point-right",
         title: "Arquivo",
         keywords: ["arquivo", "antiga", "antigas", "mes", "mês", "ano", "semana", "dia", "buscar", "busca", "pesquisar materia"],
-        answer: "O arquivo organiza as notícias por busca, período, fonte, categoria e pastas por mês. Você consegue abrir a matéria no mesmo modelo novo.",
+        answer: "O Arquivo e para achar noticia antiga sem sofrimento. Voce pode buscar por palavra, periodo, editoria, fonte ou pasta do mes.",
         route: ["#arquivoArtigoSystem", "point-right", "Arquivo completo do CZS."],
       },
       {
@@ -3824,7 +3824,7 @@
         pose: "celebrate",
         title: "PubPaid",
         keywords: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "ranking", "torneio"],
-        answer: "PubPaid fica como frente de apostas e jogos. Na home pública, este bloco prioriza pesquisa política, dados e resultados.",
+        answer: "O PubPaid e a area de jogos, campanhas e participacao do CZS. Eu te levo pelo atalho para abrir os jogos, ranking e novidades.",
         route: ["pubpaid.html", "celebrate", "O botão vermelho Conhecer PubPaid abre o PubPaid."],
       },
       {
@@ -3832,7 +3832,7 @@
         pose: "present-left",
         title: "Pesquisa",
         keywords: ["pesquisa", "eleitoral", "enquete", "votar", "opiniao", "opinião"],
-        answer: "Pesquisas e enquetes ficam no bloco de pesquisas políticas e dados. Quando houver rodada ativa, o bloco mostra o caminho direto.",
+        answer: "Pesquisas e enquetes ficam no bloco de participacao. Quando tiver rodada ativa, o CZS mostra o caminho direto para votar ou acompanhar o resultado.",
         route: ["#pubpaidAtalhos", "present-left", "Pesquisas e resultados ficam aqui."],
       },
       {
@@ -3840,7 +3840,7 @@
         pose: "call-attention",
         title: "Informar erro",
         keywords: ["erro", "corrigir", "correcao", "correção", "errado", "informar erro", "denunciar erro"],
-        answer: "Para informar erro, mande o título da matéria, o trecho incorreto e a fonte correta. A redação recebe a correção pelo registro público.",
+        answer: "Se viu algo errado, mande o titulo da materia, o trecho e a fonte correta. A Cheffe Call registra a correcao para a redacao revisar.",
         route: ["#comunidade", "call-attention", "A correção pode entrar como pauta para a redação."],
       },
       {
@@ -3848,7 +3848,7 @@
         pose: "present-both",
         title: "Galeria",
         keywords: ["galeria", "foto", "fotos", "imagem", "turismo", "cruzeiro do sul", "mapa"],
-        answer: "A galeria reúne fotos do Vale do Juruá, pontos turísticos, mapas e imagens com enquadramento limpo.",
+        answer: "A Galeria e o lugar das fotos do Vale do Jurua: pontos de Cruzeiro do Sul, imagens locais, mapa e contexto para navegar com calma.",
         route: ["#galeriaFotos", "present-both", "Galeria e pontos de Cruzeiro do Sul."],
       },
       {
@@ -3856,7 +3856,7 @@
         pose: "point-right",
         title: "Mapa do site",
         keywords: ["mapa", "site", "onde fica", "rodape", "rodapé", "menu"],
-        answer: "O mapa do site fica no rodapé e mostra notícias, arquivo, serviços, comunidade, comercial e redação.",
+        answer: "O mapa fica no rodape. Ele junta noticias, arquivo, servicos, comunidade, comercial e redacao em um caminho so.",
         route: ["#fullSiteFooter", "point-right", "Mapa completo do portal."],
       },
       {
@@ -3864,7 +3864,7 @@
         pose: "call-attention",
         title: "WhatsApp",
         keywords: ["whatsapp", "zap", "contato", "falar", "atendente", "humano", "pessoa", "dono"],
-        answer: "Claro. Vou abrir o WhatsApp com uma mensagem pronta para falar direto com atendimento humano do CZS.",
+        answer: "Sem problema. Vou deixar o WhatsApp pronto para voce falar com uma pessoa do CZS.",
       },
     ];
 
@@ -3883,7 +3883,42 @@
       whatsapp: "Falar com humano.",
     };
 
-    const speakRayl = () => {};
+    let raylVoice = null;
+    const pickRaylVoice = () => {
+      if (!("speechSynthesis" in window) || typeof window.speechSynthesis.getVoices !== "function") return null;
+      const voices = window.speechSynthesis.getVoices();
+      raylVoice = voices.find((voice) => /pt[-_]?br/i.test(voice.lang) && /maria|luciana|google|female/i.test(voice.name))
+        || voices.find((voice) => /pt[-_]?br/i.test(voice.lang))
+        || voices.find((voice) => /^pt/i.test(voice.lang))
+        || voices[0]
+        || null;
+      return raylVoice;
+    };
+    if ("speechSynthesis" in window && typeof window.speechSynthesis.addEventListener === "function") {
+      window.speechSynthesis.addEventListener("voiceschanged", pickRaylVoice);
+    }
+    const speakRayl = (text) => {
+      try {
+        if (!("speechSynthesis" in window) || typeof window.SpeechSynthesisUtterance !== "function") return;
+        const clean = cleanPublicAiText(text || "", "")
+          .replace(/https?:\/\/\S+/g, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 240);
+        if (!clean) return;
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(clean);
+        utterance.lang = "pt-BR";
+        utterance.rate = 0.96;
+        utterance.pitch = 1.04;
+        utterance.volume = 0.88;
+        const voice = raylVoice || pickRaylVoice();
+        if (voice) utterance.voice = voice;
+        window.speechSynthesis.speak(utterance);
+      } catch (_) {
+        // Voice is optional; old browsers should keep the chat working.
+      }
+    };
     const idlePoseOrder = ["wave", "polite", "present-left", "point-right", "stand", "call-attention"];
     let idlePoseIndex = 0;
     let idlePoseTimer = 0;
@@ -3975,7 +4010,7 @@
       const out = $("#assistantOut");
       const safeQuestion = String(question || "Quero falar com atendimento humano.").trim();
       const href = whatsappUrlFor(safeQuestion);
-      const message = "Atendimento humano liberado. Clique para abrir o WhatsApp e falar direto com o CZS.";
+      const message = "Essa eu prefiro nao chutar. Deixei o WhatsApp pronto com sua pergunta para alguem do CZS responder certinho.";
       setPose("human", message);
       const slot = $(".aylla-human-slot", card);
       if (slot) {
@@ -3983,7 +4018,7 @@
         slot.innerHTML = `<a class="chat whatsapp" href="${href}" target="_blank" rel="noopener">Falar no WhatsApp</a>`;
       }
       if (out) {
-        out.insertAdjacentHTML("beforeend", `<div class="chat bot">Link do WhatsApp pronto acima.</div>`);
+        out.insertAdjacentHTML("beforeend", `<div class="chat bot">WhatsApp pronto acima.</div>`);
         out.scrollTop = out.scrollHeight;
       }
     };
@@ -4015,7 +4050,7 @@
       const directFaq = faqItems.find((item) => item.id === question);
       if (directFaq) {
         setPose(directFaq.pose, directFaq.answer);
-        if (options.voice) speakRayl(`${raylVoiceIntro} ${spokenFaq[directFaq.id] || directFaq.title}.`);
+        if (options.voice) speakRayl(`${raylVoiceIntro} ${directFaq.answer}`);
         if (directFaq.id === "whatsapp") {
           appendWhatsappContact(question);
           return;
@@ -4030,6 +4065,7 @@
       try {
         const backend = await askRaylBackend(question);
         setPose(backend.pose || "explain", backend.answer);
+        if (options.voice) speakRayl(backend.answer);
         if (backend.human) {
           appendWhatsappContact(question);
           return;
@@ -4043,10 +4079,13 @@
       }
       const faq = findFaqAnswer(question);
       if (!faq) {
-        setPose("thinking", "Ainda nao tenho uma resposta segura para essa pergunta. Tente perguntar de outro jeito ou peca para falar com atendimento humano.");
+        const fallbackMessage = "Essa eu nao quero chutar. Tente perguntar de outro jeito ou clique para falar com atendimento humano.";
+        setPose("thinking", fallbackMessage);
+        if (options.voice) speakRayl(fallbackMessage);
         return;
       }
       setPose(faq.pose, faq.answer);
+      if (options.voice) speakRayl(faq.answer);
       if (faq.id === "whatsapp") {
         appendWhatsappContact(question);
         return;
@@ -4126,7 +4165,7 @@
       const question = String(input?.value || "").trim();
       if (!question) return;
       appendUserQuestion(question);
-      answerQuestion(question);
+      answerQuestion(question, { voice: true });
       if (input) input.value = "";
     });
 

@@ -859,6 +859,13 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - `/api/rayl/chat` consulta o estudo primeiro. Se a pergunta bater em rota/resposta pronta, responde com atalho seguro; se não bater, retorna `human=true` para o frontend abrir WhatsApp com a dúvida do visitante.
 - Validação Render no commit `ecf627b`: pergunta “Como faço para anunciar no site?” retornou `human=false`, `href=/divulgue.html`, `study.covered=true`, `ai.provider=ollama`; pergunta fora do estudo retornou `human=true` e mensagem de encaminhamento para WhatsApp.
 
+## RAyL chatbot helper - 2026-06-04 voz e tom humano
+
+- Respostas prontas de `server.js`, `data/rayl-website-study.json` e `assets/v8-final/v8-merge-ready.js` foram reescritas para tom mais humano, curto e conversado.
+- Frontend da RAyL agora usa `speechSynthesis` quando o visitante clica em FAQ, rota ou envia pergunta digitada; a voz é opcional e prefere `pt-BR` quando o navegador oferece.
+- Fallback fora do estudo deixou de inventar resposta e retorna somente atendimento humano, com `href` e `routeKey` vazios para não misturar WhatsApp com atalho de notícias.
+- Validação local: pergunta de anúncio retornou `human=false`, `href=/divulgue.html`, resposta mais natural e `ai.provider=ollama`; pergunta fora do estudo retornou `human=true`, sem rota, e texto de WhatsApp pronto.
+
 ## V8 Catálogo CZS - 2026-06-04 acabamento final antes de subir
 
 - CTA comercial perto do hero passou a entrar logo depois de `Mapa do site` com o texto pedido: `Oportunidade para vc e sua empresa`.

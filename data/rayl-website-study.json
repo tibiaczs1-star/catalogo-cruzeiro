@@ -1,7 +1,7 @@
 {
   "ok": true,
   "version": 1,
-  "generatedAt": "2026-06-04T21:09:22.358Z",
+  "generatedAt": "2026-06-04T21:20:25.483Z",
   "site": {
     "name": "Catalogo Cruzeiro do Sul",
     "region": "Cruzeiro do Sul, Acre e Vale do Jurua",
@@ -21,7 +21,7 @@
         "ultimas",
         "noticias"
       ],
-      "answer": "A pagina inicial mostra as noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos do CZS."
+      "answer": "A pagina inicial e o painel rapido do CZS: noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos importantes."
     },
     {
       "id": "arquivo",
@@ -36,7 +36,7 @@
         "materia",
         "noticia antiga"
       ],
-      "answer": "O arquivo serve para buscar noticias por termo, periodo, fonte e categoria."
+      "answer": "O Arquivo ajuda a encontrar noticia antiga por palavra, periodo, fonte ou categoria."
     },
     {
       "id": "servicos",
@@ -53,7 +53,7 @@
         "energia",
         "clima"
       ],
-      "answer": "A area de servicos reúne telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas."
+      "answer": "A area de Servicos junta telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas do dia."
     },
     {
       "id": "divulgue",
@@ -69,7 +69,7 @@
         "comercial",
         "vender"
       ],
-      "answer": "Para anunciar, use a pagina Divulgue ou fale no WhatsApp. O CZS pode orientar formato, card, materia patrocinada, video, site, app ou automacao."
+      "answer": "Para anunciar, abra a pagina Divulgue. O CZS orienta formato, card, materia patrocinada, video, site, app ou automacao; se preferir, eu levo ao WhatsApp."
     },
     {
       "id": "galeria",
@@ -85,7 +85,7 @@
         "mapa",
         "ponto turistico"
       ],
-      "answer": "A galeria reúne imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua."
+      "answer": "A Galeria reune imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua."
     },
     {
       "id": "pubpaid",
@@ -102,7 +102,7 @@
         "torneio",
         "ranking"
       ],
-      "answer": "PubPaid e a frente de jogos e campanhas do CZS. Use o atalho PubPaid para abrir jogos, ranking e novidades."
+      "answer": "PubPaid e a frente de jogos, ranking e campanhas do CZS. Use o atalho PubPaid para entrar nessa area."
     },
     {
       "id": "cheffe",
@@ -119,7 +119,7 @@
         "corrigir",
         "erro"
       ],
-      "answer": "Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios."
+      "answer": "A Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios."
     },
     {
       "id": "whatsapp",
@@ -135,63 +135,63 @@
         "dono",
         "pessoa"
       ],
-      "answer": "Quando a RAyL nao tiver resposta segura, ela deve encaminhar para o WhatsApp com a duvida do visitante pronta."
+      "answer": "Quando eu nao tiver resposta segura, deixo o WhatsApp pronto com a duvida do visitante para alguem do CZS responder direito."
     }
   ],
   "readyAnswers": [
     {
       "id": "home",
       "title": "Inicio",
-      "answer": "A pagina inicial mostra as noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos do CZS.",
+      "answer": "A pagina inicial e o painel rapido do CZS: noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos importantes.",
       "href": "/",
       "routeKey": "news"
     },
     {
       "id": "arquivo",
       "title": "Arquivo",
-      "answer": "O arquivo serve para buscar noticias por termo, periodo, fonte e categoria.",
+      "answer": "O Arquivo ajuda a encontrar noticia antiga por palavra, periodo, fonte ou categoria.",
       "href": "/arquivo.html",
       "routeKey": "archive"
     },
     {
       "id": "servicos",
       "title": "Servicos",
-      "answer": "A area de servicos reúne telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas.",
+      "answer": "A area de Servicos junta telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas do dia.",
       "href": "/catalogo-servicos.html",
       "routeKey": "services"
     },
     {
       "id": "divulgue",
       "title": "Divulgue",
-      "answer": "Para anunciar, use a pagina Divulgue ou fale no WhatsApp. O CZS pode orientar formato, card, materia patrocinada, video, site, app ou automacao.",
+      "answer": "Para anunciar, abra a pagina Divulgue. O CZS orienta formato, card, materia patrocinada, video, site, app ou automacao; se preferir, eu levo ao WhatsApp.",
       "href": "/divulgue.html",
       "routeKey": ""
     },
     {
       "id": "galeria",
       "title": "Galeria",
-      "answer": "A galeria reúne imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua.",
+      "answer": "A Galeria reune imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua.",
       "href": "/galeria.html",
       "routeKey": "gallery"
     },
     {
       "id": "pubpaid",
       "title": "PubPaid",
-      "answer": "PubPaid e a frente de jogos e campanhas do CZS. Use o atalho PubPaid para abrir jogos, ranking e novidades.",
+      "answer": "PubPaid e a frente de jogos, ranking e campanhas do CZS. Use o atalho PubPaid para entrar nessa area.",
       "href": "/pubpaid.html",
       "routeKey": "games"
     },
     {
       "id": "cheffe",
       "title": "Cheffe Call",
-      "answer": "Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios.",
+      "answer": "A Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios.",
       "href": "/cheffe-call.html",
       "routeKey": "cheffe"
     },
     {
       "id": "whatsapp",
       "title": "WhatsApp",
-      "answer": "Quando a RAyL nao tiver resposta segura, ela deve encaminhar para o WhatsApp com a duvida do visitante pronta.",
+      "answer": "Quando eu nao tiver resposta segura, deixo o WhatsApp pronto com a duvida do visitante para alguem do CZS responder direito.",
       "href": "",
       "routeKey": ""
     }
@@ -297,12 +297,5 @@
   "escalation": {
     "whatsappNumber": "556896026649",
     "rule": "Se a pergunta nao bater com respostas prontas, rotas ou noticias recentes, oferecer WhatsApp humano em vez de inventar."
-  },
-  "aiSummary": "Atender visitantes no home mostrando as noticias em destaque e últimas atualizações. No arquivo, auxiliar na busca de notícias específicas. Para serviços, orientar sobre telefones úteis e caminhos rápidos. PubPaid pode ser sugerido para jogos e campanhas. Na galeria, mostrar imagens turísticas. Cheffe Call atender solicitações de revisão ou encaminhamento.",
-  "ai": {
-    "status": "online",
-    "provider": "ollama",
-    "model": "qwen2.5:3b"
-  },
-  "refreshedByAiAt": "2026-06-04T21:09:32.206Z"
+  }
 }
