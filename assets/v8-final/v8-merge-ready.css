@@ -8755,3 +8755,41 @@ body.v8-merge-ready .aylla-dock.is-pointing {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* 20260604 intro hard lock: never reveal the page behind the loader before JS releases it. */
+html.czs-intro-lock body.v8-merge-ready {
+  background: #020b22 !important;
+  overflow: hidden !important;
+}
+
+html.czs-intro-lock body.v8-merge-ready::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483400 !important;
+  display: block !important;
+  background: #020b22 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+}
+
+html.czs-intro-lock body.v8-merge-ready > #cinematicLoader,
+html.czs-intro-lock body.v8-merge-ready > #cinematicLoader.v8-intro-exit {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 2147483600 !important;
+}
+
+html.czs-intro-lock body.v8-merge-ready > #cinematicLoader ~ * {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+html.czs-intro-release body.v8-merge-ready::before {
+  content: none !important;
+  display: none !important;
+}

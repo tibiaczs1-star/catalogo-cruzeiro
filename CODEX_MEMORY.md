@@ -875,3 +875,13 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Chatbot RAyL recebeu acabamento final: minimizado como janela circular de rosto sem fundo azul/texto, dock lateral oculto e avatar pequeno do cabecalho escondido quando o painel abre com o avatar grande.
 - Validacao local: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check`, `npm run review:team` com `totalIssues=0`, `npm run codex:health`, `npm run perf:budget` nao estrito e smoke CDP em `http://127.0.0.1:3000`.
 - Relatorio interno: `.codex-temp/czs-v8-site-finish-qa-20260604/final-readiness-report.md`; decisao: pronto para revisao visual do usuario, sem deploy automatico antes de aprovacao porque o workspace segue com muitas mudancas paralelas e os gates editoriais gerais ainda existem.
+
+## V8 Catálogo CZS - 2026-06-04 intro hard lock
+
+- Usuario reportou que o site ainda aparecia 2x durante a intro; a trava anterior nao era suficiente durante a saida/fade do loader.
+- `index.html` ganhou hard lock inline: enquanto `html.czs-intro-lock` estiver ativo, `body::before` cobre a tela, `#cinematicLoader` fica acima de tudo e os irmaos do loader ficam invisiveis.
+- `assets/v8-final/v8-merge-ready.css` replica a trava no CSS principal e impede que `.v8-intro-exit` reduza a opacidade do loader antes do release real.
+- Cache-buster e `V8_BOOT_VERSION` atualizados para `20260604-v8-intro-hardlock-v1`.
+- Validacao CDP: `.codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-report.json` retornou `pass=true`, `leaks=[]`; amostras de 120ms a 5200ms mantiveram `#cinematicLoader` como topo e o portal oculto; release somente depois de 7600ms.
+- Capturas internas: `.codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-800ms.png`, `intro-hardlock-7600ms.png` e `intro-hardlock-10400ms.png`.
+- Revisao local: `npm run review:team` passou com 212 arquivos auditados e `totalIssues=0`.

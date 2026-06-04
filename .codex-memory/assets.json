@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-04T21:02:30.942Z",
+  "lastUpdatedAt": "2026-06-04T21:27:02.330Z",
   "assets": [
     {
       "id": "v8-rayl-commercial-popup-real-images-20260603",
@@ -2215,6 +2215,28 @@
         "2026-06-04-polir-chatbot-rayl-minimizado-como-janela-de-rosto-sem-fundo-azul-aberto-sem-ava"
       ],
       "createdAt": "2026-06-04T21:02:30.942Z"
+    },
+    {
+      "id": "intro-hardlock-report-20260604",
+      "kind": "report",
+      "path": ".codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-report.json",
+      "source": "cdp-smoke",
+      "note": "Relatorio CDP: pass=true, leaks=[], loader no topo ate 5.2s e release apenas depois.",
+      "linkedOrderIds": [
+        "2026-06-04-corrigir-vazamento-visual-do-site-durante-a-intro-v8"
+      ],
+      "createdAt": "2026-06-04T21:26:51.986Z"
+    },
+    {
+      "id": "intro-hardlock-800ms-20260604",
+      "kind": "screenshot",
+      "path": ".codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-800ms.png",
+      "source": "cdp-smoke",
+      "note": "Captura aos 800ms: intro visivel sem site do portal atras.",
+      "linkedOrderIds": [
+        "2026-06-04-corrigir-vazamento-visual-do-site-durante-a-intro-v8"
+      ],
+      "createdAt": "2026-06-04T21:27:02.330Z"
     }
   ],
   "social": [

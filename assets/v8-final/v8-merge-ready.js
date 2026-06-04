@@ -7,7 +7,7 @@
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
-  const V8_BOOT_VERSION = "20260604-rayl-crop-perfect-v2";
+  const V8_BOOT_VERSION = "20260604-v8-intro-hardlock-v1";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
