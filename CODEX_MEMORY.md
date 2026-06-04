@@ -844,3 +844,20 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Criados scripts `ollama-secure-proxy.js`, `ollama-render-tunnel.js`, `start-ollama-render-tunnel.ps1` e instalador de inicializacao `install-ollama-render-tunnel-task.ps1`.
 - Render publicou commit `f6d85d2a` e validacao publica confirmou `/api/rayl/chat`, `/api/office-ai/chat` e `/api/cheffe-call/ai` com `ai.status=online`, `provider=ollama`, `model=qwen2.5:3b`.
 - Como Cloudflare quick tunnel troca URL ao reiniciar, o inicializador de usuario em Startup relanca o tunnel, atualiza Render e dispara deploy no login do Windows.
+
+## Escritórios/Cheffe Call - 2026-06-04 recebimento de ordens
+
+- `POST /api/office-orders` agora registra a ordem, chama a Cheffe/IA para despacho curto e distribui ações em `data/office-work.json` para os escritórios alvo.
+- Alvos suportam lista por `target`, `to`, `office` ou `officeKey`; quando não informado ou `todos`, distribui para Redacao, Apuracao, Revisao, Comercial, Social, Design, PubPaid e Cheffe Call.
+- Cheffe Call entra sempre como coordenadora quando a ordem vai para um alvo específico; recebe ação `received-order-cheffe` e os escritórios recebem `received-order`.
+- Validação Render no commit `779a692`: ordem `ord-mpzzg0fweem126` ficou `distribuida`, com 4 ações online para `redacao, apuracao, revisao, cheffe-call`; leitura de `/api/office-work?officeKey=redacao` e `cheffe-call` confirmou as ações.
+
+## V8 Catálogo CZS - 2026-06-04 acabamento final antes de subir
+
+- CTA comercial perto do hero passou a entrar logo depois de `Mapa do site` com o texto pedido: `Oportunidade para vc e sua empresa`.
+- Rodape social foi refeito para substituir os quadrados cortados `IG/WA/E-mail/Anun/Apos` por cards com rotulo e descricao.
+- Intro recebeu trava anti-flash em `index.html` e release coordenado em `assets/v8-final/v8-merge-ready.js`, impedindo o site de aparecer atras do loader durante a hidratacao.
+- RAyL comercial passou a usar `assets/aylla/rayl-v2-clean/rayl-v2-present-full-clean.png`; a prova visual em fundo escuro removeu o branco entre braco e corpo.
+- Chatbot RAyL recebeu acabamento final: minimizado como janela circular de rosto sem fundo azul/texto, dock lateral oculto e avatar pequeno do cabecalho escondido quando o painel abre com o avatar grande.
+- Validacao local: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check`, `npm run review:team` com `totalIssues=0`, `npm run codex:health`, `npm run perf:budget` nao estrito e smoke CDP em `http://127.0.0.1:3000`.
+- Relatorio interno: `.codex-temp/czs-v8-site-finish-qa-20260604/final-readiness-report.md`; decisao: pronto para revisao visual do usuario, sem deploy automatico antes de aprovacao porque o workspace segue com muitas mudancas paralelas e os gates editoriais gerais ainda existem.
