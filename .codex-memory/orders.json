@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-04T12:56:32.939Z",
+  "lastUpdatedAt": "2026-06-04T20:09:35.723Z",
   "orders": [
     {
       "id": "2026-06-03-v8-rayl-commercial-popup-real-images",
@@ -5350,6 +5350,158 @@
       "source": "chat",
       "rawRequest": "depois dessas correções fazer deploy online, ligar módulos públicos, atualizar notícias, deixar captação de meia em meia hora, garantir fotos/vídeos em matérias, criar stories em bolinhas com preview de vídeo, limpar git/Render/projeto com segurança e preparar manutenção",
       "summary": "Fechamento V8 para deploy: captação 30 min, mídia foto/vídeo nas matérias, stories em bolinhas e limpeza segura.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-finalizar-postagem-no-instagram-do-catalogo-czs-feed-e-stories-de-todas-as-notic",
+      "createdAt": "2026-06-04T13:54:02.936Z",
+      "updatedAt": "2026-06-04T13:54:02.936Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "termine de postar o feed e os storys do instgran tudo que noticia que faltava ate a data final dee hoje 8 /;52 nao pare ate termina",
+      "summary": "Finalizar postagem no Instagram do Catálogo CZS: feed e stories de todas as notícias pendentes até 04/06/2026 08:52.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-regra-instagram-aplicada-noticias-so-devem-ser-postadas-com-imagem-video-real-da",
+      "createdAt": "2026-06-04T17:21:07.447Z",
+      "updatedAt": "2026-06-04T17:21:07.447Z",
+      "status": "completed-posted",
+      "source": "chat",
+      "rawRequest": "de prioridade a achar iimagem ou video ou printa a capa doi artiigo na fonte mais pare de posta coisas sem foto -- e sem audio tambem n",
+      "summary": "Regra Instagram aplicada: notícias só devem ser postadas com imagem/vídeo real da fonte ou print da capa, e feed/stories devem sair com áudio/narração.",
+      "normalizedTasks": [
+        "rebaixar posts sem mídia",
+        "baixar imagens reais das fontes",
+        "gerar videos com narracao",
+        "validar audio AAC",
+        "postar stories corrigidos",
+        "postar feed/reels corrigido",
+        "confirmar aba Reels"
+      ],
+      "filesTouched": [
+        ".codex-temp/zap-round-20260604-catchup-0852/real-media-audio/manifest-real-media-audio.json",
+        ".codex-temp/zap-round-20260604-catchup-0852/real-media-audio/build_real_media_audio_package.py"
+      ],
+      "assetRefs": [
+        ".codex-temp/zap-round-20260604-catchup-0852/real-media-audio/profile-reels-after-internal-08.png",
+        ".codex-temp/zap-round-20260604-catchup-0852/real-media-audio/android-after-story-confirm-script.png"
+      ],
+      "tags": [
+        "instagram",
+        "catalogo-czs",
+        "noticias",
+        "real-media",
+        "audio",
+        "stories",
+        "feed",
+        "reels"
+      ],
+      "nextSteps": [],
+      "notes": "Pacote corrigido com 8 itens: todos com source_image e AAC/narracao validada. Stories corrigidos em video publicados. Feed/Reels corrigido publicado; item 6 ficou duplicado por retentativas antes da confirmacao correta na aba Reels. Evidencia final mostra item 8, item 7 e item 6 no topo da aba Reels."
+    },
+    {
+      "id": "2026-06-04-diagnosticar-problema-da-intro-local-v8-eliminar-respostas-sem-nexo-em-ingles-fi",
+      "createdAt": "2026-06-04T19:13:40.416Z",
+      "updatedAt": "2026-06-04T19:13:40.416Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "estamos com serios problemas - estavamos fazendo a nova intro do site localmente e ele comecou a responder com coisas sem nexo em ingles; quero um relatorio total do site e finalizacao da intro",
+      "summary": "Diagnosticar problema da intro local/V8, eliminar respostas sem nexo em ingles, finalizar intro do site e entregar relatorio total do site.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-ligar-ia-openai-direta-em-rayl-escritorios-e-cheffe-call-pendente-quota-exceeded",
+      "createdAt": "2026-06-04T19:36:12.698Z",
+      "updatedAt": "2026-06-04T19:36:12.698Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "so ligue a chave OpenAI direto no chatbot, escritorios e Cheffe Call",
+      "summary": "Ligar IA OpenAI direta em RAyL, escritorios e Cheffe Call; pendente quota exceeded na chave atual",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-finalizar-acabamentos-publicos-do-site-apos-intro-corrigir-chrome-mobile-remover",
+      "createdAt": "2026-06-04T19:42:04.202Z",
+      "updatedAt": "2026-06-04T19:42:04.202Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok deixa pra la termine as coisas do site",
+      "summary": "Finalizar acabamentos publicos do site apos intro: corrigir chrome mobile, remover sobreposicoes e validar home local.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "assets/v8-final/v8-merge-ready.css",
+        "assets/v8-final/v8-merge-ready.js",
+        "index.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "site",
+        "v8",
+        "mobile",
+        "acabamento"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-ajustar-recortes-dos-assets-poses-e-graficos-da-rayl-aylla-ate-ficarem-perfeitos",
+      "createdAt": "2026-06-04T19:49:10.701Z",
+      "updatedAt": "2026-06-04T19:49:10.701Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "a rayl tem varios e varas poses e graficos que fizemos mais a maioria ta muito mal recortado / goal ate os cortes ficarem perfeitos",
+      "summary": "Ajustar recortes dos assets, poses e graficos da RAyL/Aylla ate ficarem perfeitos.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-voltar-rayl-escritorios-e-cheffe-call-para-ollama-local-first-no-pc",
+      "createdAt": "2026-06-04T19:51:01.632Z",
+      "updatedAt": "2026-06-04T19:51:01.632Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "volte a trabalhar com ollama e local, conecte tudo a ia local no meu pc",
+      "summary": "Voltar RAyL, escritorios e Cheffe Call para Ollama local-first no PC",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-excluir-do-pacote-ativo-as-poses-antigas-laranja-da-aylla-rayl-mostradas-no-prev",
+      "createdAt": "2026-06-04T20:09:35.723Z",
+      "updatedAt": "2026-06-04T20:09:35.723Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "descarte esses sãoos antigos pode deleta",
+      "summary": "Excluir do pacote ativo as poses antigas laranja da Aylla/RAyL mostradas no preview.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

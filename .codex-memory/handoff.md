@@ -1,22 +1,10 @@
 # Handoff
 
-Updated: 2026-06-04T13:12:18.714Z
+Updated: 2026-06-04T20:16:07.951Z
 
-Deploy V8 em fechamento: Render configurado para captação automática de notícias a cada 30 minutos, integridade de artigos e topic feed ligados, captura manual final atualizada com 292 itens captados e 131 de hoje. Home V8 ganhou stories em bolinhas com preview de vídeo e viewer vertical; matérias agora priorizam vídeo quando a fonte traz media de vídeo e usam foto como poster/fallback. Validações locais passaram: node --check nos arquivos críticos, capture-latest-news, npm run review:team totalIssues=0 e Playwright smoke desktop/mobile com screenshots.
+Instagram CZS: pacote pronto para envio em .codex-temp/instagram-feed-run-20260604/delivery. Feed tem 100 videos com musica de jornal; Stories tem 17 videos narrados com Maria pt-BR; manifesto validado sem acento quebrado e sem audio cortado.
 
 ## Next
 
-- Nao apagar material amplo automaticamente: vendor/tools/.automation/assets antigos precisam de auditoria antes de remover
-- Depois do deploy
-- conferir URL publica do Render e logs se o auto-deploy nao iniciar
-
-## Files In Focus
-
-- render.yaml
-- assets/v8-final/v8-merge-ready.js
-- assets/v8-final/v8-merge-ready.css
-- noticia.js
-
-## Related Orders
-
-- 2026-06-04-fechamento-v8-para-deploy-captacao-30-min-midia-foto-video-nas-materias-stories-
+- Usuario deve abrir Instagram; usar manifesto delivery/instagram-delivery-route.json e READY_TO_SEND.md; publicar Feed primeiro na ordem para deixar CZS no topo
+- depois Stories.

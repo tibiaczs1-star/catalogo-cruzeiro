@@ -2,6 +2,35 @@
 
 Atualizado: 2026-06-04
 
+## Rodada Atual - 20260604-ollama-local-first-ai1
+
+- RAyL, Escritórios e Cheffe Call voltaram para IA local/Ollama como caminho principal.
+- `callCatalogAi` agora tenta Ollama primeiro; OpenAI só entra se `CZS_AI_PRIMARY=openai` ou se `CZS_OPENAI_FALLBACK_ENABLED=true`.
+- `server.js` deixou de herdar `OLLAMA_MODEL` genérico; o CZS usa `CZS_OLLAMA_MODEL` ou padrão `qwen2.5:3b`.
+- `.env.local` configurado para este PC: `CZS_AI_PRIMARY=ollama`, `CZS_OPENAI_FALLBACK_ENABLED=false`, `OLLAMA_BASE_URL=http://127.0.0.1:11434`, `CZS_OLLAMA_MODEL=qwen2.5:3b`.
+- `.env.example` documenta o modo local-first.
+- Validação: Ollama API local respondeu com 7 modelos; smoke dos endpoints `/api/rayl/chat`, `/api/office-ai/chat` e `/api/cheffe-call/ai` retornou `provider=ollama`, `status=online`, `model=qwen2.5:3b`.
+- Regra real para online: Render só acessa a IA do PC se `OLLAMA_BASE_URL` apontar para um túnel/hostname acessível; `127.0.0.1` no Render é o container, não o PC.
+
+## Rodada Atual - 20260604-openai-direct-ai1
+
+- RAyL, Escritórios e Cheffe Call foram ligados ao backend OpenAI direto em `server.js`.
+- O servidor agora tenta OpenAI primeiro via Responses API e cai para Ollama local quando a nuvem falha.
+- Variáveis novas documentadas em `.env.example`: `OPENAI_API_KEY`, `CZS_OPENAI_BASE_URL`, `CZS_OPENAI_MODEL`, `CZS_OPENAI_TIMEOUT_MS`, além dos fallbacks Ollama.
+- Blindagem aplicada: o CZS ignora `OPENAI_MODEL` e `OPENAI_BASE_URL` genéricos para não herdar rotas locais como `http://localhost:11434/v1`; usa apenas `CZS_OPENAI_MODEL` e `CZS_OPENAI_BASE_URL`.
+- Validação local: `node --check server.js` e `git diff --check -- server.js .env.example` OK; smoke dos 3 endpoints bateu no endpoint oficial OpenAI.
+- Pendência real: a chave OpenAI autenticou, mas retornou `quota exceeded`; precisa saldo/billing/limite ativo no painel OpenAI para a IA responder online.
+
+## Rodada Atual - 20260604-v8-intro-pt-guard-v1
+
+- Rodada emergencial da intro local/V8 concluida apos relato de resposta sem nexo/em ingles no site.
+- Servidor agora filtra respostas de IA publica com `sanitizeLocalAiAnswer`/`isUnsafeLocalAiAnswer`: remove `<think>`, rejeita padroes em ingles/raciocinio interno e cai para fallback seguro em portugues.
+- Front V8 recebeu `cleanPublicAiText`, cache-bust `20260604-v8-intro-pt-guard-v1` e copys publicas da RAyL/escritorios/Cheffe travadas em portugues.
+- URL local saudavel para revisar a intro: `http://127.0.0.1:8790/?forceIntro=1`; a porta `3000` nao respondeu HTTP nesta rodada.
+- Validacao: `node --check server.js`, `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check`, `npm run guard:pubpaid`, `npm run review:team`, `npm run codex:health`, `npm run editorial:health`, `npm run perf:budget` e Edge/Playwright em desktop/mobile.
+- Evidencias: `.codex-temp/czs-v8-intro-qa-20260604/report.json`, `desktop-intro.png`, `desktop-after-intro.png`, `desktop-rayl-open.png`, `mobile-first-fold.png` e `api-ai-pt-guard.json`.
+- Pendencias gerais fora da intro: `index.html` acima do budget, 72 P0 editoriais exigindo aprovacao/fonte/visual antes de destaque e abas fixas comerciais/rodape disputando espaco no mobile.
+
 ## Rodada Atual - 20260604-instagram-feeds-stories
 
 - Rodada emergencial Instagram concluída para `@catalogo_czs_` via Instagram Android/BlueStacks, após captura atualizada com 297 itens e 106 notícias/serviços de hoje.

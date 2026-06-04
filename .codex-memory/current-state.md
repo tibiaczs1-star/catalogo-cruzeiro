@@ -1,32 +1,15 @@
 # Current State
 
-Updated: 2026-06-04T13:12:18.627Z
+Updated: 2026-06-04T20:16:07.968Z
 
 ## Active Goal
 
-- Deploy V8 pronto para publicar
+- Instagram CZS pronto para envio
 
 ## Summary
 
-Deploy V8 em fechamento: Render configurado para captação automática de notícias a cada 30 minutos, integridade de artigos e topic feed ligados, captura manual final atualizada com 292 itens captados e 131 de hoje. Home V8 ganhou stories em bolinhas com preview de vídeo e viewer vertical; matérias agora priorizam vídeo quando a fonte traz media de vídeo e usam foto como poster/fallback. Validações locais passaram: node --check nos arquivos críticos, capture-latest-news, npm run review:team totalIssues=0 e Playwright smoke desktop/mobile com screenshots.
+Pacote Instagram 20260604 pronto: 100 Feed MP4 com musica de jornal, 17 Stories MP4 narrados com Maria pt-BR, roteiros com acento correto e sem cortes, manifesto em .codex-temp/instagram-feed-run-20260604/delivery/instagram-delivery-route.json.
 
 ## Next
 
-- Stage/commit/push dos arquivos necessários ao deploy sem incluir vendor/tools/lixo local ambíguo
-- Verificar Render online após push
-
-## Files In Focus
-
-- render.yaml
-- server.js
-- scripts/capture-latest-news.js
-- assets/v8-final/v8-merge-ready.js
-- assets/v8-final/v8-merge-ready.css
-- noticia.js
-- noticia.html
-
-## Assets In Focus
-
-- output/playwright/czs-v8-stories-desktop.png
-- output/playwright/czs-v8-story-viewer-desktop.png
-- output/playwright/czs-v8-stories-mobile.png
+- Abrir Instagram/BlueStacks quando o usuario autorizar e publicar seguindo delivery/READY_TO_SEND.md.
