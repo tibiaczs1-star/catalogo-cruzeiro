@@ -1,10 +1,11 @@
 # Handoff
 
-Updated: 2026-06-04T20:16:07.951Z
+Updated: 2026-06-04T20:26:40.000Z
 
-Instagram CZS: pacote pronto para envio em .codex-temp/instagram-feed-run-20260604/delivery. Feed tem 100 videos com musica de jornal; Stories tem 17 videos narrados com Maria pt-BR; manifesto validado sem acento quebrado e sem audio cortado.
+IA local CZS/Render: backend agora e local-first com Ollama e fallback OpenAI desligado por padrao. Render publicou commit `f6d85d2a` e os endpoints publicos de Rayl, escritorios e Cheffe Call responderam via Ollama local (`qwen2.5:3b`) atraves de Cloudflare quick tunnel protegido por bearer token.
 
 ## Next
 
-- Usuario deve abrir Instagram; usar manifesto delivery/instagram-delivery-route.json e READY_TO_SEND.md; publicar Feed primeiro na ordem para deixar CZS no topo
-- depois Stories.
+- Processo atual ativo: `node scripts/ollama-render-tunnel.js --deploy`, proxy em `127.0.0.1:11435` e cloudflared apontando para o proxy.
+- Estado/logs: `.codex-temp/ollama-render-tunnel/latest.json`, `live.stdout.log`, `live.stderr.log`.
+- Se o PC reiniciar, o inicializador em `C:\Users\junio\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\czs-ollama-render-tunnel.vbs` relanca o fluxo e atualiza o Render com a nova URL do tunnel.

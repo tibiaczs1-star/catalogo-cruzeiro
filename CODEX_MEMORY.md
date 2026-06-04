@@ -836,3 +836,11 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Home V8 ganhou stories em bolinhas com preview de vídeo e viewer vertical estilo stories, com fechar/anterior/próximo e link para matéria quando houver.
 - Validação local passou com `node --check` nos arquivos críticos, `npm run review:team` com `totalIssues=0` e Playwright smoke desktop/mobile com screenshots em `output/playwright/czs-v8-stories-*.png`.
 - Limpeza ampla ficou deliberadamente fora do deploy: `vendor/`, `tools/`, `.automation/` e assets antigos precisam de auditoria antes de remoção para não apagar material útil ou evidência aprovada.
+
+## IA local CZS/Render - 2026-06-04 Ollama tunnel
+
+- Backend passou a usar IA local-first: `CZS_AI_PRIMARY=ollama`, fallback OpenAI desligado por `CZS_OPENAI_FALLBACK_ENABLED=false`, modelo `qwen2.5:3b`.
+- Render recebe `OLLAMA_BASE_URL` e `OLLAMA_AUTH_TOKEN` via script `scripts/ollama-render-tunnel.js --deploy`; o tunnel publico aponta para proxy local protegido em `127.0.0.1:11435`, sem expor Ollama cru.
+- Criados scripts `ollama-secure-proxy.js`, `ollama-render-tunnel.js`, `start-ollama-render-tunnel.ps1` e instalador de inicializacao `install-ollama-render-tunnel-task.ps1`.
+- Render publicou commit `f6d85d2a` e validacao publica confirmou `/api/rayl/chat`, `/api/office-ai/chat` e `/api/cheffe-call/ai` com `ai.status=online`, `provider=ollama`, `model=qwen2.5:3b`.
+- Como Cloudflare quick tunnel troca URL ao reiniciar, o inicializador de usuario em Startup relanca o tunnel, atualiza Render e dispara deploy no login do Windows.

@@ -1,15 +1,16 @@
 # Current State
 
-Updated: 2026-06-04T20:16:07.968Z
+Updated: 2026-06-04T20:26:40.000Z
 
 ## Active Goal
 
-- Instagram CZS pronto para envio
+- IA local Ollama ligada ao Render
 
 ## Summary
 
-Pacote Instagram 20260604 pronto: 100 Feed MP4 com musica de jornal, 17 Stories MP4 narrados com Maria pt-BR, roteiros com acento correto e sem cortes, manifesto em .codex-temp/instagram-feed-run-20260604/delivery/instagram-delivery-route.json.
+Render publicou `f6d85d2a` (`feat(ai): connect Render to local Ollama`) e os endpoints publicos de IA estao usando Ollama local via tunnel Cloudflare protegido por token. Validacao publica: `/api/rayl/chat`, `/api/office-ai/chat` e `/api/cheffe-call/ai` retornaram `ai.status=online`, `provider=ollama`, `model=qwen2.5:3b`.
 
 ## Next
 
-- Abrir Instagram/BlueStacks quando o usuario autorizar e publicar seguindo delivery/READY_TO_SEND.md.
+- Manter o PC e o processo `scripts/ollama-render-tunnel.js --deploy` ligados enquanto o Render precisar da IA local.
+- No proximo login do Windows, o inicializador em `Startup/czs-ollama-render-tunnel.vbs` deve relancar o tunnel, atualizar `OLLAMA_BASE_URL` no Render e disparar deploy.
