@@ -852,6 +852,13 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Cheffe Call entra sempre como coordenadora quando a ordem vai para um alvo específico; recebe ação `received-order-cheffe` e os escritórios recebem `received-order`.
 - Validação Render no commit `779a692`: ordem `ord-mpzzg0fweem126` ficou `distribuida`, com 4 ações online para `redacao, apuracao, revisao, cheffe-call`; leitura de `/api/office-work?officeKey=redacao` e `cheffe-call` confirmou as ações.
 
+## RAyL chatbot helper - 2026-06-04 estudo do site
+
+- RAyL agora usa `data/rayl-website-study.json` como estudo persistente do site antes de responder ao público.
+- `GET /api/rayl/website-study` consulta/gera o estudo; `POST /api/rayl/website-study` com senha admin pede ao Ollama um resumo operacional para respostas prontas.
+- `/api/rayl/chat` consulta o estudo primeiro. Se a pergunta bater em rota/resposta pronta, responde com atalho seguro; se não bater, retorna `human=true` para o frontend abrir WhatsApp com a dúvida do visitante.
+- Validação Render no commit `ecf627b`: pergunta “Como faço para anunciar no site?” retornou `human=false`, `href=/divulgue.html`, `study.covered=true`, `ai.provider=ollama`; pergunta fora do estudo retornou `human=true` e mensagem de encaminhamento para WhatsApp.
+
 ## V8 Catálogo CZS - 2026-06-04 acabamento final antes de subir
 
 - CTA comercial perto do hero passou a entrar logo depois de `Mapa do site` com o texto pedido: `Oportunidade para vc e sua empresa`.
