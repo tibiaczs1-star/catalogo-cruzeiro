@@ -9876,7 +9876,7 @@ function raylIntentForQuestion(question = "") {
       title: "Como anunciar",
       words: ["anunciar", "anuncio", "divulgar", "propaganda", "publicidade", "vendas", "site", "app"],
       answer:
-        "Claro. Para anunciar no CZS, o caminho mais rapido e abrir a pagina Divulgue. La voce escolhe se quer card, materia patrocinada, video, site, app ou automacao. Se preferir, eu deixo o WhatsApp pronto."
+        "Boa tarde! Temos algumas formas de divulgar no CZS: card, banner, materia patrocinada, video, publicacao no site, app ou automacao. O caminho mais rapido e abrir a pagina Divulgue; se quiser falar agora, eu tambem deixo o WhatsApp pronto para combinar formato, valor e prazo."
     },
     {
       id: "noticia",
@@ -10022,7 +10022,7 @@ const RAYL_ROUTE_KNOWLEDGE = [
     href: "/divulgue.html",
     routeKey: "",
     keywords: ["anunciar", "anuncio", "divulgar", "propaganda", "publicidade", "comercial", "vender"],
-    answer: "Para anunciar, abra a pagina Divulgue. O CZS orienta formato, card, materia patrocinada, video, site, app ou automacao; se preferir, eu levo ao WhatsApp."
+    answer: "Boa tarde! Temos algumas formas de divulgar no CZS: card, banner, materia patrocinada, video, publicacao no site, app ou automacao. O caminho mais rapido e abrir a pagina Divulgue; se quiser falar agora, eu tambem deixo o WhatsApp pronto para combinar formato, valor e prazo."
   },
   {
     id: "galeria",

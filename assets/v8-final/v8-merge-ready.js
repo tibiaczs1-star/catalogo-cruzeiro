@@ -3784,7 +3784,7 @@
         pose: "present-both",
         title: "Como anunciar?",
         keywords: ["anunciar", "anuncio", "anúncio", "divulgar", "propaganda", "publicidade", "vendas", "site", "app"],
-        answer: "Claro. Para anunciar no CZS, o caminho mais rapido e abrir a pagina Divulgue. La voce escolhe card, materia patrocinada, video, site, app ou automacao. Se preferir, eu deixo o WhatsApp pronto.",
+        answer: "Boa tarde! Temos algumas formas de divulgar no CZS: card, banner, materia patrocinada, video, publicacao no site, app ou automacao. O caminho mais rapido e abrir a pagina Divulgue; se quiser falar agora, eu tambem deixo o WhatsApp pronto para combinar formato, valor e prazo.",
         href: "divulgue.html",
       },
       {

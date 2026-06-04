@@ -69,7 +69,7 @@
         "comercial",
         "vender"
       ],
-      "answer": "Para anunciar, abra a pagina Divulgue. O CZS orienta formato, card, materia patrocinada, video, site, app ou automacao; se preferir, eu levo ao WhatsApp."
+      "answer": "Boa tarde! Temos algumas formas de divulgar no CZS: card, banner, materia patrocinada, video, publicacao no site, app ou automacao. O caminho mais rapido e abrir a pagina Divulgue; se quiser falar agora, eu tambem deixo o WhatsApp pronto para combinar formato, valor e prazo."
     },
     {
       "id": "galeria",
@@ -163,7 +163,7 @@
     {
       "id": "divulgue",
       "title": "Divulgue",
-      "answer": "Para anunciar, abra a pagina Divulgue. O CZS orienta formato, card, materia patrocinada, video, site, app ou automacao; se preferir, eu levo ao WhatsApp.",
+      "answer": "Boa tarde! Temos algumas formas de divulgar no CZS: card, banner, materia patrocinada, video, publicacao no site, app ou automacao. O caminho mais rapido e abrir a pagina Divulgue; se quiser falar agora, eu tambem deixo o WhatsApp pronto para combinar formato, valor e prazo.",
       "href": "/divulgue.html",
       "routeKey": ""
     },
