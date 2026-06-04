@@ -1449,21 +1449,58 @@ const looksLikeImageAsset = (value) => {
   return /^https?:\/\/.+\.(avif|webp|png|jpe?g|gif|bmp|svg)(\?.*)?$/i.test(raw);
 };
 
-const ensureDetailHeroMediaNode = () => {
+const looksLikeVideoAsset = (value = "") => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return false;
+  }
+  return /^(?:https?:)?\/\/.+\.(mp4|webm|ogg)(\?.*)?$/i.test(raw) ||
+    /^\.?\/?.+\.(mp4|webm|ogg)(\?.*)?$/i.test(raw);
+};
+
+const getArticleVideoUrl = (article = {}) => {
+  const candidates = [
+    article.videoUrl,
+    article.video,
+    article.mediaUrl,
+    article.media?.videoUrl,
+    article.media?.url,
+    article.media?.src,
+    article.imageUrl,
+    article.feedImageUrl,
+    article.sourceImageUrl
+  ];
+  return candidates.map((candidate) => String(candidate || "").trim()).find(looksLikeVideoAsset) || "";
+};
+
+const videoTypeFor = (src = "") => {
+  if (/\.webm(?:[?#].*)?$/i.test(src)) return "video/webm";
+  if (/\.ogg(?:[?#].*)?$/i.test(src)) return "video/ogg";
+  return "video/mp4";
+};
+
+const ensureDetailHeroMediaNode = (tagName = "img") => {
   if (!thumbNode) {
     return null;
   }
 
   let mediaNode = thumbNode.querySelector(".detail-hero-media");
-  if (mediaNode) {
+  if (mediaNode && mediaNode.tagName.toLowerCase() === tagName) {
     return mediaNode;
   }
+  mediaNode?.remove();
 
-  mediaNode = document.createElement("img");
+  mediaNode = document.createElement(tagName);
   mediaNode.className = "detail-hero-media";
-  mediaNode.alt = "";
-  mediaNode.decoding = "async";
-  mediaNode.loading = "eager";
+  if (tagName === "video") {
+    mediaNode.controls = true;
+    mediaNode.playsInline = true;
+    mediaNode.preload = "metadata";
+  } else {
+    mediaNode.alt = "";
+    mediaNode.decoding = "async";
+    mediaNode.loading = "eager";
+  }
   thumbNode.insertBefore(mediaNode, thumbNode.firstChild || null);
   return mediaNode;
 };
@@ -1522,7 +1559,7 @@ const getDetailHeroCandidates = (article = {}) =>
 
       return list.findIndex((value) => getImageFingerprint(value) === fingerprint) === index;
     })
-  ).filter((candidate) => !isIllustrativeImage(article, candidate));
+  ).filter((candidate) => !looksLikeVideoAsset(candidate) && !isIllustrativeImage(article, candidate));
 
 const fetchSourceHeroImage = async (sourceUrl) => {
   const cleanUrl = String(sourceUrl || "").trim();
@@ -1554,7 +1591,7 @@ const applyResolvedDetailHeroImage = (imageUrl, article = {}) => {
     return;
   }
 
-  const mediaNode = ensureDetailHeroMediaNode();
+  const mediaNode = ensureDetailHeroMediaNode("img");
   if (!mediaNode) {
     return;
   }
@@ -1583,14 +1620,57 @@ const applyResolvedDetailHeroImage = (imageUrl, article = {}) => {
   mediaNode.classList.toggle("is-contain", backgroundSize === "contain");
 };
 
+const applyResolvedDetailHeroVideo = (videoUrl, article = {}, posterUrl = "") => {
+  if (!thumbNode) {
+    return;
+  }
+
+  const mediaNode = ensureDetailHeroMediaNode("video");
+  if (!mediaNode) {
+    return;
+  }
+
+  const normalizedVideoUrl = String(videoUrl || "").trim();
+  const normalizedPoster = sanitizeImageUrl(posterUrl);
+  const source = mediaNode.querySelector("source") || document.createElement("source");
+  source.src = normalizedVideoUrl;
+  source.type = videoTypeFor(normalizedVideoUrl);
+  if (!source.parentElement) mediaNode.appendChild(source);
+
+  mediaNode.poster = normalizedPoster;
+  mediaNode.setAttribute("aria-label", article.title ? `Vídeo da matéria: ${article.title}` : "Vídeo da matéria");
+  mediaNode.load();
+
+  thumbNode.classList.remove("no-image");
+  thumbNode.classList.add("has-image", "has-video", "has-inline-media");
+  thumbNode.dataset.topImage = "video";
+  thumbNode.style.backgroundColor = "#02040a";
+  if (normalizedPoster) {
+    thumbNode.style.setProperty("--bg-image", `url('${normalizedPoster}')`);
+    thumbNode.style.backgroundImage = `linear-gradient(180deg, rgba(8, 16, 29, 0.12) 0%, rgba(8, 16, 29, 0.52) 100%), url('${normalizedPoster}')`;
+    thumbNode.style.backgroundSize = "cover";
+    thumbNode.style.backgroundPosition = "center";
+  }
+};
+
 const applyDetailHeroImage = async (article = {}) => {
   if (!thumbNode) {
     return;
   }
 
   const requestId = ++detailHeroRequestId;
-  const mediaNode = ensureDetailHeroMediaNode();
+  const videoUrl = getArticleVideoUrl(article);
+  const mediaNode = ensureDetailHeroMediaNode(videoUrl ? "video" : "img");
   const candidates = getDetailHeroCandidates(article);
+
+  if (videoUrl) {
+    const posterUrl = candidates.length ? await resolveFirstAvailableHeroImage(candidates) : "";
+    if (requestId !== detailHeroRequestId) {
+      return;
+    }
+    applyResolvedDetailHeroVideo(videoUrl, article, posterUrl);
+    return;
+  }
 
   if (!mediaNode || !candidates.length) {
     thumbNode.classList.add("no-image");
@@ -1978,13 +2058,28 @@ const renderArticle = (article) => {
   const editorialTabs = renderFactTabs(article);
 
   void applyDetailHeroImage(article);
+  const articleVideoUrl = getArticleVideoUrl(article);
 
-  if (article.imageUrl || article.media) {
+  if (article.imageUrl || article.media || articleVideoUrl) {
     applyMediaBadge(thumbNode, article.media);
   }
 
   if (mediaKindNode && mediaNoteNode && mediaLinkNode) {
-    if (article.media) {
+    if (articleVideoUrl) {
+      const mediaTargetUrl = article.media?.creditUrl || article.sourceUrl || HOME_RETURN_URL;
+      mediaKindNode.textContent = "Vídeo da matéria";
+      mediaNoteNode.textContent = article.media?.note || "Quando a fonte traz vídeo, ele aparece no topo no lugar da imagem.";
+      mediaLinkNode.href = mediaTargetUrl;
+      mediaLinkNode.textContent = article.media?.creditLabel || "Abrir fonte";
+
+      if (mediaTargetUrl && mediaTargetUrl.startsWith("http")) {
+        mediaLinkNode.setAttribute("target", "_blank");
+        mediaLinkNode.setAttribute("rel", "noreferrer");
+      } else {
+        mediaLinkNode.removeAttribute("target");
+        mediaLinkNode.removeAttribute("rel");
+      }
+    } else if (article.media) {
       mediaKindNode.textContent = article.media.label || "";
       mediaNoteNode.textContent = article.media.note || "";
       mediaLinkNode.href = article.media.creditUrl || HOME_RETURN_URL;

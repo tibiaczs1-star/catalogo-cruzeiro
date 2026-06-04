@@ -1,6 +1,115 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-05-27
+Atualizado: 2026-06-04
+
+## Rodada Atual - 20260604-instagram-feeds-stories
+
+- Rodada emergencial Instagram concluída para `@catalogo_czs_` via Instagram Android/BlueStacks, após captura atualizada com 297 itens e 106 notícias/serviços de hoje.
+- Publicados 13 stories e 6 feeds no total desta sequência; primeira leva fechou em 219 posts e a continuação confirmou o perfil em 222 posts com story ativo.
+- Os feeds 02 e 03 foram recriados em versão limpa antes de postar porque os cards gerados primeiro duplicavam o título.
+- Na continuação, itens fracos/sensíveis foram cortados antes da publicação, e o fallback visual que duplicava título foi corrigido no pacote `.codex-temp/zap-round-20260604-continue/`.
+- Chrome/CDP não foi usado para publicação porque o perfil web não estava logado.
+- Evidências, manifests, HTML preview e logs: `.codex-temp/zap-round-20260604/` e `.codex-temp/zap-round-20260604-continue/`; prova final consolidada em `.codex-temp/zap-round-20260604/ig-profile-final-after-continue.png`.
+
+## Rodada Atual - 20260604-v8-public-agents-footer-teleport
+
+- Correção pós-feedback do usuário aplicada no V8 final: voz sintetizada da RAyL removida do chatbot e logo principal restaurada para `assets/logo-czs.svg`.
+- CTA vermelho "Venha apostar" reposicionado acima do Info, com botões laterais maiores.
+- "Escritórios de agentes" deixou de expor sistema interno/IA local/fila administrativa no front público; agora é apenas uma vitrine/rota para agentes autônomos com sprites e links públicos.
+- Fluxo público reorganizado: apresentação principal, módulos públicos/secundários, gateway de agentes, feed contínuo e só então rodapé.
+- Botão flutuante agora sinaliza "Rodapé / Mapa da página", carrega o restante do feed contínuo e salta direto para o footer; no rodapé vira "Topo / Home".
+- Validação: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check`, `npm run review:team` OK com 0 issues e CDP Edge confirmando footer visível após o salto.
+- Evidências: `C:\Users\junio\AppData\Local\Temp\v8-final-agents-public-clip-final3.png` e `C:\Users\junio\AppData\Local\Temp\v8-final-footer-jump.png`.
+
+## Rodada Atual - 20260604-v8-rayl-feedback-fix-v4
+
+- Correção pós-feedback do usuário: a RAyL voltou a aparecer na intro; o recorte agora é feito no cartão do loader sem remover a sprite e sem mostrar a logo antiga do CZS no loader.
+- O pop-up comercial preserva a RAyL sentada inteira acima do card; a correção removeu o efeito anterior em que só apareciam pernas/corte de avatar.
+- Escritórios ficaram mais acháveis: continuam dentro da Cheffe Call, com botão "Ver escritórios", card próprio no mapa do jornal e intenção própria na RAyL.
+- Backend local ajustado: respostas Ollama ficaram mais curtas e o timeout default subiu para 30s; em smoke na porta temporária 3026, RAyL/escritórios/Cheffe responderam `ai.status=online`.
+- Validação: Browser desktop/mobile sem console errors, sem overflow horizontal no mobile, `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check` nos arquivos tocados e `npm run review:team` OK com 0 issues.
+- Pendência real antes de Render: Ollama em `http://127.0.0.1:11434` só responde no ambiente onde o servidor roda. No Render online isso aponta para o container do Render, não para o PC do usuário, salvo se houver túnel/serviço seguro configurado.
+
+## Rodada Atual - 20260604-v8-ollama-offices-review-ui-v3
+
+- V8 recebeu a rodada final local antes do retorno do usuário: intro sem logo antiga, corte melhor da RAyL no loader/popup, modo compacto alternando para "Modo aberto", CTA "Ler" simplificado e RAyL sem resumo no cabeçalho.
+- Mobile corrigido no hero/lead/rail, com checks de DOM sem overflow horizontal; publicidade ganhou espaçamento e botão sem encavalar.
+- Galeria turística ficou visível após vídeos, com 16 itens, mapa e organização visual de Cruzeiro do Sul/Vale do Juruá.
+- Vídeos agora usam player quando o item é `.mp4` e tentam capturar/cachear um frame real para poster; quando o browser/CORS bloqueia a captura, permanece fallback visual seguro.
+- Todo artigo/card recebe ação "Revisão"; o clique envia para Cheffe Call via `/api/editorial-corrections`, registra como revisão editorial e deixa o botão verde/brilhando sem abrir o leitor por acidente.
+- Escritórios foram remontados como workspace de fluxo, com cards por área, fila Cheffe e formulário de IA local; RAyL, escritórios e Cheffe Call usam Ollama local em endpoints separados.
+- Ollama default ficou `qwen2.5:3b` porque `qwen3-hermes:4b` respondeu vazio/thinking no smoke; override continua possível por `CZS_OLLAMA_MODEL`.
+- Validação: `node --check server.js`, `node --check assets/v8-final/v8-merge-ready.js`, endpoints RAyL/escritórios/Cheffe, Edge CDP mobile/popup e `npm run review:team` OK.
+- Evidências: `.codex-temp/v8-qa-20260604/cdp-mobile-final.png` e `.codex-temp/v8-qa-20260604/cdp-popup-avatar-final.png`.
+- Pendência real antes de Render: merge/smoke no online, campanhas comerciais reais em `data/ad-campaigns.json` se forem subir já, e considerar timeout/modelo do Ollama se muitas IAs forem chamadas em paralelo.
+
+## Rodada Atual - 20260603-v8-real-functional-v2
+
+- V8 passou de preview decorativo para integrações mínimas reais nas áreas críticas confirmadas pelo usuário.
+- MP4 agora é detectado como vídeo e renderiza `<video controls>` no hero, leitor e hub de vídeos; `.mp4` não cai mais em `<img>`.
+- Arquivo V8 busca `/api/news/archive?limit=1000`, mostra status de endpoint/fallback e usa o payload online quando o servidor responde.
+- Cheffe/Comunidade deixaram de ser só localStorage: correções/fotos/fontes vão para `/api/editorial-corrections`; relatos comunitários usam `/api/community/reports`.
+- RAyL agora tenta `/api/rayl/chat` e só cai no FAQ local quando o backend não responde; o endpoint registra log em `DATA_DIR/rayl-chat-log.json`.
+- Anúncios/comercial ganharam backend simples persistente: `/api/ads/campaigns`, `/api/ads/events` e `/api/commercial/leads`, com arquivos JSON em `DATA_DIR`.
+- Cache-bust atualizado para `20260604-v8-real-functional-v2` em `index.html` e nos dois protótipos V8.
+- Validação: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, smoke HTTP com `DATA_DIR` temporário, Edge headless e `npm run review:team` OK.
+- Evidência: `.codex-temp/v8-visual-smoke/home-v8-1440.png`.
+- Pendência antes de Render: decidir campanhas reais em `data/ad-campaigns.json`, se RAyL deve chamar IA externa além do roteador determinístico e repetir smoke no online após merge.
+
+## Rodada Atual - 20260603-qwen-update1
+
+- Qwen atualizado em escopo local/Hermes sem mudar a autoridade principal: `openai-codex/gpt-5.5` segue como frente final e Qwen continua worker.
+- CLI `@qwen-code/qwen-code` verificado/atualizado via npm global em `C:\claude`, permanecendo na versao mais recente disponivel `0.17.1`.
+- Modelos Ollama renovados: `qwen2.5-coder:3b` e `qwen2.5:3b`; novo `qwen3:4b` baixado para uso local leve.
+- Criado derivado local `qwen3-hermes:4b` com `num_ctx 65536` via `.codex-temp/qwen3-hermes.Modelfile`, porque o runtime default do Ollama carregava `qwen3:4b` com 4096 de contexto e o Hermes exige janela maior.
+- Configs `C:\Users\junio\.hermes\config.yaml` e `C:\Users\junio\AppData\Local\hermes\config.yaml` passaram a declarar `qwen3:4b`, `qwen3-hermes:4b` e rota explicita `local-qwen3-explicit`; backups `config.backup-qwen-update-20260603-194110.yaml` criados antes da mudanca.
+- RayX passa a preferir `qwen3-hermes:4b` quando escolher um LLM local nao-coder; o roteador de continuidade inclui `qwen3-hermes:4b` como worker local.
+
+## Rodada Atual - 20260603-rayl-chatbot-faq1
+
+- Chatbot da RAyL implementado no prototipo V8 alvo `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
+- Assistente agora tem FAQ local, campo de pergunta, respostas por intencao e troca de pose conforme contexto: anunciar, noticia/pauta, servicos, PubPaid, duvida incerta e atendimento humano.
+- WhatsApp nao e fallback automatico para pergunta sem resposta; o CTA `Falar no WhatsApp` aparece apenas quando o visitante pede contato humano/atendente/dono/Zap.
+- Link humano configurado para `https://wa.me/556896026649` com texto pre-preenchido.
+- Foram extraidas 31 poses novas a partir das imagens enviadas e salvas em `assets/aylla/chatbot-poses/`; manifest em `assets/aylla/chatbot-poses.json`.
+- Cache-bust do alvo atualizado para `20260603-app-loader-v10-rayl-chatbot`.
+- Validacao: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` nos arquivos alvo e Playwright mobile. Evidencia: `.codex-temp/v8-qa/rayl-chatbot-human-whatsapp-mobile.png`.
+
+## Rodada Atual - 20260603-czs-v8-final-visual-review
+
+- Rodada v4 de acabamento executada no prototipo alvo: `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`, com cache-bust `20260603-app-loader-v4`.
+- Intro virou abertura continua de app: ceu azul institucional, estrelas/particulas, colisao de luz, progresso minimo real, cache renovado por `V8_BOOT_VERSION`, logo PNG transparente sem recorte de letras e RAyL viva alternando poses no painel de boas-vindas.
+- Leitor de artigo reorganizado: titulo primeiro, depois foto + cards laterais de contexto, e abaixo o texto captado da materia sem resumo procedural no corpo. Areas de divulgacao nativa foram planejadas dentro e depois do artigo.
+- Paleta final desta fatia segue azul profundo + amarelo institucional + branco; vermelho fica reservado para urgencia editorial.
+- Evidencias visuais salvas em `.codex-temp/v8-qa/v4b-intro-rayl-logo.png`, `.codex-temp/v8-qa/v4b-reader-layout-ads.png` e `.codex-temp/v8-qa/v4b-reader-body-ads.png`.
+- Validacao v4: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` nos arquivos alvo e `npm run review:team`. O review ainda mostra 74 achados em arquivos/prototipos legados, mas nao no prototipo alvo nem em `assets/v8-final`.
+- Popup comercial V8 atualizado para RAyL: mascote sentada acima da caixa, balao com frases alternadas, cards de criacao de sites/apps/divulgacao/automacao com imagens bitmap reais em `assets/v8-commercial/`; validado em desktop/mobile sem console errors e sem overflow horizontal.
+- Protótipo V8 alvo finalizado para revisão visual local: `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
+- Logo oficial aplicada com escala de marca e animações de entrada/sinal/flip em `assets/v8-final/v8-merge-ready.css`, usando `assets/brand/catalogo-czs-logo-official-crops-20260603/02-versao-horizontal-alpha.png`.
+- Copies redundantes e textos automáticos removidos dos dados principais (`data/runtime-news.json`, `data/news-archive.json`, `news-data.js` e JSON embutido no protótipo); fallback procedural/placeholder foi bloqueado em favor de fotos reais.
+- Leitor V8 validado com matéria abrindo no layout novo, imagem real, fonte de corpo maior e efeito de passagem de página.
+- Rodapé/área final recebeu galeria de Cruzeiro do Sul, mapa Google Maps e exemplos de formatos de anúncio.
+- Aylla ficou compacta e integrada: no mobile vira ícone quadrado para não cobrir a manchete.
+- Validação: `node --check assets/v8-final/v8-merge-ready.js`, `npm run review:team`, Browser/IAB desktop/artigo/recursos/mobile sem console errors e sem overflow. Relatório de revisão não lista mais o protótipo alvo; os 74 achados restantes são legados fora desta página.
+- URL local para revisão: `http://127.0.0.1:8790/prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
+
+## Rodada Atual - 20260602-hermes-gpt-mind-hard-stop
+
+- Erro encontrado: quando `openai-codex/gpt-5.5` estava sem credencial, o Hermes fazia fallback automatico para `custom:local-ollama/minimax-m3:cloud`, fazendo MiniMax assumir a conversa em vez de pedir autenticacao.
+- Correcao aplicada: `fallback_providers: []` e `model_router.enabled: false` no config ativo `C:\Users\junio\AppData\Local\hermes\config.yaml` e no espelho `C:\Users\junio\.hermes\config.yaml`.
+- Todas as credenciais antigas de `openai-codex` foram removidas dos auth stores `C:\Users\junio\AppData\Local\hermes\auth.json` e `C:\Users\junio\.hermes\auth.json`; tambem foi removido `suppressed_sources.openai-codex` para a proxima autenticacao por `hermes auth add openai-codex` entrar limpa.
+- Regra operacional confirmada pelo usuario: GPT planeja e decide antes de tudo; outros modelos ajudam por tras como workers de rapidez/economia, mas nao substituem a mente/modelo principal sem permissao explicita.
+- Prompt de recuperacao criado em `.codex-temp/hermes-gpt-mind-auth-prompt.md` e copiado para `C:\Users\junio\AppData\Local\hermes\docs\HERMES_GPT_MIND_RECOVERY_PROMPT.md`.
+- Validacao: `hermes fallback list` retorna `No fallback providers configured`; `hermes auth status openai-codex` retorna logged out; smoke GPT sem credencial falha corretamente com `No Codex credentials stored. Run hermes auth to authenticate.` em vez de abrir MiniMax.
+
+## Rodada Atual - 20260602-hermes-chatgpt-minimax-priority2
+
+- Hermes alinhado para trabalhar com `openai-codex/gpt-5.5` como porta de entrada e autoridade final, com pedido explicito de `me autentique` quando o GPT falhar por auth.
+- Config ativo `C:\Users\junio\AppData\Local\hermes\config.yaml`: primary `openai-codex/gpt-5.5`; fallback em ordem `minimax-m3:cloud`, `minimaxai/minimax-m2.7`, `gemini-2.5-flash-lite`, `llama3.2:3b`.
+- Config espelho `C:\Users\junio\.hermes\config.yaml`: default e delegation voltaram para `openai-codex/gpt-5.5`; MiniMax M3 e MiniMax 2.7 foram colocados antes de Gemma/Qwen/Llama.
+- `scripts/hermes-continuity-router.js` agora usa suporte quente padrao 2, testa MiniMax 2.7 via NVIDIA (`minimaxai/minimax-m2.7`), deixa Gemma/Gemini/Llama/Nemotron como fallback e emite alerta `me autentique` quando o GPT exigir reauth.
+- Backups criados: `C:\Users\junio\AppData\Local\hermes\config.backup-chatgpt-minimax-priority-20260602-163937.yaml` e `C:\Users\junio\.hermes\config.backup-chatgpt-minimax-priority-20260602-163937.yaml`.
+- Validacao: `hermes fallback list` mostrou primary GPT e fallback MiniMax M3 -> MiniMax 2.7 -> Gemini -> Llama; `hermes auth status openai-codex` logged in; GPT smoke `OK-HERMES-GPT-READY`; MiniMax M3 smoke `OK-HERMES-M3`; MiniMax 2.7 smoke `OK-HERMES-M27`; `node scripts/hermes-continuity-router.js --support 2 --include-cloud=false --timeout 70000` retornou `authority=chatgpt-codex-primary`, `warmSupport=minimax-m3-cloud,minimax-m27-fast`.
 
 ## Rodada Atual - 20260602-hermes-opendesign-desk1
 
@@ -648,3 +757,53 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Criados `docs/social/czs-executive-order-2026-05-31.md`, `docs/social/czs-instagram-news-standard-2026-05-31.md`, `docs/social/czs-growth-following-cleanup-2026-05-31.md` e `docs/social/czs-editorial-growth-formats-2026-05-31.md`.
 - Nova regra do Instagram/Jornal: video de fonte primeiro, contexto claro, narracao curta quando util, imagem depois, propaganda intercalada e trilha jornalistica sem terror/suspense exagerado.
 - Crescimento: parar de seguir perfis pessoais comuns; manter apenas nichos de jornal, noticias, fofoca, radio, politica regional, Acre, Vale do Jurua e Cruzeiro do Sul; sem automacao de massa.
+
+## V8 Catálogo CZS - 2026-06-03 logo/colors/QA
+
+- Protótipo principal revisado: `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
+- Camada final: `assets/v8-final/v8-merge-ready.css` e `assets/v8-final/v8-merge-ready.js`.
+- Aplicadas variações oficiais da marca: principal na intro, horizontal no topo/rodapé e ícone CZS+estrelas no mini-footer.
+- Paleta travada em azul/amarelo/branco da logomarca; vermelho fica apenas para notícia urgente.
+- Design ajustado para geometria quadrada/minimalista, sem dourado e sem cards transparentes.
+- Corrigidos hero/fotos sem corte agressivo, ticker mobile, filtros mobile e feedback real dos escritórios da Cheffe Call.
+- QA Playwright final: desktop/mobile `overflowX=0`, sem console errors, sem links antigos de `noticia.html`, reader V8 abrindo, busca funcionando e Cheffe registrando ações.
+- URL local de revisão: `http://127.0.0.1:8790/prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
+
+## V8 Catálogo CZS - 2026-06-03 intro/RAyL/jovem/comercial
+
+- Intro restaurada com a logo nova oficial e sem a cruz antiga; brilhos laterais carnavalescos trocados por fundo editorial com linha do rio, grade de mapa, sinais e notas fantasma.
+- RAyL do chatbot ganhou poses por opção e fala curta via `speechSynthesis` apenas para botões/opções reais do chat; respostas digitadas continuam sem narração automática.
+- Topo ganhou atalho `Venha jogar` após a marca, apontando para `pubpaid.html`, e links para Galeria, TV CZS e Área Jovem.
+- Criados TV CZS Stories em formato 9:16, Área Jovem para PubPaid/games/animes/novelas/filmes/shows/agenda do Acre e lateral fechável com hashtags, mercado rápido e agenda.
+- Landing comercial reformulada: botão perto da busca abre tela preta com RAyL, intro de vendas e página de números/ofertas no mesmo visual do V8.
+- Cheffe Call recebeu layout de mesa de comando com prioridade, revisão, imagem, fonte, comercial e escritórios.
+- Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check` e `npm run review:team` passaram; revisão local auditou 209 arquivos com `totalIssues=0`.
+
+## V8 Catálogo CZS - 2026-06-04 rodada corretiva screenshots
+
+- Camada final atualizada em `assets/v8-final/v8-merge-ready.js` e `assets/v8-final/v8-merge-ready.css`; cache-buster renovado em `index.html` e `prototype-redesign-v8-portal-inteligente.html`.
+- Topo recebeu crawl/ticker de manchetes entre logo e busca; ticker antigo voltou a ser preenchido; divisores de seção passaram de traços para bolinhas.
+- CTA da marca mudou para vermelho `Venha apostar` com ícone de sinuca; no mobile a logo fica contida e o CTA aparece abaixo da marca.
+- Compartilhar abre painel com WhatsApp, Instagram e copiar link; `Ver arquivo`/links antigos remapeiam para o arquivo V8.
+- Intro agora tem logo grande persistente, RAyL em destaque e fluxo de uma vez por sessão de navegador; `skipIntro=1` ficou como atalho técnico para QA local.
+- Cheffe Call saiu como acesso direto público: aparece em vermelho como sistema admin restrito, sem link para `cheffe-call.html`; a área pública virou `Escritórios de agentes`.
+- TV CZS, galeria, pesquisa/newsletter, apoio local, rodapé e feed contínuo antes do rodapé foram reescritos para conversar com o layout V8.
+- Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` nos arquivos tocados e `npm run review:team` passaram; review-team auditou 210 arquivos com `totalIssues=0`. Screenshots headless confirmaram topo desktop/mobile.
+
+## Social CZS - 2026-06-04 Instagram rodada final
+
+- Instagram @catalogo_czs_: rodada do dia concluida com 19 stories e 9 feeds publicados via Android/BlueStacks.
+- Sequencia: primeira leva 8 stories + 3 feeds; continuacao 5 stories + 3 feeds; rodada final silenciosa 6 stories + 3 feeds.
+- Perfil final confirmou 225 posts e story ativo em `.codex-temp/zap-round-20260604/ig-profile-final-after-sleep-run.png`.
+- Pacote final em `.codex-temp/zap-round-20260604-final/`, com allowlist manual de noticias/servicos e corte de itens sensiveis/fracos.
+- Ajuste operacional: `post_instagram_manifest_feed.ps1` remove `;` do texto enviado via `adb shell input text` para evitar quebra de caption em titulos com ponto e virgula.
+
+## V8 Catálogo CZS - 2026-06-04 deploy, captação 30 min e mídia
+
+- Render preparado para publicar o V8 com captação de notícias a cada 30 minutos: `NEWS_REFRESH_AUTO_DISABLED=false`, `NEWS_REFRESH_INTERVAL_MS=1800000`, integridade de artigos ligada e topic feed automático a cada 30 minutos.
+- Captura manual final atualizada antes do deploy: `scripts/capture-latest-news.js` retornou `ok=true`, 292 itens captados, 131 de hoje, 360 na janela ativa e 480 no arquivo.
+- Parser de notícias agora separa vídeo de imagem em RSS/fontes diretas; vídeo entra como `videoUrl`/`media.type=video` e não é mais tratado como imagem quebrada.
+- Matérias em `noticia.html`/`noticia.js` priorizam vídeo no hero quando a fonte traz mídia de vídeo; fotos continuam como poster/fallback e a legenda virou mídia da notícia.
+- Home V8 ganhou stories em bolinhas com preview de vídeo e viewer vertical estilo stories, com fechar/anterior/próximo e link para matéria quando houver.
+- Validação local passou com `node --check` nos arquivos críticos, `npm run review:team` com `totalIssues=0` e Playwright smoke desktop/mobile com screenshots em `output/playwright/czs-v8-stories-*.png`.
+- Limpeza ampla ficou deliberadamente fora do deploy: `vendor/`, `tools/`, `.automation/` e assets antigos precisam de auditoria antes de remoção para não apagar material útil ou evidência aprovada.

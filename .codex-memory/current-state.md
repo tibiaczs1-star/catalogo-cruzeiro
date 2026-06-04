@@ -1,15 +1,32 @@
 # Current State
 
-Updated: 2026-06-02T15:17:31.932Z
+Updated: 2026-06-04T13:12:18.627Z
 
 ## Active Goal
 
-- CZS social: publicando fila em lotes
+- Deploy V8 pronto para publicar
 
 ## Summary
 
-Depois da cobrança do usuário, saiu mais um lote: WhatsApp Catálogo CZS recebeu mais 4 cards de notícia; Instagram recebeu mais 5 stories (4 notícias + 1 serviço), chegando a 25 stories nesta execução. Fila de 500 segue como reservatório, mas execução está em andamento por lotes validados.
+Deploy V8 em fechamento: Render configurado para captação automática de notícias a cada 30 minutos, integridade de artigos e topic feed ligados, captura manual final atualizada com 292 itens captados e 131 de hoje. Home V8 ganhou stories em bolinhas com preview de vídeo e viewer vertical; matérias agora priorizam vídeo quando a fonte traz media de vídeo e usam foto como poster/fallback. Validações locais passaram: node --check nos arquivos críticos, capture-latest-news, npm run review:team totalIssues=0 e Playwright smoke desktop/mobile com screenshots.
 
 ## Next
 
-- Continuar gerando lotes filtrados por localidade real; bloquear notícia global/política opinativa e classificados no Instagram; publicar sem deixar apenas em fila.
+- Stage/commit/push dos arquivos necessários ao deploy sem incluir vendor/tools/lixo local ambíguo
+- Verificar Render online após push
+
+## Files In Focus
+
+- render.yaml
+- server.js
+- scripts/capture-latest-news.js
+- assets/v8-final/v8-merge-ready.js
+- assets/v8-final/v8-merge-ready.css
+- noticia.js
+- noticia.html
+
+## Assets In Focus
+
+- output/playwright/czs-v8-stories-desktop.png
+- output/playwright/czs-v8-story-viewer-desktop.png
+- output/playwright/czs-v8-stories-mobile.png

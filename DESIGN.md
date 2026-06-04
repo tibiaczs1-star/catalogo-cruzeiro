@@ -219,3 +219,46 @@ Sombras em três níveis: `low` para cards resting, `mid` para hover/elevação,
 - NAO USE: sombra elevation.high em elementos que nao sejam modais ou overlays
 - NAO USE: border-radius full fora de avatares e badges
 - NAO USE: mais de 3 fontes diferentes em uma mesma pagina
+
+---
+
+# Rayxpx / OpenDesign Pack — instruções ativas 2026-06-02
+
+Fonte detalhada corrigida: `docs/design-refs/OPENDESIGN-TOOLS-DOWNLOADED-2026-06-02.md`.
+Manifest das ferramentas reais: `vendor/opendesign-tools/TOOL_PACK_MANIFEST.json`.
+Skills Impeccable: `.github/skills/impeccable/`.
+Open Design local: `vendor/opendesign-tools/open-design/`.
+
+## Gates
+
+- CZS/site separado de PubPaid, jogos e Cheffe Call.
+- Sem deploy, push ou Render sem aprovação explícita do Junior.
+- Sem copiar assets pagos/licenciados de Kittl/Untitled UI/logos Svgl.
+- Protótipos CZS seguem vanilla HTML/CSS/JS até Junior aprovar outra stack.
+- Toda melhora visual precisa passar por Impeccable + QA visual antes de ser chamada de pronta.
+
+## Direção adicional para V4/V5
+
+- Manter ouro regional `#d4a843`, mas mover a experiência para dark editorial premium/obsidian com glass controlado.
+- Evitar cara de SaaS AI: remover chips/eyebrows genéricos e integrar editoria como breadcrumb/kicker natural.
+- Evitar `Inter only`; usar dupla editorial: display serif forte (`Newsreader`, `Literata`, `Source Serif 4`) + sans legível (`IBM Plex Sans`, `Atkinson Hyperlegible`, `system-ui`).
+- Limitar tracking de manchete para `-0.045em` a `-0.025em`; nunca `-0.07em` sem justificativa visual.
+- Feed MSN-style infinito com prioridade: Cruzeiro do Sul/Juruá > Purus > Acre > Brasil/Mundo > volta para local.
+- Usar no máximo 1 a 3 microinterações Design Spells por página, com `prefers-reduced-motion`.
+- Ícones de produção: inline SVG próprio 24x24, stroke 1.5px, round caps/joins, `color: inherit`; sem emoji e sem CDN.
+- Cult UI/Untitled UI/Kittl/Svgl são referência de sistema e acabamento, não licença automática para copiar assets.
+
+## Validação obrigatória
+
+```bash
+npx -y impeccable detect <arquivo-html-ou-url>
+git diff --check
+```
+
+Se JS for tocado:
+
+```bash
+node --check <arquivo-js>
+```
+
+Problemas atuais do protótipo V4: relatório em `docs/design-refs/impeccable-detect-prototype-v4.txt` com 28 anti-patterns, principalmente contraste, chip SaaS, padding, tracking excessivo, overflow clipping, Inter-only e hierarquia tipográfica fraca.

@@ -46,7 +46,7 @@
       {{SEO_JSON_LD}}
     </script>
     <link rel="stylesheet" href="./styles.css?v=20260513-preload-gate2" />
-  <link rel="stylesheet" href="noticia-enhance.css?v=20260423fact-contrast" />
+  <link rel="stylesheet" href="noticia-enhance.css?v=20260604-video-media1" />
   <link rel="stylesheet" href="contrast-mixer.css?v=20260411n" />
   <link rel="stylesheet" href="servicos-menu.css?v=20260411m" />
   <link rel="stylesheet" href="rodape-voz-humana.css?v=20260411o" />
@@ -56,8 +56,9 @@
   <link rel="stylesheet" href="./modern-launch.css?v=20260428footerflow" />
   <link rel="stylesheet" href="./startup-experience.css?v=20260524-bookloader4" />
   <link rel="stylesheet" href="./noticia-premium.css?v=20260601-audio-caption1" />
+  <link rel="stylesheet" href="./czs-design-system.css?v=20260603-official-ds1" />
 </head>
-  <body class="detail-body">
+  <body class="detail-body czs-official-system">
     <script>
       (function () {
         const flagKey = "catalogo_page_action_loader_pending_v1";
@@ -143,10 +144,31 @@
       </header>
 
       <main class="detail-main">
-        <article class="detail-shell active" id="detail-shell">
+        <article class="detail-shell active czs-article-template" id="detail-shell" data-czs-article-template="official">
+          <!-- Schema.org support: BreadcrumbList FAQPage -->
+          <nav class="article-breadcrumbs" id="article-breadcrumbs" aria-label="Caminho da matéria">
+            <ol>
+              <li><a href="./index.html?skipIntro=1">Início</a></li>
+              <li><a href="./arquivo.html">Arquivo</a></li>
+              <li><span>Notícia</span></li>
+            </ol>
+          </nav>
           <p class="eyebrow" id="detail-eyebrow">notícia em destaque</p>
           <h1 id="detail-title">Notícia</h1>
           <p class="detail-meta" id="detail-meta"></p>
+          <div class="article-meta-grid" id="article-byline" aria-label="Autoria e dados da publicação">
+            <span>Por <strong>Redação CZS</strong></span>
+            <time id="article-published-time" datetime="">Atualização em acompanhamento</time>
+            <span class="article-reading-time" id="article-reading-time">1 min de leitura</span>
+          </div>
+          <div class="article-share" id="article-share" aria-label="Compartilhar matéria">
+            <span>Compartilhar</span>
+            <a href="https://api.whatsapp.com/send?text=Cat%C3%A1logo%20CZS" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcatalogo-cruzeiro-web.onrender.com%2Fnoticia.html" target="_blank" rel="noreferrer">Facebook</a>
+            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fcatalogo-cruzeiro-web.onrender.com%2Fnoticia.html&text=Cat%C3%A1logo%20CZS" target="_blank" rel="noreferrer">X</a>
+            <button type="button" data-czs-copy-link>Copiar link</button>
+          </div>
+
           <div class="detail-article-toolbar" aria-label="Navegação da matéria">
             <a class="detail-back-button" href="./index.html?skipIntro=1" data-home-return>
               <span aria-hidden="true">←</span>
@@ -174,6 +196,12 @@
           </div>
 
           <p class="detail-lede" id="detail-lede"></p>
+
+          <nav class="article-toc" id="article-toc" aria-label="Índice da matéria" hidden>
+            <strong>Índice rápido</strong>
+            <ol></ol>
+          </nav>
+
 
           <section class="detail-audio-reader" id="detail-audio-reader" aria-labelledby="detail-audio-title" hidden>
             <div>
@@ -238,7 +266,7 @@
               </div>
 
               <div class="detail-card">
-                <span>imagem da notícia</span>
+                <span>mídia da notícia</span>
                 <strong id="detail-media-kind">Crédito da imagem</strong>
                 <p id="detail-media-note"></p>
                 <a class="outline-button" id="detail-media-link" href="./index.html?skipIntro=1">
@@ -263,6 +291,17 @@
 
             </aside>
           </div>
+
+          <section class="article-faq czs-card" id="article-faq" aria-labelledby="article-faq-title" hidden>
+            <p class="eyebrow">FAQ</p>
+            <h2 id="article-faq-title">Perguntas rápidas</h2>
+          </section>
+
+          <section class="article-related czs-card" id="article-related" aria-labelledby="article-related-title" hidden>
+            <p class="eyebrow">Relacionadas</p>
+            <h2 id="article-related-title">Continue acompanhando</h2>
+            <div class="article-related-grid"></div>
+          </section>
         </article>
       </main>
 
@@ -344,7 +383,7 @@
     <script defer src="./news-data.js?v=20260424pixelart1"></script>
     <script defer src="runtime-config.js?v=20260413d"></script>
     <script defer src="./navigation-loader.js?v=20260513-review-photo-cta1"></script>
-    <script defer src="./noticia.js?v=20260601-audio-caption1"></script>
+    <script defer src="./noticia.js?v=20260604-video-media1"></script>
   <script defer src="analytics-client.js?v=20260428consent1"></script>
   <script defer src="engagement-api.js?v=20260411j"></script>
   <script defer src="servicos-menu.js?v=20260511-no-ninjas1"></script>
@@ -352,5 +391,6 @@
   <script defer src="photo-layout-fix.js?v=20260411ab"></script>
   <script defer src="newspaper-gradient-balance.js?v=20260411r"></script>
   <script defer src="agentes-newsroom-hero.js?v=20260413ab"></script>
+  <script defer src="./czs-design-system.js?v=20260603-official-ds1"></script>
 </body>
 </html>

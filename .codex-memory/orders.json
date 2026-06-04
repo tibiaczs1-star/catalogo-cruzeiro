@@ -1,7 +1,168 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-02T14:43:24.350Z",
+  "lastUpdatedAt": "2026-06-04T12:56:32.939Z",
   "orders": [
+    {
+      "id": "2026-06-03-v8-rayl-commercial-popup-real-images",
+      "createdAt": "2026-06-03T11:57:04.0869378-05:00",
+      "updatedAt": "2026-06-03T11:57:04.0869378-05:00",
+      "status": "completed-validated",
+      "source": "chat",
+      "rawRequest": "Popup comercial com a mascote sentada acima do card, cards bonitos para criacao de sites, apps, divulgacao e automacao, imagens reais, movimento simples, balao alternando frases, e renomear Aylla para RAyL.",
+      "summary": "Popup comercial V8 atualizado: RAyL sentada acima do card, balao dinamico, quatro cards com imagens bitmap reais e nome publico RAyL no popup/suporte.",
+      "normalizedTasks": [
+        "usar imagens reais nos cards comerciais em vez de desenhos CSS",
+        "manter RAyL acima da caixa sem cobrir texto",
+        "alternar frases no balao de fala",
+        "trocar nome publico da mascote de Aylla para RAyL",
+        "validar desktop e mobile sem overflow horizontal"
+      ],
+      "filesTouched": [
+        "assets/v8-final/v8-merge-ready.js",
+        "assets/v8-final/v8-merge-ready.css",
+        "assets/v8-commercial/commercial-sites.png",
+        "assets/v8-commercial/commercial-apps.png",
+        "assets/v8-commercial/commercial-divulgacao.png",
+        "assets/v8-commercial/commercial-automacao.png",
+        ".codex-temp/rayl-commercial-popup-desktop.png",
+        ".codex-temp/rayl-commercial-popup-mobile.png"
+      ],
+      "assetRefs": [
+        "v8-rayl-commercial-popup-real-images-20260603",
+        "v8-rayl-commercial-popup-validation-20260603"
+      ],
+      "tags": [
+        "czs-v8",
+        "popup",
+        "rayl",
+        "servicos",
+        "imagens-reais",
+        "validacao-visual"
+      ],
+      "nextSteps": [
+        "Se o usuario pedir novo ajuste, partir das capturas em .codex-temp/rayl-commercial-popup-desktop.png e mobile.",
+        "Manter o nome publico RAyL nos textos visiveis; nomes internos aylla podem permanecer enquanto forem dependencias de CSS/assets."
+      ],
+      "notes": "Validado com Playwright: 4 imagens carregadas, sem console errors e overflowX 0 em desktop 1365x900 e mobile 390x844."
+    },
+    {
+      "id": "2026-06-02-social-image-caption-facebook-first-whatsapp-catalogo",
+      "createdAt": "2026-06-02T21:07:09.252Z",
+      "updatedAt": "2026-06-02T21:07:09.252Z",
+      "status": "prepared-blocked-by-chrome-extension",
+      "source": "chat",
+      "rawRequest": "sempre e imagem mais legenda ou seja faça criativos e para cada serviço ou convite anunciado - isso tambem serve pra vendas - e depois so sincronize mais noticias no catalogo do whats app mais antes veja facebook, procure gurpos renove vendas coloque serviços depois volte pro zap",
+      "summary": "Nova regra social: sempre imagem + legenda para servicos, convites, vendas e noticias; primeiro Facebook/grupos, depois WhatsApp vendas/servicos e por fim Catálogo CZS com noticias em cards/imagens.",
+      "normalizedTasks": [
+        "nunca postar texto solto em campanhas sociais",
+        "usar um criativo e uma legenda por servico, convite ou venda",
+        "ver Facebook primeiro, procurar/validar grupos e renovar vendas/servicos",
+        "voltar ao WhatsApp para grupos de venda e Catálogo CZS",
+        "sincronizar noticias no Catálogo CZS apenas como imagem/card"
+      ],
+      "filesTouched": [
+        ".codex-temp/facebook-whatsapp-image-caption-20260602/queue.json",
+        ".codex-temp/facebook-whatsapp-image-caption-20260602/queue.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "facebook-whatsapp-image-caption-queue-20260602"
+      ],
+      "tags": [
+        "facebook",
+        "whatsapp",
+        "catalogo-czs",
+        "imagem-legenda",
+        "servicos",
+        "vendas",
+        "noticias-card"
+      ],
+      "nextSteps": [
+        "Reativar controle do Chrome: perfil selecionado precisa ter Codex Chrome Extension habilitada e host nativo correto.",
+        "Antes de qualquer envio, confirmar destino e o par imagem+legenda.",
+        "Remover/limpar eventual rascunho no grupo R.ALVES E REGIAO VENDAS antes de nova execução se ele ainda aparecer."
+      ],
+      "notes": "Fila com 6 criativos comerciais foi preparada. Automacao externa bloqueada porque Computer Use ficou indisponivel e o Chrome extension backend nao esta disponivel no perfil selecionado."
+    },
+    {
+      "id": "2026-06-02-social-services-memory-first-routing",
+      "createdAt": "2026-06-02T18:45:34.790Z",
+      "updatedAt": "2026-06-02T18:45:34.790Z",
+      "status": "standing-instruction-recorded",
+      "source": "chat",
+      "rawRequest": "lembre-se de puxar da memoria tudo que temos pra postar de serviços e etc, com as formas que ja faziamos mais mais organizado",
+      "summary": "Regra operacional: para Facebook/WhatsApp de servicos, vendas e convites, puxar primeiro os materiais da memoria local e reorganizar por canal/destino antes de criar novos criativos.",
+      "normalizedTasks": [
+        "consultar assets.json, orders.json e manifests sociais antes de preparar postagens",
+        "reaproveitar artes/legendas existentes quando forem adequadas",
+        "organizar por servico, venda, convite, transporte, conteudo e noticia",
+        "manter WhatsApp, Facebook Marketplace e Instagram com rotas separadas"
+      ],
+      "filesTouched": [
+        ".codex-temp/facebook-whatsapp-pack-20260602/index.html",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "facebook-whatsapp-services-sales-pack-20260602",
+        "czs-sales-ads-v2-20260601"
+      ],
+      "tags": [
+        "social",
+        "facebook",
+        "whatsapp",
+        "servicos",
+        "vendas",
+        "memoria-primeiro",
+        "roteamento-seguro"
+      ],
+      "nextSteps": [
+        "Antes de nova postagem, abrir o pacote HTML e os manifests de sales-ads-v2/service-highlights-v2.",
+        "Usar uma arte e uma legenda por item, evitando pacote misturado.",
+        "Confirmar cabecalho do destino antes de postar em WhatsApp ou Facebook."
+      ],
+      "notes": "O pacote HTML foi atualizado com uma secao Banco Da Memoria Para Postar, listando os servicos e artes ja existentes."
+    },
+    {
+      "id": "2026-06-02-facebook-whatsapp-services-sales-pack",
+      "createdAt": "2026-06-02T14:15:00-05:00",
+      "updatedAt": "2026-06-02T18:45:34.790Z",
+      "status": "completed-artifact-ready",
+      "source": "chat",
+      "rawRequest": "aqui tratamos de facebook e whatas app crie um prompt para colocar nossos serviços e vendas e conteudos e convites pra nos seguir tuedo nos cantos sertos com criativos bons e perfeitos / agora faça",
+      "summary": "Criado pacote navegavel para Facebook e WhatsApp com servicos, vendas, conteudos, convites para seguir, rotas corretas de postagem e modelos de criativos.",
+      "normalizedTasks": [
+        "separar Facebook e WhatsApp por destino correto",
+        "criar textos para servicos, vendas, conteudos e convite para seguir",
+        "incluir ideias de criativos e texto de arte",
+        "evitar spam e postagem em canal errado"
+      ],
+      "filesTouched": [
+        ".codex-temp/facebook-whatsapp-pack-20260602/index.html",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "facebook-whatsapp-services-sales-pack-20260602"
+      ],
+      "tags": [
+        "facebook",
+        "whatsapp",
+        "servicos",
+        "vendas",
+        "conteudo",
+        "convite-seguir",
+        "social"
+      ],
+      "nextSteps": [
+        "Substituir placeholders como nome do produto, preco, local e contato antes de postar.",
+        "Usar grupos de venda apenas para venda/servico/classificado.",
+        "Usar Facebook Marketplace em anuncios separados para cada produto ou servico.",
+        "Puxar da memoria local os pacotes ja existentes antes de criar novos textos ou artes."
+      ],
+      "notes": "Nao houve postagem automatica; apenas pacote de copy e orientacao visual foi preparado. Atualizado com banco da memoria para reaproveitar servicos, vendas e convites existentes."
+    },
     {
       "id": "2026-06-02-hermes-continuity-router-language-switch",
       "createdAt": "2026-06-02T01:30:32-05:00",
@@ -4547,6 +4708,648 @@
       "source": "chat",
       "rawRequest": "Continuar rodada social: postar o novo captado, depois procurar até completar 500 conteúdos para Catálogo CZS, Instagram e WhatsApp.",
       "summary": "Novo lote publicado: 8 cards no WhatsApp Catálogo CZS e 8 stories de notícias no Instagram; captação rerodada e fila de 500 regenerada.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-assumir-correcoes-do-hermes-no-website-validar-usar-credenciais-git-render-do-co",
+      "createdAt": "2026-06-02T17:41:21.268Z",
+      "updatedAt": "2026-06-02T17:41:21.268Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o hemes fez muitas correções no web site presciso que vc pegu3ew tudo e faça deploy, se comunique com ele ele nao tem credeciais do git e do render",
+      "summary": "Assumir correcoes do Hermes no website, validar, usar credenciais Git/Render do Codex e publicar deploy.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-endurecer-fluxo-do-feed-instagram-usar-memoria-protocolo-corrigir-falhas-de-card",
+      "createdAt": "2026-06-02T17:41:53.395Z",
+      "updatedAt": "2026-06-02T17:41:53.395Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "endireite esse fluxo leia sua propria memoria e proprios caminhos, endureça o prompt pra nao causar essas falhas, va ate o final se corringindo e checando",
+      "summary": "Endurecer fluxo do Feed Instagram: usar memoria/protocolo, corrigir falhas de card, exigir imagem real ou print da fonte e validação visual antes de publicar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo",
+      "createdAt": "2026-06-02T18:40:32.945Z",
+      "updatedAt": "2026-06-02T18:40:32.945Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "esse e o novo prompt que vc deve seguir, a parti de agora instgran e whas app e facebook sao 3 coisas dfiferentes aqui trataremos so intgran",
+      "summary": "Definir escopo desta rodada como somente Instagram; WhatsApp e Facebook sao fluxos separados; seguir o novo prompt de gestao Instagram como regra operacional.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-ajustar-hermes-para-priorizar-chatgpt-openai-codex-sempre-pronto-usar-minimax-m3",
+      "createdAt": "2026-06-02T21:37:56.819Z",
+      "updatedAt": "2026-06-02T21:37:56.819Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "presciso que o hermes trabalhe so com chat gpt e mini max 3m e mini max 2.,7 max speed --- fall back pro resto , mais sempre deixa o gpt pronto pra dizer me autentique porque ate agora n conseguiirmos termina algo simpl3es",
+      "summary": "Ajustar Hermes para priorizar ChatGPT/openai-codex sempre pronto, usar MiniMax M3 e MiniMax 2.7 Max Speed como apoios principais, deixar demais modelos apenas como fallback, e avisar reautenticacao do GPT quando auth falhar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-02-regra-hermes-gpt-openai-codex-deve-planejar-e-decidir-antes-de-tudo-outros-model",
+      "createdAt": "2026-06-02T22:22:26.913Z",
+      "updatedAt": "2026-06-02T22:22:26.913Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "so sei que eu tenho que planejar com o gpt, antes de tudo e depois ele deletga e trabalha junto mais sem trocar modelo, os outros deveriam acudir ele e ajudar n substituir",
+      "summary": "Regra Hermes: GPT/openai-codex deve planejar e decidir antes de tudo; outros modelos ajudam como workers por tras, mas nunca substituem a mente/modelo principal sem permissao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-aplicar-super-prompt-completo-no-v8-enviado-com-intro-espacial-premium-busca-lim",
+      "createdAt": "2026-06-03T09:07:54.984Z",
+      "updatedAt": "2026-06-03T09:07:54.984Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Aplicar o Super Prompt Completo no projeto V8 enviado por URL: prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html; assumir a execucao porque o Hermes esta errando demais.",
+      "summary": "Aplicar Super Prompt Completo no V8 enviado, com intro espacial premium, busca limpa, navegacao minima, performance e validacao visual.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-remover-bandeira-do-v8-rodape-para-nao-atrapalhar-navegacao",
+      "createdAt": "2026-06-03T09:21:54.388Z",
+      "updatedAt": "2026-06-03T09:21:54.388Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Remover a bandeira adicionada no V8 porque esta atrapalhando a navegacao e nao serve como PNG transparente.",
+      "summary": "Remover bandeira do V8/rodape para nao atrapalhar navegacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-refazer-bandeira-transparente-preservando-estrelas-brancas-e-detalhes-internos",
+      "createdAt": "2026-06-03T09:25:38.673Z",
+      "updatedAt": "2026-06-03T09:25:38.673Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Continuar ajuste da bandeira: corrigir PNG transparente sem cortar o branco interno das estrelas, porque as estrelas sao importantes.",
+      "summary": "Refazer bandeira transparente preservando estrelas brancas e detalhes internos.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-rodada-v8-merge-ready-substituir-experiencia-antiga-com-leitor-v8-hero-interativ",
+      "createdAt": "2026-06-03T09:55:06.905Z",
+      "updatedAt": "2026-06-03T09:55:06.905Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Juntar prompt PDF, prompts desta conversa e executar um goal ate o V8 estar pronto para substituir o site antigo: intro azul estrelada melhorada, hero interativo, nada do jornal antigo sem lugar no novo, fotos adaptativas no feed infinito, leitor V8 em vez do layout antigo, Cheffe Call e escritorios com funcao real, todas as copys reescritas para o publico final de jornal, e ao final uma rodada de limpeza geral.",
+      "summary": "Rodada V8 merge-ready: substituir experiencia antiga com leitor V8, hero interativo, intro azul, Cheffe Call funcional, copys de jornal e limpeza geral.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "v8",
+        "merge-ready",
+        "catálogo-czs",
+        "cheffe-call",
+        "copy",
+        "leitor-v8",
+        "hero"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-projeto-de-logo-catalogo-czs-inspirado-em-letreiro-forte-de-jornal-sem-vermelho-",
+      "createdAt": "2026-06-03T10:22:25.942Z",
+      "updatedAt": "2026-06-03T10:22:25.942Z",
+      "status": "concept-board-created",
+      "source": "chat",
+      "rawRequest": "queria um projeto de logo marca pra o nosso catalogo czs mais baseado no new york post; ajuste: sem vermelho, sem dourado, cores fortes e solidas, com representacao das 5 estrelas da constelacao de Cruzeiro do Sul",
+      "summary": "Projeto de logo Catálogo CZS inspirado em letreiro forte de jornal, sem vermelho/dourado, com 5 estrelas do Cruzeiro do Sul",
+      "normalizedTasks": [
+        "criar prancha HTML navegavel",
+        "criar SVG principal",
+        "usar cores solidas",
+        "representar 5 estrelas"
+      ],
+      "filesTouched": [
+        ".codex-temp/logo-catalogo-czs-post-20260603/index.html",
+        ".codex-temp/logo-catalogo-czs-post-20260603/catalogo-czs-southern-cross-concept.svg"
+      ],
+      "assetRefs": [
+        "catalogo-czs-logo-board-20260603"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "logo",
+        "marca",
+        "cruzeiro-do-sul",
+        "html",
+        "svg"
+      ],
+      "nextSteps": [
+        "Revisar visualmente o board e escolher se a rota principal vira vetor final"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-refazer-logo-catalogo-czs-com-mais-forca-em-azul-e-amarelo",
+      "createdAt": "2026-06-03T10:32:57.234Z",
+      "updatedAt": "2026-06-03T10:32:57.234Z",
+      "status": "logo-svg-created",
+      "source": "chat",
+      "rawRequest": "faça uma logo de descencia pra min",
+      "summary": "Refazer logo Catálogo CZS com mais força em azul e amarelo",
+      "normalizedTasks": [
+        "criar SVG principal mais forte",
+        "atualizar prancha HTML",
+        "usar azul e amarelo",
+        "manter 5 estrelas"
+      ],
+      "filesTouched": [
+        ".codex-temp/logo-catalogo-czs-post-20260603/catalogo-czs-logo-decente.svg",
+        ".codex-temp/logo-catalogo-czs-post-20260603/index.html"
+      ],
+      "assetRefs": [
+        "catalogo-czs-logo-decente-20260603"
+      ],
+      "tags": [
+        "catalogo-czs",
+        "logo",
+        "azul-amarelo",
+        "cruzeiro-do-sul"
+      ],
+      "nextSteps": [
+        "Usuario revisar a nova logo e pedir ajustes finos de proporcao",
+        "fonte ou estrelas"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-recortar-prancha-oficial-de-novas-logos-do-catalogo-czs-em-versoes-separadas-par",
+      "createdAt": "2026-06-03T11:07:52.011Z",
+      "updatedAt": "2026-06-03T11:07:52.011Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ja tenho as novas logos vc pode recorta / ta ai",
+      "summary": "Recortar prancha oficial de novas logos do Catálogo CZS em versões separadas para uso.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-criar-esquema-manual-para-criativos-de-instagram-e-facebook-baseados-na-nova-log",
+      "createdAt": "2026-06-03T11:11:00.752Z",
+      "updatedAt": "2026-06-03T11:11:00.752Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora crie um eschema para ser seguido na criação de criativos para o instgran e facebook baseados na logo",
+      "summary": "Criar esquema/manual para criativos de Instagram e Facebook baseados na nova logo Catálogo CZS.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-gerar-pngs-transparentes-das-novas-logos-do-catalogo-czs-para-uso-em-criativos-s",
+      "createdAt": "2026-06-03T12:54:24.885Z",
+      "updatedAt": "2026-06-03T12:54:24.885Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu quero essas logos sem fundo - ou seja png para uso",
+      "summary": "Gerar PNGs transparentes das novas logos do Catálogo CZS para uso em criativos, site e redes sociais.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-implementar-aylla-assistente-virtual-como-avatar-do-suporte-czs-com-poses-intera",
+      "createdAt": "2026-06-03T13:08:04.917Z",
+      "updatedAt": "2026-06-03T13:08:04.917Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "essa e a nossa assistente virtual eu quero que vc modele ela pra poder sentar em janelas interagir, muda possição e d dyuzer tipo a navi do link em zelda hey -  e ela tambem deve assumir o avart  no suporte do site -- faça com q isso funcione",
+      "summary": "Implementar Aylla Assistente Virtual como avatar do suporte CZS, com poses interativas, capacidade de sentar em janelas/elementos e comportamento tipo Navi para orientar o usuario.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-refazer-o-modelo-automatico-das-artes-fallback-de-noticias-baseado-na-nova-logo-",
+      "createdAt": "2026-06-03T13:08:35.399Z",
+      "updatedAt": "2026-06-03T13:08:35.399Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ele ta horrivel temos que fazer um modelo novo baseado na nossa logo e no nosso sistema de cores",
+      "summary": "Refazer o modelo automatico das artes fallback de noticias baseado na nova logo Catálogo CZS e no sistema de cores azul/amarelo/branco.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "scripts/re-rodada-dia-geral.js",
+        "assets/news-fallbacks"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "catalogo-czs",
+        "news-fallback",
+        "arte",
+        "logo",
+        "sistema-de-cores"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-criar-pop-up-comercial-do-czs-com-aylla-sentada-no-topo-quatro-cards-criativos-p",
+      "createdAt": "2026-06-03T16:18:21.853Z",
+      "updatedAt": "2026-06-03T16:18:21.853Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok , agora tente fazer o pop up com ela sentada em cima do card, pop up com area de card e cads dentro cada um com seu criativo - criação de sites --- apps --- divulgação  --- e automação  -- quero um pop up e criativos bonitos como esses que vc abre quando eu abro o codex pra anunciar algo",
+      "summary": "Criar pop-up comercial do CZS com Aylla sentada no topo, quatro cards criativos para criação de sites, apps, divulgação e automação, com visual bonito para anúncio.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-avaliar-introducao-de-chatbot-no-site-com-avatar-rayl-e-respostas-por-faq-em-esc",
+      "createdAt": "2026-06-03T19:19:34.180Z",
+      "updatedAt": "2026-06-03T19:19:34.180Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "chat bot - tem como introduzir um para o site, que tenha respostas atraves do avatar e perguntas frequentes?",
+      "summary": "Avaliar introducao de chatbot no site com avatar/RAyL e respostas por FAQ, em escopo pontual sem reabrir redesign amplo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-implementar-chatbot-da-rayl-no-site-com-faq-local-e-fallback-para-whatsapp-quand",
+      "createdAt": "2026-06-03T19:39:45.526Z",
+      "updatedAt": "2026-06-03T19:39:45.526Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok então faça e se n conseguir tira a duvida mande  a mensagem pro zap",
+      "summary": "Implementar chatbot da RAyL no site com FAQ local e fallback para WhatsApp quando a pergunta nao tiver resposta confiavel.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-corrigir-chatbot-link-do-whatsapp-deve-aparecer-apenas-quando-o-visitante-pedir-",
+      "createdAt": "2026-06-03T19:56:07.619Z",
+      "updatedAt": "2026-06-03T19:56:07.619Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nao o botão do zap e quando a pessoa pede pra falar com um ser humano ai ele indica o meu wwhats app e abre o link pra falar comigo ----",
+      "summary": "Corrigir chatbot: link do WhatsApp deve aparecer apenas quando o visitante pedir atendimento humano/falar com o dono, nao como fallback automatico para toda pergunta sem resposta.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-03-instagram-feed-only-captar-noticias-atuais-montar-no-minimo-100-cards-de-noticia",
+      "createdAt": "2026-06-03T20:51:37.734Z",
+      "updatedAt": "2026-06-03T20:51:37.734Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "OK PODE FAER A CAPTCAO DAS NOTICIAS E ENVIAR PRO FEED DO INSTGRAN - SO FEED NO MINIMO 100 NOTICIAS - MUSICA DE JORNAL - NADA DE NARRACAO -- COMEÇANDO COM GLOBO ATE O FINAL SO COM CRUZEIRO DO SUL - CRUZEIRO DO SUL EM DESTAQUE NA PARTE DE CIMA DO FEED",
+      "summary": "Instagram Feed-only: captar noticias atuais, montar no minimo 100 cards de noticias, sem narracao, com musica de jornal quando o editor permitir, publicar em ordem que deixe Cruzeiro do Sul no topo da grade.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-auditar-o-projeto-v8-para-encontrar-pontos-ficticios-placeholder-incluindo-playe",
+      "createdAt": "2026-06-04T00:17:36.777Z",
+      "updatedAt": "2026-06-04T00:17:36.777Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "pegue o projeto v8 e verifique tudo que e ficticio nele e faça ser real eram 11 pontos ficticios lembro de alguns ele nao tem player de video então n roda video o chefe call n funciona a galeria premium tambem n -0 ache os os outros resolva tudo e deixe funcional pra dpeois agente fazer o deployu",
+      "summary": "Auditar o projeto V8 para encontrar pontos ficticios/placeholder, incluindo player de video, Cheffe Call e galeria premium, corrigir o que for localmente funcional e deixar pronto para validacao pre-deploy.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-confirmacao-dos-pontos-v8-que-ainda-nao-podem-subir-como-se-fossem-reais-fechar-",
+      "createdAt": "2026-06-04T01:24:23.999Z",
+      "updatedAt": "2026-06-04T02:39:53.147Z",
+      "status": "completed-locally-validated",
+      "source": "chat",
+      "rawRequest": "Confirmado: V8 ainda tem areas de enfeite/incompletas antes do deploy: videos carregando mp4 como imagem, area de videos incompleta, galeria turistica de Cruzeiro do Sul incompleta, arquivo client-side sem endpoint definitivo, Cheffe Call/escritorios sem backend/fila persistente, chatbot RAyL FAQ/local sem IA/backend, anuncios sem campanha/rotacao/painel, redes sociais X/Facebook/LinkedIn/YouTube em breve por decisao do usuario, intro com autenticacao local simulada, subpaginas antigas nao absorvidas e deploy/merge Render pendente.",
+      "summary": "Confirmacao dos pontos V8 que ainda nao podem subir como se fossem reais; fechar ou proteger antes do deploy final.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Rodada v3 fechou localmente: video poster/frame, galeria final, revisar para Cheffe, IA Ollama local para RAyL/escritorios/Cheffe, compact toggle, intro/avatar e ajustes de copy/layout. Deploy/merge online ainda pendente."
+    },
+    {
+      "id": "2026-06-04-v8-ollama-offices-review-ui-final-pass",
+      "createdAt": "2026-06-04T02:39:53.147Z",
+      "updatedAt": "2026-06-04T02:39:53.147Z",
+      "status": "completed-validated",
+      "source": "chat",
+      "rawRequest": "Fazer tudo: corrigir erro mobile, avatar da intro, sumir logo antiga, modo compacto voltar para modo aberto, remover resumo nas copys, corrigir publicidade e respiro assunto/titulo, mostrar galeria, usar frame em videos, trocar ler em 1 minuto por ler, enviar para revisao via Cheffe Call com estado verde, remontar escritorios e ligar RAyL/escritorios/Cheffe Call ao Ollama local.",
+      "summary": "V8 final pass v3: UI/copy/mobile ajustados, galeria turistica reforcada, video poster/frame cache, revisao editorial integrada ao Cheffe Call, escritorios remountados com fluxo e IA local Ollama, RAyL/office/Cheffe endpoints validados.",
+      "normalizedTasks": [
+        "corrigir intro, logo antiga e corte da RAyL",
+        "ajustar modo compacto para permitir voltar ao modo aberto",
+        "remover resumo publico e simplificar CTAs de leitura",
+        "corrigir publicidade, respiro editorial e mobile hero",
+        "completar galeria turistica com mapa e organizacao visual",
+        "capturar frame de video e usar fallback quando necessario",
+        "enviar artigos para revisao via Cheffe Call com estado verde/brilhando",
+        "remontar escritorios com layout de fluxo e IA local",
+        "ligar RAyL, escritorios e Cheffe Call ao Ollama local"
+      ],
+      "filesTouched": [
+        "assets/v8-final/v8-merge-ready.js",
+        "assets/v8-final/v8-merge-ready.css",
+        "server.js",
+        "index.html",
+        "prototype-redesign-v8-portal-inteligente.html",
+        "prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html",
+        "data/ollama-chat-log.json",
+        "data/editorial-corrections-log.json"
+      ],
+      "assetRefs": [
+        "v8-ollama-offices-review-ui-final-pass-20260604"
+      ],
+      "tags": [
+        "czs-v8",
+        "ollama-local",
+        "rayl",
+        "cheffe-call",
+        "escritorios",
+        "galeria",
+        "video",
+        "mobile",
+        "pre-deploy"
+      ],
+      "nextSteps": [
+        "Antes do Render, repetir smoke no dominio online apos merge e decidir se campanhas reais entram em data/ad-campaigns.json.",
+        "Se o usuario quiser outro modelo Ollama, setar CZS_OLLAMA_MODEL; qwen2.5:3b ficou como default porque qwen3-hermes:4b respondeu vazio/thinking no smoke."
+      ],
+      "notes": "Validado com node --check, endpoints RAyL/escritorios/Cheffe Call, Edge CDP mobile/popup e npm run review:team. Cheffe respondeu fallback quando chamada em paralelo pesado, mas respondeu online isolada."
+    },
+    {
+      "id": "2026-06-04-correcoes-v8-pos-feedback-rayl-intro-preservada-e-melhor-recortada-intro-sem-lix",
+      "createdAt": "2026-06-04T03:00:07.022Z",
+      "updatedAt": "2026-06-04T03:00:07.022Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Corrigir os erros da rodada V8: melhorar recorte do sprite da RAyL na intro sem remover; tirar lixos antigos da intro como icone antigo e deixar transicao leve/bonita; preservar popup da RAyL sentada; explicar/acertar acesso aos escritorios, Cheffe Call e Ollama/captacao antes de deploy.",
+      "summary": "Correcoes V8 pos-feedback: RAyL intro preservada e melhor recortada, intro sem lixo antigo com transicao leve, popup sentado intocado, escritorios/Cheffe/Ollama revisados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-rayl-reativa-no-chatbot-pose-por-opcao-fala-curta-limitada-aos-botoes-faq-do-cha",
+      "createdAt": "2026-06-04T03:37:44.015Z",
+      "updatedAt": "2026-06-04T03:37:44.015Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "RAyL chatbot deve trocar de posição conforme o botão clicado, dizer com som 'Hey! Eu sou a RAyL' com voz jovem adulta educada e brincalhona/confiante, e falar apenas as opções existentes no chatbot.",
+      "summary": "RAyL reativa no chatbot: pose por opção, fala curta limitada aos botões/FAQ do chat e tom jovem adulto educado/brincalhão.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-rodada-de-correcoes-v8-pos-screenshots-ticker-arquivo-intro-mapa-servicos-tv-gal",
+      "createdAt": "2026-06-04T04:21:56.176Z",
+      "updatedAt": "2026-06-04T04:21:56.176Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Correcoes V8: ticker de manchetes entre busca e logo, compartilhar por WhatsApp/Instagram, refazer Ver arquivo no novo layout, intro com logomarca persistente e fluxo uma vez por sessao de navegador, destaque/espaco para avatar, loading descritivo, mapa do site com Cheffe Call vermelho/admin e servicos ao leitor com escritorios, remover acesso direto Cheffe Call no front, corrigir branco lateral, TV captura noticias/videos, galeria para fotos do Jurua, trocar PubPaid por pesquisas politicas/newsletter/apoio local, voz feminina sensual do chatbot, recorte da mao da RAyL, rodape com links funcionais e CTA Venha apostar vermelho com icone de sinuca.",
+      "summary": "Rodada de correcoes V8 pos-screenshots: ticker, arquivo, intro, mapa, servicos, TV/galeria, pesquisa/newsletter/apoio, chatbot/RAyL, rodape e CTA PubPaid.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-04-postar-o-maximo-pratico-hoje-no-instagram-feeds-e-stories-do-catalogo-czs-seguin",
+      "createdAt": "2026-06-04T05:18:46.242Z",
+      "updatedAt": "2026-06-04T05:52:24.667Z",
+      "status": "completed-posted",
+      "source": "chat",
+      "rawRequest": "bom faça as postagens dos feeds e dos storys no instgran hoje foi bem corrido o maximo que der",
+      "summary": "Postar o maximo pratico hoje no Instagram: feeds e stories do Catalogo CZS, seguindo regras de noticia/servico e evidencias.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".codex-temp/zap-round-20260604/manifest-stories.json",
+        ".codex-temp/zap-round-20260604/manifest-feed.json",
+        ".codex-temp/zap-round-20260604/index.html"
+      ],
+      "assetRefs": [
+        ".codex-temp/zap-round-20260604/ig-profile-final-after-feeds-stories.png",
+        ".codex-temp/zap-round-20260604/ig-today-20260604-final.png",
+        ".codex-temp/zap-round-20260604/ig-feed-02-clean-after-share.png",
+        ".codex-temp/zap-round-20260604/ig-feed-03-clean-after-share.png"
+      ],
+      "tags": [
+        "instagram",
+        "catalogo-czs",
+        "stories",
+        "feed",
+        "noticias"
+      ],
+      "nextSteps": [],
+      "notes": "Publicado via Instagram Android/BlueStacks: 8 stories e 3 feeds. Cards de feed 02/03 foram limpos antes da postagem por duplicacao de titulo. Perfil final confirmou 219 posts e story ativo."
+    },
+    {
+      "id": "2026-06-04-v8-public-agents-and-footer-teleport-correction",
+      "createdAt": "2026-06-04T05:45:33.909Z",
+      "updatedAt": "2026-06-04T05:45:33.909Z",
+      "status": "completed-validated",
+      "source": "chat",
+      "rawRequest": "Corrigir V8 atual: retirar voz da RAyL, restaurar logo anterior, mover Venha apostar acima de Info e aumentar botoes, transformar escritorios de agentes em acesso publico aos agentes autonomos sem expor sistema interno, e fazer o botao de rodape teletransportar direto para o mapa da pagina com modulos antes do infinite scroll.",
+      "summary": "V8 public agents and footer teleport correction",
+      "normalizedTasks": [
+        "retirar voz RayL",
+        "restaurar logo assets/logo-czs.svg",
+        "mover CTA Venha apostar acima de Info",
+        "ocultar escritorios internos no publico",
+        "criar gateway publico de agentes autonomos",
+        "reordenar modulos antes do feed continuo",
+        "fazer botao Rodape Mapa da pagina teleportar"
+      ],
+      "filesTouched": [
+        "assets/v8-final/v8-merge-ready.js",
+        "assets/v8-final/v8-merge-ready.css",
+        "index.html",
+        "prototype-redesign-v8-portal-inteligente.html"
+      ],
+      "assetRefs": [
+        "C:\\Users\\junio\\AppData\\Local\\Temp\\v8-final-agents-public-clip-final3.png",
+        "C:\\Users\\junio\\AppData\\Local\\Temp\\v8-final-footer-jump.png"
+      ],
+      "tags": [
+        "czs-v8",
+        "rayl",
+        "agentes-autonomos",
+        "rodape",
+        "infinite-scroll",
+        "pubpaid"
+      ],
+      "nextSteps": [],
+      "notes": "Validado com node --check, git diff --check, npm run review:team e CDP Edge: rodape visivel apos salto, feed continuo carregado, painel publico de agentes sem grade interna."
+    },
+    {
+      "id": "2026-06-04-continuar-rodada-instagram-czs-de-2026-06-04-com-mais-stories-e-feeds-evitando-d",
+      "createdAt": "2026-06-04T07:13:25.076Z",
+      "updatedAt": "2026-06-04T07:13:25.076Z",
+      "status": "completed-posted",
+      "source": "chat",
+      "rawRequest": "conitnue",
+      "summary": "Continuar rodada Instagram CZS de 2026-06-04 com mais stories e feeds, evitando duplicatas e itens fracos.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".codex-temp/zap-round-20260604-continue/manifest-stories-clean.json",
+        ".codex-temp/zap-round-20260604-continue/manifest-feed.json",
+        ".codex-temp/zap-round-20260604-continue/index.html"
+      ],
+      "assetRefs": [
+        ".codex-temp/zap-round-20260604/ig-profile-final-after-continue.png",
+        ".codex-temp/zap-round-20260604/ig-continue-20260604-final.png",
+        ".codex-temp/zap-round-20260604/ig-continue-feed-20260604-final.png"
+      ],
+      "tags": [
+        "instagram",
+        "catalogo-czs",
+        "stories",
+        "feed",
+        "noticias"
+      ],
+      "nextSteps": [],
+      "notes": "Continuação publicada via Instagram Android/BlueStacks: +5 stories limpos e +3 feeds. Perfil final confirmou 222 posts; story ativo."
+    },
+    {
+      "id": "2026-06-04-terminar-silenciosamente-rodada-instagram-czs-antes-do-usuario-dormir",
+      "createdAt": "2026-06-04T08:08:00.000Z",
+      "updatedAt": "2026-06-04T08:08:00.000Z",
+      "status": "completed-posted",
+      "source": "chat",
+      "rawRequest": "termine sem mae avis so va fazendo eu presciso dormi",
+      "summary": "Terminar silenciosamente a rodada Instagram CZS de 2026-06-04 antes do usuario dormir.",
+      "normalizedTasks": [
+        "recapturar noticias",
+        "selecionar itens limpos",
+        "publicar stories",
+        "publicar feeds",
+        "confirmar perfil final"
+      ],
+      "filesTouched": [
+        ".codex-temp/zap-round-20260604/generate_instagram_final.py",
+        ".codex-temp/zap-round-20260604/post_instagram_manifest_feed.ps1",
+        ".codex-temp/zap-round-20260604-final/manifest-stories-clean.json",
+        ".codex-temp/zap-round-20260604-final/manifest-feed.json",
+        ".codex-temp/zap-round-20260604-final/index.html"
+      ],
+      "assetRefs": [
+        ".codex-temp/zap-round-20260604/ig-profile-final-after-sleep-run.png",
+        ".codex-temp/zap-round-20260604/ig-final-20260604-final.png",
+        ".codex-temp/zap-round-20260604/ig-final-feed-20260604b-final.png"
+      ],
+      "tags": [
+        "instagram",
+        "catalogo-czs",
+        "stories",
+        "feed",
+        "noticias"
+      ],
+      "nextSteps": [],
+      "notes": "Rodada final publicada via Instagram Android/BlueStacks: +6 stories e +3 feeds. Total do dia nesta sequencia: 19 stories e 9 feeds. Perfil final confirmou 225 posts e story ativo."
+    },
+    {
+      "id": "2026-06-04-fechamento-v8-para-deploy-captacao-30-min-midia-foto-video-nas-materias-stories-",
+      "createdAt": "2026-06-04T12:56:32.939Z",
+      "updatedAt": "2026-06-04T12:56:32.939Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "depois dessas correções fazer deploy online, ligar módulos públicos, atualizar notícias, deixar captação de meia em meia hora, garantir fotos/vídeos em matérias, criar stories em bolinhas com preview de vídeo, limpar git/Render/projeto com segurança e preparar manutenção",
+      "summary": "Fechamento V8 para deploy: captação 30 min, mídia foto/vídeo nas matérias, stories em bolinhas e limpeza segura.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

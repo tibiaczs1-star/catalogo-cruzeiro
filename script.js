@@ -141,6 +141,33 @@ const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 360 : 520;
 const splashCinematicDurationMs = splashCompactViewportQuery.matches ? 760 : 1250;
 const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 700 : 900;
 const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 520 : 780;
+// ===== FEATURE FLAGS: control which improvements are active =====
+// URL params: ?intro=cinematic|preview|minimal|none  ?popup=hotnews|newsletter|cookie|darkmode|capture  ?layer=live|climate|region|quick|feedback
+const urlParams = new URLSearchParams(window.location.search);
+const introMode = urlParams.get("intro") || "cinematic"; // default: full cinematic
+const activePopups = (urlParams.get("popup") || "hotnews,newsletter,cookie,darkmode,capture").split(",");
+const activeLayers = (urlParams.get("layer") || "live,climate,region,quick,feedback").split(",");
+const popupDelay = 30000; // 30 seconds for newsletter
+const popupShownKey = "catalogo_popups_shown";
+
+// Intro modes
+const INTRO_MODES = {
+  cinematic: { duration: splashCinematicDurationMs, animations: true, headline: false },
+  preview: { duration: splashCinematicDurationMs, animations: true, headline: true },
+  minimal: { duration: 800, animations: true, headline: false },
+  none: { duration: 0, animations: false, headline: false }
+};
+const currentIntro = INTRO_MODES[introMode] || INTRO_MODES.cinematic;
+
+// Apply intro mode class to body
+document.body.dataset.introMode = introMode;
+
+// Apply popup flags
+activePopups.forEach(p => document.body.dataset[`popup${p.charAt(0).toUpperCase()+p.slice(1)}`] = "on");
+
+// Apply layer flags
+activeLayers.forEach(l => document.body.dataset[`layer${l.charAt(0).toUpperCase()+l.slice(1)}`] = "on");
+
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 320 : 460;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 520 : 760;
 const mobileFirstFoldMaximumMs = 3000;
@@ -3947,10 +3974,11 @@ const buildCommunityReportCard = (report = {}) => {
   const time = document.createElement("time");
 
   article.className = "community-report-card";
+  const neighborhood = String(report.neighborhood || "").trim() || "Bairro não informado";
   badge.textContent = "em conferência";
-  title.textContent = report.neighborhood || "Bairro não informado";
+  title.textContent = neighborhood;
   message.textContent = report.message || "";
-  footer.textContent = `${report.name || "Morador local"} • conversa pública`;
+  footer.textContent = `${report.name || "Morador local"} • relato da comunidade`;
   if (report.createdAt) {
     time.dateTime = report.createdAt;
     time.textContent = formatCommunityMessageTime(report.createdAt);
@@ -4032,7 +4060,7 @@ const submitCommunityReport = async (event) => {
   const payload = {
     name: String(formData.get("name") || "").trim(),
     contact: String(formData.get("contact") || "").trim(),
-    neighborhood: String(formData.get("neighborhood") || "").trim(),
+    neighborhood: String(formData.get("neighborhood") || "Bairro não informado").trim() || "Bairro não informado",
     message,
     topic: "Mensagem comunitária",
     sourcePage: window.location.pathname,

@@ -1,12 +1,156 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-24T01:05:50.049Z",
+  "updatedAt": "2026-06-04T03:12:17.199Z",
   "offices": {
     "editorial": {
       "inventory": []
     }
   },
-  "actions": [],
+  "actions": [
+    {
+      "id": "work-mpyx68traidaiv",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-respondido",
+      "title": "IA local da Cheffe",
+      "detail": "Revisar conteúdo da página inicial prioritariamente.",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T03:12:17.199Z"
+    },
+    {
+      "id": "work-mpyx67k3p815rd",
+      "officeKey": "redacao",
+      "officeLabel": "Redação",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-chat",
+      "status": "ollama-respondido",
+      "title": "IA local: Redação",
+      "detail": "Proximo passo é revisar conteúdo e estrutura da home. Cuidado para manter consistência visual e funcionalidade.",
+      "source": "v8-office-ai",
+      "createdAt": "2026-06-04T03:12:15.555Z"
+    },
+    {
+      "id": "work-mpyx3vxvcgbgd1",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-respondido",
+      "title": "IA local da Cheffe",
+      "detail": "Revisar conteúdo para página inicial Próximo passo: Atualizar página inicial com feedbacks.",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T03:10:27.187Z"
+    },
+    {
+      "id": "work-mpyx3qpd3e3lka",
+      "officeKey": "redacao",
+      "officeLabel": "Redação",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-chat",
+      "status": "ollama-respondido",
+      "title": "IA local: Redação",
+      "detail": "Proximo passo é revisar o conteúdo e layout da home. Cuidado com a consistência visual e funcionalidade.",
+      "source": "v8-office-ai",
+      "createdAt": "2026-06-04T03:10:20.401Z"
+    },
+    {
+      "id": "work-mpyx2jas6z6pnj",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-fallback",
+      "title": "IA local da Cheffe",
+      "detail": "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar. (Ollama local demorou para responder.)",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T03:09:24.148Z"
+    },
+    {
+      "id": "work-mpyx2ixp6e270d",
+      "officeKey": "redacao",
+      "officeLabel": "Redação",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-chat",
+      "status": "ollama-respondido",
+      "title": "IA local: Redação",
+      "detail": "O próximo passo para revisar a home do seu site local seria começar a analisar as partes específicas da página que você deseja revisar, como conteúdo, design e funcionalidade. Em seguida, você pode iniciar uma reavaliação criteriosa dessas áreas, considerando feedbacks de usuários ou testes A/B se necessário. Depois disso, o próximo passo seria a aplicação das correções identificadas. Isso poderia envolver alterações no texto, ajustes na estrutura do site, melhorias no design visual ou implementações de novas funcionalidades. Por fim, é importante testar as mudanças para garantir que tudo está funcionando conforme o esperado e sem erros. Após a validação dessas correções, você pode finalizar a revisão da home e fazer qualquer ajuste necessário antes de publicá-la. Lembre-se de manter uma abordagem iterativa neste processo, pois é provável que você precise voltar para algumas etapas se identificar novos problemas ou oportunidades.",
+      "source": "v8-office-ai",
+      "createdAt": "2026-06-04T03:09:23.677Z"
+    },
+    {
+      "id": "work-mpyvykkhn12xlu",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-respondido",
+      "title": "IA local da Cheffe",
+      "detail": "A revisão do artigo de teste deve ser iniciada imediatamente. Em seguida, será necessário preparar a pauta para o próximo round de revisão e garantir que todas as correções sugeridas sejam implementadas. Após isso, o próximo passo será publicar o artigo conforme previsto no cronograma.",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T02:38:19.553Z"
+    },
+    {
+      "id": "work-mpyvy8qmsa04fr",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-fallback",
+      "title": "IA local da Cheffe",
+      "detail": "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar. (Ollama local demorou para responder.)",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T02:38:04.222Z"
+    },
+    {
+      "id": "work-mpyvy2w1ed3jg2",
+      "officeKey": "apuracao",
+      "officeLabel": "apuracao",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-chat",
+      "status": "ollama-respondido",
+      "title": "IA local: apuracao",
+      "detail": "Prioridade: Organizar uma pauta curta sobre a galeria turística é essencial para garantir que os visitantes tenham acesso rápido e fácil aos principais pontos de interesse da cidade ou região. Próximo passo: 1. Identificar os principais atrativos turísticos, como museus, parques, monumentos históricos, restaurantes famosos, bares noturnos, etc. 2. Organizar esses locais em uma sequência lógica de visita, considerando a localização e o tempo necessário para cada visita. 3. Criar um cronograma detalhado que inclua horários de funcionamento dos lugares turísticos. Cuidado: 1. Garantir que todos os pontos turísticos listados estejam atualizados e acessíveis. 2. Considerar a disponibilidade de transporte público para cada local, se necessário. 3. Estabelecer um limite no número de visitas por dia para evitar congestionamentos excessivos. 4. Incluir informações sobre horários de fechamento dos lugares turísticos para evitar surpresas indesejáveis. 5. Considerar a disponibilidade de restaurantes e outros serviços locais para o alívio do estresse após uma longa visita. Lembre-se, a pauta curta deve ser fácil de entender e acessível para os visitantes, garantindo que eles possam aproveitar ",
+      "source": "v8-office-ai",
+      "createdAt": "2026-06-04T02:37:56.641Z"
+    },
+    {
+      "id": "work-mpyvsvka7h1cb9",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-respondido",
+      "title": "IA local da Cheffe",
+      "detail": "Pauta: Revisão dos artigos enviados para revisão. Revisão em andamento. A seguir estão os próximos passos: 1. **Fonte**: Consultar o arquivo JSON localizado no contexto fornecido. 2. **Artigo a ser revisado**: \"Teste\". 3. **Status atual**: Enviado para revisão. **Próximos Passos:** - **Revisar Artigo**: Realizar a revisão do artigo \"Teste\" conforme as regras estabelecidas. - **Atualizar Status**: Após a revisão, atualizar o status do artigo no JSON localizado no contexto fornecido. Serviços: - Suporte para revisão de textos - Gerenciamento de fluxo de trabalho Comercial: - Oferecer suporte personalizado e eficaz para otimização da produtividade na revisão de artigos.",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T02:33:53.866Z"
+    },
+    {
+      "id": "work-mpyvsn9j303nx3",
+      "officeKey": "redacao",
+      "officeLabel": "Redação",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-chat",
+      "status": "ollama-respondido",
+      "title": "IA local: Redação",
+      "detail": "Priorize a criação da capa do seu site local. Abra o editor de conteúdo ou design gráfico do seu sistema de gestão de conteúdo (CMS) e comece a trabalhar na imagem principal que será exibida no topo da página inicial. Certifique-se de que ela é atraente, informativa e representa bem o seu negócio. Próximo passo: Use uma foto ou logotipo profissional para destacar sua marca. Selecione um texto claro e apropriado para descrever os serviços ou produtos oferecidos. Ajuste as cores e o tamanho da fonte para garantir que tudo esteja bem balanceado. Cuidado: Certifique-se de que a capa é responsiva, adaptando-se perfeitamente tanto em dispositivos móveis quanto em desktops. Além disso, certifique-se de que todas as informações são atualizadas e precisas para fornecer uma boa experiência ao usuário.",
+      "source": "v8-office-ai",
+      "createdAt": "2026-06-04T02:33:43.111Z"
+    }
+  ],
   "supportRequests": [],
   "terminalPasses": [],
   "customEnvironments": []

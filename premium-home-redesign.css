@@ -2682,7 +2682,7 @@ body.editorial-home .icon-founder {
 }
 
 body.editorial-home .masthead {
-  grid-template-columns: minmax(500px, 1fr) minmax(280px, 330px) !important;
+  grid-template-columns: minmax(440px, 1fr) minmax(420px, 520px) !important;
   align-items: center !important;
   width: min(1456px, calc(100% - 68px)) !important;
   min-height: 114px !important;
@@ -2787,7 +2787,7 @@ body.editorial-home .brand small {
 
 body.editorial-home .header-search {
   width: 100% !important;
-  max-width: 330px !important;
+  max-width: 520px !important;
   justify-self: end;
   min-height: 48px !important;
   border-color: rgba(155, 192, 222, 0.32) !important;
@@ -4082,7 +4082,7 @@ body.editorial-home .editorial-footer .footer-bottom a {
   body.editorial-home .masthead {
     width: 100% !important;
     max-width: none !important;
-    grid-template-columns: minmax(430px, 1fr) minmax(280px, 330px) !important;
+    grid-template-columns: minmax(380px, 1fr) minmax(420px, 520px) !important;
   }
 
   body.editorial-home .header-services-strip {

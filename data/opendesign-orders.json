@@ -18,5 +18,52 @@
     "hierarchy": "ChatGPT/Codex -> Hermes -> OpenDesign Desk -> design/copy/review workers",
     "primaryRule": "Codex e o diretor final; workers nao publicam sozinhos.",
     "outputPreference": "HTML navegavel quando visual; Markdown compacto para especificacao ou catalogo."
+  },
+  {
+    "id": "2026-06-02-czs-homepage-v4-jurua-premium-cinematic-news-msn-style-infinite-editorial-feed-s",
+    "createdAt": "2026-06-02T23:10:45.508Z",
+    "updatedAt": "2026-06-02T23:10:45.508Z",
+    "status": "queued",
+    "source": "hermes-opendesign-bridge",
+    "request": "CZS homepage v4: Juruá Premium Cinematic News, MSN-style infinite editorial feed, super intro, custom SVG/icon imagery, OpenDesign references, mobile/desktop performance, no deploy before Junior approval; image fallback uses ChatGPT Images in Chrome profile Aylla Plus.",
+    "kind": "homepage-redesign",
+    "destination": "prototype",
+    "tags": [
+      "czs",
+      "msn",
+      "infinite-feed",
+      "premium-cinematic"
+    ],
+    "hierarchy": "ChatGPT/Codex -> Hermes -> OpenDesign Desk -> design/copy/review workers",
+    "primaryRule": "Codex e o diretor final; workers nao publicam sozinhos.",
+    "outputPreference": "HTML navegavel quando visual; Markdown compacto para especificacao ou catalogo."
+  },
+  {
+    "id": "2026-06-02-estudo-concluido-de-refero-styles-impeccable-emil-kowalski-skill-nexu-open-desig",
+    "createdAt": "2026-06-02T23:51:03.444Z",
+    "updatedAt": "2026-06-02T23:59:30.000Z",
+    "status": "ready-tool-pack",
+    "source": "hermes-opendesign-bridge",
+    "request": "Estudo concluido de Refero Styles, Impeccable, Emil Kowalski skill, nexu Open Design, Kittl, Design Spells, Svgl, Cult UI e Untitled UI. Aplicar no CZS como DESIGN.md + refinamento do prototipo: tipografia premium, feed infinito editorial MSN, icones SVG proprios, motion/parallax disciplinado, mobile/desktop, auditoria Impeccable antes de Render.",
+    "kind": "resource-study",
+    "destination": "CZS DESIGN.md / prototype V4 refinement",
+    "tags": [
+      "czs",
+      "opendesign",
+      "impeccable",
+      "refero",
+      "design-spells",
+      "icons",
+      "motion"
+    ],
+    "hierarchy": "ChatGPT/Codex -> Hermes -> OpenDesign Desk -> design/copy/review workers",
+    "primaryRule": "Codex e o diretor final; workers nao publicam sozinhos.",
+    "outputPreference": "HTML navegavel quando visual; Markdown compacto para especificacao ou catalogo.",
+    "resourcesPack": "vendor/opendesign-tools/",
+    "activeDesignInstruction": "DESIGN.md",
+    "detailedInstruction": "docs/design-refs/OPENDESIGN-TOOLS-DOWNLOADED-2026-06-02.md",
+    "auditReport": "docs/design-refs/impeccable-detect-prototype-v4.txt",
+    "nextAction": "Usar as ferramentas clonadas em vendor/opendesign-tools para criar prototype-redesign-v5-opendesign.html corrigindo os 28 anti-patterns do V4; sem deploy antes da aprovacao visual do Junior.",
+    "toolManifest": "vendor/opendesign-tools/TOOL_PACK_MANIFEST.json"
   }
 ]

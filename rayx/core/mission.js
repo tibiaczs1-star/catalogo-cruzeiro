@@ -160,7 +160,9 @@ function runRayxJob(job) {
 function chooseOllamaModel(doctorJson) {
   const models = doctorJson?.ollama?.models || [];
   const names = models.map((model) => model.name).filter(Boolean);
-  return names.find((name) => name.includes("llama3.2:3b")) ||
+  return names.find((name) => name.includes("qwen3-hermes:4b")) ||
+    names.find((name) => name.includes("qwen3:4b")) ||
+    names.find((name) => name.includes("llama3.2:3b")) ||
     names.find((name) => name.includes("qwen2.5:3b")) ||
     names.find((name) => !name.includes("coder")) ||
     names[0] ||

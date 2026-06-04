@@ -1,10 +1,22 @@
 # Handoff
 
-Updated: 2026-06-02T14:43:42.394Z
+Updated: 2026-06-04T13:12:18.714Z
 
-CZS social retomado e publicado: WhatsApp Catálogo CZS recebeu 8 cards novos de notícias; Instagram recebeu 8 stories novos de notícias (13-20) com rota corrigida via StoryShareHandlerActivity/SEND. Evidências em news-latest-batch-cards-posted.png e ig-latest-news-20260602-v3-final.png. Fila 500 regenerada.
+Deploy V8 em fechamento: Render configurado para captação automática de notícias a cada 30 minutos, integridade de artigos e topic feed ligados, captura manual final atualizada com 292 itens captados e 131 de hoje. Home V8 ganhou stories em bolinhas com preview de vídeo e viewer vertical; matérias agora priorizam vídeo quando a fonte traz media de vídeo e usam foto como poster/fallback. Validações locais passaram: node --check nos arquivos críticos, capture-latest-news, npm run review:team totalIssues=0 e Playwright smoke desktop/mobile com screenshots.
 
 ## Next
 
-- Próximo lote: usar instagram-500-content-queue.json + social-posting-progress.json; validar visual antes de publicar; se story via ADD_TO_STORY travar
-- usar android.intent.action.SEND com com.instagram.share.handleractivity.StoryShareHandlerActivity.
+- Nao apagar material amplo automaticamente: vendor/tools/.automation/assets antigos precisam de auditoria antes de remover
+- Depois do deploy
+- conferir URL publica do Render e logs se o auto-deploy nao iniciar
+
+## Files In Focus
+
+- render.yaml
+- assets/v8-final/v8-merge-ready.js
+- assets/v8-final/v8-merge-ready.css
+- noticia.js
+
+## Related Orders
+
+- 2026-06-04-fechamento-v8-para-deploy-captacao-30-min-midia-foto-video-nas-materias-stories-

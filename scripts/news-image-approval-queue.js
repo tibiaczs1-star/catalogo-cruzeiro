@@ -444,7 +444,7 @@ function updateArticleList(items, decision) {
       next.imageFocus = decision.focus || "center 50%";
       next.imageReviewStatus = "fallback-approved";
       if (isFallbackImage(next.imageUrl || next.feedImageUrl || next.sourceImageUrl)) {
-        next.imageCredit = next.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul";
+        next.imageCredit = next.imageCredit || "Foto editorial local do banco CZS";
       }
     } else if (decision.action === "replace-image" && decision.replacementImageUrl) {
       next.imageUrl = decision.replacementImageUrl;

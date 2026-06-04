@@ -1,15 +1,15 @@
 {
-  "ok": false,
+  "ok": true,
   "trigger": "once",
-  "startedAt": "2026-06-02T11:44:00.400Z",
-  "finishedAt": "2026-06-02T11:44:04.400Z",
+  "startedAt": "2026-06-04T13:07:38.941Z",
+  "finishedAt": "2026-06-04T13:07:41.855Z",
   "actions": [
     {
       "id": "news-editorial-body",
       "agentGroup": "copy/editor/review/sources",
       "status": "done",
-      "changedRuntimeItems": 0,
-      "changedStaticItems": 0,
+      "changedRuntimeItems": 68,
+      "changedStaticItems": 39,
       "detail": "Garantiu body editorial proprio em noticias captadas e removeu repeticao entre resumo e corpo."
     },
     {
@@ -23,8 +23,8 @@
     {
       "id": "review-team",
       "agentGroup": "equipe local de revisao",
-      "status": "failed",
-      "output": "{\"reportJson\":\".codex-temp/review-team/latest-report.json\",\"reportMd\":\".codex-temp/review-team/latest-report.md\",\"filesAudited\":188,\"totalIssues\":5}"
+      "status": "done",
+      "output": "{\"reportJson\":\".codex-temp/review-team/latest-report.json\",\"reportMd\":\".codex-temp/review-team/latest-report.md\",\"filesAudited\":210,\"totalIssues\":0}"
     }
   ]
 }

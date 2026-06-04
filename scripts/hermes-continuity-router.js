@@ -18,7 +18,7 @@ const HERMES_EXE_CANDIDATES = [
   "hermes"
 ];
 
-const DEFAULT_SUPPORT_COUNT = 4;
+const DEFAULT_SUPPORT_COUNT = 2;
 const DEFAULT_TIMEOUT_MS = 90000;
 const EXACT = "OK-HERMES-CONTINUITY";
 const MINIMAX_ID = "minimax-m3-cloud";
@@ -203,9 +203,9 @@ function buildCandidates(options) {
     },
     {
       id: "minimax-m27-fast",
-      role: "fast-codex-substitute",
-      provider: "custom:local-ollama",
-      model: "minimax-m2.7",
+      role: "fast-codex-substitute-max-speed",
+      provider: "nvidia",
+      model: "minimaxai/minimax-m2.7",
       lane: "replacement",
       authority: "substitute-when-codex-stops",
       priority: 20,
@@ -219,9 +219,7 @@ function buildCandidates(options) {
       model: "gemma3:4b",
       lane: "support",
       authority: "worker-only",
-      priority: 30,
-      tokenSaver: true,
-      specialSupport: true
+      priority: 80
     },
     {
       id: "llama3-2-3b",
@@ -231,6 +229,16 @@ function buildCandidates(options) {
       lane: "support",
       authority: "fallback-only",
       priority: 80
+    },
+    {
+      id: "qwen3-4b",
+      role: "local-qwen-reasoning-worker",
+      provider: "custom:local-ollama",
+      model: "qwen3-hermes:4b",
+      lane: "support",
+      authority: "worker-only",
+      priority: 75,
+      tokenSaver: true
     },
     {
       id: "qwen2-5-coder-3b",
@@ -253,18 +261,16 @@ function buildCandidates(options) {
         model: "gemini-2.5-flash-lite",
         lane: "support",
         authority: "fallback-only",
-        priority: 90
+        priority: 100
       },
       {
         id: "nvidia-nemotron-v15",
-        role: "rescue-cloud-support-worker",
+        role: "rescue-cloud-fallback-worker",
         provider: "nvidia",
         model: "nvidia/llama-3.3-nemotron-super-49b-v1.5",
         lane: "support",
-        authority: "worker-only",
-        priority: 40,
-        tokenSaver: true,
-        specialSupport: true
+        authority: "fallback-only",
+        priority: 110
       }
     );
   }
@@ -352,7 +358,7 @@ function chooseContinuity(results, supportCount) {
     substituteAuthority: codex && codex.ok ? null : healthyReplacement[0]?.id || null,
     codexHealthy: Boolean(codex && codex.ok),
     reauthRequired: Boolean(codex && !codex.ok && codex.failure === "auth"),
-    fastestSupport: [...healthyPrioritySupport, ...healthyFallback].sort((a, b) => a.elapsedMs - b.elapsedMs)[0]?.id || null,
+    fastestSupport: healthyPrioritySupport.sort((a, b) => a.elapsedMs - b.elapsedMs)[0]?.id || null,
     warmSupport: warmSupport.slice(0, supportCount),
     tokenSavers: healthyPrioritySupport,
     fallbacks: healthyFallback,
@@ -373,7 +379,7 @@ function renderMarkdown(report) {
     : "None";
 
   const alert = report.selection.reauthRequired
-    ? "\n## Alert\n\nChatGPT/Codex stopped because authentication failed. Reauthenticate with `hermes auth add openai-codex`, then rerun this router.\n"
+    ? "\n## Alert\n\nChatGPT/Codex is the front door and is not healthy because authentication failed. Tell the user: `me autentique`; then run `hermes auth add openai-codex` and rerun this router.\n"
     : "";
 
   return [
@@ -399,9 +405,9 @@ function renderMarkdown(report) {
     "## Rule",
     "",
     "- ChatGPT/Codex is the final authority when healthy.",
-    "- If ChatGPT/Codex stops, MiniMax M3 cloud is the first substitute and MiniMax M2.7 fast is the second substitute.",
-    "- When ChatGPT/Codex is healthy, MiniMax workers can run delegated multitasks to save Codex tokens.",
-    "- Gemma and Nemotron are special support workers; the other healthy models are fallback.",
+    "- If ChatGPT/Codex stops, MiniMax M3 cloud is the first substitute and MiniMax M2.7 Max Speed is the second substitute.",
+    "- When ChatGPT/Codex is healthy, only MiniMax workers stay warm by default; all other models are fallback.",
+    "- Gemma, Gemini, Llama, Nemotron, and other healthy models are fallback only.",
     "- Qwen Coder remains code-only and never becomes the normal chat authority.",
     ""
   ].join("\n");
@@ -456,7 +462,7 @@ function runOnce(args) {
   writeJson(path.join(HERMES_STATE_DIR, "hermes_continuity_router_latest.json"), report);
 
   if (selection.reauthRequired) {
-    console.log("ALERTA: ChatGPT/Codex parou por autenticacao. Rode: hermes auth add openai-codex");
+    console.log("ALERTA: ChatGPT/Codex parou por autenticacao. Diga ao usuario: me autentique. Depois rode: hermes auth add openai-codex");
   }
 
   console.log(`authority=${selection.authority || "none"}`);

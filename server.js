@@ -162,11 +162,11 @@ const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
   : 30 * 60 * 1000;
 const TOPIC_FEED_AUTO_REFRESH_INTERVAL_INPUT = Number(
-  process.env.TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS || 20 * 60 * 1000
+  process.env.TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS || 30 * 60 * 1000
 );
 const TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS = Number.isFinite(TOPIC_FEED_AUTO_REFRESH_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, TOPIC_FEED_AUTO_REFRESH_INTERVAL_INPUT)
-  : 20 * 60 * 1000;
+  : 30 * 60 * 1000;
 const realAgentsAutoRunState = {
   running: false,
   timer: null,
@@ -234,6 +234,11 @@ const VR_RENTAL_LEADS_FILE = path.join(DATA_DIR, "vr-rental-leads.json");
 const VISITS_FILE = path.join(DATA_DIR, "visits.json");
 const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
 const COMMUNITY_REPORTS_FILE = path.join(DATA_DIR, "community-reports.json");
+const AD_CAMPAIGNS_FILE = path.join(DATA_DIR, "ad-campaigns.json");
+const AD_EVENTS_FILE = path.join(DATA_DIR, "ad-events.json");
+const COMMERCIAL_LEADS_FILE = path.join(DATA_DIR, "commercial-leads.json");
+const RAYL_CHAT_LOG_FILE = path.join(DATA_DIR, "rayl-chat-log.json");
+const OLLAMA_CHAT_LOG_FILE = path.join(DATA_DIR, "ollama-chat-log.json");
 const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
 const ACRE_2026_POLL_SETTINGS_FILE = path.join(DATA_DIR, "acre-2026-poll-settings.json");
 const ACRE_2026_POLL_EXTENSION_SETTINGS = {
@@ -269,6 +274,11 @@ const LEGACY_PUBPAID_WALLETS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidW
 const SITE_URL = String(process.env.SITE_URL || "https://catalogo-cruzeiro-web.onrender.com")
   .trim()
   .replace(/\/+$/, "");
+const OLLAMA_BASE_URL = String(process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434")
+  .trim()
+  .replace(/\/+$/, "");
+const OLLAMA_MODEL = String(process.env.CZS_OLLAMA_MODEL || process.env.OLLAMA_MODEL || "qwen2.5:3b").trim();
+const OLLAMA_TIMEOUT_MS = Math.max(1000, Math.min(45000, Number(process.env.CZS_OLLAMA_TIMEOUT_MS || 30000)));
 const WHATSAPP_CHAT_ENABLED = String(process.env.WHATSAPP_CHAT_ENABLED || "").trim().toLowerCase() === "true";
 const WHATSAPP_CLOUD_TOKEN = String(process.env.WHATSAPP_CLOUD_TOKEN || "").trim();
 const WHATSAPP_CLOUD_PHONE_NUMBER_ID = String(process.env.WHATSAPP_CLOUD_PHONE_NUMBER_ID || "").trim();
@@ -732,7 +742,7 @@ const RSS_SOURCES = (() => {
 })();
 const NEWS_REFRESH_INTERVAL_MS = Math.max(
   1000 * 60 * 5,
-  Number(process.env.NEWS_REFRESH_INTERVAL_MS || 1000 * 60 * 15)
+  Number(process.env.NEWS_REFRESH_INTERVAL_MS || 1000 * 60 * 30)
 );
 const TOPIC_FEED_TTL_MS = Math.max(
   1000 * 60 * 5,
@@ -9528,6 +9538,573 @@ function recordCommunityReport(body = {}, req = null) {
   };
 }
 
+function defaultAdCampaigns() {
+  return [
+    {
+      id: "topo-premium-czs",
+      title: "Topo premium",
+      slot: "hero",
+      size: "16:9",
+      text: "Destaque para marcas locais no topo editorial do CZS.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 90
+    },
+    {
+      id: "card-patrocinado-feed",
+      title: "Card patrocinado",
+      slot: "feed",
+      size: "1:1",
+      text: "Card para feed, grupos e redes sociais com foto real e copy curta.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 80
+    },
+    {
+      id: "video-vertical-czs",
+      title: "Video vertical",
+      slot: "video",
+      size: "9:16",
+      text: "Formato para stories, reels e secao de videos do CZS.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 70
+    },
+    {
+      id: "site-app-automacao",
+      title: "Site, app ou automacao",
+      slot: "servico-digital",
+      size: "projeto",
+      text: "Atendimento comercial para criar presenca digital e automacao.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 60
+    }
+  ];
+}
+
+function normalizeAdCampaign(item = {}) {
+  return {
+    id: cleanShortText(item.id || createRecordId("ad"), 90),
+    title: cleanShortText(item.title || item.name || "Campanha local", 120),
+    slot: cleanShortText(item.slot || item.format || "feed", 80),
+    size: cleanShortText(item.size || item.dimension || "sob medida", 80),
+    text: cleanShortText(item.text || item.description || item.summary || "", 260),
+    href: cleanShortText(item.href || item.url || "divulgue.html", 260),
+    status: cleanShortText(item.status || "active", 40).toLowerCase(),
+    startsAt: cleanShortText(item.startsAt || item.startAt || "", 80),
+    endsAt: cleanShortText(item.endsAt || item.endAt || "", 80),
+    priority: Number(item.priority || 0),
+    source: cleanShortText(item.source || "backend", 80)
+  };
+}
+
+function isAdCampaignActive(item = {}, now = Date.now()) {
+  const status = normalizeText(item.status || "active");
+  if (status && !["active", "ativo", "live", "publicado"].includes(status)) return false;
+  const startsAt = Date.parse(item.startsAt || "");
+  const endsAt = Date.parse(item.endsAt || "");
+  if (Number.isFinite(startsAt) && startsAt > now) return false;
+  if (Number.isFinite(endsAt) && endsAt < now) return false;
+  return true;
+}
+
+function getAdCampaignsPayload(options = {}) {
+  const slot = normalizeText(options.slot || "");
+  const safeLimit = Math.max(1, Math.min(30, Number(options.limit) || 8));
+  const stored = normalizeJsonArrayPayload(readJson(AD_CAMPAIGNS_FILE, []));
+  const base = stored.length ? stored : defaultAdCampaigns();
+  const now = Date.now();
+  const items = base
+    .map(normalizeAdCampaign)
+    .filter((item) => isAdCampaignActive(item, now))
+    .filter((item) => !slot || slot === "all" || normalizeText(item.slot) === slot)
+    .sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0))
+    .slice(0, safeLimit);
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    source: stored.length ? "data-dir" : "default-local-campaigns",
+    total: items.length,
+    items
+  };
+}
+
+function recordAdEvent(body = {}, req = null) {
+  const tracking = req ? buildTrackingMeta(req, body) : {};
+  const eventType = cleanShortText(body.eventType || body.type || "click", 40).toLowerCase();
+  const event = {
+    id: createRecordId("ade"),
+    at: new Date().toISOString(),
+    eventType,
+    campaignId: cleanShortText(body.campaignId || body.id || "", 120),
+    title: cleanShortText(body.title || body.campaignTitle || "", 160),
+    slot: cleanShortText(body.slot || "", 80),
+    page: cleanShortText(body.page || body.sourcePage || tracking.pagePath || "/", 260),
+    referrer: tracking.referrer,
+    browser: tracking.browser,
+    deviceType: tracking.deviceType,
+    city: tracking.city,
+    country: tracking.country
+  };
+  const events = normalizeJsonArrayPayload(readJson(AD_EVENTS_FILE, []));
+  writeJson(AD_EVENTS_FILE, events.concat(event).slice(-1000));
+  return { ok: true, status: 201, item: event };
+}
+
+function recordCommercialLead(body = {}, req = null) {
+  const tracking = req ? buildTrackingMeta(req, body) : {};
+  const contact = cleanShortText(body.contact || body.phone || body.whatsapp || body.email, 160);
+  const phoneDigits = cleanPhoneDigits(contact);
+  const email = contact.includes("@") ? cleanEmail(contact) : cleanEmail(body.email || "");
+
+  if (phoneDigits.length < 8 && !email) {
+    return {
+      ok: false,
+      status: 400,
+      error: "Informe WhatsApp ou e-mail para retorno comercial."
+    };
+  }
+
+  const lead = {
+    id: createRecordId("adl"),
+    createdAt: new Date().toISOString(),
+    name: cleanShortText(body.name || body.company || "Cliente comercial", 120),
+    contact,
+    phone: cleanPhone(contact || body.phone || body.whatsapp),
+    email,
+    format: cleanShortText(body.format || body.plan || "campanha-local", 120),
+    message: cleanShortText(body.message || body.details || "", 800),
+    status: "recebido",
+    sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260),
+    referrer: tracking.referrer,
+    browser: tracking.browser,
+    deviceType: tracking.deviceType,
+    city: tracking.city,
+    country: tracking.country
+  };
+  const leads = normalizeJsonArrayPayload(readJson(COMMERCIAL_LEADS_FILE, []));
+  writeJson(COMMERCIAL_LEADS_FILE, leads.concat(lead).slice(-500));
+
+  appendOfficeOrder({
+    id: createRecordId("ord"),
+    from: "Comercial CZS",
+    to: "Codex CEO + Comercial + Design",
+    priority: "alta",
+    message: `Lead comercial recebido: ${lead.format} para ${lead.name}. Contato: ${lead.contact}.`,
+    ceoReply:
+      "Recebido. Registrar proposta, confirmar formato, prazo e canal de veiculacao antes de publicar campanha.",
+    status: "lead-comercial-recebido",
+    hierarchy: "Site V8 -> Comercial -> Codex CEO -> Design/Redacao",
+    createdAt: lead.createdAt
+  });
+
+  return {
+    ok: true,
+    status: 201,
+    item: lead,
+    message: "Pedido comercial registrado."
+  };
+}
+
+function raylIntentForQuestion(question = "") {
+  const text = normalizeText(question);
+  const intents = [
+    {
+      id: "anunciar",
+      routeKey: "",
+      href: "divulgue.html",
+      pose: "present-both",
+      title: "Como anunciar",
+      words: ["anunciar", "anuncio", "divulgar", "propaganda", "publicidade", "vendas", "site", "app"],
+      answer:
+        "Para anunciar no CZS, escolha o formato comercial e envie o contato. Posso abrir a pagina Divulgue ou registrar um pedido para retorno."
+    },
+    {
+      id: "noticia",
+      routeKey: "community",
+      pose: "community",
+      title: "Enviar noticia",
+      words: ["noticia", "pauta", "denuncia", "foto", "video", "bairro", "comunidade"],
+      answer:
+        "Envie local, horario, foto ou video e explique o que aconteceu. O CZS deve checar denuncia, seguranca e saude antes de publicar como noticia."
+    },
+    {
+      id: "escritorios",
+      routeKey: "cheffe",
+      pose: "call-attention",
+      title: "Escritórios",
+      words: ["escritorio", "escritorios", "office", "redacao", "cheffe", "equipe"],
+      answer:
+        "Os escritorios ficam dentro da Cheffe Call. Abra Cheffe Call e use Ver escritorios para acionar Redacao, Comercial, Comunidade, Fotos, Servicos e Cheffe."
+    },
+    {
+      id: "servicos",
+      routeKey: "services",
+      pose: "point-right",
+      title: "Servicos uteis",
+      words: ["servico", "farmacia", "hospital", "telefone", "energia", "agua", "clima", "rio"],
+      answer:
+        "Servicos uteis ficam na area de hospitais, farmacias, clima, rio, energia, agua, telefones e alertas para Cruzeiro do Sul e Vale do Jurua."
+    },
+    {
+      id: "arquivo",
+      routeKey: "archive",
+      pose: "point-right",
+      title: "Arquivo",
+      words: ["arquivo", "antiga", "mes", "ano", "semana", "dia", "buscar", "pesquisar"],
+      answer:
+        "O arquivo usa o endpoint de noticias do servidor e permite buscar por termo, periodo, editoria, fonte e pasta mensal."
+    },
+    {
+      id: "pubpaid",
+      routeKey: "games",
+      pose: "celebrate",
+      title: "PubPaid",
+      words: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "ranking", "torneio"],
+      answer:
+        "PubPaid e a frente de jogos do projeto. Use os atalhos de Pesquisa e PubPaid para entrar nos jogos e acompanhar novidades."
+    },
+    {
+      id: "pesquisa",
+      routeKey: "games",
+      pose: "present-left",
+      title: "Pesquisa",
+      words: ["pesquisa", "eleitoral", "enquete", "votar", "opiniao"],
+      answer:
+        "Pesquisas e enquetes ficam no bloco de participacao. Quando houver rodada ativa, o CZS mostra o caminho direto."
+    },
+    {
+      id: "correcao",
+      routeKey: "cheffe",
+      pose: "call-attention",
+      title: "Informar erro",
+      words: ["erro", "corrigir", "correcao", "errado", "denunciar erro"],
+      answer:
+        "Para informar erro, mande o titulo da materia, o trecho incorreto e a fonte correta. A Cheffe Call registra a tarefa para revisao."
+    },
+    {
+      id: "galeria",
+      routeKey: "gallery",
+      pose: "present-both",
+      title: "Galeria",
+      words: ["galeria", "foto", "fotos", "imagem", "turismo", "cruzeiro do sul", "mapa"],
+      answer:
+        "A galeria organiza fotos e pontos de Cruzeiro do Sul com mapa, contexto e navegacao visual."
+    },
+    {
+      id: "mapa",
+      routeKey: "footer",
+      pose: "point-right",
+      title: "Mapa do site",
+      words: ["mapa", "site", "onde fica", "rodape", "menu"],
+      answer:
+        "O mapa do site fica no rodape e mostra noticias, arquivo, servicos, comunidade, comercial e redacao."
+    }
+  ];
+
+  let selected = null;
+  let selectedScore = 0;
+  for (const intent of intents) {
+    const score = intent.words.reduce((total, word) => total + (text.includes(normalizeText(word)) ? 1 : 0), 0);
+    if (score > selectedScore) {
+      selected = intent;
+      selectedScore = score;
+    }
+  }
+
+  if (/(whatsapp|zap|contato|falar|atendente|humano|pessoa|dono)/.test(text)) {
+    return {
+      id: "whatsapp",
+      pose: "human",
+      title: "Atendimento humano",
+      human: true,
+      answer: "Atendimento humano liberado. Vou deixar o WhatsApp pronto para falar direto com o CZS."
+    };
+  }
+
+  return selected || {
+    id: "fallback",
+    routeKey: "news",
+    pose: "thinking",
+    title: "Atalho CZS",
+    answer:
+      "Ainda nao tenho uma resposta segura para essa pergunta. Posso te levar para as noticias recentes ou abrir atendimento humano se precisar."
+  };
+}
+
+function isAllowedOllamaArea(area = "") {
+  const normalized = normalizeText(area);
+  return new Set([
+    "rayl",
+    "chatbot",
+    "chat",
+    "office",
+    "offices",
+    "escritorio",
+    "escritorios",
+    "cheffe",
+    "cheffe-call"
+  ]).has(normalized);
+}
+
+function recordOllamaConversation(item = {}) {
+  const log = normalizeJsonArrayPayload(readJson(OLLAMA_CHAT_LOG_FILE, []));
+  const entry = {
+    id: createRecordId("ollama"),
+    createdAt: new Date().toISOString(),
+    area: cleanShortText(item.area || "rayl", 80),
+    model: cleanShortText(item.model || OLLAMA_MODEL || "", 120),
+    prompt: cleanShortText(item.prompt || "", 1200),
+    answer: cleanShortText(item.answer || "", 1600),
+    ok: Boolean(item.ok),
+    error: cleanShortText(item.error || "", 220),
+    meta: item.meta && typeof item.meta === "object" ? item.meta : {}
+  };
+  writeJson(OLLAMA_CHAT_LOG_FILE, log.concat(entry).slice(-500));
+  return entry;
+}
+
+async function callLocalOllama({ area = "rayl", system = "", prompt = "", context = {}, temperature = 0.2 } = {}) {
+  if (!isAllowedOllamaArea(area)) {
+    return { ok: false, skipped: true, error: "Área não autorizada para IA local." };
+  }
+  const cleanPrompt = cleanShortText(prompt, 1800);
+  if (!cleanPrompt) return { ok: false, error: "Prompt vazio." };
+  if (!OLLAMA_MODEL) return { ok: false, error: "Modelo Ollama não configurado." };
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), OLLAMA_TIMEOUT_MS);
+  const payload = {
+    model: OLLAMA_MODEL,
+    stream: false,
+    think: false,
+    messages: [
+      {
+        role: "system",
+        content: cleanShortText(system || [
+          "Você é uma IA local do Catálogo CZS.",
+          "Responda em português claro, curto e útil.",
+          "Não invente fonte, dado, notícia ou promessa operacional.",
+          "Quando não souber, diga o próximo passo seguro."
+        ].join(" "), 1200)
+      },
+      {
+        role: "user",
+        content: [
+          cleanPrompt,
+          context && Object.keys(context).length
+            ? `\nContexto local JSON:\n${JSON.stringify(context).slice(0, 2200)}`
+            : ""
+        ].join("")
+      }
+    ],
+    options: {
+      temperature,
+      num_predict: 260
+    }
+  };
+
+  try {
+    const response = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+    const data = await response.json().catch(() => ({}));
+    const answer = cleanShortText(data?.message?.content || data?.response || data?.content || "", 1600);
+    if (!response.ok || !answer) {
+      throw new Error(data?.error || `Ollama HTTP ${response.status}`);
+    }
+    const item = recordOllamaConversation({
+      area,
+      model: OLLAMA_MODEL,
+      prompt: cleanPrompt,
+      answer,
+      ok: true,
+      meta: { baseUrl: OLLAMA_BASE_URL }
+    });
+    return {
+      ok: true,
+      answer,
+      itemId: item.id,
+      ai: {
+        status: "online",
+        provider: "ollama",
+        model: OLLAMA_MODEL
+      }
+    };
+  } catch (error) {
+    const message = error?.name === "AbortError" ? "Ollama local demorou para responder." : error?.message || "Ollama local indisponível.";
+    const item = recordOllamaConversation({
+      area,
+      model: OLLAMA_MODEL,
+      prompt: cleanPrompt,
+      answer: "",
+      ok: false,
+      error: message,
+      meta: { baseUrl: OLLAMA_BASE_URL }
+    });
+    return {
+      ok: false,
+      error: message,
+      itemId: item.id,
+      ai: {
+        status: "offline",
+        provider: "ollama",
+        model: OLLAMA_MODEL
+      }
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function answerRaylChat(body = {}, req = null) {
+  const tracking = req ? buildTrackingMeta(req, body) : {};
+  const question = cleanShortText(body.question || body.message || body.text || "", 500);
+  if (!question || question.length < 2) {
+    return { ok: false, status: 400, error: "Envie uma pergunta para a RAyL." };
+  }
+  const intent = raylIntentForQuestion(question);
+  let aiResult = null;
+  if (!intent.human) {
+    aiResult = await callLocalOllama({
+      area: "rayl",
+      system: [
+        "Você é RAyL CZS, assistente local do Catálogo CZS.",
+        "Responda em português do Acre, de forma curta e prática.",
+        "Nunca responda só com uma palavra solta; use uma frase útil com próximo passo.",
+        "Use somente rotas do site: notícias, arquivo, serviços, galeria, comercial, Cheffe Call, comunidade e PubPaid.",
+        "Não invente atendimento humano, backend, notícia ou promessa; se a pergunta exigir pessoa, recomende WhatsApp."
+      ].join(" "),
+      prompt: [
+        `Pergunta do leitor: ${question}`,
+        `Resposta segura do CZS para usar como base: ${intent.answer}`,
+        "Responda com uma frase prática e, se houver rota, deixe claro onde clicar."
+      ].join("\n"),
+      context: {
+        detectedIntent: intent.id,
+        routeKey: intent.routeKey || "",
+        href: intent.href || "",
+        safeAnswer: intent.answer,
+        sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260)
+      },
+      temperature: 0.15
+    });
+  }
+  const log = normalizeJsonArrayPayload(readJson(RAYL_CHAT_LOG_FILE, []));
+  const item = {
+    id: createRecordId("rayl"),
+    createdAt: new Date().toISOString(),
+    question,
+    intent: intent.id,
+    aiStatus: aiResult?.ai?.status || "fallback",
+    aiItemId: aiResult?.itemId || "",
+    sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260),
+    referrer: tracking.referrer,
+    browser: tracking.browser,
+    deviceType: tracking.deviceType
+  };
+  writeJson(RAYL_CHAT_LOG_FILE, log.concat(item).slice(-500));
+  return {
+    ok: true,
+    status: 200,
+    answer: intent.routeKey || intent.href || intent.human
+      ? intent.answer
+      : aiResult?.ok && aiResult.answer && aiResult.answer.length >= 18
+        ? aiResult.answer
+        : intent.answer,
+    pose: intent.pose || "explain",
+    title: intent.title || "RAyL",
+    routeKey: intent.routeKey || "",
+    href: intent.href || "",
+    human: Boolean(intent.human),
+    ai: aiResult?.ai || { status: "fallback", provider: "local-faq", model: "" },
+    itemId: item.id
+  };
+}
+
+async function answerOfficeAiChat(body = {}, req = null) {
+  const officeKey = normalizeOfficeKey(body.officeKey || body.office || "redacao");
+  const officeLabel = cleanShortText(body.officeLabel || officeKey, 120);
+  const message = cleanShortText(body.message || body.prompt || body.text || "", 1200);
+  if (!message) return { ok: false, status: 400, error: "Envie uma pergunta para o escritório." };
+  const context = body.context && typeof body.context === "object" ? body.context : {};
+  const result = await callLocalOllama({
+    area: "office",
+    system: [
+      "Você é uma IA local de escritório do Catálogo CZS.",
+      "Responda como operador de fluxo: prioridade, próximo passo e cuidado.",
+      "Use no máximo 4 linhas curtas.",
+      "Não finja publicar, ligar, vender ou executar ação externa.",
+      "Foque em usabilidade, fluxo e decisão para o site local."
+    ].join(" "),
+    prompt: `${officeLabel}: ${message}`,
+    context,
+    temperature: 0.18
+  });
+  const fallback = `Fluxo seguro para ${officeLabel}: registrar a tarefa na Cheffe Call, revisar prioridade local e executar só quando houver confirmação/fonte.`;
+  const action = addOfficeWorkAction({
+    officeKey,
+    officeLabel,
+    kind: "ollama-local-chat",
+    status: result.ok ? "ollama-respondido" : "ollama-fallback",
+    title: `IA local: ${officeLabel}`,
+    detail: result.ok ? result.answer : `${fallback} (${result.error || "Ollama offline"})`,
+    source: "v8-office-ai"
+  });
+  return {
+    ok: true,
+    status: 200,
+    officeKey,
+    officeLabel,
+    answer: result.ok ? result.answer : fallback,
+    ai: result.ai || { status: "offline", provider: "ollama", model: OLLAMA_MODEL },
+    action
+  };
+}
+
+async function answerCheffeAiChat(body = {}, req = null) {
+  const message = cleanShortText(body.message || body.prompt || body.text || "", 1400);
+  if (!message) return { ok: false, status: 400, error: "Envie uma pergunta para a Cheffe." };
+  const queue = Array.isArray(body.queue) ? body.queue.slice(0, 12) : [];
+  const result = await callLocalOllama({
+    area: "cheffe-call",
+    system: [
+      "Você é a IA local de apoio da Cheffe Call do CZS.",
+      "Organize revisão, fonte, foto, pauta, comercial e serviços em próximos passos.",
+      "Use no máximo 4 linhas curtas, com prioridade e próximo passo.",
+      "Não assuma que uma ação externa foi feita; apenas recomende e registre fluxo."
+    ].join(" "),
+    prompt: message,
+    context: {
+      queue,
+      sourcePage: cleanShortText(body.sourcePage || buildTrackingMeta(req, body).pagePath || "/", 260)
+    },
+    temperature: 0.16
+  });
+  const fallback = "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar.";
+  const action = addOfficeWorkAction({
+    officeKey: "cheffe-call",
+    officeLabel: "Cheffe Call",
+    kind: "ollama-local-cheffe",
+    status: result.ok ? "ollama-respondido" : "ollama-fallback",
+    title: "IA local da Cheffe",
+    detail: result.ok ? result.answer : `${fallback} (${result.error || "Ollama offline"})`,
+    source: "v8-cheffe-ai"
+  });
+  return {
+    ok: true,
+    status: 200,
+    answer: result.ok ? result.answer : fallback,
+    ai: result.ai || { status: "offline", provider: "ollama", model: OLLAMA_MODEL },
+    action
+  };
+}
+
 function readLatestRealAgentsRunArtifact() {
   const primaryRun = readJson(REAL_AGENTS_RUN_FILE, null);
   const legacyRun = primaryRun ? null : readJson(LEGACY_REAL_AGENTS_RUN_FILE, null);
@@ -12411,6 +12988,9 @@ function recordPublicEditorialCorrection(body = {}, req = null) {
   const sourceUrl = cleanShortText(body.sourceUrl || "", 260);
   const imageUrl = cleanShortText(body.imageUrl || "", 260);
   const priority = cleanShortText(body.priority || (type === "foto" || type === "fonte" ? "alta" : "media"), 40);
+  const titlePrefix = /^(revisao|revisão|triagem)$/i.test(type)
+    ? "Artigo enviado para revisão"
+    : "Leitor informou erro";
   const userAgent = cleanShortText(req?.headers?.["user-agent"] || "", 140);
   const forwarded = cleanShortText(req?.headers?.["x-forwarded-for"] || req?.socket?.remoteAddress || "", 90);
   const payload = readJson(EDITORIAL_CORRECTIONS_LOG_FILE, { version: 1, corrections: [] });
@@ -12434,7 +13014,7 @@ function recordPublicEditorialCorrection(body = {}, req = null) {
     type,
     typeLabel,
     slug,
-    title: `Leitor informou erro: ${title}`,
+    title: `${titlePrefix}: ${title}`,
     articleUrl,
     sourceUrl,
     imageUrl,
@@ -12464,7 +13044,9 @@ function recordPublicEditorialCorrection(body = {}, req = null) {
   return {
     ok: true,
     correction,
-    message: "Correção registrada e priorizada para revisão editorial."
+    message: /^(revisao|revisão|triagem)$/i.test(type)
+      ? "Artigo registrado e priorizado para revisão editorial."
+      : "Correção registrada e priorizada para revisão editorial."
   };
 }
 
@@ -13460,7 +14042,7 @@ function startTopicFeedAutoRunner() {
   if (topicFeedAutoState.timer) return;
 
   topicFeedAutoState.timer = setInterval(() => {
-    runTopicFeedsAutoCycle("auto-20-minutos").catch(() => {});
+    runTopicFeedsAutoCycle("auto-30-minutos").catch(() => {});
   }, TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS);
 
   setTimeout(() => {
@@ -15981,6 +16563,43 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "POST" && pathname === "/api/community/reports") {
     const body = await parseBody(req);
     const result = recordCommunityReport(body, req);
+    return sendJson(res, result.status || 201, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/rayl/chat") {
+    const body = await parseBody(req);
+    const result = await answerRaylChat(body, req);
+    return sendJson(res, result.status || 200, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-ai/chat") {
+    const body = await parseBody(req);
+    const result = await answerOfficeAiChat(body, req);
+    return sendJson(res, result.status || 200, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/ai") {
+    const body = await parseBody(req);
+    const result = await answerCheffeAiChat(body, req);
+    return sendJson(res, result.status || 200, result);
+  }
+
+  if (req.method === "GET" && pathname === "/api/ads/campaigns") {
+    return sendJson(res, 200, getAdCampaignsPayload({
+      slot: searchParams.get("slot") || "",
+      limit: searchParams.get("limit") || 8
+    }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/ads/events") {
+    const body = await parseBody(req);
+    const result = recordAdEvent(body, req);
+    return sendJson(res, result.status || 201, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/commercial/leads") {
+    const body = await parseBody(req);
+    const result = recordCommercialLead(body, req);
     return sendJson(res, result.status || 201, result);
   }
 

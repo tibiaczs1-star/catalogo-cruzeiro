@@ -7,9 +7,8 @@
  * - MediaRecorder API para gravacao de video
  * - ImageCapture API (Chrome) para foto em alta resolucao
  * 
- *用法:
- *   <script src="catalogo-capture.js"><\/script>
- *   <button onclick="CatalogoCapture.open()">Enviar foto/vídeo</button>
+ * Uso:
+ *   importar o script e chamar CatalogoCapture.open() a partir de um botão público com rótulo específico.
  */
 
 (function() {

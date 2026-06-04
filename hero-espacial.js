@@ -33,7 +33,7 @@
           pública em uma leitura moderna, clara e dinâmica.
         </p>
         <div class="hero-espacial-actions">
-          <a class="hero-espacial-btn primary" href="#radar">Abrir Radar CZS</a>
+          <a class="hero-espacial-btn primary" href="#feed">Abrir Radar CZS</a>
           <a class="hero-espacial-btn ghost" href="catalogo-servicos.html">Abrir catálogo de serviços</a>
         </div>
       </div>

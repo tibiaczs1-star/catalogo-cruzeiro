@@ -30,7 +30,7 @@
           pensado para leitura rápida e acompanhamento em tempo real.
         </p>
         <div class="crz3d-actions">
-          <a href="#radar" class="crz3d-btn primary">Ir para os assuntos</a>
+          <a href="#feed" class="crz3d-btn primary">Ir para os assuntos</a>
           <a href="catalogo-servicos.html" class="crz3d-btn ghost">Abrir catálogo de serviços</a>
         </div>
       </div>

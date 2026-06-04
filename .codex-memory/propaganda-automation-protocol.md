@@ -96,15 +96,16 @@ Enviar:
 
 ### Grupos de Uber/transporte
 
-- `UBER E MOTO UBER EM CZS-AC`
-- `UBER CZS`
-- `MOTO UBER MANO LIMA`
-- `UBER 1 MOTO UBER...CZS`
+- Bloqueados por ordem do usuario em 2026-06-03:
+  - `UBER E MOTO UBER EM CZS-AC`
+  - `UBER CZS`
+  - `MOTO UBER MANO LIMA`
+  - `UBER 1 MOTO UBER...CZS`
 
 Enviar:
 
-- `06-motorista-julia-oliveira.png`
-- legenda da Julia Oliveira / motorista particular
+- Nenhum envio automatico de motorista particular / Julia Oliveira nesses grupos.
+- So usar novo destino de transporte se o usuario liberar explicitamente outro grupo ou contato.
 
 ## Validacao Antes De Enviar
 

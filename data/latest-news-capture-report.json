@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-02T16:15:41.186Z",
-  "finishedAt": "2026-06-02T16:15:47.420Z",
-  "capturedItems": 296,
-  "capturedToday": 204,
+  "startedAt": "2026-06-04T13:11:55.042Z",
+  "finishedAt": "2026-06-04T13:12:00.461Z",
+  "capturedItems": 292,
+  "capturedToday": 131,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -80,8 +80,8 @@
     {
       "source": "g1-pop-arte",
       "ok": true,
-      "count": 13,
-      "blocked": 1,
+      "count": 14,
+      "blocked": 0,
       "mode": "rss"
     },
     {
@@ -115,7 +115,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 6,
+      "count": 3,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -136,21 +136,21 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 1,
+      "count": 0,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

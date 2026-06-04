@@ -1,0 +1,42 @@
+{
+  "source": "C:\\Users\\junio\\projeto codex\\assets\\brand\\catalogo-czs-logo-official-crops-20260603",
+  "generatedAt": "2026-06-03T12:50:11.881Z",
+  "files": [
+    {
+      "dstName": "01-logo-oficial-principal-sem-fundo.png",
+      "removed": "already-alpha",
+      "width": 388,
+      "height": 198
+    },
+    {
+      "dstName": "02-logo-horizontal-sem-fundo.png",
+      "removed": 32389,
+      "width": 523,
+      "height": 164
+    },
+    {
+      "dstName": "03-logo-quadrada-instagram-sem-fundo.png",
+      "removed": 39970,
+      "width": 338,
+      "height": 240
+    },
+    {
+      "dstName": "04-logo-transparente-da-prancha-sem-fundo.png",
+      "removed": 20478,
+      "width": 388,
+      "height": 198
+    },
+    {
+      "dstName": "05-logo-monocromatica-sem-fundo.png",
+      "removed": 40140,
+      "width": 397,
+      "height": 196
+    },
+    {
+      "dstName": "06-icone-czs-estrelas-sem-fundo.png",
+      "removed": 3693,
+      "width": 354,
+      "height": 114
+    }
+  ]
+}

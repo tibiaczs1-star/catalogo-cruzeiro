@@ -150,6 +150,10 @@ function sanitizeUrl(value = "") {
   return /^https?:\/\//i.test(text) ? text : "";
 }
 
+function isVideoAssetUrl(value = "") {
+  return /^https?:\/\/.+\.(?:mp4|webm|ogg)(?:[?#].*)?$/i.test(String(value || "").trim());
+}
+
 function resolveUrl(baseUrl = "", value = "") {
   const cleaned = decodeEntities(value).trim();
   if (!cleaned) return "";
@@ -303,31 +307,21 @@ function wrapSvgText(text = "", maxChars = 28, maxLines = 3) {
 }
 
 function fallbackImageFor(item = {}, reason = "rss-sem-imagem") {
-  ensureDir(FALLBACK_DIR);
   const slug = slugify(item.slug || item.title || "noticia") || `noticia-${Date.now()}`;
-  const filePath = path.join(FALLBACK_DIR, `${slug}.svg`);
-  const publicPath = `./assets/news-fallbacks/${slug}.svg`;
-  if (fs.existsSync(filePath)) return publicPath;
-
-  const hue = (hashString(`${slug}|${reason}`) % 280) + 20;
-  const titleLines = wrapSvgText(item.title || "Noticia em atualizacao")
-    .map((line, index) => `<tspan x="112" dy="${index === 0 ? "0" : "58"}">${escapeHtml(line)}</tspan>`)
-    .join("");
-  const category = cleanText(item.category || "Noticia", 24).toUpperCase();
-  const source = cleanText(item.sourceName || "Fonte monitorada", 54);
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
-  <rect width="1200" height="720" fill="#101827"/>
-  <rect x="68" y="62" width="1064" height="596" rx="28" fill="#f8fafc"/>
-  <rect x="112" y="112" width="310" height="54" rx="27" fill="hsl(${hue} 82% 50%)"/>
-  <text x="140" y="147" fill="#08111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">${escapeHtml(category)}</text>
-  <text x="112" y="286" fill="#111827" font-family="Georgia, serif" font-size="52" font-weight="700">${titleLines}</text>
-  <path d="M112 548h976" stroke="hsl(${hue} 82% 50%)" stroke-width="14" stroke-linecap="round"/>
-  <text x="112" y="612" fill="#475569" font-family="Arial, sans-serif" font-size="25" font-weight="700">${escapeHtml(source)} - imagem editorial segura</text>
-</svg>
-`;
-  fs.writeFileSync(filePath, svg, "utf-8");
-  return publicPath;
+  const realFallbacks = [
+    "./assets/home-cache/rio-jurua-panorama.jpg",
+    "./assets/home-cache/footer-cruzeiro-bg.jpg",
+    "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    "./assets/home-cache/buzz-cruzeiro-02.jpg",
+    "./assets/home-cache/buzz-cruzeiro-03.jpg",
+    "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    "./assets/home-cache/news-batelao-local.jpg",
+    "./assets/home-cache/fallback-cheia.jpg",
+    "./assets/home-cache/fallback-cotidiano.jpg",
+    "./assets/home-cache/buzz-via-cruzeiro.jpg",
+    "./assets/home-cache/buzz-cultura-show.jpg"
+  ];
+  return realFallbacks[hashString(`${slug}|${reason}`) % realFallbacks.length];
 }
 
 function buildBody(item = {}) {
@@ -335,9 +329,9 @@ function buildBody(item = {}) {
   const title = cleanText(item.title || "noticia", 180);
   const dateLabel = formatDate(item.publishedAt || item.createdAt || item.date);
   return [
-    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}.`,
-    `${title} e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.`,
-    "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    `${sourceName} publicou em ${dateLabel}: ${title}.`,
+    "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+    "Novas informações entram quando houver atualização verificável."
   ];
 }
 
@@ -426,10 +420,13 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
   const rawDate = pickFirstTag(block, ["pubDate", "published", "updated", "dc:date"]);
   const publishedAt = parseFeedDate(rawDate);
   const rawCategory = cleanText(pickFirstTag(block, ["category"]), 80);
+  const mediaContentUrl = sanitizeUrl(pickAttr(block, "media:content", "url"));
+  const enclosureUrl = sanitizeUrl(pickAttr(block, "enclosure", "url"));
+  const videoUrl = [mediaContentUrl, enclosureUrl].find(isVideoAssetUrl) || "";
   const imageUrl =
-    sanitizeUrl(pickAttr(block, "media:content", "url")) ||
+    (!isVideoAssetUrl(mediaContentUrl) ? mediaContentUrl : "") ||
     sanitizeUrl(pickAttr(block, "media:thumbnail", "url")) ||
-    sanitizeUrl(pickAttr(block, "enclosure", "url")) ||
+    (!isVideoAssetUrl(enclosureUrl) ? enclosureUrl : "") ||
     extractImageFromMarkup(`${descriptionMarkup} ${contentMarkup}`, link);
 
   if (!title || !link) return null;
@@ -460,7 +457,17 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
     imageCredit: "",
     imageFocus: "",
     imageFit: "",
-    media: null,
+    media: videoUrl
+      ? {
+          type: "video",
+          url: videoUrl,
+          label: "Vídeo da matéria",
+          note: "Vídeo captado diretamente da fonte monitorada.",
+          creditUrl: link,
+          creditLabel: "Abrir fonte"
+        }
+      : null,
+    videoUrl,
     priority: Number(source.priority || source.editorialPriorityScore || 0) || 0,
     editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : "",
     crossSources: [
@@ -509,6 +516,8 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
   const publishedAt = parseFeedDate(raw.publishedAt || raw.date || raw.updatedAt || "");
   const categoryInfo = inferCategory({ title, summary, source, rawCategory: raw.category || "" });
   const slug = slugify(title);
+  const rawVideoUrl = sanitizeUrl(raw.videoUrl || raw.video || raw.media?.videoUrl || raw.media?.url || "");
+  const videoUrl = isVideoAssetUrl(rawVideoUrl) ? rawVideoUrl : "";
   const imageUrl = sanitizeUrl(raw.imageUrl || raw.feedImageUrl || raw.sourceImageUrl || "");
   const item = {
     id: link,
@@ -534,7 +543,17 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
     imageCredit: "",
     imageFocus: "",
     imageFit: "",
-    media: null,
+    media: videoUrl
+      ? {
+          type: "video",
+          url: videoUrl,
+          label: "Vídeo da matéria",
+          note: "Vídeo vinculado à fonte monitorada.",
+          creditUrl: link,
+          creditLabel: "Abrir fonte"
+        }
+      : null,
+    videoUrl,
     priority: Number(source.priority || source.editorialPriorityScore || 0) || 0,
     editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : "",
     crossSources: [

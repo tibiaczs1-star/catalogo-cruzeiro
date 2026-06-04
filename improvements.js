@@ -165,7 +165,7 @@
           <span class="popup-badge">🔥 NOVIDADE</span>
           <p class="popup-headline"></p>
           <div class="popup-actions">
-            <a href="#" class="popup-btn-primary">Ler agora</a>
+            <a href="#feed" class="popup-btn-primary">Ler agora</a>
             <button class="popup-btn-close" aria-label="Fechar">×</button>
           </div>
         </div>
@@ -659,13 +659,13 @@
           <button class="drawer-close" aria-label="Fechar">×</button>
         </div>
         <nav class="drawer-nav">
-          <a href="#noticias" class="drawer-item">📰 Notícias</a>
+          <a href="#feed" class="drawer-item">📰 Notícias</a>
           <a href="#servicos" class="drawer-item">📋 Serviços</a>
           <a href="#agenda" class="drawer-item">📅 Agenda</a>
-          <a href="#clima-alertas" class="drawer-item">🌤️ Clima</a>
-          <a href="#arquivo" class="drawer-item">📁 Arquivo</a>
+          <a href="#tempo" class="drawer-item">🌤️ Clima</a>
+          <a href="#arquivoArtigoSystem" class="drawer-item">📁 Arquivo</a>
           <a href="#newsletter" class="drawer-item">📬 Newsletter</a>
-          <a href="#contato" class="drawer-item">📞 Contato</a>
+          <a href="#fullSiteFooter" class="drawer-item">📞 Contato</a>
           <a href="/pubpaid.html" class="drawer-item">🎮 PubPaid</a>
         </nav>
       `;

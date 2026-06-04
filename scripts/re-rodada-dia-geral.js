@@ -504,14 +504,6 @@ function hashString(value) {
   return hash;
 }
 
-function escapeHtml(value) {
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 function imageOf(item = {}) {
   return item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "";
 }
@@ -543,92 +535,22 @@ function isWeakImage(value) {
   return false;
 }
 
-function splitSvgLongWord(word = "", maxChars = 27) {
-  const raw = String(word || "");
-  if (raw.length <= maxChars) return [raw];
-
-  const chunks = [];
-  for (let index = 0; index < raw.length; index += maxChars - 1) {
-    chunks.push(raw.slice(index, index + maxChars - 1));
-  }
-  return chunks;
-}
-
-function wrapSvgTextByWords(value = "", maxChars = 27, maxLines = 3) {
-  const words = cleanText(value, 150)
-    .split(/\s+/)
-    .filter(Boolean)
-    .flatMap((word) => splitSvgLongWord(word, maxChars));
-  const lines = [];
-
-  words.forEach((word) => {
-    if (!lines.length) {
-      lines.push(word);
-      return;
-    }
-
-    const current = lines[lines.length - 1] || "";
-    const next = current ? `${current} ${word}` : word;
-    if (next.length <= maxChars) {
-      lines[lines.length - 1] = next;
-      return;
-    }
-
-    if (lines.length < maxLines) {
-      lines.push(word);
-    }
-  });
-
-  const consumed = lines.join(" ").replace(/\.\.\.$/, "");
-  if (words.join(" ").length > consumed.length && lines.length) {
-    lines[lines.length - 1] = `${lines[lines.length - 1].replace(/\s+\S*$/, "").trim() || lines[lines.length - 1]}...`;
-  }
-
-  return lines.slice(0, maxLines);
-}
-
-function buildFallbackSvg(item = {}, reason = "fallback") {
-  const title = cleanText(item.title || item.sourceLabel || "Notícia em revisão", 150);
-  const category = cleanText(item.category || item.eyebrow || "Notícia", 42).toUpperCase();
-  const source = cleanText(item.sourceName || "Catálogo", 42);
-  const hue = (hashString(`${item.slug || title}|${reason}`) % 280) + 20;
-  const titleMarkup = wrapSvgTextByWords(title, 27, 3)
-    .map((line, index) => `<tspan x="126" dy="${index === 0 ? "0" : "60"}">${escapeHtml(line)}</tspan>`)
-    .join("");
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
-  <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#07111f"/>
-      <stop offset="1" stop-color="#20242d"/>
-    </linearGradient>
-    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
-      <path d="M42 0H0v42" fill="none" stroke="rgba(255,255,255,.055)" stroke-width="2"/>
-    </pattern>
-  </defs>
-  <rect width="1200" height="720" fill="url(#bg)"/>
-  <rect width="1200" height="720" fill="url(#grid)"/>
-  <rect x="86" y="82" width="1028" height="556" rx="28" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
-  <rect x="126" y="126" width="244" height="48" rx="24" fill="hsl(${hue} 78% 58%)"/>
-  <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">${escapeHtml(cleanText(category, 20))}</text>
-  <circle cx="986" cy="158" r="76" fill="hsl(${hue} 78% 58%)" opacity=".9"/>
-  <circle cx="1038" cy="210" r="52" fill="hsl(${(hue + 55) % 360} 72% 48%)" opacity=".78"/>
-  <path d="M126 492h948" stroke="hsl(${hue} 78% 58%)" stroke-width="12" stroke-linecap="round" opacity=".82"/>
-  <text x="126" y="282" fill="#fff8ea" font-family="Georgia, serif" font-size="50" font-weight="700">
-    ${titleMarkup}
-  </text>
-  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="23" font-weight="700">${escapeHtml(cleanText(`${source} - imagem editorial segura`, 56))}</text>
-</svg>
-`;
-}
-
 function fallbackImageFor(item = {}, reason = "fallback") {
-  ensureDir(FALLBACK_DIR);
   const slug = slugify(item.slug || item.title || "noticia");
-  const fileName = `${slug || `noticia-${Date.now()}`}.svg`;
-  const filePath = path.join(FALLBACK_DIR, fileName);
-  fs.writeFileSync(filePath, buildFallbackSvg(item, reason), "utf-8");
-  return `/assets/news-fallbacks/${fileName}`;
+  const realFallbacks = [
+    "/assets/home-cache/rio-jurua-panorama.jpg",
+    "/assets/home-cache/footer-cruzeiro-bg.jpg",
+    "/assets/home-cache/buzz-cruzeiro-01.jpg",
+    "/assets/home-cache/buzz-cruzeiro-02.jpg",
+    "/assets/home-cache/buzz-cruzeiro-03.jpg",
+    "/assets/home-cache/buzz-cruzeiro-04.jpg",
+    "/assets/home-cache/news-batelao-local.jpg",
+    "/assets/home-cache/fallback-cheia.jpg",
+    "/assets/home-cache/fallback-cotidiano.jpg",
+    "/assets/home-cache/buzz-via-cruzeiro.jpg",
+    "/assets/home-cache/buzz-cultura-show.jpg"
+  ];
+  return realFallbacks[hashString(`${slug || "noticia"}|${reason}`) % realFallbacks.length];
 }
 
 function repairImages(items = []) {
@@ -663,7 +585,7 @@ function repairImages(items = []) {
         originalImageUrl: isWeakImage(currentImage) ? "" : currentImage || item.originalImageUrl || "",
         originalFeedImageUrl: isWeakImage(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
         originalSourceImageUrl: isWeakImage(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || "",
-        imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
+        imageCredit: item.imageCredit || "Foto editorial local do banco CZS",
         imageFocus: item.imageFocus || "center 50%",
         imageQuality: `${reason}-fallback-e-buscar-na-fonte`
       };
@@ -678,7 +600,7 @@ function repairImages(items = []) {
       feedImageUrl: imageUrl,
       sourceImageUrl: imageUrl,
       originalImageUrl: currentImage || item.originalImageUrl || "",
-      imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      imageCredit: item.imageCredit || "Foto editorial local do banco CZS",
       imageFocus: item.imageFocus || "center 50%",
       imageQuality: reason
     };
@@ -704,7 +626,7 @@ function repairMissingImages(items = []) {
       originalImageUrl: item.originalImageUrl || "",
       originalFeedImageUrl: item.originalFeedImageUrl || "",
       originalSourceImageUrl: item.originalSourceImageUrl || "",
-      imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      imageCredit: item.imageCredit || "Foto editorial local do banco CZS",
       imageFocus: item.imageFocus || "center 50%",
       imageQuality: "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
     };

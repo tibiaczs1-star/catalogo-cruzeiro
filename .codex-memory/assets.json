@@ -1,7 +1,51 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-02T14:43:24.359Z",
+  "lastUpdatedAt": "2026-06-04T13:05:38.639Z",
   "assets": [
+    {
+      "id": "v8-rayl-commercial-popup-real-images-20260603",
+      "kind": "image-pack",
+      "path": "assets/v8-commercial/",
+      "note": "Quatro imagens bitmap reais para o popup comercial V8: criacao de sites, apps, divulgacao e automacao.",
+      "source": "generated-image",
+      "linkedOrderIds": [
+        "2026-06-03-v8-rayl-commercial-popup-real-images"
+      ],
+      "createdAt": "2026-06-03T11:57:04.0869378-05:00"
+    },
+    {
+      "id": "v8-rayl-commercial-popup-validation-20260603",
+      "kind": "screenshot-pack",
+      "path": ".codex-temp/rayl-commercial-popup-desktop.png",
+      "note": "Capturas finais do popup comercial com RAyL em desktop e mobile; par mobile em .codex-temp/rayl-commercial-popup-mobile.png.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-03-v8-rayl-commercial-popup-real-images"
+      ],
+      "createdAt": "2026-06-03T11:57:04.0869378-05:00"
+    },
+    {
+      "id": "facebook-whatsapp-image-caption-queue-20260602",
+      "kind": "manifest",
+      "path": ".codex-temp/facebook-whatsapp-image-caption-20260602/queue.json",
+      "note": "Fila imagem+legenda para Facebook e WhatsApp: 6 criativos comerciais, regra de nunca postar texto solto e ordem Facebook primeiro, WhatsApp depois.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-02-social-image-caption-facebook-first-whatsapp-catalogo"
+      ],
+      "createdAt": "2026-06-02T21:07:09.252Z"
+    },
+    {
+      "id": "facebook-whatsapp-services-sales-pack-20260602",
+      "kind": "html",
+      "path": ".codex-temp/facebook-whatsapp-pack-20260602/index.html",
+      "note": "Pacote navegavel com textos, criativos e banco de memoria para Facebook e WhatsApp: servicos, vendas, conteudo, convite para seguir e materiais ja existentes.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-02-facebook-whatsapp-services-sales-pack"
+      ],
+      "createdAt": "2026-06-02T14:15:00-05:00"
+    },
     {
       "id": "czs-video-first-safe-queue-20260601",
       "kind": "manifest",
@@ -1622,6 +1666,489 @@
       "note": "Evidência: 8 cards novos de notícia publicados no WhatsApp Catálogo CZS.",
       "linkedOrderIds": [],
       "createdAt": "2026-06-02T14:43:24.359Z"
+    },
+    {
+      "id": "feed-professora-de-yoga-fortalece-pr-tica-em-cruzeiro-do-sul-square-png",
+      "kind": "image",
+      "path": ".codex-temp/zap-round-20260602/instagram-feed-clean/feed-professora-de-yoga-fortalece-pr-tica-em-cruzeiro-do-sul-square.png",
+      "source": "workspace",
+      "note": "Instagram Feed corrigido e publicado: card quadrado feed-safe, usando print/foto da fonte, validado no compositor antes de compartilhar.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T18:13:12.534Z"
+    },
+    {
+      "id": "instagram-web-after-share-click-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/instagram-web-after-share-click.png",
+      "source": "workspace",
+      "note": "Evidencia de publicacao Instagram Feed: tela confirmou 'Seu post foi compartilhado' para a noticia da professora de Yoga.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T18:13:12.548Z"
+    },
+    {
+      "id": "ig-feed-servidores-rodrigues-after-share-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/ig-feed-servidores-rodrigues-after-share.png",
+      "source": "workspace",
+      "note": "Instagram-only: Feed publicado sobre atraso salarial em Rodrigues Alves; tela confirmou post compartilhado.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T18:52:00.308Z"
+    },
+    {
+      "id": "instagram-czs-operating-prompt-md",
+      "kind": "note",
+      "path": ".codex-temp/zap-round-20260602/INSTAGRAM_CZS_OPERATING_PROMPT.md",
+      "source": "workspace",
+      "note": "Prompt operacional Instagram-only do Catalogo CZS; WhatsApp e Facebook sao fluxos separados.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T18:52:00.318Z"
+    },
+    {
+      "id": "ig-feed-sindromes-respiratorias-after-share-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/ig-feed-sindromes-respiratorias-after-share.png",
+      "source": "workspace",
+      "note": "Instagram-only goal: Feed publicado sobre aumento de sindromes respiratorias; tela confirmou post compartilhado.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-02T19:17:49.039Z"
+    },
+    {
+      "id": "ig-feed-sebrae-acre-after-share-png",
+      "kind": "evidence",
+      "path": ".codex-temp/zap-round-20260602/ig-feed-sebrae-acre-after-share.png",
+      "source": "workspace",
+      "note": "Instagram-only: Feed publicado e confirmado visualmente; Sebrae Acre convocacao; Feed #5 da rodada.",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T19:36:16.773Z"
+    },
+    {
+      "id": "ig-feed-vagas-acre-final-after-share-png",
+      "kind": "evidence",
+      "path": ".codex-temp/zap-round-20260602/ig-feed-vagas-acre-final-after-share.png",
+      "source": "workspace",
+      "note": "Instagram-only: Feed publicado e confirmado visualmente; vagas de emprego no Acre; Feed #6 da rodada.",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T19:49:13.704Z"
+    },
+    {
+      "id": "ig-profile-check-after-open-futebol-png",
+      "kind": "evidence",
+      "path": ".codex-temp/zap-round-20260602/ig-profile-check-after-open-futebol.png",
+      "source": "workspace",
+      "note": "Instagram-only: perfil confirmou Open de Futebol no Feed; tambem revelou duplicata de Vagas pendente de limpeza.",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T20:07:10.768Z"
+    },
+    {
+      "id": "ig-feed-saude-feriado-czs-after-share-png",
+      "kind": "evidence",
+      "path": ".codex-temp/zap-round-20260602/ig-feed-saude-feriado-czs-after-share.png",
+      "source": "workspace",
+      "note": "Instagram-only: Feed saude feriado publicado com horario local corrigido e confirmacao visual.",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T20:16:12.603Z"
+    },
+    {
+      "id": "ig-profile-check-after-pescador-png",
+      "kind": "evidence",
+      "path": ".codex-temp/zap-round-20260602/ig-profile-check-after-pescador.png",
+      "source": "workspace",
+      "note": "Instagram-only: perfil confirmou Feed Pescador 70kg como post mais recente; Feed #9 unico.",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T20:27:16.724Z"
+    },
+    {
+      "id": "ig-feed-sol-forte-jurua",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/ig-profile-check-after-sol-forte.png",
+      "source": "instagram-web-cdp",
+      "note": "Feed confirmado na grade: sol forte no Vale do Jurua",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T20:39:10.475Z"
+    },
+    {
+      "id": "ig-feed-palacete-ruelas",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/ig-profile-check-after-palacete.png",
+      "source": "instagram-web-cdp",
+      "note": "Feed confirmado na grade: Palacete dos Ruelas",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T20:46:03.590Z"
+    },
+    {
+      "id": "ig-feed-voo-cancelado",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/ig-profile-check-after-voo-cancelado.png",
+      "source": "instagram-web-cdp",
+      "note": "Feed confirmado na grade: passageiros cobram assistencia apos voo cancelado",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T20:52:22.607Z"
+    },
+    {
+      "id": "ig-feed-censo-escolar",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/bluestacks-profile-after-censo.png",
+      "source": "instagram-bluestacks-adb",
+      "note": "Feed confirmado na grade: Censo Escolar; perfil em 214 posts",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T21:18:27.078Z"
+    },
+    {
+      "id": "ig-feed-diocese-solidaria",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/bluestacks-profile-after-diocese.png",
+      "source": "instagram-bluestacks-adb",
+      "note": "Feed confirmado na grade: Diocese solidaria; perfil em 215 posts",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T21:25:26.646Z"
+    },
+    {
+      "id": "ig-feed-defensoria-dna",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/bluestacks-profile-after-defensoria.png",
+      "source": "instagram-bluestacks-adb",
+      "note": "Feed confirmado na grade: Defensoria DNA gratuito; perfil em 216 posts",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T21:32:29.198Z"
+    },
+    {
+      "id": "ig-feed-cooperativismo-produtores",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260602/bluestacks-profile-after-cooperativismo.png",
+      "source": "instagram-bluestacks-adb",
+      "note": "Feed confirmado na grade: Cooperativismo produtores; perfil em 217 posts",
+      "linkedOrderIds": [
+        "2026-06-02-definir-escopo-desta-rodada-como-somente-instagram-whatsapp-e-facebook-sao-fluxo"
+      ],
+      "createdAt": "2026-06-02T21:38:55.553Z"
+    },
+    {
+      "id": "czs-acre-crossed-flags-transparent-20260603-png",
+      "kind": "image",
+      "path": "assets/brand/czs-acre-crossed-flags-transparent-20260603.png",
+      "source": "workspace",
+      "note": "Bandeiras CZS/Acre com fundo externo transparente preservando estrelas brancas internas; usada apenas no rodape completo do V8.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T09:31:15.538Z"
+    },
+    {
+      "id": "catalogo-czs-logo-board-20260603",
+      "kind": "html",
+      "path": ".codex-temp/logo-catalogo-czs-post-20260603/index.html",
+      "source": "workspace",
+      "note": "Prancha navegavel de logo Catálogo CZS: letreiro forte inclinado, sem vermelho/dourado, cores solidas e 5 estrelas do Cruzeiro do Sul.",
+      "linkedOrderIds": [
+        "2026-06-03-projeto-de-logo-catalogo-czs-inspirado-em-letreiro-forte-de-jornal-sem-vermelho-dourado-com-5-estrelas-do-cruzeiro-do-sul"
+      ],
+      "createdAt": "2026-06-03T10:22:25.928Z"
+    },
+    {
+      "id": "catalogo-czs-logo-decente-20260603",
+      "kind": "image",
+      "path": ".codex-temp/logo-catalogo-czs-post-20260603/catalogo-czs-logo-decente.svg",
+      "source": "workspace",
+      "note": "Nova logo principal Catálogo CZS em azul e amarelo, letreiro forte com sombra preta e 5 estrelas da constelacao Cruzeiro do Sul.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T10:32:57.223Z"
+    },
+    {
+      "id": "catalogo-czs-logo-official-crops-20260603",
+      "kind": "image",
+      "path": "assets/brand/catalogo-czs-logo-official-crops-20260603/",
+      "source": "workspace",
+      "note": "Pacote de recortes da prancha oficial enviada pelo usuario: principal, horizontal, quadrada, transparente, monocromatica e icone CZS+estrelas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T11:07:52.042Z"
+    },
+    {
+      "id": "index-html",
+      "kind": "html",
+      "path": ".codex-temp/catalogo-czs-creative-schema-20260603/index.html",
+      "source": "workspace",
+      "note": "Guia navegavel para criativos Instagram e Facebook baseados na nova logo Catálogo CZS: paleta, formatos, hierarquia, uso de logo, modelos e legenda.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T11:11:00.722Z"
+    },
+    {
+      "id": "catalogo-czs-logo-transparent-png-20260603",
+      "kind": "image",
+      "path": "assets/brand/catalogo-czs-logo-transparent-png-20260603/",
+      "source": "workspace",
+      "note": "Pasta final de logos Catálogo CZS sem fundo externo em PNG transparente, incluindo principal, horizontal, quadrada, quadrada 1080, monocromática e ícone.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T12:54:24.904Z"
+    },
+    {
+      "id": "5f07876e-ef2e-4e78-9215-19dd40dd1560-png",
+      "kind": "image",
+      "path": "C:/Users/junio/Downloads/5f07876e-ef2e-4e78-9215-19dd40dd1560.png",
+      "source": "workspace",
+      "note": "Referencia visual da Aylla Assistente Virtual: galeria de poses para avatar do suporte CZS e interacoes tipo Navi.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T13:08:35.113Z"
+    },
+    {
+      "id": "aylla",
+      "kind": "image",
+      "path": "assets/aylla/",
+      "source": "workspace",
+      "note": "Pacote final da Aylla Assistente Virtual: recortes PNG transparentes de poses, manifest JSON e contact sheet usados pelo suporte V8.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T13:25:06.590Z"
+    },
+    {
+      "id": "ig-v8-creatives-preview-20260603",
+      "kind": "html",
+      "path": ".codex-temp/v8-instagram-creatives-20260603/index.html",
+      "source": "codex-v8-creative-redesign",
+      "note": "Preview navegavel dos criativos Instagram refeitos com logo 20260603 e projeto V8",
+      "linkedOrderIds": [
+        "2026-06-03-refazer-criativos-instagram-com-logo-novo-e-projeto-v8"
+      ],
+      "createdAt": "2026-06-03T14:47:45.605Z"
+    },
+    {
+      "id": "ig-v8-creatives-manifesto-20260603",
+      "kind": "doc",
+      "path": ".codex-temp/v8-instagram-creatives-20260603/manifesto-instagram-v8.md",
+      "source": "codex-v8-creative-redesign",
+      "note": "Manifesto com corpos de posts, plano Instagram, regras de Feed, Stories, Reels e destaques",
+      "linkedOrderIds": [
+        "2026-06-03-refazer-criativos-instagram-com-logo-novo-e-projeto-v8"
+      ],
+      "createdAt": "2026-06-03T14:47:45.685Z"
+    },
+    {
+      "id": "ig-v8-standard-layouts-20260603",
+      "kind": "html",
+      "path": ".codex-temp/instagram-layouts-v8-20260603/index.html",
+      "source": "codex-v8-instagram-layout-kit",
+      "note": "Kit de layouts padroes Instagram V8: feed, stories, reels, carrossel, destaque e propaganda de servicos; sem prints do site",
+      "linkedOrderIds": [
+        "2026-06-03-criar-layouts-padroes-instagram-v8"
+      ],
+      "createdAt": "2026-06-03T14:55:47.698Z"
+    },
+    {
+      "id": "ig-v8-standard-layouts-manifest-20260603",
+      "kind": "doc",
+      "path": ".codex-temp/instagram-layouts-v8-20260603/MANIFESTO.md",
+      "source": "codex-v8-instagram-layout-kit",
+      "note": "Manifesto do kit de layouts Instagram V8 com regras para noticia, video, feed, story e servico",
+      "linkedOrderIds": [
+        "2026-06-03-criar-layouts-padroes-instagram-v8"
+      ],
+      "createdAt": "2026-06-03T14:55:47.771Z"
+    },
+    {
+      "id": "ig-v8-consolidated-standards-20260603",
+      "kind": "doc",
+      "path": ".codex-temp/instagram-layouts-v8-20260603/PADROES-CONSOLIDADOS.md",
+      "source": "codex-v8-instagram-standardization",
+      "note": "Padronizacao consolidada comparando posts antigos, pacote premium e layouts V8 novos para Instagram",
+      "linkedOrderIds": [
+        "2026-06-03-trabalhar-padronizacao-instagram"
+      ],
+      "createdAt": "2026-06-03T15:07:34.989Z"
+    },
+    {
+      "id": "ig-v8-brand-identity-use-20260603",
+      "kind": "doc",
+      "path": ".codex-temp/instagram-layouts-v8-20260603/IDENTIDADE-E-USO.md",
+      "source": "user-brand-assets-20260603",
+      "note": "Guia de uso das logomarcas oficiais e Aylla Assistente Virtual no Instagram CZS",
+      "linkedOrderIds": [
+        "2026-06-03-adaptar-tudo-com-logos-e-aylla"
+      ],
+      "createdAt": "2026-06-03T15:23:25.235Z"
+    },
+    {
+      "id": "ig-service-portal-news-layouts-20260603",
+      "kind": "html",
+      "path": ".codex-temp/instagram-layouts-v8-20260603/index.html",
+      "source": "user-reference-service-adapted",
+      "note": "Servico Portal de Noticias adicionado ao kit Instagram CZS com layout proprio em Feed e Story",
+      "linkedOrderIds": [
+        "2026-06-03-adicionar-servico-portal-noticias-ao-layout-czs"
+      ],
+      "createdAt": "2026-06-03T15:37:03.848Z"
+    },
+    {
+      "id": "whatsapp-v8-criativos-vendas-servicos-20260603",
+      "kind": "html",
+      "path": ".codex-temp/whatsapp-criativos-v8-20260603/index.html",
+      "source": "codex-whatsapp-v8-creatives",
+      "note": "Criativos WhatsApp no padrao CZS para Redmi 13, S21 FE, TV 55, portal de noticias, convite Instagram e convite site",
+      "linkedOrderIds": [
+        "2026-06-03-criar-criativos-whatsapp-com-logo-e-padroes"
+      ],
+      "createdAt": "2026-06-03T16:56:43.766Z"
+    },
+    {
+      "id": "ig-premium-exemplos-postados-20260603",
+      "kind": "html",
+      "path": ".codex-temp/premium-exemplos-postados-20260603/index.html",
+      "source": "old-posted-photos-premium-remount",
+      "note": "Exemplos premium usando fotos reais dos posts antigos, logo nova e copy melhor; referencia de qualidade para novos criativos",
+      "linkedOrderIds": [
+        "2026-06-03-refazer-criativos-premium-com-fotos-antigas"
+      ],
+      "createdAt": "2026-06-03T17:26:54.247Z"
+    },
+    {
+      "id": "rayl-chatbot-human-whatsapp-mobile-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/v8-qa/rayl-chatbot-human-whatsapp-mobile.png",
+      "source": "workspace",
+      "note": "Validacao mobile do chatbot RAyL: FAQ, pose nova com celular e CTA Falar no WhatsApp visivel apenas apos pedido de atendimento humano.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T20:08:36.625Z"
+    },
+    {
+      "id": "chatbot-poses",
+      "kind": "image-pack",
+      "path": "assets/aylla/chatbot-poses/",
+      "source": "workspace",
+      "note": "31 poses novas da RAyL extraidas das imagens enviadas em 2026-06-03 para o chatbot/assistente interativo.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-03T20:08:36.628Z"
+    },
+    {
+      "id": "ig-feed-modelo-aprovacao-logo-user-20260603",
+      "kind": "html",
+      "path": ".codex-temp/feed-modelo-aprovacao-20260603/index.html",
+      "source": "user-logo-feed-approval",
+      "note": "Modelo de feed para aprovacao usando logo enviada pelo usuario, foto real antiga e composicao premium",
+      "linkedOrderIds": [
+        "2026-06-03-modelo-feed-aprovacao-logo-oficial"
+      ],
+      "createdAt": "2026-06-03T20:35:11.883Z"
+    },
+    {
+      "id": "v8-real-functional-v2-home-headless-20260603",
+      "kind": "screenshot",
+      "path": ".codex-temp/v8-visual-smoke/home-v8-1440.png",
+      "source": "edge-headless-v8-smoke",
+      "note": "Smoke visual V8 v2: DOM confirmou hub de videos, tag video, rail de campanhas, status do arquivo e formulario comercial renderizados.",
+      "linkedOrderIds": [
+        "2026-06-04-confirmacao-dos-pontos-v8-que-ainda-nao-podem-subir-como-se-fossem-reais-fechar-"
+      ],
+      "createdAt": "2026-06-04T01:41:39.433Z"
+    },
+    {
+      "id": "v8-ollama-offices-review-ui-final-pass-20260604",
+      "kind": "screenshot-pack",
+      "path": ".codex-temp/v8-qa-20260604/",
+      "note": "Validacao V8 final pass v3: mobile sem overflow, popup RAyL com corte correto, intro sem logo antiga e checks DOM para galeria/escritorios/video/revisao.",
+      "source": "edge-cdp-v8-smoke",
+      "linkedOrderIds": [
+        "2026-06-04-v8-ollama-offices-review-ui-final-pass"
+      ],
+      "createdAt": "2026-06-04T02:39:53.147Z"
+    },
+    {
+      "id": "v8-final-agents-public-clip-final3",
+      "kind": "screenshot",
+      "path": "C:\\Users\\junio\\AppData\\Local\\Temp\\v8-final-agents-public-clip-final3.png",
+      "source": "local-qa-edge-cdp",
+      "note": "Gateway publico dos agentes autonomos em largura cheia, sem grade de escritorio interno exposta.",
+      "linkedOrderIds": [
+        "2026-06-04-v8-public-agents-and-footer-teleport-correction"
+      ],
+      "createdAt": "2026-06-04T05:45:47.724Z"
+    },
+    {
+      "id": "v8-final-footer-jump",
+      "kind": "screenshot",
+      "path": "C:\\Users\\junio\\AppData\\Local\\Temp\\v8-final-footer-jump.png",
+      "source": "local-qa-edge-cdp",
+      "note": "Botao Rodape Mapa da pagina carregou o feed continuo restante e saltou para o footer; depois virou Topo Home.",
+      "linkedOrderIds": [
+        "2026-06-04-v8-public-agents-and-footer-teleport-correction"
+      ],
+      "createdAt": "2026-06-04T05:45:59.637Z"
+    },
+    {
+      "id": "ig-posting-round-20260604-feeds-stories-evidence",
+      "kind": "screenshot-pack",
+      "path": ".codex-temp/zap-round-20260604/",
+      "source": "instagram-bluestacks-adb",
+      "note": "Rodada Instagram 2026-06-04: 8 stories e 3 feeds publicados; perfil final confirmou 219 posts e story ativo; inclui manifests, HTML preview, logs e prints finais.",
+      "linkedOrderIds": [
+        "2026-06-04-postar-o-maximo-pratico-hoje-no-instagram-feeds-e-stories-do-catalogo-czs-seguin"
+      ],
+      "createdAt": "2026-06-04T05:51:31.364Z"
+    },
+    {
+      "id": "ig-posting-round-20260604-continue-evidence",
+      "kind": "screenshot-pack",
+      "path": ".codex-temp/zap-round-20260604-continue/",
+      "source": "instagram-bluestacks-adb",
+      "note": "Continuação Instagram 2026-06-04: pacote limpo com 5 stories e 3 feeds, mais provas finais em .codex-temp/zap-round-20260604/ig-profile-final-after-continue.png.",
+      "linkedOrderIds": [
+        "2026-06-04-continuar-rodada-instagram-czs-de-2026-06-04-com-mais-stories-e-feeds-evitando-d"
+      ],
+      "createdAt": "2026-06-04T07:13:25.072Z"
+    },
+    {
+      "id": "ig-posting-round-20260604-final-sleep-run-evidence",
+      "kind": "screenshot-pack",
+      "path": ".codex-temp/zap-round-20260604-final/",
+      "source": "instagram-bluestacks-adb",
+      "note": "Rodada final silenciosa Instagram 2026-06-04: pacote com 6 stories e 3 feeds; provas finais em .codex-temp/zap-round-20260604/ig-profile-final-after-sleep-run.png confirmando 225 posts e story ativo.",
+      "linkedOrderIds": [
+        "2026-06-04-terminar-silenciosamente-rodada-instagram-czs-antes-do-usuario-dormir"
+      ],
+      "createdAt": "2026-06-04T08:08:00.000Z"
+    },
+    {
+      "id": "czs-v8-stories-desktop-png",
+      "kind": "screenshot",
+      "path": "output/playwright/czs-v8-stories-desktop.png",
+      "source": "workspace",
+      "note": "QA V8 stories desktop: bolinhas de story e TV CZS renderizadas sem overflow",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-04T13:05:38.494Z"
+    },
+    {
+      "id": "czs-v8-story-viewer-desktop-png",
+      "kind": "screenshot",
+      "path": "output/playwright/czs-v8-story-viewer-desktop.png",
+      "source": "workspace",
+      "note": "QA V8 story viewer desktop: clique em bolinha abriu visualizador estilo Instagram com video",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-04T13:05:38.565Z"
+    },
+    {
+      "id": "czs-v8-stories-mobile-png",
+      "kind": "screenshot",
+      "path": "output/playwright/czs-v8-stories-mobile.png",
+      "source": "workspace",
+      "note": "QA V8 stories mobile: bolinhas e player vertical renderizados no viewport mobile",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-04T13:05:38.639Z"
     }
   ],
   "social": [

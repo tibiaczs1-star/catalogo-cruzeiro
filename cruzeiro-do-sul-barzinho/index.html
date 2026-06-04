@@ -1,120 +1,1150 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PubPaid 3.0 — Cruzeiro do Sul Barzinho</title>
-  <link rel="stylesheet" href="./src/styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=960, initial-scale=1">
+<title>>>>CZS<<< v2 — Cruzeiro do Sul >>>Barzinho<<< (>>>Premium<<<)</title>
+<link rel="stylesheet" href="barzinho-premium.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#0a0a0a;
+  font-family:'Press Start 2P','Courier New',monospace;
+  color:#00ff41;
+  overflow:hidden;
+  user-select:none;
+}
+
+/* === MATRIX INTRO === */
+#intro-screen {
+  position:fixed; inset:0;
+  background:#000;
+  z-index:1000;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+}
+#intro-screen canvas {
+  position:absolute; inset:0;
+}
+#intro-title {
+  position:relative; z-index:2;
+  font-size:28px;
+  color:#00ff41;
+  text-shadow:0 0 20px #00ff41, 0 0 40px #00ff41;
+  animation:titlePulse 2s ease-in-out infinite;
+  text-align:center;
+  line-height:1.6;
+}
+#intro-subtitle {
+  position:relative; z-index:2;
+  margin-top:20px;
+  font-size:12px;
+  color:#ff00ff;
+  text-shadow:0 0 10px #ff00ff;
+}
+#intro-enter {
+  position:relative; z-index:2;
+  margin-top:60px;
+  font-size:10px;
+  color:#ffff00;
+  animation:blink 1s step-end infinite;
+}
+#intro-skip {
+  position:absolute; bottom:20px; right:20px;
+  font-size:8px;
+  color:#666;
+  cursor:pointer;
+  z-index:3;
+}
+@keyframes titlePulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.8; transform:scale(1.02); }
+}
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50% { opacity:0; }
+}
+
+/* === CHARACTER SELECT === */
+#select-screen {
+  position:fixed; inset:0;
+  background:linear-gradient(180deg,#0d0d1a 0%,#1a0d2e 100%);
+  z-index:900;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+}
+#select-title {
+  font-size:18px;
+  color:#00ffff;
+  text-shadow:0 0 15px #00ffff;
+  margin-bottom:10px;
+}
+#select-subtitle {
+  font-size:9px;
+  color:#888;
+  margin-bottom:20px;
+}
+#character-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+  max-width:800px;
+}
+.char-card {
+  background:#1a1a2e;
+  border:2px solid #333;
+  border-radius:8px;
+  padding:10px;
+  cursor:pointer;
+  transition:all 0.2s;
+  text-align:center;
+}
+.char-card:hover {
+  border-color:#00ffff;
+  box-shadow:0 0 15px #00ffff;
+  transform:translateY(-5px);
+}
+.char-card.selected {
+  border-color:#ff00ff;
+  box-shadow:0 0 20px #ff00ff;
+}
+.char-card img {
+  width:80px; height:120px;
+  image-rendering:pixelated;
+  background:#000;
+  margin-bottom:8px;
+}
+.char-name {
+  font-size:8px;
+  color:#00ff41;
+  margin-bottom:4px;
+}
+.char-style {
+  font-size:7px;
+  color:#888;
+}
+
+/* === GAME SCREEN === */
+#game-screen {
+  position:fixed; inset:0;
+  background:#0a0a0a;
+  z-index:800;
+  display:none;
+}
+
+/* HUD TOP */
+#hud-top {
+  position:absolute; top:0; left:0; right:0;
+  height:50px;
+  background:linear-gradient(180deg,rgba(0,0,0,0.9) 0%,transparent 100%);
+  display:flex; align-items:center;
+  padding:0 15px;
+  z-index:10;
+}
+#player-info {
+  display:flex; align-items:center; gap:10px;
+}
+#player-avatar {
+  width:36px; height:36px;
+  border-radius:50%;
+  border:2px solid #00ffff;
+  background:#222;
+  image-rendering:pixelated;
+}
+#player-name {
+  font-size:10px;
+  color:#fff;
+}
+#player-level {
+  font-size:8px;
+  color:#00ff41;
+}
+#top-actions {
+  margin-left:auto;
+  display:flex; gap:10px;
+}
+.hud-btn {
+  background:#1a1a2e;
+  border:1px solid #00ffff;
+  color:#00ffff;
+  font-family:inherit;
+  font-size:8px;
+  padding:8px 12px;
+  cursor:pointer;
+  border-radius:4px;
+}
+.hud-btn:hover {
+  background:#00ffff;
+  color:#000;
+}
+
+/* GAME WORLD */
+#game-world {
+  position:absolute; inset:0;
+  overflow:hidden;
+}
+#world-canvas {
+  position:absolute;
+  image-rendering:pixelated;
+  image-rendering:crisp-edges;
+}
+
+/* PLAYERS LAYER */
+#players-layer {
+  position:absolute; inset:0;
+  pointer-events:none;
+}
+.player-entity {
+  position:absolute;
+  text-align:center;
+  pointer-events:auto;
+  cursor:pointer;
+  transition:transform 0.1s;
+}
+.player-entity:hover { transform:scale(1.1); }
+.entity-sprite {
+  width:48px; height:72px;
+  image-rendering:pixelated;
+}
+.entity-name {
+  font-size:7px;
+  color:#fff;
+  text-shadow:1px 1px 2px #000;
+  margin-top:2px;
+}
+.entity-challenge {
+  font-size:6px;
+  color:#ff0;
+  cursor:pointer;
+}
+
+/* CHAT BOX */
+#chat-box {
+  position:absolute; bottom:80px; left:15px;
+  width:300px;
+  background:rgba(0,0,0,0.85);
+  border:1px solid #00ffff;
+  border-radius:6px;
+  z-index:10;
+}
+#chat-messages {
+  height:120px;
+  overflow-y:auto;
+  padding:8px;
+  font-size:8px;
+  line-height:1.6;
+}
+.chat-msg { margin-bottom:4px; }
+.chat-msg .nick { color:#ff00ff; }
+.chat-msg .text { color:#fff; }
+#chat-input-area {
+  display:flex; border-top:1px solid #333;
+}
+#chat-input {
+  flex:1;
+  background:#111;
+  border:none;
+  color:#00ff41;
+  font-family:inherit;
+  font-size:8px;
+  padding:8px;
+}
+#chat-send {
+  background:#00ffff;
+  border:none;
+  color:#000;
+  font-family:inherit;
+  font-size:8px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+/* EMOTES */
+#emotes-bar {
+  position:absolute; bottom:15px; left:15px;
+  display:flex; gap:5px;
+  z-index:10;
+}
+.emote-btn {
+  width:36px; height:36px;
+  background:#1a1a2e;
+  border:1px solid #ff00ff;
+  border-radius:4px;
+  font-size:16px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.emote-btn:hover {
+  background:#ff00ff;
+  transform:scale(1.2);
+}
+
+/* MINIMAP */
+#minimap {
+  position:absolute; top:60px; right:15px;
+  width:120px; height:90px;
+  background:rgba(0,0,0,0.7);
+  border:1px solid #00ffff;
+  border-radius:4px;
+  z-index:10;
+}
+#minimap-canvas {
+  width:100%; height:100%;
+  image-rendering:pixelated;
+}
+
+/* LOCATION LABEL */
+#location-label {
+  position:absolute; top:60px; left:50%; transform:translateX(-50%);
+  font-size:10px;
+  color:#ffff00;
+  text-shadow:0 0 10px #ffff00;
+  z-index:10;
+}
+
+/* === MENU CELULAR === */
+#phone-menu {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.95);
+  z-index:999;
+  display:none;
+  align-items:center; justify-content:center;
+}
+#phone-frame {
+  width:280px; height:500px;
+  background:#111;
+  border:3px solid #333;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 0 30px rgba(0,255,255,0.3);
+}
+#phone-screen {
+  width:100%; height:100%;
+  background:#0a0a0a;
+  padding:15px;
+  overflow-y:auto;
+}
+.phone-header {
+  text-align:center;
+  font-size:10px;
+  color:#00ffff;
+  margin-bottom:15px;
+  padding-bottom:10px;
+  border-bottom:1px solid #333;
+}
+.phone-section {
+  margin-bottom:15px;
+}
+.phone-section-title {
+  font-size:8px;
+  color:#ff00ff;
+  margin-bottom:8px;
+}
+.phone-item {
+  display:flex; align-items:center;
+  background:#1a1a2e;
+  border:1px solid #333;
+  border-radius:4px;
+  padding:8px;
+  margin-bottom:5px;
+  gap:10px;
+}
+.phone-item-icon {
+  font-size:20px;
+}
+.phone-item-name {
+  font-size:8px;
+  color:#fff;
+}
+.phone-item-effect {
+  font-size:7px;
+  color:#00ff41;
+}
+.phone-close {
+  position:absolute; bottom:15px; left:50%; transform:translateX(-50%);
+  background:#ff00ff;
+  border:none;
+  color:#fff;
+  font-family:inherit;
+  font-size:8px;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* === CHALLENGE MODAL === */
+#challenge-modal {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.9);
+  z-index:998;
+  display:none;
+  align-items:center; justify-content:center;
+}
+#challenge-box {
+  background:#1a1a2e;
+  border:2px solid #ff00ff;
+  border-radius:10px;
+  padding:30px;
+  text-align:center;
+  min-width:300px;
+}
+#challenge-title {
+  font-size:12px;
+  color:#ff00ff;
+  margin-bottom:15px;
+}
+#challenge-target-name {
+  font-size:10px;
+  color:#fff;
+  margin-bottom:20px;
+}
+.challenge-games {
+  display:flex; gap:10px; justify-content:center;
+  margin-bottom:20px;
+}
+.challenge-game-btn {
+  background:#00ffff;
+  border:none;
+  color:#000;
+  font-family:inherit;
+  font-size:9px;
+  padding:12px 15px;
+  cursor:pointer;
+  border-radius:4px;
+}
+.challenge-game-btn:hover { background:#fff; }
+#challenge-cancel {
+  background:transparent;
+  border:1px solid #666;
+  color:#666;
+  font-family:inherit;
+  font-size:8px;
+  padding:8px 15px;
+  cursor:pointer;
+}
+
+/* === LOADING === */
+#loading {
+  position:fixed; inset:0;
+  background:#000;
+  z-index:2000;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+}
+#loading-text {
+  font-size:10px;
+  color:#00ff41;
+  animation:blink 0.5s step-end infinite;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:#111; }
+::-webkit-scrollbar-thumb { background:#00ffff; }
+
+/* ANIMATIONS */
+@keyframes phoneOpen {
+  0% { transform:scale(0) rotate(-10deg); opacity:0; }
+  100% { transform:scale(1) rotate(0deg); opacity:1; }
+}
+@keyframes phoneClose {
+  0% { transform:scale(1) rotate(0deg); opacity:1; }
+  100% { transform:scale(0) rotate(10deg); opacity:0; }
+}
+.phone-open { animation:phoneOpen 0.3s ease-out forwards; }
+.phone-close-anim { animation:phoneClose 0.3s ease-in forwards; }
+</style>
 </head>
 <body>
-  <div class="matrix-rain" aria-hidden="true"></div>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">Ambiente separado • PubPaid Barzinho</p>
-      <h1>PubPaid 3.0 <span>Cruzeiro do Sul Barzinho</span></h1>
+
+<!-- LOADING -->
+<div id="loading">
+  <div id="loading-text">CARREGANDO BARZINHO CZS...</div>
+</div>
+
+<!-- INTRO MATRIX -->
+<div id="intro-screen">
+  <canvas id="matrix-canvas"></canvas>
+  <div id="intro-title">
+    >>>CZS<<< v2<br>
+    <span style="font-size:20px;">Cruzeiro do Sul</span><br>
+    <span style="color:#ff00ff;">Barzinho Premium</span>
+  </div>
+  <div id="intro-subtitle">Onde a noite encontra a arte</div>
+  <div id="intro-enter">[ ENTER ]</div>
+  <div id="intro-skip" onclick="skipIntro()">PULAR [SPACE]</div>
+</div>
+
+<!-- CHARACTER SELECT -->
+<div id="select-screen">
+  <div id="select-title">ESCOLHA SEU PERSONAGEM</div>
+  <div id="select-subtitle">10 personas locais de Cruzeiro do Sul</div>
+  <div id="character-grid">
+    <!-- FEMININAS -->
+    <div class="char-card" data-char="lia" role="button" tabindex="0" aria-label="Selecionar personagem Lia Neon">
+      <img src="assets/characters/fem/lia/card_front.bmp" alt="Lia" onerror="this.style.display='none'">
+      <h3 class="char-name">LIA NEON</h3>
+      <div class="char-style">Cyberpunk Tropical</div>
     </div>
-    <nav class="tabs" aria-label="Telas do jogo">
-      <button data-screen="intro" class="active">Intro</button>
-      <button data-screen="lobby">Lobby 10</button>
-      <button data-screen="games">Mesas</button>
-      <button data-screen="report">Relatório</button>
-    </nav>
-  </header>
+    <div class="char-card" data-char="sol" role="button" tabindex="0" aria-label="Selecionar personagem Sol">
+      <img src="assets/characters/fem/sol/card_front.bmp" alt="Sol" onerror="this.style.display='none'">
+      <h3 class="char-name">SOL</h3>
+      <div class="char-style">Card Dealer</div>
+    </div>
+    <div class="char-card" data-char="rafa" role="button" tabindex="0" aria-label="Selecionar personagem Rafa">
+      <img src="assets/characters/fem/rafa/card_front.bmp" alt="Rafa" onerror="this.style.display='none'">
+      <h3 class="char-name">RAFA</h3>
+      <div class="char-style">Fashion Dealer</div>
+    </div>
+    <div class="char-card" data-char="je" role="button" tabindex="0" aria-label="Selecionar personagem Garçonete Jé">
+      <img src="assets/characters/fem/je/card_front.bmp" alt="Jé" onerror="this.style.display='none'">
+      <h3 class="char-name">GARÇONETE JÉ</h3>
+      <div class="char-style">Baiana Moderna</div>
+    </div>
+    <div class="char-card" data-char="cantora" role="button" tabindex="0" aria-label="Selecionar personagem Cantora Neon">
+      <img src="assets/characters/fem/cantora/card_front.bmp" alt="Cantora" onerror="this.style.display='none'">
+      <h3 class="char-name">CANTORA NEON</h3>
+      <div class="char-style">Popstar LED</div>
+    </div>
+    <!-- MASCULINOS -->
+    <div class="char-card" data-char="nando" role="button" tabindex="0" aria-label="Selecionar personagem Nando">
+      <img src="assets/characters/masc/nando/card_front.bmp" alt="Nando" onerror="this.style.display='none'">
+      <h3 class="char-name">NANDO</h3>
+      <div class="char-style">Security</div>
+    </div>
+    <div class="char-card" data-char="caio" role="button" tabindex="0" aria-label="Selecionar personagem Caio Pix">
+      <img src="assets/characters/masc/caio/card_front.bmp" alt="Caio" onerror="this.style.display='none'">
+      <h3 class="char-name">CAIO PIX</h3>
+      <div class="char-style">Skatista Punk</div>
+    </div>
+    <div class="char-card" data-char="lucas" role="button" tabindex="0" aria-label="Selecionar personagem DJ Lucas">
+      <img src="assets/characters/masc/lucas/card_front.bmp" alt="Lucas" onerror="this.style.display='none'">
+      <h3 class="char-name">DJ LUCAS</h3>
+      <div class="char-style">Groove Producer</div>
+    </div>
+    <div class="char-card" data-char="roberto" role="button" tabindex="0" aria-label="Selecionar personagem Chefão Roberto">
+      <img src="assets/characters/masc/roberto/card_front.bmp" alt="Roberto" onerror="this.style.display='none'">
+      <h3 class="char-name">CHEFÃO ROBERTO</h3>
+      <div class="char-style">Dono do Bar</div>
+    </div>
+    <div class="char-card" data-char="mateus" role="button" tabindex="0" aria-label="Selecionar personagem Garçom Mateus">
+      <img src="assets/characters/masc/mateus/card_front.bmp" alt="Mateus" onerror="this.style.display='none'">
+      <h3 class="char-name">GARÇOM MATEUS</h3>
+      <div class="char-style">Premium Service</div>
+    </div>
+  </div>
+  <div style="margin-top:20px; text-align:center;">
+    <button class="hud-btn" id="confirm-char" disabled>CONFIRMAR</button>
+  </div>
+</div>
 
-  <main id="app">
-    <section id="screen-intro" class="screen active hero-grid">
-      <article class="glass hero-card">
-        <p class="eyebrow">Bar amazônico premium • pixel art / neon / 3D fake depth</p>
-        <h2>Entrar no bar, escolher personagem, sentar com até 10 jogadores e jogar sinuca, damas ou xadrez.</h2>
-        <p>Esta fatia cria o esqueleto jogável/local do PubPaid 3.0: seleção de personagem, lobby com 10 slots, chat, emotes e três mesas em uma interface única.</p>
-        <div class="cta-row">
-          <button id="startBtn" class="primary">Abrir o bar</button>
-          <button id="quickReportBtn">Ver status técnico</button>
-        </div>
-      </article>
-      <aside class="glass poster" aria-label="Direção visual">
-        <div class="bar-sign">CZS</div>
-        <div class="street"></div>
-        <p>Direção: noite chuvosa em Cruzeiro do Sul, letreiros verdes, madeira escura, reflexo no asfalto, mesas com profundidade e HUD cinematográfico.</p>
-      </aside>
-    </section>
-
-    <section id="screen-lobby" class="screen">
-      <div class="layout-two">
-        <article class="glass">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Escolha de personagem</p>
-              <h2>10 personas para a mesma instância</h2>
-            </div>
-            <strong id="selectedCharacter">Nenhum selecionado</strong>
-          </div>
-          <div id="characterGrid" class="character-grid"></div>
-        </article>
-        <aside class="glass">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Sala online simulada</p>
-              <h2>Instância com 10 lugares</h2>
-            </div>
-            <span class="badge">10 slots</span>
-          </div>
-          <div id="slotGrid" class="slot-grid"></div>
-          <div class="chat-box">
-            <div id="chatLog" class="chat-log" aria-live="polite"></div>
-            <div class="emote-row" id="emoteRow"></div>
-            <form id="chatForm" class="chat-form">
-              <input id="chatInput" placeholder="Mensagem rápida no bar..." maxlength="90" />
-              <button type="submit">Publicar no chat do bar</button>
-            </form>
-          </div>
-        </aside>
+<!-- MAIN GAME -->
+<div id="game-screen">
+  <div id="hud-top">
+    <div id="player-info">
+      <img id="player-avatar" src="" alt="">
+      <div>
+        <div id="player-name">Jogador</div>
+        <div id="player-level">Level 1</div>
       </div>
-    </section>
+    </div>
+    <div id="top-actions">
+      <button class="hud-btn" onclick="openPhoneMenu()">CELULAR</button>
+      <button class="hud-btn" onclick="toggleChat()">CHAT</button>
+      <button class="hud-btn" onclick="switchArea()">MUDAR ÁREA</button>
+    </div>
+  </div>
 
-    <section id="screen-games" class="screen">
-      <div class="game-shell glass">
-        <div class="section-head">
+  <div id="location-label">BARZINHO CZS — INTERIOR</div>
+
+  <div id="game-world">
+    <canvas id="world-canvas"></canvas>
+    <div id="players-layer"></div>
+  </div>
+
+  <div id="chat-box">
+    <div id="chat-messages">
+      <div class="chat-msg"><span class="nick">Sistema:</span> <span class="text">Bem-vindo ao Barzinho CZS!</span></div>
+    </div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Digite sua mensagem..." maxlength="100">
+      <button id="chat-send">ENV</button>
+    </div>
+  </div>
+
+  <div id="emotes-bar">
+    <button class="emote-btn" onclick="sendEmote(0)">😀</button>
+    <button class="emote-btn" onclick="sendEmote(1)">😎</button>
+    <button class="emote-btn" onclick="sendEmote(2)">🎉</button>
+    <button class="emote-btn" onclick="sendEmote(3)">🔥</button>
+    <button class="emote-btn" onclick="sendEmote(4)">❤️</button>
+    <button class="emote-btn" onclick="sendEmote(5)">😂</button>
+    <button class="emote-btn" onclick="sendEmote(6)">😤</button>
+    <button class="emote-btn" onclick="sendEmote(7)">🎵</button>
+    <button class="emote-btn" onclick="sendEmote(8)">🍻</button>
+    <button class="emote-btn" onclick="sendEmote(9)">💪</button>
+  </div>
+
+  <div id="minimap">
+    <canvas id="minimap-canvas"></canvas>
+  </div>
+</div>
+
+<!-- PHONE MENU -->
+<div id="phone-menu">
+  <div id="phone-frame">
+    <div id="phone-screen">
+      <div class="phone-header">CELULAR — BARZINHO CZS</div>
+
+      <div class="phone-section">
+        <div class="phone-section-title">SKINS COLETADAS</div>
+        <div id="phone-skins-list"></div>
+      </div>
+
+      <div class="phone-section">
+        <div class="phone-section-title">ITENS ESPECIAIS</div>
+        <div id="phone-items-list"></div>
+      </div>
+
+      <div class="phone-section">
+        <div class="phone-section-title">CONQUISTAS</div>
+        <div class="phone-item">
+          <span class="phone-item-icon">🏆</span>
           <div>
-            <p class="eyebrow">Mesas jogáveis/base</p>
-            <h2 id="gameTitle">Sinuca — modo Livre</h2>
+            <div class="phone-item-name">Primeira Jogada</div>
+            <div class="phone-item-effect">Jogue seu primeiro jogo</div>
           </div>
-          <div class="game-switcher" aria-label="Escolha do jogo">
-            <button data-game="pool" class="active">Sinuca</button>
-            <button data-game="checkers">Damas</button>
-            <button data-game="chess">Xadrez</button>
-          </div>
-        </div>
-        <div id="poolPanel" class="game-panel active">
-          <div class="pool-toolbar">
-            <button data-pool-mode="Livre" class="active">Livre</button>
-            <button data-pool-mode="Brasileira">Brasileira</button>
-            <button data-pool-mode="Par/Ímpar">Par/Ímpar</button>
-            <span id="poolStatus">Arraste/aponte e solte para tacar.</span>
-          </div>
-          <canvas id="poolCanvas" width="920" height="430" aria-label="Mesa de sinuca jogável"></canvas>
-        </div>
-        <div id="checkersPanel" class="game-panel board-wrap">
-          <p class="hint">Damas base: clique em uma peça clara, depois em uma diagonal vazia. Esta fatia valida board, peças e input.</p>
-          <div id="checkersBoard" class="board checkers" role="grid"></div>
-        </div>
-        <div id="chessPanel" class="game-panel board-wrap">
-          <p class="hint">Xadrez base: peças 3D fake legíveis e movimento livre para validar seleção/mesa. Regras completas entram no próximo bloco.</p>
-          <div id="chessBoard" class="board chess" role="grid"></div>
         </div>
       </div>
-    </section>
 
-    <section id="screen-report" class="screen">
-      <article class="glass report-card">
-        <p class="eyebrow">Relatório local da fatia</p>
-        <h2>Estado PubPaid 3.0</h2>
-        <pre id="reportText"></pre>
-      </article>
-    </section>
-  </main>
+      <div class="phone-section">
+        <div class="phone-section-title">LOJA</div>
+        <div id="phone-shop-list"></div>
+      </div>
+    </div>
+    <button class="phone-close" onclick="closePhoneMenu()">GUARDAR CELULAR</button>
+  </div>
+</div>
 
-  <footer class="footer">Rayxpx Matrix Core • R0-R3 local • R5 publicação/dinheiro bloqueado até aprovação explícita</footer>
-  <script src="./src/app.js"></script>
+<!-- CHALLENGE MODAL -->
+<div id="challenge-modal">
+  <div id="challenge-box">
+    <div id="challenge-title">DESAFIAR JOGADOR</div>
+    <div id="challenge-target-name">Jogador Selecionado</div>
+    <div class="challenge-games">
+      <button class="challenge-game-btn" onclick="startGame('sinuca')">SINUCA</button>
+      <button class="challenge-game-btn" onclick="startGame('damas')">DAMAS</button>
+      <button class="challenge-game-btn" onclick="startGame('xadrez')">XADREZ</button>
+    </div>
+    <button id="challenge-cancel" onclick="closeChallenge()">CANCELAR</button>
+  </div>
+</div>
+
+<script>
+// ============================================
+// BARZINHO CZS PREMIUM — GAME ENGINE
+// ============================================
+
+const CONFIG = {
+  WORLD_WIDTH: 1600,
+  WORLD_HEIGHT: 1200,
+  TILE_SIZE: 32,
+  PLAYER_SPEED: 3,
+  MAX_PLAYERS: 10,
+  EMOTES: ['😀','😎','🎉','🔥','❤️','😂','😤','🎵','🍻','💪']
+};
+
+// CHARACTERS DATA
+const CHARACTERS = {
+  lia:    { name: 'Lia Neon',    gender: 'fem', style: 'Cyberpunk Tropical' },
+  sol:    { name: 'Sol',         gender: 'fem', style: 'Card Dealer' },
+  rafa:   { name: 'Rafa',       gender: 'fem', style: 'Fashion Dealer' },
+  je:     { name: 'Garçonete Jé', gender: 'fem', style: 'Baiana Moderna' },
+  sonora: { name: 'Cantora Neon', gender: 'fem', style: 'Popstar LED' },
+  nando:  { name: 'Nando',      gender: 'masc', style: 'Security' },
+  caio:   { name: 'Caio Pix',   gender: 'masc', style: 'Skatista Punk' },
+  lucas:  { name: 'DJ Lucas',   gender: 'masc', style: 'Groove Producer' },
+  roberto:{ name: 'Chefão Roberto', gender: 'masc', style: 'Dono do Bar' },
+  mateus: { name: 'Garçom Mateus', gender: 'masc', style: 'Premium Service' }
+};
+
+// ITEMS DATA
+const ITEMS = [
+  { id:1, name:'Coroa Neon',    effect:'Aura neon rosa',     rarity:'Lendário', icon:'👑' },
+  { id:2, name:'Óculos Solar',  effect:'Óculos neon',        rarity:'Raro',     icon:'🕶️' },
+  { id:3, name:'Capa Sombria',  effect:'Capa preta com fade', rarity:'Épico',    icon:'🧥' },
+  { id:4, name:'Boina Gang',     effect:'Boina gangster',      rarity:'Raro',     icon:'🎩' },
+  { id:5, name:'Headphone DJ',  effect:'Headphones brilhantes',rarity:'Épico',   icon:'🎧' },
+  { id:6, name:'Corrente Gold', effect:'Corrente de ouro',    rarity:'Lendário', icon:'⛓️' },
+  { id:7, name:'Tattoo LED',    effect:'Tattoo brilho',       rarity:'Épico',    icon:'💉' },
+  { id:8, name:'Botas Jets',    effect:'Jet boots fire trail', rarity:'Lendário', icon:'👢' },
+  { id:9, name:'Luva Boxe',     effect:'Luvas neon',          rarity:'Raro',     icon:'🥊' },
+  { id:10, name:'Camisa Flow',  effect:'Camisa padrão fluido', rarity:'Comum',    icon:'👕' }
+];
+
+// GAME STATE
+const state = {
+  screen: 'loading',
+  selectedChar: null,
+  player: {
+    id: null,
+    name: 'Jogador',
+    avatar: '',
+    level: 1,
+    charId: null,
+    x: 400,
+    y: 300,
+    dir: 'down',
+    skin: null,
+    items: []
+  },
+  otherPlayers: [],
+  currentArea: 'bar',
+  chatOpen: true,
+  phoneOpen: false,
+  challengeTarget: null
+};
+
+// ============================================
+// INITIALIZATION
+// ============================================
+
+function init() {
+  setupMatrixIntro();
+  setTimeout(() => {
+    document.getElementById('loading').style.display = 'none';
+    showScreen('intro');
+  }, 1500);
+
+  setupCharacterSelect();
+  setupGameInput();
+  setupPhoneMenu();
+  requestAnimationFrame(gameLoop);
+}
+
+function showScreen(name) {
+  state.screen = name;
+  document.getElementById('intro-screen').style.display = name === 'intro' ? 'flex' : 'none';
+  document.getElementById('select-screen').style.display = name === 'select' ? 'flex' : 'none';
+  document.getElementById('game-screen').style.display = name === 'game' ? 'block' : 'none';
+
+  if (name === 'game') initGameWorld();
+}
+
+// ============================================
+// MATRIX INTRO
+// ============================================
+
+function setupMatrixIntro() {
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const cols = Math.floor(canvas.width / 14);
+  const drops = Array(cols).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#00ff41';
+    ctx.font = '14px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const char = String.fromCharCode(0x30A0 + Math.random() * 96);
+      ctx.fillText(char, i * 14, drops[i] * 14);
+      if (drops[i] * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+  }
+
+  const matrixInterval = setInterval(drawMatrix, 50);
+
+  document.addEventListener('keydown', function introKey(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      clearInterval(matrixInterval);
+      document.removeEventListener('keydown', introKey);
+      skipIntro();
+    }
+  });
+}
+
+function skipIntro() {
+  showScreen('select');
+}
+
+function setupCharacterSelect() {
+  const cards = document.querySelectorAll('.char-card');
+  const confirmBtn = document.getElementById('confirm-char');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.selectedChar = card.dataset.char;
+      confirmBtn.disabled = false;
+    });
+  });
+
+  confirmBtn.addEventListener('click', () => {
+    if (state.selectedChar) {
+      state.player.charId = state.selectedChar;
+      state.player.name = CHARACTERS[state.selectedChar].name;
+      showScreen('game');
+    }
+  });
+}
+
+// ============================================
+// GAME WORLD
+// ============================================
+
+function initGameWorld() {
+  const canvas = document.getElementById('world-canvas');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.getElementById('player-name').textContent = state.player.name;
+  spawnOtherPlayers();
+  initMinimap();
+}
+
+function spawnOtherPlayers() {
+  const names = ['Ana','Bruno','Clara','Diego','Elena','Felipe','Gui','Hugo','Ivo','Joca'];
+  const charIds = Object.keys(CHARACTERS);
+
+  for (let i = 0; i < 5; i++) {
+    state.otherPlayers.push({
+      id: 'p' + i,
+      name: names[i],
+      charId: charIds[Math.floor(Math.random() * charIds.length)],
+      x: 200 + Math.random() * 600,
+      y: 150 + Math.random() * 400,
+      dir: 'down'
+    });
+  }
+  renderOtherPlayers();
+}
+
+function renderOtherPlayers() {
+  const layer = document.getElementById('players-layer');
+  layer.innerHTML = '';
+
+  state.otherPlayers.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'player-entity';
+    el.style.left = p.x + 'px';
+    el.style.top = p.y + 'px';
+    el.innerHTML = `
+      <div class="entity-sprite" style="background:#333;border:2px solid #${Math.floor(Math.random()*999999)};"></div>
+      <div class="entity-name">${p.name}</div>
+      <div class="entity-challenge" onclick="openChallenge('${p.id}')">Desafiar</div>
+    `;
+    layer.appendChild(el);
+  });
+}
+
+// ============================================
+// GAME INPUT
+// ============================================
+
+function setupGameInput() {
+  const keys = {};
+
+  document.addEventListener('keydown', e => {
+    keys[e.key] = true;
+    if (e.key === 'Escape') {
+      if (state.phoneOpen) closePhoneMenu();
+      else if (state.challengeTarget) closeChallenge();
+    }
+    if (e.key === 'm' || e.key === 'M') openPhoneMenu();
+    if (e.key === 'c' || e.key === 'C') toggleChat();
+  });
+
+  document.addEventListener('keyup', e => keys[e.key] = false);
+
+  setInterval(() => {
+    if (state.screen !== 'game') return;
+
+    let moved = false;
+    const speed = CONFIG.PLAYER_SPEED;
+
+    if (keys['ArrowUp'] || keys['w'] || keys['W']) { state.player.y -= speed; state.player.dir = 'up'; moved = true; }
+    if (keys['ArrowDown'] || keys['s'] || keys['S']) { state.player.y += speed; state.player.dir = 'down'; moved = true; }
+    if (keys['ArrowLeft'] || keys['a'] || keys['A']) { state.player.x -= speed; state.player.dir = 'left'; moved = true; }
+    if (keys['ArrowRight'] || keys['d'] || keys['D']) { state.player.x += speed; state.player.dir = 'right'; moved = true; }
+
+    if (moved) {
+      state.player.x = Math.max(0, Math.min(CONFIG.WORLD_WIDTH - 48, state.player.x));
+      state.player.y = Math.max(0, Math.min(CONFIG.WORLD_HEIGHT - 72, state.player.y));
+      renderPlayer();
+    }
+  }, 16);
+
+  document.getElementById('chat-send').addEventListener('click', sendChatMessage);
+  document.getElementById('chat-input').addEventListener('keypress', e => {
+    if (e.key === 'Enter') sendChatMessage();
+  });
+}
+
+function renderPlayer() {
+  let playerEl = document.getElementById('player-entity');
+  if (!playerEl) {
+    const layer = document.getElementById('players-layer');
+    playerEl = document.createElement('div');
+    playerEl.id = 'player-entity';
+    playerEl.className = 'player-entity';
+    playerEl.innerHTML = `
+      <div class="entity-sprite" style="background:#00ff41;border:2px solid #fff;"></div>
+      <div class="entity-name">${state.player.name} (você)</div>
+    `;
+    layer.appendChild(playerEl);
+  }
+  playerEl.style.left = state.player.x + 'px';
+  playerEl.style.top = state.player.y + 'px';
+}
+
+// ============================================
+// MINIMAP
+// ============================================
+
+function initMinimap() {
+  const canvas = document.getElementById('minimap-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 120;
+  canvas.height = 90;
+  updateMinimap();
+}
+
+function updateMinimap() {
+  if (state.screen !== 'game') return;
+  const canvas = document.getElementById('minimap-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(0, 0, 120, 90);
+  ctx.fillStyle = '#333';
+  ctx.fillRect(10, 10, 50, 35);
+  ctx.fillRect(65, 50, 45, 30);
+
+  ctx.fillStyle = '#ff0';
+  state.otherPlayers.forEach(p => {
+    const mx = (p.x / CONFIG.WORLD_WIDTH) * 110 + 5;
+    const my = (p.y / CONFIG.WORLD_HEIGHT) * 80 + 5;
+    ctx.fillRect(mx, my, 4, 4);
+  });
+
+  ctx.fillStyle = '#0f0';
+  const px = (state.player.x / CONFIG.WORLD_WIDTH) * 110 + 5;
+  const py = (state.player.y / CONFIG.WORLD_HEIGHT) * 80 + 5;
+  ctx.fillRect(px, py, 5, 5);
+
+  requestAnimationFrame(updateMinimap);
+}
+
+// ============================================
+// CHAT
+// ============================================
+
+function toggleChat() {
+  state.chatOpen = !state.chatOpen;
+  document.getElementById('chat-box').style.display = state.chatOpen ? 'block' : 'none';
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const messages = document.getElementById('chat-messages');
+  const msgEl = document.createElement('div');
+  msgEl.className = 'chat-msg';
+  msgEl.innerHTML = `<span class="nick">${state.player.name}:</span> <span class="text">${escapeHtml(text)}</span>`;
+  messages.appendChild(msgEl);
+  messages.scrollTop = messages.scrollHeight;
+  input.value = '';
+}
+
+function sendEmote(idx) {
+  const messages = document.getElementById('chat-messages');
+  const msgEl = document.createElement('div');
+  msgEl.className = 'chat-msg';
+  msgEl.innerHTML = `<span class="nick">${state.player.name}:</span> <span class="text">${CONFIG.EMOTES[idx]}</span>`;
+  messages.appendChild(msgEl);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ============================================
+// AREA SWITCH
+// ============================================
+
+function switchArea() {
+  state.currentArea = state.currentArea === 'bar' ? 'street' : 'bar';
+  document.getElementById('location-label').textContent =
+    state.currentArea === 'bar' ? 'BARZINHO CZS — INTERIOR' : 'BARZINHO CZS — RUA';
+}
+
+// ============================================
+// PHONE MENU
+// ============================================
+
+function setupPhoneMenu() {
+  renderPhoneSkins();
+  renderPhoneItems();
+  renderPhoneShop();
+}
+
+function openPhoneMenu() {
+  state.phoneOpen = true;
+  const menu = document.getElementById('phone-menu');
+  menu.style.display = 'flex';
+  menu.querySelector('#phone-frame').classList.add('phone-open');
+}
+
+function closePhoneMenu() {
+  const menu = document.getElementById('phone-menu');
+  const frame = menu.querySelector('#phone-frame');
+  frame.classList.remove('phone-open');
+  frame.classList.add('phone-close-anim');
+  setTimeout(() => {
+    menu.style.display = 'none';
+    frame.classList.remove('phone-close-anim');
+    state.phoneOpen = false;
+  }, 300);
+}
+
+function renderPhoneSkins() {
+  const list = document.getElementById('phone-skins-list');
+  if (!list) return;
+  list.innerHTML = '';
+  Object.entries(CHARACTERS).forEach(([id, char]) => {
+    const owned = id === state.player.charId;
+    list.innerHTML += `
+      <div class="phone-item" style="opacity:${owned ? 1 : 0.5};">
+        <span class="phone-item-icon">${char.gender === 'fem' ? '👩' : '👨'}</span>
+        <div>
+          <div class="phone-item-name">${char.name}</div>
+          <div class="phone-item-effect">${owned ? 'Equipado' : 'Trava'}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function renderPhoneItems() {
+  const list = document.getElementById('phone-items-list');
+  if (!list) return;
+  list.innerHTML = '';
+  state.player.items.forEach(itemId => {
+    const item = ITEMS.find(i => i.id === itemId);
+    if (item) {
+      list.innerHTML += `
+        <div class="phone-item">
+          <span class="phone-item-icon">${item.icon}</span>
+          <div>
+            <div class="phone-item-name">${item.name}</div>
+            <div class="phone-item-effect">${item.effect}</div>
+          </div>
+        </div>
+      `;
+    }
+  });
+  if (state.player.items.length === 0) {
+    list.innerHTML = '<div style="font-size:7px;color:#666;">Nenhum item ainda</div>';
+  }
+}
+
+function renderPhoneShop() {
+  const list = document.getElementById('phone-shop-list');
+  if (!list) return;
+  list.innerHTML = '';
+  ITEMS.forEach(item => {
+    const owned = state.player.items.includes(item.id);
+    list.innerHTML += `
+      <div class="phone-item" style="cursor:pointer;" onclick="buyItem(${item.id})">
+        <span class="phone-item-icon">${item.icon}</span>
+        <div>
+          <div class="phone-item-name">${item.name}</div>
+          <div class="phone-item-effect">${item.effect} — ${item.rarity}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function buyItem(itemId) {
+  if (state.player.items.includes(itemId)) return;
+  state.player.items.push(itemId);
+  renderPhoneItems();
+  renderPhoneShop();
+
+  const item = ITEMS.find(i => i.id === itemId);
+  const messages = document.getElementById('chat-messages');
+  const msgEl = document.createElement('div');
+  msgEl.className = 'chat-msg';
+  msgEl.innerHTML = `<span class="nick">Sistema:</span> <span class="text">Você comprou ${item.icon} ${item.name}!</span>`;
+  messages.appendChild(msgEl);
+}
+
+// ============================================
+// CHALLENGE SYSTEM
+// ============================================
+
+function openChallenge(playerId) {
+  const player = state.otherPlayers.find(p => p.id === playerId);
+  if (!player) return;
+
+  state.challengeTarget = playerId;
+  document.getElementById('challenge-target-name').textContent = player.name;
+  document.getElementById('challenge-modal').style.display = 'flex';
+}
+
+function closeChallenge() {
+  state.challengeTarget = null;
+  document.getElementById('challenge-modal').style.display = 'none';
+}
+
+function startGame(gameType) {
+  closeChallenge();
+  alert(`Iniciando ${gameType.toUpperCase()}...\n(Em desenvolvimento)`);
+}
+
+// ============================================
+// GAME LOOP
+// ============================================
+
+let lastTime = 0;
+function gameLoop(timestamp) {
+  requestAnimationFrame(gameLoop);
+}
+
+// ============================================
+// START
+// ============================================
+
+window.addEventListener('load', init);
+window.addEventListener('resize', () => {
+  const canvas = document.getElementById('world-canvas');
+  if (canvas) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  const matrixCanvas = document.getElementById('matrix-canvas');
+  if (matrixCanvas) {
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+  }
+});
+</script>
 </body>
 </html>

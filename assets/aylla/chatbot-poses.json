@@ -1,0 +1,281 @@
+[
+  {
+    "id": "full-01",
+    "name": "rayl-full-01-neutral.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-01-neutral.png",
+    "size": [
+      214,
+      496
+    ]
+  },
+  {
+    "id": "full-02",
+    "name": "rayl-full-02-wave.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-02-wave.png",
+    "size": [
+      221,
+      496
+    ]
+  },
+  {
+    "id": "full-03",
+    "name": "rayl-full-03-thinking.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-03-thinking.png",
+    "size": [
+      197,
+      496
+    ]
+  },
+  {
+    "id": "full-04",
+    "name": "rayl-full-04-point-right.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-04-point-right.png",
+    "size": [
+      270,
+      496
+    ]
+  },
+  {
+    "id": "full-05",
+    "name": "rayl-full-05-present-both.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-05-present-both.png",
+    "size": [
+      259,
+      496
+    ]
+  },
+  {
+    "id": "full-06",
+    "name": "rayl-full-06-point-up.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-06-point-up.png",
+    "size": [
+      230,
+      496
+    ]
+  },
+  {
+    "id": "full-07",
+    "name": "rayl-full-07-kiss.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-07-kiss.png",
+    "size": [
+      202,
+      495
+    ]
+  },
+  {
+    "id": "full-08",
+    "name": "rayl-full-08-celebrate.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-08-celebrate.png",
+    "size": [
+      240,
+      493
+    ]
+  },
+  {
+    "id": "full-09",
+    "name": "rayl-full-09-ponder.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-09-ponder.png",
+    "size": [
+      180,
+      496
+    ]
+  },
+  {
+    "id": "full-10",
+    "name": "rayl-full-10-stand.png",
+    "path": "assets/aylla/chatbot-poses/rayl-full-10-stand.png",
+    "size": [
+      184,
+      496
+    ]
+  },
+  {
+    "id": "props-01",
+    "name": "rayl-props-01-seated-stool.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-01-seated-stool.png",
+    "size": [
+      235,
+      476
+    ]
+  },
+  {
+    "id": "props-02",
+    "name": "rayl-props-02-seated-card.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-02-seated-card.png",
+    "size": [
+      260,
+      485
+    ]
+  },
+  {
+    "id": "props-03",
+    "name": "rayl-props-03-peek-panel.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-03-peek-panel.png",
+    "size": [
+      158,
+      489
+    ]
+  },
+  {
+    "id": "props-04",
+    "name": "rayl-props-04-phone-panel.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-04-phone-panel.png",
+    "size": [
+      241,
+      486
+    ]
+  },
+  {
+    "id": "props-05",
+    "name": "rayl-props-05-peek-side.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-05-peek-side.png",
+    "size": [
+      165,
+      349
+    ]
+  },
+  {
+    "id": "props-06",
+    "name": "rayl-props-06-lean-card.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-06-lean-card.png",
+    "size": [
+      191,
+      487
+    ]
+  },
+  {
+    "id": "props-07",
+    "name": "rayl-props-07-hold-card.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-07-hold-card.png",
+    "size": [
+      214,
+      492
+    ]
+  },
+  {
+    "id": "props-08",
+    "name": "rayl-props-08-double-point.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-08-double-point.png",
+    "size": [
+      261,
+      492
+    ]
+  },
+  {
+    "id": "props-09",
+    "name": "rayl-props-09-phone-like.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-09-phone-like.png",
+    "size": [
+      237,
+      494
+    ]
+  },
+  {
+    "id": "props-10",
+    "name": "rayl-props-10-stand-prop.png",
+    "path": "assets/aylla/chatbot-poses/rayl-props-10-stand-prop.png",
+    "size": [
+      173,
+      494
+    ]
+  },
+  {
+    "id": "close-01",
+    "name": "rayl-close-01-polite.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-01-polite.png",
+    "size": [
+      194,
+      665
+    ]
+  },
+  {
+    "id": "close-02",
+    "name": "rayl-close-02-wave-close.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-02-wave-close.png",
+    "size": [
+      195,
+      662
+    ]
+  },
+  {
+    "id": "close-03",
+    "name": "rayl-close-03-point-close.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-03-point-close.png",
+    "size": [
+      194,
+      663
+    ]
+  },
+  {
+    "id": "close-04",
+    "name": "rayl-close-04-present-close.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-04-present-close.png",
+    "size": [
+      195,
+      660
+    ]
+  },
+  {
+    "id": "close-05",
+    "name": "rayl-close-05-confident.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-05-confident.png",
+    "size": [
+      195,
+      663
+    ]
+  },
+  {
+    "id": "close-06",
+    "name": "rayl-close-06-walk.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-06-walk.png",
+    "size": [
+      194,
+      620
+    ]
+  },
+  {
+    "id": "close-07",
+    "name": "rayl-close-07-heart.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-07-heart.png",
+    "size": [
+      195,
+      623
+    ]
+  },
+  {
+    "id": "close-08",
+    "name": "rayl-close-08-kiss-close.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-08-kiss-close.png",
+    "size": [
+      192,
+      623
+    ]
+  },
+  {
+    "id": "close-09",
+    "name": "rayl-close-09-laugh.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-09-laugh.png",
+    "size": [
+      195,
+      621
+    ]
+  },
+  {
+    "id": "close-10",
+    "name": "rayl-close-10-present-close-alt.png",
+    "path": "assets/aylla/chatbot-poses/rayl-close-10-present-close-alt.png",
+    "size": [
+      195,
+      621
+    ]
+  },
+  {
+    "id": "feature-01",
+    "name": "rayl-feature-01-seated-close.png",
+    "path": "assets/aylla/chatbot-poses/rayl-feature-01-seated-close.png",
+    "size": [
+      677,
+      1360
+    ]
+  }
+]
