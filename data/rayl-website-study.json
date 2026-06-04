@@ -1,0 +1,308 @@
+{
+  "ok": true,
+  "version": 1,
+  "generatedAt": "2026-06-04T21:09:22.358Z",
+  "site": {
+    "name": "Catalogo Cruzeiro do Sul",
+    "region": "Cruzeiro do Sul, Acre e Vale do Jurua",
+    "purpose": "portal hiperlocal com noticias, servicos, arquivo, comunidade, comercial, PubPaid, galeria e Cheffe Call"
+  },
+  "routes": [
+    {
+      "id": "home",
+      "title": "Inicio",
+      "href": "/",
+      "routeKey": "news",
+      "keywords": [
+        "inicio",
+        "home",
+        "capa",
+        "principal",
+        "ultimas",
+        "noticias"
+      ],
+      "answer": "A pagina inicial mostra as noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos do CZS."
+    },
+    {
+      "id": "arquivo",
+      "title": "Arquivo",
+      "href": "/arquivo.html",
+      "routeKey": "archive",
+      "keywords": [
+        "arquivo",
+        "buscar",
+        "pesquisar",
+        "antiga",
+        "materia",
+        "noticia antiga"
+      ],
+      "answer": "O arquivo serve para buscar noticias por termo, periodo, fonte e categoria."
+    },
+    {
+      "id": "servicos",
+      "title": "Servicos",
+      "href": "/catalogo-servicos.html",
+      "routeKey": "services",
+      "keywords": [
+        "servico",
+        "servicos",
+        "telefone",
+        "farmacia",
+        "hospital",
+        "agua",
+        "energia",
+        "clima"
+      ],
+      "answer": "A area de servicos reúne telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas."
+    },
+    {
+      "id": "divulgue",
+      "title": "Divulgue",
+      "href": "/divulgue.html",
+      "routeKey": "",
+      "keywords": [
+        "anunciar",
+        "anuncio",
+        "divulgar",
+        "propaganda",
+        "publicidade",
+        "comercial",
+        "vender"
+      ],
+      "answer": "Para anunciar, use a pagina Divulgue ou fale no WhatsApp. O CZS pode orientar formato, card, materia patrocinada, video, site, app ou automacao."
+    },
+    {
+      "id": "galeria",
+      "title": "Galeria",
+      "href": "/galeria.html",
+      "routeKey": "gallery",
+      "keywords": [
+        "galeria",
+        "foto",
+        "fotos",
+        "imagem",
+        "turismo",
+        "mapa",
+        "ponto turistico"
+      ],
+      "answer": "A galeria reúne imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua."
+    },
+    {
+      "id": "pubpaid",
+      "title": "PubPaid",
+      "href": "/pubpaid.html",
+      "routeKey": "games",
+      "keywords": [
+        "pubpaid",
+        "jogo",
+        "jogos",
+        "sinuca",
+        "xadrez",
+        "dama",
+        "torneio",
+        "ranking"
+      ],
+      "answer": "PubPaid e a frente de jogos e campanhas do CZS. Use o atalho PubPaid para abrir jogos, ranking e novidades."
+    },
+    {
+      "id": "cheffe",
+      "title": "Cheffe Call",
+      "href": "/cheffe-call.html",
+      "routeKey": "cheffe",
+      "keywords": [
+        "cheffe",
+        "chefecall",
+        "redacao",
+        "escritorio",
+        "escritorios",
+        "equipe",
+        "corrigir",
+        "erro"
+      ],
+      "answer": "Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios."
+    },
+    {
+      "id": "whatsapp",
+      "title": "WhatsApp",
+      "href": "",
+      "routeKey": "",
+      "keywords": [
+        "whatsapp",
+        "zap",
+        "atendente",
+        "humano",
+        "contato",
+        "dono",
+        "pessoa"
+      ],
+      "answer": "Quando a RAyL nao tiver resposta segura, ela deve encaminhar para o WhatsApp com a duvida do visitante pronta."
+    }
+  ],
+  "readyAnswers": [
+    {
+      "id": "home",
+      "title": "Inicio",
+      "answer": "A pagina inicial mostra as noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos do CZS.",
+      "href": "/",
+      "routeKey": "news"
+    },
+    {
+      "id": "arquivo",
+      "title": "Arquivo",
+      "answer": "O arquivo serve para buscar noticias por termo, periodo, fonte e categoria.",
+      "href": "/arquivo.html",
+      "routeKey": "archive"
+    },
+    {
+      "id": "servicos",
+      "title": "Servicos",
+      "answer": "A area de servicos reúne telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas.",
+      "href": "/catalogo-servicos.html",
+      "routeKey": "services"
+    },
+    {
+      "id": "divulgue",
+      "title": "Divulgue",
+      "answer": "Para anunciar, use a pagina Divulgue ou fale no WhatsApp. O CZS pode orientar formato, card, materia patrocinada, video, site, app ou automacao.",
+      "href": "/divulgue.html",
+      "routeKey": ""
+    },
+    {
+      "id": "galeria",
+      "title": "Galeria",
+      "answer": "A galeria reúne imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua.",
+      "href": "/galeria.html",
+      "routeKey": "gallery"
+    },
+    {
+      "id": "pubpaid",
+      "title": "PubPaid",
+      "answer": "PubPaid e a frente de jogos e campanhas do CZS. Use o atalho PubPaid para abrir jogos, ranking e novidades.",
+      "href": "/pubpaid.html",
+      "routeKey": "games"
+    },
+    {
+      "id": "cheffe",
+      "title": "Cheffe Call",
+      "answer": "Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios.",
+      "href": "/cheffe-call.html",
+      "routeKey": "cheffe"
+    },
+    {
+      "id": "whatsapp",
+      "title": "WhatsApp",
+      "answer": "Quando a RAyL nao tiver resposta segura, ela deve encaminhar para o WhatsApp com a duvida do visitante pronta.",
+      "href": "",
+      "routeKey": ""
+    }
+  ],
+  "recentNews": [
+    {
+      "title": "Cruzeiro do Sul impulsiona turismo e economia com abertura de inscrições para o programa Hospedagem Criativa 2026",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=cruzeiro-do-sul-impulsiona-turismo-e-economia-com-abertura-de-inscricoes-para-o-programa-hospeda"
+    },
+    {
+      "title": "Após horas de trabalho, tapete de Corpus Christi está pronto para receber fiéis em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=apos-horas-de-trabalho-tapete-de-corpus-christi-esta-pronto-para-receber-fieis-em-cruzeiro-do-su"
+    },
+    {
+      "title": "Prefeitura de Cruzeiro do Sul mantém serviços de infraestrutura e tapa buracos no Centro e nos bairros",
+      "category": "Prefeitura",
+      "sourceName": "Voz do Norte",
+      "date": "03 de jun de 2026",
+      "href": "/noticia.html?slug=prefeitura-de-cruzeiro-do-sul-mantem-servicos-de-infraestrutura-e-tapa-buracos-no-centro-e-nos-b"
+    },
+    {
+      "title": "Sebrae promove maratona de desenvolvimento de games em Cruzeiro do Sul com inscrições abertas",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=sebrae-promove-maratona-de-desenvolvimento-de-games-em-cruzeiro-do-sul-com-inscricoes-abertas"
+    },
+    {
+      "title": "Prefeitura de Cruzeiro do Sul mantém unidades de saúde abertas durante o feriado de Corpus Christi",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=prefeitura-de-cruzeiro-do-sul-mantem-unidades-de-saude-abertas-durante-o-feriado-de-corpus-chris"
+    },
+    {
+      "title": "Exame toxicológico passa a ser obrigatório para primeira CNH em Cruzeiro do Sul a partir de 8 de junho",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=exame-toxicologico-passa-a-ser-obrigatorio-para-primeira-cnh-em-cruzeiro-do-sul-a-partir-de-8-de"
+    },
+    {
+      "title": "Cruzeiro do Sul mantém unidades de saúde abertas durante este feriado de Corpus Christi",
+      "category": "Prefeitura",
+      "sourceName": "ac24horas",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=cruzeiro-do-sul-mantem-unidades-de-saude-abertas-durante-este-feriado-de-corpus-christi"
+    },
+    {
+      "title": "Tapete de Corpus Christi já está pronto em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=tapete-de-corpus-christi-ja-esta-pronto-em-cruzeiro-do-sul"
+    },
+    {
+      "title": "Prefeitura lança programação oficial dos 34 anos de Porto Walter com obras, esporte, cultura e show nacional",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "date": "04 de jun de 2026",
+      "href": "/noticia.html?slug=prefeitura-lanca-programacao-oficial-dos-34-anos-de-porto-walter-com-obras-esporte-cultura-e-sho"
+    },
+    {
+      "title": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão do município de Mâncio Lima ao Sisan",
+      "category": "Prefeitura",
+      "sourceName": "Voz do Norte",
+      "date": "03 de jun de 2026",
+      "href": "/noticia.html?slug=governo-do-acre-consolida-acoes-de-combate-a-inseguranca-alimentar-com-adesao-do-municipio-de-ma"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Prefeitura",
+      "count": 13
+    },
+    {
+      "name": "Acre / Governo",
+      "count": 11
+    },
+    {
+      "name": "Saúde",
+      "count": 6
+    },
+    {
+      "name": "Cotidiano",
+      "count": 5
+    },
+    {
+      "name": "Política",
+      "count": 4
+    },
+    {
+      "name": "Esporte",
+      "count": 1
+    }
+  ],
+  "escalation": {
+    "whatsappNumber": "556896026649",
+    "rule": "Se a pergunta nao bater com respostas prontas, rotas ou noticias recentes, oferecer WhatsApp humano em vez de inventar."
+  },
+  "aiSummary": "Atender visitantes no home mostrando as noticias em destaque e últimas atualizações. No arquivo, auxiliar na busca de notícias específicas. Para serviços, orientar sobre telefones úteis e caminhos rápidos. PubPaid pode ser sugerido para jogos e campanhas. Na galeria, mostrar imagens turísticas. Cheffe Call atender solicitações de revisão ou encaminhamento.",
+  "ai": {
+    "status": "online",
+    "provider": "ollama",
+    "model": "qwen2.5:3b"
+  },
+  "refreshedByAiAt": "2026-06-04T21:09:32.206Z"
+}

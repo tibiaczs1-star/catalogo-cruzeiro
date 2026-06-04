@@ -256,6 +256,7 @@ const ACRE_2026_POLL_REOPEN_SETTINGS = ACRE_2026_POLL_EXTENSION_SETTINGS;
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
+const RAYL_WEBSITE_STUDY_FILE = path.join(DATA_DIR, "rayl-website-study.json");
 const PIX_RECEIVER_KEY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_KEY || "99566741204", 120);
 const PIX_RECEIVER_NAME = cleanShortText(process.env.OFFICE_SUPPORT_PIX_RECEIVER_NAME || "ANTONIO CLOVIS", 25);
 const PIX_RECEIVER_CITY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_CITY || "CRUZEIRO SUL", 15);
@@ -9990,10 +9991,191 @@ function raylIntentForQuestion(question = "") {
   };
 }
 
+const RAYL_ROUTE_KNOWLEDGE = [
+  {
+    id: "home",
+    title: "Inicio",
+    href: "/",
+    routeKey: "news",
+    keywords: ["inicio", "home", "capa", "principal", "ultimas", "noticias"],
+    answer: "A pagina inicial mostra as noticias em destaque, ultimas atualizacoes, servicos, galeria, comercial e atalhos do CZS."
+  },
+  {
+    id: "arquivo",
+    title: "Arquivo",
+    href: "/arquivo.html",
+    routeKey: "archive",
+    keywords: ["arquivo", "buscar", "pesquisar", "antiga", "materia", "noticia antiga"],
+    answer: "O arquivo serve para buscar noticias por termo, periodo, fonte e categoria."
+  },
+  {
+    id: "servicos",
+    title: "Servicos",
+    href: "/catalogo-servicos.html",
+    routeKey: "services",
+    keywords: ["servico", "servicos", "telefone", "farmacia", "hospital", "agua", "energia", "clima"],
+    answer: "A area de servicos reúne telefones uteis, orientacoes locais, clima, alertas e caminhos rapidos para resolver demandas."
+  },
+  {
+    id: "divulgue",
+    title: "Divulgue",
+    href: "/divulgue.html",
+    routeKey: "",
+    keywords: ["anunciar", "anuncio", "divulgar", "propaganda", "publicidade", "comercial", "vender"],
+    answer: "Para anunciar, use a pagina Divulgue ou fale no WhatsApp. O CZS pode orientar formato, card, materia patrocinada, video, site, app ou automacao."
+  },
+  {
+    id: "galeria",
+    title: "Galeria",
+    href: "/galeria.html",
+    routeKey: "gallery",
+    keywords: ["galeria", "foto", "fotos", "imagem", "turismo", "mapa", "ponto turistico"],
+    answer: "A galeria reúne imagens, pontos de Cruzeiro do Sul e conteudo visual do Vale do Jurua."
+  },
+  {
+    id: "pubpaid",
+    title: "PubPaid",
+    href: "/pubpaid.html",
+    routeKey: "games",
+    keywords: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "dama", "torneio", "ranking"],
+    answer: "PubPaid e a frente de jogos e campanhas do CZS. Use o atalho PubPaid para abrir jogos, ranking e novidades."
+  },
+  {
+    id: "cheffe",
+    title: "Cheffe Call",
+    href: "/cheffe-call.html",
+    routeKey: "cheffe",
+    keywords: ["cheffe", "chefecall", "redacao", "escritorio", "escritorios", "equipe", "corrigir", "erro"],
+    answer: "Cheffe Call organiza revisao, correcao, fonte, foto, pauta, comercial e encaminhamento para os escritorios."
+  },
+  {
+    id: "whatsapp",
+    title: "WhatsApp",
+    href: "",
+    routeKey: "",
+    keywords: ["whatsapp", "zap", "atendente", "humano", "contato", "dono", "pessoa"],
+    answer: "Quando a RAyL nao tiver resposta segura, ela deve encaminhar para o WhatsApp com a duvida do visitante pronta."
+  }
+];
+
+function scoreRaylKnowledgeQuestion(question = "", item = {}) {
+  const text = normalizeText(question);
+  const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+  return keywords.reduce((total, keyword) => {
+    const key = normalizeText(keyword);
+    if (!key) return total;
+    return total + (text.includes(key) ? 1 : 0);
+  }, 0);
+}
+
+function buildRaylWebsiteStudy({ refresh = false } = {}) {
+  const existing = readJson(RAYL_WEBSITE_STUDY_FILE, null);
+  const maxAgeMs = 6 * 60 * 60 * 1000;
+  const generatedAtMs = Date.parse(existing?.generatedAt || "");
+  if (!refresh && existing?.ok && Number.isFinite(generatedAtMs) && Date.now() - generatedAtMs < maxAgeMs) {
+    return existing;
+  }
+  const news = getArticleNews(40);
+  const categories = {};
+  news.forEach((item) => {
+    const key = cleanShortText(item.category || item.categoryKey || "Noticias", 80);
+    categories[key] = (categories[key] || 0) + 1;
+  });
+  const recentNews = news.slice(0, 10).map((item) => ({
+    title: cleanShortText(item.title || "", 180),
+    category: cleanShortText(item.category || item.categoryKey || "", 80),
+    sourceName: cleanShortText(item.sourceName || "", 100),
+    date: cleanShortText(item.date || item.publishedAt || "", 80),
+    href: item.slug ? `/noticia.html?slug=${encodeURIComponent(item.slug)}` : "/arquivo.html"
+  }));
+  const study = {
+    ok: true,
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    site: {
+      name: "Catalogo Cruzeiro do Sul",
+      region: "Cruzeiro do Sul, Acre e Vale do Jurua",
+      purpose: "portal hiperlocal com noticias, servicos, arquivo, comunidade, comercial, PubPaid, galeria e Cheffe Call"
+    },
+    routes: RAYL_ROUTE_KNOWLEDGE,
+    readyAnswers: RAYL_ROUTE_KNOWLEDGE.map((item) => ({
+      id: item.id,
+      title: item.title,
+      answer: item.answer,
+      href: item.href,
+      routeKey: item.routeKey
+    })),
+    recentNews,
+    categories: Object.entries(categories)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 12)
+      .map(([name, count]) => ({ name, count })),
+    escalation: {
+      whatsappNumber: "556896026649",
+      rule: "Se a pergunta nao bater com respostas prontas, rotas ou noticias recentes, oferecer WhatsApp humano em vez de inventar."
+    }
+  };
+  writeJson(RAYL_WEBSITE_STUDY_FILE, study);
+  return study;
+}
+
+async function refreshRaylWebsiteStudyWithAi({ reason = "auto" } = {}) {
+  const study = buildRaylWebsiteStudy({ refresh: true });
+  const result = await callCatalogAi({
+    area: "rayl-study",
+    system: [
+      "Você é a RAyL estudando o site inteiro antes de atender o público.",
+      "Crie respostas prontas curtas com base apenas no JSON do site.",
+      "Não invente páginas, fatos, contatos, notícias ou promessas.",
+      "Retorne português claro, sem raciocínio interno, em até 8 linhas."
+    ].join(" "),
+    prompt: `Estude o site e diga como a RAyL deve atender visitantes. Motivo: ${reason}`,
+    context: {
+      site: study.site,
+      routes: study.routes,
+      recentNews: study.recentNews.slice(0, 6),
+      categories: study.categories
+    },
+    temperature: 0.12
+  });
+  const nextStudy = {
+    ...study,
+    aiSummary: result.ok ? sanitizeCatalogAiAnswer(result.answer, "") : "",
+    ai: result.ai || { status: "fallback", provider: "local-study", model: "" },
+    refreshedByAiAt: new Date().toISOString()
+  };
+  writeJson(RAYL_WEBSITE_STUDY_FILE, nextStudy);
+  return nextStudy;
+}
+
+function findRaylStudyAnswer(question = "", study = null) {
+  const source = study?.ok ? study : buildRaylWebsiteStudy();
+  let best = null;
+  let score = 0;
+  (source.routes || []).forEach((item) => {
+    const itemScore = scoreRaylKnowledgeQuestion(question, item);
+    if (itemScore > score) {
+      best = item;
+      score = itemScore;
+    }
+  });
+  if (!best || score < 1) return null;
+  return {
+    id: best.id,
+    routeKey: best.routeKey || "",
+    href: best.href || "",
+    pose: best.id === "whatsapp" ? "human" : best.id === "pubpaid" ? "celebrate" : best.id === "cheffe" ? "call-attention" : "present-both",
+    title: best.title,
+    answer: best.answer,
+    human: best.id === "whatsapp"
+  };
+}
+
 function isAllowedOllamaArea(area = "") {
   const normalized = normalizeText(area);
   return new Set([
     "rayl",
+    "rayl-study",
     "chatbot",
     "chat",
     "office",
@@ -10347,35 +10529,56 @@ async function answerRaylChat(body = {}, req = null) {
   if (!question || question.length < 2) {
     return { ok: false, status: 400, error: "Envie uma pergunta para a RAyL." };
   }
-  const intent = raylIntentForQuestion(question);
+  const study = buildRaylWebsiteStudy();
+  const studyIntent = findRaylStudyAnswer(question, study);
+  const baseIntent = raylIntentForQuestion(question);
+  const intent = studyIntent || baseIntent;
+  const coveredByStudy = Boolean(studyIntent) || baseIntent.id !== "fallback";
   let aiResult = null;
-  if (!intent.human) {
+  if (!intent.human && coveredByStudy) {
     aiResult = await callCatalogAi({
       area: "rayl",
       system: [
         "Você é RAyL CZS, assistente local do Catálogo CZS.",
         "Responda em português do Acre, de forma curta e prática.",
+        "Você estudou o site inteiro; use somente o estudo do site e a resposta segura fornecida.",
         "Se o modelo tentar responder em inglês, corrija para português do Brasil antes de finalizar.",
         "Não mostre raciocínio interno, tags <think>, logs, nomes de modelo ou texto de bastidor.",
         "Nunca responda só com uma palavra solta; use uma frase útil com próximo passo.",
         "Use somente rotas do site: notícias, arquivo, serviços, galeria, comercial, Cheffe Call, comunidade e PubPaid.",
-        "Não invente atendimento humano, backend, notícia ou promessa; se a pergunta exigir pessoa, recomende WhatsApp."
+        "Não invente atendimento humano, backend, notícia ou promessa; se faltar segurança, diga que vai encaminhar ao WhatsApp."
       ].join(" "),
       prompt: [
         `Pergunta do leitor: ${question}`,
         `Resposta segura do CZS para usar como base: ${intent.answer}`,
+        study.aiSummary ? `Resumo do estudo RAyL: ${study.aiSummary}` : "",
         "Responda com uma frase prática e, se houver rota, deixe claro onde clicar."
-      ].join("\n"),
+      ].filter(Boolean).join("\n"),
       context: {
         detectedIntent: intent.id,
         routeKey: intent.routeKey || "",
         href: intent.href || "",
         safeAnswer: intent.answer,
+        websiteStudy: {
+          generatedAt: study.generatedAt,
+          site: study.site,
+          routes: (study.routes || []).map((item) => ({
+            id: item.id,
+            title: item.title,
+            href: item.href,
+            routeKey: item.routeKey
+          })),
+          recentNews: (study.recentNews || []).slice(0, 5)
+        },
         sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260)
       },
       temperature: 0.15
     });
   }
+  const humanFallback = !coveredByStudy || intent.human;
+  const fallbackAnswer = humanFallback
+    ? "Ainda nao tenho resposta segura para isso no estudo do site. Vou deixar o WhatsApp pronto para atendimento humano."
+    : intent.answer;
   const log = normalizeJsonArrayPayload(readJson(RAYL_CHAT_LOG_FILE, []));
   const item = {
     id: createRecordId("rayl"),
@@ -10384,6 +10587,8 @@ async function answerRaylChat(body = {}, req = null) {
     intent: intent.id,
     aiStatus: aiResult?.ai?.status || "fallback",
     aiItemId: aiResult?.itemId || "",
+    coveredByStudy,
+    humanFallback,
     sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260),
     referrer: tracking.referrer,
     browser: tracking.browser,
@@ -10393,17 +10598,23 @@ async function answerRaylChat(body = {}, req = null) {
   return {
     ok: true,
     status: 200,
-    answer: intent.routeKey || intent.href || intent.human
-      ? intent.answer
+    answer: intent.routeKey || intent.href || humanFallback
+      ? fallbackAnswer
       : aiResult?.ok && sanitizeCatalogAiAnswer(aiResult.answer, intent.answer)
         ? sanitizeCatalogAiAnswer(aiResult.answer, intent.answer)
-        : intent.answer,
-    pose: intent.pose || "explain",
-    title: intent.title || "RAyL",
+        : fallbackAnswer,
+    pose: humanFallback ? "human" : intent.pose || "explain",
+    title: humanFallback ? "Atendimento humano" : intent.title || "RAyL",
     routeKey: intent.routeKey || "",
     href: intent.href || "",
-    human: Boolean(intent.human),
+    human: Boolean(humanFallback),
     ai: aiResult?.ai || { status: "fallback", provider: "local-faq", model: "" },
+    study: {
+      status: "ready",
+      generatedAt: study.generatedAt,
+      matched: Boolean(studyIntent),
+      covered: coveredByStudy
+    },
     itemId: item.id
   };
 }
@@ -16966,6 +17177,23 @@ async function handleApi(req, res, pathname, searchParams) {
     const body = await parseBody(req);
     const result = await answerRaylChat(body, req);
     return sendJson(res, result.status || 200, result);
+  }
+
+  if (req.method === "GET" && pathname === "/api/rayl/website-study") {
+    return sendJson(res, 200, buildRaylWebsiteStudy({
+      refresh: /^(1|true|yes|sim)$/i.test(String(searchParams.get("refresh") || ""))
+    }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/rayl/website-study") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const study = await refreshRaylWebsiteStudyWithAi({
+      reason: body.reason || body.message || "manual"
+    });
+    return sendJson(res, 201, study);
   }
 
   if (req.method === "POST" && pathname === "/api/office-ai/chat") {
