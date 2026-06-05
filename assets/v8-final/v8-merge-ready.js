@@ -8,7 +8,7 @@
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
   const INTRO_WELCOME_AUDIO = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v7";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v9";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -3886,8 +3886,11 @@
     loader.dataset.stage = "swarm";
 
     const started = performance.now();
-    const fullSequenceMs = 7800;
-    const forcedFinishMs = 9800;
+    const audioHoldAfterStartMs = 4000;
+    const audioFallbackDurationMs = 5700;
+    const puzzleTransitionMs = 1000;
+    const fullSequenceMs = 8800;
+    const forcedFinishMs = 12800;
     let finished = false;
     let foldReady = false;
     let shellReady = false;
@@ -3906,7 +3909,10 @@
     const introVideo = $(".v8-loader-video", loader);
     const introAudio = $(".v8-loader-welcome-audio", loader);
     let introVideoStarted = false;
+    let introMediaStartedAt = 0;
     let introAudioStarted = false;
+    let introAudioStartedAt = 0;
+    let introAudioEnded = false;
     let introAudioRetryArmed = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
@@ -3932,6 +3938,18 @@
       });
     };
 
+    const markIntroAudioStarted = () => {
+      introAudioStarted = true;
+      introAudioStartedAt = performance.now();
+      introAudioEnded = false;
+      clearWelcomeAudioRetry();
+      if (introAudio) {
+        introAudio.addEventListener("ended", () => {
+          introAudioEnded = true;
+        }, { once: true });
+      }
+    };
+
     const playWelcomeAudio = () => {
       if (!introAudio || introAudioStarted) return;
       try {
@@ -3944,21 +3962,35 @@
         if (attempt?.catch) {
           attempt
             .then(() => {
-              introAudioStarted = true;
-              clearWelcomeAudioRetry();
+              markIntroAudioStarted();
             })
             .catch(() => {
               introAudioStarted = false;
               armWelcomeAudioRetry();
             });
         } else {
-          introAudioStarted = true;
-          clearWelcomeAudioRetry();
+          markIntroAudioStarted();
         }
       } catch (_) {
         introAudioStarted = false;
         armWelcomeAudioRetry();
       }
+    };
+
+    const ensurePuzzleCurtain = () => {
+      let puzzle = $(".v8-intro-puzzle", loader);
+      if (puzzle) return puzzle;
+      puzzle = document.createElement("div");
+      puzzle.className = "v8-intro-puzzle";
+      puzzle.setAttribute("aria-hidden", "true");
+      puzzle.innerHTML = Array.from({ length: 20 }, (_, index) => {
+        const col = index % 5;
+        const row = Math.floor(index / 5);
+        const delay = (index * 34 + row * 24).toFixed(0);
+        return `<span style="--i:${index};--x:${col};--y:${row};--delay:${delay}ms"></span>`;
+      }).join("");
+      loader.appendChild(puzzle);
+      return puzzle;
     };
 
     const setProgress = (value) => {
@@ -3972,6 +4004,7 @@
       else loader.dataset.stage = "ready";
       if (introVideo && p >= 38 && !introVideoStarted) {
         introVideoStarted = true;
+        introMediaStartedAt = performance.now();
         try {
           introVideo.currentTime = 0;
           introVideo.muted = true;
@@ -3988,9 +4021,10 @@
       window.clearInterval(doneGuard);
       stopAssistantLife();
       setProgress(100);
-      setStatus("Tudo pronto. Abrindo o jornal.");
-      loader.dataset.stage = "ready";
-      document.body.classList.add("v8-intro-light-release");
+      setStatus("Tudo pronto. Montando o site.");
+      loader.dataset.stage = "puzzle";
+      ensurePuzzleCurtain();
+      document.body.classList.add("v8-intro-light-release", "v8-intro-handoff", "v8-intro-puzzle-active");
       if (introVideo) {
         try {
           introVideo.pause();
@@ -4001,19 +4035,21 @@
           introAudio.pause();
         } catch (_) {}
       }
-      loader.classList.add("v8-intro-exit");
+      releaseIntroLock();
+      window.requestAnimationFrame(() => {
+        loader.classList.add("v8-intro-exit");
+      });
       setTimeout(() => {
         loader.classList.add("done");
         loader.setAttribute("aria-hidden", "true");
         loader.hidden = true;
         loader.style.pointerEvents = "none";
-        document.body.classList.remove("v8-intro-running", "v8-intro-light-release");
-        releaseIntroLock();
+        document.body.classList.remove("v8-intro-running", "v8-intro-light-release", "v8-intro-handoff", "v8-intro-puzzle-active");
         try {
           sessionStorage.setItem(INTRO_SESSION_KEY, V8_BOOT_VERSION);
         } catch (_) {}
-        setTimeout(showEntryPopup, 320);
-      }, 120);
+        setTimeout(showEntryPopup, 240);
+      }, puzzleTransitionMs + 80);
     };
 
     const tick = (now) => {
@@ -4034,11 +4070,26 @@
       }
       if (!foldReady || !shellReady || elapsed < fullSequenceMs) progress = Math.min(progress, 94);
       setProgress(progress);
-      if (foldReady && shellReady && elapsed >= fullSequenceMs) {
+      const mediaStartedAt = introAudioStartedAt || introMediaStartedAt || 0;
+      const audioElapsed = introAudioStartedAt ? now - introAudioStartedAt : 0;
+      const holdDone = Boolean(mediaStartedAt) && now - mediaStartedAt >= audioHoldAfterStartMs;
+      const audioDone = !introAudio || (
+        introAudioStarted && (
+          introAudioEnded ||
+          introAudio.ended ||
+          (Number.isFinite(introAudio.duration) && introAudio.duration > 0 && introAudio.currentTime >= Math.max(0, introAudio.duration - 0.12)) ||
+          audioElapsed >= audioFallbackDurationMs
+        )
+      );
+      if (foldReady && shellReady && elapsed >= fullSequenceMs && holdDone && audioDone) {
         finish();
         return;
       }
-      if (elapsed > forcedFinishMs) {
+      if (elapsed > forcedFinishMs && (!introAudioStarted || audioDone)) {
+        finish();
+        return;
+      }
+      if (elapsed > forcedFinishMs + 3000) {
         finish();
         return;
       }

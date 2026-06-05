@@ -9380,6 +9380,118 @@ body.v8-merge-ready.v8-intro-light-release #cinematicLoader .v8-loader-video {
   display: none !important;
 }
 
+/* 20260605: handoff curtain after voice - reveal the page under the loader before fading it out. */
+body.v8-merge-ready.v8-intro-handoff #cinematicLoader,
+html.czs-intro-release body.v8-merge-ready.v8-intro-handoff > #cinematicLoader {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  transform: translateZ(0) scale(1) !important;
+  filter: none !important;
+  transition:
+    opacity .86s cubic-bezier(.22,1,.36,1),
+    filter .86s cubic-bezier(.22,1,.36,1),
+    transform .86s cubic-bezier(.22,1,.36,1) !important;
+  will-change: opacity, filter, transform !important;
+}
+
+html.czs-intro-release body.v8-merge-ready.v8-intro-handoff > #cinematicLoader.v8-intro-exit,
+body.v8-merge-ready.v8-intro-handoff #cinematicLoader.v8-intro-exit {
+  opacity: 0 !important;
+  filter: saturate(1.06) brightness(1.12) blur(8px) !important;
+  transform: translateZ(0) scale(1.018) !important;
+}
+
+body.v8-merge-ready.v8-intro-handoff #cinematicLoader .cosmic-core,
+body.v8-merge-ready.v8-intro-handoff #cinematicLoader .loader-core {
+  transition:
+    opacity .72s cubic-bezier(.22,1,.36,1),
+    transform .72s cubic-bezier(.22,1,.36,1) !important;
+}
+
+body.v8-merge-ready.v8-intro-handoff #cinematicLoader.v8-intro-exit .cosmic-core,
+body.v8-merge-ready.v8-intro-handoff #cinematicLoader.v8-intro-exit .loader-core {
+  opacity: 0 !important;
+  transform: translate3d(0,-14px,0) scale(.985) !important;
+}
+
+body.v8-merge-ready.v8-intro-puzzle-active #cinematicLoader,
+html.czs-intro-release body.v8-merge-ready.v8-intro-puzzle-active > #cinematicLoader,
+html.czs-intro-release body.v8-merge-ready.v8-intro-puzzle-active > #cinematicLoader.v8-intro-exit {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: translateZ(0) !important;
+  background: transparent !important;
+}
+
+body.v8-merge-ready.v8-intro-puzzle-active #cinematicLoader::before,
+body.v8-merge-ready.v8-intro-puzzle-active #cinematicLoader::after {
+  content: none !important;
+  display: none !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-intro-puzzle {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483650 !important;
+  display: grid !important;
+  grid-template-columns: repeat(5,1fr) !important;
+  grid-template-rows: repeat(4,1fr) !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+body.v8-merge-ready.v8-intro-puzzle-active #cinematicLoader .v8-intro-puzzle {
+  opacity: 1 !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-intro-puzzle span {
+  position: relative !important;
+  display: block !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255,255,255,.36), transparent 30%),
+    linear-gradient(135deg,#03112c 0%,#08285a 44%,#ffd000 45%,#ffd000 51%,#f8fbff 52%,#ffffff 100%) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.42),
+    0 0 32px rgba(8,40,90,.24) !important;
+  transform: translateZ(0) scale(1.012) !important;
+  opacity: 1 !important;
+  transition:
+    transform .78s cubic-bezier(.2,.84,.18,1),
+    opacity .72s cubic-bezier(.2,.84,.18,1),
+    filter .72s cubic-bezier(.2,.84,.18,1) !important;
+  transition-delay: var(--delay) !important;
+  will-change: transform, opacity, filter !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-intro-puzzle span:nth-child(3n) {
+  background:
+    radial-gradient(circle at 62% 36%, rgba(255,255,255,.40), transparent 32%),
+    linear-gradient(145deg,#ffffff 0%,#f1f7ff 42%,#06306a 43%,#061932 100%) !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-intro-puzzle span:nth-child(4n) {
+  background:
+    radial-gradient(circle at 48% 42%, rgba(255,255,255,.48), transparent 34%),
+    linear-gradient(135deg,#ffd000 0%,#fff2a3 32%,#0a2f63 33%,#020b22 100%) !important;
+}
+
+body.v8-merge-ready.v8-intro-puzzle-active #cinematicLoader.v8-intro-exit .v8-intro-puzzle span {
+  opacity: 0 !important;
+  filter: blur(5px) saturate(1.1) !important;
+  transform:
+    translate3d(
+      calc((var(--x) - 2) * 14vw),
+      calc((var(--y) - 1.5) * 13vh),
+      0
+    )
+    rotate(calc((var(--i) - 9) * 1.35deg))
+    scale(.86) !important;
+}
+
 body.v8-merge-ready .story-row + .v8-review-mini,
 body.v8-merge-ready .article-modern-row + .v8-review-mini,
 body.v8-merge-ready .v8-continuous-card .v8-review-mini {
