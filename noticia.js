@@ -1237,7 +1237,7 @@ const normalizeDetailArticle = (article = {}) => {
 };
 
 const buildArticleNarrationText = (article = {}) => {
-  const title = normalizeEditorialText(article.audioNarrationText || "");
+  const title = normalizeEditorialText(article.audioNarrationTranscript || article.audioNarrationText || "");
   if (title) return title.slice(0, 950);
 
   const parts = [
@@ -1261,10 +1261,13 @@ const getFemalePortugueseVoice = () => {
     const lang = String(voice.lang || "");
     return /^pt([-_]|$)/i.test(lang) && !/^pt[-_]PT$/i.test(lang);
   });
-  const femaleNamePattern = /female|femin|maria|francisca|helena|luciana|vitoria|vitória|let[ií]cia|yara|camila/i;
+  const raylNamePattern = /francisca|thalita/i;
+  const femaleNamePattern = /female|femin|maria|francisca|thalita|helena|luciana|vitoria|vitória|let[ií]cia|yara|camila/i;
   return (
+    ptBrVoices.find((voice) => raylNamePattern.test(voice.name || "")) ||
     ptBrVoices.find((voice) => femaleNamePattern.test(voice.name || "")) ||
     ptBrVoices[0] ||
+    portugueseNonPortugalVoices.find((voice) => raylNamePattern.test(voice.name || "")) ||
     portugueseNonPortugalVoices.find((voice) => femaleNamePattern.test(voice.name || "")) ||
     portugueseNonPortugalVoices[0] ||
     null
@@ -1278,15 +1281,15 @@ const stopArticleNarration = () => {
   audioPlayButton?.classList.remove("is-playing");
 };
 
-const playArticleNarration = (text = "") => {
+const playArticleNarration = (text = "", article = {}) => {
   if (!("speechSynthesis" in window) || !text) return;
   stopArticleNarration();
   const utterance = new SpeechSynthesisUtterance(text);
   const voice = getFemalePortugueseVoice();
   if (voice) utterance.voice = voice;
   utterance.lang = /^pt[-_]BR$/i.test(voice?.lang || "") ? voice.lang : "pt-BR";
-  utterance.rate = 0.94;
-  utterance.pitch = 1.08;
+  utterance.rate = String(article.audioNarrationVoice || "").includes("rayl-francisca") ? 0.98 : 0.94;
+  utterance.pitch = String(article.audioNarrationVoice || "").includes("rayl-francisca") ? 1 : 1.04;
   utterance.volume = 1;
   utterance.onend = () => audioPlayButton?.classList.remove("is-playing");
   utterance.onerror = () => audioPlayButton?.classList.remove("is-playing");
@@ -1299,7 +1302,9 @@ const renderArticleAudioAndCaption = (article = {}) => {
   if (audioReaderNode && audioReaderTextNode && narrationText) {
     audioReaderTextNode.textContent = narrationText;
     audioReaderNode.hidden = false;
-    if (audioPlayButton) audioPlayButton.onclick = () => playArticleNarration(narrationText);
+    audioReaderNode.dataset.voice = article.audioNarrationVoice || "rayl-francisca-whatsapp-normal";
+    audioReaderNode.dataset.voiceName = article.audioNarrationVoiceName || "RAyL Francisca WhatsApp normal";
+    if (audioPlayButton) audioPlayButton.onclick = () => playArticleNarration(narrationText, article);
     if (audioStopButton) audioStopButton.onclick = stopArticleNarration;
   } else if (audioReaderNode) {
     audioReaderNode.hidden = true;

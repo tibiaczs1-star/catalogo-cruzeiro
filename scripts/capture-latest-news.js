@@ -11,6 +11,11 @@ const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const FALLBACK_DIR = path.join(ROOT_DIR, "assets", "news-fallbacks");
+const RAYL_NEWS_VOICE_ID = "rayl-francisca-whatsapp-normal";
+const RAYL_NEWS_VOICE_NAME = "RAyL Francisca WhatsApp normal";
+const RAYL_NEWS_VOICE_ENGINE = "edge-tts";
+const RAYL_NEWS_VOICE_MODEL = "pt-BR-FranciscaNeural";
+const RAYL_NEWS_VOICE_SAMPLE_URL = "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3";
 const DEFAULT_LIMIT_PER_SOURCE = Math.max(5, Math.min(80, Number(process.env.CATALOGO_CAPTURE_LIMIT_PER_SOURCE || 30)));
 const ACTIVE_WINDOW_LIMIT = Math.max(120, Number(process.env.CATALOGO_ACTIVE_NEWS_LIMIT || 360));
 const ARCHIVE_LIMIT = Math.max(ACTIVE_WINDOW_LIMIT, Number(process.env.CATALOGO_ARCHIVE_NEWS_LIMIT || 480));
@@ -369,11 +374,11 @@ function buildNewsAudioNarrationText(item = {}) {
   const category = cleanText(item.category || item.eyebrow || "noticia", 60);
   return cleanText(
     [
-      "Catálogo CZS.",
-      `Notícia de ${category}.`,
+      "Boa tarde. Eu sou a RAyL, do Catálogo CZS.",
+      `Agora no catálogo: notícia de ${category}.`,
       title,
       summary && summary !== title ? summary : "",
-      `Fonte: ${source}.`
+      `A informação vem de ${source}.`
     ]
       .filter(Boolean)
       .join(" "),
@@ -395,14 +400,21 @@ function buildNewsVideoCaptionText(item = {}) {
 
 function applyAudioAndVideoMetadata(item = {}) {
   item.audioNarrationText = item.audioNarrationText || buildNewsAudioNarrationText(item);
-  item.audioNarrationVoice = item.audioNarrationVoice || "pt-BR-female-browser-tts";
+  item.audioNarrationTranscript = item.audioNarrationTranscript || item.audioNarrationText;
+  item.audioNarrationVoice = RAYL_NEWS_VOICE_ID;
+  item.audioNarrationVoiceName = RAYL_NEWS_VOICE_NAME;
+  item.audioNarrationVoiceEngine = RAYL_NEWS_VOICE_ENGINE;
+  item.audioNarrationVoiceModel = RAYL_NEWS_VOICE_MODEL;
+  item.audioNarrationVoiceSampleUrl = RAYL_NEWS_VOICE_SAMPLE_URL;
   item.audioNarrationLanguage = item.audioNarrationLanguage || "pt-BR";
-  item.audioNarrationStatus = item.audioNarrationStatus || "ready-client-side";
+  item.audioNarrationStatus = item.audioNarrationStatus || "ready-transcript";
   item.videoCaptionText = item.videoCaptionText || buildNewsVideoCaptionText(item);
   item.videoCaptionStatus = item.videoCaptionStatus || "ready";
   item.accessibility = {
     ...(item.accessibility || {}),
     hasAudioNarrationText: Boolean(item.audioNarrationText),
+    hasAudioNarrationTranscript: Boolean(item.audioNarrationTranscript),
+    raylVoice: RAYL_NEWS_VOICE_ID,
     hasVideoCaptionText: Boolean(item.videoCaptionText)
   };
   return item;

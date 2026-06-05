@@ -202,6 +202,11 @@ const DEFAULT_SITE_DESCRIPTION =
   "Jornal agregador local de Cruzeiro do Sul e Vale do Jurua, com editorias, arquivo mensal, resumos originais e links para as fontes.";
 const DEFAULT_OG_IMAGE_PATH = "/assets/og-cover.svg";
 const DEFAULT_PUBLISHER_LOGO_PATH = "/assets/favicon-512x512.png";
+const RAYL_NEWS_VOICE_ID = "rayl-francisca-whatsapp-normal";
+const RAYL_NEWS_VOICE_NAME = "RAyL Francisca WhatsApp normal";
+const RAYL_NEWS_VOICE_ENGINE = "edge-tts";
+const RAYL_NEWS_VOICE_MODEL = "pt-BR-FranciscaNeural";
+const RAYL_NEWS_VOICE_SAMPLE_URL = "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3";
 const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".html",
   ".css",
@@ -7178,9 +7183,15 @@ function normalizeArticleRecord(item) {
     imageFocus: item.imageFocus || "",
     imageFit: item.imageFit || "",
     media: item.media || null,
-    audioNarrationText: item.audioNarrationText || "",
-    audioNarrationVoice: item.audioNarrationVoice || "",
-    audioNarrationStatus: item.audioNarrationStatus || "",
+    audioNarrationText: item.audioNarrationText || item.audioNarrationTranscript || "",
+    audioNarrationTranscript: item.audioNarrationTranscript || item.audioNarrationText || "",
+    audioNarrationVoice: item.audioNarrationVoice || RAYL_NEWS_VOICE_ID,
+    audioNarrationVoiceName: item.audioNarrationVoiceName || RAYL_NEWS_VOICE_NAME,
+    audioNarrationVoiceEngine: item.audioNarrationVoiceEngine || RAYL_NEWS_VOICE_ENGINE,
+    audioNarrationVoiceModel: item.audioNarrationVoiceModel || RAYL_NEWS_VOICE_MODEL,
+    audioNarrationVoiceSampleUrl: item.audioNarrationVoiceSampleUrl || RAYL_NEWS_VOICE_SAMPLE_URL,
+    audioNarrationLanguage: item.audioNarrationLanguage || "pt-BR",
+    audioNarrationStatus: item.audioNarrationStatus || "ready-transcript",
     videoCaptionText: item.videoCaptionText || "",
     videoCaptionStatus: item.videoCaptionStatus || "",
     accessibility: item.accessibility || null,
