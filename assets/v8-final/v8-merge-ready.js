@@ -3887,7 +3887,9 @@
     const pickRaylVoice = () => {
       if (!("speechSynthesis" in window) || typeof window.speechSynthesis.getVoices !== "function") return null;
       const voices = window.speechSynthesis.getVoices();
-      raylVoice = voices.find((voice) => /pt[-_]?br/i.test(voice.lang) && /maria|luciana|google|female/i.test(voice.name))
+      raylVoice = voices.find((voice) => /pt[-_]?br/i.test(voice.lang) && /francisca|thalita/i.test(voice.name))
+        || voices.find((voice) => /^pt/i.test(voice.lang) && /francisca|thalita/i.test(voice.name))
+        || voices.find((voice) => /pt[-_]?br/i.test(voice.lang) && /maria|luciana|google|female/i.test(voice.name))
         || voices.find((voice) => /pt[-_]?br/i.test(voice.lang))
         || voices.find((voice) => /^pt/i.test(voice.lang))
         || voices[0]
@@ -3909,8 +3911,8 @@
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(clean);
         utterance.lang = "pt-BR";
-        utterance.rate = 0.96;
-        utterance.pitch = 1.04;
+        utterance.rate = 0.98;
+        utterance.pitch = 1;
         utterance.volume = 0.88;
         const voice = raylVoice || pickRaylVoice();
         if (voice) utterance.voice = voice;
