@@ -7,7 +7,7 @@
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-20260605.mp4";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v11";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v12";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -3918,6 +3918,7 @@
     let introMediaStartedAt = 0;
     let introMediaEnded = false;
     let introMediaRetryArmed = false;
+    let introMediaPrimed = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
       if (status && status.textContent !== message) status.textContent = message;
@@ -3985,6 +3986,15 @@
       }
     };
 
+    const primeIntroMedia = () => {
+      if (!introVideo || introMediaPrimed) return;
+      introMediaPrimed = true;
+      try {
+        introVideo.preload = "auto";
+        introVideo.load?.();
+      } catch (_) {}
+    };
+
     const ensurePuzzleCurtain = () => {
       let puzzle = $(".v8-intro-puzzle", loader);
       if (puzzle) return puzzle;
@@ -4008,7 +4018,7 @@
       loader.dataset.progress = String(p);
       if (p < 24) loader.dataset.stage = "swarm";
       else if (p < 38) loader.dataset.stage = "collision";
-      else if (p < 94) loader.dataset.stage = "video";
+      else if (p < 100) loader.dataset.stage = "video";
       else loader.dataset.stage = "ready";
       if (introVideo && p >= 38 && !introVideoStarted) startIntroMedia();
     };
@@ -4055,13 +4065,14 @@
         progress = 24 + ((elapsed - 1500) / 1000) * 14;
         setStatus("Chamando a vinheta CZS.");
       } else if (elapsed < fullSequenceMs) {
-        progress = 38 + ((elapsed - 2500) / (fullSequenceMs - 2500)) * 56;
+        progress = 38 + ((elapsed - 2500) / (fullSequenceMs - 2500)) * 61;
         setStatus("Rodando o vídeo enquanto a página carrega.");
       } else {
-        progress = 94;
-        setStatus(shellReady && foldReady ? "Tudo pronto. Abrindo o jornal." : "Sincronizando a primeira dobra.");
+        progress = 99;
+        setStatus(shellReady && foldReady ? "Conferindo vídeo e voz." : "Sincronizando a primeira dobra.");
       }
-      if (!foldReady || !shellReady || elapsed < fullSequenceMs) progress = Math.min(progress, 94);
+      if (progress >= 24) primeIntroMedia();
+      if (!foldReady || !shellReady || elapsed < fullSequenceMs) progress = Math.min(progress, 99);
       setProgress(progress);
       const mediaStartedAt = introMediaStartedAt || 0;
       const mediaElapsed = introMediaStartedAt ? now - introMediaStartedAt : 0;
