@@ -216,6 +216,9 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".jpg",
   ".jpeg",
   ".webp",
+  ".mp3",
+  ".ogg",
+  ".wav",
   ".mp4",
   ".pdf",
   ".ico",
@@ -7185,13 +7188,19 @@ function normalizeArticleRecord(item) {
     media: item.media || null,
     audioNarrationText: item.audioNarrationText || item.audioNarrationTranscript || "",
     audioNarrationTranscript: item.audioNarrationTranscript || item.audioNarrationText || "",
-    audioNarrationVoice: item.audioNarrationVoice || RAYL_NEWS_VOICE_ID,
+    audioNarrationVoice:
+      !item.audioNarrationVoice || item.audioNarrationVoice === "pt-BR-female-browser-tts"
+        ? RAYL_NEWS_VOICE_ID
+        : item.audioNarrationVoice,
     audioNarrationVoiceName: item.audioNarrationVoiceName || RAYL_NEWS_VOICE_NAME,
     audioNarrationVoiceEngine: item.audioNarrationVoiceEngine || RAYL_NEWS_VOICE_ENGINE,
     audioNarrationVoiceModel: item.audioNarrationVoiceModel || RAYL_NEWS_VOICE_MODEL,
     audioNarrationVoiceSampleUrl: item.audioNarrationVoiceSampleUrl || RAYL_NEWS_VOICE_SAMPLE_URL,
     audioNarrationLanguage: item.audioNarrationLanguage || "pt-BR",
-    audioNarrationStatus: item.audioNarrationStatus || "ready-transcript",
+    audioNarrationStatus:
+      !item.audioNarrationStatus || item.audioNarrationStatus === "ready-client-side"
+        ? "ready-transcript"
+        : item.audioNarrationStatus,
     videoCaptionText: item.videoCaptionText || "",
     videoCaptionStatus: item.videoCaptionStatus || "",
     accessibility: item.accessibility || null,
