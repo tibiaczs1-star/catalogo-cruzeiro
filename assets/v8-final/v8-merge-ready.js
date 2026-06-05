@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v33";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v34";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -22,7 +22,6 @@
   const CHEFFE_ACTIONS_KEY = "czs-v8-cheffe-actions";
   const COMMUNITY_REPORTS_KEY = "czs-v8-community-reports";
   const NEWSLETTER_LEADS_KEY = "czs-v8-newsletter-leads";
-  const SAVED_STORIES_KEY = "czs-v8-saved-stories";
   const AD_EVENT_CACHE_KEY = "czs-v8-ad-events";
   const DENSITY_MODE_KEY = "czs-v8-density-mode";
   const VIDEO_FRAME_CACHE_KEY = "czs-v8-video-frame-cache";
@@ -1693,7 +1692,6 @@
     const cardSelectors = [
       ".v8-opportunity-card",
       ".v8-related-card",
-      ".news-card",
     ];
     cardSelectors.forEach((selector) => {
       $$(selector, root).forEach((card) => {
@@ -3444,9 +3442,9 @@
             <small>${esc(sourceName(story))} • ${esc(storyDate(story))}</small>
           </a>
           <div class="actions">
-            <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">Ler</a>
             <button class="small-btn ghost shareBtn" type="button">Compartilhar</button>
-            <button class="small-btn ghost saveBtn" type="button">Salvar</button>
+            <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">Ler</a>
+            <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
           </div>
         </article>`;
       }).join(""));
@@ -5305,26 +5303,6 @@
     }
 
     document.addEventListener("click", (event) => {
-      const save = event.target.closest(".saveBtn");
-      if (save) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        const story = storyFromElement(save);
-        const saved = safeRead(SAVED_STORIES_KEY, []);
-        if (story && !saved.some((item) => item.slug === story.slug)) {
-          saved.unshift({
-            slug: story.slug,
-            title: story.title,
-            at: new Date().toISOString(),
-            source: sourceName(story),
-          });
-          safeWrite(SAVED_STORIES_KEY, saved.slice(0, 80));
-        }
-        save.textContent = "Salvo";
-        save.classList.add("is-saved");
-        toast("Notícia salva no V8");
-        return;
-      }
       const report = event.target.closest(".reportBtn");
       if (report) {
         event.preventDefault();

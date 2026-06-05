@@ -704,11 +704,6 @@ body.v8-merge-ready .v8-cheffe-log-item .actions {
   margin-top: 10px !important;
 }
 
-body.v8-merge-ready .saveBtn.is-saved {
-  background: var(--v8-blue-soft) !important;
-  color: var(--v8-blue-dark) !important;
-}
-
 @media (max-width: 920px) {
   body.v8-merge-ready .v8-video-shell,
   body.v8-merge-ready .v8-commercial-real {
