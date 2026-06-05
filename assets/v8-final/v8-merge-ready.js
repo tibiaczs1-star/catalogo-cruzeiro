@@ -7,7 +7,7 @@
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
-  const V8_BOOT_VERSION = "20260604-v8-intro-hardlock-v1";
+  const V8_BOOT_VERSION = "20260605-v8-live-hydration-cleanup-v1";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -581,9 +581,19 @@
     return score;
   };
 
+  const heroScore = (story) => {
+    const text = [story?.title, story?.subtitle, story?.summary, story?.category, story?.sourceName]
+      .join(" ")
+      .toLowerCase();
+    let score = localScore(story);
+    if (/corpus christi|festival|programacao|programação|saude|saúde|educacao|educação|servico|serviço|tempo|rio|cidade|comunidade|obra|agenda|show|cultura|evento|mailza|mailsa|gladson|gladison/.test(text)) score += 340;
+    if (/estupro|homicidio|homicídio|morte|assassin|execucao|execução|roubo|roubad|furto|prisao|prisão|presidio|presídio|presos|detento|superlotacao|superlotação|trafico|tráfico|mandado|foragido|policia|polícia|delegacia|investig/.test(text)) score -= 1500;
+    return score;
+  };
+
   const heroStories = allStories
     .slice()
-    .sort((a, b) => localScore(b) - localScore(a))
+    .sort((a, b) => heroScore(b) - heroScore(a))
     .slice(0, 8);
 
   const opportunityStories = allStories
@@ -702,9 +712,10 @@
       topNav.dataset.v8QuickLinks = "1";
       $$("a", topNav).forEach((link) => {
         if (/chefe|cheffe/i.test(link.textContent || link.href)) {
-          link.textContent = "Sistema admin";
-          link.href = "#cheffeCallEditor";
-          link.classList.add("v8-admin-link");
+          link.textContent = "Checagem";
+          link.href = "#checagemCzs";
+          link.classList.remove("v8-admin-link");
+          link.classList.add("v8-check-link");
         }
       });
       [
@@ -1057,23 +1068,86 @@
     });
     trimRedundantCopy();
 
-    const serviceCopy = [
-      ["Serviços públicos", "Telefones, saúde, atendimento, prazos e orientação para resolver a vida na cidade."],
-      ["Vagas publicadas", "Matérias com Sine, seletivos, concursos, estágios e cursos quando houver fonte publicada."],
-      ["Concursos", "Editais, inscrições e prazos que o leitor precisa acompanhar."],
-      ["Agenda cultural", "Eventos, feiras, esporte e programação regional sem caça ao link."],
-      ["Galeria visual", "Fotos do cotidiano, da comunidade e das matérias do dia."],
-      ["Catálogo telefônico", "Contatos úteis reunidos para consulta rápida."],
-      ["Participação da comunidade", "Bairros, relatos e sugestões de pauta com caminho claro para a redação."],
-      ["Escritórios de agentes", "Entrada visual para os agentes autônomos e personagens do projeto."],
+    hydrateReaderServices();
+  }
+
+  function hydrateReaderServices() {
+    const cards = $$("#servicos .service-card");
+    if (!cards.length) return;
+    const hasJobs = Boolean(opportunityStories.length);
+    const services = [
+      {
+        title: "Atendimento do CZS",
+        text: "Abre uma conversa direta para pauta, dúvida, serviço ou correção.",
+        href: whatsappHref("Oi, CZS. Preciso de ajuda com uma pauta, serviço ou correção."),
+        external: true,
+      },
+      {
+        title: "Saúde e urgência",
+        text: "Busca rápida por hospitais, unidades e atendimento em Cruzeiro do Sul.",
+        href: "https://www.google.com/maps/search/hospital+Cruzeiro+do+Sul+Acre",
+        external: true,
+      },
+      {
+        title: "Tempo, rio e alertas",
+        text: "Consulta externa para clima, Rio Juruá e alertas que afetam a rotina.",
+        href: "https://www.google.com/search?q=tempo+Cruzeiro+do+Sul+Acre+Rio+Jurua",
+        external: true,
+      },
+      {
+        title: "Vagas publicadas",
+        text: hasJobs ? "Leva para oportunidades reais encontradas no arquivo do CZS." : "Sem vaga útil publicada por enquanto.",
+        href: hasJobs ? "#vagasCzs" : "",
+        empty: !hasJobs,
+      },
+      {
+        title: "Pesquisa política",
+        text: "Abre a pesquisa Acre 2026, formulário público e parciais visíveis.",
+        href: "pesquisa-acre-2026.html",
+      },
+      {
+        title: "Galeria premium",
+        text: "Abre registros fotográficos locais, sem misturar notícia aleatória.",
+        href: "#galeriaFotos",
+      },
+      {
+        title: "Checagem",
+        text: "Abre o helper para enviar boato, print, link, fonte ou correção ao WhatsApp.",
+        href: "#checagemCzs",
+      },
+      {
+        title: "Escritórios de agentes",
+        text: "Mostra os escritórios visuais e rotas públicas dos agentes do projeto.",
+        href: "#agentesAutonomos",
+      },
     ];
-    $$("#servicos .service-card").forEach((card, index) => {
-      const item = serviceCopy[index];
+    cards.forEach((card, index) => {
+      const item = services[index];
       if (!item) return;
       const title = card.querySelector("b");
       const text = card.querySelector("p");
-      if (title) title.textContent = item[0];
-      if (text) text.textContent = item[1];
+      const link = card.matches("a") ? card : card.querySelector("a[href]");
+      if (title) title.textContent = item.title;
+      if (text) text.textContent = item.text;
+      card.classList.toggle("is-empty", Boolean(item.empty));
+      if (link) {
+        if (item.empty) {
+          link.removeAttribute("href");
+          link.setAttribute("aria-disabled", "true");
+          link.dataset.v8EmptyService = item.title;
+        } else {
+          link.href = item.href;
+          link.removeAttribute("aria-disabled");
+          delete link.dataset.v8EmptyService;
+          if (item.external) {
+            link.target = "_blank";
+            link.rel = "noopener";
+          } else {
+            link.removeAttribute("target");
+            link.removeAttribute("rel");
+          }
+        }
+      }
     });
   }
 
@@ -1483,16 +1557,16 @@
 
   function installGlobalReviewButtons(root = document) {
     const cardSelectors = [
-      ".v8-archive-card",
       ".v8-opportunity-card",
       ".v8-related-card",
-      ".article-modern-row",
-      ".story-row",
       ".news-card",
     ];
     cardSelectors.forEach((selector) => {
       $$(selector, root).forEach((card) => {
         if (card.dataset.v8ReviewReady === "1") return;
+        if (card.closest(".v8-continuous-scroll")) return;
+        const actions = card.querySelector(".actions");
+        if (!actions) return;
         const story = storyFromElement(card);
         if (!story?.slug) return;
         card.dataset.v8ReviewReady = "1";
@@ -1502,10 +1576,7 @@
         button.dataset.v8Review = story.slug;
         button.textContent = isReviewSent(story.slug) ? "Enviado" : "Revisão";
         button.setAttribute("aria-label", `Enviar ${story.title || "matéria"} para revisão`);
-        const actions = card.querySelector(".actions");
-        if (actions) actions.appendChild(button);
-        else if (card.tagName === "A") card.insertAdjacentElement("afterend", button);
-        else card.appendChild(button);
+        actions.appendChild(button);
       });
     });
   }
@@ -1762,16 +1833,10 @@
       <div class="panel pad v8-offices-workspace v8-agent-gateway" id="agentesAutonomos">
         <div class="section-kicker">Agentes autônomos</div>
         <h2>Escritórios dos agentes</h2>
-        <p class="v8-cheffe-lead">Uma porta visual para os agentes autônomos do projeto: personagens, tarefas públicas e rotas úteis, sem rotinas internas no front-end.</p>
-        <div class="v8-agent-stage" aria-label="Personagens dos agentes autônomos">
+        <p class="v8-cheffe-lead">Escolha um escritório para atendimento, jogos, comunidade, galeria ou organização editorial do CZS.</p>
+        <div class="v8-agent-stage" aria-label="Escritórios visuais dos agentes autônomos">
           ${agents.map(agentGatewayCard).join("")}
         </div>
-        <div class="v8-agent-public-actions">
-          <a class="small-btn" href="#assistantInline">Falar com RAyL</a>
-          <a class="small-btn ghost" href="#areaJovem">Ver área jovem</a>
-          <a class="small-btn ghost" href="pubpaid.html">Abrir PubPaid</a>
-        </div>
-        <div class="chat" id="cheffeStatus">Entrada pública para conhecer os agentes e seguir para as áreas abertas do CZS.</div>
       </div>`;
     if (!section.dataset.v8CheffeBound) {
       section.addEventListener("click", onCheffeClick);
@@ -1783,27 +1848,43 @@
   function getAutonomousAgentPreviews() {
     return [
       {
-        title: "RAyL guia",
-        text: "leva o leitor para notícias, serviços, mapa e atendimento.",
-        img: "assets/aylla/rayl-v2-clean/rayl-v2-walk-full.png",
+        title: "Escritório RAyL",
+        label: "Atendimento",
+        text: "guia o leitor para notícia, serviço, mapa do site e ajuda rápida.",
+        img: "assets/aylla/rayl-v2-clean/rayl-v2-wave-full.png",
+        bg: "assets/cheffe-call-office-bg.jpg",
         href: "#assistantInline",
       },
       {
-        title: "Agente do jogo",
-        text: "aponta para PubPaid, sinuca, torneios e área jovem.",
-        img: "assets/aylla/rayl-v2-clean/rayl-v2-present-full.png",
+        title: "Escritório Nerd",
+        label: "Cheffe Call",
+        text: "mostra a sala dos agentes, tecnologia, revisão e organização do projeto.",
+        img: "assets/fusion-avatar-hologram.png",
+        bg: "assets/cheffe-call-nerd-straight-seats-ai.png",
+        href: "#infosGerais",
+      },
+      {
+        title: "Escritório PubPaid",
+        label: "Jogos",
+        text: "abre PubPaid, sinuca, lobby, torneios e área jovem.",
+        img: "assets/pubpaid/sprite-candidates/hyperreal-main-options-v1/rafa_dealer_master_front_96x144_alpha.png",
+        bg: "assets/pubpaid/lobby/pubpaid-lobby-bg-v1.png",
         href: "pubpaid.html",
       },
       {
-        title: "Agente de comunidade",
-        text: "encaminha pauta de bairro, fotos e relatos verificáveis.",
-        img: "assets/aylla/rayl-v2-clean/rayl-v2-confident-full.png",
+        title: "Escritório Comunidade",
+        label: "Bairros",
+        text: "recebe pauta de bairro, fotos, relatos e pedidos verificáveis.",
+        img: "assets/pubpaid/sprite-candidates/hyperreal-main-options-v1/caio_pix_master_front_96x144_alpha.png",
+        bg: "assets/home-cache/footer-cruzeiro-bg.jpg",
         href: "#comunidade",
       },
       {
-        title: "Agente visual",
-        text: "abre galeria, TV CZS e registros do Vale do Juruá.",
-        img: "assets/aylla/rayl-v2-clean/rayl-v2-walk-full.png",
+        title: "Escritório Visual",
+        label: "Galeria",
+        text: "leva para fotos premium, TV CZS e registros do Vale do Juruá.",
+        img: "assets/aylla/rayl-v2-clean/rayl-v2-present-full.png",
+        bg: "assets/home-cache/rio-jurua-panorama.jpg",
         href: "#galeriaFotos",
       },
     ];
@@ -1811,7 +1892,8 @@
 
   function agentGatewayCard(agent) {
     return `
-      <a class="v8-agent-public-card" href="${esc(agent.href)}">
+      <a class="v8-agent-public-card" href="${esc(agent.href)}" style="--agent-bg:url('${esc(agent.bg)}')">
+        <span class="v8-agent-label">${esc(agent.label || "Agente")}</span>
         <span class="v8-agent-sprite"><img src="${esc(agent.img)}" alt="${esc(agent.title)}" loading="eager" decoding="async"></span>
         <b>${esc(agent.title)}</b>
         <p>${esc(agent.text)}</p>
@@ -2033,7 +2115,7 @@
         ${systemCard("Comunidade", "Pauta de bairro e denúncia verificável.", "#comunidade")}
         ${systemCard("Fotos", "Galeria sem cortes agressivos.", "#galeriaFotos")}
         ${systemCard("Vídeos", "Notícias em vídeo, fonte e contexto visual.", "#videos")}
-        ${systemCard("Cheffe Call", "Sistema admin restrito, sem painel aberto ao público.", "#agentesAutonomos", "is-admin")}
+        ${systemCard("Cheffe Call", "Entrada pública para atendimento, checagem e organização editorial.", "#agentesAutonomos", "is-admin")}
         ${systemCard("Escritórios de agentes", "Entrada visual para os agentes autônomos e personagens do projeto.", "#agentesAutonomos")}
         ${systemCard("Comercial", "Anúncio e apoio local dentro do mesmo desenho.", "#monetizacao")}
       </div>`;
@@ -2290,30 +2372,45 @@
   }
 
   function galleryItems() {
-    const seen = new Set();
-    const fromStories = allStories
-      .map((story) => ({
-        title: story.title,
-        text: `${story.category || "Notícia"} • ${sourceName(story)}`,
-        src: imgFor(story),
-        href: v8Url(story),
-        slug: story.slug,
-      }))
-      .filter((item) => item.src && !weakImage(item.src))
-      .filter((item) => {
-        const key = item.src.replace(/\?.*$/, "");
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      })
-      .slice(0, 12);
-    const local = [
-      ["Rio Juruá", "Paisagem, porto, cheia, vazante e vida ribeirinha", "assets/home-cache/rio-jurua-panorama.jpg"],
-      ["Pessoas do Vale", "Gente, comércio, escolas, bairros e cotidiano", "assets/home-cache/footer-cruzeiro-bg.jpg"],
-      ["Eventos e comunidade", "Festas, cultura, esporte e circulação local", "assets/home-cache/news-batelao-local.jpg"],
-      ["Cultura do Juruá", "Agenda, artistas, encontros e memória visual", "assets/home-cache/buzz-cultura-show.jpg"],
+    const stableBase = [
+      ["Rio Juruá cinematográfico", "Panorama, água, céu e vida ribeirinha", "assets/home-cache/rio-jurua-panorama.jpg"],
+      ["Cruzeiro do Sul no fim de tarde", "Cidade, bairro, comércio e circulação local", "assets/home-cache/footer-cruzeiro-bg.jpg"],
+      ["Comunidade em movimento", "Registro local para galeria, sem virar manchete aleatória", "assets/home-cache/news-batelao-local.jpg"],
+      ["Cultura do Vale", "Agenda, palco, música e encontro comunitário", "assets/home-cache/buzz-cultura-show.jpg"],
+      ["Ruas e encontros", "Cena urbana para banco visual do CZS", "assets/home-cache/buzz-cruzeiro-01.jpg"],
+      ["Detalhes do cotidiano", "Imagem de apoio para matérias locais", "assets/home-cache/buzz-cruzeiro-02.jpg"],
+      ["Memória visual", "Arquivo de cidade, bairro e pessoas", "assets/home-cache/buzz-cruzeiro-03.jpg"],
+      ["Vale do Juruá", "Textura regional para cobertura premium", "assets/home-cache/buzz-cruzeiro-04.jpg"],
+      ["Via Cruzeiro", "Trânsito, estrada, comércio e caminho do leitor", "assets/home-cache/buzz-via-cruzeiro.jpg"],
+      ["Sabor local", "Gastronomia, mercado e pequenos negócios", "assets/home-cache/buzz-acai-bowl.jpg"],
     ].map(([title, text, src]) => ({ title, text, src, href: "#galeriaFotos" }));
-    return [...local, ...fromStories].slice(0, 16);
+
+    const localSignal = /\b(cruzeiro do sul|jurua|juruá|vale do jurua|acre|mailza|mailsa|maisa|gladson|gladison|mancio lima|mâncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauacá|sena madureira|rio branco)\b/i;
+    const gallerySignal = /\b(corpus christi|festival|show|cultura|procissao|procissão|fieis|fiéis|evento|programacao|programação|festa|turismo|rio|cidade|comunidade|esporte|jogo|agenda|obra|entrega|encontro|solenidade|educacao|educação|saude|saúde|servico|serviço)\b/i;
+    const sensitiveSignal = /\b(estupro|homicidio|homicídio|morte|cadaver|cadáver|assassin|violencia|violência|execucao|execução|prisao|prisão|trafico|tráfico|abuso|foragido|mandado)\b/i;
+    const seen = new Set(stableBase.map((item) => item.src));
+    const captured = allStories
+      .filter((story) => {
+        const haystack = [story.title, story.summary, story.category, story.categoryKey, story.sourceName].join(" ");
+        const image = normalizeAssetUrl(story.imageUrl || story.feedImageUrl || story.sourceImageUrl || "");
+        return image && !weakImage(image) && localSignal.test(haystack) && gallerySignal.test(haystack) && !sensitiveSignal.test(haystack);
+      })
+      .slice(0, 18)
+      .map((story) => {
+        const src = normalizeAssetUrl(story.imageUrl || story.feedImageUrl || story.sourceImageUrl || "");
+        if (!src || seen.has(src)) return null;
+        seen.add(src);
+        return {
+          title: story.title || "Registro local",
+          text: `${story.sourceName || "CZS"} - ${story.date || "captado agora"}`,
+          src,
+          href: v8Url(story),
+          slug: story.slug || "",
+        };
+      })
+      .filter(Boolean);
+
+    return [...captured, ...stableBase].slice(0, 16);
   }
 
   function renderPremiumGallery() {
@@ -2330,8 +2427,8 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">Galeria do Juruá</div>
-          <h2>Fotos do Juruá</h2>
-          <p>Cultura, pessoas, eventos, paisagens, bairros e imagens das matérias em uma galeria limpa.</p>
+          <h2>Galeria fotográfica premium</h2>
+          <p>Fotos locais, eventos e registros captados com curadoria visual, sem notícia aleatória nem controle interno.</p>
         </div>
         <button class="btn ghost" type="button" data-v8-gallery-open="0">Ver galeria</button>
       </div>
@@ -2597,6 +2694,221 @@
     }
   }
 
+  function photoDeskStories() {
+    const approved = safeRead("czs-v8-photo-approvals", {});
+    return allStories
+      .filter((story) => {
+        if (!story?.slug || approved[story.slug]) return false;
+        const raw = story.imageUrl || story.feedImageUrl || story.sourceImageUrl || "";
+        const visual = imgFor(story);
+        return !raw
+          || weakImage(raw)
+          || weakImage(visual)
+          || /assets\/home-cache\/(fallback|buzz-|news-batelao|rio-jurua|footer-cruzeiro)/i.test(visual);
+      })
+      .slice(0, 8);
+  }
+
+  function isCheffeAdminMode() {
+    const params = new URLSearchParams(location.search || "");
+    return params.get("cheffeAdmin") === "1" || safeRead("czs-v8-cheffe-admin", false) === true;
+  }
+
+  function renderCheffePhotoDesk() {
+    let section = $("#cheffePhotoDesk");
+    const anchor = $("#cheffeCallEditor") || $("#arquivoArtigoSystem") || $("#galeriaFotos");
+    if (!anchor?.parentElement) return;
+    if (!section) {
+      section = document.createElement("section");
+      section.id = "cheffePhotoDesk";
+      anchor.parentElement.insertBefore(section, anchor);
+    }
+    section.className = "section v8-photo-desk";
+    if (!isCheffeAdminMode()) {
+      section.innerHTML = `
+        <div class="v8-photo-desk-locked">
+          <div>
+            <div class="section-kicker">Edição restrita</div>
+            <h2>Fotos e enquadramento</h2>
+            <p>Esta mesa abre pendências de matéria, foto incerta e aprovação editorial. A fila interna só aparece para admin/super admin.</p>
+          </div>
+          <div class="v8-photo-desk-lock-actions">
+            <a class="btn" target="_blank" rel="noopener" href="${whatsappHref("Oi, CZS. Preciso de acesso de admin/super admin para Fotos e Enquadramento.")}">Solicitar acesso</a>
+            <a class="btn ghost" href="#cheffeCallEditor">Abrir Cheffe Call</a>
+          </div>
+        </div>`;
+      return;
+    }
+    const items = photoDeskStories();
+    section.innerHTML = `
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Cheffe Call</div>
+          <h2>Pendências de foto e enquadramento</h2>
+          <p>Primeira cena do editor: matérias com foto fraca, genérica ou incerta entram aqui antes de virar problema público.</p>
+        </div>
+      </div>
+      ${items.length ? `
+        <div class="v8-photo-desk-grid">
+          ${items.map((story) => `
+            <article class="v8-photo-desk-card" data-v8-photo-card="${esc(story.slug)}">
+              <img src="${esc(imgFor(story))}" alt="${esc(story.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+              <div>
+                <span>${esc(sourceName(story))} • ${esc(archiveDateLabel(story))}</span>
+                <h3>${esc(story.title)}</h3>
+                <p>${esc((story.subtitle || story.summary || localImpact(story)).slice(0, 145))}</p>
+                <div class="actions">
+                  <button class="small-btn" type="button" data-v8-open="${esc(story.slug)}">Abrir matéria</button>
+                  <button class="small-btn ghost" type="button" data-v8-photo-approve="${esc(story.slug)}">Foto aprovada</button>
+                  <a class="small-btn ghost" target="_blank" rel="noopener" data-v8-photo-whatsapp="${esc(story.slug)}" href="${whatsappHref(`Oi, CZS. Revisar foto/enquadramento desta matéria: ${story.title} - ${v8Url(story)}`)}">Enviar ao WhatsApp</a>
+                </div>
+              </div>
+            </article>`).join("")}
+        </div>` : `
+        <div class="v8-empty-public-state">
+          <b>Sem pendência de foto por enquanto.</b>
+          <span>Quando uma matéria usar foto genérica, fallback ou enquadramento duvidoso, ela aparece aqui.</span>
+        </div>`}
+    `;
+    if (!section.dataset.v8PhotoDeskBound) {
+      section.addEventListener("click", (event) => {
+        const open = event.target.closest("[data-v8-open]");
+        if (open) {
+          const story = bySlug.get(open.dataset.v8Open || "");
+          if (story) {
+            event.preventDefault();
+            openReader(story);
+          }
+          return;
+        }
+        const approve = event.target.closest("[data-v8-photo-approve]");
+        if (approve) {
+          event.preventDefault();
+          const slug = approve.dataset.v8PhotoApprove || "";
+          const approvals = safeRead("czs-v8-photo-approvals", {});
+          approvals[slug] = new Date().toISOString();
+          safeWrite("czs-v8-photo-approvals", approvals);
+          toast("Foto marcada como aprovada");
+          renderCheffePhotoDesk();
+          return;
+        }
+        const whatsapp = event.target.closest("[data-v8-photo-whatsapp]");
+        if (whatsapp) {
+          const story = bySlug.get(whatsapp.dataset.v8PhotoWhatsapp || "");
+          if (story) queueCheffeAction(story, "photo");
+        }
+      });
+      section.dataset.v8PhotoDeskBound = "1";
+    }
+  }
+
+  function installEditorialHelpers() {
+    if (!$("#v8EditorialHelper")) {
+      const modal = document.createElement("section");
+      modal.id = "v8EditorialHelper";
+      modal.className = "v8-editorial-helper";
+      modal.hidden = true;
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-label", "Helper editorial do CZS");
+      modal.innerHTML = `
+        <div class="v8-editorial-helper-backdrop" data-v8-helper-close></div>
+        <article class="v8-editorial-helper-panel">
+          <button class="v8-helper-close" type="button" data-v8-helper-close aria-label="Fechar helper">×</button>
+          <span class="section-kicker" id="v8HelperKicker">Redação CZS</span>
+          <h2 id="v8HelperTitle"></h2>
+          <p id="v8HelperIntro"></p>
+          <div class="v8-helper-options" id="v8HelperOptions"></div>
+          <textarea id="v8HelperText" rows="4" placeholder="Cole link, print, nome, data ou descreva o problema..."></textarea>
+          <div class="v8-helper-actions">
+            <a class="btn" id="v8HelperWhatsApp" target="_blank" rel="noopener" href="${SOCIAL_WHATSAPP}">Enviar no WhatsApp</a>
+            <button class="btn ghost" type="button" data-v8-helper-close>Fechar</button>
+          </div>
+        </article>`;
+      document.body.appendChild(modal);
+      modal.addEventListener("click", (event) => {
+        if (event.target.closest("[data-v8-helper-close]")) closeEditorialHelper();
+        const option = event.target.closest("[data-v8-helper-option]");
+        if (option) {
+          $$("#v8HelperOptions button").forEach((button) => button.classList.toggle("is-active", button === option));
+          updateEditorialHelperLink();
+        }
+      });
+      $("#v8HelperText")?.addEventListener("input", updateEditorialHelperLink);
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeEditorialHelper();
+      });
+    }
+    if (document.body.dataset.v8EditorialHelpersBound === "1") return;
+    document.addEventListener("click", (event) => {
+      const empty = event.target.closest("[data-v8-empty-service]");
+      if (empty) {
+        event.preventDefault();
+        toast(`${empty.dataset.v8EmptyService}: sem nada útil por enquanto`);
+        return;
+      }
+      const anchor = event.target.closest("a[href]");
+      const href = anchor?.getAttribute("href") || "";
+      if (href === "#checagemCzs" || href === "#correcaoEditorialCzs") {
+        event.preventDefault();
+        openEditorialHelper(href === "#checagemCzs" ? "check" : "correction");
+      }
+    }, true);
+    document.body.dataset.v8EditorialHelpersBound = "1";
+  }
+
+  function openEditorialHelper(mode) {
+    const modal = $("#v8EditorialHelper");
+    if (!modal) return;
+    const config = mode === "correction"
+      ? {
+        kicker: "Correções editoriais",
+        title: "O que precisa ser corrigido?",
+        intro: "Escolha o tipo de correção, acrescente o detalhe e envie direto para o WhatsApp da redação.",
+        options: ["Erro de nome", "Erro de data", "Foto errada", "Fonte faltando", "Atualização de matéria"],
+        prefix: "Oi, CZS. Quero informar uma correção editorial",
+      }
+      : {
+        kicker: "Checagem CZS",
+        title: "O que posso checar?",
+        intro: "Envie boato, print, link, vídeo, fonte ou dúvida para a redação conferir antes de publicar.",
+        options: ["Fonte e link da notícia", "Data ou horário", "Foto ou vídeo", "Boato de bairro", "Correção de texto"],
+        prefix: "Oi, CZS. Quero checar uma informação",
+      };
+    modal.dataset.mode = mode;
+    $("#v8HelperKicker").textContent = config.kicker;
+    $("#v8HelperTitle").textContent = config.title;
+    $("#v8HelperIntro").textContent = config.intro;
+    $("#v8HelperOptions").innerHTML = config.options
+      .map((option, index) => `<button class="${index === 0 ? "is-active" : ""}" type="button" data-v8-helper-option="${esc(option)}">${esc(option)}</button>`)
+      .join("");
+    const text = $("#v8HelperText");
+    if (text) text.value = "";
+    modal.hidden = false;
+    modal.classList.add("is-open");
+    document.body.classList.add("v8-helper-open");
+    updateEditorialHelperLink(config.prefix);
+  }
+
+  function updateEditorialHelperLink(prefixOverride = "") {
+    const modal = $("#v8EditorialHelper");
+    if (!modal) return;
+    const mode = modal.dataset.mode;
+    const prefix = prefixOverride || (mode === "correction" ? "Oi, CZS. Quero informar uma correção editorial" : "Oi, CZS. Quero checar uma informação");
+    const selected = $("#v8HelperOptions .is-active")?.textContent?.trim() || "Informação";
+    const detail = $("#v8HelperText")?.value?.trim() || "Vou enviar os detalhes por aqui.";
+    const link = $("#v8HelperWhatsApp");
+    if (link) link.href = whatsappHref(`${prefix}: ${selected}. ${detail}`);
+  }
+
+  function closeEditorialHelper() {
+    const modal = $("#v8EditorialHelper");
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.hidden = true;
+    document.body.classList.remove("v8-helper-open");
+  }
+
   function renderNewsFooter() {
     const footer = $("#fullSiteFooter");
     if (!footer) return;
@@ -2661,9 +2973,9 @@
         ])}
         ${footerColumn("Redação", [
           ["Agentes autônomos", "#agentesAutonomos"],
-          ["Checagem", "#arquivoArtigoSystem"],
-          ["Fotos e enquadramento", "#galeriaFotos"],
-          ["Correções editoriais", "#comunidade"],
+          ["Checagem", "#checagemCzs"],
+          ["Fotos e enquadramento", "#cheffePhotoDesk"],
+          ["Correções editoriais", "#correcaoEditorialCzs"],
           ["Fontes e arquivo", "#arquivoArtigoSystem"],
           ["Mapa do jornal", "#infosGerais"],
         ])}
@@ -2744,23 +3056,23 @@
         <div class="shortcut-grid v8-research-grid">
           <a class="shortcut-card survey" href="pesquisa-acre-2026.html">
             <span class="shortcut-icon">PE</span>
-            <b>Pesquisa eleitoral</b>
-            <p>Abra a pesquisa pronta e acompanhe a ficha do levantamento.</p>
+            <b>Abrir pesquisa Acre 2026</b>
+            <p>Leva para a página real da pesquisa publicada no site.</p>
           </a>
-          <a class="shortcut-card results" href="pesquisa-acre-2026.html#resultados">
-            <span class="shortcut-icon">R</span>
-            <b>Resultados</b>
-            <p>Veja apuração, recortes e evolução quando houver rodada publicada.</p>
+          <a class="shortcut-card results" href="pesquisa-acre-2026.html#acrePollForm">
+            <span class="shortcut-icon">V</span>
+            <b>Responder agora</b>
+            <p>Abre direto no formulário de voto/opinião da pesquisa.</p>
           </a>
-          <a class="shortcut-card data" href="#arquivoArtigoSystem">
+          <a class="shortcut-card data" href="pesquisa-acre-2026.html#voteBars">
             <span class="shortcut-icon">D</span>
-            <b>Dados de pesquisa</b>
-            <p>Use arquivo, fontes e histórico para comparar política, serviços e opinião.</p>
+            <b>Ver parciais</b>
+            <p>Mostra barras, totais e leitura rápida quando houver votos locais.</p>
           </a>
-          <a class="shortcut-card newsletter" href="#newsletter">
-            <span class="shortcut-icon">N</span>
-            <b>Resumo do dia</b>
-            <p>Receba no e-mail as principais notícias e o que muda hoje.</p>
+          <a class="shortcut-card newsletter" href="pesquisa-acre-2026.html#summaryTotal">
+            <span class="shortcut-icon">F</span>
+            <b>Ficha da pesquisa</b>
+            <p>Mostra total, leitura pública e contexto sem abrir área administrativa.</p>
           </a>
         </div>`;
     }
@@ -3018,8 +3330,7 @@
       setClosed(true);
     });
     restore.addEventListener("click", () => setClosed(false));
-    const storedRail = safeGetItem("czs-v8-context-rail-closed");
-    setClosed(storedRail !== "0");
+    setClosed(true);
   }
 
   function installSalesLanding() {
@@ -3447,20 +3758,25 @@
       setProgress(100);
       setStatus("Tudo pronto. Abrindo o jornal.");
       loader.dataset.stage = "ready";
+      document.body.classList.add("v8-intro-light-release");
+      if (introVideo) {
+        try {
+          introVideo.pause();
+        } catch (_) {}
+      }
       loader.classList.add("v8-intro-exit");
       setTimeout(() => {
         loader.classList.add("done");
         loader.setAttribute("aria-hidden", "true");
         loader.hidden = true;
         loader.style.pointerEvents = "none";
-        document.body.classList.remove("v8-intro-running");
+        document.body.classList.remove("v8-intro-running", "v8-intro-light-release");
         releaseIntroLock();
         try {
           sessionStorage.setItem(INTRO_SESSION_KEY, V8_BOOT_VERSION);
         } catch (_) {}
-        showEntryPopup();
-        setTimeout(showEntryPopup, 260);
-      }, 260);
+        setTimeout(showEntryPopup, 320);
+      }, 120);
     };
 
     const tick = (now) => {
@@ -4589,9 +4905,11 @@
     renderPremiumGallery();
     renderArchiveExplorer();
     renderCheffeCommand();
+    renderCheffePhotoDesk();
     loadArchiveEndpoint();
     loadCheffeBackendState();
     renderResearchAndSupport();
+    hydrateReaderServices();
     renderFinalResources();
     enhanceCommercialAndShortcuts();
     positionPublicModulesBeforeContinuous();
@@ -4604,6 +4922,7 @@
     sanitizePublicCopy();
     remapLegacyLinks();
     normalizeInternalLinks(document);
+    installEditorialHelpers();
     installClickRouter();
     installDensityToggle();
     installGlobalReviewButtons();

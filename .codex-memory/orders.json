@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-04T21:26:41.104Z",
+  "lastUpdatedAt": "2026-06-05T02:07:21.374Z",
   "orders": [
     {
       "id": "2026-06-03-v8-rayl-commercial-popup-real-images",
@@ -5646,6 +5646,87 @@
       ],
       "nextSteps": [],
       "notes": "Hard lock esconde todos os irmaos do loader e mantem cobertura fixa escura ate html.czs-intro-release."
+    },
+    {
+      "id": "2026-06-04-descartar-5-poses-props-rejeitadas-da-rayl-no-backup-chatbot-poses-e-atualizar-f",
+      "createdAt": "2026-06-04T23:28:50.299Z",
+      "updatedAt": "2026-06-04T23:28:50.299Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "descarte esses",
+      "summary": "Descartar 5 poses props rejeitadas da RAyL no backup chatbot-poses e atualizar folha de extras.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        ".codex-backups/rayl-crop-fix-20260604/assets/aylla/chatbot-poses/rayl-props-06-lean-card.png",
+        ".codex-backups/rayl-crop-fix-20260604/assets/aylla/chatbot-poses/rayl-props-07-hold-card.png",
+        ".codex-backups/rayl-crop-fix-20260604/assets/aylla/chatbot-poses/rayl-props-08-double-point.png",
+        ".codex-backups/rayl-crop-fix-20260604/assets/aylla/chatbot-poses/rayl-props-09-phone-like.png",
+        ".codex-backups/rayl-crop-fix-20260604/assets/aylla/chatbot-poses/rayl-props-10-stand-prop.png"
+      ],
+      "assetRefs": [
+        ".codex-temp/rayl-crop-fix-20260604/rayl-extra-poses-found.html",
+        ".codex-temp/rayl-crop-fix-20260604/rayl-extra-poses-found.png"
+      ],
+      "tags": [
+        "rayl",
+        "recorte",
+        "descarte",
+        "poses"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-rodada-final-captar-hidratar-validar-e-subir-v8-online-com-noticias-fotos-videos",
+      "createdAt": "2026-06-05T02:06:25.490Z",
+      "updatedAt": "2026-06-05T02:06:25.490Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Subir o site, atualizar/hidratar desde a data em que parou ate agora, captar noticias, fotos para galeria, atividades e dados sobre Mailza/Mailsa e Gladson, priorizar muitos videos, datas, eventos e seções hidratadas; deixar sem foto so em ultimo caso e mandar itens duvidosos para Cheffe Call apos online.",
+      "summary": "Rodada final: captar, hidratar, validar e subir V8 online com noticias, fotos, videos, datas/eventos e fila Cheffe Call.",
+      "normalizedTasks": [
+        "captar noticias atuais",
+        "hidratar todas as secoes",
+        "priorizar fotos reais e videos",
+        "mandar duvidas para Cheffe Call",
+        "validar local",
+        "subir online"
+      ],
+      "filesTouched": [
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "data/latest-news-capture-report.json",
+        "assets/v8-final/v8-merge-ready.js",
+        "assets/v8-final/v8-merge-ready.css",
+        "index.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "czs-v8",
+        "deploy",
+        "captacao",
+        "hidratacao",
+        "cheffe-call",
+        "galeria",
+        "noticias"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-voz-rayl-deve-narrar-noticia-a-partir-de-texto-pre-corrigido-para-portugues-bras",
+      "createdAt": "2026-06-05T02:07:21.374Z",
+      "updatedAt": "2026-06-05T02:07:21.374Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Corrigir voz RAyL: antes de falar notícias, ler a notícia, gerar texto em português corrigido com contexto e acentos, e só então mandar a Francisca narrar.",
+      "summary": "Voz RAyL deve narrar notícia a partir de texto pré-corrigido para português brasileiro, com contexto e acentos, não do texto bruto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }
