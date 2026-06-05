@@ -1,21 +1,18 @@
 # Handoff
 
-Updated: 2026-06-04T21:27:28.632Z
+Updated: 2026-06-05T02:29:36.463Z
 
-V8 intro hard lock aplicado em index.html + assets/v8-final/v8-merge-ready.css/js. O problema reportado pelo usuario era o site aparecer 2x durante a intro; agora a intro usa body::before como cobertura escura e mantem #cinematicLoader acima ate html.czs-intro-release. CDP em http://127.0.0.1:3000/?forceIntro=1&hardlockTest=1 confirmou pass=true e leaks=[].
+Captacao/hidratacao 2026-06-05 publicada: commits e08ac51 e a3ae67c no Render live. Online smoke OK: versão 20260605, Corpus Christi no snapshot/API, sem vazamento de chave. Cleanup removeu SVGs news-fallbacks sem referencia e prepara commit de assets legados Aylla sem uso.
 
 ## Next
 
-- Manter deploy/push aguardando aval do usuario
-- evitar staging de arquivos paralelos sujos
+- Usuario deve revisar https://catalogo-cruzeiro-web.onrender.com; se aparecer bug online
+- corrigir local e redeploy. Nao apagar barzinho/vendor/docs/testes sem revisao especifica.
 
 ## Files In Focus
 
 - index.html
-- assets/v8-final/v8-merge-ready.css
 - assets/v8-final/v8-merge-ready.js
-- .codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-report.json
-
-## Related Orders
-
-- 2026-06-04-corrigir-vazamento-visual-do-site-durante-a-intro-v8
+- assets/v8-final/v8-merge-ready.css
+- scripts/render-api-bridge.js
+- .codex-temp/cleanup-20260605/news-fallback-cleanup.json

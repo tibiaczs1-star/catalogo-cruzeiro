@@ -1,27 +1,26 @@
 # Current State
 
-Updated: 2026-06-04T21:27:16.385Z
+Updated: 2026-06-05T02:29:36.463Z
 
 ## Active Goal
 
-- V8 intro hard lock corrigido
+- V8 hidratado online e limpeza em andamento
 
 ## Summary
 
-O vazamento visual em que o site aparecia durante a intro foi corrigido com trava dura: enquanto html.czs-intro-lock estiver ativo, o loader fica visivel, os irmaos ficam ocultos e uma cobertura fixa escura bloqueia qualquer frame do portal. Validacao CDP passou com leaks=[] e review-team totalIssues=0.
+Site V8 foi hidratado com captacao atual, validado local/online e publicado no Render. Limpeza remove fallbacks SVG antigos sem referencia e assets legados Aylla sem uso; trabalho paralelo fica preservado.
 
 ## Next
 
-- Usuario revisar localmente antes de subir
-- nao fazer deploy/push sem aprovacao
+- Revisar online com usuario
+- investigar qualquer bug retornado do Render e continuar limpeza manual apenas em itens classificados como seguros.
 
 ## Files In Focus
 
 - index.html
-- assets/v8-final/v8-merge-ready.css
 - assets/v8-final/v8-merge-ready.js
-
-## Assets In Focus
-
-- .codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-report.json
-- .codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-800ms.png
+- assets/v8-final/v8-merge-ready.css
+- data/runtime-news.json
+- data/news-archive.json
+- news-data.js
+- scripts/render-api-bridge.js
