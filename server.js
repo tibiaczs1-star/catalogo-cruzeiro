@@ -6697,6 +6697,12 @@ function mimeFor(filePath) {
       return "image/gif";
     case ".mp4":
       return "video/mp4";
+    case ".mp3":
+      return "audio/mpeg";
+    case ".ogg":
+      return "audio/ogg";
+    case ".wav":
+      return "audio/wav";
     case ".pdf":
       return "application/pdf";
     case ".ico":

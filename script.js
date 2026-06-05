@@ -522,7 +522,8 @@ window.__CATALOGO_HOME_FIRST_FOLD_PROMISE__ = new Promise((resolve) => {
   homeFirstFoldReadyState.resolve = resolve;
 });
 const portalWarmStaticUrls = [
-  "./assets/logo-czs.svg",
+  "./assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png",
+  "./assets/intro/czs-loader-video-20260603.mp4",
   "./assets/favicon.svg",
   "./styles.css?v=20260522-homegate3",
   "./premium-home-redesign.css?v=20260522-homegate3",
@@ -15360,26 +15361,26 @@ const hydrateStaticMediaSurfaces = async (options = {}) => {
       return;
     }
 
-    hydrateSocialCards(window.NEWS_DATA || []);
-    renderClimateAlertsSection(window.NEWS_DATA || []);
-    renderAgendaSection(window.NEWS_DATA || []);
-    renderSocialAgendaSurface(window.NEWS_DATA || []);
-    renderCatalogTvSurface(window.NEWS_DATA || []);
-    renderPremiumBottomNewsSurface(window.NEWS_DATA || []);
-
-    if (deferCadernos) {
-      window.setTimeout(hydrateSecondarySurfaces, 0);
-    } else {
-      hydrateSecondarySurfaces();
-    }
-
-    if (deferCadernos) {
-      window.setTimeout(() => {
-        void hydrateCadernos().catch(() => {});
-      }, 180);
-    } else {
-      await hydrateCadernos();
-    }
+    runIdleStepQueue(
+      [
+        () => hydrateSocialCards(window.NEWS_DATA || []),
+        () => {
+          renderClimateAlertsSection(window.NEWS_DATA || []);
+          renderAgendaSection(window.NEWS_DATA || []);
+        },
+        () => {
+          renderSocialAgendaSurface(window.NEWS_DATA || []);
+          renderCatalogTvSurface(window.NEWS_DATA || []);
+        },
+        () => renderPremiumBottomNewsSurface(window.NEWS_DATA || []),
+        () => hydrateSecondarySurfaces(),
+        () => {
+          void hydrateCadernos().catch(() => {});
+        }
+      ],
+      splashCompactViewportQuery.matches ? 1200 : 720,
+      splashCompactViewportQuery.matches ? 520 : 220
+    );
   }
 
 };

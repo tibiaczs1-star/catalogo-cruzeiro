@@ -1,7 +1,45 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-05T04:45:00.000Z",
+  "lastUpdatedAt": "2026-06-05T17:25:02.007Z",
   "orders": [
+    {
+      "id": "2026-06-05-capturar-produtos-grupo-inova-logo-correta",
+      "createdAt": "2026-06-05T05:01:13.097Z",
+      "updatedAt": "2026-06-05T05:01:13.097Z",
+      "status": "blocked-by-safe-whatsapp-control",
+      "source": "chat",
+      "rawRequest": "use essa logo... agora va no grupo inova no zap capture todos os produtos, faça criativos deles e legenda, e poste nos outros grupos de venda, e com nosso whats app pra contato",
+      "summary": "Usuário corrigiu a logo oficial a ser usada e pediu captura de produtos do grupo Inova no WhatsApp para criar criativos/legendas e postar nos grupos de venda.",
+      "normalizedTasks": [
+        "usar a logo enviada em C:/Users/junio/Downloads/ChatGPT Image 3 de jun. de 2026, 05_47_16.png",
+        "capturar todos os produtos do grupo Inova no WhatsApp",
+        "criar uma imagem e uma legenda por produto com link wa.me do usuário",
+        "postar somente nos grupos de venda confirmados após validar cabeçalho",
+        "bloquear execução ao vivo enquanto o controle seguro do WhatsApp não estiver disponível"
+      ],
+      "filesTouched": [
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/logo-catalogo-czs-correta.png",
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/whatsapp/",
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/INOVA_CAPTURE_PENDING.md"
+      ],
+      "assetRefs": [
+        "whatsapp-vendas-homem-aluguel-20260605"
+      ],
+      "tags": [
+        "whatsapp",
+        "inova",
+        "vendas",
+        "produtos",
+        "logo-correta",
+        "wa-me"
+      ],
+      "nextSteps": [
+        "Retomar com Browser/DOM seguro no WhatsApp Web ou plugin Codex Browser.",
+        "Abrir grupo Inova, confirmar cabeçalho e capturar produtos/fotos/preços.",
+        "Gerar criativos com a logo correta e postar nos grupos de venda um item por vez."
+      ],
+      "notes": "Nesta sessão, Chrome não expôs CDP e UIA só mostrou a barra do navegador; não foi possível capturar produtos do grupo Inova nem postar sem risco de clique cego."
+    },
     {
       "id": "2026-06-05-v8-hidratacao-real-deploy",
       "createdAt": "2026-06-05T04:45:00.000Z",
@@ -5885,6 +5923,111 @@
       "source": "chat",
       "rawRequest": "aqui vai ficar a rotina do facebook",
       "summary": "Esta conversa/fluxo passa a ser o ponto de rotina do Facebook: preparar e executar publicacoes do Facebook com criativo + legenda, respeitando o protocolo social do projeto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-envios-whatsapp-servicos-czs-v4-final-aguardando-sessao-logada-no-plugin",
+      "createdAt": "2026-06-05T05:55:54.072Z",
+      "updatedAt": "2026-06-05T05:55:54.072Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Executar todos os envios WhatsApp com criativos premium v4: serviços contextuais, logo oficial pequena, uma imagem + uma legenda por item; incluir aluguel de Meta Quest; nao postar no GRUPO VIP DONA D; retomar quando WhatsApp acessivel pelo plugin estiver logado.",
+      "summary": "Envios WhatsApp servicos CZS v4 final aguardando sessao logada no plugin",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-relatorio-de-melhorias-de-responsividade-da-home-czs-v8-com-foco-em-desktop-estr",
+      "createdAt": "2026-06-05T14:27:34.127Z",
+      "updatedAt": "2026-06-05T14:27:34.127Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Responsividade é importante; fazer relatório de como melhorar a responsividade para não ficar feio quando diminuir a tela, conforme captura enviada.",
+      "summary": "Relatório de melhorias de responsividade da home CZS/V8 com foco em desktop estreito, tablet e mobile.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-intro-v8-preservar-logo-exibir-video-original-em-tamanho-qualidade-original-apen",
+      "createdAt": "2026-06-05T16:14:29.926Z",
+      "updatedAt": "2026-06-05T16:14:29.926Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "OK ESTA RESOLVIDO, A LOGO SUMIO NAO FAÇA ISSO, O VIDEO TA MUITO SEM QUALIDADE, DEIXE ELE ORIGINAL ABERTO COM O TAMANHO ORIGINAL IGUINORE O NOME DOLA LA TANTO FAZ, E SO ASSIM QUE O CARRAGAMENTO DO SITE ACABAR DE CHEGAR A 100 POR CENTO, AI APARECE A JANELA DO VIDEO, E UM LAO DIZENDO CLICLE PARA INCIIAR, AI SIM TOCA O BEM VINSDOS E PASSA PRA ABERTURA DO SITE",
+      "summary": "Intro V8: preservar logo, exibir video original em tamanho/qualidade original apenas apos carregamento chegar a 100%, mostrar chamada Clique para iniciar, tocar audio de boas-vindas com o video e entao abrir o site.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-rotina-whatsapp-2026-06-05-executada-via-plugin-chrome",
+      "createdAt": "2026-06-05T16:36:14.137Z",
+      "updatedAt": "2026-06-05T16:36:14.137Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Rotina executada: serviços, propagandas, convites e notícias no WhatsApp usando plugin no Chrome logado; não usar VIP Dona D; notícia somente Catálogo CZS.",
+      "summary": "Rotina WhatsApp 2026-06-05 executada via plugin Chrome",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-ajustar-raiane-para-parecer-sentada-na-linha-amarela-da-janela-e-transformar-car",
+      "createdAt": "2026-06-05T16:38:53.181Z",
+      "updatedAt": "2026-06-05T16:38:53.181Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ELA TINHA QUE ESTA SENTADA NAQUELA LINHA AMARELA PRA PARECER QUE SENTOU EM CIMA DA JANELA; QUANDO VC TEM TIPO LICITAÇÕES OU COISAS QUE FICAM DA PRA FAZER UMA LSITA ALI PORQUE N FAZ, LICITAÇÃO DE QUE? MELHOR QUE ESSE PANO EM BRANCO",
+      "summary": "Ajustar RAIane para parecer sentada na linha amarela da janela e transformar cards de licitação/utilidade pública em cards úteis com lista do objeto/órgão/prazo/fonte em vez de área branca vazia.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-instalar-configurar-gemma-4-12b-como-modelo-local-de-apoio-no-ollama-hermes-open",
+      "createdAt": "2026-06-05T16:53:26.695Z",
+      "updatedAt": "2026-06-05T16:53:26.695Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "QUERO QUE VC USE O GEMMA 4.0 12B no Hermes, Ollama, OpenCode/Codex e outras CLIs locais como apoio para subsistemas de IA dos sites e sistemas automaticos; adicionar às CLIs e testar quais respondem bem.",
+      "summary": "Instalar/configurar Gemma 4 12B como modelo local de apoio no Ollama, Hermes, OpenCode/Codex, RayX e subsistemas IA do CZS, com smoke comparativo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-fechamento-v8-final-otimizar-hidratacao-velocidade-manter-intro-aprovada-prepara",
+      "createdAt": "2026-06-05T17:25:02.007Z",
+      "updatedAt": "2026-06-05T17:25:02.007Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "OK O RESTO TA BOM, AGORA DEPOIS SUBA E OTIMZE A VELOCIDADE O MAXIMO QUE DE DE HISDRATAÇÃO -- PROXIMO PASSO VAMOS COLOCAR A IA PRA LA ATRAVES DO MEU PC AQUI -- ENTÃO VAMOS TER FINALIZADO",
+      "summary": "Fechamento V8 final: otimizar hidratação/velocidade, manter intro aprovada, preparar commit/deploy e próxima etapa será ligar IA online via PC local.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

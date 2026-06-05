@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-05T04:45:00.000Z",
+  "lastUpdatedAt": "2026-06-05T16:31:23.565Z",
   "assets": [
     {
       "id": "v8-hidratacao-real-validation-20260605",
@@ -28,10 +28,11 @@
       "id": "whatsapp-vendas-homem-aluguel-20260605",
       "kind": "html-and-whatsapp-queue",
       "path": ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/index.html",
-      "note": "Pacote navegável com imagens e legendas para WhatsApp grupos de venda, todos com link wa.me e novo serviço Homem de Aluguel.",
+      "note": "Pacote navegável com imagens e legendas para WhatsApp grupos de venda, agora com a logo correta enviada pelo usuário aplicada nas 12 imagens; captura do grupo Inova segue pendente por falta de controle seguro.",
       "source": "workspace",
       "linkedOrderIds": [
-        "2026-06-05-whatsapp-vendas-homem-aluguel"
+        "2026-06-05-whatsapp-vendas-homem-aluguel",
+        "2026-06-05-capturar-produtos-grupo-inova-logo-correta"
       ],
       "createdAt": "2026-06-05T03:47:01.119Z"
     },
@@ -2315,6 +2316,33 @@
       "note": "Screenshot final do WhatsApp apos repostagem premium em grupos de venda via plugin.",
       "linkedOrderIds": [],
       "createdAt": "2026-06-05T03:10:36.041Z"
+    },
+    {
+      "id": "contact-sheet-jpg",
+      "kind": "image",
+      "path": ".codex-temp/whatsapp-contextual-services-20260605-v4-final/contact-sheet.jpg",
+      "source": "workspace",
+      "note": "Contact sheet do pacote v4 final, usado para conferir logo pequena e Meta Quest incluido.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T05:55:54.041Z"
+    },
+    {
+      "id": "manifest-json",
+      "kind": "report",
+      "path": ".codex-temp/whatsapp-contextual-services-20260605-v4-final/manifest.json",
+      "source": "workspace",
+      "note": "Manifesto com imagens e legendas finais para envio atomico imagem+legenda.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T05:55:54.071Z"
+    },
+    {
+      "id": "czs-intro-v28-proof-final",
+      "kind": "screenshot-pack",
+      "path": "C:\\Users\\junio\\AppData\\Local\\Temp\\czs-intro-v28-proof-final",
+      "source": "workspace",
+      "note": "Prova da intro v28: antes do clique em 100%, video tocando com audio embutido apos clique, e site liberado depois da transicao.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T16:31:23.565Z"
     }
   ],
   "social": [

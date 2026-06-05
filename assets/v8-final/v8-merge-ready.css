@@ -9014,24 +9014,12 @@ body.v8-merge-ready #cinematicLoader .v8-loader-video-scene::before {
 }
 
 body.v8-merge-ready #cinematicLoader .v8-loader-video-scene::after {
-  content: "CZS" !important;
-  position: absolute !important;
-  right: 14px !important;
-  bottom: 14px !important;
-  z-index: 3 !important;
-  min-width: 56px !important;
-  min-height: 30px !important;
-  display: grid !important;
-  place-items: center !important;
-  padding: 6px 10px !important;
-  border-radius: 999px !important;
-  border: 1px solid rgba(255,255,255,.48) !important;
-  background: linear-gradient(135deg, rgba(2,8,23,.94), rgba(9,43,87,.92)) !important;
-  color: #ffd400 !important;
-  font-size: 12px !important;
-  font-weight: 1000 !important;
-  letter-spacing: .08em !important;
-  box-shadow: 0 12px 26px rgba(2,8,23,.42) !important;
+  content: none !important;
+  display: none !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-loader-video-mask {
+  display: none !important;
 }
 
 body.v8-merge-ready #cinematicLoader .v8-loader-video {
@@ -9042,37 +9030,27 @@ body.v8-merge-ready #cinematicLoader .v8-loader-video {
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
+  object-position: center center !important;
   border-radius: 24px !important;
   background: #020713 !important;
-  padding: 8px !important;
+  padding: 0 !important;
+  transform: none !important;
+  transform-origin: 50% 50% !important;
+  pointer-events: none !important;
 }
 
 body.v8-merge-ready #cinematicLoader .v8-loader-video-label {
-  position: absolute !important;
-  left: 50% !important;
-  bottom: 14px !important;
-  z-index: 2 !important;
-  transform: translateX(-50%) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 28px !important;
-  padding: 7px 12px !important;
-  border-radius: 999px !important;
-  background: rgba(2,8,23,.70) !important;
-  color: #ffffff !important;
-  font-size: 11px !important;
-  font-weight: 900 !important;
-  letter-spacing: .08em !important;
-  text-transform: uppercase !important;
-  white-space: nowrap !important;
-  box-shadow: 0 10px 28px rgba(2,8,23,.26) !important;
+  display: none !important;
 }
 
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-brand-logo {
-  width: min(520px, 74vw) !important;
-  margin-bottom: 10px !important;
-  filter: drop-shadow(0 14px 26px rgba(2,8,23,.30)) !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: min(520px, 76vw) !important;
+  height: auto !important;
+  margin: 0 auto 12px !important;
+  overflow: visible !important;
 }
 
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .southern-cross,
@@ -9083,18 +9061,60 @@ body.v8-merge-ready #cinematicLoader[data-stage="video"] .czs-cross {
   overflow: hidden !important;
 }
 
+body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-intro-chips {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-video-scene {
-  width: min(430px, 64vw, 48vh) !important;
+  width: min(480px, 88vw, 68vh) !important;
   height: auto !important;
-  min-height: min(430px, 64vw, 48vh) !important;
-  margin: 8px auto 14px !important;
+  min-height: min(480px, 88vw, 68vh) !important;
+  margin: 6px auto 12px !important;
   opacity: 1 !important;
   transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+}
+
+body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-video-label {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 14px !important;
+  z-index: 9 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 44px !important;
+  padding: 0 18px !important;
+  border: 2px solid #001b4f !important;
+  border-radius: 999px !important;
+  background: #ffd400 !important;
+  color: #001a4d !important;
+  font-family: "Arial Black", Impact, sans-serif !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+  box-shadow: 5px 6px 0 #001b4f, 0 18px 34px rgba(2,8,23,.30) !important;
+  transform: translateX(-50%) !important;
+  white-space: nowrap !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  appearance: none !important;
+}
+
+body.v8-merge-ready #cinematicLoader.v8-video-playing .v8-loader-video-label {
+  display: none !important;
 }
 
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .loader-core h2 {
-  font-size: clamp(24px, 3vw, 34px) !important;
-  margin-top: 4px !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
 }
 
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .loader-core p {
@@ -9128,9 +9148,9 @@ body.v8-merge-ready #cinematicLoader[data-stage="video"] .loader-track {
   }
 
   body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-video-scene {
-    width: min(300px, 78vw) !important;
+    width: min(350px, 88vw) !important;
     height: auto !important;
-    min-height: min(300px, 42vh, 78vw) !important;
+    min-height: min(350px, 56vh, 88vw) !important;
   }
 }
 
@@ -9547,4 +9567,95 @@ body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control small {
 body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control svg {
   width: 22px !important;
   height: 22px !important;
+}
+
+/* 20260605 v29: RAIane anchored to the commercial window and procurement cards made useful. */
+body.v8-merge-ready .v8-entry-popup.v8-commercial-entry > .v8-commercial-aylla {
+  top: calc(-1 * clamp(122px, 13vw, 154px)) !important;
+  right: clamp(28px, 5vw, 66px) !important;
+  width: clamp(152px, 14vw, 180px) !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  z-index: 7 !important;
+  transform: translateY(3px) !important;
+  filter: drop-shadow(0 26px 28px rgba(2,8,23,.22)) !important;
+}
+
+body.v8-merge-ready .v8-entry-popup.v8-commercial-entry .v8-commercial-shell {
+  padding-top: clamp(112px, 10vw, 132px) !important;
+}
+
+body.v8-merge-ready .v8-entry-popup.v8-commercial-entry {
+  top: calc(50% + 104px) !important;
+}
+
+body.v8-merge-ready .news-card.is-procurement-card,
+body.v8-merge-ready .v8-continuous-card.is-procurement-card {
+  min-height: 0 !important;
+  height: auto !important;
+  align-self: start !important;
+}
+
+body.v8-merge-ready .news-card.is-procurement-card .copy,
+body.v8-merge-ready .v8-continuous-card.is-procurement-card > a {
+  gap: 10px !important;
+}
+
+body.v8-merge-ready .news-card.is-procurement-card .actions,
+body.v8-merge-ready .v8-continuous-card.is-procurement-card .actions {
+  margin-top: 12px !important;
+}
+
+body.v8-merge-ready .v8-procurement-list {
+  display: grid !important;
+  gap: 8px !important;
+  list-style: none !important;
+  margin: 4px 14px 0 !important;
+  padding: 0 !important;
+}
+
+body.v8-merge-ready .copy .v8-procurement-list {
+  margin: 4px 0 0 !important;
+}
+
+body.v8-merge-ready .v8-procurement-list li {
+  display: grid !important;
+  grid-template-columns: minmax(72px, .35fr) minmax(0, 1fr) !important;
+  gap: 8px !important;
+  align-items: start !important;
+  padding: 8px 10px !important;
+  background: #f7faff !important;
+  border: 1px solid #dce6f5 !important;
+  border-radius: 6px !important;
+}
+
+body.v8-merge-ready .v8-procurement-list b {
+  color: #06255a !important;
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .v8-procurement-list span {
+  color: #101b31 !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+@media (max-width: 560px) {
+  body.v8-merge-ready .v8-entry-popup.v8-commercial-entry > .v8-commercial-aylla {
+    top: -112px !important;
+    right: 18px !important;
+    width: 136px !important;
+  }
+
+  body.v8-merge-ready .v8-entry-popup.v8-commercial-entry .v8-commercial-shell {
+    padding-top: 108px !important;
+  }
+
+  body.v8-merge-ready .v8-procurement-list li {
+    grid-template-columns: 1fr !important;
+    gap: 3px !important;
+  }
 }

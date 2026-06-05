@@ -6,9 +6,10 @@
   const BRAND_MAIN = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
-  const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-20260605.mp4";
+  const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v14";
+  const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v32";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -302,7 +303,60 @@
   function storyImageMarkup(story = {}, loading = "lazy") {
     const src = imgFor(story);
     if (!src) return missingStoryVisualMarkup(story);
-    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" onerror="(()=>{const card=this.closest('.news-card,.v8-continuous-card,.v8-opportunity-card,.v8-archive-card,.v8-rail-story'); if(card){card.remove();} else {this.remove();}})()">`;
+    const priority = loading === "eager" ? "high" : "low";
+    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" decoding="async" fetchpriority="${priority}" onerror="(()=>{const card=this.closest('.news-card,.v8-continuous-card,.v8-opportunity-card,.v8-archive-card,.v8-rail-story'); if(card){card.remove();} else {this.remove();}})()">`;
+  }
+
+  const PROCUREMENT_PATTERN = /\b(licita[cç][aã]o|preg[aã]o|edital|chamada p[úu]blica|concorr[êe]ncia|tomada de pre[cç]os|dispensa|inexigibilidade|cotação|cotacao|credenciamento|registro de pre[cç]o|CP\s*N[º°]?\s*\d+)/i;
+
+  function isProcurementStory(story = {}) {
+    return PROCUREMENT_PATTERN.test([
+      story.title,
+      story.category,
+      story.summary,
+      story.subtitle,
+      story.sourceName,
+      story.sourceLabel,
+      story.sourceUrl,
+    ].filter(Boolean).join(" "));
+  }
+
+  function procurementNumber(story = {}) {
+    const text = [story.title, story.summary, story.sourceLabel, story.sourceUrl].filter(Boolean).join(" ");
+    const found = text.match(/\b(?:CP|PE|PP|TP|DL|IN|EDITAL|PREG[ÃA]O|CONCORR[ÊE]NCIA)\s*N?[º°]?\s*\d{1,4}\/\d{4}\b/i);
+    if (found) return found[0].replace(/\s+/g, " ").trim();
+    const compact = String(story.title || "").split(/\s+-\s+/)[0]?.trim();
+    return compact || "Edital público";
+  }
+
+  function procurementSubject(story = {}) {
+    const title = String(story.title || "").trim();
+    const summary = String(story.summary || story.subtitle || "").trim();
+    const richText = [
+      story.audioNarrationText,
+      story.audioNarrationTranscript,
+      story.videoCaptionText,
+      Array.isArray(story.body) ? story.body.join(" ") : "",
+      story.lede,
+    ].filter(Boolean).join(" ");
+    const objectFromRichText = richText.match(/Aviso de Licita[cç][aã]o[.:]?\s+(.+?)(?:\s+(?:A informa[cç][aã]o vem|Fonte:|O CZS|Novas informa[cç][oõ]es)|$)/i);
+    if (objectFromRichText?.[1] && objectFromRichText[1].trim().length > 10) {
+      return objectFromRichText[1].replace(/\s+/g, " ").trim().slice(0, 148);
+    }
+    const tail = title.split(/\s+-\s+/).slice(1).join(" - ").trim();
+    if (tail && !/^aviso de licita[cç][aã]o$/i.test(tail)) return tail;
+    if (summary && summary !== title && summary.length > 22) return summary.replace(/\s+/g, " ").slice(0, 148);
+    return "Abrir edital para ver objeto, itens, prazo e anexos.";
+  }
+
+  function procurementDetailMarkup(story = {}) {
+    const source = sourceName(story) || "Fonte oficial";
+    return `<ul class="v8-procurement-list" aria-label="Resumo da licitação">
+      <li><b>Processo</b><span>${esc(procurementNumber(story))}</span></li>
+      <li><b>Órgão</b><span>${esc(source)}</span></li>
+      <li><b>Publicado</b><span>${esc(storyDate(story) || story.date || "Atualizado")}</span></li>
+      <li><b>Objeto</b><span>${esc(procurementSubject(story))}</span></li>
+    </ul>`;
   }
 
   function firstVideoUrlFrom(value) {
@@ -811,8 +865,9 @@
       videoScene.className = "v8-loader-video-scene";
       videoScene.setAttribute("aria-label", "Vídeo de abertura do Catálogo CZS");
       videoScene.innerHTML = `
-        <video class="v8-loader-video" src="${INTRO_VIDEO}" poster="${INTRO_POSTER}" muted playsinline webkit-playsinline autoplay preload="auto"></video>
-        <span class="v8-loader-video-label">carregando o jornal do vale</span>`;
+        <video class="v8-loader-video" src="${INTRO_VIDEO}" poster="${INTRO_POSTER}" playsinline webkit-playsinline preload="auto"></video>
+        <span class="v8-loader-video-mask" aria-hidden="true"></span>
+        <button class="v8-loader-video-label" type="button">Clique para iniciar</button>`;
       const progressTrack = loaderCore.querySelector(".loader-track");
       loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
     }
@@ -1755,7 +1810,7 @@
     return `
       <a class="v8-rail-story" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
         ${videoSrc
-          ? `<img src="${esc(videoPosterFor(story, videoSrc))}" alt="${esc(story.title)}" loading="lazy" data-v8-video-poster-src="${esc(videoSrc)}" data-v8-video-fallback="${esc(imgFor(story))}">`
+          ? `<img src="${esc(videoPosterFor(story, videoSrc))}" alt="${esc(story.title)}" loading="lazy" decoding="async" fetchpriority="low" data-v8-video-poster-src="${esc(videoSrc)}" data-v8-video-fallback="${esc(imgFor(story))}">`
           : storyImageMarkup(story)}
         <span><b>${esc(story.title)}</b><small>${esc(story.category || "Notícia")} • ${esc(storyDate(story))}</small></span>
       </a>`;
@@ -2479,7 +2534,7 @@
       <div class="v8-young-grid">
         ${cards.map((card, index) => `
           <a class="v8-young-card ${index === 0 ? "is-featured" : ""}" href="${esc(card.href)}">
-            <img src="${esc(card.image)}" alt="${esc(card.title)}" loading="lazy">
+            <img src="${esc(card.image)}" alt="${esc(card.title)}" loading="lazy" decoding="async" fetchpriority="low">
             <span>${esc(card.label)}</span>
             <b>${esc(card.title)}</b>
             <p>${esc(card.text)}</p>
@@ -2593,7 +2648,7 @@
       <div class="v8-gallery-grid">
         ${items.map((item, itemIndex) => `
           <button class="v8-gallery-tile" type="button" data-v8-gallery-open="${itemIndex}">
-            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy">
+            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy" decoding="async" fetchpriority="low">
             <span><i>${esc(item.kind === "video" ? "Vídeo" : "Foto")}</i><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span>
           </button>`).join("")}
       </div>
@@ -3272,7 +3327,7 @@
           ${partners.map(([name, logo, label, href]) => `
             <article class="v8-support-card">
               <div class="v8-support-logo">
-                ${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy">` : `<span class="v8-support-logo-text">${esc(name)}</span>`}
+                ${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy" decoding="async" fetchpriority="low">` : `<span class="v8-support-logo-text">${esc(name)}</span>`}
               </div>
               <a class="v8-support-title-link" href="${esc(href)}">${esc(name)}</a>
               <p>${esc(label)}</p>
@@ -3314,7 +3369,7 @@
         <div class="v8-tourism-grid">
           ${points.map(([title, text, img]) => `
             <article class="v8-tour-card">
-              <img src="${esc(img)}" alt="${esc(title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor({ title }))}'">
+              <img src="${esc(img)}" alt="${esc(title)}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null;this.src='${esc(realPhotoFor({ title }))}'">
               <div>
                 <b>${esc(title)}</b>
                 <p>${esc(text)}</p>
@@ -3377,13 +3432,15 @@
     const paint = () => {
       const slice = source.slice(index, index + batchSize);
       index += slice.length;
-      grid.insertAdjacentHTML("beforeend", slice.map((story) => `
-        <article class="news-card v8-continuous-card" data-v8-slug="${esc(story.slug)}">
+      grid.insertAdjacentHTML("beforeend", slice.map((story) => {
+        const procurement = isProcurementStory(story);
+        return `
+        <article class="news-card v8-continuous-card${procurement ? " is-procurement-card" : ""}" data-v8-slug="${esc(story.slug)}">
           <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
             ${storyImageMarkup(story)}
             <span class="badge">${esc(story.category || sourceName(story))}</span>
             <h3>${esc(story.title)}</h3>
-            <p>${esc(story.summary || story.subtitle || localImpact(story))}</p>
+            ${procurement ? procurementDetailMarkup(story) : `<p>${esc(story.summary || story.subtitle || localImpact(story))}</p>`}
             <small>${esc(sourceName(story))} • ${esc(storyDate(story))}</small>
           </a>
           <div class="actions">
@@ -3391,7 +3448,8 @@
             <button class="small-btn ghost shareBtn" type="button">Compartilhar</button>
             <button class="small-btn ghost saveBtn" type="button">Salvar</button>
           </div>
-        </article>`).join(""));
+        </article>`;
+      }).join(""));
       if (index >= source.length) {
         more.hidden = true;
         $("#v8ContinuousSentinel", section).textContent = "Rodapé completo abaixo.";
@@ -3773,11 +3831,14 @@
       ...firstStories,
     ].filter(Boolean);
 
-    const cacheClear = window.caches?.keys
+    const lastBootVersion = localStorage.getItem("czs-v8-boot-version") || "";
+    const versionChanged = lastBootVersion !== V8_BOOT_VERSION;
+
+    const cacheClear = versionChanged && window.caches?.keys
       ? caches.keys()
         .then((keys) => Promise.all(keys.filter((key) => /v8|prototype|catalogo|czs/i.test(key)).map((key) => caches.delete(key))))
         .catch(() => {})
-      : Promise.resolve();
+      : Promise.resolve("cache-current");
 
     const serviceWorkerRefresh = navigator.serviceWorker?.getRegistrations
       ? navigator.serviceWorker.getRegistrations()
@@ -3800,9 +3861,9 @@
         localStorage.setItem("czs-v8-boot-auth-error", error?.message || "auth session unavailable");
       });
 
-    const fetches = assetUrls.slice(0, 22).map((url) =>
+    const fetches = assetUrls.slice(0, versionChanged ? 12 : 6).map((url) =>
       fetch(url, {
-        cache: "reload",
+        cache: versionChanged ? "reload" : "force-cache",
         credentials: "same-origin",
         mode: /^https?:\/\//i.test(url) && !String(url).startsWith(location.origin) ? "no-cors" : "same-origin",
       }).catch(() => {})
@@ -3819,7 +3880,7 @@
         assetCount: assetUrls.length,
         preloadCount: fetches.length,
         completedTasks: loaded,
-        mode: "intro-total-load",
+        mode: versionChanged ? "intro-version-refresh" : "intro-fast-cache",
       }));
       return results;
     });
@@ -3884,21 +3945,25 @@
       loader.style.pointerEvents = "none";
       document.body.classList.remove("v8-intro-running");
       releaseIntroLock();
+      if (forceIntro || params.get("forcePopup") === "1" || params.get("popup") === "1") {
+        setTimeout(showEntryPopup, 240);
+      }
       return;
     }
     document.body.classList.add("v8-intro-running");
+    document.documentElement.classList.remove("czs-intro-release");
+    document.documentElement.classList.add("czs-intro-lock");
     loader.classList.remove("done", "v8-intro-exit");
     loader.hidden = false;
     loader.style.pointerEvents = "";
     loader.setAttribute("aria-hidden", "false");
     loader.dataset.stage = "swarm";
 
-    const started = performance.now();
+    let started = performance.now();
     const audioHoldAfterStartMs = 4000;
     const audioFallbackDurationMs = 5700;
     const puzzleTransitionMs = 1000;
     const fullSequenceMs = 8800;
-    const forcedFinishMs = 12800;
     let finished = false;
     let foldReady = false;
     let shellReady = false;
@@ -3915,137 +3980,308 @@
 
     const status = $(".v8-loader-status", loader);
     const introVideo = $(".v8-loader-video", loader);
+    const introVideoScene = $(".v8-loader-video-scene", loader);
+    const introVideoLabel = $(".v8-loader-video-label", loader);
+    const introVoice = $(".v8-loader-voice", loader);
+    const earlyIntroMedia = window.__czsIntroMedia && window.__czsIntroMedia.video === introVideo ? window.__czsIntroMedia : (window.__czsIntroMedia = {
+      video: introVideo || null,
+      voice: introVoice || null,
+      requestedAt: performance.now(),
+      startedAt: 0,
+      videoStarted: false,
+      voiceStarted: !introVoice,
+      videoEnded: false,
+      voiceEnded: !introVoice,
+      videoBlocked: false,
+      voiceBlocked: false,
+      audible: false,
+      events: []
+    });
+    earlyIntroMedia.video = introVideo || earlyIntroMedia.video || null;
+    earlyIntroMedia.voice = introVoice || earlyIntroMedia.voice || null;
+    if (!Array.isArray(earlyIntroMedia.events)) earlyIntroMedia.events = [];
     let introVideoStarted = false;
+    let introVoiceStarted = !introVoice;
     let introMediaAttempting = false;
     let introMediaStartedAt = 0;
     let introMediaEnded = false;
     let introMediaRetryArmed = false;
     let introMediaPrimed = false;
+    let introMediaBlocked = false;
+    let audioGateWaiting = false;
+    let introLoadingReady = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
       if (status && status.textContent !== message) status.textContent = message;
     };
+    const recordIntroMedia = (name, extra = {}) => {
+      try {
+        earlyIntroMedia.events.push(Object.assign({ name, at: Math.round(performance.now()) }, extra));
+        if (earlyIntroMedia.events.length > 48) earlyIntroMedia.events.splice(0, earlyIntroMedia.events.length - 48);
+      } catch (_) {}
+    };
 
     const retryIntroMedia = () => {
-      if (introVideoStarted) return;
+      if (introMediaAttempting) return;
+      introMediaRetryArmed = false;
+      if (introVideoStarted && (introVoiceStarted || !introVoice)) return;
+      recordIntroMedia("gesture-retry");
       startIntroMedia();
     };
 
+    const handleIntroMediaGesture = (event) => {
+      if (!introLoadingReady || finished || introVideoStarted) return;
+      if (event?.cancelable) event.preventDefault();
+      retryIntroMedia();
+    };
+
     const armIntroMediaRetry = () => {
-      if (introMediaRetryArmed || introVideoStarted) return;
+      if (introMediaRetryArmed || (introVideoStarted && (introVoiceStarted || !introVoice))) return;
       introMediaRetryArmed = true;
-      ["pointerdown", "touchstart", "keydown", "click"].forEach((eventName) => {
+      ["pointerdown", "mousedown", "touchstart", "keydown", "click"].forEach((eventName) => {
         window.addEventListener(eventName, retryIntroMedia, { passive: true, once: true, capture: true });
+        loader.addEventListener(eventName, retryIntroMedia, { passive: true, once: true, capture: true });
+        introVideoScene?.addEventListener(eventName, handleIntroMediaGesture, { passive: false });
+        introVideoLabel?.addEventListener(eventName, handleIntroMediaGesture, { passive: false });
       });
     };
 
     const clearIntroMediaRetry = () => {
-      ["pointerdown", "touchstart", "keydown", "click"].forEach((eventName) => {
+      ["pointerdown", "mousedown", "touchstart", "keydown", "click"].forEach((eventName) => {
         window.removeEventListener(eventName, retryIntroMedia, { capture: true });
+        loader.removeEventListener(eventName, retryIntroMedia, { capture: true });
+        introVideoScene?.removeEventListener(eventName, handleIntroMediaGesture);
+        introVideoLabel?.removeEventListener(eventName, handleIntroMediaGesture);
       });
     };
 
-    const markIntroMediaStarted = () => {
-      introVideoStarted = true;
-      introMediaAttempting = false;
-      introMediaStartedAt = performance.now();
-      introMediaEnded = false;
-      clearIntroMediaRetry();
-      if (introVideo) {
-        introVideo.addEventListener("ended", () => {
-          introMediaEnded = true;
-        }, { once: true });
+    const mediaNearEnd = (node) => Boolean(
+      node &&
+      Number.isFinite(node.duration) &&
+      node.duration > 0 &&
+      node.currentTime >= Math.max(0, node.duration - 0.12)
+    );
+
+    const syncIntroProof = () => {
+      try {
+        earlyIntroMedia.videoStarted = Boolean(earlyIntroMedia.videoStarted || introVideoStarted || (introVideo && !introVideo.paused && introVideo.currentTime > 0));
+        earlyIntroMedia.voiceStarted = Boolean(earlyIntroMedia.voiceStarted || introVoiceStarted || (introVoice && !introVoice.paused && introVoice.currentTime > 0));
+        earlyIntroMedia.videoEnded = Boolean(!introVideo || introVideo.ended || mediaNearEnd(introVideo));
+        earlyIntroMedia.voiceEnded = Boolean(!introVoice || introVoice.ended || mediaNearEnd(introVoice));
+        earlyIntroMedia.videoBlocked = Boolean(earlyIntroMedia.videoBlocked || (introMediaBlocked && !introVideoStarted));
+        earlyIntroMedia.voiceBlocked = Boolean(earlyIntroMedia.voiceBlocked || (introMediaBlocked && Boolean(introVoice) && !introVoiceStarted));
+        earlyIntroMedia.videoAudible = Boolean(introVideo && earlyIntroMedia.videoStarted && !introVideo.muted && introVideo.volume > 0 && !introVideo.paused);
+        earlyIntroMedia.audible = earlyIntroMedia.videoAudible || Boolean(introVoice && earlyIntroMedia.voiceStarted && !introVoice.muted && introVoice.volume > 0 && !introVoice.paused);
+        earlyIntroMedia.videoCurrentTime = introVideo ? Number(introVideo.currentTime || 0) : null;
+        earlyIntroMedia.voiceCurrentTime = introVoice ? Number(introVoice.currentTime || 0) : null;
+        earlyIntroMedia.videoPaused = introVideo ? Boolean(introVideo.paused) : true;
+        earlyIntroMedia.voicePaused = introVoice ? Boolean(introVoice.paused) : true;
+        earlyIntroMedia.videoReadyState = introVideo ? introVideo.readyState : 0;
+        earlyIntroMedia.voiceReadyState = introVoice ? introVoice.readyState : 0;
+        earlyIntroMedia.progress = loader.dataset.progress || "0";
+        earlyIntroMedia.stage = loader.dataset.stage || "";
+      } catch (_) {}
+    };
+
+    const syncIntroMediaState = () => {
+      if (earlyIntroMedia) {
+        introVideoStarted = introVideoStarted || Boolean(earlyIntroMedia.videoStarted);
+        introVoiceStarted = introVoiceStarted || Boolean(earlyIntroMedia.voiceStarted);
+        introMediaBlocked = introMediaBlocked || Boolean(earlyIntroMedia.videoBlocked || earlyIntroMedia.voiceBlocked);
+        if (earlyIntroMedia.startedAt && !introMediaStartedAt) introMediaStartedAt = earlyIntroMedia.startedAt;
       }
+      if (introVideo && !introVideo.paused && introVideo.currentTime > 0) introVideoStarted = true;
+      if (introVoice && !introVoice.paused && introVoice.currentTime > 0) introVoiceStarted = true;
+      const videoDone = !introVideo || introVideo.ended || mediaNearEnd(introVideo);
+      const voiceRequired = Boolean(introVoice && introVoiceStarted && !introMediaBlocked);
+      const voiceDone = !voiceRequired || introVoice.ended || mediaNearEnd(introVoice);
+      introMediaEnded = Boolean(videoDone && voiceDone);
+      syncIntroProof();
+    };
+
+    const markIntroMediaStarted = (kind) => {
+      if (kind === "voice") {
+        introVoiceStarted = true;
+        introMediaBlocked = false;
+      } else {
+        introVideoStarted = true;
+        audioGateWaiting = false;
+        introMediaBlocked = false;
+        earlyIntroMedia.videoBlocked = false;
+        loader.classList.add("v8-video-playing");
+      }
+      introMediaAttempting = false;
+      if (!introMediaStartedAt) introMediaStartedAt = earlyIntroMedia?.startedAt || performance.now();
+      recordIntroMedia(`${kind}-started`, {
+        videoTime: introVideo ? Number(introVideo.currentTime || 0) : null,
+        voiceTime: introVoice ? Number(introVoice.currentTime || 0) : null,
+        audible: Boolean(
+          (introVideo && !introVideo.muted && introVideo.volume > 0) ||
+          (introVoice && !introVoice.muted && introVoice.volume > 0)
+        )
+      });
+      clearIntroMediaRetry();
+      syncIntroMediaState();
     };
 
     const startIntroMedia = () => {
-      if (!introVideo || introVideoStarted || introMediaAttempting) return;
+      syncIntroMediaState();
+      if ((!introVideo && !introVoice) || introMediaAttempting || (introVideoStarted && (introVoiceStarted || !introVoice))) return;
       introMediaAttempting = true;
-      let playIssued = false;
-      const failMedia = () => {
+      recordIntroMedia("start-attempt");
+      const attempts = [];
+      const finishAttempt = () => {
         introMediaAttempting = false;
-        introVideoStarted = false;
-        armIntroMediaRetry();
+        syncIntroMediaState();
+        if (introVideoStarted) clearIntroMediaRetry();
+        else armIntroMediaRetry();
       };
-      const playMutedVisual = () => {
-        if (playIssued || introVideoStarted) return;
-        playIssued = true;
+      if (earlyIntroMedia?.start) {
+        attempts.push(Promise.resolve(earlyIntroMedia.start()).then(() => {
+          syncIntroMediaState();
+        }).catch((error) => {
+          introMediaBlocked = true;
+          recordIntroMedia("early-start-blocked", { message: error && error.name ? error.name : "play-failed" });
+        }));
+      }
+      if (introVideo && !introVideoStarted) {
         try {
-          introVideo.muted = true;
-          introVideo.volume = 1;
-          const mutedAttempt = introVideo.play?.();
-          if (mutedAttempt?.catch) {
-            mutedAttempt
-              .then(() => {
-                markIntroMediaStarted();
-                window.setTimeout(() => {
-                  try {
-                    introVideo.volume = 1;
-                    introVideo.muted = false;
-                  } catch (_) {}
-                }, 180);
-              })
-              .catch(failMedia);
-          } else {
-            markIntroMediaStarted();
-          }
-        } catch (_) {
-          failMedia();
-        }
-      };
-      const playAudible = () => {
-        if (playIssued || introVideoStarted) return;
-        playIssued = true;
-        try {
+          if (introVideo.ended || introVideo.currentTime > 0.12) introVideo.currentTime = 0;
+          introVideo.preload = "auto";
+          introVideo.autoplay = false;
           introVideo.muted = false;
           introVideo.volume = 1;
-          const audibleAttempt = introVideo.play?.();
-          if (audibleAttempt?.catch) {
-            audibleAttempt
-              .then(() => markIntroMediaStarted())
-              .catch(() => {
-                playIssued = false;
-                playMutedVisual();
-              });
-          } else {
-            markIntroMediaStarted();
-          }
-        } catch (_) {
-          playIssued = false;
-          playMutedVisual();
+          introVideo.loop = false;
+          introVideo.playsInline = true;
+          introVideo.removeAttribute("autoplay");
+          introVideo.removeAttribute("muted");
+          introVideo.setAttribute("playsinline", "");
+          introVideo.setAttribute("webkit-playsinline", "");
+          attempts.push(Promise.resolve(introVideo.play?.()).then(() => {
+            markIntroMediaStarted("video");
+            recordIntroMedia("video-audible-play", {
+              muted: Boolean(introVideo.muted),
+              volume: Number(introVideo.volume || 0),
+              currentTime: Number(introVideo.currentTime || 0)
+            });
+          }).catch((error) => {
+            introVideoStarted = false;
+            introMediaBlocked = true;
+            audioGateWaiting = true;
+            earlyIntroMedia.videoBlocked = true;
+            try {
+              introVideo.pause?.();
+              introVideo.currentTime = 0;
+              introVideo.muted = false;
+              introVideo.volume = 1;
+              introVideo.removeAttribute("muted");
+            } catch (_) {}
+            armIntroMediaRetry();
+            recordIntroMedia("video-audio-blocked-waiting-gesture", { message: error && error.name ? error.name : "play-failed" });
+          }));
+        } catch (error) {
+          introVideoStarted = false;
+          introMediaBlocked = true;
+          audioGateWaiting = true;
+          earlyIntroMedia.videoBlocked = true;
+          armIntroMediaRetry();
+          recordIntroMedia("video-error", { message: error && error.name ? error.name : "play-error" });
         }
-      };
-      try {
-        if (introVideo.currentTime > 0.05 || introVideo.ended) introVideo.currentTime = 0;
-        introVideo.volume = 1;
-        introVideo.loop = false;
-        introVideo.playsInline = true;
-        introVideo.setAttribute("playsinline", "");
-        introVideo.setAttribute("webkit-playsinline", "");
-        if (introVideo.readyState < 2) {
-          introVideo.addEventListener("canplay", playAudible, { once: true });
-          introVideo.addEventListener("loadeddata", playAudible, { once: true });
-          introVideo.load?.();
-          window.setTimeout(playAudible, 700);
-          return;
-        }
-        playAudible();
-      } catch (_) {
-        failMedia();
       }
+      if (introVoice && !introVoiceStarted) {
+        try {
+          if (introVoice.ended || introVoice.currentTime > 0.12) introVoice.currentTime = 0;
+          introVoice.preload = "auto";
+          introVoice.autoplay = true;
+          introVoice.loop = false;
+          introVoice.muted = true;
+          introVoice.volume = 0;
+          introVoice.setAttribute("autoplay", "");
+          introVoice.setAttribute("muted", "");
+          attempts.push(Promise.resolve(introVoice.play?.()).then(() => {
+            window.setTimeout(() => {
+              try {
+                introVoice.currentTime = 0;
+                introVoice.muted = false;
+                introVoice.volume = 1;
+                introVoice.removeAttribute("muted");
+              } catch (_) {}
+              markIntroMediaStarted("voice");
+              recordIntroMedia("voice-unmuted", {
+                muted: Boolean(introVoice.muted),
+                volume: Number(introVoice.volume || 0),
+                currentTime: Number(introVoice.currentTime || 0)
+              });
+            }, 40);
+          }).catch((error) => {
+            introMediaBlocked = true;
+            earlyIntroMedia.voiceBlocked = true;
+            recordIntroMedia("voice-blocked", { message: error && error.name ? error.name : "play-failed" });
+          }));
+        } catch (error) {
+          introMediaBlocked = true;
+          earlyIntroMedia.voiceBlocked = true;
+          recordIntroMedia("voice-error", { message: error && error.name ? error.name : "play-error" });
+        }
+      }
+      Promise.allSettled(attempts).then(finishAttempt);
     };
 
     const primeIntroMedia = () => {
-      if (!introVideo || introMediaPrimed) return;
+      if (introMediaPrimed) return;
       introMediaPrimed = true;
-      try {
-        introVideo.preload = "auto";
-        introVideo.playsInline = true;
-        introVideo.setAttribute("playsinline", "");
-        introVideo.setAttribute("webkit-playsinline", "");
-        introVideo.load?.();
-      } catch (_) {}
+      recordIntroMedia("prime");
+      if (earlyIntroMedia?.prime) {
+        try {
+          earlyIntroMedia.prime();
+        } catch (_) {}
+      }
+      if (introVideo) {
+        try {
+          introVideo.preload = "auto";
+          introVideo.autoplay = false;
+          introVideo.muted = false;
+          introVideo.volume = 1;
+          introVideo.playsInline = true;
+          introVideo.removeAttribute("autoplay");
+          introVideo.removeAttribute("muted");
+          introVideo.setAttribute("playsinline", "");
+          introVideo.setAttribute("webkit-playsinline", "");
+          if (!introVideoStarted && introVideo.readyState < 2) introVideo.load?.();
+        } catch (_) {}
+      }
+      if (introVoice) {
+        try {
+          introVoice.preload = "auto";
+          introVoice.autoplay = true;
+          introVoice.muted = true;
+          introVoice.volume = 0;
+          introVoice.setAttribute("autoplay", "");
+          introVoice.setAttribute("muted", "");
+          if (!introVoiceStarted && introVoice.readyState < 2) introVoice.load?.();
+        } catch (_) {}
+      }
     };
+
+    if (introVideo) {
+      introVideo.addEventListener("play", () => {
+        recordIntroMedia("video-event-play");
+        markIntroMediaStarted("video");
+      });
+      introVideo.addEventListener("ended", () => {
+        recordIntroMedia("video-ended", { currentTime: Number(introVideo.currentTime || 0) });
+        syncIntroMediaState();
+      }, { once: true });
+    }
+    if (introVoice) {
+      introVoice.addEventListener("play", () => {
+        recordIntroMedia("voice-event-play", { muted: Boolean(introVoice.muted), volume: Number(introVoice.volume || 0) });
+      });
+      introVoice.addEventListener("ended", () => {
+        recordIntroMedia("voice-ended", { currentTime: Number(introVoice.currentTime || 0) });
+        syncIntroMediaState();
+      }, { once: true });
+    }
 
     const ensurePuzzleCurtain = () => {
       let puzzle = $(".v8-intro-puzzle", loader);
@@ -4070,9 +4306,8 @@
       loader.dataset.progress = String(p);
       if (p < 24) loader.dataset.stage = "swarm";
       else if (p < 38) loader.dataset.stage = "collision";
-      else if (p < 100) loader.dataset.stage = "video";
+      else if (p < 100) loader.dataset.stage = "collision";
       else loader.dataset.stage = "ready";
-      if (introVideo && p >= 24 && !introVideoStarted) startIntroMedia();
     };
 
     const finish = () => {
@@ -4082,12 +4317,27 @@
       stopAssistantLife();
       setProgress(100);
       setStatus("Tudo pronto. Montando o site.");
+      loader.classList.remove("v8-video-playing");
       loader.dataset.stage = "puzzle";
       ensurePuzzleCurtain();
+      recordIntroMedia("finish", {
+        videoTime: introVideo ? Number(introVideo.currentTime || 0) : null,
+        voiceTime: introVoice ? Number(introVoice.currentTime || 0) : null,
+        audible: Boolean(
+          (introVideo && !introVideo.muted && introVideo.volume > 0) ||
+          (introVoice && !introVoice.muted && introVoice.volume > 0)
+        )
+      });
+      syncIntroProof();
       document.body.classList.add("v8-intro-light-release", "v8-intro-handoff", "v8-intro-puzzle-active");
       if (introVideo) {
         try {
           introVideo.pause();
+        } catch (_) {}
+      }
+      if (introVoice) {
+        try {
+          introVoice.pause();
         } catch (_) {}
       }
       releaseIntroLock();
@@ -4118,39 +4368,51 @@
         setStatus("Chamando a vinheta CZS.");
       } else if (elapsed < fullSequenceMs) {
         progress = 38 + ((elapsed - 2500) / (fullSequenceMs - 2500)) * 61;
-        setStatus("Rodando o vídeo enquanto a página carrega.");
+        setStatus("Carregando o site antes da vinheta.");
       } else {
         progress = 99;
-        setStatus(shellReady && foldReady ? "Conferindo vídeo e voz." : "Sincronizando a primeira dobra.");
+        setStatus(shellReady && foldReady ? "Preparando o clique da boas-vindas." : "Sincronizando a primeira dobra.");
       }
-      if (progress >= 24) primeIntroMedia();
-      if (!foldReady || !shellReady || elapsed < fullSequenceMs) progress = Math.min(progress, 99);
-      setProgress(progress);
-      const mediaStartedAt = introMediaStartedAt || 0;
+      if (progress >= 4) {
+        primeIntroMedia();
+        syncIntroMediaState();
+      }
+
+      const loadingReady = introLoadingReady || (foldReady && shellReady && elapsed >= fullSequenceMs);
+      if (!loadingReady) {
+        setProgress(Math.min(progress, 99));
+        requestAnimationFrame(tick);
+        return;
+      }
+
+      introLoadingReady = true;
+      setProgress(100);
+      loader.dataset.stage = "video";
+      primeIntroMedia();
+      syncIntroMediaState();
+
+      if (!introVideoStarted) {
+        audioGateWaiting = true;
+        setStatus("Clique para iniciar.");
+        armIntroMediaRetry();
+        requestAnimationFrame(tick);
+        return;
+      }
+
+      loader.classList.add("v8-video-playing");
+      setStatus("Boas-vindas em voz e vídeo.");
       const mediaElapsed = introMediaStartedAt ? now - introMediaStartedAt : 0;
-      const holdDone = Boolean(mediaStartedAt) && now - mediaStartedAt >= audioHoldAfterStartMs;
-      const audioDone = !introVideo || (
-        introVideoStarted && (
-          introMediaEnded ||
-          introVideo.ended ||
-          (Number.isFinite(introVideo.duration) && introVideo.duration > 0 && introVideo.currentTime >= Math.max(0, introVideo.duration - 0.12)) ||
-          mediaElapsed >= audioFallbackDurationMs
-        )
-      );
-      if (foldReady && shellReady && elapsed >= fullSequenceMs && holdDone && audioDone) {
-        finish();
-        return;
-      }
-      if (elapsed > forcedFinishMs && (!introVideoStarted || audioDone)) {
-        finish();
-        return;
-      }
-      if (elapsed > forcedFinishMs + 3000) {
+      const videoDone = !introVideo || introVideo.ended || mediaNearEnd(introVideo);
+      const voiceRequired = Boolean(introVoice && introVoiceStarted && !introMediaBlocked);
+      const voiceDone = !voiceRequired || introVoice.ended || mediaNearEnd(introVoice);
+      const mediaDone = introMediaEnded || (introVideoStarted && videoDone && voiceDone) || (introMediaBlocked && introVideoStarted && mediaElapsed >= audioFallbackDurationMs);
+      if (mediaDone || (introVideoStarted && mediaElapsed > Math.max(audioFallbackDurationMs + audioHoldAfterStartMs, 9800))) {
         finish();
         return;
       }
       requestAnimationFrame(tick);
     };
+    primeIntroMedia();
     requestAnimationFrame(tick);
   }
 
@@ -4194,7 +4456,7 @@
     panel.setAttribute("aria-label", "Serviços comerciais do Catálogo CZS");
     panel.innerHTML = `
       <button type="button" class="v8-entry-close" aria-label="Fechar atalhos">×</button>
-      <img class="v8-commercial-aylla" src="${RAYL_POSES.seatedFeature}" alt="" aria-hidden="true">
+      <img class="v8-commercial-aylla" src="${RAYL_POSES.seatedFeature}" alt="" aria-hidden="true" decoding="async">
       <div class="v8-commercial-speech"><b>RAIane CZS.</b> Seja bem-vindo. Escolha uma opção ou me diga o que procura.</div>
       <div class="v8-commercial-shell">
         <header class="v8-commercial-head">
@@ -4204,19 +4466,19 @@
         </header>
         <div class="v8-commercial-cards" aria-label="Artes e serviços">
           <a class="v8-commercial-card" href="#monetizacao">
-            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-sites.png" alt="Criação de sites"></span>
+            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-sites.png" alt="Criação de sites" loading="lazy" decoding="async" fetchpriority="low"></span>
             <span class="v8-card-copy"><strong>Sites</strong><small>Site, vitrine ou página para vender melhor.</small></span>
           </a>
           <a class="v8-commercial-card" href="#pubpaidAtalhos">
-            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-apps.png" alt="Aplicativos e experiências digitais"></span>
+            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-apps.png" alt="Aplicativos e experiências digitais" loading="lazy" decoding="async" fetchpriority="low"></span>
             <span class="v8-card-copy"><strong>Apps</strong><small>Experiência digital, jogo ou fluxo interativo.</small></span>
           </a>
           <a class="v8-commercial-card" href="#monetizacao">
-            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-divulgacao.png" alt="Divulgação local"></span>
+            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-divulgacao.png" alt="Divulgação local" loading="lazy" decoding="async" fetchpriority="low"></span>
             <span class="v8-card-copy"><strong>Divulgação</strong><small>Campanha, card e presença no portal.</small></span>
           </a>
           <a class="v8-commercial-card" href="#servicos">
-            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-automacao.png" alt="Automação de atendimento"></span>
+            <span class="v8-card-art"><img src="assets/v8-commercial/commercial-automacao.png" alt="Automação de atendimento" loading="lazy" decoding="async" fetchpriority="low"></span>
             <span class="v8-card-copy"><strong>Automação</strong><small>Atendimento, agenda e captação.</small></span>
           </a>
         </div>
@@ -4248,8 +4510,7 @@
     });
   }
 
-  function showEntryPopup() {
-    if (!entryPopupDue()) return;
+  function openEntryPopupPanel(reason = "shown-after-intro") {
     let panel = $("#v8EntryPopup");
     if (!panel) {
       installEntryPopup();
@@ -4257,7 +4518,9 @@
     }
     if (!panel || panel.dataset.opened === "1") return;
     panel.dataset.opened = "1";
-    markEntryPopupSeen("shown-after-intro");
+    try {
+      markEntryPopupSeen(reason);
+    } catch (_) {}
     document.body.classList.add("v8-entry-popup-active", "v8-commercial-popup-on");
     panel.hidden = false;
     panel.removeAttribute("hidden");
@@ -4275,6 +4538,11 @@
         }, 260);
       }
     }, 18000);
+  }
+
+  function showEntryPopup() {
+    if (!entryPopupDue()) return;
+    openEntryPopupPanel("shown-after-intro");
   }
 
   function floatArrow(direction) {
@@ -5344,6 +5612,10 @@
     loadCommunityReports();
     installFloatingFooterControl();
     runCinematicIntro();
+    const initParams = new URLSearchParams(window.location.search || "");
+    if (initParams.get("skipIntro") === "1" && (initParams.get("forcePopup") === "1" || initParams.get("popup") === "1")) {
+      setTimeout(() => openEntryPopupPanel("forced-skip-intro"), 360);
+    }
     guardLegacyPopup();
     handleHash();
     clearInterval(window.__v8CopyCleanupTimer);

@@ -1,6 +1,27 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-06-04
+Atualizado: 2026-06-05
+
+## Rodada Atual - 20260605-v8-final-speed-hydration-v32
+
+- Fechamento local V8 apos aprovacao do fluxo principal: cache-bust atualizado para `20260605-v8-public-corrective-pass-v32`.
+- Hidratação ficou mais leve: refresh de cache só limpa em troca de versão, preload inicial reduzido, superfícies abaixo da dobra entram por fila ociosa e imagens V8 ganharam `decoding="async"`/`fetchpriority` para reduzir disputa com a intro.
+- Cards de licitação passaram a renderizar lista útil com processo, órgão, data e objeto extraído do texto narrado/caption quando a notícia é de pregão, CP ou aviso de licitação.
+- Popup comercial direto validado em `http://127.0.0.1:3001/?skipIntro=1&forcePopup=1`: RAIane aparece inteira sobre a janela, CTA comercial e cards de serviços seguem funcionais.
+- Intro validada localmente em Chromium em `http://127.0.0.1:3001/?forceIntro=1`: botão `Clique para iniciar`, vídeo 480x480, `muted=false`, `volume=1`, `audibleProof=true`, áudio decodificado e loader encerrando com logo visível.
+- Evidências locais salvas em `output/v31-final-audit/`: `home-skip-intro.png`, `popup-raiane.png`, `intro-ready.png`, `intro-playing.png`, `after-intro.png`.
+- Validações: `node --check assets/v8-final/v8-merge-ready.js`, `node --check script.js`, `git diff --check` nos arquivos tocados, `npm run review:team`, `npm run perf:budget`, `npm run codex:health`.
+- Observação real de performance: `perf:budget` segue OK em modo não estrito, mas `index.html` continua acima do teto antigo; refatorar HTML inicial para arquivo menor fica como etapa futura, sem bloquear o deploy desta rodada.
+- Próxima etapa de IA online: Render só acessará a IA do PC se houver túnel/host seguro para o Ollama/local runner; `127.0.0.1` no Render continua sendo o container do Render.
+
+## Rodada Atual - 20260605-v8-intro-click-video-original-v28
+
+- Intro V8 ajustada conforme feedback final do usuario: a logo permanece visivel, a barra chega a 100% primeiro, so depois aparece a janela do video em proporcao original, sem mascara/zoom/corte.
+- O aviso virou botao real "Clique para iniciar"; o video nao tenta tocar automaticamente antes do clique.
+- O MP4 usado e `assets/intro/czs-loader-video-welcome-voice-20260605.mp4`, com video 480x480 e audio AAC embutido do OGG enviado pelo usuario.
+- Validacao local em `http://127.0.0.1:3001/?forceIntro=1`: antes do clique `progress=100`, `stage=video`, `paused=true`, `muted=false`, `volume=1`, logo visivel e `object-fit=contain`.
+- Depois do clique: `paused=false`, `currentTime>1.7`, `audioTrackCount=1`, `webkitAudioDecodedByteCount>36000`, `audibleProof=true`; no final `loaderHidden=true`, `htmlClass=czs-intro-release` e site visivel.
+- Evidencias temporarias: `C:\Users\junio\AppData\Local\Temp\czs-intro-v28-proof-final\01-before-click.png`, `02-playing.png`, `03-after-intro.png`.
 
 ## Rodada Atual - 20260604-ollama-local-first-ai1
 

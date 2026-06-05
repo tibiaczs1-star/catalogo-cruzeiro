@@ -1,30 +1,24 @@
 # Handoff
 
-Updated: 2026-06-05T04:45:00.000Z
+Updated: 2026-06-05T12:25:27-05:00
 
-Rodada corretiva V8/CZS pronta para commit/deploy.
+## Rodada V8 final speed/hydration v32
 
-## O que foi feito
+- Entrega em fechamento: CZS V8 com intro aprovada preservada, hidratação mais leve, cache-bust v32, licitações com lista útil e popup comercial validado.
+- Teste local principal: `http://127.0.0.1:3001/?forceIntro=1`.
+- Teste local direto do popup: `http://127.0.0.1:3001/?skipIntro=1&forcePopup=1`.
+- Evidências locais: `output/v31-final-audit/`.
+- Validações OK: `node --check` nos JS tocados, `git diff --check`, `npm run review:team`, `npm run perf:budget`, `npm run codex:health`.
+- Antes de mexer de novo na home, preservar o fluxo da intro: 100% primeiro, botão "Clique para iniciar", vídeo original com áudio embutido, site só depois do final.
+- Próximo assunto do usuário: colocar a IA online através do PC local. Não usar `127.0.0.1` no Render como se fosse o PC; precisa túnel/host seguro para Ollama/local runner.
 
-- `assets/v8-final/v8-merge-ready.js` e CSS: correções de hash, galeria premium, fontes de vídeo, área jovem, comunidade, serviços e prevenção de cards/fotos falsas.
-- `index.html`: JSON embutido rebuildado com 480 itens, cache-bust `20260605-v8-public-corrective-pass-v5`, fallback antigo do panorama removido dos `onerror` renderizados.
-- `backend/source-config.js`: adicionadas fontes testadas Portal Acre, O Alto Acre, Estado do Acre, Acre Noticias, Acre Agora e A Gazeta do Acre.
-- `scripts/hydrate-source-screenshots.js`: novo hidratador de prints da fonte para matérias sem imagem.
-- Dados atualizados: 371 capturas, 218 itens de hoje, 360 ativos, 480 no arquivo; 103 itens com print de fonte.
+## Nota anterior
 
-## Validação local
+Rotina WhatsApp corrigida concluida: grupos de venda = servicos/propagandas/convite sem noticia; Catálogo CZS = servicos + convite + todas as noticias do pacote do dia; VIP Dona D nao tocado.
 
-- URL local: `http://127.0.0.1:3001/?skipIntro=1`.
-- `node --check` OK para bundle V8, scripts de captação/hidratação e `server.js`.
-- CDP smoke OK para `#feed`, `#videos`, `#galeriaFotos`, `#areaJovem`, `#comunidade`, `#servicos`.
-- Capturas internas em `.codex-temp/screenshots/cdp-*-v5.png`; galeria final em `.codex-temp/screenshots/cdp-galeriaFotos-v5b.png`.
-- `npm run review:team` passou; PubPaid guard OK; 0 achados nos arquivos tocados.
+## Next
 
-## Pendente conhecido
-
-- `git diff --check` global aponta whitespace em `data/editorial-health-report.md`, fora do escopo e já sujo. Não stagear isso nesta rodada.
-- 7 fontes sem imagem continuam como pendência de Cheffe Call porque Chrome headless não capturou: e-SAJ/TJAC e URLs do Voz do Norte.
-
-## Próximo passo
-
-Stage seletivo, commit, push em `main`, deploy Render e verificação online em `https://catalogo-cruzeiro-web.onrender.com/?skipIntro=1`.
+- Na proxima rotina
+- tratar todos os grupos de venda iguais: recebem tudo comercial/servico/convite
+- nunca noticia. Catálogo CZS recebe todas as noticias do dia e servicos/convite
+- mas nao venda/classificado.

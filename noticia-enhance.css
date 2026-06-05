@@ -562,6 +562,19 @@
   }
 }
 
+.detail-body .masthead .brand img[src*="catalogo-czs-logo-offline-horizontal-crop"] {
+  width: min(320px, 72vw) !important;
+  height: auto !important;
+  max-height: 92px !important;
+  object-fit: contain !important;
+  border-radius: 8px !important;
+  background: #d5d9dc !important;
+}
+
+.detail-body .masthead .brand img[src*="catalogo-czs-logo-offline-horizontal-crop"] + div {
+  display: none !important;
+}
+
 @media (max-width: 430px) {
   .detail-body .detail-container,
   .detail-body .detail-layout,

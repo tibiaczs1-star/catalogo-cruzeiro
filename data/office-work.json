@@ -1,12 +1,38 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-04T03:12:17.199Z",
+  "updatedAt": "2026-06-04T20:59:49.975Z",
   "offices": {
     "editorial": {
       "inventory": []
     }
   },
   "actions": [
+    {
+      "id": "work-mpzw2rtbkyvg2z",
+      "officeKey": "cheffe-call",
+      "officeLabel": "Cheffe Call",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-cheffe",
+      "status": "ollama-fallback",
+      "title": "IA local da Cheffe",
+      "detail": "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar. (fetch failed)",
+      "source": "v8-cheffe-ai",
+      "createdAt": "2026-06-04T19:29:21.743Z"
+    },
+    {
+      "id": "work-mpzw2rt1lymawh",
+      "officeKey": "redacao",
+      "officeLabel": "Redacao",
+      "agentId": "",
+      "agentName": "",
+      "kind": "ollama-local-chat",
+      "status": "ollama-fallback",
+      "title": "IA local: Redacao",
+      "detail": "Fluxo seguro para Redacao: registrar a tarefa na Cheffe Call, revisar prioridade local e executar só quando houver confirmação/fonte. (fetch failed)",
+      "source": "v8-office-ai",
+      "createdAt": "2026-06-04T19:29:21.733Z"
+    },
     {
       "id": "work-mpyx68traidaiv",
       "officeKey": "cheffe-call",

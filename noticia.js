@@ -1237,20 +1237,64 @@ const normalizeDetailArticle = (article = {}) => {
 };
 
 const buildArticleNarrationText = (article = {}) => {
-  const title = normalizeEditorialText(article.audioNarrationTranscript || article.audioNarrationText || "");
+  const title = preparePortugueseNarrationText(article.audioNarrationTranscript || article.audioNarrationText || "");
   if (title) return title.slice(0, 950);
 
   const parts = [
-    "Catálogo CZS.",
+    "Catálogo Cruzeiro do Sul.",
     article.category ? `Notícia de ${article.category}.` : "Notícia local.",
     article.title,
     article.lede || article.summary,
     article.sourceName ? `Fonte: ${article.sourceName}.` : ""
   ]
-    .map(normalizeEditorialText)
+    .map(preparePortugueseNarrationText)
     .filter(Boolean);
 
   return parts.join(" ").slice(0, 950);
+};
+
+const preparePortugueseNarrationText = (value = "") => {
+  const replacements = [
+    [/\bCZS\b/g, "Catálogo Cruzeiro do Sul"],
+    [/\bCatalogo\b/g, "Catálogo"],
+    [/\bnoticia\b/gi, "notícia"],
+    [/\bnoticias\b/gi, "notícias"],
+    [/\batualizacao\b/gi, "atualização"],
+    [/\binformacao\b/gi, "informação"],
+    [/\binformacoes\b/gi, "informações"],
+    [/\bservico\b/gi, "serviço"],
+    [/\bservicos\b/gi, "serviços"],
+    [/\bpublicacao\b/gi, "publicação"],
+    [/\bvideo\b/gi, "vídeo"],
+    [/\bvideos\b/gi, "vídeos"],
+    [/\bmateria\b/gi, "matéria"],
+    [/\bmaterias\b/gi, "matérias"],
+    [/\bpagina\b/gi, "página"],
+    [/\bpaginas\b/gi, "páginas"],
+    [/\bJurua\b/g, "Juruá"],
+    [/\bSao\b/g, "São"],
+    [/\bCrueiro\b/g, "Cruzeiro"],
+    [/\bnao\b/gi, "não"],
+    [/\bvoce\b/gi, "você"],
+    [/\bja\b/gi, "já"],
+    [/\btambem\b/gi, "também"],
+    [/\bate\b/gi, "até"],
+    [/\bapos\b/gi, "após"],
+    [/\bpais\b/gi, "país"],
+    [/\bsaude\b/gi, "saúde"],
+    [/\beducacao\b/gi, "educação"],
+    [/\btransito\b/gi, "trânsito"],
+    [/\bpolicia\b/gi, "polícia"],
+    [/\bpolitica\b/gi, "política"],
+    [/\bAmazonia\b/g, "Amazônia"],
+    [/\bAcrelandia\b/g, "Acrelândia"],
+    [/\bBrasileia\b/g, "Brasiléia"]
+  ];
+  let text = normalizeEditorialText(value);
+  replacements.forEach(([pattern, replacement]) => {
+    text = text.replace(pattern, replacement);
+  });
+  return normalizeEditorialText(text);
 };
 
 const getFemalePortugueseVoice = () => {
@@ -1282,13 +1326,14 @@ const stopArticleNarration = () => {
 };
 
 const playArticleNarration = (text = "", article = {}) => {
-  if (!("speechSynthesis" in window) || !text) return;
+  const spokenText = preparePortugueseNarrationText(text);
+  if (!("speechSynthesis" in window) || !spokenText) return;
   stopArticleNarration();
-  const utterance = new SpeechSynthesisUtterance(text);
+  const utterance = new SpeechSynthesisUtterance(spokenText);
   const voice = getFemalePortugueseVoice();
   if (voice) utterance.voice = voice;
   utterance.lang = /^pt[-_]BR$/i.test(voice?.lang || "") ? voice.lang : "pt-BR";
-  utterance.rate = String(article.audioNarrationVoice || "").includes("rayl-francisca") ? 0.98 : 0.94;
+  utterance.rate = String(article.audioNarrationVoice || "").includes("rayl-francisca") ? 1.06 : 0.98;
   utterance.pitch = String(article.audioNarrationVoice || "").includes("rayl-francisca") ? 1 : 1.04;
   utterance.volume = 1;
   utterance.onend = () => audioPlayButton?.classList.remove("is-playing");
@@ -1302,8 +1347,8 @@ const renderArticleAudioAndCaption = (article = {}) => {
   if (audioReaderNode && audioReaderTextNode && narrationText) {
     audioReaderTextNode.textContent = narrationText;
     audioReaderNode.hidden = false;
-    audioReaderNode.dataset.voice = article.audioNarrationVoice || "rayl-francisca-whatsapp-normal";
-    audioReaderNode.dataset.voiceName = article.audioNarrationVoiceName || "RAyL Francisca WhatsApp normal";
+    audioReaderNode.dataset.voice = article.audioNarrationVoice || "raiane-francisca-whatsapp-normal";
+    audioReaderNode.dataset.voiceName = article.audioNarrationVoiceName || "RAIane Francisca WhatsApp normal";
     if (audioPlayButton) audioPlayButton.onclick = () => playArticleNarration(narrationText, article);
     if (audioStopButton) audioStopButton.onclick = stopArticleNarration;
   } else if (audioReaderNode) {
