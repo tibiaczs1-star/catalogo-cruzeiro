@@ -202,8 +202,8 @@ const DEFAULT_SITE_DESCRIPTION =
   "Jornal agregador local de Cruzeiro do Sul e Vale do Jurua, com editorias, arquivo mensal, resumos originais e links para as fontes.";
 const DEFAULT_OG_IMAGE_PATH = "/assets/og-cover.svg";
 const DEFAULT_PUBLISHER_LOGO_PATH = "/assets/favicon-512x512.png";
-const RAYL_NEWS_VOICE_ID = "rayl-francisca-whatsapp-normal";
-const RAYL_NEWS_VOICE_NAME = "RAyL Francisca WhatsApp normal";
+const RAYL_NEWS_VOICE_ID = "raiane-francisca-whatsapp-normal";
+const RAYL_NEWS_VOICE_NAME = "RAIane Francisca WhatsApp normal";
 const RAYL_NEWS_VOICE_ENGINE = "edge-tts";
 const RAYL_NEWS_VOICE_MODEL = "pt-BR-FranciscaNeural";
 const RAYL_NEWS_VOICE_SAMPLE_URL = "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3";
@@ -7130,6 +7130,69 @@ function isMailzaPriorityArticle(item = {}) {
   return /\b(mailza|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
 }
 
+function prepareRaylNarrationText(value = "", maxLength = 950) {
+  const replacements = [
+    [/\bCZS\b/g, "Catálogo Cruzeiro do Sul"],
+    [/\bCatalogo\b/g, "Catálogo"],
+    [/\bnoticia\b/gi, "notícia"],
+    [/\bnoticias\b/gi, "notícias"],
+    [/\batualizacao\b/gi, "atualização"],
+    [/\binformacao\b/gi, "informação"],
+    [/\binformacoes\b/gi, "informações"],
+    [/\bservico\b/gi, "serviço"],
+    [/\bservicos\b/gi, "serviços"],
+    [/\bpublicacao\b/gi, "publicação"],
+    [/\bvideo\b/gi, "vídeo"],
+    [/\bvideos\b/gi, "vídeos"],
+    [/\bmateria\b/gi, "matéria"],
+    [/\bmaterias\b/gi, "matérias"],
+    [/\bpagina\b/gi, "página"],
+    [/\bpaginas\b/gi, "páginas"],
+    [/\bJurua\b/g, "Juruá"],
+    [/\bSao\b/g, "São"],
+    [/\bCrueiro\b/g, "Cruzeiro"],
+    [/\bnao\b/gi, "não"],
+    [/\bvoce\b/gi, "você"],
+    [/\bja\b/gi, "já"],
+    [/\btambem\b/gi, "também"],
+    [/\bate\b/gi, "até"],
+    [/\bapos\b/gi, "após"],
+    [/\bpais\b/gi, "país"],
+    [/\bsaude\b/gi, "saúde"],
+    [/\beducacao\b/gi, "educação"],
+    [/\btransito\b/gi, "trânsito"],
+    [/\bpolicia\b/gi, "polícia"],
+    [/\bpolitica\b/gi, "política"],
+    [/\bAmazonia\b/g, "Amazônia"],
+    [/\bAcrelandia\b/g, "Acrelândia"],
+    [/\bBrasileia\b/g, "Brasiléia"]
+  ];
+  let text = cleanShortText(value || "", maxLength + 120);
+  replacements.forEach(([pattern, replacement]) => {
+    text = text.replace(pattern, replacement);
+  });
+  return cleanShortText(text, maxLength);
+}
+
+function buildRaylNarrationTextForArticle(item = {}) {
+  const title = prepareRaylNarrationText(item.title || "Notícia do Catálogo Cruzeiro do Sul", 180);
+  const category = prepareRaylNarrationText(item.category || item.eyebrow || "notícia", 60);
+  const summary = prepareRaylNarrationText(item.lede || item.summary || item.description || title, 520);
+  const source = prepareRaylNarrationText(item.sourceName || item.source || item.sourceLabel || "fonte monitorada", 80);
+  return prepareRaylNarrationText(
+    [
+      "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul.",
+      `Agora no catálogo: notícia de ${category}.`,
+      title,
+      summary && summary !== title ? summary : "",
+      `A informação vem de ${source}.`
+    ]
+      .filter(Boolean)
+      .join(" "),
+    950
+  );
+}
+
 function normalizeArticleRecord(item) {
   const title = String(item.title || "Atualizacao");
   const isMailzaPriority = isMailzaPriorityArticle(item);
@@ -7152,6 +7215,15 @@ function normalizeArticleRecord(item) {
   const cleanLede =
     stripLegacyEditorialSummary(item.lede || item.summary || item.description || "") || cleanSummary;
   const editorialGate = buildEditorialGate({ ...item, sourceName, sourceUrl, title });
+  const raylNarrationText = buildRaylNarrationTextForArticle({
+    ...item,
+    title,
+    category,
+    sourceName,
+    sourceLabel: item.sourceLabel || title,
+    lede: cleanLede,
+    summary: cleanSummary
+  });
 
   return {
     id: item.id || slug || sourceUrl || title,
@@ -7186,8 +7258,10 @@ function normalizeArticleRecord(item) {
     imageFocus: item.imageFocus || "",
     imageFit: item.imageFit || "",
     media: item.media || null,
-    audioNarrationText: item.audioNarrationText || item.audioNarrationTranscript || "",
-    audioNarrationTranscript: item.audioNarrationTranscript || item.audioNarrationText || "",
+    audioNarrationText: prepareRaylNarrationText(item.audioNarrationText || item.audioNarrationTranscript || raylNarrationText),
+    audioNarrationTranscript: prepareRaylNarrationText(
+      item.audioNarrationTranscript || item.audioNarrationText || raylNarrationText
+    ),
     audioNarrationVoice:
       !item.audioNarrationVoice || item.audioNarrationVoice === "pt-BR-female-browser-tts"
         ? RAYL_NEWS_VOICE_ID
@@ -9706,10 +9780,24 @@ function recordCommunityReport(body = {}, req = null) {
     createdAt: report.createdAt
   });
 
+  const whatsappMessage = [
+    "CZS - relato comunitario para checagem",
+    `Bairro: ${report.neighborhood}`,
+    `Assunto: ${report.topic}`,
+    `Mensagem: ${report.message}`,
+    report.contact ? `Contato do leitor: ${report.contact}` : ""
+  ].filter(Boolean).join("\n");
+
   return {
     ok: true,
     status: 201,
     item: report,
+    notify: {
+      whatsappNumber: "556896026649",
+      whatsappHref: `https://wa.me/556896026649?text=${encodeURIComponent(whatsappMessage)}`,
+      channel: "whatsapp",
+      label: "Enviar para checagem no WhatsApp"
+    },
     message:
       "Mensagem recebida. Ela pode aparecer no chat de informacoes da populacao."
   };
@@ -9722,7 +9810,7 @@ function defaultAdCampaigns() {
       title: "Topo premium",
       slot: "hero",
       size: "16:9",
-      text: "Destaque para marcas locais no topo editorial do CZS.",
+      text: "Banner grande com foto, oferta, botao e leitura de impacto para marcas locais.",
       href: "divulgue.html",
       status: "active",
       priority: 90
@@ -9732,7 +9820,7 @@ function defaultAdCampaigns() {
       title: "Card patrocinado",
       slot: "feed",
       size: "1:1",
-      text: "Card para feed, grupos e redes sociais com foto real e copy curta.",
+      text: "Card chamativo para produto, promocao, loja, grupo e rede social.",
       href: "divulgue.html",
       status: "active",
       priority: 80
@@ -9742,7 +9830,7 @@ function defaultAdCampaigns() {
       title: "Video vertical",
       slot: "video",
       size: "9:16",
-      text: "Formato para stories, reels e secao de videos do CZS.",
+      text: "Corte de video para stories, reels, TV CZS e campanha com chamada rapida.",
       href: "divulgue.html",
       status: "active",
       priority: 70
@@ -9756,6 +9844,46 @@ function defaultAdCampaigns() {
       href: "divulgue.html",
       status: "active",
       priority: 60
+    },
+    {
+      id: "vitrine-produtos",
+      title: "Vitrine de produtos",
+      slot: "loja",
+      size: "card+whatsapp",
+      text: "Produto com foto, preco, beneficio, CTA e encaminhamento para WhatsApp.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 55
+    },
+    {
+      id: "loja-whatsapp",
+      title: "Loja no WhatsApp",
+      slot: "vendas",
+      size: "catalogo",
+      text: "Catalogo simples, lista de pedidos e mensagem pronta para vender no bairro.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 50
+    },
+    {
+      id: "sistema-loja",
+      title: "Sistema para loja",
+      slot: "automacao",
+      size: "painel",
+      text: "Pedidos, estoque simples, agenda e captacao de clientes para lojas locais.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 45
+    },
+    {
+      id: "marca-jovem",
+      title: "Marca na Area Jovem",
+      slot: "jovem",
+      size: "drop",
+      text: "Acao para game, anime, show, influenciador, lancamento ou promocao jovem.",
+      href: "divulgue.html",
+      status: "active",
+      priority: 40
     }
   ];
 }
@@ -10144,12 +10272,12 @@ async function refreshRaylWebsiteStudyWithAi({ reason = "auto" } = {}) {
   const result = await callCatalogAi({
     area: "rayl-study",
     system: [
-      "Você é a RAyL estudando o site inteiro antes de atender o público.",
+      "Você é a RAIane estudando o site inteiro antes de atender o público.",
       "Crie respostas prontas curtas com base apenas no JSON do site.",
       "Não invente páginas, fatos, contatos, notícias ou promessas.",
       "Retorne português claro, sem raciocínio interno, em até 8 linhas."
     ].join(" "),
-    prompt: `Estude o site e diga como a RAyL deve atender visitantes. Motivo: ${reason}`,
+    prompt: `Estude o site e diga como a RAIane deve atender visitantes. Motivo: ${reason}`,
     context: {
       site: study.site,
       routes: study.routes,
@@ -10547,7 +10675,7 @@ async function answerRaylChat(body = {}, req = null) {
   const tracking = req ? buildTrackingMeta(req, body) : {};
   const question = cleanShortText(body.question || body.message || body.text || "", 500);
   if (!question || question.length < 2) {
-    return { ok: false, status: 400, error: "Envie uma pergunta para a RAyL." };
+    return { ok: false, status: 400, error: "Envie uma pergunta para a RAIane." };
   }
   const study = buildRaylWebsiteStudy();
   const studyIntent = findRaylStudyAnswer(question, study);
@@ -10559,7 +10687,7 @@ async function answerRaylChat(body = {}, req = null) {
     aiResult = await callCatalogAi({
       area: "rayl",
       system: [
-        "Você é RAyL CZS, assistente local do Catálogo CZS.",
+        "Você é RAIane CZS, assistente local do Catálogo CZS.",
         "Responda em português do Acre, de forma curta, humana e prática.",
         "Fale como uma atendente simpática do Vale do Juruá: natural, acolhedora, sem soar como manual ou robô.",
         "Você estudou o site inteiro; use somente o estudo do site e a resposta segura fornecida.",
@@ -10572,7 +10700,7 @@ async function answerRaylChat(body = {}, req = null) {
       prompt: [
         `Pergunta do leitor: ${question}`,
         `Resposta segura do CZS para usar como base: ${intent.answer}`,
-        study.aiSummary ? `Resumo do estudo RAyL: ${study.aiSummary}` : "",
+        study.aiSummary ? `Resumo do estudo RAIane: ${study.aiSummary}` : "",
         "Responda com uma frase prática e, se houver rota, deixe claro onde clicar."
       ].filter(Boolean).join("\n"),
       context: {
@@ -10625,7 +10753,7 @@ async function answerRaylChat(body = {}, req = null) {
         ? sanitizeCatalogAiAnswer(aiResult.answer, intent.answer)
         : fallbackAnswer,
     pose: humanFallback ? "human" : intent.pose || "explain",
-    title: humanFallback ? "Atendimento humano" : intent.title || "RAyL",
+    title: humanFallback ? "Atendimento humano" : intent.title || "RAIane",
     routeKey: humanFallback ? "" : intent.routeKey || "",
     href: humanFallback ? "" : intent.href || "",
     human: Boolean(humanFallback),

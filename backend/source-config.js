@@ -194,6 +194,26 @@ module.exports = [
     priorityReason: "Jornal regional do Jurua com RSS ativo e cobertura direta de Cruzeiro do Sul."
   },
   {
+    id: "jurua-informativo",
+    name: "Jurua Informativo",
+    feedUrl: "https://www.juruainformativo.com.br/feed/",
+    siteUrl: "https://www.juruainformativo.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 35,
+    priority: 962,
+    priorityReason: "Fonte regional do Vale do Jurua verificada em 2026-06-05 com RSS ativo; reforca cobertura de bairro, seguranca e servicos."
+  },
+  {
+    id: "integracao-net",
+    name: "Integracao Net",
+    feedUrl: "https://integracaonet.com/feed/",
+    siteUrl: "https://integracaonet.com/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 35,
+    priority: 958,
+    priorityReason: "Portal regional de Cruzeiro do Sul verificado em 2026-06-05 com RSS ativo; amplia cobertura do Vale do Jurua."
+  },
+  {
     id: "acre-in-foco",
     name: "Acre in Foco",
     feedUrl: "https://acreinfoco.com/wp-json/wp/v2/posts?per_page=24&_embed=1",
@@ -214,6 +234,66 @@ module.exports = [
     limitPerSource: 35,
     priority: 830,
     priorityReason: "Fonte estadual com cobertura frequente de Cruzeiro do Sul, seguranca, politica e servicos do interior."
+  },
+  {
+    id: "portal-acre",
+    name: "Portal Acre",
+    feedUrl: "https://portalacre.com.br/feed/",
+    siteUrl: "https://portalacre.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 24,
+    priority: 825,
+    priorityReason: "Fonte acreana verificada em 2026-06-05 com RSS ativo; entra como reforco para esporte, cidades e temas do interior."
+  },
+  {
+    id: "o-alto-acre",
+    name: "O Alto Acre",
+    feedUrl: "https://oaltoacre.com/feed/",
+    siteUrl: "https://oaltoacre.com/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 820,
+    priorityReason: "Fonte estadual verificada em 2026-06-05 com RSS ativo; usar como camada complementar quando houver impacto no Acre ou no Jurua."
+  },
+  {
+    id: "estado-do-acre",
+    name: "Estado do Acre",
+    feedUrl: "https://estadodoacre.com.br/feed/",
+    siteUrl: "https://estadodoacre.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 815,
+    priorityReason: "Fonte acreana verificada em 2026-06-05 com RSS ativo; reforca cultura, eventos e agenda regional."
+  },
+  {
+    id: "acre-com-br",
+    name: "Acre Noticias",
+    feedUrl: "https://acre.com.br/feed/",
+    siteUrl: "https://acre.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 810,
+    priorityReason: "Fonte acreana verificada em 2026-06-05 com RSS ativo; inclui pautas de governo, tecnologia, esporte e juventude."
+  },
+  {
+    id: "acre-agora",
+    name: "Acre Agora",
+    feedUrl: "https://acreagora.com/feed/",
+    siteUrl: "https://acreagora.com/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 805,
+    priorityReason: "Fonte acreana verificada em 2026-06-05 com RSS ativo; camada complementar para cidades, servicos e politica."
+  },
+  {
+    id: "a-gazeta-do-acre",
+    name: "A Gazeta do Acre",
+    feedUrl: "https://agazetadoacre.com/feed/",
+    siteUrl: "https://agazetadoacre.com/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 800,
+    priorityReason: "Fonte estadual verificada em 2026-06-05 com RSS ativo; usada como reforco de cobertura quando o tema dialogar com o Vale do Jurua."
   },
   {
     id: "agencia-brasil-ultimas",

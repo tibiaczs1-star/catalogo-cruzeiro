@@ -7,7 +7,7 @@
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
-  const V8_BOOT_VERSION = "20260605-v8-live-hydration-cleanup-v1";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v5";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -75,6 +75,26 @@
       text: "Fallback de mídia local enquanto a TV busca vídeos de notícias no arquivo.",
     },
   ];
+  const V8_VIDEO_SOURCE_DIRECTORY = [
+    { label: "TV Juruá", type: "TV local", href: "https://www.tvjurua.com/", region: "Vale do Juruá" },
+    { label: "Juruá Online", type: "Portal com vídeo", href: "https://juruaonline.com.br/", region: "Vale do Juruá" },
+    { label: "Juruá 24 Horas", type: "Portal com vídeo", href: "https://jurua24horas.com/", region: "Vale do Juruá" },
+    { label: "Juruá Comunicação", type: "Portal local", href: "https://juruacomunicacao.com.br/", region: "Vale do Juruá" },
+    { label: "Voz do Norte", type: "Jornal regional", href: "https://www.vozdonorte.com.br/", region: "Vale do Juruá" },
+    { label: "Portal do Juruá", type: "Portal regional", href: "https://www.portaldojurua.com.br/", region: "Vale do Juruá" },
+    { label: "Juruá Informativo", type: "Fonte regional", href: "https://www.juruainformativo.com.br/", region: "Vale do Juruá" },
+    { label: "Integração Net", type: "Fonte regional", href: "https://integracaonet.com/", region: "Vale do Juruá" },
+    { label: "Agência Acre", type: "Fonte oficial", href: "https://agencia.ac.gov.br/", region: "Acre" },
+    { label: "TV Acre", type: "TV oficial", href: "https://www.ac.gov.br/tvacre", region: "Acre" },
+    { label: "Agência AC Oficial", type: "YouTube", href: "https://www.youtube.com/@agenciaacreoficial", region: "Acre" },
+    { label: "Governo do Acre", type: "YouTube", href: "https://www.youtube.com/@governodoacreoficial", region: "Acre" },
+    { label: "CTBC TV", type: "YouTube", href: "https://www.youtube.com/@ctbctv", region: "Cruzeiro do Sul" },
+    { label: "Juruá News", type: "YouTube", href: "https://www.youtube.com/@juruanews", region: "Vale do Juruá" },
+    { label: "Câmara de CZS", type: "YouTube", href: "https://www.youtube.com/@camaraCDS", region: "Cruzeiro do Sul" },
+    { label: "GloboNews", type: "YouTube", href: "https://www.youtube.com/@globo_news", region: "Brasil" },
+    { label: "CNN Brasil", type: "YouTube", href: "https://www.youtube.com/@CNNBrasil", region: "Brasil" },
+    { label: "Record News", type: "YouTube", href: "https://www.youtube.com/@recordnews", region: "Brasil" },
+  ];
   const archiveState = {
     query: "",
     period: "all",
@@ -120,7 +140,7 @@
     [RAYL_POSES.loaderPoint, "Apontando os atalhos úteis.", "point"],
     [RAYL_POSES.loaderPresent, "Organizando serviços e anúncios.", "present"],
     [RAYL_POSES.loaderJoy, "Quase pronto para abrir.", "joy"],
-    [RAYL_POSES.seatedFeature, "RAyL entra com o portal.", "seated"],
+    [RAYL_POSES.seatedFeature, "RAIane entra com o portal.", "seated"],
   ];
   const dataNode = document.getElementById("newsData");
   const DATA = dataNode ? JSON.parse(dataNode.textContent || "{}") : { items: [] };
@@ -262,13 +282,27 @@
   const weakImage = (value = "") =>
     !value ||
     isVideoUrl(value) ||
-    /(?:^|\/)assets\/news-fallbacks\/|\/news-fallbacks\/|loading_v2\.gif|pixel-art-editorial\.svg|placeholder|spacer|blank|favicon|logo|avatar|gravatar|default|sem-imagem|generica|gen[eé]rica/i.test(String(value));
+    /(?:^|\/)assets\/(?:home-cache|news-fallbacks)\/|\/news-fallbacks\/|loading_v2\.gif|pixel-art-editorial\.svg|placeholder|spacer|blank|favicon|logo|avatar|gravatar|default|sem-imagem|generica|gen[eé]rica/i.test(String(value));
 
   const imgFor = (story) => {
     const raw = normalizeAssetUrl(story?.imageUrl || story?.feedImageUrl || story?.sourceImageUrl || "");
-    if (weakImage(raw)) return realPhotoFor(story);
+    if (weakImage(raw)) return "";
     return raw;
   };
+
+  function missingStoryVisualMarkup(story = {}) {
+    const source = sourceName(story) || "fonte";
+    return `<div class="v8-missing-story-photo" role="img" aria-label="Foto em checagem na fonte">
+      <b>Foto em checagem</b>
+      <span>Abrir fonte: ${esc(source)}</span>
+    </div>`;
+  }
+
+  function storyImageMarkup(story = {}, loading = "lazy") {
+    const src = imgFor(story);
+    if (!src) return missingStoryVisualMarkup(story);
+    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" onerror="this.replaceWith((() => { const box = document.createElement('div'); box.className = 'v8-missing-story-photo'; box.setAttribute('role', 'img'); box.setAttribute('aria-label', 'Foto em checagem na fonte'); box.innerHTML = '<b>Foto em checagem</b><span>Imagem da fonte não carregou</span>'; return box; })())">`;
+  }
 
   function firstVideoUrlFrom(value) {
     if (!value) return "";
@@ -427,7 +461,7 @@
         Vídeo indisponível neste navegador.
       </video>`;
     }
-    return `<img src="${esc(imgFor(story))}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">`;
+    return storyImageMarkup(story, loading);
   }
 
   function ensureStoryViewerOverlay() {
@@ -865,10 +899,10 @@
     if (loader && !$(".v8-loader-welcome", loader)) {
       const welcome = document.createElement("aside");
       welcome.className = "v8-loader-welcome";
-      welcome.setAttribute("aria-label", "Boas-vindas da RAyL");
+      welcome.setAttribute("aria-label", "Boas-vindas da RAIane");
       welcome.innerHTML = `
-        <span class="v8-loader-avatar-crop"><img src="${AYLLA_LOADER_POSES[0][0]}" alt="RAyL CZS" data-loader-aylla></span>
-        <span class="v8-loader-copy"><b>RAyL CZS</b><span>${esc(AYLLA_LOADER_POSES[0][1])}</span></span>`;
+        <span class="v8-loader-avatar-crop"><img src="${AYLLA_LOADER_POSES[0][0]}" alt="RAIane CZS" data-loader-aylla></span>
+        <span class="v8-loader-copy"><b>RAIane CZS</b><span>${esc(AYLLA_LOADER_POSES[0][1])}</span></span>`;
       loader.appendChild(welcome);
     }
     if (loader && !$(".v8-loader-status", loader)) {
@@ -1120,7 +1154,31 @@
         text: "Mostra os escritórios visuais e rotas públicas dos agentes do projeto.",
         href: "#agentesAutonomos",
       },
+      {
+        title: "Vitrine de produtos",
+        text: "Divulgação de produto local com foto, preço, descrição curta e botão para WhatsApp.",
+        href: "#monetizacao",
+      },
+      {
+        title: "Loja no WhatsApp",
+        text: "Sistema simples de pedidos: catálogo, carrinho manual, mensagem pronta e controle de demanda.",
+        href: whatsappHref("Oi, CZS. Quero montar uma loja no WhatsApp com catálogo e pedidos."),
+        external: true,
+      },
+      {
+        title: "Site para empresa",
+        text: "Página profissional, cardápio, formulário, mapa, Google e atendimento para pequenos negócios.",
+        href: whatsappHref("Oi, CZS. Quero criar um site para minha empresa."),
+        external: true,
+      },
+      {
+        title: "Sistema para loja",
+        text: "Pedidos, estoque simples, agenda, divulgação e automação para vender sem depender só de postagem.",
+        href: whatsappHref("Oi, CZS. Quero um sistema para loja ou vendas autônomas."),
+        external: true,
+      },
     ];
+    const grid = cards[0]?.parentElement;
     cards.forEach((card, index) => {
       const item = services[index];
       if (!item) return;
@@ -1149,6 +1207,20 @@
         }
       }
     });
+    if (grid && !grid.dataset.v8ExtraServices) {
+      services.slice(cards.length).forEach((item) => {
+        const link = document.createElement("a");
+        link.className = "service-card v8-extra-service-card";
+        link.href = item.href || "#servicos";
+        if (item.external) {
+          link.target = "_blank";
+          link.rel = "noopener";
+        }
+        link.innerHTML = `<b>${esc(item.title)}</b><p>${esc(item.text)}</p>`;
+        grid.appendChild(link);
+      });
+      grid.dataset.v8ExtraServices = "1";
+    }
   }
 
   function trimRedundantCopy(root = document) {
@@ -1672,9 +1744,12 @@
   }
 
   function railCard(story) {
+    const videoSrc = storyVideoUrl(story);
     return `
       <a class="v8-rail-story" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
-        <img src="${esc(storyVideoUrl(story) ? videoPosterFor(story, storyVideoUrl(story)) : imgFor(story))}" alt="${esc(story.title)}" loading="lazy" data-v8-video-poster-src="${esc(storyVideoUrl(story))}" data-v8-video-fallback="${esc(imgFor(story))}" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+        ${videoSrc
+          ? `<img src="${esc(videoPosterFor(story, videoSrc))}" alt="${esc(story.title)}" loading="lazy" data-v8-video-poster-src="${esc(videoSrc)}" data-v8-video-fallback="${esc(imgFor(story))}">`
+          : storyImageMarkup(story)}
         <span><b>${esc(story.title)}</b><small>${esc(story.category || "Notícia")} • ${esc(storyDate(story))}</small></span>
       </a>`;
   }
@@ -1848,11 +1923,11 @@
   function getAutonomousAgentPreviews() {
     return [
       {
-        title: "Escritório RAyL",
+        title: "Escritório RAIane",
         label: "Atendimento",
         text: "guia o leitor para notícia, serviço, mapa do site e ajuda rápida.",
         img: "assets/aylla/rayl-v2-clean/rayl-v2-wave-full.png",
-        bg: "assets/cheffe-call-office-bg.jpg",
+        bg: "/assets/cheffe-call-office-bg.jpg",
         href: "#assistantInline",
       },
       {
@@ -1860,7 +1935,7 @@
         label: "Cheffe Call",
         text: "mostra a sala dos agentes, tecnologia, revisão e organização do projeto.",
         img: "assets/fusion-avatar-hologram.png",
-        bg: "assets/cheffe-call-nerd-straight-seats-ai.png",
+        bg: "/assets/cheffe-call-nerd-straight-seats-ai.png",
         href: "#infosGerais",
       },
       {
@@ -1868,7 +1943,7 @@
         label: "Jogos",
         text: "abre PubPaid, sinuca, lobby, torneios e área jovem.",
         img: "assets/pubpaid/sprite-candidates/hyperreal-main-options-v1/rafa_dealer_master_front_96x144_alpha.png",
-        bg: "assets/pubpaid/lobby/pubpaid-lobby-bg-v1.png",
+        bg: "/assets/pubpaid/lobby/pubpaid-lobby-bg-v1.png",
         href: "pubpaid.html",
       },
       {
@@ -1876,7 +1951,7 @@
         label: "Bairros",
         text: "recebe pauta de bairro, fotos, relatos e pedidos verificáveis.",
         img: "assets/pubpaid/sprite-candidates/hyperreal-main-options-v1/caio_pix_master_front_96x144_alpha.png",
-        bg: "assets/home-cache/footer-cruzeiro-bg.jpg",
+        bg: "/assets/home-cache/footer-cruzeiro-bg.jpg",
         href: "#comunidade",
       },
       {
@@ -1884,7 +1959,7 @@
         label: "Galeria",
         text: "leva para fotos premium, TV CZS e registros do Vale do Juruá.",
         img: "assets/aylla/rayl-v2-clean/rayl-v2-present-full.png",
-        bg: "assets/home-cache/rio-jurua-panorama.jpg",
+        bg: "/assets/home-cache/rio-jurua-panorama.jpg",
         href: "#galeriaFotos",
       },
     ];
@@ -1903,7 +1978,7 @@
   function commandCard(story) {
     return `
       <article class="v8-command-card" data-v8-command-card="${esc(story.slug)}">
-        <img src="${esc(imgFor(story))}" alt="${esc(story.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+        ${storyImageMarkup(story)}
         <div>
           <span class="v8-task-status">${esc(isUrgent(story) ? "alta prioridade" : story.category || "notícia")}</span>
           <h3>${esc(story.title)}</h3>
@@ -2156,7 +2231,7 @@
         ${opportunityStories.map((story) => `
           <article class="v8-opportunity-card">
             <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
-              <img src="${esc(imgFor(story))}" alt="${esc(story.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+              ${storyImageMarkup(story)}
               <span class="badge">${esc(opportunityLabel(story))}</span>
               <b>${esc(story.title)}</b>
               <small>${esc(sourceName(story))} • ${esc(storyDate(story))}</small>
@@ -2184,7 +2259,28 @@
       .filter((story) => /v[ií]deo|youtube|tv|ao vivo|bastidor|futebol|show|cultura|esporte/i.test(
         [story?.title, story?.summary, story?.subtitle, story?.category, sourceName(story)].join(" ")
       ))
-      .slice(0, 3);
+      .slice(0, 6);
+  }
+
+  function videoSourceDirectoryItems() {
+    const sourceStories = (archiveSourceStories.length ? archiveSourceStories : allStories)
+      .filter((story) => storyVideoUrl(story) || /v[ií]deo|youtube|tv|ao vivo|reels|story|bastidor/i.test(
+        [story?.title, story?.summary, story?.sourceUrl, sourceName(story)].join(" ")
+      ))
+      .map((story) => ({
+        label: sourceName(story) || "Fonte monitorada",
+        type: storyVideoUrl(story) ? "Vídeo captado" : "Fonte com pauta visual",
+        href: story.sourceUrl || LIVE,
+        region: story.category || "Notícia",
+      }));
+    const merged = [...sourceStories, ...V8_VIDEO_SOURCE_DIRECTORY];
+    const seen = new Set();
+    return merged.filter((item) => {
+      const key = normalizeText(`${item.label} ${item.href}`);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 24);
   }
 
   function videoPlaylistItems() {
@@ -2223,6 +2319,7 @@
     if (!active) return;
     storyViewerState.playlist = playlist;
     const context = videoContextStories();
+    const monitoredSources = videoSourceDirectoryItems();
     section.classList.add("v8-real-video-hub", "v8-story-video-hub");
     section.innerHTML = `
       <div class="section-head">
@@ -2254,7 +2351,7 @@
           </div>
         </div>
         <div class="v8-video-playlist v8-story-playlist" aria-label="Playlist de stories do CZS">
-          <div class="v8-story-capture-note"><b>Captação</b><span>Prioriza vídeo real de notícia; usa acervo local só quando não houver vídeo no snapshot.</span></div>
+          <div class="v8-story-capture-note"><b>Captação</b><span>Varre as fontes monitoradas, canais, TVs e matérias com vídeo; acervo local fica só como apoio.</span></div>
           ${playlist.map((item, index) => `
             <button class="v8-video-item ${index === 0 ? "is-active" : ""}" type="button" data-v8-video="${esc(item.id)}">
               <img src="${esc(item.poster)}" alt="" data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}">
@@ -2262,10 +2359,24 @@
             </button>`).join("")}
         </div>
       </div>
+      <div class="v8-video-source-board" aria-label="Fontes de vídeo monitoradas">
+        <div>
+          <b>Fontes de vídeo em captação</b>
+          <span>Canais, TVs e portais que entram na fila da TV CZS para vídeo, story e conferência visual.</span>
+        </div>
+        <div class="v8-video-source-grid">
+          ${monitoredSources.map((source) => `
+            <a href="${esc(source.href || "#videos")}" target="_blank" rel="noopener">
+              <small>${esc(source.type || "Fonte")}</small>
+              <b>${esc(source.label || "Fonte monitorada")}</b>
+              <span>${esc(source.region || "CZS")}</span>
+            </a>`).join("")}
+        </div>
+      </div>
       <div class="v8-video-context">
         ${context.map((story) => `
           <article class="v8-editorial-card">
-            <b>${esc(story.title)}</b>
+            <a class="v8-context-title-link" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">${esc(story.title)}</a>
             <p>${esc(story.summary || story.subtitle || "Matéria com contexto visual para conferência editorial.")}</p>
             <div class="actions">
               <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">Ler</a>
@@ -2310,31 +2421,35 @@
     if (section?.dataset.v8YoungReady === "1") return;
     const anchor = $("#videos") || $("#galeriaFotos") || $("#servicos");
     if (!section && !anchor?.parentElement) return;
-    const source = archiveSourceStories.length ? archiveSourceStories : allStories;
-    const pick = (regex, fallbackTitle, fallbackText, fallbackImage = "assets/home-cache/buzz-cultura-show.jpg") => {
-      const story = source.find((item) => regex.test([item?.title, item?.summary, item?.subtitle, item?.category, sourceName(item)].join(" ")));
-      if (story) {
-        return {
-          title: story.title,
-          text: story.summary || story.subtitle || localImpact(story),
-          image: imgFor(story),
-          href: v8Url(story),
-          label: story.category || sourceName(story),
-        };
-      }
-      return {
-        title: fallbackTitle,
-        text: fallbackText,
-        image: fallbackImage,
-        href: "#areaJovem",
-        label: "Curadoria CZS",
-      };
-    };
     const cards = [
-      pick(/pubpaid|jogo|game|xadrez|damas|sinuca|torneio|ranking/i, "Sinuca e apostas", "Atalhos para experiências de jogo sem misturar com a home editorial.", "assets/home-cache/buzz-via-cruzeiro.jpg"),
-      pick(/anime|animes|mang[aá]|geek|cosplay|games/i, "Animes e cultura geek", "Espaço jovem para animes, games, internet e cultura pop quando houver pauta segura.", "assets/home-cache/fallback-educacao.jpg"),
-      pick(/novela|televis[aã]o|rede nacional|bbb|s[ée]rie|filme|cinema|streaming/i, "Novelas, filmes e TV nacional", "O que virou assunto no Brasil, sempre com peso menor que a rotina do Vale.", "assets/home-cache/buzz-cruzeiro-02.jpg"),
-      pick(/show|festival|agenda|cultura|evento|m[uú]sica|artista|teatro/i, "Shows e agenda do Acre", "Agenda jovem do Acre: shows, festas, eventos, escolas, esporte e cultura.", "assets/home-cache/buzz-cultura-show.jpg"),
+      {
+        title: "Jogos e PubPaid",
+        text: "Sinuca, ranking, desafios, torneios e experiências de jogo para a comunidade jovem.",
+        image: "assets/home-cache/buzz-via-cruzeiro.jpg",
+        href: "pubpaid.html",
+        label: "Games",
+      },
+      {
+        title: "Anime, mangá e cultura geek",
+        text: "Espaço para animes, HQs, cosplay, comunidades nerds e encontros de fãs do Vale.",
+        image: "assets/home-cache/fallback-educacao.jpg",
+        href: "#areaJovem",
+        label: "Geek",
+      },
+      {
+        title: "Livros, HQs e estudo",
+        text: "Indicações, clubes de leitura, vestibular, ENEM e histórias para quem quer evoluir.",
+        image: "assets/home-cache/buzz-cruzeiro-02.jpg",
+        href: "#areaJovem",
+        label: "Livros",
+      },
+      {
+        title: "Shows, ídolos e influenciadores",
+        text: "Agenda jovem, artistas, criadores locais, marcas, drops e bastidores de eventos.",
+        image: "assets/home-cache/buzz-cultura-show.jpg",
+        href: "#videos",
+        label: "Pop",
+      },
     ];
     if (!section) {
       section = document.createElement("section");
@@ -2347,15 +2462,15 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">Área jovem</div>
-          <h2>Jogos, animes, novelas, filmes e agenda do Acre</h2>
-          <p>Um corredor leve para quem quer entretenimento, mas sem tirar a home do foco principal: Vale do Juruá primeiro.</p>
+          <h2>Jogos, animes, livros, shows e cultura pop</h2>
+          <p>Um corredor de entretenimento para marcas, fãs, influenciadores e jovens do Vale, sem misturar notícia aleatória.</p>
         </div>
         <a class="btn ghost" href="#videos">Abrir TV CZS</a>
       </div>
       <div class="v8-young-grid">
         ${cards.map((card, index) => `
           <a class="v8-young-card ${index === 0 ? "is-featured" : ""}" href="${esc(card.href)}">
-            <img src="${esc(card.image)}" alt="${esc(card.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor({ title: card.title }))}'">
+            <img src="${esc(card.image)}" alt="${esc(card.title)}" loading="lazy">
             <span>${esc(card.label)}</span>
             <b>${esc(card.title)}</b>
             <p>${esc(card.text)}</p>
@@ -2364,53 +2479,80 @@
       <div class="v8-young-agenda">
         <b>Agenda rápida</b>
         <span>Shows do Acre</span>
-        <span>Eventos de escola</span>
-        <span>Festas e cultura</span>
-        <span>Sinuca e apostas</span>
-        <span>Filmes e TV nacional</span>
+        <span>Animes e HQs</span>
+        <span>Livros e ENEM</span>
+        <span>Sinuca e PubPaid</span>
+        <span>Influenciadores</span>
       </div>`;
   }
 
   function galleryItems() {
-    const stableBase = [
-      ["Rio Juruá cinematográfico", "Panorama, água, céu e vida ribeirinha", "assets/home-cache/rio-jurua-panorama.jpg"],
-      ["Cruzeiro do Sul no fim de tarde", "Cidade, bairro, comércio e circulação local", "assets/home-cache/footer-cruzeiro-bg.jpg"],
-      ["Comunidade em movimento", "Registro local para galeria, sem virar manchete aleatória", "assets/home-cache/news-batelao-local.jpg"],
-      ["Cultura do Vale", "Agenda, palco, música e encontro comunitário", "assets/home-cache/buzz-cultura-show.jpg"],
-      ["Ruas e encontros", "Cena urbana para banco visual do CZS", "assets/home-cache/buzz-cruzeiro-01.jpg"],
-      ["Detalhes do cotidiano", "Imagem de apoio para matérias locais", "assets/home-cache/buzz-cruzeiro-02.jpg"],
-      ["Memória visual", "Arquivo de cidade, bairro e pessoas", "assets/home-cache/buzz-cruzeiro-03.jpg"],
-      ["Vale do Juruá", "Textura regional para cobertura premium", "assets/home-cache/buzz-cruzeiro-04.jpg"],
-      ["Via Cruzeiro", "Trânsito, estrada, comércio e caminho do leitor", "assets/home-cache/buzz-via-cruzeiro.jpg"],
-      ["Sabor local", "Gastronomia, mercado e pequenos negócios", "assets/home-cache/buzz-acai-bowl.jpg"],
-    ].map(([title, text, src]) => ({ title, text, src, href: "#galeriaFotos" }));
-
-    const localSignal = /\b(cruzeiro do sul|jurua|juruá|vale do jurua|acre|mailza|mailsa|maisa|gladson|gladison|mancio lima|mâncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauacá|sena madureira|rio branco)\b/i;
-    const gallerySignal = /\b(corpus christi|festival|show|cultura|procissao|procissão|fieis|fiéis|evento|programacao|programação|festa|turismo|rio|cidade|comunidade|esporte|jogo|agenda|obra|entrega|encontro|solenidade|educacao|educação|saude|saúde|servico|serviço)\b/i;
-    const sensitiveSignal = /\b(estupro|homicidio|homicídio|morte|cadaver|cadáver|assassin|violencia|violência|execucao|execução|prisao|prisão|trafico|tráfico|abuso|foragido|mandado)\b/i;
-    const seen = new Set(stableBase.map((item) => item.src));
-    const captured = allStories
-      .filter((story) => {
-        const haystack = [story.title, story.summary, story.category, story.categoryKey, story.sourceName].join(" ");
-        const image = normalizeAssetUrl(story.imageUrl || story.feedImageUrl || story.sourceImageUrl || "");
-        return image && !weakImage(image) && localSignal.test(haystack) && gallerySignal.test(haystack) && !sensitiveSignal.test(haystack);
-      })
-      .slice(0, 18)
-      .map((story) => {
-        const src = normalizeAssetUrl(story.imageUrl || story.feedImageUrl || story.sourceImageUrl || "");
-        if (!src || seen.has(src)) return null;
-        seen.add(src);
-        return {
-          title: story.title || "Registro local",
-          text: `${story.sourceName || "CZS"} - ${story.date || "captado agora"}`,
-          src,
-          href: v8Url(story),
-          slug: story.slug || "",
-        };
-      })
-      .filter(Boolean);
-
-    return [...captured, ...stableBase].slice(0, 16);
+    return [
+      {
+        title: "Rio Juruá ao amanhecer",
+        text: "Bruma, água baixa e horizonte do Juruá em Cruzeiro do Sul.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rio%20Jurua%2C%20Cruzeiro%20do%20Sul%2C%20Acre.jpg?width=1400",
+        href: "https://commons.wikimedia.org/wiki/File:Rio_Jurua,_Cruzeiro_do_Sul,_Acre.jpg",
+        sourceLabel: "Wikimedia Commons",
+        kind: "foto",
+      },
+      {
+        title: "Alto Rio Moa",
+        text: "Serra do Divisor, água, mata e rota ribeirinha em visual cinematográfico.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Alto%20rio%20Moa%2C%20Parque%20Nacional%20Serra%20do%20Divisor%2C%20Acre%2C%20Brazil.jpg?width=1400",
+        href: "https://commons.wikimedia.org/wiki/Category:Parque_Nacional_da_Serra_do_Divisor",
+        sourceLabel: "Commons Serra do Divisor",
+        kind: "foto",
+      },
+      {
+        title: "Cachoeira Encantada",
+        text: "Queda d'água da Serra do Divisor para abrir a galeria como turismo premium.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Cachoeira%20Encantada%20na%20Serra%20do%20Divisor.jpg?width=1400",
+        href: "https://commons.wikimedia.org/wiki/File:Cachoeira_Encantada_na_Serra_do_Divisor.jpg",
+        sourceLabel: "Wikimedia Commons",
+        kind: "foto",
+      },
+      {
+        title: "Rio Moa e canoa",
+        text: "Vida ribeirinha, travessia e paisagem de água no extremo oeste acreano.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rio%20Moa%20canoa.jpg?width=1200",
+        href: "https://commons.wikimedia.org/wiki/File:Rio_Moa_canoa.jpg",
+        sourceLabel: "Wikimedia Commons",
+        kind: "foto",
+      },
+      {
+        title: "Ribeirinho pé da serra",
+        text: "Retrato humano e cotidiano ribeirinho para lembrar que galeria também é gente.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ribeirinho%20peh%20da%20serra.jpg?width=1100",
+        href: "https://commons.wikimedia.org/wiki/File:Ribeirinho_peh_da_serra.jpg",
+        sourceLabel: "Wikimedia Commons",
+        kind: "foto",
+      },
+      {
+        title: "Nascer do sol no mirante",
+        text: "Luz baixa, serra e floresta: imagem para abrir em tela cheia.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nascer%20do%20sol%20mirante.jpg?width=1200",
+        href: "https://commons.wikimedia.org/wiki/File:Nascer_do_sol_mirante.jpg",
+        sourceLabel: "Wikimedia Commons",
+        kind: "foto",
+      },
+      {
+        title: "Juruá Aventuras em vídeo",
+        text: "Canal jovem local mostrando rios, igarapés, comunidades e Serra do Divisor.",
+        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ribeirinho%20peh%20da%20serra.jpg?width=1100",
+        href: "https://jurua24horas.com/2025/09/canal-de-jovem-de-cruzeiro-do-sul-alcanca-100-mil-inscritos-no-youtube-e-divulga-cultura-do-vale-do-jurua/",
+        sourceLabel: "Juruá 24 Horas",
+        kind: "video",
+      },
+      {
+        title: "Buscar vídeos do Vale",
+        text: "Atalho para garimpar vídeos de Serra do Moa, Juruá, ribeirinhos e Cruzeiro do Sul.",
+        src: "assets/home-cache/rio-jurua-panorama.jpg",
+        href: "https://www.youtube.com/results?search_query=Vale+do+Juru%C3%A1+Cruzeiro+do+Sul+Serra+do+Moa",
+        sourceLabel: "YouTube",
+        kind: "video",
+      },
+    ];
   }
 
   function renderPremiumGallery() {
@@ -2427,8 +2569,8 @@
       <div class="section-head">
         <div>
           <div class="section-kicker">Galeria do Juruá</div>
-          <h2>Galeria fotográfica premium</h2>
-          <p>Fotos locais, eventos e registros captados com curadoria visual, sem notícia aleatória nem controle interno.</p>
+          <h2>Fotos e vídeos cinematográficos do Vale</h2>
+          <p>Rio Juruá, Serra do Moa, Serra do Divisor, ribeirinhos, cachoeiras e rotas visuais. Galeria não é feed de notícia.</p>
         </div>
         <button class="btn ghost" type="button" data-v8-gallery-open="0">Ver galeria</button>
       </div>
@@ -2442,8 +2584,8 @@
       <div class="v8-gallery-grid">
         ${items.map((item, itemIndex) => `
           <button class="v8-gallery-tile" type="button" data-v8-gallery-open="${itemIndex}">
-            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor({ title: item.title }))}'">
-            <span><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span>
+            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy">
+            <span><i>${esc(item.kind === "video" ? "Vídeo" : "Foto")}</i><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span>
           </button>`).join("")}
       </div>
       <div class="v8-gallery-lightbox" id="v8GalleryLightbox" hidden role="dialog" aria-modal="true" aria-label="Galeria premium do CZS">
@@ -2454,7 +2596,7 @@
           <figcaption>
             <b id="v8GalleryTitle"></b>
             <span id="v8GalleryText"></span>
-            <a id="v8GalleryLink" class="small-btn" href="#galeriaFotos">Abrir matéria</a>
+            <a id="v8GalleryLink" class="small-btn" href="#galeriaFotos" target="_blank" rel="noopener">Abrir fonte</a>
           </figcaption>
         </figure>
         <button class="v8-gallery-nav next" type="button" data-v8-gallery-next aria-label="Próxima foto">›</button>
@@ -2470,7 +2612,7 @@
       $("#v8GalleryText").textContent = item.text;
       const link = $("#v8GalleryLink");
       link.href = item.href || "#galeriaFotos";
-      link.hidden = !item.slug;
+      link.hidden = !item.href;
       lightbox.hidden = false;
       lightbox.classList.add("is-open");
       document.body.classList.add("v8-gallery-open");
@@ -2656,7 +2798,7 @@
     return `
       <article class="v8-archive-card">
         <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
-          <img src="${esc(imgFor(story))}" alt="${esc(story.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+          ${storyImageMarkup(story)}
           <span>
             <small>${esc(story.category || "Notícia")} • ${esc(sourceName(story))} • ${esc(archiveDateLabel(story))}</small>
             <b>${esc(story.title)}</b>
@@ -2752,7 +2894,7 @@
         <div class="v8-photo-desk-grid">
           ${items.map((story) => `
             <article class="v8-photo-desk-card" data-v8-photo-card="${esc(story.slug)}">
-              <img src="${esc(imgFor(story))}" alt="${esc(story.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+              ${storyImageMarkup(story)}
               <div>
                 <span>${esc(sourceName(story))} • ${esc(archiveDateLabel(story))}</span>
                 <h3>${esc(story.title)}</h3>
@@ -3084,12 +3226,12 @@
         <div class="adbox v8-newsletter-box">
           <div>
             <div class="section-kicker">Newsletter</div>
-            <h2>Resumo do dia no e-mail</h2>
-            <p>O CZS envia um resumo diário com manchetes, serviços, alertas e próximos acompanhamentos.</p>
+            <h2>Resumo da semana no e-mail</h2>
+            <p>Um resumo semanal com manchetes, serviços, alertas e acompanhamentos para quem se cadastrar. Ainda está em construção; o cadastro entra na lista de teste.</p>
           </div>
           <form class="search" id="newsletterForm">
             <input type="email" placeholder="Seu e-mail" aria-label="Seu e-mail para receber o resumo do dia">
-            <button type="submit">Receber resumo</button>
+            <button type="submit">Entrar na lista</button>
           </form>
           <div class="v8-social-login-row" aria-label="Entradas sociais opcionais">
             <button type="button" data-social-soon="Login com Google">Google</button>
@@ -3103,27 +3245,27 @@
     if (support) {
       support.classList.add("v8-local-support");
       const partners = [
-        ["Café Cruzeiro", "assets/founders-cafe-pack-static.png", "café local"],
-        ["Shopping Copacabana", "", "comércio local"],
-        ["Dra. Geane Odontologia", "assets/founders-geane-logo-optimized.png", "saúde e cuidado"],
-        ["Grupo AS", "assets/founders-grupo-as-logo.png", "apoio regional"],
+        ["Café Cruzeiro", "assets/founders-cafe-pack-static.png", "café local", "divulgue.html#apoio-local"],
+        ["Shopping Copacabana", "", "comércio local", "divulgue.html#apoio-local"],
+        ["Dra. Geane Odontologia", "assets/founders-geane-logo-optimized.png", "saúde e cuidado", "divulgue.html#apoio-local"],
+        ["Grupo AS", "assets/founders-grupo-as-logo.png", "apoio regional", "divulgue.html#apoio-local"],
       ];
       support.innerHTML = `
         <div class="section-head">
           <div>
             <div class="section-kicker">Apoio local</div>
             <h2>Marcas que ajudam o CZS a crescer</h2>
-            <p>Café Cruzeiro, Shopping Copacabana, clínica odontológica e apoiadores locais com presença limpa no portal.</p>
+            <p>Logos, produtos e marcas locais com enquadramento limpo, sem cortar o que precisa aparecer.</p>
           </div>
           <a class="btn ghost" href="${SOCIAL_WHATSAPP}" target="_blank" rel="noopener">Ser apoiador</a>
         </div>
         <div class="v8-support-grid">
-          ${partners.map(([name, logo, label]) => `
+          ${partners.map(([name, logo, label, href]) => `
             <article class="v8-support-card">
               <div class="v8-support-logo">
                 ${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy">` : `<span class="v8-support-logo-text">${esc(name)}</span>`}
               </div>
-              <b>${esc(name)}</b>
+              <a class="v8-support-title-link" href="${esc(href)}">${esc(name)}</a>
               <p>${esc(label)}</p>
             </article>`).join("")}
         </div>`;
@@ -3228,7 +3370,7 @@
       grid.insertAdjacentHTML("beforeend", slice.map((story) => `
         <article class="news-card v8-continuous-card" data-v8-slug="${esc(story.slug)}">
           <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
-            <img src="${esc(imgFor(story))}" alt="${esc(story.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(realPhotoFor(story))}'">
+            ${storyImageMarkup(story)}
             <span class="badge">${esc(story.category || sourceName(story))}</span>
             <h3>${esc(story.title)}</h3>
             <p>${esc(story.summary || story.subtitle || localImpact(story))}</p>
@@ -3358,7 +3500,7 @@
     portal.innerHTML = `
       <button class="v8-sales-close" type="button" aria-label="Fechar página comercial">×</button>
       <div class="v8-sales-intro">
-        <img src="${RAYL_POSES.chatPresent}" alt="RAyL apresentando ofertas do CZS">
+        <img src="${RAYL_POSES.chatPresent}" alt="RAIane apresentando ofertas do CZS">
         <div>
           <span>Oportunidade para vc e sua empresa</span>
           <h2>O CZS leva sua marca para o Vale do Juruá</h2>
@@ -3431,9 +3573,45 @@
   }
 
   function handleHash() {
-    if (!location.hash.startsWith("#noticia=")) return;
-    const slug = decodeURIComponent(location.hash.replace("#noticia=", ""));
-    if (bySlug.has(slug)) openReader(slug, false);
+    const hash = location.hash || "";
+    if (hash.startsWith("#noticia=")) {
+      const slug = decodeURIComponent(hash.replace("#noticia=", ""));
+      if (bySlug.has(slug)) openReader(slug, false);
+      return;
+    }
+    const directTargets = new Set([
+      "#galeriaFotos",
+      "#videos",
+      "#feed",
+      "#latestThreeColumns",
+      "#areaJovem",
+      "#comunidade",
+      "#servicos",
+      "#monetizacao",
+      "#newsletter",
+      "#apoioLocal",
+      "#arquivoArtigoSystem",
+      "#cheffeCallEditor",
+      "#fullSiteFooter",
+    ]);
+    if (!directTargets.has(hash)) return;
+    const feedTargets = new Set(["#feed", "#latestThreeColumns"]);
+    const shouldPauseLegacyFeed = !feedTargets.has(hash);
+    document.body.dataset.v8HashJumping = shouldPauseLegacyFeed ? "1" : "0";
+    const sentinel = $("#feedSentinel");
+    if (sentinel) {
+      sentinel.style.display = shouldPauseLegacyFeed ? "none" : "";
+    }
+    const jump = () => {
+      const target = $(hash);
+      if (target) target.scrollIntoView({ block: "start", behavior: "auto" });
+    };
+    [80, 420, 1100, 1800].forEach((delay) => setTimeout(jump, delay));
+    setTimeout(() => {
+      if (document.body.dataset.v8HashJumping === "1") {
+        delete document.body.dataset.v8HashJumping;
+      }
+    }, 2600);
   }
 
   function enhanceIntroParallax() {
@@ -3653,7 +3831,7 @@
         window.setTimeout(() => card.classList.remove("is-changing"), 420);
       });
       img.src = src;
-      img.alt = `RAyL em pose ${pose}`;
+      img.alt = `RAIane em pose ${pose}`;
       if (text) text.textContent = message;
     };
     applyPose(0);
@@ -3851,7 +4029,7 @@
     panel.innerHTML = `
       <button type="button" class="v8-entry-close" aria-label="Fechar atalhos">×</button>
       <img class="v8-commercial-aylla" src="${RAYL_POSES.seatedFeature}" alt="" aria-hidden="true">
-      <div class="v8-commercial-speech"><b>RAyL CZS.</b> Posso te mostrar o caminho.</div>
+      <div class="v8-commercial-speech"><b>RAIane CZS.</b> Seja bem-vindo. Escolha uma opção ou me diga o que procura.</div>
       <div class="v8-commercial-shell">
         <header class="v8-commercial-head">
           <span>Comercial CZS</span>
@@ -4015,12 +4193,12 @@
     const portrait = $(".assistant-portrait", card);
     if (portrait) {
       portrait.className = "assistant-portrait aylla-portrait";
-      portrait.innerHTML = `<img src="${RAYL_POSES.chatWave}" alt="RAyL, assistente virtual do CZS">`;
+      portrait.innerHTML = `<img src="${RAYL_POSES.chatWave}" alt="RAIane, assistente virtual do CZS">`;
     }
 
     const title = $(".assistant-head strong", card);
     const status = $(".assistant-head p", card);
-    if (title) title.textContent = "RAyL CZS";
+    if (title) title.textContent = "RAIane CZS";
     if (status) {
       status.textContent = "";
       status.hidden = true;
@@ -4031,8 +4209,8 @@
     if (body) {
       body.innerHTML = `
         <div class="aylla-stage" aria-live="polite">
-          <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="RAyL acenando">
-          <div class="aylla-speech"><b>Oi!</b> Eu sou a RAyL. Escolha uma opção abaixo.</div>
+          <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="RAIane acenando">
+          <div class="aylla-speech"><b>Oi!</b> Eu sou a RAIane. Escolha uma opção abaixo.</div>
         </div>
         <div class="aylla-faq" aria-label="Perguntas frequentes">
           <button type="button" data-aylla-faq="anunciar">Como anunciar?</button>
@@ -4070,13 +4248,13 @@
     dock.className = "aylla-dock is-hidden";
     dock.setAttribute("aria-hidden", "true");
     dock.innerHTML = `
-      <button class="aylla-dock-close" type="button" aria-label="Trazer RAyL para o suporte">×</button>
+      <button class="aylla-dock-close" type="button" aria-label="Trazer RAIane para o suporte">×</button>
       <img src="${RAYL_POSES.chatPoint}" alt="">
       <span>Oi, estou aqui.</span>`;
     document.body.appendChild(dock);
 
     const poseMap = {
-      wave: [RAYL_POSES.chatWave, "Eu sou a RAyL. Escolha uma opção abaixo."],
+      wave: [RAYL_POSES.chatWave, "Eu sou a RAIane. Escolha uma opção abaixo."],
       polite: [RAYL_POSES.chatNeutral, "Estou aqui para ajudar com calma."],
       "point-right": [RAYL_POSES.chatPoint, "Este é o caminho mais direto."],
       "present-left": [RAYL_POSES.chatPointUp, "Tenho atalhos prontos para você."],
@@ -4184,7 +4362,7 @@
       },
     ];
 
-    const raylVoiceIntro = "Oi, eu sou a RAyL.";
+    const raylVoiceIntro = "Oi, eu sou a RAIane.";
     const spokenFaq = {
       anunciar: "Como anunciar no CZS.",
       noticia: "Enviar notícia para a redação.",
@@ -4263,7 +4441,7 @@
       const images = $$("img", card).filter((img) => img.closest(".aylla-portrait") || img.classList.contains("aylla-full"));
       images.forEach((img) => {
         img.src = item[0];
-        img.alt = `RAyL em pose ${pose.replace(/-/g, " ")}`;
+        img.alt = `RAIane em pose ${pose.replace(/-/g, " ")}`;
       });
       $$("[data-aylla-pose]", card).forEach((button) => {
         const active = button.dataset.ayllaPose === pose;
@@ -4304,7 +4482,7 @@
       return bestScore > 0 ? best : null;
     };
 
-    const whatsappUrlFor = (question) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Oi, CZS. Vim pelo chat da RAyL e quero falar com um atendimento humano. Minha duvida: ${question}`)}`;
+    const whatsappUrlFor = (question) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Oi, CZS. Vim pelo chat da RAIane e quero falar com um atendimento humano. Minha duvida: ${question}`)}`;
     const faqRouteKeys = {
       servicos: "services",
       escritorios: "cheffe",
@@ -4500,7 +4678,7 @@
       card.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
 
-    setTimeout(() => setPose("call-attention", "Sou a RAyL. Clique em Abrir quando quiser ajuda."), 1800);
+    setTimeout(() => setPose("call-attention", "Sou a RAIane. Clique em Abrir quando quiser ajuda."), 1800);
   }
 
   function storyFromElement(element) {
@@ -4513,12 +4691,15 @@
     const panel = $("#v8CommunityReports");
     if (!panel) return;
     const reports = safeRead(COMMUNITY_REPORTS_KEY, []);
-    panel.innerHTML = reports.slice(0, 4).map((item) => `
-      <div class="v8-editorial-card">
-        <b>${esc(item.title || "Pauta enviada")}</b>
-        <p>${esc(item.text)}</p>
-        <small>${esc(compactDateTime(item.at || item.createdAt))} • ${esc(item.remoteLabel || item.status || "fila local")}</small>
-      </div>`).join("") || "<div class=\"v8-editorial-card\"><b>Nenhuma pauta enviada ainda</b><p>O próximo relato aparece aqui e entra no registro público da redação.</p></div>";
+    panel.innerHTML = `
+      <div class="v8-community-feed-title"><b>Informado ao vivo</b><span>Relatos aparecem aqui como fila de checagem.</span></div>
+      ${reports.slice(0, 6).map((item) => `
+        <div class="v8-community-bubble">
+          <b>${esc(item.title || "Informação ao vivo")}</b>
+          <p>${esc(item.text || item.message || "")}</p>
+          <small>${esc(item.neighborhood || "bairro não informado")} • ${esc(compactDateTime(item.at || item.createdAt))} • ${esc(item.remoteLabel || item.status || "fila local")}</small>
+          ${item.notifyHref ? `<a class="small-btn ghost" href="${esc(item.notifyHref)}" target="_blank" rel="noopener">Avisar WhatsApp</a>` : ""}
+        </div>`).join("") || "<div class=\"v8-community-bubble\"><b>Nenhum relato ainda</b><p>Quando alguém informar algo do bairro, aparece aqui e vai para checagem.</p></div>"}`;
   }
 
   async function loadCommunityReports() {
@@ -4531,6 +4712,7 @@
         id: item.id,
         title: item.topic || "Pauta enviada",
         text: item.message,
+        neighborhood: item.neighborhood,
         at: item.createdAt,
         status: item.verificationStatus || item.status || "recebido",
         remoteLabel: "backend",
@@ -4547,6 +4729,8 @@
       const result = await apiPostJson(API.communityReports, {
         topic: report.title || "Pauta do bairro",
         message: report.text,
+        neighborhood: report.neighborhood || "",
+        contact: report.contact || "",
         sourcePage: location.pathname + location.search,
       });
       const payload = result.payload || {};
@@ -4555,6 +4739,7 @@
       const next = list.map((item) => item.id === report.id ? {
         ...item,
         id: payload.item?.id || item.id,
+        notifyHref: payload.notify?.whatsappHref || item.notifyHref || "",
         remoteLabel: "backend",
         status: "recebido",
       } : item);
@@ -4577,15 +4762,34 @@
     const communityButton = $("#communityBtn");
     const communityText = $("#communityText");
     if (community && !$("#v8CommunityReports")) {
+      const host = community.querySelector(".panel") || community;
+      if (!$("#v8CommunityLivePrompt")) {
+        const prompt = document.createElement("div");
+        prompt.id = "v8CommunityLivePrompt";
+        prompt.className = "v8-community-live-prompt";
+        prompt.innerHTML = `
+          <div class="v8-radar-dot" aria-hidden="true"></div>
+          <div>
+            <b>Radar do bairro</b>
+            <label for="communityText">Você tá sabendo de algo para informar ao vivo?</label>
+            <input id="communityNeighborhood" autocomplete="address-level3" placeholder="Bairro ou ponto de referência">
+            <small id="v8CommunityThanks">Envie só o que você viu, ouviu de fonte direta ou consegue indicar para checagem.</small>
+          </div>`;
+        const textWrap = communityText?.closest?.("label, .field, .search, div") || communityText;
+        const beforeNode = textWrap && textWrap.parentElement === host ? textWrap : null;
+        host.insertBefore(prompt, beforeNode || null);
+      }
       const panel = document.createElement("div");
       panel.id = "v8CommunityReports";
       panel.className = "v8-community-reports";
-      community.querySelector(".panel")?.appendChild(panel);
+      host.appendChild(panel);
       paintCommunityReports();
     }
     if (communityButton && communityText) {
       communityButton.onclick = null;
       communityButton.type = "button";
+      communityButton.textContent = "Informar ao vivo";
+      communityText.placeholder = "Ex.: vi algo agora no bairro, tem risco, fila, acidente, evento, obra, falta de água ou movimentação...";
       communityButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -4598,8 +4802,9 @@
         const report = {
           id: `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
           at: new Date().toISOString(),
-          title: "Pauta do bairro",
+          title: "Informação ao vivo",
           text,
+          neighborhood: $("#communityNeighborhood")?.value?.trim() || "bairro não informado",
           remoteLabel: "enviando ao backend",
         };
         const reports = safeRead(COMMUNITY_REPORTS_KEY, []);
@@ -4614,8 +4819,10 @@
         }, "community");
         syncCommunityReport(report);
         communityText.value = "";
+        const thanks = $("#v8CommunityThanks");
+        if (thanks) thanks.textContent = "Obrigado por participar. O relato entrou na fila e será checado antes de virar notícia ou alerta.";
         paintCommunityReports();
-        toast("Pauta registrada para a redação");
+        toast("Relato recebido para checagem");
       }, true);
     }
 
@@ -4694,7 +4901,7 @@
         title: "Topo premium",
         slot: "home-topo",
         size: "970x250",
-        text: "Campanha principal para comércio, serviço ou anúncio institucional local.",
+        text: "Banner grande com foto, oferta, botão e leitura de impacto para marcas locais.",
         href: whatsappHref("Oi, CZS. Quero reservar o formato Topo premium 970x250."),
       },
       {
@@ -4702,7 +4909,7 @@
         title: "Card patrocinado",
         slot: "feed",
         size: "1:1",
-        text: "Card para feed, grupos e redes sociais com foto real e copy curta.",
+        text: "Card chamativo para produto, promoção, loja, grupo e rede social.",
         href: whatsappHref("Oi, CZS. Quero um Card patrocinado para campanha local."),
       },
       {
@@ -4710,7 +4917,7 @@
         title: "Vídeo vertical",
         slot: "video",
         size: "9:16",
-        text: "Formato para stories, reels e seção de vídeos do CZS.",
+        text: "Corte de vídeo para stories, reels, TV CZS e campanha com chamada rápida.",
         href: whatsappHref("Oi, CZS. Quero saber sobre vídeo vertical 9:16."),
       },
       {
@@ -4720,6 +4927,38 @@
         size: "projeto",
         text: "Atendimento comercial para criar presença digital e automação.",
         href: whatsappHref("Oi, CZS. Quero contratar site, app ou automação."),
+      },
+      {
+        id: "vitrine-produtos",
+        title: "Vitrine de produtos",
+        slot: "loja",
+        size: "card+whatsapp",
+        text: "Produto com foto, preço, benefício, CTA e encaminhamento para WhatsApp.",
+        href: whatsappHref("Oi, CZS. Quero divulgar produtos na vitrine local."),
+      },
+      {
+        id: "loja-whatsapp",
+        title: "Loja no WhatsApp",
+        slot: "vendas",
+        size: "catalogo",
+        text: "Catálogo simples, lista de pedidos e mensagem pronta para vender no bairro.",
+        href: whatsappHref("Oi, CZS. Quero uma loja no WhatsApp."),
+      },
+      {
+        id: "sistema-loja",
+        title: "Sistema para loja",
+        slot: "automacao",
+        size: "painel",
+        text: "Pedidos, estoque simples, agenda e captação de clientes para lojas locais.",
+        href: whatsappHref("Oi, CZS. Quero um sistema para minha loja."),
+      },
+      {
+        id: "marca-jovem",
+        title: "Marca na Área Jovem",
+        slot: "jovem",
+        size: "drop",
+        text: "Ação para game, anime, show, influenciador, lançamento ou promoção jovem.",
+        href: whatsappHref("Oi, CZS. Quero divulgar uma marca na Área Jovem."),
       },
     ];
   }
@@ -4749,6 +4988,7 @@
     const items = activeCommercialCampaigns();
     rail.innerHTML = items.map((item, index) => `
       <a class="v8-campaign-card ${index === 0 ? "is-active" : ""}" href="${esc(item.href || "#monetizacao")}" target="${/^https?:\/\//.test(item.href || "") ? "_blank" : "_self"}" rel="noopener" data-campaign-id="${esc(item.id)}">
+        <i aria-hidden="true"></i>
         <span>${esc(item.slot || "campanha")}</span>
         <b>${esc(item.title)}</b>
         <p>${esc(item.text || item.description || "")}</p>
@@ -4840,6 +5080,10 @@
             <option value="topo-premium">Topo premium</option>
             <option value="video-vertical">Vídeo vertical</option>
             <option value="site-app-automacao">Site, app ou automação</option>
+            <option value="vitrine-produtos">Vitrine de produtos</option>
+            <option value="loja-whatsapp">Loja no WhatsApp</option>
+            <option value="sistema-loja">Sistema para loja</option>
+            <option value="marca-jovem">Marca na Área Jovem</option>
           </select>
           <button type="submit">Enviar pedido</button>
           <p id="v8CommercialLeadStatus" class="v8-form-status"></p>
@@ -4938,7 +5182,9 @@
     handleHash();
     clearInterval(window.__v8CopyCleanupTimer);
     window.__v8CopyCleanupTimer = setInterval(() => sanitizePublicCopy(), 900);
+    window.addEventListener("hashchange", handleHash);
     window.addEventListener("popstate", handleHash);
+    window.addEventListener("load", handleHash, { once: true });
   }
 
   if (document.readyState === "loading") {

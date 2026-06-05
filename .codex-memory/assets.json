@@ -1,7 +1,40 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-04T21:27:02.330Z",
+  "lastUpdatedAt": "2026-06-05T04:45:00.000Z",
   "assets": [
+    {
+      "id": "v8-hidratacao-real-validation-20260605",
+      "kind": "screenshot-pack",
+      "path": ".codex-temp/screenshots/cdp-galeriaFotos-v5b.png",
+      "note": "Capturas CDP da rodada V8: feed, vídeos, galeria final, área jovem, comunidade e serviços; galeria final em cdp-galeriaFotos-v5b.png.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-05-v8-hidratacao-real-deploy"
+      ],
+      "createdAt": "2026-06-05T04:45:00.000Z"
+    },
+    {
+      "id": "v8-source-screenshots-20260605",
+      "kind": "image-pack",
+      "path": "assets/source-screenshots/",
+      "note": "Prints da fonte original para matérias sem imagem segura; usados no lugar de fallback falso e marcados para Cheffe Call quando necessário.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-05-v8-hidratacao-real-deploy"
+      ],
+      "createdAt": "2026-06-05T04:45:00.000Z"
+    },
+    {
+      "id": "whatsapp-vendas-homem-aluguel-20260605",
+      "kind": "html-and-whatsapp-queue",
+      "path": ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/index.html",
+      "note": "Pacote navegável com imagens e legendas para WhatsApp grupos de venda, todos com link wa.me e novo serviço Homem de Aluguel.",
+      "source": "workspace",
+      "linkedOrderIds": [
+        "2026-06-05-whatsapp-vendas-homem-aluguel"
+      ],
+      "createdAt": "2026-06-05T03:47:01.119Z"
+    },
     {
       "id": "v8-rayl-commercial-popup-real-images-20260603",
       "kind": "image-pack",
@@ -2237,6 +2270,51 @@
         "2026-06-04-corrigir-vazamento-visual-do-site-durante-a-intro-v8"
       ],
       "createdAt": "2026-06-04T21:27:02.330Z"
+    },
+    {
+      "id": "whatsapp-plugin-post-log-json",
+      "kind": "report",
+      "path": ".codex-temp/zap-round-20260604-services-products-plugin/whatsapp-plugin-post-log.json",
+      "source": "workspace",
+      "note": "Log da rodada WhatsApp via plugin: notícias no Catálogo CZS, serviços/produtos em grupos de venda e destinos pulados.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T02:31:15.697Z"
+    },
+    {
+      "id": "whatsapp-final-state-plugin-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/zap-round-20260604-services-products-plugin/whatsapp-final-state-plugin.png",
+      "source": "workspace",
+      "note": "Screenshot final da rodada WhatsApp controlada pelo plugin do Codex/Browser.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T02:31:21.920Z"
+    },
+    {
+      "id": "whatsapp-premium-post-log-json",
+      "kind": "report",
+      "path": ".codex-temp/whatsapp-premium-repost-20260604/whatsapp-premium-post-log.json",
+      "source": "workspace",
+      "note": "Log da rodada WhatsApp premium corrigida: logo correta, criativos premium e envios por grupo.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T03:10:02.436Z"
+    },
+    {
+      "id": "exports",
+      "kind": "image-pack",
+      "path": ".codex-temp/whatsapp-premium-repost-20260604/exports",
+      "source": "workspace",
+      "note": "6 criativos premium WhatsApp refeitos com a logo enviada pelo usuario: servicos, PubPaid, pacote digital, Redmi, S21 FE e TV 55.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T03:10:19.790Z"
+    },
+    {
+      "id": "whatsapp-premium-final-state-png",
+      "kind": "screenshot",
+      "path": ".codex-temp/whatsapp-premium-repost-20260604/whatsapp-premium-final-state.png",
+      "source": "workspace",
+      "note": "Screenshot final do WhatsApp apos repostagem premium em grupos de venda via plugin.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-06-05T03:10:36.041Z"
     }
   ],
   "social": [

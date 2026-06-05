@@ -4,7 +4,7 @@ Atualizado: 2026-06-04
 
 ## Rodada Atual - 20260604-ollama-local-first-ai1
 
-- RAyL, Escritórios e Cheffe Call voltaram para IA local/Ollama como caminho principal.
+- RAIane, Escritórios e Cheffe Call voltaram para IA local/Ollama como caminho principal.
 - `callCatalogAi` agora tenta Ollama primeiro; OpenAI só entra se `CZS_AI_PRIMARY=openai` ou se `CZS_OPENAI_FALLBACK_ENABLED=true`.
 - `server.js` deixou de herdar `OLLAMA_MODEL` genérico; o CZS usa `CZS_OLLAMA_MODEL` ou padrão `qwen2.5:3b`.
 - `.env.local` configurado para este PC: `CZS_AI_PRIMARY=ollama`, `CZS_OPENAI_FALLBACK_ENABLED=false`, `OLLAMA_BASE_URL=http://127.0.0.1:11434`, `CZS_OLLAMA_MODEL=qwen2.5:3b`.
@@ -14,7 +14,7 @@ Atualizado: 2026-06-04
 
 ## Rodada Atual - 20260604-openai-direct-ai1
 
-- RAyL, Escritórios e Cheffe Call foram ligados ao backend OpenAI direto em `server.js`.
+- RAIane, Escritórios e Cheffe Call foram ligados ao backend OpenAI direto em `server.js`.
 - O servidor agora tenta OpenAI primeiro via Responses API e cai para Ollama local quando a nuvem falha.
 - Variáveis novas documentadas em `.env.example`: `OPENAI_API_KEY`, `CZS_OPENAI_BASE_URL`, `CZS_OPENAI_MODEL`, `CZS_OPENAI_TIMEOUT_MS`, além dos fallbacks Ollama.
 - Blindagem aplicada: o CZS ignora `OPENAI_MODEL` e `OPENAI_BASE_URL` genéricos para não herdar rotas locais como `http://localhost:11434/v1`; usa apenas `CZS_OPENAI_MODEL` e `CZS_OPENAI_BASE_URL`.
@@ -25,7 +25,7 @@ Atualizado: 2026-06-04
 
 - Rodada emergencial da intro local/V8 concluida apos relato de resposta sem nexo/em ingles no site.
 - Servidor agora filtra respostas de IA publica com `sanitizeLocalAiAnswer`/`isUnsafeLocalAiAnswer`: remove `<think>`, rejeita padroes em ingles/raciocinio interno e cai para fallback seguro em portugues.
-- Front V8 recebeu `cleanPublicAiText`, cache-bust `20260604-v8-intro-pt-guard-v1` e copys publicas da RAyL/escritorios/Cheffe travadas em portugues.
+- Front V8 recebeu `cleanPublicAiText`, cache-bust `20260604-v8-intro-pt-guard-v1` e copys publicas da RAIane/escritorios/Cheffe travadas em portugues.
 - URL local saudavel para revisar a intro: `http://127.0.0.1:8790/?forceIntro=1`; a porta `3000` nao respondeu HTTP nesta rodada.
 - Validacao: `node --check server.js`, `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check`, `npm run guard:pubpaid`, `npm run review:team`, `npm run codex:health`, `npm run editorial:health`, `npm run perf:budget` e Edge/Playwright em desktop/mobile.
 - Evidencias: `.codex-temp/czs-v8-intro-qa-20260604/report.json`, `desktop-intro.png`, `desktop-after-intro.png`, `desktop-rayl-open.png`, `mobile-first-fold.png` e `api-ai-pt-guard.json`.
@@ -42,7 +42,7 @@ Atualizado: 2026-06-04
 
 ## Rodada Atual - 20260604-v8-public-agents-footer-teleport
 
-- Correção pós-feedback do usuário aplicada no V8 final: voz sintetizada da RAyL removida do chatbot e logo principal restaurada para `assets/logo-czs.svg`.
+- Correção pós-feedback do usuário aplicada no V8 final: voz sintetizada da RAIane removida do chatbot e logo principal restaurada para `assets/logo-czs.svg`.
 - CTA vermelho "Venha apostar" reposicionado acima do Info, com botões laterais maiores.
 - "Escritórios de agentes" deixou de expor sistema interno/IA local/fila administrativa no front público; agora é apenas uma vitrine/rota para agentes autônomos com sprites e links públicos.
 - Fluxo público reorganizado: apresentação principal, módulos públicos/secundários, gateway de agentes, feed contínuo e só então rodapé.
@@ -52,23 +52,23 @@ Atualizado: 2026-06-04
 
 ## Rodada Atual - 20260604-v8-rayl-feedback-fix-v4
 
-- Correção pós-feedback do usuário: a RAyL voltou a aparecer na intro; o recorte agora é feito no cartão do loader sem remover a sprite e sem mostrar a logo antiga do CZS no loader.
-- O pop-up comercial preserva a RAyL sentada inteira acima do card; a correção removeu o efeito anterior em que só apareciam pernas/corte de avatar.
-- Escritórios ficaram mais acháveis: continuam dentro da Cheffe Call, com botão "Ver escritórios", card próprio no mapa do jornal e intenção própria na RAyL.
-- Backend local ajustado: respostas Ollama ficaram mais curtas e o timeout default subiu para 30s; em smoke na porta temporária 3026, RAyL/escritórios/Cheffe responderam `ai.status=online`.
+- Correção pós-feedback do usuário: a RAIane voltou a aparecer na intro; o recorte agora é feito no cartão do loader sem remover a sprite e sem mostrar a logo antiga do CZS no loader.
+- O pop-up comercial preserva a RAIane sentada inteira acima do card; a correção removeu o efeito anterior em que só apareciam pernas/corte de avatar.
+- Escritórios ficaram mais acháveis: continuam dentro da Cheffe Call, com botão "Ver escritórios", card próprio no mapa do jornal e intenção própria na RAIane.
+- Backend local ajustado: respostas Ollama ficaram mais curtas e o timeout default subiu para 30s; em smoke na porta temporária 3026, RAIane/escritórios/Cheffe responderam `ai.status=online`.
 - Validação: Browser desktop/mobile sem console errors, sem overflow horizontal no mobile, `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check` nos arquivos tocados e `npm run review:team` OK com 0 issues.
 - Pendência real antes de Render: Ollama em `http://127.0.0.1:11434` só responde no ambiente onde o servidor roda. No Render online isso aponta para o container do Render, não para o PC do usuário, salvo se houver túnel/serviço seguro configurado.
 
 ## Rodada Atual - 20260604-v8-ollama-offices-review-ui-v3
 
-- V8 recebeu a rodada final local antes do retorno do usuário: intro sem logo antiga, corte melhor da RAyL no loader/popup, modo compacto alternando para "Modo aberto", CTA "Ler" simplificado e RAyL sem resumo no cabeçalho.
+- V8 recebeu a rodada final local antes do retorno do usuário: intro sem logo antiga, corte melhor da RAIane no loader/popup, modo compacto alternando para "Modo aberto", CTA "Ler" simplificado e RAIane sem resumo no cabeçalho.
 - Mobile corrigido no hero/lead/rail, com checks de DOM sem overflow horizontal; publicidade ganhou espaçamento e botão sem encavalar.
 - Galeria turística ficou visível após vídeos, com 16 itens, mapa e organização visual de Cruzeiro do Sul/Vale do Juruá.
 - Vídeos agora usam player quando o item é `.mp4` e tentam capturar/cachear um frame real para poster; quando o browser/CORS bloqueia a captura, permanece fallback visual seguro.
 - Todo artigo/card recebe ação "Revisão"; o clique envia para Cheffe Call via `/api/editorial-corrections`, registra como revisão editorial e deixa o botão verde/brilhando sem abrir o leitor por acidente.
-- Escritórios foram remontados como workspace de fluxo, com cards por área, fila Cheffe e formulário de IA local; RAyL, escritórios e Cheffe Call usam Ollama local em endpoints separados.
+- Escritórios foram remontados como workspace de fluxo, com cards por área, fila Cheffe e formulário de IA local; RAIane, escritórios e Cheffe Call usam Ollama local em endpoints separados.
 - Ollama default ficou `qwen2.5:3b` porque `qwen3-hermes:4b` respondeu vazio/thinking no smoke; override continua possível por `CZS_OLLAMA_MODEL`.
-- Validação: `node --check server.js`, `node --check assets/v8-final/v8-merge-ready.js`, endpoints RAyL/escritórios/Cheffe, Edge CDP mobile/popup e `npm run review:team` OK.
+- Validação: `node --check server.js`, `node --check assets/v8-final/v8-merge-ready.js`, endpoints RAIane/escritórios/Cheffe, Edge CDP mobile/popup e `npm run review:team` OK.
 - Evidências: `.codex-temp/v8-qa-20260604/cdp-mobile-final.png` e `.codex-temp/v8-qa-20260604/cdp-popup-avatar-final.png`.
 - Pendência real antes de Render: merge/smoke no online, campanhas comerciais reais em `data/ad-campaigns.json` se forem subir já, e considerar timeout/modelo do Ollama se muitas IAs forem chamadas em paralelo.
 
@@ -78,12 +78,12 @@ Atualizado: 2026-06-04
 - MP4 agora é detectado como vídeo e renderiza `<video controls>` no hero, leitor e hub de vídeos; `.mp4` não cai mais em `<img>`.
 - Arquivo V8 busca `/api/news/archive?limit=1000`, mostra status de endpoint/fallback e usa o payload online quando o servidor responde.
 - Cheffe/Comunidade deixaram de ser só localStorage: correções/fotos/fontes vão para `/api/editorial-corrections`; relatos comunitários usam `/api/community/reports`.
-- RAyL agora tenta `/api/rayl/chat` e só cai no FAQ local quando o backend não responde; o endpoint registra log em `DATA_DIR/rayl-chat-log.json`.
+- RAIane agora tenta `/api/rayl/chat` e só cai no FAQ local quando o backend não responde; o endpoint registra log em `DATA_DIR/rayl-chat-log.json`.
 - Anúncios/comercial ganharam backend simples persistente: `/api/ads/campaigns`, `/api/ads/events` e `/api/commercial/leads`, com arquivos JSON em `DATA_DIR`.
 - Cache-bust atualizado para `20260604-v8-real-functional-v2` em `index.html` e nos dois protótipos V8.
 - Validação: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, smoke HTTP com `DATA_DIR` temporário, Edge headless e `npm run review:team` OK.
 - Evidência: `.codex-temp/v8-visual-smoke/home-v8-1440.png`.
-- Pendência antes de Render: decidir campanhas reais em `data/ad-campaigns.json`, se RAyL deve chamar IA externa além do roteador determinístico e repetir smoke no online após merge.
+- Pendência antes de Render: decidir campanhas reais em `data/ad-campaigns.json`, se RAIane deve chamar IA externa além do roteador determinístico e repetir smoke no online após merge.
 
 ## Rodada Atual - 20260603-qwen-update1
 
@@ -96,7 +96,7 @@ Atualizado: 2026-06-04
 
 ## Rodada Atual - 20260603-rayl-chatbot-faq1
 
-- Chatbot da RAyL implementado no prototipo V8 alvo `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
+- Chatbot da RAIane implementado no prototipo V8 alvo `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
 - Assistente agora tem FAQ local, campo de pergunta, respostas por intencao e troca de pose conforme contexto: anunciar, noticia/pauta, servicos, PubPaid, duvida incerta e atendimento humano.
 - WhatsApp nao e fallback automatico para pergunta sem resposta; o CTA `Falar no WhatsApp` aparece apenas quando o visitante pede contato humano/atendente/dono/Zap.
 - Link humano configurado para `https://wa.me/556896026649` com texto pre-preenchido.
@@ -107,12 +107,12 @@ Atualizado: 2026-06-04
 ## Rodada Atual - 20260603-czs-v8-final-visual-review
 
 - Rodada v4 de acabamento executada no prototipo alvo: `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`, com cache-bust `20260603-app-loader-v4`.
-- Intro virou abertura continua de app: ceu azul institucional, estrelas/particulas, colisao de luz, progresso minimo real, cache renovado por `V8_BOOT_VERSION`, logo PNG transparente sem recorte de letras e RAyL viva alternando poses no painel de boas-vindas.
+- Intro virou abertura continua de app: ceu azul institucional, estrelas/particulas, colisao de luz, progresso minimo real, cache renovado por `V8_BOOT_VERSION`, logo PNG transparente sem recorte de letras e RAIane viva alternando poses no painel de boas-vindas.
 - Leitor de artigo reorganizado: titulo primeiro, depois foto + cards laterais de contexto, e abaixo o texto captado da materia sem resumo procedural no corpo. Areas de divulgacao nativa foram planejadas dentro e depois do artigo.
 - Paleta final desta fatia segue azul profundo + amarelo institucional + branco; vermelho fica reservado para urgencia editorial.
 - Evidencias visuais salvas em `.codex-temp/v8-qa/v4b-intro-rayl-logo.png`, `.codex-temp/v8-qa/v4b-reader-layout-ads.png` e `.codex-temp/v8-qa/v4b-reader-body-ads.png`.
 - Validacao v4: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` nos arquivos alvo e `npm run review:team`. O review ainda mostra 74 achados em arquivos/prototipos legados, mas nao no prototipo alvo nem em `assets/v8-final`.
-- Popup comercial V8 atualizado para RAyL: mascote sentada acima da caixa, balao com frases alternadas, cards de criacao de sites/apps/divulgacao/automacao com imagens bitmap reais em `assets/v8-commercial/`; validado em desktop/mobile sem console errors e sem overflow horizontal.
+- Popup comercial V8 atualizado para RAIane: mascote sentada acima da caixa, balao com frases alternadas, cards de criacao de sites/apps/divulgacao/automacao com imagens bitmap reais em `assets/v8-commercial/`; validado em desktop/mobile sem console errors e sem overflow horizontal.
 - Protótipo V8 alvo finalizado para revisão visual local: `prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
 - Logo oficial aplicada com escala de marca e animações de entrada/sinal/flip em `assets/v8-final/v8-merge-ready.css`, usando `assets/brand/catalogo-czs-logo-official-crops-20260603/02-versao-horizontal-alpha.png`.
 - Copies redundantes e textos automáticos removidos dos dados principais (`data/runtime-news.json`, `data/news-archive.json`, `news-data.js` e JSON embutido no protótipo); fallback procedural/placeholder foi bloqueado em favor de fotos reais.
@@ -798,13 +798,13 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - QA Playwright final: desktop/mobile `overflowX=0`, sem console errors, sem links antigos de `noticia.html`, reader V8 abrindo, busca funcionando e Cheffe registrando ações.
 - URL local de revisão: `http://127.0.0.1:8790/prototype-redesign-v8-portal-inteligente.backup-before-final-corrective-prompt-20260603.html`.
 
-## V8 Catálogo CZS - 2026-06-03 intro/RAyL/jovem/comercial
+## V8 Catálogo CZS - 2026-06-03 intro/RAIane/jovem/comercial
 
 - Intro restaurada com a logo nova oficial e sem a cruz antiga; brilhos laterais carnavalescos trocados por fundo editorial com linha do rio, grade de mapa, sinais e notas fantasma.
-- RAyL do chatbot ganhou poses por opção e fala curta via `speechSynthesis` apenas para botões/opções reais do chat; respostas digitadas continuam sem narração automática.
+- RAIane do chatbot ganhou poses por opção e fala curta via `speechSynthesis` apenas para botões/opções reais do chat; respostas digitadas continuam sem narração automática.
 - Topo ganhou atalho `Venha jogar` após a marca, apontando para `pubpaid.html`, e links para Galeria, TV CZS e Área Jovem.
 - Criados TV CZS Stories em formato 9:16, Área Jovem para PubPaid/games/animes/novelas/filmes/shows/agenda do Acre e lateral fechável com hashtags, mercado rápido e agenda.
-- Landing comercial reformulada: botão perto da busca abre tela preta com RAyL, intro de vendas e página de números/ofertas no mesmo visual do V8.
+- Landing comercial reformulada: botão perto da busca abre tela preta com RAIane, intro de vendas e página de números/ofertas no mesmo visual do V8.
 - Cheffe Call recebeu layout de mesa de comando com prioridade, revisão, imagem, fonte, comercial e escritórios.
 - Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check` e `npm run review:team` passaram; revisão local auditou 209 arquivos com `totalIssues=0`.
 
@@ -814,7 +814,7 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Topo recebeu crawl/ticker de manchetes entre logo e busca; ticker antigo voltou a ser preenchido; divisores de seção passaram de traços para bolinhas.
 - CTA da marca mudou para vermelho `Venha apostar` com ícone de sinuca; no mobile a logo fica contida e o CTA aparece abaixo da marca.
 - Compartilhar abre painel com WhatsApp, Instagram e copiar link; `Ver arquivo`/links antigos remapeiam para o arquivo V8.
-- Intro agora tem logo grande persistente, RAyL em destaque e fluxo de uma vez por sessão de navegador; `skipIntro=1` ficou como atalho técnico para QA local.
+- Intro agora tem logo grande persistente, RAIane em destaque e fluxo de uma vez por sessão de navegador; `skipIntro=1` ficou como atalho técnico para QA local.
 - Cheffe Call saiu como acesso direto público: aparece em vermelho como sistema admin restrito, sem link para `cheffe-call.html`; a área pública virou `Escritórios de agentes`.
 - TV CZS, galeria, pesquisa/newsletter, apoio local, rodapé e feed contínuo antes do rodapé foram reescritos para conversar com o layout V8.
 - Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` nos arquivos tocados e `npm run review:team` passaram; review-team auditou 210 arquivos com `totalIssues=0`. Screenshots headless confirmaram topo desktop/mobile.
@@ -852,17 +852,17 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Cheffe Call entra sempre como coordenadora quando a ordem vai para um alvo específico; recebe ação `received-order-cheffe` e os escritórios recebem `received-order`.
 - Validação Render no commit `779a692`: ordem `ord-mpzzg0fweem126` ficou `distribuida`, com 4 ações online para `redacao, apuracao, revisao, cheffe-call`; leitura de `/api/office-work?officeKey=redacao` e `cheffe-call` confirmou as ações.
 
-## RAyL chatbot helper - 2026-06-04 estudo do site
+## RAIane chatbot helper - 2026-06-04 estudo do site
 
-- RAyL agora usa `data/rayl-website-study.json` como estudo persistente do site antes de responder ao público.
+- RAIane agora usa `data/rayl-website-study.json` como estudo persistente do site antes de responder ao público.
 - `GET /api/rayl/website-study` consulta/gera o estudo; `POST /api/rayl/website-study` com senha admin pede ao Ollama um resumo operacional para respostas prontas.
 - `/api/rayl/chat` consulta o estudo primeiro. Se a pergunta bater em rota/resposta pronta, responde com atalho seguro; se não bater, retorna `human=true` para o frontend abrir WhatsApp com a dúvida do visitante.
 - Validação Render no commit `ecf627b`: pergunta “Como faço para anunciar no site?” retornou `human=false`, `href=/divulgue.html`, `study.covered=true`, `ai.provider=ollama`; pergunta fora do estudo retornou `human=true` e mensagem de encaminhamento para WhatsApp.
 
-## RAyL chatbot helper - 2026-06-04 voz e tom humano
+## RAIane chatbot helper - 2026-06-04 voz e tom humano
 
 - Respostas prontas de `server.js`, `data/rayl-website-study.json` e `assets/v8-final/v8-merge-ready.js` foram reescritas para tom mais humano, curto e conversado.
-- Frontend da RAyL agora usa `speechSynthesis` quando o visitante clica em FAQ, rota ou envia pergunta digitada; a voz é opcional e prefere `pt-BR` quando o navegador oferece.
+- Frontend da RAIane agora usa `speechSynthesis` quando o visitante clica em FAQ, rota ou envia pergunta digitada; a voz é opcional e prefere `pt-BR` quando o navegador oferece.
 - Fallback fora do estudo deixou de inventar resposta e retorna somente atendimento humano, com `href` e `routeKey` vazios para não misturar WhatsApp com atalho de notícias.
 - Validação local: pergunta de anúncio retornou `human=false`, `href=/divulgue.html`, resposta mais natural e `ai.provider=ollama`; pergunta fora do estudo retornou `human=true`, sem rota, e texto de WhatsApp pronto.
 
@@ -871,8 +871,8 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - CTA comercial perto do hero passou a entrar logo depois de `Mapa do site` com o texto pedido: `Oportunidade para vc e sua empresa`.
 - Rodape social foi refeito para substituir os quadrados cortados `IG/WA/E-mail/Anun/Apos` por cards com rotulo e descricao.
 - Intro recebeu trava anti-flash em `index.html` e release coordenado em `assets/v8-final/v8-merge-ready.js`, impedindo o site de aparecer atras do loader durante a hidratacao.
-- RAyL comercial usa `assets/aylla/rayl-v2-clean/rayl-v2-present-full.png`, agora recortado/limpo; a prova visual em fundo escuro removeu o branco entre braco e corpo.
-- Chatbot RAyL recebeu acabamento final: minimizado como janela circular de rosto sem fundo azul/texto, dock lateral oculto e avatar pequeno do cabecalho escondido quando o painel abre com o avatar grande.
+- RAIane comercial usa `assets/aylla/rayl-v2-clean/rayl-v2-present-full.png`, agora recortado/limpo; a prova visual em fundo escuro removeu o branco entre braco e corpo.
+- Chatbot RAIane recebeu acabamento final: minimizado como janela circular de rosto sem fundo azul/texto, dock lateral oculto e avatar pequeno do cabecalho escondido quando o painel abre com o avatar grande.
 - Validacao local: `node --check assets/v8-final/v8-merge-ready.js`, `node --check server.js`, `git diff --check`, `npm run review:team` com `totalIssues=0`, `npm run codex:health`, `npm run perf:budget` nao estrito e smoke CDP em `http://127.0.0.1:3000`.
 - Relatorio interno: `.codex-temp/czs-v8-site-finish-qa-20260604/final-readiness-report.md`; decisao: pronto para revisao visual do usuario, sem deploy automatico antes de aprovacao porque o workspace segue com muitas mudancas paralelas e os gates editoriais gerais ainda existem.
 
@@ -885,3 +885,13 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Validacao CDP: `.codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-report.json` retornou `pass=true`, `leaks=[]`; amostras de 120ms a 5200ms mantiveram `#cinematicLoader` como topo e o portal oculto; release somente depois de 7600ms.
 - Capturas internas: `.codex-temp/czs-v8-intro-hardlock-20260604/intro-hardlock-800ms.png`, `intro-hardlock-7600ms.png` e `intro-hardlock-10400ms.png`.
 - Revisao local: `npm run review:team` passou com 212 arquivos auditados e `totalIssues=0`.
+
+## V8 Catálogo CZS - 2026-06-05 hidratacao real e deploy
+
+- Captação atualizada com 371 itens, 218 de hoje, 360 ativos e 480 no arquivo; fontes novas verificadas: Portal Acre, O Alto Acre, Estado do Acre, Acre Noticias, Acre Agora e A Gazeta do Acre.
+- Fallbacks visuais falsos foram retirados dos campos principais; `scripts/hydrate-source-screenshots.js` captura print da fonte quando a matéria não traz foto segura.
+- Galeria virou galeria de fotos/vídeos do Juruá, sem cards de notícias; imagens quebradas da galeria foram substituídas por referências estáveis.
+- Camada de vídeos lista fontes monitoradas e TV/canais; área jovem foi separada para games, anime, livros, shows e cultura pop.
+- Relato comunitário virou entrada ao vivo com radar do bairro, backend e fila para Cheffe Call/WhatsApp.
+- Validação local em `http://127.0.0.1:3001/?skipIntro=1`: CDP OK para `#feed`, `#videos`, `#galeriaFotos`, `#areaJovem`, `#comunidade`, `#servicos`; sem exceção JS e sem 404 de assets V8.
+- `npm run review:team` passou; guard PubPaid OK; achados do auditor ficaram fora dos arquivos tocados. `git diff --check` global ainda acusa whitespace antigo em `data/editorial-health-report.md`, fora do escopo.

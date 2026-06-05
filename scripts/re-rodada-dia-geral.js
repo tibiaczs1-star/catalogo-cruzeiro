@@ -536,21 +536,7 @@ function isWeakImage(value) {
 }
 
 function fallbackImageFor(item = {}, reason = "fallback") {
-  const slug = slugify(item.slug || item.title || "noticia");
-  const realFallbacks = [
-    "/assets/home-cache/rio-jurua-panorama.jpg",
-    "/assets/home-cache/footer-cruzeiro-bg.jpg",
-    "/assets/home-cache/buzz-cruzeiro-01.jpg",
-    "/assets/home-cache/buzz-cruzeiro-02.jpg",
-    "/assets/home-cache/buzz-cruzeiro-03.jpg",
-    "/assets/home-cache/buzz-cruzeiro-04.jpg",
-    "/assets/home-cache/news-batelao-local.jpg",
-    "/assets/home-cache/fallback-cheia.jpg",
-    "/assets/home-cache/fallback-cotidiano.jpg",
-    "/assets/home-cache/buzz-via-cruzeiro.jpg",
-    "/assets/home-cache/buzz-cultura-show.jpg"
-  ];
-  return realFallbacks[hashString(`${slug || "noticia"}|${reason}`) % realFallbacks.length];
+  return "";
 }
 
 function repairImages(items = []) {
@@ -575,34 +561,32 @@ function repairImages(items = []) {
       : "foto-repetida-na-mesma-divisao";
     const sourceUrl = String(item.sourceUrl || item.url || item.link || "").trim();
     if (sourceUrl && sourceUrl !== "#") {
-      const imageUrl = fallbackImageFor(item, reason);
       repaired += 1;
       return {
         ...item,
-        imageUrl,
-        feedImageUrl: imageUrl,
-        sourceImageUrl: imageUrl,
+        imageUrl: "",
+        feedImageUrl: "",
+        sourceImageUrl: "",
         originalImageUrl: isWeakImage(currentImage) ? "" : currentImage || item.originalImageUrl || "",
         originalFeedImageUrl: isWeakImage(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
         originalSourceImageUrl: isWeakImage(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || "",
-        imageCredit: item.imageCredit || "Foto editorial local do banco CZS",
-        imageFocus: item.imageFocus || "center 50%",
-        imageQuality: `${reason}-fallback-e-buscar-na-fonte`
+        imageCredit: item.imageCredit || "",
+        imageFocus: item.imageFocus || "",
+        imageQuality: `${reason}-sem-foto-generica-enviar-cheffe-call`
       };
     }
 
-    const imageUrl = fallbackImageFor(item, reason);
     repaired += 1;
 
     return {
       ...item,
-      imageUrl,
-      feedImageUrl: imageUrl,
-      sourceImageUrl: imageUrl,
+      imageUrl: "",
+      feedImageUrl: "",
+      sourceImageUrl: "",
       originalImageUrl: currentImage || item.originalImageUrl || "",
-      imageCredit: item.imageCredit || "Foto editorial local do banco CZS",
-      imageFocus: item.imageFocus || "center 50%",
-      imageQuality: reason
+      imageCredit: item.imageCredit || "",
+      imageFocus: item.imageFocus || "",
+      imageQuality: `${reason}-sem-foto-generica-enviar-cheffe-call`
     };
   });
 
@@ -615,20 +599,19 @@ function repairMissingImages(items = []) {
   const nextItems = items.map((item) => {
     if (imageOf(item)) return item;
 
-    const imageUrl = fallbackImageFor(item, "imagem-ausente-ou-generica");
     repaired += 1;
 
     return {
       ...item,
-      imageUrl,
-      feedImageUrl: imageUrl,
-      sourceImageUrl: imageUrl,
+      imageUrl: "",
+      feedImageUrl: "",
+      sourceImageUrl: "",
       originalImageUrl: item.originalImageUrl || "",
       originalFeedImageUrl: item.originalFeedImageUrl || "",
       originalSourceImageUrl: item.originalSourceImageUrl || "",
-      imageCredit: item.imageCredit || "Foto editorial local do banco CZS",
-      imageFocus: item.imageFocus || "center 50%",
-      imageQuality: "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+      imageCredit: item.imageCredit || "",
+      imageFocus: item.imageFocus || "",
+      imageQuality: "imagem-ausente-ou-generica-sem-foto-generica-enviar-cheffe-call"
     };
   });
 

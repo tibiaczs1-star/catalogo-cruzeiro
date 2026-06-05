@@ -11,8 +11,8 @@ const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const FALLBACK_DIR = path.join(ROOT_DIR, "assets", "news-fallbacks");
-const RAYL_NEWS_VOICE_ID = "rayl-francisca-whatsapp-normal";
-const RAYL_NEWS_VOICE_NAME = "RAyL Francisca WhatsApp normal";
+const RAYL_NEWS_VOICE_ID = "raiane-francisca-whatsapp-normal";
+const RAYL_NEWS_VOICE_NAME = "RAIane Francisca WhatsApp normal";
 const RAYL_NEWS_VOICE_ENGINE = "edge-tts";
 const RAYL_NEWS_VOICE_MODEL = "pt-BR-FranciscaNeural";
 const RAYL_NEWS_VOICE_SAMPLE_URL = "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3";
@@ -312,21 +312,7 @@ function wrapSvgText(text = "", maxChars = 28, maxLines = 3) {
 }
 
 function fallbackImageFor(item = {}, reason = "rss-sem-imagem") {
-  const slug = slugify(item.slug || item.title || "noticia") || `noticia-${Date.now()}`;
-  const realFallbacks = [
-    "./assets/home-cache/rio-jurua-panorama.jpg",
-    "./assets/home-cache/footer-cruzeiro-bg.jpg",
-    "./assets/home-cache/buzz-cruzeiro-01.jpg",
-    "./assets/home-cache/buzz-cruzeiro-02.jpg",
-    "./assets/home-cache/buzz-cruzeiro-03.jpg",
-    "./assets/home-cache/buzz-cruzeiro-04.jpg",
-    "./assets/home-cache/news-batelao-local.jpg",
-    "./assets/home-cache/fallback-cheia.jpg",
-    "./assets/home-cache/fallback-cotidiano.jpg",
-    "./assets/home-cache/buzz-via-cruzeiro.jpg",
-    "./assets/home-cache/buzz-cultura-show.jpg"
-  ];
-  return realFallbacks[hashString(`${slug}|${reason}`) % realFallbacks.length];
+  return "";
 }
 
 function buildBody(item = {}) {
@@ -367,14 +353,59 @@ function normalizeFeedMarkupNoise(item = {}) {
   return next;
 }
 
+function prepareBrazilianNarrationText(value = "", limit = 900) {
+  const replacements = [
+    [/\bCZS\b/g, "Catálogo Cruzeiro do Sul"],
+    [/\bCatalogo\b/g, "Catálogo"],
+    [/\bnoticia\b/gi, "notícia"],
+    [/\bnoticias\b/gi, "notícias"],
+    [/\batualizacao\b/gi, "atualização"],
+    [/\binformacao\b/gi, "informação"],
+    [/\binformacoes\b/gi, "informações"],
+    [/\bservico\b/gi, "serviço"],
+    [/\bservicos\b/gi, "serviços"],
+    [/\bpublicacao\b/gi, "publicação"],
+    [/\bvideo\b/gi, "vídeo"],
+    [/\bvideos\b/gi, "vídeos"],
+    [/\bmateria\b/gi, "matéria"],
+    [/\bmaterias\b/gi, "matérias"],
+    [/\bpagina\b/gi, "página"],
+    [/\bpaginas\b/gi, "páginas"],
+    [/\bJurua\b/g, "Juruá"],
+    [/\bSao\b/g, "São"],
+    [/\bCrueiro\b/g, "Cruzeiro"],
+    [/\bnao\b/gi, "não"],
+    [/\bvoce\b/gi, "você"],
+    [/\bja\b/gi, "já"],
+    [/\btambem\b/gi, "também"],
+    [/\bate\b/gi, "até"],
+    [/\bapos\b/gi, "após"],
+    [/\bpais\b/gi, "país"],
+    [/\bsaude\b/gi, "saúde"],
+    [/\beducacao\b/gi, "educação"],
+    [/\btransito\b/gi, "trânsito"],
+    [/\bpolicia\b/gi, "polícia"],
+    [/\bpolitica\b/gi, "política"],
+    [/\beconomia\b/gi, "economia"],
+    [/\bAmazonia\b/g, "Amazônia"],
+    [/\bAcrelandia\b/g, "Acrelândia"],
+    [/\bBrasileia\b/g, "Brasiléia"]
+  ];
+  let text = cleanText(value, limit + 120);
+  replacements.forEach(([pattern, replacement]) => {
+    text = text.replace(pattern, replacement);
+  });
+  return cleanText(text, limit);
+}
+
 function buildNewsAudioNarrationText(item = {}) {
-  const title = cleanText(item.title || "Notícia do Catálogo CZS", 180);
-  const summary = cleanText(item.lede || item.summary || item.description || title, 520);
+  const title = prepareBrazilianNarrationText(item.title || "Notícia do Catálogo Cruzeiro do Sul", 180);
+  const summary = prepareBrazilianNarrationText(item.lede || item.summary || item.description || title, 520);
   const source = cleanText(item.sourceName || "fonte monitorada", 80);
-  const category = cleanText(item.category || item.eyebrow || "noticia", 60);
-  return cleanText(
+  const category = prepareBrazilianNarrationText(item.category || item.eyebrow || "notícia", 60);
+  return prepareBrazilianNarrationText(
     [
-      "Boa tarde. Eu sou a RAyL, do Catálogo CZS.",
+      "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul.",
       `Agora no catálogo: notícia de ${category}.`,
       title,
       summary && summary !== title ? summary : "",
@@ -399,8 +430,11 @@ function buildNewsVideoCaptionText(item = {}) {
 }
 
 function applyAudioAndVideoMetadata(item = {}) {
-  item.audioNarrationText = item.audioNarrationText || buildNewsAudioNarrationText(item);
-  item.audioNarrationTranscript = item.audioNarrationTranscript || item.audioNarrationText;
+  const narrationText = buildNewsAudioNarrationText(item);
+  item.audioNarrationText = prepareBrazilianNarrationText(item.audioNarrationText || narrationText);
+  item.audioNarrationTranscript = prepareBrazilianNarrationText(
+    item.audioNarrationTranscript || item.audioNarrationText || narrationText
+  );
   item.audioNarrationVoice = RAYL_NEWS_VOICE_ID;
   item.audioNarrationVoiceName = RAYL_NEWS_VOICE_NAME;
   item.audioNarrationVoiceEngine = RAYL_NEWS_VOICE_ENGINE;
@@ -503,6 +537,7 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
   item.imageUrl = safeImage;
   item.feedImageUrl = safeImage;
   item.sourceImageUrl = safeImage;
+  if (!safeImage) item.imageQuality = "imagem-ausente-na-fonte-enviar-cheffe-call";
   item.body = buildBody(item);
   return normalizeFeedMarkupNoise(item);
 }
@@ -589,6 +624,7 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
   item.imageUrl = safeImage;
   item.feedImageUrl = safeImage;
   item.sourceImageUrl = safeImage;
+  if (!safeImage) item.imageQuality = "imagem-ausente-na-fonte-enviar-cheffe-call";
   item.body = buildBody(item);
   return normalizeFeedMarkupNoise(item);
 }

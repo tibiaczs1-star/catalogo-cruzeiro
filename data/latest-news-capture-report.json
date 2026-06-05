@@ -1,16 +1,37 @@
 {
   "ok": true,
-  "startedAt": "2026-06-04T14:35:31.281Z",
-  "finishedAt": "2026-06-04T14:35:36.358Z",
-  "capturedItems": 287,
-  "capturedToday": 162,
+  "startedAt": "2026-06-05T04:21:04.434Z",
+  "finishedAt": "2026-06-05T04:21:15.202Z",
+  "capturedItems": 371,
+  "capturedToday": 218,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
     {
+      "source": "a-gazeta-do-acre",
+      "ok": true,
+      "count": 20,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "ac24horas",
       "ok": true,
       "count": 20,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "acre-agora",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "acre-com-br",
+      "ok": true,
+      "count": 8,
       "blocked": 0,
       "mode": "rss"
     },
@@ -57,6 +78,13 @@
       "mode": "rss"
     },
     {
+      "source": "estado-do-acre",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "folha-do-acre",
       "ok": true,
       "count": 24,
@@ -85,6 +113,13 @@
       "mode": "rss"
     },
     {
+      "source": "integracao-net",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "jurua-24-horas",
       "ok": true,
       "count": 10,
@@ -106,6 +141,13 @@
       "mode": "wordpress-json"
     },
     {
+      "source": "jurua-informativo",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "jurua-online",
       "ok": true,
       "count": 24,
@@ -120,7 +162,21 @@
       "mode": "official-home-headlines"
     },
     {
+      "source": "o-alto-acre",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "pcac",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "portal-acre",
       "ok": true,
       "count": 10,
       "blocked": 0,
@@ -198,10 +254,9 @@
     },
     {
       "source": "voz-do-norte",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     }
   ]
 }

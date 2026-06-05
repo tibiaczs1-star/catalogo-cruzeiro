@@ -1,0 +1,46 @@
+{
+  "ok": true,
+  "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "candidateCount": 7,
+  "selectedCount": 7,
+  "timeoutMs": 12000,
+  "captured": [],
+  "failed": [
+    {
+      "title": "Conferencia de Documentos e-SAJ",
+      "sourceUrl": "https://esaj.tjac.jus.br/esaj/portal.do?servico=920100",
+      "error": "[3656:1748:0604/232935.234:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[3656:1748:0604/232935.234:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registr"
+    },
+    {
+      "title": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão do município de Mâncio Lima ao Sisan",
+      "sourceUrl": "https://www.vozdonorte.com.br/governo-do-acre-consolida-acoes-de-combate-a-inseguranca-alimentar-com-adesao-de-mancio-lima-ao-sisan/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-consolida-acoes-de-combate-a-inseguranca-alimentar-com-adesao-de-mancio-lima-ao-sisan",
+      "error": "[31352:31612:0604/232948.757:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[31352:31612:0604/232948.812:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Reg"
+    },
+    {
+      "title": "VITÓRIA – Jovens do Colégio Militar Dom Pedro II conquistam 3º lugar no Campeonato Acreano de Taekwondo",
+      "sourceUrl": "https://www.vozdonorte.com.br/vitoria-jovens-do-colegio-militar-dom-pedro-ii-conquistam-3o-lugar-no-campeonato-acreano-de-taekwondo/?utm_source=rss&utm_medium=rss&utm_campaign=vitoria-jovens-do-colegio-militar-dom-pedro-ii-conquistam-3o-lugar-no-campeonato-acreano-de-taekwondo",
+      "error": "[13748:32300:0604/233000.721:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[13748:32300:0604/233000.721:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Reg"
+    },
+    {
+      "title": "Artigo – Cuidar da Amazônia é investir no futuro – Engenheiro Civil Marcellus Campêlo",
+      "sourceUrl": "https://www.vozdonorte.com.br/artigo-cuidar-da-amazonia-e-investir-no-futuro-engenheiro-civil-marcellus-campelo/?utm_source=rss&utm_medium=rss&utm_campaign=artigo-cuidar-da-amazonia-e-investir-no-futuro-engenheiro-civil-marcellus-campelo",
+      "error": "[15720:19888:0604/233013.230:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[15720:19888:0604/233013.230:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Reg"
+    },
+    {
+      "title": "Operação Verão 2026 – Governo do Acre, por meio do Deracre, inicia construção da 6ª ponte de Rio Branco",
+      "sourceUrl": "https://www.vozdonorte.com.br/governo-do-acre-por-meio-do-deracre-inicia-construcao-da-6a-ponte-de-rio-branco/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-por-meio-do-deracre-inicia-construcao-da-6a-ponte-de-rio-branco",
+      "error": "[32832:32368:0604/233024.971:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[32832:32368:0604/233024.971:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Reg"
+    },
+    {
+      "title": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão de Marechal Thaumaturgo ao Sisan",
+      "sourceUrl": "https://www.vozdonorte.com.br/governo-do-acre-consolida-acoes-de-combate-a-inseguranca-alimentar-com-adesao-de-marechal-thaumaturgo-ao-sisan/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-consolida-acoes-de-combate-a-inseguranca-alimentar-com-adesao-de-marechal-thaumaturgo-ao-sisan",
+      "error": "[11476:27636:0604/233038.005:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[11476:27636:0604/233038.009:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Reg"
+    },
+    {
+      "title": "MPF promove audiência pública para debater impactos da emergência climática sobre populações vulneráveis no Acre",
+      "sourceUrl": "https://www.vozdonorte.com.br/mpf-promove-audiencia-publica-para-debater-impactos-da-emergencia-climatica-sobre-populacoes-vulneraveis-no-acre/?utm_source=rss&utm_medium=rss&utm_campaign=mpf-promove-audiencia-publica-para-debater-impactos-da-emergencia-climatica-sobre-populacoes-vulneraveis-no-acre",
+      "error": "[27896:27152:0604/233051.424:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\r\n[27896:27152:0604/233051.424:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Reg"
+    }
+  ],
+  "changedItems": 0
+}

@@ -1,7 +1,96 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-05T02:07:21.374Z",
+  "lastUpdatedAt": "2026-06-05T04:45:00.000Z",
   "orders": [
+    {
+      "id": "2026-06-05-v8-hidratacao-real-deploy",
+      "createdAt": "2026-06-05T04:45:00.000Z",
+      "updatedAt": "2026-06-05T04:45:00.000Z",
+      "status": "validated-local-ready-for-deploy",
+      "source": "chat",
+      "rawRequest": "finalizar site, pesquisar mais fontes, hidratar notícias/fotos/vídeos, remover imagens falsas, checar fluxos e subir online no Render.",
+      "summary": "Rodada V8 de hidratação real, fontes novas, prints de fonte para imagens ausentes, galeria/vídeos/área jovem/comunidade e preparação para deploy.",
+      "normalizedTasks": [
+        "captar notícias desde a última rodada e incluir fontes adicionais verificadas",
+        "não usar foto genérica quando a fonte não tiver imagem; capturar print ou mandar para Cheffe Call",
+        "transformar galeria em fotos e vídeos do Juruá, não notícias",
+        "fazer área jovem, comunidade, serviços e vídeos terem função real",
+        "validar localmente, commit, push e deploy Render"
+      ],
+      "filesTouched": [
+        "assets/v8-final/v8-merge-ready.js",
+        "assets/v8-final/v8-merge-ready.css",
+        "backend/source-config.js",
+        "scripts/hydrate-source-screenshots.js",
+        "scripts/capture-latest-news.js",
+        "scripts/re-rodada-dia-geral.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "news-data.js",
+        "index.html",
+        "server.js",
+        "package.json"
+      ],
+      "assetRefs": [
+        "cdp-feed-v5",
+        "cdp-videos-v5",
+        "cdp-galeriaFotos-v5b",
+        "source-screenshots"
+      ],
+      "tags": [
+        "czs-v8",
+        "hidratacao",
+        "fontes",
+        "galeria",
+        "videos",
+        "deploy",
+        "render"
+      ],
+      "nextSteps": [
+        "Stage seletivo, commit, push main, deploy Render e validação online."
+      ],
+      "notes": "Review team passou; achados globais restantes estão fora dos arquivos tocados. Sete URLs sem foto continuam para Cheffe Call."
+    },
+    {
+      "id": "2026-06-05-whatsapp-vendas-homem-aluguel",
+      "createdAt": "2026-06-05T03:47:01.119Z",
+      "updatedAt": "2026-06-05T03:47:01.119Z",
+      "status": "prepared-blocked-by-safe-browser-control",
+      "source": "chat",
+      "rawRequest": "pesquise todos os produtos crie legendas poste nos outros grupos com nosso link de whats app para entra em contato comigo sobre o produto, e eu vender, e n esqueça de colocar os serviços de homen de aluguel...",
+      "summary": "Fila de WhatsApp para grupos de venda preparada com produtos/serviços existentes, link wa.me em todas as legendas e novo serviço Homem de Aluguel.",
+      "normalizedTasks": [
+        "reaproveitar todos os produtos e serviços comerciais localizados na memória local",
+        "criar legendas com link direto do WhatsApp do usuário",
+        "incluir homem de aluguel com compras, farmácia regular, leva-e-traz, consertos e serviços gerais simples",
+        "postar somente em grupos de venda confirmados",
+        "não postar sem controle seguro de grupo/cabeçalho"
+      ],
+      "filesTouched": [
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/index.html",
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/queue.json",
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/QUEUE.md",
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/whatsapp/",
+        ".codex-temp/whatsapp-vendas-homem-aluguel-20260605/captions/"
+      ],
+      "assetRefs": [
+        "whatsapp-vendas-homem-aluguel-20260605"
+      ],
+      "tags": [
+        "whatsapp",
+        "vendas",
+        "servicos",
+        "homem-de-aluguel",
+        "imagem-legenda",
+        "wa-me"
+      ],
+      "nextSteps": [
+        "Quando o controle seguro do WhatsApp/Browser estiver disponível, abrir cada grupo da fila, conferir cabeçalho e postar item por item.",
+        "Pular destinos admin-only, conversas individuais e grupos sem caixa de mensagem.",
+        "Se o usuário enviar fotos reais novas dos produtos, substituir as imagens ilustrativas antes de repostar."
+      ],
+      "notes": "A janela WhatsApp - Google Chrome existia, mas nesta rodada a ferramenta de controle DOM/Browser não estava disponível no toolset; postagem ao vivo ficou bloqueada para evitar clique cego."
+    },
     {
       "id": "2026-06-03-v8-rayl-commercial-popup-real-images",
       "createdAt": "2026-06-03T11:57:04.0869378-05:00",
@@ -5721,6 +5810,81 @@
       "source": "chat",
       "rawRequest": "Corrigir voz RAyL: antes de falar notícias, ler a notícia, gerar texto em português corrigido com contexto e acentos, e só então mandar a Francisca narrar.",
       "summary": "Voz RAyL deve narrar notícia a partir de texto pré-corrigido para português brasileiro, com contexto e acentos, não do texto bruto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-rodada-whatsapp-via-plugin-8-noticias-no-catalogo-czs-servicos-produtos-em-grupo",
+      "createdAt": "2026-06-05T02:31:07.361Z",
+      "updatedAt": "2026-06-05T02:31:07.361Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "puxe rotina do WhatsApp e siga no Chrome aberto usando o plugin do Codex; postar noticias, servicos e produtos sem erro de destino",
+      "summary": "Rodada WhatsApp via plugin: 8 noticias no Catálogo CZS; serviços/produtos em grupos de venda validados; Instagram e chats individuais não usados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-renomear-a-mascote-assistente-de-rayl-para-raiane-em-textos-metadados-de-voz-hel",
+      "createdAt": "2026-06-05T02:52:44.830Z",
+      "updatedAt": "2026-06-05T02:52:44.830Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Mudar o nome do mascote para RAIane em todos os lugares.",
+      "summary": "Renomear a mascote/assistente de RAyL para RAIane em textos, metadados de voz, helper, notícias e previews.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-rodada-whatsapp-premium-corrigida-logo-oficial-enviada-aplicada-6-criativos-prem",
+      "createdAt": "2026-06-05T03:09:46.137Z",
+      "updatedAt": "2026-06-05T03:09:46.137Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "corrigir regra de artes WhatsApp: usar logo correta enviada, foto/montagem premium, layout CZS e legenda; excluir GRUPO VIP DONA D; retomar postagens via plugin",
+      "summary": "Rodada WhatsApp premium corrigida: logo oficial enviada aplicada, 6 criativos premium refeitos/exportados e postados via plugin em VENDAS E ALUGUEL, GRUPO DE DESAPEGO e R.ALVES; VIP Dona D bloqueado.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-instalar-biblioteca-local-de-ferramentas-criativas-pesquisadas-e-montar-guia-de-",
+      "createdAt": "2026-06-05T03:30:01.678Z",
+      "updatedAt": "2026-06-05T03:30:01.678Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "baixar, instalar e aprender como usar as ferramentas locais/open-source para criativos de produtos, posts, stories, reels, imagens e automacao",
+      "summary": "Instalar biblioteca local de ferramentas criativas pesquisadas e montar guia de uso por ferramenta.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-05-esta-conversa-fluxo-passa-a-ser-o-ponto-de-rotina-do-facebook-preparar-e-executa",
+      "createdAt": "2026-06-05T03:37:08.882Z",
+      "updatedAt": "2026-06-05T03:37:08.882Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "aqui vai ficar a rotina do facebook",
+      "summary": "Esta conversa/fluxo passa a ser o ponto de rotina do Facebook: preparar e executar publicacoes do Facebook com criativo + legenda, respeitando o protocolo social do projeto.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
