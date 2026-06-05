@@ -8,7 +8,7 @@
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
   const INTRO_WELCOME_AUDIO = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v6";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v7";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -807,7 +807,6 @@
       videoScene.innerHTML = `
         <video class="v8-loader-video" src="${INTRO_VIDEO}" muted playsinline autoplay loop preload="auto"></video>
         <audio class="v8-loader-welcome-audio" src="${INTRO_WELCOME_AUDIO}" preload="auto"></audio>
-        <button class="v8-loader-audio-button" type="button" hidden>Ouvir boas-vindas</button>
         <span class="v8-loader-video-label">carregando o jornal do vale</span>`;
       const progressTrack = loaderCore.querySelector(".loader-track");
       loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
@@ -3906,42 +3905,61 @@
     const status = $(".v8-loader-status", loader);
     const introVideo = $(".v8-loader-video", loader);
     const introAudio = $(".v8-loader-welcome-audio", loader);
-    const introAudioButton = $(".v8-loader-audio-button", loader);
     let introVideoStarted = false;
     let introAudioStarted = false;
+    let introAudioRetryArmed = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
       if (status && status.textContent !== message) status.textContent = message;
     };
 
+    const retryWelcomeAudio = () => {
+      if (introAudioStarted) return;
+      playWelcomeAudio();
+    };
+
+    const armWelcomeAudioRetry = () => {
+      if (introAudioRetryArmed || introAudioStarted) return;
+      introAudioRetryArmed = true;
+      ["pointerdown", "touchstart", "keydown", "click"].forEach((eventName) => {
+        window.addEventListener(eventName, retryWelcomeAudio, { passive: true, once: true, capture: true });
+      });
+    };
+
+    const clearWelcomeAudioRetry = () => {
+      ["pointerdown", "touchstart", "keydown", "click"].forEach((eventName) => {
+        window.removeEventListener(eventName, retryWelcomeAudio, { capture: true });
+      });
+    };
+
     const playWelcomeAudio = () => {
       if (!introAudio || introAudioStarted) return;
-      introAudioStarted = true;
       try {
+        introAudio.muted = false;
         introAudio.currentTime = 0;
-        introAudio.volume = 0.92;
+        introAudio.volume = 1;
+        introAudio.setAttribute("aria-hidden", "true");
+        introAudio.load?.();
         const attempt = introAudio.play?.();
         if (attempt?.catch) {
           attempt
             .then(() => {
-              if (introAudioButton) introAudioButton.hidden = true;
+              introAudioStarted = true;
+              clearWelcomeAudioRetry();
             })
             .catch(() => {
               introAudioStarted = false;
-              if (introAudioButton) introAudioButton.hidden = false;
+              armWelcomeAudioRetry();
             });
-        } else if (introAudioButton) {
-          introAudioButton.hidden = true;
+        } else {
+          introAudioStarted = true;
+          clearWelcomeAudioRetry();
         }
       } catch (_) {
         introAudioStarted = false;
-        if (introAudioButton) introAudioButton.hidden = false;
+        armWelcomeAudioRetry();
       }
     };
-
-    introAudioButton?.addEventListener("click", () => {
-      playWelcomeAudio();
-    });
 
     const setProgress = (value) => {
       const p = Math.max(0, Math.min(100, Math.round(value)));
