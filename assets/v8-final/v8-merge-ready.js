@@ -6,9 +6,8 @@
   const BRAND_MAIN = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
-  const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
-  const INTRO_WELCOME_AUDIO = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v9";
+  const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-20260605.mp4";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v10";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -302,7 +301,7 @@
   function storyImageMarkup(story = {}, loading = "lazy") {
     const src = imgFor(story);
     if (!src) return missingStoryVisualMarkup(story);
-    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" onerror="this.replaceWith((() => { const box = document.createElement('div'); box.className = 'v8-missing-story-photo'; box.setAttribute('role', 'img'); box.setAttribute('aria-label', 'Foto em checagem na fonte'); box.innerHTML = '<b>Foto em checagem</b><span>Imagem da fonte não carregou</span>'; return box; })())">`;
+    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" onerror="(()=>{const card=this.closest('.news-card,.v8-continuous-card,.v8-opportunity-card,.v8-archive-card,.v8-rail-story'); if(card){card.remove();} else {this.remove();}})()">`;
   }
 
   function firstVideoUrlFrom(value) {
@@ -342,6 +341,10 @@
       story.feedImageUrl,
       story.sourceImageUrl,
     ]);
+  }
+
+  function hasTrustedStoryMedia(story = {}) {
+    return Boolean(imgFor(story) || storyVideoUrl(story));
   }
 
   function videoTypeFor(src = "") {
@@ -628,11 +631,13 @@
 
   const heroStories = allStories
     .slice()
+    .filter(hasTrustedStoryMedia)
     .sort((a, b) => heroScore(b) - heroScore(a))
     .slice(0, 8);
 
   const opportunityStories = allStories
     .filter((story) => isOpportunityStory(story))
+    .filter(hasTrustedStoryMedia)
     .sort((a, b) => localScore(b) - localScore(a))
     .slice(0, 9);
 
@@ -805,8 +810,7 @@
       videoScene.className = "v8-loader-video-scene";
       videoScene.setAttribute("aria-label", "Vídeo de abertura do Catálogo CZS");
       videoScene.innerHTML = `
-        <video class="v8-loader-video" src="${INTRO_VIDEO}" muted playsinline autoplay loop preload="auto"></video>
-        <audio class="v8-loader-welcome-audio" src="${INTRO_WELCOME_AUDIO}" preload="auto"></audio>
+        <video class="v8-loader-video" src="${INTRO_VIDEO}" muted playsinline autoplay preload="auto"></video>
         <span class="v8-loader-video-label">carregando o jornal do vale</span>`;
       const progressTrack = loaderCore.querySelector(".loader-track");
       loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
@@ -2210,7 +2214,9 @@
       if (text) text.textContent = "Emprego, concurso, estágio e curso quando a fonte publicar.";
     }
 
-    if (!opportunityStories.length) {
+    const visualOpportunityStories = opportunityStories.filter(hasTrustedStoryMedia);
+
+    if (!visualOpportunityStories.length) {
       $$('a[href="#vagasCzs"]').forEach((link) => link.remove());
       $("#vagasCzs")?.remove();
       return;
@@ -2230,7 +2236,7 @@
         <a class="small-btn" href="#feed">Ver todas</a>
       </div>
       <div class="v8-opportunity-grid">
-        ${opportunityStories.map((story) => `
+        ${visualOpportunityStories.map((story) => `
           <article class="v8-opportunity-card">
             <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
               ${storyImageMarkup(story)}
@@ -2789,7 +2795,7 @@
     const count = $("#v8ArchiveCount");
     const more = $("[data-archive-more]");
     if (!list || !count) return;
-    const filtered = archiveStories();
+    const filtered = archiveStories().filter(hasTrustedStoryMedia);
     count.textContent = `${filtered.length} resultado${filtered.length === 1 ? "" : "s"} no filtro atual`;
     list.innerHTML = filtered.slice(0, archiveState.limit).map(archiveCard).join("") ||
       `<article class="v8-archive-empty"><b>Nada encontrado</b><p>Tente outro termo, periodo, fonte ou pasta.</p></article>`;
@@ -3345,6 +3351,7 @@
     if (!footer?.parentElement) return;
     const source = allStories
       .filter((story) => story?.slug && bySlug.has(story.slug))
+      .filter(hasTrustedStoryMedia)
       .slice(Math.min(36, Math.max(12, heroStories.length + 12)));
     if (!source.length) return;
     let index = 0;
@@ -3907,73 +3914,74 @@
 
     const status = $(".v8-loader-status", loader);
     const introVideo = $(".v8-loader-video", loader);
-    const introAudio = $(".v8-loader-welcome-audio", loader);
     let introVideoStarted = false;
     let introMediaStartedAt = 0;
-    let introAudioStarted = false;
-    let introAudioStartedAt = 0;
-    let introAudioEnded = false;
-    let introAudioRetryArmed = false;
+    let introMediaEnded = false;
+    let introMediaRetryArmed = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
       if (status && status.textContent !== message) status.textContent = message;
     };
 
-    const retryWelcomeAudio = () => {
-      if (introAudioStarted) return;
-      playWelcomeAudio();
+    const retryIntroMedia = () => {
+      if (introVideoStarted) return;
+      startIntroMedia();
     };
 
-    const armWelcomeAudioRetry = () => {
-      if (introAudioRetryArmed || introAudioStarted) return;
-      introAudioRetryArmed = true;
+    const armIntroMediaRetry = () => {
+      if (introMediaRetryArmed || introVideoStarted) return;
+      introMediaRetryArmed = true;
       ["pointerdown", "touchstart", "keydown", "click"].forEach((eventName) => {
-        window.addEventListener(eventName, retryWelcomeAudio, { passive: true, once: true, capture: true });
+        window.addEventListener(eventName, retryIntroMedia, { passive: true, once: true, capture: true });
       });
     };
 
-    const clearWelcomeAudioRetry = () => {
+    const clearIntroMediaRetry = () => {
       ["pointerdown", "touchstart", "keydown", "click"].forEach((eventName) => {
-        window.removeEventListener(eventName, retryWelcomeAudio, { capture: true });
+        window.removeEventListener(eventName, retryIntroMedia, { capture: true });
       });
     };
 
-    const markIntroAudioStarted = () => {
-      introAudioStarted = true;
-      introAudioStartedAt = performance.now();
-      introAudioEnded = false;
-      clearWelcomeAudioRetry();
-      if (introAudio) {
-        introAudio.addEventListener("ended", () => {
-          introAudioEnded = true;
+    const markIntroMediaStarted = () => {
+      introVideoStarted = true;
+      introMediaStartedAt = performance.now();
+      introMediaEnded = false;
+      clearIntroMediaRetry();
+      if (introVideo) {
+        introVideo.addEventListener("ended", () => {
+          introMediaEnded = true;
         }, { once: true });
       }
     };
 
-    const playWelcomeAudio = () => {
-      if (!introAudio || introAudioStarted) return;
+    const startIntroMedia = () => {
+      if (!introVideo || introVideoStarted) return;
       try {
-        introAudio.muted = false;
-        introAudio.currentTime = 0;
-        introAudio.volume = 1;
-        introAudio.setAttribute("aria-hidden", "true");
-        introAudio.load?.();
-        const attempt = introAudio.play?.();
+        introVideo.currentTime = 0;
+        introVideo.muted = true;
+        introVideo.volume = 1;
+        introVideo.loop = false;
+        introVideo.load?.();
+        const attempt = introVideo.play?.();
         if (attempt?.catch) {
           attempt
             .then(() => {
-              markIntroAudioStarted();
+              introVideo.volume = 1;
+              introVideo.muted = false;
+              markIntroMediaStarted();
             })
             .catch(() => {
-              introAudioStarted = false;
-              armWelcomeAudioRetry();
+              introVideoStarted = false;
+              armIntroMediaRetry();
             });
         } else {
-          markIntroAudioStarted();
+          introVideo.volume = 1;
+          introVideo.muted = false;
+          markIntroMediaStarted();
         }
       } catch (_) {
-        introAudioStarted = false;
-        armWelcomeAudioRetry();
+        introVideoStarted = false;
+        armIntroMediaRetry();
       }
     };
 
@@ -4002,17 +4010,7 @@
       else if (p < 38) loader.dataset.stage = "collision";
       else if (p < 94) loader.dataset.stage = "video";
       else loader.dataset.stage = "ready";
-      if (introVideo && p >= 38 && !introVideoStarted) {
-        introVideoStarted = true;
-        introMediaStartedAt = performance.now();
-        try {
-          introVideo.currentTime = 0;
-          introVideo.muted = true;
-          introVideo.loop = true;
-          introVideo.play?.().catch?.(() => {});
-        } catch (_) {}
-        playWelcomeAudio();
-      }
+      if (introVideo && p >= 38 && !introVideoStarted) startIntroMedia();
     };
 
     const finish = () => {
@@ -4028,11 +4026,6 @@
       if (introVideo) {
         try {
           introVideo.pause();
-        } catch (_) {}
-      }
-      if (introAudio) {
-        try {
-          introAudio.pause();
         } catch (_) {}
       }
       releaseIntroLock();
@@ -4070,22 +4063,22 @@
       }
       if (!foldReady || !shellReady || elapsed < fullSequenceMs) progress = Math.min(progress, 94);
       setProgress(progress);
-      const mediaStartedAt = introAudioStartedAt || introMediaStartedAt || 0;
-      const audioElapsed = introAudioStartedAt ? now - introAudioStartedAt : 0;
+      const mediaStartedAt = introMediaStartedAt || 0;
+      const mediaElapsed = introMediaStartedAt ? now - introMediaStartedAt : 0;
       const holdDone = Boolean(mediaStartedAt) && now - mediaStartedAt >= audioHoldAfterStartMs;
-      const audioDone = !introAudio || (
-        introAudioStarted && (
-          introAudioEnded ||
-          introAudio.ended ||
-          (Number.isFinite(introAudio.duration) && introAudio.duration > 0 && introAudio.currentTime >= Math.max(0, introAudio.duration - 0.12)) ||
-          audioElapsed >= audioFallbackDurationMs
+      const audioDone = !introVideo || (
+        introVideoStarted && (
+          introMediaEnded ||
+          introVideo.ended ||
+          (Number.isFinite(introVideo.duration) && introVideo.duration > 0 && introVideo.currentTime >= Math.max(0, introVideo.duration - 0.12)) ||
+          mediaElapsed >= audioFallbackDurationMs
         )
       );
       if (foldReady && shellReady && elapsed >= fullSequenceMs && holdDone && audioDone) {
         finish();
         return;
       }
-      if (elapsed > forcedFinishMs && (!introAudioStarted || audioDone)) {
+      if (elapsed > forcedFinishMs && (!introVideoStarted || audioDone)) {
         finish();
         return;
       }
