@@ -7,7 +7,8 @@
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-20260603.mp4";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v5";
+  const INTRO_WELCOME_AUDIO = "assets/intro/czs-welcome-voice-20260604.ogg";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v6";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -805,6 +806,8 @@
       videoScene.setAttribute("aria-label", "Vídeo de abertura do Catálogo CZS");
       videoScene.innerHTML = `
         <video class="v8-loader-video" src="${INTRO_VIDEO}" muted playsinline autoplay loop preload="auto"></video>
+        <audio class="v8-loader-welcome-audio" src="${INTRO_WELCOME_AUDIO}" preload="auto"></audio>
+        <button class="v8-loader-audio-button" type="button" hidden>Ouvir boas-vindas</button>
         <span class="v8-loader-video-label">carregando o jornal do vale</span>`;
       const progressTrack = loaderCore.querySelector(".loader-track");
       loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
@@ -3902,11 +3905,43 @@
 
     const status = $(".v8-loader-status", loader);
     const introVideo = $(".v8-loader-video", loader);
+    const introAudio = $(".v8-loader-welcome-audio", loader);
+    const introAudioButton = $(".v8-loader-audio-button", loader);
     let introVideoStarted = false;
+    let introAudioStarted = false;
     stopAssistantLife = startLoaderAssistantLife(loader);
     const setStatus = (message) => {
       if (status && status.textContent !== message) status.textContent = message;
     };
+
+    const playWelcomeAudio = () => {
+      if (!introAudio || introAudioStarted) return;
+      introAudioStarted = true;
+      try {
+        introAudio.currentTime = 0;
+        introAudio.volume = 0.92;
+        const attempt = introAudio.play?.();
+        if (attempt?.catch) {
+          attempt
+            .then(() => {
+              if (introAudioButton) introAudioButton.hidden = true;
+            })
+            .catch(() => {
+              introAudioStarted = false;
+              if (introAudioButton) introAudioButton.hidden = false;
+            });
+        } else if (introAudioButton) {
+          introAudioButton.hidden = true;
+        }
+      } catch (_) {
+        introAudioStarted = false;
+        if (introAudioButton) introAudioButton.hidden = false;
+      }
+    };
+
+    introAudioButton?.addEventListener("click", () => {
+      playWelcomeAudio();
+    });
 
     const setProgress = (value) => {
       const p = Math.max(0, Math.min(100, Math.round(value)));
@@ -3925,6 +3960,7 @@
           introVideo.loop = true;
           introVideo.play?.().catch?.(() => {});
         } catch (_) {}
+        playWelcomeAudio();
       }
     };
 
@@ -3940,6 +3976,11 @@
       if (introVideo) {
         try {
           introVideo.pause();
+        } catch (_) {}
+      }
+      if (introAudio) {
+        try {
+          introAudio.pause();
         } catch (_) {}
       }
       loader.classList.add("v8-intro-exit");

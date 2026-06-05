@@ -9044,6 +9044,28 @@ body.v8-merge-ready #cinematicLoader .v8-loader-video-label {
   box-shadow: 0 10px 28px rgba(2,8,23,.26) !important;
 }
 
+body.v8-merge-ready #cinematicLoader .v8-loader-audio-button {
+  position: absolute !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  z-index: 3 !important;
+  border: 1px solid rgba(255,255,255,.72) !important;
+  border-radius: 999px !important;
+  background: rgba(2,8,23,.78) !important;
+  color: #ffffff !important;
+  padding: 8px 11px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 10px 28px rgba(2,8,23,.28) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-loader-audio-button[hidden] {
+  display: none !important;
+}
+
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-brand-logo {
   width: min(520px, 74vw) !important;
   margin-bottom: 10px !important;
