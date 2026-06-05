@@ -134,7 +134,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Jurua Online publicou em 04 de jun de 2026: Cruzeiro do Sul será beneficiada com novos equipamentos cirúrgicos para ampliar atendimentos e reduzir filas no SUS.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -167,7 +166,6 @@ window.NEWS_DATA = [
     "summary": "Após horas de trabalho, tapete de Corpus Christi está pronto para receber fiéis em Cruzeiro do Sul",
     "analysis": "",
     "body": [
-      "Jurua Online publicou em 04 de jun de 2026: Após horas de trabalho, tapete de Corpus Christi está pronto para receber fiéis em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -451,7 +449,6 @@ window.NEWS_DATA = [
     "summary": "Sorteio da campanha Compra Premiada acontece neste sábado em Cruzeiro do Sul com mais de R$ 100 mil em prêmios",
     "analysis": "",
     "body": [
-      "Jurua Online publicou em 03 de jun de 2026: Sorteio da campanha Compra Premiada acontece neste sábado em Cruzeiro do Sul com mais de R$ 100 mil em prêmios.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -738,7 +735,6 @@ window.NEWS_DATA = [
     "summary": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão do município de Mâncio Lima ao Sisan",
     "analysis": "",
     "body": [
-      "Voz do Norte publicou em 03 de jun de 2026: Governo do Acre consolida ações de combate à insegurança alimentar com adesão do município de Mâncio Lima ao Sisan.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -1443,7 +1439,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Folha do Acre publicou em 04 de jun de 2026: Prefeitura de Cruzeiro do Sul mantém unidades de saúde abertas durante o feriado de Corpus Christi.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -2051,6 +2046,77 @@ window.NEWS_DATA = [
     "imageHydratedAt": "2026-06-05T02:47:39.522Z"
   },
   {
+    "id": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/",
+    "slug": "projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter",
+    "title": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
+    "eyebrow": "Prefeitura",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T22:46:58.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/",
+    "sourceLabel": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
+    "lede": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
+    "summary": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/Aldeia-Arara-Encantada-atendimento-emissao-de-identidade-8-150x150.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/Aldeia-Arara-Encantada-atendimento-emissao-de-identidade-8-150x150.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/Aldeia-Arara-Encantada-atendimento-emissao-de-identidade-8-150x150.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter Durante o atendimento do projeto Identidade para Dignidade em Porto Walter, equipes da Secretaria de Estado de Justiça e Segurança Pública (Sejusp) e da Polícia Civil, por meio do Instituto de Identificação Raimundo Hermínio de Melo, se deslocaram, nesta... A informação vem de Agencia Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter Durante o atendimento do projeto Identidade para Dignidade em Porto Walter, equipes da Secretaria de Estado de Justiça e Segurança Pública (Sejusp) e da Polícia Civil, por meio do Instituto de Identificação Raimundo Hermínio de Melo, se deslocaram, nesta... A informação vem de Agencia Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter. Durante o atendimento do projeto Identidade para Dignidade em Porto Walter, equipes da Secretaria de Estado de Justiça e Segurança Pública (Sejusp) e da Polícia Civil, por meio do Instituto de Identificação Raimundo Hermínio de Melo, se... Fonte: Agencia Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 3
+  },
+  {
     "id": "https://agencia.ac.gov.br/acre-pela-vida-realiza-torneio-de-futsal-para-jovens-em-porto-walter/",
     "slug": "acre-pela-vida-realiza-torneio-de-futsal-para-jovens-em-porto-walter",
     "title": "Acre Pela Vida realiza torneio de futsal para jovens em Porto Walter",
@@ -2262,7 +2328,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Jurua Comunicacao publicou em 04 de jun de 2026: Sebrae promove maratona de desenvolvimento de games em Cruzeiro do Sul com inscrições abertas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -2409,7 +2474,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Jurua 24 Horas publicou em 04 de jun de 2026: Presidente de associação destaca avanços levados pelo Incra aos assentamentos da região do Juruá.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -2592,7 +2656,6 @@ window.NEWS_DATA = [
     "summary": "Exame toxicológico passa a ser obrigatório para primeira CNH em Cruzeiro do Sul a partir de 8 de junho",
     "analysis": "",
     "body": [
-      "Jurua 24 Horas publicou em 04 de jun de 2026: Exame toxicológico passa a ser obrigatório para primeira CNH em Cruzeiro do Sul a partir de 8 de junho.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -2666,7 +2729,6 @@ window.NEWS_DATA = [
     "summary": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão de Mâncio Lima ao Sisan",
     "analysis": "",
     "body": [
-      "Jurua 24 Horas publicou em 04 de jun de 2026: Governo do Acre consolida ações de combate à insegurança alimentar com adesão de Mâncio Lima ao Sisan.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -3102,7 +3164,6 @@ window.NEWS_DATA = [
     "summary": "Prefeitura de Cruzeiro do Sul realiza quarta entrega de alimentos do PAA para 15 entidades sociais",
     "analysis": "",
     "body": [
-      "Batelao publicou em 03 de jun de 2026: Prefeitura de Cruzeiro do Sul realiza quarta entrega de alimentos do PAA para 15 entidades sociais.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -3173,7 +3234,6 @@ window.NEWS_DATA = [
     "summary": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão de Mâncio Lima ao Sisan",
     "analysis": "",
     "body": [
-      "Batelao publicou em 03 de jun de 2026: Governo do Acre consolida ações de combate à insegurança alimentar com adesão de Mâncio Lima ao Sisan.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -3246,7 +3306,6 @@ window.NEWS_DATA = [
     "summary": "Cruzeiro do Sul terá telão no Complexo Esportivo para transmissão dos jogos do Brasil na Copa do Mundo",
     "analysis": "",
     "body": [
-      "Jurua 24 Horas publicou em 03 de jun de 2026: Cruzeiro do Sul terá telão no Complexo Esportivo para transmissão dos jogos do Brasil na Copa do Mundo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -3866,7 +3925,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Jurua em Tempo publicou em 04 de jun de 2026: GEFRON recupera veículos roubados após assalto com cárcere privado em zona rural de Plácido de Castro.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -4610,7 +4668,6 @@ window.NEWS_DATA = [
     "summary": "MPF promove audiência pública para debater impactos da emergência climática sobre populações vulneráveis no Acre",
     "analysis": "",
     "body": [
-      "Voz do Norte publicou em 03 de jun de 2026: MPF promove audiência pública para debater impactos da emergência climática sobre populações vulneráveis no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -4754,7 +4811,6 @@ window.NEWS_DATA = [
     "summary": "Leis sancionadas por Mailza Assis modernizam e fortalecem o Ministério Público do Acre, marcando uma nova era para a instituição",
     "analysis": "",
     "body": [
-      "Voz do Norte publicou em 03 de jun de 2026: Leis sancionadas por Mailza Assis modernizam e fortalecem o Ministério Público do Acre, marcando uma nova era para a instituição.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -5168,7 +5224,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "print-da-fonte-para-revisao-cheffe-call",
     "body": [
-      "Integracao Net publicou em 04 de jun de 2026: Petecão declara apoio a Alan Rick no Bujari e reforça aliança na disputa pelo governo do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -5319,7 +5374,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "ac24horas publicou em 04 de jun de 2026: Mailza diz que prioridade é proteger vidas após decreto de emergência na saúde do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -5494,7 +5548,6 @@ window.NEWS_DATA = [
     "summary": "Mailza e Sula começam Operação Verão 2026 com construção da 6ª ponte de Rio Branco",
     "analysis": "",
     "body": [
-      "Folha do Acre publicou em 03 de jun de 2026: Mailza e Sula começam Operação Verão 2026 com construção da 6ª ponte de Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -5892,7 +5945,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Folha do Acre publicou em 05 de jun de 2026: Copa Rio Branco de Futebol Amador terá R$ 55 mil em premiação e expectativa de reunir mais de 3 mil atletas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -6718,7 +6770,6 @@ window.NEWS_DATA = [
     "summary": "Feriado terá apenas quatro unidades de saúde abertas em Rio Branco; veja onde buscar atendimento",
     "analysis": "",
     "body": [
-      "Folha do Acre publicou em 03 de jun de 2026: Feriado terá apenas quatro unidades de saúde abertas em Rio Branco; veja onde buscar atendimento.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -6910,78 +6961,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 2
   },
   {
-    "id": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/",
-    "slug": "detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-s",
-    "title": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
-    "eyebrow": "Acre / Governo",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T19:47:14.000Z",
-    "category": "Acre / Governo",
-    "categoryKey": "acre-governo",
-    "previewClass": "thumb-acre-governo",
-    "sourceName": "Portal Acre",
-    "sourceUrl": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/",
-    "sourceLabel": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
-    "lede": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
-    "summary": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/06/detran-2.jpeg",
-    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/06/detran-2.jpeg",
-    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/06/detran-2.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 825,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Portal Acre",
-        "url": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Portal Acre",
-        "url": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-s"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8 O Departamento Estadual de Trânsito do Acre (Detran) informa que, a partir do dia 8 de junho de 2026, será obrigatória a realização do exame toxicológico para candidatos à obtenção da primeira Carteira Nacional de Habilitação (CNH) nas categorias A... A informação vem de Portal Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8 O Departamento Estadual de Trânsito do Acre (Detran) informa que, a partir do dia 8 de junho de 2026, será obrigatória a realização do exame toxicológico para candidatos à obtenção da primeira Carteira Nacional de Habilitação (CNH) nas categorias A... A informação vem de Portal Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8. O Departamento Estadual de Trânsito do Acre (Detran) informa que, a partir do dia 8 de junho de 2026, será obrigatória a realização do exame toxicológico para candidatos à obtenção da primeira Carteira Nacional de Habilitação (CNH) nas... Fonte: Portal Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Portal Acre publicou em 04 de jun de 2026: Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
     "id": "https://portalacre.com.br/2026/06/lomo-saltado-de-assis-brasil-ganha-concurso-de-melhor-receita-da-alimentacao-escolar-do-acre/",
     "slug": "lomo-saltado-de-assis-brasil-ganha-concurso-de-melhor-receita-da-alimentacao-escolar-do-acre",
     "title": "Lomo saltado de Assis Brasil ganha concurso de melhor receita da alimentação escolar do Acre",
@@ -7043,7 +7022,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Portal Acre publicou em 04 de jun de 2026: Lomo saltado de Assis Brasil ganha concurso de melhor receita da alimentação escolar do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -7115,7 +7093,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Portal Acre publicou em 04 de jun de 2026: Prefeitura de Rio Branco lança Copa Rio Branco, Copa Rural e Intersecretarias com mais de R$ 55 mil em premiação.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -12351,7 +12328,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Acre in Foco publicou em 04 de jun de 2026: Pobre não compra uma caixa de fósforo sem pagar imposto mas Universal compra helicóptero de R$ 35 milhões sem pagar tributo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -12868,6 +12844,77 @@ window.NEWS_DATA = [
     "imageHydratedAt": "2026-06-05T02:47:39.522Z"
   },
   {
+    "id": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/",
+    "slug": "detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-s",
+    "title": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
+    "eyebrow": "Acre / Governo",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T19:47:14.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "Portal Acre",
+    "sourceUrl": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/",
+    "sourceLabel": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
+    "lede": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
+    "summary": "Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/06/detran-2.jpeg",
+    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/06/detran-2.jpeg",
+    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/06/detran-2.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 825,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/06/detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-segunda-feira-dia-8/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "detran-vai-exigir-exame-toxicologico-obrigatorio-para-primeira-habilitacao-a-partir-da-proxima-s"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8 O Departamento Estadual de Trânsito do Acre (Detran) informa que, a partir do dia 8 de junho de 2026, será obrigatória a realização do exame toxicológico para candidatos à obtenção da primeira Carteira Nacional de Habilitação (CNH) nas categorias A... A informação vem de Portal Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8 O Departamento Estadual de Trânsito do Acre (Detran) informa que, a partir do dia 8 de junho de 2026, será obrigatória a realização do exame toxicológico para candidatos à obtenção da primeira Carteira Nacional de Habilitação (CNH) nas categorias A... A informação vem de Portal Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Detran vai exigir exame toxicológico obrigatório para primeira habilitação a partir da próxima segunda-feira, dia 8. O Departamento Estadual de Trânsito do Acre (Detran) informa que, a partir do dia 8 de junho de 2026, será obrigatória a realização do exame toxicológico para candidatos à obtenção da primeira Carteira Nacional de Habilitação (CNH) nas... Fonte: Portal Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
+  },
+  {
     "id": "https://oaltoacre.com/dois-caminhoes-tanque-chegam-a-cobija-apos-bloqueios-e-garantem-abastecimento-de-gasolina-durante-feriado-de-corpus-christi/",
     "slug": "dois-caminhoes-tanque-chegam-a-cobija-apos-bloqueios-e-garantem-abastecimento-de-gasolina-durant",
     "title": "Dois caminhões-tanque chegam a Cobija após bloqueios e garantem abastecimento de gasolina durante feriado de Corpus Christi",
@@ -12929,7 +12976,78 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "O Alto Acre publicou em 04 de jun de 2026: Dois caminhões-tanque chegam a Cobija após bloqueios e garantem abastecimento de gasolina durante feriado de Corpus Christi.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
+  },
+  {
+    "id": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/",
+    "slug": "vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha",
+    "title": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
+    "eyebrow": "Saude",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T22:16:15.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "O Alto Acre",
+    "sourceUrl": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/",
+    "sourceLabel": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
+    "lede": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
+    "summary": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/15-660x660.png",
+    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/15-660x660.png",
+    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/15-660x660.png",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 820,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "O Alto Acre",
+        "url": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "O Alto Acre",
+        "url": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha O ministro da Saúde, Alexandre Padilha, anunciou nesta quarta-feira (3) o início da vacinação com a Pneumo 20 para crianças de até 5 anos, que deve começar na segunda quinzena deste mês de junho, nas Unidades Básicas de Saúde (UBS) O imunizante, uma... A informação vem de O Alto Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha O ministro da Saúde, Alexandre Padilha, anunciou nesta quarta-feira (3) o início da vacinação com a Pneumo 20 para crianças de até 5 anos, que deve começar na segunda quinzena deste mês de junho, nas Unidades Básicas de Saúde (UBS) O imunizante, uma... A informação vem de O Alto Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha. O ministro da Saúde, Alexandre Padilha, anunciou nesta quarta-feira (3) o início da vacinação com a Pneumo 20 para crianças de até 5 anos, que deve começar na segunda quinzena deste mês de junho, nas Unidades Básicas de Saúde (UBS) O... Fonte: O Alto Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O Alto Acre publicou em 04 de jun de 2026: Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -13168,8 +13286,8 @@ window.NEWS_DATA = [
     "sourceName": "Estado do Acre",
     "sourceUrl": "https://estadodoacre.com.br/2026/06/claudia-leitte-e-ivete-sangalo-interagem-apos-polemica-veja-video/",
     "sourceLabel": "Claudia Leitte e Ivete Sangalo interagem após polêmica. Veja vídeo",
-    "lede": "Claudia Leitte e Ivete Sangalo interagem após polêmica. Veja vídeo",
-    "summary": "Claudia Leitte e Ivete Sangalo interagem após polêmica. Veja vídeo",
+    "lede": "Claudia Leitte e Ivete Sangalo interagem após polêmica.",
+    "summary": "Claudia Leitte e Ivete Sangalo interagem após polêmica.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -15203,6 +15321,77 @@ window.NEWS_DATA = [
     "sourceScreenshotUrl": "assets/source-screenshots/20260604-apos-exito-na-estreia-brasil-volta-a-jogar-a-noite-na-liga-das-nacoes.png"
   },
   {
+    "id": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/",
+    "slug": "mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes",
+    "title": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
+    "eyebrow": "Prefeitura",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T21:25:25.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/",
+    "sourceLabel": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
+    "lede": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
+    "summary": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/BOCALOM_DEST.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/BOCALOM_DEST.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/BOCALOM_DEST.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes O Ministério Público do Estado do Acre (MPAC) instaurou um Procedimento Investigatório Criminal (PIC) para apurar possíveis irregularidades relacionadas ao contrato emergencial firmado entre a Prefeitura de Rio Branco e a empresa Ricco Transportes e Turismo... A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes O Ministério Público do Estado do Acre (MPAC) instaurou um Procedimento Investigatório Criminal (PIC) para apurar possíveis irregularidades relacionadas ao contrato emergencial firmado entre a Prefeitura de Rio Branco e a empresa Ricco Transportes e Turismo... A informação vem de ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes. O Ministério Público do Estado do Acre (MPAC) instaurou um Procedimento Investigatório Criminal (PIC) para apurar possíveis irregularidades relacionadas ao contrato emergencial firmado entre a Prefeitura de Rio Branco e a empresa Ricco... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
+  },
+  {
     "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-06/fieis-enfrentam-chuva-para-fazer-tapetes-de-corpus-christi-no-rio",
     "slug": "fieis-enfrentam-chuva-para-fazer-tapetes-de-corpus-christi-no-rio",
     "title": "Fiéis enfrentam chuva para fazer tapetes de Corpus Christi no Rio",
@@ -16899,6 +17088,76 @@ window.NEWS_DATA = [
     ],
     "alternateSlugs": [
       "justica-afasta-titulares-de-cartorios-no-tocantins-por-suspeitas-de-irregularidades-fundiarias"
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/",
+    "slug": "estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa",
+    "title": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
+    "eyebrow": "Cotidiano",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T12:19:50.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/",
+    "sourceLabel": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0,
+    "sourceCount": 1,
+    "lede": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
+    "summary": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
+    "analysis": "",
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/IMG_7449.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/IMG_7449.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/IMG_7449.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "audioNarrationText": "Catálogo Catálogo Cruzeiro do Sul. Notícia de Cotidiano. Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá Um estudo realizado pelo Instituto de Pesquisa e Formação Indígena (Iepé), em parceria com o Distrito Sanitário Especial Indígena do Amapá e Norte do Pará (Dsei), identificou altos níveis de contaminação por mercúrio em comunidades indígenas de Oiapoque, no... Fonte: ac24horas.",
+    "audioNarrationTranscript": "Catálogo Catálogo Cruzeiro do Sul. Notícia de Cotidiano. Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá Um estudo realizado pelo Instituto de Pesquisa e Formação Indígena (Iepé), em parceria com o Distrito Sanitário Especial Indígena do Amapá e Norte do Pará (Dsei), identificou altos níveis de contaminação por mercúrio em comunidades indígenas de Oiapoque, no... Fonte: ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá. Um estudo realizado pelo Instituto de Pesquisa e Formação Indígena (Iepé), em parceria com o Distrito Sanitário Especial Indígena do Amapá e Norte do Pará (Dsei), identificou altos níveis de contaminação por mercúrio em comunidades... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasVideoCaptionText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal"
+    },
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/"
+      }
+    ],
+    "alternateSlugs": [
+      "estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa"
     ]
   },
   {
@@ -20142,78 +20401,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 3
   },
   {
-    "id": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/",
-    "slug": "adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre",
-    "title": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
-    "eyebrow": "Policia",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T19:56:08.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/",
-    "sourceLabel": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
-    "lede": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
-    "summary": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/7e3ccb12-d6ee-4fe4-81a7-2954b7e4d3d7.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/7e3ccb12-d6ee-4fe4-81a7-2954b7e4d3d7.jpeg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/7e3ccb12-d6ee-4fe4-81a7-2954b7e4d3d7.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre A Polícia Civil apreendeu um adolescente suspeito de envolvimento em ameaças contra professores e o diretor da Escola Cunha Vasconcelos, no município de Rodrigues Alves, após a descoberta de um bilhete no banheiro masculino da unidade de ensino. A informação vem de Juruá Online.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre A Polícia Civil apreendeu um adolescente suspeito de envolvimento em ameaças contra professores e o diretor da Escola Cunha Vasconcelos, no município de Rodrigues Alves, após a descoberta de um bilhete no banheiro masculino da unidade de ensino. A informação vem de Juruá Online.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre. A Polícia Civil apreendeu um adolescente suspeito de envolvimento em ameaças contra professores e o diretor da Escola Cunha Vasconcelos, no município de Rodrigues Alves, após a descoberta de um bilhete no banheiro masculino da unidade de... Fonte: Jurua Online.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Jurua Online publicou em 04 de jun de 2026: Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
-  },
-  {
     "id": "https://juruaonline.com.br/projeto-cidadao-celebra-30-anos-com-casamento-coletivo-para-100-casais-em-rodrigues-alves/",
     "slug": "projeto-cidadao-celebra-30-anos-com-casamento-coletivo-para-100-casais-em-rodrigues-alves",
     "title": "Projeto Cidadão celebra 30 anos com Casamento Coletivo para 100 casais em Rodrigues Alves",
@@ -20379,7 +20566,6 @@ window.NEWS_DATA = [
     "summary": "Jovem envolvido em acidente fatal que matou idoso em Cruzeiro do Sul se apresenta à polícia e relata versão dos fatos",
     "analysis": "",
     "body": [
-      "Jurua Online publicou em 03 de jun de 2026: Jovem envolvido em acidente fatal que matou idoso em Cruzeiro do Sul se apresenta à polícia e relata versão dos fatos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -21027,7 +21213,6 @@ window.NEWS_DATA = [
     "summary": "Polícia Civil intensifica combate à violência contra a mulher e cumpre mandados de prisão em Cruzeiro do Sul",
     "analysis": "",
     "body": [
-      "Policia Civil do Acre publicou em 03 de jun de 2026: Polícia Civil intensifica combate à violência contra a mulher e cumpre mandados de prisão em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -21075,78 +21260,6 @@ window.NEWS_DATA = [
       "policia-civil-intensifica-combate-a-violencia-contra-a-mulher-e-cumpre-mandados-de-prisao-em-cru"
     ],
     "videoUrl": ""
-  },
-  {
-    "id": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/",
-    "slug": "policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre",
-    "title": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
-    "eyebrow": "Policia",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T21:50:03.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Folha do Acre",
-    "sourceUrl": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/",
-    "sourceLabel": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
-    "lede": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
-    "summary": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/06/87702e35-499b-4330-b478-dd81ce67e493.jpeg",
-    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/06/87702e35-499b-4330-b478-dd81ce67e493.jpeg",
-    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/06/87702e35-499b-4330-b478-dd81ce67e493.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 830,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre A Polícia Civil do Acre (PCAC), por meio da Delegacia-Geral de Rodrigues Alves, realizou a apreensão em flagrante de um adolescente na última quarta-feira, 3, após a descoberta de graves ameaças direcionadas ao corpo docente da Escola Cunha Vasconcellos. A informação vem de Folha do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre A Polícia Civil do Acre (PCAC), por meio da Delegacia-Geral de Rodrigues Alves, realizou a apreensão em flagrante de um adolescente na última quarta-feira, 3, após a descoberta de graves ameaças direcionadas ao corpo docente da Escola Cunha Vasconcellos. A informação vem de Folha do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre. A Polícia Civil do Acre (PCAC), por meio da Delegacia-Geral de Rodrigues Alves, realizou a apreensão em flagrante de um adolescente na última quarta-feira, 3, após a descoberta de graves ameaças direcionadas ao corpo docente da Escola... Fonte: Folha do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Folha do Acre publicou em 04 de jun de 2026: Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
   },
   {
     "id": "https://folhadoacre.com.br/2026/06/alunos-questionam-qualidade-da-merenda-apos-relato-de-larvas-em-refeicao-no-ifac-de-tarauaca/",
@@ -21436,78 +21549,6 @@ window.NEWS_DATA = [
     "imageHydration": "source-page-screenshot",
     "imageHydratedAt": "2026-06-05T04:23:00.700Z",
     "sourceScreenshotUrl": "assets/source-screenshots/20260604-adolescente-suspeito-de-ameacar-professores-ja-havia-sido-apreendido-com-mais-de-4-kg-de-drogas.png",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
-  },
-  {
-    "id": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/",
-    "slug": "projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter",
-    "title": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
-    "eyebrow": "Prefeitura",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T22:46:58.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/",
-    "sourceLabel": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
-    "lede": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
-    "summary": "Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/Aldeia-Arara-Encantada-atendimento-emissao-de-identidade-8-150x150.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/Aldeia-Arara-Encantada-atendimento-emissao-de-identidade-8-150x150.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/Aldeia-Arara-Encantada-atendimento-emissao-de-identidade-8-150x150.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "projeto-identidade-para-dignidade-atende-em-aldeia-arara-encantada-proximo-a-porto-walter"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter Durante o atendimento do projeto Identidade para Dignidade em Porto Walter, equipes da Secretaria de Estado de Justiça e Segurança Pública (Sejusp) e da Polícia Civil, por meio do Instituto de Identificação Raimundo Hermínio de Melo, se deslocaram, nesta... A informação vem de Agencia Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter Durante o atendimento do projeto Identidade para Dignidade em Porto Walter, equipes da Secretaria de Estado de Justiça e Segurança Pública (Sejusp) e da Polícia Civil, por meio do Instituto de Identificação Raimundo Hermínio de Melo, se deslocaram, nesta... A informação vem de Agencia Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter. Durante o atendimento do projeto Identidade para Dignidade em Porto Walter, equipes da Secretaria de Estado de Justiça e Segurança Pública (Sejusp) e da Polícia Civil, por meio do Instituto de Identificação Raimundo Hermínio de Melo, se... Fonte: Agencia Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Agencia Acre publicou em 04 de jun de 2026: Projeto Identidade para Dignidade atende em aldeia Arara Encantada próximo à Porto Walter.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
     "editorialGate": "P0",
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
@@ -22032,6 +22073,77 @@ window.NEWS_DATA = [
     },
     "body": [
       "Jurua Online publicou em 04 de jun de 2026: Após ataque no Instituto São José, Aleac aprova indenização para familiares das vítimas.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 2
+  },
+  {
+    "id": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/",
+    "slug": "adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre",
+    "title": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
+    "eyebrow": "Policia",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T19:56:08.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/",
+    "sourceLabel": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
+    "lede": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
+    "summary": "Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/7e3ccb12-d6ee-4fe4-81a7-2954b7e4d3d7.jpeg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/7e3ccb12-d6ee-4fe4-81a7-2954b7e4d3d7.jpeg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/06/7e3ccb12-d6ee-4fe4-81a7-2954b7e4d3d7.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 980,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "adolescente-e-apreendido-apos-bilhete-com-ameacas-a-professores-e-diretor-em-escola-no-acre"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre A Polícia Civil apreendeu um adolescente suspeito de envolvimento em ameaças contra professores e o diretor da Escola Cunha Vasconcelos, no município de Rodrigues Alves, após a descoberta de um bilhete no banheiro masculino da unidade de ensino. A informação vem de Juruá Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre A Polícia Civil apreendeu um adolescente suspeito de envolvimento em ameaças contra professores e o diretor da Escola Cunha Vasconcelos, no município de Rodrigues Alves, após a descoberta de um bilhete no banheiro masculino da unidade de ensino. A informação vem de Juruá Online.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Adolescente é apreendido após bilhete com ameaças a professores e diretor em escola no Acre. A Polícia Civil apreendeu um adolescente suspeito de envolvimento em ameaças contra professores e o diretor da Escola Cunha Vasconcelos, no município de Rodrigues Alves, após a descoberta de um bilhete no banheiro masculino da unidade de... Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -22692,77 +22804,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 2
   },
   {
-    "id": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/",
-    "slug": "governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores",
-    "title": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
-    "eyebrow": "governadora mailza",
-    "date": "03 de jun de 2026",
-    "publishedAt": "2026-06-03T23:37:59.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/",
-    "sourceLabel": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2,
-    "sourceCount": 1,
-    "lede": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
-    "summary": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 03 de jun de 2026: Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-14.48.38-1200x728.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-14.48.38-1200x728.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-14.48.38-1200x728.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "audioNarrationText": "Catálogo Catálogo Cruzeiro do Sul. Notícia de política. Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores O Ministério Público do Estado do Acre (MPAC) viveu um momento histórico na manhã desta quarta-feira, 3, com a sanção, pela governadora Mailza Assis, de duas leis que promovem avanços na valorização dos servidores, na modernização administrativa e no... Fonte: ac24horas.",
-    "audioNarrationTranscript": "Catálogo Catálogo Cruzeiro do Sul. Notícia de política. Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores O Ministério Público do Estado do Acre (MPAC) viveu um momento histórico na manhã desta quarta-feira, 3, com a sanção, pela governadora Mailza Assis, de duas leis que promovem avanços na valorização dos servidores, na modernização administrativa e no... Fonte: ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores. O Ministério Público do Estado do Acre (MPAC) viveu um momento histórico na manhã desta quarta-feira, 3, com a sanção, pela governadora Mailza Assis, de duas leis que promovem avanços na valorização dos servidores, na modernização... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasVideoCaptionText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal"
-    },
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/"
-      }
-    ],
-    "alternateSlugs": [
-      "governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores"
-    ]
-  },
-  {
     "id": "https://folhadoacre.com.br/2026/06/governo-mailza-assis-alcanca-632-de-aprovacao-aponta-parana-pesquisas/",
     "slug": "governo-mailza-assis-alcanca-63-2-de-aprovacao-aponta-parana-pesquisas",
     "title": "Governo Mailza Assis alcança 63,2% de aprovação, aponta Paraná Pesquisas",
@@ -23328,6 +23369,77 @@ window.NEWS_DATA = [
     },
     "body": [
       "Folha do Acre publicou em 05 de jun de 2026: MP abre investigação sobre contrato da Ricco e mira gestão de Bocalom em apuração sigilosa.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 2
+  },
+  {
+    "id": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/",
+    "slug": "policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre",
+    "title": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
+    "eyebrow": "Policia",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T21:50:03.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Folha do Acre",
+    "sourceUrl": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/",
+    "sourceLabel": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
+    "lede": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
+    "summary": "Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/06/87702e35-499b-4330-b478-dd81ce67e493.jpeg",
+    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/06/87702e35-499b-4330-b478-dd81ce67e493.jpeg",
+    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/06/87702e35-499b-4330-b478-dd81ce67e493.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 830,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/06/policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "policia-apreende-adolescente-apos-ameacas-a-professores-e-diretor-de-escola-no-acre"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre A Polícia Civil do Acre (PCAC), por meio da Delegacia-Geral de Rodrigues Alves, realizou a apreensão em flagrante de um adolescente na última quarta-feira, 3, após a descoberta de graves ameaças direcionadas ao corpo docente da Escola Cunha Vasconcellos. A informação vem de Folha do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre A Polícia Civil do Acre (PCAC), por meio da Delegacia-Geral de Rodrigues Alves, realizou a apreensão em flagrante de um adolescente na última quarta-feira, 3, após a descoberta de graves ameaças direcionadas ao corpo docente da Escola Cunha Vasconcellos. A informação vem de Folha do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Polícia apreende adolescente após ameaças a professores e diretor de escola no Acre. A Polícia Civil do Acre (PCAC), por meio da Delegacia-Geral de Rodrigues Alves, realizou a apreensão em flagrante de um adolescente na última quarta-feira, 3, após a descoberta de graves ameaças direcionadas ao corpo docente da Escola... Fonte: Folha do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -24283,85 +24395,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 2
   },
   {
-    "id": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/",
-    "slug": "tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia",
-    "title": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
-    "eyebrow": "Policia",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-05T03:39:02.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "O Alto Acre",
-    "sourceUrl": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/",
-    "sourceLabel": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
-    "lede": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
-    "summary": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/ACIDENTE-CAMPINAS-NA-BR-317_A_Captura-de-tela-2026-06-04-223327-05.png",
-    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/ACIDENTE-CAMPINAS-NA-BR-317_A_Captura-de-tela-2026-06-04-223327-05.png",
-    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/ACIDENTE-CAMPINAS-NA-BR-317_A_Captura-de-tela-2026-06-04-223327-05.png",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": {
-      "type": "video",
-      "url": "https://oaltoacre.com/wp-content/uploads/2026/06/WhatsApp-Video-2026-06-04-at-21.47.21.mp4",
-      "label": "Vídeo da matéria",
-      "note": "Vídeo captado diretamente da fonte monitorada.",
-      "creditUrl": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/",
-      "creditLabel": "Abrir fonte"
-    },
-    "videoUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/WhatsApp-Video-2026-06-04-at-21.47.21.mp4",
-    "priority": 820,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia Oficial aposentado foi socorrido pelos bombeiros e encaminhado ao Hospital Raimundo Chaar; estado de saúde é considerado estável O tenente da reserva da Polícia Militar do Acre, Reginaldo Dantas Campinas, de 61 anos, foi encontrado desacordado e ferido às... A informação vem de O Alto Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia Oficial aposentado foi socorrido pelos bombeiros e encaminhado ao Hospital Raimundo Chaar; estado de saúde é considerado estável O tenente da reserva da Polícia Militar do Acre, Reginaldo Dantas Campinas, de 61 anos, foi encontrado desacordado e ferido às... A informação vem de O Alto Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia. Oficial aposentado foi socorrido pelos bombeiros e encaminhado ao Hospital Raimundo Chaar; estado de saúde é considerado estável O tenente da reserva da Polícia Militar do Acre, Reginaldo Dantas Campinas, de 61 anos, foi encontrado... Fonte: O Alto Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "O Alto Acre publicou em 04 de jun de 2026: Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
     "id": "https://oaltoacre.com/acidente-entre-moto-e-carro-termina-em-briga-entre-duas-mulheres-em-via-publica-em-brasileia/",
     "slug": "acidente-entre-moto-e-carro-termina-em-briga-entre-duas-mulheres-em-via-publica-em-brasileia",
     "title": "Acidente entre moto e carro termina em briga entre duas mulheres em via pública em Brasiléia",
@@ -24502,86 +24535,9 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "O Alto Acre publicou em 04 de jun de 2026: Ponte Frei Paolino Baldassari, em Sena Madureira, é interditada preventivamente após identificação de possíveis problemas estruturais.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/",
-    "slug": "policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard",
-    "title": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
-    "eyebrow": "Politica",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T22:06:58.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "O Alto Acre",
-    "sourceUrl": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/",
-    "sourceLabel": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
-    "lede": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
-    "summary": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
-    "feedImageUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
-    "sourceImageUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
-    "imageCredit": "Print da fonte original",
-    "imageFocus": "source-page-first-fold",
-    "imageFit": "cover",
-    "media": null,
-    "videoUrl": "",
-    "priority": 820,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard Estabelecimento funcionava sem autorização sanitária e sem condições mínimas de higiene; produção abastecia comércio local; arma de fogo também foi apreendida; investigado já havia sido advertido pelo MPAC A Polícia Civil do Acre (PCAC), por meio da... A informação vem de O Alto Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard Estabelecimento funcionava sem autorização sanitária e sem condições mínimas de higiene; produção abastecia comércio local; arma de fogo também foi apreendida; investigado já havia sido advertido pelo MPAC A Polícia Civil do Acre (PCAC), por meio da... A informação vem de O Alto Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard. Estabelecimento funcionava sem autorização sanitária e sem condições mínimas de higiene; produção abastecia comércio local; arma de fogo também foi apreendida; investigado já havia sido advertido pelo MPAC A Polícia Civil do Acre (PCAC)... Fonte: O Alto Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "print-da-fonte-para-revisao-cheffe-call",
-    "body": [
-      "O Alto Acre publicou em 04 de jun de 2026: Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "imageHydration": "source-page-screenshot",
-    "imageHydratedAt": "2026-06-05T04:24:58.372Z",
-    "sourceScreenshotUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
     "editorialGate": "P0",
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
@@ -24961,78 +24917,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 2
   },
   {
-    "id": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/",
-    "slug": "mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes",
-    "title": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
-    "eyebrow": "Prefeitura",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T21:25:25.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/",
-    "sourceLabel": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
-    "lede": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
-    "summary": "MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/BOCALOM_DEST.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/BOCALOM_DEST.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/BOCALOM_DEST.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/06/04/mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes-na-capital/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mp-vai-investigar-bocalom-por-suspeitas-envolvendo-contrato-da-ricco-transportes"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes O Ministério Público do Estado do Acre (MPAC) instaurou um Procedimento Investigatório Criminal (PIC) para apurar possíveis irregularidades relacionadas ao contrato emergencial firmado entre a Prefeitura de Rio Branco e a empresa Ricco Transportes e Turismo... A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes O Ministério Público do Estado do Acre (MPAC) instaurou um Procedimento Investigatório Criminal (PIC) para apurar possíveis irregularidades relacionadas ao contrato emergencial firmado entre a Prefeitura de Rio Branco e a empresa Ricco Transportes e Turismo... A informação vem de ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes. O Ministério Público do Estado do Acre (MPAC) instaurou um Procedimento Investigatório Criminal (PIC) para apurar possíveis irregularidades relacionadas ao contrato emergencial firmado entre a Prefeitura de Rio Branco e a empresa Ricco... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 04 de jun de 2026: MP vai investigar Bocalom por suspeitas envolvendo contrato da Ricco Transportes.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
     "id": "https://juruacomunicacao.com.br/um-acidente-envolvendo-uma-motocicleta-e-um-carro-terminou-em-confusao-na-tarde-de-quarta-feira-3-em-brasileia-no-interior-do-acre-apos-a-colisao-duas-mulheres-se-envolveram-em-uma-briga-em-plen/",
     "slug": "apos-acidente-de-transito-mulheres-brigam-em-via-publica-em-brasileia",
     "title": "Após acidente de trânsito, mulheres brigam em via pública em Brasiléia",
@@ -25330,78 +25214,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 2,
     "imageHydration": "source-html-image",
     "imageHydratedAt": "2026-06-05T02:47:39.522Z"
-  },
-  {
-    "id": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial",
-    "slug": "seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial",
-    "title": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
-    "eyebrow": "Policia",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T14:50:36.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial",
-    "sourceLabel": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
-    "lede": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
-    "summary": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/99e5516b-7e92-45ca-9c00-f10fc931a603-1024x768.jpg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/99e5516b-7e92-45ca-9c00-f10fc931a603-1024x768.jpg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/99e5516b-7e92-45ca-9c00-f10fc931a603-1024x768.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial Por Miguel Feitosa A Secretaria de Estado de Justiça e Segurança Pública do Acre (Sejusp) concluiu, nesta quarta-feira, 3, mais uma capacitação para a quarta turma de profissionais que atuam na linha de frente do atendimento a ocorrências emergenciais, com... A informação vem de Batelao.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial Por Miguel Feitosa A Secretaria de Estado de Justiça e Segurança Pública do Acre (Sejusp) concluiu, nesta quarta-feira, 3, mais uma capacitação para a quarta turma de profissionais que atuam na linha de frente do atendimento a ocorrências emergenciais, com... A informação vem de Batelao.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial. Por Miguel Feitosa A Secretaria de Estado de Justiça e Segurança Pública do Acre (Sejusp) concluiu, nesta quarta-feira, 3, mais uma capacitação para a quarta turma de profissionais que atuam na linha de frente do atendimento a... Fonte: Batelao.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Batelao publicou em 04 de jun de 2026: Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
   },
   {
     "id": "https://ac24horas.com/2026/06/04/policial-penal-do-acre-que-cobra-r-16-mil-em-horas-extras-do-iapen-tem-derrota-no-supremo/",
@@ -27303,7 +27115,6 @@ window.NEWS_DATA = [
     "summary": "Alunos de colégio militar conquistam 3º lugar por equipes no Campeonato Acreano de Taekwondo",
     "analysis": "",
     "body": [
-      "Jurua em Tempo publicou em 03 de jun de 2026: Alunos de colégio militar conquistam 3º lugar por equipes no Campeonato Acreano de Taekwondo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -28644,6 +28455,76 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
+    "id": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/",
+    "slug": "governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores",
+    "title": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
+    "eyebrow": "governadora mailza",
+    "date": "03 de jun de 2026",
+    "publishedAt": "2026-06-03T23:37:59.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/",
+    "sourceLabel": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0,
+    "sourceCount": 1,
+    "lede": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
+    "summary": "Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores",
+    "analysis": "",
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-14.48.38-1200x728.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-14.48.38-1200x728.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-14.48.38-1200x728.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "audioNarrationText": "Catálogo Catálogo Cruzeiro do Sul. Notícia de política. Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores O Ministério Público do Estado do Acre (MPAC) viveu um momento histórico na manhã desta quarta-feira, 3, com a sanção, pela governadora Mailza Assis, de duas leis que promovem avanços na valorização dos servidores, na modernização administrativa e no... Fonte: ac24horas.",
+    "audioNarrationTranscript": "Catálogo Catálogo Cruzeiro do Sul. Notícia de política. Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores O Ministério Público do Estado do Acre (MPAC) viveu um momento histórico na manhã desta quarta-feira, 3, com a sanção, pela governadora Mailza Assis, de duas leis que promovem avanços na valorização dos servidores, na modernização administrativa e no... Fonte: ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Governadora Mailza Assis sanciona leis que modernizam o MPAC e valorizam servidores. O Ministério Público do Estado do Acre (MPAC) viveu um momento histórico na manhã desta quarta-feira, 3, com a sanção, pela governadora Mailza Assis, de duas leis que promovem avanços na valorização dos servidores, na modernização... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasVideoCaptionText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal"
+    },
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/06/03/governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores/"
+      }
+    ],
+    "alternateSlugs": [
+      "governadora-mailza-assis-sanciona-leis-que-modernizam-o-mpac-e-valorizam-servidores"
+    ]
+  },
+  {
     "id": "https://www.mpac.mp.br/mpac-recomenda-implementacao-de-capacitacao-obrigatorio-de-letramento-racial-para-gestores-estaduais/",
     "slug": "mpac-recomenda-implementacao-de-capacitacao-obrigatorio-de-letramento-racial-para-gestores-estad",
     "title": "MPAC recomenda implementação de capacitação obrigatório de letramento racial para gestores estaduais",
@@ -29460,7 +29341,6 @@ window.NEWS_DATA = [
     "summary": "Me engana que eu gosto: mulher de 37 anos finge ter 12 e é presa por estelionato após ser adotada",
     "analysis": "",
     "body": [
-      "Acre in Foco publicou em 03 de jun de 2026: Me engana que eu gosto: mulher de 37 anos finge ter 12 e é presa por estelionato após ser adotada.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -29653,6 +29533,84 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/",
+    "slug": "tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia",
+    "title": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
+    "eyebrow": "Policia",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-05T03:39:02.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "O Alto Acre",
+    "sourceUrl": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/",
+    "sourceLabel": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
+    "lede": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
+    "summary": "Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/ACIDENTE-CAMPINAS-NA-BR-317_A_Captura-de-tela-2026-06-04-223327-05.png",
+    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/ACIDENTE-CAMPINAS-NA-BR-317_A_Captura-de-tela-2026-06-04-223327-05.png",
+    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/ACIDENTE-CAMPINAS-NA-BR-317_A_Captura-de-tela-2026-06-04-223327-05.png",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": {
+      "type": "video",
+      "url": "https://oaltoacre.com/wp-content/uploads/2026/06/WhatsApp-Video-2026-06-04-at-21.47.21.mp4",
+      "label": "Vídeo da matéria",
+      "note": "Vídeo captado diretamente da fonte monitorada.",
+      "creditUrl": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/",
+      "creditLabel": "Abrir fonte"
+    },
+    "videoUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/WhatsApp-Video-2026-06-04-at-21.47.21.mp4",
+    "priority": 820,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "O Alto Acre",
+        "url": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "O Alto Acre",
+        "url": "https://oaltoacre.com/tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tenente-da-reserva-da-pm-e-encontrado-ferido-apos-acidente-na-br-317-em-epitaciolandia"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia Oficial aposentado foi socorrido pelos bombeiros e encaminhado ao Hospital Raimundo Chaar; estado de saúde é considerado estável O tenente da reserva da Polícia Militar do Acre, Reginaldo Dantas Campinas, de 61 anos, foi encontrado desacordado e ferido às... A informação vem de O Alto Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia Oficial aposentado foi socorrido pelos bombeiros e encaminhado ao Hospital Raimundo Chaar; estado de saúde é considerado estável O tenente da reserva da Polícia Militar do Acre, Reginaldo Dantas Campinas, de 61 anos, foi encontrado desacordado e ferido às... A informação vem de O Alto Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Tenente da reserva da PM é encontrado ferido após acidente na BR-317, em Epitaciolândia. Oficial aposentado foi socorrido pelos bombeiros e encaminhado ao Hospital Raimundo Chaar; estado de saúde é considerado estável O tenente da reserva da Polícia Militar do Acre, Reginaldo Dantas Campinas, de 61 anos, foi encontrado... Fonte: O Alto Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
+  },
+  {
     "id": "https://oaltoacre.com/justica-eleitoral-proibe-propaganda-politica-em-igrejas-e-templos-descumprimento-pode-levar-a-perda-de-registro-de-candidatura/",
     "slug": "justica-eleitoral-proibe-propaganda-politica-em-igrejas-e-templos-descumprimento-pode-levar-a-pe",
     "title": "Justiça Eleitoral proíbe propaganda política em igrejas e templos; descumprimento pode levar à perda de registro de candidatura",
@@ -29729,29 +29687,29 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
-    "id": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/",
-    "slug": "vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha",
-    "title": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
-    "eyebrow": "Saude",
+    "id": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/",
+    "slug": "policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard",
+    "title": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
+    "eyebrow": "Politica",
     "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T22:16:15.000Z",
-    "category": "Saude",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
+    "publishedAt": "2026-06-04T22:06:58.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
     "sourceName": "O Alto Acre",
-    "sourceUrl": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/",
-    "sourceLabel": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
-    "lede": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
-    "summary": "Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha",
+    "sourceUrl": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/",
+    "sourceLabel": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
+    "lede": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
+    "summary": "Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/15-660x660.png",
-    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/15-660x660.png",
-    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/15-660x660.png",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
+    "feedImageUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
+    "sourceImageUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
+    "imageCredit": "Print da fonte original",
+    "imageFocus": "source-page-first-fold",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 820,
@@ -29759,21 +29717,21 @@ window.NEWS_DATA = [
     "crossSources": [
       {
         "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/"
+        "url": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/"
       }
     ],
     "alternateSources": [
       {
         "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha/"
+        "url": "https://oaltoacre.com/policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "vacinacao-com-a-pneumo-20-pelo-sus-comeca-em-duas-semanas-diz-padilha"
+      "policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard"
     ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha O ministro da Saúde, Alexandre Padilha, anunciou nesta quarta-feira (3) o início da vacinação com a Pneumo 20 para crianças de até 5 anos, que deve começar na segunda quinzena deste mês de junho, nas Unidades Básicas de Saúde (UBS) O imunizante, uma... A informação vem de O Alto Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha O ministro da Saúde, Alexandre Padilha, anunciou nesta quarta-feira (3) o início da vacinação com a Pneumo 20 para crianças de até 5 anos, que deve começar na segunda quinzena deste mês de junho, nas Unidades Básicas de Saúde (UBS) O imunizante, uma... A informação vem de O Alto Acre.",
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard Estabelecimento funcionava sem autorização sanitária e sem condições mínimas de higiene; produção abastecia comércio local; arma de fogo também foi apreendida; investigado já havia sido advertido pelo MPAC A Polícia Civil do Acre (PCAC), por meio da... A informação vem de O Alto Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard Estabelecimento funcionava sem autorização sanitária e sem condições mínimas de higiene; produção abastecia comércio local; arma de fogo também foi apreendida; investigado já havia sido advertido pelo MPAC A Polícia Civil do Acre (PCAC), por meio da... A informação vem de O Alto Acre.",
     "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
     "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
     "audioNarrationVoiceEngine": "edge-tts",
@@ -29781,7 +29739,7 @@ window.NEWS_DATA = [
     "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
     "audioNarrationLanguage": "pt-BR",
     "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha. O ministro da Saúde, Alexandre Padilha, anunciou nesta quarta-feira (3) o início da vacinação com a Pneumo 20 para crianças de até 5 anos, que deve começar na segunda quinzena deste mês de junho, nas Unidades Básicas de Saúde (UBS) O... Fonte: O Alto Acre.",
+    "videoCaptionText": "Imagem da notícia: Polícia Civil fecha fábrica clandestina de laticínios e prende proprietário em Senador Guiomard. Estabelecimento funcionava sem autorização sanitária e sem condições mínimas de higiene; produção abastecia comércio local; arma de fogo também foi apreendida; investigado já havia sido advertido pelo MPAC A Polícia Civil do Acre (PCAC)... Fonte: O Alto Acre.",
     "videoCaptionStatus": "ready",
     "accessibility": {
       "hasAudioNarrationText": true,
@@ -29789,11 +29747,14 @@ window.NEWS_DATA = [
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "print-da-fonte-para-revisao-cheffe-call",
     "body": [
-      "O Alto Acre publicou em 04 de jun de 2026: Vacinação com a Pneumo 20 pelo SUS começa em duas semanas, diz Padilha.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
+    "imageHydration": "source-page-screenshot",
+    "imageHydratedAt": "2026-06-05T04:24:58.372Z",
+    "sourceScreenshotUrl": "assets/source-screenshots/20260604-policia-civil-fecha-fabrica-clandestina-de-laticinios-e-prende-proprietario-em-senador-guiomard.png",
     "editorialGate": "P0",
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
@@ -31843,7 +31804,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "G1 Politica publicou em 04 de jun de 2026: Flávio Bolsonaro, Tarcísio, Nunes, Jorge Messias e André Mendonça participam da Marcha para Jesus em SP.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -31928,6 +31888,77 @@ window.NEWS_DATA = [
     "imageHydration": "source-page-screenshot",
     "imageHydratedAt": "2026-06-05T03:44:08.374Z",
     "sourceScreenshotUrl": "assets/source-screenshots/20260604-neymar-nao-viajara-com-selecao-brasileira-para-amistoso-contra-egito.png"
+  },
+  {
+    "id": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial",
+    "slug": "seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial",
+    "title": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
+    "eyebrow": "Policia",
+    "date": "04 de jun de 2026",
+    "publishedAt": "2026-06-04T14:50:36.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial",
+    "sourceLabel": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
+    "lede": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
+    "summary": "Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/99e5516b-7e92-45ca-9c00-f10fc931a603-1024x768.jpg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/99e5516b-7e92-45ca-9c00-f10fc931a603-1024x768.jpg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/99e5516b-7e92-45ca-9c00-f10fc931a603-1024x768.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial/?utm_source=rss&utm_medium=rss&utm_campaign=seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "seguranca-publica-conclui-quarta-turma-de-profissionais-para-teleatendimento-emergencial"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial Por Miguel Feitosa A Secretaria de Estado de Justiça e Segurança Pública do Acre (Sejusp) concluiu, nesta quarta-feira, 3, mais uma capacitação para a quarta turma de profissionais que atuam na linha de frente do atendimento a ocorrências emergenciais, com... A informação vem de Batelao.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial Por Miguel Feitosa A Secretaria de Estado de Justiça e Segurança Pública do Acre (Sejusp) concluiu, nesta quarta-feira, 3, mais uma capacitação para a quarta turma de profissionais que atuam na linha de frente do atendimento a ocorrências emergenciais, com... A informação vem de Batelao.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Segurança Pública conclui quarta turma de profissionais para teleatendimento emergencial. Por Miguel Feitosa A Secretaria de Estado de Justiça e Segurança Pública do Acre (Sejusp) concluiu, nesta quarta-feira, 3, mais uma capacitação para a quarta turma de profissionais que atuam na linha de frente do atendimento a... Fonte: Batelao.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
   },
   {
     "id": "https://g1.globo.com/politica/blog/andreia-sadi/post/2026/06/04/pf-e-pgr-devem-decidir-na-proxima-semana-futuro-da-nova-proposta-de-delacao-de-vorcaro.ghtml",
@@ -32240,7 +32271,6 @@ window.NEWS_DATA = [
     "summary": "STF dá 30 dias para União apresentar plano de retirada de garimpo ilegal em terra indígena Cinta Larga",
     "analysis": "",
     "body": [
-      "ac24horas publicou em 04 de jun de 2026: STF dá 30 dias para União apresentar plano de retirada de garimpo ilegal em terra indígena Cinta Larga.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -32499,77 +32529,6 @@ window.NEWS_DATA = [
     ],
     "alternateSlugs": [
       "ira-consegue-vistos-para-o-mexico-e-confirma-viagem-para-a-copa-do-mundo"
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/",
-    "slug": "estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa",
-    "title": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
-    "eyebrow": "Cotidiano",
-    "date": "04 de jun de 2026",
-    "publishedAt": "2026-06-04T12:19:50.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/",
-    "sourceLabel": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0,
-    "sourceCount": 1,
-    "lede": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
-    "summary": "Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 04 de jun de 2026: Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/IMG_7449.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/IMG_7449.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/06/IMG_7449.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "audioNarrationText": "Catálogo Catálogo Cruzeiro do Sul. Notícia de Cotidiano. Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá Um estudo realizado pelo Instituto de Pesquisa e Formação Indígena (Iepé), em parceria com o Distrito Sanitário Especial Indígena do Amapá e Norte do Pará (Dsei), identificou altos níveis de contaminação por mercúrio em comunidades indígenas de Oiapoque, no... Fonte: ac24horas.",
-    "audioNarrationTranscript": "Catálogo Catálogo Cruzeiro do Sul. Notícia de Cotidiano. Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá Um estudo realizado pelo Instituto de Pesquisa e Formação Indígena (Iepé), em parceria com o Distrito Sanitário Especial Indígena do Amapá e Norte do Pará (Dsei), identificou altos níveis de contaminação por mercúrio em comunidades indígenas de Oiapoque, no... Fonte: ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Estudo aponta alta contaminação por mercúrio entre indígenas de Oiapoque, no Amapá. Um estudo realizado pelo Instituto de Pesquisa e Formação Indígena (Iepé), em parceria com o Distrito Sanitário Especial Indígena do Amapá e Norte do Pará (Dsei), identificou altos níveis de contaminação por mercúrio em comunidades... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasVideoCaptionText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal"
-    },
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/06/04/estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa/"
-      }
-    ],
-    "alternateSlugs": [
-      "estudo-aponta-alta-contaminacao-por-mercurio-entre-indigenas-de-oiapoque-no-amapa"
     ]
   },
   {
