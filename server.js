@@ -6809,6 +6809,58 @@ function rememberStaticFileResponse(key, value) {
 function sendFile(req, res, filePath, options = {}) {
   const mimeType = mimeFor(filePath);
   const cacheControl = options.cacheControl || getStaticCacheControl(filePath);
+  const usesTemplateVars = mimeType.startsWith("text/html") && options.templateVars;
+  const isRangeMedia = /^(audio|video)\//i.test(mimeType) && !usesTemplateVars;
+  const rangeHeader = String(req.headers.range || "").trim();
+
+  if (isRangeMedia && rangeHeader) {
+    fs.stat(filePath, (err, stat) => {
+      if (err || !stat.isFile()) {
+        return sendText(res, 404, "Arquivo não encontrado.");
+      }
+
+      const size = stat.size;
+      const match = rangeHeader.match(/^bytes=(\d*)-(\d*)$/i);
+      if (!match || size <= 0) {
+        res.writeHead(416, {
+          "Content-Range": `bytes */${Math.max(0, size)}`,
+          "Accept-Ranges": "bytes",
+          "Cache-Control": cacheControl
+        });
+        return res.end();
+      }
+
+      let start = match[1] ? Number(match[1]) : 0;
+      let end = match[2] ? Number(match[2]) : size - 1;
+      if (!match[1] && match[2]) {
+        const suffixLength = Math.max(0, Number(match[2]));
+        start = Math.max(0, size - suffixLength);
+        end = size - 1;
+      }
+      if (!Number.isFinite(start) || !Number.isFinite(end) || start > end || start >= size) {
+        res.writeHead(416, {
+          "Content-Range": `bytes */${size}`,
+          "Accept-Ranges": "bytes",
+          "Cache-Control": cacheControl
+        });
+        return res.end();
+      }
+
+      end = Math.min(end, size - 1);
+      const contentLength = end - start + 1;
+      res.writeHead(206, {
+        "Content-Type": mimeType,
+        "Cache-Control": cacheControl,
+        "Accept-Ranges": "bytes",
+        "Content-Range": `bytes ${start}-${end}/${size}`,
+        "Content-Length": contentLength,
+        ...(options.headers || {}),
+      });
+      fs.createReadStream(filePath, { start, end }).pipe(res);
+    });
+    return;
+  }
+
   const responseCacheKey = [
     getFileCacheSignature(filePath),
     mimeType,
@@ -6830,7 +6882,7 @@ function sendFile(req, res, filePath, options = {}) {
     }
     let fileBuffer = buffer;
 
-    if (mimeType.startsWith("text/html") && options.templateVars) {
+    if (usesTemplateVars) {
       let html = buffer.toString("utf-8");
       Object.entries(options.templateVars).forEach(([key, value]) => {
         html = html.replace(new RegExp(`{{\\s*${key}\\s*}}`, "g"), String(value ?? ""));
@@ -6854,6 +6906,7 @@ function sendFile(req, res, filePath, options = {}) {
       "Content-Type": mimeType,
       "Cache-Control": cacheControl,
       "Content-Length": finalBuffer.length,
+      ...(isRangeMedia ? { "Accept-Ranges": "bytes" } : {}),
       ...(options.headers || {}),
     };
 
