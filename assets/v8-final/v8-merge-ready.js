@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v32";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v33";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -4797,6 +4797,7 @@
     ];
 
     const raylVoiceIntro = "Oi, eu sou a RAIane.";
+    const ASSISTANT_HELPER_VOICE_ENABLED = false;
     const spokenFaq = {
       anunciar: "Como anunciar no CZS.",
       noticia: "Enviar notícia para a redação.",
@@ -4813,6 +4814,7 @@
 
     let raylVoice = null;
     const pickRaylVoice = () => {
+      if (!ASSISTANT_HELPER_VOICE_ENABLED) return null;
       if (!("speechSynthesis" in window) || typeof window.speechSynthesis.getVoices !== "function") return null;
       const voices = window.speechSynthesis.getVoices();
       raylVoice = voices.find((voice) => /pt[-_]?br/i.test(voice.lang) && /francisca|thalita/i.test(voice.name))
@@ -4824,11 +4826,15 @@
         || null;
       return raylVoice;
     };
-    if ("speechSynthesis" in window && typeof window.speechSynthesis.addEventListener === "function") {
+    if (ASSISTANT_HELPER_VOICE_ENABLED && "speechSynthesis" in window && typeof window.speechSynthesis.addEventListener === "function") {
       window.speechSynthesis.addEventListener("voiceschanged", pickRaylVoice);
     }
     const speakRayl = (text) => {
       try {
+        if (!ASSISTANT_HELPER_VOICE_ENABLED) {
+          if ("speechSynthesis" in window) window.speechSynthesis.cancel?.();
+          return;
+        }
         if (!("speechSynthesis" in window) || typeof window.SpeechSynthesisUtterance !== "function") return;
         const clean = cleanPublicAiText(text || "", "")
           .replace(/https?:\/\/\S+/g, "")

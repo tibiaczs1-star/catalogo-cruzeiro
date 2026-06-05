@@ -9019,7 +9019,59 @@ body.v8-merge-ready #cinematicLoader .v8-loader-video-scene::after {
 }
 
 body.v8-merge-ready #cinematicLoader .v8-loader-video-mask {
-  display: none !important;
+  position: absolute !important;
+  top: auto !important;
+  right: -18px !important;
+  bottom: -18px !important;
+  display: block !important;
+  z-index: 4 !important;
+  width: clamp(108px, 16vw, 138px) !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(circle at 34% 28%, #ffffff 0 24%, #ffffff 25% 58%, #f2fbff 59% 76%, #ffd400 77% 100%) !important;
+  border: 3px solid #ffffff !important;
+  box-shadow:
+    0 0 0 3px rgba(255,212,0,.42),
+    0 0 24px rgba(255,255,255,.95),
+    0 0 42px rgba(255,212,0,.66),
+    inset 0 0 14px rgba(0,48,110,.14) !important;
+  opacity: 1 !important;
+  transform: translateZ(0) !important;
+  animation: v8IntroCornerSeal 1.9s ease-in-out infinite alternate !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-loader-video-mask::before,
+body.v8-merge-ready #cinematicLoader .v8-loader-video-mask::after {
+  content: "" !important;
+  position: absolute !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-loader-video-mask::before {
+  inset: 18% !important;
+  background: radial-gradient(circle, rgba(255,255,255,1), rgba(255,255,255,.28) 62%, transparent 72%) !important;
+  filter: blur(.2px) !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-loader-video-mask::after {
+  inset: -10px !important;
+  background: conic-gradient(from 25deg, transparent, rgba(255,255,255,.72), transparent, rgba(255,212,0,.62), transparent) !important;
+  opacity: .68 !important;
+  filter: blur(8px) !important;
+}
+
+@keyframes v8IntroCornerSeal {
+  from {
+    filter: brightness(1) saturate(1);
+    transform: scale(.98);
+  }
+  to {
+    filter: brightness(1.15) saturate(1.08);
+    transform: scale(1.035);
+  }
 }
 
 body.v8-merge-ready #cinematicLoader .v8-loader-video {
