@@ -8979,7 +8979,9 @@ body.v8-merge-ready #cinematicLoader .v8-loader-video-scene {
   display: block !important;
   width: min(380px, 62vw) !important;
   max-width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
   height: 0 !important;
+  min-height: 0 !important;
   margin: 0 auto !important;
   opacity: 0 !important;
   overflow: hidden !important;
@@ -9012,7 +9014,9 @@ body.v8-merge-ready #cinematicLoader .v8-loader-video-scene::before {
 }
 
 body.v8-merge-ready #cinematicLoader .v8-loader-video {
-  position: relative !important;
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
   z-index: 1 !important;
   width: 100% !important;
   height: 100% !important;
@@ -9059,7 +9063,9 @@ body.v8-merge-ready #cinematicLoader[data-stage="video"] .czs-cross {
 }
 
 body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-video-scene {
-  height: min(380px, 48vh, 62vw) !important;
+  width: min(430px, 64vw, 48vh) !important;
+  height: auto !important;
+  min-height: min(430px, 64vw, 48vh) !important;
   margin: 8px auto 14px !important;
   opacity: 1 !important;
   transform: translateY(0) scale(1) !important;
@@ -9102,7 +9108,8 @@ body.v8-merge-ready #cinematicLoader[data-stage="video"] .loader-track {
 
   body.v8-merge-ready #cinematicLoader[data-stage="video"] .v8-loader-video-scene {
     width: min(300px, 78vw) !important;
-    height: min(300px, 42vh, 78vw) !important;
+    height: auto !important;
+    min-height: min(300px, 42vh, 78vw) !important;
   }
 }
 
