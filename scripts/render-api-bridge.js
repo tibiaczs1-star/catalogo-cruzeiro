@@ -134,7 +134,7 @@ async function listDeploys(serviceId) {
 async function createDeploy(serviceId, clearCache = false) {
   return request(`/services/${encodeURIComponent(serviceId)}/deploys`, {
     method: "POST",
-    body: JSON.stringify({ clearCache: Boolean(clearCache) })
+    body: JSON.stringify({ clearCache: clearCache ? "clear" : "do_not_clear" })
   });
 }
 
