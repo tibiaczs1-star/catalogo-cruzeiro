@@ -7,7 +7,8 @@
   const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-20260605.mp4";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v12";
+  const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v14";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -810,7 +811,7 @@
       videoScene.className = "v8-loader-video-scene";
       videoScene.setAttribute("aria-label", "Vídeo de abertura do Catálogo CZS");
       videoScene.innerHTML = `
-        <video class="v8-loader-video" src="${INTRO_VIDEO}" muted playsinline autoplay preload="auto"></video>
+        <video class="v8-loader-video" src="${INTRO_VIDEO}" poster="${INTRO_POSTER}" muted playsinline webkit-playsinline autoplay preload="auto"></video>
         <span class="v8-loader-video-label">carregando o jornal do vale</span>`;
       const progressTrack = loaderCore.querySelector(".loader-track");
       loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
@@ -3915,6 +3916,7 @@
     const status = $(".v8-loader-status", loader);
     const introVideo = $(".v8-loader-video", loader);
     let introVideoStarted = false;
+    let introMediaAttempting = false;
     let introMediaStartedAt = 0;
     let introMediaEnded = false;
     let introMediaRetryArmed = false;
@@ -3945,6 +3947,7 @@
 
     const markIntroMediaStarted = () => {
       introVideoStarted = true;
+      introMediaAttempting = false;
       introMediaStartedAt = performance.now();
       introMediaEnded = false;
       clearIntroMediaRetry();
@@ -3956,33 +3959,79 @@
     };
 
     const startIntroMedia = () => {
-      if (!introVideo || introVideoStarted) return;
-      try {
-        introVideo.currentTime = 0;
-        introVideo.muted = true;
-        introVideo.volume = 1;
-        introVideo.loop = false;
-        introVideo.load?.();
-        const attempt = introVideo.play?.();
-        if (attempt?.catch) {
-          attempt
-            .then(() => {
-              introVideo.volume = 1;
-              introVideo.muted = false;
-              markIntroMediaStarted();
-            })
-            .catch(() => {
-              introVideoStarted = false;
-              armIntroMediaRetry();
-            });
-        } else {
-          introVideo.volume = 1;
-          introVideo.muted = false;
-          markIntroMediaStarted();
-        }
-      } catch (_) {
+      if (!introVideo || introVideoStarted || introMediaAttempting) return;
+      introMediaAttempting = true;
+      let playIssued = false;
+      const failMedia = () => {
+        introMediaAttempting = false;
         introVideoStarted = false;
         armIntroMediaRetry();
+      };
+      const playMutedVisual = () => {
+        if (playIssued || introVideoStarted) return;
+        playIssued = true;
+        try {
+          introVideo.muted = true;
+          introVideo.volume = 1;
+          const mutedAttempt = introVideo.play?.();
+          if (mutedAttempt?.catch) {
+            mutedAttempt
+              .then(() => {
+                markIntroMediaStarted();
+                window.setTimeout(() => {
+                  try {
+                    introVideo.volume = 1;
+                    introVideo.muted = false;
+                  } catch (_) {}
+                }, 180);
+              })
+              .catch(failMedia);
+          } else {
+            markIntroMediaStarted();
+          }
+        } catch (_) {
+          failMedia();
+        }
+      };
+      const playAudible = () => {
+        if (playIssued || introVideoStarted) return;
+        playIssued = true;
+        try {
+          introVideo.muted = false;
+          introVideo.volume = 1;
+          const audibleAttempt = introVideo.play?.();
+          if (audibleAttempt?.catch) {
+            audibleAttempt
+              .then(() => markIntroMediaStarted())
+              .catch(() => {
+                playIssued = false;
+                playMutedVisual();
+              });
+          } else {
+            markIntroMediaStarted();
+          }
+        } catch (_) {
+          playIssued = false;
+          playMutedVisual();
+        }
+      };
+      try {
+        if (introVideo.currentTime > 0.05 || introVideo.ended) introVideo.currentTime = 0;
+        introVideo.volume = 1;
+        introVideo.loop = false;
+        introVideo.playsInline = true;
+        introVideo.setAttribute("playsinline", "");
+        introVideo.setAttribute("webkit-playsinline", "");
+        if (introVideo.readyState < 2) {
+          introVideo.addEventListener("canplay", playAudible, { once: true });
+          introVideo.addEventListener("loadeddata", playAudible, { once: true });
+          introVideo.load?.();
+          window.setTimeout(playAudible, 700);
+          return;
+        }
+        playAudible();
+      } catch (_) {
+        failMedia();
       }
     };
 
@@ -3991,6 +4040,9 @@
       introMediaPrimed = true;
       try {
         introVideo.preload = "auto";
+        introVideo.playsInline = true;
+        introVideo.setAttribute("playsinline", "");
+        introVideo.setAttribute("webkit-playsinline", "");
         introVideo.load?.();
       } catch (_) {}
     };
@@ -4020,7 +4072,7 @@
       else if (p < 38) loader.dataset.stage = "collision";
       else if (p < 100) loader.dataset.stage = "video";
       else loader.dataset.stage = "ready";
-      if (introVideo && p >= 38 && !introVideoStarted) startIntroMedia();
+      if (introVideo && p >= 24 && !introVideoStarted) startIntroMedia();
     };
 
     const finish = () => {
