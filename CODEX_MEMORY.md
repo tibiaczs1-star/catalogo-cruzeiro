@@ -30,6 +30,10 @@ Atualizado: 2026-06-06
 - Validacao local v56 em janela 1432px: `.page` com `x=48`, `maxWidth=1320px`, sem overflow; chatbot com `faqCount=6`, links WhatsApp visiveis e animacao ativa.
 - Complemento v58: autoridade antiga `--v8-wide-wrap` reduzia/expandia a home de forma conflitante; consolidado para 1320px com `.page`/`.tech-sky > .page` centralizados e padding lateral zerado no shell principal.
 - Hero responsiva validada localmente em 1440, 1180, 900 e 390px com CSS `20260606-v8-hero-centered-v58`, sem overflow horizontal; em 900px a `.v8-live-hero` passa a uma coluna para evitar espremimento.
+- Correção posterior v59 restaurou o canvas editorial amplo para 1920px após o limite de 1320px deixar o portal pequeno em monitores largos.
+- Rodada v60 ampliou o teto do portal em 20%, de 1920px para 2304px, mantendo o limite da janela e a centralização.
+- A camada pública de Escritórios/Agentes ficou temporariamente offline: oito vitrines visuais com backgrounds e personagens preservados, todas marcadas `Em breve`, renderizadas como `article` sem `href` ou comando público.
+- Variações adicionadas ao Cheffe Call: Auditório, Reunião e Palco Sul. IDs diretos: `escritorio-raiane`, `escritorio-nerd`, `cheffe-call-auditorio`, `cheffe-call-reuniao`, `cheffe-call-palco-sul`, `escritorio-pubpaid`, `escritorio-comunidade`, `escritorio-visual`.
 
 ## Rodada Atual - 20260605-instagram-feed-cycle-79-100-final
 

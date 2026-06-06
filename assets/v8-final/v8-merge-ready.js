@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260606-v8-wide-hero-repair-v59";
+  const V8_BOOT_VERSION = "20260606-v8-offices-coming-soon-v60";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -2157,7 +2157,8 @@
       <div class="panel pad v8-offices-workspace v8-agent-gateway" id="agentesAutonomos">
         <div class="section-kicker">Agentes autônomos</div>
         <h2>Escritórios dos agentes</h2>
-        <p class="v8-cheffe-lead">Escolha um escritório para atendimento, jogos, comunidade, galeria ou organização editorial do CZS.</p>
+        <p class="v8-cheffe-lead">Ambientes em preparação. Por enquanto, conheça os escritórios, personagens e variações visuais do Cheffe Call.</p>
+        <div class="v8-offices-coming-banner" role="status"><b>Em breve</b><span>Os escritórios ainda não recebem comandos públicos.</span></div>
         <div class="v8-agent-stage" aria-label="Escritórios visuais dos agentes autônomos">
           ${agents.map(agentGatewayCard).join("")}
         </div>
@@ -2172,6 +2173,7 @@
   function getAutonomousAgentPreviews() {
     return [
       {
+        id: "escritorio-raiane",
         title: "Escritório RAIane",
         label: "Atendimento",
         text: "guia o leitor para notícia, serviço, mapa do site e ajuda rápida.",
@@ -2180,6 +2182,7 @@
         href: "#assistantInline",
       },
       {
+        id: "escritorio-nerd",
         title: "Escritório Nerd",
         label: "Cheffe Call",
         text: "mostra a sala dos agentes, tecnologia, revisão e organização do projeto.",
@@ -2188,6 +2191,34 @@
         href: "#infosGerais",
       },
       {
+        id: "cheffe-call-auditorio",
+        title: "Cheffe Call Auditório",
+        label: "Variação",
+        text: "variação ampla com 200 lugares para reuniões e operações coordenadas.",
+        img: "assets/fusion-avatar-hologram-optimized.webp",
+        bg: "/assets/cheffe-call-200-seats-ai.png",
+        href: "#infosGerais",
+      },
+      {
+        id: "cheffe-call-reuniao",
+        title: "Cheffe Call Reunião",
+        label: "Variação",
+        text: "ambiente visual para briefing, revisão coletiva e decisões editoriais.",
+        img: "assets/fusion-avatar-hologram-optimized.webp",
+        bg: "/assets/cheffe-call-meeting-theater-ai.png",
+        href: "#infosGerais",
+      },
+      {
+        id: "cheffe-call-palco-sul",
+        title: "Cheffe Call Palco Sul",
+        label: "Variação",
+        text: "cenário de apresentação para missões, relatórios e acompanhamento dos agentes.",
+        img: "assets/fusion-avatar-hologram-optimized.webp",
+        bg: "/assets/cheffe-call-south-stage-theater-ai.png",
+        href: "#infosGerais",
+      },
+      {
+        id: "escritorio-pubpaid",
         title: "Escritório PubPaid",
         label: "Jogos",
         text: "abre PubPaid, sinuca, lobby, torneios e área jovem.",
@@ -2196,6 +2227,7 @@
         href: "pubpaid.html",
       },
       {
+        id: "escritorio-comunidade",
         title: "Escritório Comunidade",
         label: "Bairros",
         text: "recebe pauta de bairro, fotos, relatos e pedidos verificáveis.",
@@ -2204,6 +2236,7 @@
         href: "#comunidade",
       },
       {
+        id: "escritorio-visual",
         title: "Escritório Visual",
         label: "Galeria",
         text: "leva para fotos premium, TV CZS e registros do Vale do Juruá.",
@@ -2216,12 +2249,13 @@
 
   function agentGatewayCard(agent) {
     return `
-      <a class="v8-agent-public-card" href="${esc(agent.href)}" style="--agent-bg:url('${esc(agent.bg)}')">
+      <article class="v8-agent-public-card is-coming-soon" id="${esc(agent.id)}" aria-disabled="true" style="--agent-bg:url('${esc(agent.bg)}')">
         <span class="v8-agent-label">${esc(agent.label || "Agente")}</span>
+        <span class="v8-agent-coming">Em breve</span>
         <span class="v8-agent-sprite"><img src="${esc(agent.img)}" alt="${esc(agent.title)}" loading="lazy" decoding="async" fetchpriority="low"></span>
         <b>${esc(agent.title)}</b>
         <p>${esc(agent.text)}</p>
-      </a>`;
+      </article>`;
   }
 
   function commandCard(story) {

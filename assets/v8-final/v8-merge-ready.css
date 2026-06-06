@@ -6120,7 +6120,7 @@ body.v8-merge-ready .v8-page-turn > b {
 
 /* V7 correction: show RAIane popup clearly and widen the editorial canvas. */
 body.v8-merge-ready {
-  --v8-wide-wrap: min(1920px, calc(100vw - 28px));
+  --v8-wide-wrap: min(2304px, calc(100vw - 28px));
 }
 
 body.v8-merge-ready .page,
@@ -8588,6 +8588,66 @@ body.v8-merge-ready #agentesAutonomos .v8-agent-public-card p {
   opacity: .9 !important;
 }
 
+body.v8-merge-ready #agentesAutonomos .v8-offices-coming-banner {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 12px 0 18px !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(255, 208, 0, .62) !important;
+  border-left: 6px solid #ffcc00 !important;
+  background: #fff9d9 !important;
+  color: #071b49 !important;
+}
+
+body.v8-merge-ready #agentesAutonomos .v8-offices-coming-banner b {
+  font: 950 12px/1 var(--v8-robot) !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready #agentesAutonomos .v8-offices-coming-banner span {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+body.v8-merge-ready #agentesAutonomos .v8-agent-public-card.is-coming-soon {
+  cursor: default !important;
+  user-select: none !important;
+}
+
+body.v8-merge-ready #agentesAutonomos .v8-agent-public-card.is-coming-soon:hover {
+  transform: none !important;
+  filter: none !important;
+}
+
+body.v8-merge-ready #agentesAutonomos .v8-agent-coming {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  z-index: 4 !important;
+  display: inline-flex !important;
+  padding: 6px 9px !important;
+  border: 1px solid rgba(255, 255, 255, .54) !important;
+  background: rgba(2, 8, 23, .82) !important;
+  color: #ffffff !important;
+  font: 950 10px/1 var(--v8-robot) !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+body.v8-merge-ready #agentesAutonomos .v8-agent-public-card[id] {
+  scroll-margin-top: 130px !important;
+}
+
+@media (max-width: 620px) {
+  body.v8-merge-ready #agentesAutonomos .v8-offices-coming-banner {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+}
+
 body.v8-merge-ready .service-card.is-empty {
   opacity: .72 !important;
   background: #f8fafc !important;
@@ -10976,7 +11036,7 @@ body.v8-merge-ready .assistant-card.aylla-card .aylla-log {
 
 /* 20260606 v59: wide editorial canvas with a centered responsive hero. */
 body.v8-merge-ready {
-  --v8-page-max: 1920px;
+  --v8-page-max: 2304px;
   --v8-page-gutter: 14px;
 }
 
