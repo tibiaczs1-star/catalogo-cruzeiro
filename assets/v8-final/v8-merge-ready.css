@@ -6120,7 +6120,7 @@ body.v8-merge-ready .v8-page-turn > b {
 
 /* V7 correction: show RAIane popup clearly and widen the editorial canvas. */
 body.v8-merge-ready {
-  --v8-wide-wrap: min(1320px, calc(100vw - 48px));
+  --v8-wide-wrap: min(1920px, calc(100vw - 28px));
 }
 
 body.v8-merge-ready .page,
@@ -10974,10 +10974,10 @@ body.v8-merge-ready .assistant-card.aylla-card .aylla-log {
   }
 }
 
-/* 20260606 v57: single source of truth for centered homepage and responsive hero. */
+/* 20260606 v59: wide editorial canvas with a centered responsive hero. */
 body.v8-merge-ready {
-  --v8-page-max: 1320px;
-  --v8-page-gutter: clamp(16px, 3vw, 36px);
+  --v8-page-max: 1920px;
+  --v8-page-gutter: 14px;
 }
 
 body.v8-merge-ready .page,
