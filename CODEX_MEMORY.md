@@ -1,6 +1,74 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-06-05
+Atualizado: 2026-06-06
+
+## Rodada Atual - 20260606-facebook-client-acquisition-routine
+
+- Rotina dedicada ao Facebook iniciada para captacao de clientes do Catálogo CZS/CZS: criativos premium, perfil primeiro, depois compartilhamento em grupos validados do Vale do Jurua/Cruzeiro do Sul.
+- Pacote visual/copy navegavel criado em `.codex-temp/facebook-client-acquisition-20260605/index.html`, com criativos em `.codex-temp/facebook-client-acquisition-20260605/creatives/` e legendas `.txt`.
+- Post 1 confirmado no perfil: `https://www.facebook.com/photo/?fbid=982961928049864&set=a.123931713952894`; compartilhado e verificado no grupo `Bazar do Desapego` pelo permalink `https://www.facebook.com/groups/2024957284396145/?multi_permalinks=5370423663182807`.
+- Post 2 confirmado no perfil: `https://www.facebook.com/photo/?fbid=983076738038383&set=a.123931713952894`, com criativo `publis-vitrine-facebook-feed.jpg` e legenda comercial de publis/servicos.
+- Tentativa de compartilhar o post 2 em `VENDA TUDO CRUZEIRO DO SUL` foi enviada pelo compositor, mas a verificacao em `my_pending_content` e `my_posted_content` nao encontrou texto/ID/permalink; registrar como tentativa sem link confirmado, nao como publicado.
+- Parte de convites concluida: post de convite confirmado no perfil com Instagram, grupo do WhatsApp, site e contato comercial em `https://www.facebook.com/photo/?fbid=983368308009226&set=a.123931713952894`.
+- Convite compartilhado e verificado em `Publicados` no grupo `JURUÁ NEGÓCIOS E VENDAS TUDO`: `https://www.facebook.com/groups/471993862967796/?multi_permalinks=3578383208995497`.
+- Excecao autorizada pelo usuario em 2026-06-06: no Facebook, pode quebrar a separacao anterior e enviar convite/comercial tambem para grupos de venda e grupos de noticia/midia, mantendo bloqueio para Messenger/conversas individuais.
+- Apos a excecao, convite tambem foi compartilhado e verificado em `Publicados` no grupo `MÍDIA DIGITAL`: `https://www.facebook.com/groups/1937056146594911/?multi_permalinks=4008842449416260`.
+- Marketplace foi checado em `https://www.facebook.com/marketplace/create/`; a UI apresentou apenas `Item para venda`, `Veículo` e `Imóvel`, sem categoria de servico/convite adequada. Nao publicar servico como item fisico sem instrucao/preco/categoria aceitavel.
+- Lote pedido de 30+ grupos concluido em 2026-06-06: convite enviado/efetivado em 31 destinos do Facebook, incluindo grupos de Cruzeiro do Sul, CZS, Juruá, Mâncio Lima, Feijó, Rodrigues Alves, Porto Walter e Marechal Thaumaturgo. Contagem operacional: 2 verificados antes, 24 `submitted` nesta rodada e 5 `submitted_timeout_unverified` do bloco que estourou tempo apos submissao; 9 destinos falharam por UI/compositor/busca.
+- Aprendizado operacional: postar imagem JPG no perfil via compositor, anexar imagem primeiro, colar legenda, clicar `Avancar`, depois clicar o `Postar` real do dialogo; em seguida usar menu `Compartilhar` -> `Grupo`. Evitar Messenger/chats individuais e Marketplace para servicos sem preco/categoria adequada.
+
+## Rodada Atual - 20260606-v8-raiane-motion-compact-v54
+
+- Cache-bust atualizado para `20260606-v8-raiane-motion-compact-v54` em `index.html` e `assets/v8-final/v8-merge-ready.js`.
+- Chatbot RAIane ficou mais enxuto: FAQ publico reduzido de 11 para 6 escolhas (`Anunciar`, `Enviar pauta`, `Arquivo`, `Serviços`, `PubPaid`, `Humano`) e atalhos rapidos reduzidos para 3.
+- Respostas fixas do chatbot foram encurtadas para orientacao direta e sem audio; `ASSISTANT_HELPER_VOICE_ENABLED` segue desligado.
+- CSS final adicionou palco com movimento real: avatar desloca/oscila por pose, sombra viaja e balao flutua, preservando o minimizado como janela de rosto.
+- Validacao local em `http://localhost:3001/?skipIntro=1&qa=raiane-v54&fresh=20260606-v54`: desktop com `faqCount=6`, `actionCount=3`, `avatarAnimation=ayllaGuideStep`, `cardWidth=300px`, sem overflow; mobile 390px com `cardWidth=292px`, FAQ em 2 colunas e sem overflow.
+- Evidencia local: `.codex-temp/raiane-v54-mobile.png`.
+- Complemento v56: cache-bust atualizado para `20260606-v8-layout-whatsapp-v56`; a pagina agora limita o miolo a 1320px e centraliza em janela comum, corrigindo o desalinhamento visto fora da tela cheia.
+- O fluxo `Humano` da RAIane passou a mostrar link visivel com numero: `WhatsApp CZS: (68) 9602-6649` e `Chamar no WhatsApp: (68) 9602-6649`, ambos apontando para `wa.me/556896026649`.
+- Validacao local v56 em janela 1432px: `.page` com `x=48`, `maxWidth=1320px`, sem overflow; chatbot com `faqCount=6`, links WhatsApp visiveis e animacao ativa.
+- Complemento v58: autoridade antiga `--v8-wide-wrap` reduzia/expandia a home de forma conflitante; consolidado para 1320px com `.page`/`.tech-sky > .page` centralizados e padding lateral zerado no shell principal.
+- Hero responsiva validada localmente em 1440, 1180, 900 e 390px com CSS `20260606-v8-hero-centered-v58`, sem overflow horizontal; em 900px a `.v8-live-hero` passa a uma coluna para evitar espremimento.
+
+## Rodada Atual - 20260605-instagram-feed-cycle-79-100-final
+
+- Ciclo pendente do feed Instagram `@catalogo_czs_` fechado: itens 81-100 publicados; itens 79-80 ja estavam publicados antes desta retomada.
+- Contador confirmado subindo de 325 para 345 posts no perfil.
+- Cards regenerados/corrigidos para area segura: logo pequena dentro do hero, sem placa branca, evitando topo/cantos que o Instagram corta ou cobre.
+- Perfil limpo para exibir apenas `www.catalogo-cruzeiro-web.onrender.com` como link principal.
+- Fluxo final: JPG 4:5 no Feed, ajuste de proporcao no compositor, audio `Breaking News` quando aceito, legenda com resumo e `Link original`, entrada por ADBKeyboard/base64 UTF-8.
+- Script de apoio criado em `.codex-temp/instagram-feed-run-20260604/delivery/publish-feed-safe.ps1`; rodar em blocos curtos e conferir contador.
+- Observacao operacional: UIAutomator pode falhar com `null root`; nesses casos conferir screenshot do perfil antes de repetir, pois os itens 95 e 98 publicaram mesmo com falha de leitura XML.
+
+## Rodada Atual - 20260605-v8-three-news-actions-v34
+
+- Correcao solicitada: cards de materia agora exibem somente tres acoes publicas: `Compartilhar`, `Ler` e `Informar erro`.
+- Removido o botao `Salvar`, a persistencia local `SAVED_STORIES_KEY`, o handler `.saveBtn` e a regra CSS `.saveBtn.is-saved`.
+- Removida a injecao automatica do mini botao `Revisao` em `.news-card`; revisao editorial continua restrita aos fluxos apropriados do leitor/Cheffe.
+- Cache-bust atualizado para `20260605-v8-public-corrective-pass-v34`.
+- Validacao local em `http://127.0.0.1:3001/?skipIntro=1`: Chromium contou 476 cards, `saveButtons=0`, `reviewMiniButtons=0`, sem texto Salvar/Salvo, `wrongCount=[]` e `wrongSet=[]`.
+- Deploy: commit `09fdead4` enviado para `origin/main`; Render `catalogo-cruzeiro-web` ficou `live`; online serviu v34 e a checagem DOM online repetiu 476 cards com exatamente as tres acoes.
+
+## Rodada Atual - 20260605-gemma4-local-ai-support
+
+- `gemma4:12b` foi confirmado/atualizado no Ollama (`ollama pull` OK; `ollama show` indica Gemma4 11.9B, contexto 262144, tools/vision/audio).
+- `.env.local` agora aponta o CZS local para `CZS_OLLAMA_MODEL=gemma4:12b` e `CZS_OLLAMA_TIMEOUT_MS=90000`; `.env.example` e `server.js` acompanham o teto de 90s.
+- `server.js` reduziu o contexto enviado pela RAIane ao Ollama para evitar timeout com Gemma4; smokes temporarios mostraram RAIane, Escritórios e Cheffe Call com `provider=ollama`, `status=online`, `model=gemma4:12b`.
+- Hermes recebeu `gemma4:12b` nos configs `C:\Users\junio\AppData\Local\hermes\config.yaml` e `C:\Users\junio\.hermes\config.yaml` com backups `*.backup-gemma4-20260605-121238.yaml`; o Hermes principal continua `openai-codex/gpt-5.5` e Gemma entra como worker/local route.
+- `scripts/hermes-continuity-router.js` agora testa `gemma4-12b`; relatório local marcou Gemma4 OK em ~20.5s, atrás de Llama/Qwen em velocidade mas saudável como apoio pesado.
+- RayX passou a preferir `gemma4:12b` quando disponível e chama Ollama com `think:false`/limite de resposta; smoke `rayx mission` retornou resposta local Ollama com Gemma4.
+- Codex App foi configurado pelo `ollama launch codex-app --model gemma4:12b --config -y`; para restaurar o perfil normal, usar `ollama launch codex-app --restore`.
+- OpenCode e Qwen não responderam bem: OpenCode não reconheceu provider Ollama direto e via `ollama launch opencode` estourou timeout; Qwen via endpoint OpenAI-compatible estourou 240s. Codex CLI foi atualizado para 0.137.0, mas com Gemma4 local saiu sem resposta visível no smoke.
+
+## Rodada Atual - 20260605-v8-helper-voice-watermark-v33
+
+- Correcao pontual pos-deploy: cache-bust atualizado para `20260605-v8-public-corrective-pass-v33` em `index.html`.
+- Audio do chatbot/helper RAIane desligado no front com `ASSISTANT_HELPER_VOICE_ENABLED = false`; chamadas de voz agora cancelam/retornam sem acionar `speechSynthesis.speak`.
+- Intro manteve video/audio de boas-vindas; apenas recebeu selo circular branco/dourado solido no canto inferior direito para cobrir a marca "Dola AI" sem remover a logo do CZS nem recortar o video.
+- Validacao local em `http://127.0.0.1:3001/?forceIntro=1`: video pronto 480x480, `muted=false`, `volume=1`, `audibleProof=true`, loader encerrando, logo visivel e sem erros de console.
+- Deploy: commit `7e262a8a` enviado para `origin/main`; Render `catalogo-cruzeiro-web` ficou `live`; online respondeu HTML/JS/CSS v33, helper voice off e audit online confirmou intro com audio audivel e sem erros de console.
+- URL online de prova: `https://catalogo-cruzeiro-web.onrender.com/?forceIntro=1`.
 
 ## Rodada Atual - 20260605-v8-final-speed-hydration-v32
 
@@ -11,6 +79,7 @@ Atualizado: 2026-06-05
 - Intro validada localmente em Chromium em `http://127.0.0.1:3001/?forceIntro=1`: botão `Clique para iniciar`, vídeo 480x480, `muted=false`, `volume=1`, `audibleProof=true`, áudio decodificado e loader encerrando com logo visível.
 - Evidências locais salvas em `output/v31-final-audit/`: `home-skip-intro.png`, `popup-raiane.png`, `intro-ready.png`, `intro-playing.png`, `after-intro.png`.
 - Validações: `node --check assets/v8-final/v8-merge-ready.js`, `node --check script.js`, `git diff --check` nos arquivos tocados, `npm run review:team`, `npm run perf:budget`, `npm run codex:health`.
+- Deploy: commit `b560bd30` enviado para `origin/main`; Render `catalogo-cruzeiro-web` ficou `live` e o online respondeu com HTML v32, JS v32 e MP4 da intro HTTP 200. Auditoria online clicou a intro com `audibleProof=true` e sem erros de console.
 - Observação real de performance: `perf:budget` segue OK em modo não estrito, mas `index.html` continua acima do teto antigo; refatorar HTML inicial para arquivo menor fica como etapa futura, sem bloquear o deploy desta rodada.
 - Próxima etapa de IA online: Render só acessará a IA do PC se houver túnel/host seguro para o Ollama/local runner; `127.0.0.1` no Render continua sendo o container do Render.
 
@@ -916,3 +985,32 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Relato comunitário virou entrada ao vivo com radar do bairro, backend e fila para Cheffe Call/WhatsApp.
 - Validação local em `http://127.0.0.1:3001/?skipIntro=1`: CDP OK para `#feed`, `#videos`, `#galeriaFotos`, `#areaJovem`, `#comunidade`, `#servicos`; sem exceção JS e sem 404 de assets V8.
 - `npm run review:team` passou; guard PubPaid OK; achados do auditor ficaram fora dos arquivos tocados. `git diff --check` global ainda acusa whitespace antigo em `data/editorial-health-report.md`, fora do escopo.
+
+## V8 Catálogo CZS - 2026-06-05 otimização mobile v43
+
+- Commit `5e4328c` publicado no Render com a versão `20260605-v8-public-corrective-pass-v43`.
+- Carga fria mobile de recursos caiu de cerca de 19,47 MB para 3,56 MB ao converter imagens pesadas para WebP, adiar mídia abaixo da dobra e impedir captura redundante do vídeo local de 5 MB.
+- Home validada em 390 x 844 e 1440 x 900, sem estouro horizontal, sem erro de console e com as três ações públicas: Compartilhar, Ler e Informar erro.
+- Intro online comprovada: vídeo 480 x 480 pronto, reprodução avançando sem mudo no volume 1, home oculta durante a vinheta e liberada somente após a transição.
+- Relatório local: `.codex-temp/mobile-audit/relatorio-final-v43.md`.
+
+## V8 Catálogo CZS - 2026-06-06 limpeza responsiva v47
+
+- Versão local atualizada para `20260606-v8-final-responsive-clean-v47` em `index.html` e `assets/v8-final/v8-merge-ready.js`.
+- O endpoint pesado `/api/news/archive?limit=1000` foi adiado para depois da primeira pintura; mobile frio local caiu para 30 recursos e cerca de 1,28 MB antes da sincronização do arquivo completo.
+- Correções responsivas: hero 320px sem corte nos botões, cards da pesquisa com altura real, newsletter em uma coluna no mobile e botões com quebra segura.
+- Limpeza comprovada: removido apenas `assets/brand/catalogo-czs-logo-offline-horizontal-20260603.png`, sem referencia no projeto; `tools/`, `vendor/`, venvs e evidencias foram preservados.
+- Validação local: Playwright em 320/375/390/430/768/1024/1440 sem overflow horizontal e sem console error; intro `?forceIntro=1` provou vídeo 480x480 tocando com `muted=false`, `volume=1` e release para a home.
+- Relatório local: `.codex-temp/final-responsive-audit-20260606/final-report-v47.md`.
+
+## V8 Catálogo CZS - 2026-06-06 feed dinâmico v52
+
+- Versão local atualizada para `20260606-v8-dynamic-feed-video-themes-v52` em `index.html` e `assets/v8-final/v8-merge-ready.js`.
+- Feed contínuo ganhou prioridade editorial dinâmica conforme regra CZS: impacto, urgência, proximidade, interesse e curiosidade; a ordenação agora balanceia temas para não deixar crime/segurança sequestrar o bloco inteiro.
+- Cards do feed usam tamanhos calculados (`wide`, `video`, `feature-video`, `compact`) com `grid-auto-flow: dense`, reduzindo espaços mortos e limitando altura visual; licitações deixam de usar imagem/blur inútil e mostram lista de processo, órgão, publicado e objeto.
+- Vídeos reais captados entram no feed como cards inline mudos e em loop; vídeos de acervo entram como TV CZS identificada. A rail da hero também recebe um vídeo relevante sem tomar a manchete principal.
+- Cores semânticas aplicadas: segurança/crime preto, urgência vermelho, oportunidades/licitação amarelo, ambiente verde, local/Cruzeiro do Sul azul, saúde turquesa, cultura roxo e vídeo azul TV CZS.
+- Validação local em `http://127.0.0.1:3001/?skipIntro=1&qa=dynamic-v52`: desktop sem overflow, console sem erros, 71 cards carregados no feed completo, 7 vídeos distribuídos, ações públicas preservadas como `Compartilhar`, `Ler`, `Informar erro`.
+- Validação mobile 390 x 844: sem overflow horizontal, cards com largura máxima 355px, vídeos no feed e botões públicos corretos.
+- `npm run review:team` rodou: guard PubPaid OK; auditor geral ainda lista pendências antigas em `tools/creative-suite/...` e venvs, fora dos arquivos tocados nesta atualização.
+- Microajuste v53: cards ganharam faixa lateral, halo/contorno e fundo tonal mais forte por tema; validação local em desktop e mobile manteve console sem erros, sem overflow e ações públicas corretas.

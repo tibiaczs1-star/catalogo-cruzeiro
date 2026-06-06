@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260606-v8-final-responsive-clean-v47";
+  const V8_BOOT_VERSION = "20260606-v8-hero-centered-v58";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -523,6 +523,80 @@
     return storyImageMarkup(story, loading);
   }
 
+  function inlineVideoMarkup({ src, poster = "", title = "Vídeo CZS", storySlug = "", fallbackPoster = "", capturePoster = true } = {}) {
+    if (!src) return "";
+    const posterAttr = poster ? ` poster="${esc(poster)}"` : "";
+    const captureAttrs = capturePoster
+      ? ` data-v8-video-poster-src="${esc(src)}" data-v8-video-fallback="${esc(fallbackPoster || poster)}"`
+      : "";
+    return `<video muted playsinline loop preload="metadata"${posterAttr} data-v8-inline-video="${esc(storySlug || src)}"${captureAttrs}>
+      <source src="${esc(src)}" type="${esc(videoTypeFor(src))}">
+      Vídeo indisponível neste navegador.
+    </video>
+    <span class="v8-video-pill">Vídeo</span>`;
+  }
+
+  function storyFeedMediaMarkup(story = {}, loading = "lazy") {
+    const videoSrc = storyVideoUrl(story);
+    if (videoSrc) {
+      const fallback = imgFor(story);
+      return `<div class="v8-card-media v8-card-media-video">
+        ${inlineVideoMarkup({
+          src: videoSrc,
+          poster: videoPosterFor(story, videoSrc),
+          title: story.title || "Vídeo CZS",
+          storySlug: story.slug || "",
+          fallbackPoster: fallback,
+          capturePoster: true,
+        })}
+      </div>`;
+    }
+    return `<div class="v8-card-media">${storyImageMarkup(story, loading)}</div>`;
+  }
+
+  function playlistFeedMediaMarkup(item = {}) {
+    return `<div class="v8-card-media v8-card-media-video">
+      ${inlineVideoMarkup({
+        src: item.src,
+        poster: item.poster,
+        title: item.title || "TV CZS",
+        storySlug: item.storySlug || item.id || "",
+        fallbackPoster: item.fallbackPoster || item.poster,
+        capturePoster: Boolean(item.capturePoster),
+      })}
+    </div>`;
+  }
+
+  function startInlineVideoPreviews(root = document) {
+    const videos = $$("video[data-v8-inline-video]", root);
+    if (!videos.length) return;
+    videos.forEach((video) => {
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "");
+    });
+    if (!("IntersectionObserver" in window)) return;
+    if (!window.__v8InlineVideoObserver) {
+      window.__v8InlineVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (!(video instanceof HTMLVideoElement)) return;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { rootMargin: "180px 0px", threshold: 0.22 });
+    }
+    videos.forEach((video) => {
+      if (video.dataset.v8InlineObserved === "1") return;
+      video.dataset.v8InlineObserved = "1";
+      window.__v8InlineVideoObserver.observe(video);
+    });
+  }
+
   function ensureStoryViewerOverlay() {
     let overlay = $("#v8StoryViewer");
     if (overlay) return overlay;
@@ -680,15 +754,90 @@
       .toLowerCase();
     let score = localScore(story);
     if (/corpus christi|festival|programacao|programação|saude|saúde|educacao|educação|servico|serviço|tempo|rio|cidade|comunidade|obra|agenda|show|cultura|evento|mailza|mailsa|gladson|gladison/.test(text)) score += 340;
+    if (storyVideoUrl(story)) score += 260;
     if (/estupro|homicidio|homicídio|morte|assassin|execucao|execução|roubo|roubad|furto|prisao|prisão|presidio|presídio|presos|detento|superlotacao|superlotação|trafico|tráfico|mandado|foragido|policia|polícia|delegacia|investig/.test(text)) score -= 1500;
     return score;
   };
 
-  const heroStories = allStories
-    .slice()
-    .filter(hasTrustedStoryMedia)
-    .sort((a, b) => heroScore(b) - heroScore(a))
-    .slice(0, 8);
+  const SECURITY_TOPIC_PATTERN = /crime|criminal|policia|polícia|civil|militar|delegacia|assalto|roubo|roubad|furto|prisao|prisão|preso|presos|homicidio|homicídio|morte|assassin|execucao|execução|estupro|violencia|violência|trafico|tráfico|foragido|mandado|arma|fac[cç][aã]o|agredid|agress/i;
+  const URGENT_TOPIC_PATTERN = /urgente|alerta|emerg[eê]ncia|risco|grave|interditad|interdi[cç][aã]o|acidente|desaparece|cheia|enchente|temporal|surto|colapso/i;
+  const OPPORTUNITY_TOPIC_PATTERN = /oportunidade|vaga|emprego|curso|inscri[cç][aã]o|edital|licita[cç][aã]o|preg[aã]o|concurso|processo seletivo|credenciamento|sebrae|empreendedor|renda|credito|cr[eé]dito/i;
+  const ENVIRONMENT_TOPIC_PATTERN = /meio ambiente|ambiental|floresta|flores|jardim|rio|igarap[eé]|serra do moa|serra do divisor|parque nacional|ribeirinh|agro|agricultura|plantio|seca|chuva|queimada|mercurio|merc[uú]rio|[aá]gua|reserva|terra ind[ií]gena/i;
+  const LOCAL_TOPIC_PATTERN = /cruzeiro do sul|czs|vale do jurua|vale do juru[aá]|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauac[aá]|feij[oó]/i;
+  const HEALTH_TOPIC_PATTERN = /sa[uú]de|hospital|upa|srag|s[ií]ndrome|dengue|vacina|uti|atendimento m[eé]dico|hemoacre|hemocentro/i;
+  const CULTURE_TOPIC_PATTERN = /show|festival|cultura|esporte|futebol|jogo|games|anime|livro|m[uú]sica|influencer|influenciador|jovem|cinema|s[ée]rie|festa/i;
+
+  function storySignalText(story = {}) {
+    return [
+      story.title,
+      story.subtitle,
+      story.summary,
+      story.category,
+      story.sourceName,
+      story.sourceLabel,
+      story.editorialPriority,
+    ].filter(Boolean).join(" ");
+  }
+
+  function storyTheme(story = {}) {
+    const text = storySignalText(story);
+    if (SECURITY_TOPIC_PATTERN.test(text)) return { id: "security", label: "Segurança", tone: "preto" };
+    if (URGENT_TOPIC_PATTERN.test(text) || isUrgent(story)) return { id: "urgent", label: "Urgência", tone: "vermelho" };
+    if (OPPORTUNITY_TOPIC_PATTERN.test(text) || isOpportunityStory(story) || isProcurementStory(story)) return { id: "opportunity", label: "Oportunidade", tone: "amarelo" };
+    if (ENVIRONMENT_TOPIC_PATTERN.test(text)) return { id: "environment", label: "Ambiente", tone: "verde" };
+    if (LOCAL_TOPIC_PATTERN.test(text)) return { id: "local", label: "Cruzeiro do Sul", tone: "azul" };
+    if (HEALTH_TOPIC_PATTERN.test(text)) return { id: "health", label: "Saúde", tone: "turquesa" };
+    if (CULTURE_TOPIC_PATTERN.test(text)) return { id: "culture", label: "Cultura", tone: "roxo" };
+    return { id: "neutral", label: "Geral", tone: "azul" };
+  }
+
+  function storyPriorityScore(story = {}) {
+    const text = storySignalText(story);
+    let score = Number(story?.priority || 0);
+    if (LOCAL_TOPIC_PATTERN.test(text)) score += 780;
+    if (/acre|rio branco|capital|estado/i.test(text)) score += 280;
+    if (/prefeitura|sa[uú]de|educa[cç][aã]o|seguran[cç]a|tempo|servi[cç]o|obra|bairro|comunidade|agenda/i.test(text)) score += 230;
+    if (URGENT_TOPIC_PATTERN.test(text)) score += 720;
+    if (HEALTH_TOPIC_PATTERN.test(text)) score += 360;
+    if (OPPORTUNITY_TOPIC_PATTERN.test(text) || isProcurementStory(story)) score += 340;
+    if (storyVideoUrl(story)) score += 260;
+    if (SECURITY_TOPIC_PATTERN.test(text)) score += LOCAL_TOPIC_PATTERN.test(text) ? 180 : 80;
+    if (!hasTrustedStoryMedia(story)) score -= 900;
+    return score;
+  }
+
+  function storyPriorityTier(story = {}) {
+    const score = storyPriorityScore(story);
+    if (score >= 1900) return "p1";
+    if (score >= 1300) return "p2";
+    return "p3";
+  }
+
+  function storyCardSize(story = {}, position = 0, forceVideo = false) {
+    const theme = storyTheme(story).id;
+    if (forceVideo || storyVideoUrl(story)) return position % 3 === 0 ? "feature-video" : "video";
+    if (isProcurementStory(story)) return "compact";
+    if (position === 0 || storyPriorityScore(story) >= 1900) return "wide";
+    if (theme === "security" || theme === "urgent") return "horizontal";
+    if (theme === "opportunity") return "compact";
+    return position % 7 === 3 ? "wide" : "standard";
+  }
+
+  const heroStories = (() => {
+    const ranked = allStories
+      .slice()
+      .filter(hasTrustedStoryMedia)
+      .sort((a, b) => heroScore(b) - heroScore(a))
+      .slice(0, 8);
+    const videoCandidate = allStories
+      .slice()
+      .filter((story) => hasTrustedStoryMedia(story) && storyVideoUrl(story))
+      .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))[0];
+    if (videoCandidate && !ranked.some((story) => story.slug === videoCandidate.slug)) {
+      ranked.splice(Math.min(2, ranked.length), 0, videoCandidate);
+    }
+    return ranked.slice(0, 8);
+  })();
 
   const opportunityStories = allStories
     .filter((story) => isOpportunityStory(story))
@@ -1645,6 +1794,42 @@
           queueCheffeAction(story, "review");
           return;
         }
+      }
+
+      const videoJump = event.target.closest("[data-v8-video-jump]");
+      if (videoJump) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const videoId = videoJump.dataset.v8VideoJump || "";
+        document.querySelector("#videos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const target = videoId ? document.querySelector(`[data-v8-video="${cssEscape(videoId)}"]`) : null;
+        setTimeout(() => target?.click(), 420);
+        return;
+      }
+
+      const videoShare = event.target.closest("[data-v8-video-share]");
+      if (videoShare) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const url = `${location.origin}${location.pathname}#videos`;
+        const text = "TV CZS: vídeos reunidos do Vale do Juruá.";
+        if (navigator.share) navigator.share({ title: "TV CZS", text, url }).catch(() => {});
+        else navigator.clipboard?.writeText(url).then(() => toast("Link da TV CZS copiado"));
+        return;
+      }
+
+      const videoReport = event.target.closest("[data-v8-video-report]");
+      if (videoReport) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        queueCheffeAction({
+          title: "Revisar card de vídeo do feed",
+          sourceName: "TV CZS",
+          category: "Vídeo",
+          slug: "",
+        }, "review");
+        toast("Vídeo enviado para revisão");
+        return;
       }
 
       const slugTarget = event.target.closest("[data-v8-slug]");
@@ -3418,14 +3603,148 @@
     footer.parentElement.insertBefore(section, footer);
   }
 
+  function balancedPriorityStories(stories = []) {
+    const buckets = stories.reduce((acc, story) => {
+      const theme = storyTheme(story).id;
+      if (!acc.has(theme)) acc.set(theme, []);
+      acc.get(theme).push(story);
+      return acc;
+    }, new Map());
+    buckets.forEach((items) => items.sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a)));
+    const result = [];
+    const total = stories.length;
+
+    while (result.length < total) {
+      const recent = result.slice(-2).map((story) => storyTheme(story).id);
+      const sameRecent = recent.length === 2 && recent[0] === recent[1] ? recent[0] : "";
+      const securityShare = result.length
+        ? result.filter((story) => storyTheme(story).id === "security").length / result.length
+        : 0;
+      let candidates = Array.from(buckets.entries())
+        .filter(([, items]) => items.length)
+        .map(([theme, items]) => {
+          const story = items[0];
+          let score = storyPriorityScore(story);
+          if (theme === sameRecent) score -= 2400;
+          if (theme === "security" && securityShare > 0.42) score -= 1600;
+          if (theme === "neutral") score -= 120;
+          return { theme, story, score };
+        })
+        .sort((a, b) => b.score - a.score);
+      if (!candidates.length) break;
+      if (sameRecent) {
+        const different = candidates.filter((item) => item.theme !== sameRecent);
+        if (different.length) candidates = different;
+      }
+      if (securityShare > 0.48) {
+        const nonSecurity = candidates.filter((item) => item.theme !== "security");
+        if (nonSecurity.length) candidates = nonSecurity;
+      }
+      const selected = candidates[0];
+      result.push(buckets.get(selected.theme).shift());
+    }
+
+    return result;
+  }
+
+  function dynamicFeedEntries(stories = [], limit = 72) {
+    const playlist = videoPlaylistItems().filter((item) => item?.src);
+    const promotedVideoSlugs = new Set(playlist.map((item) => item.storySlug).filter(Boolean));
+    const regularStories = stories.filter((story) => !promotedVideoSlugs.has(story.slug));
+    const entries = [];
+    let videoIndex = 0;
+    let storyCount = 0;
+    const pushVideo = () => {
+      while (videoIndex < playlist.length) {
+        const item = playlist[videoIndex++];
+        if (item.storySlug && bySlug.has(item.storySlug)) {
+          const story = bySlug.get(item.storySlug);
+          if (entries.some((entry) => entry.story?.slug === story.slug)) continue;
+          entries.push({ type: "story", story, forceVideo: true });
+          return true;
+        }
+        if (entries.some((entry) => entry.video?.src === item.src)) continue;
+        entries.push({ type: "video", video: item });
+        return true;
+      }
+      return false;
+    };
+
+    regularStories.forEach((story) => {
+      if (entries.length >= limit) return;
+      entries.push({ type: "story", story });
+      storyCount += 1;
+      const interval = entries.length < 12 ? 4 : 6;
+      if (storyCount % interval === 0 && entries.length < limit) pushVideo();
+    });
+
+    while (entries.length < Math.min(limit, stories.length + playlist.length) && pushVideo()) {}
+    return entries.slice(0, limit);
+  }
+
+  function renderContinuousStoryCard(story, position = 0, forceVideo = false) {
+    const procurement = isProcurementStory(story);
+    const theme = storyTheme(story);
+    const size = storyCardSize(story, position, forceVideo);
+    const tier = storyPriorityTier(story);
+    const videoSrc = storyVideoUrl(story);
+    return `
+      <article class="news-card v8-continuous-card v8-theme-${esc(theme.id)} v8-size-${esc(size)} v8-priority-${esc(tier)}${procurement ? " is-procurement-card" : ""}${videoSrc ? " has-inline-video" : ""}" data-v8-slug="${esc(story.slug)}" data-v8-theme="${esc(theme.id)}" data-v8-size="${esc(size)}" data-v8-priority="${esc(tier)}">
+        <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
+          ${storyFeedMediaMarkup(story)}
+          <div class="v8-card-copy">
+            <span class="badge">${esc(story.category || sourceName(story))}</span>
+            <h3>${esc(story.title)}</h3>
+            ${procurement ? procurementDetailMarkup(story) : `<p>${esc(story.summary || story.subtitle || localImpact(story))}</p>`}
+            <small>${esc(sourceName(story))} • ${esc(storyDate(story))} • ${readMin(story)} min</small>
+          </div>
+        </a>
+        <div class="actions">
+          <button class="small-btn ghost shareBtn" type="button">Compartilhar</button>
+          <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">Ler</a>
+          <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
+        </div>
+      </article>`;
+  }
+
+  function renderContinuousVideoCard(item = {}, position = 0) {
+    const size = position % 2 === 0 ? "feature-video" : "video";
+    return `
+      <article class="news-card v8-continuous-card v8-theme-video v8-size-${esc(size)} has-inline-video v8-feed-video-card" data-v8-video-card="${esc(item.id || item.src)}" data-v8-theme="video" data-v8-size="${esc(size)}" data-v8-priority="video">
+        <a href="#videos" data-v8-video-jump="${esc(item.id || item.src)}">
+          ${playlistFeedMediaMarkup(item)}
+          <div class="v8-card-copy">
+            <span class="badge">${esc(item.label || "TV CZS")}</span>
+            <h3>${esc(item.title || "Vídeo do CZS")}</h3>
+            <p>${esc(item.text || "Vídeo reunido na TV CZS para dar ritmo visual ao feed.")}</p>
+            <small>TV CZS • vídeo • acervo monitorado</small>
+          </div>
+        </a>
+        <div class="actions">
+          <button class="small-btn ghost" type="button" data-v8-video-share="${esc(item.id || item.src)}">Compartilhar</button>
+          <a class="small-btn" href="#videos" data-v8-video-jump="${esc(item.id || item.src)}">Ler</a>
+          <button class="small-btn ghost" type="button" data-v8-video-report="${esc(item.id || item.src)}">Informar erro</button>
+        </div>
+      </article>`;
+  }
+
+  function renderContinuousEntry(entry, position = 0) {
+    if (entry?.type === "video") return renderContinuousVideoCard(entry.video, position);
+    return renderContinuousStoryCard(entry.story, position, Boolean(entry?.forceVideo));
+  }
+
   function renderContinuousNewsScroll() {
-    if ($("#v8ContinuousScroll")) return;
+    $("#v8ContinuousScroll")?.remove();
     const footer = $("#fullSiteFooter");
     if (!footer?.parentElement) return;
-    const source = allStories
+    const protectedHeroSlugs = new Set(heroStories.slice(0, 3).map((story) => story.slug).filter(Boolean));
+    const sourceStories = balancedPriorityStories(allStories
       .filter((story) => story?.slug && bySlug.has(story.slug))
       .filter(hasTrustedStoryMedia)
-      .slice(Math.min(36, Math.max(12, heroStories.length + 12)));
+      .filter((story) => !protectedHeroSlugs.has(story.slug))
+      .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
+      .slice(0, 84));
+    const source = dynamicFeedEntries(sourceStories, 72);
     if (!source.length) return;
     let index = 0;
     const batchSize = 18;
@@ -3449,24 +3768,21 @@
     const paint = () => {
       const slice = source.slice(index, index + batchSize);
       index += slice.length;
-      grid.insertAdjacentHTML("beforeend", slice.map((story) => {
-        const procurement = isProcurementStory(story);
-        return `
-        <article class="news-card v8-continuous-card${procurement ? " is-procurement-card" : ""}" data-v8-slug="${esc(story.slug)}">
-          <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
-            ${storyImageMarkup(story)}
-            <span class="badge">${esc(story.category || sourceName(story))}</span>
-            <h3>${esc(story.title)}</h3>
-            ${procurement ? procurementDetailMarkup(story) : `<p>${esc(story.summary || story.subtitle || localImpact(story))}</p>`}
-            <small>${esc(sourceName(story))} • ${esc(storyDate(story))}</small>
-          </a>
-          <div class="actions">
-            <button class="small-btn ghost shareBtn" type="button">Compartilhar</button>
-            <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">Ler</a>
-            <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
-          </div>
-        </article>`;
-      }).join(""));
+      grid.insertAdjacentHTML("beforeend", slice.map((entry, itemIndex) => renderContinuousEntry(entry, index - slice.length + itemIndex)).join(""));
+      refreshVideoFrames(grid);
+      startInlineVideoPreviews(grid);
+      window.__czsPriorityAudit = {
+        version: V8_BOOT_VERSION,
+        total: source.length,
+        loaded: index,
+        themes: source.reduce((acc, entry) => {
+          const key = entry.type === "video" ? "video" : storyTheme(entry.story).id;
+          acc[key] = (acc[key] || 0) + 1;
+          return acc;
+        }, {}),
+        videos: source.filter((entry) => entry.type === "video" || storyVideoUrl(entry.story)).length,
+        rule: "impacto > urgencia > proximidade > interesse > curiosidade",
+      };
       if (index >= source.length) {
         more.hidden = true;
         $("#v8ContinuousSentinel", section).textContent = "Rodapé completo abaixo.";
@@ -4655,27 +4971,20 @@
       body.innerHTML = `
         <div class="aylla-stage" aria-live="polite">
           <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="RAIane acenando">
-          <div class="aylla-speech"><b>Oi!</b> Eu sou a RAIane. Escolha uma opção abaixo.</div>
+          <div class="aylla-speech"><b>RAIane.</b> Posso te levar direto ao que importa.</div>
         </div>
         <div class="aylla-faq" aria-label="Perguntas frequentes">
-          <button type="button" data-aylla-faq="anunciar">Como anunciar?</button>
-          <button type="button" data-aylla-faq="noticia">Enviar notícia</button>
+          <button type="button" data-aylla-faq="anunciar">Anunciar</button>
+          <button type="button" data-aylla-faq="noticia">Enviar pauta</button>
           <button type="button" data-aylla-faq="arquivo">Arquivo</button>
-          <button type="button" data-aylla-faq="servicos">Serviços úteis</button>
-          <button type="button" data-aylla-faq="escritorios">Escritórios</button>
-          <button type="button" data-aylla-faq="pubpaid">Conhecer PubPaid</button>
-          <button type="button" data-aylla-faq="pesquisa">Pesquisa</button>
-          <button type="button" data-aylla-faq="correcao">Informar erro</button>
-          <button type="button" data-aylla-faq="galeria">Galeria</button>
-          <button type="button" data-aylla-faq="mapa">Mapa do site</button>
-          <button type="button" data-aylla-faq="whatsapp">Falar humano</button>
+          <button type="button" data-aylla-faq="servicos">Serviços</button>
+          <button type="button" data-aylla-faq="pubpaid">PubPaid</button>
+          <button type="button" data-aylla-faq="whatsapp">Humano</button>
         </div>
         <div class="mini-list aylla-actions">
           <a class="small-btn" href="#feed" data-aylla-go="news">Notícias</a>
-          <a class="small-btn" href="#arquivoArtigoSystem" data-aylla-go="archive">Arquivo</a>
           <a class="small-btn" href="#servicos" data-aylla-go="services">Serviços</a>
-          <a class="small-btn" href="#pubpaidAtalhos" data-aylla-go="games">Pesquisa</a>
-          <a class="small-btn" href="#comunidade" data-aylla-go="community">Enviar pauta</a>
+          <a class="small-btn" href="#comunidade" data-aylla-go="community">Pauta</a>
         </div>
         <form class="aylla-ask" data-aylla-form>
           <label for="ayllaQuestion">Tire uma dúvida</label>
@@ -4699,7 +5008,7 @@
     document.body.appendChild(dock);
 
     const poseMap = {
-      wave: [RAYL_POSES.chatWave, "Eu sou a RAIane. Escolha uma opção abaixo."],
+      wave: [RAYL_POSES.chatWave, "Posso te levar direto ao que importa."],
       polite: [RAYL_POSES.chatNeutral, "Estou aqui para ajudar com calma."],
       "point-right": [RAYL_POSES.chatPoint, "Este é o caminho mais direto."],
       "present-left": [RAYL_POSES.chatPointUp, "Tenho atalhos prontos para você."],
@@ -4723,7 +5032,7 @@
         pose: "present-both",
         title: "Como anunciar?",
         keywords: ["anunciar", "anuncio", "anúncio", "divulgar", "propaganda", "publicidade", "vendas", "site", "app"],
-        answer: "Boa tarde! Temos algumas formas de divulgar no CZS: card, banner, materia patrocinada, video, publicacao no site, app ou automacao. O caminho mais rapido e abrir a pagina Divulgue; se quiser falar agora, eu tambem deixo o WhatsApp pronto para combinar formato, valor e prazo.",
+        answer: "Divulgue no CZS com card, banner, video, materia patrocinada, site ou automacao. Posso abrir a pagina comercial ou chamar o WhatsApp.",
         href: "divulgue.html",
       },
       {
@@ -4731,7 +5040,7 @@
         pose: "community",
         title: "Enviar noticia",
         keywords: ["noticia", "notícia", "pauta", "denuncia", "denúncia", "foto", "video", "vídeo", "bairro", "comunidade"],
-        answer: "Pode mandar a pauta com local, horario, foto ou video e uma explicacao simples do que aconteceu. A redacao checa antes de publicar, principalmente quando envolve denuncia, seguranca ou saude.",
+        answer: "Mande local, horario, foto ou video e o que aconteceu. A redacao checa antes de publicar.",
         route: ["#comunidade", "community", "Aqui fica o caminho para pauta da comunidade."],
       },
       {
@@ -4739,7 +5048,7 @@
         pose: "point-right",
         title: "Servicos uteis",
         keywords: ["servico", "serviço", "farmacia", "farmácia", "hospital", "telefone", "energia", "agua", "água", "clima", "rio"],
-        answer: "Vai em Servicos. Ali ficam hospitais, farmacias, clima, rio, energia, agua, telefones e alertas locais para resolver sem ficar procurando pelo site inteiro.",
+        answer: "Hospitais, farmacias, clima, rio, energia, agua, telefones e alertas ficam em Servicos.",
         route: ["#servicos", "point-right", "Vou te levar para os servicos uteis."],
       },
       {
@@ -4747,7 +5056,7 @@
         pose: "call-attention",
         title: "Escritórios",
         keywords: ["escritorio", "escritórios", "escritorios", "office", "redacao", "redação", "cheffe", "equipe"],
-        answer: "Os escritorios trabalham pela Cheffe Call. Por ali a ordem chega para Redacao, Comercial, Comunidade, Fotos, Servicos e Cheffe, cada um cuidando da parte certa.",
+        answer: "Os escritorios recebem ordens pela Cheffe Call e distribuem para redacao, comunidade, fotos, servicos e comercial.",
         route: ["#agentesAutonomos", "call-attention", "Entrada visual dos agentes autônomos."],
       },
       {
@@ -4755,7 +5064,7 @@
         pose: "point-right",
         title: "Arquivo",
         keywords: ["arquivo", "antiga", "antigas", "mes", "mês", "ano", "semana", "dia", "buscar", "busca", "pesquisar materia"],
-        answer: "O Arquivo e para achar noticia antiga sem sofrimento. Voce pode buscar por palavra, periodo, editoria, fonte ou pasta do mes.",
+        answer: "Busque materia antiga por palavra, periodo, editoria, fonte ou mes.",
         route: ["#arquivoArtigoSystem", "point-right", "Arquivo completo do CZS."],
       },
       {
@@ -4763,7 +5072,7 @@
         pose: "celebrate",
         title: "PubPaid",
         keywords: ["pubpaid", "jogo", "jogos", "sinuca", "xadrez", "ranking", "torneio"],
-        answer: "O PubPaid e a area de jogos, campanhas e participacao do CZS. Eu te levo pelo atalho para abrir os jogos, ranking e novidades.",
+        answer: "O PubPaid junta jogos, campanhas, ranking e participacao.",
         route: ["pubpaid.html", "celebrate", "O botão vermelho Conhecer PubPaid abre o PubPaid."],
       },
       {
@@ -4771,7 +5080,7 @@
         pose: "present-left",
         title: "Pesquisa",
         keywords: ["pesquisa", "eleitoral", "enquete", "votar", "opiniao", "opinião"],
-        answer: "Pesquisas e enquetes ficam no bloco de participacao. Quando tiver rodada ativa, o CZS mostra o caminho direto para votar ou acompanhar o resultado.",
+        answer: "Pesquisas e enquetes ficam no bloco de participacao.",
         route: ["#pubpaidAtalhos", "present-left", "Pesquisas e resultados ficam aqui."],
       },
       {
@@ -4779,7 +5088,7 @@
         pose: "call-attention",
         title: "Informar erro",
         keywords: ["erro", "corrigir", "correcao", "correção", "errado", "informar erro", "denunciar erro"],
-        answer: "Se viu algo errado, mande o titulo da materia, o trecho e a fonte correta. A Cheffe Call registra a correcao para a redacao revisar.",
+        answer: "Envie titulo, trecho errado e fonte correta. A Cheffe Call manda para revisao.",
         route: ["#comunidade", "call-attention", "A correção pode entrar como pauta para a redação."],
       },
       {
@@ -4787,7 +5096,7 @@
         pose: "present-both",
         title: "Galeria",
         keywords: ["galeria", "foto", "fotos", "imagem", "turismo", "cruzeiro do sul", "mapa"],
-        answer: "A Galeria e o lugar das fotos do Vale do Jurua: pontos de Cruzeiro do Sul, imagens locais, mapa e contexto para navegar com calma.",
+        answer: "Fotos e videos do Vale do Jurua ficam na Galeria.",
         route: ["#galeriaFotos", "present-both", "Galeria e pontos de Cruzeiro do Sul."],
       },
       {
@@ -4795,7 +5104,7 @@
         pose: "point-right",
         title: "Mapa do site",
         keywords: ["mapa", "site", "onde fica", "rodape", "rodapé", "menu"],
-        answer: "O mapa fica no rodape. Ele junta noticias, arquivo, servicos, comunidade, comercial e redacao em um caminho so.",
+        answer: "O mapa do site fica no rodape, com noticias, arquivo, servicos, comunidade e comercial.",
         route: ["#fullSiteFooter", "point-right", "Mapa completo do portal."],
       },
       {
@@ -4803,7 +5112,7 @@
         pose: "call-attention",
         title: "WhatsApp",
         keywords: ["whatsapp", "zap", "contato", "falar", "atendente", "humano", "pessoa", "dono"],
-        answer: "Sem problema. Vou deixar o WhatsApp pronto para voce falar com uma pessoa do CZS.",
+        answer: "Abro o WhatsApp para atendimento humano.",
       },
     ];
 
@@ -4885,6 +5194,7 @@
       const item = poseMap[pose] || poseMap.wave;
       card.className = card.className.replace(/\baylla-pose-[\w-]+/g, "").trim();
       card.classList.add(`aylla-pose-${pose}`);
+      card.dataset.ayllaMotion = pose;
       card.classList.remove("aylla-is-changing");
       requestAnimationFrame(() => card.classList.add("aylla-is-changing"));
       clearTimeout(window.__ayllaPoseTimer);
@@ -4957,15 +5267,15 @@
       const out = $("#assistantOut");
       const safeQuestion = String(question || "Quero falar com atendimento humano.").trim();
       const href = whatsappUrlFor(safeQuestion);
-      const message = "Essa eu prefiro nao chutar. Deixei o WhatsApp pronto com sua pergunta para alguem do CZS responder certinho.";
+      const message = "Essa eu prefiro nao chutar. Clique no WhatsApp para falar com alguem do CZS.";
       setPose("human", message);
       const slot = $(".aylla-human-slot", card);
       if (slot) {
         slot.hidden = false;
-        slot.innerHTML = `<a class="chat whatsapp" href="${href}" target="_blank" rel="noopener">Falar no WhatsApp</a>`;
+        slot.innerHTML = `<a class="chat whatsapp" href="${href}" target="_blank" rel="noopener">WhatsApp CZS: (68) 9602-6649</a>`;
       }
       if (out) {
-        out.insertAdjacentHTML("beforeend", `<div class="chat bot">WhatsApp pronto acima.</div>`);
+        out.insertAdjacentHTML("beforeend", `<a class="chat whatsapp" href="${href}" target="_blank" rel="noopener">Chamar no WhatsApp: (68) 9602-6649</a>`);
         out.scrollTop = out.scrollHeight;
       }
     };
