@@ -9706,3 +9706,497 @@ body.v8-merge-ready .v8-procurement-list span {
     gap: 3px !important;
   }
 }
+
+/* 20260605 v35: mobile reading pass, keeps the CZS home dense and app-like. */
+@media (max-width: 760px) {
+  body.v8-merge-ready {
+    padding-bottom: 96px !important;
+  }
+
+  body.v8-merge-ready .page {
+    width: min(100%, calc(100vw - 20px)) !important;
+    padding-inline: 0 !important;
+  }
+
+  body.v8-merge-ready .brandbar {
+    position: sticky !important;
+    top: 0 !important;
+  }
+
+  body.v8-merge-ready .top-strip {
+    min-height: 0 !important;
+    padding: 6px 10px !important;
+    gap: 3px !important;
+  }
+
+  body.v8-merge-ready .top-strip > div {
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+  }
+
+  body.v8-merge-ready .top-strip nav a {
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+  }
+
+  body.v8-merge-ready .brandrow {
+    gap: 8px !important;
+    padding: 8px 10px 10px !important;
+  }
+
+  body.v8-merge-ready .brandrow > .brand {
+    min-height: 64px !important;
+    margin: 0 !important;
+  }
+
+  body.v8-merge-ready .brandrow > .brand img,
+  body.v8-merge-ready .brand img {
+    width: min(318px, 90vw) !important;
+    height: 64px !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+  }
+
+  body.v8-merge-ready .brandrow > .nav,
+  body.v8-merge-ready .nav,
+  body.v8-merge-ready .utility-row {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-height: none !important;
+    scrollbar-width: none !important;
+  }
+
+  body.v8-merge-ready .brandrow > .nav {
+    margin-top: 2px !important;
+    padding-bottom: 3px !important;
+  }
+
+  body.v8-merge-ready .nav::-webkit-scrollbar,
+  body.v8-merge-ready .utility-row::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  body.v8-merge-ready .nav a {
+    flex: 0 0 auto !important;
+    min-height: 42px !important;
+    padding: 9px 13px !important;
+    font-size: 15px !important;
+  }
+
+  body.v8-merge-ready .search {
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+  }
+
+  body.v8-merge-ready .search input {
+    min-width: 0 !important;
+    padding: 11px 12px !important;
+    font-size: 16px !important;
+  }
+
+  body.v8-merge-ready .search button {
+    min-height: 46px !important;
+    padding-inline: 14px !important;
+    font-size: 15px !important;
+  }
+
+  body.v8-merge-ready .utility-row {
+    gap: 8px !important;
+    padding: 8px 10px !important;
+  }
+
+  body.v8-merge-ready .utility-row .chip {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    min-height: 38px !important;
+    align-items: center !important;
+    padding: 8px 10px !important;
+    font-size: 13px !important;
+  }
+
+  body.v8-merge-ready #breakingTicker,
+  body.v8-merge-ready .ticker-wrap {
+    margin: 12px 0 14px !important;
+  }
+
+  body.v8-merge-ready #tickerTrack .ticker-item,
+  body.v8-merge-ready .ticker-item {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+  }
+
+  body.v8-merge-ready #tickerTrack .ticker-item span,
+  body.v8-merge-ready .ticker-item span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body.v8-merge-ready .hero-grid {
+    gap: 12px !important;
+    margin-bottom: 18px !important;
+  }
+
+  body.v8-merge-ready .v8-live-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy {
+    gap: 8px !important;
+    padding: 16px 14px 14px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-edition {
+    padding: 5px 0 !important;
+    font-size: 12px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy .badge {
+    margin-top: 2px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy h1 {
+    font-size: clamp(27px, 7.5vw, 34px) !important;
+    line-height: 1.04 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy p {
+    display: -webkit-box !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 3 !important;
+    font-size: 16px !important;
+    line-height: 1.42 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy .meta {
+    gap: 8px !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls {
+    display: grid !important;
+    grid-template-columns: 42px repeat(3, minmax(0, 1fr)) 42px !important;
+    gap: 6px !important;
+    align-items: stretch !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .v8-icon-btn {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .btn {
+    min-width: 0 !important;
+    min-height: 42px !important;
+    padding: 7px 5px !important;
+    display: grid !important;
+    place-items: center !important;
+    font-size: 11.5px !important;
+    line-height: 1.05 !important;
+    text-align: center !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .shareBtn {
+    grid-column: 2 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-read] {
+    grid-column: 3 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-cheffe] {
+    grid-column: 4 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-hero-next] {
+    grid-column: 5 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-dots {
+    grid-column: 1 / -1 !important;
+    justify-content: center !important;
+    padding-top: 2px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-dot {
+    width: 18px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-media {
+    padding: 0 !important;
+    border-left: 0 !important;
+    border-top: 1px solid var(--v8-line) !important;
+  }
+
+  body.v8-merge-ready .v8-hero-media-frame {
+    aspect-ratio: 16 / 9 !important;
+    max-height: 236px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-media-frame img,
+  body.v8-merge-ready .v8-hero-media-frame video {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 236px !important;
+    object-fit: cover !important;
+  }
+
+  body.v8-merge-ready .hero-side.v8-hero-rail {
+    display: none !important;
+  }
+
+  body.v8-merge-ready .section {
+    margin: 22px 0 !important;
+  }
+
+  body.v8-merge-ready .section-head {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+  }
+
+  body.v8-merge-ready .section-kicker {
+    max-width: calc(100vw - 92px) !important;
+    min-height: 34px !important;
+    padding: 7px 12px !important;
+    font-size: 15px !important;
+    line-height: 1.05 !important;
+    box-shadow: -5px 5px 0 var(--v8-blue-dark) !important;
+    white-space: normal !important;
+  }
+
+  body.v8-merge-ready .section-head .btn,
+  body.v8-merge-ready .section-head .small-btn {
+    grid-column: 2 !important;
+    min-height: 36px !important;
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+  }
+
+  body.v8-merge-ready .feed-grid,
+  body.v8-merge-ready .v8-continuous-grid,
+  body.v8-merge-ready .v8-young-grid,
+  body.v8-merge-ready .v8-gallery-grid,
+  body.v8-merge-ready .v8-video-shell,
+  body.v8-merge-ready .v8-video-context,
+  body.v8-merge-ready .v8-commercial-format-grid,
+  body.v8-merge-ready .v8-campaign-rail {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  body.v8-merge-ready .news-card,
+  body.v8-merge-ready .v8-continuous-card {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  body.v8-merge-ready .news-card.featured {
+    grid-column: auto !important;
+  }
+
+  body.v8-merge-ready .news-card .media-frame,
+  body.v8-merge-ready .news-card.featured .media-frame {
+    height: clamp(184px, 54vw, 224px) !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    background: #f8fbff !important;
+  }
+
+  body.v8-merge-ready .news-card .media-frame img,
+  body.v8-merge-ready .news-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    padding: 0 !important;
+  }
+
+  body.v8-merge-ready .news-card .copy {
+    gap: 8px !important;
+    padding: 12px !important;
+  }
+
+  body.v8-merge-ready .news-card .badge {
+    margin-bottom: 4px !important;
+  }
+
+  body.v8-merge-ready .news-card h3,
+  body.v8-merge-ready .news-card.featured h3,
+  body.v8-merge-ready .v8-continuous-card h3 {
+    font-size: clamp(19px, 5.5vw, 23px) !important;
+    line-height: 1.08 !important;
+  }
+
+  body.v8-merge-ready .news-card p,
+  body.v8-merge-ready .v8-continuous-card p {
+    display: -webkit-box !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 3 !important;
+    font-size: 16px !important;
+    line-height: 1.42 !important;
+  }
+
+  body.v8-merge-ready .news-card .meta,
+  body.v8-merge-ready .v8-continuous-card small {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+
+  body.v8-merge-ready .actions,
+  body.v8-merge-ready .news-card .actions,
+  body.v8-merge-ready .v8-continuous-card .actions {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+    overflow: visible !important;
+    margin-top: 10px !important;
+  }
+
+  body.v8-merge-ready .actions .btn,
+  body.v8-merge-ready .actions .small-btn,
+  body.v8-merge-ready .news-card .actions .small-btn,
+  body.v8-merge-ready .v8-continuous-card .actions .small-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: 7px 5px !important;
+    font-size: 11.5px !important;
+    line-height: 1.05 !important;
+    text-align: center !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open {
+    width: min(340px, calc(100vw - 20px)) !important;
+    max-height: min(74vh, 620px) !important;
+    overflow: auto !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card:not(.open) {
+    right: 12px !important;
+    bottom: 12px !important;
+    width: 62px !important;
+    min-width: 62px !important;
+    height: 62px !important;
+    min-height: 62px !important;
+  }
+
+  body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control {
+    display: none !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body.v8-merge-ready .v8-hero-controls {
+    grid-template-columns: 38px repeat(3, minmax(0, 1fr)) 38px !important;
+    gap: 5px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .v8-icon-btn {
+    width: 38px !important;
+    height: 40px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .btn,
+  body.v8-merge-ready .actions .btn,
+  body.v8-merge-ready .actions .small-btn {
+    font-size: 10.8px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy h1 {
+    font-size: clamp(25px, 7.2vw, 31px) !important;
+  }
+}
+
+/* 20260605 v35.1: trim mobile first viewport without removing content from desktop. */
+@media (max-width: 760px) {
+  body.v8-merge-ready .ticker-head {
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 9px 12px !important;
+  }
+
+  body.v8-merge-ready .ticker-head #syncStatus {
+    display: none !important;
+  }
+
+  body.v8-merge-ready #breakingTicker,
+  body.v8-merge-ready .ticker {
+    min-height: 44px !important;
+  }
+
+  body.v8-merge-ready #tickerTrack .ticker-item b,
+  body.v8-merge-ready .ticker-item b {
+    width: 74px !important;
+    min-width: 74px !important;
+    font-size: 12px !important;
+    line-height: 1.12 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy {
+    min-height: 0 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy h1 {
+    display: -webkit-box !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 4 !important;
+    font-size: clamp(24px, 6.5vw, 30px) !important;
+  }
+
+  body.v8-merge-ready .v8-hero-copy p {
+    -webkit-line-clamp: 2 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-media-frame,
+  body.v8-merge-ready .v8-hero-media-frame img,
+  body.v8-merge-ready .v8-hero-media-frame video {
+    max-height: 206px !important;
+  }
+}
+
+/* 20260605 v36: defer below-fold painting and trim costly touch-only effects. */
+@supports (content-visibility: auto) {
+  body.v8-merge-ready main > .section,
+  body.v8-merge-ready .v8-final-resources,
+  body.v8-merge-ready #fullSiteFooter {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+}
+
+@media (max-width: 760px), (hover: none) {
+  body.v8-merge-ready .brandbar,
+  body.v8-merge-ready .assistant-card,
+  body.v8-merge-ready .footer-compact,
+  body.v8-merge-ready .feed-mini-footer {
+    backdrop-filter: none !important;
+  }
+
+  body.v8-merge-ready .section,
+  body.v8-merge-ready .news-card,
+  body.v8-merge-ready .story-row,
+  body.v8-merge-ready .v8-continuous-card,
+  body.v8-merge-ready .v8-agent-public-card {
+    animation: none !important;
+  }
+
+  body.v8-merge-ready .news-card:hover,
+  body.v8-merge-ready .story-row:hover,
+  body.v8-merge-ready .shortcut-card:hover,
+  body.v8-merge-ready .v8-agent-public-card:hover {
+    transform: none !important;
+  }
+}

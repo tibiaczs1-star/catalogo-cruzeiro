@@ -2,14 +2,14 @@
   "use strict";
 
   const LIVE = "https://catalogo-cruzeiro-web.onrender.com";
-  const BRAND_INTRO = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
-  const BRAND_MAIN = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
-  const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.png";
+  const BRAND_INTRO = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.webp";
+  const BRAND_MAIN = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.webp";
+  const BRAND_HORIZONTAL = "assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.webp";
   const BRAND_ICON = "assets/brand/catalogo-czs-logo-transparent-png-20260603/06-icone-czs-estrelas-sem-fundo.png";
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v34";
+  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v43";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -864,9 +864,9 @@
       videoScene.className = "v8-loader-video-scene";
       videoScene.setAttribute("aria-label", "Vídeo de abertura do Catálogo CZS");
       videoScene.innerHTML = `
-        <video class="v8-loader-video" src="${INTRO_VIDEO}" poster="${INTRO_POSTER}" playsinline webkit-playsinline preload="auto"></video>
+        <video class="v8-loader-video" src="${INTRO_VIDEO}" poster="${INTRO_POSTER}" playsinline webkit-playsinline preload="none"></video>
         <span class="v8-loader-video-mask" aria-hidden="true"></span>
-        <button class="v8-loader-video-label" type="button">Clique para iniciar</button>`;
+        <button class="v8-loader-video-label" type="button" onclick="var v=this.parentElement.querySelector('video');if(v){v.muted=false;v.volume=1;v.play().catch(function(){})}">Clique para iniciar</button>`;
       const progressTrack = loaderCore.querySelector(".loader-track");
       loaderCore.insertBefore(videoScene, progressTrack || loaderCore.querySelector("h2") || null);
     }
@@ -1667,7 +1667,9 @@
       const share = event.target.closest(".shareBtn");
       if (share) {
         const card = share.closest(".news-card");
-        const cardSlug = card ? slugFromHref(card.querySelector("a[href]")?.href || "") : "";
+        const cardSlug = share.dataset.v8Share
+          || share.closest("[data-v8-slug]")?.dataset.v8Slug
+          || (card ? slugFromHref(card.querySelector("a[href]")?.href || "") : "");
         if (cardSlug && bySlug.has(cardSlug)) {
           event.preventDefault();
           event.stopImmediatePropagation();
@@ -1746,8 +1748,9 @@
             <button class="v8-icon-btn" type="button" data-v8-hero-prev aria-label="Notícia anterior">
               <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M15 18 9 12l6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
+            <button class="btn ghost shareBtn" type="button" data-v8-share="${esc(story.slug)}">Compartilhar</button>
             <button class="btn" type="button" data-v8-read="${esc(story.slug)}">Ler</button>
-            <button class="btn ghost ${isReviewSent(story.slug) ? "is-review-sent" : ""}" type="button" data-v8-cheffe="${esc(story.slug)}">${isReviewSent(story.slug) ? "Enviado" : "Enviar para revisão"}</button>
+            <button class="btn ghost ${isReviewSent(story.slug) ? "is-review-sent" : ""}" type="button" data-v8-cheffe="${esc(story.slug)}">${isReviewSent(story.slug) ? "Enviado" : "Informar erro"}</button>
             <button class="v8-icon-btn" type="button" data-v8-hero-next aria-label="Próxima notícia">
               <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -1994,7 +1997,7 @@
         title: "Escritório Nerd",
         label: "Cheffe Call",
         text: "mostra a sala dos agentes, tecnologia, revisão e organização do projeto.",
-        img: "assets/fusion-avatar-hologram.png",
+        img: "assets/fusion-avatar-hologram-optimized.webp",
         bg: "/assets/cheffe-call-nerd-straight-seats-ai.png",
         href: "#infosGerais",
       },
@@ -2029,7 +2032,7 @@
     return `
       <a class="v8-agent-public-card" href="${esc(agent.href)}" style="--agent-bg:url('${esc(agent.bg)}')">
         <span class="v8-agent-label">${esc(agent.label || "Agente")}</span>
-        <span class="v8-agent-sprite"><img src="${esc(agent.img)}" alt="${esc(agent.title)}" loading="eager" decoding="async"></span>
+        <span class="v8-agent-sprite"><img src="${esc(agent.img)}" alt="${esc(agent.title)}" loading="lazy" decoding="async" fetchpriority="low"></span>
         <b>${esc(agent.title)}</b>
         <p>${esc(agent.text)}</p>
       </a>`;
@@ -2359,6 +2362,7 @@
           src,
           poster: videoPosterFor(story, src),
           fallbackPoster: imgFor(story),
+          capturePoster: true,
           text: story.summary || story.subtitle || `Vídeo vinculado a ${sourceName(story)}.`,
           storySlug: story.slug || "",
         };
@@ -2369,6 +2373,7 @@
       ...item,
       fallbackPoster: item.poster,
       poster: readVideoFrameCache()[item.src] || item.poster,
+      capturePoster: false,
     }));
     return [...storyVideos, ...localVideos].slice(0, 8);
   }
@@ -2395,14 +2400,14 @@
       <div class="v8-story-bubbles" aria-label="Stories em vídeo do CZS">
         ${playlist.map((item, index) => `
           <button class="v8-story-bubble ${index === 0 ? "is-active" : ""}" type="button" data-v8-story-open="${esc(item.id)}">
-            <span><img src="${esc(item.poster)}" alt="" data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}"></span>
+            <span><img src="${esc(item.poster)}" alt="" loading="lazy" decoding="async" fetchpriority="low" ${item.capturePoster ? `data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}"` : ""}></span>
             <b>${esc(item.label || "TV CZS")}</b>
           </button>`).join("")}
       </div>
       <div class="v8-video-shell v8-story-shell">
         <div class="v8-story-phone" aria-label="TV CZS em formato vertical">
           <div class="v8-story-progress" aria-hidden="true"><i></i><i></i><i></i></div>
-          <video id="v8MainVideo" controls playsinline preload="metadata" poster="${esc(active.poster)}" data-v8-video-poster-src="${esc(active.src)}" data-v8-video-fallback="${esc(active.fallbackPoster || active.poster)}">
+          <video id="v8MainVideo" controls playsinline preload="none" poster="${esc(active.poster)}" ${active.capturePoster ? `data-v8-video-poster-src="${esc(active.src)}" data-v8-video-fallback="${esc(active.fallbackPoster || active.poster)}"` : ""}>
             <source src="${esc(active.src)}" type="${esc(videoTypeFor(active.src))}">
             Seu navegador não conseguiu carregar este vídeo.
           </video>
@@ -2416,7 +2421,7 @@
           <div class="v8-story-capture-note"><b>Captação</b><span>Varre as fontes monitoradas, canais, TVs e matérias com vídeo; acervo local fica só como apoio.</span></div>
           ${playlist.map((item, index) => `
             <button class="v8-video-item ${index === 0 ? "is-active" : ""}" type="button" data-v8-video="${esc(item.id)}">
-              <img src="${esc(item.poster)}" alt="" data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}">
+              <img src="${esc(item.poster)}" alt="" loading="lazy" decoding="async" fetchpriority="low" ${item.capturePoster ? `data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}"` : ""}>
               <span><small>${esc(item.label)}</small><b>${esc(item.title)}</b></span>
             </button>`).join("")}
         </div>
@@ -3121,7 +3126,7 @@
       <div class="v8-footer-topline" aria-hidden="true"></div>
       <div class="v8-footer-brandline">
         <a class="v8-footer-logo" href="#topo" aria-label="Voltar ao topo do Catálogo CZS">
-          <img src="${BRAND_HORIZONTAL}" alt="Catálogo CZS">
+          <img src="${BRAND_HORIZONTAL}" alt="Catálogo CZS" loading="lazy" decoding="async" fetchpriority="low">
           <strong>Informação que conecta</strong>
         </a>
         <nav class="v8-footer-social" aria-label="Atalhos sociais e recursos do CZS">
@@ -4029,28 +4034,22 @@
 
     const handleIntroMediaGesture = (event) => {
       if (!introLoadingReady || finished || introVideoStarted) return;
-      if (event?.cancelable) event.preventDefault();
-      retryIntroMedia();
+      recordIntroMedia("visible-start-control");
+      startIntroMedia();
     };
 
     const armIntroMediaRetry = () => {
       if (introMediaRetryArmed || (introVideoStarted && (introVoiceStarted || !introVoice))) return;
       introMediaRetryArmed = true;
-      ["pointerdown", "mousedown", "touchstart", "keydown", "click"].forEach((eventName) => {
-        window.addEventListener(eventName, retryIntroMedia, { passive: true, once: true, capture: true });
-        loader.addEventListener(eventName, retryIntroMedia, { passive: true, once: true, capture: true });
-        introVideoScene?.addEventListener(eventName, handleIntroMediaGesture, { passive: false });
-        introVideoLabel?.addEventListener(eventName, handleIntroMediaGesture, { passive: false });
-      });
+      if (introVideoLabel) introVideoLabel.addEventListener("click", handleIntroMediaGesture, { capture: true });
+      else introVideoScene?.addEventListener("click", handleIntroMediaGesture);
+      window.addEventListener("keydown", retryIntroMedia, { once: true, capture: true });
     };
 
     const clearIntroMediaRetry = () => {
-      ["pointerdown", "mousedown", "touchstart", "keydown", "click"].forEach((eventName) => {
-        window.removeEventListener(eventName, retryIntroMedia, { capture: true });
-        loader.removeEventListener(eventName, retryIntroMedia, { capture: true });
-        introVideoScene?.removeEventListener(eventName, handleIntroMediaGesture);
-        introVideoLabel?.removeEventListener(eventName, handleIntroMediaGesture);
-      });
+      window.removeEventListener("keydown", retryIntroMedia, { capture: true });
+      introVideoScene?.removeEventListener("click", handleIntroMediaGesture);
+      introVideoLabel?.removeEventListener("click", handleIntroMediaGesture, { capture: true });
     };
 
     const mediaNearEnd = (node) => Boolean(
@@ -4454,7 +4453,7 @@
     panel.setAttribute("aria-label", "Serviços comerciais do Catálogo CZS");
     panel.innerHTML = `
       <button type="button" class="v8-entry-close" aria-label="Fechar atalhos">×</button>
-      <img class="v8-commercial-aylla" src="${RAYL_POSES.seatedFeature}" alt="" aria-hidden="true" decoding="async">
+      <img class="v8-commercial-aylla" src="${RAYL_POSES.seatedFeature}" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low">
       <div class="v8-commercial-speech"><b>RAIane CZS.</b> Seja bem-vindo. Escolha uma opção ou me diga o que procura.</div>
       <div class="v8-commercial-shell">
         <header class="v8-commercial-head">
