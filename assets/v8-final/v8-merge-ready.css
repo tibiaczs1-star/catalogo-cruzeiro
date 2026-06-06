@@ -10200,3 +10200,197 @@ body.v8-merge-ready .v8-procurement-list span {
     transform: none !important;
   }
 }
+
+/* 20260606 v44: final responsive cleanup for narrow phones and cold mobile paint. */
+body.v8-merge-ready .btn,
+body.v8-merge-ready .small-btn,
+body.v8-merge-ready .chip,
+body.v8-merge-ready .shortcut-card,
+body.v8-merge-ready .v8-research-data .shortcut-card,
+body.v8-merge-ready .v8-newsletter-daily button {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+body.v8-merge-ready .btn,
+body.v8-merge-ready .small-btn,
+body.v8-merge-ready .v8-hero-controls .btn,
+body.v8-merge-ready .actions .btn,
+body.v8-merge-ready .actions .small-btn,
+body.v8-merge-ready .v8-newsletter-daily button {
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-align: center !important;
+}
+
+body.v8-merge-ready .shortcut-grid,
+body.v8-merge-ready .v8-research-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)) !important;
+  align-items: stretch !important;
+}
+
+body.v8-merge-ready .v8-research-data .shortcut-card {
+  min-height: 0 !important;
+  height: auto !important;
+  align-content: start !important;
+  gap: 10px !important;
+  padding: 14px !important;
+  overflow: hidden !important;
+}
+
+body.v8-merge-ready #pubpaidAtalhos.v8-research-data .shortcut-card,
+body.v8-merge-ready #pubpaidAtalhos .v8-research-data .shortcut-card {
+  min-height: 0 !important;
+  height: auto !important;
+  align-content: start !important;
+  overflow: hidden !important;
+}
+
+body.v8-merge-ready .v8-research-data .shortcut-card::after,
+body.v8-merge-ready #pubpaidAtalhos.v8-research-data .shortcut-card::after,
+body.v8-merge-ready #pubpaidAtalhos .v8-research-data .shortcut-card::after {
+  display: none !important;
+}
+
+body.v8-merge-ready .v8-research-data .shortcut-card p {
+  display: block !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+body.v8-merge-ready #pubpaidAtalhos.v8-research-data .shortcut-card p,
+body.v8-merge-ready #pubpaidAtalhos .v8-research-data .shortcut-card p {
+  display: -webkit-box !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+body.v8-merge-ready .v8-newsletter-box,
+body.v8-merge-ready #newsletterForm,
+body.v8-merge-ready #newsletter .search {
+  min-width: 0 !important;
+}
+
+body.v8-merge-ready #newsletter.v8-newsletter-daily #newsletterForm,
+body.v8-merge-ready .v8-newsletter-box #newsletterForm {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(128px, auto) !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+  border: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+body.v8-merge-ready .v8-newsletter-box input,
+body.v8-merge-ready .v8-newsletter-box button {
+  width: 100% !important;
+}
+
+body.v8-merge-ready #newsletter.v8-newsletter-daily #newsletterForm button {
+  width: 100% !important;
+  min-height: 44px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 8px 12px !important;
+  white-space: normal !important;
+  line-height: 1.1 !important;
+}
+
+body.v8-merge-ready .news-card .badge,
+body.v8-merge-ready .v8-continuous-card .badge {
+  display: inline-flex !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  margin-bottom: 8px !important;
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready .v8-newsletter-box {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready #newsletter.v8-newsletter-daily > .v8-newsletter-box {
+    display: block !important;
+    grid-template-columns: none !important;
+    justify-content: stretch !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+  }
+
+  body.v8-merge-ready #newsletter.v8-newsletter-daily > .v8-newsletter-box > * + * {
+    margin-top: 12px !important;
+  }
+
+  body.v8-merge-ready .v8-newsletter-box #newsletterForm,
+  body.v8-merge-ready #newsletter.v8-newsletter-daily #newsletterForm,
+  body.v8-merge-ready #newsletter .search {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready #newsletter.v8-newsletter-daily #newsletterForm,
+  body.v8-merge-ready #newsletter.v8-newsletter-daily #newsletterForm input,
+  body.v8-merge-ready #newsletter.v8-newsletter-daily #newsletterForm button {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  body.v8-merge-ready .shortcut-grid,
+  body.v8-merge-ready .v8-research-grid,
+  body.v8-merge-ready #pubpaidAtalhos .shortcut-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready .v8-research-data .shortcut-card {
+    min-height: 0 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body.v8-merge-ready .v8-hero-controls {
+    grid-template-columns: 36px repeat(3, minmax(0, 1fr)) 36px !important;
+    gap: 4px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .v8-icon-btn {
+    width: 36px !important;
+    height: 38px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .btn {
+    min-height: 38px !important;
+    padding: 6px 3px !important;
+    font-size: 10px !important;
+    line-height: 1.02 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .shareBtn,
+  body.v8-merge-ready .v8-hero-controls [data-v8-cheffe] {
+    font-size: 0 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .shareBtn::after,
+  body.v8-merge-ready .v8-hero-controls [data-v8-cheffe]::after {
+    display: inline !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .shareBtn::after {
+    content: "Compart.";
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-cheffe]::after {
+    content: "Erro";
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-cheffe].is-review-sent::after {
+    content: "OK";
+  }
+}

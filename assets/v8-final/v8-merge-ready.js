@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260605-v8-public-corrective-pass-v43";
+  const V8_BOOT_VERSION = "20260606-v8-final-responsive-clean-v47";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -153,6 +153,7 @@
     label: "Snapshot local",
     total: DATA.archiveTotal || allStories.length,
   };
+  let archiveEndpointLoadPromise = null;
   let cheffeBackendState = {
     status: "local",
     label: "Fila local",
@@ -2903,6 +2904,19 @@
     }
   }
 
+  function requestArchiveEndpoint(reason = "idle") {
+    if (archiveEndpointLoadPromise) return archiveEndpointLoadPromise;
+    const load = () => loadArchiveEndpoint(reason);
+    archiveEndpointLoadPromise = new Promise((resolve) => {
+      if (typeof window.requestIdleCallback === "function") {
+        window.requestIdleCallback(() => resolve(load()), { timeout: 6500 });
+        return;
+      }
+      window.setTimeout(() => resolve(load()), 5200);
+    });
+    return archiveEndpointLoadPromise;
+  }
+
   function photoDeskStories() {
     const approved = safeRead("czs-v8-photo-approvals", {});
     return allStories
@@ -5567,7 +5581,7 @@
     renderArchiveExplorer();
     renderCheffeCommand();
     renderCheffePhotoDesk();
-    loadArchiveEndpoint();
+    window.setTimeout(() => requestArchiveEndpoint("post-first-paint"), 4800);
     loadCheffeBackendState();
     renderResearchAndSupport();
     hydrateReaderServices();
