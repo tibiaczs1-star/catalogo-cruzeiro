@@ -6,7 +6,7 @@ Site CZS v63 - notícias + patrocinador Norte Ultra Fibra:
 
 - Captação disparada em 2026-06-08: `capturedItems=371`, `capturedToday=227`, `activeWindowItems=420`, `archiveItems=620`.
 - Arquivos sincronizados: `index.html`, `news-data.js`, `data/runtime-news.json`, `data/news-archive.json`, `data/latest-news-capture-report.json`.
-- Cache-buster/versão: `20260608-norte-news-v63`.
+- Cache-buster/versão: `20260608-norte-news-v64`.
 - Patrocinador distribuído no V8:
   - arte temporária: `assets/sponsors-norte-ultra-fibra.svg`;
   - WhatsApp oficial: `https://wa.me/5568992096037`;
@@ -18,7 +18,8 @@ Site CZS v63 - notícias + patrocinador Norte Ultra Fibra:
   - `npm run review:team` com guard PubPaid OK;
   - `Invoke-WebRequest http://localhost:3001/?skipIntro=1&fresh=20260608-norte-news-v63` retornou 200 e `total=620`;
   - capturas CDP em `.codex-temp/norte-v63/`.
-- Próximo passo imediato: commitar somente os arquivos da rodada, fazer push para `main`, disparar Render e checar online com `?skipIntro=1&fresh=20260608-norte-news-v63`.
+- Galeria premium passou a usar imagens locais de `assets/home-cache/` para evitar cards cinza quando imagem externa falhar.
+- Próximo passo imediato: commitar somente os arquivos da rodada, fazer push para `main`, disparar Render e checar online com `?skipIntro=1&fresh=20260608-norte-news-v64`.
 
 Rotina social 2026-06-08 tarde:
 
@@ -57,3 +58,14 @@ Correcao/novo pacote apos reclamacao do usuario:
 - Depois publicar no perfil e compartilhar em grupos usando a fila `facebook-ready-blocked-queue.json`.
 - Nao postar Facebook pelo perfil `Antonio e Rnascimento Jr.`.
 - Para postar Norte Ultra Fibra, usar feed para criativos abrangentes e stories para ofertas especificas. Em Facebook, so depois de confirmar perfil `Clovis Sampaio`.
+
+Rodada complementar de vendas diretas 2026-06-08:
+
+- Pacote criado: `.codex-temp/sales-direct-missing-20260608/`.
+- WhatsApp disparado via Chrome/WhatsApp Business Web com coordenadas calibradas para a tela 4096x2160.
+- Log final: `.codex-temp/sales-direct-missing-20260608/whatsapp-sales-direct-log.json`.
+- Resultado: 24 envios, 0 erros, com 8 itens em cada grupo (`VENDAS E ALUGUEL! CZS`, `03 POSTAR QUE VENDE LOGO CZS`, `GRUPO DE DESAPEGO`).
+- Itens enviados: TV, Redmi Note 13, gift cards/streaming/IA, suporte celular/computador, sites/chats/automacao e convites separados para Instagram, WhatsApp e site.
+- Reels: BlueStacks/Instagram publicou 1 Reel comercial em `catalogo_czs_`; prova em `.codex-temp/sales-direct-missing-20260608/reel-sales-after-share.png`.
+- Reels restantes prontos como videos locais em `.codex-temp/sales-direct-missing-20260608/reels/`, mas o Instagram so aceitou selecionar com confianca a versao camera-like `VID_20260608_1715_REEL_CZS_REDMI.mp4`.
+- Facebook ainda nao deve ser executado enquanto o perfil correto `Clovis Sampaio` nao estiver visivel/ativo.

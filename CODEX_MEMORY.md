@@ -1083,10 +1083,20 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Reels virou linha diaria de captacao: noticias, festas, servicos, ofertas, bastidores, piadas locais leves e produtos devem virar videos curtos com CTA para site/Instagram/WhatsApp quando cabivel.
 - Facebook segue bloqueado ate o perfil correto `Clovis Sampaio` estar ativo; nao publicar pelo perfil `Antonio e Rnascimento Jr.`.
 
-## V8 Catálogo CZS - 2026-06-08 notícias + patrocinador Norte v63
+## V8 Catálogo CZS - 2026-06-08 notícias + patrocinador Norte v64
 
 - Captação total disparada em 2026-06-08: 371 itens captados, 227 de hoje, 420 ativos e 620 no arquivo.
-- `index.html`, `news-data.js`, `data/runtime-news.json` e `data/news-archive.json` foram sincronizados com o novo arquivo local e cache `20260608-norte-news-v63`.
+- `index.html`, `news-data.js`, `data/runtime-news.json` e `data/news-archive.json` foram sincronizados com o novo arquivo local e cache `20260608-norte-news-v64`.
 - Norte Ultra Fibra entrou como colaborador/patrocinador real com CTA para `https://wa.me/5568992096037`, botão `Contratar internet`, cards comerciais, anúncio interno, apoio local e campanhas 500/600/800 Mega.
 - Arte local temporária do patrocinador: `assets/sponsors-norte-ultra-fibra.svg`; pode ser substituída depois pelas artes finais recebidas no WhatsApp.
+- Galeria premium passou a usar imagens locais de `assets/home-cache/` para evitar cards cinza quando redirects externos falham no Render.
 - Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` no escopo, `npm run review:team`, HTML local 200 com `total=620`, e captura CDP em `.codex-temp/norte-v63/`.
+
+## Social/Propaganda - 2026-06-08 complemento vendas diretas e Reel
+
+- Pacote `.codex-temp/sales-direct-missing-20260608/` criado para corrigir a falta de anúncios de celular, TV, gift cards/streaming/IA e serviços.
+- WhatsApp grupos de venda: 24 envios concluídos, 0 erros, com 8 itens por grupo em `VENDAS E ALUGUEL! CZS`, `03 POSTAR QUE VENDE LOGO CZS` e `GRUPO DE DESAPEGO`.
+- Itens enviados: TV, Redmi Note 13, gift/streaming/IA, suporte para celular/computador, sites/chats/automação e convites separados para Instagram, WhatsApp e site.
+- Log/prova: `.codex-temp/sales-direct-missing-20260608/whatsapp-sales-direct-log.json` e `done-*.png`.
+- Instagram/BlueStacks: publicado 1 Reel comercial em `catalogo_czs_` usando video vertical criado da arte do Redmi; prova em `.codex-temp/sales-direct-missing-20260608/reel-sales-after-share.png`.
+- Facebook permaneceu bloqueado: a opção vinculada mostrava `Antonio e Rnascimento Jr.`, não `Clovis Sampaio`.

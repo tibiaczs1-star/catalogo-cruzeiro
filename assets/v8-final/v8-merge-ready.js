@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260608-norte-news-v63";
+  const V8_BOOT_VERSION = "20260608-norte-news-v64";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -2785,7 +2785,7 @@
       {
         title: "Rio Juruá ao amanhecer",
         text: "Bruma, água baixa e horizonte do Juruá em Cruzeiro do Sul.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rio%20Jurua%2C%20Cruzeiro%20do%20Sul%2C%20Acre.jpg?width=1400",
+        src: "assets/home-cache/rio-jurua-panorama.jpg",
         href: "https://commons.wikimedia.org/wiki/File:Rio_Jurua,_Cruzeiro_do_Sul,_Acre.jpg",
         sourceLabel: "Wikimedia Commons",
         kind: "foto",
@@ -2793,7 +2793,7 @@
       {
         title: "Alto Rio Moa",
         text: "Serra do Divisor, água, mata e rota ribeirinha em visual cinematográfico.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Alto%20rio%20Moa%2C%20Parque%20Nacional%20Serra%20do%20Divisor%2C%20Acre%2C%20Brazil.jpg?width=1400",
+        src: "assets/home-cache/fallback-cheia.jpg",
         href: "https://commons.wikimedia.org/wiki/Category:Parque_Nacional_da_Serra_do_Divisor",
         sourceLabel: "Commons Serra do Divisor",
         kind: "foto",
@@ -2801,7 +2801,7 @@
       {
         title: "Cachoeira Encantada",
         text: "Queda d'água da Serra do Divisor para abrir a galeria como turismo premium.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Cachoeira%20Encantada%20na%20Serra%20do%20Divisor.jpg?width=1400",
+        src: "assets/home-cache/fallback-cotidiano.jpg",
         href: "https://commons.wikimedia.org/wiki/File:Cachoeira_Encantada_na_Serra_do_Divisor.jpg",
         sourceLabel: "Wikimedia Commons",
         kind: "foto",
@@ -2809,7 +2809,7 @@
       {
         title: "Rio Moa e canoa",
         text: "Vida ribeirinha, travessia e paisagem de água no extremo oeste acreano.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rio%20Moa%20canoa.jpg?width=1200",
+        src: "assets/home-cache/buzz-via-cruzeiro.jpg",
         href: "https://commons.wikimedia.org/wiki/File:Rio_Moa_canoa.jpg",
         sourceLabel: "Wikimedia Commons",
         kind: "foto",
@@ -2817,7 +2817,7 @@
       {
         title: "Ribeirinho pé da serra",
         text: "Retrato humano e cotidiano ribeirinho para lembrar que galeria também é gente.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ribeirinho%20peh%20da%20serra.jpg?width=1100",
+        src: "assets/home-cache/news-batelao-local.jpg",
         href: "https://commons.wikimedia.org/wiki/File:Ribeirinho_peh_da_serra.jpg",
         sourceLabel: "Wikimedia Commons",
         kind: "foto",
@@ -2825,7 +2825,7 @@
       {
         title: "Nascer do sol no mirante",
         text: "Luz baixa, serra e floresta: imagem para abrir em tela cheia.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nascer%20do%20sol%20mirante.jpg?width=1200",
+        src: "assets/home-cache/footer-cruzeiro-bg.jpg",
         href: "https://commons.wikimedia.org/wiki/File:Nascer_do_sol_mirante.jpg",
         sourceLabel: "Wikimedia Commons",
         kind: "foto",
@@ -2833,7 +2833,7 @@
       {
         title: "Juruá Aventuras em vídeo",
         text: "Canal jovem local mostrando rios, igarapés, comunidades e Serra do Divisor.",
-        src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ribeirinho%20peh%20da%20serra.jpg?width=1100",
+        src: "assets/home-cache/trend-lia-jurua.jpg",
         href: "https://jurua24horas.com/2025/09/canal-de-jovem-de-cruzeiro-do-sul-alcanca-100-mil-inscritos-no-youtube-e-divulga-cultura-do-vale-do-jurua/",
         sourceLabel: "Juruá 24 Horas",
         kind: "video",
