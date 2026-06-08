@@ -9,12 +9,12 @@ Updated: 2026-06-08T22:25:00.000Z
 ## Summary
 
 - Captação total do site disparada: 371 itens captados, 227 de hoje, 420 ativos e 620 no arquivo local.
-- Cache/versionamento atual: `20260608-norte-news-v64` em `index.html` e `assets/v8-final/v8-merge-ready.js`.
+- Cache/versionamento atual: `20260608-norte-news-v65` em `index.html` e `assets/v8-final/v8-merge-ready.js`.
 - Norte Ultra Fibra distribuído no site como patrocinador: apoio local, bloco comercial, campanhas 500/600/800 Mega, anúncios internos e CTA `Contratar internet`.
 - WhatsApp oficial usado nos CTAs: `https://wa.me/5568992096037`.
 - Arte local temporária do patrocinador: `assets/sponsors-norte-ultra-fibra.svg`; pode ser trocada depois pelas artes finais do WhatsApp.
-- Galeria premium ajustada para imagens locais de `assets/home-cache/`, evitando cards cinza por redirects externos.
-- Validação local feita em `http://localhost:3001/?skipIntro=1&fresh=20260608-norte-news-v64`: HTML 200 com `total=620`, links do WhatsApp renderizados e capturas em `.codex-temp/norte-v63/`.
+- Galeria premium ajustada para imagens locais de `assets/home-cache/` com carregamento `eager`, evitando cards cinza por redirects externos ou lazy-load.
+- Validação local feita em `http://localhost:3001/?skipIntro=1&fresh=20260608-norte-news-v65`: HTML 200 com `total=620`, links do WhatsApp renderizados e capturas em `.codex-temp/norte-v63/`.
 - `npm run review:team` rodou e passou o guard PubPaid; relatório geral ainda aponta achados antigos fora do escopo em `tools/creative-suite`, venvs e exemplos vendorizados.
 
 ## Prior Social State

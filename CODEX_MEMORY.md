@@ -1083,13 +1083,13 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Reels virou linha diaria de captacao: noticias, festas, servicos, ofertas, bastidores, piadas locais leves e produtos devem virar videos curtos com CTA para site/Instagram/WhatsApp quando cabivel.
 - Facebook segue bloqueado ate o perfil correto `Clovis Sampaio` estar ativo; nao publicar pelo perfil `Antonio e Rnascimento Jr.`.
 
-## V8 Catálogo CZS - 2026-06-08 notícias + patrocinador Norte v64
+## V8 Catálogo CZS - 2026-06-08 notícias + patrocinador Norte v65
 
 - Captação total disparada em 2026-06-08: 371 itens captados, 227 de hoje, 420 ativos e 620 no arquivo.
-- `index.html`, `news-data.js`, `data/runtime-news.json` e `data/news-archive.json` foram sincronizados com o novo arquivo local e cache `20260608-norte-news-v64`.
+- `index.html`, `news-data.js`, `data/runtime-news.json` e `data/news-archive.json` foram sincronizados com o novo arquivo local e cache `20260608-norte-news-v65`.
 - Norte Ultra Fibra entrou como colaborador/patrocinador real com CTA para `https://wa.me/5568992096037`, botão `Contratar internet`, cards comerciais, anúncio interno, apoio local e campanhas 500/600/800 Mega.
 - Arte local temporária do patrocinador: `assets/sponsors-norte-ultra-fibra.svg`; pode ser substituída depois pelas artes finais recebidas no WhatsApp.
-- Galeria premium passou a usar imagens locais de `assets/home-cache/` para evitar cards cinza quando redirects externos falham no Render.
+- Galeria premium passou a usar imagens locais de `assets/home-cache/` e carregamento `eager` nos tiles para evitar cards cinza quando redirects externos ou lazy-load falham no Render.
 - Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` no escopo, `npm run review:team`, HTML local 200 com `total=620`, e captura CDP em `.codex-temp/norte-v63/`.
 
 ## Social/Propaganda - 2026-06-08 complemento vendas diretas e Reel

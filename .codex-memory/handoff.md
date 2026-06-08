@@ -6,7 +6,7 @@ Site CZS v63 - notícias + patrocinador Norte Ultra Fibra:
 
 - Captação disparada em 2026-06-08: `capturedItems=371`, `capturedToday=227`, `activeWindowItems=420`, `archiveItems=620`.
 - Arquivos sincronizados: `index.html`, `news-data.js`, `data/runtime-news.json`, `data/news-archive.json`, `data/latest-news-capture-report.json`.
-- Cache-buster/versão: `20260608-norte-news-v64`.
+- Cache-buster/versão: `20260608-norte-news-v65`.
 - Patrocinador distribuído no V8:
   - arte temporária: `assets/sponsors-norte-ultra-fibra.svg`;
   - WhatsApp oficial: `https://wa.me/5568992096037`;
@@ -18,8 +18,8 @@ Site CZS v63 - notícias + patrocinador Norte Ultra Fibra:
   - `npm run review:team` com guard PubPaid OK;
   - `Invoke-WebRequest http://localhost:3001/?skipIntro=1&fresh=20260608-norte-news-v63` retornou 200 e `total=620`;
   - capturas CDP em `.codex-temp/norte-v63/`.
-- Galeria premium passou a usar imagens locais de `assets/home-cache/` para evitar cards cinza quando imagem externa falhar.
-- Próximo passo imediato: commitar somente os arquivos da rodada, fazer push para `main`, disparar Render e checar online com `?skipIntro=1&fresh=20260608-norte-news-v64`.
+- Galeria premium passou a usar imagens locais de `assets/home-cache/` com carregamento `eager` para evitar cards cinza quando imagem externa ou lazy-load falhar.
+- Próximo passo imediato: commitar somente os arquivos da rodada, fazer push para `main`, disparar Render e checar online com `?skipIntro=1&fresh=20260608-norte-news-v65`.
 
 Rotina social 2026-06-08 tarde:
 

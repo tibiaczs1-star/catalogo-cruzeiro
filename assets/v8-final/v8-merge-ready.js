@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260608-norte-news-v64";
+  const V8_BOOT_VERSION = "20260608-norte-news-v65";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -2878,7 +2878,7 @@
       <div class="v8-gallery-grid">
         ${items.map((item, itemIndex) => `
           <button class="v8-gallery-tile" type="button" data-v8-gallery-open="${itemIndex}">
-            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy" decoding="async" fetchpriority="low">
+            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="eager" decoding="async" fetchpriority="low">
             <span><i>${esc(item.kind === "video" ? "Vídeo" : "Foto")}</i><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span>
           </button>`).join("")}
       </div>
