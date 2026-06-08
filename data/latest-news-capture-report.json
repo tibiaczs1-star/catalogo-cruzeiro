@@ -1,16 +1,16 @@
 {
   "ok": true,
-  "startedAt": "2026-06-05T04:21:04.434Z",
-  "finishedAt": "2026-06-05T04:21:15.202Z",
+  "startedAt": "2026-06-08T21:26:02.501Z",
+  "finishedAt": "2026-06-08T21:26:12.276Z",
   "capturedItems": 371,
-  "capturedToday": 218,
-  "activeWindowItems": 360,
-  "archiveItems": 480,
+  "capturedToday": 227,
+  "activeWindowItems": 420,
+  "archiveItems": 620,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
       "ok": true,
-      "count": 20,
+      "count": 19,
       "blocked": 0,
       "mode": "rss"
     },
@@ -59,7 +59,7 @@
     {
       "source": "batelao",
       "ok": true,
-      "count": 10,
+      "count": 0,
       "blocked": 0,
       "mode": "rss"
     },
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -192,21 +192,21 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 0,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -254,9 +254,10 @@
     },
     {
       "source": "voz-do-norte",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 9,
+      "blocked": 0,
+      "mode": "rss"
     }
   ]
 }

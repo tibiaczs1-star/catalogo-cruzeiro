@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260606-v8-offices-coming-soon-v60";
+  const V8_BOOT_VERSION = "20260608-norte-news-v63";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -19,6 +19,9 @@
   const SOCIAL_INSTAGRAM = "https://www.instagram.com/catalogo_czs_/";
   const SOCIAL_WHATSAPP_NUMBER = "556896026649";
   const SOCIAL_WHATSAPP = `https://wa.me/${SOCIAL_WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi, CZS. Vim pelo V8 e quero atendimento.")}`;
+  const NORTE_WHATSAPP_NUMBER = "5568992096037";
+  const NORTE_SPONSOR_IMAGE = "assets/sponsors-norte-ultra-fibra.svg";
+  const NORTE_SPONSOR_HREF = `https://wa.me/${NORTE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar internet.")}`;
   const CHEFFE_ACTIONS_KEY = "czs-v8-cheffe-actions";
   const COMMUNITY_REPORTS_KEY = "czs-v8-community-reports";
   const NEWSLETTER_LEADS_KEY = "czs-v8-newsletter-leads";
@@ -249,6 +252,10 @@
 
   function whatsappHref(message) {
     return `https://wa.me/${SOCIAL_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  }
+
+  function norteHref(message = "Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar internet.") {
+    return `https://wa.me/${NORTE_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   }
 
   const slugFromHref = (href) => {
@@ -1509,13 +1516,13 @@
           </aside>
         </section>
         <section class="v8-reader-ad-grid" aria-label="Áreas de divulgação">
-          <a class="v8-reader-ad v8-reader-ad-wide" href="#monetizacao">
-            <span>Publicidade premium</span>
-            <b>Topo, meio da leitura e cards nativos para marcas locais.</b>
+          <a class="v8-reader-ad v8-reader-ad-wide v8-norte-reader-ad" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+            <span>Norte Ultra Fibra</span>
+            <b>Internet de verdade: 30% OFF na primeira fatura pelo CZS.</b>
           </a>
-          <a class="v8-reader-ad" href="#monetizacao">
-            <span>Comércio local</span>
-            <b>Oferta do dia, serviço ou campanha com contexto editorial.</b>
+          <a class="v8-reader-ad v8-norte-reader-ad" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+            <span>Contratar internet</span>
+            <b>Planos 500, 600 e 800 Mega com atendimento no WhatsApp.</b>
           </a>
           <a class="v8-reader-ad" href="#newsletter">
             <span>Resumo grátis</span>
@@ -1579,7 +1586,7 @@
       const paragraph = `<p>${esc(p)}</p>`;
       const shouldInsertAd = paragraphs.length > 4 ? index === 2 : index === 0;
       if (shouldInsertAd) {
-        return `${paragraph}<aside class="v8-in-article-ad"><span>Divulgação</span><b>Espaço nativo para comércio, serviço público ou campanha local.</b><a href="#monetizacao">Anunciar aqui</a></aside>`;
+        return `${paragraph}<aside class="v8-in-article-ad v8-norte-inline-ad"><span>Norte Ultra Fibra</span><b>30% OFF na primeira fatura. Internet fibra óptica para casa, estudo, trabalho e streaming.</b><a href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a></aside>`;
       }
       return paragraph;
     }).join("");
@@ -2152,15 +2159,15 @@
     if (!section) return;
     section.classList.remove("v8-cheffe-command");
     section.classList.add("v8-reader-offices", "v8-autonomous-agents-gateway");
-    const agents = getAutonomousAgentPreviews();
     section.innerHTML = `
       <div class="panel pad v8-offices-workspace v8-agent-gateway" id="agentesAutonomos">
-        <div class="section-kicker">Agentes autônomos</div>
-        <h2>Escritórios dos agentes</h2>
-        <p class="v8-cheffe-lead">Ambientes em preparação. Por enquanto, conheça os escritórios, personagens e variações visuais do Cheffe Call.</p>
-        <div class="v8-offices-coming-banner" role="status"><b>Em breve</b><span>Os escritórios ainda não recebem comandos públicos.</span></div>
-        <div class="v8-agent-stage" aria-label="Escritórios visuais dos agentes autônomos">
-          ${agents.map(agentGatewayCard).join("")}
+        <div class="v8-offices-placeholder" role="status">
+          <div>
+            <span>Cheffe Call</span>
+            <h2>Escritórios dos agentes</h2>
+            <p>Ambiente em reformulação.</p>
+          </div>
+          <b>Em breve</b>
         </div>
       </div>`;
     if (!section.dataset.v8CheffeBound) {
@@ -2186,7 +2193,7 @@
         title: "Escritório Nerd",
         label: "Cheffe Call",
         text: "mostra a sala dos agentes, tecnologia, revisão e organização do projeto.",
-        img: "assets/fusion-avatar-hologram-optimized.webp",
+        img: "",
         bg: "/assets/cheffe-call-nerd-straight-seats-ai.png",
         href: "#infosGerais",
       },
@@ -2195,7 +2202,7 @@
         title: "Cheffe Call Auditório",
         label: "Variação",
         text: "variação ampla com 200 lugares para reuniões e operações coordenadas.",
-        img: "assets/fusion-avatar-hologram-optimized.webp",
+        img: "",
         bg: "/assets/cheffe-call-200-seats-ai.png",
         href: "#infosGerais",
       },
@@ -2204,7 +2211,7 @@
         title: "Cheffe Call Reunião",
         label: "Variação",
         text: "ambiente visual para briefing, revisão coletiva e decisões editoriais.",
-        img: "assets/fusion-avatar-hologram-optimized.webp",
+        img: "",
         bg: "/assets/cheffe-call-meeting-theater-ai.png",
         href: "#infosGerais",
       },
@@ -2213,7 +2220,7 @@
         title: "Cheffe Call Palco Sul",
         label: "Variação",
         text: "cenário de apresentação para missões, relatórios e acompanhamento dos agentes.",
-        img: "assets/fusion-avatar-hologram-optimized.webp",
+        img: "",
         bg: "/assets/cheffe-call-south-stage-theater-ai.png",
         href: "#infosGerais",
       },
@@ -2252,7 +2259,7 @@
       <article class="v8-agent-public-card is-coming-soon" id="${esc(agent.id)}" aria-disabled="true" style="--agent-bg:url('${esc(agent.bg)}')">
         <span class="v8-agent-label">${esc(agent.label || "Agente")}</span>
         <span class="v8-agent-coming">Em breve</span>
-        <span class="v8-agent-sprite"><img src="${esc(agent.img)}" alt="${esc(agent.title)}" loading="lazy" decoding="async" fetchpriority="low"></span>
+        ${agent.img ? `<span class="v8-agent-sprite"><img src="${esc(agent.img)}" alt="${esc(agent.title)}" loading="lazy" decoding="async" fetchpriority="low"></span>` : ""}
         <b>${esc(agent.title)}</b>
         <p>${esc(agent.text)}</p>
       </article>`;
@@ -3545,6 +3552,7 @@
     if (support) {
       support.classList.add("v8-local-support");
       const partners = [
+        ["Norte Ultra Fibra", NORTE_SPONSOR_IMAGE, "internet fibra óptica, Wi-Fi 6 e planos 500/600/800 Mega", NORTE_SPONSOR_HREF, "is-norte"],
         ["Café Cruzeiro", "assets/founders-cafe-pack-static.png", "café local", "divulgue.html#apoio-local"],
         ["Shopping Copacabana", "", "comércio local", "divulgue.html#apoio-local"],
         ["Dra. Geane Odontologia", "assets/founders-geane-logo-optimized.png", "saúde e cuidado", "divulgue.html#apoio-local"],
@@ -3560,13 +3568,14 @@
           <a class="btn ghost" href="${SOCIAL_WHATSAPP}" target="_blank" rel="noopener">Ser apoiador</a>
         </div>
         <div class="v8-support-grid">
-          ${partners.map(([name, logo, label, href]) => `
-            <article class="v8-support-card">
+          ${partners.map(([name, logo, label, href, extraClass]) => `
+            <article class="v8-support-card ${esc(extraClass || "")}">
               <div class="v8-support-logo">
                 ${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy" decoding="async" fetchpriority="low">` : `<span class="v8-support-logo-text">${esc(name)}</span>`}
               </div>
-              <a class="v8-support-title-link" href="${esc(href)}">${esc(name)}</a>
+              <a class="v8-support-title-link" href="${esc(href)}" ${/^https?:\/\//.test(href || "") ? 'target="_blank" rel="noopener"' : ""}>${esc(name)}</a>
               <p>${esc(label)}</p>
+              ${extraClass === "is-norte" ? `<a class="small-btn v8-norte-contract" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>` : ""}
             </article>`).join("")}
         </div>`;
     }
@@ -5672,6 +5681,33 @@
   function defaultCommercialCampaigns() {
     return [
       {
+        id: "norte-ultra-fibra-500",
+        title: "Norte 500 Mega",
+        slot: "patrocinador",
+        size: "30% OFF",
+        text: "Plano 500 Mega, fibra óptica e Wi-Fi de alta performance. Contrate pelo WhatsApp.",
+        href: norteHref("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar o plano 500 Mega."),
+        sponsor: "Norte Ultra Fibra",
+      },
+      {
+        id: "norte-ultra-fibra-600",
+        title: "Norte 600 Mega",
+        slot: "internet",
+        size: "primeira fatura",
+        text: "Mais velocidade para games, streaming, estudo e home office.",
+        href: norteHref("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero saber do plano 600 Mega."),
+        sponsor: "Norte Ultra Fibra",
+      },
+      {
+        id: "norte-ultra-fibra-800",
+        title: "Norte 800 Mega",
+        slot: "ultra fibra",
+        size: "família",
+        text: "Internet ultrarrápida para toda a casa, com instalação rápida e suporte local.",
+        href: norteHref("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero saber do plano 800 Mega."),
+        sponsor: "Norte Ultra Fibra",
+      },
+      {
         id: "topo-premium",
         title: "Topo premium",
         slot: "home-topo",
@@ -5839,11 +5875,16 @@
             <p>Escolha anúncio, site, app, automação ou campanha e fale direto com o CZS.</p>
           </div>
           <div class="actions">
+            <a class="btn gold" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="btn gold" href="${whatsappHref("Oi, CZS. Quero anunciar ou contratar um serviço digital pelo V8.")}" target="_blank" rel="noopener">WhatsApp comercial</a>
             <a class="btn ghost" href="mailto:${SOCIAL_EMAIL}?subject=Comercial%20CZS%20V8">Enviar e-mail</a>
             <a class="btn ghost" href="divulgue.html">Ver página comercial</a>
           </div>
         </div>
+        <a class="v8-norte-hero-ad" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
+          <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra - contratar internet" loading="lazy" decoding="async" fetchpriority="low">
+          <span><b>Norte Ultra Fibra</b><small>30% OFF na primeira fatura. Clique para contratar internet.</small></span>
+        </a>
         <div class="v8-commercial-format-grid">
           <div id="v8CampaignRail" class="v8-campaign-rail" aria-label="Campanhas comerciais em rotação"></div>
         </div>
@@ -5851,6 +5892,7 @@
           <input name="name" autocomplete="name" placeholder="Nome ou empresa">
           <input name="contact" autocomplete="tel" placeholder="WhatsApp ou e-mail">
           <select name="format">
+            <option value="norte-internet">Contratar internet Norte Ultra Fibra</option>
             <option value="card-patrocinado">Card patrocinado</option>
             <option value="topo-premium">Topo premium</option>
             <option value="video-vertical">Vídeo vertical</option>

@@ -11124,3 +11124,141 @@ body.v8-merge-ready #assistantOut .chat.whatsapp {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* 20260608: patrocinador Norte Ultra Fibra distribuido como colaborador real. */
+body.v8-merge-ready .v8-support-card.is-norte {
+  grid-column: span 2;
+  border-color: rgba(255, 111, 0, .42) !important;
+  background:
+    radial-gradient(circle at 78% 15%, rgba(0, 130, 255, .18), transparent 34%),
+    linear-gradient(135deg, #050914 0%, #061b47 52%, #0a1020 100%) !important;
+  color: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-support-card.is-norte .v8-support-logo {
+  min-height: 168px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 14px;
+  background: #030711;
+  overflow: hidden;
+}
+
+body.v8-merge-ready .v8-support-card.is-norte .v8-support-logo img {
+  width: 100%;
+  height: 100%;
+  min-height: 168px;
+  object-fit: contain;
+  padding: 0;
+}
+
+body.v8-merge-ready .v8-support-card.is-norte .v8-support-title-link,
+body.v8-merge-ready .v8-support-card.is-norte p {
+  color: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-support-card.is-norte p {
+  opacity: .88;
+}
+
+body.v8-merge-ready .v8-norte-contract,
+body.v8-merge-ready .v8-norte-inline-ad a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 10px;
+  border-color: #20c161 !important;
+  background: #20c161 !important;
+  color: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-norte-hero-ad {
+  display: grid;
+  grid-template-columns: minmax(280px, .72fr) minmax(220px, .28fr);
+  gap: 14px;
+  align-items: center;
+  margin: 14px 0;
+  padding: 12px;
+  border: 1px solid rgba(255, 111, 0, .34);
+  border-radius: 18px;
+  min-height: 236px;
+  background:
+    linear-gradient(90deg, rgba(2, 7, 17, .18), rgba(255, 255, 255, .76) 58%, rgba(255, 111, 0, .12)),
+    url("../sponsors-norte-ultra-fibra.svg") left center / min(760px, 64%) auto no-repeat,
+    #fffaf2;
+  box-shadow: 0 18px 45px rgba(5, 25, 71, .12);
+  overflow: hidden;
+}
+
+body.v8-merge-ready .v8-norte-hero-ad img {
+  width: min(760px, 100%);
+  min-height: 196px;
+  max-height: 230px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: rgba(2, 5, 12, .78);
+  opacity: .96;
+  box-shadow: 0 16px 36px rgba(2, 9, 28, .18);
+}
+
+body.v8-merge-ready .v8-norte-hero-ad span {
+  display: grid;
+  gap: 8px;
+  color: var(--blue, #092b57);
+  justify-items: start;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .82);
+  box-shadow: 0 10px 28px rgba(2, 9, 28, .08);
+}
+
+body.v8-merge-ready .v8-norte-hero-ad b {
+  font-size: clamp(24px, 2.4vw, 42px);
+  line-height: .95;
+}
+
+body.v8-merge-ready .v8-norte-hero-ad small {
+  color: #32415b;
+  font-weight: 900;
+}
+
+body.v8-merge-ready .v8-norte-reader-ad,
+body.v8-merge-ready .v8-norte-inline-ad {
+  border-color: rgba(255, 111, 0, .42) !important;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(0, 142, 255, .22), transparent 32%),
+    linear-gradient(135deg, #041022, #061b47 62%, #ff6b00) !important;
+  color: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-norte-reader-ad span,
+body.v8-merge-ready .v8-norte-reader-ad b,
+body.v8-merge-ready .v8-norte-inline-ad span,
+body.v8-merge-ready .v8-norte-inline-ad b {
+  color: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-campaign-card[href*="992096037"] {
+  border-color: rgba(255, 111, 0, .5) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 111, 0, .17), rgba(8, 56, 160, .08)),
+    #ffffff !important;
+}
+
+body.v8-merge-ready .v8-campaign-card[href*="992096037"] > i {
+  background:
+    radial-gradient(circle, #20c161 0 28%, transparent 30%),
+    linear-gradient(135deg, #ff6b00, #006dff) !important;
+}
+
+@media (max-width: 900px) {
+  body.v8-merge-ready .v8-support-card.is-norte,
+  body.v8-merge-ready .v8-norte-hero-ad {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+
+  body.v8-merge-ready .v8-norte-hero-ad img {
+    max-height: 210px;
+  }
+}

@@ -1,6 +1,61 @@
 # Codex Memory - Estado Vivo
 
-Atualizado: 2026-06-06
+Atualizado: 2026-06-08
+
+## Rodada Atual - 20260608-pubpaid-turn-avatar-audio-cleanup
+
+- PubPaid 2.0 recebeu ajuste pontual no HUD dos jogos: o botao visual de som foi removido de `pubpaid.html`; as mensagens de entrada agora orientam ajustar pelo volume do aparelho.
+- Textos `Movimento feito...` foram retirados da Damas/Xadrez; no Xadrez compacto o chip de turno agora mostra avatar/foto do jogador da vez, e na Damas o cabecalho ganhou badge de turno com foto/inicial do jogador ativo.
+- Arquivos tocados: `pubpaid.html`, `pubpaid-phaser/app.js`, `pubpaid-phaser/scenes/BootScene.js`, `pubpaid-phaser/ui/domGameInterface.js`, `pubpaid-phaser.css`.
+- Validacao local: `node --check` em `app.js`, `domGameInterface.js` e `BootScene.js`; `npm run guard:pubpaid`; `git diff --check` nos arquivos tocados; varredura `rg` sem `Movimento feito`, `Som ligado`, `Ligar som` ou `Som 32-bit`.
+- Validacao visual Playwright em 844x390: Xadrez com chip de turno + avatar visivel; Damas pos-moeda com badge `CLOVIS` e foto aplicada; sem botao de som e sem texto de movimento. Evidencias em `.codex-temp/pubpaid-turn-avatar-visual/` e smoke do cliente de jogo em `.codex-temp/pubpaid-turn-avatar-web-game-client/`. Os 401 vistos no console vieram do usuario fake do modo review, nao do render do jogo.
+
+## Rodada Atual - 20260608-cheffe-building-premium-v9
+
+- `cheffe-building.html` passou a ser a previa local do predio Cheffe Call: vitrine publica, terminal, apoio simbolico e modo admin preservados.
+- Usuario rejeitou a proposta anterior como feia; CSS foi refeito para conversar com o CZS principal, com branco/azul/amarelo, logo oficial e andares com imagens reais dos escritorios/cheffe call.
+- Arquivos em foco: `cheffe-building.html`, `cheffe-building.css`, `cheffe-building.js`, `docs/cheffe-call-building-proposal.md`.
+- Link local de avaliacao: `http://localhost:3001/cheffe-building.html?fresh=20260608-v9c`.
+- Validacao local feita: `node --check cheffe-building.js`, `git diff --check -- cheffe-building.html cheffe-building.css`, HTTP 200 local. Capturas em `.codex-temp/cheffe-building-v9b/` e `.codex-temp/cheffe-building-v9c/`.
+- Antes de deploy, confirmar no navegador real do usuario; Chrome headless mostrou escala mobile estranha, entao nao tratar a captura mobile como prova final.
+
+## Rodada Atual - 20260608-whatsapp-twilio-sandbox-bot
+
+- Prototipo local criado para conectar WhatsApp Sandbox da Twilio a IA do projeto sem mexer no `server.js` principal.
+- Arquivo principal: `scripts/whatsapp-twilio-bot.js`; comando: `npm run whatsapp:twilio`; webhook padrao: `http://localhost:3099/whatsapp`.
+- Guia de configuracao: `docs/whatsapp-twilio-bot.md`.
+- O bot usa `OPENAI_API_KEY` quando existir; se nao houver, tenta Ollama local com `TWILIO_WHATSAPP_OLLAMA_MODEL` ou `qwen2.5:3b`.
+- Validacao local feita em porta temporaria 3199: `/health` OK e POST form-urlencoded estilo Twilio retornou TwiML 200 com resposta via Ollama.
+- `ngrok` nao estava instalado; `cloudflared` foi instalado via `winget` e abriu tunel rapido validado com POST externo.
+- Estado vivo do tunel fica em `.codex-temp/whatsapp-twilio-bot/runtime.json`; URL temporaria atual: `https://reasons-cut-mesh-subscription.trycloudflare.com/whatsapp`.
+- Proximo passo real: configurar no Twilio Sandbox `When a message comes in` para a URL temporaria `/whatsapp` e entrar no sandbox pelo codigo `join`.
+
+## Rodada Atual - 20260608-obsidian-ai-local-stack
+
+- Usuario vai baixar Obsidian e pediu conectar o segundo cerebro com LLMs/ferramentas de IA para economizar contexto/API.
+- Vault preparado em `.codex-memory/brain` com `.obsidian/` configurado; abrir essa pasta como vault no Obsidian.
+- Plugins baixados no vault: `obsidian-local-rest-api`, `smart-connections`, `ollama` e `copilot`; community plugins list ja aponta para esses IDs.
+- Ollama local validado: `scripts/obsidian-ollama-note.ps1` leu `.codex-memory/brain/resources/graphify-economia.md` com `qwen2.5:3b` e respondeu corretamente.
+- `nomic-embed-text:latest` instalado para embeddings locais; modelos disponiveis confirmados incluem `qwen2.5:3b`, `qwen2.5-coder:3b`, `gemma4:12b`, `qwen3:4b`, `gemma3:4b`, `gemma3:1b` e `llama3.2:3b`.
+- Scripts criados: `scripts/setup-obsidian-ai.ps1` reinstala/atualiza o vault e plugins; `scripts/obsidian-ollama-note.ps1` consulta notas via Ollama sem API paga.
+- Automacao `resumo-economia-graphify` foi removida apos cumprimento do objetivo.
+
+## Rodada Atual - 20260607-graphify-segundo-cerebro
+
+- Graphify adotado como apoio economico, nao como rotina pesada: padrao local e AST-only, sem LLM, via `scripts/graphify-lite.ps1 <arquivo-ou-pasta>`.
+- Validacao em `cheffe-building.js`: `.codex-temp/graphify-lite-validation/graphify-out/GRAPH_REPORT.md` gerou 11 nos, 17 arestas e 3 comunidades; pasta temporaria de input foi limpa.
+- Segundo cerebro persistente estilo Obsidian criado em `.codex-memory/brain/`, com nota principal `.codex-memory/brain/resources/graphify-economia.md`.
+- Instrucoes atualizadas para Codex/AGENTS, Cursor, Copilot e Hermes: nao rodar `/graphify .`, `graphify extract .`, `graphify update .`, `--mode deep`, `--watch` ou extracao semantica ampla sem pedido explicito.
+- Automacao `resumo-economia-graphify` criada para 2026-06-08 de manha, pedindo resumo curto da economia real/estimada.
+
+## Rodada Atual - 20260607-whatsapp-facebook-clovis-social
+
+- Perfil obrigatorio para social confirmado e usado: Clovis Sampaio / Chrome Default / `juniorclovissampaio@gmail.com`. Nao abrir outros perfis para WhatsApp/Facebook.
+- Browser/Chrome extension ficou operacional via extensao Codex `hehggadaopoacecdllhhajmbjkdcmajg` e host nativo `com.openai.codexextension`.
+- WhatsApp enviado em texto/legenda completa: `vendas 24 horas online.R. Alves`, `VENDAS E ALUGUEL! CZS`, `03 POSTAR QUE VENDE LOGO CZS` e `GRUPO DE DESAPEGO` receberam 21 legendas CZS cada; `Catálogo CZS` recebeu 34 itens, 24 noticias + servicos/convites.
+- `VENDE-SE TUDO EM CZS` nao apareceu na busca do WhatsApp nesta rodada.
+- Facebook: post geral de perfil publicado com CZS + Inova + contatos/site/Instagram; compartilhado em `VENDA TUDO CRUZEIRO DO SUL`. Continuar depois pelo permalink do post para outros grupos.
+- Limite tecnico: upload/colagem de imagem no WhatsApp nao ficou disponivel no Browser runtime (`setInputFiles` ausente; clipboard de imagem nao abriu preview). Rodada saiu sem artes, apenas legendas completas.
 
 ## Rodada Atual - 20260606-facebook-client-acquisition-routine
 
@@ -1018,3 +1073,20 @@ O nome publico pode continuar PubPaid, mas tecnicamente nao ha PubPaid 1.0 ativo
 - Validação mobile 390 x 844: sem overflow horizontal, cards com largura máxima 355px, vídeos no feed e botões públicos corretos.
 - `npm run review:team` rodou: guard PubPaid OK; auditor geral ainda lista pendências antigas em `tools/creative-suite/...` e venvs, fora dos arquivos tocados nesta atualização.
 - Microajuste v53: cards ganharam faixa lateral, halo/contorno e fundo tonal mais forte por tema; validação local em desktop e mobile manteve console sem erros, sem overflow e ações públicas corretas.
+
+## Social/Propaganda - 2026-06-08 Norte Ultra Fibra e Reels
+
+- Protocolo social corrigido: grupos de venda recebem apenas venda/servico/oferta; `Catálogo CZS` WhatsApp fica como vitrine premium com imagem/video/arte + legenda, sem texto cru quando a pauta exige midia.
+- Convites premium separados foram gerados para Instagram, WhatsApp e site em `.codex-temp/social-premium-invites-20260608/`; regra: no maximo 1 convite por dia por destino de venda.
+- Pacote Norte Ultra Fibra criado em `.codex-temp/norte-ultra-fibra-campanha-20260608/` com separacao feed/story, legendas, hashtags, plano semanal e prospeccao de clientes.
+- Atendimento oficial da campanha Norte Ultra Fibra: `https://wa.me/5568992096037`.
+- Reels virou linha diaria de captacao: noticias, festas, servicos, ofertas, bastidores, piadas locais leves e produtos devem virar videos curtos com CTA para site/Instagram/WhatsApp quando cabivel.
+- Facebook segue bloqueado ate o perfil correto `Clovis Sampaio` estar ativo; nao publicar pelo perfil `Antonio e Rnascimento Jr.`.
+
+## V8 Catálogo CZS - 2026-06-08 notícias + patrocinador Norte v63
+
+- Captação total disparada em 2026-06-08: 371 itens captados, 227 de hoje, 420 ativos e 620 no arquivo.
+- `index.html`, `news-data.js`, `data/runtime-news.json` e `data/news-archive.json` foram sincronizados com o novo arquivo local e cache `20260608-norte-news-v63`.
+- Norte Ultra Fibra entrou como colaborador/patrocinador real com CTA para `https://wa.me/5568992096037`, botão `Contratar internet`, cards comerciais, anúncio interno, apoio local e campanhas 500/600/800 Mega.
+- Arte local temporária do patrocinador: `assets/sponsors-norte-ultra-fibra.svg`; pode ser substituída depois pelas artes finais recebidas no WhatsApp.
+- Validação local: `node --check assets/v8-final/v8-merge-ready.js`, `git diff --check` no escopo, `npm run review:team`, HTML local 200 com `total=620`, e captura CDP em `.codex-temp/norte-v63/`.
