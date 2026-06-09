@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260608-norte-news-v65";
+  const V8_BOOT_VERSION = "20260609-news-social-v69";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -20,7 +20,9 @@
   const SOCIAL_WHATSAPP_NUMBER = "556896026649";
   const SOCIAL_WHATSAPP = `https://wa.me/${SOCIAL_WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi, CZS. Vim pelo V8 e quero atendimento.")}`;
   const NORTE_WHATSAPP_NUMBER = "5568992096037";
-  const NORTE_SPONSOR_IMAGE = "assets/sponsors-norte-ultra-fibra.svg";
+  const NORTE_SPONSOR_IMAGE = "assets/sponsors-norte-ultra-fibra-planos.jpeg";
+  const NORTE_SPONSOR_ARTICLE_IMAGE = "assets/sponsors-norte-ultra-fibra-artigo.jpeg";
+  const NORTE_SPONSOR_IMAGES = [NORTE_SPONSOR_ARTICLE_IMAGE, NORTE_SPONSOR_IMAGE];
   const NORTE_SPONSOR_HREF = `https://wa.me/${NORTE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar internet.")}`;
   const CHEFFE_ACTIONS_KEY = "czs-v8-cheffe-actions";
   const COMMUNITY_REPORTS_KEY = "czs-v8-community-reports";
@@ -144,7 +146,7 @@
     [RAYL_POSES.loaderPoint, "Apontando os atalhos úteis.", "point"],
     [RAYL_POSES.loaderPresent, "Organizando serviços e anúncios.", "present"],
     [RAYL_POSES.loaderJoy, "Quase pronto para abrir.", "joy"],
-    [RAYL_POSES.seatedFeature, "RAIane entra com o portal.", "seated"],
+    [RAYL_POSES.seatedFeature, "Raiane entra com o portal.", "seated"],
   ];
   const dataNode = document.getElementById("newsData");
   const DATA = dataNode ? JSON.parse(dataNode.textContent || "{}") : { items: [] };
@@ -1117,11 +1119,23 @@
     if (loader && !$(".v8-loader-welcome", loader)) {
       const welcome = document.createElement("aside");
       welcome.className = "v8-loader-welcome";
-      welcome.setAttribute("aria-label", "Boas-vindas da RAIane");
+      welcome.setAttribute("aria-label", "Boas-vindas da Raiane");
       welcome.innerHTML = `
-        <span class="v8-loader-avatar-crop"><img src="${AYLLA_LOADER_POSES[0][0]}" alt="RAIane CZS" data-loader-aylla></span>
-        <span class="v8-loader-copy"><b>RAIane CZS</b><span>${esc(AYLLA_LOADER_POSES[0][1])}</span></span>`;
+        <span class="v8-loader-avatar-crop"><img src="${AYLLA_LOADER_POSES[0][0]}" alt="Raiane" data-loader-aylla></span>
+        <span class="v8-loader-copy"><b>Raiane</b><span>${esc(AYLLA_LOADER_POSES[0][1])}</span></span>`;
       loader.appendChild(welcome);
+    }
+    if (loader && !$(".v8-loader-sponsor-bubble", loader)) {
+      const sponsor = document.createElement("a");
+      sponsor.className = "v8-loader-sponsor-bubble";
+      sponsor.href = NORTE_SPONSOR_HREF;
+      sponsor.target = "_blank";
+      sponsor.rel = "noopener";
+      sponsor.setAttribute("aria-label", "Norte Ultra Fibra, patrocinadora oficial do CZS");
+      sponsor.innerHTML = `
+        <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra">
+        <span><small>Patrocínio oficial</small><b>Norte Ultra Fibra</b><em>500 Mega • suporte local</em></span>`;
+      loader.appendChild(sponsor);
     }
     if (loader && !$(".v8-loader-status", loader)) {
       const status = document.createElement("div");
@@ -2181,7 +2195,7 @@
     return [
       {
         id: "escritorio-raiane",
-        title: "Escritório RAIane",
+        title: "Escritório Raiane",
         label: "Atendimento",
         text: "guia o leitor para notícia, serviço, mapa do site e ajuda rápida.",
         img: "assets/aylla/rayl-v2-clean/rayl-v2-wave-full.png",
@@ -3551,33 +3565,28 @@
     const support = $("#fundadores");
     if (support) {
       support.classList.add("v8-local-support");
-      const partners = [
-        ["Norte Ultra Fibra", NORTE_SPONSOR_IMAGE, "internet fibra óptica, Wi-Fi 6 e planos 500/600/800 Mega", NORTE_SPONSOR_HREF, "is-norte"],
-        ["Café Cruzeiro", "assets/founders-cafe-pack-static.png", "café local", "divulgue.html#apoio-local"],
-        ["Shopping Copacabana", "", "comércio local", "divulgue.html#apoio-local"],
-        ["Dra. Geane Odontologia", "assets/founders-geane-logo-optimized.png", "saúde e cuidado", "divulgue.html#apoio-local"],
-        ["Grupo AS", "assets/founders-grupo-as-logo.png", "apoio regional", "divulgue.html#apoio-local"],
-      ];
       support.innerHTML = `
         <div class="section-head">
           <div>
-            <div class="section-kicker">Apoio local</div>
-            <h2>Marcas que ajudam o CZS a crescer</h2>
-            <p>Logos, produtos e marcas locais com enquadramento limpo, sem cortar o que precisa aparecer.</p>
+            <div class="section-kicker">Patrocinador oficial</div>
+            <h2>Norte Ultra Fibra</h2>
+            <p>Parceira atual do CZS, com contratação e suporte direto para o leitor.</p>
           </div>
-          <a class="btn ghost" href="${SOCIAL_WHATSAPP}" target="_blank" rel="noopener">Ser apoiador</a>
+          <a class="btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">WhatsApp Norte</a>
         </div>
-        <div class="v8-support-grid">
-          ${partners.map(([name, logo, label, href, extraClass]) => `
-            <article class="v8-support-card ${esc(extraClass || "")}">
-              <div class="v8-support-logo">
-                ${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy" decoding="async" fetchpriority="low">` : `<span class="v8-support-logo-text">${esc(name)}</span>`}
-              </div>
-              <a class="v8-support-title-link" href="${esc(href)}" ${/^https?:\/\//.test(href || "") ? 'target="_blank" rel="noopener"' : ""}>${esc(name)}</a>
-              <p>${esc(label)}</p>
-              ${extraClass === "is-norte" ? `<a class="small-btn v8-norte-contract" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>` : ""}
-            </article>`).join("")}
-        </div>`;
+        <article class="v8-support-card is-norte v8-support-single">
+          <a class="v8-support-logo" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+            <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
+          </a>
+          <div>
+            <a class="v8-support-title-link" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Norte Ultra Fibra</a>
+            <p>Fibra óptica, Wi-Fi incluso, atendimento local e suporte para clientes.</p>
+            <div class="actions">
+              <a class="small-btn v8-norte-contract" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
+              <a class="small-btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Suporte no WhatsApp</a>
+            </div>
+          </div>
+        </article>`;
     }
   }
 
@@ -3697,6 +3706,10 @@
     const entries = [];
     let videoIndex = 0;
     let storyCount = 0;
+    let nextSponsorAt = 10;
+    if (limit > 0) {
+      entries.push({ type: "sponsor", position: 0, adIndex: 0 });
+    }
     const pushVideo = () => {
       while (videoIndex < playlist.length) {
         const item = playlist[videoIndex++];
@@ -3717,6 +3730,11 @@
       if (entries.length >= limit) return;
       entries.push({ type: "story", story });
       storyCount += 1;
+      if (storyCount === nextSponsorAt && entries.length < limit) {
+        const adIndex = entries.filter((entry) => entry.type === "sponsor").length;
+        entries.push({ type: "sponsor", position: storyCount, adIndex });
+        nextSponsorAt += 10;
+      }
       const interval = entries.length < 12 ? 4 : 6;
       if (storyCount % interval === 0 && entries.length < limit) pushVideo();
     });
@@ -3771,7 +3789,29 @@
       </article>`;
   }
 
+  function renderContinuousSponsorCard(entry = {}, position = 0) {
+    const image = NORTE_SPONSOR_IMAGES[(entry.adIndex || 0) % NORTE_SPONSOR_IMAGES.length] || NORTE_SPONSOR_ARTICLE_IMAGE;
+    return `
+      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-standard" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}">
+        <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+          <img src="${image}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
+        </a>
+        <div class="v8-organic-sponsor-copy">
+          <span class="badge">Patrocinado • Norte Ultra Fibra</span>
+          <h3>Internet rápida, estável e com atendimento local</h3>
+          <p>Plano 500 Mega, fibra óptica de verdade e suporte pertinho de você.</p>
+          <small>Oferta CZS • WhatsApp (68) 99209-6037 • anúncio</small>
+          <div class="actions">
+            <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
+            <a class="small-btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
+          </div>
+        </div>
+      </article>`;
+  }
+
   function renderContinuousEntry(entry, position = 0) {
+    if (entry?.type === "sponsor") return renderContinuousSponsorCard(entry, position);
     if (entry?.type === "video") return renderContinuousVideoCard(entry.video, position);
     return renderContinuousStoryCard(entry.story, position, Boolean(entry?.forceVideo));
   }
@@ -3819,11 +3859,11 @@
         total: source.length,
         loaded: index,
         themes: source.reduce((acc, entry) => {
-          const key = entry.type === "video" ? "video" : storyTheme(entry.story).id;
+          const key = entry.type === "video" ? "video" : entry.type === "sponsor" ? "sponsor" : storyTheme(entry.story).id;
           acc[key] = (acc[key] || 0) + 1;
           return acc;
         }, {}),
-        videos: source.filter((entry) => entry.type === "video" || storyVideoUrl(entry.story)).length,
+        videos: source.filter((entry) => entry.type === "video" || (entry.story && storyVideoUrl(entry.story))).length,
         rule: "impacto > urgencia > proximidade > interesse > curiosidade",
       };
       if (index >= source.length) {
@@ -3944,7 +3984,7 @@
     portal.innerHTML = `
       <button class="v8-sales-close" type="button" aria-label="Fechar página comercial">×</button>
       <div class="v8-sales-intro">
-        <img src="${RAYL_POSES.chatPresent}" alt="RAIane apresentando ofertas do CZS">
+        <img src="${RAYL_POSES.chatPresent}" alt="Raiane apresentando ofertas do CZS">
         <div>
           <span>Oportunidade para vc e sua empresa</span>
           <h2>O CZS leva sua marca para o Vale do Juruá</h2>
@@ -4278,7 +4318,7 @@
         window.setTimeout(() => card.classList.remove("is-changing"), 420);
       });
       img.src = src;
-      img.alt = `RAIane em pose ${pose}`;
+      img.alt = `Raiane em pose ${pose}`;
       if (text) text.textContent = message;
     };
     applyPose(0);
@@ -4827,7 +4867,7 @@
     panel.innerHTML = `
       <button type="button" class="v8-entry-close" aria-label="Fechar atalhos">×</button>
       <img class="v8-commercial-aylla" src="${RAYL_POSES.seatedFeature}" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low">
-      <div class="v8-commercial-speech"><b>RAIane CZS.</b> Seja bem-vindo. Escolha uma opção ou me diga o que procura.</div>
+      <div class="v8-commercial-speech"><b>Raiane.</b> Seja bem-vindo. Escolha uma opção ou me diga o que procura.</div>
       <div class="v8-commercial-shell">
         <header class="v8-commercial-head">
           <span>Comercial CZS</span>
@@ -4997,12 +5037,12 @@
     const portrait = $(".assistant-portrait", card);
     if (portrait) {
       portrait.className = "assistant-portrait aylla-portrait";
-      portrait.innerHTML = `<img src="${RAYL_POSES.chatWave}" alt="RAIane, assistente virtual do CZS">`;
+      portrait.innerHTML = `<img src="${RAYL_POSES.chatWave}" alt="Raiane, assistente virtual do CZS">`;
     }
 
     const title = $(".assistant-head strong", card);
     const status = $(".assistant-head p", card);
-    if (title) title.textContent = "RAIane CZS";
+    if (title) title.textContent = "Raiane";
     if (status) {
       status.textContent = "";
       status.hidden = true;
@@ -5013,14 +5053,15 @@
     if (body) {
       body.innerHTML = `
         <div class="aylla-stage" aria-live="polite">
-          <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="RAIane acenando">
-          <div class="aylla-speech"><b>RAIane.</b> Posso te levar direto ao que importa.</div>
+          <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="Raiane acenando">
+          <div class="aylla-speech"><b>Raiane.</b> Posso te levar direto ao que importa.</div>
         </div>
         <div class="aylla-faq" aria-label="Perguntas frequentes">
           <button type="button" data-aylla-faq="anunciar">Anunciar</button>
           <button type="button" data-aylla-faq="noticia">Enviar pauta</button>
           <button type="button" data-aylla-faq="arquivo">Arquivo</button>
           <button type="button" data-aylla-faq="servicos">Serviços</button>
+          <a href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Suporte Norte</a>
           <button type="button" data-aylla-faq="pubpaid">PubPaid</button>
           <button type="button" data-aylla-faq="whatsapp">Humano</button>
         </div>
@@ -5045,7 +5086,7 @@
     dock.className = "aylla-dock is-hidden";
     dock.setAttribute("aria-hidden", "true");
     dock.innerHTML = `
-      <button class="aylla-dock-close" type="button" aria-label="Trazer RAIane para o suporte">×</button>
+      <button class="aylla-dock-close" type="button" aria-label="Trazer Raiane para o suporte">×</button>
       <img src="${RAYL_POSES.chatPoint}" alt="">
       <span>Oi, estou aqui.</span>`;
     document.body.appendChild(dock);
@@ -5085,6 +5126,14 @@
         keywords: ["noticia", "notícia", "pauta", "denuncia", "denúncia", "foto", "video", "vídeo", "bairro", "comunidade"],
         answer: "Mande local, horario, foto ou video e o que aconteceu. A redacao checa antes de publicar.",
         route: ["#comunidade", "community", "Aqui fica o caminho para pauta da comunidade."],
+      },
+      {
+        id: "norte",
+        pose: "human",
+        title: "Suporte Norte Ultra Fibra",
+        keywords: ["norte", "ultra fibra", "internet", "fibra", "500 mega", "plano", "suporte norte", "wifi"],
+        answer: "A Norte Ultra Fibra é a patrocinadora oficial do CZS. Posso abrir o atendimento direto no WhatsApp para contratar internet ou pedir suporte.",
+        href: NORTE_SPONSOR_HREF,
       },
       {
         id: "servicos",
@@ -5159,13 +5208,14 @@
       },
     ];
 
-    const raylVoiceIntro = "Oi, eu sou a RAIane.";
+    const raylVoiceIntro = "Oi, eu sou a Raiane.";
     const ASSISTANT_HELPER_VOICE_ENABLED = false;
     const spokenFaq = {
       anunciar: "Como anunciar no CZS.",
       noticia: "Enviar notícia para a redação.",
       arquivo: "Abrir o arquivo.",
       servicos: "Serviços úteis.",
+      norte: "Suporte Norte Ultra Fibra.",
       escritorios: "Escritórios de agentes.",
       pubpaid: "Conheça o PubPaid.",
       pesquisa: "Pesquisa e participação.",
@@ -5245,7 +5295,7 @@
       const images = $$("img", card).filter((img) => img.closest(".aylla-portrait") || img.classList.contains("aylla-full"));
       images.forEach((img) => {
         img.src = item[0];
-        img.alt = `RAIane em pose ${pose.replace(/-/g, " ")}`;
+      img.alt = `Raiane em pose ${pose.replace(/-/g, " ")}`;
       });
       $$("[data-aylla-pose]", card).forEach((button) => {
         const active = button.dataset.ayllaPose === pose;
@@ -5286,7 +5336,7 @@
       return bestScore > 0 ? best : null;
     };
 
-    const whatsappUrlFor = (question) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Oi, CZS. Vim pelo chat da RAIane e quero falar com um atendimento humano. Minha duvida: ${question}`)}`;
+    const whatsappUrlFor = (question) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Oi, CZS. Vim pelo chat da Raiane e quero falar com um atendimento humano. Minha duvida: ${question}`)}`;
     const faqRouteKeys = {
       servicos: "services",
       escritorios: "cheffe",
@@ -5327,7 +5377,8 @@
       const out = $("#assistantOut");
       if (!out) return;
       if (href) {
-        out.insertAdjacentHTML("beforeend", `<a class="chat route" href="${esc(href)}">Abrir ${esc(title)}</a>`);
+        const external = /^https?:\/\//i.test(href);
+        out.insertAdjacentHTML("beforeend", `<a class="chat route" href="${esc(href)}"${external ? ' target="_blank" rel="noopener"' : ""}>Abrir ${esc(title)}</a>`);
       } else {
         out.insertAdjacentHTML("beforeend", `<button type="button" class="chat route" data-aylla-go="${esc(routeKey)}">Abrir ${esc(title)}</button>`);
       }
@@ -5353,6 +5404,10 @@
         if (options.voice) speakRayl(`${raylVoiceIntro} ${directFaq.answer}`);
         if (directFaq.id === "whatsapp") {
           appendWhatsappContact(question);
+          return;
+        }
+        if (directFaq.id === "norte") {
+          window.open(NORTE_SPONSOR_HREF, "_blank", "noopener");
           return;
         }
         if (directFaq.route) {
@@ -5388,6 +5443,10 @@
       if (options.voice) speakRayl(faq.answer);
       if (faq.id === "whatsapp") {
         appendWhatsappContact(question);
+        return;
+      }
+      if (faq.id === "norte") {
+        window.open(NORTE_SPONSOR_HREF, "_blank", "noopener");
         return;
       }
       if (faq.route) {
@@ -5459,6 +5518,13 @@
       }
     });
 
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-v8-norte-chat]");
+      if (!trigger) return;
+      event.preventDefault();
+      window.open(NORTE_SPONSOR_HREF, "_blank", "noopener");
+    });
+
     $("[data-aylla-form]", card)?.addEventListener("submit", (event) => {
       event.preventDefault();
       const input = $("#ayllaQuestion", card);
@@ -5482,7 +5548,7 @@
       card.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
 
-    setTimeout(() => setPose("call-attention", "Sou a RAIane. Clique em Abrir quando quiser ajuda."), 1800);
+    setTimeout(() => setPose("call-attention", "Sou a Raiane. Clique em Abrir quando quiser ajuda."), 1800);
   }
 
   function storyFromElement(element) {
@@ -5681,33 +5747,6 @@
   function defaultCommercialCampaigns() {
     return [
       {
-        id: "norte-ultra-fibra-500",
-        title: "Norte 500 Mega",
-        slot: "patrocinador",
-        size: "30% OFF",
-        text: "Plano 500 Mega, fibra óptica e Wi-Fi de alta performance. Contrate pelo WhatsApp.",
-        href: norteHref("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar o plano 500 Mega."),
-        sponsor: "Norte Ultra Fibra",
-      },
-      {
-        id: "norte-ultra-fibra-600",
-        title: "Norte 600 Mega",
-        slot: "internet",
-        size: "primeira fatura",
-        text: "Mais velocidade para games, streaming, estudo e home office.",
-        href: norteHref("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero saber do plano 600 Mega."),
-        sponsor: "Norte Ultra Fibra",
-      },
-      {
-        id: "norte-ultra-fibra-800",
-        title: "Norte 800 Mega",
-        slot: "ultra fibra",
-        size: "família",
-        text: "Internet ultrarrápida para toda a casa, com instalação rápida e suporte local.",
-        href: norteHref("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero saber do plano 800 Mega."),
-        sponsor: "Norte Ultra Fibra",
-      },
-      {
         id: "topo-premium",
         title: "Topo premium",
         slot: "home-topo",
@@ -5875,16 +5914,11 @@
             <p>Escolha anúncio, site, app, automação ou campanha e fale direto com o CZS.</p>
           </div>
           <div class="actions">
-            <a class="btn gold" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="btn gold" href="${whatsappHref("Oi, CZS. Quero anunciar ou contratar um serviço digital pelo V8.")}" target="_blank" rel="noopener">WhatsApp comercial</a>
             <a class="btn ghost" href="mailto:${SOCIAL_EMAIL}?subject=Comercial%20CZS%20V8">Enviar e-mail</a>
             <a class="btn ghost" href="divulgue.html">Ver página comercial</a>
           </div>
         </div>
-        <a class="v8-norte-hero-ad" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
-          <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra - contratar internet" loading="lazy" decoding="async" fetchpriority="low">
-          <span><b>Norte Ultra Fibra</b><small>30% OFF na primeira fatura. Clique para contratar internet.</small></span>
-        </a>
         <div class="v8-commercial-format-grid">
           <div id="v8CampaignRail" class="v8-campaign-rail" aria-label="Campanhas comerciais em rotação"></div>
         </div>
@@ -5892,7 +5926,6 @@
           <input name="name" autocomplete="name" placeholder="Nome ou empresa">
           <input name="contact" autocomplete="tel" placeholder="WhatsApp ou e-mail">
           <select name="format">
-            <option value="norte-internet">Contratar internet Norte Ultra Fibra</option>
             <option value="card-patrocinado">Card patrocinado</option>
             <option value="topo-premium">Topo premium</option>
             <option value="video-vertical">Vídeo vertical</option>

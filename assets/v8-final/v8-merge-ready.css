@@ -4526,6 +4526,424 @@ body.v8-merge-ready .v8-command-summary span {
   }
 }
 
+/* 20260608 v67: Norte em fluxo editorial, encaixado e sem quebrar o grid. */
+body.v8-merge-ready .v8-norte-after-hero {
+  display: grid !important;
+  grid-template-columns: minmax(260px, .72fr) minmax(280px, .52fr) !important;
+  gap: clamp(16px, 2.2vw, 30px) !important;
+  align-items: center !important;
+  margin: 18px 0 24px !important;
+  padding: clamp(14px, 2vw, 22px) !important;
+  border: 1px solid rgba(8, 117, 54, .28) !important;
+  border-top: 5px solid #ffd400 !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 212, 0, .16), transparent 34%),
+    linear-gradient(135deg, #ffffff, #f7fbff 52%, #ecfff4) !important;
+  box-shadow: 0 18px 42px rgba(7, 26, 59, .12) !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-media {
+  display: block !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(7, 26, 59, .12) !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-media img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 360px !important;
+  object-fit: cover !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy {
+  display: grid !important;
+  gap: 12px !important;
+  color: #071a3b !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy h2,
+body.v8-merge-ready .v8-norte-after-hero-copy p {
+  margin: 0 !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy h2 {
+  font-size: clamp(28px, 3vw, 46px) !important;
+  line-height: 1 !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy .actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  padding: 0 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor {
+  grid-column: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border: 1px solid rgba(8, 117, 54, .24) !important;
+  border-top: 4px solid #ffd400 !important;
+  background: #ffffff !important;
+  box-shadow: 0 14px 30px rgba(7, 26, 59, .10) !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-media {
+  display: block !important;
+  min-height: 0 !important;
+  aspect-ratio: 4 / 5 !important;
+  background: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-media img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 14px !important;
+  color: #071a3b !important;
+  background: linear-gradient(180deg, #ffffff, #f5fff8) !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy .badge {
+  width: fit-content !important;
+  margin: 0 !important;
+  border-color: rgba(8, 117, 54, .24) !important;
+  background: #ecfff4 !important;
+  color: #087536 !important;
+  box-shadow: inset 4px 0 0 #ffd400 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy h3,
+body.v8-merge-ready .v8-organic-sponsor-copy p,
+body.v8-merge-ready .v8-organic-sponsor-copy small {
+  margin: 0 !important;
+  color: #071a3b !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy h3 {
+  font-size: clamp(19px, 1.55vw, 25px) !important;
+  line-height: 1.08 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy p {
+  color: #30415c !important;
+  line-height: 1.38 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy small {
+  color: #4b5a70 !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor .actions {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+  padding: 0 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor .actions .small-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 38px !important;
+  white-space: normal !important;
+  text-align: center !important;
+  line-height: 1.1 !important;
+}
+
+/* FINAL v68 override: feed contínuo em colunas fluidas, cards coesos e rodapé acessível no mobile. */
+body.v8-merge-ready .v8-continuous-grid {
+  display: block !important;
+  column-count: 3 !important;
+  column-gap: 16px !important;
+  column-fill: balance !important;
+}
+
+body.v8-merge-ready .v8-continuous-grid > .news-card,
+body.v8-merge-ready .v8-continuous-grid > article {
+  display: inline-block !important;
+  width: 100% !important;
+  margin: 0 0 16px !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+  -webkit-column-break-inside: avoid !important;
+  grid-column: auto !important;
+  align-self: start !important;
+}
+
+body.v8-merge-ready .v8-continuous-card,
+body.v8-merge-ready .v8-continuous-card.v8-organic-sponsor {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .v8-card-media,
+body.v8-merge-ready .v8-organic-sponsor-media {
+  width: 100% !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .v8-card-media {
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+}
+
+body.v8-merge-ready .v8-continuous-card img,
+body.v8-merge-ready .v8-organic-sponsor img {
+  width: 100% !important;
+  height: auto !important;
+}
+
+body.v8-merge-ready .footer-jump-float {
+  display: grid !important;
+  place-items: center !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  z-index: 220 !important;
+}
+
+body.v8-merge-ready .footer-jump-float span {
+  display: inline-grid !important;
+}
+
+@media (max-width: 1180px) {
+  body.v8-merge-ready .v8-continuous-grid {
+    column-count: 2 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready .v8-continuous-grid {
+    column-count: 1 !important;
+  }
+
+  body.v8-merge-ready .footer-jump-float {
+    display: grid !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    width: 46px !important;
+    height: 46px !important;
+    padding: 0 !important;
+    border-radius: 999px !important;
+    font-size: 0 !important;
+  }
+
+  body.v8-merge-ready .footer-jump-float svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body.v8-merge-ready .v8-norte-after-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready .v8-norte-after-hero-media img {
+    max-height: 300px !important;
+  }
+
+  body.v8-merge-ready .v8-organic-sponsor-media {
+    aspect-ratio: 16 / 11 !important;
+  }
+}
+
+/* 20260608 v66: publicidade organica da Norte, sem invadir a vitrine comercial. */
+body.v8-merge-ready .v8-norte-hero-ad {
+  display: none !important;
+}
+
+body.v8-merge-ready .v8-local-support {
+  border-top: 4px solid var(--v8-yellow, #ffd400) !important;
+  background: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-support-grid:has(.v8-support-single) {
+  display: block !important;
+}
+
+body.v8-merge-ready .v8-support-single {
+  display: grid !important;
+  grid-template-columns: minmax(300px, 1.1fr) minmax(260px, .9fr) !important;
+  gap: clamp(18px, 3vw, 42px) !important;
+  align-items: center !important;
+  max-width: 1180px;
+  margin: 0 auto !important;
+  padding: clamp(18px, 3vw, 34px) !important;
+  border: 1px solid rgba(9, 39, 92, .2) !important;
+  border-top: 4px solid #ffd400 !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #071a3b, #0a2d68 68%, #087536) !important;
+  box-shadow: 0 18px 42px rgba(7, 26, 59, .16) !important;
+}
+
+body.v8-merge-ready .v8-support-single .v8-support-logo {
+  min-height: 0 !important;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-support-single .v8-support-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor {
+  grid-column: span 2;
+  display: grid !important;
+  grid-template-columns: minmax(300px, 1.15fr) minmax(260px, .85fr);
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(7, 117, 54, .32) !important;
+  border-top: 5px solid #ffd400 !important;
+  background: #071a3b !important;
+  box-shadow: 0 18px 42px rgba(7, 26, 59, .14);
+}
+
+body.v8-merge-ready .v8-organic-sponsor-media {
+  display: block;
+  min-height: 280px;
+  background: #ffffff;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: clamp(22px, 3.5vw, 48px);
+  color: #ffffff;
+  background:
+    linear-gradient(145deg, rgba(255, 212, 0, .12), transparent 44%),
+    linear-gradient(145deg, #071a3b, #0a2d68 68%, #087536);
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy span {
+  color: #ffd400;
+  font-size: 11px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy h3,
+body.v8-merge-ready .v8-organic-sponsor-copy p {
+  margin: 0;
+  color: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy h3 {
+  font-size: clamp(24px, 2.8vw, 42px);
+  line-height: 1;
+}
+
+body.v8-merge-ready .v8-loader-sponsor-bubble {
+  position: absolute;
+  right: clamp(16px, 5vw, 76px);
+  bottom: clamp(16px, 4vh, 48px);
+  z-index: 18;
+  display: grid;
+  grid-template-columns: 112px minmax(150px, 1fr);
+  gap: 12px;
+  align-items: center;
+  width: min(390px, calc(100vw - 32px));
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, .66);
+  border-bottom: 4px solid #ffd400;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .96);
+  color: #071a3b;
+  text-decoration: none;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .26);
+  animation: v8SponsorBubbleFloat 3.2s ease-in-out infinite;
+}
+
+body.v8-merge-ready .v8-loader-sponsor-bubble img {
+  width: 112px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+body.v8-merge-ready .v8-loader-sponsor-bubble span {
+  display: grid;
+  gap: 2px;
+}
+
+body.v8-merge-ready .v8-loader-sponsor-bubble small {
+  color: #087536;
+  font-size: 9px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+body.v8-merge-ready .v8-loader-sponsor-bubble b {
+  font-size: 17px;
+  line-height: 1;
+}
+
+body.v8-merge-ready .v8-loader-sponsor-bubble em {
+  color: #40506a;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+@keyframes v8SponsorBubbleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (max-width: 900px) {
+  body.v8-merge-ready .v8-support-single,
+  body.v8-merge-ready .v8-organic-sponsor {
+    grid-column: auto;
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready .v8-organic-sponsor-media,
+  body.v8-merge-ready .v8-organic-sponsor-media img {
+    min-height: 210px;
+    max-height: 300px;
+  }
+
+  body.v8-merge-ready .v8-loader-sponsor-bubble {
+    right: 10px;
+    bottom: 10px;
+    grid-template-columns: 76px 1fr;
+    width: min(320px, calc(100vw - 20px));
+    padding: 8px;
+  }
+
+  body.v8-merge-ready .v8-loader-sponsor-bubble img {
+    width: 76px;
+  }
+}
+
 @media (max-width: 620px) {
   body.v8-merge-ready .v8-play-cta span {
     display: none;
@@ -11261,4 +11679,91 @@ body.v8-merge-ready .v8-campaign-card[href*="992096037"] > i {
   body.v8-merge-ready .v8-norte-hero-ad img {
     max-height: 210px;
   }
+}
+
+/* FINAL v67 override: mantém Norte como card encaixado, nunca como coluna quebrada. */
+body.v8-merge-ready .v8-organic-sponsor {
+  grid-column: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+  border: 1px solid rgba(8, 117, 54, .24) !important;
+  border-top: 4px solid #ffd400 !important;
+  background: #ffffff !important;
+  color: #071a3b !important;
+  box-shadow: 0 14px 30px rgba(7, 26, 59, .10) !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-media {
+  display: block !important;
+  min-height: 0 !important;
+  aspect-ratio: 4 / 5 !important;
+  background: #ffffff !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-media img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  object-fit: cover !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 14px !important;
+  color: #071a3b !important;
+  background: linear-gradient(180deg, #ffffff, #f5fff8) !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy span,
+body.v8-merge-ready .v8-organic-sponsor-copy .badge {
+  width: fit-content !important;
+  margin: 0 !important;
+  border: 1px solid rgba(8, 117, 54, .24) !important;
+  background: #ecfff4 !important;
+  color: #087536 !important;
+  box-shadow: inset 4px 0 0 #ffd400 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy h3,
+body.v8-merge-ready .v8-organic-sponsor-copy p,
+body.v8-merge-ready .v8-organic-sponsor-copy small {
+  margin: 0 !important;
+  color: #071a3b !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy h3 {
+  font-size: clamp(19px, 1.55vw, 25px) !important;
+  line-height: 1.08 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy p {
+  color: #30415c !important;
+  line-height: 1.38 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor-copy small {
+  color: #4b5a70 !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor .actions {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+  padding: 0 !important;
+}
+
+body.v8-merge-ready .v8-organic-sponsor .actions .small-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 38px !important;
+  white-space: normal !important;
+  text-align: center !important;
+  line-height: 1.1 !important;
 }

@@ -1,16 +1,16 @@
 {
   "ok": true,
-  "startedAt": "2026-06-08T21:26:02.501Z",
-  "finishedAt": "2026-06-08T21:26:12.276Z",
-  "capturedItems": 371,
-  "capturedToday": 227,
+  "startedAt": "2026-06-09T19:55:21.640Z",
+  "finishedAt": "2026-06-09T19:55:31.071Z",
+  "capturedItems": 370,
+  "capturedToday": 279,
   "activeWindowItems": 420,
-  "archiveItems": 620,
+  "archiveItems": 700,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
       "ok": true,
-      "count": 19,
+      "count": 20,
       "blocked": 0,
       "mode": "rss"
     },
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 24,
-      "blocked": 0,
+      "count": 23,
+      "blocked": 1,
       "mode": "wordpress-json"
     },
     {
@@ -59,7 +59,7 @@
     {
       "source": "batelao",
       "ok": true,
-      "count": 0,
+      "count": 10,
       "blocked": 0,
       "mode": "rss"
     },
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 2,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -206,21 +206,21 @@
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 0,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -255,7 +255,7 @@
     {
       "source": "voz-do-norte",
       "ok": true,
-      "count": 9,
+      "count": 10,
       "blocked": 0,
       "mode": "rss"
     }
