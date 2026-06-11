@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260610-masonry-ads-v70";
+  const V8_BOOT_VERSION = "20260610-masonry-ads-v71";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -1170,6 +1170,21 @@
       link.dataset.v8Iconified = "1";
       link.innerHTML = `<span class="v8-nav-glyph">${iconSvg(icon)}</span><span>${esc(text)}</span>`;
     });
+    const footerShortcutNav = $(".nav");
+    if (footerShortcutNav && !$(".v8-nav-footer-shortcut", footerShortcutNav)) {
+      const footerLink = document.createElement("a");
+      footerLink.className = "v8-nav-footer-shortcut";
+      footerLink.href = "#fullSiteFooter";
+      footerLink.dataset.v8Iconified = "1";
+      footerLink.innerHTML = `<span class="v8-nav-glyph">${iconSvg("archive")}</span><span>Rodapé</span>`;
+      footerLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        const footer = $("#fullSiteFooter");
+        footer?.classList.add("revealed", "forced");
+        footer?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      footerShortcutNav.appendChild(footerLink);
+    }
 
     const chipIcons = ["pulse", "grid", "read", "star", "archive", "bag", "pulse", "home"];
     $$(".utility-row .chip").forEach((chip, index) => {
