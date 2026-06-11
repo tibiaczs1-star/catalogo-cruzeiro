@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260609-news-social-v69";
+  const V8_BOOT_VERSION = "20260610-masonry-ads-v70";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -2013,6 +2013,27 @@
     }, 6500);
   }
 
+  function renderNorteNativeAfterHero() {
+    $("#v8NorteAfterHero")?.remove();
+    const hero = $(".hero-grid");
+    if (!hero?.parentElement) return;
+    hero.insertAdjacentHTML("afterend", `
+      <section class="v8-norte-after-hero" id="v8NorteAfterHero" aria-label="Patrocinador oficial Norte Ultra Fibra">
+        <a class="v8-norte-after-hero-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp">
+          <img src="${NORTE_SPONSOR_ARTICLE_IMAGE}" alt="Norte Ultra Fibra - planos de internet para o leitor CZS" loading="eager" decoding="async">
+        </a>
+        <div class="v8-norte-after-hero-copy">
+          <span>Patrocinador oficial do CZS</span>
+          <h2>Norte Ultra Fibra conecta sua casa ao que importa</h2>
+          <p>Internet 100% fibra óptica, atendimento local e contratação direta pelo WhatsApp.</p>
+          <div class="actions">
+            <a class="btn green" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
+            <a class="btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          </div>
+        </div>
+      </section>`);
+  }
+
   function railCard(story) {
     const videoSrc = storyVideoUrl(story);
     return `
@@ -3575,7 +3596,7 @@
           <a class="btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">WhatsApp Norte</a>
         </div>
         <article class="v8-support-card is-norte v8-support-single">
-          <a class="v8-support-logo" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+          <a class="v8-support-logo" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Abrir atendimento da Norte Ultra Fibra no WhatsApp">
             <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
           </a>
           <div>
@@ -3793,14 +3814,14 @@
     const image = NORTE_SPONSOR_IMAGES[(entry.adIndex || 0) % NORTE_SPONSOR_IMAGES.length] || NORTE_SPONSOR_ARTICLE_IMAGE;
     return `
       <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-standard" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}">
-        <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+        <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
           <img src="${image}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
         </a>
         <div class="v8-organic-sponsor-copy">
           <span class="badge">Patrocinado • Norte Ultra Fibra</span>
           <h3>Internet rápida, estável e com atendimento local</h3>
           <p>Plano 500 Mega, fibra óptica de verdade e suporte pertinho de você.</p>
-          <small>Oferta CZS • WhatsApp (68) 99209-6037 • anúncio</small>
+          <small>Oferta CZS • WhatsApp (68) 99209-6037 • anúncio nativo</small>
           <div class="actions">
             <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="small-btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
@@ -5992,6 +6013,7 @@
     installCopyPolish();
     sanitizePublicCopy();
     renderHero();
+    renderNorteNativeAfterHero();
     renderSystemMap();
     renderOpportunityCategory();
     renderRealVideoHub();

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-05T17:25:02.007Z",
+  "lastUpdatedAt": "2026-06-11T01:57:38.001Z",
   "orders": [
     {
       "id": "2026-06-05-capturar-produtos-grupo-inova-logo-correta",
@@ -6028,6 +6028,21 @@
       "source": "chat",
       "rawRequest": "OK O RESTO TA BOM, AGORA DEPOIS SUBA E OTIMZE A VELOCIDADE O MAXIMO QUE DE DE HISDRATAÇÃO -- PROXIMO PASSO VAMOS COLOCAR A IA PRA LA ATRAVES DO MEU PC AQUI -- ENTÃO VAMOS TER FINALIZADO",
       "summary": "Fechamento V8 final: otimizar hidratação/velocidade, manter intro aprovada, preparar commit/deploy e próxima etapa será ligar IA online via PC local.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-06-11-correcao-v70-do-layout-de-noticias-masonry-responsivo-cards-dinamicos-anuncios-n",
+      "createdAt": "2026-06-11T01:57:38.001Z",
+      "updatedAt": "2026-06-11T01:57:38.001Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Organizar site e propagandas Norte Fibra; corrigir grid/masonry, cards dinamicos, intro com patrocinador, anuncios no fluxo, responsivo e deixar commitado.",
+      "summary": "Correção v70 do layout de notícias: masonry responsivo, cards dinâmicos, anúncios Norte Ultra Fibra nativos e sem corte, patrocinador após hero e cache novo.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
