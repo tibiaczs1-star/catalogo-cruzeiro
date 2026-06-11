@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260610-masonry-ads-v71";
+  const V8_BOOT_VERSION = "20260611-premium-news-grid-v72";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -824,9 +824,11 @@
 
   function storyCardSize(story = {}, position = 0, forceVideo = false) {
     const theme = storyTheme(story).id;
+    if (position === 0 && !forceVideo) return "lead";
+    if (position === 1 || position === 2) return "secondary";
     if (forceVideo || storyVideoUrl(story)) return position % 3 === 0 ? "feature-video" : "video";
     if (isProcurementStory(story)) return "compact";
-    if (position === 0 || storyPriorityScore(story) >= 1900) return "wide";
+    if (storyPriorityScore(story) >= 1900 && position > 8) return "wide";
     if (theme === "security" || theme === "urgent") return "horizontal";
     if (theme === "opportunity") return "compact";
     return position % 7 === 3 ? "wide" : "standard";
@@ -3742,10 +3744,7 @@
     const entries = [];
     let videoIndex = 0;
     let storyCount = 0;
-    let nextSponsorAt = 10;
-    if (limit > 0) {
-      entries.push({ type: "sponsor", position: 0, adIndex: 0 });
-    }
+    let nextSponsorAt = 5;
     const pushVideo = () => {
       while (videoIndex < playlist.length) {
         const item = playlist[videoIndex++];
@@ -3828,7 +3827,7 @@
   function renderContinuousSponsorCard(entry = {}, position = 0) {
     const image = NORTE_SPONSOR_IMAGES[(entry.adIndex || 0) % NORTE_SPONSOR_IMAGES.length] || NORTE_SPONSOR_ARTICLE_IMAGE;
     return `
-      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-standard" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}">
+      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}">
         <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
           <img src="${image}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
         </a>
