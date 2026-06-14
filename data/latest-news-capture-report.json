@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "startedAt": "2026-06-09T19:55:21.640Z",
-  "finishedAt": "2026-06-09T19:55:31.071Z",
-  "capturedItems": 370,
-  "capturedToday": 279,
-  "activeWindowItems": 420,
-  "archiveItems": 700,
+  "startedAt": "2026-06-14T22:44:54.467Z",
+  "finishedAt": "2026-06-14T22:45:05.282Z",
+  "capturedItems": 363,
+  "capturedToday": 198,
+  "activeWindowItems": 360,
+  "archiveItems": 480,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
       "ok": true,
-      "count": 20,
-      "blocked": 0,
+      "count": 19,
+      "blocked": 1,
       "mode": "rss"
     },
     {
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 4,
+      "count": 5,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -170,10 +170,9 @@
     },
     {
       "source": "pcac",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "portal-acre",
@@ -192,21 +191,21 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 1,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -220,7 +219,7 @@
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
