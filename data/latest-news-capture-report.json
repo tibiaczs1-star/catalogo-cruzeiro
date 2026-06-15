@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "startedAt": "2026-06-14T22:44:54.467Z",
-  "finishedAt": "2026-06-14T22:45:05.282Z",
-  "capturedItems": 363,
-  "capturedToday": 198,
+  "startedAt": "2026-06-15T21:08:34.503Z",
+  "finishedAt": "2026-06-15T21:08:42.220Z",
+  "capturedItems": 381,
+  "capturedToday": 269,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
       "ok": true,
-      "count": 19,
-      "blocked": 1,
+      "count": 20,
+      "blocked": 0,
       "mode": "rss"
     },
     {
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 23,
-      "blocked": 1,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 6,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -170,9 +170,10 @@
     },
     {
       "source": "pcac",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "portal-acre",
