@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-06-15T21:08:34.503Z",
-  "finishedAt": "2026-06-15T21:08:42.220Z",
-  "capturedItems": 381,
-  "capturedToday": 269,
+  "startedAt": "2026-06-17T02:06:33.527Z",
+  "finishedAt": "2026-06-17T02:06:39.157Z",
+  "capturedItems": 379,
+  "capturedToday": 191,
   "activeWindowItems": 360,
-  "archiveItems": 480,
+  "archiveItems": 520,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
@@ -213,7 +213,7 @@
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 2,
+      "count": 0,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
