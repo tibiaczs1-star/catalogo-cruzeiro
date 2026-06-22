@@ -5346,6 +5346,28 @@ const isMailzaPriorityArticle = (article = {}) => {
   return /\b(mailza|maisa|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
 };
 
+const isLevitaPriorityArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const text = normalizeText(
+    [
+      normalizedArticle.title,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.description,
+      normalizedArticle.category,
+      normalizedArticle.sourceName,
+      normalizedArticle.sourceUrl,
+      Array.isArray(normalizedArticle.body) ? normalizedArticle.body.join(" ") : normalizedArticle.body
+    ].join(" ")
+  );
+
+  return /\bromario\s+['"]?levita['"]?\b/.test(text)
+    || (/\blevita\b/.test(text) && /\bcruzeiro do sul\b/.test(text));
+};
+
+const getLevitaPriorityScore = (article = {}) =>
+  isLevitaPriorityArticle(article) ? 2000000000000 + Number(article.priority || 0) : 0;
+
 const getMailzaPriorityScore = (article = {}) =>
   isMailzaPriorityArticle(article) ? 1000000000000 + Number(article.priority || 0) : 0;
 
@@ -5512,6 +5534,11 @@ const compareEditorialFlowArticles = (
   const localTierDiff = Number(right?.editorialLocalTier || 0) - Number(left?.editorialLocalTier || 0);
   if (localTierDiff !== 0) {
     return localTierDiff;
+  }
+
+  const levitaDiff = getLevitaPriorityScore(right) - getLevitaPriorityScore(left);
+  if (levitaDiff !== 0) {
+    return levitaDiff;
   }
 
   const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);

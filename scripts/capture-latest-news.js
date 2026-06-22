@@ -1076,7 +1076,16 @@ function buildCuratedActiveWindow(items = [], limit = ACTIVE_WINDOW_LIMIT) {
     }
   };
 
-  // Garantia: a capa segue data atual, Mailza/Mailsa, Cruzeiro do Sul, Juruá e Acre.
+  // Garantia: a capa segue o fato local dominante, data atual, governo, Juruá e Acre.
+  take((item) => {
+    const text = normalizeText(
+      [item?.title, item?.summary, item?.lede, item?.sourceName, item?.sourceUrl]
+        .filter(Boolean)
+        .join(" ")
+    );
+    return /\bromario\s+levita\b/.test(text)
+      || (/\blevita\b/.test(text) && /\bcruzeiro do sul\b/.test(text));
+  });
   take((item) => isMailzaPriorityArticle(item));
   take((item) => getRegionalPriorityScore(item) >= 4200);
   take((item) => getRegionalPriorityScore(item) >= 3200);

@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260611-premium-news-grid-v72";
+  const V8_BOOT_VERSION = "20260615-norte-banner-geometry-v78";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -20,10 +20,59 @@
   const SOCIAL_WHATSAPP_NUMBER = "556896026649";
   const SOCIAL_WHATSAPP = `https://wa.me/${SOCIAL_WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi, CZS. Vim pelo V8 e quero atendimento.")}`;
   const NORTE_WHATSAPP_NUMBER = "5568992096037";
-  const NORTE_SPONSOR_IMAGE = "assets/sponsors-norte-ultra-fibra-planos.jpeg";
-  const NORTE_SPONSOR_ARTICLE_IMAGE = "assets/sponsors-norte-ultra-fibra-artigo.jpeg";
-  const NORTE_SPONSOR_IMAGES = [NORTE_SPONSOR_ARTICLE_IMAGE, NORTE_SPONSOR_IMAGE];
   const NORTE_SPONSOR_HREF = `https://wa.me/${NORTE_WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar internet.")}`;
+  const NORTE_SPONSOR = {
+    id: "norte-ultra-fibra",
+    name: "Norte Ultra Fibra",
+    logo: "assets/sponsors/norte-ultra-fibra/logo-oficial.jpeg",
+    href: NORTE_SPONSOR_HREF,
+    ads: [
+      {
+        id: "copa-hexa",
+        src: "assets/sponsors/norte-ultra-fibra/copa-hexa.png",
+        alt: "Norte Ultra Fibra - campanha Copa com o Catálogo CZS",
+        format: "portrait",
+        placements: ["feed", "mobile", "reader"],
+      },
+      {
+        id: "planos-500-vertical",
+        src: "assets/sponsors/norte-ultra-fibra/planos-500-vertical.jpg",
+        alt: "Norte Ultra Fibra - plano 500 Mega",
+        format: "portrait",
+        placements: ["home", "article", "footer"],
+      },
+      {
+        id: "planos-laranja",
+        src: "assets/sponsors/norte-ultra-fibra/planos-laranja.png",
+        alt: "Norte Ultra Fibra - conheça nossos planos",
+        format: "wide",
+        placements: ["side", "feed", "mobile"],
+      },
+      {
+        id: "promocao-familia-30",
+        src: "assets/sponsors/norte-ultra-fibra/promocao-familia-30.jpg",
+        alt: "Catálogo CZS e Norte Ultra Fibra - promoção de internet da região",
+        format: "portrait",
+        placements: ["feed", "article", "footer"],
+      },
+      {
+        id: "promocao-regiao-30",
+        src: "assets/sponsors/norte-ultra-fibra/promocao-regiao-30.jpg",
+        alt: "Catálogo CZS e Norte Ultra Fibra - melhor promoção para você",
+        format: "portrait",
+        placements: ["feed", "mobile", "reader"],
+      },
+      {
+        id: "planos-500-600-800",
+        src: "assets/sponsors/norte-ultra-fibra/planos-500-600-800.jpg",
+        alt: "Norte Ultra Fibra - planos 500, 600 e 800 Mega",
+        format: "portrait",
+        placements: ["feed", "side", "article"],
+      },
+    ],
+  };
+  const NORTE_SPONSOR_LOGO = NORTE_SPONSOR.logo;
+  const NORTE_SPONSOR_ADS = NORTE_SPONSOR.ads;
   const CHEFFE_ACTIONS_KEY = "czs-v8-cheffe-actions";
   const COMMUNITY_REPORTS_KEY = "czs-v8-community-reports";
   const NEWSLETTER_LEADS_KEY = "czs-v8-newsletter-leads";
@@ -55,6 +104,36 @@
     officeAI: "/api/office-ai/chat",
     cheffeAI: "/api/cheffe-call/ai",
   };
+
+  function sponsorAdFor(placement = "feed", index = 0) {
+    const pool = NORTE_SPONSOR_ADS.filter((ad) => !ad.placements || ad.placements.includes(placement));
+    const ads = pool.length ? pool : NORTE_SPONSOR_ADS;
+    if (!ads.length) {
+      return {
+        id: "logo",
+        src: NORTE_SPONSOR_LOGO,
+        alt: NORTE_SPONSOR.name,
+        format: "logo",
+      };
+    }
+    const safeIndex = Math.abs(Number(index) || 0) % ads.length;
+    return ads[safeIndex];
+  }
+
+  function sponsorImageMarkup(ad, options = {}) {
+    const loading = options.loading || "lazy";
+    return `<img src="${esc(ad.src)}" alt="${esc(ad.alt || NORTE_SPONSOR.name)}" loading="${loading}" decoding="async">`;
+  }
+
+  function renderReaderSponsorAd(index = 0, wide = false) {
+    const ad = sponsorAdFor("reader", index);
+    return `
+      <a class="v8-reader-ad v8-norte-reader-ad${wide ? " v8-reader-ad-wide" : ""}" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
+        <span class="v8-ad-label">Patrocinador oficial</span>
+        <figure>${sponsorImageMarkup(ad)}</figure>
+        <b>Norte Ultra Fibra</b>
+      </a>`;
+  }
   const V8_VIDEO_PLAYLIST = [
     {
       id: "czs-apresentacao",
@@ -757,11 +836,21 @@
     return score;
   };
 
+  const isLevitaLeadStory = (story = {}) => {
+    const text = [story?.title, story?.subtitle, story?.summary, story?.sourceName]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return /rom[aá]rio\s+[“"'‘’]?levita/.test(text)
+      || (/\blevita\b/.test(text) && /cruzeiro do sul/.test(text));
+  };
+
   const heroScore = (story) => {
     const text = [story?.title, story?.subtitle, story?.summary, story?.category, story?.sourceName]
       .join(" ")
       .toLowerCase();
     let score = localScore(story);
+    if (isLevitaLeadStory(story)) score += 12000;
     if (/corpus christi|festival|programacao|programação|saude|saúde|educacao|educação|servico|serviço|tempo|rio|cidade|comunidade|obra|agenda|show|cultura|evento|mailza|mailsa|gladson|gladison/.test(text)) score += 340;
     if (storyVideoUrl(story)) score += 260;
     if (/estupro|homicidio|homicídio|morte|assassin|execucao|execução|roubo|roubad|furto|prisao|prisão|presidio|presídio|presos|detento|superlotacao|superlotação|trafico|tráfico|mandado|foragido|policia|polícia|delegacia|investig/.test(text)) score -= 1500;
@@ -803,6 +892,7 @@
   function storyPriorityScore(story = {}) {
     const text = storySignalText(story);
     let score = Number(story?.priority || 0);
+    if (isLevitaLeadStory(story)) score += 12000;
     if (LOCAL_TOPIC_PATTERN.test(text)) score += 780;
     if (/acre|rio branco|capital|estado/i.test(text)) score += 280;
     if (/prefeitura|sa[uú]de|educa[cç][aã]o|seguran[cç]a|tempo|servi[cç]o|obra|bairro|comunidade|agenda/i.test(text)) score += 230;
@@ -1135,8 +1225,8 @@
       sponsor.rel = "noopener";
       sponsor.setAttribute("aria-label", "Norte Ultra Fibra, patrocinadora oficial do CZS");
       sponsor.innerHTML = `
-        <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra">
-        <span><small>Patrocínio oficial</small><b>Norte Ultra Fibra</b><em>500 Mega • suporte local</em></span>`;
+        <span class="v8-loader-sponsor-label">Patrocinador oficial</span>
+        <img src="${NORTE_SPONSOR_LOGO}" alt="Norte Ultra Fibra" loading="eager" decoding="async">`;
       loader.appendChild(sponsor);
     }
     if (loader && !$(".v8-loader-status", loader)) {
@@ -1547,14 +1637,8 @@
           </aside>
         </section>
         <section class="v8-reader-ad-grid" aria-label="Áreas de divulgação">
-          <a class="v8-reader-ad v8-reader-ad-wide v8-norte-reader-ad" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
-            <span>Norte Ultra Fibra</span>
-            <b>Internet de verdade: 30% OFF na primeira fatura pelo CZS.</b>
-          </a>
-          <a class="v8-reader-ad v8-norte-reader-ad" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
-            <span>Contratar internet</span>
-            <b>Planos 500, 600 e 800 Mega com atendimento no WhatsApp.</b>
-          </a>
+          ${renderReaderSponsorAd(0, true)}
+          ${renderReaderSponsorAd(1, false)}
           <a class="v8-reader-ad" href="#newsletter">
             <span>Resumo grátis</span>
             <b>Leitor recebe notícias e oportunidades sem sair do CZS.</b>
@@ -1617,7 +1701,8 @@
       const paragraph = `<p>${esc(p)}</p>`;
       const shouldInsertAd = paragraphs.length > 4 ? index === 2 : index === 0;
       if (shouldInsertAd) {
-        return `${paragraph}<aside class="v8-in-article-ad v8-norte-inline-ad"><span>Norte Ultra Fibra</span><b>30% OFF na primeira fatura. Internet fibra óptica para casa, estudo, trabalho e streaming.</b><a href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a></aside>`;
+        const ad = sponsorAdFor("article", index);
+        return `${paragraph}<aside class="v8-in-article-ad v8-norte-inline-ad" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}"><a class="v8-inline-ad-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">${sponsorImageMarkup(ad)}</a><a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a></aside>`;
       }
       return paragraph;
     }).join("");
@@ -1950,6 +2035,7 @@
     lead.classList.add("v8-live-hero");
     rail.classList.add("v8-hero-rail");
     rail.innerHTML = heroStories.slice(1, 6).map((story, i) => railCard(story, i + 1)).join("");
+    renderSponsorSideRail();
 
     const paint = (nextIndex) => {
       index = (nextIndex + heroStories.length) % heroStories.length;
@@ -2034,21 +2120,33 @@
     $("#v8NorteAfterHero")?.remove();
     const hero = $(".hero-grid");
     if (!hero?.parentElement) return;
+    const ad = sponsorAdFor("home", 0);
     hero.insertAdjacentHTML("afterend", `
-      <section class="v8-norte-after-hero" id="v8NorteAfterHero" aria-label="Patrocinador oficial Norte Ultra Fibra">
+      <section class="v8-norte-after-hero" id="v8NorteAfterHero" aria-label="Patrocinador oficial Norte Ultra Fibra" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
         <a class="v8-norte-after-hero-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp">
-          <img src="${NORTE_SPONSOR_ARTICLE_IMAGE}" alt="Norte Ultra Fibra - planos de internet para o leitor CZS" loading="eager" decoding="async">
+          ${sponsorImageMarkup(ad, { loading: "eager" })}
         </a>
         <div class="v8-norte-after-hero-copy">
           <span>Patrocinador oficial do CZS</span>
-          <h2>Norte Ultra Fibra conecta sua casa ao que importa</h2>
-          <p>Internet 100% fibra óptica, atendimento local e contratação direta pelo WhatsApp.</p>
+          <h2>Norte Ultra Fibra</h2>
+          <p>Contratação e suporte direto pelo WhatsApp, sem interromper a leitura.</p>
           <div class="actions">
             <a class="btn green" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
           </div>
         </div>
       </section>`);
+  }
+
+  function renderSponsorSideRail() {
+    const rail = $("#heroSide");
+    if (!rail || $("#v8SponsorSideRail", rail)) return;
+    const ad = sponsorAdFor("side", 0);
+    rail.insertAdjacentHTML("beforeend", `
+      <a class="v8-sponsor-side-card" id="v8SponsorSideRail" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
+        <span>Patrocinador</span>
+        <figure>${sponsorImageMarkup(ad)}</figure>
+      </a>`);
   }
 
   function railCard(story) {
@@ -3614,7 +3712,7 @@
         </div>
         <article class="v8-support-card is-norte v8-support-single">
           <a class="v8-support-logo" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Abrir atendimento da Norte Ultra Fibra no WhatsApp">
-            <img src="${NORTE_SPONSOR_IMAGE}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
+            <img src="${NORTE_SPONSOR_LOGO}" alt="Norte Ultra Fibra" loading="lazy" decoding="async">
           </a>
           <div>
             <a class="v8-support-title-link" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Norte Ultra Fibra</a>
@@ -3825,21 +3923,19 @@
   }
 
   function renderContinuousSponsorCard(entry = {}, position = 0) {
-    const image = NORTE_SPONSOR_IMAGES[(entry.adIndex || 0) % NORTE_SPONSOR_IMAGES.length] || NORTE_SPONSOR_ARTICLE_IMAGE;
+    const ad = sponsorAdFor("feed", entry.adIndex || position);
     return `
-      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}">
+      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
         <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
-          <img src="${image}" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async">
+          ${sponsorImageMarkup(ad)}
         </a>
         <div class="v8-organic-sponsor-copy">
-          <span class="badge">Patrocinado • Norte Ultra Fibra</span>
-          <h3>Internet rápida, estável e com atendimento local</h3>
-          <p>Plano 500 Mega, fibra óptica de verdade e suporte pertinho de você.</p>
-          <small>Oferta CZS • WhatsApp (68) 99209-6037 • anúncio nativo</small>
+          <span class="badge">Patrocinado</span>
+          <h3>Norte Ultra Fibra</h3>
+          <small>Oferta CZS • WhatsApp (68) 99209-6037</small>
           <div class="actions">
             <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="small-btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
-            <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
           </div>
         </div>
       </article>`;
@@ -3922,6 +4018,24 @@
       observer.observe($("#v8ContinuousSentinel", section));
     }
     paint();
+  }
+
+  function renderSponsorFooterPromo() {
+    $("#v8SponsorFooterPromo")?.remove();
+    const footer = $("#fullSiteFooter");
+    if (!footer?.parentElement) return;
+    const ad = sponsorAdFor("footer", 0);
+    footer.insertAdjacentHTML("beforebegin", `
+      <section class="section v8-sponsor-footer-promo" id="v8SponsorFooterPromo" aria-label="Promoção Norte Ultra Fibra" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
+        <a class="v8-sponsor-footer-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp">
+          ${sponsorImageMarkup(ad)}
+        </a>
+        <div class="v8-sponsor-footer-actions">
+          <span>Patrocinador oficial</span>
+          <b>Norte Ultra Fibra</b>
+          <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
+        </div>
+      </section>`);
   }
 
   function positionPublicModulesBeforeContinuous() {
@@ -6044,6 +6158,7 @@
     enhanceCommercialAndShortcuts();
     positionPublicModulesBeforeContinuous();
     renderContinuousNewsScroll();
+    renderSponsorFooterPromo();
     renderNewsFooter();
     installSalesLanding();
     installContextSideRail();
