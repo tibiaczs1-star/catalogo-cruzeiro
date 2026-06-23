@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-06-22T13:42:24.357Z",
-  "finishedAt": "2026-06-22T13:42:37.983Z",
-  "capturedItems": 363,
-  "capturedToday": 168,
-  "activeWindowItems": 420,
-  "archiveItems": 720,
+  "startedAt": "2026-06-23T19:41:58.878Z",
+  "finishedAt": "2026-06-23T19:42:05.498Z",
+  "capturedItems": 379,
+  "capturedToday": 287,
+  "activeWindowItems": 360,
+  "archiveItems": 480,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 23,
-      "blocked": 1,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 3,
+      "count": 5,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -170,9 +170,10 @@
     },
     {
       "source": "pcac",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "portal-acre",
@@ -212,14 +213,14 @@
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 0,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
