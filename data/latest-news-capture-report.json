@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-23T19:41:58.878Z",
-  "finishedAt": "2026-06-23T19:42:05.498Z",
-  "capturedItems": 379,
-  "capturedToday": 287,
+  "startedAt": "2026-06-24T12:24:41.823Z",
+  "finishedAt": "2026-06-24T12:24:47.761Z",
+  "capturedItems": 382,
+  "capturedToday": 141,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
