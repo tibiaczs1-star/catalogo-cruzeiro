@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-24T12:24:41.823Z",
-  "finishedAt": "2026-06-24T12:24:47.761Z",
-  "capturedItems": 382,
-  "capturedToday": 141,
+  "startedAt": "2026-06-26T13:00:37.702Z",
+  "finishedAt": "2026-06-26T13:00:47.732Z",
+  "capturedItems": 383,
+  "capturedToday": 197,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 4,
+      "count": 5,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -199,21 +199,21 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
