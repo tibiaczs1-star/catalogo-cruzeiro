@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-26T13:00:37.702Z",
-  "finishedAt": "2026-06-26T13:00:47.732Z",
-  "capturedItems": 383,
-  "capturedToday": 197,
+  "startedAt": "2026-06-27T00:18:54.456Z",
+  "finishedAt": "2026-06-27T00:19:05.240Z",
+  "capturedItems": 376,
+  "capturedToday": 239,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -170,10 +170,9 @@
     },
     {
       "source": "pcac",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "portal-acre",
@@ -192,7 +191,7 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -206,7 +205,7 @@
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

@@ -31,6 +31,9 @@ Antes de qualquer captacao, leia:
 8. Bloquear video borrado, pixelado, com baixa nitidez, corte ruim, compressao pesada, texto ilegivel, marca errada ou visual amador.
 9. Exportar preferencialmente em 1080x1920, 9:16, H.264/AAC, 30 fps quando a fonte permitir. O minimo aceitavel e 720p; abaixo disso, segurar para revisao.
 10. Validar preview visual antes de qualquer publicacao externa.
+11. Se o video vier de repost com logo/marca de terceiro, tentar achar a origem limpa primeiro. Se nao achar origem limpa em tempo razoavel, gerar versao CZS com logo oficial, titulo, fonte e tarja editorial cobrindo ou dominando a marca antiga, sem esconder credito da fonte.
+12. Todo pacote de video polemico/viral precisa ter uma versao MP4 compatível com WhatsApp: container `.mp4`, video H.264, audio AAC, orientacao 9:16, audio preservado quando util e tamanho revisado antes de envio.
+13. Videos captados para WhatsApp/Reels devem sair em pasta separada de revisao, com `LEIA-ME.txt`, origem, status e motivo de bloqueio quando nao baixar.
 
 ## Linha editorial
 
@@ -66,6 +69,12 @@ node scripts\capture-latest-news.js
 - status: `aprovado`, `bloqueado_sem_video`, `bloqueado_antigo`, `bloqueado_baixa_qualidade`, `bloqueado_sem_fonte`, `pendente_revisao`
 
 4. Nao usar conteudo privado, sem fonte, sem data, sem permissao operacional ou que exija gambiarra de login sensivel.
+5. Para video polemico/viral, executar busca de origem em duas etapas:
+
+- buscar pelo texto exato da legenda/manchete;
+- abrir a pagina original e procurar embeds `.mp4`, `.m3u8`, Instagram, Facebook ou TikTok antes de aceitar repost com logo.
+
+Se so houver repost com logo, registrar isso no `source-index.json` e seguir para versao branded CZS.
 
 ## Edicao
 
@@ -78,6 +87,8 @@ Para cada Reel aprovado:
 - Colocar titulo curto e legenda/resumo na tela.
 - Manter credito da fonte.
 - Preservar audio original quando for util; se nao houver audio, aplicar somente trilha jornalistica segura/aprovada.
+- Quando o video ja tiver marca de terceiro, aplicar tarja superior/inferior CZS com tipagem forte, fonte visivel e marca CZS correta. Nao usar overlay transparente fraco que deixe o Reel com cara de repost solto.
+- Gerar tambem uma versao `.mp4` propria para WhatsApp, validada com `ffprobe` como H.264/AAC.
 - Gerar capa nitida.
 - Salvar preview navegavel.
 
@@ -113,8 +124,10 @@ Com:
 - `source-index.json`
 - `blocked-items.json`
 - `publication-queue.json`
+- `LEIA-ME.txt` com origem, status, videos baixados, videos sem origem limpa e observacoes para WhatsApp
 - `index.html` de preview
 - pasta `reels/`
+- pasta `whatsapp-mp4/`
 - pasta `covers/`
 - pasta `proof/`
 - relatorio final `RELATORIO.md`
@@ -146,6 +159,7 @@ Antes de concluir, rode:
 ```powershell
 node --test scripts\test\czs-video-news-pilot.test.js
 rg -n "zoompan|animated-image|source\.jpg|anullsrc" scripts\czs-video-news-pilot.js scripts\czs-video-news-final-render.js
+ffprobe -v error -show_entries format=duration:stream=codec_name,codec_type,width,height -of json caminho-do-video.mp4
 ```
 
 O teste precisa passar, e o `rg` nao deve encontrar fallback de imagem nos scripts de Reels.
