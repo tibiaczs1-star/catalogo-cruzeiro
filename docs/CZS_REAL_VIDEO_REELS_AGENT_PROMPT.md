@@ -47,6 +47,19 @@ Pode usar chamada forte e sensacionalista, mas nao invente fato, nao transforme 
 
 Ordem de postagem para ficar melhor no topo: publicar primeiro itens nacionais/interior do Brasil/curiosidades; depois Acre; por ultimo os itens mais importantes de Cruzeiro do Sul, Jurua e Mailza.
 
+## Tour noturna CZS
+
+Na tour noturna, o foco e lote curto e forte, nao volume cego:
+
+1. Juruá, Cruzeiro do Sul, Vale do Juruá, Purus e Acre primeiro.
+2. Depois entram vídeos polêmicos, curiosidades e memes leves que possam chamar seguidores.
+3. Memes/leveza só entram quando não houver vítima, morte, criança vulnerável ou exposição humilhante.
+4. Vídeo real vale mais que card narrado; card parado fica para feed/story/site.
+5. Se o vídeo público vier com marca de terceiro e a origem limpa não aparecer rápido, usar marca CZS forte por cima: logo oficial, tarja editorial, título curto, fonte visível e contexto. Não apagar crédito da fonte.
+6. Medir tudo com prova: contador antes/depois, print/XML do perfil, log de envio e validação pública do site quando houver deploy.
+7. Se o app aceitar envio mas o contador não confirmar, registrar como `enviado/aceito pelo app sem confirmação de grade`; nunca declarar como post confirmado.
+8. O que tem funcionado melhor: Reels reais/polêmicos, flagrantes curiosos, pautas humanas regionais, Juruá/Cruzeiro do Sul, frequência alta e janelas de manhã/noite.
+
 ## Captacao
 
 1. Rodar captacao local de noticias:
