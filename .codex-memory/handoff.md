@@ -14,7 +14,8 @@ Rodada Mailza Reels concluida em 2026-06-28:
 - Contador/prova: perfil antes `846 posts`; perfil final limpo `861 posts` em `proof/profile-final-mailza-clean.png/xml`.
 - Relatorio final: `.codex-temp/mailza-round-20260628/RELATORIO-MAILZA-REELS-20260628.md`.
 - Nao repetir os IDs desta rodada: `mailza-arraial-cultural-2026`, `mailza-feijo-cirurgias`, `mailza-br364-investimentos`, `mailza-chega-cruzeiro-do-sul`, `mailza-empresa-construcao-jurua`, `mailza-turismo-acre`, `mailza-novo-mercado-velho`, `fala-governadora-investimentos`, `mailza-oportunidade-servidores`.
-- Site foi atualizado localmente pela captacao (`data/runtime-news.json`, `data/news-archive.json`, `news-data.js`, `data/latest-news-capture-report.json`), mas nao foi feito commit/push/deploy nesta rodada.
+- Site/Render finalizado: commit `b7731f73` (`chore: update CZS Mailza capture and reels proof`) enviado para `main`; Render deploy `dep-d90dbhgjs32c73ch2nh0` ficou `live`.
+- Validacao publica: `news-data.js?fresh=b7731f73` retornou 200 com `Mailza`, `Terceirizados` e `Skatepark`; API `/api/news/archive?limit=20&fresh=b7731f73` retornou pauta `CNPJs ligados a Assem Cameli... Mailza`.
 
 Tour noturna CZS concluida em 2026-06-27:
 

@@ -14,6 +14,8 @@ Updated: 2026-06-27T19:10:00-05:00
 - Instagram `@catalogo_czs_` via BlueStacks/ADB `127.0.0.1:5555`: 9 envios Mailza registrados com `submitted=true`.
 - Prova de perfil: antes `846 posts`; final limpo `861 posts`, com print/XML em `.codex-temp/mailza-round-20260628/proof/profile-final-mailza-clean.*`.
 - Observacao operacional: o contador subiu +15 na janela da rodada, possivelmente incluindo processamentos pendentes anteriores; declarar com precisao que esta fila Mailza teve 9 envios `submitted=true`, nao atribuir isoladamente +15 apenas aos 9.
+- Site/Render finalizado depois: commit `b7731f73` (`chore: update CZS Mailza capture and reels proof`) enviado para `main`; Render deploy `dep-d90dbhgjs32c73ch2nh0` ficou `live`.
+- Validacao publica: `news-data.js?fresh=b7731f73` retornou 200, com `Mailza`, `Terceirizados` e `Skatepark`; API `/api/news/archive?limit=20&fresh=b7731f73` retornou pauta `CNPJs ligados a Assem Cameli... Mailza`.
 - Relatorio: `.codex-temp/mailza-round-20260628/RELATORIO-MAILZA-REELS-20260628.md`.
 
 ## Tour noturna CZS - 2026-06-27
