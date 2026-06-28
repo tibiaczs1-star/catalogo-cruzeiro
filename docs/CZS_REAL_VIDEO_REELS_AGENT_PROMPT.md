@@ -60,6 +60,12 @@ Na tour noturna, o foco e lote curto e forte, nao volume cego:
 7. Se o app aceitar envio mas o contador não confirmar, registrar como `enviado/aceito pelo app sem confirmação de grade`; nunca declarar como post confirmado.
 8. O que tem funcionado melhor: Reels reais/polêmicos, flagrantes curiosos, pautas humanas regionais, Juruá/Cruzeiro do Sul, frequência alta e janelas de manhã/noite.
 
+### Anti-repeticao e limpeza de duplicados
+
+Antes de publicar, comparar o assunto com filas, manifests e provas recentes. Se o mesmo fato ja foi publicado, bloquear a reprise e procurar outro video/pauta.
+
+Se houver arquivo duplicado para limpar, nunca apagar no escuro. So apagar depois de comparar desempenho: manter a versao com mais views/plays e remover apenas a versao com menor view. Quando nao houver metrica local de visualizacao, preservar os arquivos e checar o Instagram antes de qualquer exclusao.
+
 ## Captacao
 
 1. Rodar captacao local de noticias:

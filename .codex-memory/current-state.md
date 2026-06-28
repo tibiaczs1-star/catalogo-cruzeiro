@@ -2,6 +2,20 @@
 
 Updated: 2026-06-27T19:10:00-05:00
 
+## Rodada Mailza Reels - 2026-06-28
+
+- Usuario pediu reforco de Mailza porque estava pouco no Instagram, com preferencia por Reels reais baixados/refeitos, logo CZS e formato padrao.
+- Captacao nova executada com `node scripts/capture-latest-news.js`: `ok=true`, 371 itens captados, 147 de hoje, 360 ativos e 480 no arquivo; PCAC abortou novamente, demais fontes ficaram validas.
+- Foram encontrados 17 itens Mailza/governadora no `data/runtime-news.json`; a maioria era foto/texto sem `videoUrl`, entao nao virou Reel fake.
+- Instagram publico bloqueou downloads via yt-dlp com `empty media response`; Facebook publico permitiu baixar videos reais.
+- Pacote da rodada: `.codex-temp/mailza-round-20260628/`.
+- Baixados 10 MP4s publicos; renderizados 9 Reels reais CZS em `videos/com-logo-czs/` com logo oficial, tarja editorial, titulo, fonte e audio preservado. O item 10 de Brasileia ficou bloqueado por arquivo/render quebrado apos timeout.
+- Captions reforcadas com fonte/link, site, Instagram, WhatsApp do Catalogo CZS e apoio Norte Ultra Fibra.
+- Instagram `@catalogo_czs_` via BlueStacks/ADB `127.0.0.1:5555`: 9 envios Mailza registrados com `submitted=true`.
+- Prova de perfil: antes `846 posts`; final limpo `861 posts`, com print/XML em `.codex-temp/mailza-round-20260628/proof/profile-final-mailza-clean.*`.
+- Observacao operacional: o contador subiu +15 na janela da rodada, possivelmente incluindo processamentos pendentes anteriores; declarar com precisao que esta fila Mailza teve 9 envios `submitted=true`, nao atribuir isoladamente +15 apenas aos 9.
+- Relatorio: `.codex-temp/mailza-round-20260628/RELATORIO-MAILZA-REELS-20260628.md`.
+
 ## Tour noturna CZS - 2026-06-27
 
 - Usuario pediu tour noturna com Juruá/região, vídeos polêmicos e memes para chamar seguidores, além de adicionar o aprendizado à rotina/memória.

@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-27T23:44:24.764Z",
-  "finishedAt": "2026-06-27T23:44:35.163Z",
-  "capturedItems": 369,
-  "capturedToday": 210,
+  "startedAt": "2026-06-28T03:15:17.404Z",
+  "finishedAt": "2026-06-28T03:15:33.553Z",
+  "capturedItems": 371,
+  "capturedToday": 147,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -164,8 +164,8 @@
     {
       "source": "o-alto-acre",
       "ok": true,
-      "count": 9,
-      "blocked": 1,
+      "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {

@@ -2,6 +2,20 @@
 
 Updated: 2026-06-27T19:10:00-05:00
 
+Rodada Mailza Reels concluida em 2026-06-28:
+
+- Pedido: reforcar Mailza no Instagram com muitos Reels reais, baixados/refeitos, logo CZS e formato padrao.
+- Captacao nova feita: 371 itens, 147 de hoje, 360 ativos, 480 no arquivo; PCAC abortou, pacote geral valido.
+- Itens Mailza no runtime: 17; quase todos sem `videoUrl`, portanto nao transformar foto/texto em Reel falso.
+- Pacote/provas: `.codex-temp/mailza-round-20260628/`.
+- Videos reais baixados do Facebook publico em `original/`; Instagram publico bloqueou yt-dlp com `empty media response`.
+- Renderizados 9 MP4 CZS validos em `videos/com-logo-czs/`; captions incluem fonte/link, site, Instagram, WhatsApp e Norte Ultra Fibra.
+- Instagram `@catalogo_czs_` via BlueStacks/ADB `127.0.0.1:5555`: `publish-results.json` registra 9 envios `submitted=true`.
+- Contador/prova: perfil antes `846 posts`; perfil final limpo `861 posts` em `proof/profile-final-mailza-clean.png/xml`.
+- Relatorio final: `.codex-temp/mailza-round-20260628/RELATORIO-MAILZA-REELS-20260628.md`.
+- Nao repetir os IDs desta rodada: `mailza-arraial-cultural-2026`, `mailza-feijo-cirurgias`, `mailza-br364-investimentos`, `mailza-chega-cruzeiro-do-sul`, `mailza-empresa-construcao-jurua`, `mailza-turismo-acre`, `mailza-novo-mercado-velho`, `fala-governadora-investimentos`, `mailza-oportunidade-servidores`.
+- Site foi atualizado localmente pela captacao (`data/runtime-news.json`, `data/news-archive.json`, `news-data.js`, `data/latest-news-capture-report.json`), mas nao foi feito commit/push/deploy nesta rodada.
+
 Tour noturna CZS concluida em 2026-06-27:
 
 - Executada com foco em Juruá/região, vídeos polêmicos e memes leves para seguidores.
