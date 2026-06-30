@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-28T03:15:17.404Z",
-  "finishedAt": "2026-06-28T03:15:33.553Z",
-  "capturedItems": 371,
-  "capturedToday": 147,
+  "startedAt": "2026-06-29T19:52:12.013Z",
+  "finishedAt": "2026-06-29T19:52:22.373Z",
+  "capturedItems": 367,
+  "capturedToday": 272,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -157,7 +157,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -198,14 +198,14 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
