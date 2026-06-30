@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-06-29T19:52:12.013Z",
-  "finishedAt": "2026-06-29T19:52:22.373Z",
-  "capturedItems": 367,
-  "capturedToday": 272,
+  "startedAt": "2026-06-30T17:16:02.657Z",
+  "finishedAt": "2026-06-30T17:16:12.178Z",
+  "capturedItems": 383,
+  "capturedToday": 274,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 24,
-      "blocked": 0,
+      "count": 23,
+      "blocked": 1,
       "mode": "wordpress-json"
     },
     {
@@ -170,9 +170,10 @@
     },
     {
       "source": "pcac",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "portal-acre",
@@ -198,7 +199,7 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -212,7 +213,7 @@
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
