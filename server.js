@@ -1890,9 +1890,20 @@ function getStaticNewsItemsUncached() {
   try {
     if (!fs.existsSync(STATIC_NEWS_FILE)) return [];
 
+    const source = fs.readFileSync(STATIC_NEWS_FILE, "utf-8");
+    const marker = "window.NEWS_DATA = ";
+    const markerIndex = source.indexOf(marker);
+    const payloadEnd = source.lastIndexOf("];");
+
+    if (markerIndex >= 0 && payloadEnd > markerIndex) {
+      const payload = source.slice(markerIndex + marker.length, payloadEnd + 1);
+      const parsed = JSON.parse(payload);
+      return Array.isArray(parsed) ? parsed : [];
+    }
+
     const sandbox = { window: {} };
     vm.createContext(sandbox);
-    vm.runInContext(fs.readFileSync(STATIC_NEWS_FILE, "utf-8"), sandbox, {
+    vm.runInContext(source, sandbox, {
       filename: STATIC_NEWS_FILE,
       timeout: 1000
     });
