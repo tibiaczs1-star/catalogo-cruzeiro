@@ -7900,7 +7900,17 @@ function getArticleBySlug(slug) {
     return staticDetailFallbacks[targetSlug];
   }
 
-  return getArticleNewsLookupMap().get(targetSlug) || null;
+  const lookupItem = getArticleNewsLookupMap().get(targetSlug);
+  if (lookupItem) {
+    return lookupItem;
+  }
+
+  return (
+    getArticleNewsApiBasePayload().items.find((item) => {
+      const slugs = [item.slug].concat(Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []);
+      return slugs.some((candidate) => normalizeLookupSlug(candidate) === targetSlug);
+    }) || null
+  );
 }
 
 function buildNewsArchivePayload(limit = 500) {
