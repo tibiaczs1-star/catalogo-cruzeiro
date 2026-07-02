@@ -7816,6 +7816,94 @@ function getArticleBySlug(slug) {
   }
 
   const staticDetailFallbacks = {
+    "o-carimbo-dos-cameli-linda-reforca-gladson-e-deixa-versao-de-zequinha-em-disputa": normalizeArticleRecord({
+      id: "https://catalogo-cruzeiro-web.onrender.com/noticia.html?slug=o-carimbo-dos-cameli-linda-reforca-gladson-e-deixa-versao-de-zequinha-em-disputa",
+      slug: "o-carimbo-dos-cameli-linda-reforca-gladson-e-deixa-versao-de-zequinha-em-disputa",
+      title: "O carimbo dos Cameli: Linda reforça Gladson e deixa versão de Zequinha em disputa",
+      eyebrow: "Política Local",
+      date: "02 de jul de 2026",
+      publishedAt: "2026-07-02T10:08:00.000-05:00",
+      category: "Política Regional",
+      categoryKey: "politica",
+      sourceName: "Catálogo CZS",
+      sourceUrl:
+        "https://oriobranco.net/gladson-cameli-nega-crise-no-governo-e-contesta-prefeito-de-cruzeiro-do-sul-fui-pego-de-surpresa/",
+      sourceLabel:
+        "Apuração CZS com O Rio Branco/AC24Horas, Folha do Acre, Acre in Foco, Juruá em Tempo e print enviado ao CZS.",
+      imageUrl: "assets/news-manual/carimbo-cameli-zequinha-alan-20260702.png",
+      feedImageUrl: "assets/news-manual/carimbo-cameli-zequinha-alan-20260702.png",
+      imageCredit: "Arte editorial Catálogo CZS, com base em fontes locais consultadas",
+      imageFocus: "center",
+      imageFit: "cover",
+      priority: 1000,
+      editorialPriority: "mailza-prioridade",
+      lede:
+        "Após Zequinha Lima declarar apoio a Alan Rick, Gladson negou ter sido avisado ou ter articulado o acordo. O print enviado ao CZS mostra Linda Cameli reforçando a versão do filho, enquanto exonerações e aparições públicas ampliam a crise política no Acre.",
+      summary:
+        "Após Zequinha Lima declarar apoio a Alan Rick, Gladson negou ter sido avisado ou ter articulado o acordo. O print enviado ao CZS mostra Linda Cameli reforçando a versão do filho, enquanto exonerações e aparições públicas ampliam a crise política no Acre.",
+      analysis:
+        "Resumo da checagem: a disputa pública não prova, por si só, quem sabia antes do acordo. O dado verificável é que Zequinha declarou apoio a Alan Rick, Gladson negou aval prévio, Linda Cameli reforçou a versão do filho e atos administrativos ampliaram o impacto político.",
+      highlights: [
+        "Zequinha declarou apoio a Alan Rick e rompeu com a base que apoiava Mailza.",
+        "Gladson diz que foi surpreendido e nega ter autorizado ou articulado o acordo.",
+        "Linda Cameli reforçou publicamente a versão do filho, segundo print enviado ao CZS.",
+        "Exonerações de familiares de Zequinha ampliaram o efeito político do movimento."
+      ],
+      development: [
+        "Linha do tempo: em 29 de junho, Zequinha confirmou apoio ao projeto de Alan Rick; em 30 de junho, foram datados decretos de exoneração de familiares do prefeito; em 1º de julho, veículos locais publicaram a negativa de Gladson e a presença de Zequinha com Alan na Expoacre Juruá.",
+        "Classificação CZS: confirmado que houve apoio público e negativa pública; parcialmente em disputa a versão sobre conhecimento prévio; sem evidência pública, nas fontes consultadas, de que Gladson tenha autorizado o acordo.",
+        "Fontes consultadas: O Rio Branco/AC24Horas, Folha do Acre, Acre in Foco, Juruá em Tempo e print do AC24Horas enviado ao CZS."
+      ],
+      crossSources: [
+        {
+          name: "O Rio Branco / AC24Horas",
+          url: "https://oriobranco.net/gladson-cameli-nega-crise-no-governo-e-contesta-prefeito-de-cruzeiro-do-sul-fui-pego-de-surpresa/"
+        },
+        {
+          name: "Folha do Acre - negativa de Gladson",
+          url: "https://folhadoacre.com.br/2026/07/gladson-nega-ter-participado-de-articulacao-entre-zequinha-e-alan-rick-e-diz-ter-sido-surpreendido-por-apoio/"
+        },
+        {
+          name: "Folha do Acre - exonerações",
+          url: "https://folhadoacre.com.br/2026/07/filha-e-genro-de-zequinha-lima-sao-exonerados-do-governo-apos-prefeito-apoiar-alan-rick/"
+        },
+        {
+          name: "Acre in Foco - apoio de Zequinha",
+          url: "https://acreinfoco.com/2026/07/prefeito-de-cruzeiro-do-sul-anuncia-apoio-a-candidatura-de-alan-rick-ao-governo-do-estado/"
+        },
+        {
+          name: "Juruá em Tempo - Expoacre Juruá",
+          url: "https://www.juruaemtempo.com.br/2026/07/ao-lado-de-alan-rick-prefeito-zequinha-lima-participa-da-expoacre-jurua/"
+        },
+        {
+          name: "AC24Horas - print enviado ao CZS",
+          url: "https://ac24horas.com/"
+        }
+      ],
+      alternateSlugs: [
+        "gladson-cameli-nega-crise-no-governo-e-contesta-prefeito-de-cruzeiro-do-sul-fui-pego-de-surpresa",
+        "gladson-nega-ter-participado-de-articulacao-entre-zequinha-e-alan-rick-e-diz-ter-sido-surpreendido-por-apoio",
+        "prefeito-de-cruzeiro-do-sul-anuncia-apoio-a-candidatura-de-alan-rick-ao-governo-do-estado",
+        "ao-lado-de-alan-rick-prefeito-zequinha-lima-participa-da-expoacre-jurua"
+      ],
+      body: [
+        "A crise aberta pelo apoio do prefeito de Cruzeiro do Sul, Zequinha Lima, ao projeto de Alan Rick ganhou uma nova camada depois que Linda Cameli, mãe de Gladson Cameli, apareceu no centro da reação pública. Em print enviado ao Catálogo CZS, uma nota do AC24Horas resume que Linda usou as redes sociais para reforçar a versão do filho e contestar a fala de Zequinha de que Gladson saberia de tudo.",
+        "O ponto central da disputa é simples e politicamente pesado: Zequinha declarou apoio a Alan Rick e, segundo as versões publicadas, afirmou que Gladson tinha conhecimento do movimento. Gladson, por sua vez, disse em entrevista que o apoio o pegou de surpresa, negou ter dado aval ao acordo e afirmou ter testemunhas de que a conversa com o prefeito não fechou esse entendimento.",
+        "A fala de Linda funciona como um carimbo familiar e político sobre a versão de Gladson. Ela não resolve sozinha a disputa, mas muda o peso público da narrativa: a divergência deixa de ser apenas entre o ex-governador e o prefeito e passa a envolver a família Cameli em defesa direta da palavra de Gladson.",
+        "A Acre in Foco registrou que Zequinha oficializou afastamento da base que apoia a pré-candidatura de Mailza Assis e aderiu ao projeto liderado por Alan Rick. A justificativa apresentada pelo prefeito foi um histórico de insatisfação com a condução política do grupo governista e com a relação com lideranças do interior.",
+        "Do outro lado, O Rio Branco, com base em entrevista ao AC24Horas, publicou que Gladson minimizou crise na base estadual, defendeu que Mailza tem direito de fazer mudanças no governo e foi direto ao contestar a versão do prefeito. A Folha do Acre também registrou a negativa de Gladson sobre participação prévia na articulação entre Zequinha e Alan Rick.",
+        "A crise saiu da fala e entrou no Diário Oficial. A Folha do Acre informou que Camila da Silva Lima e José Guilherme Lira de Souza, filha e genro de Zequinha, foram exonerados de cargos comissionados no governo estadual por decretos de 30 de junho de 2026. Os atos, segundo a publicação, não apresentaram justificativa formal.",
+        "Na Expoacre Juruá, o movimento também ficou visível. O Juruá em Tempo publicou que Zequinha percorreu a feira ao lado de Alan Rick, conversando com expositores e visitantes, enquanto a Prefeitura usava o evento para divulgar ações municipais e o Festival da Farinha. A presença pública reforçou a leitura de realinhamento político.",
+        "O que está confirmado: Zequinha declarou apoio a Alan Rick; Gladson negou ter sido avisado ou ter articulado o acordo; Linda Cameli apareceu reforçando a versão do filho no print enviado; familiares de Zequinha foram exonerados; e Zequinha circulou publicamente com Alan Rick na Expoacre Juruá.",
+        "O que está em disputa: se Gladson sabia previamente do acordo ou se foi surpreendido. Até agora, nas fontes consultadas, não apareceu documento público, áudio, ata ou mensagem apresentada que comprove que Gladson autorizou ou articulou o apoio de Zequinha a Alan Rick.",
+        "Para Cruzeiro do Sul e o Vale do Juruá, o caso importa porque a segunda maior cidade do Acre virou peça central da reorganização para 2026. O apoio de Zequinha fortalece Alan Rick no território, mas a reação de Gladson e Linda cria custo político e dá munição para a base de Mailza sustentar que houve ruptura sem aval do Progressistas."
+      ],
+      accessibility: {
+        alt: "Arte editorial do Catálogo CZS com o título O carimbo dos Cameli e blocos de checagem sobre Zequinha, Alan Rick, Gladson e Linda Cameli",
+        caption:
+          "Análise política factual sobre a disputa de versões após apoio de Zequinha Lima a Alan Rick."
+      }
+    }),
     "rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul": normalizeArticleRecord({
       id: "rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
       slug: "rio-jurua-esta-proximo-de-sair-da-cota-de-transbordamento-em-cruzeiro-do-sul",
