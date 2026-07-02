@@ -7703,7 +7703,17 @@ function getArticleNewsLookupMap() {
   }
 
   const lookup = new Map();
-  getArticleNewsApiBasePayload().items.forEach((item) => {
+  const map = new Map();
+  getRawNewsItems()
+    .map(normalizeArticleRecord)
+    .forEach((item) => {
+      const storageKey = getArticleStorageKey(item);
+      if (storageKey) {
+        upsertCrossedArticleRecord(map, storageKey, item);
+      }
+    });
+
+  Array.from(map.values()).forEach((item) => {
     const slugs = [item.slug].concat(Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []);
     slugs.forEach((candidate) => {
       const normalizedSlug = normalizeLookupSlug(candidate);
