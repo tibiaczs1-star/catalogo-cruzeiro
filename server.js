@@ -7984,10 +7984,6 @@ function getArticleBySlug(slug) {
     })
   };
 
-  if (staticDetailFallbacks[targetSlug]) {
-    return staticDetailFallbacks[targetSlug];
-  }
-
   const lookupItem = getArticleNewsLookupMap().get(targetSlug);
   if (lookupItem) {
     return lookupItem;
@@ -7997,7 +7993,9 @@ function getArticleBySlug(slug) {
     getArticleNewsApiBasePayload().items.find((item) => {
       const slugs = [item.slug].concat(Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []);
       return slugs.some((candidate) => normalizeLookupSlug(candidate) === targetSlug);
-    }) || null
+    }) ||
+    staticDetailFallbacks[targetSlug] ||
+    null
   );
 }
 
