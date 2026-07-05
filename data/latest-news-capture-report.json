@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-02T15:02:26.755Z",
-  "finishedAt": "2026-07-02T15:02:37.935Z",
-  "capturedItems": 376,
-  "capturedToday": 263,
+  "startedAt": "2026-07-05T19:29:19.575Z",
+  "finishedAt": "2026-07-05T19:29:26.127Z",
+  "capturedItems": 429,
+  "capturedToday": 226,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -24,8 +24,8 @@
     {
       "source": "acre-agora",
       "ok": true,
-      "count": 9,
-      "blocked": 1,
+      "count": 10,
+      "blocked": 0,
       "mode": "rss"
     },
     {
@@ -69,6 +69,13 @@
       "count": 18,
       "blocked": 0,
       "mode": "rss"
+    },
+    {
+      "source": "contilnet-instagram",
+      "ok": true,
+      "count": 35,
+      "blocked": 0,
+      "mode": "official-home-headlines"
     },
     {
       "source": "detran-acre",
@@ -157,7 +164,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 4,
+      "count": 6,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -170,9 +177,10 @@
     },
     {
       "source": "pcac",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "portal-acre",

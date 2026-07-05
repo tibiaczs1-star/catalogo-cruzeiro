@@ -8,6 +8,20 @@ module.exports = [
     limitPerSource: 30
   },
   {
+    id: "contilnet-instagram",
+    name: "ContilNet / Instagram",
+    feedUrl: "https://contilnetnoticias.com.br/",
+    feedType: "official-home-headlines",
+    siteUrl: "https://contilnetnoticias.com.br/",
+    instagramHandle: "@contilnetnoticias",
+    instagramUrl: "https://www.instagram.com/contilnetnoticias/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 35,
+    priority: 970,
+    priorityReason: "Fonte acreana solicitada pelo usuario; monitorar chamadas publicas do portal e atribuir o canal @contilnetnoticias quando a materia trouxer o post incorporado.",
+    linkAllowPattern: "contilnetnoticias\\.com\\.br/(?:destaque|destaque-2|noticia|politica|policia|acre|brasil)/"
+  },
+  {
     id: "jurua-online",
     name: "Jurua Online",
     feedUrl: "https://juruaonline.com.br/wp-json/wp/v2/posts?per_page=24&_embed=1",
