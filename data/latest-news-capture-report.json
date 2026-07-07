@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-05T19:29:19.575Z",
-  "finishedAt": "2026-07-05T19:29:26.127Z",
-  "capturedItems": 429,
-  "capturedToday": 226,
+  "startedAt": "2026-07-07T12:44:56.247Z",
+  "finishedAt": "2026-07-07T12:45:05.275Z",
+  "capturedItems": 425,
+  "capturedToday": 168,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -17,8 +17,8 @@
     {
       "source": "ac24horas",
       "ok": true,
-      "count": 20,
-      "blocked": 0,
+      "count": 19,
+      "blocked": 1,
       "mode": "rss"
     },
     {
@@ -206,14 +206,14 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -227,7 +227,7 @@
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
