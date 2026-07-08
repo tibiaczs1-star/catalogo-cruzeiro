@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-07T12:44:56.247Z",
-  "finishedAt": "2026-07-07T12:45:05.275Z",
-  "capturedItems": 425,
-  "capturedToday": 168,
+  "startedAt": "2026-07-08T02:22:42.258Z",
+  "finishedAt": "2026-07-08T02:22:54.697Z",
+  "capturedItems": 402,
+  "capturedToday": 194,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -17,8 +17,8 @@
     {
       "source": "ac24horas",
       "ok": true,
-      "count": 19,
-      "blocked": 1,
+      "count": 20,
+      "blocked": 0,
       "mode": "rss"
     },
     {
@@ -93,10 +93,9 @@
     },
     {
       "source": "folha-do-acre",
-      "ok": true,
-      "count": 24,
-      "blocked": 0,
-      "mode": "wordpress-json"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "g1-brasil",
@@ -213,7 +212,7 @@
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -227,7 +226,7 @@
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
