@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-08T02:22:42.258Z",
-  "finishedAt": "2026-07-08T02:22:54.697Z",
-  "capturedItems": 402,
-  "capturedToday": 194,
+  "startedAt": "2026-07-08T14:05:53.086Z",
+  "finishedAt": "2026-07-08T14:06:00.180Z",
+  "capturedItems": 419,
+  "capturedToday": 222,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -93,9 +93,10 @@
     },
     {
       "source": "folha-do-acre",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 24,
+      "blocked": 0,
+      "mode": "wordpress-json"
     },
     {
       "source": "g1-brasil",
@@ -148,10 +149,9 @@
     },
     {
       "source": "jurua-informativo",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "HTTP 403"
     },
     {
       "source": "jurua-online",
@@ -219,7 +219,7 @@
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
