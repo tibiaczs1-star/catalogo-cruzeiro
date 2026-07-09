@@ -1,8 +1,87 @@
 {
-  "lastAttemptAt": "2026-07-09T12:02:57.397Z",
-  "lastSuccessAt": "2026-07-09T12:02:57.398Z",
-  "source": "manual-rayane-image-repair",
+  "lastAttemptAt": "2026-07-09T19:57:32.146Z",
+  "lastSuccessAt": "2026-07-09T19:57:32.154Z",
+  "source": "manual-pf-yma-contrabando-acre",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-pf-apura-encomendas-iphones-remedios-proibidos-acre-grupo-yma",
+      "slug": "pf-apura-encomendas-iphones-remedios-proibidos-acre-grupo-yma",
+      "title": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre",
+      "eyebrow": "Urgente",
+      "date": "09 de jul de 2026",
+      "publishedAt": "2026-07-09T13:20:00.000-05:00",
+      "category": "Acre",
+      "categoryKey": "acre",
+      "previewClass": "thumb-acrelandia",
+      "sourceName": "Documento da Polícia Federal",
+      "sourceUrl": "documento-pf-ipl-2026-0054609-dpf-czs-ac",
+      "sourceLabel": "Documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC",
+      "lede": "Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário.",
+      "summary": "Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário.",
+      "analysis": "Pauta sensível de segurança pública e saúde. A publicação preserva dados pessoais e usa linguagem investigativa: indício, apuração e documento apontam, sem tratar citados como condenados.",
+      "highlights": [
+        "PF analisou 10 volumes apreendidos no Aeroporto Internacional de Rio Branco.",
+        "Documento cita eletrônicos, iPhones e medicamentos sem autorização regular.",
+        "Relatório menciona embalagens do Grupo Yma e pacotes vindos do Brás, em São Paulo.",
+        "Caso segue em fase investigativa; citação em documento não representa condenação."
+      ],
+      "development": [
+        "Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem.",
+        "Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária.",
+        "O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor.",
+        "Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública.",
+        "Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes.",
+        "O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial.",
+        "Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC."
+      ],
+      "imageUrl": "assets/news-manual/pf-yma-contrabando-acre-20260709.png",
+      "feedImageUrl": "assets/news-manual/pf-yma-contrabando-acre-20260709.png",
+      "sourceImageUrl": "assets/news-manual/pf-yma-contrabando-acre-20260709.png",
+      "imageCredit": "Montagem Catálogo CZS com imagens de documento da Polícia Federal; dados pessoais redigidos",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "assets/news-manual/pf-yma-contrabando-acre-reel-20260709.mp4",
+      "priority": 2000,
+      "editorialPriority": "urgente-seguranca-saude-acre",
+      "crossSources": [
+        {
+          "name": "Polícia Federal",
+          "url": "documento-pf-ipl-2026-0054609-dpf-czs-ac"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre. Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário. Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem. Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária. O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor. Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública. Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes. O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial. Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC.",
+      "audioNarrationTranscript": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre. Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário. Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem. Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária. O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor. Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública. Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes. O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial. Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "script-pronto",
+      "videoCaptionText": "Documento da PF aponta encomendas com iPhones, eletrônicos e medicamentos proibidos/sem autorização ligados ao Acre. Caso segue em investigação.",
+      "videoCaptionStatus": "pronto",
+      "accessibility": {
+        "alt": "Montagem do Catálogo CZS sobre documento da Polícia Federal citando pacotes do Grupo Yma, eletrônicos e medicamentos apreendidos",
+        "caption": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre."
+      },
+      "imageQuality": {
+        "status": "arte-propria-documento-redigido",
+        "note": "Arte 1080x1350 com logo Catálogo CZS, dados pessoais redigidos e imagens do documento da PF."
+      },
+      "body": [
+        "Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem.",
+        "Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária.",
+        "O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor.",
+        "Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública.",
+        "Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes.",
+        "O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial.",
+        "Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC."
+      ]
+    },
     {
       "id": "manual-czs-rayane-sampaio-lanca-carreira-expoacre-jurua-princesinha-do-jurua",
       "slug": "rayane-sampaio-lanca-carreira-expoacre-jurua-princesinha-do-jurua",
@@ -134897,76 +134976,88 @@
         "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
         "Novas informações entram quando houver atualização verificável."
       ]
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml",
-      "slug": "com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto",
-      "title": "Com surto na região Norte, campanha contra o sarampo no AP começa em agosto",
-      "eyebrow": "Saude",
-      "date": "23 de jul de 2018",
-      "publishedAt": "2018-07-23T22:40:12.000Z",
-      "category": "Saude",
-      "categoryKey": "saude",
-      "previewClass": "thumb-saude",
-      "sourceName": "G1 Brasil",
-      "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml",
-      "sourceLabel": "Com surto na região Norte, campanha contra o sarampo no AP começa em agosto",
-      "lede": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era...",
-      "summary": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era...",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://s2-g1.glbimg.com/HA6WyXj_0FWaznWUbHKpcB6UO8Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/4/x/aQGU6DTCAkdIXCVAlbqQ/whatsapp-image-2018-07-23-at-12.01.22.jpeg",
-      "feedImageUrl": "https://s2-g1.glbimg.com/HA6WyXj_0FWaznWUbHKpcB6UO8Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/4/x/aQGU6DTCAkdIXCVAlbqQ/whatsapp-image-2018-07-23-at-12.01.22.jpeg",
-      "sourceImageUrl": "https://s2-g1.glbimg.com/HA6WyXj_0FWaznWUbHKpcB6UO8Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/4/x/aQGU6DTCAkdIXCVAlbqQ/whatsapp-image-2018-07-23-at-12.01.22.jpeg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "id": "manual-czs-pf-apura-encomendas-iphones-remedios-proibidos-acre-grupo-yma",
+      "slug": "pf-apura-encomendas-iphones-remedios-proibidos-acre-grupo-yma",
+      "title": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre",
+      "eyebrow": "Urgente",
+      "date": "09 de jul de 2026",
+      "publishedAt": "2026-07-09T13:20:00.000-05:00",
+      "category": "Acre",
+      "categoryKey": "acre",
+      "previewClass": "thumb-acrelandia",
+      "sourceName": "Documento da Polícia Federal",
+      "sourceUrl": "documento-pf-ipl-2026-0054609-dpf-czs-ac",
+      "sourceLabel": "Documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC",
+      "lede": "Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário.",
+      "summary": "Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário.",
+      "analysis": "Pauta sensível de segurança pública e saúde. A publicação preserva dados pessoais e usa linguagem investigativa: indício, apuração e documento apontam, sem tratar citados como condenados.",
+      "highlights": [
+        "PF analisou 10 volumes apreendidos no Aeroporto Internacional de Rio Branco.",
+        "Documento cita eletrônicos, iPhones e medicamentos sem autorização regular.",
+        "Relatório menciona embalagens do Grupo Yma e pacotes vindos do Brás, em São Paulo.",
+        "Caso segue em fase investigativa; citação em documento não representa condenação."
+      ],
+      "development": [
+        "Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem.",
+        "Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária.",
+        "O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor.",
+        "Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública.",
+        "Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes.",
+        "O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial.",
+        "Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC."
+      ],
+      "imageUrl": "assets/news-manual/pf-yma-contrabando-acre-20260709.png",
+      "feedImageUrl": "assets/news-manual/pf-yma-contrabando-acre-20260709.png",
+      "sourceImageUrl": "assets/news-manual/pf-yma-contrabando-acre-20260709.png",
+      "imageCredit": "Montagem Catálogo CZS com imagens de documento da Polícia Federal; dados pessoais redigidos",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
-      "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "videoUrl": "assets/news-manual/pf-yma-contrabando-acre-reel-20260709.mp4",
+      "priority": 2000,
+      "editorialPriority": "urgente-seguranca-saude-acre",
       "crossSources": [
         {
-          "name": "G1 Brasil",
-          "url": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml"
+          "name": "Polícia Federal",
+          "url": "documento-pf-ipl-2026-0054609-dpf-czs-ac"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "G1 Brasil",
-          "url": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Com surto na região Norte, campanha contra o sarampo no AP começa em agosto Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era registrada no Brasil. A informação vem de G1 Brasil.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Com surto na região Norte, campanha contra o sarampo no AP começa em agosto Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era registrada no Brasil. A informação vem de G1 Brasil.",
+      "alternateSlugs": [],
+      "audioNarrationText": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre. Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário. Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem. Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária. O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor. Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública. Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes. O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial. Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC.",
+      "audioNarrationTranscript": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre. Documento da Polícia Federal cita 10 volumes apreendidos no Aeroporto Internacional de Rio Branco, pacotes ligados ao Grupo Yma e indícios de descaminho, contrabando e risco sanitário. Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem. Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária. O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor. Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública. Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes. O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial. Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
       "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
-      "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Com surto na região Norte, campanha contra o sarampo no AP começa em agosto. Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era registrada no... Fonte: G1 Brasil.",
-      "videoCaptionStatus": "ready",
+      "audioNarrationStatus": "script-pronto",
+      "videoCaptionText": "Documento da PF aponta encomendas com iPhones, eletrônicos e medicamentos proibidos/sem autorização ligados ao Acre. Caso segue em investigação.",
+      "videoCaptionStatus": "pronto",
       "accessibility": {
-        "hasAudioNarrationText": true,
-        "hasAudioNarrationTranscript": true,
-        "raylVoice": "raiane-francisca-whatsapp-normal",
-        "hasVideoCaptionText": true
+        "alt": "Montagem do Catálogo CZS sobre documento da Polícia Federal citando pacotes do Grupo Yma, eletrônicos e medicamentos apreendidos",
+        "caption": "PF apura encomendas com iPhones e remédios proibidos ligados ao Acre."
+      },
+      "imageQuality": {
+        "status": "arte-propria-documento-redigido",
+        "note": "Arte 1080x1350 com logo Catálogo CZS, dados pessoais redigidos e imagens do documento da PF."
       },
       "body": [
-        "G1 Brasil publicou em 23 de jul de 2018: Com surto na região Norte, campanha contra o sarampo no AP começa em agosto.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
+        "Documento da Polícia Federal obtido pelo Catálogo CZS aponta que uma apreensão realizada em 9 de janeiro de 2026, no Aeroporto Internacional de Rio Branco, resultou na análise de 10 volumes despachados pela LATAM, entre caixas de grande porte e malas de viagem.",
+        "Segundo a portaria e o relatório de análise, os volumes continham produtos eletrônicos, principalmente aparelhos celulares, e medicamentos sem autorização regular. A PF afirma haver indícios de dois eixos de investigação: descaminho, ligado a eletrônicos possivelmente introduzidos no país sem o pagamento correto de tributos, e contrabando, relacionado a medicamentos proibidos ou sem autorização sanitária.",
+        "O documento cita embalagens da transportadora Grupo Yma e menciona que, em vários casos, os pacotes teriam sido preparados a partir de endereço no bairro Brás, em São Paulo. A PF também registra que algumas encomendas não traziam identificação clara do remetente nem documentação fiscal idônea, o que, segundo o relatório, dificultaria a identificação preliminar do vendedor.",
+        "Entre os itens analisados aparecem iPhones lacrados, acessórios eletrônicos e medicamentos associados a substâncias usadas para emagrecimento, como produtos similares ao Mounjaro, tirzepatida e retatrutida. Em relação aos medicamentos, o relatório aponta ausência de autorização, falhas de armazenamento, falta de refrigeração em alguns casos e possível risco direto à saúde pública.",
+        "Na conclusão, a Polícia Federal afirma ter identificado elementos que indicam possível prática reiterada de ilícitos penais, incluindo descaminho, contrabando e comercialização ou distribuição de medicamentos proibidos. O documento recomenda o prosseguimento das investigações, envio dos itens à perícia e comunicação a órgãos competentes.",
+        "O caso ainda está em fase investigativa. A menção a pessoas, empresas ou transportadoras no documento não representa condenação. Dados pessoais presentes no PDF foram omitidos nesta publicação por segurança e responsabilidade editorial.",
+        "Fonte: documento da Polícia Federal - IPL 2026.0054609-DPF/CZS/AC."
       ]
-    }
-  ],
-  "items": [
+    },
     {
       "id": "manual-czs-rayane-sampaio-lanca-carreira-expoacre-jurua-princesinha-do-jurua",
       "slug": "rayane-sampaio-lanca-carreira-expoacre-jurua-princesinha-do-jurua",
@@ -244270,73 +244361,6 @@
       },
       "body": [
         "G1 Brasil publicou em 23 de jul de 2018: Confira as vagas de emprego do Sine em Macapá para o dia 24 de julho.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ]
-    },
-    {
-      "id": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml",
-      "slug": "com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto",
-      "title": "Com surto na região Norte, campanha contra o sarampo no AP começa em agosto",
-      "eyebrow": "Saude",
-      "date": "23 de jul de 2018",
-      "publishedAt": "2018-07-23T22:40:12.000Z",
-      "category": "Saude",
-      "categoryKey": "saude",
-      "previewClass": "thumb-saude",
-      "sourceName": "G1 Brasil",
-      "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml",
-      "sourceLabel": "Com surto na região Norte, campanha contra o sarampo no AP começa em agosto",
-      "lede": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era...",
-      "summary": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era...",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://s2-g1.glbimg.com/HA6WyXj_0FWaznWUbHKpcB6UO8Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/4/x/aQGU6DTCAkdIXCVAlbqQ/whatsapp-image-2018-07-23-at-12.01.22.jpeg",
-      "feedImageUrl": "https://s2-g1.glbimg.com/HA6WyXj_0FWaznWUbHKpcB6UO8Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/4/x/aQGU6DTCAkdIXCVAlbqQ/whatsapp-image-2018-07-23-at-12.01.22.jpeg",
-      "sourceImageUrl": "https://s2-g1.glbimg.com/HA6WyXj_0FWaznWUbHKpcB6UO8Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/4/x/aQGU6DTCAkdIXCVAlbqQ/whatsapp-image-2018-07-23-at-12.01.22.jpeg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
-      "media": null,
-      "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "G1 Brasil",
-          "url": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "G1 Brasil",
-          "url": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Com surto na região Norte, campanha contra o sarampo no AP começa em agosto Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era registrada no Brasil. A informação vem de G1 Brasil.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Com surto na região Norte, campanha contra o sarampo no AP começa em agosto Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era registrada no Brasil. A informação vem de G1 Brasil.",
-      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-      "audioNarrationVoiceEngine": "edge-tts",
-      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-      "audioNarrationLanguage": "pt-BR",
-      "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Com surto na região Norte, campanha contra o sarampo no AP começa em agosto. Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era registrada no... Fonte: G1 Brasil.",
-      "videoCaptionStatus": "ready",
-      "accessibility": {
-        "hasAudioNarrationText": true,
-        "hasAudioNarrationTranscript": true,
-        "raylVoice": "raiane-francisca-whatsapp-normal",
-        "hasVideoCaptionText": true
-      },
-      "body": [
-        "G1 Brasil publicou em 23 de jul de 2018: Com surto na região Norte, campanha contra o sarampo no AP começa em agosto.",
         "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
         "Novas informações entram quando houver atualização verificável."
       ]
