@@ -1,162 +1,162 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-06-02T02:53:41.691Z
-Escopo: 360/485 itens recentes.
+Gerado em: 2026-07-02T17:46:01.629Z
+Escopo: 360/502 itens recentes.
 
 ## Resumo
-- Gates: P0 104, P1 156, P2 100
-- Aprovacao humana exigida: 104
-- Pendencias de fonte: 104
-- Pendencias visuais: 274
+- Gates: P0 74, P1 217, P2 69
+- Aprovacao humana exigida: 74
+- Pendencias de fonte: 74
+- Pendencias visuais: 296
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: Criminosos de alta periculosidade são capturados em Cruzeiro do Sul
+- P0 human-approval: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Criminosos de alta periculosidade são capturados em Cruzeiro do Sul
+- P0 ide-fix: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Criminosos de alta periculosidade são capturados em Cruzeiro do Sul
+- P0 ide-fix: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Detento monitorado por tornozeleira eletrônica é executado a tiros
+- P0 human-approval: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Detento monitorado por tornozeleira eletrônica é executado a tiros
+- P0 ide-fix: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Detento monitorado por tornozeleira eletrônica é executado a tiros
+- P0 ide-fix: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto
+- P0 human-approval: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto
+- P0 ide-fix: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto
+- P0 ide-fix: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Jovem de 18 anos é preso por tentativa de homicídio adolescente
+- P0 human-approval: Pastor é condenado a mais de 19 anos de prisão por tentar matar ex-esposa no Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Jovem de 18 anos é preso por tentativa de homicídio adolescente
+- P0 ide-fix: Pastor é condenado a mais de 19 anos de prisão por tentar matar ex-esposa no Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Jovem de 18 anos é preso por tentativa de homicídio adolescente
+- P0 ide-fix: Pastor é condenado a mais de 19 anos de prisão por tentar matar ex-esposa no Acre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o braço
+- P0 human-approval: Criança de 9 anos é atropelada por ônibus na Estrada do Calafate, em Rio Branco
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o braço
+- P0 ide-fix: Criança de 9 anos é atropelada por ônibus na Estrada do Calafate, em Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o braço
+- P0 ide-fix: Criança de 9 anos é atropelada por ônibus na Estrada do Calafate, em Rio Branco
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: No Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar tornozeleira
+- P0 human-approval: Chuvas fortes colocam municípios do Acre em alerta nesta quinta, aponta Inmet
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: No Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar tornozeleira
+- P0 ide-fix: Chuvas fortes colocam municípios do Acre em alerta nesta quinta, aponta Inmet
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: No Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar tornozeleira
+- P0 ide-fix: Chuvas fortes colocam municípios do Acre em alerta nesta quinta, aponta Inmet
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: VÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores à vítima
+- P0 human-approval: Polícia prende “Vingadora” durante operação no bairro Papoco, em Rio Branco
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: VÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores à vítima
+- P0 ide-fix: Polícia prende “Vingadora” durante operação no bairro Papoco, em Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: VÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores à vítima
+- P0 ide-fix: Polícia prende “Vingadora” durante operação no bairro Papoco, em Rio Branco
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: CENA FORTE: homem é espacando após agredir esposa e os próprios filhos
+- P0 human-approval: Acre tem menor número de queimadas em sete anos, mostra levantamento
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: CENA FORTE: homem é espacando após agredir esposa e os próprios filhos
+- P0 ide-fix: Acre tem menor número de queimadas em sete anos, mostra levantamento
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: CENA FORTE: homem é espacando após agredir esposa e os próprios filhos
+- P0 ide-fix: Acre tem menor número de queimadas em sete anos, mostra levantamento
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Criminosos de alta periculosidade são capturados em Cruzeiro do Sul
-  - Criminosos de alta periculosidade são capturados em Cruzeiro do Sul: veja os pontos principais
-  - O que se sabe sobre criminosos de alta periculosidade são capturados em Cruzeiro do Sul
-  - Acre in Foco informa: Criminosos de alta periculosidade são capturados em Cruzeiro do Sul
-- Detento monitorado por tornozeleira eletrônica é executado a tiros
-  - Detento monitorado por tornozeleira eletrônica é executado a tiros: veja os pontos principais
-  - O que se sabe sobre detento monitorado por tornozeleira eletrônica é executado a tiros
-  - Acre in Foco informa: Detento monitorado por tornozeleira eletrônica é executado a tiros
-- Suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto
-  - Suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto: veja os pontos princ
-  - O que se sabe sobre suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto
-  - Acre in Foco informa: Suspeito de participação em homicídio é preso com revólver e mandado de prisão em aberto
-- Jovem de 18 anos é preso por tentativa de homicídio adolescente
-  - Jovem de 18 anos é preso por tentativa de homicídio adolescente: veja os pontos principais
-  - O que se sabe sobre jovem de 18 anos é preso por tentativa de homicídio adolescente
-  - Acre in Foco informa: Jovem de 18 anos é preso por tentativa de homicídio adolescente
-- Gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o braço
-  - Gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o braço: veja os pontos 
-  - O que se sabe sobre gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o br
-  - Acre in Foco informa: Gentileza do mal: dá carona para mulher, é atacado com facão por marido e quase perde o 
-- O mercado como fé e o poder como negócio
-  - O mercado como fé e o poder como negócio: veja os pontos principais
-  - Entenda o mercado como fé e o poder como negócio
-  - Acre in Foco informa: O mercado como fé e o poder como negócio
-- Degustação de uísque de US$ 1 milhão nos EUA, reuniu Vorcaro, Castro, Hugo Motta, Ciro Nogueira e líderes do Centrão
-  - Degustação de uísque de US$ 1 milhão nos EUA, reuniu Vorcaro, Castro, Hugo Motta, Ciro Nogueira e líderes do C
-  - Entenda degustação de uísque de US$ 1 milhão nos EUA, reuniu Vorcaro, Castro, Hugo Motta, Ciro Nogueira e líde
-  - Acre in Foco informa: Degustação de uísque de US$ 1 milhão nos EUA, reuniu Vorcaro, Castro, Hugo Motta, Ciro N
-- Em Rio Branco, Socorro Neri debate adequação de PCCR à nova Lei da Educação Infantil nesta terça-feira
-  - Em Rio Branco, Socorro Neri debate adequação de PCCR à nova Lei da Educação Infantil nesta terça-feira: veja o
-  - Entenda em Rio Branco, Socorro Neri debate adequação de PCCR à nova Lei da Educação Infantil nesta terça-feira
-  - Folha do Acre informa: Em Rio Branco, Socorro Neri debate adequação de PCCR à nova Lei da Educação Infantil ne
-- Mais de 23 mil famílias deixam o Bolsa Família no Acre após aumento da renda desde 2023
-  - Mais de 23 mil famílias deixam o Bolsa Família no Acre após aumento da renda desde 2023: veja os pontos princi
-  - Entenda mais de 23 mil famílias deixam o Bolsa Família no Acre após aumento da renda desde 2023
-  - Folha do Acre informa: Mais de 23 mil famílias deixam o Bolsa Família no Acre após aumento da renda desde 2023
-- No Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar tornozeleira
-  - No Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar tornozeleira: veja os pon
-  - O que se sabe sobre no Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar torno
-  - Jurua em Tempo informa: No Acre, vítima de violência doméstica é confundida com agressor e é obrigada a usar t
-- Acre aparece entre os três estados com piores condições das rodovias do país, aponta ranking nacional
-  - Acre aparece entre os três estados com piores condições das rodovias do país, aponta ranking nacional: veja os
-  - Entenda acre aparece entre os três estados com piores condições das rodovias do país, aponta ranking nacional
-  - Folha do Acre informa: Acre aparece entre os três estados com piores condições das rodovias do país, aponta ra
-- VÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores à vítima
-  - VÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores à vítima: veja os pontos
-  - O que se sabe sobre vÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores à ví
-  - Jurua em Tempo informa: VÍDEO: PM que salvou mulher após pedido de socorro disfarçado de pizza entrega flores 
+- Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
+  - Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos: veja os pontos principais
+  - Entenda quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
+  - Jurua Online informa: Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
+- Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização
+  - Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização: veja os p
+  - Entenda vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização
+  - Jurua Online informa: Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem 
+- Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
+  - Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia: veja os pon
+  - O que se sabe sobre criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Ta
+  - Jurua Online informa: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na 
+- Britânica descobre 38 parasitas no cérebro anos após viagem à Índia
+  - Britânica descobre 38 parasitas no cérebro anos após viagem à Índia: veja os pontos principais
+  - Entenda britânica descobre 38 parasitas no cérebro anos após viagem à Índia
+  - Jurua Online informa: Britânica descobre 38 parasitas no cérebro anos após viagem à Índia
+- Segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira
+  - Segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira: veja os pontos principais
+  - Entenda segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira
+  - Folha do Acre informa: Segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira
+- Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
+  - Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul: veja os pontos principais
+  - O que se sabe sobre capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
+  - Jurua Online informa: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
+- TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
+  - TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó: veja os pontos principais
+  - Entenda tCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
+  - Jurua Online informa: TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
+- Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
+  - Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria: veja os pontos principais
+  - Entenda explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
+  - Jurua Online informa: Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
+- “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terceira noite da ExpoAcre Juruá
+  - “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terceira noite da ExpoAcre 
+  - Entenda “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terceira noite da E
+  - Jurua Online informa: “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terce
+- Pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco
+  - Pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco: veja os pontos principais
+  - Entenda pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco
+  - Folha do Acre informa: Pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco
+- Frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C durante a ExpoAcre Juruá
+  - Frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C durante a ExpoAcre Jur
+  - Entenda frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C durante a Expo
+  - Jurua Online informa: Frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C 
+- Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
+  - Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato: veja os pontos principais
+  - O que se sabe sobre justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
+  - Folha do Acre informa: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
 
 ## Formatos especiais seguros
-- guia de servico: Em Rio Branco, Socorro Neri debate adequação de PCCR à nova Lei da Educação Infantil nesta terça-feira
+- linha do tempo curta: Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Mais de 23 mil famílias deixam o Bolsa Família no Acre após aumento da renda desde 2023
+- linha do tempo curta: Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: VÍDEO: Ana Castela acorda de endoscopia cantando Gusttavo Lima
+- linha do tempo curta: Britânica descobre 38 parasitas no cérebro anos após viagem à Índia
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Diácono barra gritos partidários em missa: “Igreja não é lugar de politicagem”
+- guia de servico: TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: ‘Deu ruim’: motociclista cai de cara no asfalto após tentar dar grau; veja vídeo
+- linha do tempo curta: Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: VÍDEO: influencer registra objeto luminoso e levanta debate sobre OVNIs
+- guia de servico: Detran do Acre convoca aprovados em concurso público para posse
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Mulher tropeça em tampa e acaba ‘engolida’ por bueiro; veja vídeo
+- comparativo rapido: “O agricultor consegue irrigar de acordo com a necessidade”, destaca IFAC durante feira em Cruzeiro do Su
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Mais de 23 mil famílias deixam o Bolsa Família no Acre após aumento da renda
+- guia de servico: TCE determina nova análise em inspeção sobre contratos de combustíveis da Educação em Feijó
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Zequinha Lima acompanha andamento de obras que fortalecem mobilidade, assistência social e esporte em Cruzeiro do Sul
+- guia de impacto no bolso: Gladson participa da Expoacre Juruá, prestigia Noite Gospel e destaca importância da feira para a economia
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Leonardo Jardim encontra Jorge Jesus no Rio e reaproxima gerações do Flamengo
+- linha do tempo curta: Acnur pede US$ 14,85 milhões para apoio à Venezuela após terremotos
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Irã divulga lista de convocados para a Copa do Mundo de 2026, mas ainda aguarda vistos para viajar
+- linha do tempo curta: Cazé TV expõe uma lacuna nas regras da publicidade de bets no país
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Atlético-MG avança por Fred e negocia com Fenerbahçe para fechar contratação do meia
+- agenda visual: Acreana Jéssica Ingred lança campanha para assistir à final da Copa do Mundo: “me convoca, Meli”
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-09T12:01:00.075Z",
-  "finishedAt": "2026-07-09T12:01:06.130Z",
-  "capturedItems": 415,
-  "capturedToday": 193,
+  "startedAt": "2026-07-10T06:02:59.457Z",
+  "finishedAt": "2026-07-10T06:03:05.868Z",
+  "capturedItems": 426,
+  "capturedToday": 163,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 24,
-      "blocked": 0,
+      "count": 22,
+      "blocked": 2,
       "mode": "wordpress-json"
     },
     {
@@ -149,9 +149,10 @@
     },
     {
       "source": "jurua-informativo",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP 403"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "jurua-online",
@@ -163,7 +164,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 6,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -198,28 +199,28 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
