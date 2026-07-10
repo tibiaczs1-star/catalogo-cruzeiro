@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-07-10T06:02:59.457Z",
-  "finishedAt": "2026-07-10T06:03:05.868Z",
+  "startedAt": "2026-07-10T08:45:59.251Z",
+  "finishedAt": "2026-07-10T08:46:04.567Z",
   "capturedItems": 426,
-  "capturedToday": 163,
+  "capturedToday": 165,
   "activeWindowItems": 360,
-  "archiveItems": 480,
+  "archiveItems": 1446,
   "reports": [
     {
       "source": "a-gazeta-do-acre",

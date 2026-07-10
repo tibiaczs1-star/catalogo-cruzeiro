@@ -1,811 +1,473 @@
 {
-  "updatedAt": "2026-07-02T06:17:33.155Z",
+  "updatedAt": "2026-07-10T08:49:34.335Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 80,
   "offline": false,
   "total": 80,
   "summary": {
-    "ok": 41,
-    "review": 23,
-    "warning": 1,
-    "error": 15,
-    "manualFocus": 0,
+    "ok": 79,
+    "review": 1,
+    "warning": 0,
+    "error": 0,
+    "manualFocus": 61,
     "newSinceLastAudit": 80,
-    "missingImage": 15,
+    "missingImage": 0,
     "unreachableImage": 0
   },
   "slugs": [
-    "nao-deixei-a-prefeitura-para-ser-vice-de-ninguem-diz-bocalom-ao-negar-alianca-com-mailza",
-    "governadora-mailza-visita-sede-revitalizada-da-seop-em-cruzeiro-do-sul-e-destaca-impacto-na-econ",
-    "melhores-condicoes-de-trabalho-diz-governadora-mailza-ao-entregar-reforma-da-unidade-do-idaf-em-",
-    "justica-eleitoral-manda-mailza-assis-retirar-video-do-instagram-por-indicios-de-propaganda-eleit",
-    "mailza-exonera-mario-neto-da-casa-civil-em-nova-mudanca-no-nucleo-do-governo",
-    "mailza-aumenta-duvida-sobre-rompimento-com-gladson",
-    "bocalom-nega-articulacao-com-mailza-assis-durante-visita-a-expoacre-jurua",
-    "mailza-exonera-mario-neto-diretor-de-gestao-da-casa-civil-e-coordenador-da-expoacre",
-    "governadora-mailza-publica-exoneracao-de-sula-ximenes-do-deracre-apos-entrega-do-cargo",
-    "ze-adriano-defende-industrializacao-do-acre-confirma-apoio-a-mailza-e-cobra-avanco-da-integracao",
-    "em-rodrigues-alves-governadora-mailza-reforca-mobilidade-urbana-com-entrega-de-cnhs-sociais-cole",
-    "governo-do-acre-lanca-plano-abc-e-plataforma-agricultor-digital-durante-expoacre-jurua-2026",
-    "mailza-chama-eduardo-velloso-de-novo-senador-e-amplia-sinais-de-mudancas-no-tabuleiro-politico-p",
-    "mailza-minimiza-impacto-de-mudancas-no-governo-com-saidas-de-donadoni-e-sula-medida-pontual",
-    "caminho-que-escolhemos-governadora-mailza-abre-21-edicao-da-expoacre-jurua-e-ressalta-feira-como",
-    "prefeito-de-cruzeiro-do-sul-anuncia-apoio-a-candidatura-de-alan-rick-ao-governo-do-estado",
-    "gladson-diz-que-mailza-tem-direito-de-fazer-mudancas-no-governo-e-desmente-zequinha-me-pegou-de-",
-    "no-camarim-natanzinho-lima-agradece-governadora-mailza-por-atender-pedido-do-publico-no-acre",
-    "governadora-mailza-visita-sede-revitalizada-da-seop-em-cruzeiro-do-sul-e-destaca-impacto-na-econ",
-    "para-fortalecer-fiscalizacao-fluvial-governadora-mailza-entrega-lancha-com-blindagem-e-tecnologi",
-    "mailza-entrega-centro-de-especialidades-odontologicas-e-amplia-atendimento-no-jurua",
-    "governadora-mailza-assis-entrega-revitalizacao-do-ginasio-poliesportivo-alailton-negreiros-em-cr",
-    "mailza-destaca-entregas-em-cruzeiro-do-sul-e-reforca-investimentos-em-saude-seguranca-e-esporte",
-    "na-expoacre-jurua-governadora-mailza-entrega-pacote-de-investimentos-para-a-seguranca-publica-da",
-    "durante-expoacre-jurua-mailza-recebe-o-governador-de-ucayali-para-ampliar-a-integracao-entre-o-a",
-    "governadora-mailza-abre-21-edicao-da-expoacre-jurua-e-ressalta-feira-como-motor-de-empregos-e-op",
-    "diario-extra-governadora-mailza-autoriza-convocacao-de-aprovados-no-concurso-do-corpo-de-bombeir",
-    "governadora-mailza-assis-inaugura-2-centro-odontologico-do-acre-ampliando-acesso-na-regional-do-",
-    "bittar-convida-sula-e-donadoni-pl-e-ub-nao-rompem-com-mailza-e-querem-mdb-de-volta",
-    "bittar-convida-ex-integrantes-do-governo-pl-e-uniao-brasil-mantem-apoio-a-mailza-e-articulam-ret",
-    "justica-determina-retirada-de-video-publicado-por-mailza-assis-apos-representacao-eleitoral",
-    "quando-2-cachorros-grandes-brigam-o-pequeno-fica-debaixo-da-mesa-diz-vagner-sobre-mailza-e-alan",
-    "governadora-mailza-autoriza-convocacao-de-aprovados-no-concurso-do-corpo-de-bombeiros-para-matri",
-    "mailza-entrega-lancha-com-blindagem-e-tecnologia-de-ponta-para-combater-crimes-nos-rios-acreanos",
-    "banda-morada-emociona-publico-cristao-em-show-na-expoacre-jurua-2026",
-    "noite-gospel-com-banda-morada-deve-reunir-publico-cristao-na-segunda-noite-da-expoacre-jurua",
-    "dom-flavio-destaca-uniao-crista-e-convida-publico-para-noites-de-fe-na-expoacre-jurua",
-    "estudante-da-afya-destaca-oportunidades-e-qualidade-do-curso-de-medicina-durante-expoacre-jurua",
-    "e-iniciada-votacao-para-escolha-do-rei-e-da-rainha-do-festival-da-farinha-durante-a-expoacre-jur",
-    "dr-marlon-holanda-conquista-titulo-de-especialista-em-endoscopia-digestiva-uma-das-mais-altas-ce",
-    "prefeitura-inicia-votacao-para-escolha-do-rei-e-da-rainha-do-festival-da-farinha-durante-a-expoa",
-    "homem-e-preso-por-abuso-sexual-contra-jovem-de-16-anos-em-cruzeiro-do-sul",
-    "prefeitura-de-rio-branco-investe-r-390-mil-na-reforma-de-tres-unidades-de-saude",
-    "cruzeiro-do-sul-abre-votacao-para-rei-e-rainha-popularidade-do-festival-da-farinha",
-    "prefeitura-de-cruzeiro-do-sul-entregara-100-oculos-do-programa-olhar-de-carinho-nesta-quinta-fei",
-    "banda-morada-reune-centenas-de-fieis-na-segunda-noite-da-expoacre-jurua-2026",
-    "cooperativa-de-cafe-do-jurua-conquista-publico-na-segunda-noite-da-expoacre-jurua-e-projeta-expo",
-    "brunao-morada-diz-esperar-fazer-uma-festa-para-as-familias-na-expoacre-jurua",
-    "chef-de-cruzeiro-do-sul-conquista-publico-da-expoacre-jurua-com-caponata-e-receita-guardada-a-se",
-    "realidade-virtual-chama-a-atencao-dos-visitantes-no-estande-do-sistema-fieac-durante-a-expoacre-",
-    "governo-do-acre-lanca-plano-abc-e-plataforma-agricultor-digital-durante-a-expoacre-jurua",
-    "nova-sede-da-camara-de-vereadores-de-rio-branco-recebera-nome-de-jesse-santiago-ex-presidente-da",
-    "camara-de-rio-branco-aprova-mais-de-40-materias-em-sessao-marcada-por-avancos-nas-areas-de-saude",
-    "civismo-prefeitura-de-brasileia-realiza-hasteamento-dos-pavilhoes-nas-comemoracoes-dos-116-anos-",
-    "chuva-nao-impede-multidao-de-assistir-show-gospel-na-expoacre-jurua",
-    "gladson-cameli-prestigia-a-21-expoacre-jurua",
-    "loja-colaborativa-do-sebrae-e-novidade-da-expoacre-jurua-2026",
-    "modelador-de-chapeus-atrai-publico-na-expoacre-jurua",
-    "produtos-derivados-da-macaxeira-e-agua-de-coco-inovadora-chamam-atencao-na-expojurua",
-    "alpha-pipoca-gourmet-leva-sabores-de-rio-branco-a-expoacre-jurua-e-conquista-visitantes",
-    "simulador-de-transito-do-detran-atrai-publico-no-segundo-dia-da-expoacre-jurua",
-    "prova-de-laco-garante-emocao-e-tradicao-a-arena-de-rodeios-da-expoacre-jurua",
-    "governo-atua-com-educacao-ambiental-servicos-e-acoes-de-conservacao-durante-a-expoacre-jurua",
-    "artesanato-amazonico-ganha-vitrine-na-expoacre-jurua-com-pecas-indigenas-e-producao-local",
-    "mpac-recomenda-que-prefeitura-de-cruzeiro-do-sul-adeque-calcadas-para-garantir-acessibilidade",
-    "coordenador-da-expoacre-e-aliado-de-donadoni-e-exonerado-da-casa-civil",
-    "governo-garante-atendimento-fiscalizacao-e-educacao-para-o-consumo-durante-a-expoacre-jurua",
-    "na-expoacre-jurua-sejusp-lanca-campanha-um-dia-com-a-seguranca-e-reforca-investimentos-em-tecnol",
-    "mucao-elogia-o-acre-apos-show-na-expoacre-jurua-e-destaca-humor-como-aliado-da-saude-mental",
-    "horoscopo-2026-confira-a-previsao-de-hoje-2-7-para-seu-signo",
-    "medico-explica-estrategia-de-cristiano-ronaldo-de-cuspir-bebidas",
-    "acre-ganha-estacao-de-alta-precisao-para-monitorar-fumaca-das-queimadas-e-qualidade-do-ar",
-    "ieptec-apresenta-tecnologia-e-cursos-profissionalizantes-durante-a-expoacre-jurua-2026",
-    "estande-do-detran-atrai-familias-e-reforca-educacao-no-transito-durante-a-expoacre-jurua",
-    "alunos-da-ec-209-sul-visitam-exposicao-constelacoes-contemporaneas",
-    "viveiro-da-floresta-leva-conscientizacao-ambiental-e-cerca-de-3-mil-mudas-para-a-expoacre-jurua",
-    "prova-de-laco-e-show-da-banda-morada-movimentam-a-expoacre-jurua-nesta-quarta-feira",
-    "desde-o-titulo-em-2010-espanha-nao-sabe-o-que-e-vencer-em-mata-mata",
-    "clube-ingles-demite-tecnico-ex-corinthians-e-flamengo-de-maneira-inusitada",
-    "elenco-do-atletico-comeca-preparacao-para-o-estadual-no-dia-13"
+    "casa-civil-fica-a-frente-da-expoacre-2026-mailza-prepara-decreto-para-anunciar-equipe",
+    "casa-civil-tera-papel-de-unificar-governo-na-reta-final-da-gestao-mailza-diz-novo-secretario",
+    "mailza-envia-orcamento-de-2027-pra-assembleia-e-lista-prioridades-infraestrutura-esta-entre-elas",
+    "mailza-nomeia-o-engenheiro-gilberto-lucas-para-a-presidencia-do-deracre",
+    "mailza-assis-nomeia-oficialmente-cristovam-moura-como-chefe-da-casa-civil",
+    "edvaldo-magalhaes-volta-a-defender-retorno-da-tabela-da-educacao-e-alerta-mailza-essa-injustica-",
+    "alan-se-reune-com-cupula-do-pl-e-amplia-chances-de-tirar-o-partido-da-base-de-mailza",
+    "edvaldo-magalhaes-elogia-mailza-por-projeto-de-valorizacao-de-servidores-do-quadro-provisorio",
+    "mailza-efetiva-cristovam-pontes-no-comando-da-casa-civil-do-governo-do-acre",
+    "mailza-nomeia-engenheiro-civil-como-novo-presidente-do-deracre-apos-saida-de-sula-ximenes",
+    "presidente-da-aleac-reafirma-apoio-a-mailza-e-diz-que-eleicao-2026-ainda-esta-em-aberto",
+    "apos-reunioes-em-brasilia-marcio-bittar-pode-ser-a-proxima-baixa-na-campanha-de-mailza",
+    "romulo-grandidier-reforca-equipe-de-campanha-de-mailza-assis-ao-governo",
+    "mailza-sinaliza-abertura-para-alianca-com-bocalom-de-olho-nas-eleicoes",
+    "mailza-e-gladson-iniciam-reacao-para-conter-crise-politica",
+    "mailza-envia-a-aleac-projeto-para-reduzir-icms-sobre-o-cafe",
+    "e-ruim-essa-indefinicao-do-mdb-sobre-a-alianca-com-a-mailza-diz-deputado-luiz-gonzaga-em-podcast",
+    "mdb-decide-rumo-nas-eleicoes-do-acre-ate-sexta-10-semana-decisiva-para-o-glorioso",
+    "mdb-entra-na-semana-decisiva-entre-mailza-e-alan-definicao-pode-redesenhar-a-disputa-pelo-govern",
+    "mdb-deve-definir-rumo-politico-ate-sexta-feira-decisao-pode-influenciar-disputa-pelo-governo-do-",
+    "semana-decisiva-para-o-mdb",
+    "urgente-fogo-em-area-de-vegetacao-na-avenida-boulevard-thaumaturgo-assusta-quem-passa-pelo-local",
+    "video-fogo-em-vegetacao-assusta-moradores-e-comerciantes-no-centro-de-cruzeiro-do-sul",
+    "celulares-e-notebooks-de-advogado-encontrado-morto-no-acre-passam-por-pericia-da-policia-civil",
+    "prefeitura-de-cruzeiro-do-sul-entrega-ambulancia-unidade-odontologica-movel-e-van-para-fortalece",
+    "prefeitura-abre-selecao-com-30-vagas-para-estagio-de-estudantes",
+    "prefeitura-de-rio-branco-inicia-curso-de-operacao-de-maquinas-pesadas-e-amplia-oportunidades-de-",
+    "prefeitura-de-cruzeiro-do-sul-reafirma-parceria-com-o-sest-senat-para-ampliar-qualificacao-profi",
+    "saude-itinerante-agentes-percorrem-ramais-do-municipio-de-mancio-lima-para-levar-atendimento-dom",
+    "dl-n-006-2026-aviso-de-licitacao",
+    "projeto-de-leoncio-que-altera-regras-para-funcionamento-de-estabelecimentos-que-vendem-bebidas-a",
+    "camara-de-rio-branco-aprova-ldo-de-r-2-12-bilhoes-para-2027-antes-do-recesso-parlamentar",
+    "camara-de-rio-branco-aprova-prestacao-de-contas-de-bocalom-referente-a-2021",
+    "joabe-lira-faz-balanco-do-semestre-destaca-aprovacao-da-ldo-e-do-plano-diretor-e-confirma-retorn",
+    "mpac-converte-investigacao-sobre-obra-da-camara-de-tarauaca-em-inquerito-civil-e-aguarda-laudo-t",
+    "familias-atipicas-terao-prioridade-na-habitacao-municipal-apos-aprovacao-de-projeto-de-matheus-p",
+    "marilia-tavares-e-a-terceira-atracao-nacional-anunciada-para-expoxapuri",
+    "presidente-da-camara-de-rio-branco-faz-balanco-positivo-do-semestre-com-aprovacao-da-ldo-plano-d",
+    "xapuri-mancio-lima-e-porto-walter-tem-incidencia-alta-de-dengue-aponta-boletim-da-sesacre",
+    "associacao-de-homossexuais-do-acre-alerta-sobre-acesso-gratuito-a-prep-e-pep-pelo-sus",
+    "com-menos-de-mil-casos-confirmados-acre-registra-queda-de-mais-de-80-na-dengue-em-2026",
+    "pedro-pascoal-critica-suposta-paralisacao-de-servicos-na-saude-do-estado-por-falta-de-pagamento-",
+    "bocalom-defende-regionalizacao-para-reduzir-filas-na-saude",
+    "socorro-neri-propoe-adiar-cobranca-do-fies-para-medicos-residentes",
+    "heroi-acreano-diz-alan-rick-ao-visitar-edinaldo-muniz-em-hospital",
+    "gripe-atraso-na-ampliacao-da-vacina-e-de-51-dias-em-relacao-a-2025",
+    "nova-combinacao-reduz-em-60-risco-de-volta-do-cancer-de-bexiga",
+    "os-perigos-de-usar-redes-sociais-e-ia-para-decisoes-de-saude",
+    "vacinas-contra-covid-19-serao-atualizadas-contra-novas-variantes",
+    "estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico",
+    "escola-sao-jose-realiza-culminancia-do-projeto-amazonia-viva-de-conscientizacao-dos-estudantes-p",
+    "cp-n-006-2026-aviso-de-licitacao",
+    "estudantes-da-ufac-aprovam-greve-apos-assembleia-e-cobram-solucao-para-crise-no-transporte-colet",
+    "prouni-2026-inscricoes-terminam-nesta-sexta-feira-10-7",
+    "contrato-de-r-98-milhoes-da-merenda-escolar-no-df-e-investigado",
+    "alunos-do-paranoa-prestigiam-a-mostra-constelacoes-contemporaneas",
+    "fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10",
+    "mpf-acompanha-retomada-de-obras-de-educacao-paralisadas-em-tarauaca-e-bujari-apos-novos-repasses",
+    "dce-da-ufac-convoca-greve-estudantil-em-meio-a-crise-no-transporte-publico",
+    "sport-x-botafogo-sp-horario-e-onde-assistir-ao-brasileirao-serie-b",
+    "volei-brasil-enfrenta-polonia-por-lideranca-da-liga-das-nacoes",
+    "mbappe-deixa-amizade-com-hakimi-de-lado-e-diz-aqui-nao-tem-sentimento",
+    "independencia-bate-o-sao-francisco-e-e-finalista-do-estadual-sub-20",
+    "galvez-vence-e-o-santa-cruz-vai-disputar-o-titulo-do-estadual-sub-20",
+    "wendell-barbosa-luta-o-rio-winter-internacional-open-no-rio-de-janeiro",
+    "hungria-hip-hop-confirma-show-em-rio-branco-para-setembro-saiba-mais",
+    "projeto-apoiado-com-penas-pecuniarias-entrega-50-enxovais-para-bebes-em-sena-madureira",
+    "vale-enganar-para-engajar-especialistas-dizem-que-publico-esta-cansado-de-mentira-nas-redes",
+    "vereador-de-jordao-e-preso-em-flagrante-suspeito-de-agredir-a-esposa-no-interior-do-acre",
+    "governo-do-acre-lanca-processo-seletivo-para-estagiarios-de-nivel-superior",
+    "aleac-deixa-votacao-da-ldo-para-depois-do-recesso-parlamentar",
+    "aleac-corrige-distorcoes-de-decadas-e-fortalece-direitos-dos-servidores",
+    "supremo-tribunal-federal-da-60-dias-para-uniao-notificar-donos-de-fazendas-que-estao-dentro-de-t",
+    "alan-rick-visita-edinaldo-muniz-e-destaca-recuperacao-apos-desabamento-de-ponte-em-sena-madureir",
+    "o-que-explica-a-bukelizacao-da-america-latina",
+    "agradeca-ao-alcolumbre-mp-do-frete-trava-no-senado-e-reacende-ameaca-de-greve-dos-caminhoneiros",
+    "alan-rick-visita-juiz-aposentado-edinaldo-muniz-e-destaca-forca-durante-recuperacao",
+    "socorro-neri-apresenta-emendas-para-adiar-pagamento-do-fies-na-residencia-medica-e-garantir-parc",
+    "apos-recesso-aleac-deve-retomar-votacao-da-ldo-de-2027-entre-as-primeiras-pautas",
+    "alan-rick-visita-edinaldo-muniz-em-hospital-de-sao-paulo-vitima-do-desabamento-da-ponte-de-sena-"
   ],
   "reviewQueue": [
     {
-      "slug": "nao-deixei-a-prefeitura-para-ser-vice-de-ninguem-diz-bocalom-ao-negar-alianca-com-mailza",
-      "title": "“Não deixei a Prefeitura para ser vice de ninguém”, diz Bocalom ao negar aliança com Mailza",
+      "slug": "gripe-atraso-na-ampliacao-da-vacina-e-de-51-dias-em-relacao-a-2025",
+      "title": "Gripe: atraso na ampliação da vacina é de 51 dias em relação a 2025",
       "level": "review",
       "reasons": [
         "people-or-group-scene-without-manual-focus"
       ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/40688988-d91d-4533-b8e5-ba75beb4542a.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "governadora-mailza-visita-sede-revitalizada-da-seop-em-cruzeiro-do-sul-e-destaca-impacto-na-econ",
-      "title": "Governadora Mailza visita sede revitalizada da Seop em Cruzeiro do Sul e destaca impacto na economia regional",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/IMG_3905.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "melhores-condicoes-de-trabalho-diz-governadora-mailza-ao-entregar-reforma-da-unidade-do-idaf-em-",
-      "title": "‘Melhores condições de trabalho’, diz governadora Mailza ao entregar reforma da unidade do Idaf em Rodrigues Alves",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-exonera-mario-neto-da-casa-civil-em-nova-mudanca-no-nucleo-do-governo",
-      "title": "Mailza exonera Mário Neto da Casa Civil em nova mudança no núcleo do governo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/66f3e203-0d2f-41f9-82b7-5c30cbc3fdc2.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-aumenta-duvida-sobre-rompimento-com-gladson",
-      "title": "Mailza aumenta dúvida sobre rompimento com Gladson",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "bocalom-nega-articulacao-com-mailza-assis-durante-visita-a-expoacre-jurua",
-      "title": "Bocalom nega articulação com Mailza Assis durante visita à Expoacre Juruá",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/df827b5b-4b90-4bed-9cbd-a0980f0a3936.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-exonera-mario-neto-diretor-de-gestao-da-casa-civil-e-coordenador-da-expoacre",
-      "title": "Mailza exonera Mário Neto, diretor de Gestão da Casa Civil e coordenador da Expoacre",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/024bc770-768f-402f-b02b-2ddbd749bd6f.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "governadora-mailza-publica-exoneracao-de-sula-ximenes-do-deracre-apos-entrega-do-cargo",
-      "title": "Governadora Mailza publica exoneração de Sula Ximenes do Deracre após entrega do cargo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2025/05/sulaximenes-1.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "em-rodrigues-alves-governadora-mailza-reforca-mobilidade-urbana-com-entrega-de-cnhs-sociais-cole",
-      "title": "Em Rodrigues Alves, governadora Mailza reforça mobilidade urbana com entrega de CNHs Sociais, coletes para mototaxistas e autorização de obras de pavimentação",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/Mailza-Chn-Social-Rodrigues-Alves-3.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-chama-eduardo-velloso-de-novo-senador-e-amplia-sinais-de-mudancas-no-tabuleiro-politico-p",
-      "title": "Mailza chama Eduardo Velloso de “novo senador” e amplia sinais de mudanças no tabuleiro político para 2026",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-01T192056.720.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-minimiza-impacto-de-mudancas-no-governo-com-saidas-de-donadoni-e-sula-medida-pontual",
-      "title": "Mailza minimiza impacto de mudanças no governo com saídas de Donadoni e Sula: ”medida pontual “",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-06-30T210756.231.avif",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "caminho-que-escolhemos-governadora-mailza-abre-21-edicao-da-expoacre-jurua-e-ressalta-feira-como",
-      "title": "‘CAMINHO QUE ESCOLHEMOS’ – Governadora Mailza abre 21ª edição da Expoacre Juruá e ressalta feira como motor de empregos e oportunidades",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeito-de-cruzeiro-do-sul-anuncia-apoio-a-candidatura-de-alan-rick-ao-governo-do-estado",
-      "title": "Prefeito de Cruzeiro do Sul anuncia apoio à candidatura de Alan Rick ao governo do estado",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "gladson-diz-que-mailza-tem-direito-de-fazer-mudancas-no-governo-e-desmente-zequinha-me-pegou-de-",
-      "title": "Gladson diz que Mailza “tem direito” de fazer mudanças no governo e desmente Zequinha: “me pegou de surpresa”",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/Screenshot_20260701_115713_Chrome.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "no-camarim-natanzinho-lima-agradece-governadora-mailza-por-atender-pedido-do-publico-no-acre",
-      "title": "No camarim, Natanzinho Lima agradece governadora Mailza por atender pedido do público no Acre",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-destaca-entregas-em-cruzeiro-do-sul-e-reforca-investimentos-em-saude-seguranca-e-esporte",
-      "title": "Mailza destaca entregas em Cruzeiro do Sul e reforça investimentos em saúde, segurança e esporte",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/CAPA-DO-SITE-2026-07-01T111629.888.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "diario-extra-governadora-mailza-autoriza-convocacao-de-aprovados-no-concurso-do-corpo-de-bombeir",
-      "title": "DIÁRIO EXTRA – Governadora Mailza autoriza convocação de aprovados no concurso do Corpo de Bombeiros para matrícula no curso de formação",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "bittar-convida-sula-e-donadoni-pl-e-ub-nao-rompem-com-mailza-e-querem-mdb-de-volta",
-      "title": "Bittar convida Sula e Donadoni; PL e UB não rompem com Mailza e querem MDB de volta",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "bittar-convida-ex-integrantes-do-governo-pl-e-uniao-brasil-mantem-apoio-a-mailza-e-articulam-ret",
-      "title": "Bittar convida ex-integrantes do governo; PL e União Brasil mantêm apoio a Mailza e articulam retorno do MDB",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "justica-determina-retirada-de-video-publicado-por-mailza-assis-apos-representacao-eleitoral",
-      "title": "Justiça determina retirada de vídeo publicado por Mailza Assis após representação eleitoral",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "quando-2-cachorros-grandes-brigam-o-pequeno-fica-debaixo-da-mesa-diz-vagner-sobre-mailza-e-alan",
-      "title": "“Quando 2 cachorros grandes brigam, o pequeno fica debaixo da mesa”, diz Vagner sobre Mailza e Alan",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "estudante-da-afya-destaca-oportunidades-e-qualidade-do-curso-de-medicina-durante-expoacre-jurua",
-      "title": "Estudante da Afya destaca oportunidades e qualidade do curso de Medicina durante ExpoAcre Juruá",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2654.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "e-iniciada-votacao-para-escolha-do-rei-e-da-rainha-do-festival-da-farinha-durante-a-expoacre-jur",
-      "title": "É iniciada votação para escolha do Rei e da Rainha do Festival da Farinha durante a Expoacre Juruá em Cruzeiro do Sul",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-12.49.30.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "dr-marlon-holanda-conquista-titulo-de-especialista-em-endoscopia-digestiva-uma-das-mais-altas-ce",
-      "title": "Dr. Marlon Holanda conquista Título de Especialista em Endoscopia Digestiva, uma das mais altas certificações da área no Brasil",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-17.24.57-1.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-inicia-votacao-para-escolha-do-rei-e-da-rainha-do-festival-da-farinha-durante-a-expoa",
-      "title": "Prefeitura inicia votação para escolha do Rei e da Rainha do Festival da Farinha durante a Expoacre Juruá em Cruzeiro do Sul",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-15.52.45.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-rio-branco-investe-r-390-mil-na-reforma-de-tres-unidades-de-saude",
-      "title": "Prefeitura de Rio Branco investe R$ 390 mil na reforma de três unidades de saúde",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "cruzeiro-do-sul-abre-votacao-para-rei-e-rainha-popularidade-do-festival-da-farinha",
-      "title": "Cruzeiro do Sul abre votação para Rei e Rainha Popularidade do Festival da Farinha",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-entregara-100-oculos-do-programa-olhar-de-carinho-nesta-quinta-fei",
-      "title": "Prefeitura de Cruzeiro do Sul entregará 100 óculos do Programa Olhar de Carinho nesta quinta-feira",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/77671529-17a0-4154-92ad-f285903d723d.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "banda-morada-reune-centenas-de-fieis-na-segunda-noite-da-expoacre-jurua-2026",
-      "title": "Banda Morada reúne centenas de fiéis na segunda noite da Expoacre Juruá 2026",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/ba1278e0-f4ef-4014-8e6a-d95f79fc87c7.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "camara-de-rio-branco-aprova-mais-de-40-materias-em-sessao-marcada-por-avancos-nas-areas-de-saude",
-      "title": "Câmara de Rio Branco aprova mais de 40 matérias em sessão marcada por avanços nas áreas de saúde, inclusão, mobilidade e cidadania",
-      "level": "warning",
-      "reasons": [
-        "image-content-type-not-confirmed"
-      ],
-      "imageUrl": "https://www.youtube.com/embed/yTvgVqLk4pA",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "civismo-prefeitura-de-brasileia-realiza-hasteamento-dos-pavilhoes-nas-comemoracoes-dos-116-anos-",
-      "title": "Civismo: prefeitura de Brasiléia realiza Hasteamento dos pavilhões nas comemorações dos 116 anos de Brasiléia",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-16.35.04-1.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "produtos-derivados-da-macaxeira-e-agua-de-coco-inovadora-chamam-atencao-na-expojurua",
-      "title": "Produtos derivados da macaxeira e água de coco inovadora chamam atenção na ExpoJuruá",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-01T221212.762.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "simulador-de-transito-do-detran-atrai-publico-no-segundo-dia-da-expoacre-jurua",
-      "title": "Simulador de trânsito do Detran atrai público no segundo dia da Expoacre Juruá",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "coordenador-da-expoacre-e-aliado-de-donadoni-e-exonerado-da-casa-civil",
-      "title": "Coordenador da Expoacre e aliado de Donadoni é exonerado da Casa Civil",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-19.44.40.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "na-expoacre-jurua-sejusp-lanca-campanha-um-dia-com-a-seguranca-e-reforca-investimentos-em-tecnol",
-      "title": "Na Expoacre Juruá, Sejusp lança campanha ‘Um Dia com a Segurança’ e reforça investimentos em tecnologia e segurança pública",
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "medico-explica-estrategia-de-cristiano-ronaldo-de-cuspir-bebidas",
-      "title": "Médico explica estratégia de Cristiano Ronaldo de cuspir bebidas",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/311178-medico-explica-estrategia-de-cristiano-ronaldo-de-cuspir-bebidas.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "acre-ganha-estacao-de-alta-precisao-para-monitorar-fumaca-das-queimadas-e-qualidade-do-ar",
-      "title": "Acre ganha estação de alta precisão para monitorar fumaça das queimadas e qualidade do ar",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "viveiro-da-floresta-leva-conscientizacao-ambiental-e-cerca-de-3-mil-mudas-para-a-expoacre-jurua",
-      "title": "Viveiro da Floresta leva conscientização ambiental e cerca de 3 mil mudas para a Expoacre Juruá",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "elenco-do-atletico-comeca-preparacao-para-o-estadual-no-dia-13",
-      "title": "Elenco do Atlético começa preparação para o Estadual no dia 13",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-01T214722.746.jpg",
+      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/315720-gripe-atraso-na-ampliacao-da-vacina-e-de-51-dias-em-relacao-a-2025.jpg",
       "effectiveFocus": ""
     }
   ],
   "items": [
     {
-      "slug": "nao-deixei-a-prefeitura-para-ser-vice-de-ninguem-diz-bocalom-ao-negar-alianca-com-mailza",
-      "title": "“Não deixei a Prefeitura para ser vice de ninguém”, diz Bocalom ao negar aliança com Mailza",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T09:10:49.000Z",
+      "slug": "casa-civil-fica-a-frente-da-expoacre-2026-mailza-prepara-decreto-para-anunciar-equipe",
+      "title": "Casa Civil fica à frente da Expoacre 2026; Mailza prepara decreto para anunciar equipe",
+      "category": "Política Regional",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.345Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/40688988-d91d-4533-b8e5-ba75beb4542a.jpeg",
+      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/expoacre-rio-branco-2026-500x291.jpeg?v=1783606521",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+      "dimensionsFromUrl": {
+        "width": 500,
+        "height": 291,
+        "ratio": 1.718,
+        "orientation": "landscape"
       },
-      "level": "review",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "governadora-mailza-visita-sede-revitalizada-da-seop-em-cruzeiro-do-sul-e-destaca-impacto-na-econ",
-      "title": "Governadora Mailza visita sede revitalizada da Seop em Cruzeiro do Sul e destaca impacto na economia regional",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T05:09:28.000Z",
+      "slug": "casa-civil-tera-papel-de-unificar-governo-na-reta-final-da-gestao-mailza-diz-novo-secretario",
+      "title": "Casa Civil terá papel de unificar governo na reta final da gestão Mailza, diz novo secretário",
+      "category": "Política Regional",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.343Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/IMG_3905.jpeg",
+      "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageContentType": "image/svg+xml",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "melhores-condicoes-de-trabalho-diz-governadora-mailza-ao-entregar-reforma-da-unidade-do-idaf-em-",
-      "title": "‘Melhores condições de trabalho’, diz governadora Mailza ao entregar reforma da unidade do Idaf em Rodrigues Alves",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-02T00:07:50.000Z",
+      "slug": "mailza-envia-orcamento-de-2027-pra-assembleia-e-lista-prioridades-infraestrutura-esta-entre-elas",
+      "title": "Mailza envia orçamento de 2027 pra Assembleia e lista prioridades; infraestrutura está entre elas",
+      "category": "Política Regional",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-07-10T04:18:20.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
+      "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "error",
+      "level": "ok",
       "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "justica-eleitoral-manda-mailza-assis-retirar-video-do-instagram-por-indicios-de-propaganda-eleit",
-      "title": "Justiça Eleitoral manda Mailza Assis retirar vídeo do Instagram por indícios de propaganda eleitoral antecipada",
-      "category": "Politica",
+      "slug": "mailza-nomeia-o-engenheiro-gilberto-lucas-para-a-presidencia-do-deracre",
+      "title": "Mailza nomeia o engenheiro Gilberto Lucas para a presidência do Deracre",
+      "category": "Política Regional",
       "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-02T02:11:25.000Z",
+      "publishedAt": "2026-07-09T21:59:32.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/1000197219-1220x813-1.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": {
-        "width": 1220,
-        "height": 813,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mailza-exonera-mario-neto-da-casa-civil-em-nova-mudanca-no-nucleo-do-governo",
-      "title": "Mailza exonera Mário Neto da Casa Civil em nova mudança no núcleo do governo",
-      "category": "Politica",
-      "sourceName": "Integracao Net",
-      "publishedAt": "2026-07-02T01:38:39.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/66f3e203-0d2f-41f9-82b7-5c30cbc3fdc2.jpeg",
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/gilberto.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "mailza-aumenta-duvida-sobre-rompimento-com-gladson",
-      "title": "Mailza aumenta dúvida sobre rompimento com Gladson",
-      "category": "Politica",
-      "sourceName": "Integracao Net",
-      "publishedAt": "2026-07-02T00:20:38.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "bocalom-nega-articulacao-com-mailza-assis-durante-visita-a-expoacre-jurua",
-      "title": "Bocalom nega articulação com Mailza Assis durante visita à Expoacre Juruá",
-      "category": "Politica",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T08:35:32.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/df827b5b-4b90-4bed-9cbd-a0980f0a3936.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "mailza-exonera-mario-neto-diretor-de-gestao-da-casa-civil-e-coordenador-da-expoacre",
-      "title": "Mailza exonera Mário Neto, diretor de Gestão da Casa Civil e coordenador da Expoacre",
-      "category": "Politica",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T06:30:24.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/024bc770-768f-402f-b02b-2ddbd749bd6f.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "governadora-mailza-publica-exoneracao-de-sula-ximenes-do-deracre-apos-entrega-do-cargo",
-      "title": "Governadora Mailza publica exoneração de Sula Ximenes do Deracre após entrega do cargo",
-      "category": "Politica",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T05:12:22.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2025/05/sulaximenes-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "ze-adriano-defende-industrializacao-do-acre-confirma-apoio-a-mailza-e-cobra-avanco-da-integracao",
-      "title": "Zé Adriano defende industrialização do Acre, confirma apoio a Mailza e cobra avanço da integração com o Peru",
-      "category": "Politica",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-02T03:27:15.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-02-at-00.14.24-1-1-1024x568.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 568,
-        "ratio": 1.803,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "em-rodrigues-alves-governadora-mailza-reforca-mobilidade-urbana-com-entrega-de-cnhs-sociais-cole",
-      "title": "Em Rodrigues Alves, governadora Mailza reforça mobilidade urbana com entrega de CNHs Sociais, coletes para mototaxistas e autorização de obras de pavimentação",
-      "category": "Politica",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-02T02:15:24.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/Mailza-Chn-Social-Rodrigues-Alves-3.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "governo-do-acre-lanca-plano-abc-e-plataforma-agricultor-digital-durante-expoacre-jurua-2026",
-      "title": "Governo do Acre lança Plano ABC+ e plataforma Agricultor Digital durante Expoacre Juruá 2026",
-      "category": "Politica",
-      "sourceName": "O Alto Acre",
-      "publishedAt": "2026-07-02T04:09:15.000Z",
+      "slug": "mailza-assis-nomeia-oficialmente-cristovam-moura-como-chefe-da-casa-civil",
+      "title": "Mailza Assis nomeia oficialmente Cristovam Moura como Chefe da Casa Civil",
+      "category": "Política Regional",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-09T21:50:11.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/ABC-SEAGRI-Expoacre-2026-5-1-660x440.jpeg",
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/1000067323-scaled-1-1140x570-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": {
-        "width": 660,
-        "height": 440,
-        "ratio": 1.5,
+        "width": 1140,
+        "height": 570,
+        "ratio": 2,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "mailza-chama-eduardo-velloso-de-novo-senador-e-amplia-sinais-de-mudancas-no-tabuleiro-politico-p",
-      "title": "Mailza chama Eduardo Velloso de “novo senador” e amplia sinais de mudanças no tabuleiro político para 2026",
-      "category": "Politica",
+      "slug": "edvaldo-magalhaes-volta-a-defender-retorno-da-tabela-da-educacao-e-alerta-mailza-essa-injustica-",
+      "title": "Edvaldo Magalhães volta a defender retorno da tabela da Educação e alerta Mailza: “essa injustiça também precisa ser corrigida”",
+      "category": "Política Regional",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-09T01:07:12.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-08-at-13.05.01.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "alan-se-reune-com-cupula-do-pl-e-amplia-chances-de-tirar-o-partido-da-base-de-mailza",
+      "title": "Alan se reúne com cúpula do PL e amplia chances de tirar o partido da base de Mailza",
+      "category": "Política Regional",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-09T12:01:26.758Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/alan-valdemar-roberto-500x333.jpeg?v=1783531416",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 500,
+        "height": 333,
+        "ratio": 1.502,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edvaldo-magalhaes-elogia-mailza-por-projeto-de-valorizacao-de-servidores-do-quadro-provisorio",
+      "title": "Edvaldo Magalhães elogia Mailza por projeto de valorização de servidores do Quadro Provisório",
+      "category": "Política Regional",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-09T21:52:10.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/edvaldoemailza.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mailza-efetiva-cristovam-pontes-no-comando-da-casa-civil-do-governo-do-acre",
+      "title": "Mailza efetiva Cristovam Pontes no comando da Casa Civil do Governo do Acre",
+      "category": "Política Regional",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-09T21:24:54.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-09-at-13.22.33.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mailza-nomeia-engenheiro-civil-como-novo-presidente-do-deracre-apos-saida-de-sula-ximenes",
+      "title": "Mailza nomeia engenheiro civil como novo presidente do Deracre após saída de Sula Ximenes",
+      "category": "Política Regional",
+      "sourceName": "A Gazeta do Acre",
+      "publishedAt": "2026-07-09T20:27:52.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/trend-theo-acreano.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "presidente-da-aleac-reafirma-apoio-a-mailza-e-diz-que-eleicao-2026-ainda-esta-em-aberto",
+      "title": "Presidente da Aleac reafirma apoio a Mailza e diz que eleição 2026 ainda está em aberto",
+      "category": "Política Regional",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-07-09T15:39:52.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "apos-reunioes-em-brasilia-marcio-bittar-pode-ser-a-proxima-baixa-na-campanha-de-mailza",
+      "title": "Após reuniões em Brasília, Márcio Bittar pode ser a próxima baixa na campanha de Mailza",
+      "category": "Política Regional",
       "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T00:22:25.000Z",
+      "publishedAt": "2026-07-09T10:53:44.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-01T192056.720.jpg",
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/BITTAR_SOZINHOOO.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "romulo-grandidier-reforca-equipe-de-campanha-de-mailza-assis-ao-governo",
+      "title": "Rômulo Grandidier reforça equipe de campanha de Mailza Assis ao governo",
+      "category": "Política Regional",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-09T02:54:05.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/IMG_4839.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mailza-sinaliza-abertura-para-alianca-com-bocalom-de-olho-nas-eleicoes",
+      "title": "Mailza sinaliza abertura para aliança com Bocalom de olho nas eleições",
+      "category": "Política",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-08T14:06:01.414Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mailza-e-gladson-iniciam-reacao-para-conter-crise-politica",
+      "title": "Mailza e Gladson iniciam reação para conter crise política!",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-08T12:07:11Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/976x695_IMAGEM-DESTACADA-2026-02-27T180136.699.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
@@ -815,1446 +477,382 @@
         "ratio": 1.404,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "mailza-minimiza-impacto-de-mudancas-no-governo-com-saidas-de-donadoni-e-sula-medida-pontual",
-      "title": "Mailza minimiza impacto de mudanças no governo com saídas de Donadoni e Sula: ”medida pontual “",
-      "category": "Prefeitura",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-01T17:54:34.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-06-30T210756.231.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": {
-        "width": 976,
-        "height": 695,
-        "ratio": 1.404,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "caminho-que-escolhemos-governadora-mailza-abre-21-edicao-da-expoacre-jurua-e-ressalta-feira-como",
-      "title": "‘CAMINHO QUE ESCOLHEMOS’ – Governadora Mailza abre 21ª edição da Expoacre Juruá e ressalta feira como motor de empregos e oportunidades",
-      "category": "Prefeitura",
+      "slug": "mailza-envia-a-aleac-projeto-para-reduzir-icms-sobre-o-cafe",
+      "title": "Mailza envia à Aleac projeto para reduzir ICMS sobre o café",
+      "category": "Política",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-07T19:10:38.329Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "e-ruim-essa-indefinicao-do-mdb-sobre-a-alianca-com-a-mailza-diz-deputado-luiz-gonzaga-em-podcast",
+      "title": "“É ruim essa indefinição do MDB sobre a aliança com a Mailza”, diz deputado Luiz Gonzaga em podcast na ExpoJuruá",
+      "category": "Política",
       "sourceName": "Voz do Norte",
-      "publishedAt": "2026-07-01T12:54:07.000Z",
+      "publishedAt": "2026-07-07T04:55:07Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "prefeito-de-cruzeiro-do-sul-anuncia-apoio-a-candidatura-de-alan-rick-ao-governo-do-estado",
-      "title": "Prefeito de Cruzeiro do Sul anuncia apoio à candidatura de Alan Rick ao governo do estado",
-      "category": "Prefeitura",
-      "sourceName": "Acre in Foco",
-      "publishedAt": "2026-07-01T20:35:45.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br.jpeg",
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageContentType": "image/svg+xml",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "gladson-diz-que-mailza-tem-direito-de-fazer-mudancas-no-governo-e-desmente-zequinha-me-pegou-de-",
-      "title": "Gladson diz que Mailza “tem direito” de fazer mudanças no governo e desmente Zequinha: “me pegou de surpresa”",
-      "category": "Prefeitura",
-      "sourceName": "Estado do Acre",
-      "publishedAt": "2026-07-01T17:00:56.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/Screenshot_20260701_115713_Chrome.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "no-camarim-natanzinho-lima-agradece-governadora-mailza-por-atender-pedido-do-publico-no-acre",
-      "title": "No camarim, Natanzinho Lima agradece governadora Mailza por atender pedido do público no Acre",
-      "category": "Prefeitura",
-      "sourceName": "A Gazeta do Acre",
-      "publishedAt": "2026-07-01T16:55:24.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "governadora-mailza-visita-sede-revitalizada-da-seop-em-cruzeiro-do-sul-e-destaca-impacto-na-econ",
-      "title": "Governadora Mailza visita sede revitalizada da Seop em Cruzeiro do Sul e destaca impacto na economia regional",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-07-01T20:23:35.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/07/IMG-20260701-WA0683-1024x683.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "para-fortalecer-fiscalizacao-fluvial-governadora-mailza-entrega-lancha-com-blindagem-e-tecnologi",
-      "title": "Para fortalecer fiscalização fluvial, governadora Mailza entrega lancha com blindagem e tecnologia de ponta em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-07-01T20:12:56.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/07/IMG-20260701-WA0481-1024x683.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mailza-entrega-centro-de-especialidades-odontologicas-e-amplia-atendimento-no-jurua",
-      "title": "Mailza entrega Centro de Especialidades Odontológicas e amplia atendimento no Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-07-01T20:05:12.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/07/144210d1-82d0-47b0-806a-e5bc01f1526d-768x512-1.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": {
-        "width": 768,
-        "height": 512,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governadora-mailza-assis-entrega-revitalizacao-do-ginasio-poliesportivo-alailton-negreiros-em-cr",
-      "title": "Governadora Mailza Assis entrega revitalização do Ginásio Poliesportivo Alailton Negreiros em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-01T17:14:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/07/IMG-20260701-WA0648-1024x683.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mailza-destaca-entregas-em-cruzeiro-do-sul-e-reforca-investimentos-em-saude-seguranca-e-esporte",
-      "title": "Mailza destaca entregas em Cruzeiro do Sul e reforça investimentos em saúde, segurança e esporte",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-01T16:29:46.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/CAPA-DO-SITE-2026-07-01T111629.888.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "na-expoacre-jurua-governadora-mailza-entrega-pacote-de-investimentos-para-a-seguranca-publica-da",
-      "title": "Na Expoacre Juruá, governadora Mailza entrega pacote de investimentos para a Segurança Pública da região",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-07-01T12:58:17.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/bcdd7d24-2e83-45e2-a2cf-af83c03ad4a1-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "durante-expoacre-jurua-mailza-recebe-o-governador-de-ucayali-para-ampliar-a-integracao-entre-o-a",
-      "title": "Durante Expoacre Juruá, Mailza recebe o governador de Ucayali para ampliar a integração entre o Acre e o departamento peruano",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-07-01T12:53:11.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-30-at-22.13.14-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governadora-mailza-abre-21-edicao-da-expoacre-jurua-e-ressalta-feira-como-motor-de-empregos-e-op",
-      "title": "Governadora Mailza abre 21ª edição da Expoacre Juruá e ressalta feira como motor de empregos e oportunidades",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-07-01T12:32:22.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/EXPOACRE-JURUA-NETO-LUCENA-7-1024x681.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 681,
-        "ratio": 1.504,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "diario-extra-governadora-mailza-autoriza-convocacao-de-aprovados-no-concurso-do-corpo-de-bombeir",
-      "title": "DIÁRIO EXTRA – Governadora Mailza autoriza convocação de aprovados no concurso do Corpo de Bombeiros para matrícula no curso de formação",
-      "category": "Politica",
-      "sourceName": "Voz do Norte",
-      "publishedAt": "2026-07-01T13:27:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
       "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "governadora-mailza-assis-inaugura-2-centro-odontologico-do-acre-ampliando-acesso-na-regional-do-",
-      "title": "Governadora Mailza Assis inaugura 2º Centro Odontológico do Acre, ampliando acesso na regional do Juruá",
-      "category": "Politica",
+      "slug": "mdb-decide-rumo-nas-eleicoes-do-acre-ate-sexta-10-semana-decisiva-para-o-glorioso",
+      "title": "MDB decide rumo nas eleições do Acre até sexta (10); Semana decisiva para o “Glorioso”",
+      "category": "Política",
       "sourceName": "O Alto Acre",
-      "publishedAt": "2026-07-01T17:24:02.000Z",
+      "publishedAt": "2026-07-07T22:23:13Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/IMG-20260701-WA0557-2048x1366-1-660x440.jpg",
+      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2025-10-08-at-10.57.21-660x495.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 2048,
-        "height": 1366,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "bittar-convida-sula-e-donadoni-pl-e-ub-nao-rompem-com-mailza-e-querem-mdb-de-volta",
-      "title": "Bittar convida Sula e Donadoni; PL e UB não rompem com Mailza e querem MDB de volta",
-      "category": "Politica",
-      "sourceName": "Acre Agora",
-      "publishedAt": "2026-07-01T14:53:12.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ]
-    },
-    {
-      "slug": "bittar-convida-ex-integrantes-do-governo-pl-e-uniao-brasil-mantem-apoio-a-mailza-e-articulam-ret",
-      "title": "Bittar convida ex-integrantes do governo; PL e União Brasil mantêm apoio a Mailza e articulam retorno do MDB",
-      "category": "Politica",
-      "sourceName": "Acre Agora",
-      "publishedAt": "2026-07-01T14:52:10.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ]
-    },
-    {
-      "slug": "justica-determina-retirada-de-video-publicado-por-mailza-assis-apos-representacao-eleitoral",
-      "title": "Justiça determina retirada de vídeo publicado por Mailza Assis após representação eleitoral",
-      "category": "Politica",
-      "sourceName": "A Gazeta do Acre",
-      "publishedAt": "2026-07-01T22:34:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "quando-2-cachorros-grandes-brigam-o-pequeno-fica-debaixo-da-mesa-diz-vagner-sobre-mailza-e-alan",
-      "title": "“Quando 2 cachorros grandes brigam, o pequeno fica debaixo da mesa”, diz Vagner sobre Mailza e Alan",
-      "category": "Politica",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-07-01T16:31:15.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "governadora-mailza-autoriza-convocacao-de-aprovados-no-concurso-do-corpo-de-bombeiros-para-matri",
-      "title": "Governadora Mailza autoriza convocação de aprovados no concurso do Corpo de Bombeiros para matrícula no curso de formação",
-      "category": "Politica",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-07-01T01:12:36.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/06/ba9893b5-fe31-4e85-bc01-661c6af4c79a-1024x681.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 681,
-        "ratio": 1.504,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mailza-entrega-lancha-com-blindagem-e-tecnologia-de-ponta-para-combater-crimes-nos-rios-acreanos",
-      "title": "Mailza entrega lancha com blindagem e tecnologia de ponta para combater crimes nos rios acreanos",
-      "category": "Acre / Governo",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-01T22:23:38.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/IMG-20260701-WA0481-768x512-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 768,
-        "height": 512,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "banda-morada-emociona-publico-cristao-em-show-na-expoacre-jurua-2026",
-      "title": "Banda Morada emociona público cristão em show na ExpoAcre Juruá 2026",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T10:29:43.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2697.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "noite-gospel-com-banda-morada-deve-reunir-publico-cristao-na-segunda-noite-da-expoacre-jurua",
-      "title": "Noite gospel com banda Morada deve reunir público cristão na segunda noite da Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T08:37:07.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2684.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "dom-flavio-destaca-uniao-crista-e-convida-publico-para-noites-de-fe-na-expoacre-jurua",
-      "title": "Dom Flávio destaca união cristã e convida público para noites de fé na Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T08:22:31.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2656.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "estudante-da-afya-destaca-oportunidades-e-qualidade-do-curso-de-medicina-durante-expoacre-jurua",
-      "title": "Estudante da Afya destaca oportunidades e qualidade do curso de Medicina durante ExpoAcre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T06:43:36.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2654.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "e-iniciada-votacao-para-escolha-do-rei-e-da-rainha-do-festival-da-farinha-durante-a-expoacre-jur",
-      "title": "É iniciada votação para escolha do Rei e da Rainha do Festival da Farinha durante a Expoacre Juruá em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T01:24:55.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-12.49.30.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "dr-marlon-holanda-conquista-titulo-de-especialista-em-endoscopia-digestiva-uma-das-mais-altas-ce",
-      "title": "Dr. Marlon Holanda conquista Título de Especialista em Endoscopia Digestiva, uma das mais altas certificações da área no Brasil",
-      "category": "Prefeitura",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-02T01:47:25.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-17.24.57-1.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "prefeitura-inicia-votacao-para-escolha-do-rei-e-da-rainha-do-festival-da-farinha-durante-a-expoa",
-      "title": "Prefeitura inicia votação para escolha do Rei e da Rainha do Festival da Farinha durante a Expoacre Juruá em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-02T01:44:36.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-15.52.45.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "homem-e-preso-por-abuso-sexual-contra-jovem-de-16-anos-em-cruzeiro-do-sul",
-      "title": "Homem é preso por abuso sexual contra jovem de 16 anos em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-02T00:01:26.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/fbbaf0_9209eb35e21c4eff92747b3965460ca7mv2.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "prefeitura-de-rio-branco-investe-r-390-mil-na-reforma-de-tres-unidades-de-saude",
-      "title": "Prefeitura de Rio Branco investe R$ 390 mil na reforma de três unidades de saúde",
-      "category": "Prefeitura",
-      "sourceName": "Integracao Net",
-      "publishedAt": "2026-07-02T01:09:29.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "cruzeiro-do-sul-abre-votacao-para-rei-e-rainha-popularidade-do-festival-da-farinha",
-      "title": "Cruzeiro do Sul abre votação para Rei e Rainha Popularidade do Festival da Farinha",
-      "category": "Prefeitura",
-      "sourceName": "Integracao Net",
-      "publishedAt": "2026-07-02T00:13:38.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ]
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-entregara-100-oculos-do-programa-olhar-de-carinho-nesta-quinta-fei",
-      "title": "Prefeitura de Cruzeiro do Sul entregará 100 óculos do Programa Olhar de Carinho nesta quinta-feira",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T09:03:44.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/77671529-17a0-4154-92ad-f285903d723d.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "banda-morada-reune-centenas-de-fieis-na-segunda-noite-da-expoacre-jurua-2026",
-      "title": "Banda Morada reúne centenas de fiéis na segunda noite da Expoacre Juruá 2026",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T08:30:57.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/ba1278e0-f4ef-4014-8e6a-d95f79fc87c7.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "cooperativa-de-cafe-do-jurua-conquista-publico-na-segunda-noite-da-expoacre-jurua-e-projeta-expo",
-      "title": "Cooperativa de Café do Juruá conquista público na segunda noite da Expoacre Juruá e projeta exportação em 2027",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T07:47:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/e952ee45-7472-47fc-a49c-882db9c0a9fc.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "brunao-morada-diz-esperar-fazer-uma-festa-para-as-familias-na-expoacre-jurua",
-      "title": "Brunão Morada diz esperar “fazer uma festa para as famílias” na Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T07:44:33.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/90c72da2-b84a-4ca9-bf40-223cb3066249.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "chef-de-cruzeiro-do-sul-conquista-publico-da-expoacre-jurua-com-caponata-e-receita-guardada-a-se",
-      "title": "Chef de Cruzeiro do Sul conquista público da Expoacre Juruá com caponata e receita guardada a sete chaves",
-      "category": "Prefeitura",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-02T04:48:08.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/Chef-Senai-Expoacre-jurua-2026-3-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "realidade-virtual-chama-a-atencao-dos-visitantes-no-estande-do-sistema-fieac-durante-a-expoacre-",
-      "title": "Realidade virtual chama a atenção dos visitantes no estande do Sistema FIEAC durante a Expoacre Juruá 2026",
-      "category": "Prefeitura",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-02T04:31:18.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/Realidade-Virtual-Fieac-4-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governo-do-acre-lanca-plano-abc-e-plataforma-agricultor-digital-durante-a-expoacre-jurua",
-      "title": "Governo do Acre lança Plano ABC+ e plataforma Agricultor Digital durante a Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-02T03:53:29.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/ABC-SEAGRI-Expoacre-2026-5-1-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "nova-sede-da-camara-de-vereadores-de-rio-branco-recebera-nome-de-jesse-santiago-ex-presidente-da",
-      "title": "Nova sede da Câmara de Vereadores de Rio Branco receberá nome de Jessé Santiago, ex-presidente da Casa morto em 2010",
-      "category": "Prefeitura",
-      "sourceName": "O Alto Acre",
-      "publishedAt": "2026-07-02T04:42:16.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/Captura-de-Tela-2026-07-01-as-23.33.45-660x290.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageContentType": "image/webp",
       "dimensionsFromUrl": {
         "width": 660,
-        "height": 290,
-        "ratio": 2.276,
+        "height": 495,
+        "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mdb-entra-na-semana-decisiva-entre-mailza-e-alan-definicao-pode-redesenhar-a-disputa-pelo-govern",
+      "title": "MDB entra na semana decisiva entre Mailza e Alan; definição pode redesenhar a disputa pelo governo",
+      "category": "Política",
+      "sourceName": "Acre Agora",
+      "publishedAt": "2026-07-07T18:57:58Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/trend-theo-acreano.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mdb-deve-definir-rumo-politico-ate-sexta-feira-decisao-pode-influenciar-disputa-pelo-governo-do-",
+      "title": "MDB deve definir rumo político até sexta-feira; decisão pode influenciar disputa pelo Governo do AcreCom informações do colunista Crica",
+      "category": "Política",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-07-07T11:14:42Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "semana-decisiva-para-o-mdb",
+      "title": "Semana decisiva para o MDB",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-07T11:08:19Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/08/IMG-20250829-WA0155-1-1200x798.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 798,
+        "ratio": 1.504,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "camara-de-rio-branco-aprova-mais-de-40-materias-em-sessao-marcada-por-avancos-nas-areas-de-saude",
-      "title": "Câmara de Rio Branco aprova mais de 40 matérias em sessão marcada por avanços nas áreas de saúde, inclusão, mobilidade e cidadania",
+      "slug": "urgente-fogo-em-area-de-vegetacao-na-avenida-boulevard-thaumaturgo-assusta-quem-passa-pelo-local",
+      "title": "🚨 URGENTE: Fogo em área de vegetação na Avenida Boulevard Thaumaturgo assusta quem passa pelo local em Cruzeiro do Sul",
       "category": "Prefeitura",
-      "sourceName": "O Alto Acre",
-      "publishedAt": "2026-07-02T02:55:53.000Z",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-07-10T04:05:46.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://www.youtube.com/embed/yTvgVqLk4pA",
-      "imageStatus": "not-image",
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_1175.jpeg",
+      "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "text/html; charset=utf-8",
+      "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "warning",
+      "level": "ok",
       "reasons": [
-        "image-content-type-not-confirmed"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "civismo-prefeitura-de-brasileia-realiza-hasteamento-dos-pavilhoes-nas-comemoracoes-dos-116-anos-",
-      "title": "Civismo: prefeitura de Brasiléia realiza Hasteamento dos pavilhões nas comemorações dos 116 anos de Brasiléia",
+      "slug": "video-fogo-em-vegetacao-assusta-moradores-e-comerciantes-no-centro-de-cruzeiro-do-sul",
+      "title": "VÍDEO: Fogo em vegetação assusta moradores e comerciantes no Centro de Cruzeiro do Sul",
       "category": "Prefeitura",
-      "sourceName": "O Alto Acre",
-      "publishedAt": "2026-07-02T00:24:32.000Z",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T03:53:29.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-16.35.04-1.jpeg",
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-09-at-19.52.40.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
-        "hasGroupSignal": true,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "chuva-nao-impede-multidao-de-assistir-show-gospel-na-expoacre-jurua",
-      "title": "Chuva não impede multidão de assistir show gospel na Expoacre Juruá",
+      "slug": "celulares-e-notebooks-de-advogado-encontrado-morto-no-acre-passam-por-pericia-da-policia-civil",
+      "title": "Celulares e notebooks de advogado encontrado morto no Acre passam por perícia da Polícia Civil",
       "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T04:23:50.000Z",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T03:42:29.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/446765db-5ded-47cb-bc46-9d9b34728bdd-1200x800.jpeg",
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/advogado-achado-morto-2-1536x766-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1536,
+        "height": 766,
+        "ratio": 2.005,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-entrega-ambulancia-unidade-odontologica-movel-e-van-para-fortalece",
+      "title": "Prefeitura de Cruzeiro do Sul entrega ambulância, unidade odontológica móvel e van para fortalecer a saúde municipal",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T01:12:10.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/f2140f92-0edb-4801-81a5-0d80d82d41d8-1200x800-1.avif",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/avif",
       "dimensionsFromUrl": {
         "width": 1200,
         "height": 800,
         "ratio": 1.5,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "gladson-cameli-prestigia-a-21-expoacre-jurua",
-      "title": "Gladson Camelí prestigia a 21ª Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T03:22:06.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-22.00.53-1200x800.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 800,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "loja-colaborativa-do-sebrae-e-novidade-da-expoacre-jurua-2026",
-      "title": "Loja colaborativa do Sebrae é novidade da Expoacre Juruá 2026",
+      "slug": "prefeitura-abre-selecao-com-30-vagas-para-estagio-de-estudantes",
+      "title": "Prefeitura abre seleção com 30 vagas para estágio de estudantes",
       "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T03:20:33.000Z",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.369Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-23.08.06-1200x900.jpeg",
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 900,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "modelador-de-chapeus-atrai-publico-na-expoacre-jurua",
-      "title": "Modelador de chapéus atrai público na Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T03:16:38.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-20.46.56-1200x900.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 900,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "produtos-derivados-da-macaxeira-e-agua-de-coco-inovadora-chamam-atencao-na-expojurua",
-      "title": "Produtos derivados da macaxeira e água de coco inovadora chamam atenção na ExpoJuruá",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T03:12:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-01T221212.762.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 976,
-        "height": 695,
-        "ratio": 1.404,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "alpha-pipoca-gourmet-leva-sabores-de-rio-branco-a-expoacre-jurua-e-conquista-visitantes",
-      "title": "Alpha Pipoca Gourmet leva sabores de Rio Branco à Expoacre Juruá e conquista visitantes",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T02:43:29.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-21.11.08-1200x675.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "simulador-de-transito-do-detran-atrai-publico-no-segundo-dia-da-expoacre-jurua",
-      "title": "Simulador de trânsito do Detran atrai público no segundo dia da Expoacre Juruá",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-02T02:39:31.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "error",
+      "level": "ok",
       "reasons": [
-        "missing-image-url"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "prova-de-laco-garante-emocao-e-tradicao-a-arena-de-rodeios-da-expoacre-jurua",
-      "title": "Prova de Laço garante emoção e tradição à Arena de Rodeios da Expoacre Juruá",
+      "slug": "prefeitura-de-rio-branco-inicia-curso-de-operacao-de-maquinas-pesadas-e-amplia-oportunidades-de-",
+      "title": "Prefeitura de Rio Branco inicia curso de Operação de Máquinas Pesadas e amplia oportunidades de qualificação profissional",
       "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-02T02:33:26.000Z",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-07-10T04:11:34.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-20.56.25-1-300x200.jpeg",
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 300,
-        "height": 200,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "governo-atua-com-educacao-ambiental-servicos-e-acoes-de-conservacao-durante-a-expoacre-jurua",
-      "title": "Governo atua com educação ambiental, serviços e ações de conservação durante a Expoacre Juruá",
+      "slug": "prefeitura-de-cruzeiro-do-sul-reafirma-parceria-com-o-sest-senat-para-ampliar-qualificacao-profi",
+      "title": "Prefeitura de Cruzeiro do Sul reafirma parceria com o SEST SENAT para ampliar qualificação profissional e acesso à saúde dos servidores",
       "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-02T02:31:21.000Z",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-07-10T04:05:28.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/07/DSC03315-300x200.jpg",
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 300,
-        "height": 200,
-        "ratio": 1.5,
-        "orientation": "landscape"
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "saude-itinerante-agentes-percorrem-ramais-do-municipio-de-mancio-lima-para-levar-atendimento-dom",
+      "title": "Saúde itinerante: agentes percorrem ramais do município de Mâncio Lima para levar atendimento domiciliar à comunidade",
+      "category": "Prefeitura",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-07-10T04:01:48.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "artesanato-amazonico-ganha-vitrine-na-expoacre-jurua-com-pecas-indigenas-e-producao-local",
-      "title": "Artesanato amazônico ganha vitrine na Expoacre Juruá com peças indígenas e produção local",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T02:25:22.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-20.20.46-1200x900.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 900,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mpac-recomenda-que-prefeitura-de-cruzeiro-do-sul-adeque-calcadas-para-garantir-acessibilidade",
-      "title": "MPAC recomenda que Prefeitura de Cruzeiro do Sul adeque calçadas para garantir acessibilidade",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T00:53:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/IMG_5311.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "coordenador-da-expoacre-e-aliado-de-donadoni-e-exonerado-da-casa-civil",
-      "title": "Coordenador da Expoacre e aliado de Donadoni é exonerado da Casa Civil",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T00:48:37.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-19.44.40.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "governo-garante-atendimento-fiscalizacao-e-educacao-para-o-consumo-durante-a-expoacre-jurua",
-      "title": "Governo garante atendimento, fiscalização e educação para o consumo durante a Expoacre Juruá",
+      "slug": "dl-n-006-2026-aviso-de-licitacao",
+      "title": "DL N°006/2026 - Aviso de Licitação",
       "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-02T00:26:29.000Z",
+      "sourceName": "Prefeitura de Mancio Lima",
+      "publishedAt": "2026-07-10T06:03:48.875Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-01-at-11.32.11-1-300x200.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 300,
-        "height": 200,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "na-expoacre-jurua-sejusp-lanca-campanha-um-dia-com-a-seguranca-e-reforca-investimentos-em-tecnol",
-      "title": "Na Expoacre Juruá, Sejusp lança campanha ‘Um Dia com a Segurança’ e reforça investimentos em tecnologia e segurança pública",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-07-02T00:16:05.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "error",
-      "reasons": [
-        "missing-image-url",
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "mucao-elogia-o-acre-apos-show-na-expoacre-jurua-e-destaca-humor-como-aliado-da-saude-mental",
-      "title": "Mução elogia o Acre após show na Expoacre Juruá e destaca humor como aliado da saúde mental",
-      "category": "Saude",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-02T04:38:42.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/Mucao-Expoacre-2026-2-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "horoscopo-2026-confira-a-previsao-de-hoje-2-7-para-seu-signo",
-      "title": "Horóscopo 2026: confira a previsão de hoje (2/7) para seu signo",
-      "category": "Saude",
-      "sourceName": "Estado do Acre",
-      "publishedAt": "2026-07-02T05:16:06.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/311168-horoscopo-2026-confira-a-previsao-de-hoje-2-7-para-seu-signo.png",
+      "imageUrl": "https://static.wixstatic.com/media/0204e8_8ef0d4150b5e4c308d81dcb972cc791c~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_8ef0d4150b5e4c308d81dcb972cc791c~mv2.png",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/png",
@@ -2264,19 +862,388 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "projeto-de-leoncio-que-altera-regras-para-funcionamento-de-estabelecimentos-que-vendem-bebidas-a",
+      "title": "Projeto de Leôncio que altera regras para funcionamento de estabelecimentos que vendem bebidas alcoólicas é aprovado na Câmara",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T03:32:22.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/4a82ad21-2ecd-483f-9ff6-28ccf42efa51.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "camara-de-rio-branco-aprova-ldo-de-r-2-12-bilhoes-para-2027-antes-do-recesso-parlamentar",
+      "title": "Câmara de Rio Branco aprova LDO de R$ 2,12 bilhões para 2027 antes do recesso parlamentar",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T02:26:37.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/41e91784-451d-4222-9f4a-861c9317b154-scaled.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
       "reasons": []
     },
     {
-      "slug": "medico-explica-estrategia-de-cristiano-ronaldo-de-cuspir-bebidas",
-      "title": "Médico explica estratégia de Cristiano Ronaldo de cuspir bebidas",
+      "slug": "camara-de-rio-branco-aprova-prestacao-de-contas-de-bocalom-referente-a-2021",
+      "title": "Câmara de Rio Branco aprova prestação de contas de Bocalom referente a 2021",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T02:04:13.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/03/bocalomcamara.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "joabe-lira-faz-balanco-do-semestre-destaca-aprovacao-da-ldo-e-do-plano-diretor-e-confirma-retorn",
+      "title": "Joabe Lira faz balanço do semestre, destaca aprovação da LDO e do Plano Diretor e confirma retorno dos trabalhos em agosto",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T02:00:57.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/e4471b41-ab7d-4bda-b233-0f3e30f51f2d.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mpac-converte-investigacao-sobre-obra-da-camara-de-tarauaca-em-inquerito-civil-e-aguarda-laudo-t",
+      "title": "MPAC converte investigação sobre obra da Câmara de Tarauacá em inquérito civil e aguarda laudo técnico",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T01:07:28.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/9ad35660-7b6e-4911-9bce-f207b72e0653.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "familias-atipicas-terao-prioridade-na-habitacao-municipal-apos-aprovacao-de-projeto-de-matheus-p",
+      "title": "Famílias atípicas terão prioridade na habitação municipal após aprovação de projeto de Matheus Paiva",
+      "category": "Prefeitura",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-10T00:38:03.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-09-at-19.33.41.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "marilia-tavares-e-a-terceira-atracao-nacional-anunciada-para-expoxapuri",
+      "title": "Marília Tavares é a terceira atração nacional anunciada para Expoxapuri",
+      "category": "Prefeitura",
+      "sourceName": "Portal Acre",
+      "publishedAt": "2026-07-10T00:18:36.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "presidente-da-camara-de-rio-branco-faz-balanco-positivo-do-semestre-com-aprovacao-da-ldo-plano-d",
+      "title": "Presidente da Câmara de Rio Branco faz balanço positivo do semestre com aprovação da LDO, Plano Diretor e Selo Escola Segura",
+      "category": "Prefeitura",
+      "sourceName": "O Alto Acre",
+      "publishedAt": "2026-07-10T01:19:46.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "xapuri-mancio-lima-e-porto-walter-tem-incidencia-alta-de-dengue-aponta-boletim-da-sesacre",
+      "title": "Xapuri, Mâncio Lima e Porto Walter têm incidência alta de dengue, aponta boletim da Sesacre",
+      "category": "Prefeitura",
+      "sourceName": "O Alto Acre",
+      "publishedAt": "2026-07-10T00:47:49.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/news-batelao-local.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "associacao-de-homossexuais-do-acre-alerta-sobre-acesso-gratuito-a-prep-e-pep-pelo-sus",
+      "title": "Associação de Homossexuais do Acre alerta sobre acesso gratuito à PrEP e PEP pelo SUS",
+      "category": "Saude",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T03:36:22.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/truvada-prep-1140x570-jpg.avif",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/avif",
+      "dimensionsFromUrl": {
+        "width": 1140,
+        "height": 570,
+        "ratio": 2,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "com-menos-de-mil-casos-confirmados-acre-registra-queda-de-mais-de-80-na-dengue-em-2026",
+      "title": "Com menos de mil casos confirmados, Acre registra queda de mais de 80% na dengue em 2026",
+      "category": "Saude",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T01:03:41.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/6a2766bb-aedes-aegypti.-zika-dengue-chikungunya-1140x570-1.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": {
+        "width": 1140,
+        "height": 570,
+        "ratio": 2,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "pedro-pascoal-critica-suposta-paralisacao-de-servicos-na-saude-do-estado-por-falta-de-pagamento-",
+      "title": "Pedro Pascoal critica suposta paralisação de serviços na saúde do estado por falta de pagamento; Sesacre nega suspensão",
+      "category": "Saude",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T00:57:03.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/sesacre-e-pedro-pascoal-1536x768-2.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1536,
+        "height": 768,
+        "ratio": 2,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "bocalom-defende-regionalizacao-para-reduzir-filas-na-saude",
+      "title": "Bocalom defende regionalização para reduzir filas na saúde",
+      "category": "Saude",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.376Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "socorro-neri-propoe-adiar-cobranca-do-fies-para-medicos-residentes",
+      "title": "Socorro Neri propõe adiar cobrança do Fies para médicos residentes",
+      "category": "Saude",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.370Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "heroi-acreano-diz-alan-rick-ao-visitar-edinaldo-muniz-em-hospital",
+      "title": "“Herói acreano”, diz Alan Rick ao visitar Edinaldo Muniz em hospital",
+      "category": "Saude",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.353Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/trend-theo-acreano.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "gripe-atraso-na-ampliacao-da-vacina-e-de-51-dias-em-relacao-a-2025",
+      "title": "Gripe: atraso na ampliação da vacina é de 51 dias em relação a 2025",
       "category": "Saude",
       "sourceName": "Estado do Acre",
-      "publishedAt": "2026-07-02T05:16:01.000Z",
+      "publishedAt": "2026-07-10T07:16:05.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/311178-medico-explica-estrategia-de-cristiano-ronaldo-de-cuspir-bebidas.jpg",
+      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/315720-gripe-atraso-na-ampliacao-da-vacina-e-de-51-dias-em-relacao-a-2025.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
@@ -2294,149 +1261,173 @@
       ]
     },
     {
-      "slug": "acre-ganha-estacao-de-alta-precisao-para-monitorar-fumaca-das-queimadas-e-qualidade-do-ar",
-      "title": "Acre ganha estação de alta precisão para monitorar fumaça das queimadas e qualidade do ar",
+      "slug": "nova-combinacao-reduz-em-60-risco-de-volta-do-cancer-de-bexiga",
+      "title": "Nova combinação reduz em 60% risco de volta do câncer de bexiga",
       "category": "Saude",
-      "sourceName": "Acre Agora",
-      "publishedAt": "2026-07-02T05:53:09.000Z",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-07-10T06:43:06.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/09/imunoterapia-contra-o-cancer.png?w=200",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/png",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
-      "level": "error",
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "os-perigos-de-usar-redes-sociais-e-ia-para-decisoes-de-saude",
+      "title": "Os perigos de usar redes sociais e IA para decisões de saúde",
+      "category": "Saude",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-07-10T06:33:26.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/solidao-redes-socias.png?w=200",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/png",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "vacinas-contra-covid-19-serao-atualizadas-contra-novas-variantes",
+      "title": "Vacinas contra covid-19 serão atualizadas contra novas variantes",
+      "category": "Saude",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-10T00:30:14.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/vacinacao_drive_thru_universidade_estadual_do_rio_de_janeiro_uerj_tnrgo_abr_2502214590_0.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico",
+      "title": "Estudantes da Ufac anunciam greve e convocam ato por transporte público",
+      "category": "Educacao",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.347Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
       "reasons": [
-        "missing-image-url"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "ieptec-apresenta-tecnologia-e-cursos-profissionalizantes-durante-a-expoacre-jurua-2026",
-      "title": "IEPTEC apresenta tecnologia e cursos profissionalizantes durante a Expoacre Juruá 2026",
+      "slug": "escola-sao-jose-realiza-culminancia-do-projeto-amazonia-viva-de-conscientizacao-dos-estudantes-p",
+      "title": "Escola São José realiza culminância do Projeto “Amazônia Viva” de conscientização dos estudantes para os cuidados com a natureza",
       "category": "Educacao",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T08:31:51.000Z",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-07-10T03:50:10.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2681.jpeg",
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageContentType": "image/svg+xml",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "estande-do-detran-atrai-familias-e-reforca-educacao-no-transito-durante-a-expoacre-jurua",
-      "title": "Estande do Detran atrai famílias e reforça educação no trânsito durante a Expoacre Juruá",
-      "category": "Educacao",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-02T08:27:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2679.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "alunos-da-ec-209-sul-visitam-exposicao-constelacoes-contemporaneas",
-      "title": "Alunos da EC 209 Sul visitam exposição Constelações Contemporâneas",
-      "category": "Educacao",
-      "sourceName": "Estado do Acre",
-      "publishedAt": "2026-07-02T05:16:05.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/311170-alunos-da-ec-209-sul-visitam-exposicao-constelacoes-contemporaneas.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "viveiro-da-floresta-leva-conscientizacao-ambiental-e-cerca-de-3-mil-mudas-para-a-expoacre-jurua",
-      "title": "Viveiro da Floresta leva conscientização ambiental e cerca de 3 mil mudas para a Expoacre Juruá",
-      "category": "Educacao",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-07-02T02:48:32.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "",
-      "imageStatus": "missing",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "error",
       "reasons": [
-        "missing-image-url"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "prova-de-laco-e-show-da-banda-morada-movimentam-a-expoacre-jurua-nesta-quarta-feira",
-      "title": "Prova de laço e show da Banda Morada movimentam a Expoacre Juruá nesta quarta-feira",
-      "category": "Esporte",
+      "slug": "cp-n-006-2026-aviso-de-licitacao",
+      "title": "CP N°006/2026 - Aviso de Licitação",
+      "category": "Educacao",
+      "sourceName": "Prefeitura de Rodrigues Alves",
+      "publishedAt": "2026-07-10T06:03:48.866Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://static.wixstatic.com/media/0204e8_64de6220fa78469b9be3790e50a581f6~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_64de6220fa78469b9be3790e50a581f6~mv2.png",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/png",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "estudantes-da-ufac-aprovam-greve-apos-assembleia-e-cobram-solucao-para-crise-no-transporte-colet",
+      "title": "Estudantes da Ufac aprovam greve após assembleia e cobram solução para crise no transporte coletivo de Rio Branco",
+      "category": "Educacao",
       "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-02T05:21:42.000Z",
+      "publishedAt": "2026-07-10T07:10:58.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/IMG_3906.jpeg",
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/A0CA1040-8246-4480-B91B-C93CA12698B2.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
-        "hasGroupSignal": false,
+        "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "desde-o-titulo-em-2010-espanha-nao-sabe-o-que-e-vencer-em-mata-mata",
-      "title": "Desde o título em 2010, Espanha não sabe o que é vencer em mata-mata",
-      "category": "Esporte",
+      "slug": "prouni-2026-inscricoes-terminam-nesta-sexta-feira-10-7",
+      "title": "Prouni 2026: inscrições terminam nesta sexta-feira (10/7)",
+      "category": "Educacao",
       "sourceName": "Estado do Acre",
-      "publishedAt": "2026-07-02T05:15:59.000Z",
+      "publishedAt": "2026-07-10T06:16:01.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/311182-desde-o-titulo-em-2010-espanha-nao-sabe-o-que-e-vencer-em-mata-mata.jpg",
+      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/315716-prouni-2026-inscricoes-terminam-nesta-sexta-feira-10-7.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
@@ -2452,13 +1443,183 @@
       "reasons": []
     },
     {
-      "slug": "clube-ingles-demite-tecnico-ex-corinthians-e-flamengo-de-maneira-inusitada",
-      "title": "Clube inglês demite técnico ex-Corinthians e Flamengo de maneira inusitada",
+      "slug": "contrato-de-r-98-milhoes-da-merenda-escolar-no-df-e-investigado",
+      "title": "Contrato de R$ 98 milhões da merenda escolar no DF é investigado",
+      "category": "Educacao",
+      "sourceName": "Estado do Acre",
+      "publishedAt": "2026-07-10T05:16:24.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/315682-contrato-de-r-98-milhoes-da-merenda-escolar-no-df-e-investigado.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "alunos-do-paranoa-prestigiam-a-mostra-constelacoes-contemporaneas",
+      "title": "Alunos do Paranoá prestigiam a mostra Constelações Contemporâneas",
+      "category": "Educacao",
+      "sourceName": "Estado do Acre",
+      "publishedAt": "2026-07-10T05:16:19.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://estadodoacre.com.br/wp-content/uploads/2026/07/315692-alunos-do-paranoa-prestigiam-a-mostra-constelacoes-contemporaneas.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10",
+      "title": "Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10)",
+      "category": "Educacao",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-07-10T08:15:44.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/female-employee-holding-mobile-device.webp?w=200",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "mpf-acompanha-retomada-de-obras-de-educacao-paralisadas-em-tarauaca-e-bujari-apos-novos-repasses",
+      "title": "MPF acompanha retomada de obras de educação paralisadas em Tarauacá e Bujari após novos repasses federais",
+      "category": "Educacao",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-10T02:37:26.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/06/MPFACRE_01_large-1132x670.jpg-1000x600-1.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": {
+        "width": 1132,
+        "height": 670,
+        "ratio": 1.69,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "dce-da-ufac-convoca-greve-estudantil-em-meio-a-crise-no-transporte-publico",
+      "title": "DCE da Ufac convoca greve estudantil em meio à crise no transporte público",
+      "category": "Educacao",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-10T02:06:16.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/976x695_IMAGEM-DESTACADA-2026-02-05T181846.104.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": {
+        "width": 976,
+        "height": 695,
+        "ratio": 1.404,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "sport-x-botafogo-sp-horario-e-onde-assistir-ao-brasileirao-serie-b",
+      "title": "Sport x Botafogo-SP: horário e onde assistir ao Brasileirão Série B",
       "category": "Esporte",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-02T03:15:29.000Z",
+      "publishedAt": "2026-07-10T07:00:33.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/jesse-lingard-liberado-corinthians-e1782848309277.webp?w=200",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/03/bandeira-coi.jpeg?w=200",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "volei-brasil-enfrenta-polonia-por-lideranca-da-liga-das-nacoes",
+      "title": "Vôlei: Brasil enfrenta Polônia por liderança da Liga das Nações",
+      "category": "Esporte",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-07-10T02:31:48.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/brasil-vence-japao-vnl-e1783642437112.webp?w=200",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mbappe-deixa-amizade-com-hakimi-de-lado-e-diz-aqui-nao-tem-sentimento",
+      "title": "Mbappé deixa amizade com Hakimi de lado e diz: “Aqui não tem sentimento”",
+      "category": "Esporte",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-07-10T01:51:42.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/AGF20260705093-e1783295912942.jpg?w=200",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
@@ -2474,13 +1635,13 @@
       "reasons": []
     },
     {
-      "slug": "elenco-do-atletico-comeca-preparacao-para-o-estadual-no-dia-13",
-      "title": "Elenco do Atlético começa preparação para o Estadual no dia 13",
+      "slug": "independencia-bate-o-sao-francisco-e-e-finalista-do-estadual-sub-20",
+      "title": "Independência bate o São Francisco e é finalista do Estadual Sub-20",
       "category": "Esporte",
       "sourceName": "ac24horas",
-      "publishedAt": "2026-07-02T02:48:10.000Z",
+      "publishedAt": "2026-07-10T01:42:02.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-01T214722.746.jpg",
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-09T204053.675.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
@@ -2493,13 +1654,423 @@
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "galvez-vence-e-o-santa-cruz-vai-disputar-o-titulo-do-estadual-sub-20",
+      "title": "Galvez vence e o Santa Cruz vai disputar o título do Estadual Sub-20",
+      "category": "Esporte",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-10T00:33:14.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-09-at-18.51.29-e1783643512461-1200x814.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 814,
+        "ratio": 1.474,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "wendell-barbosa-luta-o-rio-winter-internacional-open-no-rio-de-janeiro",
+      "title": "Wendell Barbosa luta o Rio Winter Internacional Open no Rio de Janeiro",
+      "category": "Esporte",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-07-10T00:27:22.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-09T192641.667.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 976,
+        "height": 695,
+        "ratio": 1.404,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "hungria-hip-hop-confirma-show-em-rio-branco-para-setembro-saiba-mais",
+      "title": "Hungria Hip Hop confirma show em Rio Branco para setembro; saiba mais",
+      "category": "Cultura",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.355Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "projeto-apoiado-com-penas-pecuniarias-entrega-50-enxovais-para-bebes-em-sena-madureira",
+      "title": "Projeto apoiado com penas pecuniárias entrega 50 enxovais para bebês em Sena Madureira",
+      "category": "Cultura",
+      "sourceName": "Acre in Foco",
+      "publishedAt": "2026-07-10T03:11:30.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-13.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "vale-enganar-para-engajar-especialistas-dizem-que-publico-esta-cansado-de-mentira-nas-redes",
+      "title": "Vale enganar para engajar? Especialistas dizem que público está ‘cansado’ de mentira nas redes",
+      "category": "Cultura",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-07-10T07:00:11.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://s2-g1.glbimg.com/0CCBbp7pvP0M0E6pNDxORg3yji0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/X/b/iczvmQRYiMF9MwPTNwAA/fotos-g1-1920-x-1080-px-2026-06-30t225237.298.png",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "vereador-de-jordao-e-preso-em-flagrante-suspeito-de-agredir-a-esposa-no-interior-do-acre",
+      "title": "Vereador de Jordão é preso em flagrante suspeito de agredir a esposa no interior do Acre",
+      "category": "Politica",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-07-10T01:06:09.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/VEREADOR-jpg.avif",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/avif",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governo-do-acre-lanca-processo-seletivo-para-estagiarios-de-nivel-superior",
+      "title": "Governo do Acre lança processo seletivo para estagiários de nível superior",
+      "category": "Politica",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.369Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "aleac-deixa-votacao-da-ldo-para-depois-do-recesso-parlamentar",
+      "title": "Aleac deixa votação da LDO para depois do recesso parlamentar",
+      "category": "Politica",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.366Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "aleac-corrige-distorcoes-de-decadas-e-fortalece-direitos-dos-servidores",
+      "title": "Aleac corrige distorções de décadas e fortalece direitos dos servidores",
+      "category": "Politica",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-07-10T06:03:48.358Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/buzz-cruzeiro-01.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "supremo-tribunal-federal-da-60-dias-para-uniao-notificar-donos-de-fazendas-que-estao-dentro-de-t",
+      "title": "Supremo Tribunal Federal dá 60 dias para União notificar donos de fazendas que estão dentro de terras indígenas no Acre",
+      "category": "Politica",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-07-10T03:33:59.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/trend-theo-acreano.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "alan-rick-visita-edinaldo-muniz-e-destaca-recuperacao-apos-desabamento-de-ponte-em-sena-madureir",
+      "title": "Alan Rick visita Edinaldo Muniz e destaca recuperação após desabamento de ponte em Sena Madureira",
+      "category": "Politica",
+      "sourceName": "Integracao Net",
+      "publishedAt": "2026-07-10T00:00:12.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/trend-theo-acreano.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "o-que-explica-a-bukelizacao-da-america-latina",
+      "title": "O que explica a “bukelização” da América Latina",
+      "category": "Politica",
+      "sourceName": "Acre in Foco",
+      "publishedAt": "2026-07-10T03:46:10.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/06/br-231.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "agradeca-ao-alcolumbre-mp-do-frete-trava-no-senado-e-reacende-ameaca-de-greve-dos-caminhoneiros",
+      "title": "Agradeça ao Alcolumbre: MP do Frete trava no Senado e reacende ameaça de greve dos caminhoneiros",
+      "category": "Politica",
+      "sourceName": "Acre in Foco",
+      "publishedAt": "2026-07-10T03:30:56.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-94.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "alan-rick-visita-juiz-aposentado-edinaldo-muniz-e-destaca-forca-durante-recuperacao",
+      "title": "Alan Rick visita juiz aposentado Edinaldo Muniz e destaca força durante recuperação",
+      "category": "Politica",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T05:00:52.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/4C992C96-DC8B-4EBF-BC03-A363AD2B3A8E.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "socorro-neri-apresenta-emendas-para-adiar-pagamento-do-fies-na-residencia-medica-e-garantir-parc",
+      "title": "Socorro Neri apresenta emendas para adiar pagamento do Fies na residência médica e garantir parcelas conforme a renda",
+      "category": "Politica",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T02:47:33.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/dc655e85-9fa3-48a5-85d4-067cd64c73a7.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "apos-recesso-aleac-deve-retomar-votacao-da-ldo-de-2027-entre-as-primeiras-pautas",
+      "title": "Após recesso, Aleac deve retomar votação da LDO de 2027 entre as primeiras pautas",
+      "category": "Politica",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-07-10T01:21:21.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/03/deputados.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "alan-rick-visita-edinaldo-muniz-em-hospital-de-sao-paulo-vitima-do-desabamento-da-ponte-de-sena-",
+      "title": "Alan Rick visita Edinaldo Muniz em hospital de São Paulo; vítima do desabamento da ponte de Sena Madureira já passou por 8 cirurgias",
+      "category": "Politica",
+      "sourceName": "Portal Acre",
+      "publishedAt": "2026-07-10T00:23:37.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/trend-theo-acreano.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/svg+xml",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
       ]
     }
   ]
