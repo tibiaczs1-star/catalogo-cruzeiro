@@ -1,5 +1,424 @@
 [
   {
+    "id": "manual-czs-social-moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
+    "slug": "moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
+    "title": "Moradores fecham Ramal dos Esquecidos em Rodrigues Alves",
+    "eyebrow": "Vale do Juruá",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:31:00.000Z",
+    "category": "Juruá",
+    "categoryKey": "jurua",
+    "previewClass": "thumb-jurua",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://www.instagram.com/ac24horas/reel/Danoa0wuApF/",
+    "sourceLabel": "ac24horas",
+    "lede": "Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção.",
+    "summary": "Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção.",
+    "analysis": "A mobilização expõe um problema direto de mobilidade rural e acesso a serviços básicos no Vale do Juruá.",
+    "highlights": [
+      "O bloqueio ocorreu na zona rural de Rodrigues Alves.",
+      "Moradores cobram manutenção e uma resposta oficial para a estrada.",
+      "A prefeitura informou que o prefeito foi ao local conversar com os manifestantes."
+    ],
+    "development": [
+      "Moradores da comunidade Foz do Paraná fecharam o Ramal dos Esquecidos para cobrar a recuperação da via.",
+      "Segundo os manifestantes, a precariedade afeta o transporte escolar, o acesso a atendimentos de saúde e o escoamento da produção agrícola.",
+      "A prefeitura informou que o prefeito foi ao local conversar com o grupo. Até a última atualização da fonte, não havia cronograma de obras divulgado."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-ramal-rodrigues-alves-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-ramal-rodrigues-alves-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-ramal-rodrigues-alves-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ac24horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1100,
+    "editorialPriority": "jurua-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://www.instagram.com/ac24horas/reel/Danoa0wuApF/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Moradores fecham Ramal dos Esquecidos em Rodrigues Alves. Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção. Fonte: ac24horas.",
+    "audioNarrationTranscript": "Moradores fecham Ramal dos Esquecidos em Rodrigues Alves. Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção. Fonte: ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Moradores fecham Ramal dos Esquecidos em Rodrigues Alves. Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção. Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Estrada de terra do Ramal dos Esquecidos durante protesto em Rodrigues Alves",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 5,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "Moradores da comunidade Foz do Paraná fecharam o Ramal dos Esquecidos para cobrar a recuperação da via.",
+      "Segundo os manifestantes, a precariedade afeta o transporte escolar, o acesso a atendimentos de saúde e o escoamento da produção agrícola.",
+      "A prefeitura informou que o prefeito foi ao local conversar com o grupo. Até a última atualização da fonte, não havia cronograma de obras divulgado."
+    ]
+  },
+  {
+    "id": "manual-czs-social-piracema-movimenta-porto-sena-madureira-20260713",
+    "slug": "piracema-movimenta-porto-sena-madureira-20260713",
+    "title": "Piracema movimenta o Porto de Sena Madureira",
+    "eyebrow": "Rio Purus",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:25:00.000Z",
+    "category": "Acre",
+    "categoryKey": "acre",
+    "previewClass": "thumb-rio",
+    "sourceName": "ContilNet Notícias",
+    "sourceUrl": "https://www.instagram.com/contilnetnoticias/reel/DarFUdQJsJh/",
+    "sourceLabel": "ContilNet Notícias",
+    "lede": "Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira.",
+    "summary": "Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "A chegada da piracema ao Rio Purus movimentou o Porto de Sena Madureira.",
+      "As imagens mostram pescadores capturando mandi e a grande quantidade de peixes nas margens do rio.",
+      "O registro foi publicado pela ContilNet Notícias e ganhou repercussão nas redes sociais."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-piracema-sena-madureira-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-piracema-sena-madureira-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-piracema-sena-madureira-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ContilNet Notícias",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1060,
+    "editorialPriority": "acre-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ContilNet Notícias",
+        "url": "https://www.instagram.com/contilnetnoticias/reel/DarFUdQJsJh/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Piracema movimenta o Porto de Sena Madureira. Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira. Fonte: ContilNet Notícias.",
+    "audioNarrationTranscript": "Piracema movimenta o Porto de Sena Madureira. Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira. Fonte: ContilNet Notícias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Piracema movimenta o Porto de Sena Madureira. Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira. Fonte: ContilNet Notícias.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Pescadores e peixes durante a piracema no Porto de Sena Madureira",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 4,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "A chegada da piracema ao Rio Purus movimentou o Porto de Sena Madureira.",
+      "As imagens mostram pescadores capturando mandi e a grande quantidade de peixes nas margens do rio.",
+      "O registro foi publicado pela ContilNet Notícias e ganhou repercussão nas redes sociais."
+    ]
+  },
+  {
+    "id": "manual-czs-social-ambulancia-atinge-boi-br-364-tarauaca-20260713",
+    "slug": "ambulancia-atinge-boi-br-364-tarauaca-20260713",
+    "title": "Ambulância atinge boi na BR-364 em Tarauacá",
+    "eyebrow": "BR-364",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:18:00.000Z",
+    "category": "Segurança",
+    "categoryKey": "seguranca",
+    "previewClass": "thumb-transito",
+    "sourceName": "Acre Diário",
+    "sourceUrl": "https://www.instagram.com/acre.diario/reel/DarBuJvt-7h/",
+    "sourceLabel": "Acre Diário",
+    "lede": "Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia.",
+    "summary": "Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "Uma ambulância atingiu um boi em um trecho da BR-364, em Tarauacá.",
+      "O registro mostra o veículo após a colisão e chama atenção para o risco de animais soltos na estrada durante a noite.",
+      "Informações oficiais sobre feridos não haviam sido confirmadas pela fonte até a publicação."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-ambulancia-boi-tarauaca-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-ambulancia-boi-tarauaca-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-ambulancia-boi-tarauaca-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por Acre Diário",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1055,
+    "editorialPriority": "acre-transito-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "Acre Diário",
+        "url": "https://www.instagram.com/acre.diario/reel/DarBuJvt-7h/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Ambulância atinge boi na BR-364 em Tarauacá. Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia. Fonte: Acre Diário.",
+    "audioNarrationTranscript": "Ambulância atinge boi na BR-364 em Tarauacá. Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia. Fonte: Acre Diário.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Ambulância atinge boi na BR-364 em Tarauacá. Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia. Fonte: Acre Diário.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Ambulância parada à noite após colisão com boi na BR-364 em Tarauacá",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 4,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "Uma ambulância atingiu um boi em um trecho da BR-364, em Tarauacá.",
+      "O registro mostra o veículo após a colisão e chama atenção para o risco de animais soltos na estrada durante a noite.",
+      "Informações oficiais sobre feridos não haviam sido confirmadas pela fonte até a publicação."
+    ]
+  },
+  {
+    "id": "manual-czs-social-pescador-carrega-pirarara-gigante-rio-madeira-20260713",
+    "slug": "pescador-carrega-pirarara-gigante-rio-madeira-20260713",
+    "title": "Pescador carrega pirarara gigante nas costas no Rio Madeira",
+    "eyebrow": "Amazônia",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:04:00.000Z",
+    "category": "Amazônia",
+    "categoryKey": "amazonia",
+    "previewClass": "thumb-rio",
+    "sourceName": "ContilNet Notícias",
+    "sourceUrl": "https://contilnetnoticias.com.br/voce-viu/pescador-carrega-pirarara-gigante-nas-costas-em-barranco-do-rio-madeira/",
+    "sourceLabel": "ContilNet Notícias",
+    "lede": "Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia.",
+    "summary": "Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "O registro mostra um pescador transportando uma pirarara de grandes proporções às margens do Rio Madeira, em Rondônia.",
+      "Conhecida como tubarão da Amazônia, a espécie pode ultrapassar 1,3 metro de comprimento e pesar mais de 50 quilos.",
+      "O tamanho do peixe e o esforço para subir o barranco chamaram atenção nas redes sociais."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-pirarara-rio-madeira-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-pirarara-rio-madeira-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-pirarara-rio-madeira-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ContilNet Notícias",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1045,
+    "editorialPriority": "amazonia-viral-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ContilNet Notícias",
+        "url": "https://contilnetnoticias.com.br/voce-viu/pescador-carrega-pirarara-gigante-nas-costas-em-barranco-do-rio-madeira/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Pescador carrega pirarara gigante nas costas no Rio Madeira. Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia. Fonte: ContilNet Notícias.",
+    "audioNarrationTranscript": "Pescador carrega pirarara gigante nas costas no Rio Madeira. Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia. Fonte: ContilNet Notícias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Pescador carrega pirarara gigante nas costas no Rio Madeira. Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia. Fonte: ContilNet Notícias.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Pescador carregando uma pirarara gigante nas costas às margens do Rio Madeira",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 3,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "O registro mostra um pescador transportando uma pirarara de grandes proporções às margens do Rio Madeira, em Rondônia.",
+      "Conhecida como tubarão da Amazônia, a espécie pode ultrapassar 1,3 metro de comprimento e pesar mais de 50 quilos.",
+      "O tamanho do peixe e o esforço para subir o barranco chamaram atenção nas redes sociais."
+    ]
+  },
+  {
+    "id": "manual-czs-social-colisao-longa-fila-estrada-dias-martins-20260713",
+    "slug": "colisao-longa-fila-estrada-dias-martins-20260713",
+    "title": "Colisão causa longa fila na Estrada Dias Martins",
+    "eyebrow": "Trânsito",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T14:57:00.000Z",
+    "category": "Trânsito",
+    "categoryKey": "transito",
+    "previewClass": "thumb-transito",
+    "sourceName": "ContilNet Notícias",
+    "sourceUrl": "https://contilnetnoticias.com.br/policia/acidente-na-descida-de-viaduto-provoca-lentidao-de-veiculos-em-rio-branco/",
+    "sourceLabel": "ContilNet Notícias",
+    "lede": "Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11).",
+    "summary": "Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11).",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "Uma colisão entre um automóvel e uma motocicleta causou lentidão na Estrada Dias Martins, em Rio Branco.",
+      "O acidente ocorreu na descida do viaduto e formou uma extensa fila de veículos no início da noite de sábado (11).",
+      "Até a última atualização da fonte, não havia confirmação oficial sobre a dinâmica do acidente nem sobre o estado de saúde dos envolvidos."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-colisao-dias-martins-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-colisao-dias-martins-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-colisao-dias-martins-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ContilNet Notícias",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1040,
+    "editorialPriority": "acre-transito-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ContilNet Notícias",
+        "url": "https://contilnetnoticias.com.br/policia/acidente-na-descida-de-viaduto-provoca-lentidao-de-veiculos-em-rio-branco/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Colisão causa longa fila na Estrada Dias Martins. Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11). Fonte: ContilNet Notícias.",
+    "audioNarrationTranscript": "Colisão causa longa fila na Estrada Dias Martins. Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11). Fonte: ContilNet Notícias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Colisão causa longa fila na Estrada Dias Martins. Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11). Fonte: ContilNet Notícias.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Fila de veículos após colisão na Estrada Dias Martins em Rio Branco",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 3,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "Uma colisão entre um automóvel e uma motocicleta causou lentidão na Estrada Dias Martins, em Rio Branco.",
+      "O acidente ocorreu na descida do viaduto e formou uma extensa fila de veículos no início da noite de sábado (11).",
+      "Até a última atualização da fonte, não havia confirmação oficial sobre a dinâmica do acidente nem sobre o estado de saúde dos envolvidos."
+    ]
+  },
+  {
     "id": "https://juruaonline.com.br/inmet-emite-alerta-amarelo-para-chuvas-intensas-em-cruzeiro-do-sul-e-regiao-do-jurua/",
     "slug": "inmet-emite-alerta-amarelo-para-chuvas-intensas-em-cruzeiro-do-sul-e-regiao-do-jurua",
     "title": "INMET emite alerta amarelo para chuvas intensas em Cruzeiro do Sul e região do Juruá",
@@ -19504,73 +19923,6 @@
     ]
   },
   {
-    "id": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/",
-    "slug": "moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves",
-    "title": "Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves",
-    "eyebrow": "Cotidiano",
-    "date": "10 de jul de 2026",
-    "publishedAt": "2026-07-11T00:28:28.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano moradores bloqueiam ramal dos esquecidos e cobram solucao para estrada em rodrigues alves moradores do ramal dos esquecidos na zona rural de rodrigues alves bloquearam a via nesta sexta feira 10 em protesto contra a falta de manutencao da estrada",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/",
-    "sourceLabel": "Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves",
-    "lede": "Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada.",
-    "summary": "Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_3338.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_3338.jpeg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_3338.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada. A informação vem de Juruá Online.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada. A informação vem de Juruá Online.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves. Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada. Fonte: Jurua Online.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Jurua Online publicou em 10 de jul de 2026: Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
     "id": "https://juruaonline.com.br/operacao-reforca-seguranca-apos-invasao-e-ameacas-a-liderancas-ashaninka-em-marechal-thaumaturgo/",
     "slug": "operacao-reforca-seguranca-apos-invasao-e-ameacas-a-liderancas-ashaninka-em-marechal-thaumaturgo",
     "title": "Operação reforça segurança após invasão e ameaças a lideranças Ashaninka em Marechal Thaumaturgo",
@@ -36469,276 +36821,6 @@
     },
     "body": [
       "Agencia Acre publicou em 03 de jul de 2026: Segurança é reforçada durante Expoacre Juruá e garante noites de diversão para visitantes.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
-    "id": "https://agencia.ac.gov.br/expoacre-jurua-movimenta-estande-institucional-com-turismo-e-economia-solidaria/",
-    "slug": "expoacre-jurua-movimenta-estande-institucional-com-turismo-e-economia-solidaria",
-    "title": "Expoacre Juruá movimenta estande institucional com turismo e economia solidária",
-    "eyebrow": "Prefeitura",
-    "date": "03 de jul de 2026",
-    "publishedAt": "2026-07-04T02:20:20.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/expoacre-jurua-movimenta-estande-institucional-com-turismo-e-economia-solidaria/",
-    "sourceLabel": "Expoacre Juruá movimenta estande institucional com turismo e economia solidária",
-    "lede": "A Secretaria de Estado de Turismo e Empreendedorismo (Sete) participa da Expoacre Juruá 2026, realizada entre os dias 30 de junho e 5 de julho, em Cruzeiro do Sul, com um estande dedicado à promoção dos atrativos turísticos do Acre, do artesanato regional e...",
-    "summary": "A Secretaria de Estado de Turismo e Empreendedorismo (Sete) participa da Expoacre Juruá 2026, realizada entre os dias 30 de junho e 5 de julho, em Cruzeiro do Sul, com um estande dedicado à promoção dos atrativos turísticos do Acre, do artesanato regional e...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/expoacre-jurua-movimenta-estande-institucional-com-turismo-e-economia-solidaria/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/expoacre-jurua-movimenta-estande-institucional-com-turismo-e-economia-solidaria/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "expoacre-jurua-movimenta-estande-institucional-com-turismo-e-economia-solidaria"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Expoacre Juruá movimenta estande institucional com turismo e economia solidária A Secretaria de Estado de Turismo e Empreendedorismo (Sete) participa da Expoacre Juruá 2026, realizada entre os dias 30 de junho e 5 de julho, em Cruzeiro do Sul, com um estande dedicado à promoção dos atrativos turísticos do Acre, do artesanato regional e... A informação vem de Agencia Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Expoacre Juruá movimenta estande institucional com turismo e economia solidária A Secretaria de Estado de Turismo e Empreendedorismo (Sete) participa da Expoacre Juruá 2026, realizada entre os dias 30 de junho e 5 de julho, em Cruzeiro do Sul, com um estande dedicado à promoção dos atrativos turísticos do Acre, do artesanato regional e... A informação vem de Agencia Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Expoacre Juruá movimenta estande institucional com turismo e economia solidária. A Secretaria de Estado de Turismo e Empreendedorismo (Sete) participa da Expoacre Juruá 2026, realizada entre os dias 30 de junho e 5 de julho, em Cruzeiro do Sul, com um estande dedicado à promoção dos atrativos turísticos do Acre, do... Fonte: Agencia Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Agencia Acre publicou em 03 de jul de 2026: Expoacre Juruá movimenta estande institucional com turismo e economia solidária.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
-    "id": "https://www.acre.com.br/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-universidade-federal-do-acre/",
-    "slug": "ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-universidade-federal-do-acre",
-    "title": "Ufac lança projeto de implantação de unidade de produção rural — Universidade Federal do Acre",
-    "eyebrow": "Cultura",
-    "date": "03 de jul de 2026",
-    "publishedAt": "2026-07-03T23:05:11.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "Acre Noticias",
-    "sourceUrl": "https://www.acre.com.br/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-universidade-federal-do-acre/",
-    "sourceLabel": "Ufac lança projeto de implantação de unidade de produção rural — Universidade Federal do Acre",
-    "lede": "A Pró-Reitoria de Extensão e Cultura (Proex) da Ufac realizou o lançamento do projeto “Extensão Universitária: Implantação e Divulgação de Unidade de Produção Rural Integrada para a Amazônia”, o qual coordenado pela professora Marilene Santos, é viabilizado...",
-    "summary": "A Pró-Reitoria de Extensão e Cultura (Proex) da Ufac realizou o lançamento do projeto “Extensão Universitária: Implantação e Divulgação de Unidade de Produção Rural Integrada para a Amazônia”, o qual coordenado pela professora Marilene Santos, é viabilizado...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://www.ufac.br/site/noticias/2026/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-interna2.jpg",
-    "feedImageUrl": "https://www.ufac.br/site/noticias/2026/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-interna2.jpg",
-    "sourceImageUrl": "https://www.ufac.br/site/noticias/2026/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-interna2.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 810,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Acre Noticias",
-        "url": "https://www.acre.com.br/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-universidade-federal-do-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre Noticias",
-        "url": "https://www.acre.com.br/ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-universidade-federal-do-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "ufac-lanca-projeto-de-implantacao-de-unidade-de-producao-rural-universidade-federal-do-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. Ufac lança projeto de implantação de unidade de produção rural — Universidade Federal do Acre A Pró-Reitoria de Extensão e Cultura (Proex) da Ufac realizou o lançamento do projeto “Extensão Universitária: Implantação e Divulgação de Unidade de Produção Rural Integrada para a Amazônia”, o qual coordenado pela professora Marilene Santos, é viabilizado... A informação vem de Acre notícias.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. Ufac lança projeto de implantação de unidade de produção rural — Universidade Federal do Acre A Pró-Reitoria de Extensão e Cultura (Proex) da Ufac realizou o lançamento do projeto “Extensão Universitária: Implantação e Divulgação de Unidade de Produção Rural Integrada para a Amazônia”, o qual coordenado pela professora Marilene Santos, é viabilizado... A informação vem de Acre notícias.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Ufac lança projeto de implantação de unidade de produção rural — Universidade Federal do Acre. A Pró-Reitoria de Extensão e Cultura (Proex) da Ufac realizou o lançamento do projeto “Extensão Universitária: Implantação e Divulgação de Unidade de Produção Rural Integrada para a Amazônia”, o qual coordenado pela professora Marilene... Fonte: Acre Noticias.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Acre Noticias publicou em 03 de jul de 2026: Ufac lança projeto de implantação de unidade de produção rural — Universidade Federal do Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
-    "id": "https://pc.ac.gov.br/policia-civil-do-acre-inicia-implantacao-do-projeto-pc-para-fortalecer-gestao-e-aprimorar-atendimento-a-populacao/",
-    "slug": "policia-civil-do-acre-inicia-implantacao-do-projeto-pc-para-fortalecer-gestao-e-aprimorar-atendi",
-    "title": "Polícia Civil do Acre inicia implantação do Projeto PC+ para fortalecer gestão e aprimorar atendimento à população",
-    "eyebrow": "Policia",
-    "date": "03 de jul de 2026",
-    "publishedAt": "2026-07-03T14:39:20.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Policia Civil do Acre",
-    "sourceUrl": "https://pc.ac.gov.br/policia-civil-do-acre-inicia-implantacao-do-projeto-pc-para-fortalecer-gestao-e-aprimorar-atendimento-a-populacao/",
-    "sourceLabel": "Polícia Civil do Acre inicia implantação do Projeto PC+ para fortalecer gestão e aprimorar atendimento à população",
-    "lede": "A Polícia Civil do Acre (PCAC) deu início a uma nova etapa de modernização institucional com a implantação do Projeto PC+, iniciativa voltada ao fortalecimento da gestão interna e à melhoria da qualidade dos serviços prestados à população.",
-    "summary": "A Polícia Civil do Acre (PCAC) deu início a uma nova etapa de modernização institucional com a implantação do Projeto PC+, iniciativa voltada ao fortalecimento da gestão interna e à melhoria da qualidade dos serviços prestados à população.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/07/d5fe4881-61a7-4fbf-9e1f-3ab4b8062715-750x510.jpg",
-    "feedImageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/07/d5fe4881-61a7-4fbf-9e1f-3ab4b8062715-750x510.jpg",
-    "sourceImageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/07/d5fe4881-61a7-4fbf-9e1f-3ab4b8062715-750x510.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 910,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Policia Civil do Acre",
-        "url": "https://pc.ac.gov.br/policia-civil-do-acre-inicia-implantacao-do-projeto-pc-para-fortalecer-gestao-e-aprimorar-atendimento-a-populacao/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Policia Civil do Acre",
-        "url": "https://pc.ac.gov.br/policia-civil-do-acre-inicia-implantacao-do-projeto-pc-para-fortalecer-gestao-e-aprimorar-atendimento-a-populacao/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "policia-civil-do-acre-inicia-implantacao-do-projeto-pc-para-fortalecer-gestao-e-aprimorar-atendi"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia Civil do Acre inicia implantação do Projeto PC+ para fortalecer gestão e aprimorar atendimento à população A Polícia Civil do Acre (PCAC) deu início a uma nova etapa de modernização institucional com a implantação do Projeto PC+, iniciativa voltada ao fortalecimento da gestão interna e à melhoria da qualidade dos serviços prestados à população. A informação vem de polícia Civil do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia Civil do Acre inicia implantação do Projeto PC+ para fortalecer gestão e aprimorar atendimento à população A Polícia Civil do Acre (PCAC) deu início a uma nova etapa de modernização institucional com a implantação do Projeto PC+, iniciativa voltada ao fortalecimento da gestão interna e à melhoria da qualidade dos serviços prestados à população. A informação vem de polícia Civil do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Polícia Civil do Acre inicia implantação do Projeto PC+ para fortalecer gestão e aprimorar atendimento à população. A Polícia Civil do Acre (PCAC) deu início a uma nova etapa de modernização institucional com a implantação do Projeto PC+, iniciativa voltada ao fortalecimento da gestão interna e à melhoria da qualidade dos serviços prestados à população. Fonte: Policia Civil do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Policia Civil do Acre publicou em 03 de jul de 2026: Polícia Civil do Acre inicia implantação do Projeto PC+ para fortalecer gestão e aprimorar atendimento à população.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
-    "id": "https://pc.ac.gov.br/policia-civil-do-acre-encerra-operacao-virtude-2026-com-mais-de-140-atendimentos-e-reforca-protecao-a-pessoa-idosa-2/",
-    "slug": "policia-civil-do-acre-encerra-operacao-virtude-2026-com-mais-de-140-atendimentos-e-reforca-prote",
-    "title": "Polícia Civil do Acre encerra Operação Virtude 2026 com mais de 140 atendimentos e reforça proteção à pessoa idosa",
-    "eyebrow": "Policia",
-    "date": "03 de jul de 2026",
-    "publishedAt": "2026-07-03T14:36:24.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Policia Civil do Acre",
-    "sourceUrl": "https://pc.ac.gov.br/policia-civil-do-acre-encerra-operacao-virtude-2026-com-mais-de-140-atendimentos-e-reforca-protecao-a-pessoa-idosa-2/",
-    "sourceLabel": "Polícia Civil do Acre encerra Operação Virtude 2026 com mais de 140 atendimentos e reforça proteção à pessoa idosa",
-    "lede": "A Polícia Civil do Acre (PCAC) apresentou o balanço final da Operação Virtude 2026, encerrada no dia 30 de junho, após duas semanas de ações intensificadas de prevenção, acolhimento e repressão à violência contra a pessoa idosa em todo o estado.",
-    "summary": "A Polícia Civil do Acre (PCAC) apresentou o balanço final da Operação Virtude 2026, encerrada no dia 30 de junho, após duas semanas de ações intensificadas de prevenção, acolhimento e repressão à violência contra a pessoa idosa em todo o estado.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/07/ebc018f6-0b18-4e9e-a151-d32fc3c4585b-750x510.jpg",
-    "feedImageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/07/ebc018f6-0b18-4e9e-a151-d32fc3c4585b-750x510.jpg",
-    "sourceImageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/07/ebc018f6-0b18-4e9e-a151-d32fc3c4585b-750x510.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 910,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Policia Civil do Acre",
-        "url": "https://pc.ac.gov.br/policia-civil-do-acre-encerra-operacao-virtude-2026-com-mais-de-140-atendimentos-e-reforca-protecao-a-pessoa-idosa-2/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Policia Civil do Acre",
-        "url": "https://pc.ac.gov.br/policia-civil-do-acre-encerra-operacao-virtude-2026-com-mais-de-140-atendimentos-e-reforca-protecao-a-pessoa-idosa-2/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "policia-civil-do-acre-encerra-operacao-virtude-2026-com-mais-de-140-atendimentos-e-reforca-prote"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia Civil do Acre encerra Operação Virtude 2026 com mais de 140 atendimentos e reforça proteção à pessoa idosa A Polícia Civil do Acre (PCAC) apresentou o balanço final da Operação Virtude 2026, encerrada no dia 30 de junho, após duas semanas de ações intensificadas de prevenção, acolhimento e repressão à violência contra a pessoa idosa em todo o estado. A informação vem de polícia Civil do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia Civil do Acre encerra Operação Virtude 2026 com mais de 140 atendimentos e reforça proteção à pessoa idosa A Polícia Civil do Acre (PCAC) apresentou o balanço final da Operação Virtude 2026, encerrada no dia 30 de junho, após duas semanas de ações intensificadas de prevenção, acolhimento e repressão à violência contra a pessoa idosa em todo o estado. A informação vem de polícia Civil do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Polícia Civil do Acre encerra Operação Virtude 2026 com mais de 140 atendimentos e reforça proteção à pessoa idosa. A Polícia Civil do Acre (PCAC) apresentou o balanço final da Operação Virtude 2026, encerrada no dia 30 de junho, após duas semanas de ações intensificadas de prevenção, acolhimento e repressão à violência contra a pessoa idosa em todo o... Fonte: Policia Civil do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Policia Civil do Acre publicou em 03 de jul de 2026: Polícia Civil do Acre encerra Operação Virtude 2026 com mais de 140 atendimentos e reforça proteção à pessoa idosa.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]

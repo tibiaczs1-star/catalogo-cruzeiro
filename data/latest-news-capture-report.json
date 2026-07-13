@@ -266,5 +266,20 @@
       "blocked": 0,
       "mode": "rss"
     }
-  ]
+  ],
+  "generatedAt": "2026-07-13T15:49:09.111Z",
+  "goal1050Sync": {
+    "at": "2026-07-13T15:49:09.111Z",
+    "instagramAccount": "@catalogo_czs_",
+    "instagramPosts": 1050,
+    "insertedOrPromoted": [
+      "moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
+      "piracema-movimenta-porto-sena-madureira-20260713",
+      "ambulancia-atinge-boi-br-364-tarauaca-20260713",
+      "pescador-carrega-pirarara-gigante-rio-madeira-20260713",
+      "colisao-longa-fila-estrada-dias-martins-20260713"
+    ],
+    "archiveItems": 480,
+    "activeItems": 360
+  }
 }

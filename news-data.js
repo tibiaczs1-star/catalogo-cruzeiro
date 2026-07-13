@@ -1,6 +1,425 @@
 window.NEWS_ARCHIVE_TOTAL = 480;
 window.NEWS_DATA = [
   {
+    "id": "manual-czs-social-moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
+    "slug": "moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
+    "title": "Moradores fecham Ramal dos Esquecidos em Rodrigues Alves",
+    "eyebrow": "Vale do Juruá",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:31:00.000Z",
+    "category": "Juruá",
+    "categoryKey": "jurua",
+    "previewClass": "thumb-jurua",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://www.instagram.com/ac24horas/reel/Danoa0wuApF/",
+    "sourceLabel": "ac24horas",
+    "lede": "Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção.",
+    "summary": "Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção.",
+    "analysis": "A mobilização expõe um problema direto de mobilidade rural e acesso a serviços básicos no Vale do Juruá.",
+    "highlights": [
+      "O bloqueio ocorreu na zona rural de Rodrigues Alves.",
+      "Moradores cobram manutenção e uma resposta oficial para a estrada.",
+      "A prefeitura informou que o prefeito foi ao local conversar com os manifestantes."
+    ],
+    "development": [
+      "Moradores da comunidade Foz do Paraná fecharam o Ramal dos Esquecidos para cobrar a recuperação da via.",
+      "Segundo os manifestantes, a precariedade afeta o transporte escolar, o acesso a atendimentos de saúde e o escoamento da produção agrícola.",
+      "A prefeitura informou que o prefeito foi ao local conversar com o grupo. Até a última atualização da fonte, não havia cronograma de obras divulgado."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-ramal-rodrigues-alves-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-ramal-rodrigues-alves-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-ramal-rodrigues-alves-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ac24horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1100,
+    "editorialPriority": "jurua-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://www.instagram.com/ac24horas/reel/Danoa0wuApF/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Moradores fecham Ramal dos Esquecidos em Rodrigues Alves. Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção. Fonte: ac24horas.",
+    "audioNarrationTranscript": "Moradores fecham Ramal dos Esquecidos em Rodrigues Alves. Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção. Fonte: ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Moradores fecham Ramal dos Esquecidos em Rodrigues Alves. Moradores da comunidade Foz do Paraná bloquearam o Ramal dos Esquecidos para cobrar recuperação da estrada, usada no transporte escolar, no acesso à saúde e no escoamento da produção. Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Estrada de terra do Ramal dos Esquecidos durante protesto em Rodrigues Alves",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 5,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "Moradores da comunidade Foz do Paraná fecharam o Ramal dos Esquecidos para cobrar a recuperação da via.",
+      "Segundo os manifestantes, a precariedade afeta o transporte escolar, o acesso a atendimentos de saúde e o escoamento da produção agrícola.",
+      "A prefeitura informou que o prefeito foi ao local conversar com o grupo. Até a última atualização da fonte, não havia cronograma de obras divulgado."
+    ]
+  },
+  {
+    "id": "manual-czs-social-piracema-movimenta-porto-sena-madureira-20260713",
+    "slug": "piracema-movimenta-porto-sena-madureira-20260713",
+    "title": "Piracema movimenta o Porto de Sena Madureira",
+    "eyebrow": "Rio Purus",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:25:00.000Z",
+    "category": "Acre",
+    "categoryKey": "acre",
+    "previewClass": "thumb-rio",
+    "sourceName": "ContilNet Notícias",
+    "sourceUrl": "https://www.instagram.com/contilnetnoticias/reel/DarFUdQJsJh/",
+    "sourceLabel": "ContilNet Notícias",
+    "lede": "Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira.",
+    "summary": "Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "A chegada da piracema ao Rio Purus movimentou o Porto de Sena Madureira.",
+      "As imagens mostram pescadores capturando mandi e a grande quantidade de peixes nas margens do rio.",
+      "O registro foi publicado pela ContilNet Notícias e ganhou repercussão nas redes sociais."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-piracema-sena-madureira-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-piracema-sena-madureira-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-piracema-sena-madureira-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ContilNet Notícias",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1060,
+    "editorialPriority": "acre-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ContilNet Notícias",
+        "url": "https://www.instagram.com/contilnetnoticias/reel/DarFUdQJsJh/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Piracema movimenta o Porto de Sena Madureira. Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira. Fonte: ContilNet Notícias.",
+    "audioNarrationTranscript": "Piracema movimenta o Porto de Sena Madureira. Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira. Fonte: ContilNet Notícias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Piracema movimenta o Porto de Sena Madureira. Vídeo divulgado no sábado (11) mostra pescadores capturando mandi durante a chegada da piracema ao Rio Purus, em Sena Madureira. Fonte: ContilNet Notícias.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Pescadores e peixes durante a piracema no Porto de Sena Madureira",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 4,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "A chegada da piracema ao Rio Purus movimentou o Porto de Sena Madureira.",
+      "As imagens mostram pescadores capturando mandi e a grande quantidade de peixes nas margens do rio.",
+      "O registro foi publicado pela ContilNet Notícias e ganhou repercussão nas redes sociais."
+    ]
+  },
+  {
+    "id": "manual-czs-social-ambulancia-atinge-boi-br-364-tarauaca-20260713",
+    "slug": "ambulancia-atinge-boi-br-364-tarauaca-20260713",
+    "title": "Ambulância atinge boi na BR-364 em Tarauacá",
+    "eyebrow": "BR-364",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:18:00.000Z",
+    "category": "Segurança",
+    "categoryKey": "seguranca",
+    "previewClass": "thumb-transito",
+    "sourceName": "Acre Diário",
+    "sourceUrl": "https://www.instagram.com/acre.diario/reel/DarBuJvt-7h/",
+    "sourceLabel": "Acre Diário",
+    "lede": "Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia.",
+    "summary": "Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "Uma ambulância atingiu um boi em um trecho da BR-364, em Tarauacá.",
+      "O registro mostra o veículo após a colisão e chama atenção para o risco de animais soltos na estrada durante a noite.",
+      "Informações oficiais sobre feridos não haviam sido confirmadas pela fonte até a publicação."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-ambulancia-boi-tarauaca-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-ambulancia-boi-tarauaca-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-ambulancia-boi-tarauaca-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por Acre Diário",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1055,
+    "editorialPriority": "acre-transito-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "Acre Diário",
+        "url": "https://www.instagram.com/acre.diario/reel/DarBuJvt-7h/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Ambulância atinge boi na BR-364 em Tarauacá. Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia. Fonte: Acre Diário.",
+    "audioNarrationTranscript": "Ambulância atinge boi na BR-364 em Tarauacá. Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia. Fonte: Acre Diário.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Ambulância atinge boi na BR-364 em Tarauacá. Vídeo divulgado pelo Acre Diário mostra uma ambulância após atingir um boi na BR-364, em Tarauacá, e reforça o alerta para animais soltos na rodovia. Fonte: Acre Diário.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Ambulância parada à noite após colisão com boi na BR-364 em Tarauacá",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 4,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "Uma ambulância atingiu um boi em um trecho da BR-364, em Tarauacá.",
+      "O registro mostra o veículo após a colisão e chama atenção para o risco de animais soltos na estrada durante a noite.",
+      "Informações oficiais sobre feridos não haviam sido confirmadas pela fonte até a publicação."
+    ]
+  },
+  {
+    "id": "manual-czs-social-pescador-carrega-pirarara-gigante-rio-madeira-20260713",
+    "slug": "pescador-carrega-pirarara-gigante-rio-madeira-20260713",
+    "title": "Pescador carrega pirarara gigante nas costas no Rio Madeira",
+    "eyebrow": "Amazônia",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T15:04:00.000Z",
+    "category": "Amazônia",
+    "categoryKey": "amazonia",
+    "previewClass": "thumb-rio",
+    "sourceName": "ContilNet Notícias",
+    "sourceUrl": "https://contilnetnoticias.com.br/voce-viu/pescador-carrega-pirarara-gigante-nas-costas-em-barranco-do-rio-madeira/",
+    "sourceLabel": "ContilNet Notícias",
+    "lede": "Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia.",
+    "summary": "Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "O registro mostra um pescador transportando uma pirarara de grandes proporções às margens do Rio Madeira, em Rondônia.",
+      "Conhecida como tubarão da Amazônia, a espécie pode ultrapassar 1,3 metro de comprimento e pesar mais de 50 quilos.",
+      "O tamanho do peixe e o esforço para subir o barranco chamaram atenção nas redes sociais."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-pirarara-rio-madeira-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-pirarara-rio-madeira-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-pirarara-rio-madeira-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ContilNet Notícias",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1045,
+    "editorialPriority": "amazonia-viral-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ContilNet Notícias",
+        "url": "https://contilnetnoticias.com.br/voce-viu/pescador-carrega-pirarara-gigante-nas-costas-em-barranco-do-rio-madeira/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Pescador carrega pirarara gigante nas costas no Rio Madeira. Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia. Fonte: ContilNet Notícias.",
+    "audioNarrationTranscript": "Pescador carrega pirarara gigante nas costas no Rio Madeira. Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia. Fonte: ContilNet Notícias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Pescador carrega pirarara gigante nas costas no Rio Madeira. Um pescador foi filmado carregando uma pirarara de grandes proporções enquanto subia um barranco às margens do Rio Madeira, em Rondônia. Fonte: ContilNet Notícias.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Pescador carregando uma pirarara gigante nas costas às margens do Rio Madeira",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 3,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "O registro mostra um pescador transportando uma pirarara de grandes proporções às margens do Rio Madeira, em Rondônia.",
+      "Conhecida como tubarão da Amazônia, a espécie pode ultrapassar 1,3 metro de comprimento e pesar mais de 50 quilos.",
+      "O tamanho do peixe e o esforço para subir o barranco chamaram atenção nas redes sociais."
+    ]
+  },
+  {
+    "id": "manual-czs-social-colisao-longa-fila-estrada-dias-martins-20260713",
+    "slug": "colisao-longa-fila-estrada-dias-martins-20260713",
+    "title": "Colisão causa longa fila na Estrada Dias Martins",
+    "eyebrow": "Trânsito",
+    "date": "13 de jul de 2026",
+    "publishedAt": "2026-07-13T14:57:00.000Z",
+    "category": "Trânsito",
+    "categoryKey": "transito",
+    "previewClass": "thumb-transito",
+    "sourceName": "ContilNet Notícias",
+    "sourceUrl": "https://contilnetnoticias.com.br/policia/acidente-na-descida-de-viaduto-provoca-lentidao-de-veiculos-em-rio-branco/",
+    "sourceLabel": "ContilNet Notícias",
+    "lede": "Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11).",
+    "summary": "Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11).",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "Uma colisão entre um automóvel e uma motocicleta causou lentidão na Estrada Dias Martins, em Rio Branco.",
+      "O acidente ocorreu na descida do viaduto e formou uma extensa fila de veículos no início da noite de sábado (11).",
+      "Até a última atualização da fonte, não havia confirmação oficial sobre a dinâmica do acidente nem sobre o estado de saúde dos envolvidos."
+    ],
+    "imageUrl": "assets/news-manual/czs-1050-colisao-dias-martins-20260713.jpg",
+    "feedImageUrl": "assets/news-manual/czs-1050-colisao-dias-martins-20260713.jpg",
+    "sourceImageUrl": "assets/news-manual/czs-1050-colisao-dias-martins-20260713.jpg",
+    "imageCredit": "Frame do vídeo publicado por ContilNet Notícias",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1040,
+    "editorialPriority": "acre-transito-social-sync-1050",
+    "crossSources": [
+      {
+        "name": "ContilNet Notícias",
+        "url": "https://contilnetnoticias.com.br/policia/acidente-na-descida-de-viaduto-provoca-lentidao-de-veiculos-em-rio-branco/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Colisão causa longa fila na Estrada Dias Martins. Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11). Fonte: ContilNet Notícias.",
+    "audioNarrationTranscript": "Colisão causa longa fila na Estrada Dias Martins. Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11). Fonte: ContilNet Notícias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Colisão causa longa fila na Estrada Dias Martins. Uma colisão entre um automóvel e uma motocicleta causou lentidão e extensa fila na Estrada Dias Martins, em Rio Branco, na noite de sábado (11). Fonte: ContilNet Notícias.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Fila de veículos após colisão na Estrada Dias Martins em Rio Branco",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": {
+      "status": "frame-real-do-video",
+      "note": "Capa extraída do vídeo original e publicada com identidade horizontal do Catálogo CZS."
+    },
+    "editorialGate": "P1",
+    "editorialApproval": "manual-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 3,
+    "socialSync": {
+      "instagramAccount": "@catalogo_czs_",
+      "instagramMilestone": 1050,
+      "collaboratorsRequested": [
+        "@conexaoacreac",
+        "@acre.diario"
+      ],
+      "syncedAt": "2026-07-13T15:35:00.000Z"
+    },
+    "body": [
+      "Uma colisão entre um automóvel e uma motocicleta causou lentidão na Estrada Dias Martins, em Rio Branco.",
+      "O acidente ocorreu na descida do viaduto e formou uma extensa fila de veículos no início da noite de sábado (11).",
+      "Até a última atualização da fonte, não havia confirmação oficial sobre a dinâmica do acidente nem sobre o estado de saúde dos envolvidos."
+    ]
+  },
+  {
     "id": "https://juruaonline.com.br/presidente-da-camara-de-cruzeiro-do-sul-afirma-ter-sido-ignorado-por-governadora-durante-evento-oficial/",
     "slug": "presidente-da-camara-de-cruzeiro-do-sul-afirma-ter-sido-ignorado-por-governadora-durante-evento-",
     "title": "Presidente da Câmara de Cruzeiro do Sul afirma ter sido ignorado por Governadora durante evento oficial",
@@ -423,78 +842,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "Jurua Online publicou em 10 de jul de 2026: César Andrade e Zezinho Barbary reafirmam parceria política em prol do desenvolvimento de Porto Walter.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
-  },
-  {
-    "id": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/",
-    "slug": "moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves",
-    "title": "Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves",
-    "eyebrow": "Cotidiano",
-    "date": "10 de jul de 2026",
-    "publishedAt": "2026-07-11T00:28:28.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano moradores bloqueiam ramal dos esquecidos e cobram solucao para estrada em rodrigues alves moradores do ramal dos esquecidos na zona rural de rodrigues alves bloquearam a via nesta sexta feira 10 em protesto contra a falta de manutencao da estrada",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua Online",
-    "sourceUrl": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/",
-    "sourceLabel": "Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves",
-    "lede": "Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada.",
-    "summary": "Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_3338.jpeg",
-    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_3338.jpeg",
-    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_3338.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 980,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Online",
-        "url": "https://juruaonline.com.br/moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "moradores-bloqueiam-ramal-dos-esquecidos-e-cobram-solucao-para-estrada-em-rodrigues-alves"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada. A informação vem de Juruá Online.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada. A informação vem de Juruá Online.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves. Moradores do Ramal dos Esquecidos, na zona rural de Rodrigues Alves, bloquearam a via nesta sexta-feira (10) em protesto contra a falta de manutenção da estrada. Fonte: Jurua Online.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Jurua Online publicou em 10 de jul de 2026: Moradores bloqueiam Ramal dos Esquecidos e cobram solução para estrada em Rodrigues Alves.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -38158,294 +38505,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "G1 Pop & Arte publicou em 11 de jul de 2026: Cantor italiano Peppino di Capri morre aos 86 anos.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/educacao/fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10/",
-    "slug": "fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10",
-    "title": "Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10)",
-    "eyebrow": "Educacao",
-    "date": "10 de jul de 2026",
-    "publishedAt": "2026-07-10T08:15:44.000Z",
-    "category": "Educacao",
-    "categoryKey": "educacao",
-    "previewClass": "thumb-educacao",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/educacao/fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10/",
-    "sourceLabel": "Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10)",
-    "lede": "Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10)",
-    "summary": "Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10)",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/female-employee-holding-mobile-device.webp?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/female-employee-holding-mobile-device.webp?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/female-employee-holding-mobile-device.webp?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/educacao/fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/educacao/fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "fuvest-alunos-devem-solicitar-isencao-da-taxa-ate-esta-sexta-feira-10"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10) Prazo para pedidos é até às 12h pelo site da Fundação A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10) Prazo para pedidos é até às 12h pelo site da Fundação A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10). Prazo para pedidos é até às 12h pelo site da Fundação Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 10 de jul de 2026: Fuvest: alunos devem solicitar isenção da taxa até esta sexta-feira (10).",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/tjs-usam-ferias-e-aposentadorias-para-justificar-penduricalhos-ao-stf/",
-    "slug": "tjs-usam-ferias-e-aposentadorias-para-justificar-penduricalhos-ao-stf",
-    "title": "TJs usam férias e aposentadorias para justificar “penduricalhos” ao STF",
-    "eyebrow": "Politica",
-    "date": "10 de jul de 2026",
-    "publishedAt": "2026-07-10T06:30:28.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/tjs-usam-ferias-e-aposentadorias-para-justificar-penduricalhos-ao-stf/",
-    "sourceLabel": "TJs usam férias e aposentadorias para justificar “penduricalhos” ao STF",
-    "lede": "Tribunais de Justiça estaduais negam descumprir decisão da Corte e dizem que supersalários decorreram de exceções ou de dúvidas sobre novas regras",
-    "summary": "Tribunais de Justiça estaduais negam descumprir decisão da Corte e dizem que supersalários decorreram de exceções ou de dúvidas sobre novas regras",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/dias-toffoli-gilmar-mendes.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/dias-toffoli-gilmar-mendes.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/dias-toffoli-gilmar-mendes.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/tjs-usam-ferias-e-aposentadorias-para-justificar-penduricalhos-ao-stf/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/tjs-usam-ferias-e-aposentadorias-para-justificar-penduricalhos-ao-stf/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tjs-usam-ferias-e-aposentadorias-para-justificar-penduricalhos-ao-stf"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. TJs usam férias e aposentadorias para justificar “penduricalhos” ao STF Tribunais de Justiça estaduais negam descumprir decisão da Corte e dizem que supersalários decorreram de exceções ou de dúvidas sobre novas regras A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. TJs usam férias e aposentadorias para justificar “penduricalhos” ao STF Tribunais de Justiça estaduais negam descumprir decisão da Corte e dizem que supersalários decorreram de exceções ou de dúvidas sobre novas regras A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: TJs usam férias e aposentadorias para justificar “penduricalhos” ao STF. Tribunais de Justiça estaduais negam descumprir decisão da Corte e dizem que supersalários decorreram de exceções ou de dúvidas sobre novas regras Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 10 de jul de 2026: TJs usam férias e aposentadorias para justificar “penduricalhos” ao STF.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/tarifas-levam-negatividade-a-flavio-enquanto-lula-joga-parado-diz-ap-exata/",
-    "slug": "tarifas-levam-negatividade-a-flavio-enquanto-lula-joga-parado-diz-ap-exata",
-    "title": "Tarifas levam negatividade a Flávio enquanto Lula joga parado, diz AP Exata",
-    "eyebrow": "Politica",
-    "date": "09 de jul de 2026",
-    "publishedAt": "2026-07-10T02:44:41.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/tarifas-levam-negatividade-a-flavio-enquanto-lula-joga-parado-diz-ap-exata/",
-    "sourceLabel": "Tarifas levam negatividade a Flávio enquanto Lula joga parado, diz AP Exata",
-    "lede": "Cientista de dados da AP Exata aponta que visita de Flávio a Washington foi mal recebida nas redes e que o tempo corre a favor de Lula",
-    "summary": "Cientista de dados da AP Exata aponta que visita de Flávio a Washington foi mal recebida nas redes e que o tempo corre a favor de Lula",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/Pronunciamento-do-presidente-Lula-sobre-o-Dia-Internacional-da-Mulher.jpeg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/Pronunciamento-do-presidente-Lula-sobre-o-Dia-Internacional-da-Mulher.jpeg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/Pronunciamento-do-presidente-Lula-sobre-o-Dia-Internacional-da-Mulher.jpeg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/tarifas-levam-negatividade-a-flavio-enquanto-lula-joga-parado-diz-ap-exata/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/tarifas-levam-negatividade-a-flavio-enquanto-lula-joga-parado-diz-ap-exata/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tarifas-levam-negatividade-a-flavio-enquanto-lula-joga-parado-diz-ap-exata"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Tarifas levam negatividade a Flávio enquanto Lula joga parado, diz AP Exata Cientista de dados da AP Exata aponta que visita de Flávio a Washington foi mal recebida nas redes e que o tempo corre a favor de Lula A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Tarifas levam negatividade a Flávio enquanto Lula joga parado, diz AP Exata Cientista de dados da AP Exata aponta que visita de Flávio a Washington foi mal recebida nas redes e que o tempo corre a favor de Lula A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Tarifas levam negatividade a Flávio enquanto Lula joga parado, diz AP Exata. Cientista de dados da AP Exata aponta que visita de Flávio a Washington foi mal recebida nas redes e que o tempo corre a favor de Lula Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 09 de jul de 2026: Tarifas levam negatividade a Flávio enquanto Lula joga parado, diz AP Exata.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://ac24horas.com/2026/07/09/alan-rick-mostra-juiz-aposentado-vitima-de-desabamento-de-ponte-em-recuperacao-e-um-milagre/",
-    "slug": "alan-rick-mostra-juiz-aposentado-vitima-de-desabamento-de-ponte-em-recuperacao-e-um-milagre",
-    "title": "Alan Rick mostra Juiz aposentado vítima de desabamento de ponte em recuperação: “é um milagre”",
-    "eyebrow": "Politica",
-    "date": "09 de jul de 2026",
-    "publishedAt": "2026-07-10T00:08:15.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/07/09/alan-rick-mostra-juiz-aposentado-vitima-de-desabamento-de-ponte-em-recuperacao-e-um-milagre/",
-    "sourceLabel": "Alan Rick mostra Juiz aposentado vítima de desabamento de ponte em recuperação: “é um milagre”",
-    "lede": "O senador Alan Rick (Republicanos) compartilhou, na noite desta quinta-feira, 9, um vídeo emocionante durante uma visita ao juiz aposentado Edinaldo Muniz, em um hospital em São Paulo.",
-    "summary": "O senador Alan Rick (Republicanos) compartilhou, na noite desta quinta-feira, 9, um vídeo emocionante durante uma visita ao juiz aposentado Edinaldo Muniz, em um hospital em São Paulo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-09T190804.578.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-09T190804.578.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-2026-07-09T190804.578.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/09/alan-rick-mostra-juiz-aposentado-vitima-de-desabamento-de-ponte-em-recuperacao-e-um-milagre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/09/alan-rick-mostra-juiz-aposentado-vitima-de-desabamento-de-ponte-em-recuperacao-e-um-milagre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "alan-rick-mostra-juiz-aposentado-vitima-de-desabamento-de-ponte-em-recuperacao-e-um-milagre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Alan Rick mostra Juiz aposentado vítima de desabamento de ponte em recuperação: “é um milagre” O senador Alan Rick (Republicanos) compartilhou, na noite desta quinta-feira, 9, um vídeo emocionante durante uma visita ao juiz aposentado Edinaldo Muniz, em um hospital em São Paulo. A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Alan Rick mostra Juiz aposentado vítima de desabamento de ponte em recuperação: “é um milagre” O senador Alan Rick (Republicanos) compartilhou, na noite desta quinta-feira, 9, um vídeo emocionante durante uma visita ao juiz aposentado Edinaldo Muniz, em um hospital em São Paulo. A informação vem de ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Vídeo da fonte: Alan Rick mostra Juiz aposentado vítima de desabamento de ponte em recuperação: “é um milagre”. O senador Alan Rick (Republicanos) compartilhou, na noite desta quinta-feira, 9, um vídeo emocionante durante uma visita ao juiz aposentado Edinaldo Muniz, em um hospital em São Paulo. Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 09 de jul de 2026: Alan Rick mostra Juiz aposentado vítima de desabamento de ponte em recuperação: “é um milagre”.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
