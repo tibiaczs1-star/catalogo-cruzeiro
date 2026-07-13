@@ -336,6 +336,10 @@ const PUBPAID_ALLOWED_AMOUNTS = [5, 10, 20, 50, 100];
 const PUBPAID_PENDING_WINDOW_MS = 2 * 60 * 60 * 1000;
 const PREVIEW_CLASS_BY_CATEGORY = {
   cotidiano: "thumb-cheia",
+  jurua: "thumb-jurua",
+  seguranca: "thumb-policia",
+  amazonia: "thumb-cheia",
+  transito: "thumb-alerta",
   saude: "thumb-saude",
   negocios: "thumb-pascoa",
   policia: "thumb-policia",
@@ -351,6 +355,10 @@ const PREVIEW_CLASS_BY_CATEGORY = {
 };
 const CATEGORY_LABEL_BY_KEY = {
   cotidiano: "Cotidiano",
+  jurua: "Juruá",
+  seguranca: "Segurança",
+  amazonia: "Amazônia",
+  transito: "Trânsito",
   prefeitura: "Prefeitura",
   "acre-governo": "Acre / Governo",
   politica: "Política",
@@ -367,6 +375,11 @@ const CATEGORY_LABEL_BY_KEY = {
 };
 const CATEGORY_ALIAS_MAP = {
   cotidiano: "cotidiano",
+  jurua: "jurua",
+  "vale do jurua": "jurua",
+  seguranca: "seguranca",
+  amazonia: "amazonia",
+  transito: "transito",
   politica: "politica",
   policia: "policia",
   saude: "saude",
