@@ -9,7 +9,7 @@
   const INTRO_VIDEO = "assets/intro/czs-loader-video-welcome-voice-20260605.mp4";
   const INTRO_POSTER = "assets/intro/czs-loader-video-poster-20260605.jpg";
   const INTRO_VOICE = "assets/intro/czs-welcome-voice-20260604.ogg";
-  const V8_BOOT_VERSION = "20260615-norte-banner-geometry-v78";
+  const V8_BOOT_VERSION = "20260713-site-repair-v86";
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
@@ -2149,13 +2149,17 @@
       </a>`);
   }
 
-  function railCard(story) {
+  function railMediaMarkup(story) {
     const videoSrc = storyVideoUrl(story);
+    if (!videoSrc) return storyImageMarkup(story);
+    const poster = videoPosterFor(story, videoSrc);
+    return poster ? `<img src="${esc(poster)}" alt="${esc(story.title)}" loading="lazy" decoding="async" fetchpriority="low" data-v8-video-poster-src="${esc(videoSrc)}" data-v8-video-fallback="${esc(imgFor(story))}">` : `<video muted playsinline preload="metadata" aria-label="${esc(story.title)}"><source src="${esc(videoSrc)}" type="${esc(videoTypeFor(videoSrc))}"></video>`;
+  }
+
+  function railCard(story) {
     return `
       <a class="v8-rail-story" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
-        ${videoSrc
-          ? `<img src="${esc(videoPosterFor(story, videoSrc))}" alt="${esc(story.title)}" loading="lazy" decoding="async" fetchpriority="low" data-v8-video-poster-src="${esc(videoSrc)}" data-v8-video-fallback="${esc(imgFor(story))}">`
-          : storyImageMarkup(story)}
+        ${railMediaMarkup(story)}
         <span><b>${esc(story.title)}</b><small>${esc(story.category || "Notícia")} • ${esc(storyDate(story))}</small></span>
       </a>`;
   }
@@ -2755,6 +2759,17 @@
     return [...storyVideos, ...localVideos].slice(0, 8);
   }
 
+  function videoPlaylistPreviewMarkup(item = {}) {
+    const poster = String(item.poster || "");
+    if (poster) {
+      const posterCapture = item.capturePoster
+        ? `data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || poster)}"`
+        : "";
+      return `<img src="${esc(poster)}" alt="" loading="lazy" decoding="async" fetchpriority="low" ${posterCapture}>`;
+    }
+    return `<video muted playsinline preload="metadata" aria-label="${esc(item.title || "Vídeo CZS")}"><source src="${esc(item.src)}" type="${esc(videoTypeFor(item.src))}"></video>`;
+  }
+
   function renderRealVideoHub() {
     const section = $("#videos");
     if (!section) return;
@@ -2777,14 +2792,14 @@
       <div class="v8-story-bubbles" aria-label="Stories em vídeo do CZS">
         ${playlist.map((item, index) => `
           <button class="v8-story-bubble ${index === 0 ? "is-active" : ""}" type="button" data-v8-story-open="${esc(item.id)}">
-            <span><img src="${esc(item.poster)}" alt="" loading="lazy" decoding="async" fetchpriority="low" ${item.capturePoster ? `data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}"` : ""}></span>
+            <span>${videoPlaylistPreviewMarkup(item)}</span>
             <b>${esc(item.label || "TV CZS")}</b>
           </button>`).join("")}
       </div>
       <div class="v8-video-shell v8-story-shell">
         <div class="v8-story-phone" aria-label="TV CZS em formato vertical">
           <div class="v8-story-progress" aria-hidden="true"><i></i><i></i><i></i></div>
-          <video id="v8MainVideo" controls playsinline preload="none" poster="${esc(active.poster)}" ${active.capturePoster ? `data-v8-video-poster-src="${esc(active.src)}" data-v8-video-fallback="${esc(active.fallbackPoster || active.poster)}"` : ""}>
+          <video id="v8MainVideo" controls playsinline preload="metadata" poster="${esc(active.poster)}" ${active.capturePoster ? `data-v8-video-poster-src="${esc(active.src)}" data-v8-video-fallback="${esc(active.fallbackPoster || active.poster)}"` : ""}>
             <source src="${esc(active.src)}" type="${esc(videoTypeFor(active.src))}">
             Seu navegador não conseguiu carregar este vídeo.
           </video>
@@ -2798,7 +2813,7 @@
           <div class="v8-story-capture-note"><b>Captação</b><span>Varre as fontes monitoradas, canais, TVs e matérias com vídeo; acervo local fica só como apoio.</span></div>
           ${playlist.map((item, index) => `
             <button class="v8-video-item ${index === 0 ? "is-active" : ""}" type="button" data-v8-video="${esc(item.id)}">
-              <img src="${esc(item.poster)}" alt="" loading="lazy" decoding="async" fetchpriority="low" ${item.capturePoster ? `data-v8-video-poster-src="${esc(item.src)}" data-v8-video-fallback="${esc(item.fallbackPoster || item.poster)}"` : ""}>
+              ${videoPlaylistPreviewMarkup(item)}
               <span><small>${esc(item.label)}</small><b>${esc(item.title)}</b></span>
             </button>`).join("")}
         </div>
@@ -4488,8 +4503,9 @@
     const text = $("#progressText");
     if (!loader || !fill || !text || window.__czsV8IntroControlled) return;
     const params = new URLSearchParams(window.location.search || "");
-    const forceIntro = params.get("forceIntro") === "1" || params.get("intro") === "1";
-    const skipIntro = params.get("skipIntro") === "1";
+    const introRequested = params.get("forceIntro") === "1" || params.get("intro") === "1";
+    const forceIntro = introRequested;
+    const skipIntro = params.get("skipIntro") === "1" || !introRequested;
     let seenIntro = false;
     try {
       seenIntro = sessionStorage.getItem(INTRO_SESSION_KEY) === V8_BOOT_VERSION;

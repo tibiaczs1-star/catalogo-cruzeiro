@@ -947,23 +947,46 @@ function getRegionalPriorityScore(item = {}) {
   return 0;
 }
 
-function dedupeKey(item = {}) {
+function canonicalDedupeUrl(value = "") {
+  const raw = sanitizeUrl(value);
+  if (!raw) return "";
+  try {
+    const url = new URL(raw);
+    [...url.searchParams.keys()].forEach((key) => {
+      if (/^(utm_|fbclid$|gclid$|mc_cid$|mc_eid$)/i.test(key)) url.searchParams.delete(key);
+    });
+    url.hash = "";
+    url.pathname = url.pathname.replace(/\/+$/, "") || "/";
+    return url.toString();
+  } catch {
+    return raw.replace(/[?#].*$/, "").replace(/\/+$/, "");
+  }
+}
+
+function dedupeKeys(item = {}) {
   const titleKey = normalizeText(item.title || item.sourceLabel || "")
     .replace(/\bpra\b/g, "para")
     .replace(/\bpro\b/g, "para o")
     .replace(/\s+/g, " ")
     .trim();
-  const dayKey = String(item.publishedAt || item.createdAt || item.date || "").slice(0, 10);
-  if (titleKey) return `${titleKey.slice(0, 120)}::${dayKey}`;
+  const sourceKey = canonicalDedupeUrl(item.sourceUrl || item.url || item.id || item.link || "");
+  const keys = [];
+  if (titleKey) keys.push(`title:${titleKey.slice(0, 180)}`);
+  if (sourceKey) keys.push(`url:${sourceKey}`);
+  if (!keys.length) {
+    const fallback = slugify(item.slug || item.title || "");
+    if (fallback) keys.push(`slug:${fallback}`);
+  }
+  return keys;
+}
 
-  return (
-    slugify(item.slug || item.title || "") ||
-    normalizeText(item.sourceUrl || item.url || item.id || item.link || "")
-  );
+function dedupeKey(item = {}) {
+  return dedupeKeys(item)[0] || "";
 }
 
 function mergeNewsItems(...collections) {
-  const map = new Map();
+  const items = [];
+  const indexesByKey = new Map();
 
   const sourceUrlQualityScore = (value = "") => {
     const url = String(value || "");
@@ -975,13 +998,17 @@ function mergeNewsItems(...collections) {
   collections.flat().filter(Boolean).forEach((rawItem) => {
     const item = normalizeFeedMarkupNoise(rawItem);
     if (getEditorialBlockReason(item)) return;
-    const key = dedupeKey(item);
-    if (!key) return;
-    const existing = map.get(key);
-    if (!existing) {
-      map.set(key, item);
+    const keys = dedupeKeys(item);
+    if (!keys.length) return;
+    const existingIndex = keys.map((key) => indexesByKey.get(key)).find((index) => index !== undefined);
+    if (existingIndex === undefined) {
+      const nextIndex = items.length;
+      items.push(item);
+      keys.forEach((key) => indexesByKey.set(key, nextIndex));
       return;
     }
+
+    const existing = items[existingIndex];
 
     const existingBody = Array.isArray(existing.body) ? existing.body.filter(Boolean).length : 0;
     const itemBody = Array.isArray(item.body) ? item.body.filter(Boolean).length : 0;
@@ -993,10 +1020,12 @@ function mergeNewsItems(...collections) {
       (item.imageUrl || item.feedImageUrl ? 10 : 0) +
       itemBody +
       sourceUrlQualityScore(item.sourceUrl || item.url || item.id);
-    map.set(key, itemScore >= existingScore ? { ...existing, ...item } : { ...item, ...existing });
+    const merged = itemScore >= existingScore ? { ...existing, ...item } : { ...item, ...existing };
+    items[existingIndex] = merged;
+    dedupeKeys(merged).concat(keys).forEach((key) => indexesByKey.set(key, existingIndex));
   });
 
-  return [...map.values()].sort((left, right) => {
+  return items.sort((left, right) => {
     const dateLayerDiff = getDayTimestamp(right) - getDayTimestamp(left);
     if (dateLayerDiff !== 0) return dateLayerDiff;
     const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
@@ -1161,5 +1190,6 @@ if (require.main === module) {
 
 module.exports = {
   collectLatestNewsItems,
-  runCaptureLatestNews
+  runCaptureLatestNews,
+  mergeNewsItems
 };

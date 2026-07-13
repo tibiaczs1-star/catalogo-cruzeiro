@@ -13466,3 +13466,131 @@ body.v8-merge-ready .v8-sponsor-side-card figure img {
     max-height: none !important;
   }
 }
+
+/* 20260713: preserve action labels and show source video when no poster is available. */
+body.v8-merge-ready .v8-hero-controls .btn {
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+}
+
+body.v8-merge-ready .v8-rail-story video {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  background: #07142f !important;
+}
+
+body.v8-merge-ready .v8-story-bubble video,
+body.v8-merge-ready .v8-video-item video {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  background: #07142f !important;
+  pointer-events: none !important;
+}
+
+/* 20260713: keep editorial feed cards content-sized and remove failed media slots. */
+body.v8-merge-ready .feed-grid {
+  align-items: start !important;
+  grid-auto-rows: auto !important;
+}
+
+body.v8-merge-ready .feed-grid > .news-card {
+  min-height: 0 !important;
+  height: auto !important;
+  align-self: start !important;
+}
+
+body.v8-merge-ready .news-card .media-frame.v8-img-missing {
+  display: none !important;
+}
+
+body.v8-merge-ready .feed-grid > .news-card .copy p,
+body.v8-merge-ready .feed-grid > .news-card .copy h3 {
+  display: -webkit-box !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+}
+
+body.v8-merge-ready .feed-grid > .news-card .copy p {
+  -webkit-line-clamp: 4 !important;
+}
+
+body.v8-merge-ready .feed-grid > .news-card .copy h3 {
+  -webkit-line-clamp: 4 !important;
+}
+
+@media (min-width: 981px) and (max-width: 1599px) {
+  body.v8-merge-ready .feed-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+body.v8-merge-ready .v8-story-capture-note {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  flex-wrap: wrap !important;
+}
+
+/* 20260713: compact mobile header without hiding navigation destinations. */
+@media (max-width: 760px) {
+  body.v8-merge-ready .brandrow > .nav,
+  body.v8-merge-ready .nav {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-height: none !important;
+    padding: 6px 2px 8px !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+  }
+
+  body.v8-merge-ready .nav::-webkit-scrollbar,
+  body.v8-merge-ready .utility-row::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  body.v8-merge-ready .nav a,
+  body.v8-merge-ready .nav a:nth-child(n + 5),
+  body.v8-merge-ready .nav .v8-nav-footer-shortcut {
+    display: inline-flex !important;
+    flex: 0 0 92px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    min-width: 92px !important;
+    min-height: 46px !important;
+    padding: 6px !important;
+    text-align: center !important;
+    scroll-snap-align: start !important;
+  }
+
+  body.v8-merge-ready .utility-row {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-height: none !important;
+    padding: 6px 2px 8px !important;
+    scrollbar-width: none !important;
+  }
+
+  body.v8-merge-ready .utility-row .chip,
+  body.v8-merge-ready .utility-row .chip:nth-child(n + 5) {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 42px !important;
+    padding: 7px 10px !important;
+    white-space: nowrap !important;
+  }
+}

@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-07-10T08:45:59.251Z",
-  "finishedAt": "2026-07-10T08:46:04.567Z",
-  "capturedItems": 426,
-  "capturedToday": 165,
+  "startedAt": "2026-07-13T13:57:16.590Z",
+  "finishedAt": "2026-07-13T13:57:21.241Z",
+  "capturedItems": 396,
+  "capturedToday": 169,
   "activeWindowItems": 360,
-  "archiveItems": 1446,
+  "archiveItems": 480,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 22,
-      "blocked": 2,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -227,7 +227,7 @@
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
