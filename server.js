@@ -12,6 +12,7 @@ const {
   parseHomeLinkedArticleFallbacks,
   auditHomeLinkedArticleIntegrity
 } = require("./scripts/home-linked-article-fallbacks");
+const { selectPinnedArchiveStories } = require("./scripts/news-archive-pins");
 const {
   buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
   readStore: readCanonicalPubpaidStore,
@@ -8009,7 +8010,11 @@ function buildNewsArchivePayload(limit = 500) {
   }
 
   const basePayload = getArticleNewsApiBasePayload();
-  const archiveItems = diversifyArchiveStories(basePayload.items, safeLimit).slice(0, safeLimit);
+  const archiveItems = selectPinnedArchiveStories(
+    basePayload.items,
+    safeLimit,
+    diversifyArchiveStories
+  );
   const payload = {
     total: basePayload.total,
     archiveTotal: basePayload.total,
