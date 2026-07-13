@@ -12,7 +12,7 @@ const {
   parseHomeLinkedArticleFallbacks,
   auditHomeLinkedArticleIntegrity
 } = require("./scripts/home-linked-article-fallbacks");
-const { selectPinnedArchiveStories } = require("./scripts/news-archive-pins");
+const { dedupeArchiveItems, selectPinnedArchiveStories } = require("./scripts/news-archive-pins");
 const {
   buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
   readStore: readCanonicalPubpaidStore,
@@ -7693,7 +7693,7 @@ function getArticleNewsApiBasePayload() {
     }
   });
 
-  const sorted = Array.from(map.values()).sort(sortArticleItems);
+  const sorted = dedupeArchiveItems(Array.from(map.values()).sort(sortArticleItems));
   const visibleItems = repairNewsImagesForDisplay(sorted.slice(0, 1000));
 
   articleNewsBaseCache.key = key;

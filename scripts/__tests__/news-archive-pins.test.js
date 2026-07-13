@@ -3,7 +3,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { selectPinnedArchiveStories } = require("../news-archive-pins");
+const { dedupeArchiveItems, selectPinnedArchiveStories } = require("../news-archive-pins");
 
 test("keeps the current social synchronization batch above the diversified archive", () => {
   const items = [
@@ -33,5 +33,19 @@ test("honors small API limits without leaking a regular item above a pin", () =>
   assert.deepEqual(
     selectPinnedArchiveStories(items, 1, () => items).map((item) => item.id),
     ["sync-a"]
+  );
+});
+
+test("removes repeated IDs and normalized headlines from the public archive", () => {
+  const items = [
+    { id: "same-id", title: "Primeira manchete" },
+    { id: "same-id", title: "Outro título para o mesmo registro" },
+    { id: "new-id", title: "Primeira Manchete!" },
+    { id: "unique", title: "Notícia diferente" }
+  ];
+
+  assert.deepEqual(
+    dedupeArchiveItems(items).map((item) => item.id),
+    ["same-id", "unique"]
   );
 });
