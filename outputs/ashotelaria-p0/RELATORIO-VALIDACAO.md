@@ -9,7 +9,7 @@ O P0 está integrado ao servidor do Catálogo CZS e funciona em modo demo online
 ## Evidências automatizadas
 
 - `npm run ashotelaria:check`: passou (`server.js`, APIs e scripts de interface).
-- `npm run ashotelaria:test`: 71 testes passaram, 0 falhas.
+- `npm run ashotelaria:test`: 72 testes passaram, 0 falhas.
 - `git diff --check`: passou.
 - Revisão independente de Task 3: aprovado, 38 testes de store/migração/PostgreSQL.
 - Revisão independente de Task 4: aprovado, 50 testes de lockout, idempotência, camareira e erros seguros.
@@ -38,4 +38,4 @@ Pagamento, fiscal e FNRH permanecem em `sandbox`; a reserva confirma pagamento n
 
 O `render.yaml` declara o PostgreSQL `ashotelaria-db`, injeta a connection string interna e executa `npm run ashotelaria:migrate` antes de `npm start`. O banco foi criado no plano gratuito (expira em 2026-08-13); para continuidade, migre-o para um plano persistente antes dessa data. A migration real aplicou as duas versões (`{"ok":true,"applied":2}`) e os cinco segredos foram configurados no cofre do serviço.
 
-Deploy Render confirmado: serviço `catalogo-cruzeiro-web`, deploy `dep-d9badc8qmsqc73885ppg`, commit `61e5bd89`, status `live`. Smoke test remoto confirmou `200` nos quatro aliases, health, propriedade pública e disponibilidade; login inicial respondeu `200` com `forceChange: true` e o bootstrap foi bloqueado com `409` antes da troca.
+Deploy Render confirmado: serviço `catalogo-cruzeiro-web`, deploy `dep-d9baj6reo5us73e9ut70`, commit `35ea31f4`, status `live`. Smoke test remoto confirmou `200` nos quatro aliases, health, propriedade pública e disponibilidade; login inicial respondeu `200` com `forceChange: true` e o bootstrap foi bloqueado com `409` antes da troca. A entrada foi reduzida ao formulário operacional e as áreas ganharam ajuda contextual após 650 ms de foco/hover.
