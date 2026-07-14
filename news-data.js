@@ -1,5 +1,159 @@
-window.NEWS_ARCHIVE_TOTAL = 482;
+window.NEWS_ARCHIVE_TOTAL = 484;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-mari-fernandes-deve-cantar-em-cruzeiro",
+    "slug": "mari-fernandes-deve-cantar-em-cruzeiro",
+    "title": "Mari Fernandes deve cantar em Cruzeiro",
+    "seoTitle": "Mari Fernandes deve cantar em Cruzeiro | Catálogo CZS",
+    "seoDescription": "Segundo apuração do ContilNet, Mari Fernandes deve se apresentar no Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto. Na mesma noite, o cantor Panda está previsto para a abertura da Expo Tarauacá. As programações completas ainda aguardam divulgação oficial, mas a coincidência promete movimentar o comércio e o turismo regional.",
+    "eyebrow": "Cruzeiro do Sul",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T09:58:00.000-05:00",
+    "category": "Cruzeiro do Sul",
+    "categoryKey": "cruzeiro-do-sul",
+    "previewClass": "thumb-cruzeiro-do-sul",
+    "sourceName": "ContilNet",
+    "sourceUrl": "https://contilnetnoticias.com.br/destaque-2/disputa-de-shows-no-acre-panda-em-tarauaca-e-mari-fernandes-em-cruzeiro/",
+    "sourceLabel": "Mari Fernandes deve cantar em Cruzeiro",
+    "lede": "Segundo apuração do ContilNet, Mari Fernandes deve se apresentar no Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto. Na mesma noite, o cantor Panda está previsto para a abertura da Expo Tarauacá. As programações completas ainda aguardam divulgação oficial, mas a coincidência promete movimentar o comércio e o turismo regional.",
+    "summary": "Segundo apuração do ContilNet, Mari Fernandes deve se apresentar no Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto. Na mesma noite, o cantor Panda está previsto para a abertura da Expo Tarauacá. As programações completas ainda aguardam divulgação oficial, mas a coincidência promete movimentar o comércio e o turismo regional.",
+    "analysis": "A possível apresentação reforça o calendário cultural e econômico do Vale do Juruá.",
+    "highlights": [
+      "Mari Fernandes deve cantar no Festival da Farinha.",
+      "A apresentação está prevista para 26 de agosto.",
+      "Panda deve abrir a Expo Tarauacá na mesma noite.",
+      "As programações completas aguardam confirmação oficial."
+    ],
+    "development": [
+      "Segundo apuração do ContilNet, a cantora Mari Fernandes deve integrar a programação do Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto.",
+      "Na mesma data, o cantor Panda está previsto para a abertura da Expo Tarauacá, criando uma noite de grandes atrações em municípios do interior do Acre.",
+      "As agendas completas dos eventos ainda aguardam divulgação oficial pelos organizadores.",
+      "A coincidência de shows deve movimentar comércio, hospedagem, transporte e turismo regional.",
+      "Fonte: ContilNet."
+    ],
+    "imageUrl": "assets/news-manual/mari-fernandes-festival-farinha-20260714.webp",
+    "feedImageUrl": "assets/news-manual/mari-fernandes-festival-farinha-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/mari-fernandes-festival-farinha-20260714.webp",
+    "imageCredit": "Foto: Reprodução/Redes sociais via ContilNet",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2002,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "ContilNet",
+        "url": "https://contilnetnoticias.com.br/destaque-2/disputa-de-shows-no-acre-panda-em-tarauaca-e-mari-fernandes-em-cruzeiro/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Mari Fernandes deve cantar em Cruzeiro. Segundo apuração do ContilNet, Mari Fernandes deve se apresentar no Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto. Na mesma noite, o cantor Panda está previsto para a abertura da Expo Tarauacá. As programações completas ainda aguardam divulgação oficial, mas a coincidência promete movimentar o comércio e o turismo regional.",
+    "audioNarrationTranscript": "Mari Fernandes deve cantar em Cruzeiro. Segundo apuração do ContilNet, Mari Fernandes deve se apresentar no Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto. Na mesma noite, o cantor Panda está previsto para a abertura da Expo Tarauacá. As programações completas ainda aguardam divulgação oficial, mas a coincidência promete movimentar o comércio e o turismo regional.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Segundo apuração do ContilNet, Mari Fernandes deve se apresentar no Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto. Na mesma noite, o cantor Panda está previsto para a abertura da Expo Tarauacá. As programações completas ainda aguardam divulgação oficial, mas a coincidência promete movimentar o comércio e o turismo regional. Fonte: ContilNet.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Mari Fernandes e Panda em montagem sobre shows previstos no Acre",
+      "caption": "Mari Fernandes deve cantar em Cruzeiro",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Segundo apuração do ContilNet, a cantora Mari Fernandes deve integrar a programação do Festival da Farinha, em Cruzeiro do Sul, no dia 26 de agosto.",
+      "Na mesma data, o cantor Panda está previsto para a abertura da Expo Tarauacá, criando uma noite de grandes atrações em municípios do interior do Acre.",
+      "As agendas completas dos eventos ainda aguardam divulgação oficial pelos organizadores.",
+      "A coincidência de shows deve movimentar comércio, hospedagem, transporte e turismo regional.",
+      "Fonte: ContilNet."
+    ]
+  },
+  {
+    "id": "manual-czs-cnh-social-abre-matricula-no-acre",
+    "slug": "cnh-social-abre-matricula-no-acre",
+    "title": "CNH Social abre matrícula no Acre",
+    "seoTitle": "CNH Social abre matrícula no Acre | Catálogo CZS",
+    "seoDescription": "O Detran do Acre divulgou a lista de selecionados para a CNH Social 2026 na modalidade Rural. Os aprovados têm 20 dias úteis para fazer a matrícula e apresentar documentos como CPF, identidade, comprovante de endereço e Passaporte CNH Social. Candidatos do interior devem procurar a Ciretran local; quem mora onde não há unidade pode enviar a documentação por e-mail.",
+    "eyebrow": "Acre",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T09:58:00.000-05:00",
+    "category": "Acre",
+    "categoryKey": "acre",
+    "previewClass": "thumb-acre",
+    "sourceName": "ContilNet / Detran-AC",
+    "sourceUrl": "https://contilnetnoticias.com.br/destaque-2/cnh-social-detran-divulga-lista-de-selecionados-e-abre-prazo-para-matricula/",
+    "sourceLabel": "CNH Social abre matrícula no Acre",
+    "lede": "O Detran do Acre divulgou a lista de selecionados para a CNH Social 2026 na modalidade Rural. Os aprovados têm 20 dias úteis para fazer a matrícula e apresentar documentos como CPF, identidade, comprovante de endereço e Passaporte CNH Social. Candidatos do interior devem procurar a Ciretran local; quem mora onde não há unidade pode enviar a documentação por e-mail.",
+    "summary": "O Detran do Acre divulgou a lista de selecionados para a CNH Social 2026 na modalidade Rural. Os aprovados têm 20 dias úteis para fazer a matrícula e apresentar documentos como CPF, identidade, comprovante de endereço e Passaporte CNH Social. Candidatos do interior devem procurar a Ciretran local; quem mora onde não há unidade pode enviar a documentação por e-mail.",
+    "analysis": "O prazo exige atenção dos selecionados para evitar a perda do benefício.",
+    "highlights": [
+      "Detran divulgou selecionados da modalidade Rural.",
+      "A matrícula deve ser feita em até 20 dias úteis.",
+      "Moradores do interior devem procurar a Ciretran.",
+      "Onde não houver unidade, os documentos podem ser enviados por e-mail."
+    ],
+    "development": [
+      "O Detran do Acre divulgou a relação de candidatos selecionados para a CNH Social 2026 na modalidade Rural.",
+      "Os aprovados têm 20 dias úteis para apresentar CPF, documento de identidade, comprovante de endereço e Passaporte CNH Social, além dos demais documentos exigidos no edital.",
+      "Candidatos do interior devem procurar a Ciretran do município. Nos locais sem unidade, a documentação pode ser encaminhada pelo canal eletrônico informado pelo Detran.",
+      "O não cumprimento do prazo pode comprometer a continuidade no programa.",
+      "Fonte: ContilNet e Detran-AC."
+    ],
+    "imageUrl": "assets/news-manual/cnh-social-acre-20260714.webp",
+    "feedImageUrl": "assets/news-manual/cnh-social-acre-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/cnh-social-acre-20260714.webp",
+    "imageCredit": "Foto: Reprodução/Detran-AC via ContilNet",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2001,
+    "editorialPriority": "acre-servico",
+    "crossSources": [
+      {
+        "name": "ContilNet / Detran-AC",
+        "url": "https://contilnetnoticias.com.br/destaque-2/cnh-social-detran-divulga-lista-de-selecionados-e-abre-prazo-para-matricula/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "CNH Social abre matrícula no Acre. O Detran do Acre divulgou a lista de selecionados para a CNH Social 2026 na modalidade Rural. Os aprovados têm 20 dias úteis para fazer a matrícula e apresentar documentos como CPF, identidade, comprovante de endereço e Passaporte CNH Social. Candidatos do interior devem procurar a Ciretran local; quem mora onde não há unidade pode enviar a documentação por e-mail.",
+    "audioNarrationTranscript": "CNH Social abre matrícula no Acre. O Detran do Acre divulgou a lista de selecionados para a CNH Social 2026 na modalidade Rural. Os aprovados têm 20 dias úteis para fazer a matrícula e apresentar documentos como CPF, identidade, comprovante de endereço e Passaporte CNH Social. Candidatos do interior devem procurar a Ciretran local; quem mora onde não há unidade pode enviar a documentação por e-mail.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "O Detran do Acre divulgou a lista de selecionados para a CNH Social 2026 na modalidade Rural. Os aprovados têm 20 dias úteis para fazer a matrícula e apresentar documentos como CPF, identidade, comprovante de endereço e Passaporte CNH Social. Candidatos do interior devem procurar a Ciretran local; quem mora onde não há unidade pode enviar a documentação por e-mail. Fonte: ContilNet / Detran-AC.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Carteira Nacional de Habilitação sobre documento do programa CNH Social",
+      "caption": "CNH Social abre matrícula no Acre",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O Detran do Acre divulgou a relação de candidatos selecionados para a CNH Social 2026 na modalidade Rural.",
+      "Os aprovados têm 20 dias úteis para apresentar CPF, documento de identidade, comprovante de endereço e Passaporte CNH Social, além dos demais documentos exigidos no edital.",
+      "Candidatos do interior devem procurar a Ciretran do município. Nos locais sem unidade, a documentação pode ser encaminhada pelo canal eletrônico informado pelo Detran.",
+      "O não cumprimento do prazo pode comprometer a continuidade no programa.",
+      "Fonte: ContilNet e Detran-AC."
+    ]
+  },
   {
     "id": "manual-czs-cruzeiro-reforca-combate-as-queimadas",
     "slug": "cruzeiro-reforca-combate-as-queimadas",
