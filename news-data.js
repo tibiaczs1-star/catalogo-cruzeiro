@@ -1,5 +1,101 @@
-window.NEWS_ARCHIVE_TOTAL = 480;
+window.NEWS_ARCHIVE_TOTAL = 481;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-tcu-apura-ong-presente-acre-leo-moura",
+    "slug": "tcu-apura-ong-presente-acre-leo-moura",
+    "title": "TCU apura ONG presente no Acre",
+    "seoTitle": "TCU apura ONG presente no Acre | Catálogo CZS",
+    "seoDescription": "O TCU apontou falhas e indícios de irregularidades em repasses federais destinados ao Instituto Léo Moura Sports. A entidade mantém projetos no Acre financiados por emendas do senador Alan Rick, incluindo núcleos em Rio Branco e Cruzeiro do Sul. Até o momento, não há informação de que os convênios acreanos estejam entre os contratos analisados, nem decisão definitiva sobre responsabilização dos envolvidos.",
+    "eyebrow": "Acre",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T08:10:00.000-05:00",
+    "category": "Acre",
+    "categoryKey": "acre",
+    "previewClass": "thumb-acrelandia",
+    "sourceName": "Agora Acre / TCU",
+    "sourceUrl": "https://www.facebook.com/share/p/19TtV4LS7K/",
+    "sourceLabel": "TCU analisa repasses ao Instituto Léo Moura Sports",
+    "lede": "O TCU apontou falhas e indícios de irregularidades em repasses federais destinados ao Instituto Léo Moura Sports. A entidade mantém projetos no Acre financiados por emendas do senador Alan Rick, incluindo núcleos em Rio Branco e Cruzeiro do Sul. Até o momento, não há informação de que os convênios acreanos estejam entre os contratos analisados, nem decisão definitiva sobre responsabilização dos envolvidos.",
+    "summary": "O TCU apontou falhas e indícios de irregularidades em repasses federais destinados ao Instituto Léo Moura Sports. A entidade mantém projetos no Acre financiados por emendas do senador Alan Rick, incluindo núcleos em Rio Branco e Cruzeiro do Sul. Até o momento, não há informação de que os convênios acreanos estejam entre os contratos analisados, nem decisão definitiva sobre responsabilização dos envolvidos.",
+    "analysis": "A ligação com o Acre é contextual. Não há confirmação de que os convênios acreanos façam parte dos contratos específicos apontados no processo.",
+    "highlights": [
+      "TCU apontou falhas e indícios de irregularidades em repasses ao instituto.",
+      "A entidade mantém projetos esportivos em Rio Branco e Cruzeiro do Sul.",
+      "Não há confirmação de que convênios acreanos estejam entre os analisados.",
+      "A citação no processo não representa condenação dos envolvidos."
+    ],
+    "development": [
+      "O Tribunal de Contas da União analisou repasses federais destinados ao Instituto Léo Moura Sports e registrou falhas de governança, indícios de irregularidades na execução de termos de fomento e prestações de contas reprovadas ou ainda em análise.",
+      "O Acórdão 1770/2026 cita achados como orçamentos falsos, sobrepreço, superfaturamento e ausência de documentação comprobatória em contratos específicos. O processo prevê determinações ao Ministério do Esporte e monitoramento das providências, com respeito ao contraditório e à ampla defesa.",
+      "No Acre, o instituto mantém projetos esportivos financiados por emendas do senador Alan Rick. Há núcleos em Rio Branco, Cruzeiro do Sul e outros municípios, além de uma escolinha de vôlei inaugurada na capital.",
+      "Até o momento, não há informação de que os convênios executados no Acre estejam entre os contratos específicos analisados pelo TCU. A existência dos projetos no estado não representa responsabilização do senador, dos gestores locais ou dos participantes das atividades.",
+      "O espaço permanece aberto para manifestação do Instituto Léo Moura Sports e do senador Alan Rick. A matéria será atualizada caso haja posicionamento novo ou identificação oficial de convênio acreano no processo.",
+      "Fontes: Agora Acre, Tribunal de Contas da União e ge Acre."
+    ],
+    "imageUrl": "assets/news-manual/tcu-instituto-leo-moura-acre-20260714.jpg",
+    "feedImageUrl": "assets/news-manual/tcu-instituto-leo-moura-acre-20260714.jpg",
+    "sourceImageUrl": "assets/news-manual/tcu-instituto-leo-moura-acre-20260714.jpg",
+    "imageCredit": "Foto: Gustavo Bardales/ge Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1900,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://www.facebook.com/share/p/19TtV4LS7K/"
+      },
+      {
+        "name": "Tribunal de Contas da União",
+        "url": "https://pesquisa.apps.tcu.gov.br/resultado/acordao-completo/pesquisa%2520e%2520mercado%2520e%2520pre%25C3%25A7o/COPIATIPO%253A%2528%2522AC%25C3%2593RD%25C3%2583O%2522%2529"
+      },
+      {
+        "name": "ge Acre",
+        "url": "https://ge.globo.com/ac/noticia/2024/11/11/instituto-leo-moura-inaugura-escolinha-de-volei-em-rio-branco-com-emendas-de-senador-do-ac.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Tribunal de Contas da União",
+        "url": "https://pesquisa.apps.tcu.gov.br/resultado/acordao-completo/pesquisa%2520e%2520mercado%2520e%2520pre%25C3%25A7o/COPIATIPO%253A%2528%2522AC%25C3%2593RD%25C3%2583O%2522%2529"
+      },
+      {
+        "name": "ge Acre",
+        "url": "https://ge.globo.com/ac/noticia/2024/11/11/instituto-leo-moura-inaugura-escolinha-de-volei-em-rio-branco-com-emendas-de-senador-do-ac.ghtml"
+      }
+    ],
+    "sourceCount": 3,
+    "alternateSlugs": [],
+    "audioNarrationText": "TCU apura ONG presente no Acre. O TCU apontou falhas e indícios de irregularidades em repasses federais destinados ao Instituto Léo Moura Sports. A entidade mantém projetos no Acre financiados por emendas do senador Alan Rick, incluindo núcleos em Rio Branco e Cruzeiro do Sul. Até o momento, não há informação de que os convênios acreanos estejam entre os contratos analisados, nem decisão definitiva sobre responsabilização dos envolvidos.",
+    "audioNarrationTranscript": "TCU apura ONG presente no Acre. O TCU apontou falhas e indícios de irregularidades em repasses federais destinados ao Instituto Léo Moura Sports. A entidade mantém projetos no Acre financiados por emendas do senador Alan Rick, incluindo núcleos em Rio Branco e Cruzeiro do Sul. Até o momento, não há informação de que os convênios acreanos estejam entre os contratos analisados, nem decisão definitiva sobre responsabilização dos envolvidos.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "O TCU apontou falhas e indícios de irregularidades em repasses federais destinados ao Instituto Léo Moura Sports. A entidade mantém projetos no Acre financiados por emendas do senador Alan Rick, incluindo núcleos em Rio Branco e Cruzeiro do Sul. Até o momento, não há informação de que os convênios acreanos estejam entre os contratos analisados, nem decisão definitiva sobre responsabilização dos envolvidos. Fonte: Agora Acre / TCU / ge Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Crianças e responsáveis em projeto esportivo do Instituto Léo Moura no Acre",
+      "caption": "TCU apura ONG presente no Acre",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O Tribunal de Contas da União analisou repasses federais destinados ao Instituto Léo Moura Sports e registrou falhas de governança, indícios de irregularidades na execução de termos de fomento e prestações de contas reprovadas ou ainda em análise.",
+      "O Acórdão 1770/2026 cita achados como orçamentos falsos, sobrepreço, superfaturamento e ausência de documentação comprobatória em contratos específicos. O processo prevê determinações ao Ministério do Esporte e monitoramento das providências, com respeito ao contraditório e à ampla defesa.",
+      "No Acre, o instituto mantém projetos esportivos financiados por emendas do senador Alan Rick. Há núcleos em Rio Branco, Cruzeiro do Sul e outros municípios, além de uma escolinha de vôlei inaugurada na capital.",
+      "Até o momento, não há informação de que os convênios executados no Acre estejam entre os contratos específicos analisados pelo TCU. A existência dos projetos no estado não representa responsabilização do senador, dos gestores locais ou dos participantes das atividades.",
+      "O espaço permanece aberto para manifestação do Instituto Léo Moura Sports e do senador Alan Rick. A matéria será atualizada caso haja posicionamento novo ou identificação oficial de convênio acreano no processo.",
+      "Fontes: Agora Acre, Tribunal de Contas da União e ge Acre."
+    ]
+  },
   {
     "id": "manual-czs-social-moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
     "slug": "moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
