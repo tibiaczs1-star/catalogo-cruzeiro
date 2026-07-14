@@ -84,3 +84,19 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   assert.doesNotMatch(`${html}\n${js}`, /Cheffe Call|escrit[oó]rios|agentes/i);
   assert.doesNotMatch(js, /Notification|PushManager|serviceWorker/);
 });
+
+test("navegacao inferior reune os quatro destinos publicos com estados acessiveis", () => {
+  const html = fs.readFileSync(path.join(ROOT, "app.html"), "utf8");
+  const css = fs.readFileSync(path.join(ROOT, "app.css"), "utf8");
+  const js = fs.readFileSync(APP_JS, "utf8");
+  const nav = html.match(/<nav class="bottom-nav"[\s\S]*?<\/nav>/)?.[0] || "";
+
+  assert.match(nav, /data-destination="latest"[^>]*aria-current="page"[^>]*>[^<]*Últimas/);
+  assert.match(nav, /data-destination="video"[^>]*aria-current="false"[^>]*>[^<]*Vídeos/);
+  assert.match(nav, /data-destination="categories"[^>]*aria-expanded="false"[^>]*>[^<]*Editorias/);
+  assert.match(nav, /data-destination="search"[^>]*aria-expanded="false"[^>]*>[^<]*Busca/);
+  assert.match(css, /\.bottom-nav\s*\{[\s\S]*?position:\s*fixed/);
+  assert.match(css, /env\(safe-area-inset-bottom\)/);
+  assert.match(js, /aria-current/);
+  assert.match(js, /aria-expanded/);
+});

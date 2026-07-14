@@ -123,12 +123,15 @@
     const status = document.getElementById("feedStatus");
     const notice = document.getElementById("newNewsNotice");
     const shell = document.querySelector(".feed-shell");
-    const tabs = Array.from(document.querySelectorAll(".feed-tab"));
+    const navButtons = Array.from(document.querySelectorAll(".bottom-nav button"));
     const editionDate = document.getElementById("editionDate");
     const search = document.getElementById("newsSearch");
     const categoryFilter = document.getElementById("categoryFilter");
     const filterStatus = document.getElementById("filterStatus");
-    if (!feed || !status || !notice || !shell || !search || !categoryFilter || !filterStatus) return;
+    const feedTools = document.getElementById("feedTools");
+    const categoryPanel = document.getElementById("categoryPanel");
+    const searchPanel = document.getElementById("searchPanel");
+    if (!feed || !status || !notice || !shell || !search || !categoryFilter || !filterStatus || !feedTools || !categoryPanel || !searchPanel) return;
 
     let currentItems = [];
     let activeFilter = "all";
@@ -194,14 +197,42 @@
       }
     }
 
-    tabs.forEach((tab) => tab.addEventListener("click", () => {
-      activeFilter = tab.dataset.filter || "all";
-      tabs.forEach((item) => {
-        const selected = item === tab;
-        item.classList.toggle("is-active", selected);
-        item.setAttribute("aria-pressed", String(selected));
+    function closeToolPanels() {
+      categoryPanel.hidden = true;
+      searchPanel.hidden = true;
+      feedTools.hidden = true;
+      navButtons.forEach((button) => {
+        if (button.hasAttribute("aria-expanded")) button.setAttribute("aria-expanded", "false");
       });
+    }
+
+    function setPrimaryDestination(destination) {
+      activeFilter = destination === "video" ? "video" : "all";
+      navButtons.forEach((button) => {
+        if (!button.hasAttribute("aria-current")) return;
+        button.setAttribute("aria-current", button.dataset.destination === destination ? "page" : "false");
+      });
+      closeToolPanels();
       render();
+    }
+
+    function toggleTool(destination) {
+      const targetPanel = destination === "categories" ? categoryPanel : searchPanel;
+      const targetButton = navButtons.find((button) => button.dataset.destination === destination);
+      const willOpen = targetPanel.hidden;
+      closeToolPanels();
+      if (!willOpen || !targetButton) return;
+      feedTools.hidden = false;
+      targetPanel.hidden = false;
+      targetButton.setAttribute("aria-expanded", "true");
+      if (destination === "search") search.focus();
+      else categoryFilter.focus();
+    }
+
+    navButtons.forEach((button) => button.addEventListener("click", () => {
+      const destination = button.dataset.destination;
+      if (destination === "latest" || destination === "video") setPrimaryDestination(destination);
+      else if (destination === "categories" || destination === "search") toggleTool(destination);
     }));
 
     search.addEventListener("input", render);

@@ -29,23 +29,21 @@
       <p>Notícias de Cruzeiro do Sul, Vale do Juruá e Acre, em ordem de impacto local.</p>
     </section>
 
-    <nav class="feed-tabs" aria-label="Filtrar conteúdo">
-      <button class="feed-tab is-active" type="button" data-filter="all" aria-pressed="true">Últimas</button>
-      <button class="feed-tab" type="button" data-filter="video" aria-pressed="false">Vídeos</button>
-    </nav>
-
-    <section class="feed-tools" aria-label="Ferramentas de notícias">
-      <label class="category-control" for="categoryFilter">
-        <span>Editorias</span>
-        <select id="categoryFilter">
-          <option value="all">Todas</option>
-        </select>
-      </label>
-      <label class="search-control" for="newsSearch">
-        <span>Busca</span>
-        <input id="newsSearch" type="search" inputmode="search" placeholder="Assunto ou lugar" aria-label="Buscar nas notícias" autocomplete="off">
-      </label>
-      <p class="filter-status" id="filterStatus" role="status" aria-live="polite"></p>
+    <section class="feed-tools" id="feedTools" aria-label="Ferramentas de notícias" hidden>
+      <div class="tool-panel" id="categoryPanel" hidden>
+        <label class="category-control" for="categoryFilter">
+          <span>Escolha uma editoria</span>
+          <select id="categoryFilter">
+            <option value="all">Todas</option>
+          </select>
+        </label>
+      </div>
+      <div class="tool-panel" id="searchPanel" hidden>
+        <label class="search-control" for="newsSearch">
+          <span>Buscar nas notícias</span>
+          <input id="newsSearch" type="search" inputmode="search" placeholder="Assunto ou lugar" aria-label="Buscar nas notícias" autocomplete="off">
+        </label>
+      </div>
     </section>
 
     <button class="new-news-notice" id="newNewsNotice" type="button" hidden>
@@ -54,6 +52,7 @@
     </button>
 
     <section class="feed-shell" aria-live="polite" aria-busy="true">
+      <p class="filter-status" id="filterStatus" role="status" aria-live="polite"></p>
       <div class="feed-status" id="feedStatus">
         <span class="loading-line"></span>
         <span class="loading-line short"></span>
@@ -67,6 +66,13 @@
     <img src="/assets/brand/catalogo-czs-logo-offline-horizontal-crop-20260603.webp" alt="Catálogo CZS" width="130" height="45">
     <p>Pesamos fontes. Procuramos a verdade.</p>
   </footer>
+
+  <nav class="bottom-nav" aria-label="Navegação principal do aplicativo">
+    <button type="button" data-destination="latest" aria-current="page">Últimas</button>
+    <button type="button" data-destination="video" aria-current="false">Vídeos</button>
+    <button type="button" data-destination="categories" aria-expanded="false" aria-controls="categoryPanel">Editorias</button>
+    <button type="button" data-destination="search" aria-expanded="false" aria-controls="searchPanel">Busca</button>
+  </nav>
 
   <script src="/app.js?v=20260714-1" defer></script>
 </body>
