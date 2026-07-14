@@ -30,9 +30,9 @@ test("normaliza somente itens de noticia publicaveis do endpoint leve", () => {
 test("gera apenas rotas internas seguras para a leitura da noticia", () => {
   const { getArticleHref } = loadAppModule();
 
-  assert.equal(getArticleHref({ slug: "chuva-no-jurua" }), "/noticia.html?slug=chuva-no-jurua");
-  assert.equal(getArticleHref({ slug: "../admin" }), "/arquivo.html");
-  assert.equal(getArticleHref({ sourceUrl: "javascript:alert(1)" }), "/arquivo.html");
+  assert.equal(getArticleHref({ slug: "chuva-no-jurua" }), "/app.html?slug=chuva-no-jurua");
+  assert.equal(getArticleHref({ slug: "../admin" }), "/app.html");
+  assert.equal(getArticleHref({ sourceUrl: "javascript:alert(1)" }), "/app.html");
 });
 
 test("reconhece video apenas quando a noticia traz midia reproduzivel", () => {
@@ -88,11 +88,17 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   assert.match(html, /id="newsFeed" tabindex="-1"/);
   assert.match(html, /id="loadMoreNews"/);
   assert.match(html, />Carregar mais</);
+  assert.match(html, /id="feedView"/);
+  assert.match(html, /id="articleReader"/);
+  assert.match(html, /id="articleBack"/);
+  assert.match(js, /\/api\/news\/\$\{encodeURIComponent\(slug\)\}/);
+  assert.match(js, /\/api\/news\?limit=40&lite=1&sort=latest&video=1/);
   assert.match(html, /id="newsSearch"/);
   assert.match(html, /id="categoryFilter"/);
   assert.match(html, /aria-label="Buscar nas notícias"/);
   assert.match(html, />Editorias</);
   assert.doesNotMatch(`${html}\n${js}`, /Cheffe Call|escrit[oó]rios|agentes/i);
+  assert.doesNotMatch(`${html}\n${js}`, /noticia\.html/);
   assert.doesNotMatch(js, /Notification|PushManager|serviceWorker/);
 });
 

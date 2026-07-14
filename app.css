@@ -100,6 +100,18 @@ h1 { max-width: 570px; margin: 0; color: var(--navy); font: 800 clamp(43px, 13vw
 .video-badge { position: absolute; left: 9px; bottom: 9px; display: inline-flex; align-items: center; gap: 5px; padding: 6px 8px; border-radius: 4px; background: rgba(7, 26, 61, .9); color: #fff; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
 .video-badge::before { content: ""; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 7px solid #fff; }
 
+.article-reader { min-height: 70vh; padding: 18px; background: #fff; }
+.article-back { min-height: 44px; margin: 0 0 22px; padding: 0; border: 0; background: transparent; color: var(--blue); font: 800 13px var(--sans); }
+.article-content { padding-bottom: 28px; }
+.article-content .story-label { margin-bottom: 12px; }
+.article-content h1 { margin-bottom: 18px; font-size: clamp(38px, 11vw, 62px); }
+.article-content .article-lede { margin: 0 0 22px; color: #364152; font-size: 17px; font-weight: 600; line-height: 1.58; }
+.article-content .article-image, .article-content video { display: block; width: 100%; max-height: 520px; margin: 0 0 22px; border-radius: 7px; background: var(--soft); object-fit: cover; }
+.article-content .article-body { color: #293443; font: 500 16px/1.72 var(--sans); }
+.article-content .article-body p { margin: 0 0 18px; }
+.article-content .article-source { display: inline-flex; min-height: 44px; align-items: center; margin-top: 14px; color: var(--blue); font-size: 13px; font-weight: 800; }
+.article-error { padding: 36px 0; color: var(--muted); text-align: center; }
+
 footer { padding: 34px 18px calc(28px + env(safe-area-inset-bottom)); background: var(--navy); color: #fff; }
 footer img { width: 130px; height: 45px; object-fit: contain; filter: brightness(0) invert(1); }
 footer p { margin: 14px 0 0; color: rgba(255, 255, 255, .7); font: 700 12px/1.5 var(--sans); }

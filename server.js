@@ -7718,15 +7718,20 @@ function buildArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const basePayload = getArticleNewsApiBasePayload();
   const latest = options.sort === "latest";
+  const video = Boolean(options.video);
   const orderedItems = latest
     ? basePayload.items.slice().sort((left, right) => getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left))
     : basePayload.items;
-  const visibleItems = orderedItems.slice(0, safeLimit);
+  const eligibleItems = video
+    ? orderedItems.filter((item) => item.videoUrl || (item.media?.type === "video" && (item.media?.url || item.media?.src || item.media?.videoUrl)))
+    : orderedItems;
+  const visibleItems = eligibleItems.slice(0, safeLimit);
 
   return {
     ok: true,
     sort: latest ? "latest" : "editorial",
-    total: basePayload.total,
+    video,
+    total: video ? eligibleItems.length : basePayload.total,
     archiveTotal: basePayload.total,
     returned: visibleItems.length,
     items: visibleItems
@@ -7817,7 +7822,8 @@ function getCachedArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const lite = Boolean(options.lite);
   const sort = options.sort === "latest" ? "latest" : "editorial";
-  const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}:sort:${sort}`;
+  const video = Boolean(options.video);
+  const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}:sort:${sort}:video:${video ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
 
   if (cached && cached.expiresAt > Date.now()) {
@@ -7825,8 +7831,8 @@ function getCachedArticleNewsApiPayload(limit = 1000, options = {}) {
   }
 
   const payload = lite
-    ? buildLiteArticleNewsApiPayload(safeLimit, { sort })
-    : buildArticleNewsApiPayload(safeLimit, { sort });
+    ? buildLiteArticleNewsApiPayload(safeLimit, { sort, video })
+    : buildArticleNewsApiPayload(safeLimit, { sort, video });
   newsApiResponseCache.set(key, {
     expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
     payload
@@ -17501,7 +17507,8 @@ async function handleApi(req, res, pathname, searchParams) {
     const limit = Number(searchParams.get("limit") || 1000);
     const lite = /^(1|true|yes|sim)$/i.test(String(searchParams.get("lite") || ""));
     const sort = searchParams.get("sort") === "latest" ? "latest" : "editorial";
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { lite, sort }));
+    const video = /^(1|true|yes|sim)$/i.test(String(searchParams.get("video") || ""));
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { lite, sort, video }));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
