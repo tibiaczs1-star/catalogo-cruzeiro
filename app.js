@@ -5,8 +5,10 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  const NEWS_ENDPOINT = "/api/news?limit=40&lite=1";
-  const NEWS_POLL_ENDPOINT = "/api/news?limit=1&lite=1";
+  const NEWS_ENDPOINT = "/api/news?limit=40&lite=1&sort=latest";
+  const NEWS_POLL_ENDPOINT = "/api/news?limit=1&lite=1&sort=latest";
+  const NEWS_BATCH_SIZE = 40;
+  const MAX_NEWS_LIMIT = 200;
   const POLL_INTERVAL_MS = 90 * 1000;
   const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -70,6 +72,16 @@
     });
   }
 
+  function getNextNewsLimit(currentLimit) {
+    const current = Math.max(NEWS_BATCH_SIZE, Number(currentLimit) || NEWS_BATCH_SIZE);
+    return Math.min(MAX_NEWS_LIMIT, current + NEWS_BATCH_SIZE);
+  }
+
+  function getNewsEndpoint(limit) {
+    const safeLimit = Math.max(1, Math.min(MAX_NEWS_LIMIT, Number(limit) || NEWS_BATCH_SIZE));
+    return `/api/news?limit=${safeLimit}&lite=1&sort=latest`;
+  }
+
   function formatDate(value) {
     const parsed = new Date(value);
     if (!Number.isFinite(parsed.getTime())) return text(value);
@@ -131,10 +143,13 @@
     const feedTools = document.getElementById("feedTools");
     const categoryPanel = document.getElementById("categoryPanel");
     const searchPanel = document.getElementById("searchPanel");
-    if (!feed || !status || !notice || !shell || !search || !categoryFilter || !filterStatus || !feedTools || !categoryPanel || !searchPanel) return;
+    const loadMore = document.getElementById("loadMoreNews");
+    if (!feed || !status || !notice || !shell || !search || !categoryFilter || !filterStatus || !feedTools || !categoryPanel || !searchPanel || !loadMore) return;
 
     let currentItems = [];
     let activeFilter = "all";
+    let loadedLimit = NEWS_BATCH_SIZE;
+    let totalAvailable = NEWS_BATCH_SIZE;
 
     function visibleItems() {
       const mediaItems = activeFilter === "video" ? currentItems.filter(hasPlayableVideo) : currentItems;
@@ -162,14 +177,16 @@
         items.forEach((item, index) => feed.appendChild(createStory(item, index)));
       }
       filterStatus.textContent = `${items.length} ${items.length === 1 ? "notícia encontrada" : "notícias encontradas"}`;
+      loadMore.hidden = currentItems.length >= Math.min(totalAvailable, MAX_NEWS_LIMIT) || loadedLimit >= MAX_NEWS_LIMIT;
       shell.setAttribute("aria-busy", "false");
     }
 
-    async function fetchNews({ polling = false } = {}) {
+    async function fetchNews({ polling = false, limit = loadedLimit } = {}) {
       try {
-        const response = await fetch(polling ? NEWS_POLL_ENDPOINT : NEWS_ENDPOINT, { headers: { Accept: "application/json" }, cache: "no-store" });
+        const response = await fetch(polling ? NEWS_POLL_ENDPOINT : getNewsEndpoint(limit), { headers: { Accept: "application/json" }, cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const nextItems = normalizeNewsPayload(await response.json());
+        const payload = await response.json();
+        const nextItems = normalizeNewsPayload(payload);
         if (!nextItems.length) throw new Error("empty-feed");
         const newItems = findNewItems(currentItems, nextItems);
         if (polling && newItems.length) {
@@ -177,6 +194,8 @@
           return;
         }
         if (polling) return;
+        loadedLimit = Math.max(NEWS_BATCH_SIZE, Math.min(MAX_NEWS_LIMIT, Number(limit) || NEWS_BATCH_SIZE));
+        totalAvailable = Math.max(nextItems.length, Number(payload.total || payload.archiveTotal || nextItems.length));
         currentItems = nextItems;
         updateCategoryOptions();
         editionDate.textContent = `Atualizado ${formatDate(nextItems[0].publishedAt)}`;
@@ -237,6 +256,14 @@
 
     search.addEventListener("input", render);
     categoryFilter.addEventListener("change", render);
+    loadMore.addEventListener("click", async () => {
+      const nextLimit = getNextNewsLimit(loadedLimit);
+      loadMore.disabled = true;
+      loadMore.setAttribute("aria-busy", "true");
+      await fetchNews({ limit: nextLimit });
+      loadMore.disabled = false;
+      loadMore.setAttribute("aria-busy", "false");
+    });
 
     notice.addEventListener("click", async () => {
       notice.hidden = true;
@@ -255,5 +282,5 @@
     else startBrowserApp();
   }
 
-  return { NEWS_ENDPOINT, NEWS_POLL_ENDPOINT, normalizeNewsPayload, getArticleHref, hasPlayableVideo, findNewItems, filterNewsItems };
+  return { NEWS_ENDPOINT, NEWS_POLL_ENDPOINT, normalizeNewsPayload, getArticleHref, hasPlayableVideo, findNewItems, filterNewsItems, getNextNewsLimit };
 });

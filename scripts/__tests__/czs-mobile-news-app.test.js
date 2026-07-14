@@ -67,6 +67,14 @@ test("filtra noticias localmente por busca e editoria", () => {
   assert.deepEqual(filterNewsItems(items, { query: "rio", category: "Cultura" }), []);
 });
 
+test("calcula lotes leves de carregar mais com limite seguro", () => {
+  const { getNextNewsLimit } = loadAppModule();
+
+  assert.equal(getNextNewsLimit(40), 80);
+  assert.equal(getNextNewsLimit(80), 120);
+  assert.equal(getNextNewsLimit(200), 200);
+});
+
 test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   const htmlPath = path.join(ROOT, "app.html");
   assert.equal(fs.existsSync(htmlPath), true, "app.html deve existir");
@@ -74,9 +82,12 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   const js = fs.readFileSync(APP_JS, "utf8");
 
   assert.match(js, /\/api\/news\?limit=40&lite=1/);
-  assert.match(js, /\/api\/news\?limit=1&lite=1/);
+  assert.match(js, /\/api\/news\?limit=1&lite=1&sort=latest/);
   assert.match(html, /id="newNewsNotice"/);
   assert.match(html, /id="newsFeed"/);
+  assert.match(html, /id="newsFeed" tabindex="-1"/);
+  assert.match(html, /id="loadMoreNews"/);
+  assert.match(html, />Carregar mais</);
   assert.match(html, /id="newsSearch"/);
   assert.match(html, /id="categoryFilter"/);
   assert.match(html, /aria-label="Buscar nas notícias"/);
