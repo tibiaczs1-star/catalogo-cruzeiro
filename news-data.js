@@ -1,5 +1,71 @@
-window.NEWS_ARCHIVE_TOTAL = 492;
+window.NEWS_ARCHIVE_TOTAL = 493;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-lancha-blindada-reforcara-seguranca-no-jurua",
+    "slug": "lancha-blindada-reforcara-seguranca-no-jurua",
+    "title": "Lancha blindada reforçará segurança no Juruá",
+    "seoTitle": "Lancha blindada reforçará segurança no Juruá | Catálogo CZS",
+    "seoDescription": "Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+    "eyebrow": "Vale do Juruá",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T13:30:00.000-05:00",
+    "category": "Vale do Juruá",
+    "categoryKey": "vale-do-jurua",
+    "previewClass": "thumb-vale-do-jurua",
+    "sourceName": "Juruá 24 Horas / GEFRON / Agência Acre",
+    "sourceUrl": "https://jurua24horas.com/2026/07/gefron-conclui-capacitacao-para-operacao-de-lancha-blindada-que-reforcara-patrulhamento-no-vale-do-jurua/",
+    "sourceLabel": "Lancha blindada reforçará segurança no Juruá",
+    "lede": "Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+    "summary": "Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+      "Fonte: Juruá 24 Horas / GEFRON / Agência Acre."
+    ],
+    "imageUrl": "assets/news-manual/lancha-blindada-jurua-20260714.jpg",
+    "feedImageUrl": "assets/news-manual/lancha-blindada-jurua-20260714.jpg",
+    "sourceImageUrl": "assets/news-manual/lancha-blindada-jurua-20260714.jpg",
+    "imageCredit": "Foto: Agência Acre via O Alto Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2010,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá 24 Horas / GEFRON / Agência Acre",
+        "url": "https://jurua24horas.com/2026/07/gefron-conclui-capacitacao-para-operacao-de-lancha-blindada-que-reforcara-patrulhamento-no-vale-do-jurua/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Lancha blindada reforçará segurança no Juruá. Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+    "audioNarrationTranscript": "Lancha blindada reforçará segurança no Juruá. Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira. Fonte: Juruá 24 Horas / GEFRON / Agência Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Agentes de segurança sobre a nova lancha blindada do Vale do Juruá",
+      "caption": "Lancha blindada reforçará segurança no Juruá",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Vinte agentes do GEFRON, Polícia Militar, Polícia Federal e Exército concluíram a capacitação para operar a nova lancha blindada destinada ao Vale do Juruá. A embarcação, avaliada em cerca de R$ 3,3 milhões, alcança até 80 quilômetros por hora e possui sonar, radar, câmera térmica e cabine protegida. O equipamento será usado no patrulhamento de rios e no combate a crimes de fronteira.",
+      "Fonte: Juruá 24 Horas / GEFRON / Agência Acre."
+    ]
+  },
   {
     "id": "manual-czs-ufac-abre-selecao-para-148-vagas-remanescentes",
     "slug": "ufac-abre-selecao-para-148-vagas-remanescentes",
