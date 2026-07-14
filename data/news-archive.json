@@ -1,5 +1,82 @@
 [
   {
+    "id": "manual-czs-bombeiros-alertam-para-riscos-no-rio-jurua",
+    "slug": "bombeiros-alertam-para-riscos-no-rio-jurua",
+    "title": "Bombeiros alertam para riscos no Rio Juruá",
+    "seoTitle": "Bombeiros alertam para riscos no Rio Juruá | Catálogo CZS",
+    "seoDescription": "O Corpo de Bombeiros alerta que a estiagem aumentou os riscos de navegação no Rio Juruá. Três embarcações afundaram nesta semana, sem feridos. Condutores devem evitar excesso de peso e superlotação, reduzir a velocidade em trechos rasos e observar bancos de areia e galhos. O uso de colete salva-vidas é indispensável para todos os ocupantes.",
+    "eyebrow": "Vale do Juruá",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T11:17:00.000-05:00",
+    "category": "Vale do Juruá",
+    "categoryKey": "vale-do-jurua",
+    "previewClass": "thumb-vale-do-jurua",
+    "sourceName": "Juruá 24 Horas / Corpo de Bombeiros do Acre",
+    "sourceUrl": "https://jurua24horas.com/2026/07/corpo-de-bombeiros-alerta-para-risco-de-acidentes-no-rio-jurua-durante-estiagem/",
+    "sourceLabel": "Bombeiros alertam para riscos no Rio Juruá",
+    "lede": "O Corpo de Bombeiros alerta que a estiagem aumentou os riscos de navegação no Rio Juruá. Três embarcações afundaram nesta semana, sem feridos. Condutores devem evitar excesso de peso e superlotação, reduzir a velocidade em trechos rasos e observar bancos de areia e galhos. O uso de colete salva-vidas é indispensável para todos os ocupantes.",
+    "summary": "O Corpo de Bombeiros alerta que a estiagem aumentou os riscos de navegação no Rio Juruá. Três embarcações afundaram nesta semana, sem feridos. Condutores devem evitar excesso de peso e superlotação, reduzir a velocidade em trechos rasos e observar bancos de areia e galhos. O uso de colete salva-vidas é indispensável para todos os ocupantes.",
+    "analysis": "O alerta combina prevenção, uso de equipamentos de segurança e condução cautelosa durante a vazante.",
+    "highlights": [
+      "Três embarcações afundaram nesta semana.",
+      "As ocorrências não deixaram pessoas feridas.",
+      "Bancos de areia e galhos elevam o risco.",
+      "Colete salva-vidas é indispensável."
+    ],
+    "development": [
+      "O nível do Rio Juruá caiu com a estiagem e aumentou os riscos para embarcações que circulam na região de Cruzeiro do Sul.",
+      "Segundo o Corpo de Bombeiros Militar do Acre, três embarcações afundaram nesta semana, mas as ocorrências causaram apenas danos materiais e ninguém ficou ferido.",
+      "Os condutores devem evitar superlotação e excesso de peso, reduzir a velocidade nos trechos rasos e observar bancos de areia, galhos e outros obstáculos naturais.",
+      "O uso de colete salva-vidas por todos os ocupantes é indispensável e reduz o risco de afogamento em caso de naufrágio.",
+      "Fonte: Juruá 24 Horas e Corpo de Bombeiros Militar do Acre."
+    ],
+    "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "feedImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "sourceImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "imageCredit": "Imagem: arquivo regional do Catálogo CZS",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2004,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá 24 Horas",
+        "url": "https://jurua24horas.com/2026/07/corpo-de-bombeiros-alerta-para-risco-de-acidentes-no-rio-jurua-durante-estiagem/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Bombeiros alertam para riscos no Rio Juruá. O Corpo de Bombeiros alerta que a estiagem aumentou os riscos de navegação no Rio Juruá. Três embarcações afundaram nesta semana, sem feridos. Condutores devem evitar excesso de peso e superlotação, reduzir a velocidade em trechos rasos e observar bancos de areia e galhos. O uso de colete salva-vidas é indispensável para todos os ocupantes.",
+    "audioNarrationTranscript": "Bombeiros alertam para riscos no Rio Juruá. O Corpo de Bombeiros alerta que a estiagem aumentou os riscos de navegação no Rio Juruá. Três embarcações afundaram nesta semana, sem feridos. Condutores devem evitar excesso de peso e superlotação, reduzir a velocidade em trechos rasos e observar bancos de areia e galhos. O uso de colete salva-vidas é indispensável para todos os ocupantes.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "O Corpo de Bombeiros alerta que a estiagem aumentou os riscos de navegação no Rio Juruá. Três embarcações afundaram nesta semana, sem feridos. Condutores devem evitar excesso de peso e superlotação, reduzir a velocidade em trechos rasos e observar bancos de areia e galhos. O uso de colete salva-vidas é indispensável para todos os ocupantes. Fonte: Juruá 24 Horas / Corpo de Bombeiros do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Rio Juruá durante período de estiagem no Vale do Juruá",
+      "caption": "Bombeiros alertam para riscos no Rio Juruá",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O nível do Rio Juruá caiu com a estiagem e aumentou os riscos para embarcações que circulam na região de Cruzeiro do Sul.",
+      "Segundo o Corpo de Bombeiros Militar do Acre, três embarcações afundaram nesta semana, mas as ocorrências causaram apenas danos materiais e ninguém ficou ferido.",
+      "Os condutores devem evitar superlotação e excesso de peso, reduzir a velocidade nos trechos rasos e observar bancos de areia, galhos e outros obstáculos naturais.",
+      "O uso de colete salva-vidas por todos os ocupantes é indispensável e reduz o risco de afogamento em caso de naufrágio.",
+      "Fonte: Juruá 24 Horas e Corpo de Bombeiros Militar do Acre."
+    ]
+  },
+  {
     "id": "manual-czs-cruzeiro-recebe-r-6-7-milhoes-da-sefaz",
     "slug": "cruzeiro-recebe-r-6-7-milhoes-da-sefaz",
     "title": "Cruzeiro recebe R$ 6,7 milhões da Sefaz",
