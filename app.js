@@ -15,7 +15,7 @@
 
   function registerAppServiceWorker() {
     if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("/app-sw.js", { scope: "/" }).catch(() => {});
+    navigator.serviceWorker.register("/app-sw.js", { scope: "/app.html" }).catch(() => {});
   }
 
   function text(value) {

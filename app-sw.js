@@ -1,7 +1,7 @@
 "use strict";
 
 const APP_CACHE_PREFIX = "czs-android-app-";
-const APP_CACHE_VERSION = "20260714-1";
+const APP_CACHE_VERSION = "20260714-2";
 const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-${APP_CACHE_VERSION}`;
 const NEWS_CACHE = `${APP_CACHE_PREFIX}news-${APP_CACHE_VERSION}`;
 const SHELL_ASSETS = [
@@ -52,6 +52,19 @@ async function networkFirstNews(request) {
   }
 }
 
+function staleWhileRevalidateShell(request, cacheKey, event) {
+  const cachedPromise = caches.match(cacheKey);
+  const networkPromise = fetch(request).then(async (response) => {
+    if (response && response.ok && response.type !== "opaque") {
+      const cache = await caches.open(SHELL_CACHE);
+      await cache.put(cacheKey, response.clone());
+    }
+    return response;
+  });
+  event.waitUntil(networkPromise.catch(() => {}));
+  return cachedPromise.then((cached) => cached || networkPromise);
+}
+
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
@@ -59,12 +72,7 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.startsWith("/downloads/")) return;
-  if (request.mode === "navigate") {
-    if (url.pathname === "/app.html") {
-      event.respondWith(fetch(request).catch(() => caches.match("/app.html")));
-    }
-    return;
-  }
+  if (request.mode === "navigate" && url.pathname !== "/app.html") return;
 
   if (url.pathname === "/api/news" || url.pathname.startsWith("/api/news/")) {
     event.respondWith(networkFirstNews(request));
@@ -72,5 +80,5 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (!SHELL_ASSETS.includes(url.pathname)) return;
-  event.respondWith(caches.match(url.pathname).then((cached) => cached || fetch(request)));
+  event.respondWith(staleWhileRevalidateShell(request, url.pathname, event));
 });
