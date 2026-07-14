@@ -1,8 +1,74 @@
 {
-  "lastAttemptAt": "2026-07-14T17:44:04.353Z",
-  "lastSuccessAt": "2026-07-14T17:44:04.353Z",
+  "lastAttemptAt": "2026-07-14T18:00:59.451Z",
+  "lastSuccessAt": "2026-07-14T18:00:59.451Z",
   "source": "czs-fast-mode-v3",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-avenida-copacabana-passa-por-reconstrucao-em-cruzeiro",
+      "slug": "avenida-copacabana-passa-por-reconstrucao-em-cruzeiro",
+      "title": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+      "seoTitle": "Avenida Copacabana passa por reconstrução em Cruzeiro | Catálogo CZS",
+      "seoDescription": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T12:59:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+      "sourceUrl": "https://jurua24horas.com/2026/07/prefeitura-de-cruzeiro-do-sul-executa-obra-de-reconstrucao-da-avenida-copacabana/",
+      "sourceLabel": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+      "lede": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "summary": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "analysis": "",
+      "highlights": [],
+      "development": [
+        "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+        "Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul."
+      ],
+      "imageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+      "feedImageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+      "imageCredit": "Foto: Reprodução via Juruá 24 Horas",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2008,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+          "url": "https://jurua24horas.com/2026/07/prefeitura-de-cruzeiro-do-sul-executa-obra-de-reconstrucao-da-avenida-copacabana/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "Avenida Copacabana passa por reconstrução em Cruzeiro. A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "audioNarrationTranscript": "Avenida Copacabana passa por reconstrução em Cruzeiro. A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma. Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Máquinas e trabalhadores atuam na reconstrução da Avenida Copacabana",
+        "caption": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+        "Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul."
+      ]
+    },
     {
       "id": "manual-czs-suspeita-de-ligar-faccao-entre-peru-e-acre",
       "slug": "suspeita-de-ligar-faccao-entre-peru-e-acre",
@@ -27161,53 +27227,53 @@
       "editorialSpotlightReady": false,
       "editorialSurfaceTier": "remote-secondary",
       "editorialLocalTier": 0
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-07/premio-ics-de-economia-clima-abre-inscricoes-na-segunda-feira",
-      "slug": "premio-ics-de-economia-clima-abre-inscricoes-na-segunda-feira",
-      "title": "Prêmio iCS de Economia & Clima abre inscrições na segunda-feira",
-      "eyebrow": "Negocios",
-      "date": "12 de jul de 2026",
-      "publishedAt": "2026-07-12T20:24:00.000Z",
-      "category": "Negocios",
-      "categoryKey": "negocios",
-      "previewClass": "thumb-negocios",
-      "sourceName": "Agencia Brasil",
-      "sourceUrl": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-07/premio-ics-de-economia-clima-abre-inscricoes-na-segunda-feira",
-      "sourceLabel": "Prêmio iCS de Economia & Clima abre inscrições na segunda-feira",
-      "lede": "A partir de segunda-feira (13) estarão abertas as inscrições para a segunda edição do Prêmio iCS de Economia & Clima, uma iniciativa do Hub de Economia & Clima do Instituto Clima e Sociedade em parceria com a Associação Nacional dos Centros de Pós-Graduação",
-      "summary": "A partir de segunda-feira (13) estarão abertas as inscrições para a segunda edição do Prêmio iCS de Economia & Clima, uma iniciativa do Hub de Economia & Clima do Instituto Clima e Sociedade em parceria com a Associação Nacional dos Centros de Pós-Graduação",
+      "id": "manual-czs-avenida-copacabana-passa-por-reconstrucao-em-cruzeiro",
+      "slug": "avenida-copacabana-passa-por-reconstrucao-em-cruzeiro",
+      "title": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+      "seoTitle": "Avenida Copacabana passa por reconstrução em Cruzeiro | Catálogo CZS",
+      "seoDescription": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T12:59:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+      "sourceUrl": "https://jurua24horas.com/2026/07/prefeitura-de-cruzeiro-do-sul-executa-obra-de-reconstrucao-da-avenida-copacabana/",
+      "sourceLabel": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+      "lede": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "summary": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
       "analysis": "",
       "highlights": [],
-      "development": [],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696352&o=rss",
-      "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696352&o=rss",
-      "sourceImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696352&o=rss",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "development": [
+        "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+        "Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul."
+      ],
+      "imageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+      "feedImageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+      "imageCredit": "Foto: Reprodução via Juruá 24 Horas",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
       "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "priority": 2008,
+      "editorialPriority": "jurua-destaque",
       "crossSources": [
         {
-          "name": "Agencia Brasil",
-          "url": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-07/premio-ics-de-economia-clima-abre-inscricoes-na-segunda-feira"
+          "name": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+          "url": "https://jurua24horas.com/2026/07/prefeitura-de-cruzeiro-do-sul-executa-obra-de-reconstrucao-da-avenida-copacabana/"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "Agencia Brasil",
-          "url": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-07/premio-ics-de-economia-clima-abre-inscricoes-na-segunda-feira"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "premio-ics-de-economia-clima-abre-inscricoes-na-segunda-feira"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Negocios. Prêmio iCS de economia & Clima abre inscrições na segunda-feira A partir de segunda-feira (13) estarão abertas as inscrições para a segunda edição do Prêmio iCS de economia & Clima, uma iniciativa do Hub de economia & Clima do Instituto Clima e Sociedade em parceria com a Associação Nacional dos Centros de Pós-Graduação... A informação vem de Agencia Brasil.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Negocios. Prêmio iCS de economia & Clima abre inscrições na segunda-feira A partir de segunda-feira (13) estarão abertas as inscrições para a segunda edição do Prêmio iCS de economia & Clima, uma iniciativa do Hub de economia & Clima do Instituto Clima e Sociedade em parceria com a Associação Nacional dos Centros de Pós-Graduação... A informação vem de Agencia Brasil.",
+      "alternateSlugs": [],
+      "audioNarrationText": "Avenida Copacabana passa por reconstrução em Cruzeiro. A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "audioNarrationTranscript": "Avenida Copacabana passa por reconstrução em Cruzeiro. A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -27215,27 +27281,21 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Prêmio iCS de Economia & Clima abre inscrições na segunda-feira. A partir de segunda-feira (13) estarão abertas as inscrições para a segunda edição do Prêmio iCS de Economia & Clima, uma iniciativa do Hub de Economia & Clima do Instituto Clima e Sociedade em parceria com a Associação Nacional dos... Fonte: Agencia Brasil.",
+      "videoCaptionText": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma. Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Máquinas e trabalhadores atuam na reconstrução da Avenida Copacabana",
+        "caption": "Avenida Copacabana passa por reconstrução em Cruzeiro",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
       "body": [
-        "Agencia Brasil publicou em 12 de jul de 2026: Prêmio iCS de Economia & Clima abre inscrições na segunda-feira.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialGate": "P0",
-      "editorialApproval": "human-required",
-      "editorialSpotlightReady": false,
-      "editorialSurfaceTier": "news",
-      "editorialLocalTier": 0
-    }
-  ],
-  "items": [
+        "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+        "Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul."
+      ]
+    },
     {
       "id": "manual-czs-suspeita-de-ligar-faccao-entre-peru-e-acre",
       "slug": "suspeita-de-ligar-faccao-entre-peru-e-acre",

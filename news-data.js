@@ -1,5 +1,71 @@
-window.NEWS_ARCHIVE_TOTAL = 490;
+window.NEWS_ARCHIVE_TOTAL = 491;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-avenida-copacabana-passa-por-reconstrucao-em-cruzeiro",
+    "slug": "avenida-copacabana-passa-por-reconstrucao-em-cruzeiro",
+    "title": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+    "seoTitle": "Avenida Copacabana passa por reconstrução em Cruzeiro | Catálogo CZS",
+    "seoDescription": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+    "eyebrow": "Cruzeiro do Sul",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T12:59:00.000-05:00",
+    "category": "Cruzeiro do Sul",
+    "categoryKey": "cruzeiro-do-sul",
+    "previewClass": "thumb-cruzeiro-do-sul",
+    "sourceName": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+    "sourceUrl": "https://jurua24horas.com/2026/07/prefeitura-de-cruzeiro-do-sul-executa-obra-de-reconstrucao-da-avenida-copacabana/",
+    "sourceLabel": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+    "lede": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+    "summary": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul."
+    ],
+    "imageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+    "feedImageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/avenida-copacabana-obras-20260714.webp",
+    "imageCredit": "Foto: Reprodução via Juruá 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2008,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+        "url": "https://jurua24horas.com/2026/07/prefeitura-de-cruzeiro-do-sul-executa-obra-de-reconstrucao-da-avenida-copacabana/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Avenida Copacabana passa por reconstrução em Cruzeiro. A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+    "audioNarrationTranscript": "Avenida Copacabana passa por reconstrução em Cruzeiro. A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma. Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Máquinas e trabalhadores atuam na reconstrução da Avenida Copacabana",
+      "caption": "Avenida Copacabana passa por reconstrução em Cruzeiro",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Prefeitura de Cruzeiro do Sul iniciou a reconstrução da Avenida Copacabana, uma das vias mais antigas da cidade. A primeira etapa concentra os serviços de drenagem; depois serão feitos elevação da pista, nova pavimentação e calçadas. Segundo o prefeito Zequinha Lima, cerca de 90% da avenida será reconstruída. As chuvas recentes atrasaram parte do cronograma.",
+      "Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul."
+    ]
+  },
   {
     "id": "manual-czs-suspeita-de-ligar-faccao-entre-peru-e-acre",
     "slug": "suspeita-de-ligar-faccao-entre-peru-e-acre",
