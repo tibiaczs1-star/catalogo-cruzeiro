@@ -21,7 +21,8 @@ const ROLE_LABELS = Object.freeze({
 
 const STATUS_LABELS = Object.freeze({
   available: "Disponível", occupied: "Ocupado", dirty: "Limpeza pendente",
-  inspected: "Inspecionado", maintenance: "Em manutenção", out_of_order: "Interditado",
+  cleaning: "Em limpeza", inspected: "Inspecionado", maintenance: "Em manutenção",
+  blocked: "Interditado", do_not_disturb: "Não perturbe",
   confirmed: "Confirmada", checked_in: "Hospedado", checked_out: "Finalizada",
   cancelled: "Cancelada", pending: "Pendente", in_progress: "Em andamento",
   done: "Concluída", open: "Aberta", closed: "Fechada", sandbox: "Ambiente de testes",
@@ -37,6 +38,30 @@ const NAVIGATION = Object.freeze([
   { id: "settings", label: "Integrações", icon: "⌁", permission: "admin.settings.manage", help: "Veja conexões externas e o estado de cada integração." },
   { id: "security", label: "Senhas", icon: "○", permission: "credentials.reset", help: "Troque sua senha ou redefina a senha de uma equipe." },
 ]);
+
+const AREA_HELP = Object.freeze({
+  "Movimento da unidade": "Reúne as reservas mais próximas para uma leitura rápida da operação.",
+  "Seu acesso": "Confirma usuário, cargo, unidade e origem dos dados desta sessão.",
+  "Reservas da unidade": "Lista o período, valor, situação e ações disponíveis para cada reserva.",
+  "Situação dos quartos": "Mostra o estado operacional atual de cada quarto da unidade.",
+  "Minhas tarefas": "Mostra somente as tarefas de governança atribuídas a esta conta.",
+  "Tarefas de governança": "Lista as tarefas de limpeza e inspeção registradas na unidade.",
+  "Ordens de manutenção": "Lista ocorrências técnicas, quartos relacionados e andamento do serviço.",
+  "Resumo financeiro": "Consolida valores das reservas visíveis para cargos financeiros autorizados.",
+  Integrações: "Mostra as conexões externas e se cada uma ainda está em ambiente de testes.",
+  "Controle de senhas": "Abre a troca da própria senha e a redefinição por cargo quando permitida.",
+  "Proteções ativas": "Resume as proteções aplicadas a senhas, sessões e tentativas de acesso.",
+});
+
+const METRIC_HELP = Object.freeze({
+  Quartos: "Total de quartos cadastrados nesta unidade.",
+  Disponíveis: "Quartos livres ou inspecionados para nova hospedagem.",
+  Ocupados: "Quartos marcados como ocupados neste momento.",
+  Limpeza: "Quartos aguardando limpeza e quantidade de tarefas abertas.",
+  Reservas: "Quantidade de reservas não canceladas no período visível.",
+  "Receita prevista": "Soma dos valores das reservas não canceladas exibidas no painel.",
+  "Ticket médio": "Valor médio calculado por reserva não cancelada.",
+});
 
 const state = { session: null, bootstrap: null, activeView: "now", loading: false };
 const elements = {};
@@ -84,6 +109,7 @@ function init() {
   });
   updateConnectionState();
   setToday();
+  bindTooltips(document);
   restoreServerSession();
 }
 
@@ -122,6 +148,9 @@ function publicError(code) {
     CREDENTIAL_NOT_CONFIGURED: "Acesso inicial não configurado para este cargo.",
     CONFIGURATION_ERROR: "Acesso indisponível no momento.",
     INTERNAL_ERROR: "Servidor indisponível no momento.",
+    INVALID_REQUEST: "Confira os campos informados.",
+    ROLE_REQUIRED: "Selecione o cargo para entrar.",
+    INVALID_RESERVATION_TRANSITION: "Esta ação não é permitida no estado atual da reserva.",
   })[code] ?? "Não foi possível concluir a ação. Tente novamente.";
 }
 
@@ -139,9 +168,9 @@ async function restoreServerSession() {
 async function handleLogin(event) {
   event.preventDefault();
   if (!navigator.onLine) return showLoginError("Conecte-se à internet para entrar.");
+  const body = Object.fromEntries(new FormData(elements.loginForm));
   setBusy(elements.loginForm, true);
   showLoginError("");
-  const body = Object.fromEntries(new FormData(elements.loginForm));
   try {
     const payload = await api("/auth/login", { method: "POST", body: JSON.stringify(body) });
     state.session = payload.session;
@@ -244,7 +273,7 @@ function renderNow() {
     <div class="view-columns">
       <div>
         <div class="section-heading"><div><h2>Movimento da unidade</h2><p>Reservas e tarefas visíveis para seu cargo.</p></div></div>
-        ${activity.length ? `<div class="data-list">${activity.map(reservationRow).join("")}</div>` : emptyMarkup()}
+        ${activity.length ? `<div class="data-list">${activity.map((row) => reservationRow(row)).join("")}</div>` : emptyMarkup()}
       </div>
       <aside class="context-panel"><h3>Seu acesso</h3><dl class="context-list">
         <div><dt>Usuário</dt><dd>${escapeHtml(state.session.username)}</dd></div>
@@ -258,7 +287,7 @@ function renderNow() {
 function renderReservations() {
   const reservations = state.bootstrap.reservations ?? [];
   return `<div class="section-heading"><div><h2>Reservas da unidade</h2><p>Estadias confirmadas, em andamento e finalizadas.</p></div><strong>${reservations.length}</strong></div>
-    ${reservations.length ? `<div class="data-list">${reservations.map(reservationRow).join("")}</div>` : emptyMarkup()}`;
+    ${reservations.length ? `<div class="data-list">${reservations.map((row) => reservationRow(row, true)).join("")}</div>` : emptyMarkup()}`;
 }
 
 function renderRooms() {
@@ -278,7 +307,7 @@ function renderMaintenance() {
   const orders = state.bootstrap.maintenanceOrders ?? [];
   const rooms = new Map((state.bootstrap.rooms ?? []).map((room) => [room.id, room]));
   return `<div class="section-heading"><div><h2>Ordens de manutenção</h2><p>Ocorrências técnicas da unidade.</p></div><strong>${orders.length}</strong></div>
-    ${orders.length ? `<div class="data-list">${orders.map((order) => `<div class="data-row"><strong>${escapeHtml(order.title ?? "Ordem técnica")}</strong><span>Quarto ${escapeHtml(rooms.get(order.roomId)?.number ?? "—")}</span><span>${escapeHtml(order.id)}</span>${statusMarkup(order.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
+    ${orders.length ? `<div class="data-list">${orders.map((order) => `<div class="data-row" tabindex="0" data-help="Ordem técnica: identifica o serviço, o quarto relacionado e a situação atual."><strong>${escapeHtml(order.title ?? "Ordem técnica")}</strong><span>Quarto ${escapeHtml(rooms.get(order.roomId)?.number ?? "—")}</span><span>${escapeHtml(order.id)}</span>${statusMarkup(order.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
 }
 
 function renderFinance() {
@@ -290,29 +319,31 @@ function renderFinance() {
     ${metricMarkup(["Receita prevista", money(revenue), "no período visível"])}
     ${metricMarkup(["Ticket médio", active.length ? money(Math.round(revenue / active.length)) : money(0), "por reserva"])}
   </div><div class="section-heading"><div><h2>Resumo financeiro</h2><p>Exibido somente para financeiro, contador, proprietário e administrador.</p></div></div>
-  ${active.length ? `<div class="data-list">${active.map((row) => `<div class="data-row"><strong>${escapeHtml(row.id)}</strong><span>${formatDate(row.checkIn)} → ${formatDate(row.checkOut)}</span><span>${money(row.total)}</span>${statusMarkup(row.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
+  ${active.length ? `<div class="data-list">${active.map((row) => `<div class="data-row" tabindex="0" data-help="Linha financeira: apresenta período, valor e situação de uma reserva não cancelada."><strong>${escapeHtml(row.id)}</strong><span>${formatDate(row.checkIn)} → ${formatDate(row.checkOut)}</span><span>${money(row.total)}</span>${statusMarkup(row.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
 }
 
 function renderSettings() {
   const integrations = state.bootstrap.integrations ?? [];
   return `<div class="section-heading"><div><h2>Integrações</h2><p>Conexões externas permanecem em ambiente de testes até a homologação.</p></div></div>
-    ${integrations.length ? `<div class="data-list">${integrations.map((item) => `<div class="data-row"><strong>${escapeHtml(item.provider)}</strong><span>${escapeHtml(item.id)}</span><span>Conexão protegida</span>${statusMarkup(item.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
+    ${integrations.length ? `<div class="data-list">${integrations.map((item) => `<div class="data-row" tabindex="0" data-help="Integração externa: mostra o provedor e o estado atual da conexão."><strong>${escapeHtml(item.provider)}</strong><span>${escapeHtml(item.id)}</span><span>Conexão protegida</span>${statusMarkup(item.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
 }
 
 function renderSecurity() {
   return `<div class="view-columns"><div><div class="section-heading"><div><h2>Controle de senhas</h2><p>O administrador principal pode redefinir a senha temporária de cada equipe.</p></div></div>
-    <div class="data-list"><div class="data-row"><strong>Redefinição por cargo</strong><span>Invalida sessões anteriores</span><span>Troca obrigatória no próximo acesso</span><button class="button button--secondary" data-open-security>Gerenciar</button></div></div></div>
+    <div class="data-list"><div class="data-row" tabindex="0" data-help="Redefinição por cargo: substitui a senha temporária e invalida sessões anteriores."><strong>Redefinição por cargo</strong><span>Invalida sessões anteriores</span><span>Troca obrigatória no próximo acesso</span><button class="button button--secondary" data-open-security data-help="Abre os controles de troca e redefinição de senha.">Gerenciar</button></div></div></div>
     <aside class="context-panel"><h3>Proteções ativas</h3><dl class="context-list"><div><dt>Senhas</dt><dd>Armazenadas com hash e salt</dd></div><div><dt>Sessões</dt><dd>Cookie seguro e revogável</dd></div><div><dt>Tentativas</dt><dd>Bloqueio progressivo</dd></div><div><dt>Escopo</dt><dd>Hotel e cargo isolados</dd></div></dl></aside></div>`;
 }
 
 function bindViewActions() {
   elements.content.querySelectorAll("[data-room-id]").forEach((button) => button.addEventListener("click", updateRoom));
+  elements.content.querySelectorAll("[data-reservation-status]").forEach((button) => button.addEventListener("click", updateReservation));
   elements.content.querySelector("[data-open-security]")?.addEventListener("click", () => openAccount());
-  elements.content.querySelectorAll(".metric, .section-heading, .context-panel").forEach((element) => {
-    if (!element.dataset.help) {
-      const title = element.querySelector("h2, h3, strong, span")?.textContent?.trim();
-      if (title) element.dataset.help = `Área: ${title}. Passe o mouse para ver mais informações.`;
-    }
+  elements.content.querySelectorAll(".section-heading, .context-panel").forEach((element) => {
+    const title = element.querySelector("h2, h3")?.textContent?.trim();
+    if (AREA_HELP[title]) element.dataset.help = AREA_HELP[title];
+  });
+  elements.content.querySelectorAll("[data-help]").forEach((element) => {
+    if (!element.matches("button, input, select, a, [tabindex]")) element.tabIndex = 0;
   });
   bindTooltips(elements.content);
 }
@@ -334,6 +365,7 @@ function bindTooltips(root) {
       timer = setTimeout(() => {
         tooltip = document.createElement("div");
         tooltip.className = "help-tooltip";
+        tooltip.setAttribute("role", "tooltip");
         tooltip.textContent = element.dataset.help;
         document.body.appendChild(tooltip);
         const rect = element.getBoundingClientRect();
@@ -358,11 +390,28 @@ async function updateRoom(event) {
   if (!room) return;
   const statuses = state.session.role === "camareira"
     ? ["dirty", "available", "inspected"]
-    : ["available", "occupied", "dirty", "inspected", "maintenance", "out_of_order"];
+    : ["available", "occupied", "dirty", "inspected", "maintenance", "blocked"];
   const next = statuses[(statuses.indexOf(room.status) + 1) % statuses.length];
   event.currentTarget.disabled = true;
   try {
     await api(`/rooms/${encodeURIComponent(roomId)}/status`, { method: "PATCH", body: JSON.stringify({ status: next }) });
+    await refreshBootstrap();
+  } catch (error) {
+    showViewError(error.message);
+  }
+}
+
+async function updateReservation(event) {
+  if (!hasPermission("reservations.manage")) return;
+  const reservationId = event.currentTarget.dataset.reservationId;
+  const status = event.currentTarget.dataset.reservationStatus;
+  if (!reservationId || !status) return;
+  event.currentTarget.disabled = true;
+  try {
+    await api(`/reservations/${encodeURIComponent(reservationId)}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    });
     await refreshBootstrap();
   } catch (error) {
     showViewError(error.message);
@@ -452,14 +501,36 @@ function hasPermission(permission) { return state.session.permissions?.includes(
 function countStatus(rows, status) { return rows.filter((row) => row.status === status).length; }
 function money(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(cents || 0) / 100); }
 function formatDate(value) { if (!value) return "—"; const [year, month, day] = value.slice(0, 10).split("-"); return `${day}/${month}/${year}`; }
+function operationalDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Rio_Branco", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
 function setToday() { elements.todayLabel.textContent = new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "2-digit", month: "long", timeZone: "America/Rio_Branco" }).format(new Date()); }
 function escapeHtml(value) { return String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[character]); }
-function emptyMarkup() { return `<div class="empty-state"><span>AS</span><h2>Nada pendente aqui</h2><p>Os dados atualizados aparecerão nesta área.</p></div>`; }
-function metricMarkup([label, value, detail]) { return `<div class="metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></div>`; }
+function emptyMarkup() { return `<div class="empty-state" tabindex="0" data-help="Esta área não possui registros pendentes neste momento."><span>AS</span><h2>Nada pendente aqui</h2><p>Os dados atualizados aparecerão nesta área.</p></div>`; }
+function metricMarkup([label, value, detail]) { return `<div class="metric" tabindex="0" data-help="${escapeHtml(METRIC_HELP[label] ?? "Indicador calculado com os dados atuais da unidade.")}"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></div>`; }
 function statusMarkup(status) {
-  const modifier = ["dirty", "pending", "open"].includes(status) ? " status--warning" : ["maintenance", "out_of_order", "cancelled"].includes(status) ? " status--danger" : ["checked_out", "closed"].includes(status) ? " status--neutral" : "";
+  const modifier = ["dirty", "pending", "open"].includes(status) ? " status--warning" : ["maintenance", "blocked", "cancelled"].includes(status) ? " status--danger" : ["checked_out", "closed"].includes(status) ? " status--neutral" : "";
   return `<span class="status${modifier}">${escapeHtml(STATUS_LABELS[status] ?? status)}</span>`;
 }
-function reservationRow(row) { return `<div class="data-row"><strong>${escapeHtml(row.id)}</strong><span>${formatDate(row.checkIn)} → ${formatDate(row.checkOut)}</span><span>${money(row.total)}</span>${statusMarkup(row.status)}</div>`; }
-function taskRow(task, rooms) { return `<div class="data-row"><strong>Quarto ${escapeHtml(rooms.get(task.roomId)?.number ?? "—")}</strong><span>${escapeHtml(task.id)}</span><span>Governança</span>${statusMarkup(task.status)}</div>`; }
-function roomMarkup(room) { return `<button class="room-tile" type="button" data-room-id="${escapeHtml(room.id)}" ${hasPermission("rooms.operational.update") ? "" : "disabled"}><span class="room-tile__number">${escapeHtml(room.number)}</span><span class="room-tile__status">${escapeHtml(STATUS_LABELS[room.status] ?? room.status)}</span>${hasPermission("rooms.operational.update") ? '<span class="room-tile__action">Atualizar situação →</span>' : ""}</button>`; }
+function reservationActions(row) {
+  if (!hasPermission("reservations.manage")) return "";
+  const checkInToday = row.status === "confirmed" && row.checkIn === operationalDate();
+  const actions = row.status === "confirmed"
+    ? [...(checkInToday ? [["checked_in", "Fazer check-in"]] : []), ["cancelled", "Cancelar"]]
+    : ({
+      pending: [["confirmed", "Confirmar"], ["cancelled", "Cancelar"]],
+      checked_in: [["checked_out", "Fazer check-out"]],
+    })[row.status] ?? [];
+  const checkInNote = row.status === "confirmed" && !checkInToday
+    ? `<span class="reservation-action-note" tabindex="0" data-help="Check-in disponível somente na data de entrada, conforme o dia operacional em America/Rio_Branco.">Check-in em ${formatDate(row.checkIn)}</span>`
+    : "";
+  if (!actions.length && !checkInNote) return "";
+  return `<span class="reservation-actions">${checkInNote}${actions.map(([status, label]) => `<button class="button button--secondary button--compact" type="button" data-reservation-id="${escapeHtml(row.id)}" data-reservation-status="${status}" data-help="Ação de reserva: ${escapeHtml(label)} altera a situação desta hospedagem.">${label}</button>`).join("")}</span>`;
+}
+function reservationRow(row, interactive = false) { return `<div class="data-row${interactive ? " data-row--reservation" : ""}" tabindex="0" data-help="Resumo da reserva: período, valor, situação${interactive ? " e ações operacionais permitidas" : ""}."><strong>${escapeHtml(row.id)}</strong><span>${formatDate(row.checkIn)} → ${formatDate(row.checkOut)}</span><span>${money(row.total)}</span>${statusMarkup(row.status)}${interactive ? reservationActions(row) : ""}</div>`; }
+function taskRow(task, rooms) { return `<div class="data-row" tabindex="0" data-help="Tarefa de governança: identifica o quarto e o andamento da limpeza ou inspeção."><strong>Quarto ${escapeHtml(rooms.get(task.roomId)?.number ?? "—")}</strong><span>${escapeHtml(task.id)}</span><span>Governança</span>${statusMarkup(task.status)}</div>`; }
+function roomMarkup(room) { return `<button class="room-tile" type="button" data-room-id="${escapeHtml(room.id)}" data-help="Situação operacional do quarto ${escapeHtml(room.number)}. ${hasPermission("rooms.operational.update") ? "Ative para avançar para o próximo estado." : "Seu cargo possui acesso somente para consulta."}" ${hasPermission("rooms.operational.update") ? "" : "disabled"}><span class="room-tile__number">${escapeHtml(room.number)}</span><span class="room-tile__status">${escapeHtml(STATUS_LABELS[room.status] ?? room.status)}</span>${hasPermission("rooms.operational.update") ? '<span class="room-tile__action">Atualizar situação →</span>' : ""}</button>`; }

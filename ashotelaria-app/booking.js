@@ -30,6 +30,7 @@ function initBooking() {
   window.addEventListener("offline", updateConnection);
   updateConnection();
   setDefaultDates();
+  bindTooltips(document);
   loadProperty();
 }
 
@@ -50,6 +51,9 @@ async function request(path, options = {}) {
       INVENTORY_CONFLICT: "Este quarto acabou de ser reservado. Consulte a disponibilidade novamente.",
       INVALID_STAY_RANGE: "Confira as datas de entrada e saída.",
       INVALID_RESERVATION: "Confira os dados informados.",
+      INVALID_REQUEST: "Confira os dados informados.",
+      IDEMPOTENCY_KEY_REQUIRED: "Atualize a página e tente novamente.",
+      INVALID_IDEMPOTENCY_KEY: "Atualize a página e tente novamente.",
       NOT_FOUND: "Hotel ou acomodação não encontrado.",
     };
     throw new Error(messages[payload?.error?.code] ?? "Não foi possível concluir. Tente novamente.");
@@ -71,9 +75,9 @@ async function loadProperty() {
 async function searchAvailability(event) {
   event.preventDefault();
   if (!navigator.onLine) return showError("Conecte-se à internet para consultar os quartos.");
+  const values = Object.fromEntries(new FormData(elements.availabilityForm));
   showError("");
   setBusy(elements.availabilityForm, true);
-  const values = Object.fromEntries(new FormData(elements.availabilityForm));
   booking.search = { ...values, adults: Number(values.adults), children: Number(values.children) };
   const query = new URLSearchParams({ propertySlug: booking.propertySlug, ...values });
   try {
@@ -94,6 +98,7 @@ function renderRooms(roomTypes, nights) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "room-option";
+    button.dataset.help = `Opção ${room.name}: capacidade para ${room.capacity} hóspede(s), ${room.availableUnits} unidade(s) e total de ${money(room.total)}.`;
     button.innerHTML = `<span><strong>${escapeHtml(room.name)}</strong><small>Até ${room.capacity} hóspede(s) · ${room.availableUnits} unidade(s) · ${nights} noite(s)</small></span><span class="room-option__price">${money(room.total)}</span><span class="room-option__arrow">→</span>`;
     button.addEventListener("click", () => {
       booking.roomType = room;
@@ -103,15 +108,16 @@ function renderRooms(roomTypes, nights) {
     });
     return button;
   }));
+  bindTooltips(elements.roomOptions);
 }
 
 async function createReservation(event) {
   event.preventDefault();
   if (!booking.search || !booking.roomType) return showStep(1);
   if (!navigator.onLine) return showError("Conecte-se à internet para confirmar a reserva.");
+  const guest = Object.fromEntries(new FormData(elements.guestForm));
   showError("");
   setBusy(elements.guestForm, true);
-  const guest = Object.fromEntries(new FormData(elements.guestForm));
   const body = {
     propertySlug: booking.propertySlug,
     roomTypeId: booking.roomType.id,
@@ -140,7 +146,7 @@ async function createReservation(event) {
 }
 
 function renderConfirmation(reservation) {
-  document.querySelector("#confirmation-message").textContent = `Sua hospedagem no ${booking.property?.name ?? "hotel"} foi registrada diretamente no sistema.`;
+  document.querySelector("#confirmation-message").textContent = `Sua hospedagem no ${booking.property?.name ?? "hotel"} foi registrada nesta simulação.`;
   const details = [
     ["Reserva", reservation.id],
     ["Acomodação", booking.roomType.name],
@@ -168,6 +174,42 @@ function updateConnection(forced) {
 function showError(message) {
   elements.error.textContent = message;
   elements.error.hidden = !message;
+}
+
+function bindTooltips(root) {
+  root?.querySelectorAll("[data-help]").forEach((element) => {
+    if (element.dataset.helpBound === "true") return;
+    element.dataset.helpBound = "true";
+    if (!element.matches("button, input, select, a, [tabindex]")) element.tabIndex = 0;
+    let timer = null;
+    let tooltip = null;
+    const hide = () => {
+      if (timer) clearTimeout(timer);
+      timer = null;
+      tooltip?.remove();
+      tooltip = null;
+    };
+    const show = () => {
+      hide();
+      timer = setTimeout(() => {
+        tooltip = document.createElement("div");
+        tooltip.className = "help-tooltip";
+        tooltip.setAttribute("role", "tooltip");
+        tooltip.textContent = element.dataset.help;
+        document.body.appendChild(tooltip);
+        const rect = element.getBoundingClientRect();
+        const width = tooltip.offsetWidth;
+        const left = Math.min(Math.max(10, rect.left), window.innerWidth - width - 10);
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${Math.min(window.innerHeight - tooltip.offsetHeight - 10, rect.bottom + 10)}px`;
+        requestAnimationFrame(() => tooltip?.classList.add("visible"));
+      }, 650);
+    };
+    element.addEventListener("mouseenter", show);
+    element.addEventListener("mouseleave", hide);
+    element.addEventListener("focus", show);
+    element.addEventListener("blur", hide);
+  });
 }
 
 function setBusy(container, busy) { container.querySelectorAll("input, button").forEach((element) => { element.disabled = busy; }); }

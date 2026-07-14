@@ -52,8 +52,10 @@ test("declares the 14 canonical roles and limits cashflow to the four approved r
   assert.equal(hasPermission("camareira", "guests.basic.read"), false);
   assert.equal(hasPermission("camareira", "rooms.operational.update"), true);
   assert.equal(hasPermission("recepcionista", "reservations.read"), true);
+  assert.equal(hasPermission("recepcionista", "reservations.manage"), true);
   assert.equal(hasPermission("recepcionista", "guests.basic.read"), true);
   assert.equal(hasPermission("recepcionista", "finance.cashflow.read"), false);
+  assert.equal(hasPermission("camareira", "reservations.manage"), false);
 
   for (const role of ["administrador", "proprietario", "superadmin"]) {
     assert.equal(hasPermission(role, "credentials.reset"), true, role);
@@ -138,6 +140,163 @@ test("initial temporary passwords accept four characters but future passwords st
   );
 });
 
+test("demo access can disable the mandatory initial password change for new and existing profiles", async () => {
+  const store = createMemoryStore();
+  const environment = { ASHOTELARIA_RECEPTION_PASSWORD: "T4mp" };
+  const temporary = createService({ store, config: { environment } });
+  const first = await temporary.service.login({
+    propertySlug: "hotel-jurua-palace",
+    username: "admin",
+    role: "recepcionista",
+    password: "T4mp",
+  });
+  assert.equal(first.session.forceChange, true);
+
+  const demo = createService({
+    store,
+    config: { environment, requireInitialPasswordChange: false },
+  });
+  const loggedIn = await demo.service.login({
+    propertySlug: "hotel-jurua-palace",
+    username: "admin",
+    role: "recepcionista",
+    password: "T4mp",
+  });
+  assert.equal(loggedIn.session.forceChange, false);
+  assert.equal((await store.getCredentialProfile({
+    tenantId: "tenant-czs",
+    propertyId: "property-jurua-palace",
+    username: "admin",
+    role: "recepcionista",
+  })).forceChange, false);
+
+  const strictAfterDemo = createService({
+    store,
+    config: { environment, requireInitialPasswordChange: true },
+  });
+  const cutoverLogin = await strictAfterDemo.service.login({
+    propertySlug: "hotel-jurua-palace",
+    username: "admin",
+    role: "recepcionista",
+    password: "T4mp",
+  });
+  assert.equal(cutoverLogin.session.forceChange, true);
+});
+
+test("strict cutover does not force a second change after the initial password was replaced", async () => {
+  const store = createMemoryStore();
+  const environment = { ASHOTELARIA_RECEPTION_PASSWORD: "T4mp" };
+  const demo = createService({
+    store,
+    config: { environment, requireInitialPasswordChange: false },
+  });
+  const loggedIn = await demo.service.login({
+    propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "T4mp",
+  });
+  await demo.service.changePassword({
+    session: loggedIn.session,
+    currentPassword: "T4mp",
+    newPassword: "Recepcao-real-2026!",
+  });
+
+  const strict = createService({ store, config: { environment, requireInitialPasswordChange: true } });
+  const afterCutover = await strict.service.login({
+    propertySlug: "hotel-jurua-palace",
+    username: "admin",
+    role: "recepcionista",
+    password: "Recepcao-real-2026!",
+  });
+  assert.equal(afterCutover.session.forceChange, false);
+});
+
+test("a stale successful login cannot survive a concurrent password change", async () => {
+  const store = createMemoryStore();
+  const environment = { ASHOTELARIA_RECEPTION_PASSWORD: "T4mp" };
+  const demo = createService({
+    store,
+    config: { environment, requireInitialPasswordChange: false },
+  });
+  const active = await demo.service.login({
+    propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "T4mp",
+  });
+
+  const updateCredentialProfile = store.updateCredentialProfile.bind(store);
+  let enteredResolve;
+  const entered = new Promise((resolve) => { enteredResolve = resolve; });
+  let releaseResolve;
+  const release = new Promise((resolve) => { releaseResolve = resolve; });
+  store.updateCredentialProfile = async (input) => {
+    enteredResolve();
+    await release;
+    return updateCredentialProfile(input);
+  };
+
+  const strict = createService({ store, config: { environment, requireInitialPasswordChange: true } });
+  const staleLogin = strict.service.login({
+    propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "T4mp",
+  });
+  await entered;
+  await demo.service.changePassword({
+    session: active.session,
+    currentPassword: "T4mp",
+    newPassword: "Recepcao-real-2026!",
+  });
+  releaseResolve();
+
+  await assert.rejects(staleLogin, (error) => error.code === "SESSION_REVOKED");
+  const relogged = await strict.service.login({
+    propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "Recepcao-real-2026!",
+  });
+  assert.equal(relogged.session.sessionVersion, 2);
+  assert.equal(relogged.session.forceChange, false);
+});
+
+test("a stale failed login cannot increment or lock a concurrently changed credential", async () => {
+  const store = createMemoryStore();
+  const environment = { ASHOTELARIA_RECEPTION_PASSWORD: "T4mp" };
+  const demo = createService({
+    store,
+    config: { environment, requireInitialPasswordChange: false, maxFailedAttempts: 1 },
+  });
+  const active = await demo.service.login({
+    propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "T4mp",
+  });
+
+  const recordCredentialFailure = store.recordCredentialFailure.bind(store);
+  let enteredResolve;
+  const entered = new Promise((resolve) => { enteredResolve = resolve; });
+  let releaseResolve;
+  const release = new Promise((resolve) => { releaseResolve = resolve; });
+  store.recordCredentialFailure = async (input) => {
+    enteredResolve();
+    await release;
+    return recordCredentialFailure(input);
+  };
+
+  const staleFailure = demo.service.login({
+    propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "senha-incorreta",
+  });
+  await entered;
+  await demo.service.changePassword({
+    session: active.session,
+    currentPassword: "T4mp",
+    newPassword: "Recepcao-real-2026!",
+  });
+  releaseResolve();
+
+  await assert.rejects(
+    staleFailure,
+    (error) => error.code === "INVALID_CREDENTIALS" && error.message === "Invalid credentials",
+  );
+  const profile = await store.getCredentialProfile({
+    tenantId: "tenant-czs", propertyId: "property-jurua-palace", username: "admin", role: "recepcionista",
+  });
+  assert.equal(profile.sessionVersion, 2);
+  assert.equal(profile.failedAttempts, 0);
+  assert.equal(profile.lockedUntil, null);
+  assert.equal(profile.forceChange, false);
+});
+
 test("selected roles create isolated contexts for the same admin username", async () => {
   const { service } = createService();
   const reception = await service.login({
@@ -216,7 +375,7 @@ test("session signatures, expiry and sessionVersion are checked on every authent
 });
 
 test("a user changes their own password and revokes every prior session", async () => {
-  const { service } = createService();
+  const { service, store } = createService();
   const loggedIn = await service.login({
     propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista",
     password: "Recepcao-inicial-2026!",
@@ -236,10 +395,20 @@ test("a user changes their own password and revokes every prior session", async 
     propertySlug: "hotel-jurua-palace", username: "admin", role: "recepcionista", password: "Recepcao-nova-2026!",
   });
   assert.equal(relogged.session.sessionVersion, 2);
+  const events = await store.listAuditEvents({
+    tenantId: "tenant-czs", propertyId: "property-jurua-palace",
+  });
+  const event = events.find(({ action }) => action === "credential.password_changed");
+  assert.deepEqual(event.actor, { username: "admin", role: "recepcionista" });
+  assert.deepEqual(event.changes, {
+    targetUsername: "admin", targetRole: "recepcionista", sessionVersion: 2,
+  });
+  assert.equal(JSON.stringify(event).includes("Recepcao-nova-2026!"), false);
+  assert.equal(JSON.stringify(event).includes("passwordHash"), false);
 });
 
 test("only principal administrators, owners and superadmins reset another role", async () => {
-  const { service } = createService();
+  const { service, store } = createService();
   const admin = await service.login({
     propertySlug: "hotel-jurua-palace", username: "admin", role: "administrador",
     password: "Admin-inicial-2026!",
@@ -263,6 +432,16 @@ test("only principal administrators, owners and superadmins reset another role",
     password: "Camareira-nova-2026!",
   });
   assert.equal(maid.session.role, "camareira");
+  const events = await store.listAuditEvents({
+    tenantId: "tenant-czs", propertyId: "property-jurua-palace",
+  });
+  const event = events.find(({ action }) => action === "credential.password_reset");
+  assert.deepEqual(event.actor, { username: "admin", role: "administrador" });
+  assert.deepEqual(event.changes, {
+    targetUsername: "admin", targetRole: "camareira", sessionVersion: 1,
+  });
+  assert.equal(JSON.stringify(event).includes("Camareira-nova-2026!"), false);
+  assert.equal(JSON.stringify(event).includes("passwordHash"), false);
 });
 
 test("memory credential repository scopes profiles and never aliases mutable values", async () => {
@@ -288,4 +467,48 @@ test("memory credential repository scopes profiles and never aliases mutable val
   assert.equal(await store.getCredentialProfile({
     tenantId: "tenant-vale-demo", propertyId: "property-jurua-palace", username: "admin", role: "auditor",
   }), null);
+});
+
+test("stale credential provisioning cannot overwrite a profile created by another caller", async () => {
+  const store = createMemoryStore();
+  const scope = {
+    tenantId: "tenant-czs",
+    propertyId: "property-jurua-palace",
+    username: "admin",
+    role: "recepcionista",
+  };
+  const resetPassword = "Recepcao-reset-2026!";
+  await store.upsertCredentialProfile({
+    ...scope,
+    passwordHash: await hashPassword(resetPassword),
+    sessionVersion: 7,
+    failedAttempts: 0,
+    lockedUntil: null,
+    forceChange: false,
+    updatedAt: "2026-07-14T11:59:00.000Z",
+  });
+
+  const storedGet = store.getCredentialProfile.bind(store);
+  let staleRead = true;
+  store.getCredentialProfile = async (candidate) => {
+    if (staleRead) {
+      staleRead = false;
+      return null;
+    }
+    return storedGet(candidate);
+  };
+  const { service } = createService({ store });
+
+  await assert.rejects(
+    service.login({
+      propertySlug: "hotel-jurua-palace",
+      username: "admin",
+      role: "recepcionista",
+      password: "Recepcao-inicial-2026!",
+    }),
+    (error) => error.code === "INVALID_CREDENTIALS",
+  );
+  const preserved = await storedGet(scope);
+  assert.equal(preserved.sessionVersion, 7);
+  assert.equal(await verifyPassword(resetPassword, preserved.passwordHash), true);
 });

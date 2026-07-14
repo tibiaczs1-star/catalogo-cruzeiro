@@ -64,6 +64,34 @@ test("createSeed is deterministic and includes isolated demo organizations and h
     [...roles].sort(),
     ["administrador", "camareira", "contador", "recepcionista"],
   );
+
+  const juruaTypes = first.roomTypes.filter((row) => row.propertyId === JURUA_PROPERTY);
+  const juruaRooms = first.rooms.filter((row) => row.propertyId === JURUA_PROPERTY);
+  const juruaReservations = first.reservations.filter((row) => row.propertyId === JURUA_PROPERTY);
+  assert.deepEqual(juruaTypes.map((row) => row.name), ["Standard", "Superior", "Suíte Família"]);
+  assert.equal(juruaRooms.length, 12);
+  assert.deepEqual(
+    [...new Set(juruaReservations.map((row) => row.status))].sort(),
+    ["cancelled", "checked_in", "checked_out", "confirmed"],
+  );
+  assert.deepEqual(
+    juruaReservations.find(({ id }) => id === "reservation-jurua-arrival-20260714"),
+    {
+      id: "reservation-jurua-arrival-20260714",
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      guestId: "guest-jurua-01",
+      roomTypeId: "room-type-standard-jurua",
+      roomId: "room-102",
+      checkIn: "2026-07-14",
+      checkOut: "2026-07-16",
+      adults: 2,
+      children: 0,
+      nightlyRate: 18_900,
+      total: 37_800,
+      status: "confirmed",
+    },
+  );
 });
 
 test("health identifies the ephemeral server-side demo store", async () => {
@@ -96,8 +124,8 @@ test("public property lookup and availability expose only the requested slug", a
   assert.equal(result.property.id, JURUA_PROPERTY);
   assert.equal(result.nights, 2);
   const standard = result.roomTypes.find(({ id }) => id === "room-type-standard-jurua");
-  assert.equal(standard.availableUnits, 1);
-  assert.deepEqual(standard.availableRoomIds, ["room-102"]);
+  assert.equal(standard.availableUnits, 2);
+  assert.deepEqual(standard.availableRoomIds, ["room-102", "room-103"]);
   assert.equal(standard.total, standard.nightlyRate * 2);
 });
 
@@ -115,7 +143,7 @@ test("availability ignores cancelled stays and treats checkout as exclusive", as
     cancelledDates.roomTypes
       .find(({ id }) => id === "room-type-standard-jurua")
       .availableRoomIds,
-    ["room-101", "room-102"],
+    ["room-101", "room-102", "room-103"],
   );
 
   const startsAtExistingCheckout = await store.findAvailability({
@@ -129,7 +157,7 @@ test("availability ignores cancelled stays and treats checkout as exclusive", as
     startsAtExistingCheckout.roomTypes
       .find(({ id }) => id === "room-type-standard-jurua")
       .availableRoomIds,
-    ["room-101", "room-102"],
+    ["room-101", "room-102", "room-103"],
   );
 });
 
@@ -365,7 +393,9 @@ test("idempotency keys are property-scoped inside the same tenant", async () => 
 });
 
 test("concurrent distinct commands cannot allocate the same last room", async () => {
-  const store = createMemoryStore(createSeed("2026-07-14"));
+  const seed = createSeed("2026-07-14");
+  seed.rooms.find(({ id }) => id === "room-103").status = "maintenance";
+  const store = createMemoryStore(seed);
   const base = {
     tenantId: CZS_TENANT,
     propertyId: JURUA_PROPERTY,
@@ -385,7 +415,9 @@ test("concurrent distinct commands cannot allocate the same last room", async ()
 });
 
 test("createReservation rejects cross-tenant access and reports inventory conflicts", async () => {
-  const store = createMemoryStore(createSeed("2026-07-14"));
+  const seed = createSeed("2026-07-14");
+  seed.rooms.find(({ id }) => id === "room-103").status = "maintenance";
+  const store = createMemoryStore(seed);
 
   assert.equal(await store.createReservation({
     tenantId: OTHER_TENANT,
@@ -437,7 +469,9 @@ test("availability sells only rooms marked available or inspected", async () => 
   for (const [status, sellable] of cases) {
     const seed = createSeed("2026-07-14");
     seed.rooms.find(({ id }) => id === "room-101").status = status;
-    seed.rooms.find(({ id }) => id === "room-102").status = "maintenance";
+    for (const roomId of ["room-102", "room-103", "room-104"]) {
+      seed.rooms.find(({ id }) => id === roomId).status = "maintenance";
+    }
     const store = createMemoryStore(seed);
     const result = await store.findAvailability({
       propertySlug: "hotel-jurua-palace",
@@ -506,6 +540,203 @@ test("updateRoomStatus accepts operational statuses, stays scoped and creates au
     propertyId: JURUA_PROPERTY,
   });
   assert.equal(bootstrap.summary.totalRooms, bootstrap.rooms.length);
+});
+
+test("memory check-in rejects days outside arrival without changing reservation, room or audit", async () => {
+  for (const now of [
+    new Date("2026-07-14T03:30:00.000Z"),
+    "2026-07-15",
+    "2026-07-16",
+  ]) {
+    const store = createMemoryStore(createSeed("2026-07-14"), { now: () => now });
+    await assert.rejects(
+      store.updateReservationStatus({
+        tenantId: CZS_TENANT,
+        propertyId: JURUA_PROPERTY,
+        reservationId: "reservation-jurua-arrival-20260714",
+        status: "checked_in",
+        actor: { id: "admin:recepcionista" },
+      }),
+      (error) => error.code === "CHECK_IN_NOT_ALLOWED",
+      String(now),
+    );
+
+    const reservations = await store.listReservations({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+    assert.equal(reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714").status, "confirmed");
+    const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+    assert.equal(bootstrap.rooms.find(({ id }) => id === "room-102").status, "available");
+    assert.equal((await store.listAuditEvents({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY }))
+      .some(({ entityId }) => entityId === "reservation-jurua-arrival-20260714"), false);
+  }
+});
+
+test("memory check-in preserves every incompatible room status", async () => {
+  const incompatibleStatuses = ["maintenance", "blocked", "dirty", "cleaning", "occupied", "do_not_disturb"];
+  for (const roomStatus of incompatibleStatuses) {
+    const seed = createSeed("2026-07-14");
+    seed.rooms.find(({ id }) => id === "room-102").status = roomStatus;
+    const store = createMemoryStore(seed, { now: () => "2026-07-14" });
+
+    await assert.rejects(
+      store.updateReservationStatus({
+        tenantId: CZS_TENANT,
+        propertyId: JURUA_PROPERTY,
+        reservationId: "reservation-jurua-arrival-20260714",
+        status: "checked_in",
+        actor: { id: "admin:recepcionista" },
+      }),
+      (error) => error.code === "ROOM_NOT_READY",
+      roomStatus,
+    );
+
+    const reservations = await store.listReservations({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+    assert.equal(reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714").status, "confirmed");
+    const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+    assert.equal(bootstrap.rooms.find(({ id }) => id === "room-102").status, roomStatus);
+    assert.equal((await store.listAuditEvents({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY }))
+      .some(({ entityId }) => entityId === "reservation-jurua-arrival-20260714"), false);
+  }
+});
+
+test("memory check-in rejects another checked-in reservation in the same scoped room", async () => {
+  const seed = createSeed("2026-07-14");
+  seed.reservations.push({
+    ...seed.reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714"),
+    id: "reservation-jurua-room-conflict",
+    status: "checked_in",
+  });
+  const store = createMemoryStore(seed, { now: () => "2026-07-14" });
+
+  await assert.rejects(
+    store.updateReservationStatus({
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      reservationId: "reservation-jurua-arrival-20260714",
+      status: "checked_in",
+      actor: { id: "admin:recepcionista" },
+    }),
+    (error) => error.code === "ROOM_NOT_READY",
+  );
+  const reservations = await store.listReservations({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714").status, "confirmed");
+  const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.rooms.find(({ id }) => id === "room-102").status, "available");
+});
+
+test("concurrent memory check-ins cannot both occupy the same room", async () => {
+  const seed = createSeed("2026-07-14");
+  seed.reservations.push({
+    ...seed.reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714"),
+    id: "reservation-jurua-arrival-racing",
+  });
+  const store = createMemoryStore(seed, { now: () => "2026-07-14" });
+  const command = (reservationId) => store.updateReservationStatus({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    reservationId,
+    status: "checked_in",
+    actor: { id: "admin:recepcionista" },
+  });
+
+  const results = await Promise.allSettled([
+    command("reservation-jurua-arrival-20260714"),
+    command("reservation-jurua-arrival-racing"),
+  ]);
+  assert.equal(results.filter(({ status }) => status === "fulfilled").length, 1);
+  const rejected = results.find(({ status }) => status === "rejected");
+  assert.equal(rejected.reason.code, "ROOM_NOT_READY");
+  assert.equal((await store.listAuditEvents({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY }))
+    .filter(({ action }) => action === "reservation.status_updated").length, 1);
+});
+
+test("memory check-in cannot overwrite a concurrent incompatible room update", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"), { now: () => "2026-07-14" });
+  const results = await Promise.allSettled([
+    store.updateRoomStatus({
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      roomId: "room-102",
+      status: "maintenance",
+      actor: { id: "admin:manutencao" },
+    }),
+    store.updateReservationStatus({
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      reservationId: "reservation-jurua-arrival-20260714",
+      status: "checked_in",
+      actor: { id: "admin:recepcionista" },
+    }),
+  ]);
+
+  assert.equal(results[0].status, "fulfilled");
+  assert.equal(results[1].status, "rejected");
+  assert.equal(results[1].reason.code, "ROOM_NOT_READY");
+  const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.rooms.find(({ id }) => id === "room-102").status, "maintenance");
+  assert.equal(bootstrap.reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714").status, "confirmed");
+});
+
+test("reservation lifecycle updates the stay, room and audit inside the property scope", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"), {
+    now: () => new Date("2026-07-15T03:30:00.000Z"),
+  });
+  const actor = { id: "admin:recepcionista", role: "recepcionista" };
+
+  const checkedIn = await store.updateReservationStatus({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    reservationId: "reservation-jurua-arrival-20260714",
+    status: "checked_in",
+    actor,
+  });
+  assert.equal(checkedIn.status, "checked_in");
+  let bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.rooms.find(({ id }) => id === "room-102").status, "occupied");
+
+  const checkedOut = await store.updateReservationStatus({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    reservationId: "reservation-jurua-arrival-20260714",
+    status: "checked_out",
+    actor,
+  });
+  assert.equal(checkedOut.status, "checked_out");
+  bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.rooms.find(({ id }) => id === "room-102").status, "dirty");
+  assert.equal((await store.listAuditEvents({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY }))
+    .filter(({ action }) => action === "reservation.status_updated").length, 2);
+
+  await assert.rejects(
+    store.updateReservationStatus({
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      reservationId: "reservation-jurua-arrival-20260714",
+      status: "checked_in",
+      actor,
+    }),
+    (error) => error.code === "INVALID_RESERVATION_TRANSITION",
+  );
+  assert.equal(await store.updateReservationStatus({
+    tenantId: OTHER_TENANT,
+    propertyId: JURUA_PROPERTY,
+    reservationId: "reservation-jurua-cancelled",
+    status: "cancelled",
+    actor,
+  }), null);
+});
+
+test("a confirmed reservation can be cancelled without occupying the room", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"));
+  const cancelled = await store.updateReservationStatus({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    reservationId: "reservation-jurua-active",
+    status: "cancelled",
+    actor: { id: "admin:administrador" },
+  });
+  assert.equal(cancelled.status, "cancelled");
+  const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.rooms.find(({ id }) => id === "room-101").status, "available");
 });
 
 test("getUserByEmail is case-insensitive and returns scoped memberships without secrets", async () => {

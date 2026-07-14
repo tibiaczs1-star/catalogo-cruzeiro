@@ -216,6 +216,7 @@ test("forceChange blocks every operational route until the initial password is c
   for (const [method, path, body] of [
     ["GET", "/bootstrap"],
     ["GET", "/reservations"],
+    ["PATCH", "/reservations/reservation-jurua-active/status", { status: "checked_in" }],
     ["PATCH", "/rooms/room-102/status", { status: "cleaning" }],
     ["POST", "/admin/credentials/reset", { role: "camareira", newPassword: "Nova-camareira-2026!" }],
   ]) {
@@ -257,8 +258,8 @@ test("backend RBAC filters bootstrap and blocks camareira from reservations", as
   assert.equal(bootstrap.res.statusCode, 200);
   assert.equal(Array.isArray(bootstrap.res.json.bootstrap.rooms), true);
   assert.equal(Array.isArray(bootstrap.res.json.bootstrap.housekeepingTasks), true);
-  assert.deepEqual(bootstrap.res.json.bootstrap.housekeepingTasks.map(({ id }) => id), ["housekeeping-jurua-01"]);
-  assert.deepEqual(bootstrap.res.json.bootstrap.rooms.map(({ id }) => id), ["room-102"]);
+  assert.deepEqual(bootstrap.res.json.bootstrap.housekeepingTasks.map(({ id }) => id), ["housekeeping-jurua-01", "housekeeping-jurua-02"]);
+  assert.deepEqual(bootstrap.res.json.bootstrap.rooms.map(({ id }) => id), ["room-104", "room-301"]);
   for (const hidden of ["guests", "reservations", "integrations", "maintenanceOrders", "summary"]) {
     assert.equal(Object.hasOwn(bootstrap.res.json.bootstrap, hidden), false, hidden);
   }
@@ -281,6 +282,39 @@ test("recepcionista gets scoped reservations and basic guests but never cashflow
   assert.equal(Array.isArray(bootstrap.res.json.bootstrap.guests), true);
   assert.equal(bootstrap.res.json.session.permissions.includes("finance.cashflow.read"), false);
   assert.equal(Object.hasOwn(bootstrap.res.json.bootstrap, "integrations"), false);
+});
+
+test("reception can run check-in and check-out while invalid transitions stay controlled", async () => {
+  const { handler } = fixture({
+    store: createMemoryStore(createSeed("2026-07-14"), {
+      now: () => new Date("2026-07-15T03:30:00.000Z"),
+    }),
+  });
+  const cookie = await login(handler, "recepcionista", "Recepcao-inicial-2026!");
+  const headers = { cookie };
+
+  const checkedIn = await request(handler, "PATCH", `${BASE}/reservations/reservation-jurua-arrival-20260714/status`, {
+    headers,
+    body: { status: "checked_in" },
+  });
+  assert.equal(checkedIn.res.statusCode, 200, checkedIn.res.text);
+  assert.equal(checkedIn.res.json.reservation.status, "checked_in");
+
+  const checkedOut = await request(handler, "PATCH", `${BASE}/reservations/reservation-jurua-arrival-20260714/status`, {
+    headers,
+    body: { status: "checked_out" },
+  });
+  assert.equal(checkedOut.res.statusCode, 200, checkedOut.res.text);
+  assert.equal(checkedOut.res.json.reservation.status, "checked_out");
+  const bootstrap = await request(handler, "GET", `${BASE}/bootstrap`, { headers });
+  assert.equal(bootstrap.res.json.bootstrap.rooms.find(({ id }) => id === "room-102").status, "dirty");
+
+  const invalid = await request(handler, "PATCH", `${BASE}/reservations/reservation-jurua-arrival-20260714/status`, {
+    headers,
+    body: { status: "checked_in" },
+  });
+  assert.equal(invalid.res.statusCode, 409);
+  assert.equal(invalid.res.json.error.code, "INVALID_RESERVATION_TRANSITION");
 });
 
 test("change-password revokes the cookie session and administrative reset is permission checked", async () => {
@@ -311,7 +345,9 @@ test("change-password revokes the cookie session and administrative reset is per
 });
 
 test("inventory conflicts and internal exceptions use safe errors with correlation ids", async () => {
-  const { handler } = fixture();
+  const seed = createSeed("2026-07-14");
+  seed.rooms.find(({ id }) => id === "room-103").status = "maintenance";
+  const { handler } = fixture({ store: createMemoryStore(seed) });
   const base = {
     propertySlug: "hotel-jurua-palace", roomTypeId: "room-type-standard-jurua",
     checkIn: "2026-07-20", checkOut: "2026-07-22", adults: 1, guestName: "Visitante",
@@ -364,4 +400,34 @@ test("only controlled 4xx errors expose public messages", async () => {
   const controlled = await request(unsafe.handler, "GET", `${BASE}/missing`);
   assert.equal(controlled.res.statusCode, 404);
   assert.deepEqual(controlled.res.json.error, { code: "NOT_FOUND", message: "Route not found" });
+});
+
+test("controlled check-in errors are exposed as public HTTP 409 responses", async (t) => {
+  const cases = [
+    ["CHECK_IN_NOT_ALLOWED", "Check-in is only allowed on the reservation arrival date"],
+    ["ROOM_NOT_READY", "Room is not ready for check-in"],
+  ];
+
+  for (const [code, message] of cases) {
+    await t.test(code, async () => {
+      const store = {
+        ...createMemoryStore(),
+        async updateReservationStatus() {
+          const error = new Error("private check-in detail");
+          error.code = code;
+          throw error;
+        },
+      };
+      const { handler } = fixture({ store });
+      const cookie = await login(handler, "recepcionista", "Recepcao-inicial-2026!");
+      const result = await request(handler, "PATCH", `${BASE}/reservations/reservation-jurua-active/status`, {
+        headers: { cookie },
+        body: { status: "checked_in" },
+      });
+
+      assert.equal(result.res.statusCode, 409);
+      assert.deepEqual(result.res.json.error, { code, message });
+      assert.equal(result.res.text.includes("private check-in detail"), false);
+    });
+  }
 });

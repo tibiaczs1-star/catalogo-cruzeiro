@@ -22,34 +22,34 @@ const CANONICAL_ROLES = Object.freeze([
 
 const ROLE_PERMISSIONS = Object.freeze({
   superadmin: permissions(
-    "hotel.bootstrap.read", "reservations.read", "reservations.create", "guests.basic.read",
+    "hotel.bootstrap.read", "reservations.read", "reservations.create", "reservations.manage", "guests.basic.read",
     "rooms.operational.read", "rooms.operational.update", "tasks.housekeeping.read",
     "tasks.housekeeping.update", "tasks.maintenance.read", "tasks.maintenance.update",
     "admin.users.manage", "admin.roles.manage", "admin.settings.manage", "audit.read",
     "credentials.reset",
   ),
   proprietario: permissions(
-    "hotel.bootstrap.read", "reservations.read", "reservations.create", "guests.basic.read",
+    "hotel.bootstrap.read", "reservations.read", "reservations.create", "reservations.manage", "guests.basic.read",
     "rooms.operational.read", "rooms.operational.update", "tasks.housekeeping.read",
     "tasks.housekeeping.update", "tasks.maintenance.read", "tasks.maintenance.update",
     "finance.cashflow.read", "admin.users.manage", "admin.roles.manage", "admin.settings.manage",
     "audit.read", "credentials.reset",
   ),
   administrador: permissions(
-    "hotel.bootstrap.read", "reservations.read", "reservations.create", "guests.basic.read",
+    "hotel.bootstrap.read", "reservations.read", "reservations.create", "reservations.manage", "guests.basic.read",
     "rooms.operational.read", "rooms.operational.update", "tasks.housekeeping.read",
     "tasks.housekeeping.update", "tasks.maintenance.read", "tasks.maintenance.update",
     "finance.cashflow.read", "admin.users.manage", "admin.roles.manage", "admin.settings.manage",
     "audit.read", "credentials.reset",
   ),
   gerente: permissions(
-    "hotel.bootstrap.read", "frontdesk.read", "reservations.read", "reservations.create",
+    "hotel.bootstrap.read", "frontdesk.read", "reservations.read", "reservations.create", "reservations.manage",
     "guests.basic.read", "rooms.operational.read", "rooms.operational.update",
     "tasks.housekeeping.read", "tasks.housekeeping.update", "tasks.maintenance.read",
     "tasks.maintenance.update", "audit.read",
   ),
   recepcionista: permissions(
-    "hotel.bootstrap.read", "frontdesk.read", "reservations.read", "reservations.create",
+    "hotel.bootstrap.read", "frontdesk.read", "reservations.read", "reservations.create", "reservations.manage",
     "guests.basic.read", "rooms.operational.read", "rooms.operational.update",
   ),
   camareira: permissions(
@@ -161,6 +161,13 @@ function initialPasswordForRole(role, environment) {
   return environment.ASHOTELARIA_DEFAULT_PASSWORD;
 }
 
+function sameConfiguredPassword(candidate, configured) {
+  if (typeof candidate !== "string" || typeof configured !== "string") return false;
+  const actual = Buffer.from(candidate, "utf8");
+  const expected = Buffer.from(configured, "utf8");
+  return actual.length === expected.length && timingSafeEqual(actual, expected);
+}
+
 function publicSession(payload) {
   return {
     tenantId: payload.tenantId,
@@ -179,8 +186,10 @@ function publicSession(payload) {
 function createAuthService({ store, config = {} } = {}) {
   if (!store
     || typeof store.getCredentialProfile !== "function"
+    || typeof store.createCredentialProfileIfAbsent !== "function"
     || typeof store.upsertCredentialProfile !== "function"
     || typeof store.updateCredentialProfile !== "function"
+    || typeof store.setCredentialPassword !== "function"
     || typeof store.recordCredentialFailure !== "function") {
     throw new TypeError("store must provide credential profile methods");
   }
@@ -191,6 +200,9 @@ function createAuthService({ store, config = {} } = {}) {
   }
   const now = typeof config.now === "function" ? config.now : Date.now;
   const environment = config.environment ?? process.env;
+  const requireInitialPasswordChange = typeof config.requireInitialPasswordChange === "boolean"
+    ? config.requireInitialPasswordChange
+    : String(environment.ASHOTELARIA_REQUIRE_PASSWORD_CHANGE ?? "true").trim().toLowerCase() !== "false";
   const sessionTtlSeconds = positiveInteger(config.sessionTtlSeconds, 8 * 60 * 60);
   const maxFailedAttempts = positiveInteger(config.maxFailedAttempts, 5);
   const lockoutMs = positiveInteger(config.lockoutMs, 15 * 60 * 1000);
@@ -248,7 +260,7 @@ function createAuthService({ store, config = {} } = {}) {
       throw authError("CREDENTIAL_NOT_CONFIGURED", "Credential is not configured");
     }
     const updatedAt = new Date(now()).toISOString();
-    profile = await store.upsertCredentialProfile({
+    profile = await store.createCredentialProfileIfAbsent({
       tenantId: property.tenantId,
       propertyId: property.id,
       username,
@@ -257,7 +269,7 @@ function createAuthService({ store, config = {} } = {}) {
       sessionVersion: 1,
       failedAttempts: 0,
       lockedUntil: null,
-      forceChange: true,
+      forceChange: requireInitialPasswordChange,
       updatedAt,
     });
     return profile;
@@ -287,6 +299,7 @@ function createAuthService({ store, config = {} } = {}) {
         propertyId: property.id,
         username: normalizedUsername,
         role: normalizedRole,
+        expectedSessionVersion: profile.sessionVersion,
         maxFailedAttempts,
         lockedUntil: new Date(current + lockoutMs).toISOString(),
         updatedAt: new Date(current).toISOString(),
@@ -297,13 +310,23 @@ function createAuthService({ store, config = {} } = {}) {
       throw authError("INVALID_CREDENTIALS", "Invalid credentials");
     }
 
+    const configuredInitialPassword = initialPasswordForRole(normalizedRole, environment);
+    const mustChangePassword = requireInitialPasswordChange
+      && (profile.forceChange || sameConfiguredPassword(password, configuredInitialPassword));
     const updated = await store.updateCredentialProfile({
       tenantId: property.tenantId,
       propertyId: property.id,
       username: normalizedUsername,
       role: normalizedRole,
-      changes: { failedAttempts: 0, lockedUntil: null, updatedAt: new Date(current).toISOString() },
+      expectedSessionVersion: profile.sessionVersion,
+      changes: {
+        failedAttempts: 0,
+        lockedUntil: null,
+        forceChange: mustChangePassword,
+        updatedAt: new Date(current).toISOString(),
+      },
     });
+    if (!updated) throw authError("SESSION_REVOKED", "Session revoked");
     const iat = Math.floor(current / 1000);
     const payload = {
       tenantId: property.tenantId,
@@ -355,20 +378,19 @@ function createAuthService({ store, config = {} } = {}) {
     if (!profile || !await verifyPassword(currentPassword, profile.passwordHash)) {
       throw authError("INVALID_CREDENTIALS", "Invalid credentials");
     }
-    await store.updateCredentialProfile({
+    const updated = await store.setCredentialPassword({
       tenantId: session.tenantId,
       propertyId: session.propertyId,
       username: session.username,
       role: session.role,
-      changes: {
-        passwordHash: await hashPassword(newPassword),
-        sessionVersion: profile.sessionVersion + 1,
-        failedAttempts: 0,
-        lockedUntil: null,
-        forceChange: false,
-        updatedAt: new Date(now()).toISOString(),
-      },
+      passwordHash: await hashPassword(newPassword),
+      forceChange: false,
+      expectedSessionVersion: profile.sessionVersion,
+      updatedAt: new Date(now()).toISOString(),
+      actor: { username: session.username, role: session.role },
+      action: "credential.password_changed",
     });
+    if (!updated) throw authError("SESSION_REVOKED", "Session revoked");
     return { changed: true };
   }
 
@@ -384,22 +406,15 @@ function createAuthService({ store, config = {} } = {}) {
       username: "admin",
       role,
     };
-    const existing = await store.getCredentialProfile(scope);
-    const next = {
+    const updated = await store.setCredentialPassword({
       ...scope,
       passwordHash: await hashPassword(newPassword),
-      sessionVersion: (existing?.sessionVersion ?? 0) + 1,
-      failedAttempts: 0,
-      lockedUntil: null,
       forceChange: true,
       updatedAt: new Date(now()).toISOString(),
-    };
-    if (existing) {
-      await store.updateCredentialProfile({ ...scope, changes: next });
-    } else {
-      await store.upsertCredentialProfile(next);
-    }
-    return { reset: true, role, sessionVersion: next.sessionVersion };
+      actor: { username: session.username, role: session.role },
+      action: "credential.password_reset",
+    });
+    return { reset: true, role, sessionVersion: updated.sessionVersion };
   }
 
   return { login, authenticate, changePassword, resetPassword };

@@ -4,7 +4,11 @@ const { randomUUID } = require("node:crypto");
 const {
   parseStayRange,
   buildOperationalSummary,
+  operationalDate,
+  validateCheckInEligibility,
+  validateCheckInRoom,
   validateReservationInput,
+  validateReservationTransition,
 } = require("./domain");
 
 const ROOM_STATUSES = new Set([
@@ -168,10 +172,11 @@ function reservationResult(reservation, replayed, includeReplayMetadata) {
   return includeReplayMetadata ? { reservation, replayed } : reservation;
 }
 
-function createPostgresStore({ pool, idFactory = randomUUID } = {}) {
+function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Date() } = {}) {
   if (!pool || typeof pool.query !== "function") {
     throw new TypeError("pool must provide query");
   }
+  if (typeof now !== "function") throw new TypeError("now must be a function");
 
   async function scopedProperty(executor, tenantId, propertyId) {
     const result = await executor.query(
@@ -414,6 +419,96 @@ function createPostgresStore({ pool, idFactory = randomUUID } = {}) {
       }
     },
 
+    async updateReservationStatus({ tenantId, propertyId, reservationId, status, actor }) {
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const currentResult = await client.query(
+          `SELECT rv.*, rr.room_id, p.time_zone
+             FROM reservations rv
+             JOIN properties p
+               ON p.tenant_id = rv.tenant_id AND p.id = rv.property_id
+             LEFT JOIN reservation_rooms rr
+               ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id
+              AND rr.reservation_id = rv.id
+            WHERE rv.tenant_id = $1 AND rv.property_id = $2 AND rv.id = $3
+            FOR UPDATE OF rv`,
+          [tenantId, propertyId, reservationId],
+        );
+        const current = currentResult.rows[0];
+        if (!current) {
+          await client.query("COMMIT");
+          return null;
+        }
+        const next = validateReservationTransition(current.status, status);
+        if (next === current.status) {
+          await client.query("COMMIT");
+          return reservationFromRow(current);
+        }
+        if (next === "checked_in") {
+          validateCheckInEligibility({
+            checkIn: dateOnly(current.check_in),
+            checkOut: dateOnly(current.check_out),
+            operationalDate: operationalDate(now(), current.time_zone),
+          });
+          const roomResult = await client.query(
+            `SELECT id, status
+               FROM rooms
+              WHERE tenant_id = $1 AND property_id = $2 AND id = $3
+              FOR UPDATE`,
+            [tenantId, propertyId, current.room_id],
+          );
+          const checkedInResult = await client.query(
+            `SELECT rv.id
+               FROM reservation_rooms rr
+               JOIN reservations rv
+                 ON rv.tenant_id = rr.tenant_id AND rv.property_id = rr.property_id
+                AND rv.id = rr.reservation_id
+              WHERE rr.tenant_id = $1 AND rr.property_id = $2 AND rr.room_id = $3
+                AND rv.status = 'checked_in' AND rv.id <> $4
+              LIMIT 1`,
+            [tenantId, propertyId, current.room_id, reservationId],
+          );
+          validateCheckInRoom({
+            roomStatus: roomResult.rows[0]?.status,
+            hasCheckedInReservation: Boolean(checkedInResult.rows[0]),
+          });
+        }
+        const updated = await client.query(
+          `UPDATE reservations
+              SET status = $4, updated_at = now()
+            WHERE tenant_id = $1 AND property_id = $2 AND id = $3
+          RETURNING *`,
+          [tenantId, propertyId, reservationId, next],
+        );
+        const roomStatus = next === "checked_in" ? "occupied" : next === "checked_out" ? "dirty" : null;
+        if (current.room_id && roomStatus) {
+          await client.query(
+            `UPDATE rooms
+                SET status = $4, updated_at = now()
+              WHERE tenant_id = $1 AND property_id = $2 AND id = $3
+            RETURNING id, status`,
+            [tenantId, propertyId, current.room_id, roomStatus],
+          );
+        }
+        await insertAudit(client, {
+          tenantId,
+          propertyId,
+          action: "reservation.status_updated",
+          entityId: reservationId,
+          actor,
+          changes: { from: current.status, to: next, roomId: current.room_id },
+        });
+        await client.query("COMMIT");
+        return reservationFromRow(updated.rows[0], current.room_id);
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
     async updateRoomStatus({ tenantId, propertyId, roomId, status, actor }) {
       const normalized = typeof status === "string" ? status.trim().toLowerCase() : "";
       if (!ROOM_STATUSES.has(normalized)) throw new RangeError("room status is unknown");
@@ -516,7 +611,43 @@ function createPostgresStore({ pool, idFactory = randomUUID } = {}) {
       return credentialFromRow(result.rows[0]);
     },
 
-    async updateCredentialProfile({ tenantId, propertyId, username, role, changes }) {
+    async createCredentialProfileIfAbsent(profile) {
+      const scope = [
+        profile.tenantId,
+        profile.propertyId,
+        String(profile.username ?? "").trim().toLowerCase(),
+        String(profile.role ?? "").trim().toLowerCase(),
+      ];
+      const inserted = await pool.query(
+        `INSERT INTO credential_profiles
+           (tenant_id, property_id, username, role, password_hash, session_version,
+            failed_attempts, locked_until, force_change, updated_at)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+         ON CONFLICT (tenant_id, property_id, username, role) DO NOTHING
+         RETURNING tenant_id, property_id, username, role, password_hash, session_version,
+                   failed_attempts, locked_until, force_change, updated_at`,
+        [
+          ...scope,
+          profile.passwordHash,
+          profile.sessionVersion,
+          profile.failedAttempts,
+          profile.lockedUntil,
+          profile.forceChange,
+          profile.updatedAt,
+        ],
+      );
+      if (inserted.rows[0]) return credentialFromRow(inserted.rows[0]);
+      const existing = await pool.query(
+        `SELECT tenant_id, property_id, username, role, password_hash, session_version,
+                failed_attempts, locked_until, force_change, updated_at
+           FROM credential_profiles
+          WHERE tenant_id = $1 AND property_id = $2 AND username = $3 AND role = $4`,
+        scope,
+      );
+      return credentialFromRow(existing.rows[0]);
+    },
+
+    async updateCredentialProfile({ tenantId, propertyId, username, role, expectedSessionVersion, changes }) {
       const columns = {
         passwordHash: "password_hash",
         sessionVersion: "session_version",
@@ -538,10 +669,13 @@ function createPostgresStore({ pool, idFactory = randomUUID } = {}) {
         assignments.push(`${column} = $${values.length}`);
       }
       if (assignments.length === 0) return this.getCredentialProfile({ tenantId, propertyId, username, role });
+      const compareVersion = expectedSessionVersion !== undefined && expectedSessionVersion !== null;
+      if (compareVersion) values.push(expectedSessionVersion);
       const result = await pool.query(
         `UPDATE credential_profiles
             SET ${assignments.join(", ")}
           WHERE tenant_id = $1 AND property_id = $2 AND username = $3 AND role = $4
+            ${compareVersion ? `AND session_version = $${values.length}` : ""}
         RETURNING tenant_id, property_id, username, role, password_hash, session_version,
                   failed_attempts, locked_until, force_change, updated_at`,
         values,
@@ -549,9 +683,93 @@ function createPostgresStore({ pool, idFactory = randomUUID } = {}) {
       return credentialFromRow(result.rows[0]);
     },
 
-    async recordCredentialFailure({
-      tenantId, propertyId, username, role, maxFailedAttempts, lockedUntil, updatedAt,
+    async setCredentialPassword({
+      tenantId, propertyId, username, role, passwordHash, forceChange,
+      expectedSessionVersion, updatedAt, actor, action,
     }) {
+      const normalizedUsername = String(username ?? "").trim().toLowerCase();
+      const normalizedRole = String(role ?? "").trim().toLowerCase();
+      const scope = [tenantId, propertyId, normalizedUsername, normalizedRole];
+      const compareVersion = expectedSessionVersion !== undefined && expectedSessionVersion !== null;
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const result = compareVersion
+          ? await client.query(
+            `UPDATE credential_profiles
+                SET password_hash = $5,
+                    session_version = session_version + 1,
+                    failed_attempts = 0,
+                    locked_until = NULL,
+                    force_change = $6,
+                    updated_at = $7
+              WHERE tenant_id = $1 AND property_id = $2 AND username = $3 AND role = $4
+                AND session_version = $8
+            RETURNING tenant_id, property_id, username, role, password_hash, session_version,
+                      failed_attempts, locked_until, force_change, updated_at`,
+            [...scope, passwordHash, Boolean(forceChange), updatedAt, expectedSessionVersion],
+          )
+          : await client.query(
+            `INSERT INTO credential_profiles
+               (tenant_id, property_id, username, role, password_hash, session_version,
+                failed_attempts, locked_until, force_change, updated_at)
+             VALUES ($1, $2, $3, $4, $5, 1, 0, NULL, $6, $7)
+             ON CONFLICT (tenant_id, property_id, username, role) DO UPDATE SET
+               password_hash = EXCLUDED.password_hash,
+               session_version = credential_profiles.session_version + 1,
+               failed_attempts = 0,
+               locked_until = NULL,
+               force_change = EXCLUDED.force_change,
+               updated_at = EXCLUDED.updated_at
+             RETURNING tenant_id, property_id, username, role, password_hash, session_version,
+                       failed_attempts, locked_until, force_change, updated_at`,
+            [...scope, passwordHash, Boolean(forceChange), updatedAt],
+          );
+        const profile = credentialFromRow(result.rows[0]);
+        if (!profile) {
+          await client.query("COMMIT");
+          return null;
+        }
+        await insertAudit(client, {
+          tenantId,
+          propertyId,
+          action,
+          entityId: `credential:${normalizedUsername}:${normalizedRole}`,
+          actor: {
+            username: String(actor?.username ?? "system").trim().toLowerCase(),
+            role: String(actor?.role ?? "system").trim().toLowerCase(),
+          },
+          changes: {
+            targetUsername: normalizedUsername,
+            targetRole: normalizedRole,
+            sessionVersion: profile.sessionVersion,
+          },
+        });
+        await client.query("COMMIT");
+        return profile;
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async recordCredentialFailure({
+      tenantId, propertyId, username, role, expectedSessionVersion,
+      maxFailedAttempts, lockedUntil, updatedAt,
+    }) {
+      const compareVersion = expectedSessionVersion !== undefined && expectedSessionVersion !== null;
+      const values = [
+        tenantId,
+        propertyId,
+        String(username ?? "").trim().toLowerCase(),
+        String(role ?? "").trim().toLowerCase(),
+        maxFailedAttempts,
+        lockedUntil,
+        updatedAt,
+      ];
+      if (compareVersion) values.push(expectedSessionVersion);
       const result = await pool.query(
         `UPDATE credential_profiles
             SET failed_attempts = failed_attempts + 1,
@@ -561,17 +779,10 @@ function createPostgresStore({ pool, idFactory = randomUUID } = {}) {
                 END,
                 updated_at = $7
           WHERE tenant_id = $1 AND property_id = $2 AND username = $3 AND role = $4
+            ${compareVersion ? `AND session_version = $${values.length}` : ""}
         RETURNING tenant_id, property_id, username, role, password_hash, session_version,
                   failed_attempts, locked_until, force_change, updated_at`,
-        [
-          tenantId,
-          propertyId,
-          String(username ?? "").trim().toLowerCase(),
-          String(role ?? "").trim().toLowerCase(),
-          maxFailedAttempts,
-          lockedUntil,
-          updatedAt,
-        ],
+        values,
       );
       return credentialFromRow(result.rows[0]);
     },

@@ -306,6 +306,147 @@ test("updateRoomStatus scopes the update and writes an audit event in one transa
   assert.equal(queries.at(-1).text, "COMMIT");
 });
 
+test("PostgreSQL check-in locks the scoped stay and room before updating and auditing", async () => {
+  let status = "confirmed";
+  let roomStatus = "available";
+  const reservationRow = () => ({
+    id: "reservation-1", tenant_id: "tenant-1", property_id: "property-1", guest_id: "guest-1",
+    room_type_id: "type-1", room_id: "room-1", check_in: "2026-07-14", check_out: "2026-07-16",
+    adults: 2, children: 0, nightly_rate_cents: "18900", extras_cents: "0", taxes_cents: "0",
+    total_cents: "37800", status, time_zone: "America/Rio_Branco",
+  });
+  const { pool, queries } = scriptedPool((sql, values) => {
+    if (/SELECT rv\.\*, rr\.room_id/.test(sql) && /FOR UPDATE OF rv/.test(sql)) return { rows: [reservationRow()] };
+    if (/FROM rooms/.test(sql) && /FOR UPDATE/.test(sql)) {
+      return { rows: [{ id: "room-1", status: roomStatus }] };
+    }
+    if (/rv\.status = 'checked_in'/.test(sql)) return { rows: [] };
+    if (/UPDATE reservations/.test(sql)) {
+      status = values[3];
+      return { rows: [reservationRow()] };
+    }
+    if (/UPDATE rooms/.test(sql)) {
+      roomStatus = values[3];
+      return { rows: [{ id: "room-1", status: roomStatus }] };
+    }
+    return { rows: [] };
+  });
+  const { createPostgresStore } = require("../postgres-store");
+  const store = createPostgresStore({
+    pool,
+    idFactory: () => "audit-1",
+    now: () => new Date("2026-07-15T03:30:00.000Z"),
+  });
+  const reservation = await store.updateReservationStatus({
+    tenantId: "tenant-1",
+    propertyId: "property-1",
+    reservationId: "reservation-1",
+    status: "checked_in",
+    actor: { id: "admin:recepcionista" },
+  });
+
+  assert.equal(reservation.status, "checked_in");
+  assert.equal(roomStatus, "occupied");
+  assert.equal(queries[0].text, "BEGIN");
+  const reservationLock = queries.find(({ text }) => /FOR UPDATE OF rv/.test(text));
+  assert.match(reservationLock.text, /JOIN properties p/);
+  assert.match(reservationLock.text, /p\.time_zone/);
+  const roomLock = queries.find(({ text }) => /FROM rooms/.test(text) && /FOR UPDATE/.test(text));
+  assert.deepEqual(roomLock.values, ["tenant-1", "property-1", "room-1"]);
+  const occupiedCheck = queries.find(({ text }) => /rv\.status = 'checked_in'/.test(text));
+  assert.deepEqual(occupiedCheck.values, ["tenant-1", "property-1", "room-1", "reservation-1"]);
+  assert.ok(queries.some(({ text }) => /INSERT INTO audit_events/.test(text)));
+  assert.equal(queries.at(-1).text, "COMMIT");
+});
+
+test("PostgreSQL check-in rejects an invalid operational day before any mutation", async () => {
+  const current = {
+    id: "reservation-1", tenant_id: "tenant-1", property_id: "property-1", guest_id: "guest-1",
+    room_type_id: "type-1", room_id: "room-1", check_in: "2026-07-14", check_out: "2026-07-16",
+    adults: 2, children: 0, nightly_rate_cents: "18900", extras_cents: "0", taxes_cents: "0",
+    total_cents: "37800", status: "confirmed", time_zone: "America/Rio_Branco",
+  };
+  const { pool, queries, client } = scriptedPool((sql) => {
+    if (/FOR UPDATE OF rv/.test(sql)) return { rows: [current] };
+    return { rows: [] };
+  });
+  const { createPostgresStore } = require("../postgres-store");
+  const store = createPostgresStore({ pool, now: () => "2026-07-15" });
+
+  await assert.rejects(
+    store.updateReservationStatus({
+      tenantId: "tenant-1", propertyId: "property-1", reservationId: "reservation-1",
+      status: "checked_in", actor: { id: "admin:recepcionista" },
+    }),
+    (error) => error.code === "CHECK_IN_NOT_ALLOWED",
+  );
+  assert.equal(queries.some(({ text }) => /UPDATE reservations|UPDATE rooms|INSERT INTO audit_events/.test(text)), false);
+  assert.equal(queries.at(-1).text, "ROLLBACK");
+  assert.equal(client.releaseCount, 1);
+});
+
+test("PostgreSQL check-in locks and preserves every incompatible room status", async () => {
+  const incompatibleStatuses = ["maintenance", "blocked", "dirty", "cleaning", "occupied", "do_not_disturb"];
+  for (const roomStatus of incompatibleStatuses) {
+    const current = {
+      id: "reservation-1", tenant_id: "tenant-1", property_id: "property-1", guest_id: "guest-1",
+      room_type_id: "type-1", room_id: "room-1", check_in: "2026-07-14", check_out: "2026-07-16",
+      adults: 2, children: 0, nightly_rate_cents: "18900", extras_cents: "0", taxes_cents: "0",
+      total_cents: "37800", status: "confirmed", time_zone: "America/Rio_Branco",
+    };
+    const { pool, queries } = scriptedPool((sql) => {
+      if (/FOR UPDATE OF rv/.test(sql)) return { rows: [current] };
+      if (/FROM rooms/.test(sql) && /FOR UPDATE/.test(sql)) return { rows: [{ id: "room-1", status: roomStatus }] };
+      return { rows: [] };
+    });
+    const { createPostgresStore } = require("../postgres-store");
+    const store = createPostgresStore({ pool, now: () => "2026-07-14" });
+
+    await assert.rejects(
+      store.updateReservationStatus({
+        tenantId: "tenant-1", propertyId: "property-1", reservationId: "reservation-1",
+        status: "checked_in", actor: { id: "admin:recepcionista" },
+      }),
+      (error) => error.code === "ROOM_NOT_READY",
+      roomStatus,
+    );
+    assert.ok(queries.some(({ text }) => /FROM rooms/.test(text) && /FOR UPDATE/.test(text)));
+    assert.equal(queries.some(({ text }) => /UPDATE reservations|UPDATE rooms|INSERT INTO audit_events/.test(text)), false);
+    assert.equal(queries.at(-1).text, "ROLLBACK");
+  }
+});
+
+test("PostgreSQL check-in rejects another checked-in reservation in the same scoped room", async () => {
+  const current = {
+    id: "reservation-1", tenant_id: "tenant-1", property_id: "property-1", guest_id: "guest-1",
+    room_type_id: "type-1", room_id: "room-1", check_in: "2026-07-14", check_out: "2026-07-16",
+    adults: 2, children: 0, nightly_rate_cents: "18900", extras_cents: "0", taxes_cents: "0",
+    total_cents: "37800", status: "confirmed", time_zone: "America/Rio_Branco",
+  };
+  const { pool, queries } = scriptedPool((sql) => {
+    if (/FOR UPDATE OF rv/.test(sql)) return { rows: [current] };
+    if (/FROM rooms/.test(sql) && /FOR UPDATE/.test(sql)) return { rows: [{ id: "room-1", status: "inspected" }] };
+    if (/rv\.status = 'checked_in'/.test(sql)) return { rows: [{ id: "reservation-other" }] };
+    return { rows: [] };
+  });
+  const { createPostgresStore } = require("../postgres-store");
+  const store = createPostgresStore({ pool, now: () => "2026-07-14" });
+
+  await assert.rejects(
+    store.updateReservationStatus({
+      tenantId: "tenant-1", propertyId: "property-1", reservationId: "reservation-1",
+      status: "checked_in", actor: { id: "admin:recepcionista" },
+    }),
+    (error) => error.code === "ROOM_NOT_READY",
+  );
+  const conflict = queries.find(({ text }) => /rv\.status = 'checked_in'/.test(text));
+  assert.deepEqual(conflict.values, ["tenant-1", "property-1", "room-1", "reservation-1"]);
+  assert.match(conflict.text, /rr\.tenant_id = \$1/);
+  assert.match(conflict.text, /rr\.property_id = \$2/);
+  assert.equal(queries.some(({ text }) => /UPDATE reservations|UPDATE rooms|INSERT INTO audit_events/.test(text)), false);
+  assert.equal(queries.at(-1).text, "ROLLBACK");
+});
+
 test("PostgreSQL credential repository reads and mutates profiles by the complete scope", async () => {
   const row = {
     tenant_id: "tenant-1", property_id: "property-1", username: "admin", role: "recepcionista",
@@ -337,7 +478,9 @@ test("PostgreSQL credential repository reads and mutates profiles by the complet
     ...scope, passwordHash: "scrypt$hash", sessionVersion: 2, failedAttempts: 1,
     lockedUntil: null, forceChange: true, updatedAt: "2026-07-14T12:00:00.000Z",
   });
-  const updated = await store.updateCredentialProfile({ ...scope, changes: { failedAttempts: 0 } });
+  const updated = await store.updateCredentialProfile({
+    ...scope, expectedSessionVersion: 2, changes: { failedAttempts: 0 },
+  });
   assert.equal(updated.failedAttempts, 0);
 
   for (const query of queries) {
@@ -350,6 +493,103 @@ test("PostgreSQL credential repository reads and mutates profiles by the complet
   }
   const update = queries.find(({ text }) => /UPDATE credential_profiles/.test(text));
   assert.deepEqual(update.values.slice(0, 4), ["tenant-1", "property-1", "admin", "recepcionista"]);
+  assert.match(update.text, /session_version\s*=\s*\$\d+/i);
+  assert.equal(update.values.at(-1), 2);
+});
+
+test("PostgreSQL credential provisioning returns the winner without updating a conflict", async () => {
+  const existing = {
+    tenant_id: "tenant-1", property_id: "property-1", username: "admin", role: "recepcionista",
+    password_hash: "scrypt$reset-hash", session_version: 7, failed_attempts: 0,
+    locked_until: null, force_change: false, updated_at: "2026-07-14T12:00:00.000Z",
+  };
+  const { pool, queries } = scriptedPool((sql) => {
+    if (/INSERT INTO credential_profiles/.test(sql)) return { rows: [], rowCount: 0 };
+    if (/FROM credential_profiles/.test(sql)) return { rows: [existing], rowCount: 1 };
+    return { rows: [], rowCount: 0 };
+  });
+  const { createPostgresStore } = require("../postgres-store");
+  const store = createPostgresStore({ pool });
+
+  const result = await store.createCredentialProfileIfAbsent({
+    tenantId: "tenant-1", propertyId: "property-1", username: "admin", role: "recepcionista",
+    passwordHash: "scrypt$initial-hash", sessionVersion: 1, failedAttempts: 0,
+    lockedUntil: null, forceChange: true, updatedAt: "2026-07-14T12:01:00.000Z",
+  });
+
+  assert.equal(result.passwordHash, "scrypt$reset-hash");
+  assert.equal(result.sessionVersion, 7);
+  const insert = queries.find(({ text }) => /INSERT INTO credential_profiles/.test(text));
+  assert.match(insert.text, /ON CONFLICT\s*\(tenant_id, property_id, username, role\)\s*DO NOTHING/i);
+  assert.doesNotMatch(insert.text, /DO UPDATE/i);
+});
+
+test("PostgreSQL password change uses sessionVersion CAS and audits safe metadata atomically", async () => {
+  const changed = {
+    tenant_id: "tenant-1", property_id: "property-1", username: "admin", role: "recepcionista",
+    password_hash: "scrypt$new-hash", session_version: 3, failed_attempts: 0,
+    locked_until: null, force_change: false, updated_at: "2026-07-14T12:00:00.000Z",
+  };
+  const { pool, queries, client } = scriptedPool((sql) => {
+    if (/UPDATE credential_profiles/.test(sql)) return { rows: [changed], rowCount: 1 };
+    return { rows: [], rowCount: 0 };
+  });
+  const { createPostgresStore } = require("../postgres-store");
+  const store = createPostgresStore({ pool, idFactory: () => "audit-password-change" });
+
+  const result = await store.setCredentialPassword({
+    tenantId: "tenant-1", propertyId: "property-1", username: "admin", role: "recepcionista",
+    passwordHash: "scrypt$new-hash", forceChange: false, expectedSessionVersion: 2,
+    updatedAt: "2026-07-14T12:00:00.000Z",
+    actor: { username: "admin", role: "recepcionista" },
+    action: "credential.password_changed",
+  });
+
+  assert.equal(result.sessionVersion, 3);
+  const update = queries.find(({ text }) => /UPDATE credential_profiles/.test(text));
+  assert.match(update.text, /session_version\s*=\s*session_version\s*\+\s*1/i);
+  assert.match(update.text, /session_version\s*=\s*\$\d+/i);
+  const audit = queries.find(({ text }) => /INSERT INTO audit_events/.test(text));
+  assert.ok(audit);
+  assert.equal(audit.values[5], JSON.stringify({ username: "admin", role: "recepcionista" }));
+  assert.deepEqual(JSON.parse(audit.values[6]), {
+    targetUsername: "admin", targetRole: "recepcionista", sessionVersion: 3,
+  });
+  assert.equal(audit.values.some((value) => String(value).includes("scrypt$new-hash")), false);
+  assert.equal(queries[0].text, "BEGIN");
+  assert.equal(queries.at(-1).text, "COMMIT");
+  assert.equal(client.releaseCount, 1);
+});
+
+test("PostgreSQL password reset upserts with an atomic version increment and safe audit", async () => {
+  const reset = {
+    tenant_id: "tenant-1", property_id: "property-1", username: "admin", role: "camareira",
+    password_hash: "scrypt$reset-hash", session_version: 8, failed_attempts: 0,
+    locked_until: null, force_change: true, updated_at: "2026-07-14T12:00:00.000Z",
+  };
+  const { pool, queries } = scriptedPool((sql) => {
+    if (/INSERT INTO credential_profiles/.test(sql)) return { rows: [reset], rowCount: 1 };
+    return { rows: [], rowCount: 0 };
+  });
+  const { createPostgresStore } = require("../postgres-store");
+  const store = createPostgresStore({ pool, idFactory: () => "audit-password-reset" });
+
+  const result = await store.setCredentialPassword({
+    tenantId: "tenant-1", propertyId: "property-1", username: "admin", role: "camareira",
+    passwordHash: "scrypt$reset-hash", forceChange: true,
+    updatedAt: "2026-07-14T12:00:00.000Z",
+    actor: { username: "admin", role: "administrador" },
+    action: "credential.password_reset",
+  });
+
+  assert.equal(result.sessionVersion, 8);
+  const upsert = queries.find(({ text }) => /INSERT INTO credential_profiles/.test(text));
+  assert.match(upsert.text, /ON CONFLICT[\s\S]*session_version\s*=\s*credential_profiles\.session_version\s*\+\s*1/i);
+  const audit = queries.find(({ text }) => /INSERT INTO audit_events/.test(text));
+  assert.deepEqual(JSON.parse(audit.values[6]), {
+    targetUsername: "admin", targetRole: "camareira", sessionVersion: 8,
+  });
+  assert.equal(audit.values.some((value) => String(value).includes("scrypt$reset-hash")), false);
 });
 
 test("PostgreSQL credential failures increment atomically and return the resulting lock state", async () => {
@@ -374,10 +614,13 @@ test("PostgreSQL credential failures increment atomically and return the resulti
     maxFailedAttempts: 2,
     lockedUntil,
     updatedAt: "2026-07-14T12:00:00.000Z",
+    expectedSessionVersion: 1,
   });
   assert.equal(profile.failedAttempts, 2);
   assert.equal(profile.lockedUntil, lockedUntil);
   const update = queries.find(({ text }) => /UPDATE credential_profiles/.test(text));
   assert.match(update.text, /failed_attempts\s*=\s*failed_attempts\s*\+\s*1/i);
+  assert.match(update.text, /session_version\s*=\s*\$\d+/i);
+  assert.equal(update.values.at(-1), 1);
   assert.match(update.text, /returning/i);
 });

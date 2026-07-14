@@ -26,6 +26,7 @@ const RESERVATION_STATUSES = new Set([
 ]);
 
 const ACTIVE_RESERVATION_STATUSES = new Set(["confirmed", "checked_in"]);
+const CHECK_IN_READY_ROOM_STATUSES = new Set(["available", "inspected"]);
 
 function assertObject(value, label) {
   if (value === null || typeof value !== "object" || Array.isArray(value)) {
@@ -147,7 +148,7 @@ function normalizeKnownStatus(value, label, allowedStatuses) {
   return status;
 }
 
-function dateFromNow(now, timeZone) {
+function operationalDate(now, timeZone) {
   if (typeof now === "string") {
     return parseDate(now, "now").value;
   }
@@ -192,7 +193,7 @@ function buildOperationalSummary({
     throw new TypeError("reservations must be an array");
   }
 
-  const today = dateFromNow(now, timeZone);
+  const today = operationalDate(now, timeZone);
   const roomCounts = {
     occupiedRooms: 0,
     availableRooms: 0,
@@ -300,11 +301,57 @@ function validateReservationInput(input) {
   };
 }
 
+const RESERVATION_TRANSITIONS = Object.freeze({
+  pending: new Set(["confirmed", "cancelled"]),
+  confirmed: new Set(["checked_in", "cancelled"]),
+  checked_in: new Set(["checked_out"]),
+  checked_out: new Set(),
+  cancelled: new Set(),
+});
+
+function validateReservationTransition(currentStatus, targetStatus) {
+  const current = String(currentStatus ?? "").trim().toLowerCase().replace(/^canceled$/, "cancelled");
+  const target = String(targetStatus ?? "").trim().toLowerCase().replace(/^canceled$/, "cancelled");
+  const allowed = RESERVATION_TRANSITIONS[current];
+  if (!allowed || !Object.hasOwn(RESERVATION_TRANSITIONS, target)
+    || (current !== target && !allowed.has(target))) {
+    const error = new RangeError("reservation status transition is invalid");
+    error.code = "INVALID_RESERVATION_TRANSITION";
+    throw error;
+  }
+  return target;
+}
+
+function validateCheckInEligibility({ checkIn, checkOut, operationalDate: currentDay } = {}) {
+  const stay = parseStayRange({ checkIn, checkOut });
+  const day = parseDate(currentDay, "operationalDate").value;
+  if (day !== stay.checkIn || day >= stay.checkOut) {
+    const error = new RangeError("check-in is only allowed on the reservation arrival date");
+    error.code = "CHECK_IN_NOT_ALLOWED";
+    throw error;
+  }
+  return day;
+}
+
+function validateCheckInRoom({ roomStatus, hasCheckedInReservation = false } = {}) {
+  const normalizedStatus = String(roomStatus ?? "").trim().toLowerCase();
+  if (!CHECK_IN_READY_ROOM_STATUSES.has(normalizedStatus) || hasCheckedInReservation) {
+    const error = new RangeError("room is not ready for check-in");
+    error.code = "ROOM_NOT_READY";
+    throw error;
+  }
+  return normalizedStatus;
+}
+
 module.exports = {
   parseStayRange,
   countNights,
   rangesOverlap,
   calculateStayTotal,
   buildOperationalSummary,
+  operationalDate,
+  validateCheckInEligibility,
+  validateCheckInRoom,
   validateReservationInput,
+  validateReservationTransition,
 };

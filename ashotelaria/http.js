@@ -161,6 +161,28 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         return true;
       }
 
+      const reservationStatusMatch = routePath.match(/^\/reservations\/([^/]+)\/status$/);
+      if (method === "PATCH" && reservationStatusMatch) {
+        const session = await requireSession(req, authService, cookieName);
+        requirePasswordChanged(session);
+        requirePermission(session, "reservations.manage");
+        const body = await readJson(req, bodyLimit);
+        const reservation = await store.updateReservationStatus({
+          tenantId: session.tenantId,
+          propertyId: session.propertyId,
+          reservationId: decodeURIComponent(reservationStatusMatch[1]),
+          status: body.status,
+          actor: {
+            id: `${session.username}:${session.role}`,
+            username: session.username,
+            role: session.role,
+          },
+        });
+        if (!reservation) throw httpError("NOT_FOUND", "Reservation not found", 404);
+        sendJson(res, 200, { reservation });
+        return true;
+      }
+
       const roomStatusMatch = routePath.match(/^\/rooms\/([^/]+)\/status$/);
       if (method === "PATCH" && roomStatusMatch) {
         const session = await requireSession(req, authService, cookieName);
@@ -410,6 +432,9 @@ function normalizeError(error) {
     CREDENTIAL_NOT_CONFIGURED: 503,
     CONFIGURATION_ERROR: 503,
     INVENTORY_CONFLICT: 409,
+    INVALID_RESERVATION_TRANSITION: 409,
+    CHECK_IN_NOT_ALLOWED: 409,
+    ROOM_NOT_READY: 409,
   };
   if (authStatuses[error?.code]) {
     const code = error.code;
@@ -427,6 +452,9 @@ function normalizeError(error) {
       ACCOUNT_LOCKED: "Credential is temporarily locked",
       RATE_LIMITED: "Too many attempts",
       INVENTORY_CONFLICT: "No inventory is available for this stay",
+      INVALID_RESERVATION_TRANSITION: "Reservation status transition is invalid",
+      CHECK_IN_NOT_ALLOWED: "Check-in is only allowed on the reservation arrival date",
+      ROOM_NOT_READY: "Room is not ready for check-in",
     };
     return { status, code, message: messages[code] };
   }

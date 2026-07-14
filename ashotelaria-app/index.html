@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260714-p1">
+  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260714-p4">
 </head>
 <body class="app-body">
   <div id="connection-banner" class="connection-banner" role="status" aria-live="polite" hidden>
@@ -22,7 +22,7 @@
         <span class="brand-mark">AS</span>
         <span><strong>AShotelaria</strong><small>por CZS Labs</small></span>
       </a>
-      <div class="login-context"><span>Unidade</span><strong>Hotel Juruá Palace</strong><span>Operação online</span></div>
+      <div class="login-context"><span class="simulation-badge">Simulação</span><span>Unidade</span><strong>Hotel Juruá Palace</strong><span>Operação online</span></div>
     </section>
 
     <section class="login-panel">
@@ -33,11 +33,11 @@
         </header>
         <label>
           <span>Usuário</span>
-          <input name="username" value="admin" autocomplete="username" required>
+          <input name="username" value="admin" autocomplete="username" data-help="Use o usuário admin neste ambiente de simulação." required>
         </label>
         <label>
           <span>Cargo</span>
-          <select name="role" autocomplete="organization-title" required>
+          <select name="role" autocomplete="organization-title" data-help="O cargo define quais áreas e ações serão liberadas no painel." required>
             <option value="administrador">Administrador</option>
             <option value="proprietario">Proprietário</option>
             <option value="gerente">Gerente</option>
@@ -55,13 +55,13 @@
         <label>
           <span>Senha</span>
           <span class="password-control">
-            <input name="password" type="password" autocomplete="current-password" required>
-            <button class="text-button password-toggle" type="button" aria-label="Mostrar senha">Mostrar</button>
+            <input name="password" type="password" autocomplete="current-password" data-help="Informe a senha demonstrativa correspondente ao cargo selecionado." required>
+            <button class="text-button password-toggle" type="button" aria-label="Mostrar senha" data-help="Mostra ou oculta a senha digitada.">Mostrar</button>
           </span>
         </label>
         <input name="propertySlug" type="hidden" value="hotel-jurua-palace">
         <p id="login-error" class="form-error" role="alert" hidden></p>
-        <button class="button button--primary button--wide" type="submit">Entrar</button>
+        <button class="button button--primary button--wide" type="submit" data-help="Valida usuário, cargo e senha e abre o painel da unidade.">Entrar</button>
       </form>
     </section>
   </main>
@@ -72,15 +72,15 @@
         <span class="brand-mark">AS</span>
         <span><strong>AShotelaria</strong><small>Operação online</small></span>
       </a>
-      <div class="property-chip">
+      <div class="property-chip" tabindex="0" data-help="Mostra a unidade e o cargo usados nesta sessão.">
         <span class="property-chip__label">Unidade ativa</span>
         <strong id="property-name">Hotel</strong>
         <span id="role-name">Cargo</span>
       </div>
       <nav id="app-navigation" class="app-navigation" aria-label="Navegação principal"></nav>
       <footer class="sidebar-footer">
-        <button id="open-account" class="sidebar-action" type="button">Minha conta</button>
-        <button id="logout-button" class="sidebar-action" type="button">Sair</button>
+        <button id="open-account" class="sidebar-action" type="button" data-help="Abre a troca de senha e os controles permitidos para sua conta.">Minha conta</button>
+        <button id="logout-button" class="sidebar-action" type="button" data-help="Encerra esta sessão e volta para a entrada.">Sair</button>
       </footer>
     </aside>
 
@@ -91,9 +91,10 @@
           <h1 id="view-title">Agora</h1>
         </div>
         <div class="header-status">
+          <span class="simulation-badge simulation-badge--dark">Simulação</span>
           <span class="live-dot" aria-hidden="true"></span>
           <span>Dados online</span>
-          <button id="refresh-button" class="icon-button" type="button" aria-label="Atualizar dados">↻</button>
+          <button id="refresh-button" class="icon-button" type="button" aria-label="Atualizar dados" data-help="Busca no servidor os dados mais recentes da unidade.">↻</button>
         </div>
       </header>
       <section id="view-content" class="view-content" aria-live="polite"></section>
@@ -104,25 +105,25 @@
     <form method="dialog" class="dialog-shell">
       <header class="dialog-header">
         <div><p class="eyebrow">Segurança</p><h2>Minha conta</h2></div>
-        <button id="account-close" class="icon-button" value="cancel" aria-label="Fechar">×</button>
+        <button id="account-close" class="icon-button" value="cancel" aria-label="Fechar" data-help="Fecha os controles da conta.">×</button>
       </header>
       <div class="account-meta"><strong id="account-username"></strong><span id="account-role"></span></div>
       <div class="dialog-section">
         <h3>Trocar minha senha</h3>
         <p>Ao trocar a senha, sua sessão será encerrada em todos os acessos.</p>
         <div id="change-password-form" class="stacked-fields">
-          <label><span>Senha atual</span><input name="currentPassword" type="password" autocomplete="current-password"></label>
-          <label><span>Nova senha</span><input name="newPassword" type="password" autocomplete="new-password" minlength="8"></label>
-          <button id="change-password-button" class="button button--primary" type="button">Trocar senha</button>
+          <label><span>Senha atual</span><input name="currentPassword" type="password" autocomplete="current-password" data-help="Confirma a senha usada no acesso atual."></label>
+          <label><span>Nova senha</span><input name="newPassword" type="password" autocomplete="new-password" minlength="8" data-help="Defina uma nova senha com pelo menos oito caracteres."></label>
+          <button id="change-password-button" class="button button--primary" type="button" data-help="Salva a nova senha e encerra as sessões anteriores.">Trocar senha</button>
         </div>
       </div>
       <div id="admin-reset-section" class="dialog-section" hidden>
         <h3>Redefinir senha de uma equipe</h3>
         <p>Apenas o administrador principal pode executar esta ação.</p>
         <div id="reset-password-form" class="stacked-fields">
-          <label><span>Cargo</span><select name="role"></select></label>
-          <label><span>Nova senha temporária</span><input name="newPassword" type="password" minlength="8"></label>
-          <button id="reset-password-button" class="button button--secondary" type="button">Redefinir senha</button>
+          <label><span>Cargo</span><select name="role" data-help="Escolha qual equipe receberá a senha temporária."></select></label>
+          <label><span>Nova senha temporária</span><input name="newPassword" type="password" minlength="8" data-help="Cria uma senha temporária com pelo menos oito caracteres."></label>
+          <button id="reset-password-button" class="button button--secondary" type="button" data-help="Substitui a senha do cargo e invalida os acessos anteriores.">Redefinir senha</button>
         </div>
       </div>
       <p id="account-message" class="form-message" role="status"></p>
@@ -132,6 +133,6 @@
   <template id="empty-state-template">
     <div class="empty-state"><span>AS</span><h2>Nada pendente aqui</h2><p>Os dados atualizados aparecerão automaticamente nesta área.</p></div>
   </template>
-  <script src="/ashotelaria-app/app.js?v=20260714-p1" defer></script>
+  <script src="/ashotelaria-app/app.js?v=20260714-p4" defer></script>
 </body>
 </html>

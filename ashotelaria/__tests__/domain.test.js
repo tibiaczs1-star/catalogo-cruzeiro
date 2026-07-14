@@ -9,7 +9,10 @@ const {
   rangesOverlap,
   calculateStayTotal,
   buildOperationalSummary,
+  operationalDate,
+  validateCheckInEligibility,
   validateReservationInput,
+  validateReservationTransition,
 } = require("../domain");
 
 test("parseStayRange normalizes a valid exclusive checkout range", () => {
@@ -212,6 +215,31 @@ test("buildOperationalSummary derives the operational day in America/Rio_Branco"
   assert.equal(summary.departuresToday, 0);
 });
 
+test("check-in eligibility uses the property operational day and only accepts arrival day", () => {
+  const localDay = operationalDate(
+    new Date("2026-07-15T03:30:00.000Z"),
+    "America/Rio_Branco",
+  );
+  assert.equal(localDay, "2026-07-14");
+  assert.equal(validateCheckInEligibility({
+    checkIn: "2026-07-14",
+    checkOut: "2026-07-16",
+    operationalDate: localDay,
+  }), "2026-07-14");
+
+  for (const rejectedDay of ["2026-07-13", "2026-07-15", "2026-07-16"]) {
+    assert.throws(
+      () => validateCheckInEligibility({
+        checkIn: "2026-07-14",
+        checkOut: "2026-07-16",
+        operationalDate: rejectedDay,
+      }),
+      (error) => error.code === "CHECK_IN_NOT_ALLOWED",
+      rejectedDay,
+    );
+  }
+});
+
 test("buildOperationalSummary rejects unknown or non-textual room statuses", () => {
   assert.throws(
     () => buildOperationalSummary({
@@ -368,5 +396,22 @@ test("validateReservationInput reports structural and value errors", () => {
       checkOut: "2026-08-02",
     }),
     TypeError,
+  );
+});
+
+test("reservation lifecycle accepts only operational transitions", () => {
+  assert.equal(validateReservationTransition("pending", "confirmed"), "confirmed");
+  assert.equal(validateReservationTransition("pending", "cancelled"), "cancelled");
+  assert.equal(validateReservationTransition("confirmed", "checked_in"), "checked_in");
+  assert.equal(validateReservationTransition("confirmed", "cancelled"), "cancelled");
+  assert.equal(validateReservationTransition("checked_in", "checked_out"), "checked_out");
+  assert.equal(validateReservationTransition("checked_out", "checked_out"), "checked_out");
+  assert.throws(
+    () => validateReservationTransition("checked_out", "checked_in"),
+    (error) => error.code === "INVALID_RESERVATION_TRANSITION",
+  );
+  assert.throws(
+    () => validateReservationTransition("confirmed", "unknown"),
+    (error) => error.code === "INVALID_RESERVATION_TRANSITION",
   );
 });

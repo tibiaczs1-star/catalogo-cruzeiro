@@ -20816,6 +20816,8 @@ if (ASHOTELARIA_ENABLED) {
     config: {
       sessionSecret: process.env.ASHOTELARIA_SESSION_SECRET,
       environment: process.env,
+      requireInitialPasswordChange: String(process.env.ASHOTELARIA_REQUIRE_PASSWORD_CHANGE ?? "true")
+        .trim().toLowerCase() !== "false",
     },
   });
   ashotelariaHandler = createASHotelariaHandler({

@@ -4,7 +4,11 @@ const {
   parseStayRange,
   rangesOverlap,
   buildOperationalSummary,
+  operationalDate,
+  validateCheckInEligibility,
+  validateCheckInRoom,
   validateReservationInput,
+  validateReservationTransition,
 } = require("./domain");
 const { createSeed } = require("./seed");
 
@@ -36,8 +40,9 @@ function reservationResult(reservation, replayed, includeReplayMetadata) {
   return includeReplayMetadata ? { reservation: safe, replayed } : safe;
 }
 
-function createMemoryStore(initialSeed = createSeed()) {
+function createMemoryStore(initialSeed = createSeed(), config = {}) {
   const state = copy(initialSeed);
+  const now = typeof config.now === "function" ? config.now : () => new Date();
   state.auditEvents ??= [];
   state.credentialProfiles ??= [];
   const idempotency = new Map();
@@ -84,6 +89,10 @@ function createMemoryStore(initialSeed = createSeed()) {
 
   function scopedRows(collection, tenantId, propertyId) {
     return state[collection].filter((row) => row.tenantId === tenantId && row.propertyId === propertyId);
+  }
+
+  function roomLockKey(tenantId, propertyId, roomId) {
+    return `${tenantId}:${propertyId}:room:${roomId}`;
   }
 
   function audit({ tenantId, propertyId, action, entityId, actor, changes }) {
@@ -257,12 +266,67 @@ function createMemoryStore(initialSeed = createSeed()) {
         throw new RangeError("room status is unknown");
       }
       if (!scopedProperty(tenantId, propertyId)) return null;
-      const room = state.rooms.find((row) => row.id === roomId && row.tenantId === tenantId && row.propertyId === propertyId);
-      if (!room) return null;
-      const previous = room.status;
-      room.status = status.trim().toLowerCase();
-      audit({ tenantId, propertyId, action: "room.status_updated", entityId: room.id, actor, changes: { from: previous, to: room.status } });
-      return copy(room);
+      return withInventoryLock(roomLockKey(tenantId, propertyId, roomId), async () => {
+        const room = state.rooms.find((row) => row.id === roomId && row.tenantId === tenantId && row.propertyId === propertyId);
+        if (!room) return null;
+        const previous = room.status;
+        room.status = status.trim().toLowerCase();
+        audit({ tenantId, propertyId, action: "room.status_updated", entityId: room.id, actor, changes: { from: previous, to: room.status } });
+        return copy(room);
+      });
+    },
+
+    async updateReservationStatus({ tenantId, propertyId, reservationId, status, actor }) {
+      const property = scopedProperty(tenantId, propertyId);
+      if (!property) return null;
+      const initialReservation = state.reservations.find((row) => (
+        row.id === reservationId && row.tenantId === tenantId && row.propertyId === propertyId
+      ));
+      if (!initialReservation) return null;
+      const lockKey = initialReservation.roomId
+        ? roomLockKey(tenantId, propertyId, initialReservation.roomId)
+        : `${tenantId}:${propertyId}:reservation:${reservationId}`;
+      return withInventoryLock(lockKey, async () => {
+        const reservation = state.reservations.find((row) => (
+          row.id === reservationId && row.tenantId === tenantId && row.propertyId === propertyId
+        ));
+        if (!reservation) return null;
+        const next = validateReservationTransition(reservation.status, status);
+        const previous = reservation.status;
+        if (next === previous) return copy(reservation);
+
+        const room = state.rooms.find((row) => (
+          row.id === reservation.roomId && row.tenantId === tenantId && row.propertyId === propertyId
+        ));
+        if (next === "checked_in") {
+          validateCheckInEligibility({
+            checkIn: reservation.checkIn,
+            checkOut: reservation.checkOut,
+            operationalDate: operationalDate(now(), property.timeZone),
+          });
+          const hasCheckedInReservation = state.reservations.some((row) => (
+            row.id !== reservation.id
+            && row.tenantId === tenantId
+            && row.propertyId === propertyId
+            && row.roomId === reservation.roomId
+            && row.status === "checked_in"
+          ));
+          validateCheckInRoom({ roomStatus: room?.status, hasCheckedInReservation });
+        }
+
+        reservation.status = next;
+        if (room && next === "checked_in") room.status = "occupied";
+        if (room && next === "checked_out") room.status = "dirty";
+        audit({
+          tenantId,
+          propertyId,
+          action: "reservation.status_updated",
+          entityId: reservation.id,
+          actor,
+          changes: { from: previous, to: next, roomId: reservation.roomId },
+        });
+        return copy(reservation);
+      });
     },
 
     async getUserByEmail(email) {
@@ -303,26 +367,105 @@ function createMemoryStore(initialSeed = createSeed()) {
       return copy(normalized);
     },
 
-    async updateCredentialProfile({ tenantId, propertyId, username, role, changes }) {
+    async createCredentialProfileIfAbsent(profile) {
+      if (!scopedProperty(profile.tenantId, profile.propertyId)) return null;
+      const normalized = {
+        ...copy(profile),
+        username: String(profile.username ?? "").trim().toLowerCase(),
+        role: String(profile.role ?? "").trim().toLowerCase(),
+      };
+      const key = `${normalized.tenantId}:${normalized.propertyId}:${normalized.username}:${normalized.role}`;
+      return withCredentialLock(key, async () => {
+        const existing = state.credentialProfiles.find((row) => (
+          row.tenantId === normalized.tenantId
+          && row.propertyId === normalized.propertyId
+          && row.username === normalized.username
+          && row.role === normalized.role
+        ));
+        if (existing) return copy(existing);
+        state.credentialProfiles.push(normalized);
+        return copy(normalized);
+      });
+    },
+
+    async updateCredentialProfile({ tenantId, propertyId, username, role, expectedSessionVersion, changes }) {
       const normalizedUsername = typeof username === "string" ? username.trim().toLowerCase() : "";
       const normalizedRole = typeof role === "string" ? role.trim().toLowerCase() : "";
-      const profile = state.credentialProfiles.find((row) => (
-        row.tenantId === tenantId
-        && row.propertyId === propertyId
-        && row.username === normalizedUsername
-        && row.role === normalizedRole
-      ));
-      if (!profile) return null;
-      for (const field of [
-        "passwordHash", "sessionVersion", "failedAttempts", "lockedUntil", "forceChange", "updatedAt",
-      ]) {
-        if (Object.hasOwn(changes ?? {}, field)) profile[field] = copy(changes[field]);
-      }
-      return copy(profile);
+      const key = `${tenantId}:${propertyId}:${normalizedUsername}:${normalizedRole}`;
+      return withCredentialLock(key, async () => {
+        const profile = state.credentialProfiles.find((row) => (
+          row.tenantId === tenantId
+          && row.propertyId === propertyId
+          && row.username === normalizedUsername
+          && row.role === normalizedRole
+        ));
+        const compareVersion = expectedSessionVersion !== undefined && expectedSessionVersion !== null;
+        if (!profile || (compareVersion && profile.sessionVersion !== expectedSessionVersion)) return null;
+        for (const field of [
+          "passwordHash", "sessionVersion", "failedAttempts", "lockedUntil", "forceChange", "updatedAt",
+        ]) {
+          if (Object.hasOwn(changes ?? {}, field)) profile[field] = copy(changes[field]);
+        }
+        return copy(profile);
+      });
+    },
+
+    async setCredentialPassword({
+      tenantId, propertyId, username, role, passwordHash, forceChange,
+      expectedSessionVersion, updatedAt, actor, action,
+    }) {
+      if (!scopedProperty(tenantId, propertyId)) return null;
+      const normalizedUsername = String(username ?? "").trim().toLowerCase();
+      const normalizedRole = String(role ?? "").trim().toLowerCase();
+      const key = `${tenantId}:${propertyId}:${normalizedUsername}:${normalizedRole}`;
+      return withCredentialLock(key, async () => {
+        let profile = state.credentialProfiles.find((row) => (
+          row.tenantId === tenantId
+          && row.propertyId === propertyId
+          && row.username === normalizedUsername
+          && row.role === normalizedRole
+        ));
+        const compareVersion = expectedSessionVersion !== undefined && expectedSessionVersion !== null;
+        if (compareVersion && (!profile || profile.sessionVersion !== expectedSessionVersion)) return null;
+        if (!profile) {
+          profile = {
+            tenantId,
+            propertyId,
+            username: normalizedUsername,
+            role: normalizedRole,
+            sessionVersion: 1,
+          };
+          state.credentialProfiles.push(profile);
+        } else {
+          profile.sessionVersion += 1;
+        }
+        profile.passwordHash = passwordHash;
+        profile.failedAttempts = 0;
+        profile.lockedUntil = null;
+        profile.forceChange = Boolean(forceChange);
+        profile.updatedAt = updatedAt;
+        audit({
+          tenantId,
+          propertyId,
+          action,
+          entityId: `credential:${normalizedUsername}:${normalizedRole}`,
+          actor: {
+            username: String(actor?.username ?? "system").trim().toLowerCase(),
+            role: String(actor?.role ?? "system").trim().toLowerCase(),
+          },
+          changes: {
+            targetUsername: normalizedUsername,
+            targetRole: normalizedRole,
+            sessionVersion: profile.sessionVersion,
+          },
+        });
+        return copy(profile);
+      });
     },
 
     async recordCredentialFailure({
-      tenantId, propertyId, username, role, maxFailedAttempts, lockedUntil, updatedAt,
+      tenantId, propertyId, username, role, expectedSessionVersion,
+      maxFailedAttempts, lockedUntil, updatedAt,
     }) {
       const normalizedUsername = typeof username === "string" ? username.trim().toLowerCase() : "";
       const normalizedRole = typeof role === "string" ? role.trim().toLowerCase() : "";
@@ -334,7 +477,8 @@ function createMemoryStore(initialSeed = createSeed()) {
           && row.username === normalizedUsername
           && row.role === normalizedRole
         ));
-        if (!profile) return null;
+        const compareVersion = expectedSessionVersion !== undefined && expectedSessionVersion !== null;
+        if (!profile || (compareVersion && profile.sessionVersion !== expectedSessionVersion)) return null;
         profile.failedAttempts = Number(profile.failedAttempts ?? 0) + 1;
         profile.lockedUntil = profile.failedAttempts >= maxFailedAttempts ? lockedUntil : null;
         profile.updatedAt = updatedAt;
