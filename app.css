@@ -55,6 +55,15 @@ h1 { max-width: 570px; margin: 0; color: var(--navy); font: 800 clamp(43px, 13vw
 .feed-tab.is-active { border-color: var(--red); color: var(--navy); }
 .feed-tab:focus-visible, .new-news-notice:focus-visible, .story-link:focus-visible { outline: 3px solid rgba(15, 75, 201, .35); outline-offset: 3px; }
 
+.feed-tools { display: grid; grid-template-columns: minmax(120px, .72fr) minmax(0, 1.28fr); gap: 10px; padding: 14px 18px 8px; }
+.feed-tools label { display: grid; gap: 6px; }
+.feed-tools label > span { color: var(--navy); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.feed-tools select, .feed-tools input { width: 100%; min-height: 46px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); font: 700 13px var(--sans); outline: none; }
+.feed-tools select { padding: 0 34px 0 11px; }
+.feed-tools input { padding: 0 12px; }
+.feed-tools select:focus, .feed-tools input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(15, 75, 201, .11); }
+.filter-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: var(--muted); font-size: 11px; font-weight: 700; }
+
 .new-news-notice { position: sticky; top: 128px; z-index: 7; width: calc(100% - 36px); margin: 12px 18px 0; padding: 12px 15px; border: 0; border-radius: 8px; background: var(--blue); color: #fff; box-shadow: 0 12px 32px rgba(7, 26, 61, .22); text-align: left; animation: noticeIn .24s ease-out; }
 .new-news-notice span, .new-news-notice small { display: block; }
 .new-news-notice span { font-weight: 800; }
@@ -103,6 +112,10 @@ footer p { margin: 14px 0 0; color: rgba(255, 255, 255, .7); font: 700 12px/1.5 
   .app-header, main, footer { width: min(100%, 720px); margin-inline: auto; }
   main { background: #fff; }
   .app-header { box-shadow: 0 0 40px rgba(7, 26, 61, .08); }
+}
+@media (max-width: 370px) {
+  .feed-tools { grid-template-columns: 1fr; }
+  .filter-status { grid-column: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

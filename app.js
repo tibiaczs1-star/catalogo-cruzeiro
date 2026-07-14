@@ -6,6 +6,7 @@
   "use strict";
 
   const NEWS_ENDPOINT = "/api/news?limit=40&lite=1";
+  const NEWS_POLL_ENDPOINT = "/api/news?limit=1&lite=1";
   const POLL_INTERVAL_MS = 90 * 1000;
   const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -52,6 +53,20 @@
     return (Array.isArray(nextItems) ? nextItems : []).filter((item) => {
       const key = itemKey(item);
       return key && !known.has(key);
+    });
+  }
+
+  function normalizeSearch(value) {
+    return text(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
+  function filterNewsItems(items, options = {}) {
+    const query = normalizeSearch(options.query);
+    const category = normalizeSearch(options.category || "all");
+    return (Array.isArray(items) ? items : []).filter((item) => {
+      const matchesCategory = category === "all" || normalizeSearch(item?.category) === category;
+      const haystack = normalizeSearch([item?.title, item?.summary, item?.category].filter(Boolean).join(" "));
+      return matchesCategory && (!query || haystack.includes(query));
     });
   }
 
@@ -110,14 +125,25 @@
     const shell = document.querySelector(".feed-shell");
     const tabs = Array.from(document.querySelectorAll(".feed-tab"));
     const editionDate = document.getElementById("editionDate");
-    if (!feed || !status || !notice || !shell) return;
+    const search = document.getElementById("newsSearch");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const filterStatus = document.getElementById("filterStatus");
+    if (!feed || !status || !notice || !shell || !search || !categoryFilter || !filterStatus) return;
 
     let currentItems = [];
-    let pendingItems = [];
     let activeFilter = "all";
 
     function visibleItems() {
-      return activeFilter === "video" ? currentItems.filter(hasPlayableVideo) : currentItems;
+      const mediaItems = activeFilter === "video" ? currentItems.filter(hasPlayableVideo) : currentItems;
+      return filterNewsItems(mediaItems, { query: search.value, category: categoryFilter.value });
+    }
+
+    function updateCategoryOptions() {
+      const selected = categoryFilter.value;
+      const categories = Array.from(new Set(currentItems.map((item) => item.category).filter(Boolean))).sort((a, b) => a.localeCompare(b, "pt-BR"));
+      categoryFilter.replaceChildren(new Option("Todas", "all"));
+      categories.forEach((category) => categoryFilter.appendChild(new Option(category, category)));
+      categoryFilter.value = categories.includes(selected) ? selected : "all";
     }
 
     function render() {
@@ -125,27 +151,31 @@
       feed.replaceChildren();
       if (!items.length) {
         status.hidden = false;
-        status.textContent = activeFilter === "video" ? "Ainda não há vídeos nesta edição." : "Nenhuma notícia disponível agora.";
+        status.textContent = search.value || categoryFilter.value !== "all"
+          ? "Nenhuma notícia corresponde aos filtros."
+          : activeFilter === "video" ? "Ainda não há vídeos nesta edição." : "Nenhuma notícia disponível agora.";
       } else {
         status.hidden = true;
         items.forEach((item, index) => feed.appendChild(createStory(item, index)));
       }
+      filterStatus.textContent = `${items.length} ${items.length === 1 ? "notícia encontrada" : "notícias encontradas"}`;
       shell.setAttribute("aria-busy", "false");
     }
 
     async function fetchNews({ polling = false } = {}) {
       try {
-        const response = await fetch(NEWS_ENDPOINT, { headers: { Accept: "application/json" }, cache: "no-store" });
+        const response = await fetch(polling ? NEWS_POLL_ENDPOINT : NEWS_ENDPOINT, { headers: { Accept: "application/json" }, cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const nextItems = normalizeNewsPayload(await response.json());
         if (!nextItems.length) throw new Error("empty-feed");
         const newItems = findNewItems(currentItems, nextItems);
         if (polling && newItems.length) {
-          pendingItems = nextItems;
           notice.hidden = false;
           return;
         }
+        if (polling) return;
         currentItems = nextItems;
+        updateCategoryOptions();
         editionDate.textContent = `Atualizado ${formatDate(nextItems[0].publishedAt)}`;
         render();
       } catch (_error) {
@@ -174,12 +204,12 @@
       render();
     }));
 
-    notice.addEventListener("click", () => {
-      if (pendingItems.length) currentItems = pendingItems;
-      pendingItems = [];
+    search.addEventListener("input", render);
+    categoryFilter.addEventListener("change", render);
+
+    notice.addEventListener("click", async () => {
       notice.hidden = true;
-      editionDate.textContent = `Atualizado ${formatDate(currentItems[0]?.publishedAt)}`;
-      render();
+      await fetchNews();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -194,5 +224,5 @@
     else startBrowserApp();
   }
 
-  return { NEWS_ENDPOINT, normalizeNewsPayload, getArticleHref, hasPlayableVideo, findNewItems };
+  return { NEWS_ENDPOINT, NEWS_POLL_ENDPOINT, normalizeNewsPayload, getArticleHref, hasPlayableVideo, findNewItems, filterNewsItems };
 });

@@ -55,6 +55,18 @@ test("detecta noticias novas sem avisar no primeiro carregamento", () => {
   assert.deepEqual(findNewItems(before, after).map((item) => item.id), ["c"]);
 });
 
+test("filtra noticias localmente por busca e editoria", () => {
+  const { filterNewsItems } = loadAppModule();
+  const items = [
+    { title: "Rio Juruá sobe", summary: "Alerta em Cruzeiro", category: "Clima" },
+    { title: "Festival começa hoje", summary: "Agenda cultural", category: "Cultura" }
+  ];
+
+  assert.deepEqual(filterNewsItems(items, { query: "cruzeiro", category: "all" }).map((item) => item.title), ["Rio Juruá sobe"]);
+  assert.deepEqual(filterNewsItems(items, { query: "", category: "Cultura" }).map((item) => item.title), ["Festival começa hoje"]);
+  assert.deepEqual(filterNewsItems(items, { query: "rio", category: "Cultura" }), []);
+});
+
 test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   const htmlPath = path.join(ROOT, "app.html");
   assert.equal(fs.existsSync(htmlPath), true, "app.html deve existir");
@@ -62,8 +74,13 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   const js = fs.readFileSync(APP_JS, "utf8");
 
   assert.match(js, /\/api\/news\?limit=40&lite=1/);
+  assert.match(js, /\/api\/news\?limit=1&lite=1/);
   assert.match(html, /id="newNewsNotice"/);
   assert.match(html, /id="newsFeed"/);
+  assert.match(html, /id="newsSearch"/);
+  assert.match(html, /id="categoryFilter"/);
+  assert.match(html, /aria-label="Buscar nas notícias"/);
+  assert.match(html, />Editorias</);
   assert.doesNotMatch(`${html}\n${js}`, /Cheffe Call|escrit[oó]rios|agentes/i);
   assert.doesNotMatch(js, /Notification|PushManager|serviceWorker/);
 });
