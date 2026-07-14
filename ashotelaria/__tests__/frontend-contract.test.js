@@ -43,3 +43,17 @@ test("navegacao do painel e montada a partir das permissoes da sessao", async ()
   assert.match(script, /tasks\.housekeeping\.read/);
   assert.doesNotMatch(script, /ASHOTELARIA_(?:ADMIN|FINANCE|RECEPTION|DEFAULT)_PASSWORD\s*=/);
 });
+
+test("entrada é direta e áreas operacionais oferecem ajuda atrasada", async () => {
+  const [html, script, styles] = await Promise.all([
+    source("index.html"), source("app.js"), source("styles.css"),
+  ]);
+
+  assert.doesNotMatch(html, /Cada equipe vê o que precisa|Operação hoteleira, em tempo real/);
+  assert.match(html, /styles\.css\?v=20260714-p1/);
+  assert.match(html, /app\.js\?v=20260714-p1/);
+  assert.match(script, /dataset\.help/);
+  assert.match(script, /setTimeout\(/);
+  assert.match(script, /650\)/);
+  assert.match(styles, /\.help-tooltip/);
+});

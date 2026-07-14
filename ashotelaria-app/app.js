@@ -28,14 +28,14 @@ const STATUS_LABELS = Object.freeze({
 });
 
 const NAVIGATION = Object.freeze([
-  { id: "now", label: "Agora", icon: "◉", permission: "hotel.bootstrap.read" },
-  { id: "reservations", label: "Reservas", icon: "▤", permission: "reservations.read" },
-  { id: "rooms", label: "Quartos", icon: "▦", permission: "rooms.operational.read" },
-  { id: "housekeeping", label: "Governança", icon: "◇", permission: "tasks.housekeeping.read" },
-  { id: "maintenance", label: "Manutenção", icon: "△", permission: "tasks.maintenance.read" },
-  { id: "finance", label: "Financeiro", icon: "R$", permission: "finance.cashflow.read" },
-  { id: "settings", label: "Integrações", icon: "⌁", permission: "admin.settings.manage" },
-  { id: "security", label: "Senhas", icon: "○", permission: "credentials.reset" },
+  { id: "now", label: "Agora", icon: "◉", permission: "hotel.bootstrap.read", help: "Visão rápida da operação da unidade." },
+  { id: "reservations", label: "Reservas", icon: "▤", permission: "reservations.read", help: "Consulte chegadas, saídas e reservas da unidade." },
+  { id: "rooms", label: "Quartos", icon: "▦", permission: "rooms.operational.read", help: "Veja a situação de cada quarto e atualize o status." },
+  { id: "housekeeping", label: "Governança", icon: "◇", permission: "tasks.housekeeping.read", help: "Acompanhe as tarefas de limpeza e inspeção." },
+  { id: "maintenance", label: "Manutenção", icon: "△", permission: "tasks.maintenance.read", help: "Acompanhe ocorrências técnicas e ordens abertas." },
+  { id: "finance", label: "Financeiro", icon: "R$", permission: "finance.cashflow.read", help: "Consulte receita prevista e movimento financeiro." },
+  { id: "settings", label: "Integrações", icon: "⌁", permission: "admin.settings.manage", help: "Veja conexões externas e o estado de cada integração." },
+  { id: "security", label: "Senhas", icon: "○", permission: "credentials.reset", help: "Troque sua senha ou redefina a senha de uma equipe." },
 ]);
 
 const state = { session: null, bootstrap: null, activeView: "now", loading: false };
@@ -119,6 +119,9 @@ function publicError(code) {
     FORBIDDEN: "Seu cargo não tem permissão para esta ação.",
     AUTHENTICATION_REQUIRED: "Sua sessão terminou. Entre novamente.",
     INVALID_PASSWORD: "A senha precisa ter pelo menos 8 caracteres.",
+    CREDENTIAL_NOT_CONFIGURED: "Acesso inicial não configurado para este cargo.",
+    CONFIGURATION_ERROR: "Acesso indisponível no momento.",
+    INTERNAL_ERROR: "Servidor indisponível no momento.",
   })[code] ?? "Não foi possível concluir a ação. Tente novamente.";
 }
 
@@ -199,6 +202,7 @@ function renderNavigation() {
     button.type = "button";
     button.className = `nav-button${item.id === state.activeView ? " active" : ""}`;
     button.dataset.view = item.id;
+    button.dataset.help = item.help;
     button.innerHTML = `<span class="nav-icon" aria-hidden="true">${item.icon}</span><span>${item.label}</span>`;
     button.addEventListener("click", () => {
       state.activeView = item.id;
@@ -207,6 +211,7 @@ function renderNavigation() {
     });
     return button;
   }));
+  bindTooltips(elements.navigation);
 }
 
 function renderActiveView() {
@@ -303,6 +308,47 @@ function renderSecurity() {
 function bindViewActions() {
   elements.content.querySelectorAll("[data-room-id]").forEach((button) => button.addEventListener("click", updateRoom));
   elements.content.querySelector("[data-open-security]")?.addEventListener("click", () => openAccount());
+  elements.content.querySelectorAll(".metric, .section-heading, .context-panel").forEach((element) => {
+    if (!element.dataset.help) {
+      const title = element.querySelector("h2, h3, strong, span")?.textContent?.trim();
+      if (title) element.dataset.help = `Área: ${title}. Passe o mouse para ver mais informações.`;
+    }
+  });
+  bindTooltips(elements.content);
+}
+
+function bindTooltips(root) {
+  root?.querySelectorAll("[data-help]").forEach((element) => {
+    if (element.dataset.helpBound === "true") return;
+    element.dataset.helpBound = "true";
+    let timer = null;
+    let tooltip = null;
+    const hide = () => {
+      if (timer) clearTimeout(timer);
+      timer = null;
+      tooltip?.remove();
+      tooltip = null;
+    };
+    const show = () => {
+      hide();
+      timer = setTimeout(() => {
+        tooltip = document.createElement("div");
+        tooltip.className = "help-tooltip";
+        tooltip.textContent = element.dataset.help;
+        document.body.appendChild(tooltip);
+        const rect = element.getBoundingClientRect();
+        const width = tooltip.offsetWidth;
+        const left = Math.min(Math.max(10, rect.left), window.innerWidth - width - 10);
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${Math.min(window.innerHeight - tooltip.offsetHeight - 10, rect.bottom + 10)}px`;
+        requestAnimationFrame(() => tooltip?.classList.add("visible"));
+      }, 650);
+    };
+    element.addEventListener("mouseenter", show);
+    element.addEventListener("mouseleave", hide);
+    element.addEventListener("focus", show);
+    element.addEventListener("blur", hide);
+  });
 }
 
 async function updateRoom(event) {

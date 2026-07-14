@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/ashotelaria-app/styles.css">
+  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260714-p1">
 </head>
 <body class="app-body">
   <div id="connection-banner" class="connection-banner" role="status" aria-live="polite" hidden>
@@ -22,20 +22,14 @@
         <span class="brand-mark">AS</span>
         <span><strong>AShotelaria</strong><small>por CZS Labs</small></span>
       </a>
-      <div class="login-message">
-        <p class="eyebrow">Operação hoteleira, em tempo real</p>
-        <h1>Cada equipe vê o que precisa. O hotel inteiro trabalha junto.</h1>
-        <p>Recepção, governança, manutenção e gestão em uma única operação online, com acesso separado por cargo.</p>
-      </div>
-      <p class="brand-footnote">Uma solução Catálogo CZS · Cruzeiro do Sul, Acre</p>
+      <div class="login-context"><span>Unidade</span><strong>Hotel Juruá Palace</strong><span>Operação online</span></div>
     </section>
 
     <section class="login-panel">
       <form id="login-form" class="auth-form" autocomplete="on">
         <header>
-          <p class="eyebrow">Acesso seguro</p>
-          <h2>Entrar no sistema</h2>
-          <p>Selecione seu cargo para abrir somente o seu ambiente de trabalho.</p>
+          <p class="eyebrow">Acesso</p>
+          <h2>Entrar</h2>
         </header>
         <label>
           <span>Usuário</span>
@@ -67,8 +61,7 @@
         </label>
         <input name="propertySlug" type="hidden" value="hotel-jurua-palace">
         <p id="login-error" class="form-error" role="alert" hidden></p>
-        <button class="button button--primary button--wide" type="submit">Entrar online</button>
-        <p class="online-note"><span aria-hidden="true"></span> Este sistema funciona conectado à internet.</p>
+        <button class="button button--primary button--wide" type="submit">Entrar</button>
       </form>
     </section>
   </main>
@@ -139,6 +132,6 @@
   <template id="empty-state-template">
     <div class="empty-state"><span>AS</span><h2>Nada pendente aqui</h2><p>Os dados atualizados aparecerão automaticamente nesta área.</p></div>
   </template>
-  <script src="/ashotelaria-app/app.js" defer></script>
+  <script src="/ashotelaria-app/app.js?v=20260714-p1" defer></script>
 </body>
 </html>
