@@ -1,5 +1,82 @@
-window.NEWS_ARCHIVE_TOTAL = 485;
+window.NEWS_ARCHIVE_TOTAL = 486;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-cruzeiro-recebe-r-6-7-milhoes-da-sefaz",
+    "slug": "cruzeiro-recebe-r-6-7-milhoes-da-sefaz",
+    "title": "Cruzeiro recebe R$ 6,7 milhões da Sefaz",
+    "seoTitle": "Cruzeiro recebe R$ 6,7 milhões da Sefaz | Catálogo CZS",
+    "seoDescription": "A Sefaz informou o repasse de R$ 62 milhões aos 22 municípios acreanos referente à arrecadação de junho. Cruzeiro do Sul recebeu R$ 6,78 milhões em cotas de ICMS, IPVA e Fundeb, segundo maior valor do estado, atrás apenas de Rio Branco. Os recursos ajudam a financiar serviços públicos e investimentos municipais.",
+    "eyebrow": "Cruzeiro do Sul",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T10:36:00.000-05:00",
+    "category": "Cruzeiro do Sul",
+    "categoryKey": "cruzeiro-do-sul",
+    "previewClass": "thumb-cruzeiro-do-sul",
+    "sourceName": "Juruá 24 Horas / Sefaz-AC",
+    "sourceUrl": "https://jurua24horas.com/2026/07/sefaz-repassa-mais-de-r-62-milhoes-aos-municipios-acreanos-cruzeiro-do-sul-recebe-r-67-milhoes/",
+    "sourceLabel": "Cruzeiro recebe R$ 6,7 milhões da Sefaz",
+    "lede": "A Sefaz informou o repasse de R$ 62 milhões aos 22 municípios acreanos referente à arrecadação de junho. Cruzeiro do Sul recebeu R$ 6,78 milhões em cotas de ICMS, IPVA e Fundeb, segundo maior valor do estado, atrás apenas de Rio Branco. Os recursos ajudam a financiar serviços públicos e investimentos municipais.",
+    "summary": "A Sefaz informou o repasse de R$ 62 milhões aos 22 municípios acreanos referente à arrecadação de junho. Cruzeiro do Sul recebeu R$ 6,78 milhões em cotas de ICMS, IPVA e Fundeb, segundo maior valor do estado, atrás apenas de Rio Branco. Os recursos ajudam a financiar serviços públicos e investimentos municipais.",
+    "analysis": "O repasse coloca Cruzeiro do Sul na segunda posição estadual e reforça o caixa dos serviços municipais.",
+    "highlights": [
+      "Cruzeiro do Sul recebeu R$ 6,78 milhões.",
+      "O total distribuído aos municípios foi de R$ 62 milhões.",
+      "Os valores vêm de ICMS, IPVA e Fundeb.",
+      "Cruzeiro teve o segundo maior repasse do Acre."
+    ],
+    "development": [
+      "A Secretaria de Estado da Fazenda informou a distribuição de R$ 62.059.351,12 aos 22 municípios acreanos, referente à arrecadação estadual de junho de 2026.",
+      "Cruzeiro do Sul recebeu R$ 6.783.121,38 em cotas de ICMS, IPVA e Fundeb, o segundo maior repasse do estado no período.",
+      "Rio Branco liderou a lista, com R$ 28,4 milhões. Brasiléia, Senador Guiomard, Sena Madureira e Tarauacá também aparecem entre os maiores valores.",
+      "Os repasses mensais ajudam as prefeituras a custear serviços públicos e realizar investimentos municipais.",
+      "Fonte: Juruá 24 Horas e Sefaz-AC."
+    ],
+    "imageUrl": "assets/news-manual/sefaz-repasse-cruzeiro-20260714.webp",
+    "feedImageUrl": "assets/news-manual/sefaz-repasse-cruzeiro-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/sefaz-repasse-cruzeiro-20260714.webp",
+    "imageCredit": "Foto ilustrativa: Reprodução via Juruá 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2003,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá 24 Horas",
+        "url": "https://jurua24horas.com/2026/07/sefaz-repassa-mais-de-r-62-milhoes-aos-municipios-acreanos-cruzeiro-do-sul-recebe-r-67-milhoes/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Cruzeiro recebe R$ 6,7 milhões da Sefaz. A Sefaz informou o repasse de R$ 62 milhões aos 22 municípios acreanos referente à arrecadação de junho. Cruzeiro do Sul recebeu R$ 6,78 milhões em cotas de ICMS, IPVA e Fundeb, segundo maior valor do estado, atrás apenas de Rio Branco. Os recursos ajudam a financiar serviços públicos e investimentos municipais.",
+    "audioNarrationTranscript": "Cruzeiro recebe R$ 6,7 milhões da Sefaz. A Sefaz informou o repasse de R$ 62 milhões aos 22 municípios acreanos referente à arrecadação de junho. Cruzeiro do Sul recebeu R$ 6,78 milhões em cotas de ICMS, IPVA e Fundeb, segundo maior valor do estado, atrás apenas de Rio Branco. Os recursos ajudam a financiar serviços públicos e investimentos municipais.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "A Sefaz informou o repasse de R$ 62 milhões aos 22 municípios acreanos referente à arrecadação de junho. Cruzeiro do Sul recebeu R$ 6,78 milhões em cotas de ICMS, IPVA e Fundeb, segundo maior valor do estado, atrás apenas de Rio Branco. Os recursos ajudam a financiar serviços públicos e investimentos municipais. Fonte: Juruá 24 Horas / Sefaz-AC.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Cédulas de cem reais em imagem ilustrativa sobre repasses municipais",
+      "caption": "Cruzeiro recebe R$ 6,7 milhões da Sefaz",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Secretaria de Estado da Fazenda informou a distribuição de R$ 62.059.351,12 aos 22 municípios acreanos, referente à arrecadação estadual de junho de 2026.",
+      "Cruzeiro do Sul recebeu R$ 6.783.121,38 em cotas de ICMS, IPVA e Fundeb, o segundo maior repasse do estado no período.",
+      "Rio Branco liderou a lista, com R$ 28,4 milhões. Brasiléia, Senador Guiomard, Sena Madureira e Tarauacá também aparecem entre os maiores valores.",
+      "Os repasses mensais ajudam as prefeituras a custear serviços públicos e realizar investimentos municipais.",
+      "Fonte: Juruá 24 Horas e Sefaz-AC."
+    ]
+  },
   {
     "id": "manual-czs-maquina-de-r-200-mil-e-recuperada",
     "slug": "maquina-de-r-200-mil-e-recuperada",
