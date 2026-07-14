@@ -1,5 +1,82 @@
 [
   {
+    "id": "manual-czs-maquina-de-r-200-mil-e-recuperada",
+    "slug": "maquina-de-r-200-mil-e-recuperada",
+    "title": "Máquina de R$ 200 mil é recuperada",
+    "seoTitle": "Máquina de R$ 200 mil é recuperada | Catálogo CZS",
+    "seoDescription": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+    "eyebrow": "Fronteira",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T10:16:00.000-05:00",
+    "category": "Brasil",
+    "categoryKey": "brasil",
+    "previewClass": "thumb-brasil",
+    "sourceName": "Juruá em Tempo / Polícia Civil de Rondônia",
+    "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/pa-carregadeira-de-r-200-mil-e-recuperada-antes-de-ser-levada-para-a-bolivia/",
+    "sourceLabel": "Máquina de R$ 200 mil é recuperada",
+    "lede": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+    "summary": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+    "analysis": "A recuperação evitou que um equipamento de alto valor atravessasse a fronteira por uma rota clandestina.",
+    "highlights": [
+      "Máquina é avaliada em cerca de R$ 200 mil.",
+      "Equipamento foi localizado perto da Bolívia.",
+      "Investigação aponta fraude registrada em Porto Velho.",
+      "O caso continua sob apuração policial."
+    ],
+    "development": [
+      "Uma pá carregadeira avaliada em aproximadamente R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, região próxima à fronteira com a Bolívia.",
+      "Segundo a investigação, o equipamento havia sido obtido por meio de fraude registrada em Porto Velho.",
+      "A suspeita é de que a máquina seria levada para o país vizinho por uma rota clandestina na faixa de fronteira.",
+      "O bem foi localizado antes de deixar o território brasileiro e o caso continua sob apuração das autoridades.",
+      "Fonte: Juruá em Tempo e Polícia Civil de Rondônia."
+    ],
+    "imageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+    "feedImageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+    "imageCredit": "Foto: Polícia Civil de Rondônia via Juruá em Tempo",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1999,
+    "editorialPriority": "brasil-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá em Tempo",
+        "url": "https://www.juruaemtempo.com.br/2026/07/pa-carregadeira-de-r-200-mil-e-recuperada-antes-de-ser-levada-para-a-bolivia/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Máquina de R$ 200 mil é recuperada. Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+    "audioNarrationTranscript": "Máquina de R$ 200 mil é recuperada. Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação. Fonte: Juruá em Tempo / Polícia Civil de Rondônia.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Pá carregadeira recuperada pela polícia durante a noite",
+      "caption": "Máquina de R$ 200 mil é recuperada",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Uma pá carregadeira avaliada em aproximadamente R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, região próxima à fronteira com a Bolívia.",
+      "Segundo a investigação, o equipamento havia sido obtido por meio de fraude registrada em Porto Velho.",
+      "A suspeita é de que a máquina seria levada para o país vizinho por uma rota clandestina na faixa de fronteira.",
+      "O bem foi localizado antes de deixar o território brasileiro e o caso continua sob apuração das autoridades.",
+      "Fonte: Juruá em Tempo e Polícia Civil de Rondônia."
+    ]
+  },
+  {
     "id": "manual-czs-mari-fernandes-deve-cantar-em-cruzeiro",
     "slug": "mari-fernandes-deve-cantar-em-cruzeiro",
     "title": "Mari Fernandes deve cantar em Cruzeiro",

@@ -1,8 +1,85 @@
 {
-  "lastAttemptAt": "2026-07-14T15:03:47.674Z",
-  "lastSuccessAt": "2026-07-14T15:03:47.676Z",
-  "source": "manual-czs-fast-confirmed-batch-20260714",
+  "lastAttemptAt": "2026-07-14T15:18:31.868Z",
+  "lastSuccessAt": "2026-07-14T15:18:31.869Z",
+  "source": "manual-pa-carregadeira-fronteira",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-maquina-de-r-200-mil-e-recuperada",
+      "slug": "maquina-de-r-200-mil-e-recuperada",
+      "title": "Máquina de R$ 200 mil é recuperada",
+      "seoTitle": "Máquina de R$ 200 mil é recuperada | Catálogo CZS",
+      "seoDescription": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "eyebrow": "Fronteira",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T10:16:00.000-05:00",
+      "category": "Brasil",
+      "categoryKey": "brasil",
+      "previewClass": "thumb-brasil",
+      "sourceName": "Juruá em Tempo / Polícia Civil de Rondônia",
+      "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/pa-carregadeira-de-r-200-mil-e-recuperada-antes-de-ser-levada-para-a-bolivia/",
+      "sourceLabel": "Máquina de R$ 200 mil é recuperada",
+      "lede": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "summary": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "analysis": "A recuperação evitou que um equipamento de alto valor atravessasse a fronteira por uma rota clandestina.",
+      "highlights": [
+        "Máquina é avaliada em cerca de R$ 200 mil.",
+        "Equipamento foi localizado perto da Bolívia.",
+        "Investigação aponta fraude registrada em Porto Velho.",
+        "O caso continua sob apuração policial."
+      ],
+      "development": [
+        "Uma pá carregadeira avaliada em aproximadamente R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, região próxima à fronteira com a Bolívia.",
+        "Segundo a investigação, o equipamento havia sido obtido por meio de fraude registrada em Porto Velho.",
+        "A suspeita é de que a máquina seria levada para o país vizinho por uma rota clandestina na faixa de fronteira.",
+        "O bem foi localizado antes de deixar o território brasileiro e o caso continua sob apuração das autoridades.",
+        "Fonte: Juruá em Tempo e Polícia Civil de Rondônia."
+      ],
+      "imageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+      "feedImageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+      "imageCredit": "Foto: Polícia Civil de Rondônia via Juruá em Tempo",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 1999,
+      "editorialPriority": "brasil-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá em Tempo",
+          "url": "https://www.juruaemtempo.com.br/2026/07/pa-carregadeira-de-r-200-mil-e-recuperada-antes-de-ser-levada-para-a-bolivia/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "Máquina de R$ 200 mil é recuperada. Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "audioNarrationTranscript": "Máquina de R$ 200 mil é recuperada. Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação. Fonte: Juruá em Tempo / Polícia Civil de Rondônia.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Pá carregadeira recuperada pela polícia durante a noite",
+        "caption": "Máquina de R$ 200 mil é recuperada",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "Uma pá carregadeira avaliada em aproximadamente R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, região próxima à fronteira com a Bolívia.",
+        "Segundo a investigação, o equipamento havia sido obtido por meio de fraude registrada em Porto Velho.",
+        "A suspeita é de que a máquina seria levada para o país vizinho por uma rota clandestina na faixa de fronteira.",
+        "O bem foi localizado antes de deixar o território brasileiro e o caso continua sob apuração das autoridades.",
+        "Fonte: Juruá em Tempo e Polícia Civil de Rondônia."
+      ]
+    },
     {
       "id": "manual-czs-mari-fernandes-deve-cantar-em-cruzeiro",
       "slug": "mari-fernandes-deve-cantar-em-cruzeiro",
@@ -27132,53 +27209,61 @@
       "editorialSpotlightReady": false,
       "editorialSurfaceTier": "remote-secondary",
       "editorialLocalTier": 0
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://g1.globo.com/politica/noticia/2026/07/12/com-recesso-convencoes-e-inicio-das-campanhas-votacoes-importantes-no-congresso-devem-ficar-para-depois-das-eleicoes.ghtml",
-      "slug": "com-recesso-convencoes-e-inicio-das-campanhas-votacoes-importantes-no-congresso-devem-ficar-para",
-      "title": "Com recesso, convenções e início das campanhas, votações importantes no Congresso devem ficar para depois das eleições",
-      "eyebrow": "Politica",
-      "date": "11 de jul de 2026",
-      "publishedAt": "2026-07-12T03:00:35.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
-      "sourceName": "G1 Politica",
-      "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/12/com-recesso-convencoes-e-inicio-das-campanhas-votacoes-importantes-no-congresso-devem-ficar-para-depois-das-eleicoes.ghtml",
-      "sourceLabel": "Com recesso, convenções e início das campanhas, votações importantes no Congresso devem ficar para depois das eleições",
-      "lede": "O recesso parlamentar, as convenções partidárias e o início das campanhas eleitorais devem reduzir a atividade na Câmara dos Deputados e no Senado nos próximos meses, empurrando a análise de pautas consideradas importantes para depois das eleições de outubro.",
-      "summary": "O recesso parlamentar, as convenções partidárias e o início das campanhas eleitorais devem reduzir a atividade na Câmara dos Deputados e no Senado nos próximos meses, empurrando a análise de pautas consideradas importantes para depois das eleições de outubro.",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://s2-g1.glbimg.com/S4dNqmfMy-VGhhFbPe5EcbDHuUQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/u/3ja7BUQrKLJGTvzs6ryQ/globo-canal-4-20260505-2000-frame-150493.jpeg",
-      "feedImageUrl": "https://s2-g1.glbimg.com/S4dNqmfMy-VGhhFbPe5EcbDHuUQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/u/3ja7BUQrKLJGTvzs6ryQ/globo-canal-4-20260505-2000-frame-150493.jpeg",
-      "sourceImageUrl": "https://s2-g1.glbimg.com/S4dNqmfMy-VGhhFbPe5EcbDHuUQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/u/3ja7BUQrKLJGTvzs6ryQ/globo-canal-4-20260505-2000-frame-150493.jpeg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "id": "manual-czs-maquina-de-r-200-mil-e-recuperada",
+      "slug": "maquina-de-r-200-mil-e-recuperada",
+      "title": "Máquina de R$ 200 mil é recuperada",
+      "seoTitle": "Máquina de R$ 200 mil é recuperada | Catálogo CZS",
+      "seoDescription": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "eyebrow": "Fronteira",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T10:16:00.000-05:00",
+      "category": "Brasil",
+      "categoryKey": "brasil",
+      "previewClass": "thumb-brasil",
+      "sourceName": "Juruá em Tempo / Polícia Civil de Rondônia",
+      "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/pa-carregadeira-de-r-200-mil-e-recuperada-antes-de-ser-levada-para-a-bolivia/",
+      "sourceLabel": "Máquina de R$ 200 mil é recuperada",
+      "lede": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "summary": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "analysis": "A recuperação evitou que um equipamento de alto valor atravessasse a fronteira por uma rota clandestina.",
+      "highlights": [
+        "Máquina é avaliada em cerca de R$ 200 mil.",
+        "Equipamento foi localizado perto da Bolívia.",
+        "Investigação aponta fraude registrada em Porto Velho.",
+        "O caso continua sob apuração policial."
+      ],
+      "development": [
+        "Uma pá carregadeira avaliada em aproximadamente R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, região próxima à fronteira com a Bolívia.",
+        "Segundo a investigação, o equipamento havia sido obtido por meio de fraude registrada em Porto Velho.",
+        "A suspeita é de que a máquina seria levada para o país vizinho por uma rota clandestina na faixa de fronteira.",
+        "O bem foi localizado antes de deixar o território brasileiro e o caso continua sob apuração das autoridades.",
+        "Fonte: Juruá em Tempo e Polícia Civil de Rondônia."
+      ],
+      "imageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+      "feedImageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/pa-carregadeira-fronteira-20260714.webp",
+      "imageCredit": "Foto: Polícia Civil de Rondônia via Juruá em Tempo",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
       "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "priority": 1999,
+      "editorialPriority": "brasil-destaque",
       "crossSources": [
         {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/12/com-recesso-convencoes-e-inicio-das-campanhas-votacoes-importantes-no-congresso-devem-ficar-para-depois-das-eleicoes.ghtml"
+          "name": "Juruá em Tempo",
+          "url": "https://www.juruaemtempo.com.br/2026/07/pa-carregadeira-de-r-200-mil-e-recuperada-antes-de-ser-levada-para-a-bolivia/"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/12/com-recesso-convencoes-e-inicio-das-campanhas-votacoes-importantes-no-congresso-devem-ficar-para-depois-das-eleicoes.ghtml"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "com-recesso-convencoes-e-inicio-das-campanhas-votacoes-importantes-no-congresso-devem-ficar-para"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Com recesso, convenções e início das campanhas, votações importantes no Congresso devem ficar para depois das eleições O recesso parlamentar, as convenções partidárias e o início das campanhas eleitorais devem reduzir a atividade na Câmara dos Deputados e no Senado nos próximos meses, empurrando a análise de pautas consideradas importantes para depois das eleições de outubro. A informação vem de G1 política.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Com recesso, convenções e início das campanhas, votações importantes no Congresso devem ficar para depois das eleições O recesso parlamentar, as convenções partidárias e o início das campanhas eleitorais devem reduzir a atividade na Câmara dos Deputados e no Senado nos próximos meses, empurrando a análise de pautas consideradas importantes para depois das eleições de outubro. A informação vem de G1 política.",
+      "alternateSlugs": [],
+      "audioNarrationText": "Máquina de R$ 200 mil é recuperada. Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
+      "audioNarrationTranscript": "Máquina de R$ 200 mil é recuperada. Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -27186,27 +27271,24 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Com recesso, convenções e início das campanhas, votações importantes no Congresso devem ficar para depois das eleições. O recesso parlamentar, as convenções partidárias e o início das campanhas eleitorais devem reduzir a atividade na Câmara dos Deputados e no Senado nos próximos meses, empurrando a análise de pautas consideradas importantes para depois... Fonte: G1 Politica.",
+      "videoCaptionText": "Uma pá carregadeira avaliada em cerca de R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, perto da fronteira com a Bolívia. Segundo a investigação, a máquina havia sido obtida em um golpe registrado em Porto Velho e seria levada ao país vizinho por uma rota clandestina. O caso continua sob investigação. Fonte: Juruá em Tempo / Polícia Civil de Rondônia.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Pá carregadeira recuperada pela polícia durante a noite",
+        "caption": "Máquina de R$ 200 mil é recuperada",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
       "body": [
-        "G1 Politica publicou em 11 de jul de 2026: Com recesso, convenções e início das campanhas, votações importantes no Congresso devem ficar para depois das eleições.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialGate": "P1",
-      "editorialApproval": "auto-check",
-      "editorialSpotlightReady": false,
-      "editorialSurfaceTier": "remote-secondary",
-      "editorialLocalTier": 0
-    }
-  ],
-  "items": [
+        "Uma pá carregadeira avaliada em aproximadamente R$ 200 mil foi recuperada pela Polícia Civil em Costa Marques, Rondônia, região próxima à fronteira com a Bolívia.",
+        "Segundo a investigação, o equipamento havia sido obtido por meio de fraude registrada em Porto Velho.",
+        "A suspeita é de que a máquina seria levada para o país vizinho por uma rota clandestina na faixa de fronteira.",
+        "O bem foi localizado antes de deixar o território brasileiro e o caso continua sob apuração das autoridades.",
+        "Fonte: Juruá em Tempo e Polícia Civil de Rondônia."
+      ]
+    },
     {
       "id": "manual-czs-mari-fernandes-deve-cantar-em-cruzeiro",
       "slug": "mari-fernandes-deve-cantar-em-cruzeiro",
