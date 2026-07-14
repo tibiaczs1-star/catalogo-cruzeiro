@@ -1,8 +1,85 @@
 {
-  "lastAttemptAt": "2026-07-14T16:49:44.013Z",
-  "lastSuccessAt": "2026-07-14T16:49:44.014Z",
-  "source": "manual-rio-jurua-alerta-estiagem",
+  "lastAttemptAt": "2026-07-14T17:07:09.851Z",
+  "lastSuccessAt": "2026-07-14T17:07:09.860Z",
+  "source": "manual-festival-farinha-expositores",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-festival-da-farinha-abre-vagas-para-expositores",
+      "slug": "festival-da-farinha-abre-vagas-para-expositores",
+      "title": "Festival da Farinha abre vagas para expositores",
+      "seoTitle": "Festival da Farinha abre vagas para expositores | Catálogo CZS",
+      "seoDescription": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T12:03:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+      "sourceUrl": "https://jurua24horas.com/2026/07/prefeitura-abre-inscricoes-para-expositores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/",
+      "sourceLabel": "Festival da Farinha abre vagas para expositores",
+      "lede": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "summary": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "analysis": "O credenciamento abre espaço para empreendedores locais participarem de um dos principais eventos do Vale do Juruá.",
+      "highlights": [
+        "Inscrições seguem até 20 de julho.",
+        "Festival ocorre de 26 a 29 de agosto.",
+        "Há vagas para diversos segmentos econômicos.",
+        "Taxas variam de R$ 50 a R$ 1.500."
+      ],
+      "development": [
+        "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, programado para ocorrer entre 26 e 29 de agosto.",
+        "As inscrições são online e ficam abertas até 20 de julho para pessoas físicas maiores de 18 anos e pessoas jurídicas que atendam ao edital.",
+        "Há espaços para alimentação, bebidas, artesanato, ambulantes, restaurantes, trailers, cooperativas, associações, MEIs e empresas.",
+        "As taxas variam de R$ 50 a R$ 1.500. Ambulantes e produtores de plantas ornamentais estão isentos, e os selecionados terão 48 horas para confirmar a participação.",
+        "Fonte: Juruá 24 Horas e Prefeitura de Cruzeiro do Sul."
+      ],
+      "imageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+      "feedImageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+      "imageCredit": "Foto: Reprodução via Juruá 24 Horas",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2005,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá 24 Horas",
+          "url": "https://jurua24horas.com/2026/07/prefeitura-abre-inscricoes-para-expositores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "Festival da Farinha abre vagas para expositores. A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "audioNarrationTranscript": "Festival da Farinha abre vagas para expositores. A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500. Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Trabalhadores produzindo farinha durante festival em Cruzeiro do Sul",
+        "caption": "Festival da Farinha abre vagas para expositores",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, programado para ocorrer entre 26 e 29 de agosto.",
+        "As inscrições são online e ficam abertas até 20 de julho para pessoas físicas maiores de 18 anos e pessoas jurídicas que atendam ao edital.",
+        "Há espaços para alimentação, bebidas, artesanato, ambulantes, restaurantes, trailers, cooperativas, associações, MEIs e empresas.",
+        "As taxas variam de R$ 50 a R$ 1.500. Ambulantes e produtores de plantas ornamentais estão isentos, e os selecionados terão 48 horas para confirmar a participação.",
+        "Fonte: Juruá 24 Horas e Prefeitura de Cruzeiro do Sul."
+      ]
+    },
     {
       "id": "manual-czs-bombeiros-alertam-para-riscos-no-rio-jurua",
       "slug": "bombeiros-alertam-para-riscos-no-rio-jurua",
@@ -27147,53 +27224,61 @@
       "editorialSpotlightReady": false,
       "editorialSurfaceTier": "remote-secondary",
       "editorialLocalTier": 0
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://g1.globo.com/politica/noticia/2026/07/12/pf-diz-que-tuca-apontada-como-operadora-de-esquema-tinha-pleno-aval-da-presidencia-da-camara-para-desviar-emendas-para-eduardo-cunha.ghtml",
-      "slug": "pf-diz-que-presidencia-da-camara-deu-aval-para-desvio-de-emendas-em-nome-de-cunha",
-      "title": "PF diz que Presidência da Câmara deu aval para desvio de emendas em nome de Cunha",
-      "eyebrow": "Politica",
-      "date": "12 de jul de 2026",
-      "publishedAt": "2026-07-12T16:22:52.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
-      "sourceName": "G1 Politica",
-      "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/12/pf-diz-que-tuca-apontada-como-operadora-de-esquema-tinha-pleno-aval-da-presidencia-da-camara-para-desviar-emendas-para-eduardo-cunha.ghtml",
-      "sourceLabel": "PF diz que Presidência da Câmara deu aval para desvio de emendas em nome de Cunha",
-      "lede": "PF: servidora tinha aval para demandas de Eduardo Cunha A investigação da Polícia Federal que resultou no bloqueio de R$ 6 milhões atribuídos ao ex-deputado Eduardo Cunha (Republicanos-MG) aponta que a servidora da Câmara dos Deputados Mariângela Fialek",
-      "summary": "PF: servidora tinha aval para demandas de Eduardo Cunha A investigação da Polícia Federal que resultou no bloqueio de R$ 6 milhões atribuídos ao ex-deputado Eduardo Cunha (Republicanos-MG) aponta que a servidora da Câmara dos Deputados Mariângela Fialek",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://s2-g1.glbimg.com/sQQmgmp5kafenicak1-xQi8PWgk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2017/c/0/29I4YuRLiJA30UqX3oxg/eduardo-cunha-pmdb-rj-ueslei-marcelino-reuters.jpg",
-      "feedImageUrl": "https://s2-g1.glbimg.com/sQQmgmp5kafenicak1-xQi8PWgk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2017/c/0/29I4YuRLiJA30UqX3oxg/eduardo-cunha-pmdb-rj-ueslei-marcelino-reuters.jpg",
-      "sourceImageUrl": "https://s2-g1.glbimg.com/sQQmgmp5kafenicak1-xQi8PWgk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2017/c/0/29I4YuRLiJA30UqX3oxg/eduardo-cunha-pmdb-rj-ueslei-marcelino-reuters.jpg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "id": "manual-czs-festival-da-farinha-abre-vagas-para-expositores",
+      "slug": "festival-da-farinha-abre-vagas-para-expositores",
+      "title": "Festival da Farinha abre vagas para expositores",
+      "seoTitle": "Festival da Farinha abre vagas para expositores | Catálogo CZS",
+      "seoDescription": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T12:03:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+      "sourceUrl": "https://jurua24horas.com/2026/07/prefeitura-abre-inscricoes-para-expositores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/",
+      "sourceLabel": "Festival da Farinha abre vagas para expositores",
+      "lede": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "summary": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "analysis": "O credenciamento abre espaço para empreendedores locais participarem de um dos principais eventos do Vale do Juruá.",
+      "highlights": [
+        "Inscrições seguem até 20 de julho.",
+        "Festival ocorre de 26 a 29 de agosto.",
+        "Há vagas para diversos segmentos econômicos.",
+        "Taxas variam de R$ 50 a R$ 1.500."
+      ],
+      "development": [
+        "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, programado para ocorrer entre 26 e 29 de agosto.",
+        "As inscrições são online e ficam abertas até 20 de julho para pessoas físicas maiores de 18 anos e pessoas jurídicas que atendam ao edital.",
+        "Há espaços para alimentação, bebidas, artesanato, ambulantes, restaurantes, trailers, cooperativas, associações, MEIs e empresas.",
+        "As taxas variam de R$ 50 a R$ 1.500. Ambulantes e produtores de plantas ornamentais estão isentos, e os selecionados terão 48 horas para confirmar a participação.",
+        "Fonte: Juruá 24 Horas e Prefeitura de Cruzeiro do Sul."
+      ],
+      "imageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+      "feedImageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+      "imageCredit": "Foto: Reprodução via Juruá 24 Horas",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
       "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "priority": 2005,
+      "editorialPriority": "jurua-destaque",
       "crossSources": [
         {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/12/pf-diz-que-tuca-apontada-como-operadora-de-esquema-tinha-pleno-aval-da-presidencia-da-camara-para-desviar-emendas-para-eduardo-cunha.ghtml"
+          "name": "Juruá 24 Horas",
+          "url": "https://jurua24horas.com/2026/07/prefeitura-abre-inscricoes-para-expositores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/12/pf-diz-que-tuca-apontada-como-operadora-de-esquema-tinha-pleno-aval-da-presidencia-da-camara-para-desviar-emendas-para-eduardo-cunha.ghtml"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "pf-diz-que-presidencia-da-camara-deu-aval-para-desvio-de-emendas-em-nome-de-cunha"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. PF diz que Presidência da Câmara deu aval para desvio de emendas em nome de Cunha PF: servidora tinha aval para demandas de Eduardo Cunha A investigação da Polícia Federal que resultou no bloqueio de R$ 6 milhões atribuídos ao ex-deputado Eduardo Cunha (Republicanos-MG) aponta que a servidora da Câmara dos Deputados Mariângela Fialek... A informação vem de G1 política.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. PF diz que Presidência da Câmara deu aval para desvio de emendas em nome de Cunha PF: servidora tinha aval para demandas de Eduardo Cunha A investigação da Polícia Federal que resultou no bloqueio de R$ 6 milhões atribuídos ao ex-deputado Eduardo Cunha (Republicanos-MG) aponta que a servidora da Câmara dos Deputados Mariângela Fialek... A informação vem de G1 política.",
+      "alternateSlugs": [],
+      "audioNarrationText": "Festival da Farinha abre vagas para expositores. A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+      "audioNarrationTranscript": "Festival da Farinha abre vagas para expositores. A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -27201,27 +27286,24 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: PF diz que Presidência da Câmara deu aval para desvio de emendas em nome de Cunha. PF: servidora tinha aval para demandas de Eduardo Cunha A investigação da Polícia Federal que resultou no bloqueio de R$ 6 milhões atribuídos ao ex-deputado Eduardo Cunha (Republicanos-MG) aponta que a servidora da Câmara dos Deputados... Fonte: G1 Politica.",
+      "videoCaptionText": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500. Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Trabalhadores produzindo farinha durante festival em Cruzeiro do Sul",
+        "caption": "Festival da Farinha abre vagas para expositores",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
       "body": [
-        "G1 Politica publicou em 12 de jul de 2026: PF diz que Presidência da Câmara deu aval para desvio de emendas em nome de Cunha.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialGate": "P0",
-      "editorialApproval": "human-required",
-      "editorialSpotlightReady": false,
-      "editorialSurfaceTier": "remote-secondary",
-      "editorialLocalTier": 0
-    }
-  ],
-  "items": [
+        "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, programado para ocorrer entre 26 e 29 de agosto.",
+        "As inscrições são online e ficam abertas até 20 de julho para pessoas físicas maiores de 18 anos e pessoas jurídicas que atendam ao edital.",
+        "Há espaços para alimentação, bebidas, artesanato, ambulantes, restaurantes, trailers, cooperativas, associações, MEIs e empresas.",
+        "As taxas variam de R$ 50 a R$ 1.500. Ambulantes e produtores de plantas ornamentais estão isentos, e os selecionados terão 48 horas para confirmar a participação.",
+        "Fonte: Juruá 24 Horas e Prefeitura de Cruzeiro do Sul."
+      ]
+    },
     {
       "id": "manual-czs-bombeiros-alertam-para-riscos-no-rio-jurua",
       "slug": "bombeiros-alertam-para-riscos-no-rio-jurua",

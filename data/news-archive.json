@@ -1,5 +1,82 @@
 [
   {
+    "id": "manual-czs-festival-da-farinha-abre-vagas-para-expositores",
+    "slug": "festival-da-farinha-abre-vagas-para-expositores",
+    "title": "Festival da Farinha abre vagas para expositores",
+    "seoTitle": "Festival da Farinha abre vagas para expositores | Catálogo CZS",
+    "seoDescription": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+    "eyebrow": "Cruzeiro do Sul",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T12:03:00.000-05:00",
+    "category": "Cruzeiro do Sul",
+    "categoryKey": "cruzeiro-do-sul",
+    "previewClass": "thumb-cruzeiro-do-sul",
+    "sourceName": "Juruá 24 Horas / Prefeitura de Cruzeiro do Sul",
+    "sourceUrl": "https://jurua24horas.com/2026/07/prefeitura-abre-inscricoes-para-expositores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/",
+    "sourceLabel": "Festival da Farinha abre vagas para expositores",
+    "lede": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+    "summary": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+    "analysis": "O credenciamento abre espaço para empreendedores locais participarem de um dos principais eventos do Vale do Juruá.",
+    "highlights": [
+      "Inscrições seguem até 20 de julho.",
+      "Festival ocorre de 26 a 29 de agosto.",
+      "Há vagas para diversos segmentos econômicos.",
+      "Taxas variam de R$ 50 a R$ 1.500."
+    ],
+    "development": [
+      "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, programado para ocorrer entre 26 e 29 de agosto.",
+      "As inscrições são online e ficam abertas até 20 de julho para pessoas físicas maiores de 18 anos e pessoas jurídicas que atendam ao edital.",
+      "Há espaços para alimentação, bebidas, artesanato, ambulantes, restaurantes, trailers, cooperativas, associações, MEIs e empresas.",
+      "As taxas variam de R$ 50 a R$ 1.500. Ambulantes e produtores de plantas ornamentais estão isentos, e os selecionados terão 48 horas para confirmar a participação.",
+      "Fonte: Juruá 24 Horas e Prefeitura de Cruzeiro do Sul."
+    ],
+    "imageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+    "feedImageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/festival-farinha-expositores-20260714.webp",
+    "imageCredit": "Foto: Reprodução via Juruá 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2005,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá 24 Horas",
+        "url": "https://jurua24horas.com/2026/07/prefeitura-abre-inscricoes-para-expositores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Festival da Farinha abre vagas para expositores. A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+    "audioNarrationTranscript": "Festival da Farinha abre vagas para expositores. A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, marcado para 26 a 29 de agosto. As inscrições são online e seguem até 20 de julho. Há vagas para alimentação, bebidas, artesanato, ambulantes, cooperativas, MEIs e empresas; as taxas variam de R$ 50 a R$ 1.500. Fonte: Juruá 24 Horas / Prefeitura de Cruzeiro do Sul.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Trabalhadores produzindo farinha durante festival em Cruzeiro do Sul",
+      "caption": "Festival da Farinha abre vagas para expositores",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Prefeitura de Cruzeiro do Sul abriu o credenciamento de expositores para o 9º Festival da Farinha, programado para ocorrer entre 26 e 29 de agosto.",
+      "As inscrições são online e ficam abertas até 20 de julho para pessoas físicas maiores de 18 anos e pessoas jurídicas que atendam ao edital.",
+      "Há espaços para alimentação, bebidas, artesanato, ambulantes, restaurantes, trailers, cooperativas, associações, MEIs e empresas.",
+      "As taxas variam de R$ 50 a R$ 1.500. Ambulantes e produtores de plantas ornamentais estão isentos, e os selecionados terão 48 horas para confirmar a participação.",
+      "Fonte: Juruá 24 Horas e Prefeitura de Cruzeiro do Sul."
+    ]
+  },
+  {
     "id": "manual-czs-bombeiros-alertam-para-riscos-no-rio-jurua",
     "slug": "bombeiros-alertam-para-riscos-no-rio-jurua",
     "title": "Bombeiros alertam para riscos no Rio Juruá",
