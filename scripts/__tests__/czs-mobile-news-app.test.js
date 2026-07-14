@@ -103,7 +103,8 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   assert.match(html, />Editorias</);
   assert.doesNotMatch(`${html}\n${js}`, /Cheffe Call|escrit[oó]rios|agentes/i);
   assert.doesNotMatch(`${html}\n${js}`, /noticia\.html/);
-  assert.doesNotMatch(js, /Notification|PushManager|serviceWorker/);
+  assert.doesNotMatch(js, /Notification|PushManager/);
+  assert.match(js, /navigator\.serviceWorker\.register\("\/app-sw\.js"/);
 });
 
 test("navegacao inferior reune os quatro destinos publicos com estados acessiveis", () => {

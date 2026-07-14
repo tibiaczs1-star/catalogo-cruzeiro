@@ -13,6 +13,11 @@
   const POLL_INTERVAL_MS = 90 * 1000;
   const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+  function registerAppServiceWorker() {
+    if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.register("/app-sw.js", { scope: "/" }).catch(() => {});
+  }
+
   function text(value) {
     return typeof value === "string" ? value.trim() : "";
   }
@@ -146,6 +151,7 @@
   }
 
   function startBrowserApp() {
+    registerAppServiceWorker();
     const feed = document.getElementById("newsFeed");
     const status = document.getElementById("feedStatus");
     const notice = document.getElementById("newNewsNotice");

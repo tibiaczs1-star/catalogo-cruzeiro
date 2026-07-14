@@ -229,6 +229,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".wav",
   ".mp4",
   ".pdf",
+  ".apk",
   ".ico",
   ".webmanifest"
 ]);
@@ -6737,6 +6738,8 @@ function mimeFor(filePath) {
       return "audio/wav";
     case ".pdf":
       return "application/pdf";
+    case ".apk":
+      return "application/vnd.android.package-archive";
     case ".ico":
       return "image/x-icon";
     case ".txt":
