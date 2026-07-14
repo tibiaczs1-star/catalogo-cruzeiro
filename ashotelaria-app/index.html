@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#123e36">
+  <title>AShotelaria — Operação online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/ashotelaria-app/styles.css">
+</head>
+<body class="app-body">
+  <div id="connection-banner" class="connection-banner" role="status" aria-live="polite" hidden>
+    Sem conexão com o sistema. As ações estão bloqueadas até a internet voltar.
+  </div>
+
+  <main id="login-screen" class="login-screen">
+    <section class="login-brand" aria-label="AShotelaria">
+      <a class="brand-lockup brand-lockup--light" href="/" aria-label="Catálogo CZS">
+        <span class="brand-mark">AS</span>
+        <span><strong>AShotelaria</strong><small>por CZS Labs</small></span>
+      </a>
+      <div class="login-message">
+        <p class="eyebrow">Operação hoteleira, em tempo real</p>
+        <h1>Cada equipe vê o que precisa. O hotel inteiro trabalha junto.</h1>
+        <p>Recepção, governança, manutenção e gestão em uma única operação online, com acesso separado por cargo.</p>
+      </div>
+      <p class="brand-footnote">Uma solução Catálogo CZS · Cruzeiro do Sul, Acre</p>
+    </section>
+
+    <section class="login-panel">
+      <form id="login-form" class="auth-form" autocomplete="on">
+        <header>
+          <p class="eyebrow">Acesso seguro</p>
+          <h2>Entrar no sistema</h2>
+          <p>Selecione seu cargo para abrir somente o seu ambiente de trabalho.</p>
+        </header>
+        <label>
+          <span>Usuário</span>
+          <input name="username" value="admin" autocomplete="username" required>
+        </label>
+        <label>
+          <span>Cargo</span>
+          <select name="role" autocomplete="organization-title" required>
+            <option value="administrador">Administrador</option>
+            <option value="proprietario">Proprietário</option>
+            <option value="gerente">Gerente</option>
+            <option value="recepcionista">Recepção</option>
+            <option value="camareira">Camareira</option>
+            <option value="supervisor_governanca">Supervisão de governança</option>
+            <option value="contador">Contador</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="caixa">Caixa</option>
+            <option value="manutencao">Manutenção</option>
+            <option value="revenue_manager">Gestão de tarifas</option>
+            <option value="auditor">Auditoria</option>
+          </select>
+        </label>
+        <label>
+          <span>Senha</span>
+          <span class="password-control">
+            <input name="password" type="password" autocomplete="current-password" required>
+            <button class="text-button password-toggle" type="button" aria-label="Mostrar senha">Mostrar</button>
+          </span>
+        </label>
+        <input name="propertySlug" type="hidden" value="hotel-jurua-palace">
+        <p id="login-error" class="form-error" role="alert" hidden></p>
+        <button class="button button--primary button--wide" type="submit">Entrar online</button>
+        <p class="online-note"><span aria-hidden="true"></span> Este sistema funciona conectado à internet.</p>
+      </form>
+    </section>
+  </main>
+
+  <div id="workspace" class="workspace" hidden>
+    <aside class="sidebar">
+      <a class="brand-lockup brand-lockup--light" href="/ashotelaria/app">
+        <span class="brand-mark">AS</span>
+        <span><strong>AShotelaria</strong><small>Operação online</small></span>
+      </a>
+      <div class="property-chip">
+        <span class="property-chip__label">Unidade ativa</span>
+        <strong id="property-name">Hotel</strong>
+        <span id="role-name">Cargo</span>
+      </div>
+      <nav id="app-navigation" class="app-navigation" aria-label="Navegação principal"></nav>
+      <footer class="sidebar-footer">
+        <button id="open-account" class="sidebar-action" type="button">Minha conta</button>
+        <button id="logout-button" class="sidebar-action" type="button">Sair</button>
+      </footer>
+    </aside>
+
+    <main class="main-workspace">
+      <header class="workspace-header">
+        <div>
+          <p id="today-label" class="eyebrow"></p>
+          <h1 id="view-title">Agora</h1>
+        </div>
+        <div class="header-status">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>Dados online</span>
+          <button id="refresh-button" class="icon-button" type="button" aria-label="Atualizar dados">↻</button>
+        </div>
+      </header>
+      <section id="view-content" class="view-content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="account-dialog" class="dialog">
+    <form method="dialog" class="dialog-shell">
+      <header class="dialog-header">
+        <div><p class="eyebrow">Segurança</p><h2>Minha conta</h2></div>
+        <button id="account-close" class="icon-button" value="cancel" aria-label="Fechar">×</button>
+      </header>
+      <div class="account-meta"><strong id="account-username"></strong><span id="account-role"></span></div>
+      <div class="dialog-section">
+        <h3>Trocar minha senha</h3>
+        <p>Ao trocar a senha, sua sessão será encerrada em todos os acessos.</p>
+        <div id="change-password-form" class="stacked-fields">
+          <label><span>Senha atual</span><input name="currentPassword" type="password" autocomplete="current-password"></label>
+          <label><span>Nova senha</span><input name="newPassword" type="password" autocomplete="new-password" minlength="8"></label>
+          <button id="change-password-button" class="button button--primary" type="button">Trocar senha</button>
+        </div>
+      </div>
+      <div id="admin-reset-section" class="dialog-section" hidden>
+        <h3>Redefinir senha de uma equipe</h3>
+        <p>Apenas o administrador principal pode executar esta ação.</p>
+        <div id="reset-password-form" class="stacked-fields">
+          <label><span>Cargo</span><select name="role"></select></label>
+          <label><span>Nova senha temporária</span><input name="newPassword" type="password" minlength="8"></label>
+          <button id="reset-password-button" class="button button--secondary" type="button">Redefinir senha</button>
+        </div>
+      </div>
+      <p id="account-message" class="form-message" role="status"></p>
+    </form>
+  </dialog>
+
+  <template id="empty-state-template">
+    <div class="empty-state"><span>AS</span><h2>Nada pendente aqui</h2><p>Os dados atualizados aparecerão automaticamente nesta área.</p></div>
+  </template>
+  <script src="/ashotelaria-app/app.js" defer></script>
+</body>
+</html>

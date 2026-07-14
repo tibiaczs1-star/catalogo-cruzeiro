@@ -9,6 +9,10 @@
     "rayx": "rayx/bin/rayx.js"
   },
   "scripts": {
+    "test": "node --test ashotelaria/__tests__/*.test.js",
+    "ashotelaria:test": "node --test ashotelaria/__tests__/*.test.js",
+    "ashotelaria:migrate": "node ashotelaria/migrate.js",
+    "ashotelaria:check": "node --check server.js && node --check ashotelaria/http.js && node --check ashotelaria/auth.js && node --check ashotelaria-app/app.js && node --check ashotelaria-app/booking.js",
     "agents:cycle": "node scripts/agents-autonomy-cycle.js --once",
     "agents:daemon": "node scripts/agents-autonomy-cycle.js --daemon",
     "agents:run": "node scripts/real-agents-runtime.js",
@@ -68,6 +72,7 @@
   "dependencies": {
     "chess.js": "^1.4.0",
     "pdfkit": "^0.17.2",
+    "pg": "^8.22.0",
     "phaser": "^3.90.0",
     "qrcode": "^1.5.4"
   },

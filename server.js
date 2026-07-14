@@ -24,6 +24,10 @@ const {
 const vm = require("vm");
 const zlib = require("zlib");
 const { URL } = require("url");
+const { createASHotelariaHandler } = require("./ashotelaria/http");
+const { createAuthService } = require("./ashotelaria/auth");
+const { createStore } = require("./ashotelaria/store");
+const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
 let Chess = null;
 try {
   Chess = require("chess.js").Chess;
@@ -71,6 +75,9 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
+const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED || "").trim().toLowerCase() === "true"
+  || String(process.env.ASHOTELARIA_DEMO_MODE || "").trim().toLowerCase() === "true"
+  || (IS_PRODUCTION && Boolean(String(process.env.ASHOTELARIA_DATABASE_URL || "").trim()));
 const PUBPAID_CLIENT_BUILD_VERSION = "20260527-chessfast1";
 
 function getRequiredSecret(name, fallbackValue) {
@@ -20658,6 +20665,28 @@ async function handleApi(req, res, pathname, searchParams) {
 function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
 
+  if (pathname === "/ashotelaria/app" || pathname === "/ashotelaria/app/" || pathname === "/czs-labs/ashotelaria" || pathname === "/czs-labs/ashotelaria/") {
+    return sendFile(req, res, path.join(ROOT_DIR, "ashotelaria-app", "index.html"), {
+      cacheControl: "no-store",
+      templateVars,
+    });
+  }
+
+  if (pathname === "/hoteis" || pathname === "/hoteis/") {
+    return sendFile(req, res, path.join(ROOT_DIR, "ashotelaria-app", "booking.html"), {
+      cacheControl: "no-store",
+      templateVars,
+    });
+  }
+
+  const bookingAlias = pathname.match(/^\/reservar\/([^/]+)\/?$/);
+  if (bookingAlias) {
+    return sendFile(req, res, path.join(ROOT_DIR, "ashotelaria-app", "booking.html"), {
+      cacheControl: "no-store",
+      templateVars,
+    });
+  }
+
   if (pathname === "/robots.txt") {
     return sendText(res, 200, buildRobotsTxt(req), "public, max-age=3600");
   }
@@ -20779,9 +20808,33 @@ if (RSS_SOURCES.length && !NEWS_REFRESH_AUTO_DISABLED) {
   }, NEWS_REFRESH_INTERVAL_MS);
 }
 
+let ashotelariaHandler = null;
+if (ASHOTELARIA_ENABLED) {
+  const ashotelariaStore = createStore();
+  const ashotelariaAuth = createAuthService({
+    store: ashotelariaStore,
+    config: {
+      sessionSecret: process.env.ASHOTELARIA_SESSION_SECRET,
+      environment: process.env,
+    },
+  });
+  ashotelariaHandler = createASHotelariaHandler({
+    store: ashotelariaStore,
+    authService: ashotelariaAuth,
+    config: { production: IS_PRODUCTION },
+  });
+}
+const ashotelariaIntegration = createASHotelariaServerIntegration({
+  rootDir: ROOT_DIR,
+  apiHandler: ashotelariaHandler,
+  sendFile,
+});
+
 const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = requestUrl.pathname;
+
+  if (await ashotelariaIntegration.handle(req, res, pathname)) return;
 
   if (pathname.startsWith("/api/") || pathname === "/health") {
     return handleApi(req, res, pathname, requestUrl.searchParams);

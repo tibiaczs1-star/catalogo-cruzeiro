@@ -6,7 +6,7 @@ services:
     plan: starter
     autoDeployTrigger: commit
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: npm run ashotelaria:migrate && npm start
     healthCheckPath: /
     disk:
       name: app-data
@@ -15,6 +15,22 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: ASHOTELARIA_ENABLED
+        value: "true"
+      - key: ASHOTELARIA_DATABASE_URL
+        fromDatabase:
+          name: ashotelaria-db
+          property: connectionString
+      - key: ASHOTELARIA_SESSION_SECRET
+        sync: false
+      - key: ASHOTELARIA_ADMIN_PASSWORD
+        sync: false
+      - key: ASHOTELARIA_FINANCE_PASSWORD
+        sync: false
+      - key: ASHOTELARIA_RECEPTION_PASSWORD
+        sync: false
+      - key: ASHOTELARIA_DEFAULT_PASSWORD
+        sync: false
       - key: TZ
         value: America/Rio_Branco
       - key: SITE_URL
@@ -73,3 +89,10 @@ services:
         sync: false
       - key: NINJAS_MERCHANT_CITY
         sync: false
+databases:
+  - name: ashotelaria-db
+    plan: free
+    region: oregon
+    postgresMajorVersion: "17"
+    databaseName: ashotelaria
+    user: ashotelaria
