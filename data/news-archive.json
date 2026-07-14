@@ -1,5 +1,71 @@
 [
   {
+    "id": "manual-czs-briga-na-ufac-termina-na-delegacia",
+    "slug": "briga-na-ufac-termina-na-delegacia",
+    "title": "Briga na Ufac termina na delegacia",
+    "seoTitle": "Briga na Ufac termina na delegacia | Catálogo CZS",
+    "seoDescription": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+    "eyebrow": "Cruzeiro do Sul",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T14:13:00.000-05:00",
+    "category": "Cruzeiro do Sul",
+    "categoryKey": "cruzeiro-do-sul",
+    "previewClass": "thumb-cruzeiro-do-sul",
+    "sourceName": "Juruá em Tempo",
+    "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/confusao-na-ufac-de-cruzeiro-do-sul-termina-com-tres-estudantes-conduzidos-a-delegacia/",
+    "sourceLabel": "Briga na Ufac termina na delegacia",
+    "lede": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+    "summary": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "Fonte: Juruá em Tempo."
+    ],
+    "imageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+    "feedImageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+    "sourceImageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+    "imageCredit": "Foto: Juruá em Tempo",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2011,
+    "editorialPriority": "jurua-destaque",
+    "crossSources": [
+      {
+        "name": "Juruá em Tempo",
+        "url": "https://www.juruaemtempo.com.br/2026/07/confusao-na-ufac-de-cruzeiro-do-sul-termina-com-tres-estudantes-conduzidos-a-delegacia/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Briga na Ufac termina na delegacia. Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+    "audioNarrationTranscript": "Briga na Ufac termina na delegacia. Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias. Fonte: Juruá em Tempo.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Vista aérea do campus da Ufac em Cruzeiro do Sul",
+      "caption": "Briga na Ufac termina na delegacia",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "Fonte: Juruá em Tempo."
+    ]
+  },
+  {
     "id": "manual-czs-pm-apreende-quase-16-kg-de-maconha",
     "slug": "pm-apreende-quase-16-kg-de-maconha",
     "title": "PM apreende quase 16 kg de maconha",

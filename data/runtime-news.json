@@ -1,8 +1,74 @@
 {
-  "lastAttemptAt": "2026-07-14T18:58:09.759Z",
-  "lastSuccessAt": "2026-07-14T18:58:09.759Z",
+  "lastAttemptAt": "2026-07-14T19:16:39.278Z",
+  "lastSuccessAt": "2026-07-14T19:16:39.278Z",
   "source": "czs-fast-mode-v3",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-briga-na-ufac-termina-na-delegacia",
+      "slug": "briga-na-ufac-termina-na-delegacia",
+      "title": "Briga na Ufac termina na delegacia",
+      "seoTitle": "Briga na Ufac termina na delegacia | Catálogo CZS",
+      "seoDescription": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T14:13:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá em Tempo",
+      "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/confusao-na-ufac-de-cruzeiro-do-sul-termina-com-tres-estudantes-conduzidos-a-delegacia/",
+      "sourceLabel": "Briga na Ufac termina na delegacia",
+      "lede": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "summary": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "analysis": "",
+      "highlights": [],
+      "development": [
+        "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+        "Fonte: Juruá em Tempo."
+      ],
+      "imageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+      "feedImageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+      "sourceImageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+      "imageCredit": "Foto: Juruá em Tempo",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2011,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá em Tempo",
+          "url": "https://www.juruaemtempo.com.br/2026/07/confusao-na-ufac-de-cruzeiro-do-sul-termina-com-tres-estudantes-conduzidos-a-delegacia/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "Briga na Ufac termina na delegacia. Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "audioNarrationTranscript": "Briga na Ufac termina na delegacia. Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias. Fonte: Juruá em Tempo.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Vista aérea do campus da Ufac em Cruzeiro do Sul",
+        "caption": "Briga na Ufac termina na delegacia",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+        "Fonte: Juruá em Tempo."
+      ]
+    },
     {
       "id": "manual-czs-pm-apreende-quase-16-kg-de-maconha",
       "slug": "pm-apreende-quase-16-kg-de-maconha",
@@ -27135,53 +27201,53 @@
       "editorialSpotlightReady": false,
       "editorialSurfaceTier": "remote-secondary",
       "editorialLocalTier": 0
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://juruacomunicacao.com.br/fifa-avalia-ampliar-copa-do-mundo-para-64-selecoes-a-partir-de-2030/",
-      "slug": "fifa-avalia-ampliar-copa-do-mundo-para-64-selecoes-a-partir-de-2030",
-      "title": "Fifa avalia ampliar Copa do Mundo para 64 seleções a partir de 2030",
-      "eyebrow": "Esporte",
-      "date": "12 de jul de 2026",
-      "publishedAt": "2026-07-12T21:59:53.000Z",
-      "category": "Esporte",
-      "categoryKey": "esporte",
-      "previewClass": "thumb-esporte",
-      "sourceName": "Jurua Comunicacao",
-      "sourceUrl": "https://juruacomunicacao.com.br/fifa-avalia-ampliar-copa-do-mundo-para-64-selecoes-a-partir-de-2030/",
-      "sourceLabel": "Fifa avalia ampliar Copa do Mundo para 64 seleções a partir de 2030",
-      "lede": "A Copa do Mundo pode ganhar ainda mais participantes nos próximos anos.",
-      "summary": "A Copa do Mundo pode ganhar ainda mais participantes nos próximos anos.",
+      "id": "manual-czs-briga-na-ufac-termina-na-delegacia",
+      "slug": "briga-na-ufac-termina-na-delegacia",
+      "title": "Briga na Ufac termina na delegacia",
+      "seoTitle": "Briga na Ufac termina na delegacia | Catálogo CZS",
+      "seoDescription": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T14:13:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá em Tempo",
+      "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/confusao-na-ufac-de-cruzeiro-do-sul-termina-com-tres-estudantes-conduzidos-a-delegacia/",
+      "sourceLabel": "Briga na Ufac termina na delegacia",
+      "lede": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "summary": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
       "analysis": "",
       "highlights": [],
-      "development": [],
-      "imageUrl": "",
-      "feedImageUrl": "",
-      "sourceImageUrl": "",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "development": [
+        "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+        "Fonte: Juruá em Tempo."
+      ],
+      "imageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+      "feedImageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+      "sourceImageUrl": "assets/news-manual/briga-ufac-cruzeiro-20260714.jpg",
+      "imageCredit": "Foto: Juruá em Tempo",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
       "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "priority": 2011,
+      "editorialPriority": "jurua-destaque",
       "crossSources": [
         {
-          "name": "Jurua Comunicacao",
-          "url": "https://juruacomunicacao.com.br/fifa-avalia-ampliar-copa-do-mundo-para-64-selecoes-a-partir-de-2030/"
+          "name": "Juruá em Tempo",
+          "url": "https://www.juruaemtempo.com.br/2026/07/confusao-na-ufac-de-cruzeiro-do-sul-termina-com-tres-estudantes-conduzidos-a-delegacia/"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "Jurua Comunicacao",
-          "url": "https://juruacomunicacao.com.br/fifa-avalia-ampliar-copa-do-mundo-para-64-selecoes-a-partir-de-2030/"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "fifa-avalia-ampliar-copa-do-mundo-para-64-selecoes-a-partir-de-2030"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Esporte. Fifa avalia ampliar Copa do Mundo para 64 seleções a partir de 2030 A Copa do Mundo pode ganhar ainda mais participantes nos próximos anos. O presidente da Fifa, Gianni Infantino, afirmou que a entidade vai discutir a possibilidade de ampliar o torneio de 48 para 64 seleções a partir da edição de 2030, em uma mudança que... A informação vem de Juruá Comunicacao.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Esporte. Fifa avalia ampliar Copa do Mundo para 64 seleções a partir de 2030 A Copa do Mundo pode ganhar ainda mais participantes nos próximos anos. O presidente da Fifa, Gianni Infantino, afirmou que a entidade vai discutir a possibilidade de ampliar o torneio de 48 para 64 seleções a partir da edição de 2030, em uma mudança que... A informação vem de Juruá Comunicacao.",
+      "alternateSlugs": [],
+      "audioNarrationText": "Briga na Ufac termina na delegacia. Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+      "audioNarrationTranscript": "Briga na Ufac termina na delegacia. Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -27189,28 +27255,21 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Fifa avalia ampliar Copa do Mundo para 64 seleções a partir de 2030. A Copa do Mundo pode ganhar ainda mais participantes nos próximos anos. O presidente da Fifa, Gianni Infantino, afirmou que a entidade vai discutir a possibilidade de ampliar o torneio de 48 para 64 seleções a partir da edição de 2030... Fonte: Jurua Comunicacao.",
+      "videoCaptionText": "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias. Fonte: Juruá em Tempo.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Vista aérea do campus da Ufac em Cruzeiro do Sul",
+        "caption": "Briga na Ufac termina na delegacia",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
-      "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
       "body": [
-        "Jurua Comunicacao publicou em 12 de jul de 2026: Fifa avalia ampliar Copa do Mundo para 64 seleções a partir de 2030.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialGate": "P1",
-      "editorialApproval": "auto-check",
-      "editorialSpotlightReady": false,
-      "editorialSurfaceTier": "remote-secondary",
-      "editorialLocalTier": 0
-    }
-  ],
-  "items": [
+        "Uma briga dentro da Ufac em Cruzeiro do Sul terminou com três estudantes conduzidos à delegacia na noite de segunda-feira. Segundo o boletim de ocorrência, a confusão aconteceu em um laboratório, deixou dois jovens feridos e provocou danos a equipamentos. A Polícia Militar ouviu os envolvidos e levou o caso à Polícia Civil, que apura as circunstâncias.",
+        "Fonte: Juruá em Tempo."
+      ]
+    },
     {
       "id": "manual-czs-pm-apreende-quase-16-kg-de-maconha",
       "slug": "pm-apreende-quase-16-kg-de-maconha",
