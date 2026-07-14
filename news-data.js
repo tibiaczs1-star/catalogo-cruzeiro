@@ -1,5 +1,71 @@
-window.NEWS_ARCHIVE_TOTAL = 493;
+window.NEWS_ARCHIVE_TOTAL = 494;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-pm-apreende-quase-16-kg-de-maconha",
+    "slug": "pm-apreende-quase-16-kg-de-maconha",
+    "title": "PM apreende quase 16 kg de maconha",
+    "seoTitle": "PM apreende quase 16 kg de maconha | Catálogo CZS",
+    "seoDescription": "A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+    "eyebrow": "Acre",
+    "date": "14 de jul de 2026",
+    "publishedAt": "2026-07-14T13:54:00.000-05:00",
+    "category": "Acre",
+    "categoryKey": "acre",
+    "previewClass": "thumb-acre",
+    "sourceName": "ContilNet / PMAC",
+    "sourceUrl": "https://contilnetnoticias.com.br/policia/pm-divulga-imagens-da-maior-apreensao-de-drogas-do-ano-em-sena/",
+    "sourceLabel": "PM apreende quase 16 kg de maconha",
+    "lede": "A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+    "summary": "A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+      "Fonte: ContilNet / PMAC."
+    ],
+    "imageUrl": "assets/news-manual/pm-apreende-16-kg-maconha-sena-20260714.webp",
+    "feedImageUrl": "assets/news-manual/pm-apreende-16-kg-maconha-sena-20260714.webp",
+    "sourceImageUrl": "assets/news-manual/pm-apreende-16-kg-maconha-sena-20260714.webp",
+    "imageCredit": "Foto: ContilNet / PMAC",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2009,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "ContilNet / PMAC",
+        "url": "https://contilnetnoticias.com.br/policia/pm-divulga-imagens-da-maior-apreensao-de-drogas-do-ano-em-sena/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "PM apreende quase 16 kg de maconha. A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+    "audioNarrationTranscript": "PM apreende quase 16 kg de maconha. A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos. Fonte: ContilNet / PMAC.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Pacotes de maconha apreendidos pela Polícia Militar em Sena Madureira",
+      "caption": "PM apreende quase 16 kg de maconha",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Polícia Militar apreendeu quase 16 quilos de maconha no bairro Cristo Libertador, em Sena Madureira, na maior ocorrência do tipo registrada no município em 2026. A ação reuniu equipes do 8º BPM e do GIRO e terminou com um suspeito preso. A droga foi levada à delegacia, e a investigação busca identificar a origem e outros possíveis envolvidos.",
+      "Fonte: ContilNet / PMAC."
+    ]
+  },
   {
     "id": "manual-czs-lancha-blindada-reforcara-seguranca-no-jurua",
     "slug": "lancha-blindada-reforcara-seguranca-no-jurua",
