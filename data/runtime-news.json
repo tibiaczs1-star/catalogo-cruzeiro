@@ -1,8 +1,74 @@
 {
-  "lastAttemptAt": "2026-07-14T17:20:36.660Z",
-  "lastSuccessAt": "2026-07-14T17:20:36.669Z",
-  "source": "manual-mp-marcha-jesus-edital",
+  "lastAttemptAt": "2026-07-14T17:44:04.353Z",
+  "lastSuccessAt": "2026-07-14T17:44:04.353Z",
+  "source": "czs-fast-mode-v3",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-suspeita-de-ligar-faccao-entre-peru-e-acre",
+      "slug": "suspeita-de-ligar-faccao-entre-peru-e-acre",
+      "title": "Suspeita de ligar facção entre Peru e Acre",
+      "seoTitle": "Suspeita de ligar facção entre Peru e Acre | Catálogo CZS",
+      "seoDescription": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T12:37:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá em Tempo / PMAC",
+      "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/suspeita-de-intermediar-comunicacao-de-faccao-entre-peru-e-acre-e-presa-pela-pm-em-cruzeiro-do-sul/",
+      "sourceLabel": "Suspeita de ligar facção entre Peru e Acre",
+      "lede": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "summary": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "analysis": "",
+      "highlights": [],
+      "development": [
+        "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+        "Fonte: Juruá em Tempo / PMAC."
+      ],
+      "imageUrl": "assets/news-manual/prisao-faccao-peru-acre-20260714.webp",
+      "feedImageUrl": "assets/news-manual/prisao-faccao-peru-acre-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/prisao-faccao-peru-acre-20260714.webp",
+      "imageCredit": "Foto: Reprodução via Juruá em Tempo",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2007,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá em Tempo / PMAC",
+          "url": "https://www.juruaemtempo.com.br/2026/07/suspeita-de-intermediar-comunicacao-de-faccao-entre-peru-e-acre-e-presa-pela-pm-em-cruzeiro-do-sul/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "Suspeita de ligar facção entre Peru e Acre. Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "audioNarrationTranscript": "Suspeita de ligar facção entre Peru e Acre. Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil. Fonte: Juruá em Tempo / PMAC.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Mulher presa entre dois policiais da ROTAM em Cruzeiro do Sul",
+        "caption": "Suspeita de ligar facção entre Peru e Acre",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+        "Fonte: Juruá em Tempo / PMAC."
+      ]
+    },
     {
       "id": "manual-czs-mp-questiona-edital-de-r-2-4-milhoes",
       "slug": "mp-questiona-edital-de-r-2-4-milhoes",
@@ -27167,53 +27233,53 @@
       "editorialSpotlightReady": false,
       "editorialSurfaceTier": "news",
       "editorialLocalTier": 0
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://g1.globo.com/politica/noticia/2026/07/12/troca-de-mensagens-entre-cunha-e-servidora-aponta-burla-em-alocacao-de-emendas-diz-pf-veja-dialogos.ghtml",
-      "slug": "troca-de-mensagens-entre-cunha-e-servidora-aponta-burla-em-alocacao-de-emendas-diz-pf-veja-dialo",
-      "title": "Troca de mensagens entre Cunha e servidora aponta ‘burla’ em alocação de emendas, diz PF; veja diálogos",
-      "eyebrow": "Politica",
-      "date": "12 de jul de 2026",
-      "publishedAt": "2026-07-12T18:54:14.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
-      "sourceName": "G1 Politica",
-      "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/12/troca-de-mensagens-entre-cunha-e-servidora-aponta-burla-em-alocacao-de-emendas-diz-pf-veja-dialogos.ghtml",
-      "sourceLabel": "Troca de mensagens entre Cunha e servidora aponta ‘burla’ em alocação de emendas, diz PF; veja diálogos",
-      "lede": "Polícia Federal suspeita que Eduardo Cunha tenha desviado emendas parlamentares A troca de mensagens entre o ex-deputado Eduardo Cunha (Republicanos-MG) e a servidora da Câmara dos Deputados Mariângela Fialek, conhecida como \"Tuca, demonstra como o processo",
-      "summary": "Polícia Federal suspeita que Eduardo Cunha tenha desviado emendas parlamentares A troca de mensagens entre o ex-deputado Eduardo Cunha (Republicanos-MG) e a servidora da Câmara dos Deputados Mariângela Fialek, conhecida como \"Tuca, demonstra como o processo",
+      "id": "manual-czs-suspeita-de-ligar-faccao-entre-peru-e-acre",
+      "slug": "suspeita-de-ligar-faccao-entre-peru-e-acre",
+      "title": "Suspeita de ligar facção entre Peru e Acre",
+      "seoTitle": "Suspeita de ligar facção entre Peru e Acre | Catálogo CZS",
+      "seoDescription": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T12:37:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá em Tempo / PMAC",
+      "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/suspeita-de-intermediar-comunicacao-de-faccao-entre-peru-e-acre-e-presa-pela-pm-em-cruzeiro-do-sul/",
+      "sourceLabel": "Suspeita de ligar facção entre Peru e Acre",
+      "lede": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "summary": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
       "analysis": "",
       "highlights": [],
-      "development": [],
-      "imageUrl": "https://s2-g1.glbimg.com/ERaLbkFQbXX8yGLT_XT5A_4Z8Oc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/o/p/bBxdf6QzuBJwuZWFPoIQ/979993-13102015-dsc-3410.webp",
-      "feedImageUrl": "https://s2-g1.glbimg.com/ERaLbkFQbXX8yGLT_XT5A_4Z8Oc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/o/p/bBxdf6QzuBJwuZWFPoIQ/979993-13102015-dsc-3410.webp",
-      "sourceImageUrl": "https://s2-g1.glbimg.com/ERaLbkFQbXX8yGLT_XT5A_4Z8Oc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/o/p/bBxdf6QzuBJwuZWFPoIQ/979993-13102015-dsc-3410.webp",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "development": [
+        "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+        "Fonte: Juruá em Tempo / PMAC."
+      ],
+      "imageUrl": "assets/news-manual/prisao-faccao-peru-acre-20260714.webp",
+      "feedImageUrl": "assets/news-manual/prisao-faccao-peru-acre-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/prisao-faccao-peru-acre-20260714.webp",
+      "imageCredit": "Foto: Reprodução via Juruá em Tempo",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
       "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "priority": 2007,
+      "editorialPriority": "jurua-destaque",
       "crossSources": [
         {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/12/troca-de-mensagens-entre-cunha-e-servidora-aponta-burla-em-alocacao-de-emendas-diz-pf-veja-dialogos.ghtml"
+          "name": "Juruá em Tempo / PMAC",
+          "url": "https://www.juruaemtempo.com.br/2026/07/suspeita-de-intermediar-comunicacao-de-faccao-entre-peru-e-acre-e-presa-pela-pm-em-cruzeiro-do-sul/"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/12/troca-de-mensagens-entre-cunha-e-servidora-aponta-burla-em-alocacao-de-emendas-diz-pf-veja-dialogos.ghtml"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "troca-de-mensagens-entre-cunha-e-servidora-aponta-burla-em-alocacao-de-emendas-diz-pf-veja-dialo"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Troca de mensagens entre Cunha e servidora aponta ‘burla’ em alocação de emendas, diz PF; veja diálogos Polícia Federal suspeita que Eduardo Cunha tenha desviado emendas parlamentares A troca de mensagens entre o ex-deputado Eduardo Cunha (Republicanos-MG) e a servidora da Câmara dos Deputados Mariângela Fialek, conhecida como \"Tuca, demonstra como o processo... A informação vem de G1 política.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Troca de mensagens entre Cunha e servidora aponta ‘burla’ em alocação de emendas, diz PF; veja diálogos Polícia Federal suspeita que Eduardo Cunha tenha desviado emendas parlamentares A troca de mensagens entre o ex-deputado Eduardo Cunha (Republicanos-MG) e a servidora da Câmara dos Deputados Mariângela Fialek, conhecida como \"Tuca, demonstra como o processo... A informação vem de G1 política.",
+      "alternateSlugs": [],
+      "audioNarrationText": "Suspeita de ligar facção entre Peru e Acre. Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+      "audioNarrationTranscript": "Suspeita de ligar facção entre Peru e Acre. Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -27221,27 +27287,21 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Troca de mensagens entre Cunha e servidora aponta ‘burla’ em alocação de emendas, diz PF; veja diálogos. Polícia Federal suspeita que Eduardo Cunha tenha desviado emendas parlamentares A troca de mensagens entre o ex-deputado Eduardo Cunha (Republicanos-MG) e a servidora da Câmara dos Deputados Mariângela Fialek, conhecida como \"Tuca... Fonte: G1 Politica.",
+      "videoCaptionText": "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil. Fonte: Juruá em Tempo / PMAC.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Mulher presa entre dois policiais da ROTAM em Cruzeiro do Sul",
+        "caption": "Suspeita de ligar facção entre Peru e Acre",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
       "body": [
-        "G1 Politica publicou em 12 de jul de 2026: Troca de mensagens entre Cunha e servidora aponta ‘burla’ em alocação de emendas, diz PF; veja diálogos.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialGate": "P0",
-      "editorialApproval": "human-required",
-      "editorialSpotlightReady": false,
-      "editorialSurfaceTier": "remote-secondary",
-      "editorialLocalTier": 0
-    }
-  ],
-  "items": [
+        "Uma mulher apontada pela Polícia Militar como responsável por intermediar a comunicação de uma organização criminosa entre o Peru, o Acre e o Nordeste foi presa pela ROTAM em Cruzeiro do Sul. Segundo a PM, ela estava foragida havia cerca de um ano e tentou destruir o celular durante a abordagem. O aparelho foi apreendido e será analisado pela Polícia Civil.",
+        "Fonte: Juruá em Tempo / PMAC."
+      ]
+    },
     {
       "id": "manual-czs-mp-questiona-edital-de-r-2-4-milhoes",
       "slug": "mp-questiona-edital-de-r-2-4-milhoes",
