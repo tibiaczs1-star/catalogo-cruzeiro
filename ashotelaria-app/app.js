@@ -151,6 +151,8 @@ function publicError(code) {
     INVALID_REQUEST: "Confira os campos informados.",
     ROLE_REQUIRED: "Selecione o cargo para entrar.",
     INVALID_RESERVATION_TRANSITION: "Esta ação não é permitida no estado atual da reserva.",
+    CHECK_IN_NOT_ALLOWED: "Check-in disponível somente na data de entrada.",
+    ROOM_NOT_READY: "O quarto não está pronto para check-in.",
   })[code] ?? "Não foi possível concluir a ação. Tente novamente.";
 }
 
@@ -501,9 +503,9 @@ function hasPermission(permission) { return state.session.permissions?.includes(
 function countStatus(rows, status) { return rows.filter((row) => row.status === status).length; }
 function money(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(cents || 0) / 100); }
 function formatDate(value) { if (!value) return "—"; const [year, month, day] = value.slice(0, 10).split("-"); return `${day}/${month}/${year}`; }
-function operationalDate(now = new Date()) {
+function operationalDate(now = new Date(), timeZone = state.bootstrap?.property?.timeZone ?? "America/Rio_Branco") {
   const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Rio_Branco", year: "numeric", month: "2-digit", day: "2-digit",
+    timeZone, year: "numeric", month: "2-digit", day: "2-digit",
   }).formatToParts(now);
   const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
   return `${values.year}-${values.month}-${values.day}`;

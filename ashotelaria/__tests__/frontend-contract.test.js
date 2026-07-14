@@ -92,6 +92,8 @@ test("painel oferece o ciclo operacional de reservas", async () => {
   assert.match(script, /checked_in/);
   assert.match(script, /checked_out/);
   assert.match(script, /\/reservations\/\$\{encodeURIComponent\(reservationId\)\}\/status/);
+  assert.match(script, /CHECK_IN_NOT_ALLOWED/);
+  assert.match(script, /ROOM_NOT_READY/);
 });
 
 test("ajuda contextual cobre controles e linhas operacionais com mensagens especificas", async () => {
@@ -143,11 +145,11 @@ test("copy da reserva assume simulacao e orienta uso de dados ficticios", async 
   assert.match(bookingHtml, /booking\.js\?v=20260714-p4/);
 });
 
-test("painel libera check-in somente na data operacional do Acre", async () => {
+test("painel libera check-in somente na data operacional da propriedade", async () => {
   const script = await source("app.js");
 
   assert.match(script, /function operationalDate\(/);
-  assert.match(script, /timeZone:\s*"America\/Rio_Branco"/);
+  assert.match(script, /state\.bootstrap\?\.property\?\.timeZone/);
   assert.match(script, /row\.checkIn\s*===\s*operationalDate\(\)/);
   assert.match(script, /Check-in disponível somente na data de entrada/);
   assert.match(script, /reservation-action-note/);

@@ -100,7 +100,7 @@ async function bootstrapMinimum(client, seed) {
         reservation.children, reservation.nightlyRate, reservation.total, reservation.status],
     );
     await client.query(
-      "INSERT INTO reservation_rooms (id, tenant_id, property_id, reservation_id, room_id) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (tenant_id, property_id, reservation_id, room_id) DO NOTHING",
+      "INSERT INTO reservation_rooms (id, tenant_id, property_id, reservation_id, room_id) VALUES ($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING",
       [`reservation-room-${reservation.id}`, reservation.tenantId, reservation.propertyId, reservation.id, reservation.roomId],
     );
   }

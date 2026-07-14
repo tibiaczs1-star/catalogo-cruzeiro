@@ -3,7 +3,8 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { runMigrations } = require("../migrate");
+const { runMigrations, bootstrapMinimum } = require("../migrate");
+const { createSeed } = require("../seed");
 
 function migrationPool({ alreadyApplied = false } = {}) {
   const queries = [];
@@ -51,4 +52,23 @@ test("runMigrations applies SQL and records its name in the same transaction", a
     assert.doesNotMatch(queries[sqlIndex].text, /COMMIT\s*;\s*$/i);
   }
   assert.equal(queries.filter(({ text }) => /pg_advisory_xact_lock/.test(text)).length, 2);
+});
+
+test("bootstrap preserves an existing reservation-room link on every conflict", async () => {
+  const queries = [];
+  const client = {
+    async query(text, values = []) {
+      queries.push({ text: String(text), values });
+      return { rows: [], rowCount: 0 };
+    },
+  };
+
+  await bootstrapMinimum(client, createSeed("2026-07-14"));
+
+  const links = queries.filter(({ text }) => /INSERT INTO reservation_rooms/.test(text));
+  assert.ok(links.length > 0);
+  for (const { text } of links) {
+    assert.match(text, /ON CONFLICT DO NOTHING/i);
+    assert.doesNotMatch(text, /ON CONFLICT\s*\(/i);
+  }
 });
