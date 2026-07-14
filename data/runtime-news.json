@@ -1,8 +1,85 @@
 {
-  "lastAttemptAt": "2026-07-14T13:21:02.914Z",
-  "lastSuccessAt": "2026-07-14T13:21:02.915Z",
-  "source": "manual-tcu-leo-moura-acre",
+  "lastAttemptAt": "2026-07-14T14:19:42.525Z",
+  "lastSuccessAt": "2026-07-14T14:19:42.534Z",
+  "source": "manual-cruzeiro-combate-queimadas",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-cruzeiro-reforca-combate-as-queimadas",
+      "slug": "cruzeiro-reforca-combate-as-queimadas",
+      "title": "Cruzeiro reforça combate às queimadas",
+      "seoTitle": "Cruzeiro reforça combate às queimadas | Catálogo CZS",
+      "seoDescription": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T09:15:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "ContilNet / Prefeitura de Cruzeiro do Sul",
+      "sourceUrl": "https://contilnetnoticias.com.br/politica/cruzeiro-do-sul-une-seis-orgaos-para-reforcar-combate-as-queimadas/",
+      "sourceLabel": "Cruzeiro reforça combate às queimadas",
+      "lede": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "summary": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "analysis": "A ação é preventiva e reúne órgãos dos três níveis de governo para o período de estiagem.",
+      "highlights": [
+        "Órgãos alinharam prevenção e combate às queimadas.",
+        "Fiscalização e educação ambiental fazem parte do plano.",
+        "A população deve evitar fogo e denunciar ocorrências.",
+        "Bombeiros atendem pelo número 193."
+      ],
+      "development": [
+        "Representantes da Prefeitura de Cruzeiro do Sul, Corpo de Bombeiros, Imac, Ministério Público, Defesa Civil, Ibama e Sema se reuniram para alinhar ações durante o período de estiagem.",
+        "O trabalho conjunto deve reunir fiscalização, educação ambiental e resposta a incêndios florestais, rurais e urbanos, além de medidas para reduzir os impactos da fumaça.",
+        "A orientação é evitar o uso do fogo e comunicar ocorrências à Defesa Civil de Cruzeiro do Sul ou aos Bombeiros pelo número 193.",
+        "A programação operacional de cada órgão poderá ser atualizada conforme o avanço do período crítico de queimadas.",
+        "Fonte: ContilNet e Prefeitura de Cruzeiro do Sul."
+      ],
+      "imageUrl": "assets/news-manual/cruzeiro-combate-queimadas-20260714.webp",
+      "feedImageUrl": "assets/news-manual/cruzeiro-combate-queimadas-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/cruzeiro-combate-queimadas-20260714.webp",
+      "imageCredit": "Foto: Assessoria/Prefeitura de Cruzeiro do Sul via ContilNet",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2000,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "ContilNet",
+          "url": "https://contilnetnoticias.com.br/politica/cruzeiro-do-sul-une-seis-orgaos-para-reforcar-combate-as-queimadas/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "Cruzeiro reforça combate às queimadas. Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "audioNarrationTranscript": "Cruzeiro reforça combate às queimadas. Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193. Fonte: ContilNet / Prefeitura de Cruzeiro do Sul.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Representantes de órgãos públicos reunidos em Cruzeiro do Sul",
+        "caption": "Cruzeiro reforça combate às queimadas",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "Representantes da Prefeitura de Cruzeiro do Sul, Corpo de Bombeiros, Imac, Ministério Público, Defesa Civil, Ibama e Sema se reuniram para alinhar ações durante o período de estiagem.",
+        "O trabalho conjunto deve reunir fiscalização, educação ambiental e resposta a incêndios florestais, rurais e urbanos, além de medidas para reduzir os impactos da fumaça.",
+        "A orientação é evitar o uso do fogo e comunicar ocorrências à Defesa Civil de Cruzeiro do Sul ou aos Bombeiros pelo número 193.",
+        "A programação operacional de cada órgão poderá ser atualizada conforme o avanço do período crítico de queimadas.",
+        "Fonte: ContilNet e Prefeitura de Cruzeiro do Sul."
+      ]
+    },
     {
       "id": "manual-czs-tcu-apura-ong-presente-acre-leo-moura",
       "slug": "tcu-apura-ong-presente-acre-leo-moura",
@@ -27116,53 +27193,61 @@
       "editorialSpotlightReady": false,
       "editorialSurfaceTier": "remote-secondary",
       "editorialLocalTier": 0
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://g1.globo.com/politica/noticia/2026/07/11/mendonca-manda-apreender-passaporte-de-publicitario-ligado-a-daniel-vorcaro.ghtml",
-      "slug": "mendonca-manda-apreender-passaporte-de-publicitario-ligado-a-daniel-vorcaro",
-      "title": "Mendonça manda apreender passaporte de publicitário ligado a Daniel Vorcaro",
-      "eyebrow": "Politica",
-      "date": "11 de jul de 2026",
-      "publishedAt": "2026-07-11T22:47:56.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
-      "sourceName": "G1 Politica",
-      "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/11/mendonca-manda-apreender-passaporte-de-publicitario-ligado-a-daniel-vorcaro.ghtml",
-      "sourceLabel": "Mendonça manda apreender passaporte de publicitário ligado a Daniel Vorcaro",
-      "lede": "Empresário Thiago Miranda e Daniel Vorcaro Reprodução O ministro do Supremo Tribunal Federal (STF) André Mendonça determinou neste sábado (11) a apreensão do passaporte do publicitário Thiago Miranda, ligado ao dono do Banco Master, Daniel Vorcaro.",
-      "summary": "Empresário Thiago Miranda e Daniel Vorcaro Reprodução O ministro do Supremo Tribunal Federal (STF) André Mendonça determinou neste sábado (11) a apreensão do passaporte do publicitário Thiago Miranda, ligado ao dono do Banco Master, Daniel Vorcaro.",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://s2-g1.glbimg.com/vzW2HsuC3hoXG9CdQLVxGsyf3SA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/K/4tzOg9Tkmwma1zmRvJow/daniel-vorcaro-e-thiago-miranda-2-.jpg",
-      "feedImageUrl": "https://s2-g1.glbimg.com/vzW2HsuC3hoXG9CdQLVxGsyf3SA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/K/4tzOg9Tkmwma1zmRvJow/daniel-vorcaro-e-thiago-miranda-2-.jpg",
-      "sourceImageUrl": "https://s2-g1.glbimg.com/vzW2HsuC3hoXG9CdQLVxGsyf3SA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/K/4tzOg9Tkmwma1zmRvJow/daniel-vorcaro-e-thiago-miranda-2-.jpg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "id": "manual-czs-cruzeiro-reforca-combate-as-queimadas",
+      "slug": "cruzeiro-reforca-combate-as-queimadas",
+      "title": "Cruzeiro reforça combate às queimadas",
+      "seoTitle": "Cruzeiro reforça combate às queimadas | Catálogo CZS",
+      "seoDescription": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "14 de jul de 2026",
+      "publishedAt": "2026-07-14T09:15:00.000-05:00",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "ContilNet / Prefeitura de Cruzeiro do Sul",
+      "sourceUrl": "https://contilnetnoticias.com.br/politica/cruzeiro-do-sul-une-seis-orgaos-para-reforcar-combate-as-queimadas/",
+      "sourceLabel": "Cruzeiro reforça combate às queimadas",
+      "lede": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "summary": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "analysis": "A ação é preventiva e reúne órgãos dos três níveis de governo para o período de estiagem.",
+      "highlights": [
+        "Órgãos alinharam prevenção e combate às queimadas.",
+        "Fiscalização e educação ambiental fazem parte do plano.",
+        "A população deve evitar fogo e denunciar ocorrências.",
+        "Bombeiros atendem pelo número 193."
+      ],
+      "development": [
+        "Representantes da Prefeitura de Cruzeiro do Sul, Corpo de Bombeiros, Imac, Ministério Público, Defesa Civil, Ibama e Sema se reuniram para alinhar ações durante o período de estiagem.",
+        "O trabalho conjunto deve reunir fiscalização, educação ambiental e resposta a incêndios florestais, rurais e urbanos, além de medidas para reduzir os impactos da fumaça.",
+        "A orientação é evitar o uso do fogo e comunicar ocorrências à Defesa Civil de Cruzeiro do Sul ou aos Bombeiros pelo número 193.",
+        "A programação operacional de cada órgão poderá ser atualizada conforme o avanço do período crítico de queimadas.",
+        "Fonte: ContilNet e Prefeitura de Cruzeiro do Sul."
+      ],
+      "imageUrl": "assets/news-manual/cruzeiro-combate-queimadas-20260714.webp",
+      "feedImageUrl": "assets/news-manual/cruzeiro-combate-queimadas-20260714.webp",
+      "sourceImageUrl": "assets/news-manual/cruzeiro-combate-queimadas-20260714.webp",
+      "imageCredit": "Foto: Assessoria/Prefeitura de Cruzeiro do Sul via ContilNet",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
       "videoUrl": "",
-      "priority": 0,
-      "editorialPriority": "",
+      "priority": 2000,
+      "editorialPriority": "jurua-destaque",
       "crossSources": [
         {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/11/mendonca-manda-apreender-passaporte-de-publicitario-ligado-a-daniel-vorcaro.ghtml"
+          "name": "ContilNet",
+          "url": "https://contilnetnoticias.com.br/politica/cruzeiro-do-sul-une-seis-orgaos-para-reforcar-combate-as-queimadas/"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "G1 Politica",
-          "url": "https://g1.globo.com/politica/noticia/2026/07/11/mendonca-manda-apreender-passaporte-de-publicitario-ligado-a-daniel-vorcaro.ghtml"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "mendonca-manda-apreender-passaporte-de-publicitario-ligado-a-daniel-vorcaro"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Mendonça manda apreender passaporte de publicitário ligado a Daniel Vorcaro Empresário Thiago Miranda e Daniel Vorcaro Reprodução O ministro do Supremo Tribunal Federal (STF) André Mendonça determinou neste sábado (11) a apreensão do passaporte do publicitário Thiago Miranda, ligado ao dono do Banco Master, Daniel Vorcaro. A informação vem de G1 política.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Mendonça manda apreender passaporte de publicitário ligado a Daniel Vorcaro Empresário Thiago Miranda e Daniel Vorcaro Reprodução O ministro do Supremo Tribunal Federal (STF) André Mendonça determinou neste sábado (11) a apreensão do passaporte do publicitário Thiago Miranda, ligado ao dono do Banco Master, Daniel Vorcaro. A informação vem de G1 política.",
+      "alternateSlugs": [],
+      "audioNarrationText": "Cruzeiro reforça combate às queimadas. Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
+      "audioNarrationTranscript": "Cruzeiro reforça combate às queimadas. Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -27170,27 +27255,24 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Mendonça manda apreender passaporte de publicitário ligado a Daniel Vorcaro. Empresário Thiago Miranda e Daniel Vorcaro Reprodução O ministro do Supremo Tribunal Federal (STF) André Mendonça determinou neste sábado (11) a apreensão do passaporte do publicitário Thiago Miranda, ligado ao dono do Banco Master... Fonte: G1 Politica.",
+      "videoCaptionText": "Órgãos municipais, estaduais e federais alinharam ações para prevenir e combater queimadas em Cruzeiro do Sul durante a estiagem. A reunião definiu trabalho conjunto em fiscalização, educação ambiental e resposta a incêndios. A população foi orientada a evitar o uso do fogo e denunciar ocorrências à Defesa Civil ou aos Bombeiros pelo número 193. Fonte: ContilNet / Prefeitura de Cruzeiro do Sul.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Representantes de órgãos públicos reunidos em Cruzeiro do Sul",
+        "caption": "Cruzeiro reforça combate às queimadas",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
       "body": [
-        "G1 Politica publicou em 11 de jul de 2026: Mendonça manda apreender passaporte de publicitário ligado a Daniel Vorcaro.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialGate": "P1",
-      "editorialApproval": "auto-check",
-      "editorialSpotlightReady": false,
-      "editorialSurfaceTier": "remote-secondary",
-      "editorialLocalTier": 0
-    }
-  ],
-  "items": [
+        "Representantes da Prefeitura de Cruzeiro do Sul, Corpo de Bombeiros, Imac, Ministério Público, Defesa Civil, Ibama e Sema se reuniram para alinhar ações durante o período de estiagem.",
+        "O trabalho conjunto deve reunir fiscalização, educação ambiental e resposta a incêndios florestais, rurais e urbanos, além de medidas para reduzir os impactos da fumaça.",
+        "A orientação é evitar o uso do fogo e comunicar ocorrências à Defesa Civil de Cruzeiro do Sul ou aos Bombeiros pelo número 193.",
+        "A programação operacional de cada órgão poderá ser atualizada conforme o avanço do período crítico de queimadas.",
+        "Fonte: ContilNet e Prefeitura de Cruzeiro do Sul."
+      ]
+    },
     {
       "id": "manual-czs-tcu-apura-ong-presente-acre-leo-moura",
       "slug": "tcu-apura-ong-presente-acre-leo-moura",
