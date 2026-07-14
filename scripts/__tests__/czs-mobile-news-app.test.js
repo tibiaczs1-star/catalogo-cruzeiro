@@ -31,8 +31,8 @@ test("gera apenas rotas internas seguras para a leitura da noticia", () => {
   const { getArticleHref } = loadAppModule();
 
   assert.equal(getArticleHref({ slug: "chuva-no-jurua" }), "/app.html?slug=chuva-no-jurua");
-  assert.equal(getArticleHref({ slug: "../admin" }), "/app.html");
-  assert.equal(getArticleHref({ sourceUrl: "javascript:alert(1)" }), "/app.html");
+  assert.equal(getArticleHref({ slug: "../admin" }), "");
+  assert.equal(getArticleHref({ sourceUrl: "javascript:alert(1)" }), "");
 });
 
 test("reconhece video apenas quando a noticia traz midia reproduzivel", () => {
@@ -93,6 +93,10 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   assert.match(html, /id="articleBack"/);
   assert.match(js, /\/api\/news\/\$\{encodeURIComponent\(slug\)\}/);
   assert.match(js, /\/api\/news\?limit=40&lite=1&sort=latest&video=1/);
+  assert.match(js, /function ensureFeed\(/);
+  assert.match(js, /ensureFeed\(\);[\s\S]*openArticle\(initialSlug\)/);
+  assert.match(js, /if \(!currentItems\.length\) await ensureFeed\(\)/);
+  assert.match(js, /createElement\("div", "story-static"\)/);
   assert.match(html, /id="newsSearch"/);
   assert.match(html, /id="categoryFilter"/);
   assert.match(html, /aria-label="Buscar nas notícias"/);

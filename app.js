@@ -36,7 +36,7 @@
 
   function getArticleHref(item) {
     const slug = text(item?.slug).toLowerCase();
-    return SAFE_SLUG.test(slug) ? `/app.html?slug=${encodeURIComponent(slug)}` : "/app.html";
+    return SAFE_SLUG.test(slug) ? `/app.html?slug=${encodeURIComponent(slug)}` : "";
   }
 
   function hasPlayableVideo(item) {
@@ -110,9 +110,12 @@
   function createStory(item, index) {
     const article = createElement("article", index === 0 ? "story lead-story" : "story");
     article.style.animationDelay = `${Math.min(index * 28, 220)}ms`;
-    const link = createElement("a", "story-link");
-    link.href = getArticleHref(item);
-    link.setAttribute("aria-label", `Ler: ${item.title}`);
+    const href = getArticleHref(item);
+    const link = href ? createElement("a", "story-link") : createElement("div", "story-static");
+    if (href) {
+      link.href = href;
+      link.setAttribute("aria-label", `Ler: ${item.title}`);
+    }
 
     if (item.imageUrl) {
       const media = createElement("div", "story-media");
@@ -167,6 +170,7 @@
     let loadedLimit = NEWS_BATCH_SIZE;
     let totalAvailable = NEWS_BATCH_SIZE;
     let openedFromFeed = false;
+    let feedReadyPromise = null;
 
     function visibleItems() {
       const mediaItems = activeFilter === "video" ? currentItems.filter(hasPlayableVideo) : currentItems;
@@ -231,6 +235,16 @@
         });
         status.appendChild(retry);
       }
+    }
+
+    function ensureFeed() {
+      if (currentItems.length && activeFilter === "all") return Promise.resolve();
+      if (!feedReadyPromise) {
+        feedReadyPromise = fetchNews({ limit: loadedLimit }).finally(() => {
+          feedReadyPromise = null;
+        });
+      }
+      return feedReadyPromise;
     }
 
     async function fetchVideoNews() {
@@ -399,9 +413,12 @@
       openArticle(slug);
     });
 
-    articleBack.addEventListener("click", () => {
+    articleBack.addEventListener("click", async () => {
       if (openedFromFeed) history.back();
-      else showFeed({ updateUrl: true });
+      else {
+        if (!currentItems.length) await ensureFeed();
+        showFeed({ updateUrl: true });
+      }
     });
 
     window.addEventListener("popstate", () => {
@@ -414,8 +431,10 @@
     });
 
     const initialSlug = new URLSearchParams(location.search).get("slug") || "";
-    if (SAFE_SLUG.test(initialSlug)) openArticle(initialSlug);
-    else fetchNews();
+    if (SAFE_SLUG.test(initialSlug)) {
+      ensureFeed();
+      openArticle(initialSlug);
+    } else ensureFeed();
     window.setInterval(() => {
       if (document.visibilityState === "visible") fetchNews({ polling: true });
     }, POLL_INTERVAL_MS);
