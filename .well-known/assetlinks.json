@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.catalogoczs.app",
+      "sha256_cert_fingerprints": [
+        "FE:21:A5:36:2B:BB:AE:DC:09:4B:D8:75:C9:FC:33:45:54:FF:FE:A4:74:E2:43:B4:2A:9C:DB:56:A1:32:D7:AF"
+      ]
+    }
+  }
+]

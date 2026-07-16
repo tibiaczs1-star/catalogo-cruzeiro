@@ -32,6 +32,8 @@ test("shell do app declara manifesto, icones e tema", () => {
   assert.match(html, /<meta name="theme-color" content="#071a3d">/);
   assert.match(html, /<link rel="icon"[^>]+href="\/assets\/icon-192\.png"/);
   assert.match(html, /<link rel="apple-touch-icon"[^>]+href="\/assets\/icon-192\.png"/);
+  assert.match(html, /class="app-footer-brand"/);
+  assert.doesNotMatch(html, /<footer>[\s\S]*<img/);
 });
 
 test("service worker usa stale-while-revalidate no shell e rede primeiro nas noticias", () => {
@@ -81,13 +83,26 @@ test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia blo
   assert.match(html, /@media\(max-width:760px\)[\s\S]*\.android-download-bar/);
 });
 
-test("metadados iniciais nao fingem que o APK esta pronto", () => {
+test("metadados do APK publicado descrevem o arquivo real", () => {
   const metadata = JSON.parse(read("downloads/catalogo-czs-android.json"));
-  assert.deepEqual(metadata, {
-    status: "preparing",
-    versionName: "1.0.0",
-    sizeBytes: null
-  });
+  const apkPath = path.join(ROOT, "downloads", "catalogo-czs-android.apk");
+  assert.equal(fs.existsSync(apkPath), true, "APK deve existir para download");
+  assert.equal(metadata.status, "ready");
+  assert.equal(metadata.versionName, "1.0.0");
+  assert.equal(metadata.versionCode, 1);
+  assert.equal(metadata.url, "/downloads/catalogo-czs-android.apk");
+  assert.equal(metadata.sizeBytes, fs.statSync(apkPath).size);
+  assert.match(metadata.sha256, /^[a-f0-9]{64}$/);
+  assert.match(metadata.notes, /sem notificacoes push/i);
+});
+
+test("assetlinks publica a assinatura Android para TWA", () => {
+  const assetlinks = JSON.parse(read(".well-known/assetlinks.json"));
+  assert.equal(assetlinks[0].target.package_name, "com.catalogoczs.app");
+  assert.deepEqual(assetlinks[0].relation, ["delegate_permission/common.handle_all_urls"]);
+  assert.deepEqual(assetlinks[0].target.sha256_cert_fingerprints, [
+    "FE:21:A5:36:2B:BB:AE:DC:09:4B:D8:75:C9:FC:33:45:54:FF:FE:A4:74:E2:43:B4:2A:9C:DB:56:A1:32:D7:AF"
+  ]);
 });
 
 test("controle de download so habilita o APK ready que respondeu ao HEAD", () => {

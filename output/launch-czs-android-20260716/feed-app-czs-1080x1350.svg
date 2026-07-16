@@ -1,0 +1,21 @@
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="App Android do Catálogo CZS">
+  <rect width="1080" height="1350" fill="#071a3d"/>
+  <rect x="54" y="54" width="972" height="1242" rx="28" fill="#ffffff"/>
+  <rect x="110" y="112" width="860" height="412" rx="24" fill="#071a3d"/>
+  <text x="150" y="180" fill="#f0b429" font-family="Arial, sans-serif" font-size="32" font-weight="800" letter-spacing="5">LANCAMENTO ANDROID</text>
+  <text x="150" y="276" fill="#ffffff" font-family="Arial, sans-serif" font-size="82" font-weight="900">Catálogo CZS</text>
+  <text x="150" y="368" fill="#ffffff" font-family="Arial, sans-serif" font-size="76" font-weight="900">no seu celular</text>
+  <text x="150" y="448" fill="#cdd7e6" font-family="Arial, sans-serif" font-size="34" font-weight="700">Noticias e videos do Vale do Jurua</text>
+  <rect x="160" y="610" width="760" height="430" rx="46" fill="#101827"/>
+  <rect x="198" y="656" width="684" height="338" rx="28" fill="#f4f6f9"/>
+  <rect x="234" y="698" width="450" height="30" rx="15" fill="#d9222a"/>
+  <rect x="234" y="758" width="590" height="28" rx="14" fill="#071a3d"/>
+  <rect x="234" y="812" width="516" height="22" rx="11" fill="#5b6574"/>
+  <rect x="234" y="870" width="220" height="102" rx="12" fill="#dfe4eb"/>
+  <rect x="486" y="870" width="338" height="22" rx="11" fill="#071a3d"/>
+  <rect x="486" y="914" width="270" height="20" rx="10" fill="#5b6574"/>
+  <circle cx="540" cy="1078" r="24" fill="#f0b429"/>
+  <text x="110" y="1148" fill="#071a3d" font-family="Arial, sans-serif" font-size="44" font-weight="900">Baixe pelo site do Catálogo CZS</text>
+  <text x="110" y="1210" fill="#5b6574" font-family="Arial, sans-serif" font-size="30" font-weight="700">Leve. Direto. Sem notificacao push por enquanto.</text>
+  <text x="110" y="1260" fill="#071a3d" font-family="Arial, sans-serif" font-size="26" font-weight="800">Pesamos fontes. Procuramos a verdade.</text>
+</svg>

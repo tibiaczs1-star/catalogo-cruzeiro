@@ -56,3 +56,14 @@ startup-modal-*.png
 # OS
 Thumbs.db
 Desktop.ini
+
+# Android/TWA: artefatos gerados e segredos nunca entram no Git
+android/.gradle/
+android/app/build/
+android/build/
+android/*.apk
+android/*.aab
+android/*.keystore
+android/local.properties
+*.jks
+*.keystore

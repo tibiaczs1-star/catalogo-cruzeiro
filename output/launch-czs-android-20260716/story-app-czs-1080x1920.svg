@@ -1,0 +1,24 @@
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Baixe o app Android do Catálogo CZS">
+  <rect width="1080" height="1920" fill="#071a3d"/>
+  <circle cx="876" cy="192" r="118" fill="#f0b429" opacity=".18"/>
+  <circle cx="112" cy="1584" r="160" fill="#d9222a" opacity=".14"/>
+  <text x="76" y="160" fill="#f0b429" font-family="Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="6">CATALOGO CZS</text>
+  <text x="76" y="320" fill="#ffffff" font-family="Arial, sans-serif" font-size="104" font-weight="900">Agora no</text>
+  <text x="76" y="432" fill="#ffffff" font-family="Arial, sans-serif" font-size="104" font-weight="900">Android</text>
+  <text x="76" y="526" fill="#cdd7e6" font-family="Arial, sans-serif" font-size="40" font-weight="700">Noticias e videos do Vale do Jurua</text>
+  <rect x="180" y="650" width="720" height="748" rx="70" fill="#101827"/>
+  <rect x="226" y="730" width="628" height="562" rx="36" fill="#ffffff"/>
+  <rect x="270" y="784" width="302" height="32" rx="16" fill="#d9222a"/>
+  <text x="270" y="900" fill="#071a3d" font-family="Arial, sans-serif" font-size="64" font-weight="900">O que acontece</text>
+  <text x="270" y="974" fill="#071a3d" font-family="Arial, sans-serif" font-size="64" font-weight="900">perto de voce.</text>
+  <rect x="270" y="1060" width="238" height="112" rx="18" fill="#dfe4eb"/>
+  <rect x="536" y="1060" width="250" height="24" rx="12" fill="#071a3d"/>
+  <rect x="536" y="1106" width="206" height="20" rx="10" fill="#5b6574"/>
+  <rect x="536" y="1150" width="168" height="20" rx="10" fill="#5b6574"/>
+  <circle cx="540" cy="1348" r="26" fill="#f0b429"/>
+  <text x="76" y="1548" fill="#ffffff" font-family="Arial, sans-serif" font-size="58" font-weight="900">Baixe no site</text>
+  <text x="76" y="1620" fill="#cdd7e6" font-family="Arial, sans-serif" font-size="36" font-weight="700">Sem notificacao push nesta versao.</text>
+  <text x="76" y="1690" fill="#cdd7e6" font-family="Arial, sans-serif" font-size="36" font-weight="700">O app mostra o que o jornal publicar.</text>
+  <rect x="76" y="1766" width="928" height="74" rx="18" fill="#ffffff"/>
+  <text x="128" y="1816" fill="#071a3d" font-family="Arial, sans-serif" font-size="34" font-weight="900">catalogo-cruzeiro-web.onrender.com</text>
+</svg>

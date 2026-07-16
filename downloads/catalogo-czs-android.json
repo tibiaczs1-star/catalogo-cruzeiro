@@ -1,5 +1,11 @@
 {
-  "status": "preparing",
+  "status": "ready",
   "versionName": "1.0.0",
-  "sizeBytes": null
+  "versionCode": 1,
+  "fileName": "catalogo-czs-android.apk",
+  "url": "/downloads/catalogo-czs-android.apk",
+  "sizeBytes": 991349,
+  "sha256": "9aedb11c616e98a61fe82cb9c04eefa5c7b565e26e2fd9ce812d5ed71572f4fd",
+  "generatedAt": "2026-07-16T06:36:26.2639673Z",
+  "notes": "Android sem notificacoes push nesta versao; noticias novas aparecem apenas dentro do app."
 }

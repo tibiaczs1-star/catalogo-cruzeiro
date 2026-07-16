@@ -1,7 +1,7 @@
 "use strict";
 
 const APP_CACHE_PREFIX = "czs-android-app-";
-const APP_CACHE_VERSION = "20260714-2";
+const APP_CACHE_VERSION = "20260716-1";
 const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-${APP_CACHE_VERSION}`;
 const NEWS_CACHE = `${APP_CACHE_PREFIX}news-${APP_CACHE_VERSION}`;
 const SHELL_ASSETS = [
