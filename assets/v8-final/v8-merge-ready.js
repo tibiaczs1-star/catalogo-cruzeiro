@@ -5158,10 +5158,14 @@
 
     const setMode = () => {
       const rect = footer.getBoundingClientRect();
+      const heroRect = $("#leadStory")?.getBoundingClientRect();
       const nearFooter = rect.top <= window.innerHeight * 0.58 && rect.bottom > 120;
       const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 96;
       const mode = nearFooter || atPageEnd ? "home" : "footer";
+      const floatBand = window.innerHeight - 72;
+      const overlapsHero = mode === "footer" && heroRect && heroRect.top < window.innerHeight && heroRect.bottom > floatBand;
       button.dataset.mode = mode;
+      button.classList.toggle("is-over-hero", Boolean(overlapsHero));
       button.innerHTML = `${floatArrow(mode === "home" ? "up" : "down")}<span>${mode === "home" ? "Topo" : "Rodapé"}<small>${mode === "home" ? "Home" : "Mapa da página"}</small></span>`;
       button.setAttribute("aria-label", mode === "home" ? "Voltar para a home" : "Ir direto ao rodapé e mapa da página");
     };
