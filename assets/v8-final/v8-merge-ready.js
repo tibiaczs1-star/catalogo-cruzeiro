@@ -13,6 +13,7 @@
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
+  const INTRO_DAILY_KEY = "czs-v8-intro-last-open-day";
   const ENTRY_POPUP_SESSION_KEY = "czs-v8-entry-popup-seen-session";
   const ENTRY_POPUP_INTERVAL_MS = 24 * 60 * 60 * 1000;
   const SOCIAL_EMAIL = "juniorclovissampaio@gmail.com";
@@ -2145,24 +2146,6 @@
 
   function renderNorteNativeAfterHero() {
     $("#v8NorteAfterHero")?.remove();
-    const hero = $(".hero-grid");
-    if (!hero?.parentElement) return;
-    const ad = sponsorAdFor("home", 0);
-    hero.insertAdjacentHTML("afterend", `
-      <section class="v8-norte-after-hero" id="v8NorteAfterHero" aria-label="Patrocinador oficial Norte Ultra Fibra" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
-        <a class="v8-norte-after-hero-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp">
-          ${sponsorImageMarkup(ad, { loading: "eager" })}
-        </a>
-        <div class="v8-norte-after-hero-copy">
-          <span>Patrocinador oficial do CZS</span>
-          <h2>Norte Ultra Fibra</h2>
-          <p>Contratação e suporte direto pelo WhatsApp, sem interromper a leitura.</p>
-          <div class="actions">
-            <a class="btn green" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
-            <a class="btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          </div>
-        </div>
-      </section>`);
   }
 
   function renderSponsorSideRail() {
@@ -3884,7 +3867,7 @@
     const entries = [];
     let videoIndex = 0;
     let storyCount = 0;
-    let nextSponsorAt = 5;
+    let nextSponsorAt = 3;
     const pushVideo = () => {
       while (videoIndex < playlist.length) {
         const item = playlist[videoIndex++];
@@ -3967,14 +3950,14 @@
   function renderContinuousSponsorCard(entry = {}, position = 0) {
     const ad = sponsorAdFor("feed", entry.adIndex || position);
     return `
-      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
+      <article class="news-card v8-continuous-card v8-organic-sponsor v8-native-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
         <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
           ${sponsorImageMarkup(ad)}
         </a>
         <div class="v8-organic-sponsor-copy">
           <span class="badge">Patrocinado</span>
           <h3>Norte Ultra Fibra</h3>
-          <small>Oferta CZS • WhatsApp (68) 99209-6037</small>
+          <small>Internet local no Juruá • WhatsApp (68) 99209-6037</small>
           <div class="actions">
             <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="small-btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
@@ -4532,10 +4515,11 @@
     const params = new URLSearchParams(window.location.search || "");
     const introRequested = params.get("forceIntro") === "1" || params.get("intro") === "1";
     const forceIntro = introRequested;
-    const skipIntro = params.get("skipIntro") === "1" || !introRequested;
+    const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Rio_Branco" });
+    const skipIntro = params.get("skipIntro") === "1";
     let seenIntro = false;
     try {
-      seenIntro = sessionStorage.getItem(INTRO_SESSION_KEY) === V8_BOOT_VERSION;
+      seenIntro = localStorage.getItem(INTRO_DAILY_KEY) === today;
     } catch (_) {
       seenIntro = false;
     }
@@ -4954,6 +4938,7 @@
         document.body.classList.remove("v8-intro-running", "v8-intro-light-release", "v8-intro-handoff", "v8-intro-puzzle-active");
         try {
           sessionStorage.setItem(INTRO_SESSION_KEY, V8_BOOT_VERSION);
+          localStorage.setItem(INTRO_DAILY_KEY, today);
         } catch (_) {}
         setTimeout(showEntryPopup, 240);
       }, puzzleTransitionMs + 80);

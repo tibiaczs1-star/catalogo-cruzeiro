@@ -11,13 +11,19 @@
 (function(){
   var root=document.documentElement;
   var params=new URLSearchParams(location.search);
+  var dailyKey="czs-v8-intro-last-open-day";
+  var today=new Date().toLocaleDateString("en-CA",{timeZone:"America/Rio_Branco"});
   var requested=params.get("forceIntro")==="1"||params.get("intro")==="1";
-  var skip=params.get("skipIntro")==="1"||!requested;
-  function release(){root.classList.remove("czs-intro-lock");root.classList.add("czs-intro-release")}
+  var disabled=params.get("skipIntro")==="1";
+  var seenToday=false;
+  try{seenToday=localStorage.getItem(dailyKey)===today}catch(_){}
+  var showIntro=!disabled&&(requested||!seenToday);
+  function release(){root.classList.remove("czs-intro-lock");root.classList.add("czs-intro-release");if(showIntro){try{localStorage.setItem(dailyKey,today)}catch(_){}}}
   window.__czsReleaseIntroLock=release;
-  root.classList.add(skip?"czs-intro-release":"czs-intro-lock");
-  if(skip)root.classList.add("czs-skip-intro");
-  if(skip)return;
+  root.classList.add(showIntro?"czs-intro-lock":"czs-intro-release");
+  if(showIntro)root.classList.add("czs-daily-intro");
+  if(!showIntro)root.classList.add("czs-skip-intro");
+  if(!showIntro)return;
 })();
 </script>
 <style>
@@ -252,7 +258,7 @@ body{background:#F8FAFC!important;color:#111827!important;font-family:var(--sans
 <style id="android-download-styles">
 .android-download-bar{width:100%;margin:18px 0;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid #dbe4ef;border-radius:16px;background:linear-gradient(135deg,#071a3d,#123f78);box-shadow:0 14px 36px rgba(7,26,61,.18);color:#fff}.android-download-copy{display:grid;gap:3px}.android-download-bar p{margin:0;font:700 15px/1.35 Inter,system-ui,sans-serif}.android-download-bar small{color:rgba(255,255,255,.76);font:600 12px/1.3 Inter,system-ui,sans-serif}.android-download-copy a{color:#fff;text-decoration:underline;font-weight:800}.android-download-bar>a{flex:0 0 auto;display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:10px 16px;border-radius:12px;background:#fff;color:#071a3d;font:800 14px/1 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.16)}.android-download-bar>a[aria-disabled="true"]{cursor:not-allowed;opacity:.62;box-shadow:none}.android-download-bar>a:focus-visible{outline:3px solid #f2cf78;outline-offset:3px}.instagram-site-highlight{margin:0 0 18px;padding:15px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid #f4c5cb;border-radius:16px;background:linear-gradient(135deg,#fff7f8,#fff);box-shadow:0 12px 30px rgba(15,23,42,.08)}.instagram-site-highlight span{display:block;color:#d9222a;font:900 11px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}.instagram-site-highlight strong{display:block;margin-top:4px;color:#071a3d;font:900 22px/1 Inter,system-ui,sans-serif}.instagram-site-highlight p{margin:4px 0 0;color:#5b6574;font:700 13px/1.4 Inter,system-ui,sans-serif}.instagram-site-highlight a{flex:0 0 auto;display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:0 16px;border-radius:999px;background:#d9222a;color:#fff;font:900 14px/1 Inter,system-ui,sans-serif;text-decoration:none}@media(max-width:760px){.android-download-bar,.instagram-site-highlight{padding:12px;align-items:stretch;flex-direction:column}.android-download-bar p,.android-download-bar small,.instagram-site-highlight{text-align:center}.android-download-bar p{font-size:14px}.android-download-bar>a,.instagram-site-highlight a{width:100%}}
 </style>
-<link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=20260716-layout-continuity-v1">
+<link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=20260716-native-sponsor-daily-intro-v1">
 <script src="/android-download.js?v=20260714-1" defer></script>
 </head>
 <body class="v8-merge-ready">
@@ -511,9 +517,12 @@ const procurementSubject=n=>{const title=String(n.title||'').trim();const summar
 const procurementList=n=>`<ul class="v8-procurement-list" aria-label="Resumo da licitação"><li><b>Processo</b><span>${esc(procurementNumber(n))}</span></li><li><b>Órgão</b><span>${esc(n.sourceName||'Fonte oficial')}</span></li><li><b>Publicado</b><span>${esc(n.date||'Atualizado')}</span></li><li><b>Objeto</b><span>${esc(procurementSubject(n))}</span></li></ul>`;
 function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.classList.remove('on'),2200)}
 function storyCard(n,i){const featured=i%11===0?' featured':'';const procurement=isProcurementStory(n);return `<article class="news-card${featured}${procurement?' is-procurement-card':''}"><a href="${urlFor(n)}" aria-label="Abrir matéria: ${esc(n.title)}"><div class="media-frame"><img loading="lazy" src="${esc(imgFor(n))}" alt="Imagem da notícia: ${esc(n.title)}" onerror="this.closest('.media-frame')?.classList.add('v8-img-missing');this.remove()"></div><div class="copy"><span class="badge ${isUrgent(n)?'urgent':''}">${esc(isUrgent(n)?'Urgente':n.category||'Notícias')}</span><h3>${esc(n.title)}</h3>${procurement?procurementList(n):`<p>${esc(n.summary||n.subtitle)}</p>`}<div class="meta"><span>${esc(n.sourceName)}</span><span>${esc(n.date||'Atualizado')}</span><span>${n.readMin||3} min</span></div></a><div class="actions"><button class="small-btn shareBtn" data-url="${urlFor(n)}">Compartilhar</button><a class="small-btn" href="${urlFor(n)}">Ler</a><button class="small-btn reportBtn">Informar erro</button></div></div></article>`}
+const norteHref=`https://wa.me/5568992096037?text=${encodeURIComponent('Oi, Norte Ultra Fibra. Vim pelo Catálogo CZS e quero contratar internet.')}`;
+function feedSponsorCard(pos=0){return `<article class="news-card v8-organic-sponsor v8-native-sponsor v8-main-feed-sponsor" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${pos}" data-v8-ad-id="main-feed-natural"><a class="v8-organic-sponsor-media" href="${norteHref}" target="_blank" rel="noopener" aria-label="Falar com Norte Ultra Fibra pelo WhatsApp"><img src="assets/sponsors/norte-ultra-fibra/planos-500-vertical.jpg" alt="Norte Ultra Fibra - planos de internet" loading="lazy" decoding="async"></a><div class="v8-organic-sponsor-copy"><span class="badge">Patrocinado</span><h3>Norte Ultra Fibra</h3><small>Internet local no Juruá • WhatsApp (68) 99209-6037</small><div class="actions"><a class="small-btn" href="${norteHref}" target="_blank" rel="noopener">Contratar internet</a></div></div></article>`}
+function storyCardWithNativeSponsor(n,i){return `${storyCard(n,i)}${i===5?feedSponsorCard(i+1):''}`}
 function row(n){return `<a class="story-row" href="${urlFor(n)}"><img loading="lazy" src="${esc(imgFor(n))}" alt="${esc(n.title)}" onerror="this.remove()"><div><span class="badge ${isUrgent(n)?'urgent':''}">${esc(n.category)}</span><h3>${esc(n.title)}</h3><div class="meta"><span>${esc(n.sourceName)}</span><span>${esc(n.date)}</span></div></div></a>`}
 function applyFilter(){filtered=stories.filter(n=>(currentFilter==='Tudo'||(n.category||'').toLowerCase().includes(currentFilter.toLowerCase())||(n.categoryKey||'').toLowerCase().includes(currentFilter.toLowerCase()))&&(!query||[n.title,n.summary,n.subtitle,n.category,n.sourceName].join(' ').toLowerCase().includes(query.toLowerCase())));rendered=0;$('#feedGrid').innerHTML='';loadMore();}
-function loadMore(){const grid=$('#feedGrid');const slice=filtered.slice(rendered,rendered+step);if(!slice.length){$('#feedSentinel').style.display='none';return}grid.insertAdjacentHTML('beforeend',slice.map((n,i)=>storyCard(n,rendered+i)).join(''));rendered+=slice.length;$('#feedSentinel').style.display=rendered<filtered.length?'block':'none';bindDynamic();}
+function loadMore(){const grid=$('#feedGrid');const slice=filtered.slice(rendered,rendered+step);if(!slice.length){$('#feedSentinel').style.display='none';return}grid.insertAdjacentHTML('beforeend',slice.map((n,i)=>storyCardWithNativeSponsor(n,rendered+i)).join(''));rendered+=slice.length;$('#feedSentinel').style.display=rendered<filtered.length?'block':'none';bindDynamic();}
 function bindDynamic(){$$('.shareBtn').forEach(b=>b.onclick=e=>{e.preventDefault();navigator.clipboard?.writeText(b.dataset.url);toast('Link copiado')});$$('.reportBtn').forEach(b=>b.onclick=e=>{e.preventDefault();toast('Aviso enviado para a redação')})}
 function renderTicker(){const urgent=stories.filter(isUrgent).slice(0,8), normal=stories.slice(0,22);const list=[...urgent,...normal];const html=list.concat(list).map(n=>`<a class="ticker-item" href="${urlFor(n)}"><span class="badge ${isUrgent(n)?'urgent':''}">${esc(isUrgent(n)?'Urgente':n.category)}</span><span>${esc(n.title)}</span></a>`).join('');$('#tickerTrack').innerHTML=html;let down=false,start=0,scroll=0;const t=$('#breakingTicker');t.addEventListener('pointerdown',e=>{down=true;start=e.clientX;scroll=t.scrollLeft;t.classList.add('dragging')});addEventListener('pointerup',()=>{down=false;t.classList.remove('dragging')});t.addEventListener('pointermove',e=>{if(!down)return;t.scrollLeft=scroll-(e.clientX-start)})}
 function renderTop(){const lead=stories[0];$('#leadStory').innerHTML=`<div class="lead-image" style="background-image:url('${esc(imgFor(lead))}')"></div><div class="lead-copy"><span class="badge ${isUrgent(lead)?'urgent':''}">${esc(lead.category)}</span><h1>${esc(lead.title)}</h1><p>${esc(lead.subtitle||lead.summary)}</p><div class="meta"><span>${esc(lead.sourceName)}</span><span>${esc(lead.date)}</span><span>${lead.readMin} min de leitura</span></div><div class="actions"><a class="btn" href="${urlFor(lead)}">Leia matéria completa</a><a class="btn ghost" href="${LIVE}/arquivo.html">Arquivo</a></div></div>`;$('#heroSide').innerHTML=stories.slice(1,6).map(row).join('');$('#wireList').innerHTML=stories.slice(6,12).map(row).join('');const f=stories[16]||stories[2];const continuation=stories.slice(23,29).map(n=>`<a class="continuity-row" href="${urlFor(n)}"><img loading="lazy" src="${esc(imgFor(n))}" alt="${esc(n.title)}"><span><b>${esc(n.title)}</b><small>${esc(n.category||'Notícias')} • ${esc(n.date||'Atualizado')}</small></span></a>`).join('');$('#editorialFeature').innerHTML=`<a class="feature-main" href="${urlFor(f)}"><img loading="lazy" src="${esc(imgFor(f))}" alt="${esc(f.title)}"><div class="copy"><span class="badge">Destaque editorial</span><h2>${esc(f.title)}</h2><p>${esc(f.summary||f.subtitle)}</p><div class="actions"><span class="meta">${esc(f.sourceName)} • ${esc(f.date)}</span><span class="btn ghost">Abrir artigo</span></div></div></a><div class="feature-continuity"><div class="feature-continuity-title">Mais fluxo sem buraco</div>${continuation}</div>`;$('#mostRead .mini-list').innerHTML=stories.slice(17,23).map((n,i)=>`<a href="${urlFor(n)}">${i+1}. ${esc(n.title)}</a>`).join('');$('#trending .mini-list').innerHTML=['Prefeitura','Educação','Esporte','Tempo','Comunidade','Economia'].map(k=>`<a href="#feed" data-filterlink="${k}">${k}</a>`).join('');}
@@ -632,7 +641,7 @@ loadMore=function(){
     $('#fullSiteFooter')?.classList.add('revealed');
     return;
   }
-  grid.insertAdjacentHTML('beforeend',slice.map((n,i)=>storyCard(n,rendered+i)).join(''));
+  grid.insertAdjacentHTML('beforeend',slice.map((n,i)=>storyCardWithNativeSponsor(n,rendered+i)).join(''));
   rendered+=slice.length;
   const sentinel=$('#feedSentinel');
   if(sentinel)sentinel.style.display=rendered<filtered.length?'block':'none';
@@ -791,6 +800,6 @@ window.__czsLegacyInlineLoaderSkipped = true;
 
 initFooterReveal();
 </script>
-  <script defer src="assets/v8-final/v8-merge-ready.js?v=20260716-layout-continuity-v1"></script>
+  <script defer src="assets/v8-final/v8-merge-ready.js?v=20260716-native-sponsor-daily-intro-v1"></script>
 </body>
 </html>
