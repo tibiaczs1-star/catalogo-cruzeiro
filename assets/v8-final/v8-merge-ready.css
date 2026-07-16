@@ -13594,3 +13594,259 @@ body.v8-merge-ready .v8-story-capture-note {
     white-space: nowrap !important;
   }
 }
+/* 20260716: hero mais contínuo e patrocinador Norte proporcional */
+body.v8-merge-ready .v8-live-hero {
+  min-height: clamp(360px, 28vw, 470px) !important;
+}
+
+body.v8-merge-ready .v8-hero-copy {
+  justify-content: center !important;
+  padding-bottom: clamp(20px, 2vw, 30px) !important;
+}
+
+body.v8-merge-ready .v8-hero-controls {
+  display: grid !important;
+  grid-template-columns: 34px auto auto auto 34px 1fr !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 100% !important;
+  margin-top: 6px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid rgba(203, 220, 237, .72) !important;
+}
+
+body.v8-merge-ready .v8-hero-controls .v8-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 4px !important;
+  opacity: .92 !important;
+}
+
+body.v8-merge-ready .v8-hero-controls .btn {
+  min-height: 34px !important;
+  padding: 0 10px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+
+body.v8-merge-ready .v8-hero-controls .btn.ghost {
+  border-color: transparent !important;
+  background: transparent !important;
+  color: #31415d !important;
+}
+
+body.v8-merge-ready .v8-hero-controls .btn.ghost:hover {
+  background: #f4f7fb !important;
+  color: var(--v8-blue) !important;
+}
+
+body.v8-merge-ready .v8-hero-controls [data-v8-read] {
+  background: var(--v8-blue-dark) !important;
+  color: #fff !important;
+}
+
+body.v8-merge-ready .v8-hero-dots {
+  justify-self: start !important;
+  align-items: center !important;
+  margin-left: 4px !important;
+  gap: 5px !important;
+}
+
+body.v8-merge-ready .v8-hero-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 999px !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero {
+  grid-template-columns: minmax(210px, 30%) minmax(0, 1fr) !important;
+  gap: clamp(14px, 1.5vw, 22px) !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  margin: 4px 0 18px !important;
+  padding: clamp(10px, 1.3vw, 16px) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 24px rgba(7, 26, 59, .08) !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-media {
+  max-height: 188px !important;
+  min-height: 0 !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-media img {
+  max-height: 188px !important;
+  object-fit: contain !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy {
+  gap: 7px !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy h2 {
+  font-size: clamp(22px, 1.9vw, 34px) !important;
+  line-height: 1 !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy p {
+  max-width: 560px !important;
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+
+body.v8-merge-ready .v8-norte-after-hero-copy .actions .btn {
+  min-height: 34px !important;
+  padding: 0 12px !important;
+  font-size: 11px !important;
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready .v8-live-hero {
+    min-height: 0 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls {
+    grid-template-columns: 34px 1fr 34px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls .shareBtn,
+  body.v8-merge-ready .v8-hero-controls [data-v8-cheffe] {
+    grid-column: span 1 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-read] {
+    grid-column: 2 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-controls [data-v8-hero-next] {
+    grid-column: 3 !important;
+  }
+
+  body.v8-merge-ready .v8-hero-dots {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+  }
+
+  body.v8-merge-ready .v8-norte-after-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready .v8-norte-after-hero-media,
+  body.v8-merge-ready .v8-norte-after-hero-media img {
+    max-height: 220px !important;
+  }
+}
+
+/* 20260716: ticker vivo, sem corte seco nem item congelado */
+body.v8-merge-ready .ticker-wrap {
+  overflow: hidden !important;
+  border-top: 3px solid var(--v8-yellow) !important;
+}
+
+body.v8-merge-ready #breakingTicker {
+  overflow: hidden !important;
+  min-height: 56px !important;
+  cursor: grab !important;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent) !important;
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent) !important;
+}
+
+body.v8-merge-ready #tickerTrack {
+  display: flex !important;
+  width: max-content !important;
+  max-width: none !important;
+  min-width: max-content !important;
+  overflow: visible !important;
+  animation: v8TickerMarquee 48s linear infinite !important;
+  transform: translate3d(0, 0, 0);
+  will-change: transform !important;
+}
+
+body.v8-merge-ready #breakingTicker:hover #tickerTrack,
+body.v8-merge-ready #breakingTicker:focus-within #tickerTrack,
+body.v8-merge-ready #breakingTicker.dragging #tickerTrack {
+  animation-play-state: paused !important;
+}
+
+body.v8-merge-ready #tickerTrack .ticker-item,
+body.v8-merge-ready .ticker-item {
+  flex: 0 0 auto !important;
+  width: clamp(330px, 25vw, 540px) !important;
+  min-width: clamp(330px, 25vw, 540px) !important;
+  max-width: none !important;
+  min-height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 16px !important;
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+body.v8-merge-ready #tickerTrack .ticker-item b,
+body.v8-merge-ready .ticker-item b {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 98px !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  font-size: clamp(10px, 0.68vw, 12px) !important;
+  line-height: 1.08 !important;
+}
+
+body.v8-merge-ready #tickerTrack .ticker-item span,
+body.v8-merge-ready .ticker-item span {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  font-size: clamp(12px, 0.86vw, 15px) !important;
+  line-height: 1.13 !important;
+  letter-spacing: -0.015em !important;
+}
+
+@keyframes v8TickerMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready #breakingTicker {
+    min-height: 52px !important;
+  }
+
+  body.v8-merge-ready #tickerTrack {
+    animation-duration: 38s !important;
+  }
+
+  body.v8-merge-ready #tickerTrack .ticker-item,
+  body.v8-merge-ready .ticker-item {
+    width: min(82vw, 370px) !important;
+    min-width: min(82vw, 370px) !important;
+    min-height: 52px !important;
+    padding: 9px 12px !important;
+    gap: 8px !important;
+  }
+
+  body.v8-merge-ready #tickerTrack .ticker-item b,
+  body.v8-merge-ready .ticker-item b {
+    max-width: 76px !important;
+    font-size: 10px !important;
+  }
+
+  body.v8-merge-ready #tickerTrack .ticker-item span,
+  body.v8-merge-ready .ticker-item span {
+    font-size: 12px !important;
+    line-height: 1.12 !important;
+  }
+}

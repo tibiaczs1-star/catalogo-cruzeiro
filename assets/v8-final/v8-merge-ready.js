@@ -1320,6 +1320,33 @@
         </a>`).join("");
       legacyTrack.innerHTML = legacyItems + legacyItems;
     }
+    startLegacyTickerMarquee(legacyTrack);
+  }
+
+  function startLegacyTickerMarquee(track) {
+    if (!track || track.dataset.v8TickerMarquee === "1") return;
+    const viewport = track.closest("#breakingTicker") || track.parentElement;
+    if (!viewport) return;
+    track.dataset.v8TickerMarquee = "1";
+    track.style.animation = "none";
+    track.style.transform = "none";
+    track.style.willChange = "auto";
+    viewport.style.overflowX = "hidden";
+    let last = 0;
+    const pxPerSecond = Math.max(28, Math.min(74, (viewport.clientWidth || 1200) / 34));
+    const tick = (time) => {
+      const paused = viewport.matches(":hover") || viewport.classList.contains("dragging");
+      if (!last) last = time;
+      const delta = Math.min(64, time - last);
+      last = time;
+      const half = Math.max(1, track.scrollWidth / 2);
+      if (!paused && half > viewport.clientWidth) {
+        const next = viewport.scrollLeft + (delta / 1000) * pxPerSecond;
+        viewport.scrollLeft = next >= half ? next - half : next;
+      }
+      window.requestAnimationFrame(tick);
+    };
+    window.requestAnimationFrame(tick);
   }
 
   function decorateBrandMarks() {
@@ -2364,7 +2391,7 @@
         id: "cheffe-call-reuniao",
         title: "Cheffe Call Reunião",
         label: "Variação",
-        text: "ambiente visual para briefing, revisão coletiva e decisões editoriais.",
+        text: "sala visual para alinhar pauta, revisar informações e decidir próximos passos.",
         img: "",
         bg: "/assets/cheffe-call-meeting-theater-ai.png",
         href: "#infosGerais",

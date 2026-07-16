@@ -1,162 +1,162 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-07-02T17:46:01.629Z
-Escopo: 360/502 itens recentes.
+Gerado em: 2026-07-16T17:10:44.460Z
+Escopo: 360/505 itens recentes.
 
 ## Resumo
-- Gates: P0 74, P1 217, P2 69
+- Gates: P0 74, P1 164, P2 122
 - Aprovacao humana exigida: 74
 - Pendencias de fonte: 74
-- Pendencias visuais: 296
+- Pendencias visuais: 169
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
+- P0 human-approval: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
+- P0 ide-fix: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
+- P0 ide-fix: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
+- P0 human-approval: Ônibus com passageiros cai em rio em porto de Barcarena, no Pará; bombeiros fazem buscas
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
+- P0 ide-fix: Ônibus com passageiros cai em rio em porto de Barcarena, no Pará; bombeiros fazem buscas
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
+- P0 ide-fix: Ônibus com passageiros cai em rio em porto de Barcarena, no Pará; bombeiros fazem buscas
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
+- P0 human-approval: Ex-sargento tocantinense preso com cocaína em avião da FAB que integrava comitiva presidencial é condenado pela Justiça Militar
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
+- P0 ide-fix: Ex-sargento tocantinense preso com cocaína em avião da FAB que integrava comitiva presidencial é condenado pela Justiça Militar
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
+- P0 ide-fix: Ex-sargento tocantinense preso com cocaína em avião da FAB que integrava comitiva presidencial é condenado pela Justiça Militar
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Pastor é condenado a mais de 19 anos de prisão por tentar matar ex-esposa no Acre
+- P0 human-approval: Colisão entre bicicleta e ônibus deixa duas feridas em Rio Branco; jovem de 18 anos é entubada
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Pastor é condenado a mais de 19 anos de prisão por tentar matar ex-esposa no Acre
+- P0 ide-fix: Colisão entre bicicleta e ônibus deixa duas feridas em Rio Branco; jovem de 18 anos é entubada
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Pastor é condenado a mais de 19 anos de prisão por tentar matar ex-esposa no Acre
+- P0 ide-fix: Colisão entre bicicleta e ônibus deixa duas feridas em Rio Branco; jovem de 18 anos é entubada
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Criança de 9 anos é atropelada por ônibus na Estrada do Calafate, em Rio Branco
+- P0 human-approval: PM do Acre compra R$ 1,67 milhão em munições
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Criança de 9 anos é atropelada por ônibus na Estrada do Calafate, em Rio Branco
+- P0 ide-fix: PM do Acre compra R$ 1,67 milhão em munições
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Criança de 9 anos é atropelada por ônibus na Estrada do Calafate, em Rio Branco
+- P0 ide-fix: PM do Acre compra R$ 1,67 milhão em munições
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Chuvas fortes colocam municípios do Acre em alerta nesta quinta, aponta Inmet
+- P0 human-approval: Caso em Roraima reforça alerta sobre abuso de confiança e violência contra adolescentes
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Chuvas fortes colocam municípios do Acre em alerta nesta quinta, aponta Inmet
+- P0 ide-fix: Caso em Roraima reforça alerta sobre abuso de confiança e violência contra adolescentes
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Chuvas fortes colocam municípios do Acre em alerta nesta quinta, aponta Inmet
+- P0 ide-fix: Caso em Roraima reforça alerta sobre abuso de confiança e violência contra adolescentes
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Polícia prende “Vingadora” durante operação no bairro Papoco, em Rio Branco
+- P0 human-approval: Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Polícia prende “Vingadora” durante operação no bairro Papoco, em Rio Branco
+- P0 ide-fix: Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Polícia prende “Vingadora” durante operação no bairro Papoco, em Rio Branco
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Acre tem menor número de queimadas em sete anos, mostra levantamento
+- P0 human-approval: Quem era a empresária que morreu após luta contra o câncer no Acre?
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Acre tem menor número de queimadas em sete anos, mostra levantamento
+- P0 ide-fix: Quem era a empresária que morreu após luta contra o câncer no Acre?
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acre tem menor número de queimadas em sete anos, mostra levantamento
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
-  - Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos: veja os pontos principais
-  - Entenda quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
-  - Jurua Online informa: Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
-- Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização
-  - Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização: veja os p
-  - Entenda vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização
-  - Jurua Online informa: Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem 
-- Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia
-  - Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Tailândia: veja os pon
-  - O que se sabe sobre criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na Ta
-  - Jurua Online informa: Criança de 11 anos atropela grupo de monges durante peregrinação e deixa oito mortos na 
-- Britânica descobre 38 parasitas no cérebro anos após viagem à Índia
-  - Britânica descobre 38 parasitas no cérebro anos após viagem à Índia: veja os pontos principais
-  - Entenda britânica descobre 38 parasitas no cérebro anos após viagem à Índia
-  - Jurua Online informa: Britânica descobre 38 parasitas no cérebro anos após viagem à Índia
-- Segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira
-  - Segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira: veja os pontos principais
-  - Entenda segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira
-  - Folha do Acre informa: Segunda fase do Viaduto da Ceará será inaugurada nesta sexta-feira
-- Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
-  - Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul: veja os pontos principais
-  - O que se sabe sobre capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
-  - Jurua Online informa: Capotamento de ônibus deixa 16 mortos e 20 feridos na África do Sul
-- TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
-  - TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó: veja os pontos principais
-  - Entenda tCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
-  - Jurua Online informa: TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
-- Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
-  - Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria: veja os pontos principais
-  - Entenda explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
-  - Jurua Online informa: Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
-- “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terceira noite da ExpoAcre Juruá
-  - “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terceira noite da ExpoAcre 
-  - Entenda “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terceira noite da E
-  - Jurua Online informa: “A arena vai ferver”, diz organização sobre show de Tierry e abertura do rodeio na terce
-- Pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco
-  - Pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco: veja os pontos principais
-  - Entenda pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco
-  - Folha do Acre informa: Pastor é condenado a 19 anos por tentar matar a ex-mulher em Rio Branco
-- Frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C durante a ExpoAcre Juruá
-  - Frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C durante a ExpoAcre Jur
-  - Entenda frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C durante a Expo
-  - Jurua Online informa: Frente fria derruba temperaturas no Acre e mínima em Cruzeiro do Sul pode chegar a 20°C 
-- Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
-  - Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato: veja os pontos principais
-  - O que se sabe sobre justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
-  - Folha do Acre informa: Justiça mantém condenação de ex-vereadora de Feijó por furto e estelionato
+- Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
+  - Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16): veja os pontos principais
+  - Entenda mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
+  - Jurua em Tempo informa: Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
+- Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
+  - Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim: veja os pontos principais
+  - O que se sabe sobre irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
+  - Jurua em Tempo informa: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
+- Quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre
+  - Quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre: veja os pontos principais
+  - Entenda quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre
+  - Folha do Acre informa: Quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre
+- Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
+  - Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”: veja os pontos principais
+  - Entenda alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
+  - ContilNet / Instagram informa: Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
+- Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado
+  - Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado: veja os pontos principais
+  - Entenda rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado
+  - ContilNet / Instagram informa: Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado
+- O que aconteceria com nossa mente se vivêssemos na Lua?
+  - O que aconteceria com nossa mente se vivêssemos na Lua: veja os pontos principais
+  - Entenda o que aconteceria com nossa mente se vivêssemos na Lua
+  - Jurua Informativo informa: O que aconteceria com nossa mente se vivêssemos na Lua
+- O que está por trás do novo tarifaço dos EUA contra o Brasil?
+  - O que está por trás do novo tarifaço dos EUA contra o Brasil: veja os pontos principais
+  - Entenda o que está por trás do novo tarifaço dos EUA contra o Brasil
+  - Jurua Informativo informa: O que está por trás do novo tarifaço dos EUA contra o Brasil
+- Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
+  - Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026: veja os pontos principais
+  - Entenda lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
+  - Jurua Informativo informa: Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
+- Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
+  - Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas: veja os pontos principais
+  - Entenda jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
+  - Jurua Informativo informa: Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
+- Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
+  - Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão: veja os pontos principais
+  - Entenda frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
+  - Jurua Informativo informa: Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
+- Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
+  - Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon: veja os pontos principais
+  - Entenda quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
+  - Jurua Informativo informa: Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
+- Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê
+  - Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê: veja os pontos principai
+  - Entenda anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê
+  - Jurua Informativo informa: Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Yp
 
 ## Formatos especiais seguros
-- linha do tempo curta: Quase 40 mil pessoas seguem desaparecidas na Venezuela oito dias após terremotos
+- guia de servico: Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Vaticano declara cisma da Fraternidade São Pio X e excomunga bispos após ordenações sem autorização
+- linha do tempo curta: Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Britânica descobre 38 parasitas no cérebro anos após viagem à Índia
+- comparativo rapido: O que aconteceria com nossa mente se vivêssemos na Lua?
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: TCE determina nova análise sobre contratos de combustíveis da Educação em Feijó
+- comparativo rapido: Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Explosão em cafeteria deixa ao menos cinco mortos e 16 feridos em Damasco, na Síria
+- agenda visual: Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Detran do Acre convoca aprovados em concurso público para posse
+- comparativo rapido: Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- comparativo rapido: “O agricultor consegue irrigar de acordo com a necessidade”, destaca IFAC durante feira em Cruzeiro do Su
+- comparativo rapido: Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: TCE determina nova análise em inspeção sobre contratos de combustíveis da Educação em Feijó
+- comparativo rapido: Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de impacto no bolso: Gladson participa da Expoacre Juruá, prestigia Noite Gospel e destaca importância da feira para a economia
+- linha do tempo curta: Copa: antes da final, Argentina e Espanha se encontram em filme na TV
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Acnur pede US$ 14,85 milhões para apoio à Venezuela após terremotos
+- linha do tempo curta: Brava diz que CVM autorizou retomada de OPA para aquisição pela Ecopetrol
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Cazé TV expõe uma lacuna nas regras da publicidade de bets no país
+- guia de impacto no bolso: Mercado repercute tarifaço dos EUA ao Brasil; dólar abre em alta
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Acreana Jéssica Ingred lança campanha para assistir à final da Copa do Mundo: “me convoca, Meli”
+- linha do tempo curta: Anvisa determina recolhimento de lotes de água Mamba Water
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

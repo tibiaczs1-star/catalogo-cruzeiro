@@ -233,7 +233,7 @@ function buildRayaneItem() {
 
 const runtime = readJson(RUNTIME_NEWS_FILE, {});
 const archive = readJson(NEWS_ARCHIVE_FILE, []);
-const rayaneItem = buildRayaneItem();
+const rayaneItem = fs.existsSync(RAYANE_MANUAL_FILE) ? buildRayaneItem() : null;
 
 const normalizedArchive = normalizeImages(archive);
 const normalizedRuntimeItems = normalizeImages(runtime.items || []);
@@ -242,15 +242,21 @@ const normalizedActive = normalizeImages(runtime.activeWindowItems || runtime.it
 const archiveLimit = Math.max(480, normalizedArchive.items.length);
 const activeLimit = Math.max(360, normalizedActive.items.length);
 
-const updatedArchive = upsertFirst(normalizedArchive.items, rayaneItem, archiveLimit + 1);
-const updatedItems = upsertFirst(normalizedRuntimeItems.items, rayaneItem, archiveLimit + 1);
-const updatedActive = upsertFirst(normalizedActive.items, rayaneItem, activeLimit);
+const updatedArchive = rayaneItem
+  ? upsertFirst(normalizedArchive.items, rayaneItem, archiveLimit + 1)
+  : normalizedArchive.items;
+const updatedItems = rayaneItem
+  ? upsertFirst(normalizedRuntimeItems.items, rayaneItem, archiveLimit + 1)
+  : normalizedRuntimeItems.items;
+const updatedActive = rayaneItem
+  ? upsertFirst(normalizedActive.items, rayaneItem, activeLimit)
+  : normalizedActive.items;
 
 const updatedRuntime = {
   ...runtime,
   lastAttemptAt: new Date().toISOString(),
   lastSuccessAt: new Date().toISOString(),
-  source: "manual-rayane-image-repair",
+  source: rayaneItem ? "manual-rayane-image-repair" : "news-image-repair",
   activeWindowItems: updatedActive,
   items: updatedItems,
   reports: {
@@ -260,7 +266,8 @@ const updatedRuntime = {
       repairedArchive: normalizedArchive.repaired,
       repairedRuntimeItems: normalizedRuntimeItems.repaired,
       repairedActiveWindow: normalizedActive.repaired,
-      inserted: rayaneItem.slug,
+      inserted: rayaneItem?.slug || null,
+      skippedManualRayane: !rayaneItem,
       fallbackPolicy: "no-public-news-with-empty-image-fields"
     }
   }
@@ -277,8 +284,9 @@ console.log(
   JSON.stringify(
     {
       ok: true,
-      inserted: rayaneItem.slug,
-      rayaneImage: RAYANE_IMAGE,
+      inserted: rayaneItem?.slug || null,
+      rayaneImage: rayaneItem ? RAYANE_IMAGE : null,
+      skippedManualRayane: !rayaneItem,
       archive: updatedArchive.length,
       active: updatedActive.length,
       repairedArchive: normalizedArchive.repaired,

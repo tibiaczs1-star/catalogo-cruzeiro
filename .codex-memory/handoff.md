@@ -1,21 +1,27 @@
 # Handoff
 
-Updated: 2026-07-16T16:45:00Z
+Updated: 2026-07-16T17:12:00Z
 
-Lançamento Android concluído. Render está live no commit `097d7b52` com:
-- `/app.html` online e rodapé corrigido sem imagem quebrada.
-- `/downloads/catalogo-czs-android.apk` online com MIME de APK e tamanho 991349 bytes.
-- `/downloads/catalogo-czs-android.json` online.
-- `/.well-known/assetlinks.json` online.
-- `/lancamento-app.html` online.
-- Destaque do Instagram `@catalogo_czs_` no site, no app e na reportagem.
+Rodada de correção visual/editorial concluída localmente e pronta para deploy:
+- ticker "Últimas em movimento" agora roda por `scrollLeft` interno, com fonte adaptativa e sem `nowrap/ellipsis` cortando letras;
+- controles do herói ficaram compactos e menos invasivos;
+- bloco Norte Ultra Fibra foi reduzido e proporcional;
+- script de reparo de imagens não depende mais obrigatoriamente do arquivo manual da Rayane;
+- acervo/runtime/news-data receberam fallback editorial CZS onde faltava imagem;
+- `docs/CODEX_SOCIAL_SITE_ROUTINES.md` criado: fonte deve ser citada em texto/legenda, mas logo/vinheta/marca de outro jornal não deve ser promovida visualmente.
 
-Instagram: post de lançamento publicado via BlueStacks/ADB no perfil `@catalogo_czs_`; evidência local em `.codex-temp/instagram-after-wait2.png` mostra o card de lançamento no topo da grade.
+Evidência local:
+- Playwright/Chrome: ticker `scrollLeft` 47 -> 132 em 1,4s; sem overflow horizontal.
+- `npm run audit:news-images`: `error=0`, `ok=55`, `review=25`.
+- `npm run review:team`: `totalIssues=0`.
+- `npm run editorial:health`: visualIssues caiu para 169.
+- `npm run perf:budget`: ok=true, mas `index.html` continua over por ser pesado.
 
 ## Next
 
-- Acompanhar comentários/alcance.
-- Se pedir nova versão do app, reconstruir/sinar com o keystore externo já criado.
+- Push/deploy Render e validar online.
+- Otimização estrutural futura: retirar bloco gigante de notícias embutido no `index.html` e hidratar do JSON.
+- Manter regra social: citar fonte sim, propaganda visual de outro jornal não.
 
 ## Files In Focus
 
@@ -23,5 +29,7 @@ Instagram: post de lançamento publicado via BlueStacks/ADB no perfil `@catalogo
 - app.css
 - app-sw.js
 - index.html
-- lancamento-app.html
-- output/launch-czs-android-20260716/
+- assets/v8-final/v8-merge-ready.css
+- assets/v8-final/v8-merge-ready.js
+- scripts/repair-news-images-and-rayane.js
+- docs/CODEX_SOCIAL_SITE_ROUTINES.md
