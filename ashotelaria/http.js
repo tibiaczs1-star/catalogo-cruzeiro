@@ -65,6 +65,18 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         return true;
       }
 
+      if (method === "GET" && routePath === "/public/client-portal") {
+        if (typeof store.getClientPortal !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Client portal unavailable", 503);
+        }
+        const portal = await store.getClientPortal({
+          propertySlug: requiredQuery(parsedUrl, "propertySlug"),
+        });
+        if (!portal) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 200, { portal });
+        return true;
+      }
+
       if (method === "POST" && routePath === "/public/reservations") {
         const body = await readJson(req, bodyLimit);
         const idempotencyKey = stringHeader(req, "idempotency-key").trim();
@@ -82,6 +94,56 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         });
         if (!result?.reservation) throw httpError("NOT_FOUND", "Property not found", 404);
         sendJson(res, result.replayed ? 200 : 201, { reservation: result.reservation });
+        return true;
+      }
+
+      if (method === "POST" && routePath === "/public/service-requests") {
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.createGuestServiceRequest !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Service requests unavailable", 503);
+        }
+        const result = await store.createGuestServiceRequest({
+          propertySlug: body.propertySlug,
+          reservationId: body.reservationId,
+          requestType: body.requestType,
+          awayFrom: body.awayFrom,
+          awayUntil: body.awayUntil,
+          note: body.note,
+        });
+        if (!result) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 201, result);
+        return true;
+      }
+
+      if (method === "POST" && routePath === "/public/room-service-orders") {
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.createRoomServiceOrder !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Room service unavailable", 503);
+        }
+        const order = await store.createRoomServiceOrder({
+          propertySlug: body.propertySlug,
+          reservationId: body.reservationId,
+          items: body.items,
+          note: body.note,
+        });
+        if (!order) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 201, { order });
+        return true;
+      }
+
+      if (method === "POST" && routePath === "/public/messages") {
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.createGuestMessage !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Guest messages unavailable", 503);
+        }
+        const message = await store.createGuestMessage({
+          propertySlug: body.propertySlug,
+          reservationId: body.reservationId,
+          target: body.target,
+          message: body.message,
+        });
+        if (!message) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 201, { message });
         return true;
       }
 
@@ -148,6 +210,45 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         });
         if (!bootstrap) throw httpError("NOT_FOUND", "Property not found", 404);
         sendJson(res, 200, { session, bootstrap: projectBootstrap(bootstrap, session) });
+        return true;
+      }
+
+      if (method === "GET" && routePath === "/admin/overview") {
+        const session = await requireSession(req, authService, cookieName);
+        requirePasswordChanged(session);
+        requirePermission(session, "hotel.bootstrap.read");
+        if (typeof store.getAdminOverview !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Admin overview unavailable", 503);
+        }
+        const overview = await store.getAdminOverview({
+          tenantId: session.tenantId,
+          propertyId: session.propertyId,
+        });
+        if (!overview) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 200, { overview });
+        return true;
+      }
+
+      if (method === "POST" && routePath === "/housekeeping/distribute") {
+        const session = await requireSession(req, authService, cookieName);
+        requirePasswordChanged(session);
+        requirePermission(session, "tasks.housekeeping.update");
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.distributeHousekeepingWork !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Housekeeping distribution unavailable", 503);
+        }
+        const result = await store.distributeHousekeepingWork({
+          tenantId: session.tenantId,
+          propertyId: session.propertyId,
+          date: body.date,
+          actor: {
+            id: `${session.username}:${session.role}`,
+            username: session.username,
+            role: session.role,
+          },
+        });
+        if (!result) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 201, result);
         return true;
       }
 
@@ -304,6 +405,9 @@ function projectBootstrap(source, session) {
       property: source.property,
       rooms: (source.rooms ?? []).filter((room) => assignedRoomIds.has(room.id)),
       housekeepingTasks,
+      notifications: (source.notifications ?? []).filter((notification) => (
+        notification.assignedUsername === session.username && notification.assignedRole === session.role
+      )),
     };
   }
   const projected = { property: source.property };
@@ -323,6 +427,11 @@ function projectBootstrap(source, session) {
     projected.maintenanceOrders = source.maintenanceOrders ?? [];
   }
   if (hasPermission(session.role, "admin.settings.manage")) projected.integrations = source.integrations ?? [];
+  if (hasPermission(session.role, "hotel.bootstrap.read")) {
+    projected.roomServiceOrders = source.roomServiceOrders ?? [];
+    projected.guestMessages = source.guestMessages ?? [];
+    projected.notifications = source.notifications ?? [];
+  }
   return projected;
 }
 
@@ -529,6 +638,7 @@ function normalizeError(error) {
     CHECK_IN_NOT_ALLOWED: 409,
     ROOM_NOT_READY: 409,
     INVALID_MAINTENANCE_STATUS: 400,
+    SERVICE_REQUEST_NOT_ALLOWED: 409,
   };
   if (authStatuses[error?.code]) {
     const code = error.code;
@@ -550,6 +660,7 @@ function normalizeError(error) {
       CHECK_IN_NOT_ALLOWED: "Check-in is only allowed on the reservation arrival date",
       ROOM_NOT_READY: "Room is not ready for check-in",
       INVALID_MAINTENANCE_STATUS: "Maintenance status is invalid",
+      SERVICE_REQUEST_NOT_ALLOWED: "Service request is not allowed for this reservation",
     };
     return { status, code, message: messages[code] };
   }

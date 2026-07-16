@@ -36,11 +36,11 @@ test("runMigrations applies SQL and records its name in the same transaction", a
   const { pool, queries } = migrationPool();
   const result = await runMigrations({ pool, bootstrap: false });
 
-  assert.deepEqual(result, { applied: 3 });
+  assert.deepEqual(result, { applied: 4 });
   const migrationSqlIndexes = queries
-    .map(({ text }, index) => (/CREATE TABLE tenants|CREATE TABLE credential_profiles|CREATE TABLE room_photos/.test(text) ? index : -1))
+    .map(({ text }, index) => (/CREATE TABLE tenants|CREATE TABLE credential_profiles|CREATE TABLE room_photos|CREATE TABLE client_partners/.test(text) ? index : -1))
     .filter((index) => index >= 0);
-  assert.equal(migrationSqlIndexes.length, 3);
+  assert.equal(migrationSqlIndexes.length, 4);
   for (const sqlIndex of migrationSqlIndexes) {
     const beginIndex = queries.map(({ text }) => text).lastIndexOf("BEGIN", sqlIndex);
     const recordIndex = queries.findIndex(({ text }, index) => index > sqlIndex && /INSERT INTO ashotelaria_migrations/.test(text));
@@ -51,7 +51,7 @@ test("runMigrations applies SQL and records its name in the same transaction", a
     assert.doesNotMatch(queries[sqlIndex].text, /^\s*BEGIN\s*;/i);
     assert.doesNotMatch(queries[sqlIndex].text, /COMMIT\s*;\s*$/i);
   }
-  assert.equal(queries.filter(({ text }) => /pg_advisory_xact_lock/.test(text)).length, 3);
+  assert.equal(queries.filter(({ text }) => /pg_advisory_xact_lock/.test(text)).length, 4);
 });
 
 test("bootstrap preserves an existing reservation-room link on every conflict", async () => {

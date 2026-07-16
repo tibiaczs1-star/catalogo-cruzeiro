@@ -365,6 +365,86 @@ test("front desk walk-in route registers an immediate in-house guest", async () 
   assert.equal(bootstrap.res.json.bootstrap.rooms.find(({ id }) => id === "room-103").status, "occupied");
 });
 
+test("manager distributes housekeeping workload and guest portal schedules cleaning", async () => {
+  const { handler } = fixture();
+  const managerCookie = await login(handler, "gerente", "Padrao-inicial-2026!");
+  const distributed = await request(handler, "POST", `${BASE}/housekeeping/distribute`, {
+    headers: { cookie: managerCookie },
+    body: { date: "2026-07-14" },
+  });
+
+  assert.equal(distributed.res.statusCode, 201, distributed.res.text);
+  assert.equal(distributed.res.json.created.length, 3);
+  assert.equal(distributed.res.json.notifications.length, 3);
+
+  const scheduled = await request(handler, "POST", `${BASE}/public/service-requests`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      requestType: "daily_cleaning",
+      awayFrom: "09:30",
+      awayUntil: "11:00",
+      note: "Estaremos fora para passeio",
+    },
+  });
+  assert.equal(scheduled.res.statusCode, 201, scheduled.res.text);
+  assert.equal(scheduled.res.json.task.roomId, "room-201");
+  assert.equal(scheduled.res.json.task.awayFrom, "09:30");
+});
+
+test("public client portal lists discounted partners and blocks invalid service requests", async () => {
+  const { handler } = fixture();
+  const partners = await request(handler, "GET", `${BASE}/public/client-portal?propertySlug=hotel-jurua-palace`);
+  assert.equal(partners.res.statusCode, 200, partners.res.text);
+  assert.equal(partners.res.json.portal.partners.some((partner) => partner.category === "restaurant"), true);
+  assert.equal(partners.res.json.portal.partners.every((partner) => partner.discountLabel), true);
+
+  const invalid = await request(handler, "POST", `${BASE}/public/service-requests`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-cancelled",
+      requestType: "daily_cleaning",
+      awayFrom: "09:30",
+      awayUntil: "11:00",
+    },
+  });
+  assert.equal(invalid.res.statusCode, 409);
+  assert.equal(invalid.res.json.error.code, "SERVICE_REQUEST_NOT_ALLOWED");
+});
+
+test("client can order fast food and send messages while admin reads full overview", async () => {
+  const { handler } = fixture();
+  const order = await request(handler, "POST", `${BASE}/public/room-service-orders`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      items: [{ itemId: "food-burger-combo", quantity: 1 }],
+      note: "Enviar para o quarto",
+    },
+  });
+  assert.equal(order.res.statusCode, 201, order.res.text);
+  assert.equal(order.res.json.order.roomId, "room-201");
+  assert.equal(order.res.json.order.total, 3_900);
+
+  const message = await request(handler, "POST", `${BASE}/public/messages`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      target: "housekeeping",
+      message: "Pode trazer toalhas",
+    },
+  });
+  assert.equal(message.res.statusCode, 201, message.res.text);
+  assert.equal(message.res.json.message.target, "housekeeping");
+
+  const adminCookie = await login(handler, "administrador", "Admin-inicial-2026!");
+  const overview = await request(handler, "GET", `${BASE}/admin/overview`, { headers: { cookie: adminCookie } });
+  assert.equal(overview.res.statusCode, 200, overview.res.text);
+  assert.equal(overview.res.json.overview.roomServiceOrders.length, 1);
+  assert.equal(overview.res.json.overview.guestMessages.length, 1);
+  assert.equal(overview.res.json.overview.charts.revenue.totalConfirmedCents > 0, true);
+});
+
 test("housekeeping can attach delivery photos but cannot create walk-ins", async () => {
   const { handler } = fixture();
   const cookie = await login(handler, "camareira", "Padrao-inicial-2026!");

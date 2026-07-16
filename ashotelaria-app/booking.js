@@ -4,6 +4,7 @@ const API = "/api/ashotelaria/v1";
 const booking = {
   propertySlug: propertySlugFromLocation(),
   property: null,
+  portal: null,
   search: null,
   roomType: null,
   idempotencyKey: null,
@@ -22,9 +23,18 @@ function initBooking() {
     guestForm: document.querySelector("#guest-form"),
     confirmation: document.querySelector("#confirmation-step"),
     error: document.querySelector("#booking-error"),
+    cleaningForm: document.querySelector("#cleaning-form"),
+    roomServiceForm: document.querySelector("#room-service-form"),
+    guestMessageForm: document.querySelector("#guest-message-form"),
+    partnerList: document.querySelector("#partner-list"),
+    foodMenuSelect: document.querySelector("#food-menu-select"),
+    portalMessage: document.querySelector("#portal-message"),
   });
   elements.availabilityForm.addEventListener("submit", searchAvailability);
   elements.guestForm.addEventListener("submit", createReservation);
+  elements.cleaningForm?.addEventListener("submit", scheduleCleaning);
+  elements.roomServiceForm?.addEventListener("submit", orderRoomService);
+  elements.guestMessageForm?.addEventListener("submit", sendGuestMessage);
   document.querySelectorAll("[data-back]").forEach((button) => button.addEventListener("click", () => showStep(Number(button.dataset.back))));
   window.addEventListener("online", updateConnection);
   window.addEventListener("offline", updateConnection);
@@ -32,6 +42,7 @@ function initBooking() {
   setDefaultDates();
   bindTooltips(document);
   loadProperty();
+  loadClientPortal();
 }
 
 async function request(path, options = {}) {
@@ -55,6 +66,7 @@ async function request(path, options = {}) {
       IDEMPOTENCY_KEY_REQUIRED: "Atualize a página e tente novamente.",
       INVALID_IDEMPOTENCY_KEY: "Atualize a página e tente novamente.",
       NOT_FOUND: "Hotel ou acomodação não encontrado.",
+      SERVICE_REQUEST_NOT_ALLOWED: "Este serviço exige uma reserva hospedada no hotel.",
     };
     throw new Error(messages[payload?.error?.code] ?? "Não foi possível concluir. Tente novamente.");
   }
@@ -69,6 +81,17 @@ async function loadProperty() {
     document.title = `Reservar no ${booking.property.name} — AShotelaria`;
   } catch (error) {
     showError(error.message);
+  }
+}
+
+async function loadClientPortal() {
+  try {
+    const payload = await request(`/public/client-portal?propertySlug=${encodeURIComponent(booking.propertySlug)}`);
+    booking.portal = payload.portal;
+    renderPartners(booking.portal?.partners ?? []);
+    renderFoodMenu(booking.portal?.foodMenu ?? []);
+  } catch (error) {
+    showPortalMessage(error.message, true);
   }
 }
 
@@ -158,6 +181,83 @@ function renderConfirmation(reservation) {
   document.querySelector("#confirmation-details").innerHTML = details.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
 }
 
+async function scheduleCleaning(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const body = { propertySlug: booking.propertySlug, ...Object.fromEntries(new FormData(form)) };
+  showPortalMessage("");
+  setBusy(form, true);
+  try {
+    const payload = await request("/public/service-requests", { method: "POST", body: JSON.stringify(body) });
+    showPortalMessage(`Solicitação enviada: quarto ${payload.task.roomId}, ${payload.task.awayFrom || "sem horário"} até ${payload.task.awayUntil || "sem horário"}.`);
+  } catch (error) {
+    showPortalMessage(error.message, true);
+  } finally {
+    setBusy(form, false);
+  }
+}
+
+async function orderRoomService(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const values = Object.fromEntries(new FormData(form));
+  const body = {
+    propertySlug: booking.propertySlug,
+    reservationId: values.reservationId,
+    note: values.note,
+    items: [{ itemId: values.itemId, quantity: Number(values.quantity || 1) }],
+  };
+  showPortalMessage("");
+  setBusy(form, true);
+  try {
+    const payload = await request("/public/room-service-orders", { method: "POST", body: JSON.stringify(body) });
+    showPortalMessage(`Pedido enviado para o quarto: ${money(payload.order.total)}.`);
+  } catch (error) {
+    showPortalMessage(error.message, true);
+  } finally {
+    setBusy(form, false);
+  }
+}
+
+async function sendGuestMessage(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const body = { propertySlug: booking.propertySlug, ...Object.fromEntries(new FormData(form)) };
+  showPortalMessage("");
+  setBusy(form, true);
+  try {
+    await request("/public/messages", { method: "POST", body: JSON.stringify(body) });
+    form.elements.message.value = "";
+    showPortalMessage("Mensagem enviada para o hotel.");
+  } catch (error) {
+    showPortalMessage(error.message, true);
+  } finally {
+    setBusy(form, false);
+  }
+}
+
+function renderPartners(partners) {
+  if (!elements.partnerList) return;
+  elements.partnerList.innerHTML = partners.length ? partners.map((partner) => `<article class="partner-card" tabindex="0" data-help="Parceiro ${escapeHtml(partner.name)}: ${escapeHtml(partner.discountLabel)}.">
+    <strong>${escapeHtml(partner.name)}</strong>
+    <span>${escapeHtml(partner.category)}</span>
+    <p>${escapeHtml(partner.description)}</p>
+    <small>${escapeHtml(partner.discountLabel)} · ${escapeHtml(partner.contact)}</small>
+  </article>`).join("") : `<p class="muted-text">Nenhum parceiro ativo agora.</p>`;
+  bindTooltips(elements.partnerList);
+}
+
+function renderFoodMenu(foodMenu) {
+  if (!elements.foodMenuSelect) return;
+  elements.foodMenuSelect.replaceChildren(...foodMenu.map((item) => new Option(`${item.name} · ${money(item.price)}`, item.id)));
+}
+
+function showPortalMessage(message, isError = false) {
+  if (!elements.portalMessage) return;
+  elements.portalMessage.textContent = message;
+  elements.portalMessage.classList.toggle("form-error", Boolean(message && isError));
+}
+
 function showStep(step) {
   document.querySelectorAll("[data-step]").forEach((panel) => { panel.hidden = Number(panel.dataset.step) !== step; });
   document.querySelectorAll("[data-step-marker]").forEach((marker) => marker.classList.toggle("active", Number(marker.dataset.stepMarker) <= step));
@@ -212,7 +312,7 @@ function bindTooltips(root) {
   });
 }
 
-function setBusy(container, busy) { container.querySelectorAll("input, button").forEach((element) => { element.disabled = busy; }); }
+function setBusy(container, busy) { container.querySelectorAll("input, select, textarea, button").forEach((element) => { element.disabled = busy; }); }
 function money(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(cents || 0) / 100); }
 function formatDate(value) { const [year, month, day] = String(value).slice(0, 10).split("-"); return `${day}/${month}/${year}`; }
 function escapeHtml(value) { return String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[character]); }

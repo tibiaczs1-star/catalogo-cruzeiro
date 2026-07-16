@@ -30,6 +30,7 @@ const STATUS_LABELS = Object.freeze({
 
 const NAVIGATION = Object.freeze([
   { id: "now", label: "Agora", icon: "◉", permission: "hotel.bootstrap.read", help: "Visão rápida da operação da unidade." },
+  { id: "admin_center", label: "Central", icon: "▣", permission: "hotel.bootstrap.read", help: "Painel completo para administrador e gerente acompanharem operação, chamados, pedidos e gráficos." },
   { id: "frontdesk", label: "Balcão", icon: "+", permission: "reservations.create", help: "Cadastrar hóspede que chegou direto no balcão." },
   { id: "reservations", label: "Reservas", icon: "▤", permission: "reservations.read", help: "Consulte chegadas, saídas e reservas da unidade." },
   { id: "rooms", label: "Quartos", icon: "▦", permission: "rooms.operational.read", help: "Veja a situação de cada quarto e atualize o status." },
@@ -43,6 +44,7 @@ const NAVIGATION = Object.freeze([
 const AREA_HELP = Object.freeze({
   "Movimento da unidade": "Reúne as reservas mais próximas para uma leitura rápida da operação.",
   "Seu acesso": "Confirma usuário, cargo, unidade e origem dos dados desta sessão.",
+  "Central do administrador": "Resumo total da unidade: quartos, governança, pedidos, chamados, parceiros, finanças e ações diretas.",
   "Entrada no balcão": "Cadastro direto de hóspede que chegou sem reserva.",
   "Quartos prontos": "Quartos disponíveis ou inspecionados que podem receber entrada imediata.",
   "Reservas da unidade": "Lista o período, valor, situação e ações disponíveis para cada reserva.",
@@ -66,7 +68,7 @@ const METRIC_HELP = Object.freeze({
   "Ticket médio": "Valor médio calculado por reserva não cancelada.",
 });
 
-const state = { session: null, bootstrap: null, activeView: "now", loading: false };
+const state = { session: null, bootstrap: null, adminOverview: null, activeView: "now", loading: false };
 const elements = {};
 
 document.addEventListener("DOMContentLoaded", init);
@@ -251,7 +253,7 @@ function renderNavigation() {
 function renderActiveView() {
   if (!state.bootstrap) return;
   const renderer = {
-    now: renderNow, frontdesk: renderFrontdesk, reservations: renderReservations, rooms: renderRooms,
+    now: renderNow, admin_center: renderAdminCenter, frontdesk: renderFrontdesk, reservations: renderReservations, rooms: renderRooms,
     housekeeping: renderHousekeeping, maintenance: renderMaintenance,
     finance: renderFinance, settings: renderSettings, security: renderSecurity,
   }[state.activeView] ?? renderNow;
@@ -291,6 +293,52 @@ function renderNow() {
         <div><dt>Dados</dt><dd>Atualizados pelo servidor</dd></div>
       </dl></aside>
     </div>`;
+}
+
+function renderAdminCenter() {
+  if (!canSeeFullChain()) {
+    return `<div class="empty-state"><span>AS</span><h2>Acesso limitado</h2><p>Esta central é liberada para administrador, gerente, proprietário e superadmin.</p></div>`;
+  }
+  const overview = state.adminOverview ?? {
+    roomReadiness: state.bootstrap.rooms ?? [],
+    housekeepingTasks: state.bootstrap.housekeepingTasks ?? [],
+    roomServiceOrders: state.bootstrap.roomServiceOrders ?? [],
+    guestMessages: state.bootstrap.guestMessages ?? [],
+    partners: state.bootstrap.clientPartners ?? [],
+    charts: {
+      housekeepingByStatus: countBy(state.bootstrap.housekeepingTasks ?? [], "status"),
+      roomsByStatus: countBy(state.bootstrap.rooms ?? [], "status"),
+      revenue: { totalConfirmedCents: (state.bootstrap.reservations ?? []).reduce((sum, row) => sum + Number(row.total || 0), 0) },
+    },
+  };
+  const roomServiceOrders = overview.roomServiceOrders ?? [];
+  const guestMessages = overview.guestMessages ?? [];
+  const housekeepingByStatus = overview.charts?.housekeepingByStatus ?? {};
+  const roomsByStatus = overview.charts?.roomsByStatus ?? {};
+  return `<div class="admin-center">
+    <div class="section-heading"><div><h2>Central do administrador</h2><p>admin/overview · visão completa de quartos, clientes, equipe, chamados, pedidos e financeiro.</p></div><button class="button button--secondary button--compact" data-admin-overview-refresh>Atualizar central</button></div>
+    <div class="metric-strip">
+      ${metricMarkup(["Quartos", overview.roomReadiness?.length ?? 0, "monitorados"])}
+      ${metricMarkup(["Limpeza", Object.values(housekeepingByStatus).reduce((sum, value) => sum + Number(value || 0), 0), "tarefas"])}
+      ${metricMarkup(["Reservas", guestMessages.length, "chamado(s) cliente"])}
+      ${metricMarkup(["Receita prevista", money(overview.charts?.revenue?.totalConfirmedCents ?? 0), "confirmada"])}
+    </div>
+    <div class="chart-grid">
+      ${chartBlock("Governança", housekeepingByStatus)}
+      ${chartBlock("Quartos", roomsByStatus)}
+    </div>
+    <div class="view-columns">
+      <section>
+        <div class="section-heading"><div><h2>Quarto arrumado e prova</h2><p>Última foto de entrega e leitura operacional por quarto.</p></div><button class="button button--primary button--compact" data-distribute-housekeeping>Distribuir limpezas</button></div>
+        <div class="data-list">${(overview.roomReadiness ?? []).map((room) => `<div class="data-row" tabindex="0" data-help="Quarto ${escapeHtml(room.number ?? room.roomId)}: mostra estado e se existe foto de entrega."><strong>Quarto ${escapeHtml(room.number ?? room.roomId)}</strong><span>${escapeHtml(room.lastDeliveryPhoto ? "Foto registrada" : "Sem foto")}</span><span>Correção automática via imagem: fila de revisão</span>${statusMarkup(room.status)}</div>`).join("") || emptyMarkup()}</div>
+      </section>
+      <aside class="context-panel"><h3>Mensagens rápidas</h3><form class="operation-form" data-admin-message-form><label><span>Enviar mensagem</span><input name="message" placeholder="Cliente ou funcionário" data-help="Campo reservado para disparo direto ao hóspede ou colaborador."></label><button class="button button--secondary button--compact" type="submit">Enviar mensagem</button><p class="form-message" data-admin-message-status></p></form></aside>
+    </div>
+    <div class="view-columns">
+      <section><div class="section-heading"><div><h2>Pedidos no quarto</h2><p>Fast food e room service exclusivo do hotel.</p></div><strong>${roomServiceOrders.length}</strong></div>${roomServiceOrders.length ? `<div class="data-list">${roomServiceOrders.map((order) => `<div class="data-row" tabindex="0" data-help="Pedido do quarto: acompanha total, situação e entrega."><strong>${escapeHtml(order.id)}</strong><span>Quarto ${escapeHtml(order.roomId)}</span><span>${money(order.total)}</span>${statusMarkup(order.status)}</div>`).join("")}</div>` : emptyMarkup()}</section>
+      <section><div class="section-heading"><div><h2>Chamados do cliente</h2><p>Mensagens e solicitações abertas pelo portal do cliente.</p></div><strong>${guestMessages.length}</strong></div>${guestMessages.length ? `<div class="data-list">${guestMessages.map((message) => `<div class="data-row" tabindex="0" data-help="Chamado de cliente: destino, quarto, status e conteúdo resumido."><strong>${escapeHtml(message.target)}</strong><span>Quarto ${escapeHtml(message.roomId)}</span><span>${escapeHtml(message.message)}</span>${statusMarkup(message.status)}</div>`).join("")}</div>` : emptyMarkup()}</section>
+    </div>
+  </div>`;
 }
 
 function renderFrontdesk() {
@@ -379,6 +427,9 @@ function bindViewActions() {
   elements.content.querySelectorAll("[data-reservation-status]").forEach((button) => button.addEventListener("click", updateReservation));
   elements.content.querySelectorAll("[data-maintenance-order-id]").forEach((button) => button.addEventListener("click", updateMaintenance));
   elements.content.querySelector("[data-walkin-form]")?.addEventListener("submit", createWalkIn);
+  elements.content.querySelector("[data-admin-overview-refresh]")?.addEventListener("click", refreshAdminOverview);
+  elements.content.querySelector("[data-distribute-housekeeping]")?.addEventListener("click", distributeHousekeeping);
+  elements.content.querySelector("[data-admin-message-form]")?.addEventListener("submit", sendAdminMessage);
   elements.content.querySelectorAll("[data-room-photo-form]").forEach((form) => form.addEventListener("submit", uploadRoomPhoto));
   elements.content.querySelector("[data-open-security]")?.addEventListener("click", () => openAccount());
   elements.content.querySelectorAll(".section-heading, .context-panel").forEach((element) => {
@@ -389,6 +440,36 @@ function bindViewActions() {
     if (!element.matches("button, input, select, a, [tabindex]")) element.tabIndex = 0;
   });
   bindTooltips(elements.content);
+}
+
+async function refreshAdminOverview() {
+  if (!canSeeFullChain()) return;
+  try {
+    const payload = await api("/admin/overview");
+    state.adminOverview = payload.overview;
+    renderActiveView();
+  } catch (error) {
+    showViewError(error.message);
+  }
+}
+
+async function distributeHousekeeping(event) {
+  event.currentTarget.disabled = true;
+  try {
+    await api("/housekeeping/distribute", { method: "POST", body: JSON.stringify({ date: operationalDate() }) });
+    await refreshBootstrap();
+    await refreshAdminOverview();
+  } catch (error) {
+    showViewError(error.message);
+  }
+}
+
+function sendAdminMessage(event) {
+  event.preventDefault();
+  const status = event.currentTarget.querySelector("[data-admin-message-status]");
+  const value = event.currentTarget.elements.message.value.trim();
+  status.textContent = value ? "Mensagem preparada para envio no próximo conector de notificação." : "Digite uma mensagem.";
+  if (value) event.currentTarget.reset();
 }
 
 function bindTooltips(root) {
@@ -621,6 +702,7 @@ function canManageRooms() { return hasPermission("rooms.operational.update"); }
 function canManageHousekeeping() { return hasPermission("tasks.housekeeping.update"); }
 function canManageMaintenance() { return hasPermission("tasks.maintenance.update"); }
 function countStatus(rows, status) { return rows.filter((row) => row.status === status).length; }
+function countBy(rows, field) { return rows.reduce((acc, row) => ({ ...acc, [row[field]]: (acc[row[field]] ?? 0) + 1 }), {}); }
 function money(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(cents || 0) / 100); }
 function formatDate(value) { if (!value) return "—"; const [year, month, day] = value.slice(0, 10).split("-"); return `${day}/${month}/${year}`; }
 function operationalDate(now = new Date(), timeZone = state.bootstrap?.property?.timeZone ?? "America/Rio_Branco") {
@@ -642,6 +724,11 @@ function metricMarkup([label, value, detail]) { return `<div class="metric" tabi
 function statusMarkup(status) {
   const modifier = ["dirty", "pending", "open"].includes(status) ? " status--warning" : ["maintenance", "blocked", "cancelled"].includes(status) ? " status--danger" : ["checked_out", "closed"].includes(status) ? " status--neutral" : "";
   return `<span class="status${modifier}">${escapeHtml(STATUS_LABELS[status] ?? status)}</span>`;
+}
+function chartBlock(title, entries) {
+  const rows = Object.entries(entries ?? {});
+  const max = Math.max(1, ...rows.map(([, value]) => Number(value || 0)));
+  return `<section class="chart-panel" tabindex="0" data-help="Gráfico ${escapeHtml(title)}: barras proporcionais calculadas com os dados atuais."><h3>${escapeHtml(title)}</h3>${rows.length ? rows.map(([label, value]) => `<div class="chart-row"><span>${escapeHtml(STATUS_LABELS[label] ?? label)}</span><div class="chart-bar"><i style="width:${Math.max(6, Math.round((Number(value || 0) / max) * 100))}%"></i></div><strong>${escapeHtml(value)}</strong></div>`).join("") : `<p class="muted-text">Sem dados para gráfico.</p>`}</section>`;
 }
 function reservationActions(row) {
   if (!hasPermission("reservations.manage")) return "";

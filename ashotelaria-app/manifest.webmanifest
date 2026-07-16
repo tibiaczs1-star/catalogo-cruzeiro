@@ -1,0 +1,22 @@
+{
+  "name": "AShotelaria",
+  "short_name": "AShotelaria",
+  "description": "Sistema hoteleiro para equipe, cliente e operação mobile.",
+  "start_url": "/ashotelaria/app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff7f7",
+  "theme_color": "#b4232d",
+  "icons": [
+    {
+      "src": "/assets/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
