@@ -1,24 +1,22 @@
 # Current State
 
-Updated: 2026-07-16T06:39:05.936Z
+Updated: 2026-07-16T06:50:32.384Z
 
 ## Active Goal
 
-- AShotelaria completo para operação real
+- AShotelaria login mestre admin/gerente
 
 ## Summary
 
-Implementados tema vermelho claro, login por cargo com gerente/admin vendo toda cadeia, balcão para entrada imediata, slots de foto de quarto, foto de entrega por camareira, rotas e persistência em memória/PostgreSQL. Testes npm e smoke Playwright local verdes.
+Admin e gerente mantêm visão completa. Painel de manutenção agora permite iniciar/fechar/reabrir ordens sem trocar cargo, e admin também pode salvar foto de entrega do quarto. Testes 120/120 verdes.
 
 ## Next
 
-- publicar versão no Render se autorizado/pipeline disponível
+- commit/push/deploy Render
 
 ## Files In Focus
 
 - ashotelaria-app/app.js
-- ashotelaria-app/styles.css
 - ashotelaria/http.js
 - ashotelaria/memory-store.js
 - ashotelaria/postgres-store.js
-- ashotelaria/migrations/003_room_photos.sql

@@ -16,6 +16,7 @@ const ROOM_STATUSES = new Set([
   "blocked", "do_not_disturb",
 ]);
 const ROOM_PHOTO_KINDS = new Set(["room", "delivery"]);
+const MAINTENANCE_STATUSES = new Set(["open", "in_progress", "closed"]);
 const SUMMARY_ROOM_STATUS = {
   cleaning: "dirty",
   inspected: "available",
@@ -186,6 +187,12 @@ function credentialFromRow(row) {
 function conflictError() {
   const error = new Error("No inventory is available for this stay");
   error.code = "INVENTORY_CONFLICT";
+  return error;
+}
+
+function invalidMaintenanceStatus() {
+  const error = new RangeError("maintenance order status is unknown");
+  error.code = "INVALID_MAINTENANCE_STATUS";
   return error;
 }
 
@@ -631,6 +638,50 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         });
         await client.query("COMMIT");
         return photoFromRow(inserted.rows[0]);
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async updateMaintenanceOrderStatus({ tenantId, propertyId, maintenanceOrderId, status, actor }) {
+      const next = String(status ?? "").trim().toLowerCase();
+      if (!MAINTENANCE_STATUSES.has(next)) throw invalidMaintenanceStatus();
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const currentResult = await client.query(
+          `SELECT *
+             FROM maintenance_orders
+            WHERE tenant_id = $1 AND property_id = $2 AND id = $3
+            FOR UPDATE`,
+          [tenantId, propertyId, maintenanceOrderId],
+        );
+        const current = currentResult.rows[0];
+        if (!current) {
+          await client.query("COMMIT");
+          return null;
+        }
+        const updated = await client.query(
+          `UPDATE maintenance_orders
+              SET status = $4,
+                  updated_at = now()
+            WHERE tenant_id = $1 AND property_id = $2 AND id = $3
+            RETURNING *`,
+          [tenantId, propertyId, maintenanceOrderId, next],
+        );
+        await insertAudit(client, {
+          tenantId,
+          propertyId,
+          action: "maintenance.status_updated",
+          entityId: maintenanceOrderId,
+          actor,
+          changes: { from: current.status, to: next, roomId: current.room_id },
+        });
+        await client.query("COMMIT");
+        return maintenanceFromRow(updated.rows[0]);
       } catch (error) {
         try { await client.query("ROLLBACK"); } catch {}
         throw error;

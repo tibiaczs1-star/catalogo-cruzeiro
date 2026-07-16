@@ -183,6 +183,18 @@ test("hierarquia mostra todas as areas para administrador e gerente", async () =
   }
 });
 
+test("administrador opera manutenção e fotos sem trocar de cargo", async () => {
+  const script = await source("app.js");
+
+  assert.match(script, /updateMaintenance/);
+  assert.match(script, /data-maintenance-order-id/);
+  assert.match(script, /\/maintenance-orders\/\$\{encodeURIComponent\(orderId\)\}\/status/);
+  assert.match(script, /canManageRooms/);
+  assert.match(script, /canManageHousekeeping/);
+  assert.match(script, /canManageMaintenance/);
+  assert.match(script, /Salvar foto/);
+});
+
 test("painel libera check-in somente na data operacional da propriedade", async () => {
   const script = await source("app.js");
 

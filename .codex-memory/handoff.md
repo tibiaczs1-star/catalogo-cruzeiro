@@ -1,18 +1,16 @@
 # Handoff
 
-Updated: 2026-07-16T06:39:06.062Z
+Updated: 2026-07-16T06:50:32.445Z
 
-AShotelaria pronto localmente: 116 testes passam, node --check passa, smoke Playwright validou login admin, balcão walk-in e upload de foto de entrega.
+Ajuste de hierarquia concluído: rota PATCH maintenance-orders/:id/status, store memória/Postgres, botões no painel, testes novos para admin e recepção.
 
 ## Next
 
-- commit/push/deploy Render
+- publicar e validar online
 
 ## Files In Focus
 
 - ashotelaria-app/app.js
-- ashotelaria-app/styles.css
 - ashotelaria/http.js
 - ashotelaria/memory-store.js
 - ashotelaria/postgres-store.js
-- ashotelaria/migrations/003_room_photos.sql

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-07-16T06:39:05.808Z",
+  "lastUpdatedAt": "2026-07-16T06:50:32.322Z",
   "orders": [
     {
       "id": "2026-06-05-capturar-produtos-grupo-inova-logo-correta",
@@ -6080,6 +6080,36 @@
         "hotel",
         "frontdesk",
         "governanca"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-07-16-ashotelaria-admin-gerente-operam-manutencao-e-fotos-no-mesmo-login-mestre",
+      "createdAt": "2026-07-16T06:50:32.322Z",
+      "updatedAt": "2026-07-16T06:50:32.322Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Admin pode mudar estados de tudo, inclusive manutenção, tirar foto do quarto e acessar todo conteúdo sem trocar senha/cargo.",
+      "summary": "AShotelaria: admin/gerente operam manutenção e fotos no mesmo login mestre.",
+      "normalizedTasks": [
+        "admin-login-mestre",
+        "manutencao-status",
+        "painel-sem-trocar-cargo",
+        "foto-admin-quarto"
+      ],
+      "filesTouched": [
+        "ashotelaria-app/app.js",
+        "ashotelaria/http.js",
+        "ashotelaria/memory-store.js",
+        "ashotelaria/postgres-store.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "ashotelaria",
+        "hierarquia",
+        "admin",
+        "manutencao"
       ],
       "nextSteps": [],
       "notes": ""

@@ -257,6 +257,31 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         return true;
       }
 
+      const maintenanceStatusMatch = routePath.match(/^\/maintenance-orders\/([^/]+)\/status$/);
+      if (method === "PATCH" && maintenanceStatusMatch) {
+        const session = await requireSession(req, authService, cookieName);
+        requirePasswordChanged(session);
+        requirePermission(session, "tasks.maintenance.update");
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.updateMaintenanceOrderStatus !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Maintenance update unavailable", 503);
+        }
+        const maintenanceOrder = await store.updateMaintenanceOrderStatus({
+          tenantId: session.tenantId,
+          propertyId: session.propertyId,
+          maintenanceOrderId: decodeURIComponent(maintenanceStatusMatch[1]),
+          status: body.status,
+          actor: {
+            id: `${session.username}:${session.role}`,
+            username: session.username,
+            role: session.role,
+          },
+        });
+        if (!maintenanceOrder) throw httpError("NOT_FOUND", "Maintenance order not found", 404);
+        sendJson(res, 200, { maintenanceOrder });
+        return true;
+      }
+
       throw httpError("NOT_FOUND", "Route not found", 404);
     } catch (error) {
       const safe = normalizeError(error);
@@ -503,6 +528,7 @@ function normalizeError(error) {
     INVALID_RESERVATION_TRANSITION: 409,
     CHECK_IN_NOT_ALLOWED: 409,
     ROOM_NOT_READY: 409,
+    INVALID_MAINTENANCE_STATUS: 400,
   };
   if (authStatuses[error?.code]) {
     const code = error.code;
@@ -523,6 +549,7 @@ function normalizeError(error) {
       INVALID_RESERVATION_TRANSITION: "Reservation status transition is invalid",
       CHECK_IN_NOT_ALLOWED: "Check-in is only allowed on the reservation arrival date",
       ROOM_NOT_READY: "Room is not ready for check-in",
+      INVALID_MAINTENANCE_STATUS: "Maintenance status is invalid",
     };
     return { status, code, message: messages[code] };
   }

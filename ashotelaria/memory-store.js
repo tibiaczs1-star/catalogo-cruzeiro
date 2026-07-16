@@ -19,6 +19,7 @@ const ROOM_STATUSES = new Set([
   "blocked", "do_not_disturb",
 ]);
 const ROOM_PHOTO_KINDS = new Set(["room", "delivery"]);
+const MAINTENANCE_STATUSES = new Set(["open", "in_progress", "closed"]);
 const SUMMARY_ROOM_STATUS = {
   cleaning: "dirty",
   inspected: "available",
@@ -47,6 +48,12 @@ function isValidImageDataUrl(value) {
   return typeof value === "string"
     && /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/i.test(value)
     && value.length <= 2_000_000;
+}
+
+function invalidMaintenanceStatus() {
+  const error = new RangeError("maintenance order status is unknown");
+  error.code = "INVALID_MAINTENANCE_STATUS";
+  return error;
 }
 
 function reservationResult(reservation, replayed, includeReplayMetadata) {
@@ -415,6 +422,27 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
         audit({ tenantId, propertyId, action: "room.status_updated", entityId: room.id, actor, changes: { from: previous, to: room.status } });
         return copy(room);
       });
+    },
+
+    async updateMaintenanceOrderStatus({ tenantId, propertyId, maintenanceOrderId, status, actor }) {
+      const next = String(status ?? "").trim().toLowerCase();
+      if (!MAINTENANCE_STATUSES.has(next)) throw invalidMaintenanceStatus();
+      if (!scopedProperty(tenantId, propertyId)) return null;
+      const order = state.maintenanceOrders.find((row) => (
+        row.id === maintenanceOrderId && row.tenantId === tenantId && row.propertyId === propertyId
+      ));
+      if (!order) return null;
+      const previous = order.status;
+      order.status = next;
+      audit({
+        tenantId,
+        propertyId,
+        action: "maintenance.status_updated",
+        entityId: order.id,
+        actor,
+        changes: { from: previous, to: order.status, roomId: order.roomId },
+      });
+      return copy(order);
     },
 
     async updateReservationStatus({ tenantId, propertyId, reservationId, status, actor }) {

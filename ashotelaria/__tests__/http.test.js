@@ -299,6 +299,47 @@ test("gerente inherits the full operational chain including finance, settings an
   }
 });
 
+test("administrator can control maintenance orders and attach room delivery photos without switching role", async () => {
+  const { handler } = fixture();
+  const cookie = await login(handler, "administrador", "Admin-inicial-2026!");
+  const headers = { cookie };
+
+  const maintenance = await request(handler, "PATCH", `${BASE}/maintenance-orders/maintenance-jurua-01/status`, {
+    headers,
+    body: { status: "in_progress" },
+  });
+  assert.equal(maintenance.res.statusCode, 200, maintenance.res.text);
+  assert.equal(maintenance.res.json.maintenanceOrder.status, "in_progress");
+
+  const photo = await request(handler, "POST", `${BASE}/rooms/room-104/photos`, {
+    headers,
+    body: {
+      kind: "delivery",
+      imageDataUrl: "data:image/png;base64,Zm90by1hZG1pbi1uby1xdWFydG8=",
+      note: "Administrador conferiu o quarto pessoalmente",
+    },
+  });
+  assert.equal(photo.res.statusCode, 201, photo.res.text);
+  assert.equal(photo.res.json.photo.actor.role, "administrador");
+});
+
+test("maintenance order updates are scoped and blocked for reception", async () => {
+  const { handler } = fixture();
+  const receptionCookie = await login(handler, "recepcionista", "Recepcao-inicial-2026!");
+  const forbidden = await request(handler, "PATCH", `${BASE}/maintenance-orders/maintenance-jurua-01/status`, {
+    headers: { cookie: receptionCookie },
+    body: { status: "closed" },
+  });
+  assert.equal(forbidden.res.statusCode, 403);
+
+  const adminCookie = await login(handler, "administrador", "Admin-inicial-2026!");
+  const missing = await request(handler, "PATCH", `${BASE}/maintenance-orders/maintenance-moa-01/status`, {
+    headers: { cookie: adminCookie },
+    body: { status: "closed" },
+  });
+  assert.equal(missing.res.statusCode, 404);
+});
+
 test("front desk walk-in route registers an immediate in-house guest", async () => {
   const { handler } = fixture({
     store: createMemoryStore(createSeed("2026-07-14"), { now: () => "2026-07-14" }),

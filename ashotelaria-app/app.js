@@ -347,7 +347,7 @@ function renderMaintenance() {
   const orders = state.bootstrap.maintenanceOrders ?? [];
   const rooms = new Map((state.bootstrap.rooms ?? []).map((room) => [room.id, room]));
   return `<div class="section-heading"><div><h2>Ordens de manutenção</h2><p>Ocorrências técnicas da unidade.</p></div><strong>${orders.length}</strong></div>
-    ${orders.length ? `<div class="data-list">${orders.map((order) => `<div class="data-row" tabindex="0" data-help="Ordem técnica: identifica o serviço, o quarto relacionado e a situação atual."><strong>${escapeHtml(order.title ?? "Ordem técnica")}</strong><span>Quarto ${escapeHtml(rooms.get(order.roomId)?.number ?? "—")}</span><span>${escapeHtml(order.id)}</span>${statusMarkup(order.status)}</div>`).join("")}</div>` : emptyMarkup()}`;
+    ${orders.length ? `<div class="data-list">${orders.map((order) => maintenanceRow(order, rooms)).join("")}</div>` : emptyMarkup()}`;
 }
 
 function renderFinance() {
@@ -377,6 +377,7 @@ function renderSecurity() {
 function bindViewActions() {
   elements.content.querySelectorAll("[data-room-id]").forEach((button) => button.addEventListener("click", updateRoom));
   elements.content.querySelectorAll("[data-reservation-status]").forEach((button) => button.addEventListener("click", updateReservation));
+  elements.content.querySelectorAll("[data-maintenance-order-id]").forEach((button) => button.addEventListener("click", updateMaintenance));
   elements.content.querySelector("[data-walkin-form]")?.addEventListener("submit", createWalkIn);
   elements.content.querySelectorAll("[data-room-photo-form]").forEach((form) => form.addEventListener("submit", uploadRoomPhoto));
   elements.content.querySelector("[data-open-security]")?.addEventListener("click", () => openAccount());
@@ -451,6 +452,23 @@ async function updateReservation(event) {
   event.currentTarget.disabled = true;
   try {
     await api(`/reservations/${encodeURIComponent(reservationId)}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    });
+    await refreshBootstrap();
+  } catch (error) {
+    showViewError(error.message);
+  }
+}
+
+async function updateMaintenance(event) {
+  if (!canManageMaintenance()) return;
+  const orderId = event.currentTarget.dataset.maintenanceOrderId;
+  const status = event.currentTarget.dataset.maintenanceStatus;
+  if (!orderId || !status) return;
+  event.currentTarget.disabled = true;
+  try {
+    await api(`/maintenance-orders/${encodeURIComponent(orderId)}/status`, {
       method: "PATCH",
       body: JSON.stringify({ status }),
     });
@@ -599,6 +617,9 @@ function togglePassword(event) {
 }
 
 function hasPermission(permission) { return state.session.permissions?.includes(permission); }
+function canManageRooms() { return hasPermission("rooms.operational.update"); }
+function canManageHousekeeping() { return hasPermission("tasks.housekeeping.update"); }
+function canManageMaintenance() { return hasPermission("tasks.maintenance.update"); }
 function countStatus(rows, status) { return rows.filter((row) => row.status === status).length; }
 function money(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(cents || 0) / 100); }
 function formatDate(value) { if (!value) return "—"; const [year, month, day] = value.slice(0, 10).split("-"); return `${day}/${month}/${year}`; }
@@ -639,6 +660,18 @@ function reservationActions(row) {
 }
 function reservationRow(row, interactive = false) { return `<div class="data-row${interactive ? " data-row--reservation" : ""}" tabindex="0" data-help="Resumo da reserva: período, valor, situação${interactive ? " e ações operacionais permitidas" : ""}."><strong>${escapeHtml(row.id)}</strong><span>${formatDate(row.checkIn)} → ${formatDate(row.checkOut)}</span><span>${money(row.total)}</span>${statusMarkup(row.status)}${interactive ? reservationActions(row) : ""}</div>`; }
 function taskRow(task, rooms) { return `<div class="data-row" tabindex="0" data-help="Tarefa de governança: identifica o quarto e o andamento da limpeza ou inspeção."><strong>Quarto ${escapeHtml(rooms.get(task.roomId)?.number ?? "—")}</strong><span>${escapeHtml(task.id)}</span><span>Governança</span>${statusMarkup(task.status)}</div>`; }
+function maintenanceRow(order, rooms) {
+  return `<div class="data-row" tabindex="0" data-help="Ordem técnica: identifica o serviço, o quarto relacionado e a situação atual. Administrador e gerente podem alterar daqui sem trocar de cargo."><strong>${escapeHtml(order.title ?? "Ordem técnica")}</strong><span>Quarto ${escapeHtml(rooms.get(order.roomId)?.number ?? "—")}</span><span>${escapeHtml(order.id)}</span>${statusMarkup(order.status)}${maintenanceActions(order)}</div>`;
+}
+function maintenanceActions(order) {
+  if (!canManageMaintenance()) return "";
+  const actions = ({
+    open: [["in_progress", "Iniciar"], ["closed", "Fechar"]],
+    in_progress: [["closed", "Fechar"], ["open", "Reabrir"]],
+    closed: [["open", "Reabrir"]],
+  })[order.status] ?? [["open", "Abrir"]];
+  return `<span class="reservation-actions">${actions.map(([status, label]) => `<button class="button button--secondary button--compact" type="button" data-maintenance-order-id="${escapeHtml(order.id)}" data-maintenance-status="${status}" data-help="Ação de manutenção: ${escapeHtml(label)} altera a situação desta ordem técnica.">${label}</button>`).join("")}</span>`;
+}
 function roomMarkup(room) {
   const latestDelivery = room.deliveryPhotos?.[0];
   const photoPreview = room.photoUrl
@@ -647,15 +680,15 @@ function roomMarkup(room) {
   const delivery = latestDelivery
     ? `<span class="room-delivery-proof">Foto de entrega salva</span>`
     : `<span class="room-delivery-proof room-delivery-proof--empty">Sem foto de entrega</span>`;
-  const photoForm = hasPermission("tasks.housekeeping.update")
+  const photoForm = canManageHousekeeping()
     ? `<form class="room-photo-form" data-room-photo-form="${escapeHtml(room.id)}"><label><span>Foto de entrega</span><input type="file" accept="image/*" capture="environment" data-help="A camareira pode tirar foto do quarto pronto para registrar a entrega."></label><input name="note" placeholder="Observação" data-help="Observação curta sobre a entrega do quarto."><p data-photo-message class="form-message"></p><button class="button button--secondary button--compact" type="submit" data-help="Salvar foto de entrega deste quarto.">Salvar foto</button></form>`
     : "";
-  return `<div class="room-tile" data-help="Situação operacional do quarto ${escapeHtml(room.number)}. ${hasPermission("rooms.operational.update") ? "Atualize o estado ou registre foto quando necessário." : "Seu cargo possui acesso somente para consulta."}">
+  return `<div class="room-tile" data-help="Situação operacional do quarto ${escapeHtml(room.number)}. ${canManageRooms() ? "Atualize o estado ou registre foto quando necessário." : "Seu cargo possui acesso somente para consulta."}">
     ${photoPreview}
-    <button type="button" data-room-id="${escapeHtml(room.id)}" ${hasPermission("rooms.operational.update") ? "" : "disabled"}>
+    <button type="button" data-room-id="${escapeHtml(room.id)}" ${canManageRooms() ? "" : "disabled"}>
       <span class="room-tile__number">${escapeHtml(room.number)}</span>
       <span class="room-tile__status">${escapeHtml(STATUS_LABELS[room.status] ?? room.status)}</span>
-      ${hasPermission("rooms.operational.update") ? '<span class="room-tile__action">Atualizar situação →</span>' : ""}
+      ${canManageRooms() ? '<span class="room-tile__action">Atualizar situação →</span>' : ""}
     </button>
     ${delivery}
     ${photoForm}

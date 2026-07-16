@@ -767,6 +767,43 @@ test("memory check-in cannot overwrite a concurrent incompatible room update", a
   assert.equal(bootstrap.reservations.find(({ id }) => id === "reservation-jurua-arrival-20260714").status, "confirmed");
 });
 
+test("maintenance order status updates stay scoped and audited", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"));
+  const updated = await store.updateMaintenanceOrderStatus({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    maintenanceOrderId: "maintenance-jurua-01",
+    status: "in_progress",
+    actor: { id: "admin:administrador", role: "administrador" },
+  });
+
+  assert.equal(updated.status, "in_progress");
+  let bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.maintenanceOrders.find(({ id }) => id === "maintenance-jurua-01").status, "in_progress");
+  assert.equal((await store.listAuditEvents({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY }))
+    .filter(({ action }) => action === "maintenance.status_updated").length, 1);
+
+  assert.equal(await store.updateMaintenanceOrderStatus({
+    tenantId: OTHER_TENANT,
+    propertyId: JURUA_PROPERTY,
+    maintenanceOrderId: "maintenance-jurua-01",
+    status: "closed",
+    actor: { id: "admin:administrador" },
+  }), null);
+  await assert.rejects(
+    store.updateMaintenanceOrderStatus({
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      maintenanceOrderId: "maintenance-jurua-01",
+      status: "done",
+      actor: { id: "admin:administrador" },
+    }),
+    (error) => error.code === "INVALID_MAINTENANCE_STATUS",
+  );
+  bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.maintenanceOrders.find(({ id }) => id === "maintenance-jurua-01").status, "in_progress");
+});
+
 test("reservation lifecycle updates the stay, room and audit inside the property scope", async () => {
   const store = createMemoryStore(createSeed("2026-07-14"), {
     now: () => new Date("2026-07-15T03:30:00.000Z"),
