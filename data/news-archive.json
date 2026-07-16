@@ -216,8 +216,8 @@
     "sourceName": "Jurua Online",
     "sourceUrl": "https://juruaonline.com.br/foragido-apontado-como-integrante-da-tropa-do-odio-e-preso-pela-pm-em-area-rural-de-cruzeiro-do-sul/",
     "sourceLabel": "Foragido apontado como integrante da ‘Tropa do Ódio’ é preso pela PM em área rural de Cruzeiro do Sul",
-    "lede": "A Polícia Militar do Acre prendeu, na madrugada desta quarta-feira (15), um homem apontado como integrante da facção criminosa conhecida como “Tropa do Ódio” e considerado de alta periculosidade.",
-    "summary": "A Polícia Militar do Acre prendeu, na madrugada desta quarta-feira (15), um homem apontado como integrante da facção criminosa conhecida como “Tropa do Ódio” e considerado de alta periculosidade.",
+    "lede": "Um homem apontado como integrante da facção criminosa Tropa do Ódio foi preso pela Polícia Militar na área rural de Cruzeiro do Sul. Segundo o Juruá Online, a prisão ocorreu na madrugada de quarta-feira, 15, e o suspeito era considerado foragido e de alta periculosidade. Ele foi encaminhado para os procedimentos legais.",
+    "summary": "Um homem apontado como integrante da facção criminosa Tropa do Ódio foi preso pela Polícia Militar na área rural de Cruzeiro do Sul. Segundo o Juruá Online, a prisão ocorreu na madrugada de quarta-feira, 15, e o suspeito era considerado foragido e de alta periculosidade. Ele foi encaminhado para os procedimentos legais.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -268,7 +268,12 @@
       "Jurua Online publicou em 16 de jul de 2026: Foragido apontado como integrante da ‘Tropa do Ódio’ é preso pela PM em área rural de Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "seo": {
+      "title": "Foragido apontado como integrante da ‘Tropa do Ódio’ é preso pela PM em área rural de Cruzeiro do Sul",
+      "description": "Um homem apontado como integrante da facção criminosa Tropa do Ódio foi preso pela Polícia Militar na área rural de Cruzeiro do Sul. Segundo o Juruá Online, a prisão ocorreu na madrugada de quarta-feira, 15, e o suspeito era considerado foragido e de alta periculosidade. Ele foi encaminhado para os procedimentos legais.",
+      "slug": "foragido-apontado-como-integrante-da-tropa-do-odio-e-preso-pela-pm-em-area-rural-de-cruzeiro-do-"
+    }
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/servidor-da-prefeitura-vira-alvo-de-investigacao-do-mp-por-contratos-na-saude/",
@@ -11431,8 +11436,8 @@
     "sourceName": "Jurua Online",
     "sourceUrl": "https://juruaonline.com.br/caminhoes-atolam-no-ramal-2-e-moradores-voltam-a-denunciar-condicoes-precarias-da-estrada-em-cruzeiro-do-sul/",
     "sourceLabel": "Caminhões atolam no Ramal 2 e moradores voltam a denunciar condições precárias da estrada em Cruzeiro do Sul",
-    "lede": "Moradores do Ramal 2, na zona rural de Cruzeiro do Sul, voltaram a denunciar as condições da estrada após dois caminhões ficarem atolados na manhã desta quarta-feira (15).",
-    "summary": "Moradores do Ramal 2, na zona rural de Cruzeiro do Sul, voltaram a denunciar as condições da estrada após dois caminhões ficarem atolados na manhã desta quarta-feira (15).",
+    "lede": "Dois caminhões ficaram atolados no Ramal 2, na zona rural de Cruzeiro do Sul, na manhã de quarta-feira, 15. Segundo o Juruá Online, um veículo estava preso desde as 4h e uma caçamba também atolou ao tentar ajudar. Moradores afirmam que a situação prejudicou o transporte escolar, passageiros e o escoamento da produção.",
+    "summary": "Dois caminhões ficaram atolados no Ramal 2, na zona rural de Cruzeiro do Sul, na manhã de quarta-feira, 15. Segundo o Juruá Online, um veículo estava preso desde as 4h e uma caçamba também atolou ao tentar ajudar. Moradores afirmam que a situação prejudicou o transporte escolar, passageiros e o escoamento da produção.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -11483,7 +11488,12 @@
       "Jurua Online publicou em 15 de jul de 2026: Caminhões atolam no Ramal 2 e moradores voltam a denunciar condições precárias da estrada em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "seo": {
+      "title": "Caminhões atolam no Ramal 2 e moradores voltam a denunciar condições precárias da estrada em Cruzeiro do Sul",
+      "description": "Dois caminhões ficaram atolados no Ramal 2, na zona rural de Cruzeiro do Sul, na manhã de quarta-feira, 15. Segundo o Juruá Online, um veículo estava preso desde as 4h e uma caçamba também atolou ao tentar ajudar. Moradores afirmam que a situação prejudicou o transporte escolar, passageiros e o escoamento da produção.",
+      "slug": "caminhoes-atolam-no-ramal-2-e-moradores-voltam-a-denunciar-condicoes-precarias-da-estrada-em-cru"
+    }
   },
   {
     "id": "https://juruaonline.com.br/motorista-de-aplicativo-escapa-de-suposta-tentativa-de-sequestro-durante-corrida-em-cruzeiro-do-sul/",
@@ -17909,8 +17919,8 @@
     "sourceName": "Jurua Online",
     "sourceUrl": "https://juruaonline.com.br/moradores-denunciam-falta-de-funcionamento-de-caixa-do-banco-do-brasil-em-rodrigues-alves/",
     "sourceLabel": "Moradores denunciam falta de funcionamento de caixa do Banco do Brasil em Rodrigues Alves",
-    "lede": "Moradores de Rodrigues Alves denunciam que o caixa eletrônico do Banco do Brasil instalado no município está sem funcionar há mais de dois meses.",
-    "summary": "Moradores de Rodrigues Alves denunciam que o caixa eletrônico do Banco do Brasil instalado no município está sem funcionar há mais de dois meses.",
+    "lede": "Moradores de Rodrigues Alves denunciam que o caixa eletrônico do Banco do Brasil está sem funcionar há mais de dois meses. Segundo o Juruá Online, aposentados, servidores e beneficiários precisam viajar até Cruzeiro do Sul para sacar dinheiro. Comerciantes também relatam prejuízos, e a comunidade cobra uma explicação e a retomada do serviço.",
+    "summary": "Moradores de Rodrigues Alves denunciam que o caixa eletrônico do Banco do Brasil está sem funcionar há mais de dois meses. Segundo o Juruá Online, aposentados, servidores e beneficiários precisam viajar até Cruzeiro do Sul para sacar dinheiro. Comerciantes também relatam prejuízos, e a comunidade cobra uma explicação e a retomada do serviço.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -17961,7 +17971,12 @@
       "Jurua Online publicou em 15 de jul de 2026: Moradores denunciam falta de funcionamento de caixa do Banco do Brasil em Rodrigues Alves.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "seo": {
+      "title": "Moradores denunciam falta de funcionamento de caixa do Banco do Brasil em Rodrigues Alves",
+      "description": "Moradores de Rodrigues Alves denunciam que o caixa eletrônico do Banco do Brasil está sem funcionar há mais de dois meses. Segundo o Juruá Online, aposentados, servidores e beneficiários precisam viajar até Cruzeiro do Sul para sacar dinheiro. Comerciantes também relatam prejuízos, e a comunidade cobra uma explicação e a retomada do serviço.",
+      "slug": "moradores-denunciam-falta-de-funcionamento-de-caixa-do-banco-do-brasil-em-rodrigues-alves"
+    }
   },
   {
     "id": "https://juruaonline.com.br/argentina-x-inglaterra-tera-esquema-reforcado-de-seguranca-e-restricoes-para-torcedores/",
