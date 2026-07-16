@@ -1,16 +1,27 @@
 # Handoff
 
-Updated: 2026-07-16T06:50:32.445Z
+Updated: 2026-07-16T16:45:00Z
 
-Ajuste de hierarquia concluído: rota PATCH maintenance-orders/:id/status, store memória/Postgres, botões no painel, testes novos para admin e recepção.
+Lançamento Android concluído. Render está live no commit `097d7b52` com:
+- `/app.html` online e rodapé corrigido sem imagem quebrada.
+- `/downloads/catalogo-czs-android.apk` online com MIME de APK e tamanho 991349 bytes.
+- `/downloads/catalogo-czs-android.json` online.
+- `/.well-known/assetlinks.json` online.
+- `/lancamento-app.html` online.
+- Destaque do Instagram `@catalogo_czs_` no site, no app e na reportagem.
+
+Instagram: post de lançamento publicado via BlueStacks/ADB no perfil `@catalogo_czs_`; evidência local em `.codex-temp/instagram-after-wait2.png` mostra o card de lançamento no topo da grade.
 
 ## Next
 
-- publicar e validar online
+- Acompanhar comentários/alcance.
+- Se pedir nova versão do app, reconstruir/sinar com o keystore externo já criado.
 
 ## Files In Focus
 
-- ashotelaria-app/app.js
-- ashotelaria/http.js
-- ashotelaria/memory-store.js
-- ashotelaria/postgres-store.js
+- app.html
+- app.css
+- app-sw.js
+- index.html
+- lancamento-app.html
+- output/launch-czs-android-20260716/

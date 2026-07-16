@@ -1,22 +1,25 @@
 # Current State
 
-Updated: 2026-07-16T06:50:32.384Z
+Updated: 2026-07-16T16:45:00Z
 
 ## Active Goal
 
-- AShotelaria login mestre admin/gerente
+- Lançamento app Android CZS
 
 ## Summary
 
-Admin e gerente mantêm visão completa. Painel de manutenção agora permite iniciar/fechar/reabrir ordens sem trocar cargo, e admin também pode salvar foto de entrega do quarto. Testes 120/120 verdes.
+App Android do Catálogo CZS publicado no Render com APK online, página de lançamento e destaque para o Instagram oficial `@catalogo_czs_` no site, app e reportagem. Post de lançamento publicado no Instagram via BlueStacks/ADB; print de confirmação mostra o card "Catálogo CZS no seu celular" no topo da grade do perfil.
 
 ## Next
 
-- commit/push/deploy Render
+- Acompanhar comentários/alcance no Instagram.
+- Se for atualizar o APK, manter o mesmo keystore em `C:\Users\junio\.codex\secrets\catalogo-czs-android\`.
 
 ## Files In Focus
 
-- ashotelaria-app/app.js
-- ashotelaria/http.js
-- ashotelaria/memory-store.js
-- ashotelaria/postgres-store.js
+- app.html
+- app.css
+- app-sw.js
+- index.html
+- lancamento-app.html
+- downloads/catalogo-czs-android.apk
