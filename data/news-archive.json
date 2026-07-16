@@ -683,6 +683,73 @@
     ]
   },
   {
+    "id": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi-na-cidade/",
+    "slug": "prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi",
+    "title": "Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi",
+    "eyebrow": "Prefeitura",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:54:48.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi-na-cidade/",
+    "sourceLabel": "Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi",
+    "lede": "De acordo com parecer jurídico, Uber não apresentou documento que comprovasse o requisito de contratação de seguro de acidentes pessoais; empresa afirmou receber a decisão com estranheza",
+    "summary": "De acordo com parecer jurídico, Uber não apresentou documento que comprovasse o requisito de contratação de seguro de acidentes pessoais; empresa afirmou receber a decisão com estranheza",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/WhatsApp-Image-2025-01-15-at-19.25.17.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/WhatsApp-Image-2025-01-15-at-19.25.17.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/WhatsApp-Image-2025-01-15-at-19.25.17.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi-na-cidade/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi-na-cidade/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi De acordo com parecer jurídico, Uber não apresentou documento que comprovasse o requisito de contratação de seguro de acidentes pessoais; empresa afirmou receber a decisão com estranheza A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi De acordo com parecer jurídico, Uber não apresentou documento que comprovasse o requisito de contratação de seguro de acidentes pessoais; empresa afirmou receber a decisão com estranheza A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi. De acordo com parecer jurídico, Uber não apresentou documento que comprovasse o requisito de contratação de seguro de acidentes pessoais; empresa afirmou receber a decisão com estranheza Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/vazamento-de-gas-leva-prefeitura-de-manaus-decretar-estado-de-alerta",
     "slug": "vazamento-de-gas-leva-prefeitura-de-manaus-a-decretar-estado-de-alerta",
     "title": "Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta",
@@ -1086,6 +1153,145 @@
     ]
   },
   {
+    "id": "https://agazetadoacre.com/2026/07/destaques/2o-destaque/qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms/",
+    "slug": "qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms",
+    "title": "Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS",
+    "eyebrow": "Saude",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:23:10.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/destaques/2o-destaque/qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms/",
+    "sourceLabel": "Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS",
+    "lede": "A qualidade do ar em Rio Branco amanheceu em nível moderado nesta quinta-feira, 16, com concentração de partículas finas quase três vezes acima do limite anual recomendado pela Organização Mundial da Saúde. Segundo A Gazeta do Acre, os dados de qualidade do ar coincidem com o aumento dos focos de queimadas no estado neste início de julho.",
+    "summary": "A qualidade do ar em Rio Branco amanheceu em nível moderado nesta quinta-feira, 16, com concentração de partículas finas quase três vezes acima do limite anual recomendado pela Organização Mundial da Saúde. Segundo A Gazeta do Acre, os dados de qualidade do ar coincidem com o aumento dos focos de queimadas no estado neste início de julho.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-03-at-06.09.22-600x450.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-03-at-06.09.22-600x450.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-03-at-06.09.22-600x450.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/destaques/2o-destaque/qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/destaques/2o-destaque/qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS A qualidade do ar em Rio Branco amanheceu em nível moderado nesta quinta-feira, 16, com concentração de partículas finas (PM2.5) quase três vezes acima do limite anual recomendado pela Organização Mundial da Saúde (OMS). A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS A qualidade do ar em Rio Branco amanheceu em nível moderado nesta quinta-feira, 16, com concentração de partículas finas (PM2.5) quase três vezes acima do limite anual recomendado pela Organização Mundial da Saúde (OMS). A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS. A qualidade do ar em Rio Branco amanheceu em nível moderado nesta quinta-feira, 16, com concentração de partículas finas (PM2.5) quase três vezes acima do limite anual recomendado pela Organização Mundial da Saúde (OMS). Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Gazeta do Acre publicou em 16 de jul de 2026: Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "seo": {
+      "title": "Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS",
+      "description": "A qualidade do ar em Rio Branco amanheceu em nível moderado nesta quinta-feira, 16, com concentração de partículas finas quase três vezes acima do limite anual recomendado pela Organização Mundial da Saúde. Segundo A Gazeta do Acre, os dados de qualidade do ar coincidem com o aumento dos focos de queimadas no estado neste início de julho.",
+      "slug": "qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms"
+    }
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/norte/am/vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude/",
+    "slug": "vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude",
+    "title": "Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde",
+    "eyebrow": "Saude",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:05:45.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/norte/am/vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude/",
+    "sourceLabel": "Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde",
+    "lede": "Secretaria estadual de Saúde informou que quadro de saúde dos pacientes é estável; incidente ocorreu em uma indústria no Distrito Industrial",
+    "summary": "Secretaria estadual de Saúde informou que quadro de saúde dos pacientes é estável; incidente ocorreu em uma indústria no Distrito Industrial",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-06-at-09.10.41.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-06-at-09.10.41.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-06-at-09.10.41.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/norte/am/vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/norte/am/vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde Secretaria estadual de Saúde informou que quadro de saúde dos pacientes é estável; incidente ocorreu em uma indústria no Distrito Industrial A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde Secretaria estadual de Saúde informou que quadro de saúde dos pacientes é estável; incidente ocorreu em uma indústria no Distrito Industrial A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde. Secretaria estadual de Saúde informou que quadro de saúde dos pacientes é estável; incidente ocorreu em uma indústria no Distrito Industrial Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://ac24horas.com/2026/07/16/ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina/",
     "slug": "ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina",
     "title": "Ginecologista explica como o envelhecimento afeta a região íntima feminina",
@@ -1285,6 +1491,7 @@
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
       "ac24horas publicou em 16 de jul de 2026: 12 municípios do Acre superam limite de poluição da OMS antes do auge da seca.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -5221,6 +5428,277 @@
     ]
   },
   {
+    "id": "https://agazetadoacre.com/2026/07/guia-gazeta-2/1o-guia-gazeta/eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos/",
+    "slug": "eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos",
+    "title": "EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos",
+    "eyebrow": "Politica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:30:24.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/guia-gazeta-2/1o-guia-gazeta/eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos/",
+    "sourceLabel": "EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos",
+    "lede": "O governo dos Estados Unidos confirmou nesta quinta-feira (15) a aplicação de uma tarifa adicional de 25% sobre produtos brasileiros após a conclusão de uma investigação comercial conduzida pelo Escritório do Representante Comercial dos EUA (USTR, na sigla...",
+    "summary": "O governo dos Estados Unidos confirmou nesta quinta-feira (15) a aplicação de uma tarifa adicional de 25% sobre produtos brasileiros após a conclusão de uma investigação comercial conduzida pelo Escritório do Representante Comercial dos EUA (USTR, na sigla...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/guia-gazeta-2/1o-guia-gazeta/eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/guia-gazeta-2/1o-guia-gazeta/eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos O governo dos Estados Unidos confirmou nesta quinta-feira (15) a aplicação de uma tarifa adicional de 25% sobre produtos brasileiros após a conclusão de uma investigação comercial conduzida pelo Escritório do Representante Comercial dos EUA (USTR, na sigla... A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos O governo dos Estados Unidos confirmou nesta quinta-feira (15) a aplicação de uma tarifa adicional de 25% sobre produtos brasileiros após a conclusão de uma investigação comercial conduzida pelo Escritório do Representante Comercial dos EUA (USTR, na sigla... A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos. O governo dos Estados Unidos confirmou nesta quinta-feira (15) a aplicação de uma tarifa adicional de 25% sobre produtos brasileiros após a conclusão de uma investigação comercial conduzida pelo Escritório do Representante Comercial dos... Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "A Gazeta do Acre publicou em 16 de jul de 2026: EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/07/gefron-apreende-23-kg-de-skunk-escondidos-em-caminhonete-e-prende-dois-homens-em-senador-guiomard/",
+    "slug": "gefron-apreende-23-kg-de-skunk-escondidos-em-caminhonete-e-prende-dois-homens-em-senador-guiomar",
+    "title": "GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard",
+    "eyebrow": "Politica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:28:34.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/07/gefron-apreende-23-kg-de-skunk-escondidos-em-caminhonete-e-prende-dois-homens-em-senador-guiomard/",
+    "sourceLabel": "GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard",
+    "lede": "Droga estava oculta em compartimentos da estrutura do veículo, abordado em posto de fiscalização; prejuízo ao crime é estimado em mais de R$ 346 mil",
+    "summary": "Droga estava oculta em compartimentos da estrutura do veículo, abordado em posto de fiscalização; prejuízo ao crime é estimado em mais de R$ 346 mil",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/07/gefron-apreende-23-kg-de-skunk-escondidos-em-caminhonete-e-prende-dois-homens-em-senador-guiomard/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/07/gefron-apreende-23-kg-de-skunk-escondidos-em-caminhonete-e-prende-dois-homens-em-senador-guiomard/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "gefron-apreende-23-kg-de-skunk-escondidos-em-caminhonete-e-prende-dois-homens-em-senador-guiomar"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard Droga estava oculta em compartimentos da estrutura do veículo, abordado em posto de fiscalização; prejuízo ao crime é estimado em mais de R$ 346 mil A informação vem de Juruá 24 Horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard Droga estava oculta em compartimentos da estrutura do veículo, abordado em posto de fiscalização; prejuízo ao crime é estimado em mais de R$ 346 mil A informação vem de Juruá 24 Horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard. Droga estava oculta em compartimentos da estrutura do veículo, abordado em posto de fiscalização; prejuízo ao crime é estimado em mais de R$ 346 mil Fonte: Jurua 24 Horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "Jurua 24 Horas publicou em 16 de jul de 2026: GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/16/governo-lula-classifica-decisao-dos-eua-como-ideologica-e-diz-que-equipe-de-trump-agiu-de-ma-fe.ghtml",
+    "slug": "governo-lula-classifica-decisao-dos-eua-como-ideologica-e-diz-que-equipe-de-trump-agiu-de-ma-fe",
+    "title": "Governo Lula classifica decisão dos EUA como 'ideológica' e diz que equipe de Trump agiu de má-fé",
+    "eyebrow": "Politica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:03:21.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/16/governo-lula-classifica-decisao-dos-eua-como-ideologica-e-diz-que-equipe-de-trump-agiu-de-ma-fe.ghtml",
+    "sourceLabel": "Governo Lula classifica decisão dos EUA como 'ideológica' e diz que equipe de Trump agiu de má-fé",
+    "lede": "No dia seguinte ao anúncio da tarifa de 25% sobre produtos brasileiros, confirmado pelos Estados Unidos, assessores presidenciais classificaram nesta quinta-feira (16) o tarifaço norte-americano como “ideológico” e “político” e uma tentativa equivocada de...",
+    "summary": "No dia seguinte ao anúncio da tarifa de 25% sobre produtos brasileiros, confirmado pelos Estados Unidos, assessores presidenciais classificaram nesta quinta-feira (16) o tarifaço norte-americano como “ideológico” e “político” e uma tentativa equivocada de...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/16/governo-lula-classifica-decisao-dos-eua-como-ideologica-e-diz-que-equipe-de-trump-agiu-de-ma-fe.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/16/governo-lula-classifica-decisao-dos-eua-como-ideologica-e-diz-que-equipe-de-trump-agiu-de-ma-fe.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-lula-classifica-decisao-dos-eua-como-ideologica-e-diz-que-equipe-de-trump-agiu-de-ma-fe"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Governo Lula classifica decisão dos EUA como 'ideológica' e diz que equipe de Trump agiu de má-fé No dia seguinte ao anúncio da tarifa de 25% sobre produtos brasileiros, confirmado pelos Estados Unidos, assessores presidenciais classificaram nesta quinta-feira (16) o tarifaço norte-americano como “ideológico” e “político” e uma tentativa equivocada de... A informação vem de G1 política.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Governo Lula classifica decisão dos EUA como 'ideológica' e diz que equipe de Trump agiu de má-fé No dia seguinte ao anúncio da tarifa de 25% sobre produtos brasileiros, confirmado pelos Estados Unidos, assessores presidenciais classificaram nesta quinta-feira (16) o tarifaço norte-americano como “ideológico” e “político” e uma tentativa equivocada de... A informação vem de G1 política.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Governo Lula classifica decisão dos EUA como 'ideológica' e diz que equipe de Trump agiu de má-fé. No dia seguinte ao anúncio da tarifa de 25% sobre produtos brasileiros, confirmado pelos Estados Unidos, assessores presidenciais classificaram nesta quinta-feira (16) o tarifaço norte-americano como “ideológico” e “político” e uma... Fonte: G1 Politica.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "G1 Politica publicou em 16 de jul de 2026: Governo Lula classifica decisão dos EUA como 'ideológica' e diz que equipe de Trump agiu de má-fé.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/agro/projeto-autazes-dpu-pede-ao-stf-suspensao-de-decisoes-favoraveis/",
+    "slug": "projeto-autazes-dpu-pede-ao-stf-suspensao-de-decisoes-favoraveis",
+    "title": "Projeto Autazes: DPU pede ao STF suspensão de decisões favoráveis",
+    "eyebrow": "Politica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:03:10.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/agro/projeto-autazes-dpu-pede-ao-stf-suspensao-de-decisoes-favoraveis/",
+    "sourceLabel": "Projeto Autazes: DPU pede ao STF suspensão de decisões favoráveis",
+    "lede": "Brazil Potash, responsável pelo empreendimento, afirmou que o pedido não muda a situação jurídica do projeto e informou que prepara uma manifestação ao Supremo",
+    "summary": "Brazil Potash, responsável pelo empreendimento, afirmou que o pedido não muda a situação jurídica do projeto e informou que prepara uma manifestação ao Supremo",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/08/31929_C1A9FFCC251EF51C.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/08/31929_C1A9FFCC251EF51C.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/08/31929_C1A9FFCC251EF51C.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/projeto-autazes-dpu-pede-ao-stf-suspensao-de-decisoes-favoraveis/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/projeto-autazes-dpu-pede-ao-stf-suspensao-de-decisoes-favoraveis/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "projeto-autazes-dpu-pede-ao-stf-suspensao-de-decisoes-favoraveis"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Projeto Autazes: DPU pede ao STF suspensão de decisões favoráveis Brazil Potash, responsável pelo empreendimento, afirmou que o pedido não muda a situação jurídica do projeto e informou que prepara uma manifestação ao Supremo A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Projeto Autazes: DPU pede ao STF suspensão de decisões favoráveis Brazil Potash, responsável pelo empreendimento, afirmou que o pedido não muda a situação jurídica do projeto e informou que prepara uma manifestação ao Supremo A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Projeto Autazes: DPU pede ao STF suspensão de decisões favoráveis. Brazil Potash, responsável pelo empreendimento, afirmou que o pedido não muda a situação jurídica do projeto e informou que prepara uma manifestação ao Supremo Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Projeto Autazes: DPU pede ao STF suspensão de decisões favoráveis.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://g1.globo.com/politica/noticia/2026/07/16/quaest-flavio-bolsonaro-reverter-tarifas-eua.ghtml",
     "slug": "para-58-flavio-bolsonaro-nao-tem-forca-para-convencer-trump-a-rever-tarifas-segundo-quaest",
     "title": "Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest",
@@ -8234,6 +8712,74 @@
     },
     "body": [
       "Jurua em Tempo publicou em 15 de jul de 2026: PF bloqueia quase R$ 1 bilhão de esquema de bets ilegais com influencers.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://contilnetnoticias.com.br/destaque-2/quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre/",
+    "slug": "quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre",
+    "title": "Quem era a empresária que morreu após luta contra o câncer no Acre?",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:31:24.873Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ContilNet / Instagram",
+    "sourceUrl": "https://contilnetnoticias.com.br/destaque-2/quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre/",
+    "sourceLabel": "Quem era a empresária que morreu após luta contra o câncer no Acre?",
+    "lede": "Quem era a empresária que morreu após luta contra o câncer no Acre?",
+    "summary": "Quem era a empresária que morreu após luta contra o câncer no Acre?",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 970,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "ContilNet / Instagram",
+        "url": "https://contilnetnoticias.com.br/destaque-2/quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ContilNet / Instagram",
+        "url": "https://contilnetnoticias.com.br/destaque-2/quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Quem era a empresária que morreu após luta contra o câncer no Acre? A informação vem de ContilNet / Instagram.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Quem era a empresária que morreu após luta contra o câncer no Acre? A informação vem de ContilNet / Instagram.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Quem era a empresária que morreu após luta contra o câncer no Acre?. Fonte: ContilNet / Instagram.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "ContilNet / Instagram publicou em 16 de jul de 2026: Quem era a empresária que morreu após luta contra o câncer no Acre?.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -11365,73 +11911,6 @@
     ]
   },
   {
-    "id": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/",
-    "slug": "mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional",
-    "title": "MPAC participa de solenidade sobre fortalecimento do sistema prisional",
-    "eyebrow": "Utilidade Publica",
-    "date": "16 de jul de 2026",
-    "publishedAt": "2026-07-16T08:53:42.299Z",
-    "category": "Utilidade Publica",
-    "categoryKey": "utilidade publica mpac participa de solenidade sobre fortalecimento do sistema prisional 15 de julho de 2026",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Ministerio Publico do Acre",
-    "sourceUrl": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/",
-    "sourceLabel": "MPAC participa de solenidade sobre fortalecimento do sistema prisional",
-    "lede": "15 de julho de 2026",
-    "summary": "15 de julho de 2026",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-09.14.48.jpeg",
-    "feedImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-09.14.48.jpeg",
-    "sourceImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-09.14.48.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 870,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Ministerio Publico do Acre",
-        "url": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Ministerio Publico do Acre",
-        "url": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC participa de solenidade sobre fortalecimento do sistema prisional 15 de julho de 2026 A informação vem de Ministerio Publico do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC participa de solenidade sobre fortalecimento do sistema prisional 15 de julho de 2026 A informação vem de Ministerio Publico do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: MPAC participa de solenidade sobre fortalecimento do sistema prisional. 15 de julho de 2026 Fonte: Ministerio Publico do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC participa de solenidade sobre fortalecimento do sistema prisional.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
     "id": "https://www.mpac.mp.br/mpac-apura-ameacas-a-lideranca-indigena-e-possivel-atuacao-de-organizacao-criminosa-em-porto-walter/",
     "slug": "mpac-apura-ameacas-a-lideranca-indigena-e-possivel-atuacao-de-organizacao-criminosa-em-porto-wal",
     "title": "MPAC apura ameaças a liderança indígena e possível atuação de organização criminosa em Porto Walter",
@@ -11500,26 +11979,26 @@
     ]
   },
   {
-    "id": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/",
-    "slug": "mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial",
-    "title": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
-    "eyebrow": "Policia",
+    "id": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/",
+    "slug": "mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional",
+    "title": "MPAC participa de solenidade sobre fortalecimento do sistema prisional",
+    "eyebrow": "Utilidade Publica",
     "date": "16 de jul de 2026",
-    "publishedAt": "2026-07-16T08:53:42.298Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
+    "publishedAt": "2026-07-16T08:53:42.299Z",
+    "category": "Utilidade Publica",
+    "categoryKey": "utilidade publica mpac participa de solenidade sobre fortalecimento do sistema prisional 15 de julho de 2026",
+    "previewClass": "thumb-cotidiano",
     "sourceName": "Ministerio Publico do Acre",
-    "sourceUrl": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/",
-    "sourceLabel": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
-    "lede": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
-    "summary": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
+    "sourceUrl": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/",
+    "sourceLabel": "MPAC participa de solenidade sobre fortalecimento do sistema prisional",
+    "lede": "15 de julho de 2026",
+    "summary": "15 de julho de 2026",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://www.mpac.mp.br/wp-content/uploads/RECOMENDACAO.png",
-    "feedImageUrl": "https://www.mpac.mp.br/wp-content/uploads/RECOMENDACAO.png",
-    "sourceImageUrl": "https://www.mpac.mp.br/wp-content/uploads/RECOMENDACAO.png",
+    "imageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-09.14.48.jpeg",
+    "feedImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-09.14.48.jpeg",
+    "sourceImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-09.14.48.jpeg",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -11530,21 +12009,21 @@
     "crossSources": [
       {
         "name": "Ministerio Publico do Acre",
-        "url": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/"
+        "url": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/"
       }
     ],
     "alternateSources": [
       {
         "name": "Ministerio Publico do Acre",
-        "url": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/"
+        "url": "https://www.mpac.mp.br/mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional/"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial"
+      "mpac-participa-de-solenidade-sobre-fortalecimento-do-sistema-prisional"
     ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações A informação vem de Ministerio Publico do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações A informação vem de Ministerio Publico do Acre.",
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC participa de solenidade sobre fortalecimento do sistema prisional 15 de julho de 2026 A informação vem de Ministerio Publico do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC participa de solenidade sobre fortalecimento do sistema prisional 15 de julho de 2026 A informação vem de Ministerio Publico do Acre.",
     "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
     "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
     "audioNarrationVoiceEngine": "edge-tts",
@@ -11552,7 +12031,7 @@
     "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
     "audioNarrationLanguage": "pt-BR",
     "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações. Fonte: Ministerio Publico do Acre.",
+    "videoCaptionText": "Imagem da notícia: MPAC participa de solenidade sobre fortalecimento do sistema prisional. 15 de julho de 2026 Fonte: Ministerio Publico do Acre.",
     "videoCaptionStatus": "ready",
     "accessibility": {
       "hasAudioNarrationText": true,
@@ -11561,7 +12040,7 @@
       "hasVideoCaptionText": true
     },
     "body": [
-      "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações.",
+      "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC participa de solenidade sobre fortalecimento do sistema prisional.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -11629,6 +12108,73 @@
     },
     "body": [
       "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/",
+    "slug": "mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial",
+    "title": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
+    "eyebrow": "Policia",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T08:53:42.298Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Ministerio Publico do Acre",
+    "sourceUrl": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/",
+    "sourceLabel": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
+    "lede": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
+    "summary": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://www.mpac.mp.br/wp-content/uploads/RECOMENDACAO.png",
+    "feedImageUrl": "https://www.mpac.mp.br/wp-content/uploads/RECOMENDACAO.png",
+    "sourceImageUrl": "https://www.mpac.mp.br/wp-content/uploads/RECOMENDACAO.png",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 870,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Ministerio Publico do Acre",
+        "url": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Ministerio Publico do Acre",
+        "url": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações A informação vem de Ministerio Publico do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações A informação vem de Ministerio Publico do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações. Fonte: Ministerio Publico do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -12372,6 +12918,78 @@
     ]
   },
   {
+    "id": "https://portalacre.com.br/2026/07/rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico/",
+    "slug": "rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico",
+    "title": "Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:25:29.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "Portal Acre",
+    "sourceUrl": "https://portalacre.com.br/2026/07/rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico/",
+    "sourceLabel": "Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço",
+    "lede": "Rio Branco ampliou a cobertura da rede de coleta de esgoto de 21,29% da população em 2020 para 25,07% em 2024. Segundo o Portal Acre, cerca de três em cada quatro moradores ainda vivem sem acesso ao serviço. O levantamento do Instituto Trata Brasil mantém a capital entre as menores coberturas do país, à frente apenas de Macapá.",
+    "summary": "Rio Branco ampliou a cobertura da rede de coleta de esgoto de 21,29% da população em 2020 para 25,07% em 2024. Segundo o Portal Acre, cerca de três em cada quatro moradores ainda vivem sem acesso ao serviço. O levantamento do Instituto Trata Brasil mantém a capital entre as menores coberturas do país, à frente apenas de Macapá.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/03/rede-esgoto-1024x545.jpeg",
+    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/03/rede-esgoto-1024x545.jpeg",
+    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/03/rede-esgoto-1024x545.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 825,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/07/rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/07/rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço A capital acreana registrou avanço na cobertura da rede de coleta de esgoto nos últimos quatro anos, mas o serviço ainda atende apenas um em cada quatro moradores da capital acreana. A informação vem de Portal Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço A capital acreana registrou avanço na cobertura da rede de coleta de esgoto nos últimos quatro anos, mas o serviço ainda atende apenas um em cada quatro moradores da capital acreana. A informação vem de Portal Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço. A capital acreana registrou avanço na cobertura da rede de coleta de esgoto nos últimos quatro anos, mas o serviço ainda atende apenas um em cada quatro moradores da capital acreana. Fonte: Portal Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Portal Acre publicou em 16 de jul de 2026: Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "seo": {
+      "title": "Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço",
+      "description": "Rio Branco ampliou a cobertura da rede de coleta de esgoto de 21,29% da população em 2020 para 25,07% em 2024. Segundo o Portal Acre, cerca de três em cada quatro moradores ainda vivem sem acesso ao serviço. O levantamento do Instituto Trata Brasil mantém a capital entre as menores coberturas do país, à frente apenas de Macapá.",
+      "slug": "rio-branco-amplia-coleta-de-esgoto-mas-apenas-um-em-cada-quatro-moradores-tem-acesso-ao-servico"
+    }
+  },
+  {
     "id": "https://portalacre.com.br/2026/07/queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-faeac/",
     "slug": "queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-fae",
     "title": "Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC",
@@ -13007,6 +13625,214 @@
     ]
   },
   {
+    "id": "https://agazetadoacre.com/2026/07/guia-gazeta-2/2o-guia-gazeta/horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo/",
+    "slug": "horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo",
+    "title": "Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo",
+    "eyebrow": "Cotidiano",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:26:36.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "2 guia gazeta cotidiano horoscopo 2026 confira a previsao de hoje 16 7 para seu signo aries 21 03 a 20 04 solte a espontaneidade e deixe o dia mais leve com espaco para uma paquera programas divertidos com os filhos ou a retomada de um hobby atividade fisica cuidados esteticos e corporais e boas companhias darao prazer",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/guia-gazeta-2/2o-guia-gazeta/horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo/",
+    "sourceLabel": "Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo",
+    "lede": "Áries (21/03 a 20/04) Solte a espontaneidade e deixe o dia mais leve, com espaço para uma paquera, programas divertidos com os filhos ou a retomada de um hobby. Atividade física, cuidados estéticos e corporais e boas companhias darão prazer.",
+    "summary": "Áries (21/03 a 20/04) Solte a espontaneidade e deixe o dia mais leve, com espaço para uma paquera, programas divertidos com os filhos ou a retomada de um hobby. Atividade física, cuidados estéticos e corporais e boas companhias darão prazer.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/guia-gazeta-2/2o-guia-gazeta/horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/guia-gazeta-2/2o-guia-gazeta/horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo Áries (21/03 a 20/04) Solte a espontaneidade e deixe o dia mais leve, com espaço para uma paquera, programas divertidos com os filhos ou a retomada de um hobby. Atividade física, cuidados estéticos e corporais e boas companhias darão prazer. A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo Áries (21/03 a 20/04) Solte a espontaneidade e deixe o dia mais leve, com espaço para uma paquera, programas divertidos com os filhos ou a retomada de um hobby. Atividade física, cuidados estéticos e corporais e boas companhias darão prazer. A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo. Áries (21/03 a 20/04) Solte a espontaneidade e deixe o dia mais leve, com espaço para uma paquera, programas divertidos com os filhos ou a retomada de um hobby. Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "A Gazeta do Acre publicou em 16 de jul de 2026: Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://agazetadoacre.com/2026/07/destaques/6o-destaque/acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer/",
+    "slug": "acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer",
+    "title": "Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:09:53.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/destaques/6o-destaque/acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer/",
+    "sourceLabel": "Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer",
+    "lede": "O Sistema Nacional de Emprego disponibilizou 143 vagas de trabalho no Acre nesta quinta-feira, 16. Segundo A Gazeta do Acre, as oportunidades são destinadas a candidatos que buscam colocação no mercado. Os interessados podem consultar as vagas no portal do Sine Acre, manter o currículo atualizado e verificar se o perfil profissional corresponde aos requisitos informados pelos empregadores.",
+    "summary": "O Sistema Nacional de Emprego disponibilizou 143 vagas de trabalho no Acre nesta quinta-feira, 16. Segundo A Gazeta do Acre, as oportunidades são destinadas a candidatos que buscam colocação no mercado. Os interessados podem consultar as vagas no portal do Sine Acre, manter o currículo atualizado e verificar se o perfil profissional corresponde aos requisitos informados pelos empregadores.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2021/12/emprego-cedida-2.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2021/12/emprego-cedida-2.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2021/12/emprego-cedida-2.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/destaques/6o-destaque/acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/destaques/6o-destaque/acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer Quem está em busca de uma oportunidade no mercado de trabalho pode concorrer a uma das 143 vagas de emprego disponibilizadas pelo Sistema Nacional de Emprego (Sine) no Acre nesta quinta-feira, 16. A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer Quem está em busca de uma oportunidade no mercado de trabalho pode concorrer a uma das 143 vagas de emprego disponibilizadas pelo Sistema Nacional de Emprego (Sine) no Acre nesta quinta-feira, 16. A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer. Quem está em busca de uma oportunidade no mercado de trabalho pode concorrer a uma das 143 vagas de emprego disponibilizadas pelo Sistema Nacional de Emprego (Sine) no Acre nesta quinta-feira, 16. Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Gazeta do Acre publicou em 16 de jul de 2026: Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "seo": {
+      "title": "Acre tem mais de 140 vagas de emprego abertas nesta quinta-feira; veja como concorrer",
+      "description": "O Sistema Nacional de Emprego disponibilizou 143 vagas de trabalho no Acre nesta quinta-feira, 16. Segundo A Gazeta do Acre, as oportunidades são destinadas a candidatos que buscam colocação no mercado. Os interessados podem consultar as vagas no portal do Sine Acre, manter o currículo atualizado e verificar se o perfil profissional corresponde aos requisitos informados pelos empregadores.",
+      "slug": "acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer"
+    }
+  },
+  {
+    "id": "https://agazetadoacre.com/2026/07/destaques/1o-destaque/sol-predomina-e-calor-chega-a-34c-no-acre-nesta-quinta-feira-veja-a-previsao/",
+    "slug": "sol-predomina-e-calor-chega-a-34-c-no-acre-nesta-quinta-feira-veja-a-previsao",
+    "title": "Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:05:31.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/destaques/1o-destaque/sol-predomina-e-calor-chega-a-34c-no-acre-nesta-quinta-feira-veja-a-previsao/",
+    "sourceLabel": "Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão",
+    "lede": "O sol e o tempo firme predominam no Acre nesta quinta-feira, 16, de acordo com a previsão do pesquisador meteorológico Davi Friale. Apesar da estabilidade, há possibilidade de chuva rápida e isolada em algumas áreas do estado.",
+    "summary": "O sol e o tempo firme predominam no Acre nesta quinta-feira, 16, de acordo com a previsão do pesquisador meteorológico Davi Friale. Apesar da estabilidade, há possibilidade de chuva rápida e isolada em algumas áreas do estado.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/destaques/1o-destaque/sol-predomina-e-calor-chega-a-34c-no-acre-nesta-quinta-feira-veja-a-previsao/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/destaques/1o-destaque/sol-predomina-e-calor-chega-a-34c-no-acre-nesta-quinta-feira-veja-a-previsao/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "sol-predomina-e-calor-chega-a-34-c-no-acre-nesta-quinta-feira-veja-a-previsao"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão O sol e o tempo firme predominam no Acre nesta quinta-feira, 16, de acordo com a previsão do pesquisador meteorológico Davi Friale. Apesar da estabilidade, há possibilidade de chuva rápida e isolada em algumas áreas do estado. A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão O sol e o tempo firme predominam no Acre nesta quinta-feira, 16, de acordo com a previsão do pesquisador meteorológico Davi Friale. Apesar da estabilidade, há possibilidade de chuva rápida e isolada em algumas áreas do estado. A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão. O sol e o tempo firme predominam no Acre nesta quinta-feira, 16, de acordo com a previsão do pesquisador meteorológico Davi Friale. Apesar da estabilidade, há possibilidade de chuva rápida e isolada em algumas áreas do estado. Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "A Gazeta do Acre publicou em 16 de jul de 2026: Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://agazetadoacre.com/2026/07/destaques/2o-destaque/empresaria-acreana-mariana-quintela-morre-aos-32-anos-apos-batalha-contra-o-cancer/",
     "slug": "empresaria-acreana-mariana-quintela-morre-aos-32-anos-apos-batalha-contra-o-cancer",
     "title": "Empresária acreana Mariana Quintela morre aos 32 anos após batalha contra o câncer",
@@ -13075,6 +13901,341 @@
     ]
   },
   {
+    "id": "https://www.cnnbrasil.com.br/internacional/incendio-em-orfanato-na-argelia-deixa-mortos-e-feridos/",
+    "slug": "incendio-em-orfanato-na-argelia-deixa-11-mortos-e-19-feridos",
+    "title": "Incêndio em orfanato na Argélia deixa 11 mortos e 19 feridos",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:04:30.000Z",
+    "category": "Nacional",
+    "categoryKey": "internacional nacional incendio em orfanato na argelia deixa 11 mortos e 19 feridos criancas estao entre as vitimas do fogo que atingiu o local durante a madrugada cinco pessoas com deficiencia foram retiradas do predio",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/incendio-em-orfanato-na-argelia-deixa-mortos-e-feridos/",
+    "sourceLabel": "Incêndio em orfanato na Argélia deixa 11 mortos e 19 feridos",
+    "lede": "Crianças estão entre as vítimas do fogo que atingiu o local durante a madrugada; cinco pessoas com deficiência foram retiradas do prédio",
+    "summary": "Crianças estão entre as vítimas do fogo que atingiu o local durante a madrugada; cinco pessoas com deficiência foram retiradas do prédio",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Escola-de-meninas-pega-fogo-no-Quenia-deixando-mortos-e-feridos.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Escola-de-meninas-pega-fogo-no-Quenia-deixando-mortos-e-feridos.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Escola-de-meninas-pega-fogo-no-Quenia-deixando-mortos-e-feridos.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/incendio-em-orfanato-na-argelia-deixa-mortos-e-feridos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/incendio-em-orfanato-na-argelia-deixa-mortos-e-feridos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "incendio-em-orfanato-na-argelia-deixa-11-mortos-e-19-feridos"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Incêndio em orfanato na Argélia deixa 11 mortos e 19 feridos Crianças estão entre as vítimas do fogo que atingiu o local durante a madrugada; cinco pessoas com deficiência foram retiradas do prédio A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Incêndio em orfanato na Argélia deixa 11 mortos e 19 feridos Crianças estão entre as vítimas do fogo que atingiu o local durante a madrugada; cinco pessoas com deficiência foram retiradas do prédio A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Incêndio em orfanato na Argélia deixa 11 mortos e 19 feridos. Crianças estão entre as vítimas do fogo que atingiu o local durante a madrugada; cinco pessoas com deficiência foram retiradas do prédio Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Incêndio em orfanato na Argélia deixa 11 mortos e 19 feridos.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/tarifaco-brasil-poderia-barganhar-com-eua-sobre-terras-raras-diz-ex-omc/",
+    "slug": "tarifaco-brasil-poderia-barganhar-com-eua-sobre-terras-raras-diz-ex-omc",
+    "title": "Tarifaço: Brasil poderia barganhar com EUA sobre terras raras, diz ex-OMC",
+    "eyebrow": "Negocios",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:02:24.000Z",
+    "category": "Negocios",
+    "categoryKey": "negocios",
+    "previewClass": "thumb-negocios",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/tarifaco-brasil-poderia-barganhar-com-eua-sobre-terras-raras-diz-ex-omc/",
+    "sourceLabel": "Tarifaço: Brasil poderia barganhar com EUA sobre terras raras, diz ex-OMC",
+    "lede": "Ex-diretor-geral da OMC Roberto Azevêdo defende ao WW que Brasil use terras raras como moeda de troca com os EUA para superar tarifas de 25%",
+    "summary": "Ex-diretor-geral da OMC Roberto Azevêdo defende ao WW que Brasil use terras raras como moeda de troca com os EUA para superar tarifas de 25%",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL7O0HE-BASEIMAGE.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL7O0HE-BASEIMAGE.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL7O0HE-BASEIMAGE.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/tarifaco-brasil-poderia-barganhar-com-eua-sobre-terras-raras-diz-ex-omc/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/tarifaco-brasil-poderia-barganhar-com-eua-sobre-terras-raras-diz-ex-omc/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tarifaco-brasil-poderia-barganhar-com-eua-sobre-terras-raras-diz-ex-omc"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Negocios. Tarifaço: Brasil poderia barganhar com EUA sobre terras raras, diz ex-OMC Ex-diretor-geral da OMC Roberto Azevêdo defende ao WW que Brasil use terras raras como moeda de troca com os EUA para superar tarifas de 25% A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Negocios. Tarifaço: Brasil poderia barganhar com EUA sobre terras raras, diz ex-OMC Ex-diretor-geral da OMC Roberto Azevêdo defende ao WW que Brasil use terras raras como moeda de troca com os EUA para superar tarifas de 25% A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Tarifaço: Brasil poderia barganhar com EUA sobre terras raras, diz ex-OMC. Ex-diretor-geral da OMC Roberto Azevêdo defende ao WW que Brasil use terras raras como moeda de troca com os EUA para superar tarifas de 25% Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Tarifaço: Brasil poderia barganhar com EUA sobre terras raras, diz ex-OMC.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/branded-content/nacional/enel-sao-paulo-investe-em-prevencao-para-enfrentar-temporais/",
+    "slug": "enel-sao-paulo-investe-em-prevencao-para-enfrentar-temporais",
+    "title": "Enel São Paulo investe em prevenção para enfrentar temporais",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:00:19.000Z",
+    "category": "Nacional",
+    "categoryKey": "nacional nacional enel sao paulo investe em prevencao para enfrentar temporais com 650 mil podas por ano e automacao avancada a companhia age antes da chuva para manter o fornecimento de energia em sao paulo",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/branded-content/nacional/enel-sao-paulo-investe-em-prevencao-para-enfrentar-temporais/",
+    "sourceLabel": "Enel São Paulo investe em prevenção para enfrentar temporais",
+    "lede": "Com 650 mil podas por ano e automação avançada, a companhia age antes da chuva para manter o fornecimento de energia em São Paulo.",
+    "summary": "Com 650 mil podas por ano e automação avançada, a companhia age antes da chuva para manter o fornecimento de energia em São Paulo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://img.youtube.com/vi/nUcnUVH_uas/sddefault.jpg",
+    "feedImageUrl": "https://img.youtube.com/vi/nUcnUVH_uas/sddefault.jpg",
+    "sourceImageUrl": "https://img.youtube.com/vi/nUcnUVH_uas/sddefault.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/branded-content/nacional/enel-sao-paulo-investe-em-prevencao-para-enfrentar-temporais/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/branded-content/nacional/enel-sao-paulo-investe-em-prevencao-para-enfrentar-temporais/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "enel-sao-paulo-investe-em-prevencao-para-enfrentar-temporais"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Enel São Paulo investe em prevenção para enfrentar temporais Com 650 mil podas por ano e automação avançada, a companhia age antes da chuva para manter o fornecimento de energia em São Paulo. A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Enel São Paulo investe em prevenção para enfrentar temporais Com 650 mil podas por ano e automação avançada, a companhia age antes da chuva para manter o fornecimento de energia em São Paulo. A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Enel São Paulo investe em prevenção para enfrentar temporais. Com 650 mil podas por ano e automação avançada, a companhia age antes da chuva para manter o fornecimento de energia em São Paulo. Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Enel São Paulo investe em prevenção para enfrentar temporais.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/pop/celebridades/hal-williams-ator-de-os-waltons-morre-aos-91-anos/",
+    "slug": "hal-williams-ator-de-os-waltons-morre-aos-91-anos",
+    "title": "Hal Williams, ator de “Os Waltons”, morre aos 91 anos",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:58:55.000Z",
+    "category": "Nacional",
+    "categoryKey": "celebridades nacional hal williams ator de os waltons morre aos 91 anos perda do veterano foi noticiada pelo ator ernest harden jr famoso pela serie the pitt",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/pop/celebridades/hal-williams-ator-de-os-waltons-morre-aos-91-anos/",
+    "sourceLabel": "Hal Williams, ator de “Os Waltons”, morre aos 91 anos",
+    "lede": "Perda do veterano foi noticiada pelo ator Ernest Harden Jr., famoso pela série \"The Pitt\"",
+    "summary": "Perda do veterano foi noticiada pelo ator Ernest Harden Jr., famoso pela série \"The Pitt\"",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/james-handy.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/james-handy.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/james-handy.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/celebridades/hal-williams-ator-de-os-waltons-morre-aos-91-anos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/celebridades/hal-williams-ator-de-os-waltons-morre-aos-91-anos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "hal-williams-ator-de-os-waltons-morre-aos-91-anos"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Hal Williams, ator de “Os Waltons”, morre aos 91 anos Perda do veterano foi noticiada pelo ator Ernest Harden Jr., famoso pela série \"The Pitt\" A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Hal Williams, ator de “Os Waltons”, morre aos 91 anos Perda do veterano foi noticiada pelo ator Ernest Harden Jr., famoso pela série \"The Pitt\" A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Hal Williams, ator de “Os Waltons”, morre aos 91 anos. Perda do veterano foi noticiada pelo ator Ernest Harden Jr., famoso pela série \"The Pitt\" Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Hal Williams, ator de “Os Waltons”, morre aos 91 anos.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/pop/streaming/quanto-mais-preta-melhor-veja-fotos-de-filme-e-documentario-de-preta-gil/",
+    "slug": "quanto-mais-preta-melhor-veja-fotos-de-filme-e-documentario-de-preta-gil",
+    "title": "“Quanto Mais Preta Melhor”: veja fotos de filme e documentário de Preta Gil",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:57:33.000Z",
+    "category": "Nacional",
+    "categoryKey": "streaming nacional quanto mais preta melhor veja fotos de filme e documentario de preta gil producoes serao lancadas no proximo dia 20 de julho um ano apos a morte da cantora",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/pop/streaming/quanto-mais-preta-melhor-veja-fotos-de-filme-e-documentario-de-preta-gil/",
+    "sourceLabel": "“Quanto Mais Preta Melhor”: veja fotos de filme e documentário de Preta Gil",
+    "lede": "Produções serão lançadas no próximo dia 20 de julho, um ano após a morte da cantora",
+    "summary": "Produções serão lançadas no próximo dia 20 de julho, um ano após a morte da cantora",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/carolina-dieckmmann.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/carolina-dieckmmann.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/carolina-dieckmmann.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/streaming/quanto-mais-preta-melhor-veja-fotos-de-filme-e-documentario-de-preta-gil/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/streaming/quanto-mais-preta-melhor-veja-fotos-de-filme-e-documentario-de-preta-gil/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "quanto-mais-preta-melhor-veja-fotos-de-filme-e-documentario-de-preta-gil"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. “Quanto Mais Preta Melhor”: veja fotos de filme e documentário de Preta Gil Produções serão lançadas no próximo dia 20 de julho, um ano após a morte da cantora A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. “Quanto Mais Preta Melhor”: veja fotos de filme e documentário de Preta Gil Produções serão lançadas no próximo dia 20 de julho, um ano após a morte da cantora A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: “Quanto Mais Preta Melhor”: veja fotos de filme e documentário de Preta Gil. Produções serão lançadas no próximo dia 20 de julho, um ano após a morte da cantora Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: “Quanto Mais Preta Melhor”: veja fotos de filme e documentário de Preta Gil.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://www.cnnbrasil.com.br/internacional/militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth/",
     "slug": "militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth",
     "title": "Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth",
@@ -13137,6 +14298,73 @@
     },
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira",
+    "slug": "mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira",
+    "title": "Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:32:00.000Z",
+    "category": "Nacional",
+    "categoryKey": "geral nacional mega sena sorteia premio de r 30 milhoes nesta quinta feira as seis dezenas do concurso 3 032 da mega sena serao sorteadas a partir das 21h horario de brasilia no espaco da sorte localizado na avenida paulista n 750 em sao paulo o premio da faixa principal esta acumulado e estimado em r 30 milhoes",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira",
+    "sourceLabel": "Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira",
+    "lede": "As seis dezenas do concurso 3.032 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo. O prêmio da faixa principal está acumulado e estimado em R$ 30 milhões.",
+    "summary": "As seis dezenas do concurso 3.032 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo. O prêmio da faixa principal está acumulado e estimado em R$ 30 milhões.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696798&o=rss",
+    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696798&o=rss",
+    "sourceImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696798&o=rss",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira As seis dezenas do concurso 3.032 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo. O prêmio da faixa principal está acumulado e estimado em R$ 30 milhões. A informação vem de Agencia Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira As seis dezenas do concurso 3.032 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo. O prêmio da faixa principal está acumulado e estimado em R$ 30 milhões. A informação vem de Agencia Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira. As seis dezenas do concurso 3.032 da Mega-Sena serão sorteadas, a partir das 21h (horário de Brasília), no Espaço da Sorte, localizado na Avenida Paulista, nº 750, em São Paulo. Fonte: Agencia Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Agencia Brasil publicou em 16 de jul de 2026: Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -14214,6 +15442,7 @@
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
       "ac24horas publicou em 16 de jul de 2026: Cartórios, Judiciário e MP lideram ranking de maiores rendas declaradas do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -14286,6 +15515,7 @@
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
       "ac24horas publicou em 16 de jul de 2026: Exportações do Acre crescem 7,7%, apesar da queda da soja.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -14487,6 +15717,7 @@
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
       "ac24horas publicou em 16 de jul de 2026: Acre tem o segundo maior salário médio do país, aponta Receita Federal.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -14689,6 +15920,7 @@
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
       "ac24horas publicou em 16 de jul de 2026: Programa REM inicia recuperação de áreas degradadas no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -31656,1308 +32888,5 @@
     "editorialSpotlightReady": true,
     "editorialSurfaceTier": "news",
     "editorialLocalTier": 2
-  },
-  {
-    "id": "https://acreagora.com/2026/07/13/jogo-limpo-nas-urnas-o-que-pode-cassar-uma-candidatura-nas-eleicoes-de-2026/",
-    "slug": "jogo-limpo-nas-urnas-o-que-pode-cassar-uma-candidatura-nas-eleicoes-de-2026",
-    "title": "Jogo limpo nas urnas: o que pode cassar uma candidatura nas eleições de 2026",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T10:29:21.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Acre Agora",
-    "sourceUrl": "https://acreagora.com/2026/07/13/jogo-limpo-nas-urnas-o-que-pode-cassar-uma-candidatura-nas-eleicoes-de-2026/",
-    "sourceLabel": "Jogo limpo nas urnas: o que pode cassar uma candidatura nas eleições de 2026",
-    "lede": "A disputa eleitoral começa muito antes da abertura das urnas, mas há um limite claro entre a estratégia política e a ilegalidade.",
-    "summary": "A disputa eleitoral começa muito antes da abertura das urnas, mas há um limite claro entre a estratégia política e a ilegalidade.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 805,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/07/13/jogo-limpo-nas-urnas-o-que-pode-cassar-uma-candidatura-nas-eleicoes-de-2026/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/07/13/jogo-limpo-nas-urnas-o-que-pode-cassar-uma-candidatura-nas-eleicoes-de-2026/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "jogo-limpo-nas-urnas-o-que-pode-cassar-uma-candidatura-nas-eleicoes-de-2026"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Jogo limpo nas urnas: o que pode cassar uma candidatura nas eleições de 2026 A disputa eleitoral começa muito antes da abertura das urnas, mas há um limite claro entre a estratégia política e a ilegalidade. A informação vem de Acre Agora.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Jogo limpo nas urnas: o que pode cassar uma candidatura nas eleições de 2026 A disputa eleitoral começa muito antes da abertura das urnas, mas há um limite claro entre a estratégia política e a ilegalidade. A informação vem de Acre Agora.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Jogo limpo nas urnas: o que pode cassar uma candidatura nas eleições de 2026. A disputa eleitoral começa muito antes da abertura das urnas, mas há um limite claro entre a estratégia política e a ilegalidade. Fonte: Acre Agora.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Acre Agora publicou em 13 de jul de 2026: Jogo limpo nas urnas: o que pode cassar uma candidatura nas eleições de 2026.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://acreagora.com/2026/07/13/governo-endurece-regras-para-bets-com-alertas-obrigatorios-e-multas-de-ate-r-14-milhoes/",
-    "slug": "governo-endurece-regras-para-bets-com-alertas-obrigatorios-e-multas-de-ate-r-14-milhoes",
-    "title": "Governo endurece regras para bets com alertas obrigatórios e multas de até R$ 14 milhões",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T05:08:30.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Acre Agora",
-    "sourceUrl": "https://acreagora.com/2026/07/13/governo-endurece-regras-para-bets-com-alertas-obrigatorios-e-multas-de-ate-r-14-milhoes/",
-    "sourceLabel": "Governo endurece regras para bets com alertas obrigatórios e multas de até R$ 14 milhões",
-    "lede": "As novas regras para a publicidade das empresas de apostas esportivas entram em vigor em 17 de julho e tornam obrigatória a exibição de advertências do Ministério da Fazenda em todas as campanhas.",
-    "summary": "As novas regras para a publicidade das empresas de apostas esportivas entram em vigor em 17 de julho e tornam obrigatória a exibição de advertências do Ministério da Fazenda em todas as campanhas.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 805,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/07/13/governo-endurece-regras-para-bets-com-alertas-obrigatorios-e-multas-de-ate-r-14-milhoes/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/07/13/governo-endurece-regras-para-bets-com-alertas-obrigatorios-e-multas-de-ate-r-14-milhoes/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-endurece-regras-para-bets-com-alertas-obrigatorios-e-multas-de-ate-r-14-milhoes"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Governo endurece regras para bets com alertas obrigatórios e multas de até R$ 14 milhões As novas regras para a publicidade das empresas de apostas esportivas entram em vigor em 17 de julho e tornam obrigatória a exibição de advertências do Ministério da Fazenda em todas as campanhas. A informação vem de Acre Agora.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Governo endurece regras para bets com alertas obrigatórios e multas de até R$ 14 milhões As novas regras para a publicidade das empresas de apostas esportivas entram em vigor em 17 de julho e tornam obrigatória a exibição de advertências do Ministério da Fazenda em todas as campanhas. A informação vem de Acre Agora.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Governo endurece regras para bets com alertas obrigatórios e multas de até R$ 14 milhões. As novas regras para a publicidade das empresas de apostas esportivas entram em vigor em 17 de julho e tornam obrigatória a exibição de advertências do Ministério da Fazenda em todas as campanhas. Fonte: Acre Agora.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Acre Agora publicou em 13 de jul de 2026: Governo endurece regras para bets com alertas obrigatórios e multas de até R$ 14 milhões.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://acreagora.com/2026/07/13/aliancas-voltam-a-redesenhar-o-cenario-eleitoral-e-a-ampliar-a-tensao-politica-no-acre/",
-    "slug": "aliancas-voltam-a-redesenhar-o-cenario-eleitoral-e-a-ampliar-a-tensao-politica-no-acre",
-    "title": "Alianças voltam a redesenhar o cenário eleitoral e a ampliar a tensão política no Acre",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T05:00:19.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Acre Agora",
-    "sourceUrl": "https://acreagora.com/2026/07/13/aliancas-voltam-a-redesenhar-o-cenario-eleitoral-e-a-ampliar-a-tensao-politica-no-acre/",
-    "sourceLabel": "Alianças voltam a redesenhar o cenário eleitoral e a ampliar a tensão política no Acre",
-    "lede": "As articulações para as eleições de 2026 seguem aceleradas e começam a provocar desgastes públicos entre lideranças que, até pouco tempo, dividiam o mesmo campo político.",
-    "summary": "As articulações para as eleições de 2026 seguem aceleradas e começam a provocar desgastes públicos entre lideranças que, até pouco tempo, dividiam o mesmo campo político.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 805,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/07/13/aliancas-voltam-a-redesenhar-o-cenario-eleitoral-e-a-ampliar-a-tensao-politica-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/07/13/aliancas-voltam-a-redesenhar-o-cenario-eleitoral-e-a-ampliar-a-tensao-politica-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "aliancas-voltam-a-redesenhar-o-cenario-eleitoral-e-a-ampliar-a-tensao-politica-no-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Alianças voltam a redesenhar o cenário eleitoral e a ampliar a tensão política no Acre As articulações para as eleições de 2026 seguem aceleradas e começam a provocar desgastes públicos entre lideranças que, até pouco tempo, dividiam o mesmo campo político. A informação vem de Acre Agora.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Alianças voltam a redesenhar o cenário eleitoral e a ampliar a tensão política no Acre As articulações para as eleições de 2026 seguem aceleradas e começam a provocar desgastes públicos entre lideranças que, até pouco tempo, dividiam o mesmo campo político. A informação vem de Acre Agora.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Alianças voltam a redesenhar o cenário eleitoral e a ampliar a tensão política no Acre. As articulações para as eleições de 2026 seguem aceleradas e começam a provocar desgastes públicos entre lideranças que, até pouco tempo, dividiam o mesmo campo político. Fonte: Acre Agora.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Acre Agora publicou em 13 de jul de 2026: Alianças voltam a redesenhar o cenário eleitoral e a ampliar a tensão política no Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://agazetadoacre.com/2026/07/noticias/politica/embaixador-do-brasil-na-alemanha-recebe-thor-dantas-para-discutir-parcerias-estrategicas-para-o-acre/",
-    "slug": "embaixador-do-brasil-na-alemanha-recebe-thor-dantas-para-discutir-parcerias-estrategicas-para-o-",
-    "title": "Embaixador do Brasil na Alemanha recebe Thor Dantas para discutir parcerias estratégicas para o Acre",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:10:17.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "A Gazeta do Acre",
-    "sourceUrl": "https://agazetadoacre.com/2026/07/noticias/politica/embaixador-do-brasil-na-alemanha-recebe-thor-dantas-para-discutir-parcerias-estrategicas-para-o-acre/",
-    "sourceLabel": "Embaixador do Brasil na Alemanha recebe Thor Dantas para discutir parcerias estratégicas para o Acre",
-    "lede": "Em agenda internacional na Alemanha, o médico infectologista e pré-candidato ao governo do Acre, Dr. Thor Dantas, esteve reunido com o embaixador do Brasil em Berlim, Rodrigo Baena Soares.",
-    "summary": "Em agenda internacional na Alemanha, o médico infectologista e pré-candidato ao governo do Acre, Dr. Thor Dantas, esteve reunido com o embaixador do Brasil em Berlim, Rodrigo Baena Soares.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 800,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "A Gazeta do Acre",
-        "url": "https://agazetadoacre.com/2026/07/noticias/politica/embaixador-do-brasil-na-alemanha-recebe-thor-dantas-para-discutir-parcerias-estrategicas-para-o-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "A Gazeta do Acre",
-        "url": "https://agazetadoacre.com/2026/07/noticias/politica/embaixador-do-brasil-na-alemanha-recebe-thor-dantas-para-discutir-parcerias-estrategicas-para-o-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "embaixador-do-brasil-na-alemanha-recebe-thor-dantas-para-discutir-parcerias-estrategicas-para-o-"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Embaixador do Brasil na Alemanha recebe Thor Dantas para discutir parcerias estratégicas para o Acre Em agenda internacional na Alemanha, o médico infectologista e pré-candidato ao governo do Acre, Dr. Thor Dantas, esteve reunido com o embaixador do Brasil em Berlim, Rodrigo Baena Soares. A informação vem de A Gazeta do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Embaixador do Brasil na Alemanha recebe Thor Dantas para discutir parcerias estratégicas para o Acre Em agenda internacional na Alemanha, o médico infectologista e pré-candidato ao governo do Acre, Dr. Thor Dantas, esteve reunido com o embaixador do Brasil em Berlim, Rodrigo Baena Soares. A informação vem de A Gazeta do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Embaixador do Brasil na Alemanha recebe Thor Dantas para discutir parcerias estratégicas para o Acre. Em agenda internacional na Alemanha, o médico infectologista e pré-candidato ao governo do Acre, Dr. Thor Dantas, esteve reunido com o embaixador do Brasil em Berlim, Rodrigo Baena Soares. Fonte: A Gazeta do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "A Gazeta do Acre publicou em 13 de jul de 2026: Embaixador do Brasil na Alemanha recebe Thor Dantas para discutir parcerias estratégicas para o Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/politica/camara-destinou-r-13-bi-em-emendas-sem-identificar-quem-indicou-recursos/",
-    "slug": "camara-destinou-r-1-3-bi-em-emendas-sem-identificar-quem-indicou-recursos",
-    "title": "Câmara destinou R$ 1,3 bi em emendas sem identificar quem indicou recursos",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:42:06.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/politica/camara-destinou-r-13-bi-em-emendas-sem-identificar-quem-indicou-recursos/",
-    "sourceLabel": "Câmara destinou R$ 1,3 bi em emendas sem identificar quem indicou recursos",
-    "lede": "Valor foi apresentado por estudo da Transparência Brasil, que considerou as emendas de liderança da Câmara em 2025 com autoria associada à liderança partidária, sem identificar o parlamentar",
-    "summary": "Valor foi apresentado por estudo da Transparência Brasil, que considerou as emendas de liderança da Câmara em 2025 com autoria associada à liderança partidária, sem identificar o parlamentar",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/DAVI-ALCOLUMBRE-19-05-26.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/DAVI-ALCOLUMBRE-19-05-26.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/DAVI-ALCOLUMBRE-19-05-26.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/camara-destinou-r-13-bi-em-emendas-sem-identificar-quem-indicou-recursos/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/politica/camara-destinou-r-13-bi-em-emendas-sem-identificar-quem-indicou-recursos/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "camara-destinou-r-1-3-bi-em-emendas-sem-identificar-quem-indicou-recursos"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Câmara destinou R$ 1,3 bi em emendas sem identificar quem indicou recursos Valor foi apresentado por estudo da Transparência Brasil, que considerou as emendas de liderança da Câmara em 2025 com autoria associada à liderança partidária, sem identificar o parlamentar A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Câmara destinou R$ 1,3 bi em emendas sem identificar quem indicou recursos Valor foi apresentado por estudo da Transparência Brasil, que considerou as emendas de liderança da Câmara em 2025 com autoria associada à liderança partidária, sem identificar o parlamentar A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Câmara destinou R$ 1,3 bi em emendas sem identificar quem indicou recursos. Valor foi apresentado por estudo da Transparência Brasil, que considerou as emendas de liderança da Câmara em 2025 com autoria associada à liderança partidária, sem identificar o parlamentar Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 13 de jul de 2026: Câmara destinou R$ 1,3 bi em emendas sem identificar quem indicou recursos.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://jurua24horas.com/2026/07/governo-do-acre-reforca-atuacao-do-imac-e-altera-regras-do-cadastro-ambiental-rural/",
-    "slug": "governo-do-acre-reforca-atuacao-do-imac-e-altera-regras-do-cadastro-ambiental-rural",
-    "title": "Governo do Acre reforça atuação do Imac e altera regras do Cadastro Ambiental Rural",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:40:28.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/07/governo-do-acre-reforca-atuacao-do-imac-e-altera-regras-do-cadastro-ambiental-rural/",
-    "sourceLabel": "Governo do Acre reforça atuação do Imac e altera regras do Cadastro Ambiental Rural",
-    "lede": "O Governo do Acre publicou um novo decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e fortalece a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento, coordenação",
-    "summary": "O Governo do Acre publicou um novo decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e fortalece a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento, coordenação",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/07/governo-do-acre-reforca-atuacao-do-imac-e-altera-regras-do-cadastro-ambiental-rural/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/07/governo-do-acre-reforca-atuacao-do-imac-e-altera-regras-do-cadastro-ambiental-rural/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-do-acre-reforca-atuacao-do-imac-e-altera-regras-do-cadastro-ambiental-rural"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Governo do Acre reforça atuação do Imac e altera regras do Cadastro Ambiental Rural O Governo do Acre publicou um novo decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e fortalece a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento, coordenação... A informação vem de Juruá 24 Horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Governo do Acre reforça atuação do Imac e altera regras do Cadastro Ambiental Rural O Governo do Acre publicou um novo decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e fortalece a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento, coordenação... A informação vem de Juruá 24 Horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Governo do Acre reforça atuação do Imac e altera regras do Cadastro Ambiental Rural. O Governo do Acre publicou um novo decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e fortalece a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento... Fonte: Jurua 24 Horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Jurua 24 Horas publicou em 13 de jul de 2026: Governo do Acre reforça atuação do Imac e altera regras do Cadastro Ambiental Rural.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://jurua24horas.com/2026/07/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/",
-    "slug": "palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre",
-    "title": "Palácio oficializa pacote de nomeações, exonerações e mudanças no governo do Acre",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:38:34.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/07/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/",
-    "sourceLabel": "Palácio oficializa pacote de nomeações, exonerações e mudanças no governo do Acre",
-    "lede": "O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual.",
-    "summary": "O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/07/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/07/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Palácio oficializa pacote de nomeações, exonerações e mudanças no governo do Acre O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual. A informação vem de Juruá 24 Horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Palácio oficializa pacote de nomeações, exonerações e mudanças no governo do Acre O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual. A informação vem de Juruá 24 Horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Palácio oficializa pacote de nomeações, exonerações e mudanças no governo do Acre. O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual. Fonte: Jurua 24 Horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Jurua 24 Horas publicou em 13 de jul de 2026: Palácio oficializa pacote de nomeações, exonerações e mudanças no governo do Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "service-notice",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://ac24horas.com/2026/07/13/decreto-transfere-coordenacao-do-cadastro-ambiental-rural-ao-imac-no-acre/",
-    "slug": "decreto-transfere-coordenacao-do-cadastro-ambiental-rural-ao-imac-no-acre",
-    "title": "Decreto transfere coordenação do cadastro ambiental rural ao Imac no Acre",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:35:24.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/07/13/decreto-transfere-coordenacao-do-cadastro-ambiental-rural-ao-imac-no-acre/",
-    "sourceLabel": "Decreto transfere coordenação do cadastro ambiental rural ao Imac no Acre",
-    "lede": "Foto: Pedro Devani/Secom. \" O Governo do Acre publicou um decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e reforça a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento",
-    "summary": "Foto: Pedro Devani/Secom. \" O Governo do Acre publicou um decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e reforça a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/predio-imac-scaled-1-1200x741.webp",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/predio-imac-scaled-1-1200x741.webp",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/predio-imac-scaled-1-1200x741.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/13/decreto-transfere-coordenacao-do-cadastro-ambiental-rural-ao-imac-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/13/decreto-transfere-coordenacao-do-cadastro-ambiental-rural-ao-imac-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "decreto-transfere-coordenacao-do-cadastro-ambiental-rural-ao-imac-no-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Decreto transfere coordenação do cadastro ambiental rural ao Imac no Acre Foto: Pedro Devani/Secom. \" O Governo do Acre publicou um decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e reforça a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento... A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Decreto transfere coordenação do cadastro ambiental rural ao Imac no Acre Foto: Pedro Devani/Secom. \" O Governo do Acre publicou um decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e reforça a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável pelo planejamento... A informação vem de ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Decreto transfere coordenação do cadastro ambiental rural ao Imac no Acre. Foto: Pedro Devani/Secom. \" O Governo do Acre publicou um decreto que altera as regras de funcionamento do Cadastro Ambiental Rural (CAR) no estado e reforça a atuação do Instituto de Meio Ambiente do Acre (Imac) como órgão responsável... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 13 de jul de 2026: Decreto transfere coordenação do cadastro ambiental rural ao Imac no Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://ac24horas.com/2026/07/13/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/",
-    "slug": "palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo",
-    "title": "Palácio oficializa pacote de nomeações, exonerações e mudanças no governo",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:34:03.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/07/13/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/",
-    "sourceLabel": "Palácio oficializa pacote de nomeações, exonerações e mudanças no governo",
-    "lede": "O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual.",
-    "summary": "O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/PALACIO-DAS-SECRETARIAS-1200x726.webp",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/PALACIO-DAS-SECRETARIAS-1200x726.webp",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/PALACIO-DAS-SECRETARIAS-1200x726.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/13/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/13/palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo-do-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "palacio-oficializa-pacote-de-nomeacoes-exoneracoes-e-mudancas-no-governo"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Palácio oficializa pacote de nomeações, exonerações e mudanças no governo O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual. A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Palácio oficializa pacote de nomeações, exonerações e mudanças no governo O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual. A informação vem de ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Palácio oficializa pacote de nomeações, exonerações e mudanças no governo. O Governo do Acre publicou nesta segunda-feira, 13, uma série de decretos no Diário Oficial do Estado com nomeações, exonerações, cessão de servidora e designações temporárias para cargos na administração pública estadual. Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 13 de jul de 2026: Palácio oficializa pacote de nomeações, exonerações e mudanças no governo.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "service-notice",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://ac24horas.com/2026/07/13/decreto-nomeia-representantes-para-o-cetran-com-mandato-ate-2028-no-acre/",
-    "slug": "decreto-nomeia-representantes-para-o-cetran-com-mandato-ate-2028-no-acre",
-    "title": "Decreto nomeia representantes para o Cetran com mandato até 2028 no Acre",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:26:05.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/07/13/decreto-nomeia-representantes-para-o-cetran-com-mandato-ate-2028-no-acre/",
-    "sourceLabel": "Decreto nomeia representantes para o Cetran com mandato até 2028 no Acre",
-    "lede": "Foto: Sérgio Vale \" O Governo do Acre nomeou os membros que irão compor o Conselho Estadual de Trânsito (CETRAN/AC) para o biênio 2026/2028.",
-    "summary": "Foto: Sérgio Vale \" O Governo do Acre nomeou os membros que irão compor o Conselho Estadual de Trânsito (CETRAN/AC) para o biênio 2026/2028.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/01/PALACIO-SERGIO-VALE-e1720103436277-1-1200x812.webp",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/01/PALACIO-SERGIO-VALE-e1720103436277-1-1200x812.webp",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/01/PALACIO-SERGIO-VALE-e1720103436277-1-1200x812.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/13/decreto-nomeia-representantes-para-o-cetran-com-mandato-ate-2028-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/13/decreto-nomeia-representantes-para-o-cetran-com-mandato-ate-2028-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "decreto-nomeia-representantes-para-o-cetran-com-mandato-ate-2028-no-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Decreto nomeia representantes para o Cetran com mandato até 2028 no Acre Foto: Sérgio Vale \" O Governo do Acre nomeou os membros que irão compor o Conselho Estadual de Trânsito (CETRAN/AC) para o biênio 2026/2028. A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Decreto nomeia representantes para o Cetran com mandato até 2028 no Acre Foto: Sérgio Vale \" O Governo do Acre nomeou os membros que irão compor o Conselho Estadual de Trânsito (CETRAN/AC) para o biênio 2026/2028. A informação vem de ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Decreto nomeia representantes para o Cetran com mandato até 2028 no Acre. Foto: Sérgio Vale \" O Governo do Acre nomeou os membros que irão compor o Conselho Estadual de Trânsito (CETRAN/AC) para o biênio 2026/2028. Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 13 de jul de 2026: Decreto nomeia representantes para o Cetran com mandato até 2028 no Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/eleicoes/nao-da-para-trazer-uma-carta-do-pai-a-cada-crise-diz-caiado-sobre-flavio/",
-    "slug": "nao-da-para-trazer-uma-carta-do-pai-a-cada-crise-diz-caiado-sobre-flavio",
-    "title": "Não dá para trazer uma carta do pai a cada crise, diz Caiado sobre Flávio",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:17:00.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/nao-da-para-trazer-uma-carta-do-pai-a-cada-crise-diz-caiado-sobre-flavio/",
-    "sourceLabel": "Não dá para trazer uma carta do pai a cada crise, diz Caiado sobre Flávio",
-    "lede": "Ex-governador criticou a postura do senador frente à crise no PL e disse que campanha está \"extremamente fragilizada\"",
-    "summary": "Ex-governador criticou a postura do senador frente à crise no PL e disse que campanha está \"extremamente fragilizada\"",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/04/WhatsApp-Image-2025-04-06-at-13.59.15-e1743958895163.jpeg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/04/WhatsApp-Image-2025-04-06-at-13.59.15-e1743958895163.jpeg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/04/WhatsApp-Image-2025-04-06-at-13.59.15-e1743958895163.jpeg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/eleicoes/nao-da-para-trazer-uma-carta-do-pai-a-cada-crise-diz-caiado-sobre-flavio/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/eleicoes/nao-da-para-trazer-uma-carta-do-pai-a-cada-crise-diz-caiado-sobre-flavio/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "nao-da-para-trazer-uma-carta-do-pai-a-cada-crise-diz-caiado-sobre-flavio"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Não dá para trazer uma carta do pai a cada crise, diz Caiado sobre Flávio Ex-governador criticou a postura do senador frente à crise no PL e disse que campanha está \"extremamente fragilizada\" A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Não dá para trazer uma carta do pai a cada crise, diz Caiado sobre Flávio Ex-governador criticou a postura do senador frente à crise no PL e disse que campanha está \"extremamente fragilizada\" A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Não dá para trazer uma carta do pai a cada crise, diz Caiado sobre Flávio. Ex-governador criticou a postura do senador frente à crise no PL e disse que campanha está \"extremamente fragilizada\" Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 13 de jul de 2026: Não dá para trazer uma carta do pai a cada crise, diz Caiado sobre Flávio.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/eleicoes/lula-planeja-iniciar-campanha-a-reeleicao-em-sao-bernardo-do-campo/",
-    "slug": "lula-planeja-iniciar-campanha-a-reeleicao-em-sao-bernardo-do-campo",
-    "title": "Lula planeja iniciar campanha à reeleição em São Bernardo do Campo",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:14:21.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/lula-planeja-iniciar-campanha-a-reeleicao-em-sao-bernardo-do-campo/",
-    "sourceLabel": "Lula planeja iniciar campanha à reeleição em São Bernardo do Campo",
-    "lede": "Cidade no ABC paulista é berço político do presidente; petista intensifica agendas no estado para tentar diminuir vantagem da direita",
-    "summary": "Cidade no ABC paulista é berço político do presidente; petista intensifica agendas no estado para tentar diminuir vantagem da direita",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Renata-9.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Renata-9.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Renata-9.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/eleicoes/lula-planeja-iniciar-campanha-a-reeleicao-em-sao-bernardo-do-campo/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/eleicoes/lula-planeja-iniciar-campanha-a-reeleicao-em-sao-bernardo-do-campo/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "lula-planeja-iniciar-campanha-a-reeleicao-em-sao-bernardo-do-campo"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Lula planeja iniciar campanha à reeleição em São Bernardo do Campo Cidade no ABC paulista é berço político do presidente; petista intensifica agendas no estado para tentar diminuir vantagem da direita A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Lula planeja iniciar campanha à reeleição em São Bernardo do Campo Cidade no ABC paulista é berço político do presidente; petista intensifica agendas no estado para tentar diminuir vantagem da direita A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Lula planeja iniciar campanha à reeleição em São Bernardo do Campo. Cidade no ABC paulista é berço político do presidente; petista intensifica agendas no estado para tentar diminuir vantagem da direita Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 13 de jul de 2026: Lula planeja iniciar campanha à reeleição em São Bernardo do Campo.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/13/equipe-de-lula-conta-com-neutralidade-dos-partidos-do-centrao-e-defende-acenos-do-presidente-para-eleitores-de-centro.ghtml",
-    "slug": "equipe-de-lula-conta-com-neutralidade-dos-partidos-do-centrao-e-defende-acenos-do-presidente-a-e",
-    "title": "Equipe de Lula conta com neutralidade dos partidos do Centrão e defende acenos do presidente a eleitores de centro",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T12:38:43.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/13/equipe-de-lula-conta-com-neutralidade-dos-partidos-do-centrao-e-defende-acenos-do-presidente-para-eleitores-de-centro.ghtml",
-    "sourceLabel": "Equipe de Lula conta com neutralidade dos partidos do Centrão e defende acenos do presidente a eleitores de centro",
-    "lede": "A equipe do presidente Luiz Inácio Lula da Silva (PT) está apostando num cenário em que a maioria dos partidos do Centrão irão optar pela neutralidade na eleição presidencial.",
-    "summary": "A equipe do presidente Luiz Inácio Lula da Silva (PT) está apostando num cenário em que a maioria dos partidos do Centrão irão optar pela neutralidade na eleição presidencial.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/mY80-XGUByBJex2Jzq_C5ZTCU5g=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/c/Y/iITUXKRoq3dkNbnPiwHg/lula-flavio-bolsonaro.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/mY80-XGUByBJex2Jzq_C5ZTCU5g=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/c/Y/iITUXKRoq3dkNbnPiwHg/lula-flavio-bolsonaro.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/mY80-XGUByBJex2Jzq_C5ZTCU5g=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/c/Y/iITUXKRoq3dkNbnPiwHg/lula-flavio-bolsonaro.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/13/equipe-de-lula-conta-com-neutralidade-dos-partidos-do-centrao-e-defende-acenos-do-presidente-para-eleitores-de-centro.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/13/equipe-de-lula-conta-com-neutralidade-dos-partidos-do-centrao-e-defende-acenos-do-presidente-para-eleitores-de-centro.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "equipe-de-lula-conta-com-neutralidade-dos-partidos-do-centrao-e-defende-acenos-do-presidente-a-e"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Equipe de Lula conta com neutralidade dos partidos do Centrão e defende acenos do presidente a eleitores de centro A equipe do presidente Luiz Inácio Lula da Silva (PT) está apostando num cenário em que a maioria dos partidos do Centrão irão optar pela neutralidade na eleição presidencial. A informação vem de G1 política.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Equipe de Lula conta com neutralidade dos partidos do Centrão e defende acenos do presidente a eleitores de centro A equipe do presidente Luiz Inácio Lula da Silva (PT) está apostando num cenário em que a maioria dos partidos do Centrão irão optar pela neutralidade na eleição presidencial. A informação vem de G1 política.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Equipe de Lula conta com neutralidade dos partidos do Centrão e defende acenos do presidente a eleitores de centro. A equipe do presidente Luiz Inácio Lula da Silva (PT) está apostando num cenário em que a maioria dos partidos do Centrão irão optar pela neutralidade na eleição presidencial. Fonte: G1 Politica.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "G1 Politica publicou em 13 de jul de 2026: Equipe de Lula conta com neutralidade dos partidos do Centrão e defende acenos do presidente a eleitores de centro.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/07/13/a-poucos-dias-de-perder-a-validade-mp-do-piso-minimo-do-frete-ainda-aguarda-votacao-no-senado.ghtml",
-    "slug": "a-poucos-dias-de-perder-a-validade-mp-do-piso-minimo-do-frete-ainda-aguarda-votacao-no-senado",
-    "title": "A poucos dias de perder a validade, MP do piso mínimo do frete ainda aguarda votação no Senado",
-    "eyebrow": "Politica",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T05:00:29.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/13/a-poucos-dias-de-perder-a-validade-mp-do-piso-minimo-do-frete-ainda-aguarda-votacao-no-senado.ghtml",
-    "sourceLabel": "A poucos dias de perder a validade, MP do piso mínimo do frete ainda aguarda votação no Senado",
-    "lede": "A poucos dias de perder a validade, a medida provisória (MP) que altera as regras do piso mínimo do frete rodoviário ainda aguarda votação no Senado.",
-    "summary": "A poucos dias de perder a validade, a medida provisória (MP) que altera as regras do piso mínimo do frete rodoviário ainda aguarda votação no Senado.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/uCF8Qr1vQ_6_Bs0pzv8yO-4D9bg=/s.glbimg.com/jo/g1/f/original/2016/07/02/00caminhoes.sub.01.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/uCF8Qr1vQ_6_Bs0pzv8yO-4D9bg=/s.glbimg.com/jo/g1/f/original/2016/07/02/00caminhoes.sub.01.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/uCF8Qr1vQ_6_Bs0pzv8yO-4D9bg=/s.glbimg.com/jo/g1/f/original/2016/07/02/00caminhoes.sub.01.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/07/13/a-poucos-dias-de-perder-a-validade-mp-do-piso-minimo-do-frete-ainda-aguarda-votacao-no-senado.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/07/13/a-poucos-dias-de-perder-a-validade-mp-do-piso-minimo-do-frete-ainda-aguarda-votacao-no-senado.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "a-poucos-dias-de-perder-a-validade-mp-do-piso-minimo-do-frete-ainda-aguarda-votacao-no-senado"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. A poucos dias de perder a validade, MP do piso mínimo do frete ainda aguarda votação no Senado A poucos dias de perder a validade, a medida provisória (MP) que altera as regras do piso mínimo do frete rodoviário ainda aguarda votação no Senado. A informação vem de G1 política.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. A poucos dias de perder a validade, MP do piso mínimo do frete ainda aguarda votação no Senado A poucos dias de perder a validade, a medida provisória (MP) que altera as regras do piso mínimo do frete rodoviário ainda aguarda votação no Senado. A informação vem de G1 política.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: A poucos dias de perder a validade, MP do piso mínimo do frete ainda aguarda votação no Senado. A poucos dias de perder a validade, a medida provisória (MP) que altera as regras do piso mínimo do frete rodoviário ainda aguarda votação no Senado. Fonte: G1 Politica.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "G1 Politica publicou em 13 de jul de 2026: A poucos dias de perder a validade, MP do piso mínimo do frete ainda aguarda votação no Senado.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://g1.globo.com/podcast/o-assunto/noticia/2026/07/13/brasil-no-diva-como-as-eleicoes-e-a-copa-mobilizam-os-sentimentos-no-pais-o-assunto-1759.ghtml",
-    "slug": "brasil-no-diva-como-as-eleicoes-e-a-copa-mobilizam-os-sentimentos-no-pais-o-assunto-1759",
-    "title": "Brasil no divã: como as eleições e a Copa mobilizam os sentimentos no país - O Assunto #1759",
-    "eyebrow": "Politica",
-    "date": "12 de jul de 2026",
-    "publishedAt": "2026-07-13T03:30:08.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/podcast/o-assunto/noticia/2026/07/13/brasil-no-diva-como-as-eleicoes-e-a-copa-mobilizam-os-sentimentos-no-pais-o-assunto-1759.ghtml",
-    "sourceLabel": "Brasil no divã: como as eleições e a Copa mobilizam os sentimentos no país - O Assunto #1759",
-    "lede": "São raros os momentos em que um país inteiro olha para o mesmo lugar. Neste ano, isso irá acontecer duas vezes.",
-    "summary": "São raros os momentos em que um país inteiro olha para o mesmo lugar. Neste ano, isso irá acontecer duas vezes.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/5kzoy-1stlUyA5br0oCMxgTSJpQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/c/U/FsB3hwRAeWQk0RTDRggA/freud-psicanalise-cartas-800.jpg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/5kzoy-1stlUyA5br0oCMxgTSJpQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/c/U/FsB3hwRAeWQk0RTDRggA/freud-psicanalise-cartas-800.jpg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/5kzoy-1stlUyA5br0oCMxgTSJpQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/c/U/FsB3hwRAeWQk0RTDRggA/freud-psicanalise-cartas-800.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/podcast/o-assunto/noticia/2026/07/13/brasil-no-diva-como-as-eleicoes-e-a-copa-mobilizam-os-sentimentos-no-pais-o-assunto-1759.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/podcast/o-assunto/noticia/2026/07/13/brasil-no-diva-como-as-eleicoes-e-a-copa-mobilizam-os-sentimentos-no-pais-o-assunto-1759.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "brasil-no-diva-como-as-eleicoes-e-a-copa-mobilizam-os-sentimentos-no-pais-o-assunto-1759"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Brasil no divã: como as eleições e a Copa mobilizam os sentimentos no país - O Assunto #1759 São raros os momentos em que um país inteiro olha para o mesmo lugar. Neste ano, isso irá acontecer duas vezes. A informação vem de G1 política.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Brasil no divã: como as eleições e a Copa mobilizam os sentimentos no país - O Assunto #1759 São raros os momentos em que um país inteiro olha para o mesmo lugar. Neste ano, isso irá acontecer duas vezes. A informação vem de G1 política.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Brasil no divã: como as eleições e a Copa mobilizam os sentimentos no país - O Assunto #1759. São raros os momentos em que um país inteiro olha para o mesmo lugar. Neste ano, isso irá acontecer duas vezes. Fonte: G1 Politica.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "G1 Politica publicou em 12 de jul de 2026: Brasil no divã: como as eleições e a Copa mobilizam os sentimentos no país - O Assunto #1759.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://g1.globo.com/politica/noticia/2026/07/13/eua-decidem-na-quarta-sobre-tarifaco-ao-brasil-governo-lula-aguarda-dimensao-da-decisao-para-calibrar-reacao.ghtml",
-    "slug": "eua-decidem-na-quarta-sobre-tarifaco-ao-brasil-governo-lula-aguarda-dimensao-da-decisao-para-cal",
-    "title": "EUA decidem na quarta sobre tarifaço ao Brasil; governo Lula aguarda 'dimensão da decisão' para calibrar reação",
-    "eyebrow": "Politica",
-    "date": "12 de jul de 2026",
-    "publishedAt": "2026-07-13T03:00:31.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/13/eua-decidem-na-quarta-sobre-tarifaco-ao-brasil-governo-lula-aguarda-dimensao-da-decisao-para-calibrar-reacao.ghtml",
-    "sourceLabel": "EUA decidem na quarta sobre tarifaço ao Brasil; governo Lula aguarda 'dimensão da decisão' para calibrar reação",
-    "lede": "Ana Flor: Ainda serão feitas ao menos duas rodadas de conversas sobre tarifas dos EUA O governo brasileiro vai aguardar a dimensão da decisão dos Estados Unidos sobre aplicação de novas tarifas de 25% e 12,5% nas exportações de produtos brasileiros para...",
-    "summary": "Ana Flor: Ainda serão feitas ao menos duas rodadas de conversas sobre tarifas dos EUA O governo brasileiro vai aguardar a dimensão da decisão dos Estados Unidos sobre aplicação de novas tarifas de 25% e 12,5% nas exportações de produtos brasileiros para...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/tqqvS6r5NdltOoAK2lirsCznkxM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/H/Ap7HOzTyynyWlcdsX68w/globo-canal-4-20260617-2000-frame-69863.jpeg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/tqqvS6r5NdltOoAK2lirsCznkxM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/H/Ap7HOzTyynyWlcdsX68w/globo-canal-4-20260617-2000-frame-69863.jpeg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/tqqvS6r5NdltOoAK2lirsCznkxM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/H/Ap7HOzTyynyWlcdsX68w/globo-canal-4-20260617-2000-frame-69863.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/07/13/eua-decidem-na-quarta-sobre-tarifaco-ao-brasil-governo-lula-aguarda-dimensao-da-decisao-para-calibrar-reacao.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/politica/noticia/2026/07/13/eua-decidem-na-quarta-sobre-tarifaco-ao-brasil-governo-lula-aguarda-dimensao-da-decisao-para-calibrar-reacao.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "eua-decidem-na-quarta-sobre-tarifaco-ao-brasil-governo-lula-aguarda-dimensao-da-decisao-para-cal"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA decidem na quarta sobre tarifaço ao Brasil; governo Lula aguarda 'dimensão da decisão' para calibrar reação Ana Flor: Ainda serão feitas ao menos duas rodadas de conversas sobre tarifas dos EUA O governo brasileiro vai aguardar a dimensão da decisão dos Estados Unidos sobre aplicação de novas tarifas de 25% e 12,5% nas exportações de produtos brasileiros para... A informação vem de G1 política.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA decidem na quarta sobre tarifaço ao Brasil; governo Lula aguarda 'dimensão da decisão' para calibrar reação Ana Flor: Ainda serão feitas ao menos duas rodadas de conversas sobre tarifas dos EUA O governo brasileiro vai aguardar a dimensão da decisão dos Estados Unidos sobre aplicação de novas tarifas de 25% e 12,5% nas exportações de produtos brasileiros para... A informação vem de G1 política.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: EUA decidem na quarta sobre tarifaço ao Brasil; governo Lula aguarda 'dimensão da decisão' para calibrar reação. Ana Flor: Ainda serão feitas ao menos duas rodadas de conversas sobre tarifas dos EUA O governo brasileiro vai aguardar a dimensão da decisão dos Estados Unidos sobre aplicação de novas tarifas de 25% e 12,5% nas exportações de produtos... Fonte: G1 Politica.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "G1 Politica publicou em 12 de jul de 2026: EUA decidem na quarta sobre tarifaço ao Brasil; governo Lula aguarda 'dimensão da decisão' para calibrar reação.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.juruaemtempo.com.br/2026/07/enteado-invade-casamento-e-ataca-padrasto-a-facadas-dentro-de-igreja-em-eirunepe-am/",
-    "slug": "enteado-invade-casamento-e-ataca-padrasto-a-facadas-dentro-de-igreja-em-eirunepe-am",
-    "title": "Enteado invade casamento e ataca padrasto a facadas dentro de Igreja em Eirunepé (AM)",
-    "eyebrow": "Cotidiano",
-    "date": "12 de jul de 2026",
-    "publishedAt": "2026-07-13T01:14:21.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano enteado invade casamento e ataca padrasto a facadas dentro de igreja em eirunepe am o que era para ser um momento de celebracao terminou em violencia na manha da ultima sexta feira 10 um homem de 42 anos de iniciais m r v",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Jurua em Tempo",
-    "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/enteado-invade-casamento-e-ataca-padrasto-a-facadas-dentro-de-igreja-em-eirunepe-am/",
-    "sourceLabel": "Enteado invade casamento e ataca padrasto a facadas dentro de Igreja em Eirunepé (AM)",
-    "lede": "O que era para ser um momento de celebração terminou em violência na manhã da última sexta-feira (10). Um homem de 42 anos, de iniciais M. R. V.",
-    "summary": "O que era para ser um momento de celebração terminou em violência na manhã da última sexta-feira (10). Um homem de 42 anos, de iniciais M. R. V.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/photo_5089469450888613287_y.webp",
-    "feedImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/photo_5089469450888613287_y.webp",
-    "sourceImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/photo_5089469450888613287_y.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 975,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua em Tempo",
-        "url": "https://www.juruaemtempo.com.br/2026/07/enteado-invade-casamento-e-ataca-padrasto-a-facadas-dentro-de-igreja-em-eirunepe-am/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua em Tempo",
-        "url": "https://www.juruaemtempo.com.br/2026/07/enteado-invade-casamento-e-ataca-padrasto-a-facadas-dentro-de-igreja-em-eirunepe-am/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "enteado-invade-casamento-e-ataca-padrasto-a-facadas-dentro-de-igreja-em-eirunepe-am"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Enteado invade casamento e ataca padrasto a facadas dentro de Igreja em Eirunepé (AM) O que era para ser um momento de celebração terminou em violência na manhã da última sexta-feira (10). Um homem de 42 anos, de iniciais M. R. V. A informação vem de Juruá em Tempo.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Enteado invade casamento e ataca padrasto a facadas dentro de Igreja em Eirunepé (AM) O que era para ser um momento de celebração terminou em violência na manhã da última sexta-feira (10). Um homem de 42 anos, de iniciais M. R. V. A informação vem de Juruá em Tempo.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Enteado invade casamento e ataca padrasto a facadas dentro de Igreja em Eirunepé (AM). O que era para ser um momento de celebração terminou em violência na manhã da última sexta-feira (10). Um homem de 42 anos, de iniciais M. R. V. Fonte: Jurua em Tempo.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Jurua em Tempo publicou em 12 de jul de 2026: Enteado invade casamento e ataca padrasto a facadas dentro de Igreja em Eirunepé (AM).",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/policia/motorista-morre-apos-perder-controle-de-porsche-e-bater-em-mureta/",
-    "slug": "motorista-morre-apos-perder-controle-de-porsche-e-bater-em-mureta",
-    "title": "Motorista morre após perder controle de Porsche e bater em mureta",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.929Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano motorista morre apos perder controle de porsche e bater em mureta motorista morre apos perder controle de porsche e bater em mureta",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/policia/motorista-morre-apos-perder-controle-de-porsche-e-bater-em-mureta/",
-    "sourceLabel": "Motorista morre após perder controle de Porsche e bater em mureta",
-    "lede": "Motorista morre após perder controle de Porsche e bater em mureta",
-    "summary": "Motorista morre após perder controle de Porsche e bater em mureta",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/motorista-morre-apos-perder-controle-de-porsche-e-bater-em-mureta/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/motorista-morre-apos-perder-controle-de-porsche-e-bater-em-mureta/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "motorista-morre-apos-perder-controle-de-porsche-e-bater-em-mureta"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Motorista morre após perder controle de Porsche e bater em mureta A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Motorista morre após perder controle de Porsche e bater em mureta A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Motorista morre após perder controle de Porsche e bater em mureta. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Motorista morre após perder controle de Porsche e bater em mureta.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
   }
 ]

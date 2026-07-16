@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-16T12:06:00.618Z",
-  "finishedAt": "2026-07-16T12:06:09.076Z",
-  "capturedItems": 390,
-  "capturedToday": 183,
+  "startedAt": "2026-07-16T12:31:24.408Z",
+  "finishedAt": "2026-07-16T12:31:34.862Z",
+  "capturedItems": 370,
+  "capturedToday": 176,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -142,10 +142,9 @@
     },
     {
       "source": "jurua-em-tempo",
-      "ok": true,
-      "count": 23,
-      "blocked": 1,
-      "mode": "wordpress-json"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "jurua-informativo",
