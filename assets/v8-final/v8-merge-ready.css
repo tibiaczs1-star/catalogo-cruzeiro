@@ -13955,6 +13955,19 @@ body.v8-merge-ready #cinematicLoader .loader-logo,
 body.v8-merge-ready #cinematicLoader img.loader-logo,
 html.czs-daily-intro body.v8-merge-ready #cinematicLoader .loader-logo,
 body.v8-merge-ready.v8-intro-running #cinematicLoader .loader-logo {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.v8-merge-ready #cinematicLoader .v8-loader-brand-logo,
+html.czs-daily-intro body.v8-merge-ready #cinematicLoader .v8-loader-brand-logo,
+body.v8-merge-ready.v8-intro-running #cinematicLoader .v8-loader-brand-logo {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -13992,8 +14005,7 @@ html.czs-daily-intro body.v8-merge-ready #cinematicLoader .loader-core::before {
     max-height: 160px !important;
   }
 
-  body.v8-merge-ready #cinematicLoader .loader-logo,
-  body.v8-merge-ready #cinematicLoader img.loader-logo {
+  body.v8-merge-ready #cinematicLoader .v8-loader-brand-logo {
     width: min(330px, 78vw) !important;
     max-height: 150px !important;
   }

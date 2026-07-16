@@ -45,7 +45,7 @@
     "hermes:render:services": "node scripts/render-api-bridge.js services",
     "hermes:render:status": "node scripts/render-api-bridge.js status",
     "hydrate:source-screenshots": "node scripts/hydrate-source-screenshots.js",
-    "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
+    "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/audit-news-image-relevance.js && node scripts/review-team-audit.js",
     "rayx": "node rayx/bin/rayx.js",
     "rayx:boot": "node rayx/core/boot.js",
     "rayx:catalog": "node rayx/core/catalog.js",
