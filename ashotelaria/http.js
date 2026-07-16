@@ -5,11 +5,13 @@ const { hasPermission } = require("./auth");
 
 const API_PREFIX = "/api/ashotelaria/v1";
 const DEFAULT_BODY_LIMIT = 64 * 1024;
+const DEFAULT_PHOTO_BODY_LIMIT = 2 * 1024 * 1024;
 const DEFAULT_COOKIE_NAME = "ashotelaria_session";
 
 function createASHotelariaHandler({ store, authService, config = {} } = {}) {
   if (!store || !authService) throw new TypeError("store and authService are required");
   const bodyLimit = positiveInteger(config.bodyLimitBytes, DEFAULT_BODY_LIMIT);
+  const photoBodyLimit = positiveInteger(config.photoBodyLimitBytes, DEFAULT_PHOTO_BODY_LIMIT);
   const cookieName = config.cookieName ?? DEFAULT_COOKIE_NAME;
   const production = config.production ?? process.env.NODE_ENV === "production";
 
@@ -161,6 +163,29 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         return true;
       }
 
+      if (method === "POST" && routePath === "/walk-ins") {
+        const session = await requireSession(req, authService, cookieName);
+        requirePasswordChanged(session);
+        requirePermission(session, "reservations.create");
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.createWalkIn !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Walk-in registration unavailable", 503);
+        }
+        const reservation = await store.createWalkIn({
+          tenantId: session.tenantId,
+          propertyId: session.propertyId,
+          actor: {
+            id: `${session.username}:${session.role}`,
+            username: session.username,
+            role: session.role,
+          },
+          input: walkInInput(body),
+        });
+        if (!reservation) throw httpError("NOT_FOUND", "Room not found", 404);
+        sendJson(res, 201, { reservation });
+        return true;
+      }
+
       const reservationStatusMatch = routePath.match(/^\/reservations\/([^/]+)\/status$/);
       if (method === "PATCH" && reservationStatusMatch) {
         const session = await requireSession(req, authService, cookieName);
@@ -202,6 +227,33 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         });
         if (!room) throw httpError("NOT_FOUND", "Room not found", 404);
         sendJson(res, 200, { room });
+        return true;
+      }
+
+      const roomPhotoMatch = routePath.match(/^\/rooms\/([^/]+)\/photos$/);
+      if (method === "POST" && roomPhotoMatch) {
+        const session = await requireSession(req, authService, cookieName);
+        requirePasswordChanged(session);
+        requirePermission(session, "tasks.housekeeping.update");
+        const body = await readJson(req, photoBodyLimit);
+        if (typeof store.addRoomPhoto !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Room photos unavailable", 503);
+        }
+        const photo = await store.addRoomPhoto({
+          tenantId: session.tenantId,
+          propertyId: session.propertyId,
+          roomId: decodeURIComponent(roomPhotoMatch[1]),
+          kind: body.kind,
+          imageDataUrl: body.imageDataUrl,
+          note: body.note,
+          actor: {
+            id: `${session.username}:${session.role}`,
+            username: session.username,
+            role: session.role,
+          },
+        });
+        if (!photo) throw httpError("NOT_FOUND", "Room not found", 404);
+        sendJson(res, 201, { photo });
         return true;
       }
 
@@ -253,6 +305,22 @@ function reservationInput(body) {
   return {
     roomTypeId: body.roomTypeId,
     checkIn: body.checkIn,
+    checkOut: body.checkOut,
+    adults: body.adults,
+    children: body.children,
+    guestName: body.guestName,
+    guestEmail: body.guestEmail,
+    guestPhone: body.guestPhone,
+    document: body.document,
+    cpf: body.cpf,
+    extras: body.extras,
+    taxes: body.taxes,
+  };
+}
+
+function walkInInput(body) {
+  return {
+    roomId: body.roomId,
     checkOut: body.checkOut,
     adults: body.adults,
     children: body.children,

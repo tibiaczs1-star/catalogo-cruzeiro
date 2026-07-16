@@ -3,26 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#103d34">
+  <meta name="theme-color" content="#b4232d">
   <title>Reservar hospedagem — AShotelaria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260714-p4">
+  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260716-p5">
 </head>
 <body class="booking-body">
   <div id="connection-banner" class="connection-banner" role="status" hidden>Sem conexão com o hotel. Aguarde a internet voltar para continuar.</div>
   <header class="booking-header">
-    <a class="brand-lockup" href="/" data-help="Volta para o Catálogo CZS."><span class="brand-mark">AS</span><span><strong>AShotelaria</strong><small>Reserva simulada</small></span></a>
+    <a class="brand-lockup" href="/" data-help="Volta para o Catálogo CZS."><span class="brand-mark">AS</span><span><strong>AShotelaria</strong><small>Reserva online</small></span></a>
     <a class="text-link" href="/ashotelaria/app" data-help="Abre a entrada da equipe do hotel.">Acesso da equipe</a>
   </header>
 
   <main>
     <section class="booking-hero">
       <div class="booking-hero__content">
-        <p class="eyebrow">Simulação · Hospede-se no Vale do Juruá</p>
+        <p class="eyebrow">Hospede-se no Vale do Juruá</p>
         <h1 id="booking-property-name">Sua estadia começa aqui.</h1>
-        <p>Consulte a disponibilidade simulada e teste uma reserva.</p>
+        <p>Consulte disponibilidade e registre sua hospedagem.</p>
       </div>
     </section>
 
@@ -30,15 +30,15 @@
       <ol class="booking-steps" aria-label="Etapas">
         <li class="active" data-step-marker="1" tabindex="0" data-help="Defina entrada, saída e quantidade de hóspedes."><span>1</span>Datas</li>
         <li data-step-marker="2" tabindex="0" data-help="Compare as categorias disponíveis para o período."><span>2</span>Quarto</li>
-        <li data-step-marker="3" tabindex="0" data-help="Preencha somente dados fictícios para testar a reserva."><span>3</span>Hóspede</li>
-        <li data-step-marker="4" tabindex="0" data-help="Confira o registro criado nesta simulação."><span>4</span>Confirmação</li>
+        <li data-step-marker="3" tabindex="0" data-help="Preencha os dados do hóspede para identificar a reserva."><span>3</span>Hóspede</li>
+        <li data-step-marker="4" tabindex="0" data-help="Confira o registro criado no sistema."><span>4</span>Confirmação</li>
       </ol>
 
       <div class="booking-stage">
         <form id="availability-form" class="booking-form booking-form--dates" data-step="1">
           <header><p class="eyebrow">Etapa 1</p><h2>Quando você quer ficar?</h2></header>
           <div class="field-grid">
-            <label><span>Entrada</span><input name="checkIn" type="date" data-help="Primeiro dia da hospedagem simulada." required></label>
+            <label><span>Entrada</span><input name="checkIn" type="date" data-help="Primeiro dia da hospedagem." required></label>
             <label><span>Saída</span><input name="checkOut" type="date" data-help="Dia de saída; ele deve ser posterior à entrada." required></label>
             <label><span>Adultos</span><input name="adults" type="number" min="1" max="10" value="2" data-help="Quantidade de adultos usada para calcular a capacidade necessária." required></label>
             <label><span>Crianças</span><input name="children" type="number" min="0" max="10" value="0" data-help="Quantidade de crianças usada para calcular a capacidade necessária." required></label>
@@ -54,17 +54,16 @@
 
         <form id="guest-form" class="booking-form" data-step="3" hidden>
           <header><p class="eyebrow">Etapa 3</p><h2>Quem vai se hospedar?</h2></header>
-          <p class="simulation-note" role="note">Simulação: use somente dados fictícios.</p>
           <div class="field-grid">
-            <label class="field-span"><span>Nome completo fictício</span><input name="guestName" autocomplete="off" data-help="Informe um nome fictício para identificar este teste." required></label>
-            <label><span>E-mail fictício</span><input name="guestEmail" type="email" autocomplete="off" data-help="Use um endereço fictício no formato de e-mail." required></label>
-            <label><span>Telefone fictício</span><input name="guestPhone" type="tel" autocomplete="off" data-help="Use um número fictício para testar o cadastro." required></label>
-            <label><span>Documento fictício</span><input name="document" autocomplete="off" data-help="Use apenas um identificador fictício; não informe documento real." required></label>
+            <label class="field-span"><span>Nome completo</span><input name="guestName" autocomplete="name" data-help="Informe o nome do hóspede principal." required></label>
+            <label><span>E-mail</span><input name="guestEmail" type="email" autocomplete="email" data-help="Informe um endereço de e-mail para contato." required></label>
+            <label><span>Telefone</span><input name="guestPhone" type="tel" autocomplete="tel" data-help="Informe o telefone de contato do hóspede." required></label>
+            <label><span>Documento</span><input name="document" autocomplete="off" data-help="Informe o documento apresentado pelo hóspede." required></label>
           </div>
-          <label class="payment-line" tabindex="0" data-help="Nenhuma cobrança é feita; o pagamento permanece em ambiente de testes."><input type="radio" checked disabled><span><strong>Pagamento na hospedagem — sandbox</strong><small>Confirmação simulada. Nenhuma cobrança será processada.</small></span></label>
+          <label class="payment-line" tabindex="0" data-help="Pagamento registrado para conferência na hospedagem."><input type="radio" checked disabled><span><strong>Pagamento na hospedagem</strong><small>Conferência no balcão do hotel.</small></span></label>
           <div class="button-row">
             <button class="text-button back-button" type="button" data-back="2" data-help="Volta para escolher outra categoria de quarto.">← Voltar</button>
-            <button class="button button--primary" type="submit" data-help="Cria uma reserva de teste com os dados fictícios informados.">Confirmar reserva</button>
+            <button class="button button--primary" type="submit" data-help="Cria a reserva com os dados informados.">Confirmar reserva</button>
           </div>
         </form>
 
@@ -74,14 +73,14 @@
           <h2>Está tudo certo.</h2>
           <p id="confirmation-message"></p>
           <dl id="confirmation-details"></dl>
-          <a class="button button--secondary" href="/" data-help="Encerra o teste e volta para o Catálogo CZS.">Voltar ao Catálogo CZS</a>
+          <a class="button button--secondary" href="/" data-help="Volta para o Catálogo CZS.">Voltar ao Catálogo CZS</a>
         </section>
 
         <p id="booking-error" class="form-error" role="alert" hidden></p>
       </div>
     </section>
   </main>
-  <footer class="booking-footer"><span>AShotelaria · CZS Labs</span><span>Ambiente de simulação · não use dados reais</span></footer>
-  <script src="/ashotelaria-app/booking.js?v=20260714-p4" defer></script>
+  <footer class="booking-footer"><span>AShotelaria · CZS Labs</span><span>Reserva online do hotel</span></footer>
+  <script src="/ashotelaria-app/booking.js?v=20260716-p5" defer></script>
 </body>
 </html>

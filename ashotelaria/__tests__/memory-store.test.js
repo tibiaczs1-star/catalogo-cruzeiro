@@ -62,7 +62,7 @@ test("createSeed is deterministic and includes isolated demo organizations and h
     .map((membership) => membership.role));
   assert.deepEqual(
     [...roles].sort(),
-    ["administrador", "camareira", "contador", "recepcionista"],
+    ["administrador", "camareira", "contador", "gerente", "manutencao", "recepcionista", "supervisor_governanca"],
   );
 
   const juruaTypes = first.roomTypes.filter((row) => row.propertyId === JURUA_PROPERTY);
@@ -92,6 +92,18 @@ test("createSeed is deterministic and includes isolated demo organizations and h
       status: "confirmed",
     },
   );
+});
+
+test("seed exposes real hotel-ready room photo slots without external sample photos", () => {
+  const seed = createSeed("2026-07-14");
+  const juruaRooms = seed.rooms.filter((row) => row.propertyId === JURUA_PROPERTY);
+
+  assert.equal(juruaRooms.length, 12);
+  for (const room of juruaRooms) {
+    assert.equal(Object.hasOwn(room, "photoUrl"), true);
+    assert.equal(room.photoUrl, "");
+    assert.doesNotMatch(JSON.stringify(room), /unsplash|example-photo|demo/i);
+  }
 });
 
 test("health identifies the ephemeral server-side demo store", async () => {
@@ -202,6 +214,85 @@ test("all operational reads require both tenant and property and guests stay mas
   });
   assert.equal(otherBootstrap.property.tenantId, OTHER_TENANT);
   assert.equal(otherBootstrap.rooms.some((row) => row.tenantId === CZS_TENANT), false);
+});
+
+test("walk-in registration creates an immediate checked-in stay and occupies the room", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"), { now: () => "2026-07-14" });
+
+  const reservation = await store.createWalkIn({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    actor: { id: "admin:recepcionista", role: "recepcionista" },
+    input: {
+      roomId: "room-103",
+      guestName: "Hospede de balcão",
+      guestEmail: "balcao@hotel.local",
+      guestPhone: "+55 68 99900-0000",
+      document: "999.888.777-66",
+      checkOut: "2026-07-15",
+      adults: 1,
+      children: 0,
+    },
+  });
+
+  assert.equal(reservation.status, "checked_in");
+  assert.equal(reservation.roomId, "room-103");
+  assert.equal(reservation.checkIn, "2026-07-14");
+  assert.equal(reservation.total, 18_900);
+
+  const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(bootstrap.rooms.find(({ id }) => id === "room-103").status, "occupied");
+  assert.equal(bootstrap.guests.some(({ name }) => name === "Hospede de balcão"), true);
+  assert.equal((await store.listAuditEvents({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY }))
+    .some(({ action, entityId }) => action === "walkin.created" && entityId === reservation.id), true);
+});
+
+test("walk-in registration only accepts ready rooms inside the scoped property", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"), { now: () => "2026-07-14" });
+  const input = {
+    roomId: "room-104",
+    guestName: "Hospede sem quarto pronto",
+    checkOut: "2026-07-15",
+    adults: 1,
+    children: 0,
+  };
+
+  await assert.rejects(
+    store.createWalkIn({
+      tenantId: CZS_TENANT,
+      propertyId: JURUA_PROPERTY,
+      actor: { id: "admin:recepcionista", role: "recepcionista" },
+      input,
+    }),
+    (error) => error.code === "ROOM_NOT_READY",
+  );
+  assert.equal(await store.createWalkIn({
+    tenantId: OTHER_TENANT,
+    propertyId: JURUA_PROPERTY,
+    actor: { id: "attacker" },
+    input: { ...input, roomId: "room-103" },
+  }), null);
+});
+
+test("room delivery photos are persisted for the assigned housekeeping room", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"));
+  const photo = await store.addRoomPhoto({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    roomId: "room-104",
+    kind: "delivery",
+    imageDataUrl: "data:image/jpeg;base64,Zm90by1kby1xdWFydG8=",
+    note: "Quarto entregue limpo",
+    actor: { username: "admin", role: "camareira" },
+  });
+
+  assert.equal(photo.roomId, "room-104");
+  assert.equal(photo.kind, "delivery");
+  assert.equal(photo.note, "Quarto entregue limpo");
+  const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  const room = bootstrap.rooms.find(({ id }) => id === "room-104");
+  assert.equal(room.deliveryPhotos.length, 1);
+  assert.equal(room.deliveryPhotos[0].imageDataUrl, "data:image/jpeg;base64,Zm90by1kby1xdWFydG8=");
 });
 
 test("bootstrap guest projections deep-clone nested fields", async () => {
@@ -744,7 +835,7 @@ test("getUserByEmail is case-insensitive and returns scoped memberships without 
 
   const user = await store.getUserByEmail("  ADMIN@JURUA.EXAMPLE  ");
   assert.equal(user.id, "user-admin-jurua");
-  assert.deepEqual(user.memberships.map(({ role }) => role), ["administrador"]);
+  assert.deepEqual(user.memberships.map(({ role }) => role).sort(), ["administrador", "gerente", "manutencao"]);
   assert.equal(Object.hasOwn(user, "password"), false);
   assert.equal(Object.hasOwn(user, "passwordHash"), false);
   assert.equal(await store.getUserByEmail("missing@example.com"), null);

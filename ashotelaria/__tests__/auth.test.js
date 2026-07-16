@@ -38,7 +38,7 @@ function createService(options = {}) {
   return { store, service, advance(ms) { now += ms; } };
 }
 
-test("declares the 14 canonical roles and limits cashflow to the four approved roles", () => {
+test("declares the 14 canonical roles and limits cashflow to approved management roles", () => {
   assert.deepEqual(CANONICAL_ROLES, [
     "superadmin", "proprietario", "administrador", "gerente", "recepcionista", "camareira",
     "supervisor_governanca", "contador", "financeiro", "caixa", "manutencao", "revenue_manager",
@@ -47,7 +47,7 @@ test("declares the 14 canonical roles and limits cashflow to the four approved r
   assert.equal(Object.keys(ROLE_PERMISSIONS).length, 14);
 
   const cashflowRoles = CANONICAL_ROLES.filter((role) => hasPermission(role, "finance.cashflow.read"));
-  assert.deepEqual(cashflowRoles, ["proprietario", "administrador", "contador", "financeiro"]);
+  assert.deepEqual(cashflowRoles, ["proprietario", "administrador", "gerente", "contador", "financeiro"]);
   assert.equal(hasPermission("camareira", "reservations.read"), false);
   assert.equal(hasPermission("camareira", "guests.basic.read"), false);
   assert.equal(hasPermission("camareira", "rooms.operational.update"), true);
@@ -57,10 +57,10 @@ test("declares the 14 canonical roles and limits cashflow to the four approved r
   assert.equal(hasPermission("recepcionista", "finance.cashflow.read"), false);
   assert.equal(hasPermission("camareira", "reservations.manage"), false);
 
-  for (const role of ["administrador", "proprietario", "superadmin"]) {
+  for (const role of ["administrador", "gerente", "proprietario", "superadmin"]) {
     assert.equal(hasPermission(role, "credentials.reset"), true, role);
   }
-  for (const role of CANONICAL_ROLES.filter((role) => !["administrador", "proprietario", "superadmin"].includes(role))) {
+  for (const role of CANONICAL_ROLES.filter((role) => !["administrador", "gerente", "proprietario", "superadmin"].includes(role))) {
     assert.equal(hasPermission(role, "credentials.reset"), false, role);
   }
 });

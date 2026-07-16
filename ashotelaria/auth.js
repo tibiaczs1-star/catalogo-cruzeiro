@@ -46,7 +46,8 @@ const ROLE_PERMISSIONS = Object.freeze({
     "hotel.bootstrap.read", "frontdesk.read", "reservations.read", "reservations.create", "reservations.manage",
     "guests.basic.read", "rooms.operational.read", "rooms.operational.update",
     "tasks.housekeeping.read", "tasks.housekeeping.update", "tasks.maintenance.read",
-    "tasks.maintenance.update", "audit.read",
+    "tasks.maintenance.update", "finance.cashflow.read", "admin.users.manage", "admin.roles.manage",
+    "admin.settings.manage", "audit.read", "credentials.reset",
   ),
   recepcionista: permissions(
     "hotel.bootstrap.read", "frontdesk.read", "reservations.read", "reservations.create", "reservations.manage",

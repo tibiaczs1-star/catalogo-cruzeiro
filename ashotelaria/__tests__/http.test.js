@@ -284,6 +284,70 @@ test("recepcionista gets scoped reservations and basic guests but never cashflow
   assert.equal(Object.hasOwn(bootstrap.res.json.bootstrap, "integrations"), false);
 });
 
+test("gerente inherits the full operational chain including finance, settings and security", async () => {
+  const { handler } = fixture();
+  const cookie = await login(handler, "gerente", "Padrao-inicial-2026!");
+  const headers = { cookie };
+  const bootstrap = await request(handler, "GET", `${BASE}/bootstrap`, { headers });
+
+  assert.equal(bootstrap.res.statusCode, 200, bootstrap.res.text);
+  for (const key of ["summary", "rooms", "roomTypes", "reservations", "guests", "housekeepingTasks", "maintenanceOrders", "integrations"]) {
+    assert.equal(Object.hasOwn(bootstrap.res.json.bootstrap, key), true, key);
+  }
+  for (const permission of ["finance.cashflow.read", "admin.settings.manage", "credentials.reset"]) {
+    assert.equal(bootstrap.res.json.session.permissions.includes(permission), true, permission);
+  }
+});
+
+test("front desk walk-in route registers an immediate in-house guest", async () => {
+  const { handler } = fixture({
+    store: createMemoryStore(createSeed("2026-07-14"), { now: () => "2026-07-14" }),
+  });
+  const cookie = await login(handler, "recepcionista", "Recepcao-inicial-2026!");
+  const created = await request(handler, "POST", `${BASE}/walk-ins`, {
+    headers: { cookie },
+    body: {
+      roomId: "room-103",
+      guestName: "Hospede direto do balcão",
+      guestPhone: "+55 68 99900-0001",
+      document: "111.000.222-33",
+      checkOut: "2026-07-15",
+      adults: 1,
+      children: 0,
+    },
+  });
+
+  assert.equal(created.res.statusCode, 201, created.res.text);
+  assert.equal(created.res.json.reservation.status, "checked_in");
+  assert.equal(created.res.json.reservation.roomId, "room-103");
+  const bootstrap = await request(handler, "GET", `${BASE}/bootstrap`, { headers: { cookie } });
+  assert.equal(bootstrap.res.json.bootstrap.rooms.find(({ id }) => id === "room-103").status, "occupied");
+});
+
+test("housekeeping can attach delivery photos but cannot create walk-ins", async () => {
+  const { handler } = fixture();
+  const cookie = await login(handler, "camareira", "Padrao-inicial-2026!");
+  const headers = { cookie };
+
+  const denied = await request(handler, "POST", `${BASE}/walk-ins`, {
+    headers,
+    body: { roomId: "room-104", guestName: "Sem permissao", checkOut: "2026-07-15" },
+  });
+  assert.equal(denied.res.statusCode, 403);
+
+  const uploaded = await request(handler, "POST", `${BASE}/rooms/room-104/photos`, {
+    headers,
+    body: {
+      kind: "delivery",
+      imageDataUrl: "data:image/png;base64,Zm90by1kZS1lbnRyZWdh",
+      note: "Entrega do quarto 104",
+    },
+  });
+  assert.equal(uploaded.res.statusCode, 201, uploaded.res.text);
+  assert.equal(uploaded.res.json.photo.kind, "delivery");
+  assert.equal(uploaded.res.json.photo.roomId, "room-104");
+});
+
 test("reception can run check-in and check-out while invalid transitions stay controlled", async () => {
   const { handler } = fixture({
     store: createMemoryStore(createSeed("2026-07-14"), {

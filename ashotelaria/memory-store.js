@@ -18,6 +18,7 @@ const ROOM_STATUSES = new Set([
   "available", "occupied", "dirty", "cleaning", "inspected", "maintenance",
   "blocked", "do_not_disturb",
 ]);
+const ROOM_PHOTO_KINDS = new Set(["room", "delivery"]);
 const SUMMARY_ROOM_STATUS = {
   cleaning: "dirty",
   inspected: "available",
@@ -35,6 +36,19 @@ function maskedGuest(guest) {
   return { ...safe, documentMasked: `${"*".repeat(Math.max(8, source.length - 2))}${source.slice(-2)}` };
 }
 
+function addDays(dateValue, days) {
+  const [year, month, day] = String(dateValue).split("-").map(Number);
+  const instant = new Date(Date.UTC(year, month - 1, day));
+  instant.setUTCDate(instant.getUTCDate() + days);
+  return instant.toISOString().slice(0, 10);
+}
+
+function isValidImageDataUrl(value) {
+  return typeof value === "string"
+    && /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/i.test(value)
+    && value.length <= 2_000_000;
+}
+
 function reservationResult(reservation, replayed, includeReplayMetadata) {
   const safe = copy(reservation);
   return includeReplayMetadata ? { reservation: safe, replayed } : safe;
@@ -45,6 +59,7 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
   const now = typeof config.now === "function" ? config.now : () => new Date();
   state.auditEvents ??= [];
   state.credentialProfiles ??= [];
+  state.roomPhotos ??= [];
   const idempotency = new Map();
   const inFlightByIdempotencyKey = new Map();
   const inventoryQueues = new Map();
@@ -107,6 +122,25 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
     });
   }
 
+  function photosForRoom(tenantId, propertyId, roomId) {
+    const photos = state.roomPhotos
+      .filter((photo) => photo.tenantId === tenantId && photo.propertyId === propertyId && photo.roomId === roomId)
+      .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+    const roomPhoto = photos.find((photo) => photo.kind === "room");
+    return {
+      photoUrl: roomPhoto?.imageDataUrl ?? "",
+      deliveryPhotos: copy(photos.filter((photo) => photo.kind === "delivery")),
+    };
+  }
+
+  function roomWithPhotos(room) {
+    return {
+      ...room,
+      ...photosForRoom(room.tenantId, room.propertyId, room.id),
+      photoUrl: room.photoUrl || photosForRoom(room.tenantId, room.propertyId, room.id).photoUrl || "",
+    };
+  }
+
   async function findAvailability({ propertySlug, checkIn, checkOut, adults = 1, children = 0 }) {
     const range = parseStayRange({ checkIn, checkOut });
     const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
@@ -148,7 +182,7 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
     async getBootstrap({ tenantId, propertyId }) {
       const property = scopedProperty(tenantId, propertyId);
       if (!property) return null;
-      const rooms = copy(scopedRows("rooms", tenantId, propertyId));
+      const rooms = copy(scopedRows("rooms", tenantId, propertyId).map(roomWithPhotos));
       const reservations = copy(scopedRows("reservations", tenantId, propertyId));
       return {
         property: copy(property),
@@ -259,6 +293,113 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
           inFlightByIdempotencyKey.delete(key);
         }
       }
+    },
+
+    async createWalkIn({ tenantId, propertyId, input, actor }) {
+      const property = scopedProperty(tenantId, propertyId);
+      if (!property) return null;
+      return withInventoryLock(`${tenantId}:${propertyId}`, async () => {
+        const roomId = typeof input?.roomId === "string" ? input.roomId.trim() : "";
+        const room = state.rooms.find((row) => (
+          row.id === roomId && row.tenantId === tenantId && row.propertyId === propertyId
+        ));
+        if (!room) return null;
+        const hasCheckedInReservation = state.reservations.some((row) => (
+          row.tenantId === tenantId
+          && row.propertyId === propertyId
+          && row.roomId === room.id
+          && row.status === "checked_in"
+        ));
+        validateCheckInRoom({ roomStatus: room.status, hasCheckedInReservation });
+        const roomType = scopedRows("roomTypes", tenantId, propertyId)
+          .find((row) => row.id === room.roomTypeId);
+        if (!roomType) throw new RangeError("roomTypeId is unknown");
+        const checkIn = operationalDate(now(), property.timeZone);
+        const validated = validateReservationInput({
+          ...input,
+          roomTypeId: roomType.id,
+          checkIn,
+          checkOut: input?.checkOut || addDays(checkIn, 1),
+          nightlyRate: roomType.nightlyRate,
+        });
+        const overlaps = state.reservations.some((row) => (
+          row.tenantId === tenantId
+          && row.propertyId === propertyId
+          && row.roomId === room.id
+          && ACTIVE_STAY_STATUSES.has(row.status)
+          && rangesOverlap(validated.checkIn, validated.checkOut, row.checkIn, row.checkOut)
+        ));
+        if (overlaps) {
+          const error = new Error("No inventory is available for this stay");
+          error.code = "INVENTORY_CONFLICT";
+          throw error;
+        }
+        const guest = {
+          id: `guest-${tenantId}-${state.guests.length + 1}`,
+          tenantId,
+          propertyId,
+          name: validated.guestName,
+          email: input.guestEmail,
+          phone: input.guestPhone,
+          document: input.document ?? input.cpf ?? "",
+        };
+        state.guests.push(guest);
+        const reservation = {
+          id: `walkin-${tenantId}-${state.reservations.length + 1}`,
+          tenantId,
+          propertyId,
+          guestId: guest.id,
+          roomTypeId: roomType.id,
+          roomId: room.id,
+          checkIn: validated.checkIn,
+          checkOut: validated.checkOut,
+          adults: validated.adults,
+          children: validated.children,
+          nightlyRate: roomType.nightlyRate,
+          extras: validated.extras,
+          taxes: validated.taxes,
+          total: roomType.nightlyRate * validated.nights + validated.extras + validated.taxes,
+          status: "checked_in",
+          source: "frontdesk",
+        };
+        state.reservations.push(reservation);
+        room.status = "occupied";
+        audit({ tenantId, propertyId, action: "walkin.created", entityId: reservation.id, actor, changes: { roomId: room.id } });
+        return copy(reservation);
+      });
+    },
+
+    async addRoomPhoto({ tenantId, propertyId, roomId, kind = "delivery", imageDataUrl, note = "", actor }) {
+      if (!scopedProperty(tenantId, propertyId)) return null;
+      const normalizedKind = String(kind ?? "").trim().toLowerCase();
+      if (!ROOM_PHOTO_KINDS.has(normalizedKind)) throw new RangeError("room photo kind is unknown");
+      if (!isValidImageDataUrl(imageDataUrl)) throw new RangeError("room photo image is invalid");
+      return withInventoryLock(roomLockKey(tenantId, propertyId, roomId), async () => {
+        const room = state.rooms.find((row) => row.id === roomId && row.tenantId === tenantId && row.propertyId === propertyId);
+        if (!room) return null;
+        const photo = {
+          id: `room-photo-${state.roomPhotos.length + 1}`,
+          tenantId,
+          propertyId,
+          roomId,
+          kind: normalizedKind,
+          imageDataUrl,
+          note: String(note ?? "").trim().slice(0, 240),
+          actor: copy(actor ?? { id: "system" }),
+          createdAt: new Date().toISOString(),
+        };
+        state.roomPhotos.push(photo);
+        if (normalizedKind === "delivery") {
+          if (!["occupied", "maintenance", "blocked"].includes(room.status)) room.status = "inspected";
+          for (const task of state.housekeepingTasks.filter((row) => (
+            row.tenantId === tenantId && row.propertyId === propertyId && row.roomId === roomId
+          ))) {
+            if (task.status !== "cancelled") task.status = "done";
+          }
+        }
+        audit({ tenantId, propertyId, action: `room.photo_${normalizedKind}.created`, entityId: roomId, actor, changes: { photoId: photo.id } });
+        return copy(photo);
+      });
     },
 
     async updateRoomStatus({ tenantId, propertyId, roomId, status, actor }) {

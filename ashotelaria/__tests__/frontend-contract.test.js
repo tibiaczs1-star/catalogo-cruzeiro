@@ -58,9 +58,9 @@ test("entrada é direta e áreas operacionais oferecem ajuda atrasada", async ()
   ]);
 
   assert.doesNotMatch(html, /Cada equipe vê o que precisa|Operação hoteleira, em tempo real/);
-  assert.match(html, /styles\.css\?v=20260714-p4/);
-  assert.match(html, /app\.js\?v=20260714-p4/);
-  assert.match(html, /simulation-badge/);
+  assert.match(html, /styles\.css\?v=20260716-p5/);
+  assert.match(html, /app\.js\?v=20260716-p5/);
+  assert.match(html, /system-badge/);
   assert.match(script, /dataset\.help/);
   assert.match(script, /setTimeout\(/);
   assert.match(script, /650\)/);
@@ -130,19 +130,57 @@ test("reserva publica oferece ajuda atrasada inclusive nas opcoes dinamicas", as
   assert.match(script, /650\)/);
 });
 
-test("copy da reserva assume simulacao e orienta uso de dados ficticios", async () => {
+test("copy da reserva publica assume sistema do hotel em producao operacional", async () => {
   const [panelHtml, bookingHtml, bookingScript] = await Promise.all([
     source("index.html"), source("booking.html"), source("booking.js"),
   ]);
   const publicCopy = `${bookingHtml}\n${bookingScript}`;
 
-  assert.doesNotMatch(publicCopy, /disponibilidade real|reserva protegida/i);
-  assert.match(publicCopy, /dados fict[ií]cios/i);
-  assert.match(publicCopy, /simula[cç][aã]o/i);
-  assert.match(panelHtml, /styles\.css\?v=20260714-p4/);
-  assert.match(panelHtml, /app\.js\?v=20260714-p4/);
-  assert.match(bookingHtml, /styles\.css\?v=20260714-p4/);
-  assert.match(bookingHtml, /booking\.js\?v=20260714-p4/);
+  assert.doesNotMatch(publicCopy, /simula[cç][aã]o|dados fict[ií]cios|teste|sandbox|ambiente de testes/i);
+  assert.match(publicCopy, /Reserva online/);
+  assert.match(publicCopy, /registrada no sistema/);
+  assert.match(panelHtml, /styles\.css\?v=20260716-p5/);
+  assert.match(panelHtml, /app\.js\?v=20260716-p5/);
+  assert.match(bookingHtml, /styles\.css\?v=20260716-p5/);
+  assert.match(bookingHtml, /booking\.js\?v=20260716-p5/);
+});
+
+test("interface operacional nao apresenta demo nem fotos externas de exemplo", async () => {
+  const [panelHtml, bookingHtml, script, styles] = await Promise.all([
+    source("index.html"), source("booking.html"), source("app.js"), source("styles.css"),
+  ]);
+  const joined = `${panelHtml}\n${bookingHtml}\n${script}\n${styles}`;
+
+  assert.doesNotMatch(joined, /Simula[cç][aã]o|Ambiente de testes|dados fict[ií]cios|demo/i);
+  assert.doesNotMatch(joined, /images\.unsplash\.com|source\.unsplash\.com/);
+  assert.match(styles, /--hotel-red/);
+  assert.match(script, /Balc[aã]o/);
+  assert.match(script, /Registrar entrada/);
+  assert.match(script, /Foto do quarto/);
+  assert.match(script, /Foto de entrega/);
+});
+
+test("painel possui cadastro de entrada imediata e envio de foto da camareira", async () => {
+  const script = await source("app.js");
+
+  assert.match(script, /\/walk-ins/);
+  assert.match(script, /createWalkIn/);
+  assert.match(script, /data-walkin-submit/);
+  assert.match(script, /type="file"/);
+  assert.match(script, /accept="image\/\*"/);
+  assert.match(script, /capture="environment"/);
+  assert.match(script, /\/rooms\/\$\{encodeURIComponent\(roomId\)\}\/photos/);
+  assert.match(script, /uploadRoomPhoto/);
+});
+
+test("hierarquia mostra todas as areas para administrador e gerente", async () => {
+  const script = await source("app.js");
+
+  assert.match(script, /role === "administrador"/);
+  assert.match(script, /role === "gerente"/);
+  for (const label of ["Balcão", "Reservas", "Quartos", "Governança", "Manutenção", "Financeiro", "Integrações", "Senhas"]) {
+    assert.match(script, new RegExp(label));
+  }
 });
 
 test("painel libera check-in somente na data operacional da propriedade", async () => {

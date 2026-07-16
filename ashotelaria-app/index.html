@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#123e36">
+  <meta name="theme-color" content="#b4232d">
   <title>AShotelaria — Operação online</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260714-p4">
+  <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260716-p5">
 </head>
 <body class="app-body">
   <div id="connection-banner" class="connection-banner" role="status" aria-live="polite" hidden>
@@ -22,7 +22,7 @@
         <span class="brand-mark">AS</span>
         <span><strong>AShotelaria</strong><small>por CZS Labs</small></span>
       </a>
-      <div class="login-context"><span class="simulation-badge">Simulação</span><span>Unidade</span><strong>Hotel Juruá Palace</strong><span>Operação online</span></div>
+      <div class="login-context"><span class="system-badge">Sistema ativo</span><span>Unidade</span><strong>Hotel Juruá Palace</strong><span>Operação online</span></div>
     </section>
 
     <section class="login-panel">
@@ -33,7 +33,7 @@
         </header>
         <label>
           <span>Usuário</span>
-          <input name="username" value="admin" autocomplete="username" data-help="Use o usuário admin neste ambiente de simulação." required>
+          <input name="username" value="admin" autocomplete="username" data-help="Use o usuário admin do hotel." required>
         </label>
         <label>
           <span>Cargo</span>
@@ -55,7 +55,7 @@
         <label>
           <span>Senha</span>
           <span class="password-control">
-            <input name="password" type="password" autocomplete="current-password" data-help="Informe a senha demonstrativa correspondente ao cargo selecionado." required>
+            <input name="password" type="password" autocomplete="current-password" data-help="Informe a senha correspondente ao cargo selecionado." required>
             <button class="text-button password-toggle" type="button" aria-label="Mostrar senha" data-help="Mostra ou oculta a senha digitada.">Mostrar</button>
           </span>
         </label>
@@ -91,7 +91,7 @@
           <h1 id="view-title">Agora</h1>
         </div>
         <div class="header-status">
-          <span class="simulation-badge simulation-badge--dark">Simulação</span>
+          <span class="system-badge system-badge--dark">Hotel</span>
           <span class="live-dot" aria-hidden="true"></span>
           <span>Dados online</span>
           <button id="refresh-button" class="icon-button" type="button" aria-label="Atualizar dados" data-help="Busca no servidor os dados mais recentes da unidade.">↻</button>
@@ -133,6 +133,6 @@
   <template id="empty-state-template">
     <div class="empty-state"><span>AS</span><h2>Nada pendente aqui</h2><p>Os dados atualizados aparecerão automaticamente nesta área.</p></div>
   </template>
-  <script src="/ashotelaria-app/app.js?v=20260714-p4" defer></script>
+  <script src="/ashotelaria-app/app.js?v=20260716-p5" defer></script>
 </body>
 </html>

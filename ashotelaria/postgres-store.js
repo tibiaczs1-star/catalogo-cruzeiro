@@ -15,6 +15,7 @@ const ROOM_STATUSES = new Set([
   "available", "occupied", "dirty", "cleaning", "inspected", "maintenance",
   "blocked", "do_not_disturb",
 ]);
+const ROOM_PHOTO_KINDS = new Set(["room", "delivery"]);
 const SUMMARY_ROOM_STATUS = {
   cleaning: "dirty",
   inspected: "available",
@@ -32,6 +33,19 @@ function dateOnly(value) {
   if (typeof value === "string") return value.slice(0, 10);
   if (value instanceof Date) return value.toISOString().slice(0, 10);
   return value;
+}
+
+function addDays(dateValue, days) {
+  const [year, month, day] = String(dateValue).split("-").map(Number);
+  const instant = new Date(Date.UTC(year, month - 1, day));
+  instant.setUTCDate(instant.getUTCDate() + days);
+  return instant.toISOString().slice(0, 10);
+}
+
+function isValidImageDataUrl(value) {
+  return typeof value === "string"
+    && /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/i.test(value)
+    && value.length <= 2_000_000;
 }
 
 function propertyFromRow(row) {
@@ -136,6 +150,20 @@ function auditFromRow(row) {
     actor: row.actor,
     changes: row.changes,
     createdAt: row.created_at,
+  };
+}
+
+function photoFromRow(row) {
+  return {
+    id: row.id,
+    tenantId: row.tenant_id,
+    propertyId: row.property_id,
+    roomId: row.room_id,
+    kind: row.kind,
+    imageDataUrl: row.image_data_url,
+    note: row.note ?? "",
+    actor: row.actor ?? {},
+    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
   };
 }
 
@@ -259,16 +287,32 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
       const propertyRow = await scopedProperty(pool, tenantId, propertyId);
       if (!propertyRow) return null;
       const values = [tenantId, propertyId];
-      const [types, roomsResult, guests, reservations, housekeeping, maintenance, integrations] = await Promise.all([
+      const [types, roomsResult, photosResult, guests, reservations, housekeeping, maintenance, integrations] = await Promise.all([
         pool.query(`SELECT * FROM room_types WHERE tenant_id = $1 AND property_id = $2 ORDER BY name`, values),
         pool.query(`SELECT * FROM rooms WHERE tenant_id = $1 AND property_id = $2 ORDER BY number`, values),
+        pool.query(`SELECT * FROM room_photos WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at DESC`, values),
         pool.query(`SELECT id, tenant_id, property_id, name, email, phone, document FROM guests WHERE tenant_id = $1 AND property_id = $2 ORDER BY name`, values),
         pool.query(`SELECT rv.*, rr.room_id FROM reservations rv LEFT JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id WHERE rv.tenant_id = $1 AND rv.property_id = $2 ORDER BY rv.check_in, rv.id`, values),
         pool.query(`SELECT * FROM housekeeping_tasks WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at`, values),
         pool.query(`SELECT * FROM maintenance_orders WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at`, values),
         pool.query(`SELECT id, tenant_id, property_id, provider, status FROM integration_connections WHERE tenant_id = $1 AND property_id = $2 ORDER BY provider`, values),
       ]);
-      const roomRows = roomsResult.rows.map(roomFromRow);
+      const photosByRoom = new Map();
+      for (const photoRow of photosResult.rows) {
+        const photo = photoFromRow(photoRow);
+        const list = photosByRoom.get(photo.roomId) ?? [];
+        list.push(photo);
+        photosByRoom.set(photo.roomId, list);
+      }
+      const roomRows = roomsResult.rows.map((row) => {
+        const room = roomFromRow(row);
+        const photos = photosByRoom.get(room.id) ?? [];
+        return {
+          ...room,
+          photoUrl: photos.find((photo) => photo.kind === "room")?.imageDataUrl ?? "",
+          deliveryPhotos: photos.filter((photo) => photo.kind === "delivery"),
+        };
+      });
       const reservationRows = reservations.rows.map((row) => reservationFromRow(row));
       return {
         property: propertyFromRow(propertyRow),
@@ -413,6 +457,182 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
           }
         }
         if (error.code === "40001" || error.code === "40P01" || error.code === "23P01") throw conflictError();
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async createWalkIn({ tenantId, propertyId, input, actor }) {
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        await client.query(`SELECT pg_advisory_xact_lock(hashtextextended($1, 0))`, [`${tenantId}:${propertyId}`]);
+        const propertyRow = await scopedProperty(client, tenantId, propertyId);
+        if (!propertyRow) {
+          await client.query("COMMIT");
+          return null;
+        }
+
+        const roomId = typeof input?.roomId === "string" ? input.roomId.trim() : "";
+        const roomResult = await client.query(
+          `SELECT r.*, rt.nightly_rate_cents, rt.capacity
+             FROM rooms r
+             JOIN room_types rt
+               ON rt.tenant_id = r.tenant_id AND rt.property_id = r.property_id AND rt.id = r.room_type_id
+            WHERE r.tenant_id = $1 AND r.property_id = $2 AND r.id = $3
+            FOR UPDATE OF r`,
+          [tenantId, propertyId, roomId],
+        );
+        const room = roomResult.rows[0];
+        if (!room) {
+          await client.query("COMMIT");
+          return null;
+        }
+        const checkedInResult = await client.query(
+          `SELECT rv.id
+             FROM reservation_rooms rr
+             JOIN reservations rv
+               ON rv.tenant_id = rr.tenant_id AND rv.property_id = rr.property_id
+              AND rv.id = rr.reservation_id
+            WHERE rr.tenant_id = $1 AND rr.property_id = $2 AND rr.room_id = $3
+              AND rv.status = 'checked_in'
+            LIMIT 1`,
+          [tenantId, propertyId, roomId],
+        );
+        validateCheckInRoom({
+          roomStatus: room.status,
+          hasCheckedInReservation: Boolean(checkedInResult.rows[0]),
+        });
+        const checkIn = operationalDate(now(), propertyRow.time_zone);
+        const validated = validateReservationInput({
+          ...input,
+          roomTypeId: room.room_type_id,
+          checkIn,
+          checkOut: input?.checkOut || addDays(checkIn, 1),
+          nightlyRate: integer(room.nightly_rate_cents),
+        });
+        if (validated.adults + validated.children > Number(room.capacity)) throw conflictError();
+        const overlap = await client.query(
+          `SELECT 1
+             FROM reservation_rooms rr
+             JOIN reservations rv
+               ON rv.tenant_id = rr.tenant_id AND rv.property_id = rr.property_id
+              AND rv.id = rr.reservation_id
+            WHERE rr.tenant_id = $1 AND rr.property_id = $2 AND rr.room_id = $3
+              AND rv.status IN ('confirmed', 'checked_in')
+              AND rv.check_in < $5::date AND $4::date < rv.check_out
+            LIMIT 1`,
+          [tenantId, propertyId, roomId, validated.checkIn, validated.checkOut],
+        );
+        if (overlap.rows[0]) throw conflictError();
+
+        const guestId = idFactory();
+        await client.query(
+          `INSERT INTO guests (id, tenant_id, property_id, name, email, phone, document)
+           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [guestId, tenantId, propertyId, validated.guestName, input.guestEmail ?? null, input.guestPhone ?? null, input.document ?? input.cpf ?? null],
+        );
+        const reservationId = idFactory();
+        const inserted = await client.query(
+          `INSERT INTO reservations
+             (id, tenant_id, property_id, guest_id, room_type_id, check_in, check_out, adults, children,
+              nightly_rate_cents, extras_cents, taxes_cents, total_cents, status)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'checked_in')
+           RETURNING *`,
+          [reservationId, tenantId, propertyId, guestId, room.room_type_id, validated.checkIn, validated.checkOut,
+            validated.adults, validated.children, validated.nightlyRate, validated.extras, validated.taxes, validated.total],
+        );
+        await client.query(
+          `INSERT INTO reservation_rooms (id, tenant_id, property_id, reservation_id, room_id)
+           VALUES ($1, $2, $3, $4, $5)`,
+          [idFactory(), tenantId, propertyId, reservationId, roomId],
+        );
+        await client.query(
+          `UPDATE rooms
+              SET status = 'occupied', updated_at = now()
+            WHERE tenant_id = $1 AND property_id = $2 AND id = $3`,
+          [tenantId, propertyId, roomId],
+        );
+        await insertAudit(client, {
+          tenantId,
+          propertyId,
+          action: "walkin.created",
+          entityId: reservationId,
+          actor,
+          changes: { roomId },
+        });
+        await client.query("COMMIT");
+        return { ...reservationFromRow(inserted.rows[0], roomId), source: "frontdesk" };
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async addRoomPhoto({ tenantId, propertyId, roomId, kind = "delivery", imageDataUrl, note = "", actor }) {
+      const normalizedKind = String(kind ?? "").trim().toLowerCase();
+      if (!ROOM_PHOTO_KINDS.has(normalizedKind)) throw new RangeError("room photo kind is unknown");
+      if (!isValidImageDataUrl(imageDataUrl)) throw new RangeError("room photo image is invalid");
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const roomResult = await client.query(
+          `SELECT id, status
+             FROM rooms
+            WHERE tenant_id = $1 AND property_id = $2 AND id = $3
+            FOR UPDATE`,
+          [tenantId, propertyId, roomId],
+        );
+        if (!roomResult.rows[0]) {
+          await client.query("COMMIT");
+          return null;
+        }
+        const photoId = idFactory();
+        const inserted = await client.query(
+          `INSERT INTO room_photos (id, tenant_id, property_id, room_id, kind, image_data_url, note, actor)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb)
+           RETURNING *`,
+          [
+            photoId,
+            tenantId,
+            propertyId,
+            roomId,
+            normalizedKind,
+            imageDataUrl,
+            String(note ?? "").trim().slice(0, 240) || null,
+            JSON.stringify(actor ?? { id: "system" }),
+          ],
+        );
+        if (normalizedKind === "delivery" && !["occupied", "maintenance", "blocked"].includes(roomResult.rows[0].status)) {
+          await client.query(
+            `UPDATE rooms
+                SET status = 'inspected', updated_at = now()
+              WHERE tenant_id = $1 AND property_id = $2 AND id = $3`,
+            [tenantId, propertyId, roomId],
+          );
+          await client.query(
+            `UPDATE housekeeping_tasks
+                SET status = 'done', updated_at = now()
+              WHERE tenant_id = $1 AND property_id = $2 AND room_id = $3
+                AND status <> 'cancelled'`,
+            [tenantId, propertyId, roomId],
+          );
+        }
+        await insertAudit(client, {
+          tenantId,
+          propertyId,
+          action: `room.photo_${normalizedKind}.created`,
+          entityId: roomId,
+          actor,
+          changes: { photoId },
+        });
+        await client.query("COMMIT");
+        return photoFromRow(inserted.rows[0]);
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
         throw error;
       } finally {
         client.release();

@@ -146,7 +146,7 @@ async function createReservation(event) {
 }
 
 function renderConfirmation(reservation) {
-  document.querySelector("#confirmation-message").textContent = `Sua hospedagem no ${booking.property?.name ?? "hotel"} foi registrada nesta simulação.`;
+  document.querySelector("#confirmation-message").textContent = `Sua hospedagem no ${booking.property?.name ?? "hotel"} foi registrada no sistema.`;
   const details = [
     ["Reserva", reservation.id],
     ["Acomodação", booking.roomType.name],

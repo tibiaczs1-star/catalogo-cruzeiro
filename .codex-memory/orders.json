@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-11T01:57:38.001Z",
+  "lastUpdatedAt": "2026-07-16T06:39:05.808Z",
   "orders": [
     {
       "id": "2026-06-05-capturar-produtos-grupo-inova-logo-correta",
@@ -6047,6 +6047,40 @@
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-07-16-ashotelaria-finalizado-com-hierarquia-operacional-balcao-walk-in-fotos-de-quarto",
+      "createdAt": "2026-07-16T06:39:05.808Z",
+      "updatedAt": "2026-07-16T06:39:05.808Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "termine: deixar AShotelaria completo para hotel real; sem aparência de demonstração; hierarquia por cargos; admin/gerente veem tudo; tema vermelho claro; local para fotos de quartos; camareira registra foto de entrega; cadastro de hóspede no balcão.",
+      "summary": "AShotelaria finalizado com hierarquia operacional, balcão walk-in, fotos de quartos/entrega e tema vermelho claro sem copy de demonstração.",
+      "normalizedTasks": [
+        "hierarquia-admin-gerente",
+        "balcao-walkin",
+        "fotos-quarto-entrega",
+        "tema-vermelho",
+        "sem-demo",
+        "validacao-browser"
+      ],
+      "filesTouched": [
+        "ashotelaria-app/app.js",
+        "ashotelaria-app/styles.css",
+        "ashotelaria/http.js",
+        "ashotelaria/memory-store.js",
+        "ashotelaria/postgres-store.js",
+        "ashotelaria/migrations/003_room_photos.sql"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "ashotelaria",
+        "hotel",
+        "frontdesk",
+        "governanca"
+      ],
       "nextSteps": [],
       "notes": ""
     }
