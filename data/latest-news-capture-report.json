@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-13T13:57:16.590Z",
-  "finishedAt": "2026-07-13T13:57:21.241Z",
-  "capturedItems": 396,
-  "capturedToday": 169,
+  "startedAt": "2026-07-16T08:53:39.857Z",
+  "finishedAt": "2026-07-16T08:53:48.557Z",
+  "capturedItems": 395,
+  "capturedToday": 172,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -143,8 +143,8 @@
     {
       "source": "jurua-em-tempo",
       "ok": true,
-      "count": 24,
-      "blocked": 0,
+      "count": 23,
+      "blocked": 1,
       "mode": "wordpress-json"
     },
     {
@@ -164,7 +164,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 4,
+      "count": 5,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -206,28 +206,28 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 2,
+      "count": 0,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -266,20 +266,5 @@
       "blocked": 0,
       "mode": "rss"
     }
-  ],
-  "generatedAt": "2026-07-13T15:49:09.111Z",
-  "goal1050Sync": {
-    "at": "2026-07-13T15:49:09.111Z",
-    "instagramAccount": "@catalogo_czs_",
-    "instagramPosts": 1050,
-    "insertedOrPromoted": [
-      "moradores-fecham-ramal-dos-esquecidos-rodrigues-alves-20260713",
-      "piracema-movimenta-porto-sena-madureira-20260713",
-      "ambulancia-atinge-boi-br-364-tarauaca-20260713",
-      "pescador-carrega-pirarara-gigante-rio-madeira-20260713",
-      "colisao-longa-fila-estrada-dias-martins-20260713"
-    ],
-    "archiveItems": 480,
-    "activeItems": 360
-  }
+  ]
 }
