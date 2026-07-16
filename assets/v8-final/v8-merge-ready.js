@@ -13,6 +13,7 @@
   const ENTRY_POPUP_LAST_SEEN_KEY = "czs-v8-entry-popup-last-seen-at";
   const ENTRY_POPUP_VERSION_KEY = "czs-v8-entry-popup-version";
   const INTRO_SESSION_KEY = "czs-v8-intro-seen-session";
+  const INTRO_DAILY_KEY = "czs-v8-intro-last-open-day";
   const ENTRY_POPUP_SESSION_KEY = "czs-v8-entry-popup-seen-session";
   const ENTRY_POPUP_INTERVAL_MS = 24 * 60 * 60 * 1000;
   const SOCIAL_EMAIL = "juniorclovissampaio@gmail.com";
@@ -1320,6 +1321,33 @@
         </a>`).join("");
       legacyTrack.innerHTML = legacyItems + legacyItems;
     }
+    startLegacyTickerMarquee(legacyTrack);
+  }
+
+  function startLegacyTickerMarquee(track) {
+    if (!track || track.dataset.v8TickerMarquee === "1") return;
+    const viewport = track.closest("#breakingTicker") || track.parentElement;
+    if (!viewport) return;
+    track.dataset.v8TickerMarquee = "1";
+    track.style.animation = "none";
+    track.style.transform = "none";
+    track.style.willChange = "auto";
+    viewport.style.overflowX = "hidden";
+    let last = 0;
+    const pxPerSecond = Math.max(28, Math.min(74, (viewport.clientWidth || 1200) / 34));
+    const tick = (time) => {
+      const paused = viewport.matches(":hover") || viewport.classList.contains("dragging");
+      if (!last) last = time;
+      const delta = Math.min(64, time - last);
+      last = time;
+      const half = Math.max(1, track.scrollWidth / 2);
+      if (!paused && half > viewport.clientWidth) {
+        const next = viewport.scrollLeft + (delta / 1000) * pxPerSecond;
+        viewport.scrollLeft = next >= half ? next - half : next;
+      }
+      window.requestAnimationFrame(tick);
+    };
+    window.requestAnimationFrame(tick);
   }
 
   function decorateBrandMarks() {
@@ -2118,24 +2146,6 @@
 
   function renderNorteNativeAfterHero() {
     $("#v8NorteAfterHero")?.remove();
-    const hero = $(".hero-grid");
-    if (!hero?.parentElement) return;
-    const ad = sponsorAdFor("home", 0);
-    hero.insertAdjacentHTML("afterend", `
-      <section class="v8-norte-after-hero" id="v8NorteAfterHero" aria-label="Patrocinador oficial Norte Ultra Fibra" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
-        <a class="v8-norte-after-hero-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp">
-          ${sponsorImageMarkup(ad, { loading: "eager" })}
-        </a>
-        <div class="v8-norte-after-hero-copy">
-          <span>Patrocinador oficial do CZS</span>
-          <h2>Norte Ultra Fibra</h2>
-          <p>Contratação e suporte direto pelo WhatsApp, sem interromper a leitura.</p>
-          <div class="actions">
-            <a class="btn green" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
-            <a class="btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          </div>
-        </div>
-      </section>`);
   }
 
   function renderSponsorSideRail() {
@@ -2364,7 +2374,7 @@
         id: "cheffe-call-reuniao",
         title: "Cheffe Call Reunião",
         label: "Variação",
-        text: "ambiente visual para briefing, revisão coletiva e decisões editoriais.",
+        text: "sala visual para alinhar pauta, revisar informações e decidir próximos passos.",
         img: "",
         bg: "/assets/cheffe-call-meeting-theater-ai.png",
         href: "#infosGerais",
@@ -2956,35 +2966,35 @@
         kind: "foto",
       },
       {
-        title: "Alto Rio Moa",
-        text: "Serra do Divisor, água, mata e rota ribeirinha em visual cinematográfico.",
+        title: "Feira e abastecimento",
+        text: "Produtos, mercado e rotina de compra de quem vive o dia a dia do Vale.",
         src: "assets/home-cache/fallback-cheia.jpg",
-        href: "https://commons.wikimedia.org/wiki/Category:Parque_Nacional_da_Serra_do_Divisor",
-        sourceLabel: "Commons Serra do Divisor",
+        href: "#comunidade",
+        sourceLabel: "Acervo CZS",
         kind: "foto",
       },
       {
-        title: "Cachoeira Encantada",
-        text: "Queda d'água da Serra do Divisor para abrir a galeria como turismo premium.",
+        title: "Sala de capacitação",
+        text: "Educação, oficinas e encontros que movimentam a comunidade local.",
         src: "assets/home-cache/fallback-cotidiano.jpg",
-        href: "https://commons.wikimedia.org/wiki/File:Cachoeira_Encantada_na_Serra_do_Divisor.jpg",
-        sourceLabel: "Wikimedia Commons",
+        href: "#comunidade",
+        sourceLabel: "Acervo CZS",
         kind: "foto",
       },
       {
-        title: "Rio Moa e canoa",
-        text: "Vida ribeirinha, travessia e paisagem de água no extremo oeste acreano.",
+        title: "Via Cruzeiro",
+        text: "Deslocamento, bicicleta e rotina urbana nas vias do Vale.",
         src: "assets/home-cache/buzz-via-cruzeiro.jpg",
-        href: "https://commons.wikimedia.org/wiki/File:Rio_Moa_canoa.jpg",
-        sourceLabel: "Wikimedia Commons",
+        href: "#feed",
+        sourceLabel: "Acervo CZS",
         kind: "foto",
       },
       {
-        title: "Ribeirinho pé da serra",
-        text: "Retrato humano e cotidiano ribeirinho para lembrar que galeria também é gente.",
+        title: "Reunião comunitária",
+        text: "Encontro local, liderança de bairro e decisões do cotidiano regional.",
         src: "assets/home-cache/news-batelao-local.jpg",
-        href: "https://commons.wikimedia.org/wiki/File:Ribeirinho_peh_da_serra.jpg",
-        sourceLabel: "Wikimedia Commons",
+        href: "#comunidade",
+        sourceLabel: "Acervo CZS",
         kind: "foto",
       },
       {
@@ -2996,11 +3006,11 @@
         kind: "foto",
       },
       {
-        title: "Juruá Aventuras em vídeo",
-        text: "Canal jovem local mostrando rios, igarapés, comunidades e Serra do Divisor.",
-        src: "assets/home-cache/trend-lia-jurua.jpg",
-        href: "https://jurua24horas.com/2025/09/canal-de-jovem-de-cruzeiro-do-sul-alcanca-100-mil-inscritos-no-youtube-e-divulga-cultura-do-vale-do-jurua/",
-        sourceLabel: "Juruá 24 Horas",
+        title: "Esporte de bairro",
+        text: "Brincadeira, juventude e vida comunitária nas áreas abertas do Vale.",
+        src: "assets/home-cache/buzz-cruzeiro-03.jpg",
+        href: "#comunidade",
+        sourceLabel: "Acervo CZS",
         kind: "video",
       },
       {
@@ -3749,8 +3759,8 @@
     const points = [
       ["Rio Juruá", "Vista do rio, porto, cheia, vazante e rotina ribeirinha.", "assets/home-cache/rio-jurua-panorama.jpg"],
       ["Centro de Cruzeiro", "Comércio, serviços, igrejas, praça e circulação diária.", "assets/home-cache/footer-cruzeiro-bg.jpg"],
-      ["Igarapé Preto", "Banho, lazer e memória afetiva de quem vive no Vale.", "assets/home-cache/buzz-cruzeiro-01.jpg"],
-      ["Porto e mercado", "Movimento de barcos, abastecimento e economia local.", "assets/home-cache/news-batelao-local.jpg"],
+      ["Entrada de Cruzeiro", "Portal, chegada à cidade e circulação diária de quem passa pelo Vale.", "assets/home-cache/buzz-cruzeiro-01.jpg"],
+      ["Mercado e abastecimento", "Movimento de compra, produtos locais e economia regional.", "assets/home-cache/buzz-cruzeiro-02.jpg"],
       ["Serra do Divisor", "Natureza, turismo e fronteira amazônica do Acre.", "assets/home-cache/buzz-cruzeiro-04.jpg"],
       ["Agenda cultural", "Festas, shows, esporte, escolas e eventos de bairro.", "assets/home-cache/buzz-cultura-show.jpg"],
     ];
@@ -3857,7 +3867,7 @@
     const entries = [];
     let videoIndex = 0;
     let storyCount = 0;
-    let nextSponsorAt = 5;
+    let nextSponsorAt = 3;
     const pushVideo = () => {
       while (videoIndex < playlist.length) {
         const item = playlist[videoIndex++];
@@ -3940,14 +3950,14 @@
   function renderContinuousSponsorCard(entry = {}, position = 0) {
     const ad = sponsorAdFor("feed", entry.adIndex || position);
     return `
-      <article class="news-card v8-continuous-card v8-organic-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
+      <article class="news-card v8-continuous-card v8-organic-sponsor v8-native-sponsor v8-size-ad" data-v8-sponsor="norte-ultra-fibra" data-v8-after-stories="${esc(entry.position || position)}" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
         <a class="v8-organic-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar internet Norte Ultra Fibra pelo WhatsApp">
           ${sponsorImageMarkup(ad)}
         </a>
         <div class="v8-organic-sponsor-copy">
           <span class="badge">Patrocinado</span>
           <h3>Norte Ultra Fibra</h3>
-          <small>Oferta CZS • WhatsApp (68) 99209-6037</small>
+          <small>Internet local no Juruá • WhatsApp (68) 99209-6037</small>
           <div class="actions">
             <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a>
             <a class="small-btn ghost" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Falar no WhatsApp</a>
@@ -4505,10 +4515,11 @@
     const params = new URLSearchParams(window.location.search || "");
     const introRequested = params.get("forceIntro") === "1" || params.get("intro") === "1";
     const forceIntro = introRequested;
-    const skipIntro = params.get("skipIntro") === "1" || !introRequested;
+    const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Rio_Branco" });
+    const skipIntro = params.get("skipIntro") === "1";
     let seenIntro = false;
     try {
-      seenIntro = sessionStorage.getItem(INTRO_SESSION_KEY) === V8_BOOT_VERSION;
+      seenIntro = localStorage.getItem(INTRO_DAILY_KEY) === today;
     } catch (_) {
       seenIntro = false;
     }
@@ -4927,6 +4938,7 @@
         document.body.classList.remove("v8-intro-running", "v8-intro-light-release", "v8-intro-handoff", "v8-intro-puzzle-active");
         try {
           sessionStorage.setItem(INTRO_SESSION_KEY, V8_BOOT_VERSION);
+          localStorage.setItem(INTRO_DAILY_KEY, today);
         } catch (_) {}
         setTimeout(showEntryPopup, 240);
       }, puzzleTransitionMs + 80);
@@ -5146,10 +5158,14 @@
 
     const setMode = () => {
       const rect = footer.getBoundingClientRect();
+      const heroRect = $("#leadStory")?.getBoundingClientRect();
       const nearFooter = rect.top <= window.innerHeight * 0.58 && rect.bottom > 120;
       const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 96;
       const mode = nearFooter || atPageEnd ? "home" : "footer";
+      const floatBand = window.innerHeight - 72;
+      const overlapsHero = mode === "footer" && heroRect && heroRect.top < window.innerHeight && heroRect.bottom > floatBand;
       button.dataset.mode = mode;
+      button.classList.toggle("is-over-hero", Boolean(overlapsHero));
       button.innerHTML = `${floatArrow(mode === "home" ? "up" : "down")}<span>${mode === "home" ? "Topo" : "Rodapé"}<small>${mode === "home" ? "Home" : "Mapa da página"}</small></span>`;
       button.setAttribute("aria-label", mode === "home" ? "Voltar para a home" : "Ir direto ao rodapé e mapa da página");
     };

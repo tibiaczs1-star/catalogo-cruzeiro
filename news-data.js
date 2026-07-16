@@ -18,12 +18,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mailza-cafe-mercado-unidades-saude3.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mailza-cafe-mercado-unidades-saude3.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mailza-cafe-mercado-unidades-saude3.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -59,14 +59,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Mailza toma café com quibe no Mercado do Bosque e visita unidades de saúde"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Mailza toma café com quibe no Mercado do Bosque e visita unidades de saúde.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruaemtempo.com.br/2026/07/mailza-e-jessica-sales-terao-candidaturas-oficializadas-em-convencao-no-dia-31-de-julho/",
@@ -294,12 +296,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/MPAC2-1200x675.jpeg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/MPAC2-1200x675.jpeg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/MPAC2-1200x675.jpeg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -335,14 +337,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Servidor da Prefeitura vira alvo de investigação do MP por contratos na Saúde"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Servidor da Prefeitura vira alvo de investigação do MP por contratos na Saúde.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/foragido-do-complexo-penitenciario-do-jurua-acusado-de-homicidios-e-integrante-de-organizacoes-criminosas-e-capturado-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=foragido-do-complexo-penitenciario-do-jurua-acusado-de-homicidios-e-integrante-de-organizacoes-criminosas-e-capturado-em-cruzeiro-do-sul",
@@ -362,12 +366,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Captura-de-Tela-2026-07-15-as-13.37.42-1536x1235-1.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Captura-de-Tela-2026-07-15-as-13.37.42-1536x1235-1.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Captura-de-Tela-2026-07-15-as-13.37.42-1536x1235-1.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -403,14 +407,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Foragido acusado de homicídios e integrante de organizações criminosas é capturado pelo 6°BPM em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Foragido acusado de homicídios e integrante de organizações criminosas é capturado pelo 6°BPM em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/221723-2/?utm_source=rss&utm_medium=rss&utm_campaign=221723-2",
@@ -430,12 +436,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-11.46.24-1024x768-1.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-11.46.24-1024x768-1.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-11.46.24-1024x768-1.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -471,14 +477,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Polícia Militar prende dois suspeitos de tráfico de drogas em operações de enfrentamento ao tráfico em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Polícia Militar prende dois suspeitos de tráfico de drogas em operações de enfrentamento ao tráfico em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/gladson-mira-zequinha-seu-proprio-apoiador/",
@@ -498,12 +506,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Imagem-do-WhatsApp-de-2024-10-06-as-10.38.12_fcc9c7d9-jpg-e1784161569309-800x500.webp",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Imagem-do-WhatsApp-de-2024-10-06-as-10.38.12_fcc9c7d9-jpg-e1784161569309-800x500.webp",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Imagem-do-WhatsApp-de-2024-10-06-as-10.38.12_fcc9c7d9-jpg-e1784161569309-800x500.webp",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -539,14 +547,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Gladson mira Zequinha, seu próprio apoiador"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 15 de jul de 2026: Gladson mira Zequinha, seu próprio apoiador.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://folhadoacre.com.br/2026/07/morador-armado-com-espingarda-ameaca-operador-de-trator-durante-recuperacao-de-ramal-em-sena-madureira/",
@@ -700,12 +710,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2026/07/pombinho0s.png",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2026/07/pombinho0s.png",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2026/07/pombinho0s.png",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -741,14 +751,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Alerta em Rio Branco: fezes de pombos podem favorecer fungo que causa doença grave; saiba como se proteger"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Alerta em Rio Branco: fezes de pombos podem favorecer fungo que causa doença grave; saiba como se proteger.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi-na-cidade/",
@@ -1103,12 +1115,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-smartwatch-14.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-smartwatch-14.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-smartwatch-14.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -1144,14 +1156,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Samsung Galaxy Fit3: o smartwatch que une estilo e praticidade está em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Samsung Galaxy Fit3: o smartwatch que une estilo e praticidade está em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.rodriguesalves.ac.gov.br/publicacoes-transparencia/pp-srp-n%C2%B0-012%2F2026---fornecimento-de-material-m%C3%A9dico-hospitalar%2C-od0ntologico-e-saneantes",
@@ -1310,12 +1324,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Design-sem-nome-14.jpg?w=1200&h=630&crop=1",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Design-sem-nome-14.jpg?w=1200&h=630&crop=1",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Design-sem-nome-14.jpg?w=1200&h=630&crop=1",
+    "imageCredit": "CNN Brasil",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -1351,14 +1365,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Anvisa determina recolhimento de lotes de água Mamba Water"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: Anvisa determina recolhimento de lotes de água Mamba Water.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/nacional/norte/am/vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude/",
@@ -1925,12 +1941,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/UFAC-ok-1-1200x675.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/UFAC-ok-1-1200x675.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/UFAC-ok-1-1200x675.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -1966,14 +1982,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Estudantes da Ufac anunciam greve e convocam ato por transporte público"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Estudantes da Ufac anunciam greve e convocam ato por transporte público.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/sinteac-convoca-servidores-da-educacao-para-protesto-em-frente-ao-palacio/",
@@ -1993,12 +2011,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/09/sinteac.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/09/sinteac.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/09/sinteac.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -2034,14 +2052,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Servidores da Educação decidem fazer protesto em frente ao Palácio"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Servidores da Educação decidem fazer protesto em frente ao Palácio.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/em-protesto-estudantes-fecham-avenida-ceara-nas-proximidades-do-viaduto/",
@@ -2061,12 +2081,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/VIADUTO-CEARA-PROTESTO-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/VIADUTO-CEARA-PROTESTO-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/VIADUTO-CEARA-PROTESTO-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -2102,14 +2122,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Em protesto, estudantes fecham Avenida Ceará nas proximidades do viaduto"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Em protesto, estudantes fecham Avenida Ceará nas proximidades do viaduto.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/apos-bloquear-avenida-ceara-estudantes-levam-protesto-ao-terminal-urbano/",
@@ -2129,12 +2151,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/manifestacao.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/manifestacao.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/manifestacao.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -2170,14 +2192,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Após bloquear Avenida Ceará, estudantes levam protesto ao Terminal Urbano"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Após bloquear Avenida Ceará, estudantes levam protesto ao Terminal Urbano.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/ferias-escolares-x-consumo-consciente-como-reduzir-o-gasto-de-energia-sem-perder-o-conforto/?utm_source=rss&utm_medium=rss&utm_campaign=ferias-escolares-x-consumo-consciente-como-reduzir-o-gasto-de-energia-sem-perder-o-conforto",
@@ -2197,12 +2221,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/arcondiconado-divulgacao.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/arcondiconado-divulgacao.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/arcondiconado-divulgacao.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -2238,14 +2262,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Férias escolares x Consumo consciente: como reduzir o gasto de energia sem perder o conforto"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Férias escolares x Consumo consciente: como reduzir o gasto de energia sem perder o conforto.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreinfoco.com/2026/07/fies-abre-inscricoes-para-o-segundo-semestre-com-755-mil-vagas/",
@@ -2533,12 +2559,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2020/07/fies.jpeg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2020/07/fies.jpeg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2020/07/fies.jpeg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -2574,14 +2600,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Fies abre consulta de vagas e inscrições seguem até sexta; Acre participa da seleção"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Fies abre consulta de vagas e inscrições seguem até sexta; Acre participa da seleção.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreagora.com/2026/07/16/ferias-escolares-elevam-consumo-de-energia-veja-como-economizar-e-evitar-desperdicios-no-acre/",
@@ -2601,12 +2629,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2024/12/Aumento-de-energia-Nathalia-Alcantara-7.jpg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2024/12/Aumento-de-energia-Nathalia-Alcantara-7.jpg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2024/12/Aumento-de-energia-Nathalia-Alcantara-7.jpg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -2642,14 +2670,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Férias escolares elevam consumo de energia; veja como economizar e evitar desperdícios no Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Férias escolares elevam consumo de energia; veja como economizar e evitar desperdícios no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-07/inscricoes-para-fies-terminam-nesta-sexta-feira",
@@ -2870,12 +2900,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Iury-4-e1784060658449-1038x663.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Iury-4-e1784060658449-1038x663.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Iury-4-e1784060658449-1038x663.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -2911,14 +2941,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acreano de 9 anos chega ao maior torneio de futebol infantil do Norte"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Acreano de 9 anos chega ao maior torneio de futebol infantil do Norte.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/jogos-de-hoje-16-07-26-onde-assistir-futebol-ao-vivo-e-horarios-das-partidas/",
@@ -2938,12 +2970,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/futebol-streaming-2.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/futebol-streaming-2.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/futebol-streaming-2.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -2979,14 +3011,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/botafogo-x-santos-onde-assistir-horario-e-escalacoes-do-jogo-do-brasileirao/",
@@ -3006,12 +3040,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/estudiantes-x-flamengo-scaled-1-1280x720.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/estudiantes-x-flamengo-scaled-1-1280x720.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/estudiantes-x-flamengo-scaled-1-1280x720.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -3047,14 +3081,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Botafogo x Santos: onde assistir, horário e escalações do jogo do Brasileirão"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Botafogo x Santos: onde assistir, horário e escalações do jogo do Brasileirão.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/vitoria-x-vasco-onde-assistir-horario-e-escalacoes-do-jogo-do-brasileirao/",
@@ -3074,12 +3110,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vitoria-x-vasco-1280x720.png",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vitoria-x-vasco-1280x720.png",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vitoria-x-vasco-1280x720.png",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -3115,14 +3151,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Vitória x Vasco: onde assistir, horário e escalações do jogo do Brasileirão"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Vitória x Vasco: onde assistir, horário e escalações do jogo do Brasileirão.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/pop/celebridades/virginia-da-resposta-discreta-a-criticas-apos-posar-no-colo-de-vini-jr/",
@@ -3879,12 +3917,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica-swDnQvnS.webp",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica-swDnQvnS.webp",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica-swDnQvnS.webp",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -3920,14 +3958,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Consolidado na comédia, Ed Gama \"muda\" de ramo e se lança na música"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Consolidado na comédia, Ed Gama \"muda\" de ramo e se lança na música.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-07/xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k",
@@ -4551,12 +4591,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/esquerda-thor.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/esquerda-thor.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/esquerda-thor.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -4592,14 +4632,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Esquerda define data de convenção para lançar Thor Dantas ao Governo; confira"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Esquerda define data de convenção para lançar Thor Dantas ao Governo; confira.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/jarude-diz-que-seu-partido-pretende-eleger-dois-deputados-na-aleac/",
@@ -4619,12 +4661,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Emerson-Jarude-7-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Emerson-Jarude-7-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Emerson-Jarude-7-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -4660,14 +4702,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Jarude diz que seu partido pretende eleger dois deputados na Aleac"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Jarude diz que seu partido pretende eleger dois deputados na Aleac.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/governo-do-estado-conclui-projeto-que-viabiliza-migracao-da-radio-difusora-acreana-para-a-frequencia-fm/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-estado-conclui-projeto-que-viabiliza-migracao-da-radio-difusora-acreana-para-a-frequencia-fm",
@@ -4687,12 +4731,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/4fc670af-4965-4d49-a61a-9a218fe2cda7.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/4fc670af-4965-4d49-a61a-9a218fe2cda7.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/4fc670af-4965-4d49-a61a-9a218fe2cda7.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -4728,14 +4772,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Governo do Estado conclui projeto que viabiliza migração da Rádio Difusora Acreana para a frequência FM"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Governo do Estado conclui projeto que viabiliza migração da Rádio Difusora Acreana para a frequência FM.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/o-que-esta-por-tras-do-novo-tarifaco-dos-eua-contra-o-brasil/",
@@ -4755,12 +4801,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/real_dolar-1280x855.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/real_dolar-1280x855.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/real_dolar-1280x855.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -4796,14 +4842,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: O que está por trás do novo tarifaço dos EUA contra o Brasil?"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: O que está por trás do novo tarifaço dos EUA contra o Brasil?.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/flavio-bolsonaro-endossa-secretario-dos-eua-e-diz-que-lula-nao-tem-condicoes-de-ser-presidente/",
@@ -4823,12 +4871,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/flavio-bolsonaro-participa-do-debate-com-os-candidatos-a-presidente-do-brasil-para-a-eleicao-de-2026-no-evento-da-confederacao-nacional-da-industria-cni-metropoles-3-scaled-1-1200x675-1.webp",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/flavio-bolsonaro-participa-do-debate-com-os-candidatos-a-presidente-do-brasil-para-a-eleicao-de-2026-no-evento-da-confederacao-nacional-da-industria-cni-metropoles-3-scaled-1-1200x675-1.webp",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/flavio-bolsonaro-participa-do-debate-com-os-candidatos-a-presidente-do-brasil-para-a-eleicao-de-2026-no-evento-da-confederacao-nacional-da-industria-cni-metropoles-3-scaled-1-1200x675-1.webp",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -4864,14 +4912,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Flávio Bolsonaro endossa secretário dos EUA e diz que Lula não tem ‘condições de ser presidente’"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Flávio Bolsonaro endossa secretário dos EUA e diz que Lula não tem ‘condições de ser presidente’.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreinfoco.com/2026/07/mara-rocha-o-tratamento-oncologico-ainda-e-um-dos-maiores-desafios-da-saude-publica-no-acre/",
@@ -5513,12 +5563,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/Senador-Petecao-Foto-Waldemir-Barreto-Agencia-Senado-1000x600.jpg",
+    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/Senador-Petecao-Foto-Waldemir-Barreto-Agencia-Senado-1000x600.jpg",
+    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/Senador-Petecao-Foto-Waldemir-Barreto-Agencia-Senado-1000x600.jpg",
+    "imageCredit": "O Alto Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 820,
@@ -5554,14 +5604,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Com voto favorável de Petecão, Senado aprova aposentadoria diferenciada para agentes de saúde"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "O Alto Acre publicou em 15 de jul de 2026: Com voto favorável de Petecão, Senado aprova aposentadoria diferenciada para agentes de saúde.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://oaltoacre.com/senado-aprova-aumento-de-penas-para-crimes-contra-professores-e-medicos/",
@@ -5581,12 +5633,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/imagem_materia.jpeg",
+    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/imagem_materia.jpeg",
+    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/06/imagem_materia.jpeg",
+    "imageCredit": "O Alto Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 820,
@@ -5622,14 +5674,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Senado aprova aumento de penas para crimes contra professores e médicos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "O Alto Acre publicou em 15 de jul de 2026: Senado aprova aumento de penas para crimes contra professores e médicos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://estadodoacre.com.br/2026/07/prefeito-valdelio-furtado-acompanha-obra-de-quase-r-15-milhao-que-levara-agua-tratada-a-vila-triunfo/",
@@ -5716,12 +5770,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2024/04/bocalom.webp",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2024/04/bocalom.webp",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2024/04/bocalom.webp",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -5757,14 +5811,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Bocalom critica governos dos últimos 30 anos e intensifica agenda no interior do Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Bocalom critica governos dos últimos 30 anos e intensifica agenda no interior do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/guia-gazeta-2/1o-guia-gazeta/eua-anunciam-tarifa-de-25-sobre-produtos-brasileiros-veja-itens-que-serao-afetados-ou-isentos/",
@@ -5784,12 +5840,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/04/trump.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/04/trump.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/04/trump.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -5825,14 +5881,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 16 de jul de 2026: EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://g1.globo.com/politica/noticia/2026/07/16/governo-rejeita-criticas-e-defende-que-fez-mais-de-30-contatos-com-os-eua-para-negociar-tarifas.ghtml",
@@ -5919,12 +5977,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-10.avif",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-10.avif",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-10.avif",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -5960,14 +6018,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 16 de jul de 2026: GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/politica/apos-tarifaco-flavio-compara-lula-a-biden-ranzinza-e-inconsequente/",
@@ -6659,12 +6719,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Presidente-dos-EUA-Donald-Trump-em-16-de-junho-de-2025.jpg?w=800&h=543&crop=1",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Presidente-dos-EUA-Donald-Trump-em-16-de-junho-de-2025.jpg?w=800&h=543&crop=1",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Presidente-dos-EUA-Donald-Trump-em-16-de-junho-de-2025.jpg?w=800&h=543&crop=1",
+    "imageCredit": "CNN Brasil",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -6700,14 +6760,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: PoderData/AYA: 42% consideram que apoio de Trump na eleições é negativo"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: PoderData/AYA: 42% consideram que apoio de Trump na eleições é negativo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/eleicoes/poderdata-aya-lula-e-desaprovado-por-50-dos-brasileiros-42-aprovam/",
@@ -9410,12 +9472,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/qualidade-do-ar-juan.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/qualidade-do-ar-juan.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/qualidade-do-ar-juan.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9451,14 +9513,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre/",
@@ -9478,12 +9542,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mariana-780x516.avif",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mariana-780x516.avif",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mariana-780x516.avif",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9519,14 +9583,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Quem era a empresária que morreu após luta contra o câncer no Acre?"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Quem era a empresária que morreu após luta contra o câncer no Acre?.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/gefron-apreende-quase-24-kg-de-skunk-e-prende-2-homens-no-interior-do-acre/",
@@ -9546,12 +9612,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/gefron-780x516.avif",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/gefron-780x516.avif",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/gefron-780x516.avif",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9587,14 +9653,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Gefron apreende quase 24 kg de skunk e prende 2 homens no interior do Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Gefron apreende quase 24 kg de skunk e prende 2 homens no interior do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/acre-tem-a-2a-maior-renda-media-do-pais-entre-carreiras-juridicas-aponta-clp/",
@@ -9614,12 +9682,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/real_moeda_dinheiro_mcajr_2904223669-1-1200x675.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/real_moeda_dinheiro_mcajr_2904223669-1-1200x675.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/real_moeda_dinheiro_mcajr_2904223669-1-1200x675.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9655,14 +9723,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acre tem a 2ª maior renda média do país entre carreiras jurídicas, aponta CLP"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Acre tem a 2ª maior renda média do país entre carreiras jurídicas, aponta CLP.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/programa-abre-edital-para-apoiar-bioeconomia-no-acre-e-estados-vizinhos/",
@@ -9682,12 +9752,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Bioeconomia-1620x1080.jpg-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Bioeconomia-1620x1080.jpg-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Bioeconomia-1620x1080.jpg-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9723,14 +9793,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Programa abre edital para apoiar bioeconomia no Acre e estados vizinhos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Programa abre edital para apoiar bioeconomia no Acre e estados vizinhos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/monitorado-pela-justica-fica-ferido-apos-disparo-de-espingarda-no-acre/",
@@ -9750,12 +9822,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/tiro-e1783609040359.jpeg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/tiro-e1783609040359.jpeg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/tiro-e1783609040359.jpeg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9791,14 +9863,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Monitorado pela Justiça fica ferido após disparo de espingarda no Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Monitorado pela Justiça fica ferido após disparo de espingarda no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/ameaca-de-motim-em-presidio-faz-iapen-suspender-visitas-no-acre/",
@@ -9818,12 +9892,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-11-at-11.19.47-AM.jpeg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-11-at-11.19.47-AM.jpeg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/06/WhatsApp-Image-2025-06-11-at-11.19.47-AM.jpeg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9859,14 +9933,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Ameaça de motim em presídio faz Iapen suspender visitas no Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Ameaça de motim em presídio faz Iapen suspender visitas no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/acidente-de-transito-e-registrado-na-avenida-ceara-em-rio-branco/",
@@ -9886,12 +9962,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/acidente-avenida-ceara-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/acidente-avenida-ceara-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/acidente-avenida-ceara-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9927,14 +10003,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acidente de trânsito é registrado na Avenida Ceará, em Rio Branco"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Acidente de trânsito é registrado na Avenida Ceará, em Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/carro-capota-apos-tentativa-de-ultrapassagem-na-br-317/",
@@ -9954,12 +10032,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Acidente-na-Estrada-do-Pacifico-1145x663.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Acidente-na-Estrada-do-Pacifico-1145x663.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Acidente-na-Estrada-do-Pacifico-1145x663.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -9995,14 +10073,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Carro capota após tentativa de ultrapassagem na BR-317"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Carro capota após tentativa de ultrapassagem na BR-317.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/trabalhador-cai-de-telhado-e-se-fere-durante-manutencao-na-vila-acre/",
@@ -10022,12 +10102,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/homem-cai-de-telhado.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/homem-cai-de-telhado.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/homem-cai-de-telhado.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10063,14 +10143,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Trabalhador cai de telhado e se fere durante manutenção na Vila Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Trabalhador cai de telhado e se fere durante manutenção na Vila Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/jovem-perde-controle-de-moto-e-se-fere-na-via-parque-em-rio-branco/",
@@ -10090,12 +10172,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/acidente-1.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/acidente-1.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/acidente-1.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10131,14 +10213,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Jovem perde controle de moto e se fere na Via Parque, em Rio Branco"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Jovem perde controle de moto e se fere na Via Parque, em Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/politica/quaest-lula-lidera-com-45-e-amplia-vantagem-sobre-flavio-bolsonaro/",
@@ -10158,12 +10242,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/1-1-Lula-Flavio-e-Tarcisio.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/1-1-Lula-Flavio-e-Tarcisio.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/1-1-Lula-Flavio-e-Tarcisio.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10199,14 +10283,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Quaest: Lula lidera com 45% e amplia vantagem sobre Flávio Bolsonaro"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Quaest: Lula lidera com 45% e amplia vantagem sobre Flávio Bolsonaro.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/politica/alysson-visita-6-de-agosto-e-acompanha-de-demandas-de-moradores/",
@@ -10226,12 +10312,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/ALYSSON-263x175.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/ALYSSON-263x175.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/ALYSSON-263x175.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10267,14 +10353,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Alysson visita Seis de Agosto e acompanha de demandas de moradores"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Alysson visita Seis de Agosto e acompanha de demandas de moradores.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/politica/thor-dantas-celebra-os-89-anos-da-madrinha-peregrina-no-alto-santo/",
@@ -10294,12 +10382,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/thor-dantas-1-263x175.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/thor-dantas-1-263x175.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/thor-dantas-1-263x175.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10335,14 +10423,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Thor Dantas celebra os 89 anos da Madrinha Peregrina no Alto Santo"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Thor Dantas celebra os 89 anos da Madrinha Peregrina no Alto Santo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/pge-convoca-candidatos-para-etapas-discursiva-e-pratica-do-concurso-de-procurador/",
@@ -10362,12 +10452,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/pge-250x166.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/pge-250x166.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/pge-250x166.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10403,14 +10493,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: PGE convoca candidatos para etapas discursiva e prática de concurso"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: PGE convoca candidatos para etapas discursiva e prática de concurso.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/ieptec-convoca-aprovados-em-tres-processos-seletivos-simplificados/",
@@ -10430,12 +10522,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/05/ieptec-1080x663.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/05/ieptec-1080x663.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/05/ieptec-1080x663.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10471,14 +10563,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Ieptec convoca aprovados em três processos seletivos simplificados"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Ieptec convoca aprovados em três processos seletivos simplificados.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/senai-abre-selecao-no-acre-com-salarios-de-ate-r-57-mil-e-inscricoes-gratuitas/",
@@ -10498,12 +10592,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/SENAI.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/SENAI.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/SENAI.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10539,14 +10633,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: SENAI abre seleção no Acre com salários de até R$ 5,7 mil e inscrições gratuitas"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: SENAI abre seleção no Acre com salários de até R$ 5,7 mil e inscrições gratuitas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/justica-impede-plano-de-cancelar-atendimento-a-crianca-com-sindrome-rara/",
@@ -10566,12 +10662,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/japma-88-00192-g003-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/japma-88-00192-g003-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/japma-88-00192-g003-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10607,14 +10703,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Justiça impede plano de cancelar atendimento a criança com síndrome rara"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Justiça impede plano de cancelar atendimento a criança com síndrome rara.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/foragido-de-alta-periculosidade-e-preso-escondido-debaixo-da-cama/",
@@ -10634,12 +10732,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/04/preso-algema-1200x675.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/04/preso-algema-1200x675.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/04/preso-algema-1200x675.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10675,14 +10773,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Foragido de alta periculosidade é preso escondido debaixo da cama"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Foragido de alta periculosidade é preso escondido debaixo da cama.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/filha-de-tiao-viana-estreia-no-cinema-ao-lado-de-bruno-gagliasso-em-novo-filme/",
@@ -10702,12 +10802,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/catarina-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/catarina-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/catarina-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10743,14 +10843,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Filha de Tião Viana estreia no cinema ao lado de Bruno Gagliasso em novo filme"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Filha de Tião Viana estreia no cinema ao lado de Bruno Gagliasso em novo filme.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/policia/policia-investiga-morte-de-idosa-encontrada-em-estado-de-decomposicao/",
@@ -10770,12 +10872,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/IDOSA-SENA-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/IDOSA-SENA-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/IDOSA-SENA-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10811,14 +10913,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Polícia investiga morte de idosa encontrada em estado de decomposição"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Polícia investiga morte de idosa encontrada em estado de decomposição.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/familiares-de-detentos-bloqueiam-acesso-ao-presidio-apos-suspensao-de-visitas/",
@@ -10838,12 +10942,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/bloqueio-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/bloqueio-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/bloqueio-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10879,14 +10983,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Familiares de detentos bloqueiam acesso a presídio após suspensão de visitas"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Familiares de detentos bloqueiam acesso a presídio após suspensão de visitas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/argentina-vence-a-inglaterra-e-esta-na-final-da-copa-do-mundo-2026/",
@@ -10906,12 +11012,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/messi_argentina_d57dc3-e1781659449488-1.jpg",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/messi_argentina_d57dc3-e1781659449488-1.jpg",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/messi_argentina_d57dc3-e1781659449488-1.jpg",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -10947,14 +11053,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Argentina vence a Inglaterra e está na final da Copa do Mundo 2026"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Argentina vence a Inglaterra e está na final da Copa do Mundo 2026.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/gloria-pires-desembarca-no-acre-com-as-duas-filhas-e-visita-pontos-turisticos/",
@@ -10974,12 +11082,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/gloria-e-as-filhas-no-acre-1200x675.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/gloria-e-as-filhas-no-acre-1200x675.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/gloria-e-as-filhas-no-acre-1200x675.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -11015,14 +11123,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Glória Pires desembarca no Acre com as duas filhas e visita pontos turísticos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Glória Pires desembarca no Acre com as duas filhas e visita pontos turísticos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/morre-dona-zuzu-mae-da-ex-vice-prefeita-marfisa-galvao/",
@@ -11042,12 +11152,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/zuzu-1170x662.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/zuzu-1170x662.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/zuzu-1170x662.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -11083,14 +11193,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Morre dona Zuzu, mãe da ex-vice-prefeita Marfisa Galvão"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Morre dona Zuzu, mãe da ex-vice-prefeita Marfisa Galvão.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/destaque-2/morre-mariana-quintela-jovem-empresaria-do-ramo-da-culinaria-no-acre/",
@@ -11110,12 +11222,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/nota-falecimento-2.webp",
+    "feedImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/nota-falecimento-2.webp",
+    "sourceImageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/nota-falecimento-2.webp",
+    "imageCredit": "ContilNet / Instagram",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 970,
@@ -11151,14 +11263,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Morre Mariana Quintela, jovem empresária do ramo da culinária no Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ContilNet / Instagram publicou em 16 de jul de 2026: Morre Mariana Quintela, jovem empresária do ramo da culinária no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://contilnetnoticias.com.br/noticia/queimadas-caem-quase-50-no-acre-em-2026-feijo-lidera-numero-de-focos/",
@@ -11246,12 +11360,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/caixa_e_serasa-36913732.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/caixa_e_serasa-36913732.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/caixa_e_serasa-36913732.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -11287,14 +11401,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Serasa e CAIXA se unem para facilitar negociação de 1,8 milhão de clientes com descontos de até 90%"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Serasa e CAIXA se unem para facilitar negociação de 1,8 milhão de clientes com descontos de até 90%.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/artigo-o-programa-aprendiz-comeca-na-lei-mas-o-sucesso-depende-de-lideres-autenticos-jose-augusto-minarelli/?utm_source=rss&utm_medium=rss&utm_campaign=artigo-o-programa-aprendiz-comeca-na-lei-mas-o-sucesso-depende-de-lideres-autenticos-jose-augusto-minarelli",
@@ -11314,12 +11430,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/8098dc78-1200-439a-b31e-a5046a1d484d.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/8098dc78-1200-439a-b31e-a5046a1d484d.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/8098dc78-1200-439a-b31e-a5046a1d484d.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -11355,14 +11471,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Artigo – O Programa Aprendiz começa na lei, mas o sucesso depende de líderes autênticos – José Augusto Minarelli"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Artigo – O Programa Aprendiz começa na lei, mas o sucesso depende de líderes autênticos – José Augusto Minarelli.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/justica-mantem-prisao-de-madrasta-acusada-de-envenenar-enteada-com-soda-caustica-em-rio-branco/?utm_source=rss&utm_medium=rss&utm_campaign=justica-mantem-prisao-de-madrasta-acusada-de-envenenar-enteada-com-soda-caustica-em-rio-branco",
@@ -11382,12 +11500,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Imagem1-1.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Imagem1-1.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Imagem1-1.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -11423,14 +11541,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Justiça mantém prisão de madrasta acusada de envenenar enteada com soda cáustica em Rio Branco"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Justiça mantém prisão de madrasta acusada de envenenar enteada com soda cáustica em Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/221714-2/?utm_source=rss&utm_medium=rss&utm_campaign=221714-2",
@@ -11450,12 +11570,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/homem-preso.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/homem-preso.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/homem-preso.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -11491,14 +11611,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Polícia Militar prende homem acusado de descumprir medida protetiva e ameaçar sua ex-companheira"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Polícia Militar prende homem acusado de descumprir medida protetiva e ameaçar sua ex-companheira.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/justica-manda-prender-4-acusados-por-morte-de-jovem-em-rope-jump/?utm_source=rss&utm_medium=rss&utm_campaign=justica-manda-prender-4-acusados-por-morte-de-jovem-em-rope-jump",
@@ -11518,12 +11640,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/ae1mg9438ov2cm06yyl1qnovg-1.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/ae1mg9438ov2cm06yyl1qnovg-1.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/ae1mg9438ov2cm06yyl1qnovg-1.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -11559,14 +11681,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Justiça acata denúncia do MP e manda prender 4 acusados por morte de jovem em rope jump"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 16 de jul de 2026: Justiça acata denúncia do MP e manda prender 4 acusados por morte de jovem em rope jump.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/o-que-aconteceria-com-nossa-mente-se-vivessemos-na-lua/",
@@ -11586,12 +11710,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vivendo_na_lua.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vivendo_na_lua.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vivendo_na_lua.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -11627,14 +11751,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: O que aconteceria com nossa mente se vivêssemos na Lua?"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: O que aconteceria com nossa mente se vivêssemos na Lua?.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/lua-hoje-confira-a-fase-da-lua-desta-quinta-feira-16-07-2026/",
@@ -11654,12 +11780,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/lua-minguante-scaled-1-1280x814.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/lua-minguante-scaled-1-1280x814.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/lua-minguante-scaled-1-1280x814.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -11695,14 +11821,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/frente-fria-muda-o-tempo-e-coloca-o-sul-em-alerta-veja-a-previsao/",
@@ -11722,12 +11850,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/chuva-frio.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/chuva-frio.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/chuva-frio.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -11763,14 +11891,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/quer-renovar-a-sala-veja-uma-selecao-de-smart-tvs-4k-em-promocao-na-amazon/",
@@ -11790,12 +11920,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/417VfFP6sAL._SL500_-1.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/417VfFP6sAL._SL500_-1.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/417VfFP6sAL._SL500_-1.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -11831,14 +11961,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/anvisa-manda-recolher-agua-mineral-bacteria-encontrada-e-a-mesma-de-produtos-da-ype/",
@@ -11858,12 +11990,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/mamba-water.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/mamba-water.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/mamba-water.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -11899,14 +12031,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/copa-antes-da-final-argentina-e-espanha-se-encontram-em-filme-na-tv/",
@@ -11926,12 +12060,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/copa-antes-da-final-argentina-e-espanha-se-encontram-em-filme-na-tv-viv9jXuE.webp",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/copa-antes-da-final-argentina-e-espanha-se-encontram-em-filme-na-tv-viv9jXuE.webp",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/copa-antes-da-final-argentina-e-espanha-se-encontram-em-filme-na-tv-viv9jXuE.webp",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -11967,14 +12101,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Copa: antes da final, Argentina e Espanha se encontram em filme na TV"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Copa: antes da final, Argentina e Espanha se encontram em filme na TV.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/uma-casa-na-pradaria-conheca-livro-que-baseou-a-trama-real-da-netflix/",
@@ -11994,12 +12130,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/uma-casa-na-pradaria-conheca-livro-que-baseou-a-trama-real-da-netflix-Nn5KEUVW.webp",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/uma-casa-na-pradaria-conheca-livro-que-baseou-a-trama-real-da-netflix-Nn5KEUVW.webp",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/uma-casa-na-pradaria-conheca-livro-que-baseou-a-trama-real-da-netflix-Nn5KEUVW.webp",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12035,14 +12171,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Uma Casa na Pradaria: conheça livro que baseou a trama real da Netflix"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Uma Casa na Pradaria: conheça livro que baseou a trama real da Netflix.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/starship-decola-hoje-assista-com-o-olhar-digital/",
@@ -12062,12 +12200,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/12-lanamento-starship-scaled-1-1280x770.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/12-lanamento-starship-scaled-1-1280x770.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/12-lanamento-starship-scaled-1-1280x770.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12103,14 +12241,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Starship decola hoje; assista com o Olhar Digital!"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Starship decola hoje; assista com o Olhar Digital!.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/poucos-atomos-de-espessura-novo-material-promete-revolucao-quantica/",
@@ -12130,12 +12270,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/atomo-scaled-1-1280x854.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/atomo-scaled-1-1280x854.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/atomo-scaled-1-1280x854.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12171,14 +12311,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Poucos átomos de espessura: novo material promete revolução quântica"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Poucos átomos de espessura: novo material promete revolução quântica.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/dna-de-50-mil-anos-na-africa-desafia-limites-da-ciencia/",
@@ -12198,12 +12340,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/Foto-de-sutirta-budiman-na-Unsplash.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/Foto-de-sutirta-budiman-na-Unsplash.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/Foto-de-sutirta-budiman-na-Unsplash.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12239,14 +12381,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: DNA de 50 mil anos na África desafia limites da ciência"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: DNA de 50 mil anos na África desafia limites da ciência.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/critica-a-odisseia-transforma-poema-grego-em-jornada-epica-e-melancolica/",
@@ -12266,12 +12410,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/critica-a-odisseia-transforma-poema-grego-em-jornada-epica-e-melancolica-U0b0ks9S.webp",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/critica-a-odisseia-transforma-poema-grego-em-jornada-epica-e-melancolica-U0b0ks9S.webp",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/critica-a-odisseia-transforma-poema-grego-em-jornada-epica-e-melancolica-U0b0ks9S.webp",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12307,14 +12451,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Crítica: A Odisseia transforma poema grego em jornada épica e melancólica"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 16 de jul de 2026: Crítica: A Odisseia transforma poema grego em jornada épica e melancólica.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/quer-melhorar-o-wi-fi-em-casa-confira-uma-selecao-de-roteadores-em-promocao-na-amazon/",
@@ -12334,12 +12480,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-roteadores-wi-fi-14.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-roteadores-wi-fi-14.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-roteadores-wi-fi-14.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12375,14 +12521,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Quer melhorar o Wi-Fi em casa? Confira uma seleção de roteadores em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Quer melhorar o Wi-Fi em casa? Confira uma seleção de roteadores em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/confira-o-olhar-digital-news-na-integra-15-07-2026/",
@@ -12402,12 +12550,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/IMG_6722-1280x720.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/IMG_6722-1280x720.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/IMG_6722-1280x720.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12443,14 +12591,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Confira o Olhar Digital News na íntegra (15/07/2026)"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Confira o Olhar Digital News na íntegra (15/07/2026).",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/hora-de-renovar-o-home-office-as-melhores-impressoras-em-promocao-na-amazon/",
@@ -12470,12 +12620,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-impressoras-14.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-impressoras-14.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-impressoras-14.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12511,14 +12661,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Hora de renovar o home office: as melhores impressoras em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Hora de renovar o home office: as melhores impressoras em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/gta-vi-wolverine-e-mais-uma-selecao-de-jogos-ps5-que-estao-em-promocao-na-amazon/",
@@ -12538,12 +12690,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-jogos-ps5-14.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-jogos-ps5-14.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-jogos-ps5-14.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12579,14 +12731,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: GTA VI, Wolverine e mais: uma seleção de jogos PS5 que estão em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: GTA VI, Wolverine e mais: uma seleção de jogos PS5 que estão em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/halo-jedi-e-lego-uma-selecao-de-jogos-xbox-que-estao-em-promocao-na-amazon/",
@@ -12606,12 +12760,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-jogos-xbox-14.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-jogos-xbox-14.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-jogos-xbox-14.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12647,14 +12801,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Halo, Jedi e LEGO: uma seleção de jogos Xbox que estão em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Halo, Jedi e LEGO: uma seleção de jogos Xbox que estão em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/elon-musk-compra-mais-uma-empresa-por-r-5-bilhoes/",
@@ -12674,12 +12830,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/elon_musk-1280x853.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/elon_musk-1280x853.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/elon_musk-1280x853.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12715,14 +12871,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Elon Musk compra mais uma empresa por R$ 5 bilhões"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Elon Musk compra mais uma empresa por R$ 5 bilhões.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/casa-limpa-sem-esforco-veja-uma-selecao-de-aspiradores-robo-em-promocao-na-amazon/",
@@ -12742,12 +12900,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-aspirador-robo.jpg",
+    "feedImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-aspirador-robo.jpg",
+    "sourceImageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-aspirador-robo.jpg",
+    "imageCredit": "Jurua Informativo",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 962,
@@ -12783,14 +12941,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Casa limpa sem esforço: veja uma seleção de aspiradores robô em promoção na Amazon"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Informativo publicou em 15 de jul de 2026: Casa limpa sem esforço: veja uma seleção de aspiradores robô em promoção na Amazon.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.manciolima.ac.gov.br/publicacoes-transparencia/lei-org%C3%A2nica-municipal-de-m%C3%A2ncio-lima",
@@ -12810,12 +12970,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
+    "imageUrl": "assets/home-cache/fallback-cotidiano.jpg",
+    "feedImageUrl": "assets/home-cache/fallback-cotidiano.jpg",
     "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageCredit": "Prefeitura de Mancio Lima",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 955,
@@ -12851,14 +13011,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Lei Orgânica"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "fallback-editorial-servico-publico",
     "body": [
       "Prefeitura de Mancio Lima publicou em 16 de jul de 2026: Lei Orgânica.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem editorial neutra"
   },
   {
     "id": "https://www.marechalthaumaturgo.ac.gov.br/publicacoes-transparencia/pe-n-007-2026-m%C3%A1quinas-e-equipamentos",
@@ -13281,12 +13443,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
+    "imageUrl": "assets/home-cache/fallback-cotidiano.jpg",
+    "feedImageUrl": "assets/home-cache/fallback-cotidiano.jpg",
     "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageCredit": "Tribunal de Justica do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 860,
@@ -13322,14 +13484,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Conferencia de Documentos e-SAJ"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "fallback-editorial-documentos",
     "body": [
       "Tribunal de Justica do Acre publicou em 16 de jul de 2026: Conferencia de Documentos e-SAJ.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem editorial neutra"
   },
   {
     "id": "https://acreinfoco.com/2026/07/curiosidade-metade-do-seu-corpo-nao-e-humano/",
@@ -14589,12 +14753,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2025/02/Acre-Fronteira-Peru-Bolivia.jpg.jpg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2025/02/Acre-Fronteira-Peru-Bolivia.jpg.jpg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2025/02/Acre-Fronteira-Peru-Bolivia.jpg.jpg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -14630,14 +14794,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acre integra edital da Unesco para impulsionar turismo na fronteira com Peru e Bolívia"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Acre integra edital da Unesco para impulsionar turismo na fronteira com Peru e Bolívia.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreagora.com/2026/07/16/producao-de-cafe-cresce-51-no-acre-e-rendimento-das-lavouras-tambem-aumenta/",
@@ -14657,12 +14823,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2024/03/cafe-jpeg.webp",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2024/03/cafe-jpeg.webp",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2024/03/cafe-jpeg.webp",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -14698,14 +14864,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Produção de café cresce 5,1% no Acre e rendimento das lavouras também aumenta"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Produção de café cresce 5,1% no Acre e rendimento das lavouras também aumenta.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreagora.com/2026/07/16/empreendedorismo-feminino-avanca-no-acre-e-mulheres-ja-representam-42-dos-donos-de-negocios/",
@@ -14725,12 +14893,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2022/05/empreendedror.jpg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2022/05/empreendedror.jpg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2022/05/empreendedror.jpg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -14766,14 +14934,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Empreendedorismo feminino avança no Acre e mulheres já representam 42% dos donos de negócios"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 16 de jul de 2026: Empreendedorismo feminino avança no Acre e mulheres já representam 42% dos donos de negócios.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/destaques/3o-destaque/colisao-entre-bicicleta-e-onibus-deixa-duas-feridas-em-rio-branco-jovem-de-18-anos-e-entubada/",
@@ -14865,12 +15035,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/07/senac-jpg-avif.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/07/senac-jpg-avif.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/07/senac-jpg-avif.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -14906,14 +15076,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Senac abre inscrições para 40 vagas em cursos gratuitos em Rio Branco; veja quem pode participar"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 16 de jul de 2026: Senac abre inscrições para 40 vagas em cursos gratuitos em Rio Branco; veja quem pode participar.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/destaques/4o-destaque/jovem-baleado-na-cabeca-morre-apos-tres-dias-internado-em-rio-branco-policia-civil-investiga-homicidio/",
@@ -14933,12 +15105,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/nao-resistiu.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/nao-resistiu.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/nao-resistiu.jpg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -14974,14 +15146,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 16 de jul de 2026: Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/capotamento-na-br-317-deixa-duas-mulheres-feridas-apos-tentativa-de-ultrapassagem-em-brasileia/",
@@ -15001,12 +15175,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/acid.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/acid.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/acid.jpg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -15042,14 +15216,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Capotamento na BR-317 deixa duas mulheres feridas após tentativa de ultrapassagem em Brasiléia"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 16 de jul de 2026: Capotamento na BR-317 deixa duas mulheres feridas após tentativa de ultrapassagem em Brasiléia.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/guia-gazeta-2/2o-guia-gazeta/horoscopo-2026-confira-a-previsao-de-hoje-16-7-para-seu-signo/",
@@ -15069,12 +15245,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/01/horoscopo.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/01/horoscopo.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/01/horoscopo.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -15110,14 +15286,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 16 de jul de 2026: Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/destaques/6o-destaque/acre-tem-mais-de-140-vagas-de-emprego-abertas-nesta-quinta-feira-veja-como-concorrer/",
@@ -15209,12 +15387,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/02/calor.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/02/calor.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/02/calor.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -15250,14 +15428,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 16 de jul de 2026: Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/destaques/2o-destaque/empresaria-acreana-mariana-quintela-morre-aos-32-anos-apos-batalha-contra-o-cancer/",
@@ -15277,12 +15457,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/IMG_3315.jpeg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/IMG_3315.jpeg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/IMG_3315.jpeg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -15318,14 +15498,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Empresária acreana Mariana Quintela morre aos 32 anos após batalha contra o câncer"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Empresária acreana Mariana Quintela morre aos 32 anos após batalha contra o câncer.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://ac24horas.com/2026/07/16/onibus-com-passageiros-cai-em-rio-em-porto-de-barcarena-no-para-bombeiros-fazem-buscas/",
@@ -17370,12 +17552,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/WhatsApp-Image-2026-07-14-at-19.57.55.jpeg?w=1023&h=630&crop=1",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/WhatsApp-Image-2026-07-14-at-19.57.55.jpeg?w=1023&h=630&crop=1",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/WhatsApp-Image-2026-07-14-at-19.57.55.jpeg?w=1023&h=630&crop=1",
+    "imageCredit": "CNN Brasil",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -17411,14 +17593,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Resolução ANP cria problemas onde eles não existiam"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: Resolução ANP cria problemas onde eles não existiam.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/que-horas-sera-a-final-da-copa-do-mundo-2026/",
@@ -17505,12 +17689,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/WhatsApp-Image-2026-07-16-at-05.44.00.jpeg?w=745&h=419&crop=1",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/WhatsApp-Image-2026-07-16-at-05.44.00.jpeg?w=745&h=419&crop=1",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/WhatsApp-Image-2026-07-16-at-05.44.00.jpeg?w=745&h=419&crop=1",
+    "imageCredit": "CNN Brasil",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -17546,14 +17730,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: A energia existe, mas o contrato desapareceu"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: A energia existe, mas o contrato desapareceu.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/tuchel-faz-inglaterra-viver-tragedia-em-copa-apos-convocacao-polemica/",
@@ -18184,12 +18370,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.01.01.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.01.01.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.01.01.jpeg",
+    "imageCredit": "ac24horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -18225,14 +18411,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Dando bom à cavalo"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "ac24horas publicou em 16 de jul de 2026: Dando bom à cavalo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://ac24agro.com/2026/07/16/programa-rem-inicia-recuperacao-de-areas-degradadas-no-acre/",
@@ -20211,12 +20399,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2403.webp",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2403.webp",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_2403.webp",
+    "imageCredit": "Jurua Online",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 980,
@@ -20252,14 +20440,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Motorista de aplicativo escapa de suposta tentativa de sequestro durante corrida em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Online publicou em 15 de jul de 2026: Motorista de aplicativo escapa de suposta tentativa de sequestro durante corrida em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruaonline.com.br/homens-armados-com-facas-sao-presos-apos-confronto-e-resistencia-a-abordagem-policial-em-cruzeiro-do-sul/",
@@ -20619,12 +20809,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/8a4918_93b7175d96d640229248dd0ba21593efmv2.avif",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/8a4918_93b7175d96d640229248dd0ba21593efmv2.avif",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/8a4918_93b7175d96d640229248dd0ba21593efmv2.avif",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -20660,14 +20850,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeitura de Cruzeiro do Sul repassa R$ 305 mil ao Lar dos Vicentinos para atendimento a idosos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 15 de jul de 2026: Prefeitura de Cruzeiro do Sul repassa R$ 305 mil ao Lar dos Vicentinos para atendimento a idosos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/prefeitura-revitaliza-bancos-e-lixeiras-da-praca-da-revolucao-em-rio-branco/",
@@ -20687,12 +20879,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Revitalizacao-bancos-e-lixeiras-2-800x500.jpeg",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Revitalizacao-bancos-e-lixeiras-2-800x500.jpeg",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Revitalizacao-bancos-e-lixeiras-2-800x500.jpeg",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -20728,14 +20920,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeitura revitaliza bancos e lixeiras da Praça da Revolução em Rio Branco"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 15 de jul de 2026: Prefeitura revitaliza bancos e lixeiras da Praça da Revolução em Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/festival-atsa-puyanawa-2026-acontece-de-18-a-23-de-julho-em-mancio-lima/",
@@ -20755,12 +20949,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/IMG_0162-800x500.jpeg",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/IMG_0162-800x500.jpeg",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/IMG_0162-800x500.jpeg",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -20796,14 +20990,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Festival Atsa Puyanawa 2026 acontece de 18 a 23 de julho em Mâncio Lima"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 15 de jul de 2026: Festival Atsa Puyanawa 2026 acontece de 18 a 23 de julho em Mâncio Lima.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/deputado-clodoaldo-e-vice-prefeita-delcimar-cobram-melhorias-na-br-364-em-cruzeiro-do-sul/",
@@ -20823,12 +21019,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/clodoaldodelcideni-800x500.png",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/clodoaldodelcideni-800x500.png",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/clodoaldodelcideni-800x500.png",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -20864,14 +21060,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Deputado Clodoaldo e vice-prefeita Delcimar cobram melhorias na BR-364 em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 15 de jul de 2026: Deputado Clodoaldo e vice-prefeita Delcimar cobram melhorias na BR-364 em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreinfoco.com/2026/07/tipico-da-direita-ricardo-nunes-encerra-centro-para-criancas-em-situacao-de-rua-em-sp/",
@@ -21293,12 +21491,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2026/07/conrata.jpeg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2026/07/conrata.jpeg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2026/07/conrata.jpeg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -21334,14 +21532,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Contrata+Rio Branco promete abrir mercado da Prefeitura para pequenos empreendedores com pagamentos em até 10 dias"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 15 de jul de 2026: Contrata+Rio Branco promete abrir mercado da Prefeitura para pequenos empreendedores com pagamentos em até 10 dias.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/prefeitura-lanca-programa-para-ampliar-contratacao-de-meis-e-autonomos-em-rio-branco/",
@@ -21361,12 +21561,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/Contrata-Rio-Branco-1-e1784128210287-1024x576-1.jpeg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/Contrata-Rio-Branco-1-e1784128210287-1024x576-1.jpeg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/Contrata-Rio-Branco-1-e1784128210287-1024x576-1.jpeg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -21402,14 +21602,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeitura lança programa para ampliar contratação de MEIs e autônomos em Rio Branco"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Prefeitura lança programa para ampliar contratação de MEIs e autônomos em Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/rio-branco-abre-selecao-de-entidade-para-contratar-brigadistas-e-reforcar-combate-as-queimadas/",
@@ -21429,12 +21631,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/Selecao-de-OSC-4-e1784145342418.jpeg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/Selecao-de-OSC-4-e1784145342418.jpeg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/Selecao-de-OSC-4-e1784145342418.jpeg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -21470,14 +21672,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Rio Branco abre seleção de entidade para contratar brigadistas e reforçar combate às queimadas"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Rio Branco abre seleção de entidade para contratar brigadistas e reforçar combate às queimadas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/copas-de-rio-branco-serao-lancadas-nesta-sexta-no-tonicao-veja-a-programacao/",
@@ -21497,12 +21701,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/futeboll-600x338.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/futeboll-600x338.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/futeboll-600x338.jpg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -21538,14 +21742,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Copas de Rio Branco serão lançadas nesta sexta no Tonicão; veja a programação"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Copas de Rio Branco serão lançadas nesta sexta no Tonicão; veja a programação.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/",
@@ -21565,12 +21771,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -21606,14 +21812,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruacomunicacao.com.br/povos-festival-atsa-puyanawa-2026-sera-realizado-de-18-e-23-de-julho-em-mancio-lima/",
@@ -21767,12 +21975,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_0161.avif",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_0161.avif",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_0161.avif",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -21808,14 +22016,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Festival Atsa Puyanawa 2026 será realizado de 18 e 23 de julho em Mâncio Lima"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 15 de jul de 2026: Festival Atsa Puyanawa 2026 será realizado de 18 e 23 de julho em Mâncio Lima.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://batelao.com/com-apoio-da-prefeitura-projeto-guarda-mirim-e-retomado-em-mancio-lima-e-inicia-atividades-com-60-criancas/?utm_source=rss&utm_medium=rss&utm_campaign=com-apoio-da-prefeitura-projeto-guarda-mirim-e-retomado-em-mancio-lima-e-inicia-atividades-com-60-criancas",
@@ -21902,12 +22112,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/07/005-5.jpeg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/07/005-5.jpeg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/07/005-5.jpeg",
+    "imageCredit": "Batelao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -21943,14 +22153,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeitura de Cruzeiro do Sul regulamenta transporte rural e reduz preço de inspeção"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Batelao publicou em 15 de jul de 2026: Prefeitura de Cruzeiro do Sul regulamenta transporte rural e reduz preço de inspeção.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruacomunicacao.com.br/foragido-do-presidio-e-capturado-pela-pm-em-cruzeiro-do-sul/",
@@ -22037,12 +22249,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/95d3db0b-63c0-4463-bf41-df8b0567c41f.jpg?fit=458%2C506&#038;ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/95d3db0b-63c0-4463-bf41-df8b0567c41f.jpg?fit=458%2C506&#038;ssl=1",
+    "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/95d3db0b-63c0-4463-bf41-df8b0567c41f.jpg?fit=458%2C506&#038;ssl=1",
+    "imageCredit": "Jurua Comunicacao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -22078,14 +22290,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Novo vídeo de briga entre estudantes do UFAC revela detalhes de confusão que envolveu acusação e confronto dentro da instituição"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Comunicacao publicou em 15 de jul de 2026: Novo vídeo de briga entre estudantes do UFAC revela detalhes de confusão que envolveu acusação e confronto dentro da instituição.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruacomunicacao.com.br/com-mais-de-100-vagas-para-empreendedores-inscricoes-para-o-festival-da-farinha-2026-estao-abertas-em-cruzeiro-do-sul/",
@@ -22105,12 +22319,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/81-3.webp?fit=1200%2C670&#038;ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/81-3.webp?fit=1200%2C670&#038;ssl=1",
+    "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/81-3.webp?fit=1200%2C670&#038;ssl=1",
+    "imageCredit": "Jurua Comunicacao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -22146,14 +22360,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Com mais de 100 vagas para empreendedores, inscrições para o Festival da Farinha 2026 estão abertas em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Comunicacao publicou em 15 de jul de 2026: Com mais de 100 vagas para empreendedores, inscrições para o Festival da Farinha 2026 estão abertas em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://batelao.com/secretaria-de-educacao-promove-formacao-em-cruzeiro-do-sul-sobre-inclusao-de-alunos-com-tea/?utm_source=rss&utm_medium=rss&utm_campaign=secretaria-de-educacao-promove-formacao-em-cruzeiro-do-sul-sobre-inclusao-de-alunos-com-tea",
@@ -22173,12 +22389,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/07/001-5.jpg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/07/001-5.jpg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/07/001-5.jpg",
+    "imageCredit": "Batelao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -22214,14 +22430,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Secretaria de Educação promove formação em Cruzeiro do Sul sobre inclusão de alunos com TEA"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Batelao publicou em 15 de jul de 2026: Secretaria de Educação promove formação em Cruzeiro do Sul sobre inclusão de alunos com TEA.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://batelao.com/comercial-lider-destaca-25-anos-de-experiencia-e-anuncia-promocoes-especiais-nesta-quarta-feira-15/?utm_source=rss&utm_medium=rss&utm_campaign=comercial-lider-destaca-25-anos-de-experiencia-e-anuncia-promocoes-especiais-nesta-quarta-feira-15",
@@ -22375,12 +22593,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/6151c6ce-9100-4c80-bcdf-871dbde32d5d-1140x570-jpg.avif",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/6151c6ce-9100-4c80-bcdf-871dbde32d5d-1140x570-jpg.avif",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/6151c6ce-9100-4c80-bcdf-871dbde32d5d-1140x570-jpg.avif",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -22416,14 +22634,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Fezes de pombos podem favorecer doença causada por fungo; saiba como se proteger"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 15 de jul de 2026: Fezes de pombos podem favorecer doença causada por fungo; saiba como se proteger.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://batelao.com/saude-e-educacao-de-maos-dadas-napi-capacita-educadores-para-lidar-com-comportamento-de-alunos/?utm_source=rss&utm_medium=rss&utm_campaign=saude-e-educacao-de-maos-dadas-napi-capacita-educadores-para-lidar-com-comportamento-de-alunos",
@@ -22443,12 +22663,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/07/002.webp",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/07/002.webp",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/07/002.webp",
+    "imageCredit": "Batelao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -22484,14 +22704,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Saúde e educação de mãos dadas: NAPI capacita educadores para lidar com comportamento de alunos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Batelao publicou em 15 de jul de 2026: Saúde e educação de mãos dadas: NAPI capacita educadores para lidar com comportamento de alunos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://folhadoacre.com.br/2026/07/estudantes-ameacam-fechar-viaduto-da-ceara-em-nova-manifestacao-por-transporte-publico/",
@@ -22731,12 +22953,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2025/03/IMG_5349-768x512-1.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2025/03/IMG_5349-768x512-1.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2025/03/IMG_5349-768x512-1.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -22772,14 +22994,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Inscrições para estágio na PGE seguem abertas para estudantes de jornalismo e administração; bolsa é de R$ 1,2 mil"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Inscrições para estágio na PGE seguem abertas para estudantes de jornalismo e administração; bolsa é de R$ 1,2 mil.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://ac24horas.com/2026/07/15/estudantes-fecham-avenida-ceara-em-protesto-por-transporte-publico/",
@@ -23067,12 +23291,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/af4faaa9-c189-47e7-b0d4-13b1a36bd479.jpeg",
+    "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/af4faaa9-c189-47e7-b0d4-13b1a36bd479.jpeg",
+    "sourceImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/af4faaa9-c189-47e7-b0d4-13b1a36bd479.jpeg",
+    "imageCredit": "Jurua Online",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 980,
@@ -23108,14 +23332,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Flamengo inicia conversas por Rodrigo Muniz e mira reforço para o ataque"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Online publicou em 15 de jul de 2026: Flamengo inicia conversas por Rodrigo Muniz e mira reforço para o ataque.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruaonline.com.br/acre-amplia-dialogo-com-o-peru-para-atrair-investimentos-e-fortalecer-integracao-regional/",
@@ -24073,12 +24299,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/SnapInst.to_747561281_18115675778314342_1429568595304190396_n-800x500.jpg",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/SnapInst.to_747561281_18115675778314342_1429568595304190396_n-800x500.jpg",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/SnapInst.to_747561281_18115675778314342_1429568595304190396_n-800x500.jpg",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -24114,14 +24340,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Bocalom reforça discurso de desenvolvimento ao seguir agenda em Santa Rosa do Purus"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 15 de jul de 2026: Bocalom reforça discurso de desenvolvimento ao seguir agenda em Santa Rosa do Purus.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreinfoco.com/2026/07/deputado-luiz-gonzaga-representa-o-acre-no-peru-em-evento-para-debater-integracao-comercial/",
@@ -25079,12 +25307,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/instagram.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/instagram.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/instagram.jpg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -25120,14 +25348,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Frente Ampla pelo Acre marca convenção que vai oficializar candidatura de Thor Dantas ao governo do Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Frente Ampla pelo Acre marca convenção que vai oficializar candidatura de Thor Dantas ao governo do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/sinteac-mobiliza-servidores-para-ato-em-frente-ao-palacio-rio-branco-por-recomposicao-salarial/",
@@ -25147,12 +25377,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/08/WhatsApp-Image-2024-08-13-at-09.16.52-600x450.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/08/WhatsApp-Image-2024-08-13-at-09.16.52-600x450.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/08/WhatsApp-Image-2024-08-13-at-09.16.52-600x450.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -25188,14 +25418,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Sinteac mobiliza servidores para ato em frente ao Palácio Rio Branco por recomposição salarial"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Sinteac mobiliza servidores para ato em frente ao Palácio Rio Branco por recomposição salarial.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/moises-diniz-entra-na-fila-para-transplante-de-rim-e-faz-apelo-caminhada-de-fe-e-coragem/",
@@ -25215,12 +25447,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.44.51.jpeg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.44.51.jpeg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.44.51.jpeg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -25256,14 +25488,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Moisés Diniz entra na fila para transplante de rim e faz apelo: “Caminhada de fé e coragem”"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Moisés Diniz entra na fila para transplante de rim e faz apelo: “Caminhada de fé e coragem”.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/politica/bocalom-inicia-agenda-de-tres-dias-em-municipios-isolados-do-acre-para-apresentar-propostas-e-ouvir-moradores/",
@@ -25283,12 +25517,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.37.53.jpeg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.37.53.jpeg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.37.53.jpeg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -25324,14 +25558,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Bocalom inicia agenda de três dias em municípios isolados do Acre para apresentar propostas e ouvir moradores"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Bocalom inicia agenda de três dias em municípios isolados do Acre para apresentar propostas e ouvir moradores.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-07/senado-aprova-penas-maiores-em-crimes-contra-professores-e-medicos",
@@ -25753,12 +25989,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/Alan-768x512-1.jpeg?fit=768%2C512&#038;ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/Alan-768x512-1.jpeg?fit=768%2C512&#038;ssl=1",
+    "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/Alan-768x512-1.jpeg?fit=768%2C512&#038;ssl=1",
+    "imageCredit": "Jurua Comunicacao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -25794,14 +26030,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Alan antecipa convenção e vai revelar vice uma semana antes do previsto"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Comunicacao publicou em 15 de jul de 2026: Alan antecipa convenção e vai revelar vice uma semana antes do previsto.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruacomunicacao.com.br/ex-deputado-moises-diniz-anuncia-que-entrou-na-fila-por-transplante-de-rim-e-pede-oracoes/",
@@ -25821,12 +26059,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/WA_1784151170286.jpeg?fit=768%2C469&#038;ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/WA_1784151170286.jpeg?fit=768%2C469&#038;ssl=1",
+    "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/WA_1784151170286.jpeg?fit=768%2C469&#038;ssl=1",
+    "imageCredit": "Jurua Comunicacao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -25862,14 +26100,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Ex-deputado Moisés Diniz anuncia que entrou na fila por transplante de rim e pede orações"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Comunicacao publicou em 15 de jul de 2026: Ex-deputado Moisés Diniz anuncia que entrou na fila por transplante de rim e pede orações.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://jurua24horas.com/2026/07/procon-e-incluido-em-decreto-que-amplia-orgaos-aptos-ao-teletrabalho-experimental-no-acre/",
@@ -25889,12 +26129,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/PROCON_AC-1200x799-1.avif",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/PROCON_AC-1200x799-1.avif",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/PROCON_AC-1200x799-1.avif",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -25930,14 +26170,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Procon é incluído em decreto que amplia órgãos aptos ao teletrabalho experimental no Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 15 de jul de 2026: Procon é incluído em decreto que amplia órgãos aptos ao teletrabalho experimental no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://g1.globo.com/politica/noticia/2026/07/15/carta-divulgada-por-flavio-moraes-da-cinco-dias-para-pgr-avaliar-se-bolsonaro-descumpriu-ordem-judicial.ghtml",
@@ -28007,12 +28249,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2026/07/messi-1.jpg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2026/07/messi-1.jpg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2026/07/messi-1.jpg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -28048,14 +28290,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Messi decide no fim, Argentina vira sobre a Inglaterra e avança à final da Copa do Mundo"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 15 de jul de 2026: Messi decide no fim, Argentina vira sobre a Inglaterra e avança à final da Copa do Mundo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://acreagora.com/2026/07/15/acre-tem-2o-maior-crescimento-dos-servicos-em-maio-e-supera-media-nacional-em-131-pontos/",
@@ -28075,12 +28319,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://acreagora.com/wp-content/uploads/2023/05/dsc8207.jpg",
+    "feedImageUrl": "https://acreagora.com/wp-content/uploads/2023/05/dsc8207.jpg",
+    "sourceImageUrl": "https://acreagora.com/wp-content/uploads/2023/05/dsc8207.jpg",
+    "imageCredit": "Acre Agora",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 805,
@@ -28116,14 +28360,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acre tem 2º maior crescimento dos serviços em maio e supera média nacional em 13,1 pontos"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Agora publicou em 15 de jul de 2026: Acre tem 2º maior crescimento dos serviços em maio e supera média nacional em 13,1 pontos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/",
@@ -28344,12 +28590,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/03/tratamento-esgoto-900x598-1.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/03/tratamento-esgoto-900x598-1.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/03/tratamento-esgoto-900x598-1.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -28385,14 +28631,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acre é o estado que menos investiu em saneamento básico no Brasil após novo marco legal, aponta estudo"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Acre é o estado que menos investiu em saneamento básico no Brasil após novo marco legal, aponta estudo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/com-apenas-37-argentinos-acre-esta-entre-os-menores-redutos-da-torcida-de-messi-no-brasil/",
@@ -28479,12 +28727,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/sala_de_aula_2.webp",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/sala_de_aula_2.webp",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/sala_de_aula_2.webp",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 800,
@@ -28520,14 +28768,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Confira resultado da primeira chamada do Prouni segundo semestre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "A Gazeta do Acre publicou em 15 de jul de 2026: Confira resultado da primeira chamada do Prouni segundo semestre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://ac24horas.com/2026/07/15/morte-em-a-nobreza-do-amor-faz-alika-desabar-essa-noticia-me-deixou-sem-chao/",
@@ -28882,12 +29132,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/presidio.jpeg",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/presidio.jpeg",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/presidio.jpeg",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -28923,14 +29173,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Cão policial é envenenado em presídio de Rio Branco; Iapen diz que ataque será investigado"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 15 de jul de 2026: Cão policial é envenenado em presídio de Rio Branco; Iapen diz que ataque será investigado.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://jurua24horas.com/2026/07/acre-entra-em-edital-do-ministerio-do-turismo-para-fortalecer-turismo-na-fronteira-com-peru-e-bolivia/",
@@ -28950,12 +29202,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/04RT286.avif",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/04RT286.avif",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/04RT286.avif",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -28991,14 +29243,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Acre entra em edital do Ministério do Turismo para fortalecer turismo na fronteira com Peru e Bolívia"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 15 de jul de 2026: Acre entra em edital do Ministério do Turismo para fortalecer turismo na fronteira com Peru e Bolívia.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruacomunicacao.com.br/mpac-investiga-ameaca-a-lider-indigena-e-suspeita-de-faccao-em-porto-walter/",
@@ -29018,12 +29272,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/MPAC-apura-ameacas-a-lideranca-indigena.webp?fit=656%2C357&#038;ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/MPAC-apura-ameacas-a-lideranca-indigena.webp?fit=656%2C357&#038;ssl=1",
+    "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/MPAC-apura-ameacas-a-lideranca-indigena.webp?fit=656%2C357&#038;ssl=1",
+    "imageCredit": "Jurua Comunicacao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -29059,14 +29313,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: MPAC investiga ameaça a líder indígena e suspeita de facção em Porto Walter"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Comunicacao publicou em 15 de jul de 2026: MPAC investiga ameaça a líder indígena e suspeita de facção em Porto Walter.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://juruacomunicacao.com.br/cao-policial-e-envenenado-em-presidio-do-acre-iapen-trata-caso-como-atentado/",
@@ -29086,12 +29342,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/pata.webp?fit=547%2C365&#038;ssl=1",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/pata.webp?fit=547%2C365&#038;ssl=1",
+    "sourceImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/07/pata.webp?fit=547%2C365&#038;ssl=1",
+    "imageCredit": "Jurua Comunicacao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -29127,14 +29383,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Cão policial é envenenado em presídio do Acre; Iapen trata caso como atentado"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua Comunicacao publicou em 15 de jul de 2026: Cão policial é envenenado em presídio do Acre; Iapen trata caso como atentado.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://jurua24horas.com/2026/07/santa-rosa-do-purus-e-jordao-ganham-postos-fixos-para-emissao-de-rg/",
@@ -29154,12 +29412,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/148da077-5e3e-463a-ade7-7a2f341320d6.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/148da077-5e3e-463a-ade7-7a2f341320d6.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/148da077-5e3e-463a-ade7-7a2f341320d6.webp",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -29195,14 +29453,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Santa Rosa do Purus e Jordão ganham postos fixos para emissão de RG"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 15 de jul de 2026: Santa Rosa do Purus e Jordão ganham postos fixos para emissão de RG.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://batelao.com/pecuaria-do-acre-movimentou-mais-de-meio-milhao-de-bovinos-no-1o-semestre/?utm_source=rss&utm_medium=rss&utm_campaign=pecuaria-do-acre-movimentou-mais-de-meio-milhao-de-bovinos-no-1o-semestre",
@@ -29222,12 +29482,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/07/003.webp",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/07/003.webp",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/07/003.webp",
+    "imageCredit": "Batelao",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -29263,14 +29523,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Pecuária do Acre movimentou mais de meio milhão de bovinos no 1º semestre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Batelao publicou em 15 de jul de 2026: Pecuária do Acre movimentou mais de meio milhão de bovinos no 1º semestre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/duas-mulheres-na-chapa-o-acre-espera-uma-posicao/",
@@ -29290,12 +29552,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Design-sem-nome-5.avif",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Design-sem-nome-5.avif",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Design-sem-nome-5.avif",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -29331,14 +29593,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Duas mulheres na chapa. O Acre espera uma posição"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 14 de jul de 2026: Duas mulheres na chapa. O Acre espera uma posição.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/prefeitura-abre-credenciamento-para-empreendedores-do-9o-festival-da-farinha-em-cruzeiro-do-sul/",
@@ -29358,12 +29622,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/896af6_1c7938790d684031abf566c22da2b6camv2.avif",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/896af6_1c7938790d684031abf566c22da2b6camv2.avif",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/896af6_1c7938790d684031abf566c22da2b6camv2.avif",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -29399,14 +29663,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeitura abre credenciamento para empreendedores do 9º Festival da Farinha em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 14 de jul de 2026: Prefeitura abre credenciamento para empreendedores do 9º Festival da Farinha em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://integracaonet.com/pagamentos-a-artistas-da-expoacre-jurua-comecam-apos-cobranca-chegar-ao-grupo-integracao/",
@@ -29426,12 +29692,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/cd6a9242-3685-433c-a3ac-be3146e78556-800x500.jpeg",
+    "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/cd6a9242-3685-433c-a3ac-be3146e78556-800x500.jpeg",
+    "sourceImageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/cd6a9242-3685-433c-a3ac-be3146e78556-800x500.jpeg",
+    "imageCredit": "Integracao Net",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 958,
@@ -29467,14 +29733,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Pagamentos a artistas da Expoacre Juruá começam após cobrança chegar ao Grupo Integração"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Integracao Net publicou em 14 de jul de 2026: Pagamentos a artistas da Expoacre Juruá começam após cobrança chegar ao Grupo Integração.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/07/14/xande-de-pilares-avaliza-album-em-que-ian-coury-e-igor-souza-propoem-novos-caminhos-para-o-choro-e-o-samba.ghtml",
@@ -30050,10 +30318,10 @@ window.NEWS_DATA = [
       "O uso de colete salva-vidas por todos os ocupantes é indispensável e reduz o risco de afogamento em caso de naufrágio.",
       "Fonte: Juruá 24 Horas e Corpo de Bombeiros Militar do Acre."
     ],
-    "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
-    "feedImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
-    "sourceImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
-    "imageCredit": "Imagem: arquivo regional do Catálogo CZS",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4746.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4746.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4746.webp",
+    "imageCredit": "Juruá 24 Horas / Corpo de Bombeiros do Acre",
     "imageFocus": "center",
     "imageFit": "cover",
     "media": null,
@@ -30094,7 +30362,9 @@ window.NEWS_DATA = [
       "Os condutores devem evitar superlotação e excesso de peso, reduzir a velocidade nos trechos rasos e observar bancos de areia, galhos e outros obstáculos naturais.",
       "O uso de colete salva-vidas por todos os ocupantes é indispensável e reduz o risco de afogamento em caso de naufrágio.",
       "Fonte: Juruá 24 Horas e Corpo de Bombeiros Militar do Acre."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria",
+    "imageQuality": "imagem-da-pagina-fonte"
   },
   {
     "id": "manual-czs-cruzeiro-recebe-r-6-7-milhoes-da-sefaz",
@@ -30508,12 +30778,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.acre.com.br/wp-content/uploads/2026/07/Projeto-CapesCofecub-executa-missao-de-trabalho-em-MG-%E2%80%94-Universidade.jpg",
+    "feedImageUrl": "https://www.acre.com.br/wp-content/uploads/2026/07/Projeto-CapesCofecub-executa-missao-de-trabalho-em-MG-%E2%80%94-Universidade.jpg",
+    "sourceImageUrl": "https://www.acre.com.br/wp-content/uploads/2026/07/Projeto-CapesCofecub-executa-missao-de-trabalho-em-MG-%E2%80%94-Universidade.jpg",
+    "imageCredit": "Acre Noticias",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 810,
@@ -30549,14 +30819,16 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Projeto Capes/Cofecub executa missão de trabalho em MG — Universidade Federal do Acre"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Acre Noticias publicou em 13 de jul de 2026: Projeto Capes/Cofecub executa missão de trabalho em MG — Universidade Federal do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
-    ]
+    ],
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "manual-czs-lancha-blindada-reforcara-seguranca-no-jurua",
@@ -31302,12 +31574,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/8a4918_45a12b1afaf040e5bb60c5feefb3b9famv2.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/8a4918_45a12b1afaf040e5bb60c5feefb3b9famv2.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/8a4918_45a12b1afaf040e5bb60c5feefb3b9famv2.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -31343,9 +31615,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeitura de Cruzeiro do Sul institui Programa de Vacinação nas Escolas Públicas para fortalecer a imunização de crianças e adolescentes"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 12 de jul de 2026: Prefeitura de Cruzeiro do Sul institui Programa de Vacinação nas Escolas Públicas para fortalecer a imunização de crianças e adolescentes.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -31355,7 +31628,8 @@ window.NEWS_DATA = [
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
+    "editorialLocalTier": 3,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.vozdonorte.com.br/abastecimento-de-agua-reforco-na-rede-de-abastecimento-leva-agua-com-mais-pressao-ao-bela-vista-apos-quatro-decadas/?utm_source=rss&utm_medium=rss&utm_campaign=abastecimento-de-agua-reforco-na-rede-de-abastecimento-leva-agua-com-mais-pressao-ao-bela-vista-apos-quatro-decadas",
@@ -31375,12 +31649,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Agua-com-mais-pressao-ao-Bela-Vista-12-e1783789488144.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Agua-com-mais-pressao-ao-Bela-Vista-12-e1783789488144.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Agua-com-mais-pressao-ao-Bela-Vista-12-e1783789488144.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -31416,9 +31690,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Abastecimento de água – Reforço na rede de abastecimento leva água com mais pressão ao Bela Vista após quatro décadas"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 12 de jul de 2026: Abastecimento de água – Reforço na rede de abastecimento leva água com mais pressão ao Bela Vista após quatro décadas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -31428,7 +31703,8 @@ window.NEWS_DATA = [
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": true,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
+    "editorialLocalTier": 0,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruainformativo.com.br/2026/07/denuncia-anonima-leva-policia-militar-a-prender-homem-por-trafico-de-drogas-em-mancio-lima/",
@@ -31880,12 +32156,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4672.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4672.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4672.webp",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -31921,9 +32197,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Pai do influenciador Mateus Souza morre aos 73 anos em Cruzeiro do Sul"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 13 de jul de 2026: Pai do influenciador Mateus Souza morre aos 73 anos em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -31933,7 +32210,8 @@ window.NEWS_DATA = [
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
+    "editorialLocalTier": 3,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://jurua24horas.com/2026/07/colisao-entre-motocicletas-deixa-feridos-e-ocorrencia-termina-com-prisao-por-desacato/",
@@ -31953,12 +32231,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/02/sirene-policia-2.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/02/sirene-policia-2.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/02/sirene-policia-2.webp",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -31994,9 +32272,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Colisão entre motocicletas deixa feridos e ocorrência termina com prisão por desacato"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 13 de jul de 2026: Colisão entre motocicletas deixa feridos e ocorrência termina com prisão por desacato.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -32006,7 +32285,8 @@ window.NEWS_DATA = [
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
+    "editorialLocalTier": 3,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://ac24horas.com/2026/07/13/acidente-de-transito-acaba-em-confusao-e-prisao-em-cruzeiro-do-sul/",
@@ -32098,12 +32378,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4673.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4673.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/IMG_4673.webp",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -32139,9 +32419,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Suspeito é preso por tráfico de drogas durante ação da Polícia Militar em Mâncio Lima"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 13 de jul de 2026: Suspeito é preso por tráfico de drogas durante ação da Polícia Militar em Mâncio Lima.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -32151,7 +32432,8 @@ window.NEWS_DATA = [
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
+    "editorialLocalTier": 3,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://ac24horas.com/2026/07/13/homem-e-preso-em-bar-por-trafico-de-drogas-em-mancio-lima/",
@@ -32316,12 +32598,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/51ba33b3-9b1d-4719-b011-6efa012d0a8e.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/51ba33b3-9b1d-4719-b011-6efa012d0a8e.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/51ba33b3-9b1d-4719-b011-6efa012d0a8e.webp",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -32357,9 +32639,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Três embarcações afundam em uma semana no Rio Juruá e acendem alerta sobre condições de navegação"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 13 de jul de 2026: Três embarcações afundam em uma semana no Rio Juruá e acendem alerta sobre condições de navegação.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -32369,7 +32652,8 @@ window.NEWS_DATA = [
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": true,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
+    "editorialLocalTier": 3,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://jurua24horas.com/2026/07/iii-festival-de-quadrilhas-juninas-reune-tradicao-cultura-e-grande-publico-em-rodrigues-alves/",
@@ -32389,12 +32673,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/83e1d7fd-960a-42b7-b11c-bb895c6af5b4.webp",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/83e1d7fd-960a-42b7-b11c-bb895c6af5b4.webp",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/07/83e1d7fd-960a-42b7-b11c-bb895c6af5b4.webp",
+    "imageCredit": "Jurua 24 Horas",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 0,
@@ -32430,9 +32714,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: III Festival de Quadrilhas Juninas reúne tradição, cultura e grande público em Rodrigues Alves"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Jurua 24 Horas publicou em 13 de jul de 2026: III Festival de Quadrilhas Juninas reúne tradição, cultura e grande público em Rodrigues Alves.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -32442,7 +32727,8 @@ window.NEWS_DATA = [
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": true,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
+    "editorialLocalTier": 3,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/",
@@ -32534,12 +32820,12 @@ window.NEWS_DATA = [
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/w1oifhbvni199vl9819q-1.jpg",
+    "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/w1oifhbvni199vl9819q-1.jpg",
+    "sourceImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/w1oifhbvni199vl9819q-1.jpg",
+    "imageCredit": "Voz do Norte",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
     "priority": 965,
@@ -32575,9 +32861,10 @@ window.NEWS_DATA = [
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Revalida 2026/1: divulgado resultado final da primeira etapa do exame e o gabarito definitivo da prova objetiva"
     },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "imageQuality": "imagem-da-pagina-fonte",
     "body": [
       "Voz do Norte publicou em 12 de jul de 2026: Revalida 2026/1: divulgado resultado final da primeira etapa do exame e o gabarito definitivo da prova objetiva.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -32587,7 +32874,8 @@ window.NEWS_DATA = [
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": true,
     "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
+    "editorialLocalTier": 0,
+    "imageLabel": "Imagem relacionada à matéria"
   },
   {
     "id": "https://portalacre.com.br/2026/07/revalida-2026-divulgado-resultado-final-da-primeira-etapa-do-exame/",
