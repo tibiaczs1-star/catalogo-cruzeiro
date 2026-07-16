@@ -52,6 +52,14 @@ main, footer { width: min(100%, 720px); margin-inline: auto; }
 h1 { max-width: 570px; margin: 0; color: var(--navy); font: 800 clamp(43px, 13vw, 72px)/.9 var(--display); letter-spacing: -.045em; }
 .edition-heading > p:last-child { max-width: 540px; margin: 18px 0 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
 
+.instagram-follow-card { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 16px 18px 2px; padding: 15px; border: 1px solid rgba(217, 34, 42, .16); border-radius: 10px; background: linear-gradient(135deg, #fff7f8, #f4f7ff); box-shadow: 0 12px 30px rgba(7, 26, 61, .08); }
+.instagram-follow-card div { min-width: 0; }
+.instagram-follow-card span { display: block; margin-bottom: 4px; color: var(--red); font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.instagram-follow-card strong { display: block; color: var(--navy); font: 900 20px/1.05 var(--sans); letter-spacing: -.02em; }
+.instagram-follow-card p { margin: 6px 0 0; color: var(--muted); font-size: 12px; font-weight: 700; line-height: 1.45; }
+.instagram-follow-card a { flex: 0 0 auto; display: inline-flex; min-height: 42px; align-items: center; justify-content: center; padding: 0 14px; border-radius: 999px; background: var(--red); color: #fff; font-size: 12px; font-weight: 900; text-decoration: none; }
+.instagram-follow-card a:focus-visible { outline: 3px solid rgba(217, 34, 42, .25); outline-offset: 3px; }
+
 .new-news-notice:focus-visible, .story-link:focus-visible, .bottom-nav button:focus-visible, .load-more:focus-visible, #newsFeed:focus-visible { outline: 3px solid rgba(15, 75, 201, .35); outline-offset: 3px; }
 
 .feed-tools { position: fixed; right: 0; bottom: calc(64px + env(safe-area-inset-bottom)); left: 0; z-index: 11; width: min(100%, 720px); margin-inline: auto; padding: 12px 18px; border-top: 1px solid var(--line); background: rgba(255, 255, 255, .98); box-shadow: 0 -12px 28px rgba(7, 26, 61, .1); backdrop-filter: blur(18px); animation: toolIn .18s ease-out; }
@@ -139,6 +147,10 @@ footer p { margin: 14px 0 0; color: rgba(255, 255, 255, .7); font: 700 12px/1.5 
   .app-header, main, footer { width: min(100%, 720px); margin-inline: auto; }
   main { background: #fff; }
   .app-header { box-shadow: 0 0 40px rgba(7, 26, 61, .08); }
+}
+@media (max-width: 430px) {
+  .instagram-follow-card { align-items: stretch; flex-direction: column; }
+  .instagram-follow-card a { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

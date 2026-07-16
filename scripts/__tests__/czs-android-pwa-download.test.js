@@ -34,6 +34,8 @@ test("shell do app declara manifesto, icones e tema", () => {
   assert.match(html, /<link rel="apple-touch-icon"[^>]+href="\/assets\/icon-192\.png"/);
   assert.match(html, /class="app-footer-brand"/);
   assert.doesNotMatch(html, /<footer>[\s\S]*<img/);
+  assert.match(html, /class="instagram-follow-card"/);
+  assert.match(html, /https:\/\/www\.instagram\.com\/catalogo_czs_\//);
 });
 
 test("service worker usa stale-while-revalidate no shell e rede primeiro nas noticias", () => {
@@ -81,6 +83,9 @@ test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia blo
   assert.match(html, /id="androidDownloadMeta"[^>]*>Versão 1\.0\.0 · Em preparação</);
   assert.match(html, /android-download\.js/);
   assert.match(html, /@media\(max-width:760px\)[\s\S]*\.android-download-bar/);
+  assert.match(html, /class="instagram-site-highlight"/);
+  assert.match(html, /Seguir no Instagram/);
+  assert.match(html, /https:\/\/www\.instagram\.com\/catalogo_czs_\//);
 });
 
 test("metadados do APK publicado descrevem o arquivo real", () => {

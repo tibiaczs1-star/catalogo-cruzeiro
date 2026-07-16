@@ -17,12 +17,17 @@
     .launch-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
     .launch-actions a{display:inline-flex;min-height:46px;align-items:center;justify-content:center;padding:0 16px;border-radius:8px;background:#fff;color:#071a3d;font-weight:900;text-decoration:none}
     .launch-actions a.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.32)}
+    .instagram-launch{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;padding:16px;border:1px solid #f4c5cb;border-radius:12px;background:linear-gradient(135deg,#fff7f8,#ffffff)}
+    .instagram-launch strong{display:block;color:#071a3d;font-size:22px}
+    .instagram-launch span{color:#d9222a;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .instagram-launch p{margin:4px 0 0;color:#5b6574;font-size:15px}
+    .instagram-launch a{display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:0 16px;border-radius:999px;background:#d9222a;color:#fff;font-weight:900;text-decoration:none}
     article{margin-top:20px;padding:24px;border:1px solid #dfe4eb;border-radius:12px;background:#fff}
     article p{font-size:17px;line-height:1.72;color:#293443}
     .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
     .facts div{border:1px solid #dfe4eb;border-radius:10px;padding:14px;background:#f9fbff}
     .facts strong{display:block;color:#071a3d;margin-bottom:5px}
-    @media(max-width:720px){.facts{grid-template-columns:1fr}.launch-hero,article{padding:18px}}
+    @media(max-width:720px){.facts{grid-template-columns:1fr}.launch-hero,article{padding:18px}.instagram-launch{align-items:stretch;flex-direction:column}.instagram-launch a{width:100%}}
   </style>
 </head>
 <body>
@@ -39,6 +44,14 @@
 
     <article>
       <p>O Catálogo CZS lança sua primeira versão Android com foco no leitor que acompanha Cruzeiro do Sul, Vale do Juruá e Acre pelo celular. A proposta é simples: abrir o aplicativo e ver as notícias mais recentes, vídeos e editorias públicas, sem precisar procurar em várias páginas.</p>
+      <div class="instagram-launch" aria-label="Instagram oficial do Catálogo CZS">
+        <div>
+          <span>Siga também no Instagram</span>
+          <strong>@catalogo_czs_</strong>
+          <p>Chamadas rápidas, vídeos, bastidores públicos e atualizações do jornal online.</p>
+        </div>
+        <a href="https://www.instagram.com/catalogo_czs_/" target="_blank" rel="noopener">Seguir agora</a>
+      </div>
       <p>Nesta fase, o app não envia notificações push. Ele mostra aviso interno quando novas notícias chegam enquanto o leitor está usando o aplicativo. A rotina de bastidores, Cheffe Call, escritórios e agentes segue reservada ao site normal e às áreas internas da equipe.</p>
       <div class="facts">
         <div><strong>Leve</strong><span>APK com menos de 1 MB.</span></div>
