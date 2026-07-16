@@ -63,6 +63,18 @@ function serviceRequestError() {
   return error;
 }
 
+function guestAuthRequiredError() {
+  const error = new Error("Guest reservation authentication is required");
+  error.code = "GUEST_AUTH_REQUIRED";
+  return error;
+}
+
+function guestAuthFailedError() {
+  const error = new Error("Guest reservation authentication failed");
+  error.code = "GUEST_AUTH_FAILED";
+  return error;
+}
+
 function validTime(value) {
   return typeof value === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(value) ? value : "";
 }
@@ -218,6 +230,24 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
     return reservation;
   }
 
+  function reservationForGuestPortal(property, reservationId) {
+    const reservation = state.reservations.find((row) => (
+      row.id === reservationId && row.tenantId === property.tenantId && row.propertyId === property.id
+    ));
+    if (!reservation || !["confirmed", "checked_in"].includes(reservation.status)) throw guestAuthFailedError();
+    const guest = state.guests.find((row) => row.id === reservation.guestId && row.tenantId === property.tenantId && row.propertyId === property.id);
+    if (!guest) throw guestAuthFailedError();
+    return { reservation, guest };
+  }
+
+  function verifyGuestReservationAccess(property, reservationId, reservationAccessToken) {
+    if (!reservationAccessToken) throw guestAuthRequiredError();
+    const { reservation } = reservationForGuestPortal(property, reservationId);
+    if (reservation.status !== "checked_in") throw serviceRequestError();
+    if (reservationAccessToken !== reservation.accessCode) throw guestAuthFailedError();
+    return reservation;
+  }
+
   function photosForRoom(tenantId, propertyId, roomId) {
     const photos = state.roomPhotos
       .filter((photo) => photo.tenantId === tenantId && photo.propertyId === propertyId && photo.roomId === roomId)
@@ -313,6 +343,24 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
       };
     },
 
+    async createGuestPortalSession({ propertySlug, reservationId, guestEmail, reservationPassword, provider = "reservation_password" }) {
+      const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
+      if (!property) return null;
+      const { reservation, guest } = reservationForGuestPortal(property, reservationId);
+      const emailMatches = typeof guestEmail === "string" && guestEmail.trim().toLowerCase() === String(guest.email ?? "").toLowerCase();
+      const passwordMatches = typeof reservationPassword === "string" && reservationPassword.trim() === reservation.accessCode;
+      if (!emailMatches && !passwordMatches) throw guestAuthFailedError();
+      return {
+        propertySlug: property.slug,
+        reservationId: reservation.id,
+        roomId: reservation.roomId,
+        status: reservation.status,
+        guestName: guest.name,
+        provider: emailMatches && provider === "google" ? "google" : "reservation_password",
+        accessToken: reservation.accessCode,
+      };
+    },
+
     async distributeHousekeepingWork({ tenantId, propertyId, date = state.generatedAt, actor }) {
       const property = scopedProperty(tenantId, propertyId);
       if (!property) return null;
@@ -346,12 +394,12 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
       };
     },
 
-    async createGuestServiceRequest({ propertySlug, reservationId, requestType, awayFrom, awayUntil, note }) {
+    async createGuestServiceRequest({ propertySlug, reservationId, reservationAccessToken, requestType, awayFrom, awayUntil, note }) {
       const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
       if (!property) return null;
       const taskType = String(requestType ?? "").trim().toLowerCase();
       if (!HOUSEKEEPING_TASK_TYPES.has(taskType)) throw new RangeError("housekeeping task type is unknown");
-      const reservation = activeReservationForRequest(property, reservationId);
+      const reservation = verifyGuestReservationAccess(property, reservationId, reservationAccessToken);
       return createHousekeepingTask({
         tenantId: property.tenantId,
         propertyId: property.id,
@@ -367,10 +415,10 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
       });
     },
 
-    async createRoomServiceOrder({ propertySlug, reservationId, items, note }) {
+    async createRoomServiceOrder({ propertySlug, reservationId, reservationAccessToken, items, note }) {
       const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
       if (!property) return null;
-      const reservation = activeReservationForRequest(property, reservationId);
+      const reservation = verifyGuestReservationAccess(property, reservationId, reservationAccessToken);
       const menu = new Map(scopedRows("foodMenu", property.tenantId, property.id).map((item) => [item.id, item]));
       const normalizedItems = (Array.isArray(items) ? items : []).map((item) => {
         const menuItem = menu.get(String(item.itemId ?? ""));
@@ -398,10 +446,10 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
       return copy(order);
     },
 
-    async createGuestMessage({ propertySlug, reservationId, target = "frontdesk", message }) {
+    async createGuestMessage({ propertySlug, reservationId, reservationAccessToken, target = "frontdesk", message }) {
       const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
       if (!property) return null;
-      const reservation = activeReservationForRequest(property, reservationId);
+      const reservation = verifyGuestReservationAccess(property, reservationId, reservationAccessToken);
       if (typeof message !== "string" || !message.trim()) throw new RangeError("message cannot be empty");
       const row = {
         id: `guest-message-${state.guestMessages.length + 1}`,
@@ -523,6 +571,7 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
           taxes: validated.taxes,
           total: roomType.nightlyRate * validated.nights + validated.extras + validated.taxes,
           status: "confirmed",
+          accessCode: `RES-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
         };
         state.reservations.push(reservation);
         audit({ tenantId, propertyId, action: "reservation.created", entityId: reservation.id, actor });
@@ -604,6 +653,7 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
           taxes: validated.taxes,
           total: roomType.nightlyRate * validated.nights + validated.extras + validated.taxes,
           status: "checked_in",
+          accessCode: `BAL-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
           source: "frontdesk",
         };
         state.reservations.push(reservation);

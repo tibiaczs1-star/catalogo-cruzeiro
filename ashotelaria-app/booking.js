@@ -5,6 +5,7 @@ const booking = {
   propertySlug: propertySlugFromLocation(),
   property: null,
   portal: null,
+  guestSession: null,
   search: null,
   roomType: null,
   idempotencyKey: null,
@@ -23,6 +24,9 @@ function initBooking() {
     guestForm: document.querySelector("#guest-form"),
     confirmation: document.querySelector("#confirmation-step"),
     error: document.querySelector("#booking-error"),
+    guestLoginForm: document.querySelector("#guest-login-form"),
+    googleLoginButton: document.querySelector("#google-login-button"),
+    guestPortalContent: document.querySelector("#guest-portal-content"),
     cleaningForm: document.querySelector("#cleaning-form"),
     roomServiceForm: document.querySelector("#room-service-form"),
     guestMessageForm: document.querySelector("#guest-message-form"),
@@ -32,6 +36,8 @@ function initBooking() {
   });
   elements.availabilityForm.addEventListener("submit", searchAvailability);
   elements.guestForm.addEventListener("submit", createReservation);
+  elements.guestLoginForm?.addEventListener("submit", loginGuestPortal);
+  elements.googleLoginButton?.addEventListener("click", () => loginGuestPortal(null, "google"));
   elements.cleaningForm?.addEventListener("submit", scheduleCleaning);
   elements.roomServiceForm?.addEventListener("submit", orderRoomService);
   elements.guestMessageForm?.addEventListener("submit", sendGuestMessage);
@@ -67,10 +73,47 @@ async function request(path, options = {}) {
       INVALID_IDEMPOTENCY_KEY: "Atualize a página e tente novamente.",
       NOT_FOUND: "Hotel ou acomodação não encontrado.",
       SERVICE_REQUEST_NOT_ALLOWED: "Este serviço exige uma reserva hospedada no hotel.",
+      GUEST_AUTH_REQUIRED: "Entre no portal do hóspede com sua reserva antes de solicitar serviços.",
+      GUEST_AUTH_FAILED: "Não foi possível validar esta reserva. Confira e-mail ou senha da reserva.",
     };
     throw new Error(messages[payload?.error?.code] ?? "Não foi possível concluir. Tente novamente.");
   }
   return payload;
+}
+
+async function loginGuestPortal(event, provider = "reservation_password") {
+  event?.preventDefault?.();
+  const form = elements.guestLoginForm;
+  const values = Object.fromEntries(new FormData(form));
+  const body = {
+    propertySlug: booking.propertySlug,
+    reservationId: values.reservationId,
+    guestEmail: values.guestEmail,
+    reservationPassword: values.reservationPassword,
+    provider,
+  };
+  showPortalMessage("");
+  setBusy(form, true);
+  try {
+    const payload = await request("/public/guest-login", { method: "POST", body: JSON.stringify(body) });
+    booking.guestSession = payload.guestSession;
+    elements.guestPortalContent.hidden = false;
+    showPortalMessage(`Portal liberado para ${booking.guestSession.guestName}. Quarto ${booking.guestSession.roomId}.`);
+    elements.guestPortalContent.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (error) {
+    showPortalMessage(error.message, true);
+  } finally {
+    setBusy(form, false);
+  }
+}
+
+function requireGuestSession() {
+  if (!booking.guestSession?.accessToken) {
+    showPortalMessage("Entre no portal do hóspede com sua reserva antes de solicitar serviços.", true);
+    elements.guestLoginForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    return null;
+  }
+  return booking.guestSession;
 }
 
 async function loadProperty() {
@@ -183,8 +226,15 @@ function renderConfirmation(reservation) {
 
 async function scheduleCleaning(event) {
   event.preventDefault();
+  const guestSession = requireGuestSession();
+  if (!guestSession) return;
   const form = event.currentTarget;
-  const body = { propertySlug: booking.propertySlug, ...Object.fromEntries(new FormData(form)) };
+  const body = {
+    propertySlug: booking.propertySlug,
+    reservationId: guestSession.reservationId,
+    reservationAccessToken: guestSession.accessToken,
+    ...Object.fromEntries(new FormData(form)),
+  };
   showPortalMessage("");
   setBusy(form, true);
   try {
@@ -199,11 +249,14 @@ async function scheduleCleaning(event) {
 
 async function orderRoomService(event) {
   event.preventDefault();
+  const guestSession = requireGuestSession();
+  if (!guestSession) return;
   const form = event.currentTarget;
   const values = Object.fromEntries(new FormData(form));
   const body = {
     propertySlug: booking.propertySlug,
-    reservationId: values.reservationId,
+    reservationId: guestSession.reservationId,
+    reservationAccessToken: guestSession.accessToken,
     note: values.note,
     items: [{ itemId: values.itemId, quantity: Number(values.quantity || 1) }],
   };
@@ -221,8 +274,15 @@ async function orderRoomService(event) {
 
 async function sendGuestMessage(event) {
   event.preventDefault();
+  const guestSession = requireGuestSession();
+  if (!guestSession) return;
   const form = event.currentTarget;
-  const body = { propertySlug: booking.propertySlug, ...Object.fromEntries(new FormData(form)) };
+  const body = {
+    propertySlug: booking.propertySlug,
+    reservationId: guestSession.reservationId,
+    reservationAccessToken: guestSession.accessToken,
+    ...Object.fromEntries(new FormData(form)),
+  };
   showPortalMessage("");
   setBusy(form, true);
   try {

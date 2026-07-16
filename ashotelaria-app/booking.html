@@ -81,17 +81,27 @@
       </div>
     </section>
 
-    <section class="client-portal" aria-label="Portal do cliente">
+    <section class="client-portal" aria-label="Portal do hóspede">
       <div class="client-portal__intro">
-        <p class="eyebrow">Portal do cliente</p>
-        <h2>Serviços do quarto, limpeza e parceiros.</h2>
-        <p>Acesso rápido para o hóspede pedir limpeza no horário que estiver fora, enviar chamado e comprar serviços do hotel.</p>
+        <p class="eyebrow">Portal do hóspede</p>
+        <h2>Entre com sua reserva para pedir serviços.</h2>
+        <p>Reserva online fica acima. Limpeza, comida no quarto e chamados são liberados somente para hóspede com reserva ativa no hotel.</p>
       </div>
 
-      <div class="portal-grid">
+      <form id="guest-login-form" class="portal-panel guest-login-panel" data-help="Autentica o hóspede pela reserva antes de liberar serviços do quarto.">
+        <h3>Entrar no portal do hóspede</h3>
+        <label><span>Reserva</span><input name="reservationId" placeholder="Código da reserva" data-help="Informe o código da sua reserva no hotel." required></label>
+        <label><span>E-mail do Google</span><input name="guestEmail" type="email" placeholder="seuemail@gmail.com" data-help="Use o mesmo e-mail da reserva para entrar como Google."></label>
+        <label><span>Senha da reserva</span><input name="reservationPassword" placeholder="Senha recebida com a reserva" data-help="Senha/código entregue junto com a reserva ou no balcão."></label>
+        <div class="button-row">
+          <button class="button button--primary" type="submit">Entrar no portal</button>
+          <button class="button button--secondary" type="button" id="google-login-button">Entrar com Google</button>
+        </div>
+      </form>
+
+      <div id="guest-portal-content" class="portal-grid" hidden>
         <form id="cleaning-form" class="portal-panel" data-help="Agenda limpeza diária, limpeza final ou contagem de consumo para a governança.">
           <h3>Agendar limpeza</h3>
-          <label><span>Reserva</span><input name="reservationId" value="reservation-jurua-inhouse" data-help="Código da reserva hospedada no hotel." required></label>
           <label><span>Tipo</span><select name="requestType" data-help="Escolha o tipo de serviço que a camareira vai receber."><option value="daily_cleaning">Limpeza diária</option><option value="final_cleaning">Limpeza final</option><option value="consumption_count">Contagem de consumo</option></select></label>
           <div class="field-grid field-grid--compact">
             <label><span>Fora de</span><input name="awayFrom" type="time" value="10:00" data-help="Horário em que o hóspede estará fora do quarto."></label>
@@ -108,7 +118,6 @@
 
         <form id="room-service-form" class="portal-panel" data-help="Pedido de fast food e itens parceiros para entrega no quarto.">
           <h3>Pedir comida no quarto</h3>
-          <label><span>Reserva</span><input name="reservationId" value="reservation-jurua-inhouse" data-help="Reserva ativa que receberá o pedido." required></label>
           <label><span>Item</span><select name="itemId" id="food-menu-select" data-help="Cardápio do parceiro ou cozinha do hotel."></select></label>
           <label><span>Quantidade</span><input name="quantity" type="number" min="1" max="20" value="1"></label>
           <label><span>Observação</span><input name="note" placeholder="Ex.: sem cebola"></label>
@@ -117,7 +126,6 @@
 
         <form id="guest-message-form" class="portal-panel" data-help="Chamado direto para recepção, governança ou gerência.">
           <h3>Mensagem para o hotel</h3>
-          <label><span>Reserva</span><input name="reservationId" value="reservation-jurua-inhouse" required></label>
           <label><span>Destino</span><select name="target"><option value="frontdesk">Recepção</option><option value="housekeeping">Governança</option><option value="manager">Gerência</option></select></label>
           <label><span>Mensagem</span><textarea name="message" rows="4" placeholder="Digite seu chamado" required></textarea></label>
           <button class="button button--secondary" type="submit">Enviar mensagem</button>

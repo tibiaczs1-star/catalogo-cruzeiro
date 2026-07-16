@@ -377,10 +377,35 @@ test("manager distributes housekeeping workload and guest portal schedules clean
   assert.equal(distributed.res.json.created.length, 3);
   assert.equal(distributed.res.json.notifications.length, 3);
 
+  const blocked = await request(handler, "POST", `${BASE}/public/service-requests`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      requestType: "daily_cleaning",
+      awayFrom: "09:30",
+      awayUntil: "11:00",
+      note: "Estaremos fora para passeio",
+    },
+  });
+  assert.equal(blocked.res.statusCode, 401);
+  assert.equal(blocked.res.json.error.code, "GUEST_AUTH_REQUIRED");
+
+  const guestLogin = await request(handler, "POST", `${BASE}/public/guest-login`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      guestEmail: "maria@example.com",
+      provider: "google",
+    },
+  });
+  assert.equal(guestLogin.res.statusCode, 200, guestLogin.res.text);
+  assert.equal(guestLogin.res.json.guestSession.roomId, "room-201");
+
   const scheduled = await request(handler, "POST", `${BASE}/public/service-requests`, {
     body: {
       propertySlug: "hotel-jurua-palace",
       reservationId: "reservation-jurua-inhouse",
+      reservationAccessToken: guestLogin.res.json.guestSession.accessToken,
       requestType: "daily_cleaning",
       awayFrom: "09:30",
       awayUntil: "11:00",
@@ -408,16 +433,26 @@ test("public client portal lists discounted partners and blocks invalid service 
       awayUntil: "11:00",
     },
   });
-  assert.equal(invalid.res.statusCode, 409);
-  assert.equal(invalid.res.json.error.code, "SERVICE_REQUEST_NOT_ALLOWED");
+  assert.equal(invalid.res.statusCode, 401);
+  assert.equal(invalid.res.json.error.code, "GUEST_AUTH_REQUIRED");
 });
 
 test("client can order fast food and send messages while admin reads full overview", async () => {
   const { handler } = fixture();
+  const guestLogin = await request(handler, "POST", `${BASE}/public/guest-login`, {
+    body: {
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      reservationPassword: "JURUA-201",
+    },
+  });
+  assert.equal(guestLogin.res.statusCode, 200, guestLogin.res.text);
+
   const order = await request(handler, "POST", `${BASE}/public/room-service-orders`, {
     body: {
       propertySlug: "hotel-jurua-palace",
       reservationId: "reservation-jurua-inhouse",
+      reservationAccessToken: guestLogin.res.json.guestSession.accessToken,
       items: [{ itemId: "food-burger-combo", quantity: 1 }],
       note: "Enviar para o quarto",
     },
@@ -430,6 +465,7 @@ test("client can order fast food and send messages while admin reads full overvi
     body: {
       propertySlug: "hotel-jurua-palace",
       reservationId: "reservation-jurua-inhouse",
+      reservationAccessToken: guestLogin.res.json.guestSession.accessToken,
       target: "housekeeping",
       message: "Pode trazer toalhas",
     },

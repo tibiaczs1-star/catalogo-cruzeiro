@@ -97,6 +97,23 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         return true;
       }
 
+      if (method === "POST" && routePath === "/public/guest-login") {
+        const body = await readJson(req, bodyLimit);
+        if (typeof store.createGuestPortalSession !== "function") {
+          throw httpError("CONFIGURATION_ERROR", "Guest portal unavailable", 503);
+        }
+        const guestSession = await store.createGuestPortalSession({
+          propertySlug: body.propertySlug,
+          reservationId: body.reservationId,
+          guestEmail: body.guestEmail,
+          reservationPassword: body.reservationPassword,
+          provider: body.provider,
+        });
+        if (!guestSession) throw httpError("NOT_FOUND", "Property not found", 404);
+        sendJson(res, 200, { guestSession });
+        return true;
+      }
+
       if (method === "POST" && routePath === "/public/service-requests") {
         const body = await readJson(req, bodyLimit);
         if (typeof store.createGuestServiceRequest !== "function") {
@@ -105,6 +122,7 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         const result = await store.createGuestServiceRequest({
           propertySlug: body.propertySlug,
           reservationId: body.reservationId,
+          reservationAccessToken: body.reservationAccessToken,
           requestType: body.requestType,
           awayFrom: body.awayFrom,
           awayUntil: body.awayUntil,
@@ -123,6 +141,7 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         const order = await store.createRoomServiceOrder({
           propertySlug: body.propertySlug,
           reservationId: body.reservationId,
+          reservationAccessToken: body.reservationAccessToken,
           items: body.items,
           note: body.note,
         });
@@ -139,6 +158,7 @@ function createASHotelariaHandler({ store, authService, config = {} } = {}) {
         const message = await store.createGuestMessage({
           propertySlug: body.propertySlug,
           reservationId: body.reservationId,
+          reservationAccessToken: body.reservationAccessToken,
           target: body.target,
           message: body.message,
         });
@@ -639,6 +659,8 @@ function normalizeError(error) {
     ROOM_NOT_READY: 409,
     INVALID_MAINTENANCE_STATUS: 400,
     SERVICE_REQUEST_NOT_ALLOWED: 409,
+    GUEST_AUTH_REQUIRED: 401,
+    GUEST_AUTH_FAILED: 401,
   };
   if (authStatuses[error?.code]) {
     const code = error.code;
@@ -661,6 +683,8 @@ function normalizeError(error) {
       ROOM_NOT_READY: "Room is not ready for check-in",
       INVALID_MAINTENANCE_STATUS: "Maintenance status is invalid",
       SERVICE_REQUEST_NOT_ALLOWED: "Service request is not allowed for this reservation",
+      GUEST_AUTH_REQUIRED: "Guest reservation authentication is required",
+      GUEST_AUTH_FAILED: "Guest reservation authentication failed",
     };
     return { status, code, message: messages[code] };
   }

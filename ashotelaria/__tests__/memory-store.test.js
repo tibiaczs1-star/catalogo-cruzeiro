@@ -90,6 +90,7 @@ test("createSeed is deterministic and includes isolated demo organizations and h
       nightlyRate: 18_900,
       total: 37_800,
       status: "confirmed",
+      accessCode: "JURUA-102",
     },
   );
 });
@@ -318,9 +319,29 @@ test("housekeeping distribution balances daily, final cleaning and consumption c
 
 test("guest schedules cleaning while away and assigned maid sees the request metadata", async () => {
   const store = createMemoryStore(createSeed("2026-07-14"));
+  const guestSession = await store.createGuestPortalSession({
+    propertySlug: "hotel-jurua-palace",
+    reservationId: "reservation-jurua-inhouse",
+    guestEmail: "maria@example.com",
+    provider: "google",
+  });
+  assert.equal(guestSession.roomId, "room-201");
+
+  await assert.rejects(
+    () => store.createGuestServiceRequest({
+      propertySlug: "hotel-jurua-palace",
+      reservationId: "reservation-jurua-inhouse",
+      requestType: "daily_cleaning",
+      awayFrom: "10:00",
+      awayUntil: "12:00",
+    }),
+    { code: "GUEST_AUTH_REQUIRED" },
+  );
+
   const created = await store.createGuestServiceRequest({
     propertySlug: "hotel-jurua-palace",
     reservationId: "reservation-jurua-inhouse",
+    reservationAccessToken: guestSession.accessToken,
     requestType: "daily_cleaning",
     awayFrom: "10:00",
     awayUntil: "12:00",
@@ -359,9 +380,15 @@ test("client portal exposes discounted local partners by category", async () => 
 
 test("client can order room fast food and admin overview shows messages, calls and charts", async () => {
   const store = createMemoryStore(createSeed("2026-07-14"));
+  const guestSession = await store.createGuestPortalSession({
+    propertySlug: "hotel-jurua-palace",
+    reservationId: "reservation-jurua-inhouse",
+    reservationPassword: "JURUA-201",
+  });
   const order = await store.createRoomServiceOrder({
     propertySlug: "hotel-jurua-palace",
     reservationId: "reservation-jurua-inhouse",
+    reservationAccessToken: guestSession.accessToken,
     items: [{ itemId: "food-burger-combo", quantity: 2 }],
     note: "Entregar sem cebola",
   });
@@ -372,6 +399,7 @@ test("client can order room fast food and admin overview shows messages, calls a
   const message = await store.createGuestMessage({
     propertySlug: "hotel-jurua-palace",
     reservationId: "reservation-jurua-inhouse",
+    reservationAccessToken: guestSession.accessToken,
     target: "frontdesk",
     message: "Preciso de toalhas extras",
   });

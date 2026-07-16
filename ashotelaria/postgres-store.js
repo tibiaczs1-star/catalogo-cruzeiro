@@ -264,11 +264,27 @@ function serviceRequestError() {
   return error;
 }
 
+function guestAuthRequiredError() {
+  const error = new Error("Guest reservation authentication is required");
+  error.code = "GUEST_AUTH_REQUIRED";
+  return error;
+}
+
+function guestAuthFailedError() {
+  const error = new Error("Guest reservation authentication failed");
+  error.code = "GUEST_AUTH_FAILED";
+  return error;
+}
+
 function validTime(value) {
   const text = String(value ?? "").trim();
   if (!text) return "";
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(text)) throw new RangeError("time must use HH:MM");
   return text;
+}
+
+function reservationAccessCode(prefix = "RES") {
+  return `${prefix}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
 }
 
 function normalizeIdempotencyKey(value) {
@@ -440,6 +456,32 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
       return { property: propertyFromRow(property), partners: partners.rows.map(partnerFromRow), foodMenu: foodMenu.rows.map(foodFromRow) };
     },
 
+    async createGuestPortalSession({ propertySlug, reservationId, guestEmail, reservationPassword, provider = "reservation_password" }) {
+      const result = await pool.query(
+        `SELECT p.slug, rv.id, rv.status, rv.guest_access_code, rr.room_id, g.name, g.email
+           FROM properties p
+           JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
+           JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
+           JOIN guests g ON g.tenant_id = rv.tenant_id AND g.property_id = rv.property_id AND g.id = rv.guest_id
+          WHERE p.slug = $1 AND rv.id = $2 AND rv.status IN ('confirmed', 'checked_in')`,
+        [propertySlug, reservationId],
+      );
+      const row = result.rows[0];
+      if (!row) throw guestAuthFailedError();
+      const emailMatches = typeof guestEmail === "string" && guestEmail.trim().toLowerCase() === String(row.email ?? "").toLowerCase();
+      const passwordMatches = typeof reservationPassword === "string" && reservationPassword.trim() === row.guest_access_code;
+      if (!emailMatches && !passwordMatches) throw guestAuthFailedError();
+      return {
+        propertySlug: row.slug,
+        reservationId: row.id,
+        roomId: row.room_id,
+        status: row.status,
+        guestName: row.name,
+        provider: emailMatches && provider === "google" ? "google" : "reservation_password",
+        accessToken: row.guest_access_code,
+      };
+    },
+
     async distributeHousekeepingWork({ tenantId, propertyId, date = operationalDate(now()), actor }) {
       const client = await pool.connect();
       const created = [];
@@ -527,14 +569,15 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
       }
     },
 
-    async createGuestServiceRequest({ propertySlug, reservationId, requestType, awayFrom, awayUntil, note }) {
+    async createGuestServiceRequest({ propertySlug, reservationId, reservationAccessToken, requestType, awayFrom, awayUntil, note }) {
       const taskType = String(requestType ?? "").trim().toLowerCase();
       if (!HOUSEKEEPING_TASK_TYPES.has(taskType)) throw new RangeError("housekeeping task type is unknown");
+      if (!reservationAccessToken) throw guestAuthRequiredError();
       const client = await pool.connect();
       try {
         await client.query("BEGIN");
         const reservation = await client.query(
-          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id
+          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id, rv.guest_access_code
              FROM properties p
              JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
              JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
@@ -544,6 +587,7 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         );
         const row = reservation.rows[0];
         if (!row) throw serviceRequestError();
+        if (reservationAccessToken !== row.guest_access_code) throw guestAuthFailedError();
         const maid = await client.query(
           `SELECT username, role FROM credential_profiles WHERE tenant_id = $1 AND property_id = $2 AND role IN ('camareira', 'supervisor_governanca', 'administrador') ORDER BY CASE role WHEN 'camareira' THEN 0 WHEN 'supervisor_governanca' THEN 1 ELSE 2 END LIMIT 1`,
           [row.tenant_id, row.property_id],
@@ -568,12 +612,13 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
       }
     },
 
-    async createRoomServiceOrder({ propertySlug, reservationId, items, note }) {
+    async createRoomServiceOrder({ propertySlug, reservationId, reservationAccessToken, items, note }) {
+      if (!reservationAccessToken) throw guestAuthRequiredError();
       const client = await pool.connect();
       try {
         await client.query("BEGIN");
         const reservation = await client.query(
-          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id
+          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id, rv.guest_access_code
              FROM properties p
              JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
              JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
@@ -582,6 +627,7 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         );
         const row = reservation.rows[0];
         if (!row) throw serviceRequestError();
+        if (reservationAccessToken !== row.guest_access_code) throw guestAuthFailedError();
         const normalizedItems = [];
         for (const item of Array.isArray(items) ? items : []) {
           const quantity = Number(item.quantity);
@@ -610,13 +656,14 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
       }
     },
 
-    async createGuestMessage({ propertySlug, reservationId, target = "frontdesk", message }) {
+    async createGuestMessage({ propertySlug, reservationId, reservationAccessToken, target = "frontdesk", message }) {
       if (typeof message !== "string" || !message.trim()) throw new RangeError("message cannot be empty");
+      if (!reservationAccessToken) throw guestAuthRequiredError();
       const client = await pool.connect();
       try {
         await client.query("BEGIN");
         const reservation = await client.query(
-          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id
+          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id, rv.guest_access_code
              FROM properties p
              JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
              JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
@@ -625,6 +672,7 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         );
         const row = reservation.rows[0];
         if (!row) throw serviceRequestError();
+        if (reservationAccessToken !== row.guest_access_code) throw guestAuthFailedError();
         const inserted = await client.query(
           `INSERT INTO guest_messages (id, tenant_id, property_id, reservation_id, room_id, target, message, status)
            VALUES ($1, $2, $3, $4, $5, $6, $7, 'open')
@@ -751,11 +799,12 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         const inserted = await client.query(
           `INSERT INTO reservations
              (id, tenant_id, property_id, guest_id, room_type_id, check_in, check_out, adults, children,
-              nightly_rate_cents, extras_cents, taxes_cents, total_cents, status)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'confirmed')
+              nightly_rate_cents, extras_cents, taxes_cents, total_cents, status, guest_access_code)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'confirmed', $14)
            RETURNING *`,
           [reservationId, tenantId, propertyId, guestId, roomType.id, validated.checkIn, validated.checkOut,
-            validated.adults, validated.children, validated.nightlyRate, validated.extras, validated.taxes, validated.total],
+            validated.adults, validated.children, validated.nightlyRate, validated.extras, validated.taxes, validated.total,
+            reservationAccessCode("RES")],
         );
         await client.query(
           `INSERT INTO reservation_rooms (id, tenant_id, property_id, reservation_id, room_id)
@@ -868,11 +917,12 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         const inserted = await client.query(
           `INSERT INTO reservations
              (id, tenant_id, property_id, guest_id, room_type_id, check_in, check_out, adults, children,
-              nightly_rate_cents, extras_cents, taxes_cents, total_cents, status)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'checked_in')
+              nightly_rate_cents, extras_cents, taxes_cents, total_cents, status, guest_access_code)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'checked_in', $14)
            RETURNING *`,
           [reservationId, tenantId, propertyId, guestId, room.room_type_id, validated.checkIn, validated.checkOut,
-            validated.adults, validated.children, validated.nightlyRate, validated.extras, validated.taxes, validated.total],
+            validated.adults, validated.children, validated.nightlyRate, validated.extras, validated.taxes, validated.total,
+            reservationAccessCode("BAL")],
         );
         await client.query(
           `INSERT INTO reservation_rooms (id, tenant_id, property_id, reservation_id, room_id)

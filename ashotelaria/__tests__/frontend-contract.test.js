@@ -134,15 +134,23 @@ test("reserva publica oferece ajuda atrasada inclusive nas opcoes dinamicas", as
   assert.match(script, /650\)/);
 });
 
-test("portal do cliente oferece limpeza agendada e parceiros com desconto", async () => {
+test("portal do hospede exige login de reserva antes de servicos", async () => {
   const [html, script] = await Promise.all([source("booking.html"), source("booking.js")]);
 
-  assert.match(html, /Portal do cliente/);
+  assert.match(html, /Portal do hóspede/);
+  assert.match(html, /Entrar no portal do hóspede/);
+  assert.match(html, /Entrar com Google/);
+  assert.match(html, /Senha da reserva/);
   assert.match(html, /Agendar limpeza/);
   assert.match(html, /Parceiros com desconto/);
+  assert.doesNotMatch(html, /value="reservation-jurua-inhouse"/);
   assert.match(script, /\/public\/client-portal/);
+  assert.match(script, /\/public\/guest-login/);
   assert.match(script, /\/public\/service-requests/);
+  assert.match(script, /guestSession/);
+  assert.match(script, /reservationAccessToken/);
   assert.match(script, /loadClientPortal/);
+  assert.match(script, /loginGuestPortal/);
   assert.match(script, /scheduleCleaning/);
   assert.match(script, /renderPartners/);
   assert.match(script, /orderRoomService/);

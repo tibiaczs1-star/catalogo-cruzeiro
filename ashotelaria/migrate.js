@@ -92,12 +92,12 @@ async function bootstrapMinimum(client, seed) {
     await client.query(
       `INSERT INTO reservations
         (id, tenant_id, property_id, guest_id, room_type_id, check_in, check_out, adults, children,
-         nightly_rate_cents, extras_cents, taxes_cents, total_cents, status)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 0, 0, $11, $12)
-       ON CONFLICT (id) DO NOTHING`,
+         nightly_rate_cents, extras_cents, taxes_cents, total_cents, status, guest_access_code)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 0, 0, $11, $12, $13)
+       ON CONFLICT (id) DO UPDATE SET guest_access_code = COALESCE(reservations.guest_access_code, EXCLUDED.guest_access_code)`,
       [reservation.id, reservation.tenantId, reservation.propertyId, reservation.guestId,
         reservation.roomTypeId, reservation.checkIn, reservation.checkOut, reservation.adults,
-        reservation.children, reservation.nightlyRate, reservation.total, reservation.status],
+        reservation.children, reservation.nightlyRate, reservation.total, reservation.status, reservation.accessCode ?? null],
     );
     await client.query(
       "INSERT INTO reservation_rooms (id, tenant_id, property_id, reservation_id, room_id) VALUES ($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING",
