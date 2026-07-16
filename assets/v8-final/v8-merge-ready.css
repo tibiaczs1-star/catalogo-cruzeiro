@@ -14273,3 +14273,472 @@ body.v8-merge-ready #heroSide .v8-rail-story {
     aspect-ratio: 16 / 10 !important;
   }
 }
+
+/* 20260716: Raiane atendimento vivo, bonito e eficaz. */
+body.v8-merge-ready .assistant-card.aylla-card.open {
+  width: min(392px, calc(100vw - 28px)) !important;
+  right: 22px !important;
+  bottom: 22px !important;
+  border: 1px solid rgba(5, 27, 74, .22) !important;
+  border-top: 5px solid var(--v8-yellow, #ffd000) !important;
+  border-radius: 22px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(247, 251, 255, .98)) !important;
+  box-shadow:
+    0 26px 80px rgba(3, 18, 52, .22),
+    0 0 0 1px rgba(255, 255, 255, .72) inset !important;
+  overflow: hidden !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .assistant-head {
+  min-height: 66px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 14px 12px !important;
+  border-bottom: 1px solid rgba(11, 42, 91, .10) !important;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 208, 0, .20), transparent 26%),
+    linear-gradient(135deg, #ffffff 0%, #f3f8ff 100%) !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .assistant-head strong {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #06235c !important;
+  font-family: var(--v8-robot, Inter, sans-serif) !important;
+  font-size: 20px !important;
+  font-weight: 1000 !important;
+  letter-spacing: .01em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .assistant-head strong::after {
+  content: "" !important;
+  width: 9px !important;
+  height: 9px !important;
+  border-radius: 999px !important;
+  background: #ffd000 !important;
+  box-shadow: 0 0 0 5px rgba(255, 208, 0, .18), 0 0 18px rgba(255, 208, 0, .70) !important;
+  animation: raianeLivePulse 1.8s ease-in-out infinite !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .assistant-head p {
+  display: block !important;
+  margin: 4px 0 0 !important;
+  color: #5b6680 !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  letter-spacing: .07em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open #assistantToggle {
+  min-height: 38px !important;
+  padding: 0 13px !important;
+  border: 1px solid rgba(8, 31, 84, .18) !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  color: #06235c !important;
+  box-shadow: 0 8px 20px rgba(8, 31, 84, .06) !important;
+  font-size: 11px !important;
+  font-weight: 1000 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .assistant-body {
+  display: grid !important;
+  gap: 10px !important;
+  max-height: min(650px, calc(100vh - 118px)) !important;
+  padding: 12px !important;
+  overflow: auto !important;
+  border-top: 0 !important;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%) !important;
+  scrollbar-width: thin !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-stage {
+  position: relative !important;
+  min-height: 186px !important;
+  display: grid !important;
+  grid-template-columns: 142px minmax(0, 1fr) !important;
+  gap: 10px !important;
+  align-items: stretch !important;
+  margin: 0 !important;
+  padding: 10px 10px 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(11, 42, 91, .12) !important;
+  border-radius: 18px !important;
+  background:
+    radial-gradient(circle at 19% 24%, rgba(255, 208, 0, .30), transparent 25%),
+    radial-gradient(circle at 86% 84%, rgba(255, 208, 0, .24), transparent 18%),
+    linear-gradient(135deg, #fdfefe 0%, #eef6ff 100%) !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-stage::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 22px !important;
+  bottom: 20px !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 999px !important;
+  background: radial-gradient(circle, #fff7c7 0%, #ffd000 54%, rgba(255, 208, 0, .10) 72%) !important;
+  box-shadow: 0 0 22px rgba(255, 208, 0, .58) !important;
+  opacity: .68 !important;
+  animation: raianeOrbFloat 4s ease-in-out infinite !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-figure-wrap {
+  position: relative !important;
+  display: grid !important;
+  place-items: end center !important;
+  min-width: 0 !important;
+  z-index: 1 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-glow {
+  position: absolute !important;
+  left: 11px !important;
+  right: 6px !important;
+  bottom: 10px !important;
+  height: 18px !important;
+  border-radius: 999px !important;
+  background: radial-gradient(ellipse, rgba(7, 26, 59, .20), transparent 68%) !important;
+  filter: blur(1px) !important;
+  animation: raianeShadowBreath 3.2s ease-in-out infinite !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-full {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 130px !important;
+  height: 176px !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: bottom center !important;
+  filter:
+    drop-shadow(0 18px 20px rgba(7, 20, 47, .18))
+    drop-shadow(0 0 18px rgba(255, 208, 0, .20)) !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-stage-copy {
+  position: relative !important;
+  z-index: 2 !important;
+  display: grid !important;
+  align-content: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  padding: 12px 0 18px !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-live-chip {
+  justify-self: start !important;
+  padding: 5px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(6, 35, 92, .08) !important;
+  color: #06235c !important;
+  font: 1000 9px/1 var(--v8-robot, Inter, sans-serif) !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-speech {
+  align-self: center !important;
+  margin: 0 !important;
+  padding: 12px 13px !important;
+  border: 1px solid rgba(11, 42, 91, .14) !important;
+  border-radius: 15px 15px 15px 5px !important;
+  background: rgba(255, 255, 255, .94) !important;
+  color: #14213d !important;
+  box-shadow: 0 12px 24px rgba(8, 31, 84, .08) !important;
+  font-size: 15px !important;
+  font-weight: 950 !important;
+  line-height: 1.13 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-speech::before {
+  left: -6px !important;
+  top: 50% !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-color: rgba(11, 42, 91, .14) !important;
+  border-radius: 3px !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-speech b {
+  color: #f07800 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-stage-copy small {
+  max-width: 19ch !important;
+  color: #5f6c82 !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  line-height: 1.22 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions {
+  display: grid !important;
+  grid-template-columns: 1.05fr 1.05fr .9fr !important;
+  gap: 8px !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq button,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-actions a.small-btn {
+  min-width: 0 !important;
+  min-height: 42px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 1px solid rgba(8, 31, 84, .14) !important;
+  border-radius: 13px !important;
+  background: #ffffff !important;
+  color: #06235c !important;
+  box-shadow: 0 8px 18px rgba(8, 31, 84, .05) !important;
+  font: 1000 11px/1.05 var(--v8-robot, Inter, sans-serif) !important;
+  letter-spacing: -.01em !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button:first-child {
+  background: #06235c !important;
+  color: #ffffff !important;
+  border-color: #06235c !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button:hover,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq button:hover,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-actions a.small-btn:hover,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button:focus-visible,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq button:focus-visible,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-actions a.small-btn:focus-visible {
+  transform: translateY(-2px) !important;
+  border-color: var(--v8-yellow, #ffd000) !important;
+  background: #fff9dc !important;
+  box-shadow: 0 12px 24px rgba(8, 31, 84, .10) !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button:first-child:hover,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button:first-child:focus-visible {
+  background: #0a327b !important;
+  color: #fff !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card {
+  position: relative !important;
+  display: grid !important;
+  gap: 3px !important;
+  min-height: 78px !important;
+  padding: 13px 14px 13px 76px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 148, 0, .34) !important;
+  border-radius: 17px !important;
+  background:
+    radial-gradient(circle at 25px 50%, rgba(255, 208, 0, .92) 0 18px, rgba(255, 208, 0, .28) 19px 32px, transparent 33px),
+    linear-gradient(135deg, #fff7df 0%, #ffffff 58%, #eef7ff 100%) !important;
+  color: #06235c !important;
+  text-decoration: none !important;
+  box-shadow: 0 12px 28px rgba(8, 31, 84, .08) !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card::before {
+  content: "↗" !important;
+  position: absolute !important;
+  right: 13px !important;
+  top: 13px !important;
+  width: 25px !important;
+  height: 25px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 999px !important;
+  background: #06235c !important;
+  color: #ffffff !important;
+  font-weight: 1000 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card span {
+  color: #087036 !important;
+  font: 1000 9px/1 var(--v8-robot, Inter, sans-serif) !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card b {
+  color: #06235c !important;
+  font: 1000 22px/.95 var(--v8-robot, Inter, sans-serif) !important;
+  letter-spacing: -.04em !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card small {
+  max-width: 24ch !important;
+  color: #536178 !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin: 0 !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq button:last-child {
+  grid-column: auto !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-actions {
+  display: flex !important;
+  gap: 7px !important;
+  margin: 0 !important;
+  overflow-x: auto !important;
+  padding: 1px 0 2px !important;
+  scrollbar-width: none !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-actions a.small-btn {
+  flex: 1 0 auto !important;
+  min-height: 34px !important;
+  padding: 0 11px !important;
+  border-radius: 11px !important;
+  font-size: 10px !important;
+  box-shadow: none !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-ask {
+  display: grid !important;
+  gap: 7px !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  border: 1px solid rgba(11, 42, 91, .10) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, .86) !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-ask label {
+  color: #06235c !important;
+  font: 1000 10px/1 var(--v8-robot, Inter, sans-serif) !important;
+  letter-spacing: .10em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-ask div {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 7px !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-ask input {
+  height: 42px !important;
+  min-width: 0 !important;
+  border: 1px solid rgba(8, 31, 84, .16) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  color: #14213d !important;
+  font: 850 13px/1.2 var(--v8-body, Inter, sans-serif) !important;
+  padding: 0 12px !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-ask button {
+  min-height: 42px !important;
+  padding: 0 13px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: #06235c !important;
+  color: #fff !important;
+  font: 1000 11px/1 var(--v8-robot, Inter, sans-serif) !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-log {
+  display: grid !important;
+  gap: 7px !important;
+  max-height: 126px !important;
+  overflow: auto !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-log:empty {
+  display: none !important;
+}
+
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-log .chat,
+body.v8-merge-ready .assistant-card.aylla-card.open .aylla-human-slot .chat.whatsapp {
+  border-radius: 14px !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+}
+
+@keyframes raianeLivePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(.72); opacity: .72; }
+}
+
+@keyframes raianeOrbFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .62; }
+  50% { transform: translate3d(-6px, -8px, 0) scale(1.08); opacity: .86; }
+}
+
+@keyframes raianeShadowBreath {
+  0%, 100% { transform: scaleX(.92); opacity: .54; }
+  50% { transform: scaleX(1.08); opacity: .76; }
+}
+
+@media (max-width: 560px) {
+  body.v8-merge-ready .assistant-card.aylla-card.open {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    border-radius: 18px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .assistant-body {
+    max-height: min(620px, calc(100dvh - 90px)) !important;
+    padding: 10px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-stage {
+    min-height: 164px !important;
+    grid-template-columns: 112px minmax(0, 1fr) !important;
+    padding: 8px 8px 0 !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-full {
+    width: 108px !important;
+    height: 154px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-speech {
+    font-size: 13px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-stage-copy small {
+    display: none !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions,
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq {
+    gap: 6px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-primary-actions button,
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-faq button {
+    min-height: 38px !important;
+    font-size: 10px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card {
+    min-height: 70px !important;
+    padding-left: 66px !important;
+  }
+
+  body.v8-merge-ready .assistant-card.aylla-card.open .aylla-norte-card b {
+    font-size: 19px !important;
+  }
+}

@@ -5225,24 +5225,37 @@
     const status = $(".assistant-head p", card);
     if (title) title.textContent = "Raiane";
     if (status) {
-      status.textContent = "";
-      status.hidden = true;
-      status.setAttribute("aria-hidden", "true");
+      status.textContent = "online • guia do CZS";
+      status.hidden = false;
+      status.removeAttribute("aria-hidden");
     }
 
     const body = $(".assistant-body", card);
     if (body) {
       body.innerHTML = `
         <div class="aylla-stage" aria-live="polite">
-          <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="Raiane acenando">
-          <div class="aylla-speech"><b>Raiane.</b> Posso te levar direto ao que importa.</div>
+          <div class="aylla-figure-wrap">
+            <span class="aylla-glow" aria-hidden="true"></span>
+            <img class="aylla-full" src="${RAYL_POSES.chatWave}" alt="Raiane acenando">
+          </div>
+          <div class="aylla-stage-copy">
+            <span class="aylla-live-chip">ao vivo no portal</span>
+            <div class="aylla-speech"><b>Oi!</b> Eu te levo direto ao que importa.</div>
+            <small>Notícias, serviços, anúncio, pauta e atendimento.</small>
+          </div>
         </div>
-        <div class="aylla-faq" aria-label="Perguntas frequentes">
+        <div class="aylla-primary-actions" aria-label="Ações principais da Raiane">
           <button type="button" data-aylla-faq="anunciar">Anunciar</button>
           <button type="button" data-aylla-faq="noticia">Enviar pauta</button>
-          <button type="button" data-aylla-faq="arquivo">Arquivo</button>
           <button type="button" data-aylla-faq="servicos">Serviços</button>
-          <a href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Suporte Norte</a>
+        </div>
+        <a class="aylla-norte-card" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Falar com Norte Ultra Fibra">
+          <span>patrocinador oficial</span>
+          <b>Norte Ultra Fibra</b>
+          <small>Contratar internet ou pedir suporte no WhatsApp</small>
+        </a>
+        <div class="aylla-faq" aria-label="Atalhos da Raiane">
+          <button type="button" data-aylla-faq="arquivo">Arquivo</button>
           <button type="button" data-aylla-faq="pubpaid">PubPaid</button>
           <button type="button" data-aylla-faq="whatsapp">Humano</button>
         </div>
@@ -5729,7 +5742,7 @@
       card.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
 
-    setTimeout(() => setPose("call-attention", "Sou a Raiane. Clique em Abrir quando quiser ajuda."), 1800);
+    setTimeout(() => setPose("call-attention", "Escolha um atalho ou pergunte do seu jeito.", { silent: true }), 1800);
   }
 
   function storyFromElement(element) {
