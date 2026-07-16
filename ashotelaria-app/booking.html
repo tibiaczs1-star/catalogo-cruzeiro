@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="manifest" href="/ashotelaria-app/manifest.webmanifest">
   <link rel="stylesheet" href="/ashotelaria-app/styles.css?v=20260716-p5">
 </head>
 <body class="booking-body">
@@ -78,6 +79,51 @@
 
         <p id="booking-error" class="form-error" role="alert" hidden></p>
       </div>
+    </section>
+
+    <section class="client-portal" aria-label="Portal do cliente">
+      <div class="client-portal__intro">
+        <p class="eyebrow">Portal do cliente</p>
+        <h2>Serviços do quarto, limpeza e parceiros.</h2>
+        <p>Acesso rápido para o hóspede pedir limpeza no horário que estiver fora, enviar chamado e comprar serviços do hotel.</p>
+      </div>
+
+      <div class="portal-grid">
+        <form id="cleaning-form" class="portal-panel" data-help="Agenda limpeza diária, limpeza final ou contagem de consumo para a governança.">
+          <h3>Agendar limpeza</h3>
+          <label><span>Reserva</span><input name="reservationId" value="reservation-jurua-inhouse" data-help="Código da reserva hospedada no hotel." required></label>
+          <label><span>Tipo</span><select name="requestType" data-help="Escolha o tipo de serviço que a camareira vai receber."><option value="daily_cleaning">Limpeza diária</option><option value="final_cleaning">Limpeza final</option><option value="consumption_count">Contagem de consumo</option></select></label>
+          <div class="field-grid field-grid--compact">
+            <label><span>Fora de</span><input name="awayFrom" type="time" value="10:00" data-help="Horário em que o hóspede estará fora do quarto."></label>
+            <label><span>Até</span><input name="awayUntil" type="time" value="12:00" data-help="Horário previsto para retorno do hóspede."></label>
+          </div>
+          <label><span>Observação</span><input name="note" placeholder="Ex.: estou no passeio" data-help="Mensagem curta que aparece para a camareira."></label>
+          <button class="button button--primary" type="submit">Enviar para governança</button>
+        </form>
+
+        <section class="portal-panel">
+          <h3>Parceiros com desconto</h3>
+          <div id="partner-list" class="partner-list"></div>
+        </section>
+
+        <form id="room-service-form" class="portal-panel" data-help="Pedido de fast food e itens parceiros para entrega no quarto.">
+          <h3>Pedir comida no quarto</h3>
+          <label><span>Reserva</span><input name="reservationId" value="reservation-jurua-inhouse" data-help="Reserva ativa que receberá o pedido." required></label>
+          <label><span>Item</span><select name="itemId" id="food-menu-select" data-help="Cardápio do parceiro ou cozinha do hotel."></select></label>
+          <label><span>Quantidade</span><input name="quantity" type="number" min="1" max="20" value="1"></label>
+          <label><span>Observação</span><input name="note" placeholder="Ex.: sem cebola"></label>
+          <button class="button button--primary" type="submit">Enviar pedido</button>
+        </form>
+
+        <form id="guest-message-form" class="portal-panel" data-help="Chamado direto para recepção, governança ou gerência.">
+          <h3>Mensagem para o hotel</h3>
+          <label><span>Reserva</span><input name="reservationId" value="reservation-jurua-inhouse" required></label>
+          <label><span>Destino</span><select name="target"><option value="frontdesk">Recepção</option><option value="housekeeping">Governança</option><option value="manager">Gerência</option></select></label>
+          <label><span>Mensagem</span><textarea name="message" rows="4" placeholder="Digite seu chamado" required></textarea></label>
+          <button class="button button--secondary" type="submit">Enviar mensagem</button>
+        </form>
+      </div>
+      <p id="portal-message" class="form-message" role="status"></p>
     </section>
   </main>
   <footer class="booking-footer"><span>AShotelaria · CZS Labs</span><span>Reserva online do hotel</span></footer>

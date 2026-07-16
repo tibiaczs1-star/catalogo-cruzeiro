@@ -11,6 +11,10 @@ async function source(file) {
   return readFile(path.join(ROOT, "ashotelaria-app", file), "utf8");
 }
 
+async function optionalSource(file) {
+  return readFile(path.join(ROOT, "ashotelaria-app", file), "utf8");
+}
+
 function functionSource(script, name, nextName) {
   const start = script.indexOf(`function ${name}`);
   const next = script.indexOf(`function ${nextName}`, start + 1);
@@ -128,6 +132,48 @@ test("reserva publica oferece ajuda atrasada inclusive nas opcoes dinamicas", as
   assert.match(script, /element\.addEventListener\("mouseenter", show\)/);
   assert.match(script, /element\.addEventListener\("focus", show\)/);
   assert.match(script, /650\)/);
+});
+
+test("portal do cliente oferece limpeza agendada e parceiros com desconto", async () => {
+  const [html, script] = await Promise.all([source("booking.html"), source("booking.js")]);
+
+  assert.match(html, /Portal do cliente/);
+  assert.match(html, /Agendar limpeza/);
+  assert.match(html, /Parceiros com desconto/);
+  assert.match(script, /\/public\/client-portal/);
+  assert.match(script, /\/public\/service-requests/);
+  assert.match(script, /loadClientPortal/);
+  assert.match(script, /scheduleCleaning/);
+  assert.match(script, /renderPartners/);
+  assert.match(script, /orderRoomService/);
+  assert.match(script, /sendGuestMessage/);
+  assert.match(html, /Pedir comida no quarto/);
+  assert.match(html, /Mensagem para o hotel/);
+});
+
+test("painel do administrador inclui central, mensagens, pedidos e graficos", async () => {
+  const script = await source("app.js");
+
+  assert.match(script, /admin\/overview/);
+  assert.match(script, /renderAdminCenter/);
+  assert.match(script, /roomServiceOrders/);
+  assert.match(script, /guestMessages/);
+  assert.match(script, /chart-bar/);
+  assert.match(script, /Enviar mensagem/);
+});
+
+test("AShotelaria é instalável como app responsivo para mobile e desktop", async () => {
+  const [panelHtml, bookingHtml, manifestText] = await Promise.all([
+    source("index.html"), source("booking.html"), optionalSource("manifest.webmanifest"),
+  ]);
+  const manifest = JSON.parse(manifestText);
+
+  assert.match(panelHtml, /rel="manifest"/);
+  assert.match(bookingHtml, /rel="manifest"/);
+  assert.equal(manifest.display, "standalone");
+  assert.equal(manifest.start_url, "/ashotelaria/app");
+  assert.equal(manifest.scope, "/");
+  assert.equal(manifest.icons.some((icon) => Number.parseInt(icon.sizes, 10) >= 192), true);
 });
 
 test("copy da reserva publica assume sistema do hotel em producao operacional", async () => {

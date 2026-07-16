@@ -295,6 +295,97 @@ test("room delivery photos are persisted for the assigned housekeeping room", as
   assert.equal(room.deliveryPhotos[0].imageDataUrl, "data:image/jpeg;base64,Zm90by1kby1xdWFydG8=");
 });
 
+test("housekeeping distribution balances daily, final cleaning and consumption counting across maids", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"), { now: () => "2026-07-14" });
+  const result = await store.distributeHousekeepingWork({
+    tenantId: CZS_TENANT,
+    propertyId: JURUA_PROPERTY,
+    date: "2026-07-14",
+    actor: { id: "admin:gerente", role: "gerente" },
+  });
+
+  assert.equal(result.created.length, 3);
+  assert.deepEqual(result.created.map(({ taskType }) => taskType).sort(), [
+    "consumption_count",
+    "daily_cleaning",
+    "final_cleaning",
+  ]);
+  const counts = Object.values(result.workloadByMaid);
+  assert.ok(Math.max(...counts) - Math.min(...counts) <= 1);
+  assert.equal(result.notifications.length, 3);
+  assert.equal(result.created.every((task) => task.scheduledDate === "2026-07-14"), true);
+});
+
+test("guest schedules cleaning while away and assigned maid sees the request metadata", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"));
+  const created = await store.createGuestServiceRequest({
+    propertySlug: "hotel-jurua-palace",
+    reservationId: "reservation-jurua-inhouse",
+    requestType: "daily_cleaning",
+    awayFrom: "10:00",
+    awayUntil: "12:00",
+    note: "Pode limpar enquanto estou no passeio",
+  });
+
+  assert.equal(created.task.taskType, "daily_cleaning");
+  assert.equal(created.task.roomId, "room-201");
+  assert.equal(created.task.awayFrom, "10:00");
+  assert.equal(created.notification.assignedUsername, created.task.assignedUsername);
+  const bootstrap = await store.getBootstrap({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(
+    bootstrap.housekeepingTasks.some((task) => (
+      task.id === created.task.id
+      && task.note.includes("Pode limpar")
+      && task.source === "guest_portal"
+    )),
+    true,
+  );
+});
+
+test("client portal exposes discounted local partners by category", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"));
+  const portal = await store.getClientPortal({ propertySlug: "hotel-jurua-palace" });
+
+  assert.equal(portal.property.name, "Hotel Juruá Palace");
+  assert.equal(portal.partners.length >= 4, true);
+  assert.deepEqual(
+    [...new Set(portal.partners.map((partner) => partner.category))].sort(),
+    ["restaurant", "sales", "services", "tourism"],
+  );
+  assert.equal(portal.partners.every((partner) => partner.discountLabel), true);
+  assert.equal(portal.foodMenu.length >= 3, true);
+  assert.equal(portal.foodMenu.some((item) => item.category === "fast_food"), true);
+});
+
+test("client can order room fast food and admin overview shows messages, calls and charts", async () => {
+  const store = createMemoryStore(createSeed("2026-07-14"));
+  const order = await store.createRoomServiceOrder({
+    propertySlug: "hotel-jurua-palace",
+    reservationId: "reservation-jurua-inhouse",
+    items: [{ itemId: "food-burger-combo", quantity: 2 }],
+    note: "Entregar sem cebola",
+  });
+  assert.equal(order.status, "requested");
+  assert.equal(order.roomId, "room-201");
+  assert.equal(order.total, 7_800);
+
+  const message = await store.createGuestMessage({
+    propertySlug: "hotel-jurua-palace",
+    reservationId: "reservation-jurua-inhouse",
+    target: "frontdesk",
+    message: "Preciso de toalhas extras",
+  });
+  assert.equal(message.status, "open");
+  assert.equal(message.roomId, "room-201");
+
+  const overview = await store.getAdminOverview({ tenantId: CZS_TENANT, propertyId: JURUA_PROPERTY });
+  assert.equal(overview.roomServiceOrders.length, 1);
+  assert.equal(overview.guestMessages.length, 1);
+  assert.equal(overview.charts.housekeepingByStatus.pending >= 1, true);
+  assert.equal(overview.charts.revenue.totalConfirmedCents > 0, true);
+  assert.equal(overview.roomReadiness.some((row) => row.roomId === "room-104" && row.status === "dirty"), true);
+});
+
 test("bootstrap guest projections deep-clone nested fields", async () => {
   const seed = createSeed("2026-07-14");
   seed.guests[0].preferences = { accessibility: ["ground-floor"] };

@@ -106,8 +106,38 @@ async function bootstrapMinimum(client, seed) {
   }
   for (const task of seed.housekeepingTasks.filter((row) => row.propertyId === property.id)) {
     await client.query(
-      "INSERT INTO housekeeping_tasks (id, tenant_id, property_id, room_id, status, assigned_username, assigned_role) VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT (id) DO UPDATE SET room_id = EXCLUDED.room_id, assigned_username = EXCLUDED.assigned_username, assigned_role = EXCLUDED.assigned_role, updated_at = now()",
-      [task.id, task.tenantId, task.propertyId, task.roomId, task.status, task.assignedUsername ?? null, task.assignedRole ?? null],
+      `INSERT INTO housekeeping_tasks
+        (id, tenant_id, property_id, room_id, status, assigned_username, assigned_role,
+         task_type, reservation_id, scheduled_date, away_from, away_until, note, source)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, COALESCE($10::date, CURRENT_DATE), $11, $12, $13, $14)
+       ON CONFLICT (id) DO UPDATE
+        SET room_id = EXCLUDED.room_id,
+            assigned_username = EXCLUDED.assigned_username,
+            assigned_role = EXCLUDED.assigned_role,
+            task_type = EXCLUDED.task_type,
+            reservation_id = EXCLUDED.reservation_id,
+            scheduled_date = EXCLUDED.scheduled_date,
+            source = EXCLUDED.source,
+            updated_at = now()`,
+      [task.id, task.tenantId, task.propertyId, task.roomId, task.status, task.assignedUsername ?? null, task.assignedRole ?? null,
+        task.taskType ?? "daily_cleaning", task.reservationId ?? null, task.scheduledDate ?? null, task.awayFrom ?? null, task.awayUntil ?? null,
+        task.note ?? null, task.source ?? "system"],
+    );
+  }
+  for (const partner of seed.clientPartners.filter((row) => row.propertyId === property.id)) {
+    await client.query(
+      `INSERT INTO client_partners (id, tenant_id, property_id, name, category, discount_label, contact, description, active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, true)
+       ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, category = EXCLUDED.category, discount_label = EXCLUDED.discount_label, contact = EXCLUDED.contact, description = EXCLUDED.description, active = true, updated_at = now()`,
+      [partner.id, partner.tenantId, partner.propertyId, partner.name, partner.category, partner.discountLabel, partner.contact, partner.description],
+    );
+  }
+  for (const item of seed.foodMenu.filter((row) => row.propertyId === property.id)) {
+    await client.query(
+      `INSERT INTO food_menu (id, tenant_id, property_id, partner_id, name, category, price_cents, active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, true)
+       ON CONFLICT (id) DO UPDATE SET partner_id = EXCLUDED.partner_id, name = EXCLUDED.name, category = EXCLUDED.category, price_cents = EXCLUDED.price_cents, active = true, updated_at = now()`,
+      [item.id, item.tenantId, item.propertyId, item.partnerId ?? null, item.name, item.category, item.price],
     );
   }
   for (const order of seed.maintenanceOrders.filter((row) => row.propertyId === property.id)) {

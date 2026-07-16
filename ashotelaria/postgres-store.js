@@ -17,6 +17,7 @@ const ROOM_STATUSES = new Set([
 ]);
 const ROOM_PHOTO_KINDS = new Set(["room", "delivery"]);
 const MAINTENANCE_STATUSES = new Set(["open", "in_progress", "closed"]);
+const HOUSEKEEPING_TASK_TYPES = new Set(["daily_cleaning", "final_cleaning", "consumption_count"]);
 const SUMMARY_ROOM_STATUS = {
   cleaning: "dirty",
   inspected: "available",
@@ -124,6 +125,13 @@ function taskFromRow(row) {
     status: row.status,
     assignedUsername: row.assigned_username,
     assignedRole: row.assigned_role,
+    taskType: row.task_type ?? "daily_cleaning",
+    reservationId: row.reservation_id ?? "",
+    scheduledDate: dateOnly(row.scheduled_date),
+    awayFrom: row.away_from ?? "",
+    awayUntil: row.away_until ?? "",
+    note: row.note ?? "",
+    source: row.source ?? "system",
   };
 }
 
@@ -168,6 +176,60 @@ function photoFromRow(row) {
   };
 }
 
+function partnerFromRow(row) {
+  return {
+    id: row.id,
+    tenantId: row.tenant_id,
+    propertyId: row.property_id,
+    name: row.name,
+    category: row.category,
+    discountLabel: row.discount_label,
+    contact: row.contact ?? "",
+    description: row.description ?? "",
+  };
+}
+
+function foodFromRow(row) {
+  return {
+    id: row.id,
+    tenantId: row.tenant_id,
+    propertyId: row.property_id,
+    partnerId: row.partner_id ?? "",
+    name: row.name,
+    category: row.category,
+    price: integer(row.price_cents),
+  };
+}
+
+function roomServiceOrderFromRow(row) {
+  return {
+    id: row.id,
+    tenantId: row.tenant_id,
+    propertyId: row.property_id,
+    reservationId: row.reservation_id,
+    roomId: row.room_id,
+    status: row.status,
+    items: Array.isArray(row.items) ? row.items : [],
+    total: integer(row.total_cents),
+    note: row.note ?? "",
+    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
+  };
+}
+
+function guestMessageFromRow(row) {
+  return {
+    id: row.id,
+    tenantId: row.tenant_id,
+    propertyId: row.property_id,
+    reservationId: row.reservation_id,
+    roomId: row.room_id,
+    target: row.target,
+    message: row.message,
+    status: row.status,
+    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at,
+  };
+}
+
 function credentialFromRow(row) {
   if (!row) return null;
   return {
@@ -194,6 +256,19 @@ function invalidMaintenanceStatus() {
   const error = new RangeError("maintenance order status is unknown");
   error.code = "INVALID_MAINTENANCE_STATUS";
   return error;
+}
+
+function serviceRequestError() {
+  const error = new Error("service request requires an active in-house reservation");
+  error.code = "SERVICE_REQUEST_NOT_ALLOWED";
+  return error;
+}
+
+function validTime(value) {
+  const text = String(value ?? "").trim();
+  if (!text) return "";
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(text)) throw new RangeError("time must use HH:MM");
+  return text;
 }
 
 function normalizeIdempotencyKey(value) {
@@ -294,7 +369,7 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
       const propertyRow = await scopedProperty(pool, tenantId, propertyId);
       if (!propertyRow) return null;
       const values = [tenantId, propertyId];
-      const [types, roomsResult, photosResult, guests, reservations, housekeeping, maintenance, integrations] = await Promise.all([
+      const [types, roomsResult, photosResult, guests, reservations, housekeeping, maintenance, integrations, partners, foodMenu, roomServiceOrders, guestMessages] = await Promise.all([
         pool.query(`SELECT * FROM room_types WHERE tenant_id = $1 AND property_id = $2 ORDER BY name`, values),
         pool.query(`SELECT * FROM rooms WHERE tenant_id = $1 AND property_id = $2 ORDER BY number`, values),
         pool.query(`SELECT * FROM room_photos WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at DESC`, values),
@@ -303,6 +378,10 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         pool.query(`SELECT * FROM housekeeping_tasks WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at`, values),
         pool.query(`SELECT * FROM maintenance_orders WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at`, values),
         pool.query(`SELECT id, tenant_id, property_id, provider, status FROM integration_connections WHERE tenant_id = $1 AND property_id = $2 ORDER BY provider`, values),
+        pool.query(`SELECT * FROM client_partners WHERE tenant_id = $1 AND property_id = $2 AND active = true ORDER BY category, name`, values),
+        pool.query(`SELECT * FROM food_menu WHERE tenant_id = $1 AND property_id = $2 AND active = true ORDER BY category, name`, values),
+        pool.query(`SELECT * FROM room_service_orders WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at DESC`, values),
+        pool.query(`SELECT * FROM guest_messages WHERE tenant_id = $1 AND property_id = $2 ORDER BY created_at DESC`, values),
       ]);
       const photosByRoom = new Map();
       for (const photoRow of photosResult.rows) {
@@ -330,12 +409,257 @@ function createPostgresStore({ pool, idFactory = randomUUID, now = () => new Dat
         housekeepingTasks: housekeeping.rows.map(taskFromRow),
         maintenanceOrders: maintenance.rows.map(maintenanceFromRow),
         integrations: integrations.rows.map(integrationFromRow),
+        clientPartners: partners.rows.map(partnerFromRow),
+        foodMenu: foodMenu.rows.map(foodFromRow),
+        roomServiceOrders: roomServiceOrders.rows.map(roomServiceOrderFromRow),
+        guestMessages: guestMessages.rows.map(guestMessageFromRow),
+        notifications: housekeeping.rows
+          .filter((row) => row.status !== "done" && row.assigned_username)
+          .map((row) => ({ id: `notification-${row.id}`, username: row.assigned_username, role: row.assigned_role, taskId: row.id, roomId: row.room_id, scheduledDate: dateOnly(row.scheduled_date), message: "Nova tarefa de governança atribuída." })),
         summary: buildOperationalSummary({
           rooms: roomRows.map((room) => ({ ...room, status: SUMMARY_ROOM_STATUS[room.status] ?? room.status })),
           reservations: reservationRows,
           now: new Date(),
           timeZone: propertyRow.time_zone,
         }),
+      };
+    },
+
+    async getClientPortal({ propertySlug }) {
+      const propertyResult = await pool.query(
+        `SELECT id, tenant_id, name, slug, time_zone FROM properties WHERE slug = $1`,
+        [propertySlug],
+      );
+      const property = propertyResult.rows[0];
+      if (!property) return null;
+      const values = [property.tenant_id, property.id];
+      const [partners, foodMenu] = await Promise.all([
+        pool.query(`SELECT * FROM client_partners WHERE tenant_id = $1 AND property_id = $2 AND active = true ORDER BY category, name`, values),
+        pool.query(`SELECT * FROM food_menu WHERE tenant_id = $1 AND property_id = $2 AND active = true ORDER BY category, name`, values),
+      ]);
+      return { property: propertyFromRow(property), partners: partners.rows.map(partnerFromRow), foodMenu: foodMenu.rows.map(foodFromRow) };
+    },
+
+    async distributeHousekeepingWork({ tenantId, propertyId, date = operationalDate(now()), actor }) {
+      const client = await pool.connect();
+      const created = [];
+      try {
+        await client.query("BEGIN");
+        const propertyRow = await scopedProperty(client, tenantId, propertyId);
+        if (!propertyRow) {
+          await client.query("COMMIT");
+          return null;
+        }
+        const maids = await client.query(
+          `SELECT username, role FROM credential_profiles
+            WHERE tenant_id = $1 AND property_id = $2
+              AND role IN ('camareira', 'supervisor_governanca', 'administrador')
+            ORDER BY CASE role WHEN 'camareira' THEN 0 WHEN 'supervisor_governanca' THEN 1 ELSE 2 END, username`,
+          [tenantId, propertyId],
+        );
+        const candidates = maids.rows.length ? maids.rows : [{ username: "admin", role: "camareira" }];
+        const taskCounts = new Map(candidates.map((maid) => [`${maid.username}:${maid.role}`, 0]));
+        const existingWork = await client.query(
+          `SELECT assigned_username, assigned_role, count(*)::int AS total
+             FROM housekeeping_tasks
+            WHERE tenant_id = $1 AND property_id = $2 AND status IN ('pending', 'in_progress')
+            GROUP BY assigned_username, assigned_role`,
+          [tenantId, propertyId],
+        );
+        for (const row of existingWork.rows) {
+          const key = `${row.assigned_username}:${row.assigned_role}`;
+          if (taskCounts.has(key)) taskCounts.set(key, Number(row.total));
+        }
+        const pickMaid = () => {
+          const sorted = [...candidates].sort((a, b) => (taskCounts.get(`${a.username}:${a.role}`) ?? 0) - (taskCounts.get(`${b.username}:${b.role}`) ?? 0));
+          const maid = sorted[0];
+          const key = `${maid.username}:${maid.role}`;
+          taskCounts.set(key, (taskCounts.get(key) ?? 0) + 1);
+          return maid;
+        };
+        const insertTask = async ({ roomId, taskType, reservationId = null }) => {
+          const exists = await client.query(
+            `SELECT 1 FROM housekeeping_tasks
+              WHERE tenant_id = $1 AND property_id = $2 AND room_id = $3 AND task_type = $4
+                AND scheduled_date = $5::date AND source = 'auto_distribution' AND status <> 'cancelled'
+              LIMIT 1`,
+            [tenantId, propertyId, roomId, taskType, date],
+          );
+          if (exists.rows[0]) return;
+          const maid = pickMaid();
+          const inserted = await client.query(
+            `INSERT INTO housekeeping_tasks
+              (id, tenant_id, property_id, room_id, status, assigned_username, assigned_role, task_type, reservation_id, scheduled_date, source)
+             VALUES ($1, $2, $3, $4, 'pending', $5, $6, $7, $8, $9::date, 'auto_distribution')
+             RETURNING *`,
+            [idFactory(), tenantId, propertyId, roomId, maid.username, maid.role, taskType, reservationId, date],
+          );
+          created.push(taskFromRow(inserted.rows[0]));
+        };
+        const reservations = await client.query(
+          `SELECT rv.*, rr.room_id
+             FROM reservations rv
+             JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
+            WHERE rv.tenant_id = $1 AND rv.property_id = $2`,
+          [tenantId, propertyId],
+        );
+        for (const row of reservations.rows.filter((reservation) => reservation.status === "checked_in")) {
+          await insertTask({ roomId: row.room_id, taskType: "daily_cleaning", reservationId: row.id });
+          await insertTask({ roomId: row.room_id, taskType: "consumption_count", reservationId: row.id });
+        }
+        for (const row of reservations.rows.filter((reservation) => reservation.status === "checked_out")) {
+          const room = await client.query(`SELECT id FROM rooms WHERE tenant_id = $1 AND property_id = $2 AND id = $3 AND status = 'dirty'`, [tenantId, propertyId, row.room_id]);
+          if (room.rows[0]) await insertTask({ roomId: row.room_id, taskType: "final_cleaning", reservationId: row.id });
+        }
+        await insertAudit(client, { tenantId, propertyId, action: "housekeeping.distributed", entityId: propertyId, actor, changes: { created: created.length, date } });
+        await client.query("COMMIT");
+        const workloadByMaid = Object.fromEntries([...taskCounts.entries()].map(([key, value]) => [key, value]));
+        return {
+          created,
+          notifications: created.map((task) => ({ id: `notification-${task.id}`, username: task.assignedUsername, role: task.assignedRole, taskId: task.id, roomId: task.roomId, scheduledDate: task.scheduledDate, message: "Nova tarefa de governança atribuída." })),
+          workloadByMaid,
+        };
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async createGuestServiceRequest({ propertySlug, reservationId, requestType, awayFrom, awayUntil, note }) {
+      const taskType = String(requestType ?? "").trim().toLowerCase();
+      if (!HOUSEKEEPING_TASK_TYPES.has(taskType)) throw new RangeError("housekeeping task type is unknown");
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const reservation = await client.query(
+          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id
+             FROM properties p
+             JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
+             JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
+            WHERE p.slug = $1 AND rv.id = $2 AND rv.status = 'checked_in'
+            FOR UPDATE OF rv`,
+          [propertySlug, reservationId],
+        );
+        const row = reservation.rows[0];
+        if (!row) throw serviceRequestError();
+        const maid = await client.query(
+          `SELECT username, role FROM credential_profiles WHERE tenant_id = $1 AND property_id = $2 AND role IN ('camareira', 'supervisor_governanca', 'administrador') ORDER BY CASE role WHEN 'camareira' THEN 0 WHEN 'supervisor_governanca' THEN 1 ELSE 2 END LIMIT 1`,
+          [row.tenant_id, row.property_id],
+        );
+        const assigned = maid.rows[0] ?? { username: "admin", role: "camareira" };
+        const inserted = await client.query(
+          `INSERT INTO housekeeping_tasks
+            (id, tenant_id, property_id, room_id, status, assigned_username, assigned_role, task_type, reservation_id, scheduled_date, away_from, away_until, note, source)
+           VALUES ($1, $2, $3, $4, 'pending', $5, $6, $7, $8, $9::date, $10, $11, $12, 'guest_portal')
+           RETURNING *`,
+          [idFactory(), row.tenant_id, row.property_id, row.room_id, assigned.username, assigned.role, taskType, row.id, operationalDate(now()), validTime(awayFrom), validTime(awayUntil), String(note ?? "").trim().slice(0, 300) || null],
+        );
+        await insertAudit(client, { tenantId: row.tenant_id, propertyId: row.property_id, action: "guest_service.created", entityId: inserted.rows[0].id, actor: { id: "guest-portal", role: "hospede" }, changes: { taskType, roomId: row.room_id } });
+        await client.query("COMMIT");
+        const task = taskFromRow(inserted.rows[0]);
+        return { task, notification: { id: `notification-${task.id}`, username: task.assignedUsername, role: task.assignedRole, taskId: task.id, roomId: task.roomId, scheduledDate: task.scheduledDate, message: "Nova tarefa solicitada pelo hóspede." } };
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async createRoomServiceOrder({ propertySlug, reservationId, items, note }) {
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const reservation = await client.query(
+          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id
+             FROM properties p
+             JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
+             JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
+            WHERE p.slug = $1 AND rv.id = $2 AND rv.status = 'checked_in'`,
+          [propertySlug, reservationId],
+        );
+        const row = reservation.rows[0];
+        if (!row) throw serviceRequestError();
+        const normalizedItems = [];
+        for (const item of Array.isArray(items) ? items : []) {
+          const quantity = Number(item.quantity);
+          const menu = await client.query(`SELECT * FROM food_menu WHERE tenant_id = $1 AND property_id = $2 AND id = $3 AND active = true`, [row.tenant_id, row.property_id, String(item.itemId ?? "")]);
+          const menuItem = menu.rows[0];
+          if (!menuItem || !Number.isSafeInteger(quantity) || quantity < 1 || quantity > 20) throw new RangeError("room service item is invalid");
+          const price = integer(menuItem.price_cents);
+          normalizedItems.push({ itemId: menuItem.id, name: menuItem.name, quantity, unitPrice: price, total: price * quantity });
+        }
+        if (!normalizedItems.length) throw new RangeError("room service order cannot be empty");
+        const total = normalizedItems.reduce((sum, item) => sum + item.total, 0);
+        const inserted = await client.query(
+          `INSERT INTO room_service_orders (id, tenant_id, property_id, reservation_id, room_id, status, items, total_cents, note)
+           VALUES ($1, $2, $3, $4, $5, 'requested', $6::jsonb, $7, $8)
+           RETURNING *`,
+          [idFactory(), row.tenant_id, row.property_id, row.id, row.room_id, JSON.stringify(normalizedItems), total, String(note ?? "").trim().slice(0, 300) || null],
+        );
+        await insertAudit(client, { tenantId: row.tenant_id, propertyId: row.property_id, action: "room_service.created", entityId: inserted.rows[0].id, actor: { id: "guest-portal", role: "hospede" }, changes: { roomId: row.room_id, total } });
+        await client.query("COMMIT");
+        return roomServiceOrderFromRow(inserted.rows[0]);
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async createGuestMessage({ propertySlug, reservationId, target = "frontdesk", message }) {
+      if (typeof message !== "string" || !message.trim()) throw new RangeError("message cannot be empty");
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN");
+        const reservation = await client.query(
+          `SELECT p.tenant_id, p.id AS property_id, rv.id, rr.room_id
+             FROM properties p
+             JOIN reservations rv ON rv.tenant_id = p.tenant_id AND rv.property_id = p.id
+             JOIN reservation_rooms rr ON rr.tenant_id = rv.tenant_id AND rr.property_id = rv.property_id AND rr.reservation_id = rv.id
+            WHERE p.slug = $1 AND rv.id = $2 AND rv.status = 'checked_in'`,
+          [propertySlug, reservationId],
+        );
+        const row = reservation.rows[0];
+        if (!row) throw serviceRequestError();
+        const inserted = await client.query(
+          `INSERT INTO guest_messages (id, tenant_id, property_id, reservation_id, room_id, target, message, status)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, 'open')
+           RETURNING *`,
+          [idFactory(), row.tenant_id, row.property_id, row.id, row.room_id, String(target ?? "frontdesk").trim().toLowerCase().slice(0, 40) || "frontdesk", message.trim().slice(0, 500)],
+        );
+        await insertAudit(client, { tenantId: row.tenant_id, propertyId: row.property_id, action: "guest_message.created", entityId: inserted.rows[0].id, actor: { id: "guest-portal", role: "hospede" }, changes: { roomId: row.room_id } });
+        await client.query("COMMIT");
+        return guestMessageFromRow(inserted.rows[0]);
+      } catch (error) {
+        try { await client.query("ROLLBACK"); } catch {}
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+
+    async getAdminOverview({ tenantId, propertyId }) {
+      const bootstrap = await this.getBootstrap({ tenantId, propertyId });
+      if (!bootstrap) return null;
+      return {
+        roomReadiness: bootstrap.rooms.map((room) => ({ roomId: room.id, number: room.number, status: room.status, lastDeliveryPhoto: room.deliveryPhotos?.[0] ?? null })),
+        housekeepingTasks: bootstrap.housekeepingTasks,
+        roomServiceOrders: bootstrap.roomServiceOrders,
+        guestMessages: bootstrap.guestMessages,
+        partners: bootstrap.clientPartners,
+        charts: {
+          housekeepingByStatus: bootstrap.housekeepingTasks.reduce((acc, task) => ({ ...acc, [task.status]: (acc[task.status] ?? 0) + 1 }), {}),
+          roomsByStatus: bootstrap.rooms.reduce((acc, room) => ({ ...acc, [room.status]: (acc[room.status] ?? 0) + 1 }), {}),
+          revenue: {
+            totalConfirmedCents: bootstrap.reservations
+              .filter((row) => row.status !== "cancelled")
+              .reduce((sum, row) => sum + Number(row.total || 0), 0),
+          },
+        },
       };
     },
 

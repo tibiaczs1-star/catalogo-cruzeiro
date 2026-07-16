@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AShotelaria — Apresentação para cliente final</title>
+  <style>
+    :root { color-scheme: light; --red:#b4232d; --deep:#7f121b; --soft:#fff1f2; --ink:#241719; --muted:#756165; --line:#ead7d9; font-family: "Segoe UI", system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--soft); }
+    .deck { scroll-snap-type: y mandatory; }
+    section { min-height: 100svh; padding: clamp(32px, 6vw, 84px); display: grid; align-content: center; gap: 24px; scroll-snap-align: start; border-bottom: 1px solid var(--line); background: #fffafa; }
+    section.hero { color: #fff; background: linear-gradient(135deg, var(--deep), var(--red) 58%, #edb3b8); }
+    .eyebrow { margin: 0; color: var(--red); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .hero .eyebrow { color: #ffd8dc; }
+    h1, h2 { max-width: 980px; margin: 0; font-weight: 850; line-height: .95; letter-spacing: -.06em; }
+    h1 { font-size: clamp(58px, 11vw, 132px); }
+    h2 { font-size: clamp(42px, 7vw, 84px); }
+    p { max-width: 820px; margin: 0; color: var(--muted); font-size: clamp(18px, 2vw, 24px); line-height: 1.45; }
+    .hero p { color: rgba(255,255,255,.82); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .tile { min-height: 180px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .tile strong { display: block; margin-bottom: 10px; color: var(--deep); font-size: 24px; }
+    .tile span { color: var(--muted); line-height: 1.5; }
+    .flow { display: grid; gap: 12px; max-width: 980px; }
+    .flow div { padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 24px; font-weight: 750; }
+    .metric { display: flex; flex-wrap: wrap; gap: 16px; }
+    .metric b { min-width: 180px; padding: 20px; border-radius: 18px; color: #fff; background: var(--red); font-size: 28px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } section { min-height: auto; } }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="hero">
+      <p class="eyebrow">AShotelaria</p>
+      <h1>Hotel operando no web, mobile e app.</h1>
+      <p>Sistema completo para reserva, recepção, governança, manutenção, financeiro, cliente e administrador.</p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Visão geral</p>
+      <h2>Uma central para o hotel inteiro.</h2>
+      <div class="grid">
+        <div class="tile"><strong>Equipe</strong><span>Cada cargo entra com sua permissão e vê só o necessário.</span></div>
+        <div class="tile"><strong>Cliente</strong><span>Agenda limpeza, abre chamado, vê parceiros e pede comida no quarto.</span></div>
+        <div class="tile"><strong>Admin</strong><span>Acompanha quartos, fotos, pedidos, chamados, gráficos e financeiro.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Operação</p>
+      <h2>Do balcão à entrega do quarto.</h2>
+      <div class="flow">
+        <div>1. Reserva online ou cadastro imediato no balcão.</div>
+        <div>2. Check-in controlado pela data operacional do hotel.</div>
+        <div>3. Quarto ocupado, consumo e solicitações do cliente.</div>
+        <div>4. Check-out gera limpeza final e quarto pendente.</div>
+        <div>5. Camareira recebe tarefa, tira foto e entrega o quarto.</div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Governança</p>
+      <h2>Distribuição automática para camareiras.</h2>
+      <div class="grid">
+        <div class="tile"><strong>Limpeza diária</strong><span>Para hóspedes ativos, incluindo horário em que estarão fora.</span></div>
+        <div class="tile"><strong>Limpeza final</strong><span>Gerada após saída, com controle de quarto sujo até inspeção.</span></div>
+        <div class="tile"><strong>Consumo</strong><span>Contagem de consumo como tarefa separada para governança.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Portal do cliente</p>
+      <h2>O hóspede resolve sem ligar para recepção.</h2>
+      <div class="grid">
+        <div class="tile"><strong>Limpeza</strong><span>Agenda horário e avisa quando estará fora do quarto.</span></div>
+        <div class="tile"><strong>Comida</strong><span>Room service e fast food direto no quarto.</span></div>
+        <div class="tile"><strong>Parceiros</strong><span>Restaurantes, vendas, turismo e serviços com desconto.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Administração</p>
+      <h2>Números, chamados e decisões no mesmo painel.</h2>
+      <div class="metric">
+        <b>130/130 testes</b>
+        <b>PWA ativo</b>
+        <b>HTTP 200 local</b>
+        <b>Postgres pronto</b>
+      </div>
+      <p>O sistema já possui rotas, telas, migrações, store em memória, store Postgres e validação automatizada.</p>
+    </section>
+
+    <section class="hero">
+      <p class="eyebrow">Entrega</p>
+      <h2>Pronto para apresentar como sistema do hotel.</h2>
+      <p>Sem texto de demonstração, com tons vermelhos claros, ajuda contextual e operação completa para desktop, celular e app.</p>
+    </section>
+  </main>
+</body>
+</html>

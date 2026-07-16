@@ -20,6 +20,7 @@ const ROOM_STATUSES = new Set([
 ]);
 const ROOM_PHOTO_KINDS = new Set(["room", "delivery"]);
 const MAINTENANCE_STATUSES = new Set(["open", "in_progress", "closed"]);
+const HOUSEKEEPING_TASK_TYPES = new Set(["daily_cleaning", "final_cleaning", "consumption_count"]);
 const SUMMARY_ROOM_STATUS = {
   cleaning: "dirty",
   inspected: "available",
@@ -56,6 +57,16 @@ function invalidMaintenanceStatus() {
   return error;
 }
 
+function serviceRequestError() {
+  const error = new Error("Service request is not allowed for this reservation");
+  error.code = "SERVICE_REQUEST_NOT_ALLOWED";
+  return error;
+}
+
+function validTime(value) {
+  return typeof value === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(value) ? value : "";
+}
+
 function reservationResult(reservation, replayed, includeReplayMetadata) {
   const safe = copy(reservation);
   return includeReplayMetadata ? { reservation: safe, replayed } : safe;
@@ -67,6 +78,11 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
   state.auditEvents ??= [];
   state.credentialProfiles ??= [];
   state.roomPhotos ??= [];
+  state.clientPartners ??= [];
+  state.foodMenu ??= [];
+  state.roomServiceOrders ??= [];
+  state.guestMessages ??= [];
+  state.notifications ??= [];
   const idempotency = new Map();
   const inFlightByIdempotencyKey = new Map();
   const inventoryQueues = new Map();
@@ -127,6 +143,79 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
       actor: copy(actor ?? { id: "system" }),
       changes: copy(changes ?? {}),
     });
+  }
+
+  function maidsForProperty(tenantId, propertyId) {
+    const userById = new Map(state.users.map((user) => [user.id, user]));
+    const names = state.memberships
+      .filter((membership) => membership.tenantId === tenantId && membership.propertyId === propertyId && membership.role === "camareira")
+      .map((membership) => userById.get(membership.userId)?.email?.split("@")[0] || "admin");
+    return [...new Set(["admin", ...names])].sort();
+  }
+
+  function workloadByMaid(tenantId, propertyId) {
+    const maids = maidsForProperty(tenantId, propertyId);
+    const workload = Object.fromEntries(maids.map((maid) => [maid, 0]));
+    for (const task of state.housekeepingTasks.filter((row) => (
+      row.tenantId === tenantId && row.propertyId === propertyId && !["done", "cancelled"].includes(row.status)
+    ))) {
+      if (task.assignedUsername && Object.hasOwn(workload, task.assignedUsername)) workload[task.assignedUsername] += 1;
+    }
+    return workload;
+  }
+
+  function assignMaid(tenantId, propertyId) {
+    const workload = workloadByMaid(tenantId, propertyId);
+    return Object.entries(workload).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))[0]?.[0] ?? "admin";
+  }
+
+  function createHousekeepingTask({
+    tenantId, propertyId, roomId, taskType, reservationId = "", scheduledDate, awayFrom = "", awayUntil = "",
+    note = "", source = "system", actor,
+  }) {
+    if (!HOUSEKEEPING_TASK_TYPES.has(taskType)) throw new RangeError("housekeeping task type is unknown");
+    const assignedUsername = assignMaid(tenantId, propertyId);
+    const task = {
+      id: `housekeeping-${tenantId}-${state.housekeepingTasks.length + 1}`,
+      tenantId,
+      propertyId,
+      roomId,
+      reservationId,
+      taskType,
+      status: "pending",
+      assignedUsername,
+      assignedRole: "camareira",
+      scheduledDate,
+      awayFrom,
+      awayUntil,
+      note: String(note ?? "").trim().slice(0, 300),
+      source,
+    };
+    state.housekeepingTasks.push(task);
+    const notification = {
+      id: `notification-${state.notifications.length + 1}`,
+      tenantId,
+      propertyId,
+      roomId,
+      taskId: task.id,
+      assignedUsername,
+      assignedRole: "camareira",
+      title: taskType,
+      message: `Quarto ${roomId}: ${taskType}`,
+      createdAt: new Date().toISOString(),
+      read: false,
+    };
+    state.notifications.push(notification);
+    audit({ tenantId, propertyId, action: "housekeeping.task_created", entityId: task.id, actor, changes: { taskType, roomId, assignedUsername } });
+    return { task: copy(task), notification: copy(notification) };
+  }
+
+  function activeReservationForRequest(property, reservationId) {
+    const reservation = state.reservations.find((row) => (
+      row.id === reservationId && row.tenantId === property.tenantId && row.propertyId === property.id
+    ));
+    if (!reservation || reservation.status !== "checked_in") throw serviceRequestError();
+    return reservation;
   }
 
   function photosForRoom(tenantId, propertyId, roomId) {
@@ -200,6 +289,9 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
         housekeepingTasks: copy(scopedRows("housekeepingTasks", tenantId, propertyId)),
         maintenanceOrders: copy(scopedRows("maintenanceOrders", tenantId, propertyId)),
         integrations: copy(scopedRows("integrations", tenantId, propertyId)),
+        roomServiceOrders: copy(scopedRows("roomServiceOrders", tenantId, propertyId)),
+        guestMessages: copy(scopedRows("guestMessages", tenantId, propertyId)),
+        notifications: copy(scopedRows("notifications", tenantId, propertyId)),
         summary: buildOperationalSummary({
           rooms: rooms.map((room) => ({
             ...room,
@@ -208,6 +300,151 @@ function createMemoryStore(initialSeed = createSeed(), config = {}) {
           reservations,
           now: state.generatedAt,
         }),
+      };
+    },
+
+    async getClientPortal({ propertySlug }) {
+      const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
+      if (!property) return null;
+      return {
+        property: copy(property),
+        partners: copy(scopedRows("clientPartners", property.tenantId, property.id)),
+        foodMenu: copy(scopedRows("foodMenu", property.tenantId, property.id)),
+      };
+    },
+
+    async distributeHousekeepingWork({ tenantId, propertyId, date = state.generatedAt, actor }) {
+      const property = scopedProperty(tenantId, propertyId);
+      if (!property) return null;
+      const created = [];
+      const make = (roomId, taskType, reservationId = "") => {
+        const exists = state.housekeepingTasks.some((task) => (
+          task.tenantId === tenantId && task.propertyId === propertyId && task.roomId === roomId
+          && task.taskType === taskType && task.scheduledDate === date && task.source === "auto_distribution"
+          && task.status !== "cancelled"
+        ));
+        if (!exists) created.push(createHousekeepingTask({
+          tenantId, propertyId, roomId, taskType, reservationId, scheduledDate: date, source: "auto_distribution", actor,
+        }));
+      };
+      for (const reservation of scopedRows("reservations", tenantId, propertyId)) {
+        if (reservation.status === "checked_in") {
+          make(reservation.roomId, "daily_cleaning", reservation.id);
+          make(reservation.roomId, "consumption_count", reservation.id);
+        }
+      }
+      for (const reservation of scopedRows("reservations", tenantId, propertyId)) {
+        const room = scopedRows("rooms", tenantId, propertyId).find((row) => row.id === reservation.roomId && row.status === "dirty");
+        if (reservation.status === "checked_out" && room) {
+          make(room.id, "final_cleaning", reservation.id);
+        }
+      }
+      return {
+        created: created.map(({ task }) => task),
+        notifications: created.map(({ notification }) => notification),
+        workloadByMaid: workloadByMaid(tenantId, propertyId),
+      };
+    },
+
+    async createGuestServiceRequest({ propertySlug, reservationId, requestType, awayFrom, awayUntil, note }) {
+      const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
+      if (!property) return null;
+      const taskType = String(requestType ?? "").trim().toLowerCase();
+      if (!HOUSEKEEPING_TASK_TYPES.has(taskType)) throw new RangeError("housekeeping task type is unknown");
+      const reservation = activeReservationForRequest(property, reservationId);
+      return createHousekeepingTask({
+        tenantId: property.tenantId,
+        propertyId: property.id,
+        roomId: reservation.roomId,
+        reservationId: reservation.id,
+        taskType,
+        scheduledDate: state.generatedAt,
+        awayFrom: validTime(awayFrom),
+        awayUntil: validTime(awayUntil),
+        note,
+        source: "guest_portal",
+        actor: { id: "guest-portal", role: "hospede" },
+      });
+    },
+
+    async createRoomServiceOrder({ propertySlug, reservationId, items, note }) {
+      const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
+      if (!property) return null;
+      const reservation = activeReservationForRequest(property, reservationId);
+      const menu = new Map(scopedRows("foodMenu", property.tenantId, property.id).map((item) => [item.id, item]));
+      const normalizedItems = (Array.isArray(items) ? items : []).map((item) => {
+        const menuItem = menu.get(String(item.itemId ?? ""));
+        const quantity = Number(item.quantity);
+        if (!menuItem || !Number.isSafeInteger(quantity) || quantity < 1 || quantity > 20) {
+          throw new RangeError("room service item is invalid");
+        }
+        return { itemId: menuItem.id, name: menuItem.name, quantity, unitPrice: menuItem.price, total: menuItem.price * quantity };
+      });
+      if (!normalizedItems.length) throw new RangeError("room service order cannot be empty");
+      const order = {
+        id: `room-service-${state.roomServiceOrders.length + 1}`,
+        tenantId: property.tenantId,
+        propertyId: property.id,
+        reservationId: reservation.id,
+        roomId: reservation.roomId,
+        status: "requested",
+        items: normalizedItems,
+        total: normalizedItems.reduce((sum, item) => sum + item.total, 0),
+        note: String(note ?? "").trim().slice(0, 300),
+        createdAt: new Date().toISOString(),
+      };
+      state.roomServiceOrders.push(order);
+      audit({ tenantId: property.tenantId, propertyId: property.id, action: "room_service.created", entityId: order.id, actor: { id: "guest-portal", role: "hospede" }, changes: { roomId: order.roomId, total: order.total } });
+      return copy(order);
+    },
+
+    async createGuestMessage({ propertySlug, reservationId, target = "frontdesk", message }) {
+      const property = state.properties.find((row) => row.slug === propertySlug) ?? null;
+      if (!property) return null;
+      const reservation = activeReservationForRequest(property, reservationId);
+      if (typeof message !== "string" || !message.trim()) throw new RangeError("message cannot be empty");
+      const row = {
+        id: `guest-message-${state.guestMessages.length + 1}`,
+        tenantId: property.tenantId,
+        propertyId: property.id,
+        reservationId: reservation.id,
+        roomId: reservation.roomId,
+        target: String(target ?? "frontdesk").trim().toLowerCase().slice(0, 40) || "frontdesk",
+        message: message.trim().slice(0, 500),
+        status: "open",
+        createdAt: new Date().toISOString(),
+      };
+      state.guestMessages.push(row);
+      audit({ tenantId: property.tenantId, propertyId: property.id, action: "guest_message.created", entityId: row.id, actor: { id: "guest-portal", role: "hospede" }, changes: { target: row.target, roomId: row.roomId } });
+      return copy(row);
+    },
+
+    async getAdminOverview({ tenantId, propertyId }) {
+      if (!scopedProperty(tenantId, propertyId)) return null;
+      const reservations = scopedRows("reservations", tenantId, propertyId);
+      const housekeeping = scopedRows("housekeepingTasks", tenantId, propertyId);
+      const rooms = scopedRows("rooms", tenantId, propertyId);
+      const roomReadiness = rooms.map((room) => ({
+        roomId: room.id,
+        number: room.number,
+        status: room.status,
+        lastDeliveryPhoto: photosForRoom(tenantId, propertyId, room.id).deliveryPhotos[0] ?? null,
+      }));
+      return {
+        roomReadiness: copy(roomReadiness),
+        housekeepingTasks: copy(housekeeping),
+        roomServiceOrders: copy(scopedRows("roomServiceOrders", tenantId, propertyId)),
+        guestMessages: copy(scopedRows("guestMessages", tenantId, propertyId)),
+        partners: copy(scopedRows("clientPartners", tenantId, propertyId)),
+        charts: {
+          housekeepingByStatus: housekeeping.reduce((acc, task) => ({ ...acc, [task.status]: (acc[task.status] ?? 0) + 1 }), {}),
+          roomsByStatus: rooms.reduce((acc, room) => ({ ...acc, [room.status]: (acc[room.status] ?? 0) + 1 }), {}),
+          revenue: {
+            totalConfirmedCents: reservations
+              .filter((row) => !["cancelled"].includes(row.status))
+              .reduce((sum, row) => sum + Number(row.total || 0), 0),
+          },
+        },
       };
     },
 

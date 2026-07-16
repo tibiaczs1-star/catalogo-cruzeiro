@@ -60,9 +60,9 @@ function createSeed(today = "2026-07-14") {
       { id: "reservation-moa-seed", tenantId: "tenant-vale-demo", propertyId: "property-rio-moa", guestId: "guest-moa-01", roomTypeId: "room-type-standard-rio-moa", roomId: "room-moa-01", checkIn: "2026-07-01", checkOut: "2026-07-02", adults: 1, children: 0, nightlyRate: 15_900, total: 15_900, status: "checked_out" },
     ],
     housekeepingTasks: [
-      { id: "housekeeping-jurua-01", tenantId: "tenant-czs", propertyId: "property-jurua-palace", roomId: "room-104", status: "pending", assignedUsername: "admin", assignedRole: "camareira" },
-      { id: "housekeeping-jurua-02", tenantId: "tenant-czs", propertyId: "property-jurua-palace", roomId: "room-301", status: "in_progress", assignedUsername: "admin", assignedRole: "camareira" },
-      { id: "housekeeping-moa-01", tenantId: "tenant-vale-demo", propertyId: "property-rio-moa", roomId: "room-moa-01", status: "done", assignedUsername: "admin", assignedRole: "camareira" },
+      { id: "housekeeping-jurua-01", tenantId: "tenant-czs", propertyId: "property-jurua-palace", roomId: "room-104", status: "pending", assignedUsername: "admin", assignedRole: "camareira", taskType: "final_cleaning", scheduledDate: today, source: "system" },
+      { id: "housekeeping-jurua-02", tenantId: "tenant-czs", propertyId: "property-jurua-palace", roomId: "room-301", status: "in_progress", assignedUsername: "admin", assignedRole: "camareira", taskType: "final_cleaning", scheduledDate: today, source: "system" },
+      { id: "housekeeping-moa-01", tenantId: "tenant-vale-demo", propertyId: "property-rio-moa", roomId: "room-moa-01", status: "done", assignedUsername: "admin", assignedRole: "camareira", taskType: "final_cleaning", scheduledDate: today, source: "system" },
     ],
     maintenanceOrders: [
       { id: "maintenance-jurua-01", tenantId: "tenant-czs", propertyId: "property-jurua-palace", roomId: "room-203", status: "open", title: "Revisar ar-condicionado" },
@@ -90,6 +90,19 @@ function createSeed(today = "2026-07-14") {
       { id: "membership-maintenance-jurua", userId: "user-admin-jurua", tenantId: "tenant-czs", propertyId: "property-jurua-palace", role: "manutencao" },
       { id: "membership-admin-moa", userId: "user-admin-rio-moa", tenantId: "tenant-vale-demo", propertyId: "property-rio-moa", role: "administrador" },
     ],
+    clientPartners: [
+      { id: "partner-burger", tenantId: "tenant-czs", propertyId: "property-jurua-palace", name: "Burger Juruá Express", category: "restaurant", discountLabel: "10% para hóspedes", contact: "WhatsApp do parceiro", description: "Fast food, lanches e combos no quarto." },
+      { id: "partner-tour", tenantId: "tenant-czs", propertyId: "property-jurua-palace", name: "Passeios Rio Juruá", category: "tourism", discountLabel: "5% em passeios", contact: "Recepção", description: "Passeios, turismo local e traslados." },
+      { id: "partner-market", tenantId: "tenant-czs", propertyId: "property-jurua-palace", name: "Conveniência Central", category: "sales", discountLabel: "Entrega combinada", contact: "Recepção", description: "Produtos, bebidas e itens rápidos." },
+      { id: "partner-laundry", tenantId: "tenant-czs", propertyId: "property-jurua-palace", name: "Lavanderia Parceira", category: "services", discountLabel: "15% para hóspedes", contact: "Recepção", description: "Lavagem expressa e serviços úteis." },
+    ],
+    foodMenu: [
+      { id: "food-burger-combo", tenantId: "tenant-czs", propertyId: "property-jurua-palace", partnerId: "partner-burger", name: "Combo burger + batata", category: "fast_food", price: 3_900 },
+      { id: "food-pizza-individual", tenantId: "tenant-czs", propertyId: "property-jurua-palace", partnerId: "partner-burger", name: "Pizza individual", category: "fast_food", price: 4_500 },
+      { id: "food-acai", tenantId: "tenant-czs", propertyId: "property-jurua-palace", partnerId: "partner-burger", name: "Açaí do hóspede", category: "fast_food", price: 2_500 },
+    ],
+    roomServiceOrders: [],
+    guestMessages: [],
     roomPhotos: [],
     credentialProfiles: [],
     auditEvents: [],
