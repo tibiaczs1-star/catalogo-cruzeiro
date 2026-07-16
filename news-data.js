@@ -684,6 +684,73 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/vazamento-de-gas-leva-prefeitura-de-manaus-decretar-estado-de-alerta",
+    "slug": "vazamento-de-gas-leva-prefeitura-de-manaus-a-decretar-estado-de-alerta",
+    "title": "Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta",
+    "eyebrow": "Prefeitura",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:22:00.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/vazamento-de-gas-leva-prefeitura-de-manaus-decretar-estado-de-alerta",
+    "sourceLabel": "Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta",
+    "lede": "Vazamento de gás em uma unidade da empresa petroquímica Innova levou a prefeitura de Manaus a decretar estado de alerta para a capital amazonense.",
+    "summary": "Vazamento de gás em uma unidade da empresa petroquímica Innova levou a prefeitura de Manaus a decretar estado de alerta para a capital amazonense.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "feedImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "sourceImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/vazamento-de-gas-leva-prefeitura-de-manaus-decretar-estado-de-alerta"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/vazamento-de-gas-leva-prefeitura-de-manaus-decretar-estado-de-alerta"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "vazamento-de-gas-leva-prefeitura-de-manaus-a-decretar-estado-de-alerta"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta Vazamento de gás em uma unidade da empresa petroquímica Innova levou a prefeitura de Manaus a decretar estado de alerta para a capital amazonense. A informação vem de Agencia Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta Vazamento de gás em uma unidade da empresa petroquímica Innova levou a prefeitura de Manaus a decretar estado de alerta para a capital amazonense. A informação vem de Agencia Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta. Vazamento de gás em uma unidade da empresa petroquímica Innova levou a prefeitura de Manaus a decretar estado de alerta para a capital amazonense. Fonte: Agencia Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Agencia Brasil publicou em 16 de jul de 2026: Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://ac24horas.com/2026/07/16/sem-chuva-rio-acre-registra-leve-elevacao-e-marca-246-metros-na-capital/",
     "slug": "sem-chuva-rio-acre-registra-leve-elevacao-e-marca-2-46-metros-na-capital",
     "title": "Sem chuva, Rio Acre registra leve elevação e marca 2,46 metros na capital",
@@ -1015,6 +1082,145 @@ window.NEWS_DATA = [
     },
     "body": [
       "Prefeitura de Rodrigues Alves publicou em 16 de jul de 2026: Aviso de Reabertura - PP SRP N° 012/2026.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/07/16/ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina/",
+    "slug": "ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina",
+    "title": "Ginecologista explica como o envelhecimento afeta a região íntima feminina",
+    "eyebrow": "Saude",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:00:02.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/07/16/ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina/",
+    "sourceLabel": "Ginecologista explica como o envelhecimento afeta a região íntima feminina",
+    "lede": "O envelhecimento e a redução hormonal também provocam mudanças na região íntima feminina. Segundo o ac24horas, a ginecologista Thaysa Vilela explicou que a perda de colágeno e gordura pode causar flacidez, ressecamento e alterações no contorno da vulva a partir dos 30 e 40 anos. A orientação foi apresentada no programa Médico24Horas.",
+    "summary": "O envelhecimento e a redução hormonal também provocam mudanças na região íntima feminina. Segundo o ac24horas, a ginecologista Thaysa Vilela explicou que a perda de colágeno e gordura pode causar flacidez, ressecamento e alterações no contorno da vulva a partir dos 30 e 40 anos. A orientação foi apresentada no programa Médico24Horas.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/CAPA-DO-SITE-2026-07-14T130739.707.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/CAPA-DO-SITE-2026-07-14T130739.707.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/CAPA-DO-SITE-2026-07-14T130739.707.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/07/16/ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/07/16/ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Ginecologista explica como o envelhecimento afeta a região íntima feminina No programa Médico24Horas, a ginecologista Dra. Thaysa Vilela explicou que o envelhecimento e a redução hormonal também provocam mudanças na aparência da região íntima feminina. A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Ginecologista explica como o envelhecimento afeta a região íntima feminina No programa Médico24Horas, a ginecologista Dra. Thaysa Vilela explicou que o envelhecimento e a redução hormonal também provocam mudanças na aparência da região íntima feminina. A informação vem de ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Ginecologista explica como o envelhecimento afeta a região íntima feminina. No programa Médico24Horas, a ginecologista Dra. Thaysa Vilela explicou que o envelhecimento e a redução hormonal também provocam mudanças na aparência da região íntima feminina. Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "ac24horas publicou em 16 de jul de 2026: Ginecologista explica como o envelhecimento afeta a região íntima feminina.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "seo": {
+      "title": "Ginecologista explica como o envelhecimento afeta a região íntima feminina",
+      "description": "O envelhecimento e a redução hormonal também provocam mudanças na região íntima feminina. Segundo o ac24horas, a ginecologista Thaysa Vilela explicou que a perda de colágeno e gordura pode causar flacidez, ressecamento e alterações no contorno da vulva a partir dos 30 e 40 anos. A orientação foi apresentada no programa Médico24Horas.",
+      "slug": "ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina"
+    }
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/pop/celebridades/atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier/",
+    "slug": "atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier",
+    "title": "Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier",
+    "eyebrow": "Saude",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:20:05.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/pop/celebridades/atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier/",
+    "sourceLabel": "Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier",
+    "lede": "Rita Guedes fez seu relato no Instagram na última quarta-feira (15); assista na íntegra",
+    "summary": "Rita Guedes fez seu relato no Instagram na última quarta-feira (15); assista na íntegra",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/dandara-albuquerque.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/dandara-albuquerque.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/dandara-albuquerque.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/celebridades/atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/celebridades/atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier Rita Guedes fez seu relato no Instagram na última quarta-feira (15); assista na íntegra A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier Rita Guedes fez seu relato no Instagram na última quarta-feira (15); assista na íntegra A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier. Rita Guedes fez seu relato no Instagram na última quarta-feira (15); assista na íntegra Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -1355,6 +1561,74 @@ window.NEWS_DATA = [
     },
     "body": [
       "Jurua em Tempo publicou em 15 de jul de 2026: Sinteac convoca servidores da rede estadual para manifestação em frente ao Palácio Rio Branco.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://contilnetnoticias.com.br/destaque-2/estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico/",
+    "slug": "estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico",
+    "title": "Estudantes da Ufac anunciam greve e convocam ato por transporte público",
+    "eyebrow": "Educacao",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:06:01.108Z",
+    "category": "Educacao",
+    "categoryKey": "educacao",
+    "previewClass": "thumb-educacao",
+    "sourceName": "ContilNet / Instagram",
+    "sourceUrl": "https://contilnetnoticias.com.br/destaque-2/estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico/",
+    "sourceLabel": "Estudantes da Ufac anunciam greve e convocam ato por transporte público",
+    "lede": "Estudantes da Ufac anunciam greve e convocam ato por transporte público",
+    "summary": "Estudantes da Ufac anunciam greve e convocam ato por transporte público",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 970,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "ContilNet / Instagram",
+        "url": "https://contilnetnoticias.com.br/destaque-2/estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ContilNet / Instagram",
+        "url": "https://contilnetnoticias.com.br/destaque-2/estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Estudantes da Ufac anunciam greve e convocam ato por transporte público A informação vem de ContilNet / Instagram.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Estudantes da Ufac anunciam greve e convocam ato por transporte público A informação vem de ContilNet / Instagram.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Estudantes da Ufac anunciam greve e convocam ato por transporte público. Fonte: ContilNet / Instagram.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "ContilNet / Instagram publicou em 16 de jul de 2026: Estudantes da Ufac anunciam greve e convocam ato por transporte público.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -3179,6 +3453,74 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-07/xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k",
+    "slug": "xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k",
+    "title": "Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K",
+    "eyebrow": "Cultura",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:02:00.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-07/xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k",
+    "sourceLabel": "Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K",
+    "lede": "Um dos maiores sucessos do cinema brasileiro poderá ser visto novamente nas telas de todo o país a partir desta quinta-feira (16). Xica da Silva (1976), de Cacá Diegues, retorna aos cinemas 50 anos depois do lançamento original, em versão restaurada em 4K.",
+    "summary": "Um dos maiores sucessos do cinema brasileiro poderá ser visto novamente nas telas de todo o país a partir desta quinta-feira (16). Xica da Silva (1976), de Cacá Diegues, retorna aos cinemas 50 anos depois do lançamento original, em versão restaurada em 4K.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696770&o=rss",
+    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696770&o=rss",
+    "sourceImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696770&o=rss",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-07/xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-07/xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K Um dos maiores sucessos do cinema brasileiro poderá ser visto novamente nas telas de todo o país a partir desta quinta-feira (16). Xica da Silva (1976), de Cacá Diegues, retorna aos cinemas 50 anos depois do lançamento original, em versão restaurada em 4K. A informação vem de Agencia Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K Um dos maiores sucessos do cinema brasileiro poderá ser visto novamente nas telas de todo o país a partir desta quinta-feira (16). Xica da Silva (1976), de Cacá Diegues, retorna aos cinemas 50 anos depois do lançamento original, em versão restaurada em 4K. A informação vem de Agencia Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K. Um dos maiores sucessos do cinema brasileiro poderá ser visto novamente nas telas de todo o país a partir desta quinta-feira (16). Fonte: Agencia Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "Agencia Brasil publicou em 16 de jul de 2026: Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://www.cnnbrasil.com.br/pop/celebridades/apos-coracao-acelerado-gabz-vai-estrelar-musical-bete-balanco/",
     "slug": "apos-coracao-acelerado-gabz-vai-estrelar-musical-bete-balanco",
     "title": "Após “Coração Acelerado”, Gabz vai estrelar musical “Bete Balanço”",
@@ -4880,6 +5222,73 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://g1.globo.com/politica/noticia/2026/07/16/quaest-flavio-bolsonaro-reverter-tarifas-eua.ghtml",
+    "slug": "para-58-flavio-bolsonaro-nao-tem-forca-para-convencer-trump-a-rever-tarifas-segundo-quaest",
+    "title": "Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest",
+    "eyebrow": "Politica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:16:45.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/politica/noticia/2026/07/16/quaest-flavio-bolsonaro-reverter-tarifas-eua.ghtml",
+    "sourceLabel": "Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest",
+    "lede": "Flávio Bolsonaro, Eduardo Bolsonaro e Paulo Figueredo com Donald Trump Reprodução/Instagram Pesquisa Genial/Quaest divulgada nesta quinta-feira (16) mostra que 58% dos brasileiros consideram que Flávio Bolsonaro (PL-RJ) não tem força para convencer o...",
+    "summary": "Flávio Bolsonaro, Eduardo Bolsonaro e Paulo Figueredo com Donald Trump Reprodução/Instagram Pesquisa Genial/Quaest divulgada nesta quinta-feira (16) mostra que 58% dos brasileiros consideram que Flávio Bolsonaro (PL-RJ) não tem força para convencer o...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/Jb8XsXC1dhL0z6C9PmHJAH3sQEI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/t/AhUEFoS22qG6jfiK7pDw/whatsapp-image-2026-05-26-at-17.50.28-1-redimensionado-para-1200x829-1-.jpeg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/Jb8XsXC1dhL0z6C9PmHJAH3sQEI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/t/AhUEFoS22qG6jfiK7pDw/whatsapp-image-2026-05-26-at-17.50.28-1-redimensionado-para-1200x829-1-.jpeg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/Jb8XsXC1dhL0z6C9PmHJAH3sQEI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/t/AhUEFoS22qG6jfiK7pDw/whatsapp-image-2026-05-26-at-17.50.28-1-redimensionado-para-1200x829-1-.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/noticia/2026/07/16/quaest-flavio-bolsonaro-reverter-tarifas-eua.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/noticia/2026/07/16/quaest-flavio-bolsonaro-reverter-tarifas-eua.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "para-58-flavio-bolsonaro-nao-tem-forca-para-convencer-trump-a-rever-tarifas-segundo-quaest"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest Flávio Bolsonaro, Eduardo Bolsonaro e Paulo Figueredo com Donald Trump Reprodução/Instagram Pesquisa Genial/Quaest divulgada nesta quinta-feira (16) mostra que 58% dos brasileiros consideram que Flávio Bolsonaro (PL-RJ) não tem força para convencer o... A informação vem de G1 política.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest Flávio Bolsonaro, Eduardo Bolsonaro e Paulo Figueredo com Donald Trump Reprodução/Instagram Pesquisa Genial/Quaest divulgada nesta quinta-feira (16) mostra que 58% dos brasileiros consideram que Flávio Bolsonaro (PL-RJ) não tem força para convencer o... A informação vem de G1 política.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest. Flávio Bolsonaro, Eduardo Bolsonaro e Paulo Figueredo com Donald Trump Reprodução/Instagram Pesquisa Genial/Quaest divulgada nesta quinta-feira (16) mostra que 58% dos brasileiros consideram que Flávio Bolsonaro (PL-RJ) não tem força... Fonte: G1 Politica.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "G1 Politica publicou em 16 de jul de 2026: Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://ac24horas.com/2026/07/16/flavio-nega-conhecer-sicario-apos-foto-com-aliado-de-vorcaro/",
     "slug": "flavio-nega-conhecer-sicario-apos-foto-com-aliado-de-vorcaro",
     "title": "Flávio nega conhecer “Sicário”, após foto com aliado de Vorcaro",
@@ -5611,6 +6020,7 @@ window.NEWS_DATA = [
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
       "Agencia Brasil publicou em 16 de jul de 2026: Brasil diz que não há justificativas para tarifas impostas pelos EUA.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
@@ -11091,73 +11501,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/",
-    "slug": "mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil",
-    "title": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
-    "eyebrow": "Utilidade Publica",
-    "date": "16 de jul de 2026",
-    "publishedAt": "2026-07-16T08:53:42.298Z",
-    "category": "Utilidade Publica",
-    "categoryKey": "utilidade publica mpac debate projeto de lei do plano diretor de rio branco com instituicoes e sociedade civil mpac debate projeto de lei do plano diretor de rio branco com instituicoes e sociedade civil",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "Ministerio Publico do Acre",
-    "sourceUrl": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/",
-    "sourceLabel": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
-    "lede": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
-    "summary": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-13.52.53-1.jpeg",
-    "feedImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-13.52.53-1.jpeg",
-    "sourceImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-13.52.53-1.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 870,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Ministerio Publico do Acre",
-        "url": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Ministerio Publico do Acre",
-        "url": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil A informação vem de Ministerio Publico do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil A informação vem de Ministerio Publico do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil. Fonte: Ministerio Publico do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ]
-  },
-  {
     "id": "https://www.mpac.mp.br/mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes/",
     "slug": "mpac-recomenda-regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial",
     "title": "MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações",
@@ -11220,6 +11563,73 @@ window.NEWS_DATA = [
     },
     "body": [
       "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC recomenda regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/",
+    "slug": "mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil",
+    "title": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
+    "eyebrow": "Utilidade Publica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T08:53:42.298Z",
+    "category": "Utilidade Publica",
+    "categoryKey": "utilidade publica mpac debate projeto de lei do plano diretor de rio branco com instituicoes e sociedade civil mpac debate projeto de lei do plano diretor de rio branco com instituicoes e sociedade civil",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Ministerio Publico do Acre",
+    "sourceUrl": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/",
+    "sourceLabel": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
+    "lede": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
+    "summary": "MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-13.52.53-1.jpeg",
+    "feedImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-13.52.53-1.jpeg",
+    "sourceImageUrl": "https://www.mpac.mp.br/wp-content/uploads/WhatsApp-Image-2026-07-15-at-13.52.53-1.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 870,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Ministerio Publico do Acre",
+        "url": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Ministerio Publico do Acre",
+        "url": "https://www.mpac.mp.br/mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mpac-debate-projeto-de-lei-do-plano-diretor-de-rio-branco-com-instituicoes-e-sociedade-civil"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil A informação vem de Ministerio Publico do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Utilidade Publica. MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil A informação vem de Ministerio Publico do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil. Fonte: Ministerio Publico do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Ministerio Publico do Acre publicou em 16 de jul de 2026: MPAC debate Projeto de Lei do Plano Diretor de Rio Branco com instituições e sociedade civil.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -11963,6 +12373,78 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://portalacre.com.br/2026/07/queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-faeac/",
+    "slug": "queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-fae",
+    "title": "Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T12:05:07.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "Portal Acre",
+    "sourceUrl": "https://portalacre.com.br/2026/07/queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-faeac/",
+    "sourceLabel": "Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC",
+    "lede": "As saídas de gado vivo do Acre para outros estados caíram 22,5% em junho na comparação com maio. Segundo o Portal Acre, a FAEAC avalia que a retração é conjuntural, influenciada pela queda no preço da arroba e pelo início da estiagem. A entidade afirma que o acumulado do primeiro semestre continua acima do registrado no mesmo período de 2025.",
+    "summary": "As saídas de gado vivo do Acre para outros estados caíram 22,5% em junho na comparação com maio. Segundo o Portal Acre, a FAEAC avalia que a retração é conjuntural, influenciada pela queda no preço da arroba e pelo início da estiagem. A entidade afirma que o acumulado do primeiro semestre continua acima do registrado no mesmo período de 2025.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/assuero-ok-1024x540.jpg",
+    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/assuero-ok-1024x540.jpg",
+    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/assuero-ok-1024x540.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 825,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/07/queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-faeac/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/07/queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-faeac/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-fae"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC A retração de 22,5% nas saídas de gado vivo do Acre para outros estados em junho, na comparação com maio, é resultado de um ajuste conjuntural do mercado pecuário e não indica uma mudança na tendência positiva observada ao longo do primeiro semestre. A informação vem de Portal Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC A retração de 22,5% nas saídas de gado vivo do Acre para outros estados em junho, na comparação com maio, é resultado de um ajuste conjuntural do mercado pecuário e não indica uma mudança na tendência positiva observada ao longo do primeiro semestre. A informação vem de Portal Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC. A retração de 22,5% nas saídas de gado vivo do Acre para outros estados em junho, na comparação com maio, é resultado de um ajuste conjuntural do mercado pecuário e não indica uma mudança na tendência positiva observada ao longo do... Fonte: Portal Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Portal Acre publicou em 16 de jul de 2026: Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "seo": {
+      "title": "Queda nas saídas de gado vivo em junho reflete ajuste de mercado e início da estiagem, avalia FAEAC",
+      "description": "As saídas de gado vivo do Acre para outros estados caíram 22,5% em junho na comparação com maio. Segundo o Portal Acre, a FAEAC avalia que a retração é conjuntural, influenciada pela queda no preço da arroba e pelo início da estiagem. A entidade afirma que o acumulado do primeiro semestre continua acima do registrado no mesmo período de 2025.",
+      "slug": "queda-nas-saidas-de-gado-vivo-em-junho-reflete-ajuste-de-mercado-e-inicio-da-estiagem-avalia-fae"
+    }
+  },
+  {
     "id": "https://portalacre.com.br/2026/07/ultrapassagem-termina-em-capotamento-na-br-317-e-passageiras-ficam-feridas/",
     "slug": "ultrapassagem-causa-capotamento-na-317-e-passageiras-ficam-feridas",
     "title": "Ultrapassagem causa capotamento na 317 e passageiras ficam feridas",
@@ -12594,6 +13076,480 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://www.cnnbrasil.com.br/internacional/militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth/",
+    "slug": "militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth",
+    "title": "Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:38:14.000Z",
+    "category": "Nacional",
+    "categoryKey": "internacional nacional militares dos eua farao testes de testosterona anualmente anuncia hegseth secretario de defesa anunciou testagem anual obrigatoria a partir dos 30 anos para desempenho maximo das tropas americanas",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth/",
+    "sourceLabel": "Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth",
+    "lede": "Secretário de Defesa anunciou testagem anual obrigatória a partir dos 30 anos para \"desempenho máximo das tropas americanas\"",
+    "summary": "Secretário de Defesa anunciou testagem anual obrigatória a partir dos 30 anos para \"desempenho máximo das tropas americanas\"",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/Paraquedistas-do-Exercito-da-82a-Divisao-de-Paraquedistas-em-desfile-militar-em-Washington-DC.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/Paraquedistas-do-Exercito-da-82a-Divisao-de-Paraquedistas-em-desfile-militar-em-Washington-DC.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/Paraquedistas-do-Exercito-da-82a-Divisao-de-Paraquedistas-em-desfile-militar-em-Washington-DC.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "militares-dos-eua-farao-testes-de-testosterona-anualmente-anuncia-hegseth"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth Secretário de Defesa anunciou testagem anual obrigatória a partir dos 30 anos para \"desempenho máximo das tropas americanas\" A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth Secretário de Defesa anunciou testagem anual obrigatória a partir dos 30 anos para \"desempenho máximo das tropas americanas\" A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth. Secretário de Defesa anunciou testagem anual obrigatória a partir dos 30 anos para \"desempenho máximo das tropas americanas\" Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Militares dos EUA farão testes de testosterona anualmente, anuncia Hegseth.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/sul/rs/rio-grande-do-sul-sob-alerta-laranja-defesa-civil-preve-fortes-temporais/",
+    "slug": "rio-grande-do-sul-sob-alerta-laranja-defesa-civil-preve-fortes-temporais",
+    "title": "Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:27:34.000Z",
+    "category": "Nacional",
+    "categoryKey": "rio grande do sul nacional rio grande do sul sob alerta laranja defesa civil preve fortes temporais inmet emite aviso de perigo para ventos intensos e chuva volumosa entre sexta e domingo em diversas regioes gauchas",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sul/rs/rio-grande-do-sul-sob-alerta-laranja-defesa-civil-preve-fortes-temporais/",
+    "sourceLabel": "Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais",
+    "lede": "INMET emite aviso de perigo para ventos intensos e chuva volumosa entre sexta e domingo em diversas regiões gaúchas",
+    "summary": "INMET emite aviso de perigo para ventos intensos e chuva volumosa entre sexta e domingo em diversas regiões gaúchas",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/09/1631631157-3-raios_rio_grande_do_sul_venancio_aires_bom_principio_joia_chuva_clima_ao_vivo_tempo-13-09-21.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/09/1631631157-3-raios_rio_grande_do_sul_venancio_aires_bom_principio_joia_chuva_clima_ao_vivo_tempo-13-09-21.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/09/1631631157-3-raios_rio_grande_do_sul_venancio_aires_bom_principio_joia_chuva_clima_ao_vivo_tempo-13-09-21.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sul/rs/rio-grande-do-sul-sob-alerta-laranja-defesa-civil-preve-fortes-temporais/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sul/rs/rio-grande-do-sul-sob-alerta-laranja-defesa-civil-preve-fortes-temporais/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "rio-grande-do-sul-sob-alerta-laranja-defesa-civil-preve-fortes-temporais"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais INMET emite aviso de perigo para ventos intensos e chuva volumosa entre sexta e domingo em diversas regiões gaúchas A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais INMET emite aviso de perigo para ventos intensos e chuva volumosa entre sexta e domingo em diversas regiões gaúchas A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais. INMET emite aviso de perigo para ventos intensos e chuva volumosa entre sexta e domingo em diversas regiões gaúchas Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/",
+    "slug": "veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16",
+    "title": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:25:27.000Z",
+    "category": "Nacional",
+    "categoryKey": "brasileirao nacional veja como esta a tabela do brasileirao que volta nesta quinta feira 16 competicao nacional ficou mais de 50 dias paralisada por conta da copa do mundo",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/",
+    "sourceLabel": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
+    "lede": "Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo",
+    "summary": "Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16) Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16) Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16). Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16).",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/07/16/sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes/",
+    "slug": "sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes",
+    "title": "Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões",
+    "eyebrow": "Acre / Governo",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:24:35.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/07/16/sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes/",
+    "sourceLabel": "Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões",
+    "lede": "O Acre terá quinta-feira de tempo quente, com sol entre nuvens e possibilidade de chuva rápida e isolada. Segundo o ac24horas, não há previsão de temporais. No Juruá, incluindo Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves, as temperaturas devem variar entre 22°C e 24°C nas mínimas e de 31°C a 33°C nas máximas.",
+    "summary": "O Acre terá quinta-feira de tempo quente, com sol entre nuvens e possibilidade de chuva rápida e isolada. Segundo o ac24horas, não há previsão de temporais. No Juruá, incluindo Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves, as temperaturas devem variar entre 22°C e 24°C nas mínimas e de 31°C a 33°C nas máximas.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/07/calor-sol-rodrigo-cunha-tribuna-do-pr.webp",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2025/07/calor-sol-rodrigo-cunha-tribuna-do-pr.webp",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2025/07/calor-sol-rodrigo-cunha-tribuna-do-pr.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/07/16/sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/07/16/sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões Foto: reprodução \" Os moradores do Acre devem enfrentar uma quinta-feira (16) de tempo quente, com predomínio de sol entre nuvens e possibilidade de pancadas rápidas e isoladas de chuva em diferentes regiões do estado. A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões Foto: reprodução \" Os moradores do Acre devem enfrentar uma quinta-feira (16) de tempo quente, com predomínio de sol entre nuvens e possibilidade de pancadas rápidas e isoladas de chuva em diferentes regiões do estado. A informação vem de ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões. Foto: reprodução \" Os moradores do Acre devem enfrentar uma quinta-feira (16) de tempo quente, com predomínio de sol entre nuvens e possibilidade de pancadas rápidas e isoladas de chuva em diferentes regiões do estado. Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "ac24horas publicou em 16 de jul de 2026: Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "seo": {
+      "title": "Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões",
+      "description": "O Acre terá quinta-feira de tempo quente, com sol entre nuvens e possibilidade de chuva rápida e isolada. Segundo o ac24horas, não há previsão de temporais. No Juruá, incluindo Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves, as temperaturas devem variar entre 22°C e 24°C nas mínimas e de 31°C a 33°C nas máximas.",
+      "slug": "sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes"
+    }
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/empresario-que-vendeu-patek-philippe-falso-e-alvo-de-operacao-no-rj/",
+    "slug": "empresario-que-vendeu-patek-philippe-falso-e-alvo-de-operacao-no-rj",
+    "title": "Empresário que vendeu Patek Philippe falso é alvo de operação no RJ",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:22:22.000Z",
+    "category": "Nacional",
+    "categoryKey": "rio de janeiro nacional empresario que vendeu patek philippe falso e alvo de operacao no rj sao cumpridos mandados de busca e apreensao em dois enderecos de andre vinicios peralta na barra da tijuca artigo foi vendido por r 200 mil",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/empresario-que-vendeu-patek-philippe-falso-e-alvo-de-operacao-no-rj/",
+    "sourceLabel": "Empresário que vendeu Patek Philippe falso é alvo de operação no RJ",
+    "lede": "São cumpridos mandados de busca e apreensão em dois endereços de André Vinícios Peralta, na Barra da Tijuca; artigo foi vendido por R$ 200 mil",
+    "summary": "São cumpridos mandados de busca e apreensão em dois endereços de André Vinícios Peralta, na Barra da Tijuca; artigo foi vendido por R$ 200 mil",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/advogado.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/advogado.png?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/advogado.png?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/empresario-que-vendeu-patek-philippe-falso-e-alvo-de-operacao-no-rj/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/empresario-que-vendeu-patek-philippe-falso-e-alvo-de-operacao-no-rj/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "empresario-que-vendeu-patek-philippe-falso-e-alvo-de-operacao-no-rj"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Empresário que vendeu Patek Philippe falso é alvo de operação no RJ São cumpridos mandados de busca e apreensão em dois endereços de André Vinícios Peralta, na Barra da Tijuca; artigo foi vendido por R$ 200 mil A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Empresário que vendeu Patek Philippe falso é alvo de operação no RJ São cumpridos mandados de busca e apreensão em dois endereços de André Vinícios Peralta, na Barra da Tijuca; artigo foi vendido por R$ 200 mil A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Empresário que vendeu Patek Philippe falso é alvo de operação no RJ. São cumpridos mandados de busca e apreensão em dois endereços de André Vinícios Peralta, na Barra da Tijuca; artigo foi vendido por R$ 200 mil Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Empresário que vendeu Patek Philippe falso é alvo de operação no RJ.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/pop/celebridades/agente-de-sam-neill-revela-causa-da-morte-do-ator/",
+    "slug": "agente-de-sam-neill-revela-causa-da-morte-do-ator",
+    "title": "Agente de Sam Neill revela causa da morte do ator",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:22:15.000Z",
+    "category": "Nacional",
+    "categoryKey": "celebridades nacional agente de sam neill revela causa da morte do ator astro enfrentou cancer por quatro anos e se disse curado em abril",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/pop/celebridades/agente-de-sam-neill-revela-causa-da-morte-do-ator/",
+    "sourceLabel": "Agente de Sam Neill revela causa da morte do ator",
+    "lede": "Astro enfrentou câncer por quatro anos e se disse curado em abril",
+    "summary": "Astro enfrentou câncer por quatro anos e se disse curado em abril",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/virginia-vini-jr-colo.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/virginia-vini-jr-colo.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/virginia-vini-jr-colo.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/celebridades/agente-de-sam-neill-revela-causa-da-morte-do-ator/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/pop/celebridades/agente-de-sam-neill-revela-causa-da-morte-do-ator/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "agente-de-sam-neill-revela-causa-da-morte-do-ator"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Agente de Sam Neill revela causa da morte do ator Astro enfrentou câncer por quatro anos e se disse curado em abril A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Agente de Sam Neill revela causa da morte do ator Astro enfrentou câncer por quatro anos e se disse curado em abril A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Agente de Sam Neill revela causa da morte do ator. Astro enfrentou câncer por quatro anos e se disse curado em abril Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Agente de Sam Neill revela causa da morte do ator.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/agro/pescados-e-mel-organico-sao-incluidos-na-lista-de-isencoes/",
+    "slug": "pescados-e-mel-organico-sao-incluidos-na-lista-de-isencoes",
+    "title": "Pescados e mel orgânico são incluídos na lista de isenções",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:17:42.000Z",
+    "category": "Nacional",
+    "categoryKey": "agro nacional pescados e mel organico sao incluidos na lista de isencoes entidades destacam articulacao conjunta com empresas e importadores norte americanos para manter produtos fora da taxacao de 25",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/agro/pescados-e-mel-organico-sao-incluidos-na-lista-de-isencoes/",
+    "sourceLabel": "Pescados e mel orgânico são incluídos na lista de isenções",
+    "lede": "Entidades destacam articulação conjunta com empresas e importadores norte-americanos para manter produtos fora da taxação de 25%",
+    "summary": "Entidades destacam articulação conjunta com empresas e importadores norte-americanos para manter produtos fora da taxação de 25%",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/pexels-roman-odintsov-6422025.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/pexels-roman-odintsov-6422025.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/pexels-roman-odintsov-6422025.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/pescados-e-mel-organico-sao-incluidos-na-lista-de-isencoes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/pescados-e-mel-organico-sao-incluidos-na-lista-de-isencoes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "pescados-e-mel-organico-sao-incluidos-na-lista-de-isencoes"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Pescados e mel orgânico são incluídos na lista de isenções Entidades destacam articulação conjunta com empresas e importadores norte-americanos para manter produtos fora da taxação de 25% A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Pescados e mel orgânico são incluídos na lista de isenções Entidades destacam articulação conjunta com empresas e importadores norte-americanos para manter produtos fora da taxação de 25% A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Pescados e mel orgânico são incluídos na lista de isenções. Entidades destacam articulação conjunta com empresas e importadores norte-americanos para manter produtos fora da taxação de 25% Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Pescados e mel orgânico são incluídos na lista de isenções.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
     "id": "https://ac24horas.com/2026/07/16/tarifaco-ustr-encerra-investigacao-e-mira-pix-etanol-e-desmatamento/",
     "slug": "tarifaco-ustr-encerra-investigacao-e-mira-pix-etanol-e-desmatamento",
     "title": "Tarifaço: USTR encerra investigação e mira Pix, etanol e desmatamento",
@@ -12656,6 +13612,73 @@ window.NEWS_DATA = [
     },
     "body": [
       "ac24horas publicou em 16 de jul de 2026: Tarifaço: USTR encerra investigação e mira Pix, etanol e desmatamento.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/messi-e-o-maior-da-historia-nao-ha-mais-duvida-decreta-scaloni/",
+    "slug": "messi-e-o-maior-da-historia-nao-ha-mais-duvida-decreta-scaloni",
+    "title": "“Messi é o maior da história, não há mais dúvida”, decreta Scaloni",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:10:57.000Z",
+    "category": "Nacional",
+    "categoryKey": "copa do mundo nacional messi e o maior da historia nao ha mais duvida decreta scaloni tecnico da argentina rasga elogios ao seu camisa 10 apos a vitoria epica sobre a inglaterra",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/messi-e-o-maior-da-historia-nao-ha-mais-duvida-decreta-scaloni/",
+    "sourceLabel": "“Messi é o maior da história, não há mais dúvida”, decreta Scaloni",
+    "lede": "Técnico da Argentina rasga elogios ao seu camisa 10 após a vitória épica sobre a Inglaterra",
+    "summary": "Técnico da Argentina rasga elogios ao seu camisa 10 após a vitória épica sobre a Inglaterra",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/SaveClip.App_746780127_18604062427061014_855798337675991030_n-e1784063590955.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/SaveClip.App_746780127_18604062427061014_855798337675991030_n-e1784063590955.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/SaveClip.App_746780127_18604062427061014_855798337675991030_n-e1784063590955.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/messi-e-o-maior-da-historia-nao-ha-mais-duvida-decreta-scaloni/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/messi-e-o-maior-da-historia-nao-ha-mais-duvida-decreta-scaloni/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "messi-e-o-maior-da-historia-nao-ha-mais-duvida-decreta-scaloni"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. “Messi é o maior da história, não há mais dúvida”, decreta Scaloni Técnico da Argentina rasga elogios ao seu camisa 10 após a vitória épica sobre a Inglaterra A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. “Messi é o maior da história, não há mais dúvida”, decreta Scaloni Técnico da Argentina rasga elogios ao seu camisa 10 após a vitória épica sobre a Inglaterra A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: “Messi é o maior da história, não há mais dúvida”, decreta Scaloni. Técnico da Argentina rasga elogios ao seu camisa 10 após a vitória épica sobre a Inglaterra Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: “Messi é o maior da história, não há mais dúvida”, decreta Scaloni.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ]
@@ -31937,1100 +32960,5 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "news",
     "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/policia/passageira-e-sequestrada-apos-pedir-corrida-por-aplicativo/",
-    "slug": "passageira-e-sequestrada-apos-pedir-corrida-por-aplicativo",
-    "title": "Passageira é sequestrada após pedir corrida por aplicativo",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.928Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano passageira e sequestrada apos pedir corrida por aplicativo passageira e sequestrada apos pedir corrida por aplicativo",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/policia/passageira-e-sequestrada-apos-pedir-corrida-por-aplicativo/",
-    "sourceLabel": "Passageira é sequestrada após pedir corrida por aplicativo",
-    "lede": "Passageira é sequestrada após pedir corrida por aplicativo",
-    "summary": "Passageira é sequestrada após pedir corrida por aplicativo",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/passageira-e-sequestrada-apos-pedir-corrida-por-aplicativo/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/passageira-e-sequestrada-apos-pedir-corrida-por-aplicativo/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "passageira-e-sequestrada-apos-pedir-corrida-por-aplicativo"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Passageira é sequestrada após pedir corrida por aplicativo A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Passageira é sequestrada após pedir corrida por aplicativo A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Passageira é sequestrada após pedir corrida por aplicativo. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Passageira é sequestrada após pedir corrida por aplicativo.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/policia/menino-de-4-anos-morre-apos-carro-da-familia-ser-atingido-por-land-rover/",
-    "slug": "menino-de-4-anos-morre-apos-carro-da-familia-ser-atingido-por-land-rover",
-    "title": "Menino de 4 anos morre após carro da família ser atingido por Land Rover",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.927Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano menino de 4 anos morre apos carro da familia ser atingido por land rover menino de 4 anos morre apos carro da familia ser atingido por land rover",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/policia/menino-de-4-anos-morre-apos-carro-da-familia-ser-atingido-por-land-rover/",
-    "sourceLabel": "Menino de 4 anos morre após carro da família ser atingido por Land Rover",
-    "lede": "Menino de 4 anos morre após carro da família ser atingido por Land Rover",
-    "summary": "Menino de 4 anos morre após carro da família ser atingido por Land Rover",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/menino-de-4-anos-morre-apos-carro-da-familia-ser-atingido-por-land-rover/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/menino-de-4-anos-morre-apos-carro-da-familia-ser-atingido-por-land-rover/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "menino-de-4-anos-morre-apos-carro-da-familia-ser-atingido-por-land-rover"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Menino de 4 anos morre após carro da família ser atingido por Land Rover A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Menino de 4 anos morre após carro da família ser atingido por Land Rover A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Menino de 4 anos morre após carro da família ser atingido por Land Rover. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Menino de 4 anos morre após carro da família ser atingido por Land Rover.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/policia/policia-prende-dona-de-pousada-suspeita-de-matar-cozinheira-por-divida-trabalhista/",
-    "slug": "policia-prende-dona-de-pousada-suspeita-de-matar-cozinheira-por-divida-trabalhista",
-    "title": "Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista",
-    "eyebrow": "Policia",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.925Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/policia/policia-prende-dona-de-pousada-suspeita-de-matar-cozinheira-por-divida-trabalhista/",
-    "sourceLabel": "Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista",
-    "lede": "Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista",
-    "summary": "Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/policia-prende-dona-de-pousada-suspeita-de-matar-cozinheira-por-divida-trabalhista/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/policia-prende-dona-de-pousada-suspeita-de-matar-cozinheira-por-divida-trabalhista/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "policia-prende-dona-de-pousada-suspeita-de-matar-cozinheira-por-divida-trabalhista"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Polícia prende dona de pousada suspeita de matar cozinheira por dívida trabalhista.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/policia/idoso-ferido-e-resgatado-de-dentro-de-guarda-roupa-por-policiais/",
-    "slug": "idoso-ferido-e-resgatado-de-dentro-de-guarda-roupa-por-policiais",
-    "title": "Idoso ferido é resgatado de dentro de guarda-roupa por policiais",
-    "eyebrow": "Policia",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.924Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/policia/idoso-ferido-e-resgatado-de-dentro-de-guarda-roupa-por-policiais/",
-    "sourceLabel": "Idoso ferido é resgatado de dentro de guarda-roupa por policiais",
-    "lede": "Idoso ferido é resgatado de dentro de guarda-roupa por policiais",
-    "summary": "Idoso ferido é resgatado de dentro de guarda-roupa por policiais",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/idoso-ferido-e-resgatado-de-dentro-de-guarda-roupa-por-policiais/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/idoso-ferido-e-resgatado-de-dentro-de-guarda-roupa-por-policiais/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "idoso-ferido-e-resgatado-de-dentro-de-guarda-roupa-por-policiais"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Idoso ferido é resgatado de dentro de guarda-roupa por policiais A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Idoso ferido é resgatado de dentro de guarda-roupa por policiais A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Idoso ferido é resgatado de dentro de guarda-roupa por policiais. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Idoso ferido é resgatado de dentro de guarda-roupa por policiais.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/policia/tecnica-de-enfermagem-e-presa-suspeita-de-tentar-furtar-recem-nascida-em-bolsa/",
-    "slug": "tecnica-de-enfermagem-e-presa-suspeita-de-tentar-furtar-recem-nascida-em-bolsa",
-    "title": "Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.922Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano tecnica de enfermagem e presa suspeita de tentar furtar recem nascida em bolsa tecnica de enfermagem e presa suspeita de tentar furtar recem nascida em bolsa",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/policia/tecnica-de-enfermagem-e-presa-suspeita-de-tentar-furtar-recem-nascida-em-bolsa/",
-    "sourceLabel": "Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa",
-    "lede": "Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa",
-    "summary": "Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/tecnica-de-enfermagem-e-presa-suspeita-de-tentar-furtar-recem-nascida-em-bolsa/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/policia/tecnica-de-enfermagem-e-presa-suspeita-de-tentar-furtar-recem-nascida-em-bolsa/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tecnica-de-enfermagem-e-presa-suspeita-de-tentar-furtar-recem-nascida-em-bolsa"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Técnica de enfermagem é presa suspeita de tentar furtar recém-nascida em bolsa.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/politica/caiado-critica-carta-de-bolsonaro-e-diz-que-lideranca-de-candidato-nao-se-herda/",
-    "slug": "caiado-critica-carta-de-bolsonaro-e-diz-que-lideranca-de-candidato-nao-se-herda",
-    "title": "Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.914Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano caiado critica carta de bolsonaro e diz que lideranca de candidato nao se herda caiado critica carta de bolsonaro e diz que lideranca de candidato nao se herda",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/politica/caiado-critica-carta-de-bolsonaro-e-diz-que-lideranca-de-candidato-nao-se-herda/",
-    "sourceLabel": "Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda",
-    "lede": "Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda",
-    "summary": "Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/caiado-critica-carta-de-bolsonaro-e-diz-que-lideranca-de-candidato-nao-se-herda/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/caiado-critica-carta-de-bolsonaro-e-diz-que-lideranca-de-candidato-nao-se-herda/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "caiado-critica-carta-de-bolsonaro-e-diz-que-lideranca-de-candidato-nao-se-herda"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Caiado critica carta de Bolsonaro e diz que liderança de candidato não se herda.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/politica/eua-dizem-que-estreito-de-ormuz-segue-aberto-apos-anuncio-de-fechamento/",
-    "slug": "eua-dizem-que-estreito-de-ormuz-segue-aberto-apos-anuncio-de-fechamento",
-    "title": "EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.912Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano eua dizem que estreito de ormuz segue aberto apos anuncio de fechamento eua dizem que estreito de ormuz segue aberto apos anuncio de fechamento",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/politica/eua-dizem-que-estreito-de-ormuz-segue-aberto-apos-anuncio-de-fechamento/",
-    "sourceLabel": "EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento",
-    "lede": "EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento",
-    "summary": "EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/eua-dizem-que-estreito-de-ormuz-segue-aberto-apos-anuncio-de-fechamento/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/eua-dizem-que-estreito-de-ormuz-segue-aberto-apos-anuncio-de-fechamento/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "eua-dizem-que-estreito-de-ormuz-segue-aberto-apos-anuncio-de-fechamento"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: EUA dizem que Estreito de Ormuz segue aberto após anúncio de fechamento.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/politica/dino-bloqueia-r-61-milhoes-de-eduardo-cunha-por-emendas-clandestinas/",
-    "slug": "dino-bloqueia-r-6-1-milhoes-de-eduardo-cunha-por-emendas-clandestinas",
-    "title": "Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.909Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano dino bloqueia r 6 1 milhoes de eduardo cunha por emendas clandestinas dino bloqueia r 6 1 milhoes de eduardo cunha por emendas clandestinas",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/politica/dino-bloqueia-r-61-milhoes-de-eduardo-cunha-por-emendas-clandestinas/",
-    "sourceLabel": "Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas",
-    "lede": "Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas",
-    "summary": "Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/dino-bloqueia-r-61-milhoes-de-eduardo-cunha-por-emendas-clandestinas/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/dino-bloqueia-r-61-milhoes-de-eduardo-cunha-por-emendas-clandestinas/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "dino-bloqueia-r-6-1-milhoes-de-eduardo-cunha-por-emendas-clandestinas"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Dino bloqueia R$ 6,1 milhões de Eduardo Cunha por emendas clandestinas.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/politica/corpo-de-jovem-desaparecido-apos-ataque-e-encontrado-em-balneario/",
-    "slug": "corpo-de-jovem-desaparecido-apos-ataque-e-encontrado-em-balneario",
-    "title": "Corpo de jovem desaparecido após ataque é encontrado em balneário",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.904Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano corpo de jovem desaparecido apos ataque e encontrado em balneario corpo de jovem desaparecido apos ataque e encontrado em balneario",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/politica/corpo-de-jovem-desaparecido-apos-ataque-e-encontrado-em-balneario/",
-    "sourceLabel": "Corpo de jovem desaparecido após ataque é encontrado em balneário",
-    "lede": "Corpo de jovem desaparecido após ataque é encontrado em balneário",
-    "summary": "Corpo de jovem desaparecido após ataque é encontrado em balneário",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/corpo-de-jovem-desaparecido-apos-ataque-e-encontrado-em-balneario/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/corpo-de-jovem-desaparecido-apos-ataque-e-encontrado-em-balneario/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "corpo-de-jovem-desaparecido-apos-ataque-e-encontrado-em-balneario"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Corpo de jovem desaparecido após ataque é encontrado em balneário A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Corpo de jovem desaparecido após ataque é encontrado em balneário A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Corpo de jovem desaparecido após ataque é encontrado em balneário. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Corpo de jovem desaparecido após ataque é encontrado em balneário.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/politica/flavio-bolsonaro-diz-que-vai-acionar-china-contra-tarifaco-sobre-carne-bovina/",
-    "slug": "flavio-bolsonaro-diz-que-vai-acionar-china-contra-tarifaco-sobre-carne-bovina",
-    "title": "Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.901Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano flavio bolsonaro diz que vai acionar china contra tarifaco sobre carne bovina flavio bolsonaro diz que vai acionar china contra tarifaco sobre carne bovina",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/politica/flavio-bolsonaro-diz-que-vai-acionar-china-contra-tarifaco-sobre-carne-bovina/",
-    "sourceLabel": "Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina",
-    "lede": "Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina",
-    "summary": "Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/flavio-bolsonaro-diz-que-vai-acionar-china-contra-tarifaco-sobre-carne-bovina/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/flavio-bolsonaro-diz-que-vai-acionar-china-contra-tarifaco-sobre-carne-bovina/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "flavio-bolsonaro-diz-que-vai-acionar-china-contra-tarifaco-sobre-carne-bovina"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Flávio Bolsonaro diz que vai acionar China contra tarifaço sobre carne bovina.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/politica/lula-atinge-menor-indice-de-rejeicao-e-empata-com-flavio-no-2o-turno-diz-pesquisa/",
-    "slug": "lula-atinge-menor-indice-de-rejeicao-e-empata-com-flavio-no-2-turno-diz-pesquisa",
-    "title": "Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.899Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano lula atinge menor indice de rejeicao e empata com flavio no 2 turno diz pesquisa lula atinge menor indice de rejeicao e empata com flavio no 2 turno diz pesquisa",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/politica/lula-atinge-menor-indice-de-rejeicao-e-empata-com-flavio-no-2o-turno-diz-pesquisa/",
-    "sourceLabel": "Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa",
-    "lede": "Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa",
-    "summary": "Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/lula-atinge-menor-indice-de-rejeicao-e-empata-com-flavio-no-2o-turno-diz-pesquisa/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/politica/lula-atinge-menor-indice-de-rejeicao-e-empata-com-flavio-no-2o-turno-diz-pesquisa/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "lula-atinge-menor-indice-de-rejeicao-e-empata-com-flavio-no-2-turno-diz-pesquisa"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Lula atinge menor índice de rejeição e empata com Flávio no 2º turno, diz pesquisa.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/noticia/fem-publica-resultado-preliminar-da-lei-aldir-blanc-no-acre/",
-    "slug": "fem-publica-resultado-preliminar-da-lei-aldir-blanc-no-acre",
-    "title": "FEM publica resultado preliminar da Lei Aldir Blanc no Acre",
-    "eyebrow": "Acre / Governo",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.897Z",
-    "category": "Acre / Governo",
-    "categoryKey": "acre-governo",
-    "previewClass": "thumb-acre-governo",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/noticia/fem-publica-resultado-preliminar-da-lei-aldir-blanc-no-acre/",
-    "sourceLabel": "FEM publica resultado preliminar da Lei Aldir Blanc no Acre",
-    "lede": "FEM publica resultado preliminar da Lei Aldir Blanc no Acre",
-    "summary": "FEM publica resultado preliminar da Lei Aldir Blanc no Acre",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/noticia/fem-publica-resultado-preliminar-da-lei-aldir-blanc-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/noticia/fem-publica-resultado-preliminar-da-lei-aldir-blanc-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "fem-publica-resultado-preliminar-da-lei-aldir-blanc-no-acre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. FEM publica resultado preliminar da Lei Aldir Blanc no Acre A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. FEM publica resultado preliminar da Lei Aldir Blanc no Acre A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: FEM publica resultado preliminar da Lei Aldir Blanc no Acre. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: FEM publica resultado preliminar da Lei Aldir Blanc no Acre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/destaque-2/tjac-convoca-aprovados-em-processos-seletivos-de-estagio-veja-lista-2/",
-    "slug": "tjac-convoca-aprovados-em-processos-seletivos-de-estagio-veja-lista",
-    "title": "TJAC convoca aprovados em processos seletivos de estágio; veja lista",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.897Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano tjac convoca aprovados em processos seletivos de estagio veja lista tjac convoca aprovados em processos seletivos de estagio veja lista",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/destaque-2/tjac-convoca-aprovados-em-processos-seletivos-de-estagio-veja-lista-2/",
-    "sourceLabel": "TJAC convoca aprovados em processos seletivos de estágio; veja lista",
-    "lede": "TJAC convoca aprovados em processos seletivos de estágio; veja lista",
-    "summary": "TJAC convoca aprovados em processos seletivos de estágio; veja lista",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/destaque-2/tjac-convoca-aprovados-em-processos-seletivos-de-estagio-veja-lista-2/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/destaque-2/tjac-convoca-aprovados-em-processos-seletivos-de-estagio-veja-lista-2/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tjac-convoca-aprovados-em-processos-seletivos-de-estagio-veja-lista"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. TJAC convoca aprovados em processos seletivos de estágio; veja lista A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. TJAC convoca aprovados em processos seletivos de estágio; veja lista A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: TJAC convoca aprovados em processos seletivos de estágio; veja lista. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: TJAC convoca aprovados em processos seletivos de estágio; veja lista.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/noticia/fique-por-dentro-veja-os-assuntos-mais-lidos-da-semana-no-contilnet/",
-    "slug": "fique-por-dentro-veja-os-assuntos-mais-lidos-da-semana-no-contilnet",
-    "title": "Fique por dentro! Veja os assuntos mais lidos da semana no ContilNet",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.893Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano fique por dentro veja os assuntos mais lidos da semana no contilnet fique por dentro veja os assuntos mais lidos da semana no contilnet",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/noticia/fique-por-dentro-veja-os-assuntos-mais-lidos-da-semana-no-contilnet/",
-    "sourceLabel": "Fique por dentro! Veja os assuntos mais lidos da semana no ContilNet",
-    "lede": "Fique por dentro!",
-    "summary": "Fique por dentro!",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/noticia/fique-por-dentro-veja-os-assuntos-mais-lidos-da-semana-no-contilnet/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/noticia/fique-por-dentro-veja-os-assuntos-mais-lidos-da-semana-no-contilnet/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "fique-por-dentro-veja-os-assuntos-mais-lidos-da-semana-no-contilnet"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Fique por dentro! Veja os assuntos mais lidos da semana no ContilNet A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Fique por dentro! Veja os assuntos mais lidos da semana no ContilNet A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Fique por dentro! Veja os assuntos mais lidos da semana no ContilNet. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Fique por dentro! Veja os assuntos mais lidos da semana no ContilNet.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://contilnetnoticias.com.br/destaque-2/novo-administrador-apostolico-e-recebido-por-igreja-em-rio-branco/",
-    "slug": "novo-administrador-apostolico-e-recebido-por-igreja-em-rio-branco",
-    "title": "Novo administrador apostólico é recebido por igreja em Rio Branco",
-    "eyebrow": "Cotidiano",
-    "date": "13 de jul de 2026",
-    "publishedAt": "2026-07-13T13:54:40.887Z",
-    "category": "Cotidiano",
-    "categoryKey": "cotidiano novo administrador apostolico e recebido por igreja em rio branco novo administrador apostolico e recebido por igreja em rio branco",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "ContilNet / Instagram",
-    "sourceUrl": "https://contilnetnoticias.com.br/destaque-2/novo-administrador-apostolico-e-recebido-por-igreja-em-rio-branco/",
-    "sourceLabel": "Novo administrador apostólico é recebido por igreja em Rio Branco",
-    "lede": "Novo administrador apostólico é recebido por igreja em Rio Branco",
-    "summary": "Novo administrador apostólico é recebido por igreja em Rio Branco",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 970,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/destaque-2/novo-administrador-apostolico-e-recebido-por-igreja-em-rio-branco/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ContilNet / Instagram",
-        "url": "https://contilnetnoticias.com.br/destaque-2/novo-administrador-apostolico-e-recebido-por-igreja-em-rio-branco/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "novo-administrador-apostolico-e-recebido-por-igreja-em-rio-branco"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Novo administrador apostólico é recebido por igreja em Rio Branco A informação vem de ContilNet / Instagram.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Novo administrador apostólico é recebido por igreja em Rio Branco A informação vem de ContilNet / Instagram.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Novo administrador apostólico é recebido por igreja em Rio Branco. Fonte: ContilNet / Instagram.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ContilNet / Instagram publicou em 13 de jul de 2026: Novo administrador apostólico é recebido por igreja em Rio Branco.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 2
   }
 ];
