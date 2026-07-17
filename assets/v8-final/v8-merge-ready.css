@@ -14750,6 +14750,27 @@ body.v8-merge-ready .czs-flow-section {
   border-top: 5px solid var(--v8-yellow, #ffd000) !important;
 }
 
+/* Final hard override: footer button must be the only clickable route to the real end. */
+body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button {
+  pointer-events: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2147483600 !important;
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button {
+    left: 10px !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 12px !important;
+    width: auto !important;
+    min-width: 146px !important;
+    max-width: 148px !important;
+  }
+}
+
 body.v8-merge-ready .czs-flow-head {
   align-items: end !important;
   gap: 16px !important;
@@ -14772,6 +14793,13 @@ body.v8-merge-ready .czs-flow-legend {
   justify-content: flex-end !important;
   gap: 7px !important;
   max-width: 520px !important;
+}
+
+body.v8-merge-ready .czs-flow-head-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 12px !important;
 }
 
 body.v8-merge-ready .czs-flow-legend span {
@@ -14974,6 +15002,28 @@ body.v8-merge-ready .czs-flow-card.is-organic-insert {
     #fff !important;
 }
 
+body.v8-merge-ready .czs-flow-card.is-viral-insert {
+  border-top: 5px solid #d9222a !important;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(217, 34, 42, .16), transparent 26%),
+    linear-gradient(180deg, #fff, #fff8f8) !important;
+}
+
+body.v8-merge-ready .czs-flow-card.is-viral-insert .czs-flow-taxonomy span {
+  background: #d9222a !important;
+}
+
+body.v8-merge-ready .czs-flow-card.is-rss-fallback {
+  border-style: dashed !important;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(5, 28, 84, .08), transparent 22%),
+    #fbfdff !important;
+}
+
+body.v8-merge-ready .czs-flow-card.is-rss-fallback .czs-flow-taxonomy span {
+  background: #384763 !important;
+}
+
 body.v8-merge-ready .czs-flow-sponsor {
   grid-column: span 2 !important;
   display: grid !important;
@@ -15042,6 +15092,57 @@ body.v8-merge-ready .czs-android-fixed-download:hover {
   box-shadow: 0 24px 60px rgba(3, 18, 52, .32) !important;
 }
 
+body.v8-merge-ready.czs-footer-gated:not(.czs-footer-unlocked) #fullSiteFooter {
+  display: none !important;
+}
+
+body.v8-merge-ready .czs-footer-gate-button,
+body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button {
+  position: fixed !important;
+  z-index: 2147481100 !important;
+  left: 18px !important;
+  bottom: 18px !important;
+  right: auto !important;
+  top: auto !important;
+  display: grid !important;
+  gap: 2px !important;
+  min-width: 150px !important;
+  padding: 12px 14px !important;
+  border: 1px solid rgba(255, 208, 0, .72) !important;
+  border-radius: 18px !important;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 208, 0, .38), transparent 32%),
+    linear-gradient(135deg, #071a3d 0%, #0b2c69 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 18px 46px rgba(3, 18, 52, .28) !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+
+body.v8-merge-ready .czs-footer-gate-button span,
+body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button span {
+  display: block !important;
+  color: #ffd000 !important;
+  font: 1000 16px/1 var(--v8-robot, Inter, sans-serif) !important;
+  letter-spacing: .02em !important;
+}
+
+body.v8-merge-ready .czs-footer-gate-button small,
+body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button small {
+  display: block !important;
+  color: rgba(255, 255, 255, .82) !important;
+  font: 850 11px/1.2 var(--v8-robot, Inter, sans-serif) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .055em !important;
+}
+
+body.v8-merge-ready .czs-footer-gate-button::after,
+body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button::after {
+  content: "clique para abrir o fim" !important;
+  color: rgba(255, 255, 255, .68) !important;
+  font: 760 10px/1.2 var(--v8-robot, Inter, sans-serif) !important;
+}
+
 @media (max-width: 1120px) {
   body.v8-merge-ready .czs-flow-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -15084,7 +15185,7 @@ body.v8-merge-ready .czs-android-fixed-download:hover {
     top: auto !important;
     right: auto !important;
     bottom: 12px !important;
-    left: 10px !important;
+    left: 166px !important;
     min-width: 138px !important;
     padding: 10px 12px !important;
     border-radius: 15px !important;
@@ -15092,5 +15193,42 @@ body.v8-merge-ready .czs-android-fixed-download:hover {
 
   body.v8-merge-ready .czs-android-fixed-download b {
     font-size: 15px !important;
+  }
+
+  body.v8-merge-ready .czs-footer-gate-button,
+  body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button {
+    left: 10px !important;
+    bottom: 12px !important;
+    min-width: 146px !important;
+    padding: 10px 12px !important;
+    border-radius: 15px !important;
+  }
+}
+
+/* 20260717 final layer: footer route must remain clickable above every feed card. */
+body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button,
+body.v8-merge-ready #czsFooterGateButton.czs-footer-gate-button,
+body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control.czs-footer-gate-button,
+body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control.is-over-hero.czs-footer-gate-button,
+body.v8-merge-ready #footerJumpFloat.footer-jump-float.v8-left-scroll-control.czs-footer-gate-button {
+  pointer-events: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2147483600 !important;
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button,
+  body.v8-merge-ready #czsFooterGateButton.czs-footer-gate-button,
+  body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control.czs-footer-gate-button,
+  body.v8-merge-ready #footerJumpFloat.v8-left-scroll-control.is-over-hero.czs-footer-gate-button {
+    left: 10px !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 12px !important;
+    width: auto !important;
+    min-width: 146px !important;
+    max-width: 148px !important;
   }
 }

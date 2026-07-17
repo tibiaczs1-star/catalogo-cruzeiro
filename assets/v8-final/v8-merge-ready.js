@@ -4027,9 +4027,11 @@
     const flow = entry.flow || story.flow || czsFlowEngine().classifyStory(story);
     const videoSrc = storyVideoUrl(story);
     const organic = entry.type === "organic" || flow.organic;
+    const viral = entry.type === "viral" || flow.topic === "viral";
+    const rss = entry.type === "rss";
     const size = position % 11 === 0 ? "feature" : videoSrc ? "video" : organic ? "organic" : "standard";
     return `
-      <article class="news-card czs-flow-card czs-flow-${esc(flow.regionId)} czs-flow-topic-${esc(flow.topic)} czs-flow-size-${esc(size)}${organic ? " is-organic-insert" : ""}${videoSrc ? " has-inline-video" : ""}" data-v8-slug="${esc(story.slug || "")}" data-czs-flow-region="${esc(flow.regionId)}" data-czs-flow-subsection="${esc(flow.subsection)}">
+      <article class="news-card czs-flow-card czs-flow-${esc(flow.regionId)} czs-flow-topic-${esc(flow.topic)} czs-flow-size-${esc(size)}${organic ? " is-organic-insert" : ""}${viral ? " is-viral-insert" : ""}${rss ? " is-rss-fallback" : ""}${videoSrc ? " has-inline-video" : ""}" data-v8-slug="${esc(story.slug || "")}" data-czs-flow-region="${esc(flow.regionId)}" data-czs-flow-subsection="${esc(flow.subsection)}" data-czs-flow-type="${esc(entry.type || "story")}">
         <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
           ${storyFeedMediaMarkup(story)}
           <div class="czs-flow-copy">
@@ -4039,12 +4041,13 @@
             </div>
             <h3>${esc(story.title || "Notícia CZS")}</h3>
             <p>${esc(story.summary || story.subtitle || localImpact(story))}</p>
-            <small>${esc(sourceName(story))} • ${esc(storyDate(story))} • ${readMin(story)} min</small>
+            <small>${rss ? "RSS aberto" : viral ? "@catalogo_czs_ • potencial viral" : esc(sourceName(story))} • ${esc(storyDate(story))} • ${readMin(story)} min</small>
           </div>
         </a>
         <div class="actions">
           <button class="small-btn ghost shareBtn" type="button" data-url="${esc(v8Url(story))}">Compartilhar</button>
           <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">Ler</a>
+          ${viral ? `<a class="small-btn ghost" href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener">Ver Instagram</a>` : ""}
           <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
         </div>
       </article>`;
@@ -4061,13 +4064,21 @@
     const legacyFeed = $("#feed");
     if (!legacyFeed?.parentElement) return;
     const protectedHeroSlugs = new Set(heroStories.slice(0, 4).map((story) => story.slug).filter(Boolean));
-    const storiesForFlow = allStories
+    let storiesForFlow = allStories
       .filter((story) => story?.slug && bySlug.has(story.slug))
       .filter(hasTrustedStoryMedia)
       .filter((story) => !protectedHeroSlugs.has(story.slug))
       .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
       .slice(0, 160);
-    const entries = czsFlowEngine().buildCzsFlowEntries(storiesForFlow, {
+    if (storiesForFlow.length < 12) {
+      storiesForFlow = allStories
+        .filter((story) => story?.slug && bySlug.has(story.slug))
+        .filter((story) => !protectedHeroSlugs.has(story.slug))
+        .filter((story) => story?.title || story?.summary || story?.subtitle)
+        .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
+        .slice(0, 160);
+    }
+    let entries = czsFlowEngine().buildCzsFlowEntries(storiesForFlow, {
       limit: 112,
       blockSize: 4,
       sponsorEvery: 8,
@@ -4087,6 +4098,10 @@
           <div class="section-kicker">CZS Flow</div>
           <h2>Jornal vivo por região e assunto</h2>
           <p>Destaques, Cruzeiro do Sul, Juruá, Rio Branco, Purus, Brasil e geral orgânico em um fluxo contínuo com subeditorias próprias.</p>
+          <div class="czs-flow-head-actions">
+            <a class="small-btn" href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener">Seguir @catalogo_czs_</a>
+            <a class="small-btn ghost" href="/downloads/catalogo-czs-android.apk" download>Baixar app Android</a>
+          </div>
         </div>
         <div class="czs-flow-legend" aria-label="Ordem editorial do fluxo">
           <span>Destaques</span><span>Cruzeiro</span><span>Juruá</span><span>Rio Branco</span><span>Purus</span><span>Brasil</span><span>Geral</span>
@@ -4101,17 +4116,27 @@
     const more = $("[data-czs-flow-more]", section);
     const batchSize = 20;
     let index = 0;
+    let rssOffset = 0;
     const paint = () => {
-      const slice = entries.slice(index, index + batchSize);
+      let slice = entries.slice(index, index + batchSize);
       index += slice.length;
+      if (!slice.length) {
+        const rssBuilder = czsFlowEngine().buildRssFallbackEntries;
+        slice = typeof rssBuilder === "function"
+          ? rssBuilder(storiesForFlow, { offset: rssOffset, limit: batchSize })
+          : [];
+        rssOffset += slice.length;
+      }
+      if (!slice.length) return;
       grid.insertAdjacentHTML("beforeend", slice.map((entry, itemIndex) => renderCzsFlowEntry(entry, index - slice.length + itemIndex)).join(""));
       refreshVideoFrames(grid);
       startInlineVideoPreviews(grid);
       bindDynamicFlowActions(grid);
       window.__czsFlowAudit = {
-        version: "20260717-czs-flow-v1",
+        version: "20260717-czs-flow-v8",
         total: entries.length,
         loaded: index,
+        rssLoaded: rssOffset,
         regions: entries.reduce((acc, entry) => {
           const key = entry.regionId || entry.flow?.regionId || entry.story?.flow?.regionId || entry.story?.category || entry.type;
           acc[key] = (acc[key] || 0) + 1;
@@ -4119,11 +4144,12 @@
         }, {}),
         hasSponsor: entries.some((entry) => entry.type === "sponsor"),
         hasOrganic: entries.some((entry) => entry.type === "organic"),
+        hasViral: entries.some((entry) => entry.type === "viral"),
         exampleSubsections: entries.map((entry) => entry.flow?.subsection || entry.story?.flow?.subsection).filter(Boolean).slice(0, 12),
       };
       if (index >= entries.length) {
-        more.hidden = true;
-        $("#czsFlowSentinel", section).textContent = "Fluxo completo carregado.";
+        more.textContent = "Carregar RSS aberto";
+        $("#czsFlowSentinel", section).textContent = "RSS aberto pronto para continuar. Para ver o rodapé, use o botão fixo Rodapé.";
       }
     };
 
@@ -4133,12 +4159,12 @@
         paint();
         guard += 1;
       }
+      if (index >= entries.length && guard < 100) paint();
     };
     more?.addEventListener("click", paint);
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver((observed) => {
         if (observed.some((item) => item.isIntersecting)) paint();
-        if (index >= entries.length) observer.disconnect();
       }, { rootMargin: "520px 0px" });
       observer.observe($("#czsFlowSentinel", section));
     }
@@ -4180,6 +4206,48 @@
       <b>Baixar CZS</b>
       <small>notícias e vídeos</small>`;
     document.body.appendChild(dock);
+  }
+
+  function installFooterOnlyByButtonGate() {
+    document.body.classList.add("czs-footer-gated");
+    document.body.classList.remove("czs-footer-unlocked");
+    const footer = $("#fullSiteFooter");
+    footer?.classList.remove("revealed");
+    const legacyButton = $("#footerJumpFloat");
+    if (legacyButton) {
+      legacyButton.hidden = true;
+      legacyButton.setAttribute("aria-hidden", "true");
+      legacyButton.classList.remove("czs-footer-gate-button");
+    }
+    let button = $("#czsFooterGateButton");
+    if (!button) {
+      button = document.createElement("button");
+      button.id = "czsFooterGateButton";
+      button.type = "button";
+      document.body.appendChild(button);
+    }
+    button.hidden = false;
+    button.removeAttribute("aria-hidden");
+    button.className = "footer-jump-float czs-footer-gate-button czs-footer-gate-primary";
+    button.classList.add("czs-footer-gate-button");
+    button.innerHTML = `<span>Rodapé</span><small>final só por aqui</small>`;
+    button.setAttribute("aria-label", "Abrir rodapé completo do site. O final da página só aparece por este botão.");
+    const unlock = (event) => {
+      event?.preventDefault?.();
+      event?.stopImmediatePropagation?.();
+      document.body.classList.add("czs-footer-unlocked");
+      footer?.classList.add("revealed");
+      setTimeout(() => footer?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
+      window.__czsFooterGateAudit = { unlocked: true, mode: "button-only", at: new Date().toISOString() };
+    };
+    ["czsFooterGateButton", "footerJumpTop", "footerJumpInline", "footerJumpFeed", "footerJumpBtn"].forEach((id) => {
+      const node = document.getElementById(id);
+      if (!node || node.dataset.czsFooterGateBound === "1") return;
+      node.dataset.czsFooterGateBound = "1";
+      node.addEventListener("click", unlock, { capture: true });
+    });
+    button.onclick = unlock;
+    window.__czsFooterGateAudit = { unlocked: false, mode: "button-only" };
   }
 
   function renderContinuousNewsScroll() {
@@ -6435,6 +6503,7 @@
     installRealFormsAndActions();
     loadCommunityReports();
     installFloatingFooterControl();
+    installFooterOnlyByButtonGate();
     runCinematicIntro();
     const initParams = new URLSearchParams(window.location.search || "");
     if (initParams.get("skipIntro") === "1" && (initParams.get("forcePopup") === "1" || initParams.get("popup") === "1")) {

@@ -1,10 +1,10 @@
 (function (root, factory) {
+  const api = factory();
+  root.CZSFlowEngine = api;
   if (typeof module === "object" && module.exports) {
-    module.exports = factory();
-    return;
+    module.exports = api;
   }
-  root.CZSFlowEngine = factory();
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
   const REGION_ORDER = [
@@ -170,13 +170,20 @@
     return Boolean(story?.imageUrl || story?.feedImageUrl || story?.sourceImageUrl || story?.videoUrl || story?.video);
   }
 
+  function isViralCandidate(story = {}) {
+    return Boolean(story?.flow?.topic === "viral" || story?.videoUrl || story?.video || topicFor(story) === "viral");
+  }
+
   function buildCzsFlowEntries(stories = [], options = {}) {
     const limit = Math.max(12, Number(options.limit || 96));
     const blockSize = Math.max(1, Number(options.blockSize || 4));
     const sponsorEvery = Math.max(4, Number(options.sponsorEvery || 8));
+    const viralEvery = Math.max(2, Number(options.viralEvery || 6));
+    const seed = Math.max(0, Number(options.seed || 3));
     const seen = new Set();
     const buckets = new Map(REGION_ORDER.map((id) => [id, []]));
     const organicPool = [];
+    const viralPool = [];
 
     stories.filter(Boolean).forEach((story) => {
       const key = story.slug || story.url || story.title;
@@ -187,14 +194,17 @@
       if (!buckets.has(flow.regionId)) buckets.set(flow.regionId, []);
       buckets.get(flow.regionId).push(enriched);
       if (flow.organic || flow.regionId === "brasil" || flow.regionId === "geral") organicPool.push(enriched);
+      if (isViralCandidate(enriched)) viralPool.push(enriched);
     });
 
     buckets.forEach((items) => items.sort((a, b) => scoreStory(b) - scoreStory(a) || storyStamp(b) - storyStamp(a)));
     organicPool.sort((a, b) => scoreStory(b) - scoreStory(a) || storyStamp(b) - storyStamp(a));
+    viralPool.sort((a, b) => scoreStory(b) - scoreStory(a) || storyStamp(b) - storyStamp(a));
 
     const entries = [];
     const usedStories = new Set();
     let organicIndex = 0;
+    let viralIndex = seed % Math.max(1, viralPool.length || 1);
     let storyCount = 0;
     let adIndex = 0;
 
@@ -210,10 +220,22 @@
       return true;
     }
 
+    function pushViral() {
+      if (!viralPool.length) return false;
+      let attempts = 0;
+      while (attempts < viralPool.length) {
+        const story = viralPool[viralIndex % viralPool.length];
+        viralIndex += 1;
+        attempts += 1;
+        if (pushStory(story, "viral")) return true;
+      }
+      return false;
+    }
+
     function pushOrganic() {
       while (organicIndex < organicPool.length) {
         const story = organicPool[organicIndex++];
-        if (pushStory(story, "organic")) return true;
+        if (pushStory(story, isViralCandidate(story) ? "viral" : "organic")) return true;
       }
       return false;
     }
@@ -229,7 +251,9 @@
         entries.push({ type: "region-header", regionId, region: region.label, short: region.short });
         let taken = 0;
         while (bucket.length && taken < blockSize && entries.length < limit) {
-          if (pushStory(bucket.shift())) taken += 1;
+          const nextStory = bucket.shift();
+          if (pushStory(nextStory, isViralCandidate(nextStory) ? "viral" : "story")) taken += 1;
+          if (storyCount > 0 && storyCount % viralEvery === 0 && entries.length < limit) pushViral();
         }
         if (entries.length < limit) pushOrganic();
         moved = true;
@@ -241,9 +265,50 @@
     return entries.slice(0, limit);
   }
 
+  function buildRssFallbackEntries(stories = [], options = {}) {
+    const limit = Math.max(1, Number(options.limit || 24));
+    const offset = Math.max(0, Number(options.offset || 0));
+    const candidates = stories
+      .filter(Boolean)
+      .filter(hasMedia)
+      .map((story) => ({ ...story, flow: classifyStory(story) }))
+      .filter((story) => story.flow.organic || story.flow.regionId === "brasil" || story.flow.regionId === "geral" || story.flow.topic === "viral");
+    const source = candidates.length ? candidates : stories.filter(Boolean).filter(hasMedia).map((story) => ({ ...story, flow: classifyStory(story) }));
+    if (!source.length) return [];
+    const sorted = source.sort((a, b) => scoreStory(b) - scoreStory(a) || storyStamp(b) - storyStamp(a));
+    const entries = [];
+    for (let i = 0; i < limit; i += 1) {
+      const story = sorted[(offset + i) % sorted.length];
+      const cycle = Math.floor((offset + i) / sorted.length);
+      entries.push({
+        type: "rss",
+        cycle,
+        story: {
+          ...story,
+          flow: {
+            ...story.flow,
+            regionId: story.flow.regionId === "geral" ? "rss-aberto" : story.flow.regionId,
+            region: story.flow.regionId === "geral" ? "RSS aberto" : story.flow.region,
+            subsection: `RSS aberto • ${story.flow.subsection}`,
+            organic: true,
+          },
+        },
+        flow: {
+          ...story.flow,
+          regionId: story.flow.regionId === "geral" ? "rss-aberto" : story.flow.regionId,
+          region: story.flow.regionId === "geral" ? "RSS aberto" : story.flow.region,
+          subsection: `RSS aberto • ${story.flow.subsection}`,
+          organic: true,
+        },
+      });
+    }
+    return entries;
+  }
+
   return {
     classifyStory,
     buildCzsFlowEntries,
+    buildRssFallbackEntries,
     normalize,
     regions: REGIONS,
   };
