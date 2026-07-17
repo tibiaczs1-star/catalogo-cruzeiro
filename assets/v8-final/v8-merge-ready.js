@@ -3972,6 +3972,216 @@
     return renderContinuousStoryCard(entry.story, position, Boolean(entry?.forceVideo));
   }
 
+  function czsFlowEngine() {
+    return window.CZSFlowEngine || {
+      classifyStory(story = {}) {
+        const text = storySignalText(story);
+        const local = /cruzeiro do sul|vale do jurua|vale do juru[aá]|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo/i.test(text);
+        const rioBranco = /rio branco|aleac|governo do acre|capital/i.test(text);
+        const purus = /purus|sena madureira|manoel urbano|santa rosa/i.test(text);
+        const brasil = /brasil|nacional|governo federal|pol[ií]cia federal|pf\b|inss|receita federal/i.test(text);
+        const police = /pol[ií]cia|pris[aã]o|crime|roubo|furto|opera[cç][aã]o|mandado|tr[aá]fico/i.test(text);
+        const region = local ? "Vale do Juruá" : rioBranco ? "Rio Branco" : purus ? "Vale do Purus" : brasil ? "Brasil" : "Geral orgânico";
+        const regionId = local ? "vale-jurua" : rioBranco ? "rio-branco" : purus ? "vale-purus" : brasil ? "brasil" : "geral";
+        const subsection = police
+          ? (regionId === "rio-branco" ? "Polícia de Rio Branco" : regionId === "brasil" ? "Polícia do Brasil" : regionId === "vale-purus" ? "Polícia do Purus" : "Polícia do Juruá")
+          : `Geral de ${region}`;
+        return { regionId, region, regionShort: region, topic: police ? "police" : "general", subsection, organic: regionId === "geral", weight: 0 };
+      },
+      buildCzsFlowEntries(stories = [], options = {}) {
+        return stories.slice(0, options.limit || 72).map((story) => ({ type: "story", story, flow: this.classifyStory(story) }));
+      },
+    };
+  }
+
+  function renderCzsFlowRegionHeader(entry = {}) {
+    return `
+      <article class="czs-flow-region-header" data-czs-flow-region="${esc(entry.regionId || "geral")}">
+        <span>CZS Flow</span>
+        <h3>${esc(entry.region || "Geral orgânico")}</h3>
+        <p>Região com subeditorias próprias: polícia, política, serviço, comunidade, vídeos e contexto.</p>
+      </article>`;
+  }
+
+  function renderCzsFlowSponsor(entry = {}, position = 0) {
+    const ad = sponsorAdFor("feed", entry.adIndex || position);
+    return `
+      <article class="czs-flow-card czs-flow-sponsor" data-czs-flow-type="sponsor" data-v8-ad-id="${esc(ad.id)}">
+        <a class="czs-flow-sponsor-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">
+          ${sponsorImageMarkup(ad)}
+        </a>
+        <div class="czs-flow-copy">
+          <span class="czs-flow-kicker">Patrocinador no fluxo</span>
+          <h3>Norte Ultra Fibra</h3>
+          <p>Internet local entrando como anúncio nativo, sem virar notícia e sem quebrar a leitura.</p>
+          <div class="actions">
+            <a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar</a>
+            <a class="small-btn ghost" href="divulgue.html">Anunciar aqui</a>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderCzsFlowStory(entry = {}, position = 0) {
+    const story = entry.story || {};
+    const flow = entry.flow || story.flow || czsFlowEngine().classifyStory(story);
+    const videoSrc = storyVideoUrl(story);
+    const organic = entry.type === "organic" || flow.organic;
+    const size = position % 11 === 0 ? "feature" : videoSrc ? "video" : organic ? "organic" : "standard";
+    return `
+      <article class="news-card czs-flow-card czs-flow-${esc(flow.regionId)} czs-flow-topic-${esc(flow.topic)} czs-flow-size-${esc(size)}${organic ? " is-organic-insert" : ""}${videoSrc ? " has-inline-video" : ""}" data-v8-slug="${esc(story.slug || "")}" data-czs-flow-region="${esc(flow.regionId)}" data-czs-flow-subsection="${esc(flow.subsection)}">
+        <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
+          ${storyFeedMediaMarkup(story)}
+          <div class="czs-flow-copy">
+            <div class="czs-flow-taxonomy">
+              <span>${esc(flow.region)}</span>
+              <b>${esc(flow.subsection)}</b>
+            </div>
+            <h3>${esc(story.title || "Notícia CZS")}</h3>
+            <p>${esc(story.summary || story.subtitle || localImpact(story))}</p>
+            <small>${esc(sourceName(story))} • ${esc(storyDate(story))} • ${readMin(story)} min</small>
+          </div>
+        </a>
+        <div class="actions">
+          <button class="small-btn ghost shareBtn" type="button" data-url="${esc(v8Url(story))}">Compartilhar</button>
+          <a class="small-btn" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">Ler</a>
+          <button class="small-btn ghost reportBtn" type="button">Informar erro</button>
+        </div>
+      </article>`;
+  }
+
+  function renderCzsFlowEntry(entry, position = 0) {
+    if (entry?.type === "region-header") return renderCzsFlowRegionHeader(entry);
+    if (entry?.type === "sponsor") return renderCzsFlowSponsor(entry, position);
+    return renderCzsFlowStory(entry, position);
+  }
+
+  function installCzsRegionalFlow() {
+    if ($("#czsRegionalFlow")) return;
+    const legacyFeed = $("#feed");
+    if (!legacyFeed?.parentElement) return;
+    const protectedHeroSlugs = new Set(heroStories.slice(0, 4).map((story) => story.slug).filter(Boolean));
+    const storiesForFlow = allStories
+      .filter((story) => story?.slug && bySlug.has(story.slug))
+      .filter(hasTrustedStoryMedia)
+      .filter((story) => !protectedHeroSlugs.has(story.slug))
+      .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
+      .slice(0, 160);
+    const entries = czsFlowEngine().buildCzsFlowEntries(storiesForFlow, {
+      limit: 112,
+      blockSize: 4,
+      sponsorEvery: 8,
+    });
+    if (!entries.length) return;
+
+    legacyFeed.id = "feedLegacy";
+    legacyFeed.hidden = true;
+    legacyFeed.setAttribute("aria-hidden", "true");
+
+    const section = document.createElement("section");
+    section.id = "feed";
+    section.className = "section czs-flow-section";
+    section.innerHTML = `
+      <div class="section-head czs-flow-head">
+        <div>
+          <div class="section-kicker">CZS Flow</div>
+          <h2>Jornal vivo por região e assunto</h2>
+          <p>Destaques, Cruzeiro do Sul, Juruá, Rio Branco, Purus, Brasil e geral orgânico em um fluxo contínuo com subeditorias próprias.</p>
+        </div>
+        <div class="czs-flow-legend" aria-label="Ordem editorial do fluxo">
+          <span>Destaques</span><span>Cruzeiro</span><span>Juruá</span><span>Rio Branco</span><span>Purus</span><span>Brasil</span><span>Geral</span>
+        </div>
+      </div>
+      <div class="czs-flow-grid" id="czsFlowGrid"></div>
+      <button class="btn ghost czs-flow-more" type="button" data-czs-flow-more>Carregar mais regiões</button>
+      <div class="czs-flow-sentinel" id="czsFlowSentinel" aria-hidden="true"></div>`;
+    legacyFeed.parentElement.insertBefore(section, legacyFeed);
+
+    const grid = $("#czsFlowGrid", section);
+    const more = $("[data-czs-flow-more]", section);
+    const batchSize = 20;
+    let index = 0;
+    const paint = () => {
+      const slice = entries.slice(index, index + batchSize);
+      index += slice.length;
+      grid.insertAdjacentHTML("beforeend", slice.map((entry, itemIndex) => renderCzsFlowEntry(entry, index - slice.length + itemIndex)).join(""));
+      refreshVideoFrames(grid);
+      startInlineVideoPreviews(grid);
+      bindDynamicFlowActions(grid);
+      window.__czsFlowAudit = {
+        version: "20260717-czs-flow-v1",
+        total: entries.length,
+        loaded: index,
+        regions: entries.reduce((acc, entry) => {
+          const key = entry.regionId || entry.flow?.regionId || entry.story?.flow?.regionId || entry.story?.category || entry.type;
+          acc[key] = (acc[key] || 0) + 1;
+          return acc;
+        }, {}),
+        hasSponsor: entries.some((entry) => entry.type === "sponsor"),
+        hasOrganic: entries.some((entry) => entry.type === "organic"),
+        exampleSubsections: entries.map((entry) => entry.flow?.subsection || entry.story?.flow?.subsection).filter(Boolean).slice(0, 12),
+      };
+      if (index >= entries.length) {
+        more.hidden = true;
+        $("#czsFlowSentinel", section).textContent = "Fluxo completo carregado.";
+      }
+    };
+
+    window.__czsLoadAllRegionalFlow = () => {
+      let guard = 0;
+      while (index < entries.length && guard < 100) {
+        paint();
+        guard += 1;
+      }
+    };
+    more?.addEventListener("click", paint);
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((observed) => {
+        if (observed.some((item) => item.isIntersecting)) paint();
+        if (index >= entries.length) observer.disconnect();
+      }, { rootMargin: "520px 0px" });
+      observer.observe($("#czsFlowSentinel", section));
+    }
+    paint();
+  }
+
+  function bindDynamicFlowActions(root = document) {
+    $$(".czs-flow-card .shareBtn", root).forEach((button) => {
+      if (button.dataset.czsBound === "1") return;
+      button.dataset.czsBound = "1";
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        navigator.clipboard?.writeText(button.dataset.url || location.href);
+        toast("Link copiado");
+      });
+    });
+    $$(".czs-flow-card .reportBtn", root).forEach((button) => {
+      if (button.dataset.czsBound === "1") return;
+      button.dataset.czsBound = "1";
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        toast("Aviso enviado para a redação");
+      });
+    });
+  }
+
+  function installAndroidFixedDownload() {
+    if ($("#czsAndroidFixedDownload")) return;
+    const panel = $("#androidDownloadPanel");
+    const href = panel?.dataset.downloadUrl || "/downloads/catalogo-czs-android.apk";
+    const dock = document.createElement("a");
+    dock.id = "czsAndroidFixedDownload";
+    dock.className = "czs-android-fixed-download";
+    dock.href = href;
+    dock.setAttribute("download", "");
+    dock.setAttribute("aria-label", "Baixar aplicativo Android do Catálogo CZS");
+    dock.innerHTML = `
+      <span>App Android</span>
+      <b>Baixar CZS</b>
+      <small>notícias e vídeos</small>`;
+    document.body.appendChild(dock);
+  }
+
   function renderContinuousNewsScroll() {
     $("#v8ContinuousScroll")?.remove();
     const footer = $("#fullSiteFooter");
@@ -6200,6 +6410,8 @@
     renderResearchAndSupport();
     hydrateReaderServices();
     renderFinalResources();
+    installCzsRegionalFlow();
+    installAndroidFixedDownload();
     enhanceCommercialAndShortcuts();
     positionPublicModulesBeforeContinuous();
     renderContinuousNewsScroll();
