@@ -2151,7 +2151,10 @@
   function renderSponsorSideRail() {
     const rail = $("#heroSide");
     if (!rail || $("#v8SponsorSideRail", rail)) return;
-    const ad = sponsorAdFor("side", 0);
+    const ad = NORTE_SPONSOR_ADS.find((item) =>
+      item?.placements?.includes("side") && /^(rail|compact)$/i.test(String(item.format || ""))
+    );
+    if (!ad) return;
     rail.insertAdjacentHTML("beforeend", `
       <a class="v8-sponsor-side-card" id="v8SponsorSideRail" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener" aria-label="Contratar Norte Ultra Fibra pelo WhatsApp" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}">
         <span>Patrocinador</span>
@@ -4133,7 +4136,7 @@
       startInlineVideoPreviews(grid);
       bindDynamicFlowActions(grid);
       window.__czsFlowAudit = {
-        version: "20260717-czs-flow-v8",
+        version: "20260717-czs-flow-v9",
         total: entries.length,
         loaded: index,
         rssLoaded: rssOffset,
