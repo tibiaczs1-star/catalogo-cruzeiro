@@ -473,6 +473,10 @@ function sendAdminMessage(event) {
 }
 
 function bindTooltips(root) {
+  if (isTouchLikeDevice()) {
+    document.querySelectorAll(".help-tooltip").forEach((tooltip) => tooltip.remove());
+    return;
+  }
   root?.querySelectorAll("[data-help]").forEach((element) => {
     if (element.dataset.helpBound === "true") return;
     element.dataset.helpBound = "true";
@@ -505,6 +509,13 @@ function bindTooltips(root) {
     element.addEventListener("focus", show);
     element.addEventListener("blur", hide);
   });
+}
+
+function isTouchLikeDevice() {
+  return Boolean(
+    window.matchMedia?.("(hover: none), (pointer: coarse)")?.matches
+    || navigator.maxTouchPoints > 0,
+  );
 }
 
 async function updateRoom(event) {
