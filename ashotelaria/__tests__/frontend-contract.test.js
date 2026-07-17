@@ -111,6 +111,8 @@ test("ajuda contextual cobre controles e linhas operacionais com mensagens espec
   }
   assert.match(script, /element\.addEventListener\("mouseenter", show\)/);
   assert.match(script, /element\.addEventListener\("focus", show\)/);
+  assert.match(script, /isTouchLikeDevice/);
+  assert.match(script, /\(hover: none\), \(pointer: coarse\)/);
   assert.match(script, /element\.tabIndex = 0/);
   assert.match(script, /data-help=.*Resumo da reserva/);
   assert.match(script, /data-help=.*Situação operacional do quarto/);
@@ -131,6 +133,8 @@ test("reserva publica oferece ajuda atrasada inclusive nas opcoes dinamicas", as
   assert.match(script, /bindTooltips\(elements\.roomOptions\)/);
   assert.match(script, /element\.addEventListener\("mouseenter", show\)/);
   assert.match(script, /element\.addEventListener\("focus", show\)/);
+  assert.match(script, /isTouchLikeDevice/);
+  assert.match(script, /\(hover: none\), \(pointer: coarse\)/);
   assert.match(script, /650\)/);
 });
 
