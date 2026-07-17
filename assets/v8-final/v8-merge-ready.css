@@ -15266,11 +15266,95 @@ body.v8-merge-ready #androidDownloadCta {
 }
 
 body.v8-merge-ready #androidDownloadPanel.android-download-native {
+  max-width: min(1080px, calc(100% - 32px)) !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  margin: 10px auto 0 !important;
+  padding: 8px 12px !important;
+  border-radius: 0 !important;
   background: #fff !important;
 }
 
 body.v8-merge-ready #androidDownloadPanel.android-download-native ~ #feed {
   margin-top: 0 !important;
+}
+
+body.v8-merge-ready #androidDownloadPanel.android-download-native .android-download-copy {
+  display: flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 8px 12px !important;
+}
+
+body.v8-merge-ready #androidDownloadPanel.android-download-native p {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  font: 800 14px/1.2 Inter, system-ui, sans-serif !important;
+}
+
+body.v8-merge-ready #androidDownloadPanel.android-download-native p span,
+body.v8-merge-ready #androidDownloadPanel.android-download-native small {
+  font: 700 12px/1.2 Inter, system-ui, sans-serif !important;
+  color: #34405a !important;
+}
+
+body.v8-merge-ready .instagram-site-highlight {
+  max-width: min(1080px, calc(100% - 32px)) !important;
+  margin: 0 auto 14px !important;
+  padding: 8px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  border: 1px solid rgba(5, 28, 84, .14) !important;
+  border-left: 5px solid #d9222a !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+body.v8-merge-ready .instagram-site-highlight div {
+  display: flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 8px 10px !important;
+}
+
+body.v8-merge-ready .instagram-site-highlight span {
+  color: #d9222a !important;
+  font: 950 11px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .instagram-site-highlight strong {
+  margin: 0 !important;
+  color: #071a3d !important;
+  font: 950 15px/1 Inter, system-ui, sans-serif !important;
+}
+
+body.v8-merge-ready .instagram-site-highlight p {
+  margin: 0 !important;
+  color: #34405a !important;
+  font: 700 12px/1.2 Inter, system-ui, sans-serif !important;
+}
+
+body.v8-merge-ready .instagram-site-highlight a {
+  min-height: 32px !important;
+  padding: 0 12px !important;
+  border-radius: 0 !important;
+  background: #071a3d !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  font: 900 12px/1 Inter, system-ui, sans-serif !important;
+}
+
+body.v8-merge-ready #footerJumpFloat,
+body.v8-merge-ready #czsFooterGateButton {
+  display: none !important;
 }
 
 body.v8-merge-ready.czs-footer-gated:not(.czs-footer-unlocked) #fullSiteFooter {

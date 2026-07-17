@@ -22,6 +22,7 @@ test("atalhos principais apontam para secoes reais e intencionais", () => {
 });
 
 test("rodape mostra apenas acesso para Cheffe Call, sem executar a Cheffe ali dentro", () => {
+  const html = read("index.html");
   const js = read("assets/v8-final/v8-merge-ready.js");
   const css = read("assets/v8-final/v8-merge-ready.css");
 
@@ -30,12 +31,9 @@ test("rodape mostra apenas acesso para Cheffe Call, sem executar a Cheffe ali de
   assert.match(js, /href="#cheffeCallEditor"/, "botão do rodapé deve apontar para a Cheffe real");
   assert.match(js, /title="[^"]*Cheffe Call/, "explicação da Cheffe no rodapé deve ficar só no hover/title");
   assert.match(js, /site de scroll infinito/i, "rodapé deve explicar que o portal é de scroll infinito");
-  assert.match(js, /button\.innerHTML = `<span>Rodapé<\/span>`/, "botão flutuante do rodapé deve ser compacto e sem texto cortável");
-  assert.match(js, /só aparece por este botão|so aparece por este botao/i, "explicação da porta única deve ficar no hover/aria");
-  assert.doesNotMatch(js, /<small>só aparece por este botão|<small>so aparece por este botao/i, "porta única não deve aparecer como texto fixo no botão");
-  assert.match(css, /#czsFooterGateButton\.czs-footer-gate-button[\s\S]*background:\s*#071a3d\s*!important;/, "botão do rodapé deve usar cor sólida, sem degradê");
-  assert.match(css, /#czsFooterGateButton\.czs-footer-gate-button[\s\S]*border-radius:\s*999px\s*!important;/, "botão do rodapé deve ser uma pílula compacta");
-  assert.match(css, /#czsFooterGateButton\.czs-footer-gate-button[\s\S]*min-height:\s*44px\s*!important;/, "botão do rodapé precisa ter altura estável");
+  assert.doesNotMatch(html, /id="footerJumpFloat"/, "não deve existir botão flutuante de rodapé na marcação inicial");
+  assert.doesNotMatch(js, /\n\s*installFooterOnlyByButtonGate\(\);\s*\n/, "o gate flutuante do rodapé não deve inicializar");
+  assert.match(css, /#footerJumpFloat[\s\S]*display:\s*none\s*!important;/, "qualquer botão flutuante legado precisa ficar oculto");
   assert.doesNotMatch(js, /dock\.appendChild\(section\)/, "Cheffe funcional não pode ser movida para dentro do rodapé");
   assert.doesNotMatch(js, /v8-cheffe-in-footer/, "Cheffe não deve receber classe de execução dentro do rodapé");
   assert.doesNotMatch(js, /<small>Uso da equipe CZS/, "Cheffe no rodapé não deve explicar em texto fixo");

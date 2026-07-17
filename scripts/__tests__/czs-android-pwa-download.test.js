@@ -88,9 +88,14 @@ test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia blo
   assert.match(css, /#androidDownloadPanel\.android-download-native[\s\S]*background:\s*#fff\s*!important;/);
   assert.match(css, /#androidDownloadPanel\.android-download-native\s+~\s+#feed[\s\S]*margin-top:\s*0\s*!important;/);
   assert.match(css, /#androidDownloadCta[\s\S]*display:\s*none\s*!important;/);
+  assert.match(css, /#androidDownloadPanel\.android-download-native[\s\S]*max-width:\s*min\(1080px, calc\(100% - 32px\)\)\s*!important;/);
+  assert.match(css, /#androidDownloadPanel\.android-download-native[\s\S]*border-radius:\s*0\s*!important;/);
   assert.match(html, /class="instagram-site-highlight"/);
-  assert.match(html, /Seguir no Instagram/);
+  assert.match(html, /Instagram oficial/);
   assert.match(html, /https:\/\/www\.instagram\.com\/catalogo_czs_\//);
+  assert.match(css, /\.instagram-site-highlight[\s\S]*background:\s*#fff\s*!important;/);
+  assert.match(css, /\.instagram-site-highlight[\s\S]*box-shadow:\s*none\s*!important;/);
+  assert.doesNotMatch(css, /\.instagram-site-highlight[\s\S]{0,500}linear-gradient/);
   assert.doesNotMatch(js, /czsAndroidFixedDownload|installAndroidFixedDownload/, "download do app não pode ser botão flutuante por cima do conteúdo");
   assert.doesNotMatch(css, /czs-android-fixed-download/, "CSS não deve manter CTA fixo sobreposto do Android");
 });

@@ -6600,8 +6600,7 @@
     installAyllaAssistant();
     installRealFormsAndActions();
     loadCommunityReports();
-    installFloatingFooterControl();
-    installFooterOnlyByButtonGate();
+    // Rodapé sem botão flutuante: usar os atalhos normais da página.
     runCinematicIntro();
     const initParams = new URLSearchParams(window.location.search || "");
     if (initParams.get("skipIntro") === "1" && (initParams.get("forcePopup") === "1" || initParams.get("popup") === "1")) {
