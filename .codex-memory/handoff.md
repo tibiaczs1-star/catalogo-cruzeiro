@@ -1,5 +1,20 @@
 # Handoff
 
+Updated: 2026-07-17T00:05:00-05:00
+
+## Retomada 20260717 - CZS flow/app publicado no Render
+
+Status real: publicado e validado.
+
+- Commit live no Render: `c4923b4e43e23b626799adfe47f2e079c6e49b6f`.
+- Deploy live: `dep-d9cqiptckfvc73cj1jb0`.
+- URL: `https://catalogo-cruzeiro-web.onrender.com`.
+- Antes do deploy, a branch integrou `origin/main` (`f5824896`, AShotelaria/APK).
+- Testes locais finais: `npm test` 130/130, testes CZS 16/16, `npm run review:team` 0 issues, `npm audit --omit=dev` 0 vulnerabilidades.
+- Smoke publico confirmou: home 200, health 200, APK 200, assetlinks 200, scripts 200, `#tempo` e `#ticker` vivos, Cheffe fora do rodape, botao do rodape apontando para `#cheffeCallEditor`, sem erros de console e sem IDs duplicados.
+- Observacao para Fable/Claude Code: o handoff temporario de coordenacao foi substituido por este registro; se ele trouxer uma reformulacao nova amanha, comparar contra `main` atual antes de mexer.
+- Nao apagar `downloads/catalogo-czs-android.apk`, `.well-known/assetlinks.json`, `android-download.js`, nem provas de deploy/revisao recentes.
+
 Updated: 2026-07-16T17:12:00Z
 
 Rodada de correção visual/editorial concluída localmente e pronta para deploy:

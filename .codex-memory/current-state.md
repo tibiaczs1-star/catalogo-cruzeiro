@@ -1,5 +1,19 @@
 # Current State
 
+Updated: 2026-07-17T00:05:00-05:00
+
+## Rodada Atual - 20260717-czs-flow-android-render-release
+
+- Fable/Claude Code nao estava disponivel; usuario autorizou incorporar as acoes e seguir com deploy.
+- Branch `feature/czs-android-app` integrou `origin/main` e foi enviada para `main`.
+- Commit publicado: `c4923b4e43e23b626799adfe47f2e079c6e49b6f`.
+- Render `catalogo-cruzeiro-web` deploy `dep-d9cqiptckfvc73cj1jb0` ficou `live`.
+- Site publico validado em `https://catalogo-cruzeiro-web.onrender.com`.
+- APK Android segue exposto em `/downloads/catalogo-czs-android.apk`; assetlinks TWA 200.
+- Rodape agora tem somente botao de acesso para Cheffe Call; a Cheffe funcional fica fora do rodape.
+- Testes/revisoes: CZS 16/16, AShotelaria 130/130, review team 0 issues, producao audit 0 vulnerabilidades.
+- Pendencia nao bloqueante: audit completo de dev aponta `undici`; nao afeta runtime Render pelo `npm audit --omit=dev`.
+
 Updated: 2026-07-16T17:12:00Z
 
 ## Active Goal

@@ -1,5 +1,19 @@
 # Codex Memory - Estado Vivo
 
+Atualizado: 2026-07-17
+
+## Rodada Atual - 20260717-czs-flow-android-render-release
+
+- Usuario autorizou incorporar a fila sem esperar Fable/Claude Code, continuar, fazer deploy e limpar o ambiente.
+- Publicacao executada no site `catalogo-cruzeiro-web` no Render, com commit final `c4923b4e` (`Merge remote-tracking branch 'origin/main' into feature/czs-android-app`) enviado para `main`.
+- Render deploy `dep-d9cqiptckfvc73cj1jb0` ficou `live` no commit `c4923b4e43e23b626799adfe47f2e079c6e49b6f`.
+- Integrado o commit remoto anterior `f5824896` da AShotelaria/APK antes do deploy.
+- Correcoes CZS incluidas: fluxo regional/infinito, CTA fixo do APK Android, destaque Instagram, ancora `#tempo`, aliases de ancoras, rodape com apenas botao de acesso para Cheffe Call e Cheffe funcional fora do rodape.
+- Validacoes locais: testes CZS 16/16, AShotelaria 130/130, `npm run review:team` com 0 issues, sintaxe/diff OK, `npm audit --omit=dev` com 0 vulnerabilidades de producao.
+- Observacao de seguranca: `npm audit` completo ainda aponta vulnerabilidade alta em `undici` apenas em dependencia dev; runtime de producao ficou sem vulnerabilidades no audit omitindo dev.
+- Validacao publica: home 200, `/api/health` 200, APK 200 com 991349 bytes, `/.well-known/assetlinks.json` 200, `android-download.js` 200, HTML servindo cache bust `v12`.
+- Smoke DOM publico: `#tempo` e `#ticker` presentes, Cheffe Call existe mas nao fica dentro do rodape, botao `Abrir Cheffe Call` aponta para `#cheffeCallEditor`, APK aparece no site, console sem erros e sem IDs duplicados.
+
 Atualizado: 2026-06-08
 
 ## Rodada Atual - 20260608-pubpaid-turn-avatar-audio-cleanup
