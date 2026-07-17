@@ -5581,6 +5581,35 @@
     setMode();
   }
 
+  function installRightActionRail() {
+    if ($("#czsRightActionRail")) return;
+    const rail = document.createElement("nav");
+    rail.id = "czsRightActionRail";
+    rail.className = "czs-right-action-rail";
+    rail.setAttribute("aria-label", "Atalhos rápidos do Catálogo CZS");
+    rail.innerHTML = `
+      <a href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener" data-czs-action="instagram" aria-label="Seguir o Catálogo CZS no Instagram">
+        <b aria-hidden="true">IG</b><span>Seguir Instagram</span>
+      </a>
+      <a href="/downloads/catalogo-czs-android.apk" download data-czs-action="android" aria-label="Baixar app Android do Catálogo CZS">
+        <b aria-hidden="true">APP</b><span>Baixar Android</span>
+      </a>`;
+    document.body.appendChild(rail);
+  }
+
+  function installLoaderActionInvites() {
+    const loaderCore = $(".loader-core");
+    if (!loaderCore || $(".czs-loader-action-invites", loaderCore)) return;
+    const invites = document.createElement("div");
+    invites.className = "czs-loader-action-invites";
+    invites.setAttribute("aria-label", "Convites rápidos do Catálogo CZS");
+    invites.innerHTML = `
+      <a href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener">Seguir @catalogo_czs_</a>
+      <a href="/downloads/catalogo-czs-android.apk" download>Baixar app Android</a>`;
+    const track = $(".loader-track", loaderCore);
+    loaderCore.insertBefore(invites, track || null);
+  }
+
   function installAyllaAssistant() {
     const card = $("#assistantCard");
     if (!card || card.dataset.ayllaReady) return;
@@ -6600,6 +6629,8 @@
     installAyllaAssistant();
     installRealFormsAndActions();
     loadCommunityReports();
+    installRightActionRail();
+    installLoaderActionInvites();
     // Rodapé sem botão flutuante: usar os atalhos normais da página.
     runCinematicIntro();
     const initParams = new URLSearchParams(window.location.search || "");

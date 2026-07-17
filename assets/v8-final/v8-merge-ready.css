@@ -15352,6 +15352,99 @@ body.v8-merge-ready .instagram-site-highlight a {
   font: 900 12px/1 Inter, system-ui, sans-serif !important;
 }
 
+body.v8-merge-ready .czs-right-action-rail {
+  position: fixed !important;
+  z-index: 2147480800 !important;
+  right: 14px !important;
+  top: 45vh !important;
+  display: grid !important;
+  gap: 10px !important;
+  pointer-events: none !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail a {
+  position: relative !important;
+  width: 52px !important;
+  min-height: 52px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 2px solid var(--v8-yellow, #ffd000) !important;
+  border-radius: 999px !important;
+  background: #071a3d !important;
+  color: #fff !important;
+  box-shadow: 0 12px 24px rgba(7, 26, 61, .16) !important;
+  text-decoration: none !important;
+  pointer-events: auto !important;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail a[data-czs-action="instagram"] {
+  border-color: #d9222a !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail a:is(:hover, :focus-visible) {
+  transform: translateX(-3px) !important;
+  box-shadow: 0 16px 28px rgba(7, 26, 61, .22) !important;
+  outline: none !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail a b {
+  display: block !important;
+  color: #fff !important;
+  font: 1000 12px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: .03em !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail a span {
+  position: absolute !important;
+  right: 60px !important;
+  top: 50% !important;
+  min-width: max-content !important;
+  padding: 9px 11px !important;
+  border: 1px solid rgba(5, 28, 84, .18) !important;
+  background: #fff !important;
+  color: #071a3d !important;
+  box-shadow: 0 10px 22px rgba(7, 26, 61, .14) !important;
+  font: 900 12px/1 Inter, system-ui, sans-serif !important;
+  opacity: 0 !important;
+  transform: translate(8px, -50%) !important;
+  pointer-events: none !important;
+  transition: opacity .16s ease, transform .16s ease !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail a:is(:hover, :focus-visible) span {
+  opacity: 1 !important;
+  transform: translate(0, -50%) !important;
+}
+
+body.v8-merge-ready .czs-loader-action-invites {
+  width: min(420px, 100%) !important;
+  margin: 14px auto 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+body.v8-merge-ready .czs-loader-action-invites a {
+  min-height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 12px !important;
+  border: 1px solid rgba(255, 255, 255, .28) !important;
+  border-radius: 999px !important;
+  background: rgba(7, 26, 61, .58) !important;
+  color: #fff !important;
+  font: 900 12px/1 Inter, system-ui, sans-serif !important;
+  text-decoration: none !important;
+}
+
+body.v8-merge-ready .czs-loader-action-invites a:is(:hover, :focus-visible) {
+  border-color: var(--v8-yellow, #ffd000) !important;
+  outline: none !important;
+}
+
 body.v8-merge-ready #footerJumpFloat,
 body.v8-merge-ready #czsFooterGateButton {
   display: none !important;
@@ -15413,6 +15506,32 @@ body.v8-merge-ready .czs-footer-gate-button::after,
 body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button::after {
   content: none !important;
   display: none !important;
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready .czs-right-action-rail {
+    right: 10px !important;
+    top: auto !important;
+    bottom: 78px !important;
+    gap: 8px !important;
+  }
+
+  body.v8-merge-ready .czs-right-action-rail a {
+    width: 46px !important;
+    min-height: 46px !important;
+  }
+
+  body.v8-merge-ready .czs-right-action-rail a b {
+    font-size: 11px !important;
+  }
+
+  body.v8-merge-ready .czs-right-action-rail a span {
+    right: 52px !important;
+  }
+
+  body.v8-merge-ready .czs-loader-action-invites {
+    margin-top: 10px !important;
+  }
 }
 
 @media (max-width: 1120px) {

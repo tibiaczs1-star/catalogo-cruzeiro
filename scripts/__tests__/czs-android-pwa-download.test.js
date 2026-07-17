@@ -100,6 +100,31 @@ test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia blo
   assert.doesNotMatch(css, /czs-android-fixed-download/, "CSS não deve manter CTA fixo sobreposto do Android");
 });
 
+test("home usa atalhos laterais discretos para app e Instagram e convite no loader", () => {
+  const html = read("index.html");
+  const js = read("assets/v8-final/v8-merge-ready.js");
+  const css = read("assets/v8-final/v8-merge-ready.css");
+
+  assert.match(html, /20260717-floating-actions-v16/, "cache da home deve subir para publicar a rail nova");
+  assert.match(js, /function installRightActionRail\(\)/);
+  assert.match(js, /id = "czsRightActionRail"/);
+  assert.match(js, /data-czs-action="instagram"/);
+  assert.match(js, /data-czs-action="android"/);
+  assert.match(js, /\/downloads\/catalogo-czs-android\.apk/);
+  assert.match(js, /SOCIAL_INSTAGRAM/);
+  assert.match(css, /\.czs-right-action-rail[\s\S]*position:\s*fixed\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail[\s\S]*right:\s*14px\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail a[\s\S]*border-radius:\s*999px\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail a span[\s\S]*opacity:\s*0\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail a:is\(:hover, :focus-visible\) span[\s\S]*opacity:\s*1\s*!important;/);
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.czs-right-action-rail/);
+
+  assert.match(js, /function installLoaderActionInvites\(\)/);
+  assert.match(js, /className = "czs-loader-action-invites"/);
+  assert.match(css, /\.czs-loader-action-invites[\s\S]*display:\s*flex\s*!important;/);
+  assert.match(css, /\.czs-loader-action-invites a[\s\S]*border:\s*1px solid rgba\(255, 255, 255, \.28\)\s*!important;/);
+});
+
 test("metadados do APK publicado descrevem o arquivo real", () => {
   const metadata = JSON.parse(read("downloads/catalogo-czs-android.json"));
   const apkPath = path.join(ROOT, "downloads", "catalogo-czs-android.apk");
