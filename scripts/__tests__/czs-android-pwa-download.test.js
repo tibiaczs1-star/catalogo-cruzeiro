@@ -72,7 +72,9 @@ test("app registra service worker com falha silenciosa quando indisponivel", () 
 
 test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia bloqueado", () => {
   const html = read("index.html");
-  assert.match(html, /class="android-download-bar"/);
+  const js = read("assets/v8-final/v8-merge-ready.js");
+  const css = read("assets/v8-final/v8-merge-ready.css");
+  assert.match(html, /class="android-download-bar android-download-native"/);
   assert.ok(html.indexOf('id="androidDownloadPanel"') > html.indexOf('id="latestThreeColumns"'));
   assert.ok(html.indexOf('id="androidDownloadPanel"') < html.indexOf('id="feed"'));
   assert.match(html, /data-download-url="\/downloads\/catalogo-czs-android\.apk"/);
@@ -86,6 +88,8 @@ test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia blo
   assert.match(html, /class="instagram-site-highlight"/);
   assert.match(html, /Seguir no Instagram/);
   assert.match(html, /https:\/\/www\.instagram\.com\/catalogo_czs_\//);
+  assert.doesNotMatch(js, /czsAndroidFixedDownload|installAndroidFixedDownload/, "download do app não pode ser botão flutuante por cima do conteúdo");
+  assert.doesNotMatch(css, /czs-android-fixed-download/, "CSS não deve manter CTA fixo sobreposto do Android");
 });
 
 test("metadados do APK publicado descrevem o arquivo real", () => {

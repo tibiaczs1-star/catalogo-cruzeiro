@@ -1,5 +1,14 @@
 # Current State
 
+Updated: 2026-07-17T00:35:00-05:00
+
+## Rodada Atual - 20260717-czs-download-footer-polish
+
+- Ajuste local pronto para deploy: download Android deixou de ser flutuante/fixo e ficou como destaque nativo estatico; Cheffe Call no rodape ficou discreta com dica somente no hover/title.
+- Rodape agora explica que o CZS usa scroll infinito e que o fim/rodape so aparece pelo botao.
+- Estudos locais de Cheffe/Fable-like consultados apontam Cheffe como sala de comando interna; por isso o rodape nao deve carregar textao operacional.
+- Validacoes locais passaram: CZS 16/16, AShotelaria 130/130, review team 0 issues, audit de producao 0 vulnerabilidades e smoke DOM sem sobreposicao.
+
 Updated: 2026-07-17T00:05:00-05:00
 
 ## Rodada Atual - 20260717-czs-flow-android-render-release

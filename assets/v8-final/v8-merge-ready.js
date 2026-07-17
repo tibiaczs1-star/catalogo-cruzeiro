@@ -3709,14 +3709,14 @@
       </div>
       <div class="v8-footer-bottom">
         <span>Catálogo Cruzeiro do Sul • Vale do Juruá • Acre</span>
-        <span>Notícias, serviços, comunidade e oportunidades em um só jornal.</span>
+        <span>Site de scroll infinito: o rodapé completo só aparece pelo botão de fim da página.</span>
       </div>`;
 
     const compact = $("#footerCompact");
     if (compact) {
       compact.innerHTML = `
-        <div class="footer-brand-mini v8-footer-mini-brand"><span><img src="${BRAND_ICON}" alt=""></span><div><strong>Catálogo CZS</strong><p id="footerMiniStatus">Mapa, notícias e serviços.</p></div></div>
-        <div class="quick-links"><a href="#feed">Notícias</a><a href="#servicos">Serviços</a><a href="#pubpaidAtalhos">Pesquisa</a><a href="#monetizacao">Anunciar</a><button class="footer-jump" id="footerJumpBtn" type="button">Mapa do site</button></div>`;
+        <div class="footer-brand-mini v8-footer-mini-brand"><span><img src="${BRAND_ICON}" alt=""></span><div><strong>Catálogo CZS</strong><p id="footerMiniStatus">Scroll infinito: fim só pelo botão.</p></div></div>
+        <div class="quick-links"><a href="#feed">Notícias</a><a href="#servicos">Serviços</a><a href="#pubpaidAtalhos">Pesquisa</a><a href="#monetizacao">Anunciar</a><button class="footer-jump" id="footerJumpBtn" type="button">Fim do site</button></div>`;
       $("#footerJumpBtn")?.addEventListener("click", () => {
         footer.classList.add("revealed");
         footer.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -4285,23 +4285,6 @@
     });
   }
 
-  function installAndroidFixedDownload() {
-    if ($("#czsAndroidFixedDownload")) return;
-    const panel = $("#androidDownloadPanel");
-    const href = panel?.dataset.downloadUrl || "/downloads/catalogo-czs-android.apk";
-    const dock = document.createElement("a");
-    dock.id = "czsAndroidFixedDownload";
-    dock.className = "czs-android-fixed-download";
-    dock.href = href;
-    dock.setAttribute("download", "");
-    dock.setAttribute("aria-label", "Baixar aplicativo Android do Catálogo CZS");
-    dock.innerHTML = `
-      <span>App Android</span>
-      <b>Baixar CZS</b>
-      <small>notícias e vídeos</small>`;
-    document.body.appendChild(dock);
-  }
-
   function installFooterOnlyByButtonGate() {
     document.body.classList.add("czs-footer-gated");
     document.body.classList.remove("czs-footer-unlocked");
@@ -4324,8 +4307,9 @@
     button.removeAttribute("aria-hidden");
     button.className = "footer-jump-float czs-footer-gate-button czs-footer-gate-primary";
     button.classList.add("czs-footer-gate-button");
-    button.innerHTML = `<span>Rodapé</span><small>final só por aqui</small>`;
-    button.setAttribute("aria-label", "Abrir rodapé completo do site. O final da página só aparece por este botão.");
+    button.innerHTML = `<span>Fim do site</span><small>só aparece por este botão</small>`;
+    button.title = "O CZS é um site de scroll infinito: o rodapé completo só aparece por este botão.";
+    button.setAttribute("aria-label", "Abrir rodapé completo do site de scroll infinito. O final da página só aparece por este botão.");
     const unlock = (event) => {
       event?.preventDefault?.();
       event?.stopImmediatePropagation?.();
@@ -4460,13 +4444,7 @@
       if (bottom) footer.insertBefore(dock, bottom);
       else footer.appendChild(dock);
     }
-    dock.innerHTML = `
-      <div class="v8-footer-cheffe-head">
-        <span>Cheffe Call</span>
-        <b>Atendimento, correções e escritórios internos</b>
-        <small>Uso da equipe CZS, separado do fluxo normal de notícias.</small>
-      </div>
-      <a class="v8-footer-cheffe-access" href="#cheffeCallEditor" aria-label="Abrir Cheffe Call fora do rodapé">Abrir Cheffe Call</a>`;
+    dock.innerHTML = `<a class="v8-footer-cheffe-access" href="#cheffeCallEditor" title="Cheffe Call: correções, atendimento interno e escritórios da equipe CZS." aria-label="Abrir Cheffe Call fora do rodapé">Cheffe Call</a>`;
   }
 
   function installContextSideRail() {
@@ -6601,7 +6579,6 @@
     hydrateReaderServices();
     renderFinalResources();
     installCzsRegionalFlow();
-    installAndroidFixedDownload();
     enhanceCommercialAndShortcuts();
     positionPublicModulesBeforeContinuous();
     renderContinuousNewsScroll();

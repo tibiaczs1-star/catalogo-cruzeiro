@@ -1,5 +1,16 @@
 # Handoff
 
+Updated: 2026-07-17T00:35:00-05:00
+
+## Retomada 20260717 - polimento download Android / rodape / Cheffe
+
+Status local antes do deploy: pronto e validado.
+
+- CTA Android: remover qualquer botao flutuante por cima do conteudo; usar apenas `#androidDownloadPanel.android-download-native` no fluxo natural.
+- Rodape: gate principal deve dizer `Fim do site` / `só aparece por este botão`; rodape deve explicar o scroll infinito.
+- Cheffe no rodape: apenas link discreto com `title`; nao mover `#cheffeCallEditor` para dentro do rodape e nao exibir texto explicativo fixo.
+- Validacoes executadas: `node --test scripts/__tests__/portal-anchor-contract.test.js scripts/__tests__/czs-flow-engine.test.js scripts/__tests__/czs-android-pwa-download.test.js`, `npm test`, `node --check`, `git diff --check`, `npm run review:team`, `npm audit --omit=dev`, smoke DOM local mobile/desktop.
+
 Updated: 2026-07-17T00:05:00-05:00
 
 ## Retomada 20260717 - CZS flow/app publicado no Render

@@ -2,6 +2,17 @@
 
 Atualizado: 2026-07-17
 
+## Rodada Atual - 20260717-czs-download-footer-polish
+
+- Usuario reclamou que o botao de download estava pessimo/sobreposto e que o rodape/Cheffe estava explicativo demais e brigando com o botao de rodape.
+- Aplicado ajuste: removido CTA fixo/flutuante do Android, mantido download como destaque nativo estatico entre fluxo editorial e feed; cache bust atualizado para `v13`.
+- Rodape: botao principal agora comunica `Fim do site` e `só aparece por este botão`; rodape declara que o CZS e site de scroll infinito.
+- Cheffe Call no rodape virou apenas link discreto `Cheffe Call`, com explicacao somente em `title`/hover; Cheffe funcional continua fora do rodape.
+- Estudos locais consultados: `docs/cheffe-call-181-ideas.md`, `docs/FLUXO_GERAL_CATALOGO_CZS.md`, `docs/superpowers/plans/cheffe-call-map-20260602.md`; regra incorporada: Cheffe e sala de comando/fluxo interno, nao bloco explicativo pesado no front publico.
+- Validacao local: testes CZS 16/16, AShotelaria 130/130, `npm run review:team` 0 issues, `npm audit --omit=dev` 0 vulnerabilidades, smoke DOM mobile/desktop com CTA Android `position: static`, sem `#czsAndroidFixedDownload`, sem overlap com gate do rodape e 0 erros de console.
+
+Atualizado: 2026-07-17
+
 ## Rodada Atual - 20260717-czs-flow-android-render-release
 
 - Usuario autorizou incorporar a fila sem esperar Fable/Claude Code, continuar, fazer deploy e limpar o ambiente.
