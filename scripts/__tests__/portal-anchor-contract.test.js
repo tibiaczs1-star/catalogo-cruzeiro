@@ -30,10 +30,25 @@ test("rodape mostra apenas acesso para Cheffe Call, sem executar a Cheffe ali de
   assert.match(js, /href="#cheffeCallEditor"/, "botão do rodapé deve apontar para a Cheffe real");
   assert.match(js, /title="[^"]*Cheffe Call/, "explicação da Cheffe no rodapé deve ficar só no hover/title");
   assert.match(js, /site de scroll infinito/i, "rodapé deve explicar que o portal é de scroll infinito");
-  assert.match(js, /só aparece por este botão|so aparece por este botao/i, "botão do rodapé deve deixar clara a porta única para o fim");
+  assert.match(js, /button\.innerHTML = `<span>Rodapé<\/span>`/, "botão flutuante do rodapé deve ser compacto e sem texto cortável");
+  assert.match(js, /só aparece por este botão|so aparece por este botao/i, "explicação da porta única deve ficar no hover/aria");
+  assert.doesNotMatch(js, /<small>só aparece por este botão|<small>so aparece por este botao/i, "porta única não deve aparecer como texto fixo no botão");
+  assert.match(css, /#czsFooterGateButton\.czs-footer-gate-button[\s\S]*background:\s*#071a3d\s*!important;/, "botão do rodapé deve usar cor sólida, sem degradê");
+  assert.match(css, /#czsFooterGateButton\.czs-footer-gate-button[\s\S]*border-radius:\s*999px\s*!important;/, "botão do rodapé deve ser uma pílula compacta");
+  assert.match(css, /#czsFooterGateButton\.czs-footer-gate-button[\s\S]*min-height:\s*44px\s*!important;/, "botão do rodapé precisa ter altura estável");
   assert.doesNotMatch(js, /dock\.appendChild\(section\)/, "Cheffe funcional não pode ser movida para dentro do rodapé");
   assert.doesNotMatch(js, /v8-cheffe-in-footer/, "Cheffe não deve receber classe de execução dentro do rodapé");
   assert.doesNotMatch(js, /<small>Uso da equipe CZS/, "Cheffe no rodapé não deve explicar em texto fixo");
   assert.doesNotMatch(css, /v8-footer-cheffe-head/, "CSS não deve manter bloco explicativo pesado da Cheffe no rodapé");
   assert.match(js, /renderNewsFooter\(\);\s*renderCheffeFooterAccess\(\);/s, "o acesso deve ser recriado depois que o rodapé é recriado");
+});
+
+test("home preserva o feed aprovado e nao inicializa o pacote CZS Flow rejeitado", () => {
+  const html = read("index.html");
+  const js = read("assets/v8-final/v8-merge-ready.js");
+
+  assert.doesNotMatch(html, /czs-flow-engine\.js/, "home não deve carregar o pacote experimental rejeitado");
+  assert.doesNotMatch(js, /\n\s*installCzsRegionalFlow\(\);\s*\n/, "o pacote CZS Flow não pode esconder o feed aprovado");
+  assert.match(js, /CZS Flow experimental rejeitado visualmente/, "o boot deve documentar por que o pacote foi desligado");
+  assert.match(js, /renderContinuousNewsScroll\(\);/, "scroll contínuo estável deve continuar renderizando");
 });

@@ -27,6 +27,32 @@ test("builds regional flow with headers, organic inserts and sponsors", () => {
   assert(entries.some((entry) => entry.story?.flow?.subsection === "Polícia do Juruá"));
 });
 
+test("does not leave orphan cards before a full-width region header", () => {
+  const stories = [
+    { slug: "czs-1", title: "Prefeitura de Cruzeiro do Sul anuncia serviço", imageUrl: "a.jpg", category: "Serviços" },
+    { slug: "czs-2", title: "Polícia prende suspeito em Cruzeiro do Sul", imageUrl: "b.jpg", category: "Polícia" },
+    { slug: "czs-3", title: "Avenida Copacabana passa por obra em Cruzeiro", imageUrl: "c.jpg", category: "Cidade" },
+    { slug: "czs-4", title: "Ufac tem debate em Cruzeiro do Sul", imageUrl: "d.jpg", category: "Educação" },
+    { slug: "organic-1", title: "Máquina de R$ 200 mil é recuperada no Brasil", imageUrl: "e.jpg", category: "Brasil" },
+    { slug: "jurua-1", title: "Polícia prende suspeito em Mâncio Lima", imageUrl: "f.jpg", category: "Polícia" },
+    { slug: "jurua-2", title: "Rio Juruá tem alerta para comunidades", imageUrl: "g.jpg", category: "Clima" },
+    { slug: "jurua-3", title: "Lancha blindada reforçará segurança no Juruá", imageUrl: "h.jpg", category: "Segurança" },
+    { slug: "jurua-4", title: "Vídeo do Juruá repercute nas redes", imageUrl: "i.jpg", videoUrl: "jurua.mp4", category: "Vídeo" },
+  ];
+  const entries = buildCzsFlowEntries(stories, { limit: 24, sponsorEvery: 99, viralEvery: 99, blockSize: 4 });
+  let cardsSinceHeader = 0;
+  let seenFirstHeader = false;
+  for (const entry of entries) {
+    if (entry.type === "region-header") {
+      if (seenFirstHeader) assert.equal(cardsSinceHeader % 4, 0, "não pode sobrar card sozinho antes de cabeçalho full-width");
+      seenFirstHeader = true;
+      cardsSinceHeader = 0;
+      continue;
+    }
+    cardsSinceHeader += 1;
+  }
+});
+
 test("keeps viral stories and videos mixed inside the regional flow", () => {
   const stories = [
     { slug: "czs-1", title: "Serviço em Cruzeiro do Sul muda atendimento", imageUrl: "a.jpg", category: "Serviços" },

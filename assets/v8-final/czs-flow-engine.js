@@ -177,6 +177,7 @@
   function buildCzsFlowEntries(stories = [], options = {}) {
     const limit = Math.max(12, Number(options.limit || 96));
     const blockSize = Math.max(1, Number(options.blockSize || 4));
+    const rowColumns = Math.max(1, Number(options.rowColumns || 4));
     const sponsorEvery = Math.max(4, Number(options.sponsorEvery || 8));
     const viralEvery = Math.max(2, Number(options.viralEvery || 6));
     const seed = Math.max(0, Number(options.seed || 3));
@@ -250,12 +251,27 @@
         const region = REGIONS[regionId] || REGIONS.geral;
         entries.push({ type: "region-header", regionId, region: region.label, short: region.short });
         let taken = 0;
+        let cardsSinceHeader = 0;
+        const countInsertedCards = (beforeLength) => {
+          cardsSinceHeader += Math.max(0, entries.length - beforeLength);
+        };
         while (bucket.length && taken < blockSize && entries.length < limit) {
           const nextStory = bucket.shift();
-          if (pushStory(nextStory, isViralCandidate(nextStory) ? "viral" : "story")) taken += 1;
-          if (storyCount > 0 && storyCount % viralEvery === 0 && entries.length < limit) pushViral();
+          const beforeStory = entries.length;
+          if (pushStory(nextStory, isViralCandidate(nextStory) ? "viral" : "story")) {
+            taken += 1;
+            countInsertedCards(beforeStory);
+          }
+          if (storyCount > 0 && storyCount % viralEvery === 0 && entries.length < limit) {
+            const beforeViral = entries.length;
+            if (pushViral()) countInsertedCards(beforeViral);
+          }
         }
-        if (entries.length < limit) pushOrganic();
+        while (cardsSinceHeader > 0 && cardsSinceHeader % rowColumns !== 0 && entries.length < limit) {
+          const beforeOrganic = entries.length;
+          if (!pushOrganic()) break;
+          countInsertedCards(beforeOrganic);
+        }
         moved = true;
       }
       if (!moved) break;

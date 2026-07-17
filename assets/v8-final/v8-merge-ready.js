@@ -4188,17 +4188,13 @@
     section.className = "section czs-flow-section";
     section.innerHTML = `
       <div class="section-head czs-flow-head">
-        <div>
-          <div class="section-kicker">CZS Flow</div>
-          <h2>Jornal vivo por região e assunto</h2>
-          <p>Destaques, Cruzeiro do Sul, Juruá, Rio Branco, Purus, Brasil e geral orgânico em um fluxo contínuo com subeditorias próprias.</p>
-          <div class="czs-flow-head-actions">
-            <a class="small-btn" href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener">Seguir @catalogo_czs_</a>
-            <a class="small-btn ghost" href="/downloads/catalogo-czs-android.apk" download>Baixar app Android</a>
-          </div>
-        </div>
-        <div class="czs-flow-legend" aria-label="Ordem editorial do fluxo">
+        <div class="section-kicker">CZS Flow</div>
+        <nav class="czs-flow-nav" aria-label="Ordem editorial do fluxo">
           <span>Destaques</span><span>Cruzeiro</span><span>Juruá</span><span>Rio Branco</span><span>Purus</span><span>Brasil</span><span>Geral</span>
+        </nav>
+        <div class="czs-flow-head-actions">
+          <a class="small-btn" href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener">Instagram</a>
+          <a class="small-btn ghost" href="/downloads/catalogo-czs-android.apk" download>App Android</a>
         </div>
       </div>
       <div class="czs-flow-grid" id="czsFlowGrid"></div>
@@ -4307,7 +4303,7 @@
     button.removeAttribute("aria-hidden");
     button.className = "footer-jump-float czs-footer-gate-button czs-footer-gate-primary";
     button.classList.add("czs-footer-gate-button");
-    button.innerHTML = `<span>Fim do site</span><small>só aparece por este botão</small>`;
+    button.innerHTML = `<span>Rodapé</span>`;
     button.title = "O CZS é um site de scroll infinito: o rodapé completo só aparece por este botão.";
     button.setAttribute("aria-label", "Abrir rodapé completo do site de scroll infinito. O final da página só aparece por este botão.");
     const unlock = (event) => {
@@ -6578,7 +6574,7 @@
     renderResearchAndSupport();
     hydrateReaderServices();
     renderFinalResources();
-    installCzsRegionalFlow();
+    // CZS Flow experimental rejeitado visualmente: manter o feed aprovado até redesenho em preview.
     enhanceCommercialAndShortcuts();
     positionPublicModulesBeforeContinuous();
     renderContinuousNewsScroll();

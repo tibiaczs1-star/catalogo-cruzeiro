@@ -81,10 +81,13 @@ test("home posiciona CTA CZS depois da primeira sequencia editorial e inicia blo
   assert.match(html, /data-metadata-url="\/downloads\/catalogo-czs-android\.json"/);
   assert.match(html, /id="androidDownloadCta"[^>]*aria-disabled="true"/);
   assert.doesNotMatch(html, /id="androidDownloadCta"[^>]*href=/);
-  assert.match(html, />Baixar app CZS</);
+  assert.doesNotMatch(html, />Baixar app CZS</);
   assert.match(html, /id="androidDownloadMeta"[^>]*>Versão 1\.0\.0 · Em preparação</);
   assert.match(html, /android-download\.js/);
   assert.match(html, /@media\(max-width:760px\)[\s\S]*\.android-download-bar/);
+  assert.match(css, /#androidDownloadPanel\.android-download-native[\s\S]*background:\s*#fff\s*!important;/);
+  assert.match(css, /#androidDownloadPanel\.android-download-native\s+~\s+#feed[\s\S]*margin-top:\s*0\s*!important;/);
+  assert.match(css, /#androidDownloadCta[\s\S]*display:\s*none\s*!important;/);
   assert.match(html, /class="instagram-site-highlight"/);
   assert.match(html, /Seguir no Instagram/);
   assert.match(html, /https:\/\/www\.instagram\.com\/catalogo_czs_\//);
