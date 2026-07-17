@@ -1491,9 +1491,8 @@
       },
       {
         title: "Tempo, rio e alertas",
-        text: "Consulta externa para clima, Rio Juruá e alertas que afetam a rotina.",
-        href: "https://www.google.com/search?q=tempo+Cruzeiro+do+Sul+Acre+Rio+Jurua",
-        external: true,
+        text: "Abre a previsão, chuva, Rio Juruá e alertas que afetam a rotina.",
+        href: "#tempo",
       },
       {
         title: "Vagas publicadas",
@@ -2643,6 +2642,7 @@
         ${systemCard("Notícias", "Feed vivo, hero interativo e leitor V8.", "#feed")}
         ${systemCard("Arquivo", "Histórico por assunto com leitura no mesmo padrão do V8.", "#arquivoArtigoSystem")}
         ${systemCard("Vagas", "Matérias de emprego, concurso e oportunidade com fonte publicada.", "#vagasCzs")}
+        ${systemCard("Tempo agora", "Previsão, chuva, rio e alertas em uma seção própria.", "#tempo")}
         ${systemCard("Serviços para o leitor", "Telefones, prazos, agenda e orientação útil.", "#servicos")}
         ${systemCard("Comunidade", "Pauta de bairro e denúncia verificável.", "#comunidade")}
         ${systemCard("Fotos", "Galeria sem cortes agressivos.", "#galeriaFotos")}
@@ -2710,6 +2710,97 @@
 
   function systemCard(title, text, href, variant = "") {
     return `<a class="v8-system-card ${esc(variant)}" href="${href}"><b>${esc(title)}</b><p>${esc(text)}</p></a>`;
+  }
+
+  function renderTempoAgoraSection() {
+    const oldSideCard = $("#tempo");
+    if (oldSideCard && oldSideCard.closest("#latestThreeColumns")) {
+      oldSideCard.id = "tempoResumo";
+      oldSideCard.querySelector("strong")?.setAttribute("aria-label", "Resumo de tempo");
+    }
+
+    let section = $("#tempo");
+    if (!section) {
+      section = document.createElement("section");
+      section.id = "tempo";
+      section.className = "section v8-tempo-agora";
+      const anchor = $("#servicos") || $("#infosGerais") || $("#feed");
+      if (anchor?.parentElement) {
+        anchor.parentElement.insertBefore(section, anchor);
+      } else {
+        document.querySelector("main")?.appendChild(section);
+      }
+    }
+
+    const weatherStories = allStories
+      .filter((story) => /tempo|chuva|rio|juru[aá]|cheia|enchente|friagem|alerta|defesa civil|energia|tr[âa]nsito/i.test(
+        [story?.title, story?.summary, story?.category, sourceName(story)].join(" ")
+      ))
+      .slice(0, 3);
+    const forecastHref = "https://www.google.com/search?q=previs%C3%A3o+do+tempo+Cruzeiro+do+Sul+Acre+Rio+Juru%C3%A1";
+    const riverHref = "https://www.google.com/search?q=Rio+Juru%C3%A1+n%C3%ADvel+Cruzeiro+do+Sul+Acre";
+    const alertHref = "https://www.google.com/search?q=alertas+Defesa+Civil+Cruzeiro+do+Sul+Acre";
+
+    section.innerHTML = `
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Tempo agora</div>
+          <h2>Previsão, Rio Juruá e alertas úteis</h2>
+          <p>Área rápida para o leitor checar clima, chuva, nível do rio e avisos que mexem com a rotina em Cruzeiro do Sul.</p>
+        </div>
+        <a class="btn ghost" href="${forecastHref}" target="_blank" rel="noopener">Abrir previsão completa</a>
+      </div>
+      <div class="v8-tempo-grid">
+        <a class="v8-tempo-card is-primary" href="${forecastHref}" target="_blank" rel="noopener">
+          <span>Previsão</span>
+          <b>Tempo em Cruzeiro do Sul</b>
+          <p>Consulta externa atualizada para chuva, calor e próximos dias.</p>
+        </a>
+        <a class="v8-tempo-card" href="${riverHref}" target="_blank" rel="noopener">
+          <span>Rio</span>
+          <b>Rio Juruá</b>
+          <p>Atalho para nível, cheia, vazante e boletins de acompanhamento.</p>
+        </a>
+        <a class="v8-tempo-card" href="${alertHref}" target="_blank" rel="noopener">
+          <span>Alertas</span>
+          <b>Defesa Civil e serviços</b>
+          <p>Busca rápida por avisos de chuva, trânsito, energia e risco local.</p>
+        </a>
+      </div>
+      <div class="v8-tempo-news" aria-label="Notícias relacionadas ao tempo">
+        ${weatherStories.length ? weatherStories.map((story) => `
+          <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
+            <small>${esc(story.category || "Alerta")}</small>
+            <b>${esc(story.title)}</b>
+            <span>${esc(sourceName(story))} • ${esc(storyDate(story))}</span>
+          </a>`).join("") : `
+          <p>Quando houver notícia local sobre chuva, rio, energia ou alerta, ela entra aqui automaticamente.</p>`}
+      </div>`;
+
+    $$('a[href="#tempo"]').forEach((link) => {
+      link.setAttribute("aria-label", `${link.textContent.trim() || "Tempo agora"}: abrir previsão e alertas`);
+    });
+  }
+
+  function ensurePortalAnchorAliases() {
+    const aliases = [
+      { id: "social", target: "#comunidade" },
+      { id: "checagemCzs", target: "#v8EditorialHelper" },
+      { id: "correcaoEditorialCzs", target: "#v8EditorialHelper" },
+    ];
+    aliases.forEach(({ id, target }) => {
+      if (document.getElementById(id)) return;
+      const alias = document.createElement("span");
+      alias.id = id;
+      alias.className = "v8-anchor-alias";
+      alias.setAttribute("aria-hidden", "true");
+      const targetNode = $(target) || document.body;
+      if (targetNode?.parentElement) {
+        targetNode.parentElement.insertBefore(alias, targetNode);
+      } else {
+        document.body.appendChild(alias);
+      }
+    });
   }
 
   function videoContextStories() {
@@ -3587,7 +3678,7 @@
           ["Perguntar ao CZS", "#assistantInline"],
           ["Resumo do dia", "#newsletter"],
           ["Seja apoiador", "#fundadores"],
-          ["Informar correção", "#comunidade"],
+          ["Informar correção", "#cheffeCallEditor"],
           ["Falar no WhatsApp", SOCIAL_WHATSAPP],
         ])}
         ${footerColumn("Comercial", [
@@ -4349,6 +4440,35 @@
     const agents = $("#cheffeCallEditor");
     if (!footer?.parentElement || !agents) return;
     footer.parentElement.insertBefore(agents, footer);
+  }
+
+  function dockCheffeCallInFooter() {
+    const footer = $("#fullSiteFooter");
+    const section = $("#cheffeCallEditor");
+    if (!footer || !section) return;
+
+    let dock = $("#v8FooterCheffeDock");
+    if (!dock) {
+      dock = document.createElement("section");
+      dock.id = "v8FooterCheffeDock";
+      dock.className = "v8-footer-cheffe-dock";
+      dock.setAttribute("aria-label", "Cheffe Call e escritórios internos no rodapé");
+      dock.innerHTML = `
+        <div class="v8-footer-cheffe-head">
+          <span>Cheffe Call</span>
+          <b>Atendimento, correções e escritórios internos</b>
+          <small>Uso da equipe CZS, separado do fluxo normal de notícias.</small>
+        </div>`;
+    }
+
+    const bottom = $(".v8-footer-bottom", footer);
+    if (dock.parentElement !== footer) {
+      if (bottom) footer.insertBefore(dock, bottom);
+      else footer.appendChild(dock);
+    }
+
+    section.classList.add("v8-cheffe-in-footer");
+    dock.appendChild(section);
   }
 
   function installContextSideRail() {
@@ -6469,6 +6589,7 @@
     renderHero();
     renderNorteNativeAfterHero();
     renderSystemMap();
+    renderTempoAgoraSection();
     renderOpportunityCategory();
     renderRealVideoHub();
     renderYoungArea();
@@ -6488,6 +6609,8 @@
     renderContinuousNewsScroll();
     renderSponsorFooterPromo();
     renderNewsFooter();
+    dockCheffeCallInFooter();
+    ensurePortalAnchorAliases();
     installSalesLanding();
     installContextSideRail();
     bindComingSoonSocials(document);
@@ -6496,6 +6619,7 @@
     remapLegacyLinks();
     normalizeInternalLinks(document);
     installEditorialHelpers();
+    ensurePortalAnchorAliases();
     installClickRouter();
     installDensityToggle();
     installGlobalReviewButtons();
