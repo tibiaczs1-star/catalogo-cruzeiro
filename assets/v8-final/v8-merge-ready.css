@@ -6606,9 +6606,28 @@ body.v8-merge-ready .v8-footer-cheffe-head small {
   text-transform: uppercase;
 }
 
-body.v8-merge-ready #cheffeCallEditor.v8-cheffe-in-footer {
-  margin: 0 !important;
-  padding: 0 !important;
+body.v8-merge-ready .v8-footer-cheffe-access {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 16px;
+  border: 2px solid var(--v8-yellow);
+  background: var(--v8-yellow);
+  color: var(--v8-blue-dark);
+  font-family: var(--v8-robot);
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 26px rgba(0,0,0,.18);
+}
+
+body.v8-merge-ready .v8-footer-cheffe-access:hover,
+body.v8-merge-ready .v8-footer-cheffe-access:focus-visible {
+  background: #ffffff;
+  color: var(--v8-blue-dark);
 }
 
 body.v8-merge-ready .v8-anchor-alias {

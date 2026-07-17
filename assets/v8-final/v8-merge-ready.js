@@ -4442,7 +4442,7 @@
     footer.parentElement.insertBefore(agents, footer);
   }
 
-  function dockCheffeCallInFooter() {
+  function renderCheffeFooterAccess() {
     const footer = $("#fullSiteFooter");
     const section = $("#cheffeCallEditor");
     if (!footer || !section) return;
@@ -4452,13 +4452,7 @@
       dock = document.createElement("section");
       dock.id = "v8FooterCheffeDock";
       dock.className = "v8-footer-cheffe-dock";
-      dock.setAttribute("aria-label", "Cheffe Call e escritórios internos no rodapé");
-      dock.innerHTML = `
-        <div class="v8-footer-cheffe-head">
-          <span>Cheffe Call</span>
-          <b>Atendimento, correções e escritórios internos</b>
-          <small>Uso da equipe CZS, separado do fluxo normal de notícias.</small>
-        </div>`;
+      dock.setAttribute("aria-label", "Acesso para Cheffe Call e escritórios internos");
     }
 
     const bottom = $(".v8-footer-bottom", footer);
@@ -4466,9 +4460,13 @@
       if (bottom) footer.insertBefore(dock, bottom);
       else footer.appendChild(dock);
     }
-
-    section.classList.add("v8-cheffe-in-footer");
-    dock.appendChild(section);
+    dock.innerHTML = `
+      <div class="v8-footer-cheffe-head">
+        <span>Cheffe Call</span>
+        <b>Atendimento, correções e escritórios internos</b>
+        <small>Uso da equipe CZS, separado do fluxo normal de notícias.</small>
+      </div>
+      <a class="v8-footer-cheffe-access" href="#cheffeCallEditor" aria-label="Abrir Cheffe Call fora do rodapé">Abrir Cheffe Call</a>`;
   }
 
   function installContextSideRail() {
@@ -6609,7 +6607,7 @@
     renderContinuousNewsScroll();
     renderSponsorFooterPromo();
     renderNewsFooter();
-    dockCheffeCallInFooter();
+    renderCheffeFooterAccess();
     ensurePortalAnchorAliases();
     installSalesLanding();
     installContextSideRail();

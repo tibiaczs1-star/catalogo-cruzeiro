@@ -21,11 +21,13 @@ test("atalhos principais apontam para secoes reais e intencionais", () => {
   assert.match(js, /#servicos/, "atalho de serviços deve permanecer ancorado");
 });
 
-test("Cheffe Call fica encaixada no rodape completo", () => {
+test("rodape mostra apenas acesso para Cheffe Call, sem executar a Cheffe ali dentro", () => {
   const js = read("assets/v8-final/v8-merge-ready.js");
 
-  assert.match(js, /function dockCheffeCallInFooter\(\)/, "deve existir uma doca de rodapé para Cheffe Call");
+  assert.match(js, /function renderCheffeFooterAccess\(\)/, "rodapé deve renderizar apenas acesso para Cheffe");
   assert.match(js, /id = "v8FooterCheffeDock"/, "doca precisa ter ID fixo para auditoria");
-  assert.match(js, /dock\.appendChild\(section\)/, "Cheffe Call deve ser movida para dentro da doca");
-  assert.match(js, /renderNewsFooter\(\);\s*dockCheffeCallInFooter\(\);/s, "a doca deve rodar depois que o rodapé é recriado");
+  assert.match(js, /href="#cheffeCallEditor"/, "botão do rodapé deve apontar para a Cheffe real");
+  assert.doesNotMatch(js, /dock\.appendChild\(section\)/, "Cheffe funcional não pode ser movida para dentro do rodapé");
+  assert.doesNotMatch(js, /v8-cheffe-in-footer/, "Cheffe não deve receber classe de execução dentro do rodapé");
+  assert.match(js, /renderNewsFooter\(\);\s*renderCheffeFooterAccess\(\);/s, "o acesso deve ser recriado depois que o rodapé é recriado");
 });
