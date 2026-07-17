@@ -5581,20 +5581,104 @@
     setMode();
   }
 
+  function railIcon(type) {
+    if (type === "instagram") {
+      return `
+        <svg class="czs-rail-icon czs-rail-icon-instagram" viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="7" y="7" width="18" height="18" rx="6"></rect>
+          <circle cx="16" cy="16" r="4.25"></circle>
+          <circle class="czs-rail-dot" cx="21.1" cy="10.9" r="1.15"></circle>
+        </svg>`;
+    }
+    if (type === "android") {
+      return `
+        <svg class="czs-rail-icon czs-rail-icon-android" viewBox="0 0 32 32" aria-hidden="true">
+          <rect class="czs-rail-phone" x="10" y="4.5" width="12" height="23" rx="3.4"></rect>
+          <path class="czs-rail-download" d="M16 10.5v8.2"></path>
+          <path class="czs-rail-download" d="M12.7 15.9 16 19.2l3.3-3.3"></path>
+          <path d="M13.4 23.3h5.2"></path>
+          <path d="M12.6 3.8 10.8 1.6"></path>
+          <path d="M19.4 3.8 21.2 1.6"></path>
+        </svg>`;
+    }
+    return `
+      <svg class="czs-rail-icon czs-rail-icon-partners" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 4.6 18.9 11l6.8.7-5.1 4.7 1.5 6.7L16 19.6l-6.1 3.5 1.5-6.7-5.1-4.7 6.8-.7L16 4.6Z"></path>
+        <path d="M9.2 26.2h13.6"></path>
+      </svg>`;
+  }
+
+  function formatCurrencyValue(value) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) return "--";
+    return numeric.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function hydrateSideUtilityDock() {
+    const rail = $("#czsRightActionRail");
+    if (!rail) return;
+    const weatherValue = $("[data-czs-widget-value='weather']", rail);
+    const marketValue = $("[data-czs-widget-value='market']", rail);
+    const clockValue = $("[data-czs-widget-value='clock']", rail);
+    if (clockValue) {
+      const updateClock = () => {
+        clockValue.textContent = new Intl.DateTimeFormat("pt-BR", {
+          timeZone: "America/Rio_Branco",
+          hour: "2-digit",
+          minute: "2-digit",
+        }).format(new Date());
+      };
+      updateClock();
+      clearInterval(window.__czsSideClockTimer);
+      window.__czsSideClockTimer = setInterval(updateClock, 30000);
+    }
+
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=-7.63&longitude=-72.67&current=temperature_2m,weather_code,wind_speed_10m&timezone=America%2FRio_Branco", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((payload) => {
+        const temp = payload?.current?.temperature_2m;
+        if (weatherValue && Number.isFinite(Number(temp))) weatherValue.textContent = `${Math.round(Number(temp))}°C`;
+      })
+      .catch(() => {});
+
+    fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-BRL", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((payload) => {
+        if (marketValue && payload?.USDBRL?.bid) marketValue.textContent = formatCurrencyValue(payload.USDBRL.bid).replace("R$", "US$");
+      })
+      .catch(() => {});
+
+  }
+
   function installRightActionRail() {
     if ($("#czsRightActionRail")) return;
     const rail = document.createElement("nav");
     rail.id = "czsRightActionRail";
     rail.className = "czs-right-action-rail";
-    rail.setAttribute("aria-label", "Atalhos rápidos do Catálogo CZS");
+    rail.setAttribute("aria-label", "Atalhos e radar rápido do Catálogo CZS");
     rail.innerHTML = `
-      <a href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener" data-czs-action="instagram" aria-label="Seguir o Catálogo CZS no Instagram">
-        <b aria-hidden="true">IG</b><span>Seguir Instagram</span>
-      </a>
-      <a href="/downloads/catalogo-czs-android.apk" download data-czs-action="android" aria-label="Baixar app Android do Catálogo CZS">
-        <b aria-hidden="true">APP</b><span>Baixar Android</span>
-      </a>`;
+      <div class="czs-side-action-stack" aria-label="Atalhos laterais">
+        <a href="${SOCIAL_INSTAGRAM}" target="_blank" rel="noopener" data-czs-action="instagram" aria-label="Seguir o Catálogo CZS no Instagram">
+          ${railIcon("instagram")}<span>Instagram</span>
+        </a>
+        <a href="/downloads/catalogo-czs-android.apk" download data-czs-action="android" aria-label="Baixar app Android do Catálogo CZS">
+          ${railIcon("android")}<span>Baixar app</span>
+        </a>
+        <a href="#monetizacao" data-czs-action="partners" aria-label="Ver nossos parceiros e oportunidades comerciais">
+          ${railIcon("partners")}<span>Nossos parceiros</span>
+        </a>
+      </div>
+      <section class="czs-side-widget-panel" aria-label="Radar rápido com informações em tempo real">
+        <b>Radar rápido</b>
+        <a href="#tempo" data-czs-side-widget="weather"><small>Clima CZS</small><strong data-czs-widget-value="weather">--°C</strong></a>
+        <a href="#tempo" data-czs-side-widget="clock"><small>Hora Acre</small><strong data-czs-widget-value="clock">--:--</strong></a>
+        <a href="https://www.google.com/finance/quote/USD-BRL" target="_blank" rel="noopener" data-czs-side-widget="market"><small>Dólar</small><strong data-czs-widget-value="market">--</strong></a>
+        <a href="https://www.google.com/finance/quote/IBOV:INDEXBVMF" target="_blank" rel="noopener" data-czs-side-widget="ibov"><small>Bolsa</small><strong data-czs-widget-value="ibov">abrir</strong></a>
+      </section>`;
     document.body.appendChild(rail);
+    hydrateSideUtilityDock();
+    clearInterval(window.__czsSideUtilityTimer);
+    window.__czsSideUtilityTimer = setInterval(hydrateSideUtilityDock, 10 * 60 * 1000);
   }
 
   function installLoaderActionInvites() {

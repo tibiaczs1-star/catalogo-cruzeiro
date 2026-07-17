@@ -15356,10 +15356,17 @@ body.v8-merge-ready .czs-right-action-rail {
   position: fixed !important;
   z-index: 2147480800 !important;
   right: 14px !important;
-  top: 45vh !important;
+  top: 40vh !important;
   display: grid !important;
-  gap: 10px !important;
+  gap: 8px !important;
+  justify-items: end !important;
   pointer-events: none !important;
+}
+
+body.v8-merge-ready .czs-side-action-stack {
+  display: grid !important;
+  gap: 8px !important;
+  justify-items: end !important;
 }
 
 body.v8-merge-ready .czs-right-action-rail a {
@@ -15382,17 +15389,37 @@ body.v8-merge-ready .czs-right-action-rail a[data-czs-action="instagram"] {
   border-color: #d9222a !important;
 }
 
+body.v8-merge-ready .czs-right-action-rail a[data-czs-action="partners"] {
+  border-color: #ffd000 !important;
+}
+
 body.v8-merge-ready .czs-right-action-rail a:is(:hover, :focus-visible) {
   transform: translateX(-3px) !important;
   box-shadow: 0 16px 28px rgba(7, 26, 61, .22) !important;
   outline: none !important;
 }
 
-body.v8-merge-ready .czs-right-action-rail a b {
+body.v8-merge-ready .czs-right-action-rail svg {
   display: block !important;
+  width: 25px !important;
+  height: 25px !important;
   color: #fff !important;
-  font: 1000 12px/1 Inter, system-ui, sans-serif !important;
-  letter-spacing: .03em !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.1 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail .czs-rail-icon-instagram .czs-rail-dot,
+body.v8-merge-ready .czs-right-action-rail .czs-rail-icon-partners path:first-child {
+  fill: currentColor !important;
+  stroke-width: 1.6 !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail .czs-rail-icon-android {
+  width: 27px !important;
+  height: 27px !important;
 }
 
 body.v8-merge-ready .czs-right-action-rail a span {
@@ -15415,6 +15442,71 @@ body.v8-merge-ready .czs-right-action-rail a span {
 body.v8-merge-ready .czs-right-action-rail a:is(:hover, :focus-visible) span {
   opacity: 1 !important;
   transform: translate(0, -50%) !important;
+}
+
+body.v8-merge-ready .czs-side-widget-panel {
+  width: 188px !important;
+  max-width: calc(100vw - 28px) !important;
+  padding: 10px !important;
+  display: grid !important;
+  gap: 7px !important;
+  border: 1px solid rgba(5, 28, 84, .18) !important;
+  border-left: 4px solid var(--v8-yellow, #ffd000) !important;
+  background: #fff !important;
+  color: #071a3d !important;
+  box-shadow: 0 14px 28px rgba(7, 26, 61, .16) !important;
+  opacity: 0 !important;
+  transform: translateX(18px) !important;
+  pointer-events: none !important;
+  transition: opacity .18s ease, transform .18s ease !important;
+}
+
+body.v8-merge-ready .czs-right-action-rail:is(:hover, :focus-within) .czs-side-widget-panel {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}
+
+body.v8-merge-ready .czs-side-widget-panel > b {
+  display: block !important;
+  color: #071a3d !important;
+  font: 950 11px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: .11em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .czs-side-widget-panel a {
+  width: 100% !important;
+  min-height: 0 !important;
+  padding: 8px 9px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  border: 1px solid rgba(5, 28, 84, .12) !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #071a3d !important;
+  box-shadow: none !important;
+}
+
+body.v8-merge-ready .czs-side-widget-panel a:is(:hover, :focus-visible) {
+  transform: none !important;
+  border-color: rgba(255, 208, 0, .88) !important;
+  box-shadow: none !important;
+}
+
+body.v8-merge-ready .czs-side-widget-panel small {
+  color: #5b6574 !important;
+  font: 850 10px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+}
+
+body.v8-merge-ready .czs-side-widget-panel strong {
+  color: #071a3d !important;
+  font: 950 12px/1 Inter, system-ui, sans-serif !important;
+  text-align: right !important;
 }
 
 body.v8-merge-ready .czs-loader-action-invites {
@@ -15521,12 +15613,17 @@ body.v8-merge-ready #footerJumpFloat.czs-footer-gate-button::after {
     min-height: 46px !important;
   }
 
-  body.v8-merge-ready .czs-right-action-rail a b {
-    font-size: 11px !important;
+  body.v8-merge-ready .czs-right-action-rail svg {
+    width: 22px !important;
+    height: 22px !important;
   }
 
   body.v8-merge-ready .czs-right-action-rail a span {
     right: 52px !important;
+  }
+
+  body.v8-merge-ready .czs-side-widget-panel {
+    display: none !important;
   }
 
   body.v8-merge-ready .czs-loader-action-invites {

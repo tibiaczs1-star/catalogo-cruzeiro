@@ -105,18 +105,37 @@ test("home usa atalhos laterais discretos para app e Instagram e convite no load
   const js = read("assets/v8-final/v8-merge-ready.js");
   const css = read("assets/v8-final/v8-merge-ready.css");
 
-  assert.match(html, /20260717-floating-actions-v16/, "cache da home deve subir para publicar a rail nova");
+  assert.match(html, /20260717-floating-icons-v17/, "cache da home deve subir para publicar os icones novos");
   assert.match(js, /function installRightActionRail\(\)/);
   assert.match(js, /id = "czsRightActionRail"/);
   assert.match(js, /data-czs-action="instagram"/);
   assert.match(js, /data-czs-action="android"/);
+  assert.match(js, /class="czs-rail-icon czs-rail-icon-instagram"/);
+  assert.match(js, /class="czs-rail-icon czs-rail-icon-android"/);
+  assert.match(js, /class="czs-rail-icon czs-rail-icon-partners"/);
+  assert.match(js, /<rect class="czs-rail-phone"/);
+  assert.match(js, /<path class="czs-rail-download"/);
+  assert.doesNotMatch(js, />IG<\/b>/);
+  assert.doesNotMatch(js, />APP<\/b>/);
   assert.match(js, /\/downloads\/catalogo-czs-android\.apk/);
   assert.match(js, /SOCIAL_INSTAGRAM/);
   assert.match(css, /\.czs-right-action-rail[\s\S]*position:\s*fixed\s*!important;/);
   assert.match(css, /\.czs-right-action-rail[\s\S]*right:\s*14px\s*!important;/);
   assert.match(css, /\.czs-right-action-rail a[\s\S]*border-radius:\s*999px\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail svg[\s\S]*width:\s*25px\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail svg[\s\S]*stroke-linecap:\s*round\s*!important;/);
   assert.match(css, /\.czs-right-action-rail a span[\s\S]*opacity:\s*0\s*!important;/);
   assert.match(css, /\.czs-right-action-rail a:is\(:hover, :focus-visible\) span[\s\S]*opacity:\s*1\s*!important;/);
+  assert.match(js, /function hydrateSideUtilityDock\(\)/);
+  assert.match(js, /api\.open-meteo\.com/);
+  assert.match(js, /economia\.awesomeapi\.com\.br/);
+  assert.doesNotMatch(js, /query1\.finance\.yahoo\.com/, "não usar API de bolsa que bloqueia CORS no navegador");
+  assert.match(js, /data-czs-side-widget="weather"/);
+  assert.match(js, /data-czs-side-widget="market"/);
+  assert.match(js, /data-czs-side-widget="ibov"/);
+  assert.match(js, /data-czs-side-widget="clock"/);
+  assert.match(css, /\.czs-side-widget-panel[\s\S]*opacity:\s*0\s*!important;/);
+  assert.match(css, /\.czs-right-action-rail:is\(:hover, :focus-within\) \.czs-side-widget-panel[\s\S]*opacity:\s*1\s*!important;/);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.czs-right-action-rail/);
 
   assert.match(js, /function installLoaderActionInvites\(\)/);
