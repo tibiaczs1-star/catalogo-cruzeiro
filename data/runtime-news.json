@@ -1,8 +1,74 @@
 {
-  "lastAttemptAt": "2026-07-16T17:04:39.451Z",
-  "lastSuccessAt": "2026-07-16T19:40:58.390Z",
-  "source": "news-image-repair",
+  "lastAttemptAt": "2026-07-17T13:11:47.163Z",
+  "lastSuccessAt": "2026-07-17T13:11:47.163Z",
+  "source": "czs-fast-mode-v3",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
+      "slug": "tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
+      "title": "TJAC mantém decisão contra Ilderlei Cordeiro",
+      "seoTitle": "TJAC mantém decisão contra Ilderlei Cordeiro | Catálogo CZS",
+      "seoDescription": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "eyebrow": "Justiça",
+      "date": "17 de jul de 2026",
+      "publishedAt": "2026-07-17T08:06:00.000-05:00",
+      "category": "Juruá",
+      "categoryKey": "jurua",
+      "previewClass": "thumb-jurua",
+      "sourceName": "Acre em Notícia / TJAC",
+      "sourceUrl": "https://www.facebook.com/photo?fbid=1071734628752183&set=a.182967934295528",
+      "sourceLabel": "TJAC mantém decisão contra Ilderlei Cordeiro",
+      "lede": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "summary": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "analysis": "",
+      "highlights": [],
+      "development": [
+        "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+        "Fonte: Acre em Notícia / TJAC."
+      ],
+      "imageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+      "feedImageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+      "sourceImageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+      "imageCredit": "Reprodução/Acre em Notícia; arte Catálogo CZS",
+      "imageFocus": "center",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/tjac-ilderlei-decisao-reel-20260717.mp4",
+      "priority": 2200,
+      "editorialPriority": "jurua-justica-atual",
+      "crossSources": [
+        {
+          "name": "Acre em Notícia / TJAC",
+          "url": "https://www.facebook.com/photo?fbid=1071734628752183&set=a.182967934295528"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "audioNarrationText": "TJAC mantém decisão contra Ilderlei Cordeiro. O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "audioNarrationTranscript": "TJAC mantém decisão contra Ilderlei Cordeiro. O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+      "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+      "audioNarrationVoiceEngine": "edge-tts",
+      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+      "audioNarrationLanguage": "pt-BR",
+      "audioNarrationStatus": "ready-transcript",
+      "videoCaptionText": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores. Fonte: Acre em Notícia / TJAC.",
+      "videoCaptionStatus": "ready",
+      "accessibility": {
+        "alt": "Ilderlei Cordeiro em arte do Catálogo CZS sobre decisão do Tribunal de Justiça do Acre",
+        "caption": "TJAC mantém decisão contra Ilderlei Cordeiro",
+        "hasAudioNarrationText": true,
+        "hasAudioNarrationTranscript": true,
+        "raylVoice": "raiane-francisca-whatsapp-normal",
+        "hasVideoCaptionText": true
+      },
+      "body": [
+        "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+        "Fonte: Acre em Notícia / TJAC."
+      ]
+    },
     {
       "id": "https://contilnetnoticias.com.br/politica/mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude/",
       "slug": "mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude",
@@ -24442,53 +24508,53 @@
         "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
         "Novas informações entram quando houver atualização verificável."
       ]
-    },
+    }
+  ],
+  "items": [
     {
-      "id": "https://acreinfoco.com/2026/07/e-extrema-direita-estupido-tarcisio-prometeu-zerar-populacao-de-rua-mas-cadastro-cresce-82-em-sao-paulo/",
-      "slug": "e-extrema-direita-estupido-tarcisio-prometeu-zerar-populacao-de-rua-mas-cadastro-cresce-82-em-sa",
-      "title": "É extrema direita, estúpido: Tarcísio prometeu zerar população de rua, mas cadastro cresce 82% em São Paulo",
-      "eyebrow": "Politica",
-      "date": "15 de jul de 2026",
-      "publishedAt": "2026-07-15T20:46:16.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
-      "sourceName": "Acre in Foco",
-      "sourceUrl": "https://acreinfoco.com/2026/07/e-extrema-direita-estupido-tarcisio-prometeu-zerar-populacao-de-rua-mas-cadastro-cresce-82-em-sao-paulo/",
-      "sourceLabel": "É extrema direita, estúpido: Tarcísio prometeu zerar população de rua, mas cadastro cresce 82% em São Paulo",
-      "lede": "Dados oficiais mostram que o número de famílias em situação de rua cadastradas no estado aumentou desde a eleição de 2022 A queda brusca das temperaturas levou o governo de São Paulo a montar uma operação emergencial para acolher pessoas em situação de rua.",
-      "summary": "Dados oficiais mostram que o número de famílias em situação de rua cadastradas no estado aumentou desde a eleição de 2022 A queda brusca das temperaturas levou o governo de São Paulo a montar uma operação emergencial para acolher pessoas em situação de rua.",
+      "id": "manual-czs-tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
+      "slug": "tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
+      "title": "TJAC mantém decisão contra Ilderlei Cordeiro",
+      "seoTitle": "TJAC mantém decisão contra Ilderlei Cordeiro | Catálogo CZS",
+      "seoDescription": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "eyebrow": "Justiça",
+      "date": "17 de jul de 2026",
+      "publishedAt": "2026-07-17T08:06:00.000-05:00",
+      "category": "Juruá",
+      "categoryKey": "jurua",
+      "previewClass": "thumb-jurua",
+      "sourceName": "Acre em Notícia / TJAC",
+      "sourceUrl": "https://www.facebook.com/photo?fbid=1071734628752183&set=a.182967934295528",
+      "sourceLabel": "TJAC mantém decisão contra Ilderlei Cordeiro",
+      "lede": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "summary": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
       "analysis": "",
       "highlights": [],
-      "development": [],
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-137.webp",
-      "feedImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-137.webp",
-      "sourceImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-137.webp",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "development": [
+        "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+        "Fonte: Acre em Notícia / TJAC."
+      ],
+      "imageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+      "feedImageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+      "sourceImageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+      "imageCredit": "Reprodução/Acre em Notícia; arte Catálogo CZS",
+      "imageFocus": "center",
+      "imageFit": "cover",
       "media": null,
-      "videoUrl": "",
-      "priority": 840,
-      "editorialPriority": "fonte-regional-prioritaria",
+      "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/tjac-ilderlei-decisao-reel-20260717.mp4",
+      "priority": 2200,
+      "editorialPriority": "jurua-justica-atual",
       "crossSources": [
         {
-          "name": "Acre in Foco",
-          "url": "https://acreinfoco.com/2026/07/e-extrema-direita-estupido-tarcisio-prometeu-zerar-populacao-de-rua-mas-cadastro-cresce-82-em-sao-paulo/"
+          "name": "Acre em Notícia / TJAC",
+          "url": "https://www.facebook.com/photo?fbid=1071734628752183&set=a.182967934295528"
         }
       ],
-      "alternateSources": [
-        {
-          "name": "Acre in Foco",
-          "url": "https://acreinfoco.com/2026/07/e-extrema-direita-estupido-tarcisio-prometeu-zerar-populacao-de-rua-mas-cadastro-cresce-82-em-sao-paulo/"
-        }
-      ],
+      "alternateSources": [],
       "sourceCount": 1,
-      "alternateSlugs": [
-        "e-extrema-direita-estupido-tarcisio-prometeu-zerar-populacao-de-rua-mas-cadastro-cresce-82-em-sa"
-      ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. É extrema direita, estúpido: Tarcísio prometeu zerar população de rua, mas cadastro cresce 82% em São Paulo Dados oficiais mostram que o número de famílias em situação de rua cadastradas no estado aumentou desde a eleição de 2022 A queda brusca das temperaturas levou o governo de São Paulo a montar uma operação emergencial para acolher pessoas em situação de rua. A informação vem de Acre in Foco.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. É extrema direita, estúpido: Tarcísio prometeu zerar população de rua, mas cadastro cresce 82% em São Paulo Dados oficiais mostram que o número de famílias em situação de rua cadastradas no estado aumentou desde a eleição de 2022 A queda brusca das temperaturas levou o governo de São Paulo a montar uma operação emergencial para acolher pessoas em situação de rua. A informação vem de Acre in Foco.",
+      "alternateSlugs": [],
+      "audioNarrationText": "TJAC mantém decisão contra Ilderlei Cordeiro. O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "audioNarrationTranscript": "TJAC mantém decisão contra Ilderlei Cordeiro. O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
       "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
       "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
       "audioNarrationVoiceEngine": "edge-tts",
@@ -24496,22 +24562,21 @@
       "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
       "audioNarrationLanguage": "pt-BR",
       "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: É extrema direita, estúpido: Tarcísio prometeu zerar população de rua, mas cadastro cresce 82% em São Paulo. Dados oficiais mostram que o número de famílias em situação de rua cadastradas no estado aumentou desde a eleição de 2022 A queda brusca das temperaturas levou o governo de São Paulo a montar uma operação emergencial para acolher pessoas... Fonte: Acre in Foco.",
+      "videoCaptionText": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores. Fonte: Acre em Notícia / TJAC.",
       "videoCaptionStatus": "ready",
       "accessibility": {
+        "alt": "Ilderlei Cordeiro em arte do Catálogo CZS sobre decisão do Tribunal de Justiça do Acre",
+        "caption": "TJAC mantém decisão contra Ilderlei Cordeiro",
         "hasAudioNarrationText": true,
         "hasAudioNarrationTranscript": true,
         "raylVoice": "raiane-francisca-whatsapp-normal",
         "hasVideoCaptionText": true
       },
       "body": [
-        "Acre in Foco publicou em 15 de jul de 2026: É extrema direita, estúpido: Tarcísio prometeu zerar população de rua, mas cadastro cresce 82% em São Paulo.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
+        "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+        "Fonte: Acre em Notícia / TJAC."
       ]
-    }
-  ],
-  "items": [
+    },
     {
       "id": "https://contilnetnoticias.com.br/politica/mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude/",
       "slug": "mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude",

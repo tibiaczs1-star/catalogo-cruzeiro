@@ -1,5 +1,71 @@
-window.NEWS_ARCHIVE_TOTAL = 480;
+window.NEWS_ARCHIVE_TOTAL = 481;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
+    "slug": "tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
+    "title": "TJAC mantém decisão contra Ilderlei Cordeiro",
+    "seoTitle": "TJAC mantém decisão contra Ilderlei Cordeiro | Catálogo CZS",
+    "seoDescription": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+    "eyebrow": "Justiça",
+    "date": "17 de jul de 2026",
+    "publishedAt": "2026-07-17T08:06:00.000-05:00",
+    "category": "Juruá",
+    "categoryKey": "jurua",
+    "previewClass": "thumb-jurua",
+    "sourceName": "Acre em Notícia / TJAC",
+    "sourceUrl": "https://www.facebook.com/photo?fbid=1071734628752183&set=a.182967934295528",
+    "sourceLabel": "TJAC mantém decisão contra Ilderlei Cordeiro",
+    "lede": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+    "summary": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+    "analysis": "",
+    "highlights": [],
+    "development": [
+      "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "Fonte: Acre em Notícia / TJAC."
+    ],
+    "imageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+    "feedImageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+    "sourceImageUrl": "assets/news-manual/tjac-ilderlei-decisao-20260717.png",
+    "imageCredit": "Reprodução/Acre em Notícia; arte Catálogo CZS",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/tjac-ilderlei-decisao-reel-20260717.mp4",
+    "priority": 2200,
+    "editorialPriority": "jurua-justica-atual",
+    "crossSources": [
+      {
+        "name": "Acre em Notícia / TJAC",
+        "url": "https://www.facebook.com/photo?fbid=1071734628752183&set=a.182967934295528"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "TJAC mantém decisão contra Ilderlei Cordeiro. O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+    "audioNarrationTranscript": "TJAC mantém decisão contra Ilderlei Cordeiro. O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores. Fonte: Acre em Notícia / TJAC.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Ilderlei Cordeiro em arte do Catálogo CZS sobre decisão do Tribunal de Justiça do Acre",
+      "caption": "TJAC mantém decisão contra Ilderlei Cordeiro",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O Tribunal de Justiça do Acre rejeitou o recurso do ex-prefeito de Cruzeiro do Sul, Ilderlei Cordeiro, em ação sobre o reajuste de 16,37% dos subsídios do Executivo municipal. O recurso não foi analisado por recolhimento incorreto das custas. Assim, permanece a decisão da primeira instância. Ainda cabem recursos às instâncias superiores.",
+      "Fonte: Acre em Notícia / TJAC."
+    ]
+  },
   {
     "id": "https://contilnetnoticias.com.br/politica/mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude/",
     "slug": "mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude",
