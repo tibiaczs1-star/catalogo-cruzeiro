@@ -37,6 +37,16 @@ services:
         value: https://catalogo-cruzeiro-web.onrender.com
       - key: DATA_DIR
         value: /opt/render/project/src/render-data
+      - key: AGENT_OS_ENABLED
+        value: "true"
+      - key: AGENT_OS_CYCLE_INTERVAL_MS
+        value: "3600000"
+      - key: AGENT_OS_CYCLE_ON_START
+        value: "true"
+      - key: AGENT_OS_LLM_URL
+        value: http://ollama:11434
+      - key: AGENT_OS_LLM_MODEL
+        value: qwen2.5:3b
       - key: CZS_AI_PRIMARY
         value: ollama
       - key: CZS_OPENAI_FALLBACK_ENABLED
