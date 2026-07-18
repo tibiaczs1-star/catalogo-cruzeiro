@@ -38,11 +38,11 @@ services:
       - key: DATA_DIR
         value: /opt/render/project/src/render-data
       - key: AGENT_OS_ENABLED
-        value: "true"
+        value: "false"
       - key: AGENT_OS_CYCLE_INTERVAL_MS
         value: "3600000"
       - key: AGENT_OS_CYCLE_ON_START
-        value: "true"
+        value: "false"
       - key: AGENT_OS_LLM_URL
         value: http://ollama:11434
       - key: AGENT_OS_LLM_MODEL
