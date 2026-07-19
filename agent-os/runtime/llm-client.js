@@ -15,13 +15,16 @@ const http = require("node:http");
 class LlmClient {
   constructor() {
     this.baseUrl =
+      process.env.AGENT_OS_LLM_URL ||
       process.env.LLM_API_URL ||
       process.env.OLLAMA_BASE_URL ||
       "http://127.0.0.1:11434/v1/chat/completions";
     this.model =
+      process.env.AGENT_OS_LLM_MODEL ||
       process.env.LLM_MODEL ||
       process.env.CZS_OLLAMA_MODEL ||
       ":3b";
+    this.authToken = String(process.env.OLLAMA_AUTH_TOKEN || "").trim();
     this.timeoutMs = parseInt(process.env.LLM_TIMEOUT_MS || "90000", 10);
     this._healthy = null;
     this._lastCheck = 0;
@@ -32,16 +35,17 @@ class LlmClient {
     return url.startsWith("http://");
   }
 
-  request(url, body) {
+  request(url, body = null, method = "POST") {
     return new Promise((resolve, reject) => {
       const lib = this.isHttp(url) ? http : https;
-      const data = JSON.stringify(body);
+      const data = body === null ? "" : JSON.stringify(body);
       const req = lib.request(url, {
-        method: "POST",
+        method,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Content-Length": Buffer.byteLength(data),
+          ...(this.authToken ? { Authorization: `Bearer ${this.authToken}` } : {}),
         },
         timeout: this.timeoutMs,
       }, (res) => {
@@ -61,7 +65,7 @@ class LlmClient {
         req.destroy();
         reject(new Error(`Timeout em ${url} após ${this.timeoutMs}ms`));
       });
-      req.write(data);
+      if (data) req.write(data);
       req.end();
     });
   }
@@ -73,8 +77,8 @@ class LlmClient {
     }
     this._lastCheck = now;
     try {
-      const modelUrl = this.baseUrl.replace("/chat/completions", "");
-      const r = await this.request(`${modelUrl}/api/tags`, {});
+      const tagsUrl = new URL("/api/tags", this.baseUrl).toString();
+      const r = await this.request(tagsUrl, null, "GET");
       this._healthy = r.status === 200;
     } catch {
       this._healthy = false;
