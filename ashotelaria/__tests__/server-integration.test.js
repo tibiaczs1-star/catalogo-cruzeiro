@@ -57,4 +57,6 @@ test("server.js invokes AShotelaria before the generic API fallback", () => {
   const fallbackIndex = source.indexOf('pathname.startsWith("/api/")', hotelIndex);
   assert.ok(hotelIndex > 0, "AShotelaria integration must be wired");
   assert.ok(fallbackIndex > hotelIndex, "AShotelaria must run before generic API routing");
+  assert.match(source, /ASHOTELARIA_ENABLED\s*&&\s*await ashotelariaIntegration\.handle/,
+    "catalog must not expose hotel routes when the product is disabled");
 });

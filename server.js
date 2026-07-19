@@ -20975,7 +20975,7 @@ const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = requestUrl.pathname;
 
-  if (await ashotelariaIntegration.handle(req, res, pathname)) return;
+  if (ASHOTELARIA_ENABLED && await ashotelariaIntegration.handle(req, res, pathname)) return;
 
   if (pathname.startsWith("/api/") || pathname === "/health") {
     return handleApi(req, res, pathname, requestUrl.searchParams);

@@ -6,7 +6,7 @@ services:
     plan: starter
     autoDeployTrigger: commit
     buildCommand: npm install && node agent-os/runtime/generate-manifests.js
-    startCommand: npm run ashotelaria:migrate && node render-start.js
+    startCommand: node render-start.js
     healthCheckPath: /api/health
     disk:
       name: app-data
@@ -15,22 +15,6 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: ASHOTELARIA_ENABLED
-        value: "true"
-      - key: ASHOTELARIA_DATABASE_URL
-        fromDatabase:
-          name: ashotelaria-db
-          property: connectionString
-      - key: ASHOTELARIA_SESSION_SECRET
-        sync: false
-      - key: ASHOTELARIA_ADMIN_PASSWORD
-        sync: false
-      - key: ASHOTELARIA_FINANCE_PASSWORD
-        sync: false
-      - key: ASHOTELARIA_RECEPTION_PASSWORD
-        sync: false
-      - key: ASHOTELARIA_DEFAULT_PASSWORD
-        sync: false
       - key: TZ
         value: America/Rio_Branco
       - key: SITE_URL
@@ -103,6 +87,34 @@ services:
         value: "320"
       - key: AGENT_OS_LLM_CONCURRENCY
         value: "1"
+  - type: web
+    name: ashotelaria-saas
+    runtime: node
+    rootDir: .
+    plan: free
+    autoDeployTrigger: commit
+    buildCommand: npm install
+    startCommand: npm run ashotelaria:migrate && npm run ashotelaria:start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TZ
+        value: America/Rio_Branco
+      - key: ASHOTELARIA_DATABASE_URL
+        fromDatabase:
+          name: ashotelaria-db
+          property: connectionString
+      - key: ASHOTELARIA_SESSION_SECRET
+        sync: false
+      - key: ASHOTELARIA_ADMIN_PASSWORD
+        sync: false
+      - key: ASHOTELARIA_FINANCE_PASSWORD
+        sync: false
+      - key: ASHOTELARIA_RECEPTION_PASSWORD
+        sync: false
+      - key: ASHOTELARIA_DEFAULT_PASSWORD
+        sync: false
 databases:
   - name: ashotelaria-db
     plan: free
