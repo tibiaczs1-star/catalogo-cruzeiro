@@ -220,6 +220,47 @@ async function fixCatalogRuntime(serviceId) {
   };
 }
 
+async function probeCatalogOllama(serviceId) {
+  const env = Object.fromEntries((await getEnvVars(serviceId)).map((entry) => [entry.key, entry.value]));
+  const baseUrl = String(env.OLLAMA_BASE_URL || "").replace(/\/+$/, "");
+  if (!baseUrl) throw new Error("OLLAMA_BASE_URL ausente.");
+  const headers = env.OLLAMA_AUTH_TOKEN ? { Authorization: `Bearer ${env.OLLAMA_AUTH_TOKEN}` } : {};
+  const response = await fetch(`${baseUrl}/api/tags`, { headers, signal: AbortSignal.timeout(15000) });
+  const body = await response.json().catch(() => ({}));
+  let chat = null;
+  if (response.ok) {
+    const startedAt = Date.now();
+    const chatResponse = await fetch(`${baseUrl}/api/chat`, {
+      method: "POST",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: env.CZS_OLLAMA_MODEL || env.LLM_MODEL || "llama3.2:3b",
+        stream: false,
+        think: false,
+        messages: [{ role: "user", content: "Responda exatamente: OK-CHEFFE" }],
+        options: { temperature: 0, num_predict: 24 }
+      }),
+      signal: AbortSignal.timeout(60000)
+    });
+    const chatBody = await chatResponse.json().catch(() => ({}));
+    chat = {
+      status: chatResponse.status,
+      ok: chatResponse.ok,
+      elapsedMs: Date.now() - startedAt,
+      answer: String(chatBody?.message?.content || chatBody?.response || "").slice(0, 100),
+      error: chatResponse.ok ? "" : String(chatBody.error || chatBody.message || "").slice(0, 180)
+    };
+  }
+  return {
+    host: new URL(baseUrl).host,
+    status: response.status,
+    ok: response.ok,
+    models: Array.isArray(body.models) ? body.models.map((model) => model.name).slice(0, 20) : [],
+    error: response.ok ? "" : String(body.error || body.message || "Resposta sem erro estruturado").slice(0, 180),
+    chat
+  };
+}
+
 async function createDeploy(serviceId, clearCache = false) {
   return request(`/services/${encodeURIComponent(serviceId)}/deploys`, {
     method: "POST",
@@ -244,6 +285,7 @@ Comandos:
   create-ashotelaria               cria servico A.S com segredos copiados
   isolate-catalog                  remove somente variaveis A.S do Catalogo
   fix-catalog-runtime              corrige comando do servico no painel Render
+  probe-ollama                     testa a rota Ollama sem expor credenciais
   deploy --service nome-ou-id      dispara deploy manual
 
 `);
@@ -301,6 +343,12 @@ async function main() {
 
   if (command === "fix-catalog-runtime") {
     process.stdout.write(`${JSON.stringify({ service, result: await fixCatalogRuntime(service.id) }, null, 2)}\n`);
+    return;
+  }
+
+
+  if (command === "probe-ollama") {
+    process.stdout.write(`${JSON.stringify({ service, result: await probeCatalogOllama(service.id) }, null, 2)}\n`);
     return;
   }
 

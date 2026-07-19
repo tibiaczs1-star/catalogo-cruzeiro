@@ -74,7 +74,7 @@ function createProxyServer(options = {}) {
     }
 
     const allowed = (req.method === "GET" && req.url === "/api/tags") ||
-      (req.method === "POST" && req.url === "/v1/chat/completions");
+      (req.method === "POST" && (req.url === "/v1/chat/completions" || req.url === "/api/chat"));
     if (!allowed) {
       return sendJson(res, 404, { ok: false, error: "not_found" });
     }

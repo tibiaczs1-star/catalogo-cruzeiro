@@ -10,6 +10,7 @@ test("proxy protects and forwards only required Ollama routes", async (t) => {
     res.setHeader("Content-Type", "application/json");
     if (req.url === "/api/tags") return res.end(JSON.stringify({ models: [{ name: "llama3.2:3b" }] }));
     if (req.url === "/v1/chat/completions") return res.end(JSON.stringify({ choices: [{ message: { content: "OK" } }] }));
+    if (req.url === "/api/chat") return res.end(JSON.stringify({ message: { content: "OK-CHEFFE" } }));
     res.writeHead(404).end("{}");
   });
   await new Promise((resolve) => upstream.listen(0, "127.0.0.1", resolve));
@@ -26,5 +27,8 @@ test("proxy protects and forwards only required Ollama routes", async (t) => {
   const chat = await fetch(`${base}/v1/chat/completions`, { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: "{}" });
   assert.equal(chat.status, 200);
   assert.equal((await chat.json()).choices[0].message.content, "OK");
-  assert.equal((await fetch(`${base}/api/chat`, { method: "POST", headers })).status, 404);
+  const cheffeChat = await fetch(`${base}/api/chat`, { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: "{}" });
+  assert.equal(cheffeChat.status, 200);
+  assert.equal((await cheffeChat.json()).message.content, "OK-CHEFFE");
+  assert.equal((await fetch(`${base}/api/generate`, { method: "POST", headers })).status, 404);
 });
