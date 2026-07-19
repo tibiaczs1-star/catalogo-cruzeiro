@@ -43,6 +43,8 @@ const LLM_URL = process.env.AGENT_OS_LLM_URL || process.env.LLM_API_URL || proce
 const LLM_MODEL = process.env.AGENT_OS_LLM_MODEL || process.env.CZS_OLLAMA_MODEL || process.env.LLM_MODEL || "llama3.2:3b";
 const LLM_AUTH_TOKEN = String(process.env.OLLAMA_AUTH_TOKEN || "").trim();
 const LLM_TIMEOUT_MS = parseInt(process.env.LLM_TIMEOUT_MS || "90000", 10);
+const LLM_MAX_TOKENS = parseInt(process.env.AGENT_OS_LLM_MAX_TOKENS || "320", 10);
+const LLM_CONCURRENCY = Math.max(1, parseInt(process.env.AGENT_OS_LLM_CONCURRENCY || "1", 10));
 
 let timer = null;
 let running = false;
@@ -203,7 +205,7 @@ async function callLLM(systemPrompt, userPrompt) {
           { role: "user", content: userPrompt },
         ],
         temperature: 0.4,
-        max_tokens: 2000,
+        max_tokens: LLM_MAX_TOKENS,
         stream: false,
       }),
       signal: controller.signal,
@@ -339,10 +341,9 @@ async function runCycle(options = {}) {
 
     console.log(`   Executando ${agentsToRun.length} agentes...`);
 
-    // Execute agents (with LLM concurrency limit of 3)
-    const CONCURRENCY = 3;
-    for (let i = 0; i < agentsToRun.length; i += CONCURRENCY) {
-      const batch = agentsToRun.slice(i, i + CONCURRENCY);
+    // Serialize local Ollama by default; concurrency remains configurable for remote providers.
+    for (let i = 0; i < agentsToRun.length; i += LLM_CONCURRENCY) {
+      const batch = agentsToRun.slice(i, i + LLM_CONCURRENCY);
       const batchResults = await Promise.allSettled(
         batch.map(m => executeAgent(m, context))
       );
@@ -983,6 +984,8 @@ module.exports = {
     LLM_URL,
     LLM_MODEL,
     LLM_TIMEOUT_MS,
+    LLM_MAX_TOKENS,
+    LLM_CONCURRENCY,
     MANIFESTS_DIR,
     REPORTS_DIR,
     PENDING_DIR,

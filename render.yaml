@@ -99,6 +99,10 @@ services:
         sync: false
       - key: AGENT_OS_LLM_MODEL
         value: llama3.2:3b
+      - key: AGENT_OS_LLM_MAX_TOKENS
+        value: "320"
+      - key: AGENT_OS_LLM_CONCURRENCY
+        value: "1"
 databases:
   - name: ashotelaria-db
     plan: free
