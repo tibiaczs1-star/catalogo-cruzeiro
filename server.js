@@ -10777,6 +10777,7 @@ async function callLocalOllama({ area = "rayl", system = "", prompt = "", contex
     ],
     options: {
       temperature,
+      num_ctx: 2048,
       num_predict: Math.max(32, Math.min(260, Number(maxPredict) || 160))
     }
   };
@@ -11040,11 +11041,17 @@ async function answerCheffeAiChat(body = {}, req = null) {
   const queue = Array.isArray(body.queue) ? body.queue.slice(0, 12) : [];
   const result = await callCatalogAi({
     area: "cheffe-call",
-    system: "Você é a Cheffe Call do CZS. Responda em pt-BR, em até 3 linhas: decisão, motivo e próximo passo. Não invente fatos ou fontes nem diga que publicou; sem fonte, mande verificar e não publicar.",
+    system: [
+      "Você é a Cheffe Call do CZS e decide a ordem do trabalho editorial e comercial.",
+      "Responda em pt-BR, em até 3 linhas: decisão, motivo e próximo passo.",
+      "Prioridade: aviso oficial urgente e com prazo vem primeiro; item sem fonte deve ser verificado e ficar bloqueado; oferta comercial sem aprovação deve aguardar aprovação.",
+      "Não invente fatos ou fontes, não diga que publicou e não autorize publicação sem confirmação.",
+      "Não desvie para advogado: isto é triagem operacional interna, não aconselhamento jurídico."
+    ].join(" "),
     prompt: message,
     context: queue.length ? { queue } : {},
     temperature: 0.16,
-    maxPredict: 32
+    maxPredict: 64
   });
   const fallback = "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar.";
   const safeAnswer = result.ok ? sanitizeCatalogAiAnswer(result.answer, fallback) : fallback;

@@ -238,7 +238,7 @@ async function probeCatalogOllama(serviceId) {
         stream: false,
         think: false,
         messages: [{ role: "user", content: "Responda exatamente: OK-CHEFFE" }],
-        options: { temperature: 0, num_predict: 24 }
+        options: { temperature: 0, num_ctx: 2048, num_predict: 24 }
       }),
       signal: AbortSignal.timeout(60000)
     });
