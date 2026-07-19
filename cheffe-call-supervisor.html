@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheffe Call • Supervisor Operacional 24/7</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="cheffe-call.css?v=20260513-review-photo-cta1" />
+  <style>
+    .supervisor-page { padding: 16px clamp(16px, 4vw, 42px); }
+    .supervisor-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .supervisor-header h1 { margin: 0; font-size: clamp(22px, 3vw, 32px); }
+    .supervisor-header .subtitle { color: var(--call-muted); font-size: 13px; }
+    .supervisor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .supervisor-card { background: var(--call-panel); border: 1px solid var(--call-line); border-radius: 12px; padding: 14px; }
+    .supervisor-card h3 { margin: 0 0 8px; font-size: 14px; color: var(--call-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .supervisor-card .value { font-size: 28px; font-weight: 700; color: var(--call-gold); }
+    .supervisor-card .meta { color: var(--call-muted); font-size: 12px; margin-top: 6px; }
+    .supervisor-card .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+    .status-dot.active { background: var(--call-green); box-shadow: 0 0 8px var(--call-green); }
+    .status-dot.inactive { background: var(--call-red); box-shadow: 0 0 8px var(--call-red); }
+    .status-dot.warning { background: #ffb84d; box-shadow: 0 0 8px #ffb84d; }
+    .supervisor-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .supervisor-actions button { background: var(--call-panel-2); color: var(--call-text); border: 1px solid var(--call-line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+    .supervisor-actions button:hover { background: rgba(244, 201, 107, 0.12); }
+    .supervisor-password { min-width: 220px; background: var(--call-panel-2); color: var(--call-text); border: 1px solid var(--call-line); border-radius: 8px; padding: 8px 12px; }
+    .supervisor-log { background: var(--call-panel); border: 1px solid var(--call-line); border-radius: 12px; padding: 14px; margin-top: 14px; }
+    .supervisor-log h3 { margin: 0 0 10px; font-size: 14px; color: var(--call-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .supervisor-log pre { margin: 0; max-height: 320px; overflow: auto; font-size: 12px; line-height: 1.5; color: var(--call-text); white-space: pre-wrap; word-break: break-word; }
+    .supervisor-section { margin-top: 18px; }
+    .supervisor-section h2 { font-size: 16px; color: var(--call-gold); margin-bottom: 10px; }
+    .supervisor-link { display: inline-flex; align-items: center; gap: 6px; color: var(--call-cyan); text-decoration: none; border: 1px solid var(--call-line); border-radius: 8px; padding: 8px 12px; background: var(--call-panel); }
+    .supervisor-link:hover { background: rgba(127, 231, 255, 0.08); }
+  </style>
+</head>
+<body class="cheffe-call-page">
+  <header class="call-topbar">
+    <a href="./cheffe-call.html">← Cheffe Call</a>
+    <a href="./index.html">Jornal</a>
+    <a href="./real-agents.html">Agentes reais</a>
+    <span style="color: var(--call-muted); font-size: 12px; margin-left: auto;">Supervisor operacional</span>
+  </header>
+
+  <main class="supervisor-page">
+    <div class="supervisor-header">
+      <div>
+        <h1>Painel do Supervisor</h1>
+        <p class="subtitle">Monitoramento 24/7 do Cheffe Call, agentes, filas e runtime.</p>
+      </div>
+      <a class="supervisor-link" href="./cheffe-call.html">Abrir Cheffe Call</a>
+    </div>
+
+    <section class="supervisor-grid" aria-label="Indicadores principais">
+      <article class="supervisor-card" id="cardState">
+        <h3>Estado da reunião</h3>
+        <div class="value" id="svStateValue">—</div>
+        <div class="meta" id="svStateMeta">Atualizando...</div>
+      </article>
+      <article class="supervisor-card" id="cardAgents">
+        <h3>Agentes</h3>
+        <div class="value" id="svAgentsValue">—</div>
+        <div class="meta" id="svAgentsMeta">181 esperados</div>
+      </article>
+      <article class="supervisor-card" id="cardAutonomy">
+        <h3>Autonomia média</h3>
+        <div class="value" id="svAutonomyValue">—</div>
+        <div class="meta" id="svAutonomyMeta">Atualizando...</div>
+      </article>
+      <article class="supervisor-card" id="cardQueue">
+        <h3>Fila de tarefas</h3>
+        <div class="value" id="svQueueValue">—</div>
+        <div class="meta" id="svQueueMeta">Itens ativos</div>
+      </article>
+      <article class="supervisor-card" id="cardOrders">
+        <h3>Ordens</h3>
+        <div class="value" id="svOrdersValue">—</div>
+        <div class="meta" id="svOrdersMeta">Registradas</div>
+      </article>
+      <article class="supervisor-card" id="cardIde">
+        <h3>Fila IDE</h3>
+        <div class="value" id="svIdeValue">—</div>
+        <div class="meta" id="svIdeMeta">Aguardando comando do IDE</div>
+      </article>
+      <article class="supervisor-card" id="cardRuntime">
+        <h3>Auto runtime</h3>
+        <div class="value" id="svRuntimeValue">—</div>
+        <div class="meta" id="svRuntimeMeta">Última execução</div>
+      </article>
+      <article class="supervisor-card" id="cardReview">
+        <h3>Revisão</h3>
+        <div class="value" id="svReviewValue">—</div>
+        <div class="meta" id="svReviewMeta">Pendências</div>
+      </article>
+    </section>
+
+    <section class="supervisor-section" aria-label="Controles">
+      <h2>Controles operacionais</h2>
+      <div class="supervisor-actions">
+        <input class="supervisor-password" id="svPassword" type="password" autocomplete="current-password" placeholder="Senha Cheffe Call / Full Admin" aria-label="Senha Cheffe Call ou Full Admin" />
+        <button id="svRefresh">Atualizar agora</button>
+        <button id="svRunAgents">Rodar agentes</button>
+        <button id="svRelease">Liberar reunião</button>
+        <button id="svClearSession">Limpar sessão</button>
+      </div>
+    </section>
+
+    <section class="supervisor-section" aria-label="Log operacional">
+      <div class="supervisor-log">
+        <h3>Log operacional do Cheffe Call</h3>
+        <pre id="svLog">Carregando...</pre>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="cheffe-call-supervisor.js?v=20260718-supervisor-v1"></script>
+</body>
+</html>
