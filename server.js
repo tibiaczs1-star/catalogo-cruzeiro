@@ -11042,16 +11042,15 @@ async function answerCheffeAiChat(body = {}, req = null) {
   const result = await callCatalogAi({
     area: "cheffe-call",
     system: [
-      "Você é a Cheffe Call do CZS e decide a ordem do trabalho editorial e comercial.",
-      "Responda em pt-BR, em até 3 linhas: decisão, motivo e próximo passo.",
-      "Prioridade: aviso oficial urgente e com prazo vem primeiro; item sem fonte deve ser verificado e ficar bloqueado; oferta comercial sem aprovação deve aguardar aprovação.",
-      "Não invente fatos ou fontes, não diga que publicou e não autorize publicação sem confirmação.",
-      "Não desvie para advogado: isto é triagem operacional interna, não aconselhamento jurídico."
+      "Você é a Cheffe Call do CZS. Faça triagem operacional, não jurídica.",
+      "Em até 3 linhas: decisão, motivo e próximo passo.",
+      "Regras: aviso oficial urgente vem primeiro; item sem fonte deve ser verificado e ficar bloqueado; oferta comercial sem aprovação deve aguardar aprovação.",
+      "Não desvie para advogado, não invente e não alegue publicação."
     ].join(" "),
     prompt: message,
     context: queue.length ? { queue } : {},
     temperature: 0.16,
-    maxPredict: 64
+    maxPredict: 40
   });
   const fallback = "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar.";
   const safeAnswer = result.ok ? sanitizeCatalogAiAnswer(result.answer, fallback) : fallback;
