@@ -1,0 +1,23 @@
+{
+  "id": "gerente-conteudo",
+  "name": "Gerente de Conteúdo",
+  "reportsTo": "dir-editorial",
+  "manages": [
+    "esp-014",
+    "esp-015",
+    "esp-016",
+    "esp-021"
+  ],
+  "level": "manager",
+  "specialty": "Coordena 4 especialistas",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos especialistas",
+    "ROTINA B: Agrupar problemas similares",
+    "ROTINA C: Remover duplicatas",
+    "ROTINA D: Priorizar por severidade",
+    "ROTINA E: Enviar relatório consolidado ao Diretor"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2000
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-019",
+  "name": "Especialista WhatsApp",
+  "cargo": "Especialista WhatsApp",
+  "specialty": "Grupos, atendimento, propagandas",
+  "subroutines": [
+    "Verificar grupos ativos",
+    "Propor conteúdo por grupo (venda/serviço/notícia)",
+    "Verificar taxa de resposta",
+    "Gerar relatório de engajamento"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

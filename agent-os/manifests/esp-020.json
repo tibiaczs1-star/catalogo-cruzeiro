@@ -1,0 +1,16 @@
+{
+  "id": "esp-020",
+  "name": "Especialista RSS/Feeds",
+  "cargo": "Especialista RSS/Feeds",
+  "specialty": "Captação de notícias via RSS, feeds Atom",
+  "subroutines": [
+    "Verificar status de todas as fontes RSS",
+    "Detectar fontes quebradas",
+    "Propor novas fontes",
+    "Validar qualidade de captação"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

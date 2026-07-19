@@ -1,0 +1,16 @@
+{
+  "id": "esp-040",
+  "name": "Auditor Estratégico",
+  "cargo": "Auditor Estratégico",
+  "specialty": "ROI, crescimento, eficácia",
+  "subroutines": [
+    "Verificar se mudanças entregaram valor",
+    "Comparar métricas antes/depois",
+    "Calcular ROI de ações",
+    "Gerar relatório estratégico"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

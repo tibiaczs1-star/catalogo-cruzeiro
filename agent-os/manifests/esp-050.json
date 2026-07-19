@@ -1,0 +1,16 @@
+{
+  "id": "esp-050",
+  "name": "Especialista Patrocínios",
+  "cargo": "Especialista Patrocínios",
+  "specialty": "Norte Ultra Fibra, patrocinadores",
+  "subroutines": [
+    "Verificar status dos patrocinadores",
+    "Analisar performance dos CTAs",
+    "Propor novos formatos",
+    "Gerar relatório de patrocínios"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

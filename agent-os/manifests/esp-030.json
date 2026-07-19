@@ -1,0 +1,16 @@
+{
+  "id": "esp-030",
+  "name": "Especialista Instagram Metrics",
+  "cargo": "Especialista Instagram Metrics",
+  "specialty": "Seguidores, engajamento, alcance, Reels",
+  "subroutines": [
+    "Analisar crescimento de seguidores",
+    "Verificar taxa de engajamento",
+    "Identificar posts com melhor performance",
+    "Propor estratégias de crescimento"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

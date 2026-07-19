@@ -1,0 +1,23 @@
+{
+  "id": "gerente-noticias",
+  "name": "Gerente de Notícias",
+  "reportsTo": "dir-editorial",
+  "manages": [
+    "esp-011",
+    "esp-012",
+    "esp-013",
+    "esp-020"
+  ],
+  "level": "manager",
+  "specialty": "Coordena 4 especialistas",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos especialistas",
+    "ROTINA B: Agrupar problemas similares",
+    "ROTINA C: Remover duplicatas",
+    "ROTINA D: Priorizar por severidade",
+    "ROTINA E: Enviar relatório consolidado ao Diretor"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2000
+}

@@ -1,0 +1,23 @@
+{
+  "id": "dir-editorial",
+  "name": "Diretor Editorial",
+  "cargo": "Editor-chefe",
+  "description": "Responsável por todo o conteúdo.",
+  "manages": [
+    "gerente-noticias",
+    "gerente-conteudo",
+    "gerente-social",
+    "gerente-pesquisa"
+  ],
+  "level": "director",
+  "specialty": "Responsável por todo o conteúdo.",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos gerentes",
+    "ROTINA B: Consolidar informações",
+    "ROTINA C: Tomar decisões estratégicas",
+    "ROTINA D: Reportar ao CEO"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2500
+}

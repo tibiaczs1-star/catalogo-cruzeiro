@@ -1,0 +1,16 @@
+{
+  "id": "esp-044",
+  "name": "Especialista Banco de Dados",
+  "cargo": "Especialista Banco de Dados",
+  "specialty": "JSON store, integridade, índices",
+  "subroutines": [
+    "Verificar integridade dos JSONs",
+    "Detectar dados órfãos",
+    "Propor estrutura otimizada",
+    "Gerar relatório de dados"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

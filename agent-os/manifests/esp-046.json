@@ -1,0 +1,16 @@
+{
+  "id": "esp-046",
+  "name": "Especialista Copywriting",
+  "cargo": "Especialista Copywriting",
+  "specialty": "Títulos, CTAs, tom editorial CZS",
+  "subroutines": [
+    "Revisar títulos da home",
+    "Verificar tom editorial",
+    "Melhorar CTAs",
+    "Propor variações A/B"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

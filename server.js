@@ -20682,6 +20682,114 @@ async function handleApi(req, res, pathname, searchParams) {
     });
   }
 
+  // ─── Agent OS Routes ─────────────────────────────────────────────────
+
+  const agentOs = require("./agent-os-integration");
+
+  if (
+    pathname.startsWith("/api/agent-os/") &&
+    !(req.method === "GET" && pathname === "/api/agent-os/state") &&
+    !requireAdmin(req)
+  ) {
+    return sendAdminUnauthorized(res);
+  }
+
+  if (req.method === "GET" && pathname === "/api/agent-os/state") {
+    return sendJson(res, 200, agentOs.getState());
+  }
+
+  if (req.method === "GET" && pathname === "/api/agent-os/reports") {
+    return sendJson(res, 200, { ok: true, reports: agentOs.loadReports(), total: agentOs.loadReports().length });
+  }
+
+  if (req.method === "GET" && pathname.startsWith("/api/agent-os/reports/")) {
+    const filename = decodeURIComponent(pathname.replace("/api/agent-os/reports/", ""));
+    const report = agentOs.getReport(filename);
+    if (!report) return sendJson(res, 404, { ok: false, error: "Relatório não encontrado" });
+    return sendJson(res, 200, { ok: true, ...report });
+  }
+
+  if (req.method === "GET" && pathname === "/api/agent-os/pending") {
+    return sendJson(res, 200, { ok: true, actions: agentOs.getPendingActions(), total: agentOs.getPendingActions().length });
+  }
+
+  if (req.method === "POST" && pathname === "/api/agent-os/cycle") {
+    const body = await parseBody(req);
+    const result = await agentOs.runCycle(body || {});
+    return sendJson(res, result.ok ? 200 : 500, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/agent-os/meeting") {
+    const body = await parseBody(req);
+    const topic = body?.topic || "Discussão geral";
+    const result = await agentOs.startMeeting(topic, body || {});
+    return sendJson(res, result.ok ? 200 : 500, result);
+  }
+
+  if (req.method === "POST" && pathname.startsWith("/api/agent-os/actions/")) {
+    const actionType = pathname.replace("/api/agent-os/actions/", "");
+    const body = await parseBody(req);
+    const actions = agentOs.SiteActions || {};
+
+    if (actionType === "create-news" && actions.createNews) {
+      return sendJson(res, 200, actions.createNews(body?.title, body?.body, body?.source));
+    }
+    if (actionType === "fix-images" && actions.fixMissingImages) {
+      return sendJson(res, 200, actions.fixMissingImages());
+    }
+    if (actionType === "analyze-seo" && actions.analyzeSEO) {
+      return sendJson(res, 200, actions.analyzeSEO());
+    }
+    if (actionType === "analyze-engagement" && actions.analyzeEngagement) {
+      return sendJson(res, 200, actions.analyzeEngagement());
+    }
+
+    return sendJson(res, 400, { ok: false, error: `Ação "${actionType}" não reconhecida` });
+  }
+
+  // ─── Memory & Instagram Sync Routes ───────────────────────────────
+
+  if (req.method === "GET" && pathname === "/api/agent-os/memory") {
+    return sendJson(res, 200, { ok: true, agents: agentOs.loadAllAgentMemories(), global: agentOs.loadGlobalMemory("__all__", {}) });
+  }
+
+  if (req.method === "GET" && pathname.startsWith("/api/agent-os/memory/")) {
+    const agentId = decodeURIComponent(pathname.replace("/api/agent-os/memory/", ""));
+    const memory = agentOs.loadAgentMemory(agentId);
+    return sendJson(res, 200, { ok: true, agentId, memory });
+  }
+
+  if (req.method === "GET" && pathname === "/api/agent-os/instagram-sync") {
+    const latest = agentOs.getInstagramSyncLatest();
+    if (!latest) return sendJson(res, 404, { ok: false, error: "Nenhum sync de Instagram ainda" });
+    return sendJson(res, 200, { ok: true, ...latest });
+  }
+
+  if (req.method === "GET" && pathname.startsWith("/api/agent-os/instagram-sync/")) {
+    const filename = decodeURIComponent(pathname.replace("/api/agent-os/instagram-sync/", ""));
+    const syncs = agentOs.getAllInstagramSyncs();
+    const found = syncs.find(s => s.file === filename);
+    if (!found) return sendJson(res, 404, { ok: false, error: "Sync não encontrado" });
+    return sendJson(res, 200, { ok: true, ...found });
+  }
+
+  // ─── Agent OS Test Results Routes ─────────────────────────────────
+
+  if (req.method === "GET" && pathname.startsWith("/api/agent-os/test-results/")) {
+    const filename = decodeURIComponent(pathname.replace("/api/agent-os/test-results/", ""));
+    const filePath = path.join(ROOT, ".codex-temp", "agent-os", "test-results", filename);
+    if (!fs.existsSync(filePath)) return sendJson(res, 404, { ok: false, error: "Resultado não encontrado" });
+    const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    return sendJson(res, 200, { ok: true, ...data });
+  }
+
+  if (req.method === "GET" && pathname === "/api/agent-os/test-results") {
+    const latest = path.join(ROOT, ".codex-temp", "agent-os", "test-results", "latest.json");
+    if (!fs.existsSync(latest)) return sendJson(res, 404, { ok: false, error: "Nenhum resultado ainda" });
+    const data = JSON.parse(fs.readFileSync(latest, "utf8"));
+    return sendJson(res, 200, { ok: true, ...data });
+  }
+
   return sendJson(res, 404, { ok: false, message: "Rota não encontrada." });
 }
 
@@ -20881,6 +20989,12 @@ server.listen(PORT, HOST, () => {
   startRealAgentsAutoRunner();
   startArticleIntegrityAutoRunner();
   startTopicFeedAutoRunner();
+  try {
+    const agentOs = require("./agent-os-integration");
+    agentOs.start();
+  } catch (_e) {
+    console.error("⚠️ Agent OS não iniciado:", _e.message);
+  }
   setTimeout(() => {
     try {
       getCachedArticleNewsApiPayload(60, { lite: true });

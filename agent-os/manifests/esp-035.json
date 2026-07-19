@@ -1,0 +1,16 @@
+{
+  "id": "esp-035",
+  "name": "Especialista Ads",
+  "cargo": "Especialista Ads",
+  "specialty": "Anúncios pagos, ROI, campanhas",
+  "subroutines": [
+    "Analisar performance de campanhas",
+    "Calcular ROI",
+    "Propor novas campanhas",
+    "Gerar relatório de ads"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-034",
+  "name": "Especialista Comunidade",
+  "cargo": "Especialista Comunidade",
+  "specialty": "Comentários, DMs, engajamento",
+  "subroutines": [
+    "Monitorar comentários",
+    "Identificar perguntas frequentes",
+    "Propor respostas padrão",
+    "Gerar relatório de comunidade"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

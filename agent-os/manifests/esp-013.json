@@ -1,0 +1,16 @@
+{
+  "id": "esp-013",
+  "name": "Especialista Fact Checking",
+  "cargo": "Especialista Fact Checking",
+  "specialty": "Verificação de fontes, datas, números",
+  "subroutines": [
+    "Verificar data da notícia",
+    "Verificar fonte original",
+    "Verificar números e valores",
+    "Marcar suspeitas para revisão humana"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

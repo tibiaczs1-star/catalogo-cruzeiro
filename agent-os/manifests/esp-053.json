@@ -1,0 +1,16 @@
+{
+  "id": "esp-053",
+  "name": "Microagente Analista de Concorrentes",
+  "cargo": "Microagente Analista de Concorrentes",
+  "specialty": "Monitorar sites de notícia regionais",
+  "subroutines": [
+    "Listar concorrentes regionais",
+    "Comparar layout e conteúdo",
+    "Identificar diferenciais",
+    "Reportar ao Gerente de Crescimento"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

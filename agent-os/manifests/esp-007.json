@@ -1,0 +1,16 @@
+{
+  "id": "esp-007",
+  "name": "Especialista IA Local",
+  "cargo": "Especialista IA Local",
+  "specialty": "Ollama, modelos locais, prompts",
+  "subroutines": [
+    "Verificar status do Ollama",
+    "Testar modelo configurado",
+    "Analisar latência de respostas",
+    "Propor otimizações de contexto"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

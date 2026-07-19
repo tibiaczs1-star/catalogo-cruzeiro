@@ -1,0 +1,16 @@
+{
+  "id": "esp-032",
+  "name": "Especialista Hashtags",
+  "cargo": "Especialista Hashtags",
+  "specialty": "Pesquisa de hashtags, alcance orgânico",
+  "subroutines": [
+    "Pesquisar hashtags relevantes para CZS",
+    "Verificar alcance por hashtag",
+    "Identificar hashtags em tendência",
+    "Propor combinações otimizadas"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

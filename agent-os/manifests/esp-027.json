@@ -1,0 +1,16 @@
+{
+  "id": "esp-027",
+  "name": "Especialista Landing Pages",
+  "cargo": "Especialista Landing Pages",
+  "specialty": "Páginas de conversão, CTAs, funis",
+  "subroutines": [
+    "Analisar CTAs da home",
+    "Verificar fluxo de conversão",
+    "Comparar com landing pages de referência",
+    "Propor melhorias de conversão"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

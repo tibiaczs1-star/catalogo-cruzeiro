@@ -1,0 +1,17 @@
+{
+  "id": "esp-011",
+  "name": "Especialista Notícias Locais",
+  "cargo": "Especialista Notícias Locais",
+  "specialty": "Notícias do Vale do Juruá, Cruzeiro do Sul, Acre",
+  "subroutines": [
+    "Ler notícias de hoje",
+    "Verificar fontes e credibilidade",
+    "Identificar pautas locais relevantes",
+    "Propor destaques para a home",
+    "Verificar balanceamento editorial"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

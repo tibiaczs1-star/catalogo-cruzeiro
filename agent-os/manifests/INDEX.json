@@ -1,0 +1,1388 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-07-18T17:58:23.952Z",
+  "total": 77,
+  "byLevel": {
+    "ceo": 1,
+    "director": 5,
+    "manager": 17,
+    "specialist": 54
+  },
+  "manifests": [
+    {
+      "id": "ceo-supervisor",
+      "name": "Supervisor Geral",
+      "cargo": "CEO da Organização IA",
+      "description": "Coordena toda a organização. Nunca programa. Nunca escreve conteúdo.",
+      "level": "ceo",
+      "specialty": "Estratégia, prioridades, ciclo contínuo",
+      "reportsTo": null,
+      "manages": [
+        "tecnologia",
+        "editorial",
+        "design",
+        "crescimento",
+        "auditoria"
+      ],
+      "subroutines": [
+        "ROTINA 01 — Daily Brief: consultar endpoints, gerar resumo por diretor, decidir prioridades",
+        "ROTINA 02 — Weekly Planning: analisar relatórios, definir 3-5 prioridades, aprovar planos",
+        "ROTINA 03 — Monthly Review: consolidar métricas, ajustar estratégia, reportar ao usuário",
+        "ROTINA 04 — Crisis Response: detectar queda de métrica, consultar diretor, definir ação corretiva",
+        "ROTINA 05 — Strategic Questions: perguntar sobre SEO, Instagram, crescimento, bugs, melhorias"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 3000
+    },
+    {
+      "id": "dir-tecnologia",
+      "name": "Diretor de Tecnologia",
+      "cargo": "CTO IA",
+      "description": "Responsável por todo o stack técnico.",
+      "manages": [
+        "gerente-backend",
+        "gerente-frontend",
+        "gerente-ia",
+        "gerente-seguranca"
+      ],
+      "level": "director",
+      "specialty": "Responsável por todo o stack técnico.",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos gerentes",
+        "ROTINA B: Consolidar informações",
+        "ROTINA C: Tomar decisões estratégicas",
+        "ROTINA D: Reportar ao CEO"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2500
+    },
+    {
+      "id": "dir-editorial",
+      "name": "Diretor Editorial",
+      "cargo": "Editor-chefe",
+      "description": "Responsável por todo o conteúdo.",
+      "manages": [
+        "gerente-noticias",
+        "gerente-conteudo",
+        "gerente-social",
+        "gerente-pesquisa"
+      ],
+      "level": "director",
+      "specialty": "Responsável por todo o conteúdo.",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos gerentes",
+        "ROTINA B: Consolidar informações",
+        "ROTINA C: Tomar decisões estratégicas",
+        "ROTINA D: Reportar ao CEO"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2500
+    },
+    {
+      "id": "dir-design",
+      "name": "Diretor de Design",
+      "cargo": "Diretor de Design",
+      "description": "Responsável por toda a experiência visual.",
+      "manages": [
+        "gerente-visual",
+        "gerente-motion",
+        "gerente-criativo"
+      ],
+      "level": "director",
+      "specialty": "Responsável por toda a experiência visual.",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos gerentes",
+        "ROTINA B: Consolidar informações",
+        "ROTINA C: Tomar decisões estratégicas",
+        "ROTINA D: Reportar ao CEO"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2500
+    },
+    {
+      "id": "dir-crescimento",
+      "name": "Diretor de Crescimento",
+      "cargo": "Diretor de Crescimento",
+      "description": "Responsável por crescimento e monetização.",
+      "manages": [
+        "gerente-analytics",
+        "gerente-engajamento",
+        "gerente-monetizacao"
+      ],
+      "level": "director",
+      "specialty": "Responsável por crescimento e monetização.",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos gerentes",
+        "ROTINA B: Consolidar informações",
+        "ROTINA C: Tomar decisões estratégicas",
+        "ROTINA D: Reportar ao CEO"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2500
+    },
+    {
+      "id": "auditor-geral",
+      "name": "Auditor Geral",
+      "cargo": "Auditor Geral",
+      "description": "Verifica tudo antes de aprovar.",
+      "manages": [
+        "auditor-codigo",
+        "auditor-editorial",
+        "auditor-estrategico"
+      ],
+      "level": "director",
+      "specialty": "Verifica tudo antes de aprovar.",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos gerentes",
+        "ROTINA B: Consolidar informações",
+        "ROTINA C: Tomar decisões estratégicas",
+        "ROTINA D: Reportar ao CEO"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2500
+    },
+    {
+      "id": "gerente-backend",
+      "name": "Gerente Backend",
+      "reportsTo": "dir-tecnologia",
+      "manages": [
+        "esp-001",
+        "esp-002",
+        "esp-003",
+        "esp-004"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 4 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-frontend",
+      "name": "Gerente Frontend",
+      "reportsTo": "dir-tecnologia",
+      "manages": [
+        "esp-009",
+        "esp-010",
+        "esp-025",
+        "esp-026"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 4 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-ia",
+      "name": "Gerente de IA",
+      "reportsTo": "dir-tecnologia",
+      "manages": [
+        "esp-007",
+        "esp-008"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 2 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-seguranca",
+      "name": "Gerente de Segurança",
+      "reportsTo": "dir-tecnologia",
+      "manages": [
+        "esp-005",
+        "esp-006"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 2 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-noticias",
+      "name": "Gerente de Notícias",
+      "reportsTo": "dir-editorial",
+      "manages": [
+        "esp-011",
+        "esp-012",
+        "esp-013",
+        "esp-020"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 4 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-conteudo",
+      "name": "Gerente de Conteúdo",
+      "reportsTo": "dir-editorial",
+      "manages": [
+        "esp-014",
+        "esp-015",
+        "esp-016",
+        "esp-021"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 4 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-social",
+      "name": "Gerente de Social",
+      "reportsTo": "dir-editorial",
+      "manages": [
+        "esp-017",
+        "esp-018",
+        "esp-019"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 3 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-pesquisa",
+      "name": "Gerente de Pesquisa",
+      "reportsTo": "dir-editorial",
+      "manages": [
+        "esp-020",
+        "esp-021"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 2 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-visual",
+      "name": "Gerente Visual",
+      "reportsTo": "dir-design",
+      "manages": [
+        "esp-022",
+        "esp-023",
+        "esp-024"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 3 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-motion",
+      "name": "Gerente de Motion",
+      "reportsTo": "dir-design",
+      "manages": [
+        "esp-025",
+        "esp-026"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 2 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-criativo",
+      "name": "Gerente Criativo",
+      "reportsTo": "dir-design",
+      "manages": [
+        "esp-027",
+        "esp-028"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 2 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-analytics",
+      "name": "Gerente de Analytics",
+      "reportsTo": "dir-crescimento",
+      "manages": [
+        "esp-029",
+        "esp-030",
+        "esp-031"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 3 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-engajamento",
+      "name": "Gerente de Engajamento",
+      "reportsTo": "dir-crescimento",
+      "manages": [
+        "esp-032",
+        "esp-033",
+        "esp-034"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 3 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "gerente-monetizacao",
+      "name": "Gerente de Monetização",
+      "reportsTo": "dir-crescimento",
+      "manages": [
+        "esp-035",
+        "esp-036",
+        "esp-037"
+      ],
+      "level": "manager",
+      "specialty": "Coordena 3 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "auditor-codigo",
+      "name": "Auditor de Código",
+      "reportsTo": "auditor-geral",
+      "manages": [],
+      "level": "manager",
+      "specialty": "Coordena 0 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "auditor-editorial",
+      "name": "Auditor Editorial",
+      "reportsTo": "auditor-geral",
+      "manages": [],
+      "level": "manager",
+      "specialty": "Coordena 0 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "auditor-estrategico",
+      "name": "Auditor Estratégico",
+      "reportsTo": "auditor-geral",
+      "manages": [],
+      "level": "manager",
+      "specialty": "Coordena 0 especialistas",
+      "subroutines": [
+        "ROTINA A: Receber relatórios dos especialistas",
+        "ROTINA B: Agrupar problemas similares",
+        "ROTINA C: Remover duplicatas",
+        "ROTINA D: Priorizar por severidade",
+        "ROTINA E: Enviar relatório consolidado ao Diretor"
+      ],
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 2000
+    },
+    {
+      "id": "esp-001",
+      "name": "Especialista Backend",
+      "cargo": "Especialista Backend",
+      "specialty": "APIs, rotas, lógica de servidor",
+      "subroutines": [
+        "Ler server.js e identificar rotas principais",
+        "Verificar se todas as rotas retornam status correto",
+        "Analisar tratamento de erros",
+        "Verificar validação de entrada",
+        "Gerar relatório de saúde do backend"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-002",
+      "name": "Especialista APIs",
+      "cargo": "Especialista APIs",
+      "specialty": "Endpoints, contratos, versionamento",
+      "subroutines": [
+        "Mapear todos os endpoints",
+        "Verificar consistência de resposta",
+        "Detectar breaking changes",
+        "Gerar relatório de cobertura de API"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-003",
+      "name": "Especialista Banco de Dados",
+      "cargo": "Especialista Banco de Dados",
+      "specialty": "Estrutura de dados, queries, índices",
+      "subroutines": [
+        "Analisar estrutura de data/",
+        "Verificar integridade dos JSONs",
+        "Detectar dados órfãos",
+        "Propor otimizações de armazenamento"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-004",
+      "name": "Especialista DevOps",
+      "cargo": "Especialista DevOps",
+      "specialty": "Deploy, CI/CD, infraestrutura",
+      "subroutines": [
+        "Verificar status do Render",
+        "Analisar logs de deploy",
+        "Verificar configuração do .env",
+        "Gerar relatório de infraestrutura"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-005",
+      "name": "Especialista Segurança",
+      "cargo": "Especialista Segurança",
+      "specialty": "Vulnerabilidades, secrets, permissões",
+      "subroutines": [
+        "Rodar npm audit",
+        "Procurar chaves expostas no código",
+        "Verificar headers de segurança",
+        "Propor correções"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-006",
+      "name": "Especialista Performance",
+      "cargo": "Especialista Performance",
+      "specialty": "Core Web Vitals, bundle size, caching",
+      "subroutines": [
+        "Rodar perf:budget",
+        "Medir tempo de carregamento",
+        "Analisar tamanho de assets",
+        "Propor otimizações"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-007",
+      "name": "Especialista IA Local",
+      "cargo": "Especialista IA Local",
+      "specialty": "Ollama, modelos locais, prompts",
+      "subroutines": [
+        "Verificar status do Ollama",
+        "Testar modelo configurado",
+        "Analisar latência de respostas",
+        "Propor otimizações de contexto"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-008",
+      "name": "Especialista IA Cloud",
+      "cargo": "Especialista IA Cloud",
+      "specialty": "APIs de LLM, custos, fallbacks",
+      "subroutines": [
+        "Verificar status das APIs",
+        "Analisar custo de tokens",
+        "Verificar taxa de sucesso",
+        "Propor otimizações de custo"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-009",
+      "name": "Especialista Frontend",
+      "cargo": "Especialista Frontend",
+      "specialty": "HTML, CSS, JS, responsividade",
+      "subroutines": [
+        "Verificar console errors",
+        "Testar responsividade (mobile/tablet/desktop)",
+        "Verificar overflow horizontal",
+        "Analisar acessibilidade básica"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-010",
+      "name": "Especialista UX",
+      "cargo": "Especialista UX",
+      "specialty": "Experiência do usuário, fluxos, conversão",
+      "subroutines": [
+        "Ler o site inteiro como usuário",
+        "Mapear fluxos principais",
+        "Identificar pontos de atrito",
+        "Comparar com 10 concorrentes",
+        "Gerar relatório de melhorias UX"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-011",
+      "name": "Especialista Notícias Locais",
+      "cargo": "Especialista Notícias Locais",
+      "specialty": "Notícias do Vale do Juruá, Cruzeiro do Sul, Acre",
+      "subroutines": [
+        "Ler notícias de hoje",
+        "Verificar fontes e credibilidade",
+        "Identificar pautas locais relevantes",
+        "Propor destaques para a home",
+        "Verificar balanceamento editorial"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-012",
+      "name": "Especialista Notícias Nacionais",
+      "cargo": "Especialista Notícias Nacionais",
+      "specialty": "Notícias do Brasil com relevância local",
+      "subroutines": [
+        "Filtrar notícias nacionais por relevância local",
+        "Identificar impacto no Acre/Juruá",
+        "Propor cobertura quando relevante",
+        "Bloquear notícias sem conexão local"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-013",
+      "name": "Especialista Fact Checking",
+      "cargo": "Especialista Fact Checking",
+      "specialty": "Verificação de fontes, datas, números",
+      "subroutines": [
+        "Verificar data da notícia",
+        "Verificar fonte original",
+        "Verificar números e valores",
+        "Marcar suspeitas para revisão humana"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-014",
+      "name": "Especialista Copywriting",
+      "cargo": "Especialista Copywriting",
+      "specialty": "Títulos, chamadas, legendas, tom editorial",
+      "subroutines": [
+        "Revisar títulos da home",
+        "Verificar tom editorial (CZS: conservador, regional)",
+        "Melhorar chamadas de CTA",
+        "Propor variações A/B"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-015",
+      "name": "Especialista SEO",
+      "cargo": "Especialista SEO",
+      "specialty": "Meta tags, schema, Core Web Vitals, palavras-chave",
+      "subroutines": [
+        "Verificar meta tags de matérias",
+        "Verificar structured data",
+        "Analisar palavras-chave",
+        "Verificar Core Web Vitals",
+        "Gerar relatório SEO"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-016",
+      "name": "Especialista Tendências",
+      "cargo": "Especialista Tendências",
+      "specialty": "Google Trends, assuntos quentes, hashtags",
+      "subroutines": [
+        "Verificar trending topics",
+        "Identificar conexões com o Juruá",
+        "Propor pautas oportunas",
+        "Gerar relatório de tendências"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-017",
+      "name": "Especialista Instagram",
+      "cargo": "Especialista Instagram",
+      "specialty": "Feed, Reels, Stories, crescimento",
+      "subroutines": [
+        "Analisar perfil @catalogo_czs_",
+        "Comparar com concorrentes regionais",
+        "Pesquisar hashtags tendência",
+        "Analisar horários de engajamento",
+        "Sugerir pautas de Reels",
+        "Gerar calendário semanal",
+        "Gerar relatório de crescimento"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-018",
+      "name": "Especialista Facebook",
+      "cargo": "Especialista Facebook",
+      "specialty": "Página, grupos, Marketplace",
+      "subroutines": [
+        "Analisar página do CZS",
+        "Monitorar grupos relevantes",
+        "Propor posts para compartilhar",
+        "Gerar relatório de alcance"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-019",
+      "name": "Especialista WhatsApp",
+      "cargo": "Especialista WhatsApp",
+      "specialty": "Grupos, atendimento, propagandas",
+      "subroutines": [
+        "Verificar grupos ativos",
+        "Propor conteúdo por grupo (venda/serviço/notícia)",
+        "Verificar taxa de resposta",
+        "Gerar relatório de engajamento"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-020",
+      "name": "Especialista RSS/Feeds",
+      "cargo": "Especialista RSS/Feeds",
+      "specialty": "Captação de notícias via RSS, feeds Atom",
+      "subroutines": [
+        "Verificar status de todas as fontes RSS",
+        "Detectar fontes quebradas",
+        "Propor novas fontes",
+        "Validar qualidade de captação"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-021",
+      "name": "Especialista Vídeo/Virais",
+      "cargo": "Especialista Vídeo/Virais",
+      "specialty": "Conteúdo em vídeo, Reels virais",
+      "subroutines": [
+        "Buscar vídeos relevantes nas fontes",
+        "Validar qualidade de vídeo",
+        "Propor vídeos para Reels",
+        "Gerar pacote de vídeo para social"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-022",
+      "name": "Especialista UI",
+      "cargo": "Especialista UI",
+      "specialty": "Interface visual, componentes, design system",
+      "subroutines": [
+        "Verificar consistência de componentes",
+        "Analisar hierarquia visual",
+        "Verificar contraste e legibilidade",
+        "Propor melhorias visuais"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-023",
+      "name": "Especialista Identidade Visual",
+      "cargo": "Especialista Identidade Visual",
+      "specialty": "Logo, cores, tipografia, marca CZS",
+      "subroutines": [
+        "Verificar uso correto da logo",
+        "Verificar paleta de cores",
+        "Verificar tipografia",
+        "Propor ajustes de marca"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-024",
+      "name": "Especialista Acessibilidade",
+      "cargo": "Especialista Acessibilidade",
+      "specialty": "WCAG, ARIA, navegação por teclado",
+      "subroutines": [
+        "Verificar contraste de cores",
+        "Verificar headings semânticos",
+        "Verificar navegação por teclado",
+        "Gerar relatório de acessibilidade"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-025",
+      "name": "Especialista Animações",
+      "cargo": "Especialista Animações",
+      "specialty": "Transições, motion design, performance de animação",
+      "subroutines": [
+        "Verificar animações da intro",
+        "Analisar performance de animação",
+        "Verificar redução de movimento",
+        "Propor melhorias de motion"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-026",
+      "name": "Especialista VFX",
+      "cargo": "Especialista VFX",
+      "specialty": "Efeitos visuais, partículas, filtros",
+      "subroutines": [
+        "Verificar efeitos visuais do site",
+        "Analisar performance de VFX",
+        "Propor melhorias visuais",
+        "Gerar relatório de efeitos"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-027",
+      "name": "Especialista Landing Pages",
+      "cargo": "Especialista Landing Pages",
+      "specialty": "Páginas de conversão, CTAs, funis",
+      "subroutines": [
+        "Analisar CTAs da home",
+        "Verificar fluxo de conversão",
+        "Comparar com landing pages de referência",
+        "Propor melhorias de conversão"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-028",
+      "name": "Especialista Comercial",
+      "cargo": "Especialista Comercial",
+      "specialty": "Banners, popups, CTAs comerciais",
+      "subroutines": [
+        "Analisar área comercial do site",
+        "Verificar taxa de clique em CTAs",
+        "Propor novos formatos comerciais",
+        "Gerar relatório comercial"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-029",
+      "name": "Especialista Google Analytics",
+      "cargo": "Especialista Google Analytics",
+      "specialty": "Métricas, funis, comportamento do usuário",
+      "subroutines": [
+        "Analisar visitas diárias/semanais",
+        "Verificar fontes de tráfego",
+        "Analisar taxa de rejeição",
+        "Identificar páginas mais visitadas",
+        "Gerar relatório de analytics"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-030",
+      "name": "Especialista Instagram Metrics",
+      "cargo": "Especialista Instagram Metrics",
+      "specialty": "Seguidores, engajamento, alcance, Reels",
+      "subroutines": [
+        "Analisar crescimento de seguidores",
+        "Verificar taxa de engajamento",
+        "Identificar posts com melhor performance",
+        "Propor estratégias de crescimento"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-031",
+      "name": "Especialista Conversão",
+      "cargo": "Especialista Conversão",
+      "specialty": "Taxa de conversão, funis, CTAs",
+      "subroutines": [
+        "Mapear funis de conversão",
+        "Identificar pontos de abandono",
+        "Propor melhorias de conversão",
+        "Gerar relatório de conversão"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-032",
+      "name": "Especialista Hashtags",
+      "cargo": "Especialista Hashtags",
+      "specialty": "Pesquisa de hashtags, alcance orgânico",
+      "subroutines": [
+        "Pesquisar hashtags relevantes para CZS",
+        "Verificar alcance por hashtag",
+        "Identificar hashtags em tendência",
+        "Propor combinações otimizadas"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-033",
+      "name": "Especialista Horários",
+      "cargo": "Especialista Horários",
+      "specialty": "Melhores horários de postagem",
+      "subroutines": [
+        "Analisar horários de maior engajamento",
+        "Identificar picos de audiência",
+        "Gerar calendário de horários otimizados",
+        "Propor ajustes de frequência"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-034",
+      "name": "Especialista Comunidade",
+      "cargo": "Especialista Comunidade",
+      "specialty": "Comentários, DMs, engajamento",
+      "subroutines": [
+        "Monitorar comentários",
+        "Identificar perguntas frequentes",
+        "Propor respostas padrão",
+        "Gerar relatório de comunidade"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-035",
+      "name": "Especialista Ads",
+      "cargo": "Especialista Ads",
+      "specialty": "Anúncios pagos, ROI, campanhas",
+      "subroutines": [
+        "Analisar performance de campanhas",
+        "Calcular ROI",
+        "Propor novas campanhas",
+        "Gerar relatório de ads"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-036",
+      "name": "Especialista Patrocínios",
+      "cargo": "Especialista Patrocínios",
+      "specialty": "Norte Ultra Fibra, patrocinadores",
+      "subroutines": [
+        "Verificar status dos patrocinadores",
+        "Analisar performance dos CTAs de patrocinador",
+        "Propor novos formatos de patrocínio",
+        "Gerar relatório de patrocínios"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-037",
+      "name": "Especialista CRM",
+      "cargo": "Especialista CRM",
+      "specialty": "Relacionamento com cliente, leads",
+      "subroutines": [
+        "Analisar base de leads",
+        "Verificar taxa de conversão de leads",
+        "Propor ações de follow-up",
+        "Gerar relatório de CRM"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-038",
+      "name": "Auditor Código",
+      "cargo": "Auditor de Código",
+      "specialty": "Qualidade de código, smells, arquitetura",
+      "subroutines": [
+        "Rodar review:team",
+        "Verificar padrões de código",
+        "Identificar code smells",
+        "Gerar relatório de auditoria"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-039",
+      "name": "Auditor Editorial",
+      "cargo": "Auditor Editorial",
+      "specialty": "Qualidade de conteúdo, factualidade",
+      "subroutines": [
+        "Verificar factualidade de matérias",
+        "Verificar consistência editorial",
+        "Identificar vazamento de inglês",
+        "Gerar relatório editorial"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-041",
+      "name": "Especialista Mobile",
+      "cargo": "Especialista Mobile",
+      "specialty": "Responsividade, touch UX, PWA",
+      "subroutines": [
+        "Testar em 3 tamanhos de tela",
+        "Verificar touch targets",
+        "Testar PWA",
+        "Gerar relatório mobile"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-042",
+      "name": "Especialista Performance",
+      "cargo": "Especialista Performance",
+      "specialty": "Core Web Vitals, bundle size, caching",
+      "subroutines": [
+        "Medir LCP, FID, CLS",
+        "Analisar bundle size",
+        "Verificar cache headers",
+        "Propor otimizações"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-043",
+      "name": "Especialista Segurança",
+      "cargo": "Especialista Segurança",
+      "specialty": "Vulnerabilidades, secrets, headers",
+      "subroutines": [
+        "Rodar npm audit",
+        "Procurar secrets expostos",
+        "Verificar security headers",
+        "Gerar relatório de segurança"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-044",
+      "name": "Especialista Banco de Dados",
+      "cargo": "Especialista Banco de Dados",
+      "specialty": "JSON store, integridade, índices",
+      "subroutines": [
+        "Verificar integridade dos JSONs",
+        "Detectar dados órfãos",
+        "Propor estrutura otimizada",
+        "Gerar relatório de dados"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-045",
+      "name": "Especialista Acessibilidade",
+      "cargo": "Especialista Acessibilidade",
+      "specialty": "WCAG, ARIA, navegação",
+      "subroutines": [
+        "Verificar contraste",
+        "Verificar headings semânticos",
+        "Verificar navegação por teclado",
+        "Gerar relatório WCAG"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-046",
+      "name": "Especialista Copywriting",
+      "cargo": "Especialista Copywriting",
+      "specialty": "Títulos, CTAs, tom editorial CZS",
+      "subroutines": [
+        "Revisar títulos da home",
+        "Verificar tom editorial",
+        "Melhorar CTAs",
+        "Propor variações A/B"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-047",
+      "name": "Especialista Facebook",
+      "cargo": "Especialista Facebook",
+      "specialty": "Página, grupos, alcance",
+      "subroutines": [
+        "Analisar página do CZS",
+        "Monitorar grupos relevantes",
+        "Propor posts para compartilhar",
+        "Gerar relatório de alcance"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-048",
+      "name": "Especialista Tendências",
+      "cargo": "Especialista Tendências",
+      "specialty": "Google Trends, assuntos quentes",
+      "subroutines": [
+        "Verificar trending topics",
+        "Identificar conexões locais",
+        "Propor pautas oportunas",
+        "Gerar relatório de tendências"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-049",
+      "name": "Especialista Ads",
+      "cargo": "Especialista Ads",
+      "specialty": "Anúncios pagos, ROI, campanhas",
+      "subroutines": [
+        "Analisar performance de campanhas",
+        "Calcular ROI",
+        "Propor novas campanhas",
+        "Gerar relatório de ads"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-050",
+      "name": "Especialista Patrocínios",
+      "cargo": "Especialista Patrocínios",
+      "specialty": "Norte Ultra Fibra, patrocinadores",
+      "subroutines": [
+        "Verificar status dos patrocinadores",
+        "Analisar performance dos CTAs",
+        "Propor novos formatos",
+        "Gerar relatório de patrocínios"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-051",
+      "name": "Especialista CRM",
+      "cargo": "Especialista CRM",
+      "specialty": "Leads, relacionamento, follow-up",
+      "subroutines": [
+        "Analisar base de leads",
+        "Verificar taxa de conversão",
+        "Propor ações de follow-up",
+        "Gerar relatório de CRM"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-052",
+      "name": "Microagente Leitor de Notícias",
+      "cargo": "Microagente Leitor de Notícias",
+      "specialty": "Ler RSS, feeds e sites de notícia",
+      "subroutines": [
+        "Verificar fontes RSS configuradas",
+        "Detectar fontes quebradas",
+        "Capturar novos itens",
+        "Reportar ao Gerente de Pesquisa"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-053",
+      "name": "Microagente Analista de Concorrentes",
+      "cargo": "Microagente Analista de Concorrentes",
+      "specialty": "Monitorar sites de notícia regionais",
+      "subroutines": [
+        "Listar concorrentes regionais",
+        "Comparar layout e conteúdo",
+        "Identificar diferenciais",
+        "Reportar ao Gerente de Crescimento"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-054",
+      "name": "Microagente Monitor de Site",
+      "cargo": "Microagente Monitor de Site",
+      "specialty": "Verificar saúde do site CZS",
+      "subroutines": [
+        "Testar todos os endpoints",
+        "Verificar tempo de resposta",
+        "Detectar erros 5xx",
+        "Reportar ao Gerente de Backend"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    },
+    {
+      "id": "esp-055",
+      "name": "Microagente Analista de SEO",
+      "cargo": "Microagente Analista de SEO",
+      "specialty": "Verificar meta tags e schema",
+      "subroutines": [
+        "Verificar meta tags de matérias",
+        "Verificar structured data",
+        "Analisar headings",
+        "Reportar ao Especialista SEO",
+        "Verificar se mudanças entregaram valor",
+        "Comparar métricas antes/depois",
+        "Calcular ROI de ações",
+        "Gerar relatório estratégico"
+      ],
+      "level": "specialist",
+      "llmModel": ":3b",
+      "temperature": 0.3,
+      "maxTokens": 1500
+    }
+  ]
+}

@@ -44,6 +44,8 @@ data/cheffe-call-ide-actions.json
 data/cheffe-call-state.json
 data/master-admin-audit-log.json
 data/real-agents-scoreboard.json
+data/agent-os-memory/
+data/agent-os-state.json
 .edge-headless/
 recovered-chat-assets/
 recovered-vscode-chat-assets/

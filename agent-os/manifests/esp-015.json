@@ -1,0 +1,17 @@
+{
+  "id": "esp-015",
+  "name": "Especialista SEO",
+  "cargo": "Especialista SEO",
+  "specialty": "Meta tags, schema, Core Web Vitals, palavras-chave",
+  "subroutines": [
+    "Verificar meta tags de matérias",
+    "Verificar structured data",
+    "Analisar palavras-chave",
+    "Verificar Core Web Vitals",
+    "Gerar relatório SEO"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

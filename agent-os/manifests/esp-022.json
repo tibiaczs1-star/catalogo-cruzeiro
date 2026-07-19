@@ -1,0 +1,16 @@
+{
+  "id": "esp-022",
+  "name": "Especialista UI",
+  "cargo": "Especialista UI",
+  "specialty": "Interface visual, componentes, design system",
+  "subroutines": [
+    "Verificar consistência de componentes",
+    "Analisar hierarquia visual",
+    "Verificar contraste e legibilidade",
+    "Propor melhorias visuais"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

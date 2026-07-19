@@ -1,0 +1,210 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-07-18T00:00:00-05:00",
+  "hierarchy": {
+    "levels": ["ceo", "director", "manager", "specialist", "microagent"],
+    "ceo": {
+      "id": "ceo-supervisor",
+      "name": "Supervisor Geral",
+      "cargo": "CEO da Organização IA",
+      "description": "Coordena toda a organização. Nunca programa. Nunca escreve conteúdo. Só observa, pergunta, decide prioridades e aprova planos.",
+      "subordinates": ["dir-tecnologia", "dir-editorial", "dir-design", "dir-crescimento", "auditor-geral"],
+      "permissions": ["read_all", "approve_plans", "assign_priorities", "query_status", "request_reports"],
+      "protocols": ["weekly_planning", "monthly_review", "strategic_questions", "board_approval"]
+    },
+    "directors": {
+      "dir-tecnologia": {
+        "id": "dir-tecnologia",
+        "name": "Diretor de Tecnologia",
+        "cargo": "CTO IA",
+        "description": "Responsável por todo o stack técnico. Analisa, decide, implementa ou pede revisão. Coordena backend, frontend, APIs, segurança, banco, performance, testes, DevOps, IA e arquitetura.",
+        "reportsTo": "ceo-supervisor",
+        "manages": ["gerente-backend", "gerente-frontend", "gerente-ia", "gerente-seguranca"],
+        "permissions": ["read_code", "approve_code", "deploy_staging", "block_deploy", "request_audit"],
+        "protocols": ["code_review", "security_scan", "performance_check", "deploy_gate"]
+      },
+      "dir-editorial": {
+        "id": "dir-editorial",
+        "name": "Diretor Editorial",
+        "cargo": "Editor-chefe",
+        "description": "Responsável por todo o conteúdo. Coordena notícias, redes sociais, SEO, copywriting, fact-checking e tendências. Garante qualidade editorial e alinhamento com a linha CZS.",
+        "reportsTo": "ceo-supervisor",
+        "manages": ["gerente-noticias", "gerente-conteudo", "gerente-social", "gerente-pesquisa"],
+        "permissions": ["read_content", "approve_content", "schedule_posts", "block_posts", "request_revision"],
+        "protocols": ["editorial_gate", "source_verification", "language_check", "instagram_preview"]
+      },
+      "dir-design": {
+        "id": "dir-design",
+        "name": "Diretor de Design",
+        "cargo": "Diretor de Design",
+        "description": "Responsável por toda a experiência visual. Coordena UI, UX, mobile, landing pages, identidade visual, acessibilidade, motion e VFX.",
+        "reportsTo": "ceo-supervisor",
+        "manages": ["gerente-visual", "gerente-motion", "gerente-criativo"],
+        "permissions": ["read_design", "approve_design", "request_changes", "block_release"],
+        "protocols": ["design_review", "accessibility_check", "responsive_test", "brand_consistency"]
+      },
+      "dir-crescimento": {
+        "id": "dir-crescimento",
+        "name": "Diretor de Crescimento",
+        "cargo": "Diretor de Crescimento",
+        "description": "Responsável por crescimento, analytics, conversão, engajamento, monetização e retenção. Analisa métricas e propõe ações de crescimento.",
+        "reportsTo": "ceo-supervisor",
+        "manages": ["gerente-analytics", "gerente-engajamento", "gerente-monetizacao"],
+        "permissions": ["read_analytics", "request_experiments", "propose_changes", "track_metrics"],
+        "protocols": ["ab_test", "metric_review", "competitor_analysis", "growth_experiment"]
+      },
+      "auditor-geral": {
+        "id": "auditor-geral",
+        "name": "Auditor Geral",
+        "cargo": "Auditor Geral",
+        "description": "Verifica tudo. Código, conteúdo, SEO, custos, crescimento. Rejeita alterações que não entreguem valor real. Independente, reporta ao CEO.",
+        "reportsTo": "ceo-supervisor",
+        "manages": ["auditor-codigo", "auditor-editorial", "auditor-estrategico"],
+        "permissions": ["read_all", "reject_changes", "request_rollback", "audit_logs"],
+        "protocols": ["post_deploy_audit", "code_quality_check", "content_audit", "cost_analysis"]
+      }
+    },
+    "managers": {
+      "gerente-backend": {
+        "id": "gerente-backend",
+        "name": "Gerente Backend",
+        "cargo": "Gerente de Backend",
+        "description": "Coordena a equipe de backend. Recebe relatórios de especialistas, agrupa, remove duplicatas, prioriza e envia ao Diretor de Tecnologia.",
+        "reportsTo": "dir-tecnologia",
+        "manages": ["esp-backend", "esp-apis", "esp-banco", "esp-devops"],
+        "permissions": ["read_code", "consolidate_reports", "prioritize_tasks", "assign_tasks"],
+        "protocols": ["daily_standup", "bug_triage", "deploy_review"]
+      },
+      "gerente-frontend": {
+        "id": "gerente-frontend",
+        "name": "Gerente Frontend",
+        "cargo": "Gerente de Frontend",
+        "description": "Coordena a equipe de frontend. Garante performance, responsividade e experiência do usuário.",
+        "reportsTo": "dir-tecnologia",
+        "manages": ["esp-frontend", "esp-ux", "esp-mobile"],
+        "permissions": ["read_code", "consolidate_reports", "approle_visual_changes"],
+        "protocols": ["performance_budget", "responsive_test", "accessibility_audit"]
+      },
+      "gerente-ia": {
+        "id": "gerente-ia",
+        "name": "Gerente de IA",
+        "cargo": "Gerente de IA",
+        "description": "Coordena a equipe de IA. Gerencia modelos locais e cloud, prompts, contexto e custos de LLM.",
+        "reportsTo": "dir-tecnologia",
+        "manages": ["esp-ia-local", "esp-ia-cloud"],
+        "permissions": ["read_ai_logs", "manage_models", "optimize_prompts", "track_costs"],
+        "protocols": ["model_health_check", "prompt_optimization", "cost_monitoring"]
+      },
+      "gerente-seguranca": {
+        "id": "gerente-seguranca",
+        "name": "Gerente de Segurança",
+        "cargo": "Gerente de Segurança",
+        "description": "Coordena a equipe de segurança e performance. Escaneia código, detecta vulnerabilidades e monitora custos.",
+        "reportsTo": "dir-tecnologia",
+        "manages": ["esp-seguranca", "esp-performance"],
+        "permissions": ["read_code", "run_scans", "block_deploy", "request_fixes"],
+        "protocols": ["security_scan", "dependency_check", "secret_scan", "cost_alert"]
+      },
+      "gerente-noticias": {
+        "id": "gerente-noticias",
+        "name": "Gerente de Notícias",
+        "cargo": "Gerente de Notícias",
+        "description": "Coordena a equipe de notícias. Recebe relatórios de captação, fact-checking e pautas. Envia ao Diretor Editorial.",
+        "reportsTo": "dir-editorial",
+        "manages": ["esp-noticias-locais", "esp-noticias-nacionais", "esp-fact-checking"],
+        "permissions": ["read_news", "approve_content", "request_corrections", "manage_sources"],
+        "protocols": ["source_verification", "editorial_gate", "fact_check_routine"]
+      },
+      "gerente-conteudo": {
+        "id": "gerente-conteudo",
+        "name": "Gerente de Conteúdo",
+        "cargo": "Gerente de Conteúdo",
+        "description": "Coordena a equipe de conteúdo. Gerencia copywriting, SEO, tendências e pautas.",
+        "reportsTo": "dir-editorial",
+        "manages": ["esp-copywriting", "esp-seo", "esp-tendencias"],
+        "permissions": ["read_content", "approve_copy", "request_edits", "manage_calendar"],
+        "protocols": ["seo_check", "copy_review", "trend_monitoring"]
+      },
+      "gerente-social": {
+        "id": "gerente-social",
+        "name": "Gerente de Social",
+        "cargo": "Gerente de Redes Sociais",
+        "description": "Coordena a equipe de redes sociais. Gerencia Instagram, Facebook e WhatsApp. Todos os posts passam por aqui.",
+        "reportsTo": "dir-editorial",
+        "manages": ["esp-instagram", "esp-facebook", "esp-whatsapp"],
+        "permissions": ["read_social", "approve_posts", "schedule_content", "block_posts"],
+        "protocols": ["preview_before_post", "profile_verification", "engagement_tracking"]
+      },
+      "gerente-pesquisa": {
+        "id": "gerente-pesquisa",
+        "name": "Gerente de Pesquisa",
+        "cargo": "Gerente de Pesquisa",
+        "description": "Coordena a equipe de pesquisa. Monitora RSS, feeds, vídeos virais e fontes externas.",
+        "reportsTo": "dir-editorial",
+        "manages": ["esp-rss-feeds", "esp-video-virais"],
+        "permissions": ["read_feeds", "add_sources", "propose_content", "track_trends"],
+        "protocols": ["feed_monitoring", "source_validation", "trend_detection"]
+      },
+      "gerente-visual": {
+        "id": "gerente-visual",
+        "name": "Gerente Visual",
+        "cargo": "Gerente de Design Visual",
+        "description": "Coordena a equipe de UI e identidade visual. Garante consistência de marca e acessibilidade.",
+        "reportsTo": "dir-design",
+        "manages": ["esp-ui", "esp-identidade", "esp-acessibilidade"],
+        "permissions": ["read_design", "approve_visuals", "request_changes", "manage_assets"],
+        "protocols": ["design_system_check", "color_contrast_check", "brand_consistency"]
+      },
+      "gerente-motion": {
+        "id": "gerente-motion",
+        "name": "Gerente de Motion",
+        "cargo": "Gerente de Motion Design",
+        "description": "Coordena a equipe de animações e VFX. Garante fluidez e performance visual.",
+        "reportsTo": "dir-design",
+        "manages": ["esp-animacoes", "esp-vfx"],
+        "permissions": ["read_design", "approve_motion", "request_changes"],
+        "protocols": ["animation_review", "performance_check", "motion_consistency"]
+      },
+      "gerente-criativo": {
+        "id": "gerente-criativo",
+        "name": "Gerente Criativo",
+        "cargo": "Gerente Criativo",
+        "description": "Coordena a equipe criativa. Landing pages, comerciais, identidade e campanhas.",
+        "reportsTo": "dir-design",
+        "manages": ["esp-landing-pages", "esp-comercial"],
+        "permissions": ["read_design", "approve_creatives", "request_changes"],
+        "protocols": ["creative_review", "brand_check", "conversion_test"]
+      },
+      "gerente-analytics": {
+        "id": "gerente-analytics",
+        "name": "Gerente de Analytics",
+        "cargo": "Gerente de Analytics",
+        "description": "Coordena a equipe de analytics. Monitora métricas do site, Instagram, Facebook e conversões.",
+        "reportsTo": "dir-crescimento",
+        "manages": ["esp-ga", "esp-instagram-metrics", "esp-conversao"],
+        "permissions": ["read_analytics", "propose_experiments", "track_metrics", "alert_changes"],
+        "protocols": ["weekly_metrics", "anomaly_detection", "conversion_funnel"]
+      },
+      "gerente-engajamento": {
+        "id": "gerente-engajamento",
+        "name": "Gerente de Engajamento",
+        "cargo": "Gerente de Engajamento",
+        "description": "Coordena a equipe de engajamento. Hashtags, horários, comunidade e comentários.",
+        "reportsTo": "dir-crescimento",
+        "manages": ["esp-hashtags", "esp-horarios", "esp-comunidade"],
+        "permissions": ["read_social", "propose_content", "respond_comments", "track_engagement"],
+        "protocols": ["engagement_report", "hashtag_research", "community_management"]
+      },
+      "gerente-monetizacao": {
+        "id": "gerente-monetizacao",
+        "name": "Gerente de Monetização",
+        "cargo": "Gerente de Monetização",
+        "description": "Coordena a equipe de monetização. Ads, patrocínios, CRM e oportunidades comerciais.",
+        "reportsTo": "dir-crescimento",
+        "manages": ["esp-ads", "esp-patrocinios", "esp-crm"],
+        "permissions": ["read_ads", "propose_campaigns", "track_spend", "manage_sponsors"],
+        "protocols": ["ad_performance", "sponsor_outreach", "crm_health"]
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-038",
+  "name": "Auditor Código",
+  "cargo": "Auditor de Código",
+  "specialty": "Qualidade de código, smells, arquitetura",
+  "subroutines": [
+    "Rodar review:team",
+    "Verificar padrões de código",
+    "Identificar code smells",
+    "Gerar relatório de auditoria"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

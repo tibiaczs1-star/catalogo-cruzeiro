@@ -1,0 +1,16 @@
+{
+  "id": "esp-012",
+  "name": "Especialista Notícias Nacionais",
+  "cargo": "Especialista Notícias Nacionais",
+  "specialty": "Notícias do Brasil com relevância local",
+  "subroutines": [
+    "Filtrar notícias nacionais por relevância local",
+    "Identificar impacto no Acre/Juruá",
+    "Propor cobertura quando relevante",
+    "Bloquear notícias sem conexão local"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

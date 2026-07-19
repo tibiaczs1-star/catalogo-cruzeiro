@@ -1,0 +1,16 @@
+{
+  "id": "esp-014",
+  "name": "Especialista Copywriting",
+  "cargo": "Especialista Copywriting",
+  "specialty": "Títulos, chamadas, legendas, tom editorial",
+  "subroutines": [
+    "Revisar títulos da home",
+    "Verificar tom editorial (CZS: conservador, regional)",
+    "Melhorar chamadas de CTA",
+    "Propor variações A/B"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

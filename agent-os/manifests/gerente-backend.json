@@ -1,0 +1,23 @@
+{
+  "id": "gerente-backend",
+  "name": "Gerente Backend",
+  "reportsTo": "dir-tecnologia",
+  "manages": [
+    "esp-001",
+    "esp-002",
+    "esp-003",
+    "esp-004"
+  ],
+  "level": "manager",
+  "specialty": "Coordena 4 especialistas",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos especialistas",
+    "ROTINA B: Agrupar problemas similares",
+    "ROTINA C: Remover duplicatas",
+    "ROTINA D: Priorizar por severidade",
+    "ROTINA E: Enviar relatório consolidado ao Diretor"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2000
+}

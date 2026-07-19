@@ -1,0 +1,16 @@
+{
+  "id": "esp-042",
+  "name": "Especialista Performance",
+  "cargo": "Especialista Performance",
+  "specialty": "Core Web Vitals, bundle size, caching",
+  "subroutines": [
+    "Medir LCP, FID, CLS",
+    "Analisar bundle size",
+    "Verificar cache headers",
+    "Propor otimizações"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

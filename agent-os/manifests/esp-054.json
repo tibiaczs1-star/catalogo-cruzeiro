@@ -1,0 +1,16 @@
+{
+  "id": "esp-054",
+  "name": "Microagente Monitor de Site",
+  "cargo": "Microagente Monitor de Site",
+  "specialty": "Verificar saúde do site CZS",
+  "subroutines": [
+    "Testar todos os endpoints",
+    "Verificar tempo de resposta",
+    "Detectar erros 5xx",
+    "Reportar ao Gerente de Backend"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

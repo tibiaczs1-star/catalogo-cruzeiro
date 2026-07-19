@@ -1,0 +1,20 @@
+{
+  "id": "esp-055",
+  "name": "Microagente Analista de SEO",
+  "cargo": "Microagente Analista de SEO",
+  "specialty": "Verificar meta tags e schema",
+  "subroutines": [
+    "Verificar meta tags de matérias",
+    "Verificar structured data",
+    "Analisar headings",
+    "Reportar ao Especialista SEO",
+    "Verificar se mudanças entregaram valor",
+    "Comparar métricas antes/depois",
+    "Calcular ROI de ações",
+    "Gerar relatório estratégico"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

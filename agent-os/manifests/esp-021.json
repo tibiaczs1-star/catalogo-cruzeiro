@@ -1,0 +1,16 @@
+{
+  "id": "esp-021",
+  "name": "Especialista Vídeo/Virais",
+  "cargo": "Especialista Vídeo/Virais",
+  "specialty": "Conteúdo em vídeo, Reels virais",
+  "subroutines": [
+    "Buscar vídeos relevantes nas fontes",
+    "Validar qualidade de vídeo",
+    "Propor vídeos para Reels",
+    "Gerar pacote de vídeo para social"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

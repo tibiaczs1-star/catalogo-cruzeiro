@@ -1,0 +1,17 @@
+{
+  "id": "esp-010",
+  "name": "Especialista UX",
+  "cargo": "Especialista UX",
+  "specialty": "Experiência do usuário, fluxos, conversão",
+  "subroutines": [
+    "Ler o site inteiro como usuário",
+    "Mapear fluxos principais",
+    "Identificar pontos de atrito",
+    "Comparar com 10 concorrentes",
+    "Gerar relatório de melhorias UX"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

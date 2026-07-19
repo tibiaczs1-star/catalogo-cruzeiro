@@ -1,0 +1,17 @@
+{
+  "id": "esp-029",
+  "name": "Especialista Google Analytics",
+  "cargo": "Especialista Google Analytics",
+  "specialty": "Métricas, funis, comportamento do usuário",
+  "subroutines": [
+    "Analisar visitas diárias/semanais",
+    "Verificar fontes de tráfego",
+    "Analisar taxa de rejeição",
+    "Identificar páginas mais visitadas",
+    "Gerar relatório de analytics"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-041",
+  "name": "Especialista Mobile",
+  "cargo": "Especialista Mobile",
+  "specialty": "Responsividade, touch UX, PWA",
+  "subroutines": [
+    "Testar em 3 tamanhos de tela",
+    "Verificar touch targets",
+    "Testar PWA",
+    "Gerar relatório mobile"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

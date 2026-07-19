@@ -1,0 +1,17 @@
+{
+  "id": "esp-001",
+  "name": "Especialista Backend",
+  "cargo": "Especialista Backend",
+  "specialty": "APIs, rotas, lógica de servidor",
+  "subroutines": [
+    "Ler server.js e identificar rotas principais",
+    "Verificar se todas as rotas retornam status correto",
+    "Analisar tratamento de erros",
+    "Verificar validação de entrada",
+    "Gerar relatório de saúde do backend"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

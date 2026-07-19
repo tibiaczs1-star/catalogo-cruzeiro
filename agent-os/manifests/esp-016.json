@@ -1,0 +1,16 @@
+{
+  "id": "esp-016",
+  "name": "Especialista Tendências",
+  "cargo": "Especialista Tendências",
+  "specialty": "Google Trends, assuntos quentes, hashtags",
+  "subroutines": [
+    "Verificar trending topics",
+    "Identificar conexões com o Juruá",
+    "Propor pautas oportunas",
+    "Gerar relatório de tendências"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

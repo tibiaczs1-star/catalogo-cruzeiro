@@ -1,0 +1,16 @@
+{
+  "id": "esp-026",
+  "name": "Especialista VFX",
+  "cargo": "Especialista VFX",
+  "specialty": "Efeitos visuais, partículas, filtros",
+  "subroutines": [
+    "Verificar efeitos visuais do site",
+    "Analisar performance de VFX",
+    "Propor melhorias visuais",
+    "Gerar relatório de efeitos"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

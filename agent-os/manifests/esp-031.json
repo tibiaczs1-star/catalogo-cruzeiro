@@ -1,0 +1,16 @@
+{
+  "id": "esp-031",
+  "name": "Especialista Conversão",
+  "cargo": "Especialista Conversão",
+  "specialty": "Taxa de conversão, funis, CTAs",
+  "subroutines": [
+    "Mapear funis de conversão",
+    "Identificar pontos de abandono",
+    "Propor melhorias de conversão",
+    "Gerar relatório de conversão"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

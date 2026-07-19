@@ -1,0 +1,16 @@
+{
+  "id": "esp-051",
+  "name": "Especialista CRM",
+  "cargo": "Especialista CRM",
+  "specialty": "Leads, relacionamento, follow-up",
+  "subroutines": [
+    "Analisar base de leads",
+    "Verificar taxa de conversão",
+    "Propor ações de follow-up",
+    "Gerar relatório de CRM"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

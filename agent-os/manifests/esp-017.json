@@ -1,0 +1,19 @@
+{
+  "id": "esp-017",
+  "name": "Especialista Instagram",
+  "cargo": "Especialista Instagram",
+  "specialty": "Feed, Reels, Stories, crescimento",
+  "subroutines": [
+    "Analisar perfil @catalogo_czs_",
+    "Comparar com concorrentes regionais",
+    "Pesquisar hashtags tendência",
+    "Analisar horários de engajamento",
+    "Sugerir pautas de Reels",
+    "Gerar calendário semanal",
+    "Gerar relatório de crescimento"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

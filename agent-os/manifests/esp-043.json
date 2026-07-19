@@ -1,0 +1,16 @@
+{
+  "id": "esp-043",
+  "name": "Especialista Segurança",
+  "cargo": "Especialista Segurança",
+  "specialty": "Vulnerabilidades, secrets, headers",
+  "subroutines": [
+    "Rodar npm audit",
+    "Procurar secrets expostos",
+    "Verificar security headers",
+    "Gerar relatório de segurança"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

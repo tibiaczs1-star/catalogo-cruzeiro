@@ -1,0 +1,16 @@
+{
+  "id": "esp-028",
+  "name": "Especialista Comercial",
+  "cargo": "Especialista Comercial",
+  "specialty": "Banners, popups, CTAs comerciais",
+  "subroutines": [
+    "Analisar área comercial do site",
+    "Verificar taxa de clique em CTAs",
+    "Propor novos formatos comerciais",
+    "Gerar relatório comercial"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-002",
+  "name": "Especialista APIs",
+  "cargo": "Especialista APIs",
+  "specialty": "Endpoints, contratos, versionamento",
+  "subroutines": [
+    "Mapear todos os endpoints",
+    "Verificar consistência de resposta",
+    "Detectar breaking changes",
+    "Gerar relatório de cobertura de API"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

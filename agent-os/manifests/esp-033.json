@@ -1,0 +1,16 @@
+{
+  "id": "esp-033",
+  "name": "Especialista Horários",
+  "cargo": "Especialista Horários",
+  "specialty": "Melhores horários de postagem",
+  "subroutines": [
+    "Analisar horários de maior engajamento",
+    "Identificar picos de audiência",
+    "Gerar calendário de horários otimizados",
+    "Propor ajustes de frequência"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

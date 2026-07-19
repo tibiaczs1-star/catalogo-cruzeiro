@@ -1,0 +1,16 @@
+{
+  "id": "esp-052",
+  "name": "Microagente Leitor de Notícias",
+  "cargo": "Microagente Leitor de Notícias",
+  "specialty": "Ler RSS, feeds e sites de notícia",
+  "subroutines": [
+    "Verificar fontes RSS configuradas",
+    "Detectar fontes quebradas",
+    "Capturar novos itens",
+    "Reportar ao Gerente de Pesquisa"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

@@ -1,0 +1,21 @@
+{
+  "name": "agent-os",
+  "version": "1.0.0",
+  "description": "Sistema Operacional de Agentes — Centro de Comando do CZS",
+  "main": "runtime/agent-os-server.js",
+  "scripts": {
+    "agent-os:generate": "node runtime/generate-manifests.js",
+    "agent-os:server": "node runtime/agent-os-server.js",
+    "agent-os:cycle": "node runtime/agent-os-runtime.js --cycle full",
+    "agent-os:team": "node runtime/agent-os-runtime.js --team",
+    "agent-os:agent": "node runtime/agent-os-runtime.js --agent",
+    "agent-os:watch": "node runtime/agent-os-runtime.js --watch",
+    "agent-os:validate": "node runtime/validate.js",
+    "agent-os:setup": "node runtime/setup.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

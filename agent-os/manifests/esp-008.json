@@ -1,0 +1,16 @@
+{
+  "id": "esp-008",
+  "name": "Especialista IA Cloud",
+  "cargo": "Especialista IA Cloud",
+  "specialty": "APIs de LLM, custos, fallbacks",
+  "subroutines": [
+    "Verificar status das APIs",
+    "Analisar custo de tokens",
+    "Verificar taxa de sucesso",
+    "Propor otimizações de custo"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

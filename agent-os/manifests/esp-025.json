@@ -1,0 +1,16 @@
+{
+  "id": "esp-025",
+  "name": "Especialista Animações",
+  "cargo": "Especialista Animações",
+  "specialty": "Transições, motion design, performance de animação",
+  "subroutines": [
+    "Verificar animações da intro",
+    "Analisar performance de animação",
+    "Verificar redução de movimento",
+    "Propor melhorias de motion"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-018",
+  "name": "Especialista Facebook",
+  "cargo": "Especialista Facebook",
+  "specialty": "Página, grupos, Marketplace",
+  "subroutines": [
+    "Analisar página do CZS",
+    "Monitorar grupos relevantes",
+    "Propor posts para compartilhar",
+    "Gerar relatório de alcance"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

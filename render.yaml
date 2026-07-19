@@ -5,9 +5,9 @@ services:
     rootDir: .
     plan: starter
     autoDeployTrigger: commit
-    buildCommand: npm install
-    startCommand: npm run ashotelaria:migrate && npm start
-    healthCheckPath: /
+    buildCommand: npm install && node agent-os/runtime/generate-manifests.js
+    startCommand: npm run ashotelaria:migrate && node render-start.js
+    healthCheckPath: /api/health
     disk:
       name: app-data
       mountPath: /opt/render/project/src/render-data
@@ -99,6 +99,16 @@ services:
         sync: false
       - key: NINJAS_MERCHANT_CITY
         sync: false
+      - key: AGENT_OS_ENABLED
+        value: "true"
+      - key: AGENT_OS_CYCLE_INTERVAL_MS
+        value: "3600000"
+      - key: AGENT_OS_CYCLE_ON_START
+        value: "true"
+      - key: AGENT_OS_LLM_URL
+        sync: false
+      - key: AGENT_OS_LLM_MODEL
+        value: llama3.2:3b
 databases:
   - name: ashotelaria-db
     plan: free

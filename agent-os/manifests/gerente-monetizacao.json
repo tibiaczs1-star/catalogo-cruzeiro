@@ -1,0 +1,22 @@
+{
+  "id": "gerente-monetizacao",
+  "name": "Gerente de Monetização",
+  "reportsTo": "dir-crescimento",
+  "manages": [
+    "esp-035",
+    "esp-036",
+    "esp-037"
+  ],
+  "level": "manager",
+  "specialty": "Coordena 3 especialistas",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos especialistas",
+    "ROTINA B: Agrupar problemas similares",
+    "ROTINA C: Remover duplicatas",
+    "ROTINA D: Priorizar por severidade",
+    "ROTINA E: Enviar relatório consolidado ao Diretor"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2000
+}

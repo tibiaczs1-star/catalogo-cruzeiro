@@ -1,0 +1,23 @@
+{
+  "id": "gerente-frontend",
+  "name": "Gerente Frontend",
+  "reportsTo": "dir-tecnologia",
+  "manages": [
+    "esp-009",
+    "esp-010",
+    "esp-025",
+    "esp-026"
+  ],
+  "level": "manager",
+  "specialty": "Coordena 4 especialistas",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos especialistas",
+    "ROTINA B: Agrupar problemas similares",
+    "ROTINA C: Remover duplicatas",
+    "ROTINA D: Priorizar por severidade",
+    "ROTINA E: Enviar relatório consolidado ao Diretor"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2000
+}

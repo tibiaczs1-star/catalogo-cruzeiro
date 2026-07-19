@@ -1,0 +1,16 @@
+{
+  "id": "esp-039",
+  "name": "Auditor Editorial",
+  "cargo": "Auditor Editorial",
+  "specialty": "Qualidade de conteúdo, factualidade",
+  "subroutines": [
+    "Verificar factualidade de matérias",
+    "Verificar consistência editorial",
+    "Identificar vazamento de inglês",
+    "Gerar relatório editorial"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

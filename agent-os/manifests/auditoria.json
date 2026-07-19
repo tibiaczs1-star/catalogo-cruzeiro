@@ -1,0 +1,22 @@
+{
+  "id": "auditor-geral",
+  "name": "Auditor Geral",
+  "cargo": "Auditor Geral",
+  "description": "Verifica tudo antes de aprovar.",
+  "manages": [
+    "auditor-codigo",
+    "auditor-editorial",
+    "auditor-estrategico"
+  ],
+  "level": "director",
+  "specialty": "Verifica tudo antes de aprovar.",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos gerentes",
+    "ROTINA B: Consolidar informações",
+    "ROTINA C: Tomar decisões estratégicas",
+    "ROTINA D: Reportar ao CEO"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2500
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-006",
+  "name": "Especialista Performance",
+  "cargo": "Especialista Performance",
+  "specialty": "Core Web Vitals, bundle size, caching",
+  "subroutines": [
+    "Rodar perf:budget",
+    "Medir tempo de carregamento",
+    "Analisar tamanho de assets",
+    "Propor otimizações"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

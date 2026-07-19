@@ -1,0 +1,21 @@
+{
+  "id": "gerente-pesquisa",
+  "name": "Gerente de Pesquisa",
+  "reportsTo": "dir-editorial",
+  "manages": [
+    "esp-020",
+    "esp-021"
+  ],
+  "level": "manager",
+  "specialty": "Coordena 2 especialistas",
+  "subroutines": [
+    "ROTINA A: Receber relatórios dos especialistas",
+    "ROTINA B: Agrupar problemas similares",
+    "ROTINA C: Remover duplicatas",
+    "ROTINA D: Priorizar por severidade",
+    "ROTINA E: Enviar relatório consolidado ao Diretor"
+  ],
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 2000
+}

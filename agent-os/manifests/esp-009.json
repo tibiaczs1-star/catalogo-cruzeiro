@@ -1,0 +1,16 @@
+{
+  "id": "esp-009",
+  "name": "Especialista Frontend",
+  "cargo": "Especialista Frontend",
+  "specialty": "HTML, CSS, JS, responsividade",
+  "subroutines": [
+    "Verificar console errors",
+    "Testar responsividade (mobile/tablet/desktop)",
+    "Verificar overflow horizontal",
+    "Analisar acessibilidade básica"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

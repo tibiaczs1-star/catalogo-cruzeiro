@@ -1,0 +1,16 @@
+{
+  "id": "esp-024",
+  "name": "Especialista Acessibilidade",
+  "cargo": "Especialista Acessibilidade",
+  "specialty": "WCAG, ARIA, navegação por teclado",
+  "subroutines": [
+    "Verificar contraste de cores",
+    "Verificar headings semânticos",
+    "Verificar navegação por teclado",
+    "Gerar relatório de acessibilidade"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

@@ -1,0 +1,16 @@
+{
+  "id": "esp-023",
+  "name": "Especialista Identidade Visual",
+  "cargo": "Especialista Identidade Visual",
+  "specialty": "Logo, cores, tipografia, marca CZS",
+  "subroutines": [
+    "Verificar uso correto da logo",
+    "Verificar paleta de cores",
+    "Verificar tipografia",
+    "Propor ajustes de marca"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}

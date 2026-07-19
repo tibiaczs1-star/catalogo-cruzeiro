@@ -1,0 +1,16 @@
+{
+  "id": "esp-004",
+  "name": "Especialista DevOps",
+  "cargo": "Especialista DevOps",
+  "specialty": "Deploy, CI/CD, infraestrutura",
+  "subroutines": [
+    "Verificar status do Render",
+    "Analisar logs de deploy",
+    "Verificar configuração do .env",
+    "Gerar relatório de infraestrutura"
+  ],
+  "level": "specialist",
+  "llmModel": ":3b",
+  "temperature": 0.3,
+  "maxTokens": 1500
+}
