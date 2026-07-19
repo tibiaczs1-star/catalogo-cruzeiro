@@ -10740,7 +10740,7 @@ async function callOpenAiResponse({ area = "rayl", system = "", prompt = "", con
   }
 }
 
-async function callLocalOllama({ area = "rayl", system = "", prompt = "", context = {}, temperature = 0.2 } = {}) {
+async function callLocalOllama({ area = "rayl", system = "", prompt = "", context = {}, temperature = 0.2, maxPredict = 160 } = {}) {
   if (!isAllowedOllamaArea(area)) {
     return { ok: false, skipped: true, error: "Área não autorizada para IA local." };
   }
@@ -10777,7 +10777,7 @@ async function callLocalOllama({ area = "rayl", system = "", prompt = "", contex
     ],
     options: {
       temperature,
-      num_predict: 260
+      num_predict: Math.max(32, Math.min(260, Number(maxPredict) || 160))
     }
   };
 
@@ -11054,7 +11054,8 @@ async function answerCheffeAiChat(body = {}, req = null) {
       queue,
       sourcePage: cleanShortText(body.sourcePage || buildTrackingMeta(req, body).pagePath || "/", 260)
     },
-    temperature: 0.16
+    temperature: 0.16,
+    maxPredict: 80
   });
   const fallback = "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar.";
   const safeAnswer = result.ok ? sanitizeCatalogAiAnswer(result.answer, fallback) : fallback;
