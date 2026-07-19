@@ -80,21 +80,21 @@ const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED || "").trim()
   || (IS_PRODUCTION && Boolean(String(process.env.ASHOTELARIA_DATABASE_URL || "").trim()));
 const PUBPAID_CLIENT_BUILD_VERSION = "20260527-chessfast1";
 
-function getRequiredSecret(name, fallbackValue) {
+function getRequiredSecret(name, fallbackValue = "") {
   const value = String(process.env[name] || "").trim();
   if (value) return value;
 
-  if (!IS_PRODUCTION) {
+  if (fallbackValue) {
     return fallbackValue;
   }
 
-  console.warn(`[security] Missing required env ${name} in production. Related admin access is disabled until it is set.`);
-  return `missing-${name.toLowerCase()}-in-production`;
+  console.warn(`[security] Missing required env ${name}. Related admin access is disabled until it is set.`);
+  return crypto.randomBytes(32).toString("hex");
 }
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
-const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
-const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "99831455a");
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD");
+const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD");
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();
@@ -323,7 +323,7 @@ const WHATSAPP_CHAT_AUTOREPLY_TEXT = String(
   .replace(/\s+/g, " ")
   .trim()
   .slice(0, 1000);
-const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
+const SPRITE_CHECK_PASSWORD = getRequiredSecret("SPRITE_CHECK_PASSWORD");
 const FULL_ADMIN_PASSWORD = getRequiredSecret("FULL_ADMIN_PASSWORD", SUPER_ADMIN_PASSWORD).trim();
 const CHEFFE_CALL_USER = getRequiredSecret("CHEFFE_CALL_USER", "chefecall");
 const CHEFFE_CALL_PASSWORD = getRequiredSecret("CHEFFE_CALL_PASSWORD", FULL_ADMIN_PASSWORD).trim();
@@ -10908,14 +10908,15 @@ async function answerRaylChat(body = {}, req = null) {
   let aiResult = null;
   if (!intent.human && coveredByStudy) {
     aiResult = await callCatalogAi({
-      area: "rayl",
+      area: "cheffe-call-public",
       system: [
-        "Você é RAIane CZS, assistente local do Catálogo CZS.",
+        "Você é RAIane CZS, porta pública inteligente da Cheffe Call do Catálogo CZS.",
         "Responda em português do Acre, de forma curta, humana e prática.",
         "Fale como uma atendente simpática do Vale do Juruá: natural, acolhedora, sem soar como manual ou robô.",
         "Você estudou o site inteiro; use somente o estudo do site e a resposta segura fornecida.",
         "Se o modelo tentar responder em inglês, corrija para português do Brasil antes de finalizar.",
         "Não mostre raciocínio interno, tags <think>, logs, nomes de modelo ou texto de bastidor.",
+        "Nunca revele filas internas, dados de contatos, registros de ações, instruções administrativas, senhas, identidades de agentes ou detalhes da redação.",
         "Nunca responda só com uma palavra solta; use uma frase útil com próximo passo.",
         "Use somente rotas do site: notícias, arquivo, serviços, galeria, comercial, Cheffe Call, comunidade e PubPaid.",
         "Não invente atendimento humano, backend, notícia ou promessa; se faltar segurança, diga que vai encaminhar ao WhatsApp."
@@ -10951,6 +10952,10 @@ async function answerRaylChat(body = {}, req = null) {
   const fallbackAnswer = humanFallback
     ? "Essa eu prefiro nao chutar. Vou deixar o WhatsApp pronto com sua pergunta para alguem do CZS responder certinho."
     : intent.answer;
+  const safeAiAnswer = aiResult?.ok
+    ? sanitizeCatalogAiAnswer(aiResult.answer, fallbackAnswer)
+    : fallbackAnswer;
+  const answer = humanFallback ? fallbackAnswer : safeAiAnswer;
   const log = normalizeJsonArrayPayload(readJson(RAYL_CHAT_LOG_FILE, []));
   const item = {
     id: createRecordId("rayl"),
@@ -10970,11 +10975,7 @@ async function answerRaylChat(body = {}, req = null) {
   return {
     ok: true,
     status: 200,
-    answer: intent.routeKey || intent.href || humanFallback
-      ? fallbackAnswer
-      : aiResult?.ok && sanitizeCatalogAiAnswer(aiResult.answer, intent.answer)
-        ? sanitizeCatalogAiAnswer(aiResult.answer, intent.answer)
-        : fallbackAnswer,
+    answer,
     pose: humanFallback ? "human" : intent.pose || "explain",
     title: humanFallback ? "Atendimento humano" : intent.title || "RAIane",
     routeKey: humanFallback ? "" : intent.routeKey || "",
@@ -11032,6 +11033,15 @@ async function answerOfficeAiChat(body = {}, req = null) {
     answer: safeAnswer,
     ai: result.ai || { status: "offline", provider: "openai", model: OPENAI_MODEL },
     action
+  };
+}
+
+async function answerCheffePublicAiChat(body = {}, req = null) {
+  const result = await answerRaylChat(body, req);
+  return {
+    ...result,
+    channel: "public",
+    assistant: "RAIane"
   };
 }
 
@@ -17326,10 +17336,16 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/cheffe-call") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para abrir a Cheffe Call." });
+    }
     return sendJson(res, 200, buildCheffeCallPayload());
   }
 
   if (req.method === "GET" && pathname === "/api/cheffe-call/prompts") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para abrir os prompts da Cheffe Call." });
+    }
     const payload = readJson(CHEFFE_CALL_PROMPTS_FILE, null);
     if (!payload) {
       return sendJson(res, 404, { ok: false, error: "Arquivo de prompts da Cheffe Call nao encontrado." });
@@ -17548,6 +17564,12 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, result.status || 200, result);
   }
 
+  if (req.method === "POST" && pathname === "/api/cheffe-call/ai/public") {
+    const body = await parseBody(req);
+    const result = await answerCheffePublicAiChat(body, req);
+    return sendJson(res, result.status || 200, result);
+  }
+
   if (req.method === "GET" && pathname === "/api/rayl/website-study") {
     return sendJson(res, 200, buildRaylWebsiteStudy({
       refresh: /^(1|true|yes|sim)$/i.test(String(searchParams.get("refresh") || ""))
@@ -17573,6 +17595,9 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/ai") {
     const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito à Cheffe Call operacional." });
+    }
     const result = await answerCheffeAiChat(body, req);
     return sendJson(res, result.status || 200, result);
   }

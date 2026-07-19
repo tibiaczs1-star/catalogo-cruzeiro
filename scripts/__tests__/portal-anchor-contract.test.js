@@ -21,24 +21,19 @@ test("atalhos principais apontam para secoes reais e intencionais", () => {
   assert.match(js, /#servicos/, "atalho de serviços deve permanecer ancorado");
 });
 
-test("rodape mostra apenas acesso para Cheffe Call, sem executar a Cheffe ali dentro", () => {
-  const html = read("index.html");
+test("rodapé é acessado pela seta discreta e Cheffe Call aponta para acesso restrito", () => {
   const js = read("assets/v8-final/v8-merge-ready.js");
   const css = read("assets/v8-final/v8-merge-ready.css");
 
-  assert.match(js, /function renderCheffeFooterAccess\(\)/, "rodapé deve renderizar apenas acesso para Cheffe");
-  assert.match(js, /id = "v8FooterCheffeDock"/, "doca precisa ter ID fixo para auditoria");
-  assert.match(js, /href="#cheffeCallEditor"/, "botão do rodapé deve apontar para a Cheffe real");
-  assert.match(js, /title="[^"]*Cheffe Call/, "explicação da Cheffe no rodapé deve ficar só no hover/title");
-  assert.match(js, /site de scroll infinito/i, "rodapé deve explicar que o portal é de scroll infinito");
-  assert.doesNotMatch(html, /id="footerJumpFloat"/, "não deve existir botão flutuante de rodapé na marcação inicial");
-  assert.doesNotMatch(js, /\n\s*installFooterOnlyByButtonGate\(\);\s*\n/, "o gate flutuante do rodapé não deve inicializar");
-  assert.match(css, /#footerJumpFloat[\s\S]*display:\s*none\s*!important;/, "qualquer botão flutuante legado precisa ficar oculto");
-  assert.doesNotMatch(js, /dock\.appendChild\(section\)/, "Cheffe funcional não pode ser movida para dentro do rodapé");
-  assert.doesNotMatch(js, /v8-cheffe-in-footer/, "Cheffe não deve receber classe de execução dentro do rodapé");
-  assert.doesNotMatch(js, /<small>Uso da equipe CZS/, "Cheffe no rodapé não deve explicar em texto fixo");
-  assert.doesNotMatch(css, /v8-footer-cheffe-head/, "CSS não deve manter bloco explicativo pesado da Cheffe no rodapé");
-  assert.match(js, /renderNewsFooter\(\);\s*renderCheffeFooterAccess\(\);/s, "o acesso deve ser recriado depois que o rodapé é recriado");
+  assert.match(js, /function installCzsNavigationContract\(\)/);
+  assert.match(js, /const adminHref = "\/cheffe-call\.html\?admin=1";/);
+  assert.match(js, /\["Cheffe Call", "\/cheffe-call\.html\?admin=1"\]/);
+  assert.match(js, /function installFloatingFooterControl\(\)/);
+  assert.match(js, /aria-label", "Ir para o rodapé"/);
+  assert.match(js, /Leitura contínua/);
+  assert.doesNotMatch(js, /function renderCheffeFooterAccess\(\)/);
+  assert.doesNotMatch(js, /renderNewsFooter\(\);\s*renderCheffeFooterAccess/);
+  assert.match(css, /#footerJumpFloat\.czs-footer-arrow/);
 });
 
 test("home preserva o feed aprovado e nao inicializa o pacote CZS Flow rejeitado", () => {

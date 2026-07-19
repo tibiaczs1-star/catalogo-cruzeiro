@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260513-review-photo-cta1" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260719-access-cleanup" />
   </head>
-  <body class="cheffe-call-page">
+  <body class="cheffe-call-page cheffe-access-locked">
     <header class="call-topbar">
       <a href="./index.html">Jornal</a>
       <a href="./real-agents.html">Agentes reais</a>
@@ -777,12 +777,13 @@
           <button type="button" id="quickNextSpeaker">Próximo agente</button>
         </div>
       </form>
+    </main>
 
-      <div class="cheffe-access-modal" id="cheffeAccessModal" role="dialog" aria-modal="true" aria-labelledby="cheffeAccessTitle">
+    <div class="cheffe-access-modal" id="cheffeAccessModal" role="dialog" aria-modal="true" aria-labelledby="cheffeAccessTitle">
         <div class="cheffe-access-card">
-          <p class="call-kicker">Acesso do chefe</p>
-          <h2 id="cheffeAccessTitle">Entrar na Cheffe Call</h2>
-          <p>Digite a senha Full Admin para liberar a sala, os agentes reais e os comandos administrativos.</p>
+          <p class="call-kicker">Redação CZS</p>
+          <h2 id="cheffeAccessTitle">Cheffe Call — acesso restrito</h2>
+          <p>Área interna da redação. Informe a senha administrativa para continuar.</p>
           <label for="quickPasswordInput">Senha da Cheffe Call</label>
           <div class="cheffe-access-row">
             <input
@@ -901,7 +902,6 @@
           </section>
         </div>
       </div>
-    </main>
 
     <div class="cheffe-action-feedback" id="cheffeActionFeedback" hidden role="status" aria-live="polite">
       <section class="cheffe-action-feedback-card" aria-labelledby="cheffeActionFeedbackTitle">
@@ -943,6 +943,6 @@
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260513-review-photo-cta1"></script>
+    <script defer src="cheffe-call.js?v=20260719-access-cleanup"></script>
   </body>
 </html>

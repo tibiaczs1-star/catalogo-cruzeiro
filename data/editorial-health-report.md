@@ -1,6 +1,6 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-07-16T17:10:44.460Z
+Gerado em: 2026-07-19T15:33:05.010Z
 Escopo: 360/505 itens recentes.
 
 ## Resumo

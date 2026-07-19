@@ -264,6 +264,7 @@
     }
   }
   let cheffeAdminPassword = readStoredAdminPassword();
+  let callPollingTimer = null;
   let photoApprovalQueue = [];
   let photoApprovalIndex = 0;
   let photoApprovalBusy = false;
@@ -1368,6 +1369,10 @@
   }
 
   function openAccessModal(message = "Digite a senha Full Admin para entrar na Cheffe Call.", tone = "") {
+    if (callPollingTimer) {
+      window.clearInterval(callPollingTimer);
+      callPollingTimer = null;
+    }
     resetPhotoApprovalGate();
     resetFrontendReviewGate();
     cheffeAccessModal?.classList.remove("is-unlocked");
@@ -1790,64 +1795,22 @@
     return payload;
   }
 
-  async function enterCheffeRoom(message = "Senha validada. Sala liberada.") {
+  async function enterCheffeRoom(message = "Senha validada. Sala administrativa liberada.") {
     const password = getAdminPassword();
-    const shouldRunAgents = Boolean(photoApprovalRunRuntime?.checked);
-    closeAccessModal();
+    if (!password) {
+      openAccessModal("Informe a senha administrativa para continuar.", "bad");
+      return;
+    }
     setPasswordStatus(message, "ok");
     try {
-      if (shouldRunAgents) {
-        setStatus("Rodando agentes reais antes de abrir a sala...");
-        await runAgentsFromAccessGate(password);
-      }
-      await loadCall();
-      if (shouldRunAgents) {
-        setActionFeedback({
-          badge: "Finalizado",
-          title: "Sala atualizada",
-          message: "Os agentes terminaram e a Cheffe Call já recebeu o feedback da runtime.",
-          tone: "ok",
-          steps: [
-            { label: "Agentes reais executados", state: "done" },
-            { label: "Feedback carregado na sala", state: "done" },
-            { label: "Fluxo normal liberado", state: "done" }
-          ],
-          details: "",
-          closable: true
-        });
-      } else {
-        setActionFeedback({
-          badge: "Sala",
-          title: "Cheffe Call liberada",
-          message: "A sala abriu sem rodar agentes agora. As decisões pendentes continuam na fila.",
-          tone: "ok",
-          steps: [
-            { label: "Senha validada", state: "done" },
-            { label: "Fila mantida para próxima runtime", state: "done" }
-          ],
-          closable: true,
-          autoCloseMs: 3600
-        });
-      }
-      setStatus(
-        shouldRunAgents
-          ? "Rodada manual dos agentes concluida e sala atualizada."
-          : "Cheffe Call liberada. Escreva uma ordem e clique Enviar.",
-        "ok"
-      );
+      await Promise.all([initPromptConsole(), loadCall()]);
+      closeAccessModal();
+      startCallPolling();
+      setStatus("Cheffe Call liberada. Escreva uma ordem e clique em Abrir rodada.", "ok");
       quickInstructionInput?.focus();
     } catch (error) {
-      setActionFeedback({
-        badge: "Falha",
-        title: "Ação não concluída",
-        message: error.message || "Não foi possível abrir a Cheffe Call.",
-        tone: "bad",
-        steps: [
-          { label: "Ação interrompida", state: "bad" },
-          { label: "Sala preservada sem gravar nova etapa", state: "pending" }
-        ],
-        closable: true
-      });
+      clearAdminPassword();
+      openAccessModal(error.message || "Não foi possível abrir a Cheffe Call.", "bad");
       setStatus(error.message || "Nao foi possivel abrir a Cheffe Call.", "bad");
     }
   }
@@ -3253,8 +3216,13 @@
 
   async function initPromptConsole() {
     if (!promptPreviewText) return;
+    const password = getAdminPassword();
+    if (!password) return;
     try {
-      const response = await fetch("/api/cheffe-call/prompts", { cache: "no-store" });
+      const response = await fetch("/api/cheffe-call/prompts", {
+        headers: { Accept: "application/json", "x-admin-password": password },
+        cache: "no-store"
+      });
       if (!response.ok) throw new Error("Nao foi possivel carregar o arquivo de prompts.");
       const payload = await response.json();
       promptConsoleData = payload?.ok ? payload : null;
@@ -5366,9 +5334,10 @@
 
   async function loadCall() {
     const password = getAdminPassword();
+    if (!password) throw new Error("Senha Full Admin obrigatória para abrir a Cheffe Call.");
     const [callResult, realResult] = await Promise.allSettled([
-      fetch("/api/cheffe-call", { headers: { Accept: "application/json" } }),
-      password ? loadRealAgentsReport(password) : Promise.resolve(null)
+      fetch("/api/cheffe-call", { headers: { Accept: "application/json", "x-admin-password": password } }),
+      loadRealAgentsReport(password)
     ]);
     if (callResult.status !== "fulfilled") throw new Error("Nao foi possivel carregar a Cheffe Call.");
 
@@ -5380,6 +5349,14 @@
       realPayload = realResult.value;
     }
     render(mergeCheffeAndRealPayload(callPayload, realPayload));
+  }
+
+  function startCallPolling() {
+    if (callPollingTimer) window.clearInterval(callPollingTimer);
+    callPollingTimer = window.setInterval(() => {
+      if (document.body.classList.contains("cheffe-access-locked") || !getAdminPassword()) return;
+      loadCall().catch((error) => setStatus(error.message, "bad"));
+    }, 60 * 1000);
   }
 
   async function postCall(path, body) {
@@ -5877,44 +5854,7 @@
     try {
       await validateAdminPassword(password);
       rememberAdminPassword(password, { close: false });
-      setPasswordStatus(
-        readPublicCorrectionFocus()
-          ? "Senha validada. Abrindo prioridade do leitor antes da sala."
-          : "Senha validada. Abrindo fila de foto/foco para revisão.",
-        "pending"
-      );
-      let approvalPayload = null;
-      try {
-        approvalPayload = await fetchPhotoApprovals(password);
-      } catch (approvalError) {
-        setPasswordStatus("Senha validada. Fila de foto/foco indisponivel agora.", "bad");
-        await openFrontendReviewList({
-          reload: true,
-          message: approvalError.message || "Fila de foto/foco indisponível. Conferindo matérias online."
-        });
-        return;
-      }
-      if (readPublicCorrectionFocus()) {
-        await openFrontendReviewList({
-          reload: true,
-          message: "Prioridade do leitor aberta antes das demais edições e antes da Cheffe Call."
-        });
-        return;
-      }
-      if (Number(approvalPayload.pendingCount || 0) > 0) {
-        openPhotoApprovalQueue(approvalPayload);
-        return;
-      }
-      if (hasPhotoApprovalRuntimeWork(approvalPayload)) {
-        openPhotoApprovalQueue(approvalPayload);
-        return;
-      }
-      await openFrontendReviewList({
-        reload: true,
-        message: readPublicCorrectionFocus()
-          ? "Senha validada. Correção do leitor está no topo da fila online."
-          : "Senha validada. Sem foto/foco pendente; confira as matérias online."
-      });
+      await enterCheffeRoom("Senha validada. Sala administrativa liberada.");
     } catch (error) {
       clearAdminPassword();
       openAccessModal(error.message || "Senha recusada.", "bad");
@@ -6211,12 +6151,7 @@
   quickRefreshAgents?.addEventListener("click", () => {
     const password = getAdminPassword();
     if (!password) {
-      loadCall()
-        .then(() => {
-          openCheffeInfoPopup("Resumo da última ordem", buildSessionSummaryText());
-          setStatus("Resumo atualizado. Para rodar agentes reais, entre com a senha da Cheffe Call.", "ok");
-        })
-        .catch((error) => setStatus(error.message, "bad"));
+      openAccessModal("Informe a senha administrativa para atualizar a sala.", "bad");
       return;
     }
     setStatus("Recarregando sala e fila de opiniões...");
@@ -6925,20 +6860,8 @@
   formEl?.querySelector('[name="password"]')?.addEventListener("input", () => updateRealFlow());
   syncGameShellState();
 
-  initPromptConsole();
-  loadCall()
-    .then(async () => {
-      if (cheffeAdminPassword && readPublicCorrectionFocus()) {
-        await openFrontendReviewList({
-          reload: true,
-          message: "Correção do leitor recebida. Abrindo revisão da matéria antes da Cheffe Call."
-        });
-      }
-    })
-    .catch((error) => setStatus(error.message, "bad"));
   renderMeetingLogs();
   renderTaskQueue();
   renderIdeActionQueue();
   renderReviewQueue();
-  window.setInterval(() => loadCall().catch((error) => setStatus(error.message, "bad")), 60 * 1000);
 })();

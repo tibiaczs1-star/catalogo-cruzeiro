@@ -1,7 +1,7 @@
 {
   "ok": true,
   "version": 1,
-  "generatedAt": "2026-06-04T21:20:25.483Z",
+  "generatedAt": "2026-07-19T15:33:47.510Z",
   "site": {
     "name": "Catalogo Cruzeiro do Sul",
     "region": "Cruzeiro do Sul, Acre e Vale do Jurua",
@@ -198,99 +198,107 @@
   ],
   "recentNews": [
     {
-      "title": "Cruzeiro do Sul impulsiona turismo e economia com abertura de inscrições para o programa Hospedagem Criativa 2026",
+      "title": "Gladson mira Zequinha, seu próprio apoiador",
       "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=cruzeiro-do-sul-impulsiona-turismo-e-economia-com-abertura-de-inscricoes-para-o-programa-hospeda"
+      "sourceName": "Integracao Net",
+      "date": "15 de jul de 2026",
+      "href": "/noticia.html?slug=gladson-mira-zequinha-seu-proprio-apoiador"
     },
     {
-      "title": "Após horas de trabalho, tapete de Corpus Christi está pronto para receber fiéis em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=apos-horas-de-trabalho-tapete-de-corpus-christi-esta-pronto-para-receber-fieis-em-cruzeiro-do-su"
-    },
-    {
-      "title": "Prefeitura de Cruzeiro do Sul mantém serviços de infraestrutura e tapa buracos no Centro e nos bairros",
-      "category": "Prefeitura",
-      "sourceName": "Voz do Norte",
-      "date": "03 de jun de 2026",
-      "href": "/noticia.html?slug=prefeitura-de-cruzeiro-do-sul-mantem-servicos-de-infraestrutura-e-tapa-buracos-no-centro-e-nos-b"
-    },
-    {
-      "title": "Sebrae promove maratona de desenvolvimento de games em Cruzeiro do Sul com inscrições abertas",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=sebrae-promove-maratona-de-desenvolvimento-de-games-em-cruzeiro-do-sul-com-inscricoes-abertas"
-    },
-    {
-      "title": "Prefeitura de Cruzeiro do Sul mantém unidades de saúde abertas durante o feriado de Corpus Christi",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=prefeitura-de-cruzeiro-do-sul-mantem-unidades-de-saude-abertas-durante-o-feriado-de-corpus-chris"
-    },
-    {
-      "title": "Exame toxicológico passa a ser obrigatório para primeira CNH em Cruzeiro do Sul a partir de 8 de junho",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=exame-toxicologico-passa-a-ser-obrigatorio-para-primeira-cnh-em-cruzeiro-do-sul-a-partir-de-8-de"
-    },
-    {
-      "title": "Cruzeiro do Sul mantém unidades de saúde abertas durante este feriado de Corpus Christi",
-      "category": "Prefeitura",
+      "title": "12 municípios do Acre superam limite de poluição da OMS antes do auge da seca",
+      "category": "Saúde",
       "sourceName": "ac24horas",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=cruzeiro-do-sul-mantem-unidades-de-saude-abertas-durante-este-feriado-de-corpus-christi"
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=12-municipios-do-acre-superam-limite-de-poluicao-da-oms-antes-do-auge-da-seca"
     },
     {
-      "title": "Tapete de Corpus Christi já está pronto em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=tapete-de-corpus-christi-ja-esta-pronto-em-cruzeiro-do-sul"
+      "title": "Sol predomina no Acre nesta quinta-feira, mas há chance de chuva rápida em todas as regiões",
+      "category": "Acre / Governo",
+      "sourceName": "ac24horas",
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=sol-predomina-no-acre-nesta-quinta-feira-mas-ha-chance-de-chuva-rapida-em-todas-as-regioes"
     },
     {
-      "title": "Prefeitura lança programação oficial dos 34 anos de Porto Walter com obras, esporte, cultura e show nacional",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "date": "04 de jun de 2026",
-      "href": "/noticia.html?slug=prefeitura-lanca-programacao-oficial-dos-34-anos-de-porto-walter-com-obras-esporte-cultura-e-sho"
+      "title": "O que aconteceria com nossa mente se vivêssemos na Lua?",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Informativo",
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=o-que-aconteceria-com-nossa-mente-se-vivessemos-na-lua"
     },
     {
-      "title": "Governo do Acre consolida ações de combate à insegurança alimentar com adesão do município de Mâncio Lima ao Sisan",
-      "category": "Prefeitura",
-      "sourceName": "Voz do Norte",
-      "date": "03 de jun de 2026",
-      "href": "/noticia.html?slug=governo-do-acre-consolida-acoes-de-combate-a-inseguranca-alimentar-com-adesao-do-municipio-de-ma"
+      "title": "Starship decola hoje; assista com o Olhar Digital!",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Informativo",
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=starship-decola-hoje-assista-com-o-olhar-digital"
+    },
+    {
+      "title": "Poucos átomos de espessura: novo material promete revolução quântica",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Informativo",
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=poucos-atomos-de-espessura-novo-material-promete-revolucao-quantica"
+    },
+    {
+      "title": "DNA de 50 mil anos na África desafia limites da ciência",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Informativo",
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=dna-de-50-mil-anos-na-africa-desafia-limites-da-ciencia"
+    },
+    {
+      "title": "Confira o Olhar Digital News na íntegra (15/07/2026)",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Informativo",
+      "date": "15 de jul de 2026",
+      "href": "/noticia.html?slug=confira-o-olhar-digital-news-na-integra-15-07-2026"
+    },
+    {
+      "title": "Consolidado na comédia, Ed Gama \"muda\" de ramo e se lança na música",
+      "category": "Cultura",
+      "sourceName": "Jurua Informativo",
+      "date": "16 de jul de 2026",
+      "href": "/noticia.html?slug=consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica"
+    },
+    {
+      "title": "Prefeito Valdelio Furtado acompanha obra de quase R$ 1,5 milhão que levará água tratada à Vila Triunfo",
+      "category": "Política",
+      "sourceName": "Estado do Acre",
+      "date": "15 de jul de 2026",
+      "href": "/noticia.html?slug=prefeito-valdelio-furtado-acompanha-obra-de-quase-r-1-5-milhao-que-levara-agua-tratada-a-vila-tr"
     }
   ],
   "categories": [
     {
-      "name": "Prefeitura",
-      "count": 13
-    },
-    {
       "name": "Acre / Governo",
-      "count": 11
-    },
-    {
-      "name": "Saúde",
-      "count": 6
+      "count": 18
     },
     {
       "name": "Cotidiano",
+      "count": 10
+    },
+    {
+      "name": "Educação",
       "count": 5
     },
     {
-      "name": "Política",
-      "count": 4
+      "name": "Saúde",
+      "count": 3
     },
     {
-      "name": "Esporte",
+      "name": "Prefeitura",
+      "count": 1
+    },
+    {
+      "name": "Cultura",
+      "count": 1
+    },
+    {
+      "name": "Política",
+      "count": 1
+    },
+    {
+      "name": "Negócios",
       "count": 1
     }
   ],

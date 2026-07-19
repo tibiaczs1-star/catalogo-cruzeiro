@@ -15714,3 +15714,91 @@ body.v8-merge-ready #footerJumpFloat.footer-jump-float.v8-left-scroll-control.cz
     max-width: 118px !important;
   }
 }
+
+/* Navegação reparada: elementos pequenos, planos e com função clara. */
+body.v8-merge-ready .top-strip nav a.czs-admin-entry {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 32px !important;
+  padding: 0 12px !important;
+  border: 1px solid #8f1212 !important;
+  border-radius: 0 !important;
+  background: #b91c1c !important;
+  background-image: none !important;
+  color: #fff !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.035em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+body.v8-merge-ready .top-strip nav a.czs-admin-entry:hover,
+body.v8-merge-ready .top-strip nav a.czs-admin-entry:focus-visible {
+  border-color: #6f0e0e !important;
+  background: #8f1212 !important;
+  background-image: none !important;
+  color: #fff !important;
+}
+
+body.v8-merge-ready #footerJumpFloat.czs-footer-arrow {
+  position: fixed !important;
+  top: auto !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  left: auto !important;
+  z-index: 2147483600 !important;
+  display: grid !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  padding: 0 !important;
+  place-items: center !important;
+  border: 1px solid #061b47 !important;
+  border-radius: 50% !important;
+  background: #061b47 !important;
+  background-image: none !important;
+  box-shadow: 0 3px 9px rgba(6, 27, 71, 0.18) !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+body.v8-merge-ready #footerJumpFloat.czs-footer-arrow:hover,
+body.v8-merge-ready #footerJumpFloat.czs-footer-arrow:focus-visible {
+  border-color: #ffc900 !important;
+  background: #0e3c86 !important;
+  background-image: none !important;
+  color: #fff !important;
+  outline: none !important;
+}
+
+body.v8-merge-ready #footerJumpFloat.czs-footer-arrow svg {
+  width: 18px !important;
+  height: 18px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.4 !important;
+}
+
+@media (max-width: 760px) {
+  body.v8-merge-ready .top-strip nav a.czs-admin-entry {
+    min-height: 30px !important;
+    padding: 0 10px !important;
+    font-size: 0.66rem !important;
+  }
+
+  body.v8-merge-ready #footerJumpFloat.czs-footer-arrow {
+    right: 10px !important;
+    bottom: 14px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}

@@ -102,6 +102,7 @@
     adsEvents: "/api/ads/events",
     commercialLeads: "/api/commercial/leads",
     raylChat: "/api/rayl/chat",
+    cheffePublicAI: "/api/cheffe-call/ai/public",
     officeAI: "/api/office-ai/chat",
     cheffeAI: "/api/cheffe-call/ai",
   };
@@ -1058,10 +1059,12 @@
       topNav.dataset.v8QuickLinks = "1";
       $$("a", topNav).forEach((link) => {
         if (/chefe|cheffe/i.test(link.textContent || link.href)) {
-          link.textContent = "Checagem";
-          link.href = "#checagemCzs";
-          link.classList.remove("v8-admin-link");
-          link.classList.add("v8-check-link");
+          link.textContent = "Cheffe Call";
+          link.href = "/cheffe-call.html?admin=1";
+          link.classList.remove("v8-check-link");
+          link.classList.add("v8-admin-link", "czs-admin-entry");
+          link.title = "Acesso restrito da redação: a senha é solicitada na Cheffe Call.";
+          topNav.prepend(link);
         }
       });
       [
@@ -1410,7 +1413,6 @@
       ["#feed .section-kicker", "text", "Todas as notícias"],
       ["#feed .section-head h2", "text", "Últimas atualizações"],
       ["#feed .section-head p", "text", ""],
-      ["#footerJumpInline", "text", "Mapa do site"],
       ["#arquivoArtigoSystem .section-kicker", "text", "Arquivo CZS"],
       ["#arquivoArtigoSystem .panel:first-child h2", "text", "Matérias antigas"],
       ["#arquivoArtigoSystem .panel:first-child p", "text", ""],
@@ -1451,9 +1453,6 @@
       ["#fullSiteFooter h2", "text", "Tudo do Catálogo CZS"],
       ["#fullSiteFooter .footer-full-head p", "text", ""],
       ["#syncBtn", "text", "Atualizar notícias"],
-      ["#footerJumpTop", "text", "Mapa do site"],
-      ["#footerJumpBtn", "text", "Mapa do site"],
-      ["#footerJumpFeed", "text", "Mapa do site"],
       ["#syncStatus", "text", "Arquivo CZS: 1610 notícias • amostra local: 1000"],
     ];
 
@@ -1894,11 +1893,8 @@
     const routes = [
       [/\/arquivo\.html/i, "#arquivoArtigoSystem"],
       [/\/catalogo-servicos\.html/i, "#servicos"],
-      [/\/cheffe-call\.html/i, "#cheffeCallEditor"],
       [/\/galeria\.html/i, "#galeriaFotos"],
       [/\/divulgue\.html/i, "#monetizacao"],
-      [/\/privacidade\.html/i, "#fullSiteFooter"],
-      [/\/termos\.html/i, "#fullSiteFooter"],
     ];
 
     $$("a[href]", root).forEach((anchor) => {
@@ -1907,6 +1903,21 @@
       if (slug) {
         anchor.dataset.v8Slug = slug;
         anchor.href = v8Url({ slug });
+        return;
+      }
+      if (/\/cheffe-call\.html/i.test(href)) {
+        anchor.dataset.v8Remapped = "true";
+        anchor.href = "/cheffe-call.html?admin=1";
+        return;
+      }
+      if (/\/privacidade\.html/i.test(href)) {
+        anchor.dataset.v8Remapped = "true";
+        anchor.href = "/legal.html#privacidade";
+        return;
+      }
+      if (/\/termos\.html/i.test(href)) {
+        anchor.dataset.v8Remapped = "true";
+        anchor.href = "/legal.html#termos";
         return;
       }
       const routeTarget = href.includes(LIVE) ? href : new URL(href, location.href).pathname;
@@ -2526,16 +2537,15 @@
   async function askCheffeAI(message) {
     const answer = $("#v8CheffeAiAnswer");
     if (!message) return;
-    if (answer) answer.textContent = "Consultando IA local da Cheffe...";
+    if (answer) answer.textContent = "Consultando a RAIane...";
     try {
-      const result = await apiPostJson(API.cheffeAI, {
+      const result = await apiPostJson(API.cheffePublicAI, {
         message,
-        queue: safeRead(CHEFFE_ACTIONS_KEY, []).slice(0, 10),
         sourcePage: location.pathname + location.search,
       }, { timeout: 28000 });
       const payload = result.payload || {};
       if (!result.ok || !payload.ok) throw new Error(payload.error || `HTTP ${result.status}`);
-      if (answer) answer.innerHTML = `<b>${esc(payload.ai?.status === "online" ? "IA local respondeu em português" : "Fallback local")}</b><span>${esc(cleanPublicAiText(payload.answer, "Cheffe local: confirme fonte/data, revise imagem ou vídeo e mantenha a fila registrada antes de publicar."))}</span>`;
+      if (answer) answer.innerHTML = `<b>${esc(payload.ai?.status === "online" ? "RAIane respondeu em português" : "Resposta editorial disponível")}</b><span>${esc(cleanPublicAiText(payload.answer, "Posso ajudar a encontrar notícias, vídeos, serviços e contatos do CZS."))}</span>`;
       return payload;
     } catch (error) {
       if (answer) answer.innerHTML = `<b>IA local offline</b><span>${esc(error?.message || "Resposta local indisponível.")}</span>`;
@@ -2710,6 +2720,65 @@
 
   function systemCard(title, text, href, variant = "") {
     return `<a class="v8-system-card ${esc(variant)}" href="${href}"><b>${esc(title)}</b><p>${esc(text)}</p></a>`;
+  }
+
+  function installCzsNavigationContract() {
+    const adminHref = "/cheffe-call.html?admin=1";
+    const topNav = $(".top-strip nav");
+    if (topNav) {
+      let admin = topNav.querySelector("a.czs-admin-entry, a[href*='cheffe-call.html']");
+      if (!admin) {
+        admin = document.createElement("a");
+        topNav.prepend(admin);
+      }
+      admin.href = adminHref;
+      admin.textContent = "Cheffe Call";
+      admin.classList.remove("v8-check-link");
+      admin.classList.add("v8-admin-link", "czs-admin-entry");
+      admin.title = "Acesso restrito da redação: a senha é solicitada na Cheffe Call.";
+      admin.setAttribute("aria-label", "Cheffe Call, acesso restrito da redação");
+      if (topNav.firstElementChild !== admin) topNav.prepend(admin);
+    }
+
+    const aliasTarget = (id, target) => {
+      if (document.getElementById(id)) return;
+      const node = typeof target === "function" ? target() : $(target);
+      if (!node) return;
+      const alias = document.createElement("span");
+      alias.id = id;
+      alias.className = "v8-anchor-alias";
+      alias.setAttribute("aria-hidden", "true");
+      node.parentElement?.insertBefore(alias, node);
+    };
+
+    aliasTarget("vagasCzs", "#empregos");
+    aliasTarget("concursosCzs", () => $$("#servicos .service-card").find((card) => /concursos/i.test(card.textContent)) || $("#servicos"));
+    aliasTarget("catalogo-telefonico", () => $$("#servicos .service-card").find((card) => /catálogo telefônico/i.test(card.textContent)) || $("#servicos"));
+    aliasTarget("participacao-comunitaria", "#comunidade");
+    aliasTarget("social", "#comunidade");
+    aliasTarget("agentesAutonomos", "#cheffeCallEditor");
+    aliasTarget("checagemCzs", "#v8EditorialHelper");
+    aliasTarget("cheffePhotoDesk", "#galeriaFotos");
+    aliasTarget("correcaoEditorialCzs", "#v8EditorialHelper");
+
+    $$("a[href='#empregos']").forEach((link) => { link.href = "#vagasCzs"; });
+    $$("a[href='#agenda']").forEach((link) => { link.href = "#agenda"; });
+    $$("a[href='#servicos']").forEach((link) => {
+      if (/catálogo telefônico/i.test(link.textContent)) link.href = "#catalogo-telefonico";
+      if (/concursos/i.test(link.textContent)) link.href = "#concursosCzs";
+    });
+    $$('a[href*="privacidade.html"]').forEach((link) => { link.href = "/legal.html#privacidade"; });
+    $$('a[href*="termos.html"]').forEach((link) => { link.href = "/legal.html#termos"; });
+    $$('a[href*="cheffe-call.html"]').forEach((link) => {
+      link.href = adminHref;
+      link.title = "Acesso restrito da redação: a senha é solicitada na Cheffe Call.";
+    });
+
+    ["footerJumpTop", "footerJumpInline", "footerJumpBtn", "footerJumpFeed", "czsFooterGateButton"].forEach((id) => {
+      const control = document.getElementById(id);
+      if (control) control.remove();
+    });
+    document.querySelector(".v8-footer-cheffe-dock")?.remove();
   }
 
   function renderTempoAgoraSection() {
@@ -3666,9 +3735,9 @@
           ["Serviços públicos", "#servicos"],
           ["Tempo e alertas", "#tempo"],
           ["Vagas publicadas", "#vagasCzs"],
-          ["Concursos", "#servicos"],
+          ["Concursos", "#concursosCzs"],
           ["Agenda cultural", "#agenda"],
-          ["Catálogo telefônico", "#servicos"],
+          ["Catálogo telefônico", "#catalogo-telefonico"],
           ["Pesquisa eleitoral", "pesquisa-acre-2026.html"],
           ["Resultados de pesquisa", "pesquisa-acre-2026.html#resultados"],
           ["Escritórios de agentes", "#agentesAutonomos"],
@@ -3690,8 +3759,9 @@
           ["Fale com comercial", "#monetizacao"],
         ])}
         ${footerColumn("Redação", [
-          ["Agentes autônomos", "#agentesAutonomos"],
-          ["Checagem", "#checagemCzs"],
+        ["Agentes autônomos", "#agentesAutonomos"],
+        ["Cheffe Call", "/cheffe-call.html?admin=1"],
+        ["Checagem", "#checagemCzs"],
           ["Fotos e enquadramento", "#cheffePhotoDesk"],
           ["Correções editoriais", "#correcaoEditorialCzs"],
           ["Fontes e arquivo", "#arquivoArtigoSystem"],
@@ -3709,18 +3779,14 @@
       </div>
       <div class="v8-footer-bottom">
         <span>Catálogo Cruzeiro do Sul • Vale do Juruá • Acre</span>
-        <span>Site de scroll infinito: o rodapé completo só aparece pelo botão de fim da página.</span>
+        <span>Leitura contínua: o rodapé é acessado pela seta discreta da página.</span>
       </div>`;
 
     const compact = $("#footerCompact");
     if (compact) {
       compact.innerHTML = `
-        <div class="footer-brand-mini v8-footer-mini-brand"><span><img src="${BRAND_ICON}" alt=""></span><div><strong>Catálogo CZS</strong><p id="footerMiniStatus">Scroll infinito: fim só pelo botão.</p></div></div>
-        <div class="quick-links"><a href="#feed">Notícias</a><a href="#servicos">Serviços</a><a href="#pubpaidAtalhos">Pesquisa</a><a href="#monetizacao">Anunciar</a><button class="footer-jump" id="footerJumpBtn" type="button">Fim do site</button></div>`;
-      $("#footerJumpBtn")?.addEventListener("click", () => {
-        footer.classList.add("revealed");
-        footer.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+        <div class="footer-brand-mini v8-footer-mini-brand"><span><img src="${BRAND_ICON}" alt=""></span><div><strong>Catálogo CZS</strong><p id="footerMiniStatus">Leitura contínua</p></div></div>
+        <div class="quick-links"><a href="#feed">Notícias</a><a href="#servicos">Serviços</a><a href="#pubpaidAtalhos">Pesquisa</a><a href="#monetizacao">Anunciar</a></div>`;
     }
     normalizeInternalLinks(footer);
   }
@@ -4422,27 +4488,6 @@
     footer.parentElement.insertBefore(agents, footer);
   }
 
-  function renderCheffeFooterAccess() {
-    const footer = $("#fullSiteFooter");
-    const section = $("#cheffeCallEditor");
-    if (!footer || !section) return;
-
-    let dock = $("#v8FooterCheffeDock");
-    if (!dock) {
-      dock = document.createElement("section");
-      dock.id = "v8FooterCheffeDock";
-      dock.className = "v8-footer-cheffe-dock";
-      dock.setAttribute("aria-label", "Acesso para Cheffe Call e escritórios internos");
-    }
-
-    const bottom = $(".v8-footer-bottom", footer);
-    if (dock.parentElement !== footer) {
-      if (bottom) footer.insertBefore(dock, bottom);
-      else footer.appendChild(dock);
-    }
-    dock.innerHTML = `<a class="v8-footer-cheffe-access" href="#cheffeCallEditor" title="Cheffe Call: correções, atendimento interno e escritórios da equipe CZS." aria-label="Abrir Cheffe Call fora do rodapé">Cheffe Call</a>`;
-  }
-
   function installContextSideRail() {
     if ($("#v8ContextRail")) return;
     const rail = document.createElement("aside");
@@ -4705,8 +4750,8 @@
       [/Arquivo online:/g, "Arquivo CZS:"],
       [/amostra carregada:/g, "amostra local:"],
       [/Infinite scroll:/g, "Leitura contínua:"],
-      [/Carregar até o rodapé/g, "Ver mapa do site"],
-      [/Ir ao rodapé/g, "Mapa do site"],
+      [/Carregar até o rodapé/g, ""],
+      [/Ir ao rodapé/g, ""],
       [/Abrir arquivo completo/g, "Ver arquivo"],
       [/Abrir galeria online/g, "Ver galeria"],
       [/Abrir no online/g, "Ler"],
@@ -5524,34 +5569,23 @@
     }
 
     $("#v8TopFloat")?.remove();
-    button.className = "footer-jump-float v8-left-scroll-control";
+    button.className = "footer-jump-float czs-footer-arrow";
     button.type = "button";
     button.removeAttribute("onclick");
-    button.removeAttribute("title");
+    button.title = "Ir para o rodapé";
 
     const setMode = () => {
       const rect = footer.getBoundingClientRect();
-      const heroRect = $("#leadStory")?.getBoundingClientRect();
       const nearFooter = rect.top <= window.innerHeight * 0.58 && rect.bottom > 120;
-      const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 96;
-      const mode = nearFooter || atPageEnd ? "home" : "footer";
-      const floatBand = window.innerHeight - 72;
-      const overlapsHero = mode === "footer" && heroRect && heroRect.top < window.innerHeight && heroRect.bottom > floatBand;
-      button.dataset.mode = mode;
-      button.classList.toggle("is-over-hero", Boolean(overlapsHero));
-      button.innerHTML = `${floatArrow(mode === "home" ? "up" : "down")}<span>${mode === "home" ? "Topo" : "Rodapé"}<small>${mode === "home" ? "Home" : "Mapa da página"}</small></span>`;
-      button.setAttribute("aria-label", mode === "home" ? "Voltar para a home" : "Ir direto ao rodapé e mapa da página");
+      button.classList.toggle("is-near-footer", nearFooter);
+      button.innerHTML = floatArrow("down");
+      button.setAttribute("aria-label", "Ir para o rodapé");
     };
 
     button.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
       event.stopPropagation();
-      if (button.dataset.mode === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setTimeout(setMode, 420);
-        return;
-      }
       window.__czsFooterDirectJump = true;
       window.__czsFooterOpenedFinal = true;
       footer.classList.add("revealed", "forced");
@@ -6066,7 +6100,7 @@
     };
 
     const askRaylBackend = async (question) => {
-      const result = await apiPostJson(API.raylChat, {
+      const result = await apiPostJson(API.cheffePublicAI, {
         question,
         sourcePage: location.pathname + location.search,
       }, { timeout: 22000 });
@@ -6693,7 +6727,6 @@
     renderContinuousNewsScroll();
     renderSponsorFooterPromo();
     renderNewsFooter();
-    renderCheffeFooterAccess();
     ensurePortalAnchorAliases();
     installSalesLanding();
     installContextSideRail();
@@ -6702,6 +6735,7 @@
     sanitizePublicCopy();
     remapLegacyLinks();
     normalizeInternalLinks(document);
+    installCzsNavigationContract();
     installEditorialHelpers();
     ensurePortalAnchorAliases();
     installClickRouter();
@@ -6715,7 +6749,7 @@
     loadCommunityReports();
     installRightActionRail();
     installLoaderActionInvites();
-    // Rodapé sem botão flutuante: usar os atalhos normais da página.
+    installFloatingFooterControl();
     runCinematicIntro();
     const initParams = new URLSearchParams(window.location.search || "");
     if (initParams.get("skipIntro") === "1" && (initParams.get("forcePopup") === "1" || initParams.get("popup") === "1")) {

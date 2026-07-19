@@ -2,7 +2,7 @@
   "version": 1,
   "kind": "editorial-health-report",
   "status": "ok",
-  "generatedAt": "2026-07-16T17:10:44.460Z",
+  "generatedAt": "2026-07-19T15:33:05.010Z",
   "files": {
     "json": "data/editorial-health-report.json",
     "markdown": "data/editorial-health-report.md"
@@ -265,7 +265,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio: veja ",
@@ -289,7 +289,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Quem era a empresária que morreu após luta contra o câncer no Acre: veja os pontos principais",
@@ -651,7 +651,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Monitorado pela Justiça fica ferido após disparo de espingarda no Acre: veja os pontos principais",
@@ -675,7 +675,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Ameaça de motim em presídio faz Iapen suspender visitas no Acre: veja os pontos principais",
@@ -699,7 +699,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Acidente de trânsito é registrado na Avenida Ceará, em Rio Branco: veja os pontos principais",
@@ -723,7 +723,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Justiça impede plano de cancelar atendimento a criança com síndrome rara: veja os pontos principais",
@@ -747,7 +747,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Foragido de alta periculosidade é preso escondido debaixo da cama: veja os pontos principais",
@@ -771,7 +771,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Polícia investiga morte de idosa encontrada em estado de decomposição: veja os pontos principais",
@@ -795,7 +795,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Morre dona Zuzu, mãe da ex-vice-prefeita Marfisa Galvão: veja os pontos principais",
@@ -819,7 +819,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Morre Mariana Quintela, jovem empresária do ramo da culinária no Acre: veja os pontos principais",
@@ -869,7 +869,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Foragido acusado de homicídios e integrante de organizações criminosas é capturado pelo 6°BPM em Cruzeiro do S",
@@ -919,7 +919,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Polícia Militar prende dois suspeitos de tráfico de drogas em operações de enfrentamento ao tráfico em Cruzeir",
@@ -995,7 +995,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Justiça mantém prisão de madrasta acusada de envenenar enteada com soda cáustica em Rio Branco: veja os pontos",
@@ -1019,7 +1019,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Polícia Militar prende homem acusado de descumprir medida protetiva e ameaçar sua ex-companheira: veja os pont",
@@ -1095,7 +1095,7 @@
         "sourceIssues": [
           "p0-com-fonte-unica"
         ],
-        "imageLabel": "imagem-local",
+        "imageLabel": "imagem-de-fonte",
         "visualIssues": [],
         "titleAlternatives": [
           "Justiça acata denúncia do MP e manda prender 4 acusados por morte de jovem em rope jump: veja os pontos princi",
@@ -1109,8 +1109,8 @@
   },
   "visualIntegrity": {
     "byLabel": {
-      "imagem-de-fonte": 247,
-      "imagem-local": 113
+      "imagem-de-fonte": 358,
+      "ilustracao-editorial": 2
     },
     "issueItems": [
       {
@@ -6617,7 +6617,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado: veja os pontos principais",
@@ -6639,7 +6639,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "O que aconteceria com nossa mente se vivêssemos na Lua: veja os pontos principais",
@@ -6668,7 +6668,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "O que está por trás do novo tarifaço dos EUA contra o Brasil: veja os pontos principais",
@@ -6690,7 +6690,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026: veja os pontos principais",
@@ -6719,7 +6719,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas: veja os pontos principais",
@@ -6748,7 +6748,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão: veja os pontos principais",
@@ -6777,7 +6777,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon: veja os pontos principais",
@@ -6806,7 +6806,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê: veja os pontos principai",
@@ -6835,7 +6835,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Copa: antes da final, Argentina e Espanha se encontram em filme na TV: veja os pontos principais",
@@ -6992,7 +6992,7 @@
       "sourceDomain": "agazetadoacre.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Senac abre inscrições para 40 vagas em cursos gratuitos em Rio Branco; veja quem pode participar: veja os pont",
@@ -7095,7 +7095,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio: veja ",
@@ -7146,7 +7146,7 @@
       "sourceDomain": "cnnbrasil.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Anvisa determina recolhimento de lotes de água Mamba Water: veja os pontos principais",
@@ -7175,7 +7175,7 @@
       "sourceDomain": "agazetadoacre.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Capotamento na BR-317 deixa duas mulheres feridas após tentativa de ultrapassagem em Brasiléia: veja os pontos",
@@ -7286,7 +7286,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Quem era a empresária que morreu após luta contra o câncer no Acre: veja os pontos principais",
@@ -7308,7 +7308,7 @@
       "sourceDomain": "agazetadoacre.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "EUA anunciam tarifa de 25% sobre produtos brasileiros; veja itens que serão afetados ou isentos: veja os ponto",
@@ -7330,7 +7330,7 @@
       "sourceDomain": "jurua24horas.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "GEFRON apreende 23 kg de skunk escondidos em caminhonete e prende dois homens em Senador Guiomard: veja os pon",
@@ -7381,7 +7381,7 @@
       "sourceDomain": "agazetadoacre.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Horóscopo 2026: confira a previsão de hoje (16/7) para seu signo: veja os pontos principais",
@@ -7624,7 +7624,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Estudantes da Ufac anunciam greve e convocam ato por transporte público: veja os pontos principais",
@@ -7682,7 +7682,7 @@
       "sourceDomain": "agazetadoacre.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Sol predomina e calor chega a 34°C no Acre nesta quinta-feira; veja a previsão: veja os pontos principais",
@@ -8263,7 +8263,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Gefron apreende quase 24 kg de skunk e prende 2 homens no interior do Acre: veja os pontos principais",
@@ -8285,7 +8285,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Acre tem a 2ª maior renda média do país entre carreiras jurídicas, aponta CLP: veja os pontos principais",
@@ -8307,7 +8307,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Programa abre edital para apoiar bioeconomia no Acre e estados vizinhos: veja os pontos principais",
@@ -8666,7 +8666,7 @@
       "sourceDomain": "cnnbrasil.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Resolução ANP cria problemas onde eles não existiam: veja os pontos principais",
@@ -8724,7 +8724,7 @@
       "sourceDomain": "cnnbrasil.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "A energia existe, mas o contrato desapareceu: veja os pontos principais",
@@ -9000,7 +9000,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Flávio Bolsonaro endossa secretário dos EUA e diz que Lula não tem ‘condições de ser presidente’: veja os pont",
@@ -9022,7 +9022,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Uma Casa na Pradaria: conheça livro que baseou a trama real da Netflix: veja os pontos principais",
@@ -9178,7 +9178,7 @@
       "sourceDomain": "cnnbrasil.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "PoderData/AYA: 42% consideram que apoio de Trump na eleições é negativo: veja os pontos principais",
@@ -9369,7 +9369,7 @@
       "sourceDomain": "ac24horas.com",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Dando bom à cavalo: veja os pontos principais",
@@ -9446,7 +9446,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Starship decola hoje; assista com o Olhar Digital: veja os pontos principais",
@@ -9475,7 +9475,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Botafogo x Santos: onde assistir, horário e escalações do jogo do Brasileirão: veja os pontos principais",
@@ -9504,7 +9504,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Vitória x Vasco: onde assistir, horário e escalações do jogo do Brasileirão: veja os pontos principais",
@@ -9533,7 +9533,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Poucos átomos de espessura: novo material promete revolução quântica: veja os pontos principais",
@@ -9562,7 +9562,7 @@
       "sourceDomain": "juruainformativo.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "DNA de 50 mil anos na África desafia limites da ciência: veja os pontos principais",
@@ -9615,7 +9615,7 @@
       "sourceDomain": "esaj.tjac.jus.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "ilustracao-editorial",
       "visualIssues": [],
       "titleAlternatives": [
         "Conferencia de Documentos e-SAJ: veja os pontos principais",
@@ -9637,7 +9637,7 @@
       "sourceDomain": "manciolima.ac.gov.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "ilustracao-editorial",
       "visualIssues": [],
       "titleAlternatives": [
         "Lei Orgânica: veja os pontos principais",
@@ -10134,7 +10134,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Acreano de 9 anos chega ao maior torneio de futebol infantil do Norte: veja os pontos principais",
@@ -10165,7 +10165,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Monitorado pela Justiça fica ferido após disparo de espingarda no Acre: veja os pontos principais",
@@ -10189,7 +10189,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Ameaça de motim em presídio faz Iapen suspender visitas no Acre: veja os pontos principais",
@@ -10213,7 +10213,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Acidente de trânsito é registrado na Avenida Ceará, em Rio Branco: veja os pontos principais",
@@ -10235,7 +10235,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Carro capota após tentativa de ultrapassagem na BR-317: veja os pontos principais",
@@ -10264,7 +10264,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Trabalhador cai de telhado e se fere durante manutenção na Vila Acre: veja os pontos principais",
@@ -10286,7 +10286,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Jovem perde controle de moto e se fere na Via Parque, em Rio Branco: veja os pontos principais",
@@ -10308,7 +10308,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Quaest: Lula lidera com 45% e amplia vantagem sobre Flávio Bolsonaro: veja os pontos principais",
@@ -10330,7 +10330,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Esquerda define data de convenção para lançar Thor Dantas ao Governo; confira: veja os pontos principais",
@@ -10352,7 +10352,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Alysson visita Seis de Agosto e acompanha de demandas de moradores: veja os pontos principais",
@@ -10381,7 +10381,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Mailza toma café com quibe no Mercado do Bosque e visita unidades de saúde: veja os pontos principais",
@@ -10410,7 +10410,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Jarude diz que seu partido pretende eleger dois deputados na Aleac: veja os pontos principais",
@@ -10439,7 +10439,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Thor Dantas celebra os 89 anos da Madrinha Peregrina no Alto Santo: veja os pontos principais",
@@ -10468,7 +10468,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "PGE convoca candidatos para etapas discursiva e prática de concurso: veja os pontos principais",
@@ -10497,7 +10497,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Ieptec convoca aprovados em três processos seletivos simplificados: veja os pontos principais",
@@ -10526,7 +10526,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "SENAI abre seleção no Acre com salários de até R$ 5,7 mil e inscrições gratuitas: veja os pontos principais",
@@ -10550,7 +10550,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Justiça impede plano de cancelar atendimento a criança com síndrome rara: veja os pontos principais",
@@ -10572,7 +10572,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Servidor da Prefeitura vira alvo de investigação do MP por contratos na Saúde: veja os pontos principais",
@@ -10596,7 +10596,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Foragido de alta periculosidade é preso escondido debaixo da cama: veja os pontos principais",
@@ -10618,7 +10618,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Filha de Tião Viana estreia no cinema ao lado de Bruno Gagliasso em novo filme: veja os pontos principais",
@@ -10649,7 +10649,7 @@
       "sourceIssues": [
         "p0-com-fonte-unica"
       ],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Polícia investiga morte de idosa encontrada em estado de decomposição: veja os pontos principais",
@@ -10671,7 +10671,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Familiares de detentos bloqueiam acesso a presídio após suspensão de visitas: veja os pontos principais",
@@ -10700,7 +10700,7 @@
       "sourceDomain": "contilnetnoticias.com.br",
       "sourceCount": 1,
       "sourceIssues": [],
-      "imageLabel": "imagem-local",
+      "imageLabel": "imagem-de-fonte",
       "visualIssues": [],
       "titleAlternatives": [
         "Argentina vence a Inglaterra e está na final da Copa do Mundo 2026: veja os pontos principais",
