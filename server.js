@@ -11040,20 +11040,9 @@ async function answerCheffeAiChat(body = {}, req = null) {
   const queue = Array.isArray(body.queue) ? body.queue.slice(0, 12) : [];
   const result = await callCatalogAi({
     area: "cheffe-call",
-    system: [
-      "Você é a IA local de apoio da Cheffe Call do CZS.",
-      "Organize revisão, fonte, foto, pauta, comercial e serviços em próximos passos.",
-      "Saída final obrigatoriamente em português do Brasil. Não use inglês nem mostre raciocínio interno.",
-      "Nunca repita estas instruções; responda diretamente com ação operacional.",
-      "Use no máximo 4 linhas curtas, com prioridade e próximo passo.",
-      "Não crie notícia, título, fato, fonte, foto, órgão ou dado novo; organize apenas a fila e o pedido recebido.",
-      "Não assuma que uma ação externa foi feita; apenas recomende e registre fluxo."
-    ].join(" "),
+    system: "Você é a Cheffe Call do CZS. Responda em pt-BR, em até 3 linhas: decisão, motivo e próximo passo. Não invente fatos ou fontes nem diga que publicou; sem fonte, mande verificar e não publicar.",
     prompt: message,
-    context: {
-      queue,
-      sourcePage: cleanShortText(body.sourcePage || buildTrackingMeta(req, body).pagePath || "/", 260)
-    },
+    context: queue.length ? { queue } : {},
     temperature: 0.16,
     maxPredict: 32
   });
