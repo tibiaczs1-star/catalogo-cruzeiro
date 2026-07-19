@@ -63,38 +63,32 @@ async function readBody(req, limitBytes = 160000) {
   return Buffer.concat(chunks).toString("utf-8");
 }
 
-loadLocalEnv();
-
-const HOST = String(process.env.CZS_LOCAL_AI_PROXY_HOST || "127.0.0.1").trim();
-const PORT = Number(process.env.CZS_LOCAL_AI_PROXY_PORT || 11435);
-const TOKEN = String(process.env.CZS_LOCAL_AI_TUNNEL_TOKEN || process.env.OLLAMA_AUTH_TOKEN || "").trim();
-const OLLAMA_BASE_URL = String(process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434").trim().replace(/\/+$/, "");
-
-if (!TOKEN || TOKEN.length < 24) {
-  console.error("CZS_LOCAL_AI_TUNNEL_TOKEN ausente ou curto demais. Gere um token antes de expor o proxy.");
-  process.exit(1);
-}
-
-const server = http.createServer(async (req, res) => {
+function createProxyServer(options = {}) {
+  const token = String(options.token || "").trim();
+  const ollamaBaseUrl = String(options.ollamaBaseUrl || "http://127.0.0.1:11434").replace(/\/+$/, "");
+  if (token.length < 24) throw new Error("token_too_short");
+  return http.createServer(async (req, res) => {
   try {
     if (req.method === "GET" && req.url === "/health") {
       return sendJson(res, 200, { ok: true, service: "czs-ollama-secure-proxy" });
     }
 
-    if (req.method !== "POST" || req.url !== "/api/chat") {
+    const allowed = (req.method === "GET" && req.url === "/api/tags") ||
+      (req.method === "POST" && req.url === "/v1/chat/completions");
+    if (!allowed) {
       return sendJson(res, 404, { ok: false, error: "not_found" });
     }
 
     const auth = String(req.headers.authorization || "").replace(/^Bearer\s+/i, "").trim();
-    if (!safeEqual(auth, TOKEN)) {
+    if (!safeEqual(auth, token)) {
       return sendJson(res, 401, { ok: false, error: "unauthorized" });
     }
 
-    const rawBody = await readBody(req);
-    const response = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: rawBody
+    const rawBody = req.method === "POST" ? await readBody(req) : null;
+    const response = await fetch(`${ollamaBaseUrl}${req.url}`, {
+      method: req.method,
+      headers: req.method === "POST" ? { "Content-Type": "application/json" } : {},
+      ...(rawBody !== null ? { body: rawBody } : {})
     });
     const text = await response.text();
     res.writeHead(response.status, {
@@ -106,8 +100,23 @@ const server = http.createServer(async (req, res) => {
     const status = error?.message === "payload_too_large" ? 413 : 500;
     sendJson(res, status, { ok: false, error: error?.message || "proxy_error" });
   }
-});
+  });
+}
 
-server.listen(PORT, HOST, () => {
-  console.log(`CZS Ollama secure proxy: http://${HOST}:${PORT} -> ${OLLAMA_BASE_URL}`);
-});
+if (require.main === module) {
+  loadLocalEnv();
+  const host = String(process.env.CZS_LOCAL_AI_PROXY_HOST || "127.0.0.1").trim();
+  const port = Number(process.env.CZS_LOCAL_AI_PROXY_PORT || 11435);
+  const token = String(process.env.CZS_LOCAL_AI_TUNNEL_TOKEN || process.env.OLLAMA_AUTH_TOKEN || "").trim();
+  const ollamaBaseUrl = String(process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434").trim();
+  try {
+    createProxyServer({ token, ollamaBaseUrl }).listen(port, host, () => {
+      console.log(`CZS Ollama secure proxy: http://${host}:${port} -> ${ollamaBaseUrl}`);
+    });
+  } catch {
+    console.error("CZS_LOCAL_AI_TUNNEL_TOKEN ausente ou curto demais. Gere um token antes de expor o proxy.");
+    process.exit(1);
+  }
+}
+
+module.exports = { createProxyServer };
