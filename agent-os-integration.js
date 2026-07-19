@@ -41,6 +41,7 @@ const CYCLE_INTERVAL_MS = parseInt(process.env.AGENT_OS_CYCLE_INTERVAL_MS || pro
 const CYCLE_ON_START = /^(1|true|yes|sim)$/i.test(process.env.AGENT_OS_CYCLE_ON_START || "1");
 const LLM_URL = process.env.AGENT_OS_LLM_URL || process.env.LLM_API_URL || process.env.CZS_LLM_URL || "http://127.0.0.1:11434/v1/chat/completions";
 const LLM_MODEL = process.env.AGENT_OS_LLM_MODEL || process.env.CZS_OLLAMA_MODEL || process.env.LLM_MODEL || "llama3.2:3b";
+const LLM_AUTH_TOKEN = String(process.env.OLLAMA_AUTH_TOKEN || "").trim();
 const LLM_TIMEOUT_MS = parseInt(process.env.LLM_TIMEOUT_MS || "90000", 10);
 
 let timer = null;
@@ -191,7 +192,10 @@ async function callLLM(systemPrompt, userPrompt) {
   try {
     const response = await fetch(LLM_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(LLM_AUTH_TOKEN ? { Authorization: `Bearer ${LLM_AUTH_TOKEN}` } : {}),
+      },
       body: JSON.stringify({
         model: LLM_MODEL,
         messages: [
@@ -944,6 +948,7 @@ module.exports = {
   // Core
   runCycle,
   executeAgent,
+  callLLM,
   loadManifests,
   getSiteContext,
   startMeeting,
