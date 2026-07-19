@@ -15,8 +15,8 @@ $trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet `
   -AllowStartIfOnBatteries `
   -DontStopIfGoingOnBatteries `
-  -ExecutionTimeLimit (New-TimeSpan -Days 7) `
-  -RestartCount 3 `
+  -ExecutionTimeLimit ([TimeSpan]::Zero) `
+  -RestartCount 999 `
   -RestartInterval (New-TimeSpan -Minutes 2)
 
 try {

@@ -205,15 +205,27 @@ async function waitForHealth(url, token, timeoutMs = 20000) {
   return false;
 }
 
+async function assertLocalModel(baseUrl, model) {
+  const response = await fetch(`${baseUrl.replace(/\/+$/, "")}/api/tags`);
+  if (!response.ok) throw new Error(`Ollama local indisponível: HTTP ${response.status}`);
+  const payload = await response.json();
+  const names = (payload.models || []).map((item) => item.name || item.model);
+  if (!names.includes(model)) throw new Error(`Modelo local ausente: ${model}`);
+}
+
 async function main() {
   const args = new Set(process.argv.slice(2));
   const localEnv = getLocalEnv();
+  const model = "llama3.2:3b";
+  const localOllamaUrl = String(localEnv.OLLAMA_LOCAL_BASE_URL || "http://127.0.0.1:11434");
+  await assertLocalModel(localOllamaUrl, model);
   const token = String(localEnv.CZS_LOCAL_AI_TUNNEL_TOKEN || crypto.randomBytes(32).toString("base64url"));
   ensureLocalEnvValue("CZS_LOCAL_AI_TUNNEL_TOKEN", token);
   ensureLocalEnvValue("OLLAMA_AUTH_TOKEN", token);
   ensureLocalEnvValue("CZS_AI_PRIMARY", "ollama");
   ensureLocalEnvValue("CZS_OPENAI_FALLBACK_ENABLED", "false");
-  ensureLocalEnvValue("CZS_OLLAMA_MODEL", localEnv.CZS_OLLAMA_MODEL || "qwen2.5:3b");
+  ensureLocalEnvValue("CZS_OLLAMA_MODEL", model);
+  ensureLocalEnvValue("AGENT_OS_LLM_MODEL", model);
 
   const proxyPort = Number(localEnv.CZS_LOCAL_AI_PROXY_PORT || 11435);
   const proxy = spawnLogged(process.execPath, ["scripts/ollama-secure-proxy.js"], {
@@ -221,7 +233,7 @@ async function main() {
       CZS_LOCAL_AI_TUNNEL_TOKEN: token,
       OLLAMA_AUTH_TOKEN: token,
       CZS_LOCAL_AI_PROXY_PORT: String(proxyPort),
-      OLLAMA_BASE_URL: localEnv.OLLAMA_BASE_URL || "http://127.0.0.1:11434"
+      OLLAMA_BASE_URL: localOllamaUrl
     }
   });
 
@@ -238,7 +250,7 @@ async function main() {
     updatedAt: new Date().toISOString(),
     tunnelUrl,
     proxyPort,
-    model: localEnv.CZS_OLLAMA_MODEL || "qwen2.5:3b",
+    model,
     renderEnv: {
       OLLAMA_BASE_URL: tunnelUrl,
       OLLAMA_AUTH_TOKEN: "[secret]",
@@ -251,11 +263,15 @@ async function main() {
     const service = await findRenderService(process.env.RENDER_SERVICE || "catalogo-cruzeiro-web");
     if (!service?.id) throw new Error("Serviço Render não encontrado.");
     await upsertRenderEnvVars(service.id, {
+      AGENT_OS_LLM_URL: `${tunnelUrl}/v1/chat/completions`,
+      LLM_API_URL: `${tunnelUrl}/v1/chat/completions`,
       OLLAMA_BASE_URL: tunnelUrl,
       OLLAMA_AUTH_TOKEN: token,
       CZS_AI_PRIMARY: "ollama",
       CZS_OPENAI_FALLBACK_ENABLED: "false",
-      CZS_OLLAMA_MODEL: localEnv.CZS_OLLAMA_MODEL || "qwen2.5:3b",
+      AGENT_OS_LLM_MODEL: model,
+      LLM_MODEL: model,
+      CZS_OLLAMA_MODEL: model,
       CZS_OLLAMA_TIMEOUT_MS: localEnv.CZS_OLLAMA_TIMEOUT_MS || "30000"
     });
     console.log(`Render env vars atualizadas para ${service.name || service.id}.`);

@@ -25,7 +25,7 @@
     "memory:ensure": "node scripts/codex-memory.js ensure",
     "memory:status": "node scripts/codex-memory.js status",
     "ollama:proxy": "node scripts/ollama-secure-proxy.js",
-    "ollama:render:tunnel": "node scripts/ollama-render-tunnel.js --deploy",
+    "ollama:render:tunnel": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-ollama-render-tunnel.ps1",
     "perf:budget": "node scripts/performance-budget-check.js",
     "guard:pubpaid": "node scripts/guard-pubpaid-no-canvas.js",
     "hermes:office:brief": "node scripts/hermes-office-bridge.js brief",
