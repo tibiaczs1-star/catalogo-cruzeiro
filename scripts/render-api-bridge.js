@@ -200,6 +200,18 @@ async function isolateCatalogService(serviceId) {
   return { changed: true, removed, retainedCount: retained.length };
 }
 
+async function setCatalogCheffeTimeout(serviceId, timeoutMs = 75000) {
+  const timeout = Math.max(1000, Math.min(90000, Number(timeoutMs) || 75000));
+  const current = await getEnvVars(serviceId);
+  const next = current.filter((entry) => entry.key !== "CZS_OLLAMA_TIMEOUT_MS");
+  next.push({ key: "CZS_OLLAMA_TIMEOUT_MS", value: String(timeout) });
+  await request(`/services/${encodeURIComponent(serviceId)}/env-vars`, {
+    method: "PUT",
+    body: JSON.stringify(next)
+  });
+  return { key: "CZS_OLLAMA_TIMEOUT_MS", value: String(timeout) };
+}
+
 async function fixCatalogRuntime(serviceId) {
   const updated = await request(`/services/${encodeURIComponent(serviceId)}`, {
     method: "PATCH",
@@ -284,6 +296,7 @@ Comandos:
   env-keys [--service nome-ou-id]  lista somente nomes das variaveis
   create-ashotelaria               cria servico A.S com segredos copiados
   isolate-catalog                  remove somente variaveis A.S do Catalogo
+  set-cheffe-timeout [--ms 75000] ajusta o limite da Cheffe sem expor segredos
   fix-catalog-runtime              corrige comando do servico no painel Render
   probe-ollama                     testa a rota Ollama sem expor credenciais
   deploy --service nome-ou-id      dispara deploy manual
@@ -337,6 +350,11 @@ async function main() {
 
   if (command === "isolate-catalog") {
     process.stdout.write(`${JSON.stringify({ service, result: await isolateCatalogService(service.id) }, null, 2)}\n`);
+    return;
+  }
+
+  if (command === "set-cheffe-timeout") {
+    process.stdout.write(`${JSON.stringify({ service, result: await setCatalogCheffeTimeout(service.id, args.ms) }, null, 2)}\n`);
     return;
   }
 

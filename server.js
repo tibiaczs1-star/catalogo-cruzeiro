@@ -298,7 +298,7 @@ const OLLAMA_BASE_URL = String(process.env.OLLAMA_BASE_URL || "http://127.0.0.1:
   .trim()
   .replace(/\/+$/, "");
 const OLLAMA_MODEL = String(process.env.CZS_OLLAMA_MODEL || "qwen2.5:3b").trim();
-const OLLAMA_TIMEOUT_MS = Math.max(1000, Math.min(45000, Number(process.env.CZS_OLLAMA_TIMEOUT_MS || 30000)));
+const OLLAMA_TIMEOUT_MS = Math.max(1000, Math.min(90000, Number(process.env.CZS_OLLAMA_TIMEOUT_MS || 75000)));
 const OLLAMA_AUTH_TOKEN = String(process.env.OLLAMA_AUTH_TOKEN || "").trim();
 const CZS_AI_PRIMARY = String(process.env.CZS_AI_PRIMARY || "ollama").trim().toLowerCase();
 const CZS_OPENAI_FALLBACK_ENABLED = /^(1|true|yes|sim)$/i.test(
