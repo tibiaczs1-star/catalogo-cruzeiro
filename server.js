@@ -20796,14 +20796,22 @@ async function handleApi(req, res, pathname, searchParams) {
 function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
 
-  if (pathname === "/ashotelaria/app" || pathname === "/ashotelaria/app/" || pathname === "/czs-labs/ashotelaria" || pathname === "/czs-labs/ashotelaria/") {
+  const isHotelStaticRoute = pathname === "/ashotelaria/app" || pathname === "/ashotelaria/app/"
+    || pathname === "/czs-labs/ashotelaria" || pathname === "/czs-labs/ashotelaria/"
+    || pathname === "/hoteis" || pathname === "/hoteis/"
+    || /^\/reservar\/[^/]+\/?$/.test(pathname);
+  if (!ASHOTELARIA_ENABLED && isHotelStaticRoute) {
+    return sendJson(res, 404, { ok: false, message: "Rota não encontrada." });
+  }
+
+  if (ASHOTELARIA_ENABLED && (pathname === "/ashotelaria/app" || pathname === "/ashotelaria/app/" || pathname === "/czs-labs/ashotelaria" || pathname === "/czs-labs/ashotelaria/")) {
     return sendFile(req, res, path.join(ROOT_DIR, "ashotelaria-app", "index.html"), {
       cacheControl: "no-store",
       templateVars,
     });
   }
 
-  if (pathname === "/hoteis" || pathname === "/hoteis/") {
+  if (ASHOTELARIA_ENABLED && (pathname === "/hoteis" || pathname === "/hoteis/")) {
     return sendFile(req, res, path.join(ROOT_DIR, "ashotelaria-app", "booking.html"), {
       cacheControl: "no-store",
       templateVars,
@@ -20811,7 +20819,7 @@ function handleStatic(req, res, pathname, requestUrl) {
   }
 
   const bookingAlias = pathname.match(/^\/reservar\/([^/]+)\/?$/);
-  if (bookingAlias) {
+  if (ASHOTELARIA_ENABLED && bookingAlias) {
     return sendFile(req, res, path.join(ROOT_DIR, "ashotelaria-app", "booking.html"), {
       cacheControl: "no-store",
       templateVars,
