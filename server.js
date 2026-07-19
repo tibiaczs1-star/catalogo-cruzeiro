@@ -11055,7 +11055,7 @@ async function answerCheffeAiChat(body = {}, req = null) {
       sourcePage: cleanShortText(body.sourcePage || buildTrackingMeta(req, body).pagePath || "/", 260)
     },
     temperature: 0.16,
-    maxPredict: 80
+    maxPredict: 32
   });
   const fallback = "Cheffe local: priorize itens urgentes, confirme fonte/data, revise imagem ou vídeo, e mantenha a fila registrada antes de publicar.";
   const safeAnswer = result.ok ? sanitizeCatalogAiAnswer(result.answer, fallback) : fallback;
