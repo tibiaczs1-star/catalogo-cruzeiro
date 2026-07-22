@@ -39,6 +39,20 @@ test("preserva exatamente o resumo do Instagram no item do site", () => {
   assert.deepEqual(item.body, [config.summary, `Fonte: ${config.sourceName}.`]);
 });
 
+test("aceita corpo editorial, destaques e análise opcionais", () => {
+  const editorial = {
+    ...config,
+    body: ["Primeiro parágrafo.", "Segundo parágrafo."],
+    highlights: ["Destaque editorial."],
+    analysis: "Contexto editorial."
+  };
+  const item = buildItem(editorial);
+  assert.deepEqual(item.body, editorial.body);
+  assert.deepEqual(item.development, editorial.body);
+  assert.deepEqual(item.highlights, editorial.highlights);
+  assert.equal(item.analysis, editorial.analysis);
+});
+
 test("detecta duplicidade apenas por título ou link", () => {
   assert.equal(findDuplicate([{ title: config.title }], config).reason, "title");
   assert.equal(findDuplicate([{ sourceUrl: config.sourceUrl }], config).reason, "sourceUrl");

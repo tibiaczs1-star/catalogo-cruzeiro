@@ -226,6 +226,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".jpg",
   ".jpeg",
   ".webp",
+  ".gif",
   ".mp3",
   ".ogg",
   ".wav",
@@ -20816,6 +20817,21 @@ async function handleApi(req, res, pathname, searchParams) {
 
 function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
+
+  if (pathname === "/bookray") {
+    res.writeHead(308, {
+      Location: "/bookray/",
+      "Cache-Control": "no-store"
+    });
+    return res.end();
+  }
+
+  if (pathname === "/bookray/") {
+    return sendFile(req, res, path.join(ROOT_DIR, "bookray", "index.html"), {
+      cacheControl: "no-store",
+      templateVars,
+    });
+  }
 
   const isHotelStaticRoute = pathname === "/ashotelaria/app" || pathname === "/ashotelaria/app/"
     || pathname === "/czs-labs/ashotelaria" || pathname === "/czs-labs/ashotelaria/"

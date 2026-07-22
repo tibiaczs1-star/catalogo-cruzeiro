@@ -1,5 +1,82 @@
-window.NEWS_ARCHIVE_TOTAL = 481;
+window.NEWS_ARCHIVE_TOTAL = 482;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-modelo-cruzeirense-lanca-seu-book-online-confira",
+    "slug": "modelo-cruzeirense-lanca-seu-book-online-confira",
+    "title": "Modelo cruzeirense lança seu book online — confira",
+    "seoTitle": "Modelo cruzeirense lança seu book online — confira | Catálogo CZS",
+    "seoDescription": "A modelo cruzeirense Raiane Leoncio, de 17 anos, acaba de lançar seu novo book online. Voltado à apresentação profissional de seu trabalho como modelo de passarela, o portfólio reúne ensaios, sequências editoriais e registros em movimento em uma experiência visual criada para celular e computador. O material completo já está disponível em uma página exclusiva do Catálogo CZS.",
+    "eyebrow": "Talento local",
+    "date": "21 de jul de 2026",
+    "publishedAt": "2026-07-21T22:50:00.000-05:00",
+    "category": "Cruzeiro do Sul",
+    "categoryKey": "cruzeiro-do-sul",
+    "previewClass": "thumb-cruzeiro-do-sul",
+    "sourceName": "Raiane Leoncio / Catálogo CZS",
+    "sourceUrl": "https://catalogo-cruzeiro-web.onrender.com/bookray/",
+    "sourceLabel": "Modelo cruzeirense lança seu book online — confira",
+    "lede": "A modelo cruzeirense Raiane Leoncio, de 17 anos, acaba de lançar seu novo book online. Voltado à apresentação profissional de seu trabalho como modelo de passarela, o portfólio reúne ensaios, sequências editoriais e registros em movimento em uma experiência visual criada para celular e computador. O material completo já está disponível em uma página exclusiva do Catálogo CZS.",
+    "summary": "A modelo cruzeirense Raiane Leoncio, de 17 anos, acaba de lançar seu novo book online. Voltado à apresentação profissional de seu trabalho como modelo de passarela, o portfólio reúne ensaios, sequências editoriais e registros em movimento em uma experiência visual criada para celular e computador. O material completo já está disponível em uma página exclusiva do Catálogo CZS.",
+    "analysis": "O lançamento amplia a presença digital de talentos de Cruzeiro do Sul e oferece à modelo uma apresentação profissional acessível em qualquer tela.",
+    "highlights": [
+      "Raiane Leoncio tem 17 anos e é modelo de passarela.",
+      "O book reúne cinco capítulos visuais e registros em movimento.",
+      "A experiência foi criada para celular e computador.",
+      "O acesso ao portfólio completo é gratuito."
+    ],
+    "development": [
+      "Aos 17 anos, a modelo cruzeirense Raiane Leoncio acaba de lançar seu novo book online. O portfólio apresenta seu trabalho como modelo de passarela em uma experiência visual criada para celular e computador.",
+      "O projeto percorre cinco capítulos editoriais, combinando páginas de revista, sequências fotográficas, efeitos de profundidade e registros em movimento. As imagens são exibidas sem cortes agressivos no rosto e preservam a composição original dos ensaios.",
+      "A proposta reúne em um único endereço diferentes momentos do trabalho de Raiane, facilitando a apresentação do material ao público e aos profissionais da moda.",
+      "O book completo de Raiane Leoncio pode ser acessado gratuitamente na página exclusiva do Catálogo CZS.",
+      "Fonte: Raiane Leoncio / Catálogo CZS."
+    ],
+    "imageUrl": "bookray/assets/IMG_1127.jpeg",
+    "feedImageUrl": "bookray/assets/IMG_1127.jpeg",
+    "sourceImageUrl": "bookray/assets/IMG_1127.jpeg",
+    "imageCredit": "Foto: acervo pessoal de Raiane Leoncio",
+    "imageFocus": "center top",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 2200,
+    "editorialPriority": "jurua-talento-local",
+    "crossSources": [
+      {
+        "name": "Raiane Leoncio / Catálogo CZS",
+        "url": "https://catalogo-cruzeiro-web.onrender.com/bookray/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Modelo cruzeirense lança seu book online — confira. A modelo cruzeirense Raiane Leoncio, de 17 anos, acaba de lançar seu novo book online. Voltado à apresentação profissional de seu trabalho como modelo de passarela, o portfólio reúne ensaios, sequências editoriais e registros em movimento em uma experiência visual criada para celular e computador. O material completo já está disponível em uma página exclusiva do Catálogo CZS.",
+    "audioNarrationTranscript": "Modelo cruzeirense lança seu book online — confira. A modelo cruzeirense Raiane Leoncio, de 17 anos, acaba de lançar seu novo book online. Voltado à apresentação profissional de seu trabalho como modelo de passarela, o portfólio reúne ensaios, sequências editoriais e registros em movimento em uma experiência visual criada para celular e computador. O material completo já está disponível em uma página exclusiva do Catálogo CZS.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "A modelo cruzeirense Raiane Leoncio, de 17 anos, acaba de lançar seu novo book online. Voltado à apresentação profissional de seu trabalho como modelo de passarela, o portfólio reúne ensaios, sequências editoriais e registros em movimento em uma experiência visual criada para celular e computador. O material completo já está disponível em uma página exclusiva do Catálogo CZS. Fonte: Raiane Leoncio / Catálogo CZS.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Raiane Leoncio em ensaio fotográfico de seu book online",
+      "caption": "Modelo cruzeirense lança seu book online — confira",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Aos 17 anos, a modelo cruzeirense Raiane Leoncio acaba de lançar seu novo book online. O portfólio apresenta seu trabalho como modelo de passarela em uma experiência visual criada para celular e computador.",
+      "O projeto percorre cinco capítulos editoriais, combinando páginas de revista, sequências fotográficas, efeitos de profundidade e registros em movimento. As imagens são exibidas sem cortes agressivos no rosto e preservam a composição original dos ensaios.",
+      "A proposta reúne em um único endereço diferentes momentos do trabalho de Raiane, facilitando a apresentação do material ao público e aos profissionais da moda.",
+      "O book completo de Raiane Leoncio pode ser acessado gratuitamente na página exclusiva do Catálogo CZS.",
+      "Fonte: Raiane Leoncio / Catálogo CZS."
+    ]
+  },
   {
     "id": "manual-czs-tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",
     "slug": "tjac-rejeita-recurso-ilderlei-mantem-decisao-primeira-instancia",

@@ -66,6 +66,12 @@ function findDuplicate(items, config) {
 
 function buildItem(config) {
   const sourceLine = `Fonte: ${config.sourceName}.`;
+  const body = Array.isArray(config.body) && config.body.length
+    ? config.body.map(String).filter(Boolean)
+    : [config.summary, sourceLine];
+  const highlights = Array.isArray(config.highlights)
+    ? config.highlights.map(String).filter(Boolean)
+    : [];
   return {
     id: `manual-czs-${config.slug}`,
     slug: config.slug,
@@ -83,9 +89,9 @@ function buildItem(config) {
     sourceLabel: config.title,
     lede: config.summary,
     summary: config.summary,
-    analysis: "",
-    highlights: [],
-    development: [config.summary, sourceLine],
+    analysis: String(config.analysis || ""),
+    highlights,
+    development: body,
     imageUrl: config.imageUrl,
     feedImageUrl: config.imageUrl,
     sourceImageUrl: config.imageUrl,
@@ -119,7 +125,7 @@ function buildItem(config) {
       raylVoice: "raiane-francisca-whatsapp-normal",
       hasVideoCaptionText: true
     },
-    body: [config.summary, sourceLine]
+    body
   };
 }
 
