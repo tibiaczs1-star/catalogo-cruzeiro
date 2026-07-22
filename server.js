@@ -212,8 +212,8 @@ const DEFAULT_SITE_DESCRIPTION =
   "Jornal agregador local de Cruzeiro do Sul e Vale do Jurua, com editorias, arquivo mensal, resumos originais e links para as fontes.";
 const DEFAULT_OG_IMAGE_PATH = "/assets/og-cover.svg";
 const DEFAULT_PUBLISHER_LOGO_PATH = "/assets/favicon-512x512.png";
-const RAYL_NEWS_VOICE_ID = "raiane-francisca-whatsapp-normal";
-const RAYL_NEWS_VOICE_NAME = "RAIane Francisca WhatsApp normal";
+const RAYL_NEWS_VOICE_ID = "rayl-francisca-whatsapp-normal";
+const RAYL_NEWS_VOICE_NAME = "RAyL Francisca WhatsApp normal";
 const RAYL_NEWS_VOICE_ENGINE = "edge-tts";
 const RAYL_NEWS_VOICE_MODEL = "pt-BR-FranciscaNeural";
 const RAYL_NEWS_VOICE_SAMPLE_URL = "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3";
@@ -7278,7 +7278,7 @@ function buildRaylNarrationTextForArticle(item = {}) {
   const source = prepareRaylNarrationText(item.sourceName || item.source || item.sourceLabel || "fonte monitorada", 80);
   return prepareRaylNarrationText(
     [
-      "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul.",
+      "Boa tarde. Eu sou a RAyL, do Catálogo CZS.",
       `Agora no catálogo: notícia de ${category}.`,
       title,
       summary && summary !== title ? summary : "",

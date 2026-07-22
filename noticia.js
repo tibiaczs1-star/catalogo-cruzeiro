@@ -1347,8 +1347,8 @@ const renderArticleAudioAndCaption = (article = {}) => {
   if (audioReaderNode && audioReaderTextNode && narrationText) {
     audioReaderTextNode.textContent = narrationText;
     audioReaderNode.hidden = false;
-    audioReaderNode.dataset.voice = article.audioNarrationVoice || "raiane-francisca-whatsapp-normal";
-    audioReaderNode.dataset.voiceName = article.audioNarrationVoiceName || "RAIane Francisca WhatsApp normal";
+    audioReaderNode.dataset.voice = article.audioNarrationVoice || "rayl-francisca-whatsapp-normal";
+    audioReaderNode.dataset.voiceName = article.audioNarrationVoiceName || "RAyL Francisca WhatsApp normal";
     if (audioPlayButton) audioPlayButton.onclick = () => playArticleNarration(narrationText, article);
     if (audioStopButton) audioStopButton.onclick = stopArticleNarration;
   } else if (audioReaderNode) {

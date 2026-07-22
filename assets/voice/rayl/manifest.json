@@ -1,13 +1,13 @@
 {
-  "activeVoiceId": "raiane-francisca-whatsapp-normal",
-  "activeVoiceName": "RAIane Francisca WhatsApp normal",
+  "activeVoiceId": "rayl-francisca-whatsapp-normal",
+  "activeVoiceName": "RAyL Francisca WhatsApp normal",
   "language": "pt-BR",
   "engine": "edge-tts",
   "model": "pt-BR-FranciscaNeural",
   "sampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
   "style": "mulher jovem brasileira convencional, educada, prestativa, ritmo de WhatsApp, sem velocidade exagerada",
   "useFor": [
-    "RAIane helper",
+    "RAyL helper",
     "noticias do Catalogo CZS",
     "noticias e roteiros para Instagram",
     "transcricao de narracao",

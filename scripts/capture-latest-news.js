@@ -11,8 +11,8 @@ const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const FALLBACK_DIR = path.join(ROOT_DIR, "assets", "news-fallbacks");
-const RAYL_NEWS_VOICE_ID = "raiane-francisca-whatsapp-normal";
-const RAYL_NEWS_VOICE_NAME = "RAIane Francisca WhatsApp normal";
+const RAYL_NEWS_VOICE_ID = "rayl-francisca-whatsapp-normal";
+const RAYL_NEWS_VOICE_NAME = "RAyL Francisca WhatsApp normal";
 const RAYL_NEWS_VOICE_ENGINE = "edge-tts";
 const RAYL_NEWS_VOICE_MODEL = "pt-BR-FranciscaNeural";
 const RAYL_NEWS_VOICE_SAMPLE_URL = "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3";
@@ -405,7 +405,7 @@ function buildNewsAudioNarrationText(item = {}) {
   const category = prepareBrazilianNarrationText(item.category || item.eyebrow || "notícia", 60);
   return prepareBrazilianNarrationText(
     [
-      "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul.",
+      "Boa tarde. Eu sou a RAyL, do Catálogo CZS.",
       `Agora no catálogo: notícia de ${category}.`,
       title,
       summary && summary !== title ? summary : "",
