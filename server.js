@@ -7229,6 +7229,8 @@ function isMailzaPriorityArticle(item = {}) {
 
 function prepareRaylNarrationText(value = "", maxLength = 950) {
   const replacements = [
+    [/\bRAIane\b/gi, "RAyL"],
+    [/\bRAiane\b/gi, "RAyL"],
     [/\bCZS\b/g, "Catálogo Cruzeiro do Sul"],
     [/\bCatalogo\b/g, "Catálogo"],
     [/\bnoticia\b/gi, "notícia"],
@@ -7321,6 +7323,13 @@ function normalizeArticleRecord(item) {
     lede: cleanLede,
     summary: cleanSummary
   });
+  const storedVoice = String(item.audioNarrationVoice || "").trim();
+  const storedVoiceName = String(item.audioNarrationVoiceName || "").trim();
+  const usesLegacyRaylVoice =
+    !storedVoice ||
+    storedVoice === "pt-BR-female-browser-tts" ||
+    storedVoice === "raiane-francisca-whatsapp-normal" ||
+    /^(RAIane|RAiane) Francisca WhatsApp normal$/i.test(storedVoiceName);
 
   return {
     id: item.id || slug || sourceUrl || title,
@@ -7360,14 +7369,17 @@ function normalizeArticleRecord(item) {
     audioNarrationTranscript: prepareRaylNarrationText(
       item.audioNarrationTranscript || item.audioNarrationText || raylNarrationText
     ),
-    audioNarrationVoice:
-      !item.audioNarrationVoice || item.audioNarrationVoice === "pt-BR-female-browser-tts"
-        ? RAYL_NEWS_VOICE_ID
-        : item.audioNarrationVoice,
-    audioNarrationVoiceName: item.audioNarrationVoiceName || RAYL_NEWS_VOICE_NAME,
-    audioNarrationVoiceEngine: item.audioNarrationVoiceEngine || RAYL_NEWS_VOICE_ENGINE,
-    audioNarrationVoiceModel: item.audioNarrationVoiceModel || RAYL_NEWS_VOICE_MODEL,
-    audioNarrationVoiceSampleUrl: item.audioNarrationVoiceSampleUrl || RAYL_NEWS_VOICE_SAMPLE_URL,
+    audioNarrationVoice: usesLegacyRaylVoice ? RAYL_NEWS_VOICE_ID : storedVoice,
+    audioNarrationVoiceName: usesLegacyRaylVoice ? RAYL_NEWS_VOICE_NAME : storedVoiceName || RAYL_NEWS_VOICE_NAME,
+    audioNarrationVoiceEngine: usesLegacyRaylVoice
+      ? RAYL_NEWS_VOICE_ENGINE
+      : item.audioNarrationVoiceEngine || RAYL_NEWS_VOICE_ENGINE,
+    audioNarrationVoiceModel: usesLegacyRaylVoice
+      ? RAYL_NEWS_VOICE_MODEL
+      : item.audioNarrationVoiceModel || RAYL_NEWS_VOICE_MODEL,
+    audioNarrationVoiceSampleUrl: usesLegacyRaylVoice
+      ? RAYL_NEWS_VOICE_SAMPLE_URL
+      : item.audioNarrationVoiceSampleUrl || RAYL_NEWS_VOICE_SAMPLE_URL,
     audioNarrationLanguage: item.audioNarrationLanguage || "pt-BR",
     audioNarrationStatus:
       !item.audioNarrationStatus || item.audioNarrationStatus === "ready-client-side"
