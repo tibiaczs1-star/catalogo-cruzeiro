@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071426"><meta name="description" content="Experiências com 2 headsets Meta Quest no Shopping Copacabana e em festas e eventos.">
+  <title>QUESTFEST — experiências Meta Quest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body data-mode="adult" data-theme="zero">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="noise" aria-hidden="true"></div><div class="cursor-orb" aria-hidden="true"></div>
+
+  <section class="experience-gate" id="experience-gate" aria-labelledby="gate-title">
+    <div class="gate-grid" aria-hidden="true"></div><div class="gate-glow glow-a" aria-hidden="true"></div><div class="gate-glow glow-b" aria-hidden="true"></div>
+    <p class="gate-brand"><b>Q</b> QUESTFEST <span>REALIDADE VIRTUAL + MISTA</span></p>
+    <div class="headset-scene" aria-hidden="true"><div class="headset-halo"></div><img src="assets/quest-headset-portal.png" alt=""><i class="orbit orbit-a"></i><i class="orbit orbit-b"></i></div>
+    <div class="gate-copy"><p>2 APARELHOS · MUITOS MUNDOS</p><h1 id="gate-title">Qual experiência<br><em>combina com você?</em></h1><span>Escolha um universo. Você pode trocar quando quiser.</span></div>
+    <div class="mode-choices" role="group" aria-label="Escolha seu tipo de experiência">
+      <button data-mode="kids" aria-pressed="false"><small>01 · COLORIDO E ACOLHEDOR</small><i>Kids</i><span>Jogos, aventuras e descobertas →</span></button>
+      <button data-mode="adult" aria-pressed="true"><small>02 · AÇÃO E IMERSÃO</small><i>Jovem / Adulto</i><span>Desafios, terror e competição →</span></button>
+    </div>
+    <p class="gate-proof"><b>SHOPPING COPACABANA</b><span>A partir de <strong>R$ 10</strong> por experiência</span></p>
+  </section>
+
+  <header class="site-header" id="topo"><a class="brand" href="#topo"><span>Q</span>QUESTFEST</a><nav><a href="#experiencia">Experiência</a><a href="#jogos">Jogos</a><a href="#pacotes">Como contratar</a></nav><button class="mode-switch" data-switch-mode aria-label="Trocar experiência">KIDS ↔ ADULTO</button><a class="mini-cta" href="#orcamento">RESERVAR ↗</a></header>
+
+  <main id="conteudo" aria-live="polite">
+    <section class="world-stage" data-experience="kids" aria-labelledby="kids-title">
+      <video class="world-video active" autoplay muted loop playsinline poster="assets/world-dream.png"><source src="assets/world-dream.mp4" type="video/mp4"></video>
+      <div class="world-shade"></div><div class="light-beam"></div><div class="kids-stickers" aria-hidden="true"><b>★</b><b>✦</b><b>●</b></div>
+      <div class="hero-copy"><p class="eyebrow">VR KIDS · SHOPPING COPACABANA</p><h1 id="kids-title">Diversão que<br><em>vira memória.</em></h1><p>Experiências rápidas de realidade virtual e mista, com orientação em cada etapa — no shopping ou na sua festa.</p><div class="hero-actions"><a class="button primary" href="#shopping">EXPERIMENTAR POR R$ 10 ↗</a><a class="button ghost" href="#orcamento">LEVAR PARA UMA FESTA</a></div></div>
+      <aside class="capacity-card"><small>NOSSA ESTRUTURA</small><strong>2</strong><span>aparelhos disponíveis</span><p>Rodízio organizado para a turma toda participar.</p></aside>
+    </section>
+
+    <section class="world-stage adult-stage" data-experience="adult" aria-labelledby="adult-title">
+      <div class="world-media" aria-hidden="true"><video class="world-video active" autoplay muted loop playsinline poster="assets/world-zero.png"><source src="assets/world-zero.mp4" type="video/mp4"></video><video class="world-video" muted loop playsinline poster="assets/world-beat.png"><source src="assets/world-beat.mp4" type="video/mp4"></video><video class="world-video" muted loop playsinline poster="assets/world-dream.png"><source src="assets/world-dream.mp4" type="video/mp4"></video></div>
+      <canvas id="portal-canvas" aria-hidden="true"></canvas><div class="world-shade"></div><div class="light-beam"></div>
+      <div class="hero-copy"><p class="eyebrow">MODO JOVEM / ADULTO · 2 META QUEST</p><h1 id="adult-title">Sua sala vira arena.<br><em>Seu evento vira história.</em></h1><p>Realidade virtual e mista para aniversários, noites gamer, encontros e ativações — com ação, desafio e torcida.</p><div class="hero-actions"><a class="button primary" href="#orcamento">MONTAR MEU EVENTO ↗</a><a class="button ghost" href="#jogos">VER EXPERIÊNCIAS</a></div></div>
+      <div class="world-switcher" role="group" aria-label="Escolha um ambiente"><button class="active" data-world="0" aria-pressed="true">01 MISSÃO</button><button data-world="1" aria-pressed="false">02 RITMO</button><button data-world="2" aria-pressed="false">03 MISTA</button><i class="world-progress"><span></span></i></div>
+    </section>
+
+    <section class="shopping section" id="shopping"><div class="price-block"><p>JOGUE AGORA</p><h2>No Shopping<br>Copacabana.</h2><span>Escolha a experiência, ajuste o headset e entre no jogo.</span></div><div class="price"><small>A PARTIR DE</small><strong>R$ 10</strong><b>POR EXPERIÊNCIA</b><a class="button dark" href="#orcamento">QUERO EXPERIMENTAR ↗</a></div></section>
+
+    <section class="manifesto section" id="experiencia"><p class="section-index">01 / O QUE LEVAMOS</p><div class="split-title"><h2>Dois portais.<br><em>Uma atração completa.</em></h2><p>Levamos nossos 2 headsets Meta Quest, selecionamos os jogos para o perfil do público, orientamos cada participante e organizamos o rodízio. Quando a estrutura permitir, a visão do jogador pode aparecer em uma tela para a torcida acompanhar.</p></div><div class="fact-strip"><span><b>2</b> pessoas jogando por rodada</span><span><b>MR</b> o digital entra no ambiente real</span><span><b>360°</b> liberdade para olhar e explorar</span></div></section>
+
+    <section class="game-section section" id="jogos"><p class="section-index">02 / ESCOLHA A ENERGIA</p><div class="split-title"><h2>Muitos jogos.<br><em>O público certo.</em></h2><p>O catálogo é combinado antes da reserva conforme idade, espaço, disponibilidade e intensidade desejada.</p></div><div class="game-deck">
+      <article class="game-card kids-card tilt"><video autoplay muted loop playsinline poster="assets/world-dream.png"><source src="assets/world-dream.mp4" type="video/mp4"></video><div><small>KIDS · FAMÍLIA</small><h3>Aventuras coloridas</h3><p>Descoberta, criatividade, esportes e desafios fáceis de aprender.</p></div></article>
+      <article class="game-card adult-card tilt"><video autoplay muted loop playsinline poster="assets/world-zero.png"><source src="assets/world-zero.mp4" type="video/mp4"></video><div><small>JOVEM / ADULTO · AÇÃO</small><h3>Resident Evil 4 VR</h3><p>Campanha de terror e ação para público compatível. Sujeito à classificação indicativa e disponibilidade.</p></div></article>
+      <article class="game-card all-card tilt"><video autoplay muted loop playsinline poster="assets/world-beat.png"><source src="assets/world-beat.mp4" type="video/mp4"></video><div><small>TODOS · COMPETIÇÃO</small><h3>Ritmo, esporte e torcida</h3><p>Partidas rápidas, placar informal e muita vontade de jogar de novo.</p></div></article>
+    </div></section>
+
+    <section class="how section" id="como-funciona"><p class="section-index">03 / COMO FUNCIONA</p><div class="steps"><article><b>01</b><h3>Escolha</h3><p>No shopping, na festa ou no evento.</p></article><article><b>02</b><h3>Ajustamos</h3><p>Orientação e headset configurado.</p></article><article><b>03</b><h3>Você joga</h3><p>Uma pessoa por aparelho, até 2 por rodada.</p></article><article><b>04</b><h3>A turma vibra</h3><p>Rodízio claro para manter o fluxo.</p></article></div></section>
+
+    <section class="packages section" id="pacotes"><p class="section-index">04 / FORMATOS REAIS</p><div class="format-grid"><article><small>PASSAGEM RÁPIDA</small><h3>Experiência no shopping</h3><p>Uma entrada simples no universo VR, a partir de R$ 10 por experiência.</p><a href="#orcamento">CONSULTAR AGORA →</a></article><article class="featured"><small>SEU ESPAÇO, OUTRA REALIDADE</small><h3>Festas e aniversários</h3><p>2 headsets, seleção de jogos, orientação e rodízio planejado para os convidados.</p><a href="#orcamento">PEDIR ORÇAMENTO →</a></article><article><small>ENERGIA DE EQUIPE</small><h3>Noite gamer e eventos</h3><p>Desafios para amigos, empresas e ativações, dimensionados para o tempo disponível.</p><a href="#orcamento">MONTAR FORMATO →</a></article></div></section>
+
+    <section class="builder section" id="orcamento"><div><p class="section-index">05 / RESERVE SUA EXPERIÊNCIA</p><h2>Onde você quer<br><em>abrir o portal?</em></h2><p>Preencha o básico. O site prepara uma mensagem para consultar disponibilidade e valor.</p></div><form id="event-form" class="event-form"><label>Formato<select id="event-type"><option>Experiência no Shopping</option><option>Festa ou aniversário</option><option>Noite gamer</option><option>Empresa ou ativação</option></select></label><label>Público<select id="audience"><option>Kids / família</option><option>Jovem / adulto</option><option>Misto</option></select></label><label>Participantes<input id="guests" type="range" min="1" max="100" value="20"><output id="guest-output">20 pessoas</output></label><div class="estimate"><span>ESTRUTURA DISPONÍVEL</span><strong id="recommended-plan">2 META QUEST · RODÍZIO ASSISTIDO</strong><small id="estimate-copy">Até 2 pessoas jogam por rodada.</small></div><button class="button primary wide" type="submit">PREPARAR PEDIDO ↗</button></form></section>
+  </main>
+
+  <footer><a class="brand" href="#topo"><span>Q</span>QUESTFEST</a><p>Experiências Meta Quest no shopping, em festas e eventos.</p><small>Serviço independente, sem vínculo com a Meta Platforms. Jogos e formatos sujeitos à disponibilidade e classificação indicativa.</small></footer>
+  <dialog id="contact-modal" aria-labelledby="modal-title"><button class="modal-close" aria-label="Fechar">×</button><p class="eyebrow">PEDIDO CONFIGURADO</p><h2 id="modal-title">Pronto para consultar.</h2><p id="modal-summary"></p><textarea id="message-preview" rows="6" readonly></textarea><button class="button primary wide" id="copy-message">COPIAR MENSAGEM</button></dialog>
+  <dialog id="reel-modal"><button class="modal-close" aria-label="Fechar">×</button><video controls muted loop playsinline poster="assets/questfest-hero.png"><source src="assets/questfest-loop.mp4" type="video/mp4"></video></dialog>
+</body></html>

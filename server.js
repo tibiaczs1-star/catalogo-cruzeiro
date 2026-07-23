@@ -20952,6 +20952,13 @@ function handleStatic(req, res, pathname, requestUrl) {
     });
   }
 
+  if (pathname === "/metafest" || pathname === "/metafest/") {
+    return sendFile(req, res, path.join(ROOT_DIR, "metafest", "index.html"), {
+      cacheControl: "no-store",
+      templateVars
+    });
+  }
+
   if (pathname === "/pubpaid-v2.html") {
     res.writeHead(302, {
       Location: `/pubpaid.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
