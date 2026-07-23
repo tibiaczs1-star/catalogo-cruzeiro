@@ -9,11 +9,6 @@
     "rayx": "rayx/bin/rayx.js"
   },
   "scripts": {
-    "test": "node --test ashotelaria/__tests__/*.test.js",
-    "ashotelaria:test": "node --test ashotelaria/__tests__/*.test.js",
-    "ashotelaria:migrate": "node ashotelaria/migrate.js",
-    "ashotelaria:start": "node ashotelaria-standalone.js",
-    "ashotelaria:check": "node --check ashotelaria-standalone.js && node --check ashotelaria/standalone-server.js && node --check ashotelaria/http.js && node --check ashotelaria/auth.js && node --check ashotelaria-app/app.js && node --check ashotelaria-app/booking.js",
     "agents:cycle": "node scripts/agents-autonomy-cycle.js --once",
     "agents:daemon": "node scripts/agents-autonomy-cycle.js --daemon",
     "agents:run": "node scripts/real-agents-runtime.js",
@@ -26,7 +21,7 @@
     "memory:ensure": "node scripts/codex-memory.js ensure",
     "memory:status": "node scripts/codex-memory.js status",
     "ollama:proxy": "node scripts/ollama-secure-proxy.js",
-    "ollama:render:tunnel": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-ollama-render-tunnel.ps1",
+    "ollama:render:tunnel": "node scripts/ollama-render-tunnel.js --deploy",
     "perf:budget": "node scripts/performance-budget-check.js",
     "guard:pubpaid": "node scripts/guard-pubpaid-no-canvas.js",
     "hermes:office:brief": "node scripts/hermes-office-bridge.js brief",
@@ -46,7 +41,7 @@
     "hermes:render:services": "node scripts/render-api-bridge.js services",
     "hermes:render:status": "node scripts/render-api-bridge.js status",
     "hydrate:source-screenshots": "node scripts/hydrate-source-screenshots.js",
-    "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/audit-news-image-relevance.js && node scripts/review-team-audit.js",
+    "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
     "rayx": "node rayx/bin/rayx.js",
     "rayx:boot": "node rayx/core/boot.js",
     "rayx:catalog": "node rayx/core/catalog.js",
@@ -73,7 +68,6 @@
   "dependencies": {
     "chess.js": "^1.4.0",
     "pdfkit": "^0.17.2",
-    "pg": "^8.22.0",
     "phaser": "^3.90.0",
     "qrcode": "^1.5.4"
   },
