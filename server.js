@@ -20651,8 +20651,36 @@ function handleStatic(req, res, pathname, requestUrl) {
   }
 
   if (pathname === "/sitemap.xml") {
-    return sendXml(res, 200, buildSitemapXml(req));
-  }
+       return sendXml(res, 200, buildSitemapXml(req));
+     }
+
+     if (pathname.startsWith("/bookray/")) {
+       const filePath = path.join(ROOT_DIR, "bookray", pathname.slice(1));
+       return sendFile(req, res, filePath, {
+         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
+
+     if (pathname.startsWith("/ashotelaria/")) {
+       const filePath = path.join(ROOT_DIR, "ashotelaria-app", pathname.slice(1));
+       return sendFile(req, res, filePath, {
+         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
+
+     if (pathname.startsWith("/questfest/")) {
+       const filePath = path.join(ROOT_DIR, "questfest", pathname.slice(1));
+       return sendFile(req, res, filePath, {
+         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
+
+     if (pathname.startsWith("/reservar/")) {
+       const filePath = path.join(ROOT_DIR, "reservar", pathname.slice(1));
+       return sendFile(req, res, filePath, {
+         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
 
   if (pathname === "/ninjas.html" || pathname === "/escritorio-ninjas.html") {
     return sendText(res, 410, "Serviço indisponível.");
