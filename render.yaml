@@ -59,6 +59,12 @@ services:
         sync: false
       - key: SPRITE_CHECK_PASSWORD
         sync: false
+      - key: ASHOTELARIA_ENABLED
+        value: "true"
+      - key: ASHOTELARIA_DATABASE_URL
+        sync: false
+      - key: ASHOTELARIA_SESSION_SECRET
+        sync: false
       - key: POLL_ADMIN_PASSWORD
         sync: false
       - key: GOOGLE_AUTH_CLIENT_ID
@@ -73,3 +79,7 @@ services:
         sync: false
       - key: NINJAS_MERCHANT_CITY
         sync: false
+    headers:
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 1; mode=block

@@ -20,6 +20,10 @@ const {
   reviewWithdrawal: reviewCanonicalPubpaidWithdrawal,
   withPubpaidLock: withCanonicalPubpaidLock,
 } = require("./pubpaid-runtime");
+const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
+let ashotelariaIntegration = null;
+let ashotelariaApiHandler = null;
+const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
 const vm = require("vm");
 const zlib = require("zlib");
 const { URL } = require("url");
@@ -108,6 +112,10 @@ const DEFAULT_DATA_DIR = path.join(ROOT_DIR, "data");
 const DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
   : DEFAULT_DATA_DIR;
+ashotelariaIntegration = createASHotelariaServerIntegration({
+  rootDir: ROOT_DIR,
+  sendFile,
+});
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const MAINTENANCE_FILE = path.join(ROOT_DIR, "maintenance.html");
 const ADMIN_MASTER_FILE = path.join(ROOT_DIR, "backend", "public", "admin-master.html");
@@ -7493,9 +7501,9 @@ function getEditorialFocusScore(item = {}) {
 }
 
 function sortArticleItems(left, right) {
-  const dateLayerDiff = getPublicNewsDayTimestamp(right) - getPublicNewsDayTimestamp(left);
-  if (dateLayerDiff !== 0) {
-    return dateLayerDiff;
+  const timestampDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+  if (timestampDiff !== 0) {
+    return timestampDiff;
   }
 
   const spotlightReadyDiff =
@@ -7518,7 +7526,7 @@ function sortArticleItems(left, right) {
   const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
   if (priorityDiff !== 0) return priorityDiff;
 
-  return getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+  return getPublicNewsDayTimestamp(right) - getPublicNewsDayTimestamp(left);
 }
 
 function getArticleRecordQualityScore(item = {}) {
@@ -16790,6 +16798,28 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
+  if (ASHOTELARIA_ENABLED && pathname.startsWith("/api/ashotelaria/v1")) {
+    if (!ashotelariaApiHandler) {
+      const { createStore: createASHotelariaStore } = require("./ashotelaria/store");
+      const { createAuthService: createASHotelariaAuth } = require("./ashotelaria/auth");
+      const { createASHotelariaHandler: createASHotelariaHttpHandler } = require("./ashotelaria/http");
+      const store = createASHotelariaStore({ connectionString: process.env.ASHOTELARIA_DATABASE_URL });
+      const authService = createASHotelariaAuth({
+        store,
+        config: {
+          sessionSecret: process.env.ASHOTELARIA_SESSION_SECRET,
+          environment: process.env,
+        },
+      });
+      ashotelariaApiHandler = createASHotelariaHttpHandler({
+        store,
+        authService,
+        config: { production: process.env.NODE_ENV === "production" },
+      });
+    }
+    return ashotelariaApiHandler(req, res);
+  }
+
   if (pathname === "/health") {
     return sendJson(res, 200, { ok: true, service: "catalogo-cruzeiro", time: new Date().toISOString() });
   }
@@ -20637,7 +20667,7 @@ async function handleApi(req, res, pathname, searchParams) {
   return sendJson(res, 404, { ok: false, message: "Rota não encontrada." });
 }
 
-function handleStatic(req, res, pathname, requestUrl) {
+async function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
 
   if (pathname === "/robots.txt") {
@@ -20654,29 +20684,57 @@ function handleStatic(req, res, pathname, requestUrl) {
        return sendXml(res, 200, buildSitemapXml(req));
      }
 
-     if (pathname.startsWith("/bookray/")) {
-       const filePath = path.join(ROOT_DIR, "bookray", pathname.slice(1));
+      if (ashotelariaIntegration && ASHOTELARIA_ENABLED) {
+        const handled = await ashotelariaIntegration.handle(req, res, pathname);
+        if (handled) return;
+      }
+
+      if (pathname === "/questfest") {
+        res.writeHead(302, {
+          Location: "/questfest/",
+          "Cache-Control": "no-store"
+        });
+        return res.end();
+      }
+
+      if (pathname.startsWith("/bookray/")) {
+        const filePath = path.join(ROOT_DIR, "bookray", pathname.slice("/bookray/".length));
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
      }
 
      if (pathname.startsWith("/ashotelaria/")) {
-       const filePath = path.join(ROOT_DIR, "ashotelaria-app", pathname.slice(1));
+        const filePath = path.join(ROOT_DIR, "ashotelaria-app", pathname.slice("/ashotelaria/".length));
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
      }
 
      if (pathname.startsWith("/questfest/")) {
-       const filePath = path.join(ROOT_DIR, "questfest", pathname.slice(1));
+        const filePath = path.join(ROOT_DIR, "questfest", pathname.slice("/questfest/".length));
+       return sendFile(req, res, filePath, {
+         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
+
+     if (pathname === "/metafest") {
+       res.writeHead(302, {
+         Location: "/metafest/",
+         "Cache-Control": "no-store"
+       });
+       return res.end();
+     }
+
+     if (pathname.startsWith("/metafest/")) {
+        const filePath = path.join(ROOT_DIR, "metafest", pathname.slice("/metafest/".length));
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
      }
 
      if (pathname.startsWith("/reservar/")) {
-       const filePath = path.join(ROOT_DIR, "reservar", pathname.slice(1));
+        const filePath = path.join(ROOT_DIR, "reservar", pathname.slice("/reservar/".length));
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });

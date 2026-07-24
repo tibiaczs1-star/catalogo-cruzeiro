@@ -1723,15 +1723,7 @@
   function renderReaderArticle(story) {
     const paragraphs = articleParagraphs(story);
     if (!paragraphs.length) return "";
-    return paragraphs.map((p, index) => {
-      const paragraph = `<p>${esc(p)}</p>`;
-      const shouldInsertAd = paragraphs.length > 4 ? index === 2 : index === 0;
-      if (shouldInsertAd) {
-        const ad = sponsorAdFor("article", index);
-        return `${paragraph}<aside class="v8-in-article-ad v8-norte-inline-ad" data-v8-ad-id="${esc(ad.id)}" data-v8-ad-format="${esc(ad.format)}"><a class="v8-inline-ad-media" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">${sponsorImageMarkup(ad)}</a><a class="small-btn" href="${NORTE_SPONSOR_HREF}" target="_blank" rel="noopener">Contratar internet</a></aside>`;
-      }
-      return paragraph;
-    }).join("");
+    return paragraphs.map((p) => `<p>${esc(p)}</p>`).join("");
   }
 
   function genericReaderParagraph(text) {
