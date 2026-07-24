@@ -20698,21 +20698,30 @@ async function handleStatic(req, res, pathname, requestUrl) {
       }
 
       if (pathname.startsWith("/bookray/")) {
-        const filePath = path.join(ROOT_DIR, "bookray", pathname.slice("/bookray/".length));
-       return sendFile(req, res, filePath, {
-         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
-       });
-     }
+        let filePath = path.join(ROOT_DIR, "bookray", pathname.slice("/bookray/".length));
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+          filePath = path.join(filePath, "index.html");
+        }
+        return sendFile(req, res, filePath, {
+          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+        });
+      }
 
      if (pathname.startsWith("/ashotelaria/")) {
-        const filePath = path.join(ROOT_DIR, "ashotelaria-app", pathname.slice("/ashotelaria/".length));
+       let filePath = path.join(ROOT_DIR, "ashotelaria-app", pathname.slice("/ashotelaria/".length));
+       if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+         filePath = path.join(filePath, "index.html");
+       }
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
      }
 
      if (pathname.startsWith("/questfest/")) {
-        const filePath = path.join(ROOT_DIR, "questfest", pathname.slice("/questfest/".length));
+       let filePath = path.join(ROOT_DIR, "questfest", pathname.slice("/questfest/".length));
+       if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+         filePath = path.join(filePath, "index.html");
+       }
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
@@ -20727,14 +20736,20 @@ async function handleStatic(req, res, pathname, requestUrl) {
      }
 
      if (pathname.startsWith("/metafest/")) {
-        const filePath = path.join(ROOT_DIR, "metafest", pathname.slice("/metafest/".length));
+       let filePath = path.join(ROOT_DIR, "metafest", pathname.slice("/metafest/".length));
+       if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+         filePath = path.join(filePath, "index.html");
+       }
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
      }
 
      if (pathname.startsWith("/reservar/")) {
-        const filePath = path.join(ROOT_DIR, "reservar", pathname.slice("/reservar/".length));
+       let filePath = path.join(ROOT_DIR, "reservar", pathname.slice("/reservar/".length));
+       if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+         filePath = path.join(filePath, "index.html");
+       }
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
