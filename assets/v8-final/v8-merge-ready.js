@@ -4926,7 +4926,7 @@
     const introRequested = params.get("forceIntro") === "1" || params.get("intro") === "1";
     const forceIntro = introRequested;
     const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Rio_Branco" });
-    const skipIntro = params.get("skipIntro") === "1" || !introRequested;
+    const skipIntro = params.get("skipIntro") === "1";
     let seenIntro = false;
     try {
       seenIntro = localStorage.getItem(INTRO_DAILY_KEY) === today;

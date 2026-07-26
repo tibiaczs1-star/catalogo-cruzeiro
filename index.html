@@ -14,10 +14,10 @@
   var dailyKey="czs-v8-intro-last-open-day";
   var today=new Date().toLocaleDateString("en-CA",{timeZone:"America/Rio_Branco"});
   var requested=params.get("forceIntro")==="1"||params.get("intro")==="1";
-  var skip=params.get("skipIntro")==="1"||!requested;
+  var disabled=params.get("skipIntro")==="1";
   var seenToday=false;
   try{seenToday=localStorage.getItem(dailyKey)===today}catch(_){}
-  var showIntro=!skip&&requested;
+  var showIntro=!disabled&&(requested||!seenToday);
   function release(){root.classList.remove("czs-intro-lock");root.classList.add("czs-intro-release");if(showIntro){try{localStorage.setItem(dailyKey,today)}catch(_){}}}
   window.__czsReleaseIntroLock=release;
   root.classList.add(showIntro?"czs-intro-lock":"czs-intro-release");
@@ -34,8 +34,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=20260726-intro-recovery-v2">
 </head>
-<body>
+<body class="v8-merge-ready">
 <section class="cinematic-loader cosmic-loader" id="cinematicLoader" aria-label="Carregando Catálogo Cruzeiro do Sul" data-progress="0" data-stage="prelude">
   <div class="cosmic-depth depth-a" aria-hidden="true"></div>
   <div class="cosmic-depth depth-b" aria-hidden="true"></div>
@@ -629,6 +630,6 @@ window.__czsLegacyInlineLoaderSkipped = true;
 
 initFooterReveal();
 </script>
-  <script defer src="assets/v8-final/v8-merge-ready.js?v=20260717-floating-icons-v17"></script>
+  <script defer src="assets/v8-final/v8-merge-ready.js?v=20260726-intro-recovery-v2"></script>
 </body>
 </html>

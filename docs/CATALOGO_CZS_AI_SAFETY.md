@@ -12,7 +12,7 @@ Este arquivo é obrigatório para qualquer IA, automação ou pessoa que altere 
 ## 2. Contrato público que não pode quebrar
 
 - `/` abre diretamente o portal regional completo, com `home.css` existente e rastreado pelo Git.
-- A abertura cinematográfica só aparece quando solicitada explicitamente por `?intro=1` ou `?forceIntro=1`; ela nunca pode prender o acesso normal.
+- A abertura cinematográfica V8 aprovada aparece uma vez por dia (fuso `America/Rio_Branco`) no acesso normal. `?forceIntro=1` força a prévia e `?skipIntro=1` é somente atalho técnico. Preserve o CSS `assets/v8-final/v8-merge-ready.css`, a classe `body.v8-merge-ready`, o vídeo 480×480 sem corte, o botão “Clique para iniciar” e a liberação segura para o portal.
 - `/bookray` redireciona para `/bookray/`.
 - `/ashotelaria` redireciona para `/ashotelaria/`.
 - `/questfest` redireciona para `/questfest/`.

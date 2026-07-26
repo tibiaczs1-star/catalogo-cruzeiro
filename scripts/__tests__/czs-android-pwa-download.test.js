@@ -105,7 +105,7 @@ test("home usa atalhos laterais discretos para app e Instagram e convite no load
   const js = read("assets/v8-final/v8-merge-ready.js");
   const css = read("assets/v8-final/v8-merge-ready.css");
 
-  assert.match(html, /20260717-floating-icons-v17/, "cache da home deve subir para publicar os icones novos");
+  assert.match(html, /20260726-intro-recovery-v2/, "cache da home deve subir para publicar a abertura V8 restaurada");
   assert.match(js, /function installRightActionRail\(\)/);
   assert.match(js, /id = "czsRightActionRail"/);
   assert.match(js, /data-czs-action="instagram"/);
