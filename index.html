@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=20260726-intro-recovery-v2">
+<link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=20260726-news-flow-standard-v1">
 </head>
 <body class="v8-merge-ready">
 <section class="cinematic-loader cosmic-loader" id="cinematicLoader" aria-label="Carregando Catálogo Cruzeiro do Sul" data-progress="0" data-stage="prelude">
@@ -392,7 +392,8 @@ document.addEventListener('pointermove',e=>{const av=document.querySelector('.cs
 
 // FINAL_REPAIR_20260603_GOAL runtime override: top surfaces, modern article layout, public copy
 const CZS_LOW_VALUE_RE=/lei\s+org[aâ]nica|selo\s+qualidade|transpar[eê]ncia|e-saj|confer[eê]ncia\s+de\s+documentos|documentos\s+e-saj/i;
-function czsSurfaceStories(){return stories.filter(n=>!CZS_LOW_VALUE_RE.test([n.title,n.subtitle,n.summary,n.category,n.categoryKey].join(' ')));}
+function czsStoryTime(n){const raw=n.publishedAt||n.createdAt||n.updatedAt||n.date;const t=Date.parse(raw);return Number.isFinite(t)?t:0}
+function czsSurfaceStories(){return stories.filter(n=>!CZS_LOW_VALUE_RE.test([n.title,n.subtitle,n.summary,n.category,n.categoryKey].join(' '))).slice().sort((a,b)=>czsStoryTime(b)-czsStoryTime(a));}
 function czsCompactRow(n){return `<a class="story-row" href="${urlFor(n)}"><img loading="lazy" src="${esc(imgFor(n))}" alt="${esc(n.title)}" onerror="this.remove()"><div><span class="badge ${isUrgent(n)?'urgent':''}">${esc(isUrgent(n)?'Urgente':n.category||'Notícias')}</span><h3>${esc(n.title)}</h3><div class="meta"><span>${esc(n.sourceName||'CZS')}</span><span>${esc(n.date||'Atualizado')}</span></div></div></a>`}
 renderTop=function(){
   const top=czsSurfaceStories();
