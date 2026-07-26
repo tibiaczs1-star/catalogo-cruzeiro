@@ -118,13 +118,13 @@ function scanPrompts() {
   return { directory: promptDir, total: files.length, files };
 }
 
-function mergeToolFromReport(name, reportTool) {
-  const foundPath = reportTool?.path || commandPath(name);
+function mergeToolFromReport(name, reportTool, resolveMissingTools = true) {
+  const foundPath = reportTool?.path || (resolveMissingTools ? commandPath(name) : "");
   return {
     name,
     found: Boolean(reportTool?.found || foundPath),
     path: foundPath || null,
-    version: reportTool?.version || commandVersion(name, foundPath),
+    version: reportTool?.version || (resolveMissingTools ? commandVersion(name, foundPath) : null),
     source: reportTool ? "doctor" : "catalog"
   };
 }
@@ -133,8 +133,9 @@ function scanCatalog(options = {}) {
   const report = options.report || buildReport();
   const reportTools = new Map((report.tools || []).map((tool) => [tool.name, tool]));
   const names = [...new Set(TOOL_GROUPS.flatMap((group) => group.tools))];
-  const tools = names.map((name) => mergeToolFromReport(name, reportTools.get(name)));
-  const skillRoots = [
+  const resolveMissingTools = options.resolveMissingTools !== false;
+  const tools = names.map((name) => mergeToolFromReport(name, reportTools.get(name), resolveMissingTools));
+  const skillRoots = options.skillRoots || [
     path.join(os.homedir(), ".codex", "skills"),
     path.join(os.homedir(), ".codex", "plugins", "cache")
   ];

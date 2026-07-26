@@ -1,6 +1,6 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-07-26T17:06:30.657Z
+Gerado em: 2026-07-26T17:24:48.220Z
 Escopo: 360/505 itens recentes.
 
 ## Resumo
@@ -8,83 +8,65 @@ Escopo: 360/505 itens recentes.
 - Aprovacao humana exigida: 0
 - Decisoes humanas registradas: 58
 - Pendencias de fonte: 58
-- Pendencias visuais: 296
+- Pendencias visuais: 0
 - Titulos alternativos gerados: 239
 - Especiais seguros sugeridos: 60
 
 ## Pendencias tecnicas ativas para IDE
-- P0 ide-fix: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Incêndio em aparelho de ar-condicionado gera correria no Hospital Infantil de Rio Branco
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Incêndio em aparelho de ar-condicionado gera correria no Hospital Infantil de Rio Branco
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Incêndio destrói residência na zona rural de Guajará e família perde todos os bens
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Incêndio destrói residência na zona rural de Guajará e família perde todos os bens
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Homem em situação de rua morre após passar mal em Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Homem em situação de rua morre após passar mal em Rio Branco
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Jovem perde controle de motocicleta e bater em poste no interior do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Jovem perde controle de motocicleta e bater em poste no interior do Acre
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 ide-fix: Jovem é encontrado morto em calçada no bairro Mascarenha de Moraes, em Rio Branco
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Costureira é encontrada morta com mãos e pés amarrados e ferimento no pescoço, no Bujari
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Acre mantém operação na Terra Indígena Ashaninka após invasão armada
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Acre tem a 4ª maior taxa de mortes violentas da Região Norte, aponta Anuário de Segurança Pública
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Polícia impede plano de fuga e ataque a policiais no presídio de Rio Branco
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Pré-candidato Tião Bocalom escolhe o cruzeirense sargento da Polícia Militar, Adônis, para seu vice na disputa ao governo do Estado
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Polícia Civil investiga assalto a casa do jornalista Chico Melo e trabalha com a hipótese de roubo, mas nenhuma hipótese será afastada
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Polícia Civil diz que investigação sobre invasão à casa de jornalista está avançada
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Tático do 2º BPM cumpre mandado e prende mulher apontada como chefona do Conselho Final do B13
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Investigação da Polícia Civil resulta em condenação de acusados de homicídio no interior do Acre
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Chico Melo diz que atentado contra sua vida não pode ser tratado como roubo
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: MP dá 30 dias para polícia atualizar caso de agressão ao jornalista Chico Melo
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Quem era a empresária que morreu após luta contra o câncer no Acre?
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
 - Maiane Sobrinho recusa título de princesa e questiona resultado da escolha da Rainha do Rodeio 2026

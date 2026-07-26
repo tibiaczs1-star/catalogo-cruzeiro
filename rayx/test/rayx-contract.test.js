@@ -5,6 +5,25 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 
+function lightweightReport() {
+  return {
+    tools: [
+      { name: "node", found: true, path: process.execPath, version: process.version },
+      { name: "git", found: true, path: "git", version: "test" }
+    ],
+    hermes: {
+      found: false,
+      desktop: { found: false, path: null },
+      status: null
+    },
+    chrome: {
+      exePath: null,
+      userData: null,
+      profiles: []
+    }
+  };
+}
+
 test("boot plan has visible steps and no silent operation above 10 minutes", () => {
   const { buildBootPlan } = require("../core/boot");
   const plan = buildBootPlan();
@@ -20,7 +39,11 @@ test("boot plan has visible steps and no silent operation above 10 minutes", () 
 
 test("tool catalog exposes inherited local tools and skill inventory", () => {
   const { scanCatalog } = require("../core/catalog");
-  const catalog = scanCatalog();
+  const catalog = scanCatalog({
+    report: lightweightReport(),
+    skillRoots: [path.join(__dirname, "fixtures")],
+    resolveMissingTools: false
+  });
 
   assert.equal(catalog.schema, "rayx.catalog.v1");
   assert.ok(catalog.tools.some((tool) => tool.name === "node" && tool.found));
@@ -31,7 +54,7 @@ test("tool catalog exposes inherited local tools and skill inventory", () => {
 
 test("Hermes adapter exposes status, open and log actions", () => {
   const { getHermesStatus } = require("../adapters/hermes");
-  const status = getHermesStatus();
+  const status = getHermesStatus({ report: lightweightReport() });
 
   assert.equal(status.schema, "rayx.hermes.adapter.v1");
   assert.equal(typeof status.found, "boolean");
@@ -42,7 +65,18 @@ test("Hermes adapter exposes status, open and log actions", () => {
 
 test("Chrome bridge exposes profiles and a CDP launch contract", () => {
   const { getChromeBridgeStatus } = require("../adapters/chrome");
-  const bridge = getChromeBridgeStatus();
+  const bridge = getChromeBridgeStatus({
+    report: lightweightReport(),
+    profileResult: {
+      payload: {
+        chromeExePath: null,
+        chromeUserData: null,
+        defaultPolicy: "ask",
+        profiles: []
+      }
+    },
+    tabs: []
+  });
 
   assert.equal(bridge.schema, "rayx.chrome.bridge.v1");
   assert.equal(bridge.remoteDebuggingPort, 9222);

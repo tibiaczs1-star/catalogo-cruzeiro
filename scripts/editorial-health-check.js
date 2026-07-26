@@ -78,10 +78,15 @@ function resolveHumanApprovalQueue(queue, store) {
 }
 
 function filterResolvedHumanActions(actionQueue, resolved) {
-  const resolvedSlugs = new Set(resolved.map((item) => item.slug));
-  return actionQueue.filter(
-    (action) => action.resolutionType !== "human-approval" || !resolvedSlugs.has(action.slug)
-  );
+  const decisions = new Map(resolved.map((item) => [item.slug, item.humanDecision]));
+  return actionQueue.filter((action) => {
+    const decision = decisions.get(action.slug);
+    if (!decision) return true;
+    if (decision === "REJECT") return false;
+    if (action.resolutionType === "human-approval") return false;
+    if (decision === "APPROVE" && action.missingRequirements?.includes("p0-com-fonte-unica")) return false;
+    return true;
+  });
 }
 
 function getArrayFromStore(store) {
@@ -237,7 +242,7 @@ function analyzeVisual(item, gateInfo) {
         ? "imagem-de-fonte"
         : "imagem-local";
   const issues = [];
-  if (!imageUrl) issues.push("sem-imagem");
+  if (!imageUrl && item.visualPolicy !== "text-only-source") issues.push("sem-imagem");
   if (gateInfo.gate !== "P2" && imageUrl && !imageCredit) issues.push("p0-p1-sem-credito-visual");
   if (gateInfo.gate === "P0" && label === "ilustracao-editorial") issues.push("p0-com-ilustracao-generica");
   return {

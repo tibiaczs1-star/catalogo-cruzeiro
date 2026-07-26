@@ -5,6 +5,7 @@ const vm = require("vm");
 const ROOT_DIR = path.resolve(__dirname, "..");
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
+const EMBEDDED_FALLBACK_LIMIT = 12;
 
 function readNewsItems() {
   const sandbox = { window: {} };
@@ -18,12 +19,13 @@ function run() {
     throw new Error("news-data.js nao possui noticias para sincronizar.");
   }
 
+  const fallbackItems = items.slice(0, EMBEDDED_FALLBACK_LIMIT);
   const payload = {
     ok: true,
     total: items.length,
     archiveTotal: items.length,
-    returned: items.length,
-    items
+    returned: fallbackItems.length,
+    items: fallbackItems
   };
   const replacement = `<script id="newsData" type="application/json">${JSON.stringify(payload)}</script>`;
   const index = fs.readFileSync(INDEX_FILE, "utf8");
@@ -37,7 +39,12 @@ function run() {
   }
 
   fs.writeFileSync(INDEX_FILE, updated, "utf8");
-  console.log(JSON.stringify({ ok: true, items: items.length, first: items[0].title }, null, 2));
+  console.log(JSON.stringify({
+    ok: true,
+    archiveItems: items.length,
+    embeddedFallbackItems: fallbackItems.length,
+    first: items[0].title
+  }, null, 2));
 }
 
 run();

@@ -60,7 +60,9 @@ function getChromeBridgeStatus(options = {}) {
   const profileResult = options.profileResult || syncProfiles(report);
   const payload = profileResult.payload || profileResult;
   const profiles = payload.profiles || [];
-  const tabs = listTabsSync(options.port || DEFAULT_CDP_PORT);
+  const tabs = Array.isArray(options.tabs)
+    ? options.tabs
+    : listTabsSync(options.port || DEFAULT_CDP_PORT);
   const allowCount = profiles.filter((profile) => profile.permission === "allow").length;
   const observeCount = profiles.filter((profile) => profile.permission === "observe").length;
 
