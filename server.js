@@ -123,6 +123,7 @@ const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-das
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const FAVICON_ICO_FILE = path.join(ROOT_DIR, "assets", "favicon-32x32.png");
+const ANDROID_APP_METADATA_FILE = path.join(ROOT_DIR, "downloads", "catalogo-czs-android.json");
 const RE_RODADA_DIA_GERAL_REPORT_FILE = path.join(DATA_DIR, "re-rodada-dia-geral-report.json");
 const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
 const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(DATA_DIR, "news-image-focus-decisions.json");
@@ -229,6 +230,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".wav",
   ".mp4",
   ".pdf",
+  ".apk",
   ".ico",
   ".webmanifest"
 ]);
@@ -6724,6 +6726,8 @@ function mimeFor(filePath) {
       return "audio/wav";
     case ".pdf":
       return "application/pdf";
+    case ".apk":
+      return "application/vnd.android.package-archive";
     case ".ico":
       return "image/x-icon";
     case ".txt":
@@ -20670,6 +20674,10 @@ async function handleApi(req, res, pathname, searchParams) {
 async function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
 
+  if ((req.method === "GET" || req.method === "HEAD") && pathname === "/downloads/catalogo-czs-android.json") {
+    return sendFile(req, res, ANDROID_APP_METADATA_FILE, { cacheControl: "no-store" });
+  }
+
   if (pathname === "/robots.txt") {
     return sendText(res, 200, buildRobotsTxt(req), "public, max-age=3600");
   }
@@ -20687,6 +20695,28 @@ async function handleStatic(req, res, pathname, requestUrl) {
       if (ashotelariaIntegration && ASHOTELARIA_ENABLED) {
         const handled = await ashotelariaIntegration.handle(req, res, pathname);
         if (handled) return;
+      }
+
+      if (pathname === "/bookray") {
+        res.writeHead(302, {
+          Location: "/bookray/",
+          "Cache-Control": "no-store"
+        });
+        return res.end();
+      }
+
+      if (pathname === "/bookray/") {
+        return sendFile(req, res, path.join(ROOT_DIR, "bookray", "index.html"), {
+          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+        });
+      }
+
+      if (pathname === "/ashotelaria") {
+        res.writeHead(302, {
+          Location: "/ashotelaria/",
+          "Cache-Control": "no-store"
+        });
+        return res.end();
       }
 
       if (pathname === "/questfest") {
@@ -20743,6 +20773,14 @@ async function handleStatic(req, res, pathname, requestUrl) {
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
        });
+     }
+
+     if (pathname === "/reservar" || pathname === "/reservar/") {
+       res.writeHead(302, {
+         Location: "/reservar/hotel-jurua-palace/",
+         "Cache-Control": "no-store"
+       });
+       return res.end();
      }
 
      if (pathname.startsWith("/reservar/")) {

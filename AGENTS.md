@@ -2,6 +2,14 @@
 
 Lista de agentes personalizados criados para este projeto.
 
+## Proteção obrigatória do portal
+
+Antes de alterar, restaurar ou publicar o Catálogo CZS ou qualquer subsite, leia e cumpra:
+
+`docs/CATALOGO_CZS_AI_SAFETY.md`
+
+Essa regra vale para toda IA, automação e pessoa que mexer em `index.html`, `home.css`, `server.js`, `render.yaml`, rotas públicas, assets, Instagram ou deploy.
+
 ## Regra central do CZS
 
 Antes de mexer na homepage, arquitetura editorial, UX, retenção, cards, vídeo, editorias, serviços ou módulos públicos do CZS, leia e siga:

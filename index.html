@@ -14,10 +14,10 @@
   var dailyKey="czs-v8-intro-last-open-day";
   var today=new Date().toLocaleDateString("en-CA",{timeZone:"America/Rio_Branco"});
   var requested=params.get("forceIntro")==="1"||params.get("intro")==="1";
-  var disabled=params.get("skipIntro")==="1";
+  var skip=params.get("skipIntro")==="1"||!requested;
   var seenToday=false;
   try{seenToday=localStorage.getItem(dailyKey)===today}catch(_){}
-  var showIntro=!disabled&&(requested||!seenToday);
+  var showIntro=!skip&&requested;
   function release(){root.classList.remove("czs-intro-lock");root.classList.add("czs-intro-release");if(showIntro){try{localStorage.setItem(dailyKey,today)}catch(_){}}}
   window.__czsReleaseIntroLock=release;
   root.classList.add(showIntro?"czs-intro-lock":"czs-intro-release");
@@ -27,12 +27,16 @@
 })();
 </script>
 <link rel="stylesheet" href="home.css">
+<style>
+.android-download-bar{width:100%;margin:18px 0;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid #dbe4ef;border-radius:16px;background:linear-gradient(135deg,#071a3d,#123f78);box-shadow:0 14px 36px rgba(7,26,61,.18);color:#fff}.android-download-copy{display:grid;gap:3px}.android-download-bar p{margin:0;font:700 15px/1.35 Inter,system-ui,sans-serif}.android-download-bar small{color:rgba(255,255,255,.76);font:600 12px/1.3 Inter,system-ui,sans-serif}.android-download-bar a{flex:0 0 auto;display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:10px 16px;border-radius:12px;background:#fff;color:#071a3d;font:800 14px/1 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.16)}.android-download-bar a[aria-disabled="true"]{cursor:not-allowed;opacity:.62;box-shadow:none}.android-download-bar a:focus-visible{outline:3px solid #f2cf78;outline-offset:3px}@media(max-width:760px){.android-download-bar{padding:12px;align-items:stretch;flex-direction:column}.android-download-bar p,.android-download-bar small{text-align:center}.android-download-bar p{font-size:14px}.android-download-bar a{width:100%}}
+</style>
+<script src="/android-download.js?v=20260726-recovery-1" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<section class="cinematic-loader cosmic-loader" id="cinematicLoader" aria-label="Carregando Catálogo Cruzeiro do Sul" data-progress="0" data-stage="prelude">
 </head>
 <body>
+<section class="cinematic-loader cosmic-loader" id="cinematicLoader" aria-label="Carregando Catálogo Cruzeiro do Sul" data-progress="0" data-stage="prelude">
   <div class="cosmic-depth depth-a" aria-hidden="true"></div>
   <div class="cosmic-depth depth-b" aria-hidden="true"></div>
   <div class="cosmic-depth depth-c" aria-hidden="true"></div>
