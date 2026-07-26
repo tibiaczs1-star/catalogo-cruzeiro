@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-16T12:56:08.702Z",
-  "finishedAt": "2026-07-16T12:56:13.200Z",
-  "capturedItems": 391,
-  "capturedToday": 208,
+  "startedAt": "2026-07-26T06:23:21.477Z",
+  "finishedAt": "2026-07-26T06:23:32.248Z",
+  "capturedItems": 399,
+  "capturedToday": 161,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -143,8 +143,8 @@
     {
       "source": "jurua-em-tempo",
       "ok": true,
-      "count": 23,
-      "blocked": 1,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -164,7 +164,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 3,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -199,28 +199,28 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 0,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

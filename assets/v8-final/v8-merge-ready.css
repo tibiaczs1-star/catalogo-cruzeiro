@@ -14292,6 +14292,24 @@ body.v8-merge-ready #heroSide .v8-rail-story {
   min-height: 0 !important;
 }
 
+body.v8-merge-ready #heroSide .v8-rail-story.v8-rail-story-text-only {
+  grid-template-columns: 1fr !important;
+  min-height: 86px !important;
+}
+
+body.v8-merge-ready #heroSide .v8-rail-story.v8-rail-story-text-only span {
+  padding-left: 0 !important;
+}
+
+body.v8-merge-ready .v8-live-hero.v8-live-hero-text-only {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+body.v8-merge-ready .v8-live-hero.v8-live-hero-text-only .v8-hero-copy {
+  max-width: 760px !important;
+  min-height: 100% !important;
+}
+
 @media (max-width: 1180px) {
   body.v8-merge-ready {
     --v8-hero-lock-h: 510px;
@@ -15801,4 +15819,23 @@ body.v8-merge-ready #footerJumpFloat.czs-footer-arrow svg {
     height: 36px !important;
     min-height: 36px !important;
   }
+}
+
+/* CZS recovery 2026-07-26: news without confirmed media must become strong text, not an empty frame. */
+body.v8-merge-ready .v8-live-hero.v8-live-hero-text-only {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+body.v8-merge-ready .v8-live-hero.v8-live-hero-text-only .v8-hero-media {
+  display: none !important;
+}
+
+body.v8-merge-ready .v8-live-hero.v8-live-hero-text-only .v8-hero-copy {
+  width: 100% !important;
+  max-width: 780px !important;
+}
+
+body.v8-merge-ready #heroSide .v8-rail-story.v8-rail-story-text-only {
+  grid-template-columns: minmax(0, 1fr) !important;
+  min-height: 86px !important;
 }

@@ -232,7 +232,12 @@
   const dataNode = document.getElementById("newsData");
   const DATA = dataNode ? JSON.parse(dataNode.textContent || "{}") : { items: [] };
   const allStories = (DATA.items || [])
-    .filter((item) => !/^(lei organica|lei orgânica)$/i.test(String(item.title || "").trim()));
+    .filter((item) => !/^(lei organica|lei orgânica)$/i.test(String(item.title || "").trim()))
+    .sort((a, b) => {
+      const stampA = Date.parse(a?.publishedAt || a?.date || a?.capturedAt || "");
+      const stampB = Date.parse(b?.publishedAt || b?.date || b?.capturedAt || "");
+      return (Number.isFinite(stampB) ? stampB : 0) - (Number.isFinite(stampA) ? stampA : 0);
+    });
   let archiveSourceStories = allStories.slice();
   let archiveSourceMeta = {
     status: "snapshot",
@@ -394,7 +399,7 @@
     const src = imgFor(story);
     if (!src) return missingStoryVisualMarkup(story);
     const priority = loading === "eager" ? "high" : "low";
-    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" decoding="async" fetchpriority="${priority}" onerror="(()=>{const card=this.closest('.news-card,.v8-continuous-card,.v8-opportunity-card,.v8-archive-card,.v8-rail-story'); if(card){card.remove();} else {this.remove();}})()">`;
+    return `<img src="${esc(src)}" alt="${esc(story?.title || "Notícia CZS")}" loading="${esc(loading)}" decoding="async" fetchpriority="${priority}" onerror="(()=>{const hero=this.closest('.v8-live-hero'); if(hero){hero.classList.add('v8-live-hero-text-only'); this.closest('.v8-hero-media')?.remove(); return;} const rail=this.closest('.v8-rail-story'); if(rail){rail.classList.add('v8-rail-story-text-only'); this.remove(); return;} const card=this.closest('.news-card,.v8-continuous-card,.v8-opportunity-card,.v8-archive-card'); if(card){card.remove();} else {this.remove();}})()">`;
   }
 
   const PROCUREMENT_PATTERN = /\b(licita[cç][aã]o|preg[aã]o|edital|chamada p[úu]blica|concorr[êe]ncia|tomada de pre[cç]os|dispensa|inexigibilidade|cotação|cotacao|credenciamento|registro de pre[cç]o|CP\s*N[º°]?\s*\d+)/i;
@@ -852,9 +857,11 @@
       .join(" ")
       .toLowerCase();
     let score = localScore(story);
+    score += storyFreshnessBoost(story);
     if (isLevitaLeadStory(story)) score += 12000;
     if (/corpus christi|festival|programacao|programação|saude|saúde|educacao|educação|servico|serviço|tempo|rio|cidade|comunidade|obra|agenda|show|cultura|evento|mailza|mailsa|gladson|gladison/.test(text)) score += 340;
     if (storyVideoUrl(story)) score += 260;
+    if (hasTrustedStoryMedia(story)) score += 180;
     if (/estupro|homicidio|homicídio|morte|assassin|execucao|execução|roubo|roubad|furto|prisao|prisão|presidio|presídio|presos|detento|superlotacao|superlotação|trafico|tráfico|mandado|foragido|policia|polícia|delegacia|investig/.test(text)) score -= 1500;
     return score;
   };
@@ -903,7 +910,9 @@
     if (OPPORTUNITY_TOPIC_PATTERN.test(text) || isProcurementStory(story)) score += 340;
     if (storyVideoUrl(story)) score += 260;
     if (SECURITY_TOPIC_PATTERN.test(text)) score += LOCAL_TOPIC_PATTERN.test(text) ? 180 : 80;
-    if (!hasTrustedStoryMedia(story)) score -= 900;
+    score += storyFreshnessBoost(story);
+    if (hasTrustedStoryMedia(story)) score += 140;
+    if (!hasTrustedStoryMedia(story)) score -= 120;
     return score;
   }
 
@@ -920,22 +929,26 @@
     if (position === 1 || position === 2) return "secondary";
     if (forceVideo || storyVideoUrl(story)) return position % 3 === 0 ? "feature-video" : "video";
     if (isProcurementStory(story)) return "compact";
-    if (storyPriorityScore(story) >= 1900 && position > 8) return "wide";
+    if (storyPriorityScore(story) >= 1900 && (position === 3 || position === 10)) return "wide";
     if (theme === "security" || theme === "urgent") return "horizontal";
     if (theme === "opportunity") return "compact";
-    return position % 7 === 3 ? "wide" : "standard";
+    return position % 11 === 6 ? "wide" : "standard";
   }
 
   const heroStories = (() => {
-    const ranked = allStories
+    const eligible = allStories
+      .filter((story) => story?.title || story?.summary || story?.subtitle)
+      .filter((story) => isFreshEditorialStory(story, 10) || isLevitaLeadStory(story));
+    const currentWindow = eligible.filter((story) => isFreshEditorialStory(story, 3));
+    const pool = currentWindow.length >= 6 ? currentWindow : eligible;
+    const ranked = pool
       .slice()
-      .filter(hasTrustedStoryMedia)
-      .sort((a, b) => heroScore(b) - heroScore(a))
+      .sort((a, b) => heroScore(b) - heroScore(a) || storyTimestamp(b) - storyTimestamp(a))
       .slice(0, 8);
-    const videoCandidate = allStories
-      .slice()
-      .filter((story) => hasTrustedStoryMedia(story) && storyVideoUrl(story))
-      .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))[0];
+  const videoCandidate = allStories
+    .slice()
+    .filter((story) => isFreshEditorialStory(story, 3) && storyVideoUrl(story))
+    .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))[0];
     if (videoCandidate && !ranked.some((story) => story.slug === videoCandidate.slug)) {
       ranked.splice(Math.min(2, ranked.length), 0, videoCandidate);
     }
@@ -944,7 +957,6 @@
 
   const opportunityStories = allStories
     .filter((story) => isOpportunityStory(story))
-    .filter(hasTrustedStoryMedia)
     .sort((a, b) => localScore(b) - localScore(a))
     .slice(0, 9);
 
@@ -979,6 +991,29 @@
     const raw = story?.publishedAt || story?.date || story?.capturedAt || "";
     const parsed = Date.parse(raw);
     return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function storyAgeHours(story) {
+    const stamp = storyTimestamp(story);
+    if (!stamp) return 9999;
+    return Math.max(0, (Date.now() - stamp) / 36e5);
+  }
+
+  function isFreshEditorialStory(story = {}, days = 7) {
+    const stamp = storyTimestamp(story);
+    if (!stamp) return true;
+    return Date.now() - stamp <= days * 24 * 36e5;
+  }
+
+  function storyFreshnessBoost(story = {}) {
+    const age = storyAgeHours(story);
+    if (age <= 6) return 1800;
+    if (age <= 24) return 1450;
+    if (age <= 48) return 1050;
+    if (age <= 72) return 720;
+    if (age <= 96) return 260;
+    if (age <= 168) return -900;
+    return -5200;
   }
 
   function storyDateObject(story) {
@@ -2070,7 +2105,9 @@
     const paint = (nextIndex) => {
       index = (nextIndex + heroStories.length) % heroStories.length;
       const story = heroStories[index];
+      const hasHeroMedia = Boolean(storyVideoUrl(story) || imgFor(story));
       lead.dataset.v8Slug = story.slug || "";
+      lead.classList.toggle("v8-live-hero-text-only", !hasHeroMedia);
       lead.innerHTML = `
         <div class="v8-hero-copy">
           <div class="v8-hero-edition"><span>Capa ao vivo</span><span>${index + 1}/${heroStories.length}</span></div>
@@ -2097,9 +2134,9 @@
             <div class="v8-hero-dots">${heroStories.slice(0, 5).map((_, i) => `<button class="v8-hero-dot ${i === Math.min(index, 4) ? "is-active" : ""}" type="button" data-v8-dot="${i}" aria-label="Abrir destaque ${i + 1}"></button>`).join("")}</div>
           </div>
         </div>
-        <div class="v8-hero-media">
+        ${hasHeroMedia ? `<div class="v8-hero-media">
           <div class="v8-hero-media-frame">${storyVisualMarkup(story, "eager")}</div>
-        </div>`;
+        </div>` : ""}`;
       $$(".v8-rail-story", rail).forEach((node) => node.classList.toggle("is-active", node.dataset.v8Slug === story.slug));
     };
 
@@ -2166,15 +2203,20 @@
 
   function railMediaMarkup(story) {
     const videoSrc = storyVideoUrl(story);
-    if (!videoSrc) return storyImageMarkup(story);
+    if (!videoSrc) {
+      const imageSrc = imgFor(story);
+      if (!imageSrc) return "";
+      return `<img src="${esc(imageSrc)}" alt="${esc(story.title)}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.closest('.v8-rail-story')?.classList.add('v8-rail-story-text-only'); this.remove();">`;
+    }
     const poster = videoPosterFor(story, videoSrc);
     return poster ? `<img src="${esc(poster)}" alt="${esc(story.title)}" loading="lazy" decoding="async" fetchpriority="low" data-v8-video-poster-src="${esc(videoSrc)}" data-v8-video-fallback="${esc(imgFor(story))}">` : `<video muted playsinline preload="metadata" aria-label="${esc(story.title)}"><source src="${esc(videoSrc)}" type="${esc(videoTypeFor(videoSrc))}"></video>`;
   }
 
   function railCard(story) {
+    const media = railMediaMarkup(story);
     return `
-      <a class="v8-rail-story" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
-        ${railMediaMarkup(story)}
+      <a class="v8-rail-story ${media ? "" : "v8-rail-story-text-only"}" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
+        ${media}
         <span><b>${esc(story.title)}</b><small>${esc(story.category || "Notícia")} • ${esc(storyDate(story))}</small></span>
       </a>`;
   }
@@ -2667,7 +2709,7 @@
       if (text) text.textContent = "Emprego, concurso, estágio e curso quando a fonte publicar.";
     }
 
-    const visualOpportunityStories = opportunityStories.filter(hasTrustedStoryMedia);
+    const visualOpportunityStories = opportunityStories;
 
     if (!visualOpportunityStories.length) {
       $$('a[href="#vagasCzs"]').forEach((link) => link.remove());
@@ -3411,7 +3453,7 @@
     const count = $("#v8ArchiveCount");
     const more = $("[data-archive-more]");
     if (!list || !count) return;
-    const filtered = archiveStories().filter(hasTrustedStoryMedia);
+    const filtered = archiveStories();
     count.textContent = `${filtered.length} resultado${filtered.length === 1 ? "" : "s"} no filtro atual`;
     list.innerHTML = filtered.slice(0, archiveState.limit).map(archiveCard).join("") ||
       `<article class="v8-archive-empty"><b>Nada encontrado</b><p>Tente outro termo, periodo, fonte ou pasta.</p></article>`;
@@ -4181,7 +4223,7 @@
     const organic = entry.type === "organic" || flow.organic;
     const viral = entry.type === "viral" || flow.topic === "viral";
     const rss = entry.type === "rss";
-    const size = position % 11 === 0 ? "feature" : videoSrc ? "video" : organic ? "organic" : "standard";
+    const size = position === 0 || position % 17 === 0 ? "feature" : videoSrc ? "video" : organic ? "organic" : "standard";
     return `
       <article class="news-card czs-flow-card czs-flow-${esc(flow.regionId)} czs-flow-topic-${esc(flow.topic)} czs-flow-size-${esc(size)}${organic ? " is-organic-insert" : ""}${viral ? " is-viral-insert" : ""}${rss ? " is-rss-fallback" : ""}${videoSrc ? " has-inline-video" : ""}" data-v8-slug="${esc(story.slug || "")}" data-czs-flow-region="${esc(flow.regionId)}" data-czs-flow-subsection="${esc(flow.subsection)}" data-czs-flow-type="${esc(entry.type || "story")}">
         <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
@@ -4218,7 +4260,6 @@
     const protectedHeroSlugs = new Set(heroStories.slice(0, 4).map((story) => story.slug).filter(Boolean));
     let storiesForFlow = allStories
       .filter((story) => story?.slug && bySlug.has(story.slug))
-      .filter(hasTrustedStoryMedia)
       .filter((story) => !protectedHeroSlugs.has(story.slug))
       .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
       .slice(0, 160);
@@ -4389,7 +4430,6 @@
     const protectedHeroSlugs = new Set(heroStories.slice(0, 3).map((story) => story.slug).filter(Boolean));
     const sourceStories = balancedPriorityStories(allStories
       .filter((story) => story?.slug && bySlug.has(story.slug))
-      .filter(hasTrustedStoryMedia)
       .filter((story) => !protectedHeroSlugs.has(story.slug))
       .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
       .slice(0, 84));

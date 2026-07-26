@@ -1,162 +1,162 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-07-19T15:33:05.010Z
+Gerado em: 2026-07-26T06:41:41.719Z
 Escopo: 360/505 itens recentes.
 
 ## Resumo
-- Gates: P0 74, P1 164, P2 122
-- Aprovacao humana exigida: 74
-- Pendencias de fonte: 74
-- Pendencias visuais: 169
-- Titulos alternativos gerados: 240
+- Gates: P0 58, P1 227, P2 75
+- Aprovacao humana exigida: 58
+- Pendencias de fonte: 58
+- Pendencias visuais: 296
+- Titulos alternativos gerados: 239
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
+- P0 human-approval: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
+- P0 ide-fix: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
+- P0 ide-fix: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Ônibus com passageiros cai em rio em porto de Barcarena, no Pará; bombeiros fazem buscas
+- P0 human-approval: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Ônibus com passageiros cai em rio em porto de Barcarena, no Pará; bombeiros fazem buscas
+- P0 ide-fix: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Ônibus com passageiros cai em rio em porto de Barcarena, no Pará; bombeiros fazem buscas
+- P0 ide-fix: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Ex-sargento tocantinense preso com cocaína em avião da FAB que integrava comitiva presidencial é condenado pela Justiça Militar
+- P0 human-approval: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Ex-sargento tocantinense preso com cocaína em avião da FAB que integrava comitiva presidencial é condenado pela Justiça Militar
+- P0 ide-fix: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Ex-sargento tocantinense preso com cocaína em avião da FAB que integrava comitiva presidencial é condenado pela Justiça Militar
+- P0 ide-fix: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Colisão entre bicicleta e ônibus deixa duas feridas em Rio Branco; jovem de 18 anos é entubada
+- P0 human-approval: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Colisão entre bicicleta e ônibus deixa duas feridas em Rio Branco; jovem de 18 anos é entubada
+- P0 ide-fix: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Colisão entre bicicleta e ônibus deixa duas feridas em Rio Branco; jovem de 18 anos é entubada
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
+  Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: PM do Acre compra R$ 1,67 milhão em munições
+- P0 human-approval: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: PM do Acre compra R$ 1,67 milhão em munições
+- P0 ide-fix: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: PM do Acre compra R$ 1,67 milhão em munições
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
+  Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Caso em Roraima reforça alerta sobre abuso de confiança e violência contra adolescentes
+- P0 human-approval: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Caso em Roraima reforça alerta sobre abuso de confiança e violência contra adolescentes
+- P0 ide-fix: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Caso em Roraima reforça alerta sobre abuso de confiança e violência contra adolescentes
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
+  Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio
+- P0 human-approval: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Jovem baleado na cabeça morre após três dias internado em Rio Branco; Polícia Civil investiga homicídio
+- P0 ide-fix: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 human-approval: Quem era a empresária que morreu após luta contra o câncer no Acre?
+- P0 ide-fix: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
+  Motivo: Pendencia visual: sem-imagem.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Quem era a empresária que morreu após luta contra o câncer no Acre?
+- P0 ide-fix: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 human-approval: Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Rio Branco amplia coleta de esgoto, mas apenas um em cada quatro moradores tem acesso ao serviço
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
+  Motivo: Pendencia visual: sem-imagem.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
-  - Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16): veja os pontos principais
-  - Entenda mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
-  - Jurua em Tempo informa: Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
-- Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
-  - Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim: veja os pontos principais
-  - O que se sabe sobre irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
-  - Jurua em Tempo informa: Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim
-- Quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre
-  - Quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre: veja os pontos principais
-  - Entenda quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre
-  - Folha do Acre informa: Quinta-feira será de calor com possibilidade de pancadas isoladas de chuva no Acre
-- Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
-  - Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”: veja os pontos principais
-  - Entenda alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
-  - ContilNet / Instagram informa: Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
-- Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado
-  - Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado: veja os pontos principais
-  - Entenda rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado
-  - ContilNet / Instagram informa: Rio Branco amanhece com ar poluído e partículas três vezes acima do recomendado
-- O que aconteceria com nossa mente se vivêssemos na Lua?
-  - O que aconteceria com nossa mente se vivêssemos na Lua: veja os pontos principais
-  - Entenda o que aconteceria com nossa mente se vivêssemos na Lua
-  - Jurua Informativo informa: O que aconteceria com nossa mente se vivêssemos na Lua
-- O que está por trás do novo tarifaço dos EUA contra o Brasil?
-  - O que está por trás do novo tarifaço dos EUA contra o Brasil: veja os pontos principais
-  - Entenda o que está por trás do novo tarifaço dos EUA contra o Brasil
-  - Jurua Informativo informa: O que está por trás do novo tarifaço dos EUA contra o Brasil
-- Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
-  - Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026: veja os pontos principais
-  - Entenda lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
-  - Jurua Informativo informa: Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
-- Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
-  - Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas: veja os pontos principais
-  - Entenda jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
-  - Jurua Informativo informa: Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
-- Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
-  - Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão: veja os pontos principais
-  - Entenda frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
-  - Jurua Informativo informa: Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
-- Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
-  - Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon: veja os pontos principais
-  - Entenda quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
-  - Jurua Informativo informa: Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
-- Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê
-  - Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê: veja os pontos principai
-  - Entenda anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê
-  - Jurua Informativo informa: Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Yp
+- Maiane Sobrinho recusa título de princesa e questiona resultado da escolha da Rainha do Rodeio 2026
+  - Maiane Sobrinho recusa título de princesa e questiona resultado da escolha da Rainha do Rodeio 2026: veja os p
+  - Entenda maiane Sobrinho recusa título de princesa e questiona resultado da escolha da Rainha do Rodeio 2026
+  - Folha do Acre informa: Maiane Sobrinho recusa título de princesa e questiona resultado da escolha da Rainha do
+- Erica Oliveira é eleita Rainha do Rodeio da Expoacre 2026 e destaca força da mulher acreana
+  - Erica Oliveira é eleita Rainha do Rodeio da Expoacre 2026 e destaca força da mulher acreana: veja os pontos pr
+  - Entenda erica Oliveira é eleita Rainha do Rodeio da Expoacre 2026 e destaca força da mulher acreana
+  - Folha do Acre informa: Erica Oliveira é eleita Rainha do Rodeio da Expoacre 2026 e destaca força da mulher acr
+- Conheça as 12 candidatas que disputam o título de Rainha do Rodeio da Expoacre 2026
+  - Conheça as 12 candidatas que disputam o título de Rainha do Rodeio da Expoacre 2026: veja os pontos principais
+  - Entenda conheça as 12 candidatas que disputam o título de Rainha do Rodeio da Expoacre 2026
+  - Folha do Acre informa: Conheça as 12 candidatas que disputam o título de Rainha do Rodeio da Expoacre 2026
+- Jurada da escolha da Rainha do Rodeio da Expoacre 2026, Vitória Serafim destaca expectativa para o concurso
+  - Jurada da escolha da Rainha do Rodeio da Expoacre 2026, Vitória Serafim destaca expectativa para o concurso: v
+  - Entenda jurada da escolha da Rainha do Rodeio da Expoacre 2026, Vitória Serafim destaca expectativa para o con
+  - Folha do Acre informa: Jurada da escolha da Rainha do Rodeio da Expoacre 2026, Vitória Serafim destaca expecta
+- Camila Assunção se despede do reinado e diz ter deixado legado na Rainha do Rodeio da Expoacre
+  - Camila Assunção se despede do reinado e diz ter deixado legado na Rainha do Rodeio da Expoacre: veja os pontos
+  - Entenda camila Assunção se despede do reinado e diz ter deixado legado na Rainha do Rodeio da Expoacre
+  - Folha do Acre informa: Camila Assunção se despede do reinado e diz ter deixado legado na Rainha do Rodeio da E
+- Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
+  - Auriane Silva celebra conquista de título e incentiva participação de jovens em evento: veja os pontos princip
+  - O que se sabe sobre auriane Silva celebra conquista de título e incentiva participação de jovens em evento
+  - Jurua Online informa: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
+- 2° Leilão da Genética Conquista movimenta Expoacre 2026 com realização da Galileu Leilões
+  - 2° Leilão da Genética Conquista movimenta Expoacre 2026 com realização da Galileu Leilões: veja os pontos prin
+  - Entenda 2° Leilão da Genética Conquista movimenta Expoacre 2026 com realização da Galileu Leilões
+  - Folha do Acre informa: 2° Leilão da Genética Conquista movimenta Expoacre 2026 com realização da Galileu Leilõ
+- Alan Rick anuncia Fábio Leite como pré-candidato a vice-governador do Acre
+  - Alan Rick anuncia Fábio Leite como pré-candidato a vice-governador do Acre: veja os pontos principais
+  - Entenda alan Rick anuncia Fábio Leite como pré-candidato a vice-governador do Acre
+  - Jurua Online informa: Alan Rick anuncia Fábio Leite como pré-candidato a vice-governador do Acre
+- MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
+  - MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco: veja os pontos principais
+  - O que se sabe sobre mPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
+  - Ministerio Publico do Acre informa: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
+- MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
+  - MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada: veja os pontos princi
+  - O que se sabe sobre mPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
+  - Ministerio Publico do Acre informa: MPAC denuncia 13 integrantes de organização criminosa investigados na Oper
+- CHP N° 012/2026
+  - CHP N° 012/2026: veja os pontos principais
+  - Entenda cHP N° 012/2026
+  - Prefeitura de Marechal Thaumaturgo informa: CHP N° 012/2026
+- CHP N° 013/2026
+  - CHP N° 013/2026: veja os pontos principais
+  - Entenda cHP N° 013/2026
+  - Prefeitura de Marechal Thaumaturgo informa: CHP N° 013/2026
 
 ## Formatos especiais seguros
-- guia de servico: Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira (16)
+- guia de servico: Maiane Sobrinho recusa título de princesa e questiona resultado da escolha da Rainha do Rodeio 2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Alysson abre as portas para Gladson no grupo de Bocalom: “Seria muito bom”
+- guia de servico: Jurada da escolha da Rainha do Rodeio da Expoacre 2026, Vitória Serafim destaca expectativa para o concurso
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- comparativo rapido: O que aconteceria com nossa mente se vivêssemos na Lua?
+- agenda visual: Camila Assunção se despede do reinado e diz ter deixado legado na Rainha do Rodeio da Expoacre
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- comparativo rapido: Lua hoje: confira a fase da Lua desta quinta-feira 16/07/2026
+- linha do tempo curta: Candidata à Rainha do Rodeio destaca preparação e confiança antes da final
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas
+- linha do tempo curta: Torcidas de municípios movimentam final da Rainha do Rodeio 2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- comparativo rapido: Frente fria muda o tempo e coloca o Sul em alerta; veja a previsão
+- linha do tempo curta: Sob chuva, torcidas começam a chegar para final da Rainha do Rodeio 2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- comparativo rapido: Quer renovar a sala? Veja uma seleção de Smart TVs 4K em promoção na Amazon
+- linha do tempo curta: Jovem é espancado após falha em fechamento de caixa de boca de fumo
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- comparativo rapido: Anvisa manda recolher água mineral; bactéria encontrada é a mesma de produtos da Ypê
+- linha do tempo curta: Na convenção, Jarude saúda Rico e se declara à esposa que era indicada a vice
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Copa: antes da final, Argentina e Espanha se encontram em filme na TV
+- linha do tempo curta: Programa oferece auxílio de R$ 3 mil para universitários; inscrições estão abertas
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Brava diz que CVM autorizou retomada de OPA para aquisição pela Ecopetrol
+- linha do tempo curta: “Me senti desrespeitado e ofendido”, diz Zequinha ao explicar apoio a Alan
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de impacto no bolso: Mercado repercute tarifaço dos EUA ao Brasil; dólar abre em alta
+- linha do tempo curta: Ifac lança edital para seleção de trabalhos para congresso nacional de ciência
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Anvisa determina recolhimento de lotes de água Mamba Water
+- guia de servico: Prefeitura convoca aprovados em processos seletivos da educação
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
