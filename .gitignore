@@ -46,6 +46,7 @@ data/master-admin-audit-log.json
 data/real-agents-scoreboard.json
 data/agent-os-memory/
 data/agent-os-state.json
+data/mundoapple/
 .edge-headless/
 recovered-chat-assets/
 recovered-vscode-chat-assets/

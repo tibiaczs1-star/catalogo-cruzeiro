@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0d0a">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Administrativo | Mundo Apple</title>
+    <link rel="stylesheet" href="admin.css?v=20260726">
+  </head>
+  <body>
+    <div class="login-view" id="login-view">
+      <div class="login-art">
+        <a class="brand" href="/mundoapple/"><span class="brand-orbit"></span><span>MUNDO <strong>APPLE</strong></span></a>
+        <div class="login-message">
+          <p class="kicker">GESTÃO MUNDO APPLE</p>
+          <h1>Tudo da loja.<br><em>Num só lugar.</em></h1>
+          <p>Estoque, vendas, caixa, lucro, documentos e recibos protegidos em um painel simples.</p>
+        </div>
+        <p class="login-location">Cruzeiro do Sul · Acre</p>
+      </div>
+      <main class="login-panel">
+        <form id="login-form" class="login-form">
+          <span class="status-light"></span>
+          <p class="kicker">ACESSO RESTRITO</p>
+          <h2>Bem-vindo.</h2>
+          <p>Entre com seu usuário e senha de administrador.</p>
+          <label>Usuário<input name="username" autocomplete="username" required></label>
+          <label>Senha<input name="password" type="password" autocomplete="current-password" required></label>
+          <button class="primary-button" type="submit">Entrar no painel <span>→</span></button>
+          <p class="form-message" id="login-message" role="alert"></p>
+          <a href="/mundoapple/">← Voltar à loja</a>
+        </form>
+      </main>
+    </div>
+
+    <div class="admin-app" id="admin-app" hidden>
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <a class="brand" href="/mundoapple/" target="_blank"><span class="brand-orbit"></span><span>MUNDO <strong>APPLE</strong></span></a>
+          <button class="mobile-close" id="mobile-close" type="button" aria-label="Fechar menu">×</button>
+        </div>
+        <nav aria-label="Seções administrativas">
+          <button class="nav-item active" type="button" data-section="dashboard"><span>◫</span>Visão geral</button>
+          <button class="nav-item" type="button" data-section="activate"><span>＋</span>Colocar no estoque</button>
+          <button class="nav-item" type="button" data-section="inventory"><span>▦</span>Estoque ativo</button>
+          <button class="nav-item" type="button" data-section="sales"><span>↗</span>Vendas</button>
+          <button class="nav-item" type="button" data-section="cash"><span>◎</span>Caixa</button>
+          <button class="nav-item" type="button" data-section="expenses"><span>−</span>Despesas</button>
+          <button class="nav-item" type="button" data-section="documents"><span>▤</span>Documentos</button>
+          <button class="nav-item" type="button" data-section="help"><span>?</span>Ajuda e FAQ</button>
+        </nav>
+        <div class="sidebar-foot">
+          <div><span class="status-light"></span><strong>Sistema online</strong><small>Dados protegidos</small></div>
+          <button id="logout-button" type="button">Sair</button>
+        </div>
+      </aside>
+
+      <div class="admin-main">
+        <header class="topbar">
+          <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Abrir menu">☰</button>
+          <div>
+            <p class="kicker">MUNDO APPLE · ADMINISTRATIVO</p>
+            <h1 id="page-title">Visão geral</h1>
+          </div>
+          <div class="topbar-actions">
+            <a href="/mundoapple/" target="_blank">Ver loja ↗</a>
+            <button class="help-circle" type="button" data-help="dashboard" aria-label="Ajuda da tela">?</button>
+            <div class="avatar">MV</div>
+          </div>
+        </header>
+
+        <main class="workspace">
+          <section class="admin-section active" data-view="dashboard">
+            <div class="welcome-card">
+              <div><p class="kicker">CONTROLE EM TEMPO REAL</p><h2>Olá, Mateus.</h2><p>Veja o que está acontecendo na loja e escolha sua próxima ação.</p></div>
+              <button class="primary-button" type="button" data-go="activate">＋ Colocar produto no estoque</button>
+            </div>
+            <div class="metric-grid" id="dashboard-metrics">
+              <article><span>Unidades em estoque <button class="inline-help" data-help="inventory" type="button">?</button></span><strong>—</strong><small>Carregando</small></article>
+              <article><span>Receita recebida <button class="inline-help" data-help="cash" type="button">?</button></span><strong>—</strong><small>Vendas baixadas</small></article>
+              <article class="metric-accent"><span>Lucro final <button class="inline-help" data-help="pricing" type="button">?</button></span><strong>—</strong><small>Após custos e despesas</small></article>
+              <article><span>Vendas pendentes <button class="inline-help" data-help="sales" type="button">?</button></span><strong>—</strong><small>Aguardando baixa</small></article>
+            </div>
+            <div class="dashboard-grid">
+              <article class="panel">
+                <div class="panel-head"><div><p class="kicker">ATALHOS</p><h3>O que você quer fazer?</h3></div></div>
+                <div class="quick-actions">
+                  <button type="button" data-go="activate"><span>＋</span><strong>Adicionar estoque</strong><small>Escolha um produto pronto</small></button>
+                  <button type="button" data-go="sales"><span>↗</span><strong>Registrar venda</strong><small>Venda, entrada e baixa</small></button>
+                  <button type="button" data-go="expenses"><span>−</span><strong>Lançar despesa</strong><small>Frete, motoboy e outros</small></button>
+                  <button type="button" data-go="documents"><span>▤</span><strong>Guardar comprovante</strong><small>PDF ou imagem privada</small></button>
+                </div>
+              </article>
+              <article class="panel activity-panel">
+                <div class="panel-head"><div><p class="kicker">RESUMO</p><h3>Saúde da operação</h3></div><button class="inline-help" data-help="dashboard" type="button">?</button></div>
+                <div id="dashboard-summary" class="summary-list"></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="admin-section" data-view="activate">
+            <div class="section-intro">
+              <div><p class="kicker">CATÁLOGO MESTRE</p><h2>Colocar no estoque</h2><p>Escolha o produto com foto e informe apenas os dados do aparelho que chegou.</p></div>
+              <button class="help-link" type="button" data-help="catalog">Como funciona?</button>
+            </div>
+            <div class="activation-layout">
+              <aside class="master-picker panel">
+                <label class="search-box">⌕<input id="master-search" type="search" placeholder="Buscar modelo ou ano"></label>
+                <div class="filter-row" id="master-categories"></div>
+                <p class="catalog-counter" id="catalog-counter">Carregando catálogo...</p>
+                <div class="master-list" id="master-list"></div>
+              </aside>
+              <form class="panel form-panel" id="inventory-form">
+                <div class="selected-product" id="selected-product">
+                  <div class="product-thumb product-thumb-iphone"><span></span></div>
+                  <div><small>PRODUTO SELECIONADO</small><strong>Escolha na lista ao lado</strong><span>O estoque começa zerado</span></div>
+                </div>
+                <input type="hidden" name="catalogKey" required>
+                <div class="form-grid">
+                  <label>Quantidade <button class="inline-help" data-help="inventory" type="button">?</button><input name="quantity" type="number" min="1" value="1" required></label>
+                  <label>Estado <button class="inline-help" data-help="condition" type="button">?</button><select name="condition"><option value="new">Novo</option><option value="used">Seminovo / usado</option></select></label>
+                  <label>Dias de garantia <button class="inline-help" data-help="warranty" type="button">?</button><input name="warrantyDays" type="number" min="0" value="90" required></label>
+                  <label>Saúde da bateria (%) <button class="inline-help" data-help="battery" type="button">?</button><input name="batteryHealth" type="number" min="0" max="100" placeholder="Ex.: 89"></label>
+                  <label>Armazenamento<input name="storage" placeholder="Ex.: 128 GB"></label>
+                  <label>Cor<input name="color" placeholder="Ex.: Preto"></label>
+                  <label>IMEI <button class="inline-help" data-help="imei" type="button">?</button><input name="imei" inputmode="numeric" placeholder="Somente se aplicável"></label>
+                  <label>Número de série<input name="serialNumber" placeholder="Opcional"></label>
+                </div>
+                <fieldset>
+                  <legend>Custos e logística <button class="inline-help" data-help="pricing" type="button">?</button></legend>
+                  <div class="form-grid money-grid">
+                    <label>Preço de compra<input name="purchasePrice" inputmode="decimal" placeholder="0,00" required></label>
+                    <label>Frete / transportadora<input name="freight" inputmode="decimal" placeholder="0,00"></label>
+                    <label>Motoboy<input name="motoboy" inputmode="decimal" placeholder="0,00"></label>
+                    <label>Embalagem<input name="packaging" inputmode="decimal" placeholder="0,00"></label>
+                    <label>Preparação / reparo<input name="preparation" inputmode="decimal" placeholder="0,00"></label>
+                    <label>Reserva de garantia<input name="warrantyReserve" inputmode="decimal" placeholder="0,00"></label>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend>Preços ao cliente <button class="inline-help" data-help="pricing" type="button">?</button></legend>
+                  <div class="form-grid">
+                    <label>Preço web<input name="webPrice" inputmode="decimal" placeholder="0,00" required></label>
+                    <label>Preço retirada<input name="pickupPrice" inputmode="decimal" placeholder="0,00" required></label>
+                  </div>
+                  <div class="price-preview" id="price-preview">
+                    <div><span>Custo total unitário</span><strong>R$ 0,00</strong></div>
+                    <div><span>Lucro estimado web</span><strong>R$ 0,00</strong></div>
+                    <div><span>Margem estimada</span><strong>0%</strong></div>
+                  </div>
+                </fieldset>
+                <label>Observações<textarea name="notes" rows="3" placeholder="Acessórios inclusos, detalhes do aparelho ou logística"></textarea></label>
+                <label class="switch-row"><span><strong>Publicar na loja agora</strong><small>Só aparece se houver quantidade disponível</small></span><input name="published" type="checkbox" checked><i></i></label>
+                <button class="primary-button full-button" type="submit">Colocar no estoque <span>→</span></button>
+                <p class="form-message" id="inventory-message" role="status"></p>
+              </form>
+            </div>
+          </section>
+
+          <section class="admin-section" data-view="inventory">
+            <div class="section-intro">
+              <div><p class="kicker">ESTOQUE REAL</p><h2>Estoque ativo</h2><p>Controle saldo, publicação, lucro e detalhes dos itens cadastrados.</p></div>
+              <button class="primary-button" type="button" data-go="activate">＋ Colocar no estoque</button>
+            </div>
+            <div class="toolbar panel"><label class="search-box">⌕<input id="inventory-search" type="search" placeholder="Buscar no estoque"></label><div id="inventory-summary"></div></div>
+            <div id="inventory-list" class="table-panel panel"></div>
+          </section>
+
+          <section class="admin-section" data-view="sales">
+            <div class="section-intro">
+              <div><p class="kicker">VENDA E RECEBIMENTO</p><h2>Vendas</h2><p>Registre a negociação e depois informe se recebeu em dinheiro, Pix ou maquininha para dar baixa.</p></div>
+              <button class="help-link" type="button" data-help="sales">Entender venda e baixa</button>
+            </div>
+            <div class="sales-layout">
+              <form class="panel form-panel" id="sale-form">
+                <div class="panel-head"><div><p class="kicker">NOVA VENDA</p><h3>Dados da negociação</h3></div><button class="inline-help" data-help="sales" type="button">?</button></div>
+                <label>Produto do estoque<select name="inventoryId" id="sale-inventory" required><option value="">Escolha...</option></select></label>
+                <div class="form-grid">
+                  <label>Nome do cliente<input name="customerName" required></label>
+                  <label>Telefone<input name="customerPhone" inputmode="tel"></label>
+                  <label>CPF / documento<input name="customerDocument"></label>
+                  <label>Quantidade<input name="quantity" type="number" min="1" value="1" required></label>
+                  <label>Valor da venda<input name="price" inputmode="decimal" placeholder="0,00" required></label>
+                  <label>Desconto<input name="discount" inputmode="decimal" placeholder="0,00"></label>
+                  <label>Forma combinada<select name="paymentMethod"><option value="cash">Dinheiro</option><option value="pix">Pix</option><option value="card">Maquininha</option><option value="transfer">Transferência</option><option value="online">Online (futuro)</option></select></label>
+                  <label>Endereço / entrega<input name="customerAddress"></label>
+                </div>
+                <label class="switch-row"><span><strong>Aparelho de entrada</strong><small>Cliente entregou outro aparelho como parte</small></span><input id="trade-in-toggle" type="checkbox"><i></i></label>
+                <fieldset id="trade-in-fields" hidden>
+                  <legend>Aparelho de entrada <button class="inline-help" data-help="trade-in" type="button">?</button></legend>
+                  <div class="form-grid">
+                    <label>Modelo<input name="tradeInModel"></label>
+                    <label>IMEI<input name="tradeInImei"></label>
+                    <label>Estado<select name="tradeInCondition"><option value="used">Usado</option><option value="new">Novo</option></select></label>
+                    <label>Valor avaliado<input name="tradeInValue" inputmode="decimal" placeholder="0,00"></label>
+                  </div>
+                  <label>Observações<textarea name="tradeInNotes" rows="2"></textarea></label>
+                </fieldset>
+                <button class="primary-button full-button" type="submit">Registrar venda pendente <span>→</span></button>
+                <p class="form-message" id="sale-message" role="status"></p>
+              </form>
+              <div class="panel">
+                <div class="panel-head"><div><p class="kicker">HISTÓRICO</p><h3>Vendas e baixas</h3></div><button class="inline-help" data-help="receipt" type="button">?</button></div>
+                <div id="sales-list" class="stack-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-section" data-view="cash">
+            <div class="section-intro">
+              <div><p class="kicker">MOVIMENTAÇÃO FINANCEIRA</p><h2>Caixa</h2><p>Entradas aparecem após a baixa da venda. Despesas são lançadas no fluxo próprio.</p></div>
+              <button class="help-link" type="button" data-help="cash">Como é calculado?</button>
+            </div>
+            <div id="cash-metrics" class="metric-grid compact"></div>
+            <div id="cash-list" class="table-panel panel"></div>
+          </section>
+
+          <section class="admin-section" data-view="expenses">
+            <div class="section-intro">
+              <div><p class="kicker">SAÍDAS DA LOJA</p><h2>Despesas</h2><p>Campo aberto para motoboy, frete, transportadora, reparo e qualquer outro custo.</p></div>
+              <button class="help-link" type="button" data-help="expenses">O que lançar aqui?</button>
+            </div>
+            <div class="expenses-layout">
+              <form class="panel form-panel" id="expense-form">
+                <div class="panel-head"><div><p class="kicker">NOVA DESPESA</p><h3>Registrar saída</h3></div><button class="inline-help" data-help="expenses" type="button">?</button></div>
+                <label>Descrição<input name="description" placeholder="Ex.: Motoboy entrega cliente" required></label>
+                <div class="form-grid">
+                  <label>Categoria<select name="category"><option value="motoboy">Motoboy</option><option value="freight">Frete / transportadora</option><option value="repair">Reparo / preparação</option><option value="supplies">Material / embalagem</option><option value="tax">Taxa</option><option value="other">Outro</option></select></label>
+                  <label>Valor<input name="amount" inputmode="decimal" placeholder="0,00" required></label>
+                  <label>Data<input name="occurredAt" type="date" required></label>
+                  <label>Pago por<select name="paymentMethod"><option value="cash">Dinheiro</option><option value="pix">Pix</option><option value="card">Cartão</option><option value="transfer">Transferência</option></select></label>
+                </div>
+                <label>Observações<textarea name="notes" rows="3"></textarea></label>
+                <button class="primary-button full-button" type="submit">Lançar despesa <span>→</span></button>
+                <p class="form-message" id="expense-message" role="status"></p>
+              </form>
+              <div class="panel">
+                <div class="panel-head"><div><p class="kicker">HISTÓRICO</p><h3>Despesas lançadas</h3></div></div>
+                <div id="expense-list" class="stack-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-section" data-view="documents">
+            <div class="section-intro">
+              <div><p class="kicker">ARQUIVO PRIVADO</p><h2>Documentos</h2><p>Guarde comprovantes de pagamentos e documentação já online, vinculados à operação.</p></div>
+              <button class="help-link" type="button" data-help="documents">Segurança dos arquivos</button>
+            </div>
+            <div class="documents-layout">
+              <form class="panel upload-panel" id="document-form">
+                <label class="drop-zone" for="document-file">
+                  <span>↑</span><strong>Comprovante de pagamento ou documento</strong>
+                  <small>PDF, JPG, PNG ou WebP · máximo 8 MB</small>
+                  <input id="document-file" name="file" type="file" accept=".pdf,image/jpeg,image/png,image/webp" required>
+                </label>
+                <div class="form-grid">
+                  <label>Tipo<select name="kind"><option value="payment-proof">Comprovante de pagamento</option><option value="customer-document">Documento do cliente</option><option value="supplier-invoice">Nota / comprovante do fornecedor</option><option value="warranty">Garantia</option><option value="other">Outro</option></select></label>
+                  <label>Vincular à venda<select name="saleId" id="document-sale"><option value="">Sem vínculo</option></select></label>
+                </div>
+                <button class="primary-button full-button" type="submit">Guardar documento <span>→</span></button>
+                <p class="form-message" id="document-message" role="status"></p>
+              </form>
+              <div class="panel">
+                <div class="panel-head"><div><p class="kicker">ARQUIVOS</p><h3>Documentos guardados</h3></div><button class="inline-help" data-help="documents" type="button">?</button></div>
+                <div id="document-list" class="stack-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-section" data-view="help">
+            <div class="section-intro">
+              <div><p class="kicker">MANUAL DO SISTEMA</p><h2>Ajuda e FAQ</h2><p>Clique em qualquer interrogação do painel para entender aquela função. Aqui está o manual completo.</p></div>
+            </div>
+            <div class="help-hero panel">
+              <div><span>?</span><h3>Ficou com dúvida?</h3><p>O sistema explica o que cada campo faz sem você precisar sair da tela.</p></div>
+              <label class="search-box">⌕<input id="help-search" type="search" placeholder="Buscar dúvida"></label>
+            </div>
+            <div class="faq-list" id="faq-list"></div>
+            <article class="manual panel">
+              <p class="kicker">PASSO A PASSO PRINCIPAL</p>
+              <h3>Da chegada do aparelho até o recibo</h3>
+              <ol>
+                <li><strong>Colocar no estoque:</strong> escolha o produto mestre, informe novo/usado, quantidade, garantia, custos e preços.</li>
+                <li><strong>Publicar:</strong> deixe a chave ativa para mostrar o item na loja. Saldo zero sai da vitrine automaticamente.</li>
+                <li><strong>Registrar venda:</strong> selecione o item, cliente, valor e forma combinada. Se houver entrada, descreva o aparelho recebido.</li>
+                <li><strong>Dar baixa:</strong> somente após confirmar o recebimento em dinheiro, Pix ou maquininha. A baixa reduz o estoque e lança no caixa uma única vez.</li>
+                <li><strong>Comprovante:</strong> anexe o arquivo à venda. Somente o administrador autenticado consegue abrir.</li>
+                <li><strong>Recibo:</strong> abra “Imprimir recibo” na venda baixada para entregar a declaração com produto, IMEI, pagamento e garantia.</li>
+              </ol>
+            </article>
+            <article class="gateway-note panel">
+              <div><span>◎</span><div><p class="kicker">PAGAMENTOS AUTOMÁTICOS</p><h3>Preparado, mas não ativado</h3></div></div>
+              <p>Mercado Pago, PagBank e Asaas são as opções recomendadas para uma futura cobrança automática por Pix/cartão. Enquanto as credenciais próprias da loja não forem configuradas, o sistema usa confirmação manual e não cria cobrança real.</p>
+            </article>
+          </section>
+        </main>
+      </div>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    </div>
+
+    <dialog class="help-dialog" id="help-dialog">
+      <button class="dialog-close" type="button" aria-label="Fechar">×</button>
+      <p class="kicker">AJUDA RÁPIDA</p>
+      <h2 id="help-dialog-title">Entenda esta função</h2>
+      <p id="help-dialog-copy"></p>
+      <button class="primary-button" type="button" id="help-dialog-ok">Entendi</button>
+    </dialog>
+
+    <dialog class="settle-dialog" id="settle-dialog">
+      <button class="dialog-close" type="button" aria-label="Fechar">×</button>
+      <p class="kicker">CONFIRMAR RECEBIMENTO</p>
+      <h2>Dar baixa na venda</h2>
+      <p>Confirme somente depois que o dinheiro entrar. Essa ação reduz o estoque e registra a entrada no caixa.</p>
+      <form id="settle-form">
+        <input type="hidden" name="saleId">
+        <label>Recebido em<select name="paymentMethod"><option value="cash">Dinheiro</option><option value="pix">Pix</option><option value="card">Maquininha</option><option value="transfer">Transferência</option></select></label>
+        <label>Valor recebido<input name="received" inputmode="decimal" required></label>
+        <div class="form-grid">
+          <label>Taxa da maquininha<input name="paymentFee" inputmode="decimal" placeholder="0,00"></label>
+          <label>Outras despesas<input name="saleExpenses" inputmode="decimal" placeholder="0,00"></label>
+        </div>
+        <label class="confirm-check"><input name="confirmed" type="checkbox" required> Eu confirmo que o valor já foi recebido.</label>
+        <button class="primary-button full-button" type="submit">Dar baixa agora</button>
+        <p class="form-message" id="settle-message" role="status"></p>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="admin.js?v=20260726-2" defer></script>
+  </body>
+</html>

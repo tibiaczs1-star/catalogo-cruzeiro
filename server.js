@@ -21,8 +21,10 @@ const {
   withPubpaidLock: withCanonicalPubpaidLock,
 } = require("./pubpaid-runtime");
 const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
+const { createMundoAppleServerIntegration } = require("./mundoapple/server-integration");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
+let mundoAppleIntegration = null;
 const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
 const vm = require("vm");
 const zlib = require("zlib");
@@ -114,6 +116,12 @@ const DATA_DIR = process.env.DATA_DIR
   : DEFAULT_DATA_DIR;
 ashotelariaIntegration = createASHotelariaServerIntegration({
   rootDir: ROOT_DIR,
+  sendFile,
+});
+mundoAppleIntegration = createMundoAppleServerIntegration({
+  rootDir: ROOT_DIR,
+  dataDir: DATA_DIR,
+  environment: process.env,
   sendFile,
 });
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
@@ -16802,6 +16810,10 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
+  if (pathname.startsWith("/api/mundoapple/")) {
+    return mundoAppleIntegration.handleApi(req, res);
+  }
+
   if (ASHOTELARIA_ENABLED && pathname.startsWith("/api/ashotelaria/v1")) {
     if (!ashotelariaApiHandler) {
       const { createStore: createASHotelariaStore } = require("./ashotelaria/store");
@@ -20673,6 +20685,11 @@ async function handleApi(req, res, pathname, searchParams) {
 
 async function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
+
+  if (mundoAppleIntegration) {
+    const handled = await mundoAppleIntegration.handleStatic(req, res, pathname);
+    if (handled) return;
+  }
 
   if ((req.method === "GET" || req.method === "HEAD") && pathname === "/downloads/catalogo-czs-android.json") {
     return sendFile(req, res, ANDROID_APP_METADATA_FILE, { cacheControl: "no-store" });

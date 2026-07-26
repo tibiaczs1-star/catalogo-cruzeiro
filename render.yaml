@@ -65,6 +65,12 @@ services:
         sync: false
       - key: ASHOTELARIA_SESSION_SECRET
         sync: false
+      - key: MUNDOAPPLE_ADMIN_USER
+        sync: false
+      - key: MUNDOAPPLE_ADMIN_PASSWORD_HASH
+        sync: false
+      - key: MUNDOAPPLE_SESSION_SECRET
+        sync: false
       - key: POLL_ADMIN_PASSWORD
         sync: false
       - key: GOOGLE_AUTH_CLIENT_ID
