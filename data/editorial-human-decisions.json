@@ -1,0 +1,477 @@
+{
+  "version": 1,
+  "kind": "editorial-human-decisions",
+  "decidedAt": "2026-07-26T00:00:00-05:00",
+  "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario",
+  "policy": {
+    "APPROVE": "Pode permanecer no portal; nao autoriza publicacao social automatica.",
+    "PARK": "Permanece fora de destaque/social ate completar prova editorial.",
+    "REJECT": "Excluir da fila editorial ativa; conservar registro para auditoria."
+  },
+  "decisions": [
+    {
+      "slug": "auriane-silva-celebra-conquista-de-titulo-e-incentiva-participacao-de-jovens-em-evento",
+      "title": "Auriane Silva celebra conquista de título e incentiva participação de jovens em evento",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mpac-recomenda-veto-ao-projeto-de-revisao-do-plano-diretor-de-rio-branco",
+      "title": "MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mpac-denuncia-13-integrantes-de-organizacao-criminosa-investigados-na-operacao-alvorada",
+      "title": "MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mulher-e-encontrada-morta-com-maos-e-pes-amarrados-na-zona-rural-do-acre",
+      "title": "Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-e-preso-por-suspeita-de-abusar-da-prima-de-11-anos-no-interior-do-acre",
+      "title": "Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pedra-com-data-impossivel-flecha-disparada-antes-da-morte-e-radar-sem-encontrar-corpo-o-suposto-",
+      "title": "Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "eua-tentaram-manter-o-horario-de-verao-o-ano-inteiro-para-economizar-petroleo-mas-criancas-indo-",
+      "title": "EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "9-gpm-em-acao-pm-prende-traficante-e-apreende-maconha-e-cocaina-em-guajara",
+      "title": "9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "incendio-em-aparelho-de-ar-condicionado-gera-correria-no-hospital-infantil-de-rio-branco",
+      "title": "Incêndio em aparelho de ar-condicionado gera correria no Hospital Infantil de Rio Branco",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "incendio-destroi-residencia-na-zona-rural-de-guajara-e-familia-perde-todos-os-bens",
+      "title": "Incêndio destrói residência na zona rural de Guajará e família perde todos os bens",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-em-situacao-de-rua-morre-apos-passar-mal-em-rio-branco",
+      "title": "Homem em situação de rua morre após passar mal em Rio Branco",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-perde-controle-de-motocicleta-e-bater-em-poste-no-interior-do-acre",
+      "title": "Jovem perde controle de motocicleta e bater em poste no interior do Acre",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "principio-de-incendio-atinge-enfermaria-do-hospital-crianca-em-rio-branco",
+      "title": "Princípio de incêndio atinge Enfermaria do Hospital Criança em Rio Branco",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "principio-de-incendio-provoca-susto-e-correria-no-hospital-da-crianca",
+      "title": "Princípio de incêndio provoca susto e correria no Hospital da Criança",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "policia-busca-suspeito-de-avancar-com-carro-contra-multidao-em-berlim",
+      "title": "Polícia busca suspeito de avançar com carro contra multidão em Berlim",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-e-encontrado-morto-em-calcada-no-bairro-mascarenha-de-moraes-em-rio-branco",
+      "title": "Jovem é encontrado morto em calçada no bairro Mascarenha de Moraes, em Rio Branco",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "costureira-e-encontrada-morta-com-maos-e-pes-amarrados-e-golpe-de-faca-no-pescoco-no-bujari",
+      "title": "Costureira é encontrada morta com mãos e pés amarrados e golpe de faca no pescoço no Bujari",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "costureira-e-encontrada-morta-com-maos-e-pes-amarrados-e-ferimento-no-pescoco-no-bujari",
+      "title": "Costureira é encontrada morta com mãos e pés amarrados e ferimento no pescoço, no Bujari",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homenagem-a-luana-barbosa-marca-a-11-marcha-das-mulheres-negras-em-sp",
+      "title": "Homenagem a Luana Barbosa marca a 11ª Marcha das Mulheres Negras em SP",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "acre-mantem-operacao-na-terra-indigena-ashaninka-apos-invasao-armada",
+      "title": "Acre mantém operação na Terra Indígena Ashaninka após invasão armada",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "adolescente-e-apreendido-por-desacato-e-ameacas-a-policiais-durante-ocorrencia-em-cruzeiro-do-su",
+      "title": "Adolescente é apreendido por desacato e ameaças a policiais durante ocorrência em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-com-tornozeleira-eletronica-e-preso-apos-descumprir-medida-protetiva-em-cruzeiro-do-sul",
+      "title": "Homem com tornozeleira eletrônica é preso após descumprir medida protetiva em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "acre-tem-a-4-maior-taxa-de-mortes-violentas-da-regiao-norte-aponta-anuario-de-seguranca-publica",
+      "title": "Acre tem a 4ª maior taxa de mortes violentas da Região Norte, aponta Anuário de Segurança Pública",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "adolescente-de-17-anos-e-apreendido-apos-desacatar-e-ameacar-policiais",
+      "title": "Adolescente de 17 anos é apreendido após desacatar e ameaçar policiais",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-com-tornozeleira-eletronica-e-preso-apos-descumprir-medida-protetiva",
+      "title": "Homem com tornozeleira eletrônica é preso após descumprir medida protetiva",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "leopardo-entra-em-distribuidora-e-ataca-vendedor",
+      "title": "Leopardo entra em distribuidora e ataca vendedor",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "fiat-mobi-atinge-motocicleta-em-rotatoria-proxima-a-aabb-em-cruzeiro-do-sul",
+      "title": "Fiat Mobi atinge motocicleta em rotatória próxima à AABB, em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "escola-diocesana-sao-jose-conquista-tres-vagas-para-a-fase-nacional-dos-jogos-escolares-em-brasi",
+      "title": "Escola Diocesana São José conquista três vagas para a fase nacional dos Jogos Escolares em Brasília",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "desafia-a-lei-dos-eua-e-do-brasil-trump-ameaca-disputar-quarto-mandato-e-quer-mandar-nas-eleicoe",
+      "title": "Desafia a lei dos EUA e do Brasil: Trump ameaça disputar quarto mandato e quer mandar nas eleições do Brasil",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-e-preso-por-estuprar-prima-de-11-anos-em-mancio-lima",
+      "title": "Homem é preso por estuprar prima de 11 anos em Mâncio Lima",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "policia-impede-plano-de-fuga-e-ataque-a-policiais-no-presidio-de-rio-branco",
+      "title": "Polícia impede plano de fuga e ataque a policiais no presídio de Rio Branco",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "acre-tem-duas-iniciativas-entre-as-182-classificadas-para-etapa-nacional-do-premio-rodrigo-melo-",
+      "title": "Acre tem duas iniciativas entre as 182 classificadas para etapa nacional do Prêmio Rodrigo Melo Franco",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pre-candidato-tiao-bocalom-escolhe-o-cruzeirense-sargento-da-policia-militar-adonis-para-seu-vic",
+      "title": "Pré-candidato Tião Bocalom escolhe o cruzeirense sargento da Polícia Militar, Adônis, para seu vice na disputa ao governo do Estado",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "policia-civil-investiga-assalto-a-casa-do-jornalista-chico-melo-e-trabalha-com-a-hipotese-de-rou",
+      "title": "Polícia Civil investiga assalto a casa do jornalista Chico Melo e trabalha com a hipótese de roubo, mas nenhuma hipótese será afastada",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "casa-pega-fogo-na-comunidade-do-gama-em-guajara-am-e-ponte-danificada-impede-acesso-de-viatura-d",
+      "title": "Casa pega fogo na comunidade do Gama, em Guajará (AM) e ponte danificada impede acesso de viatura do Corpo de Bombeiros",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "policia-civil-diz-que-investigacao-sobre-invasao-a-casa-de-jornalista-esta-avancada",
+      "title": "Polícia Civil diz que investigação sobre invasão à casa de jornalista está avançada",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "tatico-do-2-bpm-cumpre-mandado-e-prende-mulher-apontada-como-chefona-do-conselho-final-do-b13",
+      "title": "Tático do 2º BPM cumpre mandado e prende mulher apontada como chefona do Conselho Final do B13",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "investigacao-da-policia-civil-resulta-em-condenacao-de-acusados-de-homicidio-no-interior-do-acre",
+      "title": "Investigação da Polícia Civil resulta em condenação de acusados de homicídio no interior do Acre",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "motorista-de-app-comprova-que-recebeu-proposta-xerecard-e-se-livra-da-prisao-apos-falsa-acusacao",
+      "title": "Motorista de app comprova que recebeu proposta “Xerecard” e se livra da prisão após falsa acusação de estupro",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "desaparecido-medico-e-encontrado-morto-dentro-de-tumulo-em-cemiterio",
+      "title": "Desaparecido, médico é encontrado morto dentro de túmulo em cemitério",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "ponte-danificada-impede-acesso-de-viatura-de-combate-e-incendio-destroi-residencia-no-interior-d",
+      "title": "Ponte danificada impede acesso de viatura de combate e incêndio destrói residência no interior de Guajará",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "video-apos-nao-aceitar-o-fim-da-relacao-homem-agride-ex-e-incendeia-sua-cadela-viva",
+      "title": "VÍDEO: Após não aceitar o fim da relação, homem agride ex e incendeia sua cadela viva",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "incendio-destroi-casa-de-madeira-na-estrada-do-gama-em-guajara",
+      "title": "Incêndio destrói casa de madeira na Estrada do Gama, em Guajará",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "caso-d4vd-mensagens-mostram-que-adolescente-fez-aborto-um-ano-antes-de-ser-morta",
+      "title": "Caso D4vd: mensagens mostram que adolescente fez aborto um ano antes de ser morta",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "um-mes-apos-terremotos-venezuela-ainda-enfrenta-consequencias-da-tragedia",
+      "title": "Um mês após terremotos, Venezuela ainda enfrenta consequências da tragédia",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "autor-de-ataque-em-escola-dos-eua-admite-culpa-e-ouve-depoimentos-emocionados-de-vitimas",
+      "title": "Autor de ataque em escola dos EUA admite culpa e ouve depoimentos emocionados de vítimas",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "planta-trepadeira-em-rede-eletrica-preocupa-moradores-no-bairro-cruzeirao-em-cruzeiro-do-sul",
+      "title": "Planta trepadeira em rede elétrica preocupa moradores no bairro Cruzeirão, em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "morre-chuck-russell-diretor-de-o-maskara-diz-site",
+      "title": "Morre Chuck Russell, diretor de 'O Máskara', diz site",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mortes-por-ebola-no-congo-ultrapassam-1-000-enquanto-a-violencia-e-escassez-de-suprimentos-preju",
+      "title": "Mortes por ebola no Congo ultrapassam 1.000 enquanto a violência e escassez de suprimentos prejudicam médicos",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "chico-melo-diz-que-atentado-contra-sua-vida-nao-pode-ser-tratado-como-roubo",
+      "title": "Chico Melo diz que atentado contra sua vida não pode ser tratado como roubo",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "o-que-diz-a-lei-sobre-questionar-as-urnas-veja-as-possiveis-punicoes",
+      "title": "O que diz a lei sobre questionar as urnas? Veja as possíveis punições",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "joice-hasselmann-diz-que-william-waack-aceitou-ser-ministro-de-bolsonaro-e-levanta-suspeitas-sob",
+      "title": "Joice Hasselmann diz que William Waack aceitou ser ministro de Bolsonaro e levanta suspeitas sobre morte de Bebianno",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "com-media-de-18-mortos-por-dia-por-policiais-brasil-tem-6-600-pessoas-mortas-por-forcas-de-segur",
+      "title": "Com média de 18 mortos por dia por policiais, Brasil tem 6.600 pessoas mortas por forças de segurança",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mp-da-30-dias-para-policia-atualizar-caso-de-agressao-ao-jornalista-chico-melo",
+      "title": "MP dá 30 dias para polícia atualizar caso de agressão ao jornalista Chico Melo",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "parfor-da-ufac-em-santa-rosa-do-purus-lanca-livro-de-contos-universidade-federal-do-acre",
+      "title": "Parfor da Ufac em Santa Rosa do Purus lança livro de contos — Universidade Federal do Acre",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "recebimento-licenca-de-operacao-pioneiro-combustiveis-ltda",
+      "title": "Recebimento Licença de Operação – Pioneiro Combustíveis LTDA",
+      "decision": "APPROVE",
+      "reason": "Fonte, data e contexto suficientes para permanencia editorial; manter atribuicao e resolver credito visual separadamente.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "ira-adverte-que-ormuz-e-linha-vermelha-e-que-vai-resistir-ate-o-fim",
+      "title": "Irã adverte que Ormuz é “linha vermelha” e que vai resistir até o fim",
+      "decision": "REJECT",
+      "reason": "Retirar da fila ativa por duplicidade, baixo valor regional, enquadramento sensacionalista/grafico ou insuficiencia editorial para o CZS.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre",
+      "title": "Quem era a empresária que morreu após luta contra o câncer no Acre?",
+      "decision": "PARK",
+      "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
+      "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    }
+  ]
+}

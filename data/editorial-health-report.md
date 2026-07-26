@@ -1,87 +1,88 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-07-26T06:41:41.719Z
+Gerado em: 2026-07-26T17:06:30.657Z
 Escopo: 360/505 itens recentes.
 
 ## Resumo
 - Gates: P0 58, P1 227, P2 75
-- Aprovacao humana exigida: 58
+- Aprovacao humana exigida: 0
+- Decisoes humanas registradas: 58
 - Pendencias de fonte: 58
 - Pendencias visuais: 296
 - Titulos alternativos gerados: 239
 - Especiais seguros sugeridos: 60
 
-## Pendencias para humano/IDE
-- P0 human-approval: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+## Pendencias tecnicas ativas para IDE
 - P0 ide-fix: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: Auriane Silva celebra conquista de título e incentiva participação de jovens em evento
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: MPAC recomenda veto ao projeto de revisão do Plano Diretor de Rio Branco
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: MPAC denuncia 13 integrantes de organização criminosa investigados na Operação Alvorada
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre
   Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre
   Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: Pedra com data impossível, flecha disparada antes da morte e radar sem encontrar corpo: o suposto túmulo de Robin Hood na Inglaterra que desafia historiadores há séculos
   Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: EUA tentaram manter o horário de verão o ano inteiro para economizar petróleo, mas crianças indo à escola no escuro, confusão nos voos e medo nas ruas fizeram o apoio popular...
   Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 - P0 ide-fix: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
 - P0 ide-fix: 9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ
+  Motivo: Pendencia visual: sem-imagem.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 ide-fix: Incêndio em aparelho de ar-condicionado gera correria no Hospital Infantil de Rio Branco
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Incêndio em aparelho de ar-condicionado gera correria no Hospital Infantil de Rio Branco
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 ide-fix: Incêndio destrói residência na zona rural de Guajará e família perde todos os bens
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Incêndio destrói residência na zona rural de Guajará e família perde todos os bens
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 ide-fix: Homem em situação de rua morre após passar mal em Rio Branco
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Homem em situação de rua morre após passar mal em Rio Branco
+  Motivo: Pendencia visual: sem-imagem.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 ide-fix: Jovem perde controle de motocicleta e bater em poste no interior do Acre
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Jovem perde controle de motocicleta e bater em poste no interior do Acre
   Motivo: Pendencia visual: sem-imagem.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 

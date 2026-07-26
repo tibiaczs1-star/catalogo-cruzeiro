@@ -10,6 +10,7 @@ const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : pat
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const TOPIC_FEED_FALLBACK_FILE = path.join(DATA_DIR, "topic-feed-fallback.json");
+const HUMAN_DECISIONS_FILE = path.join(DATA_DIR, "editorial-human-decisions.json");
 const REPORT_JSON_FILE = path.join(DATA_DIR, "editorial-health-report.json");
 const REPORT_MD_FILE = path.join(DATA_DIR, "editorial-health-report.md");
 const DEFAULT_LIMIT = 360;
@@ -50,12 +51,46 @@ function writeJson(filePath, payload) {
   fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 }
 
+function resolveHumanApprovalQueue(queue, store) {
+  const valid = new Set(["APPROVE", "PARK", "REJECT"]);
+  const decisions = new Map(
+    getArrayFromStore(store)
+      .filter((item) => item?.slug && valid.has(item.decision))
+      .map((item) => [item.slug, item])
+  );
+  const pending = [];
+  const resolved = [];
+  queue.forEach((item) => {
+    const decision = decisions.get(item.slug);
+    if (!decision) {
+      pending.push(item);
+      return;
+    }
+    resolved.push({
+      ...item,
+      humanDecision: decision.decision,
+      decisionReason: cleanText(decision.reason, 500),
+      decidedAt: cleanText(decision.decidedAt || store.decidedAt, 80),
+      decidedBy: cleanText(decision.decidedBy || store.decidedBy, 120)
+    });
+  });
+  return { pending, resolved };
+}
+
+function filterResolvedHumanActions(actionQueue, resolved) {
+  const resolvedSlugs = new Set(resolved.map((item) => item.slug));
+  return actionQueue.filter(
+    (action) => action.resolutionType !== "human-approval" || !resolvedSlugs.has(action.slug)
+  );
+}
+
 function getArrayFromStore(store) {
   if (Array.isArray(store)) return store;
   if (!store || typeof store !== "object") return [];
   if (Array.isArray(store.items)) return store.items;
   if (Array.isArray(store.news)) return store.news;
   if (Array.isArray(store.articles)) return store.articles;
+  if (Array.isArray(store.decisions)) return store.decisions;
   return [];
 }
 
@@ -365,12 +400,13 @@ function buildMarkdown(report) {
   lines.push("## Resumo");
   lines.push(`- Gates: P0 ${report.gates.P0}, P1 ${report.gates.P1}, P2 ${report.gates.P2}`);
   lines.push(`- Aprovacao humana exigida: ${report.summary.humanApprovalRequired}`);
+  lines.push(`- Decisoes humanas registradas: ${report.summary.humanApprovalResolved}`);
   lines.push(`- Pendencias de fonte: ${report.summary.sourceIssues}`);
   lines.push(`- Pendencias visuais: ${report.summary.visualIssues}`);
   lines.push(`- Titulos alternativos gerados: ${report.summary.titleAlternativeCount}`);
   lines.push(`- Especiais seguros sugeridos: ${report.summary.specialCandidates}`);
   lines.push("");
-  lines.push("## Pendencias para humano/IDE");
+  lines.push("## Pendencias tecnicas ativas para IDE");
   if (!report.actionQueue.length) {
     lines.push("- Nenhuma pendencia prioritaria encontrada.");
   } else {
@@ -435,7 +471,6 @@ function runEditorialHealthCheck(options = {}) {
   });
 
   const fullActionQueue = buildActionQueue(items);
-  const actionQueue = fullActionQueue.slice(0, 80);
   const titleAlternatives = items
     .filter((item) => item.titleAlternatives.length)
     .slice(0, 80)
@@ -450,7 +485,13 @@ function runEditorialHealthCheck(options = {}) {
     .filter(Boolean)
     .slice(0, 60);
   const fullHumanApprovalQueue = fullActionQueue.filter((action) => action.resolutionType === "human-approval");
-  const humanApprovalQueue = fullHumanApprovalQueue.slice(0, 80);
+  const humanResolution = resolveHumanApprovalQueue(
+    fullHumanApprovalQueue,
+    readJson(HUMAN_DECISIONS_FILE, { decisions: [] })
+  );
+  const activeActionQueue = filterResolvedHumanActions(fullActionQueue, humanResolution.resolved);
+  const actionQueue = activeActionQueue.slice(0, 80);
+  const humanApprovalQueue = humanResolution.pending.slice(0, 80);
   const sourceIssues = items.reduce((sum, item) => sum + item.sourceIssues.length, 0);
   const visualIssues = items.reduce((sum, item) => sum + item.visualIssues.length, 0);
   const report = {
@@ -472,12 +513,13 @@ function runEditorialHealthCheck(options = {}) {
       }
     },
     summary: {
-      humanApprovalRequired: fullHumanApprovalQueue.length,
+      humanApprovalRequired: humanResolution.pending.length,
+      humanApprovalResolved: humanResolution.resolved.length,
       sourceIssues,
       visualIssues,
       titleAlternativeCount: titleAlternatives.reduce((sum, item) => sum + item.alternatives.length, 0),
       specialCandidates: specialFormats.length,
-      actionQueueTotal: fullActionQueue.length
+      actionQueueTotal: activeActionQueue.length
     },
     gates: {
       P0: items.filter((item) => item.gate === "P0").length,
@@ -494,6 +536,7 @@ function runEditorialHealthCheck(options = {}) {
       issueItems: items.filter((item) => item.visualIssues.length).slice(0, 40)
     },
     humanApprovalQueue,
+    humanApprovalResolved: humanResolution.resolved.slice(0, 160),
     actionQueue,
     titleAlternatives,
     specialFormats,
@@ -524,5 +567,7 @@ if (require.main === module) {
 }
 
 module.exports = {
-  runEditorialHealthCheck
+  filterResolvedHumanActions,
+  runEditorialHealthCheck,
+  resolveHumanApprovalQueue
 };
