@@ -766,7 +766,6 @@ window.NEWS_DATA = [
       "Acompanhe a fonte original para documentos e atualizações."
     ],
     "development": [
-      "Fonte preservada: Prefeitura de CZS.",
       "Status editorial: texto recuperado para evitar página com apenas foto e chamada curta."
     ],
     "imageUrl": "https://static.wixstatic.com/media/0204e8_2a193b37c3434815bdad078c7bef7381~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_2a193b37c3434815bdad078c7bef7381~mv2.jpg",
@@ -818,7 +817,7 @@ window.NEWS_DATA = [
       "Moradores, lideranças e interessados devem acompanhar a página original para prazos, anexos e novas atualizações do procedimento."
     ],
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P1",
@@ -2319,6 +2318,7 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-da-pagina-fonte",
     "body": [
+      "Integracao Net publicou em 14 de jul de 2026: Pagamentos a artistas da Expoacre Juruá começam após cobrança chegar ao Grupo Integração.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -2406,7 +2406,7 @@ window.NEWS_DATA = [
     ],
     "imageLabel": "Imagem editorial neutra",
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P1",
@@ -4959,6 +4959,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "Acre in Foco publicou em 15 de jul de 2026: Deputado Luiz Gonzaga representa o Acre no Peru, em evento para debater integração comercial.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -6489,6 +6490,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "Portal Acre publicou em 15 de jul de 2026: Em Santa Rosa do Purus, Bocalom defende integração e desenvolvimento para municípios isolados do Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -8750,6 +8752,81 @@ window.NEWS_DATA = [
     "editorialLocalTier": 2
   },
   {
+    "id": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/",
+    "slug": "prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro",
+    "title": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
+    "eyebrow": "Prefeitura",
+    "date": "15 de jul de 2026",
+    "publishedAt": "2026-07-15T20:13:59.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/",
+    "sourceLabel": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
+    "lede": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
+    "summary": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
+    "imageCredit": "A Gazeta do Acre",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro A pouco mais de três semanas das tradicionais festividades do bairro Seis de Agosto, a Prefeitura de Rio Branco realizou, nesta quarta-feira, 15, uma vistoria técnica na região para levantar demandas da comunidade e acompanhar serviços de infraestrutura em... A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro A pouco mais de três semanas das tradicionais festividades do bairro Seis de Agosto, a Prefeitura de Rio Branco realizou, nesta quarta-feira, 15, uma vistoria técnica na região para levantar demandas da comunidade e acompanhar serviços de infraestrutura em... A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro. A pouco mais de três semanas das tradicionais festividades do bairro Seis de Agosto, a Prefeitura de Rio Branco realizou, nesta quarta-feira, 15, uma vistoria técnica na região para levantar demandas da comunidade e acompanhar serviços... Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true,
+      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro"
+    },
+    "imageQuality": "imagem-da-pagina-fonte",
+    "body": [
+      "A Gazeta do Acre publicou em 15 de jul de 2026: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "imageLabel": "Imagem relacionada à matéria",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 2
+  },
+  {
     "id": "https://agazetadoacre.com/2026/07/noticias/geral/acre-e-o-estado-que-menos-investiu-em-saneamento-basico-no-brasil-apos-novo-marco-legal-aponta-estudo/",
     "slug": "acre-e-o-estado-que-menos-investiu-em-saneamento-basico-no-brasil-apos-novo-marco-legal-aponta-e",
     "title": "Acre é o estado que menos investiu em saneamento básico no Brasil após novo marco legal, aponta estudo",
@@ -9990,6 +10067,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "ac24horas publicou em 13 de jul de 2026: Operação Fronteira movimenta Brasiléia e fortalece o airsoft nos 116 anos do município.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -10294,6 +10372,78 @@ window.NEWS_DATA = [
     "editorialLocalTier": 1
   },
   {
+    "id": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/",
+    "slug": "rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo",
+    "title": "Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título",
+    "eyebrow": "Cotidiano",
+    "date": "15 de jul de 2026",
+    "publishedAt": "2026-07-15T22:00:08.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "geral cotidiano rainha do rodeio expoacre 2026 conheca as 15 finalistas que disputam o titulo a disputa pela faixa de rainha do rodeio expoacre 2026 entrou na reta decisiva a organizacao do concurso divulgou nesta semana a lista das 15 candidatas finalistas que seguem na competicao e disputarao o titulo de representante oficial de uma das",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "A Gazeta do Acre",
+    "sourceUrl": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/",
+    "sourceLabel": "Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título",
+    "lede": "A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva.",
+    "summary": "A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/cc6833d1-21ef-4b92-8b62-d15c20de16dd.jpg",
+    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/cc6833d1-21ef-4b92-8b62-d15c20de16dd.jpg",
+    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/cc6833d1-21ef-4b92-8b62-d15c20de16dd.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 800,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Gazeta do Acre",
+        "url": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva. A organização do concurso divulgou, nesta semana, a lista das 15 candidatas finalistas que seguem na competição e disputarão o título de representante oficial de uma das... A informação vem de A Gazeta do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva. A organização do concurso divulgou, nesta semana, a lista das 15 candidatas finalistas que seguem na competição e disputarão o título de representante oficial de uma das... A informação vem de A Gazeta do Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título. A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva. A organização do concurso divulgou, nesta semana, a lista das 15 candidatas finalistas que seguem na competição e disputarão o título de representante... Fonte: A Gazeta do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A Gazeta do Acre publicou em 15 de jul de 2026: Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 1
+  },
+  {
     "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-07/mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira",
     "slug": "mega-sena-sorteia-premio-de-r-30-milhoes-nesta-quinta-feira",
     "title": "Mega-Sena sorteia prêmio de R$ 30 milhões nesta quinta-feira",
@@ -10378,8 +10528,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/educacao/quantas-horas-por-dia-e-preciso-estudar-para-o-enem-veja-dicas/",
     "sourceLabel": "Quantas horas por dia é preciso estudar para o Enem? Veja dicas",
-    "lede": "Quantas horas por dia é preciso estudar para o Enem?",
-    "summary": "Quantas horas por dia é preciso estudar para o Enem?",
+    "lede": "Quantas horas por dia é preciso estudar para o Enem? Veja dicas",
+    "summary": "Quantas horas por dia é preciso estudar para o Enem? Veja dicas",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -11221,77 +11371,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "Jurua em Tempo publicou em 15 de jul de 2026: Metade dos imóveis brasileiros apresenta irregularidades documentais.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/",
-    "slug": "mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha",
-    "title": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
-    "eyebrow": "Saude",
-    "date": "12 de jul de 2026",
-    "publishedAt": "2026-07-13T01:20:06.000Z",
-    "category": "Saude",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "Jurua em Tempo",
-    "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/",
-    "sourceLabel": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
-    "lede": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
-    "summary": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/IMG_3128-1140x570-jpeg.avif",
-    "feedImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/IMG_3128-1140x570-jpeg.avif",
-    "sourceImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/IMG_3128-1140x570-jpeg.avif",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 975,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Jurua em Tempo",
-        "url": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua em Tempo",
-        "url": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha Depois de sobreviver ao desabamento da Ponte Frei Paolino Baldassari, passar por oito cirurgias e permanecer internado na UTI de um hospital em São Paulo, o juiz aposentado Edinaldo Muniz mantém os planos de disputar uma vaga na Assembleia Legislativa do... A informação vem de Juruá em Tempo.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha Depois de sobreviver ao desabamento da Ponte Frei Paolino Baldassari, passar por oito cirurgias e permanecer internado na UTI de um hospital em São Paulo, o juiz aposentado Edinaldo Muniz mantém os planos de disputar uma vaga na Assembleia Legislativa do... A informação vem de Juruá em Tempo.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha. Depois de sobreviver ao desabamento da Ponte Frei Paolino Baldassari, passar por oito cirurgias e permanecer internado na UTI de um hospital em São Paulo, o juiz aposentado Edinaldo Muniz mantém os planos de disputar uma vaga na... Fonte: Jurua em Tempo.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -12710,6 +12789,7 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-da-pagina-fonte",
     "body": [
+      "Voz do Norte publicou em 12 de jul de 2026: Revalida 2026/1: divulgado resultado final da primeira etapa do exame e o gabarito definitivo da prova objetiva.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -14072,7 +14152,7 @@ window.NEWS_DATA = [
     ],
     "imageLabel": "Imagem editorial neutra",
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P1",
@@ -14215,78 +14295,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/",
-    "slug": "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio",
-    "title": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
-    "eyebrow": "Politica",
-    "date": "15 de jul de 2026",
-    "publishedAt": "2026-07-16T02:35:28.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Acre in Foco",
-    "sourceUrl": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/",
-    "sourceLabel": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
-    "lede": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
-    "summary": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
-    "feedImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
-    "sourceImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 840,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Acre in Foco",
-        "url": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre in Foco",
-        "url": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio O fundo integra a MP negociada entre o governo, o Congresso Nacional e a FPA O governo do presidente Luiz Inácio Lula da Silva anunciou nesta quarta-feira (15) a criação de um fundo garantidor para o setor agropecuário, com aporte de até R$ 2 bilhões da... A informação vem de Acre in Foco.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio O fundo integra a MP negociada entre o governo, o Congresso Nacional e a FPA O governo do presidente Luiz Inácio Lula da Silva anunciou nesta quarta-feira (15) a criação de um fundo garantidor para o setor agropecuário, com aporte de até R$ 2 bilhões da... A informação vem de Acre in Foco.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio. O fundo integra a MP negociada entre o governo, o Congresso Nacional e a FPA O governo do presidente Luiz Inácio Lula da Silva anunciou nesta quarta-feira (15) a criação de um fundo garantidor para o setor agropecuário, com aporte de até... Fonte: Acre in Foco.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Acre in Foco publicou em 15 de jul de 2026: Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio.",
+      "Acre in Foco publicou em 15 de jul de 2026: Protestos no Equador exigem que órgão eleitoral analise processo de impeachment contra Noboa.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -15102,78 +15111,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
-    "id": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/",
-    "slug": "rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo",
-    "title": "Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título",
-    "eyebrow": "Cotidiano",
-    "date": "15 de jul de 2026",
-    "publishedAt": "2026-07-15T22:00:08.000Z",
-    "category": "Cotidiano",
-    "categoryKey": "geral cotidiano rainha do rodeio expoacre 2026 conheca as 15 finalistas que disputam o titulo a disputa pela faixa de rainha do rodeio expoacre 2026 entrou na reta decisiva a organizacao do concurso divulgou nesta semana a lista das 15 candidatas finalistas que seguem na competicao e disputarao o titulo de representante oficial de uma das",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "A Gazeta do Acre",
-    "sourceUrl": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/",
-    "sourceLabel": "Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título",
-    "lede": "A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva.",
-    "summary": "A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/cc6833d1-21ef-4b92-8b62-d15c20de16dd.jpg",
-    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/cc6833d1-21ef-4b92-8b62-d15c20de16dd.jpg",
-    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/cc6833d1-21ef-4b92-8b62-d15c20de16dd.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 800,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "A Gazeta do Acre",
-        "url": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "A Gazeta do Acre",
-        "url": "https://agazetadoacre.com/2026/07/noticias/geral/rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "rainha-do-rodeio-expoacre-2026-conheca-as-15-finalistas-que-disputam-o-titulo"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva. A organização do concurso divulgou, nesta semana, a lista das 15 candidatas finalistas que seguem na competição e disputarão o título de representante oficial de uma das... A informação vem de A Gazeta do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cotidiano. Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva. A organização do concurso divulgou, nesta semana, a lista das 15 candidatas finalistas que seguem na competição e disputarão o título de representante oficial de uma das... A informação vem de A Gazeta do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título. A disputa pela faixa de Rainha do Rodeio Expoacre 2026 entrou na reta decisiva. A organização do concurso divulgou, nesta semana, a lista das 15 candidatas finalistas que seguem na competição e disputarão o título de representante... Fonte: A Gazeta do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "A Gazeta do Acre publicou em 15 de jul de 2026: Rainha do Rodeio Expoacre 2026: conheça as 15 finalistas que disputam o título.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
     "id": "https://agazetadoacre.com/2026/07/noticias/artesa-cria-linha-de-calcados-autorais-apos-participacao-em-projeto-do-sebrae/",
     "slug": "artesa-cria-linha-de-calcados-autorais-apos-participacao-em-projeto-do-sebrae",
     "title": "Artesã cria linha de calçados autorais após participação em projeto do Sebrae",
@@ -15239,80 +15176,6 @@ window.NEWS_DATA = [
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/",
-    "slug": "prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro",
-    "title": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
-    "eyebrow": "Prefeitura",
-    "date": "15 de jul de 2026",
-    "publishedAt": "2026-07-15T20:13:59.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "A Gazeta do Acre",
-    "sourceUrl": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/",
-    "sourceLabel": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
-    "lede": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
-    "summary": "Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
-    "feedImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
-    "sourceImageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/07/seis-de-agosto.jpg",
-    "imageCredit": "A Gazeta do Acre",
-    "imageFocus": "center",
-    "imageFit": "cover",
-    "media": null,
-    "videoUrl": "",
-    "priority": 800,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "A Gazeta do Acre",
-        "url": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "A Gazeta do Acre",
-        "url": "https://agazetadoacre.com/2026/07/noticias/geral/prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "prefeito-vistoria-ruas-do-seis-de-agosto-e-anuncia-melhorias-antes-das-festividades-do-bairro"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro A pouco mais de três semanas das tradicionais festividades do bairro Seis de Agosto, a Prefeitura de Rio Branco realizou, nesta quarta-feira, 15, uma vistoria técnica na região para levantar demandas da comunidade e acompanhar serviços de infraestrutura em... A informação vem de A Gazeta do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro A pouco mais de três semanas das tradicionais festividades do bairro Seis de Agosto, a Prefeitura de Rio Branco realizou, nesta quarta-feira, 15, uma vistoria técnica na região para levantar demandas da comunidade e acompanhar serviços de infraestrutura em... A informação vem de A Gazeta do Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro. A pouco mais de três semanas das tradicionais festividades do bairro Seis de Agosto, a Prefeitura de Rio Branco realizou, nesta quarta-feira, 15, uma vistoria técnica na região para levantar demandas da comunidade e acompanhar serviços... Fonte: A Gazeta do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true,
-      "alt": "Imagem editorial do Catálogo CZS para a matéria: Prefeito vistoria ruas do Seis de Agosto e anuncia melhorias antes das festividades do bairro"
-    },
-    "imageQuality": "imagem-da-pagina-fonte",
-    "body": [
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "imageLabel": "Imagem relacionada à matéria",
     "editorialGate": "P1",
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": true,
@@ -16614,78 +16477,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: Rio Grande do Sul sob alerta laranja; Defesa Civil prevê fortes temporais.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/",
-    "slug": "veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16",
-    "title": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
-    "eyebrow": "Nacional",
-    "date": "16 de jul de 2026",
-    "publishedAt": "2026-07-16T11:25:27.000Z",
-    "category": "Nacional",
-    "categoryKey": "brasileirao nacional veja como esta a tabela do brasileirao que volta nesta quinta feira 16 competicao nacional ficou mais de 50 dias paralisada por conta da copa do mundo",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/",
-    "sourceLabel": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
-    "lede": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
-    "summary": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16) Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16) Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16). Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 16 de jul de 2026: Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16).",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -18021,7 +17812,6 @@ window.NEWS_DATA = [
       "Acompanhe a fonte original para documentos e atualizações."
     ],
     "development": [
-      "Fonte preservada: ac24horas.",
       "Status editorial: texto recuperado para evitar página com apenas foto e chamada curta."
     ],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-15.01.01.jpeg",
@@ -18076,7 +17866,7 @@ window.NEWS_DATA = [
     ],
     "imageLabel": "Imagem relacionada à matéria",
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.989Z",
+      "repairedAt": "2026-07-26T06:37:50.363Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P1",
@@ -19392,150 +19182,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
-    "id": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/",
-    "slug": "entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil",
-    "title": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
-    "eyebrow": "Politica",
-    "date": "16 de jul de 2026",
-    "publishedAt": "2026-07-16T07:00:50.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/",
-    "sourceLabel": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
-    "lede": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
-    "summary": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/trump-lisa-cook-fed.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/trump-lisa-cook-fed.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/trump-lisa-cook-fed.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Entenda em cinco pontos a nova taxação dos EUA contra o Brasil Governo Trump oficializou na quinta-feira (15) a aplicação de novas tarifas contra produtos brasileiros A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Entenda em cinco pontos a nova taxação dos EUA contra o Brasil Governo Trump oficializou na quinta-feira (15) a aplicação de novas tarifas contra produtos brasileiros A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Entenda em cinco pontos a nova taxação dos EUA contra o Brasil. Governo Trump oficializou na quinta-feira (15) a aplicação de novas tarifas contra produtos brasileiros Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 16 de jul de 2026: Entenda em cinco pontos a nova taxação dos EUA contra o Brasil.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/",
-    "slug": "brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa",
-    "title": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
-    "eyebrow": "Nacional",
-    "date": "16 de jul de 2026",
-    "publishedAt": "2026-07-16T07:00:36.000Z",
-    "category": "Nacional",
-    "categoryKey": "brasileirao nacional brasileirao de volta veja os primeiros jogos apos a pausa para copa torneio nacional volta antes mesmo da final da copa do mundo na quinta feira 16",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/",
-    "sourceLabel": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
-    "lede": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
-    "summary": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/trofeu-copa-libertadores-e1780058942468.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/trofeu-copa-libertadores-e1780058942468.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/trofeu-copa-libertadores-e1780058942468.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Brasileirão de volta: veja os primeiros jogos após a pausa para Copa Torneio nacional volta antes mesmo da final da Copa do Mundo, na quinta-feira (16) A informação vem de CNN Brasil.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Brasileirão de volta: veja os primeiros jogos após a pausa para Copa Torneio nacional volta antes mesmo da final da Copa do Mundo, na quinta-feira (16) A informação vem de CNN Brasil.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Brasileirão de volta: veja os primeiros jogos após a pausa para Copa. Torneio nacional volta antes mesmo da final da Copa do Mundo, na quinta-feira (16) Fonte: CNN Brasil.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "CNN Brasil publicou em 16 de jul de 2026: Brasileirão de volta: veja os primeiros jogos após a pausa para Copa.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
     "id": "https://www.cnnbrasil.com.br/agro/entenda-por-que-os-eua-isentaram-a-carne-bovina-brasileira-do-tarifaco/",
     "slug": "entenda-por-que-os-eua-isentaram-a-carne-bovina-brasileira-do-tarifaco",
     "title": "Entenda por que os EUA isentaram a carne bovina brasileira do tarifaço",
@@ -20184,78 +19830,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
-    "id": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/",
-    "slug": "eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes",
-    "title": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
-    "eyebrow": "Politica",
-    "date": "15 de jul de 2026",
-    "publishedAt": "2026-07-16T00:49:12.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/",
-    "sourceLabel": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
-    "lede": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
-    "summary": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/trump-fertilidade-eua-reproducao-assistida.jpg-1200x800.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/trump-fertilidade-eua-reproducao-assistida.jpg-1200x800.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/trump-fertilidade-eua-reproducao-assistida.jpg-1200x800.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções Foto: BONNIE CASH/EFE/EPA/POOL \" O chefe do USTR (Escritório do Representante Comercial da Casa Branca), Jamieson Greer, disse a interlocutores do governo Lula que já levou para o presidente Donald Trump a recomendação final de um novo tarifaço sobre... A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções Foto: BONNIE CASH/EFE/EPA/POOL \" O chefe do USTR (Escritório do Representante Comercial da Casa Branca), Jamieson Greer, disse a interlocutores do governo Lula que já levou para o presidente Donald Trump a recomendação final de um novo tarifaço sobre... A informação vem de ac24horas.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções. Foto: BONNIE CASH/EFE/EPA/POOL \" O chefe do USTR (Escritório do Representante Comercial da Casa Branca), Jamieson Greer, disse a interlocutores do governo Lula que já levou para o presidente Donald Trump a recomendação final de um novo... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 15 de jul de 2026: EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
     "id": "https://ac24horas.com/2026/07/15/jogadores-da-argentina-exibem-bandeira-sobre-as-malvinas-apos-vitoria/",
     "slug": "jogadores-da-argentina-exibem-bandeira-sobre-as-malvinas-apos-vitoria",
     "title": "Jogadores da Argentina exibem bandeira sobre as Malvinas após vitória",
@@ -20691,77 +20265,6 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
-    "id": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml",
-    "slug": "penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal",
-    "title": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
-    "eyebrow": "Politica",
-    "date": "15 de jul de 2026",
-    "publishedAt": "2026-07-15T20:37:33.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "G1 Politica",
-    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml",
-    "sourceLabel": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
-    "lede": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
-    "summary": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://s2-g1.glbimg.com/zJVE5hqX1EA-kh9FEgn6yuw2AOs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/T/xOwjk8SDAAplbec9MMLQ/globo-canal-4-20251205-2000-frame-126200.jpeg",
-    "feedImageUrl": "https://s2-g1.glbimg.com/zJVE5hqX1EA-kh9FEgn6yuw2AOs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/T/xOwjk8SDAAplbec9MMLQ/globo-canal-4-20251205-2000-frame-126200.jpeg",
-    "sourceImageUrl": "https://s2-g1.glbimg.com/zJVE5hqX1EA-kh9FEgn6yuw2AOs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/T/xOwjk8SDAAplbec9MMLQ/globo-canal-4-20251205-2000-frame-126200.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "G1 Politica",
-        "url": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo Senado aprova projeto que permite servidores do TCU receberem acima do teto do funcionalismo Jornal Nacional/ Reprodução O Tribunal de Contas da União (TCU) decidiu nesta quarta-feira (15) permitir que o salário e a gratificação por desempenho de função de... A informação vem de G1 política.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo Senado aprova projeto que permite servidores do TCU receberem acima do teto do funcionalismo Jornal Nacional/ Reprodução O Tribunal de Contas da União (TCU) decidiu nesta quarta-feira (15) permitir que o salário e a gratificação por desempenho de função de... A informação vem de G1 política.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo. Senado aprova projeto que permite servidores do TCU receberem acima do teto do funcionalismo Jornal Nacional/ Reprodução O Tribunal de Contas da União (TCU) decidiu nesta quarta-feira (15) permitir que o salário e a gratificação por... Fonte: G1 Politica.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 0
-  },
-  {
     "id": "https://g1.globo.com/politica/blog/octavio-guedes/post/2026/07/15/justica-torna-reus-militares-reformados-por-posts-criticos-a-comandantes-da-marinha.ghtml",
     "slug": "justica-torna-reus-militares-reformados-por-posts-criticos-a-comandantes-da-marinha",
     "title": "Justiça torna réus militares reformados por posts críticos a comandantes da Marinha",
@@ -20970,6 +20473,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "G1 Politica publicou em 15 de jul de 2026: Ministro rejeita recurso e mantém suspensão de 30 dias a ex-diretor da penitenciária de Mossoró.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -23510,7 +23014,7 @@ window.NEWS_DATA = [
       "O Catálogo CZS mantém a chamada em tom cauteloso e remete à fonte oficial para detalhes confirmados da investigação."
     ],
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P0",
@@ -23805,6 +23309,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "Batelao publicou em 15 de jul de 2026: Com apoio da Prefeitura, Projeto Guarda Mirim é retomado em Mâncio Lima e inicia atividades com 60 crianças.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -25001,7 +24506,7 @@ window.NEWS_DATA = [
       "A matéria segue com fonte oficial para que o leitor confira autoridades presentes, encaminhamentos e detalhes do evento."
     ],
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P0",
@@ -25733,6 +25238,78 @@ window.NEWS_DATA = [
       "description": "Mayco de Souza Borges, de 23 anos, morreu no Pronto-Socorro de Rio Branco após ser baleado na cabeça durante um atentado em Brasiléia. Segundo o Portal Acre, ele estava internado desde domingo, 12, e não resistiu aos ferimentos. A Polícia Civil alterou o caso de tentativa de homicídio para homicídio qualificado e segue investigando autoria e motivação.",
       "slug": "jovem-que-levou-tiro-na-cabeca-em-brasileia-morre-no-ps"
     },
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 2
+  },
+  {
+    "id": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/",
+    "slug": "regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestaco",
+    "title": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
+    "eyebrow": "Policia",
+    "date": "15 de jul de 2026",
+    "publishedAt": "2026-07-15T19:27:32.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Portal Acre",
+    "sourceUrl": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/",
+    "sourceLabel": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
+    "lede": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
+    "summary": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/briga-estudantes-ok.jpg",
+    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/briga-estudantes-ok.jpg",
+    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/briga-estudantes-ok.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 825,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestaco"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC O Ministério Público do Estado do Acre (MPAC), por meio da Promotoria de Justiça Especializada de Defesa dos Direitos Humanos e Cidadania, expediu recomendação ao prefeito de Rio Branco, ao comandante-geral da Polícia Militar e ao chefe do Gabinete de... A informação vem de Portal Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC O Ministério Público do Estado do Acre (MPAC), por meio da Promotoria de Justiça Especializada de Defesa dos Direitos Humanos e Cidadania, expediu recomendação ao prefeito de Rio Branco, ao comandante-geral da Polícia Militar e ao chefe do Gabinete de... A informação vem de Portal Acre.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC. O Ministério Público do Estado do Acre (MPAC), por meio da Promotoria de Justiça Especializada de Defesa dos Direitos Humanos e Cidadania, expediu recomendação ao prefeito de Rio Branco, ao comandante-geral da Polícia Militar e ao chefe... Fonte: Portal Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Portal Acre publicou em 15 de jul de 2026: Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
     "editorialGate": "P0",
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
@@ -27965,8 +27542,8 @@ window.NEWS_DATA = [
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "remote-secondary",
     "editorialLocalTier": 0
@@ -28539,6 +28116,78 @@ window.NEWS_DATA = [
     },
     "body": [
       "Jurua em Tempo publicou em 15 de jul de 2026: PF bloqueia quase R$ 1 bilhão de esquema de bets ilegais com influencers.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
+  },
+  {
+    "id": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/",
+    "slug": "mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha",
+    "title": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
+    "eyebrow": "Saude",
+    "date": "12 de jul de 2026",
+    "publishedAt": "2026-07-13T01:20:06.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "Jurua em Tempo",
+    "sourceUrl": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/",
+    "sourceLabel": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
+    "lede": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
+    "summary": "Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/IMG_3128-1140x570-jpeg.avif",
+    "feedImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/IMG_3128-1140x570-jpeg.avif",
+    "sourceImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/IMG_3128-1140x570-jpeg.avif",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 975,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Jurua em Tempo",
+        "url": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua em Tempo",
+        "url": "https://www.juruaemtempo.com.br/2026/07/mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mesmo-internado-na-uti-edinaldo-muniz-mantem-pre-candidatura-e-prepara-retomada-da-campanha"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha Depois de sobreviver ao desabamento da Ponte Frei Paolino Baldassari, passar por oito cirurgias e permanecer internado na UTI de um hospital em São Paulo, o juiz aposentado Edinaldo Muniz mantém os planos de disputar uma vaga na Assembleia Legislativa do... A informação vem de Juruá em Tempo.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha Depois de sobreviver ao desabamento da Ponte Frei Paolino Baldassari, passar por oito cirurgias e permanecer internado na UTI de um hospital em São Paulo, o juiz aposentado Edinaldo Muniz mantém os planos de disputar uma vaga na Assembleia Legislativa do... A informação vem de Juruá em Tempo.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha. Depois de sobreviver ao desabamento da Ponte Frei Paolino Baldassari, passar por oito cirurgias e permanecer internado na UTI de um hospital em São Paulo, o juiz aposentado Edinaldo Muniz mantém os planos de disputar uma vaga na... Fonte: Jurua em Tempo.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Jurua em Tempo publicou em 12 de jul de 2026: Mesmo internado na UTI, Edinaldo Muniz mantém pré-candidatura e prepara retomada da campanha.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -29137,6 +28786,7 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-da-pagina-fonte",
     "body": [
+      "Voz do Norte publicou em 16 de jul de 2026: Polícia Militar prende homem acusado de descumprir medida protetiva e ameaçar sua ex-companheira.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -29371,7 +29021,7 @@ window.NEWS_DATA = [
       "O Catálogo CZS mantém a fonte oficial para que leitores confiram edital, anexos, datas e condições do processo."
     ],
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P1",
@@ -29454,7 +29104,7 @@ window.NEWS_DATA = [
       "O Catálogo CZS preserva o link original para consulta do comunicado completo e eventuais critérios do reconhecimento."
     ],
     "contentQuality": {
-      "repairedAt": "2026-07-23T22:40:31.988Z",
+      "repairedAt": "2026-07-26T06:37:50.364Z",
       "repairedReason": "summary-body-flow"
     },
     "editorialGate": "P0",
@@ -29818,6 +29468,78 @@ window.NEWS_DATA = [
     ],
     "editorialGate": "P0",
     "editorialApproval": "human-required",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "remote-secondary",
+    "editorialLocalTier": 0
+  },
+  {
+    "id": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/",
+    "slug": "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio",
+    "title": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
+    "eyebrow": "Politica",
+    "date": "15 de jul de 2026",
+    "publishedAt": "2026-07-16T02:35:28.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Acre in Foco",
+    "sourceUrl": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/",
+    "sourceLabel": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
+    "lede": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
+    "summary": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
+    "feedImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
+    "sourceImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 840,
+    "editorialPriority": "fonte-regional-prioritaria",
+    "crossSources": [
+      {
+        "name": "Acre in Foco",
+        "url": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Acre in Foco",
+        "url": "https://acreinfoco.com/2026/07/tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio O fundo integra a MP negociada entre o governo, o Congresso Nacional e a FPA O governo do presidente Luiz Inácio Lula da Silva anunciou nesta quarta-feira (15) a criação de um fundo garantidor para o setor agropecuário, com aporte de até R$ 2 bilhões da... A informação vem de Acre in Foco.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio O fundo integra a MP negociada entre o governo, o Congresso Nacional e a FPA O governo do presidente Luiz Inácio Lula da Silva anunciou nesta quarta-feira (15) a criação de um fundo garantidor para o setor agropecuário, com aporte de até R$ 2 bilhões da... A informação vem de Acre in Foco.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio. O fundo integra a MP negociada entre o governo, o Congresso Nacional e a FPA O governo do presidente Luiz Inácio Lula da Silva anunciou nesta quarta-feira (15) a criação de um fundo garantidor para o setor agropecuário, com aporte de até... Fonte: Acre in Foco.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Acre in Foco publicou em 15 de jul de 2026: Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "remote-secondary",
     "editorialLocalTier": 0
@@ -30388,6 +30110,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "Acre in Foco publicou em 15 de jul de 2026: Típico da direita: Ricardo Nunes encerra centro para crianças em situação de rua em SP.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -30539,77 +30262,6 @@ window.NEWS_DATA = [
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "remote-secondary",
-    "editorialLocalTier": 0
-  },
-  {
-    "id": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/",
-    "slug": "regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestaco",
-    "title": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
-    "eyebrow": "Policia",
-    "date": "15 de jul de 2026",
-    "publishedAt": "2026-07-15T19:27:32.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Portal Acre",
-    "sourceUrl": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/",
-    "sourceLabel": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
-    "lede": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
-    "summary": "Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/briga-estudantes-ok.jpg",
-    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/briga-estudantes-ok.jpg",
-    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/briga-estudantes-ok.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 825,
-    "editorialPriority": "fonte-regional-prioritaria",
-    "crossSources": [
-      {
-        "name": "Portal Acre",
-        "url": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Portal Acre",
-        "url": "https://portalacre.com.br/2026/07/regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestacoes-sao-recomendadas-pelo-mpac/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "regularizacao-do-transporte-coletivo-e-criacao-de-protocolo-para-atuacao-policial-em-manifestaco"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC O Ministério Público do Estado do Acre (MPAC), por meio da Promotoria de Justiça Especializada de Defesa dos Direitos Humanos e Cidadania, expediu recomendação ao prefeito de Rio Branco, ao comandante-geral da Polícia Militar e ao chefe do Gabinete de... A informação vem de Portal Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC O Ministério Público do Estado do Acre (MPAC), por meio da Promotoria de Justiça Especializada de Defesa dos Direitos Humanos e Cidadania, expediu recomendação ao prefeito de Rio Branco, ao comandante-geral da Polícia Militar e ao chefe do Gabinete de... A informação vem de Portal Acre.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Regularização do transporte coletivo e criação de protocolo para atuação policial em manifestações são recomendadas pelo MPAC. O Ministério Público do Estado do Acre (MPAC), por meio da Promotoria de Justiça Especializada de Defesa dos Direitos Humanos e Cidadania, expediu recomendação ao prefeito de Rio Branco, ao comandante-geral da Polícia Militar e ao chefe... Fonte: Portal Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
     "editorialLocalTier": 0
   },
   {
@@ -31707,7 +31359,7 @@ window.NEWS_DATA = [
     "editorialGate": "P0",
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
-    "editorialSurfaceTier": "news",
+    "editorialSurfaceTier": "remote-secondary",
     "editorialLocalTier": 0
   },
   {
@@ -31780,6 +31432,78 @@ window.NEWS_DATA = [
     "editorialApproval": "human-required",
     "editorialSpotlightReady": false,
     "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/",
+    "slug": "veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16",
+    "title": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T11:25:27.000Z",
+    "category": "Nacional",
+    "categoryKey": "brasileirao nacional veja como esta a tabela do brasileirao que volta nesta quinta feira 16 competicao nacional ficou mais de 50 dias paralisada por conta da copa do mundo",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/",
+    "sourceLabel": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
+    "lede": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
+    "summary": "Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16)",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Elenco-Palmeiras-e1776082728419.png?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "veja-como-esta-a-tabela-do-brasileirao-que-volta-nesta-quinta-feira-16"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16) Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16) Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16). Competição nacional ficou mais de 50 dias paralisada por conta da Copa do Mundo Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Veja como está a tabela do Brasileirão, que volta nesta quinta-feira (16).",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "remote-secondary",
     "editorialLocalTier": 0
   },
   {
@@ -31916,6 +31640,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "G1 Politica publicou em 16 de jul de 2026: Para 58%, Flávio Bolsonaro não tem força para convencer Trump a rever tarifas, segundo Quaest.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -33082,6 +32807,78 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
+    "id": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/",
+    "slug": "entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil",
+    "title": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
+    "eyebrow": "Politica",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T07:00:50.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/",
+    "sourceLabel": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
+    "lede": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
+    "summary": "Entenda em cinco pontos a nova taxação dos EUA contra o Brasil",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/trump-lisa-cook-fed.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/trump-lisa-cook-fed.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/trump-lisa-cook-fed.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "entenda-em-cinco-pontos-a-nova-taxacao-dos-eua-contra-o-brasil"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Entenda em cinco pontos a nova taxação dos EUA contra o Brasil Governo Trump oficializou na quinta-feira (15) a aplicação de novas tarifas contra produtos brasileiros A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Entenda em cinco pontos a nova taxação dos EUA contra o Brasil Governo Trump oficializou na quinta-feira (15) a aplicação de novas tarifas contra produtos brasileiros A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Entenda em cinco pontos a nova taxação dos EUA contra o Brasil. Governo Trump oficializou na quinta-feira (15) a aplicação de novas tarifas contra produtos brasileiros Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Entenda em cinco pontos a nova taxação dos EUA contra o Brasil.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "remote-secondary",
+    "editorialLocalTier": 0
+  },
+  {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/messi-vibra-com-vaga-da-argentina-na-final-da-copa-do-mundo/",
     "slug": "messi-vibra-com-vaga-da-argentina-na-final-da-copa-do-mundo",
     "title": "Messi vibra com vaga da Argentina na final da Copa do Mundo",
@@ -33144,6 +32941,78 @@ window.NEWS_DATA = [
     },
     "body": [
       "CNN Brasil publicou em 16 de jul de 2026: Messi vibra com vaga da Argentina na final da Copa do Mundo.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "remote-secondary",
+    "editorialLocalTier": 0
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/",
+    "slug": "brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa",
+    "title": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
+    "eyebrow": "Nacional",
+    "date": "16 de jul de 2026",
+    "publishedAt": "2026-07-16T07:00:36.000Z",
+    "category": "Nacional",
+    "categoryKey": "brasileirao nacional brasileirao de volta veja os primeiros jogos apos a pausa para copa torneio nacional volta antes mesmo da final da copa do mundo na quinta feira 16",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/",
+    "sourceLabel": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
+    "lede": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
+    "summary": "Brasileirão de volta: veja os primeiros jogos após a pausa para Copa",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/trofeu-copa-libertadores-e1780058942468.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/trofeu-copa-libertadores-e1780058942468.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/trofeu-copa-libertadores-e1780058942468.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/brasileirao/brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "brasileirao-de-volta-veja-os-primeiros-jogos-apos-a-pausa-para-copa"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Brasileirão de volta: veja os primeiros jogos após a pausa para Copa Torneio nacional volta antes mesmo da final da Copa do Mundo, na quinta-feira (16) A informação vem de CNN Brasil.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Nacional. Brasileirão de volta: veja os primeiros jogos após a pausa para Copa Torneio nacional volta antes mesmo da final da Copa do Mundo, na quinta-feira (16) A informação vem de CNN Brasil.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Brasileirão de volta: veja os primeiros jogos após a pausa para Copa. Torneio nacional volta antes mesmo da final da Copa do Mundo, na quinta-feira (16) Fonte: CNN Brasil.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "CNN Brasil publicou em 16 de jul de 2026: Brasileirão de volta: veja os primeiros jogos após a pausa para Copa.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -33503,6 +33372,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "G1 Politica publicou em 15 de jul de 2026: 5 pontos sobre a pesquisa Quaest divulgada após briga entre Michelle e Flávio Bolsonaro e operação contra Jaques Wagner.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -34007,6 +33877,78 @@ window.NEWS_DATA = [
     },
     "body": [
       "ac24horas publicou em 15 de jul de 2026: Senado aprova “jabutis” bilionários nas contas de luz em votação-relâmpago.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "remote-secondary",
+    "editorialLocalTier": 0
+  },
+  {
+    "id": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/",
+    "slug": "eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes",
+    "title": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
+    "eyebrow": "Politica",
+    "date": "15 de jul de 2026",
+    "publishedAt": "2026-07-16T00:49:12.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/",
+    "sourceLabel": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
+    "lede": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
+    "summary": "EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/trump-fertilidade-eua-reproducao-assistida.jpg-1200x800.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/trump-fertilidade-eua-reproducao-assistida.jpg-1200x800.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/trump-fertilidade-eua-reproducao-assistida.jpg-1200x800.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/07/15/eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "eua-confirmam-tarifaco-ao-governo-brasileiro-e-sinalizam-novas-excecoes"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções Foto: BONNIE CASH/EFE/EPA/POOL \" O chefe do USTR (Escritório do Representante Comercial da Casa Branca), Jamieson Greer, disse a interlocutores do governo Lula que já levou para o presidente Donald Trump a recomendação final de um novo tarifaço sobre... A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções Foto: BONNIE CASH/EFE/EPA/POOL \" O chefe do USTR (Escritório do Representante Comercial da Casa Branca), Jamieson Greer, disse a interlocutores do governo Lula que já levou para o presidente Donald Trump a recomendação final de um novo tarifaço sobre... A informação vem de ac24horas.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções. Foto: BONNIE CASH/EFE/EPA/POOL \" O chefe do USTR (Escritório do Representante Comercial da Casa Branca), Jamieson Greer, disse a interlocutores do governo Lula que já levou para o presidente Donald Trump a recomendação final de um novo... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "ac24horas publicou em 15 de jul de 2026: EUA confirmam tarifaço ao governo brasileiro e sinalizam novas exceções.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -35025,6 +34967,78 @@ window.NEWS_DATA = [
     "editorialLocalTier": 0
   },
   {
+    "id": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml",
+    "slug": "penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal",
+    "title": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
+    "eyebrow": "Politica",
+    "date": "15 de jul de 2026",
+    "publishedAt": "2026-07-15T20:37:33.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml",
+    "sourceLabel": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
+    "lede": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
+    "summary": "Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/zJVE5hqX1EA-kh9FEgn6yuw2AOs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/T/xOwjk8SDAAplbec9MMLQ/globo-canal-4-20251205-2000-frame-126200.jpeg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/zJVE5hqX1EA-kh9FEgn6yuw2AOs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/T/xOwjk8SDAAplbec9MMLQ/globo-canal-4-20251205-2000-frame-126200.jpeg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/zJVE5hqX1EA-kh9FEgn6yuw2AOs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/T/xOwjk8SDAAplbec9MMLQ/globo-canal-4-20251205-2000-frame-126200.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/economia/noticia/2026/07/15/penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal-e-do-legislativo.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "penduricalhos-tcu-libera-pagamento-de-gratificacao-fora-do-teto-a-servidores-do-proprio-tribunal"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo Senado aprova projeto que permite servidores do TCU receberem acima do teto do funcionalismo Jornal Nacional/ Reprodução O Tribunal de Contas da União (TCU) decidiu nesta quarta-feira (15) permitir que o salário e a gratificação por desempenho de função de... A informação vem de G1 política.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo Senado aprova projeto que permite servidores do TCU receberem acima do teto do funcionalismo Jornal Nacional/ Reprodução O Tribunal de Contas da União (TCU) decidiu nesta quarta-feira (15) permitir que o salário e a gratificação por desempenho de função de... A informação vem de G1 política.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo. Senado aprova projeto que permite servidores do TCU receberem acima do teto do funcionalismo Jornal Nacional/ Reprodução O Tribunal de Contas da União (TCU) decidiu nesta quarta-feira (15) permitir que o salário e a gratificação por... Fonte: G1 Politica.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "G1 Politica publicou em 15 de jul de 2026: Penduricalhos: TCU libera pagamento de gratificação fora do teto a servidores do próprio tribunal e do Legislativo.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false,
+    "editorialSurfaceTier": "remote-secondary",
+    "editorialLocalTier": 0
+  },
+  {
     "id": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/07/15/zema-defende-direito-de-bolsonaro-escrever-cartas-critica-moraes-e-diz-que-vai-percorrer-o-pais-para-crescer-nas-pesquisas.ghtml",
     "slug": "zema-defende-direito-de-bolsonaro-escrever-cartas-critica-moraes-e-diz-que-vai-percorrer-o-pais-",
     "title": "Zema defende direito de Bolsonaro escrever cartas, critica Moraes e diz que vai percorrer o país para crescer nas pesquisas",
@@ -35233,6 +35247,7 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
+      "G1 Politica publicou em 15 de jul de 2026: Defesa diz que Bolsonaro 'jamais soube' que Flávio divulgaria carta em apoio a pré-candidatura.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],

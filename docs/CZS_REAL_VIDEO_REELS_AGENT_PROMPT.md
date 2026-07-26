@@ -33,7 +33,8 @@ Antes de qualquer captacao, leia:
 10. Validar preview visual antes de qualquer publicacao externa.
 11. Se o video vier de repost com logo/marca de terceiro, tentar achar a origem limpa primeiro. Se nao achar origem limpa em tempo razoavel, gerar versao CZS com logo oficial, titulo, fonte e tarja editorial cobrindo ou dominando a marca antiga, sem esconder credito da fonte.
 12. Todo pacote de video polemico/viral precisa ter uma versao MP4 compatível com WhatsApp: container `.mp4`, video H.264, audio AAC, orientacao 9:16, audio preservado quando util e tamanho revisado antes de envio.
-13. Videos captados para WhatsApp/Reels devem sair em pasta separada de revisao, com `LEIA-ME.txt`, origem, status e motivo de bloqueio quando nao baixar.
+13. Antes de aprovar qualquer Reel, inspecionar os 6 segundos finais. Se aparecer vinheta, splash, logo, end card, slogan ou marca de outra pagina, cortar antes da primeira marca e substituir pela vinheta CZS com `python scripts/replace_outro.py`.
+14. Videos captados para WhatsApp/Reels devem sair em pasta separada de revisao, com `LEIA-ME.txt`, origem, status e motivo de bloqueio quando nao baixar.
 
 ## Linha editorial
 
@@ -107,7 +108,9 @@ Para cada Reel aprovado:
 - Manter credito da fonte.
 - Preservar audio original quando for util; se nao houver audio, aplicar somente trilha jornalistica segura/aprovada.
 - Quando o video ja tiver marca de terceiro, aplicar tarja superior/inferior CZS com tipagem forte, fonte visivel e marca CZS correta. Nao usar overlay transparente fraco que deixe o Reel com cara de repost solto.
+- Inspecionar os 6 segundos finais com `python scripts/replace_outro.py inspect INPUT.mp4 --output-dir REVIEW`; se houver vinheta de terceiros, renderizar a saida final com `python scripts/replace_outro.py replace INPUT.mp4 OUTPUT.mp4 --outro-start SEGUNDO_EXATO`.
 - Gerar tambem uma versao `.mp4` propria para WhatsApp, validada com `ffprobe` como H.264/AAC.
+- Validar a saida final com `python scripts/replace_outro.py validate OUTPUT.mp4 --require-audible` quando houver narracao ou audio obrigatorio. Reprovar se qualquer marca de terceiro aparecer depois do corte.
 - Gerar capa nitida.
 - Salvar preview navegavel.
 

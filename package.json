@@ -42,6 +42,7 @@
     "hermes:render:status": "node scripts/render-api-bridge.js status",
     "hydrate:source-screenshots": "node scripts/hydrate-source-screenshots.js",
     "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
+    "reels:replace-outro": "python scripts/replace_outro.py",
     "rayx": "node rayx/bin/rayx.js",
     "rayx:boot": "node rayx/core/boot.js",
     "rayx:catalog": "node rayx/core/catalog.js",
