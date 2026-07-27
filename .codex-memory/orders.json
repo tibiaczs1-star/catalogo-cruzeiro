@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-07-16T06:50:32.322Z",
+  "lastUpdatedAt": "2026-07-27T15:58:39.913Z",
   "orders": [
     {
       "id": "2026-06-05-capturar-produtos-grupo-inova-logo-correta",
@@ -6112,6 +6112,39 @@
         "manutencao"
       ],
       "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-07-27-publicar-mundo-apple-no-render-e-entregar-video-de-demonstracao-cinematografica-",
+      "createdAt": "2026-07-27T15:58:39.913Z",
+      "updatedAt": "2026-07-27T15:58:39.913Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Finalizar o Mundo Apple: publicar no Render e gerar um vídeo cinematográfico real demonstrando a abertura, a loja e o administrativo.",
+      "summary": "Publicar Mundo Apple no Render e entregar vídeo de demonstração cinematográfica com fluxo público e administrativo.",
+      "normalizedTasks": [
+        "validar interface",
+        "testar fluxo",
+        "gravar vídeo",
+        "enviar repositório",
+        "confirmar Render"
+      ],
+      "filesTouched": [
+        "mundoapple/",
+        "output/playwright/"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "mundoapple",
+        "render",
+        "video",
+        "admin"
+      ],
+      "nextSteps": [
+        "validar mudanças pendentes",
+        "gravar demonstração local",
+        "publicar e verificar rota pública"
+      ],
       "notes": ""
     }
   ]

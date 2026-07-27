@@ -81,7 +81,7 @@ test("front-end assets use the scoped Mundo Apple API and remain mobile responsi
   assert.match(read("index.html"), /data-premium-showcase/);
   assert.doesNotMatch(read("index.html"), /data-journey-stage/);
   assert.match(read("index.html"), /class="hero-backdrop"/);
-  assert.match(read("index.html"), /hero-mundoapple-fullbleed-v2\.png/);
+  assert.match(read("index.html"), /hero-mundoapple-fullbleed-v3\.png/);
   assert.doesNotMatch(read("index.html"), /class="hero-visual-frame"/);
   assert.doesNotMatch(read("index.html"), /class="floating-proof/);
   assert.doesNotMatch(storeScript, /Olá, Matheus/);
@@ -113,4 +113,78 @@ test("inventory table shows the projected web profit calculated by the server", 
   const adminScript = read("admin/admin.js");
   assert.match(adminScript, /formatMoney\(item\.webProjectedProfitCents\)/);
   assert.doesNotMatch(adminScript, /formatMoney\(item\.webProfitCents\)/);
+});
+
+test("official store logo and the selected color drive the product photograph", () => {
+  const storefront = read("index.html");
+  const admin = read("admin/index.html");
+  const storeScript = read("store.js");
+  const mediaModulePath = path.join(root, "product-media.js");
+
+  assert.match(storefront, /assets\/mundo-apple-logo-header\.png/);
+  assert.match(admin, /\.\.\/assets\/mundo-apple-logo-header\.png/);
+  assert.equal(fs.existsSync(mediaModulePath), true);
+  assert.match(storefront, /product-media\.js/);
+  assert.match(storeScript, /productVisual\(item,\s*true,\s*selected\)/);
+
+  const { variantArtPath } = require(mediaModulePath);
+  const item = {
+    catalogKey: "iphone-16-pro-2024",
+    artPath: "assets/products-ai/iphone-16-pro-2024.png",
+  };
+  const natural = variantArtPath(item, { name: "Titânio natural", hex: "#c7b9a8" });
+  const black = variantArtPath(item, { name: "Titânio preto", hex: "#3c3b3d" });
+
+  assert.notEqual(natural, black);
+  assert.match(natural, /assets\/product-colors\/iphone-16-pro-2024\/c7b9a8\.webp(?:\?|$)/);
+  assert.match(black, /assets\/product-colors\/iphone-16-pro-2024\/3c3b3d\.webp(?:\?|$)/);
+});
+
+test("storefront exposes the hold-to-enter cinematic opening", () => {
+  const storefront = read("index.html");
+  const introScript = read("intro.js");
+  const styles = read("styles.css");
+
+  assert.match(storefront, /id="intro-experience"/);
+  assert.match(storefront, /class="intro-apple-mark"/);
+  assert.match(storefront, /assets\/mundoapple-opening-cinematic-v1\.png/);
+  assert.match(storefront, /intro\.js/);
+  assert.match(storefront, /Segure para entrar/);
+  assert.match(introScript, /requestAnimationFrame/);
+  assert.match(introScript, /is-revealing/);
+  assert.match(introScript, /skipIntro/);
+  assert.match(styles, /\.intro-experience/);
+  assert.match(styles, /\.intro-experience\.is-revealing/);
+});
+
+test("the hold interaction charges light, a galaxy and sound before opening", () => {
+  const storefront = read("index.html");
+  const introScript = read("intro.js");
+  const styles = read("styles.css");
+
+  assert.match(storefront, /id="intro-cosmos"/);
+  assert.match(storefront, /class="intro-galaxy"/);
+  assert.match(storefront, /class="intro-energy-core"/);
+  assert.match(introScript, /const createCosmos/);
+  assert.match(introScript, /const createAudioEngine/);
+  assert.match(introScript, /audio\.startCharge\(\)/);
+  assert.match(introScript, /audio\.burst\(\)/);
+  assert.match(introScript, /overlay\.style\.setProperty\("--intro-progress-unit"/);
+  assert.match(styles, /\.intro-cosmos/);
+  assert.match(styles, /\.intro-experience\.is-revealing \.intro-galaxy/);
+});
+
+test("the charged opening adds 3d parallax, tremor, orbiting stars and a terminal explosion", () => {
+  const introScript = read("intro.js");
+  const styles = read("styles.css");
+
+  assert.match(introScript, /const updateParallax/);
+  assert.match(introScript, /overlay\.style\.setProperty\("--intro-parallax-x"/);
+  assert.match(introScript, /hold\.addEventListener\("pointermove"/);
+  assert.match(introScript, /overlay\.classList\.add\("is-exploding"/);
+  assert.match(styles, /--intro-parallax-x/);
+  assert.match(styles, /\.intro-experience\.is-pressing \.intro-scene/);
+  assert.match(styles, /rotateX\(/);
+  assert.match(styles, /\.intro-experience\.is-exploding \.intro-galaxy/);
+  assert.match(styles, /@keyframes intro-cinematic-shake/);
 });

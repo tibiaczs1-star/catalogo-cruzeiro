@@ -46,15 +46,46 @@
     return money.format((Number(cents) || 0) / 100);
   }
 
-  function productArt(item) {
-    const catalogKey = String(item.catalogKey || "").replace(/[^a-z0-9-]/gi, "");
-    return item.artPath || (catalogKey ? `assets/products/${catalogKey}.svg` : "");
+  const productMedia = window.MundoAppleMedia || {};
+
+  function fallbackVariantArtPath(item, variant) {
+    if (variant?.artPath && /\.webp(?:\?|$)/i.test(String(variant.artPath))) return String(variant.artPath);
+    const catalogKey = String(item?.catalogKey || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "");
+    const colorHex = String(variant?.hex || "").trim().toLowerCase();
+    return catalogKey && /^#[0-9a-f]{6}$/.test(colorHex)
+      ? `assets/product-colors/${catalogKey}/${colorHex.slice(1)}.webp?v=20260726-3`
+      : "";
   }
 
-  function productVisual(item, eager = false) {
-    const source = productArt(item);
+  function productArt(item, variant = null) {
+    if (variant) {
+      if (typeof productMedia.variantArtPath === "function") {
+        const mediaPath = productMedia.variantArtPath(item, variant);
+        if (mediaPath && /\.webp(?:\?|$)/i.test(String(mediaPath))) return String(mediaPath);
+      }
+      const fallbackPath = fallbackVariantArtPath(item, variant);
+      if (fallbackPath) return fallbackPath;
+    }
+    if (typeof productMedia.productArtPath === "function") {
+      return productMedia.productArtPath(item);
+    }
+    const catalogKey = String(item?.catalogKey || "").replace(/[^a-z0-9-]/gi, "");
+    return item?.artPath || (catalogKey ? `assets/products/${catalogKey}.svg` : "");
+  }
+
+  function productVisual(item, eager = false, variant = null) {
+    const source = productArt(item, variant);
     if (!source) return '<span class="visual-fallback" aria-hidden="true"></span>';
-    return `<img src="${escapeHtml(source)}" alt="Arte exclusiva de ${escapeHtml(item.name)}" ${eager ? "" : 'loading="lazy"'} decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'visual-fallback'}))">`;
+    const appleMark = `
+      <span class="product-apple-mark" aria-label="Produto Apple identificado">
+        <svg aria-hidden="true" viewBox="0 0 18 19">
+          <path d="M16.7 8.5c-1.1-1.4-2.7-2.2-4.2-2.2-2 0-2.8 1-4.3 1-1.6 0-2.8-1-4.5-1C1.6 6.3 0 7.6 0 10.2c0 1.7.6 3.5 1.4 4.8 1.1 1.7 2.5 3.7 4.2 3.6 1.4-.1 2-1 3.7-1 1.7 0 2.2 1 3.8 1 1.7 0 2.8-1.6 3.8-3.2-2.3-1.1-2.8-4.3-.2-6.9Zm-3-7.9c.2 1.5-.4 2.9-1.2 3.8-.9 1-2.2 1.7-3.5 1.6-.2-1.4.4-2.8 1.2-3.7.9-1 2.3-1.7 3.5-1.7Z"/>
+        </svg>
+        <span>Apple</span>
+      </span>`;
+    return `<span class="product-image-frame"><img src="${escapeHtml(source)}" alt="${escapeHtml(item.name)}${variant?.name ? ` na cor ${escapeHtml(variant.name)}` : ""}" ${eager ? "" : 'loading="lazy"'} decoding="async" onerror="this.closest('.product-image-frame').replaceWith(Object.assign(document.createElement('span'),{className:'visual-fallback'}))">${appleMark}</span>`;
   }
 
   function conditionLabel(item) {
@@ -73,11 +104,12 @@
         name: String(variant.name || "").trim(),
         hex: /^#[0-9a-f]{6}$/i.test(String(variant.hex || "")) ? variant.hex : "#8b8f88",
         quantity: Math.max(0, Number(variant.quantity) || 0),
+        artPath: String(variant.artPath || "").trim(),
       }))
       .filter((variant) => variant.name && variant.quantity > 0);
     if (normalized.length) return normalized;
     return item.color && Number(item.quantity) > 0
-      ? [{ name: item.color, hex: "#8b8f88", quantity: Number(item.quantity) }]
+      ? [{ name: item.color, hex: "#8b8f88", quantity: Number(item.quantity), artPath: "" }]
       : [];
   }
 
@@ -216,7 +248,7 @@
     dialogContent.innerHTML = `
       <div class="dialog-layout">
         <div class="dialog-visual selected-product-color" data-product-color-visual style="--selected-color:${escapeHtml(selected?.hex || "#8b8f88")}">
-          <div class="product-visual">${productVisual(item, true)}</div>
+          <div class="product-visual">${productVisual(item, true, selected)}</div>
           ${selected ? `<span class="selected-color-badge"><i></i><span>Cor escolhida</span><strong>${escapeHtml(selected.name)}</strong></span>` : ""}
           <button class="motion-preview" type="button" data-present-product><span>▶</span> Ver apresentação</button>
           <small>Movimento ilustrativo do produto</small>
@@ -268,7 +300,7 @@
       <div class="checkout-shell">
         <aside class="checkout-summary" style="--selected-color:${escapeHtml(selected.hex)}">
           <p class="eyebrow"><span></span> Compra segura assistida</p>
-          <div class="checkout-product-art">${productVisual(item, true)}</div>
+          <div class="checkout-product-art">${productVisual(item, true, selected)}</div>
           <div class="checkout-product-copy">
             <small>${escapeHtml(item.category)} · ${conditionLabel(item)}</small>
             <h2>${escapeHtml(item.name)}</h2>

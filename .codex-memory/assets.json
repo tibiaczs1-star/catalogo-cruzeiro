@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-06-05T16:31:23.565Z",
+  "lastUpdatedAt": "2026-07-27T16:16:44.126Z",
   "assets": [
     {
       "id": "v8-hidratacao-real-validation-20260605",
@@ -2343,6 +2343,17 @@
       "note": "Prova da intro v28: antes do clique em 100%, video tocando com audio embutido apos clique, e site liberado depois da transicao.",
       "linkedOrderIds": [],
       "createdAt": "2026-06-05T16:31:23.565Z"
+    },
+    {
+      "id": "mundoapple-cinematic-tour-mp4",
+      "kind": "video",
+      "path": "output/playwright/mundoapple-demo/mundoapple-cinematic-tour.mp4",
+      "source": "workspace",
+      "note": "Captura real cinematográfica: abertura, vitrine, seleção de cor, checkout e administrativo.",
+      "linkedOrderIds": [
+        "2026-07-27-publicar-mundo-apple-no-render-e-entregar-video-de-demonstracao-cinematografica-"
+      ],
+      "createdAt": "2026-07-27T16:16:44.126Z"
     }
   ],
   "social": [
