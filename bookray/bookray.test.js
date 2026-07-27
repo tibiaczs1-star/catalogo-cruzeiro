@@ -6,6 +6,10 @@ const path = require("node:path");
 const root = __dirname;
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const app = fs.readFileSync(path.join(root, "app.js"), "utf8");
+const mediaKitPath = path.join(root, "media-kit.html");
+const mediaKit = fs.existsSync(mediaKitPath)
+  ? fs.readFileSync(mediaKitPath, "utf8")
+  : "";
 
 const campaignAssets = [
   "campanha-country-botas-rosa-estudio.webp",
@@ -42,6 +46,7 @@ test("não publica fotografias com marcas de loja ou artefatos de remoção", ()
   for (const asset of excludedAssets) {
     assert.doesNotMatch(app, new RegExp(asset.replaceAll(".", "\\.")));
     assert.doesNotMatch(html, new RegExp(asset.replaceAll(".", "\\.")));
+    assert.doesNotMatch(mediaKit, new RegExp(asset.replaceAll(".", "\\.")));
   }
 });
 
@@ -58,4 +63,20 @@ test("galeria responsiva expõe metadados e lightbox acessível", () => {
   assert.match(app, /width="\$\{item\.width\}"/);
   assert.match(html, /<dialog[^>]+id="lightbox"/);
   assert.match(html, /aria-label="Fechar/);
+});
+
+test("nova direção editorial possui movimento, perfil social e acesso ao media kit", () => {
+  assert.match(html, /ticker-track/);
+  assert.match(html, /social-stage/);
+  assert.match(html, /data-depth/);
+  assert.match(html, /media-kit\.html/);
+});
+
+test("media kit apresenta dados profissionais e métricas históricas com responsabilidade", () => {
+  assert.ok(fs.existsSync(mediaKitPath));
+  for (const fact of ["17 anos", "1,82 m", "55 kg", "ATM Modas", "80 mil", "50 milhões"]) {
+    assert.match(mediaKit, new RegExp(fact, "i"));
+  }
+  assert.match(mediaKit, /históric/i);
+  assert.match(mediaKit, /responsável|representante/i);
 });

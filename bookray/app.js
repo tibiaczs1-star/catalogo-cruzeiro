@@ -112,4 +112,27 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 
+const hero = document.querySelector(".hero");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const precisePointer = window.matchMedia("(pointer: fine)").matches;
+
+if (hero && !reducedMotion && precisePointer) {
+  hero.addEventListener("pointermove", (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    hero.querySelectorAll("[data-depth]").forEach((layer) => {
+      const depth = Number(layer.dataset.depth || 0);
+      layer.style.translate = `${x * depth}px ${y * depth}px`;
+    });
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    hero.querySelectorAll("[data-depth]").forEach((layer) => {
+      layer.style.translate = "";
+    });
+  });
+}
+
 document.querySelector("#year").textContent = new Date().getFullYear();
