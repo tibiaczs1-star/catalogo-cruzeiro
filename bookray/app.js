@@ -1,113 +1,115 @@
-const stills = [
-  '6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg','IMG_0406.jpeg','IMG_0407.jpeg','IMG_0449.jpeg','5f9195c0-957a-44e8-ba89-f8e0291b8a32.JPG.jpeg','IMG_0602.jpeg','IMG_0605.jpeg','IMG_0657.jpeg','259b0ccb-9b2a-4b97-b0e2-fc2d09eee812.JPG.jpeg','bc0cea41-9f73-4f8a-a754-04290a741733.JPG.jpeg','1c69e6fc-05f9-4ad6-9d4f-5e595f645762.JPG.jpeg','21496ee4-5f41-4ea0-850e-85ffb099a475.JPG.jpeg','5200325f-1857-4517-8fbc-c4fcabd0ab73.JPG.jpeg','1999e35b-ef92-41c8-b717-9df2e47bd880.JPG.jpeg','6a2f159a-5513-4df7-8214-a58ea0caca22.JPG.jpeg','5b61d66c-39e7-4868-a193-230185470d4d.JPG.jpeg','IMG_0767.jpeg','IMG_0812.jpeg','IMG_0816.jpeg','IMG_0817.jpeg','IMG_0818.jpeg','IMG_0830.jpeg','IMG_0903.jpeg','87189062-434a-437b-aea5-2b0afaaadfe2.JPG.jpeg','304aa290-f2bc-43fc-b953-0b427eba0cc3.JPG.jpeg','3b0d5937-0611-43cc-8b7e-81dd4cb1b44f.JPG.jpeg','96cd42f8-7399-42a1-a6cf-26aceb41ecc2.JPG.jpeg','IMG_1127.jpeg','IMG_1128.jpeg','IMG_1129.jpeg','IMG_1130.jpeg','IMG_1154.jpeg','IMG_1200.jpeg','IMG_1201.jpeg'
+const campaign = [
+  { file: "campanha-country-raiane-botas-douradas.webp", width: 1086, height: 1448, title: "Western Contemporâneo", meta: "Editorial de estúdio", className: "portrait lead" },
+  { file: "campanha-country-raiane-blocos.webp", width: 1122, height: 1402, title: "Geometria & Couro", meta: "Editorial country · 2026", className: "portrait tall" },
+  { file: "campanha-country-botas-douradas-close.webp", width: 1086, height: 1448, title: "Textura", meta: "Detalhe editorial", className: "portrait" }
 ];
 
-const scenes = [
-  { type: 'studio', title: 'Casting Studio', kicker: '01 / SCREEN TEST', files: stills.slice(0, 7) },
-  { type: 'devices', title: 'Pocket Editorial', kicker: '02 / DIGITAL COVER', files: stills.slice(7, 14) },
-  { type: 'broadcast', title: 'On Air', kicker: '03 / FASHION SIGNAL', files: stills.slice(14, 21) },
-  { type: 'lightbox', title: 'Contact Sheet', kicker: '04 / THE SELECTION', files: stills.slice(21, 28) },
-  { type: 'cinema', title: 'Final Look', kicker: '05 / AFTER DARK', files: stills.slice(28) }
+const products = [
+  { file: "produto-botas-rosa-fazenda.webp", width: 1122, height: 1402, title: "Bota Rosa", meta: "Campanha rural", className: "wide" },
+  { file: "produto-botas-douradas-frontal.webp", width: 1086, height: 1448, title: "Bota Dourada", meta: "Vista frontal" },
+  { file: "produto-botas-douradas-perfil.webp", width: 1086, height: 1448, title: "Bota Dourada", meta: "Perfil editorial" },
+  { file: "campanha-country-botas-rosa-estudio.webp", width: 1086, height: 1448, title: "Bota Rosa", meta: "Still de estúdio" }
 ];
 
-const img = (file, index, className = '') => `<img class="${className}" src="assets/${file}" alt="Raiane Leoncio — fotografia editorial ${index + 1}" loading="lazy">`;
-const page = (file, index, kind = '') => `<figure class="mag-page ${kind}">${img(file, index)}<figcaption><span>${String(index + 1).padStart(2, '0')}</span><span>RAIANE LEONCIO</span></figcaption></figure>`;
+const partners = [
+  { file: "lifestyle-country-cavalo.webp", width: 1122, height: 1402, title: "Lifestyle Country", meta: "Narrativa de território", className: "partner-main" }
+];
 
-function renderScene(scene, sceneIndex) {
-  const start = scenes.slice(0, sceneIndex).reduce((total, item) => total + item.files.length, 0);
-  const [a, b, c, d, e, f, g] = scene.files;
-  const globalIndex = offset => start + offset;
-  let composition = '';
-  if (scene.type === 'studio') composition = `
-    <div class="photo-atmosphere parallax" data-speed="0.08">${img(a, globalIndex(0))}</div>
-    <div class="mag-layout layout-studio">
-      <div class="open-spread">${page(a,globalIndex(0),'page-left')}${page(b,globalIndex(1),'page-right')}</div>
-      ${page(c,globalIndex(2),'cover cover-a')}${page(d,globalIndex(3),'cover cover-b')}
-      <div class="page-ribbon">${[e,f,g].map((file,i)=>page(file,globalIndex(i+4))).join('')}</div>
-    </div>`;
-  else if (scene.type === 'devices') composition = `
-    <div class="editorial-word" aria-hidden="true">RAIANE</div>
-    <div class="mag-layout layout-orbit">
-      ${page(a,globalIndex(0),'hero-cover parallax')}
-      <div class="open-spread spread-left">${page(b,globalIndex(1),'page-left')}${page(c,globalIndex(2),'page-right')}</div>
-      ${page(d,globalIndex(3),'cover side-cover')}
-      <div class="page-ribbon">${[e,f,g].map((file,i)=>page(file,globalIndex(i+4))).join('')}</div>
-    </div>`;
-  else if (scene.type === 'broadcast') composition = `
-    <div class="photo-atmosphere parallax" data-speed="0.07">${img(a,globalIndex(0))}</div>
-    <div class="mag-layout layout-signal">
-      <div class="open-spread signal-spread">${page(a,globalIndex(0),'page-left')}${page(b,globalIndex(1),'page-right')}</div>
-      ${page(c,globalIndex(2),'cover signal-cover')}
-      <div class="contact-ribbon">${[d,e,f,g].map((file,i)=>page(file,globalIndex(i+3))).join('')}</div>
-    </div>`;
-  else if (scene.type === 'lightbox') composition = `
-    <div class="mag-layout contact-sheet">${scene.files.map((file,i)=>page(file,globalIndex(i),`contact-${i+1}`)).join('')}</div>`;
-  else composition = `
-    <div class="photo-atmosphere parallax" data-speed="0.08">${img(a,globalIndex(0))}</div>
-    <div class="mag-layout layout-final">
-      <div class="open-spread final-spread">${page(a,globalIndex(0),'page-left')}${page(b,globalIndex(1),'page-right')}</div>
-      ${page(c,globalIndex(2),'cover final-cover')}
-      <div class="page-ribbon">${[d,e,f].filter(Boolean).map((file,i)=>page(file,globalIndex(i+3))).join('')}</div>
-    </div>`;
+const legacy = [
+  { file: "IMG_0406.jpeg", width: 1920, height: 2560, title: "Passarela", meta: "Seleção de arquivo" },
+  { file: "IMG_0657.jpeg", width: 1920, height: 2560, title: "Editorial", meta: "Seleção de arquivo" },
+  { file: "IMG_0903.jpeg", width: 1920, height: 2560, title: "Moda", meta: "Seleção de arquivo" },
+  { file: "IMG_1200.jpeg", width: 1920, height: 2560, title: "Presença", meta: "Seleção de arquivo" }
+];
 
-  return `<section class="gallery-scene scene-${scene.type} reveal" aria-label="${scene.title}">
-    <header class="scene-heading"><span>${scene.kicker}</span><h3>${scene.title}</h3></header>
-    <div class="scene-composition">${composition}</div>
-    <footer class="scene-footer"><span>RAIANE LEONCIO</span><span>${String(start + 1).padStart(2, '0')} — ${String(start + scene.files.length).padStart(2, '0')}</span></footer>
-  </section>`;
+const lightboxItems = [];
+const lightbox = document.querySelector("#lightbox");
+const lightboxImage = lightbox.querySelector("img");
+const lightboxTitle = lightbox.querySelector("figcaption span");
+const lightboxMeta = lightbox.querySelector("figcaption small");
+let activeIndex = 0;
+
+function responsivePicture(item) {
+  const path = `assets/${item.file}`;
+  const isResponsiveWebp = item.file.endsWith(".webp");
+  const stem = isResponsiveWebp ? item.file.slice(0, -5) : item.file;
+  const small = isResponsiveWebp ? `assets/${stem}-720.webp` : path;
+  return `
+    <picture>
+      ${small !== path ? `<source srcset="${small} 720w, ${path} ${item.width}w" sizes="(max-width: 760px) 92vw, 45vw">` : ""}
+      <img src="${path}" width="${item.width}" height="${item.height}" alt="${item.title} — ${item.meta}" loading="lazy" decoding="async">
+    </picture>`;
 }
 
-document.querySelector('#gallery').innerHTML = scenes.map(renderScene).join('');
+function card(item, index, group) {
+  const globalIndex = lightboxItems.push(item) - 1;
+  return `
+    <button class="photo-card ${item.className || ""} reveal" type="button" data-lightbox-index="${globalIndex}" aria-label="Ampliar: ${item.title}">
+      ${responsivePicture(item)}
+      <span class="photo-overlay"><strong>${item.title}</strong><small>${item.meta}</small><i>↗</i></span>
+      <span class="photo-number">${String(index + 1).padStart(2, "0")} / ${String(group.length).padStart(2, "0")}</span>
+    </button>`;
+}
 
-const motion = [
-  { file: 'IMG_0224.GIF', type: 'image', label: 'MOTION PORTRAIT' },
-  { file: 'runway-film.mp4', type: 'video', label: 'RUNWAY FILM' }
-];
+function renderCollection(selector, items) {
+  document.querySelector(selector).innerHTML = items.map((item, index) => card(item, index, items)).join("");
+}
 
-const motionGrid = document.querySelector('#motion-grid');
-motion.forEach((item, i) => {
-  const el = document.createElement('article');
-  el.className = 'motion-item reveal';
-  const media = item.type === 'video'
-    ? `<video src="assets/${item.file}" muted loop playsinline controls preload="metadata"></video>`
-    : `<img src="assets/${item.file}" alt="Raiane Leoncio em movimento" loading="lazy">`;
-  el.innerHTML = `${media}<div class="motion-caption"><span>${item.label}</span><span>0${i + 1} / 0${motion.length}</span></div>`;
-  motionGrid.appendChild(el);
+renderCollection("#campaign-grid", campaign);
+renderCollection("#product-grid", products);
+renderCollection("#partner-grid", partners);
+renderCollection("#legacy-grid", legacy);
+
+function openLightbox(index) {
+  activeIndex = index;
+  const item = lightboxItems[activeIndex];
+  const path = `assets/${item.file}`;
+  lightboxImage.src = path;
+  lightboxImage.alt = `${item.title} — ${item.meta}`;
+  lightboxTitle.textContent = item.title;
+  lightboxMeta.textContent = `${item.meta} · ${activeIndex + 1}/${lightboxItems.length}`;
+  if (!lightbox.open) lightbox.showModal();
+}
+
+function moveLightbox(delta) {
+  activeIndex = (activeIndex + delta + lightboxItems.length) % lightboxItems.length;
+  openLightbox(activeIndex);
+}
+
+document.addEventListener("click", (event) => {
+  const trigger = event.target.closest("[data-lightbox-index]");
+  if (trigger) openLightbox(Number(trigger.dataset.lightboxIndex));
 });
 
-const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting) {
-    entry.target.classList.add('is-visible');
-    const video = entry.target.querySelector('video');
-    if (video) video.play().catch(() => {});
-  } else {
-    const video = entry.target.querySelector('video');
-    if (video) video.pause();
-  }
-}), { threshold: 0.12 });
+lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
+lightbox.querySelector(".previous").addEventListener("click", () => moveLightbox(-1));
+lightbox.querySelector(".next").addEventListener("click", () => moveLightbox(1));
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) lightbox.close();
+});
+document.addEventListener("keydown", (event) => {
+  if (!lightbox.open) return;
+  if (event.key === "ArrowLeft") moveLightbox(-1);
+  if (event.key === "ArrowRight") moveLightbox(1);
+});
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-const progress = document.querySelector('.progress');
-const parallaxLayers = [...document.querySelectorAll('.parallax')];
-let ticking = false;
-
-function updateMotion() {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  progress.style.width = `${max ? scrollY / max * 100 : 0}%`;
-  parallaxLayers.forEach(layer => {
-    const rect = layer.closest('.gallery-scene').getBoundingClientRect();
-    const speed = Number(layer.dataset.speed || (layer.classList.contains('hero-phone') ? -0.05 : 0.06));
-    const travel = (innerHeight / 2 - (rect.top + rect.height / 2)) * speed;
-    layer.style.setProperty('--parallax-y', `${travel.toFixed(1)}px`);
-  });
-  ticking = false;
+const progress = document.querySelector(".progress span");
+function updateScrollEffects() {
+  const scrollable = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = `scaleX(${scrollable ? scrollY / scrollable : 0})`;
+  document.documentElement.style.setProperty("--scroll", scrollY);
 }
+addEventListener("scroll", updateScrollEffects, { passive: true });
+updateScrollEffects();
 
-addEventListener('scroll', () => {
-  if (!ticking) {
-    requestAnimationFrame(updateMotion);
-    ticking = true;
-  }
-}, { passive: true });
-updateMotion();
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+document.querySelector("#year").textContent = new Date().getFullYear();

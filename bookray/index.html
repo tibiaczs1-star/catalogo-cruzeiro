@@ -2,60 +2,137 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Portfólio de Raiane Leoncio, 17 anos, modelo de passarela.">
-  <title>Raiane Leoncio — Modelo de Passarela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0a09">
+  <meta name="description" content="Book profissional de Raiane Leôncio — modelo, passarela e campanhas publicitárias.">
+  <title>Raiane Leôncio — Book</title>
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/campanha-country-raiane-blocos-720.webp" imagesrcset="assets/campanha-country-raiane-blocos-720.webp 720w, assets/campanha-country-raiane-blocos.webp 1122w" imagesizes="100vw">
   <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
-<body>
-  <div class="progress" aria-hidden="true"></div>
-  <header class="topbar">
-    <a href="#inicio" class="monogram" aria-label="Início">RL</a>
-    <p>PORTFÓLIO · 2026</p>
-    <a href="#perfil">PERFIL</a>
+<body data-bookray-version="2026-07-27-country-clean">
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <a class="monogram" href="#inicio" aria-label="Raiane Leôncio, início">RL</a>
+    <nav aria-label="Navegação principal">
+      <a href="#perfil">Perfil</a>
+      <a href="#campanha">Campanha</a>
+      <a href="#produto">Produto</a>
+      <a href="#passarela">Passarela</a>
+    </nav>
+    <a class="header-cta" href="#contato">Contato</a>
   </header>
 
-  <main>
-    <section class="hero" id="inicio">
-      <div class="hero-media"><img src="assets/IMG_1127.jpeg" alt="Raiane Leoncio em apresentação de passarela"></div>
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <picture class="hero-media">
+        <source media="(max-width: 760px)" srcset="assets/campanha-country-raiane-blocos-720.webp">
+        <img src="assets/campanha-country-raiane-blocos.webp" width="1122" height="1402" alt="Raiane em editorial country contemporâneo" fetchpriority="high" decoding="async">
+      </picture>
       <div class="hero-shade"></div>
+      <p class="hero-kicker">Modelo · Acre, Brasil</p>
       <div class="hero-copy">
-        <p class="eyebrow">MODELO DE PASSARELA · 17 ANOS</p>
-        <h1><span>RAIANE</span><span>LEONCIO</span></h1>
-        <p class="scroll-cue">ROLE PARA ENTRAR EM CENA <i></i></p>
+        <h1 id="hero-title">Raiane<br><em>Leôncio</em></h1>
+        <p>Presença que transforma moda, produto e território em imagem.</p>
+      </div>
+      <div class="hero-index" aria-hidden="true">Book<br>MMXXVI</div>
+      <a class="scroll-cue" href="#perfil"><span>Explorar</span><i></i></a>
+    </section>
+
+    <section class="profile chapter" id="perfil">
+      <div class="chapter-marker"><span>01</span> Perfil</div>
+      <div class="profile-copy reveal">
+        <p class="eyebrow">Naturalidade em frente às lentes</p>
+        <h2>Elegância com<br><em>identidade amazônica.</em></h2>
+        <p class="lede">Raiane transita entre o editorial, a moda comercial e a passarela com uma presença marcante, contemporânea e versátil.</p>
+        <dl class="facts">
+          <div><dt>Base</dt><dd>Cruzeiro do Sul — AC</dd></div>
+          <div><dt>Atuação</dt><dd>Editorial · Publicidade · Passarela</dd></div>
+          <div><dt>Disponível</dt><dd>Campanhas e colaborações</dd></div>
+        </dl>
+      </div>
+      <figure class="profile-portrait reveal">
+        <picture>
+          <source srcset="assets/campanha-country-raiane-botas-douradas-720.webp 720w, assets/campanha-country-raiane-botas-douradas.webp 1086w" sizes="(max-width: 800px) 92vw, 43vw">
+          <img src="assets/campanha-country-raiane-botas-douradas.webp" width="1086" height="1448" alt="Retrato editorial de Raiane com look country contemporâneo" loading="lazy" decoding="async">
+        </picture>
+        <figcaption>Editorial / 2026</figcaption>
+      </figure>
+    </section>
+
+    <section class="campaign chapter" id="campanha">
+      <header class="section-heading reveal">
+        <div class="chapter-marker"><span>02</span> Campanha Country</div>
+        <h2>Sertão <em>Luxo</em></h2>
+        <p>Couro, cor e luz dourada em uma narrativa que aproxima moda regional e linguagem editorial.</p>
+      </header>
+      <div class="editorial-grid" id="campaign-grid" aria-label="Fotos da campanha Country"></div>
+    </section>
+
+    <section class="product chapter" id="produto">
+      <header class="section-heading reveal">
+        <div class="chapter-marker"><span>03</span> Produto em Cena</div>
+        <h2>Detalhe que<br><em>vende desejo.</em></h2>
+      </header>
+      <div class="product-stage" id="product-grid" aria-label="Fotografias de produto"></div>
+    </section>
+
+    <section class="partners chapter" id="parceiros">
+      <div class="partner-copy reveal">
+        <div class="chapter-marker"><span>04</span> Parceiros</div>
+        <p class="eyebrow">Moda local, alcance real</p>
+        <h2>Imagem que conecta<br><em>marca e público.</em></h2>
+        <p>Ensaios com leitura comercial, valorização do produto e integração natural ao universo de cada parceiro.</p>
+      </div>
+      <div class="partner-visuals" id="partner-grid"></div>
+    </section>
+
+    <section class="runway chapter" id="passarela">
+      <header class="section-heading reveal">
+        <div class="chapter-marker"><span>05</span> Passarela</div>
+        <h2>Movimento.<br><em>Atitude. Presença.</em></h2>
+      </header>
+      <div class="runway-layout">
+        <div class="runway-film reveal">
+          <video controls playsinline preload="metadata" poster="assets/IMG_0406.jpeg" aria-label="Raiane em vídeo de passarela">
+            <source src="assets/runway-film.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="legacy-strip" id="legacy-grid" aria-label="Seleção de passarela"></div>
       </div>
     </section>
 
-    <section class="manifest reveal">
-      <p class="chapter">01 / PRESENÇA</p>
-      <h2>Presença que começa<br>antes do primeiro passo.</h2>
-      <p class="lede">Raiane traduz atitude, elegância e movimento em uma imagem naturalmente editorial.</p>
-    </section>
-
-    <section class="stage" aria-label="Editorial fotográfico">
-      <div class="stage-title reveal"><span>THE</span><strong>RUNWAY</strong><span>EDIT</span></div>
-      <div id="gallery" class="gallery"></div>
-    </section>
-
-    <section class="motion-section" id="motion">
-      <div class="motion-heading reveal">
-        <p class="chapter">02 / MOVIMENTO</p>
-        <h2>Em cena.</h2>
+    <section class="contact" id="contato">
+      <p class="eyebrow">Vamos criar juntos</p>
+      <h2>Raiane está pronta<br>para a sua <em>próxima campanha.</em></h2>
+      <div class="contact-actions">
+        <a class="button primary" href="https://wa.me/556896026649" target="_blank" rel="noopener">Falar sobre um trabalho <span>↗</span></a>
+        <a class="button ghost" href="https://catalogo-cruzeiro-web.onrender.com/" target="_blank" rel="noopener">Conhecer o Catálogo CZS</a>
       </div>
-      <div id="motion-grid" class="motion-grid"></div>
-    </section>
-
-    <section class="profile" id="perfil">
-      <div class="profile-line reveal"><span>NOME</span><strong>RAIANE LEONCIO</strong></div>
-      <div class="profile-line reveal"><span>IDADE</span><strong>17 ANOS</strong></div>
-      <div class="profile-line reveal"><span>ATUAÇÃO</span><strong>MODELO DE PASSARELA</strong></div>
-      <div class="profile-ending reveal">
-        <p>CASTING PORTFOLIO</p>
-        <h2>RAIANE<br>LEONCIO</h2>
-        <p>CONTATO PROFISSIONAL SOB CONSULTA</p>
-      </div>
+      <p class="contact-location">Cruzeiro do Sul · Acre · Brasil</p>
     </section>
   </main>
-  <script src="app.js"></script>
+
+  <footer>
+    <a class="monogram" href="#inicio" aria-label="Voltar ao início">RL</a>
+    <p>© <span id="year"></span> Raiane Leôncio</p>
+    <p>Modelo &amp; Criadora</p>
+  </footer>
+
+  <dialog id="lightbox" aria-label="Visualizador de fotografias">
+    <button class="lightbox-close" type="button" aria-label="Fechar">×</button>
+    <button class="lightbox-nav previous" type="button" aria-label="Foto anterior">←</button>
+    <figure>
+      <img src="" alt="">
+      <figcaption><span></span><small></small></figcaption>
+    </figure>
+    <button class="lightbox-nav next" type="button" aria-label="Próxima foto">→</button>
+  </dialog>
 </body>
 </html>
