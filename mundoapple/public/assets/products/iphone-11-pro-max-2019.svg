@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" role="img" aria-labelledby="title desc">
+  <title id="title">iPhone 11 Pro Max</title><desc id="desc">Ilustração editorial exclusiva do produto iPhone 11 Pro Max</desc>
+  <defs>
+    <radialGradient id="bg" cx="69%" cy="49%"><stop stop-color="#0b6f69"/><stop offset=".48" stop-color="#101515"/><stop offset="1" stop-color="#050606"/></radialGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4f1e8"/><stop offset=".36" stop-color="#8d9697"/><stop offset=".72" stop-color="#222728"/><stop offset="1" stop-color="#dce4e3"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#020405"/><stop offset=".48" stop-color="#0b6f69"/><stop offset=".75" stop-color="#c8ff4d"/><stop offset="1" stop-color="#030505"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cfe8ef" stop-opacity=".82"/><stop offset=".45" stop-color="#0b6f69" stop-opacity=".45"/><stop offset="1" stop-color="#0b0e10" stop-opacity=".88"/></linearGradient>
+    <pattern id="mesh" width="22" height="22" patternUnits="userSpaceOnUse"><rect width="22" height="22" fill="#273030"/><circle cx="5" cy="5" r="3" fill="#c8ff4d" opacity=".48"/></pattern>
+    <filter id="shadow"><feDropShadow dx="0" dy="34" stdDeviation="28" flood-color="#000" flood-opacity=".55"/></filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="26"/></filter>
+  </defs>
+  <rect width="1200" height="1200" rx="100" fill="url(#bg)"/>
+  <circle cx="414" cy="304" r="394" fill="none" stroke="#c8ff4d" stroke-width="4" opacity=".16"/>
+  <ellipse cx="600" cy="930" rx="390" ry="95" fill="#c8ff4d" opacity=".16" filter="url(#blur)"/>
+  <g filter="url(#shadow)"><g transform="rotate(-1 600 590)">
+      <rect x="340" y="190" width="520" height="820" rx="92" fill="url(#metal)" stroke="rgba(255,255,255,.65)" stroke-width="7"/>
+      <rect x="370" y="220" width="460" height="760" rx="70" fill="url(#screen)"/>
+      <rect x="525" y="242" width="150" height="36" rx="18" fill="#050606"/>
+      <rect x="392" y="296" width="150" height="150" rx="42" fill="rgba(255,255,255,.12)"/>
+      <circle cx="410" cy="325" r="20" fill="#050606" stroke="#c8ff4d" stroke-width="4"/>
+      <path d="M420 840 Q600 710 810 820 L810 950 L390 950Z" fill="#c8ff4d" opacity=".32"/>
+    </g></g>
+  <path d="M95 1035 H1105" stroke="rgba(255,255,255,.12)"/>
+  <circle cx="966" cy="184" r="11" fill="#c8ff4d"/>
+</svg>

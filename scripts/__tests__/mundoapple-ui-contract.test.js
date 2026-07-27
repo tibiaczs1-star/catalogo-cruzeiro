@@ -31,15 +31,24 @@ test("admin interface covers the complete store workflow and contextual help", (
     "Despesas",
     "Documentos",
     "Ajuda e FAQ",
+    "Relatórios",
   ]) {
     assert.match(html, new RegExp(label));
   }
   assert.match(html, /data-help=/);
   assert.match(html, /Preço web/);
   assert.match(html, /Preço retirada/);
+  assert.match(html, /Cores disponíveis/);
   assert.match(html, /Aparelho de entrada/);
   assert.match(html, /Comprovante de pagamento/);
   assert.match(html, /Dar baixa/);
+  assert.match(html, /Carregar demonstração/);
+  assert.match(html, /data-demo-seed/);
+  assert.match(html, /data-delivery-settings/);
+  assert.match(html, /Taxa base de envio/);
+  assert.match(html, /99 Entrega/);
+  assert.match(html, /Logística local/);
+  assert.match(html, /Preço a combinar/);
 });
 
 test("front-end assets use the scoped Mundo Apple API and remain mobile responsive", () => {
@@ -50,6 +59,41 @@ test("front-end assets use the scoped Mundo Apple API and remain mobile responsi
   assert.match(adminScript, /\/api\/mundoapple\/admin\/catalog/);
   assert.match(adminScript, /\/api\/mundoapple\/admin\/documents/);
   assert.match(adminScript, /\/api\/mundoapple\/admin\/sales/);
+  assert.match(adminScript, /\/api\/mundoapple\/admin\/reports/);
+  assert.match(adminScript, /\/api\/mundoapple\/admin\/demo/);
+  assert.match(adminScript, /\/api\/mundoapple\/admin\/settings\/delivery/);
+  assert.match(adminScript, /colorVariants/);
+  assert.match(storeScript, /variant-product-preview/);
+  assert.match(storeScript, /data-select-color/);
+  assert.doesNotMatch(storeScript, /data-card-color/);
+  assert.doesNotMatch(storeScript, /card-color-status/);
+  assert.match(storeScript, /data-product-color-visual/);
+  assert.match(storeScript, /\/api\/mundoapple\/checkout\/pix/);
+  assert.match(read("index.html"), /id="checkout-dialog"/);
+  assert.match(storeScript, /data-checkout-form/);
+  assert.match(storeScript, /Retirada direta/);
+  assert.match(storeScript, /99 Entrega/);
+  assert.match(storeScript, /Logística local/);
+  assert.match(storeScript, /Preço a combinar/);
+  assert.match(storeScript, /data-checkout-subtotal/);
+  assert.match(storeScript, /data-delivery-fee/);
+  assert.match(read("index.html"), /PROPRIETÁRIO E ATENDIMENTO/);
+  assert.match(read("index.html"), /data-premium-showcase/);
+  assert.doesNotMatch(read("index.html"), /data-journey-stage/);
+  assert.match(read("index.html"), /class="hero-backdrop"/);
+  assert.match(read("index.html"), /hero-mundoapple-fullbleed-v2\.png/);
+  assert.doesNotMatch(read("index.html"), /class="hero-visual-frame"/);
+  assert.doesNotMatch(read("index.html"), /class="floating-proof/);
+  assert.doesNotMatch(storeScript, /Olá, Matheus/);
+  assert.doesNotMatch(storeScript, /Quero falar com Matheus/);
+  assert.match(styles, /\.variant-product-preview/);
+  assert.match(styles, /\.selected-product-color/);
+  assert.match(styles, /\.premium-showcase/);
+  assert.match(
+    styles,
+    /\.product-dialog\s*\{[^}]*overflow:\s*auto/s,
+    "the product purchase dialog must remain scrollable on short screens",
+  );
   assert.match(styles, /@media\s*\(max-width:/);
   assert.match(styles, /prefers-reduced-motion/);
 });

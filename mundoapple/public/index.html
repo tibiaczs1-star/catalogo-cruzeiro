@@ -3,13 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#080908">
-    <meta name="description" content="Mundo Apple em Cruzeiro do Sul, Acre. iPhones e outros produtos selecionados com estoque atualizado, garantia e atendimento local.">
-    <title>Mundo Apple | Cruzeiro do Sul, Acre</title>
-    <link rel="stylesheet" href="styles.css?v=20260726">
+    <meta name="theme-color" content="#070807">
+    <meta name="description" content="Mundo Apple em Cruzeiro do Sul, Acre. Produtos novos e seminovos, estoque atualizado, garantia informada e atendimento local.">
+    <title>Mundo Apple | Tecnologia premium em Cruzeiro do Sul</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="styles.css?v=20260726-7">
   </head>
   <body>
     <a class="skip-link" href="#catalogo">Pular para o catálogo</a>
+    <div class="demo-ribbon" role="note"><span></span><strong>Vitrine de demonstração</strong><small>Produtos, preços e movimentações simulados para apresentação.</small></div>
+
     <header class="site-header">
       <a class="brand" href="/mundoapple/" aria-label="Mundo Apple — início">
         <span class="brand-orbit" aria-hidden="true"></span>
@@ -17,21 +20,27 @@
       </a>
       <nav aria-label="Navegação principal">
         <a href="#catalogo">Produtos</a>
-        <a href="#vantagens">Como comprar</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#compra">Como comprar</a>
         <a href="#contato">Contato</a>
-        <a class="admin-link" href="admin/">Admin</a>
+        <a class="admin-link" href="admin/">Administrador</a>
       </nav>
+      <a class="header-contact" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!%20Quero%20consultar%20o%20estoque." target="_blank" rel="noopener">Atendimento <span>↗</span></a>
     </header>
 
     <main>
       <section class="hero">
-        <div class="hero-copy">
+        <div class="hero-backdrop" data-parallax aria-hidden="true">
+          <img src="assets/hero-mundoapple-fullbleed-v2.png" alt="" loading="eager" fetchpriority="high">
+          <span class="hero-backdrop-glow"></span>
+        </div>
+        <div class="hero-copy reveal">
           <p class="eyebrow"><span></span> Cruzeiro do Sul · Acre</p>
-          <h1>Seu próximo<br><em>Apple.</em> Mais perto.</h1>
-          <p class="hero-lead">Novos e seminovos selecionados, preços locais e atendimento direto para você escolher com segurança.</p>
+          <h1>Extraordinário,<br><em>agora no Juruá.</em></h1>
+          <p class="hero-lead">Uma seleção de tecnologia premium, com garantia informada, procedência e atendimento humano para você escolher sem dúvida.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#catalogo">Ver estoque</a>
-            <a class="button button-ghost" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!%20Quero%20saber%20quais%20produtos%20est%C3%A3o%20dispon%C3%ADveis." target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a class="button button-primary magnetic" href="#catalogo">Explorar estoque <span>↓</span></a>
+            <a class="button button-ghost" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!%20Quero%20ajuda%20para%20escolher%20meu%20produto." target="_blank" rel="noopener">Falar com um especialista</a>
           </div>
           <div class="trust-row" aria-label="Diferenciais da loja">
             <span>Estoque atualizado</span>
@@ -39,24 +48,34 @@
             <span>Retirada local</span>
           </div>
         </div>
-        <div class="hero-stage" aria-label="Seleção premium Mundo Apple">
-          <div class="stage-glow"></div>
-          <div class="hero-visual-frame">
-            <img class="hero-art" src="assets/hero-family.webp" alt="Família de dispositivos premium em estúdio preto e verde-lima">
-            <span class="hero-sheen" aria-hidden="true"></span>
-          </div>
-          <span class="stage-label stage-label-one">Novos</span>
-          <span class="stage-label stage-label-two">Seminovos</span>
+      </section>
+
+      <section class="signal-strip" aria-label="Categorias disponíveis">
+        <div>
+          <span>iPhone</span><i>✦</i><span>Mac</span><i>✦</i><span>iPad</span><i>✦</i><span>Watch</span><i>✦</i><span>AirPods</span><i>✦</i><span>Casa & TV</span><i>✦</i>
+          <span>iPhone</span><i>✦</i><span>Mac</span><i>✦</i><span>iPad</span><i>✦</i><span>Watch</span><i>✦</i><span>AirPods</span><i>✦</i><span>Casa & TV</span><i>✦</i>
         </div>
       </section>
 
+      <section class="manifesto" id="experiencia">
+        <div class="manifesto-number">01</div>
+        <div>
+          <p class="eyebrow dark"><span></span> Feito para escolher melhor</p>
+          <h2>Não é só um aparelho.<br><em>É a experiência inteira.</em></h2>
+        </div>
+        <p>Informação clara sobre condição, armazenamento, cor, garantia, estoque e preço. Tudo o que importa antes de decidir — sem letras pequenas.</p>
+      </section>
+
       <section class="catalog-section" id="catalogo">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <div>
-            <p class="eyebrow"><span></span> Disponível agora</p>
+            <p class="eyebrow dark"><span></span> Estoque atualizado</p>
             <h2>Encontre o seu.</h2>
           </div>
-          <p>Somente produtos ativados e realmente disponíveis aparecem aqui.</p>
+          <div class="catalog-intro">
+            <span id="catalog-count">Carregando produtos...</span>
+            <p>Todos os itens desta demonstração têm imagem própria e estão prontos para apresentação.</p>
+          </div>
         </div>
         <div class="catalog-toolbar">
           <label class="search-field">
@@ -67,56 +86,96 @@
           <div class="category-filters" id="category-filters" aria-label="Filtrar por categoria">
             <button class="active" type="button" data-category="Todos">Todos</button>
           </div>
+          <label class="sort-field"><span class="sr-only">Ordenar produtos</span>
+            <select id="catalog-sort"><option value="featured">Destaques</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option><option value="name">Nome</option></select>
+          </label>
         </div>
 
-        <div class="catalog-grid" id="catalog-grid" aria-live="polite"></div>
+        <div class="catalog-grid loading" id="catalog-grid" aria-live="polite" aria-busy="true">
+          <article class="product-card skeleton"></article><article class="product-card skeleton"></article><article class="product-card skeleton"></article>
+        </div>
         <div class="empty-state" id="empty-state" hidden>
           <div class="empty-orbit"><span></span></div>
-          <p class="eyebrow"><span></span> Estoque atualizado</p>
+          <p class="eyebrow dark"><span></span> Estoque atualizado</p>
           <h3>Sem estoque agora.</h3>
-          <p>Os produtos já estão preparados no sistema, mas só aparecem quando chegam à loja. Fale com a gente e diga o modelo que procura.</p>
-          <a class="button button-primary" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!%20Quero%20encomendar%20um%20produto." target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
+          <p>Não encontramos esse modelo na seleção atual. Fale com a gente e diga exatamente o que procura.</p>
+          <a class="button button-dark" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!%20Quero%20encomendar%20um%20produto." target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
         </div>
       </section>
 
-      <section class="experience" id="vantagens">
-        <div class="experience-copy">
-          <p class="eyebrow"><span></span> Compra sem dúvida</p>
-          <h2>Detalhe em cada escolha.</h2>
-          <p>Cada anúncio informa estado, armazenamento, cor, garantia e opção de retirada. Você também pode entregar seu aparelho como parte do pagamento, sujeito à avaliação.</p>
+      <section class="purchase-story" id="compra">
+        <div class="purchase-visual reveal" data-premium-showcase>
+          <div class="premium-showcase" aria-label="iPhone em apresentação dinâmica Mundo Apple">
+            <span class="premium-showcase-light" aria-hidden="true"></span>
+            <div class="premium-showcase-media">
+              <img src="assets/products-ai/iphone-16-pro-max-2024.png" alt="iPhone 16 Pro Max em apresentação premium">
+            </div>
+            <div class="premium-showcase-copy">
+              <span>SELEÇÃO MUNDO APPLE</span>
+              <strong>Um produto.<br>Todos os detalhes.</strong>
+              <small>Escolha modelo, condição e cor no momento da compra.</small>
+            </div>
+            <div class="premium-showcase-status"><i></i><span>Estoque em movimento</span></div>
+            <div class="premium-showcase-progress" aria-hidden="true"><i></i></div>
+          </div>
         </div>
-        <div class="feature-grid">
-          <article><span>01</span><h3>Escolha</h3><p>Veja apenas o estoque real, com preço para web e retirada local.</p></article>
-          <article><span>02</span><h3>Converse</h3><p>Tire dúvidas e combine pagamento direto com o atendimento.</p></article>
-          <article><span>03</span><h3>Receba</h3><p>Saia com recibo, dados do aparelho e garantia informada.</p></article>
+        <div class="purchase-copy reveal">
+          <p class="eyebrow"><span></span> Compra assistida</p>
+          <h2>Do desejo<br>à sua mão.</h2>
+          <div class="step-list">
+            <article><span>01</span><div><h3>Escolha com clareza</h3><p>Compare condição, capacidade, cor, garantia e dois preços: compra online ou retirada local.</p></div></article>
+            <article><span>02</span><div><h3>Converse no WhatsApp</h3><p>Envie o produto exato para o atendimento, consulte pagamento e combine entrega ou retirada.</p></div></article>
+            <article><span>03</span><div><h3>Receba documentado</h3><p>A venda pode gerar recibo com aparelho, garantia, pagamento e dados da negociação.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-section">
+        <p class="eyebrow dark"><span></span> Segurança para decidir</p>
+        <div class="trust-cards">
+          <article><span>◇</span><h3>Novo ou seminovo</h3><p>Condição e saúde da bateria informadas quando aplicáveis.</p></article>
+          <article><span>↔</span><h3>Seu aparelho na troca</h3><p>Aparelho usado pode entrar como parte do pagamento, após avaliação.</p></article>
+          <article><span>⌁</span><h3>Pagamento flexível</h3><p>Dinheiro, Pix, maquininha ou link online, conforme disponibilidade.</p></article>
+          <article><span>✓</span><h3>Garantia no recibo</h3><p>Prazo do produto registrado de forma clara na venda.</p></article>
         </div>
       </section>
 
       <section class="contact-panel" id="contato">
-        <div>
+        <div class="contact-copy reveal">
           <p class="eyebrow"><span></span> Atendimento local</p>
-          <h2>Mundo Apple<br><em>Cruzeiro do Sul.</em></h2>
+          <h2>Seu próximo<br><em>favorito.</em></h2>
+          <p>Fale com a Mundo Apple em Cruzeiro do Sul. Atendimento direto para consultar estoque, entrega, retirada e formas de pagamento.</p>
         </div>
-        <div class="owner-card">
-          <div class="owner-mark">MV</div>
-          <div><strong>Mateus Vanessa</strong><span>Atendimento Mundo Apple</span></div>
+        <div class="owner-card reveal">
+          <div class="owner-top"><div class="owner-mark">MA</div><span class="online-dot"></span></div>
+          <small>PROPRIETÁRIO E ATENDIMENTO</small>
+          <strong>Matheus</strong>
           <a href="tel:+556899811047">+55 68 9981-1047</a>
-          <a class="button button-primary" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!" target="_blank" rel="noopener">Chamar agora</a>
+          <a class="button button-primary" href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!%20Vim%20pela%20loja%20online." target="_blank" rel="noopener">Iniciar conversa <span>↗</span></a>
         </div>
       </section>
     </main>
 
     <footer>
       <a class="brand brand-footer" href="/mundoapple/"><span class="brand-orbit" aria-hidden="true"></span><span class="brand-copy">MUNDO <strong>APPLE</strong></span></a>
-      <p>Loja independente em Cruzeiro do Sul, Acre. Apple é marca registrada de sua proprietária. Não somos uma Apple Store oficial.</p>
-      <a href="/">Voltar ao Catálogo CZS</a>
+      <p>Loja independente em Cruzeiro do Sul, Acre. Apple e os nomes dos produtos citados são marcas de seus respectivos titulares. Não somos uma Apple Store oficial.</p>
+      <div class="footer-links"><a href="/">Catálogo CZS</a><a href="admin/">Admin</a></div>
     </footer>
+
+    <div class="mobile-dock">
+      <a href="#catalogo">Ver estoque</a>
+      <a href="https://wa.me/556899811047?text=Ol%C3%A1%2C%20Mundo%20Apple!" target="_blank" rel="noopener">WhatsApp ↗</a>
+    </div>
 
     <dialog id="product-dialog" class="product-dialog">
       <button class="dialog-close" type="button" aria-label="Fechar">×</button>
       <div id="product-dialog-content"></div>
     </dialog>
+    <dialog id="checkout-dialog" class="checkout-dialog">
+      <button class="dialog-close" type="button" data-close-checkout aria-label="Fechar compra">×</button>
+      <div id="checkout-dialog-content"></div>
+    </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="store.js?v=20260726" defer></script>
+    <script src="store.js?v=20260726-8" defer></script>
   </body>
 </html>

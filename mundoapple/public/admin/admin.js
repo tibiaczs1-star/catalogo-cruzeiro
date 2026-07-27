@@ -5,6 +5,9 @@
   const ADMIN_CATALOG_ENDPOINT = "/api/mundoapple/admin/catalog";
   const ADMIN_DOCUMENTS_ENDPOINT = "/api/mundoapple/admin/documents";
   const ADMIN_SALES_ENDPOINT = "/api/mundoapple/admin/sales";
+  const ADMIN_REPORTS_ENDPOINT = "/api/mundoapple/admin/reports";
+  const ADMIN_DEMO_ENDPOINT = "/api/mundoapple/admin/demo";
+  const ADMIN_DELIVERY_SETTINGS_ENDPOINT = "/api/mundoapple/admin/settings/delivery";
   const moneyFormatter = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -21,6 +24,7 @@
     cash: "Caixa",
     expenses: "Despesas",
     documents: "Documentos",
+    reports: "Relatórios",
     help: "Ajuda e FAQ",
   };
   const categoryLabels = {
@@ -38,6 +42,10 @@
     card: "Maquininha",
     transfer: "Transferência",
     online: "Online",
+  };
+  const conditionLabels = {
+    new: "Novo",
+    used: "Seminovo",
   };
   const expenseLabels = {
     motoboy: "Motoboy",
@@ -76,6 +84,11 @@
       summary: "Informe o percentual mostrado nos ajustes do aparelho usado. Deixe vazio quando não se aplicar ou não houver medição.",
     },
     {
+      id: "colors",
+      title: "Cores e estoque por cor",
+      summary: "Adicione somente as cores que você realmente tem e informe a quantidade de cada uma. O total é calculado automaticamente, a vitrine mostra as opções e a baixa acontece na cor escolhida.",
+    },
+    {
       id: "imei",
       title: "IMEI e número de série",
       summary: "Identificadores do aparelho para controle e recibo. Confira os números no dispositivo e evite fotografá-los na vitrine pública.",
@@ -90,6 +103,16 @@
       title: "Despesas",
       summary: "Campo aberto para motoboy, frete, transportadora, embalagem, reparos, taxas e outros gastos da operação.",
     },
+    {
+      id: "delivery",
+      title: "Retirada direta e envio",
+      summary: "Retirada direta não tem taxa porque o cliente busca em Cruzeiro do Sul. No envio pelo Vale do Juruá, o checkout soma a taxa base configurada aqui e oferece 99 Entrega, Logística local ou Preço a combinar. O mínimo é R$ 30,00.",
+    },
+    {
+      id: "reports",
+      title: "Relatórios e demonstração",
+      summary: "Reúne faturamento, lucro, despesas, formas de pagamento e produtos mais vendidos. Os dados simulados aparecem identificados como demonstração.",
+    },
   ];
 
   const state = {
@@ -101,6 +124,8 @@
     documents: [],
     help: [],
     dashboard: null,
+    reports: null,
+    deliverySettings: null,
     catalogCategory: "all",
     catalogQuery: "",
     selectedCatalogKey: "",
@@ -212,8 +237,93 @@
       categoryLabels[item.category] || item.category,
       item.year,
       item.storage,
-      item.color,
+      colorSummary(item),
     ].filter(Boolean).join(" · ");
+  }
+
+  function colorVariants(item, includeEmpty = false) {
+    const variants = Array.isArray(item?.colorVariants) ? item.colorVariants : [];
+    const normalized = variants.map((variant) => ({
+      name: String(variant?.name || "").trim(),
+      hex: /^#[0-9a-f]{6}$/i.test(String(variant?.hex || "")) ? variant.hex : "#8b8f88",
+      quantity: Math.max(0, Number(variant?.quantity) || 0),
+    })).filter((variant) => variant.name && (includeEmpty || variant.quantity > 0));
+    if (normalized.length) return normalized;
+    return item?.color
+      ? [{ name: String(item.color), hex: "#8b8f88", quantity: Math.max(0, Number(item.quantity) || 0) }]
+      : [];
+  }
+
+  function colorSummary(item) {
+    return colorVariants(item, true)
+      .map((variant) => `${variant.name} (${variant.quantity})`)
+      .join(", ");
+  }
+
+  function productImageSource(key, artPath = "") {
+    if (artPath) return `../${String(artPath).replace(/^\.?\//, "")}`;
+    return `../assets/products-ai/${String(key || "").replace(/[^a-z0-9-]/gi, "")}.png`;
+  }
+
+  function productImage(key, artPath = "") {
+    const safeKey = String(key || "").replace(/[^a-z0-9-]/gi, "");
+    return `<img src="${escapeHtml(productImageSource(safeKey, artPath))}" data-fallback-src="../assets/products/${escapeHtml(safeKey)}.svg" alt="" loading="lazy">`;
+  }
+
+  function renderColorVariantEditor(variants = [{ name: "Preto", hex: "#1d1d1f", quantity: 1 }]) {
+    const list = $("#color-variant-list");
+    const rows = variants.length ? variants : [{ name: "Preto", hex: "#1d1d1f", quantity: 1 }];
+    list.innerHTML = rows.map((variant, index) => `
+      <div class="color-variant-row">
+        <label class="color-picker-label">
+          <span>Tom</span>
+          <input name="variantHex" type="color" value="${escapeHtml(variant.hex || "#8b8f88")}" aria-label="Tom da cor ${index + 1}">
+        </label>
+        <label>
+          <span>Nome da cor</span>
+          <input name="variantName" value="${escapeHtml(variant.name || "")}" placeholder="Ex.: Titânio Natural" required>
+        </label>
+        <label>
+          <span>Quantidade</span>
+          <input name="variantQuantity" type="number" min="0" step="1" value="${Math.max(0, Number(variant.quantity) || 0)}" required>
+        </label>
+        <button class="remove-color-button" type="button" data-remove-color="${index}" aria-label="Remover esta cor">×</button>
+      </div>
+    `).join("");
+    updateColorTotal();
+  }
+
+  function draftColorVariants() {
+    return $$(".color-variant-row", $("#color-variant-list")).map((row) => ({
+      name: row.querySelector('[name="variantName"]').value.trim(),
+      hex: row.querySelector('[name="variantHex"]').value,
+      quantity: Math.max(0, Number(row.querySelector('[name="variantQuantity"]').value) || 0),
+    }));
+  }
+
+  function readColorVariants() {
+    const variants = draftColorVariants();
+    if (!variants.length || variants.some((variant) => !variant.name)) {
+      throw new TypeError("Informe o nome de todas as cores disponíveis.");
+    }
+    if (variants.some((variant) => !Number.isSafeInteger(variant.quantity) || variant.quantity < 0)) {
+      throw new TypeError("Informe uma quantidade válida para cada cor.");
+    }
+    if (variants.reduce((sum, variant) => sum + variant.quantity, 0) < 1) {
+      throw new TypeError("O estoque precisa ter pelo menos uma unidade em alguma cor.");
+    }
+    const unique = new Set(variants.map((variant) => variant.name.toLocaleLowerCase("pt-BR")));
+    if (unique.size !== variants.length) {
+      throw new TypeError("Cada cor deve aparecer apenas uma vez.");
+    }
+    return variants;
+  }
+
+  function updateColorTotal() {
+    const total = $$('[name="variantQuantity"]', $("#color-variant-list"))
+      .reduce((sum, input) => sum + Math.max(0, Number(input.value) || 0), 0);
+    $("#color-total").textContent = String(total);
+    $("#inventory-form").elements.namedItem("quantity").value = String(total);
   }
 
   function categoryClass(value) {
@@ -252,7 +362,7 @@
     $("#catalog-counter").textContent = `${items.length} de ${state.catalog.length} produtos prontos para ativar`;
     $("#master-list").innerHTML = items.length ? items.map((item) => `
       <button class="master-item ${state.selectedCatalogKey === item.key ? "selected" : ""}" type="button" data-catalog-key="${escapeHtml(item.key)}">
-        <span class="mini-thumb mini-thumb-${categoryClass(item.category)}"></span>
+        <span class="mini-thumb">${productImage(item.key)}</span>
         <span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(productMeta(item))}</small></span>
         <span>›</span>
       </button>
@@ -265,7 +375,7 @@
     state.selectedCatalogKey = key;
     $("#inventory-form").elements.namedItem("catalogKey").value = key;
     $("#selected-product").innerHTML = `
-      <div class="product-thumb product-thumb-${categoryClass(item.category)}"><span></span></div>
+      <div class="product-thumb">${productImage(item.key)}</div>
       <div><small>PRODUTO SELECIONADO</small><strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(productMeta(item))}</span></div>
     `;
     renderMasterCatalog();
@@ -295,7 +405,7 @@
   function renderInventory() {
     const query = $("#inventory-search").value.trim().toLocaleLowerCase("pt-BR");
     const items = state.inventory.filter((item) => (
-      !query || `${item.name} ${item.imei} ${item.color} ${item.storage}`.toLocaleLowerCase("pt-BR").includes(query)
+      !query || `${item.name} ${item.imei} ${colorSummary(item)} ${item.storage}`.toLocaleLowerCase("pt-BR").includes(query)
     ));
     const units = state.inventory.reduce((sum, item) => sum + item.quantity, 0);
     const active = state.inventory.filter((item) => item.published && item.quantity > 0).length;
@@ -305,7 +415,7 @@
         <thead><tr><th>Produto</th><th>Estado</th><th>Saldo</th><th>Preço web</th><th>Lucro unit.</th><th>Loja</th><th>Ação</th></tr></thead>
         <tbody>${items.map((item) => `
           <tr>
-            <td><div class="table-product"><span class="mini-thumb mini-thumb-${categoryClass(item.category)}"></span><div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml([item.storage, item.color, item.imei ? `IMEI ${item.imei}` : ""].filter(Boolean).join(" · "))}</small></div></div></td>
+            <td><div class="table-product"><span class="mini-thumb">${productImage(item.catalogKey, item.artPath)}</span><div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml([item.storage, colorSummary(item), item.imei ? `IMEI ${item.imei}` : ""].filter(Boolean).join(" · "))}</small></div></div></td>
             <td><span class="pill ${item.condition === "new" ? "green" : "orange"}">${item.condition === "new" ? "Novo" : "Seminovo"}</span></td>
             <td><strong>${item.quantity}</strong></td>
             <td>${formatMoney(item.webPriceCents)}</td>
@@ -320,13 +430,27 @@
 
   function renderSaleOptions() {
     const active = state.inventory.filter((item) => item.quantity > 0);
+    const selectedInventoryId = $("#sale-inventory").value;
     const options = active.map((item) => (
       `<option value="${escapeHtml(item.id)}">${escapeHtml(item.name)} · ${item.quantity} un. · ${formatMoney(item.webPriceCents)}</option>`
     )).join("");
     $("#sale-inventory").innerHTML = `<option value="">Escolha...</option>${options}`;
+    if (active.some((item) => item.id === selectedInventoryId)) {
+      $("#sale-inventory").value = selectedInventoryId;
+    }
+    updateSaleColors(state.inventory.find((item) => item.id === $("#sale-inventory").value));
     $("#document-sale").innerHTML = `<option value="">Sem vínculo</option>${state.sales.map((sale) => (
       `<option value="${escapeHtml(sale.id)}">${escapeHtml(sale.customerName)} · ${escapeHtml(sale.productName)}</option>`
     )).join("")}`;
+  }
+
+  function updateSaleColors(item) {
+    const select = $("#sale-color");
+    const variants = item ? colorVariants(item) : [];
+    select.innerHTML = variants.length
+      ? variants.map((variant) => `<option value="${escapeHtml(variant.name)}">${escapeHtml(variant.name)} · ${variant.quantity} ${variant.quantity === 1 ? "unidade" : "unidades"}</option>`).join("")
+      : `<option value="">${item ? "Sem cor com saldo" : "Escolha o produto primeiro"}</option>`;
+    select.disabled = variants.length === 0;
   }
 
   function renderSales() {
@@ -337,7 +461,7 @@
       return `
         <article class="stack-card">
           <div class="stack-card-head">
-            <div><strong>${escapeHtml(sale.productName)}</strong><small>${escapeHtml(sale.customerName)} · ${sale.quantity} un. · ${formatDate(sale.createdAt)}</small></div>
+            <div><strong>${escapeHtml(sale.productName)}</strong><small>${escapeHtml(sale.customerName)} · ${sale.quantity} un.${sale.selectedColor ? ` · ${sale.selectedColor}` : ""} · ${formatDate(sale.createdAt)}</small></div>
             <span class="pill ${paid ? "green" : "orange"}">${paid ? "Recebida" : "Pendente"}</span>
           </div>
           ${sale.tradeIn ? `<small>Entrada: ${escapeHtml(sale.tradeIn.model)} · avaliação ${formatMoney(sale.tradeIn.appraisedValueCents)}</small>` : ""}
@@ -440,6 +564,48 @@
     `;
   }
 
+  function renderReportBars(selector, items, { money = true, maxItems = 8 } = {}) {
+    const target = $(selector);
+    const rows = Array.isArray(items) ? items.slice(0, maxItems) : [];
+    const maximum = Math.max(1, ...rows.map((item) => cents(item.value)));
+    target.innerHTML = rows.length ? rows.map((item, index) => {
+      const width = Math.max(4, Math.round((cents(item.value) / maximum) * 100));
+      const label = paymentLabels[item.label]
+        || categoryLabels[item.label]
+        || conditionLabels[item.label]
+        || item.label;
+      return `
+        <div class="report-row">
+          <div class="report-row-head"><span>${escapeHtml(label)}</span><strong>${money ? formatMoney(item.value) : cents(item.value).toLocaleString("pt-BR")}</strong></div>
+          <div class="report-track"><span class="report-fill" style="--bar:${width}%;--delay:${index * 45}ms"></span></div>
+        </div>
+      `;
+    }).join("") : `<div class="empty-list"><strong>Sem dados neste período</strong>Registre vendas e baixas para formar este relatório.</div>`;
+  }
+
+  function renderReports() {
+    const reports = state.reports || {};
+    const summary = reports.summary || {};
+    const demo = reports.demo || {};
+    $("#reports-demo-title").textContent = demo.active ? "Demonstração ativa" : "Demonstração pronta para começar";
+    $("#reports-demo-copy").textContent = demo.active
+      ? `${cents(demo.productCount)} produtos publicados com movimentações simuladas. Tudo está marcado como demonstração.`
+      : "Carregue 50 produtos com estoque, vendas, caixa e despesas simuladas para apresentar o sistema.";
+    $("#reports-metrics").innerHTML = `
+      <article><span>Faturamento recebido</span><strong>${formatMoney(summary.grossRevenueCents)}</strong><small>${cents(summary.unitsSold)} unidades vendidas</small></article>
+      <article class="metric-accent"><span>Lucro líquido</span><strong>${formatMoney(summary.netProfitCents)}</strong><small>Despesas: ${formatMoney(summary.expensesCents)}</small></article>
+      <article><span>Ticket médio</span><strong>${formatMoney(summary.averageTicketCents)}</strong><small>Por venda concluída</small></article>
+      <article><span>Estoque disponível</span><strong>${cents(summary.stockUnits)}</strong><small>${cents(summary.activeProducts)} produtos publicados</small></article>
+    `;
+    const timeline = Array.isArray(reports.salesTimeline) ? reports.salesTimeline : [];
+    $("#reports-timeline-total").textContent = formatMoney(timeline.reduce((total, item) => total + cents(item.value), 0));
+    renderReportBars("#reports-timeline", timeline, { maxItems: 10 });
+    renderReportBars("#reports-payment", reports.paymentMix);
+    renderReportBars("#reports-category", reports.categoryMix);
+    renderReportBars("#reports-condition", reports.conditionMix, { money: false });
+    renderReportBars("#reports-top", reports.topProducts, { maxItems: 6 });
+  }
+
   function renderAll() {
     renderMasterCatalog();
     renderInventory();
@@ -449,6 +615,16 @@
     renderDocuments();
     renderHelp();
     renderDashboard();
+    renderReports();
+    renderDeliverySettings();
+  }
+
+  function renderDeliverySettings() {
+    const form = $("#delivery-settings-form");
+    if (!form || !state.deliverySettings) return;
+    form.elements.namedItem("deliveryBaseFee").value = (cents(state.deliverySettings.baseFeeCents) / 100)
+      .toFixed(2)
+      .replace(".", ",");
   }
 
   async function loadAll() {
@@ -461,6 +637,8 @@
       api(ADMIN_DOCUMENTS_ENDPOINT),
       api("/admin/help"),
       api("/admin/dashboard"),
+      api(ADMIN_REPORTS_ENDPOINT),
+      api(ADMIN_DELIVERY_SETTINGS_ENDPOINT),
     ]);
     [
       state.catalog,
@@ -471,6 +649,8 @@
       state.documents,
       state.help,
       state.dashboard,
+      state.reports,
+      state.deliverySettings,
     ] = [
       requests[0].items,
       requests[1].items,
@@ -480,18 +660,21 @@
       requests[5].items,
       [...requests[6].items, ...localHelp],
       requests[7].item,
+      requests[8].item,
+      requests[9].item,
     ];
     renderAll();
   }
 
   async function refreshOperationalData() {
-    const [inventory, sales, cash, expenses, documents, dashboard] = await Promise.all([
+    const [inventory, sales, cash, expenses, documents, dashboard, reports] = await Promise.all([
       api("/admin/inventory"),
       api(ADMIN_SALES_ENDPOINT),
       api("/admin/cash"),
       api("/admin/expenses"),
       api(ADMIN_DOCUMENTS_ENDPOINT),
       api("/admin/dashboard"),
+      api(ADMIN_REPORTS_ENDPOINT),
     ]);
     state.inventory = inventory.items;
     state.sales = sales.items;
@@ -499,12 +682,14 @@
     state.expenses = expenses.items;
     state.documents = documents.items;
     state.dashboard = dashboard.item;
+    state.reports = reports.item;
     renderInventory();
     renderSales();
     renderCash();
     renderExpenses();
     renderDocuments();
     renderDashboard();
+    renderReports();
   }
 
   function receiptHtml(sale) {
@@ -591,6 +776,8 @@
       const publishButton = event.target.closest("[data-toggle-published]");
       const settleButton = event.target.closest("[data-settle]");
       const receiptButton = event.target.closest("[data-receipt]");
+      const demoSeed = event.target.closest("[data-demo-seed]");
+      const demoClear = event.target.closest("[data-demo-clear]");
       if (nav) goTo(nav.dataset.section);
       if (go) goTo(go.dataset.go);
       if (help) showHelp(help.dataset.help);
@@ -630,6 +817,38 @@
         $("#settle-dialog").showModal();
       }
       if (receiptButton) openReceipt(receiptButton.dataset.receipt);
+      if (demoSeed) {
+        demoSeed.disabled = true;
+        try {
+          await api(ADMIN_DEMO_ENDPOINT, {
+            method: "POST",
+            body: JSON.stringify({ count: 50 }),
+          });
+          await loadAll();
+          goTo("reports");
+          showToast("Demonstração carregada: 50 produtos, vendas e relatórios.");
+        } catch (error) {
+          showToast(error.message);
+        } finally {
+          demoSeed.disabled = false;
+        }
+        return;
+      }
+      if (demoClear) {
+        if (!window.confirm("Remover somente os produtos e movimentos de demonstração? Seus dados reais serão preservados.")) return;
+        demoClear.disabled = true;
+        try {
+          await api(ADMIN_DEMO_ENDPOINT, { method: "DELETE", body: "{}" });
+          await loadAll();
+          goTo("reports");
+          showToast("Dados de demonstração removidos.");
+        } catch (error) {
+          showToast(error.message);
+        } finally {
+          demoClear.disabled = false;
+        }
+        return;
+      }
       const faqButton = event.target.closest(".faq-item button");
       if (faqButton) {
         const item = faqButton.closest(".faq-item");
@@ -651,14 +870,62 @@
     $("#inventory-search").addEventListener("input", renderInventory);
     $("#help-search").addEventListener("input", renderHelp);
     $("#inventory-form").addEventListener("input", renderPricePreview);
+    $("#color-variant-list").addEventListener("input", updateColorTotal);
+    $("#add-color-variant").addEventListener("click", () => {
+      renderColorVariantEditor([
+        ...draftColorVariants(),
+        { name: "", hex: "#8b8f88", quantity: 0 },
+      ]);
+      const rows = $$(".color-variant-row", $("#color-variant-list"));
+      rows.at(-1)?.querySelector('[name="variantName"]')?.focus();
+    });
+    $("#color-variant-list").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-remove-color]");
+      if (!button) return;
+      const variants = draftColorVariants();
+      variants.splice(Number(button.dataset.removeColor), 1);
+      renderColorVariantEditor(variants);
+    });
+    document.addEventListener("error", (event) => {
+      const image = event.target.closest?.("img[data-fallback-src]");
+      if (!image || image.dataset.fallbackApplied) return;
+      image.dataset.fallbackApplied = "true";
+      image.src = image.dataset.fallbackSrc;
+    }, true);
     $("#trade-in-toggle").addEventListener("change", (event) => {
       $("#trade-in-fields").hidden = !event.target.checked;
     });
     $("#sale-inventory").addEventListener("change", (event) => {
       const item = state.inventory.find((inventory) => inventory.id === event.target.value);
       if (item) $("#sale-form").elements.namedItem("price").value = (item.webPriceCents / 100).toFixed(2).replace(".", ",");
+      updateSaleColors(item);
     });
     $("#expense-form").elements.namedItem("occurredAt").value = new Date().toISOString().slice(0, 10);
+
+    $("#delivery-settings-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const message = $("#delivery-settings-message");
+      const button = form.querySelector("button[type=submit]");
+      setMessage(message, "");
+      button.disabled = true;
+      try {
+        const response = await api(ADMIN_DELIVERY_SETTINGS_ENDPOINT, {
+          method: "PATCH",
+          body: JSON.stringify({
+            baseFeeCents: parseMoney(formValue(form, "deliveryBaseFee")),
+          }),
+        });
+        state.deliverySettings = response.item;
+        renderDeliverySettings();
+        setMessage(message, `Taxa de envio atualizada para ${formatMoney(response.item.baseFeeCents)}.`, true);
+        showToast("Taxa de envio sincronizada com a loja.");
+      } catch (error) {
+        setMessage(message, error.message);
+      } finally {
+        button.disabled = false;
+      }
+    });
 
     $("#inventory-form").addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -672,16 +939,18 @@
       const button = form.querySelector("button[type=submit]");
       button.disabled = true;
       try {
+        const variants = readColorVariants();
         await api("/admin/inventory", {
           method: "POST",
           body: JSON.stringify({
             catalogKey: formValue(form, "catalogKey"),
-            quantity: Number(formValue(form, "quantity")),
+            quantity: variants.reduce((sum, variant) => sum + variant.quantity, 0),
             condition: formValue(form, "condition"),
             warrantyDays: Number(formValue(form, "warrantyDays")),
             batteryHealth: formValue(form, "batteryHealth") === "" ? "" : Number(formValue(form, "batteryHealth")),
             storage: formValue(form, "storage"),
-            color: formValue(form, "color"),
+            color: variants.find((variant) => variant.quantity > 0)?.name || variants[0].name,
+            colorVariants: variants,
             imei: formValue(form, "imei"),
             serialNumber: formValue(form, "serialNumber"),
             notes: formValue(form, "notes"),
@@ -701,6 +970,7 @@
         form.elements.namedItem("warrantyDays").value = "90";
         form.elements.namedItem("published").checked = true;
         form.elements.namedItem("catalogKey").value = state.selectedCatalogKey;
+        renderColorVariantEditor();
         await refreshOperationalData();
         renderPricePreview();
         setMessage(message, "Produto colocado no estoque com sucesso.", true);
@@ -725,6 +995,7 @@
           method: "POST",
           body: JSON.stringify({
             inventoryId: formValue(form, "inventoryId"),
+            selectedColor: formValue(form, "selectedColor"),
             customerName: formValue(form, "customerName"),
             customerPhone: formValue(form, "customerPhone"),
             customerDocument: formValue(form, "customerDocument"),
@@ -746,6 +1017,7 @@
         $("#trade-in-toggle").checked = false;
         $("#trade-in-fields").hidden = true;
         form.elements.namedItem("quantity").value = "1";
+        updateSaleColors(null);
         await refreshOperationalData();
         setMessage(message, "Venda registrada. Confirme o recebimento para dar baixa.", true);
         showToast("Venda pendente criada.");
@@ -856,6 +1128,7 @@
   }
 
   async function initialize() {
+    renderColorVariantEditor();
     bindEvents();
     try {
       await api("/auth/session");

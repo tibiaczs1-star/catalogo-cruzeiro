@@ -18,19 +18,30 @@ function createMundoAppleServerIntegration(options = {}) {
   if (typeof sendFile !== "function") throw new TypeError("sendFile é obrigatório.");
 
   const publicRoot = path.join(rootDir, "mundoapple", "public");
+  const adminUser = String(environment.MUNDOAPPLE_ADMIN_USER || "").trim();
   const store = createJsonStore({
     filePath: path.join(dataDir, "mundoapple", "state.json"),
     catalog,
   });
   let ready = null;
   function ensureReady() {
-    if (!ready) ready = store.initialize();
+    if (!ready) {
+      ready = (async () => {
+        await store.initialize();
+        if (String(environment.MUNDOAPPLE_DEMO_MODE || "").toLowerCase() === "true") {
+          const reports = await store.getReports({ ownerUsername: adminUser || "matheus" });
+          if (!reports.demo?.active) {
+            await store.seedDemo({ ownerUsername: adminUser || "matheus", count: 50 });
+          }
+        }
+      })();
+    }
     return ready;
   }
   const apiHandler = createMundoAppleHandler({
     store,
     catalog,
-    adminUser: String(environment.MUNDOAPPLE_ADMIN_USER || "").trim(),
+    adminUser,
     passwordHash: String(environment.MUNDOAPPLE_ADMIN_PASSWORD_HASH || "").trim(),
     sessionSecret: String(environment.MUNDOAPPLE_SESSION_SECRET || "").trim(),
     secureCookies: String(environment.NODE_ENV || "").toLowerCase() === "production",

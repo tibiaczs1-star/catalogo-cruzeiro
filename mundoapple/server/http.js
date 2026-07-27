@@ -3,6 +3,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const QRCode = require("qrcode");
 const {
   buildExpiredSessionCookie,
   buildSessionCookie,
@@ -215,7 +216,11 @@ function createMundoAppleHandler(options = {}) {
 
     try {
       if (pathname === `${API_PREFIX}/catalog` && req.method === "GET") {
-        sendJson(res, 200, { ok: true, items: await store.listPublicCatalog() });
+        sendJson(res, 200, {
+          ok: true,
+          items: await store.listPublicCatalog(),
+          delivery: await store.getDeliverySettings(),
+        });
         return true;
       }
       if (pathname === `${API_PREFIX}/payments/status` && req.method === "GET") {
@@ -224,6 +229,103 @@ function createMundoAppleHandler(options = {}) {
           enabled: false,
           mode: "disabled",
           providers: ["Mercado Pago", "PagBank", "Asaas"],
+        });
+        return true;
+      }
+      if (pathname === `${API_PREFIX}/checkout/pix` && req.method === "POST") {
+        const input = await readJson(req);
+        const inventory = await store.getInventory(String(input.inventoryId || ""));
+        if (!inventory || !inventory.published || inventory.quantity < 1) {
+          throw new TypeError("Produto indisponível na vitrine.");
+        }
+
+        const deliveryMode = input.deliveryMode === "pickup" ? "pickup" : "delivery";
+        const deliverySettings = await store.getDeliverySettings();
+        const deliveryProvider = deliveryMode === "delivery"
+          ? deliverySettings.providers.find((provider) => provider.id === input.deliveryProvider)
+          : null;
+        if (deliveryMode === "delivery" && !deliveryProvider) {
+          throw new TypeError("Escolha uma opção de envio.");
+        }
+        const address = input.address && typeof input.address === "object" ? input.address : {};
+        const addressFields = {
+          street: String(address.street || "").trim(),
+          number: String(address.number || "").trim(),
+          neighborhood: String(address.neighborhood || "").trim(),
+          city: String(address.city || "").trim(),
+          state: String(address.state || "").trim().toUpperCase(),
+          postalCode: String(address.postalCode || "").trim(),
+          complement: String(address.complement || "").trim(),
+        };
+        if (deliveryMode === "delivery") {
+          for (const [field, label] of [
+            ["street", "Rua"],
+            ["number", "Número"],
+            ["neighborhood", "Bairro"],
+            ["city", "Cidade"],
+            ["state", "Estado"],
+            ["postalCode", "CEP"],
+          ]) {
+            if (!addressFields[field]) throw new TypeError(`${label} é obrigatório para entrega.`);
+          }
+        }
+
+        const customerAddress = deliveryMode === "pickup"
+          ? "Retirada direta — cliente busca em Cruzeiro do Sul"
+          : [
+              `${addressFields.street}, ${addressFields.number}`,
+              addressFields.complement,
+              addressFields.neighborhood,
+              `${addressFields.city}/${addressFields.state}`,
+              `CEP ${addressFields.postalCode}`,
+            ].filter(Boolean).join(" · ");
+        const unitPriceCents = deliveryMode === "pickup"
+          ? inventory.pickupPriceCents
+          : inventory.webPriceCents;
+        const quantity = Math.max(1, Number.parseInt(input.quantity, 10) || 1);
+        const subtotalCents = unitPriceCents * quantity;
+        const deliveryFeeCents = deliveryMode === "delivery"
+          ? deliverySettings.baseFeeCents
+          : 0;
+        const amountCents = subtotalCents + deliveryFeeCents;
+        const sale = await store.createSale({
+          inventoryId: inventory.id,
+          selectedColor: input.selectedColor,
+          quantity,
+          customerName: input.customerName,
+          customerDocument: input.customerDocument,
+          customerPhone: input.customerPhone,
+          customerAddress,
+          priceCents: amountCents,
+          subtotalCents,
+          deliveryFeeCents,
+          deliveryMode,
+          deliveryProvider: deliveryProvider?.id || "",
+          deliveryProviderLabel: deliveryProvider?.label || "Retirada direta",
+          paymentMethod: "pix",
+        });
+        const qrCodeText = `MUNDOAPPLE-DEMO:${sale.id}`;
+        const qrCodeDataUrl = await QRCode.toDataURL(qrCodeText, {
+          width: 320,
+          margin: 2,
+          color: { dark: "#07110b", light: "#ffffff" },
+        });
+        sendJson(res, 201, {
+          ok: true,
+          item: {
+            orderId: sale.id,
+            amountCents,
+            subtotalCents,
+            deliveryFeeCents,
+            selectedColor: sale.selectedColor,
+            deliveryMode,
+            deliveryProvider: deliveryProvider?.id || "",
+            deliveryProviderLabel: deliveryProvider?.label || "Retirada direta",
+            qrCodeDataUrl,
+            qrCodeText,
+            payable: false,
+            mode: "demo",
+          },
         });
         return true;
       }
@@ -277,6 +379,29 @@ function createMundoAppleHandler(options = {}) {
 
       if (pathname === `${API_PREFIX}/admin/dashboard` && req.method === "GET") {
         sendJson(res, 200, { ok: true, item: await store.getDashboard() });
+      } else if (pathname === `${API_PREFIX}/admin/settings/delivery` && req.method === "GET") {
+        sendJson(res, 200, { ok: true, item: await store.getDeliverySettings() });
+      } else if (pathname === `${API_PREFIX}/admin/settings/delivery` && req.method === "PATCH") {
+        sendJson(res, 200, {
+          ok: true,
+          item: await store.updateDeliverySettings(await readJson(req)),
+        });
+      } else if (pathname === `${API_PREFIX}/admin/reports` && req.method === "GET") {
+        sendJson(res, 200, {
+          ok: true,
+          item: await store.getReports({ ownerUsername: adminUser || "matheus" }),
+        });
+      } else if (pathname === `${API_PREFIX}/admin/demo` && req.method === "POST") {
+        const input = await readJson(req);
+        sendJson(res, 201, {
+          ok: true,
+          item: await store.seedDemo({
+            ownerUsername: adminUser || "matheus",
+            count: input.count || 50,
+          }),
+        });
+      } else if (pathname === `${API_PREFIX}/admin/demo` && req.method === "DELETE") {
+        sendJson(res, 200, { ok: true, item: await store.clearDemo() });
       } else if (pathname === `${API_PREFIX}/admin/catalog` && req.method === "GET") {
         sendJson(res, 200, { ok: true, items: catalog.length ? catalog : await store.listMasterCatalog() });
       } else if (pathname === `${API_PREFIX}/admin/inventory` && req.method === "GET") {

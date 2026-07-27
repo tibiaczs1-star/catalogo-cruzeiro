@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0b0d0a">
     <meta name="robots" content="noindex,nofollow">
     <title>Administrativo | Mundo Apple</title>
-    <link rel="stylesheet" href="admin.css?v=20260726">
+    <link rel="stylesheet" href="admin.css?v=20260726-2">
   </head>
   <body>
     <div class="login-view" id="login-view">
@@ -48,6 +48,7 @@
           <button class="nav-item" type="button" data-section="cash"><span>◎</span>Caixa</button>
           <button class="nav-item" type="button" data-section="expenses"><span>−</span>Despesas</button>
           <button class="nav-item" type="button" data-section="documents"><span>▤</span>Documentos</button>
+          <button class="nav-item" type="button" data-section="reports"><span>⌁</span>Relatórios</button>
           <button class="nav-item" type="button" data-section="help"><span>?</span>Ajuda e FAQ</button>
         </nav>
         <div class="sidebar-foot">
@@ -66,15 +67,22 @@
           <div class="topbar-actions">
             <a href="/mundoapple/" target="_blank">Ver loja ↗</a>
             <button class="help-circle" type="button" data-help="dashboard" aria-label="Ajuda da tela">?</button>
-            <div class="avatar">MV</div>
+            <div class="avatar" title="Perfil Matheus">MA</div>
           </div>
         </header>
 
         <main class="workspace">
           <section class="admin-section active" data-view="dashboard">
             <div class="welcome-card">
-              <div><p class="kicker">CONTROLE EM TEMPO REAL</p><h2>Olá, Mateus.</h2><p>Veja o que está acontecendo na loja e escolha sua próxima ação.</p></div>
+              <div><p class="kicker">CONTROLE EM TEMPO REAL</p><h2>Olá, Matheus.</h2><p>Veja o que está acontecendo na loja e escolha sua próxima ação.</p></div>
               <button class="primary-button" type="button" data-go="activate">＋ Colocar produto no estoque</button>
+            </div>
+            <div class="demo-callout">
+              <div>
+                <span class="demo-dot"></span>
+                <div><strong>Demonstração profissional</strong><small>Cria 50 produtos publicados, vendas, despesas e relatórios simulados no seu perfil.</small></div>
+              </div>
+              <button type="button" data-demo-seed>Carregar demonstração</button>
             </div>
             <div class="metric-grid" id="dashboard-metrics">
               <article><span>Unidades em estoque <button class="inline-help" data-help="inventory" type="button">?</button></span><strong>—</strong><small>Carregando</small></article>
@@ -82,6 +90,24 @@
               <article class="metric-accent"><span>Lucro final <button class="inline-help" data-help="pricing" type="button">?</button></span><strong>—</strong><small>Após custos e despesas</small></article>
               <article><span>Vendas pendentes <button class="inline-help" data-help="sales" type="button">?</button></span><strong>—</strong><small>Aguardando baixa</small></article>
             </div>
+            <form class="panel delivery-settings-card" data-delivery-settings id="delivery-settings-form">
+              <div class="delivery-settings-copy">
+                <p class="kicker">LOGÍSTICA · VALE DO JURUÁ</p>
+                <h3>Taxa base de envio <button class="inline-help" data-help="delivery" type="button">?</button></h3>
+                <p>Retirada direta é grátis: o cliente busca. No envio, esta taxa entra separada no pedido e nunca pode ser menor que R$ 30,00.</p>
+              </div>
+              <label class="delivery-fee-field">
+                <span>Taxa base</span>
+                <span class="money-input-prefix"><b>R$</b><input name="deliveryBaseFee" type="text" inputmode="decimal" value="30,00" aria-label="Taxa base de envio em reais" required></span>
+              </label>
+              <div class="delivery-provider-badges" aria-label="Opções de logística disponíveis">
+                <span>99 Entrega</span>
+                <span>Logística local</span>
+                <span>Preço a combinar</span>
+              </div>
+              <button class="primary-button" type="submit">Salvar taxa</button>
+              <p id="delivery-settings-message" class="form-message" role="status"></p>
+            </form>
             <div class="dashboard-grid">
               <article class="panel">
                 <div class="panel-head"><div><p class="kicker">ATALHOS</p><h3>O que você quer fazer?</h3></div></div>
@@ -117,16 +143,24 @@
                   <div><small>PRODUTO SELECIONADO</small><strong>Escolha na lista ao lado</strong><span>O estoque começa zerado</span></div>
                 </div>
                 <input type="hidden" name="catalogKey" required>
+                <input type="hidden" name="quantity" value="1">
                 <div class="form-grid">
-                  <label>Quantidade <button class="inline-help" data-help="inventory" type="button">?</button><input name="quantity" type="number" min="1" value="1" required></label>
                   <label>Estado <button class="inline-help" data-help="condition" type="button">?</button><select name="condition"><option value="new">Novo</option><option value="used">Seminovo / usado</option></select></label>
                   <label>Dias de garantia <button class="inline-help" data-help="warranty" type="button">?</button><input name="warrantyDays" type="number" min="0" value="90" required></label>
                   <label>Saúde da bateria (%) <button class="inline-help" data-help="battery" type="button">?</button><input name="batteryHealth" type="number" min="0" max="100" placeholder="Ex.: 89"></label>
                   <label>Armazenamento<input name="storage" placeholder="Ex.: 128 GB"></label>
-                  <label>Cor<input name="color" placeholder="Ex.: Preto"></label>
                   <label>IMEI <button class="inline-help" data-help="imei" type="button">?</button><input name="imei" inputmode="numeric" placeholder="Somente se aplicável"></label>
                   <label>Número de série<input name="serialNumber" placeholder="Opcional"></label>
                 </div>
+                <fieldset class="color-fieldset">
+                  <legend>Cores disponíveis <button class="inline-help" data-help="colors" type="button">?</button></legend>
+                  <p class="color-fieldset-copy">Informe somente as cores que chegaram. A loja mostrará a bolinha da cor e o saldo real de cada uma.</p>
+                  <div class="color-variant-list" id="color-variant-list"></div>
+                  <div class="color-editor-foot">
+                    <button class="secondary-button" id="add-color-variant" type="button">＋ Adicionar outra cor</button>
+                    <span>Total no estoque <strong id="color-total">1</strong></span>
+                  </div>
+                </fieldset>
                 <fieldset>
                   <legend>Custos e logística <button class="inline-help" data-help="pricing" type="button">?</button></legend>
                   <div class="form-grid money-grid">
@@ -177,6 +211,7 @@
                 <div class="panel-head"><div><p class="kicker">NOVA VENDA</p><h3>Dados da negociação</h3></div><button class="inline-help" data-help="sales" type="button">?</button></div>
                 <label>Produto do estoque<select name="inventoryId" id="sale-inventory" required><option value="">Escolha...</option></select></label>
                 <div class="form-grid">
+                  <label>Cor do aparelho<select name="selectedColor" id="sale-color" required><option value="">Escolha o produto primeiro</option></select></label>
                   <label>Nome do cliente<input name="customerName" required></label>
                   <label>Telefone<input name="customerPhone" inputmode="tel"></label>
                   <label>CPF / documento<input name="customerDocument"></label>
@@ -268,6 +303,46 @@
             </div>
           </section>
 
+          <section class="admin-section" data-view="reports">
+            <div class="section-intro">
+              <div><p class="kicker">INTELIGÊNCIA DA OPERAÇÃO</p><h2>Relatórios</h2><p>Receita, lucro, margem, estoque e comportamento de vendas do perfil Matheus.</p></div>
+              <button class="help-link" type="button" data-help="reports">Entender os números</button>
+            </div>
+            <div class="demo-callout persistent">
+              <div>
+                <span class="demo-dot"></span>
+                <div><strong id="reports-demo-title">Modo demonstração</strong><small id="reports-demo-copy">Os dados simulados são identificados e podem ser removidos sem afetar lançamentos reais.</small></div>
+              </div>
+              <div class="demo-actions">
+                <button type="button" data-demo-seed>Recarregar 50 produtos</button>
+                <button class="subtle-danger" type="button" data-demo-clear>Remover demonstração</button>
+              </div>
+            </div>
+            <div class="metric-grid reports-metrics" id="reports-metrics"></div>
+            <div class="reports-grid">
+              <article class="panel report-panel report-wide">
+                <div class="panel-head"><div><p class="kicker">ÚLTIMOS 7 DIAS</p><h3>Vendas recebidas</h3></div><span class="report-total" id="reports-timeline-total">—</span></div>
+                <div class="report-bars vertical" id="reports-timeline"></div>
+              </article>
+              <article class="panel report-panel">
+                <div class="panel-head"><div><p class="kicker">RECEBIMENTO</p><h3>Formas de pagamento</h3></div></div>
+                <div class="report-bars" id="reports-payment"></div>
+              </article>
+              <article class="panel report-panel">
+                <div class="panel-head"><div><p class="kicker">MIX DE VENDAS</p><h3>Por categoria</h3></div></div>
+                <div class="report-bars" id="reports-category"></div>
+              </article>
+              <article class="panel report-panel">
+                <div class="panel-head"><div><p class="kicker">CONDIÇÃO</p><h3>Novo x seminovo</h3></div></div>
+                <div class="report-bars" id="reports-condition"></div>
+              </article>
+              <article class="panel report-panel report-wide">
+                <div class="panel-head"><div><p class="kicker">DESTAQUES</p><h3>Produtos com maior giro</h3></div></div>
+                <div class="top-products" id="reports-top"></div>
+              </article>
+            </div>
+          </section>
+
           <section class="admin-section" data-view="help">
             <div class="section-intro">
               <div><p class="kicker">MANUAL DO SISTEMA</p><h2>Ajuda e FAQ</h2><p>Clique em qualquer interrogação do painel para entender aquela função. Aqui está o manual completo.</p></div>
@@ -326,6 +401,6 @@
       </form>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="admin.js?v=20260726-2" defer></script>
+    <script src="admin.js?v=20260726-3" defer></script>
   </body>
 </html>

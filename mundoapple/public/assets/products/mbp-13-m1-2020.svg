@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" role="img" aria-labelledby="title desc">
+  <title id="title">MacBook Pro 13 polegadas (M1)</title><desc id="desc">Ilustração editorial exclusiva do produto MacBook Pro 13 polegadas (M1)</desc>
+  <defs>
+    <radialGradient id="bg" cx="52%" cy="47%"><stop stop-color="#7a4b16"/><stop offset=".48" stop-color="#101515"/><stop offset="1" stop-color="#050606"/></radialGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff8da"/><stop offset=".36" stop-color="#8d9697"/><stop offset=".72" stop-color="#222728"/><stop offset="1" stop-color="#dce4e3"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#020405"/><stop offset=".48" stop-color="#7a4b16"/><stop offset=".75" stop-color="#ffe28a"/><stop offset="1" stop-color="#030505"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cfe8ef" stop-opacity=".82"/><stop offset=".45" stop-color="#7a4b16" stop-opacity=".45"/><stop offset="1" stop-color="#0b0e10" stop-opacity=".88"/></linearGradient>
+    <pattern id="mesh" width="22" height="22" patternUnits="userSpaceOnUse"><rect width="22" height="22" fill="#273030"/><circle cx="5" cy="5" r="3" fill="#ffe28a" opacity=".48"/></pattern>
+    <filter id="shadow"><feDropShadow dx="0" dy="34" stdDeviation="28" flood-color="#000" flood-opacity=".55"/></filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="26"/></filter>
+  </defs>
+  <rect width="1200" height="1200" rx="100" fill="url(#bg)"/>
+  <circle cx="482" cy="292" r="422" fill="none" stroke="#ffe28a" stroke-width="4" opacity=".16"/>
+  <ellipse cx="600" cy="930" rx="390" ry="95" fill="#ffe28a" opacity=".16" filter="url(#blur)"/>
+  <g filter="url(#shadow)"><g><rect x="250" y="190" width="700" height="520" rx="42" fill="url(#metal)"/>
+      <rect x="282" y="222" width="636" height="450" rx="24" fill="url(#screen)"/>
+      <path d="M160 740 H1040 L920 900 H280Z" fill="url(#metal)"/>
+      <path d="M510 755 H690 L665 795 H535Z" fill="rgba(0,0,0,.22)"/></g></g>
+  <path d="M95 1035 H1105" stroke="rgba(255,255,255,.12)"/>
+  <circle cx="938" cy="252" r="11" fill="#ffe28a"/>
+</svg>
