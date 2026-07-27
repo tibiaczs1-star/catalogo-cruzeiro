@@ -1,8 +1,80 @@
 {
-  "lastAttemptAt": "2026-07-26T06:23:21.477Z",
-  "lastSuccessAt": "2026-07-26T06:23:32.193Z",
-  "source": "rss-direct-agents-capture",
+  "lastAttemptAt": "2026-07-27T02:37:40.037Z",
+  "lastSuccessAt": "2026-07-27T02:37:40.037Z",
+  "source": "rss-direct-agents-capture+manual-social-sync",
   "activeWindowItems": [
+    {
+      "id": "https://www.instagram.com/p/DbLIOdtEarM/",
+      "slug": "morador-cruzeiro-do-sul-voluntario-ucrania",
+      "title": "Morador de Cruzeiro do Sul embarca como voluntário para atuar na Ucrânia",
+      "eyebrow": "Vale do Juruá",
+      "date": "24 de jul de 2026",
+      "publishedAt": "2026-07-24T12:00:00.000-05:00",
+      "category": "Vale do Juruá",
+      "categoryKey": "vale-do-jurua",
+      "previewClass": "thumb-cidade",
+      "sourceName": "Notícias do Juruá",
+      "sourceUrl": "https://www.instagram.com/p/DbLIOdtEarM/",
+      "sourceLabel": "Relato publicado pelo perfil Notícias do Juruá",
+      "lede": "Mário Jorge do Vale Costa, de 33 anos, deixou Cruzeiro do Sul e informou que seguirá para a Ucrânia como voluntário.",
+      "summary": "O cruzeirense Mário Jorge do Vale Costa, de 33 anos, relatou ter sido selecionado para atuar como voluntário na Ucrânia após contato e videoconferência com um familiar que já está no país.",
+      "analysis": "A informação é baseada no relato do próprio morador reproduzido pela fonte. Não há, até a publicação, confirmação independente sobre vínculo, função, unidade ou chegada à Ucrânia.",
+      "highlights": [
+        "Mário Jorge tem 33 anos e mora no bairro Cohab, em Cruzeiro do Sul.",
+        "Segundo o relato, ele saiu da cidade na quarta-feira e passou por São Paulo antes da viagem internacional.",
+        "O morador afirmou ter servido no Exército Brasileiro, no 5º BEC."
+      ],
+      "development": [
+        "De acordo com a publicação do Notícias do Juruá, Mário Jorge do Vale Costa deixou Cruzeiro do Sul na quarta-feira e estava em São Paulo, de onde seguiria viagem para a Ucrânia no domingo.",
+        "Ele afirmou que o processo começou por intermédio de um familiar que já se encontra no país europeu. Segundo o relato, houve uma videoconferência e, depois, a comunicação de que havia sido aprovado.",
+        "Mário Jorge também declarou ter experiência anterior no Exército Brasileiro, com passagem pelo 5º Batalhão de Engenharia de Construção, em Cruzeiro do Sul.",
+        "O Catálogo CZS mantém o caso em acompanhamento. Informações sobre chegada, atividade, vínculo e segurança serão atualizadas apenas quando houver confirmação verificável."
+      ],
+      "imageUrl": "/assets/news-manual/morador-cruzeiro-do-sul-voluntario-ucrania-20260724.jpg",
+      "feedImageUrl": "/assets/news-manual/morador-cruzeiro-do-sul-voluntario-ucrania-20260724.jpg",
+      "sourceImageUrl": "/assets/news-manual/morador-cruzeiro-do-sul-voluntario-ucrania-20260724.jpg",
+      "imageCredit": "Imagem reproduzida da publicação de Notícias do Juruá",
+      "imageFocus": "center 30%",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 1,
+      "editorialPriority": "jurua-prioridade",
+      "crossSources": [
+        {
+          "name": "Notícias do Juruá",
+          "url": "https://www.instagram.com/p/DbLIOdtEarM/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "Notícias do Juruá",
+          "url": "https://www.instagram.com/p/DbLIOdtEarM/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "morador-cruzeiro-do-sul-voluntario-ucrania"
+      ],
+      "audioNarrationText": "",
+      "audioNarrationTranscript": "",
+      "audioNarrationStatus": "not-requested",
+      "videoCaptionText": "",
+      "videoCaptionStatus": "not-requested",
+      "accessibility": {
+        "hasAudioNarrationText": false,
+        "hasAudioNarrationTranscript": false,
+        "hasVideoCaptionText": false
+      },
+      "imageQuality": "imagem-fonte-validada",
+      "body": [
+        "Mário Jorge do Vale Costa, de 33 anos, morador do bairro Cohab, em Cruzeiro do Sul, informou que seguirá para a Ucrânia como voluntário.",
+        "Segundo o relato publicado pelo perfil Notícias do Juruá, ele deixou Cruzeiro do Sul na quarta-feira e passou por São Paulo antes da etapa internacional da viagem.",
+        "Mário Jorge disse que foi recrutado com a ajuda de um familiar que já está na Ucrânia. Ele relatou ter participado de uma videoconferência antes de receber a informação de que havia sido aprovado.",
+        "O cruzeirense afirmou ainda que serviu no Exército Brasileiro, no 5º Batalhão de Engenharia de Construção.",
+        "Até esta publicação, não há confirmação independente sobre vínculo, função, unidade ou chegada ao território ucraniano. O Catálogo CZS atualizará a matéria quando surgirem informações verificáveis."
+      ]
+    },
     {
       "id": "https://batelao.com/com-chapa-majoritaria-feminina-historica-mdb-homologa-candidaturas-em-evento-neste-sabado/?utm_source=rss&utm_medium=rss&utm_campaign=com-chapa-majoritaria-feminina-historica-mdb-homologa-candidaturas-em-evento-neste-sabado",
       "slug": "com-chapa-majoritaria-feminina-historica-mdb-homologa-candidaturas-em-evento-neste-sabado",
@@ -24589,6 +24661,78 @@
     }
   ],
   "items": [
+    {
+      "id": "https://www.instagram.com/p/DbLIOdtEarM/",
+      "slug": "morador-cruzeiro-do-sul-voluntario-ucrania",
+      "title": "Morador de Cruzeiro do Sul embarca como voluntário para atuar na Ucrânia",
+      "eyebrow": "Vale do Juruá",
+      "date": "24 de jul de 2026",
+      "publishedAt": "2026-07-24T12:00:00.000-05:00",
+      "category": "Vale do Juruá",
+      "categoryKey": "vale-do-jurua",
+      "previewClass": "thumb-cidade",
+      "sourceName": "Notícias do Juruá",
+      "sourceUrl": "https://www.instagram.com/p/DbLIOdtEarM/",
+      "sourceLabel": "Relato publicado pelo perfil Notícias do Juruá",
+      "lede": "Mário Jorge do Vale Costa, de 33 anos, deixou Cruzeiro do Sul e informou que seguirá para a Ucrânia como voluntário.",
+      "summary": "O cruzeirense Mário Jorge do Vale Costa, de 33 anos, relatou ter sido selecionado para atuar como voluntário na Ucrânia após contato e videoconferência com um familiar que já está no país.",
+      "analysis": "A informação é baseada no relato do próprio morador reproduzido pela fonte. Não há, até a publicação, confirmação independente sobre vínculo, função, unidade ou chegada à Ucrânia.",
+      "highlights": [
+        "Mário Jorge tem 33 anos e mora no bairro Cohab, em Cruzeiro do Sul.",
+        "Segundo o relato, ele saiu da cidade na quarta-feira e passou por São Paulo antes da viagem internacional.",
+        "O morador afirmou ter servido no Exército Brasileiro, no 5º BEC."
+      ],
+      "development": [
+        "De acordo com a publicação do Notícias do Juruá, Mário Jorge do Vale Costa deixou Cruzeiro do Sul na quarta-feira e estava em São Paulo, de onde seguiria viagem para a Ucrânia no domingo.",
+        "Ele afirmou que o processo começou por intermédio de um familiar que já se encontra no país europeu. Segundo o relato, houve uma videoconferência e, depois, a comunicação de que havia sido aprovado.",
+        "Mário Jorge também declarou ter experiência anterior no Exército Brasileiro, com passagem pelo 5º Batalhão de Engenharia de Construção, em Cruzeiro do Sul.",
+        "O Catálogo CZS mantém o caso em acompanhamento. Informações sobre chegada, atividade, vínculo e segurança serão atualizadas apenas quando houver confirmação verificável."
+      ],
+      "imageUrl": "/assets/news-manual/morador-cruzeiro-do-sul-voluntario-ucrania-20260724.jpg",
+      "feedImageUrl": "/assets/news-manual/morador-cruzeiro-do-sul-voluntario-ucrania-20260724.jpg",
+      "sourceImageUrl": "/assets/news-manual/morador-cruzeiro-do-sul-voluntario-ucrania-20260724.jpg",
+      "imageCredit": "Imagem reproduzida da publicação de Notícias do Juruá",
+      "imageFocus": "center 30%",
+      "imageFit": "cover",
+      "media": null,
+      "videoUrl": "",
+      "priority": 1,
+      "editorialPriority": "jurua-prioridade",
+      "crossSources": [
+        {
+          "name": "Notícias do Juruá",
+          "url": "https://www.instagram.com/p/DbLIOdtEarM/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "Notícias do Juruá",
+          "url": "https://www.instagram.com/p/DbLIOdtEarM/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "morador-cruzeiro-do-sul-voluntario-ucrania"
+      ],
+      "audioNarrationText": "",
+      "audioNarrationTranscript": "",
+      "audioNarrationStatus": "not-requested",
+      "videoCaptionText": "",
+      "videoCaptionStatus": "not-requested",
+      "accessibility": {
+        "hasAudioNarrationText": false,
+        "hasAudioNarrationTranscript": false,
+        "hasVideoCaptionText": false
+      },
+      "imageQuality": "imagem-fonte-validada",
+      "body": [
+        "Mário Jorge do Vale Costa, de 33 anos, morador do bairro Cohab, em Cruzeiro do Sul, informou que seguirá para a Ucrânia como voluntário.",
+        "Segundo o relato publicado pelo perfil Notícias do Juruá, ele deixou Cruzeiro do Sul na quarta-feira e passou por São Paulo antes da etapa internacional da viagem.",
+        "Mário Jorge disse que foi recrutado com a ajuda de um familiar que já está na Ucrânia. Ele relatou ter participado de uma videoconferência antes de receber a informação de que havia sido aprovado.",
+        "O cruzeirense afirmou ainda que serviu no Exército Brasileiro, no 5º Batalhão de Engenharia de Construção.",
+        "Até esta publicação, não há confirmação independente sobre vínculo, função, unidade ou chegada ao território ucraniano. O Catálogo CZS atualizará a matéria quando surgirem informações verificáveis."
+      ]
+    },
     {
       "id": "https://batelao.com/com-chapa-majoritaria-feminina-historica-mdb-homologa-candidaturas-em-evento-neste-sabado/?utm_source=rss&utm_medium=rss&utm_campaign=com-chapa-majoritaria-feminina-historica-mdb-homologa-candidaturas-em-evento-neste-sabado",
       "slug": "com-chapa-majoritaria-feminina-historica-mdb-homologa-candidaturas-em-evento-neste-sabado",
