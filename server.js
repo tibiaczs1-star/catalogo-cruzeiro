@@ -374,6 +374,10 @@ const CATEGORY_LABEL_BY_KEY = {
   policia: "Polícia",
   saude: "Saúde",
   educacao: "Educação",
+  jurua: "Juruá",
+  seguranca: "Segurança",
+  amazonia: "Amazônia",
+  transito: "Trânsito",
   negocios: "Negócios",
   calendario: "Calendário",
   cultura: "Cultura",
@@ -388,6 +392,14 @@ const CATEGORY_ALIAS_MAP = {
   policia: "policia",
   saude: "saude",
   educacao: "educacao",
+  jurua: "jurua",
+  juruá: "jurua",
+  seguranca: "seguranca",
+  segurança: "seguranca",
+  amazonia: "amazonia",
+  amazônia: "amazonia",
+  transito: "transito",
+  trânsito: "transito",
   economia: "negocios",
   negocios: "negocios",
   calendario: "calendario",
@@ -7348,6 +7360,7 @@ function normalizeArticleRecord(item) {
     imageFocus: item.imageFocus || "",
     imageFit: item.imageFit || "",
     media: item.media || null,
+    videoUrl: item.videoUrl || item.media?.videoUrl || item.media?.url || "",
     audioNarrationText: prepareRaylNarrationText(item.audioNarrationText || item.audioNarrationTranscript || raylNarrationText),
     audioNarrationTranscript: prepareRaylNarrationText(
       item.audioNarrationTranscript || item.audioNarrationText || raylNarrationText
@@ -7712,13 +7725,23 @@ function getArticleNewsApiBasePayload() {
   };
 }
 
-function buildArticleNewsApiPayload(limit = 1000) {
+function articleHasVideo(item = {}) {
+  return Boolean(item.videoUrl || item.media?.type === "video" || item.media?.videoUrl);
+}
+
+function buildArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
+  const sort = String(options.sort || "").toLowerCase() === "latest" ? "latest" : "";
+  const video = Boolean(options.video);
   const basePayload = getArticleNewsApiBasePayload();
-  const visibleItems = basePayload.items.slice(0, safeLimit);
+  const eligibleItems = video ? basePayload.items.filter(articleHasVideo) : basePayload.items;
+  const orderedItems = sort === "latest" ? eligibleItems.slice().sort(sortArticleItems) : eligibleItems;
+  const visibleItems = orderedItems.slice(0, safeLimit);
 
   return {
     ok: true,
+    sort: sort || undefined,
+    video: video || undefined,
     total: basePayload.total,
     archiveTotal: basePayload.total,
     returned: visibleItems.length,
@@ -7783,6 +7806,7 @@ function buildLiteArticleNewsApiItem(item = {}) {
     imageFocus: item.imageFocus,
     imageFit: item.imageFit,
     media: item.media,
+    videoUrl: item.videoUrl,
     priority: item.priority,
     editorialPriority: item.editorialPriority,
     editorialGate: item.editorialGate,
@@ -7796,8 +7820,8 @@ function buildLiteArticleNewsApiItem(item = {}) {
   };
 }
 
-function buildLiteArticleNewsApiPayload(limit = 80) {
-  const payload = buildArticleNewsApiPayload(Math.max(1, Math.min(120, Number(limit) || 80)));
+function buildLiteArticleNewsApiPayload(limit = 80, options = {}) {
+  const payload = buildArticleNewsApiPayload(Math.max(1, Math.min(1000, Number(limit) || 80)), options);
   return {
     ...payload,
     lite: true,
@@ -7808,14 +7832,18 @@ function buildLiteArticleNewsApiPayload(limit = 80) {
 function getCachedArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const lite = Boolean(options.lite);
-  const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}`;
+  const sort = String(options.sort || "").toLowerCase() === "latest" ? "latest" : "";
+  const video = Boolean(options.video);
+  const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}:sort:${sort || "default"}:video:${video ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
 
   if (cached && cached.expiresAt > Date.now()) {
     return cached.payload;
   }
 
-  const payload = lite ? buildLiteArticleNewsApiPayload(safeLimit) : buildArticleNewsApiPayload(safeLimit);
+  const payload = lite
+    ? buildLiteArticleNewsApiPayload(safeLimit, { sort, video })
+    : buildArticleNewsApiPayload(safeLimit, { sort, video });
   newsApiResponseCache.set(key, {
     expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
     payload
@@ -17511,7 +17539,9 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 1000);
     const lite = /^(1|true|yes|sim)$/i.test(String(searchParams.get("lite") || ""));
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { lite }));
+    const sort = searchParams.get("sort") || "";
+    const video = /^(1|true|yes|sim)$/i.test(String(searchParams.get("video") || ""));
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { lite, sort, video }));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
