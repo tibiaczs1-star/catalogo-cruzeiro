@@ -22,9 +22,11 @@ const {
 } = require("./pubpaid-runtime");
 const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
 const { createMundoAppleServerIntegration } = require("./mundoapple/server-integration");
+const { createArizonaRanchIntegration } = require("./arizona-ranch");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
 let mundoAppleIntegration = null;
+let arizonaRanchIntegration = null;
 const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
 const vm = require("vm");
 const zlib = require("zlib");
@@ -123,6 +125,13 @@ mundoAppleIntegration = createMundoAppleServerIntegration({
   dataDir: DATA_DIR,
   environment: process.env,
   sendFile,
+});
+arizonaRanchIntegration = createArizonaRanchIntegration({
+  rootDir: ROOT_DIR,
+  dataDir: DATA_DIR,
+  environment: process.env,
+  sendFile,
+  getAuthUser: readCatalogoAuthSession,
 });
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const MAINTENANCE_FILE = path.join(ROOT_DIR, "maintenance.html");
@@ -16838,6 +16847,10 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
+  if (pathname.startsWith("/api/arizona-ranch/")) {
+    return arizonaRanchIntegration.handleApi(req, res, pathname);
+  }
+
   if (pathname.startsWith("/api/mundoapple/")) {
     return mundoAppleIntegration.handleApi(req, res);
   }
@@ -20715,6 +20728,11 @@ async function handleApi(req, res, pathname, searchParams) {
 
 async function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
+
+  if (arizonaRanchIntegration) {
+    const handled = await arizonaRanchIntegration.handleStatic(req, res, pathname);
+    if (handled) return;
+  }
 
   if (mundoAppleIntegration) {
     const handled = await mundoAppleIntegration.handleStatic(req, res, pathname);

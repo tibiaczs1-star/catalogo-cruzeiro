@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#120e0b">
+    <title>Administração | Arizona Ranch</title>
+    <link rel="stylesheet" href="/pagamentos/ai/arizona.css?v=20260731-3">
+    <script src="https://accounts.google.com/gsi/client" async></script>
+  </head>
+  <body class="arizona-page admin-page">
+    <main class="admin-shell">
+      <a class="back-link" href="/pagamentos/ai/">← Voltar para reservas</a>
+      <p class="eyebrow">Arizona Ranch • administração</p>
+      <h1>Pagamentos e reservas</h1>
+      <p class="admin-intro">Confirme manualmente somente depois de verificar o comprovante recebido.</p>
+      <section class="admin-auth panel" id="admin-auth">
+        <h2>Acesso do administrador</h2>
+        <p id="admin-access">Entre com a conta Google autorizada.</p>
+        <div id="admin-google-login"></div>
+      </section>
+      <section class="admin-summary" id="admin-summary" hidden></section>
+      <section class="admin-reservations" id="admin-reservations" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Pedidos recentes</p>
+            <h2>Conferir comprovantes</h2>
+          </div>
+          <button class="button button-secondary" id="refresh-admin" type="button">Atualizar</button>
+        </div>
+        <div class="admin-list" id="admin-list"></div>
+      </section>
+    </main>
+    <div class="toast" id="admin-toast" hidden></div>
+    <script src="/pagamentos/ai/admin.js" defer></script>
+  </body>
+</html>
