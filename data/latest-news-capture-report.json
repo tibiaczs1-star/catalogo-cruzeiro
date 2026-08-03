@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-27T12:40:06.260Z",
-  "finishedAt": "2026-07-27T12:40:14.407Z",
-  "capturedItems": 402,
-  "capturedToday": 193,
+  "startedAt": "2026-08-03T21:35:34.534Z",
+  "finishedAt": "2026-08-03T21:35:42.803Z",
+  "capturedItems": 395,
+  "capturedToday": 282,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -44,10 +44,9 @@
     },
     {
       "source": "agencia-acre",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "HTTP 503"
     },
     {
       "source": "agencia-brasil-ultimas",
@@ -164,7 +163,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 3,
+      "count": 6,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -199,21 +198,21 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 1,
+      "count": 4,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

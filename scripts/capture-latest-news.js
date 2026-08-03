@@ -6,6 +6,7 @@ const path = require("node:path");
 const vm = require("node:vm");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
+const { decorateNewsItem, getEditorialScope, orderPortalStories } = require(path.join(ROOT_DIR, "editorial-scope.js"));
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(ROOT_DIR, "data");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
@@ -539,7 +540,7 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
   item.sourceImageUrl = safeImage;
   if (!safeImage) item.imageQuality = "imagem-ausente-na-fonte-enviar-cheffe-call";
   item.body = buildBody(item);
-  return normalizeFeedMarkupNoise(item);
+  return decorateNewsItem(normalizeFeedMarkupNoise(item));
 }
 
 function extractWordPressFeaturedImage(post = {}) {
@@ -626,7 +627,7 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
   item.sourceImageUrl = safeImage;
   if (!safeImage) item.imageQuality = "imagem-ausente-na-fonte-enviar-cheffe-call";
   item.body = buildBody(item);
-  return normalizeFeedMarkupNoise(item);
+  return decorateNewsItem(normalizeFeedMarkupNoise(item));
 }
 
 function parseWordPressJsonItems(jsonText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
@@ -910,41 +911,7 @@ function getCategoryFlowScore(item = {}) {
 }
 
 function getRegionalPriorityScore(item = {}) {
-  const haystack = normalizeText(
-    [
-      item.title,
-      item.summary,
-      item.lede,
-      item.description,
-      item.category,
-      item.categoryKey,
-      item.eyebrow,
-      item.sourceName,
-      item.sourceLabel,
-      item.sourceUrl,
-      Array.isArray(item.body) ? item.body.join(" ") : item.body
-    ].join(" ")
-  );
-
-  if (/\b(cruzeiro do sul|cruzeiro-do-sul|cruzeirodosul|czs)\b/.test(haystack)) return 5000;
-  if (
-    /\b(vale do jurua|vale do juru[aá]|vale-do-jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá]|jurua24horas|juruaemtempo|juruacomunicacao|tribunadojurua|portaldojurua)\b/.test(
-      haystack
-    )
-  ) {
-    return 4200;
-  }
-  if (
-    /\b(acre|rio branco|sena madureira|feijo|feij[oó]|xapuri|brasileia|brasil[eé]ia|epitaciolandia|epitaciol[aâ]ndia|assis brasil|placido de castro|pl[aá]cido de castro|agencia acre|agencia\.ac|acre\.gov|ac24horas|contilnet|acrenews)\b/.test(
-      haystack
-    )
-  ) {
-    return 3200;
-  }
-  if (/\b(brasil|brasilia|bras[ií]lia|stf|senado|congresso|governo federal|agencia brasil|g1|cnn brasil)\b/.test(haystack)) {
-    return 900;
-  }
-  return 0;
+  return getEditorialScope(item).priority;
 }
 
 function canonicalDedupeUrl(value = "") {
@@ -996,7 +963,7 @@ function mergeNewsItems(...collections) {
   };
 
   collections.flat().filter(Boolean).forEach((rawItem) => {
-    const item = normalizeFeedMarkupNoise(rawItem);
+    const item = decorateNewsItem(normalizeFeedMarkupNoise(rawItem));
     if (getEditorialBlockReason(item)) return;
     const keys = dedupeKeys(item);
     if (!keys.length) return;
@@ -1025,7 +992,7 @@ function mergeNewsItems(...collections) {
     dedupeKeys(merged).concat(keys).forEach((key) => indexesByKey.set(key, existingIndex));
   });
 
-  return items.sort((left, right) => {
+  return orderPortalStories(items).sort((left, right) => {
     const dateLayerDiff = getDayTimestamp(right) - getDayTimestamp(left);
     if (dateLayerDiff !== 0) return dateLayerDiff;
     const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
@@ -1120,25 +1087,25 @@ function buildCuratedActiveWindow(items = [], limit = ACTIVE_WINDOW_LIMIT) {
   take((item) => getRegionalPriorityScore(item) >= 3200);
   take(() => true);
 
-  return [...picked.values()].slice(0, target);
+  return orderPortalStories([...picked.values()]).slice(0, target);
 }
 
 async function runCaptureLatestNews(options = {}) {
   const startedAt = new Date().toISOString();
   const capture = await collectLatestNewsItems(options);
   const existingItems = readExistingNewsItems();
-  const mergedItems = mergeNewsItems(capture.items, existingItems)
-    .map((item) => applyAudioAndVideoMetadata(item))
+  const mergedItems = orderPortalStories(mergeNewsItems(capture.items, existingItems))
+    .map((item) => applyAudioAndVideoMetadata(decorateNewsItem(item)))
     .slice(0, ARCHIVE_LIMIT);
   const activeWindowItems = buildCuratedActiveWindow(mergedItems, ACTIVE_WINDOW_LIMIT).map((item) =>
     applyAudioAndVideoMetadata(item)
   );
   const activeKeys = new Set(activeWindowItems.map((item) => dedupeKey(item)).filter(Boolean));
-  const mergedUiItems = [
+  const mergedUiItems = orderPortalStories([
     ...activeWindowItems,
     ...mergedItems.filter((item) => !activeKeys.has(dedupeKey(item)))
-  ]
-    .map((item) => applyAudioAndVideoMetadata(item))
+  ])
+    .map((item) => applyAudioAndVideoMetadata(decorateNewsItem(item)))
     .slice(0, ARCHIVE_LIMIT);
   const todayKey = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Rio_Branco",

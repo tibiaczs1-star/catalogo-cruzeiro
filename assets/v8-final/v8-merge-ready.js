@@ -230,14 +230,23 @@
     [RAYL_POSES.seatedFeature, "Raiane entra com o portal.", "seated"],
   ];
   const dataNode = document.getElementById("newsData");
-  const DATA = dataNode ? JSON.parse(dataNode.textContent || "{}") : { items: [] };
-  const allStories = (DATA.items || [])
+  const inlineData = dataNode ? JSON.parse(dataNode.textContent || "{}") : { items: [] };
+  const liveItems = Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [];
+  const DATA = liveItems.length
+    ? {
+      ...inlineData,
+      items: liveItems,
+      archiveTotal: Number(window.NEWS_ARCHIVE_TOTAL || liveItems.length),
+    }
+    : inlineData;
+  const rawStories = (DATA.items || [])
     .filter((item) => !/^(lei organica|lei orgânica)$/i.test(String(item.title || "").trim()))
     .sort((a, b) => {
       const stampA = Date.parse(a?.publishedAt || a?.date || a?.capturedAt || "");
       const stampB = Date.parse(b?.publishedAt || b?.date || b?.capturedAt || "");
       return (Number.isFinite(stampB) ? stampB : 0) - (Number.isFinite(stampA) ? stampA : 0);
     });
+  const allStories = window.CzsEditorialScope?.orderPortalStories?.(rawStories) || rawStories;
   let archiveSourceStories = allStories.slice();
   let archiveSourceMeta = {
     status: "snapshot",
@@ -1488,7 +1497,7 @@
       ["#fullSiteFooter h2", "text", "Tudo do Catálogo CZS"],
       ["#fullSiteFooter .footer-full-head p", "text", ""],
       ["#syncBtn", "text", "Atualizar notícias"],
-      ["#syncStatus", "text", "Arquivo CZS: 1610 notícias • amostra local: 1000"],
+    ["#syncStatus", "text", `Arquivo CZS: ${allStories.length} notícias • seleção regional em destaque`],
     ];
 
     copy.forEach(([selector, mode, value]) => {

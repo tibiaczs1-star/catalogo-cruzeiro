@@ -23,6 +23,7 @@ const {
 const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
 const { createMundoAppleServerIntegration } = require("./mundoapple/server-integration");
 const { createArizonaRanchIntegration } = require("./arizona-ranch");
+const { decorateNewsItem, orderPortalStories } = require("./editorial-scope");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
 let mundoAppleIntegration = null;
@@ -5144,7 +5145,7 @@ function buildDirectFeedRecord(raw = {}, source = {}) {
   });
   const imageUrl = safeString(raw.imageUrl || raw.feedImageUrl || raw.sourceImageUrl || "", 520);
 
-  return {
+  return decorateNewsItem({
     id: link,
     slug: slugify(title),
     title,
@@ -5161,7 +5162,7 @@ function buildDirectFeedRecord(raw = {}, source = {}) {
     sourceImageUrl: imageUrl,
     priority: Number(source.priority || 0) || 0,
     editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : ""
-  };
+  });
 }
 
 function parseWordPressJsonItems(jsonText = "", source = {}) {
@@ -7711,7 +7712,7 @@ function getArticleNewsApiBasePayload() {
     };
   }
 
-  const items = getRawNewsItems().map(normalizeArticleRecord);
+  const items = getRawNewsItems().map(normalizeArticleRecord).map(decorateNewsItem);
   const map = new Map();
 
   items.forEach((item) => {
@@ -7740,11 +7741,17 @@ function articleHasVideo(item = {}) {
 
 function buildArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
-  const sort = String(options.sort || "").toLowerCase() === "latest" ? "latest" : "";
+  const requestedSort = String(options.sort || "").toLowerCase();
+  const sort = requestedSort === "latest" || requestedSort === "editorial" ? requestedSort : "";
   const video = Boolean(options.video);
   const basePayload = getArticleNewsApiBasePayload();
   const eligibleItems = video ? basePayload.items.filter(articleHasVideo) : basePayload.items;
-  const orderedItems = sort === "latest" ? eligibleItems.slice().sort(sortArticleItems) : eligibleItems;
+  const orderedItems =
+    sort === "latest"
+      ? eligibleItems.slice().sort(sortArticleItems)
+      : sort === "editorial"
+        ? orderPortalStories(eligibleItems)
+        : eligibleItems;
   const visibleItems = orderedItems.slice(0, safeLimit);
 
   return {
@@ -7823,6 +7830,7 @@ function buildLiteArticleNewsApiItem(item = {}) {
     editorialSpotlightReady: item.editorialSpotlightReady,
     editorialSurfaceTier: item.editorialSurfaceTier,
     editorialLocalTier: item.editorialLocalTier,
+    editorialScope: item.editorialScope,
     sourceCount: item.sourceCount,
     crossSources: item.crossSources,
     alternateSlugs: item.alternateSlugs
@@ -7841,7 +7849,8 @@ function buildLiteArticleNewsApiPayload(limit = 80, options = {}) {
 function getCachedArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const lite = Boolean(options.lite);
-  const sort = String(options.sort || "").toLowerCase() === "latest" ? "latest" : "";
+  const requestedSort = String(options.sort || "").toLowerCase();
+  const sort = requestedSort === "latest" || requestedSort === "editorial" ? requestedSort : "";
   const video = Boolean(options.video);
   const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}:sort:${sort || "default"}:video:${video ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
