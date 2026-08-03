@@ -1584,10 +1584,16 @@ const COMPRESSIBLE_MIME_TYPES = [
 let imagePreviewCacheLoaded = false;
 let imagePreviewCacheWriteTimer = null;
 const JSON_FILE_MUTATION_QUEUES = new Map();
+const EDITORIAL_NEWS_SNAPSHOT_FILES = Object.freeze([
+  "runtime-news.json",
+  "news-archive.json",
+  "latest-news-capture-report.json"
+]);
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
   seedDataDirFromDefault();
+  syncPersistentEditorialNewsSnapshot();
 }
 
 function seedDataDirFromDefault() {
@@ -1607,6 +1613,35 @@ function seedDataDirFromDefault() {
     if (fs.existsSync(targetPath)) return;
     fs.copyFileSync(sourcePath, targetPath);
   });
+}
+
+function getEditorialSnapshotFinishedAt(dataDir) {
+  const report = readJson(path.join(dataDir, "latest-news-capture-report.json"), null);
+  const parsed = Date.parse(String(report?.finishedAt || report?.updatedAt || report?.startedAt || ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function hasUsableEditorialSnapshot(dataDir) {
+  return ["runtime-news.json", "news-archive.json"].every((fileName) => {
+    const items = normalizeJsonArrayPayload(readJson(path.join(dataDir, fileName), []));
+    return items.length > 0;
+  });
+}
+
+function syncPersistentEditorialNewsSnapshot() {
+  if (path.resolve(DATA_DIR) === path.resolve(DEFAULT_DATA_DIR)) return false;
+  if (!hasUsableEditorialSnapshot(DEFAULT_DATA_DIR)) return false;
+
+  const bundledFinishedAt = getEditorialSnapshotFinishedAt(DEFAULT_DATA_DIR);
+  const persistentFinishedAt = getEditorialSnapshotFinishedAt(DATA_DIR);
+  if (!bundledFinishedAt || bundledFinishedAt <= persistentFinishedAt) return false;
+
+  EDITORIAL_NEWS_SNAPSHOT_FILES.forEach((fileName) => {
+    const sourcePath = path.join(DEFAULT_DATA_DIR, fileName);
+    if (!fs.existsSync(sourcePath)) return;
+    writeJson(path.join(DATA_DIR, fileName), readJson(sourcePath, null));
+  });
+  return true;
 }
 
 function safeJoin(base, targetPath) {
