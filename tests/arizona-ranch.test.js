@@ -6,8 +6,42 @@ const {
   STATIC_OCCUPIED_TABLES,
   calculateReservation,
   buildPixPayload,
+  createArizonaAdminSessionManager,
   createReservationStore,
 } = require("../arizona-ranch");
+
+test("mantém a sessão administrativa separada do login Google", () => {
+  const admin = createArizonaAdminSessionManager({
+    environment: {
+      ARIZONA_ADMIN_USERNAME: "admin-teste",
+      ARIZONA_ADMIN_PASSWORD: "senha-de-teste",
+      ARIZONA_ADMIN_SESSION_SECRET: "segredo-de-teste-com-tamanho-seguro",
+    },
+    now: () => new Date("2026-08-03T12:00:00.000Z"),
+  });
+
+  const token = admin.authenticate({ username: "admin-teste", password: "senha-de-teste" });
+  assert.ok(token);
+  assert.deepEqual(admin.verify(token), { username: "admin-teste" });
+  assert.equal(admin.authenticate({ username: "admin-teste", password: "incorreta" }), null);
+  assert.match(admin.createSessionCookie(token, { secure: true }), /HttpOnly/);
+  assert.match(admin.createSessionCookie(token, { secure: true }), /SameSite=Strict/);
+  assert.match(admin.clearSessionCookie({ secure: true }), /Max-Age=0/);
+});
+
+test("reaproveita a senha administrativa já configurada no catálogo", () => {
+  const admin = createArizonaAdminSessionManager({
+    environment: {
+      FULL_ADMIN_PASSWORD: "senha-global-de-teste",
+      SITE_AUTH_SESSION_SECRET: "segredo-global-de-teste-com-tamanho-seguro",
+      NODE_ENV: "production",
+    },
+  });
+
+  const token = admin.authenticate({ username: "arizona", password: "senha-global-de-teste" });
+  assert.ok(token);
+  assert.deepEqual(admin.verify(token), { username: "arizona" });
+});
 
 test("cobra o valor integral conforme a quantidade de lugares", () => {
   assert.deepEqual(calculateReservation(2), {

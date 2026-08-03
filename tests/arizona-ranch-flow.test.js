@@ -8,7 +8,7 @@ const readProjectFile = (...segments) =>
   fs.readFileSync(path.join(projectRoot, ...segments), "utf8");
 
 test("a reserva conduz a pessoa por login, dados, mesa, WhatsApp e pagamento", () => {
-  const html = readProjectFile("pagamentos", "ai", "index.html");
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
 
   ["login", "details", "table", "whatsapp", "payment"].forEach((step) => {
     assert.match(html, new RegExp(`data-flow-step=["']${step}["']`));
@@ -20,8 +20,8 @@ test("a reserva conduz a pessoa por login, dados, mesa, WhatsApp e pagamento", (
 });
 
 test("a abertura incorpora a trilha oficial e mostra o aviso de direitos", () => {
-  const html = readProjectFile("pagamentos", "ai", "index.html");
-  const app = readProjectFile("pagamentos", "ai", "app.js");
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const openingMarkup = html.match(
     /<section[^>]*id=["']opening-screen["'][^>]*>[\s\S]*?<\/section>/i,
   )?.[0];
@@ -37,9 +37,9 @@ test("a abertura incorpora a trilha oficial e mostra o aviso de direitos", () =>
 });
 
 test("a abertura leva direto à reserva, inicia a trilha e exibe a foto sem recorte", () => {
-  const html = readProjectFile("pagamentos", "ai", "index.html");
-  const app = readProjectFile("pagamentos", "ai", "app.js");
-  const css = readProjectFile("pagamentos", "ai", "arizona.css");
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+  const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
 
   assert.match(html, /id=["']start-experience["']/i);
   assert.match(app, /openingButton\.textContent = "Reservar mesa"/);
@@ -51,7 +51,7 @@ test("a abertura leva direto à reserva, inicia a trilha e exibe a foto sem reco
 });
 
 test("o mapa exibe somente mesa livre ou comprada", () => {
-  const app = readProjectFile("pagamentos", "ai", "app.js");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
   assert.match(app, /function tableAvailability\(/);
   assert.match(app, /✓ Livre/);
@@ -60,8 +60,8 @@ test("o mapa exibe somente mesa livre ou comprada", () => {
 });
 
 test("identificação permite corrigir dados e mantém o Google simples", () => {
-  const html = readProjectFile("pagamentos", "ai", "index.html");
-  const app = readProjectFile("pagamentos", "ai", "app.js");
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
   assert.doesNotMatch(html, /id=["']details-name["'][^>]*\breadonly\b/i);
   assert.doesNotMatch(html, /id=["']details-email["'][^>]*\breadonly\b/i);
@@ -72,4 +72,15 @@ test("identificação permite corrigir dados e mantém o Google simples", () => 
   assert.doesNotMatch(googleAuth, /showToast\(error\.message, "error"\)/);
   assert.match(googleAuth, /showToast\("Não foi possível conectar com Google agora\. Tente novamente\.", "error"\)/);
   assert.match(app, /customer: \{ name: state\.customer\.name, email: state\.customer\.email \}/);
+});
+
+test("o painel usa sessão própria de administrador sem login Google", () => {
+  const html = readProjectFile("pagamentos", "reservaranch", "admin.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "admin.js");
+
+  assert.match(html, /id=["']admin-login-form["']/);
+  assert.match(html, /id=["']admin-password["'][^>]*type=["']password["']/);
+  assert.doesNotMatch(html, /accounts\.google\.com/);
+  assert.doesNotMatch(app, /renderGoogleLogin/);
+  assert.match(app, /\/admin\/login/);
 });

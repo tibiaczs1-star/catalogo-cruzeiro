@@ -53,6 +53,12 @@ services:
         sync: false
       - key: FULL_ADMIN_PASSWORD
         sync: false
+      - key: ARIZONA_ADMIN_USERNAME
+        sync: false
+      - key: ARIZONA_ADMIN_PASSWORD
+        sync: false
+      - key: ARIZONA_ADMIN_SESSION_SECRET
+        sync: false
       - key: CHEFFE_CALL_USER
         sync: false
       - key: CHEFFE_CALL_PASSWORD

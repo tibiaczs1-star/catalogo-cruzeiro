@@ -5,9 +5,11 @@ const fs = require("node:fs");
 const path = require("node:path");
 const QRCode = require("qrcode");
 
-const PUBLIC_PREFIX = "/pagamentos/ai";
+const PUBLIC_PREFIX = "/pagamentos/reservaranch";
 const API_PREFIX = "/api/arizona-ranch";
 const RESERVATION_TTL_MS = 24 * 60 * 60 * 1000;
+const ADMIN_SESSION_COOKIE = "arizona_ranch_admin";
+const ADMIN_SESSION_MAX_AGE_SECONDS = 12 * 60 * 60;
 const PIX_KEY_DEFAULT = "556899582615";
 const WHATSAPP_DEFAULT = "556899582615";
 const STATIC_OCCUPIED_TABLES = new Set([9, 22, 28, 29, 30, 31, 33, 39, 40, 41, 42, 45, 50, 52, 57, 65, 67]);
@@ -332,17 +334,127 @@ function cleanUser(user) {
   };
 }
 
-function getAdminEmails(environment) {
-  return [
-    environment.ARIZONA_ADMIN_GOOGLE_EMAILS,
-    environment.ADMIN_GOOGLE_EMAILS,
-    environment.SUPER_ADMIN_EMAIL,
-  ]
-    .filter(Boolean)
-    .join(",")
-    .split(/[,;\s]+/)
-    .map((email) => email.trim().toLowerCase())
-    .filter(Boolean);
+function safeEqual(left, right) {
+  const leftBuffer = Buffer.from(String(left || ""));
+  const rightBuffer = Buffer.from(String(right || ""));
+  return leftBuffer.length === rightBuffer.length && crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function parseCookieHeader(header) {
+  return String(header || "")
+    .split(";")
+    .reduce((cookies, entry) => {
+      const separator = entry.indexOf("=");
+      if (separator < 1) {
+        return cookies;
+      }
+      const name = entry.slice(0, separator).trim();
+      const value = entry.slice(separator + 1).trim();
+      try {
+        cookies[name] = decodeURIComponent(value);
+      } catch (_error) {
+        cookies[name] = "";
+      }
+      return cookies;
+    }, {});
+}
+
+function getTimestamp(now) {
+  const current = typeof now === "function" ? now() : now;
+  const timestamp = current instanceof Date ? current.getTime() : Number(current);
+  return Number.isFinite(timestamp) ? timestamp : Date.now();
+}
+
+function createArizonaAdminSessionManager({ environment = process.env, now = () => Date.now() } = {}) {
+  const username = String(environment.ARIZONA_ADMIN_USERNAME || "arizona").trim();
+  const password = String(
+    environment.ARIZONA_ADMIN_PASSWORD
+      || environment.FULL_ADMIN_PASSWORD
+      || ""
+  );
+  const isProduction = String(environment.NODE_ENV || "").toLowerCase() === "production";
+  const secret = String(
+    environment.ARIZONA_ADMIN_SESSION_SECRET
+      || environment.SITE_AUTH_SESSION_SECRET
+      || (!isProduction ? "arizona-ranch-local-admin-session" : "")
+  ).trim();
+  const configured = Boolean(username && password && secret);
+
+  function sign(value) {
+    return crypto.createHmac("sha256", secret).update(value).digest("base64url");
+  }
+
+  function authenticate({ username: candidateUsername, password: candidatePassword } = {}) {
+    if (!configured || !safeEqual(candidateUsername, username) || !safeEqual(candidatePassword, password)) {
+      return null;
+    }
+    const issuedAt = getTimestamp(now);
+    const payload = Buffer.from(JSON.stringify({
+      audience: "arizona-ranch-admin",
+      username,
+      issuedAt,
+      expiresAt: issuedAt + ADMIN_SESSION_MAX_AGE_SECONDS * 1000,
+    })).toString("base64url");
+    return `${payload}.${sign(payload)}`;
+  }
+
+  function verify(token) {
+    if (!configured || typeof token !== "string") {
+      return null;
+    }
+    const [payload, signature, extra] = token.split(".");
+    if (!payload || !signature || extra || !safeEqual(signature, sign(payload))) {
+      return null;
+    }
+    try {
+      const session = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+      if (
+        session.audience !== "arizona-ranch-admin"
+        || !safeEqual(session.username, username)
+        || !Number.isFinite(session.expiresAt)
+        || session.expiresAt <= getTimestamp(now)
+      ) {
+        return null;
+      }
+      return { username };
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function createSessionCookie(token, { secure = false } = {}) {
+    return [
+      `${ADMIN_SESSION_COOKIE}=${encodeURIComponent(token)}`,
+      `Path=${API_PREFIX}/admin`,
+      `Max-Age=${ADMIN_SESSION_MAX_AGE_SECONDS}`,
+      "HttpOnly",
+      "SameSite=Strict",
+      secure ? "Secure" : "",
+    ].filter(Boolean).join("; ");
+  }
+
+  function clearSessionCookie({ secure = false } = {}) {
+    return [
+      `${ADMIN_SESSION_COOKIE}=`,
+      `Path=${API_PREFIX}/admin`,
+      "Max-Age=0",
+      "Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+      "HttpOnly",
+      "SameSite=Strict",
+      secure ? "Secure" : "",
+    ].filter(Boolean).join("; ");
+  }
+
+  function getSession(request) {
+    return verify(parseCookieHeader(request?.headers?.cookie)[ADMIN_SESSION_COOKIE]);
+  }
+
+  return { authenticate, verify, getSession, createSessionCookie, clearSessionCookie };
+}
+
+function isSecureRequest(request, environment) {
+  const forwardedProtocol = String(request?.headers?.["x-forwarded-proto"] || "").split(",")[0].trim().toLowerCase();
+  return forwardedProtocol === "https" || String(environment.NODE_ENV || "").toLowerCase() === "production";
 }
 
 function buildWhatsAppUrl({ reservation, phoneNumber }) {
@@ -427,20 +539,16 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
     throw new Error("A integração Arizona Ranch precisa do servidor principal.");
   }
 
-  const publicRoot = path.join(rootDir, "pagamentos", "ai");
+  const publicRoot = path.join(rootDir, "pagamentos", "reservaranch");
   const storageRoot = path.join(dataDir, "arizona-ranch");
   const receiptRoot = path.join(storageRoot, "receipts");
   const store = createReservationStore({ filePath: path.join(storageRoot, "reservations.json") });
   const pixKey = String(environment.ARIZONA_PIX_KEY || PIX_KEY_DEFAULT).trim();
   const whatsappNumber = String(environment.ARIZONA_WHATSAPP_NUMBER || WHATSAPP_DEFAULT).trim();
-  const adminEmails = new Set(getAdminEmails(environment));
+  const adminAuth = createArizonaAdminSessionManager({ environment });
 
   function getUser(request) {
     return cleanUser(getAuthUser(request));
-  }
-
-  function isAdmin(user) {
-    return Boolean(user && adminEmails.has(user.email));
   }
 
   function requireUser(request, response) {
@@ -453,15 +561,12 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
   }
 
   function requireAdmin(request, response) {
-    const user = requireUser(request, response);
-    if (!user) {
+    const admin = adminAuth.getSession(request);
+    if (!admin) {
+      sendJson(response, 401, { ok: false, error: "Entre com seu acesso de administrador." });
       return null;
     }
-    if (!isAdmin(user)) {
-      sendJson(response, 403, { ok: false, error: "Esta conta não possui acesso administrativo." });
-      return null;
-    }
-    return user;
+    return admin;
   }
 
   function serializeForUser(reservation, user, admin = false) {
@@ -493,6 +598,29 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
   async function handleApi(request, response, pathname) {
     const route = pathname.slice(API_PREFIX.length) || "/";
     try {
+      if (request.method === "POST" && route === "/admin/login") {
+        const credentials = await readRequestJson(request);
+        const token = adminAuth.authenticate(credentials);
+        if (!token) {
+          sendJson(response, 401, { ok: false, error: "Usuário ou senha inválidos." });
+          return;
+        }
+        response.setHeader("Set-Cookie", adminAuth.createSessionCookie(token, { secure: isSecureRequest(request, environment) }));
+        sendJson(response, 200, { ok: true, authenticated: true });
+        return;
+      }
+
+      if (request.method === "GET" && route === "/admin/session") {
+        sendJson(response, 200, { ok: true, authenticated: Boolean(adminAuth.getSession(request)) });
+        return;
+      }
+
+      if (request.method === "DELETE" && route === "/admin/session") {
+        response.setHeader("Set-Cookie", adminAuth.clearSessionCookie({ secure: isSecureRequest(request, environment) }));
+        sendJson(response, 200, { ok: true });
+        return;
+      }
+
       if (request.method === "GET" && route === "/config") {
         const user = getUser(request);
         sendJson(response, 200, {
@@ -503,7 +631,7 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
           session: {
             signedIn: Boolean(user),
             user: user ? { email: user.email, name: user.name } : null,
-            isAdmin: isAdmin(user),
+            isAdmin: false,
           },
         });
         return;
@@ -543,13 +671,15 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
 
       const receiptDownload = route.match(/^\/reservations\/([A-Za-z0-9-]+)\/receipt$/);
       if (request.method === "GET" && receiptDownload) {
-        const user = requireUser(request, response);
-        if (!user) {
+        const user = getUser(request);
+        const admin = adminAuth.getSession(request);
+        if (!user && !admin) {
+          sendJson(response, 401, { ok: false, error: "Entre com Google ou com o acesso de administrador." });
           return;
         }
         const reservation = store.get(receiptDownload[1]);
-        const isOwner = reservation && reservation.customer.sub === user.sub;
-        if (!reservation || (!isOwner && !isAdmin(user)) || !reservation.receipt) {
+        const isOwner = reservation && user && reservation.customer.sub === user.sub;
+        if (!reservation || (!isOwner && !admin) || !reservation.receipt) {
           sendJson(response, 404, { ok: false, error: "Comprovante não encontrado." });
           return;
         }
@@ -610,7 +740,7 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
           return;
         }
         const reservation = store.get(reservationRoute[1]);
-        const publicReservation = serializeForUser(reservation, user, isAdmin(user));
+        const publicReservation = serializeForUser(reservation, user);
         if (!publicReservation) {
           sendJson(response, 404, { ok: false, error: "Reserva não encontrada." });
           return;
@@ -623,8 +753,8 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
       }
 
       if (request.method === "GET" && route === "/admin/reservations") {
-        const user = requireAdmin(request, response);
-        if (!user) {
+        const admin = requireAdmin(request, response);
+        if (!admin) {
           return;
         }
         sendJson(response, 200, { ok: true, reservations: store.listForAdmin() });
@@ -633,15 +763,15 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
 
       const adminReservation = route.match(/^\/admin\/reservations\/([A-Za-z0-9-]+)$/);
       if (request.method === "PATCH" && adminReservation) {
-        const user = requireAdmin(request, response);
-        if (!user) {
+        const admin = requireAdmin(request, response);
+        if (!admin) {
           return;
         }
         const payload = await readRequestJson(request);
         const reservation = store.review({
           id: adminReservation[1],
           action: payload.action,
-          adminEmail: user.email,
+          adminEmail: admin.username,
         });
         sendJson(response, 200, { ok: true, reservation });
         return;
@@ -687,6 +817,7 @@ module.exports = {
   STATIC_OCCUPIED_TABLES,
   buildPixPayload,
   calculateReservation,
+  createArizonaAdminSessionManager,
   createArizonaRanchIntegration,
   createReservationStore,
 };

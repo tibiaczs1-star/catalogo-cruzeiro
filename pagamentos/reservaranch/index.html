@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#17120e" />
     <meta name="description" content="Reserve sua mesa para a inauguração do Arizona Ranch." />
     <title>Arizona Ranch | Reserva de mesas</title>
-    <link rel="preload" href="/pagamentos/ai/assets/arizona-entrada.jpeg" as="image" />
-    <link rel="stylesheet" href="/pagamentos/ai/arizona.css?v=20260803-3" />
+    <link rel="preload" href="/pagamentos/reservaranch/assets/arizona-entrada.jpeg" as="image" />
+    <link rel="stylesheet" href="/pagamentos/reservaranch/arizona.css?v=20260803-4" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body class="is-opening">
@@ -111,7 +111,7 @@
         </section>
       </main>
 
-      <footer><img src="/pagamentos/ai/assets/arizona-logo.png" alt="Arizona Ranch" /><p>Arizona Ranch · reservas de mesas</p><a href="/pagamentos/ai/admin/">Acesso administrativo</a></footer>
+      <footer><img src="/pagamentos/reservaranch/assets/arizona-logo.png" alt="Arizona Ranch" /><p>Arizona Ranch · reservas de mesas</p><a href="/pagamentos/reservaranch/admin/">Acesso administrativo</a></footer>
     </div>
 
     <dialog class="map-dialog" id="map-dialog" aria-label="Mapa geral do salão"><div class="dialog-frame map-dialog-frame"><div class="dialog-heading"><div><p class="eyebrow">Visão geral</p><h2>Mapa do salão</h2><p>Gire o celular para a horizontal e veja todas as mesas sem cortes.</p></div><button class="icon-button" type="button" data-close-map aria-label="Fechar mapa">×</button></div><div class="full-map-wrap"><div class="full-map" id="full-map" aria-label="Mapa geral de mesas navegável"></div></div></div></dialog>
@@ -119,6 +119,6 @@
     <dialog class="payment-dialog" id="payment-dialog" aria-label="Pagamento Pix"><div class="dialog-frame payment-frame"><button class="icon-button payment-close" type="button" data-close-payment aria-label="Fechar pagamento">×</button><p class="eyebrow">Pagamento Pix</p><h2 id="payment-title">Mesa reservada temporariamente</h2><p id="payment-summary"></p><div class="pix-content"><img id="pix-qr" alt="QR Code Pix para pagamento" /><div><strong>1. Pague o valor integral pelo Pix</strong><p>Escaneie o QR Code ou copie o código abaixo. O pagamento não confirma a mesa automaticamente.</p><label for="pix-code">Pix copia e cola</label><textarea id="pix-code" readonly rows="4"></textarea><button class="button button-quiet" id="copy-pix" type="button">Copiar código Pix</button></div></div><div class="receipt-box"><strong>2. Envie seu comprovante</strong><p>Você pode anexar uma imagem ou PDF de até 4 MB aqui mesmo, ou enviar a mensagem pronta pelo WhatsApp.</p><div class="receipt-actions"><label class="file-button" for="receipt-file">Anexar comprovante</label><input id="receipt-file" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" /><a class="button button-gold" id="whatsapp-proof" target="_blank" rel="noreferrer">Enviar no WhatsApp</a></div><p class="upload-status" id="upload-status" aria-live="polite"></p></div><p class="payment-note">Pedido <strong id="order-id"></strong> · confirmação manual em até 24 horas · não há devolução.</p></div></dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-    <script src="/pagamentos/ai/app.js?v=20260803-3" defer></script>
+    <script src="/pagamentos/reservaranch/app.js?v=20260803-4" defer></script>
   </body>
 </html>

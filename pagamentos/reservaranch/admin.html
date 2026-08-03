@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#120e0b">
     <title>Administração | Arizona Ranch</title>
-    <link rel="stylesheet" href="/pagamentos/ai/arizona.css?v=20260731-3">
-    <script src="https://accounts.google.com/gsi/client" async></script>
+    <link rel="stylesheet" href="/pagamentos/reservaranch/arizona.css?v=20260803-4">
   </head>
   <body class="arizona-page admin-page">
     <main class="admin-shell">
-      <a class="back-link" href="/pagamentos/ai/">← Voltar para reservas</a>
+      <a class="back-link" href="/pagamentos/reservaranch/">← Voltar para reservas</a>
       <p class="eyebrow">Arizona Ranch • administração</p>
       <h1>Pagamentos e reservas</h1>
       <p class="admin-intro">Confirme manualmente somente depois de verificar o comprovante recebido.</p>
       <section class="admin-auth panel" id="admin-auth">
-        <h2>Acesso do administrador</h2>
-        <p id="admin-access">Entre com a conta Google autorizada.</p>
-        <div id="admin-google-login"></div>
+        <p class="eyebrow">Área restrita</p>
+        <h2>Entrar no painel</h2>
+        <p id="admin-access">Use seu acesso de administrador.</p>
+        <form class="admin-login-form" id="admin-login-form">
+          <label>Usuário<input id="admin-username" name="username" autocomplete="username" required></label>
+          <label>Senha<input id="admin-password" name="password" type="password" autocomplete="current-password" required></label>
+          <button class="button" id="admin-login-button" type="submit">Entrar no painel</button>
+        </form>
       </section>
       <section class="admin-summary" id="admin-summary" hidden></section>
       <section class="admin-reservations" id="admin-reservations" hidden>
@@ -26,12 +30,15 @@
             <p class="eyebrow">Pedidos recentes</p>
             <h2>Conferir comprovantes</h2>
           </div>
-          <button class="button button-secondary" id="refresh-admin" type="button">Atualizar</button>
+          <div class="admin-actions">
+            <button class="button button-secondary" id="refresh-admin" type="button">Atualizar</button>
+            <button class="button button-secondary" id="logout-admin" type="button">Sair</button>
+          </div>
         </div>
         <div class="admin-list" id="admin-list"></div>
       </section>
     </main>
     <div class="toast" id="admin-toast" hidden></div>
-    <script src="/pagamentos/ai/admin.js" defer></script>
+    <script src="/pagamentos/reservaranch/admin.js?v=20260803-4" defer></script>
   </body>
 </html>

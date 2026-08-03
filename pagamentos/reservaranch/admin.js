@@ -1,10 +1,14 @@
 (() => {
   const API = "/api/arizona-ranch";
-  const state = { config: null, auth: null, reservations: [] };
+  const state = { reservations: [] };
   const elements = {
     access: document.querySelector("#admin-access"),
     auth: document.querySelector("#admin-auth"),
-    google: document.querySelector("#admin-google-login"),
+    form: document.querySelector("#admin-login-form"),
+    username: document.querySelector("#admin-username"),
+    password: document.querySelector("#admin-password"),
+    loginButton: document.querySelector("#admin-login-button"),
+    logoutButton: document.querySelector("#logout-admin"),
     list: document.querySelector("#admin-list"),
     reservations: document.querySelector("#admin-reservations"),
     summary: document.querySelector("#admin-summary"),
@@ -30,7 +34,11 @@
       ...options,
     });
     const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || "Não foi possível carregar os pedidos.");
+    if (!response.ok) {
+      const error = new Error(payload.error || "Não foi possível carregar os pedidos.");
+      error.status = response.status;
+      throw error;
+    }
     return payload;
   }
 
@@ -50,36 +58,6 @@
       receipt_submitted: "Comprovante recebido",
       rejected: "Não aprovada",
     }[status] || status;
-  }
-
-  function renderGoogleLogin() {
-    elements.google.replaceChildren();
-    const user = state.config?.user;
-    if (user?.signedIn && user?.isAdmin) {
-      elements.access.textContent = `Acesso autorizado: ${user.name || user.email}`;
-      return;
-    }
-    if (user?.signedIn) {
-      elements.access.textContent = "Esta conta Google não possui acesso administrativo.";
-      return;
-    }
-    if (!state.auth?.clientId) {
-      elements.access.textContent = "O login Google não está disponível nesta instalação.";
-      return;
-    }
-    if (!window.google?.accounts?.id) {
-      const reload = document.createElement("button");
-      reload.className = "button button-secondary";
-      reload.type = "button";
-      reload.textContent = "Carregar login Google";
-      reload.addEventListener("click", () => window.location.reload());
-      elements.google.append(reload);
-      return;
-    }
-    window.google.accounts.id.initialize({ client_id: state.auth.clientId, callback: signIn });
-    window.google.accounts.id.renderButton(elements.google, {
-      shape: "pill", size: "large", text: "continue_with", theme: "filled_black", width: 300,
-    });
   }
 
   function renderSummary(summary) {
@@ -169,6 +147,18 @@
     elements.reservations.hidden = false;
   }
 
+  function setAuthenticated(authenticated) {
+    elements.auth.hidden = authenticated;
+    elements.summary.hidden = !authenticated;
+    elements.reservations.hidden = !authenticated;
+    if (elements.logoutButton) elements.logoutButton.hidden = !authenticated;
+    if (!authenticated) {
+      elements.access.textContent = "Use seu acesso de administrador.";
+      elements.summary.replaceChildren();
+      elements.list.replaceChildren();
+    }
+  }
+
   async function updateReservation(id, status, button) {
     const question = status === "confirmed" ? "Confirmar esta mesa como paga?" : "Recusar este pedido e liberar a mesa?";
     if (!window.confirm(question)) return;
@@ -186,33 +176,62 @@
     }
   }
 
-  async function signIn(response) {
+  async function signIn(event) {
+    event.preventDefault();
+    const username = elements.username.value.trim();
+    const password = elements.password.value;
+    if (!username || !password) {
+      elements.access.textContent = "Informe usuário e senha para continuar.";
+      return;
+    }
+    elements.loginButton.disabled = true;
     try {
-      const result = await fetch("/api/auth/google", {
+      await request("/admin/login", {
         method: "POST",
-        credentials: "same-origin",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ credential: response.credential }),
+        body: JSON.stringify({ username, password }),
       });
-      if (!result.ok) throw new Error("Não foi possível entrar com Google.");
-      await initialize();
+      elements.form.reset();
+      setAuthenticated(true);
+      await loadAdmin();
+      showToast("Painel liberado.", "success");
+    } catch (error) {
+      elements.access.textContent = error.status === 401 ? "Usuário ou senha inválidos." : error.message;
+      showToast(error.message, "error");
+    } finally {
+      elements.loginButton.disabled = false;
+    }
+  }
+
+  async function logout() {
+    elements.logoutButton.disabled = true;
+    try {
+      await request("/admin/session", { method: "DELETE" });
+      elements.form.reset();
+      setAuthenticated(false);
+      elements.username.focus();
+      showToast("Você saiu do painel.", "success");
     } catch (error) {
       showToast(error.message, "error");
+    } finally {
+      elements.logoutButton.disabled = false;
     }
   }
 
   async function initialize() {
     try {
-      state.auth = await fetch("/api/auth/config", { credentials: "same-origin" }).then((response) => response.json().catch(() => ({})));
-      const config = await request("/config");
-      state.config = { ...config, user: config.session };
-      renderGoogleLogin();
-      if (state.config.user?.isAdmin) await loadAdmin();
+      const session = await request("/admin/session");
+      const authenticated = Boolean(session.authenticated);
+      setAuthenticated(authenticated);
+      if (authenticated) await loadAdmin();
+      else elements.username.focus();
     } catch (error) {
+      setAuthenticated(false);
       showToast(error.message, "error");
     }
   }
 
   document.querySelector("#refresh-admin")?.addEventListener("click", () => loadAdmin().catch((error) => showToast(error.message, "error")));
+  elements.form?.addEventListener("submit", signIn);
+  elements.logoutButton?.addEventListener("click", logout);
   initialize();
 })();
