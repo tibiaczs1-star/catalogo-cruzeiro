@@ -7,167 +7,121 @@
     <meta name="description" content="Reserve sua mesa para a inauguração do Arizona Ranch." />
     <title>Arizona Ranch | Reserva de mesas</title>
     <link rel="preload" href="/pagamentos/ai/assets/arizona-entrada.jpeg" as="image" />
-    <link rel="stylesheet" href="/pagamentos/ai/arizona.css?v=20260731-3" />
+    <link rel="stylesheet" href="/pagamentos/ai/arizona.css?v=20260803-1" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
-  <body>
+  <body class="is-opening">
+    <section class="opening-screen" id="opening-screen" aria-label="Abertura Arizona Ranch">
+      <div class="opening-image" aria-hidden="true"></div>
+      <div class="opening-vignette" aria-hidden="true"></div>
+      <div class="opening-content">
+        <img src="/pagamentos/ai/assets/arizona-logo.png" alt="Arizona Ranch" />
+        <p class="eyebrow">Inauguração oficial · 05 de setembro</p>
+        <h1>Uma noite para ficar na história.</h1>
+        <p>Especial Marília Mendonça, na voz de Luzienne Lucena.</p>
+        <div class="opening-progress" aria-label="Carregando experiência"><span id="opening-progress"></span></div>
+        <button class="button button-gold" id="start-experience" type="button" disabled>Preparando a experiência…</button>
+        <p class="copyright-notice">Trilha incorporada do YouTube: “Marília Mendonça Ao Vivo” — Marília Mendonça. Todos os direitos reservados aos titulares.</p>
+        <a class="opening-source" href="https://www.youtube.com/watch?v=lmXo83Adl7g" target="_blank" rel="noreferrer">Abrir música no YouTube ↗</a>
+      </div>
+    </section>
+    <iframe id="opening-player" class="opening-player" title="Trilha oficial incorporada do YouTube" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
     <div class="site-shell">
-      <header class="hero" id="inicio">
-        <div class="hero-glow" aria-hidden="true"></div>
-        <div class="hero-copy">
-          <p class="eyebrow">Arizona Ranch · inauguração oficial</p>
-          <h1>Escolha sua mesa para uma noite histórica.</h1>
-          <p class="hero-text">Especial Marília Mendonça, na voz de Luzienne Lucena. Dia 05 de setembro, no Clube da Polícia Militar, Cruzeiro do Sul – Acre.</p>
-          <div class="hero-actions">
-            <a class="button button-gold" href="#reservar">Reservar mesa</a>
-            <button class="button button-quiet" type="button" data-open-map>Ver mapa geral</button>
-          </div>
-          <div class="event-badges" aria-label="Informações do evento">
-            <span>05 SET · SÁBADO</span>
-            <span>Mesas de 2 ou 4 lugares</span>
-          </div>
+      <header class="flow-hero" id="inicio">
+        <div>
+          <p class="eyebrow">Arizona Ranch · reserva de mesas</p>
+          <h1>Reserve sua mesa em poucos passos.</h1>
+          <p>Mesas para 2 ou 4 lugares · pagamento integral · confirmação manual em até 24 horas após o comprovante.</p>
         </div>
-        <div class="hero-art" aria-label="Artista convidada do Arizona Ranch">
-          <img src="/pagamentos/ai/assets/arizona-entrada.jpeg" alt="Arizona Ranch com especial Marília Mendonça" />
+        <div class="flow-hero-actions">
+          <button class="button button-quiet sound-control" id="toggle-sound" type="button" hidden>❚❚ Pausar trilha</button>
+          <button class="button button-quiet" type="button" data-open-map>Ver mapa geral</button>
         </div>
       </header>
 
-      <main>
-        <section class="steps" aria-label="Como reservar">
-          <article><span>01</span><strong>Entre com Google</strong><p>Uma conta simples para localizar seu pedido.</p></article>
-          <article><span>02</span><strong>Escolha a mesa</strong><p>Veja setor, lugares e disponibilidade em tempo real.</p></article>
-          <article><span>03</span><strong>Pague via Pix</strong><p>Envie o comprovante pelo pedido ou pelo WhatsApp.</p></article>
-        </section>
+      <main id="reservar">
+        <ol class="journey-steps" aria-label="Etapas da reserva">
+          <li data-flow-nav="login" class="is-active"><span>1</span> Google</li>
+          <li data-flow-nav="details"><span>2</span> Dados</li>
+          <li data-flow-nav="table"><span>3</span> Mesa</li>
+          <li data-flow-nav="whatsapp"><span>4</span> WhatsApp</li>
+          <li data-flow-nav="payment"><span>5</span> Pagamento</li>
+        </ol>
 
-        <section class="reservation-section" id="reservar">
+        <section class="reservation-section flow-step" data-flow-step="login" id="login-step">
           <div class="section-heading">
-            <p class="eyebrow">Reserva de mesas</p>
-            <h2>Primeiro escolha o tamanho da sua mesa.</h2>
-            <p>O pagamento é integral no Pix. A confirmação é manual e acontece em até 24 horas após o envio do comprovante.</p>
+            <p class="eyebrow">Etapa 1 de 5 · identificação</p>
+            <h2>Entre com sua conta Google.</h2>
+            <p>Usamos somente para localizar sua reserva e enviar o status do pedido. Não é necessário criar cadastro.</p>
           </div>
-
-          <div class="seat-choice" role="radiogroup" aria-label="Quantidade de lugares">
-            <button type="button" class="seat-card is-selected" data-seats="2" aria-pressed="true">
-              <span class="seat-icon">◉ ◉</span>
-              <strong>Mesa para 2</strong>
-              <b>R$ 100,00</b>
-              <small>valor integral</small>
-            </button>
-            <button type="button" class="seat-card" data-seats="4" aria-pressed="false">
-              <span class="seat-icon">◉ ◉<br />◉ ◉</span>
-              <strong>Mesa para 4</strong>
-              <b>R$ 200,00</b>
-              <small>valor integral</small>
-            </button>
-          </div>
-
           <div class="account-strip" id="account-strip">
             <div>
-              <p class="eyebrow">Identificação</p>
+              <p class="eyebrow">Acesso seguro</p>
               <strong id="account-title">Entre com Google para reservar</strong>
-              <p id="account-description">Sem cadastro complicado. Sua conta serve somente para acessar e acompanhar seu pedido.</p>
+              <p id="account-description">Sua conta serve somente para acompanhar seu pedido.</p>
             </div>
             <div id="google-login" class="google-login"></div>
           </div>
+          <button class="button button-gold button-next" id="login-next" type="button" hidden>Continuar com meus dados</button>
+        </section>
 
+        <section class="reservation-section flow-step" data-flow-step="details" id="details-step" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Etapa 2 de 5 · informações básicas</p>
+            <h2>Confira seus dados.</h2>
+            <p>Esses dados vêm da sua conta Google e identificam a reserva.</p>
+          </div>
+          <div class="details-card">
+            <label>Nome completo<input id="details-name" type="text" readonly /></label>
+            <label>E-mail<input id="details-email" type="email" readonly /></label>
+            <label class="consent-field"><input id="details-consent" type="checkbox" /> <span>Li e aceito que a confirmação do pedido é manual, em até 24 horas após o pagamento e envio do comprovante.</span></label>
+          </div>
+          <button class="button button-gold button-next" id="details-next" type="button" disabled>Escolher minha mesa</button>
+        </section>
+
+        <section class="reservation-section flow-step" data-flow-step="table" id="table-step" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Etapa 3 de 5 · escolha da mesa</p>
+            <h2>Escolha sua mesa e seu setor.</h2>
+            <p>Toque em uma mesa livre. Para conferir a localização no salão, abra o mapa geral e gire o celular na horizontal.</p>
+          </div>
+          <div class="seat-choice" role="radiogroup" aria-label="Quantidade de lugares">
+            <button type="button" class="seat-card is-selected" data-seats="2" aria-pressed="true"><span class="seat-icon">◉ ◉</span><strong>Mesa para 2</strong><b>R$ 100,00</b><small>valor integral</small></button>
+            <button type="button" class="seat-card" data-seats="4" aria-pressed="false"><span class="seat-icon">◉ ◉<br />◉ ◉</span><strong>Mesa para 4</strong><b>R$ 200,00</b><small>valor integral</small></button>
+          </div>
           <div class="map-card">
-            <div class="map-card-top">
-              <div>
-                <p class="eyebrow">Mapa das mesas</p>
-                <h3>Toque em uma mesa disponível.</h3>
-              </div>
-              <button class="link-button" type="button" data-open-map>Ampliar mapa geral <span aria-hidden="true">↗</span></button>
-            </div>
-            <div class="map-legend" aria-label="Legenda do mapa">
-              <span><i class="legend-available"></i>Disponível</span>
-              <span><i class="legend-selected"></i>Sua escolha</span>
-              <span><i class="legend-pending"></i>Em processo</span>
-              <span><i class="legend-unavailable"></i>Indisponível</span>
-            </div>
+            <div class="map-card-top"><div><p class="eyebrow">Mapa das mesas</p><h3>Toque em uma mesa livre.</h3></div><button class="link-button" type="button" data-open-map>Ver mapa geral <span aria-hidden="true">↗</span></button></div>
+            <div class="map-legend" aria-label="Legenda do mapa"><span><i class="legend-available"></i>✓ Livre</span><span><i class="legend-selected"></i>Sua escolha</span><span><i class="legend-unavailable"></i>✕ Comprada</span></div>
             <nav class="sector-nav" id="sector-nav" aria-label="Setores das mesas"></nav>
             <div class="sector-caption" id="sector-caption">Carregando as mesas…</div>
             <div class="table-grid" id="table-grid" aria-live="polite"></div>
           </div>
-
-          <aside class="selection-panel" id="selection-panel">
-            <div>
-              <p class="eyebrow">Sua escolha</p>
-              <h3 id="selection-title">Selecione uma mesa no mapa</h3>
-              <p id="selection-description">A mesa fica bloqueada por 24 horas enquanto você realiza o Pix e envia o comprovante.</p>
-            </div>
-            <label class="phone-field" for="contact-phone">WhatsApp para contato <span>(opcional)</span>
-              <input id="contact-phone" name="contact-phone" type="tel" inputmode="tel" placeholder="(68) 99999-9999" autocomplete="tel" />
-            </label>
-            <button class="button button-gold button-large" id="reserve-button" type="button" disabled>Continuar para o Pix</button>
-            <div id="reservation-panel" aria-live="polite"></div>
-          </aside>
+          <aside class="selection-panel" id="selection-panel"><div><p class="eyebrow">Sua escolha</p><h3 id="selection-title">Selecione uma mesa no mapa</h3><p id="selection-description">Somente mesas com ✓ Livre podem ser escolhidas.</p></div><button class="button button-gold button-large" id="table-next" type="button" disabled>Continuar com esta mesa</button></aside>
         </section>
 
-        <section class="rules-section">
-          <div class="rule-mark">!</div>
-          <div>
-            <p class="eyebrow">Importante</p>
-            <h2>Reserva confirmada somente após análise do comprovante.</h2>
-            <p>Não há devolução em caso de desistência. Após pagar, envie o comprovante pelo pedido ou pelo WhatsApp; a confirmação pode levar até 24 horas.</p>
-          </div>
-          <a class="button button-quiet" id="rules-whatsapp" href="https://wa.me/556899582615" target="_blank" rel="noreferrer">Falar no WhatsApp</a>
+        <section class="reservation-section flow-step" data-flow-step="whatsapp" id="whatsapp-step" hidden>
+          <div class="section-heading"><p class="eyebrow">Etapa 4 de 5 · contato</p><h2>Qual WhatsApp recebe a confirmação?</h2><p>Vamos usar este número para falar sobre a reserva e facilitar o envio do comprovante.</p></div>
+          <div class="contact-card"><label class="phone-field" for="contact-phone">WhatsApp para contato<input id="contact-phone" name="contact-phone" type="tel" inputmode="tel" placeholder="(68) 99999-9999" autocomplete="tel" /></label><p id="whatsapp-selection"></p></div>
+          <button class="button button-gold button-next" id="whatsapp-next" type="button">Ir para o pagamento</button>
+        </section>
+
+        <section class="reservation-section flow-step" data-flow-step="payment" id="payment-step" hidden>
+          <div class="section-heading"><p class="eyebrow">Etapa 5 de 5 · pagamento</p><h2>Escolha como deseja pagar.</h2><p id="payment-summary-inline">Revise a mesa antes de gerar o pagamento.</p></div>
+          <div class="payment-methods"><button class="payment-method is-pix" id="payment-pix" type="button"><span>Pix</span><strong>Gerar QR Code Pix</strong><small>Pagamento integral e envio do comprovante pelo pedido ou WhatsApp.</small></button><button class="payment-method" id="payment-card" type="button"><span>Cartão</span><strong>Pagamento por cartão em construção</strong><small>Por enquanto, finalize sua reserva pelo Pix.</small></button></div>
+          <div id="reservation-panel" aria-live="polite"></div>
+          <section class="rules-section"><div class="rule-mark">!</div><div><p class="eyebrow">Importante</p><h2>Não há devolução em caso de desistência.</h2><p>Após pagar, envie o comprovante pelo pedido ou pelo WhatsApp. A confirmação é manual e pode levar até 24 horas.</p></div><a class="button button-quiet" href="https://wa.me/556899582615" target="_blank" rel="noreferrer">Falar no WhatsApp</a></section>
         </section>
       </main>
 
-      <footer>
-        <img src="/pagamentos/ai/assets/arizona-logo.png" alt="Arizona Ranch" />
-        <p>Arizona Ranch · reservas de mesas</p>
-        <a href="/pagamentos/ai/admin/">Acesso administrativo</a>
-      </footer>
+      <footer><img src="/pagamentos/ai/assets/arizona-logo.png" alt="Arizona Ranch" /><p>Arizona Ranch · reservas de mesas</p><a href="/pagamentos/ai/admin/">Acesso administrativo</a></footer>
     </div>
 
-    <dialog class="map-dialog" id="map-dialog" aria-label="Mapa geral do salão">
-      <div class="dialog-frame map-dialog-frame">
-        <div class="dialog-heading">
-          <div>
-            <p class="eyebrow">Visão geral</p>
-            <h2>Mapa do salão</h2>
-            <p>Para enxergar melhor no celular, use o telefone na horizontal. Nenhuma mesa fica escondida.</p>
-          </div>
-          <button class="icon-button" type="button" data-close-map aria-label="Fechar mapa">×</button>
-        </div>
-        <div class="full-map-wrap">
-          <div class="full-map" id="full-map" aria-label="Mapa geral de mesas navegável"></div>
-        </div>
-      </div>
-    </dialog>
+    <dialog class="map-dialog" id="map-dialog" aria-label="Mapa geral do salão"><div class="dialog-frame map-dialog-frame"><div class="dialog-heading"><div><p class="eyebrow">Visão geral</p><h2>Mapa do salão</h2><p>Gire o celular para a horizontal e veja todas as mesas sem cortes.</p></div><button class="icon-button" type="button" data-close-map aria-label="Fechar mapa">×</button></div><div class="full-map-wrap"><div class="full-map" id="full-map" aria-label="Mapa geral de mesas navegável"></div></div></div></dialog>
 
-    <dialog class="payment-dialog" id="payment-dialog" aria-label="Pagamento Pix">
-      <div class="dialog-frame payment-frame">
-        <button class="icon-button payment-close" type="button" data-close-payment aria-label="Fechar pagamento">×</button>
-        <p class="eyebrow">Pagamento Pix</p>
-        <h2 id="payment-title">Mesa reservada temporariamente</h2>
-        <p id="payment-summary"></p>
-        <div class="pix-content">
-          <img id="pix-qr" alt="QR Code Pix para pagamento" />
-          <div>
-            <strong>1. Pague o valor integral pelo Pix</strong>
-            <p>Escaneie o QR Code ou copie o código abaixo. O pagamento não confirma a mesa automaticamente.</p>
-            <label for="pix-code">Pix copia e cola</label>
-            <textarea id="pix-code" readonly rows="4"></textarea>
-            <button class="button button-quiet" id="copy-pix" type="button">Copiar código Pix</button>
-          </div>
-        </div>
-        <div class="receipt-box">
-          <strong>2. Envie seu comprovante</strong>
-          <p>Você pode anexar uma imagem ou PDF de até 4 MB aqui mesmo, ou enviar a mensagem pronta pelo WhatsApp.</p>
-          <div class="receipt-actions">
-            <label class="file-button" for="receipt-file">Anexar comprovante</label>
-            <input id="receipt-file" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" />
-            <a class="button button-gold" id="whatsapp-proof" target="_blank" rel="noreferrer">Enviar no WhatsApp</a>
-          </div>
-          <p class="upload-status" id="upload-status" aria-live="polite"></p>
-        </div>
-        <p class="payment-note">Pedido <strong id="order-id"></strong> · confirmação manual em até 24 horas · não há devolução.</p>
-      </div>
-    </dialog>
+    <dialog class="payment-dialog" id="payment-dialog" aria-label="Pagamento Pix"><div class="dialog-frame payment-frame"><button class="icon-button payment-close" type="button" data-close-payment aria-label="Fechar pagamento">×</button><p class="eyebrow">Pagamento Pix</p><h2 id="payment-title">Mesa reservada temporariamente</h2><p id="payment-summary"></p><div class="pix-content"><img id="pix-qr" alt="QR Code Pix para pagamento" /><div><strong>1. Pague o valor integral pelo Pix</strong><p>Escaneie o QR Code ou copie o código abaixo. O pagamento não confirma a mesa automaticamente.</p><label for="pix-code">Pix copia e cola</label><textarea id="pix-code" readonly rows="4"></textarea><button class="button button-quiet" id="copy-pix" type="button">Copiar código Pix</button></div></div><div class="receipt-box"><strong>2. Envie seu comprovante</strong><p>Você pode anexar uma imagem ou PDF de até 4 MB aqui mesmo, ou enviar a mensagem pronta pelo WhatsApp.</p><div class="receipt-actions"><label class="file-button" for="receipt-file">Anexar comprovante</label><input id="receipt-file" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" /><a class="button button-gold" id="whatsapp-proof" target="_blank" rel="noreferrer">Enviar no WhatsApp</a></div><p class="upload-status" id="upload-status" aria-live="polite"></p></div><p class="payment-note">Pedido <strong id="order-id"></strong> · confirmação manual em até 24 horas · não há devolução.</p></div></dialog>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/pagamentos/ai/app.js" defer></script>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/pagamentos/ai/app.js?v=20260803-2" defer></script>
   </body>
 </html>

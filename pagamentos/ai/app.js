@@ -1,460 +1,166 @@
 (() => {
   const API = "/api/arizona-ranch";
+  const YOUTUBE_VIDEO_ID = "lmXo83Adl7g";
   const tableSectors = [
     { id: "entrada", label: "Entrada & buffet", detail: "Mesas 01 a 12", numbers: range(1, 12) },
     { id: "frente", label: "Frente do salão", detail: "Mesas 13 a 24", numbers: range(13, 24) },
     { id: "centro", label: "Centro do salão", detail: "Mesas 25 a 45", numbers: range(25, 45) },
     { id: "palco", label: "Próximo ao palco", detail: "Mesas 46 a 67", numbers: range(46, 67) },
   ];
-
-  const state = {
-    activeSector: "all",
-    auth: null,
-    config: null,
-    reservation: null,
-    selectedSeats: 2,
-    selectedTable: null,
-    tables: [],
-  };
-
+  const flow = ["login", "details", "table", "whatsapp", "payment"];
+  const state = { activeSector: "all", auth: null, audioPlaying: false, config: null, contactPhone: "", flowStep: "login", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
   const elements = {
-    account: document.querySelector("#google-login"),
-    accountDescription: document.querySelector("#account-description"),
-    accountTitle: document.querySelector("#account-title"),
-    mapDialog: document.querySelector("#map-dialog"),
-    overviewMap: document.querySelector("#full-map"),
-    paymentDialog: document.querySelector("#payment-dialog"),
-    paymentInfo: document.querySelector("#payment-summary"),
-    paymentQr: document.querySelector("#pix-qr"),
-    reservationPanel: document.querySelector("#reservation-panel"),
-    sectorNav: document.querySelector("#sector-nav"),
-    selectionDescription: document.querySelector("#selection-description"),
-    selectionTitle: document.querySelector("#selection-title"),
-    sectorCaption: document.querySelector("#sector-caption"),
-    tableGrid: document.querySelector("#table-grid"),
-    toast: document.querySelector("#toast"),
+    account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
+    detailsConsent: document.querySelector("#details-consent"), detailsEmail: document.querySelector("#details-email"), detailsName: document.querySelector("#details-name"),
+    loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"), opening: document.querySelector("#opening-screen"), openingButton: document.querySelector("#start-experience"), openingPlayer: document.querySelector("#opening-player"), openingProgress: document.querySelector("#opening-progress"),
+    overviewMap: document.querySelector("#full-map"), paymentDialog: document.querySelector("#payment-dialog"), paymentInfo: document.querySelector("#payment-summary"), paymentQr: document.querySelector("#pix-qr"), reservationPanel: document.querySelector("#reservation-panel"),
+    sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast"), toggleSound: document.querySelector("#toggle-sound"), whatsappSelection: document.querySelector("#whatsapp-selection")
   };
 
-  function range(start, end) {
-    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
-  }
-
-  function tableSector(number) {
-    return tableSectors.find((sector) => sector.numbers.includes(number))?.id || "centro";
-  }
-
-  function tableLabel(number) {
-    return String(number).padStart(2, "0");
-  }
-
-  function tableByNumber(number) {
-    return state.tables.find((table) => table.number === number);
-  }
+  function range(start, end) { return Array.from({ length: end - start + 1 }, (_, index) => start + index); }
+  function tableLabel(number) { return String(number).padStart(2, "0"); }
+  function tableByNumber(number) { return state.tables.find((table) => table.number === number); }
+  function tableSector(number) { return tableSectors.find((sector) => sector.numbers.includes(number))?.id || "centro"; }
+  function tableAvailability(table, compact = false) { const text = table.status === "available" ? "✓ Livre" : "✕ Comprada"; return compact ? text.slice(0, 1) : text; }
+  function statusText(status) { return { awaiting_payment: "Aguardando comprovante", confirmed: "Reserva confirmada", expired: "Prazo expirado", receipt_submitted: "Comprovante em análise", rejected: "Pagamento não aprovado" }[status] || "Pedido criado"; }
+  function formatCurrency(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100); }
 
   function showToast(message, tone = "normal") {
     elements.toast.textContent = message;
     elements.toast.classList.toggle("is-error", tone === "error");
-    elements.toast.classList.add("is-visible");
-    elements.toast.hidden = false;
+    elements.toast.classList.add("is-visible"); elements.toast.hidden = false;
     window.clearTimeout(showToast.timeout);
-    showToast.timeout = window.setTimeout(() => {
-      elements.toast.classList.remove("is-visible");
-      elements.toast.hidden = true;
-    }, 4200);
+    showToast.timeout = window.setTimeout(() => { elements.toast.classList.remove("is-visible"); elements.toast.hidden = true; }, 4200);
   }
 
   async function request(path, options = {}) {
-    const response = await fetch(`${API}${path}`, {
-      credentials: "same-origin",
-      headers: {
-        "content-type": "application/json",
-        ...(options.headers || {}),
-      },
-      ...options,
-    });
+    const response = await fetch(`${API}${path}`, { credentials: "same-origin", headers: { "content-type": "application/json", ...(options.headers || {}) }, ...options });
     const payload = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error(payload.error || "Não foi possível concluir esta etapa.");
-    }
+    if (!response.ok) throw new Error(payload.error || "Não foi possível concluir esta etapa.");
     return payload;
   }
 
-  function statusText(status) {
-    return {
-      awaiting_payment: "Aguardando comprovante",
-      confirmed: "Reserva confirmada",
-      expired: "Prazo expirado",
-      receipt_submitted: "Comprovante em análise",
-      rejected: "Pagamento não aprovado",
-    }[status] || "Em andamento";
+  function showFlowStep(step, { scroll = true } = {}) {
+    if (!flow.includes(step)) return;
+    state.flowStep = step;
+    document.querySelectorAll("[data-flow-step]").forEach((section) => { section.hidden = section.dataset.flowStep !== step; });
+    document.querySelectorAll("[data-flow-nav]").forEach((item) => { item.classList.toggle("is-active", item.dataset.flowNav === step); item.classList.toggle("is-complete", flow.indexOf(item.dataset.flowNav) < flow.indexOf(step)); });
+    if (step === "whatsapp") renderWhatsAppStep();
+    if (step === "payment") renderPaymentStep();
+    if (scroll) document.querySelector(`[data-flow-step="${step}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function renderSectors() {
     elements.sectorNav.replaceChildren();
-    const options = [{ id: "all", label: "Todas" }, ...tableSectors];
-    for (const sector of options) {
+    [{ id: "all", label: "Todas" }, ...tableSectors].forEach((sector) => {
       const button = document.createElement("button");
-      button.className = `sector-button${state.activeSector === sector.id ? " is-active" : ""}`;
-      button.type = "button";
-      button.dataset.sector = sector.id;
-      button.textContent = sector.label;
-      button.setAttribute("aria-pressed", String(state.activeSector === sector.id));
+      button.className = `sector-button${state.activeSector === sector.id ? " is-active" : ""}`; button.type = "button"; button.dataset.sector = sector.id; button.textContent = sector.label; button.setAttribute("aria-pressed", String(state.activeSector === sector.id));
       elements.sectorNav.append(button);
-    }
+    });
   }
 
   function createTableButton(table, className = "table-button") {
-    const button = document.createElement("button");
-    const isSelected = state.selectedTable === table.number;
-    button.type = "button";
-    button.className = `${className} status-${table.status}${isSelected ? " is-selected" : ""}`;
-    button.dataset.table = String(table.number);
-    button.dataset.status = table.status;
-    button.title = `Mesa ${tableLabel(table.number)} — ${statusText(table.status)}`;
-    button.setAttribute("aria-label", `Mesa ${tableLabel(table.number)} — ${statusText(table.status)}`);
-    button.setAttribute("aria-pressed", String(isSelected));
-    button.disabled = table.status !== "available";
-
-    const number = document.createElement("strong");
-    number.textContent = tableLabel(table.number);
-    const availability = document.createElement("span");
-    availability.className = "table-availability";
-    availability.textContent = table.status === "available" ? "Livre" : statusText(table.status);
-    button.append(number, availability);
-    return button;
+    const button = document.createElement("button"); const isSelected = state.selectedTable === table.number;
+    button.type = "button"; button.className = `${className} status-${table.status}${isSelected ? " is-selected" : ""}`; button.dataset.table = String(table.number); button.dataset.status = table.status; button.disabled = table.status !== "available";
+    button.title = `Mesa ${tableLabel(table.number)} — ${tableAvailability(table)}`; button.setAttribute("aria-label", button.title); button.setAttribute("aria-pressed", String(isSelected));
+    const number = document.createElement("strong"); number.textContent = tableLabel(table.number);
+    const availability = document.createElement("span"); availability.className = "table-availability"; availability.textContent = tableAvailability(table, className === "overview-table");
+    button.append(number, availability); return button;
   }
 
   function renderTables() {
     elements.tableGrid.replaceChildren();
-    const tables = state.tables.filter((table) => state.activeSector === "all" || tableSector(table.number) === state.activeSector);
-    const activeSector = tableSectors.find((sector) => sector.id === state.activeSector);
-    elements.sectorCaption.textContent = activeSector ? activeSector.detail : "Todas as mesas do salão";
-    for (const table of tables) {
-      elements.tableGrid.append(createTableButton(table));
-    }
+    const visible = state.tables.filter((table) => state.activeSector === "all" || tableSector(table.number) === state.activeSector);
+    const active = tableSectors.find((sector) => sector.id === state.activeSector); elements.sectorCaption.textContent = active ? active.detail : "Todas as mesas do salão";
+    visible.forEach((table) => elements.tableGrid.append(createTableButton(table)));
   }
 
   function renderOverviewMap() {
     elements.overviewMap.replaceChildren();
-    const stage = document.createElement("div");
-    stage.className = "map-zone map-stage";
-    stage.textContent = "PALCO";
-    elements.overviewMap.append(stage);
-
-    const bar = document.createElement("div");
-    bar.className = "map-zone map-bar";
-    bar.textContent = "BAR";
-    elements.overviewMap.append(bar);
-
-    const kitchen = document.createElement("div");
-    kitchen.className = "map-zone map-kitchen";
-    kitchen.textContent = "COZINHA";
-    elements.overviewMap.append(kitchen);
-
-    const entrance = document.createElement("div");
-    entrance.className = "map-zone map-entry";
-    entrance.textContent = "ENTRADA • BUFFET";
-    elements.overviewMap.append(entrance);
-
-    for (const table of state.tables) {
-      const button = createTableButton(table, "overview-table");
-      button.style.gridColumn = String(((table.number - 1) % 10) + 1);
-      button.style.gridRow = String(Math.floor((table.number - 1) / 10) + 2);
-      elements.overviewMap.append(button);
-    }
+    [["map-stage", "PALCO"], ["map-bar", "BAR"], ["map-kitchen", "COZINHA"], ["map-entry", "ENTRADA • BUFFET"]].forEach(([className, text]) => { const zone = document.createElement("div"); zone.className = `map-zone ${className}`; zone.textContent = text; elements.overviewMap.append(zone); });
+    state.tables.forEach((table) => { const button = createTableButton(table, "overview-table"); button.style.gridColumn = String(((table.number - 1) % 10) + 1); button.style.gridRow = String(Math.floor((table.number - 1) / 10) + 2); elements.overviewMap.append(button); });
   }
 
   function renderAccount() {
-    const user = state.config?.user;
-    elements.account.replaceChildren();
-    if (user?.signedIn) {
-      const card = document.createElement("div");
-      card.className = "account-card";
-      const identity = document.createElement("p");
-      identity.textContent = `Conectado como ${user.name || user.email}`;
-      const hint = document.createElement("small");
-      hint.textContent = "Sua identificação é usada somente para acompanhar esta reserva.";
-      card.append(identity, hint);
-      elements.account.append(card);
-      elements.accountTitle.textContent = `Conectado como ${user.name || user.email}`;
-      elements.accountDescription.textContent = "Conta Google conectada. Agora escolha uma mesa e gere o Pix.";
-      return;
-    }
-
-    elements.accountTitle.textContent = "Entre com Google para reservar";
-    elements.accountDescription.textContent = "Sua conta serve somente para localizar e acompanhar este pedido.";
-    if (!state.auth?.clientId) {
-      elements.accountDescription.textContent = "O login Google ainda não está disponível. Você pode consultar as mesas enquanto isso.";
-      return;
-    }
-
-    const buttonMount = document.createElement("div");
-    buttonMount.className = "google-button-mount";
-    elements.account.append(buttonMount);
-    if (window.google?.accounts?.id) {
-      window.google.accounts.id.initialize({
-        client_id: state.auth.clientId,
-        callback: handleGoogleCredential,
-      });
-      window.google.accounts.id.renderButton(buttonMount, {
-        shape: "pill",
-        size: "large",
-        text: "continue_with",
-        theme: "filled_black",
-        width: 300,
-      });
-      return;
-    }
-
-    const fallback = document.createElement("button");
-    fallback.className = "button button-secondary";
-    fallback.type = "button";
-    fallback.textContent = "Carregar login Google";
-    fallback.addEventListener("click", () => window.location.reload());
-    elements.account.append(fallback);
+    const user = state.config?.user; elements.account.replaceChildren(); elements.loginNext.hidden = !user?.signedIn;
+    if (user?.signedIn) { const card = document.createElement("div"); card.className = "account-card"; card.innerHTML = `<p>Conectado como ${escapeHtml(user.name || user.email)}</p><small>Sua identificação é usada somente para acompanhar esta reserva.</small>`; elements.account.append(card); elements.accountTitle.textContent = `Conectado como ${user.name || user.email}`; elements.accountDescription.textContent = "Conta Google conectada. Continue para confirmar seus dados."; renderDetails(); return; }
+    elements.accountTitle.textContent = "Entre com Google para reservar"; elements.accountDescription.textContent = state.auth?.clientId ? "Use sua conta Google para seguir com a reserva." : "O login Google ainda não está disponível. Tente novamente em alguns instantes.";
+    if (!state.auth?.clientId) return;
+    const buttonMount = document.createElement("div"); buttonMount.className = "google-button-mount"; elements.account.append(buttonMount);
+    if (window.google?.accounts?.id) { window.google.accounts.id.initialize({ client_id: state.auth.clientId, callback: handleGoogleCredential }); window.google.accounts.id.renderButton(buttonMount, { shape: "pill", size: "large", text: "continue_with", theme: "filled_black", width: 300 }); return; }
+    const fallback = document.createElement("button"); fallback.className = "button button-secondary"; fallback.type = "button"; fallback.textContent = "Carregar login Google"; fallback.addEventListener("click", () => window.location.reload()); elements.account.append(fallback);
   }
 
+  function renderDetails() { const user = state.config?.user; elements.detailsName.value = user?.name || ""; elements.detailsEmail.value = user?.email || ""; elements.detailsConsent.checked = false; elements.detailsConsent.dispatchEvent(new Event("change")); }
   function renderSelection() {
     const table = state.selectedTable ? tableByNumber(state.selectedTable) : null;
-    if (!table) {
-      elements.selectionTitle.textContent = "Selecione uma mesa no mapa";
-      elements.selectionDescription.textContent = "A mesa fica bloqueada por 24 horas enquanto você realiza o Pix e envia o comprovante.";
-      document.querySelector("#reserve-button").disabled = true;
-      return;
-    }
-
-    elements.selectionTitle.textContent = `Mesa ${tableLabel(table.number)} selecionada`;
-    elements.selectionDescription.textContent = `${state.selectedSeats} lugares • ${formatCurrency(state.selectedSeats === 2 ? 10000 : 20000)} à vista via Pix. Você confere o QR Code na próxima etapa.`;
-    document.querySelector("#reserve-button").disabled = !state.config?.user?.signedIn;
+    if (!table) { elements.selectionTitle.textContent = "Selecione uma mesa no mapa"; elements.selectionDescription.textContent = "Somente mesas com ✓ Livre podem ser escolhidas."; elements.tableNext.disabled = true; return; }
+    elements.selectionTitle.textContent = `Mesa ${tableLabel(table.number)} selecionada`; elements.selectionDescription.textContent = `${state.selectedSeats} lugares · ${formatCurrency(state.selectedSeats === 2 ? 10000 : 20000)} · pagamento integral via Pix.`; elements.tableNext.disabled = false;
   }
-
+  function renderWhatsAppStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.whatsappSelection.textContent = table ? `Você está reservando a mesa ${tableLabel(table.number)} para ${state.selectedSeats} lugares.` : ""; }
+  function renderPaymentStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.paymentInfo.textContent = ""; document.querySelector("#payment-summary-inline").textContent = table ? `Mesa ${tableLabel(table.number)} · ${state.selectedSeats} lugares · ${formatCurrency(state.selectedSeats === 2 ? 10000 : 20000)}.` : "Escolha uma mesa antes de gerar o Pix."; }
   function renderReservation() {
-    elements.reservationPanel.replaceChildren();
-    if (!state.reservation) return;
-    const card = document.createElement("div");
-    card.className = "active-reservation";
-    const title = document.createElement("strong");
-    title.textContent = `Pedido ${state.reservation.code} — ${statusText(state.reservation.status)}`;
-    const description = document.createElement("span");
-    description.textContent = `Mesa ${tableLabel(state.reservation.tableNumber)} • ${formatCurrency(state.reservation.amountCents)} • confirmação manual em até 24h após o pagamento.`;
-    card.append(title, description);
-    if (state.reservation.status === "awaiting_payment" || state.reservation.status === "receipt_submitted") {
-      const action = document.createElement("button");
-      action.type = "button";
-      action.className = "button button-secondary";
-      action.textContent = "Ver dados do Pix";
-      action.addEventListener("click", () => openPayment(state.reservation));
-      card.append(action);
-    }
+    elements.reservationPanel.replaceChildren(); if (!state.reservation) return;
+    const card = document.createElement("div"); card.className = "active-reservation"; card.innerHTML = `<strong>Pedido ${escapeHtml(state.reservation.code)} — ${escapeHtml(statusText(state.reservation.status))}</strong><span>Mesa ${tableLabel(state.reservation.tableNumber)} · ${formatCurrency(state.reservation.amountCents)} · confirmação manual em até 24 horas após o pagamento.</span>`;
+    if (["awaiting_payment", "receipt_submitted"].includes(state.reservation.status)) { const action = document.createElement("button"); action.type = "button"; action.className = "button button-secondary"; action.textContent = "Ver dados do Pix"; action.addEventListener("click", () => openPayment(state.reservation)); card.append(action); }
     elements.reservationPanel.append(card);
   }
+  function escapeHtml(value) { const node = document.createElement("span"); node.textContent = value || ""; return node.innerHTML; }
 
-  function formatCurrency(cents) {
-    return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
-  }
-
-  async function loadTables() {
-    const payload = await request("/tables");
-    state.tables = payload.tables || [];
-    renderTables();
-    renderOverviewMap();
-  }
-
+  async function loadTables() { const payload = await request("/tables"); state.tables = payload.tables || []; renderTables(); renderOverviewMap(); }
   async function loadAuth() {
-    state.auth = await fetch("/api/auth/config", { credentials: "same-origin" }).then(async (response) => {
-      const payload = await response.json().catch(() => ({}));
-      return response.ok ? payload : {};
-    });
-    const config = await request("/config");
-    state.config = { ...config, user: config.session };
-    renderAccount();
-    renderSelection();
-    if (state.config.user?.signedIn) await loadExistingReservation();
+    state.auth = await fetch("/api/auth/config", { credentials: "same-origin" }).then(async (response) => { const payload = await response.json().catch(() => ({})); return response.ok ? payload : {}; });
+    const config = await request("/config"); state.config = { ...config, user: config.session }; renderAccount(); renderSelection(); if (state.config.user?.signedIn) await loadExistingReservation();
   }
-
-  async function loadExistingReservation() {
-    const payload = await request("/reservations/me");
-    const latest = payload.reservations?.[0];
-    if (!latest || !["awaiting_payment", "receipt_submitted"].includes(latest.status)) return;
-    const details = await request(`/reservations/${latest.id}`);
-    state.reservation = { ...details.reservation, payment: details.payment };
-    renderReservation();
-  }
-
+  async function loadExistingReservation() { const payload = await request("/reservations/me"); const latest = payload.reservations?.[0]; if (!latest || !["awaiting_payment", "receipt_submitted"].includes(latest.status)) return; const details = await request(`/reservations/${latest.id}`); state.reservation = { ...details.reservation, payment: details.payment }; renderReservation(); }
   async function handleGoogleCredential(response) {
-    try {
-      await fetch("/api/auth/google", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ credential: response.credential }),
-      }).then(async (result) => {
-        if (!result.ok) {
-          const payload = await result.json().catch(() => ({}));
-          throw new Error(payload.error || "Não foi possível entrar com Google.");
-        }
-      });
-      await loadAuth();
-      showToast("Conta Google conectada. Escolha a mesa desejada.", "success");
-    } catch (error) {
-      showToast(error.message, "error");
-    }
+    try { await fetch("/api/auth/google", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: response.credential }) }).then(async (result) => { if (!result.ok) { const payload = await result.json().catch(() => ({})); throw new Error(payload.error || "Não foi possível entrar com Google."); } }); await loadAuth(); showFlowStep("details"); showToast("Conta Google conectada. Confira seus dados.", "success"); } catch (error) { showToast(error.message, "error"); }
   }
 
-  function selectTable(number) {
-    const table = tableByNumber(number);
-    if (!table || table.status !== "available") {
-      showToast("Esta mesa não está disponível no momento.", "error");
-      return;
-    }
-    state.selectedTable = number;
-    renderTables();
-    renderOverviewMap();
-    renderSelection();
-    document.querySelector("#selection-panel")?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-
+  function selectTable(number) { const table = tableByNumber(number); if (!table || table.status !== "available") { showToast("Esta mesa já está comprada.", "error"); return; } state.selectedTable = number; renderTables(); renderOverviewMap(); renderSelection(); }
   async function reserveSelectedTable() {
-    if (!state.selectedTable) {
-      showToast("Escolha uma mesa livre primeiro.", "error");
-      return;
-    }
-    if (!state.config?.user?.signedIn) {
-      document.querySelector("#account-strip")?.scrollIntoView({ behavior: "smooth", block: "center" });
-      showToast("Entre com sua conta Google para criar a reserva.", "error");
-      return;
-    }
-
-    const button = document.querySelector("#reserve-button");
-    button.disabled = true;
-    button.textContent = "Gerando Pix…";
-    try {
-      const payload = await request("/reservations", {
-        method: "POST",
-        body: JSON.stringify({
-          tableNumber: state.selectedTable,
-          seats: state.selectedSeats,
-          phone: document.querySelector("#contact-phone")?.value.trim() || "",
-        }),
-      });
-      state.reservation = { ...payload.reservation, payment: payload.payment };
-      renderReservation();
-      await loadTables();
-      openPayment(state.reservation);
-      showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success");
-    } catch (error) {
-      showToast(error.message, "error");
-      await loadTables().catch(() => undefined);
-    } finally {
-      button.disabled = false;
-      button.textContent = "Gerar Pix da reserva";
-    }
+    if (!state.selectedTable || !state.contactPhone) { showToast("Escolha uma mesa e informe seu WhatsApp.", "error"); return; }
+    const button = document.querySelector("#payment-pix"); button.disabled = true; button.querySelector("strong").textContent = "Gerando Pix…";
+    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, phone: state.contactPhone }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
+    catch (error) { showToast(error.message, "error"); await loadTables().catch(() => undefined); }
+    finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
-
   function openPayment(reservation) {
-    state.reservation = reservation;
-    const payment = reservation.payment;
-    elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} • ${formatCurrency(reservation.amountCents)} • Pedido ${reservation.code}`;
-    elements.paymentQr.removeAttribute("src");
-    if (payment?.qrCodeDataUrl) elements.paymentQr.src = payment.qrCodeDataUrl;
-    document.querySelector("#pix-code").value = payment?.pixCode || "";
-    document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`;
-    document.querySelector("#order-id").textContent = reservation.code;
-    const whatsapp = document.querySelector("#whatsapp-proof");
-    whatsapp.href = payment?.whatsappUrl || "#";
-    document.querySelector("#upload-status").textContent = reservation.expiresAt
-      ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.`
-      : "Envie o comprovante após realizar o pagamento.";
-    elements.paymentDialog.showModal();
+    state.reservation = reservation; const payment = reservation.payment; elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${reservation.code}`; elements.paymentQr.removeAttribute("src"); if (payment?.qrCodeDataUrl) elements.paymentQr.src = payment.qrCodeDataUrl;
+    document.querySelector("#pix-code").value = payment?.pixCode || ""; document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`; document.querySelector("#order-id").textContent = reservation.code;
+    document.querySelector("#whatsapp-proof").href = payment?.whatsappUrl || "#"; document.querySelector("#upload-status").textContent = reservation.expiresAt ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.` : "Envie o comprovante após realizar o pagamento."; elements.paymentDialog.showModal();
   }
-
-  async function copyPixCode() {
-    const input = document.querySelector("#pix-code");
-    try {
-      await navigator.clipboard.writeText(input.value);
-      showToast("Código Pix copiado.", "success");
-    } catch {
-      input.select();
-      document.execCommand("copy");
-      showToast("Código Pix copiado.", "success");
-    }
-  }
-
+  async function copyPixCode() { const input = document.querySelector("#pix-code"); try { await navigator.clipboard.writeText(input.value); } catch { input.select(); document.execCommand("copy"); } showToast("Código Pix copiado.", "success"); }
+  function readAsDataUrl(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error("Não foi possível ler este arquivo.")); reader.readAsDataURL(file); }); }
   async function uploadReceipt(file) {
-    if (!file || !state.reservation) return;
-    if (file.size > 4 * 1024 * 1024) {
-      showToast("O comprovante deve ter no máximo 4 MB.", "error");
-      return;
-    }
-    const receiptStatus = document.querySelector("#upload-status");
-    receiptStatus.textContent = "Enviando comprovante…";
-    try {
-      const dataUrl = await readAsDataUrl(file);
-      const payload = await request(`/reservations/${state.reservation.id}/receipt`, {
-        method: "POST",
-        body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }),
-      });
-      state.reservation = { ...payload.reservation, payment: state.reservation.payment };
-      renderReservation();
-      await loadTables();
-      receiptStatus.textContent = "Comprovante enviado. Aguarde a confirmação manual.";
-      showToast("Comprovante enviado. A confirmação é feita em até 24h.", "success");
-    } catch (error) {
-      showToast(error.message, "error");
-    } finally {
-      if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = "";
-    }
+    if (!file || !state.reservation) return; if (file.size > 4 * 1024 * 1024) { showToast("O comprovante deve ter no máximo 4 MB.", "error"); return; }
+    const receiptStatus = document.querySelector("#upload-status"); receiptStatus.textContent = "Enviando comprovante…";
+    try { const dataUrl = await readAsDataUrl(file); const payload = await request(`/reservations/${state.reservation.id}/receipt`, { method: "POST", body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }) }); state.reservation = { ...payload.reservation, payment: state.reservation.payment }; renderReservation(); await loadTables(); receiptStatus.textContent = "Comprovante enviado. Aguarde a confirmação manual."; showToast("Comprovante enviado. A confirmação é feita em até 24h.", "success"); } catch (error) { showToast(error.message, "error"); } finally { if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = ""; }
   }
 
-  function readAsDataUrl(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error("Não foi possível ler este arquivo."));
-      reader.readAsDataURL(file);
-    });
+  function sendPlayerCommand(func, args = []) {
+    elements.openingPlayer.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args }), "*");
   }
+  function startExperience() {
+    const playerParams = new URLSearchParams({ autoplay: "1", enablejsapi: "1", loop: "1", mute: "0", origin: window.location.origin, playlist: YOUTUBE_VIDEO_ID, playsinline: "1", rel: "0" });
+    elements.openingPlayer.addEventListener("load", () => { sendPlayerCommand("unMute"); sendPlayerCommand("setVolume", [70]); sendPlayerCommand("playVideo"); }, { once: true });
+    elements.openingPlayer.src = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?${playerParams}`;
+    state.audioPlaying = true; elements.opening.classList.add("is-complete"); document.body.classList.remove("is-opening"); elements.toggleSound.hidden = false; elements.toggleSound.textContent = "❚❚ Pausar trilha";
+  }
+  function toggleSound() { if (!elements.openingPlayer.contentWindow) return; state.audioPlaying = !state.audioPlaying; sendPlayerCommand(state.audioPlaying ? "playVideo" : "pauseVideo"); elements.toggleSound.textContent = state.audioPlaying ? "❚❚ Pausar trilha" : "▶ Ouvir trilha"; }
+  function setupOpening() { let progress = 0; const timer = window.setInterval(() => { progress = Math.min(100, progress + (progress < 72 ? 8 : 2)); elements.openingProgress.style.width = `${progress}%`; if (progress === 100) { window.clearInterval(timer); elements.openingButton.disabled = false; elements.openingButton.textContent = "Entrar com trilha"; } }, 85); }
 
   function bindEvents() {
     document.addEventListener("click", (event) => {
-      const table = event.target.closest("[data-table]");
-      if (table) selectTable(Number(table.dataset.table));
-      const sector = event.target.closest("[data-sector]");
-      if (sector) {
-        state.activeSector = sector.dataset.sector;
-        renderSectors();
-        renderTables();
-      }
-      if (event.target.closest("[data-open-map]")) elements.mapDialog.showModal();
-      if (event.target.closest("[data-close-map]")) elements.mapDialog.close();
-      if (event.target.closest("[data-close-payment]")) elements.paymentDialog.close();
+      const table = event.target.closest("[data-table]"); if (table) selectTable(Number(table.dataset.table));
+      const sector = event.target.closest("[data-sector]"); if (sector) { state.activeSector = sector.dataset.sector; renderSectors(); renderTables(); }
+      if (event.target.closest("[data-open-map]")) elements.mapDialog.showModal(); if (event.target.closest("[data-close-map]")) elements.mapDialog.close(); if (event.target.closest("[data-close-payment]")) elements.paymentDialog.close();
     });
-
-    document.querySelectorAll("[data-seats]").forEach((button) => {
-      button.addEventListener("click", () => {
-        state.selectedSeats = Number(button.dataset.seats);
-        document.querySelectorAll("[data-seats]").forEach((item) => {
-          item.setAttribute("aria-pressed", String(item === button));
-          item.classList.toggle("is-selected", item === button);
-        });
-        renderSelection();
-      });
-    });
-    document.querySelector("#reserve-button")?.addEventListener("click", reserveSelectedTable);
-    document.querySelector("#copy-pix")?.addEventListener("click", copyPixCode);
-    document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0]));
+    document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
+    elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => showFlowStep("table")); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
+    document.querySelector("#whatsapp-next").addEventListener("click", () => { const phone = document.querySelector("#contact-phone").value.trim(); if (phone.replace(/\D/g, "").length < 10) { showToast("Informe um WhatsApp válido com DDD.", "error"); return; } state.contactPhone = phone; showFlowStep("payment"); });
+    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix").addEventListener("click", copyPixCode); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); elements.openingButton.addEventListener("click", startExperience); elements.toggleSound.addEventListener("click", toggleSound);
   }
-
-  async function initialize() {
-    bindEvents();
-    renderSectors();
-    renderSelection();
-    try {
-      await Promise.all([loadTables(), loadAuth()]);
-    } catch (error) {
-      showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error");
-    }
-  }
-
+  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();
