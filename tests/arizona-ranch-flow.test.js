@@ -58,3 +58,18 @@ test("o mapa exibe somente mesa livre ou comprada", () => {
   assert.match(app, /✕ Comprada/);
   assert.doesNotMatch(app, new RegExp(["Em", "andamento"].join(" ")));
 });
+
+test("identificação permite corrigir dados e mantém o Google simples", () => {
+  const html = readProjectFile("pagamentos", "ai", "index.html");
+  const app = readProjectFile("pagamentos", "ai", "app.js");
+
+  assert.doesNotMatch(html, /id=["']details-name["'][^>]*\breadonly\b/i);
+  assert.doesNotMatch(html, /id=["']details-email["'][^>]*\breadonly\b/i);
+  assert.match(html, /Conecte com Google/i);
+  assert.match(app, /elements\.accountTitle\.textContent = "Conectar com Google";/);
+  assert.doesNotMatch(app, /Conectado como/);
+  const googleAuth = app.match(/async function handleGoogleCredential\(response\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  assert.doesNotMatch(googleAuth, /showToast\(error\.message, "error"\)/);
+  assert.match(googleAuth, /showToast\("Não foi possível conectar com Google agora\. Tente novamente\.", "error"\)/);
+  assert.match(app, /customer: \{ name: state\.customer\.name, email: state\.customer\.email \}/);
+});

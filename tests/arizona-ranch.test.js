@@ -46,3 +46,16 @@ test("não libera mesa já ocupada nem duplica reserva pendente", () => {
   assert.equal(reservation.status, "awaiting_payment");
   assert.throws(() => store.create({ tableNumber: 12, seats: 2, user: { sub: "u2", email: "b@teste.com" } }), /indisponível/i);
 });
+
+test("salva nome e e-mail ajustados após o acesso Google", () => {
+  const store = createReservationStore({ now: () => new Date("2026-08-03T12:00:00.000Z") });
+  const reservation = store.create({
+    tableNumber: 13,
+    seats: 2,
+    user: { sub: "google-user-1", name: "Conta Google", email: "conta@google.test" },
+    customer: { name: "Maria da Silva", email: "maria@exemplo.com" },
+  });
+
+  assert.equal(reservation.customer.name, "Maria da Silva");
+  assert.equal(reservation.customer.email, "maria@exemplo.com");
+});

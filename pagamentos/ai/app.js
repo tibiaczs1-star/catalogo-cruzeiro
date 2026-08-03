@@ -8,7 +8,7 @@
     { id: "palco", label: "Próximo ao palco", detail: "Mesas 46 a 67", numbers: range(46, 67) },
   ];
   const flow = ["login", "details", "table", "whatsapp", "payment"];
-  const state = { activeSector: "all", auth: null, config: null, contactPhone: "", flowStep: "login", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
+  const state = { activeSector: "all", auth: null, config: null, contactPhone: "", customer: { name: "", email: "" }, flowStep: "login", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
   const elements = {
     account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
     detailsConsent: document.querySelector("#details-consent"), detailsEmail: document.querySelector("#details-email"), detailsName: document.querySelector("#details-name"),
@@ -83,15 +83,16 @@
 
   function renderAccount() {
     const user = state.config?.user; elements.account.replaceChildren(); elements.loginNext.hidden = !user?.signedIn;
-    if (user?.signedIn) { const card = document.createElement("div"); card.className = "account-card"; card.innerHTML = `<p>Conectado como ${escapeHtml(user.name || user.email)}</p><small>Sua identificação é usada somente para acompanhar esta reserva.</small>`; elements.account.append(card); elements.accountTitle.textContent = `Conectado como ${user.name || user.email}`; elements.accountDescription.textContent = "Conta Google conectada. Continue para confirmar seus dados."; renderDetails(); return; }
-    elements.accountTitle.textContent = "Entre com Google para reservar"; elements.accountDescription.textContent = state.auth?.clientId ? "Use sua conta Google para seguir com a reserva." : "O login Google ainda não está disponível. Tente novamente em alguns instantes.";
+    if (user?.signedIn) { const card = document.createElement("div"); card.className = "account-card"; card.innerHTML = "<p>Google conectado.</p><small>Pronto para continuar com a reserva.</small>"; elements.account.append(card); elements.accountTitle.textContent = "Google conectado"; elements.accountDescription.textContent = "Pronto. Confira seus dados e continue."; renderDetails(); return; }
+    elements.accountTitle.textContent = "Conectar com Google"; elements.accountDescription.textContent = state.auth?.clientId ? "Toque no botão para continuar." : "A conexão está sendo preparada. Atualize a página em alguns segundos.";
     if (!state.auth?.clientId) return;
     const buttonMount = document.createElement("div"); buttonMount.className = "google-button-mount"; elements.account.append(buttonMount);
     if (window.google?.accounts?.id) { window.google.accounts.id.initialize({ client_id: state.auth.clientId, callback: handleGoogleCredential }); window.google.accounts.id.renderButton(buttonMount, { shape: "pill", size: "large", text: "continue_with", theme: "filled_black", width: 300 }); return; }
-    const fallback = document.createElement("button"); fallback.className = "button button-secondary"; fallback.type = "button"; fallback.textContent = "Carregar login Google"; fallback.addEventListener("click", () => window.location.reload()); elements.account.append(fallback);
+    const fallback = document.createElement("button"); fallback.className = "button button-secondary"; fallback.type = "button"; fallback.textContent = "Conectar com Google"; fallback.addEventListener("click", () => window.location.reload()); elements.account.append(fallback);
   }
 
-  function renderDetails() { const user = state.config?.user; elements.detailsName.value = user?.name || ""; elements.detailsEmail.value = user?.email || ""; elements.detailsConsent.checked = false; elements.detailsConsent.dispatchEvent(new Event("change")); }
+  function renderDetails() { const user = state.config?.user; elements.detailsName.value = state.customer.name || user?.name || ""; elements.detailsEmail.value = state.customer.email || user?.email || ""; elements.detailsConsent.checked = false; elements.detailsConsent.dispatchEvent(new Event("change")); }
+  function saveCustomerDetails() { const name = elements.detailsName.value.trim().replace(/\s+/g, " "); const email = elements.detailsEmail.value.trim().toLowerCase(); if (name.length < 2) { showToast("Informe seu nome completo.", "error"); return false; } if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast("Informe um e-mail válido.", "error"); return false; } state.customer = { name, email }; return true; }
   function renderSelection() {
     const table = state.selectedTable ? tableByNumber(state.selectedTable) : null;
     if (!table) { elements.selectionTitle.textContent = "Selecione uma mesa no mapa"; elements.selectionDescription.textContent = "Somente mesas com ✓ Livre podem ser escolhidas."; elements.tableNext.disabled = true; return; }
@@ -114,14 +115,14 @@
   }
   async function loadExistingReservation() { const payload = await request("/reservations/me"); const latest = payload.reservations?.[0]; if (!latest || !["awaiting_payment", "receipt_submitted"].includes(latest.status)) return; const details = await request(`/reservations/${latest.id}`); state.reservation = { ...details.reservation, payment: details.payment }; renderReservation(); }
   async function handleGoogleCredential(response) {
-    try { await fetch("/api/auth/google", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: response.credential }) }).then(async (result) => { if (!result.ok) { const payload = await result.json().catch(() => ({})); throw new Error(payload.error || "Não foi possível entrar com Google."); } }); await loadAuth(); showFlowStep("details"); showToast("Conta Google conectada. Confira seus dados.", "success"); } catch (error) { showToast(error.message, "error"); }
+    try { await fetch("/api/auth/google", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: response.credential }) }).then(async (result) => { if (!result.ok) { const payload = await result.json().catch(() => ({})); throw new Error(payload.error || "Não foi possível entrar com Google."); } }); await loadAuth(); showFlowStep("details"); showToast("Google conectado.", "success"); } catch { showToast("Não foi possível conectar com Google agora. Tente novamente.", "error"); }
   }
 
   function selectTable(number) { const table = tableByNumber(number); if (!table || table.status !== "available") { showToast("Esta mesa já está comprada.", "error"); return; } state.selectedTable = number; renderTables(); renderOverviewMap(); renderSelection(); }
   async function reserveSelectedTable() {
-    if (!state.selectedTable || !state.contactPhone) { showToast("Escolha uma mesa e informe seu WhatsApp.", "error"); return; }
+    if (!state.selectedTable || !state.contactPhone || !state.customer.name || !state.customer.email) { showToast("Confira seus dados, mesa e WhatsApp antes de gerar o Pix.", "error"); return; }
     const button = document.querySelector("#payment-pix"); button.disabled = true; button.querySelector("strong").textContent = "Gerando Pix…";
-    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, phone: state.contactPhone }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
+    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, phone: state.contactPhone, customer: { name: state.customer.name, email: state.customer.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
     catch (error) { showToast(error.message, "error"); await loadTables().catch(() => undefined); }
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
@@ -156,7 +157,7 @@
       if (event.target.closest("[data-open-map]")) elements.mapDialog.showModal(); if (event.target.closest("[data-close-map]")) elements.mapDialog.close(); if (event.target.closest("[data-close-payment]")) elements.paymentDialog.close();
     });
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
-    elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => showFlowStep("table")); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
+    elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => { if (saveCustomerDetails()) showFlowStep("table"); }); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
     document.querySelector("#whatsapp-next").addEventListener("click", () => { const phone = document.querySelector("#contact-phone").value.trim(); if (phone.replace(/\D/g, "").length < 10) { showToast("Informe um WhatsApp válido com DDD.", "error"); return; } state.contactPhone = phone; showFlowStep("payment"); });
     document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix").addEventListener("click", copyPixCode); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); elements.openingButton.addEventListener("click", startExperience);
   }

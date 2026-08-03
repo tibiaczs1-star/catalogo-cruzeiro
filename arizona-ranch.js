@@ -197,13 +197,21 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
   }
 
   return {
-    create({ tableNumber: rawTableNumber, seats: rawSeats, user, phone = "" }) {
+    create({ tableNumber: rawTableNumber, seats: rawSeats, user, phone = "", customer = {} }) {
       const tableNumber = Number(rawTableNumber);
       if (!Number.isInteger(tableNumber) || tableNumber < 1 || tableNumber > 67) {
         throw new Error("Mesa inválida.");
       }
       if (!user || !user.sub || !user.email) {
         throw new Error("Entre com sua conta Google para reservar.");
+      }
+      const customerName = String(customer.name || user.name || user.givenName || "Cliente").trim().replace(/\s+/g, " ");
+      const customerEmail = String(customer.email || user.email).trim().toLowerCase();
+      if (customerName.length < 2) {
+        throw new Error("Informe seu nome completo.");
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+        throw new Error("Informe um e-mail válido.");
       }
       const reservationInfo = calculateReservation(rawSeats);
       const state = withFreshState();
@@ -222,8 +230,8 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
         expiresAt: new Date(createdAt.getTime() + RESERVATION_TTL_MS).toISOString(),
         customer: {
           sub: String(user.sub),
-          name: String(user.name || user.givenName || "Cliente"),
-          email: String(user.email).toLowerCase(),
+          name: customerName,
+          email: customerEmail,
           phone: String(phone || "").replace(/[^0-9+()\-\s]/g, "").slice(0, 30),
         },
         receipt: null,
@@ -525,6 +533,7 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
           tableNumber: payload.tableNumber,
           seats: payload.seats,
           phone: payload.phone,
+          customer: payload.customer,
           user,
         });
         const payment = await paymentDetails(reservation);
