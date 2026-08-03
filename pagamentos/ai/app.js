@@ -1,6 +1,6 @@
 (() => {
   const API = "/api/arizona-ranch";
-  const YOUTUBE_VIDEO_ID = "lmXo83Adl7g";
+  const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";
   const tableSectors = [
     { id: "entrada", label: "Entrada & buffet", detail: "Mesas 01 a 12", numbers: range(1, 12) },
     { id: "frente", label: "Frente do salão", detail: "Mesas 13 a 24", numbers: range(13, 24) },
@@ -8,13 +8,13 @@
     { id: "palco", label: "Próximo ao palco", detail: "Mesas 46 a 67", numbers: range(46, 67) },
   ];
   const flow = ["login", "details", "table", "whatsapp", "payment"];
-  const state = { activeSector: "all", auth: null, audioPlaying: false, config: null, contactPhone: "", flowStep: "login", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
+  const state = { activeSector: "all", auth: null, config: null, contactPhone: "", flowStep: "login", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
   const elements = {
     account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
     detailsConsent: document.querySelector("#details-consent"), detailsEmail: document.querySelector("#details-email"), detailsName: document.querySelector("#details-name"),
     loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"), opening: document.querySelector("#opening-screen"), openingButton: document.querySelector("#start-experience"), openingPlayer: document.querySelector("#opening-player"), openingProgress: document.querySelector("#opening-progress"),
     overviewMap: document.querySelector("#full-map"), paymentDialog: document.querySelector("#payment-dialog"), paymentInfo: document.querySelector("#payment-summary"), paymentQr: document.querySelector("#pix-qr"), reservationPanel: document.querySelector("#reservation-panel"),
-    sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast"), toggleSound: document.querySelector("#toggle-sound"), whatsappSelection: document.querySelector("#whatsapp-selection")
+    sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast"), whatsappSelection: document.querySelector("#whatsapp-selection")
   };
 
   function range(start, end) { return Array.from({ length: end - start + 1 }, (_, index) => start + index); }
@@ -144,11 +144,10 @@
   function startExperience() {
     const playerParams = new URLSearchParams({ autoplay: "1", enablejsapi: "1", loop: "1", mute: "0", origin: window.location.origin, playlist: YOUTUBE_VIDEO_ID, playsinline: "1", rel: "0" });
     elements.openingPlayer.addEventListener("load", () => { sendPlayerCommand("unMute"); sendPlayerCommand("setVolume", [70]); sendPlayerCommand("playVideo"); }, { once: true });
-    elements.openingPlayer.src = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?${playerParams}`;
-    state.audioPlaying = true; elements.opening.classList.add("is-complete"); document.body.classList.remove("is-opening"); elements.toggleSound.hidden = false; elements.toggleSound.textContent = "❚❚ Pausar trilha";
+    elements.openingPlayer.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?${playerParams}`;
+    elements.opening.classList.add("is-complete"); document.body.classList.remove("is-opening");
   }
-  function toggleSound() { if (!elements.openingPlayer.contentWindow) return; state.audioPlaying = !state.audioPlaying; sendPlayerCommand(state.audioPlaying ? "playVideo" : "pauseVideo"); elements.toggleSound.textContent = state.audioPlaying ? "❚❚ Pausar trilha" : "▶ Ouvir trilha"; }
-  function setupOpening() { let progress = 0; const timer = window.setInterval(() => { progress = Math.min(100, progress + (progress < 72 ? 8 : 2)); elements.openingProgress.style.width = `${progress}%`; if (progress === 100) { window.clearInterval(timer); elements.openingButton.disabled = false; elements.openingButton.textContent = "Entrar com trilha"; } }, 85); }
+  function setupOpening() { let progress = 0; const timer = window.setInterval(() => { progress = Math.min(100, progress + (progress < 72 ? 8 : 2)); elements.openingProgress.style.width = `${progress}%`; if (progress === 100) { window.clearInterval(timer); elements.openingButton.disabled = false; elements.openingButton.textContent = "Reservar mesa"; } }, 85); }
 
   function bindEvents() {
     document.addEventListener("click", (event) => {
@@ -159,7 +158,7 @@
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
     elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => showFlowStep("table")); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
     document.querySelector("#whatsapp-next").addEventListener("click", () => { const phone = document.querySelector("#contact-phone").value.trim(); if (phone.replace(/\D/g, "").length < 10) { showToast("Informe um WhatsApp válido com DDD.", "error"); return; } state.contactPhone = phone; showFlowStep("payment"); });
-    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix").addEventListener("click", copyPixCode); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); elements.openingButton.addEventListener("click", startExperience); elements.toggleSound.addEventListener("click", toggleSound);
+    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix").addEventListener("click", copyPixCode); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); elements.openingButton.addEventListener("click", startExperience);
   }
   async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();

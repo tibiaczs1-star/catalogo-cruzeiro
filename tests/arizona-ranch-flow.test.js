@@ -30,9 +30,24 @@ test("a abertura incorpora a trilha oficial e mostra o aviso de direitos", () =>
   assert.ok(openingMarkup);
   assert.doesNotMatch(openingMarkup, /id=["']opening-player["']/);
   assert.match(html, /Todos os direitos reservados/i);
-  assert.match(app, /lmXo83Adl7g/);
+  assert.match(app, /const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";/);
   assert.match(app, /mute: "0"/);
-  assert.match(app, /youtube(?:-nocookie)?\.com\/embed/i);
+  assert.match(app, /https:\/\/www\.youtube\.com\/embed\/\$\{YOUTUBE_VIDEO_ID\}/);
+  assert.doesNotMatch(app, /youtube-nocookie\.com/i);
+});
+
+test("a abertura leva direto à reserva, inicia a trilha e exibe a foto sem recorte", () => {
+  const html = readProjectFile("pagamentos", "ai", "index.html");
+  const app = readProjectFile("pagamentos", "ai", "app.js");
+  const css = readProjectFile("pagamentos", "ai", "arizona.css");
+
+  assert.match(html, /id=["']start-experience["']/i);
+  assert.match(app, /openingButton\.textContent = "Reservar mesa"/);
+  assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
+  assert.doesNotMatch(html, /id=["']toggle-sound["']/i);
+  assert.match(css, /\.opening-image\s*\{[^}]*\/ contain no-repeat;/);
+  assert.match(css, /\.opening-screen::before\s*\{[^}]*filter:\s*blur\(/);
+  assert.match(app, /function startExperience\(\)[\s\S]*?sendPlayerCommand\("playVideo"\)/);
 });
 
 test("o mapa exibe somente mesa livre ou comprada", () => {
