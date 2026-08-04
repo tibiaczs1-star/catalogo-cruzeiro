@@ -28,6 +28,7 @@ let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
 let mundoAppleIntegration = null;
 let arizonaRanchIntegration = null;
+let cashierIntegration = null;
 const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
 const vm = require("vm");
 const zlib = require("zlib");
@@ -127,6 +128,7 @@ mundoAppleIntegration = createMundoAppleServerIntegration({
   environment: process.env,
   sendFile,
 });
+cashierIntegration = createCashierIntegration({ dataDir, environment });
 arizonaRanchIntegration = createArizonaRanchIntegration({
   rootDir: ROOT_DIR,
   dataDir: DATA_DIR,
@@ -16891,6 +16893,10 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
+  if (pathname.startsWith("/api/cashier/")) {
+    const handled = cashierIntegration?.handleApi(request, response, pathname);
+    if (handled) return;
+  }
   if (pathname.startsWith("/api/arizona-ranch/")) {
     return arizonaRanchIntegration.handleApi(req, res, pathname);
   }
