@@ -62,10 +62,22 @@
 
   function renderSummary(summary) {
     elements.summary.replaceChildren();
-    for (const [label, value] of [["Aguardando", summary.awaitingPayment], ["Em análise", summary.receiptSubmitted], ["Confirmadas", summary.confirmed]]) {
+    const items = [
+      ["Aguardando", summary.awaitingPayment],
+      ["Em análise", summary.receiptSubmitted],
+      ["Confirmadas", summary.confirmed],
+    ];
+    if (summary.financial) {
+      items.push(
+        ["Total vendido", summary.financial.totalSoldLabel],
+        ["Pré-vendas", summary.financial.preSoldCount],
+        ["Total esperado", formatCurrency(summary.financial.totalExpected)]
+      );
+    }
+    for (const [label, value] of items) {
       const card = document.createElement("div");
       const count = document.createElement("strong");
-      count.textContent = String(value || 0);
+      count.textContent = typeof value === "string" ? value : String(value || 0);
       const text = document.createElement("span");
       text.textContent = label;
       card.append(count, text);
@@ -141,7 +153,11 @@
   async function loadAdmin() {
     const payload = await request("/admin/reservations");
     state.reservations = payload.reservations || [];
-    renderSummary(summarize(state.reservations));
+    const summary = summarize(state.reservations);
+    if (payload.projection) {
+      summary.financial = payload.projection;
+    }
+    renderSummary(summary);
     renderReservations();
     elements.summary.hidden = false;
     elements.reservations.hidden = false;
