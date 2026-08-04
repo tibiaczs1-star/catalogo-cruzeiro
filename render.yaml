@@ -59,6 +59,10 @@ services:
         sync: false
       - key: ARIZONA_ADMIN_SESSION_SECRET
         sync: false
+      - key: ARIZONA_PIX_KEY
+        sync: false
+      - key: ARIZONA_WHATSAPP_NUMBER
+        sync: false
       - key: CHEFFE_CALL_USER
         sync: false
       - key: CHEFFE_CALL_PASSWORD
