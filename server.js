@@ -129,7 +129,7 @@ mundoAppleIntegration = createMundoAppleServerIntegration({
   environment: process.env,
   sendFile,
 });
-cashierIntegration = createCashierIntegration({ dataDir: DATA_DIR, environment });
+cashierIntegration = createCashierIntegration({ dataDir: DATA_DIR, environment: process.env });
 arizonaRanchIntegration = createArizonaRanchIntegration({
   rootDir: ROOT_DIR,
   dataDir: DATA_DIR,
