@@ -10,8 +10,8 @@ const API_PREFIX = "/api/arizona-ranch";
 const RESERVATION_TTL_MS = 24 * 60 * 60 * 1000;
 const ADMIN_SESSION_COOKIE = "arizona_ranch_admin";
 const ADMIN_SESSION_MAX_AGE_SECONDS = 12 * 60 * 60;
-const PIX_KEY_DEFAULT = "556899582615";
-const WHATSAPP_DEFAULT = "556899582615";
+const PIX_KEY_DEFAULT = "5568992056283";
+const WHATSAPP_DEFAULT = "5568992056283";
 const STATIC_OCCUPIED_TABLES = new Set([9, 22, 28, 29, 30, 31, 33, 39, 40, 41, 42, 45, 50, 52, 57, 65, 67]);
 
 function formatCurrency(amountCents) {

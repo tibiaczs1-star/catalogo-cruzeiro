@@ -59,14 +59,14 @@ test("cobra o valor integral conforme a quantidade de lugares", () => {
 
 test("gera Pix copia e cola para a chave direta", () => {
   const payload = buildPixPayload({
-    pixKey: "+556899582615",
+    pixKey: "+5568992056283",
     amountCents: 20000,
     reference: "ARIZONA-12-ABCD",
   });
 
   assert.match(payload, /^000201/);
   assert.match(payload, /BR.GOV.BCB.PIX/);
-  assert.match(payload, /556899582615/);
+  assert.match(payload, /5568992056283/);
   assert.match(payload, /200.00/);
   assert.match(payload, /6304[0-9A-F]{4}$/);
 });
