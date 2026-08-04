@@ -23,6 +23,7 @@ const {
 const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
 const { createMundoAppleServerIntegration } = require("./mundoapple/server-integration");
 const { createArizonaRanchIntegration } = require("./arizona-ranch");
+const { createCashierIntegration } = require("./cashier");
 const { decorateNewsItem, orderPortalStories } = require("./editorial-scope");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
