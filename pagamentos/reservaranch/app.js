@@ -21,8 +21,28 @@
   function tableLabel(number) { return String(number).padStart(2, "0"); }
   function tableByNumber(number) { return state.tables.find((table) => table.number === number); }
   function tableSector(number) { return tableSectors.find((sector) => sector.numbers.includes(number))?.id || "centro"; }
-  function tableAvailability(table, compact = false) { const text = table.status === "available" ? "✓ Livre" : "✕ Comprada"; return compact ? text.slice(0, 1) : text; }
-  function statusText(status) { return { awaiting_payment: "Aguardando comprovante", confirmed: "Reserva confirmada", expired: "Prazo expirado", receipt_submitted: "Comprovante em análise", rejected: "Pagamento não aprovado" }[status] || "Pedido criado"; }
+  function tableAvailability(table, compact = false) {
+    const labels = {
+      available: { yes: "✓ Livre", no: "Livre", icon: "✓" },
+      pending: { yes: "Pedido", no: "Pedido", icon: "!" },
+      reserved: { yes: "Vendida", no: "Vendida", icon: "V" },
+      unavailable: { yes: "Indisponível", no: "—", icon: "×" },
+      pre_sold: { yes: "Pré-venda", no: "Pré-venda", icon: "P" },
+    };
+    const t = labels[table.status] || labels.available;
+    return compact ? t.icon : t.yes;
+  }
+  function statusText(status) {
+    const map = {
+      awaiting_payment: "Aguardando comprovante",
+      confirmed: "Reserva confirmada",
+      expired: "Prazo expirado",
+      receipt_submitted: "Comprovante em análise",
+      rejected: "Pagamento não aprovado",
+      pre_sold: "Pré-venda",
+    };
+    return map[status] || "Pedido criado";
+  }
   function formatCurrency(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100); }
 
   function showToast(message, tone = "normal") {

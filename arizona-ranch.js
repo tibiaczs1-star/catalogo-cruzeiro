@@ -13,6 +13,7 @@ const ADMIN_SESSION_MAX_AGE_SECONDS = 12 * 60 * 60;
 const PIX_KEY_DEFAULT = "5568992056283";
 const WHATSAPP_DEFAULT = "5568992056283";
 const STATIC_OCCUPIED_TABLES = new Set([9, 22, 28, 29, 30, 31, 33, 39, 40, 41, 42, 45, 50, 52, 57, 65, 67]);
+const PRE_SOLD_TABLES = new Set([5]);
 
 function formatCurrency(amountCents) {
   return new Intl.NumberFormat("pt-BR", {
@@ -77,6 +78,7 @@ function statusLabel(status) {
     confirmed: "Confirmada",
     rejected: "Recusada",
     expired: "Expirada",
+    pre_sold: "Pré-venda",
   }[status] || "Em análise";
 }
 
@@ -147,6 +149,9 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
   }
 
   function getTableStatus(state, tableNumber) {
+    if (PRE_SOLD_TABLES.has(tableNumber)) {
+      return "pre_sold";
+    }
     if (STATIC_OCCUPIED_TABLES.has(tableNumber)) {
       return "unavailable";
     }
@@ -584,8 +589,8 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
       reference: reservation.id,
     });
     return QRCode.toDataURL(pixCode, {
-      errorCorrectionLevel: "M",
-      margin: 2,
+      errorCorrectionLevel: "H",
+      margin: 4,
       width: 420,
       color: { dark: "#17120e", light: "#fffaf0" },
     }).then((qrCodeDataUrl) => ({
@@ -757,7 +762,21 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
         if (!admin) {
           return;
         }
-        sendJson(response, 200, { ok: true, reservations: store.listForAdmin() });
+        const all = store.listForAdmin();
+        const totalSold = all.filter((r) => r.status === "confirmed").reduce((sum, r) => sum + r.amountCents, 0);
+        const pendingCount = all.filter((r) => ["awaiting_payment", "receipt_submitted"].includes(r.status)).length;
+        sendJson(response, 200, {
+          ok: true,
+          reservations: all,
+          projection: {
+            totalSold,
+            totalSoldLabel: formatCurrency(totalSold),
+            confirmedCount: all.filter((r) => r.status === "confirmed").length,
+            pendingCount,
+            preSoldCount: all.filter((r) => r.status === "pre_sold").length,
+            totalExpected: totalSold + all.filter((r) => ["awaiting_payment", "receipt_submitted"].includes(r.status)).reduce((sum, r) => sum + r.amountCents, 0),
+          },
+        });
         return;
       }
 
