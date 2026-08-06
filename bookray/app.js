@@ -1,138 +1,158 @@
-const campaign = [
-  { file: "campanha-country-raiane-botas-douradas.webp", width: 1086, height: 1448, title: "Western Contemporâneo", meta: "Editorial de estúdio", className: "portrait lead" },
-  { file: "campanha-country-raiane-blocos.webp", width: 1122, height: 1402, title: "Geometria & Couro", meta: "Editorial country · 2026", className: "portrait tall" },
-  { file: "campanha-country-botas-douradas-close.webp", width: 1086, height: 1448, title: "Textura", meta: "Detalhe editorial", className: "portrait" }
+document.documentElement.classList.add("js");
+
+const scenes = [
+  ["Magnetismo", "O olhar abre a narrativa", "portrait"],
+  ["Ritmo", "Moda em movimento", "split"],
+  ["Presença", "A imagem sustenta o silêncio", "wide"],
+  ["Precisão", "Detalhes que comandam", "poster"],
+  ["Raiz", "Origem, elegância e verdade", "wide"],
+  ["Impulso", "O campo vira passarela", "cinema"],
+  ["Atitude", "Firmeza em primeiro plano", "poster"],
+  ["Movimento", "Forma, passo e energia", "split"],
+  ["Instinto", "A força do gesto", "poster"],
+  ["Desejo", "Luxo sem excesso", "portrait"],
+  ["Elegância", "Linhas que alongam o tempo", "wide"],
+  ["Assinatura", "Uma presença impossível de copiar", "poster"],
+  ["Horizonte", "O futuro começa na origem", "cinema"],
+  ["Suspense", "Entre luz, sombra e intenção", "portrait"],
+  ["Calor", "Dourado, terra e coragem", "finale"],
 ];
 
-const products = [
-  { file: "produto-botas-rosa-fazenda.webp", width: 1122, height: 1402, title: "Bota Rosa", meta: "Campanha rural", className: "wide" },
-  { file: "produto-botas-douradas-frontal.webp", width: 1086, height: 1448, title: "Bota Dourada", meta: "Vista frontal" },
-  { file: "produto-botas-douradas-perfil.webp", width: 1086, height: 1448, title: "Bota Dourada", meta: "Perfil editorial" },
-  { file: "campanha-country-botas-rosa-estudio.webp", width: 1086, height: 1448, title: "Bota Rosa", meta: "Still de estúdio" }
+// Acervo cumulativo: 34 fotos originais + 12 novas aqui. A abertura e o perfil
+// completam as 14 novas, totalizando 48 imagens distintas, uma vez cada.
+const assets = [
+  "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
+  "assets/IMG_0406.jpeg",
+  "assets/IMG_0407.jpeg",
+  "assets/IMG_0449.jpeg",
+  "assets/5f9195c0-957a-44e8-ba89-f8e0291b8a32.JPG.jpeg",
+  "assets/IMG_0602.jpeg",
+  "assets/IMG_0605.jpeg",
+  "assets/IMG_0657.jpeg",
+  "assets/259b0ccb-9b2a-4b97-b0e2-fc2d09eee812.JPG.jpeg",
+  "assets/bc0cea41-9f73-4f8a-a754-04290a741733.JPG.jpeg",
+  "assets/1c69e6fc-05f9-4ad6-9d4f-5e595f645762.JPG.jpeg",
+  "assets/21496ee4-5f41-4ea0-850e-85ffb099a475.JPG.jpeg",
+  "assets/5200325f-1857-4517-8fbc-c4fcabd0ab73.JPG.jpeg",
+  "assets/1999e35b-ef92-41c8-b717-9df2e47bd880.JPG.jpeg",
+  "assets/6a2f159a-5513-4df7-8214-a58ea0caca22.JPG.jpeg",
+  "assets/5b61d66c-39e7-4868-a193-230185470d4d.JPG.jpeg",
+  "assets/IMG_0767.jpeg",
+  "assets/IMG_0812.jpeg",
+  "assets/IMG_0816.jpeg",
+  "assets/IMG_0817.jpeg",
+  "assets/IMG_0818.jpeg",
+  "assets/IMG_0830.jpeg",
+  "assets/IMG_0903.jpeg",
+  "assets/87189062-434a-437b-aea5-2b0afaaadfe2.JPG.jpeg",
+  "assets/304aa290-f2bc-43fc-b953-0b427eba0cc3.JPG.jpeg",
+  "assets/3b0d5937-0611-43cc-8b7e-81dd4cb1b44f.JPG.jpeg",
+  "assets/96cd42f8-7399-42a1-a6cf-26aceb41ecc2.JPG.jpeg",
+  "assets/IMG_1127.jpeg",
+  "assets/IMG_1128.jpeg",
+  "assets/IMG_1129.jpeg",
+  "assets/IMG_1130.jpeg",
+  "assets/IMG_1154.jpeg",
+  "assets/IMG_1200.jpeg",
+  "assets/IMG_1201.jpeg",
+  "assets/campanha-country-botas-douradas-close.webp",
+  "assets/campanha-country-botas-rosa-estudio.webp",
+  "assets/campanha-country-botas-rosa-loja.webp",
+  "assets/campanha-country-raiane-blocos.webp",
+  "assets/campanha-country-raiane-botas-douradas.webp",
+  "assets/campanha-country-raiane-editorial-estudio.webp",
+  "assets/lifestyle-country-cavalo.webp",
+  "assets/parceiros-laco-de-ouro.webp",
+  "assets/produto-botas-douradas-frontal.webp",
+  "assets/produto-botas-douradas-perfil.webp",
+  "assets/produto-botas-rosa-fazenda.webp",
+  "assets/produto-botas-rosa-pegada-loja.webp",
 ];
 
-const partners = [
-  { file: "lifestyle-country-cavalo.webp", width: 1122, height: 1402, title: "Lifestyle Country", meta: "Narrativa de território", className: "partner-main" }
-];
-
-const legacy = [
-  { file: "IMG_0406.jpeg", width: 1920, height: 2560, title: "Passarela", meta: "Seleção de arquivo" },
-  { file: "IMG_0657.jpeg", width: 1920, height: 2560, title: "Editorial", meta: "Seleção de arquivo" },
-  { file: "IMG_0903.jpeg", width: 1920, height: 2560, title: "Moda", meta: "Seleção de arquivo" },
-  { file: "IMG_1200.jpeg", width: 1920, height: 2560, title: "Presença", meta: "Seleção de arquivo" }
-];
-
-const lightboxItems = [];
-const lightbox = document.querySelector("#lightbox");
-const lightboxImage = lightbox.querySelector("img");
-const lightboxTitle = lightbox.querySelector("figcaption span");
-const lightboxMeta = lightbox.querySelector("figcaption small");
-let activeIndex = 0;
-
-function responsivePicture(item) {
-  const path = `assets/${item.file}`;
-  const isResponsiveWebp = item.file.endsWith(".webp");
-  const stem = isResponsiveWebp ? item.file.slice(0, -5) : item.file;
-  const small = isResponsiveWebp ? `assets/${stem}-720.webp` : path;
-  return `
-    <picture>
-      ${small !== path ? `<source srcset="${small} 720w, ${path} ${item.width}w" sizes="(max-width: 760px) 92vw, 45vw">` : ""}
-      <img src="${path}" width="${item.width}" height="${item.height}" alt="${item.title} — ${item.meta}" loading="lazy" decoding="async">
-    </picture>`;
-}
-
-function card(item, index, group) {
-  const globalIndex = lightboxItems.push(item) - 1;
-  return `
-    <button class="photo-card ${item.className || ""} reveal" type="button" data-lightbox-index="${globalIndex}" aria-label="Ampliar: ${item.title}">
-      ${responsivePicture(item)}
-      <span class="photo-overlay"><strong>${item.title}</strong><small>${item.meta}</small><i>↗</i></span>
-      <span class="photo-number">${String(index + 1).padStart(2, "0")} / ${String(group.length).padStart(2, "0")}</span>
-    </button>`;
-}
-
-function renderCollection(selector, items) {
-  document.querySelector(selector).innerHTML = items.map((item, index) => card(item, index, items)).join("");
-}
-
-renderCollection("#campaign-grid", campaign);
-renderCollection("#product-grid", products);
-renderCollection("#partner-grid", partners);
-renderCollection("#legacy-grid", legacy);
-
-function openLightbox(index) {
-  activeIndex = index;
-  const item = lightboxItems[activeIndex];
-  const path = `assets/${item.file}`;
-  lightboxImage.src = path;
-  lightboxImage.alt = `${item.title} — ${item.meta}`;
-  lightboxTitle.textContent = item.title;
-  lightboxMeta.textContent = `${item.meta} · ${activeIndex + 1}/${lightboxItems.length}`;
-  if (!lightbox.open) lightbox.showModal();
-}
-
-function moveLightbox(delta) {
-  activeIndex = (activeIndex + delta + lightboxItems.length) % lightboxItems.length;
-  openLightbox(activeIndex);
-}
-
-document.addEventListener("click", (event) => {
-  const trigger = event.target.closest("[data-lightbox-index]");
-  if (trigger) openLightbox(Number(trigger.dataset.lightboxIndex));
+const total = assets.length + 2;
+const portfolio = assets.map((src, index) => {
+  const scene = scenes[index % scenes.length];
+  return { src, title: scene[0], copy: scene[1], layout: scene[2] };
 });
 
-lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
-lightbox.querySelector(".previous").addEventListener("click", () => moveLightbox(-1));
-lightbox.querySelector(".next").addEventListener("click", () => moveLightbox(1));
-lightbox.addEventListener("click", (event) => {
-  if (event.target === lightbox) lightbox.close();
-});
-document.addEventListener("keydown", (event) => {
-  if (!lightbox.open) return;
-  if (event.key === "ArrowLeft") moveLightbox(-1);
-  if (event.key === "ArrowRight") moveLightbox(1);
-});
-
-const progress = document.querySelector(".progress span");
-function updateScrollEffects() {
-  const scrollable = document.documentElement.scrollHeight - innerHeight;
-  progress.style.transform = `scaleX(${scrollable ? scrollY / scrollable : 0})`;
-  document.documentElement.style.setProperty("--scroll", scrollY);
-}
-addEventListener("scroll", updateScrollEffects, { passive: true });
-updateScrollEffects();
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
+function renderPortfolio() {
+  const root = document.querySelector(".portfolio");
+  if (!root) return;
+  portfolio.forEach((item, index) => {
+    const number = String(index + 2).padStart(2, "0");
+    const element = document.createElement("article");
+    element.className = `scene ${item.layout} scene-${number} face-safe`;
+    element.innerHTML = `<img loading="lazy" src="${item.src}" alt="Raiane — ${item.title}"><div class="wash"></div><div class="caption"><span>${number}/${total}</span><h3>${item.title}</h3><p>${item.copy}</p></div>`;
+    element.addEventListener("click", () => openLightbox(index));
+    root.appendChild(element);
   });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+}
+renderPortfolio();
+
+const box = document.querySelector("#lightbox");
+function openLightbox(index) {
+  if (!box) return;
+  const item = portfolio[index];
+  const image = box.querySelector("img");
+  image.src = item.src;
+  image.alt = `Raiane — ${item.title}`;
+  box.querySelector("b").textContent = item.title;
+  box.querySelector("span").textContent = item.copy;
+  box.showModal();
+}
+
+function initLightbox() {
+  if (!box) return;
+  box.querySelector("button").onclick = () => box.close();
+  box.onclick = (event) => {
+    if (event.target === box) box.close();
+  };
+}
+initLightbox();
+
+addEventListener("scroll", () => {
+  const distance = document.documentElement.scrollHeight - innerHeight;
+  const progress = document.querySelector(".progress");
+  if (progress)
+    progress.style.transform = `scaleX(${distance ? scrollY / distance : 0})`;
+  document.documentElement.style.setProperty("--scroll-y", `${scrollY}px`);
+});
+
+const revealTargets = document.querySelectorAll(
+  ".scene,.manifesto,.editorial-intro",
+);
+if (typeof IntersectionObserver === "undefined") {
+  revealTargets.forEach((element) => element.classList.add("seen"));
+} else {
+  const reveal = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("seen");
+          reveal.unobserve(entry.target);
+        }
+      }),
+    { threshold: 0.12 },
+  );
+  revealTargets.forEach((element) => reveal.observe(element));
+}
+
+document.documentElement.classList.add("motion-ready");
 
 const hero = document.querySelector(".hero");
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const precisePointer = window.matchMedia("(pointer: fine)").matches;
-
-if (hero && !reducedMotion && precisePointer) {
+if (
+  hero &&
+  matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)")
+    .matches
+) {
   hero.addEventListener("pointermove", (event) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-    hero.querySelectorAll("[data-depth]").forEach((layer) => {
-      const depth = Number(layer.dataset.depth || 0);
-      layer.style.translate = `${x * depth}px ${y * depth}px`;
-    });
-  });
-
-  hero.addEventListener("pointerleave", () => {
-    hero.querySelectorAll("[data-depth]").forEach((layer) => {
-      layer.style.translate = "";
-    });
+    hero.style.setProperty(
+      "--mx",
+      (event.clientX / innerWidth - 0.5).toFixed(3),
+    );
+    hero.style.setProperty(
+      "--my",
+      (event.clientY / innerHeight - 0.5).toFixed(3),
+    );
   });
 }
-
-document.querySelector("#year").textContent = new Date().getFullYear();

@@ -1,26 +1,883 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#a10d1b"><title>Media Kit — Raiane</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .kit{background:#eee6da;color:#0b0b0b}.kit-nav{position:fixed;z-index:10;inset:18px 22px auto;display:flex;justify-content:space-between}.kit-nav a{background:#0b0b0b;color:#fff;padding:12px 18px;border-radius:999px;font-size:11px}.kit-hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;background:#a10d1b;color:#fff;overflow:hidden}.kit-title{padding:15vh 4vw 7vw;position:relative;z-index:2}.kit-title small{letter-spacing:.3em}.kit-title h1{font:clamp(86px,14vw,220px)/.68 Archivo Black;letter-spacing:-.1em;margin:10vh 0 4vh}.kit-title h1 i{font-family:Playfair Display;color:#d3a451}.kit-title p{max-width:500px;line-height:1.7}.kit-photo{position:relative}.kit-photo img{width:100%;height:100%;object-fit:cover;object-position:52% 25%;filter:grayscale(1) contrast(1.05)}.kit-photo:after{content:"1,82 M";position:absolute;right:2vw;bottom:3vw;font:clamp(60px,9vw,130px)/1 Archivo Black;color:#fff;writing-mode:vertical-rl}.facts{padding:8vw 4vw;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#0b0b0b}.fact{background:#171717;color:#fff;padding:4vw 3vw;min-height:210px}.fact strong{display:block;font:clamp(45px,6vw,88px)/1 Archivo Black;color:#d3a451}.fact span{font-size:11px;letter-spacing:.18em;text-transform:uppercase}.bio{padding:10vw 7vw;display:grid;grid-template-columns:.8fr 1.4fr;gap:10vw}.bio h2,.values h2{font:clamp(58px,8vw,120px)/.85 Archivo Black;letter-spacing:-.07em;margin:0}.bio p{font-size:clamp(18px,2vw,27px);line-height:1.65}.values{padding:9vw 6vw;background:#a10d1b;color:#fff}.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:6vw}.value-grid div{border:1px solid #ffffff55;padding:3vw;min-height:180px}.value-grid b{font:40px/1 Archivo Black;color:#d3a451}.value-grid p{text-transform:uppercase;letter-spacing:.15em;font-size:11px}.kit-contact{padding:10vw 6vw;background:#d3a451;color:#0b0b0b;text-align:center}.kit-contact h2{font:clamp(64px,11vw,165px)/.8 Archivo Black;letter-spacing:-.08em;margin:2vw}.kit-contact p{max-width:650px;margin:3vw auto;line-height:1.7}.kit-contact a{display:inline-block;background:#0b0b0b;color:#fff;padding:16px 24px;border-radius:999px}@media(max-width:800px){.kit-hero{grid-template-columns:1fr}.kit-title{padding-top:18vh}.kit-title h1{font-size:28vw}.kit-photo{height:70vh}.facts{grid-template-columns:1fr 1fr}.bio{grid-template-columns:1fr;padding-block:20vw}.value-grid{grid-template-columns:1fr 1fr}}
-  </style>
-</head>
-<body class="kit">
-  <nav class="kit-nav"><a href="index.html">← VOLTAR AO BOOK</a><a href="#contato">CONTATO</a></nav>
-  <main>
-    <section class="kit-hero"><div class="kit-title"><small>MEDIA KIT / 2026</small><h1>RAI<br><i>ANE</i></h1><p>Modelo de passarela · Editorial · Presença digital</p></div><div class="kit-photo"><img src="assets/campanha-country-raiane-botas-douradas.webp" alt="Raiane em editorial de moda"></div></section>
-    <section class="facts" aria-label="Dados profissionais">
-      <div class="fact"><strong>17</strong><span>anos</span></div><div class="fact"><strong>1,82 m</strong><span>altura</span></div><div class="fact"><strong>55 kg</strong><span>peso</span></div>
-      <div class="fact"><strong>ATM</strong><span>formação em moda</span></div><div class="fact"><strong>80 mil</strong><span>seguidores históricos*</span></div><div class="fact"><strong>50 milhões</strong><span>visualizações históricas*</span></div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Media Kit — Raiane</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #17110f;
+        font-family: Arial, sans-serif;
+      }
+      .page {
+        width: 210mm;
+        height: 297mm;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        background: #eee7da;
+        color: #17110f;
+      }
+      .black {
+        background: #090909;
+        color: #fff;
+      }
+      .red {
+        background: #ed2b0c;
+        color: #fff;
+      }
+      .gold {
+        background: #d89b20;
+      }
+      .pad {
+        padding: 16mm;
+      }
+      .photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #000d, transparent 70%);
+      }
+      .eyebrow {
+        font-size: 9pt;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .rule {
+        width: 28mm;
+        height: 3mm;
+        background: #ed2b0c;
+        margin: 6mm 0;
+      }
+      .title,
+      .quote {
+        font:
+          900 31mm/0.82 Impact,
+          Arial Black,
+          sans-serif;
+        letter-spacing: -0.055em;
+        margin: 7mm 0;
+      }
+      .hero h1 {
+        position: absolute;
+        z-index: 2;
+        left: 12mm;
+        top: 20mm;
+        margin: 0;
+        font: 900 76mm/0.7 Impact;
+        color: #f23814;
+        letter-spacing: -0.08em;
+      }
+      .hero h1:nth-of-type(2) {
+        top: 84mm;
+        color: #eee7da;
+      }
+      .tag {
+        position: absolute;
+        z-index: 4;
+        left: 16mm;
+        bottom: 17mm;
+        color: #fff;
+        font-size: 12pt;
+        letter-spacing: 0.15em;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7mm;
+      }
+      .bio {
+        font-size: 13pt;
+        line-height: 1.5;
+      }
+      .portrait {
+        width: 100%;
+        height: 126mm;
+        object-fit: cover;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2mm;
+        margin-top: 9mm;
+      }
+      .fact {
+        background: #111;
+        color: #fff;
+        padding: 7mm 5mm;
+      }
+      .fact b {
+        display: block;
+        color: #ff4a1f;
+        font: 900 16mm/0.85 Impact;
+      }
+      .fact span {
+        font-size: 7pt;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .metric {
+        border-top: 1px solid #ffffff55;
+        padding: 7mm 0;
+      }
+      .metric b {
+        font: 900 21mm/0.8 Impact;
+        color: #ff3b15;
+      }
+      .metric span {
+        display: block;
+        font-size: 8pt;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .note {
+        font-size: 8pt;
+        line-height: 1.5;
+        opacity: 0.75;
+      }
+      .cards {
+        display: flex;
+        gap: 5mm;
+        transform: rotate(-4deg);
+        margin-top: 15mm;
+      }
+      .card {
+        flex: 1;
+        height: 108mm;
+        border-radius: 8mm;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 8mm 15mm #0006;
+      }
+      .card:nth-child(2) {
+        transform: translateY(-12mm);
+      }
+      .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .cover {
+        position: absolute;
+        z-index: 5;
+        display: grid;
+        place-items: center;
+        background: #ed2b0c;
+        color: #111;
+        font-size: 6pt;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .cover.tr {
+        right: 0;
+        top: 0;
+        width: 39%;
+        height: 23%;
+      }
+      .cover.brand-top {
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 26%;
+        background: #090909;
+        color: #ed2b0c;
+      }
+      .cover.brand-mid {
+        left: 22%;
+        top: 39%;
+        width: 66%;
+        height: 20%;
+        background: #090909;
+        color: #ed2b0c;
+      }
+      .cover.brand-low {
+        left: 6%;
+        bottom: 3%;
+        width: 82%;
+        height: 19%;
+        background: #eee7da;
+      }
+      .hero-mid {
+        left: 10%;
+        bottom: 17%;
+        width: 80%;
+        height: 14%;
+        background: #090909;
+        color: #ed2b0c;
+        font-size: 8pt;
+      }
+      .gallery-title {
+        font: 900 25mm/0.82 Impact;
+        margin: 3mm 0;
+        letter-spacing: -0.05em;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4mm;
+        margin-top: 5mm;
+      }
+      .shot {
+        height: 48mm;
+        position: relative;
+        overflow: hidden;
+        background: #111;
+      }
+      .shot.wide {
+        grid-column: 1/-1;
+      }
+      .shot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .shot label {
+        position: absolute;
+        z-index: 7;
+        left: 3mm;
+        bottom: 3mm;
+        background: #ed2b0c;
+        color: #fff;
+        padding: 2mm 3mm;
+        font-size: 7pt;
+        letter-spacing: 0.14em;
+      }
+      .folio {
+        position: absolute;
+        right: 15mm;
+        bottom: 8mm;
+        font-size: 8pt;
+        letter-spacing: 0.18em;
+      }
+      .contact {
+        position: absolute;
+        left: 15mm;
+        right: 15mm;
+        bottom: 14mm;
+        border-top: 2px solid;
+        padding-top: 6mm;
+        display: flex;
+        justify-content: space-between;
+        font-size: 9pt;
+      }
+      @media print {
+        body {
+          background: none;
+        }
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    </style>
+    <style>
+      /* Escudos editoriais opacos: neutralizam marcas presentes nos cenários. */
+      .cover.tr {
+        right: -2%;
+        top: -2%;
+        width: 48%;
+        height: 32%;
+        clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 80%);
+      }
+      .cover.brand-top {
+        left: -2%;
+        top: -2%;
+        width: 57%;
+        height: 35%;
+        clip-path: polygon(0 0, 100% 0, 84% 100%, 0 78%);
+      }
+      .cover.brand-mid {
+        left: auto;
+        right: -3%;
+        top: 34%;
+        width: 70%;
+        height: 50%;
+        transform: rotate(-4deg);
+        clip-path: polygon(8% 0, 100% 7%, 92% 100%, 0 90%);
+      }
+      .cover.brand-low {
+        left: -2%;
+        bottom: -2%;
+        width: 104%;
+        height: 43%;
+        transform: none;
+        clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
+      }
+      .cover::before {
+        content: "RAIANE";
+        font:
+          700 42pt/0.8 Italiana,
+          serif;
+        letter-spacing: -0.04em;
+      }
+      .cover::after {
+        content: "RUNWAY / EDITORIAL";
+        position: absolute;
+        right: 7%;
+        bottom: 11%;
+        font: 700 7pt Arial;
+        letter-spacing: 0.2em;
+      }
+      .photo,
+      .portrait,
+      .card img,
+      .shot img {
+        object-fit: contain;
+        object-position: center top;
+        background: #0b0b0b;
+      }
+      .digital-safe {
+        left: auto;
+        right: 7mm;
+        top: auto;
+        bottom: 7mm;
+        width: 34%;
+        height: 14%;
+        background: #ed2b0c;
+        color: #111;
+        clip-path: none;
+      }
+    </style>
+    <style>
+      html {
+        background: #17110f;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 0 70px;
+      }
+      .page {
+        box-shadow: 0 18px 70px rgba(0, 0, 0, 0.48);
+      }
+      .title,
+      .quote {
+        max-width: 100%;
+        font-size: 24mm;
+        line-height: 0.88;
+        letter-spacing: -0.035em;
+        overflow-wrap: normal;
+        word-break: keep-all;
+        hyphens: none;
+      }
+      .hero h1 {
+        left: 8mm;
+        right: 8mm;
+        top: 20mm;
+        z-index: 8;
+        font-size: 34mm;
+        line-height: 0.82;
+        letter-spacing: -0.045em;
+        white-space: nowrap;
+        text-align: center;
+        color: #f7f0e7;
+        -webkit-text-stroke: 1.4px #14100e;
+        text-shadow:
+          0 5px 26px rgba(0, 0, 0, 0.72),
+          0 1px 0 #14100e;
+      }
+      .gallery-title {
+        max-width: 100%;
+        font-size: 20mm;
+        line-height: 0.9;
+        letter-spacing: -0.025em;
+        white-space: nowrap;
+        word-break: keep-all;
+        hyphens: none;
+      }
+      .cover {
+        overflow: hidden;
+        text-align: center;
+        padding: 4mm;
+      }
+      .cover::before {
+        content: "R.";
+        font:
+          700 18pt/0.9 Georgia,
+          serif;
+        letter-spacing: 0;
+      }
+      .download-cta {
+        position: fixed;
+        z-index: 9999;
+        right: 18px;
+        bottom: 18px;
+        padding: 13px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 999px;
+        background: #f23916;
+        color: #fff;
+        text-decoration: none;
+        font:
+          800 13px/1 Arial,
+          sans-serif;
+        letter-spacing: 0.04em;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+        transition: 0.25s ease;
+      }
+      .download-cta:hover {
+        transform: translateY(-3px);
+        background: #ff5a31;
+        box-shadow: 0 16px 40px rgba(242, 57, 22, 0.45);
+      }
+      .visual-bw {
+        filter: grayscale(1) contrast(1.12) brightness(0.94);
+      }
+      .visual-pop {
+        filter: saturate(1.28) contrast(1.08) brightness(1.03);
+      }
+      .visual-showcase {
+        filter: saturate(1.5) contrast(1.13);
+        transform: scale(0.985);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.18),
+          0 20px 55px rgba(242, 57, 22, 0.24);
+      }
+      .shot,
+      .card {
+        background: radial-gradient(
+          circle at 50% 30%,
+          #8e2415 0,
+          #24100d 44%,
+          #080706 100%
+        );
+      }
+      .cream .shot,
+      .cream .card {
+        background: radial-gradient(
+          circle at 50% 25%,
+          #ffc94f 0,
+          #ee5028 42%,
+          #2c1210 100%
+        );
+      }
+      @media print {
+        body {
+          display: block;
+          padding: 0;
+          background: none;
+        }
+        .page {
+          margin: 0;
+          box-shadow: none;
+        }
+        .no-print {
+          display: none !important;
+        }
+      }
+      @media (max-width: 820px) {
+        body {
+          align-items: flex-start;
+        }
+      }
+    </style>
+    <style>
+      .hero .photo,
+      .gold .card img {
+        filter: saturate(1.3) contrast(1.08) brightness(1.04);
+      }
+      .grid .portrait,
+      .cards .card:nth-child(2) img,
+      .gallery .shot:nth-child(4) img {
+        filter: grayscale(1) contrast(1.18) brightness(0.92);
+      }
+      .cards .card:nth-child(1) img,
+      .gallery .shot:nth-child(2) img,
+      .gallery .wide img {
+        filter: saturate(1.42) contrast(1.1) brightness(1.03);
+      }
+      .cards .card:nth-child(3) img,
+      .gallery .shot:nth-child(3) img,
+      .black > .card > img {
+        filter: saturate(1.6) contrast(1.16);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+          0 18px 48px rgba(242, 57, 22, 0.28);
+      }
+
+      /* Tarjas legíveis no navegador e no PDF: título e assinatura em zonas separadas. */
+      .cover {
+        display: block;
+        place-items: initial;
+        font-size: 0 !important;
+        line-height: 1;
+        isolation: isolate;
+      }
+      .cover::before {
+        content: "R.";
+        position: absolute;
+        left: 10%;
+        top: 18%;
+        font:
+          900 22pt/1 Arial Black,
+          Arial,
+          sans-serif;
+        letter-spacing: -0.05em;
+        white-space: nowrap;
+      }
+      .cover::after {
+        content: "RUNWAY / EDITORIAL";
+        position: absolute;
+        left: 10%;
+        right: 7%;
+        bottom: 13%;
+        font:
+          800 6.5pt/1.15 Arial,
+          sans-serif;
+        letter-spacing: 0.16em;
+        white-space: nowrap;
+      }
+      .cover.brand-mid::before {
+        top: 14%;
+      }
+      .cover.brand-mid::after {
+        bottom: 12%;
+      }
+      .cover.tr::before,
+      .cover.tr::after {
+        left: 28%;
+      }
+      .cover.tr::after {
+        right: 4%;
+        font-size: 5.2pt;
+        letter-spacing: 0.1em;
+      }
+      .cover.brand-low::before {
+        top: 30%;
+      }
+      .cover.brand-low::after {
+        bottom: 14%;
+      }
+      .digital-safe::before {
+        font-size: 15pt;
+        top: 18%;
+      }
+      .digital-safe::after {
+        font-size: 5pt;
+        bottom: 12%;
+      }
+      .archive-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4mm;
+        margin-top: 7mm;
+      }
+      .archive-photo {
+        height: 72mm;
+        margin: 0;
+        background: #090909;
+        position: relative;
+        overflow: hidden;
+      }
+      .archive-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center top;
+      }
+      .archive-photo figcaption {
+        position: absolute;
+        left: 2mm;
+        bottom: 2mm;
+        padding: 1.5mm 2mm;
+        background: #ed2b0c;
+        color: #fff;
+        font:
+          800 6pt/1 Arial,
+          sans-serif;
+        letter-spacing: 0.12em;
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      class="download-cta no-print"
+      href="downloads/media-kit-rayane.pdf"
+      download
+      >Baixar Media Kit em PDF</a
+    >
+    <section class="page hero black">
+      <img class="photo" src="assets/raiane-sensacao-13.jpg" />
+      <div class="shade"></div>
+      <h1>RAIANE</h1>
+      <div class="cover tr">Editorial 2026</div>
+      <div class="cover hero-mid">Presença · Movimento · Identidade</div>
+      <div class="tag">MEDIA KIT 2026 · MODELO DE PASSARELA</div>
     </section>
-    <section class="bio"><h2>BIO<br><i>GRA<br>FIA</i></h2><div><p>Vinda do interior, Raiane carrega para a passarela a força de uma formação baseada em disciplina, família e autenticidade. Aos 17 anos, concilia os estudos em escola militar com sua preparação profissional como modelo de passarela no curso da ATM Modas.</p><p>Seu perfil digital começou cedo: aos 15 anos, alcançou cerca de 80 mil seguidores e quase 50 milhões de visualizações — números históricos informados pela família. Mesmo diante desse alcance, decidiu priorizar os estudos e a formação antes de retomar sua presença pública de forma profissional.</p><p>Raiane gosta de dança, passarela, piscina e música. Com princípios moderados e valores conservadores nos costumes, projeta uma carreira responsável, elegante e preparada para oportunidades que respeitem sua idade, seus estudos e sua identidade.</p></div></section>
-    <section class="values"><h2>INTERESSES<br>& IDENTIDADE</h2><div class="value-grid"><div><b>01</b><p>Passarela</p></div><div><b>02</b><p>Dança</p></div><div><b>03</b><p>Música</p></div><div><b>04</b><p>Piscina</p></div></div></section>
-    <section class="kit-contact" id="contato"><small>AGENCIAMENTO · EDITORIAIS · CAMPANHAS</small><h2>VAMOS<br>CONVERSAR?</h2><p>Por Raiane ser menor de idade, propostas profissionais, uso de imagem, deslocamentos e contratos devem ser tratados exclusivamente com responsável legal ou representante autorizado.</p><a href="index.html#top">ACESSAR O BOOK COMPLETO ↗</a><p><small>*Métricas históricas informadas, sem auditoria independente nesta publicação.</small></p></section>
-  </main>
-</body>
+    <section class="page pad">
+      <div class="eyebrow">Perfil profissional / 01</div>
+      <div class="rule"></div>
+      <h2 class="title">PRESENÇA<br />QUE FICA.</h2>
+      <div class="grid">
+        <div>
+          <p class="bio">
+            Vinda do interior, Raiane transforma disciplina, elegância e
+            autenticidade em presença de passarela. Aos 17 anos, concilia os
+            estudos em escola militar com sua formação profissional no curso de
+            modelo da <b>ATM Modas</b>.
+          </p>
+          <p class="bio">
+            Seu projeto respeita o tempo da formação, os vínculos familiares e
+            uma identidade guiada por princípios moderados e valores
+            conservadores nos costumes.
+          </p>
+        </div>
+        <img class="portrait" src="assets/raiane-sensacao-13.jpg" />
+      </div>
+      <div class="facts">
+        <div class="fact"><b>17</b><span>anos</span></div>
+        <div class="fact"><b>1,82</b><span>metro</span></div>
+        <div class="fact"><b>55</b><span>quilos</span></div>
+      </div>
+      <span class="folio">02</span>
+    </section>
+    <section class="page black pad">
+      <div class="eyebrow">Trajetória digital / 02</div>
+      <div class="rule"></div>
+      <div class="grid" style="grid-template-columns: 0.8fr 1.2fr">
+        <div>
+          <div class="metric">
+            <b>80 MIL</b><span>seguidores aos 15 anos*</span>
+          </div>
+          <div class="metric">
+            <b>50 MI</b><span>visualizações acumuladas*</span>
+          </div>
+          <p style="font-size: 15pt; line-height: 1.5">
+            O alcance veio cedo. Raiane escolheu priorizar os estudos antes de
+            retomar sua presença pública com direção profissional, segurança e
+            propósito.
+          </p>
+          <p class="note">
+            *Métricas históricas informadas pela família, sem auditoria
+            independente.
+          </p>
+        </div>
+        <div class="card" style="height: 205mm">
+          <img src="assets/raiane-sensacao-10.jpg" />
+          <div class="cover digital-safe">Foco</div>
+        </div>
+      </div>
+      <span class="folio">03</span>
+    </section>
+    <section class="page red pad">
+      <div class="eyebrow">Universo criativo / 03</div>
+      <h2 class="quote">CADA PASSO<br />É UMA SENSAÇÃO.</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="assets/raiane-sensacao-03.jpg" />
+          <div class="cover brand-low">Passarela</div>
+        </div>
+        <div class="card">
+          <img src="assets/raiane-sensacao-05.jpg" />
+          <div class="cover brand-top">Country</div>
+        </div>
+        <div class="card">
+          <img src="assets/raiane-sensacao-12.jpg" />
+          <div class="cover tr">Editorial</div>
+        </div>
+      </div>
+      <p style="position: absolute; bottom: 18mm; letter-spacing: 0.22em">
+        PASSARELA · DANÇA · MÚSICA · PISCINA
+      </p>
+      <span class="folio">04</span>
+    </section>
+    <section class="page gold pad">
+      <div class="eyebrow">Posicionamento / 04</div>
+      <h2 class="title">MODA COM<br />IDENTIDADE.</h2>
+      <div class="grid">
+        <p class="bio">
+          Disponível para oportunidades de passarela, editoriais e campanhas
+          compatíveis com sua idade, seus estudos e seus valores. Uma imagem
+          contemporânea, versátil e conectada às raízes.
+        </p>
+        <div class="card" style="height: 145mm">
+          <img src="assets/raiane-sensacao-15.jpg" />
+          <div class="cover tr">Raízes</div>
+        </div>
+      </div>
+      <div class="contact">
+        <b>RAIANE · MODELO</b><span>ATM MODAS · 2026</span>
+      </div>
+    </section>
+    <section class="page black pad">
+      <div class="eyebrow">Portfólio / 05</div>
+      <h2 class="gallery-title">MOVIMENTO</h2>
+      <div class="gallery">
+        <div class="shot">
+          <img src="assets/raiane-sensacao-01.jpg" />
+          <div class="cover tr">Detalhe</div>
+          <label>01</label>
+        </div>
+        <div class="shot">
+          <img src="assets/raiane-sensacao-02.jpg" />
+          <div class="cover brand-mid">Loja coberta</div>
+          <label>02</label>
+        </div>
+        <div class="shot">
+          <img src="assets/raiane-sensacao-04.jpg" />
+          <div class="cover tr">Forma</div>
+          <label>04</label>
+        </div>
+        <div class="shot">
+          <img src="assets/raiane-sensacao-07.jpg" />
+          <div class="cover tr">Atitude</div>
+          <div class="cover brand-low">Editorial</div>
+          <label>07</label>
+        </div>
+        <div class="shot wide">
+          <img src="assets/raiane-sensacao-08.jpg" />
+          <div class="cover brand-top">Ritmo</div>
+          <div class="cover brand-low">Passo</div>
+          <label>08</label>
+        </div>
+      </div>
+      <span class="folio">06</span>
+    </section>
+    <section class="page pad">
+      <div class="eyebrow">Portfólio / 06</div>
+      <h2 class="gallery-title">VERSATILIDADE</h2>
+      <div class="gallery">
+        <div class="shot">
+          <img src="assets/raiane-sensacao-09.jpg" />
+          <div class="cover tr">Silhueta</div>
+          <label>09</label>
+        </div>
+        <div class="shot">
+          <img src="assets/raiane-sensacao-14.jpg" />
+          <div class="cover tr">Textura</div>
+          <label>14</label>
+        </div>
+        <div class="shot wide">
+          <img src="assets/raiane-sensacao-01.jpg" />
+          <div class="cover tr">Produto</div>
+          <label>DETALHE</label>
+        </div>
+      </div>
+      <p class="bio" style="margin-top: 8mm">
+        Do estúdio ao universo country, cada enquadramento revela uma camada
+        diferente: precisão, força, leveza e presença.
+      </p>
+      <span class="folio">07</span>
+    </section>
+    <section class="page pad black">
+      <div class="eyebrow">Acervo completo / 07</div>
+      <div class="rule"></div>
+      <h2 class="gallery-title">TODAS AS FOTOS</h2>
+      <div class="archive-grid">
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-01.jpg" />
+          <figcaption>01</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-02.jpg" />
+          <figcaption>02</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-03.jpg" />
+          <figcaption>03</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-04.jpg" />
+          <figcaption>04</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-05.jpg" />
+          <figcaption>05</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-06.jpg" />
+          <figcaption>06</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-07.jpg" />
+          <figcaption>07</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-08.jpg" />
+          <figcaption>08</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-09.jpg" />
+          <figcaption>09</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="page pad">
+      <div class="eyebrow">Acervo completo / 08</div>
+      <div class="rule"></div>
+      <h2 class="gallery-title">CONTINUAÇÃO</h2>
+      <div class="archive-grid">
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-10.jpg" />
+          <figcaption>10</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-11.jpg" />
+          <figcaption>11</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-12.jpg" />
+          <figcaption>12</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-13.jpg" />
+          <figcaption>13</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-14.jpg" />
+          <figcaption>14</figcaption>
+        </figure>
+        <figure class="archive-photo">
+          <img src="assets/raiane-sensacao-15.jpg" />
+          <figcaption>15</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="page black">
+      <div
+        class="card"
+        style="position: absolute; inset: 0; height: auto; border-radius: 0"
+      >
+        <img src="assets/raiane-sensacao-11.jpg" />
+        <div class="cover tr">Contato profissional</div>
+      </div>
+      <div
+        style="
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(0deg, #000 0%, transparent 70%);
+        "
+      ></div>
+      <div
+        style="
+          position: absolute;
+          z-index: 8;
+          left: 15mm;
+          right: 15mm;
+          bottom: 18mm;
+        "
+      >
+        <div class="eyebrow">Contato / 07</div>
+        <h2 class="quote" style="margin: 5mm 0">
+          VAMOS CRIAR<br />ALGO MARCANTE?
+        </h2>
+        <p style="max-width: 160mm; font-size: 12pt; line-height: 1.5">
+          Por Raiane ser menor de idade, propostas, uso de imagem, deslocamentos
+          e contratos devem ser tratados exclusivamente com responsável legal ou
+          representante autorizado.
+        </p>
+      </div>
+    </section>
+  </body>
 </html>
