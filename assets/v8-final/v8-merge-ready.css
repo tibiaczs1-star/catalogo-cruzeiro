@@ -15812,7 +15812,7 @@ body.v8-merge-ready .page > .hero-grid {
   margin: 18px auto 24px !important;
 }
 
-body.v8-merge-ready #leadStory.lead-card {
+body.v8-merge-ready #leadStory.lead-card:not(.v8-live-hero) {
   display: flex !important;
   flex-direction: column !important;
   min-height: 0 !important;

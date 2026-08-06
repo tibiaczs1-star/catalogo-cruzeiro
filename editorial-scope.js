@@ -36,15 +36,28 @@
     return { scope: "brasil-mundo", localTier: 0, priority: 0, editorialPriority: "" };
   }
 
+  function isLowSignalAdministrativeNotice(item = {}) {
+    const haystack = `${item.title || ""} ${item.summary || ""} ${item.lede || ""} ${item.sourceLabel || ""}`;
+    const normalized = haystack
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
+    return /\b(cotacao de precos?|aviso de cotacao|aviso de licitacao|extrato de contrato|decreto n[ºo]?|portaria n[ºo]?|ata de registro|termo de homologacao)\b/.test(
+      normalized
+    );
+  }
+
   function decorateNewsItem(item = {}) {
     const placement = getEditorialScope(item);
+    const lowSignalAdministrativeNotice = isLowSignalAdministrativeNotice(item);
     return {
       ...item,
       editorialScope: placement.scope,
       editorialLocalTier: placement.localTier,
-      editorialSurfaceTier: placement.localTier,
-      priority: placement.priority,
-      editorialPriority: placement.editorialPriority
+      editorialSurfaceTier: lowSignalAdministrativeNotice ? 1 : placement.localTier,
+      priority: lowSignalAdministrativeNotice ? Math.min(900, placement.priority) : placement.priority,
+      editorialPriority: lowSignalAdministrativeNotice ? "arquivo-administrativo" : placement.editorialPriority
     };
   }
 
@@ -62,6 +75,10 @@
       const rightFresh = Number(newest - timestamp(right) <= 96 * HOUR_MS);
       if (rightFresh !== leftFresh) return rightFresh - leftFresh;
 
+      const noticeDiff =
+        Number(isLowSignalAdministrativeNotice(left)) - Number(isLowSignalAdministrativeNotice(right));
+      if (noticeDiff !== 0) return noticeDiff;
+
       const localTierDiff = Number(right.editorialLocalTier || 0) - Number(left.editorialLocalTier || 0);
       if (localTierDiff !== 0) return localTierDiff;
 
@@ -72,5 +89,5 @@
     });
   }
 
-  return { getEditorialScope, decorateNewsItem, orderPortalStories };
+  return { getEditorialScope, decorateNewsItem, orderPortalStories, isLowSignalAdministrativeNotice };
 });

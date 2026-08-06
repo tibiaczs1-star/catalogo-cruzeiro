@@ -6,7 +6,12 @@ const path = require("node:path");
 const vm = require("node:vm");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
-const { decorateNewsItem, getEditorialScope, orderPortalStories } = require(path.join(ROOT_DIR, "editorial-scope.js"));
+const {
+  decorateNewsItem,
+  getEditorialScope,
+  isLowSignalAdministrativeNotice,
+  orderPortalStories
+} = require(path.join(ROOT_DIR, "editorial-scope.js"));
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(ROOT_DIR, "data");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
@@ -997,6 +1002,9 @@ function mergeNewsItems(...collections) {
     if (dateLayerDiff !== 0) return dateLayerDiff;
     const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
     if (mailzaDiff !== 0) return mailzaDiff;
+    const administrativeNoticeDiff =
+      Number(isLowSignalAdministrativeNotice(left)) - Number(isLowSignalAdministrativeNotice(right));
+    if (administrativeNoticeDiff !== 0) return administrativeNoticeDiff;
     const regionalDiff = getRegionalPriorityScore(right) - getRegionalPriorityScore(left);
     if (regionalDiff !== 0) return regionalDiff;
     const categoryDiff = getCategoryFlowScore(right) - getCategoryFlowScore(left);
