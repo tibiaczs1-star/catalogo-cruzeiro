@@ -8,11 +8,20 @@ const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const app = fs.readFileSync(path.join(root, "app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "styles.css"), "utf8");
 const kit = fs.readFileSync(path.join(root, "media-kit.html"), "utf8");
+const server = fs.readFileSync(path.join(root, "..", "server.js"), "utf8");
 
 function galleryAssets() {
   const block = app.match(/const assets = \[([\s\S]*?)\];/);
   assert.ok(block, "lista principal de fotos ausente");
   return [...block[1].matchAll(/"(assets\/[^"]+\.(?:jpe?g|webp))"/gi)].map(
+    (match) => match[1],
+  );
+}
+
+function mediaKitArchiveAssets() {
+  const block = kit.match(/const archiveAssets = \[([\s\S]*?)\];/);
+  assert.ok(block, "lista completa do media kit ausente");
+  return [...block[1].matchAll(/"(assets\/[^\"]+\.(?:jpe?g|webp))"/gi)].map(
     (match) => match[1],
   );
 }
@@ -33,6 +42,46 @@ test("o book principal mantém o acervo completo com as 15 fotos novas", () => {
   for (const ref of refs) {
     assert.ok(fs.existsSync(path.join(root, ref)), ref);
   }
+});
+
+test("o media kit e o PDF incorporam as 63 fotos únicas do book", () => {
+  const expected = [
+    "assets/campanha-country-raiane-por-do-sol.webp",
+    ...galleryAssets(),
+    "assets/campanha-country-raiane-botas-rosa-loja.webp",
+  ];
+  const refs = mediaKitArchiveAssets();
+
+  assert.equal(refs.length, 63);
+  assert.equal(new Set(refs).size, 63);
+  assert.deepEqual(new Set(refs), new Set(expected));
+  for (const ref of refs) assert.ok(fs.existsSync(path.join(root, ref)), ref);
+});
+
+test("a página oficial sempre busca o HTML atual e usa assets versionados juntos", () => {
+  const styleVersion = html.match(/styles\.css\?v=([^\"]+)/)?.[1];
+  const scriptVersion = html.match(/app\.js\?v=([^\"]+)/)?.[1];
+  assert.ok(styleVersion, "versão do CSS ausente");
+  assert.equal(scriptVersion, styleVersion);
+  assert.doesNotMatch(styleVersion, /20260806-r(?:8|11)$/);
+  assert.match(
+    server,
+    /pathname === "\/bookray\/"[\s\S]*?cacheControl:\s*"no-store"/,
+  );
+});
+
+test("o capítulo de passarela usa a nova foto e fala profissionalmente de Raiane", () => {
+  const runway = html.match(/<section class="runway-break"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.doesNotMatch(runway, /campanha-country-raiane-botas-douradas\.webp/);
+  assert.match(runway, /campanha-country-raiane-editorial-estudio\.webp/);
+  assert.doesNotMatch(html, /book construído|cada imagem ganha ritmo/i);
+  assert.match(html, /Versátil para editoriais, campanhas e passarela/i);
+});
+
+test("a foto retirada do destaque aparece somente no acervo completo", () => {
+  const references = kit.match(/assets\/raiane-sensacao-10\.jpg/g) ?? [];
+  assert.equal(references.length, 1);
+  assert.match(kit, /<img src="assets\/campanha-country-raiane-editorial-estudio\.webp" \/>/);
 });
 
 test("a direção visual tem abertura, profundidade e capítulo editorial", () => {
@@ -74,7 +123,7 @@ test("o enquadramento preserva rosto, corpo e identidade", () => {
     css,
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.scene img\s*\{[^}]*transform:\s*none/s,
   );
-  assert.match(html, /Sem alterar rosto, corpo ou identidade/i);
+  assert.match(html, /identidade própria diante das câmeras/i);
   assert.doesNotMatch(app, /imagegen|face-swap|body-edit/i);
 });
 

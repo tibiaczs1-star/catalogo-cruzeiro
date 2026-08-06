@@ -20823,7 +20823,7 @@ async function handleStatic(req, res, pathname, requestUrl) {
 
       if (pathname === "/bookray/") {
         return sendFile(req, res, path.join(ROOT_DIR, "bookray", "index.html"), {
-          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+          cacheControl: "no-store"
         });
       }
 
@@ -20848,8 +20848,12 @@ async function handleStatic(req, res, pathname, requestUrl) {
         if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
           filePath = path.join(filePath, "index.html");
         }
+        const bookrayExtension = path.extname(filePath).toLowerCase();
         return sendFile(req, res, filePath, {
-          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+          cacheControl:
+            bookrayExtension === ".html" || bookrayExtension === ".pdf"
+              ? "no-store"
+              : VERSIONED_STATIC_CACHE_CONTROL
         });
       }
 

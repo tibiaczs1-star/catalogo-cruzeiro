@@ -24,8 +24,8 @@ test("publishes Raiane Leoncio's approved portfolio as the /bookray/ subpage", (
   assert.match(html, /Raiane Leoncio/i);
   assert.match(html, /17 anos/i);
   assert.match(html, /modelo de passarela/i);
-  assert.match(html, /href="styles\.css"/);
-  assert.match(html, /src="app\.js"/);
+  assert.match(html, /href="styles\.css(?:\?[^\"]+)?"/);
+  assert.match(html, /src="app\.js(?:\?[^\"]+)?"/);
   assert.match(server, /pathname === "\/bookray"/);
   assert.match(server, /pathname === "\/bookray\/"/);
   assert.match(server, /path\.join\(ROOT_DIR, "bookray", "index\.html"\)/);
@@ -33,15 +33,13 @@ test("publishes Raiane Leoncio's approved portfolio as the /bookray/ subpage", (
 
   assert.doesNotMatch(app, /IMG_0727(?:-web)?\.(?:MOV|mp4)/i);
   assert.doesNotMatch(app, /872BC754-C597-4446-A5D9-D42FB1117EB1\.MP4/);
-  assert.match(app, /runway-film\.mp4/);
-
-  const referencedAssets = [...app.matchAll(/['"]([^'"`]+\.(?:jpe?g|gif|mp4))['"]/gi)]
+  const referencedAssets = [...app.matchAll(/['"]([^'"`]+\.(?:jpe?g|webp|gif|mp4))['"]/gi)]
     .map((match) => match[1]);
-  assert.equal(new Set(referencedAssets).size, 36);
+  assert.equal(new Set(referencedAssets).size, 61);
 
   for (const asset of new Set(referencedAssets)) {
-    const assetPath = path.join(bookRoot, "assets", asset);
-    assert.ok(fs.existsSync(assetPath), `bookray/assets/${asset} must exist`);
+    const assetPath = path.join(bookRoot, asset);
+    assert.ok(fs.existsSync(assetPath), `bookray/${asset} must exist`);
     assert.ok(fs.statSync(assetPath).size < 25 * 1024 * 1024, `${asset} must stay below 25 MB`);
   }
 });

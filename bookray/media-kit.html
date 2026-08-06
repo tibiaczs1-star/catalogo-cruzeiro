@@ -599,6 +599,17 @@
           sans-serif;
         letter-spacing: 0.12em;
       }
+      .archive-page .gallery-title {
+        font-size: 14mm;
+        margin: 2mm 0;
+      }
+      .archive-page .archive-grid {
+        gap: 3mm;
+        margin-top: 4mm;
+      }
+      .archive-page .archive-photo {
+        height: 66mm;
+      }
     </style>
   </head>
   <body>
@@ -665,7 +676,7 @@
           </p>
         </div>
         <div class="card" style="height: 205mm">
-          <img src="assets/raiane-sensacao-10.jpg" />
+          <img src="assets/campanha-country-raiane-editorial-estudio.webp" />
           <div class="cover digital-safe">Foco</div>
         </div>
       </div>
@@ -771,81 +782,7 @@
       </p>
       <span class="folio">07</span>
     </section>
-    <section class="page pad black">
-      <div class="eyebrow">Acervo completo / 07</div>
-      <div class="rule"></div>
-      <h2 class="gallery-title">TODAS AS FOTOS</h2>
-      <div class="archive-grid">
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-01.jpg" />
-          <figcaption>01</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-02.jpg" />
-          <figcaption>02</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-03.jpg" />
-          <figcaption>03</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-04.jpg" />
-          <figcaption>04</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-05.jpg" />
-          <figcaption>05</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-06.jpg" />
-          <figcaption>06</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-07.jpg" />
-          <figcaption>07</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-08.jpg" />
-          <figcaption>08</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-09.jpg" />
-          <figcaption>09</figcaption>
-        </figure>
-      </div>
-    </section>
-    <section class="page pad">
-      <div class="eyebrow">Acervo completo / 08</div>
-      <div class="rule"></div>
-      <h2 class="gallery-title">CONTINUAÇÃO</h2>
-      <div class="archive-grid">
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-10.jpg" />
-          <figcaption>10</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-11.jpg" />
-          <figcaption>11</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-12.jpg" />
-          <figcaption>12</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-13.jpg" />
-          <figcaption>13</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-14.jpg" />
-          <figcaption>14</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-15.jpg" />
-          <figcaption>15</figcaption>
-        </figure>
-      </div>
-    </section>
-    <section class="page black">
+    <section class="page black" id="contact-page">
       <div
         class="card"
         style="position: absolute; inset: 0; height: auto; border-radius: 0"
@@ -869,7 +806,7 @@
           bottom: 18mm;
         "
       >
-        <div class="eyebrow">Contato / 07</div>
+        <div class="eyebrow">Contato / 15</div>
         <h2 class="quote" style="margin: 5mm 0">
           VAMOS CRIAR<br />ALGO MARCANTE?
         </h2>
@@ -881,6 +818,94 @@
       </div>
     </section>
     <script>
+      const archiveAssets = [
+        "assets/campanha-country-raiane-por-do-sol.webp",
+        "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
+        "assets/IMG_0406.jpeg",
+        "assets/IMG_0407.jpeg",
+        "assets/IMG_0449.jpeg",
+        "assets/5f9195c0-957a-44e8-ba89-f8e0291b8a32.JPG.jpeg",
+        "assets/IMG_0602.jpeg",
+        "assets/IMG_0605.jpeg",
+        "assets/IMG_0657.jpeg",
+        "assets/259b0ccb-9b2a-4b97-b0e2-fc2d09eee812.JPG.jpeg",
+        "assets/bc0cea41-9f73-4f8a-a754-04290a741733.JPG.jpeg",
+        "assets/1c69e6fc-05f9-4ad6-9d4f-5e595f645762.JPG.jpeg",
+        "assets/21496ee4-5f41-4ea0-850e-85ffb099a475.JPG.jpeg",
+        "assets/5200325f-1857-4517-8fbc-c4fcabd0ab73.JPG.jpeg",
+        "assets/1999e35b-ef92-41c8-b717-9df2e47bd880.JPG.jpeg",
+        "assets/6a2f159a-5513-4df7-8214-a58ea0caca22.JPG.jpeg",
+        "assets/5b61d66c-39e7-4868-a193-230185470d4d.JPG.jpeg",
+        "assets/IMG_0767.jpeg",
+        "assets/IMG_0812.jpeg",
+        "assets/IMG_0816.jpeg",
+        "assets/IMG_0817.jpeg",
+        "assets/IMG_0818.jpeg",
+        "assets/IMG_0830.jpeg",
+        "assets/IMG_0903.jpeg",
+        "assets/87189062-434a-437b-aea5-2b0afaaadfe2.JPG.jpeg",
+        "assets/304aa290-f2bc-43fc-b953-0b427eba0cc3.JPG.jpeg",
+        "assets/3b0d5937-0611-43cc-8b7e-81dd4cb1b44f.JPG.jpeg",
+        "assets/96cd42f8-7399-42a1-a6cf-26aceb41ecc2.JPG.jpeg",
+        "assets/IMG_1127.jpeg",
+        "assets/IMG_1128.jpeg",
+        "assets/IMG_1129.jpeg",
+        "assets/IMG_1130.jpeg",
+        "assets/IMG_1154.jpeg",
+        "assets/IMG_1200.jpeg",
+        "assets/IMG_1201.jpeg",
+        "assets/campanha-country-botas-douradas-close.webp",
+        "assets/campanha-country-botas-rosa-estudio.webp",
+        "assets/campanha-country-botas-rosa-loja.webp",
+        "assets/campanha-country-raiane-blocos.webp",
+        "assets/campanha-country-raiane-botas-douradas.webp",
+        "assets/campanha-country-raiane-editorial-estudio.webp",
+        "assets/lifestyle-country-cavalo.webp",
+        "assets/parceiros-laco-de-ouro.webp",
+        "assets/produto-botas-douradas-frontal.webp",
+        "assets/produto-botas-douradas-perfil.webp",
+        "assets/produto-botas-rosa-fazenda.webp",
+        "assets/produto-botas-rosa-pegada-loja.webp",
+        "assets/raiane-sensacao-01.jpg",
+        "assets/raiane-sensacao-02.jpg",
+        "assets/raiane-sensacao-03.jpg",
+        "assets/raiane-sensacao-04.jpg",
+        "assets/raiane-sensacao-05.jpg",
+        "assets/raiane-sensacao-06.jpg",
+        "assets/raiane-sensacao-07.jpg",
+        "assets/raiane-sensacao-08.jpg",
+        "assets/raiane-sensacao-09.jpg",
+        "assets/raiane-sensacao-10.jpg",
+        "assets/raiane-sensacao-11.jpg",
+        "assets/raiane-sensacao-12.jpg",
+        "assets/raiane-sensacao-13.jpg",
+        "assets/raiane-sensacao-14.jpg",
+        "assets/raiane-sensacao-15.jpg",
+        "assets/campanha-country-raiane-botas-rosa-loja.webp",
+      ];
+
+      function renderArchivePages() {
+        const contactPage = document.querySelector("#contact-page");
+        document
+          .querySelectorAll(".archive-static")
+          .forEach((page) => page.remove());
+
+        for (let offset = 0; offset < archiveAssets.length; offset += 9) {
+          const pageNumber = 8 + offset / 9;
+          const page = document.createElement("section");
+          page.className = `page pad archive-page ${pageNumber % 2 === 0 ? "black" : ""}`;
+          const figures = archiveAssets
+            .slice(offset, offset + 9)
+            .map((src, index) => {
+              const number = String(offset + index + 1).padStart(2, "0");
+              return `<figure class="archive-photo"><img src="${src}" alt="Raiane — foto ${number}" /><figcaption>${number}</figcaption></figure>`;
+            })
+            .join("");
+          page.innerHTML = `<div class="eyebrow">Acervo completo / ${String(pageNumber).padStart(2, "0")}</div><div class="rule"></div><h2 class="gallery-title">${offset === 0 ? "63 FOTOS" : "CONTINUAÇÃO"}</h2><div class="archive-grid">${figures}</div><span class="folio">${String(pageNumber).padStart(2, "0")}</span>`;
+          contactPage.before(page);
+        }
+      }
+
       function fitMediaKitPages() {
         const page = document.querySelector(".page");
         if (!page) return;
@@ -894,6 +919,7 @@
         document.documentElement.style.setProperty("--page-fit", pageFit);
       }
 
+      renderArchivePages();
       fitMediaKitPages();
       window.addEventListener("resize", fitMediaKitPages, { passive: true });
     </script>
