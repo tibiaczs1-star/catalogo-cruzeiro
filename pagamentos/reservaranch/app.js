@@ -1,8 +1,8 @@
 (() => {
   const API = "/api/arizona-ranch";
-  const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";
-  const YOUTUBE_PLAYER_PARAMS = { enablejsapi: "1", autoplay: "0", controls: "0", mute: "0", playsinline: "1" };
   const COUVERT_ARTISTICO_LABEL = "Couvert artístico: R$ 7,00";
+  const CONTRACT_WHATSAPP_NUMBER = "556892260598";
+  const OPENING_VOICE_TEXT = "Bem-vindo à reserva de mesas do Arizona Ranch. Escolha sua mesa, confirme seu Pix e deixe o conforto por nossa conta.";
   const PIX_PAYMENT_OPTIONS = {
     10000: {
       amountLabel: "R$ 100,00",
@@ -57,11 +57,64 @@
       expired: "Prazo expirado",
       receipt_submitted: "Comprovante em análise",
       rejected: "Pagamento não aprovado",
+      released: "Mesa liberada",
       pre_sold: "Pré-venda",
     };
     return map[status] || "Pedido criado";
   }
+  function reservationCode(reservation) { return reservation?.code || reservation?.id || ""; }
   function formatCurrency(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100); }
+  function clientContactPhone() { return state.contactPhone || state.reservation?.customer?.phone || document.querySelector("#contact-phone")?.value.trim() || ""; }
+  function buildProofMessage(reservation = state.reservation) {
+    const code = reservationCode(reservation);
+    const customer = reservation?.customer || state.customer || {};
+    const phone = clientContactPhone();
+    const table = tableLabel(reservation?.tableNumber || state.selectedTable || "");
+    const seats = reservation?.seats || state.selectedSeats;
+    const amount = formatCurrency(reservation?.amountCents || selectedAmountCents());
+    return [
+      `Comprei a mesa ${table} no Arizona Ranch.`,
+      "Já enviei o comprovante e este é o contato para confirmação.",
+      "",
+      "Evento: Inauguração Oficial do Arizona Ranch - 05 de setembro",
+      code ? `Pedido: ${code}` : "",
+      `Mesa: ${table}`,
+      seats ? `Lugares: ${seats}` : "",
+      `Valor pago: ${amount}`,
+      "Couvert artístico: R$ 7,00 por pessoa",
+      customer.name ? `Nome: ${customer.name}` : "",
+      customer.email ? `E-mail: ${customer.email}` : "",
+      phone ? `WhatsApp do cliente: ${phone}` : "",
+    ].filter(Boolean).join("\n");
+  }
+  function buildProofWhatsAppUrl(reservation = state.reservation) {
+    return `https://wa.me/${CONTRACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(buildProofMessage(reservation))}`;
+  }
+  function wait(ms) { return new Promise((resolve) => window.setTimeout(resolve, ms)); }
+  function playBrowserVoice() {
+    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return Promise.resolve();
+    return new Promise((resolve) => {
+      const utterance = new SpeechSynthesisUtterance(OPENING_VOICE_TEXT);
+      utterance.lang = "pt-BR";
+      utterance.rate = 0.88;
+      utterance.pitch = 0.72;
+      utterance.volume = 1;
+      utterance.onend = resolve;
+      utterance.onerror = resolve;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    });
+  }
+  function playOpeningVoice(openingVoice) {
+    if (!openingVoice) return playBrowserVoice();
+    openingVoice.currentTime = 0;
+    openingVoice.volume = 1;
+    return openingVoice.play().catch(() => playBrowserVoice());
+  }
+  function updateWhatsAppProofLink(reservation = state.reservation) {
+    const link = document.querySelector("#whatsapp-proof");
+    if (link) link.href = buildProofWhatsAppUrl(reservation);
+  }
 
   function showToast(message, tone = "normal") {
     elements.toast.textContent = message;
@@ -140,7 +193,7 @@
   function renderPaymentStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.paymentInfo.textContent = ""; document.querySelector("#payment-summary-inline").textContent = table ? `Mesa ${tableLabel(table.number)} · ${state.selectedSeats} lugares · ${formatCurrency(selectedAmountCents())}. ${COUVERT_ARTISTICO_LABEL} por pessoa no evento.` : "Escolha uma mesa antes de gerar o Pix."; }
   function renderReservation() {
     elements.reservationPanel.replaceChildren(); if (!state.reservation) return;
-    const card = document.createElement("div"); card.className = "active-reservation"; card.dataset.status = state.reservation.status; card.innerHTML = `<strong>Pedido ${escapeHtml(state.reservation.code)} — ${escapeHtml(statusText(state.reservation.status))}</strong><span>Mesa ${tableLabel(state.reservation.tableNumber)} · ${formatCurrency(state.reservation.amountCents)} · ${COUVERT_ARTISTICO_LABEL} por pessoa · confirmação manual em até 24 horas após o pagamento.</span>`;
+    const card = document.createElement("div"); card.className = "active-reservation"; card.dataset.status = state.reservation.status; card.innerHTML = `<strong>Pedido ${escapeHtml(reservationCode(state.reservation))} — ${escapeHtml(statusText(state.reservation.status))}</strong><span>Mesa ${tableLabel(state.reservation.tableNumber)} · ${formatCurrency(state.reservation.amountCents)} · ${COUVERT_ARTISTICO_LABEL} por pessoa · confirmação manual em até 24 horas após o pagamento.</span>`;
     if (["awaiting_payment", "receipt_submitted"].includes(state.reservation.status)) { const action = document.createElement("button"); action.type = "button"; action.className = "button button-secondary"; action.textContent = "Ver dados do Pix"; action.addEventListener("click", () => openPayment(state.reservation)); card.append(action); }
     elements.reservationPanel.append(card);
   }
@@ -165,10 +218,10 @@
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
   function openPayment(reservation) {
-    state.reservation = reservation; const payment = reservation.payment; const pixOption = pixForAmount(reservation.amountCents); const qrSrc = pixOption?.qrCodeImage || payment?.qrCodeDataUrl || ""; elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${reservation.code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
+    state.reservation = reservation; const payment = reservation.payment; const pixOption = pixForAmount(reservation.amountCents); const qrSrc = pixOption?.qrCodeImage || payment?.qrCodeDataUrl || ""; const code = reservationCode(reservation); elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
     elements.pixAmountValue.textContent = pixOption?.amountLabel || payment?.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = pixOption?.pixCode || payment?.pixCode || ""; elements.pixKeyDisplay.textContent = pixOption?.pixKey || payment?.pixKey || "(68) 99205-6283";
-    document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`; document.querySelector("#order-id").textContent = reservation.code;
-    const whatsappProof = document.querySelector("#whatsapp-proof"); if (whatsappProof) whatsappProof.href = payment?.whatsappUrl || "https://wa.me/5568992056283";
+    document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`; document.querySelector("#order-id").textContent = code;
+    updateWhatsAppProofLink(reservation);
     const uploadStatus = document.querySelector("#upload-status"); if (uploadStatus) uploadStatus.textContent = reservation.expiresAt ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.` : "Envie o comprovante após realizar o pagamento."; elements.pixInfoBody.hidden = true; elements.pixInfoToggle.setAttribute("aria-expanded", "false"); elements.paymentDialog.showModal();
   }
   async function copyPixText(text) { try { await navigator.clipboard.writeText(text); } catch { const ta = document.createElement("textarea"); ta.value = text; document.body.append(ta); ta.select(); document.execCommand("copy"); ta.remove(); } }
@@ -178,7 +231,7 @@
   async function uploadReceipt(file) {
     if (!file || !state.reservation) return; if (file.size > 4 * 1024 * 1024) { showToast("O comprovante deve ter no máximo 4 MB.", "error"); return; }
     const receiptStatus = document.querySelector("#upload-status"); receiptStatus.textContent = "Enviando comprovante…";
-    try { const dataUrl = await readAsDataUrl(file); const payload = await request(`/reservations/${state.reservation.id}/receipt`, { method: "POST", body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }) }); state.reservation = { ...payload.reservation, payment: state.reservation.payment }; renderReservation(); await loadTables(); receiptStatus.textContent = "Comprovante enviado. Aguarde a confirmação manual."; showToast("Comprovante enviado. A confirmação é feita em até 24h.", "success"); } catch (error) { showToast(error.message, "error"); } finally { if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = ""; }
+    try { const dataUrl = await readAsDataUrl(file); const payload = await request(`/reservations/${state.reservation.id}/receipt`, { method: "POST", body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }) }); state.reservation = { ...payload.reservation, payment: state.reservation.payment }; renderReservation(); await loadTables(); const whatsappUrl = buildProofWhatsAppUrl(state.reservation); updateWhatsAppProofLink(state.reservation); receiptStatus.textContent = "Comprovante enviado. Abrindo WhatsApp com a mensagem pronta…"; showToast("Comprovante enviado. Confirme agora pelo WhatsApp.", "success"); window.setTimeout(() => { window.location.href = whatsappUrl; }, 250); } catch (error) { showToast(error.message, "error"); } finally { if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = ""; }
   }
 
 
@@ -193,27 +246,43 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     await copyPixText(shareText); showToast("Conteúdo copiado para compartilhar.", "success"); }
   function setupOpening() {
     const openingButton = document.querySelector("#start-experience");
-    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Reservar mesa"; }
+    const openingVideo = document.querySelector("#opening-video");
+    const openingVoice = document.querySelector("#opening-voice");
+    if (openingVideo) {
+      openingVideo.muted = true;
+      openingVideo.volume = 1;
+      openingVideo.load();
+      openingVideo.pause();
+      openingVideo.currentTime = 0;
+    }
+    if (openingVoice) openingVoice.load();
+    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Liberar vídeo, voz e reserva"; }
     const progress = document.querySelector("#opening-progress");
     if (progress) progress.style.width = "100%";
-    if (!document.querySelector("#opening-music-frame")) {
-      const frame = document.createElement("iframe");
-      frame.id = "opening-music-frame";
-      frame.className = "opening-player";
-      frame.title = "Trilha oficial Arizona Ranch";
-      frame.allow = "autoplay; encrypted-media";
-      frame.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?${new URLSearchParams(YOUTUBE_PLAYER_PARAMS)}`;
-      document.body.appendChild(frame);
+  }
+  async function startExperience() {
+    const openingButton = document.querySelector("#start-experience");
+    const openingVideo = document.querySelector("#opening-video");
+    const openingVoice = document.querySelector("#opening-voice");
+    const openingScreen = document.getElementById("opening-screen");
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Abrindo porteira…"; }
+    try {
+      openingScreen?.classList.add("is-live");
+      if (openingVideo) {
+        openingVideo.muted = false;
+        openingVideo.volume = 1;
+        await openingVideo.play();
+      }
+      await Promise.race([playOpeningVoice(openingVoice), wait(5200)]);
+    } catch {
+      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Tocar novamente para liberar o som"; }
+      showToast("O navegador bloqueou o som. Toque novamente no botão.", "error");
+      return;
     }
-  }
-  function sendPlayerCommand(command) {
-    const frame = document.querySelector("#opening-music-frame");
-    frame?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: command, args: [] }), "https://www.youtube.com");
-  }
-  function startExperience() {
-    sendPlayerCommand("playVideo");
-    document.getElementById("opening-screen")?.classList.add("is-complete");
-    document.body.classList.remove("is-opening");
+    window.setTimeout(() => {
+      openingScreen?.classList.add("is-complete");
+      document.body.classList.remove("is-opening");
+    }, 240);
   }
   function bindEvents() {
     document.addEventListener("click", (event) => {

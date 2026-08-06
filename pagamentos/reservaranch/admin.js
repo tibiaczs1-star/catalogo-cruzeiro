@@ -57,16 +57,24 @@
       expired: "Expirada",
       receipt_submitted: "Comprovante recebido",
       rejected: "Não aprovada",
+      released: "Liberada",
     }[status] || status;
   }
 
+  function reservationCode(reservation) {
+    return reservation?.code || reservation?.id || "sem código";
+  }
+
   function renderFinanceSummary(summary, finance = {}) {
+    const expectedSeats = (finance.confirmedSeats || 0) + (finance.pendingSeats || 0);
     return [
       ["Aguardando", summary.awaitingPayment, "Pix pendente"],
       ["Em análise", summary.receiptSubmitted, "Comprovante enviado"],
       ["Confirmadas", summary.confirmed, "Mesa vendida"],
       ["Total vendido", finance.totalSoldLabel || formatCurrency(finance.totalSold || 0), "Reservas confirmadas"],
+      ["A receber", finance.totalPendingLabel || formatCurrency(finance.totalPending || 0), "Pedidos aguardando/verificando"],
       ["Total esperado", finance.totalExpectedLabel || formatCurrency(finance.totalExpected || 0), "Confirmadas + pendentes"],
+      ["Couvert previsto", finance.couvertExpectedLabel || formatCurrency(finance.couvertExpected || 0), `${expectedSeats} lugares em aberto/confirmados`],
       ["Couvert artístico", "R$ 7,00", "Valor por pessoa no evento"],
     ];
   }
@@ -116,7 +124,7 @@
       card.className = "admin-card";
       const heading = document.createElement("div");
       const title = document.createElement("h3");
-      title.textContent = `Mesa ${String(reservation.tableNumber).padStart(2, "0")} · ${reservation.code}`;
+      title.textContent = `Mesa ${String(reservation.tableNumber).padStart(2, "0")} · ${reservationCode(reservation)}`;
       const status = document.createElement("span");
       status.className = "status-pill";
       status.dataset.status = reservation.status;
@@ -150,6 +158,14 @@
         reject.addEventListener("click", () => updateReservation(reservation.id, "rejected", reject));
         actions.append(confirm, reject);
       }
+      if (reservation.status === "confirmed") {
+        const release = document.createElement("button");
+        release.className = "button button-danger";
+        release.type = "button";
+        release.textContent = "Liberar mesa";
+        release.addEventListener("click", () => updateReservation(reservation.id, "released", release));
+        actions.append(release);
+      }
       card.append(heading, details, created, actions);
       elements.list.append(card);
     }
@@ -179,16 +195,35 @@
   }
 
   async function updateReservation(id, status, button) {
-    const question = status === "confirmed" ? "Confirmar esta mesa como paga?" : "Recusar este pedido e liberar a mesa?";
+    const actions = {
+      confirmed: {
+        action: "confirm",
+        question: "Confirmar esta mesa como paga?",
+        success: "Mesa confirmada.",
+      },
+      rejected: {
+        action: "reject",
+        question: "Recusar este pedido e liberar a mesa?",
+        success: "Pedido recusado e mesa liberada.",
+      },
+      released: {
+        action: "release",
+        question: "Liberar esta mesa confirmada e voltar para o mapa?",
+        success: "Mesa liberada e voltou para o mapa.",
+      },
+    };
+    const selected = actions[status];
+    if (!selected) return;
+    const question = selected.question;
     if (!window.confirm(question)) return;
     button.disabled = true;
     try {
       await request(`/admin/reservations/${id}`, {
         method: "PATCH",
-        body: JSON.stringify({ action: status === "confirmed" ? "confirm" : "reject" }),
+        body: JSON.stringify({ action: selected.action }),
       });
       await loadAdmin();
-      showToast(status === "confirmed" ? "Mesa confirmada." : "Pedido recusado e mesa liberada.", "success");
+      showToast(selected.success, "success");
     } catch (error) {
       showToast(error.message, "error");
       button.disabled = false;

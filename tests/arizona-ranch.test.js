@@ -81,6 +81,22 @@ test("não libera mesa já ocupada nem duplica reserva pendente", () => {
   assert.throws(() => store.create({ tableNumber: 12, seats: 2, user: { sub: "u2", email: "b@teste.com" } }), /indisponível/i);
 });
 
+test("admin libera mesa confirmada para voltar ao mapa de reservas", () => {
+  const store = createReservationStore({ now: () => new Date("2026-08-03T12:00:00.000Z") });
+  const reservation = store.create({ tableNumber: 3, seats: 4, user: { sub: "u1", email: "a@teste.com" } });
+
+  store.review({ id: reservation.id, action: "confirm", adminEmail: "admin@teste.com" });
+  assert.equal(store.tables().find((table) => table.number === 3).status, "reserved");
+
+  const released = store.review({ id: reservation.id, action: "release", adminEmail: "admin@teste.com" });
+  assert.equal(released.status, "released");
+  assert.equal(released.statusLabel, "Liberada");
+  assert.equal(store.tables().find((table) => table.number === 3).status, "available");
+
+  const nextReservation = store.create({ tableNumber: 3, seats: 2, user: { sub: "u2", email: "b@teste.com" } });
+  assert.equal(nextReservation.tableNumber, 3);
+});
+
 test("salva nome e e-mail ajustados após o acesso Google", () => {
   const store = createReservationStore({ now: () => new Date("2026-08-03T12:00:00.000Z") });
   const reservation = store.create({

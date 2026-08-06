@@ -11,7 +11,7 @@ const RESERVATION_TTL_MS = 24 * 60 * 60 * 1000;
 const ADMIN_SESSION_COOKIE = "arizona_ranch_admin";
 const ADMIN_SESSION_MAX_AGE_SECONDS = 12 * 60 * 60;
 const PIX_KEY_DEFAULT = "5568992056283";
-const WHATSAPP_DEFAULT = "5568992056283";
+const WHATSAPP_DEFAULT = "556892260598";
 const STATIC_OCCUPIED_TABLES = new Set([9, 22, 28, 29, 30, 31, 33, 39, 40, 41, 42, 45, 50, 52, 57, 65, 67]);
 const PRE_SOLD_TABLES = new Set([5]);
 
@@ -77,6 +77,7 @@ function statusLabel(status) {
     receipt_submitted: "Comprovante enviado",
     confirmed: "Confirmada",
     rejected: "Recusada",
+    released: "Liberada",
     expired: "Expirada",
     pre_sold: "Pré-venda",
   }[status] || "Em análise";
@@ -168,6 +169,7 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
     }
     const result = {
       id: reservation.id,
+      code: reservation.code || reservation.id,
       tableNumber: reservation.tableNumber,
       seats: reservation.seats,
       amountCents: reservation.amountCents,
@@ -188,6 +190,7 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
       reviewedAt: reservation.reviewedAt || null,
       reviewerEmail: reservation.reviewerEmail || null,
       history: Array.isArray(reservation.history) ? reservation.history : [],
+      releasedAt: reservation.releasedAt || null,
     };
     if (includeOwner) {
       result.customer = {
@@ -310,6 +313,9 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
         reservation.status = "confirmed";
       } else if (action === "reject") {
         reservation.status = "rejected";
+      } else if (action === "release") {
+        reservation.status = "released";
+        reservation.releasedAt = reviewedAt;
       } else if (action === "review_receipt") {
         if (!reservation.receipt) {
           throw new Error("Nenhum comprovante foi enviado.");
@@ -464,13 +470,24 @@ function isSecureRequest(request, environment) {
 
 function buildWhatsAppUrl({ reservation, phoneNumber }) {
   const phone = String(phoneNumber || WHATSAPP_DEFAULT).replace(/\D/g, "");
+  const code = reservation.code || reservation.id;
+  const table = String(reservation.tableNumber).padStart(2, "0");
+  const customer = reservation.customer || {};
+  const customerPhone = customer.phone || reservation.phone || "";
   const message = [
-    "Olá! Enviei o comprovante da minha reserva no Arizona Ranch.",
-    `Pedido: ${reservation.id}`,
-    `Mesa: ${reservation.tableNumber} (${reservation.seats} lugares)`,
-    `Valor: ${reservation.amountLabel}`,
-    `Nome: ${reservation.customer.name}`,
-  ].join("\n");
+    `Comprei a mesa ${table} no Arizona Ranch.`,
+    "Já enviei o comprovante e este é o contato para confirmação.",
+    "",
+    "Evento: Inauguração Oficial do Arizona Ranch - 05 de setembro",
+    code ? `Pedido: ${code}` : "",
+    `Mesa: ${table}`,
+    reservation.seats ? `Lugares: ${reservation.seats}` : "",
+    `Valor pago: ${reservation.amountLabel || formatCurrency(reservation.amountCents)}`,
+    "Couvert artístico: R$ 7,00 por pessoa",
+    customer.name ? `Nome: ${customer.name}` : "",
+    customer.email ? `E-mail: ${customer.email}` : "",
+    customerPhone ? `WhatsApp do cliente: ${customerPhone}` : "",
+  ].filter(Boolean).join("\n");
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 
@@ -763,18 +780,34 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
           return;
         }
         const all = store.listForAdmin();
-        const totalSold = all.filter((r) => r.status === "confirmed").reduce((sum, r) => sum + r.amountCents, 0);
-        const pendingCount = all.filter((r) => ["awaiting_payment", "receipt_submitted"].includes(r.status)).length;
+        const confirmed = all.filter((r) => r.status === "confirmed");
+        const pending = all.filter((r) => ["awaiting_payment", "receipt_submitted"].includes(r.status));
+        const totalSold = confirmed.reduce((sum, r) => sum + r.amountCents, 0);
+        const totalPending = pending.reduce((sum, r) => sum + r.amountCents, 0);
+        const confirmedSeats = confirmed.reduce((sum, r) => sum + Number(r.seats || 0), 0);
+        const pendingSeats = pending.reduce((sum, r) => sum + Number(r.seats || 0), 0);
+        const couvertSold = confirmedSeats * 700;
+        const couvertExpected = (confirmedSeats + pendingSeats) * 700;
+        const pendingCount = pending.length;
         sendJson(response, 200, {
           ok: true,
           reservations: all,
           projection: {
             totalSold,
             totalSoldLabel: formatCurrency(totalSold),
-            confirmedCount: all.filter((r) => r.status === "confirmed").length,
+            totalPending,
+            totalPendingLabel: formatCurrency(totalPending),
+            totalExpected: totalSold + totalPending,
+            totalExpectedLabel: formatCurrency(totalSold + totalPending),
+            confirmedCount: confirmed.length,
             pendingCount,
             preSoldCount: all.filter((r) => r.status === "pre_sold").length,
-            totalExpected: totalSold + all.filter((r) => ["awaiting_payment", "receipt_submitted"].includes(r.status)).reduce((sum, r) => sum + r.amountCents, 0),
+            confirmedSeats,
+            pendingSeats,
+            couvertSold,
+            couvertSoldLabel: formatCurrency(couvertSold),
+            couvertExpected,
+            couvertExpectedLabel: formatCurrency(couvertExpected),
           },
         });
         return;

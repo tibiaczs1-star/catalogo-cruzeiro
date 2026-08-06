@@ -28,15 +28,19 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
 
   assert.match(html, /id=["']opening-screen["']/);
   assert.ok(openingMarkup);
+  assert.match(openingMarkup, /id=["']opening-video["']/i);
+  assert.match(openingMarkup, /id=["']opening-voice["']/i);
   assert.doesNotMatch(openingMarkup, /id=["']opening-player["']/);
   assert.match(openingMarkup, /arizona-entrada\.mp4/i);
+  assert.match(openingMarkup, /arizona-welcome\.mp3/i);
+  assert.match(openingMarkup, /class=["']opening-brand["']/i);
+  assert.match(openingMarkup, /arizona-logo\.png/i);
+  assert.match(openingMarkup, /Reserva para a Inaugura[çc][ãa]o Oficial do Arizona Ranch/i);
   assert.doesNotMatch(openingMarkup, /opening-image/i);
   assert.doesNotMatch(openingMarkup, /opening-vignette/i);
   assert.doesNotMatch(openingMarkup, /Todos os direitos reservados/i);
-  assert.match(app, /const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";/);
-  assert.match(app, /mute: "0"/);
-  assert.match(app, /https:\/\/www\.youtube\.com\/embed\/\$\{YOUTUBE_VIDEO_ID\}/);
-  assert.doesNotMatch(app, /youtube-nocookie\.com/i);
+  assert.doesNotMatch(app, /YOUTUBE_VIDEO_ID|youtube\.com|youtube-nocookie\.com|sendPlayerCommand/);
+  assert.match(app, /const OPENING_VOICE_TEXT = /);
 });
 
 test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inteiro", () => {
@@ -45,14 +49,17 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
 
   assert.match(html, /id=["']start-experience["']/i);
-  assert.match(app, /openingButton\.textContent = "Reservar mesa"/);
+  assert.match(app, /openingButton\.textContent = "Liberar vídeo, voz e reserva"/);
+  assert.match(app, /openingVideo\.muted = false/);
+  assert.match(app, /openingVideo\.play\(\)/);
+  assert.match(app, /playOpeningVoice\(openingVoice\)/);
   assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
   assert.doesNotMatch(html, /id=["']toggle-sound["']/i);
-  assert.match(css, /\.opening-video\s*\{[^}]*object-fit:\s*contain;[^}]*filter:\s*none;[^}]*transform:\s*none;/s);
+  assert.match(css, /\.opening-video\s*\{[^}]*object-fit:\s*contain;[^}]*filter:\s*none;/s);
   assert.doesNotMatch(css, /\.opening-screen::before/);
   assert.doesNotMatch(css, /\.opening-screen::after/);
   assert.doesNotMatch(css, /\.opening-image/);
-  assert.match(app, /function startExperience\(\)[\s\S]*?sendPlayerCommand\("playVideo"\)/);
+  assert.match(css, /@keyframes logo-entrance/);
 });
 
 test("usa os Pix copia e cola exatos dos QR enviados", () => {
