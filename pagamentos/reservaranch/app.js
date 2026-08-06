@@ -3,7 +3,10 @@
   const COUVERT_ARTISTICO_LABEL = "Couvert artístico: R$ 7,00";
   const CONTRACT_WHATSAPP_NUMBER = "556892260598";
   const YOUTUBE_MUSIC_VIDEO_ID = "CxKRaR6kFYs";
-  const OPENING_MUSIC_VOLUME = 62;
+  const OPENING_MUSIC_PRESENTATION_VOLUME = 18;
+  const RESERVATION_MUSIC_VOLUME = 38;
+  const OPENING_PRESENTATION_MAX_MS = 16500;
+  const OPENING_MUSIC_READY_TIMEOUT_MS = 4200;
   const OPENING_VOICE_TEXT = "Bem-vindo à reserva de mesas do Arizona Ranch. Dia cinco de setembro, a porteira se abre para a inauguração oficial, com a voz de Luzienne Lucena. Escolha sua mesa, faça seu Pix e envie o comprovante. Arizona Ranch: sua noite começa aqui.";
   let openingMusicPlayer = null;
   let openingMusicReady = null;
@@ -12,6 +15,7 @@
   let openingMusicReject = null;
   let openingMusicStartedResolve = null;
   let openingMusicIsReady = false;
+  let openingMusicLoadTimedOut = false;
   const PIX_PAYMENT_OPTIONS = {
     10000: {
       amountLabel: "R$ 100,00",
@@ -100,6 +104,7 @@
     return `https://wa.me/${CONTRACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(buildProofMessage(reservation))}`;
   }
   function wait(ms) { return new Promise((resolve) => window.setTimeout(resolve, ms)); }
+  function setOpeningMusicVolume(volume) { if (!openingMusicPlayer?.setVolume) return; const safeVolume = Math.max(0, Math.min(100, volume)); openingMusicPlayer.setVolume(safeVolume); }
   function ensureOpeningMusicPlayer() {
     if (!document.querySelector("#opening-player")) {
       openingMusicIsReady = false;
@@ -128,7 +133,7 @@
         },
         events: {
           onReady: (event) => {
-            event.target.setVolume(OPENING_MUSIC_VOLUME);
+            event.target.setVolume(OPENING_MUSIC_PRESENTATION_VOLUME);
             event.target.cueVideoById(YOUTUBE_MUSIC_VIDEO_ID);
             event.target.getIframe?.()?.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
             openingMusicIsReady = true;
@@ -166,7 +171,7 @@
     const player = openingMusicPlayer;
     openingMusicStartedResolve = null;
     player.unMute?.();
-    player.setVolume?.(OPENING_MUSIC_VOLUME);
+    setOpeningMusicVolume(OPENING_MUSIC_PRESENTATION_VOLUME);
     player.playVideo?.();
     const stateNow = typeof player.getPlayerState === "function" ? player.getPlayerState() : null;
     if (window.YT?.PlayerState && stateNow !== window.YT.PlayerState.PLAYING && stateNow !== window.YT.PlayerState.BUFFERING) {
@@ -241,6 +246,7 @@
     document.querySelectorAll("[data-flow-nav]").forEach((item) => { item.classList.toggle("is-active", item.dataset.flowNav === step); item.classList.toggle("is-complete", flow.indexOf(item.dataset.flowNav) < flow.indexOf(step)); });
     if (step === "whatsapp") renderWhatsAppStep();
     if (step === "payment") renderPaymentStep();
+    if (step === "table") setOpeningMusicVolume(RESERVATION_MUSIC_VOLUME);
     if (scroll) document.querySelector(`[data-flow-step="${step}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -362,15 +368,23 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const progress = document.querySelector("#opening-progress");
     if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Carregando trilha…"; }
     if (progress) progress.style.width = "72%";
+    const releaseStart = () => {
+      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
+      if (progress) progress.style.width = "100%";
+    };
+    const fallbackTimer = window.setTimeout(() => {
+      openingMusicLoadTimedOut = true;
+      releaseStart();
+    }, OPENING_MUSIC_READY_TIMEOUT_MS);
     ensureOpeningMusicPlayer()
       .then(() => {
-        if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
-        if (progress) progress.style.width = "100%";
+        window.clearTimeout(fallbackTimer);
+        releaseStart();
       })
       .catch(() => {
-        if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Atualize para iniciar"; }
-        if (progress) progress.style.width = "0%";
-        showToast("A trilha do YouTube não carregou. Atualize a página e tente novamente.", "error");
+        window.clearTimeout(fallbackTimer);
+        openingMusicLoadTimedOut = true;
+        releaseStart();
       });
   }
   async function startExperience() {
@@ -378,24 +392,29 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingVideo = document.querySelector("#opening-video");
     const openingVoice = document.querySelector("#opening-voice");
     const openingScreen = document.getElementById("opening-screen");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Carregando trilha…"; }
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Apresentando o Arizona Ranch…"; }
     try {
-      await startOpeningMusic();
-      if (openingButton) openingButton.textContent = "Apresentando o Arizona Ranch…";
       openingScreen?.classList.add("is-live");
       if (openingVideo) {
         openingVideo.muted = true;
         openingVideo.volume = 0;
         await openingVideo.play();
       }
-      await playOpeningVoice(openingVoice);
+      await Promise.race([
+        playOpeningVoice(openingVoice),
+        wait(OPENING_PRESENTATION_MAX_MS),
+      ]);
     } catch {
-      if (openingButton) {
-        openingButton.disabled = !openingMusicIsReady;
-        openingButton.textContent = openingMusicIsReady ? "Iniciar reserva" : "Carregando trilha…";
+      showToast("A apresentação não iniciou completa, mas a reserva foi liberada.", "error");
+    }
+    if (openingButton) openingButton.textContent = "Iniciando trilha…";
+    try {
+      await startOpeningMusic();
+    } catch (error) {
+      openingMusicLoadTimedOut = true;
+      if (!openingMusicIsReady && !openingMusicError) {
+        console.info("Abertura seguindo sem bloquear pela trilha externa.", error);
       }
-      showToast("A trilha ainda não iniciou. Toque em iniciar novamente.", "error");
-      return;
     }
     window.setTimeout(() => {
       openingScreen?.classList.add("is-complete");
