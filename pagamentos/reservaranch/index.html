@@ -10,11 +10,20 @@
     <link rel="stylesheet" href="/pagamentos/reservaranch/arizona.css?v=20260805-1" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
-  <body >
-    
-    
+  <body class="is-opening">
+    <section class="opening-screen" id="opening-screen" aria-label="Abertura Arizona Ranch">
+      <div class="opening-image" aria-hidden="true"></div>
+      <div class="opening-vignette" aria-hidden="true"></div>
+      <div class="opening-content">
+        <p class="eyebrow">Inauguração oficial · 05 de setembro</p>
+        <h1>Reserve sua mesa.</h1>
+        <p>Escolha a mesa e finalize sua reserva.</p>
+        <div class="opening-progress" aria-label="Carregando experiência"><span id="opening-progress"></span></div>
+        <button class="button button-gold" id="start-experience" type="button">Reservar mesa</button>
+      </div>
+    </section>
 
-    <div class="site-shell">
+<div class="site-shell">
       <header class="flow-hero" id="inicio">
         <div>
           <p class="eyebrow">Arizona Ranch · reserva de mesas</p>

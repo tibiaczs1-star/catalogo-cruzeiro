@@ -171,6 +171,16 @@ Código: ${elements.pixCodeDisplay.textContent}
 Chave: ${elements.pixKeyDisplay.textContent}`;
     if (navigator.share) { try { await navigator.share({ title: "Pagamento Pix - Arizona Ranch", text: shareText }); return; } catch {} }
     await copyPixText(shareText); showToast("Conteúdo copiado para compartilhar.", "success"); }
+  function setupOpening() {
+    const btn = document.querySelector("#start-experience");
+    if (btn) { btn.disabled = false; btn.textContent = "Reservar mesa"; }
+    const progress = document.querySelector("#opening-progress");
+    if (progress) progress.style.width = "100%";
+  }
+  function startExperience() {
+    document.getElementById("opening-screen")?.classList.add("is-complete");
+    document.body.classList.remove("is-opening");
+  }
   function bindEvents() {
     document.addEventListener("click", (event) => {
       const table = event.target.closest("[data-table]"); if (table) selectTable(Number(table.dataset.table));
