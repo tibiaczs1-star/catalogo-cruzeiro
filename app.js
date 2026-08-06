@@ -5,8 +5,8 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  const NEWS_ENDPOINT = "/api/news?limit=40&lite=1&sort=latest";
-  const NEWS_POLL_ENDPOINT = "/api/news?limit=1&lite=1&sort=latest";
+  const NEWS_ENDPOINT = "/api/news?limit=40&lite=1&sort=editorial";
+  const NEWS_POLL_ENDPOINT = "/api/news?limit=1&lite=1&sort=editorial";
   const VIDEO_NEWS_ENDPOINT = "/api/news?limit=40&lite=1&sort=latest&video=1";
   const NEWS_BATCH_SIZE = 40;
   const MAX_NEWS_LIMIT = 200;
@@ -85,7 +85,7 @@
 
   function getNewsEndpoint(limit) {
     const safeLimit = Math.max(1, Math.min(MAX_NEWS_LIMIT, Number(limit) || NEWS_BATCH_SIZE));
-    return `/api/news?limit=${safeLimit}&lite=1&sort=latest`;
+    return `/api/news?limit=${safeLimit}&lite=1&sort=editorial`;
   }
 
   function formatDate(value) {

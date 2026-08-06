@@ -82,7 +82,7 @@ test("shell publico aponta para API leve e nao inclui modulos privados", () => {
   const js = fs.readFileSync(APP_JS, "utf8");
 
   assert.match(js, /\/api\/news\?limit=40&lite=1/);
-  assert.match(js, /\/api\/news\?limit=1&lite=1&sort=latest/);
+  assert.match(js, /\/api\/news\?limit=1&lite=1&sort=editorial/);
   assert.match(html, /id="newNewsNotice"/);
   assert.match(html, /id="newsFeed"/);
   assert.match(html, /id="newsFeed" tabindex="-1"/);

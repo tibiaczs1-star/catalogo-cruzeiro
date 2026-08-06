@@ -41,6 +41,13 @@ test("API lite preserva videos reais e sort latest entrega ordem cronologica", {
   const timestamps = latest.items.map((item) => Date.parse(item.publishedAt || item.date || "") || 0);
   assert.deepEqual(timestamps, [...timestamps].sort((left, right) => right - left));
 
+  const editorialResponse = await fetch(`${baseUrl}/api/news?limit=40&lite=1&sort=editorial`);
+  assert.equal(editorialResponse.status, 200);
+  const editorial = await editorialResponse.json();
+  assert.equal(editorial.sort, "editorial");
+  assert.equal(editorial.items.length, 40);
+  assert.ok(editorial.items.every((item) => typeof item.editorialScope === "string"));
+
   const allResponse = await fetch(`${baseUrl}/api/news?limit=1000&lite=1&sort=latest`);
   const all = await allResponse.json();
   const video = all.items.find((item) => typeof item.videoUrl === "string" && item.videoUrl.length > 0);

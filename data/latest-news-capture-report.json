@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-07-27T12:40:06.260Z",
-  "finishedAt": "2026-07-27T12:40:14.407Z",
-  "capturedItems": 402,
-  "capturedToday": 193,
+  "startedAt": "2026-08-06T03:31:46.851Z",
+  "finishedAt": "2026-08-06T03:31:57.273Z",
+  "capturedItems": 373,
+  "capturedToday": 145,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -38,16 +38,15 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 24,
-      "blocked": 0,
+      "count": 23,
+      "blocked": 1,
       "mode": "wordpress-json"
     },
     {
       "source": "agencia-acre",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "HTTP 503"
     },
     {
       "source": "agencia-brasil-ultimas",
@@ -142,10 +141,9 @@
     },
     {
       "source": "jurua-em-tempo",
-      "ok": true,
-      "count": 24,
-      "blocked": 0,
-      "mode": "wordpress-json"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "jurua-informativo",
@@ -164,7 +162,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 3,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -199,21 +197,21 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 1,
+      "count": 4,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -227,7 +225,7 @@
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 1,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

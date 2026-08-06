@@ -22,9 +22,14 @@ const {
 } = require("./pubpaid-runtime");
 const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
 const { createMundoAppleServerIntegration } = require("./mundoapple/server-integration");
+const { createArizonaRanchIntegration } = require("./arizona-ranch");
+const { createCashierIntegration } = require("./cashier");
+const { decorateNewsItem, orderPortalStories } = require("./editorial-scope");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
 let mundoAppleIntegration = null;
+let arizonaRanchIntegration = null;
+let cashierIntegration = null;
 const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
 const vm = require("vm");
 const zlib = require("zlib");
@@ -123,6 +128,14 @@ mundoAppleIntegration = createMundoAppleServerIntegration({
   dataDir: DATA_DIR,
   environment: process.env,
   sendFile,
+});
+cashierIntegration = createCashierIntegration({ dataDir: DATA_DIR, environment: process.env });
+arizonaRanchIntegration = createArizonaRanchIntegration({
+  rootDir: ROOT_DIR,
+  dataDir: DATA_DIR,
+  environment: process.env,
+  sendFile,
+  getAuthUser: readCatalogoAuthSession,
 });
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const MAINTENANCE_FILE = path.join(ROOT_DIR, "maintenance.html");
@@ -1574,10 +1587,16 @@ const COMPRESSIBLE_MIME_TYPES = [
 let imagePreviewCacheLoaded = false;
 let imagePreviewCacheWriteTimer = null;
 const JSON_FILE_MUTATION_QUEUES = new Map();
+const EDITORIAL_NEWS_SNAPSHOT_FILES = Object.freeze([
+  "runtime-news.json",
+  "news-archive.json",
+  "latest-news-capture-report.json"
+]);
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
   seedDataDirFromDefault();
+  syncPersistentEditorialNewsSnapshot();
 }
 
 function seedDataDirFromDefault() {
@@ -1597,6 +1616,35 @@ function seedDataDirFromDefault() {
     if (fs.existsSync(targetPath)) return;
     fs.copyFileSync(sourcePath, targetPath);
   });
+}
+
+function getEditorialSnapshotFinishedAt(dataDir) {
+  const report = readJson(path.join(dataDir, "latest-news-capture-report.json"), null);
+  const parsed = Date.parse(String(report?.finishedAt || report?.updatedAt || report?.startedAt || ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function hasUsableEditorialSnapshot(dataDir) {
+  return ["runtime-news.json", "news-archive.json"].every((fileName) => {
+    const items = normalizeJsonArrayPayload(readJson(path.join(dataDir, fileName), []));
+    return items.length > 0;
+  });
+}
+
+function syncPersistentEditorialNewsSnapshot() {
+  if (path.resolve(DATA_DIR) === path.resolve(DEFAULT_DATA_DIR)) return false;
+  if (!hasUsableEditorialSnapshot(DEFAULT_DATA_DIR)) return false;
+
+  const bundledFinishedAt = getEditorialSnapshotFinishedAt(DEFAULT_DATA_DIR);
+  const persistentFinishedAt = getEditorialSnapshotFinishedAt(DATA_DIR);
+  if (!bundledFinishedAt || bundledFinishedAt <= persistentFinishedAt) return false;
+
+  EDITORIAL_NEWS_SNAPSHOT_FILES.forEach((fileName) => {
+    const sourcePath = path.join(DEFAULT_DATA_DIR, fileName);
+    if (!fs.existsSync(sourcePath)) return;
+    writeJson(path.join(DATA_DIR, fileName), readJson(sourcePath, null));
+  });
+  return true;
 }
 
 function safeJoin(base, targetPath) {
@@ -5135,7 +5183,7 @@ function buildDirectFeedRecord(raw = {}, source = {}) {
   });
   const imageUrl = safeString(raw.imageUrl || raw.feedImageUrl || raw.sourceImageUrl || "", 520);
 
-  return {
+  return decorateNewsItem({
     id: link,
     slug: slugify(title),
     title,
@@ -5152,7 +5200,7 @@ function buildDirectFeedRecord(raw = {}, source = {}) {
     sourceImageUrl: imageUrl,
     priority: Number(source.priority || 0) || 0,
     editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : ""
-  };
+  });
 }
 
 function parseWordPressJsonItems(jsonText = "", source = {}) {
@@ -7702,7 +7750,7 @@ function getArticleNewsApiBasePayload() {
     };
   }
 
-  const items = getRawNewsItems().map(normalizeArticleRecord);
+  const items = getRawNewsItems().map(normalizeArticleRecord).map(decorateNewsItem);
   const map = new Map();
 
   items.forEach((item) => {
@@ -7731,11 +7779,17 @@ function articleHasVideo(item = {}) {
 
 function buildArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
-  const sort = String(options.sort || "").toLowerCase() === "latest" ? "latest" : "";
+  const requestedSort = String(options.sort || "").toLowerCase();
+  const sort = requestedSort === "latest" || requestedSort === "editorial" ? requestedSort : "";
   const video = Boolean(options.video);
   const basePayload = getArticleNewsApiBasePayload();
   const eligibleItems = video ? basePayload.items.filter(articleHasVideo) : basePayload.items;
-  const orderedItems = sort === "latest" ? eligibleItems.slice().sort(sortArticleItems) : eligibleItems;
+  const orderedItems =
+    sort === "latest"
+      ? eligibleItems.slice().sort(sortArticleItems)
+      : sort === "editorial"
+        ? orderPortalStories(eligibleItems)
+        : eligibleItems;
   const visibleItems = orderedItems.slice(0, safeLimit);
 
   return {
@@ -7814,6 +7868,7 @@ function buildLiteArticleNewsApiItem(item = {}) {
     editorialSpotlightReady: item.editorialSpotlightReady,
     editorialSurfaceTier: item.editorialSurfaceTier,
     editorialLocalTier: item.editorialLocalTier,
+    editorialScope: item.editorialScope,
     sourceCount: item.sourceCount,
     crossSources: item.crossSources,
     alternateSlugs: item.alternateSlugs
@@ -7832,7 +7887,8 @@ function buildLiteArticleNewsApiPayload(limit = 80, options = {}) {
 function getCachedArticleNewsApiPayload(limit = 1000, options = {}) {
   const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const lite = Boolean(options.lite);
-  const sort = String(options.sort || "").toLowerCase() === "latest" ? "latest" : "";
+  const requestedSort = String(options.sort || "").toLowerCase();
+  const sort = requestedSort === "latest" || requestedSort === "editorial" ? requestedSort : "";
   const video = Boolean(options.video);
   const key = `limit:${safeLimit}:lite:${lite ? "1" : "0"}:sort:${sort || "default"}:video:${video ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
@@ -16838,6 +16894,14 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
+  if (pathname.startsWith("/api/cashier/")) {
+    const handled = cashierIntegration?.handleApi(request, response, pathname);
+    if (handled) return;
+  }
+  if (pathname.startsWith("/api/arizona-ranch/")) {
+    return arizonaRanchIntegration.handleApi(req, res, pathname);
+  }
+
   if (pathname.startsWith("/api/mundoapple/")) {
     return mundoAppleIntegration.handleApi(req, res);
   }
@@ -20715,6 +20779,11 @@ async function handleApi(req, res, pathname, searchParams) {
 
 async function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
+
+  if (arizonaRanchIntegration) {
+    const handled = await arizonaRanchIntegration.handleStatic(req, res, pathname);
+    if (handled) return;
+  }
 
   if (mundoAppleIntegration) {
     const handled = await mundoAppleIntegration.handleStatic(req, res, pathname);

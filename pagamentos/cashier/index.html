@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frente de Caixa — Arizona Ranch</title>
+  <style>
+    :root {
+      --ink: #17120e; --paper: #fffaf0; --muted: #8a7869;
+      --line: rgba(208,82,67,.25); --gold: #f9a33c; --gold-pale: #fce7b2;
+      --red: #d94a3a; --green: #5ddb94; --blue: #4a9eff;
+      --cream: #f5e6d3; --paper-deep: #211811;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: var(--paper-deep); color: var(--paper); }
+    .shell { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+    h1 { margin: 0; font-size: 1.8rem; }
+    .back-link { color: var(--gold-pale); text-decoration: none; }
+    .login-card { max-width: 360px; margin: 4rem auto; padding: 2rem; border: 1px solid var(--line); border-radius: 12px; background: #1b1510; }
+    .login-card h2 { margin-top: 0; }
+    .login-card input { width: 100%; padding: .75rem; margin: .5rem 0; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.2); border-radius: 4px; color: var(--paper); }
+    .login-card button { width: 100%; padding: .75rem; background: var(--gold); color: var(--ink); border: 0; border-radius: 4px; font-weight: 700; cursor: pointer; }
+    .login-card button:disabled { opacity: .5; cursor: not-allowed; }
+    .hidden { display: none !important; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .summary-card { padding: 1.25rem; border: 1px solid rgba(249,207,108,.22); border-radius: 12px; background: rgba(28,20,14,.82); }
+    .summary-card strong { display: block; margin-top: .35rem; color: var(--gold-light); font-size: 1.5rem; }
+    .summary-card span { font-size: .85rem; color: var(--muted); }
+
+    .pos-grid { display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem; }
+    @media (max-width: 860px) { .pos-grid { grid-template-columns: 1fr; } }
+
+    .categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: .75rem; margin-bottom: 1.5rem; }
+    .cat-btn { padding: 1rem .5rem; border: 2px solid transparent; border-radius: 8px; background: #2a1f17; color: var(--paper); cursor: pointer; font-weight: 700; font-size: .85rem; transition: all .15s; }
+    .cat-btn:hover { transform: translateY(-2px); }
+    .cat-btn.is-active { border-color: var(--gold); background: rgba(249,207,108,.1); }
+
+    .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: .75rem; margin-bottom: 1.5rem; }
+    .item-btn { padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: #1b1510; color: var(--paper); cursor: pointer; text-align: left; transition: all .15s; }
+    .item-btn:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .item-btn .item-name { font-weight: 700; display: block; margin-bottom: .25rem; }
+    .item-btn .item-price { font-size: .85rem; color: var(--gold-pale); }
+
+    .cart { position: sticky; top: 1rem; padding: 1.5rem; border: 1px solid rgba(249,207,108,.22); border-radius: 12px; background: rgba(28,20,14,.95); }
+    .cart h3 { margin-top: 0; font-size: 1.2rem; }
+    .cart-items { max-height: 300px; overflow-y: auto; margin-bottom: 1rem; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .cart-item:last-child { border-bottom: 0; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-weight: 700; font-size: .9rem; }
+    .cart-item-meta { font-size: .78rem; color: var(--muted); }
+    .cart-item-total { font-weight: 700; color: var(--gold-pale); margin-left: .75rem; }
+    .cart-item-remove { background: none; border: 0; color: var(--red); cursor: pointer; font-size: 1.2rem; padding: 0 .5rem; }
+
+    .cart-total { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; padding: 1rem 0; border-top: 2px solid var(--gold); margin-bottom: 1rem; }
+
+    .payment-methods { display: grid; gap: .5rem; margin-bottom: 1rem; }
+    .pay-btn { padding: .75rem; border: 2px solid var(--line); border-radius: 6px; background: #1b1510; color: var(--paper); cursor: pointer; font-weight: 700; transition: all .15s; }
+    .pay-btn:hover { border-color: var(--gold); }
+    .pay-btn.is-active { border-color: var(--gold); background: rgba(249,207,108,.1); }
+
+    .cart-actions { display: grid; gap: .5rem; }
+    .btn-primary { padding: 1rem; background: var(--green); color: var(--ink); border: 0; border-radius: 6px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+    .btn-primary:hover:not(:disabled) { filter: brightness(1.1); }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-secondary { padding: .75rem; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: .35rem; font-size: .85rem; font-weight: 700; color: var(--muted); }
+    .form-group input, .form-group select { width: 100%; padding: .65rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.2); border-radius: 4px; color: var(--paper); }
+
+    .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; padding: 1rem 1.5rem; background: var(--red); color: var(--paper); border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.3); transform: translateY(150%); transition: transform .25s ease; z-index: 1000; font-weight: 700; }
+    .toast.is-visible { transform: translateY(0); }
+
+    .section-heading { margin: 2rem 0 1rem; font-size: 1.3rem; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a href="/pagamentos/reservaranch/" class="back-link">← Voltar</a>
+      <h1>🎫 Frente de Caixa</h1>
+      <div id="auth-section">
+        <button id="login-btn" class="btn-secondary">Acesso Admin</button>
+      </div>
+    </header>
+
+    <div id="login-card" class="login-card hidden">
+      <h2>Acesso administrativo</h2>
+      <input type="text" id="username" placeholder="Usuário" autocomplete="username">
+      <input type="password" id="password" placeholder="Senha" autocomplete="current-password">
+      <button id="do-login">Entrar</button>
+    </div>
+
+    <main id="main-content" class="hidden">
+      <div id="summary-section"></div>
+
+      <h2 class="section-heading">Nova Venda</h2>
+      <div class="pos-grid">
+        <div class="pos-left">
+          <div class="categories" id="categories"></div>
+          <div class="items-grid" id="items"></div>
+        </div>
+        <div class="cart">
+          <h3>Carrinho</h3>
+          <div class="cart-items" id="cart-items"></div>
+          <div class="cart-total">
+            <span>Total</span>
+            <span id="cart-total-value">R$ 0,00</span>
+          </div>
+          <div class="payment-methods" id="payment-methods"></div>
+          <div class="form-group">
+            <label for="operator">Operador</label>
+            <input type="text" id="operator" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label for="notes">Observação (opcional)</label>
+            <input type="text" id="notes" placeholder="Ex: mesa 5, sem gelo">
+          </div>
+          <div class="cart-actions">
+            <button id="checkout-btn" class="btn-primary" disabled>Finalizar Venda</button>
+            <button id="clear-cart" class="btn-secondary">Limpar carrinho</button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading">Histórico</h2>
+      <div id="sales-history"></div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const API = "/api/cashier";
+    const state = { auth: false, categories: [], cart: [], selectedCategory: null, paymentMethod: "pix", sales: [] };
+
+    function $(sel) { return document.querySelector(sel); }
+    function formatCurrency(cents) {
+      return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(cents) / 100);
+    }
+
+    function showToast(message, isError = false) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.style.background = isError ? "var(--red)" : "var(--green)";
+      toast.style.color = isError ? "var(--paper)" : "var(--ink)";
+      toast.classList.add("is-visible");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toast.classList.remove("is-visible"), 3000);
+    }
+
+    async function request(path, options = {}) {
+      const res = await fetch(`${API}${path}`, {
+        credentials: "same-origin",
+        headers: { "content-type": "application/json", ...(options.headers || {}) },
+        ...options,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Erro na requisição.");
+      return data;
+    }
+
+    function renderCategories() {
+      const el = $("#categories");
+      el.innerHTML = "";
+      for (const cat of state.categories) {
+        const btn = document.createElement("button");
+        btn.className = `cat-btn${state.selectedCategory === cat.id ? " is-active" : ""}`;
+        btn.textContent = cat.label;
+        btn.addEventListener("click", () => { state.selectedCategory = cat.id; renderCategories(); renderItems(); });
+        el.appendChild(btn);
+      }
+    }
+
+    function renderItems() {
+      const el = $("#items");
+      el.innerHTML = "";
+      const cat = state.categories.find((c) => c.id === state.selectedCategory);
+      if (!cat) { el.innerHTML = "<p style='color:var(--muted)'>Selecione uma categoria.</p>"; return; }
+      const items = [
+        { name: cat.label + " (un.)", priceCents: 1000 },
+        { name: cat.label + " premium", priceCents: 1500 },
+        { name: cat.label + " especial", priceCents: 2000 },
+      ];
+      for (const item of items) {
+        const btn = document.createElement("button");
+        btn.className = "item-btn";
+        btn.innerHTML = `<span class="item-name">${item.name}</span><span class="item-price">${formatCurrency(item.priceCents)}</span>`;
+        btn.addEventListener("click", () => addToCart(item.name, item.priceCents));
+        el.appendChild(btn);
+      }
+    }
+
+    function addToCart(name, priceCents) {
+      const existing = state.cart.find((c) => c.name === name);
+      if (existing) { existing.quantity += 1; }
+      else { state.cart.push({ name, priceCents, quantity: 1 }); }
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      state.cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const el = $("#cart-items");
+      el.innerHTML = "";
+      let total = 0;
+      for (let i = 0; i < state.cart.length; i++) {
+        const item = state.cart[i];
+        total += item.priceCents * item.quantity;
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-meta">${item.quantity}x ${formatCurrency(item.priceCents)}</div>
+          </div>
+          <div class="cart-item-total">${formatCurrency(item.priceCents * item.quantity)}</div>
+          <button class="cart-item-remove" data-idx="${i}">×</button>
+        `;
+        el.appendChild(row);
+      }
+      el.querySelectorAll(".cart-item-remove").forEach((btn) => {
+        btn.addEventListener("click", () => removeFromCart(Number(btn.dataset.idx)));
+      });
+      $("#cart-total-value").textContent = formatCurrency(total);
+      $("#checkout-btn").disabled = state.cart.length === 0;
+    }
+
+    async function checkout() {
+      if (!state.auth) { showToast("Faça login como admin.", true); return; }
+      const operator = $("#operator").value.trim();
+      if (!operator) { showToast("Informe o operador.", true); return; }
+      const total = state.cart.reduce((s, i) => s + i.priceCents * i.quantity, 0);
+      try {
+        for (const item of state.cart) {
+          await request("/sales", {
+            method: "POST",
+            body: JSON.stringify({
+              categoryId: state.selectedCategory || "beer",
+              itemName: item.name,
+              quantity: item.quantity,
+              unitPriceCents: item.priceCents,
+              paymentMethod: state.paymentMethod,
+              operator,
+              notes: $("#notes").value.trim(),
+            }),
+          });
+        }
+        showToast(`Venda registrada: ${formatCurrency(total)}`);
+        state.cart = [];
+        renderCart();
+        loadSummary();
+        loadSales();
+      } catch (err) {
+        showToast(err.message, true);
+      }
+    }
+
+    async function loadCategories() {
+      const data = await request("/categories");
+      state.categories = data.categories || [];
+      if (!state.selectedCategory && state.categories.length) state.selectedCategory = state.categories[0].id;
+      renderCategories();
+      renderItems();
+    }
+
+    async function loadSummary() {
+      const data = await request("/summary");
+      const s = data.summary;
+      $("#summary-section").innerHTML = `
+        <div class="summary-grid">
+          <div class="summary-card"><span>Vendas</span><strong>${s.totalSales}</strong></div>
+          <div class="summary-card"><span>Total</span><strong>${s.totalRevenueLabel}</strong></div>
+          ${Object.entries(s.byPayment).map(([k, v]) => `<div class="summary-card"><span>${k.toUpperCase()}</span><strong>${formatCurrency(v)}</strong></div>`).join("")}
+        </div>
+      `;
+    }
+
+    async function loadSales() {
+      const data = await request("/sales?limit=50");
+      state.sales = data.sales || [];
+      const el = $("#sales-history");
+      if (!state.sales.length) { el.innerHTML = "<p style='color:var(--muted)'>Nenhuma venda registrada.</p>"; return; }
+      el.innerHTML = state.sales.map((s) => `
+        <div class="cart-item" style="padding:.75rem;border-bottom:1px solid var(--line)">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${s.itemName}${s.quantity > 1 ? ` x${s.quantity}` : ""}</div>
+            <div class="cart-item-meta">${s.categoryLabel} · ${s.paymentMethod.toUpperCase()} · ${new Date(s.createdAt).toLocaleString("pt-BR")}${s.operator ? ` · ${s.operator}` : ""}</div>
+          </div>
+          <div class="cart-item-total">${formatCurrency(s.totalCents)}</div>
+        </div>
+      `).join("");
+    }
+
+    function setupLogin() {
+      $("#login-btn").addEventListener("click", () => {
+        $("#login-card").classList.toggle("hidden");
+      });
+      $("#do-login").addEventListener("click", async () => {
+        const u = $("#username").value.trim();
+        const p = $("#password").value;
+        if (!u || !p) { showToast("Preencha usuário e senha.", true); return; }
+        try {
+          await request("/admin/login", { method: "POST", body: JSON.stringify({ username: u, password: p }) });
+          state.auth = true;
+          $("#login-card").classList.add("hidden");
+          $("#auth-section").innerHTML = "<span style='color:var(--green)'>✓ Logado</span>";
+          $("#main-content").classList.remove("hidden");
+          loadSummary();
+          loadSales();
+        } catch (err) {
+          showToast(err.message, true);
+        }
+      });
+    }
+
+    function setupPOS() {
+      $("#checkout-btn").addEventListener("click", checkout);
+      $("#clear-cart").addEventListener("click", () => { state.cart = []; renderCart(); });
+      $("#payment-methods").innerHTML = ["pix", "dinheiro", "cartao"].map((m) => `
+        <button class="pay-btn${state.paymentMethod === m ? " is-active" : ""}" data-pay="${m}">${m.toUpperCase()}</button>
+      `).join("");
+      $("#payment-methods").querySelectorAll(".pay-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.paymentMethod = btn.dataset.pay;
+          document.querySelectorAll(".pay-btn").forEach((b) => b.classList.toggle("is-active", b.dataset.pay === state.paymentMethod));
+        });
+      });
+    }
+
+    async function init() {
+      setupLogin();
+      setupPOS();
+      try {
+        await loadCategories();
+      } catch (err) {
+        showToast("Erro ao carregar categorias.", true);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
