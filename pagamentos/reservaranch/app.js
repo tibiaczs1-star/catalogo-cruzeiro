@@ -11,6 +11,7 @@
   let openingMusicResolve = null;
   let openingMusicReject = null;
   let openingMusicStartedResolve = null;
+  let openingMusicIsReady = false;
   const PIX_PAYMENT_OPTIONS = {
     10000: {
       amountLabel: "R$ 100,00",
@@ -100,7 +101,10 @@
   }
   function wait(ms) { return new Promise((resolve) => window.setTimeout(resolve, ms)); }
   function ensureOpeningMusicPlayer() {
-    if (!document.querySelector("#opening-player")) return Promise.reject(new Error("Player de música não encontrado."));
+    if (!document.querySelector("#opening-player")) {
+      openingMusicIsReady = false;
+      return Promise.reject(new Error("Player de música não encontrado."));
+    }
     if (openingMusicPlayer) return openingMusicReady;
     openingMusicReady = new Promise((resolve, reject) => {
       openingMusicResolve = resolve;
@@ -109,8 +113,8 @@
     const createPlayer = () => {
       if (openingMusicPlayer || !window.YT?.Player) return;
       openingMusicPlayer = new window.YT.Player("opening-player", {
-        height: "1",
-        width: "1",
+        height: "90",
+        width: "160",
         videoId: YOUTUBE_MUSIC_VIDEO_ID,
         playerVars: {
           autoplay: 0,
@@ -126,6 +130,8 @@
           onReady: (event) => {
             event.target.setVolume(OPENING_MUSIC_VOLUME);
             event.target.cueVideoById(YOUTUBE_MUSIC_VIDEO_ID);
+            event.target.getIframe?.()?.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+            openingMusicIsReady = true;
             openingMusicResolve?.(event.target);
           },
           onStateChange: (event) => {
@@ -137,6 +143,7 @@
             }
           },
           onError: () => {
+            openingMusicIsReady = false;
             openingMusicError = new Error("A trilha do YouTube não carregou.");
             openingMusicReject?.(openingMusicError);
           },
@@ -155,10 +162,9 @@
   }
   async function startOpeningMusic() {
     if (openingMusicError) throw openingMusicError;
-    const player = await Promise.race([
-      ensureOpeningMusicPlayer(),
-      wait(10000).then(() => { throw new Error("A música demorou para carregar."); }),
-    ]);
+    if (!openingMusicIsReady || !openingMusicPlayer) throw new Error("A trilha ainda não terminou de carregar.");
+    const player = openingMusicPlayer;
+    openingMusicStartedResolve = null;
     player.unMute?.();
     player.setVolume?.(OPENING_MUSIC_VOLUME);
     player.playVideo?.();
@@ -353,10 +359,19 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       openingVideo.currentTime = 0;
     }
     if (openingVoice) openingVoice.load();
-    ensureOpeningMusicPlayer().catch(() => {});
-    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
     const progress = document.querySelector("#opening-progress");
-    if (progress) progress.style.width = "100%";
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Carregando trilha…"; }
+    if (progress) progress.style.width = "72%";
+    ensureOpeningMusicPlayer()
+      .then(() => {
+        if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
+        if (progress) progress.style.width = "100%";
+      })
+      .catch(() => {
+        if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Atualize para iniciar"; }
+        if (progress) progress.style.width = "0%";
+        showToast("A trilha do YouTube não carregou. Atualize a página e tente novamente.", "error");
+      });
   }
   async function startExperience() {
     const openingButton = document.querySelector("#start-experience");
@@ -375,8 +390,11 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       }
       await playOpeningVoice(openingVoice);
     } catch {
-      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
-      showToast("Não foi possível iniciar a apresentação. Toque novamente.", "error");
+      if (openingButton) {
+        openingButton.disabled = !openingMusicIsReady;
+        openingButton.textContent = openingMusicIsReady ? "Iniciar reserva" : "Carregando trilha…";
+      }
+      showToast("A trilha ainda não iniciou. Toque em iniciar novamente.", "error");
       return;
     }
     window.setTimeout(() => {
