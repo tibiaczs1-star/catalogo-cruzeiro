@@ -467,9 +467,19 @@
           display: none !important;
         }
       }
-      @media (max-width: 820px) {
+      @media screen and (max-width: 820px) {
         body {
-          align-items: flex-start;
+          align-items: center;
+          gap: 8px;
+          padding-top: 0;
+        }
+        .page {
+          zoom: var(--page-fit, 1);
+        }
+        .download-cta {
+          right: 12px;
+          bottom: 12px;
+          padding: 12px 16px;
         }
       }
     </style>
@@ -870,5 +880,22 @@
         </p>
       </div>
     </section>
+    <script>
+      function fitMediaKitPages() {
+        const page = document.querySelector(".page");
+        if (!page) return;
+
+        const pageWidth = page.offsetWidth;
+        const availableWidth = Math.min(
+          window.innerWidth,
+          document.documentElement.clientWidth
+        );
+        const pageFit = Math.min(1, availableWidth / pageWidth);
+        document.documentElement.style.setProperty("--page-fit", pageFit);
+      }
+
+      fitMediaKitPages();
+      window.addEventListener("resize", fitMediaKitPages, { passive: true });
+    </script>
   </body>
 </html>

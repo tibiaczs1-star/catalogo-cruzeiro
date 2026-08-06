@@ -125,3 +125,10 @@ test("a inclinação da faixa preserva o desenho sem alargar o desktop", () => {
   assert.doesNotMatch(tickerBlock, /transform:\s*rotate/);
   assert.match(tickerBlock, /clip-path:\s*polygon/);
 });
+
+test("o media kit encaixa a prancheta inteira no celular", () => {
+  assert.match(kit, /--page-fit/);
+  assert.match(kit, /zoom:\s*var\(--page-fit/);
+  assert.match(kit, /function\s+fitMediaKitPages/);
+  assert.match(kit, /window\.innerWidth/);
+});
