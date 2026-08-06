@@ -119,3 +119,9 @@ test("a faixa editorial não cria rolagem horizontal no mobile", () => {
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.ticker\s*\{[^}]*transform:\s*none/
   );
 });
+
+test("a inclinação da faixa preserva o desenho sem alargar o desktop", () => {
+  const tickerBlock = css.match(/\.ticker\s*\{([^}]*)\}/)?.[1] ?? "";
+  assert.doesNotMatch(tickerBlock, /transform:\s*rotate/);
+  assert.match(tickerBlock, /clip-path:\s*polygon/);
+});

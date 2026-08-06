@@ -419,7 +419,7 @@ nav a:focus-visible::after {
   padding: 0.72rem 0;
   color: var(--ink);
   background: var(--gold);
-  transform: rotate(-1.1deg) scale(1.02);
+  clip-path: polygon(0 18%, 100% 0, 100% 82%, 0 100%);
 }
 
 .ticker div {
