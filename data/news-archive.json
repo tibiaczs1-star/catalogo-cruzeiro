@@ -1,5 +1,77 @@
 [
   {
+    "id": "manual-czs-ataque-urso-india-em-apuracao",
+    "slug": "ataque-urso-india-em-apuracao",
+    "title": "Ataque de urso na Índia segue em apuração",
+    "seoTitle": "Ataque de urso na Índia segue em apuração | Catálogo CZS",
+    "seoDescription": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "eyebrow": "Mundo",
+    "date": "05 de ago de 2026",
+    "publishedAt": "2026-08-06T04:08:00.000Z",
+    "category": "Mundo",
+    "categoryKey": "mundo",
+    "previewClass": "thumb-mundo",
+    "sourceName": "Instagram: @bolchal_news e @hindinewscg",
+    "sourceUrl": "https://www.instagram.com/reel/DbqpSyvzpqK/",
+    "sourceLabel": "Ataque de urso na Índia segue em apuração",
+    "lede": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "summary": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "analysis": "A redação optou por publicar com cautela porque os dois relatos de origem indiana não apresentam a mesma contagem de vítimas. A matéria será atualizada se houver confirmação independente.",
+    "highlights": [
+      "Relatos citam a região de Kanker, em Chhattisgarh",
+      "Há divergência sobre o número de vítimas",
+      "Conteúdo foi publicado com tratamento visual sem imagens fortes"
+    ],
+    "development": [
+      "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, no estado de Chhattisgarh. As publicações apontam mortes e feridos, mas não apresentam a mesma contagem de vítimas.",
+      "Por haver versões diferentes entre os relatos, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes ou detalhes gráficos.",
+      "As fontes consultadas foram os perfis @bolchal_news e @hindinewscg no Instagram. A matéria será atualizada se houver confirmação independente por autoridades locais ou veículos jornalísticos consolidados."
+    ],
+    "imageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
+    "feedImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
+    "sourceImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
+    "imageCredit": "Arte: Catálogo CZS / Fontes: @bolchal_news e @hindinewscg",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/2026-08-05/czs-reel-ataque-urso-india.mp4",
+    "priority": 2600,
+    "editorialPriority": "mundo-reels-apuracao-czs",
+    "crossSources": [
+      {
+        "name": "Instagram: @bolchal_news e @hindinewscg",
+        "url": "https://www.instagram.com/reel/DbqpSyvzpqK/"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 2,
+    "alternateSlugs": [],
+    "audioNarrationText": "Ataque de urso na Índia segue em apuração. Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "audioNarrationTranscript": "Ataque de urso na Índia segue em apuração. Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes. Fonte: Instagram: @bolchal_news e @hindinewscg.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Arte do Catálogo CZS com chamada para ataque de urso na Índia, marcado como caso em apuração",
+      "caption": "Ataque de urso na Índia segue em apuração",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, no estado de Chhattisgarh. As publicações apontam mortes e feridos, mas não apresentam a mesma contagem de vítimas.",
+      "Por haver versões diferentes entre os relatos, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes ou detalhes gráficos.",
+      "As fontes consultadas foram os perfis @bolchal_news e @hindinewscg no Instagram. A matéria será atualizada se houver confirmação independente por autoridades locais ou veículos jornalísticos consolidados."
+    ]
+  },
+  {
     "id": "https://jurua24horas.com/noticia/a-casa-da-mae-esta-sempre-de-portas-abertas-andre-ribeiro-participa-ha-27-anos-do-novenario-em-cruzeiro-do-sul",
     "slug": "a-casa-da-mae-esta-sempre-de-portas-abertas-andre-ribeiro-participa-ha-27-anos-do-novenario-em-c",
     "title": "A casa da mãe está sempre de portas abertas”: André Ribeiro participa há 27 anos do Novenário em Cruzeiro do Sul",
