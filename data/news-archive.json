@@ -2,52 +2,56 @@
   {
     "id": "manual-czs-ataque-urso-india-em-apuracao",
     "slug": "ataque-urso-india-em-apuracao",
-    "title": "Ataque de urso na Índia segue em apuração",
-    "seoTitle": "Ataque de urso na Índia segue em apuração | Catálogo CZS",
-    "seoDescription": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "title": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia",
+    "seoTitle": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia | Catálogo CZS",
+    "seoDescription": "Reel publicado pelo perfil hindinewscg mostra o caso em Kanker. Reportagem indiana atualizada em 6 de agosto registra quatro mortes e três feridos graves em ataques separados nos distritos de Kanker e Dhamtari, em Chhattisgarh.",
     "eyebrow": "Mundo",
     "date": "05 de ago de 2026",
     "publishedAt": "2026-08-06T04:08:00.000Z",
     "category": "Mundo",
     "categoryKey": "mundo",
     "previewClass": "thumb-mundo",
-    "sourceName": "Instagram: @bolchal_news e @hindinewscg",
-    "sourceUrl": "https://www.instagram.com/reel/DbqpSyvzpqK/",
-    "sourceLabel": "Ataque de urso na Índia segue em apuração",
-    "lede": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "summary": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "analysis": "A redação optou por publicar com cautela porque os dois relatos de origem indiana não apresentam a mesma contagem de vítimas. A matéria será atualizada se houver confirmação independente.",
+    "sourceName": "Instagram: @hindinewscg / The New Indian Express",
+    "sourceUrl": "https://www.newindianexpress.com/india/2026/Aug/06/four-killed-in-separate-bear-attacks-in-chhattisgarh-siblings-die-protecting-children",
+    "sourceLabel": "Ataques de urso deixam mortos e feridos em Chhattisgarh",
+    "lede": "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. Reportagem indiana atualizada nesta quinta-feira, 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "summary": "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. Reportagem indiana atualizada nesta quinta-feira, 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "analysis": "O Catálogo CZS conferiu o vídeo publicado por @hindinewscg e cruzou o relato com reportagem do The New Indian Express atualizada em 06/08/2026. O texto evita detalhes gráficos e mantém crédito claro à fonte do vídeo e à fonte jornalística da checagem.",
     "highlights": [
-      "Relatos citam a região de Kanker, em Chhattisgarh",
-      "Há divergência sobre o número de vítimas",
-      "Conteúdo foi publicado com tratamento visual sem imagens fortes"
+      "Reel mostra o caso em Kanker, no estado de Chhattisgarh",
+      "Reportagem indiana registra quatro mortos e três feridos graves em ataques separados",
+      "Autoridades orientaram moradores a não entrar sozinhos em áreas de floresta"
     ],
     "development": [
-      "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, no estado de Chhattisgarh. As publicações apontam mortes e feridos, mas não apresentam a mesma contagem de vítimas.",
-      "Por haver versões diferentes entre os relatos, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes ou detalhes gráficos.",
-      "As fontes consultadas foram os perfis @bolchal_news e @hindinewscg no Instagram. A matéria será atualizada se houver confirmação independente por autoridades locais ou veículos jornalísticos consolidados."
+      "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. A gravação circulou nas redes com alerta sobre mortes e feridos na região.",
+      "A reportagem do The New Indian Express, atualizada em 6 de agosto de 2026, informa que quatro pessoas morreram e três ficaram gravemente feridas em ataques separados nos distritos de Kanker e Dhamtari, também em Chhattisgarh.",
+      "Segundo o veículo, a administração florestal emitiu alerta para que moradores não entrem sozinhos em áreas de floresta. O Catálogo CZS mantém o crédito ao vídeo original, usa tratamento visual próprio e evita exposição gráfica do caso."
     ],
-    "imageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
-    "feedImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
-    "sourceImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
-    "imageCredit": "Arte: Catálogo CZS / Fontes: @bolchal_news e @hindinewscg",
+    "imageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-urso-kanker-real-centralizado.jpg",
+    "feedImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-urso-kanker-real-centralizado.jpg",
+    "sourceImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-urso-kanker-real-centralizado.jpg",
+    "imageCredit": "Arte: Catálogo CZS / Vídeo: @hindinewscg / Apuração: The New Indian Express",
     "imageFocus": "center",
     "imageFit": "cover",
     "media": null,
-    "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/2026-08-05/czs-reel-ataque-urso-india.mp4",
+    "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/2026-08-05/czs-reel-urso-kanker-real-centralizado.mp4",
     "priority": 2600,
-    "editorialPriority": "mundo-reels-apuracao-czs",
+    "editorialPriority": "mundo-reels-checado-czs",
     "crossSources": [
       {
-        "name": "Instagram: @bolchal_news e @hindinewscg",
-        "url": "https://www.instagram.com/reel/DbqpSyvzpqK/"
+        "name": "Instagram: @hindinewscg",
+        "url": "https://www.instagram.com/reel/Dbp_EO8oMpX/"
+      },
+      {
+        "name": "The New Indian Express",
+        "url": "https://www.newindianexpress.com/india/2026/Aug/06/four-killed-in-separate-bear-attacks-in-chhattisgarh-siblings-die-protecting-children"
       }
     ],
     "alternateSources": [],
     "sourceCount": 2,
     "alternateSlugs": [],
-    "audioNarrationText": "Ataque de urso na Índia segue em apuração. Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "audioNarrationTranscript": "Ataque de urso na Índia segue em apuração. Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
+    "audioNarrationText": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia. Um vídeo publicado pelo perfil indiano @hindinewscg relata o caso em Kanker. Reportagem do The New Indian Express, atualizada em 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "audioNarrationTranscript": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia. Um vídeo publicado pelo perfil indiano @hindinewscg relata o caso em Kanker. Reportagem do The New Indian Express, atualizada em 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
     "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
     "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
     "audioNarrationVoiceEngine": "edge-tts",
@@ -55,20 +59,20 @@
     "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
     "audioNarrationLanguage": "pt-BR",
     "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes. Fonte: Instagram: @bolchal_news e @hindinewscg.",
+    "videoCaptionText": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia. Reel publicado por @hindinewscg mostra o caso em Kanker; reportagem do The New Indian Express registra quatro mortes e três feridos graves em ataques separados. Fonte: @hindinewscg / The New Indian Express.",
     "videoCaptionStatus": "ready",
     "accessibility": {
-      "alt": "Arte do Catálogo CZS com chamada para ataque de urso na Índia, marcado como caso em apuração",
-      "caption": "Ataque de urso na Índia segue em apuração",
+      "alt": "Arte do Catálogo CZS com vídeo centralizado de notícia sobre ataque de urso em Kanker, na Índia",
+      "caption": "Ataques de urso deixam mortos e feridos em Chhattisgarh",
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "raiane-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
     "body": [
-      "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, no estado de Chhattisgarh. As publicações apontam mortes e feridos, mas não apresentam a mesma contagem de vítimas.",
-      "Por haver versões diferentes entre os relatos, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes ou detalhes gráficos.",
-      "As fontes consultadas foram os perfis @bolchal_news e @hindinewscg no Instagram. A matéria será atualizada se houver confirmação independente por autoridades locais ou veículos jornalísticos consolidados."
+      "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. A gravação circulou nas redes com alerta sobre mortes e feridos na região.",
+      "A reportagem do The New Indian Express, atualizada em 6 de agosto de 2026, informa que quatro pessoas morreram e três ficaram gravemente feridas em ataques separados nos distritos de Kanker e Dhamtari, também em Chhattisgarh.",
+      "Segundo o veículo, a administração florestal emitiu alerta para que moradores não entrem sozinhos em áreas de floresta. O Catálogo CZS mantém o crédito ao vídeo original, usa tratamento visual próprio e evita exposição gráfica do caso."
     ]
   },
   {

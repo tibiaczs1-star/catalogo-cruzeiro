@@ -1,162 +1,163 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-07-27T13:38:44.380Z
-Escopo: 360/746 itens recentes.
+Gerado em: 2026-08-06T12:51:49.950Z
+Escopo: 360/505 itens recentes.
 
 ## Resumo
-- Gates: P0 66, P1 215, P2 79
-- Aprovacao humana exigida: 52
-- Decisoes humanas registradas: 14
-- Pendencias de fonte: 66
-- Pendencias visuais: 210
-- Titulos alternativos gerados: 239
+- Gates: P0 84, P1 190, P2 86
+- Aprovacao humana exigida: 84
+- Decisoes humanas registradas: 0
+- Pendencias de fonte: 83
+- Pendencias visuais: 298
+- Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias tecnicas ativas para IDE
-- P0 human-approval: Cavalos são soltos e galopam pelas ruas para fugir de incêndio na França
+- P0 human-approval: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Cavalos são soltos e galopam pelas ruas para fugir de incêndio na França
+- P0 ide-fix: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Cavalos são soltos e galopam pelas ruas para fugir de incêndio na França
+- P0 ide-fix: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Motociclista sofre traumatismo craniano após colisão com caminhonete do bairro Morada do Sol, em Rio Branco
+- P0 human-approval: PM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em Rio Branco
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Motociclista sofre traumatismo craniano após colisão com caminhonete do bairro Morada do Sol, em Rio Branco
+- P0 ide-fix: PM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Motociclista sofre traumatismo craniano após colisão com caminhonete do bairro Morada do Sol, em Rio Branco
+- P0 ide-fix: PM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em Rio Branco
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: PM prende homem com garrucha no conjunto Cidade do Povo, em Rio Branco
+- P0 human-approval: Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: PM prende homem com garrucha no conjunto Cidade do Povo, em Rio Branco
+- P0 human-approval: O que Ceuta nos revela?
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: O que Ceuta nos revela?
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: PM prende homem com garrucha no conjunto Cidade do Povo, em Rio Branco
+- P0 ide-fix: O que Ceuta nos revela?
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Perseguição contra mulheres cresce no Acre, aponta Anuário de Segurança Pública
+- P0 human-approval: Quem Ama Cuida faz Adriana recuperar tudo o que perdeu em apenas uma semana
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Perseguição contra mulheres cresce no Acre, aponta Anuário de Segurança Pública
+- P0 ide-fix: Quem Ama Cuida faz Adriana recuperar tudo o que perdeu em apenas uma semana
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Perseguição contra mulheres cresce no Acre, aponta Anuário de Segurança Pública
-  Motivo: Pendencia visual: sem-imagem.
+- P0 ide-fix: Quem Ama Cuida faz Adriana recuperar tudo o que perdeu em apenas uma semana
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Trio usa papelão para driblar câmeras e é preso em tentativa a banco
+- P0 human-approval: MPAC recomenda medidas para garantir continuidade dos serviços do Hospital Santa Juliana e da Casa Souza Araújo
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Trio usa papelão para driblar câmeras e é preso em tentativa a banco
+- P0 ide-fix: MPAC recomenda medidas para garantir continuidade dos serviços do Hospital Santa Juliana e da Casa Souza Araújo
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Trio usa papelão para driblar câmeras e é preso em tentativa a banco
-  Motivo: Pendencia visual: sem-imagem.
+- P0 ide-fix: MPAC recomenda medidas para garantir continuidade dos serviços do Hospital Santa Juliana e da Casa Souza Araújo
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Acidente entre três veículos deixa ferido e bloqueia trecho da BR-364
+- P0 human-approval: MPAC amplia mobilização pelo Agosto Lilás durante Noite Católica da Expoacre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Acidente entre três veículos deixa ferido e bloqueia trecho da BR-364
+- P0 ide-fix: MPAC amplia mobilização pelo Agosto Lilás durante Noite Católica da Expoacre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acidente entre três veículos deixa ferido e bloqueia trecho da BR-364
-  Motivo: Pendencia visual: sem-imagem.
+- P0 ide-fix: MPAC amplia mobilização pelo Agosto Lilás durante Noite Católica da Expoacre
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Idoso morre no hospital após colisão entre moto e carro na BR-364
+- P0 human-approval: MPAC lança oficialmente campanha contra violência de gênero na Expoacre nesta quinta-feira
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Idoso morre no hospital após colisão entre moto e carro na BR-364
+- P0 ide-fix: MPAC lança oficialmente campanha contra violência de gênero na Expoacre nesta quinta-feira
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Idoso morre no hospital após colisão entre moto e carro na BR-364
-  Motivo: Pendencia visual: sem-imagem.
+- P0 ide-fix: MPAC lança oficialmente campanha contra violência de gênero na Expoacre nesta quinta-feira
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Ultrapassagem provoca grave acidente e jovem será transferido para Rio Branco
+- P0 human-approval: Homem é encontrado morto próximo a curral de propriedade rural
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Ultrapassagem provoca grave acidente e jovem será transferido para Rio Branco
+- P0 ide-fix: Homem é encontrado morto próximo a curral de propriedade rural
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Ultrapassagem provoca grave acidente e jovem será transferido para Rio Branco
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Economista criou projeto inovador para ajudar alunos que almejam estudar em centros de excelência no Brasil e no exterior
-  - Economista criou projeto inovador para ajudar alunos que almejam estudar em centros de excelência no Brasil e
-  - Entenda economista criou projeto inovador para ajudar alunos que almejam estudar em centros de excelência no B
-  - Jurua em Tempo informa: Economista criou projeto inovador para ajudar alunos que almejam estudar em centros de
-- ‘Tenho alma jovem, disposta a descobrir’, diz Fátima Bernardes
-  - ‘Tenho alma jovem, disposta a descobrir’, diz Fátima Bernardes: veja os pontos principais
-  - Entenda ‘Tenho alma jovem, disposta a descobrir’, diz Fátima Bernardes
-  - Jurua em Tempo informa: ‘Tenho alma jovem, disposta a descobrir’, diz Fátima Bernardes
-- Lula define ato de abertura da campanha e deve faltar a primeiro debate
-  - Lula define ato de abertura da campanha e deve faltar a primeiro debate: veja os pontos principais
-  - Entenda lula define ato de abertura da campanha e deve faltar a primeiro debate
-  - Jurua em Tempo informa: Lula define ato de abertura da campanha e deve faltar a primeiro debate
-- Ao apontar rejeição de Lula e Flávio, Caiado mira insatisfeitos para melhorar índices
-  - Ao apontar rejeição de Lula e Flávio, Caiado mira insatisfeitos para melhorar índices: veja os pontos principa
-  - Entenda ao apontar rejeição de Lula e Flávio, Caiado mira insatisfeitos para melhorar índices
-  - Jurua em Tempo informa: Ao apontar rejeição de Lula e Flávio, Caiado mira insatisfeitos para melhorar índices
-- Atuação decepcionante frustra planos do Flamengo de se aproximar da liderança
-  - Atuação decepcionante frustra planos do Flamengo de se aproximar da liderança: veja os pontos principais
-  - Entenda atuação decepcionante frustra planos do Flamengo de se aproximar da liderança
-  - Jurua em Tempo informa: Atuação decepcionante frustra planos do Flamengo de se aproximar da liderança
-- Cavalos são soltos e galopam pelas ruas para fugir de incêndio na França
-  - Cavalos são soltos e galopam pelas ruas para fugir de incêndio na França: veja os pontos principais
-  - O que se sabe sobre cavalos são soltos e galopam pelas ruas para fugir de incêndio na França
-  - Acre in Foco informa: Cavalos são soltos e galopam pelas ruas para fugir de incêndio na França
-- Teatros na Amazônia são reconhecidos como patrimônio cultural do mundo pela Unesco
-  - Teatros na Amazônia são reconhecidos como patrimônio cultural do mundo pela Unesco: veja os pontos principais
-  - Entenda teatros na Amazônia são reconhecidos como patrimônio cultural do mundo pela Unesco
-  - Jurua em Tempo informa: Teatros na Amazônia são reconhecidos como patrimônio cultural do mundo pela Unesco
-- Ação que pode tornar Flávio Bolsonaro inelegível está à deriva no TSE
-  - Ação que pode tornar Flávio Bolsonaro inelegível está à deriva no TSE: veja os pontos principais
-  - Entenda ação que pode tornar Flávio Bolsonaro inelegível está à deriva no TSE
-  - Jurua em Tempo informa: Ação que pode tornar Flávio Bolsonaro inelegível está à deriva no TSE
-- Pesquisa Real Time: Alan Rick lidera com 38%; Mailza tem 28%, Bocalom 17% e Thor Dantas aparece com 7% no Acre
-  - Entenda pesquisa Real Time: Alan Rick lidera com 38%; Mailza tem 28%, Bocalom 17% e Thor Dantas aparece com 7%
-  - Folha do Acre informa: Pesquisa Real Time: Alan Rick lidera com 38%; Mailza tem 28%, Bocalom 17% e Thor Dantas
-- Presidente de Cuba acusa EUA de “genocídio político” em meio a tensões
-  - Presidente de Cuba acusa EUA de “genocídio político” em meio a tensões: veja os pontos principais
-  - Entenda presidente de Cuba acusa EUA de “genocídio político” em meio a tensões
-  - Jurua em Tempo informa: Presidente de Cuba acusa EUA de “genocídio político” em meio a tensões
-- Internações por Síndrome Respiratória Aguda Grave atingem maior nível em três anos no Acre
-  - Internações por Síndrome Respiratória Aguda Grave atingem maior nível em três anos no Acre: veja os pontos pri
-  - Entenda internações por Síndrome Respiratória Aguda Grave atingem maior nível em três anos no Acre
-  - Folha do Acre informa: Internações por Síndrome Respiratória Aguda Grave atingem maior nível em três anos no A
-- Universidades, PM, prefeituras e outros órgãos: concursos ofertam 28,2 mil vagas
-  - Universidades, PM, prefeituras e outros órgãos: concursos ofertam 28,2 mil vagas: veja os pontos principais
-  - Entenda universidades, PM, prefeituras e outros órgãos: concursos ofertam 28,2 mil vagas
-  - Jurua em Tempo informa: Universidades, PM, prefeituras e outros órgãos: concursos ofertam 28,2 mil vagas
+- 27º Leilão Marca C reúne produtores e destaca genética bovina durante a Expoacre 2026
+  - 27º Leilão Marca C reúne produtores e destaca genética bovina durante a Expoacre 2026: veja os pontos principa
+  - Entenda 27º Leilão Marca C reúne produtores e destaca genética bovina durante a Expoacre 2026
+  - Folha do Acre informa: 27º Leilão Marca C reúne produtores e destaca genética bovina durante a Expoacre 2026
+- Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre
+  - Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre:
+  - O que se sabe sobre hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia
+  - Folha do Acre informa: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrolo
+- Manoel Moraes aposta em crescimento da candidatura de Mailza e diz que sua prioridade seguirá sendo a produção rural
+  - Manoel Moraes aposta em crescimento da candidatura de Mailza e diz que sua prioridade seguirá sendo a produção
+  - Entenda manoel Moraes aposta em crescimento da candidatura de Mailza e diz que sua prioridade seguirá sendo a
+  - Folha do Acre informa: Manoel Moraes aposta em crescimento da candidatura de Mailza e diz que sua prioridade s
+- Pavimentação do Ramal do Gama entra na fase final e deve ser concluída nesta quinta-feira
+  - Pavimentação do Ramal do Gama entra na fase final e deve ser concluída nesta quinta-feira: veja os pontos prin
+  - Entenda pavimentação do Ramal do Gama entra na fase final e deve ser concluída nesta quinta-feira
+  - Jurua Online informa: Pavimentação do Ramal do Gama entra na fase final e deve ser concluída nesta quinta-feir
+- Artesã peruana atravessa a fronteira para levar a cultura de Puerto Maldonado à Expoacre 2026
+  - Artesã peruana atravessa a fronteira para levar a cultura de Puerto Maldonado à Expoacre 2026: veja os pontos
+  - Entenda artesã peruana atravessa a fronteira para levar a cultura de Puerto Maldonado à Expoacre 2026
+  - Folha do Acre informa: Artesã peruana atravessa a fronteira para levar a cultura de Puerto Maldonado à Expoacr
+- Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos
+  - Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinh
+  - Entenda na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com paíse
+  - Folha do Acre informa: Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integ
+- Público chega cedo e trânsito já registra congestionamento para a quinta noite da Expoacre 2026
+  - Público chega cedo e trânsito já registra congestionamento para a quinta noite da Expoacre 2026: veja os ponto
+  - Entenda público chega cedo e trânsito já registra congestionamento para a quinta noite da Expoacre 2026
+  - Folha do Acre informa: Público chega cedo e trânsito já registra congestionamento para a quinta noite da Expoa
+- PM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em Rio Branco
+  - PM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em Rio Branco: veja os po
+  - O que se sabe sobre pM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em Ri
+  - Folha do Acre informa: PM apreende submetralhadora e prende 3 suspeitos durante abordagem no bairro Papoco, em
+- Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia
+  - Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia: veja os pontos principais
+  - O que se sabe sobre ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia
+  - Instagram: @hindinewscg / The New Indian Express informa: Ataques de urso deixam mortos e feridos em Chhattisg
+- O que Ceuta nos revela?
+  - O que Ceuta nos revela: veja os pontos principais
+  - O que se sabe sobre o que Ceuta nos revela
+  - Acre in Foco informa: O que Ceuta nos revela
+- ONU alerta: El Niño pode levar 49 milhões à fome aguda até 2027
+  - ONU alerta: El Niño pode levar 49 milhões à fome aguda até 2027: veja os pontos principais
+  - Entenda oNU alerta: El Niño pode levar 49 milhões à fome aguda até 2027
+  - Acre in Foco informa: ONU alerta: El Niño pode levar 49 milhões à fome aguda até 2027
+- Haiti: gangues deixam de ocupar territórios e passam a controlar o funcionamento do Estado
+  - Haiti: gangues deixam de ocupar territórios e passam a controlar o funcionamento do Estado: veja os pontos pri
+  - Entenda haiti: gangues deixam de ocupar territórios e passam a controlar o funcionamento do Estado
+  - Acre in Foco informa: Haiti: gangues deixam de ocupar territórios e passam a controlar o funcionamento do Esta
 
 ## Formatos especiais seguros
-- guia de servico: Economista criou projeto inovador para ajudar alunos que almejam estudar em centros de excelência no Brasil e no exterior
+- linha do tempo curta: Pavimentação do Ramal do Gama entra na fase final e deve ser concluída nesta quinta-feira
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: ‘Tenho alma jovem, disposta a descobrir’, diz Fátima Bernardes
+- agenda visual: Artesã peruana atravessa a fronteira para levar a cultura de Puerto Maldonado à Expoacre 2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Atuação decepcionante frustra planos do Flamengo de se aproximar da liderança
+- linha do tempo curta: Açúcar e sal não serão mais aceitos para troca de ingressos da Expoacre
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Teatros na Amazônia são reconhecidos como patrimônio cultural do mundo pela Unesco
+- linha do tempo curta: Humorista Mução tem presença confirmada na Expoacre 2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Universidades, PM, prefeituras e outros órgãos: concursos ofertam 28,2 mil vagas
+- linha do tempo curta: Operação conjunta da PF e PCAC apreende 16 kg de cocaína na BR-317
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Cesárea aumenta risco de câncer de placenta após mola gestacional
+- linha do tempo curta: Batida frontal entre veículos deixa prejuízos em ramal de Sena Madureira
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Aeronave é encontrada abandonada após pouso forçado às margens da BR-364
+- linha do tempo curta: PM prende trio com submetralhadora que pode ter sido feita em 3D
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Coreia do Norte rejeita apelos internacionais e afirma que atualizará arsenal nuclear
+- linha do tempo curta: Charlene Lima celebra força das mulheres e união de partidos durante convenção
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Rejeição a pré-candidatos à Presidência atinge 50% em nova pesquisa eleitoral
+- linha do tempo curta: Mazinho destaca força dos municípios do interior e reforça apoio à Mailza
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Candidata ao Rainha do Rodeio é homenageada com carreata em Plácido
+- linha do tempo curta: Fapac divulga resultado preliminar de bolsas do Mães da Ciência e Mentes Azuis
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: “Não vou me calar”: candidata solta nota sobre resultado do Rainha do Rodeio
+- linha do tempo curta: MC Daniel é confirmado na ExpoTarauacá; veja programação completa
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: ANDRESSA JAMYLLE AGRADECE APOIO APÓS REPRESENTAR O ACRE NO MISS UNIVERSE BRASIL 2026
+- linha do tempo curta: Bope prende homem e apreende 18 quilos de drogas e munições de fuzil
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

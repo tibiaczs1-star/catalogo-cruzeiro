@@ -2129,6 +2129,80 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": true
   },
   {
+    "id": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/",
+    "slug": "dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul",
+    "title": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T16:29:35.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/",
+    "sourceLabel": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
+    "lede": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
+    "summary": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 5400,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul Após um empate por 1 a 1 no tempo normal, o time da escola Dom Henrique Ruth, de Cruzeiro do Sul, venceu a equipe da escola Djalma Batista, de Tarauacá, por 5 a 4, nas penalidades, nesse domingo, 2, no Centro de Iniciação ao Esporte(CIE), em Cruzeiro do... A informação vem de Juruá Comunicacao.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul Após um empate por 1 a 1 no tempo normal, o time da escola Dom Henrique Ruth, de Cruzeiro do Sul, venceu a equipe da escola Djalma Batista, de Tarauacá, por 5 a 4, nas penalidades, nesse domingo, 2, no Centro de Iniciação ao Esporte(CIE), em Cruzeiro do... A informação vem de Juruá Comunicacao.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul. Após um empate por 1 a 1 no tempo normal, o time da escola Dom Henrique Ruth, de Cruzeiro do Sul, venceu a equipe da escola Djalma Batista, de Tarauacá, por 5 a 4, nas penalidades, nesse domingo, 2, no Centro de Iniciação ao... Fonte: Jurua Comunicacao.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "Jurua Comunicacao publicou em 03 de ago de 2026: Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 3,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true
+  },
+  {
     "id": "https://www.rodriguesalves.ac.gov.br/publicacoes-transparencia/cp-n-003-2026-po%C3%A7os-tubulares-profundos",
     "slug": "cp-n-003-2026-aviso-de-reabertura",
     "title": "CP N°003/2026 - Aviso de Reabertura",
@@ -2642,83 +2716,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": true
   },
   {
-    "id": "manual-czs-ataque-urso-india-em-apuracao",
-    "slug": "ataque-urso-india-em-apuracao",
-    "title": "Ataque de urso na Índia segue em apuração",
-    "seoTitle": "Ataque de urso na Índia segue em apuração | Catálogo CZS",
-    "seoDescription": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "eyebrow": "Mundo",
-    "date": "05 de ago de 2026",
-    "publishedAt": "2026-08-06T04:08:00.000Z",
-    "category": "Mundo",
-    "categoryKey": "mundo",
-    "previewClass": "thumb-mundo",
-    "sourceName": "Instagram: @bolchal_news e @hindinewscg",
-    "sourceUrl": "https://www.instagram.com/reel/DbqpSyvzpqK/",
-    "sourceLabel": "Ataque de urso na Índia segue em apuração",
-    "lede": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "summary": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "analysis": "A redação optou por publicar com cautela porque os dois relatos de origem indiana não apresentam a mesma contagem de vítimas. A matéria será atualizada se houver confirmação independente.",
-    "highlights": [
-      "Relatos citam a região de Kanker, em Chhattisgarh",
-      "Há divergência sobre o número de vítimas",
-      "Conteúdo foi publicado com tratamento visual sem imagens fortes"
-    ],
-    "development": [
-      "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, no estado de Chhattisgarh. As publicações apontam mortes e feridos, mas não apresentam a mesma contagem de vítimas.",
-      "Por haver versões diferentes entre os relatos, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes ou detalhes gráficos.",
-      "As fontes consultadas foram os perfis @bolchal_news e @hindinewscg no Instagram. A matéria será atualizada se houver confirmação independente por autoridades locais ou veículos jornalísticos consolidados."
-    ],
-    "imageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
-    "feedImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
-    "sourceImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-ataque-urso-india.jpg",
-    "imageCredit": "Arte: Catálogo CZS / Fontes: @bolchal_news e @hindinewscg",
-    "imageFocus": "center",
-    "imageFit": "cover",
-    "media": null,
-    "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/2026-08-05/czs-reel-ataque-urso-india.mp4",
-    "priority": 2600,
-    "editorialPriority": "mundo-reels-apuracao-czs",
-    "crossSources": [
-      {
-        "name": "Instagram: @bolchal_news e @hindinewscg",
-        "url": "https://www.instagram.com/reel/DbqpSyvzpqK/"
-      }
-    ],
-    "alternateSources": [],
-    "sourceCount": 2,
-    "alternateSlugs": [],
-    "audioNarrationText": "Ataque de urso na Índia segue em apuração. Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "audioNarrationTranscript": "Ataque de urso na Índia segue em apuração. Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes.",
-    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, em Chhattisgarh. Como as publicações divergem sobre o número de vítimas, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes. Fonte: Instagram: @bolchal_news e @hindinewscg.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "alt": "Arte do Catálogo CZS com chamada para ataque de urso na Índia, marcado como caso em apuração",
-      "caption": "Ataque de urso na Índia segue em apuração",
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "raiane-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Vídeos publicados por perfis da Índia relatam um ataque de urso na região de Kanker, no estado de Chhattisgarh. As publicações apontam mortes e feridos, mas não apresentam a mesma contagem de vítimas.",
-      "Por haver versões diferentes entre os relatos, o Catálogo CZS registra o caso como em apuração e evita reproduzir imagens fortes ou detalhes gráficos.",
-      "As fontes consultadas foram os perfis @bolchal_news e @hindinewscg no Instagram. A matéria será atualizada se houver confirmação independente por autoridades locais ou veículos jornalísticos consolidados."
-    ],
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": true,
-    "editorialSurfaceTier": "news",
-    "editorialLocalTier": 3
-  },
-  {
     "id": "https://www.juruainformativo.com.br/2026/08/ia-vai-ajudar-a-encontrar-vida-extraterrestre-diz-cientista/",
     "slug": "ia-vai-ajudar-a-encontrar-vida-extraterrestre-diz-cientista",
     "title": "IA vai ajudar a encontrar vida extraterrestre, diz cientista",
@@ -2928,79 +2925,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "Folha do Acre publicou em 06 de ago de 2026: Manoel Moraes aposta em crescimento da candidatura de Mailza e diz que sua prioridade seguirá sendo a produção rural.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true
-  },
-  {
-    "id": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/",
-    "slug": "na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-p",
-    "title": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
-    "eyebrow": "Politica",
-    "date": "06 de ago de 2026",
-    "publishedAt": "2026-08-06T05:37:19.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Folha do Acre",
-    "sourceUrl": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/",
-    "sourceLabel": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
-    "lede": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
-    "summary": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Inacio.webp",
-    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Inacio.webp",
-    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Inacio.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-p"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos O candidato ao Senado pela Federação PSOL-Rede, Inácio Moreira, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que pretende concentrar sua campanha na defesa do fortalecimento dos... A informação vem de Folha do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos O candidato ao Senado pela Federação PSOL-Rede, Inácio Moreira, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que pretende concentrar sua campanha na defesa do fortalecimento dos... A informação vem de Folha do Acre.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos. O candidato ao Senado pela Federação PSOL-Rede, Inácio Moreira, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que pretende concentrar sua campanha na defesa do... Fonte: Folha do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Folha do Acre publicou em 06 de ago de 2026: Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -4045,79 +3969,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": true
   },
   {
-    "id": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/",
-    "slug": "secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026",
-    "title": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
-    "eyebrow": "Acre / Governo",
-    "date": "05 de ago de 2026",
-    "publishedAt": "2026-08-06T02:26:42.000Z",
-    "category": "Acre / Governo",
-    "categoryKey": "acre-governo",
-    "previewClass": "thumb-acre-governo",
-    "sourceName": "Portal Acre",
-    "sourceUrl": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/",
-    "sourceLabel": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
-    "lede": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
-    "summary": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/Themylis-1-1024x576.jpeg",
-    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/Themylis-1-1024x576.jpeg",
-    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/Themylis-1-1024x576.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Portal Acre",
-        "url": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Portal Acre",
-        "url": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026 Durante entrevista aos jornalistas Leônidas Badaró e Daigleíne Cavalcante, na transmissão do Portal Acre na quinta noite da Expoacre 2026, a secretária de Estado de Turismo e Empreendedorismo, Temyllis Silva, afirmou que a ampliação da participação da... A informação vem de Portal Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026 Durante entrevista aos jornalistas Leônidas Badaró e Daigleíne Cavalcante, na transmissão do Portal Acre na quinta noite da Expoacre 2026, a secretária de Estado de Turismo e Empreendedorismo, Temyllis Silva, afirmou que a ampliação da participação da... A informação vem de Portal Acre.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026. Durante entrevista aos jornalistas Leônidas Badaró e Daigleíne Cavalcante, na transmissão do Portal Acre na quinta noite da Expoacre 2026, a secretária de Estado de Turismo e Empreendedorismo, Temyllis Silva, afirmou que a ampliação da... Fonte: Portal Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Portal Acre publicou em 05 de ago de 2026: Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true
-  },
-  {
     "id": "https://ac24horas.com/2026/08/05/dj-doido-e-maradona-estao-confirmados-na-copa-nacional-de-volei-de-praia/",
     "slug": "dj-doido-e-maradona-estao-confirmados-na-copa-nacional-de-volei-de-praia",
     "title": "DJ Doido e Maradona estão confirmados na Copa Nacional de Vôlei de Praia",
@@ -4398,7 +4249,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "ac24horas publicou em 05 de ago de 2026: Alysson Bestene lança o Compra Mais Rio Branco para dar transparência e facilitação aos fornecedores.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -4544,7 +4394,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Folha do Acre publicou em 05 de ago de 2026: ApexBrasil vê missão chinesa como oportunidade para aproximar empresários e ampliar negócios no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -4771,79 +4620,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "Folha do Acre publicou em 05 de ago de 2026: Em encontro com empresários chineses, Murilo Leite defende abertura de mercados para ampliar exportações da carne acreana.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true
-  },
-  {
-    "id": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/",
-    "slug": "dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre",
-    "title": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
-    "eyebrow": "Acre / Governo",
-    "date": "05 de ago de 2026",
-    "publishedAt": "2026-08-06T00:43:02.000Z",
-    "category": "Acre / Governo",
-    "categoryKey": "acre-governo",
-    "previewClass": "thumb-acre-governo",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/",
-    "sourceLabel": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
-    "lede": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
-    "summary": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-20.07.42-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-20.07.42-1200x675.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-20.07.42-1200x675.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre Foto: Kennedy Santos \" Durante a cobertura da Expoacre 2026, no Parque de Exposições Wildy Viana, a equipe do ac24horas conheceu o estande da Dindins Gourmet Acre, que vem chamando a atenção do público pelos sabores diferenciados e pela qualidade dos... A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre Foto: Kennedy Santos \" Durante a cobertura da Expoacre 2026, no Parque de Exposições Wildy Viana, a equipe do ac24horas conheceu o estande da Dindins Gourmet Acre, que vem chamando a atenção do público pelos sabores diferenciados e pela qualidade dos... A informação vem de ac24horas.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre. Foto: Kennedy Santos \" Durante a cobertura da Expoacre 2026, no Parque de Exposições Wildy Viana, a equipe do ac24horas conheceu o estande da Dindins Gourmet Acre, que vem chamando a atenção do público pelos sabores diferenciados e pela... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 05 de ago de 2026: ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -5223,80 +4999,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": true
   },
   {
-    "id": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/",
-    "slug": "juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes",
-    "title": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
-    "eyebrow": "Politica",
-    "date": "05 de ago de 2026",
-    "publishedAt": "2026-08-05T22:19:50.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/",
-    "sourceLabel": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
-    "lede": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
-    "summary": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições O juiz auxiliar da propaganda eleitoral do Tribunal Regional Eleitoral do Acre (TRE-AC), Leandro Gross, afirmou nesta quarta-feira (5) que a Justiça Eleitoral intensificará a fiscalização contra a disseminação de notícias falsas e o uso de deepfake durante... A informação vem de Juruá Comunicacao.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições O juiz auxiliar da propaganda eleitoral do Tribunal Regional Eleitoral do Acre (TRE-AC), Leandro Gross, afirmou nesta quarta-feira (5) que a Justiça Eleitoral intensificará a fiscalização contra a disseminação de notícias falsas e o uso de deepfake durante... A informação vem de Juruá Comunicacao.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições. O juiz auxiliar da propaganda eleitoral do Tribunal Regional Eleitoral do Acre (TRE-AC), Leandro Gross, afirmou nesta quarta-feira (5) que a Justiça Eleitoral intensificará a fiscalização contra a disseminação de notícias falsas e o uso... Fonte: Jurua Comunicacao.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Jurua Comunicacao publicou em 05 de ago de 2026: Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true
-  },
-  {
     "id": "https://www.vozdonorte.com.br/politica-gladson-cameli-mantem-55-de-aprovacao-no-acre-mostra-pesquisa-atlasintel-ac24horas/?utm_source=rss&utm_medium=rss&utm_campaign=politica-gladson-cameli-mantem-55-de-aprovacao-no-acre-mostra-pesquisa-atlasintel-ac24horas",
     "slug": "politica-gladson-cameli-mantem-55-de-aprovacao-no-acre-mostra-pesquisa",
     "title": "POLÍTICA – Gladson Cameli mantém 55% de aprovação no Acre, mostra pesquisa",
@@ -5507,7 +5209,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "Voz do Norte publicou em 05 de ago de 2026: Fortalecimento – Mailza mobiliza pré-candidatos e lideranças para campanha unificada no Acre.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -7272,7 +6973,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "A Gazeta do Acre publicou em 05 de ago de 2026: População é convidada para conhecer Plano de Redução de Riscos que mapeou 87 áreas vulneráveis em Rio Branco.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -7419,7 +7119,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Batelao publicou em 05 de ago de 2026: ‘Sempre estive ao lado da sociedade’, diz Gladson Camelí ao reafirmar compromisso com o Acre durante convenção.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -7786,7 +7485,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Folha do Acre publicou em 03 de ago de 2026: No Acre, Leonardo faz apelo nas redes sociais e pede ajuda para tratamento dos irmãos Pedro e Thiago: “Temos pouco tempo”.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -10221,79 +9919,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": true
   },
   {
-    "id": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/",
-    "slug": "atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria",
-    "title": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
-    "eyebrow": "Esporte",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T19:41:42.000Z",
-    "category": "Esporte",
-    "categoryKey": "esporte",
-    "previewClass": "thumb-esporte",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/",
-    "sourceLabel": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
-    "lede": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
-    "summary": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/PHOTO-2026-08-03-14-06-08-1108x1200.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/PHOTO-2026-08-03-14-06-08-1108x1200.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/PHOTO-2026-08-03-14-06-08-1108x1200.jpg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Esporte. Atleta do Preventório realiza rifa para fazer teste na Ferroviária Foto Sueli Rodrigues: Ana Luíza tem excelentes chances de ser aprovada na Ferroviária \" A zagueira/volante Ana Luíza, 13, do Preventório, resolveu fazer uma rifa com o objetivo de garantir recursos para um deslocamento entre Rio Branco e Araraquara, no... A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Esporte. Atleta do Preventório realiza rifa para fazer teste na Ferroviária Foto Sueli Rodrigues: Ana Luíza tem excelentes chances de ser aprovada na Ferroviária \" A zagueira/volante Ana Luíza, 13, do Preventório, resolveu fazer uma rifa com o objetivo de garantir recursos para um deslocamento entre Rio Branco e Araraquara, no... A informação vem de ac24horas.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Atleta do Preventório realiza rifa para fazer teste na Ferroviária. Foto Sueli Rodrigues: Ana Luíza tem excelentes chances de ser aprovada na Ferroviária \" A zagueira/volante Ana Luíza, 13, do Preventório, resolveu fazer uma rifa com o objetivo de garantir recursos para um deslocamento entre Rio Branco e... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "ac24horas publicou em 03 de ago de 2026: Atleta do Preventório realiza rifa para fazer teste na Ferroviária.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P1",
-    "editorialApproval": "auto-check",
-    "editorialSpotlightReady": true
-  },
-  {
     "id": "https://agazetadoacre.com/2026/08/noticias/geral/padre-fabio-de-melo-convida-acreanos-para-show-na-expoacre-2026-honra-de-fazer-parte-da-programacao/",
     "slug": "padre-fabio-de-melo-convida-acreanos-para-show-na-expoacre-2026-honra-de-fazer-parte-da-programa",
     "title": "Padre Fábio de Melo convida acreanos para show na Expoacre 2026: “Honra de fazer parte da programação”",
@@ -10796,7 +10421,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "O Alto Acre publicou em 03 de ago de 2026: Governo do Acre decreta situação de emergência em todo o estado por causa da seca severa.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -12807,6 +12431,297 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": true
   },
   {
+    "id": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/",
+    "slug": "secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026",
+    "title": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
+    "eyebrow": "Acre / Governo",
+    "date": "05 de ago de 2026",
+    "publishedAt": "2026-08-06T02:26:42.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "Portal Acre",
+    "sourceUrl": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/",
+    "sourceLabel": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
+    "lede": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
+    "summary": "Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/Themylis-1-1024x576.jpeg",
+    "feedImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/Themylis-1-1024x576.jpeg",
+    "sourceImageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/Themylis-1-1024x576.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Portal Acre",
+        "url": "https://portalacre.com.br/2026/08/secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "secretaria-destaca-ampliacao-da-iniciativa-privada-como-marca-da-expoacre-2026"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026 Durante entrevista aos jornalistas Leônidas Badaró e Daigleíne Cavalcante, na transmissão do Portal Acre na quinta noite da Expoacre 2026, a secretária de Estado de Turismo e Empreendedorismo, Temyllis Silva, afirmou que a ampliação da participação da... A informação vem de Portal Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026 Durante entrevista aos jornalistas Leônidas Badaró e Daigleíne Cavalcante, na transmissão do Portal Acre na quinta noite da Expoacre 2026, a secretária de Estado de Turismo e Empreendedorismo, Temyllis Silva, afirmou que a ampliação da participação da... A informação vem de Portal Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026. Durante entrevista aos jornalistas Leônidas Badaró e Daigleíne Cavalcante, na transmissão do Portal Acre na quinta noite da Expoacre 2026, a secretária de Estado de Turismo e Empreendedorismo, Temyllis Silva, afirmou que a ampliação da... Fonte: Portal Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Portal Acre publicou em 05 de ago de 2026: Secretária destaca ampliação da iniciativa privada como marca da Expoacre 2026.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true
+  },
+  {
+    "id": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/",
+    "slug": "dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre",
+    "title": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
+    "eyebrow": "Acre / Governo",
+    "date": "05 de ago de 2026",
+    "publishedAt": "2026-08-06T00:43:02.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/",
+    "sourceLabel": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
+    "lede": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
+    "summary": "‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-20.07.42-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-20.07.42-1200x675.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-20.07.42-1200x675.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/08/05/dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "dindins-gourmet-conquistam-clientes-com-sabores-artesanais-na-expoacre"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre Foto: Kennedy Santos \" Durante a cobertura da Expoacre 2026, no Parque de Exposições Wildy Viana, a equipe do ac24horas conheceu o estande da Dindins Gourmet Acre, que vem chamando a atenção do público pelos sabores diferenciados e pela qualidade dos... A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Acre / Governo. ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre Foto: Kennedy Santos \" Durante a cobertura da Expoacre 2026, no Parque de Exposições Wildy Viana, a equipe do ac24horas conheceu o estande da Dindins Gourmet Acre, que vem chamando a atenção do público pelos sabores diferenciados e pela qualidade dos... A informação vem de ac24horas.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre. Foto: Kennedy Santos \" Durante a cobertura da Expoacre 2026, no Parque de Exposições Wildy Viana, a equipe do ac24horas conheceu o estande da Dindins Gourmet Acre, que vem chamando a atenção do público pelos sabores diferenciados e pela... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "ac24horas publicou em 05 de ago de 2026: ‘Dindins gourmet’ conquistam clientes com sabores artesanais na Expoacre.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true
+  },
+  {
+    "id": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/",
+    "slug": "juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes",
+    "title": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
+    "eyebrow": "Politica",
+    "date": "05 de ago de 2026",
+    "publishedAt": "2026-08-05T22:19:50.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/",
+    "sourceLabel": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
+    "lede": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
+    "summary": "Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "juiz-do-tre-ac-alerta-partidos-sobre-combate-a-desinformacao-e-uso-de-deepfake-nas-eleicoes"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições O juiz auxiliar da propaganda eleitoral do Tribunal Regional Eleitoral do Acre (TRE-AC), Leandro Gross, afirmou nesta quarta-feira (5) que a Justiça Eleitoral intensificará a fiscalização contra a disseminação de notícias falsas e o uso de deepfake durante... A informação vem de Juruá Comunicacao.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições O juiz auxiliar da propaganda eleitoral do Tribunal Regional Eleitoral do Acre (TRE-AC), Leandro Gross, afirmou nesta quarta-feira (5) que a Justiça Eleitoral intensificará a fiscalização contra a disseminação de notícias falsas e o uso de deepfake durante... A informação vem de Juruá Comunicacao.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Juiz do TRE-AC alerta partidos sobre combate à desinformação e uso de deepfake nas eleições. O juiz auxiliar da propaganda eleitoral do Tribunal Regional Eleitoral do Acre (TRE-AC), Leandro Gross, afirmou nesta quarta-feira (5) que a Justiça Eleitoral intensificará a fiscalização contra a disseminação de notícias falsas e o uso... Fonte: Jurua Comunicacao.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true
+  },
+  {
+    "id": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/",
+    "slug": "baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick",
+    "title": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
+    "eyebrow": "Educacao",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T21:28:28.000Z",
+    "category": "Educacao",
+    "categoryKey": "educacao",
+    "previewClass": "thumb-educacao",
+    "sourceName": "Folha do Acre",
+    "sourceUrl": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/",
+    "sourceLabel": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
+    "lede": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
+    "summary": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/escolinha-alan2.webp",
+    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/escolinha-alan2.webp",
+    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/escolinha-alan2.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick Novo núcleo inicia as atividades na próxima terça-feira com 190 crianças inscritas e amplia para mais de mil o número de alunos atendidos gratuitamente em Rio Branco A Baixada da Sobral passa a contar com um espaço permanente de esporte, disciplina e... A informação vem de Folha do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick Novo núcleo inicia as atividades na próxima terça-feira com 190 crianças inscritas e amplia para mais de mil o número de alunos atendidos gratuitamente em Rio Branco A Baixada da Sobral passa a contar com um espaço permanente de esporte, disciplina e... A informação vem de Folha do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick. Novo núcleo inicia as atividades na próxima terça-feira com 190 crianças inscritas e amplia para mais de mil o número de alunos atendidos gratuitamente em Rio Branco A Baixada da Sobral passa a contar com um espaço permanente de esporte... Fonte: Folha do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true
+  },
+  {
     "id": "https://ac24horas.com/2026/08/03/epitaciolandia-faz-contratacoes-e-sonha-com-grande-campanha-na-serie-a/",
     "slug": "epitaciolandia-faz-contratacoes-e-sonha-com-grande-campanha-na-serie-a",
     "title": "Epitaciolândia faz contratações e sonha com grande campanha na Série A",
@@ -12878,6 +12793,160 @@ window.NEWS_DATA = [
     "editorialGate": "P1",
     "editorialApproval": "auto-check",
     "editorialSpotlightReady": true
+  },
+  {
+    "id": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/",
+    "slug": "atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria",
+    "title": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
+    "eyebrow": "Esporte",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T19:41:42.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/",
+    "sourceLabel": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
+    "lede": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
+    "summary": "Atleta do Preventório realiza rifa para fazer teste na Ferroviária",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/PHOTO-2026-08-03-14-06-08-1108x1200.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/PHOTO-2026-08-03-14-06-08-1108x1200.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/08/PHOTO-2026-08-03-14-06-08-1108x1200.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/08/03/atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "atleta-do-preventorio-realiza-rifa-para-fazer-teste-na-ferroviaria"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Esporte. Atleta do Preventório realiza rifa para fazer teste na Ferroviária Foto Sueli Rodrigues: Ana Luíza tem excelentes chances de ser aprovada na Ferroviária \" A zagueira/volante Ana Luíza, 13, do Preventório, resolveu fazer uma rifa com o objetivo de garantir recursos para um deslocamento entre Rio Branco e Araraquara, no... A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Esporte. Atleta do Preventório realiza rifa para fazer teste na Ferroviária Foto Sueli Rodrigues: Ana Luíza tem excelentes chances de ser aprovada na Ferroviária \" A zagueira/volante Ana Luíza, 13, do Preventório, resolveu fazer uma rifa com o objetivo de garantir recursos para um deslocamento entre Rio Branco e Araraquara, no... A informação vem de ac24horas.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Atleta do Preventório realiza rifa para fazer teste na Ferroviária. Foto Sueli Rodrigues: Ana Luíza tem excelentes chances de ser aprovada na Ferroviária \" A zagueira/volante Ana Luíza, 13, do Preventório, resolveu fazer uma rifa com o objetivo de garantir recursos para um deslocamento entre Rio Branco e... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "ac24horas publicou em 03 de ago de 2026: Atleta do Preventório realiza rifa para fazer teste na Ferroviária.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": true
+  },
+  {
+    "id": "manual-czs-ataque-urso-india-em-apuracao",
+    "slug": "ataque-urso-india-em-apuracao",
+    "title": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia",
+    "seoTitle": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia | Catálogo CZS",
+    "seoDescription": "Reel publicado pelo perfil hindinewscg mostra o caso em Kanker. Reportagem indiana atualizada em 6 de agosto registra quatro mortes e três feridos graves em ataques separados nos distritos de Kanker e Dhamtari, em Chhattisgarh.",
+    "eyebrow": "Mundo",
+    "date": "05 de ago de 2026",
+    "publishedAt": "2026-08-06T04:08:00.000Z",
+    "category": "Mundo",
+    "categoryKey": "mundo",
+    "previewClass": "thumb-mundo",
+    "sourceName": "Instagram: @hindinewscg / The New Indian Express",
+    "sourceUrl": "https://www.newindianexpress.com/india/2026/Aug/06/four-killed-in-separate-bear-attacks-in-chhattisgarh-siblings-die-protecting-children",
+    "sourceLabel": "Ataques de urso deixam mortos e feridos em Chhattisgarh",
+    "lede": "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. Reportagem indiana atualizada nesta quinta-feira, 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "summary": "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. Reportagem indiana atualizada nesta quinta-feira, 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "analysis": "O Catálogo CZS conferiu o vídeo publicado por @hindinewscg e cruzou o relato com reportagem do The New Indian Express atualizada em 06/08/2026. O texto evita detalhes gráficos e mantém crédito claro à fonte do vídeo e à fonte jornalística da checagem.",
+    "highlights": [
+      "Reel mostra o caso em Kanker, no estado de Chhattisgarh",
+      "Reportagem indiana registra quatro mortos e três feridos graves em ataques separados",
+      "Autoridades orientaram moradores a não entrar sozinhos em áreas de floresta"
+    ],
+    "development": [
+      "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. A gravação circulou nas redes com alerta sobre mortes e feridos na região.",
+      "A reportagem do The New Indian Express, atualizada em 6 de agosto de 2026, informa que quatro pessoas morreram e três ficaram gravemente feridas em ataques separados nos distritos de Kanker e Dhamtari, também em Chhattisgarh.",
+      "Segundo o veículo, a administração florestal emitiu alerta para que moradores não entrem sozinhos em áreas de floresta. O Catálogo CZS mantém o crédito ao vídeo original, usa tratamento visual próprio e evita exposição gráfica do caso."
+    ],
+    "imageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-urso-kanker-real-centralizado.jpg",
+    "feedImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-urso-kanker-real-centralizado.jpg",
+    "sourceImageUrl": "/assets/news-manual/2026-08-05/preview-czs-reel-urso-kanker-real-centralizado.jpg",
+    "imageCredit": "Arte: Catálogo CZS / Vídeo: @hindinewscg / Apuração: The New Indian Express",
+    "imageFocus": "center",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/news-manual/2026-08-05/czs-reel-urso-kanker-real-centralizado.mp4",
+    "priority": 2600,
+    "editorialPriority": "mundo-reels-checado-czs",
+    "crossSources": [
+      {
+        "name": "Instagram: @hindinewscg",
+        "url": "https://www.instagram.com/reel/Dbp_EO8oMpX/"
+      },
+      {
+        "name": "The New Indian Express",
+        "url": "https://www.newindianexpress.com/india/2026/Aug/06/four-killed-in-separate-bear-attacks-in-chhattisgarh-siblings-die-protecting-children"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 2,
+    "alternateSlugs": [],
+    "audioNarrationText": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia. Um vídeo publicado pelo perfil indiano @hindinewscg relata o caso em Kanker. Reportagem do The New Indian Express, atualizada em 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "audioNarrationTranscript": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia. Um vídeo publicado pelo perfil indiano @hindinewscg relata o caso em Kanker. Reportagem do The New Indian Express, atualizada em 6 de agosto, registra quatro mortes e três feridos graves em ataques separados em Kanker e Dhamtari.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Ataques de urso deixam mortos e feridos em Chhattisgarh, na Índia. Reel publicado por @hindinewscg mostra o caso em Kanker; reportagem do The New Indian Express registra quatro mortes e três feridos graves em ataques separados. Fonte: @hindinewscg / The New Indian Express.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Arte do Catálogo CZS com vídeo centralizado de notícia sobre ataque de urso em Kanker, na Índia",
+      "caption": "Ataques de urso deixam mortos e feridos em Chhattisgarh",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Um vídeo publicado pelo perfil indiano @hindinewscg relata um ataque de urso em Kanker, no estado de Chhattisgarh. A gravação circulou nas redes com alerta sobre mortes e feridos na região.",
+      "A reportagem do The New Indian Express, atualizada em 6 de agosto de 2026, informa que quatro pessoas morreram e três ficaram gravemente feridas em ataques separados nos distritos de Kanker e Dhamtari, também em Chhattisgarh.",
+      "Segundo o veículo, a administração florestal emitiu alerta para que moradores não entrem sozinhos em áreas de floresta. O Catálogo CZS mantém o crédito ao vídeo original, usa tratamento visual próprio e evita exposição gráfica do caso."
+    ],
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": true,
+    "editorialSurfaceTier": "news",
+    "editorialLocalTier": 0
   },
   {
     "id": "https://contilnetnoticias.com.br/politica/mazinho-destaca-forca-dos-municipios-do-interior-e-reforca-apoio-a-mailza/",
@@ -17657,7 +17726,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "O Alto Acre publicou em 05 de ago de 2026: Deepfakes podem gerar multa de até R$ 30 mil e cassação de candidatura, alerta TRE-AC.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -19341,7 +19409,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Acre in Foco publicou em 05 de ago de 2026: A última fronteira do capital: como a inteligência artificial chega para aniquilar o valor do trabalho.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -19414,7 +19481,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Acre in Foco publicou em 05 de ago de 2026: Ativista que denunciava extrema direita tem redes suspensas pelo TRE-CE até fim das eleições.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -21828,7 +21894,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "G1 Pop & Arte publicou em 04 de ago de 2026: 'Cheguei a pensar: será que a culpa era minha?': influencer denuncia deepfake após foto de biquíni ser manipulada por IA para simular nudez.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -21975,7 +22040,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Jurua em Tempo publicou em 03 de ago de 2026: Moraes extingue pena de tentente-coronel condenado por participação em trama golpista.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -23586,7 +23650,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "O Alto Acre publicou em 03 de ago de 2026: Agosto Lilás é lançado em Cruzeiro do Sul com ações de conscientização sobre violência contra a mulher.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -23806,80 +23869,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "Jurua 24 Horas publicou em 03 de ago de 2026: Prefeitura de Cruzeiro do Sul lança Agosto Lilás e fortalece ações de prevenção à violência contra a mulher.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "cruzeiro-do-sul",
-    "editorialLocalTier": 3,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
-    "id": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/",
-    "slug": "dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul",
-    "title": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
-    "eyebrow": "Prefeitura",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T16:29:35.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/",
-    "sourceLabel": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
-    "lede": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
-    "summary": "Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 5400,
-    "editorialPriority": "cruzeiro-destaque",
-    "crossSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "dom-henrique-vence-djalma-batista-e-conquista-o-open-em-cruzeiro-do-sul"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul Após um empate por 1 a 1 no tempo normal, o time da escola Dom Henrique Ruth, de Cruzeiro do Sul, venceu a equipe da escola Djalma Batista, de Tarauacá, por 5 a 4, nas penalidades, nesse domingo, 2, no Centro de Iniciação ao Esporte(CIE), em Cruzeiro do... A informação vem de Juruá Comunicacao.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul Após um empate por 1 a 1 no tempo normal, o time da escola Dom Henrique Ruth, de Cruzeiro do Sul, venceu a equipe da escola Djalma Batista, de Tarauacá, por 5 a 4, nas penalidades, nesse domingo, 2, no Centro de Iniciação ao Esporte(CIE), em Cruzeiro do... A informação vem de Juruá Comunicacao.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul. Após um empate por 1 a 1 no tempo normal, o time da escola Dom Henrique Ruth, de Cruzeiro do Sul, venceu a equipe da escola Djalma Batista, de Tarauacá, por 5 a 4, nas penalidades, nesse domingo, 2, no Centro de Iniciação ao... Fonte: Jurua Comunicacao.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Jurua Comunicacao publicou em 03 de ago de 2026: Dom Henrique vence Djalma Batista e conquista o Open em Cruzeiro do Sul.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -24330,80 +24319,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": false
   },
   {
-    "id": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/",
-    "slug": "pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco",
-    "title": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
-    "eyebrow": "Policia",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T20:21:26.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Acre Agora",
-    "sourceUrl": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/",
-    "sourceLabel": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
-    "lede": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
-    "summary": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre Agora",
-        "url": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões A Polícia Federal coordenou, por meio do Centro de Cooperação Policial Internacional da Amazônia (CCPI-Amazônia), a Operação Atalaia do Juruá, realizada entre os dias 19 e 25 de julho, para reforçar o combate ao tráfico de drogas e aos crimes ambientais na... A informação vem de Acre Agora.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões A Polícia Federal coordenou, por meio do Centro de Cooperação Policial Internacional da Amazônia (CCPI-Amazônia), a Operação Atalaia do Juruá, realizada entre os dias 19 e 25 de julho, para reforçar o combate ao tráfico de drogas e aos crimes ambientais na... A informação vem de Acre Agora.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões. A Polícia Federal coordenou, por meio do Centro de Cooperação Policial Internacional da Amazônia (CCPI-Amazônia), a Operação Atalaia do Juruá, realizada entre os dias 19 e 25 de julho, para reforçar o combate ao tráfico de drogas e aos... Fonte: Acre Agora.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "Acre Agora publicou em 03 de ago de 2026: PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 3,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
     "id": "https://jurua24horas.com/noticia/patrulha-maria-da-penha-reforca-fiscalizacao-de-medidas-protetivas-e-destaca-avanco-na-informacao-das-mulheres-no-jurua",
     "slug": "patrulha-maria-da-penha-reforca-fiscalizacao-de-medidas-protetivas-e-destaca-avanco-na-informaca",
     "title": "Patrulha Maria da Penha reforça fiscalização de medidas protetivas e destaca avanço na informação das mulheres no Juruá",
@@ -24618,79 +24533,6 @@ window.NEWS_DATA = [
     ],
     "editorialScope": "brasil-mundo",
     "editorialLocalTier": 3,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
-    "id": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/",
-    "slug": "hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-duran",
-    "title": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
-    "eyebrow": "Saude",
-    "date": "06 de ago de 2026",
-    "publishedAt": "2026-08-06T07:33:15.000Z",
-    "category": "Saude",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "Folha do Acre",
-    "sourceUrl": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/",
-    "sourceLabel": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
-    "lede": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
-    "summary": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Audione-.webp",
-    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Audione-.webp",
-    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Audione-.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-duran"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre A enfermeira Audione Fernandes, coordenadora do Centro de Internação do Hospital dos Rins, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que o principal diferencial da unidade é o... A informação vem de Folha do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre A enfermeira Audione Fernandes, coordenadora do Centro de Internação do Hospital dos Rins, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que o principal diferencial da unidade é o... A informação vem de Folha do Acre.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre. A enfermeira Audione Fernandes, coordenadora do Centro de Internação do Hospital dos Rins, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que o principal... Fonte: Folha do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Folha do Acre publicou em 06 de ago de 2026: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
     "editorialSurfaceTier": "news",
     "editorialGate": "P0",
     "editorialApproval": "human-required",
@@ -25127,7 +24969,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "O Alto Acre publicou em 05 de ago de 2026: Prefeitura de Rio Branco cria comissão intersetorial para enfrentar violência nas escolas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -25201,7 +25042,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "O Alto Acre publicou em 05 de ago de 2026: Acre já realizou 121 transplantes de fígado na Fundhacre com apoio das forças de segurança.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -26595,7 +26435,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Ministerio Publico do Acre publicou em 03 de ago de 2026: MPAC avança no calendário anual de correições com ações em Rio Branco e Senador Guiomard.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -27271,79 +27110,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": false
   },
   {
-    "id": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/",
-    "slug": "baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick",
-    "title": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
-    "eyebrow": "Educacao",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T21:28:28.000Z",
-    "category": "Educacao",
-    "categoryKey": "educacao",
-    "previewClass": "thumb-educacao",
-    "sourceName": "Folha do Acre",
-    "sourceUrl": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/",
-    "sourceLabel": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
-    "lede": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
-    "summary": "Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/escolinha-alan2.webp",
-    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/escolinha-alan2.webp",
-    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/escolinha-alan2.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Folha do Acre",
-        "url": "https://folhadoacre.com.br/2026/08/baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "baixada-da-sobral-passa-a-contar-com-escolinha-leo-moura-viabilizada-por-recursos-de-alan-rick"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick Novo núcleo inicia as atividades na próxima terça-feira com 190 crianças inscritas e amplia para mais de mil o número de alunos atendidos gratuitamente em Rio Branco A Baixada da Sobral passa a contar com um espaço permanente de esporte, disciplina e... A informação vem de Folha do Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de educação. Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick Novo núcleo inicia as atividades na próxima terça-feira com 190 crianças inscritas e amplia para mais de mil o número de alunos atendidos gratuitamente em Rio Branco A Baixada da Sobral passa a contar com um espaço permanente de esporte, disciplina e... A informação vem de Folha do Acre.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick. Novo núcleo inicia as atividades na próxima terça-feira com 190 crianças inscritas e amplia para mais de mil o número de alunos atendidos gratuitamente em Rio Branco A Baixada da Sobral passa a contar com um espaço permanente de esporte... Fonte: Folha do Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Folha do Acre publicou em 03 de ago de 2026: Baixada da Sobral passa a contar com Escolinha Léo Moura viabilizada por recursos de Alan Rick.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
     "id": "https://folhadoacre.com.br/2026/08/edinaldo-muniz-volta-a-ficar-de-pe-durante-recuperacao-apos-desabamento-de-ponte-em-sena/",
     "slug": "edinaldo-muniz-volta-a-ficar-de-pe-durante-recuperacao-apos-desabamento-de-ponte-em-sena",
     "title": "Edinaldo Muniz volta a ficar de pé durante recuperação após desabamento de ponte em Sena",
@@ -27636,79 +27402,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": false
   },
   {
-    "id": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/",
-    "slug": "tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados",
-    "title": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
-    "eyebrow": "Policia",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T21:03:00.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "O Alto Acre",
-    "sourceUrl": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/",
-    "sourceLabel": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
-    "lede": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
-    "summary": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/judo-660x1173.jpeg",
-    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/judo-660x1173.jpeg",
-    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/judo-660x1173.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "O Alto Acre",
-        "url": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados Decisão do desembargador Elcio Sabo Mendes Júnior acolhe alegação de liberdade religiosa de Judson Barros Pereira, membro da Igreja Adventista do Sétimo Dia; MP também se manifestou favoravelmente Com TJAC O Tribunal de Justiça do Acre (TJAC) manteve a... A informação vem de O Alto Acre.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados Decisão do desembargador Elcio Sabo Mendes Júnior acolhe alegação de liberdade religiosa de Judson Barros Pereira, membro da Igreja Adventista do Sétimo Dia; MP também se manifestou favoravelmente Com TJAC O Tribunal de Justiça do Acre (TJAC) manteve a... A informação vem de O Alto Acre.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados. Decisão do desembargador Elcio Sabo Mendes Júnior acolhe alegação de liberdade religiosa de Judson Barros Pereira, membro da Igreja Adventista do Sétimo Dia; MP também se manifestou favoravelmente Com TJAC O Tribunal de Justiça do Acre... Fonte: O Alto Acre.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "O Alto Acre publicou em 03 de ago de 2026: TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
     "id": "https://www.vozdonorte.com.br/223283-2/?utm_source=rss&utm_medium=rss&utm_campaign=223283-2",
     "slug": "em-agosto-ciee-oferece-novas-oportunidades-para-programas-de-estagio-no-acre",
     "title": "Em Agosto, CIEE oferece novas oportunidades para programas de estágio, no Acre",
@@ -27926,6 +27619,79 @@ window.NEWS_DATA = [
     "editorialSurfaceTier": "service-notice",
     "editorialGate": "P1",
     "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/",
+    "slug": "pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco",
+    "title": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
+    "eyebrow": "Policia",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T20:21:26.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Acre Agora",
+    "sourceUrl": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/",
+    "sourceLabel": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
+    "lede": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
+    "summary": "PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "",
+    "feedImageUrl": "",
+    "sourceImageUrl": "",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Acre Agora",
+        "url": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Acre Agora",
+        "url": "https://acreagora.com/2026/08/03/pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco-prisoes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "pf-coordena-operacao-na-fronteira-do-acre-com-peru-e-realiza-445-abordagens-50-autuacoes-e-cinco"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões A Polícia Federal coordenou, por meio do Centro de Cooperação Policial Internacional da Amazônia (CCPI-Amazônia), a Operação Atalaia do Juruá, realizada entre os dias 19 e 25 de julho, para reforçar o combate ao tráfico de drogas e aos crimes ambientais na... A informação vem de Acre Agora.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões A Polícia Federal coordenou, por meio do Centro de Cooperação Policial Internacional da Amazônia (CCPI-Amazônia), a Operação Atalaia do Juruá, realizada entre os dias 19 e 25 de julho, para reforçar o combate ao tráfico de drogas e aos crimes ambientais na... A informação vem de Acre Agora.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: PF coordena operação na fronteira do Acre com Peru e realiza 445 abordagens, 50 autuações e cinco prisões. A Polícia Federal coordenou, por meio do Centro de Cooperação Policial Internacional da Amazônia (CCPI-Amazônia), a Operação Atalaia do Juruá, realizada entre os dias 19 e 25 de julho, para reforçar o combate ao tráfico de drogas e aos... Fonte: Acre Agora.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 2,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
     "editorialSpotlightReady": false
   },
   {
@@ -28149,80 +27915,6 @@ window.NEWS_DATA = [
     "editorialSpotlightReady": false
   },
   {
-    "id": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/",
-    "slug": "pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita",
-    "title": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
-    "eyebrow": "Prefeitura",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T20:01:06.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/",
-    "sourceLabel": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
-    "lede": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
-    "summary": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/10/PADEIRO-BUJARI-.webp",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2025/10/PADEIRO-BUJARI-.webp",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2025/10/PADEIRO-BUJARI-.webp",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. PF vai apurar suposta violência política de Padeiro contra vice-prefeita FOTO: SECOM/PREFEITURA \" O Tribunal Regional Eleitoral do Acre (TRE-AC) autorizou a instauração de um inquérito policial para apurar a suposta prática do crime de violência política contra a mulher, previsto no artigo 326-B do Código Eleitoral, atribuída a... A informação vem de ac24horas.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. PF vai apurar suposta violência política de Padeiro contra vice-prefeita FOTO: SECOM/PREFEITURA \" O Tribunal Regional Eleitoral do Acre (TRE-AC) autorizou a instauração de um inquérito policial para apurar a suposta prática do crime de violência política contra a mulher, previsto no artigo 326-B do Código Eleitoral, atribuída a... A informação vem de ac24horas.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: PF vai apurar suposta violência política de Padeiro contra vice-prefeita. FOTO: SECOM/PREFEITURA \" O Tribunal Regional Eleitoral do Acre (TRE-AC) autorizou a instauração de um inquérito policial para apurar a suposta prática do crime de violência política contra a mulher, previsto no artigo 326-B do Código... Fonte: ac24horas.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-    "body": [
-      "ac24horas publicou em 03 de ago de 2026: PF vai apurar suposta violência política de Padeiro contra vice-prefeita.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
     "id": "https://agazetadoacre.com/2026/08/noticias/policia/condenado-a-mais-de-13-anos-de-prisao-e-capturado-apos-operacao-das-policias-civil-e-militar-no-acre/",
     "slug": "condenado-a-mais-de-13-anos-de-prisao-e-capturado-apos-operacao-das-policias-civil-e-militar-no-",
     "title": "Condenado a mais de 13 anos de prisão é capturado após operação das polícias Civil e Militar no Acre",
@@ -28359,79 +28051,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "ac24horas publicou em 03 de ago de 2026: Homem que sequestrou filho para voltar com a ex é condenado no AC.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
-    "id": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/",
-    "slug": "homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate",
-    "title": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
-    "eyebrow": "Policia",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T19:38:14.000Z",
-    "category": "Policia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Acre in Foco",
-    "sourceUrl": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/",
-    "sourceLabel": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
-    "lede": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
-    "summary": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/08/br-2.jpeg",
-    "feedImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/08/br-2.jpeg",
-    "sourceImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/08/br-2.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Acre in Foco",
-        "url": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Acre in Foco",
-        "url": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate Polícia Militar e Corpo de Bombeiros interditaram a ponte que liga o 1º ao 2º Distrito; negociação provocou congestionamento e desvio no trânsito da capital A Polícia Militar e o Corpo de Bombeiros Militar do Acre interditaram, na noite deste domingo (2), a... A informação vem de Acre in Foco.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate Polícia Militar e Corpo de Bombeiros interditaram a ponte que liga o 1º ao 2º Distrito; negociação provocou congestionamento e desvio no trânsito da capital A Polícia Militar e o Corpo de Bombeiros Militar do Acre interditaram, na noite deste domingo (2), a... A informação vem de Acre in Foco.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate. Polícia Militar e Corpo de Bombeiros interditaram a ponte que liga o 1º ao 2º Distrito; negociação provocou congestionamento e desvio no trânsito da capital A Polícia Militar e o Corpo de Bombeiros Militar do Acre interditaram, na noite... Fonte: Acre in Foco.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Acre in Foco publicou em 03 de ago de 2026: Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -28585,79 +28204,6 @@ window.NEWS_DATA = [
     },
     "body": [
       "Acre in Foco publicou em 03 de ago de 2026: 40 quilos de drogas escondidos em compartimento secreto de caminhonete, são apreendidos.",
-      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-      "Novas informações entram quando houver atualização verificável."
-    ],
-    "editorialScope": "acre",
-    "editorialLocalTier": 2,
-    "editorialSurfaceTier": "news",
-    "editorialGate": "P0",
-    "editorialApproval": "human-required",
-    "editorialSpotlightReady": false
-  },
-  {
-    "id": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas",
-    "slug": "seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-me",
-    "title": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
-    "eyebrow": "Cultura",
-    "date": "03 de ago de 2026",
-    "publishedAt": "2026-08-03T18:48:25.000Z",
-    "category": "Cultura",
-    "categoryKey": "cultura",
-    "previewClass": "thumb-cultura",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas",
-    "sourceLabel": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
-    "lede": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
-    "summary": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-13.05.43.jpeg",
-    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-13.05.43.jpeg",
-    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-13.05.43.jpeg",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "videoUrl": "",
-    "priority": 3400,
-    "editorialPriority": "acre-destaque",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-me"
-    ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas Da Redação A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e o Instituto Socioeducativo do Acre (ISE) firmaram parceria neste domingo, 2, para oferecer cursos de qualificação profissional a adolescentes e jovens em cumprimento de... A informação vem de Batelao.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas Da Redação A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e o Instituto Socioeducativo do Acre (ISE) firmaram parceria neste domingo, 2, para oferecer cursos de qualificação profissional a adolescentes e jovens em cumprimento de... A informação vem de Batelao.",
-    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-    "audioNarrationVoiceEngine": "edge-tts",
-    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-    "audioNarrationLanguage": "pt-BR",
-    "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas. Da Redação A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e o Instituto Socioeducativo do Acre (ISE) firmaram parceria neste domingo, 2, para oferecer cursos de qualificação profissional a adolescentes e jovens... Fonte: Batelao.",
-    "videoCaptionStatus": "ready",
-    "accessibility": {
-      "hasAudioNarrationText": true,
-      "hasAudioNarrationTranscript": true,
-      "raylVoice": "rayl-francisca-whatsapp-normal",
-      "hasVideoCaptionText": true
-    },
-    "body": [
-      "Batelao publicou em 03 de ago de 2026: SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -29032,6 +28578,440 @@ window.NEWS_DATA = [
     "editorialSurfaceTier": "service-notice",
     "editorialGate": "P1",
     "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/",
+    "slug": "hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-duran",
+    "title": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
+    "eyebrow": "Saude",
+    "date": "06 de ago de 2026",
+    "publishedAt": "2026-08-06T07:33:15.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "Folha do Acre",
+    "sourceUrl": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/",
+    "sourceLabel": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
+    "lede": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
+    "summary": "Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Audione-.webp",
+    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Audione-.webp",
+    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Audione-.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/08/hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-durante-a-expoacre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "hospital-dos-rins-destaca-atendimento-humanizado-e-amplia-servicos-para-alem-da-nefrologia-duran"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre A enfermeira Audione Fernandes, coordenadora do Centro de Internação do Hospital dos Rins, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que o principal diferencial da unidade é o... A informação vem de Folha do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de saúde. Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre A enfermeira Audione Fernandes, coordenadora do Centro de Internação do Hospital dos Rins, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que o principal diferencial da unidade é o... A informação vem de Folha do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Hospital dos Rins destaca atendimento humanizado e amplia serviços para além da nefrologia durante a Expoacre. A enfermeira Audione Fernandes, coordenadora do Centro de Internação do Hospital dos Rins, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que o principal... Fonte: Folha do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/",
+    "slug": "na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-p",
+    "title": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
+    "eyebrow": "Politica",
+    "date": "06 de ago de 2026",
+    "publishedAt": "2026-08-06T05:37:19.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Folha do Acre",
+    "sourceUrl": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/",
+    "sourceLabel": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
+    "lede": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
+    "summary": "Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Inacio.webp",
+    "feedImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Inacio.webp",
+    "sourceImageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/Inacio.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Folha do Acre",
+        "url": "https://folhadoacre.com.br/2026/08/na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-paises-vizinhos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "na-expoacre-candidato-do-psol-ao-senado-defende-industrializacao-estado-forte-e-integracao-com-p"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos O candidato ao Senado pela Federação PSOL-Rede, Inácio Moreira, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que pretende concentrar sua campanha na defesa do fortalecimento dos... A informação vem de Folha do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos O candidato ao Senado pela Federação PSOL-Rede, Inácio Moreira, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que pretende concentrar sua campanha na defesa do fortalecimento dos... A informação vem de Folha do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Na Expoacre, candidato do PSOL ao Senado defende industrialização, Estado forte e integração com países vizinhos. O candidato ao Senado pela Federação PSOL-Rede, Inácio Moreira, afirmou nesta quarta-feira (5), durante entrevista à jornalista Gina Menezes no estande da Folha do Acre, na Expoacre 2026, que pretende concentrar sua campanha na defesa do... Fonte: Folha do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "remote-secondary",
+    "editorialGate": "P1",
+    "editorialApproval": "auto-check",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/",
+    "slug": "tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados",
+    "title": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
+    "eyebrow": "Policia",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T21:03:00.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "O Alto Acre",
+    "sourceUrl": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/",
+    "sourceLabel": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
+    "lede": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
+    "summary": "TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/judo-660x1173.jpeg",
+    "feedImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/judo-660x1173.jpeg",
+    "sourceImageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/judo-660x1173.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "O Alto Acre",
+        "url": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "O Alto Acre",
+        "url": "https://oaltoacre.com/tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tjac-mantem-liminar-que-impede-policia-civil-de-escalar-delegado-para-plantoes-aos-sabados"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados Decisão do desembargador Elcio Sabo Mendes Júnior acolhe alegação de liberdade religiosa de Judson Barros Pereira, membro da Igreja Adventista do Sétimo Dia; MP também se manifestou favoravelmente Com TJAC O Tribunal de Justiça do Acre (TJAC) manteve a... A informação vem de O Alto Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados Decisão do desembargador Elcio Sabo Mendes Júnior acolhe alegação de liberdade religiosa de Judson Barros Pereira, membro da Igreja Adventista do Sétimo Dia; MP também se manifestou favoravelmente Com TJAC O Tribunal de Justiça do Acre (TJAC) manteve a... A informação vem de O Alto Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: TJAC mantém liminar que impede Polícia Civil de escalar delegado para plantões aos sábados. Decisão do desembargador Elcio Sabo Mendes Júnior acolhe alegação de liberdade religiosa de Judson Barros Pereira, membro da Igreja Adventista do Sétimo Dia; MP também se manifestou favoravelmente Com TJAC O Tribunal de Justiça do Acre... Fonte: O Alto Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/",
+    "slug": "pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita",
+    "title": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
+    "eyebrow": "Prefeitura",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T20:01:06.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/",
+    "sourceLabel": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
+    "lede": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
+    "summary": "PF vai apurar suposta violência política de Padeiro contra vice-prefeita",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/10/PADEIRO-BUJARI-.webp",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2025/10/PADEIRO-BUJARI-.webp",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2025/10/PADEIRO-BUJARI-.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/08/03/pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "pf-vai-apurar-suposta-violencia-politica-de-padeiro-contra-vice-prefeita"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. PF vai apurar suposta violência política de Padeiro contra vice-prefeita FOTO: SECOM/PREFEITURA \" O Tribunal Regional Eleitoral do Acre (TRE-AC) autorizou a instauração de um inquérito policial para apurar a suposta prática do crime de violência política contra a mulher, previsto no artigo 326-B do Código Eleitoral, atribuída a... A informação vem de ac24horas.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. PF vai apurar suposta violência política de Padeiro contra vice-prefeita FOTO: SECOM/PREFEITURA \" O Tribunal Regional Eleitoral do Acre (TRE-AC) autorizou a instauração de um inquérito policial para apurar a suposta prática do crime de violência política contra a mulher, previsto no artigo 326-B do Código Eleitoral, atribuída a... A informação vem de ac24horas.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: PF vai apurar suposta violência política de Padeiro contra vice-prefeita. FOTO: SECOM/PREFEITURA \" O Tribunal Regional Eleitoral do Acre (TRE-AC) autorizou a instauração de um inquérito policial para apurar a suposta prática do crime de violência política contra a mulher, previsto no artigo 326-B do Código... Fonte: ac24horas.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
+    "body": [
+      "ac24horas publicou em 03 de ago de 2026: PF vai apurar suposta violência política de Padeiro contra vice-prefeita.",
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/",
+    "slug": "homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate",
+    "title": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
+    "eyebrow": "Policia",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T19:38:14.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Acre in Foco",
+    "sourceUrl": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/",
+    "sourceLabel": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
+    "lede": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
+    "summary": "Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/08/br-2.jpeg",
+    "feedImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/08/br-2.jpeg",
+    "sourceImageUrl": "https://acreinfoco.com/wp-content/uploads/2026/08/br-2.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Acre in Foco",
+        "url": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Acre in Foco",
+        "url": "https://acreinfoco.com/2026/08/homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "homem-ameaca-se-jogar-da-ponte-coronel-sebastiao-dantas-e-mobiliza-equipes-de-resgate"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate Polícia Militar e Corpo de Bombeiros interditaram a ponte que liga o 1º ao 2º Distrito; negociação provocou congestionamento e desvio no trânsito da capital A Polícia Militar e o Corpo de Bombeiros Militar do Acre interditaram, na noite deste domingo (2), a... A informação vem de Acre in Foco.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de polícia. Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate Polícia Militar e Corpo de Bombeiros interditaram a ponte que liga o 1º ao 2º Distrito; negociação provocou congestionamento e desvio no trânsito da capital A Polícia Militar e o Corpo de Bombeiros Militar do Acre interditaram, na noite deste domingo (2), a... A informação vem de Acre in Foco.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: Homem ameaça se jogar da Ponte Coronel Sebastião Dantas e mobiliza equipes de resgate. Polícia Militar e Corpo de Bombeiros interditaram a ponte que liga o 1º ao 2º Distrito; negociação provocou congestionamento e desvio no trânsito da capital A Polícia Militar e o Corpo de Bombeiros Militar do Acre interditaram, na noite... Fonte: Acre in Foco.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
+    "editorialSpotlightReady": false
+  },
+  {
+    "id": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas",
+    "slug": "seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-me",
+    "title": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
+    "eyebrow": "Cultura",
+    "date": "03 de ago de 2026",
+    "publishedAt": "2026-08-03T18:48:25.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas",
+    "sourceLabel": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
+    "lede": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
+    "summary": "SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-13.05.43.jpeg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-13.05.43.jpeg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-13.05.43.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "videoUrl": "",
+    "priority": 3400,
+    "editorialPriority": "acre-destaque",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas/?utm_source=rss&utm_medium=rss&utm_campaign=seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-medidas-socioeducativas"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "seasdh-e-ise-firmam-parceria-para-qualificacao-profissional-de-adolescentes-em-cumprimento-de-me"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas Da Redação A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e o Instituto Socioeducativo do Acre (ISE) firmaram parceria neste domingo, 2, para oferecer cursos de qualificação profissional a adolescentes e jovens em cumprimento de... A informação vem de Batelao.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Cultura. SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas Da Redação A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e o Instituto Socioeducativo do Acre (ISE) firmaram parceria neste domingo, 2, para oferecer cursos de qualificação profissional a adolescentes e jovens em cumprimento de... A informação vem de Batelao.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da notícia: SEASDH e ISE firmam parceria para qualificação profissional de adolescentes em cumprimento de medidas socioeducativas. Da Redação A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) e o Instituto Socioeducativo do Acre (ISE) firmaram parceria neste domingo, 2, para oferecer cursos de qualificação profissional a adolescentes e jovens... Fonte: Batelao.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
+      "Novas informações entram quando houver atualização verificável."
+    ],
+    "editorialScope": "acre",
+    "editorialLocalTier": 0,
+    "editorialSurfaceTier": "news",
+    "editorialGate": "P0",
+    "editorialApproval": "human-required",
     "editorialSpotlightReady": false
   },
   {
@@ -29461,7 +29441,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "Ministerio Publico do Acre publicou em 05 de ago de 2026: MPAC recomenda medidas para garantir continuidade dos serviços do Hospital Santa Juliana e da Casa Souza Araújo.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -29923,8 +29902,8 @@ window.NEWS_DATA = [
     "sourceName": "Estado do Acre",
     "sourceUrl": "https://estadodoacre.com.br/2026/08/pai-deixou-a-escola-aos-14-anos-para-trabalhar-numa-metalurgica-criou-dois-filhos-e-garantiu-a-eles-as-oportunidades-que-nunca-teve-quase-50-anos-depois-voltou-a-eja-aos-63-onde-o-proprio-filho-f/",
     "sourceLabel": "Pai deixou a escola aos 14 anos para trabalhar numa metalúrgica, criou dois filhos e garantiu a eles as oportunidades que nunca teve; quase 50 anos depois, voltou à EJA aos 63...",
-    "lede": "Pai deixou a escola aos 14 anos para trabalhar numa metalúrgica, criou dois filhos e garantiu a eles as oportunidades que nunca teve; quase 50 anos depois, voltou à EJA aos 63...",
-    "summary": "Pai deixou a escola aos 14 anos para trabalhar numa metalúrgica, criou dois filhos e garantiu a eles as oportunidades que nunca teve; quase 50 anos depois, voltou à EJA aos 63...",
+    "lede": "Pai deixou a escola aos 14 anos para trabalhar numa metalúrgica, criou dois filhos e garantiu a eles as oportunidades que nunca teve; quase 50 anos depois, voltou à EJA aos 63",
+    "summary": "Pai deixou a escola aos 14 anos para trabalhar numa metalúrgica, criou dois filhos e garantiu a eles as oportunidades que nunca teve; quase 50 anos depois, voltou à EJA aos 63",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -29973,7 +29952,6 @@ window.NEWS_DATA = [
     },
     "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
     "body": [
-      "Estado do Acre publicou em 05 de ago de 2026: Pai deixou a escola aos 14 anos para trabalhar numa metalúrgica, criou dois filhos e garantiu a eles as oportunidades que nunca teve; quase 50 anos depois, voltou à EJA aos 63....",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -30412,7 +30390,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "O Alto Acre publicou em 05 de ago de 2026: Lula sanciona lei que endurece fiscalização do piso mínimo do frete para caminhoneiros.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
@@ -31291,7 +31268,6 @@ window.NEWS_DATA = [
       "hasVideoCaptionText": true
     },
     "body": [
-      "G1 Politica publicou em 05 de ago de 2026: Fux marca nova audiência no STF sobre empréstimo bilionário para o BRB; crédito segue travado.",
       "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
       "Novas informações entram quando houver atualização verificável."
     ],
