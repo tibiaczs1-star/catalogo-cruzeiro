@@ -1,5 +1,22 @@
 (() => {
   const API = "/api/arizona-ranch";
+  const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";
+  const YOUTUBE_PLAYER_PARAMS = { enablejsapi: "1", autoplay: "0", controls: "0", mute: "0", playsinline: "1" };
+  const COUVERT_ARTISTICO_LABEL = "Couvert artístico: R$ 7,00";
+  const PIX_PAYMENT_OPTIONS = {
+    10000: {
+      amountLabel: "R$ 100,00",
+      pixKey: "(68) 99205-6283",
+      qrCodeImage: "/pagamentos/reservaranch/assets/pix-arizona-100.png",
+      pixCode: "00020126530014br.gov.bcb.pix0114+55689920562830213Arizona Ranch5204000053039865406100.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503***63042013",
+    },
+    20000: {
+      amountLabel: "R$ 200,00",
+      pixKey: "(68) 99205-6283",
+      qrCodeImage: "/pagamentos/reservaranch/assets/pix-arizona-200.png",
+      pixCode: "00020126530014br.gov.bcb.pix0114+55689920562830213Arizona Ranch5204000053039865406200.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503***63048038",
+    },
+  };
   const tableSectors = [
     { id: "entrada", label: "Entrada & buffet", detail: "Mesas 01 a 12", numbers: range(1, 12) },
     { id: "frente", label: "Frente do salão", detail: "Mesas 13 a 24", numbers: range(13, 24) },
@@ -17,6 +34,8 @@
   };
 
   function range(start, end) { return Array.from({ length: end - start + 1 }, (_, index) => start + index); }
+  function selectedAmountCents() { return state.selectedSeats === 2 ? 10000 : 20000; }
+  function pixForAmount(amountCents) { return PIX_PAYMENT_OPTIONS[Number(amountCents)] || null; }
   function tableLabel(number) { return String(number).padStart(2, "0"); }
   function tableByNumber(number) { return state.tables.find((table) => table.number === number); }
   function tableSector(number) { return tableSectors.find((sector) => sector.numbers.includes(number))?.id || "centro"; }
@@ -24,7 +43,7 @@
     const labels = {
       available: { yes: "✓ Livre", no: "Livre", icon: "✓" },
       pending: { yes: "Pedido", no: "Pedido", icon: "!" },
-      reserved: { yes: "Vendida", no: "Vendida", icon: "V" },
+      reserved: { yes: "✕ Comprada", no: "Comprada", icon: "✕" },
       unavailable: { yes: "Indisponível", no: "—", icon: "×" },
       pre_sold: { yes: "Pré-venda", no: "Pré-venda", icon: "P" },
     };
@@ -115,13 +134,13 @@
   function renderSelection() {
     const table = state.selectedTable ? tableByNumber(state.selectedTable) : null;
     if (!table) { elements.selectionTitle.textContent = "Selecione uma mesa no mapa"; elements.selectionDescription.textContent = "Somente mesas com ✓ Livre podem ser escolhidas."; elements.tableNext.disabled = true; return; }
-    elements.selectionTitle.textContent = `Mesa ${tableLabel(table.number)} selecionada`; elements.selectionDescription.textContent = `${state.selectedSeats} lugares · ${formatCurrency(state.selectedSeats === 2 ? 10000 : 20000)} · pagamento integral via Pix.`; elements.tableNext.disabled = false;
+    elements.selectionTitle.textContent = `Mesa ${tableLabel(table.number)} selecionada`; elements.selectionDescription.textContent = `${state.selectedSeats} lugares · ${formatCurrency(selectedAmountCents())} · pagamento integral via Pix. ${COUVERT_ARTISTICO_LABEL} por pessoa no evento.`; elements.tableNext.disabled = false;
   }
   function renderWhatsAppStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.whatsappSelection.textContent = table ? `Você está reservando a mesa ${tableLabel(table.number)} para ${state.selectedSeats} lugares.` : ""; }
-  function renderPaymentStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.paymentInfo.textContent = ""; document.querySelector("#payment-summary-inline").textContent = table ? `Mesa ${tableLabel(table.number)} · ${state.selectedSeats} lugares · ${formatCurrency(state.selectedSeats === 2 ? 10000 : 20000)}.` : "Escolha uma mesa antes de gerar o Pix."; }
+  function renderPaymentStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.paymentInfo.textContent = ""; document.querySelector("#payment-summary-inline").textContent = table ? `Mesa ${tableLabel(table.number)} · ${state.selectedSeats} lugares · ${formatCurrency(selectedAmountCents())}. ${COUVERT_ARTISTICO_LABEL} por pessoa no evento.` : "Escolha uma mesa antes de gerar o Pix."; }
   function renderReservation() {
     elements.reservationPanel.replaceChildren(); if (!state.reservation) return;
-    const card = document.createElement("div"); card.className = "active-reservation"; card.innerHTML = `<strong>Pedido ${escapeHtml(state.reservation.code)} — ${escapeHtml(statusText(state.reservation.status))}</strong><span>Mesa ${tableLabel(state.reservation.tableNumber)} · ${formatCurrency(state.reservation.amountCents)} · confirmação manual em até 24 horas após o pagamento.</span>`;
+    const card = document.createElement("div"); card.className = "active-reservation"; card.dataset.status = state.reservation.status; card.innerHTML = `<strong>Pedido ${escapeHtml(state.reservation.code)} — ${escapeHtml(statusText(state.reservation.status))}</strong><span>Mesa ${tableLabel(state.reservation.tableNumber)} · ${formatCurrency(state.reservation.amountCents)} · ${COUVERT_ARTISTICO_LABEL} por pessoa · confirmação manual em até 24 horas após o pagamento.</span>`;
     if (["awaiting_payment", "receipt_submitted"].includes(state.reservation.status)) { const action = document.createElement("button"); action.type = "button"; action.className = "button button-secondary"; action.textContent = "Ver dados do Pix"; action.addEventListener("click", () => openPayment(state.reservation)); card.append(action); }
     elements.reservationPanel.append(card);
   }
@@ -141,15 +160,16 @@
   async function reserveSelectedTable() {
     if (!state.selectedTable || !state.contactPhone || !state.customer.name || !state.customer.email) { showToast("Confira seus dados, mesa e WhatsApp antes de gerar o Pix.", "error"); return; }
     const button = document.querySelector("#payment-pix"); button.disabled = true; button.querySelector("strong").textContent = "Gerando Pix…";
-    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, phone: state.contactPhone, customer: { name: state.customer.name, email: state.customer.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
+    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, phone: state.contactPhone, amountCents: selectedAmountCents(), customer: { name: state.customer.name, email: state.customer.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
     catch (error) { showToast(error.message, "error"); await loadTables().catch(() => undefined); }
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
   function openPayment(reservation) {
-    state.reservation = reservation; const payment = reservation.payment; elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${reservation.code}`; elements.paymentQr.removeAttribute("src"); if (payment?.qrCodeDataUrl) elements.paymentQr.src = payment.qrCodeDataUrl;
-    elements.pixAmountValue.textContent = payment?.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = payment?.pixCode || ""; elements.pixKeyDisplay.textContent = payment?.pixKey || "(68) 99205-6283";
+    state.reservation = reservation; const payment = reservation.payment; const pixOption = pixForAmount(reservation.amountCents); const qrSrc = pixOption?.qrCodeImage || payment?.qrCodeDataUrl || ""; elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${reservation.code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
+    elements.pixAmountValue.textContent = pixOption?.amountLabel || payment?.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = pixOption?.pixCode || payment?.pixCode || ""; elements.pixKeyDisplay.textContent = pixOption?.pixKey || payment?.pixKey || "(68) 99205-6283";
     document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`; document.querySelector("#order-id").textContent = reservation.code;
-    document.querySelector("#whatsapp-proof").href = payment?.whatsappUrl || "#"; document.querySelector("#upload-status").textContent = reservation.expiresAt ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.` : "Envie o comprovante após realizar o pagamento."; elements.pixInfoBody.hidden = true; elements.pixInfoToggle.setAttribute("aria-expanded", "false"); elements.paymentDialog.showModal();
+    const whatsappProof = document.querySelector("#whatsapp-proof"); if (whatsappProof) whatsappProof.href = payment?.whatsappUrl || "https://wa.me/5568992056283";
+    const uploadStatus = document.querySelector("#upload-status"); if (uploadStatus) uploadStatus.textContent = reservation.expiresAt ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.` : "Envie o comprovante após realizar o pagamento."; elements.pixInfoBody.hidden = true; elements.pixInfoToggle.setAttribute("aria-expanded", "false"); elements.paymentDialog.showModal();
   }
   async function copyPixText(text) { try { await navigator.clipboard.writeText(text); } catch { const ta = document.createElement("textarea"); ta.value = text; document.body.append(ta); ta.select(); document.execCommand("copy"); ta.remove(); } }
   async function copyPixCode() { await copyPixText(elements.pixCodeDisplay.textContent); showToast("Código Pix copiado.", "success"); }
@@ -172,12 +192,26 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     if (navigator.share) { try { await navigator.share({ title: "Pagamento Pix - Arizona Ranch", text: shareText }); return; } catch {} }
     await copyPixText(shareText); showToast("Conteúdo copiado para compartilhar.", "success"); }
   function setupOpening() {
-    const btn = document.querySelector("#start-experience");
-    if (btn) { btn.disabled = false; btn.textContent = "Reservar mesa"; }
+    const openingButton = document.querySelector("#start-experience");
+    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Reservar mesa"; }
     const progress = document.querySelector("#opening-progress");
     if (progress) progress.style.width = "100%";
+    if (!document.querySelector("#opening-music-frame")) {
+      const frame = document.createElement("iframe");
+      frame.id = "opening-music-frame";
+      frame.className = "opening-player";
+      frame.title = "Trilha oficial Arizona Ranch";
+      frame.allow = "autoplay; encrypted-media";
+      frame.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?${new URLSearchParams(YOUTUBE_PLAYER_PARAMS)}`;
+      document.body.appendChild(frame);
+    }
+  }
+  function sendPlayerCommand(command) {
+    const frame = document.querySelector("#opening-music-frame");
+    frame?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: command, args: [] }), "https://www.youtube.com");
   }
   function startExperience() {
+    sendPlayerCommand("playVideo");
     document.getElementById("opening-screen")?.classList.add("is-complete");
     document.body.classList.remove("is-opening");
   }
@@ -190,7 +224,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
     elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => { if (saveCustomerDetails()) showFlowStep("table"); }); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
     document.querySelector("#whatsapp-next").addEventListener("click", () => { const phone = document.querySelector("#contact-phone").value.trim(); if (phone.replace(/\D/g, "").length < 10) { showToast("Informe um WhatsApp válido com DDD.", "error"); return; } state.contactPhone = phone; showFlowStep("payment"); });
-    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
+    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
   async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();

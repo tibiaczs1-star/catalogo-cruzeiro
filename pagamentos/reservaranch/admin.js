@@ -1,6 +1,6 @@
 (() => {
   const API = "/api/arizona-ranch";
-  const state = { reservations: [] };
+  const state = { reservations: [], finance: null };
   const elements = {
     access: document.querySelector("#admin-access"),
     auth: document.querySelector("#admin-auth"),
@@ -60,27 +60,32 @@
     }[status] || status;
   }
 
+  function renderFinanceSummary(summary, finance = {}) {
+    return [
+      ["Aguardando", summary.awaitingPayment, "Pix pendente"],
+      ["Em análise", summary.receiptSubmitted, "Comprovante enviado"],
+      ["Confirmadas", summary.confirmed, "Mesa vendida"],
+      ["Total vendido", finance.totalSoldLabel || formatCurrency(finance.totalSold || 0), "Reservas confirmadas"],
+      ["Total esperado", finance.totalExpectedLabel || formatCurrency(finance.totalExpected || 0), "Confirmadas + pendentes"],
+      ["Couvert artístico", "R$ 7,00", "Valor por pessoa no evento"],
+    ];
+  }
+
   function renderSummary(summary) {
     elements.summary.replaceChildren();
-    const items = [
-      ["Aguardando", summary.awaitingPayment],
-      ["Em análise", summary.receiptSubmitted],
-      ["Confirmadas", summary.confirmed],
-    ];
-    if (summary.financial) {
-      items.push(
-        ["Total vendido", summary.financial.totalSoldLabel],
-        ["Pré-vendas", summary.financial.preSoldCount],
-        ["Total esperado", formatCurrency(summary.financial.totalExpected)]
-      );
-    }
-    for (const [label, value] of items) {
+    const items = renderFinanceSummary(summary, state.finance || {});
+    for (const [label, value, hint] of items) {
       const card = document.createElement("div");
       const count = document.createElement("strong");
       count.textContent = typeof value === "string" ? value : String(value || 0);
       const text = document.createElement("span");
       text.textContent = label;
       card.append(count, text);
+      if (hint) {
+        const small = document.createElement("small");
+        small.textContent = hint;
+        card.append(small);
+      }
       elements.summary.append(card);
     }
   }
@@ -118,7 +123,7 @@
       status.textContent = statusText(reservation.status);
       heading.append(title, status);
       const details = document.createElement("p");
-      details.textContent = `${reservation.customer?.name || "Cliente"} · ${reservation.customer?.email || ""} · ${reservation.seats} lugares · ${formatCurrency(reservation.amountCents)}`;
+      details.textContent = `${reservation.customer?.name || "Cliente"} · ${reservation.customer?.email || ""} · ${reservation.seats} lugares · ${formatCurrency(reservation.amountCents)} · Couvert artístico R$ 7,00 por pessoa`;
       const created = document.createElement("small");
       created.textContent = `Criado em ${formatDate(reservation.createdAt)}${reservation.receipt?.submittedAt ? ` · comprovante em ${formatDate(reservation.receipt.submittedAt)}` : ""}`;
       const actions = document.createElement("div");
@@ -153,10 +158,8 @@
   async function loadAdmin() {
     const payload = await request("/admin/reservations");
     state.reservations = payload.reservations || [];
+    state.finance = payload.finance || payload.projection || null;
     const summary = summarize(state.reservations);
-    if (payload.projection) {
-      summary.financial = payload.projection;
-    }
     renderSummary(summary);
     renderReservations();
     elements.summary.hidden = false;
