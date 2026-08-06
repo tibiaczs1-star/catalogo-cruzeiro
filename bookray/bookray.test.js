@@ -112,3 +112,10 @@ test("book conserva narrativa e destinos profissionais", () => {
   assert.match(html, /media-kit\.html/);
   assert.match(html, /downloads\/media-kit-rayane\.pdf/);
 });
+
+test("a faixa editorial não cria rolagem horizontal no mobile", () => {
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.ticker\s*\{[^}]*transform:\s*none/
+  );
+});

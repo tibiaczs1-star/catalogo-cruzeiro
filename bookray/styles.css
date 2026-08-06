@@ -973,6 +973,10 @@ dialog button {
 }
 
 @media (max-width: 900px) {
+  .ticker {
+    transform: none;
+  }
+
   header {
     padding-inline: 1.25rem;
   }
