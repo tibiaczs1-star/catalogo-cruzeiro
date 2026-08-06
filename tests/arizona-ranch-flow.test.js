@@ -49,11 +49,16 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
 
   assert.match(html, /id=["']start-experience["']/i);
-  assert.match(app, /openingButton\.textContent = "Liberar vídeo, voz e reserva"/);
-  assert.match(app, /openingVideo\.muted = false/);
+  assert.match(html, />Iniciar reserva</);
+  assert.match(app, /openingButton\.textContent = "Iniciar reserva"/);
+  assert.match(app, /openingVideo\.muted = true/);
+  assert.match(app, /openingVideo\.volume = 0/);
+  assert.doesNotMatch(app, /openingVideo\.muted = false/);
   assert.match(app, /openingVideo\.play\(\)/);
-  assert.match(app, /playOpeningVoice\(openingVoice\)/);
+  assert.match(app, /await playOpeningVoice\(openingVoice\)/);
+  assert.doesNotMatch(app, /Promise\.race\(\[playOpeningVoice\(openingVoice\), wait\(5200\)\]\)/);
   assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
+  assert.doesNotMatch(`${html}\n${app}`, /Liberar vídeo, voz e reserva/i);
   assert.doesNotMatch(html, /id=["']toggle-sound["']/i);
   assert.match(css, /\.opening-video\s*\{[^}]*object-fit:\s*contain;[^}]*filter:\s*none;/s);
   assert.doesNotMatch(css, /\.opening-screen::before/);

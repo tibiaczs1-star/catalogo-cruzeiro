@@ -109,7 +109,25 @@
     if (!openingVoice) return playBrowserVoice();
     openingVoice.currentTime = 0;
     openingVoice.volume = 1;
-    return openingVoice.play().catch(() => playBrowserVoice());
+    return new Promise((resolve) => {
+      const cleanup = () => {
+        openingVoice.removeEventListener("ended", onDone);
+        openingVoice.removeEventListener("error", onError);
+        window.clearTimeout(timeout);
+      };
+      const onDone = () => {
+        cleanup();
+        resolve();
+      };
+      const onError = () => {
+        cleanup();
+        playBrowserVoice().then(resolve);
+      };
+      const timeout = window.setTimeout(onDone, 22000);
+      openingVoice.addEventListener("ended", onDone, { once: true });
+      openingVoice.addEventListener("error", onError, { once: true });
+      openingVoice.play().catch(onError);
+    });
   }
   function updateWhatsAppProofLink(reservation = state.reservation) {
     const link = document.querySelector("#whatsapp-proof");
@@ -250,13 +268,13 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingVoice = document.querySelector("#opening-voice");
     if (openingVideo) {
       openingVideo.muted = true;
-      openingVideo.volume = 1;
+      openingVideo.volume = 0;
       openingVideo.load();
       openingVideo.pause();
       openingVideo.currentTime = 0;
     }
     if (openingVoice) openingVoice.load();
-    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Liberar vídeo, voz e reserva"; }
+    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
     const progress = document.querySelector("#opening-progress");
     if (progress) progress.style.width = "100%";
   }
@@ -265,18 +283,18 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingVideo = document.querySelector("#opening-video");
     const openingVoice = document.querySelector("#opening-voice");
     const openingScreen = document.getElementById("opening-screen");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Abrindo porteira…"; }
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Apresentando o Arizona Ranch…"; }
     try {
       openingScreen?.classList.add("is-live");
       if (openingVideo) {
-        openingVideo.muted = false;
-        openingVideo.volume = 1;
+        openingVideo.muted = true;
+        openingVideo.volume = 0;
         await openingVideo.play();
       }
-      await Promise.race([playOpeningVoice(openingVoice), wait(5200)]);
+      await playOpeningVoice(openingVoice);
     } catch {
-      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Tocar novamente para liberar o som"; }
-      showToast("O navegador bloqueou o som. Toque novamente no botão.", "error");
+      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
+      showToast("Não foi possível iniciar a apresentação. Toque novamente.", "error");
       return;
     }
     window.setTimeout(() => {
