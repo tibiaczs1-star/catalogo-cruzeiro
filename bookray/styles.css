@@ -1106,6 +1106,15 @@ dialog button {
     min-height: 60svh;
   }
 
+  .scene img {
+    transform: none;
+  }
+
+  .scene:hover img,
+  .scene:focus-visible img {
+    transform: scale(1.01);
+  }
+
   .profile {
     grid-template-columns: 1fr;
   }

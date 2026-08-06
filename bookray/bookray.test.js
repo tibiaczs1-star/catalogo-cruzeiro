@@ -70,6 +70,10 @@ test("redução de movimento mantém todas as fotos visíveis", () => {
 
 test("o enquadramento preserva rosto, corpo e identidade", () => {
   assert.match(css, /\.scene\.face-safe img\s*\{[^}]*object-fit:\s*contain/s);
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.scene img\s*\{[^}]*transform:\s*none/s,
+  );
   assert.match(html, /Sem alterar rosto, corpo ou identidade/i);
   assert.doesNotMatch(app, /imagegen|face-swap|body-edit/i);
 });
