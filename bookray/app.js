@@ -18,8 +18,7 @@ const scenes = [
   ["Calor", "Dourado, terra e coragem", "finale"],
 ];
 
-// Acervo cumulativo: 34 fotos originais + 12 novas aqui. A abertura e o perfil
-// completam as 14 novas, totalizando 48 imagens distintas, uma vez cada.
+// Acervo completo: 60 fotos na grade, mais abertura e perfil = 62 imagens.
 const assets = [
   "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
   "assets/IMG_0406.jpeg",
@@ -67,6 +66,20 @@ const assets = [
   "assets/produto-botas-douradas-perfil.webp",
   "assets/produto-botas-rosa-fazenda.webp",
   "assets/produto-botas-rosa-pegada-loja.webp",
+  "assets/raiane-sensacao-01.jpg",
+  "assets/raiane-sensacao-02.jpg",
+  "assets/raiane-sensacao-03.jpg",
+  "assets/raiane-sensacao-04.jpg",
+  "assets/raiane-sensacao-05.jpg",
+  "assets/raiane-sensacao-07.jpg",
+  "assets/raiane-sensacao-08.jpg",
+  "assets/raiane-sensacao-09.jpg",
+  "assets/raiane-sensacao-10.jpg",
+  "assets/raiane-sensacao-11.jpg",
+  "assets/raiane-sensacao-12.jpg",
+  "assets/raiane-sensacao-13.jpg",
+  "assets/raiane-sensacao-14.jpg",
+  "assets/raiane-sensacao-15.jpg",
 ];
 
 const total = assets.length + 2;
@@ -82,8 +95,17 @@ function renderPortfolio() {
     const number = String(index + 2).padStart(2, "0");
     const element = document.createElement("article");
     element.className = `scene ${item.layout} scene-${number} face-safe`;
-    element.innerHTML = `<img loading="lazy" src="${item.src}" alt="Raiane — ${item.title}"><div class="wash"></div><div class="caption"><span>${number}/${total}</span><h3>${item.title}</h3><p>${item.copy}</p></div>`;
+    element.tabIndex = 0;
+    element.setAttribute("role", "button");
+    element.setAttribute("aria-label", `Ampliar foto ${number}: ${item.title}`);
+    element.innerHTML = `<div class="scene-media"><img loading="lazy" src="${item.src}" alt="Raiane — ${item.title}"></div><div class="caption"><span>${number}/${total}</span><div><h3>${item.title}</h3><p>${item.copy}</p></div></div>`;
     element.addEventListener("click", () => openLightbox(index));
+    element.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLightbox(index);
+      }
+    });
     root.appendChild(element);
   });
 }
@@ -98,7 +120,8 @@ function openLightbox(index) {
   image.alt = `Raiane — ${item.title}`;
   box.querySelector("b").textContent = item.title;
   box.querySelector("span").textContent = item.copy;
-  box.showModal();
+  const show = () => box.showModal();
+  document.startViewTransition ? document.startViewTransition(show) : show();
 }
 
 function initLightbox() {
