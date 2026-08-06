@@ -2,7 +2,15 @@
   const API = "/api/arizona-ranch";
   const COUVERT_ARTISTICO_LABEL = "Couvert artístico: R$ 7,00";
   const CONTRACT_WHATSAPP_NUMBER = "556892260598";
-  const OPENING_VOICE_TEXT = "Bem-vindo à reserva de mesas do Arizona Ranch. Escolha sua mesa, confirme seu Pix e deixe o conforto por nossa conta.";
+  const YOUTUBE_MUSIC_VIDEO_ID = "CxKRaR6kFYs";
+  const OPENING_MUSIC_VOLUME = 62;
+  const OPENING_VOICE_TEXT = "Bem-vindo à reserva de mesas do Arizona Ranch. Dia cinco de setembro, a porteira se abre para a inauguração oficial, com a voz de Luzienne Lucena. Escolha sua mesa, faça seu Pix e envie o comprovante. Arizona Ranch: sua noite começa aqui.";
+  let openingMusicPlayer = null;
+  let openingMusicReady = null;
+  let openingMusicError = null;
+  let openingMusicResolve = null;
+  let openingMusicReject = null;
+  let openingMusicStartedResolve = null;
   const PIX_PAYMENT_OPTIONS = {
     10000: {
       amountLabel: "R$ 100,00",
@@ -91,6 +99,77 @@
     return `https://wa.me/${CONTRACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(buildProofMessage(reservation))}`;
   }
   function wait(ms) { return new Promise((resolve) => window.setTimeout(resolve, ms)); }
+  function ensureOpeningMusicPlayer() {
+    if (!document.querySelector("#opening-player")) return Promise.reject(new Error("Player de música não encontrado."));
+    if (openingMusicPlayer) return openingMusicReady;
+    openingMusicReady = new Promise((resolve, reject) => {
+      openingMusicResolve = resolve;
+      openingMusicReject = reject;
+    });
+    const createPlayer = () => {
+      if (openingMusicPlayer || !window.YT?.Player) return;
+      openingMusicPlayer = new window.YT.Player("opening-player", {
+        height: "1",
+        width: "1",
+        videoId: YOUTUBE_MUSIC_VIDEO_ID,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          loop: 1,
+          modestbranding: 1,
+          origin: window.location.origin,
+          playlist: YOUTUBE_MUSIC_VIDEO_ID,
+          playsinline: 1,
+          rel: 0,
+        },
+        events: {
+          onReady: (event) => {
+            event.target.setVolume(OPENING_MUSIC_VOLUME);
+            event.target.cueVideoById(YOUTUBE_MUSIC_VIDEO_ID);
+            openingMusicResolve?.(event.target);
+          },
+          onStateChange: (event) => {
+            const state = window.YT?.PlayerState;
+            if (!state) return;
+            if (event.data === state.PLAYING || event.data === state.BUFFERING) {
+              openingMusicStartedResolve?.();
+              openingMusicStartedResolve = null;
+            }
+          },
+          onError: () => {
+            openingMusicError = new Error("A trilha do YouTube não carregou.");
+            openingMusicReject?.(openingMusicError);
+          },
+        },
+      });
+    };
+    if (window.YT?.Player) createPlayer();
+    else {
+      const previousYouTubeReady = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (typeof previousYouTubeReady === "function") previousYouTubeReady();
+        createPlayer();
+      };
+    }
+    return openingMusicReady;
+  }
+  async function startOpeningMusic() {
+    if (openingMusicError) throw openingMusicError;
+    const player = await Promise.race([
+      ensureOpeningMusicPlayer(),
+      wait(10000).then(() => { throw new Error("A música demorou para carregar."); }),
+    ]);
+    player.unMute?.();
+    player.setVolume?.(OPENING_MUSIC_VOLUME);
+    player.playVideo?.();
+    const stateNow = typeof player.getPlayerState === "function" ? player.getPlayerState() : null;
+    if (window.YT?.PlayerState && stateNow !== window.YT.PlayerState.PLAYING && stateNow !== window.YT.PlayerState.BUFFERING) {
+      await Promise.race([
+        new Promise((resolve) => { openingMusicStartedResolve = resolve; }),
+        wait(6000).then(() => { throw new Error("A música não iniciou."); }),
+      ]);
+    }
+  }
   function playBrowserVoice() {
     if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return Promise.resolve();
     return new Promise((resolve) => {
@@ -274,6 +353,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       openingVideo.currentTime = 0;
     }
     if (openingVoice) openingVoice.load();
+    ensureOpeningMusicPlayer().catch(() => {});
     if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
     const progress = document.querySelector("#opening-progress");
     if (progress) progress.style.width = "100%";
@@ -283,8 +363,10 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingVideo = document.querySelector("#opening-video");
     const openingVoice = document.querySelector("#opening-voice");
     const openingScreen = document.getElementById("opening-screen");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Apresentando o Arizona Ranch…"; }
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Carregando trilha…"; }
     try {
+      await startOpeningMusic();
+      if (openingButton) openingButton.textContent = "Apresentando o Arizona Ranch…";
       openingScreen?.classList.add("is-live");
       if (openingVideo) {
         openingVideo.muted = true;

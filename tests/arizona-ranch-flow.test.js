@@ -30,7 +30,7 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.ok(openingMarkup);
   assert.match(openingMarkup, /id=["']opening-video["']/i);
   assert.match(openingMarkup, /id=["']opening-voice["']/i);
-  assert.doesNotMatch(openingMarkup, /id=["']opening-player["']/);
+  assert.match(openingMarkup, /id=["']opening-player["']/);
   assert.match(openingMarkup, /arizona-entrada\.mp4/i);
   assert.match(openingMarkup, /arizona-welcome\.mp3/i);
   assert.match(openingMarkup, /class=["']opening-brand["']/i);
@@ -39,7 +39,9 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.doesNotMatch(openingMarkup, /opening-image/i);
   assert.doesNotMatch(openingMarkup, /opening-vignette/i);
   assert.doesNotMatch(openingMarkup, /Todos os direitos reservados/i);
-  assert.doesNotMatch(app, /YOUTUBE_VIDEO_ID|youtube\.com|youtube-nocookie\.com|sendPlayerCommand/);
+  assert.match(html, /youtube\.com\/iframe_api/);
+  assert.match(app, /const YOUTUBE_MUSIC_VIDEO_ID = "CxKRaR6kFYs"/);
+  assert.doesNotMatch(app, /sendPlayerCommand/);
   assert.match(app, /const OPENING_VOICE_TEXT = /);
 });
 
@@ -51,11 +53,14 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(html, /id=["']start-experience["']/i);
   assert.match(html, />Iniciar reserva</);
   assert.match(app, /openingButton\.textContent = "Iniciar reserva"/);
+  assert.match(app, /openingButton\.textContent = "Carregando trilha…"/);
   assert.match(app, /openingVideo\.muted = true/);
   assert.match(app, /openingVideo\.volume = 0/);
   assert.doesNotMatch(app, /openingVideo\.muted = false/);
   assert.match(app, /openingVideo\.play\(\)/);
   assert.match(app, /await playOpeningVoice\(openingVoice\)/);
+  assert.ok(app.indexOf("await startOpeningMusic()") < app.indexOf("await openingVideo.play()"));
+  assert.ok(app.indexOf("await openingVideo.play()") < app.indexOf("await playOpeningVoice(openingVoice)"));
   assert.doesNotMatch(app, /Promise\.race\(\[playOpeningVoice\(openingVoice\), wait\(5200\)\]\)/);
   assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
   assert.doesNotMatch(`${html}\n${app}`, /Liberar vídeo, voz e reserva/i);
