@@ -171,7 +171,25 @@
     elements.openingPlayer.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?${playerParams}`;
     elements.opening.classList.add("is-complete"); document.body.classList.remove("is-opening");
   }
-  function setupOpening() { let progress = 0; const timer = window.setInterval(() => { progress = Math.min(100, progress + (progress < 72 ? 8 : 2)); elements.openingProgress.style.width = `${progress}%`; if (progress === 100) { window.clearInterval(timer); elements.openingButton.disabled = false; elements.openingButton.textContent = "Reservar mesa"; } }, 85); }
+  function setupOpening() {
+    let progress = 0;
+    const timer = window.setInterval(() => {
+      progress = Math.min(100, progress + (progress < 72 ? 8 : 2));
+      elements.openingProgress.style.width = `${progress}%`;
+      if (progress === 100) {
+        window.clearInterval(timer);
+        elements.openingButton.disabled = false;
+        elements.openingButton.textContent = "Reservar mesa";
+      }
+    }, 85);
+    setTimeout(() => {
+      if (elements.openingButton.disabled) {
+        elements.openingButton.disabled = false;
+        elements.openingButton.textContent = "Reservar mesa";
+        elements.openingProgress.style.width = "100%";
+      }
+    }, 4000);
+  }
 
   function togglePixInfo() { const expanded = elements.pixInfoToggle.getAttribute("aria-expanded") === "true"; elements.pixInfoToggle.setAttribute("aria-expanded", String(!expanded)); elements.pixInfoBody.hidden = expanded; }
   async function sharePix() {
