@@ -1,6 +1,5 @@
 (() => {
   const API = "/api/arizona-ranch";
-  const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";
   const tableSectors = [
     { id: "entrada", label: "Entrada & buffet", detail: "Mesas 01 a 12", numbers: range(1, 12) },
     { id: "frente", label: "Frente do salão", detail: "Mesas 13 a 24", numbers: range(13, 24) },
@@ -12,7 +11,7 @@
   const elements = {
     account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
     detailsConsent: document.querySelector("#details-consent"), detailsEmail: document.querySelector("#details-email"), detailsName: document.querySelector("#details-name"),
-    loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"), opening: document.querySelector("#opening-screen"), openingButton: document.querySelector("#start-experience"), openingPlayer: document.querySelector("#opening-player"), openingProgress: document.querySelector("#opening-progress"),
+    loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"),
     overviewMap: document.querySelector("#full-map"), paymentDialog: document.querySelector("#payment-dialog"), paymentInfo: document.querySelector("#payment-summary"), paymentQr: document.querySelector("#pix-qr"), pixAmountValue: document.querySelector("#pix-amount-value"), pixCodeDisplay: document.querySelector("#pix-code-display"), pixKeyDisplay: document.querySelector("#pix-key-display"), pixInfoToggle: document.querySelector("#pix-info-toggle"), pixInfoBody: document.querySelector("#pix-info-body"), pixShareBtn: document.querySelector("#pix-share-btn"), reservationPanel: document.querySelector("#reservation-panel"),
     sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast"), whatsappSelection: document.querySelector("#whatsapp-selection")
   };
@@ -162,20 +161,8 @@
     try { const dataUrl = await readAsDataUrl(file); const payload = await request(`/reservations/${state.reservation.id}/receipt`, { method: "POST", body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }) }); state.reservation = { ...payload.reservation, payment: state.reservation.payment }; renderReservation(); await loadTables(); receiptStatus.textContent = "Comprovante enviado. Aguarde a confirmação manual."; showToast("Comprovante enviado. A confirmação é feita em até 24h.", "success"); } catch (error) { showToast(error.message, "error"); } finally { if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = ""; }
   }
 
-  function sendPlayerCommand(func, args = []) {
-    elements.openingPlayer.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args }), "*");
-  }
-  function startExperience() {
-    const playerParams = new URLSearchParams({ autoplay: "1", enablejsapi: "1", loop: "1", mute: "0", origin: window.location.origin, playlist: YOUTUBE_VIDEO_ID, playsinline: "1", rel: "0" });
-    elements.openingPlayer.addEventListener("load", () => { sendPlayerCommand("unMute"); sendPlayerCommand("setVolume", [70]); sendPlayerCommand("playVideo"); }, { once: true });
-    elements.openingPlayer.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?${playerParams}`;
-    elements.opening.classList.add("is-complete"); document.body.classList.remove("is-opening");
-  }
-  function setupOpening() {
-    elements.openingProgress.style.width = "100%";
-    elements.openingButton.disabled = false;
-    elements.openingButton.textContent = "Reservar mesa";
-  }
+
+  
 
 function togglePixInfo() { const expanded = elements.pixInfoToggle.getAttribute("aria-expanded") === "true"; elements.pixInfoToggle.setAttribute("aria-expanded", String(!expanded)); elements.pixInfoBody.hidden = expanded; }
   async function sharePix() {
@@ -193,8 +180,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
     elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => { if (saveCustomerDetails()) showFlowStep("table"); }); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
     document.querySelector("#whatsapp-next").addEventListener("click", () => { const phone = document.querySelector("#contact-phone").value.trim(); if (phone.replace(/\D/g, "").length < 10) { showToast("Informe um WhatsApp válido com DDD.", "error"); return; } state.contactPhone = phone; showFlowStep("payment"); });
-    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); elements.openingButton.addEventListener("click", startExperience);
-  }
+    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file").addEventListener("change", (event) => uploadReceipt(event.target.files?.[0]));   }
   async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();
