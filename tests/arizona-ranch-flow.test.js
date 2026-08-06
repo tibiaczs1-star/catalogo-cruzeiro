@@ -19,7 +19,7 @@ test("a reserva conduz a pessoa por login, dados, mesa, WhatsApp e pagamento", (
   assert.match(html, /Pagamento por cart[ãa]o em constru[çc][ãa]o/i);
 });
 
-test("a abertura incorpora a trilha oficial e mostra o aviso de direitos", () => {
+test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const openingMarkup = html.match(
@@ -29,14 +29,17 @@ test("a abertura incorpora a trilha oficial e mostra o aviso de direitos", () =>
   assert.match(html, /id=["']opening-screen["']/);
   assert.ok(openingMarkup);
   assert.doesNotMatch(openingMarkup, /id=["']opening-player["']/);
-  assert.match(html, /Todos os direitos reservados/i);
+  assert.match(openingMarkup, /arizona-entrada\.mp4/i);
+  assert.doesNotMatch(openingMarkup, /opening-image/i);
+  assert.doesNotMatch(openingMarkup, /opening-vignette/i);
+  assert.doesNotMatch(openingMarkup, /Todos os direitos reservados/i);
   assert.match(app, /const YOUTUBE_VIDEO_ID = "CxKRaR6kFYs";/);
   assert.match(app, /mute: "0"/);
   assert.match(app, /https:\/\/www\.youtube\.com\/embed\/\$\{YOUTUBE_VIDEO_ID\}/);
   assert.doesNotMatch(app, /youtube-nocookie\.com/i);
 });
 
-test("a abertura leva direto à reserva, inicia a trilha e exibe a foto sem recorte", () => {
+test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inteiro", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
@@ -45,9 +48,21 @@ test("a abertura leva direto à reserva, inicia a trilha e exibe a foto sem reco
   assert.match(app, /openingButton\.textContent = "Reservar mesa"/);
   assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
   assert.doesNotMatch(html, /id=["']toggle-sound["']/i);
-  assert.match(css, /\.opening-image\s*\{[^}]*\/ contain no-repeat;/);
-  assert.match(css, /\.opening-screen::before\s*\{[^}]*filter:\s*blur\(/);
+  assert.match(css, /\.opening-video\s*\{[^}]*object-fit:\s*contain;[^}]*filter:\s*none;[^}]*transform:\s*none;/s);
+  assert.doesNotMatch(css, /\.opening-screen::before/);
+  assert.doesNotMatch(css, /\.opening-screen::after/);
+  assert.doesNotMatch(css, /\.opening-image/);
   assert.match(app, /function startExperience\(\)[\s\S]*?sendPlayerCommand\("playVideo"\)/);
+});
+
+test("usa os Pix copia e cola exatos dos QR enviados", () => {
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+
+  assert.match(html, /Pix copia e cola — código exato do QR/);
+  assert.match(html, /As quebras na tela não alteram o código/);
+  assert.match(app, /5406100\.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503\*\*\*63042013/);
+  assert.match(app, /5406200\.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503\*\*\*63048038/);
 });
 
 test("o mapa exibe somente mesa livre ou comprada", () => {
