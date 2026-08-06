@@ -284,31 +284,31 @@
       .cover.tr {
         right: -2%;
         top: -2%;
-        width: 48%;
-        height: 32%;
+        width: 47%;
+        height: 25%;
         clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 80%);
       }
       .cover.brand-top {
         left: -2%;
         top: -2%;
-        width: 57%;
-        height: 35%;
+        width: 52%;
+        height: 27%;
         clip-path: polygon(0 0, 100% 0, 84% 100%, 0 78%);
       }
       .cover.brand-mid {
         left: auto;
         right: -3%;
-        top: 34%;
-        width: 70%;
-        height: 50%;
-        transform: rotate(-4deg);
+        top: 38%;
+        width: 63%;
+        height: 28%;
+        transform: rotate(-2deg);
         clip-path: polygon(8% 0, 100% 7%, 92% 100%, 0 90%);
       }
       .cover.brand-low {
         left: -2%;
         bottom: -2%;
         width: 104%;
-        height: 43%;
+        height: 31%;
         transform: none;
         clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
       }
@@ -349,7 +349,7 @@
     </style>
     <style>
       html {
-        background: #17110f;
+        background: #080808;
       }
       body {
         display: flex;
@@ -389,10 +389,11 @@
       }
       .gallery-title {
         max-width: 100%;
-        font-size: 20mm;
+        font-size: 18mm;
         line-height: 0.9;
-        letter-spacing: -0.025em;
+        letter-spacing: -0.035em;
         white-space: nowrap;
+        overflow-wrap: normal;
         word-break: keep-all;
         hyphens: none;
       }
@@ -439,28 +440,18 @@
       }
       .visual-showcase {
         filter: saturate(1.5) contrast(1.13);
-        transform: scale(0.985);
+        transform: none;
         box-shadow:
           0 0 0 1px rgba(255, 255, 255, 0.18),
           0 20px 55px rgba(242, 57, 22, 0.24);
       }
       .shot,
       .card {
-        background: radial-gradient(
-          circle at 50% 30%,
-          #8e2415 0,
-          #24100d 44%,
-          #080706 100%
-        );
+        background: #090909;
       }
       .cream .shot,
       .cream .card {
-        background: radial-gradient(
-          circle at 50% 25%,
-          #ffc94f 0,
-          #ee5028 42%,
-          #2c1210 100%
-        );
+        background: #eee7da;
       }
       @media print {
         body {
@@ -517,8 +508,8 @@
       .cover::before {
         content: "R.";
         position: absolute;
-        left: 10%;
-        top: 18%;
+        left: 12%;
+        top: 15%;
         font:
           900 22pt/1 Arial Black,
           Arial,
@@ -529,9 +520,9 @@
       .cover::after {
         content: "RUNWAY / EDITORIAL";
         position: absolute;
-        left: 10%;
+        left: 12%;
         right: 7%;
-        bottom: 13%;
+        bottom: 15%;
         font:
           800 6.5pt/1.15 Arial,
           sans-serif;
@@ -546,7 +537,7 @@
       }
       .cover.tr::before,
       .cover.tr::after {
-        left: 28%;
+        left: 24%;
       }
       .cover.tr::after {
         right: 4%;
@@ -554,10 +545,10 @@
         letter-spacing: 0.1em;
       }
       .cover.brand-low::before {
-        top: 30%;
+        top: 24%;
       }
       .cover.brand-low::after {
-        bottom: 14%;
+        bottom: 18%;
       }
       .digital-safe::before {
         font-size: 15pt;

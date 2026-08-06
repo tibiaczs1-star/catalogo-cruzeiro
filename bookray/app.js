@@ -18,7 +18,7 @@ const scenes = [
   ["Calor", "Dourado, terra e coragem", "finale"],
 ];
 
-// Acervo completo: 60 fotos na grade, mais abertura e perfil = 62 imagens.
+// Acervo completo: 61 fotos na grade, mais abertura e perfil = 63 imagens.
 const assets = [
   "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
   "assets/IMG_0406.jpeg",
@@ -71,6 +71,7 @@ const assets = [
   "assets/raiane-sensacao-03.jpg",
   "assets/raiane-sensacao-04.jpg",
   "assets/raiane-sensacao-05.jpg",
+  "assets/raiane-sensacao-06.jpg",
   "assets/raiane-sensacao-07.jpg",
   "assets/raiane-sensacao-08.jpg",
   "assets/raiane-sensacao-09.jpg",
@@ -95,11 +96,29 @@ function renderPortfolio() {
     const number = String(index + 2).padStart(2, "0");
     const element = document.createElement("article");
     element.className = `scene ${item.layout} scene-${number} face-safe`;
+    element.style.setProperty("--order", index);
+    element.style.setProperty("--delay", `${(index % 3) * 90}ms`);
     element.tabIndex = 0;
     element.setAttribute("role", "button");
     element.setAttribute("aria-label", `Ampliar foto ${number}: ${item.title}`);
     element.innerHTML = `<div class="scene-media"><img loading="lazy" src="${item.src}" alt="Raiane — ${item.title}"></div><div class="caption"><span>${number}/${total}</span><div><h3>${item.title}</h3><p>${item.copy}</p></div></div>`;
     element.addEventListener("click", () => openLightbox(index));
+    if (
+      matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)")
+        .matches
+    ) {
+      element.addEventListener("pointermove", (event) => {
+        const rect = element.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        element.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
+        element.style.setProperty("--tilt-y", `${(x * 5).toFixed(2)}deg`);
+      });
+      element.addEventListener("pointerleave", () => {
+        element.style.setProperty("--tilt-x", "0deg");
+        element.style.setProperty("--tilt-y", "0deg");
+      });
+    }
     element.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
@@ -133,16 +152,70 @@ function initLightbox() {
 }
 initLightbox();
 
-addEventListener("scroll", () => {
+let motionFrame = 0;
+function updateMotion() {
   const distance = document.documentElement.scrollHeight - innerHeight;
   const progress = document.querySelector(".progress");
   if (progress)
     progress.style.transform = `scaleX(${distance ? scrollY / distance : 0})`;
   document.documentElement.style.setProperty("--scroll-y", `${scrollY}px`);
-});
+  document.documentElement.style.setProperty(
+    "--hero-shift",
+    `${Math.min(scrollY * 0.18, 180).toFixed(1)}px`,
+  );
+
+  const runway = document.querySelector(".runway-break");
+  if (runway) {
+    const rect = runway.getBoundingClientRect();
+    const runwayRange = Math.max(runway.offsetHeight - innerHeight, 1);
+    const chapterProgress = Math.max(
+      0,
+      Math.min(1, -rect.top / runwayRange),
+    );
+    runway.style.setProperty("--chapter-progress", chapterProgress.toFixed(3));
+    runway.style.setProperty(
+      "--runway-text-a",
+      `${((chapterProgress - 0.5) * 7).toFixed(2)}vw`,
+    );
+    runway.style.setProperty(
+      "--runway-text-b",
+      `${((0.5 - chapterProgress) * 7).toFixed(2)}vw`,
+    );
+    runway.style.setProperty(
+      "--runway-one-shift",
+      `${((0.5 - chapterProgress) * 120).toFixed(1)}px`,
+    );
+    runway.style.setProperty(
+      "--runway-two-shift",
+      `${((chapterProgress - 0.5) * 170).toFixed(1)}px`,
+    );
+    runway.style.setProperty(
+      "--runway-three-shift",
+      `${((0.5 - chapterProgress) * 150).toFixed(1)}px`,
+    );
+  }
+
+  document.querySelectorAll(".scene.seen").forEach((scene) => {
+    const rect = scene.getBoundingClientRect();
+    if (rect.bottom < -100 || rect.top > innerHeight + 100) return;
+    const center = rect.top + rect.height / 2;
+    const normalized = (center - innerHeight / 2) / innerHeight;
+    const shift = Math.max(-34, Math.min(34, normalized * -28));
+    scene.style.setProperty("--scene-shift", `${shift.toFixed(1)}px`);
+  });
+  motionFrame = 0;
+}
+
+function queueMotionUpdate() {
+  if (!motionFrame) motionFrame = requestAnimationFrame(updateMotion);
+}
+
+addEventListener("scroll", queueMotionUpdate, { passive: true });
+addEventListener("resize", queueMotionUpdate, { passive: true });
+queueMotionUpdate();
 
 const revealTargets = document.querySelectorAll(
-  ".scene,.manifesto,.editorial-intro",
+  ".scene,.manifesto,.editorial-intro,.stats,.runway-break,.profile",
 );
 if (typeof IntersectionObserver === "undefined") {
   revealTargets.forEach((element) => element.classList.add("seen"));
@@ -169,13 +242,31 @@ if (
     .matches
 ) {
   hero.addEventListener("pointermove", (event) => {
-    hero.style.setProperty(
-      "--mx",
-      (event.clientX / innerWidth - 0.5).toFixed(3),
-    );
-    hero.style.setProperty(
-      "--my",
-      (event.clientY / innerHeight - 0.5).toFixed(3),
-    );
+    const mx = event.clientX / innerWidth - 0.5;
+    const my = event.clientY / innerHeight - 0.5;
+    hero.style.setProperty("--hero-x", `${(mx * -18).toFixed(1)}px`);
+    hero.style.setProperty("--hero-y", `${(my * -12).toFixed(1)}px`);
+    hero.style.setProperty("--hero-rotate-x", `${(my * -3).toFixed(2)}deg`);
+    hero.style.setProperty("--hero-rotate-y", `${(mx * 4).toFixed(2)}deg`);
   });
 }
+
+const pointerOrb = document.querySelector(".pointer-orb");
+if (
+  pointerOrb &&
+  matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)").matches
+) {
+  document.addEventListener(
+    "pointermove",
+    (event) => {
+      pointerOrb.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+    },
+    { passive: true },
+  );
+}
+
+function finishIntro() {
+  document.documentElement.classList.add("experience-loaded");
+}
+addEventListener("load", finishIntro, { once: true });
+setTimeout(finishIntro, 900);
