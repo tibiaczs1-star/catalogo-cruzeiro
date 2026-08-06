@@ -200,7 +200,7 @@ body.is-opening { overflow: hidden; }
 .pix-share-btn svg { flex: 0 0 auto; }
 
 /* ===== Premium local polish: brilho cinematográfico leve ===== */
-.opening-screen.is-live::after { animation: cinematic-glow-in 1250ms ease-out both, gold-veil-pass 4.8s ease-in-out .65s 2; }
+.opening-screen.is-live::after { animation: cinematic-glow-in 900ms ease-out both; }
 .button-gold { position: relative; overflow: hidden; isolation: isolate; }
 .button-gold::after { content: ""; position: absolute; inset: -130% -52%; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255, 239, 182, .08) 43%, rgba(255, 216, 112, .42) 50%, rgba(255, 247, 219, .18) 57%, transparent 66%); opacity: 0; transform: translateX(-74%) rotate(18deg); animation: cta-glimmer 3.8s ease-in-out 1.2s infinite; }
 [data-flow-step]:not([hidden]) { animation: step-gold-rise 420ms ease-out both; }

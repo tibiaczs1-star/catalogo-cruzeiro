@@ -31,10 +31,10 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.match(openingMarkup, /id=["']opening-video["']/i);
   assert.match(openingMarkup, /id=["']opening-voice["']/i);
   assert.match(openingMarkup, /id=["']opening-player["']/);
-  assert.match(openingMarkup, /arizona-entrada\.mp4/i);
+  assert.match(openingMarkup, /arizona-entrada-mobile\.mp4/i);
   assert.match(openingMarkup, /arizona-welcome\.mp3/i);
   assert.match(openingMarkup, /class=["']opening-brand["']/i);
-  assert.match(openingMarkup, /arizona-logo\.png/i);
+  assert.match(openingMarkup, /arizona-logo-web\.png/i);
   assert.match(openingMarkup, /Reserva para a Inaugura[çc][ãa]o Oficial do Arizona Ranch/i);
   assert.match(openingMarkup, /Sua mesa escolhida com calma/i);
   assert.doesNotMatch(openingMarkup, /opening-image/i);
@@ -48,6 +48,8 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.match(app, /const OPENING_MUSIC_READY_TIMEOUT_MS = 4200/);
   assert.doesNotMatch(app, /sendPlayerCommand/);
   assert.match(app, /const OPENING_VOICE_TEXT = /);
+  assert.doesNotMatch(html, /rel=["']preload["'][^>]+arizona-entrada\.mp4/i);
+  assert.match(openingMarkup, /preload=["']metadata["']/i);
 });
 
 test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inteiro", () => {
@@ -70,16 +72,20 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(app, /openingVideo\.muted = true/);
   assert.match(app, /openingVideo\.volume = 0/);
   assert.doesNotMatch(app, /openingVideo\.muted = false/);
-  assert.match(app, /openingVideo\.play\(\)/);
+  assert.match(app, /const videoPlay = openingVideo\.play\(\)/);
+  assert.match(app, /await Promise\.race\(\[videoPlay, wait\(850\)\]\)/);
   assert.match(app, /await Promise\.race\(\[\s*playOpeningVoice\(openingVoice\),\s*wait\(OPENING_PRESENTATION_MAX_MS\),\s*\]\)/);
   const startExperienceBody = app.match(/async function startExperience\(\) \{([\s\S]*?)\n  function bindEvents/)?.[1] || "";
-  const videoPlayIndex = startExperienceBody.indexOf("await openingVideo.play()");
+  const videoPlayIndex = startExperienceBody.indexOf("const videoPlay = openingVideo.play()");
+  const videoRaceIndex = startExperienceBody.indexOf("await Promise.race([videoPlay, wait(850)])");
   const voicePlayIndex = startExperienceBody.indexOf("playOpeningVoice(openingVoice)");
   const musicPlayIndex = startExperienceBody.indexOf("await startOpeningMusic()");
   assert.ok(videoPlayIndex > -1);
+  assert.ok(videoRaceIndex > -1);
   assert.ok(voicePlayIndex > -1);
   assert.ok(musicPlayIndex > -1);
   assert.ok(videoPlayIndex < voicePlayIndex);
+  assert.ok(videoRaceIndex < voicePlayIndex);
   assert.ok(voicePlayIndex < musicPlayIndex);
   const startMusicBody = app.match(/async function startOpeningMusic\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   assert.ok(startMusicBody.includes("player.playVideo?.()"));
@@ -106,7 +112,7 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(css, /@keyframes gold-veil-pass/);
   assert.match(css, /@keyframes cta-glimmer/);
   assert.match(css, /@keyframes step-gold-rise/);
-  assert.match(css, /\.opening-screen\.is-live::after\s*\{[^}]*gold-veil-pass/s);
+  assert.doesNotMatch(css, /\.opening-screen\.is-live::after\s*\{[^}]*gold-veil-pass/s);
   assert.match(css, /\.button-gold::after\s*\{[^}]*cta-glimmer/s);
   assert.match(css, /\[data-flow-step\]:not\(\[hidden\]\)\s*\{[^}]*step-gold-rise/s);
   assert.match(css, /logo-breathe 2\.7s ease-in-out 1\.45s 2/);
