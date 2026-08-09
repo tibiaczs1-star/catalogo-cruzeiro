@@ -25,3 +25,16 @@ test("real V8 hero final CSS prevents cropped hero images and clipped titles", (
   assert.match(css, /#leadStory\.v8-live-hero \.v8-hero-copy h1[\s\S]*-webkit-line-clamp:\s*4\s*!important/, "desktop hero title must be clamped instead of visually cropped");
   assert.match(css, /#heroSide \.v8-rail-story\[data-czs-media-fit="contain"\] img[\s\S]*object-fit:\s*contain\s*!important/, "side rail graphic cards must not be amputated");
 });
+
+test("hero side rail keeps cards readable instead of breaking words", () => {
+  const css = fs.readFileSync(path.join(ROOT, "assets", "v8-final", "v8-merge-ready.css"), "utf8");
+  const balanceBlock = css.slice(css.lastIndexOf("CZS_HERO_RAIL_BALANCE_20260809"));
+
+  assert.notEqual(balanceBlock, css, "missing final side-rail balance block");
+  assert.match(balanceBlock, /grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(min\(100%,\s*300px\),\s*1fr\)\)\s*!important/, "rail cards need a safe minimum width");
+  assert.match(balanceBlock, /#heroSide \.v8-rail-story b,[\s\S]*#heroSide \.story-row h3[\s\S]*overflow-wrap:\s*normal\s*!important/, "rail titles must use natural wrapping");
+  assert.match(balanceBlock, /word-break:\s*normal\s*!important/, "rail titles must not split words");
+  assert.match(balanceBlock, /hyphens:\s*none\s*!important/, "rail titles must not insert automatic hyphens");
+  assert.match(balanceBlock, /-webkit-line-clamp:\s*3\s*!important/, "rail titles need enough room for readable headlines");
+  assert.match(balanceBlock, /\.v8-rail-story-text-only[\s\S]{0,240}grid-template-columns:\s*minmax\(0,\s*1fr\)/i, "text-only rail cards must not reserve an empty image column");
+});
