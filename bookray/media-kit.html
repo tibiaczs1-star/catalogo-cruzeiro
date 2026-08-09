@@ -881,6 +881,13 @@
         "assets/raiane-sensacao-13.jpg",
         "assets/raiane-sensacao-14.jpg",
         "assets/raiane-sensacao-15.jpg",
+        "assets/raiane-jardim-noturno-01-corpo.png",
+        "assets/raiane-jardim-noturno-02.jpeg",
+        "assets/raiane-jardim-noturno-03.jpeg",
+        "assets/raiane-jardim-noturno-04.jpeg",
+        "assets/raiane-jardim-noturno-05.jpeg",
+        "assets/raiane-jardim-noturno-06.jpeg",
+        "assets/raiane-bastidores-retrato-01.jpeg",
         "assets/campanha-country-raiane-botas-rosa-loja.webp",
       ];
 
@@ -901,7 +908,7 @@
               return `<figure class="archive-photo"><img src="${src}" alt="Raiane — foto ${number}" /><figcaption>${number}</figcaption></figure>`;
             })
             .join("");
-          page.innerHTML = `<div class="eyebrow">Acervo completo / ${String(pageNumber).padStart(2, "0")}</div><div class="rule"></div><h2 class="gallery-title">${offset === 0 ? "63 FOTOS" : "CONTINUAÇÃO"}</h2><div class="archive-grid">${figures}</div><span class="folio">${String(pageNumber).padStart(2, "0")}</span>`;
+          page.innerHTML = `<div class="eyebrow">Acervo completo / ${String(pageNumber).padStart(2, "0")}</div><div class="rule"></div><h2 class="gallery-title">${offset === 0 ? "70 FOTOS" : "CONTINUAÇÃO"}</h2><div class="archive-grid">${figures}</div><span class="folio">${String(pageNumber).padStart(2, "0")}</span>`;
           contactPage.before(page);
         }
       }

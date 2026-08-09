@@ -18,7 +18,7 @@ const scenes = [
   ["Calor", "Dourado, terra e coragem", "finale"],
 ];
 
-// Acervo completo: 61 fotos na grade, mais abertura e perfil = 63 imagens.
+// Acervo completo: 68 fotos na grade, mais abertura e perfil = 70 imagens.
 const assets = [
   "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
   "assets/IMG_0406.jpeg",
@@ -81,10 +81,79 @@ const assets = [
   "assets/raiane-sensacao-13.jpg",
   "assets/raiane-sensacao-14.jpg",
   "assets/raiane-sensacao-15.jpg",
+  "assets/raiane-jardim-noturno-01-corpo.png",
+  "assets/raiane-jardim-noturno-02.jpeg",
+  "assets/raiane-jardim-noturno-03.jpeg",
+  "assets/raiane-jardim-noturno-04.jpeg",
+  "assets/raiane-jardim-noturno-05.jpeg",
+  "assets/raiane-jardim-noturno-06.jpeg",
+  "assets/raiane-bastidores-retrato-01.jpeg",
 ];
 
 const total = assets.length + 2;
+const newEditorialScenes = [
+  {
+    title: "Flor em cena",
+    copy: "Presença de corpo inteiro, elegância natural e domínio da silhueta",
+    layout: "full-body garden",
+  },
+  {
+    title: "Contraste vivo",
+    copy: "O olhar encontra cor, textura e personalidade",
+    layout: "portrait garden face-safe",
+  },
+  {
+    title: "Olhar botânico",
+    copy: "Força serena em uma composição intensa",
+    layout: "poster garden face-safe",
+  },
+  {
+    title: "Linha e gesto",
+    copy: "Postura longa, gesto leve e leitura comercial",
+    layout: "full-body garden",
+  },
+  {
+    title: "Vertical",
+    copy: "Proporção, presença e movimento sem excesso",
+    layout: "full-body garden",
+  },
+  {
+    title: "Close",
+    copy: "Expressão aberta e beleza em primeiro plano",
+    layout: "portrait garden face-safe",
+  },
+  {
+    title: "Entre cenas",
+    copy: "Um retrato espontâneo que amplia a versatilidade do book",
+    layout: "portrait backstage face-safe",
+  },
+];
+
+const chapterMarkers = new Map([
+  [
+    61,
+    {
+      number: "03",
+      kicker: "COR / PRESENÇA / CONTRASTE",
+      title: "JARDIM NOTURNO",
+      copy: "Raiane atravessa a cor com elegância e sustenta a cena do retrato ao corpo inteiro.",
+    },
+  ],
+  [
+    67,
+    {
+      number: "04",
+      kicker: "NATURAL / PRÓXIMO / REAL",
+      title: "BASTIDORES",
+      copy: "A mesma identidade fora da produção: expressão, personalidade e verdade.",
+    },
+  ],
+]);
+
 const portfolio = assets.map((src, index) => {
+  if (index >= 61) {
+    return { src, ...newEditorialScenes[index - 61] };
+  }
   const scene = scenes[index % scenes.length];
   return { src, title: scene[0], copy: scene[1], layout: scene[2] };
 });
@@ -93,9 +162,16 @@ function renderPortfolio() {
   const root = document.querySelector(".portfolio");
   if (!root) return;
   portfolio.forEach((item, index) => {
+    const chapter = chapterMarkers.get(index);
+    if (chapter) {
+      const divider = document.createElement("div");
+      divider.className = "chapter-divider";
+      divider.innerHTML = `<div class="chapter-number">${chapter.number}</div><div class="chapter-heading"><p>${chapter.kicker}</p><h2>${chapter.title}</h2></div><p class="chapter-copy">${chapter.copy}</p>`;
+      root.appendChild(divider);
+    }
     const number = String(index + 2).padStart(2, "0");
     const element = document.createElement("article");
-    element.className = `scene ${item.layout} scene-${number} face-safe`;
+    element.className = `scene ${item.layout} scene-${number}`;
     element.style.setProperty("--order", index);
     element.style.setProperty("--delay", `${(index % 3) * 90}ms`);
     element.tabIndex = 0;
@@ -215,7 +291,7 @@ addEventListener("resize", queueMotionUpdate, { passive: true });
 queueMotionUpdate();
 
 const revealTargets = document.querySelectorAll(
-  ".scene,.manifesto,.editorial-intro,.stats,.runway-break,.profile",
+  ".scene,.chapter-divider,.manifesto,.editorial-intro,.stats,.runway-break,.profile",
 );
 if (typeof IntersectionObserver === "undefined") {
   revealTargets.forEach((element) => element.classList.add("seen"));

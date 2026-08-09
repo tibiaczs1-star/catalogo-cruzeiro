@@ -13,7 +13,7 @@ const server = fs.readFileSync(path.join(root, "..", "server.js"), "utf8");
 function galleryAssets() {
   const block = app.match(/const assets = \[([\s\S]*?)\];/);
   assert.ok(block, "lista principal de fotos ausente");
-  return [...block[1].matchAll(/"(assets\/[^"]+\.(?:jpe?g|webp))"/gi)].map(
+  return [...block[1].matchAll(/"(assets\/[^"]+\.(?:jpe?g|png|webp))"/gi)].map(
     (match) => match[1],
   );
 }
@@ -21,14 +21,14 @@ function galleryAssets() {
 function mediaKitArchiveAssets() {
   const block = kit.match(/const archiveAssets = \[([\s\S]*?)\];/);
   assert.ok(block, "lista completa do media kit ausente");
-  return [...block[1].matchAll(/"(assets\/[^\"]+\.(?:jpe?g|webp))"/gi)].map(
+  return [...block[1].matchAll(/"(assets\/[^\"]+\.(?:jpe?g|png|webp))"/gi)].map(
     (match) => match[1],
   );
 }
 
-test("o book principal mantém o acervo completo com as 15 fotos novas", () => {
+test("o book principal mantém as 68 fotos da galeria, incluindo o Jardim Noturno", () => {
   const refs = galleryAssets();
-  assert.equal(refs.length, 61);
+  assert.equal(refs.length, 68);
   assert.equal(new Set(refs).size, refs.length);
 
   for (let index = 1; index <= 15; index += 1) {
@@ -39,12 +39,24 @@ test("o book principal mantém o acervo completo com as 15 fotos novas", () => {
     );
   }
 
+  for (const ref of [
+    "assets/raiane-jardim-noturno-01-corpo.png",
+    "assets/raiane-jardim-noturno-02.jpeg",
+    "assets/raiane-jardim-noturno-03.jpeg",
+    "assets/raiane-jardim-noturno-04.jpeg",
+    "assets/raiane-jardim-noturno-05.jpeg",
+    "assets/raiane-jardim-noturno-06.jpeg",
+    "assets/raiane-bastidores-retrato-01.jpeg",
+  ]) {
+    assert.ok(refs.includes(ref), ref);
+  }
+
   for (const ref of refs) {
     assert.ok(fs.existsSync(path.join(root, ref)), ref);
   }
 });
 
-test("o media kit e o PDF incorporam as 63 fotos únicas do book", () => {
+test("o media kit e o PDF incorporam as 70 fotos únicas do book", () => {
   const expected = [
     "assets/campanha-country-raiane-por-do-sol.webp",
     ...galleryAssets(),
@@ -52,8 +64,8 @@ test("o media kit e o PDF incorporam as 63 fotos únicas do book", () => {
   ];
   const refs = mediaKitArchiveAssets();
 
-  assert.equal(refs.length, 63);
-  assert.equal(new Set(refs).size, 63);
+  assert.equal(refs.length, 70);
+  assert.equal(new Set(refs).size, 70);
   assert.deepEqual(new Set(refs), new Set(expected));
   for (const ref of refs) assert.ok(fs.existsSync(path.join(root, ref)), ref);
 });
@@ -61,8 +73,10 @@ test("o media kit e o PDF incorporam as 63 fotos únicas do book", () => {
 test("a página oficial sempre busca o HTML atual e usa assets versionados juntos", () => {
   const styleVersion = html.match(/styles\.css\?v=([^\"]+)/)?.[1];
   const scriptVersion = html.match(/app\.js\?v=([^\"]+)/)?.[1];
+  const webglVersion = html.match(/webgl\.js\?v=([^\"]+)/)?.[1];
   assert.ok(styleVersion, "versão do CSS ausente");
   assert.equal(scriptVersion, styleVersion);
+  assert.equal(webglVersion, styleVersion);
   assert.doesNotMatch(styleVersion, /20260806-r(?:8|11)$/);
   assert.match(
     server,
@@ -87,6 +101,7 @@ test("a foto retirada do destaque aparece somente no acervo completo", () => {
 test("a direção visual tem abertura, profundidade e capítulo editorial", () => {
   for (const hook of [
     "experience-intro",
+    "hero-webgl",
     "hero-depth",
     "runway-break",
     "pointer-orb",
@@ -97,6 +112,20 @@ test("a direção visual tem abertura, profundidade e capítulo editorial", () =
   assert.match(css, /transform-style:\s*preserve-3d/);
   assert.match(css, /@keyframes\s+studio-curtain/);
   assert.match(css, /@keyframes\s+type-sweep/);
+  assert.match(app, /JARDIM NOTURNO/);
+  assert.match(app, /BASTIDORES/);
+  assert.match(css, /\.chapter-divider/);
+  assert.match(css, /\.scene\.full-body/);
+});
+
+test("o WebGL é progressivo, leve e respeita acessibilidade", () => {
+  const webgl = fs.readFileSync(path.join(root, "webgl.js"), "utf8");
+  assert.match(webgl, /getContext\(["']webgl/);
+  assert.match(webgl, /prefers-reduced-motion/);
+  assert.match(webgl, /saveData/);
+  assert.match(webgl, /pointer:\s*coarse/);
+  assert.match(webgl, /devicePixelRatio/);
+  assert.match(webgl, /visibilitychange/);
 });
 
 test("as revelações e o 3D funcionam sem depender de CSS experimental", () => {
