@@ -2,9 +2,13 @@ const { chromium } = require('playwright');
 
 (async () => {
   const browser = await chromium.launch({ headless: true });
+  const bookrayUrl = new URL(
+    process.env.BOOKRAY_URL || 'http://127.0.0.1:8765/bookray/'
+  );
+  const mediaKitUrl = new URL('media-kit.html', bookrayUrl);
   const capture = async (viewport, path) => {
     const page = await browser.newPage({ viewport });
-    await page.goto('http://127.0.0.1:8765/bookray/', { waitUntil: 'networkidle' });
+    await page.goto(bookrayUrl.href, { waitUntil: 'networkidle' });
     await page.evaluate(async () => {
       for (let y = 0; y < document.body.scrollHeight; y += 650) {
         scrollTo(0, y);
@@ -21,7 +25,7 @@ const { chromium } = require('playwright');
   await capture({ width: 390, height: 844 }, 'outputs/bookray-mobile-final.png');
 
   const mediaKit = await browser.newPage();
-  await mediaKit.goto('http://127.0.0.1:8765/bookray/media-kit.html', { waitUntil: 'networkidle' });
+  await mediaKit.goto(mediaKitUrl.href, { waitUntil: 'networkidle' });
   const sheets = mediaKit.locator('.page');
   for (let index = 0; index < (await sheets.count()); index += 1) {
     await sheets.nth(index).screenshot({

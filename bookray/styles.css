@@ -756,6 +756,18 @@ nav a:focus-visible::after {
   object-position: center top;
 }
 
+.scene.garden-night .scene-media {
+  background:
+    radial-gradient(circle at 74% 18%, rgba(17, 95, 179, 0.2), transparent 34%),
+    linear-gradient(145deg, #111d18 0%, #050706 58%, #25110d 100%);
+}
+
+.scene.garden-warm .scene-media {
+  background:
+    radial-gradient(circle at 65% 30%, rgba(244, 43, 18, 0.14), transparent 38%),
+    linear-gradient(145deg, #28150d 0%, #070605 72%);
+}
+
 .scene.full-body .scene-media {
   min-height: clamp(620px, 76vw, 1080px);
   background:

@@ -26,9 +26,9 @@ function mediaKitArchiveAssets() {
   );
 }
 
-test("o book principal mantém as 68 fotos da galeria, incluindo o Jardim Noturno", () => {
+test("o book principal mantém as 70 fotos da galeria, incluindo o Jardim Noturno", () => {
   const refs = galleryAssets();
-  assert.equal(refs.length, 68);
+  assert.equal(refs.length, 70);
   assert.equal(new Set(refs).size, refs.length);
 
   for (let index = 1; index <= 15; index += 1) {
@@ -46,6 +46,8 @@ test("o book principal mantém as 68 fotos da galeria, incluindo o Jardim Noturn
     "assets/raiane-jardim-noturno-04.jpeg",
     "assets/raiane-jardim-noturno-05.jpeg",
     "assets/raiane-jardim-noturno-06.jpeg",
+    "assets/raiane-jardim-noturno-07.jpeg",
+    "assets/raiane-jardim-noturno-08.jpeg",
     "assets/raiane-bastidores-retrato-01.jpeg",
   ]) {
     assert.ok(refs.includes(ref), ref);
@@ -56,7 +58,7 @@ test("o book principal mantém as 68 fotos da galeria, incluindo o Jardim Noturn
   }
 });
 
-test("o media kit e o PDF incorporam as 70 fotos únicas do book", () => {
+test("o media kit e o PDF incorporam as 72 fotos únicas do book", () => {
   const expected = [
     "assets/campanha-country-raiane-por-do-sol.webp",
     ...galleryAssets(),
@@ -64,8 +66,8 @@ test("o media kit e o PDF incorporam as 70 fotos únicas do book", () => {
   ];
   const refs = mediaKitArchiveAssets();
 
-  assert.equal(refs.length, 70);
-  assert.equal(new Set(refs).size, 70);
+  assert.equal(refs.length, 72);
+  assert.equal(new Set(refs).size, 72);
   assert.deepEqual(new Set(refs), new Set(expected));
   for (const ref of refs) assert.ok(fs.existsSync(path.join(root, ref)), ref);
 });

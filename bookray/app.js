@@ -18,7 +18,7 @@ const scenes = [
   ["Calor", "Dourado, terra e coragem", "finale"],
 ];
 
-// Acervo completo: 68 fotos na grade, mais abertura e perfil = 70 imagens.
+// Acervo completo: 70 fotos na grade, mais abertura e perfil = 72 imagens.
 const assets = [
   "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
   "assets/IMG_0406.jpeg",
@@ -87,6 +87,8 @@ const assets = [
   "assets/raiane-jardim-noturno-04.jpeg",
   "assets/raiane-jardim-noturno-05.jpeg",
   "assets/raiane-jardim-noturno-06.jpeg",
+  "assets/raiane-jardim-noturno-07.jpeg",
+  "assets/raiane-jardim-noturno-08.jpeg",
   "assets/raiane-bastidores-retrato-01.jpeg",
 ];
 
@@ -123,6 +125,16 @@ const newEditorialScenes = [
     layout: "portrait garden face-safe",
   },
   {
+    title: "Noite em flor",
+    copy: "Cor, espontaneidade e presença sob a luz urbana",
+    layout: "portrait garden garden-night face-safe",
+  },
+  {
+    title: "Gesto botânico",
+    copy: "Perfil, delicadeza e intenção em uma composição noturna",
+    layout: "portrait garden garden-warm face-safe",
+  },
+  {
     title: "Entre cenas",
     copy: "Um retrato espontâneo que amplia a versatilidade do book",
     layout: "portrait backstage face-safe",
@@ -140,7 +152,7 @@ const chapterMarkers = new Map([
     },
   ],
   [
-    67,
+    69,
     {
       number: "04",
       kicker: "NATURAL / PRÓXIMO / REAL",
