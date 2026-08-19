@@ -2,7 +2,7 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
-const { execFile, spawnSync } = require("child_process");
+const { execFile, spawn, spawnSync } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
   buildImageApprovalQueue,
@@ -6773,6 +6773,8 @@ function mimeFor(filePath) {
       return "application/xml; charset=utf-8";
     case ".webmanifest":
       return "application/manifest+json; charset=utf-8";
+    case ".apk":
+      return "application/vnd.android.package-archive";
     case ".svg":
       return "image/svg+xml";
     case ".png":
@@ -21020,9 +21022,73 @@ if (RSS_SOURCES.length && !NEWS_REFRESH_AUTO_DISABLED) {
   }, NEWS_REFRESH_INTERVAL_MS);
 }
 
+const ANGEL_PREFIX = "/angel-midia";
+const ANGEL_CONTROLLER_DIR = path.join(ROOT_DIR, "angel-midia", "controller");
+const ANGEL_INTERNAL_PORT = Number(process.env.ANGEL_INTERNAL_PORT || 3101);
+
+function proxyAngelApi(req, res) {
+  const upstreamPath = req.url.slice(ANGEL_PREFIX.length) || "/api/health";
+  const proxy = http.request({
+    host: "127.0.0.1",
+    port: ANGEL_INTERNAL_PORT,
+    method: req.method,
+    path: upstreamPath,
+    headers: { ...req.headers, host: `127.0.0.1:${ANGEL_INTERNAL_PORT}` }
+  }, (upstream) => {
+    res.writeHead(upstream.statusCode || 502, upstream.headers);
+    upstream.pipe(res);
+  });
+  proxy.on("error", () => {
+    if (!res.headersSent) sendJson(res, 503, { error: "angel_media_unavailable" });
+    else res.destroy();
+  });
+  req.pipe(proxy);
+}
+
+function handleAngelStatic(req, res, pathname) {
+  let decoded;
+  try {
+    decoded = decodeURIComponent(pathname.slice(ANGEL_PREFIX.length)).replace(/^\/+/, "");
+  } catch {
+    return sendText(res, 400, "Caminho inválido.");
+  }
+  const relative = decoded || "index.html";
+  const candidate = safeJoin(ANGEL_CONTROLLER_DIR, relative);
+  if (candidate && fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+    return sendFile(req, res, candidate, {
+      cacheControl: relative.startsWith("downloads/") ? "public, max-age=300" : "no-store"
+    });
+  }
+  if (!path.extname(relative)) {
+    return sendFile(req, res, path.join(ANGEL_CONTROLLER_DIR, "index.html"), { cacheControl: "no-store" });
+  }
+  return sendText(res, 404, "Arquivo não encontrado.");
+}
+
+let angelApiProcess;
+function startAngelApi() {
+  if (!process.env.ANGEL_DATABASE_URL) {
+    console.warn("[angel-midia] desativado: ANGEL_DATABASE_URL ausente");
+    return;
+  }
+  angelApiProcess = spawn(process.execPath, [path.join(ROOT_DIR, "angel-midia", "api", "src", "render-server.js")], {
+    cwd: ROOT_DIR,
+    env: { ...process.env, ANGEL_INTERNAL_PORT: String(ANGEL_INTERNAL_PORT) },
+    stdio: "inherit"
+  });
+  angelApiProcess.on("exit", (code) => console.warn(`[angel-midia] API encerrada (${code})`));
+}
+
 const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = requestUrl.pathname;
+
+  if (pathname === `${ANGEL_PREFIX}/api` || pathname.startsWith(`${ANGEL_PREFIX}/api/`)) {
+    return proxyAngelApi(req, res);
+  }
+  if (pathname === ANGEL_PREFIX || pathname.startsWith(`${ANGEL_PREFIX}/`)) {
+    return handleAngelStatic(req, res, pathname);
+  }
 
   if (pathname.startsWith("/api/") || pathname === "/health") {
     return handleApi(req, res, pathname, requestUrl.searchParams);
@@ -21033,6 +21099,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`[catalogo] online em http://${HOST}:${PORT}`);
+  startAngelApi();
   startRealAgentsAutoRunner();
   startArticleIntegrityAutoRunner();
   startTopicFeedAutoRunner();

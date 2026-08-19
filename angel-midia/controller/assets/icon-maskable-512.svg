@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Angel AppStation">
+  <rect width="512" height="512" fill="#111513"/>
+  <circle cx="256" cy="256" r="196" fill="#1b211e"/>
+  <path d="M256 132 372 365h-63l-23-50h-61l25-54h11l-21-47-71 151h-63l116-233z" fill="#d7ff5b"/>
+  <circle cx="349" cy="167" r="22" fill="#fff"/>
+</svg>

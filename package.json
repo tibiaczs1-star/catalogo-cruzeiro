@@ -67,10 +67,13 @@
     "sync:online-local": "node scripts/sync-online-local.js"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.1.2",
+    "@fastify/multipart": "^9.4.0",
     "chess.js": "^1.4.0",
+    "fastify": "^5.12.1",
     "pdfkit": "^0.17.2",
-    "phaser": "^3.90.0",
     "pg": "^8.13.1",
+    "phaser": "^3.90.0",
     "qrcode": "^1.5.4"
   },
   "engines": {
