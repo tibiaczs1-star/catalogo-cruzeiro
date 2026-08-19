@@ -86,7 +86,13 @@ O manifesto entregue à TV terá versão, playlist ativa, itens ordenados, hashe
 
 ## Segurança e limites iniciais
 
-O Admin exige login. Tokens das TVs são revogáveis e não dão acesso administrativo. Uploads usam lista explícita de tipos permitidos e limite configurável. Senhas e tokens nunca entram no APK, no repositório ou nos logs. O escopo inicial não inclui edição de vídeo, múltiplas zonas na mesma tela, cobrança ou usuários com permissões diferentes.
+O Admin exige login e terá uma conta de superadministrador com identificador `admin`. A senha inicial será recebida somente por configuração segura do ambiente e armazenada como hash; nunca entrará no APK, no repositório, na documentação ou nos logs. Tokens das TVs são revogáveis e não dão acesso administrativo. Uploads usam lista explícita de tipos permitidos e limite configurável. O escopo inicial não inclui edição de vídeo, múltiplas zonas na mesma tela, cobrança ou usuários administrativos adicionais.
+
+## Atualização e cache
+
+Cada publicação terá uma versão de release única. O shell do painel usará cache versionado e estratégia de rede primeiro para HTML, service worker e manifesto, removendo caches antigos durante a ativação. CSS e JavaScript receberão identificadores de conteúdo ou parâmetros de versão. O painel exibirá a versão instalada e avisará quando houver atualização, oferecendo recarga imediata. Os links dos APKs também terão versão visível e não reutilizarão silenciosamente um binário antigo.
+
+O objetivo é que uma nova publicação apareça automaticamente para o administrador sem exigir limpeza manual do navegador. A reprodução offline das TVs continuará usando cache controlado pelo manifesto de programação, separado do cache visual do Admin.
 
 ## Testes e aceite
 
@@ -103,4 +109,6 @@ Critérios de aceite:
 - painel mostrar TV, mapa, mídia atual, próxima mídia, sincronização e erro de download;
 - painel responsivo e visualmente consistente com a identidade Angel Mídia Play;
 - APK Admin e APK TV instaláveis e disponíveis na subpágina;
+- uma nova release substituir a interface anterior sem limpeza manual de cache;
+- superadministrador `admin` conseguir autenticar com a senha inicial configurada no ambiente;
 - deploy público validado por health check, login, operações principais e downloads dos APKs.
