@@ -39,6 +39,12 @@ export default async function mediaRoutes(app, options) {
     if (!UUID.test(request.params.id ?? '')) return reply.code(400).send({ error: 'invalid_request' });
     const { rows } = await app.db.query(
       `with authorized_media as (
+         select distinct ma.id,ma.storage_key,ma.content_type,ma.size_bytes
+           from media_assets ma join playlist_items pi on pi.asset_id=ma.id
+           join schedules s on s.playlist_id=pi.playlist_id and s.starts_at<=now() and s.ends_at>now()
+           join schedule_targets st on st.schedule_id=s.id
+          where ma.id=$1 and (st.target_type='all' or (st.target_type='device' and st.device_id=$2) or (st.target_type='group' and exists(select 1 from group_devices gd where gd.group_id=st.group_id and gd.device_id=$2)))
+         union
          select distinct ma.id, ma.storage_key, ma.content_type, ma.size_bytes
            from media_assets ma
            join campaigns c on c.id = ma.campaign_id and c.status = 'approved'

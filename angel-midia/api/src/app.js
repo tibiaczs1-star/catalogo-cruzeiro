@@ -6,6 +6,10 @@ import campaignRoutes from './routes/campaigns.js';
 import scheduleRoutes from './routes/schedules.js';
 import locationRoutes from './routes/locations.js';
 import mediaRoutes from './routes/media.js';
+import telemetryRoutes from './routes/telemetry.js';
+import libraryRoutes from './routes/library.js';
+import playlistRoutes from './routes/playlists.js';
+import reportRoutes from './routes/reports.js';
 import { createActivationRateLimiter } from './services/activation-rate-limit.js';
 
 export function buildApp({
@@ -40,6 +44,10 @@ export function buildApp({
   app.register(scheduleRoutes);
   app.register(locationRoutes, { geocoder, locationRateLimiter, locationCache, locationSearchTimeoutMs });
   app.register(mediaRoutes, { mediaDir });
+  app.register(telemetryRoutes);
+  app.register(libraryRoutes, { mediaDir });
+  app.register(playlistRoutes);
+  app.register(reportRoutes);
   app.get('/api/health', async (_request, reply) => {
     try {
       await app.db.query('SELECT 1');

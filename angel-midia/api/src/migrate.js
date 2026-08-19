@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -90,6 +91,21 @@ export async function applyMigrations({ db, migrations }) {
   }
 }
 
+export async function provisionSuperadmin({ db, passwordHash }) {
+  if (!passwordHash) return false;
+  if (!/^[a-f0-9]{32}:[a-f0-9]{128}$/i.test(passwordHash)) {
+    throw new Error('ANGEL_ADMIN_PASSWORD_HASH must be a valid scrypt hash');
+  }
+  await db.query(
+    `insert into admins (id,email,password_hash,name)
+     values ($1,'admin@angelmidia.app',$2,'admin')
+     on conflict ((lower(email))) do update
+       set name='admin', password_hash=excluded.password_hash, updated_at=now()`,
+    [randomUUID(), passwordHash],
+  );
+  return true;
+}
+
 export async function main() {
   const config = loadConfig();
   const db = createDatabase(config);
@@ -97,6 +113,7 @@ export async function main() {
     const directory = fileURLToPath(new URL('../migrations/', import.meta.url));
     const migrations = await loadMigrations(directory);
     await applyMigrations({ db, migrations });
+    await provisionSuperadmin({ db, passwordHash: process.env.ANGEL_ADMIN_PASSWORD_HASH });
   } finally {
     await db.end();
   }

@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { requireAdmin } from '../auth.js';
 import { authenticateDevice } from '../services/device-token.js';
-import { validateScheduleInput } from '../services/schedule.js';
+import { validatePlaylistScheduleInput, validateScheduleInput } from '../services/schedule.js';
 import { inTransaction } from './devices.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -17,18 +17,33 @@ async function requireActiveDevice(request, reply) {
 }
 
 export default async function scheduleRoutes(app) {
+  const supportsAdminListing = typeof app.get === 'function';
+  if (supportsAdminListing) app.get('/api/admin/schedules', { preHandler: requireAdmin }, async () => {
+    const { rows } = await app.db.query(`select s.id,s.starts_at,s.ends_at,s.priority,s.created_at,p.id as playlist_id,p.name as playlist_name,st.target_type,st.device_id,st.group_id,coalesce(d.name,g.name,'Todas as TVs') as target_name from schedules s join schedule_targets st on st.schedule_id=s.id left join playlists p on p.id=s.playlist_id left join devices d on d.id=st.device_id left join groups g on g.id=st.group_id order by s.starts_at desc limit 250`);
+    return { schedules: rows };
+  });
+
   app.post('/api/admin/schedules', { preHandler: requireAdmin }, async (request, reply) => {
-    const parsed = validateScheduleInput(request.body);
+    const playlistMode = Object.prototype.hasOwnProperty.call(request.body ?? {}, 'playlistId');
+    const parsed = playlistMode ? validatePlaylistScheduleInput(request.body) : validateScheduleInput(request.body);
     if (!parsed.ok) return reply.code(400).send({ error: 'invalid_request' });
     const body = parsed.value;
-    const canonical = JSON.stringify([body.campaignId, body.target.type, body.target.id, body.startsAt, body.endsAt, body.priority]);
+    const contentId = playlistMode ? body.playlistId : body.campaignId;
+    const canonical = JSON.stringify([contentId, body.target.type, body.target.id, body.startsAt, body.endsAt, body.priority]);
     const requestHash = createHash('sha256').update(canonical).digest('hex');
     const result = await inTransaction(app.db, async (db) => {
       await db.query('select pg_advisory_xact_lock(hashtext($1))', [requestHash]);
-      const campaign = await db.query('select id, status from campaigns where id = $1 for key share', [body.campaignId]);
-      if (!campaign.rows[0]) return { error: 'campaign_not_found', status: 404 };
-      if (campaign.rows[0].status !== 'approved') return { error: 'campaign_not_approved', status: 409 };
-      const existing = await db.query(`select s.id from schedules s join schedule_targets st on st.schedule_id=s.id where s.campaign_id=$1 and s.starts_at=$2 and s.ends_at=$3 and s.priority=$4 and st.target_type=$5 and st.device_id is not distinct from $6 and st.group_id is not distinct from $7 limit 1`, [body.campaignId, body.startsAt, body.endsAt, body.priority, body.target.type, body.target.type === 'device' ? body.target.id : null, body.target.type === 'group' ? body.target.id : null]);
+      if (playlistMode) {
+        const playlist = await db.query('select id,status from playlists where id=$1 for key share', [body.playlistId]);
+        if (!playlist.rows[0]) return { error: 'playlist_not_found', status: 404 };
+        if (playlist.rows[0].status !== 'active') return { error: 'playlist_inactive', status: 409 };
+      } else if (supportsAdminListing) {
+        const campaign = await db.query('select id,status from campaigns where id=$1 for key share', [body.campaignId]);
+        if (!campaign.rows[0]) return { error: 'campaign_not_found', status: 404 };
+        if (campaign.rows[0].status !== 'approved') return { error: 'campaign_not_approved', status: 409 };
+      }
+      const idColumn = playlistMode ? 'playlist_id' : 'campaign_id';
+      const existing = await db.query(`select s.id from schedules s join schedule_targets st on st.schedule_id=s.id where s.${idColumn}=$1 and s.starts_at=$2 and s.ends_at=$3 and s.priority=$4 and st.target_type=$5 and st.device_id is not distinct from $6 and st.group_id is not distinct from $7 limit 1`, [contentId, body.startsAt, body.endsAt, body.priority, body.target.type, body.target.type === 'device' ? body.target.id : null, body.target.type === 'group' ? body.target.id : null]);
       if (existing.rows[0]) return { id: existing.rows[0].id, duplicate: true };
       if (body.target.type !== 'all') {
         const table = body.target.type === 'device' ? 'devices' : 'groups';
@@ -36,7 +51,7 @@ export default async function scheduleRoutes(app) {
         if (!target.rows[0]) return { error: 'target_not_found', status: 404 };
       }
       const id = randomUUID();
-      await db.query('insert into schedules (id,campaign_id,starts_at,ends_at,priority,created_by) values ($1,$2,$3,$4,$5,$6)', [id, body.campaignId, body.startsAt, body.endsAt, body.priority, request.admin.id]);
+      await db.query('insert into schedules (id,campaign_id,playlist_id,starts_at,ends_at,priority,created_by) values ($1,$2,$3,$4,$5,$6,$7)', [id, playlistMode ? null : body.campaignId, playlistMode ? body.playlistId : null, body.startsAt, body.endsAt, body.priority, request.admin.id]);
       await db.query('insert into schedule_targets (id,schedule_id,target_type,device_id,group_id) values ($1,$2,$3,$4,$5)', [randomUUID(), id, body.target.type, body.target.type === 'device' ? body.target.id : null, body.target.type === 'group' ? body.target.id : null]);
       const affected = await db.query(`update devices d set schedule_version=d.schedule_version+1, updated_at=now() where ($1='all') or ($1='device' and d.id=$2) or ($1='group' and exists(select 1 from group_devices gd where gd.device_id=d.id and gd.group_id=$2)) returning d.id,d.schedule_version`, [body.target.type, body.target.id]);
       for (const device of affected.rows) await db.query('insert into device_commands (id,device_id,version,command_type,payload) values ($1,$2,$3,$4,$5)', [randomUUID(), device.id, device.schedule_version, 'schedule_changed', JSON.stringify({ scheduleId: id })]);

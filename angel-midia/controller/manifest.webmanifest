@@ -1,12 +1,12 @@
 {
   "name": "Angel Mídia Play AppStation",
-  "short_name": "AppStation",
+  "short_name": "Angel Mídia",
   "description": "Controle lean das TVs Angel Mídia Play.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#111513",
-  "theme_color": "#111513",
+  "background_color": "#071426",
+  "theme_color": "#071426",
   "lang": "pt-BR",
   "icons": [
     { "src": "./assets/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" },

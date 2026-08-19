@@ -1,5 +1,5 @@
-const CACHE_PREFIX = 'angel-appstation-shell';
-const CACHE_NAME = `${CACHE_PREFIX}-v1`;
+const CACHE_PREFIX = 'angel-midia-play-shell';
+const CACHE_NAME = `${CACHE_PREFIX}-20260819-2`;
 const SHELL = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const SHELL = [
   './src/styles.css',
   './src/responsive.css',
   './src/app.js',
+  './src/orchestration.js',
   './src/api.js',
   './assets/icon-192.svg',
   './assets/icon-512.svg',
