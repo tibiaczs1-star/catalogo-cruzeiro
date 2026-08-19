@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { beforeEach, expect, it, vi } from 'vitest';
 import { createApp } from '../src/app.js';
+import { renderLibrary } from '../src/orchestration.js';
 
 beforeEach(() => { document.body.innerHTML = '<div id="app"></div>'; });
 
@@ -35,4 +36,22 @@ it('faz login usando o usuário administrador', async () => {
   document.querySelector('[name="password"]').value = 'secret';
   document.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalledWith('/auth/login', { method: 'POST', body: { identifier: 'admin', password: 'secret' } }));
+});
+
+it('envia o nome da mídia usando o contrato multipart da API', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media: [] }, apiClient, vi.fn());
+  const form = root.querySelector('[data-upload]');
+  const mediaInput = form.querySelector('[name="media"]');
+  const file = new File(['imagem'], 'foto.png', { type: 'image/png' });
+  Object.defineProperty(mediaInput, 'files', { configurable: true, value: [file] });
+  form.querySelector('[name="displayName"]').value = 'Foto 2';
+  form.querySelector('[name="durationSeconds"]').value = '10';
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  const [path, options] = apiClient.mock.calls[0];
+  expect(path).toBe('/admin/media');
+  expect(options.body.get('name')).toBe('Foto 2');
+  expect(options.body.has('displayName')).toBe(false);
 });

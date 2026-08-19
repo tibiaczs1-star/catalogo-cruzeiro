@@ -7,10 +7,10 @@ export function renderLibrary(root, payload, apiClient, refresh) {
   <section class="glass upload-card"><form data-upload><label class="dropzone">Adicionar mídia<input name="media" type="file" accept="image/jpeg,image/png,image/webp,video/mp4" required></label><label>Nome<input name="displayName" required maxlength="120"></label><label>Duração da imagem (segundos)<input name="durationSeconds" type="number" min="1" max="3600" value="10"></label><button class="primary">Enviar para a biblioteca</button><p role="status"></p></form></section>
   <section class="media-grid">${media.map((m) => `<article class="glass media-card"><span class="media-type">${m.content_type?.startsWith('video') ? 'VÍDEO' : 'IMAGEM'}</span><h3>${esc(m.display_name)}</h3><p>${Math.round(Number(m.size_bytes || 0) / 1024 / 1024 * 10) / 10} MB · ${esc(m.processing_status || 'ready')}</p></article>`).join('') || '<div class="empty">Sua biblioteca ainda está vazia.</div>'}</section>`;
   root.querySelector('[data-upload]').addEventListener('submit', async (event) => {
-    event.preventDefault(); const form = event.currentTarget; const data = new FormData(); const file = form.media.files[0];
-    data.set('media', file); data.set('displayName', form.displayName.value); if (file.type.startsWith('image/')) data.set('durationSeconds', form.durationSeconds.value);
+    event.preventDefault(); const form = event.currentTarget; const data = new FormData(); const file = form.querySelector('[name="media"]').files[0];
+    data.set('media', file); data.set('name', form.querySelector('[name="displayName"]').value); if (file.type.startsWith('image/')) data.set('durationSeconds', form.querySelector('[name="durationSeconds"]').value);
     const status = form.querySelector('[role=status]'); status.textContent = 'Enviando…';
-    try { await apiClient('/admin/media', { method: 'POST', body: data }); status.textContent = 'Mídia enviada com sucesso.'; await refresh(); } catch { status.textContent = 'Não foi possível enviar a mídia.'; }
+    try { await apiClient('/admin/media', { method: 'POST', body: data }); status.textContent = 'Mídia enviada com sucesso.'; await refresh(); } catch (error) { status.textContent = `Não foi possível enviar a mídia (${error.message}).`; }
   });
 }
 
