@@ -28,6 +28,36 @@ class PlaybackPolicyTest {
         assertEquals(true, PlaybackPolicy.shouldLoop(null))
         assertEquals(true, PlaybackPolicy.shouldLoop(true))
         assertEquals(false, PlaybackPolicy.shouldLoop(false))
+        assertEquals(null, PlaybackPolicy.nextIndexOrNull(2, 3, false))
+        assertEquals(0, PlaybackPolicy.nextIndexOrNull(2, 3, true))
+    }
+
+    @Test fun emergencyInterruptsRecoveryAndCancelsStaleTransfers() {
+        assertEquals(true, PlaybackPolicy.shouldInterruptForEmergency(true, true))
+        assertEquals(false, PlaybackPolicy.shouldInterruptForEmergency(false, true))
+        assertEquals(false, PlaybackPolicy.transferAllowed(7, 8))
+        assertEquals(true, PlaybackPolicy.transferAllowed(8, 8))
+    }
+
+    @Test fun concurrentDownloadsUseIndependentCacheFilesWithoutAGlobalLock() {
+        val first = PlaybackPolicy.cacheTempName("asset", "normal")
+        val emergency = PlaybackPolicy.cacheTempName("asset", "emergency")
+        assertEquals(false, first == emergency)
+        assertEquals(".asset-emergency.part", emergency)
+    }
+
+    @Test fun emergencyCancellationImmediatelyDisconnectsEveryNormalTransfer() {
+        val cancelled = mutableListOf<String>()
+        val registry = TransferRegistry<String> { cancelled.add(it) }
+        registry.register(4, "playback")
+        registry.register(4, "prefetch")
+        registry.register(5, "emergency")
+
+        registry.cancel(4)
+
+        assertEquals(setOf("playback", "prefetch"), cancelled.toSet())
+        registry.cancel(5)
+        assertEquals(true, cancelled.contains("emergency"))
     }
 
     @Test fun emergencyAlwaysWinsOverTheNormalSchedule() {
