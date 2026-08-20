@@ -3,7 +3,7 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { createApp } from '../src/app.js';
 import { renderLibrary } from '../src/orchestration.js';
 import { filterMedia, formatMediaFacts } from '../src/library.js';
-import { buildPresentationPatch } from '../src/media-editor.js';
+import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js';
 
 beforeEach(() => { document.body.innerHTML = '<div id="app"></div>'; });
 
@@ -75,4 +75,26 @@ it('filtra mídias e monta patches seguros para edição não destrutiva', () =>
   expect(filterMedia(media, { query: 'oferta', type: 'video' })).toHaveLength(1);
   expect(formatMediaFacts({ content_type: 'image/png', width: 1080, height: 1080 })).toContain('1:1');
   expect(buildPresentationPatch({ fitMode: 'contain', focalX: '25', focalY: '75', zoom: '1.2', rotation: '90', backgroundColor: '#ffffff' })).toEqual({ fitMode: 'contain', focalX: 25, focalY: 75, zoom: 1.2, rotation: 90, backgroundColor: '#ffffff' });
+});
+
+it('abre o editor quando o detalhe usa mimeType em vez de type', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, {
+    id: 'm2', name: 'Vídeo institucional', mimeType: 'video/mp4', width: 1080, height: 1920,
+    hasAudio: true, presentation: { fitMode: 'contain', focalX: 50, focalY: 50, zoom: 1, rotation: 0, backgroundColor: '#000000' },
+    usage: { playlists: [], playingNow: [] },
+  }, vi.fn());
+  expect(root.querySelector('.media-type').textContent).toBe('VÍDEO');
+});
+
+it('abre o editor com metadados brutos compatíveis com versões anteriores da API', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, {
+    id: 'm3', name: 'Oferta', content_type: 'video/mp4', width: 1920, height: 1080,
+    has_audio: true, fit_mode: 'cover', focal_x: 25, focal_y: 75, zoom: 1.2,
+    rotation: 90, background_color: '#112233', usage: { playlists: [], playingNow: [] },
+  }, vi.fn());
+  expect(root.querySelector('[name=fitMode]').value).toBe('cover');
+  expect(root.querySelector('[name=focalX]').value).toBe('25');
+  expect(root.textContent).toContain('com áudio');
 });
