@@ -82,6 +82,14 @@ it('mostra a imagem real no card da biblioteca', () => {
   expect(preview.getAttribute('alt')).toBe('Prévia de Foto');
 });
 
+it('aceita mimeType no card e não inventa informação de áudio ausente', () => {
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media: [{ id: 'm4b', name: 'Filme', mimeType: 'video/mp4' }] }, vi.fn(), vi.fn());
+  expect(root.querySelector('.media-preview video')).not.toBeNull();
+  expect(root.textContent).toContain('Áudio');
+  expect(root.textContent).toContain('Não informado');
+});
+
 it('mostra detalhes operacionais no card e abre a mídia inteira', () => {
   const root = document.querySelector('#app');
   const media = {
@@ -116,6 +124,57 @@ it('renderiza visualizador acessível sem acumular diálogos', () => {
   expect(root.querySelector('.media-viewer img').getAttribute('alt')).toBe('Prévia de <Oferta>');
   root.querySelector('[data-close-media-viewer]').click();
   expect(root.querySelector('.media-viewer')).toBeNull();
+});
+
+it('trata fullscreen indisponível e rejeitado sem promessa não tratada', async () => {
+  const root = document.querySelector('#app');
+  openMediaViewer(root, { id: 'm7', name: 'Vídeo', type: 'video/mp4' });
+  const fullscreen = root.querySelector('[data-viewer-fullscreen]');
+  fullscreen.click();
+  expect(root.querySelector('[data-viewer-status]').textContent).toContain('não está disponível');
+  root.querySelector('[data-viewer-stage]').requestFullscreen = vi.fn(() => Promise.reject(new Error('bloqueado')));
+  fullscreen.click();
+  await vi.waitFor(() => expect(root.querySelector('[data-viewer-status]').textContent).toContain('Não foi possível'));
+});
+
+it('mantém foco no diálogo, restaura o acionador e remove listeners ao fechar', () => {
+  const root = document.querySelector('#app');
+  root.innerHTML = '<button id="trigger">Abrir</button><main id="background">Conteúdo</main>';
+  const trigger = root.querySelector('#trigger');
+  trigger.focus();
+  const addSpy = vi.spyOn(document, 'addEventListener');
+  const removeSpy = vi.spyOn(document, 'removeEventListener');
+  openMediaViewer(root, { id: 'm8', name: 'Imagem', type: 'image/png' });
+  const viewer = root.querySelector('.media-viewer');
+  const controls = [...viewer.querySelectorAll('button')];
+  expect(document.activeElement).toBe(controls[0]);
+  expect(trigger.inert || trigger.hasAttribute('inert')).toBe(true);
+  controls.at(-1).focus();
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+  expect(document.activeElement).toBe(controls[0]);
+  controls[0].focus();
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }));
+  expect(document.activeElement).toBe(controls.at(-1));
+  controls[0].click();
+  expect(document.activeElement).toBe(trigger);
+  expect(trigger.inert || trigger.hasAttribute('inert')).toBe(false);
+  expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
+  expect(removeSpy).toHaveBeenCalledWith('fullscreenchange', expect.any(Function));
+  expect(addSpy).toHaveBeenCalledWith('fullscreenchange', expect.any(Function));
+  addSpy.mockRestore();
+  removeSpy.mockRestore();
+});
+
+it('atualiza o rótulo quando entra e sai da tela cheia', () => {
+  const root = document.querySelector('#app');
+  openMediaViewer(root, { id: 'm9', name: 'Imagem', type: 'image/png' });
+  const stage = root.querySelector('[data-viewer-stage]');
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, value: stage });
+  document.dispatchEvent(new Event('fullscreenchange'));
+  expect(root.querySelector('[data-viewer-fullscreen]').textContent).toContain('Sair');
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, value: null });
+  document.dispatchEvent(new Event('fullscreenchange'));
+  expect(root.querySelector('[data-viewer-fullscreen]').textContent).toContain('Tela cheia');
 });
 
 it('envia o tipo de cada mídia ao criar uma playlist', async () => {
