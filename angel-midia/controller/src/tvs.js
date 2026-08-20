@@ -1,3 +1,5 @@
+import { angelIcon } from './angel-icons.js';
+
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
 const statusLabel = (device) => device.status === 'pending' ? 'Pendente' : device.status === 'active' ? 'Ativa' : device.status === 'blocked' ? 'Bloqueada' : 'Offline';
 const normalized = (value) => String(value ?? '').trim().replace(/\s+/g, ' ');
@@ -22,7 +24,7 @@ function defaultMapFactory(root, devices, openDevice) {
 
 export function renderTvs(root, initialDevices, apiClient, { mapAvailable = true, mapFactory = defaultMapFactory } = {}) {
   const devices = [...initialDevices].sort((a, b) => Number(b.status === 'pending') - Number(a.status === 'pending') || String(a.name).localeCompare(String(b.name), 'pt-BR'));
-  root.innerHTML = `<section class="tv-management" data-area="tvs"><header class="tv-heading"><div><p class="eyebrow">Inventário</p><h1>TVs</h1></div><label class="tv-filter">Pesquisar TV<input data-tv-search type="search" placeholder="Nome, endereço ou código"></label></header><div class="tv-layout"><div><div class="item-list tv-list" data-device-list></div></div><aside class="map-support" aria-label="Mapa de apoio"><p>Mapa de apoio</p><div data-map-root></div><div data-marker aria-live="polite"></div></aside></div><div data-tv-details></div></section>`;
+  root.innerHTML = `<section class="tv-management" data-area="tvs"><header class="tv-heading"><div><p class="eyebrow">Inventário</p><h1>${angelIcon('tv')} TVs</h1></div><label class="tv-filter">Pesquisar TV<input data-tv-search type="search" placeholder="Nome, endereço ou código"></label></header><div class="tv-layout"><div><div class="item-list tv-list" data-device-list></div></div><aside class="map-support" aria-label="Mapa de apoio"><p>Mapa de apoio</p><div data-map-root></div><div data-marker aria-live="polite"></div></aside></div><div data-tv-details></div></section>`;
   const list = root.querySelector('[data-device-list]'); const details = root.querySelector('[data-tv-details]'); const marker = root.querySelector('[data-marker]'); const mapRoot = root.querySelector('[data-map-root]');
   let map;
   function drawList(filter = '') {
@@ -42,6 +44,7 @@ export function renderTvs(root, initialDevices, apiClient, { mapAvailable = true
     const valid = hasCoordinates(device); const coords = valid ? `${Number(device.latitude).toFixed(4)}, ${Number(device.longitude).toFixed(4)}` : 'Não informadas';
     marker.textContent = coords; map?.select(device.id, coords);
     details.innerHTML = `<section class="tv-details" aria-labelledby="tv-detail-name"><div><p class="eyebrow">Detalhes da TV</p><h2 id="tv-detail-name">${escapeHtml(device.name)}</h2></div><dl><div><dt>Endereço</dt><dd>${escapeHtml(device.address || 'Não informado')}</dd></div><div><dt>Código</dt><dd>${escapeHtml(device.linkCode || '—')}</dd></div><div><dt>Coordenadas</dt><dd>${coords}</dd></div><div><dt>Status</dt><dd>${statusLabel(device)}</dd></div></dl><div class="marker-controls"><label>Latitude<input name="latitude" type="number" step="any" value="${valid ? device.latitude : ''}"></label><label>Longitude<input name="longitude" type="number" step="any" value="${valid ? device.longitude : ''}"></label><button type="button" data-move-marker>Ajustar marcador</button></div><label class="location-search">Buscar outro local<input data-location-search type="search" placeholder="Digite pelo menos 3 caracteres"></label><div data-location-results></div>${device.status === 'pending' ? '<button type="button" class="primary" data-approve>Aprovar TV</button>' : ''}<p role="status" aria-live="polite"></p></section>`;
+    details.querySelector('#tv-detail-name').insertAdjacentHTML('afterbegin', `${angelIcon('settings')} `);
     const status = details.querySelector('[role="status"]'); let savePromise = Promise.resolve(); let saveRevision = 0;
     const persist = (latitude, longitude, address = device.address) => {
       const revision = ++saveRevision;

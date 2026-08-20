@@ -18,8 +18,11 @@ describe('gestão lean de TVs', () => {
       { id: 'tv-2', name: 'Recepção', address: 'Rua 2', linkCode: 'AMP-DEF456', latitude: -7.5, longitude: -72.5, status: 'active', online: true },
     ], apiClient);
 
+    expect(document.querySelector('h1 [data-angel-icon="tv"]')).not.toBeNull();
+
     document.querySelector('[data-device-id="tv-1"]').click();
     const details = document.querySelector('[data-tv-details]');
+    expect(details.querySelector('[data-angel-icon="settings"]')).not.toBeNull();
     expect(details.textContent).toContain('Mercado Centro');
     expect(details.textContent).toContain('Av. Mâncio Lima, 100');
     expect(details.textContent).toContain('AMP-ABC123');

@@ -1,4 +1,5 @@
 import { mediaMimeType } from './library.js';
+import { angelIcon } from './angel-icons.js';
 
 const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
@@ -21,7 +22,7 @@ export function openMediaViewer(root, media) {
   viewer.setAttribute('role', 'dialog');
   viewer.setAttribute('aria-modal', 'true');
   viewer.setAttribute('aria-labelledby', 'media-viewer-title');
-  viewer.innerHTML = `<div class="media-viewer-window"><header class="retro-titlebar"><span id="media-viewer-title">${esc(name)}</span><button type="button" aria-label="Fechar visualização" data-close-media-viewer>×</button></header><div class="media-viewer-stage" data-viewer-stage data-fit="contain">${isVideo ? `<video src="${source}" controls preload="metadata" aria-label="Prévia de ${esc(name)}"></video>` : `<img src="${source}" alt="Prévia de ${esc(name)}">`}</div><div class="media-viewer-facts"><span>${isVideo ? 'Vídeo' : 'Imagem'}</span><span>${esc(dimensions)}</span><span>${esc(durationText)}</span><span>${esc(status)}</span></div><footer class="media-viewer-toolbar" aria-label="Controles da visualização"><span class="media-viewer-status" role="status" aria-live="polite" data-viewer-status></span><button type="button" class="ghost" data-viewer-fit>Mostrar inteira</button><button type="button" class="ghost" data-viewer-actual>100%</button><button type="button" class="ghost" data-viewer-fullscreen>Tela cheia</button><button type="button" class="primary" data-close-media-viewer>Fechar</button></footer></div>`;
+  viewer.innerHTML = `<div class="media-viewer-window"><header class="retro-titlebar"><span id="media-viewer-title">${angelIcon(isVideo ? 'video' : 'image')} ${esc(name)}</span><button type="button" aria-label="Fechar visualização" data-close-media-viewer>×</button></header><div class="media-viewer-stage" data-viewer-stage data-fit="contain">${isVideo ? `<video src="${source}" controls preload="metadata" aria-label="Prévia de ${esc(name)}"></video>` : `<img src="${source}" alt="Prévia de ${esc(name)}">`}</div><div class="media-viewer-facts"><span>${isVideo ? 'Vídeo' : 'Imagem'}</span><span>${esc(dimensions)}</span><span>${esc(durationText)}</span><span>${esc(status)}</span></div><footer class="media-viewer-toolbar" aria-label="Controles da visualização"><span class="media-viewer-status" role="status" aria-live="polite" data-viewer-status></span>${isVideo ? `<button type="button" class="ghost" data-viewer-play aria-label="Reproduzir vídeo">${angelIcon('play')} Reproduzir</button>` : ''}<button type="button" class="ghost" data-viewer-fit>${angelIcon('center')} Mostrar inteira</button><button type="button" class="ghost" data-viewer-actual>${angelIcon('zoom')} 100%</button><button type="button" class="ghost" data-viewer-fullscreen>${angelIcon('tv')} Tela cheia</button><button type="button" class="primary" data-close-media-viewer>Fechar</button></footer></div>`;
   root.append(viewer);
 
   const stage = viewer.querySelector('[data-viewer-stage]');
@@ -33,7 +34,7 @@ export function openMediaViewer(root, media) {
     ariaHidden: element.getAttribute('aria-hidden'),
   }));
   background.forEach(({ element }) => { element.setAttribute('inert', ''); element.setAttribute('aria-hidden', 'true'); });
-  const updateFullscreen = () => { fullscreenButton.textContent = document.fullscreenElement === stage ? 'Sair da tela cheia' : 'Tela cheia'; };
+  const updateFullscreen = () => { fullscreenButton.innerHTML = `${angelIcon('tv')} ${document.fullscreenElement === stage ? 'Sair da tela cheia' : 'Tela cheia'}`; };
   const close = () => {
     document.removeEventListener('keydown', onKeyDown);
     document.removeEventListener('fullscreenchange', updateFullscreen);
@@ -60,6 +61,15 @@ export function openMediaViewer(root, media) {
   viewer.querySelectorAll('[data-close-media-viewer]').forEach((button) => button.addEventListener('click', close));
   viewer.querySelector('[data-viewer-fit]').addEventListener('click', () => { stage.dataset.fit = 'contain'; });
   viewer.querySelector('[data-viewer-actual]').addEventListener('click', () => { stage.dataset.fit = 'actual'; });
+  const playbackButton = viewer.querySelector('[data-viewer-play]');
+  playbackButton?.addEventListener('click', () => {
+    const video = stage.querySelector('video');
+    const playing = playbackButton.dataset.playing === 'true';
+    if (playing) video.pause(); else Promise.resolve(video.play()).catch(() => { viewerStatus.textContent = 'Não foi possível reproduzir o vídeo.'; });
+    playbackButton.dataset.playing = String(!playing);
+    playbackButton.setAttribute('aria-label', playing ? 'Reproduzir vídeo' : 'Pausar vídeo');
+    playbackButton.innerHTML = `${angelIcon(playing ? 'play' : 'pause')} ${playing ? 'Reproduzir' : 'Pausar'}`;
+  });
   fullscreenButton.addEventListener('click', async () => {
     viewerStatus.textContent = '';
     try {

@@ -89,9 +89,17 @@ it('mostra todos os detalhes da mídia e abre o editor de enquadramento', async 
   expect(root.textContent).toContain('VÍDEO');
   expect(root.textContent).toContain('MP4 · 1920×1080 · 16:9');
   expect(root.textContent).toContain('Rodando agora em 2 TVs');
+  expect(root.querySelector('.media-type [data-angel-icon="video"]')).not.toBeNull();
+  expect(root.querySelector('[data-preview-media="m1"] [data-angel-icon="play"]')).not.toBeNull();
+  expect(root.querySelector('[data-edit-media="m1"] [data-angel-icon="settings"]')).not.toBeNull();
   root.querySelector('[data-edit-media]').click();
   await vi.waitFor(() => expect(root.querySelector('[aria-label="Centralização horizontal"]')).not.toBeNull());
   expect(root.querySelector('[aria-label="Modo de ajuste"]')).not.toBeNull();
+  expect(root.querySelector('#media-editor-title [data-angel-icon="settings"]')).not.toBeNull();
+  expect(root.querySelector('[aria-label="Centro"] [data-angel-icon="center"]')).not.toBeNull();
+  expect(root.querySelector('[name="zoom"]').closest('label').querySelector('[data-angel-icon="zoom"]')).not.toBeNull();
+  expect(root.querySelector('[name="rotation"]').closest('label').querySelector('[data-angel-icon="rotate"]')).not.toBeNull();
+  expect(root.querySelector('[data-simulate-tv] [data-angel-icon="tv"]')).not.toBeNull();
   expect(root.querySelector('.editor-preview video')?.getAttribute('src')).toBe('./api/admin/media/m1/content');
 });
 
@@ -128,6 +136,14 @@ it('mostra detalhes operacionais no card e abre a mídia inteira', () => {
   const viewer = root.querySelector('.media-viewer');
   expect(viewer).not.toBeNull();
   expect(viewer.querySelector('video').controls).toBe(true);
+  const playback = viewer.querySelector('[data-viewer-play]');
+  expect(playback.getAttribute('aria-label')).toBe('Reproduzir vídeo');
+  expect(playback.querySelector('[data-angel-icon="play"]')).not.toBeNull();
+  viewer.querySelector('video').play = vi.fn(() => Promise.resolve());
+  viewer.querySelector('video').pause = vi.fn();
+  playback.click();
+  expect(playback.getAttribute('aria-label')).toBe('Pausar vídeo');
+  expect(playback.querySelector('[data-angel-icon="pause"]')).not.toBeNull();
   expect(viewer.textContent).toContain('Mostrar inteira');
   viewer.querySelector('[data-close-media-viewer]').click();
   root.querySelector('[data-media-search]').value = 'verão';
