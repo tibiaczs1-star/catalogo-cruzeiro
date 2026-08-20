@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#071426">
+  <meta name="theme-color" content="#080e35">
   <title>Angel Mídia Play</title>
   <link rel="manifest" href="./manifest.webmanifest?v=20260819-2">
   <link rel="stylesheet" href="./src/styles.css?v=20260819-2">
@@ -12,6 +12,13 @@
   <link rel="stylesheet" href="./src/responsive.css?v=20260819-2">
 </head>
 <body>
+  <header class="brand-masthead" aria-label="Angel Mídia Play">
+    <img class="brand-logo" src="./assets/angel-midia-logo.png" alt="Angel Mídia — Painéis Digitais">
+    <nav class="brand-downloads" aria-label="Aplicativos Angel Mídia">
+      <a data-download="admin" href="./downloads/angel-midia-admin.apk" download>Baixar Admin</a>
+      <a data-download="tv" href="./downloads/angel-midia-tv.apk" download>Baixar TV</a>
+    </nav>
+  </header>
   <div id="app"></div>
   <script type="module" src="./src/app.js?v=20260819-2"></script>
 </body>
