@@ -6,6 +6,7 @@ import { renderCampaignProgramming } from '../src/campaigns.js';
 import { filterMedia, formatMediaFacts } from '../src/library.js';
 import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js';
 import { openMediaViewer } from '../src/media-viewer.js';
+import { angelIcon } from '../src/angel-icons.js';
 
 beforeEach(() => { document.body.innerHTML = '<div id="app"></div>'; });
 
@@ -24,6 +25,27 @@ it('expõe as dez áreas operacionais do Angel Mídia Play', async () => {
   expect([...document.querySelectorAll('[data-nav]')].map((n) => n.textContent.trim().slice(2))).toEqual([
     'Visão geral', 'Mapa das TVs', 'Biblioteca', 'Playlists', 'Programação', 'Ao vivo', 'Relatórios', 'Empresas', 'Relâmpago', 'Aplicativos',
   ]);
+  for (const button of document.querySelectorAll('[data-nav], button')) {
+    const icon = button.querySelector('svg[data-angel-icon]');
+    if (icon) expect(icon.getAttribute('aria-hidden')).toBe('true');
+    expect(button.textContent.trim() || button.getAttribute('aria-label')).toBeTruthy();
+  }
+  expect([...document.querySelectorAll('[data-nav]')].every((button) => button.querySelector('svg[data-angel-icon]'))).toBe(true);
+});
+
+it('renderiza o registro completo de ícones Angel como SVG próprio e decorativo', () => {
+  const names = ['dashboard', 'tv', 'pin', 'image', 'video', 'playlist', 'clock', 'live', 'chart', 'company', 'user', 'emergency', 'settings', 'download', 'apk', 'play', 'pause', 'center', 'zoom', 'rotate'];
+  document.body.innerHTML = names.map(angelIcon).join('');
+  const icons = [...document.querySelectorAll('svg[data-angel-icon]')];
+  expect(icons).toHaveLength(names.length);
+  for (const [index, icon] of icons.entries()) {
+    expect(icon.getAttribute('data-angel-icon')).toBe(names[index]);
+    expect(icon.getAttribute('viewBox')).toBe('0 0 24 24');
+    expect(icon.getAttribute('fill')).toBe('none');
+    expect(icon.getAttribute('stroke')).toBe('currentColor');
+    expect(icon.getAttribute('aria-hidden')).toBe('true');
+    expect(icon.querySelector('path, rect, circle, polyline, polygon, line')).not.toBeNull();
+  }
 });
 
 it('faz login usando o usuário administrador', async () => {

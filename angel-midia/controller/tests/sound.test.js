@@ -23,3 +23,23 @@ it('persiste silêncio e volume definidos pelo administrador', () => {
   expect(localStorage.getItem('angel-sound')).toContain('"muted":true');
   expect(getSoundPreferences(localStorage)).toEqual({ muted: true, volume: 0.2 });
 });
+
+it('não cria Audio quando os efeitos estão silenciados', () => {
+  const AudioSpy = vi.fn(function Audio() { this.play = vi.fn(); });
+  vi.stubGlobal('Audio', AudioSpy);
+  setSoundPreferences({ muted: true, volume: 0.18 }, localStorage);
+  expect(playUiSound('selection')).toBe(false);
+  expect(AudioSpy).not.toHaveBeenCalled();
+  expect(getSoundPreferences(localStorage)).toEqual({ muted: true, volume: 0.18 });
+});
+
+it('toca seleção sem alterar o volume ou silêncio persistidos', () => {
+  const play = vi.fn().mockResolvedValue(undefined);
+  const AudioSpy = vi.fn(function Audio() { this.play = play; this.volume = 1; });
+  vi.stubGlobal('Audio', AudioSpy);
+  setSoundPreferences({ muted: false, volume: 0.18 }, localStorage);
+  expect(playUiSound('selection')).toBe(true);
+  expect(AudioSpy).toHaveBeenCalledOnce();
+  expect(AudioSpy.mock.instances[0].volume).toBe(0.18);
+  expect(getSoundPreferences(localStorage)).toEqual({ muted: false, volume: 0.18 });
+});

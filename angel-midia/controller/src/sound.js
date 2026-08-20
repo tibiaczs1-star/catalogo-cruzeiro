@@ -1,6 +1,7 @@
 const SOUND_KEY = 'angel-sound';
 const DEFAULTS = Object.freeze({ muted: false, volume: 0.35 });
 const SOUND_URLS = Object.freeze({
+  selection: './assets/sounds/start.ogg',
   success: './assets/sounds/success.ogg',
   alert: './assets/sounds/alert.ogg',
   error: './assets/sounds/error.ogg',

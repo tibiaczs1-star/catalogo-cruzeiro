@@ -1,0 +1,10 @@
+const SHAPES = Object.freeze({
+  dashboard: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/>',
+  tv: '<rect x="3" y="5" width="18" height="12" rx="1"/><path d="m8 21 4-4 4 4M7 21h10"/>', pin: '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+  image: '<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="m5 18 5-5 3 3 2-2 4 4"/>', video: '<rect x="3" y="5" width="14" height="14" rx="1"/><path d="m17 10 4-3v10l-4-3zM8 9l5 3-5 3z"/>',
+  playlist: '<path d="M4 6h10M4 12h10M4 18h7M18 13v7M15 16h6"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/>', live: '<circle cx="12" cy="12" r="2"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/>',
+  chart: '<path d="M4 20V10h4v10M10 20V4h4v16M16 20v-7h4v7M3 20h18"/>', company: '<path d="M4 21V7l8-4 8 4v14M8 9h2M14 9h2M8 13h2M14 13h2M10 21v-4h4v4"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 3-8 8-8s8 3 8 8"/>',
+  emergency: '<path d="M12 3 2.5 20h19zM12 9v5M12 17h.01"/>', settings: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>', download: '<path d="M12 3v12M7 10l5 5 5-5M4 20h16"/>',
+  apk: '<path d="M7 7 5 4M17 7l2-3M5 8h14v11H5zM8 12h.01M16 12h.01M8 19v3M16 19v3M2 10v7M22 10v7"/>', play: '<path d="m8 5 11 7-11 7z"/>', pause: '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>', center: '<path d="M12 3v18M3 12h18M7 7h10v10H7z"/>', zoom: '<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M10 7v6M7 10h6"/>', rotate: '<path d="M20 7V3l-3 3a8 8 0 1 0 2 10M20 3h-5"/>',
+});
+export function angelIcon(name) { const shape=SHAPES[name]; if(!shape) throw new RangeError(`Ícone Angel desconhecido: ${name}`); return `<svg data-angel-icon="${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${shape}</svg>`; }
