@@ -71,7 +71,7 @@ export default async function scheduleRoutes(app) {
     let accepted = 0;
     await inTransaction(app.db, async (db) => {
       for (const event of events) {
-        const inserted = await db.query(`insert into playback_events (id,event_id,device_id,asset_id,event_type,occurred_at,detail) values ($1,$2,$3,$4,$5,$6,$7) on conflict (event_id) do nothing returning event_id`, [randomUUID(), event.eventId, request.device.id, event.assetId, event.type.trim(), new Date(event.occurredAt).toISOString(), JSON.stringify(event.detail)]);
+        const inserted = await db.query(`insert into playback_events (id,event_id,device_id,asset_id,event_type,occurred_at,detail,advertiser_id) values ($1,$2,$3,$4,$5,$6,$7,(select advertiser_id from media_advertisers where asset_id=$4 order by created_at limit 1)) on conflict (event_id) do nothing returning event_id`, [randomUUID(), event.eventId, request.device.id, event.assetId, event.type.trim(), new Date(event.occurredAt).toISOString(), JSON.stringify(event.detail)]);
         accepted += inserted.rows.length;
       }
     });

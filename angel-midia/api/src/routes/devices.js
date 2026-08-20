@@ -29,13 +29,20 @@ function validCoordinates(latitude, longitude) {
     && typeof longitude === 'number' && Number.isFinite(longitude) && longitude >= -180 && longitude <= 180;
 }
 
-function validActivation(body) {
+export function validActivation(body) {
+  const hasLatitude = body?.latitude !== undefined && body?.latitude !== null;
+  const hasLongitude = body?.longitude !== undefined && body?.longitude !== null;
   return isObject(body)
     && Object.keys(body).every((key) => ['installationId', 'name', 'address', 'latitude', 'longitude'].includes(key))
     && validText(body.installationId, 255)
     && validText(body.name, 160)
     && validText(body.address, 500)
-    && validCoordinates(body.latitude, body.longitude);
+    && (hasLatitude === hasLongitude)
+    && (!hasLatitude || validCoordinates(body.latitude, body.longitude));
+}
+
+export function activationResponse({ linkCode, deviceToken }) {
+  return { status: 'active', linkCode, deviceToken };
 }
 
 function nextLinkCode(generate) {
@@ -131,7 +138,7 @@ export default async function deviceRoutes(app, options) {
             await db.query(
               `update locations set label = $2, address = $3, latitude = $4, longitude = $5, updated_at = now()
                 where id = $1`,
-              [existing.location_id, body.address.trim(), body.address.trim(), body.latitude, body.longitude],
+              [existing.location_id, body.address.trim(), body.address.trim(), body.latitude ?? null, body.longitude ?? null],
             );
             await db.query('update devices set name = $2, location_id = $3, updated_at = now() where id = $1 returning *', [existing.id, body.name.trim(), existing.location_id]);
             return { existing: true, linkCode: existing.link_code };
@@ -142,11 +149,11 @@ export default async function deviceRoutes(app, options) {
           await db.query(
             `insert into locations (id, label, address, latitude, longitude)
              values ($1, $2, $3, $4, $5) returning id`,
-            [locationId, body.address.trim(), body.address.trim(), body.latitude, body.longitude],
+            [locationId, body.address.trim(), body.address.trim(), body.latitude ?? null, body.longitude ?? null],
           );
           const inserted = await db.query(
-            `insert into devices (id, installation_id, location_id, name, link_code)
-             values ($1, $2, $3, $4, $5)
+            `insert into devices (id, installation_id, location_id, name, link_code, status, approved_at)
+             values ($1, $2, $3, $4, $5, 'active', now())
              on conflict (installation_id) do nothing
              returning *`,
             [deviceId, installationId, locationId, body.name.trim(), linkCode],
@@ -156,8 +163,8 @@ export default async function deviceRoutes(app, options) {
             conflict.code = 'INSTALLATION_CONFLICT';
             throw conflict;
           }
-          const activationToken = await issueCredential(db, deviceId, { expiresAt: new Date(now().getTime() + ACTIVATION_TTL_MS) });
-          return { linkCode, activationToken };
+          const deviceToken = await issueCredential(db, deviceId);
+          return { linkCode, deviceToken };
         });
         break;
       } catch (error) {
@@ -171,8 +178,7 @@ export default async function deviceRoutes(app, options) {
     }
     if (!created) throw new Error('could not allocate link code');
     if (created.existing) return reply.send({ status: 'pending', linkCode: created.linkCode });
-    const { linkCode, activationToken } = created;
-    return reply.code(201).send({ status: 'pending', linkCode, activationToken });
+    return reply.code(201).send(activationResponse(created));
   });
 
   app.get('/api/admin/devices', { preHandler: requireAdmin }, async (_request, reply) => {
@@ -281,14 +287,20 @@ export default async function deviceRoutes(app, options) {
         const address = body.address ?? device.address ?? device.location_label;
         const latitude = body.latitude ?? device.latitude;
         const longitude = body.longitude ?? device.longitude;
-        if (!validText(name, 160) || !validText(address, 500) || !validCoordinates(latitude, longitude)) return { error: 'invalid_request', statusCode: 400 };
+        const hasLatitude = latitude !== undefined && latitude !== null;
+        const hasLongitude = longitude !== undefined && longitude !== null;
+        if (!validText(name, 160) || !validText(address, 500)
+          || hasLatitude !== hasLongitude
+          || (hasLatitude && !validCoordinates(Number(latitude), Number(longitude)))) {
+          return { error: 'invalid_request', statusCode: 400 };
+        }
         if (body.groupId !== undefined && body.groupId !== null) {
           const group = await db.query('select id from groups where id = $1 for key share', [body.groupId]);
           if (!group.rows[0]) return { error: 'invalid_group', statusCode: 400 };
         }
         await db.query(
           'update locations set label = $2, address = $3, latitude = $4, longitude = $5, updated_at = now() where id = $1',
-          [device.location_id, address.trim(), address.trim(), latitude, longitude],
+          [device.location_id, address.trim(), address.trim(), hasLatitude ? Number(latitude) : null, hasLongitude ? Number(longitude) : null],
         );
         await db.query('update devices set name = $2, location_id = $3, updated_at = now() where id = $1 returning *', [device.id, name.trim(), device.location_id]);
         if (body.groupId !== undefined) {
@@ -325,9 +337,11 @@ export default async function deviceRoutes(app, options) {
     if (request.device.status !== 'active') return reply.code(403).send({ error: 'device_blocked' });
     if (request.device.credential_expires_at) return reply.code(403).send({ error: 'credential_claim_required' });
     const schedule = await resolveSchedule(app.db, request.device);
+    const emergencyResult = await app.db.query(`select e.id,e.mode,e.title,e.message,e.asset_id,m.content_type,m.sha256,m.duration_seconds,m.fit_mode,m.focal_x,m.focal_y,m.zoom,m.rotation,m.background_color from emergency_broadcasts e left join media_assets m on m.id=e.asset_id where e.active order by e.activated_at desc limit 1`);
     return reply.send({
       status: 'active',
       schedule,
+      emergency: emergencyResult.rows[0] ?? null,
     });
   });
 }

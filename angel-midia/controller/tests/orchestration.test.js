@@ -7,7 +7,7 @@ import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js'
 
 beforeEach(() => { document.body.innerHTML = '<div id="app"></div>'; });
 
-it('expõe as oito áreas operacionais do Angel Mídia Play', async () => {
+it('expõe as dez áreas operacionais do Angel Mídia Play', async () => {
   const apiClient = vi.fn(async (path) => {
     if (path === '/auth/me') return { name: 'admin' };
     if (path === '/admin/devices' || path === '/admin/campaigns') return [];
@@ -20,7 +20,7 @@ it('expõe as oito áreas operacionais do Angel Mídia Play', async () => {
   });
   await createApp({ root: document.querySelector('#app'), apiClient });
   expect([...document.querySelectorAll('[data-nav]')].map((n) => n.textContent.trim().slice(2))).toEqual([
-    'Visão geral', 'Mapa das TVs', 'Biblioteca', 'Playlists', 'Programação', 'Ao vivo', 'Relatórios', 'Aplicativos',
+    'Visão geral', 'Mapa das TVs', 'Biblioteca', 'Playlists', 'Programação', 'Ao vivo', 'Relatórios', 'Empresas', 'Relâmpago', 'Aplicativos',
   ]);
 });
 

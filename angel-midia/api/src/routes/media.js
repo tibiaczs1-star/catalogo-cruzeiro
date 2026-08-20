@@ -57,6 +57,10 @@ export default async function mediaRoutes(app, options) {
               select 1 from group_devices gd where gd.group_id = st.group_id and gd.device_id = $2
             ))
           )
+         union
+         select ma.id,ma.storage_key,ma.content_type,ma.size_bytes
+           from media_assets ma join emergency_broadcasts e on e.asset_id=ma.id and e.active
+          where ma.id=$1
        ) select * from authorized_media limit 1`,
       [request.params.id, request.device.id],
     );
