@@ -13,8 +13,13 @@ export function normalizePriority(value) {
 }
 
 function normalizeScheduleWindow(body) {
-  if (body.mode === 'continuous') return { ok: true, value: { mode: 'continuous', startsAt: null, endsAt: null } };
+  if (body.mode === 'continuous') {
+    if (Object.hasOwn(body, 'startsAt') || Object.hasOwn(body, 'endsAt')) return { ok: false };
+    return { ok: true, value: { mode: 'continuous', startsAt: null, endsAt: null } };
+  }
   if (body.mode !== 'scheduled' || !Object.hasOwn(body, 'startsAt') || !Object.hasOwn(body, 'endsAt')) return { ok: false };
+  if (typeof body.startsAt !== 'string' || body.startsAt.trim() === ''
+      || typeof body.endsAt !== 'string' || body.endsAt.trim() === '') return { ok: false };
   const startsAt = new Date(body.startsAt); const endsAt = new Date(body.endsAt);
   if (!Number.isFinite(startsAt.getTime()) || !Number.isFinite(endsAt.getTime()) || endsAt <= startsAt) return { ok: false };
   return { ok: true, value: { mode: 'scheduled', startsAt: startsAt.toISOString(), endsAt: endsAt.toISOString() } };

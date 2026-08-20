@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizePriority, validatePlaylistScheduleInput, resolveSchedule } from '../src/services/schedule.js';
+import { normalizePriority, validatePlaylistScheduleInput, validateScheduleInput, resolveSchedule } from '../src/services/schedule.js';
 
 const id = '11111111-1111-4111-8111-111111111111';
 
@@ -31,6 +31,31 @@ test('rejects a scheduled playlist without a complete valid interval', () => {
   assert.equal(validatePlaylistScheduleInput({ ...common, startsAt: '2026-08-19T10:00:00Z' }).ok, false);
   assert.equal(validatePlaylistScheduleInput({ ...common, startsAt: 'invalid', endsAt: '2026-08-20T10:00:00Z' }).ok, false);
   assert.equal(validatePlaylistScheduleInput({ ...common, startsAt: '2026-08-20T10:00:00Z', endsAt: '2026-08-19T10:00:00Z' }).ok, false);
+});
+
+test('rejects null or empty scheduled dates for playlist and campaign schedules', () => {
+  const target = { type: 'all', id: null };
+  const playlist = { playlistId: id, target, mode: 'scheduled', priority: 'normal' };
+  const campaign = { campaignId: id, target, mode: 'scheduled', priority: 10 };
+  for (const window of [
+    { startsAt: null, endsAt: '2026-08-20T10:00:00Z' },
+    { startsAt: '2026-08-19T10:00:00Z', endsAt: null },
+    { startsAt: '', endsAt: '2026-08-20T10:00:00Z' },
+    { startsAt: '2026-08-19T10:00:00Z', endsAt: '' },
+  ]) {
+    assert.equal(validatePlaylistScheduleInput({ ...playlist, ...window }).ok, false);
+    assert.equal(validateScheduleInput({ ...campaign, ...window }).ok, false);
+  }
+});
+
+test('rejects date properties on continuous playlist and campaign schedules', () => {
+  const target = { type: 'all', id: null };
+  const playlist = { playlistId: id, target, mode: 'continuous', priority: 'normal' };
+  const campaign = { campaignId: id, target, mode: 'continuous', priority: 10 };
+  for (const dates of [{ startsAt: null }, { endsAt: null }, { startsAt: null, endsAt: null }]) {
+    assert.equal(validatePlaylistScheduleInput({ ...playlist, ...dates }).ok, false);
+    assert.equal(validateScheduleInput({ ...campaign, ...dates }).ok, false);
+  }
 });
 
 test('rejects unsupported priority labels', () => {
