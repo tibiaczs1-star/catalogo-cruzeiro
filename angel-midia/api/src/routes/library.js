@@ -66,7 +66,11 @@ export default async function libraryRoutes(app, { mediaDir, removeMedia = remov
   await app.register(multipart, { limits: { files: 1, fileSize: MAX_MEDIA_BYTES, fields: 2, parts: 3 } });
 
   app.get('/api/admin/media', { preHandler: requireAdmin }, async () => {
-    const { rows } = await app.db.query(`select id,coalesce(display_name,original_name) as name,original_name,content_type,size_bytes,sha256,duration_seconds,processing_status,created_at from media_assets order by created_at desc`);
+    const { rows } = await app.db.query(`select ma.id,coalesce(ma.display_name,ma.original_name) as name,ma.original_name,ma.content_type,ma.size_bytes,ma.sha256,ma.duration_seconds,ma.processing_status,ma.created_at,ma.width,ma.height,ma.has_audio,
+      coalesce((select json_agg(distinct jsonb_build_object('id',p.id,'name',p.name)) from playlist_items pi join playlists p on p.id=pi.playlist_id where pi.asset_id=ma.id),'[]'::json) as playlists,
+      coalesce((select json_agg(distinct jsonb_build_object('id',g.id,'name',g.name)) from playlist_items pi join schedules s on s.playlist_id=pi.playlist_id join schedule_targets st on st.schedule_id=s.id and st.target_type='group' join groups g on g.id=st.group_id where pi.asset_id=ma.id),'[]'::json) as groups,
+      (select count(distinct ps.device_id)::int from playback_status ps where ps.current_asset_id=ma.id) as playing_now_count
+      from media_assets ma order by ma.created_at desc`);
     return rows;
   });
 

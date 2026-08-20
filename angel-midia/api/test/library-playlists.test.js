@@ -61,6 +61,24 @@ test('media detail reports presentation and where it is running', async () => {
   await app.close();
 });
 
+test('media library resolves group markers through schedule targets', async () => {
+  let librarySql = '';
+  const db = { query: async (sql) => {
+    if (sql.includes('from sessions')) return { rows: [{ id: image, name: 'Admin', email: 'admin@angel.local' }] };
+    librarySql = sql;
+    return { rows: [] };
+  } };
+  const app = Fastify();
+  app.decorate('db', db);
+  await app.register(cookie);
+  await app.register(libraryRoutes, { mediaDir: './var/media' });
+  const response = await app.inject({ method: 'GET', url: '/api/admin/media', headers: { cookie: 'amp_session=test' } });
+  assert.equal(response.statusCode, 200);
+  assert.match(librarySql, /join schedule_targets st on st\.schedule_id=s\.id/);
+  assert.match(librarySql, /join groups g on g\.id=st\.group_id/);
+  await app.close();
+});
+
 test('admin updates media presentation and invalid values are rejected', async () => {
   const mediaId = '33333333-3333-4333-8333-333333333333';
   const db = { query: async (sql, params) => {

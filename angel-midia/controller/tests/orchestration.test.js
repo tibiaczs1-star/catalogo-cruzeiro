@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { beforeEach, expect, it, vi } from 'vitest';
 import { createApp } from '../src/app.js';
-import { renderLibrary } from '../src/orchestration.js';
+import { renderLibrary, renderPlaylists, renderSchedule } from '../src/orchestration.js';
 import { filterMedia, formatMediaFacts } from '../src/library.js';
 import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js';
 
@@ -78,6 +78,30 @@ it('mostra a imagem real no card da biblioteca', () => {
   expect(preview).not.toBeNull();
   expect(preview.getAttribute('src')).toBe('./api/admin/media/m4/content');
   expect(preview.getAttribute('alt')).toBe('Prévia de Foto');
+});
+
+it('envia o tipo de cada mídia ao criar uma playlist', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderPlaylists(root, [], { media: [{ id: 'm1', display_name: 'Foto', content_type: 'image/png', duration_seconds: 8 }] }, apiClient, vi.fn());
+  root.querySelector('[name=name]').value = 'Vitrine';
+  root.querySelector('[name=asset]').checked = true;
+  root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body.items[0]).toMatchObject({ assetId: 'm1', type: 'image/png', imageDurationSeconds: 8 });
+});
+
+it('programa uma playlist para um conjunto de TVs', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderSchedule(root, { playlists: [{ id: 'p1', name: 'Principal' }], devices: [], groups: [{ id: 'g1', name: 'Lojas Centro' }], schedules: [] }, apiClient, vi.fn());
+  root.querySelector('[name=playlistId]').value = 'p1';
+  root.querySelector('[name=target]').value = 'group:g1';
+  root.querySelector('[name=startsAt]').value = '2026-08-20T10:00';
+  root.querySelector('[name=endsAt]').value = '2026-08-21T10:00';
+  root.querySelector('[data-schedule]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body.target).toEqual({ type: 'group', id: 'g1' });
 });
 
 it('filtra mídias e monta patches seguros para edição não destrutiva', () => {

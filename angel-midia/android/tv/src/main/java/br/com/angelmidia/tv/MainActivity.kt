@@ -28,12 +28,21 @@ class MainActivity : Activity() {
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        enterFullscreen()
         when {
             preferences.contains("device_token") -> showReady()
             preferences.contains("link_code") -> showPairing()
             else -> showFirstRun()
         }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) enterFullscreen()
+    }
+
+    private fun enterFullscreen() {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
     }
 
     private fun label(value: String, size: Float = 20f) = TextView(this).apply {
@@ -168,30 +177,46 @@ class MainActivity : Activity() {
             val token = preferences.getString("device_token", null) ?: return@Thread
             val assetId = item.getString("assetId")
             val type = item.optString("type")
+            val presentation = item.optJSONObject("presentation") ?: JSONObject()
             val file = downloadMedia(assetId, token, type)
             mainHandler.post {
                 if (generation != playbackGeneration) return@post
                 if (type.startsWith("video/")) {
+                    val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
                     val video = VideoView(this).apply {
                         setVideoPath(file.absolutePath)
                         setOnPreparedListener { player -> player.isLooping = emergency; start() }
                         setOnCompletionListener { finishMedia(assetId, emergency, generation) }
                         setOnErrorListener { _, _, _ -> finishMedia(assetId, emergency, generation); true }
                     }
-                    setContentView(video); video.start(); if (!emergency) scheduleEmergencyCheck(generation)
+                    stage.addView(video, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
+                    setContentView(stage); enterFullscreen(); video.start(); if (!emergency) scheduleEmergencyCheck(generation)
                     if (emergency) mainHandler.postDelayed({ syncAndPlay(generation) }, 5_000)
                 } else {
+                    val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
                     val image = ImageView(this).apply {
-                        setBackgroundColor(Color.BLACK); scaleType = ImageView.ScaleType.FIT_CENTER
+                        scaleType = when (presentation.optString("fitMode", "contain")) {
+                            "cover" -> ImageView.ScaleType.CENTER_CROP
+                            "fill" -> ImageView.ScaleType.FIT_XY
+                            else -> ImageView.ScaleType.FIT_CENTER
+                        }
+                        rotation = presentation.optDouble("rotation", 0.0).toFloat()
+                        scaleX = presentation.optDouble("zoom", 1.0).toFloat()
+                        scaleY = presentation.optDouble("zoom", 1.0).toFloat()
                         setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
                     }
-                    setContentView(image)
+                    stage.addView(image, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
+                    setContentView(stage); enterFullscreen()
                     if (!emergency) scheduleEmergencyCheck(generation)
                     mainHandler.postDelayed({ finishMedia(assetId, emergency, generation) }, if (emergency) 5_000 else PlaybackPolicy.imageDurationMs(item.optInt("durationSeconds").takeIf { item.has("durationSeconds") }))
                 }
             }
         } catch (_: Exception) { mainHandler.post { showIdle(generation, "Nao foi possivel carregar a midia. Tentando novamente...") } }
     }.start() }
+
+    private fun presentationColor(presentation: JSONObject): Int = runCatching {
+        Color.parseColor(presentation.optString("backgroundColor", "#000000"))
+    }.getOrDefault(Color.BLACK)
 
     private fun finishMedia(assetId: String, emergency: Boolean, generation: Int): Unit {
         if (generation != playbackGeneration) return
