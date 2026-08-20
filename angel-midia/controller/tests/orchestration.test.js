@@ -289,3 +289,73 @@ it('abre o editor com metadados brutos compatíveis com versões anteriores da A
   expect(root.querySelector('[name=focalX]').value).toBe('25');
   expect(root.textContent).toContain('com áudio');
 });
+
+it('oferece nove alinhamentos e centraliza a mídia com indicadores sincronizados', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'align', name: 'Cartaz', type: 'image/png', presentation: { fitMode: 'contain', focalX: 15, focalY: 85, zoom: 1, rotation: 0, backgroundColor: '#000000' } }, vi.fn());
+  expect(root.querySelectorAll('[data-align]')).toHaveLength(9);
+  root.querySelector('[data-align="center"]').click();
+  expect(root.querySelector('[name=focalX]').value).toBe('50');
+  expect(root.querySelector('[name=focalY]').value).toBe('50');
+  expect(root.querySelector('[data-focal-x-value]').textContent).toBe('50%');
+  expect(root.querySelector('[data-focal-y-value]').textContent).toBe('50%');
+  const horizontalNumber = root.querySelector('[data-number-for="focalX"]');
+  horizontalNumber.value = '72';
+  horizontalNumber.dispatchEvent(new Event('input', { bubbles: true }));
+  expect(root.querySelector('[name=focalX]').value).toBe('72');
+  expect(root.querySelector('[data-focal-x-value]').textContent).toBe('72%');
+});
+
+it('inclui proporção da tela, área segura e aviso para modos que deformam ou cortam', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'ratio', name: 'Cartaz', type: 'image/png' }, vi.fn());
+  expect(root.querySelectorAll('[name=screenRatio] option')).toHaveLength(4);
+  expect(root.querySelector('.editor-safe-area')).not.toBeNull();
+  root.querySelector('[name=fitMode]').value = 'cover';
+  root.querySelector('[name=fitMode]').dispatchEvent(new Event('input', { bubbles: true }));
+  expect(root.querySelector('[data-fit-warning]').hidden).toBe(false);
+});
+
+it('normaliza enquadramento e metadados de reprodução por tipo', () => {
+  expect(buildPresentationPatch({ fitMode: 'invalid', focalX: '-8', focalY: '120', zoom: '9', rotation: '45', backgroundColor: 'red', mediaType: 'image/png', imageDurationSeconds: '8' })).toMatchObject({ fitMode: 'contain', focalX: 0, focalY: 100, zoom: 4, rotation: 0, backgroundColor: '#000000', durationSeconds: 8 });
+  expect(buildPresentationPatch({ fitMode: 'fill', focalX: '50', focalY: '50', zoom: '0', rotation: '270', backgroundColor: '#ABCDEF', mediaType: 'video/mp4', trimStartSeconds: '', trimEndSeconds: '18', volume: '150' })).toMatchObject({ fitMode: 'fill', zoom: 0.25, rotation: 270, backgroundColor: '#abcdef', trimStartSeconds: null, trimEndSeconds: 18, volume: 100 });
+});
+
+it('mostra duração para imagem sem controles de corte', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'photo', name: 'Foto', type: 'image/png', durationSeconds: 11 }, apiClient);
+  expect(root.querySelector('[name=imageDurationSeconds]').value).toBe('11');
+  expect(root.querySelector('[data-video-timeline]')).toBeNull();
+  root.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body.durationSeconds).toBe(11);
+  expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('trimStartSeconds');
+});
+
+it('mostra timeline, corte e volume para vídeo e envia edição não destrutiva', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'movie', name: 'Filme', type: 'video/mp4', durationSeconds: 30, trimStartSeconds: 2, trimEndSeconds: 25, volume: 80 }, apiClient);
+  expect(root.querySelector('[data-video-timeline]')).not.toBeNull();
+  expect(root.querySelector('[name=trimStartSeconds]').value).toBe('2');
+  expect(root.querySelector('[name=trimEndSeconds]').value).toBe('25');
+  expect(root.querySelector('[name=volume]').value).toBe('80');
+  root.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body).toMatchObject({ trimStartSeconds: 2, trimEndSeconds: 25, volume: 80 });
+  expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('durationSeconds');
+});
+
+it('desfaz a última alteração da sessão e restaura os padrões', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'undo', name: 'Foto', type: 'image/png', presentation: { fitMode: 'cover', focalX: 25, focalY: 75, zoom: 1.5, rotation: 90, backgroundColor: '#112233' } }, vi.fn());
+  const zoom = root.querySelector('[name=zoom]');
+  zoom.value = '2';
+  zoom.dispatchEvent(new Event('input', { bubbles: true }));
+  root.querySelector('[data-undo]').click();
+  expect(zoom.value).toBe('1.5');
+  root.querySelector('[data-reset]').click();
+  expect(root.querySelector('[name=fitMode]').value).toBe('contain');
+  expect(root.querySelector('[name=focalX]').value).toBe('50');
+});
