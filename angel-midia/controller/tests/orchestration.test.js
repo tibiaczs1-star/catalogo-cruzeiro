@@ -2,6 +2,7 @@
 import { beforeEach, expect, it, vi } from 'vitest';
 import { createApp } from '../src/app.js';
 import { renderLibrary, renderPlaylists, renderSchedule } from '../src/orchestration.js';
+import { renderCampaignProgramming } from '../src/campaigns.js';
 import { filterMedia, formatMediaFacts } from '../src/library.js';
 import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js';
 
@@ -91,17 +92,56 @@ it('envia o tipo de cada mídia ao criar uma playlist', async () => {
   expect(apiClient.mock.calls[0][1].body.items[0]).toMatchObject({ assetId: 'm1', type: 'image/png', imageDurationSeconds: 8 });
 });
 
-it('programa uma playlist para um conjunto de TVs', async () => {
+it('programa uma playlist contínua por padrão sem enviar datas', async () => {
   const apiClient = vi.fn(async () => ({}));
   const root = document.querySelector('#app');
   renderSchedule(root, { playlists: [{ id: 'p1', name: 'Principal' }], devices: [], groups: [{ id: 'g1', name: 'Lojas Centro' }], schedules: [] }, apiClient, vi.fn());
+  const form = root.querySelector('[data-schedule]');
+  expect(form.elements.mode.value).toBe('continuous');
+  expect(form.querySelector('[data-schedule-window]').hidden).toBe(true);
+  expect(form.elements.startsAt.required).toBe(false);
+  expect(form.elements.endsAt.required).toBe(false);
   root.querySelector('[name=playlistId]').value = 'p1';
   root.querySelector('[name=target]').value = 'group:g1';
-  root.querySelector('[name=startsAt]').value = '2026-08-20T10:00';
-  root.querySelector('[name=endsAt]').value = '2026-08-21T10:00';
-  root.querySelector('[data-schedule]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
-  expect(apiClient.mock.calls[0][1].body.target).toEqual({ type: 'group', id: 'g1' });
+  expect(apiClient.mock.calls[0][1].body).toEqual({
+    playlistId: 'p1', target: { type: 'group', id: 'g1' }, mode: 'continuous', priority: 'normal',
+  });
+});
+
+it('mostra a janela agendada e envia as datas em ISO', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderSchedule(root, { playlists: [{ id: 'p1', name: 'Principal' }], devices: [], groups: [], schedules: [] }, apiClient, vi.fn());
+  const form = root.querySelector('[data-schedule]');
+  form.querySelector('[name=mode][value=scheduled]').checked = true;
+  form.querySelector('[name=mode][value=scheduled]').dispatchEvent(new Event('change', { bubbles: true }));
+  expect(form.querySelector('[data-schedule-window]').hidden).toBe(false);
+  expect(form.elements.startsAt.required).toBe(true);
+  expect(form.elements.endsAt.required).toBe(true);
+  form.elements.playlistId.value = 'p1';
+  form.elements.startsAt.value = '2026-08-20T10:00';
+  form.elements.endsAt.value = '2026-08-21T10:00';
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body).toMatchObject({
+    mode: 'scheduled',
+    startsAt: new Date('2026-08-20T10:00').toISOString(),
+    endsAt: new Date('2026-08-21T10:00').toISOString(),
+  });
+});
+
+it('reutiliza os modos contínuo e agendado no formulário de campanha', () => {
+  const root = document.querySelector('#app');
+  renderCampaignProgramming(root, { devices: [], campaigns: [], apiClient: vi.fn() });
+  const form = root.querySelector('.campaign-form');
+  expect(form.elements.mode.value).toBe('continuous');
+  expect(form.querySelector('[data-schedule-window]').hidden).toBe(true);
+  form.querySelector('[name=mode][value=scheduled]').checked = true;
+  form.querySelector('[name=mode][value=scheduled]').dispatchEvent(new Event('change', { bubbles: true }));
+  expect(form.querySelector('[data-schedule-window]').hidden).toBe(false);
+  expect(form.elements.startsAt.required).toBe(true);
 });
 
 it('filtra mídias e monta patches seguros para edição não destrutiva', () => {

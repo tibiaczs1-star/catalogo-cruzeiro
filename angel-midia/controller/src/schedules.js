@@ -27,15 +27,30 @@ export function renderTargetSelect(root, type, devices) {
   select.innerHTML = options.map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.label)}</option>`).join('');
 }
 
+export function syncScheduleMode(form) {
+  const scheduled = form.elements.mode?.value === 'scheduled';
+  const window = form.querySelector('[data-schedule-window]');
+  if (window) window.hidden = !scheduled;
+  for (const name of ['startsAt', 'endsAt']) {
+    if (form.elements[name]) form.elements[name].required = scheduled;
+  }
+  return scheduled;
+}
+
 export function scheduleBody(form, campaignId) {
   const targetType = form.elements.targetType.value;
-  return {
+  const mode = form.elements.mode.value;
+  const body = {
     campaignId,
     target: { type: targetType, id: targetType === 'all' ? null : form.elements.targetId.value },
-    startsAt: new Date(form.elements.startsAt.value).toISOString(),
-    endsAt: new Date(form.elements.endsAt.value).toISOString(),
+    mode,
     priority: Number(form.elements.priority.value),
   };
+  if (mode === 'scheduled') {
+    body.startsAt = new Date(form.elements.startsAt.value).toISOString();
+    body.endsAt = new Date(form.elements.endsAt.value).toISOString();
+  }
+  return body;
 }
 
 export function naturalSummary(form, devices) {
@@ -45,6 +60,12 @@ export function naturalSummary(form, devices) {
   const priority = `${PRIORITIES[priorityValue] || 'Normal'} ${priorityValue || 10}`;
   const campaign = form.elements.campaignName.value.trim() || 'campanha sem nome';
   const media = form.elements.media.files?.[0]?.name || 'mídia não selecionada';
+  if (form.elements.mode.value === 'continuous') {
+    const ignoredDates = form.elements.startsAt.value && form.elements.endsAt.value
+      ? ` As datas preenchidas (${new Date(form.elements.startsAt.value).toLocaleString('pt-BR')} até ${new Date(form.elements.endsAt.value).toLocaleString('pt-BR')}) não serão usadas neste modo.`
+      : '';
+    return `Exibir “${campaign}” (${media}) em ${target}, em loop contínuo sem data final, prioridade ${priority}.${ignoredDates}`;
+  }
   const start = form.elements.startsAt.value ? new Date(form.elements.startsAt.value).toLocaleString('pt-BR') : 'início não definido';
   const end = form.elements.endsAt.value ? new Date(form.elements.endsAt.value).toLocaleString('pt-BR') : 'fim não definido';
   return `Exibir “${campaign}” (${media}) em ${target}, de ${start} até ${end}, prioridade ${priority}.`;
