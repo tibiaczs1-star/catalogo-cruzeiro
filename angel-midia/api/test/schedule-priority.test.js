@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizePriority, validatePlaylistScheduleInput, validateScheduleInput, resolveSchedule } from '../src/services/schedule.js';
+import scheduleRoutes from '../src/routes/schedules.js';
+import mediaRoutes from '../src/routes/media.js';
 
 const id = '11111111-1111-4111-8111-111111111111';
 
@@ -77,4 +79,68 @@ test('manifest preserves the winning playlist order and playback metadata', asyn
   assert.deepEqual(manifest.items.map((item) => [item.startsAt, item.endsAt]), [[null, null], [null, null]]);
   assert.deepEqual(manifest.items[0].presentation, { fitMode: 'cover', focalX: 25, focalY: 70, zoom: 1.2, rotation: 0, backgroundColor: '#000000' });
   assert.deepEqual(manifest.items[0].playback, { trimStartSeconds: 2, trimEndSeconds: 12, volume: 0.8, transition: 'fade' });
+});
+
+function replyRecorder() {
+  return {
+    statusCode: 200,
+    code(statusCode) { this.statusCode = statusCode; return this; },
+    send(payload) { this.payload = payload; return payload; },
+  };
+}
+
+test('schedule routes expose mode and persist continuous schedules with nullable dates', async () => {
+  const queries = [];
+  const handlers = new Map();
+  const db = {
+    async query(sql, params = []) {
+      queries.push({ sql, params });
+      if (sql.includes('select id,status from playlists')) return { rows: [{ id, status: 'active' }] };
+      if (sql.includes('select s.id from schedules')) return { rows: [] };
+      if (sql.includes('update devices')) return { rows: [] };
+      return { rows: [] };
+    },
+  };
+  const app = {
+    db,
+    get(path, _options, handler) { handlers.set(`GET ${path}`, handler); },
+    post(path, _options, handler) { handlers.set(`POST ${path}`, handler); },
+  };
+  await scheduleRoutes(app);
+
+  await handlers.get('GET /api/admin/schedules')();
+  assert.match(queries.at(-1).sql, /select\s+s\.id,s\.mode,/i);
+
+  const reply = replyRecorder();
+  await handlers.get('POST /api/admin/schedules')({
+    body: { playlistId: id, target: { type: 'all', id: null }, mode: 'continuous', priority: 'normal' },
+    admin: { id: '22222222-2222-4222-8222-222222222222' },
+  }, reply);
+
+  const duplicate = queries.find(({ sql }) => sql.includes('select s.id from schedules'));
+  assert.match(duplicate.sql, /s\.mode=\$2/i);
+  assert.match(duplicate.sql, /s\.starts_at is not distinct from \$3/i);
+  assert.match(duplicate.sql, /s\.ends_at is not distinct from \$4/i);
+  assert.deepEqual(duplicate.params.slice(0, 5), [id, 'continuous', null, null, 10]);
+
+  const insert = queries.find(({ sql }) => sql.includes('insert into schedules'));
+  assert.match(insert.sql, /\(id,campaign_id,playlist_id,mode,starts_at,ends_at,priority,created_by\)/i);
+  assert.deepEqual(insert.params.slice(1), [null, id, 'continuous', null, null, 10, '22222222-2222-4222-8222-222222222222']);
+});
+
+test('media authorization treats continuous and scheduled agendas as active', async () => {
+  const queries = [];
+  let handler;
+  const app = {
+    db: { async query(sql) { queries.push(sql); return { rows: [] }; } },
+    get(path, _options, routeHandler) {
+      if (path === '/api/device/media/:id') handler = routeHandler;
+    },
+  };
+  await mediaRoutes(app, { mediaDir: '.' });
+  await handler({ params: { id }, device: { id } }, replyRecorder());
+
+  const sql = queries[0];
+  const activePredicates = sql.match(/s\.mode\s*=\s*'continuous'\s+or\s+\(s\.starts_at\s*<=\s*now\(\)\s+and\s+s\.ends_at\s*>\s*now\(\)\)/gi) ?? [];
+  assert.equal(activePredicates.length, 2);
 });
