@@ -21,14 +21,23 @@ export function filterMedia(media, { query = '', type = 'all' } = {}) {
 
 export function renderMediaCard(media) {
   const isVideo = String(media.content_type || '').startsWith('video/');
-  const count = Number(media.playing_now_count || 0);
-  const size = `${Math.round(Number(media.size_bytes || 0) / 104857.6) / 10} MB`;
+  const count = Number(media.playing_now_count ?? media.playingNowCount ?? 0);
+  const sizeBytes = Number(media.size_bytes ?? media.sizeBytes);
+  const size = Number.isFinite(sizeBytes) && sizeBytes > 0 ? `${Math.round(sizeBytes / 104857.6) / 10} MB` : 'tamanho não informado';
   const name = media.display_name || media.name;
   const playlists = Array.isArray(media.playlists) ? media.playlists : [];
   const groups = Array.isArray(media.groups) ? media.groups : [];
   const source = `./api/admin/media/${encodeURIComponent(media.id)}/content`;
+  const duration = Number(media.duration_seconds ?? media.durationSeconds);
+  const durationText = Number.isFinite(duration) && duration > 0 ? `${duration} s` : 'duração não informada';
+  const playlistCount = Number(media.playlist_count ?? media.playlistCount ?? playlists.length);
+  const groupCount = Number(media.group_count ?? media.groupCount ?? groups.length);
+  const playlistLabel = `${playlistCount} playlist${playlistCount === 1 ? '' : 's'}`;
+  const groupLabel = `${groupCount} conjunto${groupCount === 1 ? '' : 's'}`;
+  const hasAudio = Boolean(media.has_audio ?? media.hasAudio);
+  const processing = media.processing_status ?? media.status ?? 'não informado';
   const preview = isVideo
     ? `<video src="${source}" controls muted preload="metadata" aria-label="Prévia de ${esc(name)}"></video>`
     : `<img src="${source}" alt="Prévia de ${esc(name)}" loading="lazy">`;
-  return `<article class="glass media-card" data-media-id="${esc(media.id)}"><div class="media-preview">${preview}</div><div class="media-card-body"><span class="media-type">${isVideo ? 'VÍDEO' : 'IMAGEM'}</span><h3>${esc(name)}</h3><p class="media-facts">${esc(formatMediaFacts(media))}</p><p>${size} · ${media.has_audio ? 'com áudio' : 'sem áudio'} · ${esc(media.processing_status || 'ready')}</p><p class="media-links"><b>Playlists:</b> ${playlists.length ? playlists.map((p) => esc(p.name)).join(' · ') : 'nenhuma'}<br><b>Conjuntos:</b> ${groups.length ? groups.map((g) => esc(g.name)).join(' · ') : 'nenhum'}</p><strong>${count ? `Rodando agora em ${count} TV${count === 1 ? '' : 's'}` : 'Fora do ar agora'}</strong><button type="button" class="ghost" data-edit-media="${esc(media.id)}">Editar mídia</button></div></article>`;
+  return `<article class="glass media-card" data-media-id="${esc(media.id)}"><div class="media-preview">${preview}<button type="button" class="media-preview-open" data-preview-media="${esc(media.id)}">Abrir prévia completa</button></div><div class="media-card-body"><span class="media-type">${isVideo ? 'VÍDEO' : 'IMAGEM'}</span><h3>${esc(name)}</h3><p class="media-facts">${esc(formatMediaFacts(media))}</p><dl class="media-detail-grid"><div><dt>Duração</dt><dd>${esc(durationText)}</dd></div><div><dt>Tamanho</dt><dd>${esc(size)}</dd></div><div><dt>Áudio</dt><dd>${hasAudio ? 'Com áudio' : 'Sem áudio'}</dd></div><div><dt>Processamento</dt><dd>${esc(processing)}</dd></div><div><dt>Uso</dt><dd>${playlistLabel} · ${groupLabel}</dd></div><div><dt>Exibição</dt><dd>${count ? `${count} TV${count === 1 ? '' : 's'} agora` : 'Fora do ar'}</dd></div></dl><p class="media-links"><b>Playlists:</b> ${playlists.length ? playlists.map((p) => esc(p.name)).join(' · ') : 'não informado'}<br><b>Conjuntos:</b> ${groups.length ? groups.map((g) => esc(g.name)).join(' · ') : 'não informado'}</p><strong>${count ? `Rodando agora em ${count} TV${count === 1 ? '' : 's'}` : 'Fora do ar agora'}</strong><button type="button" class="ghost" data-edit-media="${esc(media.id)}">Editar mídia</button></div></article>`;
 }

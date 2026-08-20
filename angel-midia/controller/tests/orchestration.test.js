@@ -5,6 +5,7 @@ import { renderLibrary, renderPlaylists, renderSchedule } from '../src/orchestra
 import { renderCampaignProgramming } from '../src/campaigns.js';
 import { filterMedia, formatMediaFacts } from '../src/library.js';
 import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js';
+import { openMediaViewer } from '../src/media-viewer.js';
 
 beforeEach(() => { document.body.innerHTML = '<div id="app"></div>'; });
 
@@ -79,6 +80,42 @@ it('mostra a imagem real no card da biblioteca', () => {
   expect(preview).not.toBeNull();
   expect(preview.getAttribute('src')).toBe('./api/admin/media/m4/content');
   expect(preview.getAttribute('alt')).toBe('Prévia de Foto');
+});
+
+it('mostra detalhes operacionais no card e abre a mídia inteira', () => {
+  const root = document.querySelector('#app');
+  const media = {
+    id: 'm5', display_name: 'Campanha verão', content_type: 'video/mp4', width: 1920, height: 1080,
+    duration_seconds: 12, size_bytes: 10485760, has_audio: true, processing_status: 'ready',
+    playlists: [{ name: 'Principal' }, { name: 'Shopping' }], groups: [{ name: 'Shopping Center' }], playing_now_count: 2,
+  };
+  renderLibrary(root, { media: [media] }, vi.fn(), vi.fn());
+  expect(root.textContent).toContain('12 s');
+  expect(root.textContent).toContain('2 playlists');
+  expect(root.textContent).toContain('1 conjunto');
+  expect(root.querySelector('[data-preview-media="m5"]')).not.toBeNull();
+  root.querySelector('[data-preview-media="m5"]').click();
+  const viewer = root.querySelector('.media-viewer');
+  expect(viewer).not.toBeNull();
+  expect(viewer.querySelector('video').controls).toBe(true);
+  expect(viewer.textContent).toContain('Mostrar inteira');
+  viewer.querySelector('[data-close-media-viewer]').click();
+  root.querySelector('[data-media-search]').value = 'verão';
+  root.querySelector('[data-media-search]').dispatchEvent(new Event('input', { bubbles: true }));
+  root.querySelector('[data-preview-media="m5"]').click();
+  expect(root.querySelectorAll('.media-viewer')).toHaveLength(1);
+});
+
+it('renderiza visualizador acessível sem acumular diálogos', () => {
+  const root = document.querySelector('#app');
+  const media = { id: 'm6', display_name: '<Oferta>', content_type: 'image/png', width: 1080, height: 1080 };
+  openMediaViewer(root, media);
+  openMediaViewer(root, media);
+  expect(root.querySelectorAll('.media-viewer')).toHaveLength(1);
+  expect(root.querySelector('.media-viewer').getAttribute('aria-modal')).toBe('true');
+  expect(root.querySelector('.media-viewer img').getAttribute('alt')).toBe('Prévia de <Oferta>');
+  root.querySelector('[data-close-media-viewer]').click();
+  expect(root.querySelector('.media-viewer')).toBeNull();
 });
 
 it('envia o tipo de cada mídia ao criar uma playlist', async () => {

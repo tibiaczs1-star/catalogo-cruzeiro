@@ -12,9 +12,10 @@ export function renderLibrary(root, payload, apiClient, refresh) {
     const status = form.querySelector('[role=status]'); status.textContent = 'Enviando…';
     try { await apiClient('/admin/media', { method: 'POST', body: data }); status.textContent = 'Mídia enviada com sucesso.'; playUiSound('success'); await refresh(); } catch (error) { status.textContent = `Não foi possível enviar a mídia (${error.message}).`; playUiSound('error'); }
   });
-  const updateGrid = () => { const filtered = filterMedia(media, { query: root.querySelector('[data-media-search]').value, type: root.querySelector('[data-media-type]').value }); root.querySelector('[data-media-grid]').innerHTML = filtered.map(renderMediaCard).join('') || '<div class="empty">Nenhuma mídia encontrada.</div>'; bindEditors(); };
   const bindEditors = () => root.querySelectorAll('[data-edit-media]').forEach((button) => button.addEventListener('click', async () => { const detail = await apiClient(`/admin/media/${button.dataset.editMedia}`); openMediaEditor(root, detail, apiClient); }));
-  root.querySelector('[data-media-search]').addEventListener('input', updateGrid); root.querySelector('[data-media-type]').addEventListener('change', updateGrid); root.querySelector('[data-view-mode]').addEventListener('click', () => root.querySelector('[data-media-grid]').classList.toggle('media-list')); bindEditors();
+  const bindPreviews = () => root.querySelectorAll('[data-preview-media]').forEach((button) => button.addEventListener('click', () => { const item = media.find((candidate) => String(candidate.id) === button.dataset.previewMedia); if (item) openMediaViewer(root, item); }));
+  const updateGrid = () => { const filtered = filterMedia(media, { query: root.querySelector('[data-media-search]').value, type: root.querySelector('[data-media-type]').value }); root.querySelector('[data-media-grid]').innerHTML = filtered.map(renderMediaCard).join('') || '<div class="empty">Nenhuma mídia encontrada.</div>'; bindEditors(); bindPreviews(); };
+  root.querySelector('[data-media-search]').addEventListener('input', updateGrid); root.querySelector('[data-media-type]').addEventListener('change', updateGrid); root.querySelector('[data-view-mode]').addEventListener('click', () => root.querySelector('[data-media-grid]').classList.toggle('media-list')); bindEditors(); bindPreviews();
 }
 
 export function renderPlaylists(root, playlistPayload, mediaPayload, apiClient, refresh) {
@@ -40,5 +41,6 @@ export function renderLive(root, payload) { const devices=list(payload,'devices'
 export function renderReports(root,payload){const events=list(payload,'events');root.innerHTML=`<header class="page-head"><div><p class="eyebrow">Comprovação</p><h1>Relatórios</h1><p>Histórico de reproduções, downloads e erros por TV e mídia.</p></div><button class="ghost" onclick="window.print()">Exportar / imprimir</button></header><section class="glass report"><table><thead><tr><th>Quando</th><th>TV</th><th>Mídia</th><th>Evento</th></tr></thead><tbody>${events.map(e=>`<tr><td>${new Date(e.occurred_at).toLocaleString('pt-BR')}</td><td>${esc(e.device_name)}</td><td>${esc(e.media_name||'—')}</td><td>${esc(e.event_type)}</td></tr>`).join('')||'<tr><td colspan="4">Nenhum evento registrado.</td></tr>'}</tbody></table></section>`;}
 import { filterMedia, renderMediaCard } from './library.js';
 import { openMediaEditor } from './media-editor.js';
+import { openMediaViewer } from './media-viewer.js';
 import { playUiSound } from './sound.js';
 import { parseScheduleWindow, syncScheduleMode } from './schedules.js';
