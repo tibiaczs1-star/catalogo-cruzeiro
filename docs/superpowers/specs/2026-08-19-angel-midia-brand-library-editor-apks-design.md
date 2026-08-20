@@ -17,6 +17,23 @@ Tese visual: uma central de operação audiovisual premium, sóbria e precisa, c
 - Desktop, tablet e celular não podem produzir rolagem horizontal nem cortar títulos, formulários, miniaturas ou botões.
 - Animações serão curtas: entrada suave da navegação, troca de painel e resposta visual de seleção/enquadramento. `prefers-reduced-motion` será respeitado.
 
+## Identidade sonora e interação
+
+O painel Admin e os dois APKs terão uma identidade sonora própria, curta e profissional. Os sons funcionam como confirmação de interação e nunca devem encobrir o áudio das propagandas.
+
+- toque suave ao abrir o aplicativo e concluir o login;
+- confirmação curta ao salvar, enviar mídia, publicar programação, sincronizar ou concluir download;
+- aviso diferente para erro, TV offline, conflito de programação e falha de mídia;
+- resposta discreta em ações importantes, sem som a cada clique comum;
+- vibração tátil opcional no APK Admin quando o aparelho permitir;
+- controle de volume dos efeitos e opção **Silenciar sons da interface** no painel e nos APKs;
+- sons desligados automaticamente durante reprodução ou prévia de vídeo com áudio;
+- APK TV não toca transições sonoras entre propagandas, salvo quando uma programação incluir explicitamente uma mídia de áudio/vídeo;
+- carregamento local dos arquivos sonoros para funcionar offline e não atrasar a interface;
+- preferência de som persistida por usuário/dispositivo e respeito aos modos silencioso e não perturbe do Android.
+
+Os arquivos serão originais ou licenciados para uso comercial, leves e normalizados para evitar picos de volume. A interface combina som, microanimação e estado visual, mantendo acessibilidade para quem estiver com o aparelho silenciado.
+
 ## Navegação
 
 O menu lateral mantém as áreas operacionais existentes e adiciona acesso permanente aos aplicativos:
@@ -137,6 +154,7 @@ A implementação seguirá TDD e deverá comprovar:
 - indicação correta de onde a mídia está programada e rodando;
 - links dos dois APKs com versão, tamanho e download HTTP válido;
 - atualização de release e remoção do cache anterior;
+- efeitos sonoros corretos para sucesso, alerta e erro, com volume, silêncio e proteção do áudio dos vídeos;
 - operação offline do Player com a última playlist íntegra;
 - testes de API, controlador, manifesto e builds Android;
 - inspeção visual em desktop e celular;
