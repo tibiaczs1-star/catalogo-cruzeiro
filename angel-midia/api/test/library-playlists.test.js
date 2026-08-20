@@ -33,6 +33,10 @@ test('playlist validates and preserves video playback metadata', () => {
     [{ trimStartSeconds: -1, trimEndSeconds: 5, volume: 1 }, 'invalid_trim_start'],
     [{ trimStartSeconds: 5, trimEndSeconds: 5, volume: 1 }, 'invalid_trim_range'],
     [{ trimStartSeconds: 0, trimEndSeconds: 31, volume: 1 }, 'trim_exceeds_duration'],
+    [{ trimStartSeconds: 30, trimEndSeconds: null, volume: 1 }, 'trim_exceeds_duration'],
+    [{ trimStartSeconds: '', trimEndSeconds: null, volume: 1 }, 'invalid_trim_start'],
+    [{ trimStartSeconds: false, trimEndSeconds: null, volume: 1 }, 'invalid_trim_start'],
+    [{ trimStartSeconds: 0, trimEndSeconds: null, volume: '' }, 'invalid_volume'],
     [{ trimStartSeconds: 0, trimEndSeconds: 5, volume: 2 }, 'invalid_volume'],
   ];
   for (const [playback, error] of invalid) {

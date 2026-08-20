@@ -5,12 +5,13 @@ import { inTransaction } from './devices.js';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export function validateVideoPlayback(item, durationSeconds) {
-  const start = item.trimStartSeconds == null ? null : Number(item.trimStartSeconds);
-  const end = item.trimEndSeconds == null ? null : Number(item.trimEndSeconds);
-  const volume = item.volume == null ? 1 : Number(item.volume);
+  const start = item.trimStartSeconds == null ? null : item.trimStartSeconds;
+  const end = item.trimEndSeconds == null ? null : item.trimEndSeconds;
+  const volume = item.volume == null ? 1 : item.volume;
   if (start !== null && (!Number.isFinite(start) || start < 0)) return { ok: false, error: 'invalid_trim_start' };
   if (end !== null && (!Number.isFinite(end) || end <= (start ?? 0))) return { ok: false, error: 'invalid_trim_range' };
-  if (end !== null && Number.isFinite(Number(durationSeconds)) && end > Number(durationSeconds)) return { ok: false, error: 'trim_exceeds_duration' };
+  const duration = Number(durationSeconds);
+  if (Number.isFinite(duration) && ((start !== null && start >= duration) || (end !== null && end > duration))) return { ok: false, error: 'trim_exceeds_duration' };
   if (!Number.isFinite(volume) || volume < 0 || volume > 1) return { ok: false, error: 'invalid_volume' };
   return { ok: true, value: { start, end, volume } };
 }

@@ -5,6 +5,7 @@ enum class TrimEndAction { RESTART, ADVANCE }
 data class VideoPlayback(val startMs: Int, val endMs: Int?, val volume: Float)
 
 object PlaybackPolicy {
+    fun finiteNumber(value: Any?): Double? = (value as? Number)?.toDouble()?.takeIf { it.isFinite() }
     fun source(emergencyActive: Boolean, itemCount: Int): PlaybackSource = when {
         emergencyActive -> PlaybackSource.EMERGENCY
         itemCount > 0 -> PlaybackSource.SCHEDULE
@@ -14,9 +15,9 @@ object PlaybackPolicy {
     fun imageDurationMs(seconds: Int?): Long = ((seconds ?: 10).coerceAtLeast(1)) * 1_000L
 
     fun videoPlayback(startSeconds: Double?, endSeconds: Double?, volume: Double?): VideoPlayback {
-        val start = ((startSeconds ?: 0.0).coerceAtLeast(0.0) * 1_000).toInt()
-        val end = endSeconds?.takeIf { it > start / 1_000.0 }?.let { (it * 1_000).toInt() }
-        return VideoPlayback(start, end, (volume ?: 1.0).coerceIn(0.0, 1.0).toFloat())
+        val start = ((startSeconds?.takeIf { it.isFinite() } ?: 0.0).coerceAtLeast(0.0) * 1_000).toInt()
+        val end = endSeconds?.takeIf { it.isFinite() && it > start / 1_000.0 }?.let { (it * 1_000).toInt() }
+        return VideoPlayback(start, end, (volume?.takeIf { it.isFinite() } ?: 1.0).coerceIn(0.0, 1.0).toFloat())
     }
 
     fun reachedTrimEnd(positionMs: Int, endMs: Int?): Boolean = endMs != null && positionMs >= endMs

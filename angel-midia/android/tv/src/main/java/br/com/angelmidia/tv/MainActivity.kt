@@ -184,14 +184,15 @@ class MainActivity : Activity() {
                 if (type.startsWith("video/")) {
                     val playbackJson = item.optJSONObject("playback") ?: JSONObject()
                     val playback = PlaybackPolicy.videoPlayback(
-                        playbackJson.optDouble("trimStartSeconds").takeIf { playbackJson.has("trimStartSeconds") },
-                        playbackJson.optDouble("trimEndSeconds").takeIf { playbackJson.has("trimEndSeconds") },
-                        playbackJson.optDouble("volume").takeIf { playbackJson.has("volume") },
+                        PlaybackPolicy.finiteNumber(playbackJson.opt("trimStartSeconds")),
+                        PlaybackPolicy.finiteNumber(playbackJson.opt("trimEndSeconds")),
+                        PlaybackPolicy.finiteNumber(playbackJson.opt("volume")),
                     )
                     val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
                     val video = VideoView(this).apply {
                         setVideoPath(file.absolutePath)
                         setOnPreparedListener { player ->
+                            applyPresentation(this, stage, player.videoWidth, player.videoHeight, presentation)
                             player.isLooping = emergency && playback.endMs == null
                             player.setVolume(playback.volume, playback.volume)
                             seekTo(playback.startMs)
@@ -210,19 +211,10 @@ class MainActivity : Activity() {
                     if (emergency) mainHandler.postDelayed({ syncAndPlay(generation) }, 5_000)
                 } else {
                     val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
-                    val image = ImageView(this).apply {
-                        scaleType = when (presentation.optString("fitMode", "contain")) {
-                            "cover" -> ImageView.ScaleType.CENTER_CROP
-                            "fill" -> ImageView.ScaleType.FIT_XY
-                            else -> ImageView.ScaleType.FIT_CENTER
-                        }
-                        rotation = presentation.optDouble("rotation", 0.0).toFloat()
-                        scaleX = presentation.optDouble("zoom", 1.0).toFloat()
-                        scaleY = presentation.optDouble("zoom", 1.0).toFloat()
-                        setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
-                    }
+                    val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                    val image = ImageView(this).apply { scaleType = ImageView.ScaleType.FIT_XY; setImageBitmap(bitmap) }
                     stage.addView(image, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
-                    setContentView(stage); enterFullscreen()
+                    setContentView(stage); enterFullscreen(); stage.post { applyPresentation(image, stage, bitmap.width, bitmap.height, presentation) }
                     if (!emergency) scheduleEmergencyCheck(generation)
                     mainHandler.postDelayed({ finishMedia(assetId, emergency, generation) }, if (emergency) 5_000 else PlaybackPolicy.imageDurationMs(item.optInt("durationSeconds").takeIf { item.has("durationSeconds") }))
                 }
@@ -231,8 +223,24 @@ class MainActivity : Activity() {
     }.start() }
 
     private fun presentationColor(presentation: JSONObject): Int = runCatching {
-        Color.parseColor(presentation.optString("backgroundColor", "#000000"))
+        Color.parseColor(PresentationPolicy.color(presentationSpec(presentation)))
     }.getOrDefault(Color.BLACK)
+
+    private fun presentationSpec(json: JSONObject) = PresentationSpec(
+        fit = json.optString("fitMode", "contain").takeIf { it in setOf("contain", "cover", "fill") } ?: "contain",
+        focalX = (PlaybackPolicy.finiteNumber(json.opt("focalX")) ?: 50.0).toFloat(),
+        focalY = (PlaybackPolicy.finiteNumber(json.opt("focalY")) ?: 50.0).toFloat(),
+        zoom = (PlaybackPolicy.finiteNumber(json.opt("zoom")) ?: 1.0).toFloat(),
+        rotation = (PlaybackPolicy.finiteNumber(json.opt("rotation")) ?: 0.0).toInt().takeIf { it in setOf(0, 90, 180, 270) } ?: 0,
+        backgroundColor = json.opt("backgroundColor") as? String ?: "#000000",
+    )
+
+    private fun applyPresentation(view: View, stage: FrameLayout, mediaWidth: Int, mediaHeight: Int, json: JSONObject) {
+        val layout = PresentationPolicy.layout(stage.width, stage.height, mediaWidth, mediaHeight, presentationSpec(json))
+        view.layoutParams = FrameLayout.LayoutParams(layout.width, layout.height, Gravity.CENTER)
+        view.translationX = layout.translationX; view.translationY = layout.translationY
+        view.scaleX = layout.zoom; view.scaleY = layout.zoom; view.rotation = layout.rotation
+    }
 
     private fun finishMedia(assetId: String, emergency: Boolean, generation: Int): Unit {
         if (generation != playbackGeneration) return

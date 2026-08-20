@@ -207,6 +207,18 @@ it('configura duração por item ou padrão global e playback de vídeo no paylo
   ]);
 });
 
+it('limita o início pela duração e mostra erro específico antes de enviar', async () => {
+  const apiClient = vi.fn(async () => ({})); const root = document.querySelector('#app');
+  renderPlaylists(root, [], { media: [{ id: 'm2', display_name: 'Filme', content_type: 'video/mp4', duration_seconds: 30 }] }, apiClient, vi.fn());
+  root.querySelector('[name=name]').value = 'Vitrine'; root.querySelector('[data-add-playlist-item]').click();
+  const start = root.querySelector('[data-trim-start]');
+  expect(start.max).toBe('30'); start.value = '30';
+  root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await Promise.resolve();
+  expect(apiClient).not.toHaveBeenCalled();
+  expect(root.querySelector('[role=status]').textContent).toMatch(/início.+menor.+30/i);
+});
+
 it('edita item de playlist existente, lê valores salvos e usa PUT', async () => {
   const apiClient = vi.fn(async () => ({})); const root = document.querySelector('#app');
   const playlists = [{ id: 'p1', name: 'Shopping', items: [{ assetId: 'm2', type: 'video/mp4', position: 0, trimStartSeconds: 3, trimEndSeconds: 18, volume: .4 }] }];
