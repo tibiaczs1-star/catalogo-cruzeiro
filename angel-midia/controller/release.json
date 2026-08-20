@@ -1,0 +1,24 @@
+{
+  "release": "2026.08.19.3",
+  "publishedAt": "2026-08-19T20:27:00-05:00",
+  "apps": {
+    "admin": {
+      "name": "Angel Mídia Admin",
+      "version": "2026.08.19.3",
+      "sizeBytes": 8835754,
+      "sha256": "0a846d6f0ee140bfebd40d7825f44620e80a777dac964e4519089f4c0ea4839f",
+      "minAndroid": "8.0",
+      "path": "./downloads/angel-midia-admin.apk",
+      "purpose": "Administrar mídias, playlists, TVs, mapas e programações."
+    },
+    "tv": {
+      "name": "Angel Mídia TV",
+      "version": "2026.08.19.3",
+      "sizeBytes": 11272537,
+      "sha256": "ab97c8b8bb31e3829328e39a2569b6a4682c47ec2ebfdcf05f81e7e417001347",
+      "minAndroid": "8.0",
+      "path": "./downloads/angel-midia-tv.apk",
+      "purpose": "Vincular o stick à TV, baixar a programação e reproduzir offline."
+    }
+  }
+}
