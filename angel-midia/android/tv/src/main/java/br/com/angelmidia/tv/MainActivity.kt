@@ -25,7 +25,8 @@ class MainActivity : Activity() {
     private val preferences by lazy { getSharedPreferences("angel_tv", MODE_PRIVATE) }
     private val mainHandler = Handler(Looper.getMainLooper())
     private val transfers = TransferRegistry<HttpURLConnection> { it.disconnect() }
-    @Volatile private var playbackGeneration = 0
+    private val playbackSession = PlaybackSession()
+    private val playbackSlot = PlaybackSlot<VideoView> { video -> runCatching { video.stopPlayback() } }
     private var scheduleIndex = 0
     private var scheduleItems = JSONArray()
     private var manifestLoop = true
@@ -35,20 +36,54 @@ class MainActivity : Activity() {
     private var scheduleExhausted = false
 
     private fun advanceGeneration(): Int {
-        val previous = playbackGeneration
-        playbackGeneration = previous + 1
+        val previous = playbackSession.current()
+        val next = playbackSession.advance()
         transfers.cancel(previous)
-        return playbackGeneration
+        stopCurrentPlayback()
+        return next
     }
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         enterFullscreen()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        playbackSession.activate()
         when {
             preferences.contains("device_token") -> showReady()
             preferences.contains("link_code") -> showPairing()
             else -> showFirstRun()
         }
+    }
+
+    override fun onStop() {
+        shutdownPlayback()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        shutdownPlayback()
+        super.onDestroy()
+    }
+
+    private fun shutdownPlayback() {
+        val previous = playbackSession.current()
+        playbackSession.deactivate()
+        mainHandler.removeCallbacksAndMessages(null)
+        transfers.cancel(previous)
+        stopCurrentPlayback()
+    }
+
+    private fun stopCurrentPlayback() {
+        playbackSlot.clear()
+    }
+
+    private fun showContent(view: View, video: VideoView? = null) {
+        playbackSlot.replace(video)
+        setContentView(view)
+        enterFullscreen()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -96,14 +131,15 @@ class MainActivity : Activity() {
                 status.text = "Preencha o nome da TV e o local."; return@setOnClickListener
             }
             button.isEnabled = false; status.text = "Cadastrando com seguranca..."
-            activate(name.text.toString().trim(), location.text.toString().trim(), updates.isChecked) { result ->
+            val generation = playbackSession.current()
+            activate(name.text.toString().trim(), location.text.toString().trim(), updates.isChecked, generation) { result ->
                 button.isEnabled = true
                 if (result.isSuccess) {
                     if (preferences.contains("device_token")) showReady() else showPairing()
                 } else status.text = result.exceptionOrNull()?.message ?: "Nao foi possivel cadastrar. Verifique a internet."
             }
         }
-        setContentView(root)
+        showContent(root)
     }
 
     private fun updateExplanation(enabled: Boolean): String {
@@ -122,7 +158,7 @@ class MainActivity : Activity() {
         return (androidId?.takeIf { it.isNotBlank() } ?: UUID.randomUUID().toString()).also { preferences.edit().putString("installation_id", it).apply() }
     }
 
-    private fun activate(name: String, location: String, autoUpdate: Boolean, done: (Result<Unit>) -> Unit) = Thread {
+    private fun activate(name: String, location: String, autoUpdate: Boolean, generation: Int, done: (Result<Unit>) -> Unit) = Thread {
         try {
             val payload = JSONObject().put("installationId", installationId()).put("name", name).put("address", location)
             val response = request("api/devices/activate", payload)
@@ -131,14 +167,15 @@ class MainActivity : Activity() {
             if (FirstRunSetup.destination(deviceToken, activationToken) == ActivationDestination.ERROR) {
                 throw IllegalStateException("O servidor nao devolveu a credencial da TV.")
             }
+            if (!playbackSession.accepts(generation)) return@Thread
             preferences.edit().putString("device_name", name).putString("location", location).putBoolean("auto_update", autoUpdate)
                 .putString("link_code", response.optString("linkCode"))
                 .apply {
                     if (deviceToken != null) putString("device_token", deviceToken).remove("activation_token")
                     if (activationToken != null) putString("activation_token", activationToken)
                 }.apply()
-            mainHandler.post { done(Result.success(Unit)) }
-        } catch (error: Exception) { mainHandler.post { done(Result.failure(error)) } }
+            mainHandler.post { if (playbackSession.accepts(generation)) done(Result.success(Unit)) }
+        } catch (error: Exception) { mainHandler.post { if (playbackSession.accepts(generation)) done(Result.failure(error)) } }
     }.start()
 
     private fun showPairing() {
@@ -147,7 +184,7 @@ class MainActivity : Activity() {
         root.addView(label(preferences.getString("location", "") ?: "", 18f)); root.addView(label("Codigo para vincular no painel", 18f))
         root.addView(label(preferences.getString("link_code", "------") ?: "------", 42f))
         val status = label("Aguardando aprovacao do administrador...", 18f); root.addView(status)
-        setContentView(root); claimWhenApproved(status)
+        showContent(root); claimWhenApproved(status, playbackSession.current())
     }
 
     private fun showReady(): Unit {
@@ -158,7 +195,7 @@ class MainActivity : Activity() {
         try {
             val token = preferences.getString("device_token", null) ?: return@Thread
             val state = getJson("api/device/sync", token)
-            if (generation != playbackGeneration) return@Thread
+            if (!playbackSession.accepts(generation)) return@Thread
             val emergency = state.optJSONObject("emergency")
             val schedule = state.optJSONObject("schedule")
             val items = schedule?.optJSONArray("items") ?: JSONArray()
@@ -167,7 +204,7 @@ class MainActivity : Activity() {
             // so a changed legacy schedule can leave the completed state.
             val version = schedule?.optString("version")?.takeIf { it.isNotBlank() } ?: schedule?.toString()
             mainHandler.post {
-                if (generation != playbackGeneration) return@post
+                if (!playbackSession.accepts(generation)) return@post
                 if (scheduleVersion != version) {
                     scheduleIndex = 0
                     scheduleExhausted = false
@@ -198,9 +235,27 @@ class MainActivity : Activity() {
             root.addView(label("⚡ RELÂMPAGO MARQUINHOS", 28f))
             root.addView(label(item.optString("title", "ATENÇÃO"), 54f))
             root.addView(label(item.optString("message"), 32f))
-            setContentView(root)
-            mainHandler.postDelayed({ syncAndPlay(generation) }, 5_000)
-        } else playMedia(JSONObject().put("assetId", item.optString("asset_id")).put("type", item.optString("content_type")).put("durationSeconds", item.optInt("duration_seconds", 10)), true, generation)
+            showContent(root)
+            mainHandler.postDelayed({ if (playbackSession.accepts(generation)) syncAndPlay(generation) }, 5_000)
+        } else playMedia(emergencyMediaItem(item), true, generation)
+    }
+
+    private fun emergencyMediaItem(item: JSONObject): JSONObject {
+        val presentation = PlaybackPolicy.apiPresentation(
+            item.opt("fit_mode") as? String, PlaybackPolicy.finiteNumber(item.opt("focal_x")),
+            PlaybackPolicy.finiteNumber(item.opt("focal_y")), PlaybackPolicy.finiteNumber(item.opt("zoom")),
+            PlaybackPolicy.finiteNumber(item.opt("rotation")), item.opt("background_color") as? String,
+        )
+        val presentationJson = JSONObject().put("fitMode", presentation.fit).put("focalX", presentation.focalX)
+            .put("focalY", presentation.focalY).put("zoom", presentation.zoom).put("rotation", presentation.rotation)
+            .put("backgroundColor", presentation.backgroundColor)
+        val playbackJson = JSONObject()
+        if (item.has("trim_start_seconds")) playbackJson.put("trimStartSeconds", item.opt("trim_start_seconds"))
+        if (item.has("trim_end_seconds")) playbackJson.put("trimEndSeconds", item.opt("trim_end_seconds"))
+        if (item.has("volume")) playbackJson.put("volume", item.opt("volume"))
+        return JSONObject().put("assetId", item.optString("asset_id")).put("type", item.optString("content_type"))
+            .put("durationSeconds", item.optInt("duration_seconds", 10)).put("presentation", presentationJson)
+            .put("playback", playbackJson)
     }
 
     private fun playMedia(item: JSONObject, emergency: Boolean, generation: Int): Unit { Thread {
@@ -211,7 +266,7 @@ class MainActivity : Activity() {
             val presentation = item.optJSONObject("presentation") ?: JSONObject()
             val file = downloadMedia(assetId, token, type, generation)
             mainHandler.post {
-                if (generation != playbackGeneration) return@post
+                if (!playbackSession.accepts(generation)) return@post
                 if (type.startsWith("video/")) {
                     val playbackJson = item.optJSONObject("playback") ?: JSONObject()
                     val playback = PlaybackPolicy.videoPlayback(
@@ -223,6 +278,10 @@ class MainActivity : Activity() {
                     val video = VideoView(this).apply {
                         setVideoPath(file.absolutePath)
                         setOnPreparedListener { player ->
+                            if (!playbackSession.accepts(generation) || !playbackSlot.isCurrent(this)) {
+                                player.release()
+                                return@setOnPreparedListener
+                            }
                             applyPresentation(this, stage, player.videoWidth, player.videoHeight, presentation)
                             player.isLooping = emergency && playback.endMs == null
                             player.setVolume(playback.volume, playback.volume)
@@ -242,8 +301,8 @@ class MainActivity : Activity() {
                         }
                     }
                     stage.addView(video, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
-                    setContentView(stage); enterFullscreen(); video.start()
-                    if (emergency) mainHandler.postDelayed({ syncAndPlay(generation) }, 5_000)
+                    showContent(stage, video); video.start()
+                    if (emergency) mainHandler.postDelayed({ if (playbackSession.accepts(generation)) syncAndPlay(generation) }, 5_000)
                 } else {
                     val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
                     val bitmap = BitmapFactory.decodeFile(file.absolutePath)
@@ -253,7 +312,7 @@ class MainActivity : Activity() {
                     }
                     val image = ImageView(this).apply { scaleType = ImageView.ScaleType.FIT_XY; setImageBitmap(bitmap) }
                     stage.addView(image, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
-                    setContentView(stage); enterFullscreen(); stage.post { applyPresentation(image, stage, bitmap.width, bitmap.height, presentation) }
+                    showContent(stage); stage.post { if (playbackSession.accepts(generation)) applyPresentation(image, stage, bitmap.width, bitmap.height, presentation) }
                     if (!emergency) prefetchNext(generation)
                     mainHandler.postDelayed({ finishMedia(assetId, emergency, generation) }, if (emergency) 5_000 else PlaybackPolicy.imageDurationMs(item.optInt("durationSeconds").takeIf { item.has("durationSeconds") }))
                 }
@@ -285,7 +344,7 @@ class MainActivity : Activity() {
     }
 
     private fun finishMedia(assetId: String, emergency: Boolean, generation: Int): Unit {
-        if (generation != playbackGeneration) return
+        if (!playbackSession.accepts(generation)) return
         if (!emergency) {
             reportPlaybackEvent(assetId, "completed")
             consecutiveFailures = 0
@@ -299,7 +358,7 @@ class MainActivity : Activity() {
     }
 
     private fun failMedia(assetId: String, emergency: Boolean, generation: Int, reason: String) {
-        if (generation != playbackGeneration) return
+        if (!playbackSession.accepts(generation)) return
         reportPlaybackEvent(assetId, "error", reason)
         val nextGeneration = advanceGeneration()
         if (emergency) {
@@ -316,38 +375,38 @@ class MainActivity : Activity() {
     }
 
     private fun showRecovery(generation: Int) {
-        if (generation != playbackGeneration) return
+        if (!playbackSession.accepts(generation)) return
         val root = container()
         root.addView(label("ANGEL MIDIA PLAY", 34f))
         root.addView(label("Estamos recuperando a reproducao", 25f))
         root.addView(label("As midias serao verificadas novamente em instantes.", 18f))
-        setContentView(root)
+        showContent(root)
         val delay = PlaybackPolicy.retryBackoffMs(recoveryAttempt)
         scheduleEmergencyCheck(generation, 0)
         mainHandler.postDelayed({
-            if (generation == playbackGeneration) {
+            if (playbackSession.accepts(generation)) {
                 syncAndPlay(advanceGeneration())
             }
         }, delay)
     }
 
     private fun showScheduleComplete(generation: Int) {
-        if (generation != playbackGeneration) return
+        if (!playbackSession.accepts(generation)) return
         val root = container()
         root.addView(label("ANGEL MIDIA PLAY", 34f))
         root.addView(label("Programacao concluida", 25f))
         root.addView(label("Aguardando uma nova programacao ou aviso de emergencia.", 18f))
-        setContentView(root)
+        showContent(root)
         scheduleEmergencyCheck(generation, 0)
         mainHandler.postDelayed({
-            if (generation == playbackGeneration) {
+            if (playbackSession.accepts(generation)) {
                 syncAndPlay(advanceGeneration())
             }
         }, 5_000)
     }
 
     private fun prefetchNext(generation: Int) {
-        if (generation != playbackGeneration || scheduleItems.length() == 0) return
+        if (!playbackSession.accepts(generation) || scheduleItems.length() == 0) return
         val next = PlaybackPolicy.nextIndex(scheduleIndex, scheduleItems.length())
         val item = scheduleItems.optJSONObject(next) ?: return
         val token = preferences.getString("device_token", null) ?: return
@@ -359,7 +418,7 @@ class MainActivity : Activity() {
     private fun monitorTrimEnd(video: VideoView, assetId: String, emergency: Boolean, generation: Int, playback: VideoPlayback) {
         mainHandler.postDelayed(object : Runnable {
             override fun run() {
-                if (generation != playbackGeneration) return
+                if (!playbackSession.accepts(generation)) return
                 if (PlaybackPolicy.reachedTrimEnd(video.currentPosition, playback.endMs)) {
                     if (PlaybackPolicy.trimEndAction(emergency) == TrimEndAction.RESTART) {
                         video.seekTo(playback.startMs); video.start(); mainHandler.postDelayed(this, 100)
@@ -371,14 +430,15 @@ class MainActivity : Activity() {
 
     private fun scheduleEmergencyCheck(generation: Int, delayMs: Long = 1_000): Unit {
         mainHandler.postDelayed({
-            if (generation != playbackGeneration) return@postDelayed
+            if (!playbackSession.accepts(generation)) return@postDelayed
             Thread {
+                if (!playbackSession.accepts(generation)) return@Thread
                 val emergency = runCatching { getJson("api/device/sync", preferences.getString("device_token", null)!!).optJSONObject("emergency") }.getOrNull()
                 if (emergency != null) mainHandler.post {
-                    if (PlaybackPolicy.shouldInterruptForEmergency(generation == playbackGeneration, true)) {
+                    if (PlaybackPolicy.shouldInterruptForEmergency(playbackSession.accepts(generation), true)) {
                         playEmergency(emergency, advanceGeneration())
                     }
-                } else mainHandler.post { if (generation == playbackGeneration) scheduleEmergencyCheck(generation) }
+                } else mainHandler.post { if (playbackSession.accepts(generation)) scheduleEmergencyCheck(generation) }
             }.start()
         }, delayMs)
     }
@@ -395,11 +455,11 @@ class MainActivity : Activity() {
     }.start()
 
     private fun showIdle(generation: Int, message: String = "TV ativa. Aguardando programacao...") {
-        if (generation != playbackGeneration) return
-        val root = container(); root.addView(label("ANGEL MIDIA PLAY", 34f)); root.addView(label(message, 22f)); setContentView(root)
+        if (!playbackSession.accepts(generation)) return
+        val root = container(); root.addView(label("ANGEL MIDIA PLAY", 34f)); root.addView(label(message, 22f)); showContent(root)
         scheduleEmergencyCheck(generation, 0)
         mainHandler.postDelayed({
-            if (generation == playbackGeneration) {
+            if (playbackSession.accepts(generation)) {
                 syncAndPlay(advanceGeneration())
             }
         }, 10_000)
@@ -418,23 +478,23 @@ class MainActivity : Activity() {
         if (target.exists() && target.length() > 0) return target
         val pending = File(cacheDir, PlaybackPolicy.cacheTempName(assetId, UUID.randomUUID().toString()))
         val c = URL(BuildConfig.BASE_URL + "api/device/media/$assetId").openConnection() as HttpURLConnection
-        transfers.register(generation, c)
+        if (!transfers.register(generation, c)) throw InterruptedIOException("stale_transfer")
         try {
-            if (!PlaybackPolicy.transferAllowed(generation, playbackGeneration)) throw InterruptedIOException("stale_transfer")
+            if (!playbackSession.accepts(generation)) throw InterruptedIOException("stale_transfer")
             c.connectTimeout = 30_000; c.readTimeout = 60_000; c.setRequestProperty("Authorization", "Bearer $bearer")
             if (c.responseCode !in 200..299) throw IllegalStateException("media_failed")
             c.inputStream.use { input ->
                 FileOutputStream(pending).use { output ->
                     val buffer = ByteArray(64 * 1024)
                     while (true) {
-                        if (!PlaybackPolicy.transferAllowed(generation, playbackGeneration)) throw InterruptedIOException("stale_transfer")
+                        if (!playbackSession.accepts(generation)) throw InterruptedIOException("stale_transfer")
                         val read = input.read(buffer)
                         if (read < 0) break
                         output.write(buffer, 0, read)
                     }
                 }
             }
-            if (!PlaybackPolicy.transferAllowed(generation, playbackGeneration)) throw InterruptedIOException("stale_transfer")
+            if (!playbackSession.accepts(generation)) throw InterruptedIOException("stale_transfer")
             if (!target.exists() && !pending.renameTo(target)) throw IllegalStateException("media_cache_failed")
         } finally {
             transfers.unregister(generation, c)
@@ -450,16 +510,19 @@ class MainActivity : Activity() {
         c.outputStream.use { it.write(payload.toString().toByteArray()) }; if (c.responseCode !in 200..299) throw IllegalStateException("event_failed")
     }
 
-    private fun claimWhenApproved(status: TextView) {
+    private fun claimWhenApproved(status: TextView, generation: Int) {
         val token = preferences.getString("activation_token", null)
         if (token.isNullOrBlank()) { status.text = "TV aprovada e pronta para receber a programacao."; return }
         Thread {
             try {
                 val result = request("api/device/claim", JSONObject(), token)
+                if (!playbackSession.accepts(generation)) return@Thread
                 val deviceToken = result.optString("deviceToken")
                 if (deviceToken.isNotBlank()) preferences.edit().putString("device_token", deviceToken).remove("activation_token").apply()
-                mainHandler.post { status.text = "TV aprovada e pronta para receber a programacao." }
-            } catch (_: Exception) { mainHandler.postDelayed({ claimWhenApproved(status) }, 15_000) }
+                mainHandler.post { if (playbackSession.accepts(generation)) status.text = "TV aprovada e pronta para receber a programacao." }
+            } catch (_: Exception) {
+                mainHandler.postDelayed({ if (playbackSession.accepts(generation)) claimWhenApproved(status, generation) }, 15_000)
+            }
         }.start()
     }
 

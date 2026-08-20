@@ -1,9 +1,42 @@
 package br.com.angelmidia.tv
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun lifecycleGenerationRejectsStoppedAndStaleCallbacks() {
+        val session = PlaybackSession()
+        val first = session.activate()
+        assertTrue(session.accepts(first))
+
+        session.deactivate()
+        assertFalse(session.accepts(first))
+
+        val resumed = session.activate()
+        assertFalse(session.accepts(first))
+        assertTrue(session.accepts(resumed))
+
+        val replacement = session.advance()
+        assertFalse(session.accepts(resumed))
+        assertTrue(session.accepts(replacement))
+    }
+
+    @Test fun replacingPlaybackStopsThePreviousPlayerAndRejectsItsCallback() {
+        val stopped = mutableListOf<String>()
+        val slot = PlaybackSlot<String> { stopped.add(it) }
+        val first = String(charArrayOf('a'))
+        val second = String(charArrayOf('b'))
+        slot.replace(first)
+        slot.replace(second)
+        assertEquals(listOf(first), stopped)
+        assertFalse(slot.isCurrent(first))
+        assertTrue(slot.isCurrent(second))
+        slot.clear()
+        assertEquals(listOf(first, second), stopped)
+    }
+
     @Test fun advancesCircularlyAcrossAPlaylist() {
         assertEquals(1, PlaybackPolicy.nextIndex(0, 3))
         assertEquals(2, PlaybackPolicy.nextIndex(1, 3))
@@ -58,6 +91,26 @@ class PlaybackPolicyTest {
         assertEquals(setOf("playback", "prefetch"), cancelled.toSet())
         registry.cancel(5)
         assertEquals(true, cancelled.contains("emergency"))
+    }
+
+    @Test fun aTransferRegisteredAfterCancellationIsRejectedAndCancelled() {
+        val cancelled = mutableListOf<String>()
+        val registry = TransferRegistry<String> { cancelled.add(it) }
+        registry.cancel(4)
+
+        assertFalse(registry.register(4, "late-normal"))
+        assertEquals(listOf("late-normal"), cancelled)
+    }
+
+    @Test fun emergencySnakeCasePresentationAndPlaybackAreNormalized() {
+        val presentation = PlaybackPolicy.apiPresentation(
+            fitMode = "cover", focalX = 23.0, focalY = 71.0, zoom = 1.25,
+            rotation = 90.0, backgroundColor = "#123456"
+        )
+        assertEquals(PresentationSpec("cover", 23f, 71f, 1.25f, 90, "#123456"), presentation)
+
+        val playback = PlaybackPolicy.videoPlayback(3.5, 18.0, 0.4)
+        assertEquals(VideoPlayback(3_500, 18_000, 0.4f), playback)
     }
 
     @Test fun emergencyAlwaysWinsOverTheNormalSchedule() {

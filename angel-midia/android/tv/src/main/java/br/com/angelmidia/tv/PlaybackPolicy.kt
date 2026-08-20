@@ -1,16 +1,47 @@
 package br.com.angelmidia.tv
 
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
 
 enum class PlaybackSource { EMERGENCY, SCHEDULE, IDLE }
 enum class TrimEndAction { RESTART, ADVANCE }
 data class VideoPlayback(val startMs: Int, val endMs: Int?, val volume: Float)
 
+class PlaybackSession {
+    private val generation = AtomicInteger(0)
+    @Volatile private var active = false
+
+    fun activate(): Int { val next = generation.incrementAndGet(); active = true; return next }
+    fun deactivate(): Int { active = false; return generation.incrementAndGet() }
+    fun advance(): Int = generation.incrementAndGet()
+    fun current(): Int = generation.get()
+    fun accepts(expectedGeneration: Int): Boolean = active && generation.get() == expectedGeneration
+}
+
+class PlaybackSlot<T>(private val stop: (T) -> Unit) {
+    @Volatile private var current: T? = null
+    fun replace(next: T?) {
+        val previous = current
+        if (previous !== next) previous?.let(stop)
+        current = next
+    }
+    fun clear() = replace(null)
+    fun isCurrent(value: T): Boolean = current === value
+}
+
 class TransferRegistry<T>(private val cancelTransfer: (T) -> Unit) {
     private val transfers = ConcurrentHashMap<Int, MutableSet<T>>()
+    private val cancelled = ConcurrentHashMap.newKeySet<Int>()
 
-    fun register(generation: Int, transfer: T) {
-        transfers.computeIfAbsent(generation) { ConcurrentHashMap.newKeySet() }.add(transfer)
+    fun register(generation: Int, transfer: T): Boolean {
+        if (cancelled.contains(generation)) { cancelTransfer(transfer); return false }
+        val active = transfers.computeIfAbsent(generation) { ConcurrentHashMap.newKeySet() }
+        active.add(transfer)
+        if (cancelled.contains(generation)) {
+            if (active.remove(transfer)) cancelTransfer(transfer)
+            return false
+        }
+        return true
     }
 
     fun unregister(generation: Int, transfer: T) {
@@ -21,11 +52,22 @@ class TransferRegistry<T>(private val cancelTransfer: (T) -> Unit) {
     }
 
     fun cancel(generation: Int) {
+        cancelled.add(generation)
         transfers.remove(generation)?.forEach(cancelTransfer)
     }
 }
 
 object PlaybackPolicy {
+    fun apiPresentation(
+        fitMode: String?, focalX: Double?, focalY: Double?, zoom: Double?,
+        rotation: Double?, backgroundColor: String?,
+    ) = PresentationSpec(
+        fit = fitMode?.takeIf { it in setOf("contain", "cover", "fill") } ?: "contain",
+        focalX = (focalX ?: 50.0).toFloat(), focalY = (focalY ?: 50.0).toFloat(),
+        zoom = (zoom ?: 1.0).toFloat(),
+        rotation = (rotation ?: 0.0).toInt().takeIf { it in setOf(0, 90, 180, 270) } ?: 0,
+        backgroundColor = backgroundColor ?: "#000000",
+    )
     fun nextIndex(current: Int, itemCount: Int): Int =
         if (itemCount <= 0) 0 else Math.floorMod(current + 1, itemCount)
 
