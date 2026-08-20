@@ -1,5 +1,6 @@
 import { mediaMimeType } from './library.js';
 import { angelIcon } from './angel-icons.js';
+import { playUiSound } from './sound.js';
 
 const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
@@ -38,6 +39,11 @@ export function openMediaViewer(root, media) {
   const close = () => {
     document.removeEventListener('keydown', onKeyDown);
     document.removeEventListener('fullscreenchange', updateFullscreen);
+    if (video) {
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
+      video.removeEventListener('ended', onPause);
+    }
     background.forEach(({ element, inert, ariaHidden }) => {
       if (!inert) element.removeAttribute('inert');
       if (ariaHidden === null) element.removeAttribute('aria-hidden'); else element.setAttribute('aria-hidden', ariaHidden);
@@ -62,13 +68,28 @@ export function openMediaViewer(root, media) {
   viewer.querySelector('[data-viewer-fit]').addEventListener('click', () => { stage.dataset.fit = 'contain'; });
   viewer.querySelector('[data-viewer-actual]').addEventListener('click', () => { stage.dataset.fit = 'actual'; });
   const playbackButton = viewer.querySelector('[data-viewer-play]');
-  playbackButton?.addEventListener('click', () => {
-    const video = stage.querySelector('video');
-    const playing = playbackButton.dataset.playing === 'true';
-    if (playing) video.pause(); else Promise.resolve(video.play()).catch(() => { viewerStatus.textContent = 'Não foi possível reproduzir o vídeo.'; });
-    playbackButton.dataset.playing = String(!playing);
-    playbackButton.setAttribute('aria-label', playing ? 'Reproduzir vídeo' : 'Pausar vídeo');
-    playbackButton.innerHTML = `${angelIcon(playing ? 'play' : 'pause')} ${playing ? 'Reproduzir' : 'Pausar'}`;
+  const video = stage.querySelector('video');
+  const updatePlayback = (playing) => {
+    if (!playbackButton) return;
+    playbackButton.dataset.playing = String(playing);
+    playbackButton.setAttribute('aria-label', playing ? 'Pausar vídeo' : 'Reproduzir vídeo');
+    playbackButton.innerHTML = `${angelIcon(playing ? 'pause' : 'play')} ${playing ? 'Pausar' : 'Reproduzir'}`;
+  };
+  const onPlay = () => updatePlayback(true);
+  const onPause = () => updatePlayback(false);
+  video?.addEventListener('play', onPlay);
+  video?.addEventListener('pause', onPause);
+  video?.addEventListener('ended', onPause);
+  playbackButton?.addEventListener('click', async () => {
+    viewerStatus.textContent = '';
+    if (playbackButton.dataset.playing === 'true') { video.pause(); return; }
+    try {
+      await video.play();
+    } catch {
+      updatePlayback(false);
+      viewerStatus.textContent = 'Não foi possível reproduzir o vídeo.';
+      playUiSound('error');
+    }
   });
   fullscreenButton.addEventListener('click', async () => {
     viewerStatus.textContent = '';

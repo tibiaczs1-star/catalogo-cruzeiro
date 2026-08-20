@@ -24,6 +24,15 @@ it('persiste silêncio e volume definidos pelo administrador', () => {
   expect(getSoundPreferences(localStorage)).toEqual({ muted: true, volume: 0.2 });
 });
 
+it('mantém a preferência em memória quando o armazenamento recusa a escrita', () => {
+  const storage = {
+    getItem: vi.fn(() => null),
+    setItem: vi.fn(() => { throw new Error('quota'); }),
+  };
+  expect(() => setSoundPreferences({ muted: true, volume: 0.22 }, storage)).not.toThrow();
+  expect(setSoundPreferences({ muted: true, volume: 0.22 }, storage)).toEqual({ muted: true, volume: 0.22 });
+});
+
 it('não cria Audio quando os efeitos estão silenciados', () => {
   const AudioSpy = vi.fn(function Audio() { this.play = vi.fn(); });
   vi.stubGlobal('Audio', AudioSpy);

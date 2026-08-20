@@ -103,6 +103,19 @@ it('mostra todos os detalhes da mídia e abre o editor de enquadramento', async 
   expect(root.querySelector('.editor-preview video')?.getAttribute('src')).toBe('./api/admin/media/m1/content');
 });
 
+it('mostra erro visível e toca o som de erro quando os detalhes não carregam', async () => {
+  const play = vi.fn().mockResolvedValue(undefined);
+  const AudioSpy = vi.fn(function Audio(source) { this.src = source; this.play = play; this.volume = 1; });
+  vi.stubGlobal('Audio', AudioSpy);
+  const apiClient = vi.fn(async () => { throw new Error('offline'); });
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media: [{ id: 'broken', name: 'Falha', type: 'video/mp4' }] }, apiClient, vi.fn());
+  root.querySelector('[data-edit-media="broken"]').click();
+  await vi.waitFor(() => expect(root.querySelector('[data-library-status]').textContent).toContain('Não foi possível carregar'));
+  expect(AudioSpy).toHaveBeenCalledWith('./assets/sounds/error.ogg');
+  expect(root.querySelector('.media-editor')).toBeNull();
+});
+
 it('mostra a imagem real no card da biblioteca', () => {
   const root = document.querySelector('#app');
   renderLibrary(root, { media: [{ id: 'm4', display_name: 'Foto', content_type: 'image/png' }] }, vi.fn(), vi.fn());
@@ -142,6 +155,7 @@ it('mostra detalhes operacionais no card e abre a mídia inteira', () => {
   viewer.querySelector('video').play = vi.fn(() => Promise.resolve());
   viewer.querySelector('video').pause = vi.fn();
   playback.click();
+  viewer.querySelector('video').dispatchEvent(new Event('play'));
   expect(playback.getAttribute('aria-label')).toBe('Pausar vídeo');
   expect(playback.querySelector('[data-angel-icon="pause"]')).not.toBeNull();
   expect(viewer.textContent).toContain('Mostrar inteira');
@@ -173,6 +187,48 @@ it('trata fullscreen indisponível e rejeitado sem promessa não tratada', async
   root.querySelector('[data-viewer-stage]').requestFullscreen = vi.fn(() => Promise.reject(new Error('bloqueado')));
   fullscreen.click();
   await vi.waitFor(() => expect(root.querySelector('[data-viewer-status]').textContent).toContain('Não foi possível'));
+});
+
+it('sincroniza play e pause com o estado real do vídeo e limpa os listeners', async () => {
+  const root = document.querySelector('#app');
+  const removeSpy = vi.spyOn(HTMLMediaElement.prototype, 'removeEventListener');
+  const viewer = openMediaViewer(root, { id: 'state', name: 'Vídeo', type: 'video/mp4' });
+  const video = viewer.querySelector('video');
+  const button = viewer.querySelector('[data-viewer-play]');
+  let resolvePlay;
+  video.play = vi.fn(() => new Promise((resolve) => { resolvePlay = resolve; }));
+  button.click();
+  expect(button.getAttribute('aria-label')).toBe('Reproduzir vídeo');
+  resolvePlay();
+  await Promise.resolve();
+  expect(button.getAttribute('aria-label')).toBe('Reproduzir vídeo');
+  video.dispatchEvent(new Event('play'));
+  expect(button.getAttribute('aria-label')).toBe('Pausar vídeo');
+  expect(button.querySelector('[data-angel-icon="pause"]')).not.toBeNull();
+  video.dispatchEvent(new Event('pause'));
+  expect(button.getAttribute('aria-label')).toBe('Reproduzir vídeo');
+  video.dispatchEvent(new Event('play'));
+  video.dispatchEvent(new Event('ended'));
+  expect(button.getAttribute('aria-label')).toBe('Reproduzir vídeo');
+  viewer.querySelector('[data-close-media-viewer]').click();
+  expect(removeSpy).toHaveBeenCalledWith('play', expect.any(Function));
+  expect(removeSpy).toHaveBeenCalledWith('pause', expect.any(Function));
+  expect(removeSpy).toHaveBeenCalledWith('ended', expect.any(Function));
+});
+
+it('mantém o botão parado e informa erro quando play é rejeitado', async () => {
+  const playSound = vi.fn().mockResolvedValue(undefined);
+  const AudioSpy = vi.fn(function Audio(source) { this.src = source; this.play = playSound; this.volume = 1; });
+  vi.stubGlobal('Audio', AudioSpy);
+  const root = document.querySelector('#app');
+  const viewer = openMediaViewer(root, { id: 'denied', name: 'Vídeo', type: 'video/mp4' });
+  const video = viewer.querySelector('video');
+  const button = viewer.querySelector('[data-viewer-play]');
+  video.play = vi.fn(() => Promise.reject(new Error('denied')));
+  button.click();
+  await vi.waitFor(() => expect(viewer.querySelector('[data-viewer-status]').textContent).toContain('Não foi possível reproduzir'));
+  expect(button.getAttribute('aria-label')).toBe('Reproduzir vídeo');
+  expect(AudioSpy).toHaveBeenCalledWith('./assets/sounds/error.ogg');
 });
 
 it('mantém foco no diálogo, restaura o acionador e remove listeners ao fechar', () => {

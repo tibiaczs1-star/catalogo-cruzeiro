@@ -22,7 +22,7 @@ export function getSoundPreferences(storage = globalThis.localStorage) {
 export function setSoundPreferences(preferences, storage = globalThis.localStorage) {
   const current = getSoundPreferences(storage);
   const next = { muted: preferences?.muted ?? current.muted, volume: clampVolume(preferences?.volume ?? current.volume) };
-  storage?.setItem(SOUND_KEY, JSON.stringify(next));
+  try { storage?.setItem(SOUND_KEY, JSON.stringify(next)); } catch { /* Preference remains valid for the current caller. */ }
   return next;
 }
 

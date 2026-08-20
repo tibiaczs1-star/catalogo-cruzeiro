@@ -3,7 +3,7 @@ const list = (value, key) => Array.isArray(value) ? value : Array.isArray(value?
 
 export function renderLibrary(root, payload, apiClient, refresh) {
   const media = list(payload, 'media');
-  root.innerHTML = `<header class="page-head"><div><p class="eyebrow">Conteúdo central</p><h1>Biblioteca</h1><p>Envie imagens e vídeos uma vez e use em várias playlists.</p></div><span class="pill">${media.length} mídias</span></header>
+  root.innerHTML = `<header class="page-head"><div><p class="eyebrow">Conteúdo central</p><h1>Biblioteca</h1><p>Envie imagens e vídeos uma vez e use em várias playlists.</p><p role="status" aria-live="polite" data-library-status></p></div><span class="pill">${media.length} mídias</span></header>
   <section class="glass upload-card"><form data-upload><label class="dropzone">${angelIcon('image')} Adicionar mídia<input name="media" type="file" accept="image/jpeg,image/png,image/webp,video/mp4" required></label><label>Nome<input name="displayName" required maxlength="120"></label><label>Duração da imagem (segundos)<input name="durationSeconds" type="number" min="1" max="3600" value="10"></label><button class="primary">${angelIcon('download')} Enviar para a biblioteca</button><p role="status"></p></form></section>
   <div class="library-tools"><input data-media-search type="search" placeholder="Buscar mídia"><select data-media-type><option value="all">Todos os tipos</option><option value="image">Imagens</option><option value="video">Vídeos</option></select><button type="button" class="ghost" data-view-mode>${angelIcon('image')} Grade / lista</button></div><section class="media-grid" data-media-grid>${media.map(renderMediaCard).join('') || '<div class="empty">Sua biblioteca ainda está vazia.</div>'}</section>`;
   root.querySelector('[data-upload]').addEventListener('submit', async (event) => {
@@ -12,7 +12,19 @@ export function renderLibrary(root, payload, apiClient, refresh) {
     const status = form.querySelector('[role=status]'); status.textContent = 'Enviando…';
     try { await apiClient('/admin/media', { method: 'POST', body: data }); status.textContent = 'Mídia enviada com sucesso.'; playUiSound('success'); await refresh(); } catch (error) { status.textContent = `Não foi possível enviar a mídia (${error.message}).`; playUiSound('error'); }
   });
-  const bindEditors = () => root.querySelectorAll('[data-edit-media]').forEach((button) => button.addEventListener('click', async () => { playUiSound('selection'); const detail = await apiClient(`/admin/media/${button.dataset.editMedia}`); openMediaEditor(root, detail, apiClient); }));
+  const bindEditors = () => root.querySelectorAll('[data-edit-media]').forEach((button) => button.addEventListener('click', async () => {
+    const status = root.querySelector('[data-library-status]');
+    status.textContent = 'Carregando detalhes da mídia…';
+    playUiSound('selection');
+    try {
+      const detail = await apiClient(`/admin/media/${button.dataset.editMedia}`);
+      status.textContent = '';
+      openMediaEditor(root, detail, apiClient);
+    } catch {
+      status.textContent = 'Não foi possível carregar os detalhes da mídia. Tente novamente.';
+      playUiSound('error');
+    }
+  }));
   const bindPreviews = () => root.querySelectorAll('[data-preview-media]').forEach((button) => button.addEventListener('click', () => { playUiSound('selection'); const item = media.find((candidate) => String(candidate.id) === button.dataset.previewMedia); if (item) openMediaViewer(root, item); }));
   const updateGrid = () => { const filtered = filterMedia(media, { query: root.querySelector('[data-media-search]').value, type: root.querySelector('[data-media-type]').value }); root.querySelector('[data-media-grid]').innerHTML = filtered.map(renderMediaCard).join('') || '<div class="empty">Nenhuma mídia encontrada.</div>'; bindEditors(); bindPreviews(); };
   root.querySelector('[data-media-search]').addEventListener('input', updateGrid); root.querySelector('[data-media-type]').addEventListener('change', updateGrid); root.querySelector('[data-view-mode]').addEventListener('click', () => { playUiSound('selection'); root.querySelector('[data-media-grid]').classList.toggle('media-list'); }); bindEditors(); bindPreviews();
