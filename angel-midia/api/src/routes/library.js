@@ -19,6 +19,8 @@ export function validLibraryMetadata(fields) {
 }
 
 export function validatePresentation(fields = {}) {
+  const allowed = new Set(['fitMode', 'focalX', 'focalY', 'zoom', 'rotation', 'backgroundColor', 'durationSeconds']);
+  if (!fields || typeof fields !== 'object' || Object.keys(fields).some((key) => !allowed.has(key))) return { ok: false };
   const value = {
     fitMode: fields.fitMode ?? 'contain',
     focalX: Number(fields.focalX ?? 50),
@@ -111,8 +113,14 @@ export default async function libraryRoutes(app, { mediaDir, removeMedia = remov
   app.patch('/api/admin/media/:id', { preHandler: requireAdmin }, async (request, reply) => {
     const presentation = validatePresentation(request.body);
     if (!presentation.ok) return reply.code(400).send({ error: 'invalid_presentation' });
+    const current = await app.db.query('select content_type,duration_seconds from media_assets where id=$1', [request.params.id]);
+    if (!current.rows[0]) return reply.code(404).send({ error: 'media_not_found' });
+    const isImage = String(current.rows[0].content_type).startsWith('image/');
+    if (!isImage && request.body.durationSeconds !== undefined) return reply.code(400).send({ error: 'invalid_media_duration' });
+    const duration = request.body.durationSeconds === undefined ? current.rows[0].duration_seconds : Number(request.body.durationSeconds);
+    if (isImage && (!Number.isFinite(Number(duration)) || Number(duration) <= 0 || Number(duration) > 86400)) return reply.code(400).send({ error: 'invalid_media_duration' });
     const value = presentation.value;
-    const updated = await app.db.query(`update media_assets set fit_mode=$2,focal_x=$3,focal_y=$4,zoom=$5,rotation=$6,background_color=$7 where id=$1 returning id,coalesce(display_name,original_name) as name,original_name,content_type,size_bytes,sha256,duration_seconds,processing_status,width,height,has_audio,thumbnail_key,original_filename,fit_mode,focal_x,focal_y,zoom,rotation,background_color`, [request.params.id, value.fitMode, value.focalX, value.focalY, value.zoom, value.rotation, value.backgroundColor]);
+    const updated = await app.db.query(`update media_assets set fit_mode=$2,focal_x=$3,focal_y=$4,zoom=$5,rotation=$6,background_color=$7,duration_seconds=$8 where id=$1 returning id,coalesce(display_name,original_name) as name,original_name,content_type,size_bytes,sha256,duration_seconds,processing_status,width,height,has_audio,thumbnail_key,original_filename,fit_mode,focal_x,focal_y,zoom,rotation,background_color`, [request.params.id, value.fitMode, value.focalX, value.focalY, value.zoom, value.rotation, value.backgroundColor, duration === null ? null : Number(duration)]);
     if (!updated.rows[0]) return reply.code(404).send({ error: 'media_not_found' });
     return mediaDetail(updated.rows[0]);
   });

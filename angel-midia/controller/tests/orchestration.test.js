@@ -318,7 +318,9 @@ it('inclui proporção da tela, área segura e aviso para modos que deformam ou 
 
 it('normaliza enquadramento e metadados de reprodução por tipo', () => {
   expect(buildPresentationPatch({ fitMode: 'invalid', focalX: '-8', focalY: '120', zoom: '9', rotation: '45', backgroundColor: 'red', mediaType: 'image/png', imageDurationSeconds: '8' })).toMatchObject({ fitMode: 'contain', focalX: 0, focalY: 100, zoom: 4, rotation: 0, backgroundColor: '#000000', durationSeconds: 8 });
-  expect(buildPresentationPatch({ fitMode: 'fill', focalX: '50', focalY: '50', zoom: '0', rotation: '270', backgroundColor: '#ABCDEF', mediaType: 'video/mp4', trimStartSeconds: '', trimEndSeconds: '18', volume: '150' })).toMatchObject({ fitMode: 'fill', zoom: 0.25, rotation: 270, backgroundColor: '#abcdef', trimStartSeconds: null, trimEndSeconds: 18, volume: 100 });
+  const videoPatch = buildPresentationPatch({ fitMode: 'fill', focalX: '50', focalY: '50', zoom: '0', rotation: '270', backgroundColor: '#ABCDEF', mediaType: 'video/mp4', trimStartSeconds: '', trimEndSeconds: '18', volume: '150' });
+  expect(videoPatch).toMatchObject({ fitMode: 'fill', zoom: 0.25, rotation: 270, backgroundColor: '#abcdef' });
+  expect(videoPatch).not.toHaveProperty('trimStartSeconds'); expect(videoPatch).not.toHaveProperty('trimEndSeconds'); expect(videoPatch).not.toHaveProperty('volume');
 });
 
 it('mostra duração para imagem sem controles de corte', async () => {
@@ -333,7 +335,7 @@ it('mostra duração para imagem sem controles de corte', async () => {
   expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('trimStartSeconds');
 });
 
-it('mostra timeline, corte e volume para vídeo e envia edição não destrutiva', async () => {
+it('simula timeline, corte e volume no vídeo sem salvar playback no arquivo global', async () => {
   const apiClient = vi.fn(async () => ({}));
   const root = document.querySelector('#app');
   openMediaEditor(root, { id: 'movie', name: 'Filme', type: 'video/mp4', durationSeconds: 30, trimStartSeconds: 2, trimEndSeconds: 25, volume: 80 }, apiClient);
@@ -341,10 +343,71 @@ it('mostra timeline, corte e volume para vídeo e envia edição não destrutiva
   expect(root.querySelector('[name=trimStartSeconds]').value).toBe('2');
   expect(root.querySelector('[name=trimEndSeconds]').value).toBe('25');
   expect(root.querySelector('[name=volume]').value).toBe('80');
+  expect(root.querySelector('[data-playlist-playback-note]').textContent).toContain('playlist');
   root.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
-  expect(apiClient.mock.calls[0][1].body).toMatchObject({ trimStartSeconds: 2, trimEndSeconds: 25, volume: 80 });
+  expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('trimStartSeconds');
+  expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('trimEndSeconds');
+  expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('volume');
   expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('durationSeconds');
+});
+
+it('atualiza a prévia de vídeo imediatamente e respeita os limites do corte', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'preview-video', name: 'Filme', type: 'video/mp4', durationSeconds: 30, trimStartSeconds: 2, trimEndSeconds: 8, volume: 50 }, vi.fn());
+  const video = root.querySelector('video');
+  const volume = root.querySelector('[name=volume]');
+  volume.value = '25'; volume.dispatchEvent(new Event('input', { bubbles: true }));
+  expect(video.volume).toBe(.25);
+  const start = root.querySelector('[name=trimStartSeconds]');
+  start.value = '4'; start.dispatchEvent(new Event('input', { bubbles: true }));
+  expect(video.currentTime).toBe(4);
+  video.currentTime = 8.1; video.dispatchEvent(new Event('timeupdate'));
+  expect(video.currentTime).toBe(4);
+  const timeline = root.querySelector('[data-timeline-position]');
+  video.currentTime = 6; video.dispatchEvent(new Event('timeupdate'));
+  expect(timeline.value).toBe('6');
+  timeline.value = '7'; timeline.dispatchEvent(new Event('input', { bubbles: true }));
+  expect(video.currentTime).toBe(7);
+});
+
+it.each([
+  ['-1', '8', 'O início do corte não pode ser negativo.'],
+  ['8', '8', 'O fim do corte deve ser maior que o início.'],
+  ['2', '31', 'O fim do corte não pode ultrapassar 30 segundos.'],
+])('bloqueia corte inválido com mensagem específica', async (start, end, message) => {
+  const apiClient = vi.fn(); const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'invalid-video', name: 'Filme', type: 'video/mp4', durationSeconds: 30 }, apiClient);
+  root.querySelector('[name=trimStartSeconds]').value = start; root.querySelector('[name=trimEndSeconds]').value = end;
+  root.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  expect(root.querySelector('[role=status]').textContent).toBe(message);
+  expect(apiClient).not.toHaveBeenCalled();
+});
+
+it('bloqueia duração inválida da imagem com mensagem específica', () => {
+  const apiClient = vi.fn(); const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'invalid-image', name: 'Foto', type: 'image/png' }, apiClient);
+  root.querySelector('[name=imageDurationSeconds]').value = '-2';
+  root.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  expect(root.querySelector('[role=status]').textContent).toContain('duração da imagem');
+  expect(apiClient).not.toHaveBeenCalled();
+});
+
+it('torna o modal isolado, prende Tab, restaura foco e limpa o fundo', () => {
+  const root = document.querySelector('#app'); const opener = document.createElement('button'); opener.textContent = 'Editar'; root.append(opener); opener.focus();
+  const panel = openMediaEditor(root, { id: 'a11y', name: 'Foto', type: 'image/png' }, vi.fn());
+  expect(panel.getAttribute('aria-modal')).toBe('true'); expect(opener.inert).toBe(true); expect(opener.getAttribute('aria-hidden')).toBe('true');
+  const focusable = [...panel.querySelectorAll('button:not([disabled]), input:not([disabled]):not([type=hidden]), select:not([disabled]), video[controls]')];
+  focusable.at(-1).focus(); panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true })); expect(document.activeElement).toBe(focusable[0]);
+  focusable[0].focus(); panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true })); expect(document.activeElement).toBe(focusable.at(-1));
+  panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  expect(document.activeElement).toBe(opener); expect(opener.inert).toBe(false); expect(opener.hasAttribute('aria-hidden')).toBe(false);
+});
+
+it('oferece simulação em tela cheia e ações móveis identificáveis', () => {
+  const root = document.querySelector('#app'); openMediaEditor(root, { id: 'tv', name: 'Foto', type: 'image/png' }, vi.fn());
+  expect(root.querySelector('[data-simulate-tv]')).not.toBeNull();
+  expect(root.querySelector('footer').classList.contains('editor-actions')).toBe(true);
 });
 
 it('desfaz a última alteração da sessão e restaura os padrões', () => {

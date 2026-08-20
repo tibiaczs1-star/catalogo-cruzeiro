@@ -25,6 +25,20 @@ test('playlist preserves explicit item order and image duration', () => {
   assert.deepEqual(result.value.items.map((item) => item.position), [0, 1]);
 });
 
+test('playlist validates and preserves video playback metadata', () => {
+  const valid = validatePlaylist({ name: 'Vídeos', items: [{ assetId: video, type: 'video/mp4', position: 0, imageDurationSeconds: null, trimStartSeconds: 2, trimEndSeconds: 12, volume: .7 }] });
+  assert.equal(valid.ok, true); assert.deepEqual(valid.value.items[0], { assetId: video, type: 'video/mp4', position: 0, imageDurationSeconds: null, trimStartSeconds: 2, trimEndSeconds: 12, volume: .7 });
+  const invalid = [
+    [{ trimStartSeconds: -1, trimEndSeconds: 5, volume: 1 }, 'invalid_trim_start'],
+    [{ trimStartSeconds: 5, trimEndSeconds: 5, volume: 1 }, 'invalid_trim_range'],
+    [{ trimStartSeconds: 0, trimEndSeconds: 31, volume: 1 }, 'trim_exceeds_duration'],
+    [{ trimStartSeconds: 0, trimEndSeconds: 5, volume: 2 }, 'invalid_volume'],
+  ];
+  for (const [playback, error] of invalid) {
+    assert.deepEqual(validatePlaylist({ name: 'Inválida', items: [{ assetId: video, type: 'video/mp4', position: 0, imageDurationSeconds: null, durationSeconds: 30, ...playback }] }), { ok: false, error });
+  }
+});
+
 test('playlist rejects an image without duration and duplicate positions', () => {
   assert.equal(validatePlaylist({ name: 'Inválida', items: [{ assetId: image, type: 'image/png', position: 0, imageDurationSeconds: null }] }).ok, false);
   assert.equal(validatePlaylist({ name: 'Inválida', items: [{ assetId: image, type: 'image/png', position: 0, imageDurationSeconds: 5 }, { assetId: video, type: 'video/mp4', position: 0, imageDurationSeconds: null }] }).ok, false);
@@ -83,6 +97,7 @@ test('admin updates media presentation and invalid values are rejected', async (
   const mediaId = '33333333-3333-4333-8333-333333333333';
   const db = { query: async (sql, params) => {
     if (sql.includes('from sessions')) return { rows: [{ id: image, name: 'Admin', email: 'admin@angel.local' }] };
+    if (sql.startsWith('select content_type')) return { rows: [{ content_type: 'image/png', duration_seconds: 8 }] };
     if (sql.startsWith('update media_assets')) return { rows: [{ id: mediaId, name: 'Oferta', original_name: 'oferta.png', content_type: 'image/png', size_bytes: 900, sha256: 'b'.repeat(64), duration_seconds: '8', processing_status: 'ready', width: 1080, height: 1920, has_audio: false, fit_mode: params[1], focal_x: params[2], focal_y: params[3], zoom: params[4], rotation: params[5], background_color: params[6] }] };
     return { rows: [] };
   } };
@@ -96,6 +111,22 @@ test('admin updates media presentation and invalid values are rejected', async (
   assert.deepEqual(updated.json().presentation, { fitMode: 'cover', focalX: 40, focalY: 60, zoom: 1.5, rotation: 90, backgroundColor: '#112233' });
   const invalid = await app.inject({ method: 'PATCH', url: `/api/admin/media/${mediaId}`, headers, payload: { focalX: 200 } });
   assert.equal(invalid.statusCode, 400);
+  await app.close();
+});
+
+test('admin persists and reads back image duration and rejects invalid playback fields', async () => {
+  const mediaId = '33333333-3333-4333-8333-333333333333'; let updateParams;
+  const db = { query: async (sql, params) => {
+    if (sql.includes('from sessions')) return { rows: [{ id: image, name: 'Admin', email: 'admin@angel.local' }] };
+    if (sql.startsWith('select content_type')) return { rows: [{ content_type: 'image/png', duration_seconds: 8 }] };
+    if (sql.startsWith('update media_assets')) { updateParams = params; return { rows: [{ id: mediaId, name: 'Foto', original_name: 'foto.png', content_type: 'image/png', size_bytes: 900, sha256: 'b'.repeat(64), duration_seconds: params[7], processing_status: 'ready', fit_mode: params[1], focal_x: params[2], focal_y: params[3], zoom: params[4], rotation: params[5], background_color: params[6] }] }; }
+    return { rows: [] };
+  } };
+  const app = Fastify(); app.decorate('db', db); await app.register(cookie); await app.register(libraryRoutes, { mediaDir: './var/media' }); const headers = { cookie: 'amp_session=test' };
+  const payload = { fitMode: 'contain', focalX: 50, focalY: 50, zoom: 1, rotation: 0, backgroundColor: '#000000', durationSeconds: 17 };
+  const response = await app.inject({ method: 'PATCH', url: `/api/admin/media/${mediaId}`, headers, payload });
+  assert.equal(response.statusCode, 200); assert.equal(updateParams[7], 17); assert.equal(response.json().durationSeconds, 17);
+  for (const invalid of [{ ...payload, durationSeconds: -1 }, { ...payload, trimStartSeconds: 2 }, { ...payload, volume: .5 }]) assert.equal((await app.inject({ method: 'PATCH', url: `/api/admin/media/${mediaId}`, headers, payload: invalid })).statusCode, 400);
   await app.close();
 });
 
