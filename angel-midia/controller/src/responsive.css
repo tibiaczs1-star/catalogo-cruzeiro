@@ -1,2 +1,15 @@
 .login-panel{min-width:0}
 .login-form{min-width:0}
+
+:root{--angel-navy:#080e35;--angel-navy-soft:#111943;--angel-white:#f8f9ff;--angel-red:#e3062c;--angel-muted:#aab1cd}
+html,body,#app{width:100%;max-width:100%;overflow-x:clip}
+img,video,canvas,svg{max-width:100%}
+body{--bg:var(--angel-navy);--panel:var(--angel-navy-soft);--panel2:#182252;--line:#34406f;--text:var(--angel-white);--ink:var(--angel-white);--muted:var(--angel-muted);--sky:var(--angel-red);--accent:var(--angel-red);--violet:#fff;background:radial-gradient(circle at 72% 0,#25306b 0,transparent 38%),var(--angel-navy)}
+.logo-mark{background:linear-gradient(145deg,var(--angel-white),#c7cce1);color:var(--angel-navy);box-shadow:0 0 0 2px #e3062c55,0 18px 45px #0007}
+.primary{background:linear-gradient(135deg,var(--angel-red),#b90022);box-shadow:0 14px 34px #e3062c38}
+.brand-plane{background:radial-gradient(circle at 68% 24%,#25306b 0,transparent 35%),linear-gradient(145deg,var(--angel-navy-soft),var(--angel-navy))}
+.sidebar nav button[aria-current=page]{background:linear-gradient(90deg,#e3062c26,transparent);box-shadow:inset 3px 0 0 var(--angel-red)}
+.glass{background:linear-gradient(145deg,#182252e8,#0b123ae8)}
+.dropzone{border-color:#e3062c88;background:linear-gradient(145deg,#e3062c0c,#ffffff08)}
+.page-head h1 em,.eyebrow,.media-type,.priority{color:var(--angel-red)}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
