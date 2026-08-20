@@ -182,7 +182,7 @@ it('envia o tipo de cada mídia ao criar uma playlist', async () => {
   const root = document.querySelector('#app');
   renderPlaylists(root, [], { media: [{ id: 'm1', display_name: 'Foto', content_type: 'image/png', duration_seconds: 8 }] }, apiClient, vi.fn());
   root.querySelector('[name=name]').value = 'Vitrine';
-  root.querySelector('[name=asset]').checked = true;
+  root.querySelector('[data-add-playlist-item]').click();
   root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
   expect(apiClient.mock.calls[0][1].body.items[0]).toMatchObject({ assetId: 'm1', type: 'image/png', imageDurationSeconds: null });
@@ -195,9 +195,10 @@ it('configura duração por item ou padrão global e playback de vídeo no paylo
     { id: 'm2', display_name: 'Filme', content_type: 'video/mp4', duration_seconds: 30 },
   ] }, apiClient, vi.fn());
   root.querySelector('[name=name]').value = 'Vitrine';
-  root.querySelector('[name="asset"][value="m1"]').click(); root.querySelector('[name="asset"][value="m2"]').click();
-  root.querySelector('[name="durationMode-m1"][value="custom"]').click(); root.querySelector('[name="imageDuration-m1"]').value = '14';
-  root.querySelector('[name="trimStart-m2"]').value = '2'; root.querySelector('[name="trimEnd-m2"]').value = '20'; root.querySelector('[name="volume-m2"]').value = '65';
+  root.querySelector('[data-add-playlist-item]').click(); root.querySelector('[name=assetToAdd]').value = 'm2'; root.querySelector('[data-add-playlist-item]').click();
+  const rows = root.querySelectorAll('[data-playlist-item]');
+  rows[0].querySelector('[data-duration-mode][value="custom"]').click(); rows[0].querySelector('[data-image-duration]').value = '14';
+  rows[1].querySelector('[data-trim-start]').value = '2'; rows[1].querySelector('[data-trim-end]').value = '20'; rows[1].querySelector('[data-volume]').value = '65';
   root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
   expect(apiClient.mock.calls[0][1].body.items).toEqual([
@@ -211,10 +212,29 @@ it('edita item de playlist existente, lê valores salvos e usa PUT', async () =>
   const playlists = [{ id: 'p1', name: 'Shopping', items: [{ assetId: 'm2', type: 'video/mp4', position: 0, trimStartSeconds: 3, trimEndSeconds: 18, volume: .4 }] }];
   renderPlaylists(root, playlists, { media: [{ id: 'm2', display_name: 'Filme', content_type: 'video/mp4', duration_seconds: 30 }] }, apiClient, vi.fn());
   root.querySelector('[data-edit-playlist="p1"]').click();
-  expect(root.querySelector('[name="trimStart-m2"]').value).toBe('3'); expect(root.querySelector('[name="volume-m2"]').value).toBe('40');
-  root.querySelector('[name="volume-m2"]').value = '75'; root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  const row = root.querySelector('[data-playlist-item]'); expect(row.querySelector('[data-trim-start]').value).toBe('3'); expect(row.querySelector('[data-volume]').value).toBe('40');
+  row.querySelector('[data-volume]').value = '75'; root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
   expect(apiClient).toHaveBeenCalledWith('/admin/playlists/p1', expect.objectContaining({ method: 'PUT', body: expect.objectContaining({ items: [expect.objectContaining({ volume: .75 })] }) }));
+});
+
+it('preserva ordem, reordena explicitamente e aceita mídia repetida com configurações independentes', async () => {
+  const apiClient = vi.fn(async () => ({})); const root = document.querySelector('#app');
+  const playlists = [{ id: 'p1', name: 'Sequência', items: [
+    { assetId: 'm1', type: 'video/mp4', position: 1, trimStartSeconds: 11, trimEndSeconds: 19, volume: .3 },
+    { assetId: 'm1', type: 'video/mp4', position: 0, trimStartSeconds: 1, trimEndSeconds: 9, volume: .8 },
+  ] }];
+  renderPlaylists(root, playlists, { media: [{ id: 'm1', display_name: 'Filme', content_type: 'video/mp4', duration_seconds: 30 }] }, apiClient, vi.fn());
+  root.querySelector('[data-edit-playlist="p1"]').click();
+  let rows = root.querySelectorAll('[data-playlist-item]');
+  expect([...rows].map((row) => row.querySelector('[data-trim-start]').value)).toEqual(['1', '11']);
+  rows[1].querySelector('[data-move-up]').click();
+  root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body.items).toEqual([
+    expect.objectContaining({ assetId: 'm1', position: 0, trimStartSeconds: 11, volume: .3 }),
+    expect.objectContaining({ assetId: 'm1', position: 1, trimStartSeconds: 1, volume: .8 }),
+  ]);
 });
 
 it('programa uma playlist contínua por padrão sem enviar datas', async () => {

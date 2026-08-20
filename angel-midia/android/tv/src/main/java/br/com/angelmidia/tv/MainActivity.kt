@@ -182,11 +182,27 @@ class MainActivity : Activity() {
             mainHandler.post {
                 if (generation != playbackGeneration) return@post
                 if (type.startsWith("video/")) {
+                    val playbackJson = item.optJSONObject("playback") ?: JSONObject()
+                    val playback = PlaybackPolicy.videoPlayback(
+                        playbackJson.optDouble("trimStartSeconds").takeIf { playbackJson.has("trimStartSeconds") },
+                        playbackJson.optDouble("trimEndSeconds").takeIf { playbackJson.has("trimEndSeconds") },
+                        playbackJson.optDouble("volume").takeIf { playbackJson.has("volume") },
+                    )
                     val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
                     val video = VideoView(this).apply {
                         setVideoPath(file.absolutePath)
-                        setOnPreparedListener { player -> player.isLooping = emergency; start() }
-                        setOnCompletionListener { finishMedia(assetId, emergency, generation) }
+                        setOnPreparedListener { player ->
+                            player.isLooping = emergency && playback.endMs == null
+                            player.setVolume(playback.volume, playback.volume)
+                            seekTo(playback.startMs)
+                            start()
+                            if (playback.endMs != null) monitorTrimEnd(this, assetId, emergency, generation, playback)
+                        }
+                        setOnCompletionListener {
+                            if (PlaybackPolicy.trimEndAction(emergency) == TrimEndAction.RESTART && playback.endMs != null) {
+                                seekTo(playback.startMs); start()
+                            } else finishMedia(assetId, emergency, generation)
+                        }
                         setOnErrorListener { _, _, _ -> finishMedia(assetId, emergency, generation); true }
                     }
                     stage.addView(video, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
@@ -223,6 +239,19 @@ class MainActivity : Activity() {
         if (!emergency) { reportCompleted(assetId); scheduleIndex += 1 }
         playbackGeneration += 1
         syncAndPlay(playbackGeneration)
+    }
+
+    private fun monitorTrimEnd(video: VideoView, assetId: String, emergency: Boolean, generation: Int, playback: VideoPlayback) {
+        mainHandler.postDelayed(object : Runnable {
+            override fun run() {
+                if (generation != playbackGeneration) return
+                if (PlaybackPolicy.reachedTrimEnd(video.currentPosition, playback.endMs)) {
+                    if (PlaybackPolicy.trimEndAction(emergency) == TrimEndAction.RESTART) {
+                        video.seekTo(playback.startMs); video.start(); mainHandler.postDelayed(this, 100)
+                    } else finishMedia(assetId, false, generation)
+                } else mainHandler.postDelayed(this, 100)
+            }
+        }, 100)
     }
 
     private fun scheduleEmergencyCheck(generation: Int): Unit {

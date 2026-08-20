@@ -63,7 +63,7 @@ export async function resolveSchedule(db, device) {
      select d.schedule_version, w.playlist_id, p.name as playlist_name, w.mode,
             coalesce(pi.asset_id, legacy.id) as asset_id,
             coalesce(pi.position, (row_number() over(order by legacy.id)) - 1) as position,
-            coalesce(pi.image_duration_seconds, legacy.duration_seconds) as duration_seconds,
+            coalesce(pi.image_duration_seconds, asset.duration_seconds, legacy.duration_seconds) as duration_seconds,
             coalesce(asset.content_type, legacy.content_type) as content_type,
             coalesce(asset.sha256, legacy.sha256) as sha256,
             coalesce(asset.fit_mode, legacy.fit_mode, 'contain') as fit_mode,
