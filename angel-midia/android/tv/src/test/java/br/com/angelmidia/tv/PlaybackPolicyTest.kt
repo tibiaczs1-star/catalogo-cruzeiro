@@ -4,6 +4,32 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun advancesCircularlyAcrossAPlaylist() {
+        assertEquals(1, PlaybackPolicy.nextIndex(0, 3))
+        assertEquals(2, PlaybackPolicy.nextIndex(1, 3))
+        assertEquals(0, PlaybackPolicy.nextIndex(2, 3))
+    }
+
+    @Test fun repeatsASingleItemAndSurvivesAnEmptyList() {
+        assertEquals(0, PlaybackPolicy.nextIndex(0, 1))
+        assertEquals(0, PlaybackPolicy.nextIndex(5, 0))
+    }
+
+    @Test fun oneCompletelyFailedCycleTriggersRecoveryWithBoundedBackoff() {
+        assertEquals(false, PlaybackPolicy.completedFailedCycle(2, 3))
+        assertEquals(true, PlaybackPolicy.completedFailedCycle(3, 3))
+        assertEquals(false, PlaybackPolicy.completedFailedCycle(1, 0))
+        assertEquals(2_000L, PlaybackPolicy.retryBackoffMs(1))
+        assertEquals(4_000L, PlaybackPolicy.retryBackoffMs(2))
+        assertEquals(30_000L, PlaybackPolicy.retryBackoffMs(20))
+    }
+
+    @Test fun explicitAndLegacyManifestLoopModesAreSupported() {
+        assertEquals(true, PlaybackPolicy.shouldLoop(null))
+        assertEquals(true, PlaybackPolicy.shouldLoop(true))
+        assertEquals(false, PlaybackPolicy.shouldLoop(false))
+    }
+
     @Test fun emergencyAlwaysWinsOverTheNormalSchedule() {
         assertEquals(PlaybackSource.EMERGENCY, PlaybackPolicy.source(true, 5))
         assertEquals(PlaybackSource.SCHEDULE, PlaybackPolicy.source(false, 5))

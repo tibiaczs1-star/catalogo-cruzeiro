@@ -5,6 +5,19 @@ enum class TrimEndAction { RESTART, ADVANCE }
 data class VideoPlayback(val startMs: Int, val endMs: Int?, val volume: Float)
 
 object PlaybackPolicy {
+    fun nextIndex(current: Int, itemCount: Int): Int =
+        if (itemCount <= 0) 0 else Math.floorMod(current + 1, itemCount)
+
+    fun completedFailedCycle(consecutiveFailures: Int, itemCount: Int): Boolean =
+        itemCount > 0 && consecutiveFailures >= itemCount
+
+    fun retryBackoffMs(attempt: Int): Long {
+        val shift = (attempt - 1).coerceIn(0, 4)
+        return (2_000L * (1L shl shift)).coerceAtMost(30_000L)
+    }
+
+    fun shouldLoop(loop: Boolean?): Boolean = loop != false
+
     fun finiteNumber(value: Any?): Double? = (value as? Number)?.toDouble()?.takeIf { it.isFinite() }
     fun source(emergencyActive: Boolean, itemCount: Int): PlaybackSource = when {
         emergencyActive -> PlaybackSource.EMERGENCY

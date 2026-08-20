@@ -25,6 +25,10 @@ class MainActivity : Activity() {
     private val mainHandler = Handler(Looper.getMainLooper())
     private var playbackGeneration = 0
     private var scheduleIndex = 0
+    private var scheduleItems = JSONArray()
+    private var manifestLoop = true
+    private var consecutiveFailures = 0
+    private var recoveryAttempt = 0
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -146,9 +150,13 @@ class MainActivity : Activity() {
             val state = getJson("api/device/sync", token)
             if (generation != playbackGeneration) return@Thread
             val emergency = state.optJSONObject("emergency")
-            val items = state.optJSONObject("schedule")?.optJSONArray("items") ?: JSONArray()
+            val schedule = state.optJSONObject("schedule")
+            val items = schedule?.optJSONArray("items") ?: JSONArray()
+            val loop = PlaybackPolicy.shouldLoop(schedule?.let { if (it.has("loop")) it.optBoolean("loop") else null })
             mainHandler.post {
                 if (generation != playbackGeneration) return@post
+                scheduleItems = items
+                manifestLoop = loop
                 when (PlaybackPolicy.source(emergency != null, items.length())) {
                     PlaybackSource.EMERGENCY -> playEmergency(emergency!!, generation)
                     PlaybackSource.SCHEDULE -> {
@@ -197,6 +205,7 @@ class MainActivity : Activity() {
                             player.setVolume(playback.volume, playback.volume)
                             seekTo(playback.startMs)
                             start()
+                            if (!emergency) prefetchNext(generation)
                             if (playback.endMs != null) monitorTrimEnd(this, assetId, emergency, generation, playback)
                         }
                         setOnCompletionListener {
@@ -204,7 +213,10 @@ class MainActivity : Activity() {
                                 seekTo(playback.startMs); start()
                             } else finishMedia(assetId, emergency, generation)
                         }
-                        setOnErrorListener { _, _, _ -> finishMedia(assetId, emergency, generation); true }
+                        setOnErrorListener { _, what, extra ->
+                            failMedia(assetId, emergency, generation, "video_error_$what/$extra")
+                            true
+                        }
                     }
                     stage.addView(video, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
                     setContentView(stage); enterFullscreen(); video.start(); if (!emergency) scheduleEmergencyCheck(generation)
@@ -212,14 +224,22 @@ class MainActivity : Activity() {
                 } else {
                     val stage = FrameLayout(this).apply { setBackgroundColor(presentationColor(presentation)) }
                     val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                    if (bitmap == null) {
+                        failMedia(assetId, emergency, generation, "image_decode_failed")
+                        return@post
+                    }
                     val image = ImageView(this).apply { scaleType = ImageView.ScaleType.FIT_XY; setImageBitmap(bitmap) }
                     stage.addView(image, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
                     setContentView(stage); enterFullscreen(); stage.post { applyPresentation(image, stage, bitmap.width, bitmap.height, presentation) }
+                    if (!emergency) prefetchNext(generation)
                     if (!emergency) scheduleEmergencyCheck(generation)
                     mainHandler.postDelayed({ finishMedia(assetId, emergency, generation) }, if (emergency) 5_000 else PlaybackPolicy.imageDurationMs(item.optInt("durationSeconds").takeIf { item.has("durationSeconds") }))
                 }
             }
-        } catch (_: Exception) { mainHandler.post { showIdle(generation, "Nao foi possivel carregar a midia. Tentando novamente...") } }
+        } catch (error: Exception) {
+            val assetId = item.optString("assetId")
+            mainHandler.post { failMedia(assetId, emergency, generation, error.message ?: "media_load_failed") }
+        }
     }.start() }
 
     private fun presentationColor(presentation: JSONObject): Int = runCatching {
@@ -244,9 +264,54 @@ class MainActivity : Activity() {
 
     private fun finishMedia(assetId: String, emergency: Boolean, generation: Int): Unit {
         if (generation != playbackGeneration) return
-        if (!emergency) { reportCompleted(assetId); scheduleIndex += 1 }
+        if (!emergency) {
+            reportPlaybackEvent(assetId, "completed")
+            consecutiveFailures = 0
+            recoveryAttempt = 0
+            if (manifestLoop) scheduleIndex = PlaybackPolicy.nextIndex(scheduleIndex, scheduleItems.length())
+            else scheduleIndex = (scheduleIndex + 1).coerceAtMost(scheduleItems.length() - 1)
+        }
         playbackGeneration += 1
         syncAndPlay(playbackGeneration)
+    }
+
+    private fun failMedia(assetId: String, emergency: Boolean, generation: Int, reason: String) {
+        if (generation != playbackGeneration) return
+        reportPlaybackEvent(assetId, "error", reason)
+        playbackGeneration += 1
+        val nextGeneration = playbackGeneration
+        if (emergency) {
+            syncAndPlay(nextGeneration)
+            return
+        }
+        consecutiveFailures += 1
+        scheduleIndex = PlaybackPolicy.nextIndex(scheduleIndex, scheduleItems.length())
+        if (PlaybackPolicy.completedFailedCycle(consecutiveFailures, scheduleItems.length())) {
+            consecutiveFailures = 0
+            recoveryAttempt += 1
+            showRecovery(nextGeneration)
+        } else syncAndPlay(nextGeneration)
+    }
+
+    private fun showRecovery(generation: Int) {
+        if (generation != playbackGeneration) return
+        val root = container()
+        root.addView(label("ANGEL MIDIA PLAY", 34f))
+        root.addView(label("Estamos recuperando a reproducao", 25f))
+        root.addView(label("As midias serao verificadas novamente em instantes.", 18f))
+        setContentView(root)
+        val delay = PlaybackPolicy.retryBackoffMs(recoveryAttempt)
+        mainHandler.postDelayed({ if (generation == playbackGeneration) syncAndPlay(generation) }, delay)
+    }
+
+    private fun prefetchNext(generation: Int) {
+        if (generation != playbackGeneration || scheduleItems.length() == 0) return
+        val next = PlaybackPolicy.nextIndex(scheduleIndex, scheduleItems.length())
+        val item = scheduleItems.optJSONObject(next) ?: return
+        val token = preferences.getString("device_token", null) ?: return
+        Thread {
+            runCatching { downloadMedia(item.getString("assetId"), token, item.optString("type")) }
+        }.start()
     }
 
     private fun monitorTrimEnd(video: VideoView, assetId: String, emergency: Boolean, generation: Int, playback: VideoPlayback) {
@@ -274,10 +339,13 @@ class MainActivity : Activity() {
         }, 5_000)
     }
 
-    private fun reportCompleted(assetId: String) = Thread {
+    private fun reportPlaybackEvent(assetId: String, type: String, error: String? = null) = Thread {
         runCatching {
-            val event = JSONObject().put("eventId", UUID.randomUUID().toString()).put("assetId", assetId).put("type", "completed")
-                .put("occurredAt", java.time.Instant.now().toString()).put("detail", JSONObject().put("source", "tv-player"))
+            if (assetId.isBlank()) return@runCatching
+            val detail = JSONObject().put("source", "tv-player")
+            error?.take(160)?.let { detail.put("error", it) }
+            val event = JSONObject().put("eventId", UUID.randomUUID().toString()).put("assetId", assetId).put("type", type)
+                .put("occurredAt", java.time.Instant.now().toString()).put("detail", detail)
             requestArray("api/device/events", JSONArray().put(event), preferences.getString("device_token", null)!!)
         }
     }.start()
@@ -295,14 +363,21 @@ class MainActivity : Activity() {
         return JSONObject(c.inputStream.bufferedReader().use { it.readText() })
     }
 
+    @Synchronized
     private fun downloadMedia(assetId: String, bearer: String, type: String): File {
         val extension = if (type.startsWith("video/")) ".mp4" else ".img"
         val target = File(cacheDir, "$assetId$extension")
         if (target.exists() && target.length() > 0) return target
+        val pending = File(cacheDir, ".$assetId-${UUID.randomUUID()}.part")
         val c = URL(BuildConfig.BASE_URL + "api/device/media/$assetId").openConnection() as HttpURLConnection
         c.connectTimeout = 30_000; c.readTimeout = 60_000; c.setRequestProperty("Authorization", "Bearer $bearer")
         if (c.responseCode !in 200..299) throw IllegalStateException("media_failed")
-        c.inputStream.use { input -> FileOutputStream(target).use { output -> input.copyTo(output) } }
+        try {
+            c.inputStream.use { input -> FileOutputStream(pending).use { output -> input.copyTo(output) } }
+            if (!pending.renameTo(target)) throw IllegalStateException("media_cache_failed")
+        } finally {
+            if (pending.exists()) pending.delete()
+        }
         return target
     }
 
