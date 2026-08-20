@@ -21,7 +21,7 @@ export function validatePlaylist(body) {
   for (const item of body.items) {
     const image = typeof item?.type === 'string' && item.type.startsWith('image/');
     if (!UUID.test(item?.assetId ?? '') || !Number.isInteger(item.position) || item.position < 0 || positions.has(item.position)) return { ok: false };
-    if (image && (!Number.isInteger(item.imageDurationSeconds) || item.imageDurationSeconds < 1 || item.imageDurationSeconds > 86400)) return { ok: false };
+    if (image && item.imageDurationSeconds !== null && (!Number.isInteger(item.imageDurationSeconds) || item.imageDurationSeconds < 1 || item.imageDurationSeconds > 86400)) return { ok: false };
     if (!image && item.imageDurationSeconds !== null) return { ok: false };
     if (!image) {
       const playback = validateVideoPlayback(item, item.durationSeconds);
@@ -50,6 +50,8 @@ export default async function playlistRoutes(app) {
       const types = new Map(assets.rows.map((asset) => [asset.id, asset.content_type]));
       if (body.items.some((item) => types.get(item.assetId) !== item.type)) return null;
       const durations = new Map(assets.rows.map((asset) => [asset.id, asset.duration_seconds]));
+      const missingImageDuration = body.items.find((item) => item.type.startsWith('image/') && item.imageDurationSeconds == null && !(Number(durations.get(item.assetId)) > 0));
+      if (missingImageDuration) return { error: 'missing_image_duration' };
       const invalidPlayback = body.items.map((item) => ({ item, result: item.type.startsWith('image/') ? { ok: true } : validateVideoPlayback(item, durations.get(item.assetId)) })).find(({ result: playback }) => !playback.ok);
       if (invalidPlayback) return { error: invalidPlayback.result.error };
       const id = randomUUID();
@@ -60,5 +62,35 @@ export default async function playlistRoutes(app) {
     if (!result) return reply.code(400).send({ error: 'invalid_media' });
     if (result.error) return reply.code(400).send(result);
     return reply.code(201).send(result);
+  });
+
+  app.put('/api/admin/playlists/:id', { preHandler: requireAdmin }, async (request, reply) => {
+    if (!UUID.test(request.params.id)) return reply.code(400).send({ error: 'invalid_request' });
+    const parsed = validatePlaylist(request.body);
+    if (!parsed.ok) return reply.code(400).send({ error: parsed.error || 'invalid_request' });
+    const body = parsed.value;
+    const result = await inTransaction(app.db, async (db) => {
+      const assets = await db.query('select id,content_type,duration_seconds from media_assets where id=any($1::uuid[])', [body.items.map((item) => item.assetId)]);
+      if (assets.rows.length !== new Set(body.items.map((item) => item.assetId)).size) return null;
+      const byId = new Map(assets.rows.map((asset) => [asset.id, asset]));
+      if (body.items.some((item) => byId.get(item.assetId)?.content_type !== item.type)) return null;
+      for (const item of body.items) {
+        if (item.type.startsWith('image/')) {
+          if (item.imageDurationSeconds == null && !(Number(byId.get(item.assetId).duration_seconds) > 0)) return { error: 'missing_image_duration' };
+        } else {
+          const valid = validateVideoPlayback(item, byId.get(item.assetId).duration_seconds);
+          if (!valid.ok) return { error: valid.error };
+        }
+      }
+      const updated = await db.query('update playlists set name=$2,description=$3 where id=$1 returning id,status', [request.params.id, body.name, body.description]);
+      if (!updated.rows.length) return { missing: true };
+      await db.query('delete from playlist_items where playlist_id=$1', [request.params.id]);
+      for (const item of body.items) await db.query('insert into playlist_items (id,playlist_id,asset_id,position,image_duration_seconds,trim_start_seconds,trim_end_seconds,volume) values ($1,$2,$3,$4,$5,$6,$7,$8)', [randomUUID(), request.params.id, item.assetId, item.position, item.imageDurationSeconds, item.trimStartSeconds ?? null, item.trimEndSeconds ?? null, item.volume ?? 1]);
+      return { id: request.params.id, ...body, status: updated.rows[0].status };
+    });
+    if (!result) return reply.code(400).send({ error: 'invalid_media' });
+    if (result.missing) return reply.code(404).send({ error: 'not_found' });
+    if (result.error) return reply.code(400).send(result);
+    return result;
   });
 }

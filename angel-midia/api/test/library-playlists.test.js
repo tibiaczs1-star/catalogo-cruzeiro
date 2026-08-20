@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { validatePlaylist } from '../src/routes/playlists.js';
 import libraryRoutes, { validLibraryMetadata, validatePresentation } from '../src/routes/library.js';
+import playlistRoutes from '../src/routes/playlists.js';
 
 const image = '11111111-1111-4111-8111-111111111111';
 const video = '22222222-2222-4222-8222-222222222222';
@@ -39,9 +40,35 @@ test('playlist validates and preserves video playback metadata', () => {
   }
 });
 
-test('playlist rejects an image without duration and duplicate positions', () => {
-  assert.equal(validatePlaylist({ name: 'Inválida', items: [{ assetId: image, type: 'image/png', position: 0, imageDurationSeconds: null }] }).ok, false);
+test('playlist accepts global image duration and rejects duplicate positions', () => {
+  assert.equal(validatePlaylist({ name: 'Padrão global', items: [{ assetId: image, type: 'image/png', position: 0, imageDurationSeconds: null }] }).ok, true);
   assert.equal(validatePlaylist({ name: 'Inválida', items: [{ assetId: image, type: 'image/png', position: 0, imageDurationSeconds: 5 }, { assetId: video, type: 'video/mp4', position: 0, imageDurationSeconds: null }] }).ok, false);
+});
+
+test('admin updates an existing playlist item and reads playback metadata back', async () => {
+  const playlist='33333333-3333-4333-8333-333333333333'; const queries=[];
+  const db={query:async(sql,params=[])=>{queries.push({sql,params});
+    if(sql.includes('from sessions'))return{rows:[{id:image,name:'Admin'}]};
+    if(sql.startsWith('select id,content_type'))return{rows:[{id:video,content_type:'video/mp4',duration_seconds:30}]};
+    if(sql.startsWith('update playlists'))return{rows:[{id:playlist,status:'active'}]};
+    if(sql.startsWith('select p.id'))return{rows:[{id:playlist,name:'Shopping',items:[{assetId:video,trimStartSeconds:2,trimEndSeconds:20,volume:.65}]}]};
+    return{rows:[]};}};
+  const app=Fastify();app.decorate('db',db);await app.register(cookie);await app.register(playlistRoutes);const headers={cookie:'amp_session=test'};
+  const payload={name:'Shopping',items:[{assetId:video,type:'video/mp4',position:0,imageDurationSeconds:null,durationSeconds:30,trimStartSeconds:2,trimEndSeconds:20,volume:.65}]};
+  const updated=await app.inject({method:'PUT',url:`/api/admin/playlists/${playlist}`,headers,payload}); assert.equal(updated.statusCode,200);
+  const insert=queries.find((q)=>q.sql.startsWith('insert into playlist_items'));assert.deepEqual(insert.params.slice(4),[null,2,20,.65]);
+  const readback=await app.inject({method:'GET',url:'/api/admin/playlists',headers});assert.deepEqual(readback.json()[0].items[0],{assetId:video,trimStartSeconds:2,trimEndSeconds:20,volume:.65}); await app.close();
+});
+
+test('admin refuses a global image duration when the library default is missing', async () => {
+  const db={query:async(sql)=>{
+    if(sql.includes('from sessions'))return{rows:[{id:image,name:'Admin'}]};
+    if(sql.startsWith('select id,content_type'))return{rows:[{id:image,content_type:'image/png',duration_seconds:null}]};
+    return{rows:[]};
+  }};
+  const app=Fastify();app.decorate('db',db);await app.register(cookie);await app.register(playlistRoutes);
+  const response=await app.inject({method:'POST',url:'/api/admin/playlists',headers:{cookie:'amp_session=test'},payload:{name:'Sem padrão',items:[{assetId:image,type:'image/png',position:0,imageDurationSeconds:null}]}});
+  assert.equal(response.statusCode,400);assert.deepEqual(response.json(),{error:'missing_image_duration'});await app.close();
 });
 
 test('presentation validates centering, zoom, rotation and color', () => {

@@ -185,7 +185,36 @@ it('envia o tipo de cada mídia ao criar uma playlist', async () => {
   root.querySelector('[name=asset]').checked = true;
   root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
-  expect(apiClient.mock.calls[0][1].body.items[0]).toMatchObject({ assetId: 'm1', type: 'image/png', imageDurationSeconds: 8 });
+  expect(apiClient.mock.calls[0][1].body.items[0]).toMatchObject({ assetId: 'm1', type: 'image/png', imageDurationSeconds: null });
+});
+
+it('configura duração por item ou padrão global e playback de vídeo no payload', async () => {
+  const apiClient = vi.fn(async () => ({})); const root = document.querySelector('#app');
+  renderPlaylists(root, [], { media: [
+    { id: 'm1', display_name: 'Foto', content_type: 'image/png', duration_seconds: 8 },
+    { id: 'm2', display_name: 'Filme', content_type: 'video/mp4', duration_seconds: 30 },
+  ] }, apiClient, vi.fn());
+  root.querySelector('[name=name]').value = 'Vitrine';
+  root.querySelector('[name="asset"][value="m1"]').click(); root.querySelector('[name="asset"][value="m2"]').click();
+  root.querySelector('[name="durationMode-m1"][value="custom"]').click(); root.querySelector('[name="imageDuration-m1"]').value = '14';
+  root.querySelector('[name="trimStart-m2"]').value = '2'; root.querySelector('[name="trimEnd-m2"]').value = '20'; root.querySelector('[name="volume-m2"]').value = '65';
+  root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body.items).toEqual([
+    expect.objectContaining({ assetId: 'm1', imageDurationSeconds: 14 }),
+    expect.objectContaining({ assetId: 'm2', trimStartSeconds: 2, trimEndSeconds: 20, volume: .65 }),
+  ]);
+});
+
+it('edita item de playlist existente, lê valores salvos e usa PUT', async () => {
+  const apiClient = vi.fn(async () => ({})); const root = document.querySelector('#app');
+  const playlists = [{ id: 'p1', name: 'Shopping', items: [{ assetId: 'm2', type: 'video/mp4', position: 0, trimStartSeconds: 3, trimEndSeconds: 18, volume: .4 }] }];
+  renderPlaylists(root, playlists, { media: [{ id: 'm2', display_name: 'Filme', content_type: 'video/mp4', duration_seconds: 30 }] }, apiClient, vi.fn());
+  root.querySelector('[data-edit-playlist="p1"]').click();
+  expect(root.querySelector('[name="trimStart-m2"]').value).toBe('3'); expect(root.querySelector('[name="volume-m2"]').value).toBe('40');
+  root.querySelector('[name="volume-m2"]').value = '75'; root.querySelector('[data-playlist]').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient).toHaveBeenCalledWith('/admin/playlists/p1', expect.objectContaining({ method: 'PUT', body: expect.objectContaining({ items: [expect.objectContaining({ volume: .75 })] }) }));
 });
 
 it('programa uma playlist contínua por padrão sem enviar datas', async () => {
