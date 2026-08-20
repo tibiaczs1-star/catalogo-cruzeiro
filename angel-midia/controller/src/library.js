@@ -23,5 +23,10 @@ export function renderMediaCard(media) {
   const isVideo = String(media.content_type || '').startsWith('video/');
   const count = Number(media.playing_now_count || 0);
   const size = `${Math.round(Number(media.size_bytes || 0) / 104857.6) / 10} MB`;
-  return `<article class="glass media-card" data-media-id="${esc(media.id)}"><div class="media-preview"><span>${isVideo ? '▶' : '▧'}</span></div><div class="media-card-body"><span class="media-type">${isVideo ? 'VÍDEO' : 'IMAGEM'}</span><h3>${esc(media.display_name || media.name)}</h3><p class="media-facts">${esc(formatMediaFacts(media))}</p><p>${size} · ${media.has_audio ? 'com áudio' : 'sem áudio'} · ${esc(media.processing_status || 'ready')}</p><strong>${count ? `Rodando agora em ${count} TV${count === 1 ? '' : 's'}` : 'Fora do ar agora'}</strong><button type="button" class="ghost" data-edit-media="${esc(media.id)}">Editar mídia</button></div></article>`;
+  const name = media.display_name || media.name;
+  const source = `./api/admin/media/${encodeURIComponent(media.id)}/content`;
+  const preview = isVideo
+    ? `<video src="${source}" controls muted preload="metadata" aria-label="Prévia de ${esc(name)}"></video>`
+    : `<img src="${source}" alt="Prévia de ${esc(name)}" loading="lazy">`;
+  return `<article class="glass media-card" data-media-id="${esc(media.id)}"><div class="media-preview">${preview}</div><div class="media-card-body"><span class="media-type">${isVideo ? 'VÍDEO' : 'IMAGEM'}</span><h3>${esc(name)}</h3><p class="media-facts">${esc(formatMediaFacts(media))}</p><p>${size} · ${media.has_audio ? 'com áudio' : 'sem áudio'} · ${esc(media.processing_status || 'ready')}</p><strong>${count ? `Rodando agora em ${count} TV${count === 1 ? '' : 's'}` : 'Fora do ar agora'}</strong><button type="button" class="ghost" data-edit-media="${esc(media.id)}">Editar mídia</button></div></article>`;
 }

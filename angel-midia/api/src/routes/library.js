@@ -1,7 +1,15 @@
 import multipart from '@fastify/multipart';
 import { randomUUID } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import { stat } from 'node:fs/promises';
+import { join } from 'node:path';
 import { requireAdmin } from '../auth.js';
 import { MAX_MEDIA_BYTES, removeStoredMedia, storeMedia } from '../services/storage.js';
+import { parseByteRange } from './media.js';
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const STORAGE_KEY = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.(?:mp4|jpg|png|webp)$/i;
+const ALLOWED_TYPES = new Set(['video/mp4', 'image/jpeg', 'image/png', 'image/webp']);
 
 export function validLibraryMetadata(fields) {
   if (!fields || typeof fields.name !== 'string' || !fields.name.trim() || fields.name.trim().length > 160) return false;
@@ -74,6 +82,26 @@ export default async function libraryRoutes(app, { mediaDir, removeMedia = remov
         playingNow: playingNow.rows.map((row) => ({ deviceId: row.device_id, deviceName: row.device_name, locationName: row.location_name })),
       },
     };
+  });
+
+  app.get('/api/admin/media/:id/content', { preHandler: requireAdmin }, async (request, reply) => {
+    if (!UUID.test(request.params.id ?? '')) return reply.code(400).send({ error: 'invalid_request' });
+    const { rows } = await app.db.query('select id,storage_key,content_type,size_bytes from media_assets where id=$1', [request.params.id]);
+    const media = rows[0];
+    if (!media || !STORAGE_KEY.test(media.storage_key ?? '') || !ALLOWED_TYPES.has(media.content_type)) return reply.code(404).send({ error: 'media_not_found' });
+    const path = join(mediaDir, media.storage_key);
+    let info;
+    try { info = await stat(path); } catch { return reply.code(404).send({ error: 'media_not_found' }); }
+    const declaredSize = Number(media.size_bytes);
+    if (!info.isFile() || !Number.isSafeInteger(declaredSize) || declaredSize < 1 || info.size !== declaredSize) return reply.code(404).send({ error: 'media_not_found' });
+    const range = parseByteRange(request.headers.range, info.size);
+    reply.header('Accept-Ranges', 'bytes').header('Cache-Control', 'private, no-transform').type(media.content_type);
+    if (range === false) return reply.header('Content-Range', `bytes */${info.size}`).code(416).send();
+    if (range) {
+      const length = range.end - range.start + 1;
+      return reply.header('Content-Range', `bytes ${range.start}-${range.end}/${info.size}`).header('Content-Length', length).code(206).send(createReadStream(path, range));
+    }
+    return reply.header('Content-Length', info.size).send(createReadStream(path));
   });
 
   app.patch('/api/admin/media/:id', { preHandler: requireAdmin }, async (request, reply) => {

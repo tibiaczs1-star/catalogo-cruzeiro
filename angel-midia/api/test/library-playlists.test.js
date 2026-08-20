@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
 import cookie from '@fastify/cookie';
+import { mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { validatePlaylist } from '../src/routes/playlists.js';
 import libraryRoutes, { validLibraryMetadata, validatePresentation } from '../src/routes/library.js';
 
@@ -76,4 +79,31 @@ test('admin updates media presentation and invalid values are rejected', async (
   const invalid = await app.inject({ method: 'PATCH', url: `/api/admin/media/${mediaId}`, headers, payload: { focalX: 200 } });
   assert.equal(invalid.statusCode, 400);
   await app.close();
+});
+
+test('admin can stream the original media for preview', async () => {
+  const mediaId = '33333333-3333-4333-8333-333333333333';
+  const storageKey = `${mediaId}.png`;
+  const mediaDir = await mkdtemp(join(tmpdir(), 'angel-preview-'));
+  const bytes = Buffer.from([0x89, 0x50, 0x4e, 0x47, 1, 2, 3, 4]);
+  await writeFile(join(mediaDir, storageKey), bytes);
+  const db = { query: async (sql) => {
+    if (sql.includes('from sessions')) return { rows: [{ id: image, name: 'Admin', email: 'admin@angel.local' }] };
+    if (sql.includes('storage_key')) return { rows: [{ id: mediaId, storage_key: storageKey, content_type: 'image/png', size_bytes: bytes.length }] };
+    return { rows: [] };
+  } };
+  const app = Fastify();
+  app.decorate('db', db);
+  await app.register(cookie);
+  await app.register(libraryRoutes, { mediaDir });
+  const response = await app.inject({ method: 'GET', url: `/api/admin/media/${mediaId}/content`, headers: { cookie: 'amp_session=test' } });
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.headers['content-type'], 'image/png');
+  assert.deepEqual(response.rawPayload, bytes);
+  const partial = await app.inject({ method: 'GET', url: `/api/admin/media/${mediaId}/content`, headers: { cookie: 'amp_session=test', range: 'bytes=1-3' } });
+  assert.equal(partial.statusCode, 206);
+  assert.equal(partial.headers['content-range'], `bytes 1-3/${bytes.length}`);
+  assert.deepEqual(partial.rawPayload, bytes.subarray(1, 4));
+  await app.close();
+  await rm(mediaDir, { recursive: true, force: true });
 });

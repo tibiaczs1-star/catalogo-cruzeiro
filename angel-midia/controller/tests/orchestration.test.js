@@ -68,6 +68,16 @@ it('mostra todos os detalhes da mídia e abre o editor de enquadramento', async 
   root.querySelector('[data-edit-media]').click();
   await vi.waitFor(() => expect(root.querySelector('[aria-label="Centralização horizontal"]')).not.toBeNull());
   expect(root.querySelector('[aria-label="Modo de ajuste"]')).not.toBeNull();
+  expect(root.querySelector('.editor-preview video')?.getAttribute('src')).toBe('./api/admin/media/m1/content');
+});
+
+it('mostra a imagem real no card da biblioteca', () => {
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media: [{ id: 'm4', display_name: 'Foto', content_type: 'image/png' }] }, vi.fn(), vi.fn());
+  const preview = root.querySelector('.media-preview img');
+  expect(preview).not.toBeNull();
+  expect(preview.getAttribute('src')).toBe('./api/admin/media/m4/content');
+  expect(preview.getAttribute('alt')).toBe('Prévia de Foto');
 });
 
 it('filtra mídias e monta patches seguros para edição não destrutiva', () => {
