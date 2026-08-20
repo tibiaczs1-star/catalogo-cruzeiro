@@ -310,7 +310,7 @@ it('inclui proporção da tela, área segura e aviso para modos que deformam ou 
   const root = document.querySelector('#app');
   openMediaEditor(root, { id: 'ratio', name: 'Cartaz', type: 'image/png' }, vi.fn());
   expect(root.querySelectorAll('[name=screenRatio] option')).toHaveLength(4);
-  expect(root.querySelector('.editor-safe-area')).not.toBeNull();
+  expect(root.querySelector('[data-safe-area]')).not.toBeNull();
   root.querySelector('[name=fitMode]').value = 'cover';
   root.querySelector('[name=fitMode]').dispatchEvent(new Event('input', { bubbles: true }));
   expect(root.querySelector('[data-fit-warning]').hidden).toBe(false);
@@ -358,4 +358,21 @@ it('desfaz a última alteração da sessão e restaura os padrões', () => {
   root.querySelector('[data-reset]').click();
   expect(root.querySelector('[name=fitMode]').value).toBe('contain');
   expect(root.querySelector('[name=focalX]').value).toBe('50');
+});
+
+it('restaura todo o estado visual e a duração padrão da imagem', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'reset-image', name: 'Foto', type: 'image/png', durationSeconds: 27, presentation: { fitMode: 'fill', focalX: 20, focalY: 80, zoom: 2, rotation: 270, backgroundColor: '#abcdef' } }, vi.fn());
+  root.querySelector('[name=screenRatio]').value = '9-16';
+  root.querySelector('[name=imageDurationSeconds]').value = '22';
+  root.querySelector('[data-reset]').click();
+  expect(Object.fromEntries(new FormData(root.querySelector('form')))).toMatchObject({ fitMode: 'contain', focalX: '50', focalY: '50', zoom: '1', rotation: '0', backgroundColor: '#000000', screenRatio: '16-9', imageDurationSeconds: '10' });
+});
+
+it('restaura todo o playback padrão do vídeo', () => {
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'reset-video', name: 'Filme', type: 'video/mp4', trimStartSeconds: 3, trimEndSeconds: 20, volume: 45 }, vi.fn());
+  root.querySelector('[name=screenRatio]').value = '4-3';
+  root.querySelector('[data-reset]').click();
+  expect(Object.fromEntries(new FormData(root.querySelector('form')))).toMatchObject({ screenRatio: '16-9', trimStartSeconds: '', trimEndSeconds: '', volume: '100' });
 });
