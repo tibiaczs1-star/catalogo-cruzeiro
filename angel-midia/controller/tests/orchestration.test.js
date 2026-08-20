@@ -2,6 +2,8 @@
 import { beforeEach, expect, it, vi } from 'vitest';
 import { createApp } from '../src/app.js';
 import { renderLibrary } from '../src/orchestration.js';
+import { filterMedia, formatMediaFacts } from '../src/library.js';
+import { buildPresentationPatch } from '../src/media-editor.js';
 
 beforeEach(() => { document.body.innerHTML = '<div id="app"></div>'; });
 
@@ -54,4 +56,23 @@ it('envia o nome da mídia usando o contrato multipart da API', async () => {
   expect(path).toBe('/admin/media');
   expect(options.body.get('name')).toBe('Foto 2');
   expect(options.body.has('displayName')).toBe(false);
+});
+
+it('mostra todos os detalhes da mídia e abre o editor de enquadramento', async () => {
+  const apiClient = vi.fn(async (path) => path.endsWith('/m1') ? { id: 'm1', name: 'Anúncio', type: 'video/mp4', width: 1920, height: 1080, hasAudio: true, sizeBytes: 10485760, durationSeconds: 12, status: 'ready', presentation: { fitMode: 'cover', focalX: 50, focalY: 50, zoom: 1, rotation: 0, backgroundColor: '#000000' }, usage: { playlists: [{ name: 'Principal' }], playingNow: [{ deviceName: 'TV 1' }, { deviceName: 'TV 2' }] } } : {});
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media: [{ id: 'm1', display_name: 'Anúncio', content_type: 'video/mp4', width: 1920, height: 1080, has_audio: true, size_bytes: 10485760, duration_seconds: 12, processing_status: 'ready', playing_now_count: 2 }] }, apiClient, vi.fn());
+  expect(root.textContent).toContain('VÍDEO');
+  expect(root.textContent).toContain('MP4 · 1920×1080 · 16:9');
+  expect(root.textContent).toContain('Rodando agora em 2 TVs');
+  root.querySelector('[data-edit-media]').click();
+  await vi.waitFor(() => expect(root.querySelector('[aria-label="Centralização horizontal"]')).not.toBeNull());
+  expect(root.querySelector('[aria-label="Modo de ajuste"]')).not.toBeNull();
+});
+
+it('filtra mídias e monta patches seguros para edição não destrutiva', () => {
+  const media = [{ display_name: 'Foto vitrine', content_type: 'image/png' }, { display_name: 'Oferta', content_type: 'video/mp4' }];
+  expect(filterMedia(media, { query: 'oferta', type: 'video' })).toHaveLength(1);
+  expect(formatMediaFacts({ content_type: 'image/png', width: 1080, height: 1080 })).toContain('1:1');
+  expect(buildPresentationPatch({ fitMode: 'contain', focalX: '25', focalY: '75', zoom: '1.2', rotation: '90', backgroundColor: '#ffffff' })).toEqual({ fitMode: 'contain', focalX: 25, focalY: 75, zoom: 1.2, rotation: 90, backgroundColor: '#ffffff' });
 });
