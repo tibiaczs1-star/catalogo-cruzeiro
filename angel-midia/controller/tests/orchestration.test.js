@@ -132,6 +132,27 @@ it('mostra a janela agendada e envia as datas em ISO', async () => {
   });
 });
 
+it.each([
+  ['', '', 'Informe o início e o fim da programação.'],
+  ['invalid', '2026-08-21T10:00', 'Informe datas e horários válidos.'],
+  ['2026-08-21T10:00', '2026-08-20T10:00', 'O fim precisa ser depois do início.'],
+])('bloqueia playlist agendada com janela inválida', async (startsAt, endsAt, message) => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderSchedule(root, { playlists: [{ id: 'p1', name: 'Principal' }], devices: [], groups: [], schedules: [] }, apiClient, vi.fn());
+  const form = root.querySelector('[data-schedule]');
+  form.querySelector('[name=mode][value=scheduled]').checked = true;
+  form.querySelector('[name=mode][value=scheduled]').dispatchEvent(new Event('change', { bubbles: true }));
+  form.elements.playlistId.value = 'p1';
+  if (startsAt === 'invalid') Object.defineProperty(form.elements.startsAt, 'value', { configurable: true, value: startsAt });
+  else form.elements.startsAt.value = startsAt;
+  form.elements.endsAt.value = endsAt;
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await Promise.resolve();
+  expect(apiClient).not.toHaveBeenCalled();
+  expect(form.querySelector('[role=status]').textContent).toBe(message);
+});
+
 it('reutiliza os modos contínuo e agendado no formulário de campanha', () => {
   const root = document.querySelector('#app');
   renderCampaignProgramming(root, { devices: [], campaigns: [], apiClient: vi.fn() });

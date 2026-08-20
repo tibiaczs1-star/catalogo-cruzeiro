@@ -37,19 +37,29 @@ export function syncScheduleMode(form) {
   return scheduled;
 }
 
+export function parseScheduleWindow(form) {
+  const mode = form.elements.mode?.value || 'continuous';
+  if (mode !== 'scheduled') return { valid: true, fields: { mode } };
+  const startValue = form.elements.startsAt?.value;
+  const endValue = form.elements.endsAt?.value;
+  if (!startValue || !endValue) return { valid: false, error: 'Informe o início e o fim da programação.' };
+  const start = new Date(startValue);
+  const end = new Date(endValue);
+  if (!Number.isFinite(start.getTime()) || !Number.isFinite(end.getTime())) return { valid: false, error: 'Informe datas e horários válidos.' };
+  if (end <= start) return { valid: false, error: 'O fim precisa ser depois do início.' };
+  return { valid: true, fields: { mode, startsAt: start.toISOString(), endsAt: end.toISOString() } };
+}
+
 export function scheduleBody(form, campaignId) {
   const targetType = form.elements.targetType.value;
-  const mode = form.elements.mode.value;
+  const window = parseScheduleWindow(form);
+  if (!window.valid) throw new Error(window.error);
   const body = {
     campaignId,
     target: { type: targetType, id: targetType === 'all' ? null : form.elements.targetId.value },
-    mode,
     priority: Number(form.elements.priority.value),
+    ...window.fields,
   };
-  if (mode === 'scheduled') {
-    body.startsAt = new Date(form.elements.startsAt.value).toISOString();
-    body.endsAt = new Date(form.elements.endsAt.value).toISOString();
-  }
   return body;
 }
 

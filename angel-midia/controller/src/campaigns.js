@@ -1,4 +1,4 @@
-import { naturalSummary, renderTargetSelect, scheduleBody, syncScheduleMode } from './schedules.js';
+import { naturalSummary, parseScheduleWindow, renderTargetSelect, scheduleBody, syncScheduleMode } from './schedules.js';
 
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
 
@@ -78,12 +78,9 @@ export function renderCampaignProgramming(root, { devices, campaigns, apiClient,
     event.preventDefault();
     if (submitting) return;
     const file = form.elements.media.files?.[0];
-    const scheduled = form.elements.mode.value === 'scheduled';
-    const startsAt = scheduled ? new Date(form.elements.startsAt.value) : null;
-    const endsAt = scheduled ? new Date(form.elements.endsAt.value) : null;
-    const invalidPeriod = scheduled && (!Number.isFinite(startsAt.getTime()) || !Number.isFinite(endsAt.getTime()) || endsAt <= startsAt);
-    if (!file || !form.elements.campaignName.value.trim() || invalidPeriod || (form.elements.targetType.value !== 'all' && !form.elements.targetId.value)) {
-      status.textContent = scheduled && Number.isFinite(startsAt?.getTime()) && Number.isFinite(endsAt?.getTime()) && endsAt <= startsAt ? 'O fim precisa ser depois do início.' : 'Preencha todos os campos antes de publicar.';
+    const window = parseScheduleWindow(form);
+    if (!file || !form.elements.campaignName.value.trim() || !window.valid || (form.elements.targetType.value !== 'all' && !form.elements.targetId.value)) {
+      status.textContent = !window.valid ? window.error : 'Preencha todos os campos antes de publicar.';
       return;
     }
     if (!confirming) {
