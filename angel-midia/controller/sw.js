@@ -7,11 +7,16 @@ const SHELL = [
   './src/styles.css',
   './src/responsive.css',
   './src/app.js',
+  './src/sound.js',
   './src/orchestration.js',
   './src/api.js',
   './assets/icon-192.svg',
   './assets/icon-512.svg',
   './assets/icon-maskable-512.svg',
+  './assets/sounds/success.ogg',
+  './assets/sounds/alert.ogg',
+  './assets/sounds/error.ogg',
+  './assets/sounds/start.ogg',
 ];
 
 self.addEventListener('install', (event) => {
