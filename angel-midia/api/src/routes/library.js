@@ -10,12 +10,79 @@ export function validLibraryMetadata(fields) {
   return Number.isFinite(duration) && duration > 0 && duration <= 86400;
 }
 
+export function validatePresentation(fields = {}) {
+  const value = {
+    fitMode: fields.fitMode ?? 'contain',
+    focalX: Number(fields.focalX ?? 50),
+    focalY: Number(fields.focalY ?? 50),
+    zoom: Number(fields.zoom ?? 1),
+    rotation: Number(fields.rotation ?? 0),
+    backgroundColor: fields.backgroundColor ?? '#000000',
+  };
+  const valid = ['contain', 'cover', 'fill'].includes(value.fitMode)
+    && Number.isFinite(value.focalX) && value.focalX >= 0 && value.focalX <= 100
+    && Number.isFinite(value.focalY) && value.focalY >= 0 && value.focalY <= 100
+    && Number.isFinite(value.zoom) && value.zoom >= 0.25 && value.zoom <= 4
+    && [0, 90, 180, 270].includes(value.rotation)
+    && /^#[0-9a-f]{6}$/i.test(value.backgroundColor);
+  return valid ? { ok: true, value } : { ok: false };
+}
+
+function mediaDetail(row) {
+  return {
+    id: row.id,
+    name: row.name,
+    originalName: row.original_name,
+    type: row.content_type,
+    sizeBytes: Number(row.size_bytes),
+    sha256: row.sha256,
+    durationSeconds: row.duration_seconds === null ? null : Number(row.duration_seconds),
+    status: row.processing_status,
+    width: row.width,
+    height: row.height,
+    hasAudio: row.has_audio,
+    originalFilename: row.original_filename,
+    thumbnailKey: row.thumbnail_key,
+    presentation: {
+      fitMode: row.fit_mode,
+      focalX: Number(row.focal_x),
+      focalY: Number(row.focal_y),
+      zoom: Number(row.zoom),
+      rotation: Number(row.rotation),
+      backgroundColor: row.background_color,
+    },
+  };
+}
+
 export default async function libraryRoutes(app, { mediaDir, removeMedia = removeStoredMedia } = {}) {
   await app.register(multipart, { limits: { files: 1, fileSize: MAX_MEDIA_BYTES, fields: 2, parts: 3 } });
 
   app.get('/api/admin/media', { preHandler: requireAdmin }, async () => {
     const { rows } = await app.db.query(`select id,coalesce(display_name,original_name) as name,original_name,content_type,size_bytes,sha256,duration_seconds,processing_status,created_at from media_assets order by created_at desc`);
     return rows;
+  });
+
+  app.get('/api/admin/media/:id', { preHandler: requireAdmin }, async (request, reply) => {
+    const detail = await app.db.query(`select ma.id,coalesce(ma.display_name,ma.original_name) as name,ma.original_name,ma.content_type,ma.size_bytes,ma.sha256,ma.duration_seconds,ma.processing_status,ma.width,ma.height,ma.has_audio,ma.thumbnail_key,ma.original_filename,ma.fit_mode,ma.focal_x,ma.focal_y,ma.zoom,ma.rotation,ma.background_color from media_assets ma where ma.id=$1`, [request.params.id]);
+    if (!detail.rows[0]) return reply.code(404).send({ error: 'media_not_found' });
+    const playlists = await app.db.query(`select p.id,p.name,pi.position from playlist_items pi join playlists p on p.id=pi.playlist_id where pi.asset_id=$1 order by p.name,pi.position`, [request.params.id]);
+    const playingNow = await app.db.query(`select d.id as device_id,d.name as device_name,l.label as location_name from playback_status ps join devices d on d.id=ps.device_id left join locations l on l.id=d.location_id where ps.current_asset_id=$1 order by d.name`, [request.params.id]);
+    return {
+      ...mediaDetail(detail.rows[0]),
+      usage: {
+        playlists: playlists.rows,
+        playingNow: playingNow.rows.map((row) => ({ deviceId: row.device_id, deviceName: row.device_name, locationName: row.location_name })),
+      },
+    };
+  });
+
+  app.patch('/api/admin/media/:id', { preHandler: requireAdmin }, async (request, reply) => {
+    const presentation = validatePresentation(request.body);
+    if (!presentation.ok) return reply.code(400).send({ error: 'invalid_presentation' });
+    const value = presentation.value;
+    const updated = await app.db.query(`update media_assets set fit_mode=$2,focal_x=$3,focal_y=$4,zoom=$5,rotation=$6,background_color=$7 where id=$1 returning id,coalesce(display_name,original_name) as name,original_name,content_type,size_bytes,sha256,duration_seconds,processing_status,width,height,has_audio,thumbnail_key,original_filename,fit_mode,focal_x,focal_y,zoom,rotation,background_color`, [request.params.id, value.fitMode, value.focalX, value.focalY, value.zoom, value.rotation, value.backgroundColor]);
+    if (!updated.rows[0]) return reply.code(404).send({ error: 'media_not_found' });
+    return mediaDetail(updated.rows[0]);
   });
 
   app.post('/api/admin/media', { preHandler: requireAdmin }, async (request, reply) => {
