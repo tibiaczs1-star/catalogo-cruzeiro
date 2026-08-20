@@ -45,6 +45,13 @@ export async function resolveSchedule(db, device) {
             coalesce(pi.image_duration_seconds, legacy.duration_seconds) as duration_seconds,
             coalesce(asset.content_type, legacy.content_type) as content_type,
             coalesce(asset.sha256, legacy.sha256) as sha256,
+            coalesce(asset.fit_mode, legacy.fit_mode, 'contain') as fit_mode,
+            coalesce(asset.focal_x, legacy.focal_x, 50) as focal_x,
+            coalesce(asset.focal_y, legacy.focal_y, 50) as focal_y,
+            coalesce(asset.zoom, legacy.zoom, 1) as zoom,
+            coalesce(asset.rotation, legacy.rotation, 0) as rotation,
+            coalesce(asset.background_color, legacy.background_color, '#000000') as background_color,
+            pi.trim_start_seconds,pi.trim_end_seconds,coalesce(pi.volume,1) as volume,coalesce(pi.transition_name,'cut') as transition_name,
             w.starts_at, w.ends_at, w.priority
        from devices d
        left join winning w on true
@@ -57,7 +64,7 @@ export async function resolveSchedule(db, device) {
       order by position nulls last`, [device.id]);
   const first = rows[0];
   const schedule = {
-    version: first?.schedule_version,
+    scheduleRevision: first?.schedule_version,
     items: rows.filter((row) => row.asset_id).map((row) => ({
       assetId: row.asset_id,
       type: row.content_type,
@@ -67,8 +74,19 @@ export async function resolveSchedule(db, device) {
       startsAt: new Date(row.starts_at).toISOString(),
       endsAt: new Date(row.ends_at).toISOString(),
       priority: row.priority,
+      presentation: {
+        fitMode: row.fit_mode ?? 'contain', focalX: Number(row.focal_x ?? 50), focalY: Number(row.focal_y ?? 50),
+        zoom: Number(row.zoom ?? 1), rotation: Number(row.rotation ?? 0), backgroundColor: row.background_color ?? '#000000',
+      },
+      playback: {
+        trimStartSeconds: row.trim_start_seconds == null ? null : Number(row.trim_start_seconds),
+        trimEndSeconds: row.trim_end_seconds == null ? null : Number(row.trim_end_seconds),
+        volume: Number(row.volume ?? 1), transition: row.transition_name ?? 'cut',
+      },
     })),
   };
   if (first?.playlist_id) schedule.playlist = { id: first.playlist_id, name: first.playlist_name };
+  schedule.version = createHash('sha256').update(JSON.stringify(schedule)).digest('hex');
   return schedule;
 }
+import { createHash } from 'node:crypto';
