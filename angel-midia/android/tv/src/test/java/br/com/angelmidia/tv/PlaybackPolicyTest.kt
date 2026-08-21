@@ -65,6 +65,12 @@ class PlaybackPolicyTest {
         assertEquals(0, PlaybackPolicy.nextIndexOrNull(2, 3, true))
     }
 
+    @Test fun videoWatchdogAdvancesWhenAndroidMissesCompletion() {
+        assertEquals(13_000L, PlaybackPolicy.videoWatchdogMs(0, null, 10_000))
+        assertEquals(8_000L, PlaybackPolicy.videoWatchdogMs(2_000, 7_000, 30_000))
+        assertEquals(null, PlaybackPolicy.videoWatchdogMs(0, null, 0))
+    }
+
     @Test fun emergencyInterruptsRecoveryAndCancelsStaleTransfers() {
         assertEquals(true, PlaybackPolicy.shouldInterruptForEmergency(true, true))
         assertEquals(false, PlaybackPolicy.shouldInterruptForEmergency(false, true))

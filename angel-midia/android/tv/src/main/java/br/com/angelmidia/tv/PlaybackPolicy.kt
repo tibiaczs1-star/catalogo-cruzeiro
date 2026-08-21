@@ -112,5 +112,9 @@ object PlaybackPolicy {
     }
 
     fun reachedTrimEnd(positionMs: Int, endMs: Int?): Boolean = endMs != null && positionMs >= endMs
+    fun videoWatchdogMs(startMs: Int, endMs: Int?, mediaDurationMs: Int): Long? {
+        val effectiveEnd = endMs ?: mediaDurationMs.takeIf { it > 0 } ?: return null
+        return (effectiveEnd - startMs).coerceAtLeast(1).toLong() + 3_000L
+    }
     fun trimEndAction(loop: Boolean): TrimEndAction = if (loop) TrimEndAction.RESTART else TrimEndAction.ADVANCE
 }

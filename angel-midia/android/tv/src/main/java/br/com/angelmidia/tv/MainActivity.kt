@@ -289,6 +289,9 @@ class MainActivity : Activity() {
                             start()
                             if (!emergency) prefetchNext(generation)
                             if (playback.endMs != null) monitorTrimEnd(this, assetId, emergency, generation, playback)
+                            if (!emergency) PlaybackPolicy.videoWatchdogMs(playback.startMs, playback.endMs, player.duration)?.let { timeout ->
+                                mainHandler.postDelayed({ finishMedia(assetId, false, generation) }, timeout)
+                            }
                         }
                         setOnCompletionListener {
                             if (PlaybackPolicy.trimEndAction(emergency) == TrimEndAction.RESTART && playback.endMs != null) {
