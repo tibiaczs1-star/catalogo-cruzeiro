@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { renderTvs } from '../src/tvs.js';
+import { renderDeviceMap, renderTvs } from '../src/tvs.js';
 
 const pending = {
   id: 'tv-1', name: 'Mercado Centro', address: 'Av. Mâncio Lima, 100',
@@ -91,6 +91,27 @@ describe('gestão lean de TVs', () => {
     expect(document.querySelector('[data-tv-details]').textContent).toContain('Mercado Centro');
     expect(document.querySelector('[data-map-device="tv-1"]').getAttribute('aria-current')).toBe('true');
     expect(document.querySelector('[data-map-device="tv-2"]').getAttribute('aria-current')).toBe('false');
+  });
+
+  it('abre a localização exata da TV no Google Maps', () => {
+    renderTvs(document.querySelector('#tvs'), [{ ...pending }], vi.fn());
+    document.querySelector('[data-device-id="tv-1"]').click();
+    const link = document.querySelector('[data-open-google-maps]');
+    expect(link).not.toBeNull();
+    expect(link.href).toBe('https://www.google.com/maps/search/?api=1&query=-7.6301%2C-72.6701');
+    expect(link.target).toBe('_blank');
+    expect(link.rel).toContain('noopener');
+  });
+
+  it('renderiza um mapa geral reutilizável e abre a TV pelo marcador', () => {
+    const openDevice = vi.fn();
+    renderDeviceMap(document.querySelector('#tvs'), [
+      { ...pending },
+      { id: 'tv-2', name: 'Recepção', latitude: -7.5, longitude: -72.5 },
+    ], openDevice);
+    expect(document.querySelectorAll('[data-map-device]')).toHaveLength(2);
+    document.querySelector('[data-map-device="tv-2"]').click();
+    expect(openDevice).toHaveBeenCalledWith('tv-2');
   });
 
   it('serializa ajustes concorrentes e mantém a localização mais recente', async () => {

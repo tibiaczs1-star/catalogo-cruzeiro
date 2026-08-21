@@ -6,7 +6,7 @@ const normalized = (value) => String(value ?? '').trim().replace(/\s+/g, ' ');
 const coordinate = (value, min, max) => value !== null && value !== '' && Number.isFinite(Number(value)) && Number(value) >= min && Number(value) <= max;
 const hasCoordinates = (device) => coordinate(device.latitude, -90, 90) && coordinate(device.longitude, -180, 180);
 
-function defaultMapFactory(root, devices, openDevice) {
+export function renderDeviceMap(root, devices, openDevice) {
   const mapped = devices.filter(hasCoordinates);
   if (!mapped.length) root.innerHTML = '<p>Nenhuma TV com coordenadas.</p>';
   else {
@@ -21,6 +21,8 @@ function defaultMapFactory(root, devices, openDevice) {
   root.querySelectorAll('[data-map-device]').forEach((button) => button.addEventListener('click', () => openDevice(button.dataset.mapDevice)));
   return { select(id, text) { root.querySelectorAll('[data-map-device]').forEach((button) => button.setAttribute('aria-current', String(button.dataset.mapDevice === id))); root.dataset.selectedCoordinates = text; } };
 }
+
+const defaultMapFactory = renderDeviceMap;
 
 export function renderTvs(root, initialDevices, apiClient, { mapAvailable = true, mapFactory = defaultMapFactory } = {}) {
   const devices = [...initialDevices].sort((a, b) => Number(b.status === 'pending') - Number(a.status === 'pending') || String(a.name).localeCompare(String(b.name), 'pt-BR'));
@@ -43,7 +45,8 @@ export function renderTvs(root, initialDevices, apiClient, { mapAvailable = true
   function showDetails(device) {
     const valid = hasCoordinates(device); const coords = valid ? `${Number(device.latitude).toFixed(4)}, ${Number(device.longitude).toFixed(4)}` : 'Não informadas';
     marker.textContent = coords; map?.select(device.id, coords);
-    details.innerHTML = `<section class="tv-details" aria-labelledby="tv-detail-name"><div><p class="eyebrow">Detalhes da TV</p><h2 id="tv-detail-name">${escapeHtml(device.name)}</h2></div><dl><div><dt>Endereço</dt><dd>${escapeHtml(device.address || 'Não informado')}</dd></div><div><dt>Código</dt><dd>${escapeHtml(device.linkCode || '—')}</dd></div><div><dt>Coordenadas</dt><dd>${coords}</dd></div><div><dt>Status</dt><dd>${statusLabel(device)}</dd></div></dl><div class="marker-controls"><label>Latitude<input name="latitude" type="number" step="any" value="${valid ? device.latitude : ''}"></label><label>Longitude<input name="longitude" type="number" step="any" value="${valid ? device.longitude : ''}"></label><button type="button" data-move-marker>Ajustar marcador</button></div><label class="location-search">Buscar outro local<input data-location-search type="search" placeholder="Digite pelo menos 3 caracteres"></label><div data-location-results></div>${device.status === 'pending' ? '<button type="button" class="primary" data-approve>Aprovar TV</button>' : ''}<p role="status" aria-live="polite"></p></section>`;
+    const mapsUrl = valid ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${Number(device.latitude)},${Number(device.longitude)}`)}` : '';
+    details.innerHTML = `<section class="tv-details" aria-labelledby="tv-detail-name"><div><p class="eyebrow">Detalhes da TV</p><h2 id="tv-detail-name">${escapeHtml(device.name)}</h2></div><dl><div><dt>Endereço</dt><dd>${escapeHtml(device.address || 'Não informado')}</dd></div><div><dt>Código</dt><dd>${escapeHtml(device.linkCode || '—')}</dd></div><div><dt>Coordenadas</dt><dd>${coords}</dd></div><div><dt>Status</dt><dd>${statusLabel(device)}</dd></div></dl>${valid ? `<a class="google-maps-link" data-open-google-maps href="${mapsUrl}" target="_blank" rel="noopener noreferrer">Abrir localização exata no Google Maps</a>` : ''}<div class="marker-controls"><label>Latitude<input name="latitude" type="number" step="any" value="${valid ? device.latitude : ''}"></label><label>Longitude<input name="longitude" type="number" step="any" value="${valid ? device.longitude : ''}"></label><button type="button" data-move-marker>Ajustar marcador</button></div><label class="location-search">Buscar outro local<input data-location-search type="search" placeholder="Digite pelo menos 3 caracteres"></label><div data-location-results></div>${device.status === 'pending' ? '<button type="button" class="primary" data-approve>Aprovar TV</button>' : ''}<p role="status" aria-live="polite"></p></section>`;
     details.querySelector('#tv-detail-name').insertAdjacentHTML('afterbegin', `${angelIcon('settings')} `);
     const status = details.querySelector('[role="status"]'); let savePromise = Promise.resolve(); let saveRevision = 0;
     const persist = (latitude, longitude, address = device.address) => {
