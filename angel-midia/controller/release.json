@@ -1,21 +1,21 @@
 {
-  "release": "2026.08.21.1",
-  "publishedAt": "2026-08-21T15:06:48-05:00",
+  "release": "2026.08.21.2",
+  "publishedAt": "2026-08-21T16:15:00-05:00",
   "apps": {
     "admin": {
       "name": "Angel Mídia Admin",
-      "version": "2026.08.21.1",
-      "sizeBytes": 626376,
-      "sha256": "b811c683b9ddc4597fe6ec9fc1611ba434474b87a3d7c78b5d31d1ecd64d9076",
+      "version": "2026.08.21.2",
+      "sizeBytes": 626384,
+      "sha256": "00309cb6a97b0c1904a28973b2bd47308b0551f94203eb0827f4f476a51ad08c",
       "minAndroid": "8.0",
       "path": "./downloads/angel-midia-admin.apk",
       "purpose": "Administrar mídias, playlists, TVs, mapas e programações."
     },
     "tv": {
       "name": "Angel Mídia TV",
-      "version": "2026.08.21.1",
+      "version": "2026.08.21.2",
       "sizeBytes": 655752,
-      "sha256": "f96cbd712de400a7b3764296a901b7f4b3e627d8563a39a1dc7ab2a5d0da5b21",
+      "sha256": "9ac2f30ab0f36cff7ee7716e1acf4b1316318820e89a2ab845b62fd6a0307446",
       "minAndroid": "8.0",
       "path": "./downloads/angel-midia-tv.apk",
       "purpose": "Vincular o stick à TV, baixar a programação e reproduzir offline."

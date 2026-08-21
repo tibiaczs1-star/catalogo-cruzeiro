@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'angel-midia-play-shell';
-const CACHE_NAME = `${CACHE_PREFIX}-20260821-1`;
+const CACHE_NAME = `${CACHE_PREFIX}-20260821-2`;
 const SHELL = [
   './',
   './index.html',
