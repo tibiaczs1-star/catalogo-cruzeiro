@@ -10,13 +10,22 @@ export function renderDeviceMap(root, devices, openDevice) {
   const mapped = devices.filter(hasCoordinates);
   if (!mapped.length) root.innerHTML = '<p>Nenhuma TV com coordenadas.</p>';
   else {
-    const latitudes = mapped.map((device) => Number(device.latitude)); const longitudes = mapped.map((device) => Number(device.longitude));
-    const minLat = Math.min(...latitudes); const maxLat = Math.max(...latitudes); const minLon = Math.min(...longitudes); const maxLon = Math.max(...longitudes);
-    const project = (value, min, max) => min === max ? 50 : 8 + ((value - min) / (max - min)) * 84;
-    root.innerHTML = `<div class="map-plot" data-map-plot role="region" aria-label="Mapa simplificado com ${mapped.length} TVs" style="position:relative;min-height:18rem;overflow:hidden;border:1px solid currentColor;border-radius:.65rem">${mapped.map((device) => {
-      const left = project(Number(device.longitude), minLon, maxLon); const top = 100 - project(Number(device.latitude), minLat, maxLat);
-      return `<button type="button" class="map-marker" data-map-device="${escapeHtml(device.id)}" style="position:absolute;left:${left}%;top:${top}%;transform:translate(-50%,-50%)" aria-label="Abrir TV ${escapeHtml(device.name)}" title="${escapeHtml(device.name)}"><span>${escapeHtml(device.name)}</span></button>`;
-    }).join('')}</div>`;
+    const zoom = 14; const tileCount = 2 ** zoom; const tileSize = 256;
+    const worldPoint = (lat, lon) => {
+      const latitude = Math.max(-85.0511, Math.min(85.0511, Number(lat))) * Math.PI / 180;
+      return { x: ((Number(lon) + 180) / 360) * tileCount * tileSize, y: (0.5 - Math.log((1 + Math.sin(latitude)) / (1 - Math.sin(latitude))) / (4 * Math.PI)) * tileCount * tileSize };
+    };
+    const points = mapped.map((device) => ({ device, ...worldPoint(device.latitude, device.longitude) }));
+    const centerX = points.reduce((sum, point) => sum + point.x, 0) / points.length; const centerY = points.reduce((sum, point) => sum + point.y, 0) / points.length;
+    const startTileX = Math.floor(centerX / tileSize) - 2; const startTileY = Math.floor(centerY / tileSize) - 1;
+    const leftWorld = startTileX * tileSize; const topWorld = startTileY * tileSize; const mapWidth = tileSize * 4; const mapHeight = tileSize * 2;
+    const tiles = Array.from({ length: 8 }, (_, index) => { const x = startTileX + (index % 4); const y = startTileY + Math.floor(index / 4); return `<img data-map-tile loading="lazy" alt="" src="https://tile.openstreetmap.org/${zoom}/${x}/${y}.png">`; }).join('');
+    const positioned = points.map((point, index) => ({ ...point, left: ((point.x - leftWorld) / mapWidth) * 100, top: ((point.y - topWorld) / mapHeight) * 100, index: index + 1 }));
+    const route = positioned.map((point) => `${point.left},${point.top}`).join(' ');
+    root.innerHTML = `<div class="map-plot osm-map" data-map-plot data-map-provider="openstreetmap" role="region" aria-label="Mapa da rede com ${mapped.length} TVs"><div class="osm-tile-grid" aria-hidden="true">${tiles}</div><svg class="map-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline data-map-route points="${route}"></polyline></svg>${positioned.map(({ device, left, top, index }) => {
+      const attention = !device.online || device.status === 'pending' || device.status === 'blocked';
+      return `<button type="button" class="map-marker${attention ? ' is-attention' : ''}" data-map-device="${escapeHtml(device.id)}" style="position:absolute;left:${left}%;top:${top}%;transform:translate(-50%,-50%)" aria-label="Abrir TV ${escapeHtml(device.name)}" title="${escapeHtml(device.name)}"><b><i>${index}</i></b><span>${escapeHtml(device.name)}</span></button>`;
+    }).join('')}<small class="map-attribution">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></small></div>`;
   }
   root.querySelectorAll('[data-map-device]').forEach((button) => button.addEventListener('click', () => openDevice(button.dataset.mapDevice)));
   return { select(id, text) { root.querySelectorAll('[data-map-device]').forEach((button) => button.setAttribute('aria-current', String(button.dataset.mapDevice === id))); root.dataset.selectedCoordinates = text; } };
@@ -46,7 +55,7 @@ export function renderTvs(root, initialDevices, apiClient, { mapAvailable = true
     const valid = hasCoordinates(device); const coords = valid ? `${Number(device.latitude).toFixed(4)}, ${Number(device.longitude).toFixed(4)}` : 'Não informadas';
     marker.textContent = coords; map?.select(device.id, coords);
     const mapsUrl = valid ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${Number(device.latitude)},${Number(device.longitude)}`)}` : '';
-    details.innerHTML = `<section class="tv-details" aria-labelledby="tv-detail-name"><div><p class="eyebrow">Detalhes da TV</p><h2 id="tv-detail-name">${escapeHtml(device.name)}</h2></div><dl><div><dt>Endereço</dt><dd>${escapeHtml(device.address || 'Não informado')}</dd></div><div><dt>Código</dt><dd>${escapeHtml(device.linkCode || '—')}</dd></div><div><dt>Coordenadas</dt><dd>${coords}</dd></div><div><dt>Status</dt><dd>${statusLabel(device)}</dd></div></dl>${valid ? `<a class="google-maps-link" data-open-google-maps href="${mapsUrl}" target="_blank" rel="noopener noreferrer">Abrir localização exata no Google Maps</a>` : ''}<div class="marker-controls"><label>Latitude<input name="latitude" type="number" step="any" value="${valid ? device.latitude : ''}"></label><label>Longitude<input name="longitude" type="number" step="any" value="${valid ? device.longitude : ''}"></label><button type="button" data-move-marker>Ajustar marcador</button></div><label class="location-search">Buscar outro local<input data-location-search type="search" placeholder="Digite pelo menos 3 caracteres"></label><div data-location-results></div>${device.status === 'pending' ? '<button type="button" class="primary" data-approve>Aprovar TV</button>' : ''}<p role="status" aria-live="polite"></p></section>`;
+    details.innerHTML = `<section class="tv-details tv-inspector" aria-labelledby="tv-detail-name"><div><p class="eyebrow">Detalhes da TV</p><h2 id="tv-detail-name">${escapeHtml(device.name)}</h2></div><dl><div><dt>Endereço</dt><dd>${escapeHtml(device.address || 'Não informado')}</dd></div><div><dt>Código</dt><dd>${escapeHtml(device.linkCode || '—')}</dd></div><div><dt>Coordenadas</dt><dd>${coords}</dd></div><div><dt>Status</dt><dd>${statusLabel(device)}</dd></div></dl>${valid ? `<a class="google-maps-link" data-open-google-maps href="${mapsUrl}" target="_blank" rel="noopener noreferrer">Abrir localização exata no Google Maps</a>` : ''}<div class="marker-controls"><label>Latitude<input name="latitude" type="number" step="any" value="${valid ? device.latitude : ''}"></label><label>Longitude<input name="longitude" type="number" step="any" value="${valid ? device.longitude : ''}"></label><button type="button" data-move-marker>Ajustar marcador</button></div><label class="location-search">Buscar outro local<input data-location-search type="search" placeholder="Digite pelo menos 3 caracteres"></label><div data-location-results></div>${device.status === 'pending' ? '<button type="button" class="primary" data-approve>Aprovar TV</button>' : ''}<p role="status" aria-live="polite"></p></section>`;
     details.querySelector('#tv-detail-name').insertAdjacentHTML('afterbegin', `${angelIcon('settings')} `);
     const status = details.querySelector('[role="status"]'); let savePromise = Promise.resolve(); let saveRevision = 0;
     const persist = (latitude, longitude, address = device.address) => {

@@ -2,7 +2,9 @@ const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]
 const text=(v,max=300)=>typeof v==='string'&&v.trim().length<=max?v.trim():null;
 export function validateAdvertiser(body){
   if(!body||typeof body!=='object'||!text(body.name,160))return{ok:false};
-  const value={name:text(body.name,160),contactName:text(body.contactName??'',160),phone:text(body.phone??'',40),email:text(body.email??'',200),notes:text(body.notes??'',1000)};
+  const photoAssetId=body.photoAssetId||null,logoAssetId=body.logoAssetId||null;
+  if((photoAssetId&&!UUID.test(photoAssetId))||(logoAssetId&&!UUID.test(logoAssetId)))return{ok:false};
+  const value={name:text(body.name,160),contactName:text(body.contactName??'',160),phone:text(body.phone??'',40),email:text(body.email??'',200),notes:text(body.notes??'',1000),photoAssetId,logoAssetId};
   if(body.email&&(!value.email||!/^\S+@\S+\.\S+$/.test(value.email)))return{ok:false};
   return{ok:true,value};
 }

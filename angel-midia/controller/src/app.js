@@ -1,5 +1,6 @@
 import { api } from "./api.js";
-import { renderDeviceMap, renderTvs } from "./tvs.js";
+import { renderTvs } from "./tvs.js";
+import { renderOperationsOverview } from "./overview.js";
 import {
   renderLibrary,
   renderPlaylists,
@@ -25,7 +26,7 @@ const NAV = [
   "Aplicativos",
   "Ajuda",
 ];
-const RELEASE = "2026.08.21.2";
+const RELEASE = "2026.08.21.3";
 const HELP_SECTION_TITLE = "Primeiros passos";
 const NAV_ICONS = [
   "dashboard",
@@ -51,6 +52,7 @@ const esc = (v) =>
 const asList = (v, k) =>
   Array.isArray(v) ? v : Array.isArray(v?.[k]) ? v[k] : [];
 function loginView(root, client) {
+  document.body.classList.remove("is-shell-active");
   root.innerHTML = `<main class="login" data-view="login"><section class="login-panel"><div class="logo-mark">AM</div><p class="eyebrow">Angel Mídia Play</p><h1>Comande sua rede.</h1><p class="login-copy">Mídias, playlists, mapas e cada tela sob controle — de qualquer lugar.</p><form class="login-form"><label>Usuário<input name="identifier" autocomplete="username" required value="admin"></label><label>Senha<input name="password" type="password" autocomplete="current-password" required></label><p class="form-error" role="alert" hidden></p><button class="primary">Entrar no painel</button></form><button class="ghost" type="button" data-sound-toggle>${getSoundPreferences().muted ? "Ativar sons" : "Silenciar sons"}</button><div class="app-downloads"><a href="./downloads/angel-midia-admin.apk?v=${RELEASE}" download>↓ APK Admin</a><a href="./downloads/angel-midia-tv.apk?v=${RELEASE}" download>↓ APK TV</a></div><small class="release">Versão ${RELEASE}</small></section><aside class="brand-plane"><span>PLAY</span><div><b>online</b><small>sincronizado</small></div></aside></main>`;
   root.querySelector("[data-sound-toggle]").onclick = (e) => {
     const prefs = toggleUiSounds();
@@ -128,30 +130,22 @@ async function authenticatedView(root, client) {
     return loginView(root, client);
   }
   let data = await loadAll(client);
-  root.innerHTML = `<div class="shell"><aside class="sidebar"><div class="brand"><div class="logo-mark">AM</div><span>Angel Mídia</span><strong>Play</strong></div><nav>${NAV.map((n, i) => `<button data-nav="${i}" aria-current="${i ? "false" : "page"}"><span>${String(i + 1).padStart(2, "0")}</span>${angelIcon(NAV_ICONS[i])}${n}</button>`).join("")}</nav><button class="sidebar-help" data-help>${angelIcon("help")}<span><b>Precisa de ajuda?</b><small>Acesse tutoriais e dúvidas.</small></span></button><div class="account"><span>SUPERADMIN</span><strong>${esc(admin.name || admin.email || "admin")}</strong><small>v${RELEASE}</small><button data-logout>${angelIcon("user")}Sair</button></div></aside><main class="workspace"></main></div>`;
+  document.body.classList.add("is-shell-active");
+  root.innerHTML = `<div class="shell"><aside class="sidebar"><div class="brand"><img src="./assets/angel-midia-logo.png" alt="Angel Mídia"><div><span>Angel Mídia</span><strong>Play</strong></div></div><nav>${NAV.map((n, i) => `<button data-nav="${i}" aria-current="${i ? "false" : "page"}">${angelIcon(NAV_ICONS[i])}<span>${n}</span></button>`).join("")}</nav><button class="sidebar-help" data-help>${angelIcon("help")}<span><b>Precisa de ajuda?</b><small>Tutoriais e respostas rápidas</small></span></button><div class="account"><span class="account-avatar">${esc((admin.name || admin.email || "A").slice(0, 1).toUpperCase())}</span><div><small>SUPERADMIN</small><strong>${esc(admin.name || admin.email || "admin")}</strong><em>v${RELEASE}</em></div><button data-logout aria-label="Sair">${angelIcon("user")}</button></div></aside><main class="workspace"></main></div>`;
   const workspace = root.querySelector(".workspace");
   const refresh = async (index) => {
     data = await loadAll(client);
     show(index);
   };
   function overview() {
-    const devices = asList(data.devices, "devices"),
-      live = asList(data.live, "devices"),
-      media = asList(data.media, "media"),
-      playlists = asList(data.playlists, "playlists"),
-      schedules = asList(data.schedules, "schedules");
-    const online =
-      live.filter((d) => d.online).length ||
-      devices.filter((d) => d.online).length;
-    workspace.innerHTML = `<header class="page-head hero"><div><p class="eyebrow">Central de comando</p><h1>O que você quer<br><em>colocar no ar?</em></h1><p>Siga as etapas abaixo. O painel mostra o próximo passo e mantém toda a rede visível.</p></div><span class="live-dot">sistema online</span></header><section class="dashboard-guide" aria-label="Atividades principais"><button class="action-card" data-jump="2">${angelIcon("image")}<span><b>1. Enviar mídia</b><small>Adicione fotos e vídeos à biblioteca.</small></span><i>Começar →</i></button><button class="action-card" data-jump="3">${angelIcon("playlist")}<span><b>2. Montar playlist</b><small>Defina a ordem, duração e repetição.</small></span><i>Organizar →</i></button><button class="action-card" data-jump="1">${angelIcon("tv")}<span><b>3. Escolher TVs</b><small>Confira aparelhos, grupos e locais.</small></span><i>Ver TVs →</i></button><button class="action-card action-card-primary" data-jump="4">${angelIcon("play")}<span><b>4. Colocar no ar</b><small>Programe a playlist no conjunto certo.</small></span><i>Publicar →</i></button></section><section class="kpi-grid"><article><span>TVs online</span><strong data-count="online">${online}</strong><small>de ${devices.length} cadastradas</small></article><article><span>Biblioteca</span><strong>${media.length}</strong><small>arquivos disponíveis</small></article><article><span>Playlists</span><strong>${playlists.length}</strong><small>sequências prontas</small></article><article><span>Programações</span><strong>${schedules.length}</strong><small>regras publicadas</small></article></section><section class="glass overview-map"><header><div><p class="eyebrow">Rede em campo</p><h2>Mapa geral das TVs</h2></div><button class="ghost" data-jump="1">Abrir mapa completo →</button></header><div data-overview-map></div></section>`;
-    renderDeviceMap(
-      workspace.querySelector("[data-overview-map]"),
-      devices,
-      () => show(1),
-    );
-    workspace
-      .querySelectorAll("[data-jump]")
-      .forEach((b) => (b.onclick = () => show(Number(b.dataset.jump))));
+    renderOperationsOverview(workspace, {
+      devices: asList(data.devices, "devices"),
+      live: asList(data.live, "devices"),
+      media: asList(data.media, "media"),
+      playlists: asList(data.playlists, "playlists"),
+      schedules: asList(data.schedules, "schedules"),
+      advertisers: asList(data.advertisers, "advertisers"),
+    }, show);
   }
   function help() {
     workspace.innerHTML = `<section data-view="help" class="help-center"><header class="page-head"><div><p class="eyebrow">Suporte Angel Mídia</p><h1>Central de Ajuda</h1><p>Do primeiro aparelho à comprovação de exibições, tudo explicado sem linguagem técnica.</p></div></header><section class="help-steps"><article><b>01</b>${angelIcon("tv")}<h2>Cadastre a TV</h2><p>Abra o APK TV, informe nome e local. O aparelho aparece no Mapa das TVs.</p></article><article><b>02</b>${angelIcon("image")}<h2>Envie as mídias</h2><p>Na Biblioteca, envie imagens ou vídeos e confira a prévia completa.</p></article><article><b>03</b>${angelIcon("playlist")}<h2>Monte a playlist</h2><p>Adicione, repita e ordene conteúdos. Ajuste duração, corte, volume e enquadramento.</p></article><article><b>04</b>${angelIcon("play")}<h2>Coloque no ar</h2><p>Vincule a playlist a um conjunto de TVs. No modo contínuo, o último item volta ao primeiro.</p></article></section><section class="help-docs"><article><h2>${angelIcon("apk")} APK Administrador</h2><ul><li>Use no celular para administrar TVs, mídias, empresas e relatórios.</li><li>Instale atualizações sobre o aplicativo atual para preservar o acesso.</li><li>A senha nunca aparece nos relatórios ou nas telas das TVs.</li></ul></article><article><h2>${angelIcon("tv")} APK TV</h2><ul><li>Instale no stick/TV e faça o cadastro inicial do local.</li><li>Mantenha atualizações automáticas ativadas.</li><li>O conteúdo baixa para o cache e continua tocando durante oscilações de internet.</li></ul></article></section><section class="help-faq"><h2>Dúvidas frequentes</h2><details open><summary>A playlist volta ao primeiro conteúdo?</summary><p>Sim. Programações contínuas repetem toda a sequência sem parar.</p></details><details><summary>A TV ficou offline. O que verificar?</summary><p>Confira internet, energia e se o APK TV está aberto. O painel registra a última conexão.</p></details><details><summary>Como interromper todas as TVs?</summary><p>Use Relâmpago para publicar uma mídia emergencial em toda a rede, com prioridade imediata.</p></details><details><summary>Onde vejo a comprovação?</summary><p>Relatórios mostram TV, local, mídia, quantidade de exibições e segundos reproduzidos.</p></details></section></section>`;
@@ -236,6 +230,7 @@ async function authenticatedView(root, client) {
     try {
       await client("/auth/logout", { method: "POST" });
     } finally {
+      document.body.classList.remove("is-shell-active");
       loginView(root, client);
     }
   };

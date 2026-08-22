@@ -22,7 +22,7 @@ it('expõe todas as áreas operacionais do Angel Mídia Play', async () => {
     throw new Error(path);
   });
   await createApp({ root: document.querySelector('#app'), apiClient });
-  expect([...document.querySelectorAll('[data-nav]')].map((n) => n.textContent.trim().slice(2))).toEqual([
+  expect([...document.querySelectorAll('[data-nav]')].map((n) => n.querySelector(':scope > span')?.textContent.trim())).toEqual([
     'Visão geral', 'Mapa das TVs', 'Biblioteca', 'Playlists', 'Programação', 'Ao vivo', 'Relatórios', 'Empresas', 'Relâmpago', 'Aplicativos', 'Ajuda',
   ]);
   for (const button of document.querySelectorAll('[data-nav], button')) {

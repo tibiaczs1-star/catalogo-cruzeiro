@@ -114,6 +114,19 @@ describe('gestão lean de TVs', () => {
     expect(openDevice).toHaveBeenCalledWith('tv-2');
   });
 
+  it('usa mapa OpenStreetMap, rota e estado de atenção para três TVs', () => {
+    renderDeviceMap(document.querySelector('#tvs'), [
+      { ...pending },
+      { id: 'tv-2', name: 'Recepção', latitude: -7.628, longitude: -72.672, status: 'active', online: true },
+      { id: 'tv-3', name: 'Salão', latitude: -7.635, longitude: -72.665, status: 'active', online: false },
+    ], vi.fn());
+    expect(document.querySelector('[data-map-provider="openstreetmap"]')).not.toBeNull();
+    expect(document.querySelectorAll('[data-map-tile]').length).toBeGreaterThan(0);
+    expect(document.querySelector('[data-map-route]')).not.toBeNull();
+    expect(document.querySelectorAll('[data-map-device]')).toHaveLength(3);
+    expect(document.querySelector('[data-map-device="tv-3"]').classList.contains('is-attention')).toBe(true);
+  });
+
   it('serializa ajustes concorrentes e mantém a localização mais recente', async () => {
     const releases = [];
     const apiClient = vi.fn((_path, options) => new Promise((resolve) => releases.push(() => resolve(options.body))));

@@ -4,7 +4,10 @@ import { validateAdvertiser, validateMonth, summarizeFinancial } from '../src/se
 import { validateEmergency } from '../src/routes/emergency.js';
 
 test('validates advertiser and monthly commercial record without charging', () => {
-  assert.equal(validateAdvertiser({ name: 'Mercado Central', contactName: 'Ana', phone: '68999999999', email: 'ana@mercado.test', notes: '' }).ok, true);
+  const advertiser=validateAdvertiser({ name: 'Mercado Central', contactName: 'Ana', phone: '68999999999', email: 'ana@mercado.test', notes: '', photoAssetId:'11111111-1111-4111-8111-111111111111', logoAssetId:'22222222-2222-4222-8222-222222222222' });
+  assert.equal(advertiser.ok, true);
+  assert.equal(advertiser.value.photoAssetId, '11111111-1111-4111-8111-111111111111');
+  assert.equal(validateAdvertiser({ name: 'Mercado Central', photoAssetId: 'arquivo-invalido' }).ok, false);
   assert.equal(validateAdvertiser({ name: '' }).ok, false);
   assert.equal(validateMonth({ competence: '2026-08', monthlyAmount: 1500, status: 'paid', notes: 'Pago por Pix' }).value.amountCents, 150000);
   assert.equal(validateMonth({ competence: '08/2026', monthlyAmount: 10, status: 'paid', notes: '' }).ok, false);
