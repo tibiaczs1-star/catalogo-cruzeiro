@@ -2,20 +2,10 @@
   const API = "/api/arizona-ranch";
   const COUVERT_ARTISTICO_LABEL = "Couvert artístico: R$ 7,00";
   const CONTRACT_WHATSAPP_NUMBER = "556892260598";
-  const YOUTUBE_MUSIC_VIDEO_ID = "CxKRaR6kFYs";
-  const OPENING_MUSIC_PRESENTATION_VOLUME = 18;
-  const RESERVATION_MUSIC_VOLUME = 38;
   const OPENING_PRESENTATION_MAX_MS = 16500;
   const OPENING_MUSIC_READY_TIMEOUT_MS = 4200;
   const OPENING_VOICE_TEXT = "Bem-vindo à reserva de mesas do Arizona Ranch. Dia cinco de setembro, a porteira se abre para a inauguração oficial, com a voz de Luzienne Lucena. Escolha sua mesa, faça seu Pix e envie o comprovante. Arizona Ranch: sua noite começa aqui.";
-  let openingMusicPlayer = null;
-  let openingMusicReady = null;
-  let openingMusicError = null;
-  let openingMusicResolve = null;
-  let openingMusicReject = null;
-  let openingMusicStartedResolve = null;
-  let openingMusicIsReady = false;
-  let openingMusicLoadTimedOut = false;
+  let soundscape = null;
   const PIX_PAYMENT_OPTIONS = {
     10000: {
       amountLabel: "R$ 100,00",
@@ -103,121 +93,6 @@
     return `https://wa.me/${CONTRACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(buildProofMessage(reservation))}`;
   }
   function wait(ms) { return new Promise((resolve) => window.setTimeout(resolve, ms)); }
-  function setOpeningMusicVolume(volume) { if (!openingMusicPlayer?.setVolume) return; const safeVolume = Math.max(0, Math.min(100, volume)); openingMusicPlayer.setVolume(safeVolume); }
-  function ensureOpeningMusicPlayer() {
-    if (!document.querySelector("#opening-player")) {
-      openingMusicIsReady = false;
-      return Promise.reject(new Error("Player de música não encontrado."));
-    }
-    if (openingMusicPlayer) return openingMusicReady;
-    openingMusicReady = new Promise((resolve, reject) => {
-      openingMusicResolve = resolve;
-      openingMusicReject = reject;
-    });
-    const createPlayer = () => {
-      if (openingMusicPlayer || !window.YT?.Player) return;
-      openingMusicPlayer = new window.YT.Player("opening-player", {
-        height: "90",
-        width: "160",
-        videoId: YOUTUBE_MUSIC_VIDEO_ID,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          loop: 1,
-          modestbranding: 1,
-          origin: window.location.origin,
-          playlist: YOUTUBE_MUSIC_VIDEO_ID,
-          playsinline: 1,
-          rel: 0,
-        },
-        events: {
-          onReady: (event) => {
-            event.target.setVolume(OPENING_MUSIC_PRESENTATION_VOLUME);
-            event.target.cueVideoById(YOUTUBE_MUSIC_VIDEO_ID);
-            event.target.getIframe?.()?.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
-            openingMusicIsReady = true;
-            openingMusicResolve?.(event.target);
-          },
-          onStateChange: (event) => {
-            const state = window.YT?.PlayerState;
-            if (!state) return;
-            if (event.data === state.PLAYING || event.data === state.BUFFERING) {
-              openingMusicStartedResolve?.();
-              openingMusicStartedResolve = null;
-            }
-          },
-          onError: () => {
-            openingMusicIsReady = false;
-            openingMusicError = new Error("A trilha do YouTube não carregou.");
-            openingMusicReject?.(openingMusicError);
-          },
-        },
-      });
-    };
-    if (window.YT?.Player) createPlayer();
-    else {
-      const previousYouTubeReady = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
-        if (typeof previousYouTubeReady === "function") previousYouTubeReady();
-        createPlayer();
-      };
-    }
-    return openingMusicReady;
-  }
-  async function startOpeningMusic() {
-    if (openingMusicError) throw openingMusicError;
-    if (!openingMusicIsReady || !openingMusicPlayer) throw new Error("A trilha ainda não terminou de carregar.");
-    const player = openingMusicPlayer;
-    openingMusicStartedResolve = null;
-    player.unMute?.();
-    setOpeningMusicVolume(OPENING_MUSIC_PRESENTATION_VOLUME);
-    player.playVideo?.();
-    const stateNow = typeof player.getPlayerState === "function" ? player.getPlayerState() : null;
-    if (window.YT?.PlayerState && stateNow !== window.YT.PlayerState.PLAYING && stateNow !== window.YT.PlayerState.BUFFERING) {
-      await Promise.race([
-        new Promise((resolve) => { openingMusicStartedResolve = resolve; }),
-        wait(6000).then(() => { throw new Error("A música não iniciou."); }),
-      ]);
-    }
-  }
-  function playBrowserVoice() {
-    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return Promise.resolve();
-    return new Promise((resolve) => {
-      const utterance = new SpeechSynthesisUtterance(OPENING_VOICE_TEXT);
-      utterance.lang = "pt-BR";
-      utterance.rate = 0.88;
-      utterance.pitch = 0.72;
-      utterance.volume = 1;
-      utterance.onend = resolve;
-      utterance.onerror = resolve;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(utterance);
-    });
-  }
-  function playOpeningVoice(openingVoice) {
-    if (!openingVoice) return playBrowserVoice();
-    openingVoice.currentTime = 0;
-    openingVoice.volume = 1;
-    return new Promise((resolve) => {
-      const cleanup = () => {
-        openingVoice.removeEventListener("ended", onDone);
-        openingVoice.removeEventListener("error", onError);
-        window.clearTimeout(timeout);
-      };
-      const onDone = () => {
-        cleanup();
-        resolve();
-      };
-      const onError = () => {
-        cleanup();
-        playBrowserVoice().then(resolve);
-      };
-      const timeout = window.setTimeout(onDone, 22000);
-      openingVoice.addEventListener("ended", onDone, { once: true });
-      openingVoice.addEventListener("error", onError, { once: true });
-      openingVoice.play().catch(onError);
-    });
-  }
   function updateWhatsAppProofLink(reservation = state.reservation) {
     const link = document.querySelector("#whatsapp-proof");
     if (link) link.href = buildProofWhatsAppUrl(reservation);
@@ -244,7 +119,6 @@
     document.querySelectorAll("[data-flow-step]").forEach((section) => { section.hidden = section.dataset.flowStep !== step; });
     document.querySelectorAll("[data-flow-nav]").forEach((item) => { item.classList.toggle("is-active", item.dataset.flowNav === step); item.classList.toggle("is-complete", flow.indexOf(item.dataset.flowNav) < flow.indexOf(step)); });
     if (step === "payment") renderPaymentStep();
-    if (step === "table") setOpeningMusicVolume(RESERVATION_MUSIC_VOLUME);
     if (scroll) document.querySelector(`[data-flow-step="${step}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -353,35 +227,9 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingButton = document.querySelector("#start-experience");
     const openingVideo = document.querySelector("#opening-video");
     const openingVoice = document.querySelector("#opening-voice");
-    if (openingVideo) {
-      openingVideo.muted = true;
-      openingVideo.volume = 0;
-      openingVideo.load();
-      openingVideo.pause();
-      openingVideo.currentTime = 0;
-    }
+    if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona"; }
+    if (openingVideo) { openingVideo.muted = true; openingVideo.volume = 0; openingVideo.load(); }
     if (openingVoice) openingVoice.load();
-    const progress = document.querySelector("#opening-progress");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Preparando a entrada…"; }
-    if (progress) progress.style.width = "72%";
-    const releaseStart = () => {
-      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona"; }
-      if (progress) progress.style.width = "100%";
-    };
-    const fallbackTimer = window.setTimeout(() => {
-      openingMusicLoadTimedOut = true;
-      releaseStart();
-    }, OPENING_MUSIC_READY_TIMEOUT_MS);
-    ensureOpeningMusicPlayer()
-      .then(() => {
-        window.clearTimeout(fallbackTimer);
-        releaseStart();
-      })
-      .catch(() => {
-        window.clearTimeout(fallbackTimer);
-        openingMusicLoadTimedOut = true;
-        releaseStart();
-      });
   }
   function setupGallery() {
     const dialog = document.querySelector("#gallery-dialog");
@@ -461,98 +309,27 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     window.addEventListener("scroll", () => { if (!ticking) { ticking = true; window.requestAnimationFrame(render); } }, { passive: true });
     render();
   }
-  function setupRanchSound() {
-    let context;
-    let ambience;
-    let ambienceGain;
-    let cowTimer;
-    let started = false;
-    const createNoise = (seconds) => {
-      const buffer = context.createBuffer(1, context.sampleRate * seconds, context.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < data.length; i += 1) data[i] = Math.random() * 2 - 1;
-      return buffer;
-    };
-    const playWesternCue = () => {
-      const source = context.createBufferSource();
-      const gain = context.createGain();
-      const filter = context.createBiquadFilter();
-      source.buffer = createNoise(.22); filter.type = "highpass"; filter.frequency.value = 520;
-      gain.gain.setValueAtTime(.17, context.currentTime); gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .22);
-      source.connect(filter).connect(gain).connect(context.destination); source.start();
-    };
-    const playHoofbeats = () => {
-      [0, .19, .43, .62].forEach((delay, index) => {
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
-        oscillator.type = "triangle";
-        oscillator.frequency.setValueAtTime(index % 2 ? 82 : 96, context.currentTime + delay);
-        gain.gain.setValueAtTime(.001, context.currentTime + delay);
-        gain.gain.linearRampToValueAtTime(.045, context.currentTime + delay + .018);
-        gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + delay + .12);
-        oscillator.connect(gain).connect(context.destination);
-        oscillator.start(context.currentTime + delay); oscillator.stop(context.currentTime + delay + .13);
-      });
-    };
-    const playDistantMoo = () => {
-      if (!context || context.state !== "running") return;
-      const oscillator = context.createOscillator();
-      const gain = context.createGain();
-      const filter = context.createBiquadFilter();
-      oscillator.type = "sawtooth"; oscillator.frequency.setValueAtTime(112, context.currentTime); oscillator.frequency.exponentialRampToValueAtTime(78, context.currentTime + 1.45);
-      filter.type = "lowpass"; filter.frequency.value = 420;
-      gain.gain.setValueAtTime(.001, context.currentTime); gain.gain.linearRampToValueAtTime(.025, context.currentTime + .32); gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + 1.7);
-      oscillator.connect(filter).connect(gain).connect(context.destination); oscillator.start(); oscillator.stop(context.currentTime + 1.75);
-    };
-    const start = async () => {
-      if (started) return;
-      started = true;
-      context ||= new (window.AudioContext || window.webkitAudioContext)(); await context.resume();
-      ambience = context.createBufferSource(); ambienceGain = context.createGain(); const filter = context.createBiquadFilter();
-      ambience.buffer = createNoise(8); ambience.loop = true; ambienceGain.gain.value = .018; filter.type = "lowpass"; filter.frequency.value = 950;
-      ambience.connect(filter).connect(ambienceGain).connect(context.destination); ambience.start(); playWesternCue(); playHoofbeats(); window.setTimeout(playDistantMoo, 1200); cowTimer = window.setInterval(playDistantMoo, 14000);
-    };
-    window.startRanchAmbience = start;
-  }
   async function startExperience() {
     const openingButton = document.querySelector("#start-experience");
     const openingVideo = document.querySelector("#opening-video");
     const openingVoice = document.querySelector("#opening-voice");
     const openingScreen = document.getElementById("opening-screen");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Apresentando o Arizona Ranch…"; }
-    try {
-      window.startRanchAmbience?.();
-      openingScreen?.classList.add("is-live");
-      if (openingVideo) {
-        openingVideo.muted = false;
-        openingVideo.volume = .52;
-        openingVideo.playsInline = true;
-        const videoPlay = openingVideo.play();
-        videoPlay.catch((error) => {
-          console.info("Vídeo de abertura seguindo sem bloquear a reserva.", error);
-        });
-        await Promise.race([videoPlay, wait(850)]).catch(() => {});
-      }
-      await Promise.race([
-        playOpeningVoice(openingVoice),
-        wait(OPENING_PRESENTATION_MAX_MS),
-      ]);
-    } catch {
-      showToast("A apresentação não iniciou completa, mas a reserva foi liberada.", "error");
+    openingScreen?.classList.add("is-live");
+    document.body.classList.remove("is-opening");
+    if (openingButton) openingButton.disabled = true;
+    if (openingVideo) {
+      openingVideo.muted = false;
+      openingVideo.volume = .52;
+      const videoPlay = openingVideo.play();
+      await Promise.race([videoPlay, wait(850)]).catch(() => {});
     }
-    if (openingButton) openingButton.textContent = "Iniciando trilha…";
-    try {
-      await startOpeningMusic();
-    } catch (error) {
-      openingMusicLoadTimedOut = true;
-      if (!openingMusicIsReady && !openingMusicError) {
-        console.info("Abertura seguindo sem bloquear pela trilha externa.", error);
-      }
-    }
+    const createSoundscape = window.ArizonaSoundscape?.createSoundscape;
+    soundscape ||= createSoundscape?.({ voice: openingVoice });
+    if (soundscape) soundscape.start().catch(() => {});
     window.setTimeout(() => {
-      openingScreen?.classList.add("is-complete");
-      document.body.classList.remove("is-opening");
-    }, 240);
+      openingScreen?.classList.add("is-leaving");
+      window.setTimeout(() => openingScreen?.remove(), 900);
+    }, OPENING_PRESENTATION_MAX_MS);
   }
   function bindEvents() {
     document.addEventListener("click", (event) => {
@@ -563,6 +340,6 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
     elements.loginNext.addEventListener("click", () => showFlowStep("payment")); elements.tableNext.addEventListener("click", () => showFlowStep(state.config?.user?.signedIn ? "payment" : "login"));
     document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
-  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupGallery(); setupEventCountdown(); setupCinematicScroll(); setupRanchSound(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
+  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupEventCountdown(); setupCinematicScroll(); setupOpening(); window.requestAnimationFrame(() => window.ArizonaCinematic?.createCinematic().catch(() => {})); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();
