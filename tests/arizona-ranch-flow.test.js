@@ -79,10 +79,11 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(app, /openingVideo\.play\(\)/);
   assert.match(app, /await Promise\.race\(\[\s*playOpeningVoice\(openingVoice\),\s*wait\(OPENING_PRESENTATION_MAX_MS\),\s*\]\)/);
   const startExperienceBody = app.match(/async function startExperience\(\) \{([\s\S]*?)\n  function bindEvents/)?.[1] || "";
-  const videoPlayIndex = startExperienceBody.indexOf("await openingVideo.play()");
-  const voicePlayIndex = startExperienceBody.indexOf("await Promise.race([\n        playOpeningVoice(openingVoice)");
+  const videoPlayIndex = startExperienceBody.indexOf("const videoPlay = openingVideo.play()");
+  const voicePlayIndex = startExperienceBody.indexOf("playOpeningVoice(openingVoice)");
   const musicPlayIndex = startExperienceBody.indexOf("await startOpeningMusic()");
   assert.ok(videoPlayIndex > -1);
+  assert.ok(startExperienceBody.includes("await Promise.race([videoPlay, wait(850)]).catch(() => {})"));
   assert.ok(voicePlayIndex > -1);
   assert.ok(musicPlayIndex > -1);
   assert.ok(videoPlayIndex < voicePlayIndex);
