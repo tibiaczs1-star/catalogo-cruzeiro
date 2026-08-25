@@ -29,13 +29,22 @@ test("a linguagem de venda reforça Arizona Ranch como bar pub western", () => {
   assert.match(html, /O portão vai abrir/i);
 });
 
-test("a galeria combina imagens realistas e símbolos western com lightbox acessível", () => {
+test("separa imagens criadas, elementos de layout e fotos originais em galerias próprias", () => {
   const html = read("pagamentos", "reservaranch", "index.html");
   const app = read("pagamentos", "reservaranch", "app.js");
 
   const galleryImages = [...html.matchAll(/class=["'][^"']*gallery-image[^"']*["'][^>]*src=["']([^"']+\.(?:webp|png))["']/g)];
-  assert.ok(galleryImages.length >= 8, "a galeria precisa de pelo menos 8 imagens editoriais");
-  assert.match(html, /assets\/ai\/kit-western\.png/);
+  assert.ok(galleryImages.length >= 8, "as duas galerias precisam manter pelo menos 8 imagens editoriais");
+  const generatedGallery = html.match(/<div class="editorial-gallery generated-gallery"[\s\S]*?<\/div>/)?.[0] || "";
+  const originalGallery = html.match(/<div class="editorial-gallery original-gallery"[\s\S]*?<\/div>/)?.[0] || "";
+  assert.match(generatedGallery, /assets\/ai\/palco-noite\.png/);
+  assert.match(generatedGallery, /assets\/ai\/brinde-noite\.png/);
+  assert.match(generatedGallery, /assets\/ai\/hero-porteira\.png/);
+  assert.doesNotMatch(generatedGallery, /assets\/gallery\//);
+  assert.doesNotMatch(generatedGallery, /kit-western\.png/);
+  assert.match(originalGallery, /assets\/gallery\/marca-arizona\.webp/);
+  assert.doesNotMatch(originalGallery, /assets\/ai\//);
+  assert.match(html, /<aside class="western-kit"[\s\S]*assets\/ai\/kit-western\.png/);
   assert.match(html, /id=["']gallery-dialog["'][^>]*aria-label=/);
   assert.match(html, /id=["']gallery-dialog-image["'][^>]*alt=/);
   assert.match(app, /setupGallery/);
