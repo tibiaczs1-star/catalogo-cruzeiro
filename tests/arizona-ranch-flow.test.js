@@ -7,12 +7,18 @@ const projectRoot = path.resolve(__dirname, "..");
 const readProjectFile = (...segments) =>
   fs.readFileSync(path.join(projectRoot, ...segments), "utf8");
 
-test("a reserva conduz a pessoa por login, dados, mesa, WhatsApp e pagamento", () => {
+test("a reserva apresenta o mapa antes do Google e segue direto ao pagamento", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
-  ["login", "details", "table", "whatsapp", "payment"].forEach((step) => {
+  ["table", "login", "payment"].forEach((step) => {
     assert.match(html, new RegExp(`data-flow-step=["']${step}["']`));
   });
+  assert.doesNotMatch(html, /data-flow-step=["']details["']/);
+  assert.doesNotMatch(html, /data-flow-step=["']whatsapp["']/);
+  assert.match(app, /const flow = \["table", "login", "payment"\]/);
+  assert.match(html, /data-flow-step=["']table["'][^>]*>/);
+  assert.match(html, /data-flow-step=["']login["'][^>]*hidden/);
 
   assert.match(html, /id=["']payment-pix["']/);
   assert.match(html, /id=["']payment-card["']/);
@@ -162,19 +168,20 @@ test("o mapa exibe somente mesa livre ou comprada", () => {
   assert.doesNotMatch(app, new RegExp(["Em", "andamento"].join(" ")));
 });
 
-test("identificação permite corrigir dados e mantém o Google simples", () => {
+test("Google identifica o comprador apenas quando ele avança para pagar", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
-  assert.doesNotMatch(html, /id=["']details-name["'][^>]*\breadonly\b/i);
-  assert.doesNotMatch(html, /id=["']details-email["'][^>]*\breadonly\b/i);
+  assert.doesNotMatch(html, /id=["']details-name["']/i);
+  assert.doesNotMatch(html, /id=["']details-email["']/i);
+  assert.doesNotMatch(html, /id=["']contact-phone["']/i);
   assert.match(html, /Conecte com Google/i);
   assert.match(app, /elements\.accountTitle\.textContent = "Conectar com Google";/);
   assert.doesNotMatch(app, /Conectado como/);
   const googleAuth = app.match(/async function handleGoogleCredential\(response\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   assert.doesNotMatch(googleAuth, /showToast\(error\.message, "error"\)/);
   assert.match(googleAuth, /showToast\("Não foi possível conectar com Google agora\. Tente novamente\.", "error"\)/);
-  assert.match(app, /customer: \{ name: state\.customer\.name, email: state\.customer\.email \}/);
+  assert.match(app, /customer: \{ name: user\.name, email: user\.email \}/);
 });
 
 test("o painel usa sessão própria de administrador sem login Google", () => {
