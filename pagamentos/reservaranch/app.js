@@ -389,15 +389,21 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const caption = document.querySelector("#gallery-dialog-caption");
     const cards = Array.from(document.querySelectorAll(".gallery-card"));
     if (!dialog || !image || !cards.length) return;
+    let activeCards = cards;
     let currentIndex = 0;
     const showImage = (index) => {
-      currentIndex = (index + cards.length) % cards.length;
-      const source = cards[currentIndex].querySelector("img");
+      currentIndex = (index + activeCards.length) % activeCards.length;
+      const source = activeCards[currentIndex].querySelector("img");
       image.src = source.src;
       image.alt = source.alt;
-      if (caption) caption.textContent = cards[currentIndex].getAttribute("aria-label") || source.alt;
+      if (caption) caption.textContent = activeCards[currentIndex].querySelector("span")?.textContent || source.alt;
     };
-    cards.forEach((card, index) => card.addEventListener("click", () => { showImage(index); dialog.showModal(); }));
+    cards.forEach((card) => card.addEventListener("click", () => {
+      const gallery = card.closest(".editorial-gallery");
+      activeCards = Array.from(gallery?.querySelectorAll(".gallery-card") || [card]);
+      showImage(activeCards.indexOf(card));
+      dialog.showModal();
+    }));
     dialog.querySelector("[data-close-gallery]")?.addEventListener("click", () => dialog.close());
     dialog.querySelector("[data-gallery-prev]")?.addEventListener("click", () => showImage(currentIndex - 1));
     dialog.querySelector("[data-gallery-next]")?.addEventListener("click", () => showImage(currentIndex + 1));
@@ -407,6 +413,53 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       if (event.key === "ArrowLeft") showImage(currentIndex - 1);
       if (event.key === "ArrowRight") showImage(currentIndex + 1);
     });
+  }
+  function setupEventCountdown() {
+    const countdown = document.querySelector(".event-countdown");
+    if (!countdown) return;
+    const eventDate = new Date(countdown.dataset.eventDate).getTime();
+    const fields = {
+      days: countdown.querySelector("[data-countdown-days]"),
+      hours: countdown.querySelector("[data-countdown-hours]"),
+      minutes: countdown.querySelector("[data-countdown-minutes]"),
+    };
+    const update = () => {
+      const remaining = Math.max(0, eventDate - Date.now());
+      const totalMinutes = Math.floor(remaining / 60000);
+      fields.days.textContent = String(Math.floor(totalMinutes / 1440)).padStart(2, "0");
+      fields.hours.textContent = String(Math.floor((totalMinutes % 1440) / 60)).padStart(2, "0");
+      fields.minutes.textContent = String(totalMinutes % 60).padStart(2, "0");
+      countdown.classList.toggle("is-today", remaining === 0);
+    };
+    update();
+    window.setInterval(update, 30000);
+  }
+  function setupCinematicScroll() {
+    const progress = document.querySelector("#trail-progress");
+    const heroImage = document.querySelector(".sales-hero-image");
+    const kitImage = document.querySelector(".western-kit img");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scenes = document.querySelectorAll(".story-section,.ranch-moment,.gallery-section,.offer-section,.how-section,.faq-section,#mapa-de-mesas,.western-kit,.event-countdown");
+    scenes.forEach((scene) => scene.classList.add("reveal-scene"));
+    if ("IntersectionObserver" in window && !reducedMotion) {
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
+      }), { threshold: .12, rootMargin: "0px 0px -6%" });
+      scenes.forEach((scene) => observer.observe(scene));
+    } else scenes.forEach((scene) => scene.classList.add("is-visible"));
+    let ticking = false;
+    const render = () => {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      if (progress) progress.style.transform = `scaleX(${Math.min(1, window.scrollY / maxScroll)})`;
+      if (!reducedMotion) {
+        const offset = Math.min(42, window.scrollY * .045);
+        if (heroImage) heroImage.style.transform = `scale(1.035) translate3d(0,${offset}px,0)`;
+        if (kitImage) kitImage.style.setProperty("--kit-drift", `${Math.max(-18, 18 - window.scrollY * .012)}px`);
+      }
+      ticking = false;
+    };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; window.requestAnimationFrame(render); } }, { passive: true });
+    render();
   }
   function setupRanchSound() {
     const button = document.querySelector("#sound-toggle");
@@ -429,6 +482,19 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       gain.gain.setValueAtTime(.17, context.currentTime); gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .22);
       source.connect(filter).connect(gain).connect(context.destination); source.start();
     };
+    const playHoofbeats = () => {
+      [0, .19, .43, .62].forEach((delay, index) => {
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = "triangle";
+        oscillator.frequency.setValueAtTime(index % 2 ? 82 : 96, context.currentTime + delay);
+        gain.gain.setValueAtTime(.001, context.currentTime + delay);
+        gain.gain.linearRampToValueAtTime(.045, context.currentTime + delay + .018);
+        gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + delay + .12);
+        oscillator.connect(gain).connect(context.destination);
+        oscillator.start(context.currentTime + delay); oscillator.stop(context.currentTime + delay + .13);
+      });
+    };
     const playDistantMoo = () => {
       if (!context || context.state !== "running") return;
       const oscillator = context.createOscillator();
@@ -443,7 +509,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       context ||= new (window.AudioContext || window.webkitAudioContext)(); await context.resume();
       ambience = context.createBufferSource(); ambienceGain = context.createGain(); const filter = context.createBiquadFilter();
       ambience.buffer = createNoise(8); ambience.loop = true; ambienceGain.gain.value = .018; filter.type = "lowpass"; filter.frequency.value = 950;
-      ambience.connect(filter).connect(ambienceGain).connect(context.destination); ambience.start(); playWesternCue(); window.setTimeout(playDistantMoo, 1200); cowTimer = window.setInterval(playDistantMoo, 14000);
+      ambience.connect(filter).connect(ambienceGain).connect(context.destination); ambience.start(); playWesternCue(); playHoofbeats(); window.setTimeout(playDistantMoo, 1200); cowTimer = window.setInterval(playDistantMoo, 14000);
       button.setAttribute("aria-pressed", "true"); button.querySelector("b").textContent = "Clima do rancho ligado";
     };
     const stop = () => { try { ambience?.stop(); } catch {} clearInterval(cowTimer); context?.suspend(); button.setAttribute("aria-pressed", "false"); button.querySelector("b").textContent = "Ligar clima do rancho"; };
@@ -497,6 +563,6 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
     elements.loginNext.addEventListener("click", () => showFlowStep("payment")); elements.tableNext.addEventListener("click", () => showFlowStep(state.config?.user?.signedIn ? "payment" : "login"));
     document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
-  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupGallery(); setupRanchSound(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
+  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupGallery(); setupEventCountdown(); setupCinematicScroll(); setupRanchSound(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();

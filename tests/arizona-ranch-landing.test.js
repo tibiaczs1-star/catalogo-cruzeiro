@@ -62,3 +62,28 @@ test("a página inclui metadados sociais, FAQ e CTA móvel", () => {
   assert.match(html, /<details[^>]*class=["'][^"']*faq-item/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
 });
+
+test("a experiência de retenção mantém o visitante orientado para a compra", () => {
+  const html = read("pagamentos", "reservaranch", "index.html");
+  const app = read("pagamentos", "reservaranch", "app.js");
+  const css = read("pagamentos", "reservaranch", "arizona.css");
+
+  assert.match(html, /id=["']trail-progress["']/);
+  assert.match(html, /class=["'][^"']*event-countdown/);
+  assert.match(html, /data-event-date=["']2026-09-05T20:00:00-05:00["']/);
+  assert.match(html, /Aqui a noite começa antes do primeiro acorde/i);
+  assert.match(html, /Som ambiente opcional/i);
+  assert.match(app, /setupEventCountdown/);
+  assert.match(app, /setupCinematicScroll/);
+  assert.match(app, /requestAnimationFrame/);
+  assert.match(css, /\.trail-progress/);
+  assert.match(css, /\.ranch-moment/);
+});
+
+test("o modal navega somente dentro da galeria escolhida", () => {
+  const app = read("pagamentos", "reservaranch", "app.js");
+
+  assert.match(app, /closest\("\.editorial-gallery"\)/);
+  assert.match(app, /activeCards/);
+  assert.doesNotMatch(app, /currentIndex = \(index \+ cards\.length\) % cards\.length/);
+});
