@@ -31,7 +31,7 @@ const NAV = [
   "Aplicativos",
   "Ajuda",
 ];
-const RELEASE = "2026.08.25.8";
+const RELEASE = "2026.08.25.9";
 const HELP_SECTION_TITLE = "Primeiros passos";
 const NAV_ICONS = [
   "dashboard",
