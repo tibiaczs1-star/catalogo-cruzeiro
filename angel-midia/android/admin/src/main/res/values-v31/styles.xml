@@ -1,0 +1,7 @@
+<resources>
+    <style name="LaunchTheme" parent="@style/AppTheme">
+        <item name="android:windowSplashScreenBackground">@color/angel_blue</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_angel_mark</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
+    </style>
+</resources>

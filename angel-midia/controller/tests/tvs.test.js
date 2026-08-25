@@ -47,6 +47,16 @@ describe('gestão lean de TVs', () => {
     expect(document.querySelector('[data-device-id]').dataset.deviceId).toBe('tv-2');
   });
 
+  it('abre diretamente a TV escolhida na Central de operações', () => {
+    renderTvs(document.querySelector('#tvs'), [
+      { ...pending },
+      { id: 'tv-2', name: 'TV Farmácia', address: 'Centro', linkCode: 'AMP-FARMA', status: 'active', online: true },
+    ], vi.fn(), { selectedDeviceId: 'tv-2' });
+
+    expect(document.querySelector('[data-tv-details]').textContent).toContain('TV Farmácia');
+    expect(document.querySelector('[data-device-id="tv-2"]').getAttribute('aria-current')).toBe('true');
+  });
+
   it('continua funcional sem mapa e permite ajustar marcador manualmente', () => {
     renderTvs(document.querySelector('#tvs'), [{ ...pending }], vi.fn(), { mapAvailable: false });
     expect(document.querySelector('[data-map-fallback]').textContent).toContain('Mapa indisponível');
@@ -125,6 +135,54 @@ describe('gestão lean de TVs', () => {
     expect(document.querySelector('[data-map-route]')).not.toBeNull();
     expect(document.querySelectorAll('[data-map-device]')).toHaveLength(3);
     expect(document.querySelector('[data-map-device="tv-3"]').classList.contains('is-attention')).toBe(true);
+  });
+
+  it('mostra marcadores com ícones por tipo de ponto e filtra a rede', () => {
+    renderDeviceMap(document.querySelector('#tvs'), [
+      { ...pending, venueType: 'supermarket' },
+      { id: 'tv-2', name: 'Clínica Juruá', latitude: -7.628, longitude: -72.672, venueType: 'health', status: 'active', online: true },
+      { id: 'tv-3', name: 'Hotel Centro', latitude: -7.635, longitude: -72.665, venueType: 'hotel', status: 'active', online: true },
+    ], vi.fn());
+
+    expect(document.querySelector('[data-map-legend]')).not.toBeNull();
+    expect(document.querySelector('[data-map-device="tv-1"] [data-angel-icon="company"]')).not.toBeNull();
+    expect(document.querySelector('[data-map-device="tv-2"]').dataset.venueType).toBe('health');
+    expect(document.querySelector('[data-map-device="tv-3"]').dataset.venueType).toBe('hotel');
+    document.querySelector('[data-map-filter="health"]').click();
+    expect(document.querySelector('[data-map-filter="health"]').getAttribute('aria-pressed')).toBe('true');
+    expect(document.querySelector('[data-map-device="tv-1"]').hidden).toBe(true);
+    expect(document.querySelector('[data-map-device="tv-2"]').hidden).toBe(false);
+    expect(document.querySelector('[data-map-device="tv-3"]').hidden).toBe(true);
+  });
+
+  it('normaliza os tipos canônicos em português usados pela API de rede', () => {
+    renderDeviceMap(document.querySelector('#tvs'), [
+      { ...pending, name: 'Ponto A', address: 'Rua A, 1', venueType: 'supermercado' },
+      { id: 'tv-2', name: 'Ponto B', address: 'Rua B, 2', latitude: -7.628, longitude: -72.672, venueType: 'varejo', status: 'active', online: true },
+      { id: 'tv-3', name: 'Ponto C', address: 'Rua C, 3', latitude: -7.635, longitude: -72.665, venueType: 'saude', status: 'active', online: true },
+    ], vi.fn());
+
+    expect(document.querySelector('[data-map-device="tv-1"]').dataset.venueType).toBe('supermarket');
+    expect(document.querySelector('[data-map-device="tv-2"]').dataset.venueType).toBe('retail');
+    expect(document.querySelector('[data-map-device="tv-3"]').dataset.venueType).toBe('health');
+    expect(document.querySelector('[data-map-filter="supermarket"]').textContent).toContain('Mercado');
+    expect(document.querySelector('[data-map-filter="retail"]').textContent).toContain('Loja');
+    expect(document.querySelector('[data-map-filter="health"]').textContent).toContain('Saúde');
+  });
+
+  it('permite classificar o ponto e persiste o ícone da TV', async () => {
+    const apiClient = vi.fn(async (_path, options) => options.body);
+    renderTvs(document.querySelector('#tvs'), [{ ...pending, venueType: 'supermarket' }], apiClient);
+    document.querySelector('[data-device-id="tv-1"]').click();
+    const select = document.querySelector('[data-venue-type-select]');
+    select.value = 'health';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+
+    await vi.waitFor(() => expect(apiClient).toHaveBeenCalledWith('/admin/devices/tv-1', {
+      method: 'PATCH', body: { venueType: 'health' },
+    }));
+    expect(document.querySelector('[data-device-id="tv-1"]').textContent).toContain('Saúde');
+    expect(document.querySelector('[data-map-device="tv-1"]').dataset.venueType).toBe('health');
   });
 
   it('serializa ajustes concorrentes e mantém a localização mais recente', async () => {

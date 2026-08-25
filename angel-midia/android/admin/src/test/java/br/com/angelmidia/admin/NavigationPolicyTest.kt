@@ -11,4 +11,14 @@ class NavigationPolicyTest {
         assertFalse(NavigationPolicy.allows("https://evil.example/angel-midia/"))
         assertFalse(NavigationPolicy.allows("https://catalogo-cruzeiro-web.onrender.com/admin"))
     }
+
+    @Test fun acceptsConfiguredPreviewWithoutExpandingItsScope() {
+        val preview = "http://10.0.2.2:4183/angel-midia/controller/"
+
+        assertTrue(NavigationPolicy.allows(preview, preview))
+        assertTrue(NavigationPolicy.allows("${preview}src/app.js", preview))
+        assertFalse(NavigationPolicy.allows("http://10.0.2.2:4183/angel-midia/", preview))
+        assertFalse(NavigationPolicy.allows("http://evil.example:4183/angel-midia/controller/", preview))
+        assertFalse(NavigationPolicy.allows("http://10.0.2.2:4184/angel-midia/controller/", preview))
+    }
 }

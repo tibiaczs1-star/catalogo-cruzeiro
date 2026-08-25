@@ -3,7 +3,7 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { createApp } from '../src/app.js';
 import { renderLibrary, renderPlaylists, renderSchedule } from '../src/orchestration.js';
 import { renderCampaignProgramming } from '../src/campaigns.js';
-import { filterMedia, formatMediaFacts } from '../src/library.js';
+import { buildCycleSlots, filterMedia, formatMediaFacts, mediaSourceType } from '../src/library.js';
 import { buildPresentationPatch, openMediaEditor } from '../src/media-editor.js';
 import { openMediaViewer } from '../src/media-viewer.js';
 import { angelIcon } from '../src/angel-icons.js';
@@ -23,7 +23,7 @@ it('expõe todas as áreas operacionais do Angel Mídia Play', async () => {
   });
   await createApp({ root: document.querySelector('#app'), apiClient });
   expect([...document.querySelectorAll('[data-nav]')].map((n) => n.querySelector(':scope > span')?.textContent.trim())).toEqual([
-    'Visão geral', 'Mapa das TVs', 'Biblioteca', 'Playlists', 'Programação', 'Ao vivo', 'Relatórios', 'Empresas', 'Relâmpago', 'Aplicativos', 'Ajuda',
+    'Visão geral', 'Mapa das TVs', 'Biblioteca', 'Playlists', 'Programação', 'Receita & dinâmica', 'Ao vivo', 'Relatórios', 'Empresas', 'Rede & CRM', 'Alerta Geral', 'Aplicativos', 'Ajuda',
   ]);
   for (const button of document.querySelectorAll('[data-nav], button')) {
     const icon = button.querySelector('svg[data-angel-icon]');
@@ -34,7 +34,7 @@ it('expõe todas as áreas operacionais do Angel Mídia Play', async () => {
 });
 
 it('renderiza o registro completo de ícones Angel como SVG próprio e decorativo', () => {
-  const names = ['dashboard', 'tv', 'pin', 'image', 'video', 'playlist', 'clock', 'live', 'chart', 'company', 'user', 'emergency', 'settings', 'download', 'apk', 'play', 'pause', 'center', 'zoom', 'rotate'];
+  const names = ['dashboard', 'tv', 'pin', 'image', 'video', 'playlist', 'clock', 'live', 'chart', 'company', 'user', 'emergency', 'settings', 'download', 'apk', 'play', 'pause', 'center', 'zoom', 'rotate', 'eye', 'eyeOff'];
   document.body.innerHTML = names.map(angelIcon).join('');
   const icons = [...document.querySelectorAll('svg[data-angel-icon]')];
   expect(icons).toHaveLength(names.length);
@@ -64,6 +64,26 @@ it('faz login usando o usuário administrador', async () => {
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalledWith('/auth/login', { method: 'POST', body: { identifier: 'admin', password: 'secret' } }));
 });
 
+it('distingue senha incorreta de servidor de autenticação indisponível', async () => {
+  const offlineClient = vi.fn(async (path) => {
+    if (path === '/auth/me') throw Object.assign(new Error('unauthorized'), { status: 401 });
+    throw Object.assign(new Error('angel_media_unavailable'), { status: 503 });
+  });
+  await createApp({ root: document.querySelector('#app'), apiClient: offlineClient });
+  document.querySelector('[name="password"]').value = 'secret';
+  document.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(document.querySelector('[role=alert]').textContent).toContain('autenticação está indisponível'));
+
+  document.body.innerHTML = '<div id="app"></div>';
+  const invalidClient = vi.fn(async (path) => {
+    throw Object.assign(new Error(path === '/auth/login' ? 'invalid_credentials' : 'unauthorized'), { status: 401 });
+  });
+  await createApp({ root: document.querySelector('#app'), apiClient: invalidClient });
+  document.querySelector('[name="password"]').value = 'wrong';
+  document.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(document.querySelector('[role=alert]').textContent).toBe('Usuário ou senha inválidos.'));
+});
+
 it('envia o nome da mídia usando o contrato multipart da API', async () => {
   const apiClient = vi.fn(async () => ({}));
   const root = document.querySelector('#app');
@@ -79,7 +99,134 @@ it('envia o nome da mídia usando o contrato multipart da API', async () => {
   const [path, options] = apiClient.mock.calls[0];
   expect(path).toBe('/admin/media');
   expect(options.body.get('name')).toBe('Foto 2');
+  expect(options.body.get('sourceType')).toBe('owned');
   expect(options.body.has('displayName')).toBe(false);
+});
+
+it('preenche o painel de acesso com a marca e os três pilares da Angel Mídia', async () => {
+  await createApp({ root: document.querySelector('#app'), apiClient: vi.fn().mockRejectedValue(new Error('401')) });
+  const brand = document.querySelector('.brand-plane');
+  expect(brand.querySelector('img[src*="angel-midia-logo.png"]')?.getAttribute('alt')).toContain('Angel Mídia');
+  expect([...brand.querySelectorAll('[data-brand-capability] strong')].map((item) => item.textContent)).toEqual([
+    'Conteúdo', 'Playlists', 'Telas',
+  ]);
+  expect(brand.textContent).toContain('Sua rede em movimento');
+  expect(brand.textContent).not.toContain('PLAYonline');
+});
+
+it('transforma o acesso em um estúdio vivo com cinco cenas comerciais', async () => {
+  await createApp({ root: document.querySelector('#app'), apiClient: vi.fn().mockRejectedValue(new Error('401')) });
+  const brand = document.querySelector('.brand-plane');
+  const scenes = [...brand.querySelectorAll('[data-brand-scene]')];
+  expect(scenes).toHaveLength(5);
+  expect(scenes.map((scene) => scene.querySelector('strong')?.textContent)).toEqual([
+    'Oferta patrocinada',
+    'Notícia local',
+    'Siga pelo QR',
+    'Campanha da semana',
+    'Rede de telas',
+  ]);
+  expect(brand.querySelector('[data-brand-live]')?.textContent).toContain('pronta para transmitir');
+  expect(brand.querySelectorAll('[data-brand-orbit][aria-hidden="true"]').length).toBeGreaterThanOrEqual(3);
+  expect(brand.querySelector('img[src*="angel-midia-logo.png"]')).not.toBeNull();
+});
+
+it('mostra e oculta a senha pelo botão de olho acessível', async () => {
+  await createApp({ root: document.querySelector('#app'), apiClient: vi.fn().mockRejectedValue(new Error('401')) });
+  const password = document.querySelector('[name="password"]');
+  const toggle = document.querySelector('[data-password-toggle]');
+  expect(toggle).not.toBeNull();
+  expect(password.type).toBe('password');
+  expect(toggle.getAttribute('aria-label')).toBe('Mostrar senha');
+  expect(toggle.getAttribute('aria-pressed')).toBe('false');
+  expect(toggle.querySelector('[data-angel-icon="eye"]')).not.toBeNull();
+
+  toggle.click();
+  expect(password.type).toBe('text');
+  expect(toggle.getAttribute('aria-label')).toBe('Ocultar senha');
+  expect(toggle.getAttribute('aria-pressed')).toBe('true');
+  expect(toggle.querySelector('[data-angel-icon="eyeOff"]')).not.toBeNull();
+
+  toggle.click();
+  expect(password.type).toBe('password');
+  expect(toggle.getAttribute('aria-label')).toBe('Mostrar senha');
+});
+
+it('envia a origem comercial escolhida junto com a mídia', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media: [] }, apiClient, vi.fn());
+  const form = root.querySelector('[data-upload]');
+  const file = new File(['anuncio'], 'anuncio.png', { type: 'image/png' });
+  Object.defineProperty(form.elements.media, 'files', { configurable: true, value: [file] });
+  form.elements.displayName.value = 'Anúncio patrocinado';
+  form.elements.sourceType.value = 'direct';
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
+  expect(apiClient.mock.calls[0][1].body.get('sourceType')).toBe('direct');
+});
+
+it('organiza a central de mídia por origem e monta um ciclo honesto de oito espaços', () => {
+  const media = [
+    { id: 'own-1', display_name: 'Institucional', content_type: 'video/mp4', source_type: 'owned', playing_now_count: 2 },
+    { id: 'direct-1', display_name: 'Campanha patrocinada', content_type: 'image/png', source_type: 'direct' },
+    { id: 'open-1', display_name: 'Anúncio programático', content_type: 'video/mp4', source_type: 'programmatic' },
+    { id: 'news-1', display_name: 'Notícia do Juruá', content_type: 'image/png', source_type: 'news' },
+  ];
+  expect(media.map(mediaSourceType)).toEqual(['owned', 'direct', 'programmatic', 'editorial']);
+  const slots = buildCycleSlots(media);
+  expect(slots).toHaveLength(8);
+  expect(slots.map((slot) => slot.kind)).toEqual(['owned', 'direct', 'owned', 'editorial', 'owned', 'direct', 'owned', 'programmatic']);
+  expect(slots.filter((slot) => slot.media == null)).toHaveLength(4);
+
+  const root = document.querySelector('#app');
+  renderLibrary(root, { media }, vi.fn(), vi.fn());
+  expect(root.querySelector('.media-command-center')).not.toBeNull();
+  expect(root.querySelector('[data-now-playing]')?.textContent).toContain('Institucional');
+  expect(root.querySelectorAll('[data-cycle-slot]')).toHaveLength(8);
+  expect(root.querySelectorAll('[data-media-grid] .media-card')).toHaveLength(4);
+  expect(root.textContent).toContain('Aguardando mídia');
+  expect(root.querySelector('[data-use-media="direct-1"]')).not.toBeNull();
+
+  root.querySelector('[data-source-filter="direct"]').click();
+  expect(root.querySelectorAll('[data-media-grid] .media-card')).toHaveLength(1);
+  expect(root.querySelector('[data-media-grid]').textContent).toContain('Campanha patrocinada');
+});
+
+it('leva a mídia escolhida para o fluxo de playlists por uma ação real', () => {
+  const root = document.querySelector('#app');
+  let navigation;
+  root.addEventListener('angel:navigate', (event) => { navigation = event.detail; });
+  renderLibrary(root, { media: [{ id: 'm-play', display_name: 'Oferta', content_type: 'image/png' }] }, vi.fn(), vi.fn());
+  root.querySelector('[data-use-media="m-play"]').click();
+  expect(navigation).toEqual({ view: 'playlists', mediaId: 'm-play' });
+});
+
+it('abre playlists com a mídia escolhida pela galeria já adicionada e aceita name da API', () => {
+  const root = document.querySelector('#app');
+  renderPlaylists(root, [], { media: [{ id: 'm-api', name: 'Oferta vinda da API', content_type: 'image/png', duration_seconds: 10 }] }, vi.fn(), vi.fn(), { selectedMediaId: 'm-api' });
+  expect(root.querySelector('[name=assetToAdd]').textContent).toContain('Oferta vinda da API');
+  expect(root.querySelector('[name=assetToAdd]').value).toBe('m-api');
+  expect(root.querySelector('[data-playlist-item] strong').textContent).toBe('Oferta vinda da API');
+  expect(root.querySelector('[data-playlist-selection]').textContent).toContain('já foi adicionada');
+});
+
+it('mantém a mídia escolhida ao navegar da galeria para playlists pelo app', async () => {
+  const apiClient = vi.fn(async (path) => {
+    if (path === '/auth/me') return { name: 'Admin' };
+    if (path === '/admin/media') return { media: [{ id: 'm-flow', name: 'Oferta do fluxo', content_type: 'image/png', duration_seconds: 10 }] };
+    if (path === '/admin/playlists') return { playlists: [] };
+    if (path === '/admin/live') return { devices: [] };
+    if (path === '/admin/reports') return { totals: {}, events: [] };
+    if (path.startsWith('/admin/')) return [];
+    throw new Error(path);
+  });
+  const root = document.querySelector('#app');
+  await createApp({ root, apiClient });
+  [...root.querySelectorAll('[data-nav]')].find((button) => button.textContent.includes('Biblioteca')).click();
+  root.querySelector('[data-use-media="m-flow"]').click();
+  expect(root.querySelector('[data-playlist-item][data-asset-id="m-flow"] strong').textContent).toBe('Oferta do fluxo');
+  expect(root.querySelector('[data-playlist-selection]').textContent).toContain('já foi adicionada');
 });
 
 it('mostra todos os detalhes da mídia e abre o editor de enquadramento', async () => {
@@ -88,7 +235,7 @@ it('mostra todos os detalhes da mídia e abre o editor de enquadramento', async 
   renderLibrary(root, { media: [{ id: 'm1', display_name: 'Anúncio', content_type: 'video/mp4', width: 1920, height: 1080, has_audio: true, size_bytes: 10485760, duration_seconds: 12, processing_status: 'ready', playing_now_count: 2 }] }, apiClient, vi.fn());
   expect(root.textContent).toContain('VÍDEO');
   expect(root.textContent).toContain('MP4 · 1920×1080 · 16:9');
-  expect(root.textContent).toContain('Rodando agora em 2 TVs');
+  expect(root.textContent).toContain('Sinal recente em 2 TVs');
   expect(root.querySelector('.media-type [data-angel-icon="video"]')).not.toBeNull();
   expect(root.querySelector('[data-preview-media="m1"] [data-angel-icon="play"]')).not.toBeNull();
   expect(root.querySelector('[data-edit-media="m1"] [data-angel-icon="settings"]')).not.toBeNull();
@@ -123,12 +270,24 @@ it('mostra a imagem real no card da biblioteca', () => {
   expect(preview).not.toBeNull();
   expect(preview.getAttribute('src')).toBe('./api/admin/media/m4/content');
   expect(preview.getAttribute('alt')).toBe('Prévia de Foto');
+  expect(preview.getAttribute('loading')).toBe('lazy');
+  expect(preview.getAttribute('decoding')).toBe('async');
+  expect(root.querySelector('.media-card-actions [data-preview-media="m4"]')?.textContent).toContain('Tela cheia');
 });
 
-it('aceita mimeType no card e não inventa informação de áudio ausente', () => {
+it('exibe vídeo leve no card e deixa a tela cheia como ação secundária', () => {
   const root = document.querySelector('#app');
   renderLibrary(root, { media: [{ id: 'm4b', name: 'Filme', mimeType: 'video/mp4' }] }, vi.fn(), vi.fn());
-  expect(root.querySelector('.media-preview video')).not.toBeNull();
+  const preview = root.querySelector('.media-preview video');
+  expect(preview).not.toBeNull();
+  expect(preview.getAttribute('src')).toBe('./api/admin/media/m4b/content');
+  expect(preview.hasAttribute('controls')).toBe(true);
+  expect(preview.hasAttribute('muted')).toBe(true);
+  expect(preview.hasAttribute('playsinline')).toBe(true);
+  expect(preview.getAttribute('preload')).toBe('metadata');
+  expect(preview.hasAttribute('autoplay')).toBe(false);
+  expect(root.querySelector('.media-preview [data-preview-media]')).toBeNull();
+  expect(root.querySelector('.media-card-actions [data-preview-media="m4b"]')?.textContent).toContain('Tela cheia');
   expect(root.textContent).toContain('Áudio');
   expect(root.textContent).toContain('Não informado');
 });
@@ -488,6 +647,16 @@ it('mostra duração para imagem sem controles de corte', async () => {
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
   expect(apiClient.mock.calls[0][1].body.durationSeconds).toBe(11);
   expect(apiClient.mock.calls[0][1].body).not.toHaveProperty('trimStartSeconds');
+});
+
+it('avisa a galeria depois de salvar uma edição', async () => {
+  const updated = { id: 'photo-refresh', name: 'Foto atualizada', type: 'image/png', durationSeconds: 18 };
+  const apiClient = vi.fn(async () => updated);
+  const onSaved = vi.fn();
+  const root = document.querySelector('#app');
+  openMediaEditor(root, { id: 'photo-refresh', name: 'Foto', type: 'image/png', durationSeconds: 11 }, apiClient, onSaved);
+  root.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(onSaved).toHaveBeenCalledWith(updated));
 });
 
 it('simula timeline, corte e volume no vídeo sem salvar playback no arquivo global', async () => {

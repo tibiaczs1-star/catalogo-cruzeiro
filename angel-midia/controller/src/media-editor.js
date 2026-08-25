@@ -51,7 +51,7 @@ const alignments = [
   ['bottom-left', 0, 100, 'Inferior esquerdo'], ['bottom', 50, 100, 'Inferior'], ['bottom-right', 100, 100, 'Inferior direito'],
 ];
 
-export function openMediaEditor(root, media, apiClient) {
+export function openMediaEditor(root, media, apiClient, onSaved = () => {}) {
   root.querySelector('.media-editor')?.remove();
   const opener = document.activeElement;
   const mediaType = String(media.mimeType || media.type || media.content_type || 'image/*');
@@ -148,7 +148,12 @@ export function openMediaEditor(root, media, apiClient) {
     event.preventDefault(); const fields = snapshot(); const value = buildPresentationPatch(fields); const status = form.querySelector('[role=status]');
     const error = playbackError(fields, media.durationSeconds ?? media.duration_seconds, isVideo);
     if (error) { status.textContent = error; return; }
-    try { await apiClient(`/admin/media/${media.id}`, { method: 'PATCH', body: value }); status.textContent = 'Alterações salvas.'; close(); } catch { status.textContent = 'Não foi possível salvar as alterações.'; }
+    try {
+      const updated = await apiClient(`/admin/media/${media.id}`, { method: 'PATCH', body: value });
+      status.textContent = 'Alterações salvas.';
+      close();
+      try { await onSaved(updated); } catch {}
+    } catch { status.textContent = 'Não foi possível salvar as alterações.'; }
   });
   root.append(panel); updatePreview(); panel.querySelector('[data-close]').focus(); return panel;
 }

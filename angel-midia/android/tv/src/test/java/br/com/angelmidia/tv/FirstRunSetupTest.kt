@@ -4,6 +4,13 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class FirstRunSetupTest {
+    @Test fun explainsTheThreeStepOnboardingFlow() {
+        assertEquals(
+            listOf("Identifique a tela", "Informe o ponto", "Vincule ao painel"),
+            FirstRunSetup.ONBOARDING_STEPS,
+        )
+    }
+
     @Test fun enablesAutomaticUpdatesByDefault() {
         assertTrue(FirstRunSetup.DEFAULT_AUTO_UPDATE)
     }

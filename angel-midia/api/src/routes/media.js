@@ -61,6 +61,15 @@ export default async function mediaRoutes(app, options) {
          select ma.id,ma.storage_key,ma.content_type,ma.size_bytes
            from media_assets ma join emergency_broadcasts e on e.asset_id=ma.id and e.active
           where ma.id=$1
+         union
+         select ma.id,ma.storage_key,ma.content_type,ma.size_bytes
+           from media_assets ma join dynamic_playback_policy dp on dp.id=1 and dp.enabled
+          where ma.id=$1 and ma.processing_status='ready' and (
+            (ma.source_type='direct' and ma.content_kind='advertisement' and dp.allow_direct_ads) or
+            (ma.source_type='programmatic' and ma.content_kind='advertisement' and dp.allow_programmatic_ads) or
+            (ma.source_type='editorial' and ma.content_kind='news' and dp.allow_news) or
+            (ma.source_type='editorial' and ma.content_kind='meme' and dp.allow_memes)
+          )
        ) select * from authorized_media limit 1`,
       [request.params.id, request.device.id],
     );

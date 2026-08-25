@@ -13,6 +13,11 @@ import reportRoutes from './routes/reports.js';
 import advertiserRoutes from './routes/advertisers.js';
 import emergencyRoutes from './routes/emergency.js';
 import groupRoutes from './routes/groups.js';
+import dynamicRoutes from './routes/dynamics.js';
+import organizationRoutes from './routes/organizations.js';
+import crmRoutes from './routes/crm.js';
+import networkRoutes from './routes/network.js';
+import nocRoutes from './routes/noc.js';
 import { createActivationRateLimiter } from './services/activation-rate-limit.js';
 
 export function buildApp({
@@ -54,6 +59,11 @@ export function buildApp({
   app.register(advertiserRoutes);
   app.register(emergencyRoutes);
   app.register(groupRoutes);
+  app.register(dynamicRoutes);
+  app.register(organizationRoutes);
+  app.register(crmRoutes);
+  app.register(networkRoutes);
+  app.register(nocRoutes, { now });
   app.get('/api/health', async (_request, reply) => {
     try {
       await app.db.query('SELECT 1');

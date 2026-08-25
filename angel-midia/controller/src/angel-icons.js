@@ -7,5 +7,7 @@ const SHAPES = Object.freeze({
   emergency: '<path d="M12 3 2.5 20h19zM12 9v5M12 17h.01"/>', settings: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>', download: '<path d="M12 3v12M7 10l5 5 5-5M4 20h16"/>',
   apk: '<path d="M7 7 5 4M17 7l2-3M5 8h14v11H5zM8 12h.01M16 12h.01M8 19v3M16 19v3M2 10v7M22 10v7"/>', play: '<path d="m8 5 11 7-11 7z"/>', pause: '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>', center: '<path d="M12 3v18M3 12h18M7 7h10v10H7z"/>', zoom: '<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M10 7v6M7 10h6"/>', rotate: '<path d="M20 7V3l-3 3a8 8 0 1 0 2 10M20 3h-5"/>', help: '<circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.5 2.5 0 1 1 3.6 2.3c-.9.5-1.3 1.1-1.3 2.2M12 17h.01"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
+  eye: '<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.6"/>',
+  eyeOff: '<path d="M4 4 20 20M9.8 6.3A9.8 9.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.2 3M6.2 7.3A17.7 17.7 0 0 0 2.5 12s3.5 6 9.5 6c1 0 2-.2 2.8-.5M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
 });
 export function angelIcon(name) { const shape=SHAPES[name]; if(!shape) throw new RangeError(`Ícone Angel desconhecido: ${name}`); return `<svg data-angel-icon="${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">${shape}</svg>`; }

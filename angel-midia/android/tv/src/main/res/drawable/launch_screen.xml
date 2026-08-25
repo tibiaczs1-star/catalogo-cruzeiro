@@ -1,0 +1,4 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/angel_blue" />
+    <item android:width="124dp" android:height="124dp" android:drawable="@drawable/ic_angel_mark" android:gravity="center" />
+</layer-list>

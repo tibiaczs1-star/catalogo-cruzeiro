@@ -2,6 +2,11 @@ package br.com.angelmidia.tv
 
 object FirstRunSetup {
     const val DEFAULT_AUTO_UPDATE = true
+    val ONBOARDING_STEPS = listOf(
+        "Identifique a tela",
+        "Informe o ponto",
+        "Vincule ao painel",
+    )
 
     fun isValid(deviceName: String, location: String): Boolean =
         deviceName.trim().isNotEmpty() && deviceName.trim().length <= 160 &&

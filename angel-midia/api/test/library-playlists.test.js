@@ -13,7 +13,9 @@ const image = '11111111-1111-4111-8111-111111111111';
 const video = '22222222-2222-4222-8222-222222222222';
 
 test('library metadata requires a display name', () => {
-  assert.equal(validLibraryMetadata({ name: 'Oferta Agosto', durationSeconds: '12' }), true);
+  assert.equal(validLibraryMetadata({ name: 'Oferta Agosto', durationSeconds: '12', sourceType: 'direct' }), true);
+  assert.equal(validLibraryMetadata({ name: 'Notícia local', durationSeconds: '12', sourceType: 'editorial' }), true);
+  assert.equal(validLibraryMetadata({ name: 'Origem inválida', durationSeconds: '12', sourceType: 'affiliate' }), false);
   assert.equal(validLibraryMetadata({ name: '', durationSeconds: '' }), false);
 });
 
@@ -89,7 +91,7 @@ test('media detail reports presentation and where it is running', async () => {
   const mediaId = '33333333-3333-4333-8333-333333333333';
   const db = { query: async (sql) => {
     if (sql.includes('from sessions')) return { rows: [{ id: image, name: 'Admin', email: 'admin@angel.local' }] };
-    if (sql.includes('from media_assets ma')) return { rows: [{ id: mediaId, name: 'Oferta', original_name: 'oferta.mp4', content_type: 'video/mp4', size_bytes: 1200, sha256: 'a'.repeat(64), duration_seconds: '12', processing_status: 'ready', width: 1920, height: 1080, has_audio: true, fit_mode: 'cover', focal_x: '25', focal_y: '70', zoom: '1.2', rotation: 0, background_color: '#000000' }] };
+    if (sql.includes('from media_assets ma')) return { rows: [{ id: mediaId, name: 'Oferta', original_name: 'oferta.mp4', content_type: 'video/mp4', source_type: 'direct', size_bytes: 1200, sha256: 'a'.repeat(64), duration_seconds: '12', processing_status: 'ready', width: 1920, height: 1080, has_audio: true, fit_mode: 'cover', focal_x: '25', focal_y: '70', zoom: '1.2', rotation: 0, background_color: '#000000' }] };
     if (sql.includes('from playlist_items')) return { rows: [{ id: image, name: 'Vitrine', position: 0 }] };
     if (sql.includes('from playback_status')) return { rows: [{ device_id: video, device_name: 'TV Recepção', location_name: 'Loja Centro' }] };
     return { rows: [] };
@@ -101,6 +103,7 @@ test('media detail reports presentation and where it is running', async () => {
   const detail = await app.inject({ method: 'GET', url: `/api/admin/media/${mediaId}`, headers: { cookie: 'amp_session=test' } });
   assert.equal(detail.statusCode, 200);
   assert.deepEqual(detail.json().presentation, { fitMode: 'cover', focalX: 25, focalY: 70, zoom: 1.2, rotation: 0, backgroundColor: '#000000' });
+  assert.equal(detail.json().sourceType, 'direct');
   assert.equal(detail.json().usage.playlists[0].name, 'Vitrine');
   assert.equal(detail.json().usage.playingNow[0].deviceName, 'TV Recepção');
   await app.close();
@@ -121,6 +124,8 @@ test('media library resolves group markers through schedule targets', async () =
   assert.equal(response.statusCode, 200);
   assert.match(librarySql, /join schedule_targets st on st\.schedule_id=s\.id/);
   assert.match(librarySql, /join groups g on g\.id=st\.group_id/);
+  assert.match(librarySql, /ma\.source_type/);
+  assert.match(librarySql, /ps\.updated_at\s*>=\s*now\(\)\s*-\s*interval '2 minutes'/);
   await app.close();
 });
 

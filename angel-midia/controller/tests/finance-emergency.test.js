@@ -11,9 +11,9 @@ it('renders company finance, display metrics and charts', () => {
   expect(root.querySelector('[data-chart=displays]')).not.toBeNull();
 });
 
-it('renders Relâmpago Marquinhos with activate and stop controls', () => {
+it('renders Alerta Geral with activate and stop controls', () => {
   const root=document.createElement('div');
   renderEmergency(root,{active:false},[],vi.fn(),vi.fn());
-  expect(root.textContent).toContain('Relâmpago Marquinhos');
+  expect(root.textContent).toContain('Alerta Geral da Rede');
   expect(root.querySelector('[data-emergency-activate]')).not.toBeNull();
 });

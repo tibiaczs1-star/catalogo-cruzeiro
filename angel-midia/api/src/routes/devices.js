@@ -2,6 +2,8 @@ import { randomBytes, randomUUID } from 'node:crypto';
 import { requireAdmin } from '../auth.js';
 import { authenticateDevice, generateDeviceToken, hashDeviceToken, readBearer } from '../services/device-token.js';
 import { resolveSchedule } from '../services/schedule.js';
+import { applyDynamicContext, loadDynamicPlaybackContext } from '../services/dynamic-cycle.js';
+import { leaseNextRemoteCommand } from './noc.js';
 
 const ACTIVATION_TTL_MS = 24 * 60 * 60 * 1000;
 const LINK_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -336,12 +338,20 @@ export default async function deviceRoutes(app, options) {
     if (request.device.status === 'pending') return reply.code(403).send({ error: 'pending_approval' });
     if (request.device.status !== 'active') return reply.code(403).send({ error: 'device_blocked' });
     if (request.device.credential_expires_at) return reply.code(403).send({ error: 'credential_claim_required' });
-    const schedule = await resolveSchedule(app.db, request.device);
+    const baseSchedule = await resolveSchedule(app.db, request.device);
+    let schedule = baseSchedule;
+    try {
+      schedule = applyDynamicContext(baseSchedule, await loadDynamicPlaybackContext(app.db));
+    } catch (error) {
+      request.log?.warn?.({ error }, 'dynamic playback context unavailable');
+    }
     const emergencyResult = await app.db.query(`select e.id,e.mode,e.title,e.message,e.asset_id,m.content_type,m.sha256,m.duration_seconds,m.fit_mode,m.focal_x,m.focal_y,m.zoom,m.rotation,m.background_color from emergency_broadcasts e left join media_assets m on m.id=e.asset_id where e.active order by e.activated_at desc limit 1`);
+    const remoteCommand = await leaseNextRemoteCommand(app.db, request.device.id, now());
     return reply.send({
       status: 'active',
       schedule,
       emergency: emergencyResult.rows[0] ?? null,
+      remoteCommand,
     });
   });
 }
