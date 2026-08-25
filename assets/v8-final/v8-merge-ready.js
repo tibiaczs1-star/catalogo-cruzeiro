@@ -396,6 +396,27 @@
     return raw;
   };
 
+  const CZS_GRAPHIC_MEDIA_PATTERN = /(?:^|[\s/?#._-])(card|arte|banner|post|social|instagram|whatsapp|reel|story|stories|canva|manual|news-manual|noticia-card|card-noticia|feed-card)(?:$|[\s/?#._-])|\.png(?:$|[?#\s])/i;
+
+  function czsHeroMediaFit(story = {}) {
+    const image = imgFor(story);
+    const text = [
+      image,
+      story?.imageUrl,
+      story?.feedImageUrl,
+      story?.sourceImageUrl,
+      story?.mediaUrl,
+      story?.poster,
+      story?.title,
+      story?.summary,
+      story?.subtitle,
+      story?.category,
+      story?.sourceName,
+      story?.sourceLabel,
+    ].filter(Boolean).join(" ");
+    return CZS_GRAPHIC_MEDIA_PATTERN.test(text) ? "contain" : "cover";
+  }
+
   function missingStoryVisualMarkup(story = {}) {
     const source = sourceName(story) || "fonte";
     return `<div class="v8-missing-story-photo" role="img" aria-label="Foto em checagem na fonte">
@@ -2115,7 +2136,9 @@
       index = (nextIndex + heroStories.length) % heroStories.length;
       const story = heroStories[index];
       const hasHeroMedia = Boolean(storyVideoUrl(story) || imgFor(story));
+      const mediaFit = czsHeroMediaFit(story);
       lead.dataset.v8Slug = story.slug || "";
+      lead.dataset.czsMediaFit = mediaFit;
       lead.classList.toggle("v8-live-hero-text-only", !hasHeroMedia);
       lead.innerHTML = `
         <div class="v8-hero-copy">
@@ -2144,7 +2167,7 @@
           </div>
         </div>
         ${hasHeroMedia ? `<div class="v8-hero-media">
-          <div class="v8-hero-media-frame">${storyVisualMarkup(story, "eager")}</div>
+          <div class="v8-hero-media-frame czs-media-${esc(mediaFit)}">${storyVisualMarkup(story, "eager")}</div>
         </div>` : ""}`;
       $$(".v8-rail-story", rail).forEach((node) => node.classList.toggle("is-active", node.dataset.v8Slug === story.slug));
     };
@@ -2223,8 +2246,9 @@
 
   function railCard(story) {
     const media = railMediaMarkup(story);
+    const mediaFit = czsHeroMediaFit(story);
     return `
-      <a class="v8-rail-story ${media ? "" : "v8-rail-story-text-only"}" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
+      <a class="v8-rail-story czs-media-${esc(mediaFit)} ${media ? "" : "v8-rail-story-text-only"}" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}" data-czs-media-fit="${esc(mediaFit)}">
         ${media}
         <span><b>${esc(story.title)}</b><small>${esc(story.category || "Notícia")} • ${esc(storyDate(story))}</small></span>
       </a>`;

@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Book editorial de Raiane, modelo de passarela"
+      content="Book editorial de Raiane Leoncio, modelo de passarela"
     />
     <title>RAIANE — Book 2026</title>
-    <link rel="stylesheet" href="styles.css?v=20260806-r6" />
+    <link rel="stylesheet" href="styles.css?v=20260809-r14" />
   </head>
   <body>
     <div class="progress"></div>
+    <div class="experience-intro" aria-hidden="true">
+      <div class="intro-panel intro-panel-left"></div>
+      <div class="intro-panel intro-panel-right"></div>
+      <p class="intro-kicker">BOOK / 2026</p>
+      <div class="intro-mark"><span>R.</span><small>RAIANE</small></div>
+      <span class="intro-count">01 — 72</span>
+    </div>
+    <div class="pointer-orb" aria-hidden="true"></div>
     <header>
       <a class="brand" href="#top">R/26</a>
       <nav>
@@ -22,20 +30,21 @@
     </header>
     <main id="top">
       <section class="hero">
-        <img
-          src="assets/campanha-country-raiane-por-do-sol.webp"
-          alt="Raiane em editorial country ao pôr do sol"
-        />
-        <div class="hero-shade"></div>
-        <div class="hero-cut hero-cut-top">EDITORIAL / 2026</div>
-        <div class="hero-cut hero-cut-mid">RAIANE · MOVIMENTO · PRESENÇA</div>
-        <p class="eyebrow">MODELO DE PASSARELA · 1,82 M</p>
-        <h1><span>RAI</span><span>ANE</span></h1>
-        <p class="hero-copy">
-          Do interior para a passarela.<br />Presença que transforma silêncio em
-          imagem.
-        </p>
-        <a class="round" href="#portfolio">↓</a>
+        <div class="hero-photo">
+          <canvas class="hero-webgl" aria-hidden="true"></canvas>
+          <div class="hero-depth">
+            <img src="assets/campanha-country-raiane-por-do-sol.webp" alt="Raiane em editorial country ao pôr do sol" />
+            <span class="hero-index">01 / 72</span>
+            <span class="hero-stamp">RAIANE<br />BOOK 2026</span>
+          </div>
+        </div>
+        <div class="hero-intro">
+          <p class="eyebrow">MODELO DE PASSARELA · 1,82 M</p>
+          <p class="edition">EDITORIAL / BOOK 2026</p>
+          <h1><span>RAI</span><span>ANE</span></h1>
+          <p class="hero-copy">Do interior para a passarela.<br />Presença que transforma silêncio em imagem.</p>
+          <a class="round" href="#portfolio">Ver o book <span>↓</span></a>
+        </div>
       </section>
       <div class="ticker" aria-hidden="true">
         <div>
@@ -52,8 +61,8 @@
             equilibra delicadeza e força.
           </p>
           <p>
-            Um book construído como editorial: cada imagem ganha ritmo e
-            atmosfera. Sem alterar rosto, corpo ou identidade.
+            Versátil para editoriais, campanhas e passarela, Raiane combina
+            presença, domínio corporal e identidade própria diante das câmeras.
           </p>
         </div>
       </section>
@@ -63,12 +72,29 @@
         <div><b>80K</b><span>seguidores aos 15</span></div>
         <div><b>≈50M</b><span>visualizações</span></div>
       </section>
+      <section class="runway-break" aria-label="Capítulo em movimento">
+        <div class="runway-stage">
+          <p class="runway-kicker">02 / EM MOVIMENTO</p>
+          <h2 aria-label="Passarela"><span>PASSA</span><span>RELA</span></h2>
+          <figure class="runway-frame runway-one">
+            <img src="assets/raiane-sensacao-08.jpg" alt="Raiane em pose editorial" loading="lazy" />
+          </figure>
+          <figure class="runway-frame runway-two">
+            <img src="assets/raiane-sensacao-12.jpg" alt="Raiane em movimento" loading="lazy" />
+          </figure>
+          <figure class="runway-frame runway-three">
+            <img src="assets/campanha-country-raiane-editorial-estudio.webp" alt="Raiane em editorial de estúdio" loading="lazy" />
+          </figure>
+          <div class="runway-copy">
+            <b>FORÇA / ELEGÂNCIA / RITMO</b>
+            <p>O corpo desenha a cena. A passarela acontece antes mesmo do primeiro passo.</p>
+          </div>
+        </div>
+      </section>
       <section class="editorial-intro">
-        <p>BOOK / CAMPANHA / PRODUTO / PASSARELA</p>
-        <h2>EDITORIAL EM MOVIMENTO</h2>
-        <span
-          >Uma seleção construída em capítulos — da origem ao horizonte.</span
-        >
+        <p>ACERVO COMPLETO · 72 IMAGENS</p>
+        <h2>TODAS AS FOTOS.<br /><em>NENHUMA ESCONDIDA.</em></h2>
+        <span>EDITORIAL EM MOVIMENTO — DA ORIGEM AO HORIZONTE.</span>
       </section>
       <section
         id="portfolio"
@@ -108,9 +134,15 @@
     </main>
     <dialog id="lightbox">
       <button aria-label="Fechar">×</button>
-      <div class="dialog-photo"><img alt="" /></div>
+      <div class="dialog-photo">
+        <img
+          src="assets/campanha-country-raiane-por-do-sol.webp"
+          alt="Raiane em destaque"
+        />
+      </div>
       <div class="dialog-meta"><b></b><span></span></div>
     </dialog>
-    <script src="app.js?v=20260806-r6"></script>
+    <script src="webgl.js?v=20260809-r14"></script>
+    <script src="app.js?v=20260809-r14"></script>
   </body>
 </html>

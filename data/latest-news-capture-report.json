@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-08-06T03:31:46.851Z",
-  "finishedAt": "2026-08-06T03:31:57.273Z",
-  "capturedItems": 373,
-  "capturedToday": 145,
+  "startedAt": "2026-08-10T03:58:41.014Z",
+  "finishedAt": "2026-08-10T03:58:45.911Z",
+  "capturedItems": 392,
+  "capturedToday": 143,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 23,
-      "blocked": 1,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -141,9 +141,10 @@
     },
     {
       "source": "jurua-em-tempo",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 24,
+      "blocked": 0,
+      "mode": "wordpress-json"
     },
     {
       "source": "jurua-informativo",
@@ -204,21 +205,21 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 4,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 1,
+      "count": 0,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

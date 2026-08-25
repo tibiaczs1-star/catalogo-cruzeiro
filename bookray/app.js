@@ -18,8 +18,7 @@ const scenes = [
   ["Calor", "Dourado, terra e coragem", "finale"],
 ];
 
-// Acervo cumulativo: 34 fotos originais + 12 novas aqui. A abertura e o perfil
-// completam as 14 novas, totalizando 48 imagens distintas, uma vez cada.
+// Acervo completo: 70 fotos na grade, mais abertura e perfil = 72 imagens.
 const assets = [
   "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
   "assets/IMG_0406.jpeg",
@@ -67,10 +66,106 @@ const assets = [
   "assets/produto-botas-douradas-perfil.webp",
   "assets/produto-botas-rosa-fazenda.webp",
   "assets/produto-botas-rosa-pegada-loja.webp",
+  "assets/raiane-sensacao-01.jpg",
+  "assets/raiane-sensacao-02.jpg",
+  "assets/raiane-sensacao-03.jpg",
+  "assets/raiane-sensacao-04.jpg",
+  "assets/raiane-sensacao-05.jpg",
+  "assets/raiane-sensacao-06.jpg",
+  "assets/raiane-sensacao-07.jpg",
+  "assets/raiane-sensacao-08.jpg",
+  "assets/raiane-sensacao-09.jpg",
+  "assets/raiane-sensacao-10.jpg",
+  "assets/raiane-sensacao-11.jpg",
+  "assets/raiane-sensacao-12.jpg",
+  "assets/raiane-sensacao-13.jpg",
+  "assets/raiane-sensacao-14.jpg",
+  "assets/raiane-sensacao-15.jpg",
+  "assets/raiane-jardim-noturno-01-corpo.png",
+  "assets/raiane-jardim-noturno-02.jpeg",
+  "assets/raiane-jardim-noturno-03.jpeg",
+  "assets/raiane-jardim-noturno-04.jpeg",
+  "assets/raiane-jardim-noturno-05.jpeg",
+  "assets/raiane-jardim-noturno-06.jpeg",
+  "assets/raiane-jardim-noturno-07.jpeg",
+  "assets/raiane-jardim-noturno-08.jpeg",
+  "assets/raiane-bastidores-retrato-01.jpeg",
 ];
 
 const total = assets.length + 2;
+const newEditorialScenes = [
+  {
+    title: "Flor em cena",
+    copy: "Presença de corpo inteiro, elegância natural e domínio da silhueta",
+    layout: "full-body garden",
+  },
+  {
+    title: "Contraste vivo",
+    copy: "O olhar encontra cor, textura e personalidade",
+    layout: "portrait garden face-safe",
+  },
+  {
+    title: "Olhar botânico",
+    copy: "Força serena em uma composição intensa",
+    layout: "poster garden face-safe",
+  },
+  {
+    title: "Linha e gesto",
+    copy: "Postura longa, gesto leve e leitura comercial",
+    layout: "full-body garden",
+  },
+  {
+    title: "Vertical",
+    copy: "Proporção, presença e movimento sem excesso",
+    layout: "full-body garden",
+  },
+  {
+    title: "Close",
+    copy: "Expressão aberta e beleza em primeiro plano",
+    layout: "portrait garden face-safe",
+  },
+  {
+    title: "Noite em flor",
+    copy: "Cor, espontaneidade e presença sob a luz urbana",
+    layout: "portrait garden garden-night face-safe",
+  },
+  {
+    title: "Gesto botânico",
+    copy: "Perfil, delicadeza e intenção em uma composição noturna",
+    layout: "portrait garden garden-warm face-safe",
+  },
+  {
+    title: "Entre cenas",
+    copy: "Um retrato espontâneo que amplia a versatilidade do book",
+    layout: "portrait backstage face-safe",
+  },
+];
+
+const chapterMarkers = new Map([
+  [
+    61,
+    {
+      number: "03",
+      kicker: "COR / PRESENÇA / CONTRASTE",
+      title: "JARDIM NOTURNO",
+      copy: "Raiane atravessa a cor com elegância e sustenta a cena do retrato ao corpo inteiro.",
+    },
+  ],
+  [
+    69,
+    {
+      number: "04",
+      kicker: "NATURAL / PRÓXIMO / REAL",
+      title: "BASTIDORES",
+      copy: "A mesma identidade fora da produção: expressão, personalidade e verdade.",
+    },
+  ],
+]);
+
 const portfolio = assets.map((src, index) => {
+  if (index >= 61) {
+    return { src, ...newEditorialScenes[index - 61] };
+  }
   const scene = scenes[index % scenes.length];
   return { src, title: scene[0], copy: scene[1], layout: scene[2] };
 });
@@ -79,11 +174,45 @@ function renderPortfolio() {
   const root = document.querySelector(".portfolio");
   if (!root) return;
   portfolio.forEach((item, index) => {
+    const chapter = chapterMarkers.get(index);
+    if (chapter) {
+      const divider = document.createElement("div");
+      divider.className = "chapter-divider";
+      divider.innerHTML = `<div class="chapter-number">${chapter.number}</div><div class="chapter-heading"><p>${chapter.kicker}</p><h2>${chapter.title}</h2></div><p class="chapter-copy">${chapter.copy}</p>`;
+      root.appendChild(divider);
+    }
     const number = String(index + 2).padStart(2, "0");
     const element = document.createElement("article");
-    element.className = `scene ${item.layout} scene-${number} face-safe`;
-    element.innerHTML = `<img loading="lazy" src="${item.src}" alt="Raiane — ${item.title}"><div class="wash"></div><div class="caption"><span>${number}/${total}</span><h3>${item.title}</h3><p>${item.copy}</p></div>`;
+    element.className = `scene ${item.layout} scene-${number}`;
+    element.style.setProperty("--order", index);
+    element.style.setProperty("--delay", `${(index % 3) * 90}ms`);
+    element.tabIndex = 0;
+    element.setAttribute("role", "button");
+    element.setAttribute("aria-label", `Ampliar foto ${number}: ${item.title}`);
+    element.innerHTML = `<div class="scene-media"><img loading="lazy" src="${item.src}" alt="Raiane — ${item.title}"></div><div class="caption"><span>${number}/${total}</span><div><h3>${item.title}</h3><p>${item.copy}</p></div></div>`;
     element.addEventListener("click", () => openLightbox(index));
+    if (
+      matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)")
+        .matches
+    ) {
+      element.addEventListener("pointermove", (event) => {
+        const rect = element.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        element.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
+        element.style.setProperty("--tilt-y", `${(x * 5).toFixed(2)}deg`);
+      });
+      element.addEventListener("pointerleave", () => {
+        element.style.setProperty("--tilt-x", "0deg");
+        element.style.setProperty("--tilt-y", "0deg");
+      });
+    }
+    element.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLightbox(index);
+      }
+    });
     root.appendChild(element);
   });
 }
@@ -98,7 +227,8 @@ function openLightbox(index) {
   image.alt = `Raiane — ${item.title}`;
   box.querySelector("b").textContent = item.title;
   box.querySelector("span").textContent = item.copy;
-  box.showModal();
+  const show = () => box.showModal();
+  document.startViewTransition ? document.startViewTransition(show) : show();
 }
 
 function initLightbox() {
@@ -110,16 +240,70 @@ function initLightbox() {
 }
 initLightbox();
 
-addEventListener("scroll", () => {
+let motionFrame = 0;
+function updateMotion() {
   const distance = document.documentElement.scrollHeight - innerHeight;
   const progress = document.querySelector(".progress");
   if (progress)
     progress.style.transform = `scaleX(${distance ? scrollY / distance : 0})`;
   document.documentElement.style.setProperty("--scroll-y", `${scrollY}px`);
-});
+  document.documentElement.style.setProperty(
+    "--hero-shift",
+    `${Math.min(scrollY * 0.18, 180).toFixed(1)}px`,
+  );
+
+  const runway = document.querySelector(".runway-break");
+  if (runway) {
+    const rect = runway.getBoundingClientRect();
+    const runwayRange = Math.max(runway.offsetHeight - innerHeight, 1);
+    const chapterProgress = Math.max(
+      0,
+      Math.min(1, -rect.top / runwayRange),
+    );
+    runway.style.setProperty("--chapter-progress", chapterProgress.toFixed(3));
+    runway.style.setProperty(
+      "--runway-text-a",
+      `${((chapterProgress - 0.5) * 7).toFixed(2)}vw`,
+    );
+    runway.style.setProperty(
+      "--runway-text-b",
+      `${((0.5 - chapterProgress) * 7).toFixed(2)}vw`,
+    );
+    runway.style.setProperty(
+      "--runway-one-shift",
+      `${((0.5 - chapterProgress) * 120).toFixed(1)}px`,
+    );
+    runway.style.setProperty(
+      "--runway-two-shift",
+      `${((chapterProgress - 0.5) * 170).toFixed(1)}px`,
+    );
+    runway.style.setProperty(
+      "--runway-three-shift",
+      `${((0.5 - chapterProgress) * 150).toFixed(1)}px`,
+    );
+  }
+
+  document.querySelectorAll(".scene.seen").forEach((scene) => {
+    const rect = scene.getBoundingClientRect();
+    if (rect.bottom < -100 || rect.top > innerHeight + 100) return;
+    const center = rect.top + rect.height / 2;
+    const normalized = (center - innerHeight / 2) / innerHeight;
+    const shift = Math.max(-34, Math.min(34, normalized * -28));
+    scene.style.setProperty("--scene-shift", `${shift.toFixed(1)}px`);
+  });
+  motionFrame = 0;
+}
+
+function queueMotionUpdate() {
+  if (!motionFrame) motionFrame = requestAnimationFrame(updateMotion);
+}
+
+addEventListener("scroll", queueMotionUpdate, { passive: true });
+addEventListener("resize", queueMotionUpdate, { passive: true });
+queueMotionUpdate();
 
 const revealTargets = document.querySelectorAll(
-  ".scene,.manifesto,.editorial-intro",
+  ".scene,.chapter-divider,.manifesto,.editorial-intro,.stats,.runway-break,.profile",
 );
 if (typeof IntersectionObserver === "undefined") {
   revealTargets.forEach((element) => element.classList.add("seen"));
@@ -146,13 +330,31 @@ if (
     .matches
 ) {
   hero.addEventListener("pointermove", (event) => {
-    hero.style.setProperty(
-      "--mx",
-      (event.clientX / innerWidth - 0.5).toFixed(3),
-    );
-    hero.style.setProperty(
-      "--my",
-      (event.clientY / innerHeight - 0.5).toFixed(3),
-    );
+    const mx = event.clientX / innerWidth - 0.5;
+    const my = event.clientY / innerHeight - 0.5;
+    hero.style.setProperty("--hero-x", `${(mx * -18).toFixed(1)}px`);
+    hero.style.setProperty("--hero-y", `${(my * -12).toFixed(1)}px`);
+    hero.style.setProperty("--hero-rotate-x", `${(my * -3).toFixed(2)}deg`);
+    hero.style.setProperty("--hero-rotate-y", `${(mx * 4).toFixed(2)}deg`);
   });
 }
+
+const pointerOrb = document.querySelector(".pointer-orb");
+if (
+  pointerOrb &&
+  matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)").matches
+) {
+  document.addEventListener(
+    "pointermove",
+    (event) => {
+      pointerOrb.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+    },
+    { passive: true },
+  );
+}
+
+function finishIntro() {
+  document.documentElement.classList.add("experience-loaded");
+}
+addEventListener("load", finishIntro, { once: true });
+setTimeout(finishIntro, 900);

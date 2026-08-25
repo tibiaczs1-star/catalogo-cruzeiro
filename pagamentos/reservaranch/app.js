@@ -460,7 +460,12 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       if (openingVideo) {
         openingVideo.muted = true;
         openingVideo.volume = 0;
-        await openingVideo.play();
+        openingVideo.playsInline = true;
+        const videoPlay = openingVideo.play();
+        videoPlay.catch((error) => {
+          console.info("Vídeo de abertura seguindo sem bloquear a reserva.", error);
+        });
+        await Promise.race([videoPlay, wait(850)]).catch(() => {});
       }
       await Promise.race([
         playOpeningVoice(openingVoice),

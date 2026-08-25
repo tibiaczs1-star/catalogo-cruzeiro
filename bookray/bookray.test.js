@@ -1,104 +1,174 @@
-const test = require("node:test"),
-  assert = require("node:assert/strict"),
-  fs = require("node:fs"),
-  path = require("node:path");
-const root = __dirname,
-  html = fs.readFileSync(path.join(root, "index.html"), "utf8"),
-  app = fs.readFileSync(path.join(root, "app.js"), "utf8"),
-  css = fs.readFileSync(path.join(root, "styles.css"), "utf8"),
-  kit = fs.readFileSync(path.join(root, "media-kit.html"), "utf8");
-const old = [
-  "6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
-  "IMG_0406.jpeg",
-  "IMG_0407.jpeg",
-  "IMG_0449.jpeg",
-  "5f9195c0-957a-44e8-ba89-f8e0291b8a32.JPG.jpeg",
-  "IMG_0602.jpeg",
-  "IMG_0605.jpeg",
-  "IMG_0657.jpeg",
-  "259b0ccb-9b2a-4b97-b0e2-fc2d09eee812.JPG.jpeg",
-  "bc0cea41-9f73-4f8a-a754-04290a741733.JPG.jpeg",
-  "1c69e6fc-05f9-4ad6-9d4f-5e595f645762.JPG.jpeg",
-  "21496ee4-5f41-4ea0-850e-85ffb099a475.JPG.jpeg",
-  "5200325f-1857-4517-8fbc-c4fcabd0ab73.JPG.jpeg",
-  "1999e35b-ef92-41c8-b717-9df2e47bd880.JPG.jpeg",
-  "6a2f159a-5513-4df7-8214-a58ea0caca22.JPG.jpeg",
-  "5b61d66c-39e7-4868-a193-230185470d4d.JPG.jpeg",
-  "IMG_0767.jpeg",
-  "IMG_0812.jpeg",
-  "IMG_0816.jpeg",
-  "IMG_0817.jpeg",
-  "IMG_0818.jpeg",
-  "IMG_0830.jpeg",
-  "IMG_0903.jpeg",
-  "87189062-434a-437b-aea5-2b0afaaadfe2.JPG.jpeg",
-  "304aa290-f2bc-43fc-b953-0b427eba0cc3.JPG.jpeg",
-  "3b0d5937-0611-43cc-8b7e-81dd4cb1b44f.JPG.jpeg",
-  "96cd42f8-7399-42a1-a6cf-26aceb41ecc2.JPG.jpeg",
-  "IMG_1127.jpeg",
-  "IMG_1128.jpeg",
-  "IMG_1129.jpeg",
-  "IMG_1130.jpeg",
-  "IMG_1154.jpeg",
-  "IMG_1200.jpeg",
-  "IMG_1201.jpeg",
-];
-const treated = [
-  "campanha-country-botas-douradas-close.webp",
-  "campanha-country-botas-rosa-estudio.webp",
-  "campanha-country-botas-rosa-loja.webp",
-  "campanha-country-raiane-blocos.webp",
-  "campanha-country-raiane-botas-douradas.webp",
-  "campanha-country-raiane-botas-rosa-loja.webp",
-  "campanha-country-raiane-editorial-estudio.webp",
-  "campanha-country-raiane-por-do-sol.webp",
-  "lifestyle-country-cavalo.webp",
-  "parceiros-laco-de-ouro.webp",
-  "produto-botas-douradas-frontal.webp",
-  "produto-botas-douradas-perfil.webp",
-  "produto-botas-rosa-fazenda.webp",
-  "produto-botas-rosa-pegada-loja.webp",
-];
-test("acervo cumulativo usa 48 fotos distintas uma vez cada", () => {
-  const refs = [
-    ...`${html}\n${app}`.matchAll(/assets\/([^\"'`]+\.(?:jpe?g|webp))/gi),
-  ].map((x) => x[1]);
-  assert.equal(refs.length, 48);
-  assert.equal(new Set(refs).size, 48);
-  assert.deepEqual([...refs].sort(), [...old, ...treated].sort());
-  for (const f of refs)
-    assert.ok(fs.existsSync(path.join(root, "assets", f)), f);
+const test = require("node:test");
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const root = __dirname;
+const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const app = fs.readFileSync(path.join(root, "app.js"), "utf8");
+const css = fs.readFileSync(path.join(root, "styles.css"), "utf8");
+const kit = fs.readFileSync(path.join(root, "media-kit.html"), "utf8");
+const server = fs.readFileSync(path.join(root, "..", "server.js"), "utf8");
+
+function galleryAssets() {
+  const block = app.match(/const assets = \[([\s\S]*?)\];/);
+  assert.ok(block, "lista principal de fotos ausente");
+  return [...block[1].matchAll(/"(assets\/[^"]+\.(?:jpe?g|png|webp))"/gi)].map(
+    (match) => match[1],
+  );
+}
+
+function mediaKitArchiveAssets() {
+  const block = kit.match(/const archiveAssets = \[([\s\S]*?)\];/);
+  assert.ok(block, "lista completa do media kit ausente");
+  return [...block[1].matchAll(/"(assets\/[^\"]+\.(?:jpe?g|png|webp))"/gi)].map(
+    (match) => match[1],
+  );
+}
+
+test("o book principal mantém as 70 fotos da galeria, incluindo o Jardim Noturno", () => {
+  const refs = galleryAssets();
+  assert.equal(refs.length, 70);
+  assert.equal(new Set(refs).size, refs.length);
+
+  for (let index = 1; index <= 15; index += 1) {
+    const suffix = String(index).padStart(2, "0");
+    assert.ok(
+      refs.includes(`assets/raiane-sensacao-${suffix}.jpg`),
+      `raiane-sensacao-${suffix}.jpg não entrou no book principal`,
+    );
+  }
+
+  for (const ref of [
+    "assets/raiane-jardim-noturno-01-corpo.png",
+    "assets/raiane-jardim-noturno-02.jpeg",
+    "assets/raiane-jardim-noturno-03.jpeg",
+    "assets/raiane-jardim-noturno-04.jpeg",
+    "assets/raiane-jardim-noturno-05.jpeg",
+    "assets/raiane-jardim-noturno-06.jpeg",
+    "assets/raiane-jardim-noturno-07.jpeg",
+    "assets/raiane-jardim-noturno-08.jpeg",
+    "assets/raiane-bastidores-retrato-01.jpeg",
+  ]) {
+    assert.ok(refs.includes(ref), ref);
+  }
+
+  for (const ref of refs) {
+    assert.ok(fs.existsSync(path.join(root, ref)), ref);
+  }
 });
-test("não usa fotos brutas com logos e preserva enquadramento", () => {
-  assert.doesNotMatch(`${html}\n${app}`, /raiane-sensacao-/);
+
+test("o media kit e o PDF incorporam as 72 fotos únicas do book", () => {
+  const expected = [
+    "assets/campanha-country-raiane-por-do-sol.webp",
+    ...galleryAssets(),
+    "assets/campanha-country-raiane-botas-rosa-loja.webp",
+  ];
+  const refs = mediaKitArchiveAssets();
+
+  assert.equal(refs.length, 72);
+  assert.equal(new Set(refs).size, 72);
+  assert.deepEqual(new Set(refs), new Set(expected));
+  for (const ref of refs) assert.ok(fs.existsSync(path.join(root, ref)), ref);
+});
+
+test("a página oficial sempre busca o HTML atual e usa assets versionados juntos", () => {
+  const styleVersion = html.match(/styles\.css\?v=([^\"]+)/)?.[1];
+  const scriptVersion = html.match(/app\.js\?v=([^\"]+)/)?.[1];
+  const webglVersion = html.match(/webgl\.js\?v=([^\"]+)/)?.[1];
+  assert.ok(styleVersion, "versão do CSS ausente");
+  assert.equal(scriptVersion, styleVersion);
+  assert.equal(webglVersion, styleVersion);
+  assert.doesNotMatch(styleVersion, /20260806-r(?:8|11)$/);
+  assert.match(
+    server,
+    /pathname === "\/bookray\/"[\s\S]*?cacheControl:\s*"no-store"/,
+  );
+});
+
+test("o capítulo de passarela usa a nova foto e fala profissionalmente de Raiane", () => {
+  const runway = html.match(/<section class="runway-break"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.doesNotMatch(runway, /campanha-country-raiane-botas-douradas\.webp/);
+  assert.match(runway, /campanha-country-raiane-editorial-estudio\.webp/);
+  assert.doesNotMatch(html, /book construído|cada imagem ganha ritmo/i);
+  assert.match(html, /Versátil para editoriais, campanhas e passarela/i);
+});
+
+test("a foto retirada do destaque aparece somente no acervo completo", () => {
+  const references = kit.match(/assets\/raiane-sensacao-10\.jpg/g) ?? [];
+  assert.equal(references.length, 1);
+  assert.match(kit, /<img src="assets\/campanha-country-raiane-editorial-estudio\.webp" \/>/);
+});
+
+test("a direção visual tem abertura, profundidade e capítulo editorial", () => {
+  for (const hook of [
+    "experience-intro",
+    "hero-webgl",
+    "hero-depth",
+    "runway-break",
+    "pointer-orb",
+  ]) {
+    assert.match(html, new RegExp(`class="[^"]*${hook}`));
+  }
+  assert.match(css, /perspective:\s*\d+px/);
+  assert.match(css, /transform-style:\s*preserve-3d/);
+  assert.match(css, /@keyframes\s+studio-curtain/);
+  assert.match(css, /@keyframes\s+type-sweep/);
+  assert.match(app, /JARDIM NOTURNO/);
+  assert.match(app, /BASTIDORES/);
+  assert.match(css, /\.chapter-divider/);
+  assert.match(css, /\.scene\.full-body/);
+});
+
+test("o WebGL é progressivo, leve e respeita acessibilidade", () => {
+  const webgl = fs.readFileSync(path.join(root, "webgl.js"), "utf8");
+  assert.match(webgl, /getContext\(["']webgl/);
+  assert.match(webgl, /prefers-reduced-motion/);
+  assert.match(webgl, /saveData/);
+  assert.match(webgl, /pointer:\s*coarse/);
+  assert.match(webgl, /devicePixelRatio/);
+  assert.match(webgl, /visibilitychange/);
+});
+
+test("as revelações e o 3D funcionam sem depender de CSS experimental", () => {
+  assert.match(css, /\.js \.scene\s*\{[^}]*opacity:\s*0/s);
+  assert.match(css, /\.js \.scene\.seen\s*\{[^}]*opacity:\s*1/s);
+  assert.match(app, /requestAnimationFrame/);
+  assert.match(app, /pointermove/);
+  assert.match(app, /--tilt-x/);
+  assert.match(app, /--scene-shift/);
+  assert.match(app, /IntersectionObserver/);
+  assert.match(app, /startViewTransition/);
+});
+
+test("redução de movimento mantém todas as fotos visíveis", () => {
+  assert.match(
+    css,
+    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*\.js \.scene[\s\S]*opacity:\s*1/,
+  );
+});
+
+test("o enquadramento preserva rosto, corpo e identidade", () => {
   assert.match(css, /\.scene\.face-safe img\s*\{[^}]*object-fit:\s*contain/s);
-  assert.match(html, /Sem alterar rosto, corpo ou identidade/i);
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.scene img\s*\{[^}]*transform:\s*none/s,
+  );
+  assert.match(html, /identidade própria diante das câmeras/i);
   assert.doesNotMatch(app, /imagegen|face-swap|body-edit/i);
 });
-test("cada foto recebe conceito e interação", () => {
-  for (const x of [
-    "Magnetismo",
-    "Ritmo",
-    "Presença",
-    "Precisão",
-    "Raiz",
-    "Impulso",
-    "Atitude",
-    "Movimento",
-    "Instinto",
-    "Desejo",
-    "Elegância",
-    "Assinatura",
-    "Horizonte",
-    "Suspense",
-    "Calor",
-  ])
-    assert.match(app, new RegExp(x));
-  assert.match(html, /<dialog[^>]+id="lightbox"/);
-  assert.match(app, /IntersectionObserver/);
+
+test("o media kit remove o fundo barrento e protege as tarjas", () => {
+  assert.doesNotMatch(kit, /#8e2415|#24100d|radial-gradient\(\s*circle at 50% 30%/i);
+  assert.doesNotMatch(kit, /filter:\s*blur\(/i);
+  assert.match(kit, /\.shot,\s*\.card\s*\{[^}]*background:\s*#(?:090909|0a0a0a)/s);
+  assert.match(kit, /\.cover::before\s*\{[^}]*white-space:\s*nowrap/s);
+  assert.match(kit, /\.cover::after\s*\{[^}]*white-space:\s*nowrap/s);
+  assert.match(kit, /\.gallery-title\s*\{[^}]*overflow-wrap:\s*normal/s);
 });
-test("media kit profissional em português", () => {
-  for (const x of [
+
+test("media kit profissional conserva informações e download", () => {
+  for (const value of [
     "17",
     "1,82",
     "55",
@@ -106,35 +176,39 @@ test("media kit profissional em português", () => {
     "80 MIL",
     "50 MI",
     "responsável legal",
-  ])
-    assert.match(kit, new RegExp(x, "i"));
+  ]) {
+    assert.match(kit, new RegExp(value, "i"));
+  }
   assert.match(kit, /Métricas históricas/i);
   assert.match(kit, /@page/);
-});
-test("media kit alterna P&B, cor e showcases sem cortar rostos", () => {
-  for (const x of ["visual-bw", "visual-pop", "visual-showcase"])
-    assert.match(kit, new RegExp(x));
-  assert.match(kit, /object-fit:\s*contain/);
-  assert.match(kit, /word-break:\s*keep-all/);
-  assert.match(kit, /hyphens:\s*none/);
-});
-test("media kit oferece PDF para download", () => {
   assert.match(kit, /href="downloads\/media-kit-rayane\.pdf"/);
-  assert.match(kit, /download/);
 });
-test("book liga para o media kit", () => assert.match(html, /media-kit\.html/));
-test("javascript aprimora sem derrubar o conteúdo quando um módulo está ausente", () => {
-  assert.match(app, /if\s*\(!root\)\s*return/);
-  assert.match(app, /if\s*\(!box\)\s*return/);
-  assert.match(app, /typeof IntersectionObserver/);
+
+test("book conserva narrativa e destinos profissionais", () => {
+  for (const id of ["manifesto", "portfolio", "trajetoria"]) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+  assert.match(html, /EDITORIAL EM MOVIMENTO/i);
+  assert.match(html, /media-kit\.html/);
+  assert.match(html, /downloads\/media-kit-rayane\.pdf/);
+});
+
+test("a faixa editorial não cria rolagem horizontal no mobile", () => {
   assert.match(
     css,
-    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*\.js \.scene[\s\S]*opacity:\s*1/,
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.ticker\s*\{[^}]*transform:\s*none/
   );
 });
-test("merge mantém narrativa e destinos profissionais", () => {
-  for (const id of ["manifesto", "portfolio", "trajetoria"])
-    assert.match(html, new RegExp(`id="${id}"`));
-  assert.match(html, /EDITORIAL EM MOVIMENTO/i);
-  assert.match(html, /downloads\/media-kit-rayane\.pdf/);
+
+test("a inclinação da faixa preserva o desenho sem alargar o desktop", () => {
+  const tickerBlock = css.match(/\.ticker\s*\{([^}]*)\}/)?.[1] ?? "";
+  assert.doesNotMatch(tickerBlock, /transform:\s*rotate/);
+  assert.match(tickerBlock, /clip-path:\s*polygon/);
+});
+
+test("o media kit encaixa a prancheta inteira no celular", () => {
+  assert.match(kit, /--page-fit/);
+  assert.match(kit, /zoom:\s*var\(--page-fit/);
+  assert.match(kit, /function\s+fitMediaKitPages/);
+  assert.match(kit, /window\.innerWidth/);
 });

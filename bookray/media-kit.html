@@ -284,31 +284,31 @@
       .cover.tr {
         right: -2%;
         top: -2%;
-        width: 48%;
-        height: 32%;
+        width: 47%;
+        height: 25%;
         clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 80%);
       }
       .cover.brand-top {
         left: -2%;
         top: -2%;
-        width: 57%;
-        height: 35%;
+        width: 52%;
+        height: 27%;
         clip-path: polygon(0 0, 100% 0, 84% 100%, 0 78%);
       }
       .cover.brand-mid {
         left: auto;
         right: -3%;
-        top: 34%;
-        width: 70%;
-        height: 50%;
-        transform: rotate(-4deg);
+        top: 38%;
+        width: 63%;
+        height: 28%;
+        transform: rotate(-2deg);
         clip-path: polygon(8% 0, 100% 7%, 92% 100%, 0 90%);
       }
       .cover.brand-low {
         left: -2%;
         bottom: -2%;
         width: 104%;
-        height: 43%;
+        height: 31%;
         transform: none;
         clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
       }
@@ -349,7 +349,7 @@
     </style>
     <style>
       html {
-        background: #17110f;
+        background: #080808;
       }
       body {
         display: flex;
@@ -389,10 +389,11 @@
       }
       .gallery-title {
         max-width: 100%;
-        font-size: 20mm;
+        font-size: 18mm;
         line-height: 0.9;
-        letter-spacing: -0.025em;
+        letter-spacing: -0.035em;
         white-space: nowrap;
+        overflow-wrap: normal;
         word-break: keep-all;
         hyphens: none;
       }
@@ -439,28 +440,18 @@
       }
       .visual-showcase {
         filter: saturate(1.5) contrast(1.13);
-        transform: scale(0.985);
+        transform: none;
         box-shadow:
           0 0 0 1px rgba(255, 255, 255, 0.18),
           0 20px 55px rgba(242, 57, 22, 0.24);
       }
       .shot,
       .card {
-        background: radial-gradient(
-          circle at 50% 30%,
-          #8e2415 0,
-          #24100d 44%,
-          #080706 100%
-        );
+        background: #090909;
       }
       .cream .shot,
       .cream .card {
-        background: radial-gradient(
-          circle at 50% 25%,
-          #ffc94f 0,
-          #ee5028 42%,
-          #2c1210 100%
-        );
+        background: #eee7da;
       }
       @media print {
         body {
@@ -476,9 +467,19 @@
           display: none !important;
         }
       }
-      @media (max-width: 820px) {
+      @media screen and (max-width: 820px) {
         body {
-          align-items: flex-start;
+          align-items: center;
+          gap: 8px;
+          padding-top: 0;
+        }
+        .page {
+          zoom: var(--page-fit, 1);
+        }
+        .download-cta {
+          right: 12px;
+          bottom: 12px;
+          padding: 12px 16px;
         }
       }
     </style>
@@ -517,8 +518,8 @@
       .cover::before {
         content: "R.";
         position: absolute;
-        left: 10%;
-        top: 18%;
+        left: 12%;
+        top: 15%;
         font:
           900 22pt/1 Arial Black,
           Arial,
@@ -529,9 +530,9 @@
       .cover::after {
         content: "RUNWAY / EDITORIAL";
         position: absolute;
-        left: 10%;
+        left: 12%;
         right: 7%;
-        bottom: 13%;
+        bottom: 15%;
         font:
           800 6.5pt/1.15 Arial,
           sans-serif;
@@ -546,7 +547,7 @@
       }
       .cover.tr::before,
       .cover.tr::after {
-        left: 28%;
+        left: 24%;
       }
       .cover.tr::after {
         right: 4%;
@@ -554,10 +555,10 @@
         letter-spacing: 0.1em;
       }
       .cover.brand-low::before {
-        top: 30%;
+        top: 24%;
       }
       .cover.brand-low::after {
-        bottom: 14%;
+        bottom: 18%;
       }
       .digital-safe::before {
         font-size: 15pt;
@@ -597,6 +598,17 @@
           800 6pt/1 Arial,
           sans-serif;
         letter-spacing: 0.12em;
+      }
+      .archive-page .gallery-title {
+        font-size: 14mm;
+        margin: 2mm 0;
+      }
+      .archive-page .archive-grid {
+        gap: 3mm;
+        margin-top: 4mm;
+      }
+      .archive-page .archive-photo {
+        height: 66mm;
       }
     </style>
   </head>
@@ -664,7 +676,7 @@
           </p>
         </div>
         <div class="card" style="height: 205mm">
-          <img src="assets/raiane-sensacao-10.jpg" />
+          <img src="assets/campanha-country-raiane-editorial-estudio.webp" />
           <div class="cover digital-safe">Foco</div>
         </div>
       </div>
@@ -770,81 +782,7 @@
       </p>
       <span class="folio">07</span>
     </section>
-    <section class="page pad black">
-      <div class="eyebrow">Acervo completo / 07</div>
-      <div class="rule"></div>
-      <h2 class="gallery-title">TODAS AS FOTOS</h2>
-      <div class="archive-grid">
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-01.jpg" />
-          <figcaption>01</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-02.jpg" />
-          <figcaption>02</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-03.jpg" />
-          <figcaption>03</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-04.jpg" />
-          <figcaption>04</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-05.jpg" />
-          <figcaption>05</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-06.jpg" />
-          <figcaption>06</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-07.jpg" />
-          <figcaption>07</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-08.jpg" />
-          <figcaption>08</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-09.jpg" />
-          <figcaption>09</figcaption>
-        </figure>
-      </div>
-    </section>
-    <section class="page pad">
-      <div class="eyebrow">Acervo completo / 08</div>
-      <div class="rule"></div>
-      <h2 class="gallery-title">CONTINUAÇÃO</h2>
-      <div class="archive-grid">
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-10.jpg" />
-          <figcaption>10</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-11.jpg" />
-          <figcaption>11</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-12.jpg" />
-          <figcaption>12</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-13.jpg" />
-          <figcaption>13</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-14.jpg" />
-          <figcaption>14</figcaption>
-        </figure>
-        <figure class="archive-photo">
-          <img src="assets/raiane-sensacao-15.jpg" />
-          <figcaption>15</figcaption>
-        </figure>
-      </div>
-    </section>
-    <section class="page black">
+    <section class="page black" id="contact-page">
       <div
         class="card"
         style="position: absolute; inset: 0; height: auto; border-radius: 0"
@@ -868,7 +806,7 @@
           bottom: 18mm;
         "
       >
-        <div class="eyebrow">Contato / 07</div>
+        <div class="eyebrow">Contato / 15</div>
         <h2 class="quote" style="margin: 5mm 0">
           VAMOS CRIAR<br />ALGO MARCANTE?
         </h2>
@@ -879,5 +817,120 @@
         </p>
       </div>
     </section>
+    <script>
+      const archiveAssets = [
+        "assets/campanha-country-raiane-por-do-sol.webp",
+        "assets/6ffa85aa-813c-4136-b2e8-0ff248324533.JPG.jpeg",
+        "assets/IMG_0406.jpeg",
+        "assets/IMG_0407.jpeg",
+        "assets/IMG_0449.jpeg",
+        "assets/5f9195c0-957a-44e8-ba89-f8e0291b8a32.JPG.jpeg",
+        "assets/IMG_0602.jpeg",
+        "assets/IMG_0605.jpeg",
+        "assets/IMG_0657.jpeg",
+        "assets/259b0ccb-9b2a-4b97-b0e2-fc2d09eee812.JPG.jpeg",
+        "assets/bc0cea41-9f73-4f8a-a754-04290a741733.JPG.jpeg",
+        "assets/1c69e6fc-05f9-4ad6-9d4f-5e595f645762.JPG.jpeg",
+        "assets/21496ee4-5f41-4ea0-850e-85ffb099a475.JPG.jpeg",
+        "assets/5200325f-1857-4517-8fbc-c4fcabd0ab73.JPG.jpeg",
+        "assets/1999e35b-ef92-41c8-b717-9df2e47bd880.JPG.jpeg",
+        "assets/6a2f159a-5513-4df7-8214-a58ea0caca22.JPG.jpeg",
+        "assets/5b61d66c-39e7-4868-a193-230185470d4d.JPG.jpeg",
+        "assets/IMG_0767.jpeg",
+        "assets/IMG_0812.jpeg",
+        "assets/IMG_0816.jpeg",
+        "assets/IMG_0817.jpeg",
+        "assets/IMG_0818.jpeg",
+        "assets/IMG_0830.jpeg",
+        "assets/IMG_0903.jpeg",
+        "assets/87189062-434a-437b-aea5-2b0afaaadfe2.JPG.jpeg",
+        "assets/304aa290-f2bc-43fc-b953-0b427eba0cc3.JPG.jpeg",
+        "assets/3b0d5937-0611-43cc-8b7e-81dd4cb1b44f.JPG.jpeg",
+        "assets/96cd42f8-7399-42a1-a6cf-26aceb41ecc2.JPG.jpeg",
+        "assets/IMG_1127.jpeg",
+        "assets/IMG_1128.jpeg",
+        "assets/IMG_1129.jpeg",
+        "assets/IMG_1130.jpeg",
+        "assets/IMG_1154.jpeg",
+        "assets/IMG_1200.jpeg",
+        "assets/IMG_1201.jpeg",
+        "assets/campanha-country-botas-douradas-close.webp",
+        "assets/campanha-country-botas-rosa-estudio.webp",
+        "assets/campanha-country-botas-rosa-loja.webp",
+        "assets/campanha-country-raiane-blocos.webp",
+        "assets/campanha-country-raiane-botas-douradas.webp",
+        "assets/campanha-country-raiane-editorial-estudio.webp",
+        "assets/lifestyle-country-cavalo.webp",
+        "assets/parceiros-laco-de-ouro.webp",
+        "assets/produto-botas-douradas-frontal.webp",
+        "assets/produto-botas-douradas-perfil.webp",
+        "assets/produto-botas-rosa-fazenda.webp",
+        "assets/produto-botas-rosa-pegada-loja.webp",
+        "assets/raiane-sensacao-01.jpg",
+        "assets/raiane-sensacao-02.jpg",
+        "assets/raiane-sensacao-03.jpg",
+        "assets/raiane-sensacao-04.jpg",
+        "assets/raiane-sensacao-05.jpg",
+        "assets/raiane-sensacao-06.jpg",
+        "assets/raiane-sensacao-07.jpg",
+        "assets/raiane-sensacao-08.jpg",
+        "assets/raiane-sensacao-09.jpg",
+        "assets/raiane-sensacao-10.jpg",
+        "assets/raiane-sensacao-11.jpg",
+        "assets/raiane-sensacao-12.jpg",
+        "assets/raiane-sensacao-13.jpg",
+        "assets/raiane-sensacao-14.jpg",
+        "assets/raiane-sensacao-15.jpg",
+        "assets/raiane-jardim-noturno-01-corpo.png",
+        "assets/raiane-jardim-noturno-02.jpeg",
+        "assets/raiane-jardim-noturno-03.jpeg",
+        "assets/raiane-jardim-noturno-04.jpeg",
+        "assets/raiane-jardim-noturno-05.jpeg",
+        "assets/raiane-jardim-noturno-06.jpeg",
+        "assets/raiane-jardim-noturno-07.jpeg",
+        "assets/raiane-jardim-noturno-08.jpeg",
+        "assets/raiane-bastidores-retrato-01.jpeg",
+        "assets/campanha-country-raiane-botas-rosa-loja.webp",
+      ];
+
+      function renderArchivePages() {
+        const contactPage = document.querySelector("#contact-page");
+        document
+          .querySelectorAll(".archive-static")
+          .forEach((page) => page.remove());
+
+        for (let offset = 0; offset < archiveAssets.length; offset += 9) {
+          const pageNumber = 8 + offset / 9;
+          const page = document.createElement("section");
+          page.className = `page pad archive-page ${pageNumber % 2 === 0 ? "black" : ""}`;
+          const figures = archiveAssets
+            .slice(offset, offset + 9)
+            .map((src, index) => {
+              const number = String(offset + index + 1).padStart(2, "0");
+              return `<figure class="archive-photo"><img src="${src}" alt="Raiane — foto ${number}" /><figcaption>${number}</figcaption></figure>`;
+            })
+            .join("");
+          page.innerHTML = `<div class="eyebrow">Acervo completo / ${String(pageNumber).padStart(2, "0")}</div><div class="rule"></div><h2 class="gallery-title">${offset === 0 ? "72 FOTOS" : "CONTINUAÇÃO"}</h2><div class="archive-grid">${figures}</div><span class="folio">${String(pageNumber).padStart(2, "0")}</span>`;
+          contactPage.before(page);
+        }
+      }
+
+      function fitMediaKitPages() {
+        const page = document.querySelector(".page");
+        if (!page) return;
+
+        const pageWidth = page.offsetWidth;
+        const availableWidth = Math.min(
+          window.innerWidth,
+          document.documentElement.clientWidth
+        );
+        const pageFit = Math.min(1, availableWidth / pageWidth);
+        document.documentElement.style.setProperty("--page-fit", pageFit);
+      }
+
+      renderArchivePages();
+      fitMediaKitPages();
+      window.addEventListener("resize", fitMediaKitPages, { passive: true });
+    </script>
   </body>
 </html>
