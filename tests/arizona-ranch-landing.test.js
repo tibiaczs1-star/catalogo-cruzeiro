@@ -72,8 +72,8 @@ test("a experiência de retenção mantém o visitante orientado para a compra",
   assert.match(html, /class=["'][^"']*event-countdown/);
   assert.match(html, /data-event-date=["']2026-09-05T20:00:00-05:00["']/);
   assert.match(html, /Aqui a noite começa antes do primeiro acorde/i);
-  assert.match(html, /Experiência sonora imersiva/i);
-  assert.match(html, /id=["']sound-status["']/);
+  assert.doesNotMatch(html, /com som|som inicia|experiência sonora/i);
+  assert.doesNotMatch(html, /id=["']sound-status["']/);
   assert.match(app, /setupEventCountdown/);
   assert.match(app, /setupCinematicScroll/);
   assert.match(app, /requestAnimationFrame/);

@@ -365,7 +365,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Preparando a entrada…"; }
     if (progress) progress.style.width = "72%";
     const releaseStart = () => {
-      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona — com som"; }
+      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona"; }
       if (progress) progress.style.width = "100%";
     };
     const fallbackTimer = window.setTimeout(() => {
@@ -462,8 +462,6 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     render();
   }
   function setupRanchSound() {
-    const status = document.querySelector("#sound-status");
-    if (!status) return;
     let context;
     let ambience;
     let ambienceGain;
@@ -513,7 +511,6 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       ambience = context.createBufferSource(); ambienceGain = context.createGain(); const filter = context.createBiquadFilter();
       ambience.buffer = createNoise(8); ambience.loop = true; ambienceGain.gain.value = .018; filter.type = "lowpass"; filter.frequency.value = 950;
       ambience.connect(filter).connect(ambienceGain).connect(context.destination); ambience.start(); playWesternCue(); playHoofbeats(); window.setTimeout(playDistantMoo, 1200); cowTimer = window.setInterval(playDistantMoo, 14000);
-      status.classList.add("is-active"); status.querySelector("b").textContent = "Clima do rancho ligado";
     };
     window.startRanchAmbience = start;
   }

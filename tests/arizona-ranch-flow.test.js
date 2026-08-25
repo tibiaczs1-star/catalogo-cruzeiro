@@ -62,8 +62,9 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
 
   assert.match(html, /id=["']start-experience["']/i);
-  assert.match(html, />Entrar no Arizona — com som</);
-  assert.match(app, /openingButton\.textContent = "Entrar no Arizona — com som"/);
+  assert.match(html, />Entrar no Arizona</);
+  assert.doesNotMatch(html, /com som|som inicia|experiência sonora/i);
+  assert.match(app, /openingButton\.textContent = "Entrar no Arizona"/);
   assert.match(app, /openingButton\.textContent = "Preparando a entrada…"/);
   assert.match(app, /let openingMusicIsReady = false/);
   assert.match(app, /let openingMusicLoadTimedOut = false/);
