@@ -7,12 +7,18 @@ const projectRoot = path.resolve(__dirname, "..");
 const readProjectFile = (...segments) =>
   fs.readFileSync(path.join(projectRoot, ...segments), "utf8");
 
-test("a reserva conduz a pessoa por login, dados, mesa, WhatsApp e pagamento", () => {
+test("a reserva apresenta o mapa antes do Google e segue direto ao pagamento", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
-  ["login", "details", "table", "whatsapp", "payment"].forEach((step) => {
+  ["table", "login", "payment"].forEach((step) => {
     assert.match(html, new RegExp(`data-flow-step=["']${step}["']`));
   });
+  assert.doesNotMatch(html, /data-flow-step=["']details["']/);
+  assert.doesNotMatch(html, /data-flow-step=["']whatsapp["']/);
+  assert.match(app, /const flow = \["table", "login", "payment"\]/);
+  assert.match(html, /data-flow-step=["']table["'][^>]*>/);
+  assert.match(html, /data-flow-step=["']login["'][^>]*hidden/);
 
   assert.match(html, /id=["']payment-pix["']/);
   assert.match(html, /id=["']payment-card["']/);
@@ -31,10 +37,10 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.match(openingMarkup, /id=["']opening-video["']/i);
   assert.match(openingMarkup, /id=["']opening-voice["']/i);
   assert.match(openingMarkup, /id=["']opening-player["']/);
-  assert.match(openingMarkup, /arizona-entrada-mobile\.mp4/i);
+  assert.match(openingMarkup, /arizona-entrada\.mp4/i);
   assert.match(openingMarkup, /arizona-welcome\.mp3/i);
   assert.match(openingMarkup, /class=["']opening-brand["']/i);
-  assert.match(openingMarkup, /arizona-logo-web\.png/i);
+  assert.match(openingMarkup, /arizona-logo\.png/i);
   assert.match(openingMarkup, /Reserva para a Inaugura[çc][ãa]o Oficial do Arizona Ranch/i);
   assert.match(openingMarkup, /Sua mesa escolhida com calma/i);
   assert.doesNotMatch(openingMarkup, /opening-image/i);
@@ -48,8 +54,6 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.match(app, /const OPENING_MUSIC_READY_TIMEOUT_MS = 4200/);
   assert.doesNotMatch(app, /sendPlayerCommand/);
   assert.match(app, /const OPENING_VOICE_TEXT = /);
-  assert.doesNotMatch(html, /rel=["']preload["'][^>]+arizona-entrada\.mp4/i);
-  assert.match(openingMarkup, /preload=["']metadata["']/i);
 });
 
 test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inteiro", () => {
@@ -58,34 +62,32 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
 
   assert.match(html, /id=["']start-experience["']/i);
-  assert.match(html, />Iniciar reserva</);
-  assert.match(app, /openingButton\.textContent = "Iniciar reserva"/);
-  assert.match(app, /openingButton\.textContent = "Carregando trilha…"/);
+  assert.match(html, />Entrar no Arizona</);
+  assert.doesNotMatch(html, /com som|som inicia|experiência sonora/i);
+  assert.match(app, /openingButton\.textContent = "Entrar no Arizona"/);
+  assert.match(app, /openingButton\.textContent = "Preparando a entrada…"/);
   assert.match(app, /let openingMusicIsReady = false/);
   assert.match(app, /let openingMusicLoadTimedOut = false/);
-  assert.match(app, /openingButton\.disabled = true; openingButton\.textContent = "Carregando trilha…"/);
+  assert.match(app, /openingButton\.disabled = true; openingButton\.textContent = "Preparando a entrada…"/);
   assert.match(app, /window\.setTimeout\(\(\) => \{\s*openingMusicLoadTimedOut = true;\s*releaseStart\(\);\s*\}, OPENING_MUSIC_READY_TIMEOUT_MS\)/);
   assert.match(app, /releaseStart\(\);/);
   assert.match(app, /ensureOpeningMusicPlayer\(\)\s*\.then\(\(\) => \{/);
   assert.doesNotMatch(app, /openingButton\.textContent = "Atualize para iniciar"/);
   assert.match(app, /getIframe\?\.\(\)\?\.setAttribute\("allow", "autoplay; encrypted-media; picture-in-picture"\)/);
-  assert.match(app, /openingVideo\.muted = true/);
-  assert.match(app, /openingVideo\.volume = 0/);
-  assert.doesNotMatch(app, /openingVideo\.muted = false/);
-  assert.match(app, /const videoPlay = openingVideo\.play\(\)/);
-  assert.match(app, /await Promise\.race\(\[videoPlay, wait\(850\)\]\)/);
+  assert.match(app, /openingVideo\.muted = false/);
+  assert.match(app, /openingVideo\.volume = \.52/);
+  assert.match(app, /window\.startRanchAmbience\?\.\(\)/);
+  assert.match(app, /openingVideo\.play\(\)/);
   assert.match(app, /await Promise\.race\(\[\s*playOpeningVoice\(openingVoice\),\s*wait\(OPENING_PRESENTATION_MAX_MS\),\s*\]\)/);
   const startExperienceBody = app.match(/async function startExperience\(\) \{([\s\S]*?)\n  function bindEvents/)?.[1] || "";
   const videoPlayIndex = startExperienceBody.indexOf("const videoPlay = openingVideo.play()");
-  const videoRaceIndex = startExperienceBody.indexOf("await Promise.race([videoPlay, wait(850)])");
   const voicePlayIndex = startExperienceBody.indexOf("playOpeningVoice(openingVoice)");
   const musicPlayIndex = startExperienceBody.indexOf("await startOpeningMusic()");
   assert.ok(videoPlayIndex > -1);
-  assert.ok(videoRaceIndex > -1);
+  assert.ok(startExperienceBody.includes("await Promise.race([videoPlay, wait(850)]).catch(() => {})"));
   assert.ok(voicePlayIndex > -1);
   assert.ok(musicPlayIndex > -1);
   assert.ok(videoPlayIndex < voicePlayIndex);
-  assert.ok(videoRaceIndex < voicePlayIndex);
   assert.ok(voicePlayIndex < musicPlayIndex);
   const startMusicBody = app.match(/async function startOpeningMusic\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   assert.ok(startMusicBody.includes("player.playVideo?.()"));
@@ -112,11 +114,11 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(css, /@keyframes gold-veil-pass/);
   assert.match(css, /@keyframes cta-glimmer/);
   assert.match(css, /@keyframes step-gold-rise/);
-  assert.doesNotMatch(css, /\.opening-screen\.is-live::after\s*\{[^}]*gold-veil-pass/s);
+  assert.match(css, /\.opening-screen\.is-live::after\s*\{[^}]*gold-veil-pass/s);
   assert.match(css, /\.button-gold::after\s*\{[^}]*cta-glimmer/s);
   assert.match(css, /\[data-flow-step\]:not\(\[hidden\]\)\s*\{[^}]*step-gold-rise/s);
   assert.match(css, /logo-breathe 2\.7s ease-in-out 1\.45s 2/);
-  assert.doesNotMatch(css, /mix-blend-mode/);
+  assert.match(css, /\.decor-lantern[^}]*mix-blend-mode:screen/);
   assert.doesNotMatch(css, /premium-sweep/);
   assert.doesNotMatch(css, /button-shine/);
   assert.doesNotMatch(css, /logo-breathe 2\.7s ease-in-out 1\.45s infinite/);
@@ -168,19 +170,20 @@ test("o mapa exibe somente mesa livre ou comprada", () => {
   assert.doesNotMatch(app, new RegExp(["Em", "andamento"].join(" ")));
 });
 
-test("identificação permite corrigir dados e mantém o Google simples", () => {
+test("Google identifica o comprador apenas quando ele avança para pagar", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
-  assert.doesNotMatch(html, /id=["']details-name["'][^>]*\breadonly\b/i);
-  assert.doesNotMatch(html, /id=["']details-email["'][^>]*\breadonly\b/i);
+  assert.doesNotMatch(html, /id=["']details-name["']/i);
+  assert.doesNotMatch(html, /id=["']details-email["']/i);
+  assert.doesNotMatch(html, /id=["']contact-phone["']/i);
   assert.match(html, /Conecte com Google/i);
   assert.match(app, /elements\.accountTitle\.textContent = "Conectar com Google";/);
   assert.doesNotMatch(app, /Conectado como/);
   const googleAuth = app.match(/async function handleGoogleCredential\(response\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   assert.doesNotMatch(googleAuth, /showToast\(error\.message, "error"\)/);
   assert.match(googleAuth, /showToast\("Não foi possível conectar com Google agora\. Tente novamente\.", "error"\)/);
-  assert.match(app, /customer: \{ name: state\.customer\.name, email: state\.customer\.email \}/);
+  assert.match(app, /customer: \{ name: user\.name, email: user\.email \}/);
 });
 
 test("o painel usa sessão própria de administrador sem login Google", () => {

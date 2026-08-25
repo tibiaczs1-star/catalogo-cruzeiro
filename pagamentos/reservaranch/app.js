@@ -36,14 +36,13 @@
     { id: "centro", label: "Centro do salão", detail: "Mesas 25 a 45", numbers: range(25, 45) },
     { id: "palco", label: "Próximo ao palco", detail: "Mesas 46 a 67", numbers: range(46, 67) },
   ];
-  const flow = ["login", "details", "table", "whatsapp", "payment"];
-  const state = { activeSector: "all", auth: null, config: null, contactPhone: "", customer: { name: "", email: "" }, flowStep: "login", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
+  const flow = ["table", "login", "payment"];
+  const state = { activeSector: "all", auth: null, config: null, flowStep: "table", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
   const elements = {
     account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
-    detailsConsent: document.querySelector("#details-consent"), detailsEmail: document.querySelector("#details-email"), detailsName: document.querySelector("#details-name"),
     loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"),
     overviewMap: document.querySelector("#full-map"), paymentDialog: document.querySelector("#payment-dialog"), paymentInfo: document.querySelector("#payment-summary"), paymentQr: document.querySelector("#pix-qr"), pixAmountValue: document.querySelector("#pix-amount-value"), pixCodeDisplay: document.querySelector("#pix-code-display"), pixKeyDisplay: document.querySelector("#pix-key-display"), pixInfoToggle: document.querySelector("#pix-info-toggle"), pixInfoBody: document.querySelector("#pix-info-body"), pixShareBtn: document.querySelector("#pix-share-btn"), reservationPanel: document.querySelector("#reservation-panel"),
-    sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast"), whatsappSelection: document.querySelector("#whatsapp-selection")
+    sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast")
   };
 
   function range(start, end) { return Array.from({ length: end - start + 1 }, (_, index) => start + index); }
@@ -77,10 +76,10 @@
   }
   function reservationCode(reservation) { return reservation?.code || reservation?.id || ""; }
   function formatCurrency(cents) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100); }
-  function clientContactPhone() { return state.contactPhone || state.reservation?.customer?.phone || document.querySelector("#contact-phone")?.value.trim() || ""; }
+  function clientContactPhone() { return state.reservation?.customer?.phone || ""; }
   function buildProofMessage(reservation = state.reservation) {
     const code = reservationCode(reservation);
-    const customer = reservation?.customer || state.customer || {};
+    const customer = reservation?.customer || state.config?.user || {};
     const phone = clientContactPhone();
     const table = tableLabel(reservation?.tableNumber || state.selectedTable || "");
     const seats = reservation?.seats || state.selectedSeats;
@@ -244,7 +243,6 @@
     state.flowStep = step;
     document.querySelectorAll("[data-flow-step]").forEach((section) => { section.hidden = section.dataset.flowStep !== step; });
     document.querySelectorAll("[data-flow-nav]").forEach((item) => { item.classList.toggle("is-active", item.dataset.flowNav === step); item.classList.toggle("is-complete", flow.indexOf(item.dataset.flowNav) < flow.indexOf(step)); });
-    if (step === "whatsapp") renderWhatsAppStep();
     if (step === "payment") renderPaymentStep();
     if (step === "table") setOpeningMusicVolume(RESERVATION_MUSIC_VOLUME);
     if (scroll) document.querySelector(`[data-flow-step="${step}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -283,7 +281,7 @@
 
   function renderAccount() {
     const user = state.config?.user; elements.account.replaceChildren(); elements.loginNext.hidden = !user?.signedIn;
-    if (user?.signedIn) { const card = document.createElement("div"); card.className = "account-card"; card.innerHTML = "<p>Google conectado.</p><small>Pronto para continuar com a reserva.</small>"; elements.account.append(card); elements.accountTitle.textContent = "Google conectado"; elements.accountDescription.textContent = "Pronto. Confira seus dados e continue."; renderDetails(); return; }
+    if (user?.signedIn) { const card = document.createElement("div"); card.className = "account-card"; card.innerHTML = `<p>Google conectado.</p><small>${escapeHtml(user.name || user.email || "Identidade confirmada")} · pronto para pagar.</small>`; elements.account.append(card); elements.accountTitle.textContent = "Google conectado"; elements.accountDescription.textContent = "Sua mesa está escolhida. Continue para gerar o Pix."; return; }
     elements.accountTitle.textContent = "Conectar com Google"; elements.accountDescription.textContent = state.auth?.clientId ? "Toque no botão para continuar." : "A conexão está sendo preparada. Atualize a página em alguns segundos.";
     if (!state.auth?.clientId) return;
     const buttonMount = document.createElement("div"); buttonMount.className = "google-button-mount"; elements.account.append(buttonMount);
@@ -291,14 +289,11 @@
     const fallback = document.createElement("button"); fallback.className = "button button-secondary"; fallback.type = "button"; fallback.textContent = "Conectar com Google"; fallback.addEventListener("click", () => window.location.reload()); elements.account.append(fallback);
   }
 
-  function renderDetails() { const user = state.config?.user; elements.detailsName.value = state.customer.name || user?.name || ""; elements.detailsEmail.value = state.customer.email || user?.email || ""; elements.detailsConsent.checked = false; elements.detailsConsent.dispatchEvent(new Event("change")); }
-  function saveCustomerDetails() { const name = elements.detailsName.value.trim().replace(/\s+/g, " "); const email = elements.detailsEmail.value.trim().toLowerCase(); if (name.length < 2) { showToast("Informe seu nome completo.", "error"); return false; } if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast("Informe um e-mail válido.", "error"); return false; } state.customer = { name, email }; return true; }
   function renderSelection() {
     const table = state.selectedTable ? tableByNumber(state.selectedTable) : null;
     if (!table) { elements.selectionTitle.textContent = "Selecione uma mesa no mapa"; elements.selectionDescription.textContent = "Somente mesas com ✓ Livre podem ser escolhidas."; elements.tableNext.disabled = true; return; }
     elements.selectionTitle.textContent = `Mesa ${tableLabel(table.number)} selecionada`; elements.selectionDescription.textContent = `${state.selectedSeats} lugares · ${formatCurrency(selectedAmountCents())} · pagamento integral via Pix. ${COUVERT_ARTISTICO_LABEL} por pessoa no evento.`; elements.tableNext.disabled = false;
   }
-  function renderWhatsAppStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.whatsappSelection.textContent = table ? `Você está reservando a mesa ${tableLabel(table.number)} para ${state.selectedSeats} lugares.` : ""; }
   function renderPaymentStep() { const table = state.selectedTable ? tableByNumber(state.selectedTable) : null; elements.paymentInfo.textContent = ""; document.querySelector("#payment-summary-inline").textContent = table ? `Mesa ${tableLabel(table.number)} · ${state.selectedSeats} lugares · ${formatCurrency(selectedAmountCents())}. ${COUVERT_ARTISTICO_LABEL} por pessoa no evento.` : "Escolha uma mesa antes de gerar o Pix."; }
   function renderReservation() {
     elements.reservationPanel.replaceChildren(); if (!state.reservation) return;
@@ -315,14 +310,15 @@
   }
   async function loadExistingReservation() { const payload = await request("/reservations/me"); const latest = payload.reservations?.[0]; if (!latest || !["awaiting_payment", "receipt_submitted"].includes(latest.status)) return; const details = await request(`/reservations/${latest.id}`); state.reservation = { ...details.reservation, payment: details.payment }; renderReservation(); }
   async function handleGoogleCredential(response) {
-    try { await fetch("/api/auth/google", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: response.credential }) }).then(async (result) => { if (!result.ok) { const payload = await result.json().catch(() => ({})); throw new Error(payload.error || "Não foi possível entrar com Google."); } }); await loadAuth(); showFlowStep("details"); showToast("Google conectado.", "success"); } catch { showToast("Não foi possível conectar com Google agora. Tente novamente.", "error"); }
+    try { await fetch("/api/auth/google", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: response.credential }) }).then(async (result) => { if (!result.ok) { const payload = await result.json().catch(() => ({})); throw new Error(payload.error || "Não foi possível entrar com Google."); } }); await loadAuth(); showFlowStep("payment"); showToast("Google conectado. Agora é só gerar o Pix.", "success"); } catch { showToast("Não foi possível conectar com Google agora. Tente novamente.", "error"); }
   }
 
   function selectTable(number) { const table = tableByNumber(number); if (!table || table.status !== "available") { showToast("Esta mesa já está comprada.", "error"); return; } state.selectedTable = number; renderTables(); renderOverviewMap(); renderSelection(); }
   async function reserveSelectedTable() {
-    if (!state.selectedTable || !state.contactPhone || !state.customer.name || !state.customer.email) { showToast("Confira seus dados, mesa e WhatsApp antes de gerar o Pix.", "error"); return; }
+    const user = state.config?.user;
+    if (!state.selectedTable || !user?.signedIn || !user.name || !user.email) { showToast("Escolha uma mesa e conecte com Google antes de gerar o Pix.", "error"); return; }
     const button = document.querySelector("#payment-pix"); button.disabled = true; button.querySelector("strong").textContent = "Gerando Pix…";
-    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, phone: state.contactPhone, amountCents: selectedAmountCents(), customer: { name: state.customer.name, email: state.customer.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
+    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, amountCents: selectedAmountCents(), customer: { name: user.name, email: user.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
     catch (error) { showToast(error.message, "error"); await loadTables().catch(() => undefined); }
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
@@ -366,10 +362,10 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     }
     if (openingVoice) openingVoice.load();
     const progress = document.querySelector("#opening-progress");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Carregando trilha…"; }
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Preparando a entrada…"; }
     if (progress) progress.style.width = "72%";
     const releaseStart = () => {
-      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
+      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona"; }
       if (progress) progress.style.width = "100%";
     };
     const fallbackTimer = window.setTimeout(() => {
@@ -387,6 +383,137 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
         releaseStart();
       });
   }
+  function setupGallery() {
+    const dialog = document.querySelector("#gallery-dialog");
+    const image = document.querySelector("#gallery-dialog-image");
+    const caption = document.querySelector("#gallery-dialog-caption");
+    const cards = Array.from(document.querySelectorAll(".gallery-card"));
+    if (!dialog || !image || !cards.length) return;
+    let activeCards = cards;
+    let currentIndex = 0;
+    const showImage = (index) => {
+      currentIndex = (index + activeCards.length) % activeCards.length;
+      const source = activeCards[currentIndex].querySelector("img");
+      image.src = source.src;
+      image.alt = source.alt;
+      if (caption) caption.textContent = activeCards[currentIndex].querySelector("span")?.textContent || source.alt;
+    };
+    cards.forEach((card) => card.addEventListener("click", () => {
+      const gallery = card.closest(".editorial-gallery");
+      activeCards = Array.from(gallery?.querySelectorAll(".gallery-card") || [card]);
+      showImage(activeCards.indexOf(card));
+      dialog.showModal();
+    }));
+    dialog.querySelector("[data-close-gallery]")?.addEventListener("click", () => dialog.close());
+    dialog.querySelector("[data-gallery-prev]")?.addEventListener("click", () => showImage(currentIndex - 1));
+    dialog.querySelector("[data-gallery-next]")?.addEventListener("click", () => showImage(currentIndex + 1));
+    dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
+    document.addEventListener("keydown", (event) => {
+      if (!dialog.open) return;
+      if (event.key === "ArrowLeft") showImage(currentIndex - 1);
+      if (event.key === "ArrowRight") showImage(currentIndex + 1);
+    });
+  }
+  function setupEventCountdown() {
+    const countdown = document.querySelector(".event-countdown");
+    if (!countdown) return;
+    const eventDate = new Date(countdown.dataset.eventDate).getTime();
+    const fields = {
+      days: countdown.querySelector("[data-countdown-days]"),
+      hours: countdown.querySelector("[data-countdown-hours]"),
+      minutes: countdown.querySelector("[data-countdown-minutes]"),
+    };
+    const update = () => {
+      const remaining = Math.max(0, eventDate - Date.now());
+      const totalMinutes = Math.floor(remaining / 60000);
+      fields.days.textContent = String(Math.floor(totalMinutes / 1440)).padStart(2, "0");
+      fields.hours.textContent = String(Math.floor((totalMinutes % 1440) / 60)).padStart(2, "0");
+      fields.minutes.textContent = String(totalMinutes % 60).padStart(2, "0");
+      countdown.classList.toggle("is-today", remaining === 0);
+    };
+    update();
+    window.setInterval(update, 30000);
+  }
+  function setupCinematicScroll() {
+    const progress = document.querySelector("#trail-progress");
+    const heroImage = document.querySelector(".sales-hero-image");
+    const props = document.querySelectorAll(".decor-prop");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scenes = document.querySelectorAll(".story-section,.ranch-moment,.gallery-section,.offer-section,.how-section,.faq-section,#mapa-de-mesas,.western-scene,.event-countdown");
+    scenes.forEach((scene) => scene.classList.add("reveal-scene"));
+    if ("IntersectionObserver" in window && !reducedMotion) {
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
+      }), { threshold: .12, rootMargin: "0px 0px -6%" });
+      scenes.forEach((scene) => observer.observe(scene));
+    } else scenes.forEach((scene) => scene.classList.add("is-visible"));
+    let ticking = false;
+    const render = () => {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      if (progress) progress.style.transform = `scaleX(${Math.min(1, window.scrollY / maxScroll)})`;
+      if (!reducedMotion) {
+        const offset = Math.min(42, window.scrollY * .045);
+        if (heroImage) heroImage.style.transform = `scale(1.035) translate3d(0,${offset}px,0)`;
+        props.forEach((prop, index) => prop.style.setProperty("--prop-drift", `${(index ? -1 : 1) * Math.max(-14, 14 - window.scrollY * .008)}px`));
+      }
+      ticking = false;
+    };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; window.requestAnimationFrame(render); } }, { passive: true });
+    render();
+  }
+  function setupRanchSound() {
+    let context;
+    let ambience;
+    let ambienceGain;
+    let cowTimer;
+    let started = false;
+    const createNoise = (seconds) => {
+      const buffer = context.createBuffer(1, context.sampleRate * seconds, context.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < data.length; i += 1) data[i] = Math.random() * 2 - 1;
+      return buffer;
+    };
+    const playWesternCue = () => {
+      const source = context.createBufferSource();
+      const gain = context.createGain();
+      const filter = context.createBiquadFilter();
+      source.buffer = createNoise(.22); filter.type = "highpass"; filter.frequency.value = 520;
+      gain.gain.setValueAtTime(.17, context.currentTime); gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .22);
+      source.connect(filter).connect(gain).connect(context.destination); source.start();
+    };
+    const playHoofbeats = () => {
+      [0, .19, .43, .62].forEach((delay, index) => {
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = "triangle";
+        oscillator.frequency.setValueAtTime(index % 2 ? 82 : 96, context.currentTime + delay);
+        gain.gain.setValueAtTime(.001, context.currentTime + delay);
+        gain.gain.linearRampToValueAtTime(.045, context.currentTime + delay + .018);
+        gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + delay + .12);
+        oscillator.connect(gain).connect(context.destination);
+        oscillator.start(context.currentTime + delay); oscillator.stop(context.currentTime + delay + .13);
+      });
+    };
+    const playDistantMoo = () => {
+      if (!context || context.state !== "running") return;
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      const filter = context.createBiquadFilter();
+      oscillator.type = "sawtooth"; oscillator.frequency.setValueAtTime(112, context.currentTime); oscillator.frequency.exponentialRampToValueAtTime(78, context.currentTime + 1.45);
+      filter.type = "lowpass"; filter.frequency.value = 420;
+      gain.gain.setValueAtTime(.001, context.currentTime); gain.gain.linearRampToValueAtTime(.025, context.currentTime + .32); gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + 1.7);
+      oscillator.connect(filter).connect(gain).connect(context.destination); oscillator.start(); oscillator.stop(context.currentTime + 1.75);
+    };
+    const start = async () => {
+      if (started) return;
+      started = true;
+      context ||= new (window.AudioContext || window.webkitAudioContext)(); await context.resume();
+      ambience = context.createBufferSource(); ambienceGain = context.createGain(); const filter = context.createBiquadFilter();
+      ambience.buffer = createNoise(8); ambience.loop = true; ambienceGain.gain.value = .018; filter.type = "lowpass"; filter.frequency.value = 950;
+      ambience.connect(filter).connect(ambienceGain).connect(context.destination); ambience.start(); playWesternCue(); playHoofbeats(); window.setTimeout(playDistantMoo, 1200); cowTimer = window.setInterval(playDistantMoo, 14000);
+    };
+    window.startRanchAmbience = start;
+  }
   async function startExperience() {
     const openingButton = document.querySelector("#start-experience");
     const openingVideo = document.querySelector("#opening-video");
@@ -394,10 +521,11 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingScreen = document.getElementById("opening-screen");
     if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Apresentando o Arizona Ranch…"; }
     try {
+      window.startRanchAmbience?.();
       openingScreen?.classList.add("is-live");
       if (openingVideo) {
-        openingVideo.muted = true;
-        openingVideo.volume = 0;
+        openingVideo.muted = false;
+        openingVideo.volume = .52;
         openingVideo.playsInline = true;
         const videoPlay = openingVideo.play();
         videoPlay.catch((error) => {
@@ -433,9 +561,8 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       if (event.target.closest("[data-open-map]")) elements.mapDialog.showModal(); if (event.target.closest("[data-close-map]")) elements.mapDialog.close(); if (event.target.closest("[data-close-payment]")) elements.paymentDialog.close();
     });
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
-    elements.loginNext.addEventListener("click", () => showFlowStep("details")); elements.detailsConsent.addEventListener("change", () => { document.querySelector("#details-next").disabled = !elements.detailsConsent.checked; }); document.querySelector("#details-next").addEventListener("click", () => { if (saveCustomerDetails()) showFlowStep("table"); }); elements.tableNext.addEventListener("click", () => showFlowStep("whatsapp"));
-    document.querySelector("#whatsapp-next").addEventListener("click", () => { const phone = document.querySelector("#contact-phone").value.trim(); if (phone.replace(/\D/g, "").length < 10) { showToast("Informe um WhatsApp válido com DDD.", "error"); return; } state.contactPhone = phone; showFlowStep("payment"); });
+    elements.loginNext.addEventListener("click", () => showFlowStep("payment")); elements.tableNext.addEventListener("click", () => showFlowStep(state.config?.user?.signedIn ? "payment" : "login"));
     document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
-  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
+  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupGallery(); setupEventCountdown(); setupCinematicScroll(); setupRanchSound(); setupOpening(); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();
