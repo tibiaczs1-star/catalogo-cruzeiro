@@ -362,10 +362,10 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     }
     if (openingVoice) openingVoice.load();
     const progress = document.querySelector("#opening-progress");
-    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Carregando trilha…"; }
+    if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Preparando a entrada…"; }
     if (progress) progress.style.width = "72%";
     const releaseStart = () => {
-      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Iniciar reserva"; }
+      if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona — com som"; }
       if (progress) progress.style.width = "100%";
     };
     const fallbackTimer = window.setTimeout(() => {
@@ -437,9 +437,9 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
   function setupCinematicScroll() {
     const progress = document.querySelector("#trail-progress");
     const heroImage = document.querySelector(".sales-hero-image");
-    const kitImage = document.querySelector(".western-kit img");
+    const props = document.querySelectorAll(".decor-prop");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const scenes = document.querySelectorAll(".story-section,.ranch-moment,.gallery-section,.offer-section,.how-section,.faq-section,#mapa-de-mesas,.western-kit,.event-countdown");
+    const scenes = document.querySelectorAll(".story-section,.ranch-moment,.gallery-section,.offer-section,.how-section,.faq-section,#mapa-de-mesas,.western-scene,.event-countdown");
     scenes.forEach((scene) => scene.classList.add("reveal-scene"));
     if ("IntersectionObserver" in window && !reducedMotion) {
       const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
@@ -454,7 +454,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       if (!reducedMotion) {
         const offset = Math.min(42, window.scrollY * .045);
         if (heroImage) heroImage.style.transform = `scale(1.035) translate3d(0,${offset}px,0)`;
-        if (kitImage) kitImage.style.setProperty("--kit-drift", `${Math.max(-18, 18 - window.scrollY * .012)}px`);
+        props.forEach((prop, index) => prop.style.setProperty("--prop-drift", `${(index ? -1 : 1) * Math.max(-14, 14 - window.scrollY * .008)}px`));
       }
       ticking = false;
     };
@@ -462,12 +462,13 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     render();
   }
   function setupRanchSound() {
-    const button = document.querySelector("#sound-toggle");
-    if (!button) return;
+    const status = document.querySelector("#sound-status");
+    if (!status) return;
     let context;
     let ambience;
     let ambienceGain;
     let cowTimer;
+    let started = false;
     const createNoise = (seconds) => {
       const buffer = context.createBuffer(1, context.sampleRate * seconds, context.sampleRate);
       const data = buffer.getChannelData(0);
@@ -506,14 +507,15 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       oscillator.connect(filter).connect(gain).connect(context.destination); oscillator.start(); oscillator.stop(context.currentTime + 1.75);
     };
     const start = async () => {
+      if (started) return;
+      started = true;
       context ||= new (window.AudioContext || window.webkitAudioContext)(); await context.resume();
       ambience = context.createBufferSource(); ambienceGain = context.createGain(); const filter = context.createBiquadFilter();
       ambience.buffer = createNoise(8); ambience.loop = true; ambienceGain.gain.value = .018; filter.type = "lowpass"; filter.frequency.value = 950;
       ambience.connect(filter).connect(ambienceGain).connect(context.destination); ambience.start(); playWesternCue(); playHoofbeats(); window.setTimeout(playDistantMoo, 1200); cowTimer = window.setInterval(playDistantMoo, 14000);
-      button.setAttribute("aria-pressed", "true"); button.querySelector("b").textContent = "Clima do rancho ligado";
+      status.classList.add("is-active"); status.querySelector("b").textContent = "Clima do rancho ligado";
     };
-    const stop = () => { try { ambience?.stop(); } catch {} clearInterval(cowTimer); context?.suspend(); button.setAttribute("aria-pressed", "false"); button.querySelector("b").textContent = "Ligar clima do rancho"; };
-    button.addEventListener("click", () => button.getAttribute("aria-pressed") === "true" ? stop() : start());
+    window.startRanchAmbience = start;
   }
   async function startExperience() {
     const openingButton = document.querySelector("#start-experience");
@@ -522,10 +524,11 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingScreen = document.getElementById("opening-screen");
     if (openingButton) { openingButton.disabled = true; openingButton.textContent = "Apresentando o Arizona Ranch…"; }
     try {
+      window.startRanchAmbience?.();
       openingScreen?.classList.add("is-live");
       if (openingVideo) {
-        openingVideo.muted = true;
-        openingVideo.volume = 0;
+        openingVideo.muted = false;
+        openingVideo.volume = .52;
         openingVideo.playsInline = true;
         const videoPlay = openingVideo.play();
         videoPlay.catch((error) => {

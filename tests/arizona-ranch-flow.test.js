@@ -62,20 +62,20 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
 
   assert.match(html, /id=["']start-experience["']/i);
-  assert.match(html, />Iniciar reserva</);
-  assert.match(app, /openingButton\.textContent = "Iniciar reserva"/);
-  assert.match(app, /openingButton\.textContent = "Carregando trilha…"/);
+  assert.match(html, />Entrar no Arizona — com som</);
+  assert.match(app, /openingButton\.textContent = "Entrar no Arizona — com som"/);
+  assert.match(app, /openingButton\.textContent = "Preparando a entrada…"/);
   assert.match(app, /let openingMusicIsReady = false/);
   assert.match(app, /let openingMusicLoadTimedOut = false/);
-  assert.match(app, /openingButton\.disabled = true; openingButton\.textContent = "Carregando trilha…"/);
+  assert.match(app, /openingButton\.disabled = true; openingButton\.textContent = "Preparando a entrada…"/);
   assert.match(app, /window\.setTimeout\(\(\) => \{\s*openingMusicLoadTimedOut = true;\s*releaseStart\(\);\s*\}, OPENING_MUSIC_READY_TIMEOUT_MS\)/);
   assert.match(app, /releaseStart\(\);/);
   assert.match(app, /ensureOpeningMusicPlayer\(\)\s*\.then\(\(\) => \{/);
   assert.doesNotMatch(app, /openingButton\.textContent = "Atualize para iniciar"/);
   assert.match(app, /getIframe\?\.\(\)\?\.setAttribute\("allow", "autoplay; encrypted-media; picture-in-picture"\)/);
-  assert.match(app, /openingVideo\.muted = true/);
-  assert.match(app, /openingVideo\.volume = 0/);
-  assert.doesNotMatch(app, /openingVideo\.muted = false/);
+  assert.match(app, /openingVideo\.muted = false/);
+  assert.match(app, /openingVideo\.volume = \.52/);
+  assert.match(app, /window\.startRanchAmbience\?\.\(\)/);
   assert.match(app, /openingVideo\.play\(\)/);
   assert.match(app, /await Promise\.race\(\[\s*playOpeningVoice\(openingVoice\),\s*wait\(OPENING_PRESENTATION_MAX_MS\),\s*\]\)/);
   const startExperienceBody = app.match(/async function startExperience\(\) \{([\s\S]*?)\n  function bindEvents/)?.[1] || "";
@@ -117,7 +117,7 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(css, /\.button-gold::after\s*\{[^}]*cta-glimmer/s);
   assert.match(css, /\[data-flow-step\]:not\(\[hidden\]\)\s*\{[^}]*step-gold-rise/s);
   assert.match(css, /logo-breathe 2\.7s ease-in-out 1\.45s 2/);
-  assert.doesNotMatch(css, /mix-blend-mode/);
+  assert.match(css, /\.decor-lantern[^}]*mix-blend-mode:screen/);
   assert.doesNotMatch(css, /premium-sweep/);
   assert.doesNotMatch(css, /button-shine/);
   assert.doesNotMatch(css, /logo-breathe 2\.7s ease-in-out 1\.45s infinite/);

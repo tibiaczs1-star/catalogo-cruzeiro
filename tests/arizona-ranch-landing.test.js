@@ -44,7 +44,7 @@ test("separa imagens criadas, elementos de layout e fotos originais em galerias 
   assert.doesNotMatch(generatedGallery, /kit-western\.png/);
   assert.match(originalGallery, /assets\/gallery\/marca-arizona\.webp/);
   assert.doesNotMatch(originalGallery, /assets\/ai\//);
-  assert.match(html, /<aside class="western-kit"[\s\S]*assets\/ai\/kit-western\.png/);
+  assert.match(html, /<section class="western-scene"[\s\S]*assets\/ai\/decor-ferradura\.png[\s\S]*assets\/ai\/decor-lampiao\.png/);
   assert.match(html, /id=["']gallery-dialog["'][^>]*aria-label=/);
   assert.match(html, /id=["']gallery-dialog-image["'][^>]*alt=/);
   assert.match(app, /setupGallery/);
@@ -72,7 +72,8 @@ test("a experiência de retenção mantém o visitante orientado para a compra",
   assert.match(html, /class=["'][^"']*event-countdown/);
   assert.match(html, /data-event-date=["']2026-09-05T20:00:00-05:00["']/);
   assert.match(html, /Aqui a noite começa antes do primeiro acorde/i);
-  assert.match(html, /Som ambiente opcional/i);
+  assert.match(html, /Experiência sonora imersiva/i);
+  assert.match(html, /id=["']sound-status["']/);
   assert.match(app, /setupEventCountdown/);
   assert.match(app, /setupCinematicScroll/);
   assert.match(app, /requestAnimationFrame/);
