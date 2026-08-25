@@ -25,7 +25,7 @@ test("a reserva apresenta o mapa antes do Google e segue direto ao pagamento", (
   assert.match(html, /Pagamento por cart[ãa]o em constru[çc][ãa]o/i);
 });
 
-test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
+test("a abertura mantém o vídeo e a única chamada de voz", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const openingMarkup = html.match(
@@ -36,7 +36,6 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.ok(openingMarkup);
   assert.match(openingMarkup, /id=["']opening-video["']/i);
   assert.match(openingMarkup, /id=["']opening-voice["']/i);
-  assert.match(openingMarkup, /id=["']opening-player["']/);
   assert.match(openingMarkup, /arizona-entrada\.mp4/i);
   assert.match(openingMarkup, /arizona-welcome\.mp3/i);
   assert.match(openingMarkup, /class=["']opening-brand["']/i);
@@ -46,17 +45,16 @@ test("a abertura incorpora a trilha oficial sem camada visual extra", () => {
   assert.doesNotMatch(openingMarkup, /opening-image/i);
   assert.doesNotMatch(openingMarkup, /opening-vignette/i);
   assert.doesNotMatch(openingMarkup, /Todos os direitos reservados/i);
-  assert.match(html, /youtube\.com\/iframe_api/);
-  assert.match(app, /const YOUTUBE_MUSIC_VIDEO_ID = "CxKRaR6kFYs"/);
-  assert.match(app, /const OPENING_MUSIC_PRESENTATION_VOLUME = 18/);
-  assert.match(app, /const RESERVATION_MUSIC_VOLUME = 38/);
+  assert.doesNotMatch(html, /youtube\.com\/iframe_api/);
+  assert.match(html, /soundscape\.js/);
+  assert.doesNotMatch(app, /YOUTUBE_MUSIC_VIDEO_ID|openingMusicPlayer/);
   assert.match(app, /const OPENING_PRESENTATION_MAX_MS = 16500/);
   assert.match(app, /const OPENING_MUSIC_READY_TIMEOUT_MS = 4200/);
   assert.doesNotMatch(app, /sendPlayerCommand/);
   assert.match(app, /const OPENING_VOICE_TEXT = /);
 });
 
-test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inteiro", () => {
+test("a abertura inicia a jornada e entrega o som ao soundscape", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
@@ -65,37 +63,16 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(html, />Entrar no Arizona</);
   assert.doesNotMatch(html, /com som|som inicia|experiência sonora/i);
   assert.match(app, /openingButton\.textContent = "Entrar no Arizona"/);
-  assert.match(app, /openingButton\.textContent = "Preparando a entrada…"/);
-  assert.match(app, /let openingMusicIsReady = false/);
-  assert.match(app, /let openingMusicLoadTimedOut = false/);
-  assert.match(app, /openingButton\.disabled = true; openingButton\.textContent = "Preparando a entrada…"/);
-  assert.match(app, /window\.setTimeout\(\(\) => \{\s*openingMusicLoadTimedOut = true;\s*releaseStart\(\);\s*\}, OPENING_MUSIC_READY_TIMEOUT_MS\)/);
-  assert.match(app, /releaseStart\(\);/);
-  assert.match(app, /ensureOpeningMusicPlayer\(\)\s*\.then\(\(\) => \{/);
-  assert.doesNotMatch(app, /openingButton\.textContent = "Atualize para iniciar"/);
-  assert.match(app, /getIframe\?\.\(\)\?\.setAttribute\("allow", "autoplay; encrypted-media; picture-in-picture"\)/);
+  assert.match(app, /createSoundscape/);
+  assert.match(app, /soundscape\.start\(\)/);
   assert.match(app, /openingVideo\.muted = false/);
   assert.match(app, /openingVideo\.volume = \.52/);
-  assert.match(app, /window\.startRanchAmbience\?\.\(\)/);
   assert.match(app, /openingVideo\.play\(\)/);
-  assert.match(app, /await Promise\.race\(\[\s*playOpeningVoice\(openingVoice\),\s*wait\(OPENING_PRESENTATION_MAX_MS\),\s*\]\)/);
   const startExperienceBody = app.match(/async function startExperience\(\) \{([\s\S]*?)\n  function bindEvents/)?.[1] || "";
   const videoPlayIndex = startExperienceBody.indexOf("const videoPlay = openingVideo.play()");
-  const voicePlayIndex = startExperienceBody.indexOf("playOpeningVoice(openingVoice)");
-  const musicPlayIndex = startExperienceBody.indexOf("await startOpeningMusic()");
   assert.ok(videoPlayIndex > -1);
   assert.ok(startExperienceBody.includes("await Promise.race([videoPlay, wait(850)]).catch(() => {})"));
-  assert.ok(voicePlayIndex > -1);
-  assert.ok(musicPlayIndex > -1);
-  assert.ok(videoPlayIndex < voicePlayIndex);
-  assert.ok(voicePlayIndex < musicPlayIndex);
-  const startMusicBody = app.match(/async function startOpeningMusic\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
-  assert.ok(startMusicBody.includes("player.playVideo?.()"));
-  assert.ok(startMusicBody.includes("setOpeningMusicVolume(OPENING_MUSIC_PRESENTATION_VOLUME)"));
-  assert.equal(startMusicBody.includes("await Promise.race([\n      ensureOpeningMusicPlayer()"), false);
-  assert.ok(startMusicBody.indexOf("player.playVideo?.()") < startMusicBody.indexOf("await Promise.race(["));
-  assert.match(app, /function setOpeningMusicVolume\(volume\)/);
-  assert.match(app, /if \(step === "table"\) setOpeningMusicVolume\(RESERVATION_MUSIC_VOLUME\)/);
+  assert.match(startExperienceBody, /soundscape\.start\(\)/);
   assert.doesNotMatch(app, /Promise\.race\(\[playOpeningVoice\(openingVoice\), wait\(5200\)\]\)/);
   assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
   assert.doesNotMatch(`${html}\n${app}`, /Liberar vídeo, voz e reserva/i);
@@ -126,28 +103,17 @@ test("a abertura leva direto à reserva, inicia a trilha e mantém o vídeo inte
   assert.match(css, /@keyframes logo-entrance/);
 });
 
-test("a abertura não trava quando a trilha externa atrasa no celular", () => {
+test("a abertura não trava se vídeo ou áudio falharem", () => {
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
-  const setupOpening = app.match(/function setupOpening\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   const startExperience = app.match(/async function startExperience\(\) \{([\s\S]*?)\n  function bindEvents/)?.[1] || "";
 
-  assert.match(setupOpening, /releaseStart/);
-  assert.match(setupOpening, /OPENING_MUSIC_READY_TIMEOUT_MS/);
-  assert.match(setupOpening, /openingMusicLoadTimedOut = true/);
-  assert.match(startExperience, /await startOpeningMusic\(\);/);
-  assert.match(startExperience, /catch \(error\) \{[\s\S]*openingMusicLoadTimedOut = true;[\s\S]*Abertura seguindo sem bloquear pela trilha externa/s);
+  assert.match(startExperience, /soundscape\.start\(\)\.catch\(\(\) => \{\}\)/);
+  assert.match(startExperience, /\.catch\(\(\) => \{\}\)/);
   const liveIndex = startExperience.indexOf('openingScreen?.classList.add("is-live")');
-  const musicIndex = startExperience.indexOf("await startOpeningMusic();");
-  const musicCatchIndex = startExperience.indexOf("catch (error)", musicIndex);
   const releaseIndex = startExperience.indexOf("window.setTimeout");
   assert.ok(liveIndex > -1);
-  assert.ok(musicIndex > -1);
-  assert.ok(musicCatchIndex > -1);
   assert.ok(releaseIndex > -1);
-  assert.ok(liveIndex < musicIndex);
-  assert.ok(musicIndex < musicCatchIndex);
-  assert.ok(musicCatchIndex < releaseIndex);
-  assert.doesNotMatch(startExperience, /showToast\("A trilha ainda não iniciou/);
+  assert.ok(liveIndex < releaseIndex);
   assert.doesNotMatch(startExperience, /return;\s*\}\s*window\.setTimeout/);
 });
 

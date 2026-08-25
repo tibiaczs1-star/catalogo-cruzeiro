@@ -12,7 +12,7 @@ test("a landing apresenta o lugar antes de conduzir para a reserva", () => {
   const html = read("pagamentos", "reservaranch", "index.html");
 
   assert.match(html, /id=["']experiencia["']/);
-  assert.match(html, /id=["']galeria["']/);
+  assert.match(html, /data-cinematic-scene=["']trail["']/);
   assert.match(html, /id=["']mesas-e-valores["']/);
   assert.match(html, /id=["']como-funciona["']/);
   assert.match(html, /id=["']duvidas["']/);
@@ -29,27 +29,13 @@ test("a linguagem de venda reforça Arizona Ranch como bar pub western", () => {
   assert.match(html, /O portão vai abrir/i);
 });
 
-test("separa imagens criadas, elementos de layout e fotos originais em galerias próprias", () => {
+test("a narrativa usa cenas cinematográficas exclusivas e não uma galeria", () => {
   const html = read("pagamentos", "reservaranch", "index.html");
-  const app = read("pagamentos", "reservaranch", "app.js");
-
-  const galleryImages = [...html.matchAll(/class=["'][^"']*gallery-image[^"']*["'][^>]*src=["']([^"']+\.(?:webp|png))["']/g)];
-  assert.ok(galleryImages.length >= 8, "as duas galerias precisam manter pelo menos 8 imagens editoriais");
-  const generatedGallery = html.match(/<div class="editorial-gallery generated-gallery"[\s\S]*?<\/div>/)?.[0] || "";
-  const originalGallery = html.match(/<div class="editorial-gallery original-gallery"[\s\S]*?<\/div>/)?.[0] || "";
-  assert.match(generatedGallery, /assets\/ai\/palco-noite\.png/);
-  assert.match(generatedGallery, /assets\/ai\/brinde-noite\.png/);
-  assert.match(generatedGallery, /assets\/ai\/hero-porteira\.png/);
-  assert.doesNotMatch(generatedGallery, /assets\/gallery\//);
-  assert.doesNotMatch(generatedGallery, /kit-western\.png/);
-  assert.match(originalGallery, /assets\/gallery\/marca-arizona\.webp/);
-  assert.doesNotMatch(originalGallery, /assets\/ai\//);
-  assert.match(html, /<section class="western-scene"[\s\S]*assets\/ai\/decor-ferradura\.png[\s\S]*assets\/ai\/decor-lampiao\.png/);
-  assert.match(html, /id=["']gallery-dialog["'][^>]*aria-label=/);
-  assert.match(html, /id=["']gallery-dialog-image["'][^>]*alt=/);
-  assert.match(app, /setupGallery/);
-  assert.match(app, /ArrowLeft/);
-  assert.match(app, /ArrowRight/);
+  assert.doesNotMatch(html, /editorial-gallery|gallery-dialog|gallery-image/);
+  ["gate", "trail", "saloon", "stage", "tables"].forEach((scene) => {
+    assert.match(html, new RegExp(`data-cinematic-scene=["']${scene}["']`));
+  });
+  assert.match(html, /id=["']mapa-de-mesas["']/);
 });
 
 test("a página inclui metadados sociais, FAQ e CTA móvel", () => {
@@ -75,16 +61,8 @@ test("a experiência de retenção mantém o visitante orientado para a compra",
   assert.doesNotMatch(html, /com som|som inicia|experiência sonora/i);
   assert.doesNotMatch(html, /id=["']sound-status["']/);
   assert.match(app, /setupEventCountdown/);
-  assert.match(app, /setupCinematicScroll/);
+  assert.match(html, /cinematic\.js/);
   assert.match(app, /requestAnimationFrame/);
   assert.match(css, /\.trail-progress/);
   assert.match(css, /\.ranch-moment/);
-});
-
-test("o modal navega somente dentro da galeria escolhida", () => {
-  const app = read("pagamentos", "reservaranch", "app.js");
-
-  assert.match(app, /closest\("\.editorial-gallery"\)/);
-  assert.match(app, /activeCards/);
-  assert.doesNotMatch(app, /currentIndex = \(index \+ cards\.length\) % cards\.length/);
 });
