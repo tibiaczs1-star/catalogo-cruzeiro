@@ -93,6 +93,19 @@ function normalizeState(state) {
   };
 }
 
+function digestAccessToken(token) {
+  return crypto.createHash("sha256").update(String(token || ""), "utf8").digest("hex");
+}
+
+function matchesAccessToken(reservation, token) {
+  if (!reservation || !reservation.accessTokenHash || !token) {
+    return false;
+  }
+  const expected = Buffer.from(String(reservation.accessTokenHash), "hex");
+  const actual = Buffer.from(digestAccessToken(token), "hex");
+  return expected.length === actual.length && crypto.timingSafeEqual(expected, actual);
+}
+
 function createReservationStore({ filePath = "", now = () => new Date() } = {}) {
   let memoryState = { version: 1, reservations: [] };
 
@@ -207,20 +220,17 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
   }
 
   return {
-    create({ tableNumber: rawTableNumber, seats: rawSeats, user, phone = "", customer = {} }) {
+    create({ tableNumber: rawTableNumber, seats: rawSeats, user = {}, phone = "", customer = {} }) {
       const tableNumber = Number(rawTableNumber);
       if (!Number.isInteger(tableNumber) || tableNumber < 1 || tableNumber > 67) {
         throw new Error("Mesa inválida.");
       }
-      if (!user || !user.sub || !user.email) {
-        throw new Error("Entre com sua conta Google para reservar.");
-      }
-      const customerName = String(customer.name || user.name || user.givenName || "Cliente").trim().replace(/\s+/g, " ");
-      const customerEmail = String(customer.email || user.email).trim().toLowerCase();
+      const customerName = String(customer.name || user.name || user.givenName || "Cliente Arizona Ranch").trim().replace(/\s+/g, " ");
+      const customerEmail = String(customer.email || user.email || "").trim().toLowerCase();
       if (customerName.length < 2) {
         throw new Error("Informe seu nome completo.");
       }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+      if (customerEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
         throw new Error("Informe um e-mail válido.");
       }
       const reservationInfo = calculateReservation(rawSeats);
@@ -230,6 +240,7 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
       }
       const createdAt = now();
       const id = `AR-${createdAt.getTime().toString(36).toUpperCase()}-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
+      const accessToken = crypto.randomBytes(24).toString("base64url");
       const reservation = {
         id,
         tableNumber,
@@ -238,8 +249,9 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
         status: "awaiting_payment",
         createdAt: createdAt.toISOString(),
         expiresAt: new Date(createdAt.getTime() + RESERVATION_TTL_MS).toISOString(),
+        accessTokenHash: digestAccessToken(accessToken),
         customer: {
-          sub: String(user.sub),
+          sub: String(user.sub || ""),
           name: customerName,
           email: customerEmail,
           phone: String(phone || "").replace(/[^0-9+()\-\s]/g, "").slice(0, 30),
@@ -249,7 +261,10 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
       };
       state.reservations.push(reservation);
       save(state);
-      return publicReservation(reservation, { includeOwner: true });
+      return {
+        reservation: publicReservation(reservation, { includeOwner: true }),
+        accessToken,
+      };
     },
 
     get(id) {
@@ -258,6 +273,10 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
 
     getPublic(id, options) {
       return publicReservation(this.get(id), options);
+    },
+
+    hasAccess(id, accessToken) {
+      return matchesAccessToken(this.get(id), accessToken);
     },
 
     listForOwner(ownerSub) {
@@ -283,14 +302,14 @@ function createReservationStore({ filePath = "", now = () => new Date() } = {}) 
       });
     },
 
-    addReceipt({ id, ownerSub, receipt }) {
+    addReceipt({ id, accessToken, receipt }) {
       const state = withFreshState();
       const reservation = findReservation(state, id);
       if (!reservation) {
         throw new Error("Reserva não encontrada.");
       }
-      if (reservation.customer.sub !== String(ownerSub)) {
-        throw new Error("Você não pode alterar esta reserva.");
+      if (!matchesAccessToken(reservation, accessToken)) {
+        throw new Error("Acesso inválido para esta reserva.");
       }
       if (!["awaiting_payment", "receipt_submitted"].includes(reservation.status)) {
         throw new Error("Esta reserva não aceita mais comprovantes.");
@@ -556,8 +575,8 @@ function getReceiptExtension(contentType) {
   }[contentType] || "";
 }
 
-function createArizonaRanchIntegration({ rootDir, dataDir, environment = process.env, sendFile, getAuthUser }) {
-  if (typeof sendFile !== "function" || typeof getAuthUser !== "function") {
+function createArizonaRanchIntegration({ rootDir, dataDir, environment = process.env, sendFile }) {
+  if (typeof sendFile !== "function") {
     throw new Error("A integração Arizona Ranch precisa do servidor principal.");
   }
 
@@ -569,19 +588,6 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
   const whatsappNumber = String(environment.ARIZONA_WHATSAPP_NUMBER || WHATSAPP_DEFAULT).trim();
   const adminAuth = createArizonaAdminSessionManager({ environment });
 
-  function getUser(request) {
-    return cleanUser(getAuthUser(request));
-  }
-
-  function requireUser(request, response) {
-    const user = getUser(request);
-    if (!user) {
-      sendJson(response, 401, { ok: false, error: "Entre com sua conta Google para continuar." });
-      return null;
-    }
-    return user;
-  }
-
   function requireAdmin(request, response) {
     const admin = adminAuth.getSession(request);
     if (!admin) {
@@ -591,12 +597,8 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
     return admin;
   }
 
-  function serializeForUser(reservation, user, admin = false) {
-    const isOwner = reservation && reservation.customer && reservation.customer.sub === user.sub;
-    if (!reservation || (!admin && !isOwner)) {
-      return null;
-    }
-    return store.getPublic(reservation.id, { includeOwner: admin || isOwner });
+  function getReservationToken(request) {
+    return String(request.headers["x-arizona-reservation-token"] || "").trim();
   }
 
   function paymentDetails(reservation) {
@@ -613,6 +615,8 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
     }).then((qrCodeDataUrl) => ({
       pixCode,
       qrCodeDataUrl,
+      pixKey,
+      amountLabel: formatCurrency(reservation.amountCents),
       whatsappUrl: buildWhatsAppUrl({ reservation, phoneNumber: whatsappNumber }),
     }));
   }
@@ -644,17 +648,12 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
       }
 
       if (request.method === "GET" && route === "/config") {
-        const user = getUser(request);
         sendJson(response, 200, {
           ok: true,
           whatsappNumber,
           prices: { 2: calculateReservation(2), 4: calculateReservation(4) },
           staticOccupiedTables: [...STATIC_OCCUPIED_TABLES],
-          session: {
-            signedIn: Boolean(user),
-            user: user ? { email: user.email, name: user.name } : null,
-            isAdmin: false,
-          },
+          session: { isAdmin: Boolean(adminAuth.getSession(request)) },
         });
         return;
       }
@@ -664,44 +663,26 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
         return;
       }
 
-      if (request.method === "GET" && route === "/reservations/me") {
-        const user = requireUser(request, response);
-        if (!user) {
-          return;
-        }
-        sendJson(response, 200, { ok: true, reservations: store.listForOwner(user.sub) });
-        return;
-      }
-
       if (request.method === "POST" && route === "/reservations") {
-        const user = requireUser(request, response);
-        if (!user) {
-          return;
-        }
         const payload = await readRequestJson(request);
-        const reservation = store.create({
+        const created = store.create({
           tableNumber: payload.tableNumber,
           seats: payload.seats,
           phone: payload.phone,
           customer: payload.customer,
-          user,
         });
+        const reservation = created.reservation;
         const payment = await paymentDetails(reservation);
-        sendJson(response, 201, { ok: true, reservation, payment });
+        sendJson(response, 201, { ok: true, reservation, accessToken: created.accessToken, payment });
         return;
       }
 
       const receiptDownload = route.match(/^\/reservations\/([A-Za-z0-9-]+)\/receipt$/);
       if (request.method === "GET" && receiptDownload) {
-        const user = getUser(request);
         const admin = adminAuth.getSession(request);
-        if (!user && !admin) {
-          sendJson(response, 401, { ok: false, error: "Entre com Google ou com o acesso de administrador." });
-          return;
-        }
         const reservation = store.get(receiptDownload[1]);
-        const isOwner = reservation && user && reservation.customer.sub === user.sub;
-        if (!reservation || (!isOwner && !admin) || !reservation.receipt) {
+        const hasAccess = reservation && store.hasAccess(reservation.id, getReservationToken(request));
+        if (!reservation || (!hasAccess && !admin) || !reservation.receipt) {
           sendJson(response, 404, { ok: false, error: "Comprovante não encontrado." });
           return;
         }
@@ -716,10 +697,6 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
 
       const receiptUpload = route.match(/^\/reservations\/([A-Za-z0-9-]+)\/receipt$/);
       if (request.method === "POST" && receiptUpload) {
-        const user = requireUser(request, response);
-        if (!user) {
-          return;
-        }
         const payload = await readRequestJson(request);
         const uploaded = dataUrlToBuffer(payload.dataUrl);
         const extension = getReceiptExtension(uploaded.contentType);
@@ -731,8 +708,9 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
         if (!existing) {
           throw new Error("Reserva não encontrada.");
         }
-        if (existing.customer.sub !== user.sub) {
-          throw new Error("Você não pode alterar esta reserva.");
+        const accessToken = getReservationToken(request);
+        if (!store.hasAccess(id, accessToken)) {
+          throw new Error("Acesso inválido para esta reserva.");
         }
         if (!["awaiting_payment", "receipt_submitted"].includes(existing.status)) {
           throw new Error("Esta reserva não aceita mais comprovantes.");
@@ -742,7 +720,7 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
         fs.writeFileSync(path.join(receiptRoot, safeFileName), uploaded.buffer);
         const reservation = store.addReceipt({
           id,
-          ownerSub: user.sub,
+          accessToken,
           receipt: {
             name: String(payload.fileName || `comprovante.${extension}`).slice(0, 120),
             contentType: uploaded.contentType,
@@ -757,16 +735,14 @@ function createArizonaRanchIntegration({ rootDir, dataDir, environment = process
 
       const reservationRoute = route.match(/^\/reservations\/([A-Za-z0-9-]+)$/);
       if (request.method === "GET" && reservationRoute) {
-        const user = requireUser(request, response);
-        if (!user) {
-          return;
-        }
         const reservation = store.get(reservationRoute[1]);
-        const publicReservation = serializeForUser(reservation, user);
-        if (!publicReservation) {
+        const admin = adminAuth.getSession(request);
+        const hasAccess = reservation && store.hasAccess(reservation.id, getReservationToken(request));
+        if (!reservation || (!hasAccess && !admin)) {
           sendJson(response, 404, { ok: false, error: "Reserva não encontrada." });
           return;
         }
+        const publicReservation = store.getPublic(reservation.id, { includeOwner: true });
         const payment = reservation.status === "awaiting_payment" || reservation.status === "receipt_submitted"
           ? await paymentDetails(publicReservation)
           : null;

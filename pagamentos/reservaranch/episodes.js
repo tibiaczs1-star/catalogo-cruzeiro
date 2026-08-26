@@ -2,8 +2,8 @@
   "use strict";
 
   const EPISODE_CUES = ["gate", "boots", "saloon", "fire"];
-  const FRAME_INTERVAL_MS = 285;
-  const SCENE_TRANSITION_MS = 1900;
+  const FRAME_INTERVAL_MS = 420;
+  const SCENE_TRANSITION_MS = 3200;
   const SCENE_CLASSES = ["is-playing", "is-shot-wide", "is-comic", "is-copy-reveal", "is-ready", "is-advancing", "is-frame-complete"];
   const sequenceTimers = new Set();
   let active = 0;
@@ -65,10 +65,11 @@
     if (!reducedMotion() && typeof shot?.animate === "function") {
       shot.animate(
         [
-          { transform: "translate3d(-1.5%,1%,-35px) scale(1.07) rotateY(-1deg)" },
-          { transform: "translate3d(.8%,-.5%,0) scale(1.015) rotateY(.5deg)" },
+          { transform: "translate3d(-2%,1.2%,-70px) scale(1.13) rotateY(-1.2deg)" },
+          { transform: "translate3d(.4%,-.3%,-20px) scale(1.07) rotateY(.25deg)", offset: 0.56 },
+          { transform: "translate3d(1.2%,-.8%,0) scale(1.025) rotateY(.7deg)" },
         ],
-        { duration: Math.max(2600, frames.length * FRAME_INTERVAL_MS), easing: "cubic-bezier(.18,.72,.16,1)", fill: "both" }
+        { duration: Math.max(5200, frames.length * FRAME_INTERVAL_MS), easing: "cubic-bezier(.16,.72,.14,1)", fill: "both" }
       );
     }
 
@@ -76,10 +77,10 @@
     for (let index = 1; index < frames.length; index += 1) {
       const previous = frames[index - 1];
       const current = frames[index];
-      previous.classList.add("is-frame-leaving");
+      previous.classList.remove("is-frame-active");
       current.classList.add("is-frame-active");
       await delay(reducedMotion() ? 8 : FRAME_INTERVAL_MS);
-      previous.classList.remove("is-frame-active", "is-frame-leaving");
+      previous.classList.remove("is-frame-leaving");
     }
     episode.classList.add("is-frame-complete");
     await delay(reducedMotion() ? 10 : 420);
@@ -129,20 +130,33 @@
     updateButtons(true);
     transition?.classList.add("is-sweeping");
 
+    const next = episodes[index];
     if (!reducedMotion() && typeof current.animate === "function") {
-      current.animate(
+      await current.animate(
         [
           { transform: "translate3d(0,0,0) rotateY(0deg) scale(1)", clipPath: "inset(0 0 0 0)", opacity: 1 },
-          { transform: "translate3d(-8vw,0,-180px) rotateY(7deg) scale(.94)", clipPath: "inset(3% 14% 3% 0)", opacity: 0.22 },
+          { transform: "translate3d(-3vw,0,-80px) rotateY(2deg) scale(.985)", clipPath: "inset(1% 5% 1% 0)", opacity: 0.82, offset: .42 },
+          { transform: "translate3d(-12vw,0,-240px) rotateY(10deg) scale(.9)", clipPath: "inset(4% 22% 4% 0)", opacity: 0 },
         ],
-        { duration: SCENE_TRANSITION_MS, easing: "cubic-bezier(.7,0,.2,1)", fill: "forwards" }
-      );
+        { duration: SCENE_TRANSITION_MS / 2, easing: "cubic-bezier(.68,0,.22,1)", fill: "forwards" }
+      ).finished.catch(() => {});
     }
 
     player?.classList.add("is-turning");
-    await delay(reducedMotion() ? 30 : 950);
+    await delay(reducedMotion() ? 30 : 80);
     activate(index);
-    await delay(reducedMotion() ? 30 : 950);
+    if (!reducedMotion() && typeof next.animate === "function") {
+      await next.animate(
+        [
+          { transform: "translate3d(11vw,0,-220px) rotateY(-9deg) scale(.9)", clipPath: "inset(4% 0 4% 22%)", opacity: 0 },
+          { transform: "translate3d(2vw,0,-65px) rotateY(-2deg) scale(.98)", clipPath: "inset(1% 0 1% 5%)", opacity: .85, offset: .56 },
+          { transform: "translate3d(0,0,0) rotateY(0deg) scale(1)", clipPath: "inset(0 0 0 0)", opacity: 1 },
+        ],
+        { duration: SCENE_TRANSITION_MS / 2, easing: "cubic-bezier(.16,.74,.18,1)", fill: "both" }
+      ).finished.catch(() => {});
+    } else {
+      await delay(30);
+    }
     transition?.classList.remove("is-sweeping");
     player?.classList.remove("is-turning");
     transitioning = false;
@@ -163,6 +177,7 @@
   }
 
   function begin() {
+    document.body.classList.remove("is-opening");
     document.body.classList.add("is-story");
     const { player } = elements();
     if (player) {
@@ -194,9 +209,9 @@
     transitioning = true;
     updateButtons(true);
     transition?.classList.add("is-sweeping");
-    await delay(reducedMotion() ? 30 : 950);
+    await delay(reducedMotion() ? 30 : SCENE_TRANSITION_MS / 2);
     finish();
-    await delay(reducedMotion() ? 50 : 1150);
+    await delay(reducedMotion() ? 50 : SCENE_TRANSITION_MS / 2);
     transition?.classList.remove("is-sweeping");
     transitioning = false;
   }
@@ -216,7 +231,7 @@
     document.body.classList.add("is-landing");
     const shell = document.querySelector(".site-shell");
     shell?.removeAttribute("aria-hidden");
-    window.setTimeout(() => document.querySelector("#inicio")?.scrollIntoView({ behavior: "smooth" }), 220);
+    window.setTimeout(() => document.querySelector("#pos-pagamento")?.scrollIntoView({ behavior: "smooth" }), 320);
   }
 
   function applyParallax(event) {

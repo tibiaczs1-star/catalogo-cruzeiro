@@ -11,3 +11,7 @@ Os efeitos desta pasta são arquivos de áudio reais, sem síntese por Web Audio
 - Moeda/caixa: https://assets.mixkit.co/active_storage/sfx/866/866-preview.mp3
 
 Os arquivos `wind.mp3`, `cow.mp3`, `horse.mp3` e `gun.mp3` também vieram das respectivas categorias da mesma biblioteca. Todos permanecem locais para não depender da rede durante a experiência.
+
+## Trilha instrumental
+
+`ranch-theme.mp3` é uma versão comprimida de **Long Trail**, de Kevin MacLeod. A gravação foi disponibilizada em domínio público e baixada do Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Kevin_MacLeod_-_Long_Trail.ogg

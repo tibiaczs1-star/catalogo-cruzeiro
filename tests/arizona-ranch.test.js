@@ -76,14 +76,15 @@ test("não libera mesa já ocupada nem duplica reserva pendente", () => {
   assert.equal(STATIC_OCCUPIED_TABLES.has(22), true);
   assert.throws(() => store.create({ tableNumber: 22, seats: 2, user: { sub: "u1", email: "a@teste.com" } }), /indisponível/i);
 
-  const reservation = store.create({ tableNumber: 12, seats: 4, user: { sub: "u1", email: "a@teste.com" } });
+  const { reservation, accessToken } = store.create({ tableNumber: 12, seats: 4 });
+  assert.ok(accessToken);
   assert.equal(reservation.status, "awaiting_payment");
   assert.throws(() => store.create({ tableNumber: 12, seats: 2, user: { sub: "u2", email: "b@teste.com" } }), /indisponível/i);
 });
 
 test("admin libera mesa confirmada para voltar ao mapa de reservas", () => {
   const store = createReservationStore({ now: () => new Date("2026-08-03T12:00:00.000Z") });
-  const reservation = store.create({ tableNumber: 3, seats: 4, user: { sub: "u1", email: "a@teste.com" } });
+  const { reservation } = store.create({ tableNumber: 3, seats: 4 });
 
   store.review({ id: reservation.id, action: "confirm", adminEmail: "admin@teste.com" });
   assert.equal(store.tables().find((table) => table.number === 3).status, "reserved");
@@ -93,13 +94,13 @@ test("admin libera mesa confirmada para voltar ao mapa de reservas", () => {
   assert.equal(released.statusLabel, "Liberada");
   assert.equal(store.tables().find((table) => table.number === 3).status, "available");
 
-  const nextReservation = store.create({ tableNumber: 3, seats: 2, user: { sub: "u2", email: "b@teste.com" } });
+  const { reservation: nextReservation } = store.create({ tableNumber: 3, seats: 2 });
   assert.equal(nextReservation.tableNumber, 3);
 });
 
 test("salva nome e e-mail ajustados após o acesso Google", () => {
   const store = createReservationStore({ now: () => new Date("2026-08-03T12:00:00.000Z") });
-  const reservation = store.create({
+  const { reservation } = store.create({
     tableNumber: 13,
     seats: 2,
     user: { sub: "google-user-1", name: "Conta Google", email: "conta@google.test" },
@@ -108,4 +109,16 @@ test("salva nome e e-mail ajustados após o acesso Google", () => {
 
   assert.equal(reservation.customer.name, "Maria da Silva");
   assert.equal(reservation.customer.email, "maria@exemplo.com");
+});
+
+test("o comprovante público exige o token secreto da reserva", () => {
+  const store = createReservationStore({ now: () => new Date("2026-08-03T12:00:00.000Z") });
+  const { reservation, accessToken } = store.create({ tableNumber: 14, seats: 2 });
+
+  assert.throws(
+    () => store.addReceipt({ id: reservation.id, accessToken: "token-incorreto", receipt: { dataUrl: "data:image/png;base64,AAAA", fileName: "pix.png", mimeType: "image/png" } }),
+    /acesso/i,
+  );
+  const updated = store.addReceipt({ id: reservation.id, accessToken, receipt: { dataUrl: "data:image/png;base64,AAAA", fileName: "pix.png", mimeType: "image/png" } });
+  assert.equal(updated.status, "receipt_submitted");
 });

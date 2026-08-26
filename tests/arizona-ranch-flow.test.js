@@ -7,18 +7,20 @@ const projectRoot = path.resolve(__dirname, "..");
 const readProjectFile = (...segments) =>
   fs.readFileSync(path.join(projectRoot, ...segments), "utf8");
 
-test("a reserva apresenta o mapa antes do Google e segue direto ao pagamento", () => {
+test("a reserva apresenta o mapa e segue direto ao pagamento sem Google", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
-  ["table", "login", "payment"].forEach((step) => {
+  ["table", "payment"].forEach((step) => {
     assert.match(html, new RegExp(`data-flow-step=["']${step}["']`));
   });
+  assert.doesNotMatch(html, /data-flow-step=["']login["']/);
   assert.doesNotMatch(html, /data-flow-step=["']details["']/);
   assert.doesNotMatch(html, /data-flow-step=["']whatsapp["']/);
-  assert.match(app, /const flow = \["table", "login", "payment"\]/);
+  assert.match(app, /const flow = \["table", "payment"\]/);
   assert.match(html, /data-flow-step=["']table["'][^>]*>/);
-  assert.match(html, /data-flow-step=["']login["'][^>]*hidden/);
+  assert.match(html, /data-flow-step=["']payment["'][^>]*hidden/);
+  assert.doesNotMatch(`${html}\n${app}`, /accounts\.google\.com|Conecte com Google|google-login/i);
 
   assert.match(html, /id=["']payment-pix["']/);
   assert.match(html, /id=["']payment-card["']/);
@@ -148,7 +150,7 @@ test("a história usa quatro capítulos com doze quadros de tela cheia por cena"
   });
   assert.doesNotMatch(html, /cinema-shot-detail|detail\.png/i);
   assert.doesNotMatch(html, /class=["'][^"']*episode-frame/);
-  assert.match(html, /Narrações desta experiência foram geradas por IA/);
+  assert.doesNotMatch(html, /Narrações desta experiência foram geradas por IA|FILME INTERATIVO/i);
   assert.match(html, /id=["']episode-count["']>01 \/ 04</i);
 });
 
@@ -165,8 +167,8 @@ test("cada clique executa um corte de mini-filme com quadros, zoom e troca contr
   assert.doesNotMatch(episodes, /is-shot-detail/);
   assert.match(episodes, /is-ready/);
   assert.match(episodes, /for \(let index = 1; index < frames\.length; index \+= 1\)/);
-  assert.match(episodes, /const FRAME_INTERVAL_MS = 285/);
-  assert.match(episodes, /const SCENE_TRANSITION_MS = 1900/);
+  assert.match(episodes, /const FRAME_INTERVAL_MS = 420/);
+  assert.match(episodes, /const SCENE_TRANSITION_MS = 3200/);
   assert.match(episodes, /await delay\(reducedMotion\(\) \? 8 : FRAME_INTERVAL_MS\)/);
   assert.doesNotMatch(episodes, /setInterval/);
   assert.match(css, /perspective:\s*1400px/);
@@ -199,7 +201,7 @@ test("o terceiro capítulo apresenta a celebração antes do mapa", () => {
   assert.match(thirdEpisode, /Chegar ao mapa/i);
 });
 
-test("o quarto capítulo encerra no mapa sem antecipar o Google", () => {
+test("o quarto capítulo encerra no mapa sem etapas intermediárias", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const finalEpisode = html.match(/<article[^>]*data-scene=["']stage["'][^>]*>[\s\S]*?<\/article>/i)?.[0] || "";
   assert.match(finalEpisode, /Agora chegou a hora de escolher o seu lugar/i);
@@ -235,7 +237,7 @@ test("a mesa escolhida abre o capítulo final com Luzienne antes do pagamento", 
   assert.match(app, /function openReservationFinale\(\)/);
   assert.match(app, /playScene\?\.\("finale"\)/);
   assert.match(app, /tableNext\.addEventListener\(["']click["'],\s*openReservationFinale\)/);
-  assert.match(app, /showFlowStep\(state\.config\?\.user\?\.signedIn \? ["']payment["'] : ["']login["']\)/);
+  assert.match(app, /showFlowStep\(["']payment["']\)/);
 });
 
 test("a narradora abre a experiência e os capítulos só começam quando a abertura termina", () => {
@@ -248,15 +250,17 @@ test("a narradora abre a experiência e os capítulos só começam quando a aber
   assert.doesNotMatch(episodes, /setTimeout\(begin,\s*1100\)/);
 });
 
-test("o filme termina no mapa e a landing informativa aparece depois que o Pix é criado", () => {
+test("a experiência termina no mapa e a landing aparece somente depois do comprovante", () => {
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const episodes = readProjectFile("pagamentos", "reservaranch", "episodes.js");
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
   const reserve = app.match(/async function reserveSelectedTable\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  const upload = app.match(/async function uploadReceipt\(file\) \{([\s\S]*?)\n  \}/)?.[1] || "";
 
   assert.match(episodes, /function completePurchase\(\)/);
   assert.match(episodes, /classList\.add\(["']is-landing["']\)/);
-  assert.match(reserve, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
+  assert.doesNotMatch(reserve, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
+  assert.match(upload, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
   assert.match(css, /body:not\(\.is-purchase\):not\(\.is-landing\) \.site-shell\s*\{[^}]*display:\s*none/s);
   assert.match(css, /body\.is-landing \.site-shell\s*\{[^}]*display:\s*flex/s);
 });
@@ -297,14 +301,16 @@ test("o ambiente usa somente gravações locais e nunca sintetiza efeitos", () =
   });
 });
 
-test("usa os Pix copia e cola exatos dos QR enviados", () => {
+test("usa exclusivamente o QR Pix e o copia e cola gerados pelo servidor", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
   assert.match(html, /Pix copia e cola — código exato do QR/);
   assert.match(html, /As quebras na tela não alteram o código/);
-  assert.match(app, /5406100\.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503\*\*\*63042013/);
-  assert.match(app, /5406200\.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503\*\*\*63048038/);
+  assert.doesNotMatch(app, /PIX_PAYMENT_OPTIONS/);
+  assert.match(app, /payment\.qrCodeDataUrl/);
+  assert.match(app, /payment\.pixCode/);
+  assert.match(app, /payment\.pixKey/);
 });
 
 test("o mapa exibe somente mesa livre ou comprada", () => {
@@ -316,20 +322,32 @@ test("o mapa exibe somente mesa livre ou comprada", () => {
   assert.doesNotMatch(app, new RegExp(["Em", "andamento"].join(" ")));
 });
 
-test("Google identifica o comprador apenas quando ele avança para pagar", () => {
+test("a compra pública usa token próprio sem solicitar conta Google", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
 
   assert.doesNotMatch(html, /id=["']details-name["']/i);
   assert.doesNotMatch(html, /id=["']details-email["']/i);
   assert.doesNotMatch(html, /id=["']contact-phone["']/i);
-  assert.match(html, /Conecte com Google/i);
-  assert.match(app, /elements\.accountTitle\.textContent = "Conectar com Google";/);
-  assert.doesNotMatch(app, /Conectado como/);
-  const googleAuth = app.match(/async function handleGoogleCredential\(response\) \{([\s\S]*?)\n  \}/)?.[1] || "";
-  assert.doesNotMatch(googleAuth, /showToast\(error\.message, "error"\)/);
-  assert.match(googleAuth, /showToast\("Não foi possível conectar com Google agora\. Tente novamente\.", "error"\)/);
-  assert.match(app, /customer: \{ name: user\.name, email: user\.email \}/);
+  assert.doesNotMatch(`${html}\n${app}`, /Google|accounts\.google\.com|google-login/i);
+  assert.match(app, /reservationToken/);
+  assert.match(app, /x-arizona-reservation-token/);
+  assert.match(app, /payload\.accessToken/);
+  assert.match(app, /customer: \{ name: "Cliente Arizona Ranch", email: "" \}/);
+});
+
+test("a landing pós-comprovante separa imagens criadas e fotos originais e oferece suporte", () => {
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const generated = [...html.matchAll(/data-gallery=["']generated["'][\s\S]*?<\/section>/gi)][0]?.[0] || "";
+  const originals = [...html.matchAll(/data-gallery=["']originals["'][\s\S]*?<\/section>/gi)][0]?.[0] || "";
+  const sources = [...html.matchAll(/data-gallery-item[^>]+src=["']([^"']+)/gi)].map((match) => match[1]);
+
+  assert.match(generated, /cinematic-v2\/(gate|trail|saloon|stage)-wide\.png/i);
+  assert.match(originals, /assets\/gallery\//i);
+  assert.equal(new Set(sources).size, sources.length);
+  assert.match(html, /pagamento protegido|comprovante/i);
+  assert.match(html, /wa\.me\//i);
+  assert.match(html, /class=["'][^"']*whatsapp-float/i);
 });
 
 test("o painel usa sessão própria de administrador sem login Google", () => {

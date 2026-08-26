@@ -7,31 +7,16 @@
   const OPENING_VOICE_TEXT = "Bem-vindo ao Arizona Ranch. No dia cinco de setembro, a porteira se abre para a inauguração oficial. Entre nesta experiência e descubra o lugar onde a sua noite vai acontecer.";
   let soundscape = null;
   let openingJourneyStarted = false;
-  const PIX_PAYMENT_OPTIONS = {
-    10000: {
-      amountLabel: "R$ 100,00",
-      pixKey: "(68) 99205-6283",
-      qrCodeImage: "/pagamentos/reservaranch/assets/pix-arizona-100.png",
-      pixCode: "00020126530014br.gov.bcb.pix0114+55689920562830213Arizona Ranch5204000053039865406100.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503***63042013",
-    },
-    20000: {
-      amountLabel: "R$ 200,00",
-      pixKey: "(68) 99205-6283",
-      qrCodeImage: "/pagamentos/reservaranch/assets/pix-arizona-200.png",
-      pixCode: "00020126530014br.gov.bcb.pix0114+55689920562830213Arizona Ranch5204000053039865406200.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503***63048038",
-    },
-  };
   const tableSectors = [
     { id: "entrada", label: "Entrada & buffet", detail: "Mesas 01 a 12", numbers: range(1, 12) },
     { id: "frente", label: "Frente do salão", detail: "Mesas 13 a 24", numbers: range(13, 24) },
     { id: "centro", label: "Centro do salão", detail: "Mesas 25 a 45", numbers: range(25, 45) },
     { id: "palco", label: "Próximo ao palco", detail: "Mesas 46 a 67", numbers: range(46, 67) },
   ];
-  const flow = ["table", "login", "payment"];
-  const state = { activeSector: "all", auth: null, config: null, flowStep: "table", reservation: null, selectedSeats: 2, selectedTable: null, tables: [] };
+  const flow = ["table", "payment"];
+  const state = { activeSector: "all", config: null, flowStep: "table", reservation: null, reservationToken: window.sessionStorage.getItem("arizonaReservationToken") || "", selectedSeats: 2, selectedTable: null, tables: [] };
   const elements = {
-    account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
-    loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"),
+    mapDialog: document.querySelector("#map-dialog"),
     overviewMap: document.querySelector("#full-map"), paymentDialog: document.querySelector("#payment-dialog"), paymentInfo: document.querySelector("#payment-summary"), paymentQr: document.querySelector("#pix-qr"), pixAmountValue: document.querySelector("#pix-amount-value"), pixCodeDisplay: document.querySelector("#pix-code-display"), pixKeyDisplay: document.querySelector("#pix-key-display"), pixInfoToggle: document.querySelector("#pix-info-toggle"), pixInfoBody: document.querySelector("#pix-info-body"), pixShareBtn: document.querySelector("#pix-share-btn"), reservationPanel: document.querySelector("#reservation-panel"),
     reservationFinale: document.querySelector("#reservation-finale"), finaleTable: document.querySelector("#finale-table"), finaleContinue: document.querySelector("[data-continue-payment]"), finaleBack: document.querySelector("[data-back-to-map]"),
     sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast")
@@ -39,7 +24,6 @@
 
   function range(start, end) { return Array.from({ length: end - start + 1 }, (_, index) => start + index); }
   function selectedAmountCents() { return state.selectedSeats === 2 ? 10000 : 20000; }
-  function pixForAmount(amountCents) { return PIX_PAYMENT_OPTIONS[Number(amountCents)] || null; }
   function tableLabel(number) { return String(number).padStart(2, "0"); }
   function tableByNumber(number) { return state.tables.find((table) => table.number === number); }
   function tableSector(number) { return tableSectors.find((sector) => sector.numbers.includes(number))?.id || "centro"; }
@@ -109,7 +93,8 @@
   }
 
   async function request(path, options = {}) {
-    const response = await fetch(`${API}${path}`, { credentials: "same-origin", headers: { "content-type": "application/json", ...(options.headers || {}) }, ...options });
+    const reservationHeaders = state.reservationToken ? { "x-arizona-reservation-token": state.reservationToken } : {};
+    const response = await fetch(`${API}${path}`, { credentials: "same-origin", headers: { "content-type": "application/json", ...reservationHeaders, ...(options.headers || {}) }, ...options });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(payload.error || "Não foi possível concluir esta etapa.");
     return payload;
@@ -155,16 +140,6 @@
     state.tables.forEach((table) => { const button = createTableButton(table, "overview-table"); button.style.gridColumn = String(((table.number - 1) % 10) + 1); button.style.gridRow = String(Math.floor((table.number - 1) / 10) + 2); elements.overviewMap.append(button); });
   }
 
-  function renderAccount() {
-    const user = state.config?.user; elements.account.replaceChildren(); elements.loginNext.hidden = !user?.signedIn;
-    if (user?.signedIn) { const card = document.createElement("div"); card.className = "account-card"; card.innerHTML = `<p>Google conectado.</p><small>${escapeHtml(user.name || user.email || "Identidade confirmada")} · pronto para pagar.</small>`; elements.account.append(card); elements.accountTitle.textContent = "Google conectado"; elements.accountDescription.textContent = "Sua mesa está escolhida. Continue para gerar o Pix."; return; }
-    elements.accountTitle.textContent = "Conectar com Google"; elements.accountDescription.textContent = state.auth?.clientId ? "Toque no botão para continuar." : "A conexão está sendo preparada. Atualize a página em alguns segundos.";
-    if (!state.auth?.clientId) return;
-    const buttonMount = document.createElement("div"); buttonMount.className = "google-button-mount"; elements.account.append(buttonMount);
-    if (window.google?.accounts?.id) { window.google.accounts.id.initialize({ client_id: state.auth.clientId, callback: handleGoogleCredential }); window.google.accounts.id.renderButton(buttonMount, { shape: "pill", size: "large", text: "continue_with", theme: "filled_black", width: 300 }); return; }
-    const fallback = document.createElement("button"); fallback.className = "button button-secondary"; fallback.type = "button"; fallback.textContent = "Conectar com Google"; fallback.addEventListener("click", () => window.location.reload()); elements.account.append(fallback);
-  }
-
   function renderSelection() {
     const table = state.selectedTable ? tableByNumber(state.selectedTable) : null;
     if (!table) { elements.selectionTitle.textContent = "Selecione uma mesa no mapa"; elements.selectionDescription.textContent = "Somente mesas com ✓ Livre podem ser escolhidas."; elements.tableNext.disabled = true; return; }
@@ -180,27 +155,19 @@
   function escapeHtml(value) { const node = document.createElement("span"); node.textContent = value || ""; return node.innerHTML; }
 
   async function loadTables() { const payload = await request("/tables"); state.tables = payload.tables || []; renderTables(); renderOverviewMap(); }
-  async function loadAuth() {
-    state.auth = await fetch("/api/auth/config", { credentials: "same-origin" }).then(async (response) => { const payload = await response.json().catch(() => ({})); return response.ok ? payload : {}; });
-    const config = await request("/config"); state.config = { ...config, user: config.session }; renderAccount(); renderSelection(); if (state.config.user?.signedIn) await loadExistingReservation();
-  }
-  async function loadExistingReservation() { const payload = await request("/reservations/me"); const latest = payload.reservations?.[0]; if (!latest || !["awaiting_payment", "receipt_submitted"].includes(latest.status)) return; const details = await request(`/reservations/${latest.id}`); state.reservation = { ...details.reservation, payment: details.payment }; renderReservation(); }
-  async function handleGoogleCredential(response) {
-    try { await fetch("/api/auth/google", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: response.credential }) }).then(async (result) => { if (!result.ok) { const payload = await result.json().catch(() => ({})); throw new Error(payload.error || "Não foi possível entrar com Google."); } }); await loadAuth(); showFlowStep("payment"); showToast("Google conectado. Agora é só gerar o Pix.", "success"); } catch { showToast("Não foi possível conectar com Google agora. Tente novamente.", "error"); }
-  }
+  async function loadConfig() { state.config = await request("/config"); renderSelection(); }
 
   function selectTable(number) { const table = tableByNumber(number); if (!table || table.status !== "available") { showToast("Esta mesa já está comprada.", "error"); return; } state.selectedTable = number; renderTables(); renderOverviewMap(); renderSelection(); }
   async function reserveSelectedTable() {
-    const user = state.config?.user;
-    if (!state.selectedTable || !user?.signedIn || !user.name || !user.email) { showToast("Escolha uma mesa e conecte com Google antes de gerar o Pix.", "error"); return; }
+    if (!state.selectedTable) { showToast("Escolha uma mesa antes de gerar o Pix.", "error"); return; }
     const button = document.querySelector("#payment-pix"); button.disabled = true; button.querySelector("strong").textContent = "Gerando Pix…";
-    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, amountCents: selectedAmountCents(), customer: { name: user.name, email: user.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); window.ArizonaEpisodes?.completePurchase?.(); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
+    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, amountCents: selectedAmountCents(), customer: { name: "Cliente Arizona Ranch", email: "" } }) }); state.reservationToken = payload.accessToken || ""; if (state.reservationToken) window.sessionStorage.setItem("arizonaReservationToken", state.reservationToken); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
     catch (error) { showToast(error.message, "error"); await loadTables().catch(() => undefined); }
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
   function openPayment(reservation) {
-    state.reservation = reservation; const payment = reservation.payment; const pixOption = pixForAmount(reservation.amountCents); const qrSrc = pixOption?.qrCodeImage || payment?.qrCodeDataUrl || ""; const code = reservationCode(reservation); elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
-    elements.pixAmountValue.textContent = pixOption?.amountLabel || payment?.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = pixOption?.pixCode || payment?.pixCode || ""; elements.pixKeyDisplay.textContent = pixOption?.pixKey || payment?.pixKey || "(68) 99205-6283";
+    state.reservation = reservation; const payment = reservation.payment || {}; const qrSrc = payment.qrCodeDataUrl || ""; const code = reservationCode(reservation); elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
+    elements.pixAmountValue.textContent = payment.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = payment.pixCode || ""; elements.pixKeyDisplay.textContent = payment.pixKey || "";
     document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`; document.querySelector("#order-id").textContent = code;
     updateWhatsAppProofLink(reservation);
     const uploadStatus = document.querySelector("#upload-status"); if (uploadStatus) uploadStatus.textContent = reservation.expiresAt ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.` : "Envie o comprovante após realizar o pagamento."; elements.pixInfoBody.hidden = true; elements.pixInfoToggle.setAttribute("aria-expanded", "false"); elements.paymentDialog.showModal();
@@ -212,7 +179,7 @@
   async function uploadReceipt(file) {
     if (!file || !state.reservation) return; if (file.size > 4 * 1024 * 1024) { showToast("O comprovante deve ter no máximo 4 MB.", "error"); return; }
     const receiptStatus = document.querySelector("#upload-status"); receiptStatus.textContent = "Enviando comprovante…";
-    try { const dataUrl = await readAsDataUrl(file); const payload = await request(`/reservations/${state.reservation.id}/receipt`, { method: "POST", body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }) }); state.reservation = { ...payload.reservation, payment: state.reservation.payment }; renderReservation(); await loadTables(); const whatsappUrl = buildProofWhatsAppUrl(state.reservation); updateWhatsAppProofLink(state.reservation); receiptStatus.textContent = "Comprovante enviado. Abrindo WhatsApp com a mensagem pronta…"; showToast("Comprovante enviado. Confirme agora pelo WhatsApp.", "success"); window.setTimeout(() => { window.location.href = whatsappUrl; }, 250); } catch (error) { showToast(error.message, "error"); } finally { if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = ""; }
+    try { const dataUrl = await readAsDataUrl(file); const payload = await request(`/reservations/${state.reservation.id}/receipt`, { method: "POST", body: JSON.stringify({ dataUrl, fileName: file.name, mimeType: file.type }) }); state.reservation = { ...payload.reservation, payment: state.reservation.payment }; renderReservation(); await loadTables(); updateWhatsAppProofLink(state.reservation); receiptStatus.textContent = "Comprovante enviado. Sua confirmação segue pelo WhatsApp."; showToast("Comprovante enviado com segurança.", "success"); elements.paymentDialog.close(); window.ArizonaEpisodes?.completePurchase?.(); } catch (error) { showToast(error.message, "error"); } finally { if (!receiptStatus.textContent.includes("enviado")) receiptStatus.textContent = ""; }
   }
 
 
@@ -342,7 +309,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
 
   function continueFromFinale() {
     closeReservationFinale();
-    showFlowStep(state.config?.user?.signedIn ? "payment" : "login");
+    showFlowStep("payment");
   }
 
   async function startExperience() {
@@ -354,7 +321,6 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     const openingVoice = document.querySelector("#opening-voice");
     const openingScreen = document.getElementById("opening-screen");
     openingScreen?.classList.add("is-live");
-    document.body.classList.remove("is-opening");
     if (openingButton) openingButton.disabled = true;
     openingVideos.forEach((video) => {
       video.muted = true;
@@ -387,10 +353,10 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       if (event.target.closest("[data-open-map]")) elements.mapDialog.showModal(); if (event.target.closest("[data-close-map]")) elements.mapDialog.close(); if (event.target.closest("[data-close-payment]")) elements.paymentDialog.close();
     });
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
-    elements.loginNext.addEventListener("click", () => showFlowStep("payment")); elements.tableNext.addEventListener("click", openReservationFinale);
+    elements.tableNext.addEventListener("click", openReservationFinale);
     elements.finaleContinue?.addEventListener("click", continueFromFinale); elements.finaleBack?.addEventListener("click", closeReservationFinale);
     document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !elements.reservationFinale?.hidden) closeReservationFinale(); });
     document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
-  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupEventCountdown(); setupCinematicScroll(); setupOpening(); window.requestAnimationFrame(() => window.ArizonaCinematic?.createCinematic().catch(() => {})); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
+  async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupEventCountdown(); setupCinematicScroll(); setupOpening(); setupGallery(); window.requestAnimationFrame(() => window.ArizonaCinematic?.createCinematic().catch(() => {})); try { await Promise.all([loadTables(), loadConfig()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();

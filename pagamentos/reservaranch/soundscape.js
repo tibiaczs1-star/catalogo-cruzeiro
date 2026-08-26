@@ -16,6 +16,7 @@
     fire: "/pagamentos/reservaranch/assets/sfx/fire.mp3",
     saloon: "/pagamentos/reservaranch/assets/sfx/saloon.mp3",
     coin: "/pagamentos/reservaranch/assets/sfx/coin.mp3",
+    music: "/pagamentos/reservaranch/assets/sfx/ranch-theme.mp3",
   };
   // Sons ambientes do rancho: mugido, cavalo, noite e disparo distante.
   const DEFAULT_SOUNDS = ["cow", "horse", "night", "gun"];
@@ -54,11 +55,23 @@
     const narrationsPlayed = new Set();
     const sceneSoundsPlayed = new Set();
     const wind = typeof Audio !== "undefined" ? new Audio(SOURCES.wind) : null;
+    const ambientBed = typeof Audio !== "undefined" ? new Audio(SOURCES.fire) : null;
+    const musicBed = typeof Audio !== "undefined" ? new Audio(SOURCES.music) : null;
 
     if (wind) {
       wind.loop = true;
       wind.volume = VOLUMES.wind;
       wind.preload = "auto";
+    }
+    if (ambientBed) {
+      ambientBed.loop = true;
+      ambientBed.volume = 0.014;
+      ambientBed.preload = "auto";
+    }
+    if (musicBed) {
+      musicBed.loop = true;
+      musicBed.volume = 0.026;
+      musicBed.preload = "auto";
     }
 
     function play(category, { exclusive = false } = {}) {
@@ -105,9 +118,13 @@
       narration.preload = "auto";
       narration.volume = 0.86;
       if (wind) wind.volume = 0.018;
+      if (ambientBed) ambientBed.volume = 0.007;
+      if (musicBed) musicBed.volume = 0.012;
       const restore = () => {
         if (activeNarration === narration) activeNarration = null;
         if (wind) wind.volume = VOLUMES.wind;
+        if (ambientBed) ambientBed.volume = 0.014;
+        if (musicBed) musicBed.volume = 0.026;
       };
       narration.addEventListener("ended", restore, { once: true });
       narration.addEventListener("error", restore, { once: true });
@@ -128,6 +145,8 @@
           await voice.play().catch(() => {});
         }
         wind?.play().catch(() => {});
+        ambientBed?.play().catch(() => {});
+        musicBed?.play().catch(() => {});
         schedule();
       },
       cue(category) {
@@ -144,6 +163,14 @@
         if (wind) {
           wind.pause();
           wind.currentTime = 0;
+        }
+        if (ambientBed) {
+          ambientBed.pause();
+          ambientBed.currentTime = 0;
+        }
+        if (musicBed) {
+          musicBed.pause();
+          musicBed.currentTime = 0;
         }
         started = false;
       },
