@@ -1,4 +1,5 @@
 const assert = require("node:assert/strict");
+const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
@@ -27,7 +28,7 @@ test("a reserva apresenta o mapa e segue direto ao pagamento sem Google", () => 
   assert.match(html, /Pagamento por cart[ãa]o em constru[çc][ãa]o/i);
 });
 
-test("a abertura mantém filmes próprios para desktop e mobile e a única chamada de voz", () => {
+test("a abertura restaura a introdução original com a artista e a única chamada de voz", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const openingMarkup = html.match(
@@ -36,13 +37,12 @@ test("a abertura mantém filmes próprios para desktop e mobile e a única chama
 
   assert.match(html, /id=["']opening-screen["']/);
   assert.ok(openingMarkup);
-  assert.equal((openingMarkup.match(/data-opening-video/g) || []).length, 2);
-  assert.match(openingMarkup, /class=["'][^"']*opening-video-wide[^"']*["']/i);
-  assert.match(openingMarkup, /class=["'][^"']*opening-video-mobile[^"']*["']/i);
+  assert.equal((openingMarkup.match(/data-opening-video/g) || []).length, 1);
+  assert.match(openingMarkup, /class=["'][^"']*opening-video-intro[^"']*["']/i);
   assert.match(openingMarkup, /id=["']opening-voice["']/i);
-  assert.match(openingMarkup, /cinematic-v2\/opening-wide\.mp4/i);
-  assert.match(openingMarkup, /cinematic-v2\/opening-mobile\.mp4/i);
-  assert.doesNotMatch(openingMarkup, /arizona-entrada\.mp4/i);
+  assert.match(openingMarkup, /arizona-entrada\.mp4/i);
+  assert.match(openingMarkup, /arizona-entrada\.jpeg/i);
+  assert.doesNotMatch(openingMarkup, /cinematic-v2\/opening-(wide|mobile)\.mp4/i);
   assert.match(openingMarkup, /arizona-welcome\.mp3/i);
   assert.match(openingMarkup, /class=["']opening-brand["']/i);
   assert.match(openingMarkup, /arizona-logo\.png/i);
@@ -86,10 +86,9 @@ test("a abertura inicia a jornada com o vídeo mudo e apenas a narradora no soun
   assert.doesNotMatch(`${html}\n${app}`, /Entrar com trilha/i);
   assert.doesNotMatch(`${html}\n${app}`, /Liberar vídeo, voz e reserva/i);
   assert.doesNotMatch(html, /id=["']toggle-sound["']/i);
-  assert.match(css, /\.opening-video\s*\{[^}]*object-fit:\s*cover;[^}]*filter:\s*none;/s);
-  assert.match(css, /\.opening-video-wide\s*\{[^}]*display:\s*block/);
-  assert.match(css, /\.opening-video-mobile\s*\{[^}]*display:\s*none/);
-  assert.match(css, /@media \(max-width: 900px\), \(orientation: portrait\)\s*\{[\s\S]*\.opening-video-wide\s*\{[^}]*display:\s*none[\s\S]*\.opening-video-mobile\s*\{[^}]*display:\s*block/);
+  assert.match(css, /\.opening-video\s*\{[^}]*object-fit:\s*contain;[^}]*filter:\s*none;/s);
+  assert.match(css, /\.opening-video-intro\s*\{[^}]*object-position:\s*center/);
+  assert.doesNotMatch(css, /\.opening-video-(wide|mobile)/);
   assert.doesNotMatch(css, /--opening-frame-width/);
   assert.doesNotMatch(css, /@media \(max-width: 640px\)\s*\{[^}]*\.opening-brand\s*\{[^}]*top:\s*18px/s);
   assert.match(css, /\.opening-screen::before/);
@@ -223,26 +222,40 @@ test("desktop e mobile recebem composições de imagem separadas", () => {
   assert.doesNotMatch(css, /\.cinema-shot-detail/);
 });
 
-test("a mesa escolhida abre o capítulo final com Luzienne antes do pagamento", () => {
+test("a mesa escolhida abre uma confirmação limpa antes do pagamento", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
   const finale = html.match(/<section[^>]*data-reservation-finale[^>]*>[\s\S]*?<\/section>/i)?.[0] || "";
 
-  assert.match(finale, /Luzienne Lucena/i);
-  assert.match(finale, /buffet/i);
-  assert.match(finale, /drinks/i);
-  assert.match(finale, /atendimento VIP/i);
-  assert.match(finale, /scene-finale\.mp3/i);
+  assert.match(finale, /Mesa escolhida/i);
+  assert.match(finale, /Pix oficial/i);
+  assert.match(finale, /comprovante/i);
   assert.match(finale, /data-continue-payment/i);
+  assert.doesNotMatch(finale, /Luzienne Lucena|finale-artist|scene-finale\.mp3/i);
   assert.match(app, /function openReservationFinale\(\)/);
-  assert.match(app, /playScene\?\.\("finale"\)/);
   assert.match(app, /tableNext\.addEventListener\(["']click["'],\s*openReservationFinale\)/);
   assert.match(app, /showFlowStep\(["']payment["']\)/);
-  assert.match(css, /\.finale-artist\{[^}]*width:min\(24vw,340px\)/s);
-  assert.match(css, /\.finale-artist img\{[^}]*max-height:60vh/s);
-  assert.match(css, /@media \(max-width: 900px\), \(orientation: portrait\)[\s\S]*?\.finale-artist\{[^}]*width:min\(44vw,220px\)/s);
-  assert.match(css, /@media \(max-width: 900px\), \(orientation: portrait\)[\s\S]*?\.finale-artist img\{[^}]*max-height:34vh/s);
+  assert.doesNotMatch(app, /playScene\?\.\("finale"\)|scene-finale\.mp3/);
+  assert.doesNotMatch(css, /\.finale-artist/);
+  assert.match(css, /\.finale-content\{[^}]*text-align:center/s);
+});
+
+test("a apresentação pode ser pulada e encerra todos os meios antes de abrir o mapa", () => {
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+  const episodes = readProjectFile("pagamentos", "reservaranch", "episodes.js");
+  const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
+
+  assert.match(html, /data-skip-cinematic/);
+  assert.match(html, />Pular apresenta[çc][ãa]o</i);
+  assert.match(app, /function stopOpeningMedia\(\)/);
+  assert.match(app, /function skipPresentation\(\)/);
+  assert.match(app, /ArizonaEpisodes\?\.skipToPurchase\?\.\(\)/);
+  assert.match(episodes, /function skipToPurchase\(\)/);
+  assert.match(episodes, /classList\.add\("is-purchase"\)/);
+  assert.match(episodes, /ArizonaSoundscapeInstance\?\.stop\?\.\(\)/);
+  assert.match(css, /\.cinematic-skip\s*\{/);
 });
 
 test("a narradora abre a experiência e os capítulos só começam quando a abertura termina", () => {
@@ -306,16 +319,29 @@ test("o ambiente usa somente gravações locais e nunca sintetiza efeitos", () =
   });
 });
 
-test("usa exclusivamente o QR Pix e o copia e cola gerados pelo servidor", () => {
+test("restaura os dois QR Pix antigos autênticos e mantém o servidor como contingência", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+  const qr100 = path.join(projectRoot, "pagamentos", "reservaranch", "assets", "pix-arizona-100.png");
+  const qr200 = path.join(projectRoot, "pagamentos", "reservaranch", "assets", "pix-arizona-200.png");
+  const gitBlobSha1 = (file) => {
+    const content = fs.readFileSync(file);
+    const header = Buffer.from(`blob ${content.length}\0`);
+    return crypto.createHash("sha1").update(header).update(content).digest("hex");
+  };
 
   assert.match(html, /Pix copia e cola — código exato do QR/);
   assert.match(html, /As quebras na tela não alteram o código/);
-  assert.doesNotMatch(app, /PIX_PAYMENT_OPTIONS/);
+  assert.match(app, /const PIX_PAYMENT_OPTIONS =/);
+  assert.match(app, /pix-arizona-100\.png/);
+  assert.match(app, /pix-arizona-200\.png/);
+  assert.match(app, /function pixForAmount\(amountCents\)/);
+  assert.match(app, /00020126530014br\.gov\.bcb\.pix0114\+5568992056283/);
   assert.match(app, /payment\.qrCodeDataUrl/);
   assert.match(app, /payment\.pixCode/);
   assert.match(app, /payment\.pixKey/);
+  assert.equal(gitBlobSha1(qr100), "f550cecf8d268b91ee0b224fb0e86c20159517e2");
+  assert.equal(gitBlobSha1(qr200), "16191c15b373599ce30b91514a177f219e490892");
 });
 
 test("o mapa exibe somente mesa livre ou comprada", () => {

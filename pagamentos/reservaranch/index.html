@@ -11,16 +11,13 @@
     <meta property="og:image" content="https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/assets/ai/hero-porteira.png" />
     <meta property="og:url" content="https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/" />
     <title>Arizona Ranch | Experiência e reserva de mesas</title>
-    <link rel="stylesheet" href="/pagamentos/reservaranch/arizona.css?v=20260825-cinema-final-v8" />
+    <link rel="stylesheet" href="/pagamentos/reservaranch/arizona.css?v=20260825-v3-final" />
   </head>
   <body class="is-opening">
     <div class="trail-progress" aria-hidden="true"><span id="trail-progress"></span></div>
     <section class="opening-screen" id="opening-screen" aria-label="Abertura Arizona Ranch em vídeo">
-      <video class="opening-video opening-video-wide" data-opening-video muted loop playsinline preload="auto" poster="/pagamentos/reservaranch/assets/cinematic-v2/sequences/gate-01-wide.webp" aria-label="Filme panorâmico de abertura do Arizona Ranch">
-        <source src="/pagamentos/reservaranch/assets/cinematic-v2/opening-wide.mp4" type="video/mp4" />
-      </video>
-      <video class="opening-video opening-video-mobile" data-opening-video muted loop playsinline preload="auto" poster="/pagamentos/reservaranch/assets/cinematic-v2/sequences/gate-01-mobile.webp" aria-label="Filme vertical de abertura do Arizona Ranch">
-        <source src="/pagamentos/reservaranch/assets/cinematic-v2/opening-mobile.mp4" type="video/mp4" />
+      <video class="opening-video opening-video-intro" data-opening-video muted playsinline preload="auto" poster="/pagamentos/reservaranch/assets/arizona-entrada.jpeg" aria-label="Introdução do Arizona Ranch com a artista no palco">
+        <source src="/pagamentos/reservaranch/assets/arizona-entrada.mp4" type="video/mp4" />
       </video>
       <audio id="opening-voice" preload="auto" src="/pagamentos/reservaranch/assets/arizona-welcome.mp3"></audio>
       <div class="opening-brand">
@@ -32,6 +29,8 @@
         <button class="button button-gold" id="start-experience" type="button">Entrar no Arizona</button>
       </div>
     </section>
+
+    <button class="cinematic-skip" type="button" data-skip-cinematic>Pular apresentação</button>
 
     <section class="episode-player" id="episode-player" hidden aria-live="polite">
       <div class="episode-progress"><span>CAPÍTULOS ARIZONA</span><b id="episode-count">01 / 04</b></div>
@@ -211,17 +210,13 @@
     </div>
 
     <section class="reservation-finale" data-reservation-finale id="reservation-finale" hidden aria-hidden="true" aria-labelledby="reservation-finale-title">
-      <audio id="finale-narration" preload="auto" src="/pagamentos/reservaranch/assets/voice/scene-finale.mp3"></audio>
       <div class="finale-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
-      <picture class="finale-artist" aria-hidden="true">
-        <img src="/pagamentos/reservaranch/assets/cinematic-v2/luzienne-cutout-v2.png" alt="" width="1023" height="1537" decoding="async" />
-      </picture>
       <div class="finale-content">
-        <p class="eyebrow">Capítulo final · a noite é sua</p>
-        <p class="finale-kicker">A atração da noite</p>
-        <h2 id="reservation-finale-title">Luzienne Lucena</h2>
-        <p class="finale-description">Música ao vivo para completar uma noite com buffet, drinks e atendimento VIP. Sua mesa coloca você dentro de uma experiência pensada do começo ao fim.</p>
-        <div class="finale-benefits" aria-label="Experiências da noite"><span>Buffet</span><span>Drinks</span><span>Atendimento VIP</span></div>
+        <p class="eyebrow">Sua escolha</p>
+        <p class="finale-kicker">Agora é só garantir</p>
+        <h2 id="reservation-finale-title">Mesa escolhida.</h2>
+        <p class="finale-description">Confira seu lugar e continue para gerar o Pix oficial. Após o pagamento, envie o comprovante para confirmar sua reserva.</p>
+        <div class="finale-benefits" aria-label="Segurança da sua reserva"><span>Mesa selecionada</span><span>Pix oficial</span><span>Suporte no WhatsApp</span></div>
         <strong class="finale-table" id="finale-table">Sua mesa está escolhida.</strong>
         <div class="finale-actions"><button class="button button-quiet" type="button" data-back-to-map>Voltar ao mapa</button><button class="button button-gold" type="button" data-continue-payment>Continuar para pagamento</button></div>
       </div>
@@ -233,9 +228,9 @@
     <a class="whatsapp-float" href="https://wa.me/556892260598?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20a%20reserva%20de%20mesa%20no%20Arizona%20Ranch." target="_blank" rel="noreferrer" aria-label="Falar com o suporte no WhatsApp"><span>WhatsApp</span><b>Suporte</b></a>
 
     <dialog class="payment-dialog" id="payment-dialog" aria-label="Pagamento Pix"><div class="dialog-frame payment-frame"><button class="icon-button payment-close" type="button" data-close-payment aria-label="Fechar pagamento">×</button><p class="eyebrow">Pagamento Pix</p><h2 id="payment-title">Mesa reservada temporariamente</h2><p id="payment-summary"></p><div class="pix-view"><div class="pix-qr-wrap"><img id="pix-qr" alt="QR Code Pix para pagamento" /></div><p class="pix-amount-label" id="pix-amount-label">Valor a pagar</p><p class="pix-amount-value" id="pix-amount-value">R$ 100,00</p><div class="pix-code-row"><div><p class="pix-field-label">Pix copia e cola — código exato do QR</p><p class="pix-code-hint">Toque em copiar. As quebras na tela não alteram o código.</p><p class="pix-code-text" id="pix-code-display">00020126530014br.gov.bcb.pix0114+</p></div><button class="copy-icon-btn" id="copy-pix-code-btn" type="button" aria-label="Copiar código Pix" title="Copiar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="pix-code-row"><div><p class="pix-field-label">Chave Pix</p><p class="pix-code-text" id="pix-key-display">(68) 99205-6283</p></div><button class="copy-icon-btn" id="copy-pix-key-btn" type="button" aria-label="Copiar chave Pix" title="Copiar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="pix-info-row" id="pix-info-toggle" role="button" tabindex="0" aria-expanded="false"><span class="pix-info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><p class="pix-info-label">Informações do QR code</p><span class="pix-info-chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="pix-info-body" id="pix-info-body" hidden><p>Os dados informados vão estar disponíveis para quem ler o QR Code.</p></div><button class="pix-share-btn" id="pix-share-btn" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Compartilhar QR Code</button><div class="receipt-box"><strong>Comprovante</strong><p id="upload-status">Envie o comprovante após realizar o pagamento.</p><div class="receipt-actions"><label class="file-button" for="receipt-file">Anexar comprovante<input id="receipt-file" type="file" accept="image/*,.pdf" /></label><a class="button button-secondary" id="whatsapp-proof" href="https://wa.me/556892260598" target="_blank" rel="noreferrer">Enviar comprovante pelo WhatsApp</a></div></div><p class="payment-note">Pedido <strong id="order-id"></strong> · Couvert artístico: R$ 7,00 por pessoa · confirmação manual em até 24 horas · não há devolução.</p></div></dialog><div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-    <script src="/pagamentos/reservaranch/soundscape.js?v=20260825-cinema-final-v8" defer></script>
-    <script src="/pagamentos/reservaranch/cinematic.js?v=20260825-cinema" defer></script>
-    <script src="/pagamentos/reservaranch/episodes.js?v=20260825-cinema-final-v8" defer></script>
-    <script src="/pagamentos/reservaranch/app.js?v=20260825-cinema-final-v8" defer></script>
+    <script src="/pagamentos/reservaranch/soundscape.js?v=20260825-v3-final" defer></script>
+    <script src="/pagamentos/reservaranch/cinematic.js?v=20260825-v3-final" defer></script>
+    <script src="/pagamentos/reservaranch/episodes.js?v=20260825-v3-final" defer></script>
+    <script src="/pagamentos/reservaranch/app.js?v=20260825-v3-final" defer></script>
   </body>
 </html>

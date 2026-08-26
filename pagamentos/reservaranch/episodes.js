@@ -8,6 +8,7 @@
   const sequenceTimers = new Set();
   let active = 0;
   let transitioning = false;
+  let journeySkipped = false;
 
   function elements() {
     return {
@@ -56,6 +57,7 @@
   }
 
   async function playFrameSequence(episode) {
+    if (journeySkipped) return;
     const frames = [...episode.querySelectorAll(".film-keyframe")];
     if (frames.length < 2) return;
 
@@ -80,6 +82,7 @@
       previous.classList.remove("is-frame-active");
       current.classList.add("is-frame-active");
       await delay(reducedMotion() ? 8 : FRAME_INTERVAL_MS);
+      if (journeySkipped) return;
       previous.classList.remove("is-frame-leaving");
     }
     episode.classList.add("is-frame-complete");
@@ -87,6 +90,7 @@
   }
 
   function runScene(episode) {
+    if (journeySkipped) return;
     clearSequence();
     SCENE_CLASSES.forEach((className) => episode.classList.remove(className));
     resetFrames(episode);
@@ -108,6 +112,7 @@
   }
 
   function activate(index) {
+    if (journeySkipped) return;
     const { player, episodes, count } = elements();
     if (!episodes.length) return;
     active = Math.max(0, Math.min(index, episodes.length - 1));
@@ -122,7 +127,7 @@
   }
 
   async function transitionTo(index) {
-    if (transitioning) return;
+    if (transitioning || journeySkipped) return;
     const { player, episodes, transition } = elements();
     const current = episodes[active];
     if (!current || !episodes[index]) return;
@@ -144,6 +149,7 @@
 
     player?.classList.add("is-turning");
     await delay(reducedMotion() ? 30 : 80);
+    if (journeySkipped) return;
     activate(index);
     if (!reducedMotion() && typeof next.animate === "function") {
       await next.animate(
@@ -163,7 +169,7 @@
   }
 
   async function advanceTo(index) {
-    if (transitioning) return;
+    if (transitioning || journeySkipped) return;
     const current = elements().episodes[active];
     if (!current) return;
     transitioning = true;
@@ -177,6 +183,8 @@
   }
 
   function begin() {
+    journeySkipped = false;
+    document.querySelector("[data-skip-cinematic]")?.removeAttribute("hidden");
     document.body.classList.remove("is-opening");
     document.body.classList.add("is-story");
     const { player } = elements();
@@ -192,10 +200,12 @@
     const { player } = elements();
     player?.classList.add("is-leaving");
     window.setTimeout(() => {
+      if (journeySkipped) return;
       player?.setAttribute("hidden", "");
       player?.classList.remove("is-visible", "is-leaving", "is-turning");
       document.body.classList.remove("is-story");
       document.body.classList.add("is-purchase");
+      document.querySelector("[data-skip-cinematic]")?.setAttribute("hidden", "");
       const shell = document.querySelector(".site-shell");
       shell?.removeAttribute("aria-hidden");
       document.querySelector("#mapa-de-mesas")?.scrollIntoView({ behavior: "smooth" });
@@ -204,7 +214,7 @@
   }
 
   async function transitionToPurchase() {
-    if (transitioning) return;
+    if (transitioning || journeySkipped) return;
     const { transition } = elements();
     transitioning = true;
     updateButtons(true);
@@ -217,7 +227,7 @@
   }
 
   async function advanceToPurchase() {
-    if (transitioning) return;
+    if (transitioning || journeySkipped) return;
     const current = elements().episodes[active];
     if (!current) return;
     transitioning = true;
@@ -234,6 +244,22 @@
     window.setTimeout(() => document.querySelector("#pos-pagamento")?.scrollIntoView({ behavior: "smooth" }), 320);
   }
 
+  function skipToPurchase() {
+    journeySkipped = true;
+    transitioning = false;
+    clearSequence();
+    const { player, transition } = elements();
+    player?.setAttribute("hidden", "");
+    player?.classList.remove("is-visible", "is-leaving", "is-turning", "is-advancing");
+    transition?.classList.remove("is-sweeping");
+    document.body.classList.remove("is-opening", "is-story", "is-finale", "is-landing");
+    document.body.classList.add("is-purchase");
+    document.querySelector("[data-skip-cinematic]")?.setAttribute("hidden", "");
+    document.querySelector(".site-shell")?.removeAttribute("aria-hidden");
+    window.ArizonaSoundscapeInstance?.stop?.();
+    document.querySelector("#mapa-de-mesas")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function applyParallax(event) {
     const { player } = elements();
     if (!player || player.hidden) return;
@@ -248,5 +274,5 @@
     if (event.target.closest("[data-finish-episodes]")) advanceToPurchase();
   });
   window.addEventListener("pointermove", applyParallax, { passive: true });
-  window.ArizonaEpisodes = { begin, finish, show, transitionTo, completePurchase };
+  window.ArizonaEpisodes = { begin, finish, show, transitionTo, completePurchase, skipToPurchase };
 })();

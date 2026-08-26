@@ -5,8 +5,24 @@
   const OPENING_PRESENTATION_MAX_MS = 16500;
   const OPENING_MUSIC_READY_TIMEOUT_MS = 4200;
   const OPENING_VOICE_TEXT = "Bem-vindo ao Arizona Ranch. No dia cinco de setembro, a porteira se abre para a inauguração oficial. Entre nesta experiência e descubra o lugar onde a sua noite vai acontecer.";
+  const PIX_PAYMENT_OPTIONS = {
+    10000: {
+      amountLabel: "R$ 100,00",
+      pixKey: "(68) 99205-6283",
+      qrCodeImage: "/pagamentos/reservaranch/assets/pix-arizona-100.png",
+      pixCode: "00020126530014br.gov.bcb.pix0114+55689920562830213Arizona Ranch5204000053039865406100.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503***63042013",
+    },
+    20000: {
+      amountLabel: "R$ 200,00",
+      pixKey: "(68) 99205-6283",
+      qrCodeImage: "/pagamentos/reservaranch/assets/pix-arizona-200.png",
+      pixCode: "00020126530014br.gov.bcb.pix0114+55689920562830213Arizona Ranch5204000053039865406200.005802BR5920SILEN DE PAULO SOUZA6014RIO DE JANEIRO62070503***63048038",
+    },
+  };
   let soundscape = null;
   let openingJourneyStarted = false;
+  let openingTransitionTimer = 0;
+  let presentationSkipped = false;
   const tableSectors = [
     { id: "entrada", label: "Entrada & buffet", detail: "Mesas 01 a 12", numbers: range(1, 12) },
     { id: "frente", label: "Frente do salão", detail: "Mesas 13 a 24", numbers: range(13, 24) },
@@ -24,6 +40,7 @@
 
   function range(start, end) { return Array.from({ length: end - start + 1 }, (_, index) => start + index); }
   function selectedAmountCents() { return state.selectedSeats === 2 ? 10000 : 20000; }
+  function pixForAmount(amountCents) { return PIX_PAYMENT_OPTIONS[Number(amountCents)] || null; }
   function tableLabel(number) { return String(number).padStart(2, "0"); }
   function tableByNumber(number) { return state.tables.find((table) => table.number === number); }
   function tableSector(number) { return tableSectors.find((sector) => sector.numbers.includes(number))?.id || "centro"; }
@@ -166,8 +183,8 @@
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
   function openPayment(reservation) {
-    state.reservation = reservation; const payment = reservation.payment || {}; const qrSrc = payment.qrCodeDataUrl || ""; const code = reservationCode(reservation); elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
-    elements.pixAmountValue.textContent = payment.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = payment.pixCode || ""; elements.pixKeyDisplay.textContent = payment.pixKey || "";
+    state.reservation = reservation; const payment = reservation.payment || {}; const pixOption = pixForAmount(reservation.amountCents); const qrSrc = pixOption?.qrCodeImage || payment.qrCodeDataUrl || ""; const code = reservationCode(reservation); elements.paymentInfo.textContent = `Mesa ${tableLabel(reservation.tableNumber)} · ${formatCurrency(reservation.amountCents)} · Pedido ${code}`; elements.paymentQr.removeAttribute("src"); if (qrSrc) elements.paymentQr.src = qrSrc;
+    elements.pixAmountValue.textContent = pixOption?.amountLabel || payment.amountLabel || formatCurrency(reservation.amountCents); elements.pixCodeDisplay.textContent = pixOption?.pixCode || payment.pixCode || ""; elements.pixKeyDisplay.textContent = pixOption?.pixKey || payment.pixKey || "";
     document.querySelector("#payment-title").textContent = `Mesa ${tableLabel(reservation.tableNumber)} bloqueada por 24 horas`; document.querySelector("#order-id").textContent = code;
     updateWhatsAppProofLink(reservation);
     const uploadStatus = document.querySelector("#upload-status"); if (uploadStatus) uploadStatus.textContent = reservation.expiresAt ? `Envie o comprovante até ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(reservation.expiresAt))}.` : "Envie o comprovante após realizar o pagamento."; elements.pixInfoBody.hidden = true; elements.pixInfoToggle.setAttribute("aria-expanded", "false"); elements.paymentDialog.showModal();
@@ -303,8 +320,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     elements.reservationFinale.setAttribute("aria-hidden", "false");
     document.body.classList.add("is-finale");
     window.requestAnimationFrame(() => elements.reservationFinale.classList.add("is-visible"));
-    window.ArizonaSoundscapeInstance?.playScene?.("finale");
-    window.ArizonaSoundscapeInstance?.playSceneNarration?.("finale", "/pagamentos/reservaranch/assets/voice/scene-finale.mp3");
+    window.ArizonaSoundscapeInstance?.cue?.("coin", { volume: .38 });
   }
 
   function continueFromFinale() {
@@ -340,11 +356,34 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     window.ArizonaSoundscapeInstance = soundscape;
     const openingDuration = soundscape?.hasPlayedIntro?.() ? OPENING_MUSIC_READY_TIMEOUT_MS : OPENING_PRESENTATION_MAX_MS;
     if (soundscape) soundscape.start().catch(() => {});
-    window.setTimeout(() => {
+    openingTransitionTimer = window.setTimeout(() => {
+      if (presentationSkipped) return;
       openingScreen?.classList.add("is-leaving");
       window.ArizonaEpisodes?.begin?.();
       window.setTimeout(() => openingScreen?.remove(), 900);
     }, openingDuration);
+  }
+  function stopOpeningMedia() {
+    window.clearTimeout(openingTransitionTimer);
+    document.querySelectorAll("[data-opening-video]").forEach((video) => {
+      video.pause();
+      video.currentTime = 0;
+    });
+    const openingVoice = document.querySelector("#opening-voice");
+    if (openingVoice) {
+      openingVoice.pause();
+      openingVoice.currentTime = 0;
+    }
+    const activeSoundscape = window.ArizonaSoundscapeInstance || soundscape;
+    activeSoundscape?.stop?.();
+  }
+  function skipPresentation() {
+    presentationSkipped = true;
+    openingJourneyStarted = true;
+    stopOpeningMedia();
+    document.querySelector("#opening-screen")?.remove();
+    document.querySelector("[data-skip-cinematic]")?.setAttribute("hidden", "");
+    window.ArizonaEpisodes?.skipToPurchase?.();
   }
   function bindEvents() {
     document.addEventListener("click", (event) => {
@@ -356,7 +395,7 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     elements.tableNext.addEventListener("click", openReservationFinale);
     elements.finaleContinue?.addEventListener("click", continueFromFinale); elements.finaleBack?.addEventListener("click", closeReservationFinale);
     document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !elements.reservationFinale?.hidden) closeReservationFinale(); });
-    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
+    document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); document.querySelector("[data-skip-cinematic]")?.addEventListener("click", skipPresentation); }
   async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupEventCountdown(); setupCinematicScroll(); setupOpening(); setupGallery(); window.requestAnimationFrame(() => window.ArizonaCinematic?.createCinematic().catch(() => {})); try { await Promise.all([loadTables(), loadConfig()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
 })();

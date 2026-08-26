@@ -21,21 +21,24 @@ test("a landing apresenta o lugar antes de conduzir para a reserva", () => {
   assert.match(html, /Mesa para 4[^]*R\$ 200,00/i);
 });
 
-test("a linguagem de venda reforça Arizona Ranch como bar pub western", () => {
+test("a linguagem de venda apresenta o Arizona Ranch como experiência familiar", () => {
   const html = read("pagamentos", "reservaranch", "index.html");
-  assert.match(html, /bar pub western/i);
   assert.match(html, /Arizona Ranch/i);
   assert.match(html, /palco|música ao vivo/i);
-  assert.match(html, /O portão vai abrir/i);
+  assert.match(html, /A porteira abre em 05 de setembro/i);
+  assert.match(html, /experiência única, familiar e cheia de sentimentos/i);
+  assert.doesNotMatch(html, /velho oeste|bar pub western/i);
 });
 
-test("a narrativa usa cenas cinematográficas exclusivas e não uma galeria", () => {
+test("a narrativa usa cenas cinematográficas antes da galeria pós-pagamento", () => {
   const html = read("pagamentos", "reservaranch", "index.html");
-  assert.doesNotMatch(html, /editorial-gallery|gallery-dialog|gallery-image/);
   ["gate", "trail", "saloon", "stage", "tables"].forEach((scene) => {
     assert.match(html, new RegExp(`data-cinematic-scene=["']${scene}["']`));
   });
   assert.match(html, /id=["']mapa-de-mesas["']/);
+  assert.match(html, /id=["']pos-pagamento["']/);
+  assert.match(html, /gallery-dialog|data-gallery-item/);
+  assert.ok(html.indexOf('id="pos-pagamento"') > html.indexOf('id="mapa-de-mesas"'));
 });
 
 test("a página inclui metadados sociais, FAQ e CTA móvel", () => {

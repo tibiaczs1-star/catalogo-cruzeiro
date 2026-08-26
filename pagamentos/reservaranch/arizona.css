@@ -137,9 +137,8 @@ body.is-opening { overflow: hidden; }
 .opening-screen.is-complete { visibility: hidden; opacity: 0; pointer-events: none; }
 .opening-screen::before { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(4,3,2,.88) 0%, rgba(4,3,2,.36) 18%, transparent 42%, rgba(5,3,2,.5) 74%, rgba(4,3,2,.94) 100%), radial-gradient(circle at 50% 11%, rgba(255,225,151,.23), transparent 31%), linear-gradient(90deg, rgba(255,207,108,.26), transparent 12%, transparent 88%, rgba(255,207,108,.26)); box-shadow: 0 0 0 1px rgba(249,207,108,.3), inset 0 0 0 1px rgba(255,235,174,.08), 0 0 58px rgba(228,168,47,.24); }
 .opening-screen::after { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.9) 0 7%, transparent 18% 79%, rgba(0,0,0,.92) 92% 100%), radial-gradient(ellipse at 50% 13%, rgba(255,229,150,.2), transparent 42%), radial-gradient(ellipse at 50% 88%, rgba(228,168,47,.16), transparent 38%), repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px), linear-gradient(90deg, rgba(0,0,0,.72), transparent 16%, transparent 84%, rgba(0,0,0,.72)); opacity: .98; animation: cinematic-glow-in 1250ms ease-out both; }
-.opening-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; background: #090705; filter: none; opacity: 0; transform: scale(.98); transition: opacity 900ms ease, transform 900ms ease; }
-.opening-video-wide { display: block; }
-.opening-video-mobile { display: none; }
+.opening-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; background: #090705; filter: none; opacity: 0; transform: scale(.98); transition: opacity 900ms ease, transform 900ms ease; }
+.opening-video-intro { object-position: center; }
 .opening-screen.is-live .opening-video { opacity: 1; transform: scale(1); }
 .opening-player { position: absolute; left: -9999px; top: 0; width: 160px; height: 90px; opacity: .001; pointer-events: none; }
 .opening-brand { position: absolute; z-index: 3; top: 48%; left: 50%; width: min(68vw, 340px); filter: drop-shadow(0 20px 42px rgba(0,0,0,.84)) drop-shadow(0 0 24px rgba(247,193,85,.24)); transform: translate(-50%, -50%); animation: logo-entrance 1.45s cubic-bezier(.2,.8,.2,1) both, logo-breathe 2.7s ease-in-out 1.45s 2; transition: top 800ms ease, left 800ms ease, width 800ms ease, transform 800ms ease, filter 800ms ease, opacity 800ms ease; }
@@ -172,7 +171,9 @@ body.is-opening { overflow: hidden; }
 .table-button { display: grid; grid-template-rows: auto auto; align-content: center; gap: 3px; min-height: 58px; padding: 5px 4px; }.table-button strong { line-height: .9; }.table-availability { display: block; overflow: visible; color: #8ae7b5; font-size: .61rem; font-weight: 900; line-height: 1; white-space: nowrap; }.table-button.is-unavailable .table-availability { color: #ff8d87; }.overview-table .table-availability { display: none; }
 .admin-login-form { display: grid; max-width: 460px; gap: .9rem; margin-top: 1.25rem; }.admin-login-form label { display: grid; gap: .45rem; color: var(--cream); font-weight: 700; }.admin-login-form input { width: 100%; min-height: 48px; padding: .75rem .85rem; color: var(--paper); border: 1px solid rgba(225,169,43,.42); border-radius: 10px; outline: 0; background: rgba(0,0,0,.28); }.admin-login-form input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(225,169,43,.16); }.admin-login-form .button { justify-self: start; }
 @keyframes poster-light { from { opacity: .92; } to { opacity: 1; } } @keyframes opening-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } } @keyframes loading-line { from { transform: translateX(-18%); } to { transform: translateX(38%); } } @keyframes logo-entrance { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.58) rotateY(-120deg); } 70% { opacity: 1; transform: translate(-50%, -50%) scale(1.04) rotateY(12deg); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotateY(0); } } @keyframes logo-breathe { 0%,100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.035); } } @keyframes cinematic-glow-in { from { opacity: .56; } to { opacity: .98; } } @keyframes stage-line { from { opacity: 0; transform: scaleX(.18); } to { opacity: .88; transform: scaleX(1); } } @keyframes tagline-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } } @keyframes button-settle { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@media (max-width: 900px), (orientation: portrait) { .opening-video-wide { display: none; }.opening-video-mobile { display: block; } }
+.cinematic-skip{position:fixed;z-index:9990;top:calc(env(safe-area-inset-top) + 18px);right:clamp(16px,3vw,36px);min-height:42px;padding:10px 16px;border:1px solid rgba(255,224,164,.48);border-radius:999px;color:#fff3d8;background:rgba(8,4,2,.72);font:800 12px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.3);cursor:pointer;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.cinematic-skip:hover,.cinematic-skip:focus-visible{transform:translateY(-2px);border-color:#efad35;background:rgba(40,20,5,.9);outline:none}
+.cinematic-skip[hidden],body.is-purchase .cinematic-skip,body.is-landing .cinematic-skip,body.is-finale .cinematic-skip{display:none!important}
 @media (max-width: 640px) { .opening-screen { padding: 18px 16px calc(20px + env(safe-area-inset-bottom)); }.opening-brand { width: min(68vw, 286px); }.opening-screen.is-live .opening-brand { top: calc(env(safe-area-inset-top) + 14px); left: 14px; width: clamp(76px, 21vw, 98px); }.opening-content::before { margin-bottom: 11px; }.opening-event-label { max-width: 30ch; font-size: clamp(.76rem, 3.1vw, .92rem); }.opening-tagline { max-width: 27ch; }.opening-content h1 { font-size: clamp(2.1rem, 10vw, 3rem); }.opening-title { max-width: 10ch; }.opening-copy { margin: 14px 0; }.flow-hero { align-items: flex-start; flex-direction: column; }.journey-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }.journey-step { min-height: 45px; padding-inline: 4px; font-size: .66rem; }.payment-methods { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .opening-screen::after, .opening-video, .opening-brand, .opening-content, .opening-content::before, .opening-tagline, .opening-content .button { animation: none; }.opening-content .button::after { display: none; } }
 /* ===== Payment dialog: QR mobile-style layout ===== */
@@ -345,7 +346,7 @@ body.is-purchase{overflow:auto}body.is-purchase .site-shell{display:block}body.i
 body.is-landing{overflow:auto}
 body.is-landing .site-shell{display:flex}
 .reservation-finale[hidden]{display:none}
-.reservation-finale{position:fixed;inset:0;z-index:9500;display:grid;align-items:end;overflow:hidden;padding:clamp(32px,7vw,104px);color:#fff7ea;background:#080403;opacity:0;transform:scale(1.035);transition:opacity .52s ease,transform .9s cubic-bezier(.16,.84,.18,1)}
+.reservation-finale{position:fixed;inset:0;z-index:9500;display:grid;align-items:center;justify-items:center;overflow:hidden;padding:clamp(32px,7vw,104px);color:#fff7ea;background:#080403;opacity:0;transform:scale(1.035);transition:opacity .52s ease,transform .9s cubic-bezier(.16,.84,.18,1)}
 .reservation-finale::before{content:"";position:absolute;inset:-4%;background:url("/pagamentos/reservaranch/assets/cinematic-v2/stage-wide.png") center/cover no-repeat;transform:scale(1.08);filter:saturate(.88) contrast(1.06);transition:transform 8s cubic-bezier(.16,.72,.18,1)}
 .reservation-finale::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,2,1,.97) 0%,rgba(5,2,1,.78) 42%,rgba(5,2,1,.12) 76%),linear-gradient(0deg,rgba(5,2,1,.88),transparent 64%);pointer-events:none}
 .reservation-finale.is-visible{opacity:1;transform:none}
@@ -356,20 +357,16 @@ body.is-finale{overflow:hidden}
 .finale-atmosphere i:nth-child(1){left:58%;animation:finale-light 5.4s ease-in-out infinite alternate}
 .finale-atmosphere i:nth-child(2){left:74%;animation:finale-light 6.8s 1.2s ease-in-out infinite alternate}
 .finale-atmosphere i:nth-child(3){left:88%;animation:finale-light 4.9s .6s ease-in-out infinite alternate}
-.finale-artist{position:absolute;z-index:2;inset:15vh clamp(42px,7vw,118px) 7vh auto;display:flex;width:min(24vw,340px);align-items:flex-end;justify-content:center;pointer-events:none;opacity:0;transform:translate3d(10%,5%,90px) scale(.9);filter:drop-shadow(-20px 18px 26px rgba(0,0,0,.68));transition:opacity 1.8s .42s ease,transform 3.2s .32s cubic-bezier(.16,.78,.16,1)}
-.finale-artist::after{content:"";position:absolute;right:8%;bottom:1%;left:8%;height:16%;background:radial-gradient(ellipse,rgba(0,0,0,.82),transparent 68%);filter:blur(14px);transform:translateY(28%);z-index:-1}
-.finale-artist img{display:block;width:auto;max-width:100%;height:auto;max-height:60vh;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 0 90%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0 90%,transparent 100%)}
-.reservation-finale.is-visible .finale-artist{opacity:1;transform:translate3d(0,0,90px) scale(1)}
-.finale-content{position:relative;z-index:4;width:min(720px,54vw);transform:translate3d(-56px,32px,50px);opacity:0;transition:opacity 1.35s .55s ease,transform 2.4s .48s cubic-bezier(.16,.84,.18,1)}
+.finale-content{position:relative;z-index:4;width:min(780px,calc(100vw - 48px));padding:clamp(28px,5vw,58px);border:1px solid rgba(239,173,53,.3);border-radius:28px;background:linear-gradient(145deg,rgba(22,11,4,.86),rgba(7,4,2,.74));box-shadow:0 28px 90px rgba(0,0,0,.55);backdrop-filter:blur(14px);text-align:center;transform:translate3d(0,32px,50px);opacity:0;transition:opacity 1.35s .55s ease,transform 2.4s .48s cubic-bezier(.16,.84,.18,1)}
 .reservation-finale.is-visible .finale-content{opacity:1;transform:none}
 .finale-content .eyebrow{margin:0 0 8px;color:#efad35;font:800 12px/1.2 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase}
 .finale-kicker{margin:0;color:#fff0d5;font:700 clamp(16px,2vw,22px)/1.2 Georgia,serif}
 .finale-content h2{margin:.05em 0 .16em;font-family:Georgia,serif;font-size:clamp(62px,10vw,146px);font-weight:700;line-height:.82;letter-spacing:-.055em;text-wrap:balance;text-shadow:0 9px 44px rgba(0,0,0,.85)}
 .finale-description{max-width:650px;margin:0 0 22px;color:#efe0ca;font-size:clamp(17px,1.8vw,23px);line-height:1.45;text-shadow:0 3px 20px #000}
-.finale-benefits{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 18px}
+.finale-benefits{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:0 0 18px}
 .finale-benefits span{padding:9px 14px;border:1px solid rgba(239,173,53,.55);border-radius:999px;background:rgba(13,7,3,.56);color:#ffe5b4;font:800 11px/1 ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(7px)}
 .finale-table{display:block;margin:0 0 22px;color:#fff7ea;font-size:clamp(16px,1.6vw,21px)}
-.finale-actions{display:flex;flex-wrap:wrap;gap:10px}
+.finale-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .finale-actions .button{min-width:210px}
 .button-quiet{border:1px solid rgba(255,239,213,.34);color:#fff0d5;background:rgba(9,5,2,.58);backdrop-filter:blur(7px)}
 @keyframes finale-light{from{opacity:.18;transform:translateX(-24px) rotate(14deg)}to{opacity:.62;transform:translateX(28px) rotate(22deg)}}
@@ -384,9 +381,6 @@ body.is-finale{overflow:hidden}
   .reservation-finale{padding:94px 22px calc(28px + env(safe-area-inset-bottom));background:#080403}
   .reservation-finale::before{inset:-2%;background-image:url("/pagamentos/reservaranch/assets/cinematic-v2/stage-mobile.png");background-position:center top}
   .reservation-finale::after{background:linear-gradient(0deg,rgba(5,2,1,.98) 0%,rgba(5,2,1,.78) 46%,rgba(5,2,1,.18) 78%),linear-gradient(90deg,rgba(5,2,1,.38),transparent 70%)}
-  .finale-artist{inset:3vh 7vw auto auto;width:min(44vw,220px);height:34vh;align-items:flex-start;transform:translate3d(8%,5%,70px) scale(.88);filter:drop-shadow(0 16px 22px rgba(0,0,0,.7))}
-  .finale-artist img{max-height:34vh;-webkit-mask-image:linear-gradient(to bottom,#000 0 76%,transparent 98%);mask-image:linear-gradient(to bottom,#000 0 76%,transparent 98%)}
-  .reservation-finale.is-visible .finale-artist{transform:translate3d(0,0,70px) scale(1)}
   .finale-content{width:100%;transform:translate3d(0,40px,50px)}
   .finale-content h2{font-size:clamp(56px,18vw,92px);line-height:.86}
   .finale-description{font-size:16px;line-height:1.4}
@@ -404,7 +398,7 @@ body.is-finale{overflow:hidden}
   .comic-slice-a{width:42%;height:20%}.comic-slice-b{right:4%;width:33%;height:16%}
 }
 @media(prefers-reduced-motion:reduce){
-  .episode,.episode-player,.episode-cinema,.cinema-shot,.comic-slice,.film-flash,.comic-transition i,.episode-copy,.reservation-finale,.reservation-finale::before,.finale-content,.finale-artist,.finale-atmosphere i{transition-duration:.01ms!important;animation:none!important}
+  .episode,.episode-player,.episode-cinema,.cinema-shot,.comic-slice,.film-flash,.comic-transition i,.episode-copy,.reservation-finale,.reservation-finale::before,.finale-content,.finale-atmosphere i{transition-duration:.01ms!important;animation:none!important}
   .episode.is-active .cinema-shot-wide{opacity:1;transform:none!important}
   .episode.is-copy-reveal .episode-copy,.episode.is-ready .episode-copy{opacity:1;transform:none!important}
   .cinema-shot-wide .film-keyframe{transition:none!important;transform:none!important}
