@@ -1,5 +1,89 @@
-window.NEWS_ARCHIVE_TOTAL = 480;
+window.NEWS_ARCHIVE_TOTAL = 481;
 window.NEWS_DATA = [
+  {
+    "id": "manual-czs-agenda-arizona-ranch-inauguracao-05-setembro",
+    "slug": "agenda-arizona-ranch-inauguracao-05-setembro",
+    "title": "Agenda: Arizona Ranch inaugura em 5 de setembro com Especial Marília Mendonça",
+    "seoTitle": "Agenda: Arizona Ranch inaugura em 5 de setembro com Especial Marília Mendonça | Catálogo CZS",
+    "seoDescription": "Conteúdo comercial: o Arizona Ranch anuncia sua inauguração oficial em Cruzeiro do Sul, com Luzienne Lucena no Especial Marília Mendonça. Mesas podem ser escolhidas e reservadas online.",
+    "eyebrow": "Agenda patrocinada",
+    "date": "26 de ago de 2026",
+    "publishedAt": "2026-08-26T01:45:00.000-05:00",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "contentType": "publicidade",
+    "commercialDisclosure": "Conteúdo comercial",
+    "eventDate": "2026-09-05",
+    "sourceName": "Arizona Ranch",
+    "sourceUrl": "https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/",
+    "sourceLabel": "Reserva oficial Arizona Ranch",
+    "lede": "Conteúdo comercial: o Arizona Ranch anuncia sua inauguração oficial em Cruzeiro do Sul, com Luzienne Lucena no Especial Marília Mendonça. Mesas podem ser escolhidas e reservadas online.",
+    "summary": "Conteúdo comercial: o Arizona Ranch anuncia sua inauguração oficial em Cruzeiro do Sul, com Luzienne Lucena no Especial Marília Mendonça. Mesas podem ser escolhidas e reservadas online.",
+    "analysis": "A reserva antecipada permite escolher a mesa no mapa, conforme a disponibilidade exibida no sistema oficial.",
+    "highlights": [
+      "Inauguração oficial em 5 de setembro.",
+      "Luzienne Lucena no Especial Marília Mendonça.",
+      "Mesa para duas pessoas: R$ 100; mesa para quatro: R$ 200.",
+      "Suporte com Silem Paulo pelo WhatsApp +55 68 9958-2615."
+    ],
+    "development": [
+      "Conteúdo comercial: o Arizona Ranch informa que sua inauguração oficial será realizada em 5 de setembro, em Cruzeiro do Sul.",
+      "A programação terá Luzienne Lucena no Especial Marília Mendonça.",
+      "As mesas para duas pessoas custam R$ 100 e as mesas para quatro pessoas, R$ 200. O couvert é de R$ 7 por pessoa.",
+      "As mesas disponíveis podem ser escolhidas no mapa e reservadas pelo endereço oficial: https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/",
+      "Para dúvidas e suporte, o proprietário Silem Paulo atende pelo WhatsApp +55 68 9958-2615: https://wa.me/556899582615"
+    ],
+    "imageUrl": "assets/news-manual/2026-08-26/arizona-ranch-inauguracao.png",
+    "feedImageUrl": "assets/news-manual/2026-08-26/arizona-ranch-inauguracao.png",
+    "sourceImageUrl": "assets/news-manual/2026-08-26/arizona-ranch-inauguracao.png",
+    "imageCredit": "Arte: Arizona Ranch",
+    "imageFocus": "center",
+    "imageFit": "contain",
+    "media": null,
+    "videoUrl": "",
+    "priority": 1800,
+    "editorialPriority": "agenda-patrocinada",
+    "crossSources": [
+      {
+        "name": "Reserva oficial Arizona Ranch",
+        "url": "https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/"
+      },
+      {
+        "name": "Suporte do proprietário",
+        "url": "https://wa.me/556899582615"
+      }
+    ],
+    "alternateSources": [],
+    "sourceCount": 1,
+    "alternateSlugs": [],
+    "audioNarrationText": "Agenda: Arizona Ranch inaugura em 5 de setembro com Especial Marília Mendonça. Conteúdo comercial: o Arizona Ranch anuncia sua inauguração oficial em Cruzeiro do Sul, com Luzienne Lucena no Especial Marília Mendonça. Mesas podem ser escolhidas e reservadas online.",
+    "audioNarrationTranscript": "Agenda: Arizona Ranch inaugura em 5 de setembro com Especial Marília Mendonça. Conteúdo comercial: o Arizona Ranch anuncia sua inauguração oficial em Cruzeiro do Sul, com Luzienne Lucena no Especial Marília Mendonça. Mesas podem ser escolhidas e reservadas online.",
+    "audioNarrationVoice": "raiane-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAIane Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Conteúdo comercial: o Arizona Ranch anuncia sua inauguração oficial em Cruzeiro do Sul, com Luzienne Lucena no Especial Marília Mendonça. Mesas podem ser escolhidas e reservadas online. Reserva: https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/ Suporte: +55 68 9958-2615.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "alt": "Flyer de inauguração do Arizona Ranch em Cruzeiro do Sul",
+      "caption": "Agenda: Arizona Ranch inaugura em 5 de setembro com Especial Marília Mendonça",
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "raiane-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Conteúdo comercial: o Arizona Ranch informa que sua inauguração oficial será realizada em 5 de setembro, em Cruzeiro do Sul.",
+      "A programação terá Luzienne Lucena no Especial Marília Mendonça.",
+      "As mesas para duas pessoas custam R$ 100 e as mesas para quatro pessoas, R$ 200. O couvert é de R$ 7 por pessoa.",
+      "As mesas disponíveis podem ser escolhidas no mapa e reservadas pelo endereço oficial: https://catalogo-cruzeiro-web.onrender.com/pagamentos/reservaranch/",
+      "Para dúvidas e suporte, o proprietário Silem Paulo atende pelo WhatsApp +55 68 9958-2615: https://wa.me/556899582615"
+    ]
+  },
   {
     "id": "https://juruaonline.com.br/homem-e-preso-apos-confusao-e-agressao-a-policiais-dentro-de-bar-em-cruzeiro-do-sul/",
     "slug": "homem-e-preso-apos-confusao-e-agressao-a-policiais-dentro-de-bar-em-cruzeiro-do-sul",
