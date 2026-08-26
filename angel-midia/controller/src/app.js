@@ -16,6 +16,7 @@ import { angelIcon } from "./angel-icons.js";
 import { applyHudPreferences, getHudPreferences } from "./personalization.js";
 import { renderDynamics } from "./dynamics.js";
 import { renderNetwork } from "./network.js";
+import { mountSystemIntro } from "./intro.js";
 const NAV = [
   "Visão geral",
   "Mapa das TVs",
@@ -31,7 +32,7 @@ const NAV = [
   "Aplicativos",
   "Ajuda",
 ];
-const RELEASE = "2026.08.25.9";
+const RELEASE = "1.0.0-beta.1";
 const HELP_SECTION_TITLE = "Primeiros passos";
 const NAV_ICONS = [
   "dashboard",
@@ -61,8 +62,32 @@ const asList = (v, k) =>
 function loginView(root, client) {
   document.body.classList.remove("is-shell-active");
   root.innerHTML = `<main class="login" data-view="login">
+    <section class="system-intro" data-system-intro role="dialog" aria-modal="true" aria-label="Abertura Angel Mídia Play">
+      <button class="intro-skip" type="button" data-intro-skip>Entrar agora <span aria-hidden="true">→</span></button>
+      <div class="intro-stage">
+        <div class="intro-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="intro-logo-shell">
+          <span class="intro-signal intro-signal-a" aria-hidden="true"></span>
+          <span class="intro-signal intro-signal-b" aria-hidden="true"></span>
+          <img src="./assets/angel-midia-logo.png" alt="Angel Mídia — Painéis Digitais">
+        </div>
+        <p class="intro-kicker"><i aria-hidden="true"></i> Angel Mídia Play</p>
+        <h2>Sua rede <span>vai entrar no ar.</span></h2>
+        <p class="intro-copy">Conteúdo, programação e telas conectadas em um único comando.</p>
+        <ol class="intro-steps">
+          <li data-intro-step>${angelIcon("image")}<span><b>Mídias</b><small>prontas</small></span></li>
+          <li data-intro-step>${angelIcon("playlist")}<span><b>Playlists</b><small>sincronizadas</small></span></li>
+          <li data-intro-step>${angelIcon("tv")}<span><b>TVs</b><small>conectadas</small></span></li>
+        </ol>
+        <div class="intro-progress" aria-hidden="true"><span></span></div>
+        <small class="intro-version">BETA 1.0</small>
+      </div>
+    </section>
     <section class="login-panel">
-      <div class="logo-mark">AM</div>
+      <div class="login-logo" data-login-logo>
+        <span class="login-logo-surface"><img src="./assets/angel-midia-logo.png" alt="Angel Mídia — Painéis Digitais"><i aria-hidden="true"></i></span>
+        <span class="login-logo-status"><i aria-hidden="true"></i> Sistema pronto</span>
+      </div>
       <p class="eyebrow">Angel Mídia Play</p>
       <h1>Comande sua rede.</h1>
       <p class="login-copy">Mídias, playlists, mapas e cada tela sob controle — de qualquer lugar.</p>
@@ -74,7 +99,7 @@ function loginView(root, client) {
       </form>
       <button class="ghost" type="button" data-sound-toggle>${getSoundPreferences().muted ? "Ativar sons" : "Silenciar sons"}</button>
       <div class="app-downloads"><a href="./downloads/angel-midia-admin.apk?v=${RELEASE}" download>↓ APK Admin</a><a href="./downloads/angel-midia-tv.apk?v=${RELEASE}" download>↓ APK TV</a></div>
-      <small class="release">Versão ${RELEASE}</small>
+      <small class="release">Beta 1.0 <span>•</span> ${RELEASE}</small>
     </section>
     <aside class="brand-plane" aria-label="A Angel Mídia conecta conteúdo, playlists e telas">
       <div class="brand-story">
@@ -131,6 +156,7 @@ function loginView(root, client) {
       <footer class="brand-plane-footer"><img src="./assets/angel-wing.svg" alt=""><span><b>Angel Mídia Play</b><small>Controle, programação e transmissão</small></span></footer>
     </aside>
   </main>`;
+  mountSystemIntro(root);
   const password = root.querySelector('[name="password"]');
   root.querySelector("[data-password-toggle]").onclick = (event) => {
     const toggle = event.currentTarget;

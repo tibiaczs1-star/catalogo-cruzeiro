@@ -4,10 +4,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:navigationBarColor">@color/angel_blue</item>
         <item name="android:colorAccent">@color/angel_blue</item>
+        <item name="android:windowLightNavigationBar">false</item>
         <item name="android:windowBackground">@color/angel_blue</item>
-    </style>
-
-    <style name="LaunchTheme" parent="@style/AppTheme">
-        <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 </resources>

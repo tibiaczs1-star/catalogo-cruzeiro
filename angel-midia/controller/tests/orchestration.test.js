@@ -272,6 +272,7 @@ it('mostra a imagem real no card da biblioteca', () => {
   expect(preview.getAttribute('alt')).toBe('Prévia de Foto');
   expect(preview.getAttribute('loading')).toBe('lazy');
   expect(preview.getAttribute('decoding')).toBe('async');
+  expect(preview.closest('.media-preview').classList.contains('media-preview--image')).toBe(true);
   expect(root.querySelector('.media-card-actions [data-preview-media="m4"]')?.textContent).toContain('Tela cheia');
 });
 
@@ -285,6 +286,7 @@ it('exibe vídeo leve no card e deixa a tela cheia como ação secundária', () 
   expect(preview.hasAttribute('muted')).toBe(true);
   expect(preview.hasAttribute('playsinline')).toBe(true);
   expect(preview.getAttribute('preload')).toBe('metadata');
+  expect(preview.closest('.media-preview').classList.contains('media-preview--video')).toBe(true);
   expect(preview.hasAttribute('autoplay')).toBe(false);
   expect(root.querySelector('.media-preview [data-preview-media]')).toBeNull();
   expect(root.querySelector('.media-card-actions [data-preview-media="m4b"]')?.textContent).toContain('Tela cheia');

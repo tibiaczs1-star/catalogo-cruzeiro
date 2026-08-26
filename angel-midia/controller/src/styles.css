@@ -20,9 +20,42 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .ghost{border:1px solid var(--angel-line);background:#fff;color:var(--angel-blue)}
 .ghost:hover{border-color:#a8c4ef;background:var(--angel-blue-soft)}
 .surface-card,.glass{border:1px solid var(--angel-line);border-radius:.85rem;background:var(--angel-surface);box-shadow:var(--shadow-sm)}
+.system-intro{position:fixed;z-index:1000;inset:0;display:grid;place-items:center;overflow:hidden;padding:clamp(1.25rem,5vw,4rem);background:#07163d;color:#fff;isolation:isolate}
+.system-intro:before,.system-intro:after{content:"";position:absolute;z-index:-1;width:24rem;height:24rem;border:1px solid rgba(255,255,255,.12);border-radius:4.5rem;background:#0b245d;transform:rotate(22deg)}
+.system-intro:before{left:-12rem;top:-11rem;box-shadow:0 0 0 5rem #091d50}
+.system-intro:after{right:-13rem;bottom:-12rem;background:#0f5eea;box-shadow:0 0 0 5rem #0a347d;transform:rotate(-18deg)}
+.intro-skip{position:absolute;z-index:3;right:clamp(1rem,3vw,2.4rem);top:clamp(1rem,3vw,2.4rem);display:flex;align-items:center;gap:.5rem;min-height:2.7rem;padding:.65rem .9rem;border:1px solid rgba(255,255,255,.28);border-radius:.65rem;background:#10285f;color:#fff;font-size:.76rem;font-weight:850;letter-spacing:.02em}
+.intro-skip:hover{border-color:#fff;background:#fff;color:#0b245d;transform:translateY(-1px)}
+.intro-stage{position:relative;width:min(100%,51rem);display:grid;justify-items:center;text-align:center;animation:intro-stage-in .5s cubic-bezier(.2,.8,.2,1) both}
+.intro-grid{position:absolute;z-index:-1;inset:-3.5rem -5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;opacity:.38;transform:rotate(-8deg);pointer-events:none}
+.intro-grid i{border:1px solid rgba(255,255,255,.16);border-radius:1.2rem;background:#0b245d}
+.intro-grid i:nth-child(2){background:#0d347e}.intro-grid i:nth-child(3){background:#0f5eea}.intro-grid i:nth-child(4){background:#10285f}
+.intro-logo-shell{position:relative;width:clamp(9.5rem,18vw,12.5rem);height:clamp(7.2rem,14vw,9.5rem);display:grid;place-items:center;margin-bottom:1.25rem;border:1px solid rgba(255,255,255,.75);border-radius:1.55rem;background:#fff;box-shadow:0 1.25rem 0 rgba(4,13,38,.23);animation:intro-logo-arrive .72s .08s cubic-bezier(.15,.9,.25,1.15) both}
+.intro-logo-shell img{width:83%;height:83%;display:block;object-fit:contain}
+.intro-signal{position:absolute;width:.9rem;height:.9rem;border:3px solid #fff;border-radius:50%;background:#22c98b;box-shadow:0 0 0 .55rem rgba(34,201,139,.18);animation:intro-signal 1.2s ease-in-out infinite}
+.intro-signal-a{right:-.2rem;top:1.3rem}.intro-signal-b{left:.8rem;bottom:-.18rem;background:#24c7dc;box-shadow:0 0 0 .55rem rgba(36,199,220,.18);animation-delay:-.55s}
+.intro-kicker{display:flex;align-items:center;gap:.5rem;margin:0 0 .55rem;color:#8bb8ff;font-size:.68rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;animation:intro-copy-in .45s .32s ease-out both}
+.intro-kicker i{width:.5rem;height:.5rem;border-radius:50%;background:#22c98b;box-shadow:0 0 0 .3rem rgba(34,201,139,.16)}
+.intro-stage h2{margin:0;color:#fff;font-size:clamp(2.5rem,7vw,5.8rem);line-height:.9;letter-spacing:-.065em;animation:intro-copy-in .5s .4s ease-out both}
+.intro-stage h2 span{display:block;color:#6ea7ff}
+.intro-copy{max-width:38rem;margin:1rem 0 1.35rem;color:#c6d7f6;font-size:clamp(.84rem,1.6vw,1rem);line-height:1.55;animation:intro-copy-in .45s .52s ease-out both}
+.intro-steps{width:min(100%,37rem);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem;margin:0;padding:0;list-style:none}
+.intro-steps li{min-width:0;display:flex;align-items:center;gap:.65rem;padding:.72rem .8rem;border:1px solid #3565b3;border-radius:.8rem;background:#10285f;text-align:left;box-shadow:0 .5rem 1.25rem rgba(2,9,31,.18);animation:intro-step-in .45s .64s ease-out both}
+.intro-steps li:nth-child(2){border-color:#8a72e8;background:#352b72;animation-delay:.74s}.intro-steps li:nth-child(3){border-color:#24c7dc;background:#0a5068;animation-delay:.84s}
+.intro-steps svg{width:1.8rem;height:1.8rem;flex:0 0 auto;padding:.4rem;border-radius:.5rem;background:#0f5eea;color:#fff}.intro-steps li:nth-child(2) svg{background:#7357e8}.intro-steps li:nth-child(3) svg{background:#13a9c0}
+.intro-steps span{min-width:0;display:grid}.intro-steps b{font-size:.75rem}.intro-steps small{color:#c8d8f4;font-size:.58rem;font-weight:700}
+.intro-progress{width:min(100%,25rem);height:.3rem;overflow:hidden;margin-top:1.4rem;border-radius:999px;background:rgba(255,255,255,.18)}
+.intro-progress span{display:block;width:100%;height:100%;border-radius:inherit;background:#6ea7ff;transform-origin:left center;animation:intro-progress 2.6s linear both}
+.intro-version{margin-top:.7rem;color:#83a8e8;font-size:.54rem;font-weight:900;letter-spacing:.18em}
+.system-intro.is-leaving{pointer-events:none;animation:intro-exit .38s cubic-bezier(.65,0,.85,.3) forwards}
 .login{min-height:calc(100vh - 4.5rem);display:grid;grid-template-columns:minmax(22rem,40rem) 1fr;background:#fff}
 .login-panel{padding:clamp(2rem,7vw,7rem);display:flex;flex-direction:column;justify-content:center;min-width:0}
-.logo-mark{width:3rem;height:3rem;display:grid;place-items:center;border-radius:.75rem;background:var(--angel-blue);color:#fff;font-weight:900}
+.login-logo{width:max-content;max-width:100%;display:flex;align-items:center;gap:.75rem}
+.login-logo-surface{position:relative;width:5.25rem;height:4.15rem;display:grid;place-items:center;border:1px solid #bcd3f5;border-radius:1rem;background:#fff;box-shadow:.55rem .55rem 0 #dce9fc;animation:login-logo-float 4.8s ease-in-out infinite}
+.login-logo-surface img{width:88%;height:88%;display:block;object-fit:contain}
+.login-logo-surface i{position:absolute;right:-.2rem;top:-.2rem;width:.85rem;height:.85rem;border:3px solid #fff;border-radius:50%;background:#22b979;box-shadow:0 0 0 .28rem rgba(34,185,121,.13);animation:intro-signal 1.7s ease-in-out infinite}
+.login-logo-status{display:flex;align-items:center;gap:.42rem;color:#4f6280;font-size:.67rem;font-weight:800}
+.login-logo-status i{width:.45rem;height:.45rem;border-radius:50%;background:#22b979;box-shadow:0 0 0 .25rem rgba(34,185,121,.12)}
 .login-panel>.eyebrow{margin-top:1.5rem}
 .login h1{margin:0;max-width:10ch;font-size:clamp(3.2rem,7vw,6.5rem);letter-spacing:-.07em;line-height:.9}
 .login-copy{max-width:31rem;margin:1.4rem 0 2.2rem;color:var(--angel-muted);line-height:1.65}
@@ -100,10 +133,18 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @keyframes brand-orbit-a{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(1.2rem,-1rem) rotate(24deg)}}
 @keyframes brand-orbit-b{0%,100%{transform:translate(0,0) rotate(8deg)}50%{transform:translate(-1rem,.9rem) rotate(-18deg)}}
 @keyframes brand-ticker-move{from{transform:translateX(28rem)}to{transform:translateX(-100%)}}
+@keyframes intro-stage-in{from{opacity:0;transform:scale(.97) translateY(1rem)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes intro-logo-arrive{from{opacity:0;transform:translateY(2rem) scale(.72) rotate(-5deg)}to{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes intro-copy-in{from{opacity:0;transform:translateY(.8rem)}to{opacity:1;transform:translateY(0)}}
+@keyframes intro-step-in{from{opacity:0;transform:translateY(1rem) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes intro-signal{0%,100%{opacity:.55;transform:scale(.78)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes intro-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes intro-exit{to{opacity:0;transform:scale(1.035);visibility:hidden}}
+@keyframes login-logo-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-.35rem) rotate(.75deg)}}
 @media(max-width:1050px){.login{grid-template-columns:minmax(20rem,.82fr) minmax(27rem,1.18fr)}.login-panel{padding:clamp(1.7rem,4vw,3.2rem)}.brand-plane{padding:2.1rem}.brand-story{width:min(100%,40rem)}.brand-core-card{width:17.5rem}.brand-capability{min-width:9.5rem}.brand-capability small{display:none}}
-@media(max-width:760px){.login{grid-template-columns:1fr}.login-panel{min-height:calc(100vh - 4.5rem)}.brand-plane{min-height:39rem}.brand-story{width:min(100%,38rem)}}
-@media(max-width:520px){.brand-plane{min-height:35rem;padding:1.15rem}.brand-story{aspect-ratio:.86}.brand-live-status{top:1%}.brand-live-status>span{font-size:.51rem}.brand-core-card{width:15.5rem}.brand-logo-window{height:17rem}.brand-scene{grid-template-columns:2.25rem minmax(0,1fr) auto;gap:.45rem;padding:.65rem}.brand-scene-icon{width:2.15rem;height:2.15rem}.brand-scene em{display:none}.brand-capability{min-width:0;padding:.5rem}.brand-capability>svg{width:1.9rem;height:1.9rem}.brand-capability>span{display:none}.brand-capability-media{left:1%;top:15%}.brand-capability-playlist{right:1%;top:20%}.brand-capability-screen{left:2%;bottom:11%}.brand-ticker{left:9%;right:1%;bottom:1%}}
-@media(prefers-reduced-motion:reduce){.brand-connection-live,.brand-live-status>svg,.brand-core-card,.brand-logo-window>img,.brand-capability,.brand-orbit,.brand-ticker span,.brand-signal-dot{animation:none!important}.brand-scene{display:none;animation:none!important}.brand-scene:first-child{display:grid;opacity:1;transform:none}}
+@media(max-width:760px){.intro-grid{inset:-2rem}.login{grid-template-columns:1fr}.login-panel{min-height:calc(100vh - 4.5rem)}.brand-plane{min-height:39rem}.brand-story{width:min(100%,38rem)}}
+@media(max-width:520px){.system-intro{padding:4.5rem 1rem 1.25rem}.intro-skip{top:.85rem;right:.85rem}.intro-logo-shell{margin-bottom:.9rem}.intro-copy{margin:.8rem 0 1rem}.intro-steps{grid-template-columns:1fr;gap:.42rem}.intro-steps li{padding:.52rem .65rem}.intro-progress{margin-top:1rem}.login-logo-status{display:none}.brand-plane{min-height:35rem;padding:1.15rem}.brand-story{aspect-ratio:.86}.brand-live-status{top:1%}.brand-live-status>span{font-size:.51rem}.brand-core-card{width:15.5rem}.brand-logo-window{height:17rem}.brand-scene{grid-template-columns:2.25rem minmax(0,1fr) auto;gap:.45rem;padding:.65rem}.brand-scene-icon{width:2.15rem;height:2.15rem}.brand-scene em{display:none}.brand-capability{min-width:0;padding:.5rem}.brand-capability>svg{width:1.9rem;height:1.9rem}.brand-capability>span{display:none}.brand-capability-media{left:1%;top:15%}.brand-capability-playlist{right:1%;top:20%}.brand-capability-screen{left:2%;bottom:11%}.brand-ticker{left:9%;right:1%;bottom:1%}}
+@media(prefers-reduced-motion:reduce){.intro-stage,.intro-logo-shell,.intro-signal,.intro-kicker,.intro-stage h2,.intro-copy,.intro-steps li,.intro-progress span,.login-logo-surface,.login-logo-surface i,.brand-connection-live,.brand-live-status>svg,.brand-core-card,.brand-logo-window>img,.brand-capability,.brand-orbit,.brand-ticker span,.brand-signal-dot{animation:none!important}.brand-scene{display:none;animation:none!important}.brand-scene:first-child{display:grid;opacity:1;transform:none}}
 .shell{min-height:100vh;display:grid;grid-template-columns:200px minmax(0,1fr)}
 .sidebar{width:200px;height:100vh;position:sticky;z-index:10;top:0;padding:1rem .75rem .8rem;border-right:1px solid var(--angel-line);background:#fff;display:flex;flex-direction:column;min-width:0}
 .brand{display:flex;align-items:center;gap:.65rem;padding:.35rem .45rem 1rem;border-bottom:1px solid var(--angel-line)}

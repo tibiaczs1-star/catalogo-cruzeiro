@@ -21,6 +21,7 @@ import android.os.StatFs
 import android.provider.Settings
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
@@ -63,6 +64,14 @@ class MainActivity : Activity() {
     private var recoveryAttempt = 0
     private var scheduleVersion: String? = null
     private var scheduleExhausted = false
+    private var offlinePlayback = false
+    private var connectionRecovered = false
+    private var resumeChecked = false
+    private var pendingResumeAssetId: String? = null
+    private var pendingResumePositionMs = 0
+    private var currentPlaybackAssetId: String? = null
+    private var currentPlaybackVideo: VideoView? = null
+    private var currentPlaybackGeneration = -1
     private var activityStarted = false
     private var currentTelemetryAssetId: String? = null
     private var playbackStartedAt: String? = null
@@ -73,6 +82,13 @@ class MainActivity : Activity() {
             if (!activityStarted) return
             sendTelemetryAsync()
             mainHandler.postDelayed(this, TELEMETRY_INTERVAL_MS)
+        }
+    }
+    private val checkpointRunnable = object : Runnable {
+        override fun run() {
+            if (!activityStarted || currentPlaybackGeneration < 0) return
+            savePlaybackCheckpoint()
+            mainHandler.postDelayed(this, PLAYBACK_CHECKPOINT_INTERVAL_MS)
         }
     }
 
@@ -107,6 +123,7 @@ class MainActivity : Activity() {
 
     override fun onStop() {
         activityStarted = false
+        savePlaybackCheckpoint()
         shutdownPlayback()
         super.onStop()
     }
@@ -127,6 +144,11 @@ class MainActivity : Activity() {
     }
 
     private fun stopCurrentPlayback() {
+        savePlaybackCheckpoint()
+        mainHandler.removeCallbacks(checkpointRunnable)
+        currentPlaybackVideo = null
+        currentPlaybackAssetId = null
+        currentPlaybackGeneration = -1
         playbackSlot.clear()
     }
 
@@ -142,6 +164,7 @@ class MainActivity : Activity() {
     }
 
     private fun enterFullscreen() {
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
     }
 
@@ -375,9 +398,12 @@ class MainActivity : Activity() {
             // Old servers did not expose version. The manifest itself is a stable fallback
             // so a changed legacy schedule can leave the completed state.
             val version = schedule?.optString("version")?.takeIf { it.isNotBlank() } ?: schedule?.toString()
+            if (schedule != null) preferences.edit().putString(PREF_LAST_SCHEDULE, schedule.toString()).apply()
             mainHandler.post {
                 if (!playbackSession.accepts(generation)) return@post
                 if (remoteCommand != null && handleRemoteCommand(remoteCommand, generation)) return@post
+                offlinePlayback = false
+                connectionRecovered = false
                 if (scheduleVersion != version) {
                     scheduleIndex = 0
                     scheduleExhausted = false
@@ -385,6 +411,7 @@ class MainActivity : Activity() {
                 scheduleVersion = version
                 scheduleItems = items
                 manifestLoop = loop
+                restorePlaybackCheckpoint(items)
                 when (PlaybackPolicy.source(emergency != null, items.length())) {
                     PlaybackSource.EMERGENCY -> playEmergency(emergency!!, generation)
                     PlaybackSource.SCHEDULE -> {
@@ -399,8 +426,93 @@ class MainActivity : Activity() {
                     PlaybackSource.IDLE -> showIdle(generation)
                 }
             }
-        } catch (_: Exception) { mainHandler.post { showIdle(generation, "Sem conexao. Tentando novamente...") } }
+        } catch (_: Exception) {
+            mainHandler.post {
+                if (!playbackSession.accepts(generation)) return@post
+                if (!startOfflinePlayback(generation)) showIdle(generation, "Sem internet e sem mídia salva. Tentando novamente...")
+            }
+        }
     }.start() }
+
+    private fun startOfflinePlayback(generation: Int): Boolean {
+        if (!playbackSession.accepts(generation)) return false
+        val saved = preferences.getString(PREF_LAST_SCHEDULE, null)?.let { runCatching { JSONObject(it) }.getOrNull() } ?: return false
+        val sourceItems = saved.optJSONArray("items") ?: return false
+        val available = OfflinePlaybackPolicy.availableIndexes((0 until sourceItems.length()).map { index ->
+            sourceItems.optJSONObject(index)?.let(::cachedMediaFile)?.let { it.exists() && it.length() > 0 } == true
+        })
+        if (available.isEmpty()) return false
+
+        val currentAsset = currentPlaybackAssetId
+        val currentOriginalIndex = (0 until sourceItems.length()).firstOrNull {
+            sourceItems.optJSONObject(it)?.optString("assetId") == currentAsset
+        } ?: scheduleIndex
+        val selectedOriginalIndex = OfflinePlaybackPolicy.startIndex(currentOriginalIndex, available) ?: return false
+        val cachedItems = JSONArray()
+        available.forEach { index -> cachedItems.put(sourceItems.getJSONObject(index)) }
+
+        scheduleItems = cachedItems
+        scheduleIndex = available.indexOf(selectedOriginalIndex).coerceAtLeast(0)
+        manifestLoop = true
+        scheduleExhausted = false
+        offlinePlayback = true
+        connectionRecovered = false
+        scheduleVersion = saved.optString("version").takeIf { it.isNotBlank() } ?: saved.toString()
+        restorePlaybackCheckpoint(cachedItems)
+        scheduleEmergencyCheck(generation, OFFLINE_SYNC_INTERVAL_MS)
+        playMedia(cachedItems.getJSONObject(scheduleIndex), false, generation)
+        return true
+    }
+
+    private fun cachedMediaFile(item: JSONObject): File {
+        val extension = if (item.optString("type").startsWith("video/")) ".mp4" else ".img"
+        return File(cacheDir, "${item.optString("assetId")}$extension")
+    }
+
+    private fun savePlaybackCheckpoint() {
+        val assetId = currentPlaybackAssetId?.takeIf { it.isNotBlank() } ?: return
+        val positionMs = currentPlaybackVideo?.currentPosition?.coerceAtLeast(0) ?: 0
+        val checkpoint = JSONObject()
+            .put("assetId", assetId)
+            .put("scheduleIndex", scheduleIndex)
+            .put("positionMs", positionMs)
+            .put("savedAtEpochMs", System.currentTimeMillis())
+        preferences.edit().putString(PREF_PLAYBACK_CHECKPOINT, checkpoint.toString()).apply()
+    }
+
+    private fun clearPlaybackCheckpoint() {
+        mainHandler.removeCallbacks(checkpointRunnable)
+        currentPlaybackAssetId = null
+        currentPlaybackVideo = null
+        currentPlaybackGeneration = -1
+        pendingResumeAssetId = null
+        pendingResumePositionMs = 0
+        preferences.edit().remove(PREF_PLAYBACK_CHECKPOINT).apply()
+    }
+
+    private fun restorePlaybackCheckpoint(items: JSONArray) {
+        if (resumeChecked || items.length() == 0) return
+        resumeChecked = true
+        val saved = preferences.getString(PREF_PLAYBACK_CHECKPOINT, null)
+            ?.let { runCatching { JSONObject(it) }.getOrNull() }
+        val checkpoint = saved?.let {
+            PlaybackCheckpoint(
+                assetId = it.optString("assetId"),
+                scheduleIndex = it.optInt("scheduleIndex", 0),
+                positionMs = it.optInt("positionMs", 0),
+                savedAtEpochMs = it.optLong("savedAtEpochMs", 0L),
+            )
+        }
+        val assetIds = (0 until items.length()).map { items.optJSONObject(it)?.optString("assetId").orEmpty() }
+        val decision = PlaybackResumePolicy.restore(checkpoint, assetIds, System.currentTimeMillis())
+        if (decision == null) {
+            preferences.edit().remove(PREF_PLAYBACK_CHECKPOINT).apply()
+            return
+        }
+        scheduleIndex = decision.index
+        pendingResumeAssetId = assetIds[decision.index]
+        pendingResumePositionMs = decision.positionMs
+    }
 
     private fun playEmergency(item: JSONObject, generation: Int): Unit {
         if (item.optString("mode") == "message") {
@@ -460,12 +572,24 @@ class MainActivity : Activity() {
                             applyPresentation(this, stage, player.videoWidth, player.videoHeight, presentation)
                             player.isLooping = emergency && playback.endMs == null
                             player.setVolume(playback.volume, playback.volume)
-                            seekTo(playback.startMs)
+                            val resumeAt = if (!emergency && pendingResumeAssetId == assetId) {
+                                PlaybackResumePolicy.seekPosition(playback.startMs, pendingResumePositionMs, playback.endMs)
+                            } else playback.startMs
+                            currentPlaybackAssetId = assetId.takeUnless { emergency }
+                            currentPlaybackVideo = this.takeUnless { emergency }
+                            currentPlaybackGeneration = generation.takeUnless { emergency } ?: -1
+                            pendingResumeAssetId = null
+                            pendingResumePositionMs = 0
+                            seekTo(resumeAt)
                             start()
+                            if (!emergency) {
+                                mainHandler.removeCallbacks(checkpointRunnable)
+                                checkpointRunnable.run()
+                            }
                             updateTelemetryForPlayback(assetId)
                             if (!emergency) prefetchNext(generation)
                             if (playback.endMs != null) monitorTrimEnd(this, assetId, emergency, generation, playback, item)
-                            if (!emergency) PlaybackPolicy.videoWatchdogMs(playback.startMs, playback.endMs, player.duration)?.let { timeout ->
+                            if (!emergency) PlaybackPolicy.videoWatchdogMs(resumeAt, playback.endMs, player.duration)?.let { timeout ->
                                 mainHandler.postDelayed({ finishMedia(assetId, false, generation, item) }, timeout)
                             }
                         }
@@ -481,6 +605,7 @@ class MainActivity : Activity() {
                     }
                     stage.addView(video, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
                     applyDynamicInsertion(stage, item, emergency)
+                    if (!emergency) addOfflineIndicator(stage)
                     showContent(stage, video); video.start()
                     if (emergency) mainHandler.postDelayed({ if (playbackSession.accepts(generation)) syncAndPlay(generation) }, 5_000)
                 } else {
@@ -493,7 +618,16 @@ class MainActivity : Activity() {
                     val image = ImageView(this).apply { scaleType = ImageView.ScaleType.FIT_XY; setImageBitmap(bitmap) }
                     stage.addView(image, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
                     applyDynamicInsertion(stage, item, emergency)
+                    if (!emergency) addOfflineIndicator(stage)
                     showContent(stage); stage.post { if (playbackSession.accepts(generation)) applyPresentation(image, stage, bitmap.width, bitmap.height, presentation) }
+                    if (!emergency) {
+                        currentPlaybackAssetId = assetId
+                        currentPlaybackVideo = null
+                        currentPlaybackGeneration = generation
+                        pendingResumeAssetId = null
+                        pendingResumePositionMs = 0
+                        savePlaybackCheckpoint()
+                    }
                     updateTelemetryForPlayback(assetId)
                     if (!emergency) prefetchNext(generation)
                     mainHandler.postDelayed({ finishMedia(assetId, emergency, generation, item) }, if (emergency) 5_000 else PlaybackPolicy.imageDurationMs(item.optInt("durationSeconds").takeIf { item.has("durationSeconds") }))
@@ -558,6 +692,23 @@ class MainActivity : Activity() {
                 .withEndAction { if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && effect.usesBlur) stage.setRenderEffect(null) }
                 .start()
         }
+    }
+
+    private fun addOfflineIndicator(stage: FrameLayout) {
+        if (!offlinePlayback) return
+        val badge = TextView(this).apply {
+            text = "MODO OFFLINE  •  EXIBINDO MÍDIA SALVA"
+            textSize = 12f
+            setTextColor(Color.WHITE)
+            setTypeface(typeface, Typeface.BOLD)
+            letterSpacing = .08f
+            setPadding(dp(14f), dp(9f), dp(14f), dp(9f))
+            background = solidShape(Color.argb(220, 15, 23, 42), 10f, Color.argb(120, 255, 255, 255), 1f)
+        }
+        stage.addView(badge, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.END).apply {
+            topMargin = dp(22f)
+            marginEnd = dp(22f)
+        })
     }
 
     private fun addDynamicTicker(stage: FrameLayout, effectJson: JSONObject) {
@@ -655,34 +806,59 @@ class MainActivity : Activity() {
     private fun finishMedia(assetId: String, emergency: Boolean, generation: Int, item: JSONObject? = null): Unit {
         if (!playbackSession.accepts(generation)) return
         updateTelemetryForIdle()
-        if (!emergency) {
-            reportPlaybackEvent(assetId, "completed", item = item)
-            consecutiveFailures = 0
-            recoveryAttempt = 0
-            val next = PlaybackPolicy.nextIndexOrNull(scheduleIndex, scheduleItems.length(), manifestLoop)
-            if (next == null) scheduleExhausted = true else scheduleIndex = next
+        if (emergency) {
+            syncAndPlay(advanceGeneration())
+            return
         }
+
+        reportPlaybackEvent(assetId, "completed", item = item)
+        consecutiveFailures = 0
+        recoveryAttempt = 0
+        clearPlaybackCheckpoint()
+        val next = nextPlayableScheduleIndex()
+        if (next == null) scheduleExhausted = true else scheduleIndex = next
         val nextGeneration = advanceGeneration()
-        if (!emergency && scheduleExhausted) showScheduleComplete(nextGeneration)
-        else syncAndPlay(nextGeneration)
+        when {
+            scheduleExhausted -> showScheduleComplete(nextGeneration)
+            connectionRecovered -> syncAndPlay(nextGeneration)
+            else -> {
+                scheduleEmergencyCheck(nextGeneration, if (offlinePlayback) OFFLINE_SYNC_INTERVAL_MS else 0)
+                playMedia(scheduleItems.getJSONObject(scheduleIndex), false, nextGeneration)
+            }
+        }
     }
 
     private fun failMedia(assetId: String, emergency: Boolean, generation: Int, reason: String, item: JSONObject? = null) {
         if (!playbackSession.accepts(generation)) return
         updateTelemetryForFailure(assetId, reason)
         reportPlaybackEvent(assetId, "error", reason, item)
+        clearPlaybackCheckpoint()
+        val next = if (emergency) null else nextPlayableScheduleIndex()
+        if (next != null) scheduleIndex = next
         val nextGeneration = advanceGeneration()
         if (emergency) {
             syncAndPlay(nextGeneration)
             return
         }
         consecutiveFailures += 1
-        scheduleIndex = PlaybackPolicy.nextIndex(scheduleIndex, scheduleItems.length())
-        if (PlaybackPolicy.completedFailedCycle(consecutiveFailures, scheduleItems.length())) {
+        if (next == null || PlaybackPolicy.completedFailedCycle(consecutiveFailures, scheduleItems.length())) {
             consecutiveFailures = 0
             recoveryAttempt += 1
             showRecovery(nextGeneration)
-        } else syncAndPlay(nextGeneration)
+        } else if (connectionRecovered) {
+            syncAndPlay(nextGeneration)
+        } else {
+            scheduleEmergencyCheck(nextGeneration, if (offlinePlayback) OFFLINE_SYNC_INTERVAL_MS else 0)
+            playMedia(scheduleItems.getJSONObject(scheduleIndex), false, nextGeneration)
+        }
+    }
+
+    private fun nextPlayableScheduleIndex(): Int? {
+        if (!offlinePlayback) return PlaybackPolicy.nextIndexOrNull(scheduleIndex, scheduleItems.length(), manifestLoop)
+        val available = OfflinePlaybackPolicy.availableIndexes((0 until scheduleItems.length()).map { index ->
+            scheduleItems.optJSONObject(index)?.let(::cachedMediaFile)?.let { it.exists() && it.length() > 0 } == true
+        })
+        return OfflinePlaybackPolicy.nextIndex(scheduleIndex, available)
     }
 
     private fun showRecovery(generation: Int) {
@@ -696,7 +872,8 @@ class MainActivity : Activity() {
         scheduleEmergencyCheck(generation, 0)
         mainHandler.postDelayed({
             if (playbackSession.accepts(generation)) {
-                syncAndPlay(advanceGeneration())
+                val nextGeneration = advanceGeneration()
+                if (!offlinePlayback || !startOfflinePlayback(nextGeneration)) syncAndPlay(nextGeneration)
             }
         }, delay)
     }
@@ -717,7 +894,7 @@ class MainActivity : Activity() {
     }
 
     private fun prefetchNext(generation: Int) {
-        if (!playbackSession.accepts(generation) || scheduleItems.length() == 0) return
+        if (!playbackSession.accepts(generation) || offlinePlayback || scheduleItems.length() == 0) return
         val next = PlaybackPolicy.nextIndex(scheduleIndex, scheduleItems.length())
         val item = scheduleItems.optJSONObject(next) ?: return
         val token = preferences.getString("device_token", null) ?: return
@@ -744,15 +921,25 @@ class MainActivity : Activity() {
             if (!playbackSession.accepts(generation)) return@postDelayed
             Thread {
                 if (!playbackSession.accepts(generation)) return@Thread
-                val state = runCatching { getJson("api/device/sync", preferences.getString("device_token", null)!!) }.getOrNull()
+                val token = preferences.getString("device_token", null)
+                val state = token?.let { runCatching { getJson("api/device/sync", it) }.getOrNull() }
                 val emergency = state?.optJSONObject("emergency")
                 val remoteCommand = state?.optJSONObject("remoteCommand")
+                val incomingSchedule = state?.optJSONObject("schedule")
+                val incomingVersion = incomingSchedule?.optString("version")?.takeIf { it.isNotBlank() }
+                    ?: incomingSchedule?.toString()
                 mainHandler.post {
                     if (!playbackSession.accepts(generation)) return@post
+                    if (state == null) {
+                        offlinePlayback = true
+                        connectionRecovered = false
+                    } else if (offlinePlayback || incomingVersion != scheduleVersion) {
+                        connectionRecovered = true
+                    }
                     if (remoteCommand != null && handleRemoteCommand(remoteCommand, generation)) return@post
                     if (emergency != null && PlaybackPolicy.shouldInterruptForEmergency(true, true)) {
                         playEmergency(emergency, advanceGeneration())
-                    } else scheduleEmergencyCheck(generation)
+                    } else scheduleEmergencyCheck(generation, if (offlinePlayback && !connectionRecovered) OFFLINE_SYNC_INTERVAL_MS else 1_000)
                 }
             }.start()
         }, delayMs)
@@ -1073,6 +1260,10 @@ class MainActivity : Activity() {
 
     private companion object {
         const val TELEMETRY_INTERVAL_MS = 30_000L
+        const val PLAYBACK_CHECKPOINT_INTERVAL_MS = 5_000L
+        const val OFFLINE_SYNC_INTERVAL_MS = 15_000L
+        const val PREF_LAST_SCHEDULE = "last_schedule_v1"
+        const val PREF_PLAYBACK_CHECKPOINT = "playback_checkpoint_v1"
         const val PREF_COMMAND_JOURNAL = "remote_command_journal_v1"
         const val PREF_APPLIED_COMMAND_IDS = "remote_command_applied_ids"
         const val PREF_PENDING_ACK_ID = "remote_command_pending_ack_id"
