@@ -36,3 +36,14 @@ it('envia os arquivos à biblioteca e salva seus ids na empresa', async () => {
     body: expect.objectContaining({ name: 'Mercado Juruá', photoAssetId: photoId, logoAssetId: logoId }),
   });
 });
+
+it('explica que a tela trata anunciantes e direciona acesso e TVs para Rede & CRM', () => {
+  const root = document.querySelector('#finance');
+  renderFinance(root, { advertisers: [], companies: [], totals: {} }, [], vi.fn(), vi.fn());
+  const navigate = vi.fn();
+  root.addEventListener('angel:navigate', navigate);
+  expect(document.body.textContent).toContain('Empresa nesta tela = anunciante');
+  root.querySelector('[data-go-network]').click();
+  expect(navigate).toHaveBeenCalled();
+  expect(navigate.mock.calls[0][0].detail).toEqual({ view: 'network' });
+});

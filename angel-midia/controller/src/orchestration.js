@@ -84,15 +84,103 @@ export function renderPlaylists(root, playlistPayload, mediaPayload, apiClient, 
   form.addEventListener('submit', async (event) => { event.preventDefault(); const numberOrNull=(v)=>v===''?null:Number(v); const status=form.querySelector('[role=status]'); const rows=[...itemsRoot.querySelectorAll('[data-playlist-item]')]; for(const row of rows){if(row.dataset.type.startsWith('video/')){const duration=numberOrNull(row.dataset.duration),start=numberOrNull(row.querySelector('[data-trim-start]').value),end=numberOrNull(row.querySelector('[data-trim-end]').value);if(start!=null&&duration!=null&&start>=duration){status.textContent=`O início do corte deve ser menor que ${duration} segundos.`;playUiSound('alert');return;}if(end!=null&&(end<=(start??0)||(duration!=null&&end>duration))){status.textContent='O fim do corte deve ser maior que o início e não ultrapassar a duração.';playUiSound('alert');return;}}} const items=rows.map((row,position)=>{const image=row.dataset.type.startsWith('image/');return {assetId:row.dataset.assetId,type:row.dataset.type,position,imageDurationSeconds:image?(row.querySelector('[data-duration-mode]:checked').value==='custom'?Number(row.querySelector('[data-image-duration]').value):null):null,...(!image&&{durationSeconds:numberOrNull(row.dataset.duration),trimStartSeconds:numberOrNull(row.querySelector('[data-trim-start]').value),trimEndSeconds:numberOrNull(row.querySelector('[data-trim-end]').value),volume:Number(row.querySelector('[data-volume]').value)/100})};}); const id=form.elements.playlistId.value; try{await apiClient(id?`/admin/playlists/${id}`:'/admin/playlists',{method:id?'PUT':'POST',body:{name:form.elements.name.value.trim(),items}});status.textContent=id?'Playlist atualizada.':'Playlist salva.';playUiSound('success');await refresh();}catch{status.textContent='Revise os itens, durações e cortes.';playUiSound('alert');} });
 }
 
-export function renderSchedule(root, data, apiClient, refresh) {
-  const playlists = list(data.playlists, 'playlists'); const devices = list(data.devices, 'devices'); const groups = list(data.groups, 'groups'); const schedules = list(data.schedules, 'schedules');
-  root.innerHTML = `<header class="page-head"><div><p class="eyebrow">Mídia → playlist → conjunto</p><h1>Programação</h1><p>Crie um conjunto com TVs ativas e ative nele a playlist escolhida.</p></div></header><section class="split"><div class="stack"><form class="glass editor" data-group><h2>1. Criar conjunto de TVs</h2><label>Nome do conjunto<input name="groupName" required placeholder="Ex.: Lojas do Centro"></label><div class="asset-picker">${devices.filter((d)=>d.status==='active').map((d)=>`<label><input type="checkbox" name="deviceId" value="${d.id}"><span>TV</span>${esc(d.name)}</label>`).join('')||'<p>Ative uma TV no mapa primeiro.</p>'}</div><button class="primary">Salvar conjunto</button><p role="status"></p></form><form class="glass editor" data-schedule><h2>2. Ativar playlist</h2><label>Playlist<select name="playlistId" required><option value="">Escolha…</option>${playlists.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></label><label>Destino<select name="target"><option value="all">Todas as TVs</option>${groups.map((g) => `<option value="group:${g.id}">Conjunto · ${esc(g.name)} (${g.device_count ?? g.devices?.length ?? 0} TVs)</option>`).join('')}${devices.map((d) => `<option value="device:${d.id}">TV · ${esc(d.name)}</option>`).join('')}</select></label><fieldset class="schedule-mode"><legend>Modo de exibição</legend><div class="schedule-mode-grid"><label class="schedule-mode-card"><input name="mode" type="radio" value="continuous" checked><span><strong>Loop contínuo</strong><small>Começa agora e reinicia ao chegar à última mídia.</small></span></label><label class="schedule-mode-card"><input name="mode" type="radio" value="scheduled"><span><strong>Agendar período</strong><small>Defina uma data e hora para começar e terminar.</small></span></label></div></fieldset><div class="retro-window" data-schedule-window hidden><div class="retro-titlebar"><span>Período da programação</span><span aria-hidden="true">— □ ×</span></div><div class="field-row"><label>Início<input name="startsAt" type="datetime-local"></label><label>Fim<input name="endsAt" type="datetime-local"></label></div></div><p class="schedule-confirmation-strip" data-schedule-summary>Exibição em loop contínuo: ao terminar, a playlist volta automaticamente para a primeira mídia.</p><label>Prioridade<select name="priority"><option value="normal">Normal</option><option value="alta">Alta</option><option value="urgente">Urgente</option></select></label><button class="primary">Ativar playlist</button><p role="status"></p></form></div><div class="stack"><h2>Conjuntos e programações</h2>${groups.map((g)=>`<article class="glass list-card"><span>${g.device_count ?? g.devices?.length ?? 0} TVs</span><h3>${esc(g.name)}</h3><p>${(g.devices||[]).map((d)=>esc(d.name)).join(' · ')||'Sem aparelhos'}</p></article>`).join('')}${schedules.map((s) => `<article class="glass list-card"><span class="priority p-${s.priority}">${s.priority >= 100 ? 'Urgente' : s.priority >= 50 ? 'Alta' : 'Normal'}</span><h3>${esc(s.playlist_name || 'Campanha')}</h3><p>${esc(s.target_name)} · ${s.mode === 'continuous' || !s.starts_at ? 'Loop contínuo' : new Date(s.starts_at).toLocaleString('pt-BR')}</p></article>`).join('') || '<div class="empty">Nenhuma programação publicada.</div>'}</div></section>`;
-  root.querySelector('[data-group]').addEventListener('submit', async (event) => { event.preventDefault(); const f=event.currentTarget; const deviceIds=[...f.querySelectorAll('[name=deviceId]:checked')].map((n)=>n.value); try { await apiClient('/admin/groups',{method:'POST',body:{name:f.querySelector('[name=groupName]').value.trim(),deviceIds}}); f.querySelector('[role=status]').textContent='Conjunto salvo. Agora selecione-o abaixo.'; playUiSound('success'); await refresh(); } catch { f.querySelector('[role=status]').textContent='Escolha um nome e pelo menos uma TV ativa.'; playUiSound('error'); } });
+export function renderSchedule(root, data, apiClient, refresh, options = {}) {
+  const playlists = list(data.playlists, 'playlists');
+  const devices = list(data.devices, 'devices');
+  const groups = list(data.groups, 'groups');
+  const schedules = list(data.schedules, 'schedules');
+  const organizationScoped = Boolean(options.organizationId);
+  const organizationName = options.organizationName || 'empresa selecionada';
+  const organizations = list(options.organizations, 'organizations');
+  const targetOptions = `${organizationScoped ? '<option value="">Escolha uma TV ou conjunto…</option>' : '<option value="all">Todas as TVs</option>'}${groups.map((group) => `<option value="group:${group.id}">Conjunto · ${esc(group.name)} (${group.device_count ?? group.devices?.length ?? 0} TVs)</option>`).join('')}${devices.map((device) => `<option value="device:${device.id}">TV · ${esc(device.name)}</option>`).join('')}`;
+
+  root.innerHTML = `<header class="page-head"><div><p class="eyebrow">Mídia → playlist → conjunto</p><h1>Programação</h1><p>Crie um conjunto com TVs ativas e ative nele a playlist escolhida.</p></div></header>
+  ${organizations.length ? `<label class="schedule-scope">Escopo dos destinos<select data-schedule-scope><option value="" ${organizationScoped ? '' : 'selected'}>Rede inteira (todas as empresas)</option>${organizations.map((organization) => `<option value="${esc(organization.id)}" ${String(organization.id) === String(options.organizationId) ? 'selected' : ''}>${esc(organization.name)}</option>`).join('')}</select></label>` : ''}
+  ${organizationScoped ? `<section class="workflow-note schedule-scope-note"><div><b>Empresa da rede selecionada: ${esc(organizationName)}</b><p>Para evitar envio fora desta empresa, escolha uma TV ou conjunto vinculado a ela. “Todas as TVs” continua reservado à rede inteira.</p></div></section>` : ''}
+  <section class="split"><div class="stack"><form class="glass editor" data-group><h2>1. Criar conjunto de TVs</h2><label>Nome do conjunto<input name="groupName" required placeholder="Ex.: Lojas do Centro"></label><div class="asset-picker">${devices.filter((device) => device.status === 'active').map((device) => `<label><input type="checkbox" name="deviceId" value="${device.id}"><span>TV</span>${esc(device.name)}</label>`).join('') || '<p>Ative uma TV no mapa primeiro.</p>'}</div><button class="primary">Salvar conjunto</button><p role="status"></p></form>
+  <form class="glass editor" data-schedule><h2>2. Ativar playlist</h2><label>Playlist<select name="playlistId" required><option value="">Escolha…</option>${playlists.map((playlist) => `<option value="${playlist.id}">${esc(playlist.name)}</option>`).join('')}</select></label><label>Destino<select name="target" required>${targetOptions}</select></label><fieldset class="schedule-mode"><legend>Modo de exibição</legend><div class="schedule-mode-grid"><label class="schedule-mode-card"><input name="mode" type="radio" value="continuous" checked><span><strong>Loop contínuo</strong><small>Começa agora e reinicia ao chegar à última mídia.</small></span></label><label class="schedule-mode-card"><input name="mode" type="radio" value="scheduled"><span><strong>Agendar período</strong><small>Defina uma data e hora para começar e terminar.</small></span></label></div></fieldset><div class="retro-window" data-schedule-window hidden><div class="retro-titlebar"><span>Período da programação</span><span aria-hidden="true">— □ ×</span></div><div class="field-row"><label>Início<input name="startsAt" type="datetime-local"></label><label>Fim<input name="endsAt" type="datetime-local"></label></div></div><p class="schedule-confirmation-strip" data-schedule-summary>Exibição em loop contínuo: ao terminar, a playlist volta automaticamente para a primeira mídia.</p><label>Prioridade<select name="priority"><option value="normal">Normal</option><option value="alta">Alta</option><option value="urgente">Urgente</option></select></label><button class="primary" data-review-schedule>Revisar antes de ativar</button><section class="schedule-review" data-schedule-review hidden><p class="eyebrow">Revisão final</p><h3>Confira antes de colocar no ar</h3><dl class="schedule-review-grid" data-schedule-review-facts></dl><div class="schedule-review-actions"><button type="button" class="ghost" data-cancel-review>Voltar e ajustar</button><button type="button" class="primary" data-confirm-schedule>Ativar playlist</button></div></section><p role="status" aria-live="polite"></p></form></div>
+  <div class="stack"><h2>Conjuntos e programações</h2>${groups.map((group) => `<article class="glass list-card"><span>${group.device_count ?? group.devices?.length ?? 0} TVs</span><h3>${esc(group.name)}</h3><p>${(group.devices || []).map((device) => esc(device.name)).join(' · ') || 'Sem aparelhos'}</p></article>`).join('')}${schedules.map((schedule) => `<article class="glass list-card"><span class="priority p-${schedule.priority}">${schedule.priority >= 100 ? 'Urgente' : schedule.priority >= 50 ? 'Alta' : 'Normal'}</span><h3>${esc(schedule.playlist_name || 'Campanha')}</h3><p>${esc(schedule.target_name)} · ${schedule.mode === 'continuous' || !schedule.starts_at ? 'Loop contínuo' : new Date(schedule.starts_at).toLocaleString('pt-BR')}</p></article>`).join('') || '<div class="empty">Nenhuma programação publicada.</div>'}</div></section>`;
+
+  root.querySelector('[data-schedule-scope]')?.addEventListener('change', (event) => options.onScopeChange?.(event.currentTarget.value));
+  root.querySelector('[data-group]').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const deviceIds = [...form.querySelectorAll('[name=deviceId]:checked')].map((node) => node.value);
+    try {
+      await apiClient('/admin/groups', { method: 'POST', body: { name: form.querySelector('[name=groupName]').value.trim(), deviceIds } });
+      form.querySelector('[role=status]').textContent = 'Conjunto salvo. Agora selecione-o abaixo.';
+      playUiSound('success');
+      await refresh();
+    } catch {
+      form.querySelector('[role=status]').textContent = 'Escolha um nome e pelo menos uma TV ativa.';
+      playUiSound('error');
+    }
+  });
+
   const scheduleForm = root.querySelector('[data-schedule]');
-  const updateScheduleSummary = () => { const scheduled = scheduleForm.elements.mode.value === 'scheduled'; scheduleForm.querySelector('[data-schedule-summary]').textContent = scheduled ? 'Exibição agendada: a playlist será reproduzida somente entre o início e o fim informados.' : 'Exibição em loop contínuo: ao terminar, a playlist volta automaticamente para a primeira mídia.'; };
-  syncScheduleMode(scheduleForm); updateScheduleSummary();
-  scheduleForm.querySelectorAll('[name=mode]').forEach((radio) => radio.addEventListener('change', () => { syncScheduleMode(scheduleForm); updateScheduleSummary(); }));
-  scheduleForm.addEventListener('submit', async (event) => { event.preventDefault(); const f=event.currentTarget; const status=f.querySelector('[role=status]'); const window=parseScheduleWindow(f); if(!window.valid){status.textContent=window.error;playUiSound('error');return;} const targetValue=f.querySelector('[name=target]').value; const [kind,id]=targetValue.includes(':')?targetValue.split(':'):['all',null]; const body={playlistId:f.querySelector('[name=playlistId]').value,target:{type:kind,id},priority:f.querySelector('[name=priority]').value,...window.fields}; try { await apiClient('/admin/schedules',{method:'POST',body}); status.textContent='Playlist ativada no destino escolhido.'; playUiSound('success'); await refresh(); } catch { status.textContent='Não foi possível publicar. Revise os campos.'; playUiSound('error'); } });
+  const review = scheduleForm.querySelector('[data-schedule-review]');
+  const reviewFacts = scheduleForm.querySelector('[data-schedule-review-facts]');
+  let pendingSchedule = null;
+  let publishing = false;
+  const updateScheduleSummary = () => {
+    const scheduled = scheduleForm.elements.mode.value === 'scheduled';
+    scheduleForm.querySelector('[data-schedule-summary]').textContent = scheduled ? 'Exibição agendada: a playlist será reproduzida somente entre o início e o fim informados.' : 'Exibição em loop contínuo: ao terminar, a playlist volta automaticamente para a primeira mídia.';
+  };
+  const resetReview = () => { pendingSchedule = null; review.hidden = true; };
+  syncScheduleMode(scheduleForm);
+  updateScheduleSummary();
+  scheduleForm.querySelectorAll('[name=mode]').forEach((radio) => radio.addEventListener('change', () => { syncScheduleMode(scheduleForm); updateScheduleSummary(); resetReview(); }));
+  scheduleForm.querySelectorAll('select,input').forEach((control) => {
+    control.addEventListener('input', resetReview);
+    control.addEventListener('change', resetReview);
+  });
+  scheduleForm.querySelector('[data-cancel-review]').addEventListener('click', resetReview);
+
+  scheduleForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (publishing) return;
+    resetReview();
+    const status = scheduleForm.querySelector('[role=status]');
+    const playlistId = scheduleForm.querySelector('[name=playlistId]').value;
+    const targetValue = scheduleForm.querySelector('[name=target]').value;
+    if (!playlistId) { status.textContent = 'Escolha uma playlist.'; playUiSound('error'); return; }
+    if (!targetValue) { status.textContent = organizationScoped ? 'Escolha uma TV ou conjunto vinculado a esta empresa.' : 'Escolha o destino da programação.'; playUiSound('error'); return; }
+    const scheduleWindow = parseScheduleWindow(scheduleForm);
+    if (!scheduleWindow.valid) { status.textContent = scheduleWindow.error; playUiSound('error'); return; }
+    const [kind, id] = targetValue.includes(':') ? targetValue.split(':') : ['all', null];
+    pendingSchedule = { playlistId, target: { type: kind, id }, priority: scheduleForm.querySelector('[name=priority]').value, ...scheduleWindow.fields };
+    const playlistLabel = scheduleForm.querySelector('[name=playlistId]').selectedOptions[0]?.textContent || 'Playlist';
+    const targetLabel = scheduleForm.querySelector('[name=target]').selectedOptions[0]?.textContent || 'Destino';
+    const periodLabel = scheduleForm.elements.mode.value === 'scheduled' ? `${new Date(scheduleWindow.fields.startsAt).toLocaleString('pt-BR')} até ${new Date(scheduleWindow.fields.endsAt).toLocaleString('pt-BR')}` : 'Loop contínuo, a partir de agora';
+    reviewFacts.innerHTML = `<div><dt>Empresa da rede</dt><dd>${esc(organizationScoped ? organizationName : 'Rede inteira')}</dd></div><div><dt>Playlist</dt><dd>${esc(playlistLabel)}</dd></div><div><dt>Destino</dt><dd>${esc(targetLabel)}</dd></div><div><dt>Exibição</dt><dd>${esc(periodLabel)}</dd></div><div><dt>Prioridade</dt><dd>${esc(scheduleForm.querySelector('[name=priority]').selectedOptions[0]?.textContent || 'Normal')}</dd></div>`;
+    review.hidden = false;
+    status.textContent = 'Confira o resumo e confirme para ativar.';
+    review.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  scheduleForm.querySelector('[data-confirm-schedule]').addEventListener('click', async () => {
+    if (!pendingSchedule || publishing) return;
+    const status = scheduleForm.querySelector('[role=status]');
+    publishing = true;
+    const controls = [...scheduleForm.querySelectorAll('button,input,select'), root.querySelector('[data-schedule-scope]')].filter(Boolean);
+    const disabledStates = controls.map((control) => control.disabled);
+    controls.forEach((control) => { control.disabled = true; });
+    status.textContent = 'Ativando playlist no destino escolhido…';
+    try {
+      await apiClient('/admin/schedules', { method: 'POST', body: pendingSchedule });
+      resetReview();
+      status.textContent = 'Playlist ativada no destino escolhido.';
+      playUiSound('success');
+      try { await refresh(); }
+      catch { status.textContent = 'Playlist ativada. Não foi possível atualizar a lista; recarregue a tela para conferir.'; }
+    } catch {
+      status.textContent = 'Não foi possível publicar. Revise os campos.';
+      playUiSound('error');
+    } finally {
+      publishing = false;
+      controls.forEach((control, index) => { control.disabled = disabledStates[index]; });
+    }
+  });
 }
 
 export function renderLive(root, payload) { const devices=list(payload,'devices'); root.innerHTML=`<header class="page-head"><div><p class="eyebrow">Operação em tempo real</p><h1>Ao vivo</h1><p>O que toca agora, próximo download, armazenamento e falhas.</p></div><span class="live-dot">atualização 30 s</span></header><section class="live-grid">${devices.map(d=>`<article class="glass live-card"><div><i class="${d.online?'on':'off'}"></i><h3>${esc(d.name)}</h3></div><dl><dt>Agora</dt><dd>${esc(d.current_media_name||'Sem reprodução')}</dd><dt>Próximo</dt><dd>${esc(d.next_media_name||'Aguardando')}</dd><dt>Download</dt><dd>${esc(d.download_status||'—')}</dd><dt>Armazenamento</dt><dd>${d.storage_free_bytes?`${Math.round(d.storage_free_bytes/1073741824*10)/10} GB livres`:'—'}</dd></dl></article>`).join('')||'<div class="empty">Nenhuma TV enviou telemetria ainda.</div>'}</section>`; }

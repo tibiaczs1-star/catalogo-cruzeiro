@@ -58,18 +58,20 @@ function opportunityCard(item) {
 }
 
 function renderShell(root, payload) {
-  const { organizations, selected, members, contacts, opportunities, tasks, locations, devices } = payload;
+  const { organizations, selected, members, contacts, opportunities, tasks, locations, devices, unlinkedDevices } = payload;
   const openTasks = tasks.filter((task) => !['done', 'completed', 'cancelled'].includes(task.status));
   const pipelineValue = opportunities.filter((item) => item.stage !== 'lost').reduce((sum, item) => sum + Number(field(item, 'valueCents', 'value_cents') || 0), 0);
   const online = devices.filter((device) => ['online', 'active'].includes(device.status)).length;
   const selectedKind = KIND[selected?.kind] || KIND.matrix;
   root.innerHTML = `<section class="network-page" data-view="network">
     <header class="page-head network-page-head"><div><p class="eyebrow">Rede, equipe e relacionamento</p><h1>Rede Angel</h1><p>Organize matriz, afiliadas, filiais, clientes e cada TV em uma única operação.</p></div><div class="network-head-actions"><button class="ghost" data-network-add-company>${angelIcon('company')} Nova empresa</button><button class="primary" data-crm-add ${selected ? '' : 'disabled'}>${angelIcon('chart')} Nova oportunidade</button></div></header>
+    <section class="workflow-note network-purpose-note"><div><b>Empresa da rede</b><p>É cadastrada aqui para receber acesso, reunir locais e ter TVs vinculadas à sua operação.</p></div><div><b>Empresa em Empresas</b><p>É o anunciante: use para identidade visual, mídias, mensalidade e resultados.</p></div><button type="button" class="ghost" data-go-advertisers>Ir para Empresas</button></section>
     <section class="network-kpis" aria-label="Resumo da rede"><article class="is-blue">${angelIcon('company')}<span><small>Organizações</small><b>${compact(organizations.length)}</b></span></article><article class="is-cyan">${angelIcon('tv')}<span><small>TVs online</small><b>${online}/${devices.length}</b></span></article><article class="is-violet">${angelIcon('user')}<span><small>Equipe</small><b>${compact(members.length)}</b></span></article><article class="is-green">${angelIcon('chart')}<span><small>Pipeline</small><b>${money(pipelineValue)}</b></span></article><article class="is-amber">${angelIcon('clock')}<span><small>Próximas ações</small><b>${openTasks.length}</b></span></article></section>
     <section class="network-main-grid">
       <aside class="surface-card network-tree-card"><header><div><p class="eyebrow">Estrutura comercial</p><h2>Empresas da rede</h2></div><span>${organizations.length}</span></header><label class="network-search">${angelIcon('search')}<input type="search" data-network-search placeholder="Buscar empresa ou unidade" aria-label="Buscar empresa ou unidade"></label><div class="network-tree" data-network-tree>${hierarchyRows(organizations, selected?.id) || '<div class="network-empty"><b>Comece pela matriz</b><p>Cadastre a organização principal para distribuir sua tecnologia.</p></div>'}</div></aside>
       <section class="surface-card network-profile"><header><span class="network-profile-icon is-${selectedKind.tone}">${angelIcon('company')}</span><div><small>${selectedKind.label}</small><h2>${esc(selected?.name || 'Nenhuma organização')}</h2><p>${esc(selected?.city || selected?.email || 'Operação Angel Mídia')}</p></div></header><div class="network-profile-stats"><span><b>${locations.length}</b><small>Locais</small></span><span><b>${devices.length}</b><small>TVs</small></span><span><b>${contacts.length}</b><small>Contatos</small></span><span><b>${members.length}</b><small>Membros</small></span></div><div class="network-capabilities"><span>✓ Gestão compartilhada</span><span>✓ Permissões por função</span><span>✓ Conteúdo por local</span><span>✓ Receita por empresa</span></div></section>
     </section>
+    <section class="surface-card network-device-link"><header><div><p class="eyebrow">TVs da empresa selecionada</p><h2>Vincular TV a esta empresa</h2></div><span>${devices.length} vinculadas</span></header>${selected ? `<form data-network-device-link><label>TV disponível<select name="deviceId" ${unlinkedDevices.length ? 'required' : 'disabled'}><option value="">${unlinkedDevices.length ? 'Escolha uma TV…' : 'Nenhuma TV livre'}</option>${unlinkedDevices.map((device) => `<option value="${esc(device.id)}">${esc(device.name)}${device.status ? ` · ${esc(device.status)}` : ''}</option>`).join('')}</select></label><button class="primary" ${unlinkedDevices.length ? '' : 'disabled'}>Vincular TV</button><p role="status" aria-live="polite">${unlinkedDevices.length ? 'A TV passa a fazer parte desta empresa e aparece em seus destinos de programação.' : 'Nenhuma TV disponível para vincular. Cadastre a TV pelo APK TV e confira o Mapa das TVs.'}</p></form>` : '<div class="network-empty"><b>Selecione ou cadastre uma empresa</b><p>Depois você poderá vincular as TVs que ela usará na própria rede.</p></div>'}</section>
     <section class="surface-card crm-board-shell"><header><div><p class="eyebrow">CRM comercial</p><h2>Pipeline de oportunidades</h2></div><div class="crm-summary"><span>${opportunities.length} negócios</span><b>${money(pipelineValue)}</b></div></header><div class="network-crm-board" data-crm-board>${STAGES.map(([stage, label, tone]) => { const items = opportunities.filter((item) => item.stage === stage); const total = items.reduce((sum, item) => sum + Number(field(item, 'valueCents', 'value_cents') || 0), 0); return `<section class="crm-column is-${tone}" data-crm-stage="${stage}"><header><span>${label}</span><b>${items.length}</b></header><small>${money(total)}</small><div>${items.map(opportunityCard).join('') || '<p class="crm-column-empty">Nenhum negócio nesta etapa</p>'}</div></section>`; }).join('')}</div></section>
     <section class="network-bottom-grid">
       <section class="surface-card network-team" data-network-team><header><div><p class="eyebrow">Acesso e colaboração</p><h2>Equipe</h2></div><button class="ghost" data-network-team-manage ${members.length ? '' : 'disabled'}>${angelIcon('user')} Gerenciar</button></header><div class="network-team-list">${members.map((member) => `<article><span class="network-avatar">${esc((member.name || member.email || 'A').slice(0, 2).toUpperCase())}</span><div><b>${esc(member.name || 'Membro da equipe')}</b><small>${esc(member.email || 'Sem e-mail')}</small></div><span class="role-chip">${esc(ROLE[member.role] || member.role || 'Membro')}</span><i class="status-dot is-${member.status === 'inactive' ? 'off' : 'on'}"></i></article>`).join('') || '<div class="network-empty"><b>Nenhum membro nesta unidade</b><p>Os usuários autorizados aparecerão aqui.</p></div>'}</div></section>
@@ -89,7 +91,8 @@ function bindDrawer(root, openSelector, drawerSelector) {
   drawer?.addEventListener('click', (event) => { if (event.target === drawer) drawer.hidden = true; });
 }
 
-export async function renderNetwork(root, apiClient, externalRefresh, selectedOrganizationId) {
+export async function renderNetwork(root, apiClient, externalRefresh, selectedOrganizationId, options = {}) {
+  if (options.isCurrent && !options.isCurrent()) return;
   root.innerHTML = '<section class="network-loading" aria-live="polite"><span></span><b>Organizando a Rede Angel…</b></section>';
   const organizations = await safe(apiClient, '/admin/organizations', 'organizations');
   const selected = organizations.find((org) => org.id === selectedOrganizationId) || organizations[0] || null;
@@ -106,13 +109,31 @@ export async function renderNetwork(root, apiClient, externalRefresh, selectedOr
     locations = list(resources, 'locations'); devices = list(resources, 'devices');
     members = membersResult; contacts = contactsResult; opportunities = opportunitiesResult; tasks = tasksResult;
   }
-  renderShell(root, { organizations, selected, members, contacts, opportunities, tasks, locations, devices });
-  const refresh = async () => { await externalRefresh?.(selected?.id); return renderNetwork(root, apiClient, externalRefresh, selected?.id); };
+  const linkedDeviceIds = new Set(devices.map((device) => String(device.id)));
+  const unlinkedDevices = list(options.allDevices, 'devices').filter((device) => {
+    const organizationId = field(device, 'organizationId', 'organization_id') ?? field(device, 'orgId', 'org_id');
+    return !linkedDeviceIds.has(String(device.id)) && !organizationId;
+  });
+  if (options.isCurrent && !options.isCurrent()) return;
+  renderShell(root, { organizations, selected, members, contacts, opportunities, tasks, locations, devices, unlinkedDevices });
+  const refresh = async () => { await externalRefresh?.(selected?.id); return renderNetwork(root, apiClient, externalRefresh, selected?.id, options); };
   bindDrawer(root, '[data-network-add-company]', '[data-network-org-drawer]');
   bindDrawer(root, '[data-crm-add]', '[data-crm-drawer]');
   bindDrawer(root, '[data-network-team-manage]', '[data-network-team-drawer]');
-  root.querySelectorAll('[data-network-org]').forEach((button) => button.addEventListener('click', () => renderNetwork(root, apiClient, externalRefresh, button.dataset.networkOrg)));
+  root.querySelectorAll('[data-network-org]').forEach((button) => button.addEventListener('click', () => options.onOrganizationChange ? options.onOrganizationChange(button.dataset.networkOrg) : renderNetwork(root, apiClient, externalRefresh, button.dataset.networkOrg, options)));
+  root.querySelector('[data-go-advertisers]')?.addEventListener('click', () => root.dispatchEvent(new CustomEvent('angel:navigate', { bubbles: true, detail: { view: 'finance' } })));
   root.querySelector('[data-network-search]')?.addEventListener('input', (event) => { const query = event.currentTarget.value.trim().toLocaleLowerCase('pt-BR'); root.querySelectorAll('[data-network-org]').forEach((button) => { button.hidden = Boolean(query) && !button.textContent.toLocaleLowerCase('pt-BR').includes(query); }); });
+  root.querySelector('[data-network-device-link]')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget; const status = form.querySelector('[role=status]'); const submit = form.querySelector('button.primary'); const deviceId = form.elements.deviceId.value;
+    if (!deviceId || !selected) { status.textContent = 'Escolha uma TV disponível.'; return; }
+    const device = unlinkedDevices.find((item) => String(item.id) === String(deviceId));
+    if (!device) { status.textContent = 'Escolha uma TV disponível.'; return; }
+    const locationId = field(device, 'locationId', 'location_id') || null;
+    submit.disabled = true; status.textContent = 'Vinculando TV à empresa…';
+    try { await apiClient(`/admin/organizations/${selected.id}/devices/${deviceId}`, { method: 'PUT', body: { locationId } }); status.textContent = 'TV vinculada à empresa.'; await refresh(); }
+    catch (error) { status.textContent = `Não foi possível vincular: ${error.message}`; submit.disabled = false; }
+  });
   root.querySelector('[data-network-org-form]')?.addEventListener('submit', async (event) => {
     event.preventDefault(); const form = event.currentTarget; const status = form.querySelector('[role=status]'); const submit = form.querySelector('button.primary'); const body = Object.fromEntries(new FormData(form));
     if (body.parentId) body.organizationId = body.parentId;

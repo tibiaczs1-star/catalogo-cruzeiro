@@ -226,6 +226,7 @@ async function loadAll(client, preferredOrganizationId = '') {
     "/admin/dynamic-policy",
     "/admin/live",
     selectedOrganizationId ? `/admin/noc?organizationId=${encodeURIComponent(selectedOrganizationId)}` : null,
+    selectedOrganizationId ? `/admin/organizations/${encodeURIComponent(selectedOrganizationId)}/resources` : null,
     "/admin/reports",
     "/admin/advertisers",
     `/admin/financial-report?competence=${competence}`,
@@ -241,6 +242,7 @@ async function loadAll(client, preferredOrganizationId = '') {
     "dynamics",
     "live",
     "noc",
+    "organizationResources",
     "reports",
     "advertisers",
     "financial",
@@ -266,15 +268,36 @@ async function authenticatedView(root, client) {
     return loginView(root, client);
   }
   let selectedOrganizationId = String(admin.organizationId ?? admin.organization_id ?? '');
+  let scheduleAllOrganizations = false;
   let data = await loadAll(client, selectedOrganizationId);
   selectedOrganizationId = data.selectedOrganizationId;
   document.body.classList.add("is-shell-active");
   root.innerHTML = `<div class="shell"><aside class="sidebar"><div class="brand"><img src="./assets/angel-midia-logo.png" alt="Angel Mídia"><div><span>Angel Mídia</span><strong>Play</strong></div></div><nav>${NAV.map((n, i) => `<button data-nav="${i}" aria-current="${i ? "false" : "page"}">${angelIcon(NAV_ICONS[i])}<span>${n}</span></button>`).join("")}</nav><button class="sidebar-help" data-help>${angelIcon("help")}<span><b>Precisa de ajuda?</b><small>Tutoriais e respostas rápidas</small></span></button><div class="account"><span class="account-avatar">${esc((admin.name || admin.email || "A").slice(0, 1).toUpperCase())}</span><div><small>SUPERADMIN</small><strong>${esc(admin.name || admin.email || "admin")}</strong><em>v${RELEASE}</em></div><button data-logout aria-label="Sair">${angelIcon("user")}</button></div></aside><main class="workspace"></main></div>`;
   const workspace = root.querySelector(".workspace");
+  let currentView = 0;
+  let viewGeneration = 0;
+  let dataGeneration = 0;
+  let scopeLoading = false;
+  const reloadData = async (organizationId = selectedOrganizationId) => {
+    const generation = ++dataGeneration;
+    const nextData = await loadAll(client, organizationId);
+    if (generation !== dataGeneration) return false;
+    data = nextData;
+    selectedOrganizationId = nextData.selectedOrganizationId;
+    return true;
+  };
   const refresh = async (index) => {
-    data = await loadAll(client, selectedOrganizationId);
-    selectedOrganizationId = data.selectedOrganizationId;
-    show(index);
+    if (scopeLoading) return;
+    const generation = viewGeneration;
+    if (await reloadData() && generation === viewGeneration) show(index);
+  };
+  const changeOrganization = async (organizationId, allowEntireNetwork = false) => {
+    scopeLoading = true;
+    show(currentView);
+    if (!await reloadData(organizationId || selectedOrganizationId)) return;
+    scheduleAllOrganizations = allowEntireNetwork && !organizationId;
+    scopeLoading = false;
+    if ([0, 4, 9].includes(currentView)) show(currentView);
   };
   function overview() {
     renderOperationsOverview(workspace, {
@@ -294,7 +317,7 @@ async function authenticatedView(root, client) {
     });
   }
   function help() {
-    workspace.innerHTML = `<section data-view="help" class="help-center"><header class="page-head"><div><p class="eyebrow">Suporte Angel Mídia</p><h1>Central de Ajuda</h1><p>Do primeiro aparelho à comprovação de exibições, tudo explicado sem linguagem técnica.</p></div></header><section class="help-steps"><article><b>01</b>${angelIcon("tv")}<h2>Cadastre a TV</h2><p>Abra o APK TV, informe nome e local. O aparelho aparece no Mapa das TVs.</p></article><article><b>02</b>${angelIcon("image")}<h2>Envie as mídias</h2><p>Na Biblioteca, envie imagens ou vídeos e confira a prévia completa.</p></article><article><b>03</b>${angelIcon("playlist")}<h2>Monte a playlist</h2><p>Adicione, repita e ordene conteúdos. Ajuste duração, corte, volume e enquadramento.</p></article><article><b>04</b>${angelIcon("play")}<h2>Coloque no ar</h2><p>Vincule a playlist a um conjunto de TVs. No modo contínuo, o último item volta ao primeiro.</p></article></section><section class="help-docs"><article><h2>${angelIcon("apk")} APK Administrador</h2><ul><li>Use no celular para administrar TVs, mídias, empresas e relatórios.</li><li>Instale atualizações sobre o aplicativo atual para preservar o acesso.</li><li>A senha nunca aparece nos relatórios ou nas telas das TVs.</li></ul></article><article><h2>${angelIcon("tv")} APK TV</h2><ul><li>Instale no stick/TV e faça o cadastro inicial do local.</li><li>Mantenha atualizações automáticas ativadas.</li><li>O conteúdo baixa para o cache e continua tocando durante oscilações de internet.</li></ul></article></section><section class="help-faq"><h2>Dúvidas frequentes</h2><details open><summary>A playlist volta ao primeiro conteúdo?</summary><p>Sim. Programações contínuas repetem toda a sequência sem parar.</p></details><details><summary>A TV ficou offline. O que verificar?</summary><p>Confira internet, energia e se o APK TV está aberto. O painel registra a última conexão.</p></details><details><summary>Como interromper todas as TVs?</summary><p>Use Alerta Geral para publicar uma mídia emergencial em toda a rede, com prioridade imediata.</p></details><details><summary>Onde vejo a comprovação?</summary><p>Relatórios mostram TV, local, mídia, quantidade de exibições e segundos reproduzidos.</p></details></section></section>`;
+    workspace.innerHTML = `<section data-view="help" class="help-center"><header class="page-head"><div><p class="eyebrow">Suporte Angel Mídia</p><h1>Central de Ajuda</h1><p>Do primeiro aparelho à comprovação de exibições, tudo explicado sem linguagem técnica.</p></div></header><section class="help-concepts workflow-note"><div><b>Empresa da rede</b><p>Use Rede & CRM para organizar a empresa, vincular suas TVs e gerenciar as permissões da equipe já cadastrada.</p></div><div><b>Empresa anunciante</b><p>Use Empresas para cadastrar a marca, vincular suas mídias, mensalidades e resultados.</p></div></section><section class="help-steps"><article><b>01</b>${angelIcon("tv")}<h2>Cadastre a TV</h2><p>Abra o APK TV, informe nome e local. Depois use Rede & CRM para vinculá-la à empresa da rede.</p></article><article><b>02</b>${angelIcon("image")}<h2>Envie as mídias</h2><p>Na Biblioteca, envie imagens ou vídeos e confira a prévia. Se for anúncio, associe a mídia em Empresas.</p></article><article><b>03</b>${angelIcon("playlist")}<h2>Monte a playlist</h2><p>Adicione, repita e ordene conteúdos. Ajuste duração, corte, volume e enquadramento.</p></article><article><b>04</b>${angelIcon("play")}<h2>Coloque no ar</h2><p>Na Programação, escolha a playlist e o destino, confira o resumo e confirme. No modo contínuo, o último item volta ao primeiro.</p></article></section><section class="help-docs"><article><h2>${angelIcon("apk")} APK Administrador</h2><ul><li>Use no celular para administrar TVs, mídias, empresas e relatórios.</li><li>Instale atualizações sobre o aplicativo atual para preservar o acesso.</li><li>A senha nunca aparece nos relatórios ou nas telas das TVs.</li></ul></article><article><h2>${angelIcon("tv")} APK TV</h2><ul><li>Instale no stick/TV e faça o cadastro inicial do local.</li><li>Mantenha atualizações automáticas ativadas.</li><li>O conteúdo baixa para o cache e continua tocando durante oscilações de internet.</li></ul></article></section><section class="help-faq"><h2>Dúvidas frequentes</h2><details open><summary>Qual é a diferença entre as duas áreas de empresa?</summary><p>Rede & CRM controla acesso e TVs da empresa da rede. Empresas controla o anunciante, suas mídias e cobrança.</p></details><details><summary>A playlist volta ao primeiro conteúdo?</summary><p>Sim. Programações contínuas repetem toda a sequência sem parar.</p></details><details><summary>A TV ficou offline. O que verificar?</summary><p>Confira internet, energia e se o APK TV está aberto. O painel registra a última conexão.</p></details><details><summary>Como interromper todas as TVs?</summary><p>Use Alerta Geral para publicar uma mídia emergencial em toda a rede, com prioridade imediata.</p></details><details><summary>Onde vejo a comprovação?</summary><p>Relatórios mostram TV, local, mídia, quantidade de exibições e segundos reproduzidos.</p></details></section></section>`;
     workspace
       .querySelector(".help-steps")
       .insertAdjacentHTML(
@@ -303,6 +326,8 @@ async function authenticatedView(root, client) {
       );
   }
   function show(i, context = {}) {
+    currentView = i;
+    const generation = ++viewGeneration;
     root
       .querySelectorAll("[data-nav]")
       .forEach((b, n) =>
@@ -323,6 +348,10 @@ async function authenticatedView(root, client) {
       "apps",
       "help",
     ][i];
+    if (scopeLoading && [0, 4, 9].includes(i)) {
+      workspace.innerHTML = '<section class="network-loading" data-scope-loading role="status"><span></span><b>Carregando a empresa e suas TVs…</b></section>';
+      return;
+    }
     if (i === 0) overview();
     if (i === 1)
       renderTvs(workspace, asList(data.devices, "devices"), client, {
@@ -338,18 +367,33 @@ async function authenticatedView(root, client) {
         () => refresh(i),
         { selectedMediaId: context.mediaId },
       );
-    if (i === 4)
+    if (i === 4) {
+      const scheduleOrganizationId = scheduleAllOrganizations ? '' : selectedOrganizationId;
+      const selectedOrganization = asList(data.organizations, "organizations").find((organization) => String(organization.id) === String(scheduleOrganizationId));
+      const scopedDevices = scheduleOrganizationId ? asList(data.organizationResources, "devices") : asList(data.devices, "devices");
+      const scopedDeviceIds = new Set(scopedDevices.map((device) => String(device.id)));
+      const scopedGroups = scheduleOrganizationId ? asList(data.groups, "groups").filter((group) => {
+        const groupDevices = asList(group.devices, "devices");
+        return groupDevices.length > 0 && groupDevices.every((device) => scopedDeviceIds.has(String(typeof device === 'string' ? device : device.id)));
+      }) : asList(data.groups, "groups");
       renderSchedule(
         workspace,
         {
           playlists: data.playlists,
-          devices: data.devices,
-          groups: data.groups,
+          devices: scopedDevices,
+          groups: scopedGroups,
           schedules: data.schedules,
         },
         client,
         () => refresh(i),
+        {
+          organizationId: scheduleOrganizationId,
+          organizationName: selectedOrganization?.name || '',
+          organizations: data.organizations,
+          onScopeChange: (organizationId) => changeOrganization(organizationId, true),
+        },
       );
+    }
     if (i === 5) renderDynamics(workspace, data.dynamics, asList(data.media, "media"), client, () => refresh(i));
     if (i === 6) renderLive(workspace, data.live);
     if (i === 7) renderReports(workspace, data.reports);
@@ -364,7 +408,13 @@ async function authenticatedView(root, client) {
         client,
         () => refresh(i),
       );
-    if (i === 9) void renderNetwork(workspace, client, undefined, selectedOrganizationId);
+    if (i === 9) void renderNetwork(workspace, client, async () => {
+      if (!scopeLoading) await reloadData();
+    }, selectedOrganizationId, {
+      allDevices: asList(data.devices, "devices"),
+      isCurrent: () => generation === viewGeneration,
+      onOrganizationChange: (organizationId) => changeOrganization(organizationId),
+    });
     if (i === 10)
       renderEmergency(
         workspace,

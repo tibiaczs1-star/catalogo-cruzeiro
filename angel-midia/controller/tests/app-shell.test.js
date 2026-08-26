@@ -15,6 +15,77 @@ it('carrega o retrato NOC da organização e injeta o escopo nos comandos',async
 it('personaliza o HUD, ativa modo noturno e deixa os quadros móveis',async()=>{const apiClient=vi.fn(async path=>path==='/auth/me'?{name:'Admin'}:[]);await createApp({root:document.querySelector('#app'),apiClient});const customize=document.querySelector('[data-hud-personalize]');expect(customize).not.toBeNull();expect(document.querySelectorAll('[data-hud-widget]')).toHaveLength(5);customize.click();expect(document.querySelector('.operations-dashboard').classList.contains('is-customizing')).toBe(true);expect([...document.querySelectorAll('[data-hud-widget]')].every(widget=>widget.draggable)).toBe(true);document.querySelector('[data-hud-theme="dark"]').click();expect(document.documentElement.dataset.theme).toBe('dark');expect(JSON.parse(localStorage.getItem('angel-hud-preferences')).theme).toBe('dark');document.querySelector('[data-hud-density="compact"]').click();expect(document.documentElement.dataset.density).toBe('compact');const companies=document.querySelector('[data-hud-widget="companies"]');document.querySelector('[data-hud-visibility="companies"]').click();expect(companies.hidden).toBe(true);expect(JSON.parse(localStorage.getItem('angel-hud-preferences')).hiddenWidgets).toContain('companies');document.querySelector('[data-hud-visibility="companies"]').click();expect(companies.hidden).toBe(false)});
 it('usa somente cores sólidas na interface administrativa',()=>{const files=['styles.css','responsive.css','tvs.css','library.css','library-modern.css','solid-minimal.css'];const css=files.map(file=>readFileSync(`${rootDir}/src/${file}`,'utf8')).join('\n');expect(css).not.toMatch(/(?:linear|radial|conic)-gradient/i);expect(readFileSync(`${rootDir}/index.html`,'utf8')).toContain('solid-minimal.css')});
 it('mantém a galeria legível sem cortar cards, ações ou artes',()=>{const css=readFileSync(`${rootDir}/src/library-modern.css`,'utf8');expect(css).toContain('grid-template-columns:repeat(auto-fill,minmax(min(100%,22rem),1fr))');expect(css).toContain('.media-card-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))');expect(css).toContain('.media-card-actions .primary{grid-column:1/-1');expect(css).toContain('white-space:normal');expect(css).toMatch(/\.media-preview--image img\{[^}]*height:auto[^}]*object-fit:contain/);expect(css).toMatch(/\.media-preview--video\{[^}]*aspect-ratio:16\/9/)});
-it('oferece central de ajuda dentro do Admin',async()=>{const apiClient=vi.fn(async path=>path==='/auth/me'?{name:'Admin'}:[]);await createApp({root:document.querySelector('#app'),apiClient});const help=[...document.querySelectorAll('[data-nav]')].find(button=>button.textContent.includes('Ajuda'));expect(help).toBeTruthy();help.click();expect(document.querySelector('[data-view=help]')).not.toBeNull();expect(document.body.textContent).toContain('Primeiros passos');expect(document.body.textContent).toContain('Dúvidas frequentes')});
+it('oferece central de ajuda dentro do Admin',async()=>{const apiClient=vi.fn(async path=>path==='/auth/me'?{name:'Admin'}:[]);await createApp({root:document.querySelector('#app'),apiClient});const help=[...document.querySelectorAll('[data-nav]')].find(button=>button.textContent.includes('Ajuda'));expect(help).toBeTruthy();help.click();expect(document.querySelector('[data-view=help]')).not.toBeNull();expect(document.body.textContent).toContain('Primeiros passos');expect(document.body.textContent).toContain('Dúvidas frequentes');expect(document.body.textContent).toContain('Empresa da rede');expect(document.body.textContent).toContain('Empresa anunciante');expect(document.body.textContent).toContain('confira o resumo')});
 it('abre a Rede Angel com CRM, equipe e hierarquia pelo menu principal',async()=>{const apiClient=vi.fn(async path=>path==='/auth/me'?{name:'Admin'}:path==='/admin/organizations'?{organizations:[]}:[]);await createApp({root:document.querySelector('#app'),apiClient});const network=[...document.querySelectorAll('[data-nav]')].find(button=>button.textContent.includes('Rede & CRM'));expect(network).toBeTruthy();network.click();await vi.waitFor(()=>expect(document.querySelector('[data-crm-board]')).not.toBeNull());expect(document.querySelector('.network-page[data-view=network]')).not.toBeNull();expect(document.body.textContent).toContain('Empresas da rede')});
+it('atualiza destinos após vincular TV e preserva a opção explícita de rede inteira', async () => {
+  let linked = false;
+  const free = { id: 'tv-free', name: 'TV Livre', status: 'active', organizationId: null };
+  const own = { id: 'tv-own', name: 'TV Empresa', status: 'active', organizationId: 'org-1' };
+  const other = { id: 'tv-other', name: 'TV Outra empresa', status: 'active', organizationId: 'org-2' };
+  const apiClient = vi.fn(async (path, options) => {
+    if (path === '/auth/me') return { name: 'Admin' };
+    if (path === '/admin/organizations') return { organizations: [{ id: 'org-1', name: 'Empresa A' }, { id: 'org-2', name: 'Empresa B' }] };
+    if (path === '/admin/devices') return { devices: [own, other, { ...free, organizationId: linked ? 'org-1' : null }] };
+    if (path === '/admin/organizations/org-1/resources') return { devices: linked ? [own, free] : [own] };
+    if (path === '/admin/organizations/org-1/devices/tv-free' && options?.method === 'PUT') { linked = true; return {}; }
+    if (path === '/admin/groups') return { groups: [{ id: 'own', name: 'Somente A', devices: [own] }, { id: 'mixed', name: 'Misto', devices: [own, other] }] };
+    return [];
+  });
+  await createApp({ root: document.querySelector('#app'), apiClient });
+  document.querySelector('[data-nav="9"]').click();
+  await vi.waitFor(() => expect(document.querySelector('[data-network-device-link]')).not.toBeNull());
+  const linkForm = document.querySelector('[data-network-device-link]');
+  linkForm.elements.deviceId.value = 'tv-free';
+  linkForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(document.querySelector('[data-network-device-link] [name=deviceId] option[value="tv-free"]')).toBeNull());
+  document.querySelector('[data-nav="4"]').click();
+  let targets = document.querySelector('[data-schedule] [name=target]');
+  expect(targets.querySelector('[value="device:tv-free"]')).not.toBeNull();
+  expect(targets.querySelector('[value="device:tv-other"]')).toBeNull();
+  expect(targets.querySelector('[value="group:mixed"]')).toBeNull();
+  expect(targets.querySelector('[value="group:own"]')).not.toBeNull();
+  const scope = document.querySelector('[data-schedule-scope]');
+  scope.value = '';
+  scope.dispatchEvent(new Event('change', { bubbles: true }));
+  await vi.waitFor(() => expect(document.querySelector('[data-schedule] [name=target] option[value=all]')).not.toBeNull());
+  expect(document.querySelector('[data-schedule] [name=target] option[value="device:tv-other"]')).not.toBeNull();
+});
+it.each([4, 9])('mantém empresa e TVs coerentes durante a troca pela tela %s, sem roubar a navegação', async (startView) => {
+  let release;
+  let hold = false;
+  const delayed = new Promise(resolve => { release = resolve; });
+  const organizations = [{ id: 'org-a', name: 'Empresa A' }, { id: 'org-b', name: 'Empresa B' }];
+  const own = { id: 'tv-a', name: 'TV Empresa A', status: 'active' };
+  const other = { id: 'tv-b', name: 'TV Empresa B', status: 'active' };
+  const apiClient = vi.fn(async path => {
+    if (path === '/auth/me') return { name: 'Admin' };
+    if (path === '/admin/organizations') { if (hold) await delayed; return { organizations }; }
+    if (path === '/admin/devices') return { devices: [own, other] };
+    if (path === '/admin/organizations/org-a/resources') return { devices: [own] };
+    if (path === '/admin/organizations/org-b/resources') return { devices: [other] };
+    return [];
+  });
+  await createApp({ root: document.querySelector('#app'), apiClient });
+  document.querySelector(`[data-nav="${startView}"]`).click();
+  await vi.waitFor(() => expect(document.querySelector(startView === 4 ? '[data-schedule-scope]' : '[data-network-org="org-b"]')).not.toBeNull());
+  hold = true;
+  if (startView === 4) {
+    const scope = document.querySelector('[data-schedule-scope]');
+    scope.value = 'org-b';
+    scope.dispatchEvent(new Event('change', { bubbles: true }));
+  } else document.querySelector('[data-network-org="org-b"]').click();
+  document.querySelector('[data-nav="2"]').click();
+  document.querySelector('[data-nav="4"]').click();
+  expect(document.querySelector('[data-scope-loading]')).not.toBeNull();
+  expect(document.querySelector('[data-schedule]')).toBeNull();
+  document.querySelector('[data-nav="2"]').click();
+  release();
+  await vi.waitFor(() => expect(apiClient).toHaveBeenCalledWith('/admin/organizations/org-b/resources'));
+  await new Promise(resolve => setTimeout(resolve, 0));
+  expect(document.querySelector('.workspace').dataset.view).toBe('library');
+  document.querySelector('[data-nav="4"]').click();
+  expect(document.querySelector('[data-schedule-scope]').value).toBe('org-b');
+  expect(document.querySelector('[name=target] option[value="device:tv-b"]')).not.toBeNull();
+  expect(document.querySelector('[name=target] option[value="device:tv-a"]')).toBeNull();
+});
 it('inclui o mapa real das TVs na visão inicial',()=>{const source=readFileSync(`${rootDir}/src/app.js`,'utf8')+readFileSync(`${rootDir}/src/overview.js`,'utf8');expect(source).toContain('Mapa da rede');expect(source).toContain('data-network-map');expect(source).toContain('renderDeviceMap');expect(source).toContain('LOCAL_DEMO_DEVICES')});

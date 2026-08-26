@@ -386,6 +386,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .help-section-title{font-size:1rem}
 .split{display:grid;grid-template-columns:minmax(280px,400px) 1fr;gap:1rem}
 .stack{display:grid;align-content:start;gap:1rem}
+.workflow-note{display:flex;align-items:center;flex-wrap:wrap;gap:1rem;padding:1rem;border:1px solid var(--angel-line);border-radius:.7rem;background:var(--angel-surface,var(--panel))}
+.workflow-note>div{flex:1 1 240px;min-width:0}
+.workflow-note p{margin:.35rem 0 0;color:var(--angel-muted);font-size:.8rem;line-height:1.55}
+.schedule-scope{display:grid;gap:.4rem;max-width:32rem;margin-bottom:1rem;font-weight:700}
+.schedule-scope select{width:100%;min-width:0;min-height:44px;border:1px solid var(--angel-line);border-radius:.6rem;padding:.8rem .9rem;background:#fff;color:var(--angel-ink)}
+.schedule-scope-note{margin-bottom:1rem}
+.schedule-review{display:grid;gap:.75rem;padding:1rem;border:1px solid var(--angel-line);border-radius:.7rem;background:var(--angel-bg,var(--bg))}
+.schedule-review[hidden]{display:none}
+.schedule-review h3,.schedule-review p{margin:0}
+.schedule-review-grid{display:grid;gap:.65rem;overflow-wrap:anywhere}
+.schedule-review-grid dt{font-size:.75rem}
+.schedule-review-grid dd{margin-top:.15rem;font-weight:700}
+.schedule-review-actions{display:flex;flex-wrap:wrap;gap:.5rem}
+@media(max-width:760px){.workspace[data-view="schedule"] .split{grid-template-columns:minmax(0,1fr)}.help-steps,.help-docs{grid-template-columns:minmax(0,1fr)}}
 .upload-card,.list-card,.media-card,.live-card,.chart-card,.emergency-form,.emergency-live{padding:1rem}
 .media-grid,.live-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem}
 .empty,.empty-state{padding:2rem;border:1px dashed var(--angel-line);border-radius:.7rem;text-align:center;color:var(--angel-muted)}

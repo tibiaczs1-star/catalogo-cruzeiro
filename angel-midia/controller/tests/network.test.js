@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { renderNetwork } from '../src/network.js';
 
 const ORG_ID = '11111111-1111-4111-8111-111111111111';
+const TV_ID = '33333333-3333-4333-8333-333333333333';
 
 function responseFor(path) {
   if (path === '/admin/organizations') return { organizations: [{ id: ORG_ID, name: 'Rede Angel', kind: 'matrix', status: 'active', memberCount: 4, deviceCount: 3, locationCount: 3 }] };
@@ -67,6 +68,22 @@ it('registra oportunidade comercial no CRM da organização ativa', async () => 
   form.querySelector('[name="value"]').value = '1250';
   form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   await vi.waitFor(() => expect(api).toHaveBeenCalledWith('/admin/network/opportunities', expect.objectContaining({ method: 'POST', body: expect.objectContaining({ organizationId: ORG_ID, title: 'Campanha Supermercado', valueCents: 125000, stage: 'lead' }) })));
+});
+
+it('explica o tipo de empresa e vincula uma TV disponível à empresa da rede', async () => {
+  const api = vi.fn(async (path, options) => options?.method === 'PUT' ? { device: options.body } : responseFor(path));
+  await renderNetwork(document.querySelector('#root'), api, undefined, ORG_ID, {
+    allDevices: [{ id: TV_ID, name: 'TV Livre', status: 'active', organizationId: null, locationId: null }],
+  });
+  expect(document.body.textContent).toContain('Empresa da rede');
+  expect(document.body.textContent).toContain('Empresa em Empresas');
+  const form = document.querySelector('[data-network-device-link]');
+  expect(form).not.toBeNull();
+  form.elements.deviceId.value = TV_ID;
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await vi.waitFor(() => expect(api).toHaveBeenCalledWith(`/admin/organizations/${ORG_ID}/devices/${TV_ID}`, {
+    method: 'PUT', body: { locationId: null },
+  }));
 });
 
 it('mantém o módulo com cores sólidas e responsivo', () => {

@@ -516,6 +516,11 @@ it('programa uma playlist contínua por padrão sem enviar datas', async () => {
   root.querySelector('[name=playlistId]').value = 'p1';
   root.querySelector('[name=target]').value = 'group:g1';
   form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  expect(apiClient).not.toHaveBeenCalled();
+  expect(form.querySelector('[data-schedule-review]').hidden).toBe(false);
+  expect(form.querySelector('[data-schedule-review]').textContent).toContain('Principal');
+  expect(form.querySelector('[data-schedule-review]').textContent).toContain('Lojas Centro');
+  form.querySelector('[data-confirm-schedule]').click();
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
   expect(apiClient.mock.calls[0][1].body).toEqual({
     playlistId: 'p1', target: { type: 'group', id: 'g1' }, mode: 'continuous', priority: 'normal',
@@ -536,6 +541,8 @@ it('mostra a janela agendada e envia as datas em ISO', async () => {
   form.elements.startsAt.value = '2026-08-20T10:00';
   form.elements.endsAt.value = '2026-08-21T10:00';
   form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  expect(apiClient).not.toHaveBeenCalled();
+  form.querySelector('[data-confirm-schedule]').click();
   await vi.waitFor(() => expect(apiClient).toHaveBeenCalled());
   expect(apiClient.mock.calls[0][1].body).toMatchObject({
     mode: 'scheduled',
@@ -563,6 +570,59 @@ it.each([
   await Promise.resolve();
   expect(apiClient).not.toHaveBeenCalled();
   expect(form.querySelector('[role=status]').textContent).toBe(message);
+});
+
+it('protege a programação da empresa selecionada e exige um destino vinculado', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderSchedule(root, {
+    playlists: [{ id: 'p1', name: 'Principal' }],
+    devices: [{ id: 'tv-1', name: 'TV Mercado Juruá', status: 'active' }],
+    groups: [{ id: 'g1', name: 'Mercado Juruá', devices: [{ id: 'tv-1' }] }],
+    schedules: [],
+  }, apiClient, vi.fn(), { organizationId: 'org-1', organizationName: 'Rede Mercado Juruá' });
+  const form = root.querySelector('[data-schedule]');
+  expect(form.querySelector('[name=target] option[value="all"]')).toBeNull();
+  expect(document.body.textContent).toContain('Rede Mercado Juruá');
+  form.elements.playlistId.value = 'p1';
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  await Promise.resolve();
+  expect(apiClient).not.toHaveBeenCalled();
+  expect(form.querySelector('[role=status]').textContent).toContain('Escolha uma TV ou conjunto');
+});
+
+it('invalida a revisão ao ajustar campos e permite cancelar sem publicar', () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderSchedule(root, { playlists: [{ id: 'p1', name: 'Principal' }] }, apiClient, vi.fn());
+  const form = root.querySelector('[data-schedule]');
+  form.elements.playlistId.value = 'p1';
+  const review = () => form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  review();
+  form.elements.priority.value = 'alta';
+  form.elements.priority.dispatchEvent(new Event('change', { bubbles: true }));
+  expect(form.querySelector('[data-schedule-review]').hidden).toBe(true);
+  form.querySelector('[data-confirm-schedule]').click();
+  expect(apiClient).not.toHaveBeenCalled();
+  review();
+  form.querySelector('[data-cancel-review]').click();
+  form.querySelector('[data-confirm-schedule]').click();
+  expect(apiClient).not.toHaveBeenCalled();
+});
+
+it('não reenvia a ativação concluída quando a atualização da tela falha', async () => {
+  const apiClient = vi.fn(async () => ({}));
+  const root = document.querySelector('#app');
+  renderSchedule(root, { playlists: [{ id: 'p1', name: 'Principal' }] }, apiClient, vi.fn().mockRejectedValue(new Error('offline')));
+  const form = root.querySelector('[data-schedule]');
+  form.elements.playlistId.value = 'p1';
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  const confirm = form.querySelector('[data-confirm-schedule]');
+  confirm.click();
+  await vi.waitFor(() => expect(form.querySelector('[role=status]').textContent).toContain('ativada'));
+  confirm.click();
+  expect(apiClient).toHaveBeenCalledTimes(1);
+  expect(form.querySelector('[data-schedule-review]').hidden).toBe(true);
 });
 
 it('reutiliza os modos contínuo e agendado no formulário de campanha', () => {

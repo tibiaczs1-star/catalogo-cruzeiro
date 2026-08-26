@@ -76,6 +76,8 @@ function publicDevice(device, now) {
   return {
     id: device.id,
     name: device.name,
+    organizationId: device.organization_id ?? null,
+    locationId: device.location_id ?? null,
     address: device.address ?? device.location_label ?? null,
     latitude: device.latitude == null ? null : Number(device.latitude),
     longitude: device.longitude == null ? null : Number(device.longitude),
@@ -185,7 +187,7 @@ export default async function deviceRoutes(app, options) {
 
   app.get('/api/admin/devices', { preHandler: requireAdmin }, async (_request, reply) => {
     const { rows } = await app.db.query(
-      `select d.id, d.name, d.status, d.link_code, d.app_version, d.free_storage_bytes,
+      `select d.id, d.name, d.organization_id, d.location_id, d.status, d.link_code, d.app_version, d.free_storage_bytes,
               d.last_seen_at, l.address, l.label as location_label, l.latitude, l.longitude, gd.group_id
          from devices d left join locations l on l.id = d.location_id
          left join group_devices gd on gd.device_id = d.id
