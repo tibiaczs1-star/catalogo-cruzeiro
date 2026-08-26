@@ -12,8 +12,11 @@ const ADMIN_SESSION_COOKIE = "arizona_ranch_admin";
 const ADMIN_SESSION_MAX_AGE_SECONDS = 12 * 60 * 60;
 const PIX_KEY_DEFAULT = "5568992056283";
 const WHATSAPP_DEFAULT = "556892260598";
-const STATIC_OCCUPIED_TABLES = new Set([9, 22, 28, 29, 30, 31, 33, 39, 40, 41, 42, 45, 50, 52, 57, 65, 67]);
-const PRE_SOLD_TABLES = new Set([5]);
+const STATIC_OCCUPIED_TABLES = new Set([
+  6, 7, 8, 9, 10, 11, 18, 19, 20, 22, 28, 29, 30, 31, 33,
+  35, 39, 40, 41, 42, 43, 44, 49, 50, 51, 52, 57, 64, 65, 67,
+]);
+const PRE_SOLD_TABLES = new Set();
 
 function formatCurrency(amountCents) {
   return new Intl.NumberFormat("pt-BR", {

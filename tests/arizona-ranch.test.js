@@ -73,7 +73,10 @@ test("gera Pix copia e cola para a chave direta", () => {
 
 test("não libera mesa já ocupada nem duplica reserva pendente", () => {
   const store = createReservationStore({ now: () => new Date("2026-07-31T12:00:00.000Z") });
-  assert.equal(STATIC_OCCUPIED_TABLES.has(22), true);
+  const soldTables = [6, 7, 8, 9, 10, 11, 18, 19, 20, 22, 28, 29, 30, 31, 33, 35, 39, 40, 41, 42, 43, 44, 49, 50, 51, 52, 57, 64, 65, 67];
+  assert.deepEqual([...STATIC_OCCUPIED_TABLES].sort((a, b) => a - b), soldTables);
+  assert.equal(STATIC_OCCUPIED_TABLES.has(5), false);
+  assert.equal(STATIC_OCCUPIED_TABLES.has(45), false);
   assert.throws(() => store.create({ tableNumber: 22, seats: 2, user: { sub: "u1", email: "a@teste.com" } }), /indisponível/i);
 
   const { reservation, accessToken } = store.create({ tableNumber: 12, seats: 4 });

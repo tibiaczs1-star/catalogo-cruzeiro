@@ -274,11 +274,13 @@ test("a experiência termina no mapa e a landing aparece somente depois do compr
   const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
   const reserve = app.match(/async function reserveSelectedTable\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   const upload = app.match(/async function uploadReceipt\(file\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  const finish = app.match(/async function finishAfterWhatsAppProof\(event\) \{([\s\S]*?)\n  \}/)?.[1] || "";
 
   assert.match(episodes, /function completePurchase\(\)/);
   assert.match(episodes, /classList\.add\(["']is-landing["']\)/);
   assert.doesNotMatch(reserve, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
-  assert.match(upload, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
+  assert.doesNotMatch(upload, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
+  assert.match(finish, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
   assert.match(css, /body:not\(\.is-purchase\):not\(\.is-landing\) \.site-shell\s*\{[^}]*display:\s*none/s);
   assert.match(css, /body\.is-landing \.site-shell\s*\{[^}]*display:\s*flex/s);
 });
@@ -379,6 +381,49 @@ test("a landing pós-comprovante separa imagens criadas e fotos originais e ofer
   assert.match(html, /pagamento protegido|comprovante/i);
   assert.match(html, /wa\.me\//i);
   assert.match(html, /class=["'][^"']*whatsapp-float/i);
+});
+
+test("o envio do comprovante abre o WhatsApp em outra aba e conclui na landing geral", () => {
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+
+  assert.match(html, /class=["'][^"']*receipt-upload-button[^"']*["'][^>]*>Anexar comprovante/i);
+  assert.match(html, /class=["'][^"']*receipt-whatsapp-button[^"']*["'][^>]*id=["']whatsapp-proof["'][^>]*target=["']_blank["'][^>]*rel=["'][^"']*noopener[^"']*["']/i);
+  assert.match(css, /\.receipt-box \.receipt-upload-button\s*\{[^}]*#d92d20[^}]*#97140d/is);
+  assert.match(css, /\.receipt-box \.receipt-whatsapp-button\s*\{[^}]*#ffd76a[^}]*#e4a724/is);
+  assert.match(app, /async function finishAfterWhatsAppProof\(event\)/);
+  assert.match(app, /querySelector\(["']#whatsapp-proof["']\)\?\.addEventListener\(["']click["'],\s*finishAfterWhatsAppProof\)/);
+
+  const finishFlow = app.match(/async function finishAfterWhatsAppProof\(event\)\s*\{([\s\S]*?)\n\s*function showToast/)?.[1] || "";
+  assert.match(finishFlow, /event\?\.preventDefault\?\.\(\)/);
+  assert.match(finishFlow, /window\.open\(["']about:blank["'],\s*["']_blank["']/);
+  assert.match(finishFlow, /request\(["']\/reservations["']/);
+  assert.match(finishFlow, /paymentDialog\?\.close\(\)/);
+  assert.match(finishFlow, /ArizonaEpisodes\?\.completePurchase\?\.\(\)/);
+});
+
+test("a mesa só é bloqueada quando o cliente envia o comprovante pelo WhatsApp", () => {
+  const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+  const reserve = app.match(/async function reserveSelectedTable\(\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  const upload = app.match(/async function uploadReceipt\(file\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  const finish = app.match(/async function finishAfterWhatsAppProof\(event\) \{([\s\S]*?)\n\s*function showToast/)?.[1] || "";
+
+  assert.doesNotMatch(reserve, /request\(["']\/reservations["']/);
+  assert.doesNotMatch(upload, /request\(["']\/reservations/);
+  assert.match(upload, /state\.pendingReceiptFile\s*=\s*file/);
+  assert.match(finish, /request\(["']\/reservations["']/);
+  assert.match(finish, /state\.pendingReceiptFile/);
+});
+
+test("o mapa oficial atualizado aparece como referência acima do seletor interativo", () => {
+  const html = readProjectFile("pagamentos", "reservaranch", "index.html");
+  const mapPath = path.join(projectRoot, "pagamentos", "reservaranch", "assets", "mapa-show-oficial-atualizado.jpg");
+
+  assert.match(html, /mapa-show-oficial-atualizado\.jpg/);
+  assert.match(html, /mesas com X est[aã]o vendidas/i);
+  assert.ok(fs.existsSync(mapPath));
+  assert.ok(fs.statSync(mapPath).size > 50_000);
 });
 
 test("o painel usa sessão própria de administrador sem login Google", () => {

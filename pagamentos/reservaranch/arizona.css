@@ -189,6 +189,15 @@ body.is-opening { overflow: hidden; }
 .pix-code-text { margin: 0; color: var(--paper); font: 600 clamp(.78rem, 1.45vw, .9rem)/1.35 "DM Mono", monospace; overflow-wrap: anywhere; word-break: break-all; user-select: all; }
 .receipt-actions { align-items: center; }
 .receipt-box .file-button { box-shadow: 0 8px 24px rgba(45,138,94,.22); }
+.receipt-box .receipt-upload-button { color: #fff7ef; border-color: #ff6b5e; background: linear-gradient(135deg, #d92d20, #97140d); box-shadow: 0 10px 26px rgba(210,41,30,.32); transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; }
+.receipt-box .receipt-whatsapp-button { color: #241500; border-color: #f5c453; background: linear-gradient(135deg, #ffd76a, #e4a724); box-shadow: 0 10px 26px rgba(228,167,36,.28); transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; }
+.receipt-box .receipt-upload-button:hover, .receipt-box .receipt-whatsapp-button:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.receipt-box .receipt-upload-button:focus-visible, .receipt-box .receipt-whatsapp-button:focus-visible { outline: 3px solid rgba(255,255,255,.92); outline-offset: 3px; }
+.receipt-box .receipt-whatsapp-button[aria-disabled="true"] { pointer-events: none; cursor: wait; opacity: .72; transform: none; filter: saturate(.65); }
+.official-map-figure { margin: 24px 0 0; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #050505; box-shadow: 0 22px 56px rgba(0,0,0,.35); }
+.official-map-figure img { display: block; width: 100%; height: auto; max-height: 72svh; object-fit: contain; }
+.official-map-figure figcaption { padding: 10px 14px; color: var(--muted); font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; text-align: center; background: rgba(255,255,255,.035); }
+.interactive-map-title { margin: 30px 0 12px; color: var(--paper); font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.35rem); text-align: center; }
 .copy-icon-btn { flex: 0 0 auto; width: 40px; height: 40px; display: grid; place-items: center; color: var(--muted); border: 1px solid rgba(255,255,255,.22); border-radius: 10px; background: transparent; transition: color .15s, border-color .15s; }
 .copy-icon-btn:hover, .copy-icon-btn:active { color: var(--gold-pale); border-color: var(--gold); }
 .pix-info-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 14px; color: var(--muted); border: 0; border-top: 1px solid rgba(255,255,255,.1); background: transparent; font: inherit; cursor: pointer; text-align: left; transition: color .15s; }
