@@ -192,11 +192,13 @@
       player.hidden = false;
       window.requestAnimationFrame(() => player.classList.add("is-visible"));
     }
+    window.ArizonaSoundscapeInstance?.startChapterMusic?.();
     activate(0);
   }
 
   function finish() {
     clearSequence();
+    window.ArizonaSoundscapeInstance?.stopChapterMusic?.();
     const { player } = elements();
     player?.classList.add("is-leaving");
     window.setTimeout(() => {

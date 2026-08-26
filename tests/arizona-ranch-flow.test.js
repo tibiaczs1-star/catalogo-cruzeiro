@@ -321,6 +321,21 @@ test("o ambiente usa somente gravações locais e nunca sintetiza efeitos", () =
   });
 });
 
+test("a trilha licenciada fica baixa e toca somente durante os capítulos", () => {
+  const soundscape = readProjectFile("pagamentos", "reservaranch", "soundscape.js");
+  const episodes = readProjectFile("pagamentos", "reservaranch", "episodes.js");
+  const sources = readProjectFile("pagamentos", "reservaranch", "assets", "sfx", "SOURCES.md");
+
+  assert.match(soundscape, /const CHAPTER_MUSIC_VOLUME = 0\.032/);
+  assert.match(soundscape, /const NARRATION_MUSIC_VOLUME = 0\.01/);
+  assert.match(soundscape, /musicBed\.volume = 0/);
+  assert.match(soundscape, /function startChapterMusic\(\)/);
+  assert.match(soundscape, /function stopChapterMusic\(\)/);
+  assert.match(episodes, /function begin\(\)[\s\S]*?startChapterMusic\?\.\(\)[\s\S]*?activate\(0\)/);
+  assert.match(episodes, /function finish\(\)[\s\S]*?stopChapterMusic\?\.\(\)/);
+  assert.match(sources, /Long Trail/);
+});
+
 test("restaura os dois QR Pix antigos autênticos e mantém o servidor como contingência", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");

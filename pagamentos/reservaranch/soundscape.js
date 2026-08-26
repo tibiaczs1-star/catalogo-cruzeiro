@@ -39,6 +39,9 @@
     saloon: 0.07,
     coin: 0.1,
   };
+  const CHAPTER_MUSIC_VOLUME = 0.032;
+  const NARRATION_MUSIC_VOLUME = 0.01;
+  const MUSIC_FADE_MS = 1800;
 
   function pickNonRepeating(items, last, random = Math.random) {
     const choices = items.filter((item) => item !== last);
@@ -52,6 +55,8 @@
     let introPlayed = false;
     let activeCue = null;
     let activeNarration = null;
+    let musicFadeTimer = null;
+    let chapterMusicActive = false;
     const narrationsPlayed = new Set();
     const sceneSoundsPlayed = new Set();
     const wind = typeof Audio !== "undefined" ? new Audio(SOURCES.wind) : null;
@@ -70,8 +75,42 @@
     }
     if (musicBed) {
       musicBed.loop = true;
-      musicBed.volume = 0.026;
+      musicBed.volume = 0;
       musicBed.preload = "auto";
+    }
+
+    function fadeMusic(targetVolume, duration = MUSIC_FADE_MS, pauseAfter = false) {
+      if (!musicBed) return;
+      window.clearInterval(musicFadeTimer);
+      const initialVolume = musicBed.volume;
+      const startedAt = Date.now();
+      musicFadeTimer = window.setInterval(() => {
+        const progress = Math.min(1, (Date.now() - startedAt) / duration);
+        musicBed.volume = initialVolume + (targetVolume - initialVolume) * progress;
+        if (progress < 1) return;
+        window.clearInterval(musicFadeTimer);
+        musicFadeTimer = null;
+        if (pauseAfter) {
+          musicBed.pause();
+          musicBed.currentTime = 0;
+        }
+      }, 50);
+    }
+
+    function startChapterMusic() {
+      if (!started || !musicBed || chapterMusicActive) return;
+      chapterMusicActive = true;
+      musicBed.currentTime = 0;
+      musicBed.play()
+        .then(() => fadeMusic(CHAPTER_MUSIC_VOLUME))
+        .catch(() => {
+          chapterMusicActive = false;
+        });
+    }
+
+    function stopChapterMusic() {
+      chapterMusicActive = false;
+      fadeMusic(0, 1200, true);
     }
 
     function play(category, { exclusive = false } = {}) {
@@ -119,12 +158,12 @@
       narration.volume = 0.86;
       if (wind) wind.volume = 0.018;
       if (ambientBed) ambientBed.volume = 0.007;
-      if (musicBed) musicBed.volume = 0.012;
+      if (chapterMusicActive) fadeMusic(NARRATION_MUSIC_VOLUME, 300);
       const restore = () => {
         if (activeNarration === narration) activeNarration = null;
         if (wind) wind.volume = VOLUMES.wind;
         if (ambientBed) ambientBed.volume = 0.014;
-        if (musicBed) musicBed.volume = 0.026;
+        if (chapterMusicActive) fadeMusic(CHAPTER_MUSIC_VOLUME, 700);
       };
       narration.addEventListener("ended", restore, { once: true });
       narration.addEventListener("error", restore, { once: true });
@@ -154,8 +193,13 @@
       },
       playScene,
       playSceneNarration,
+      startChapterMusic,
+      stopChapterMusic,
       stop() {
         window.clearTimeout(timer);
+        window.clearInterval(musicFadeTimer);
+        musicFadeTimer = null;
+        chapterMusicActive = false;
         activeCue?.pause();
         activeNarration?.pause();
         activeCue = null;
@@ -171,6 +215,7 @@
         if (musicBed) {
           musicBed.pause();
           musicBed.currentTime = 0;
+          musicBed.volume = 0;
         }
         started = false;
       },
