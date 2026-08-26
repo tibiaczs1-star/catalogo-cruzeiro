@@ -356,9 +356,9 @@ body.is-finale{overflow:hidden}
 .finale-atmosphere i:nth-child(1){left:58%;animation:finale-light 5.4s ease-in-out infinite alternate}
 .finale-atmosphere i:nth-child(2){left:74%;animation:finale-light 6.8s 1.2s ease-in-out infinite alternate}
 .finale-atmosphere i:nth-child(3){left:88%;animation:finale-light 4.9s .6s ease-in-out infinite alternate}
-.finale-artist{position:absolute;z-index:2;inset:3vh 1.5vw -5vh auto;display:flex;width:min(45vw,680px);align-items:flex-end;justify-content:center;pointer-events:none;opacity:0;transform:translate3d(8%,5%,90px) scale(.9);filter:drop-shadow(-28px 24px 34px rgba(0,0,0,.72));transition:opacity 1.8s .42s ease,transform 3.2s .32s cubic-bezier(.16,.78,.16,1)}
+.finale-artist{position:absolute;z-index:2;inset:15vh clamp(42px,7vw,118px) 7vh auto;display:flex;width:min(24vw,340px);align-items:flex-end;justify-content:center;pointer-events:none;opacity:0;transform:translate3d(10%,5%,90px) scale(.9);filter:drop-shadow(-20px 18px 26px rgba(0,0,0,.68));transition:opacity 1.8s .42s ease,transform 3.2s .32s cubic-bezier(.16,.78,.16,1)}
 .finale-artist::after{content:"";position:absolute;right:8%;bottom:1%;left:8%;height:16%;background:radial-gradient(ellipse,rgba(0,0,0,.82),transparent 68%);filter:blur(14px);transform:translateY(28%);z-index:-1}
-.finale-artist img{display:block;width:auto;max-width:100%;height:auto;max-height:102vh;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 0 90%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0 90%,transparent 100%)}
+.finale-artist img{display:block;width:auto;max-width:100%;height:auto;max-height:60vh;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 0 90%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0 90%,transparent 100%)}
 .reservation-finale.is-visible .finale-artist{opacity:1;transform:translate3d(0,0,90px) scale(1)}
 .finale-content{position:relative;z-index:4;width:min(720px,54vw);transform:translate3d(-56px,32px,50px);opacity:0;transition:opacity 1.35s .55s ease,transform 2.4s .48s cubic-bezier(.16,.84,.18,1)}
 .reservation-finale.is-visible .finale-content{opacity:1;transform:none}
@@ -384,9 +384,9 @@ body.is-finale{overflow:hidden}
   .reservation-finale{padding:94px 22px calc(28px + env(safe-area-inset-bottom));background:#080403}
   .reservation-finale::before{inset:-2%;background-image:url("/pagamentos/reservaranch/assets/cinematic-v2/stage-mobile.png");background-position:center top}
   .reservation-finale::after{background:linear-gradient(0deg,rgba(5,2,1,.98) 0%,rgba(5,2,1,.78) 46%,rgba(5,2,1,.18) 78%),linear-gradient(90deg,rgba(5,2,1,.38),transparent 70%)}
-  .finale-artist{inset:1vh 50% auto auto;width:min(88vw,520px);height:64vh;align-items:flex-start;transform:translate3d(50%,5%,70px) scale(.88);filter:drop-shadow(0 22px 28px rgba(0,0,0,.78))}
-  .finale-artist img{max-height:68vh;-webkit-mask-image:linear-gradient(to bottom,#000 0 76%,transparent 98%);mask-image:linear-gradient(to bottom,#000 0 76%,transparent 98%)}
-  .reservation-finale.is-visible .finale-artist{transform:translate3d(50%,0,70px) scale(1)}
+  .finale-artist{inset:3vh 7vw auto auto;width:min(44vw,220px);height:34vh;align-items:flex-start;transform:translate3d(8%,5%,70px) scale(.88);filter:drop-shadow(0 16px 22px rgba(0,0,0,.7))}
+  .finale-artist img{max-height:34vh;-webkit-mask-image:linear-gradient(to bottom,#000 0 76%,transparent 98%);mask-image:linear-gradient(to bottom,#000 0 76%,transparent 98%)}
+  .reservation-finale.is-visible .finale-artist{transform:translate3d(0,0,70px) scale(1)}
   .finale-content{width:100%;transform:translate3d(0,40px,50px)}
   .finale-content h2{font-size:clamp(56px,18vw,92px);line-height:.86}
   .finale-description{font-size:16px;line-height:1.4}

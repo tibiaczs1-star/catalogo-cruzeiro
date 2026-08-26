@@ -226,6 +226,7 @@ test("desktop e mobile recebem composições de imagem separadas", () => {
 test("a mesa escolhida abre o capítulo final com Luzienne antes do pagamento", () => {
   const html = readProjectFile("pagamentos", "reservaranch", "index.html");
   const app = readProjectFile("pagamentos", "reservaranch", "app.js");
+  const css = readProjectFile("pagamentos", "reservaranch", "arizona.css");
   const finale = html.match(/<section[^>]*data-reservation-finale[^>]*>[\s\S]*?<\/section>/i)?.[0] || "";
 
   assert.match(finale, /Luzienne Lucena/i);
@@ -238,6 +239,10 @@ test("a mesa escolhida abre o capítulo final com Luzienne antes do pagamento", 
   assert.match(app, /playScene\?\.\("finale"\)/);
   assert.match(app, /tableNext\.addEventListener\(["']click["'],\s*openReservationFinale\)/);
   assert.match(app, /showFlowStep\(["']payment["']\)/);
+  assert.match(css, /\.finale-artist\{[^}]*width:min\(24vw,340px\)/s);
+  assert.match(css, /\.finale-artist img\{[^}]*max-height:60vh/s);
+  assert.match(css, /@media \(max-width: 900px\), \(orientation: portrait\)[\s\S]*?\.finale-artist\{[^}]*width:min\(44vw,220px\)/s);
+  assert.match(css, /@media \(max-width: 900px\), \(orientation: portrait\)[\s\S]*?\.finale-artist img\{[^}]*max-height:34vh/s);
 });
 
 test("a narradora abre a experiência e os capítulos só começam quando a abertura termina", () => {
