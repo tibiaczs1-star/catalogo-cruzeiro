@@ -4,8 +4,9 @@
   const CONTRACT_WHATSAPP_NUMBER = "556892260598";
   const OPENING_PRESENTATION_MAX_MS = 16500;
   const OPENING_MUSIC_READY_TIMEOUT_MS = 4200;
-  const OPENING_VOICE_TEXT = "Bem-vindo à reserva de mesas do Arizona Ranch. Dia cinco de setembro, a porteira se abre para a inauguração oficial, com a voz de Luzienne Lucena. Escolha sua mesa, faça seu Pix e envie o comprovante. Arizona Ranch: sua noite começa aqui.";
+  const OPENING_VOICE_TEXT = "Bem-vindo ao Arizona Ranch. No dia cinco de setembro, a porteira se abre para a inauguração oficial. Entre nesta experiência e descubra o lugar onde a sua noite vai acontecer.";
   let soundscape = null;
+  let openingJourneyStarted = false;
   const PIX_PAYMENT_OPTIONS = {
     10000: {
       amountLabel: "R$ 100,00",
@@ -32,6 +33,7 @@
     account: document.querySelector("#google-login"), accountDescription: document.querySelector("#account-description"), accountTitle: document.querySelector("#account-title"),
     loginNext: document.querySelector("#login-next"), mapDialog: document.querySelector("#map-dialog"),
     overviewMap: document.querySelector("#full-map"), paymentDialog: document.querySelector("#payment-dialog"), paymentInfo: document.querySelector("#payment-summary"), paymentQr: document.querySelector("#pix-qr"), pixAmountValue: document.querySelector("#pix-amount-value"), pixCodeDisplay: document.querySelector("#pix-code-display"), pixKeyDisplay: document.querySelector("#pix-key-display"), pixInfoToggle: document.querySelector("#pix-info-toggle"), pixInfoBody: document.querySelector("#pix-info-body"), pixShareBtn: document.querySelector("#pix-share-btn"), reservationPanel: document.querySelector("#reservation-panel"),
+    reservationFinale: document.querySelector("#reservation-finale"), finaleTable: document.querySelector("#finale-table"), finaleContinue: document.querySelector("[data-continue-payment]"), finaleBack: document.querySelector("[data-back-to-map]"),
     sectorCaption: document.querySelector("#sector-caption"), sectorNav: document.querySelector("#sector-nav"), selectionDescription: document.querySelector("#selection-description"), selectionTitle: document.querySelector("#selection-title"), tableGrid: document.querySelector("#table-grid"), tableNext: document.querySelector("#table-next"), toast: document.querySelector("#toast")
   };
 
@@ -192,7 +194,7 @@
     const user = state.config?.user;
     if (!state.selectedTable || !user?.signedIn || !user.name || !user.email) { showToast("Escolha uma mesa e conecte com Google antes de gerar o Pix.", "error"); return; }
     const button = document.querySelector("#payment-pix"); button.disabled = true; button.querySelector("strong").textContent = "Gerando Pix…";
-    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, amountCents: selectedAmountCents(), customer: { name: user.name, email: user.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
+    try { const payload = await request("/reservations", { method: "POST", body: JSON.stringify({ tableNumber: state.selectedTable, seats: state.selectedSeats, amountCents: selectedAmountCents(), customer: { name: user.name, email: user.email } }) }); state.reservation = { ...payload.reservation, payment: payload.payment }; renderReservation(); await loadTables(); openPayment(state.reservation); window.ArizonaEpisodes?.completePurchase?.(); showToast("Pedido criado. Pague o Pix e envie o comprovante.", "success"); }
     catch (error) { showToast(error.message, "error"); await loadTables().catch(() => undefined); }
     finally { button.disabled = false; button.querySelector("strong").textContent = "Gerar QR Code Pix"; }
   }
@@ -225,10 +227,14 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     await copyPixText(shareText); showToast("Conteúdo copiado para compartilhar.", "success"); }
   function setupOpening() {
     const openingButton = document.querySelector("#start-experience");
-    const openingVideo = document.querySelector("#opening-video");
+    const openingVideos = Array.from(document.querySelectorAll("[data-opening-video]"));
     const openingVoice = document.querySelector("#opening-voice");
     if (openingButton) { openingButton.disabled = false; openingButton.textContent = "Entrar no Arizona"; }
-    if (openingVideo) { openingVideo.muted = true; openingVideo.volume = 0; openingVideo.load(); }
+    openingVideos.forEach((openingVideo) => {
+      openingVideo.muted = true;
+      openingVideo.volume = 0;
+      openingVideo.load();
+    });
     if (openingVoice) openingVoice.load();
   }
   function setupGallery() {
@@ -309,27 +315,70 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
     window.addEventListener("scroll", () => { if (!ticking) { ticking = true; window.requestAnimationFrame(render); } }, { passive: true });
     render();
   }
+
+  function closeReservationFinale() {
+    if (!elements.reservationFinale) return;
+    elements.reservationFinale.classList.remove("is-visible");
+    elements.reservationFinale.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("is-finale");
+    window.setTimeout(() => { elements.reservationFinale.hidden = true; }, 520);
+  }
+
+  function openReservationFinale() {
+    if (!state.selectedTable) {
+      showToast("Escolha uma mesa livre para continuar.", "error");
+      return;
+    }
+    if (elements.finaleTable) {
+      elements.finaleTable.textContent = `Mesa ${tableLabel(state.selectedTable)} · ${state.selectedSeats} lugares · ${formatCurrency(selectedAmountCents())}`;
+    }
+    elements.reservationFinale.hidden = false;
+    elements.reservationFinale.setAttribute("aria-hidden", "false");
+    document.body.classList.add("is-finale");
+    window.requestAnimationFrame(() => elements.reservationFinale.classList.add("is-visible"));
+    window.ArizonaSoundscapeInstance?.playScene?.("finale");
+    window.ArizonaSoundscapeInstance?.playSceneNarration?.("finale", "/pagamentos/reservaranch/assets/voice/scene-finale.mp3");
+  }
+
+  function continueFromFinale() {
+    closeReservationFinale();
+    showFlowStep(state.config?.user?.signedIn ? "payment" : "login");
+  }
+
   async function startExperience() {
+    if (openingJourneyStarted) return;
+    openingJourneyStarted = true;
     const openingButton = document.querySelector("#start-experience");
-    const openingVideo = document.querySelector("#opening-video");
+    const openingVideos = Array.from(document.querySelectorAll("[data-opening-video]"));
+    const openingVideo = openingVideos.find((video) => window.getComputedStyle(video).display !== "none") || openingVideos[0];
     const openingVoice = document.querySelector("#opening-voice");
     const openingScreen = document.getElementById("opening-screen");
     openingScreen?.classList.add("is-live");
     document.body.classList.remove("is-opening");
     if (openingButton) openingButton.disabled = true;
+    openingVideos.forEach((video) => {
+      video.muted = true;
+      video.volume = 0;
+      if (video !== openingVideo) video.pause();
+    });
     if (openingVideo) {
-      openingVideo.muted = false;
-      openingVideo.volume = .52;
+      // O MP4 possui uma narração própria. Mantê-lo mudo evita sobrepor
+      // essa voz à narradora oficial reproduzida pelo soundscape.
+      openingVideo.muted = true;
+      openingVideo.volume = 0;
       const videoPlay = openingVideo.play();
       await Promise.race([videoPlay, wait(850)]).catch(() => {});
     }
     const createSoundscape = window.ArizonaSoundscape?.createSoundscape;
     soundscape ||= createSoundscape?.({ voice: openingVoice });
+    window.ArizonaSoundscapeInstance = soundscape;
+    const openingDuration = soundscape?.hasPlayedIntro?.() ? OPENING_MUSIC_READY_TIMEOUT_MS : OPENING_PRESENTATION_MAX_MS;
     if (soundscape) soundscape.start().catch(() => {});
     window.setTimeout(() => {
       openingScreen?.classList.add("is-leaving");
+      window.ArizonaEpisodes?.begin?.();
       window.setTimeout(() => openingScreen?.remove(), 900);
-    }, OPENING_PRESENTATION_MAX_MS);
+    }, openingDuration);
   }
   function bindEvents() {
     document.addEventListener("click", (event) => {
@@ -338,7 +387,9 @@ Chave: ${elements.pixKeyDisplay.textContent}`;
       if (event.target.closest("[data-open-map]")) elements.mapDialog.showModal(); if (event.target.closest("[data-close-map]")) elements.mapDialog.close(); if (event.target.closest("[data-close-payment]")) elements.paymentDialog.close();
     });
     document.querySelectorAll("[data-seats]").forEach((button) => button.addEventListener("click", () => { state.selectedSeats = Number(button.dataset.seats); document.querySelectorAll("[data-seats]").forEach((item) => { item.setAttribute("aria-pressed", String(item === button)); item.classList.toggle("is-selected", item === button); }); renderSelection(); }));
-    elements.loginNext.addEventListener("click", () => showFlowStep("payment")); elements.tableNext.addEventListener("click", () => showFlowStep(state.config?.user?.signedIn ? "payment" : "login"));
+    elements.loginNext.addEventListener("click", () => showFlowStep("payment")); elements.tableNext.addEventListener("click", openReservationFinale);
+    elements.finaleContinue?.addEventListener("click", continueFromFinale); elements.finaleBack?.addEventListener("click", closeReservationFinale);
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !elements.reservationFinale?.hidden) closeReservationFinale(); });
     document.querySelector("#payment-pix").addEventListener("click", reserveSelectedTable); document.querySelector("#payment-card").addEventListener("click", () => showToast("Pagamento por cartão em construção. Use Pix para finalizar agora.")); document.querySelector("#copy-pix-code-btn").addEventListener("click", copyPixCode); document.querySelector("#copy-pix-key-btn").addEventListener("click", copyPixKey); elements.pixInfoToggle.addEventListener("click", togglePixInfo); elements.pixInfoToggle.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePixInfo(); } }); elements.pixShareBtn.addEventListener("click", sharePix); document.querySelector("#receipt-file")?.addEventListener("change", (event) => uploadReceipt(event.target.files?.[0])); document.querySelector("#start-experience")?.addEventListener("click", startExperience); }
   async function initialize() { bindEvents(); renderSectors(); renderSelection(); setupEventCountdown(); setupCinematicScroll(); setupOpening(); window.requestAnimationFrame(() => window.ArizonaCinematic?.createCinematic().catch(() => {})); try { await Promise.all([loadTables(), loadAuth()]); } catch (error) { showToast("Não foi possível carregar as mesas agora. Atualize a página e tente novamente.", "error"); } }
   initialize();
