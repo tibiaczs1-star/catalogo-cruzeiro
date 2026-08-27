@@ -40,6 +40,18 @@ test("CZS Labs has a canonical public subpage with its own visual shell", () => 
   assert.match(html, /media\/brand\.png/);
 });
 
+test("CZS Labs frames its work as a cinematic proof of regional autonomy", () => {
+  const html = fs.readFileSync(path.join(root, "czslbs", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(root, "czslbs", "styles.css"), "utf8");
+
+  assert.match(html, /data-cinematic-hero/);
+  assert.match(html, /data-work-reel/);
+  assert.match(html, /data-technology-atlas/);
+  assert.match(html, /Do Vale do Juruá para uma\s+<em>autonomia<\/em>\s+que fica\./);
+  assert.match(css, /\.hero--cinematic/);
+  assert.match(css, /\.work-ledger/);
+});
+
 test("cinematic loader is valid body content and keeps daily and skip controls", () => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
   const bodyAt = html.indexOf("<body");
