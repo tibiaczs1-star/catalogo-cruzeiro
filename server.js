@@ -20829,6 +20829,14 @@ async function handleStatic(req, res, pathname, requestUrl) {
         });
       }
 
+      if (pathname === "/czslbs") {
+        res.writeHead(302, {
+          Location: "/czslbs/",
+          "Cache-Control": "no-store"
+        });
+        return res.end();
+      }
+
       if (pathname === "/ashotelaria") {
         res.writeHead(302, {
           Location: "/ashotelaria/",
@@ -20856,6 +20864,17 @@ async function handleStatic(req, res, pathname, requestUrl) {
             bookrayExtension === ".html" || bookrayExtension === ".pdf"
               ? "no-store"
               : VERSIONED_STATIC_CACHE_CONTROL
+        });
+      }
+
+      if (pathname.startsWith("/czslbs/")) {
+        let filePath = path.join(ROOT_DIR, "czslbs", pathname.slice("/czslbs/".length));
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+          filePath = path.join(filePath, "index.html");
+        }
+        const czsLabsExtension = path.extname(filePath).toLowerCase();
+        return sendFile(req, res, filePath, {
+          cacheControl: czsLabsExtension === ".html" ? "no-store" : VERSIONED_STATIC_CACHE_CONTROL
         });
       }
 

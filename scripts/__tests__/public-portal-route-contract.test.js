@@ -21,6 +21,25 @@ test("public portal keeps canonical entry routes for every published subsite", (
   assert.match(server, /pathname === "\/pubpaid" \|\| pathname === "\/pubpaid\/"/);
 });
 
+test("CZS Labs has a canonical public subpage with its own visual shell", () => {
+  const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
+  const pagePath = path.join(root, "czslbs", "index.html");
+  const stylesheetPath = path.join(root, "czslbs", "styles.css");
+  const scriptPath = path.join(root, "czslbs", "script.js");
+
+  assert.match(server, /pathname === "\/czslbs"/);
+  assert.match(server, /Location: "\/czslbs\/"/);
+  assert.match(server, /pathname\.startsWith\("\/czslbs\/"\)/);
+  assert.ok(fs.existsSync(pagePath), "CZS Labs must provide its public entry page");
+  assert.ok(fs.existsSync(stylesheetPath), "CZS Labs must provide its dedicated stylesheet");
+  assert.ok(fs.existsSync(scriptPath), "CZS Labs must provide its visual interaction script");
+
+  const html = fs.readFileSync(pagePath, "utf8");
+  assert.match(html, /CZS LABS/);
+  assert.match(html, /Tecnologia para o Vale do Juruá/);
+  assert.match(html, /media\/brand\.png/);
+});
+
 test("cinematic loader is valid body content and keeps daily and skip controls", () => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
   const bodyAt = html.indexOf("<body");
