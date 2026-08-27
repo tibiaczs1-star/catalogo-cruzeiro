@@ -20,6 +20,23 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
 
+const rotatingIdea = document.querySelector("[data-rotating-idea]");
+const rotatingIdeas = ["INFORMAÇÃO", "COMÉRCIO", "SERVIÇOS", "CULTURA", "OPORTUNIDADES"];
+
+if (rotatingIdea && !reducedMotion) {
+  let rotatingIdeaIndex = 0;
+
+  window.setInterval(() => {
+    rotatingIdea.classList.add("is-changing");
+
+    window.setTimeout(() => {
+      rotatingIdeaIndex = (rotatingIdeaIndex + 1) % rotatingIdeas.length;
+      rotatingIdea.textContent = rotatingIdeas[rotatingIdeaIndex];
+      rotatingIdea.classList.remove("is-changing");
+    }, 180);
+  }, 2400);
+}
+
 if (!reducedMotion) {
   const canvas = document.querySelector("#constellation");
   const context = canvas?.getContext("2d");

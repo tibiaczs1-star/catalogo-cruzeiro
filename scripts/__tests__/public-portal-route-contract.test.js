@@ -37,7 +37,14 @@ test("CZS Labs has a canonical public subpage with its own visual shell", () => 
   const html = fs.readFileSync(pagePath, "utf8");
   assert.match(html, /CZS LABS/);
   assert.match(html, /Tecnologia para o Vale do Juruá/);
-  assert.match(html, /media\/brand\.png/);
+  assert.doesNotMatch(html, /media\/brand\.png/);
+  assert.doesNotMatch(html, /hero-signal/);
+  assert.doesNotMatch(html, /hero-river/);
+  assert.doesNotMatch(html, /media\/portal\.png/);
+  assert.doesNotMatch(html, /data-visual-lab/);
+  assert.doesNotMatch(html, /catalog-spotlight/);
+  assert.match(html, /Quem cria tecnologia decide o futuro/);
+  assert.match(html, /Acre e o Brasil/);
 });
 
 test("CZS Labs frames its work as a cinematic proof of regional autonomy", () => {
@@ -52,22 +59,15 @@ test("CZS Labs frames its work as a cinematic proof of regional autonomy", () =>
   assert.match(css, /\.work-ledger/);
 });
 
-test("CZS Labs labels new cinematic visual studies without confusing them with project records", () => {
+test("CZS Labs explains regional autonomy without generic river frames or legacy portal captures", () => {
   const html = fs.readFileSync(path.join(root, "czslbs", "index.html"), "utf8");
   const css = fs.readFileSync(path.join(root, "czslbs", "styles.css"), "utf8");
 
-  for (const asset of [
-    "media/lab-night-v1.png",
-    "media/makers-desk-v1.png",
-    "media/jurua-signal-v1.png",
-  ]) {
-    assert.ok(html.includes(asset), `expected ${asset} to be part of the visual lab`);
-  }
-
-  assert.match(html, /data-visual-lab/);
-  assert.match(html, /IMAGENS CONCEITUAIS/);
-  assert.match(css, /\.visual-lab/);
-  assert.match(css, /\.visual-card--primary/);
+  assert.match(html, /TECNOLOGIA É PODER DE DECISÃO/);
+  assert.match(html, /data-regional-shift/);
+  assert.match(html, /Tecnologia organiza informação, comércio, serviços, cultura e oportunidades/);
+  assert.match(css, /\.regional-shift/);
+  assert.match(css, /\.shift-map/);
 });
 
 test("cinematic loader is valid body content and keeps daily and skip controls", () => {

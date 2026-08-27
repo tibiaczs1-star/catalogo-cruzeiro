@@ -460,3 +460,127 @@ h1 em, h2 em { color: var(--cyan-soft); font-style: normal; text-shadow: 0 0 42p
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }.orbit { animation: none; } *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* CZS Labs: tecnologia como autonomia regional */
+.hero--cinematic {
+  min-height: 810px;
+  background:
+    radial-gradient(ellipse at 79% 42%, rgba(9, 147, 238, 0.26), transparent 30rem),
+    radial-gradient(ellipse at 18% 100%, rgba(0, 212, 255, 0.11), transparent 28rem),
+    linear-gradient(134deg, #02070e 0%, #061a30 48%, #03080f 100%);
+}
+.hero--cinematic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  background-image:
+    linear-gradient(90deg, rgba(75, 185, 245, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(75, 185, 245, 0.07) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(90deg, black, rgba(0,0,0,.78) 60%, transparent);
+  pointer-events: none;
+}
+.hero--cinematic::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: clamp(4%, 9vw, 14%);
+  bottom: 18%;
+  width: min(41vw, 600px);
+  height: min(28vw, 390px);
+  border: 1px solid rgba(95, 220, 255, 0.34);
+  border-left-width: 0;
+  background:
+    linear-gradient(135deg, transparent 45%, rgba(20, 174, 255, 0.22) 46%, transparent 47%),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(108, 221, 255, 0.16) 40px 41px),
+    linear-gradient(150deg, rgba(11, 120, 195, 0.12), transparent 62%);
+  box-shadow: 0 0 80px rgba(0, 188, 255, 0.12), inset 0 0 44px rgba(0, 187, 255, 0.08);
+  clip-path: polygon(0 9%, 82% 0, 100% 23%, 92% 100%, 11% 92%);
+  transform: skewY(-4deg);
+  animation: signal-breathe 6s ease-in-out infinite;
+  pointer-events: none;
+}
+.hero-layout { display: block; position: relative; z-index: 1; width: min(var(--max), 100%); min-height: 760px; padding: 152px 34px 188px; }
+.hero-copy { max-width: 850px; }
+.hero-copy h1 { max-width: 830px; font-size: clamp(4.6rem, 8.4vw, 9.2rem); }
+.hero-intro { max-width: 655px; }
+.hero-status { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 28px 0 0; color: #8ac7e9; font: 500 0.58rem/1.4 "DM Mono", monospace; letter-spacing: 0.16em; }
+.hero-status > span { display: inline-block; width: 29px; height: 1px; background: var(--cyan); box-shadow: 0 0 11px var(--cyan); }
+.hero-status strong { min-width: 128px; color: var(--cyan-soft); font: 500 0.58rem/1.4 "DM Mono", monospace; letter-spacing: 0.16em; transition: opacity 180ms ease, transform 180ms ease; }
+.hero-status strong.is-changing { opacity: 0; transform: translateY(5px); }
+.hero-ledger { z-index: 2; }
+
+.regional-shift {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.86fr) minmax(340px, 1.14fr);
+  gap: clamp(44px, 8vw, 142px);
+  padding: clamp(106px, 12vw, 166px) max(34px, calc((100vw - var(--max)) / 2 + 34px));
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 78% 16%, rgba(0, 181, 255, 0.18), transparent 24rem),
+    linear-gradient(135deg, #04111e 0%, #06233a 56%, #040b13 100%);
+}
+.regional-shift::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .72;
+  background-image:
+    linear-gradient(90deg, rgba(104, 218, 255, .1) 1px, transparent 1px),
+    linear-gradient(rgba(104, 218, 255, .07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(90deg, black, transparent 90%);
+  pointer-events: none;
+}
+.regional-shift::after { content: ""; position: absolute; right: -13rem; top: -15rem; width: 42rem; height: 42rem; border: 1px solid rgba(116, 225, 255, .2); border-radius: 50%; box-shadow: 0 0 0 5rem rgba(15, 178, 255, .04), 0 0 0 10rem rgba(15, 178, 255, .025); }
+.shift-intro, .shift-copy, .shift-map { position: relative; z-index: 1; }
+.shift-intro .eyebrow { margin-top: 35px; }
+.shift-intro h2 { max-width: 570px; margin: 18px 0 0; font-size: clamp(3.1rem, 5.2vw, 5.7rem); font-weight: 500; line-height: .91; letter-spacing: -.078em; }
+.shift-copy { align-self: end; max-width: 610px; padding-bottom: 2px; }
+.shift-copy p { margin: 0 0 22px; color: #c6d9e8; font-size: clamp(.9rem, 1.1vw, 1rem); line-height: 1.78; }
+.shift-copy p:first-child { color: #edf9ff; font-size: clamp(1.05rem, 1.36vw, 1.22rem); line-height: 1.62; }
+.shift-copy p:last-child { margin-bottom: 0; color: var(--cyan-soft); }
+.shift-map { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: clamp(22px, 4vw, 58px); border: 1px solid rgba(113, 211, 250, .27); background: rgba(2, 11, 20, .51); }
+.shift-map::before { content: ""; position: absolute; top: 37px; right: 11%; left: 11%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 216, 255, .8), transparent); box-shadow: 0 0 12px rgba(0, 216, 255, .65); animation: regional-scan 5.5s ease-in-out infinite; }
+.shift-node { position: relative; min-height: 206px; padding: 34px clamp(22px, 3vw, 43px) 31px; border-right: 1px solid rgba(113, 211, 250, .2); transition: background 260ms ease, transform 260ms ease; }
+.shift-node:last-child { border-right: 0; }
+.shift-node:hover { background: linear-gradient(145deg, rgba(0, 182, 255, .17), rgba(1, 8, 14, .08)); transform: translateY(-5px); }
+.shift-node::before { content: ""; position: absolute; top: 28px; left: clamp(22px, 3vw, 43px); width: 13px; height: 13px; border: 1px solid var(--cyan-soft); border-radius: 50%; background: #06243a; box-shadow: 0 0 18px rgba(0, 210, 255, .35); }
+.shift-node--active::before { background: var(--cyan); box-shadow: 0 0 0 5px rgba(0, 210, 255, .15), 0 0 24px var(--cyan); animation: node-pulse 2.6s ease-in-out infinite; }
+.shift-node span { display: block; margin-left: 23px; color: #81cfea; font: 500 .53rem/1 "DM Mono", monospace; letter-spacing: .13em; }
+.shift-node h3 { margin: 43px 0 12px; color: #f1fbff; font-size: clamp(1.45rem, 2vw, 2rem); font-weight: 500; line-height: .98; letter-spacing: -.06em; }
+.shift-node p { max-width: 290px; margin: 0; color: #9eb8cb; font-size: .76rem; line-height: 1.68; }
+
+.closing { background: radial-gradient(ellipse at 50% 110%, rgba(0, 180, 250, .22), transparent 42rem), linear-gradient(180deg, #030b13, #02070e); }
+.closing::before { content: ""; position: absolute; inset: 0; opacity: .45; background-image: linear-gradient(90deg, rgba(83, 199, 246, .08) 1px, transparent 1px), linear-gradient(rgba(83, 199, 246, .08) 1px, transparent 1px); background-size: 54px 54px; mask-image: radial-gradient(ellipse at center 70%, black, transparent 65%); pointer-events: none; }
+
+@keyframes signal-breathe { 50% { opacity: .68; transform: skewY(-4deg) translateY(-8px) scale(1.015); } }
+@keyframes regional-scan { 50% { opacity: .4; transform: scaleX(.55); } }
+@keyframes node-pulse { 50% { box-shadow: 0 0 0 9px rgba(0, 210, 255, .08), 0 0 30px var(--cyan); } }
+
+@media (max-width: 980px) {
+  .hero-layout { min-height: 720px; }
+  .hero-copy h1 { font-size: clamp(4.2rem, 9vw, 7.1rem); }
+  .regional-shift { grid-template-columns: 1fr; gap: 35px; }
+  .shift-copy { max-width: 660px; }
+}
+@media (max-width: 760px) {
+  .hero-layout { min-height: 0; padding: 112px 22px 178px; }
+  .hero--cinematic::after { right: -16%; bottom: 17%; width: 92vw; height: 290px; opacity: .68; }
+  .hero-copy h1 { max-width: 540px; font-size: clamp(3.6rem, 15.2vw, 5.8rem); }
+  .hero-status { gap: 7px; max-width: 290px; font-size: .5rem; letter-spacing: .11em; }
+  .hero-status strong { min-width: 115px; font-size: .5rem; letter-spacing: .11em; }
+  .regional-shift { gap: 31px; padding: 98px 22px; }
+  .shift-intro h2 { font-size: clamp(2.9rem, 12.3vw, 4.8rem); }
+  .shift-map { grid-template-columns: 1fr; margin-top: 12px; }
+  .shift-map::before { top: 11%; right: auto; bottom: 11%; left: 37px; width: 1px; height: auto; background: linear-gradient(180deg, transparent, rgba(0, 216, 255, .8), transparent); }
+  .shift-node { min-height: 176px; padding: 29px 25px 27px 53px; border-right: 0; border-bottom: 1px solid rgba(113, 211, 250, .2); }
+  .shift-node:last-child { border-bottom: 0; }
+  .shift-node::before { top: 30px; left: 24px; }
+  .shift-node span { margin-left: 0; }
+  .shift-node h3 { margin-top: 33px; }
+}
