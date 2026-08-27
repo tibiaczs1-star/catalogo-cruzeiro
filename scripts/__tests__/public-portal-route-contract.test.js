@@ -59,6 +59,22 @@ test("CZS Labs frames its work as a cinematic proof of regional autonomy", () =>
   assert.match(css, /\.work-ledger/);
 });
 
+test("CZS Labs presents projects beside its multicapable creative studio", () => {
+  const html = fs.readFileSync(path.join(root, "czslbs", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(root, "czslbs", "styles.css"), "utf8");
+
+  assert.match(html, /data-studio-capabilities/);
+  assert.match(html, /Vídeo, fotografia e direção/);
+  assert.match(html, /Influência e distribuição/);
+  assert.match(html, /EQUIPE MULTICAPAZ/);
+  assert.match(html, /data-creative-stack/);
+  assert.match(html, /EFEITOS PARA WEB/);
+  assert.match(html, /RETENÇÃO RESPONSÁVEL/);
+  assert.match(css, /\.work-columns/);
+  assert.match(css, /\.studio-capabilities/);
+  assert.match(css, /\.creative-stack/);
+});
+
 test("CZS Labs explains regional autonomy without generic river frames or legacy portal captures", () => {
   const html = fs.readFileSync(path.join(root, "czslbs", "index.html"), "utf8");
   const css = fs.readFileSync(path.join(root, "czslbs", "styles.css"), "utf8");
