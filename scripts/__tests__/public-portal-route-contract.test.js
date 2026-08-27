@@ -53,10 +53,13 @@ test("CZS Labs frames its work as a cinematic proof of regional autonomy", () =>
 
   assert.match(html, /data-cinematic-hero/);
   assert.match(html, /data-work-reel/);
-  assert.match(html, /data-technology-atlas/);
+  assert.match(html, /data-tech-live/);
+  assert.match(html, /Não basta dizer<br \/>que existe\. <em>Tem que funcionar\.<\/em>/);
+  assert.match(html, /EMPRESA.*TVs.*MÍDIA.*PLAYLIST.*ATIVAÇÃO/s);
   assert.match(html, /Do Vale do Juruá para uma\s+<em>autonomia<\/em>\s+que fica\./);
   assert.match(css, /\.hero--cinematic/);
   assert.match(css, /\.work-ledger/);
+  assert.match(css, /\.technology-live/);
 });
 
 test("CZS Labs presents projects beside its multicapable creative studio", () => {
@@ -91,7 +94,14 @@ test("CZS Labs supports an ambitious motion layer without leaving accessibility 
   const css = fs.readFileSync(path.join(root, "czslbs", "styles.css"), "utf8");
   const script = fs.readFileSync(path.join(root, "czslbs", "script.js"), "utf8");
 
-  assert.match(html, /data-signal-field/);
+  assert.match(html, /data-product-orbit/);
+  assert.match(html, /data-product-card/);
+  assert.match(html, /data-mascot/);
+  assert.match(html, /JURU-01/);
+  assert.match(css, /\.product-orbit/);
+  assert.match(css, /\.mascot-console/);
+  assert.match(script, /productCards/);
+  assert.match(script, /mascotStates/);
   assert.match(html, /data-motion-toggle/);
   assert.match(html, /data-scroll-progress/);
   assert.match(html, /data-ambition-atlas/);

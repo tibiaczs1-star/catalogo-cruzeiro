@@ -9,6 +9,7 @@
     />
     <meta name="theme-color" content="#03080f" />
     <title>CZS Labs — Tecnologia que fica</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2303080f'/%3E%3Cpath d='M17 20h25L22 44h25' fill='none' stroke='%234dd9ff' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,7 +17,7 @@
       rel="stylesheet"
     />
     <script>document.documentElement.classList.add("has-js");</script>
-    <link rel="stylesheet" href="styles.css?v=20260827-7" />
+    <link rel="stylesheet" href="styles.css?v=20260827-12" />
   </head>
   <body>
     <div class="journey-progress" data-scroll-progress aria-hidden="true"><span></span></div>
@@ -46,17 +47,12 @@
         <div class="hero-grid" aria-hidden="true"></div>
         <div class="hero-beam hero-beam--one" aria-hidden="true"></div>
         <div class="hero-beam hero-beam--two" aria-hidden="true"></div>
-        <div class="signal-field" data-signal-field aria-hidden="true">
-          <div class="signal-field__axis signal-field__axis--a"></div>
-          <div class="signal-field__axis signal-field__axis--b"></div>
-          <div class="signal-field__orbit signal-field__orbit--one"></div>
-          <div class="signal-field__orbit signal-field__orbit--two"></div>
-          <div class="signal-field__core"><span>CZS / LABS</span><strong>JURUÁ<br />EM<br />MOVIMENTO</strong><small>TECNOLOGIA COM ORIGEM</small></div>
-          <span class="signal-field__node signal-field__node--one"></span>
-          <span class="signal-field__node signal-field__node--two"></span>
-          <span class="signal-field__node signal-field__node--three"></span>
-        </div>
-
+        <nav class="mission-hud" aria-label="Jornada CZS Labs">
+          <a href="#visao"><span>01</span>ORIGEM</a>
+          <a href="#autonomia"><span>02</span>MISSÃO</a>
+          <a href="#projetos"><span>03</span>SISTEMAS</a>
+          <a href="#tecnologias"><span>04</span>ARSENAL</a>
+        </nav>
         <div class="hero-layout">
           <div class="hero-copy" data-reveal>
             <p class="eyebrow"><span></span> CZS LABS / Tecnologia para o Vale do Juruá</p>
@@ -72,6 +68,48 @@
             <div class="hero-actions">
               <a class="button button--solid" href="#projetos">VER O QUE JÁ EXISTE <b>↓</b></a>
               <a class="button button--line" href="#autonomia">NOSSA DIREÇÃO <b>↘</b></a>
+            </div>
+          </div>
+          <div class="hero-stage" data-cyber-world aria-label="Produtos CZS Labs em operação">
+            <div class="hero-stage__head"><span><i></i> ECOSSISTEMA CZS / AO VIVO</span><b data-stage-status>ANGEL MÍDIA EM FOCO</b></div>
+            <div class="product-orbit" data-product-orbit>
+              <article class="orbit-card is-active" data-product-card>
+                <div class="orbit-card__screen"><img src="media/angel.png" alt="Painel do sistema Angel Mídia" /></div>
+                <p><span>01 / MÍDIA EM REDE</span><strong>Angel Mídia</strong><small>TVs, empresas e programação</small></p>
+              </article>
+              <article class="orbit-card" data-product-card>
+                <div class="orbit-card__screen"><img src="media/garra.png" alt="Jogo Garra dos Sonhos" /></div>
+                <p><span>02 / GAME</span><strong>Garra dos Sonhos</strong><small>experiência, arte e mecânica</small></p>
+              </article>
+              <article class="orbit-card" data-product-card>
+                <div class="orbit-card__screen"><img src="media/pubpaid.png" alt="Experiência PubPaid" /></div>
+                <p><span>03 / EXPERIÊNCIA</span><strong>PubPaid</strong><small>entretenimento e interação</small></p>
+              </article>
+              <article class="orbit-card" data-product-card>
+                <div class="orbit-card__screen"><img src="media/portal-card.png" alt="Portal Catálogo CZS" /></div>
+                <p><span>04 / PORTAL</span><strong>Catálogo CZS</strong><small>informação e presença regional</small></p>
+              </article>
+              <article class="orbit-card" data-product-card>
+                <div class="orbit-card__screen"><img src="media/metafest.png" alt="Produção audiovisual MetaFest" /></div>
+                <p><span>05 / EVENTO</span><strong>MetaFest</strong><small>produção, vídeo e experiência</small></p>
+              </article>
+              <article class="orbit-card" data-product-card>
+                <div class="orbit-card__screen"><img src="media/raiane.png" alt="Produção visual e fotografia da CZS Labs" /></div>
+                <p><span>06 / IMAGEM</span><strong>Produção Visual</strong><small>fotografia, creators e campanhas</small></p>
+              </article>
+            </div>
+            <div class="mascot-console" data-mascot data-state="idle" role="img" aria-label="Juru, mascote tecnológico da CZS Labs observando os sistemas">
+              <div class="mascot-console__copy"><span>COMPANHEIRO DE OPERAÇÃO / JURU-01</span><strong data-mascot-action>OBSERVANDO SISTEMAS</strong><small>onça tecnológica do Vale do Juruá</small></div>
+              <svg class="juru" viewBox="0 0 300 210" aria-hidden="true">
+                <defs><linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f3b64f"/><stop offset="1" stop-color="#b76523"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                <g class="juru__tail"><path d="M78 151C28 164 26 108 56 111" fill="none" stroke="url(#fur)" stroke-width="18" stroke-linecap="round"/><path d="M43 146l12-15M33 127l17-8" stroke="#1a1820" stroke-width="6"/></g>
+                <g class="juru__body"><ellipse cx="143" cy="145" rx="76" ry="49" fill="url(#fur)" stroke="#57eaff" stroke-width="2"/><path d="M98 126l12 12m30-25l8 14m30-3l-12 15m-44 22l9 14m48-18l12 12" stroke="#35211d" stroke-width="8" stroke-linecap="round"/><path d="M102 151v42m75-40v40" stroke="#c47a31" stroke-width="21" stroke-linecap="round"/><path d="M91 193h27m75 0h-28" stroke="#55e8ff" stroke-width="5" stroke-linecap="round"/></g>
+                <g class="juru__head"><path class="juru__ear juru__ear--left" d="M83 72Q65 28 108 50Z" fill="#cf8435" stroke="#57eaff" stroke-width="2"/><path class="juru__ear juru__ear--right" d="M167 50q44-24 25 23z" fill="#cf8435" stroke="#57eaff" stroke-width="2"/><path d="M83 63Q135 27 186 65L178 124Q136 154 92 121Z" fill="url(#fur)" stroke="#57eaff" stroke-width="2"/><path d="M105 68l12 11m41-11l-13 11m-12-25v14" stroke="#35211d" stroke-width="7" stroke-linecap="round"/><g class="juru__eyes"><path d="M105 91q12-10 24 0-12 13-24 0zm39 0q12-10 24 0-12 13-24 0z" fill="#06121b"/><circle cx="118" cy="89" r="3" fill="#70f5ff" filter="url(#glow)"/><circle cx="156" cy="89" r="3" fill="#70f5ff" filter="url(#glow)"/></g><path d="M129 105l8 6 8-6-8-4z" fill="#24151b"/><path d="M123 118q14 12 29 0" fill="none" stroke="#25161a" stroke-width="4" stroke-linecap="round"/></g>
+                <g class="juru__visor"><path d="M87 84Q137 62 185 84v20q-49 20-98 0z" fill="none" stroke="#50eaff" stroke-width="3" stroke-dasharray="9 6"/><path class="juru__scan" d="M91 93h90" stroke="#fff" stroke-width="2" filter="url(#glow)"/></g>
+                <g class="juru__paw"><path d="M183 135q27-17 35 3l-18 24z" fill="#d68c38" stroke="#57eaff" stroke-width="2"/><path d="M209 135l11-12m-6 18l15-6" stroke="#57eaff" stroke-width="3" stroke-linecap="round"/></g>
+                <g class="juru__keys"><rect x="216" y="164" width="66" height="30" rx="5" fill="#071925" stroke="#42dfff"/><path d="M225 174h9m5 0h9m5 0h9m5 0h7m-49 9h9m5 0h9m5 0h9m5 0h12" stroke="#62eaff" stroke-width="3"/></g>
+              </svg>
+              <div class="mascot-console__signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
             </div>
           </div>
         </div>
@@ -140,6 +178,20 @@
         <p class="ambition-atlas__intro" data-reveal>
           Não basta trazer ferramentas para o interior. É preciso reunir repertório, imagem, código, operação e gente capaz de decidir o que cada solução precisa resolver.
         </p>
+        <div class="ambition-engine" aria-hidden="true">
+          <div class="ambition-engine__canopy"></div>
+          <div class="ambition-engine__river"></div>
+          <div class="ambition-engine__routes ambition-engine__routes--a"></div>
+          <div class="ambition-engine__routes ambition-engine__routes--b"></div>
+          <div class="ambition-engine__hub"><b>CZS</b><span>COMPUTAÇÃO<br />COM ORIGEM</span></div>
+          <span class="ambition-engine__node ambition-engine__node--data">DADOS</span>
+          <span class="ambition-engine__node ambition-engine__node--image">IMAGEM</span>
+          <span class="ambition-engine__node ambition-engine__node--code">CÓDIGO</span>
+          <span class="ambition-engine__node ambition-engine__node--field">OPERAÇÃO</span>
+          <i class="ambition-engine__packet ambition-engine__packet--one"></i>
+          <i class="ambition-engine__packet ambition-engine__packet--two"></i>
+          <p>ENTRADA LOCAL <strong>→</strong> PROCESSAMENTO <strong>→</strong> IMPACTO EM REDE</p>
+        </div>
         <div class="ambition-path" aria-label="Caminho de construção da CZS Labs">
           <article class="ambition-stage" data-reveal><span>01 / ESCUTA</span><h3>Contexto antes do código</h3><p>Mapear o que trava quem vive, trabalha e empreende no Vale.</p></article>
           <article class="ambition-stage" data-reveal><span>02 / CRIAÇÃO</span><h3>Imagem, produto e linguagem</h3><p>Desenhar sistemas que respeitam a realidade local e também conseguem surpreender.</p></article>
@@ -289,22 +341,53 @@
         </div>
       </section>
 
-      <section class="technology-atlas" id="tecnologias" data-technology-atlas aria-labelledby="tech-title">
-        <div class="atlas-light atlas-light--one" aria-hidden="true"></div>
-        <div class="atlas-light atlas-light--two" aria-hidden="true"></div>
-        <div class="atlas-top" data-reveal>
-          <p class="section-index"><span>08</span><i></i> ATLAS TECNOLÓGICO</p>
-          <p>As ferramentas mudam. O compromisso é usar código, imagem, dados e operação para fazer o Acre e o Brasil reconhecerem uma tecnologia com origem no Vale.</p>
-        </div>
-        <div class="atlas-center" data-reveal>
-          <span class="orbit orbit--a" aria-hidden="true"></span>
-          <span class="orbit orbit--b" aria-hidden="true"></span>
-          <div><small>CZS</small><strong id="tech-title">LABS</strong><em>TECNOLOGIA<br />COM ORIGEM</em></div>
-        </div>
-        <div class="tech-constellation" data-reveal aria-label="Tecnologias usadas">
-          <span>REACT</span><span>NODE.JS</span><span>HTML / CSS</span><span>JAVASCRIPT</span><span>PYTHON</span><span>SQL</span>
-          <span>APIS</span><span>AUTOMAÇÃO</span><span>PLAYWRIGHT</span><span>RENDER</span><span>GIT</span><span>IA CRIATIVA</span>
-          <span>HYPERFRAMES</span><span>DESIGN SYSTEMS</span><span>VÍDEO</span><span>RESPONSIVE UI</span>
+      <section class="technology-live" id="tecnologias" data-tech-live aria-labelledby="tech-title">
+        <div class="technology-live__scan" aria-hidden="true"></div>
+        <header class="technology-live__header" data-reveal>
+          <p class="section-index"><span>08</span><i></i> TECNOLOGIA EM OPERAÇÃO</p>
+          <div>
+            <p class="eyebrow">DO CÓDIGO AO RESULTADO</p>
+            <h2 id="tech-title">Não basta dizer<br />que existe. <em>Tem que funcionar.</em></h2>
+          </div>
+          <p class="technology-live__manifesto">Cada ferramenta ocupa uma função dentro de um sistema real. A CZS Labs conecta software, imagem, dados, vídeo e operação para criar tecnologia no Vale — e manter conhecimento, decisão e oportunidade mais perto de quem vive aqui.</p>
+        </header>
+
+        <div class="technology-live__body">
+          <div class="tech-cases" role="list" aria-label="Sistemas e processos da CZS Labs">
+            <button class="tech-case is-active" type="button" role="listitem" data-tech-case data-image="media/angel.png" data-label="ANGEL MÍDIA / REDE DE TELAS" data-result="Uma operação central conecta empresas, telas, conteúdo e programação." aria-pressed="true">
+              <span class="tech-case__number">01</span>
+              <span class="tech-case__copy"><small>SISTEMA DE OPERAÇÃO</small><strong>Angel Mídia</strong><em>Da empresa à tela, sem perder o controle.</em></span>
+              <span class="tech-case__arrow">↗</span>
+              <span class="tech-route" aria-label="Fluxo: empresa, TVs, mídia, playlist, revisão e ativação"><i>EMPRESA</i><b></b><i>TVs</i><b></b><i>MÍDIA</i><b></b><i>PLAYLIST</i><b></b><i>ATIVAÇÃO</i></span>
+              <span class="tech-case__stack">REACT · NODE · SQL · APIs</span>
+            </button>
+
+            <button class="tech-case" type="button" role="listitem" data-tech-case data-image="media/pubpaid.png" data-label="PUBPAID / EXPERIÊNCIA DIGITAL" data-result="Design, mecânica e código viram uma experiência jogável e testável." aria-pressed="false">
+              <span class="tech-case__number">02</span>
+              <span class="tech-case__copy"><small>PRODUTO INTERATIVO</small><strong>PubPaid</strong><em>Uma ideia atravessa protótipo, regra e experiência.</em></span>
+              <span class="tech-case__arrow">↗</span>
+              <span class="tech-route" aria-label="Fluxo: briefing, mecânica, interface, teste e publicação"><i>BRIEFING</i><b></b><i>MECÂNICA</i><b></b><i>INTERFACE</i><b></b><i>TESTE</i><b></b><i>PLAY</i></span>
+              <span class="tech-case__stack">JAVASCRIPT · UI · PLAYWRIGHT · GIT</span>
+            </button>
+
+            <button class="tech-case" type="button" role="listitem" data-tech-case data-image="media/metafest.png" data-label="CZS STUDIO / IMAGEM EM MOVIMENTO" data-result="Foto, vídeo, influência e motion design formam campanhas com identidade regional." aria-pressed="false">
+              <span class="tech-case__number">03</span>
+              <span class="tech-case__copy"><small>ESTÚDIO AUDIOVISUAL</small><strong>Imagem que circula</strong><em>Produção feita por uma equipe com várias especialidades.</em></span>
+              <span class="tech-case__arrow">↗</span>
+              <span class="tech-route" aria-label="Fluxo: pauta, captação, edição, motion e distribuição"><i>PAUTA</i><b></b><i>CAPTAÇÃO</i><b></b><i>EDIÇÃO</i><b></b><i>MOTION</i><b></b><i>DISTRIBUIÇÃO</i></span>
+              <span class="tech-case__stack">FOTO · VÍDEO · HYPERFRAMES · IA CRIATIVA</span>
+            </button>
+          </div>
+
+          <aside class="tech-console" data-tech-console data-reveal aria-live="polite">
+            <div class="tech-console__bar"><span><i></i> SISTEMA ATIVO</span><span>VALE DO JURUÁ · AC</span></div>
+            <figure class="tech-console__visual">
+              <img src="media/angel.png" alt="Tela do sistema Angel Mídia em operação" data-tech-image />
+              <span class="tech-console__sweep" aria-hidden="true"></span>
+              <figcaption><small data-tech-label>ANGEL MÍDIA / REDE DE TELAS</small><strong data-tech-result>Uma operação central conecta empresas, telas, conteúdo e programação.</strong></figcaption>
+            </figure>
+            <div class="tech-console__telemetry" aria-hidden="true"><span>INTERFACE <b>ONLINE</b></span><span>DADOS <b>SINCRONIZADOS</b></span><span>OPERAÇÃO <b>LOCAL</b></span></div>
+          </aside>
         </div>
       </section>
 
@@ -324,6 +407,6 @@
       <a href="/" class="footer-catalog">CATÁLOGO CZS ↗</a>
     </footer>
 
-    <script src="script.js?v=20260827-5"></script>
+    <script src="script.js?v=20260827-9"></script>
   </body>
 </html>
