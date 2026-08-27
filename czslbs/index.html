@@ -15,9 +15,11 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260827-6" />
+    <script>document.documentElement.classList.add("has-js");</script>
+    <link rel="stylesheet" href="styles.css?v=20260827-7" />
   </head>
   <body>
+    <div class="journey-progress" data-scroll-progress aria-hidden="true"><span></span></div>
     <canvas id="constellation" aria-hidden="true"></canvas>
 
     <header class="site-header" data-header>
@@ -32,6 +34,10 @@
         <a href="#sistemas">Sistemas</a>
         <a href="#tecnologias">Tecnologias</a>
       </nav>
+      <button class="motion-toggle" data-motion-toggle type="button" aria-pressed="true" aria-label="Pausar movimentos da página">
+        <span class="motion-toggle__light" aria-hidden="true"></span>
+        <span data-motion-label>MOVIMENTO ATIVO</span>
+      </button>
       <a class="catalog-link" href="/" aria-label="Abrir Catálogo CZS">CATÁLOGO CZS <i aria-hidden="true">↗</i></a>
     </header>
 
@@ -40,6 +46,16 @@
         <div class="hero-grid" aria-hidden="true"></div>
         <div class="hero-beam hero-beam--one" aria-hidden="true"></div>
         <div class="hero-beam hero-beam--two" aria-hidden="true"></div>
+        <div class="signal-field" data-signal-field aria-hidden="true">
+          <div class="signal-field__axis signal-field__axis--a"></div>
+          <div class="signal-field__axis signal-field__axis--b"></div>
+          <div class="signal-field__orbit signal-field__orbit--one"></div>
+          <div class="signal-field__orbit signal-field__orbit--two"></div>
+          <div class="signal-field__core"><span>CZS / LABS</span><strong>JURUÁ<br />EM<br />MOVIMENTO</strong><small>TECNOLOGIA COM ORIGEM</small></div>
+          <span class="signal-field__node signal-field__node--one"></span>
+          <span class="signal-field__node signal-field__node--two"></span>
+          <span class="signal-field__node signal-field__node--three"></span>
+        </div>
 
         <div class="hero-layout">
           <div class="hero-copy" data-reveal>
@@ -51,6 +67,7 @@
               sistemas, imagem e operação a partir do Vale do Juruá para que as oportunidades
               também nasçam aqui.
             </p>
+            <p class="hero-resolution">Quem vive o problema também precisa controlar a ferramenta.</p>
             <p class="hero-status" aria-label="Tecnologia organiza informação, comércio, serviços, cultura e oportunidades."><span></span> TECNOLOGIA ORGANIZA <strong data-rotating-idea aria-hidden="true">INFORMAÇÃO</strong></p>
             <div class="hero-actions">
               <a class="button button--solid" href="#projetos">VER O QUE JÁ EXISTE <b>↓</b></a>
@@ -114,9 +131,26 @@
         </div>
       </section>
 
+      <section class="ambition-atlas" data-ambition-atlas aria-labelledby="ambition-title">
+        <div class="ambition-atlas__heading" data-reveal>
+          <p class="section-index"><span>04</span><i></i> ROTA DE CONSTRUÇÃO</p>
+          <p class="eyebrow">DA ESCUTA À REFERÊNCIA</p>
+          <h2 id="ambition-title">Tecnologia feita aqui.<br /><em>Impacto que circula.</em></h2>
+        </div>
+        <p class="ambition-atlas__intro" data-reveal>
+          Não basta trazer ferramentas para o interior. É preciso reunir repertório, imagem, código, operação e gente capaz de decidir o que cada solução precisa resolver.
+        </p>
+        <div class="ambition-path" aria-label="Caminho de construção da CZS Labs">
+          <article class="ambition-stage" data-reveal><span>01 / ESCUTA</span><h3>Contexto antes do código</h3><p>Mapear o que trava quem vive, trabalha e empreende no Vale.</p></article>
+          <article class="ambition-stage" data-reveal><span>02 / CRIAÇÃO</span><h3>Imagem, produto e linguagem</h3><p>Desenhar sistemas que respeitam a realidade local e também conseguem surpreender.</p></article>
+          <article class="ambition-stage" data-reveal><span>03 / OPERAÇÃO</span><h3>Ferramenta em uso real</h3><p>Colocar no ar, medir, ajustar e cuidar perto de quem usa todos os dias.</p></article>
+          <article class="ambition-stage ambition-stage--focus" data-reveal><span>04 / REFERÊNCIA</span><h3>Do Acre para o Brasil</h3><p>Fazer soluções com origem ganhar escala sem abandonar a própria origem.</p></article>
+        </div>
+      </section>
+
       <section class="work-section" id="projetos" data-work-reel aria-labelledby="work-title">
         <header class="work-header">
-          <div class="section-index" data-reveal><span>04</span><i></i> ARQUIVO EM MOVIMENTO</div>
+          <div class="section-index" data-reveal><span>05</span><i></i> ARQUIVO EM MOVIMENTO</div>
           <div data-reveal>
             <p class="eyebrow">PROJETOS CONSTRUÍDOS</p>
             <h2 id="work-title">O que a gente<br /><em>colocou no mundo.</em></h2>
@@ -221,7 +255,7 @@
 
       <section class="motion-gallery" aria-labelledby="motion-title">
         <div class="motion-title" data-reveal>
-          <p class="section-index"><span>05</span><i></i> IMAGEM EM MOVIMENTO</p>
+          <p class="section-index"><span>06</span><i></i> IMAGEM EM MOVIMENTO</p>
           <h2 id="motion-title">Tecnologia também<br />precisa de <em>pulso.</em></h2>
         </div>
         <div class="motion-reel">
@@ -242,7 +276,7 @@
 
       <section class="systems" id="sistemas" aria-labelledby="systems-title">
         <header class="systems-header">
-          <div class="section-index" data-reveal><span>06</span><i></i> CAMADAS DE SISTEMA</div>
+          <div class="section-index" data-reveal><span>07</span><i></i> CAMADAS DE SISTEMA</div>
           <div data-reveal><p class="eyebrow">DO BRIEFING À OPERAÇÃO</p><h2 id="systems-title">Produtos que não<br />param na <em>superfície.</em></h2></div>
         </header>
         <div class="systems-map">
@@ -259,7 +293,7 @@
         <div class="atlas-light atlas-light--one" aria-hidden="true"></div>
         <div class="atlas-light atlas-light--two" aria-hidden="true"></div>
         <div class="atlas-top" data-reveal>
-          <p class="section-index"><span>07</span><i></i> ATLAS TECNOLÓGICO</p>
+          <p class="section-index"><span>08</span><i></i> ATLAS TECNOLÓGICO</p>
           <p>As ferramentas mudam. O compromisso é usar código, imagem, dados e operação para fazer o Acre e o Brasil reconhecerem uma tecnologia com origem no Vale.</p>
         </div>
         <div class="atlas-center" data-reveal>
@@ -290,6 +324,6 @@
       <a href="/" class="footer-catalog">CATÁLOGO CZS ↗</a>
     </footer>
 
-    <script src="script.js?v=20260827-4"></script>
+    <script src="script.js?v=20260827-5"></script>
   </body>
 </html>

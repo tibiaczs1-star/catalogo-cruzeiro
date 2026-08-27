@@ -86,6 +86,23 @@ test("CZS Labs explains regional autonomy without generic river frames or legacy
   assert.match(css, /\.shift-map/);
 });
 
+test("CZS Labs supports an ambitious motion layer without leaving accessibility behind", () => {
+  const html = fs.readFileSync(path.join(root, "czslbs", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(root, "czslbs", "styles.css"), "utf8");
+  const script = fs.readFileSync(path.join(root, "czslbs", "script.js"), "utf8");
+
+  assert.match(html, /data-signal-field/);
+  assert.match(html, /data-motion-toggle/);
+  assert.match(html, /data-scroll-progress/);
+  assert.match(html, /data-ambition-atlas/);
+  assert.match(html, /Quem vive o problema também precisa controlar a ferramenta/);
+  assert.match(css, /@view-transition/);
+  assert.match(css, /animation-timeline:\s*view\(\)/);
+  assert.match(css, /\.motion-toggle/);
+  assert.match(script, /czs-labs-motion/);
+  assert.match(script, /visibilitychange/);
+});
+
 test("cinematic loader is valid body content and keeps daily and skip controls", () => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
   const bodyAt = html.indexOf("<body");
