@@ -1,8 +1,283 @@
 {
-  "lastAttemptAt": "2026-08-26T06:26:39.023Z",
-  "lastSuccessAt": "2026-08-26T06:26:39.027Z",
-  "source": "manual-arizona-ranch-agenda-patrocinada",
+  "lastAttemptAt": "2026-09-05T00:33:27.917Z",
+  "lastSuccessAt": "2026-09-05T00:33:27.917Z",
+  "source": "manual-czs-verified-batch-20260904",
   "activeWindowItems": [
+    {
+      "id": "manual-czs-mpac-apura-interrupcao-de-cirurgia-apos-oscilacoes-de-energia-em-cruzeiro-do-sul",
+      "slug": "mpac-apura-interrupcao-de-cirurgia-apos-oscilacoes-de-energia-em-cruzeiro-do-sul",
+      "title": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul",
+      "seoTitle": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul | Catálogo CZS",
+      "seoDescription": "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida apó",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "4 de set. de 2026",
+      "publishedAt": "2026-09-04T15:26:31Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "MPAC",
+      "sourceUrl": "https://www.mpac.mp.br/cruzeiro-do-sul-mpac-oficia-sesacre-e-hospital-sobre-caso-de-mulher-que-teve-cirurgia-interrompida-por-oscilacoes-de-energia/",
+      "sourceLabel": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul",
+      "lede": "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+      "summary": "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+      "analysis": "Data da cirurgia não informada; providências divulgadas em 04/09/2026.",
+      "highlights": [],
+      "development": [
+        "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+        "Data da cirurgia não informada; providências divulgadas em 04/09/2026.",
+        "Fonte: MPAC."
+      ],
+      "body": [
+        "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+        "Data da cirurgia não informada; providências divulgadas em 04/09/2026.",
+        "Fonte: MPAC."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2005,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "MPAC",
+          "url": "https://www.mpac.mp.br/cruzeiro-do-sul-mpac-oficia-sesacre-e-hospital-sobre-caso-de-mulher-que-teve-cirurgia-interrompida-por-oscilacoes-de-energia/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-04|jurua|mpac-apura-interrupcao-de-cirurgia-apos-oscilacoes-de-energia-em-cruzeiro-do-sul",
+      "accessibility": {
+        "alt": "Catálogo CZS — MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul",
+        "caption": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-projeto-apoia-200-produtores-rurais-com-recuperacao-de-areas-no-jurua",
+      "slug": "projeto-apoia-200-produtores-rurais-com-recuperacao-de-areas-no-jurua",
+      "title": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá",
+      "seoTitle": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá | Catálogo CZS",
+      "seoDescription": "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trab",
+      "eyebrow": "Vale do Juruá",
+      "date": "4 de set. de 2026",
+      "publishedAt": "2026-09-04T18:54:09Z",
+      "category": "Vale do Juruá",
+      "categoryKey": "vale-do-jurua",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá Online",
+      "sourceUrl": "https://juruaonline.com.br/projeto-financiado-pela-uniao-europeia-beneficia-200-produtores-rurais-no-vale-do-jurua/",
+      "sourceLabel": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá",
+      "lede": "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+      "summary": "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+      "analysis": "Projeto iniciado em dezembro de 2022; data da entrega mencionada não precisada pela reportagem.",
+      "highlights": [],
+      "development": [
+        "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+        "Projeto iniciado em dezembro de 2022; data da entrega mencionada não precisada pela reportagem.",
+        "Fonte: Juruá Online."
+      ],
+      "body": [
+        "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+        "Projeto iniciado em dezembro de 2022; data da entrega mencionada não precisada pela reportagem.",
+        "Fonte: Juruá Online."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2004,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá Online",
+          "url": "https://juruaonline.com.br/projeto-financiado-pela-uniao-europeia-beneficia-200-produtores-rurais-no-vale-do-jurua/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-04|jurua|projeto-apoia-200-produtores-rurais-com-recuperacao-de-areas-no-jurua",
+      "accessibility": {
+        "alt": "Catálogo CZS — Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá",
+        "caption": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-rua-nalberto-paiva-recebe-obras-de-asfaltamento-e-drenagem-no-miritizal",
+      "slug": "rua-nalberto-paiva-recebe-obras-de-asfaltamento-e-drenagem-no-miritizal",
+      "title": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal",
+      "seoTitle": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal | Catálogo CZS",
+      "seoDescription": "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e s",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "3 de set. de 2026",
+      "publishedAt": "2026-09-03T19:57:51Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "O Juruá em Tempo",
+      "sourceUrl": "https://www.juruaemtempo.com.br/destaque-2/prefeitura-de-cruzeiro-do-sul-inicia-asfaltamento-da-rua-nalberto-paiva-no-bairro-miritizal/",
+      "sourceLabel": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal",
+      "lede": "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+      "summary": "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+      "analysis": "Obras em andamento e visita ao local em 03/09/2026; início exato não especificado.",
+      "highlights": [],
+      "development": [
+        "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+        "Obras em andamento e visita ao local em 03/09/2026; início exato não especificado.",
+        "Fonte: O Juruá em Tempo."
+      ],
+      "body": [
+        "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+        "Obras em andamento e visita ao local em 03/09/2026; início exato não especificado.",
+        "Fonte: O Juruá em Tempo."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2003,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "O Juruá em Tempo",
+          "url": "https://www.juruaemtempo.com.br/destaque-2/prefeitura-de-cruzeiro-do-sul-inicia-asfaltamento-da-rua-nalberto-paiva-no-bairro-miritizal/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-03|jurua|rua-nalberto-paiva-recebe-obras-de-asfaltamento-e-drenagem-no-miritizal",
+      "accessibility": {
+        "alt": "Catálogo CZS — Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal",
+        "caption": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-estilista-de-cruzeiro-do-sul-cria-colecao-inspirada-na-catedral-da-gloria",
+      "slug": "estilista-de-cruzeiro-do-sul-cria-colecao-inspirada-na-catedral-da-gloria",
+      "title": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória",
+      "seoTitle": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória | Catálogo CZS",
+      "seoDescription": "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa ",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "3 de set. de 2026",
+      "publishedAt": "2026-09-04T00:00:10Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Voz do Norte",
+      "sourceUrl": "https://www.vozdonorte.com.br/estilista-cruzeirense-que-mora-em-sao-paulo-desenvolve-colecao-de-roupas-inspirada-na-catedral-de-cruzeiro-do-sul/",
+      "sourceLabel": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória",
+      "lede": "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+      "summary": "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+      "analysis": "Data de criação ou apresentação da coleção não informada; reportagem publicada em 03/09/2026.",
+      "highlights": [],
+      "development": [
+        "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+        "Data de criação ou apresentação da coleção não informada; reportagem publicada em 03/09/2026.",
+        "Fonte: Voz do Norte."
+      ],
+      "body": [
+        "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+        "Data de criação ou apresentação da coleção não informada; reportagem publicada em 03/09/2026.",
+        "Fonte: Voz do Norte."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2002,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Voz do Norte",
+          "url": "https://www.vozdonorte.com.br/estilista-cruzeirense-que-mora-em-sao-paulo-desenvolve-colecao-de-roupas-inspirada-na-catedral-de-cruzeiro-do-sul/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-03|jurua|estilista-de-cruzeiro-do-sul-cria-colecao-inspirada-na-catedral-da-gloria",
+      "accessibility": {
+        "alt": "Catálogo CZS — Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória",
+        "caption": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-feira-no-festival-da-farinha-encaminha-14-filhotes-resgatados-para-adocao",
+      "slug": "feira-no-festival-da-farinha-encaminha-14-filhotes-resgatados-para-adocao",
+      "title": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção",
+      "seoTitle": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção | Catálogo CZS",
+      "seoDescription": "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os ",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "30 de ago. de 2026",
+      "publishedAt": "2026-08-30T15:20:41Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá Online",
+      "sourceUrl": "https://juruaonline.com.br/feira-de-adocao-no-festival-da-farinha-garante-novo-lar-para-14-filhotes-resgatados/",
+      "sourceLabel": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção",
+      "lede": "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+      "summary": "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+      "analysis": "Resgate e adoções em 29/08/2026.",
+      "highlights": [],
+      "development": [
+        "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+        "Resgate e adoções em 29/08/2026.",
+        "Fonte: Juruá Online."
+      ],
+      "body": [
+        "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+        "Resgate e adoções em 29/08/2026.",
+        "Fonte: Juruá Online."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2001,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá Online",
+          "url": "https://juruaonline.com.br/feira-de-adocao-no-festival-da-farinha-garante-novo-lar-para-14-filhotes-resgatados/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-08-30|jurua|feira-no-festival-da-farinha-encaminha-14-filhotes-resgatados-para-adocao",
+      "accessibility": {
+        "alt": "Catálogo CZS — Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção",
+        "caption": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
     {
       "id": "manual-czs-agenda-arizona-ranch-inauguracao-05-setembro",
       "slug": "agenda-arizona-ranch-inauguracao-05-setembro",
@@ -25839,6 +26114,281 @@
     }
   ],
   "items": [
+    {
+      "id": "manual-czs-mpac-apura-interrupcao-de-cirurgia-apos-oscilacoes-de-energia-em-cruzeiro-do-sul",
+      "slug": "mpac-apura-interrupcao-de-cirurgia-apos-oscilacoes-de-energia-em-cruzeiro-do-sul",
+      "title": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul",
+      "seoTitle": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul | Catálogo CZS",
+      "seoDescription": "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida apó",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "4 de set. de 2026",
+      "publishedAt": "2026-09-04T15:26:31Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "MPAC",
+      "sourceUrl": "https://www.mpac.mp.br/cruzeiro-do-sul-mpac-oficia-sesacre-e-hospital-sobre-caso-de-mulher-que-teve-cirurgia-interrompida-por-oscilacoes-de-energia/",
+      "sourceLabel": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul",
+      "lede": "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+      "summary": "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+      "analysis": "Data da cirurgia não informada; providências divulgadas em 04/09/2026.",
+      "highlights": [],
+      "development": [
+        "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+        "Data da cirurgia não informada; providências divulgadas em 04/09/2026.",
+        "Fonte: MPAC."
+      ],
+      "body": [
+        "O Ministério Público do Acre solicitou informações ao Hospital da Mulher e da Criança do Juruá e à Sesacre sobre uma cirurgia que teria sido interrompida após oscilações de energia. O hospital recebeu prazo de dez dias para responder. O órgão também pediu esclarecimentos sobre o atendimento da paciente e uma inspeção no sistema de energia de emergência. O caso está em apuração.",
+        "Data da cirurgia não informada; providências divulgadas em 04/09/2026.",
+        "Fonte: MPAC."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2005,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "MPAC",
+          "url": "https://www.mpac.mp.br/cruzeiro-do-sul-mpac-oficia-sesacre-e-hospital-sobre-caso-de-mulher-que-teve-cirurgia-interrompida-por-oscilacoes-de-energia/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-04|jurua|mpac-apura-interrupcao-de-cirurgia-apos-oscilacoes-de-energia-em-cruzeiro-do-sul",
+      "accessibility": {
+        "alt": "Catálogo CZS — MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul",
+        "caption": "MPAC apura interrupção de cirurgia após oscilações de energia em Cruzeiro do Sul"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-projeto-apoia-200-produtores-rurais-com-recuperacao-de-areas-no-jurua",
+      "slug": "projeto-apoia-200-produtores-rurais-com-recuperacao-de-areas-no-jurua",
+      "title": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá",
+      "seoTitle": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá | Catálogo CZS",
+      "seoDescription": "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trab",
+      "eyebrow": "Vale do Juruá",
+      "date": "4 de set. de 2026",
+      "publishedAt": "2026-09-04T18:54:09Z",
+      "category": "Vale do Juruá",
+      "categoryKey": "vale-do-jurua",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá Online",
+      "sourceUrl": "https://juruaonline.com.br/projeto-financiado-pela-uniao-europeia-beneficia-200-produtores-rurais-no-vale-do-jurua/",
+      "sourceLabel": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá",
+      "lede": "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+      "summary": "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+      "analysis": "Projeto iniciado em dezembro de 2022; data da entrega mencionada não precisada pela reportagem.",
+      "highlights": [],
+      "development": [
+        "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+        "Projeto iniciado em dezembro de 2022; data da entrega mencionada não precisada pela reportagem.",
+        "Fonte: Juruá Online."
+      ],
+      "body": [
+        "Um projeto executado pelo Ipam com financiamento da União Europeia atende 200 produtores em Cruzeiro do Sul, Mâncio Lima e Rodrigues Alves. A iniciativa trabalha com recuperação de áreas degradadas, sistemas agroflorestais e produção de mandioca. Segundo a reportagem, associações participantes receberam equipamentos para beneficiar produtos e melhorar a estrutura de trabalho. O grupo atendido já está formado e não há novas vagas anunciadas.",
+        "Projeto iniciado em dezembro de 2022; data da entrega mencionada não precisada pela reportagem.",
+        "Fonte: Juruá Online."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2004,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá Online",
+          "url": "https://juruaonline.com.br/projeto-financiado-pela-uniao-europeia-beneficia-200-produtores-rurais-no-vale-do-jurua/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-04|jurua|projeto-apoia-200-produtores-rurais-com-recuperacao-de-areas-no-jurua",
+      "accessibility": {
+        "alt": "Catálogo CZS — Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá",
+        "caption": "Projeto apoia 200 produtores rurais com recuperação de áreas no Juruá"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-rua-nalberto-paiva-recebe-obras-de-asfaltamento-e-drenagem-no-miritizal",
+      "slug": "rua-nalberto-paiva-recebe-obras-de-asfaltamento-e-drenagem-no-miritizal",
+      "title": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal",
+      "seoTitle": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal | Catálogo CZS",
+      "seoDescription": "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e s",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "3 de set. de 2026",
+      "publishedAt": "2026-09-03T19:57:51Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "O Juruá em Tempo",
+      "sourceUrl": "https://www.juruaemtempo.com.br/destaque-2/prefeitura-de-cruzeiro-do-sul-inicia-asfaltamento-da-rua-nalberto-paiva-no-bairro-miritizal/",
+      "sourceLabel": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal",
+      "lede": "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+      "summary": "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+      "analysis": "Obras em andamento e visita ao local em 03/09/2026; início exato não especificado.",
+      "highlights": [],
+      "development": [
+        "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+        "Obras em andamento e visita ao local em 03/09/2026; início exato não especificado.",
+        "Fonte: O Juruá em Tempo."
+      ],
+      "body": [
+        "A Prefeitura de Cruzeiro do Sul informou que iniciou obras na rua Nalberto Paiva, no bairro Miritizal. A intervenção prevê cerca de 400 metros de asfalto e serviços de drenagem. A reportagem registra uma visita ao local em 3 de setembro e relatos de dificuldades de circulação durante as chuvas. A fonte consultada não informa o valor da obra nem o prazo de conclusão.",
+        "Obras em andamento e visita ao local em 03/09/2026; início exato não especificado.",
+        "Fonte: O Juruá em Tempo."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2003,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "O Juruá em Tempo",
+          "url": "https://www.juruaemtempo.com.br/destaque-2/prefeitura-de-cruzeiro-do-sul-inicia-asfaltamento-da-rua-nalberto-paiva-no-bairro-miritizal/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-03|jurua|rua-nalberto-paiva-recebe-obras-de-asfaltamento-e-drenagem-no-miritizal",
+      "accessibility": {
+        "alt": "Catálogo CZS — Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal",
+        "caption": "Rua Nalberto Paiva recebe obras de asfaltamento e drenagem no Miritizal"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-estilista-de-cruzeiro-do-sul-cria-colecao-inspirada-na-catedral-da-gloria",
+      "slug": "estilista-de-cruzeiro-do-sul-cria-colecao-inspirada-na-catedral-da-gloria",
+      "title": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória",
+      "seoTitle": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória | Catálogo CZS",
+      "seoDescription": "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa ",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "3 de set. de 2026",
+      "publishedAt": "2026-09-04T00:00:10Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Voz do Norte",
+      "sourceUrl": "https://www.vozdonorte.com.br/estilista-cruzeirense-que-mora-em-sao-paulo-desenvolve-colecao-de-roupas-inspirada-na-catedral-de-cruzeiro-do-sul/",
+      "sourceLabel": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória",
+      "lede": "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+      "summary": "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+      "analysis": "Data de criação ou apresentação da coleção não informada; reportagem publicada em 03/09/2026.",
+      "highlights": [],
+      "development": [
+        "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+        "Data de criação ou apresentação da coleção não informada; reportagem publicada em 03/09/2026.",
+        "Fonte: Voz do Norte."
+      ],
+      "body": [
+        "A estilista Greice de Souza Rodrigues, nascida em Cruzeiro do Sul e moradora de São Paulo, desenvolveu a coleção Raízes da Terra inspirada na Catedral Nossa Senhora da Glória. O trabalho integra sua formação em design de moda e reúne referências à cultura e à paisagem acreanas. A reportagem apresenta peças com elementos ligados ao rio Juruá, à floresta e à bandeira do Acre.",
+        "Data de criação ou apresentação da coleção não informada; reportagem publicada em 03/09/2026.",
+        "Fonte: Voz do Norte."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2002,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Voz do Norte",
+          "url": "https://www.vozdonorte.com.br/estilista-cruzeirense-que-mora-em-sao-paulo-desenvolve-colecao-de-roupas-inspirada-na-catedral-de-cruzeiro-do-sul/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-09-03|jurua|estilista-de-cruzeiro-do-sul-cria-colecao-inspirada-na-catedral-da-gloria",
+      "accessibility": {
+        "alt": "Catálogo CZS — Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória",
+        "caption": "Estilista de Cruzeiro do Sul cria coleção inspirada na Catedral da Glória"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
+    {
+      "id": "manual-czs-feira-no-festival-da-farinha-encaminha-14-filhotes-resgatados-para-adocao",
+      "slug": "feira-no-festival-da-farinha-encaminha-14-filhotes-resgatados-para-adocao",
+      "title": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção",
+      "seoTitle": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção | Catálogo CZS",
+      "seoDescription": "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os ",
+      "eyebrow": "Cruzeiro do Sul",
+      "date": "30 de ago. de 2026",
+      "publishedAt": "2026-08-30T15:20:41Z",
+      "category": "Cruzeiro do Sul",
+      "categoryKey": "cruzeiro-do-sul",
+      "previewClass": "thumb-cruzeiro-do-sul",
+      "sourceName": "Juruá Online",
+      "sourceUrl": "https://juruaonline.com.br/feira-de-adocao-no-festival-da-farinha-garante-novo-lar-para-14-filhotes-resgatados/",
+      "sourceLabel": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção",
+      "lede": "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+      "summary": "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+      "analysis": "Resgate e adoções em 29/08/2026.",
+      "highlights": [],
+      "development": [
+        "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+        "Resgate e adoções em 29/08/2026.",
+        "Fonte: Juruá Online."
+      ],
+      "body": [
+        "Uma feira realizada na última noite do Festival da Farinha, em Cruzeiro do Sul, encaminhou 14 filhotes resgatados para novos lares. Segundo a reportagem, os animais haviam sido encontrados na manhã de 29 de agosto, nas proximidades do Iapen. A ação reuniu a Secretaria Municipal de Meio Ambiente e o projeto Patinhas Felizes, com orientação às famílias sobre os cuidados e a responsabilidade pela adoção.",
+        "Resgate e adoções em 29/08/2026.",
+        "Fonte: Juruá Online."
+      ],
+      "imageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "feedImageUrl": "assets/brand/catalogo-czs-logo-official-crops-20260603/catalogo-czs-horizontal-real-alpha-cropped-20260603.png",
+      "sourceImageUrl": "",
+      "imageCredit": "Identidade visual: Catálogo CZS. Consulte a reportagem original no link da fonte.",
+      "imageFocus": "center",
+      "imageFit": "contain",
+      "media": null,
+      "videoUrl": "",
+      "priority": 2001,
+      "editorialPriority": "jurua-destaque",
+      "crossSources": [
+        {
+          "name": "Juruá Online",
+          "url": "https://juruaonline.com.br/feira-de-adocao-no-festival-da-farinha-garante-novo-lar-para-14-filhotes-resgatados/"
+        }
+      ],
+      "alternateSources": [],
+      "sourceCount": 1,
+      "alternateSlugs": [],
+      "eventKey": "2026-08-30|jurua|feira-no-festival-da-farinha-encaminha-14-filhotes-resgatados-para-adocao",
+      "accessibility": {
+        "alt": "Catálogo CZS — Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção",
+        "caption": "Feira no Festival da Farinha encaminha 14 filhotes resgatados para adoção"
+      },
+      "editorialVerifiedAt": "2026-09-05T00:33:27.863Z"
+    },
     {
       "id": "manual-czs-agenda-arizona-ranch-inauguracao-05-setembro",
       "slug": "agenda-arizona-ranch-inauguracao-05-setembro",
