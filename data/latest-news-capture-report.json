@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-08-10T03:58:41.014Z",
-  "finishedAt": "2026-08-10T03:58:45.911Z",
-  "capturedItems": 392,
-  "capturedToday": 143,
+  "startedAt": "2026-09-07T14:46:48.832Z",
+  "finishedAt": "2026-09-07T14:46:58.735Z",
+  "capturedItems": 386,
+  "capturedToday": 237,
   "activeWindowItems": 360,
-  "archiveItems": 480,
+  "archiveItems": 600,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
@@ -198,21 +198,21 @@
     {
       "source": "prefeitura-czs",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 2,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
