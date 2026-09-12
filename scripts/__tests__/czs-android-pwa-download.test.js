@@ -105,7 +105,7 @@ test("home usa atalhos laterais discretos para app e Instagram e convite no load
   const js = read("assets/v8-final/v8-merge-ready.js");
   const css = read("assets/v8-final/v8-merge-ready.css");
 
-  assert.match(html, /20260803-hero-live-layout-v1/, "cache da home deve subir para publicar a abertura V8 restaurada");
+  assert.match(html, /v8-merge-ready\.css\?v=[a-f0-9]{12}/, "CSS da home deve usar fingerprint para invalidar cache");
   assert.match(js, /function installRightActionRail\(\)/);
   assert.match(js, /id = "czsRightActionRail"/);
   assert.match(js, /data-czs-action="instagram"/);

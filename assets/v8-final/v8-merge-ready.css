@@ -16318,8 +16318,24 @@ body.v8-merge-ready .v8-continuous-grid {
   gap: clamp(12px, 1.4vw, 18px) !important;
   align-items: stretch !important;
   column-count: initial !important;
-  column-gap: normal !important;
+  column-gap: 18px !important;
   column-fill: initial !important;
+}
+
+body.v8-merge-ready #heroSide .v8-rail-story > img,
+body.v8-merge-ready #heroSide .v8-rail-story > video {
+  width: 100% !important;
+  height: 104px !important;
+  min-height: 0 !important;
+  object-fit: cover;
+  align-self: center;
+}
+
+body.v8-merge-ready #leadStory.v8-live-hero .v8-hero-copy h1 {
+  hyphens: none !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  letter-spacing: 0 !important;
 }
 
 @media (min-width: 1280px) {
