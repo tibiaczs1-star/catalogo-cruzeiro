@@ -41,7 +41,7 @@ test("feed cards do not stretch rows or reserve blank media", () => {
 test("homepage cache keys expose the repaired assets and news snapshot", () => {
   const index = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
 
-  assert.match(index, /v8-merge-ready\.css\?v=20260726-intro-recovery-v2/);
-  assert.match(index, /v8-merge-ready\.js\?v=20260726-intro-recovery-v2/);
-  assert.match(index, /news-data\.js\?v=20260716-photo-relevance-v1/);
+  assert.match(index, /v8-merge-ready\.css\?v=20260803-hero-live-layout-v1/);
+  assert.match(index, /v8-merge-ready\.js\?v=20260803-editorial-source-v1/);
+  assert.match(index, /news-data\.js\?v=20260803-regional-home/);
 });

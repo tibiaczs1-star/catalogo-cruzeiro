@@ -12,7 +12,7 @@ test("portal opens the approved cinematic intro once per Rio Branco day", () => 
   assert.match(index, /var requested=.*forceIntro.*intro/);
   assert.match(index, /var disabled=.*skipIntro/);
   assert.match(index, /var showIntro=!disabled&&\(requested\|\|!seenToday\)/);
-  assert.match(index, /v8-merge-ready\.css\?v=20260726-intro-recovery-v2/);
+  assert.match(index, /v8-merge-ready\.css\?v=20260803-hero-live-layout-v1/);
   assert.match(index, /<body class="v8-merge-ready">/);
   assert.match(runtime, /const introRequested = .*forceIntro.*intro/);
   assert.match(runtime, /const skipIntro = params\.get\("skipIntro"\) === "1";/);

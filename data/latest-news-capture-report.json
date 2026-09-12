@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-09-07T14:46:48.832Z",
-  "finishedAt": "2026-09-07T14:46:58.735Z",
-  "capturedItems": 386,
-  "capturedToday": 237,
+  "startedAt": "2026-09-12T16:03:27.117Z",
+  "finishedAt": "2026-09-12T16:03:32.860Z",
+  "capturedItems": 387,
+  "capturedToday": 266,
   "activeWindowItems": 360,
-  "archiveItems": 600,
+  "archiveItems": 480,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
@@ -219,14 +219,14 @@
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 0,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 3,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

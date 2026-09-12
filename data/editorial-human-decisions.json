@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "editorial-human-decisions",
-  "decidedAt": "2026-07-26T00:00:00-05:00",
+  "decidedAt": "2026-09-12T16:04:24.309Z",
   "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario",
   "policy": {
     "APPROVE": "Pode permanecer no portal; nao autoriza publicacao social automatica.",
@@ -471,6 +471,1215 @@
       "decision": "PARK",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "precisamos-de-mais-medicos-de-um-hospital-em-cada-municipio-fazer-o-que-for-necessario-para-salv",
+      "title": "“Precisamos de mais médicos, de um hospital em cada município, fazer o que for necessário para salvar vidas”, diz Bocalom",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-e-preso-apos-invadir-escola-armado-e-tentar-atirar-contra-policiais-em-sena-madureira",
+      "title": "Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureira",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "policia-civil-prende-jovem-suspeito-de-matar-homem-a-golpes-de-canivete-em-sena-madureira",
+      "title": "Polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madureira",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "siga-o-dinheiro-veja-as-principais-revelacoes-e-os-desdobramentos-do-caso-dark-horse",
+      "title": "Siga o dinheiro: veja as principais revelações e os desdobramentos do caso Dark Horse",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "diarista-fica-gravemente-ferido-apos-ser-atingido-por-galho-de-arvore-durante-derrubada-em-porto",
+      "title": "Diarista fica gravemente ferido após ser atingido por galho de árvore durante derrubada em Porto Acre",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mae-de-aluno-relata-que-invasor-correu-atras-de-estudante-com-uma-faca-em-escola-de-sena",
+      "title": "Mãe de aluno relata que invasor correu atrás de estudante com uma faca em escola de Sena",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "crime-motorista-de-ambulancia-e-suspeito-de-matar-6-pacientes-injetando-ar",
+      "title": "Crime: motorista de ambulância é suspeito de matar 6 pacientes injetando ar",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "santidade-na-veia-monge-e-preso-apos-video-de-sexo-e-suspeita-de-fraude-milionaria",
+      "title": "Santidade na veia: Monge é preso após vídeo de sexo e suspeita de fraude milionária",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mpac-alinha-atuacao-da-rede-de-protecao-para-fiscalizacao-durante-evento-lgbtqia",
+      "title": "MPAC alinha atuação da rede de proteção para fiscalização durante evento LGBTQIA+",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mpac-aleac-e-see-firmam-acordo-para-conscientizar-estudantes-sobre-prevencao-e-combate-a-corrupc",
+      "title": "MPAC, Aleac e SEE firmam acordo para conscientizar estudantes sobre prevenção e combate à corrupção",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mpac-participa-de-audiencia-publica-sobre-politicas-publicas-para-pessoas-com-lupus",
+      "title": "MPAC participa de audiência pública sobre políticas públicas para pessoas com lúpus",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "morre-adriana-oliveira-de-queiroz-servidora-da-fundhacre-mailza-lamenta",
+      "title": "Morre Adriana Oliveira de Queiroz, servidora da Fundhacre; Mailza lamenta",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "povo-yawanawa-se-posiciona-apos-denuncia-de-abuso-sexual-de-turista",
+      "title": "Povo Yawanawá se posiciona após denúncia de abuso sexual de turista",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "gestora-de-escola-em-sena-nega-perseguicao-a-alunos-durante-entrada-de-homem-no-predio",
+      "title": "Gestora de escola em Sena nega perseguição a alunos durante entrada de homem no prédio",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-e-ferido-nas-costas-em-ataque-com-arma-branca-no-segundo-distrito",
+      "title": "Jovem é ferido nas costas em ataque com arma branca no Segundo Distrito",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mae-vai-a-delegacia-por-documento-perdido-e-filho-foragido-do-acre-e-preso",
+      "title": "Mãe vai à delegacia por documento perdido e filho foragido do Acre é preso",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "acre-registra-mais-de-140-focos-de-incendio-em-7-dias-terras-indigenas-sao-atingidas",
+      "title": "Acre registra mais de 140 focos de incêndio em 7 dias; Terras Indígenas são atingidas",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-e-esfaqueado-no-segundo-distrito-nesta-madrugada",
+      "title": "Jovem é esfaqueado no Segundo Distrito nesta madrugada",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-leva-facada-e-pede-socorro-em-posto-de-combustivel-no-segundo-distrito-de-rio-branco",
+      "title": "Jovem leva facada e pede socorro em posto de combustível no Segundo Distrito de Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "carlinhos-do-pelado-entrega-novos-espacos-e-amplia-estrutura-da-escola-francisco-germano-na-zona",
+      "title": "Carlinhos do Pelado entrega novos espaços e amplia estrutura da Escola Francisco Germano na zona rural",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "trump-acredita-que-ira-esta-por-tras-de-ataque-a-oleoduto-da-arabia-saudita",
+      "title": "Trump acredita que Irã está por trás de ataque a oleoduto da Arábia Saudita",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "inmet-alerta-para-chuvas-e-ventos-forte-neste-sabado-em-cinco-municipios-acreanos",
+      "title": "Inmet alerta para chuvas e ventos forte neste sábado em cinco municípios acreanos",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "como-preparar-seu-cachorro-ou-gato-para-viajar-com-seguranca",
+      "title": "Como preparar seu cachorro ou gato para viajar com segurança",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "acidente-com-motosserra-deixa-mulher-ferida-vitima-e-transferida-para-rio-branco",
+      "title": "Acidente com motosserra deixa mulher ferida; vítima é transferida para Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-fica-ferida-apos-ser-atingida-por-motosserra-em-zona-rural-do-interior-do-acre",
+      "title": "Jovem fica ferida após ser atingida por motosserra em zona rural do interior do Acre",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "numero-de-mortos-em-incendio-em-balsa-nas-filipinas-sobe-para-76",
+      "title": "Número de mortos em incêndio em balsa nas Filipinas sobe para 76",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "desabamento-de-predio-em-construcao-deixa-dois-mortos-em-sao-paulo",
+      "title": "Desabamento de prédio em construção deixa dois mortos em São Paulo",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "duas-pessoas-estao-desaparecidas-apos-enxurrada-em-sao-paulo",
+      "title": "Duas pessoas estão desaparecidas após enxurrada em São Paulo",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "11-de-setembro-apos-25-anos-imagens-do-atentado-ainda-chocam-o-mundo",
+      "title": "11 de setembro: após 25 anos, imagens do atentado ainda chocam o mundo",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pf-aponta-cobrancas-de-flavio-a-vorcaro-por-filme-dark-horse",
+      "title": "PF aponta cobranças de Flávio a Vorcaro por filme Dark Horse",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "reconhecimento-da-culpa-do-estado-na-morte-de-marighella-faz-30-anos",
+      "title": "Reconhecimento da culpa do Estado na morte de Marighella faz 30 anos",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "morre-paulo-angioni-diretor-de-futebol-do-fluminense-e-com-mais-de-40-anos-de-servicos-no-futebo",
+      "title": "Morre Paulo Angioni, diretor de futebol do Fluminense e com mais de 40 anos de serviços no futebol",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "ministros-do-stf-articulam-sessao-fechada-para-julgamento-sobre-moraes-na-proxima-terca",
+      "title": "Ministros do STF articulam sessão fechada para julgamento sobre Moraes na próxima terça",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-armado-invade-escola-no-interior-do-acre-e-e-preso-apos-tentar-atirar-contra-policiais",
+      "title": "Homem armado invade escola no interior do Acre e é preso após tentar atirar contra policiais",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pf-lista-serie-de-contatos-e-encontros-entre-flavio-bolsonaro-e-vorcaro-veja-cronologia",
+      "title": "PF lista série de contatos e encontros entre Flávio Bolsonaro e Vorcaro; veja cronologia",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "rila-freze-apresenta-trajetoria-e-propostas-para-assistencia-social-saude-e-combate-a-violencia-",
+      "title": "Rila Freze apresenta trajetória e propostas para assistência social, saúde e combate à violência contra a mulher",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mae-se-acorrenta-em-hospital-para-salvar-filho-de-5-anos-que-precisa-de-cirurgia-no-coracao",
+      "title": "Mãe se acorrenta em hospital para salvar filho de 5 anos que precisa de cirurgia no coração",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "acidente-de-transito-mata-idosa-e-deixa-crianca-de-4-anos-ferida-em-rio-branco",
+      "title": "Acidente de trânsito mata idosa e deixa criança de 4 anos ferida em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mendonca-nega-usurpacao-de-competencia-e-pede-afastamento-de-diretor-da-pf",
+      "title": "Mendonça nega usurpação de competência e pede afastamento de diretor da PF",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "energisa-acre-reune-instituicoes-no-3-workshop-de-contingencia-climatica",
+      "title": "Energisa Acre reúne instituições no 3º Workshop de Contingência Climática",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "defesa-de-vitimas-de-confusao-em-escola-de-rio-branco-diz-que-houve-agressoes-e-anuncia-medidas-",
+      "title": "Defesa de vítimas de confusão em escola de Rio Branco diz que houve agressões e anuncia medidas jurídicas",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "brasileiro-com-supostos-mandados-de-prisao-no-brasil-e-baleado-foge-da-policia-e-acaba-recaptura",
+      "title": "Brasileiro com supostos mandados de prisão no Brasil é baleado, foge da polícia e acaba recapturado em Pando",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "custo-da-construcao-sobe-9-57-no-acre-em-12-meses-e-supera-media-nacional",
+      "title": "Custo da construção sobe 9,57% no Acre em 12 meses e supera média nacional",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "idosa-morre-apos-ser-atropelada-com-sobrinha-de-4-anos-na-amadeu-barbosa-em-rio-branco",
+      "title": "Idosa morre após ser atropelada com sobrinha de 4 anos na Amadeu Barbosa, em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "investigacao-aponta-que-empresa-da-produtora-de-dark-horse-antecipou-instalacao-de-wi-fi-em-sp-d",
+      "title": "Investigação aponta que empresa da produtora de 'Dark Horse' antecipou instalação de wi-fi em SP durante eleições de 2024",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-entrega-quadra-revitalizada-na-comunidade-boca-do-moa",
+      "title": "Prefeitura de Cruzeiro do Sul entrega quadra revitalizada na comunidade Boca do Moa",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "consumo-de-cigarros-eletronicos-cresce-mais-de-50-entre-estudantes",
+      "title": "Consumo de cigarros eletrônicos cresce mais de 50% entre estudantes",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "caso-master-relatorio-da-pf-expoe-fabrica-de-documentos-para-validar-credito-vendido-ao-brb",
+      "title": "Caso Master: relatório da PF expõe 'fábrica de documentos' para validar crédito vendido ao BRB",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "de-fraude-no-brb-a-escandalo-politico-o-que-as-investigacoes-do-caso-master-revelam-ate-agora",
+      "title": "De fraude no BRB a escândalo político: o que as investigações do Caso Master revelam até agora",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "custo-da-construcao-no-acre-passa-de-r-2-3-mil-por-metro-quadrado-em-agosto",
+      "title": "Custo da construção no Acre passa de R$ 2,3 mil por metro quadrado em agosto",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "policia-civil-prende-suspeito-de-homicidio-e-cumpre-quatro-ordens-judiciais-em-cruzeiro-do-sul",
+      "title": "Polícia Civil prende suspeito de homicídio e cumpre quatro ordens judiciais em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "turista-denuncia-abuso-sexual-em-festival-indigena-no-interior-do-acre-e-diz-que-foi-coagida",
+      "title": "Turista denuncia abuso sexual em festival indígena no interior do Acre e diz que foi coagida",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "forcas-de-seguranca-em-acao-integrada-da-pm-e-gefron-apreendem-cerca-de-143-quilos-de-skunk-em-r",
+      "title": "Forças de segurança em ação integrada da PM e Gefron apreendem cerca de 143 quilos de skunk em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-e-preso-com-cocaina-e-maconha-em-acao-do-esquadrao-aguia-no-beco-da-tiazinha-em-rio-branco",
+      "title": "Homem é preso com cocaína e maconha em ação do “Esquadrão Águia” no Beco da Tiazinha, em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pf-nega-monitoramento-ilegal-de-mendonca-e-diz-que-relatorio-seguiu-ordem-de-moraes",
+      "title": "PF nega monitoramento ilegal de Mendonça e diz que relatório seguiu ordem de Moraes",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "plataformas-vao-informar-canais-de-denuncia-de-violencia-contra-mulher",
+      "title": "Plataformas vão informar canais de denúncia de violência contra mulher",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "ifac-cruzeiro-do-sul-conquista-1-lugar-no-acre-na-olimpiada-brasileira-de-geografia",
+      "title": "IFAC Cruzeiro do Sul conquista 1º lugar no Acre na Olimpíada Brasileira de Geografia",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "operacao-do-gefron-leva-acoes-de-prevencao-e-seguranca-a-terra-indigena-arara-em-porto-walter",
+      "title": "Operação do Gefron leva ações de prevenção e segurança à Terra Indígena Arara, em Porto Walter",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "investigado-por-homicidio-e-preso-durante-operacao-da-policia-civil-em-cruzeiro-do-sul",
+      "title": "Investigado por homicídio é preso durante operação da Polícia Civil em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pesquisa-mostra-alan-rick-na-frente-mailza-proxima-e-bocalom-na-disputa-pelo-governo-do-acre",
+      "title": "Pesquisa mostra Alan Rick na frente, Mailza próxima e Bocalom na disputa pelo Governo do Acre",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "em-sena-madureira-velloso-defende-especialistas-permanentes-e-conclusao-do-hospital-joao-cancio",
+      "title": "Em Sena Madureira, Velloso defende especialistas permanentes e conclusão do Hospital João Câncio",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pf-e-pm-apreendem-143-65-kg-de-drogas-em-deposito-de-grupo-ligado-a-bolivia-em-rio-branco",
+      "title": "PF e PM apreendem 143,65 kg de drogas em depósito de grupo ligado à Bolívia em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "turista-denuncia-abuso-sexual-em-festival-indigena-no-acre-e-diz-que-foi-coagida",
+      "title": "Turista denuncia abuso sexual em festival indígena no Acre e diz que foi coagida",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "incendio-em-navio-deixa-20-mortos-e-cinco-desaparecidos-na-china",
+      "title": "Incêndio em navio deixa 20 mortos e cinco desaparecidos na China",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "morre-emma-bonino-simbolo-da-luta-pelos-direitos-das-mulheres-na-italia",
+      "title": "Morre Emma Bonino, símbolo da luta pelos direitos das mulheres na Itália",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "o-que-vem-depois-da-operacao-da-pf-contra-dark-horse",
+      "title": "O que vem depois da operação da PF contra Dark Horse",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "educacao-do-acre-entrega-revitalizacao-de-escola-indigena-no-jordao",
+      "title": "Educação do Acre entrega revitalização de escola indígena no Jordão",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "sejusp-apresenta-plano-integrado-de-seguranca-para-a-20-semana-acreana-da-diversidade",
+      "title": "Sejusp apresenta plano integrado de segurança para a 20ª Semana Acreana da Diversidade",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "proposta-aprovada-pelo-condecon-busca-ampliar-transparencia-e-protecao-aos-consumidores-acreanos",
+      "title": "Proposta aprovada pelo Condecon busca ampliar transparência e proteção aos consumidores acreanos",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pf-realiza-6-operacoes-apos-reintegracao-de-andrei-rodrigues-de-dark-horse-a-apologia-ao-nazismo",
+      "title": "PF realiza 6 operações após reintegração de Andrei Rodrigues: de Dark Horse a apologia ao nazismo",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "quimonos-uniformes-e-tatames-emendas-de-frias-bancaram-materiais-esportivos-nao-entregues",
+      "title": "Quimonos, uniformes e tatames: emendas de Frias bancaram materiais esportivos não entregues",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "governo-do-acre-fortalece-articulacao-com-unicef-para-protecao-de-criancas-e-adolescentes",
+      "title": "Governo do Acre fortalece articulação com Unicef para proteção de crianças e adolescentes",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "estado-convoca-candidatos-nomeados-no-iapen-para-inspecao-medica-e-entrega-de-documentos",
+      "title": "Estado convoca candidatos nomeados no Iapen para inspeção médica e entrega de documentos",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "desacato-a-autoridade-ameacou-a-policia-e-foi-baleado-com-elastomero-em-mancio-lima",
+      "title": "Desacato a autoridade: ameaçou a polícia e foi baleado com elastômero em Mâncio Lima",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-avanca-contra-policiais-com-facao-e-acaba-preso-em-cruzeiro-do-sul",
+      "title": "Homem avança contra policiais com facão e acaba preso em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "pm-recupera-veiculos-furtados-e-prende-suspeito-em-sena-madureira",
+      "title": "PM recupera veículos furtados e prende suspeito em Sena Madureira",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-e-preso-suspeito-de-abusar-de-menina-de-5-anos-apos-atrair-vitima-com-picole-no-acre",
+      "title": "Homem é preso suspeito de abusar de menina de 5 anos após atrair vítima com picolé no Acre",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "ao-ser-procurado-por-som-alto-homem-recebe-policiais-com-facao-e-acaba-preso-em-cruzeiro-do-sul",
+      "title": "Ao ser procurado por som alto, homem recebe policiais com facão e acaba preso em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "em-mancio-lima-homem-de-43-anos-e-preso-apos-ameacar-mulher",
+      "title": "Em Mâncio Lima, homem de 43 anos é preso após ameaçar mulher",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "mulher-e-agredida-com-socos-perde-a-consciencia-e-companheiro-e-preso-em-cruzeiro-do-sul",
+      "title": "Mulher é agredida com socos, perde a consciência e companheiro é preso em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:09.409Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-e-preso-apos-agredir-mulher-com-socos-em-cruzeiro-do-sul",
+      "title": "Homem é preso após agredir mulher com socos em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "apos-pilotar-moto-em-zigue-zague-e-sem-habilitacao-homem-acaba-preso-em-cruzeiro-do-sul",
+      "title": "Após pilotar moto em zigue-zague e sem habilitação, homem acaba preso em Cruzeiro do Sul",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "dom-flavio-pede-oracao-pelo-brasil-e-eleicoes-sem-violencia-em-mensagem-pelo-dia-da-patria",
+      "title": "Dom Flávio pede oração pelo Brasil e eleições sem violência em mensagem pelo Dia da Pátria",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "no-dia-da-independencia-bispo-de-cruzeiro-do-sul-pede-oracao-pelo-brasil-e-eleicoes-sem-violenci",
+      "title": "No Dia da Independência, bispo de Cruzeiro do Sul pede oração pelo Brasil e eleições sem violência",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-do-acre-e-morta-a-facadas-em-mt-homem-e-preso-em-flagrante",
+      "title": "Jovem do Acre é morta a facadas em MT; homem é preso em flagrante",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "ex-tenente-da-pm-acusado-de-matar-esposa-na-frente-das-filhas-sera-julgado-neste-mes-em-rio-bran",
+      "title": "Ex-tenente da PM acusado de matar esposa na frente das filhas será julgado neste mês em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "suspeito-de-furtar-carro-em-sena-madureira-e-preso-apos-veiculo-apresentar-pane-na-br-364",
+      "title": "Suspeito de furtar carro em Sena Madureira é preso após veículo apresentar pane na BR-364",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "nova-pesquisa-acirra-disputa-pelo-governo-do-acre-mailza-cresce-alan-lidera-e-bocalom-tem-maior-",
+      "title": "Nova pesquisa acirra disputa pelo Governo do Acre: Mailza cresce, Alan lidera e Bocalom tem maior rejeição",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "homem-furta-carro-abandona-veiculo-apos-pane-e-e-preso-a-pe-na-br-364-em-sena-madureira",
+      "title": "Homem furta carro, abandona veículo após pane e é preso a pé na BR-364, em Sena Madureira",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "inmet-emite-alerta-de-chuva-intensa-para-o-acre-vale-do-jurua-amanhece-com-temperaturas-amenas",
+      "title": "Inmet emite alerta de chuva intensa para o Acre; Vale do Juruá amanhece com temperaturas amenas",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "musico-e-encontrado-morto-dentro-da-propria-casa-em-rio-branco",
+      "title": "Músico é encontrado morto dentro da própria casa em Rio Branco",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "jovem-e-preso-apos-ameacar-pessoas-e-resistir-a-pm-em-mancio-lima",
+      "title": "Jovem é preso após ameaçar pessoas e resistir à PM em Mâncio Lima",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
+      "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
+    },
+    {
+      "slug": "apos-pilotar-moto-em-zigue-zague-e-sem-habilitacao-homem-e-preso",
+      "title": "Após pilotar moto em zigue-zague e sem habilitação, homem é preso",
+      "decision": "APPROVE",
+      "reason": "Aprovado em lote pelo usuario em 2026-09-12 para atualizar o portal; nao autoriza publicacao social automatica.",
+      "missingRequirements": [
+        "aprovar ou segurar a publicacao/capa manualmente",
+        "confirmar fonte e tom do resumo",
+        "verificar imagem e credito antes de destaque"
+      ],
+      "decidedAt": "2026-09-12T16:04:24.309Z",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
     }
   ]
