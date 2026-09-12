@@ -1,6 +1,6 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-09-12T17:11:07.421Z
+Gerado em: 2026-09-12T18:15:07.531Z
 Escopo: 360/504 itens recentes.
 
 ## Resumo
@@ -22,13 +22,13 @@ Escopo: 360/504 itens recentes.
 - P0 ide-fix: Polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madureira
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Siga o dinheiro: veja as principais revelações e os desdobramentos do caso Dark Horse
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Diarista fica gravemente ferido após ser atingido por galho de árvore durante derrubada em Porto Acre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Mãe de aluno relata que invasor correu atrás de estudante com uma faca em escola de Sena
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 ide-fix: Siga o dinheiro: veja as principais revelações e os desdobramentos do caso Dark Horse
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 ide-fix: Crime: motorista de ambulância é suspeito de matar 6 pacientes injetando ar
@@ -87,6 +87,18 @@ Escopo: 360/504 itens recentes.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
+- Nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta Friale
+  - Nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta Friale: veja os pontos
+  - Entenda nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta Friale
+  - Folha do Acre informa: Nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta
+- Bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS
+  - Bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS: veja os pontos principa
+  - Entenda bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS
+  - Acre in Foco informa: Bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS
+- Zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul
+  - Zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul: veja os pontos principais
+  - Entenda zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul
+  - Jurua em Tempo informa: Zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul
 - Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio
   - Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio: veja os pontos principais
   - Entenda pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio
@@ -123,18 +135,6 @@ Escopo: 360/504 itens recentes.
   - Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureira: veja os pontos pr
   - O que se sabe sobre homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureir
   - Folha do Acre informa: Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madur
-- Jovem de 25 anos desaparece no bairro Placas e deixa carta para a família
-  - Jovem de 25 anos desaparece no bairro Placas e deixa carta para a família: veja os pontos principais
-  - Entenda jovem de 25 anos desaparece no bairro Placas e deixa carta para a família
-  - Folha do Acre informa: Jovem de 25 anos desaparece no bairro Placas e deixa carta para a família
-- Thor Dantas defende infraestrutura, cooperativas e industrialização para transformar a economia do Acre
-  - Thor Dantas defende infraestrutura, cooperativas e industrialização para transformar a economia do Acre: veja 
-  - Entenda thor Dantas defende infraestrutura, cooperativas e industrialização para transformar a economia do Acr
-  - Acre in Foco informa: Thor Dantas defende infraestrutura, cooperativas e industrialização para transformar a e
-- Polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madureira
-  - Polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madureira: veja os pontos prin
-  - O que se sabe sobre polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madureira
-  - Folha do Acre informa: Polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madurei
 
 ## Formatos especiais seguros
 - guia de servico: Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio

@@ -16308,3 +16308,113 @@ body.v8-merge-ready #heroSide .v8-rail-story.v8-rail-story-text-only > span {
   grid-column: 1 / -1 !important;
   width: 100% !important;
 }
+
+/* CZS_EDITORIAL_POLISH_20260912:
+   A vitrine deixa de depender de colunas masonry, que criavam respiros
+   irregulares quando a fonte vinha sem miniatura, e passa a usar grade fixa. */
+body.v8-merge-ready .v8-continuous-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)) !important;
+  gap: clamp(12px, 1.4vw, 18px) !important;
+  align-items: stretch !important;
+  column-count: initial !important;
+  column-gap: normal !important;
+  column-fill: initial !important;
+}
+
+@media (min-width: 1280px) {
+  body.v8-merge-ready .v8-continuous-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 860px) and (max-width: 1279px) {
+  body.v8-merge-ready .v8-continuous-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 859px) {
+  body.v8-merge-ready .v8-continuous-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  body.v8-merge-ready .v8-continuous-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+body.v8-merge-ready .v8-continuous-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  border-radius: 8px !important;
+}
+
+body.v8-merge-ready .v8-continuous-card > a {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  height: 100% !important;
+  min-width: 0 !important;
+}
+
+body.v8-merge-ready .v8-continuous-card.is-text-only-card > a {
+  grid-template-rows: minmax(0, 1fr) !important;
+}
+
+body.v8-merge-ready .v8-continuous-card.is-text-only-card .v8-card-media {
+  display: none !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .v8-card-copy {
+  min-width: 0 !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .v8-card-copy h3 {
+  display: -webkit-box !important;
+  overflow: hidden !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  text-wrap: pretty !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 4 !important;
+  font-size: clamp(18px, 1.22vw, 23px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: 0 !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .v8-card-copy p {
+  display: -webkit-box !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .actions {
+  display: flex !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+body.v8-merge-ready .v8-continuous-card .actions .small-btn {
+  min-width: 0 !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 420px) {
+  body.v8-merge-ready .v8-continuous-card .v8-card-copy h3 {
+    font-size: 18px !important;
+    -webkit-line-clamp: 5 !important;
+  }
+
+  body.v8-merge-ready .v8-continuous-card .actions .small-btn {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+  }
+}

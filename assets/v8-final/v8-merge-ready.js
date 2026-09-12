@@ -1006,8 +1006,17 @@
   };
 
   const sourceName = (story) => story?.sourceName || "Fonte informada";
-  const storyDate = (story) => story?.date || "Atualizado agora";
-  const readMin = (story) => story?.readMin || 2;
+  const storyDate = (story) => {
+    const stamp = storyTimestamp(story);
+    if (stamp) return archiveDateFormatter.format(new Date(stamp)).replace(".", "");
+    return story?.date || "Atualizado";
+  };
+  const readMin = (story) => {
+    const explicit = Number(story?.readMin || 0);
+    if (explicit > 0) return explicit;
+    const words = articleParagraphs(story).join(" ").split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.min(8, Math.ceil(words / 220)));
+  };
   const archiveDateFormatter = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
   const archiveMonthFormatter = new Intl.DateTimeFormat("pt-BR", { month: "long", year: "numeric" });
 
@@ -1018,9 +1027,13 @@
     .trim();
 
   function storyTimestamp(story) {
-    const raw = story?.publishedAt || story?.date || story?.capturedAt || "";
-    const parsed = Date.parse(raw);
-    return Number.isFinite(parsed) ? parsed : 0;
+    const candidates = [story?.publishedAt, story?.updatedAt, story?.createdAt, story?.capturedAt, story?.date];
+    const nowLimit = Date.now() + 5 * 60 * 1000;
+    for (const raw of candidates) {
+      const parsed = Date.parse(raw || "");
+      if (Number.isFinite(parsed) && parsed <= nowLimit) return parsed;
+    }
+    return 0;
   }
 
   function storyAgeHours(story) {
@@ -1780,9 +1793,7 @@
         .filter((text) => text && !genericReaderParagraph(text));
       if (cleaned.length) return cleaned;
     }
-    return [
-      "Texto completo ainda não foi captado nesta amostra. Use a fonte original enquanto a captura integral é renovada.",
-    ];
+    return fallbackReaderParagraphs(story);
   }
 
   function renderReaderArticle(story) {
@@ -1792,7 +1803,26 @@
   }
 
   function genericReaderParagraph(text) {
-    return /novas atualizações oficiais|cruzar com outras fontes regionais|redação automática|ampliar a chamada além|bloqueou o resumo importado/i.test(String(text || ""));
+    return /novas atualizações oficiais|cruzar com outras fontes regionais|redação automática|ampliar a chamada além|bloqueou o resumo importado|publicou em .+?:|o czs mant[eé]m a fonte original|novas informa[cç][oõ]es entram|texto completo ainda n[aã]o foi captado/i.test(String(text || ""));
+  }
+
+  function fallbackReaderParagraphs(story = {}) {
+    const title = cleanReaderParagraph(story, story?.title || "", 0);
+    const summary = cleanReaderParagraph(
+      story,
+      story?.lede || story?.summary || story?.subtitle || story?.description || "",
+      1
+    );
+    const paragraphs = [];
+    if (summary && !genericReaderParagraph(summary) && normalizeText(summary) !== normalizeText(title)) {
+      paragraphs.push(summary);
+    } else if (title) {
+      paragraphs.push(`${title.replace(/[.!?]*$/, "")}.`);
+    }
+    paragraphs.push(
+      `Fonte: ${sourceName(story)}. O CZS preserva o link original para conferência e atualiza a matéria quando a fonte publica novos detalhes.`
+    );
+    return paragraphs.filter(Boolean);
   }
 
   function cleanReaderParagraph(story, text, index) {
@@ -4134,8 +4164,9 @@
     const size = storyCardSize(story, position, forceVideo);
     const tier = storyPriorityTier(story);
     const videoSrc = storyVideoUrl(story);
+    const hasVisual = Boolean(videoSrc || imgFor(story));
     return `
-      <article class="news-card v8-continuous-card v8-theme-${esc(theme.id)} v8-size-${esc(size)} v8-priority-${esc(tier)}${procurement ? " is-procurement-card" : ""}${videoSrc ? " has-inline-video" : ""}" data-v8-slug="${esc(story.slug)}" data-v8-theme="${esc(theme.id)}" data-v8-size="${esc(size)}" data-v8-priority="${esc(tier)}">
+      <article class="news-card v8-continuous-card v8-theme-${esc(theme.id)} v8-size-${esc(size)} v8-priority-${esc(tier)}${procurement ? " is-procurement-card" : ""}${videoSrc ? " has-inline-video" : ""}${hasVisual ? "" : " is-text-only-card"}" data-v8-slug="${esc(story.slug)}" data-v8-theme="${esc(theme.id)}" data-v8-size="${esc(size)}" data-v8-priority="${esc(tier)}">
         <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug)}">
           ${storyFeedMediaMarkup(story)}
           <div class="v8-card-copy">

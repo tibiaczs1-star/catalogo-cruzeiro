@@ -321,15 +321,52 @@ function fallbackImageFor(item = {}, reason = "rss-sem-imagem") {
   return "";
 }
 
+function isSyntheticCzsParagraph(value = "") {
+  const text = cleanText(value, 500);
+  return /publicou em .+?:|o czs mant[eé]m a fonte original|novas informa[cç][oõ]es entram|texto completo ainda n[aã]o foi captado|redação automática|bloqueou o resumo importado/i.test(text);
+}
+
+function bodyCandidate(value = "", limit = 620) {
+  const text = cleanText(value, limit);
+  if (!text || text.length < 35) return "";
+  if (hasFeedMarkupNoise(text) || isSyntheticCzsParagraph(text)) return "";
+  return text;
+}
+
+function bodyDateLabel(item = {}) {
+  const raw = item.publishedAt || item.updatedAt || item.createdAt || item.capturedAt || "";
+  const parsed = Date.parse(raw);
+  if (!Number.isFinite(parsed)) return "";
+  if (parsed > Date.now() + 5 * 60 * 1000) return "";
+  return formatDate(raw);
+}
+
 function buildBody(item = {}) {
   const sourceName = cleanText(item.sourceName || "Fonte monitorada", 80);
   const title = cleanText(item.title || "noticia", 180);
-  const dateLabel = formatDate(item.publishedAt || item.createdAt || item.date);
-  return [
-    `${sourceName} publicou em ${dateLabel}: ${title}.`,
-    "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-    "Novas informações entram quando houver atualização verificável."
+  const mainText = [
+    item.fullText,
+    item.content,
+    item.articleBody,
+    item.lede,
+    item.summary,
+    item.description,
+    item.excerpt
+  ]
+    .map((value) => bodyCandidate(value))
+    .find((value) => value && normalizeText(value) !== normalizeText(title));
+  const dateLabel = bodyDateLabel(item);
+  const paragraphs = [
+    mainText || (title ? `${title}.` : "Atualizacao monitorada pela editoria do CZS."),
+    [
+      `Fonte: ${sourceName}.`,
+      dateLabel ? `Data verificada: ${dateLabel}.` : "Data da fonte mantida para conferencia no link original.",
+      item.sourceUrl ? "Link original preservado." : ""
+    ]
+      .filter(Boolean)
+      .join(" ")
   ];
+  return paragraphs.filter(Boolean);
 }
 
 function hasFeedMarkupNoise(value = "") {
@@ -423,6 +460,15 @@ function buildNewsAudioNarrationText(item = {}) {
   );
 }
 
+function shouldRegenerateNewsNarration(value = "") {
+  const text = String(value || "");
+  return (
+    !cleanText(text) ||
+    /Cat[aá]logo\s+Cat[aá]logo/i.test(text) ||
+    /\b(good\s+(morning|afternoon|evening)|breaking news|news update|this is)\b/i.test(text)
+  );
+}
+
 function buildNewsVideoCaptionText(item = {}) {
   const title = cleanText(item.title || "", 170);
   const summary = cleanText(item.lede || item.summary || item.description || "", 240);
@@ -437,9 +483,12 @@ function buildNewsVideoCaptionText(item = {}) {
 
 function applyAudioAndVideoMetadata(item = {}) {
   const narrationText = buildNewsAudioNarrationText(item);
-  item.audioNarrationText = prepareBrazilianNarrationText(item.audioNarrationText || narrationText);
+  const existingNarration = prepareBrazilianNarrationText(item.audioNarrationText || "");
+  item.audioNarrationText = shouldRegenerateNewsNarration(existingNarration) ? narrationText : existingNarration;
   item.audioNarrationTranscript = prepareBrazilianNarrationText(
-    item.audioNarrationTranscript || item.audioNarrationText || narrationText
+    shouldRegenerateNewsNarration(item.audioNarrationTranscript)
+      ? item.audioNarrationText || narrationText
+      : item.audioNarrationTranscript
   );
   item.audioNarrationVoice = RAYL_NEWS_VOICE_ID;
   item.audioNarrationVoiceName = RAYL_NEWS_VOICE_NAME;
@@ -566,7 +615,12 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
   const summary = cleanText(raw.summary || raw.description || raw.excerpt || raw.content || title, 260);
   if (!title || !link) return null;
 
-  const publishedAt = parseFeedDate(raw.publishedAt || raw.date || raw.updatedAt || "");
+  const capturedAt = parseFeedDate(raw.capturedAt || "");
+  const parsedPublishedAt = parseFeedDate(raw.publishedAt || raw.date || raw.updatedAt || "");
+  const publishedStamp = Date.parse(parsedPublishedAt);
+  const publishedAt = Number.isFinite(publishedStamp) && publishedStamp <= Date.now() + 5 * 60 * 1000
+    ? parsedPublishedAt
+    : capturedAt;
   const categoryInfo = inferCategory({ title, summary, source, rawCategory: raw.category || "" });
   const slug = slugify(title);
   const rawVideoUrl = sanitizeUrl(raw.videoUrl || raw.video || raw.media?.videoUrl || raw.media?.url || "");
@@ -579,6 +633,7 @@ function buildDirectSourceRecord(raw = {}, source = {}) {
     eyebrow: categoryInfo.category,
     date: formatDate(publishedAt),
     publishedAt,
+    capturedAt,
     category: categoryInfo.category,
     categoryKey: categoryInfo.categoryKey,
     previewClass: PREVIEW_CLASS_BY_CATEGORY[categoryInfo.categoryKey] || "thumb-cotidiano",
@@ -705,7 +760,7 @@ function parseOfficialHomeHeadlineItems(htmlText = "", source = {}, limit = DEFA
         link,
         summary: description,
         imageUrl,
-        publishedAt: new Date().toISOString()
+        capturedAt: new Date().toISOString()
       },
       source
     );
@@ -747,7 +802,7 @@ function parsePrefeituraWixHomeItems(htmlText = "", source = {}, limit = DEFAULT
         link,
         summary: description || title,
         imageUrl,
-        publishedAt: new Date().toISOString()
+        capturedAt: new Date().toISOString()
       },
       source
     );
