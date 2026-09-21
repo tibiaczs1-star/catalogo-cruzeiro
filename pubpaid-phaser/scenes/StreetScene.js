@@ -189,7 +189,7 @@ export class StreetScene extends Phaser.Scene {
     updateGameState({
       currentScene: "street",
       focus: "porta principal",
-      objective: "Entrar no PubPaid pela porta principal",
+      objective: "Entrar no Arizona Pub Games pela porta principal",
       nerdAgent: formatNerdAgent(NERD_TEAM.engine),
       streetMap: this.getStreetMapSnapshot(),
       streetMapWarnings: this.streetMapWarnings,
@@ -745,7 +745,7 @@ export class StreetScene extends Phaser.Scene {
     updateGameState({
       currentScene: "street",
       focus: nearDoor ? "porta principal" : "rua viva",
-      objective: nearDoor ? "Entrando no salão" : "Entrar no PubPaid pela porta principal",
+      objective: nearDoor ? "Entrando no salão" : "Entrar no Arizona Pub Games pela porta principal",
       nerdAgent: formatNerdAgent(nearDoor ? NERD_TEAM.engine : NERD_TEAM.physics),
       prompt: nearDoor
         ? "Porta encontrada. Entrando no salão."
@@ -818,7 +818,7 @@ export class StreetScene extends Phaser.Scene {
       focus: "portal principal",
       objective: "Transicao para o salao",
       nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: "Entrando no salao do PubPaid..."
+      prompt: "Entrando no salao do Arizona Pub Games..."
     });
   }
 }

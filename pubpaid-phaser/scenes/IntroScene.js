@@ -120,7 +120,7 @@ export class IntroScene extends Phaser.Scene {
 
     updateGameState({
       currentScene: "intro",
-      focus: "intro cinematica PubPaid",
+      focus: "intro cinematica Arizona Pub Games",
       objective: "",
       nerdAgent: formatNerdAgent(NERD_TEAM.sprite),
       prompt: ""
@@ -141,7 +141,7 @@ export class IntroScene extends Phaser.Scene {
     this.vignette = this.add.graphics();
     this.drawVignette();
 
-    this.caption = this.add.text(48, GAME_HEIGHT - 54, "pubpaid 2.0", {
+    this.caption = this.add.text(48, GAME_HEIGHT - 54, "arizona pub games 2.0", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "15px",
       fontStyle: "bold",

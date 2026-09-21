@@ -9023,32 +9023,66 @@ body.v8-merge-ready .v8-entry-popup.v8-commercial-entry .v8-commercial-shell {
   padding-top: 70px !important;
 }
 
+body.v8-merge-ready #arquivoArtigoSystem.v8-archive-explorer,
 body.v8-merge-ready .v8-archive-explorer {
-  margin-top: 32px;
+  display: block !important;
+  max-width: min(1180px, calc(100% - 32px)) !important;
+  margin: 32px auto 0 !important;
 }
 
-body.v8-merge-ready .v8-archive-head {
-  align-items: end;
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
 }
 
-body.v8-merge-ready .v8-archive-tools {
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head > div:first-child {
+  min-width: 0;
+}
+
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head .actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  min-width: max-content;
+}
+
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head .btn,
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head .small-btn {
+  grid-column: auto !important;
+  justify-self: auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+  white-space: nowrap !important;
+  writing-mode: horizontal-tb !important;
+}
+
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-tools {
+  display: grid !important;
+  grid-template-columns: minmax(260px, 1.4fr) repeat(3, minmax(150px, 0.8fr)) !important;
+  align-items: end !important;
+  gap: 12px !important;
+  margin: 18px 0 14px !important;
+}
+
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-tools label {
   display: grid;
-  grid-template-columns: minmax(240px, 1.35fr) repeat(3, minmax(150px, 1fr));
-  gap: 12px;
-  margin: 16px 0;
-}
-
-body.v8-merge-ready .v8-archive-tools label {
-  display: grid;
+  min-width: 0;
   gap: 6px;
   font-size: 11px;
   font-weight: 900;
-  text-transform: uppercase;
   color: var(--czs-blue, #061e63);
+  text-align: left;
+  text-transform: uppercase;
 }
 
-body.v8-merge-ready .v8-archive-tools input,
-body.v8-merge-ready .v8-archive-tools select {
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-tools input,
+body.v8-merge-ready #arquivoArtigoSystem .v8-archive-tools select {
+  box-sizing: border-box;
+  width: 100%;
   min-height: 44px;
   border: 1px solid #cfd7e8;
   border-radius: 0;
@@ -9062,6 +9096,7 @@ body.v8-merge-ready .v8-archive-folders {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  justify-content: flex-start;
   margin-bottom: 14px;
 }
 
@@ -9095,7 +9130,7 @@ body.v8-merge-ready .v8-archive-count {
 
 body.v8-merge-ready .v8-archive-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 14px;
 }
 
@@ -9109,7 +9144,7 @@ body.v8-merge-ready .v8-archive-empty {
 
 body.v8-merge-ready .v8-archive-card a {
   display: grid;
-  grid-template-columns: 116px 1fr;
+  grid-template-columns: 104px minmax(0, 1fr);
   gap: 12px;
   min-height: 110px;
   padding: 10px;
@@ -9118,10 +9153,14 @@ body.v8-merge-ready .v8-archive-card a {
 }
 
 body.v8-merge-ready .v8-archive-card img {
-  width: 116px;
+  width: 104px;
   height: 92px;
   object-fit: cover;
   border-radius: 0;
+}
+
+body.v8-merge-ready .v8-archive-card span {
+  min-width: 0;
 }
 
 body.v8-merge-ready .v8-archive-card small {
@@ -9130,6 +9169,7 @@ body.v8-merge-ready .v8-archive-card small {
   color: #43516d;
   font-size: 11px;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 body.v8-merge-ready .v8-archive-card b {
@@ -9137,6 +9177,7 @@ body.v8-merge-ready .v8-archive-card b {
   color: #071532;
   font-size: 16px;
   line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 body.v8-merge-ready .v8-archive-empty {
@@ -9184,16 +9225,27 @@ body.v8-merge-ready .assistant-card.aylla-card {
 }
 
 @media (max-width: 900px) {
-  body.v8-merge-ready .v8-archive-tools,
-  body.v8-merge-ready .v8-archive-list {
-    grid-template-columns: 1fr;
+  body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head {
+    align-items: flex-start !important;
+    flex-direction: column;
   }
 
-  body.v8-merge-ready .v8-archive-card a {
-    grid-template-columns: 96px 1fr;
+  body.v8-merge-ready #arquivoArtigoSystem .v8-archive-head .actions {
+    justify-content: flex-start !important;
+    min-width: 0;
+    width: 100%;
   }
 
-  body.v8-merge-ready .v8-archive-card img {
+  body.v8-merge-ready #arquivoArtigoSystem .v8-archive-tools,
+  body.v8-merge-ready #arquivoArtigoSystem .v8-archive-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.v8-merge-ready #arquivoArtigoSystem .v8-archive-card a {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  body.v8-merge-ready #arquivoArtigoSystem .v8-archive-card img {
     width: 96px;
     height: 82px;
   }

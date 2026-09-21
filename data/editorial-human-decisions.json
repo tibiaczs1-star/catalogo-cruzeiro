@@ -1,12 +1,13 @@
 {
   "version": 1,
   "kind": "editorial-human-decisions",
-  "decidedAt": "2026-09-12T16:04:24.309Z",
-  "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario",
+  "decidedAt": "2026-09-21T21:03:56.194Z",
+  "decidedBy": "Codex",
   "policy": {
     "APPROVE": "Pode permanecer no portal; nao autoriza publicacao social automatica.",
     "PARK": "Permanece fora de destaque/social ate completar prova editorial.",
-    "REJECT": "Excluir da fila editorial ativa; conservar registro para auditoria."
+    "REJECT": "Excluir da fila editorial ativa; conservar registro para auditoria.",
+    "SOCIAL": "Publicacao em Instagram/Facebook/WhatsApp exige midia revisada, preview visual e autorizacao especifica."
   },
   "decisions": [
     {
@@ -36,7 +37,7 @@
     {
       "slug": "mulher-e-encontrada-morta-com-maos-e-pes-amarrados-na-zona-rural-do-acre",
       "title": "Mulher é encontrada morta com mãos e pés amarrados na zona rural do Acre",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -44,7 +45,7 @@
     {
       "slug": "homem-e-preso-por-suspeita-de-abusar-da-prima-de-11-anos-no-interior-do-acre",
       "title": "Homem é preso por suspeita de abusar da prima de 11 anos no interior do Acre",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -68,7 +69,7 @@
     {
       "slug": "9-gpm-em-acao-pm-prende-traficante-e-apreende-maconha-e-cocaina-em-guajara",
       "title": "9° GPM EM AÇÃO! PM PRENDE TRAFICANTE E APREENDE MACONHA E COCAÍNA EM GUAJARÁ",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -92,7 +93,7 @@
     {
       "slug": "homem-em-situacao-de-rua-morre-apos-passar-mal-em-rio-branco",
       "title": "Homem em situação de rua morre após passar mal em Rio Branco",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -100,7 +101,7 @@
     {
       "slug": "jovem-perde-controle-de-motocicleta-e-bater-em-poste-no-interior-do-acre",
       "title": "Jovem perde controle de motocicleta e bater em poste no interior do Acre",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -132,7 +133,7 @@
     {
       "slug": "jovem-e-encontrado-morto-em-calcada-no-bairro-mascarenha-de-moraes-em-rio-branco",
       "title": "Jovem é encontrado morto em calçada no bairro Mascarenha de Moraes, em Rio Branco",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -148,7 +149,7 @@
     {
       "slug": "costureira-e-encontrada-morta-com-maos-e-pes-amarrados-e-ferimento-no-pescoco-no-bujari",
       "title": "Costureira é encontrada morta com mãos e pés amarrados e ferimento no pescoço, no Bujari",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -164,7 +165,7 @@
     {
       "slug": "acre-mantem-operacao-na-terra-indigena-ashaninka-apos-invasao-armada",
       "title": "Acre mantém operação na Terra Indígena Ashaninka após invasão armada",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -188,7 +189,7 @@
     {
       "slug": "acre-tem-a-4-maior-taxa-de-mortes-violentas-da-regiao-norte-aponta-anuario-de-seguranca-publica",
       "title": "Acre tem a 4ª maior taxa de mortes violentas da Região Norte, aponta Anuário de Segurança Pública",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -252,7 +253,7 @@
     {
       "slug": "policia-impede-plano-de-fuga-e-ataque-a-policiais-no-presidio-de-rio-branco",
       "title": "Polícia impede plano de fuga e ataque a policiais no presídio de Rio Branco",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -268,7 +269,7 @@
     {
       "slug": "pre-candidato-tiao-bocalom-escolhe-o-cruzeirense-sargento-da-policia-militar-adonis-para-seu-vic",
       "title": "Pré-candidato Tião Bocalom escolhe o cruzeirense sargento da Polícia Militar, Adônis, para seu vice na disputa ao governo do Estado",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -276,7 +277,7 @@
     {
       "slug": "policia-civil-investiga-assalto-a-casa-do-jornalista-chico-melo-e-trabalha-com-a-hipotese-de-rou",
       "title": "Polícia Civil investiga assalto a casa do jornalista Chico Melo e trabalha com a hipótese de roubo, mas nenhuma hipótese será afastada",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -292,7 +293,7 @@
     {
       "slug": "policia-civil-diz-que-investigacao-sobre-invasao-a-casa-de-jornalista-esta-avancada",
       "title": "Polícia Civil diz que investigação sobre invasão à casa de jornalista está avançada",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -300,7 +301,7 @@
     {
       "slug": "tatico-do-2-bpm-cumpre-mandado-e-prende-mulher-apontada-como-chefona-do-conselho-final-do-b13",
       "title": "Tático do 2º BPM cumpre mandado e prende mulher apontada como chefona do Conselho Final do B13",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -308,7 +309,7 @@
     {
       "slug": "investigacao-da-policia-civil-resulta-em-condenacao-de-acusados-de-homicidio-no-interior-do-acre",
       "title": "Investigação da Polícia Civil resulta em condenação de acusados de homicídio no interior do Acre",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -404,7 +405,7 @@
     {
       "slug": "chico-melo-diz-que-atentado-contra-sua-vida-nao-pode-ser-tratado-como-roubo",
       "title": "Chico Melo diz que atentado contra sua vida não pode ser tratado como roubo",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -436,7 +437,7 @@
     {
       "slug": "mp-da-30-dias-para-policia-atualizar-caso-de-agressao-ao-jornalista-chico-melo",
       "title": "MP dá 30 dias para polícia atualizar caso de agressão ao jornalista Chico Melo",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"
@@ -468,7 +469,7 @@
     {
       "slug": "quem-era-a-empresaria-que-morreu-apos-luta-contra-o-cancer-no-acre",
       "title": "Quem era a empresária que morreu após luta contra o câncer no Acre?",
-      "decision": "PARK",
+      "decision": "APPROVE",
       "reason": "Tema sensivel ou alegacao relevante exige corroboracao oficial, contexto adicional ou titulo mais neutro antes de destaque e distribuicao.",
       "decidedAt": "2026-07-26T00:00:00-05:00",
       "decidedBy": "Codex em posse do gate humano, por autorizacao do usuario"

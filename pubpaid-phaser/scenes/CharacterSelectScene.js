@@ -182,7 +182,7 @@ export class CharacterSelectScene extends Phaser.Scene {
         spriteKey: option.spriteKey
       },
       currentScene: "street",
-      objective: "Entrar no PubPaid pela porta principal",
+      objective: "Entrar no Arizona Pub Games pela porta principal",
       focus: "rua viva",
       prompt: `${option.title} confirmado. Boa noite.`
     });

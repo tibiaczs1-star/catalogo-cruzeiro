@@ -22,12 +22,14 @@ const {
 } = require("./pubpaid-runtime");
 const { createASHotelariaServerIntegration } = require("./ashotelaria/server-integration");
 const { createMundoAppleServerIntegration } = require("./mundoapple/server-integration");
+const { createGarraAdminServerIntegration } = require("./garra-admin/server-integration");
 const { createArizonaRanchIntegration } = require("./arizona-ranch");
 const { createCashierIntegration } = require("./cashier");
 const { decorateNewsItem, orderPortalStories } = require("./editorial-scope");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
 let mundoAppleIntegration = null;
+let garraAdminIntegration = null;
 let arizonaRanchIntegration = null;
 let cashierIntegration = null;
 const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
@@ -81,7 +83,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260527-chessfast1";
+const PUBPAID_CLIENT_BUILD_VERSION = "arizona-pub-20260905-01";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -128,6 +130,15 @@ mundoAppleIntegration = createMundoAppleServerIntegration({
   dataDir: DATA_DIR,
   environment: process.env,
   sendFile,
+});
+garraAdminIntegration = createGarraAdminServerIntegration({
+  rootDir: ROOT_DIR,
+  dataDir: DATA_DIR,
+  sendFile,
+  isAdmin: requireAdmin,
+  readJson,
+  writeJson,
+  getActor: () => "catalogo-admin",
 });
 cashierIntegration = createCashierIntegration({ dataDir: DATA_DIR, environment: process.env });
 arizonaRanchIntegration = createArizonaRanchIntegration({
@@ -16896,6 +16907,10 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
+  if (pathname.startsWith("/api/garra-admin/")) {
+    return garraAdminIntegration.handleApi(req, res, pathname);
+  }
+
   if (pathname.startsWith("/api/cashier/")) {
     const handled = cashierIntegration?.handleApi(request, response, pathname);
     if (handled) return;
@@ -20781,6 +20796,11 @@ async function handleApi(req, res, pathname, searchParams) {
 
 async function handleStatic(req, res, pathname, requestUrl) {
   const templateVars = buildSeoTemplateVars(req, pathname, requestUrl);
+
+  if (garraAdminIntegration) {
+    const handled = await garraAdminIntegration.handleStatic(req, res, pathname);
+    if (handled) return;
+  }
 
   if (arizonaRanchIntegration) {
     const handled = await arizonaRanchIntegration.handleStatic(req, res, pathname);
