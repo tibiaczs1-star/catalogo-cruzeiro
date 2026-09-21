@@ -4238,33 +4238,37 @@
       "editorialSurfaceTier": 2
     },
     {
-      "id": "https://agazetadoacre.com/2026/09/noticias/politica/apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta/",
       "slug": "apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta",
-      "title": "Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta",
-      "eyebrow": "Politica",
-      "date": "20 de set de 2026",
+      "title": "Mailza cancela debates; campanha cita agenda no interior do Acre",
       "publishedAt": "2026-09-20T21:52:38.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
+      "date": "20 de setembro de 2026",
       "sourceName": "A Gazeta do Acre",
       "sourceUrl": "https://agazetadoacre.com/2026/09/noticias/politica/apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta/",
-      "sourceLabel": "Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta",
-      "lede": "A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco.",
-      "summary": "A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco.",
+      "summary": "Campanha informou compromissos em Santa Rosa do Purus e Cruzeiro do Sul para 21 de setembro, data dos debates da TV Norte e TV Gazeta.",
+      "imageUrl": "/assets/news/editorial-20260921/mailza-entrevista.jpeg",
+      "imageCredit": "Foto de arquivo / Reprodução: A Gazeta do Acre",
+      "body": [
+        "Mailza cancelou a participação nos debates da TV Norte e da TV Gazeta previstos para segunda-feira, 21 de setembro, segundo reportagem de A Gazeta do Acre. O comunicado foi enviado às emissoras na véspera.",
+        "Em nota, a campanha informou compromissos em Santa Rosa do Purus e Cruzeiro do Sul, ao lado de Jéssica Sales. Essa é a justificativa apresentada pela equipe para a ausência.",
+        "A realização dos encontros citados na nota não foi confirmada de forma independente nesta apuração. A justificativa da campanha e o cancelamento dos debates são informações distintas.",
+        "A imagem mostra uma entrevista de rádio anterior e é usada como foto de arquivo. Não é registro dos debates cancelados."
+      ],
+      "id": "https://agazetadoacre.com/2026/09/noticias/politica/apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta/",
+      "eyebrow": "Política",
+      "category": "Política",
+      "categoryKey": "politica",
+      "previewClass": "thumb-politica",
+      "lede": "Campanha informou compromissos em Santa Rosa do Purus e Cruzeiro do Sul para 21 de setembro, data dos debates da TV Norte e TV Gazeta.",
       "analysis": "",
       "highlights": [],
       "development": [],
-      "imageUrl": "",
-      "feedImageUrl": "",
-      "sourceImageUrl": "",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "sourceLabel": "Mailza cancela debates; campanha cita agenda no interior do Acre",
+      "feedImageUrl": "/assets/news/editorial-20260921/mailza-entrevista.jpeg",
+      "sourceImageUrl": "/assets/news/editorial-20260921/mailza-entrevista.jpeg",
+      "imageFit": "contain",
+      "imageFocus": "center",
       "media": null,
       "videoUrl": "",
-      "priority": 3400,
-      "editorialPriority": "acre-destaque",
       "crossSources": [
         {
           "name": "A Gazeta do Acre",
@@ -4281,32 +4285,11 @@
       "alternateSlugs": [
         "apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta"
       ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco. A informação vem de A Gazeta do Acre.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco. A informação vem de A Gazeta do Acre.",
-      "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-      "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-      "audioNarrationVoiceEngine": "edge-tts",
-      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-      "audioNarrationLanguage": "pt-BR",
-      "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta. A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco. Fonte: A Gazeta do Acre.",
-      "videoCaptionStatus": "ready",
-      "accessibility": {
-        "hasAudioNarrationText": true,
-        "hasAudioNarrationTranscript": true,
-        "raylVoice": "rayl-francisca-whatsapp-normal",
-        "hasVideoCaptionText": true
-      },
-      "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-      "body": [
-        "A Gazeta do Acre publicou em 20 de set de 2026: Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialScope": "acre",
-      "editorialLocalTier": 2,
-      "editorialSurfaceTier": 2
+      "editorialScope": "cruzeiro-do-sul",
+      "editorialLocalTier": 4,
+      "editorialSurfaceTier": 4,
+      "priority": 5400,
+      "editorialPriority": "cruzeiro-destaque"
     },
     {
       "id": "https://ac24horas.com/2026/09/20/veloso-destaca-propostas-de-geracao-de-emprego-durante-carreata-de-bocalom/",
@@ -7050,34 +7033,42 @@
       "editorialSurfaceTier": 2
     },
     {
-      "id": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
       "slug": "justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidad",
-      "title": "Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade",
-      "eyebrow": "Politica",
-      "date": "20 de set de 2026",
+      "title": "Justiça mantém anúncio sobre condenação anterior; decisão trata da propaganda",
       "publishedAt": "2026-09-20T18:12:07.000Z",
-      "category": "Politica",
+      "date": "20 de setembro de 2026",
+      "sourceName": "Estado do Acre",
+      "sourceUrl": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
+      "summary": "Segundo reportagem, a Justiça Eleitoral do Acre negou pedido urgente para retirar anúncio de Alan Rick. Defesa de Mailza afirma que há recurso no caso anterior.",
+      "imageUrl": "/assets/news/editorial-20260921/tre-acre.jpg",
+      "imageCredit": "Foto de arquivo: TRE-AC / via Ecos da Notícia",
+      "body": [
+        "Segundo reportagem do Estado do Acre publicada em 20 de setembro, a Justiça Eleitoral negou o pedido urgente da campanha de Mailza para retirar um anúncio de Alan Rick. A peça faz referência a uma condenação anterior por improbidade administrativa.",
+        "A defesa reconhece a existência da decisão anterior, mas afirma que ainda há recurso. A decisão noticiada agora trata da manutenção da propaganda: não é uma nova condenação nem uma absolvição de Mailza.",
+        "A negativa do pedido urgente não encerra, por si só, a discussão sobre o anúncio. O processo sobre a propaganda continua, segundo a reportagem.",
+        "Este resumo se baseia na reportagem identificada como fonte. O inteiro teor da decisão recente não foi consultado. A foto da sede do TRE-AC é de arquivo."
+      ],
+      "id": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
+      "eyebrow": "Política",
+      "category": "Política",
       "categoryKey": "politica",
       "previewClass": "thumb-politica",
-      "sourceName": "ac24horas",
-      "sourceUrl": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
-      "sourceLabel": "Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade",
-      "lede": "Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação.",
-      "summary": "Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação.",
+      "lede": "Segundo reportagem, a Justiça Eleitoral do Acre negou pedido urgente para retirar anúncio de Alan Rick. Defesa de Mailza afirma que há recurso no caso anterior.",
       "analysis": "",
       "highlights": [],
       "development": [],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-06-at-12.39.28-1200x801.jpeg",
-      "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-06-at-12.39.28-1200x801.jpeg",
-      "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-06-at-12.39.28-1200x801.jpeg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "sourceLabel": "Justiça mantém anúncio sobre condenação anterior; decisão trata da propaganda",
+      "feedImageUrl": "/assets/news/editorial-20260921/tre-acre.jpg",
+      "sourceImageUrl": "/assets/news/editorial-20260921/tre-acre.jpg",
+      "imageFit": "contain",
+      "imageFocus": "center",
       "media": null,
       "videoUrl": "",
-      "priority": 3400,
-      "editorialPriority": "acre-destaque",
       "crossSources": [
+        {
+          "name": "Estado do Acre",
+          "url": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
+        },
         {
           "name": "ac24horas",
           "url": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
@@ -7085,39 +7076,23 @@
       ],
       "alternateSources": [
         {
+          "name": "Estado do Acre",
+          "url": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
+        },
+        {
           "name": "ac24horas",
           "url": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
         }
       ],
-      "sourceCount": 1,
+      "sourceCount": 2,
       "alternateSlugs": [
         "justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidad"
       ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação. A informação vem de ac24horas.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação. A informação vem de ac24horas.",
-      "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-      "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-      "audioNarrationVoiceEngine": "edge-tts",
-      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-      "audioNarrationLanguage": "pt-BR",
-      "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade. Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua... Fonte: ac24horas.",
-      "videoCaptionStatus": "ready",
-      "accessibility": {
-        "hasAudioNarrationText": true,
-        "hasAudioNarrationTranscript": true,
-        "raylVoice": "rayl-francisca-whatsapp-normal",
-        "hasVideoCaptionText": true
-      },
-      "body": [
-        "ac24horas publicou em 20 de set de 2026: Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
       "editorialScope": "acre",
       "editorialLocalTier": 2,
-      "editorialSurfaceTier": 2
+      "editorialSurfaceTier": 2,
+      "priority": 3400,
+      "editorialPriority": "acre-destaque"
     },
     {
       "id": "https://ac24horas.com/2026/09/20/mulher-tenta-atravessar-rua-e-atropelada-e-fica-ferida-em-rio-branco/",
@@ -25718,6 +25693,60 @@
       "editorialGate": "P1",
       "editorialApproval": "auto-check",
       "editorialSpotlightReady": true
+    },
+    {
+      "slug": "pesquisa-real-time-big-data-mailza-36-alan-rick-33-acre-20260921",
+      "title": "Mailza tem 36% e Alan Rick, 33%; pesquisa aponta empate técnico no Acre",
+      "publishedAt": "2026-09-21T16:25:00.000Z",
+      "date": "21 de setembro de 2026",
+      "sourceName": "Exame / Real Time Big Data",
+      "sourceUrl": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/",
+      "summary": "Levantamento estimulado para o governo do Acre ouviu 1.600 eleitores. Margem de erro é de dois pontos para mais ou para menos.",
+      "imageUrl": "/assets/news/editorial-20260921/mailza-seasdh.jpg",
+      "imageCredit": "Foto de arquivo: Neto Lucena / Secom",
+      "body": [
+        "Mailza aparece com 36% e Alan Rick com 33% na pesquisa Real Time Big Data divulgada em 21 de setembro, segundo a Exame. Os percentuais são do primeiro turno estimulado, considerando os votos totais. A diferença está dentro das margens de erro dos dois candidatos, caracterizando empate técnico.",
+        "O levantamento ouviu 1.600 eleitores entre 16 e 19 de setembro de 2026. A margem de erro é de dois pontos percentuais para mais ou para menos e o nível de confiança é de 95%. O registro informado é AC-01699/2026.",
+        "A pesquisa retrata as intenções de voto no período da coleta. Não é resultado da eleição nem permite afirmar vitória de qualquer candidato.",
+        "A imagem é de arquivo da SEASDH e não registra a realização da pesquisa."
+      ],
+      "id": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/",
+      "eyebrow": "Política",
+      "category": "Política",
+      "categoryKey": "politica",
+      "previewClass": "thumb-politica",
+      "lede": "Levantamento estimulado para o governo do Acre ouviu 1.600 eleitores. Margem de erro é de dois pontos para mais ou para menos.",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "sourceLabel": "Mailza tem 36% e Alan Rick, 33%; pesquisa aponta empate técnico no Acre",
+      "feedImageUrl": "/assets/news/editorial-20260921/mailza-seasdh.jpg",
+      "sourceImageUrl": "/assets/news/editorial-20260921/mailza-seasdh.jpg",
+      "imageFit": "contain",
+      "imageFocus": "center",
+      "media": null,
+      "videoUrl": "",
+      "crossSources": [
+        {
+          "name": "Exame / Real Time Big Data",
+          "url": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "Exame / Real Time Big Data",
+          "url": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "pesquisa-real-time-big-data-mailza-36-alan-rick-33-acre-20260921"
+      ],
+      "editorialScope": "acre",
+      "editorialLocalTier": 2,
+      "editorialSurfaceTier": 2,
+      "priority": 3400,
+      "editorialPriority": "acre-destaque"
     }
   ],
   "items": [
@@ -29956,33 +29985,37 @@
       "editorialSurfaceTier": 2
     },
     {
-      "id": "https://agazetadoacre.com/2026/09/noticias/politica/apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta/",
       "slug": "apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta",
-      "title": "Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta",
-      "eyebrow": "Politica",
-      "date": "20 de set de 2026",
+      "title": "Mailza cancela debates; campanha cita agenda no interior do Acre",
       "publishedAt": "2026-09-20T21:52:38.000Z",
-      "category": "Politica",
-      "categoryKey": "politica",
-      "previewClass": "thumb-politica",
+      "date": "20 de setembro de 2026",
       "sourceName": "A Gazeta do Acre",
       "sourceUrl": "https://agazetadoacre.com/2026/09/noticias/politica/apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta/",
-      "sourceLabel": "Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta",
-      "lede": "A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco.",
-      "summary": "A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco.",
+      "summary": "Campanha informou compromissos em Santa Rosa do Purus e Cruzeiro do Sul para 21 de setembro, data dos debates da TV Norte e TV Gazeta.",
+      "imageUrl": "/assets/news/editorial-20260921/mailza-entrevista.jpeg",
+      "imageCredit": "Foto de arquivo / Reprodução: A Gazeta do Acre",
+      "body": [
+        "Mailza cancelou a participação nos debates da TV Norte e da TV Gazeta previstos para segunda-feira, 21 de setembro, segundo reportagem de A Gazeta do Acre. O comunicado foi enviado às emissoras na véspera.",
+        "Em nota, a campanha informou compromissos em Santa Rosa do Purus e Cruzeiro do Sul, ao lado de Jéssica Sales. Essa é a justificativa apresentada pela equipe para a ausência.",
+        "A realização dos encontros citados na nota não foi confirmada de forma independente nesta apuração. A justificativa da campanha e o cancelamento dos debates são informações distintas.",
+        "A imagem mostra uma entrevista de rádio anterior e é usada como foto de arquivo. Não é registro dos debates cancelados."
+      ],
+      "id": "https://agazetadoacre.com/2026/09/noticias/politica/apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta/",
+      "eyebrow": "Política",
+      "category": "Política",
+      "categoryKey": "politica",
+      "previewClass": "thumb-politica",
+      "lede": "Campanha informou compromissos em Santa Rosa do Purus e Cruzeiro do Sul para 21 de setembro, data dos debates da TV Norte e TV Gazeta.",
       "analysis": "",
       "highlights": [],
       "development": [],
-      "imageUrl": "",
-      "feedImageUrl": "",
-      "sourceImageUrl": "",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "sourceLabel": "Mailza cancela debates; campanha cita agenda no interior do Acre",
+      "feedImageUrl": "/assets/news/editorial-20260921/mailza-entrevista.jpeg",
+      "sourceImageUrl": "/assets/news/editorial-20260921/mailza-entrevista.jpeg",
+      "imageFit": "contain",
+      "imageFocus": "center",
       "media": null,
       "videoUrl": "",
-      "priority": 3400,
-      "editorialPriority": "acre-destaque",
       "crossSources": [
         {
           "name": "A Gazeta do Acre",
@@ -29999,32 +30032,11 @@
       "alternateSlugs": [
         "apos-confirmar-presenca-mailza-recua-e-cancela-participacao-nos-debates-da-tv-norte-e-tv-gazeta"
       ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco. A informação vem de A Gazeta do Acre.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco. A informação vem de A Gazeta do Acre.",
-      "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-      "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-      "audioNarrationVoiceEngine": "edge-tts",
-      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-      "audioNarrationLanguage": "pt-BR",
-      "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta. A governadora do Acre e candidata à reeleição, Mailza Assis (PP), cancelou a participação nos dois debates eleitorais previstos para esta segunda-feira, 21, em Rio Branco. Fonte: A Gazeta do Acre.",
-      "videoCaptionStatus": "ready",
-      "accessibility": {
-        "hasAudioNarrationText": true,
-        "hasAudioNarrationTranscript": true,
-        "raylVoice": "rayl-francisca-whatsapp-normal",
-        "hasVideoCaptionText": true
-      },
-      "imageQuality": "imagem-ausente-na-fonte-enviar-cheffe-call",
-      "body": [
-        "A Gazeta do Acre publicou em 20 de set de 2026: Após confirmar presença, Mailza recua e cancela participação nos debates da TV Norte e TV Gazeta.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
-      "editorialScope": "acre",
-      "editorialLocalTier": 2,
-      "editorialSurfaceTier": 2
+      "editorialScope": "cruzeiro-do-sul",
+      "editorialLocalTier": 4,
+      "editorialSurfaceTier": 4,
+      "priority": 5400,
+      "editorialPriority": "cruzeiro-destaque"
     },
     {
       "id": "https://ac24horas.com/2026/09/20/veloso-destaca-propostas-de-geracao-de-emprego-durante-carreata-de-bocalom/",
@@ -32768,34 +32780,42 @@
       "editorialSurfaceTier": 2
     },
     {
-      "id": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
       "slug": "justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidad",
-      "title": "Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade",
-      "eyebrow": "Politica",
-      "date": "20 de set de 2026",
+      "title": "Justiça mantém anúncio sobre condenação anterior; decisão trata da propaganda",
       "publishedAt": "2026-09-20T18:12:07.000Z",
-      "category": "Politica",
+      "date": "20 de setembro de 2026",
+      "sourceName": "Estado do Acre",
+      "sourceUrl": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
+      "summary": "Segundo reportagem, a Justiça Eleitoral do Acre negou pedido urgente para retirar anúncio de Alan Rick. Defesa de Mailza afirma que há recurso no caso anterior.",
+      "imageUrl": "/assets/news/editorial-20260921/tre-acre.jpg",
+      "imageCredit": "Foto de arquivo: TRE-AC / via Ecos da Notícia",
+      "body": [
+        "Segundo reportagem do Estado do Acre publicada em 20 de setembro, a Justiça Eleitoral negou o pedido urgente da campanha de Mailza para retirar um anúncio de Alan Rick. A peça faz referência a uma condenação anterior por improbidade administrativa.",
+        "A defesa reconhece a existência da decisão anterior, mas afirma que ainda há recurso. A decisão noticiada agora trata da manutenção da propaganda: não é uma nova condenação nem uma absolvição de Mailza.",
+        "A negativa do pedido urgente não encerra, por si só, a discussão sobre o anúncio. O processo sobre a propaganda continua, segundo a reportagem.",
+        "Este resumo se baseia na reportagem identificada como fonte. O inteiro teor da decisão recente não foi consultado. A foto da sede do TRE-AC é de arquivo."
+      ],
+      "id": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
+      "eyebrow": "Política",
+      "category": "Política",
       "categoryKey": "politica",
       "previewClass": "thumb-politica",
-      "sourceName": "ac24horas",
-      "sourceUrl": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/",
-      "sourceLabel": "Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade",
-      "lede": "Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação.",
-      "summary": "Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação.",
+      "lede": "Segundo reportagem, a Justiça Eleitoral do Acre negou pedido urgente para retirar anúncio de Alan Rick. Defesa de Mailza afirma que há recurso no caso anterior.",
       "analysis": "",
       "highlights": [],
       "development": [],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-06-at-12.39.28-1200x801.jpeg",
-      "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-06-at-12.39.28-1200x801.jpeg",
-      "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-06-at-12.39.28-1200x801.jpeg",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
+      "sourceLabel": "Justiça mantém anúncio sobre condenação anterior; decisão trata da propaganda",
+      "feedImageUrl": "/assets/news/editorial-20260921/tre-acre.jpg",
+      "sourceImageUrl": "/assets/news/editorial-20260921/tre-acre.jpg",
+      "imageFit": "contain",
+      "imageFocus": "center",
       "media": null,
       "videoUrl": "",
-      "priority": 3400,
-      "editorialPriority": "acre-destaque",
       "crossSources": [
+        {
+          "name": "Estado do Acre",
+          "url": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
+        },
         {
           "name": "ac24horas",
           "url": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
@@ -32803,39 +32823,23 @@
       ],
       "alternateSources": [
         {
+          "name": "Estado do Acre",
+          "url": "https://estadodoacre.com.br/2026/09/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
+        },
+        {
           "name": "ac24horas",
           "url": "https://ac24horas.com/2026/09/20/justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidade/"
         }
       ],
-      "sourceCount": 1,
+      "sourceCount": 2,
       "alternateSlugs": [
         "justica-eleitoral-do-acre-mantem-propaganda-que-aponta-condenacao-de-mailza-assis-por-improbidad"
       ],
-      "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação. A informação vem de ac24horas.",
-      "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de política. Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua coligação. A informação vem de ac24horas.",
-      "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
-      "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
-      "audioNarrationVoiceEngine": "edge-tts",
-      "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
-      "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
-      "audioNarrationLanguage": "pt-BR",
-      "audioNarrationStatus": "ready-transcript",
-      "videoCaptionText": "Imagem da notícia: Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade. Foto: Sérgio Vale/ac24horas \" A Desembargadora Denise Bomfim, do Tribunal Regional Eleitoral do Acre (TRE-AC), indeferiu neste domingo, 20, um pedido de tutela de urgência formulado pela candidata ao governo Mailza Assis e por sua... Fonte: ac24horas.",
-      "videoCaptionStatus": "ready",
-      "accessibility": {
-        "hasAudioNarrationText": true,
-        "hasAudioNarrationTranscript": true,
-        "raylVoice": "rayl-francisca-whatsapp-normal",
-        "hasVideoCaptionText": true
-      },
-      "body": [
-        "ac24horas publicou em 20 de set de 2026: Justiça Eleitoral do Acre mantém propaganda que aponta condenação de Mailza Assis por improbidade.",
-        "O CZS mantém a fonte original e prioriza o que afeta a rotina do leitor.",
-        "Novas informações entram quando houver atualização verificável."
-      ],
       "editorialScope": "acre",
       "editorialLocalTier": 2,
-      "editorialSurfaceTier": 2
+      "editorialSurfaceTier": 2,
+      "priority": 3400,
+      "editorialPriority": "acre-destaque"
     },
     {
       "id": "https://ac24horas.com/2026/09/20/mulher-tenta-atravessar-rua-e-atropelada-e-fica-ferida-em-rio-branco/",
@@ -59875,6 +59879,60 @@
       "editorialGate": "P1",
       "editorialApproval": "auto-check",
       "editorialSpotlightReady": true
+    },
+    {
+      "slug": "pesquisa-real-time-big-data-mailza-36-alan-rick-33-acre-20260921",
+      "title": "Mailza tem 36% e Alan Rick, 33%; pesquisa aponta empate técnico no Acre",
+      "publishedAt": "2026-09-21T16:25:00.000Z",
+      "date": "21 de setembro de 2026",
+      "sourceName": "Exame / Real Time Big Data",
+      "sourceUrl": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/",
+      "summary": "Levantamento estimulado para o governo do Acre ouviu 1.600 eleitores. Margem de erro é de dois pontos para mais ou para menos.",
+      "imageUrl": "/assets/news/editorial-20260921/mailza-seasdh.jpg",
+      "imageCredit": "Foto de arquivo: Neto Lucena / Secom",
+      "body": [
+        "Mailza aparece com 36% e Alan Rick com 33% na pesquisa Real Time Big Data divulgada em 21 de setembro, segundo a Exame. Os percentuais são do primeiro turno estimulado, considerando os votos totais. A diferença está dentro das margens de erro dos dois candidatos, caracterizando empate técnico.",
+        "O levantamento ouviu 1.600 eleitores entre 16 e 19 de setembro de 2026. A margem de erro é de dois pontos percentuais para mais ou para menos e o nível de confiança é de 95%. O registro informado é AC-01699/2026.",
+        "A pesquisa retrata as intenções de voto no período da coleta. Não é resultado da eleição nem permite afirmar vitória de qualquer candidato.",
+        "A imagem é de arquivo da SEASDH e não registra a realização da pesquisa."
+      ],
+      "id": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/",
+      "eyebrow": "Política",
+      "category": "Política",
+      "categoryKey": "politica",
+      "previewClass": "thumb-politica",
+      "lede": "Levantamento estimulado para o governo do Acre ouviu 1.600 eleitores. Margem de erro é de dois pontos para mais ou para menos.",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "sourceLabel": "Mailza tem 36% e Alan Rick, 33%; pesquisa aponta empate técnico no Acre",
+      "feedImageUrl": "/assets/news/editorial-20260921/mailza-seasdh.jpg",
+      "sourceImageUrl": "/assets/news/editorial-20260921/mailza-seasdh.jpg",
+      "imageFit": "contain",
+      "imageFocus": "center",
+      "media": null,
+      "videoUrl": "",
+      "crossSources": [
+        {
+          "name": "Exame / Real Time Big Data",
+          "url": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "Exame / Real Time Big Data",
+          "url": "https://exame.com/brasil/pesquisa-real-time-big-data-mailza-tem-36-e-alan-rick-33-no-1o-turno-no-acre/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "pesquisa-real-time-big-data-mailza-36-alan-rick-33-acre-20260921"
+      ],
+      "editorialScope": "acre",
+      "editorialLocalTier": 2,
+      "editorialSurfaceTier": 2,
+      "priority": 3400,
+      "editorialPriority": "acre-destaque"
     }
   ],
   "reports": [
