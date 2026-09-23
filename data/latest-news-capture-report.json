@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-09-21T00:48:29.646Z",
-  "finishedAt": "2026-09-21T00:48:34.144Z",
-  "capturedItems": 382,
-  "capturedToday": 213,
+  "startedAt": "2026-09-23T22:52:06.389Z",
+  "finishedAt": "2026-09-23T22:52:12.581Z",
+  "capturedItems": 374,
+  "capturedToday": 297,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 23,
-      "blocked": 1,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -163,7 +163,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -212,14 +212,14 @@
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 3,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 0,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
