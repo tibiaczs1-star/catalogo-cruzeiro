@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-09-23T17:00:00.000Z",
+  "sourcePackage": "outputs/pacote-czs-20-materias-mailza-2026-09-23.md",
+  "note": "Atualizacoes de campanha tratadas como cobertura politica/editorial. Pesquisa estacionada ate checagem humana.",
+  "updates": [
+    {
+      "key": "A",
+      "title": "Insercoes de TV",
+      "status": "publicada no lote como materia monitorada",
+      "slug": "mailza-insercoes-tv-emprego-familias"
+    },
+    {
+      "key": "B",
+      "title": "Agenda em Santa Rosa do Purus",
+      "status": "publicada no lote como agenda do interior",
+      "slug": "mailza-agenda-santa-rosa-do-purus"
+    },
+    {
+      "key": "C",
+      "title": "Programa permanente de ramais",
+      "status": "publicada no lote como proposta de campanha",
+      "slug": "mailza-propoe-programa-permanente-ramais"
+    },
+    {
+      "key": "D",
+      "title": "Agua e saneamento em Xapuri",
+      "status": "publicada no lote como proposta de campanha",
+      "slug": "mailza-saneamento-xapuri-eta-redes"
+    },
+    {
+      "key": "E",
+      "title": "Saude mental e servicos especializados no interior",
+      "status": "publicada no lote com separacao do servico municipal CAPS",
+      "slug": "mailza-saude-mental-interior-servicos"
+    },
+    {
+      "key": "F",
+      "title": "Pesquisa Data Control",
+      "status": "nao publicada: precisa metodologia, registro, amostra, margem e data de campo",
+      "slug": null
+    },
+    {
+      "key": "G",
+      "title": "Encontro com Mulheres em Cruzeiro do Sul",
+      "status": "publicada no lote como ato politico verificado",
+      "slug": "mulheres-mailza-jessica-cruzeiro-do-sul"
+    },
+    {
+      "key": "H",
+      "title": "Caminhada no Miritizal",
+      "status": "publicada no lote como agenda politica local",
+      "slug": "caminhada-acre-avanca-miritizal-mailza-jessica"
+    },
+    {
+      "key": "I",
+      "title": "Entrevista no Bom Dia Jurua",
+      "status": "publicada no lote como entrevista com propostas",
+      "slug": "mailza-hospital-ponte-empregos-bom-dia-jurua"
+    }
+  ]
+}

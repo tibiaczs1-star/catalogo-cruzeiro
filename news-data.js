@@ -1,5 +1,1385 @@
-window.NEWS_ARCHIVE_TOTAL = 481;
+window.NEWS_ARCHIVE_TOTAL = 501;
 window.NEWS_DATA = [
+  {
+    "id": "https://juruaonline.com.br/caps-de-cruzeiro-do-sul-passa-a-funcionar-em-novo-endereco-e-retoma-atendimentos-no-dia-29/",
+    "slug": "caps-cruzeiro-novo-endereco-retoma-atendimentos-dia-29",
+    "title": "CAPS retoma atendimentos dia 29",
+    "eyebrow": "Saude",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T17:00:00.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-servicos",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/caps-de-cruzeiro-do-sul-passa-a-funcionar-em-novo-endereco-e-retoma-atendimentos-no-dia-29/",
+    "sourceLabel": "CAPS retoma atendimentos dia 29",
+    "lede": "O CAPS de Cruzeiro do Sul passa a funcionar em novo endereco e tem retomada dos atendimentos informada para o dia 29.",
+    "summary": "O CAPS de Cruzeiro do Sul passa a funcionar em novo endereco, na Rua Pedro Teles, e deve retomar os atendimentos no dia 29, com impacto direto para usuarios do servico de saude mental.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7600,
+    "editorialPriority": "servico-publico",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/caps-de-cruzeiro-do-sul-passa-a-funcionar-em-novo-endereco-e-retoma-atendimentos-no-dia-29/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/caps-de-cruzeiro-do-sul-passa-a-funcionar-em-novo-endereco-e-retoma-atendimentos-no-dia-29/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "caps-cruzeiro-novo-endereco-retoma-atendimentos-dia-29"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: CAPS retoma atendimentos dia 29. O CAPS de Cruzeiro do Sul passa a funcionar em novo endereco, na Rua Pedro Teles, e deve retomar os atendimentos no dia 29, com impacto direto para usuarios do servico de saude mental. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: CAPS retoma atendimentos dia 29. O CAPS de Cruzeiro do Sul passa a funcionar em novo endereco, na Rua Pedro Teles, e deve retomar os atendimentos no dia 29, com impacto direto para usuarios do servico de saude mental. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: CAPS retoma atendimentos dia 29. O CAPS de Cruzeiro do Sul passa a funcionar em novo endereco, na Rua Pedro Teles, e deve retomar os atendimentos no dia 29, com impacto direto para usuarios do servico de saude mental. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A mudanca exige atencao de pacientes e familias que acompanham o servico. A orientacao editorial e tratar a nota como utilidade publica, preservando endereco, data de retomada e fonte original.",
+      "Fonte: Jurua Online. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://juruaonline.com.br/",
+    "slug": "previsao-tempo-cruzeiro-do-sul-23-setembro",
+    "title": "Cruzeiro tera calor e chuva",
+    "eyebrow": "Tempo",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:59:00.000Z",
+    "category": "Tempo",
+    "categoryKey": "servicos",
+    "previewClass": "thumb-servicos",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/",
+    "sourceLabel": "Cruzeiro tera calor e chuva",
+    "lede": "A previsao para Cruzeiro do Sul aponta calor, variacao de nuvens e possibilidade de pancadas de chuva.",
+    "summary": "A previsao indica quarta-feira de calor em Cruzeiro do Sul, com nebulosidade variavel e possibilidade de pancadas de chuva, reforcando atencao para mudancas rapidas no tempo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "feedImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "sourceImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7599,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "previsao-tempo-cruzeiro-do-sul-23-setembro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Cruzeiro tera calor e chuva. A previsao indica quarta-feira de calor em Cruzeiro do Sul, com nebulosidade variavel e possibilidade de pancadas de chuva, reforcando atencao para mudancas rapidas no tempo. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Cruzeiro tera calor e chuva. A previsao indica quarta-feira de calor em Cruzeiro do Sul, com nebulosidade variavel e possibilidade de pancadas de chuva, reforcando atencao para mudancas rapidas no tempo. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Cruzeiro tera calor e chuva. A previsao indica quarta-feira de calor em Cruzeiro do Sul, com nebulosidade variavel e possibilidade de pancadas de chuva, reforcando atencao para mudancas rapidas no tempo. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A nota entra como servico local e deve ser atualizada se houver novo boletim meteorologico ou alerta oficial para a regiao do Vale do Jurua.",
+      "Fonte: Jurua Online. Publicado/checado em 23/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://agoraacre.com/",
+    "slug": "bombeiros-combatem-incendios-cruzeiro-rodrigues-alves",
+    "title": "Bombeiros combatem incendios no Jurua",
+    "eyebrow": "Meio ambiente",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:58:00.000Z",
+    "category": "Meio ambiente",
+    "categoryKey": "cotidiano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Agora Acre",
+    "sourceUrl": "https://agoraacre.com/",
+    "sourceLabel": "Bombeiros combatem incendios no Jurua",
+    "lede": "Equipes do Corpo de Bombeiros atuaram em ocorrencias de incendio em Cruzeiro do Sul e Rodrigues Alves.",
+    "summary": "Bombeiros atuaram em focos de incendio em Cruzeiro do Sul e Rodrigues Alves, com registro de area queimada e de area preservada durante o combate as chamas.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/fallback-cotidiano.jpg",
+    "feedImageUrl": "assets/home-cache/fallback-cotidiano.jpg",
+    "sourceImageUrl": "assets/home-cache/fallback-cotidiano.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7598,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://agoraacre.com/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://agoraacre.com/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bombeiros-combatem-incendios-cruzeiro-rodrigues-alves"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Bombeiros combatem incendios no Jurua. Bombeiros atuaram em focos de incendio em Cruzeiro do Sul e Rodrigues Alves, com registro de area queimada e de area preservada durante o combate as chamas. A informacao vem de Agora Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Bombeiros combatem incendios no Jurua. Bombeiros atuaram em focos de incendio em Cruzeiro do Sul e Rodrigues Alves, com registro de area queimada e de area preservada durante o combate as chamas. A informacao vem de Agora Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Bombeiros combatem incendios no Jurua. Bombeiros atuaram em focos de incendio em Cruzeiro do Sul e Rodrigues Alves, com registro de area queimada e de area preservada durante o combate as chamas. Fonte: Agora Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O texto deve evitar alarmismo e manter o foco em servico, prevencao e balanco operacional informado pelas fontes regionais.",
+      "Fonte: Agora Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://juruaonline.com.br/",
+    "slug": "rogerio-mesquita-assume-presidio-manoel-neri",
+    "title": "Mesquita assume presidio Manoel Neri",
+    "eyebrow": "Seguranca",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:57:00.000Z",
+    "category": "Seguranca publica",
+    "categoryKey": "seguranca",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/",
+    "sourceLabel": "Mesquita assume presidio Manoel Neri",
+    "lede": "Rogerio Mesquita foi anunciado na direcao do presidio Manoel Neri, em Cruzeiro do Sul.",
+    "summary": "Rogerio Mesquita assume a direcao do presidio Manoel Neri, em Cruzeiro do Sul, em mudanca administrativa no sistema prisional local.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7597,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "rogerio-mesquita-assume-presidio-manoel-neri"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mesquita assume presidio Manoel Neri. Rogerio Mesquita assume a direcao do presidio Manoel Neri, em Cruzeiro do Sul, em mudanca administrativa no sistema prisional local. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mesquita assume presidio Manoel Neri. Rogerio Mesquita assume a direcao do presidio Manoel Neri, em Cruzeiro do Sul, em mudanca administrativa no sistema prisional local. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Mesquita assume presidio Manoel Neri. Rogerio Mesquita assume a direcao do presidio Manoel Neri, em Cruzeiro do Sul, em mudanca administrativa no sistema prisional local. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A cobertura deve ficar no tom institucional, registrando a alteracao de gestao e preservando a fonte original.",
+      "Fonte: Jurua Online. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://www.cruzeirodosul.ac.gov.br/",
+    "slug": "semana-nacional-transito-redacao-premiada-cruzeiro",
+    "title": "Transito premia redacoes em Cruzeiro",
+    "eyebrow": "Educacao",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:56:00.000Z",
+    "category": "Educacao",
+    "categoryKey": "educacao",
+    "previewClass": "thumb-educacao",
+    "sourceName": "Prefeitura de Cruzeiro do Sul",
+    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/",
+    "sourceLabel": "Transito premia redacoes em Cruzeiro",
+    "lede": "A Semana Nacional de Transito abriu a acao Redacao Premiada em escola de Cruzeiro do Sul.",
+    "summary": "A Semana Nacional de Transito em Cruzeiro do Sul abriu o concurso Redacao Premiada, com atividades na Escola Civico-Militar Madre Adelgundes Becker e programacao ate o dia 25.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/fallback-educacao.jpg",
+    "feedImageUrl": "assets/home-cache/fallback-educacao.jpg",
+    "sourceImageUrl": "assets/home-cache/fallback-educacao.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7596,
+    "editorialPriority": "servico-publico",
+    "crossSources": [
+      {
+        "name": "Prefeitura de Cruzeiro do Sul",
+        "url": "https://www.cruzeirodosul.ac.gov.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Prefeitura de Cruzeiro do Sul",
+        "url": "https://www.cruzeirodosul.ac.gov.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "semana-nacional-transito-redacao-premiada-cruzeiro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Transito premia redacoes em Cruzeiro. A Semana Nacional de Transito em Cruzeiro do Sul abriu o concurso Redacao Premiada, com atividades na Escola Civico-Militar Madre Adelgundes Becker e programacao ate o dia 25. A informacao vem de Prefeitura de Cruzeiro do Sul.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Transito premia redacoes em Cruzeiro. A Semana Nacional de Transito em Cruzeiro do Sul abriu o concurso Redacao Premiada, com atividades na Escola Civico-Militar Madre Adelgundes Becker e programacao ate o dia 25. A informacao vem de Prefeitura de Cruzeiro do Sul.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Transito premia redacoes em Cruzeiro. A Semana Nacional de Transito em Cruzeiro do Sul abriu o concurso Redacao Premiada, com atividades na Escola Civico-Militar Madre Adelgundes Becker e programacao ate o dia 25. Fonte: Prefeitura de Cruzeiro do Sul.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O assunto serve para site e redes de servico, com foco em educacao no transito e participacao estudantil.",
+      "Fonte: Prefeitura de Cruzeiro do Sul. Publicado/checado em 21/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://agoraacre.com/",
+    "slug": "duas-mulheres-presas-trafico-miritizal-cruzeiro",
+    "title": "Mulheres sao presas no Miritizal",
+    "eyebrow": "Policia",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:55:00.000Z",
+    "category": "Policia",
+    "categoryKey": "seguranca",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Agora Acre",
+    "sourceUrl": "https://agoraacre.com/",
+    "sourceLabel": "Mulheres sao presas no Miritizal",
+    "lede": "Duas mulheres foram presas no bairro Miritizal, em ocorrencia relacionada a suspeita de trafico.",
+    "summary": "Duas mulheres foram presas no bairro Miritizal, em Cruzeiro do Sul, em ocorrencia ligada a suspeita de trafico de drogas, segundo veiculos regionais.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7595,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://agoraacre.com/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://agoraacre.com/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "duas-mulheres-presas-trafico-miritizal-cruzeiro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mulheres sao presas no Miritizal. Duas mulheres foram presas no bairro Miritizal, em Cruzeiro do Sul, em ocorrencia ligada a suspeita de trafico de drogas, segundo veiculos regionais. A informacao vem de Agora Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mulheres sao presas no Miritizal. Duas mulheres foram presas no bairro Miritizal, em Cruzeiro do Sul, em ocorrencia ligada a suspeita de trafico de drogas, segundo veiculos regionais. A informacao vem de Agora Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Mulheres sao presas no Miritizal. Duas mulheres foram presas no bairro Miritizal, em Cruzeiro do Sul, em ocorrencia ligada a suspeita de trafico de drogas, segundo veiculos regionais. Fonte: Agora Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Usar cautela juridica: evitar condenacao antecipada, manter atribuicao a fonte e registrar como ocorrencia policial.",
+      "Fonte: Agora Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://agoraacre.com/",
+    "slug": "casal-preso-maconha-morro-da-gloria-cruzeiro",
+    "title": "Casal e preso no Morro",
+    "eyebrow": "Policia",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:54:00.000Z",
+    "category": "Policia",
+    "categoryKey": "seguranca",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Agora Acre",
+    "sourceUrl": "https://agoraacre.com/",
+    "sourceLabel": "Casal e preso no Morro",
+    "lede": "Um casal foi preso no bairro Morro da Gloria durante ocorrencia com apreensao de maconha.",
+    "summary": "Um casal foi preso no bairro Morro da Gloria, em Cruzeiro do Sul, durante ocorrencia policial envolvendo apreensao de maconha.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7594,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://agoraacre.com/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agora Acre",
+        "url": "https://agoraacre.com/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "casal-preso-maconha-morro-da-gloria-cruzeiro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Casal e preso no Morro. Um casal foi preso no bairro Morro da Gloria, em Cruzeiro do Sul, durante ocorrencia policial envolvendo apreensao de maconha. A informacao vem de Agora Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Casal e preso no Morro. Um casal foi preso no bairro Morro da Gloria, em Cruzeiro do Sul, durante ocorrencia policial envolvendo apreensao de maconha. A informacao vem de Agora Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Casal e preso no Morro. Um casal foi preso no bairro Morro da Gloria, em Cruzeiro do Sul, durante ocorrencia policial envolvendo apreensao de maconha. Fonte: Agora Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A publicacao deve manter linguagem objetiva, sem expor detalhes desnecessarios alem do informado pela fonte.",
+      "Fonte: Agora Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://juruaonline.com.br/",
+    "slug": "mpac-apura-cemiterio-municipal-jordao",
+    "title": "MPAC apura cemiterio em Jordao",
+    "eyebrow": "Interior",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:53:00.000Z",
+    "category": "Interior",
+    "categoryKey": "jurua",
+    "previewClass": "thumb-jurua",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/",
+    "sourceLabel": "MPAC apura cemiterio em Jordao",
+    "lede": "O Ministerio Publico do Acre apura a situacao do cemiterio municipal de Jordao.",
+    "summary": "O MPAC converteu procedimento em inquerito civil para apurar a situacao do cemiterio municipal de Jordao, com pontos sobre lotacao, alagamentos e proximidade do Rio Tarauaca.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7593,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mpac-apura-cemiterio-municipal-jordao"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: MPAC apura cemiterio em Jordao. O MPAC converteu procedimento em inquerito civil para apurar a situacao do cemiterio municipal de Jordao, com pontos sobre lotacao, alagamentos e proximidade do Rio Tarauaca. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: MPAC apura cemiterio em Jordao. O MPAC converteu procedimento em inquerito civil para apurar a situacao do cemiterio municipal de Jordao, com pontos sobre lotacao, alagamentos e proximidade do Rio Tarauaca. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: MPAC apura cemiterio em Jordao. O MPAC converteu procedimento em inquerito civil para apurar a situacao do cemiterio municipal de Jordao, com pontos sobre lotacao, alagamentos e proximidade do Rio Tarauaca. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O caso tem interesse regional e deve ser acompanhado por atualizacoes oficiais do Ministerio Publico e da prefeitura local.",
+      "Fonte: Jurua Online. Publicado/checado em 21/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "jurua",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://www.tre-ac.jus.br/",
+    "slug": "tre-ac-orientacoes-atendimento-eleitoral-acre",
+    "title": "TRE orienta eleitores no Acre",
+    "eyebrow": "Eleicoes",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:52:00.000Z",
+    "category": "Eleicoes",
+    "categoryKey": "servicos",
+    "previewClass": "thumb-servicos",
+    "sourceName": "TRE-AC",
+    "sourceUrl": "https://www.tre-ac.jus.br/",
+    "sourceLabel": "TRE orienta eleitores no Acre",
+    "lede": "O TRE-AC divulgou orientacoes sobre atendimento eleitoral para eleitores do Acre.",
+    "summary": "O TRE-AC divulgou orientacoes de atendimento eleitoral, com informacoes para eleitores que precisam regularizar situacao ou buscar servicos da Justica Eleitoral.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7592,
+    "editorialPriority": "servico-publico",
+    "crossSources": [
+      {
+        "name": "TRE-AC",
+        "url": "https://www.tre-ac.jus.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "TRE-AC",
+        "url": "https://www.tre-ac.jus.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tre-ac-orientacoes-atendimento-eleitoral-acre"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: TRE orienta eleitores no Acre. O TRE-AC divulgou orientacoes de atendimento eleitoral, com informacoes para eleitores que precisam regularizar situacao ou buscar servicos da Justica Eleitoral. A informacao vem de TRE-AC.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: TRE orienta eleitores no Acre. O TRE-AC divulgou orientacoes de atendimento eleitoral, com informacoes para eleitores que precisam regularizar situacao ou buscar servicos da Justica Eleitoral. A informacao vem de TRE-AC.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: TRE orienta eleitores no Acre. O TRE-AC divulgou orientacoes de atendimento eleitoral, com informacoes para eleitores que precisam regularizar situacao ou buscar servicos da Justica Eleitoral. Fonte: TRE-AC.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Como servico publico, a chamada deve priorizar prazos, canais oficiais e orientacao para consulta direta no TRE-AC.",
+      "Fonte: TRE-AC. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://juruaonline.com.br/desfile-civico-e-final-do-copao-do-jurua-marcam-aniversario-de-cruzeiro-do-sul/",
+    "slug": "cruzeiro-122-anos-desfile-copao-jurua",
+    "title": "Cruzeiro prepara agenda de 122 anos",
+    "eyebrow": "Agenda",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:51:00.000Z",
+    "category": "Agenda",
+    "categoryKey": "agenda",
+    "previewClass": "thumb-agenda",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/desfile-civico-e-final-do-copao-do-jurua-marcam-aniversario-de-cruzeiro-do-sul/",
+    "sourceLabel": "Cruzeiro prepara agenda de 122 anos",
+    "lede": "Desfile civico e final do Copao do Jurua aparecem na programacao do aniversario de Cruzeiro do Sul.",
+    "summary": "Cruzeiro do Sul prepara agenda de aniversario de 122 anos com desfile civico e final do Copao do Jurua entre os destaques de programacao.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-calendario.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-calendario.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-calendario.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7591,
+    "editorialPriority": "agenda-local",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/desfile-civico-e-final-do-copao-do-jurua-marcam-aniversario-de-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/desfile-civico-e-final-do-copao-do-jurua-marcam-aniversario-de-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "cruzeiro-122-anos-desfile-copao-jurua"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Cruzeiro prepara agenda de 122 anos. Cruzeiro do Sul prepara agenda de aniversario de 122 anos com desfile civico e final do Copao do Jurua entre os destaques de programacao. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Cruzeiro prepara agenda de 122 anos. Cruzeiro do Sul prepara agenda de aniversario de 122 anos com desfile civico e final do Copao do Jurua entre os destaques de programacao. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Cruzeiro prepara agenda de 122 anos. Cruzeiro do Sul prepara agenda de aniversario de 122 anos com desfile civico e final do Copao do Jurua entre os destaques de programacao. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A materia pode funcionar como guia de agenda, com atualizacao de locais e horarios conforme a prefeitura divulgar novas informacoes.",
+      "Fonte: Jurua Online. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://www.cruzeirodosul.ac.gov.br/",
+    "slug": "agenda-unicef-crianca-adolescente-cruzeiro",
+    "title": "Cruzeiro cria agenda da infancia",
+    "eyebrow": "Gestao publica",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:50:00.000Z",
+    "category": "Gestao publica",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Prefeitura de Cruzeiro do Sul",
+    "sourceUrl": "https://www.cruzeirodosul.ac.gov.br/",
+    "sourceLabel": "Cruzeiro cria agenda da infancia",
+    "lede": "Cruzeiro do Sul instituiu agenda transversal voltada a criancas e adolescentes.",
+    "summary": "Cruzeiro do Sul instituiu uma agenda transversal para criancas e adolescentes, vinculada a politicas publicas e ao acompanhamento de indicadores do Selo UNICEF.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/fallback-educacao.jpg",
+    "feedImageUrl": "assets/home-cache/fallback-educacao.jpg",
+    "sourceImageUrl": "assets/home-cache/fallback-educacao.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7590,
+    "editorialPriority": "cruzeiro-destaque",
+    "crossSources": [
+      {
+        "name": "Prefeitura de Cruzeiro do Sul",
+        "url": "https://www.cruzeirodosul.ac.gov.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Prefeitura de Cruzeiro do Sul",
+        "url": "https://www.cruzeirodosul.ac.gov.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "agenda-unicef-crianca-adolescente-cruzeiro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Cruzeiro cria agenda da infancia. Cruzeiro do Sul instituiu uma agenda transversal para criancas e adolescentes, vinculada a politicas publicas e ao acompanhamento de indicadores do Selo UNICEF. A informacao vem de Prefeitura de Cruzeiro do Sul.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Cruzeiro cria agenda da infancia. Cruzeiro do Sul instituiu uma agenda transversal para criancas e adolescentes, vinculada a politicas publicas e ao acompanhamento de indicadores do Selo UNICEF. A informacao vem de Prefeitura de Cruzeiro do Sul.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Cruzeiro cria agenda da infancia. Cruzeiro do Sul instituiu uma agenda transversal para criancas e adolescentes, vinculada a politicas publicas e ao acompanhamento de indicadores do Selo UNICEF. Fonte: Prefeitura de Cruzeiro do Sul.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A cobertura deve explicar o decreto de forma simples e acompanhar entregas concretas para a populacao.",
+      "Fonte: Prefeitura de Cruzeiro do Sul. Publicado/checado em setembro de 2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://juruaonline.com.br/vacinacao-antirrabica-de-porta-a-porta-acontecera-de-segunda-a-sexta-conheca-o-calendario-nos-bairros/",
+    "slug": "campanha-antirrabica-bairros-cruzeiro",
+    "title": "Antirrabica segue nos bairros",
+    "eyebrow": "Servico",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:49:00.000Z",
+    "category": "Servico",
+    "categoryKey": "servicos",
+    "previewClass": "thumb-servicos",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/vacinacao-antirrabica-de-porta-a-porta-acontecera-de-segunda-a-sexta-conheca-o-calendario-nos-bairros/",
+    "sourceLabel": "Antirrabica segue nos bairros",
+    "lede": "A campanha antirrabica de porta em porta segue em bairros de Cruzeiro do Sul.",
+    "summary": "A vacinacao antirrabica de caes e gatos segue em bairros de Cruzeiro do Sul, com calendario de porta em porta e meta de imunizar milhares de animais.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7589,
+    "editorialPriority": "servico-publico",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/vacinacao-antirrabica-de-porta-a-porta-acontecera-de-segunda-a-sexta-conheca-o-calendario-nos-bairros/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/vacinacao-antirrabica-de-porta-a-porta-acontecera-de-segunda-a-sexta-conheca-o-calendario-nos-bairros/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "campanha-antirrabica-bairros-cruzeiro"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Antirrabica segue nos bairros. A vacinacao antirrabica de caes e gatos segue em bairros de Cruzeiro do Sul, com calendario de porta em porta e meta de imunizar milhares de animais. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Antirrabica segue nos bairros. A vacinacao antirrabica de caes e gatos segue em bairros de Cruzeiro do Sul, com calendario de porta em porta e meta de imunizar milhares de animais. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Antirrabica segue nos bairros. A vacinacao antirrabica de caes e gatos segue em bairros de Cruzeiro do Sul, com calendario de porta em porta e meta de imunizar milhares de animais. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "O ideal e atualizar a nota com calendario por bairro e orientar moradores a manter animais acessiveis no periodo de visita.",
+      "Fonte: Jurua Online. Publicado/checado em setembro de 2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://juruaonline.com.br/mailza-destaca-hospital-do-cancer-ponte-para-rodrigues-alves-e-geracao-de-empregos-como-prioridades-para-novo-mandato/",
+    "slug": "mailza-hospital-ponte-empregos-bom-dia-jurua",
+    "title": "Mailza fala de saude e ponte",
+    "eyebrow": "Politica",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:48:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua Online",
+    "sourceUrl": "https://juruaonline.com.br/mailza-destaca-hospital-do-cancer-ponte-para-rodrigues-alves-e-geracao-de-empregos-como-prioridades-para-novo-mandato/",
+    "sourceLabel": "Mailza fala de saude e ponte",
+    "lede": "Mailza citou hospital do cancer, ponte para Rodrigues Alves e geracao de empregos como prioridades.",
+    "summary": "Em entrevista ao Bom Dia Jurua, Mailza destacou hospital do cancer, ponte para Rodrigues Alves e geracao de empregos como prioridades para um novo mandato.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "feedImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "sourceImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7588,
+    "editorialPriority": "politica-verificada",
+    "crossSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/mailza-destaca-hospital-do-cancer-ponte-para-rodrigues-alves-e-geracao-de-empregos-como-prioridades-para-novo-mandato/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Online",
+        "url": "https://juruaonline.com.br/mailza-destaca-hospital-do-cancer-ponte-para-rodrigues-alves-e-geracao-de-empregos-como-prioridades-para-novo-mandato/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-hospital-ponte-empregos-bom-dia-jurua"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mailza fala de saude e ponte. Em entrevista ao Bom Dia Jurua, Mailza destacou hospital do cancer, ponte para Rodrigues Alves e geracao de empregos como prioridades para um novo mandato. A informacao vem de Jurua Online.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mailza fala de saude e ponte. Em entrevista ao Bom Dia Jurua, Mailza destacou hospital do cancer, ponte para Rodrigues Alves e geracao de empregos como prioridades para um novo mandato. A informacao vem de Jurua Online.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Mailza fala de saude e ponte. Em entrevista ao Bom Dia Jurua, Mailza destacou hospital do cancer, ponte para Rodrigues Alves e geracao de empregos como prioridades para um novo mandato. Fonte: Jurua Online.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A nota deve deixar claro que se trata de fala de campanha/entrevista, sem apresentar promessa como obra entregue.",
+      "Fonte: Jurua Online. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://acriticadoacre.com.br/",
+    "slug": "mailza-insercoes-tv-emprego-familias",
+    "title": "Insercoes destacam emprego e familias",
+    "eyebrow": "Campanha",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:47:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "A Critica do Acre",
+    "sourceUrl": "https://acriticadoacre.com.br/",
+    "sourceLabel": "Insercoes destacam emprego e familias",
+    "lede": "Novas insercoes de TV da campanha destacam emprego, empreendedorismo e familias.",
+    "summary": "Novas insercoes de TV ligadas a Mailza destacam emprego, empreendedorismo e cuidado com familias, em conteudo de campanha que exige atribuicao clara ao material eleitoral.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-arquivo.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7587,
+    "editorialPriority": "campanha-monitorada",
+    "crossSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-insercoes-tv-emprego-familias"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Insercoes destacam emprego e familias. Novas insercoes de TV ligadas a Mailza destacam emprego, empreendedorismo e cuidado com familias, em conteudo de campanha que exige atribuicao clara ao material eleitoral. A informacao vem de A Critica do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Insercoes destacam emprego e familias. Novas insercoes de TV ligadas a Mailza destacam emprego, empreendedorismo e cuidado com familias, em conteudo de campanha que exige atribuicao clara ao material eleitoral. A informacao vem de A Critica do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Insercoes destacam emprego e familias. Novas insercoes de TV ligadas a Mailza destacam emprego, empreendedorismo e cuidado com familias, em conteudo de campanha que exige atribuicao clara ao material eleitoral. Fonte: A Critica do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Tratar como acompanhamento de campanha. Evitar linguagem promocional e identificar a origem do conteudo.",
+      "Fonte: A Critica do Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://acriticadoacre.com.br/",
+    "slug": "mailza-agenda-santa-rosa-do-purus",
+    "title": "Mailza cumpre agenda em Santa Rosa",
+    "eyebrow": "Campanha",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:46:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "A Critica do Acre",
+    "sourceUrl": "https://acriticadoacre.com.br/",
+    "sourceLabel": "Mailza cumpre agenda em Santa Rosa",
+    "lede": "Agenda em Santa Rosa do Purus reuniu liderancas e representantes locais.",
+    "summary": "Mailza cumpriu agenda em Santa Rosa do Purus, com reuniao junto a liderancas indigenas, vice-prefeito e area de saude, segundo fonte de campanha.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7586,
+    "editorialPriority": "campanha-monitorada",
+    "crossSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-agenda-santa-rosa-do-purus"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mailza cumpre agenda em Santa Rosa. Mailza cumpriu agenda em Santa Rosa do Purus, com reuniao junto a liderancas indigenas, vice-prefeito e area de saude, segundo fonte de campanha. A informacao vem de A Critica do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mailza cumpre agenda em Santa Rosa. Mailza cumpriu agenda em Santa Rosa do Purus, com reuniao junto a liderancas indigenas, vice-prefeito e area de saude, segundo fonte de campanha. A informacao vem de A Critica do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Mailza cumpre agenda em Santa Rosa. Mailza cumpriu agenda em Santa Rosa do Purus, com reuniao junto a liderancas indigenas, vice-prefeito e area de saude, segundo fonte de campanha. Fonte: A Critica do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Manter a publicacao como registro de agenda no interior e evitar apresentar presenca politica como endosso institucional do jornal.",
+      "Fonte: A Critica do Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://acriticadoacre.com.br/",
+    "slug": "mailza-propoe-programa-permanente-ramais",
+    "title": "Proposta mira ramais e pontes",
+    "eyebrow": "Campanha",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:45:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "A Critica do Acre",
+    "sourceUrl": "https://acriticadoacre.com.br/",
+    "sourceLabel": "Proposta mira ramais e pontes",
+    "lede": "Proposta de campanha fala em programa permanente para ramais e pontes de madeira.",
+    "summary": "A campanha de Mailza divulgou proposta de programa permanente para ramais, substituicao de pontes de madeira e conclusao de obras em areas rurais.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "feedImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "sourceImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7585,
+    "editorialPriority": "campanha-monitorada",
+    "crossSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-propoe-programa-permanente-ramais"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Proposta mira ramais e pontes. A campanha de Mailza divulgou proposta de programa permanente para ramais, substituicao de pontes de madeira e conclusao de obras em areas rurais. A informacao vem de A Critica do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Proposta mira ramais e pontes. A campanha de Mailza divulgou proposta de programa permanente para ramais, substituicao de pontes de madeira e conclusao de obras em areas rurais. A informacao vem de A Critica do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Proposta mira ramais e pontes. A campanha de Mailza divulgou proposta de programa permanente para ramais, substituicao de pontes de madeira e conclusao de obras em areas rurais. Fonte: A Critica do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Publicar como promessa de campanha, com checagem posterior de valores, obras citadas e viabilidade.",
+      "Fonte: A Critica do Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://acriticadoacre.com.br/",
+    "slug": "mailza-saneamento-xapuri-eta-redes",
+    "title": "Proposta cita saneamento em Xapuri",
+    "eyebrow": "Campanha",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:44:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "A Critica do Acre",
+    "sourceUrl": "https://acriticadoacre.com.br/",
+    "sourceLabel": "Proposta cita saneamento em Xapuri",
+    "lede": "Proposta de campanha envolve ETA e redes de abastecimento em Xapuri.",
+    "summary": "Uma atualizacao de campanha de Mailza cita proposta para agua e saneamento em Xapuri, envolvendo ETA e redes de abastecimento.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7584,
+    "editorialPriority": "campanha-monitorada",
+    "crossSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-saneamento-xapuri-eta-redes"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Proposta cita saneamento em Xapuri. Uma atualizacao de campanha de Mailza cita proposta para agua e saneamento em Xapuri, envolvendo ETA e redes de abastecimento. A informacao vem de A Critica do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Proposta cita saneamento em Xapuri. Uma atualizacao de campanha de Mailza cita proposta para agua e saneamento em Xapuri, envolvendo ETA e redes de abastecimento. A informacao vem de A Critica do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Proposta cita saneamento em Xapuri. Uma atualizacao de campanha de Mailza cita proposta para agua e saneamento em Xapuri, envolvendo ETA e redes de abastecimento. Fonte: A Critica do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Tratar como proposta, nao como entrega confirmada. Acompanhamento deve buscar dados oficiais do saneamento local.",
+      "Fonte: A Critica do Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://acriticadoacre.com.br/",
+    "slug": "mailza-saude-mental-interior-servicos",
+    "title": "Campanha cita saude mental no interior",
+    "eyebrow": "Campanha",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:43:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "A Critica do Acre",
+    "sourceUrl": "https://acriticadoacre.com.br/",
+    "sourceLabel": "Campanha cita saude mental no interior",
+    "lede": "Atualizacao de campanha cita saude mental e servicos especializados fora da capital.",
+    "summary": "A campanha de Mailza voltou a citar ampliacao de cuidados em saude mental e servicos especializados no interior, tema que exige separacao entre proposta politica e servico publico local.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-servicos.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7583,
+    "editorialPriority": "campanha-monitorada",
+    "crossSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "A Critica do Acre",
+        "url": "https://acriticadoacre.com.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-saude-mental-interior-servicos"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Campanha cita saude mental no interior. A campanha de Mailza voltou a citar ampliacao de cuidados em saude mental e servicos especializados no interior, tema que exige separacao entre proposta politica e servico publico local. A informacao vem de A Critica do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Campanha cita saude mental no interior. A campanha de Mailza voltou a citar ampliacao de cuidados em saude mental e servicos especializados no interior, tema que exige separacao entre proposta politica e servico publico local. A informacao vem de A Critica do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Campanha cita saude mental no interior. A campanha de Mailza voltou a citar ampliacao de cuidados em saude mental e servicos especializados no interior, tema que exige separacao entre proposta politica e servico publico local. Fonte: A Critica do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Nao misturar com a nota do CAPS, que e utilidade publica municipal. Esta materia deve permanecer no eixo de campanha.",
+      "Fonte: A Critica do Acre. Publicado/checado em 15/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://agencia.ac.gov.br/",
+    "slug": "mulheres-mailza-jessica-cruzeiro-do-sul",
+    "title": "Mulheres reunem Mailza e Jessica",
+    "eyebrow": "Politica",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:42:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Agencia de Noticias do Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/",
+    "sourceLabel": "Mulheres reunem Mailza e Jessica",
+    "lede": "Encontro com mulheres reuniu Mailza Assis e Jessica Sales em Cruzeiro do Sul.",
+    "summary": "Encontro com mulheres em Cruzeiro do Sul reuniu Mailza Assis e Jessica Sales, em ato politico acompanhado por apoiadores e liderancas.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "feedImageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "sourceImageUrl": "assets/cadernos/caderno-comunidade.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7582,
+    "editorialPriority": "politica-verificada",
+    "crossSources": [
+      {
+        "name": "Agencia de Noticias do Acre",
+        "url": "https://agencia.ac.gov.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia de Noticias do Acre",
+        "url": "https://agencia.ac.gov.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mulheres-mailza-jessica-cruzeiro-do-sul"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mulheres reunem Mailza e Jessica. Encontro com mulheres em Cruzeiro do Sul reuniu Mailza Assis e Jessica Sales, em ato politico acompanhado por apoiadores e liderancas. A informacao vem de Agencia de Noticias do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Mulheres reunem Mailza e Jessica. Encontro com mulheres em Cruzeiro do Sul reuniu Mailza Assis e Jessica Sales, em ato politico acompanhado por apoiadores e liderancas. A informacao vem de Agencia de Noticias do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Mulheres reunem Mailza e Jessica. Encontro com mulheres em Cruzeiro do Sul reuniu Mailza Assis e Jessica Sales, em ato politico acompanhado por apoiadores e liderancas. Fonte: Agencia de Noticias do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "A cobertura deve registrar participantes, local e pauta, sem converter a nota em material de propaganda.",
+      "Fonte: Agencia de Noticias do Acre. Publicado/checado em 22/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
+  {
+    "id": "https://agencia.ac.gov.br/",
+    "slug": "caminhada-acre-avanca-miritizal-mailza-jessica",
+    "title": "Miritizal recebe caminhada politica",
+    "eyebrow": "Politica",
+    "date": "23 de set de 2026",
+    "publishedAt": "2026-09-23T16:41:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Agencia de Noticias do Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/",
+    "sourceLabel": "Miritizal recebe caminhada politica",
+    "lede": "A caminhada O Acre Avanca passou pelo bairro Miritizal, em Cruzeiro do Sul.",
+    "summary": "A caminhada O Acre Avanca passou pelo Miritizal, em Cruzeiro do Sul, com participacao de Mailza Assis e Jessica Sales, segundo divulgacao de campanha.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "feedImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "sourceImageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+    "imageCredit": "Imagem de apoio Catálogo CZS",
+    "imageFocus": "",
+    "imageFit": "cover",
+    "media": null,
+    "videoUrl": "",
+    "priority": 7581,
+    "editorialPriority": "politica-verificada",
+    "crossSources": [
+      {
+        "name": "Agencia de Noticias do Acre",
+        "url": "https://agencia.ac.gov.br/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia de Noticias do Acre",
+        "url": "https://agencia.ac.gov.br/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "caminhada-acre-avanca-miritizal-mailza-jessica"
+    ],
+    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Miritizal recebe caminhada politica. A caminhada O Acre Avanca passou pelo Miritizal, em Cruzeiro do Sul, com participacao de Mailza Assis e Jessica Sales, segundo divulgacao de campanha. A informacao vem de Agencia de Noticias do Acre.",
+    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catalogo Cruzeiro do Sul. Agora no catalogo: Miritizal recebe caminhada politica. A caminhada O Acre Avanca passou pelo Miritizal, em Cruzeiro do Sul, com participacao de Mailza Assis e Jessica Sales, segundo divulgacao de campanha. A informacao vem de Agencia de Noticias do Acre.",
+    "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
+    "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
+    "audioNarrationVoiceEngine": "edge-tts",
+    "audioNarrationVoiceModel": "pt-BR-FranciscaNeural",
+    "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
+    "audioNarrationLanguage": "pt-BR",
+    "audioNarrationStatus": "ready-transcript",
+    "videoCaptionText": "Imagem da noticia: Miritizal recebe caminhada politica. A caminhada O Acre Avanca passou pelo Miritizal, em Cruzeiro do Sul, com participacao de Mailza Assis e Jessica Sales, segundo divulgacao de campanha. Fonte: Agencia de Noticias do Acre.",
+    "videoCaptionStatus": "ready",
+    "accessibility": {
+      "hasAudioNarrationText": true,
+      "hasAudioNarrationTranscript": true,
+      "raylVoice": "rayl-francisca-whatsapp-normal",
+      "hasVideoCaptionText": true
+    },
+    "body": [
+      "Tratar como agenda politica no bairro e manter a atribuicao de campanha no texto.",
+      "Fonte: Agencia de Noticias do Acre. Publicado/checado em 21/09/2026. Link original preservado para conferencia editorial."
+    ],
+    "editorialScope": "cruzeiro-do-sul",
+    "editorialLocalTier": 4,
+    "editorialSurfaceTier": 4
+  },
   {
     "id": "https://folhadoacre.com.br/2026/09/piloto-acreano-realiza-sonho-e-pousa-pela-primeira-vez-em-cruzeiro-do-sul-onde-nasceu/",
     "slug": "piloto-acreano-realiza-sonho-e-pousa-pela-primeira-vez-em-cruzeiro-do-sul-onde-nasceu",
