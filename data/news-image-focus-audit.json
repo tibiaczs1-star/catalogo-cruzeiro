@@ -1,507 +1,144 @@
 {
-  "updatedAt": "2026-07-19T15:33:04.389Z",
+  "updatedAt": "2026-09-28T16:04:09.630Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 80,
-  "offline": false,
+  "offline": true,
   "total": 80,
   "summary": {
-    "ok": 55,
-    "review": 25,
+    "ok": 80,
+    "review": 0,
     "warning": 0,
     "error": 0,
-    "manualFocus": 25,
-    "newSinceLastAudit": 0,
+    "manualFocus": 54,
+    "newSinceLastAudit": 63,
     "missingImage": 0,
     "unreachableImage": 0
   },
   "slugs": [
-    "mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude",
-    "mailza-e-jessica-sales-terao-candidaturas-oficializadas-em-convencao-no-dia-31-de-julho",
-    "convencao-que-vai-lancar-mailza-e-jessica-ao-governo-sera-no-final-de-julho-veja-data",
-    "foragido-apontado-como-integrante-da-tropa-do-odio-e-preso-pela-pm-em-area-rural-de-cruzeiro-do-",
-    "servidor-da-prefeitura-vira-alvo-de-investigacao-do-mp-por-contratos-na-saude",
-    "foragido-acusado-de-homicidios-e-integrante-de-organizacoes-criminosas-e-capturado-pelo-6-bpm-em",
-    "policia-militar-prende-dois-suspeitos-de-trafico-de-drogas-em-operacoes-de-enfrentamento-ao-traf",
-    "gladson-mira-zequinha-seu-proprio-apoiador",
-    "morador-armado-com-espingarda-ameaca-operador-de-trator-durante-recuperacao-de-ramal-em-sena-mad",
-    "alysson-bestene-afirma-que-nova-empresa-deve-assumir-transporte-coletivo-em-setembro-e-promete-r",
-    "alerta-em-rio-branco-fezes-de-pombos-podem-favorecer-fungo-que-causa-doenca-grave-saiba-como-se-",
-    "prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi",
-    "vazamento-de-gas-leva-prefeitura-de-manaus-a-decretar-estado-de-alerta",
-    "sem-chuva-rio-acre-registra-leve-elevacao-e-marca-2-46-metros-na-capital",
-    "comercial-lider-destaca-25-anos-de-experiencia-e-anuncia-promocoes-especiais-nesta-quinta-feira-",
-    "jovem-morre-apos-doar-rim-ao-pai-que-o-expulsou-de-casa-por-ser-gay",
-    "samsung-galaxy-fit3-o-smartwatch-que-une-estilo-e-praticidade-esta-em-promocao-na-amazon",
-    "aviso-de-reabertura-pp-srp-n-012-2026",
-    "qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms",
-    "anvisa-determina-recolhimento-de-lotes-de-agua-mamba-water",
-    "vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude",
-    "ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina",
-    "atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier",
-    "12-municipios-do-acre-superam-limite-de-poluicao-da-oms-antes-do-auge-da-seca",
-    "tratamento-de-cancer-se-torna-menos-invasivo-atraves-da-radiologia",
-    "brasileiro-cruza-pais-em-aviao-para-levar-tratamento-para-endometriose",
-    "ems-reduz-preco-da-semaglutida-ozivy-em-programa-de-descontos",
-    "sinteac-convoca-servidores-da-rede-estadual-para-manifestacao-em-frente-ao-palacio-rio-branco",
-    "estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico",
-    "servidores-da-educacao-decidem-fazer-protesto-em-frente-ao-palacio",
-    "em-protesto-estudantes-fecham-avenida-ceara-nas-proximidades-do-viaduto",
-    "apos-bloquear-avenida-ceara-estudantes-levam-protesto-ao-terminal-urbano",
-    "ferias-escolares-x-consumo-consciente-como-reduzir-o-gasto-de-energia-sem-perder-o-conforto",
-    "fies-abre-inscricoes-para-o-segundo-semestre-com-75-5-mil-vagas",
-    "estudantes-encerram-manifestacao-no-terminal-urbano-apos-ato-por-melhorias-no-transporte-publico",
-    "motociclista-tenta-furar-bloqueio-durante-protesto-de-estudantes-e-causa-tumulto-no-viaduto-da-a",
-    "estudantes-da-ufac-fecham-avenida-ceara-em-protesto-por-melhorias-no-transporte-publico",
-    "fies-abre-consulta-de-vagas-e-inscricoes-seguem-ate-sexta-acre-participa-da-selecao",
-    "ferias-escolares-elevam-consumo-de-energia-veja-como-economizar-e-evitar-desperdicios-no-acre",
-    "inscricoes-para-fies-terminam-nesta-sexta-feira",
-    "quantas-horas-por-dia-e-preciso-estudar-para-o-enem-veja-dicas",
-    "principe-william-elogia-inglaterra-apos-eliminacao-para-a-argentina-na-copa-do-mundo",
-    "acreano-de-9-anos-chega-ao-maior-torneio-de-futebol-infantil-do-norte",
-    "jogos-de-hoje-16-07-26-onde-assistir-futebol-ao-vivo-e-horarios-das-partidas",
-    "botafogo-x-santos-onde-assistir-horario-e-escalacoes-do-jogo-do-brasileirao",
-    "vitoria-x-vasco-onde-assistir-horario-e-escalacoes-do-jogo-do-brasileirao",
-    "virginia-da-resposta-discreta-a-criticas-apos-posar-no-colo-de-vini-jr",
-    "finalista-da-copa-espanha-tem-medalhistas-que-perderam-ouro-para-o-brasil",
-    "celulose-brasileira-preserva-competitividade-apesar-de-recuo-pontual",
-    "atletico-de-madrid-e-o-time-com-mais-jogadores-na-final-da-copa-veja-lista",
-    "harry-styles-no-brasil-veja-provavel-setlist-e-tudo-o-que-voce-precisa-saber-sobre-shows",
-    "messi-vibra-com-vaga-da-argentina-na-final-da-copa-do-mundo",
-    "acre-fight-combat-com-11-lutas-no-maison-borges-sabado",
-    "elenco-santa-cruz-volta-aos-treinos-e-pedro-balu-pensa-em-mudancas",
-    "messi-avanca-a-final-e-iguala-recorde-historico-de-cafu-em-copas-do-mundo",
-    "brasil-bate-bicampea-olimpica-franca-na-liga-das-nacoes-de-volei",
-    "kalebe-e-caio-retornam-e-kaua-e-a-duvida-do-independencia",
-    "consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica",
-    "xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k",
-    "apos-coracao-acelerado-gabz-vai-estrelar-musical-bete-balanco",
-    "a-odisseia-trilha-jornada-entre-epico-deslumbrante-e-exagero-hollywoodiano-g1-ja-viu",
-    "como-mcs-mais-ouvidos-do-brasil-viraram-empresarios-e-revolucionaram-o-funk",
-    "sam-neill-morreu-de-pneumonia-causa-da-morte-e-divulgada-por-assessor-de-ator-de-jurassic-park",
-    "icone-da-musica-afro-religiosa-joia-do-couro-vira-pela-1-vez-ao-acre",
-    "liam-gallagher-do-oasis-critica-tecnico-apos-eliminacao-da-inglaterra-na-copa-do-mundo",
-    "fazenda-sobe-previsao-da-inflacao-para-5-1-em-2026",
-    "pl-pede-impeachment-de-moraes-apos-veto-a-visita-de-flavio-a-bolsonaro",
-    "esquerda-define-data-de-convencao-para-lancar-thor-dantas-ao-governo-confira",
-    "jarude-diz-que-seu-partido-pretende-eleger-dois-deputados-na-aleac",
-    "governo-do-estado-conclui-projeto-que-viabiliza-migracao-da-radio-difusora-acreana-para-a-freque",
-    "o-que-esta-por-tras-do-novo-tarifaco-dos-eua-contra-o-brasil",
-    "flavio-bolsonaro-endossa-secretario-dos-eua-e-diz-que-lula-nao-tem-condicoes-de-ser-presidente",
-    "mara-rocha-o-tratamento-oncologico-ainda-e-um-dos-maiores-desafios-da-saude-publica-no-acre",
-    "a-pequena-politica-poe-em-risco-o-papel-do-estado-democratico",
-    "formacao-cidada-nova-lei-torna-educacao-politica-obrigatoria-nas-escolas",
-    "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio",
-    "operacao-do-gefron-resulta-na-apreensao-de-23-kg-de-skunk-e-prisao-de-dois-suspeitos-em-senador-",
-    "moises-diniz-revela-doenca-renal-e-entra-na-fila-por-transplante-quero-enfrentar-essa-batalha-pe",
-    "gefron-apreende-quase-24-kg-de-skunk-escondidos-em-caminhonete-durante-fiscalizacao-em-senador-g",
-    "gefron-apreende-23-quilos-de-skunk-e-prende-dois-homens-durante-operacao-em-senador-guiomard"
+    "cruzeiro-do-sul-comemora-122-anos-nesta-segunda-feira-celebrando-avancos-na-saude-e-infraestrutu",
+    "corrida-reune-450-participantes-em-comemoracao-aos-122-anos-de-cruzeiro-do-sul",
+    "complexo-industrial-do-cafe-tem-primeira-etapa-entregue-e-amplia-capacidade-de-beneficiamento-da",
+    "prefeitura-de-cruzeiro-do-sul-realiza-primeira-reuniao-para-alinhar-desfile-civico-militar-do-12",
+    "suspeito-de-envolvimento-na-morte-de-kiko-gama-e-preso-com-arma-e-drogas-em-cruzeiro-do-sul",
+    "policia-prende-suspeito-de-envolvimento-em-homicidio-em-cruzeiro-do-sul",
+    "policia-civil-prende-suspeito-de-envolvimento-em-homicidio-no-bairro-da-varzea-em-cruzeiro-do-su",
+    "projeto-cidadao-transforma-sala-de-emergencia-em-altar-e-realiza-sonho-de-casal-em-rodrigues-alv",
+    "policia-civil-se-infiltra-durante-show-de-joelma-e-recupera-celulares-roubados-em-cruzeiro-do-su",
+    "investigadores-do-nepatri-da-policia-civil-apreende-tres-adolescentes-por-roubo-em-menos-de-48-h",
+    "policia-civil-por-meio-do-nepatri-prende-suspeitos-por-furto-e-recupera-roupas-furtadas-em-cruze",
+    "cruzeiro-do-sul-chega-aos-122-anos-celebrando-historia-tradicoes-e-avancos",
+    "cruzeiro-do-sul-faz-122-anos-conheca-a-historia-da-princesinha-do-jurua",
+    "historiador-destaca-importancia-de-cruzeiro-do-sul-nos-122-anos-de-fundacao",
+    "municipio-de-cruzeiro-do-sul-celebra-122-anos-de-fundacao-1904",
+    "cruzeiro-do-sul-celebra-122-anos-de-historia-tradicoes-e-com-programacao-especial-de-aniversario",
+    "cruzeiro-do-sul-acre-28-de-setembro-de-2026-estamos-celebrando-seus-122-anos-de-fundacao-1904",
+    "cruzeiro-do-sul-celebra-122-anos-com-corrida-esporte-literatura-e-desfile-civico-militar",
+    "cruzeiro-122-anos-desfile-copao-jurua",
+    "jornalista-mariano-maciel-lanca-livro-nas-comemoracoes-de-cruzeiro-do-sul",
+    "uma-viagem-no-tempo-museu-de-cruzeiro-do-sul-resgata-a-historia-do-ciclo-da-borracha-fauna-e-val",
+    "estudantes-do-acre-conquistam-bronze-em-olimpiada-nacional-de-historia-e-levam-nome-de-tarauaca-",
+    "policia-civil-prende-integrante-de-organizacao-criminosa-durante-operacao-fronteiras-em-marechal",
+    "apos-capotar-carro-homem-e-preso-sem-habilitacao-em-cruzeiro-do-sul",
+    "homem-rompe-tornozeleira-eletronica-e-e-preso-dentro-do-hospital-do-jurua",
+    "mulher-e-presa-apos-agredir-esposa-em-cruzeiro-do-sul",
+    "quatro-homens-invadem-casa-agridem-vitima-e-roubam-motocicleta-em-cruzeiro-do-sul",
+    "discussao-por-ciumes-termina-com-mulher-presa-por-agressao-a-esposa-em-cruzeiro-do-sul",
+    "encapuzados-quatro-homens-agridem-morador-e-roubam-motocicleta-em-cruzeiro-do-sul",
+    "apos-ameacar-companheira-com-tercado-em-cruzeiro-do-sul-homem-e-preso-no-bairro-joao-alves",
+    "suspeito-de-executar-homem-com-25-tiros-e-baleado-2-vezes-pela-policia-em-cruzeiro-do-sul",
+    "bombeiros-combatem-incendios-cruzeiro-rodrigues-alves",
+    "video-tres-acidentes-de-transito-foram-registrados-em-cruzeiro-do-sul",
+    "investigado-por-homicidio-e-preso-durante-operacao-da-policia-civil-em-cruzeiro-do-sul",
+    "homem-e-preso-apos-confusao-e-agressao-a-policiais-dentro-de-bar-em-cruzeiro-do-sul",
+    "os-irmaos-jose-araujo-11-anos-e-davi-araujo-da-silva-8-anos-desaparecem-no-rio-jurua-bombeiros-s",
+    "seis-pessoas-desaparecidas-em-floresta-de-cruzeiro-do-sul-sao-resgatadas-com-vida-pelo-corpo-de-",
+    "homem-e-atingido-por-sete-tiros-e-fica-em-estado-grave-em-cruzeiro-do-sul",
+    "jovem-pai-de-tres-filhos-morre-apos-afogamento-em-igarape-de-cruzeiro-do-sul-no-dia-dos-pais-sus",
+    "homem-e-preso-apos-ser-condenado-a-13-anos-por-estupro-de-vulneravel-em-comunidade-de-cruzeiro-d",
+    "homem-e-preso-apos-tentar-invadir-residencia-no-bairro-sao-jose-em-cruzeiro-do-sul",
+    "condenado-a-13-anos-por-estupro-de-vulneravel-e-preso-pela-policia-civil-na-comunidade-santa-luz",
+    "homem-encontrado-no-centro-de-cruzeiro-do-sul-pode-ter-morrido-de-overdose-diz-policia-civil",
+    "jovem-e-preso-por-suspeita-de-trafico-de-drogas-durante-abordagem-da-pm-em-cruzeiro-do-sul",
+    "giro-fecha-ponto-de-trafico-no-centro-de-cruzeiro-do-sul-apreende-drogas-e-conduz-duas-pessoas-a",
+    "agosto-lilas-parceria-entre-estado-e-municipio-leva-rodas-de-conversa-e-conscientizacao-para-esc",
+    "apos-investigacao-do-nepatri-suspeito-e-preso-por-furto-e-receptacao-pela-policia-civil-em-cruze",
+    "policia-civil-prende-homem-por-abuso-contra-enteada-de-14-anos-em-cruzeiro-do-sul-ac",
+    "translima-express-parabeniza-cruzeiro-do-sul-e-todos-os-seus-clientes-e-parceiros-pelos-122-anos",
+    "prefeitura-de-cruzeiro-do-sul-realiza-acao-educativa-durante-a-semana-nacional-de-transito",
+    "apaa-amplia-assistencia-e-cria-servico-de-acompanhamento-domiciliar-em-cruzeiro-do-sul",
+    "estiagem-aumenta-risco-de-incendios-e-imac-reforca-alerta-contra-queimadas-no-jurua",
+    "contrato-preve-carne-de-primeira-mas-servidores-denunciam-produto-de-baixa-qualidade-em-escola-d",
+    "edvaldo-magalhaes-volta-a-denunciar-descaso-com-a-merenda-escolar-no-acre",
+    "caps-cruzeiro-novo-endereco-retoma-atendimentos-dia-29",
+    "previsao-tempo-cruzeiro-do-sul-23-setembro",
+    "campanha-antirrabica-bairros-cruzeiro",
+    "edvaldo-magalhaes-volta-a-denunciar-descaso-com-a-merenda-escolar-no-acre-absurdo",
+    "piloto-acreano-realiza-sonho-e-pousa-pela-primeira-vez-em-cruzeiro-do-sul-onde-nasceu",
+    "piloto-acreano-pilota-boeing-737-max-8-e-pousa-pela-1-vez-na-cidade-natal-cruzeiro-do-sul",
+    "piloto-acreano-pilota-boeing-737-max-8-e-pousa-pela-1-vez-na-cidade-natal",
+    "perpetua-almeida-afirma-que-acre-tera-quatro-industrias-para-beneficiamento-de-cafe",
+    "cruzeiro-do-sul-tera-sabado-de-calor-e-possibilidade-de-pancadas-de-chuva-a-noite",
+    "projeto-cidadao-celebra-30-anos-com-casamento-coletivo-para-200-casais-em-cruzeiro-do-sul",
+    "prefeitura-de-cruzeiro-do-sul-leva-atendimento-de-saude-a-comunidade-rio-croa-por-meio-do-missao",
+    "domingo-sera-de-calor-e-possibilidade-de-chuva-em-cruzeiro-do-sul",
+    "16-finalistas-do-concurso-rei-e-rainha-do-9-festival-da-farinha-sao-definidos-em-cruzeiro-do-sul",
+    "imac-identifica-28-pontos-com-indicios-de-crime-ambiental-no-vale-do-jurua-e-intensifica-fiscali",
+    "atletico-rio-moa-vence-e-conquista-a-copa-de-futebol-master-50tao-em-cruzeiro-do-sul",
+    "dempca-prende-em-cruzeiro-do-sul-homem-condenado-a-13-anos-por-estupro-de-vulneravel",
+    "prefeitura-de-cruzeiro-do-sul-abre-fase-rural-dos-jogos-escolares-e-inicia-selecao-das-equipes-p",
+    "prefeitura-de-cruzeiro-do-sul-realiza-manutencao-da-infraestrutura-urbana-com-operacao-tapa-bura",
+    "cachorra-desaparece-na-regiao-do-badejo-do-meio-e-familia-oferece-recompensa-em-cruzeiro-do-sul",
+    "prefeitura-de-cruzeiro-do-sul-abre-inscricoes-para-o-programa-estacionamento-criativo-do-9-festi",
+    "prefeitura-de-cruzeiro-do-sul-lanca-agosto-lilas-e-fortalece-acoes-de-prevencao-a-violencia-cont",
+    "cruzeiro-do-sul-abre-inscricoes-para-o-programa-estacionamento-criativo-do-9-festival-da-farinha",
+    "queda-de-aviao-que-matou-33-pessoas-no-acre-completa-55-anos",
+    "28-de-setembro-maior-tragedia-aerea-da-historia-do-acre-completa-55-anos",
+    "talks-historias-que-inspiram-realiza-edicao-especial-para-arrecadar-recursos-para-tratamento-de-",
+    "nicolau-celebra-122-anos-de-cruzeiro-do-sul-e-brinca-combina-com-o-numero-da-campanha"
   ],
-  "reviewQueue": [
-    {
-      "slug": "jovem-morre-apos-doar-rim-ao-pai-que-o-expulsou-de-casa-por-ser-gay",
-      "title": "Jovem morre após doar rim ao pai que o expulsou de casa por ser gay",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/doacao-rim_D24AM.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "aviso-de-reabertura-pp-srp-n-012-2026",
-      "title": "Aviso de Reabertura - PP SRP N° 012/2026",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://static.wixstatic.com/media/0204e8_6097aaff93b640d280c1a1d0cc8e0f93~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_6097aaff93b640d280c1a1d0cc8e0f93~mv2.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude",
-      "title": "Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-06-at-09.10.41.jpeg?w=200",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier",
-      "title": "Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/dandara-albuquerque.jpg?w=200",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "fies-abre-inscricoes-para-o-segundo-semestre-com-75-5-mil-vagas",
-      "title": "Fies abre inscrições para o segundo semestre com 75,5 mil vagas",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-144.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "principe-william-elogia-inglaterra-apos-eliminacao-para-a-argentina-na-copa-do-mundo",
-      "title": "Príncipe William elogia Inglaterra após eliminação para a Argentina na Copa do Mundo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_1516.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "virginia-da-resposta-discreta-a-criticas-apos-posar-no-colo-de-vini-jr",
-      "title": "Virginia dá resposta discreta a críticas após posar no colo de Vini Jr.",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/virginia-luana-piovani-e1780406951386.png?w=200",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "finalista-da-copa-espanha-tem-medalhistas-que-perderam-ouro-para-o-brasil",
-      "title": "Finalista da Copa, Espanha tem medalhistas que perderam ouro para o Brasil",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Franca-Espanha-4-e1784133886609.jpg?w=200",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "atletico-de-madrid-e-o-time-com-mais-jogadores-na-final-da-copa-veja-lista",
-      "title": "Atlético de Madrid é o time com mais jogadores na final da Copa; veja lista",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/harry_kane_inglaterra-e1782920922148.jpg?w=200",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "harry-styles-no-brasil-veja-provavel-setlist-e-tudo-o-que-voce-precisa-saber-sobre-shows",
-      "title": "Harry Styles no Brasil: veja provável setlist e tudo o que você precisa saber sobre shows",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/-nGpj9QcOmN6wptesDpzmTIKyWI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/D/vWse8iR9KpqW9gzsiW5A/captura-de-tela-2026-03-04-104356.png",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "messi-vibra-com-vaga-da-argentina-na-final-da-copa-do-mundo",
-      "title": "Messi vibra com vaga da Argentina na final da Copa do Mundo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/jude-bellingham-semi-e1784151402540.avif?w=200",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "acre-fight-combat-com-11-lutas-no-maison-borges-sabado",
-      "title": "Acre Fight Combat com 11 lutas no Maison Borges sábado",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-20.36.58-1200x1035.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "messi-avanca-a-final-e-iguala-recorde-historico-de-cafu-em-copas-do-mundo",
-      "title": "Messi avança à final e iguala recorde histórico de Cafu em Copas do Mundo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/tagreuters.com2025binary_LYNXNPEL870PV-BASEIMAGE-e1764955060840.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "brasil-bate-bicampea-olimpica-franca-na-liga-das-nacoes-de-volei",
-      "title": "Brasil bate bicampeã olímpica França na Liga das Nações de vôlei",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "sam-neill-morreu-de-pneumonia-causa-da-morte-e-divulgada-por-assessor-de-ator-de-jurassic-park",
-      "title": "Sam Neill morreu de pneumonia; causa da morte é divulgada por assessor de ator de 'Jurassic Park'",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/6mP0Uu2rU2rJgAhJx8VDRhuiJMQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/S/B/xzLAQ8QNWaC4xBpUAlhw/20221025-ovicio-jurassic-world-dominion-alan-grant-sam-neill.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "icone-da-musica-afro-religiosa-joia-do-couro-vira-pela-1-vez-ao-acre",
-      "title": "Ícone da música afro-religiosa, Joia do Couro virá pela 1ª vez ao Acre",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-7.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "fazenda-sobe-previsao-da-inflacao-para-5-1-em-2026",
-      "title": "Fazenda sobe previsão da inflação para 5,1% em 2026",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/JT-012245.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "pl-pede-impeachment-de-moraes-apos-veto-a-visita-de-flavio-a-bolsonaro",
-      "title": "PL pede impeachment de Moraes após veto à visita de Flávio a Bolsonaro",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/alexandre-moraes_D24AM.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mara-rocha-o-tratamento-oncologico-ainda-e-um-dos-maiores-desafios-da-saude-publica-no-acre",
-      "title": "Mara Rocha: “o tratamento oncológico ainda é um dos maiores desafios da saúde pública no Acre”",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-22.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "a-pequena-politica-poe-em-risco-o-papel-do-estado-democratico",
-      "title": "A pequena política põe em risco o papel do Estado Democrático",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-142.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio",
-      "title": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "operacao-do-gefron-resulta-na-apreensao-de-23-kg-de-skunk-e-prisao-de-dois-suspeitos-em-senador-",
-      "title": "Operação do Gefron resulta na apreensão de 23 kg de skunk e prisão de dois suspeitos em Senador Guiomard",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/Gefrondroga.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "moises-diniz-revela-doenca-renal-e-entra-na-fila-por-transplante-quero-enfrentar-essa-batalha-pe",
-      "title": "Moisés Diniz revela doença renal e entra na fila por transplante: “Quero enfrentar essa batalha pela vida”",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/MOISES-.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "gefron-apreende-quase-24-kg-de-skunk-escondidos-em-caminhonete-durante-fiscalizacao-em-senador-g",
-      "title": "Gefron apreende quase 24 kg de skunk escondidos em caminhonete durante fiscalização em Senador Guiomard",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/4d6de63d-d70c-49d7-b224-6ebddcf6c816-769x1024.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "gefron-apreende-23-quilos-de-skunk-e-prende-dois-homens-durante-operacao-em-senador-guiomard",
-      "title": "GEFRON apreende 23 quilos de skunk e prende dois homens durante operação em Senador Guiomard",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-19.45.08.jpeg",
-      "effectiveFocus": ""
-    }
-  ],
+  "reviewQueue": [],
   "items": [
     {
-      "slug": "mailza-toma-cafe-com-quibe-no-mercado-do-bosque-e-visita-unidades-de-saude",
-      "title": "Mailza toma café com quibe no Mercado do Bosque e visita unidades de saúde",
-      "category": "Saude",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.349Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/mailza-cafe-mercado-unidades-saude3.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "mailza-e-jessica-sales-terao-candidaturas-oficializadas-em-convencao-no-dia-31-de-julho",
-      "title": "Mailza e Jéssica Sales terão candidaturas oficializadas em convenção no dia 31 de julho",
-      "category": "Politica",
+      "slug": "cruzeiro-do-sul-comemora-122-anos-nesta-segunda-feira-celebrando-avancos-na-saude-e-infraestrutu",
+      "title": "Cruzeiro do Sul comemora 122 anos nesta segunda-feira celebrando avanços na saúde e infraestrutura",
+      "category": "Prefeitura",
       "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-16T02:25:24.000Z",
+      "publishedAt": "2026-09-28T15:56:12.494Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/ChatGPT-Image-15-de-jul.-de-2026-16_14_17-jpg.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "convencao-que-vai-lancar-mailza-e-jessica-ao-governo-sera-no-final-de-julho-veja-data",
-      "title": "Convenção que vai lançar Mailza e Jessica ao Governo será no final de julho; veja data",
-      "category": "Politica",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.315Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Mailza-e-jessica-500x400.webp?v=1784124792",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": {
-        "width": 500,
-        "height": 400,
-        "ratio": 1.25,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "foragido-apontado-como-integrante-da-tropa-do-odio-e-preso-pela-pm-em-area-rural-de-cruzeiro-do-",
-      "title": "Foragido apontado como integrante da ‘Tropa do Ódio’ é preso pela PM em área rural de Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-16T07:09:38.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/9ec0e603-ced0-43ec-8ff0-5ee92aad4797.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "servidor-da-prefeitura-vira-alvo-de-investigacao-do-mp-por-contratos-na-saude",
-      "title": "Servidor da Prefeitura vira alvo de investigação do MP por contratos na Saúde",
-      "category": "Prefeitura",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.337Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/06/MPAC2-1200x675.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/IMG_5107-1200x763-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
+        "height": 763,
+        "ratio": 1.573,
         "orientation": "landscape"
       },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "hasManualFocus": false,
+      "effectiveFocus": "",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": false
+        "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
+      "reasons": []
     },
     {
-      "slug": "foragido-acusado-de-homicidios-e-integrante-de-organizacoes-criminosas-e-capturado-pelo-6-bpm-em",
-      "title": "Foragido acusado de homicídios e integrante de organizações criminosas é capturado pelo 6°BPM em Cruzeiro do Sul",
+      "slug": "corrida-reune-450-participantes-em-comemoracao-aos-122-anos-de-cruzeiro-do-sul",
+      "title": "Corrida reúne 450 participantes em comemoração aos 122 anos de Cruzeiro do Sul",
       "category": "Prefeitura",
       "sourceName": "Voz do Norte",
-      "publishedAt": "2026-07-16T07:36:18.000Z",
+      "publishedAt": "2026-09-28T03:33:01.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/Captura-de-Tela-2026-07-15-as-13.37.42-1536x1235-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1536,
-        "height": 1235,
-        "ratio": 1.244,
-        "orientation": "landscape"
-      },
+      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/09/8a4918_08d54f23e7fb451ab80f188cb7dba77amv2.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "effectiveFocus": "center 45%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -513,197 +150,17 @@
       ]
     },
     {
-      "slug": "policia-militar-prende-dois-suspeitos-de-trafico-de-drogas-em-operacoes-de-enfrentamento-ao-traf",
-      "title": "Polícia Militar prende dois suspeitos de tráfico de drogas em operações de enfrentamento ao tráfico em Cruzeiro do Sul",
+      "slug": "complexo-industrial-do-cafe-tem-primeira-etapa-entregue-e-amplia-capacidade-de-beneficiamento-da",
+      "title": "Complexo Industrial do Café tem primeira etapa entregue e amplia capacidade de beneficiamento da produção no Juruá",
       "category": "Prefeitura",
-      "sourceName": "Voz do Norte",
-      "publishedAt": "2026-07-16T07:09:27.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-11.46.24-1024x768-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 768,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "gladson-mira-zequinha-seu-proprio-apoiador",
-      "title": "Gladson mira Zequinha, seu próprio apoiador",
-      "category": "Prefeitura",
-      "sourceName": "Integracao Net",
-      "publishedAt": "2026-07-16T00:26:43.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/07/Imagem-do-WhatsApp-de-2024-10-06-as-10.38.12_fcc9c7d9-jpg-e1784161569309-800x500.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": {
-        "width": 800,
-        "height": 500,
-        "ratio": 1.6,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "morador-armado-com-espingarda-ameaca-operador-de-trator-durante-recuperacao-de-ramal-em-sena-mad",
-      "title": "Morador armado com espingarda ameaça operador de trator durante recuperação de ramal em Sena Madureira",
-      "category": "Prefeitura",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-16T06:21:17.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/Ameacaramal.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T18:54:20.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/896af6_5f5a570e9e5a4d568e9dd06f631e2bc0mv2-e1790171563455.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "alysson-bestene-afirma-que-nova-empresa-deve-assumir-transporte-coletivo-em-setembro-e-promete-r",
-      "title": "Alysson Bestene afirma que nova empresa deve assumir transporte coletivo em setembro e promete resolver crise",
-      "category": "Prefeitura",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-16T12:46:36.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/lucasdourado-33-5-1024x576.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 576,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "alerta-em-rio-branco-fezes-de-pombos-podem-favorecer-fungo-que-causa-doenca-grave-saiba-como-se-",
-      "title": "Alerta em Rio Branco: fezes de pombos podem favorecer fungo que causa doença grave; saiba como se proteger",
-      "category": "Prefeitura",
-      "sourceName": "Acre Agora",
-      "publishedAt": "2026-07-16T08:19:07.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreagora.com/wp-content/uploads/2026/07/pombinho0s.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "prefeitura-de-sp-rejeita-pedido-da-uber-para-operar-servico-de-mototaxi",
-      "title": "Prefeitura de SP rejeita pedido da Uber para operar serviço de mototáxi",
-      "category": "Prefeitura",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T11:54:48.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/WhatsApp-Image-2025-01-15-at-19.25.17.jpeg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "vazamento-de-gas-leva-prefeitura-de-manaus-a-decretar-estado-de-alerta",
-      "title": "Vazamento de gás leva prefeitura de Manaus a decretar estado de alerta",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-07-16T11:22:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/svg+xml",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "sem-chuva-rio-acre-registra-leve-elevacao-e-marca-2-46-metros-na-capital",
-      "title": "Sem chuva, Rio Acre registra leve elevação e marca 2,46 metros na capital",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T11:18:07.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2021/08/RIO-ACRE-SECO-2021-SERGIO-2-900x599.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 900,
-        "height": 599,
-        "ratio": 1.503,
-        "orientation": "landscape"
-      },
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
@@ -715,574 +172,23 @@
       "reasons": []
     },
     {
-      "slug": "comercial-lider-destaca-25-anos-de-experiencia-e-anuncia-promocoes-especiais-nesta-quinta-feira-",
-      "title": "“Comercial Líder” destaca 25 anos de experiência e anuncia promoções especiais nesta quinta-feira (16)",
+      "slug": "prefeitura-de-cruzeiro-do-sul-realiza-primeira-reuniao-para-alinhar-desfile-civico-militar-do-12",
+      "title": "Prefeitura de Cruzeiro do Sul realiza primeira reunião para alinhar desfile cívico-militar do 122º aniversário da cidade",
       "category": "Prefeitura",
       "sourceName": "Batelao",
-      "publishedAt": "2026-07-16T03:52:54.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://batelao.com/wp-content/uploads/2026/07/1-5.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "jovem-morre-apos-doar-rim-ao-pai-que-o-expulsou-de-casa-por-ser-gay",
-      "title": "Jovem morre após doar rim ao pai que o expulsou de casa por ser gay",
-      "category": "Saude",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-16T01:07:38.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/doacao-rim_D24AM.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "samsung-galaxy-fit3-o-smartwatch-que-une-estilo-e-praticidade-esta-em-promocao-na-amazon",
-      "title": "Samsung Galaxy Fit3: o smartwatch que une estilo e praticidade está em promoção na Amazon",
-      "category": "Saude",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T03:52:23.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/hero-smartwatch-14.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "publishedAt": "2026-09-10T19:18:51.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-10-at-14.38.11.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "aviso-de-reabertura-pp-srp-n-012-2026",
-      "title": "Aviso de Reabertura - PP SRP N° 012/2026",
-      "category": "Saude",
-      "sourceName": "Prefeitura de Rodrigues Alves",
-      "publishedAt": "2026-07-16T08:53:41.484Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://static.wixstatic.com/media/0204e8_6097aaff93b640d280c1a1d0cc8e0f93~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_6097aaff93b640d280c1a1d0cc8e0f93~mv2.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "qualidade-do-ar-em-rio-branco-amanhece-quase-tres-vezes-acima-do-limite-da-oms",
-      "title": "Qualidade do ar em Rio Branco amanhece quase três vezes acima do limite da OMS",
-      "category": "Saude",
-      "sourceName": "A Gazeta do Acre",
-      "publishedAt": "2026-07-16T12:23:10.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-03-at-06.09.22-600x450.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": {
-        "width": 600,
-        "height": 450,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "anvisa-determina-recolhimento-de-lotes-de-agua-mamba-water",
-      "title": "Anvisa determina recolhimento de lotes de água Mamba Water",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T12:35:44.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Design-sem-nome-14.jpg?w=1200&h=630&crop=1",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "vazamento-de-gas-em-manaus-16-pessoas-dao-entrada-em-unidades-de-saude",
-      "title": "Vazamento de gás em Manaus: 16 pessoas dão entrada em unidades de saúde",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T12:05:45.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-06-at-09.10.41.jpeg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "ginecologista-explica-como-o-envelhecimento-afeta-a-regiao-intima-feminina",
-      "title": "Ginecologista explica como o envelhecimento afeta a região íntima feminina",
-      "category": "Saude",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T12:00:02.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/CAPA-DO-SITE-2026-07-14T130739.707.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "atriz-revela-ter-sido-salva-de-cirurgia-apos-ligacao-para-chico-xavier",
-      "title": "Atriz revela ter sido salva de cirurgia após ligação para Chico Xavier",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T11:20:05.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/dandara-albuquerque.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "12-municipios-do-acre-superam-limite-de-poluicao-da-oms-antes-do-auge-da-seca",
-      "title": "12 municípios do Acre superam limite de poluição da OMS antes do auge da seca",
-      "category": "Saude",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T10:43:22.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2020/07/queimadas8-900x600.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 900,
-        "height": 600,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "tratamento-de-cancer-se-torna-menos-invasivo-atraves-da-radiologia",
-      "title": "Tratamento de câncer se torna menos invasivo através da radiologia",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T06:43:42.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/amigdalas-dor-de-garganta-2-e1735820160102.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "brasileiro-cruza-pais-em-aviao-para-levar-tratamento-para-endometriose",
-      "title": "Brasileiro cruza país em avião para levar tratamento para endometriose",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T06:34:16.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/endometriose-cancer-de-ovario.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "ems-reduz-preco-da-semaglutida-ozivy-em-programa-de-descontos",
-      "title": "EMS reduz preço da semaglutida Ozivy em programa de descontos",
-      "category": "Saude",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T02:31:26.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/ozivy-mockup-cima-3-quartos-1mg.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "sinteac-convoca-servidores-da-rede-estadual-para-manifestacao-em-frente-ao-palacio-rio-branco",
-      "title": "Sinteac convoca servidores da rede estadual para manifestação em frente ao Palácio Rio Branco",
-      "category": "Educacao",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-16T02:49:54.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/sinteac-jurua-em-tempo.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "estudantes-da-ufac-anunciam-greve-e-convocam-ato-por-transporte-publico",
-      "title": "Estudantes da Ufac anunciam greve e convocam ato por transporte público",
-      "category": "Educacao",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T12:06:01.108Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/UFAC-ok-1-1200x675.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "servidores-da-educacao-decidem-fazer-protesto-em-frente-ao-palacio",
-      "title": "Servidores da Educação decidem fazer protesto em frente ao Palácio",
-      "category": "Educacao",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.325Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/09/sinteac.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "em-protesto-estudantes-fecham-avenida-ceara-nas-proximidades-do-viaduto",
-      "title": "Em protesto, estudantes fecham Avenida Ceará nas proximidades do viaduto",
-      "category": "Educacao",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.320Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/VIADUTO-CEARA-PROTESTO-1200x675.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "apos-bloquear-avenida-ceara-estudantes-levam-protesto-ao-terminal-urbano",
-      "title": "Após bloquear Avenida Ceará, estudantes levam protesto ao Terminal Urbano",
-      "category": "Educacao",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.318Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/manifestacao.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "ferias-escolares-x-consumo-consciente-como-reduzir-o-gasto-de-energia-sem-perder-o-conforto",
-      "title": "Férias escolares x Consumo consciente: como reduzir o gasto de energia sem perder o conforto",
-      "category": "Educacao",
-      "sourceName": "Voz do Norte",
-      "publishedAt": "2026-07-16T07:58:44.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/arcondiconado-divulgacao.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "fies-abre-inscricoes-para-o-segundo-semestre-com-75-5-mil-vagas",
-      "title": "Fies abre inscrições para o segundo semestre com 75,5 mil vagas",
-      "category": "Educacao",
-      "sourceName": "Acre in Foco",
-      "publishedAt": "2026-07-16T02:38:11.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-144.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "estudantes-encerram-manifestacao-no-terminal-urbano-apos-ato-por-melhorias-no-transporte-publico",
-      "title": "Estudantes encerram manifestação no Terminal Urbano após ato por melhorias no transporte público em Rio Branco",
-      "category": "Educacao",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-16T05:08:55.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/PROTESTOESTUDANTESterminal.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
         "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "motociclista-tenta-furar-bloqueio-durante-protesto-de-estudantes-e-causa-tumulto-no-viaduto-da-a",
-      "title": "Motociclista tenta furar bloqueio durante protesto de estudantes e causa tumulto no viaduto da Avenida Ceará",
-      "category": "Educacao",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-16T03:55:16.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/TUMULTOPROTESTO.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "estudantes-da-ufac-fecham-avenida-ceara-em-protesto-por-melhorias-no-transporte-publico",
-      "title": "Estudantes da Ufac fecham Avenida Ceará em protesto por melhorias no transporte público",
-      "category": "Educacao",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-16T03:22:45.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/Protestoalunosufac.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "fies-abre-consulta-de-vagas-e-inscricoes-seguem-ate-sexta-acre-participa-da-selecao",
-      "title": "Fies abre consulta de vagas e inscrições seguem até sexta; Acre participa da seleção",
-      "category": "Educacao",
-      "sourceName": "Acre Agora",
-      "publishedAt": "2026-07-16T05:13:42.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreagora.com/wp-content/uploads/2020/07/fies.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -1290,170 +196,19 @@
       ]
     },
     {
-      "slug": "ferias-escolares-elevam-consumo-de-energia-veja-como-economizar-e-evitar-desperdicios-no-acre",
-      "title": "Férias escolares elevam consumo de energia; veja como economizar e evitar desperdícios no Acre",
-      "category": "Educacao",
-      "sourceName": "Acre Agora",
-      "publishedAt": "2026-07-16T05:10:10.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreagora.com/wp-content/uploads/2024/12/Aumento-de-energia-Nathalia-Alcantara-7.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "inscricoes-para-fies-terminam-nesta-sexta-feira",
-      "title": "Inscrições para Fies terminam nesta sexta-feira",
-      "category": "Educacao",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-07-16T12:03:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696800&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "quantas-horas-por-dia-e-preciso-estudar-para-o-enem-veja-dicas",
-      "title": "Quantas horas por dia é preciso estudar para o Enem? Veja dicas",
-      "category": "Educacao",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T10:58:46.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/ufsc_campus_joinville.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "principe-william-elogia-inglaterra-apos-eliminacao-para-a-argentina-na-copa-do-mundo",
-      "title": "Príncipe William elogia Inglaterra após eliminação para a Argentina na Copa do Mundo",
-      "category": "Esporte",
+      "slug": "suspeito-de-envolvimento-na-morte-de-kiko-gama-e-preso-com-arma-e-drogas-em-cruzeiro-do-sul",
+      "title": "Suspeito de envolvimento na morte de “Kiko” Gama é preso com arma e drogas em Cruzeiro do Sul",
+      "category": "Prefeitura",
       "sourceName": "Jurua Online",
-      "publishedAt": "2026-07-16T06:59:02.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/07/IMG_1516.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "acreano-de-9-anos-chega-ao-maior-torneio-de-futebol-infantil-do-norte",
-      "title": "Acreano de 9 anos chega ao maior torneio de futebol infantil do Norte",
-      "category": "Esporte",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.370Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Iury-4-e1784060658449-1038x663.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": {
-        "width": 1038,
-        "height": 663,
-        "ratio": 1.566,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "jogos-de-hoje-16-07-26-onde-assistir-futebol-ao-vivo-e-horarios-das-partidas",
-      "title": "Jogos de hoje (16/07/26): onde assistir futebol ao vivo e horários das partidas",
-      "category": "Esporte",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T12:52:29.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/futebol-streaming-2.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "publishedAt": "2026-09-23T22:31:42.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/befunky-collage-2026-09-23t102358.047-e1790184629165.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "botafogo-x-santos-onde-assistir-horario-e-escalacoes-do-jogo-do-brasileirao",
-      "title": "Botafogo x Santos: onde assistir, horário e escalações do jogo do Brasileirão",
-      "category": "Esporte",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T09:52:31.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/estudiantes-x-flamengo-scaled-1-1280x720.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1280,
-        "height": 720,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -1465,24 +220,19 @@
       ]
     },
     {
-      "slug": "vitoria-x-vasco-onde-assistir-horario-e-escalacoes-do-jogo-do-brasileirao",
-      "title": "Vitória x Vasco: onde assistir, horário e escalações do jogo do Brasileirão",
-      "category": "Esporte",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T09:52:25.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/vitoria-x-vasco-1280x720.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": {
-        "width": 1280,
-        "height": 720,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
+      "slug": "policia-prende-suspeito-de-envolvimento-em-homicidio-em-cruzeiro-do-sul",
+      "title": "Polícia prende suspeito de envolvimento em homicídio em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-09-23T21:28:47.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/09/presoacusado.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -1494,535 +244,115 @@
       ]
     },
     {
-      "slug": "virginia-da-resposta-discreta-a-criticas-apos-posar-no-colo-de-vini-jr",
-      "title": "Virginia dá resposta discreta a críticas após posar no colo de Vini Jr.",
-      "category": "Esporte",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T11:01:48.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/virginia-luana-piovani-e1780406951386.png?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "finalista-da-copa-espanha-tem-medalhistas-que-perderam-ouro-para-o-brasil",
-      "title": "Finalista da Copa, Espanha tem medalhistas que perderam ouro para o Brasil",
-      "category": "Esporte",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T09:00:37.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Franca-Espanha-4-e1784133886609.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "celulose-brasileira-preserva-competitividade-apesar-de-recuo-pontual",
-      "title": "Celulose brasileira preserva competitividade apesar de recuo pontual",
-      "category": "Esporte",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T08:00:22.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.alpha.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2025binary_LYNXNPEL8B0VH-BASEIMAGE.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "atletico-de-madrid-e-o-time-com-mais-jogadores-na-final-da-copa-veja-lista",
-      "title": "Atlético de Madrid é o time com mais jogadores na final da Copa; veja lista",
-      "category": "Esporte",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T08:00:14.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/harry_kane_inglaterra-e1782920922148.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "harry-styles-no-brasil-veja-provavel-setlist-e-tudo-o-que-voce-precisa-saber-sobre-shows",
-      "title": "Harry Styles no Brasil: veja provável setlist e tudo o que você precisa saber sobre shows",
-      "category": "Esporte",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-07-16T07:02:10.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/-nGpj9QcOmN6wptesDpzmTIKyWI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/H/D/vWse8iR9KpqW9gzsiW5A/captura-de-tela-2026-03-04-104356.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "messi-vibra-com-vaga-da-argentina-na-final-da-copa-do-mundo",
-      "title": "Messi vibra com vaga da Argentina na final da Copa do Mundo",
-      "category": "Esporte",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T07:00:49.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/jude-bellingham-semi-e1784151402540.avif?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "acre-fight-combat-com-11-lutas-no-maison-borges-sabado",
-      "title": "Acre Fight Combat com 11 lutas no Maison Borges sábado",
-      "category": "Esporte",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T01:45:39.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-20.36.58-1200x1035.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 1035,
-        "ratio": 1.159,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "elenco-santa-cruz-volta-aos-treinos-e-pedro-balu-pensa-em-mudancas",
-      "title": "Elenco Santa Cruz volta aos treinos e Pedro Balu pensa em mudanças",
-      "category": "Esporte",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T01:02:06.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-19.57.21-e1784163679771-1200x706.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 706,
-        "ratio": 1.7,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "messi-avanca-a-final-e-iguala-recorde-historico-de-cafu-em-copas-do-mundo",
-      "title": "Messi avança à final e iguala recorde histórico de Cafu em Copas do Mundo",
-      "category": "Esporte",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T00:40:57.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/tagreuters.com2025binary_LYNXNPEL870PV-BASEIMAGE-e1764955060840.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "brasil-bate-bicampea-olimpica-franca-na-liga-das-nacoes-de-volei",
-      "title": "Brasil bate bicampeã olímpica França na Liga das Nações de vôlei",
-      "category": "Esporte",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-07-16T00:32:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/svg+xml",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "kalebe-e-caio-retornam-e-kaua-e-a-duvida-do-independencia",
-      "title": "Kalebe e Caio retornam e Kauã é a dúvida do Independência",
-      "category": "Esporte",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T00:30:44.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-5.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 976,
-        "height": 695,
-        "ratio": 1.404,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica",
-      "title": "Consolidado na comédia, Ed Gama \"muda\" de ramo e se lança na música",
-      "category": "Cultura",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T05:52:09.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/consolidado-na-comedia-ed-gama-muda-de-ramo-e-se-lanca-na-musica-swDnQvnS.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "xica-da-silva-de-caca-diegues-volta-aos-cinemas-restaurado-em-4k",
-      "title": "Xica da Silva, de Cacá Diegues, volta aos cinemas restaurado em 4K",
-      "category": "Cultura",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-07-16T11:02:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1696770&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "apos-coracao-acelerado-gabz-vai-estrelar-musical-bete-balanco",
-      "title": "Após “Coração Acelerado”, Gabz vai estrelar musical “Bete Balanço”",
-      "category": "Cultura",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-07-16T10:57:18.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/gabz-1.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "a-odisseia-trilha-jornada-entre-epico-deslumbrante-e-exagero-hollywoodiano-g1-ja-viu",
-      "title": "'A Odisseia' trilha jornada entre épico deslumbrante e exagero hollywoodiano; g1 já viu",
-      "category": "Cultura",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-07-16T09:00:08.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/HxB110k4basIIh-qsjGxjyWccBM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/w/T/PERB75QXW4Lk1LUphWkA/odisseia-matt-damon-zendaya.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "como-mcs-mais-ouvidos-do-brasil-viraram-empresarios-e-revolucionaram-o-funk",
-      "title": "Como MCs mais ouvidos do Brasil viraram empresários e revolucionaram o funk",
-      "category": "Cultura",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-07-16T07:00:17.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/yCAv248ilV_aAH9fzAqg2lk5nKk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/k/g/q0T5RpQsGOBOXtBGY1lg/fotos-g1-1920-x-1080-px-2026-07-15t205550.018.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "sam-neill-morreu-de-pneumonia-causa-da-morte-e-divulgada-por-assessor-de-ator-de-jurassic-park",
-      "title": "Sam Neill morreu de pneumonia; causa da morte é divulgada por assessor de ator de 'Jurassic Park'",
-      "category": "Cultura",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-07-16T02:42:30.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/6mP0Uu2rU2rJgAhJx8VDRhuiJMQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/S/B/xzLAQ8QNWaC4xBpUAlhw/20221025-ovicio-jurassic-world-dominion-alan-grant-sam-neill.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "icone-da-musica-afro-religiosa-joia-do-couro-vira-pela-1-vez-ao-acre",
-      "title": "Ícone da música afro-religiosa, Joia do Couro virá pela 1ª vez ao Acre",
-      "category": "Cultura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-07-16T01:56:04.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/07/976x695_IMAGEM-DESTACADA-7.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 976,
-        "height": 695,
-        "ratio": 1.404,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "liam-gallagher-do-oasis-critica-tecnico-apos-eliminacao-da-inglaterra-na-copa-do-mundo",
-      "title": "Liam Gallagher, do Oasis, critica técnico após eliminação da Inglaterra na Copa do Mundo",
-      "category": "Cultura",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-07-16T00:25:18.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/ToaaSFlYC7hWV5rEoJ17_lv8fx8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/A/e/M5ZsYRRbeh0RJKzf1K5Q/ap25185739760262.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "fazenda-sobe-previsao-da-inflacao-para-5-1-em-2026",
-      "title": "Fazenda sobe previsão da inflação para 5,1% em 2026",
-      "category": "Politica",
+      "slug": "policia-civil-prende-suspeito-de-envolvimento-em-homicidio-no-bairro-da-varzea-em-cruzeiro-do-su",
+      "title": "Polícia Civil prende suspeito de envolvimento em homicídio no bairro da Várzea, em Cruzeiro do Sul",
+      "category": "Prefeitura",
       "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-16T02:18:07.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/JT-012245.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "publishedAt": "2026-09-23T20:19:33.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-23-at-11.56.26.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": false
+        "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "pl-pede-impeachment-de-moraes-apos-veto-a-visita-de-flavio-a-bolsonaro",
-      "title": "PL pede impeachment de Moraes após veto à visita de Flávio a Bolsonaro",
-      "category": "Politica",
-      "sourceName": "Jurua em Tempo",
-      "publishedAt": "2026-07-16T00:57:04.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/07/alexandre-moraes_D24AM.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "slug": "projeto-cidadao-transforma-sala-de-emergencia-em-altar-e-realiza-sonho-de-casal-em-rodrigues-alv",
+      "title": "Projeto Cidadão transforma sala de emergência em altar e realiza sonho de casal em Rodrigues Alves",
+      "category": "Saúde",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-08-03T21:08:24.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/08/casamento_coletivo_rodrigues_alves_jurua_2026_69-Copy.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "policia-civil-se-infiltra-durante-show-de-joelma-e-recupera-celulares-roubados-em-cruzeiro-do-su",
+      "title": "Polícia Civil se infiltra durante show de Joelma e recupera celulares roubados em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Portal do Jurua",
+      "publishedAt": "2026-05-05T12:40:30.877Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://blogger.googleusercontent.com/img/a/AVvXsEg-_vY2Tsz58BkCvnXnd9lYFUUHuQCgBFpUtvMzw8TTdneJzhqtixsndFn7I_KuV_5EhSCKvQpI--EZISsHvbojACi1hF2J5q7BjxAFkR02f4nlcREbFwWyA6-DM12IATLGdSyUvQwiJFujE4F4vrKDtRqSsiF-oBGyYSWrPG8TrSFqPVgkdTySIXbYj8I=s72-c",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "esquerda-define-data-de-convencao-para-lancar-thor-dantas-ao-governo-confira",
-      "title": "Esquerda define data de convenção para lançar Thor Dantas ao Governo; confira",
-      "category": "Politica",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.352Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/esquerda-thor.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "slug": "investigadores-do-nepatri-da-policia-civil-apreende-tres-adolescentes-por-roubo-em-menos-de-48-h",
+      "title": "Investigadores do NEPATRI da Polícia civil apreende três adolescentes por roubo em menos de 48 horas em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Portal do Jurua",
+      "publishedAt": "2026-05-05T12:32:25.556Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://blogger.googleusercontent.com/img/a/AVvXsEheLzpWPnaNGOou_yw8IFVgx_ctm_LftTtrXXfItwyoNzp2ouhXibApow4B9D3frLGJ0ZfQqrRm-bzl_C4znlXYMLiVBdL3-WDBoWiskDXSvLjHJo_bNY1zT_uHTJKJlbTkucwOGOnG0zeFuGtephY-BlzG43VVAB1tRFOu4lLUgPbcORYHIChqwD-gFXo=s72-w640-h512-c",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "policia-civil-por-meio-do-nepatri-prende-suspeitos-por-furto-e-recupera-roupas-furtadas-em-cruze",
+      "title": "Polícia Civil, por meio do NEPATRI prende suspeitos por furto e recupera roupas furtadas em Cruzeiro do Sul (AC)",
+      "category": "Prefeitura",
+      "sourceName": "Portal do Jurua",
+      "publishedAt": "2026-04-18T17:45:00.005Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://blogger.googleusercontent.com/img/a/AVvXsEioukm_FW_K3W2NJuQ2hdE31o9T7rrxsjejhN4nOfq-nPu7AOB3P7H8bg9Nhxt9G5oac4Th4Yvlu3H99P3mbeKgUjsGi-6OSUOObyBguWfewVKA-YdrWwx9i9cm5LGAu-VzV2z-NdO_RnDG8yMkllp_zmoZ3LtCSP2l02rX8pgZI3iE1E1AVQH1AOywU64=s72-w640-h495-c",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -2034,48 +364,134 @@
       ]
     },
     {
-      "slug": "jarude-diz-que-seu-partido-pretende-eleger-dois-deputados-na-aleac",
-      "title": "Jarude diz que seu partido pretende eleger dois deputados na Aleac",
-      "category": "Politica",
-      "sourceName": "ContilNet / Instagram",
-      "publishedAt": "2026-07-16T08:53:40.344Z",
+      "slug": "cruzeiro-do-sul-chega-aos-122-anos-celebrando-historia-tradicoes-e-avancos",
+      "title": "Cruzeiro do Sul chega aos 122 anos celebrando história, tradições e avanços",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-09-28T15:56:12.439Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/07/Emerson-Jarude-7-1200x675.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/09/CRUZEIRO-ANIVERSARIO5.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "cruzeiro-do-sul-faz-122-anos-conheca-a-historia-da-princesinha-do-jurua",
+      "title": "Cruzeiro do Sul faz 122 anos: conheça a história da ‘Princesinha do Juruá’",
+      "category": "Prefeitura",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-09-28T15:56:11.254Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/09/Cruzeiro-do-Sul-e1790600270221-500x326.webp?v=1790582274",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
+        "width": 500,
+        "height": 326,
+        "ratio": 1.534,
         "orientation": "landscape"
       },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "hasManualFocus": false,
+      "effectiveFocus": "",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
+      "reasons": []
     },
     {
-      "slug": "governo-do-estado-conclui-projeto-que-viabiliza-migracao-da-radio-difusora-acreana-para-a-freque",
-      "title": "Governo do Estado conclui projeto que viabiliza migração da Rádio Difusora Acreana para a frequência FM",
-      "category": "Politica",
+      "slug": "historiador-destaca-importancia-de-cruzeiro-do-sul-nos-122-anos-de-fundacao",
+      "title": "Historiador destaca importância de Cruzeiro do Sul nos 122 anos de fundação",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-09-28T15:47:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/09/Screenshot_20260928_103931_WhatsAppBusiness.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "municipio-de-cruzeiro-do-sul-celebra-122-anos-de-fundacao-1904",
+      "title": "Município de Cruzeiro do Sul celebra 122 anos de fundação (1904)",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-09-28T15:25:36.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/09/79-4.jpeg?fit=1200%2C1600&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "cruzeiro-do-sul-celebra-122-anos-de-historia-tradicoes-e-com-programacao-especial-de-aniversario",
+      "title": "Cruzeiro do Sul celebra 122 anos de história, tradições e com programação especial de aniversário",
+      "category": "Prefeitura",
+      "sourceName": "A Gazeta do Acre",
+      "publishedAt": "2026-09-28T14:58:59.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agazetadoacre.com/wp-content/uploads/2026/09/cruzeiro-do-sul-2.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "cruzeiro-do-sul-acre-28-de-setembro-de-2026-estamos-celebrando-seus-122-anos-de-fundacao-1904",
+      "title": "CRUZEIRO DO SUL – ACRE 28 de setembro de 2026 – Estamos celebrando seus 122 anos de fundação (1904)",
+      "category": "Prefeitura",
       "sourceName": "Voz do Norte",
-      "publishedAt": "2026-07-16T08:17:01.000Z",
+      "publishedAt": "2026-09-28T05:01:10.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/07/4fc670af-4965-4d49-a61a-9a218fe2cda7.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/09/6.-Foto-aerea-C.-do-Sul-2016-Onofre-Brito-2.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center",
+      "effectiveFocus": "center 45%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -2087,256 +503,1552 @@
       ]
     },
     {
-      "slug": "o-que-esta-por-tras-do-novo-tarifaco-dos-eua-contra-o-brasil",
-      "title": "O que está por trás do novo tarifaço dos EUA contra o Brasil?",
-      "category": "Politica",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T12:52:43.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/real_dolar-1280x855.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "slug": "cruzeiro-do-sul-celebra-122-anos-com-corrida-esporte-literatura-e-desfile-civico-militar",
+      "title": "Cruzeiro do Sul celebra 122 anos com corrida, esporte, literatura e desfile cívico-militar",
+      "category": "Prefeitura",
+      "sourceName": "Integracao Net",
+      "publishedAt": "2026-09-26T20:40:46.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/09/PHOTO-2026-09-26-14-37-13-576x1024.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
-        "width": 1280,
-        "height": 855,
-        "ratio": 1.497,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "flavio-bolsonaro-endossa-secretario-dos-eua-e-diz-que-lula-nao-tem-condicoes-de-ser-presidente",
-      "title": "Flávio Bolsonaro endossa secretário dos EUA e diz que Lula não tem ‘condições de ser presidente’",
-      "category": "Politica",
-      "sourceName": "Jurua Informativo",
-      "publishedAt": "2026-07-16T10:52:10.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://www.juruainformativo.com.br/wp-content/uploads/2026/07/flavio-bolsonaro-participa-do-debate-com-os-candidatos-a-presidente-do-brasil-para-a-eleicao-de-2026-no-evento-da-confederacao-nacional-da-industria-cni-metropoles-3-scaled-1-1200x675-1.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "mara-rocha-o-tratamento-oncologico-ainda-e-um-dos-maiores-desafios-da-saude-publica-no-acre",
-      "title": "Mara Rocha: “o tratamento oncológico ainda é um dos maiores desafios da saúde pública no Acre”",
-      "category": "Politica",
-      "sourceName": "Acre in Foco",
-      "publishedAt": "2026-07-16T03:18:58.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-22.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "a-pequena-politica-poe-em-risco-o-papel-do-estado-democratico",
-      "title": "A pequena política põe em risco o papel do Estado Democrático",
-      "category": "Politica",
-      "sourceName": "Acre in Foco",
-      "publishedAt": "2026-07-16T02:39:35.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-142.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "formacao-cidada-nova-lei-torna-educacao-politica-obrigatoria-nas-escolas",
-      "title": "Formação cidadã: nova lei torna educação política obrigatória nas escolas",
-      "category": "Politica",
-      "sourceName": "Acre in Foco",
-      "publishedAt": "2026-07-16T02:38:55.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-143.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "tudo-para-o-agro-durigan-anuncia-fundo-garantidor-voltado-ao-agronegocio",
-      "title": "Tudo para o agro: Durigan anuncia fundo garantidor voltado ao agronegócio",
-      "category": "Politica",
-      "sourceName": "Acre in Foco",
-      "publishedAt": "2026-07-16T02:35:28.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/07/br-147.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "operacao-do-gefron-resulta-na-apreensao-de-23-kg-de-skunk-e-prisao-de-dois-suspeitos-em-senador-",
-      "title": "Operação do Gefron resulta na apreensão de 23 kg de skunk e prisão de dois suspeitos em Senador Guiomard",
-      "category": "Politica",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-16T06:28:37.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/Gefrondroga.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "moises-diniz-revela-doenca-renal-e-entra-na-fila-por-transplante-quero-enfrentar-essa-batalha-pe",
-      "title": "Moisés Diniz revela doença renal e entra na fila por transplante: “Quero enfrentar essa batalha pela vida”",
-      "category": "Politica",
-      "sourceName": "Folha do Acre",
-      "publishedAt": "2026-07-16T05:58:29.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/07/MOISES-.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "gefron-apreende-quase-24-kg-de-skunk-escondidos-em-caminhonete-durante-fiscalizacao-em-senador-g",
-      "title": "Gefron apreende quase 24 kg de skunk escondidos em caminhonete durante fiscalização em Senador Guiomard",
-      "category": "Politica",
-      "sourceName": "Portal Acre",
-      "publishedAt": "2026-07-16T01:12:30.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/07/4d6de63d-d70c-49d7-b224-6ebddcf6c816-769x1024.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 769,
+        "width": 576,
         "height": 1024,
-        "ratio": 0.751,
+        "ratio": 0.563,
         "orientation": "portrait"
       },
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
+      "level": "ok",
+      "reasons": []
     },
     {
-      "slug": "gefron-apreende-23-quilos-de-skunk-e-prende-dois-homens-durante-operacao-em-senador-guiomard",
-      "title": "GEFRON apreende 23 quilos de skunk e prende dois homens durante operação em Senador Guiomard",
-      "category": "Politica",
-      "sourceName": "O Alto Acre",
-      "publishedAt": "2026-07-16T03:22:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-15-at-19.45.08.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "slug": "cruzeiro-122-anos-desfile-copao-jurua",
+      "title": "Cruzeiro prepara agenda de 122 anos",
+      "category": "Festas & Social",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T16:51:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/cadernos/caderno-calendario.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "jornalista-mariano-maciel-lanca-livro-nas-comemoracoes-de-cruzeiro-do-sul",
+      "title": "Jornalista Mariano Maciel lança livro nas comemorações de Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-09-20T20:19:51.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/09/85-4.jpeg?resize=800%2C416&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "uma-viagem-no-tempo-museu-de-cruzeiro-do-sul-resgata-a-historia-do-ciclo-da-borracha-fauna-e-val",
+      "title": "Uma viagem no tempo: Museu de Cruzeiro do Sul resgata a história do ciclo da borracha, fauna e valoriza povos originários",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-03T18:19:25.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/f3fe2683-18a5-4ac2-92f4-a5e04c7afc7d-1200x675.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "estudantes-do-acre-conquistam-bronze-em-olimpiada-nacional-de-historia-e-levam-nome-de-tarauaca-",
+      "title": "Estudantes do Acre conquistam bronze em Olimpíada Nacional de História e levam nome de Tarauacá à Unicamp",
+      "category": "Educação",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-20T20:47:05.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/IMG_5027.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "policia-civil-prende-integrante-de-organizacao-criminosa-durante-operacao-fronteiras-em-marechal",
+      "title": "Polícia Civil prende integrante de organização criminosa durante Operação Fronteiras em Marechal Thaumaturgo",
+      "category": "Polícia",
+      "sourceName": "Policia Civil do Acre",
+      "publishedAt": "2026-06-30T16:46:18.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://pc.ac.gov.br/wp-content/uploads/2026/06/a6a3adbb-9730-4bbe-b3af-8f9fdc5c6d51-750x510.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 750,
+        "height": 510,
+        "ratio": 1.471,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "apos-capotar-carro-homem-e-preso-sem-habilitacao-em-cruzeiro-do-sul",
+      "title": "Após capotar carro, homem é preso sem habilitação em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-28T15:56:12.492Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/60a63ae987a32ab63ed97252eedf902e_XL-2.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-rompe-tornozeleira-eletronica-e-e-preso-dentro-do-hospital-do-jurua",
+      "title": "Homem rompe tornozeleira eletrônica e é preso dentro do Hospital do Juruá",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-28T15:56:12.492Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/bolso-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mulher-e-presa-apos-agredir-esposa-em-cruzeiro-do-sul",
+      "title": "Mulher é presa após agredir esposa em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-28T15:56:12.483Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/fbbaf0_9209eb35e21c4eff92747b3965460ca7mv2-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "quatro-homens-invadem-casa-agridem-vitima-e-roubam-motocicleta-em-cruzeiro-do-sul",
+      "title": "Quatro homens invadem casa, agridem vítima e roubam motocicleta em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-28T15:56:12.482Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/deb8952b-9f3e-4dce-b82b-f7d842413e1d-1-1200x900-2.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 900,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "discussao-por-ciumes-termina-com-mulher-presa-por-agressao-a-esposa-em-cruzeiro-do-sul",
+      "title": "Discussão por ciúmes termina com mulher presa por agressão à esposa em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-28T15:56:12.270Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/fbbaf0_9209eb35e21c4eff92747b3965460ca7mv2.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "encapuzados-quatro-homens-agridem-morador-e-roubam-motocicleta-em-cruzeiro-do-sul",
+      "title": "Encapuzados, quatro homens agridem morador e roubam motocicleta em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-28T15:56:12.269Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/1588004101-Bandidos-armados-e-encapuzados-roubam-veAculo-e-armas-no-interior-de-IbirapuitA.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "apos-ameacar-companheira-com-tercado-em-cruzeiro-do-sul-homem-e-preso-no-bairro-joao-alves",
+      "title": "Após ameaçar companheira com terçado em Cruzeiro do Sul homem é preso no bairro João Alves",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-28T15:56:12.268Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/08/TERCADO-.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "suspeito-de-executar-homem-com-25-tiros-e-baleado-2-vezes-pela-policia-em-cruzeiro-do-sul",
+      "title": "Suspeito de executar homem com 25 tiros é baleado 2 vezes pela polícia em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-23T23:04:55.040Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/PRESO_BELADO.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "bombeiros-combatem-incendios-cruzeiro-rodrigues-alves",
+      "title": "Bombeiros combatem incendios no Jurua",
+      "category": "Cotidiano",
+      "sourceName": "Agora Acre",
+      "publishedAt": "2026-09-23T16:58:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/fallback-cotidiano.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "video-tres-acidentes-de-transito-foram-registrados-em-cruzeiro-do-sul",
+      "title": "VÍDEO: Três acidentes de trânsito foram registrados em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-20T23:54:48.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/IMG_4611-768x965-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 768,
+        "height": 965,
+        "ratio": 0.796,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "investigado-por-homicidio-e-preso-durante-operacao-da-policia-civil-em-cruzeiro-do-sul",
+      "title": "Investigado por homicídio é preso durante operação da Polícia Civil em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-11T23:57:54.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/IMG_0878-900x520-1.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 900,
+        "height": 520,
+        "ratio": 1.731,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-e-preso-apos-confusao-e-agressao-a-policiais-dentro-de-bar-em-cruzeiro-do-sul",
+      "title": "Homem é preso após confusão e agressão a policiais dentro de bar em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-08-10T08:27:37.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-18T081323.103.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "os-irmaos-jose-araujo-11-anos-e-davi-araujo-da-silva-8-anos-desaparecem-no-rio-jurua-bombeiros-s",
+      "title": "Os irmãos José Araújo, 11 anos, e Davi Araújo da Silva, 8 anos, desaparecem no Rio Juruá; bombeiros suspendem buscas e retomam às 6h",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-10T02:45:37.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-09-at-21.43.21-e1786329984163.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "seis-pessoas-desaparecidas-em-floresta-de-cruzeiro-do-sul-sao-resgatadas-com-vida-pelo-corpo-de-",
+      "title": "Seis pessoas desaparecidas em floresta de Cruzeiro do Sul são resgatadas com vida pelo Corpo de Bombeiros",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-09T20:28:23.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-09-at-15.24.15.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-e-atingido-por-sete-tiros-e-fica-em-estado-grave-em-cruzeiro-do-sul",
+      "title": "Homem é atingido por sete tiros e fica em estado grave em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-08-09T17:55:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/08/samu.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "jovem-pai-de-tres-filhos-morre-apos-afogamento-em-igarape-de-cruzeiro-do-sul-no-dia-dos-pais-sus",
+      "title": "Jovem pai de três filhos morre após afogamento em Igarapé de Cruzeiro do Sul no dia dos Pais; suspeita-se de mal súbito",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-08-09T17:05:34.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/08/97-1.jpeg?resize=800%2C1422&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-e-preso-apos-ser-condenado-a-13-anos-por-estupro-de-vulneravel-em-comunidade-de-cruzeiro-d",
+      "title": "Homem é preso após ser condenado a 13 anos por estupro de vulnerável em comunidade de Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-08-05T23:12:44.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-15.08.29.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-e-preso-apos-tentar-invadir-residencia-no-bairro-sao-jose-em-cruzeiro-do-sul",
+      "title": "Homem é preso após tentar invadir residência no bairro São José, em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-08-05T19:22:12.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2025/11/Delegacia-Cruzeiro-do-Sul.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "condenado-a-13-anos-por-estupro-de-vulneravel-e-preso-pela-policia-civil-na-comunidade-santa-luz",
+      "title": "Condenado a 13 anos por estupro de vulnerável é preso pela Polícia Civil na Comunidade Santa Luzia em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-05T17:40:05.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/imagem_2026-08-05_123946479-1200x675.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-encontrado-no-centro-de-cruzeiro-do-sul-pode-ter-morrido-de-overdose-diz-policia-civil",
+      "title": "Homem encontrado no Centro de Cruzeiro do Sul pode ter morrido de overdose, diz Polícia Civil",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-08-05T16:28:02.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/08/b2332df3-a79e-4bf7-9347-70a2623961e3.jpeg?resize=800%2C379&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "jovem-e-preso-por-suspeita-de-trafico-de-drogas-durante-abordagem-da-pm-em-cruzeiro-do-sul",
+      "title": "Jovem é preso por suspeita de tráfico de drogas durante abordagem da PM em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-08-03T19:55:28.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2025/11/Delegacia-Cruzeiro-do-Sul.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "giro-fecha-ponto-de-trafico-no-centro-de-cruzeiro-do-sul-apreende-drogas-e-conduz-duas-pessoas-a",
+      "title": "GIRO fecha ponto de tráfico no centro de Cruzeiro do Sul, apreende drogas e conduz duas pessoas à delegacia",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-03T18:22:03.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/93ab7770-01c7-47b7-9d50-ea20abce14a5-1200x675.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "agosto-lilas-parceria-entre-estado-e-municipio-leva-rodas-de-conversa-e-conscientizacao-para-esc",
+      "title": "Agosto Lilás: parceria entre Estado e Município leva rodas de conversa e conscientização para escolas e empresas em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-03T18:01:46.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/f6c46061-6153-4059-a89d-9ed88eb9dd1d-1200x675.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "apos-investigacao-do-nepatri-suspeito-e-preso-por-furto-e-receptacao-pela-policia-civil-em-cruze",
+      "title": "Após investigação do NEPATRI, suspeito é preso por furto e receptação pela Polícia Civil em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Portal do Jurua",
+      "publishedAt": "2026-04-18T17:55:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://blogger.googleusercontent.com/img/a/AVvXsEisogGaJbmUU-SwWxLbNjJsAnNeU9Y2rjXl776cDvtOrCtwm4L27SvHbpwGYbPW_9nYzA6DyuMskpMpoXZCLbTh1rvCoF7nc5mj9EUc2Mk-osRlRvav-euOeC0-6uuM6sR9VZw03tE9zWq4o8XF991we4G9EHss15kkJaMYJO_bMWqiW8c4GBfVG1XbLR0=s72-w640-h480-c",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "policia-civil-prende-homem-por-abuso-contra-enteada-de-14-anos-em-cruzeiro-do-sul-ac",
+      "title": "Polícia Civil prende homem por abuso contra enteada de 14 anos em Cruzeiro do Sul (AC)",
+      "category": "Prefeitura",
+      "sourceName": "Portal do Jurua",
+      "publishedAt": "2026-03-31T13:11:00.007Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://blogger.googleusercontent.com/img/a/AVvXsEglPNBVXYFkCVoL1Cdy80xJIHbDiDIToqCuLWAsyJFu2WOHXHDVYN5gk5TqwNHpws52yAFHZx5Ye5DbOuRHql-vqYZa0Bp5mzejtsIQo0oWkUDj3LFwcAzhOULZei_PfIdBkaIQPI79A9fj9qcVAxyl-JrQLQXlRZv6CBHhlBgN09OCDhICOAeSejCW56U=s72-w637-h640-c",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "translima-express-parabeniza-cruzeiro-do-sul-e-todos-os-seus-clientes-e-parceiros-pelos-122-anos",
+      "title": "Translima Express parabeniza Cruzeiro do Sul e todos os seus clientes e parceiros pelos 122 anos",
+      "category": "Prefeitura",
+      "sourceName": "Voz do Norte",
+      "publishedAt": "2026-09-28T07:17:32.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-25-at-12.20.22.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 45%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-realiza-acao-educativa-durante-a-semana-nacional-de-transito",
+      "title": "Prefeitura de Cruzeiro do Sul realiza ação educativa durante a Semana Nacional de Trânsito",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-09-25T20:29:07.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-25-at-14.26.24.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "apaa-amplia-assistencia-e-cria-servico-de-acompanhamento-domiciliar-em-cruzeiro-do-sul",
+      "title": "APAA amplia assistência e cria serviço de acompanhamento domiciliar em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T23:04:54.843Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/10000-10.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "estiagem-aumenta-risco-de-incendios-e-imac-reforca-alerta-contra-queimadas-no-jurua",
+      "title": "Estiagem aumenta risco de incêndios e IMAC reforça alerta contra queimadas no Juruá",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T23:04:54.843Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/09/SECANDO1.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "contrato-preve-carne-de-primeira-mas-servidores-denunciam-produto-de-baixa-qualidade-em-escola-d",
+      "title": "Contrato prevê carne de primeira, mas servidores denunciam produto de baixa qualidade em escola de Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-23T22:55:22.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-23-at-11.14.39-768x1021-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 768,
+        "height": 1021,
+        "ratio": 0.752,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edvaldo-magalhaes-volta-a-denunciar-descaso-com-a-merenda-escolar-no-acre",
+      "title": "Edvaldo Magalhães volta a denunciar descaso com a merenda escolar no Acre",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-09-23T22:30:39.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/09/edvaldo-1.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "caps-cruzeiro-novo-endereco-retoma-atendimentos-dia-29",
+      "title": "CAPS retoma atendimentos dia 29",
+      "category": "Saúde",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T17:00:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "previsao-tempo-cruzeiro-do-sul-23-setembro",
+      "title": "Cruzeiro tera calor e chuva",
+      "category": "Utilidade Pública",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T16:59:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/home-cache/rio-jurua-panorama.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "campanha-antirrabica-bairros-cruzeiro",
+      "title": "Antirrabica segue nos bairros",
+      "category": "Saúde",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-23T16:49:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "assets/cadernos/caderno-servicos.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "edvaldo-magalhaes-volta-a-denunciar-descaso-com-a-merenda-escolar-no-acre-absurdo",
+      "title": "Edvaldo Magalhães volta a denunciar descaso com a merenda escolar no Acre: “absurdo”",
+      "category": "Prefeitura",
+      "sourceName": "Acre in Foco",
+      "publishedAt": "2026-09-22T22:14:49.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://acreinfoco.com/wp-content/uploads/2026/09/br-58.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "piloto-acreano-realiza-sonho-e-pousa-pela-primeira-vez-em-cruzeiro-do-sul-onde-nasceu",
+      "title": "Piloto acreano realiza sonho e pousa pela primeira vez em Cruzeiro do Sul, onde nasceu",
+      "category": "Prefeitura",
+      "sourceName": "Folha do Acre",
+      "publishedAt": "2026-09-21T00:32:39.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://folhadoacre.com.br/wp-content/uploads/2026/09/Piloto.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "piloto-acreano-pilota-boeing-737-max-8-e-pousa-pela-1-vez-na-cidade-natal-cruzeiro-do-sul",
+      "title": "Piloto acreano pilota Boeing 737 MAX 8 e pousa pela 1ª vez na cidade natal, Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-20T23:43:18.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/AVIAO_PILOTO-.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "piloto-acreano-pilota-boeing-737-max-8-e-pousa-pela-1-vez-na-cidade-natal",
+      "title": "Piloto acreano pilota Boeing 737 MAX 8 e pousa pela 1ª vez na cidade natal",
+      "category": "Prefeitura",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-09-20T18:25:14.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/AVIAO_PILOTO-.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "perpetua-almeida-afirma-que-acre-tera-quatro-industrias-para-beneficiamento-de-cafe",
+      "title": "Perpétua Almeida afirma que Acre terá quatro indústrias para beneficiamento de café",
+      "category": "Prefeitura",
+      "sourceName": "Integracao Net",
+      "publishedAt": "2026-09-19T21:24:03.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://s.w.org/images/core/emoji/17.0.2/72x72/1f33a.png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "cruzeiro-do-sul-tera-sabado-de-calor-e-possibilidade-de-pancadas-de-chuva-a-noite",
+      "title": "Cruzeiro do Sul terá sábado de calor e possibilidade de pancadas de chuva à noite",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-09-12T17:05:33.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2025/12/Novo-Projeto-56-1.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "projeto-cidadao-celebra-30-anos-com-casamento-coletivo-para-200-casais-em-cruzeiro-do-sul",
+      "title": "Projeto Cidadão celebra 30 anos com casamento coletivo para 200 casais em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-12T01:09:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/casamento-coletivo-cruzeiro-do-sul-2026-11-scaled-1.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-leva-atendimento-de-saude-a-comunidade-rio-croa-por-meio-do-missao",
+      "title": "Prefeitura de Cruzeiro do Sul leva atendimento de saúde a comunidade Rio Croa por meio do Missão Cuidar – Saúde em Todo Lugar",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-09-11T19:05:53.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-11-at-14.51.22.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "domingo-sera-de-calor-e-possibilidade-de-chuva-em-cruzeiro-do-sul",
+      "title": "Domingo será de calor e possibilidade de chuva em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-08-09T19:48:40.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/02/chuva-forte-tempo.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "16-finalistas-do-concurso-rei-e-rainha-do-9-festival-da-farinha-sao-definidos-em-cruzeiro-do-sul",
+      "title": "16 finalistas do concurso Rei e Rainha do 9º Festival da Farinha são definidos em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-08-09T18:34:17.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/08/5daec822-d7f0-4bca-aecd-238aee1e1e93.jpeg?resize=800%2C533&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "imac-identifica-28-pontos-com-indicios-de-crime-ambiental-no-vale-do-jurua-e-intensifica-fiscali",
+      "title": "Imac identifica 28 pontos com indícios de crime ambiental no Vale do Juruá e intensifica fiscalização",
+      "category": "Prefeitura",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-08-09T18:06:38.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/08/IMG_1548-1206x813-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1206,
+        "height": 813,
+        "ratio": 1.483,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "atletico-rio-moa-vence-e-conquista-a-copa-de-futebol-master-50tao-em-cruzeiro-do-sul",
+      "title": "Atlético Rio Môa vence e conquista a Copa de Futebol Master 50tão em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-08-09T17:22:42.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/08/89-3.jpeg?resize=800%2C534&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "dempca-prende-em-cruzeiro-do-sul-homem-condenado-a-13-anos-por-estupro-de-vulneravel",
+      "title": "DEMPCA prende em Cruzeiro do Sul homem condenado a 13 anos por estupro de vulnerável",
+      "category": "Prefeitura",
+      "sourceName": "O Alto Acre",
+      "publishedAt": "2026-08-06T01:18:04.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://oaltoacre.com/wp-content/uploads/2026/08/Condenado-a-mais-de-13-anos-por-estupro-de-vulneravel-e-preso-pela-Policia-Civil-em-Cruzeiro-do-Sul-660x440.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 660,
+        "height": 440,
+        "ratio": 1.5,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-abre-fase-rural-dos-jogos-escolares-e-inicia-selecao-das-equipes-p",
+      "title": "Prefeitura de Cruzeiro do Sul abre fase rural dos Jogos Escolares e inicia seleção das equipes para a etapa urbana de 2027",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-08-05T19:30:50.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-13.41.24.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-realiza-manutencao-da-infraestrutura-urbana-com-operacao-tapa-bura",
+      "title": "Prefeitura de Cruzeiro do Sul realiza manutenção da infraestrutura urbana com operação tapa-buraco, recuperação de calçadas e obras de drenagem",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-08-03T20:40:10.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-14.26.43.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "cachorra-desaparece-na-regiao-do-badejo-do-meio-e-familia-oferece-recompensa-em-cruzeiro-do-sul",
+      "title": "Cachorra desaparece na região do Badejo do Meio e família oferece recompensa em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-08-03T20:13:51.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-10.47.18-e1785769979398.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-abre-inscricoes-para-o-programa-estacionamento-criativo-do-9-festi",
+      "title": "Prefeitura de Cruzeiro do Sul abre inscrições para o programa Estacionamento Criativo do 9º Festival da Farinha 2026",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-08-03T19:18:59.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-03-at-12.58.29.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-lanca-agosto-lilas-e-fortalece-acoes-de-prevencao-a-violencia-cont",
+      "title": "Prefeitura de Cruzeiro do Sul lança Agosto Lilás e fortalece ações de prevenção à violência contra a mulher",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-08-03T17:59:29.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/08/69655463-a125-4a10-b022-3079c4c7b536-1200x675.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "cruzeiro-do-sul-abre-inscricoes-para-o-programa-estacionamento-criativo-do-9-festival-da-farinha",
+      "title": "Cruzeiro do Sul abre inscrições para o programa Estacionamento Criativo do 9º Festival da Farinha 2026",
+      "category": "Prefeitura",
+      "sourceName": "Portal Acre",
+      "publishedAt": "2026-08-03T17:38:16.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/08/janaina-tercas-682x1024.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 682,
+        "height": 1024,
+        "ratio": 0.666,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "queda-de-aviao-que-matou-33-pessoas-no-acre-completa-55-anos",
+      "title": "Queda de avião que matou 33 pessoas no Acre completa 55 anos",
+      "category": "Policia",
+      "sourceName": "Jurua em Tempo",
+      "publishedAt": "2026-09-28T15:56:12.492Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/09/Queda-de-aviao-3.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "28-de-setembro-maior-tragedia-aerea-da-historia-do-acre-completa-55-anos",
+      "title": "28 de Setembro: maior tragédia aérea da história do Acre completa 55 anos",
+      "category": "Policia",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-09-28T14:29:19.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/09/Queda-de-aviao-3.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "talks-historias-que-inspiram-realiza-edicao-especial-para-arrecadar-recursos-para-tratamento-de-",
+      "title": "Talks Histórias que Inspiram realiza edição especial para arrecadar recursos para tratamento de saúde de criança",
+      "category": "Saúde",
+      "sourceName": "Portal Acre",
+      "publishedAt": "2026-09-20T15:56:30.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://portalacre.com.br/wp-content/uploads/2026/09/bgvfs-768x1024.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 768,
+        "height": 1024,
+        "ratio": 0.75,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "nicolau-celebra-122-anos-de-cruzeiro-do-sul-e-brinca-combina-com-o-numero-da-campanha",
+      "title": "Nicolau celebra 122 anos de Cruzeiro do Sul e brinca: “Combina com o número da campanha”",
+      "category": "Prefeitura",
+      "sourceName": "ContilNet / Instagram",
+      "publishedAt": "2026-09-28T15:56:11.279Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2026/09/Nicolau-Junior-Cruzeiro-do-Sul-e1790603336482.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 45%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
       ]
     }
   ]
