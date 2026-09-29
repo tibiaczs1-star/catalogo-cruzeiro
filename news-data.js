@@ -38548,49 +38548,68 @@ window.NEWS_DATA = [
   {
     "id": "https://www.vozdonorte.com.br/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul",
     "slug": "projeto-cidadao-leva-mutirao-de-servicos-e-encerra-com-o-tradicional-casamento-coletivo-para-cru",
-    "title": "Projeto Cidadão leva mutirão de serviços e encerra com o tradicional Casamento Coletivo para Cruzeiro do Sul",
-    "eyebrow": "Prefeitura",
-    "date": "27 de set de 2026",
-    "publishedAt": "2026-09-28T03:16:12.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "title": "Projeto Cidadão começa hoje com serviços gratuitos em Cruzeiro do Sul",
+    "eyebrow": "Serviço",
+    "date": "29 de set de 2026",
+    "publishedAt": "2026-09-29T00:00:00-05:00",
+    "category": "Serviço",
+    "categoryKey": "servico",
     "previewClass": "thumb-prefeitura",
-    "sourceName": "Voz do Norte",
-    "sourceUrl": "https://www.vozdonorte.com.br/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul",
-    "sourceLabel": "Projeto Cidadão leva mutirão de serviços e encerra com o tradicional Casamento Coletivo para Cruzeiro do Sul",
-    "lede": "Ação gratuita oferece emissão de documentos, atendimentos médicos e jurídicos nos dias 29 e 30 de setembro, além da celebração da união civil de diversos casais O Tribunal de Justiça do Acre (TJAC) convida toda a população de...",
-    "summary": "Ação gratuita oferece emissão de documentos, atendimentos médicos e jurídicos nos dias 29 e 30 de setembro, além da celebração da união civil de diversos casais O Tribunal de Justiça do Acre (TJAC) convida toda a população de...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "",
-    "feedImageUrl": "",
-    "sourceImageUrl": "",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
+    "sourceName": "TJAC / Voz do Norte",
+    "sourceUrl": "https://www.tjac.jus.br/2026/09/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/",
+    "sourceLabel": "Mutirão gratuito do Projeto Cidadão começa hoje em Cruzeiro do Sul",
+    "lede": "O mutirão do TJAC atende nesta terça e quarta-feira, das 8h às 15h, no Templo Sede da Assembleia de Deus, no bairro João Alves. Há serviços de saúde, documentação, assistência social e orientação jurídica.",
+    "summary": "O mutirão do TJAC atende nesta terça e quarta-feira, das 8h às 15h, no Templo Sede da Assembleia de Deus, no bairro João Alves. Há serviços de saúde, documentação, assistência social e orientação jurídica. No dia 30, às 17h, haverá Casamento Coletivo no Teatro dos Náuas.",
+    "analysis": "Serviço público de utilidade local; agenda confirmada na publicação oficial do TJAC.",
+    "highlights": [
+      "29 e 30 de setembro, das 8h às 15h",
+      "Templo Sede da Assembleia de Deus, Rua Newton Prado, 50, João Alves",
+      "Serviços jurídicos, de saúde, documentação e assistência social",
+      "Casamento Coletivo: 30 de setembro, às 17h, no Teatro dos Náuas"
+    ],
+    "development": [
+      "O Projeto Cidadão começa nesta terça-feira (29) em Cruzeiro do Sul e segue na quarta-feira (30), com atendimentos gratuitos das 8h às 15h. A ação é organizada pelo Tribunal de Justiça do Acre (TJAC), em parceria com instituições públicas.",
+      "Os serviços serão concentrados no Templo Sede da Igreja Assembleia de Deus, na Rua Newton Prado, 50, bairro João Alves. A programação inclui orientação jurídica, consultas médicas e odontológicas, vacinas, testes rápidos e vacinação antirrábica de cães e gatos.",
+      "Também haverá emissão da Carteira de Identidade, certidão de nascimento e regularização de CPF, além de atendimento relacionado ao Cadastro Único, Bolsa Família, CRAS e Benefício de Prestação Continuada (BPC). A disponibilidade de cada serviço deve ser confirmada diretamente no local.",
+      "A programação termina na quarta-feira (30), às 17h, com o Casamento Coletivo no Teatro dos Náuas, na Rua do Purus, 479, também no João Alves. O casamento é uma atividade distinta do mutirão de serviços.",
+      "Fontes: Tribunal de Justiça do Estado do Acre (TJAC) e Voz do Norte. Atualizado em 29 de setembro de 2026."
+    ],
+    "imageUrl": "/assets/news-manual/tjac-projeto-cidadao-20260929.jpeg",
+    "feedImageUrl": "/assets/news-manual/tjac-projeto-cidadao-20260929.jpeg",
+    "sourceImageUrl": "https://www.tjac.jus.br/wp-content/uploads/2026/09/Projeto-Cidadao-Cruzeiro-do-Sul-3.jpeg",
+    "imageCredit": "Imagem: Comunicação/TJAC",
+    "imageFocus": "center",
+    "imageFit": "cover",
     "media": null,
     "videoUrl": "",
-    "priority": 5400,
-    "editorialPriority": "cruzeiro-destaque",
+    "priority": 9400,
+    "editorialPriority": "cruzeiro-servico-hoje",
     "crossSources": [
       {
+        "name": "Tribunal de Justiça do Estado do Acre (TJAC)",
+        "url": "https://www.tjac.jus.br/2026/09/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/"
+      },
+      {
         "name": "Voz do Norte",
-        "url": "https://www.vozdonorte.com.br/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul"
+        "url": "https://www.vozdonorte.com.br/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/"
       }
     ],
     "alternateSources": [
       {
+        "name": "Tribunal de Justiça do Estado do Acre (TJAC)",
+        "url": "https://www.tjac.jus.br/2026/09/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/"
+      },
+      {
         "name": "Voz do Norte",
-        "url": "https://www.vozdonorte.com.br/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul"
+        "url": "https://www.vozdonorte.com.br/projeto-cidadao-leva-mutirao-de-servicos-e-casamento-coletivo-para-cruzeiro-do-sul/"
       }
     ],
-    "sourceCount": 1,
+    "sourceCount": 2,
     "alternateSlugs": [
       "projeto-cidadao-leva-mutirao-de-servicos-e-encerra-com-o-tradicional-casamento-coletivo-para-cru"
     ],
-    "audioNarrationText": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Projeto Cidadão leva mutirão de serviços e encerra com o tradicional Casamento Coletivo para Cruzeiro do Sul Ação gratuita oferece emissão de documentos, atendimentos médicos e jurídicos nos dias 29 e 30 de setembro, além da celebração da união civil de diversos casais O Tribunal de Justiça do Acre (TJAC) convida toda a população de Cruzeiro do Sul para participar... A informação vem de Voz do Norte.",
-    "audioNarrationTranscript": "Boa tarde. Eu sou a RAyL, do Catálogo Catálogo Cruzeiro do Sul. Agora no catálogo: notícia de Prefeitura. Projeto Cidadão leva mutirão de serviços e encerra com o tradicional Casamento Coletivo para Cruzeiro do Sul Ação gratuita oferece emissão de documentos, atendimentos médicos e jurídicos nos dias 29 e 30 de setembro, além da celebração da união civil de diversos casais O Tribunal de Justiça do Acre (TJAC) convida toda a população de Cruzeiro do Sul para participar... A informação vem de Voz do Norte.",
+    "audioNarrationText": "Projeto Cidadão começa hoje com serviços gratuitos em Cruzeiro do Sul. O mutirão do TJAC atende nesta terça e quarta-feira, das 8h às 15h, no Templo Sede da Assembleia de Deus, no bairro João Alves. Há serviços de saúde, documentação, assistência social e orientação jurídica. No dia 30, às 17h, haverá Casamento Coletivo no Teatro dos Náuas.",
+    "audioNarrationTranscript": "Projeto Cidadão começa hoje com serviços gratuitos em Cruzeiro do Sul. O mutirão do TJAC atende nesta terça e quarta-feira, das 8h às 15h, no Templo Sede da Assembleia de Deus, no bairro João Alves. Há serviços de saúde, documentação, assistência social e orientação jurídica. No dia 30, às 17h, haverá Casamento Coletivo no Teatro dos Náuas.",
     "audioNarrationVoice": "rayl-francisca-whatsapp-normal",
     "audioNarrationVoiceName": "RAyL Francisca WhatsApp normal",
     "audioNarrationVoiceEngine": "edge-tts",
@@ -38598,25 +38617,33 @@ window.NEWS_DATA = [
     "audioNarrationVoiceSampleUrl": "/assets/voice/rayl/rayl-ref2-francisca-whatsapp-normal.mp3",
     "audioNarrationLanguage": "pt-BR",
     "audioNarrationStatus": "ready-transcript",
-    "videoCaptionText": "Imagem da notícia: Projeto Cidadão leva mutirão de serviços e encerra com o tradicional Casamento Coletivo para Cruzeiro do Sul. Ação gratuita oferece emissão de documentos, atendimentos médicos e jurídicos nos dias 29 e 30 de setembro, além da celebração da união civil de diversos casais O Tribunal de Justiça do Acre (TJAC) convida toda a população de Cruzeiro do... Fonte: Voz do Norte.",
+    "videoCaptionText": "Projeto Cidadão começa hoje com serviços gratuitos em Cruzeiro do Sul. O mutirão do TJAC atende nesta terça e quarta-feira, das 8h às 15h, no Templo Sede da Assembleia de Deus, no bairro João Alves. Há serviços de saúde, documentação, assistência social e orientação jurídica. No dia 30, às 17h, haverá Casamento Coletivo no Teatro dos Náuas. Fonte: TJAC.",
     "videoCaptionStatus": "ready",
     "accessibility": {
+      "alt": "Card oficial do TJAC com os serviços, datas, horário e endereço do Projeto Cidadão em Cruzeiro do Sul.",
+      "caption": "Projeto Cidadão começa hoje com serviços gratuitos em Cruzeiro do Sul",
       "hasAudioNarrationText": true,
       "hasAudioNarrationTranscript": true,
       "raylVoice": "rayl-francisca-whatsapp-normal",
       "hasVideoCaptionText": true
     },
-    "imageQuality": "imagem-ausente-ou-generica-sem-foto-generica-enviar-cheffe-call",
+    "imageQuality": "official-source-image",
     "body": [
-      "Ação gratuita oferece emissão de documentos, atendimentos médicos e jurídicos nos dias 29 e 30 de setembro, além da celebração da união civil de diversos casais O Tribunal de Justiça do Acre (TJAC) convida toda a população de Cruzeiro do Sul para participar...",
-      "Fonte: Voz do Norte. Data verificada: 27 de set de 2026. Link original preservado."
+      "O Projeto Cidadão começa nesta terça-feira (29) em Cruzeiro do Sul e segue na quarta-feira (30), com atendimentos gratuitos das 8h às 15h. A ação é organizada pelo Tribunal de Justiça do Acre (TJAC), em parceria com instituições públicas.",
+      "Os serviços serão concentrados no Templo Sede da Igreja Assembleia de Deus, na Rua Newton Prado, 50, bairro João Alves. A programação inclui orientação jurídica, consultas médicas e odontológicas, vacinas, testes rápidos e vacinação antirrábica de cães e gatos.",
+      "Também haverá emissão da Carteira de Identidade, certidão de nascimento e regularização de CPF, além de atendimento relacionado ao Cadastro Único, Bolsa Família, CRAS e Benefício de Prestação Continuada (BPC). A disponibilidade de cada serviço deve ser confirmada diretamente no local.",
+      "A programação termina na quarta-feira (30), às 17h, com o Casamento Coletivo no Teatro dos Náuas, na Rua do Purus, 479, também no João Alves. O casamento é uma atividade distinta do mutirão de serviços.",
+      "Fontes: Tribunal de Justiça do Estado do Acre (TJAC) e Voz do Norte. Atualizado em 29 de setembro de 2026."
     ],
     "editorialScope": "cruzeiro-do-sul",
     "editorialLocalTier": 4,
     "editorialSurfaceTier": 4,
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalImageUrl": "https://www.tjac.jus.br/wp-content/uploads/2026/09/Projeto-Cidadao-Cruzeiro-do-Sul-3.jpeg",
+    "originalFeedImageUrl": "https://www.tjac.jus.br/wp-content/uploads/2026/09/Projeto-Cidadao-Cruzeiro-do-Sul-3.jpeg",
+    "originalSourceImageUrl": "https://www.tjac.jus.br/wp-content/uploads/2026/09/Projeto-Cidadao-Cruzeiro-do-Sul-3.jpeg",
+    "seoTitle": "Projeto Cidadão começa hoje com serviços gratuitos em Cruzeiro do Sul | Catálogo CZS",
+    "seoDescription": "O mutirão do TJAC atende nesta terça e quarta-feira, das 8h às 15h, no Templo Sede da Assembleia de Deus, no bairro João Alves. Há serviços de saúde, documentação, assistência social e orientação jurídica. No dia 30, às 17h, haverá Casamento Coletivo no Teatro dos Náuas.",
+    "imageAltText": "Card oficial do TJAC com locais, horários e serviços do Projeto Cidadão em Cruzeiro do Sul."
   },
   {
     "id": "https://integracaonet.com/do-plantio-a-embalagem-cafe-do-jurua-agrega-valor-e-abre-espaco-fora-do-acre/",
