@@ -15,17 +15,28 @@ const GAME_META = {
     chip: 0x1c8f5e
   },
   checkers: {
-    title: "Dama",
-    accent: 0x50efff,
-    alt: 0x8ef0a3,
-    description: "Turnos claros, captura obrigatória e leitura limpa.",
-    badge: "ESTRATÉGIA",
-    strap: "Leitura, tática e controle",
-    panelA: 0x2a0f13,
-    panelB: 0x1d1720,
-    chip: 0xd4a33e
-  }
-};
+      title: "Dama",
+      accent: 0x50efff,
+      alt: 0x8ef0a3,
+      description: "Turnos claros, captura obrigatória e leitura limpa.",
+      badge: "ESTRATÉGIA",
+      strap: "Leitura, tática e controle",
+      panelA: 0x2a0f13,
+      panelB: 0x1d1720,
+      chip: 0xd4a33e
+    },
+    buraco: {
+      title: "Buraco",
+      accent: 0xd8a13a,
+      alt: 0xf0e3c8,
+      description: "Carteado Arizona: 11 cartas, duplas e canastra limpando a vitrine.",
+      badge: "CARTEADO",
+      strap: "Par, carta e canastra",
+      panelA: 0x241a12,
+      panelB: 0x1a120c,
+      chip: 0xe8b34b
+    }
+  };
 
 const LOBBY_META = {
   title: "Mesas",
@@ -37,6 +48,7 @@ const LOBBY_META = {
 const STAKES = [2, 5, 10, 20, 30, 40, 50, 100];
 const CARD_TEXTURES = {
   checkers: "game-menu-damas-card",
+  buraco: "game-menu-buraco-card",
   pool: ""
 };
 
@@ -58,7 +70,7 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   init(data = {}) {
-    this.gameId = data.gameId === "checkers" || data.gameId === "pool" ? data.gameId : "";
+    this.gameId = data.gameId === "checkers" || data.gameId === "pool" || data.gameId === "buraco" ? data.gameId : "";
     this.meta = GAME_META[this.gameId] || LOBBY_META;
     this.phase = "select";
     this.stake = Number(data.stake || gameState.lobbyStake || 10);
@@ -240,7 +252,7 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   selectGame(gameId) {
-    this.gameId = gameId === "checkers" || gameId === "pool" ? gameId : "";
+    this.gameId = gameId === "checkers" || gameId === "pool" || gameId === "buraco" ? gameId : "";
     this.meta = GAME_META[this.gameId] || LOBBY_META;
     this.opponent = null;
     this.phase = "select";

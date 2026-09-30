@@ -107,11 +107,11 @@ export function bindWalletInterface() {
     if (open) {
       const user = getGoogleUser();
       updateGameState({
-        objective: "Conferir carteira PubPaid",
+        objective: "Conferir carteira Arizona Pub",
         focus: "carteira real",
         walletFeedback: user?.email
           ? "Carteira aberta para atualizar seu saldo real."
-          : "Entre para abrir sua carteira real do PubPaid."
+          : "Entre para abrir sua carteira real do Arizona Pub Games."
       });
       if (user?.email) {
         void syncPubpaidAccount();

@@ -1,0 +1,4 @@
+"use strict";
+const assert=require("node:assert/strict");const fs=require("node:fs");const path=require("node:path");const test=require("node:test");const root=path.join(__dirname,"..","public");
+test("UI exposes the operational areas and permanent homologation warning",()=>{const html=fs.readFileSync(path.join(root,"index.html"),"utf8");for(const text of ["HOMOLOGAÇÃO","Resumo","Estoque de prêmios","Razão e auditoria","cobrança, saque e resgate desativados"])assert.match(html,new RegExp(text,"i"));assert.doesNotMatch(html,/ganho garantido|chance de ganhar|depositar|sacar/i)});
+test("client uses protected APIs, idempotency and integer cents",()=>{const js=fs.readFileSync(path.join(root,"garra-admin.js"),"utf8");assert.match(js,/Idempotency-Key/);assert.match(js,/unitCostCents/);assert.match(js,/Math\.round/);assert.match(js,/Acesso administrativo necessário/);assert.doesNotMatch(js,/Math\.random/)});

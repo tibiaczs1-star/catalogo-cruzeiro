@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Garra dos Sonhos — Operação</title><link rel="stylesheet" href="/garra-admin/garra-admin.css"></head>
+<body><div class="environment">HOMOLOGAÇÃO <span>cobrança, saque e resgate desativados</span></div>
+<header><div><p class="eyebrow">CATÁLOGO CZS · OPERAÇÕES</p><h1>Garra dos Sonhos</h1><p>Controle de estoque e trilha financeira auditável.</p></div><button id="refresh" type="button">Atualizar dados</button></header>
+<nav><a href="#resumo">Resumo</a><a href="#estoque">Estoque</a><a href="#razao">Razão e auditoria</a></nav>
+<main><section id="notice" class="notice" hidden></section>
+<section id="resumo"><div class="section-title"><div><p class="kicker">VISÃO OPERACIONAL</p><h2>Resumo</h2></div><span id="updated">Aguardando dados</span></div><div id="metrics" class="metrics" aria-live="polite"><p>Carregando indicadores…</p></div></section>
+<section id="estoque"><div class="section-title"><div><p class="kicker">ENTRADA CONTROLADA</p><h2>Estoque de prêmios</h2></div></div>
+<form id="batch-form"><label>Nome do item<input name="name" required maxlength="80" placeholder="Urso Aurora"></label><label>Raridade<select name="rarity"><option value="common">Comum</option><option value="rare">Raro</option><option value="epic">Épico</option><option value="legendary">Lendário</option></select></label><label>Quantidade<input name="quantity" type="number" min="1" step="1" required></label><label>Custo unitário (R$)<input name="unitCost" inputmode="decimal" required placeholder="25,90"></label><label class="wide">Motivo da entrada<input name="reason" required maxlength="160" placeholder="Reposição mensal — nota interna"></label><button type="submit">Registrar lote</button></form>
+<div class="table-wrap"><table><thead><tr><th>Item</th><th>Raridade</th><th>Qtd.</th><th>Custo unit.</th><th>Entrada</th></tr></thead><tbody id="inventory"><tr><td colspan="5">Carregando estoque…</td></tr></tbody></table></div></section>
+<section id="razao"><div class="section-title"><div><p class="kicker">REGISTRO IMUTÁVEL</p><h2>Razão e auditoria</h2></div></div><div class="table-wrap"><table><thead><tr><th>Evento</th><th>Valor</th><th>Responsável</th><th>Motivo</th><th>Data</th></tr></thead><tbody id="ledger"><tr><td colspan="5">Carregando registros…</td></tr></tbody></table></div></section></main>
+<footer>Garra dos Sonhos · Console administrativo local · Nenhuma operação financeira real está ativa.</footer><script src="/garra-admin/garra-admin.js" defer></script></body></html>

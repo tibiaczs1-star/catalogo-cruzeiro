@@ -1,0 +1,2 @@
+*** PROGRESSO_AZ_PUB.txt ***
+2026-09-11 10:01:00 - Criado CardGameScene.js, node --check OK

@@ -9,13 +9,17 @@ export const PUBPAID_TEXTURE_KEYS = {
   playerFemaleIdlePhone: "ppg-player-female-idle-phone-sheet",
   waiterHero: "ppg-waiter-hero-sprite",
   waiterLobby: "ppg-waiter-lobby-sprite",
+  -sprite",
   waiterLobbySpeaking: "ppg-waiter-lobby-speaking-sprite",
   singer: "ppg-singer-sprite",
   singerLobby: "ppg-singer-lobby-sprite",
   guestA: "ppg-guest-a-sprite",
   guestB: "ppg-guest-b-sprite",
   carSide: "ppg-car-side-sprite",
-  trafficVehicles: "ppg-traffic-vehicles-4f"
+  trafficVehicles: "ppg-traffic-vehicles-4f",
+  BARAA: 'baraa',
+  CARTA: 'carta',
+  FICHA_DOURADA: 'ficha_dourada'
 };
 
 export const PUBPAID_WORLD_SCALE = {

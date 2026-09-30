@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-09-21T00:48:29.646Z",
-  "finishedAt": "2026-09-21T00:48:34.144Z",
-  "capturedItems": 382,
-  "capturedToday": 213,
+  "startedAt": "2026-09-28T15:55:50.482Z",
+  "finishedAt": "2026-09-28T15:56:01.755Z",
+  "capturedItems": 376,
+  "capturedToday": 269,
   "activeWindowItems": 360,
   "archiveItems": 480,
   "reports": [
@@ -38,8 +38,8 @@
     {
       "source": "acre-in-foco",
       "ok": true,
-      "count": 23,
-      "blocked": 1,
+      "count": 24,
+      "blocked": 0,
       "mode": "wordpress-json"
     },
     {
@@ -163,7 +163,7 @@
     {
       "source": "mpac",
       "ok": true,
-      "count": 5,
+      "count": 4,
       "blocked": 0,
       "mode": "official-home-headlines"
     },
@@ -176,10 +176,9 @@
     },
     {
       "source": "pcac",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "portal-acre",
@@ -212,21 +211,21 @@
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 3,
+      "count": 0,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 0,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },

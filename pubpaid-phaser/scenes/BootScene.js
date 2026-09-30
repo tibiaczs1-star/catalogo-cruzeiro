@@ -51,8 +51,8 @@ export class BootScene extends Phaser.Scene {
     window.pubpaidAssetProgress = 1;
     updateGameState({
       currentScene: "intro",
-      focus: "placa PUB PAID",
-      objective: "Entrar no PubPaid",
+      focus: "placa ARIZONA PUB",
+      objective: "Entrar no Arizona Pub Games",
       prompt: "Entre com Google e comece. O som pode ser ligado depois."
     });
     this.game.events.emit("pubpaid:assets-ready");
