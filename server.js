@@ -1741,11 +1741,17 @@ function getNewsDataCacheKey() {
 function readMergedNewsCollection(fileName) {
   const livePath = path.join(DATA_DIR, fileName);
   const defaultPath = path.join(DEFAULT_DATA_DIR, fileName);
+  const hasCatchup = fileName === "runtime-news.json";
+  const catchupName = "news-catchup-20261106.json";
+  const liveCatchupPath = path.join(DATA_DIR, catchupName);
+  const defaultCatchupPath = path.join(DEFAULT_DATA_DIR, catchupName);
   const useDefault = path.resolve(DATA_DIR) !== path.resolve(DEFAULT_DATA_DIR);
   const key = [
     fileName,
     getFileCacheSignature(livePath),
-    useDefault ? getFileCacheSignature(defaultPath) : ""
+    useDefault ? getFileCacheSignature(defaultPath) : "",
+    hasCatchup ? getFileCacheSignature(liveCatchupPath) : "",
+    hasCatchup && useDefault ? getFileCacheSignature(defaultCatchupPath) : ""
   ].join("|");
   const cached = newsCollectionCache.get(key);
 
@@ -1754,9 +1760,15 @@ function readMergedNewsCollection(fileName) {
   }
 
   const liveItems = normalizeJsonArrayPayload(readJson(livePath, []));
-  const items = useDefault
+  const baseItems = useDefault
     ? liveItems.concat(normalizeJsonArrayPayload(readJson(defaultPath, [])))
     : liveItems;
+  const catchupItems = !hasCatchup
+    ? []
+    : normalizeJsonArrayPayload(readJson(liveCatchupPath, [])).concat(
+        useDefault ? normalizeJsonArrayPayload(readJson(defaultCatchupPath, [])) : []
+      );
+  const items = baseItems.concat(catchupItems);
 
   if (newsCollectionCache.size > 20) {
     newsCollectionCache.clear();
@@ -23855,3 +23867,4 @@ function patchPubpaidAdminRoutes() {
 }
 
 process.nextTick(patchPubpaidAdminRoutes);
+
