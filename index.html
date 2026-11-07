@@ -10,7 +10,8 @@
 <script>
 (function(){
   var root=document.documentElement;
-  function release(){root.classList.remove("czs-intro-lock","czs-daily-intro");root.classList.add("czs-intro-release","czs-simple-loader");}
+  window.__czsV8IntroControlled=true;
+  function release(){root.classList.remove("czs-intro-lock","czs-daily-intro");root.classList.add("czs-intro-release","czs-simple-loader");document.addEventListener("DOMContentLoaded",function(){document.body.classList.remove("v8-intro-running");},{once:true});}
   window.__czsReleaseIntroLock=release;
   release();
 })();
@@ -24,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=1c05ac7ecb87">
-<link rel="stylesheet" href="assets/czs-simple-loader.css?v=20261107">
+<link rel="stylesheet" href="assets/czs-simple-loader.css?v=20261107-no-blue-1">
 </head>
 <body class="v8-merge-ready">
 <section class="czs-simple-loader" id="cinematicLoader" aria-label="Abrindo Catálogo CZS" role="status">
@@ -68,7 +69,7 @@
     <strong id="progressText">0%</strong>
   </div>
 </section>
-<script src="assets/czs-simple-loader.js?v=20261107"></script>
+<script src="assets/czs-simple-loader.js?v=20261107-no-blue-1"></script>
 <script>
 (function(){
   if (document.documentElement.classList.contains("czs-simple-loader")) return;
