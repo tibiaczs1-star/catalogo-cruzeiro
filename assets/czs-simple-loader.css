@@ -12,7 +12,7 @@ html.czs-simple-loader {
   pointer-events: none !important;
   position: fixed !important;
   transition: opacity 120ms ease, visibility 120ms ease !important;
-  animation: czs-simple-loader-failsafe 700ms forwards !important;
+  animation: czs-simple-loader-failsafe 420ms forwards !important;
   z-index: 2147483647 !important;
 }
 
@@ -38,8 +38,23 @@ html.czs-simple-loader {
 }
 
 #cinematicLoader.czs-simple-loader.done {
+  display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
+}
+
+/* O portal nunca pode ficar oculto por estados residuais da abertura V8. */
+html.czs-simple-loader body.v8-merge-ready,
+html.czs-intro-release body.v8-merge-ready {
+  background: #f7f9fc !important;
+  overflow: visible !important;
+}
+
+html.czs-simple-loader body.v8-merge-ready > #cinematicLoader ~ *,
+html.czs-intro-release body.v8-merge-ready > #cinematicLoader ~ * {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
 }
 
 @keyframes czs-simple-loader-failsafe {
@@ -50,4 +65,3 @@ html.czs-simple-loader {
 @media (prefers-reduced-motion: reduce) {
   #cinematicLoader.czs-simple-loader { transition: none !important; }
 }
-
