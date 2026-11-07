@@ -638,14 +638,38 @@ initFooterReveal();
   <script defer src="assets/v8-final/v8-merge-ready.js?v=caf4af050bf8"></script>
   <script>
   // Mantém os cards visuais mesmo quando a foto de uma fonte externa expira ou bloqueia hotlink.
-  document.addEventListener('error', function(event) {
-    var image = event.target;
-    if (!image || image.tagName !== 'IMG' || image.dataset.czsFallbackApplied) return;
-    image.dataset.czsFallbackApplied = '1';
-    image.src = 'assets/home-cache/rio-jurua-panorama.jpg';
-    image.removeAttribute('srcset');
-    image.alt = image.alt || 'Paisagem do Vale do Juruá';
-  }, true);
+  // Também cobre imagens que já falharam antes de este bloco ser executado.
+  (function () {
+    var fallback = '/assets/home-cache/rio-jurua-panorama.jpg';
+
+    function applyFallback(image) {
+      if (!image || image.tagName !== 'IMG' || image.dataset.czsFallbackApplied === '1') return;
+      image.dataset.czsFallbackApplied = '1';
+      image.removeAttribute('srcset');
+      image.src = fallback;
+      image.alt = image.alt || 'Paisagem do Vale do Juruá';
+    }
+
+    function watch(image) {
+      if (!image || image.dataset.czsFallbackWatching === '1') return;
+      image.dataset.czsFallbackWatching = '1';
+      image.addEventListener('error', function () { applyFallback(image); }, { once: true });
+      if (image.complete && !image.naturalWidth) applyFallback(image);
+    }
+
+    function scan(root) {
+      if (!root) return;
+      if (root.tagName === 'IMG') watch(root);
+      if (root.querySelectorAll) root.querySelectorAll('img').forEach(watch);
+    }
+
+    document.addEventListener('error', function (event) { applyFallback(event.target); }, true);
+    scan(document);
+    new MutationObserver(function (records) {
+      records.forEach(function (record) { record.addedNodes.forEach(scan); });
+    }).observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(function () { scan(document); }, 1000);
+  })();
   </script>
 </body>
 </html>
