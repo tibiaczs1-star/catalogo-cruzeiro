@@ -636,5 +636,16 @@ window.__czsLegacyInlineLoaderSkipped = true;
 initFooterReveal();
 </script>
   <script defer src="assets/v8-final/v8-merge-ready.js?v=caf4af050bf8"></script>
+  <script>
+  // Mantém os cards visuais mesmo quando a foto de uma fonte externa expira ou bloqueia hotlink.
+  document.addEventListener('error', function(event) {
+    var image = event.target;
+    if (!image || image.tagName !== 'IMG' || image.dataset.czsFallbackApplied) return;
+    image.dataset.czsFallbackApplied = '1';
+    image.src = 'assets/home-cache/rio-jurua-panorama.jpg';
+    image.removeAttribute('srcset');
+    image.alt = image.alt || 'Paisagem do Vale do Juruá';
+  }, true);
+  </script>
 </body>
 </html>
