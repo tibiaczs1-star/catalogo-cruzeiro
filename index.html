@@ -326,14 +326,16 @@
 </div><div class="toast" id="toast"></div>
 <script src="editorial-scope.js?v=20260803-regional-home"></script>
 <script src="news-data.js?v=20261107-news-photo-fix"></script>
+<script src="home-current-news.js?v=20261108-home-current"></script>
 <script>window.CZS_FALLBACK_FEATURES=[{"slug":"modelo-cruzeirense-lanca-seu-book-online-confira","title":"Modelo cruzeirense lança seu book online — confira","category":"Cruzeiro do Sul","categoryKey":"cruzeiro-do-sul","summary":"Raiane Leoncio, de 17 anos, apresenta seu trabalho como modelo de passarela em book completo online.","sourceUrl":"/bookray/","imageUrl":"bookray/assets/IMG_1127.jpeg"}];</script>
 <script>
 const LIVE='https://catalogo-cruzeiro-web.onrender.com';
 const API_BASE=window.location.protocol==='http:'||window.location.protocol==='https:' ? window.location.origin : LIVE;
 const API_ARCHIVE=`${API_BASE}/api/news/archive?limit=1000`;
+const CURRENT_FEATURES=Array.isArray(window.CZS_CURRENT_FEATURES)?window.CZS_CURRENT_FEATURES:[];
 const DATA=Array.isArray(window.NEWS_DATA)&&window.NEWS_DATA.length
-  ? {items:window.NEWS_DATA,archiveTotal:Number(window.NEWS_ARCHIVE_TOTAL||window.NEWS_DATA.length)}
-  : (()=>{const backup=JSON.parse(document.getElementById('newsData').textContent);return {...backup,items:[...(backup.items||[]),...(window.CZS_FALLBACK_FEATURES||[])]};})();
+  ? {items:[...CURRENT_FEATURES,...window.NEWS_DATA],archiveTotal:Number(window.NEWS_ARCHIVE_TOTAL||window.NEWS_DATA.length)+CURRENT_FEATURES.length}
+  : (()=>{const backup=JSON.parse(document.getElementById('newsData').textContent);return {...backup,items:[...CURRENT_FEATURES,...(backup.items||[]),...(window.CZS_FALLBACK_FEATURES||[])]};})();
 let stories=(window.CzsEditorialScope?.orderPortalStories?.(DATA.items||[])||(DATA.items||[])).filter(n=>!/^(lei orgânica|lei organica)$/i.test(String(n.title||'').trim())), filtered=[...stories], rendered=0, step=24, currentFilter='Tudo', query='';
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 $('#syncStatus').textContent=`Arquivo atualizado: ${stories.length} notícias • seleção regional em destaque`;
