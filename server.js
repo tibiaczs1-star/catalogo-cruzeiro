@@ -592,18 +592,7 @@ const STATIC_PAGE_SEO = {
     changefreq: "daily",
     fileName: "estudantes.html"
   },
-  "/escritorio.html": {
-    title: `Escritorio dos Agentes | ${SITE_NAME}`,
-    description:
-      "Escritorio pixel art dos agentes especialistas do Catalogo Cruzeiro do Sul, com editoria, copy, games, infantil, vendas, design, revisao, fontes e automacao.",
-    themeColor: "#111827",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    priority: "0.76",
-    changefreq: "weekly",
-    fileName: "escritorio.html"
-  },
+
   "/real-agents.html": {
     title: `Agentes Reais em Operacao | ${SITE_NAME}`,
     description:
@@ -616,42 +605,9 @@ const STATIC_PAGE_SEO = {
     changefreq: "hourly",
     fileName: "real-agents.html"
   },
-  "/cheffe-call.html": {
-    title: `Cheffe Call | ${SITE_NAME}`,
-    description:
-      "Sala de reuniao dos agentes reais, com escritorio bitmap, pausa operacional, memoria da reuniao, agente do dia, escritorio do dia e acao do dia.",
-    themeColor: "#120f1a",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    priority: "0.73",
-    changefreq: "hourly",
-    fileName: "cheffe-call.html"
-  },
-  "/escritorio-nerd.html": {
-    title: `Escritorio Nerd | ${SITE_NAME}`,
-    description:
-      "Escritorio nerd em pixel art com o time de game dev do PubPaid, incluindo game design, fisica, HUD, pixel art, som, playtest e estabilidade.",
-    themeColor: "#170d2d",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    priority: "0.74",
-    changefreq: "weekly",
-    fileName: "escritorio-nerd.html"
-  },
-  "/escritorio-arte.html": {
-    title: `Escritorio de Arte | ${SITE_NAME}`,
-    description:
-      "Escritorio de Arte com 50 agentes de Design Art e Programacao de Game Design estudando pixel art, sprites, engine, colisao, fisica, mapas e jogos junto com os Ninjas.",
-    themeColor: "#111827",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    priority: "0.72",
-    changefreq: "weekly",
-    fileName: "escritorio-arte.html"
-  },
+
+
+
   "/esttiles.html": {
     title: `Esttiles | Editorial de Moda e Estilo | ${SITE_NAME}`,
     description:
@@ -17640,6 +17596,160 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "GET" && pathname === "/api/news/archive") {
     const limit = Number(searchParams.get("limit") || 500);
     return sendJson(res, 200, { ok: true, ...buildNewsArchivePayload(limit) });
+  }
+
+  // ===== CZS NEWS INGEST API (2026-11-09) =====
+  // Permite publicar noticias por API para o portal se atualizar sozinho.
+  if (req.method === "POST" && pathname === "/api/news/ingest") {
+    const token = String(
+      req.headers["x-ingest-token"] ||
+      (String(req.headers.authorization || "").match(/^Bearer\s+(.+)$/i) || [])[1] ||
+      ""
+    ).trim();
+    const expected = String(process.env.NEWS_INGEST_TOKEN || "").trim();
+
+    if (!expected) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Ingestao desativada. Defina NEWS_INGEST_TOKEN no ambiente."
+      });
+    }
+    if (!token || token !== expected) {
+      return sendJson(res, 401, { ok: false, error: "Token de ingestao invalido." });
+    }
+
+    let body;
+    try {
+      body = await parseBody(req);
+    } catch (_error) {
+      return sendJson(res, 400, { ok: false, error: "JSON invalido no corpo da requisicao." });
+    }
+
+    const incoming = Array.isArray(body) ? body : [body];
+    if (incoming.length > 25) {
+      return sendJson(res, 413, { ok: false, error: "Maximo de 25 noticias por requisicao." });
+    }
+
+    const now = new Date();
+    const accepted = [];
+    const rejected = [];
+
+    for (const raw of incoming) {
+      const item = raw && typeof raw === "object" ? raw : {};
+
+      const title = String(item.title || "").trim();
+      const sourceUrl = String(item.sourceUrl || item.url || "").trim();
+      const bodyParts = Array.isArray(item.body)
+        ? item.body.map((x) => String(x || "").trim()).filter(Boolean)
+        : String(item.body || "").trim()
+          ? [String(item.body).trim()]
+          : [];
+      const summary = String(item.summary || item.lede || item.description || "").trim();
+
+      const problems = [];
+      if (title.length < 8) problems.push("title ausente ou curto (min 8)");
+      if (title.length > 200) problems.push("title acima de 200 caracteres");
+      if (!/^https?:\/\//i.test(sourceUrl)) problems.push("sourceUrl precisa comecar com http(s)");
+      if (!bodyParts.length && !summary) problems.push("informe body[] ou summary");
+
+      const imageUrl = String(item.imageUrl || item.image || "").trim();
+      if (imageUrl && !/^https?:\/\//i.test(imageUrl)) {
+        problems.push("imageUrl precisa ser absoluta http(s)");
+      }
+      if (/127\.0\.0\.1|localhost/i.test(imageUrl) || /127\.0\.0\.1|localhost/i.test(String(item.videoUrl || ""))) {
+        problems.push("URL local (localhost/127.0.0.1) nao e aceita em producao");
+      }
+
+      if (problems.length) {
+        rejected.push({ title: title.slice(0, 80), problems });
+        continue;
+      }
+
+      const publishedAt = (() => {
+        const rawDate = String(item.publishedAt || item.date || "").trim();
+        const parsed = rawDate ? new Date(rawDate) : now;
+        return Number.isNaN(parsed.getTime()) ? now.toISOString() : parsed.toISOString();
+      })();
+
+      const slug = String(item.slug || "").trim() || slugify(title);
+      const category = String(item.category || "Notícias").trim();
+
+      accepted.push({
+        id: `api-${now.getTime()}-${accepted.length + 1}`,
+        slug,
+        title,
+        seoTitle: String(item.seoTitle || "").trim() || `${title} | Catálogo CZS`,
+        seoDescription: String(item.seoDescription || "").trim() || summary.slice(0, 300),
+        date: new Intl.DateTimeFormat("pt-BR", {
+          day: "numeric", month: "short", year: "numeric", timeZone: "America/Rio_Branco"
+        }).format(new Date(publishedAt)),
+        publishedAt,
+        sourcePublishedDate: publishedAt.slice(0, 10),
+        sourceTimePrecision: "minute",
+        eyebrow: String(item.eyebrow || category).trim(),
+        category,
+        categoryKey: String(item.categoryKey || "").trim() || slugify(category),
+        previewClass: "thumb-cotiano",
+        sourceName: String(item.sourceName || "").trim() || "Fonte informada",
+        sourceUrl,
+        sourceLabel: String(item.sourceLabel || "").trim() || title,
+        lede: String(item.lede || "").trim() || summary,
+        summary: summary || bodyParts[0] || "",
+        analysis: String(item.analysis || "").trim(),
+        body: bodyParts.length ? bodyParts : [summary],
+        highlights: Array.isArray(item.highlights) ? item.highlights.map(String) : [],
+        development: Array.isArray(item.development) ? item.development.map(String) : [],
+        imageUrl,
+        sourceImageUrl: imageUrl,
+        feedImageUrl: imageUrl,
+        imageCredit: String(item.imageCredit || "").trim(),
+        imageFocus: String(item.imageFocus || "center").trim(),
+        imageFit: String(item.imageFit || "").trim(),
+        media: null,
+        videoUrl: String(item.videoUrl || "").trim(),
+        priority: Number.isFinite(Number(item.priority)) ? Number(item.priority) : 2600,
+        editorialPriority: String(item.editorialPriority || "").trim(),
+        editorialScope: String(item.editorialScope || "cruzeiro-do-sul").trim(),
+        sourceCount: 1,
+        crossSources: [{ name: String(item.sourceName || "").trim() || "Fonte informada", url: sourceUrl }],
+        alternateSources: [],
+        alternateSlugs: [],
+        ingestedAt: now.toISOString(),
+        ingestedVia: "api",
+        accessibility: {
+          alt: imageUrl ? String(item.imageAlt || title).trim() : "",
+          caption: String(item.imageCredit || "").trim()
+        }
+      });
+    }
+
+    if (!accepted.length) {
+      return sendJson(res, 422, {
+        ok: false,
+        error: "Nenhuma noticia passou na validacao.",
+        rejected
+      });
+    }
+
+    // Grava preservando o acervo: novas primeiro, sem duplicar por sourceUrl.
+    const existing = getStaticNewsItemsUncached();
+    const seenSources = new Set(
+      existing.map((x) => String(x.sourceUrl || x.url || "").trim()).filter(Boolean)
+    );
+    const fresh = accepted.filter((x) => !seenSources.has(x.sourceUrl));
+    const merged = fresh.concat(existing);
+
+    // O cache e por assinatura do arquivo, entao a escrita ja invalida sozinha.
+    writeStaticNewsData(merged);
+
+    return sendJson(res, 201, {
+      ok: true,
+      inserted: fresh.length,
+      rejected: rejected.length,
+      total: merged.length,
+      rejectedItems: rejected,
+      slugs: fresh.map((x) => x.slug)
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/news/integrity") {
