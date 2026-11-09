@@ -2,9 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=960, initial-scale=1">
-<title>>>>CZS<<< v2 — Cruzeiro do Sul >>>Barzinho<<< (>>>Premium<<<)</title>
-<link rel="stylesheet" href="barzinho-premium.css">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Barzinho Premium — Cruzeiro do Sul | Catálogo CZS</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -469,7 +468,7 @@ body {
 <div id="intro-screen">
   <canvas id="matrix-canvas"></canvas>
   <div id="intro-title">
-    >>>CZS<<< v2<br>
+    CZS v2<br>
     <span style="font-size:20px;">Cruzeiro do Sul</span><br>
     <span style="color:#ff00ff;">Barzinho Premium</span>
   </div>
@@ -479,59 +478,59 @@ body {
 </div>
 
 <!-- CHARACTER SELECT -->
-<div id="select-screen">
+<div id="select-screen" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px;">
   <div id="select-title">ESCOLHA SEU PERSONAGEM</div>
   <div id="select-subtitle">10 personas locais de Cruzeiro do Sul</div>
-  <div id="character-grid">
+  <div id="character-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;max-width:900px;width:100%;margin:28px 0;">
     <!-- FEMININAS -->
     <div class="char-card" data-char="lia" role="button" tabindex="0" aria-label="Selecionar personagem Lia Neon">
-      <img src="assets/characters/fem/lia/card_front.bmp" alt="Lia" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de LN"><defs><linearGradient id="g-lia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2fb5"/><stop offset="1" stop-color="#7a1cff"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-lia)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#ff2fb5" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#ff2fb5" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#7a1cff" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">LN</text></svg>
       <h3 class="char-name">LIA NEON</h3>
       <div class="char-style">Cyberpunk Tropical</div>
     </div>
     <div class="char-card" data-char="sol" role="button" tabindex="0" aria-label="Selecionar personagem Sol">
-      <img src="assets/characters/fem/sol/card_front.bmp" alt="Sol" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de SO"><defs><linearGradient id="g-sol" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd166"/><stop offset="1" stop-color="#ff7b00"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-sol)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#ffd166" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#ffd166" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#ff7b00" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">SO</text></svg>
       <h3 class="char-name">SOL</h3>
       <div class="char-style">Card Dealer</div>
     </div>
     <div class="char-card" data-char="rafa" role="button" tabindex="0" aria-label="Selecionar personagem Rafa">
-      <img src="assets/characters/fem/rafa/card_front.bmp" alt="Rafa" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de RA"><defs><linearGradient id="g-rafa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#0077ff"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-rafa)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#00e5ff" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#00e5ff" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#0077ff" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">RA</text></svg>
       <h3 class="char-name">RAFA</h3>
       <div class="char-style">Fashion Dealer</div>
     </div>
     <div class="char-card" data-char="je" role="button" tabindex="0" aria-label="Selecionar personagem Garçonete Jé">
-      <img src="assets/characters/fem/je/card_front.bmp" alt="Jé" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de JÉ"><defs><linearGradient id="g-je" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b35"/><stop offset="1" stop-color="#ffd23f"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-je)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#ff6b35" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#ff6b35" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#ffd23f" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">JÉ</text></svg>
       <h3 class="char-name">GARÇONETE JÉ</h3>
       <div class="char-style">Baiana Moderna</div>
     </div>
     <div class="char-card" data-char="cantora" role="button" tabindex="0" aria-label="Selecionar personagem Cantora Neon">
-      <img src="assets/characters/fem/cantora/card_front.bmp" alt="Cantora" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de CN"><defs><linearGradient id="g-cantora" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c77dff"/><stop offset="1" stop-color="#7b2cbf"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-cantora)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#c77dff" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#c77dff" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#7b2cbf" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">CN</text></svg>
       <h3 class="char-name">CANTORA NEON</h3>
       <div class="char-style">Popstar LED</div>
     </div>
     <!-- MASCULINOS -->
     <div class="char-card" data-char="nando" role="button" tabindex="0" aria-label="Selecionar personagem Nando">
-      <img src="assets/characters/masc/nando/card_front.bmp" alt="Nando" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de NA"><defs><linearGradient id="g-nando" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#065f46"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-nando)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#22c55e" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#22c55e" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#065f46" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">NA</text></svg>
       <h3 class="char-name">NANDO</h3>
       <div class="char-style">Security</div>
     </div>
     <div class="char-card" data-char="caio" role="button" tabindex="0" aria-label="Selecionar personagem Caio Pix">
-      <img src="assets/characters/masc/caio/card_front.bmp" alt="Caio" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de CA"><defs><linearGradient id="g-caio" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f43f5e"/><stop offset="1" stop-color="#7f1d1d"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-caio)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#f43f5e" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#f43f5e" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#7f1d1d" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">CA</text></svg>
       <h3 class="char-name">CAIO PIX</h3>
       <div class="char-style">Skatista Punk</div>
     </div>
     <div class="char-card" data-char="lucas" role="button" tabindex="0" aria-label="Selecionar personagem DJ Lucas">
-      <img src="assets/characters/masc/lucas/card_front.bmp" alt="Lucas" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de LU"><defs><linearGradient id="g-lucas" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#0077ff"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-lucas)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#00e5ff" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#00e5ff" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#0077ff" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">LU</text></svg>
       <h3 class="char-name">DJ LUCAS</h3>
       <div class="char-style">Groove Producer</div>
     </div>
     <div class="char-card" data-char="roberto" role="button" tabindex="0" aria-label="Selecionar personagem Chefão Roberto">
-      <img src="assets/characters/masc/roberto/card_front.bmp" alt="Roberto" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de RO"><defs><linearGradient id="g-roberto" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#0077ff"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-roberto)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#00e5ff" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#00e5ff" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#0077ff" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">RO</text></svg>
       <h3 class="char-name">CHEFÃO ROBERTO</h3>
       <div class="char-style">Dono do Bar</div>
     </div>
     <div class="char-card" data-char="mateus" role="button" tabindex="0" aria-label="Selecionar personagem Garçom Mateus">
-      <img src="assets/characters/masc/mateus/card_front.bmp" alt="Mateus" onerror="this.style.display='none'">
+      <svg class="char-portrait" viewBox="0 0 120 120" role="img" aria-label="Retrato de MA"><defs><linearGradient id="g-mateus" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#0077ff"/></linearGradient></defs><circle cx="60" cy="60" r="56" fill="url(#g-mateus)" opacity=".18"/><circle cx="60" cy="60" r="56" fill="none" stroke="#00e5ff" stroke-width="2" opacity=".55"/><circle cx="60" cy="46" r="18" fill="#00e5ff" opacity=".85"/><path d="M26 104c0-19 15-30 34-30s34 11 34 30" fill="#0077ff" opacity=".85"/><text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#04070f">MA</text></svg>
       <h3 class="char-name">GARÇOM MATEUS</h3>
       <div class="char-style">Premium Service</div>
     </div>

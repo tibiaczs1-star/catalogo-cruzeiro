@@ -11,9 +11,32 @@
 (function(){
   var root=document.documentElement;
   window.__czsV8IntroControlled=true;
-  function release(){root.classList.remove("czs-intro-lock","czs-daily-intro");root.classList.add("czs-intro-release","czs-simple-loader");document.addEventListener("DOMContentLoaded",function(){document.body.classList.remove("v8-intro-running");},{once:true});}
+
+  // Abertura cinematografica: uma vez por dia (fuso America/Rio_Branco).
+  // ?forceIntro=1 forca a previa; ?skipIntro=1 e atalho tecnico.
+  var query=new URLSearchParams(location.search||"");
+  var requested=query.get("forceIntro")==="1"||query.get("intro")==="1";
+  var disabled=query.get("skipIntro")==="1";
+  var dayKey=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Rio_Branco",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+  var seenToday=false;
+  try{seenToday=localStorage.getItem("czs-intro-day")===dayKey;}catch(_e){seenToday=false;}
+  var showIntro=!disabled&&(requested||!seenToday);
+
+  function release(){
+    root.classList.remove("czs-intro-lock","czs-daily-intro");
+    root.classList.add("czs-intro-release","czs-simple-loader");
+    document.addEventListener("DOMContentLoaded",function(){document.body.classList.remove("v8-intro-running");},{once:true});
+  }
   window.__czsReleaseIntroLock=release;
-  release();
+
+  if(showIntro){
+    root.classList.add("czs-daily-intro","czs-intro-lock");
+    try{localStorage.setItem("czs-intro-day",dayKey);}catch(_e){}
+    // Falha aberta: a abertura nunca segura o portal por mais de 4,2s.
+    window.setTimeout(release,4200);
+  }else{
+    release();
+  }
 })();
 </script>
 <link rel="stylesheet" href="home.css">
@@ -395,9 +418,9 @@
     <div class="popup-actions"><button class="btn ghost" id="popupKnow" type="button">Entrar no portal</button></div>
   </article>
 </div><div class="toast" id="toast"></div>
-<script src="editorial-scope.js?v=20260803-regional-home"></script>
-<script src="news-data.js?v=20261107-news-photo-fix"></script>
-<script src="home-current-news.js?v=20261108-home-current"></script>
+<script src="editorial-scope.js?v=cc6cd51bc7d3"></script>
+<script src="news-data.js?v=d5899ab40f91"></script>
+<script src="home-current-news.js?v=ccc2c72c83d8"></script>
 <script>window.CZS_FALLBACK_FEATURES=[{"slug":"modelo-cruzeirense-lanca-seu-book-online-confira","title":"Modelo cruzeirense lança seu book online — confira","category":"Cruzeiro do Sul","categoryKey":"cruzeiro-do-sul","summary":"Raiane Leoncio, de 17 anos, apresenta seu trabalho como modelo de passarela em book completo online.","sourceUrl":"/bookray/","imageUrl":"bookray/assets/IMG_1127.jpeg"}];</script>
 <script>
 const LIVE='https://catalogo-cruzeiro-web.onrender.com';

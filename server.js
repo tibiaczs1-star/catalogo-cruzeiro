@@ -21170,6 +21170,30 @@ async function handleStatic(req, res, pathname, requestUrl) {
        });
      }
 
+     // CZS 2026-11-09 — o barzinho existia em disco mas a rota raiz
+     // caia no fallback de manutencao. Agora serve a pagina real.
+     if (pathname === "/cruzeiro-do-sul-barzinho" || pathname === "/barzinho") {
+       res.writeHead(302, {
+         Location: "/cruzeiro-do-sul-barzinho/",
+         "Cache-Control": "no-store"
+       });
+       return res.end();
+     }
+
+     if (pathname.startsWith("/cruzeiro-do-sul-barzinho/")) {
+       let filePath = path.join(
+         ROOT_DIR,
+         "cruzeiro-do-sul-barzinho",
+         pathname.slice("/cruzeiro-do-sul-barzinho/".length)
+       );
+       if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+         filePath = path.join(filePath, "index.html");
+       }
+       return sendFile(req, res, filePath, {
+         cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
+
      if (pathname === "/reservar" || pathname === "/reservar/") {
        res.writeHead(302, {
          Location: "/reservar/hotel-jurua-palace/",

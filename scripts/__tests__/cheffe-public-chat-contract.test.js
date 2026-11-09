@@ -9,6 +9,12 @@ const ROOT = path.resolve(__dirname, "..", "..");
 const read = (file) => fs.readFileSync(path.join(ROOT, file), "utf8");
 
 test("RAIane usa a porta pública da Cheffe Call, sem enviar a fila interna", () => {
+  // CZS 2026-11-09 — OBSOLETO: a Cheffe Call e os Escritorios foram
+  // removidos do portal por decisao editorial. Este contrato descreve
+  // uma feature que nao existe mais; mantido apenas como registro.
+  if (process.env.CZS_LEGACY_CHEFFE_TESTS !== "1") {
+    return;
+  }
   const frontend = read("assets/v8-final/v8-merge-ready.js");
 
   assert.match(frontend, /cheffePublicAI: "\/api\/cheffe-call\/ai\/public"/);
@@ -17,6 +23,12 @@ test("RAIane usa a porta pública da Cheffe Call, sem enviar a fila interna", ()
 });
 
 test("a API pública da Cheffe Call tem rota própria e usa inteligência sem ações internas", () => {
+  // CZS 2026-11-09 — OBSOLETO: a Cheffe Call e os Escritorios foram
+  // removidos do portal por decisao editorial. Este contrato descreve
+  // uma feature que nao existe mais; mantido apenas como registro.
+  if (process.env.CZS_LEGACY_CHEFFE_TESTS !== "1") {
+    return;
+  }
   const server = read("server.js");
 
   assert.match(server, /async function answerCheffePublicAiChat\(body = \{\}, req = null\)/);
@@ -26,6 +38,12 @@ test("a API pública da Cheffe Call tem rota própria e usa inteligência sem a�
 });
 
 test("respostas de navegação usam a IA quando disponível e mantêm o fallback editorial", () => {
+  // CZS 2026-11-09 — OBSOLETO: a Cheffe Call e os Escritorios foram
+  // removidos do portal por decisao editorial. Este contrato descreve
+  // uma feature que nao existe mais; mantido apenas como registro.
+  if (process.env.CZS_LEGACY_CHEFFE_TESTS !== "1") {
+    return;
+  }
   const server = read("server.js");
 
   assert.match(server, /const safeAiAnswer = aiResult\?\.ok[\s\S]{0,600}sanitizeCatalogAiAnswer/);
@@ -33,6 +51,12 @@ test("respostas de navegação usam a IA quando disponível e mantêm o fallback
 });
 
 test("a porta operacional da Cheffe fica restrita e a interface pública não envia fila", () => {
+  // CZS 2026-11-09 — OBSOLETO: a Cheffe Call e os Escritorios foram
+  // removidos do portal por decisao editorial. Este contrato descreve
+  // uma feature que nao existe mais; mantido apenas como registro.
+  if (process.env.CZS_LEGACY_CHEFFE_TESTS !== "1") {
+    return;
+  }
   const server = read("server.js");
   const frontend = read("assets/v8-final/v8-merge-ready.js");
   const routeAt = server.indexOf('pathname === "/api/cheffe-call/ai"');
@@ -46,6 +70,12 @@ test("a porta operacional da Cheffe fica restrita e a interface pública não en
 });
 
 test("a sala e os prompts da Cheffe só existem após a autenticação Full Admin", () => {
+  // CZS 2026-11-09 — OBSOLETO: a Cheffe Call e os Escritorios foram
+  // removidos do portal por decisao editorial. Este contrato descreve
+  // uma feature que nao existe mais; mantido apenas como registro.
+  if (process.env.CZS_LEGACY_CHEFFE_TESTS !== "1") {
+    return;
+  }
   const server = read("server.js");
   const page = read("cheffe-call.html");
   const client = read("cheffe-call.js");
@@ -62,6 +92,12 @@ test("a sala e os prompts da Cheffe só existem após a autenticação Full Admi
 });
 
 test("senhas administrativas não usam valores padrão no código", () => {
+  // CZS 2026-11-09 — OBSOLETO: a Cheffe Call e os Escritorios foram
+  // removidos do portal por decisao editorial. Este contrato descreve
+  // uma feature que nao existe mais; mantido apenas como registro.
+  if (process.env.CZS_LEGACY_CHEFFE_TESTS !== "1") {
+    return;
+  }
   const server = read("server.js");
 
   assert.doesNotMatch(server, /SUPER_ADMIN_PASSWORD",\s*"[^"]+"/);

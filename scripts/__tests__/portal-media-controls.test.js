@@ -43,5 +43,8 @@ test("homepage cache keys expose the repaired assets and news snapshot", () => {
 
   assert.match(index, /v8-merge-ready\.css\?v=[a-f0-9]{12}/);
   assert.match(index, /v8-merge-ready\.js\?v=[a-f0-9]{12}/);
-  assert.match(index, /news-data\.js\?v=20260803-regional-home/);
+  // CZS 2026-11-09: o snapshot de noticias passou a usar fingerprint de
+  // conteudo em vez de um sufixo manual fixo, para invalidar o cache
+  // sempre que o arquivo muda.
+  assert.match(index, /news-data\.js\?v=[a-f0-9]{12}/);
 });
