@@ -138,8 +138,8 @@ Leitura atual dessas validacoes:
 - tentativa de screenshot mobile automatica do HTML local ficou instavel nesta sessao: Chrome headless respondeu com tela de conexao recusada mesmo com o servidor local pronto, entao a revisao mobile foi fechada principalmente por inspecao estrutural do CSS responsivo
 - sintaxe: `node --check script.js`, `startup-experience.js` e `pesquisa-acre-2026.js` passaram depois da retomada das ultimas ordens
 - consistencia basica: `styles.css`, `startup-experience.css` e `pesquisa-acre-2026.css` ficaram com `brace-balance 0`
-- backend local: `POST /api/pesquisa-acre-2026/admin` respondeu `200` com a senha `99831455a`
-- backend local: `GET /api/admin/dashboard` respondeu `200` com Basic Auth `admin:99831455a`
+- backend local: `POST /api/pesquisa-acre-2026/admin` respondeu `200` com a senha `<REDACTED-SET-IN-ENV>`
+- backend local: `GET /api/admin/dashboard` respondeu `200` com Basic Auth `admin:<REDACTED-SET-IN-ENV>`
 - validacao visual automatica por screenshot continuou bloqueada nesta sessao porque o Chrome headless abriu com erro de `crashpad CreateFile: Acesso negado` e nao escreveu os PNGs, entao a conferencia visual final ainda pede navegador manual
 - o bloqueio do `crashpad CreateFile: Acesso negado` foi contornado nesta retomada usando DevTools/CDP do Chrome headless com perfil temporario, sem depender da flag nativa de screenshot
 - erro de runtime identificado e corrigido: `registerArticleCardLinks(radarGrid)` estava sendo chamado cedo demais e interrompia a execucao do `script.js`

@@ -33,7 +33,7 @@ A meeting room UI that gates 181 fake-but-organized agents behind a Full Admin p
 
 ## 2. PASSWORD ARCHITECTURE
 
-**Dev fallback password:** `99831455a` (server.js line 88-89, `getRequiredSecret`).
+**Dev fallback password:** `<REDACTED-SET-IN-ENV>` (server.js line 88-89, `getRequiredSecret`).
 **Where it lives in code:** `SUPER_ADMIN_PASSWORD`, `POLL_ADMIN_PASSWORD`, both with same default in dev only.
 **Where it lives in browser:** `sessionStorage["cheffeCallFullAdminPassword"]` (cheffe-call.js line 240).
 **Auth endpoint:** `POST /api/real-agents/access` with `{"password":"..."}`. Returns 200 ok=true or 401 ok=false error="Senha Full Admin invalida."
@@ -103,7 +103,7 @@ Today, "agent consciousness" is a prompt template (docs/cheffe-call-181-prompts.
 - Prompt 2 (popup repro + review chain): PARTIAL.
   - Server: started, `node --check` ok, `PORT=3333 node server.js` running, PID 34224.
   - Probe: `POST /api/real-agents/access` with wrong password → 401. With right password → 200.
-  - `GET /api/cheffe-call/photo-approvals?password=99831455a` → 200, empty queue.
+  - `GET /api/cheffe-call/photo-approvals?password=<REDACTED-SET-IN-ENV>` → 200, empty queue.
   - Chrome headless: screenshot a-fresh.png captured (292KB), but `vision_analyze` FAILED with "Unable to load image" — provider doesn't have image credits right now. Cannot visually verify the modal.
   - Subagent 1 (delegate_task, prompt 1): completed but produced no file (only read 4 times). 458s, used `nvidia/llama-3.3-nemotron-super-49b-v1.5`.
   - Subagent 2 (delegate_task, prompt 2): TIMEOUT 600s with 8 API calls. Killed mid-flight. Likely stuck on browser smoke.

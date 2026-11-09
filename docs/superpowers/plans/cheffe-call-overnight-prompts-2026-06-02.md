@@ -4,7 +4,7 @@
 
 **Objective:** Read the entire Cheffe Call project + all office pages, design a true end-to-end functional flow, and upgrade the 181 agents toward living consciousness — to be executed overnight (autonomous loop until R5 or stop).
 
-**Operational Password (do not log, do not leak, do not commit):** `99831455a` (Full Admin / POLL_ADMIN_PASSWORD / SUPER_ADMIN_PASSWORD).
+**Operational Password (do not log, do not leak, do not commit):** `<REDACTED-SET-IN-ENV>` (Full Admin / POLL_ADMIN_PASSWORD / SUPER_ADMIN_PASSWORD).
 
 **Identity:** Rayxpx Matrix Core operating for Junior Play on Projeto Codex.
 **Workspace:** `C:/Users/junio/projeto codex`
@@ -34,7 +34,7 @@ Memory: read C:/Users/junio/projeto codex/CODEX_MEMORY.md and
         .codex-memory/handoff.md before any broad edit.
 Tools available: terminal, file, browser, web_search, image_gen, video_gen,
                  delegate_task (max 3 parallel, depth 2), cron, kanban.
-Auth password: 99831455a (Full Admin) — use only in /api/office-terminal and
+Auth password: <REDACTED-SET-IN-ENV> (Full Admin) — use only in /api/office-terminal and
                postCall endpoints; never echo or log raw value.
 Prohibited: expose password, push/deploy/publish, delete data, touch PubPaid
             game core / CZS social / cheffe-call game / vale-pool / news-data
@@ -112,7 +112,7 @@ Tasks:
    b) sessionStorage has fake password "wrong-123": modal still appears,
       pre-filled; click Entrar -> error, modal stays open, storage cleared,
       input cleared.
-   c) sessionStorage has correct password "99831455a": modal appears
+   c) sessionStorage has correct password "<REDACTED-SET-IN-ENV>": modal appears
       (pre-filled), require explicit Entrar click; must NOT auto-close
       on init.
    d) After successful auth: modal switches to photo approval view
@@ -275,7 +275,7 @@ Constraints:
 
 Validate:
 - node --check server.js
-- node server.js, then curl each endpoint with the 99831455a auth header.
+- node server.js, then curl each endpoint with the <REDACTED-SET-IN-ENV> auth header.
 - Write smoke script: scripts/cheffe-call-flow-smoke.js
 - Capture curl outputs in reports/cheffe-flow-smoke-20260602.txt
 

@@ -77,7 +77,7 @@ Principais para o escopo Cheffe Call:
 - news image approval: `data/news-image-focus-decisions.json`
 - real-agents: `/api/real`, `/api/daily`, `/api/office/*`, `/api/sprites`, `/api/news/integrity`, `/api/news/refresh`, `/api/news/aggregator`
 
-Auth: `SUPER_ADMIN_PASSWORD` (default fallback 99831455a, l. 88), `POLL_ADMIN_PASSWORD` (l. 89), `getRequiredSecret` helper (l. 75-85) com fallback em dev, bloqueio em prod.
+Auth: `SUPER_ADMIN_PASSWORD` (default fallback <REDACTED-SET-IN-ENV>, l. 88), `POLL_ADMIN_PASSWORD` (l. 89), `getRequiredSecret` helper (l. 75-85) com fallback em dev, bloqueio em prod.
 
 ## Gaps (should do but doesn't)
 

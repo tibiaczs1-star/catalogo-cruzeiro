@@ -93,13 +93,19 @@ function getRequiredSecret(name, fallbackValue) {
     return fallbackValue;
   }
 
+  // CZS 2026-11-09 — seguranca: antes devolvia uma string previsivel
+  // ("missing-<nome>-in-production"), que podia ser descoberta e usada
+  // como senha. Agora o valor e aleatorio por processo: ninguem acerta,
+  // e o acesso administrativo fica realmente desligado.
   console.warn(`[security] Missing required env ${name} in production. Related admin access is disabled until it is set.`);
-  return `missing-${name.toLowerCase()}-in-production`;
+  return `lock-${crypto.randomBytes(32).toString("hex")}`;
 }
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
-const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
-const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "99831455a");
+// CZS 2026-11-09 — seguranca: sem senha padrao no codigo.
+// Defina SUPER_ADMIN_PASSWORD no ambiente; sem ela o acesso fica bloqueado.
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "");
+const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "");
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();
