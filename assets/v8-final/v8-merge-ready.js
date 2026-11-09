@@ -2429,6 +2429,9 @@
   }
 
   function renderCheffeCommand() {
+    // Cheffe Call e Escritorios removidos em 2026-11-09.
+    return;
+    /* eslint-disable no-unreachable */
     const section = $("#cheffeCallEditor");
     if (!section) return;
     section.classList.remove("v8-cheffe-command");
@@ -2452,6 +2455,9 @@
   }
 
   function getAutonomousAgentPreviews() {
+    // Escritorios removidos em 2026-11-09.
+    return [];
+    /* eslint-disable no-unreachable */
     return [
       {
         id: "escritorio-raiane",
@@ -2754,8 +2760,6 @@
         ${systemCard("Comunidade", "Pauta de bairro e denúncia verificável.", "#comunidade")}
         ${systemCard("Fotos", "Galeria sem cortes agressivos.", "#galeriaFotos")}
         ${systemCard("Vídeos", "Notícias em vídeo, fonte e contexto visual.", "#videos")}
-        ${systemCard("Cheffe Call", "Entrada pública para atendimento, checagem e organização editorial.", "#agentesAutonomos", "is-admin")}
-        ${systemCard("Escritórios de agentes", "Entrada visual para os agentes autônomos e personagens do projeto.", "#agentesAutonomos")}
         ${systemCard("Comercial", "Anúncio e apoio local dentro do mesmo desenho.", "#monetizacao")}
       </div>`;
   }
@@ -2820,23 +2824,6 @@
   }
 
   function installCzsNavigationContract() {
-    const adminHref = "/cheffe-call.html?admin=1";
-    const topNav = $(".top-strip nav");
-    if (topNav) {
-      let admin = topNav.querySelector("a.czs-admin-entry, a[href*='cheffe-call.html']");
-      if (!admin) {
-        admin = document.createElement("a");
-        topNav.prepend(admin);
-      }
-      admin.href = adminHref;
-      admin.textContent = "Cheffe Call";
-      admin.classList.remove("v8-check-link");
-      admin.classList.add("v8-admin-link", "czs-admin-entry");
-      admin.title = "Acesso restrito da redação: a senha é solicitada na Cheffe Call.";
-      admin.setAttribute("aria-label", "Cheffe Call, acesso restrito da redação");
-      if (topNav.firstElementChild !== admin) topNav.prepend(admin);
-    }
-
     const aliasTarget = (id, target) => {
       if (document.getElementById(id)) return;
       const node = typeof target === "function" ? target() : $(target);
@@ -2853,9 +2840,7 @@
     aliasTarget("catalogo-telefonico", () => $$("#servicos .service-card").find((card) => /catálogo telefônico/i.test(card.textContent)) || $("#servicos"));
     aliasTarget("participacao-comunitaria", "#comunidade");
     aliasTarget("social", "#comunidade");
-    aliasTarget("agentesAutonomos", "#cheffeCallEditor");
     aliasTarget("checagemCzs", "#v8EditorialHelper");
-    aliasTarget("cheffePhotoDesk", "#galeriaFotos");
     aliasTarget("correcaoEditorialCzs", "#v8EditorialHelper");
 
     $$("a[href='#empregos']").forEach((link) => { link.href = "#vagasCzs"; });
@@ -2866,10 +2851,6 @@
     });
     $$('a[href*="privacidade.html"]').forEach((link) => { link.href = "/legal.html#privacidade"; });
     $$('a[href*="termos.html"]').forEach((link) => { link.href = "/legal.html#termos"; });
-    $$('a[href*="cheffe-call.html"]').forEach((link) => {
-      link.href = adminHref;
-      link.title = "Acesso restrito da redação: a senha é solicitada na Cheffe Call.";
-    });
 
     ["footerJumpTop", "footerJumpInline", "footerJumpBtn", "footerJumpFeed", "czsFooterGateButton"].forEach((id) => {
       const control = document.getElementById(id);
@@ -3618,7 +3599,6 @@
           </div>
           <div class="v8-photo-desk-lock-actions">
             <a class="btn" target="_blank" rel="noopener" href="${whatsappHref("Oi, CZS. Preciso de acesso de admin/super admin para Fotos e Enquadramento.")}">Solicitar acesso</a>
-            <a class="btn ghost" href="#cheffeCallEditor">Abrir Cheffe Call</a>
           </div>
         </div>`;
       return;
@@ -3837,14 +3817,12 @@
           ["Catálogo telefônico", "#catalogo-telefonico"],
           ["Pesquisa eleitoral", "pesquisa-acre-2026.html"],
           ["Resultados de pesquisa", "pesquisa-acre-2026.html#resultados"],
-          ["Escritórios de agentes", "#agentesAutonomos"],
         ])}
         ${footerColumn("Participe", [
           ["Enviar pauta", "#comunidade"],
           ["Perguntar ao CZS", "#assistantInline"],
           ["Resumo do dia", "#newsletter"],
           ["Seja apoiador", "#fundadores"],
-          ["Informar correção", "#cheffeCallEditor"],
           ["Falar no WhatsApp", SOCIAL_WHATSAPP],
         ])}
         ${footerColumn("Comercial", [
@@ -3856,10 +3834,7 @@
           ["Fale com comercial", "#monetizacao"],
         ])}
         ${footerColumn("Redação", [
-        ["Agentes autônomos", "#agentesAutonomos"],
-        ["Cheffe Call", "/cheffe-call.html?admin=1"],
         ["Checagem", "#checagemCzs"],
-          ["Fotos e enquadramento", "#cheffePhotoDesk"],
           ["Correções editoriais", "#correcaoEditorialCzs"],
           ["Fontes e arquivo", "#arquivoArtigoSystem"],
           ["Mapa do jornal", "#infosGerais"],
@@ -4763,7 +4738,6 @@
       "#newsletter",
       "#apoioLocal",
       "#arquivoArtigoSystem",
-      "#cheffeCallEditor",
       "#fullSiteFooter",
     ]);
     if (!directTargets.has(hash)) return;

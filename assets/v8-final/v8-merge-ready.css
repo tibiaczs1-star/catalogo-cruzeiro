@@ -16486,3 +16486,34 @@ body.v8-merge-ready .v8-continuous-card .actions .small-btn {
     justify-content: center !important;
   }
 }
+
+/* ============================================================
+   CZS 2026-11-09 — correcao do destaque principal
+   Antes: a <img> mantinha o tamanho natural (ex. 871px) dentro de
+   um container de 1450px, deixando a area preta visivel a direita.
+   Agora a midia sempre preenche o quadro; contain apenas controla
+   o corte, nunca o tamanho da caixa.
+   ============================================================ */
+body.v8-merge-ready #leadStory .lead-image > img,
+body.v8-merge-ready #leadStory .lead-image > video {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+body.v8-merge-ready #leadStory .lead-image.czs-media-contain > img,
+body.v8-merge-ready #leadStory .lead-image.czs-media-contain > video {
+  object-fit: contain !important;
+  padding: clamp(4px, .6vw, 10px) !important;
+  background: #06180f !important;
+}
+
+/* No mobile o destaque nao precisa da altura fixa de desktop. */
+@media (max-width: 760px) {
+  body.v8-merge-ready #leadStory .lead-image {
+    height: clamp(200px, 46vw, 300px) !important;
+  }
+}
