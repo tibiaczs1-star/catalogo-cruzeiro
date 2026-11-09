@@ -272,6 +272,73 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".ico",
   ".webmanifest"
 ]);
+// CZS 2026-11-09 — seguranca: arquivos de servidor, runtime e configuracao
+// nunca podem ser servidos como conteudo estatico. Antes de esta lista
+// existir, /server.js respondia 200 e expunha todo o backend.
+const PRIVATE_STATIC_FILES = new Set([
+  "server.js",
+  "render-start.js",
+  "runtime-config.js",
+  "ecosystem.config.cjs",
+  "pubpaid-runtime.js",
+  "cashier.js",
+  "arizona-ranch.js",
+  "analytics-client.js",
+  "engagement-api.js",
+  "render.yaml",
+  "package.json",
+  "package-lock.json",
+  ".env",
+  ".env.example",
+  ".env.local",
+  ".env.production",
+  ".gitignore",
+  ".vercelignore",
+  "vercel.json"
+]);
+
+// Extensoes de conteudo publico permitidas na raiz. Codigo de servidor
+// (.js de runtime) e bloqueado explicitamente por PRIVATE_STATIC_FILES.
+const SERVED_ROOT_EXTENSIONS = new Set([
+  ".html",
+  ".css",
+  ".js",
+  ".svg",
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".webp",
+  ".mp3",
+  ".ogg",
+  ".wav",
+  ".mp4",
+  ".pdf",
+  ".apk",
+  ".ico",
+  ".webmanifest",
+  ".txt",
+  ".xml",
+  ".json"
+]);
+
+// Arquivos da raiz liberados como estaticos. Todo o resto da raiz
+// (server.js, runtime, configs) fica fora do ar por padrao.
+const ROOT_PUBLIC_ASSETS = new Set([
+  "index.html",
+  "news-data.js",
+  "home.css",
+  "home-current-news.js",
+  "editorial-scope.js",
+  "favicon.ico",
+  "robots.txt",
+  "sitemap.xml",
+  "app.webmanifest",
+  "site.webmanifest",
+  "sw.js",
+  "catalogo-sw.js",
+  "app-sw.js"
+]);
+
 const PRIVATE_STATIC_SEGMENTS = new Set([
   ".codex-temp",
   ".codex-agents",
@@ -4461,6 +4528,20 @@ function isPublicStaticFile(filePath) {
 
   const segments = relativePath.split(path.sep).filter(Boolean);
   if (segments.some((segment) => PRIVATE_STATIC_SEGMENTS.has(segment))) {
+    return false;
+  }
+
+  // CZS 2026-11-09 — seguranca: na raiz, bloqueia por nome o que e
+  // codigo de servidor/config, e libera apenas extensoes de conteudo.
+  // (Lista branca por arquivo quebrou as subpaginas; bloquear por nome
+  // e extensao cobre o caso real que ficou exposto: server.js.)
+  if (segments.length === 1) {
+    const baseName = segments[0];
+    if (PRIVATE_STATIC_FILES.has(baseName)) return false;
+    if (/^\.env/i.test(baseName)) return false;
+    const ext = path.extname(baseName).toLowerCase();
+    if (SERVED_ROOT_EXTENSIONS.has(ext)) return true;
+    if (ROOT_PUBLIC_ASSETS.has(baseName)) return true;
     return false;
   }
 
