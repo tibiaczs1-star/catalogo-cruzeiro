@@ -25,15 +25,24 @@
   function getEditorialScope(item = {}) {
     const text = textOf(item);
     if (CRUZEIRO_PATTERN.test(text) || sourceIsOfficialCruzeiro(item)) {
-      return { scope: "cruzeiro-do-sul", localTier: 4, priority: 5400, editorialPriority: "cruzeiro-destaque" };
+      return { scope: "cruzeiro-do-sul", localTier: 5, priority: 6400, editorialPriority: "cruzeiro-destaque" };
     }
     if (JURUA_PATTERN.test(text)) {
-      return { scope: "jurua", localTier: 3, priority: 4400, editorialPriority: "jurua-destaque" };
+      return { scope: "jurua", localTier: 4, priority: 5400, editorialPriority: "jurua-destaque" };
     }
     if (ACRE_PATTERN.test(text)) {
       return { scope: "acre", localTier: 2, priority: 3400, editorialPriority: "acre-destaque" };
     }
     return { scope: "brasil-mundo", localTier: 0, priority: 0, editorialPriority: "" };
+  }
+
+  // CZS 2026-11-09 — diversão, lazer, comida e trends.
+  // A pedido editorial: essas pautas entram intercaladas, sem competir
+  // com notícia local dura (que é o que o leitor precisa primeiro).
+  const LEISURE_PATTERN = /\b(gastronomia|receita|restaurante|lanchonete|pizzaria|caf[eé]|bar\b|comida|culin[aá]ria|sabor|prato|card[aá]pio|feira gastron[oô]mica|happy hour)\b|\b(lazer|passeio|turismo|trilha|praia|banho de rio|parque|festival|show|m[uú]sica|cinema|teatro|esporte|futebol|jogo)\b|\b(trend|viral|meme|desafio|tiktok|reels|influenciador)\b/i;
+
+  function isLeisureItem(item = {}) {
+    return LEISURE_PATTERN.test(textOf(item));
   }
 
   function isLowSignalAdministrativeNotice(item = {}) {
@@ -55,8 +64,16 @@
       ...item,
       editorialScope: placement.scope,
       editorialLocalTier: placement.localTier,
-      editorialSurfaceTier: lowSignalAdministrativeNotice ? 1 : placement.localTier,
-      priority: lowSignalAdministrativeNotice ? Math.min(900, placement.priority) : placement.priority,
+      editorialSurfaceTier: lowSignalAdministrativeNotice
+        ? 1
+        : isLeisureItem(item) && placement.localTier < 3
+          ? 1
+          : placement.localTier,
+      priority: lowSignalAdministrativeNotice
+        ? Math.min(900, placement.priority)
+        : isLeisureItem(item) && placement.localTier < 3
+          ? 1200
+          : placement.priority,
       editorialPriority: lowSignalAdministrativeNotice ? "arquivo-administrativo" : placement.editorialPriority
     };
   }
@@ -89,5 +106,5 @@
     });
   }
 
-  return { getEditorialScope, decorateNewsItem, orderPortalStories, isLowSignalAdministrativeNotice };
+  return { getEditorialScope, decorateNewsItem, orderPortalStories, isLowSignalAdministrativeNotice, isLeisureItem };
 });

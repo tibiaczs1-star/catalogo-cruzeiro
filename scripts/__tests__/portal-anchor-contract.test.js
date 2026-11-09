@@ -21,19 +21,19 @@ test("atalhos principais apontam para secoes reais e intencionais", () => {
   assert.match(js, /#servicos/, "atalho de serviços deve permanecer ancorado");
 });
 
-test("rodapé é acessado pela seta discreta e Cheffe Call aponta para acesso restrito", () => {
+test("rodapé tem um único ponto de acesso visível e a Cheffe Call foi removida", () => {
   const js = read("assets/v8-final/v8-merge-ready.js");
   const css = read("assets/v8-final/v8-merge-ready.css");
+  const html = read("index.html");
 
   assert.match(js, /function installCzsNavigationContract\(\)/);
-  assert.match(js, /const adminHref = "\/cheffe-call\.html\?admin=1";/);
-  assert.match(js, /\["Cheffe Call", "\/cheffe-call\.html\?admin=1"\]/);
-  assert.match(js, /function installFloatingFooterControl\(\)/);
-  assert.match(js, /aria-label", "Ir para o rodapé"/);
-  assert.match(js, /Leitura contínua/);
+  // CZS 2026-11-09: Cheffe Call e Escritórios foram removidos do portal.
+  assert.doesNotMatch(js, /cheffe-call\.html/);
+  assert.doesNotMatch(html, /cheffe-call\.html/);
+  // O rodapé continua com um único acesso, agora por botão visível.
+  assert.match(html, /id="czsFooterCta"/);
+  assert.match(css, /\.czs-footer-cta/);
   assert.doesNotMatch(js, /function renderCheffeFooterAccess\(\)/);
-  assert.doesNotMatch(js, /renderNewsFooter\(\);\s*renderCheffeFooterAccess/);
-  assert.match(css, /#footerJumpFloat\.czs-footer-arrow/);
 });
 
 test("home preserva o feed aprovado e nao inicializa o pacote CZS Flow rejeitado", () => {

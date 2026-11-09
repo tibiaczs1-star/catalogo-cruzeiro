@@ -4331,6 +4331,10 @@ function sendJson(res, status, payload) {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
     "Content-Length": Buffer.byteLength(body),
+    // CZS 2026-11-09 — endurecimento de seguranca.
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Frame-Options": "SAMEORIGIN",
   });
   res.end(body);
 }
@@ -17600,6 +17604,10 @@ async function handleApi(req, res, pathname, searchParams) {
 
   // ===== CZS NEWS INGEST API (2026-11-09) =====
   // Permite publicar noticias por API para o portal se atualizar sozinho.
+  // CZS 2026-11-09 — limite simples de ingestao por janela de tempo,
+  // para evitar que um token vazado seja usado em rajada.
+  if (!global.__czsIngestWindows) global.__czsIngestWindows = new Map();
+
   if (req.method === "POST" && pathname === "/api/news/ingest") {
     const token = String(
       req.headers["x-ingest-token"] ||
@@ -17616,6 +17624,23 @@ async function handleApi(req, res, pathname, searchParams) {
     }
     if (!token || token !== expected) {
       return sendJson(res, 401, { ok: false, error: "Token de ingestao invalido." });
+    }
+
+    // Limite: 30 requisicoes por minuto por token.
+    {
+      const nowMs = Date.now();
+      const windowMs = 60 * 1000;
+      const bucket = global.__czsIngestWindows.get(token) || [];
+      const recent = bucket.filter((at) => nowMs - at < windowMs);
+      if (recent.length >= 30) {
+        return sendJson(res, 429, {
+          ok: false,
+          error: "Limite de ingestao atingido. Tente novamente em um minuto.",
+          retryAfterSeconds: Math.ceil((windowMs - (nowMs - recent[0])) / 1000)
+        });
+      }
+      recent.push(nowMs);
+      global.__czsIngestWindows.set(token, recent);
     }
 
     let body;

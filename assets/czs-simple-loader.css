@@ -65,3 +65,135 @@ html.czs-intro-release body.v8-merge-ready > #cinematicLoader ~ * {
 @media (prefers-reduced-motion: reduce) {
   #cinematicLoader.czs-simple-loader { transition: none !important; }
 }
+
+/* ============================================================
+   CZS 2026-11-09 — carregamento com logo e ceu de estrelas
+   Regras: nunca travar o portal, sumir sozinho, respeitar
+   prefers-reduced-motion e falhar aberto se o JS nao rodar.
+   ============================================================ */
+html.czs-simple-loader,
+html.czs-intro-lock {
+  background: #04101f !important;
+}
+
+#cinematicLoader.czs-simple-loader {
+  background: radial-gradient(circle at 50% 38%, #0d2b50 0%, #061627 46%, #020a14 100%) !important;
+  animation: czs-loader-failsafe 4.2s forwards !important;
+  overflow: hidden;
+}
+
+/* O ceu de estrelas agora e visivel (antes era escondido pelo seletor > :not) */
+#cinematicLoader.czs-simple-loader > .cosmic-depth,
+#cinematicLoader.czs-simple-loader > .spark-star-layer {
+  display: block !important;
+}
+
+#cinematicLoader.czs-simple-loader > .cosmic-depth {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: .5;
+  animation: czs-loader-rotor 14s linear infinite;
+}
+#cinematicLoader .cosmic-depth.depth-a {
+  inset: -20%;
+  background: conic-gradient(from 0deg, transparent 0 82%, rgba(77,163,255,.16) 92%, transparent 100%);
+}
+#cinematicLoader .cosmic-depth.depth-b {
+  inset: -8%;
+  background: conic-gradient(from 180deg, transparent 0 86%, rgba(240,180,41,.14) 95%, transparent 100%);
+  animation-duration: 22s;
+  animation-direction: reverse;
+}
+#cinematicLoader .cosmic-depth.depth-c {
+  inset: 6%;
+  background: radial-gradient(circle, rgba(77,163,255,.10), transparent 62%);
+  animation: none;
+}
+
+#cinematicLoader .spark-star-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#cinematicLoader .spark-star {
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  width: calc(3px * var(--s, 1));
+  height: calc(3px * var(--s, 1));
+  border-radius: 50%;
+  background: var(--c, #fff);
+  opacity: var(--o, .6);
+  transform: rotate(var(--r, 0deg)) scale(var(--b, 1));
+  box-shadow: 0 0 6px var(--c, #fff);
+  animation: czs-star-twinkle var(--t, 6s) ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes czs-star-twinkle {
+  0%, 100% { opacity: calc(var(--o, .6) * .35); transform: rotate(var(--r, 0deg)) scale(calc(var(--b, 1) * .8)); }
+  50%      { opacity: var(--o, .6); transform: rotate(var(--r, 0deg)) scale(var(--b, 1)); }
+}
+
+@keyframes czs-loader-rotor {
+  to { transform: rotate(360deg); }
+}
+
+/* Marca central: logo + texto, sobre o ceu */
+#cinematicLoader .czs-simple-loader__brand {
+  position: relative;
+  z-index: 3;
+  color: #eaf3ff;
+  gap: 16px;
+  animation: czs-loader-brand-in 700ms cubic-bezier(.22, 1, .36, 1) both;
+}
+#cinematicLoader .czs-simple-loader__brand img {
+  max-width: min(280px, 76vw);
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .55));
+}
+#cinematicLoader .czs-simple-loader__brand span {
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: rgba(234, 243, 255, .82);
+}
+
+@keyframes czs-loader-brand-in {
+  from { opacity: 0; transform: translateY(10px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Barra de progresso indeterminada sob a marca */
+#cinematicLoader .czs-simple-loader__brand::after {
+  content: "";
+  display: block;
+  width: min(220px, 60vw);
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #4da3ff, #f0b429, transparent);
+  background-size: 220% 100%;
+  animation: czs-loader-progress 1.25s linear infinite;
+}
+@keyframes czs-loader-progress {
+  from { background-position: 120% 0; }
+  to   { background-position: -120% 0; }
+}
+
+/* Falha aberta: mesmo sem JS, o portal aparece depois de 4,2 s. */
+@keyframes czs-loader-failsafe {
+  0%, 88% { opacity: 1; visibility: visible; }
+  99%, 100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cinematicLoader .cosmic-depth,
+  #cinematicLoader .spark-star,
+  #cinematicLoader .czs-simple-loader__brand,
+  #cinematicLoader .czs-simple-loader__brand::after {
+    animation: none !important;
+  }
+  #cinematicLoader .spark-star { opacity: var(--o, .6); }
+}

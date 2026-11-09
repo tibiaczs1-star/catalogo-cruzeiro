@@ -337,3 +337,29 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   CZS 2026-11-09 — contraste dos titulos da galeria
+   O czs-design-system.css carrega depois deste arquivo e aplica
+   --czs-color-ink (#122033). Sobre o fundo escuro da galeria
+   (#03101d) isso dava contraste de 1.17:1 — abaixo do minimo
+   WCAG AA (4.5:1). Aqui os titulos voltam para a cor clara.
+   ============================================================ */
+body .gallery-hero h1,
+body .gallery-hero h1 *,
+body .gallery-sections h2,
+body .gallery-sections h2 * {
+  color: var(--text) !important;
+}
+
+body .gallery-hero p,
+body .gallery-hero li,
+body .gallery-sections p {
+  color: var(--soft) !important;
+}
+
+body .gallery-hero-card span,
+body .gallery-hero-card strong,
+body .gallery-hero-card b {
+  color: var(--text) !important;
+}

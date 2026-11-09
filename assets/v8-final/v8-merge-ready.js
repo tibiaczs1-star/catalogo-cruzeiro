@@ -1135,16 +1135,6 @@
     const topNav = $(".top-strip nav");
     if (topNav && !topNav.dataset.v8QuickLinks) {
       topNav.dataset.v8QuickLinks = "1";
-      $$("a", topNav).forEach((link) => {
-        if (/chefe|cheffe/i.test(link.textContent || link.href)) {
-          link.textContent = "Cheffe Call";
-          link.href = "/cheffe-call.html?admin=1";
-          link.classList.remove("v8-check-link");
-          link.classList.add("v8-admin-link", "czs-admin-entry");
-          link.title = "Acesso restrito da redação: a senha é solicitada na Cheffe Call.";
-          topNav.prepend(link);
-        }
-      });
       [
         ["Galeria", "#galeriaFotos"],
         ["TV CZS", "#videos"],
@@ -1593,11 +1583,6 @@
         href: "#checagemCzs",
       },
       {
-        title: "Escritórios de agentes",
-        text: "Mostra os escritórios visuais e rotas públicas dos agentes do projeto.",
-        href: "#agentesAutonomos",
-      },
-      {
         title: "Vitrine de produtos",
         text: "Divulgação de produto local com foto, preço, descrição curta e botão para WhatsApp.",
         href: "#monetizacao",
@@ -1990,11 +1975,6 @@
       if (slug) {
         anchor.dataset.v8Slug = slug;
         anchor.href = v8Url({ slug });
-        return;
-      }
-      if (/\/cheffe-call\.html/i.test(href)) {
-        anchor.dataset.v8Remapped = "true";
-        anchor.href = "/cheffe-call.html?admin=1";
         return;
       }
       if (/\/privacidade\.html/i.test(href)) {
@@ -2437,7 +2417,7 @@
     section.classList.remove("v8-cheffe-command");
     section.classList.add("v8-reader-offices", "v8-autonomous-agents-gateway");
     section.innerHTML = `
-      <div class="panel pad v8-offices-workspace v8-agent-gateway" id="agentesAutonomos">
+      <div class="panel pad v8-offices-workspace v8-agent-gateway" id="czsAgentesRemovidos">
         <div class="v8-offices-placeholder" role="status">
           <div>
             <span>Cheffe Call</span>
@@ -3580,6 +3560,9 @@
   }
 
   function renderCheffePhotoDesk() {
+    // CZS 2026-11-09: painel de fotos da Cheffe removido junto com a Cheffe Call.
+    return;
+    /* eslint-disable no-unreachable */
     let section = $("#cheffePhotoDesk");
     const anchor = $("#cheffeCallEditor") || $("#arquivoArtigoSystem") || $("#galeriaFotos");
     if (!anchor?.parentElement) return;
@@ -3793,65 +3776,58 @@
         </nav>
       </div>
       <div class="v8-footer-grid">
-        ${footerColumn("Seções e notícias", [
+        ${footerColumn("Notícias", [
+          ["Últimas notícias", "#feed"],
           ["Plantão", "#ticker"],
-          ["Últimas notícias", "#latestThreeColumns"],
-          ["Todas as notícias", "#feed"],
-          ["Arquivo CZS", "#arquivoArtigoSystem"],
-          ["Vagas", "#vagasCzs"],
-          ["Polícia", "#feed"],
-          ["Prefeitura", "#feed"],
-          ["Saúde", "#feed"],
-          ["Educação", "#feed"],
-          ["Cultura & Social", "#social"],
-          ["Esporte", "#feed"],
-          ["Galeria de fotos", "#galeriaFotos"],
+          ["Início", "#topo"],
+          ["Arquivo completo", "arquivo.html"],
+          ["Fontes monitoradas", "fontes-monitoradas.html"],
+          ["Leitor de matéria", "noticia.html"],
           ["Vídeos", "#videos"],
+          ["Galeria de fotos", "galeria.html"],
         ])}
         ${footerColumn("Serviços úteis", [
-          ["Serviços públicos", "#servicos"],
+          ["Catálogo de serviços", "catalogo-servicos.html"],
           ["Tempo e alertas", "#tempo"],
-          ["Vagas publicadas", "#vagasCzs"],
+          ["Catálogo telefônico", "#catalogo-telefonico"],
+          ["Vagas de emprego", "#vagasCzs"],
           ["Concursos", "#concursosCzs"],
           ["Agenda cultural", "#agenda"],
-          ["Catálogo telefônico", "#catalogo-telefonico"],
-          ["Pesquisa eleitoral", "pesquisa-acre-2026.html"],
-          ["Resultados de pesquisa", "pesquisa-acre-2026.html#resultados"],
+          ["Pauta do bairro", "#comunidade"],
+          ["Remoção de conteúdo", "remocao.html"],
         ])}
-        ${footerColumn("Participe", [
-          ["Enviar pauta", "#comunidade"],
-          ["Perguntar ao CZS", "#assistantInline"],
-          ["Resumo do dia", "#newsletter"],
-          ["Seja apoiador", "#fundadores"],
-          ["Falar no WhatsApp", SOCIAL_WHATSAPP],
+        ${footerColumn("Comunidade e cultura", [
+          ["Projetos e plataformas", "projetos.html"],
+          ["Estudantes", "estudantes.html"],
+          ["Infantil", "infantil.html"],
+          ["Animes", "animes.html"],
+          ["Esttiles", "esttiles.html"],
+          ["Games", "games.html"],
+          ["Palavras da Rosa", "palavras-da-rosa.html"],
+          ["Book Raiane", "bookray/"],
         ])}
-        ${footerColumn("Comercial", [
-          ["Anuncie no portal", "#monetizacao"],
+        ${footerColumn("Anuncie e comercial", [
+          ["Divulgue sua empresa", "divulgue.html"],
           ["Publicidade local", "#monetizacao"],
-          ["Mídia para empresas", "#monetizacao"],
-          ["Parcerias", "#fundadores"],
-          ["Newsletter comercial", "#newsletter"],
-          ["Fale com comercial", "#monetizacao"],
+          ["Vendas", "vendas.html"],
+          ["Seja fundador", "#fundadores"],
+          ["Newsletter grátis", "#newsletter"],
+          ["PubPaid", "pubpaid.html"],
+          ["Aplicativo Android", "lancamento-app.html"],
         ])}
-        ${footerColumn("Redação", [
-        ["Checagem", "#checagemCzs"],
-          ["Correções editoriais", "#correcaoEditorialCzs"],
-          ["Fontes e arquivo", "#arquivoArtigoSystem"],
-          ["Mapa do jornal", "#infosGerais"],
-        ])}
-        ${footerColumn("Legal", [
-          ["Quem somos", "legal.html"],
+        ${footerColumn("Institucional", [
+          ["Legal", "legal.html"],
           ["Política de Privacidade", "legal.html#privacidade"],
           ["Termos de Uso", "legal.html#termos"],
-          ["Política comercial", "#monetizacao"],
-          ["Remover conteúdo", "remocao.html"],
-          ["Contato", `mailto:${SOCIAL_EMAIL}`],
+          ["Candidato", "candidato.html"],
+          ["Pesquisa Acre 2026", "pesquisa-acre-2026.html"],
+          ["Manutenção", "maintenance.html"],
           ["Voltar ao topo", "#topo"],
         ])}
       </div>
       <div class="v8-footer-bottom">
         <span>Catálogo Cruzeiro do Sul • Vale do Juruá • Acre</span>
-        <span>Leitura contínua: o rodapé é acessado pela seta discreta da página.</span>
+        <span>Mapa completo: use o botão "Ver tudo no rodapé" para voltar a este índice.</span>
       </div>`;
 
     const compact = $("#footerCompact");
@@ -5928,14 +5904,6 @@
         route: ["#servicos", "point-right", "Vou te levar para os servicos uteis."],
       },
       {
-        id: "escritorios",
-        pose: "call-attention",
-        title: "Escritórios",
-        keywords: ["escritorio", "escritórios", "escritorios", "office", "redacao", "redação", "cheffe", "equipe"],
-        answer: "Os escritorios recebem ordens pela Cheffe Call e distribuem para redacao, comunidade, fotos, servicos e comercial.",
-        route: ["#agentesAutonomos", "call-attention", "Entrada visual dos agentes autônomos."],
-      },
-      {
         id: "arquivo",
         pose: "point-right",
         title: "Arquivo",
@@ -6291,7 +6259,6 @@
         services: ["#servicos", "present-left", "Aqui ficam os serviços úteis do dia."],
         games: ["#pubpaidAtalhos", "celebrate", "Pesquisas políticas e dados estão logo aqui."],
         community: ["#comunidade", "community", "Sentei aqui para receber sua pauta do bairro."],
-        cheffe: ["#agentesAutonomos", "call-attention", "Entrada visual dos agentes autônomos."],
         gallery: ["#galeriaFotos", "present-both", "Galeria do Vale e pontos de Cruzeiro do Sul."],
         footer: ["#fullSiteFooter", "point-right", "Mapa completo no rodapé."],
       };

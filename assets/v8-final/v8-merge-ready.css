@@ -16517,3 +16517,67 @@ body.v8-merge-ready #leadStory .lead-image.czs-media-contain > video {
     height: clamp(200px, 46vw, 300px) !important;
   }
 }
+
+/* ============================================================
+   CZS 2026-11-09 — botao fixo "Ver tudo no rodape"
+   Pedido: acesso ao mapa completo sempre visivel e obvio.
+   ============================================================ */
+.czs-footer-cta {
+  position: fixed;
+  right: clamp(12px, 2vw, 28px);
+  bottom: clamp(12px, 2vw, 26px);
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0b3a78, #145ea8);
+  color: #fff !important;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, .22);
+  box-shadow: 0 10px 30px rgba(6, 24, 52, .42), 0 0 0 0 rgba(20, 94, 168, .55);
+  animation: czs-footer-cta-pulse 2.6s cubic-bezier(.4, 0, .6, 1) infinite;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.czs-footer-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(6, 24, 52, .5);
+}
+.czs-footer-cta:focus-visible {
+  outline: 3px solid #f2cf78;
+  outline-offset: 3px;
+}
+.czs-footer-cta__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+}
+
+@keyframes czs-footer-cta-pulse {
+  0%, 100% { box-shadow: 0 10px 30px rgba(6, 24, 52, .42), 0 0 0 0 rgba(20, 94, 168, .55); }
+  50%      { box-shadow: 0 10px 30px rgba(6, 24, 52, .42), 0 0 0 12px rgba(20, 94, 168, 0); }
+}
+
+/* Em telas pequenas o texto encolhe, o botao continua tocavel (>=44px). */
+@media (max-width: 620px) {
+  .czs-footer-cta { padding: 11px 15px; font-size: 13.5px; }
+  .czs-footer-cta__icon { width: 26px; height: 26px; }
+}
+@media (max-width: 400px) {
+  .czs-footer-cta__text { display: none; }
+  .czs-footer-cta { padding: 12px; }
+}
+
+/* Acessibilidade: sem animacao para quem pediu menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  .czs-footer-cta { animation: none; transition: none; }
+  .czs-footer-cta:hover { transform: none; }
+}
