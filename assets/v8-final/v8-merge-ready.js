@@ -4446,12 +4446,13 @@
     const sourceStories = balancedPriorityStories(allStories
       .filter((story) => story?.slug && bySlug.has(story.slug))
       .filter((story) => !protectedHeroSlugs.has(story.slug))
-      .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a))
-      .slice(0, 84));
-    const source = dynamicFeedEntries(sourceStories, 72);
+      .sort((a, b) => storyPriorityScore(b) - storyPriorityScore(a) || storyTimestamp(b) - storyTimestamp(a)));
+    // CZS 2026-11-09 — fluxo continuo tipo MSN: o acervo inteiro entra no scroll,
+    // carregado em lotes conforme o leitor desce a pagina.
+    const source = dynamicFeedEntries(sourceStories, Math.max(600, sourceStories.length));
     if (!source.length) return;
     let index = 0;
-    const batchSize = 18;
+    const batchSize = 12;
     const section = document.createElement("section");
     section.id = "v8ContinuousScroll";
     section.className = "section v8-continuous-scroll";
@@ -4460,7 +4461,7 @@
         <div>
           <div class="section-kicker">Mais notícias</div>
           <h2>Continue rolando</h2>
-          <p>Depois da apresentação principal e dos módulos secundários, o CZS entra no fluxo de notícias contínuas. O mapa da página fica no rodapé, logo abaixo.</p>
+          <p>O acervo completo do CZS carrega conforme você desce: quanto mais rola, mais notícias aparecem. O mapa da página fica no rodapé.</p>
         </div>
       </div>
       <div class="v8-continuous-grid" id="v8ContinuousGrid"></div>
