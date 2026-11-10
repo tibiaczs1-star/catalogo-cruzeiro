@@ -7506,6 +7506,50 @@ function normalizeArticleRecord(item) {
   };
 }
 
+// Registros retirados da publicacao. O disco do Render e persistente, entao
+// um item removido do repositorio continua no DATA_DIR ate ser filtrado aqui.
+const RETIRED_NEWS_IDS = new Set([
+  "czs-real-video-001"
+]);
+
+// Enderecos locais/privados nunca funcionam para o visitante. Quando chegam
+// por dados antigos, viram video quebrado e requisicao bloqueada.
+function isNonPublicMediaUrl(value = "") {
+  const raw = String(value || "").trim();
+  if (!raw) return false;
+  return /^(?:https?:)?\/\/(?:localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0|10(?:\.\d{1,3}){3}|192\.168(?:\.\d{1,3}){2}|172\.(?:1[6-9]|2\d|3[01])(?:\.\d{1,3}){2})(?::\d+)?(?:\/|$)/i.test(raw);
+}
+
+function sanitizeRawNewsItem(item) {
+  if (!item || typeof item !== "object") {
+    return item;
+  }
+
+  let next = item;
+  const isLocalVideo = isNonPublicMediaUrl(item.videoUrl);
+  const mediaVideoUrl = item.media && item.media.videoUrl;
+  const mediaUrl = item.media && item.media.url;
+  const isLocalMedia =
+    (item.media && item.media.type === "video" && (isNonPublicMediaUrl(mediaVideoUrl) || isNonPublicMediaUrl(mediaUrl))) ||
+    (item.media && item.media.type === "video" && !mediaVideoUrl && !mediaUrl);
+
+  if (isLocalVideo || isLocalMedia) {
+    next = { ...next, videoUrl: "", media: isLocalMedia ? null : item.media };
+  }
+
+  if (isNonPublicMediaUrl(item.imageUrl)) {
+    next = { ...next, imageUrl: "" };
+  }
+  if (isNonPublicMediaUrl(item.feedImageUrl)) {
+    next = { ...next, feedImageUrl: "" };
+  }
+  if (isNonPublicMediaUrl(item.sourceImageUrl)) {
+    next = { ...next, sourceImageUrl: "" };
+  }
+
+  return next;
+}
+
 function getRawNewsItems() {
   const runtime = readMergedNewsCollection("runtime-news.json");
   const archive = readMergedNewsCollection("news-archive.json");
@@ -7515,11 +7559,12 @@ function getRawNewsItems() {
     .concat(archive)
     .concat(staticNews);
 
-  if (fileItems.length > 0) {
-    return fileItems;
-  }
+  const source = fileItems.length > 0 ? fileItems : parseHomeLinkedArticleFallbacks();
 
-  return parseHomeLinkedArticleFallbacks();
+  return source
+    .filter((item) => !(item && RETIRED_NEWS_IDS.has(String(item.id || "").trim())))
+    .filter((item) => !(item && String(item.slug || "").trim() === "demonstracao-tecnica-nvenc-rtx-5070"))
+    .map(sanitizeRawNewsItem);
 }
 
 function getPublicNewsTimestamp(item = {}) {
