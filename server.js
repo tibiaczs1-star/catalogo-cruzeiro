@@ -8070,9 +8070,11 @@ function buildArticleNewsApiPayload(limit = 1000, options = {}) {
   const orderedItems =
     sort === "latest"
       ? eligibleItems.slice().sort(sortArticleItems)
-      : sort === "editorial"
-        ? orderPortalStories(eligibleItems)
-        : eligibleItems;
+      : // CZS 2026-11-10 — sem `sort` explicito, usa a ordem editorial e nao
+        // a ordem de chegada. O portal e do Vale do Jurua: noticia local
+        // primeiro, nacional depois. Antes, quem chegasse na rodada aparecia
+        // antes, e nota de fora empurrava pauta daqui para baixo.
+        orderPortalStories(eligibleItems);
   const visibleItems = orderedItems.slice(0, safeLimit);
 
   return {
