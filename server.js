@@ -83,7 +83,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "arizona-pub-20260905-01";
+const PUBPAID_CLIENT_BUILD_VERSION = "arizona-pub-20261110-restore1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -7019,6 +7019,9 @@ const SURREAL_LAYER_TAG =
   '<script src="/surreal/surreal.js?v=20261110-s4" defer data-czs-surreal="1"></script>';
 // Enfeite do enxame: pontos de luz que montam os blocos um a um.
 const ENXAME_TAG = '<script src="/enxame/enxame.js?v=20261110-e6" defer data-czs-enxame="1"></script>';
+// Swarm Rebuild: o portal se reconstroi na frente do leitor uma vez por sessao.
+// Tecnica adaptada do repositorio MIT JoelBastoneLopez/swarm-rebuild.
+const SWARM_REBUILD_TAG = '<script src="/enxame/swarm-rebuild.js?v=20261110-sr1" defer data-czs-swarm-rebuild="1"></script>';
 const AGENTE_VIVO_EXCLUDED_FILES = new Set([
   "maintenance.html",
   "pubpaid.html",
@@ -7043,9 +7046,12 @@ function injectAgenteVivo(html) {
   if (/<html[^>]*\bczs-agente-vivo-offline\b/i.test(html)) return html;
 
   const wantsEnxame = !html.includes('data-czs-enxame="1"') && !/<html[^>]*\bczs-enxame-offline\b/i.test(html);
-  if (!wantsEnxame) return html;
+  const wantsSwarm =
+    !html.includes('data-czs-swarm-rebuild="1"') && !/<html[^>]*\bczs-swarm-offline\b/i.test(html);
+  if (!wantsEnxame && !wantsSwarm) return html;
 
   const tags = [];
+  if (wantsSwarm) tags.push(SWARM_REBUILD_TAG);
   if (wantsEnxame) tags.push(ENXAME_TAG);
   const payload = "  " + tags.join("\n  ");
 

@@ -9,7 +9,6 @@ export const PUBPAID_TEXTURE_KEYS = {
   playerFemaleIdlePhone: "ppg-player-female-idle-phone-sheet",
   waiterHero: "ppg-waiter-hero-sprite",
   waiterLobby: "ppg-waiter-lobby-sprite",
-  -sprite",
   waiterLobbySpeaking: "ppg-waiter-lobby-speaking-sprite",
   singer: "ppg-singer-sprite",
   singerLobby: "ppg-singer-lobby-sprite",
