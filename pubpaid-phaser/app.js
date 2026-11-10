@@ -16,7 +16,7 @@ import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260527-chessfast1";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260527-chessfast1";
 import { UIScene } from "./scenes/UIScene.js?v=20260527-chessfast1";
 
-const PUBPAID_BUILD_VERSION = "20260527-chessfast1";
+const PUBPAID_BUILD_VERSION = "arizona-pub-20261110-restore1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 const startupParams = new URLSearchParams(window.location.search || "");
 const silentAudioParam = String(startupParams.get("silent") || startupParams.get("mute") || startupParams.get("audio") || "").toLowerCase();
