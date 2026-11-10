@@ -886,13 +886,39 @@ const normalizeMarkerText = (value = "") =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
+// CZS 2026-11-10 - quebra em frases sem estragar numeros. O padrao antigo
+// (match(/[^.!?]+[.!?]?/g)) tratava todo ponto como fim de frase, entao
+// "1.171 quilometros" virava "1." + "171 quilometros" no corpo da materia.
+// Um ponto so encerra a frase quando nao esta entre digitos e nao separa
+// milhar (ponto + espaco + digito).
 const splitIntoSentences = (value = "") => {
   const cleaned = normalizeEditorialText(value);
   if (!cleaned) {
     return [];
   }
 
-  return (cleaned.match(/[^.!?]+[.!?]?/g) || [])
+  const sentences = [];
+  let start = 0;
+  for (let i = 0; i < cleaned.length; i += 1) {
+    const char = cleaned[i];
+    if (char !== "." && char !== "!" && char !== "?") continue;
+    const prev = cleaned[i - 1] || "";
+    const next = cleaned[i + 1] || "";
+    const next2 = cleaned[i + 2] || "";
+    const betweenDigits = /\d/.test(prev) && /\d/.test(next);
+    const thousandsBreak = /\d/.test(prev) && /\s/.test(next) && /\d/.test(next2);
+    if (betweenDigits || thousandsBreak) continue;
+    let end = i + 1;
+    while (end < cleaned.length && /\s/.test(cleaned[end])) end += 1;
+    const sentence = cleaned.slice(start, end).trim();
+    if (sentence) sentences.push(sentence);
+    start = end;
+    i = end - 1;
+  }
+  const tail = cleaned.slice(start).trim();
+  if (tail) sentences.push(tail);
+
+  return sentences
     .map((sentence) => normalizeParagraph(sentence))
     .filter((sentence) => sentence.length > 18);
 };
@@ -1764,6 +1790,14 @@ const applyDetailHeroImage = async (article = {}) => {
   applyResolvedDetailHeroImage(resolvedImageUrl, article);
 };
 
+// CZS 2026-11-10 — o corpo da materia usa apenas texto que veio da fonte.
+// Antes, quando o item nao tinha corpo, esta funcao montava tres paragrafos
+// fixos ("<Fonte> publicou em <data> a base desta noticia sobre...", "... e o
+// eixo mais concreto ...", "Como o material original ainda nao trouxe
+// desenvolvimento suficiente...") que se repetiam em toda materia sem corpo.
+// Isso e texto de preenchimento: o leitor chamou de IA slop e com razao.
+// Agora o corpo e montado com as frases reais do resumo/lede da fonte;
+// sem material real, devolve lista vazia e a pagina mostra so o que existe.
 const getExpandedBodyParagraphs = (article) => {
   const baseParagraphs = Array.isArray(article.body)
     ? article.body.map(normalizeEditorialText).filter(Boolean)
@@ -1780,21 +1814,26 @@ const getExpandedBodyParagraphs = (article) => {
     }
   }
 
-  const title = normalizeEditorialText(article.title || "o assunto");
-  const sourceName = normalizeEditorialText(article.sourceName || "a fonte consultada");
-  const category = normalizeEditorialText(article.category || "notícia local").toLowerCase();
-  const dateLabel = getArticleDateLabel(article);
-  const sourceLabel = normalizeEditorialText(article.sourceLabel || "");
-  const highlights = dedupeTextList(article.highlights || []).filter(
-    (item) => item !== fallbackLede && item !== title
+  // Sem corpo proprio: usa o texto real da fonte. O resumo costuma ser o
+  // primeiro paragrado da materia original.
+  const realText = normalizeEditorialText(
+    article.summary || article.lede || article.analysis || ""
   );
-  const firstHighlight = highlights[0] || sourceLabel || title;
+  if (!realText) {
+    return [];
+  }
 
-  return [
-    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e depende de servicos, seguranca, mobilidade, saude, educacao ou decisao publica local.`,
-    `${firstHighlight} e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a tres pontos: origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.`,
-    "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-  ];
+  const sentences = splitIntoSentences(realText);
+  if (sentences.length >= 3) {
+    // Agrupa de duas em duas frases para virar paragrafo legivel.
+    const paragraphs = [];
+    for (let i = 0; i < sentences.length; i += 2) {
+      paragraphs.push(sentences.slice(i, i + 2).join(" "));
+    }
+    return paragraphs.filter((paragraph) => !isRepeatedEditorialParagraph(paragraph, fallbackLede));
+  }
+
+  return isRepeatedEditorialParagraph(realText, article.lede || "") ? [] : [realText];
 };
 
 const buildEditorialFactTabs = (article = {}) => {
@@ -1824,8 +1863,7 @@ const buildEditorialFactTabs = (article = {}) => {
       ...cleanHighlights,
       leadSentence,
       cleanAnalysis,
-      sourceLabel && sourceLabel !== title ? `O eixo central da noticia é: ${sourceLabel}.` : "",
-      `O impacto imediato desta matéria cai sobre ${categoryLower} e pede atenção para os efeitos práticos no dia a dia.`
+      sourceLabel && sourceLabel !== title ? `O eixo central da noticia é: ${sourceLabel}.` : ""
     ],
     4
   );
@@ -1833,7 +1871,7 @@ const buildEditorialFactTabs = (article = {}) => {
   const truthItems = getLimitedItems(
     [
       ...truthSentences.slice(0, 3),
-      `Está confirmado que a noticia-base foi publicada por ${sourceName} em ${dateLabel}.`,
+      `Publicação original: ${sourceName}, ${dateLabel}.`,
       sourceLabel ? `A referência aberta consultada foi: ${sourceLabel}.` : ""
     ],
     4

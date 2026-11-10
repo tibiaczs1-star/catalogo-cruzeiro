@@ -7446,8 +7446,23 @@ function normalizeEditorialFingerprint(value = "") {
     .trim();
 }
 
+// CZS 2026-11-10 - texto de formula gerado pelo proprio portal quando o
+// sanitizador achava que a materia estava em ingles. Nao fala nada do fato:
+// so anuncia que "a fonte publicou". O leitor ve a mesma frase em dezenas de
+// materias. Este teste reconhece o padrao para poder descarta-lo.
+const HOLLOW_SUMMARY_PATTERN =
+  /\bpublicou uma atualiza[cç][aã]o (?:sobre|internacional sobre)\b|\b(?:o portal )?mant[eé]m (?:a refer[eê]ncia|o link) da fonte original\b|\bapresenta o tema em portugu[eê]s para acompanhamento\b|\bpermanece no acervo como acompanhamento de fonte externa\b/i;
+
+function isHollowSummaryText(value = "") {
+  return HOLLOW_SUMMARY_PATTERN.test(String(value || ""));
+}
+
 function stripLegacyEditorialSummary(value = "") {
-  return cleanShortText(stripHtml(value), 500)
+  const cleaned = cleanShortText(stripHtml(value), 500);
+  // Formula pura: nao sobra nada de fato. Devolve vazio e o chamador usa o
+  // titulo, em vez de publicar uma frase que nao diz nada.
+  if (isHollowSummaryText(cleaned)) return "";
+  return cleaned
     .replace(
       /\s*A fonte(?:\s+[\wÀ-ÿ-]+)?\s+consultada\s+traz\s+a\s+base\s+da\s+publica[cç][aã]o,?\s+e\s+(?:o\s+)?portal\s+acompanha\s+novas\s+atualiza[cç][oõ]es\s+antes\s+de\s+ampliar\s+o\s+texto\.?$/i,
       ""
@@ -7531,14 +7546,19 @@ function buildFallbackEditorialBody(item = {}) {
   // tres paragrafos fixos ("<Fonte> registrou em <data>: ...", "Impacto
   // pratico: ...", "O que seguir: ...") que se repetiam em toda materia e
   // nao informavam nada. E o texto de preenchimento que o leitor chama de
-  // IA slop. Agora o corpo usa o resumo real da fonte; se nao houver,
-  // devolve vazio e a pagina mostra so o que existe.
-  const summary = cleanFeedText(item.summary || item.description || item.lede || "");
-  return summary ? [summary] : [];
+  // IA slop. Agora o corpo e o resto do texto real da fonte depois da
+  // chamada; sem resto, devolve vazio e a pagina mostra so o que existe.
+  const fullText = cleanFeedText(item.summary || item.description || item.lede || "");
+  if (!fullText) return [];
+  return splitArticleText(fullText).body;
 }
 
 function normalizeEditorialBody(item = {}) {
-  const lede = item.lede || item.summary || item.description || "";
+  // Compara com a chamada (curta), nao com o texto inteiro: senao um corpo
+  // legitimo que comeca igual a chamada era descartado como repeticao.
+  const fullText = item.fullText || item.summary || item.description || item.lede || "";
+  const kicker = item.lede || splitArticleText(fullText).kicker || "";
+  const lede = kicker;
   const body = Array.isArray(item.body) ? item.body.map((line) => cleanFeedText(line)).filter(Boolean) : [];
   const uniqueBody = body.filter(
     (paragraph) => !isRepeatedEditorialText(paragraph, lede) && !isLegacyFallbackEditorialBody(paragraph)
@@ -7673,6 +7693,104 @@ function buildRaylNarrationTextForArticle(item = {}) {
   );
 }
 
+// Chamada curta da materia: uma ou duas frases, no maximo 260 caracteres.
+// O texto inteiro continua no corpo; a chamada so abre a leitura.
+// Separa texto real da fonte em chamada curta e corpo. A chamada e a
+// primeira frase (ou as duas primeiras, se a primeira for muito curta); o
+// corpo e o resto, agrupado de duas em duas frases por paragrafo. Trabalha
+// por frase, nunca por corte de caractere, para nao comecar no meio de uma
+// palavra. Sem sobra de texto, o corpo fica vazio e a materia mostra so a
+// chamada, em vez de repetir o mesmo texto duas vezes na tela.
+// CZS 2026-11-10 - quebra texto em frases sem estragar numeros.
+// O padrao antigo (match(/[^.!?]+[.!?]?/g)) tratava todo ponto como fim
+// de frase: 1.171 quilometros virava 1. + 171 quilometros, e 399,4 mil
+// quebrava no separador de milhar. Como o corpo da materia e montado a
+// partir dessas frases, o texto publicado saia cortado no meio do numero.
+// A versao canonica fica em scripts/lib/split-sentences.js; aqui ela e
+// repetida porque o servidor nao carrega scripts/ em producao.
+const SENTENCE_END = /[.!?…]/;
+
+function splitSentences(value = "") {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (!text) return [];
+
+  const sentences = [];
+  let start = 0;
+
+  for (let i = 0; i < text.length; i += 1) {
+    if (!SENTENCE_END.test(text[i])) continue;
+
+    const prev = text[i - 1] || "";
+    const next = text[i + 1] || "";
+    const next2 = text[i + 2] || "";
+
+    // Decimal: 158,32 nao entra aqui, mas 1.171 e 3.5 entram.
+    const betweenDigits = /\d/.test(prev) && /\d/.test(next);
+    // Milhar: "1.171" com espaco depois nao e fim de frase.
+    const thousandsBreak = /\d/.test(prev) && /\s/.test(next) && /\d/.test(next2);
+    // Abreviacao curta conhecida (Sr., Dra., etc.) nao fecha frase.
+    const tail = text.slice(start, i);
+    const lastWord = (tail.match(/[A-Za-zÀ-ÿ.]+$/) || [""])[0];
+    const abbreviation =
+      /^(sr|sra|dr|dra|prof|profa|exmo|exma|av|cel|gen|cap|ten|min|p[aá]g|num|vol|art|fig|obs|etc)$/i.test(
+        lastWord.replace(/\.$/, "")
+      );
+
+    if (betweenDigits || thousandsBreak || abbreviation) continue;
+
+    // Consome o ponto final e os espacos seguintes.
+    let end = i + 1;
+    while (end < text.length && /\s/.test(text[end])) end += 1;
+
+    const sentence = text.slice(start, end).trim();
+    if (sentence) sentences.push(sentence);
+    start = end;
+    i = end - 1;
+  }
+
+  const tail = text.slice(start).trim();
+  if (tail) sentences.push(tail);
+
+  return sentences.filter(Boolean);
+}
+
+const ARTICLE_WS = new RegExp("[" + String.fromCharCode(92) + "s" + String.fromCharCode(92) + "u00a0]+", "g");
+
+function collapseArticleWhitespace(value = "") {
+  return String(value || "").replace(ARTICLE_WS, " ").trim();
+}
+
+function splitArticleText(fullText = "") {
+  const text = collapseArticleWhitespace(fullText);
+  if (!text) return { kicker: "", body: [] };
+
+  // Quebra em frases sem estragar numeros ("1.171 km", "US$ 399,4 mil").
+  // O padrao antigo cortava todo ponto como fim de frase.
+  const sentences = splitSentences(text);
+
+  if (!sentences.length) return { kicker: text, body: [] };
+
+  let consumed = 1;
+  if (sentences[0].length < 60 && sentences.length > 1) consumed = 2;
+  // Se a primeira frase e longa, ela inteira vira chamada: cortar no meio
+  // da frase deixaria o corpo comecando numa palavra solta.
+  const kicker = sentences.slice(0, consumed).join(" ");
+  const rest = sentences.slice(consumed);
+
+  if (!rest.length) return { kicker, body: [] };
+
+  const body = [];
+  for (let i = 0; i < rest.length; i += 2) {
+    body.push(collapseArticleWhitespace(rest.slice(i, i + 2).join(" ")));
+  }
+
+  return { kicker, body: body.filter(Boolean) };
+}
+
+function buildArticleKicker(value = "") {
+  return splitArticleText(value).kicker;
+}
+
 function normalizeArticleRecord(item) {
   const title = String(item.title || "Atualizacao");
   const isMailzaPriority = isMailzaPriorityArticle(item);
@@ -7690,10 +7808,17 @@ function normalizeArticleRecord(item) {
   const sourceUrl = item.sourceUrl || item.url || item.link || "#";
   const publishedAt = item.publishedAt || item.date || item.createdAt || new Date().toISOString();
   const slug = String(item.slug || slugify(title) || item.id || "").trim();
-  const cleanSummary =
-    stripLegacyEditorialSummary(item.summary || item.lede || item.description || "") || "Sem resumo.";
-  const cleanLede =
-    stripLegacyEditorialSummary(item.lede || item.summary || item.description || "") || cleanSummary;
+  // CZS 2026-11-10 - separa chamada e texto. Antes summary e lede recebiam
+  // o mesmo texto inteiro, e o corpo tambem. A pagina entao descartava o
+  // corpo por ser repeticao da chamada e a materia ficava sem paragrafo
+  // nenhum abaixo do titulo. Agora a chamada e curta (uma ou duas frases)
+  // e o texto completo vai no corpo.
+  const fullText =
+    stripLegacyEditorialSummary(item.summary || item.lede || item.description || "") || "";
+  // Sem texto real: usa o titulo. "Sem resumo." era um rotulo vazio que
+  // aparecia igual em toda materia sem corpo; o titulo ao menos informa.
+  const cleanSummary = fullText || cleanShortText(title, 180);
+  const cleanLede = buildArticleKicker(fullText) || cleanSummary;
   const editorialGate = buildEditorialGate({ ...item, sourceName, sourceUrl, title });
   const raylNarrationText = buildRaylNarrationTextForArticle({
     ...item,
@@ -7722,7 +7847,14 @@ function normalizeArticleRecord(item) {
     lede: cleanLede,
     summary: cleanSummary,
     analysis: item.analysis || "",
-    body: normalizeEditorialBody({ ...item, title, sourceName, sourceLabel: item.sourceLabel || title }),
+    body: normalizeEditorialBody({
+      ...item,
+      title,
+      sourceName,
+      sourceLabel: item.sourceLabel || title,
+      lede: cleanLede,
+      fullText
+    }),
     highlights: Array.isArray(item.highlights) ? item.highlights.filter(Boolean) : [],
     development: Array.isArray(item.development) ? item.development.filter(Boolean) : [],
     imageUrl: resolveSafeArticleRecordImage(
