@@ -6583,6 +6583,7 @@ const PORTUGUESE_CARD_SIGNAL_PATTERN =
   /\b(uma?|pela?|pelos?|das?|dos?|para|com|sobre|entre|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?|comunidades?|f[aã]s|lan[cç]amentos?|cultura|publico|p[uú]blico)\b/i;
 const PUBLIC_NEWS_ENGLISH_MARKER_PATTERN =
   /\b(?:whether|it's|according to|today|started|rolling|coming|expected|available|company|people|users|feature|features|released|announced|podcast|fitness|playlist|dummy unit|foldable|touchscreen|gaming|mouse|smart lighting|mother's day|who's asking|the auto design world|school districts|three-year degrees|double milestone|opening the doors|phasmophobia|google started|microsoft will let|alex jones has uncovered|xreal’s best|xreal's best|360-degree cameras have|cybercab goes into production|skylight’s color-coded|skylight's color-coded|acclaimed japanese director)\b/i;
+const PUBLIC_NEWS_ENGLISH_MARKER_PATTERN_G = new RegExp(PUBLIC_NEWS_ENGLISH_MARKER_PATTERN.source, "gi");
 const PUBLIC_NEWS_KNOWN_URL_TITLES = new Map([
   ["best-mothers-day-gift-ideas-2026-mom-tech-gadgets", "Ideias de presentes tecnológicos para o Dia das Mães em 2026"],
   ["canva-magic-layers-ai-replacing-palestine", "Canva corrige falha de IA em camadas mágicas"],
@@ -6610,7 +6611,19 @@ function hasEnglishCardLeak(value = "") {
 function publicNewsTextLooksEnglish(value = "") {
   const text = cleanShortText(value || "", 900);
   if (!text) return false;
-  return hasEnglishCardLeak(text) || PUBLIC_NEWS_ENGLISH_MARKER_PATTERN.test(text);
+
+  // CZS 2026-11-10 - antes bastava UMA palavra da lista para trocar o resumo
+  // inteiro pelo texto de formula. "People" (nome da revista) e "podcast"
+  // aparecem em materia em portugues, e 133 materias perderam o texto real
+  // assim. Agora: uma unica pista so decide em texto sem sinal de portugues;
+  // com sinal de portugues, exige duas pistas diferentes.
+  const leak = hasEnglishCardLeak(text);
+  const markers = (text.match(PUBLIC_NEWS_ENGLISH_MARKER_PATTERN_G) || []).length;
+
+  if (hasPortugueseRuntimeSignal(text)) {
+    return (leak ? 1 : 0) + markers >= 2;
+  }
+  return leak || markers >= 1;
 }
 
 function hasPortugueseRuntimeSignal(value = "") {
