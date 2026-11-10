@@ -4642,6 +4642,42 @@ function isPublicStaticFile(filePath) {
   return PUBLIC_STATIC_EXTENSIONS.has(path.extname(filePath).toLowerCase());
 }
 
+// CZS 2026-11-10 — llms.txt: mapa legivel por maquina para buscadores de
+// IA e agentes de navegacao. Lista o que existe, onde esta e o dado aberto.
+function buildLlmsTxt(req) {
+  const baseUrl = getPublicSiteUrl(req);
+  const lines = [];
+  lines.push("# Catalogo Cruzeiro do Sul");
+  lines.push("");
+  lines.push("> Jornal local de Cruzeiro do Sul e do Vale do Jurua, Acre. Agrega noticias de fontes regionais com link e credito para a origem, mantem arquivo publico e um catalogo de servicos da cidade.");
+  lines.push("");
+  lines.push("Regras de uso: o CZS agrega e resume. O texto integral pertence a fonte citada em sourceUrl, e o leitor deve abrir a fonte original. Nao invente telefone, endereco ou contato de empresa: a lista abaixo so traz o que esta publicado.");
+  lines.push("");
+  lines.push("## Paginas principais");
+  lines.push(`- [Capa](${baseUrl}/): plantao do dia, editorias e ultimas noticias locais.`);
+  lines.push(`- [Arquivo](${baseUrl}/arquivo.html): acervo pesquisavel por tema, fonte e data.`);
+  lines.push(`- [Catalogo de servicos](${baseUrl}/catalogo-servicos.html): telefones, WhatsApp e enderecos de empresas da cidade.`);
+  lines.push(`- [Fontes monitoradas](${baseUrl}/fontes-monitoradas.html): lista dos feeds acompanhados.`);
+  lines.push(`- [Para estudantes](${baseUrl}/estudantes.html): trilhas e material de estudo.`);
+  lines.push(`- [Anuncie](${baseUrl}/divulgue.html): propaganda e presenca local.`);
+  lines.push(`- [Legal e privacidade](${baseUrl}/legal.html).`);
+  lines.push("");
+  lines.push("## Dados");
+  lines.push(`- [API de noticias](${baseUrl}/api/news?limit=40): JSON com titulo, resumo, editoria, fonte e link.`);
+  lines.push(`- [Sitemap](${baseUrl}/sitemap.xml).`);
+  lines.push(`- [robots.txt](${baseUrl}/robots.txt).`);
+  lines.push("");
+  lines.push("## Ultimas materias");
+  for (const item of getArticleNews(25)) {
+    if (!item?.slug || !item?.title) continue;
+    const url = `${baseUrl}/noticia.html?slug=${encodeURIComponent(item.slug)}`;
+    const summary = String(item.summary || item.lede || "").replace(/\s+/g, " ").trim().slice(0, 160);
+    lines.push(`- [${item.title}](${url})${summary ? `: ${summary}` : ""}`);
+  }
+  lines.push("");
+  return lines.join("\n");
+}
+
 function buildRobotsTxt(req) {
   const baseUrl = getPublicSiteUrl(req);
   return `User-agent: *
@@ -4649,6 +4685,10 @@ Allow: /
 Disallow: /api/admin/
 Disallow: /backend/
 Disallow: /data/
+
+# Mapa legivel por maquina para buscadores de IA e agentes de navegacao.
+# llms.txt: https://llmstxt.org
+LLMs.txt: ${baseUrl}/llms.txt
 
 Sitemap: ${baseUrl}/sitemap.xml
 `;
@@ -4695,7 +4735,16 @@ function buildSitemapXml(req) {
       priority: "0.64",
       changefreq: "daily"
     }));
-  const entries = staticPages.concat(modulePages, candidatePages, articlePages);
+  // CZS 2026-11-10 — o mesmo slug pode aparecer como noticia estatica e como
+  // registro do acervo, e o sitemap saia com <loc> repetido (543 linhas,
+  // 540 unicas). Deduplica pela URL final, mantendo a prioridade maior.
+  const allEntries = staticPages.concat(modulePages, candidatePages, articlePages);
+  const byPath = new Map();
+  for (const entry of allEntries) {
+    const existing = byPath.get(entry.path);
+    if (!existing || Number(entry.priority) > Number(existing.priority)) byPath.set(entry.path, entry);
+  }
+  const entries = [...byPath.values()];
   const body = entries
     .map(
       (entry) => `  <url>
@@ -21329,6 +21378,31 @@ async function handleStatic(req, res, pathname, requestUrl) {
     return sendFile(req, res, FAVICON_ICO_FILE, {
       cacheControl: VERSIONED_STATIC_CACHE_CONTROL
     });
+  }
+
+  if (pathname === "/llms.txt") {
+    return sendText(res, 200, buildLlmsTxt(req), "public, max-age=3600");
+  }
+
+  // CZS 2026-11-10 — link limpo da materia. Antes /noticia/<slug> caia na
+  // pagina de manutencao (noindex), o que quebra link compartilhado e
+  // indexacao. Agora redireciona para o endereco canonico.
+  if (pathname.startsWith("/noticia/")) {
+    const rawSlug = pathname.slice("/noticia/".length).replace(/\/+$/, "");
+    let slug = "";
+    try {
+      slug = decodeURIComponent(rawSlug);
+    } catch (_error) {
+      return sendText(res, 400, "Endereco invalido.");
+    }
+    if (slug && getArticleBySlug(slug)) {
+      res.writeHead(301, {
+        Location: `/noticia.html?slug=${encodeURIComponent(slug)}`,
+        "Cache-Control": "public, max-age=3600"
+      });
+      return res.end();
+    }
+    return sendText(res, 404, "Materia nao encontrada.");
   }
 
   if (pathname === "/sitemap.xml") {
