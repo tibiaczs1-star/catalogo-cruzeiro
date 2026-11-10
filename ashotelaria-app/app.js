@@ -168,7 +168,14 @@ async function restoreServerSession() {
     if (state.session.forceChange) requirePasswordChange();
     else await enterWorkspace();
   } catch (error) {
-    if (error.status !== 401) showLoginError(error.message);
+    // Ausencia de sessao e o caso normal de quem chega pela primeira vez.
+    // 401/404 acontecem no primeiro acesso; 503 significa que o servico
+    // esta desligado no ambiente e deve ser dito na tela, nao no vazio.
+    if (error.status === 503) {
+      showLoginError("ASHotelaria indisponivel agora: banco de dados nao configurado neste ambiente.");
+      return;
+    }
+    if (error.status !== 401 && error.status !== 404) showLoginError(error.message);
   }
 }
 

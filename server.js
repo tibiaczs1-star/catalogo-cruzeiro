@@ -17063,22 +17063,34 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (ASHOTELARIA_ENABLED && pathname.startsWith("/api/ashotelaria/v1")) {
     if (!ashotelariaApiHandler) {
-      const { createStore: createASHotelariaStore } = require("./ashotelaria/store");
-      const { createAuthService: createASHotelariaAuth } = require("./ashotelaria/auth");
-      const { createASHotelariaHandler: createASHotelariaHttpHandler } = require("./ashotelaria/http");
-      const store = createASHotelariaStore({ connectionString: process.env.ASHOTELARIA_DATABASE_URL });
-      const authService = createASHotelariaAuth({
-        store,
-        config: {
-          sessionSecret: process.env.ASHOTELARIA_SESSION_SECRET,
-          environment: process.env,
-        },
-      });
-      ashotelariaApiHandler = createASHotelariaHttpHandler({
-        store,
-        authService,
-        config: { production: process.env.NODE_ENV === "production" },
-      });
+      try {
+        const { createStore: createASHotelariaStore } = require("./ashotelaria/store");
+        const { createAuthService: createASHotelariaAuth } = require("./ashotelaria/auth");
+        const { createASHotelariaHandler: createASHotelariaHttpHandler } = require("./ashotelaria/http");
+        const store = createASHotelariaStore({ connectionString: process.env.ASHOTELARIA_DATABASE_URL });
+        const authService = createASHotelariaAuth({
+          store,
+          config: {
+            sessionSecret: process.env.ASHOTELARIA_SESSION_SECRET,
+            environment: process.env,
+          },
+        });
+        ashotelariaApiHandler = createASHotelariaHttpHandler({
+          store,
+          authService,
+          config: { production: process.env.NODE_ENV === "production" },
+        });
+      } catch (error) {
+        // ASHOTELARIA_ENABLED=true sem ASHOTELARIA_DATABASE_URL derrubava a
+        // rota no 404 generico do portal. Sem banco, o servico esta offline:
+        // responde 503 com motivo legivel em vez de fingir que nao existe.
+        console.error("[ashotelaria] indisponivel:", error.message);
+        return sendJson(res, 503, {
+          ok: false,
+          message: "ASHotelaria indisponivel: banco de dados nao configurado.",
+          error: { code: "CONFIGURATION_ERROR" }
+        });
+      }
     }
     return ashotelariaApiHandler(req, res);
   }
