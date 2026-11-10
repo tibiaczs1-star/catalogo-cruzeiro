@@ -1499,9 +1499,23 @@ const looksLikeImageAsset = (value) => {
   return /^https?:\/\/.+\.(avif|webp|png|jpe?g|gif|bmp|svg)(\?.*)?$/i.test(raw);
 };
 
-const looksLikeVideoAsset = (value = "") => {
+// Enderecos locais/privados nunca funcionam para visitantes: quando chegam
+// por dados antigos ou pelo cache offline, geram video quebrado e requisicao
+// bloqueada. Melhor cair na imagem de capa.
+const isNonPublicMediaUrl = (value = "") => {
   const raw = String(value || "").trim();
   if (!raw) {
+    return false;
+  }
+  if (/^\/\//.test(raw) || /^\.?\//.test(raw)) {
+    return false;
+  }
+  return /^(?:https?:)?\/\/(?:localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0|10(?:\.\d{1,3}){3}|192\.168(?:\.\d{1,3}){2}|172\.(?:1[6-9]|2\d|3[01])(?:\.\d{1,3}){2})(?::\d+)?(?:\/|$)/i.test(raw);
+};
+
+const looksLikeVideoAsset = (value = "") => {
+  const raw = String(value || "").trim();
+  if (!raw || isNonPublicMediaUrl(raw)) {
     return false;
   }
   return /^(?:https?:)?\/\/.+\.(mp4|webm|ogg)(\?.*)?$/i.test(raw) ||
@@ -2243,6 +2257,25 @@ const requestRuntimeArticle = async (apiBase, targetSlug) => {
   }
 };
 
+// O cache offline guarda a ultima materia lida. Se ela saiu do acervo
+// publicado, nao deve voltar a aparecer so porque ficou no aparelho.
+const isSlugInCurrentArchive = (targetSlug) => {
+  if (!targetSlug) {
+    return false;
+  }
+  if (AUTHORIAL_DETAIL_ARTICLES && Object.prototype.hasOwnProperty.call(AUTHORIAL_DETAIL_ARTICLES, targetSlug)) {
+    return true;
+  }
+  if (window.NEWS_MAP && Object.prototype.hasOwnProperty.call(window.NEWS_MAP, targetSlug)) {
+    return true;
+  }
+  if (Array.isArray(window.NEWS_DATA)) {
+    return window.NEWS_DATA.some((item) => normalizeSlug(item?.slug) === targetSlug);
+  }
+  // Sem acervo carregado nao ha como confirmar: mantem o comportamento antigo.
+  return true;
+};
+
 const findLocalArticle = (targetSlug) => {
   if (!targetSlug) {
     return null;
@@ -2254,7 +2287,7 @@ const findLocalArticle = (targetSlug) => {
     (Array.isArray(window.NEWS_DATA)
       ? window.NEWS_DATA.find((item) => normalizeSlug(item?.slug) === targetSlug)
       : null) ||
-    findStoredArticle(targetSlug) ||
+    (isSlugInCurrentArchive(targetSlug) ? findStoredArticle(targetSlug) : null) ||
     null;
 
   return article ? normalizeDetailArticle(article) : null;
