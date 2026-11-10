@@ -966,6 +966,28 @@
   }
 
   const heroStories = (() => {
+    // CZS 2026-11-10 — a capa respeita a selecao editorial curada.
+    // Antes ela era escolhida so por pontuacao automatica, e uma noticia
+    // nacional (COP31) passava na frente da pauta de Cruzeiro do Sul.
+    // CZS_CURRENT_FEATURES ja alimenta o letreiro; agora abre a capa tambem.
+    const curated = Array.isArray(window.CZS_CURRENT_FEATURES)
+      ? window.CZS_CURRENT_FEATURES
+      : [];
+    if (curated.length) {
+      const curatedResolved = curated
+        .map((feature) => bySlug.get(String(feature.slug || "")) || feature)
+        .filter((story) => story && (story.title || story.summary));
+      if (curatedResolved.length) {
+        const seen = new Set(curatedResolved.map((s) => String(s.slug || "")));
+        const rest = allStories
+          .filter((story) => !seen.has(String(story.slug || "")))
+          .filter((story) => isFreshEditorialStory(story, 3))
+          .sort((a, b) => heroScore(b) - heroScore(a))
+          .slice(0, 8);
+        return curatedResolved.concat(rest).slice(0, 8);
+      }
+    }
+
     const eligible = allStories
       .filter((story) => story?.title || story?.summary || story?.subtitle)
       .filter((story) => isFreshEditorialStory(story, 10) || isLevitaLeadStory(story));
