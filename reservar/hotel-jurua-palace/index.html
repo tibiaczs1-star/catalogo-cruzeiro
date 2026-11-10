@@ -1,124 +1,1126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva - Hotel Jurua Palace | Catálogo CZS</title>
-    <meta name="description" content="Sistema de reservas do Hotel Jurua Palace - Cruzeiro do Sul, Acre. Reserve sua estadia com conforto e qualidade.">
-    <link rel="icon" href="/assets/favicon-32x32.png">
-    <style>
-        :root {
-            --primary: #0F172A;
-            --secondary: #334155;
-            --accent: #2563EB;
-            --success: #10B981;
-            --background: #F8FAFC;
-            --text: #111827;
-            --muted: #6B7280;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1A3A4A" />
+  <meta name="color-scheme" content="light" />
+  <title>Reserva de hospedagem — Hotel Juruá Palace | Catálogo CZS</title>
+  <meta name="description" content="Solicite sua reserva no Hotel Juruá Palace, em Cruzeiro do Sul (AC). Escolha datas, categoria de quarto e envie o pedido direto para a recepção." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1A3A4A;
+      --ink-soft: #2F5666;
+      --clay: #C4956A;
+      --clay-deep: #A9734A;
+      --gold: #D4A843;
+      --paper: #FAFAF7;
+      --card: #FFFFFF;
+      --text: #1A1A1A;
+      --muted: #64748B;
+      --line: #E3E0D8;
+      --success: #166534;
+      --success-bg: #ECFDF3;
+      --danger: #B42318;
+      --danger-bg: #FEF3F2;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 18px;
+      --shadow-low: 0 1px 3px rgba(26, 58, 74, 0.10);
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1200px 480px at 85% -10%, rgba(212, 168, 67, 0.16), transparent 70%),
+        var(--paper);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--ink); }
+
+    :focus-visible {
+      outline: 3px solid var(--clay-deep);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: var(--space-3);
+      background: var(--ink);
+      color: #fff;
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      z-index: 50;
+    }
+    .skip-link:focus { left: var(--space-4); }
+
+    .wrap {
+      width: min(1120px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    /* ---------- Topbar ---------- */
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 250, 247, 0.86);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .topbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding-block: var(--space-3);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .brand__mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-md);
+      background: linear-gradient(140deg, var(--ink), var(--ink-soft));
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-family: "Fraunces", serif;
+    }
+    .brand small {
+      display: block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .topbar__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+    .topbar__links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--ink-soft);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+    }
+    .topbar__links a:hover { background: rgba(26, 58, 74, 0.06); color: var(--ink); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding-block: var(--space-8) var(--space-7);
+    }
+    .eyebrow {
+      font-family: "Sora", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--clay-deep);
+    }
+    .hero h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4.6vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-top: var(--space-3);
+      max-width: 20ch;
+    }
+    .hero p.lead {
+      margin-top: var(--space-4);
+      max-width: 62ch;
+      font-size: 1.06rem;
+      color: var(--ink-soft);
+    }
+    .hero__facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-5);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: var(--shadow-low);
+    }
+    .chip strong { color: var(--clay-deep); font-weight: 600; }
+
+    /* ---------- Layout ---------- */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: var(--space-6);
+      align-items: start;
+      padding-bottom: var(--space-8);
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-low);
+    }
+
+    /* ---------- Steps ---------- */
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #FDFCF8);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .steps li {
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+    .steps li span {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #EEF1F3;
+      color: var(--ink-soft);
+      font-family: "Sora", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .steps li[aria-current="step"] {
+      background: rgba(196, 149, 106, 0.14);
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .steps li[aria-current="step"] span { background: var(--clay); color: #fff; }
+
+    .form-body { padding: var(--space-5); }
+
+    .step-panel[hidden] { display: none; }
+
+    .step-head h2 {
+      font-family: "Fraunces", serif;
+      font-size: 1.45rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .step-head p {
+      margin-top: var(--space-1);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-5);
+    }
+    .field { display: block; }
+    .field--wide { grid-column: 1 / -1; }
+    .field > span {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: var(--space-2);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 0.98rem;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 11px 13px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field textarea { min-height: 96px; resize: vertical; }
+    .field input:hover, .field select:hover, .field textarea:hover { border-color: #C9C3B6; }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--clay-deep);
+      box-shadow: 0 0 0 3px rgba(196, 149, 106, 0.22);
+      outline: none;
+    }
+    .field small { display: block; margin-top: var(--space-1); color: var(--muted); font-size: 0.8rem; }
+
+    .breaker {
+      margin-block: var(--space-5) var(--space-4);
+      border: 0;
+      border-top: 1px dashed var(--line);
+    }
+
+    /* ---------- Room cards ---------- */
+    .rooms {
+      display: grid;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+    }
+    .room {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-4);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .room:hover { border-color: var(--clay); box-shadow: var(--shadow-low); }
+    .room input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+    .room:has(input:disabled) { cursor: not-allowed; }
+    .room__radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #C9C3B6;
+      display: grid;
+      place-items: center;
+      flex: none;
+    }
+    .room__radio::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--clay-deep);
+      transform: scale(0);
+      transition: transform 0.15s;
+    }
+    .room input:checked ~ .room__radio { border-color: var(--clay-deep); }
+    .room input:checked ~ .room__radio::after { transform: scale(1); }
+    .room input:checked ~ .room__body .room__name { color: var(--ink); }
+    .room:has(input:checked) {
+      border-color: var(--clay-deep);
+      background: rgba(196, 149, 106, 0.07);
+    }
+    .room input:focus-visible ~ .room__radio {
+      outline: 3px solid var(--clay-deep);
+      outline-offset: 3px;
+    }
+    .room__body strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    .room__body small { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
+    .room__price {
+      text-align: right;
+      font-family: "Sora", sans-serif;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .room__price small {
+      display: block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 400;
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: normal;
+    }
+
+    /* ---------- Review ---------- */
+    .review {
+      margin-top: var(--space-5);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #FDFCF8;
+      overflow: hidden;
+    }
+    .review dl { display: grid; grid-template-columns: max-content 1fr; }
+    .review dt, .review dd {
+      padding: 10px var(--space-4);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+    .review dt { color: var(--muted); font-weight: 500; }
+    .review dd { color: var(--text); font-weight: 500; text-align: right; }
+    .review dl > :nth-last-child(2) { border-bottom: 0; }
+    .review dl > :last-child { border-bottom: 0; }
+    .review__total dd { color: var(--ink); font-family: "Sora", sans-serif; font-size: 1.05rem; }
+
+    /* ---------- Buttons ---------- */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+      align-items: center;
+    }
+    .btn {
+      font: inherit;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: 12px 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s, border-color 0.15s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn--primary { background: var(--ink); color: #fff; }
+    .btn--primary:hover { background: var(--ink-soft); }
+    .btn--primary:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn--ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+    .btn--ghost:hover { border-color: var(--clay); color: var(--ink); }
+
+    .hint {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: var(--space-4);
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+    .hint svg { flex: none; margin-top: 3px; }
+
+    .alert {
+      margin-top: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+    }
+    .alert[hidden] { display: none; }
+    .alert--error { background: var(--danger-bg); color: var(--danger); border: 1px solid #FDA29B; }
+
+    /* ---------- Success ---------- */
+    .success { text-align: center; padding-block: var(--space-4); }
+    .success__mark {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto var(--space-3);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--success-bg);
+      color: var(--success);
+      font-size: 1.6rem;
+      border: 1px solid #A6F4C5;
+    }
+    .success h2 { font-family: "Fraunces", serif; font-size: 1.6rem; color: var(--ink); }
+    .success p { color: var(--ink-soft); max-width: 52ch; margin: var(--space-2) auto 0; }
+    .success .protocol {
+      display: inline-block;
+      margin-top: var(--space-4);
+      font-family: "Sora", sans-serif;
+      font-size: 0.9rem;
+      background: #F1F3F2;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      color: var(--ink);
+    }
+    .success .protocol:empty { display: none; }
+
+    /* ---------- Aside ---------- */
+    .aside { display: grid; gap: var(--space-4); }
+    .aside-card { padding: var(--space-5); }
+    .aside-card h2 {
+      font-family: "Sora", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+    }
+    .aside-card p { margin-top: var(--space-3); font-size: 0.93rem; color: var(--ink-soft); }
+    .aside-list {
+      list-style: none;
+      margin-top: var(--space-3);
+      display: grid;
+      gap: var(--space-3);
+    }
+    .aside-list li {
+      display: flex;
+      gap: var(--space-3);
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .aside-list li::before {
+      content: "";
+      flex: none;
+      width: 8px;
+      height: 8px;
+      margin-top: 8px;
+      border-radius: 2px;
+      background: var(--clay);
+      transform: rotate(45deg);
+    }
+    .aside-list strong { color: var(--ink); font-weight: 600; }
+    .contact-box {
+      margin-top: var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--line);
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: #FDFCF8;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding-block: var(--space-6);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .site-footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-5);
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-footer a { color: var(--ink-soft); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      .hero { padding-block: var(--space-7) var(--space-6); }
+    }
+    @media (max-width: 640px) {
+      .topbar__inner {
+        flex-wrap: wrap;
+        row-gap: var(--space-1);
+        padding-block: var(--space-3) var(--space-2);
+      }
+      .brand { font-size: 0.92rem; flex: 1 1 100%; }
+      .brand small { font-size: 0.72rem; }
+      .topbar__links {
+        flex: 1 1 100%;
+        gap: 2px;
+        margin-left: -8px;
+      }
+      .topbar__links a { padding: 6px 8px; }
+    }
+    @media (max-width: 560px) {
+      .fields { grid-template-columns: 1fr; }
+      .steps { padding-inline: var(--space-4); gap: 6px; }
+      .steps li { font-size: 0.78rem; padding: 5px 9px; }
+      .form-body { padding: var(--space-4); }
+      .room { grid-template-columns: auto minmax(0, 1fr); }
+      .room__price { grid-column: 2; text-align: left; padding-top: 2px; }
+      .review dl { grid-template-columns: 1fr; }
+      .review dt { padding-bottom: 0; border-bottom: 0; font-size: 0.8rem; }
+      .review dd { text-align: left; padding-top: 2px; }
+      .topbar__links a { padding-inline: var(--space-2); font-size: 0.84rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#formulario">Pular para o formulário de reserva</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="/">
+        <span class="brand__mark" aria-hidden="true">CZS</span>
+        <span>Hotel Juruá Palace<small>Reserva pelo Catálogo Cruzeiro do Sul</small></span>
+      </a>
+      <nav class="topbar__links" aria-label="Atalhos">
+        <a href="/">Home</a>
+        <a href="/catalogo-servicos.html">Serviços</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="conteudo">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Cruzeiro do Sul · Acre</p>
+      <h1 id="hero-title">Sua estadia no Vale do Juruá começa com uma reserva bem feita.</h1>
+      <p class="lead">
+        Monte o pedido de hospedagem em três passos: datas, categoria de quarto e seus dados.
+        A solicitação segue para a recepção do hotel, que confirma a disponibilidade pelo contato que você informar.
+      </p>
+      <div class="hero__facts">
+        <span class="chip">Categorias <strong>3</strong></span>
+        <span class="chip">Pagamento <strong>na hospedagem</strong></span>
+        <span class="chip">Confirmação <strong>pela recepção</strong></span>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="panel" id="formulario" aria-labelledby="form-title">
+        <ol class="steps" aria-label="Etapas do pedido de reserva">
+          <li aria-current="step" data-step-tab="1"><span>1</span>Datas</li>
+          <li data-step-tab="2"><span>2</span>Quarto</li>
+          <li data-step-tab="3"><span>3</span>Seus dados</li>
+        </ol>
+
+        <div class="form-body">
+          <h2 id="form-title" class="eyebrow" style="margin-bottom: var(--space-2)">Pedido de reserva</h2>
+
+          <!-- STEP 1 -->
+          <form id="step-dates" class="step-panel" data-step="1" novalidate>
+            <div class="step-head">
+              <h2>Quando você quer ficar?</h2>
+              <p>Informe o período e quantas pessoas vão se hospedar.</p>
+            </div>
+            <div class="fields">
+              <label class="field">
+                <span>Entrada</span>
+                <input name="checkIn" type="date" required />
+              </label>
+              <label class="field">
+                <span>Saída</span>
+                <input name="checkOut" type="date" required />
+              </label>
+              <label class="field">
+                <span>Adultos</span>
+                <input name="adults" type="number" min="1" max="10" value="2" required />
+              </label>
+              <label class="field">
+                <span>Crianças</span>
+                <input name="children" type="number" min="0" max="10" value="0" required />
+              </label>
+            </div>
+            <div class="actions">
+              <button class="btn btn--primary" type="submit">Ver categorias de quarto</button>
+            </div>
+            <p class="alert alert--error" id="dates-error" role="alert" hidden></p>
+          </form>
+
+          <!-- STEP 2 -->
+          <section id="step-rooms" class="step-panel" data-step="2" hidden aria-labelledby="rooms-title">
+            <div class="step-head">
+              <h2 id="rooms-title">Escolha a categoria</h2>
+              <p id="rooms-summary">Escolha a opção que combina com a sua viagem.</p>
+            </div>
+            <div class="rooms" role="radiogroup" aria-labelledby="rooms-title" id="room-options"></div>
+            <div class="actions">
+              <button class="btn btn--ghost" type="button" data-back="1">← Alterar datas</button>
+              <button class="btn btn--primary" type="button" id="rooms-next" disabled>Continuar</button>
+            </div>
+          </section>
+
+          <!-- STEP 3 -->
+          <form id="step-guest" class="step-panel" data-step="3" hidden novalidate>
+            <div class="step-head">
+              <h2>Quem vai se hospedar?</h2>
+              <p>Com esses dados a recepção consegue confirmar a reserva com você.</p>
+            </div>
+            <div class="fields">
+              <label class="field field--wide">
+                <span>Nome completo</span>
+                <input name="guestName" autocomplete="name" maxlength="120" required />
+              </label>
+              <label class="field">
+                <span>E-mail</span>
+                <input name="guestEmail" type="email" autocomplete="email" maxlength="120" required />
+              </label>
+              <label class="field">
+                <span>WhatsApp ou telefone</span>
+                <input name="guestPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(68) 9 0000-0000" required />
+              </label>
+            </div>
+            <hr class="breaker" aria-hidden="true" />
+            <div class="review" aria-label="Resumo do pedido">
+              <dl>
+                <dt>Período</dt><dd id="review-dates">—</dd>
+                <dt>Categoria</dt><dd id="review-room">—</dd>
+                <dt>Hóspedes</dt><dd id="review-guests">—</dd>
+                <dt>Diárias</dt><dd id="review-nights">—</dd>
+                <dt class="review__total">Estimativa</dt><dd class="review__total" id="review-total">—</dd>
+              </dl>
+            </div>
+            <label class="field field--wide" style="margin-top: var(--space-4)">
+              <span>Observação para a recepção (opcional)</span>
+              <textarea name="note" maxlength="600" placeholder="Ex.: chegada após as 22h, cama extra, berço."></textarea>
+            </label>
+            <div class="actions">
+              <button class="btn btn--ghost" type="button" data-back="2">← Voltar</button>
+              <button class="btn btn--primary" type="submit" id="submit-booking">Enviar pedido de reserva</button>
+            </div>
+            <p class="alert alert--error" id="guest-error" role="alert" hidden></p>
+            <p class="hint">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              <span>Enviar o pedido não cobra nada e não bloqueia o quarto. A reserva só existe depois da confirmação da recepção.</span>
+            </p>
+          </form>
+
+          <!-- SUCCESS -->
+          <section id="step-success" class="success" hidden aria-live="polite" aria-labelledby="success-title">
+            <div class="success__mark" aria-hidden="true">✓</div>
+            <h2 id="success-title">Pedido enviado.</h2>
+            <p>
+              Recebemos sua solicitação. A recepção do Hotel Juruá Palace confirma a disponibilidade
+              pelo WhatsApp ou e-mail informado. Se preferir falar antes, use o contato da recepção ao lado.
+            </p>
+            <p class="protocol" id="success-protocol"></p>
+            <div class="actions" style="justify-content: center">
+              <a class="btn btn--primary" href="/">Voltar ao Catálogo</a>
+              <button class="btn btn--ghost" type="button" id="new-booking">Fazer outro pedido</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <aside class="aside" aria-label="Informações da hospedagem">
+        <div class="panel aside-card">
+          <h2>Como funciona</h2>
+          <ul class="aside-list">
+            <li><span><strong>Monte o pedido.</strong> Escolha datas e categoria. O valor mostrado é uma estimativa das diárias.</span></li>
+            <li><span><strong>A recepção confirma.</strong> O hotel verifica a disponibilidade e responde pelo contato informado.</span></li>
+            <li><span><strong>Pagamento na hospedagem.</strong> A conferência e o acerto são feitos na chegada, no balcão.</span></li>
+          </ul>
+        </div>
+
+        <div class="panel aside-card">
+          <h2>Categorias disponíveis</h2>
+          <ul class="aside-list">
+            <li><span><strong>Standard</strong> — até 3 hóspedes</span></li>
+            <li><span><strong>Superior</strong> — até 3 hóspedes</span></li>
+            <li><span><strong>Suíte Família</strong> — até 5 hóspedes</span></li>
+          </ul>
+        </div>
+
+        <div class="panel aside-card" id="contato">
+          <h2>Contato da recepção</h2>
+          <p>Prefere falar direto? Use o canal oficial do hotel ou envie uma mensagem pelo portal.</p>
+          <div class="contact-box">
+            Telefone e WhatsApp direto do hotel ainda não foram confirmados neste portal.
+            Use o formulário para que a recepção retorne com os dados corretos.
+          </div>
+          <div class="actions">
+            <a class="btn btn--ghost" href="/catalogo-servicos.html">Ver serviços do catálogo</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Catálogo Cruzeiro do Sul · Cruzeiro do Sul, Acre</span>
+      <nav aria-label="Rodapé">
+        <a href="/">Home</a> ·
+        <a href="/catalogo-servicos.html">Serviços</a> ·
+        <a href="/reservar/">Reservas</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var ENDPOINT = "/api/agent-messages";
+
+      var CATEGORIES = [
+        { id: "standard", name: "Standard", capacity: 3, nightly: 189, desc: "Quarto confortável para casal ou viagem de trabalho." },
+        { id: "superior", name: "Superior", capacity: 3, nightly: 259, desc: "Mais espaço e acomodação reforçada para a estadia." },
+        { id: "family", name: "Suíte Família", capacity: 5, nightly: 349, desc: "Suíte ampla para famílias, com mais de um ambiente." }
+      ];
+
+      var state = {
+        checkIn: "",
+        checkOut: "",
+        adults: 2,
+        children: 0,
+        nights: 0,
+        category: null,
+        step: 1
+      };
+
+      function $(sel, root) { return (root || document).querySelector(sel); }
+      function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+      var datesForm = $("#step-dates");
+      var guestForm = $("#step-guest");
+      var roomsPanel = $("#step-rooms");
+      var successPanel = $("#step-success");
+      var roomOptions = $("#room-options");
+      var roomsNext = $("#rooms-next");
+      var datesError = $("#dates-error");
+      var guestError = $("#guest-error");
+
+      function pad(n) { return n < 10 ? "0" + n : String(n); }
+
+      function todayLocal() {
+        var now = new Date();
+        var local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+        return local.toISOString().slice(0, 10);
+      }
+
+      function addDays(isoDate, days) {
+        var parts = isoDate.split("-").map(Number);
+        var d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+        d.setUTCDate(d.getUTCDate() + days);
+        return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate());
+      }
+
+      function formatBR(isoDate) {
+        if (!isoDate) return "—";
+        var p = isoDate.split("-");
+        if (p.length !== 3) return isoDate;
+        return p[2] + "/" + p[1] + "/" + p[0];
+      }
+
+      function nightsBetween(a, b) {
+        if (!a || !b) return 0;
+        var pa = a.split("-").map(Number);
+        var pb = b.split("-").map(Number);
+        var da = Date.UTC(pa[0], pa[1] - 1, pa[2]);
+        var db = Date.UTC(pb[0], pb[1] - 1, pb[2]);
+        return Math.round((db - da) / 86400000);
+      }
+
+      function money(value) {
+        return "R$ " + value.toFixed(2).replace(".", ",");
+      }
+
+      function setStep(step) {
+        state.step = step;
+        datesForm.hidden = step !== 1;
+        roomsPanel.hidden = step !== 2;
+        guestForm.hidden = step !== 3;
+        successPanel.hidden = step !== 4;
+        $$("[data-step-tab]").forEach(function (li) {
+          var n = Number(li.getAttribute("data-step-tab"));
+          if (n === Math.min(step, 3)) li.setAttribute("aria-current", "step");
+          else li.removeAttribute("aria-current");
+        });
+        if (step === 4) $$("[data-step-tab]").forEach(function (li) { li.removeAttribute("aria-current"); });
+      }
+
+      function setError(el, message) {
+        if (!message) { el.hidden = true; el.textContent = ""; return; }
+        el.textContent = message;
+        el.hidden = false;
+      }
+
+      (function initDates() {
+        var checkIn = datesForm.elements.checkIn;
+        var checkOut = datesForm.elements.checkOut;
+        checkIn.min = todayLocal();
+        checkIn.value = addDays(todayLocal(), 1);
+        checkOut.min = addDays(todayLocal(), 2);
+        checkOut.value = addDays(todayLocal(), 3);
+      })();
+
+      function syncOutMin() {
+        var checkIn = datesForm.elements.checkIn;
+        var checkOut = datesForm.elements.checkOut;
+        if (checkIn.value) {
+          var minOut = addDays(checkIn.value, 1);
+          checkOut.min = minOut;
+          if (!checkOut.value || checkOut.value <= checkIn.value) checkOut.value = minOut;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      }
+      datesForm.elements.checkIn.addEventListener("change", syncOutMin);
+
+      function guestsTotal() {
+        return (Number(state.adults) || 0) + (Number(state.children) || 0);
+      }
+
+      function renderRooms() {
+        var total = guestsTotal();
+        var nights = state.nights;
+        roomOptions.innerHTML = "";
+        var anyFit = false;
+
+        CATEGORIES.forEach(function (cat) {
+          var fits = total <= cat.capacity;
+          if (fits) anyFit = true;
+          var label = document.createElement("label");
+          label.className = "room";
+          if (!fits) label.style.opacity = "0.55";
+
+          var input = document.createElement("input");
+          input.type = "radio";
+          input.name = "roomCategory";
+          input.value = cat.id;
+          input.disabled = !fits;
+          input.addEventListener("change", function () {
+            state.category = cat.id;
+            roomsNext.disabled = false;
+          });
+
+          var radio = document.createElement("span");
+          radio.className = "room__radio";
+          radio.setAttribute("aria-hidden", "true");
+
+          var body = document.createElement("span");
+          body.className = "room__body";
+          var name = document.createElement("strong");
+          name.className = "room__name";
+          name.textContent = cat.name;
+          var small = document.createElement("small");
+          if (fits) {
+            small.textContent = cat.desc + " Capacidade: até " + cat.capacity + " hóspedes.";
+          } else {
+            small.textContent = "Não comporta " + total + " hóspedes (capacidade " + cat.capacity + ").";
+          }
+          body.appendChild(name);
+          body.appendChild(small);
+
+          var price = document.createElement("span");
+          price.className = "room__price";
+          var sub = nights
+            ? money(cat.nightly * nights) + " em " + nights + (nights === 1 ? " diária" : " diárias")
+            : "estimativa";
+          price.innerHTML = money(cat.nightly) + " <small>/ diária · " + sub + "</small>";
+
+          label.appendChild(input);
+          label.appendChild(radio);
+          label.appendChild(body);
+          label.appendChild(price);
+          roomOptions.appendChild(label);
+        });
+
+        var summary = $("#rooms-summary");
+        if (!anyFit) {
+          summary.textContent = "Nenhuma categoria comporta " + total + " hóspedes. Reduza o número de pessoas ou fale com a recepção.";
+        } else {
+          summary.textContent = total + (total === 1 ? " hóspede" : " hóspedes") +
+            " · " + nights + (nights === 1 ? " diária" : " diárias") +
+            " · " + formatBR(state.checkIn) + " a " + formatBR(state.checkOut);
         }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
+
+        state.category = null;
+        roomsNext.disabled = true;
+      }
+
+      datesForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        setError(datesError, "");
+        var f = datesForm.elements;
+        var checkIn = f.checkIn.value;
+        var checkOut = f.checkOut.value;
+        if (!checkIn || !checkOut) {
+          setError(datesError, "Informe as datas de entrada e saída.");
+          return;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        if (checkOut <= checkIn) {
+          setError(datesError, "A saída precisa ser depois da entrada.");
+          return;
         }
-        
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
+        var nights = nightsBetween(checkIn, checkOut);
+        if (nights < 1) {
+          setError(datesError, "A hospedagem precisa ter pelo menos uma diária.");
+          return;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+        if (nights > 90) {
+          setError(datesError, "Para estadias acima de 90 diárias, fale direto com a recepção.");
+          return;
         }
-        
-        .logo-img {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #0F172A, #2563EB);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
+        state.checkIn = checkIn;
+        state.checkOut = checkOut;
+        state.nights = nights;
+        state.adults = Number(f.adults.value) || 1;
+        state.children = Number(f.children.value) || 0;
+        renderRooms();
+        setStep(2);
+        var first = roomOptions.querySelector("input:not(:disabled)");
+        if (first) first.focus();
+      });
+
+      roomsNext.addEventListener("click", function () {
+        if (!state.category) return;
+        refreshReview();
+        setStep(3);
+        guestForm.elements.guestName.focus();
+      });
+
+      $$("[data-back]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var to = Number(btn.getAttribute("data-back"));
+          setStep(to);
+          if (to === 1) datesForm.elements.checkIn.focus();
+          if (to === 2) {
+            var first = roomOptions.querySelector("input:not(:disabled)");
+            if (first) first.focus();
+          }
+        });
+      });
+
+      function currentCategory() {
+        for (var i = 0; i < CATEGORIES.length; i++) {
+          if (CATEGORIES[i].id === state.category) return CATEGORIES[i];
         }
-        
-        .logo-text h1 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin: 0;
-        }
-        
-        .logo-text p {
-            color: var(--muted);
-            font-size: 1rem;
-            margin: 0.5rem 0 0;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-        
-        .card-header {
-            background: linear-gradient(135deg, #0F172A, #2563EB);
-            color: white;
-            padding: 1.5rem 2rem;
-        }
-        
-        .card-header h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .card-body {
-            padding: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #E5E7EB;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+        return null;
+      }
+
+      function refreshReview() {
+        var cat = currentCategory();
+        var total = guestsTotal();
+        $("#review-dates").textContent = formatBR(state.checkIn) + " a " + formatBR(state.checkOut);
+        $("#review-room").textContent = cat ? cat.name : "—";
+        $("#review-guests").textContent = total + (total === 1 ? " hóspede" : " hóspedes") +
+          " (" + state.adults + " adulto" + (state.adults === 1 ? "" : "s") + ", " +
+          state.children + " criança" + (state.children === 1 ? "" : "s") + ")";
+        $("#review-nights").textContent = state.nights + (state.nights === 1 ? " diária" : " diárias");
+        $("#review-total").textContent = cat ? money(cat.nightly * state.nights) + " estimado" : "—";
+      }
+
+      function buildMessage() {
+        var cat = currentCategory();
+        var f = guestForm.elements;
+        var lines = [
+          "Pedido de reserva — Hotel Juruá Palace",
+          "Hóspede: " + f.guestName.value.trim(),
+          "E-mail: " + f.guestEmail.value.trim(),
+          "WhatsApp/telefone: " + f.guestPhone.value.trim(),
+          "Entrada: " + formatBR(state.checkIn),
+          "Saída: " + formatBR(state.checkOut),
+          "Diárias: " + state.nights,
+          "Categoria: " + (cat ? cat.name : "—"),
+          "Hóspedes: " + guestsTotal() + " (" + state.adults + " adulto(s), " + state.children + " criança(s))",
+          "Estimativa das diárias: " + (cat ? money(cat.nightly * state.nights) : "—"),
+          "Pagamento: na hospedagem, a combinar com a recepção"
+        ];
+        var note = f.note.value.trim();
+        if (note) lines.push("Observação: " + note);
+        lines.push("Origem: /reservar/hotel-jurua-palace/");
+        return lines.join("\n");
+      }
+
+      guestForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        setError(guestError, "");
+        var f = guestForm.elements;
+        var name = f.guestName.value.trim();
+        var email = f.guestEmail.value.trim();
+        var phone = f.guestPhone.value.trim();
+        var digits = phone.replace(/\D/g, "");
+
+        if (name.length < 3) { setError(guestError, "Informe o nome completo do hóspede."); f.guestName.focus(); return; }
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setError(guestError, "Informe um e-mail válido para a recepção responder."); f.guestEmail.focus(); return; }
+        if (digits.length < 8) { setError(guestError, "Informe um WhatsApp ou telefone com DDD."); f.guestPhone.focus(); return; }
+        if (!state.category) { setError(guestError, "Volte e escolha a categoria de quarto."); return; }
+
+        var submit = $("#submit-booking");
+        submit.disabled = true;
+        var original = submit.textContent;
+        submit.textContent = "Enviando…";
+
+        var payload = {
+          name: name,
+          email: email,
+          subject: "Pedido de reserva — Hotel Juruá Palace",
+          source: "reservar/hotel-jurua-palace",
+          message: buildMessage()
+        };
+
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "content-type": "application/json", accept: "application/json" },
+          body: JSON.stringify(payload)
+        })
+          .then(function (res) {
+            return res.json().catch(function () { return {}; }).then(function (data) {
+              if (!res.ok || !data || data.ok === false) {
+                throw new Error((data && data.error) || "Não foi possível enviar agora.");
+              }
+              return data;
+            });
+          })
+          .then(function (data) {
+            var proto = (data && data.item && data.item.id) ? data.item.id : "";
+            $("#success-protocol").textContent = proto ? "Referência do pedido: " + proto : "";
+            guestForm.reset();
+            setStep(4);
+            successPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+          })
+          .catch(function (error) {
+            setError(guestError, error && error.message ? error.message : "Falha de conexão. Tente novamente em instantes.");
+          })
+          .finally(function () {
+            submit.disabled = false;
+            submit.textContent = original;
+          });
+      });
+
+      $("#new-booking").addEventListener("click", function () {
+        state.category = null;
+        refreshReview();
+        setStep(1);
+        datesForm.elements.checkIn.focus();
+      });
+
+      setStep(1);
+    })();
+  </script>
+</body>
+</html>

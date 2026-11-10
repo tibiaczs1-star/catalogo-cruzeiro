@@ -21293,6 +21293,18 @@ async function handleStatic(req, res, pathname, requestUrl) {
        return res.end();
      }
 
+     // CZS 2026-11-10 — /hoteis so era atendido pela integracao AShotelaria.
+     // Sem ASHOTELARIA_ENABLED no servico, a rota caia no fallback de
+     // manutencao mesmo com a pagina de reserva publicada. Agora aponta
+     // para a reserva real do hotel.
+     if (pathname === "/hoteis" || pathname === "/hoteis/") {
+       res.writeHead(302, {
+         Location: "/reservar/hotel-jurua-palace/",
+         "Cache-Control": "no-store"
+       });
+       return res.end();
+     }
+
      if (pathname.startsWith("/reservar/")) {
        let filePath = path.join(ROOT_DIR, "reservar", pathname.slice("/reservar/".length));
        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
