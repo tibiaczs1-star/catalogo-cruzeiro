@@ -7017,6 +7017,8 @@ const AGENTE_VIVO_SCRIPT = '<script src="/agente-vivo/agentes.js?v=20261110-a10"
 const SURREAL_LAYER_TAG =
   '<link rel="stylesheet" href="/surreal/surreal.css?v=20261110-s4" data-czs-surreal="1">\n  ' +
   '<script src="/surreal/surreal.js?v=20261110-s4" defer data-czs-surreal="1"></script>';
+// Enfeite do enxame: pontos de luz que montam os blocos um a um.
+const ENXAME_TAG = '<script src="/enxame/enxame.js?v=20261110-e4" defer data-czs-enxame="1"></script>';
 const AGENTE_VIVO_EXCLUDED_FILES = new Set([
   "maintenance.html",
   "pubpaid.html",
@@ -7040,14 +7042,11 @@ function injectAgenteVivo(html) {
   if (!/<html[\s>]/i.test(html)) return html;
   if (/<html[^>]*\bczs-agente-vivo-offline\b/i.test(html)) return html;
 
-  const wantsAgents = !html.includes('data-czs-agente-vivo="1"');
-  const wantsSurreal =
-    !html.includes('data-czs-surreal="1"') && !/<html[^>]*\bczs-surreal-offline\b/i.test(html);
-  if (!wantsAgents && !wantsSurreal) return html;
+  const wantsEnxame = !html.includes('data-czs-enxame="1"') && !/<html[^>]*\bczs-enxame-offline\b/i.test(html);
+  if (!wantsEnxame) return html;
 
   const tags = [];
-  if (wantsSurreal) tags.push(SURREAL_LAYER_TAG);
-  if (wantsAgents) tags.push(AGENTE_VIVO_SCRIPT);
+  if (wantsEnxame) tags.push(ENXAME_TAG);
   const payload = "  " + tags.join("\n  ");
 
   if (html.includes("</body>")) {

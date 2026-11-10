@@ -54,15 +54,14 @@ test("rota do registro e servida sem cache para o painel ver o estado novo", () 
   const routeBlock = server.slice(server.indexOf("/agente-vivo/registro.json"));
   assert.match(routeBlock.slice(0, 600), /cacheControl: "no-store"/);
 });
-test("camada surreal sai no mesmo ponto de injecao, declarada antes do uso", () => {
-  const surrealIndex = server.indexOf("const SURREAL_LAYER_TAG");
-  assert.ok(surrealIndex > 0, "SURREAL_LAYER_TAG precisa existir");
-  assert.ok(surrealIndex < server.indexOf("function injectAgenteVivo"), "constante antes da funcao");
-  assert.match(server, /\/surreal\/surreal\.css\?v=/);
-  assert.match(server, /\/surreal\/surreal\.js\?v=/);
-  // Uma pagina que pede so uma das camadas recebe so ela.
-  assert.match(server, /const wantsSurreal =/);
-  assert.match(server, /if \(wantsSurreal\) tags\.push\(SURREAL_LAYER_TAG\)/);
+test("so o enxame e injetado: painel tecnico e camada de papel ficaram fora", () => {
+  // 2026-11-10: o usuario apontou excesso de camadas ("IA slop"). O painel
+  // de verificacao e a textura de papel sairam da injecao; sobrou o enfeite
+  // do enxame. Os arquivos continuam no repo, so nao sao servidos.
+  assert.match(server, /const wantsEnxame =/);
+  assert.match(server, /if \(wantsEnxame\) tags\.push\(ENXAME_TAG\)/);
+  assert.doesNotMatch(server, /if \(wantsSurreal\) tags\.push/);
+  assert.doesNotMatch(server, /if \(wantsAgents\) tags\.push/);
 });
 
 test("camada surreal nao mexe em conteudo nem esconde texto", () => {
