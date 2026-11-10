@@ -7006,10 +7006,45 @@ function rememberStaticFileResponse(key, value) {
   staticFileResponseCache.set(key, value);
 }
 
+// CZS 2026-11-10 — plugin "Agentes ao Vivo".
+// Uma unica tag injetada no fim do HTML de todas as paginas publicas,
+// em vez de editar 30 arquivos. Admin, jogos, manutencao e paginas de
+// impressao ficam de fora: o painel nao deve aparecer em cockpit interno.
+const AGENTE_VIVO_SCRIPT = '<script src="/agente-vivo/agentes.js?v=20261110-a9" defer data-czs-agente-vivo="1"></script>';
+const AGENTE_VIVO_EXCLUDED_FILES = new Set([
+  "maintenance.html",
+  "pubpaid.html",
+  "pubpaid-admin.html",
+  "game-director-demo.html",
+  "pesquisa-acre-2026-admin.html",
+  "real-agents.html",
+  "app.html"
+]);
+const AGENTE_VIVO_EXCLUDED_PREFIXES = ["backend/", "assets/"];
+
+function shouldInjectAgenteVivo(filePath) {
+  const relative = path.relative(ROOT_DIR, filePath).split(path.sep).join("/");
+  if (!relative || relative.startsWith("..")) return false;
+  if (AGENTE_VIVO_EXCLUDED_PREFIXES.some((prefix) => relative.startsWith(prefix))) return false;
+  if (AGENTE_VIVO_EXCLUDED_FILES.has(path.basename(relative))) return false;
+  return true;
+}
+
+function injectAgenteVivo(html) {
+  if (!/<html[\s>]/i.test(html)) return html;
+  if (html.includes('data-czs-agente-vivo="1"')) return html;
+  if (/<html[^>]*\bczs-agente-vivo-offline\b/i.test(html)) return html;
+  if (html.includes("</body>")) {
+    return html.replace(/<\/body>(?![\s\S]*<\/body>)/i, `  ${AGENTE_VIVO_SCRIPT}\n</body>`);
+  }
+  return html + `\n${AGENTE_VIVO_SCRIPT}\n`;
+}
+
 function sendFile(req, res, filePath, options = {}) {
   const mimeType = mimeFor(filePath);
   const cacheControl = options.cacheControl || getStaticCacheControl(filePath);
   const usesTemplateVars = mimeType.startsWith("text/html") && options.templateVars;
+  const injectsAgenteVivo = mimeType.startsWith("text/html") && shouldInjectAgenteVivo(filePath);
   const isRangeMedia = /^(audio|video)\//i.test(mimeType) && !usesTemplateVars;
   const rangeHeader = String(req.headers.range || "").trim();
 
@@ -7098,6 +7133,11 @@ function sendFile(req, res, filePath, options = {}) {
         );
       }
 
+      fileBuffer = Buffer.from(html, "utf-8");
+    }
+
+    if (injectsAgenteVivo) {
+      const html = injectAgenteVivo(fileBuffer.toString("utf-8"));
       fileBuffer = Buffer.from(html, "utf-8");
     }
 
@@ -21153,6 +21193,17 @@ async function handleStatic(req, res, pathname, requestUrl) {
 
   if (pathname === "/sitemap.xml") {
        return sendXml(res, 200, buildSitemapXml(req));
+     }
+
+  if (pathname === "/agente-vivo/registro.json") {
+       const registryFile = path.join(ROOT_DIR, "agente-vivo", "registro.json");
+       if (!fs.existsSync(registryFile)) {
+         return sendJson(res, 404, { ok: false, error: "registro_ausente" });
+       }
+       return sendFile(req, res, registryFile, {
+         cacheControl: "no-store",
+         headers: { "Access-Control-Allow-Origin": "*" }
+       });
      }
 
       if (ashotelariaIntegration && ASHOTELARIA_ENABLED) {

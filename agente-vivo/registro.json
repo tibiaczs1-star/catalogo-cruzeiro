@@ -1,0 +1,44 @@
+{
+  "updatedAt": "2026-11-10T05:48:23.904Z",
+  "source": "scripts/agente-vivo-supervisor.js",
+  "disclaimer": "Cada linha vem de checagem de arquivos e rotas publicadas. Nada aqui é previsão.",
+  "machines": [
+    {
+      "label": "Leitor de estrutura",
+      "note": "87 seções lidas em 12 páginas públicas",
+      "status": "ok"
+    },
+    {
+      "label": "Verificador de imagem",
+      "note": "11 imagens resolvem no disco",
+      "status": "ok"
+    },
+    {
+      "label": "Guardião de rotas",
+      "note": "29 links internos conferidos",
+      "status": "ok"
+    },
+    {
+      "label": "Indexador de subsistemas",
+      "note": "5 subsistemas publicados: czslbs, bookray, metafest, questfest, cruzeiro-do-sul-barzinho",
+      "status": "ok"
+    },
+    {
+      "label": "Inspetor de reservas",
+      "note": "página de reserva publicada",
+      "status": "ok"
+    }
+  ],
+  "details": {
+    "pages": 12,
+    "subpages": [
+      "czslbs/index.html",
+      "bookray/index.html",
+      "metafest/index.html",
+      "questfest/index.html",
+      "cruzeiro-do-sul-barzinho/index.html"
+    ],
+    "missingImages": [],
+    "missingLinks": []
+  }
+}

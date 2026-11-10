@@ -63,8 +63,9 @@
     "rayx:test": "node --test rayx/test/*.test.js",
     "rayx:shell": "node rayx/core/shell.js",
     "rayx:status": "node rayx/core/status.js",
-    "start": "node server.js",
-    "sync:online-local": "node scripts/sync-online-local.js"
+    "start": "node scripts/agente-vivo-supervisor.js && node server.js",
+    "sync:online-local": "node scripts/sync-online-local.js",
+    "agentes:registro": "node scripts/agente-vivo-supervisor.js"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.2",

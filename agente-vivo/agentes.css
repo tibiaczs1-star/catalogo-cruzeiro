@@ -1,0 +1,318 @@
+/* ============================================================
+   CZS — Agentes ao Vivo
+   Instrumento vertical ancorado na borda direita.
+   Vidro fumê escuro sobre o portal claro; grade técnica e LED âmbar.
+   A direção surreal vem da escala e da borda: parece um módulo
+   acoplado à página, não um widget de suporte.
+   ============================================================ */
+
+.av {
+  --av-ink: #06101d;
+  --av-glow: #f0c96a;
+  --av-live: #59e0b4;
+  --av-alert: #ff8a7a;
+  --av-line: rgba(233, 240, 255, 0.14);
+  --av-w: 268px;
+  --av-gap: clamp(8px, 1.2vw, 18px);
+  position: fixed;
+  top: clamp(72px, 12vh, 132px);
+  right: 0;
+  bottom: clamp(72px, 12vh, 132px);
+  z-index: 2147483000;
+  width: var(--av-w);
+  display: block;
+  font-family: "Sora", "Outfit", system-ui, sans-serif;
+  pointer-events: none;
+  contain: layout style;
+}
+
+.av-rail {
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-height: 100%;
+}
+
+.av-dock-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.av-rail {
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 16px 0 0 16px;
+  border-right: 0;
+  padding: 14px 15px 12px 16px;
+  color: #e9f0ff;
+  background:
+    linear-gradient(200deg, rgba(9, 21, 38, 0.95), rgba(5, 12, 24, 0.97)),
+    radial-gradient(circle at 100% 0%, rgba(240, 201, 106, 0.18), transparent 62%);
+  border: 1px solid var(--av-line);
+  box-shadow:
+    -24px 18px 60px rgba(3, 10, 20, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  transform-origin: 100% 50%;
+  transition: transform .46s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(233, 240, 255, 0.2) transparent;
+}
+.av-rail::-webkit-scrollbar { width: 4px; }
+.av-rail::-webkit-scrollbar-thumb { background: rgba(233, 240, 255, 0.18); border-radius: 4px; }
+
+.av-rail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: .55;
+  background-image:
+    linear-gradient(rgba(233, 240, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 240, 255, 0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(200deg, black, transparent 78%);
+  -webkit-mask-image: linear-gradient(200deg, black, transparent 78%);
+}
+
+.av-head { display: flex; align-items: center; gap: 9px; position: relative; }
+.av-head-text { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.av-head-text strong {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.av-head-text span {
+  font-size: 10.5px;
+  color: rgba(233, 240, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.av-head-stat {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(233, 240, 255, 0.46);
+  white-space: nowrap;
+}
+
+.av-led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--av-live);
+  box-shadow: 0 0 0 3px rgba(89, 224, 180, 0.16);
+  flex: none;
+}
+.av-led.is-working {
+  background: var(--av-glow);
+  box-shadow: 0 0 0 3px rgba(240, 201, 106, 0.18);
+  animation: av-pulse 1.4s ease-in-out infinite;
+}
+@keyframes av-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(240, 201, 106, 0.18); }
+  50% { box-shadow: 0 0 0 7px rgba(240, 201, 106, 0.06); }
+}
+
+/* Trilho de montagem: linha vertical que "corre" enquanto trabalha. */
+.av-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0 0 0 2px;
+  display: grid;
+  gap: 4px;
+  position: relative;
+}
+.av-list::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(240, 201, 106, 0.35), rgba(233, 240, 255, 0.06));
+}
+
+.av-item {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) 12px;
+  gap: 9px;
+  align-items: start;
+  padding: 7px 8px 7px 4px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.028);
+  opacity: .55;
+  transition: opacity .35s ease, background .25s, border-color .25s;
+}
+.av-item.is-done { opacity: 1; }
+.av-item.is-idle { opacity: .34; }
+.av-item.is-running {
+  opacity: 1;
+  background: rgba(240, 201, 106, 0.09);
+  border-color: rgba(240, 201, 106, 0.32);
+}
+
+.av-sig {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  margin-left: 1px;
+  border-radius: 50%;
+  border: 1px solid rgba(233, 240, 255, 0.32);
+  background: var(--av-ink);
+  z-index: 1;
+}
+.av-item.is-done .av-sig { background: var(--av-live); border-color: var(--av-live); box-shadow: 0 0 8px rgba(89, 224, 180, 0.45); }
+.av-item.is-running .av-sig {
+  background: var(--av-glow);
+  border-color: var(--av-glow);
+  box-shadow: 0 0 10px rgba(240, 201, 106, 0.7);
+}
+
+.av-body { display: grid; gap: 1px; min-width: 0; }
+.av-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+.av-note {
+  font-size: 10px;
+  line-height: 1.38;
+  color: rgba(233, 240, 255, 0.56);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.av-item.is-running .av-note::after {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: var(--av-glow);
+  animation: av-dot 0.9s steps(2, jump-none) infinite;
+  vertical-align: 1px;
+}
+@keyframes av-dot { 50% { opacity: 0; } }
+
+.av-mark { font-size: 11px; font-weight: 700; color: var(--av-alert); text-align: right; }
+
+.av-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(233, 240, 255, 0.08);
+}
+.av-legend {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: rgba(233, 240, 255, 0.44);
+  margin: 0;
+}
+.av-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
+.av-dot--ok { background: var(--av-live); }
+.av-dot--run { background: var(--av-glow); margin-left: 3px; }
+.av-reset {
+  font: inherit;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(233, 240, 255, 0.7);
+  background: none;
+  border: 1px solid rgba(233, 240, 255, 0.16);
+  border-radius: 999px;
+  padding: 3px 9px;
+  cursor: pointer;
+}
+.av-reset:hover { color: #fff; border-color: rgba(240, 201, 106, 0.5); }
+
+/* Aba vertical na borda quando recolhido. */
+.av-dock-toggle {
+  display: none;
+  pointer-events: auto;
+  font: inherit;
+  writing-mode: vertical-rl;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px;
+  border-radius: 12px 0 0 12px;
+  border: 1px solid var(--av-line);
+  border-right: 0;
+  background: linear-gradient(180deg, rgba(9, 21, 38, 0.96), rgba(5, 12, 24, 0.98));
+  color: #fff;
+  cursor: pointer;
+  box-shadow: -14px 10px 34px rgba(3, 10, 20, 0.36);
+}
+.av-dock-toggle:focus-visible, .av-rail :focus-visible {
+  outline: 2px solid var(--av-glow);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.av-dock-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--av-glow);
+  box-shadow: 0 0 0 3px rgba(240, 201, 106, 0.16);
+}
+.av-dock-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Recolhido: desliza para fora pela direita, fica só a aba. */
+.av.is-collapsed .av-rail {
+  transform: translateX(calc(100% + var(--av-gap)));
+  opacity: 0;
+  pointer-events: none;
+}
+.av.is-collapsed .av-dock-toggle { display: inline-flex; }
+
+@media (max-width: 900px) {
+  .av {
+    --av-w: 232px;
+    top: 84px;
+    bottom: 84px;
+  }
+  .av-head-stat { display: none; }
+  .av-note { -webkit-line-clamp: 2; }
+}
+
+@media (max-height: 620px) {
+  .av { top: 64px; bottom: 64px; }
+  .av-item { padding-block: 5px; }
+  .av-note { -webkit-line-clamp: 1; }
+}
+
+/* Com movimento reduzido: sem animação decorativa, mas o recolher
+   e o soltar continuam funcionando (é estado, não enfeite). */
+@media (prefers-reduced-motion: reduce) {
+  .av-rail { transition: opacity .18s linear; }
+  .av-led.is-working { animation: none; }
+  .av-item.is-running .av-note::after { animation: none; }
+}
