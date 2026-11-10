@@ -12332,7 +12332,11 @@ body.v8-merge-ready .v8-procurement-list span {
     display: -webkit-box !important;
     overflow: hidden !important;
     -webkit-box-orient: vertical !important;
-    -webkit-line-clamp: 4 !important;
+    /* CZS 2026-11-10 — 5 linhas com reticencia. Com 4, manchete longa
+       cortava a palavra ao meio e sobrava letra aparecendo sob o titulo. */
+    -webkit-line-clamp: 5 !important;
+    line-clamp: 5 !important;
+    text-overflow: ellipsis !important;
     font-size: clamp(24px, 6.5vw, 30px) !important;
   }
 

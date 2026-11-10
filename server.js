@@ -2687,7 +2687,7 @@ function inferCategoryKeyFromContent(rawText) {
   if (!haystack) return "";
 
   if (
-    /\b(policia|policial|preso|prende|prisao|trafico|crime|assalto|roubo|furto|homicidio|estupr|foragido|delegacia|delegado|operacao)\b/.test(
+    /\b(policia|policial|preso|prende|prisao|trafico|traficante|crime|assalto|roubo|furto|homicidio|estupr|foragido|delegacia|delegado|operacao|apreensao|apreende|apreendid|cocaina|maconha|crack|entorpecente|drogas?|armas? de fogo|mandado de prisao|investigacao|ocorrencia policial)\b/.test(
       haystack
     )
   ) {
@@ -2779,12 +2779,31 @@ function normalizeNewsCategoryKey(rawCategory = "", context = {}) {
     if (mappedKey === "prefeitura" && !isJuruaPrefeituraScope(fullText)) {
       return inferCategoryKeyFromContent(contextText) || "cotidiano";
     }
+    // CZS 2026-11-10 — mesma regra do bloco abaixo: quando o texto da
+    // noticia contradiz a categoria do feed, o texto vence.
+    const inferredFromText = inferCategoryKeyFromContent(contextText);
+    if (inferredFromText && inferredFromText !== mappedKey) {
+      if (mappedKey === "prefeitura") return mappedKey;
+      return inferredFromText;
+    }
     return mappedKey;
   }
 
   if (rawKey && !GENERIC_CATEGORY_KEYS.has(rawKey) && isKnownCategoryKey(rawKey)) {
     if (rawKey === "prefeitura" && !isJuruaPrefeituraScope(fullText)) {
       return inferCategoryKeyFromContent(contextText) || "cotidiano";
+    }
+    // CZS 2026-11-10 — o RSS manda categoria errada com frequencia
+    // ("Saude" para noticia de chuva, "Policia" para regularizacao de
+    // caminhoes rurais). Quando o proprio texto aponta outra categoria,
+    // o texto vence: ele descreve a noticia, o feed so palpite.
+    const inferred = inferCategoryKeyFromContent(contextText);
+    if (inferred && inferred !== rawKey) {
+      // Mantem a do feed apenas quando o texto nao tem sinal claro
+      // ou quando a do feed e "prefeitura" (ato oficial do municipio).
+      if (rawKey === "prefeitura") return rawKey;
+      if (inferred === "seguranca" || inferred === "policia") return inferred;
+      return inferred;
     }
     return rawKey;
   }
