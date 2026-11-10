@@ -7018,7 +7018,7 @@ const SURREAL_LAYER_TAG =
   '<link rel="stylesheet" href="/surreal/surreal.css?v=20261110-s4" data-czs-surreal="1">\n  ' +
   '<script src="/surreal/surreal.js?v=20261110-s4" defer data-czs-surreal="1"></script>';
 // Enfeite do enxame: pontos de luz que montam os blocos um a um.
-const ENXAME_TAG = '<script src="/enxame/enxame.js?v=20261110-e4" defer data-czs-enxame="1"></script>';
+const ENXAME_TAG = '<script src="/enxame/enxame.js?v=20261110-e6" defer data-czs-enxame="1"></script>';
 const AGENTE_VIVO_EXCLUDED_FILES = new Set([
   "maintenance.html",
   "pubpaid.html",

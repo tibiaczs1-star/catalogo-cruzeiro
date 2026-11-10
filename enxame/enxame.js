@@ -1,13 +1,18 @@
 "use strict";
 
 /* ============================================================
-   CZS — Enxame
-   Pontos de luz atravessam a pagina, se juntam sobre um bloco,
-   contornam a moldura dele e se abrem de novo. Depois vao para o
-   proximo bloco. E o unico enfeite: nada de painel, nada de textura.
+   CZS — Enxame de agentes
+   100 pontos minúsculos chegam junto com a página. Percorrem os blocos
+   como se estivessem montando cada parte, com uma etiqueta discreta
+   dizendo o que está sendo montado.
 
-   Sem dependencias. Um canvas. Custa quase nada: para sozinho
-   quando a aba esta oculta ou fora da tela.
+   Terminada a montagem, todos se juntam num aglomerado pequeno no canto
+   e ficam ali. De longe, o aglomerado acompanha o mouse: só inclina, sem
+   perseguir. É a sugestão de que o jornal é cuidado por agentes, sem
+   virar enfeite forçado.
+
+   Sem imagem, sem requisição, sem biblioteca. Um canvas só.
+   Desliga por completo em movimento reduzido e em economia de dados.
    ============================================================ */
 
 (function () {
@@ -19,11 +24,13 @@
   if (reduced || saveData) return;
 
   var TAU = Math.PI * 2;
-  var GOLD = "#f0c96a";
-  var DOTS = ["#e0a92c", "#f2b945", "#c98f16", "#2f7fa8"];
+  var GOLD = "#e0a92c";
+  var DOTS = ["#e0a92c", "#f2b945", "#c98f16", "#2f7fa8", "#8a6a1f"];
+  var TOTAL = 100;
 
   function rand(a, b) { return a + Math.random() * (b - a); }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
 
   function pointOnRect(r, t) {
     var w = r.width, h = r.height, d = 2 * (w + h);
@@ -43,32 +50,40 @@
     this.canvas.setAttribute("aria-hidden", "true");
     this.canvas.style.cssText =
       "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;" +
-      "z-index:2147481000;opacity:0;transition:opacity .8s ease";
+      "z-index:2147481000;opacity:0;transition:opacity 1s ease";
     this.ctx = this.canvas.getContext("2d");
     this.dpr = Math.min(window.devicePixelRatio || 1, 2);
     document.body.appendChild(this.canvas);
 
+    this.label = document.createElement("div");
+    this.label.setAttribute("aria-hidden", "true");
+    this.label.style.cssText =
+      "position:fixed;pointer-events:none;z-index:2147481001;opacity:0;" +
+      "transition:opacity .45s ease;font:600 9px/1.2 Sora,system-ui,sans-serif;" +
+      "letter-spacing:.18em;text-transform:uppercase;color:#f5efe4;white-space:nowrap;" +
+      "background:rgba(9,21,38,.72);padding:4px 8px;border-radius:3px";
+    document.body.appendChild(this.label);
+
     this.parts = [];
-    this.state = "drift";
-    this.current = null;
-    this.used = [];
+    this.state = "arrive";
     this.frame = 0;
     this.last = 0;
-    this.trailProgress = 0;
     this.running = false;
+    this.queue = [];
+    this.rect = null;
+    this.progress = 0;
+    this.mouse = { x: -9999, y: -9999 };
+    this.anchor = { x: 0, y: 0 };
 
     this.resize();
     this.spawn();
     this.bind();
-    this.play();
 
-    // Primeiro alvo apos o portal assentar.
     var self = this;
-    this.driftUntil = performance.now() + 1400;
-    window.setTimeout(function () {
-      self.canvas.style.opacity = "1";
-      self.pickNext();
-    }, 1500);
+    this.canvas.style.opacity = "1";
+    this.arriveAt = performance.now();
+    this.play();
+    window.setTimeout(function () { self.buildQueue(); self.nextTarget(); }, 900);
   }
 
   Enxame.prototype.resize = function () {
@@ -77,40 +92,47 @@
     this.canvas.width = Math.round(this.w * this.dpr);
     this.canvas.height = Math.round(this.h * this.dpr);
     this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    this.anchor.x = this.w < 720 ? 34 : 60;
+    this.anchor.y = this.h - (this.w < 720 ? 150 : 176);
   };
 
   Enxame.prototype.spawn = function () {
-    var count = this.w < 720 ? 38 : 78;
     this.parts = [];
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < TOTAL; i++) {
+      var edge = Math.random();
+      var sx, sy;
+      if (edge < 0.5) { sx = rand(-60, this.w); sy = -30; }
+      else if (edge < 0.75) { sx = this.w + 30; sy = rand(0, this.h); }
+      else { sx = rand(0, this.w); sy = this.h + 30; }
       this.parts.push({
-        x: rand(0, this.w),
-        y: rand(0, this.h),
-        vx: rand(-0.4, 0.4),
-        vy: rand(-0.4, 0.4),
-        r: rand(1.1, 2.8),
-        a: rand(0.4, 0.95),
+        x: sx,
+        y: sy,
+        vx: 0,
+        vy: 0,
+        r: rand(0.9, 1.9),
+        a: rand(0.45, 0.95),
         color: DOTS[(Math.random() * DOTS.length) | 0],
-        phase: rand(0, TAU),
-        speed: rand(0.7, 1.6)
+        jitter: rand(0, TAU),
+        lag: rand(0.6, 1.5),
+        weight: rand(0.6, 1.4)
       });
     }
   };
 
   Enxame.prototype.bind = function () {
     var self = this;
-    window.addEventListener("resize", function () { self.resize(); self.spawn(); }, { passive: true });
+    window.addEventListener("resize", function () { self.resize(); }, { passive: true });
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden) self.running = false; else self.play();
+      if (document.hidden) { self.running = false; clearTimeout(self.timer); }
+      else self.play();
     });
-    window.addEventListener("scroll", function () {
-      // Rolar cancela a moldura: o bloco saiu do lugar.
-      if (self.state === "gather" || self.state === "trace") {
-        self.state = "drift";
-        self.current = null;
-        self.trail = null;
-        self.driftUntil = performance.now() + 900;
-      }
+    window.addEventListener("pointermove", function (e) {
+      self.mouse.x = e.clientX;
+      self.mouse.y = e.clientY;
+    }, { passive: true });
+    window.addEventListener("pointerleave", function () {
+      self.mouse.x = -9999;
+      self.mouse.y = -9999;
     }, { passive: true });
   };
 
@@ -121,94 +143,85 @@
     this.schedule();
   };
 
-  // requestAnimationFrame nao dispara em aba de fundo nem em alguns
-  // navegadores de automacao; o timer garante que o enxame ande de
-  // qualquer jeito. Quem puder usar rAF usa, em cima do timer.
+  // Timer, e não requestAnimationFrame: rAF não dispara em aba de fundo.
   Enxame.prototype.schedule = function () {
     var self = this;
-    if (this.timer) clearTimeout(this.timer);
+    clearTimeout(this.timer);
     this.timer = setTimeout(function () {
       if (!self.running) return;
-      var now = performance.now();
-      self.tick(now);
+      self.tick(performance.now());
       self.schedule();
     }, 16);
   };
 
-  /* ---------- escolha de blocos ---------- */
-
-  Enxame.prototype.candidates = function () {
-    var nodes = document.querySelectorAll("main section, main .lead-card, main article, .lead-card, .service-card, .adbox");
+  Enxame.prototype.buildQueue = function () {
+    var nodes = document.querySelectorAll(".hero-grid, main section, .lead-card, .adbox");
     var out = [];
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
       var r = el.getBoundingClientRect();
-      // Só blocos com tamanho legível e perto da tela.
-      if (r.width < 220 || r.height < 90) continue;
-      if (r.bottom < 60 || r.top > this.h - 60) continue;
+      if (r.width < 260 || r.height < 100) continue;
       out.push(el);
     }
-    return out;
+    // Só o que aparece na primeira tela monta na frente do leitor.
+    this.queue = out.slice(0, 4);
   };
 
-  Enxame.prototype.pickNext = function () {
-    var list = this.candidates().filter(function (el) { return this.used.indexOf(el) === -1; }, this);
-    if (!list.length) {
-      // Deu a volta: recomeça pelo mais visível.
-      this.used = [];
-      list = this.candidates();
-    }
-    if (!list.length) { this.state = "drift"; return; }
-
-    // O mais próximo do centro da tela tem prioridade.
-    var self = this;
-    var cx = this.w / 2, cy = this.h / 2;
-    list.sort(function (a, b) {
-      var ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
-      var da = Math.hypot(ra.left + ra.width / 2 - cx, ra.top + Math.min(ra.height, 400) / 2 - cy);
-      var db = Math.hypot(rb.left + rb.width / 2 - cx, rb.top + Math.min(rb.height, 400) / 2 - cy);
-      return da - db;
-    });
-    this.target(list[0]);
-  };
-
-  Enxame.prototype.target = function (el) {
+  Enxame.prototype.nextTarget = function () {
+    if (!this.queue.length) { this.settle(); return; }
+    var el = this.queue.shift();
     var r = el.getBoundingClientRect();
-    // Recorta ao que está visível: moldura inteira em bloco grande fica feia.
-    var top = clamp(r.top + 8, 8, this.h - 40);
-    var bottom = clamp(r.bottom - 8, top + 40, this.h - 8);
-    var box = {
-      left: clamp(r.left + 6, 4, this.w - 40),
+    var top = clamp(r.top + 6, 10, this.h - 50);
+    var bottom = clamp(r.bottom - 6, top + 50, this.h - 10);
+    var left = clamp(r.left + 6, 6, this.w - 50);
+
+    this.rect = {
+      left: left,
       top: top,
-      width: 0,
-      height: bottom - top,
-      right: 0,
-      bottom: bottom
+      width: clamp(r.width - 12, 80, this.w - left - 12),
+      height: bottom - top
     };
-    box.width = clamp(r.width - 12, 60, this.w - 12);
-    box.right = box.left + box.width;
+    this.rect.right = this.rect.left + this.rect.width;
+    this.rect.bottom = this.rect.top + this.rect.height;
 
-    this.rect = box;
-    this.current = el;
-    this.used.push(el);
-
-    var per = 2 * (box.width + box.height);
-    var n = this.parts.length;
-    for (var i = 0; i < n; i++) {
-      var p = this.parts[i];
-      var pt = pointOnRect(box, (i / n) * per);
-      p.tx = pt.x;
-      p.ty = pt.y;
-    }
-    this.state = "gather";
-    this.gatherAt = performance.now();
+    this.state = "trace";
+    this.mountStart = performance.now();
+    this.progress = 0;
+    this.showLabel(el);
   };
 
-  /* ---------- laço ---------- */
+  Enxame.prototype.showLabel = function (el) {
+    var name = "seção";
+    if (el.classList.contains("hero-grid")) name = "capa";
+    else if (el.id === "servicos") name = "serviços";
+    else if (el.id === "feed") name = "notícias";
+    else if (el.classList.contains("adbox")) name = "comercial";
+    else if (el.querySelector("h2")) {
+      name = el.querySelector("h2").textContent.trim().slice(0, 22).toLowerCase();
+    }
+    this.label.textContent = "montando " + name;
+    var r = el.getBoundingClientRect();
+    this.label.style.left = Math.round(clamp(r.left + 10, 8, this.w - 170)) + "px";
+    this.label.style.top = Math.round(clamp(r.top + 8, 8, this.h - 30)) + "px";
+    this.label.style.opacity = "0.85";
+  };
+
+  Enxame.prototype.settle = function () {
+    this.state = "cluster";
+    this.rect = null;
+    this.label.style.opacity = "0";
+    for (var i = 0; i < this.parts.length; i++) {
+      var p = this.parts[i];
+      var ang = (i / TOTAL) * TAU;
+      var radius = rand(3, 16);
+      p.hx = this.anchor.x + Math.cos(ang) * radius;
+      p.hy = this.anchor.y + Math.sin(ang) * radius * 0.8;
+    }
+  };
 
   Enxame.prototype.tick = function (now) {
     if (!this.running) return;
-    var dt = clamp(now - this.last, 8, 48);
+    var dt = clamp(now - this.last, 8, 48) / 16.667;
     this.last = now;
     this.frame++;
 
@@ -217,130 +230,80 @@
 
     var i, p;
 
-    if (this.state === "drift" && now > this.driftUntil && this.driftUntil > 0) {
-      this.driftUntil = 0;
-      this.pickNext();
+    if (this.state === "arrive" && now - this.arriveAt > 900) {
+      this.state = "idle";
+      this.nextTarget();
     }
 
-    if (this.state === "gather") {
-      var near = 0;
+    if (this.state === "trace" && this.rect) {
+      this.progress = clamp((now - this.mountStart) / 1500, 0, 1);
+      var per = 2 * (this.rect.width + this.rect.height);
+      var head = per * ease(this.progress);
       for (i = 0; i < this.parts.length; i++) {
         p = this.parts[i];
-        var dx = p.tx - p.x, dy = p.ty - p.y;
-        if (Math.hypot(dx, dy) < 14) near++;
-        p.vx += dx * 0.015 - p.vy * 0.05;
-        p.vy += dy * 0.015 + p.vx * 0.05;
-        p.vx *= 0.85; p.vy *= 0.85;
+        // Cada agente ocupa um ponto do perímetro, atrás da cabeça.
+        var back = (i / this.parts.length) * 42;
+        var pt = pointOnRect(this.rect, head - back);
+        p.vx += (pt.x - p.x) * 0.06 * p.lag - p.vy * 0.2;
+        p.vy += (pt.y - p.y) * 0.06 * p.lag + p.vx * 0.2;
+        p.vx *= 0.78; p.vy *= 0.78;
       }
-      if (near >= this.parts.length * 0.8 || now - this.gatherAt > 2200) {
-        this.state = "trace";
-        this.traceStart = now;
-      }
-    } else if (this.state === "trace") {
-      this.trailProgress = clamp((now - this.traceStart) / 1100, 0, 1);
+      if (this.progress >= 1) this.nextTarget();
+    } else if (this.state === "cluster") {
       for (i = 0; i < this.parts.length; i++) {
         p = this.parts[i];
-        p.vx += (p.tx - p.x) * 0.03 - p.vy * 0.14;
-        p.vy += (p.ty - p.y) * 0.03 + p.vx * 0.14;
-        p.vx *= 0.8; p.vy *= 0.8;
+        p.jitter += 0.02 * p.weight;
+        var jx = Math.cos(p.jitter) * 1.4;
+        var jy = Math.sin(p.jitter * 1.3) * 1.4;
+        p.vx += (p.hx + jx - p.x) * 0.02 * p.lag - p.vy * 0.3;
+        p.vy += (p.hy + jy - p.y) * 0.02 * p.lag + p.vx * 0.3;
+        p.vx *= 0.9; p.vy *= 0.9;
       }
-      if (this.trailProgress >= 1) {
-        this.state = "burst";
-        this.burstStart = now;
-        var bx = this.rect.left + this.rect.width / 2;
-        var by = this.rect.top + this.rect.height / 2;
-        for (i = 0; i < this.parts.length; i++) {
-          p = this.parts[i];
-          var ang = Math.atan2(p.y - by, p.x - bx) + rand(-0.6, 0.6);
-          var sp = rand(2.6, 6.5);
-          p.vx = Math.cos(ang) * sp;
-          p.vy = Math.sin(ang) * sp;
-        }
-      }
-    } else if (this.state === "burst") {
-      if (now - this.burstStart > 850) {
-        this.state = "drift";
-        this.current = null;
-        this.trail = null;
-        this.driftUntil = now + 1200;
-      }
+    } else if (this.state === "idle") {
+      this.settle();
     }
 
-    // integração
-    for (i = 0; i < this.parts.length; i++) {
-      p = this.parts[i];
-      if (this.state === "drift") {
-        p.phase += 0.012 * p.speed;
-        p.vx += Math.cos(p.phase * 1.3 + i) * 0.014;
-        p.vy += Math.sin(p.phase * 1.1 + i) * 0.014;
-        p.vx = clamp(p.vx * 0.985, -1.4, 1.4);
-        p.vy = clamp(p.vy * 0.985, -1.4, 1.4);
-      } else if (this.state === "burst") {
-        p.vx *= 0.955; p.vy *= 0.955;
-      }
-      var k = dt / 16.667;
-      p.x += p.vx * k;
-      p.y += p.vy * k;
-
-      if (this.state === "drift") {
-        if (p.x < -40) p.x = this.w + 40;
-        if (p.x > this.w + 40) p.x = -40;
-        if (p.y < -40) p.y = this.h + 40;
-        if (p.y > this.h + 40) p.y = -40;
-      }
-      p.x = clamp(p.x, -50, this.w + 50);
-      p.y = clamp(p.y, -50, this.h + 50);
+    var watchX = 0, watchY = 0;
+    if (this.state === "cluster" && this.mouse.x > -9999) {
+      watchX = clamp((this.mouse.x - this.anchor.x) / this.w, -1, 1);
+      watchY = clamp((this.mouse.y - this.anchor.y) / this.h, -1, 1);
     }
 
-    // desenho
-    ctx.globalCompositeOperation = "lighter";
     for (i = 0; i < this.parts.length; i++) {
       p = this.parts[i];
-      var pulse = 0.7 + Math.sin(this.frame * 0.05 + p.phase * 3) * 0.3;
-      ctx.globalAlpha = p.a * pulse * 0.22;
+      if (this.state === "cluster") {
+        // Observar de longe: inclinação mínima na direção do mouse.
+        p.vx += watchX * p.weight * 0.017;
+        p.vy += watchY * p.weight * 0.017;
+      }
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+    }
+
+    for (i = 0; i < this.parts.length; i++) {
+      p = this.parts[i];
+      var twinkle = 0.65 + Math.sin(this.frame * 0.06 + p.jitter * 2) * 0.35;
+      ctx.globalAlpha = p.a * twinkle * 0.14;
       ctx.fillStyle = p.color;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 3.2, 0, TAU);
+      ctx.arc(p.x, p.y, p.r * 3, 0, TAU);
       ctx.fill();
-      ctx.globalAlpha = p.a * pulse;
+      ctx.globalAlpha = p.a * twinkle;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, TAU);
       ctx.fill();
     }
 
-    if (this.rect && this.state === "trace") this.drawTrace(this.rect, this.trailProgress);
+    if (this.rect && this.state === "trace") {
+      ctx.globalAlpha = 0.3;
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.rect(this.rect.left + 0.5, this.rect.top + 0.5, this.rect.width, this.rect.height);
+      ctx.stroke();
+    }
 
     ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = "source-over";
-  };
-
-  Enxame.prototype.drawTrace = function (r, progress) {
-    var ctx = this.ctx;
-    var per = 2 * (r.width + r.height);
-    var len = per * progress;
-    var steps = Math.max(32, Math.round(per / 12));
-    ctx.beginPath();
-    for (var i = 0; i <= steps; i++) {
-      var t = (len / steps) * i;
-      if (t > len) break;
-      var pt = pointOnRect(r, t);
-      if (i === 0) ctx.moveTo(pt.x, pt.y);
-      else ctx.lineTo(pt.x, pt.y);
-    }
-    ctx.globalAlpha = 0.42;
-    ctx.strokeStyle = GOLD;
-    ctx.lineWidth = 1.1;
-    ctx.shadowColor = "rgba(240, 201, 106, .8)";
-    ctx.shadowBlur = 9;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    var head = pointOnRect(r, len);
-    ctx.globalAlpha = 0.9;
-    ctx.fillStyle = "#fff6da";
-    ctx.beginPath();
-    ctx.arc(head.x, head.y, 2.4, 0, TAU);
-    ctx.fill();
   };
 
   function boot() {
