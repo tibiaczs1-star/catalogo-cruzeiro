@@ -307,7 +307,6 @@ body.czs-official-system .divulgue-shell {
 .czs-official-system .detail-card { padding: var(--czs-space-5); margin-bottom: var(--czs-space-4); }
 
 @media (max-width: 860px) {
-  body.czs-official-system {
   /* CZS 2026-11-10 - removido: pintava a materia de azul-marinho ate
      18rem. A folha da materia define papel claro. */
   body.czs-official-system {
