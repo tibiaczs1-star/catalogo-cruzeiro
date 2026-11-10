@@ -2090,7 +2090,10 @@ const renderArticle = (article) => {
   setupPublicCorrectionFlow(article);
 
   updateArticleSeo(article, { indexable: true });
-  eyebrowNode.textContent = article.eyebrow || "catalogo cruzeiro do sul";
+  // CZS 2026-11-10 — o rotulo vinha de article.eyebrow, que chega em
+  // minusculas e as vezes desatualizado ("cotidiano" numa materia de
+  // saude). A categoria e a fonte confiavel; eyebrow so como reserva.
+  eyebrowNode.textContent = (article.category || article.eyebrow || "Catálogo Cruzeiro do Sul").trim();
   titleNode.textContent = article.title || "Abrindo noticia";
   metaNode.textContent = `${getArticleDateLabel(article)} • ${article.category || "Noticia"}`;
 

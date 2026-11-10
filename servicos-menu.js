@@ -51,19 +51,24 @@
 
   function inject() {
     if (document.getElementById(ITEM_ID)) return;
+    // CZS 2026-11-10 — o seletor generico "nav" acertava o primeiro nav da
+    // pagina, que na materia e o breadcrumb. O menu de servicos aparecia
+    // dentro da trilha de navegacao, com chips de Restaurantes/Farmacias
+    // colados no "Inicio / Arquivo". Agora so alvos de menu de verdade.
     const selectors = [
       ".menu-local",
       ".menu-list",
       ".left-menu",
       ".side-menu",
-      "aside nav",
       "header nav ul",
-      "nav ul",
-      "nav"
+      "header .nav ul",
+      "aside nav ul"
     ];
     for (const selector of selectors) {
       const nodes = Array.from(document.querySelectorAll(selector));
       for (const node of nodes) {
+        // Nunca dentro de trilha de navegacao ou cabecalho de artigo.
+        if (node.closest("#article-breadcrumbs, nav[aria-label*='breadcrumb' i], .breadcrumb, .article-header")) continue;
         if (attach(node)) return;
       }
     }

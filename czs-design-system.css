@@ -340,3 +340,29 @@ body.czs-official-system .divulgue-shell {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ============================================================
+   CZS 2026-11-10 — materia sobre fundo escuro.
+   O design system assume fundo claro e usa --czs-color-ink no texto.
+   Na pagina de materia o fundo e #03101d, entao o nome do autor ficava
+   azul-escuro sobre azul-escuro (contraste ~1.1:1, ilegivel).
+   ============================================================ */
+.czs-article-template .article-breadcrumbs ol,
+.czs-article-template .article-meta-grid {
+  color: rgba(226, 236, 248, 0.78);
+}
+.czs-article-template .article-meta-grid strong {
+  color: #ffffff;
+}
+.czs-article-template .article-breadcrumbs a {
+  color: #9fd7ff;
+}
+.czs-article-template .article-breadcrumbs li:not(:last-child)::after {
+  color: rgba(226, 236, 248, 0.45);
+}
+.czs-article-template .article-meta-grid time,
+.czs-article-template .article-reading-time {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(226, 236, 248, 0.24);
+  color: #eef4ff;
+}
