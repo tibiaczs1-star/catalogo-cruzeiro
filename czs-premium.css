@@ -1,0 +1,65 @@
+/* ============================================================
+   CZS Premium Layer — 2026-11-09
+   Acompanha czs-premium.js. So estiliza o que o JS liga.
+   ============================================================ */
+
+/* --- Scroll reveal ------------------------------------------ */
+.czs-reveal {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(.985);
+  filter: blur(3px);
+  transition:
+    opacity .62s cubic-bezier(.22, 1, .36, 1) var(--czs-delay, 0ms),
+    transform .62s cubic-bezier(.22, 1, .36, 1) var(--czs-delay, 0ms),
+    filter .62s cubic-bezier(.22, 1, .36, 1) var(--czs-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.czs-reveal.czs-reveal-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* --- Barra de progresso de leitura -------------------------- */
+.czs-read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 200;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #145ea8, #4da3ff 45%, #f0b429);
+  box-shadow: 0 0 12px rgba(77, 163, 255, .55);
+  pointer-events: none;
+}
+
+/* --- Correcao de rotulos ilegiveis (fundo branco + texto claro) */
+.eyebrow.czs-label-fixed {
+  background: rgba(11, 47, 94, .88) !important;
+  color: #eaf3ff !important;
+  border-color: rgba(126, 247, 255, .28) !important;
+  border-radius: 999px !important;
+  padding: 4px 11px !important;
+  width: fit-content !important;
+}
+
+/* --- Respeito ao usuario ------------------------------------ */
+.czs-premium-off .czs-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .czs-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .czs-hero-aurora { display: none !important; }
+  .czs-read-progress { transition: none !important; }
+}

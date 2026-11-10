@@ -728,8 +728,8 @@
     "at": 1777141721288
   },
   "https://www.crunchyroll.com/simulcastcalendar?date=2026-04-13": {
-    "url": "https://www.crunchyroll.com/i/simulcastcalendar/chibi_happy_140px@1x.png",
-    "at": 1778523054198
+    "url": "",
+    "at": 1794270581056
   },
   "https://press.disneyplus.com/news/disney-plus-more-bluey": {
     "url": "https://lumiere-a.akamaihd.net/v1/images/bluey_logo_media_center_thumbnail_09e55144.jpeg?region=750%2C0%2C1000%2C1000",
@@ -2226,5 +2226,13 @@
   "https://www.vozdonorte.com.br/emprego-acre-gerou-1-mil-empregos-com-carteira-em-abril/?utm_source=rss&utm_medium=rss&utm_campaign=emprego-acre-gerou-1-mil-empregos-com-carteira-em-abril": {
     "url": "https://www.vozdonorte.com.br/wp-content/uploads/2020/07/banner-governo-caica-1140X300-1024x269.jpg",
     "at": 1780351359514
+  },
+  "https://www.animenewsnetwork.com/news/2026-11-09/atelier-karia-game-video-previews-story/.243659": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gI9/youtube/Z_-vajruWOs.jpg",
+    "at": 1794270580145
+  },
+  "https://blog.youtube/news-and-events/youtube-billboard-chart-update/": {
+    "url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/YOUTUBE_BLOG_-_NEAL_S_LETTER_SQ.max-900x600.format-webp.webp",
+    "at": 1794270580188
   }
 }
