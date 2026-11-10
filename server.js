@@ -2026,7 +2026,40 @@ function updateImagePreviewCache(sourceUrl, imageUrl) {
 
 function writeStaticNewsData(items = []) {
   const safeItems = Array.isArray(items) ? items : [];
-  const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
+  // CZS 2026-11-10 — desempenho: o arquivo estava com 7,9 MB porque levava
+  // o corpo completo de todas as materias. A capa e as listas so precisam
+  // dos campos de cartao; a materia aberta busca o texto na API.
+  const compactFiles = safeItems.map((item) => ({
+    id: item.id,
+    slug: item.slug,
+    title: item.title,
+    seoTitle: item.seoTitle,
+    subtitle: item.subtitle,
+    summary: item.summary,
+    lede: item.lede,
+    date: item.date,
+    publishedAt: item.publishedAt,
+    createdAt: item.createdAt,
+    category: item.category,
+    categoryKey: item.categoryKey,
+    eyebrow: item.eyebrow,
+    previewClass: item.previewClass,
+    sourceName: item.sourceName,
+    sourceUrl: item.sourceUrl,
+    sourceLabel: item.sourceLabel,
+    imageUrl: item.imageUrl,
+    feedImageUrl: item.feedImageUrl,
+    imageCredit: item.imageCredit,
+    imageFocus: item.imageFocus,
+    imageFit: item.imageFit,
+    videoUrl: item.videoUrl,
+    priority: item.priority,
+    editorialPriority: item.editorialPriority,
+    editorialScope: item.editorialScope,
+    coverageLayer: item.coverageLayer,
+    ingestedAt: item.ingestedAt
+  }));
+  const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(compactFiles, null, 1)};\n`;
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
 
