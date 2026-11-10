@@ -17,17 +17,16 @@ body.detail-body {
   max-width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-  background: #010813 !important;
-  color: var(--article-text) !important;
+  /* CZS 2026-11-10 - fundo escuro removido: a folha da materia define papel claro. */
+  /* CZS 2026-11-10 - cor clara removida: texto agora segue o papel. */
 }
 
+/* CZS 2026-11-10 - removido: campo de bolinhas douradas e azuis
+   fixado atras de todo o texto. Decoracao sem funcao. */
 body.detail-body::before,
 body.detail-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
+  content: none !important;
+  display: none !important;
 }
 
 body.detail-body::before {
@@ -442,11 +441,12 @@ body.detail-body .site-footer {
 }
 
 /* Universal premium article identity for every noticia.html slug */
+/* CZS 2026-11-10 - fundo chapado.
+   Antes: dois radial-gradients (dourado e azul) sobre #03101d. A pagina
+   lia como landing page. Agora e papel solido e nada mais. */
 body.detail-body.article-premium-ready {
-  background:
-    radial-gradient(circle at 12% 14%, rgba(240, 180, 41, 0.15), transparent 18rem),
-    radial-gradient(circle at 90% 24%, rgba(77, 163, 255, 0.12), transparent 18rem),
-    #03101d !important;
+  background-color: #faf8f3 !important;
+  background-image: none !important;
 }
 
 body.detail-body .detail-shell.article-premium-template {

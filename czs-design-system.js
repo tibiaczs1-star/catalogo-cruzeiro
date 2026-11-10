@@ -38,11 +38,15 @@
     return { words, minutes };
   };
 
+  // CZS 2026-11-10 - data sem hora inventada.
+  // O RSS garante o dia da publicacao, nao o horario. A hora que aparecia
+  // ("00:15") era o instante em que o agregador rodou, nao a publicacao.
+  // Mostrar isso da ao leitor uma precisao que a fonte nao tem.
   const formatDate = (value) => {
     if (!value) return "Atualização em acompanhamento";
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return text(value);
-    return new Intl.DateTimeFormat("pt-BR", { dateStyle: "medium", timeStyle: "short" }).format(date);
+    return new Intl.DateTimeFormat("pt-BR", { dateStyle: "medium" }).format(date);
   };
 
   const ensureElement = (id, tag, className, parent) => {
@@ -134,20 +138,19 @@
   function renderArticleFaq(article) {
     const container = ensureElement("article-faq", "section", "article-faq czs-card", document.querySelector("#detail-shell"));
     container.setAttribute("aria-labelledby", "article-faq-title");
-    const source = text(article?.sourceName || "a fonte consultada");
-    const category = text(article?.category || "notícia");
+    // CZS 2026-11-10 - sem FAQ de fabrica.
+    // Havia duas perguntas fixas ("O que foi confirmado nesta materia?" e
+    // "Por que isso importa para o Vale do Jurua?") cujas respostas eram a
+    // propria chamada. Aparecia igual em toda materia e nao respondia nada.
+    // O bloco so existe quando a materia traz perguntas proprias em `faq`.
     const explicit = Array.isArray(article?.faq) ? article.faq : [];
-    const fallback = [
-      { question: "O que foi confirmado nesta matéria?", answer: text(article?.lede || article?.summary || "A matéria reúne o fato principal, a fonte e o contexto mínimo para o leitor acompanhar a atualização.") },
-      { question: "Por que isso importa para o Vale do Juruá?", answer: `O CZS prioriza impacto local, serviço público e contexto regional. Esta atualização entra como ${category.toLowerCase()} e mantém a origem em ${source}.` }
-    ];
-    const faq = (explicit.length ? explicit : fallback)
+    const faq = explicit
       .map((item) => ({ question: text(item.question || item.q), answer: text(item.answer || item.a) }))
       .filter((item) => item.question && item.answer)
       .slice(0, 4);
     if (!faq.length) { container.hidden = true; return; }
     container.hidden = false;
-    container.innerHTML = `<p class="eyebrow">FAQ</p><h2 id="article-faq-title">Perguntas rápidas</h2>${faq.map((item) => `<details><summary>${escapeHtml(item.question)}</summary><p>${escapeHtml(item.answer)}</p></details>`).join("")}`;
+    container.innerHTML = `<p class="eyebrow">Perguntas</p><h2 id="article-faq-title">Duvidas sobre esta materia</h2>${faq.map((item) => `<details><summary>${escapeHtml(item.question)}</summary><p>${escapeHtml(item.answer)}</p></details>`).join("")}`;
     container.__czsFaqItems = faq;
   }
 
@@ -266,7 +269,6 @@
     renderArticleBreadcrumbs(article);
     renderArticleByline(article);
     renderArticleShare(article);
-    renderArticleToc(article);
     renderArticleFaq(article);
     renderArticleRelated(article);
     renderOfficialSchema(article);

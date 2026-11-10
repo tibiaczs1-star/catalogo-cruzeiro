@@ -1118,7 +1118,7 @@ const sanitizeImageUrl = (value) => {
   }
 
   const cleaned = raw.replace(/'/g, "%27");
-  const needsProxy = /ac24horas\.com|jurua24horas\.com|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br|static\.wixstatic\.com|agencia\.ac\.gov\.br|www\.amac\.com\.br|ifac\.edu\.br|portalacre\.com\.br/i.test(
+  const needsProxy = /ac24horas\.com|jurua24horas\.com|acreagora\.com|batelao\.com|vozdonorte\.com\.br|tribunadojurua\.com\.br|juruaemtempo\.com\.br|ac24agro\.com|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br|static\.wixstatic\.com|agencia\.ac\.gov\.br|www\.amac\.com\.br|ifac\.edu\.br|portalacre\.com\.br/i.test(
     cleaned
   );
 
@@ -1381,12 +1381,12 @@ const renderArticleAudioAndCaption = (article = {}) => {
     audioReaderNode.hidden = true;
   }
 
-  const captionText = normalizeEditorialText(
-    article.videoCaptionText ||
-      article.media?.caption ||
-      article.media?.note ||
-      `${article.title || ""}. ${article.sourceName ? `Fonte: ${article.sourceName}.` : ""}`
-  );
+  // CZS 2026-11-10 - "Legenda pronta para story" saiu.
+  // Era ferramenta de redacao: montava uma legenda de rede social a partir do
+  // titulo e mostrava isso para o leitor no meio da materia. Se a materia
+  // trouxer legenda propria (videoCaptionText), o bloco aparece com ela;
+  // caso contrario, fica oculto.
+  const captionText = normalizeEditorialText(article.videoCaptionText || "");
   if (videoCaptionNode && videoCaptionTextNode && captionText) {
     videoCaptionTextNode.textContent = captionText;
     videoCaptionNode.hidden = false;
@@ -2090,7 +2090,7 @@ const renderNotFound = () => {
   updateArticleSeo(null, { indexable: false });
   titleNode.textContent = "Notícia não encontrada";
   eyebrowNode.textContent = "Catálogo Cruzeiro do Sul";
-  metaNode.textContent = "O link pode estar incompleto ou a notícia ainda não foi cadastrada.";
+  if (metaNode) metaNode.textContent = "O link pode estar incompleto ou a notícia ainda não foi cadastrada.";
   ledeNode.textContent = "Volte para a capa e escolha outra notícia.";
   clearFactTabs();
   if (analysisContainer) {
@@ -2131,12 +2131,20 @@ const renderArticle = (article) => {
   // CZS 2026-11-10 — o rotulo vinha de article.eyebrow, que chega em
   // minusculas e as vezes desatualizado ("cotidiano" numa materia de
   // saude). A categoria e a fonte confiavel; eyebrow so como reserva.
-  eyebrowNode.textContent = (article.category || article.eyebrow || "Catálogo Cruzeiro do Sul").trim();
+  // CZS 2026-11-10 - o rotulo do topo saiu.
+  // Ele repetia a editoria que ja aparece na linha de data, logo abaixo do
+  // titulo ("10 de nov. de 2026 - Cotidiano"). Duas vezes a mesma palavra em
+  // duas linhas seguidas nao informa nada.
+  eyebrowNode.textContent = "";
+  eyebrowNode.hidden = true;
   titleNode.textContent = article.title || "Abrindo noticia";
-  metaNode.textContent = `${getArticleDateLabel(article)} • ${article.category || "Noticia"}`;
+  // A linha de data saiu do HTML: a assinatura logo abaixo ja mostra data e
+  // hora. O no continua opcional para nao quebrar o render.
+  if (metaNode) metaNode.textContent = `${getArticleDateLabel(article)} • ${article.category || "Noticia"}`;
 
   resetDetailThumb();
-  categoryNode.textContent = article.category || "Noticia";
+  // O chip da editoria saiu do HTML (repetia o eyebrow acima do titulo).
+  if (categoryNode) categoryNode.textContent = article.category || "Noticia";
   ledeNode.textContent = normalizeEditorialText(article.lede || article.summary || "");
   renderArticleAudioAndCaption(article);
   sourceNameNode.textContent = article.sourceName || "Fonte local";
@@ -2249,6 +2257,12 @@ const renderArticle = (article) => {
   const quickHighlights =
     editorialTabs.find((tab) => tab.id === "importance")?.items ||
     dedupeTextList(article.highlights || []);
+
+  // CZS 2026-11-10 - cartao vazio nao aparece.
+  // Sem itens, o bloco da coluna lateral mostrava so o titulo
+  // "o que importa" e nada embaixo.
+  const highlightsCard = highlightsNode.closest(".detail-card");
+  if (highlightsCard) highlightsCard.hidden = quickHighlights.length === 0;
 
   quickHighlights.slice(0, 4).forEach((highlight) => {
     const li = document.createElement("li");

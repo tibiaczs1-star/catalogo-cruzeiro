@@ -7433,18 +7433,78 @@ const ARTICLE_UNSAFE_IMAGE_OVERRIDES = {
     "https://ac24horas.com/wp-content/uploads/2025/12/PALACIO-SERGIO-VALE-e1720103436277-1200x812.webp"
 };
 
+// CZS 2026-11-10 - duas correcoes num lugar so.
+//
+// 1) A funcao devolvia SEMPRE o fallback e ignorava o candidato. O card da
+//    materia recebia string vazia e a pagina mostrava um retangulo branco de
+//    433px. Agora devolve o candidato, e o fallback so entra quando nao ha
+//    nada utilizavel.
+//
+// 2) O RSS as vezes entrega um srcset inteiro colado no campo de imagem:
+//    "https://site/foto.jpg%201536w,%20https://site/foto-300x220.webp%20300w".
+//    Nada disso e uma URL. Agora o primeiro endereco valido da lista e
+//    extraido.
+const IMAGE_EXT_PATTERN = /\.(?:avif|gif|jpe?g|png|webp)(?:\?[^\s,]*)?/i;
+
+// Extrai a primeira URL de imagem valida de um campo que pode vir sujo.
+//
+// O RSS do WordPress as vezes cola o srcset inteiro no campo de imagem, e o
+// separador vem codificado: "foto.jpeg%201536w,%20foto-300x220.webp%20300w".
+// Nesse formato nao existe espaco nem virgula literais, entao dividir a
+// string crua encontrava 2 pedacos e nenhum virava URL: o card da materia
+// ficava com string vazia e a pagina desenhava um retangulo branco.
+// A ordem correta e decodificar primeiro, dividir depois.
+function extractFirstImageUrl(value = "") {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  if (/^https?:\/\/\S+$/i.test(raw) && IMAGE_EXT_PATTERN.test(raw) && !/%20/i.test(raw)) {
+    return raw;
+  }
+
+  let decoded = raw;
+  try {
+    decoded = decodeURIComponent(raw);
+  } catch (_error) {
+    // Sequencia invalida no meio do srcset. Decodifica so o separador, que e
+    // o que importa aqui.
+    decoded = raw.replace(/%20/gi, " ").replace(/%2C/gi, ",");
+  }
+
+  // Se a decodificacao abriu uma URL com espaco no meio (nome de arquivo com
+  // espaco de verdade), tenta o primeiro token antes de desistir.
+  const parts = decoded.split(/[\s,]+/).map((part) => part.trim()).filter(Boolean);
+  for (const part of parts) {
+    const candidate = part.replace(/\d+w$/i, "").trim();
+    if (/^https?:\/\/\S+$/i.test(candidate) && IMAGE_EXT_PATTERN.test(candidate)) {
+      return candidate;
+    }
+  }
+  return "";
+}
+
+// CZS 2026-11-10 - a funcao devolvia SEMPRE o fallback e ignorava o
+// candidato, entao o card da materia recebia string vazia e a pagina
+// mostrava um retangulo branco de 433px. Agora devolve o candidato e o
+// fallback so entra quando nao ha nada utilizavel.
 function resolveSafeArticleRecordImage(item, fallback = "") {
   const slug = String(item?.slug || slugify(item?.title || "") || "").trim().toLowerCase();
   const overrideUrl = ARTICLE_UNSAFE_IMAGE_OVERRIDES[slug] || "";
-  const candidateUrl = String(
-    item?.feedImageUrl || item?.imageUrl || item?.sourceImageUrl || item?.image || fallback || ""
-  ).trim();
+  const candidates = [
+    item?.feedImageUrl,
+    item?.imageUrl,
+    item?.sourceImageUrl,
+    item?.image,
+    fallback
+  ].map((value) => extractFirstImageUrl(value));
+
+  const candidateUrl = candidates.find(Boolean) || "";
 
   if (overrideUrl && /img_6556-1024x723\.jpeg/i.test(candidateUrl)) {
     return overrideUrl;
   }
 
-  return fallback;
+  return candidateUrl;
 }
 
 function normalizeEditorialFingerprint(value = "") {
@@ -7687,23 +7747,36 @@ function prepareRaylNarrationText(value = "", maxLength = 950) {
   return cleanShortText(text, maxLength);
 }
 
+// CZS 2026-11-10 - tira lixo de feed do texto falado.
+// Fontes WordPress anexam ao resumo: "O post ... apareceu primeiro em
+// <site> - <dominio>. " e o fecho CDATA "]]>". No corpo da pagina isso
+// aparece feio; na voz, o leitor ouve o dominio. Tambem remove o marcador
+// de corte "[...]" que o agregador deixa quando encurta o resumo.
+function stripNarrationFeedNoise(value = "") {
+  return String(value || "")
+    .replace(/\]\]>/g, " ")
+    .replace(/<!\[CDATA\[/gi, " ")
+    .replace(/\s*O post .*? apareceu primeiro em [^.]{0,160}\.?/gi, " ")
+    .replace(/\s*The post .*? appeared first on [^.]{0,160}\.?/gi, " ")
+    .replace(/\s*\[\.\.\.\]\s*/g, " ")
+    .replace(/\s*\[&hellip;\]\s*/gi, " ")
+    .replace(/\s*Fonte:\s*[A-Za-z0-9 .\/-]{0,60}\.?\s*$/i, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function buildRaylNarrationTextForArticle(item = {}) {
   const title = prepareRaylNarrationText(item.title || "Notícia do Catálogo Cruzeiro do Sul", 180);
   const category = prepareRaylNarrationText(item.category || item.eyebrow || "notícia", 60);
   const summary = prepareRaylNarrationText(item.lede || item.summary || item.description || title, 520);
   const source = prepareRaylNarrationText(item.sourceName || item.source || item.sourceLabel || "fonte monitorada", 80);
-  return prepareRaylNarrationText(
-    [
+  return stripNarrationFeedNoise(prepareRaylNarrationText([
       "Boa tarde. Eu sou a RAIane, do Catálogo Cruzeiro do Sul.",
       `Agora no catálogo: notícia de ${category}.`,
       title,
       summary && summary !== title ? summary : "",
       `A informação vem de ${source}.`
-    ]
-      .filter(Boolean)
-      .join(" "),
-    950
-  );
+    ].filter(Boolean).join(" "), 950));
 }
 
 // Chamada curta da materia: uma ou duas frases, no maximo 260 caracteres.

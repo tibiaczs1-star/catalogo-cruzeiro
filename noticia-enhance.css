@@ -107,12 +107,13 @@
   animation-delay: 1.5s;
 }
 
+/* CZS 2026-11-10 - substituido.
+   Forcava um retangulo branco de 433px quando a imagem da materia
+   falhava. Sem imagem utilizavel, o bloco nao ocupa tela. */
 .detail-hero-thumb.no-image,
 .article-hero-thumb.no-image,
 .news-detail-hero-thumb.no-image {
-  background: #ffffff !important;
-  border: 1px solid rgba(11, 31, 57, 0.1) !important;
-  box-shadow: none !important;
+  display: none;
 }
 
 .detail-main p,

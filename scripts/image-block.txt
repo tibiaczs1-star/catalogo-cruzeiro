@@ -1,0 +1,62 @@
+const IMAGE_EXT_PATTERN = /\.(?:avif|gif|jpe?g|png|webp)(?:\?[^\s,]*)?/i;
+
+// Extrai a primeira URL de imagem valida de um campo que pode vir sujo.
+//
+// O RSS do WordPress as vezes cola o srcset inteiro no campo de imagem, e o
+// separador vem codificado: "foto.jpeg%201536w,%20foto-300x220.webp%20300w".
+// Nesse formato nao existe espaco nem virgula literais, entao dividir a
+// string crua encontrava 2 pedacos e nenhum virava URL: o card da materia
+// ficava com string vazia e a pagina desenhava um retangulo branco.
+// A ordem correta e decodificar primeiro, dividir depois.
+function extractFirstImageUrl(value = "") {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  if (/^https?:\/\/\S+$/i.test(raw) && IMAGE_EXT_PATTERN.test(raw) && !/%20/i.test(raw)) {
+    return raw;
+  }
+
+  let decoded = raw;
+  try {
+    decoded = decodeURIComponent(raw);
+  } catch (_error) {
+    // Sequencia invalida no meio do srcset. Decodifica so o separador, que e
+    // o que importa aqui.
+    decoded = raw.replace(/%20/gi, " ").replace(/%2C/gi, ",");
+  }
+
+  // Se a decodificacao abriu uma URL com espaco no meio (nome de arquivo com
+  // espaco de verdade), tenta o primeiro token antes de desistir.
+  const parts = decoded.split(/[\s,]+/).map((part) => part.trim()).filter(Boolean);
+  for (const part of parts) {
+    const candidate = part.replace(/\d+w$/i, "").trim();
+    if (/^https?:\/\/\S+$/i.test(candidate) && IMAGE_EXT_PATTERN.test(candidate)) {
+      return candidate;
+    }
+  }
+  return "";
+}
+
+// CZS 2026-11-10 - a funcao devolvia SEMPRE o fallback e ignorava o
+// candidato, entao o card da materia recebia string vazia e a pagina
+// mostrava um retangulo branco de 433px. Agora devolve o candidato e o
+// fallback so entra quando nao ha nada utilizavel.
+function resolveSafeArticleRecordImage(item, fallback = "") {
+  const slug = String(item?.slug || slugify(item?.title || "") || "").trim().toLowerCase();
+  const overrideUrl = ARTICLE_UNSAFE_IMAGE_OVERRIDES[slug] || "";
+  const candidates = [
+    item?.feedImageUrl,
+    item?.imageUrl,
+    item?.sourceImageUrl,
+    item?.image,
+    fallback
+  ].map((value) => extractFirstImageUrl(value));
+
+  const candidateUrl = candidates.find(Boolean) || "";
+
+  if (overrideUrl && /img_6556-1024x723\.jpeg/i.test(candidateUrl)) {
+    return overrideUrl;
+  }
+
+  return candidateUrl;
+}

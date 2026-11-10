@@ -1,0 +1,1280 @@
+/* ==========================================================================
+   CZS — FOLHA DA MATÉRIA (2026-11-10)
+   --------------------------------------------------------------------------
+   Substitui a pele azul-marinho lavada da página de notícia por uma página
+   de jornal: papel claro, uma coluna de leitura, tipografia com hierarquia
+   clara e cor de acento usada só onde precisa de atenção.
+
+   Regras que este arquivo segue:
+   - Coluna de leitura entre 62 e 72 caracteres. É o que cansa menos.
+   - Contraste mínimo 7:1 no corpo e 4.5:1 no texto secundário.
+   - Nenhum card decorativo. Bloco só existe quando carrega informação.
+   - Sem gradiente, brilho ou sombra "premium". Profundidade vem da tipografia.
+   - Carrega por último; por isso vence a cascata sem `!important`.
+   ========================================================================== */
+
+body.detail-body {
+  --art-paper: #faf8f3;
+  --art-paper-2: #f3ede2;
+  --art-ink: #1a1a1a;
+  --art-ink-soft: #333333;
+  --art-muted: #595959;
+  --art-rule: #dcd8ce;
+  --art-rule-strong: #b9b3a6;
+  --art-accent: #c70000;
+  --art-accent-soft: rgba(199, 0, 0, 0.06);
+  --art-measure: 40rem;
+
+  background: var(--art-paper);
+  color: var(--art-ink);
+}
+
+/* A página inteira vira papel. O azul só sobrevive no cabeçalho do site. */
+body.detail-body .detail-main,
+body.detail-body .page-shell {
+  background: transparent;
+}
+
+body.detail-body .detail-shell {
+  background: transparent;
+  color: var(--art-ink);
+}
+
+/* ---------------------------------------------------------------- topo ---- */
+
+body.detail-body .site-header .top-strip,
+body.detail-body .site-header .masthead {
+  background: #0d1b2a;
+}
+
+body.detail-body .article-breadcrumbs {
+  margin: 0 auto 0.75rem;
+  max-width: calc(var(--art-measure) + 8rem);
+  color: var(--art-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+body.detail-body .article-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.detail-body .article-breadcrumbs a {
+  color: var(--art-ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--art-rule);
+}
+
+body.detail-body .article-breadcrumbs a:hover {
+  color: var(--art-accent);
+  border-bottom-color: var(--art-accent);
+}
+
+/* A editoria acima do título: caixa alta, discreta, uma vez só. */
+body.detail-body #detail-eyebrow {
+  margin: 0 auto 0.5rem;
+  max-width: calc(var(--art-measure) + 8rem);
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--art-accent);
+  font-family: var(--czs-font-ui, system-ui, sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------ manchete ---- */
+
+body.detail-body #detail-title {
+  margin: 0 auto 1rem;
+  max-width: calc(var(--art-measure) + 8rem);
+  font-family: Fraunces, Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 1.1rem + 3.4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--art-ink);
+  text-wrap: balance;
+}
+
+/* Assinatura: uma linha de metadado, sem caixinha em volta. */
+body.detail-body .article-meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 0 auto 1.1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--art-muted);
+  font-size: 0.85rem;
+}
+
+body.detail-body .article-meta-grid strong {
+  color: var(--art-ink-soft);
+  font-weight: 600;
+}
+
+body.detail-body .article-reading-time {
+  color: var(--art-muted);
+}
+
+/* Compartilhar: links de texto, nada de pílulas coloridas. */
+body.detail-body .article-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 0 auto 1.5rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--art-rule);
+  border-bottom: 1px solid var(--art-rule);
+  background: none;
+}
+
+body.detail-body .article-share > span {
+  color: var(--art-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.detail-body .article-share a,
+body.detail-body .article-share button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--art-rule-strong);
+  border-radius: 0;
+  background: none;
+  color: var(--art-ink-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body.detail-body .article-share a:hover,
+body.detail-body .article-share button:hover {
+  color: var(--art-accent);
+  border-bottom-color: var(--art-accent);
+}
+
+/* --------------------------------------------------------------- foto ---- */
+
+body.detail-body .detail-hero-thumb {
+  position: relative;
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 0 auto 0.6rem;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--art-paper-2);
+  box-shadow: none;
+}
+
+/* Sem imagem: o bloco não ocupa tela. Melhor sem foto do que com retângulo. */
+body.detail-body .detail-hero-thumb.no-image,
+body.detail-body .detail-hero-thumb:not(.has-image):not(.has-inline-media) {
+  display: none;
+}
+
+body.detail-body .detail-hero-thumb img,
+body.detail-body .detail-hero-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* A credito/categoria sobre a foto sai: repetia a editoria do topo. */
+body.detail-body .detail-hero-thumb > span {
+  display: none;
+}
+
+body.detail-body .detail-hero-thumb::after {
+  display: none;
+}
+
+/* ------------------------------------------------------------- chamada ---- */
+
+body.detail-body #detail-lede {
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 1.4rem auto 2rem;
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(1.16rem, 1rem + 0.7vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--art-ink-soft);
+  text-wrap: pretty;
+}
+
+/* Primeira letra do corpo — recurso de jornal, não decoração aleatória. */
+body.detail-body .detail-content > p:first-of-type::first-letter {
+  float: left;
+  padding: 0.08em 0.12em 0 0;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 3.1em;
+  line-height: 0.86;
+  font-weight: 700;
+  color: var(--art-accent);
+}
+
+/* --------------------------------------------------------------- corpo ---- */
+
+body.detail-body .detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  max-width: calc(var(--art-measure) + 8rem + 22rem);
+  margin: 0 auto;
+  align-items: start;
+}
+
+body.detail-body .detail-content {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  max-width: var(--art-measure);
+}
+
+body.detail-body .detail-content p,
+body.detail-body .detail-content li {
+  margin: 0 0 1.15em;
+  color: var(--art-ink) !important;
+  font-family: Source Serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(1.06rem, 1rem + 0.2vw, 1.125rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+body.detail-body .detail-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------- coluna ---- */
+
+body.detail-body .detail-aside {
+  position: sticky;
+  top: 1.25rem;
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+  border-left: 2px solid var(--art-rule);
+  padding-left: 1.1rem;
+}
+
+body.detail-body .detail-card,
+body.detail-body .analysis-box {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+body.detail-body .detail-card > span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--art-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.detail-body .detail-card strong,
+body.detail-body .detail-card p {
+  color: var(--art-ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+body.detail-body .detail-card a,
+body.detail-body .detail-card .solid-button,
+body.detail-body .detail-card .outline-button {
+  display: inline-block;
+  margin-top: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--art-rule-strong);
+  border-radius: 0;
+  background: none;
+  color: var(--art-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body.detail-body .detail-card a:hover {
+  color: var(--art-accent);
+  border-bottom-color: var(--art-accent);
+}
+
+body.detail-body #detail-highlights {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.detail-body #detail-highlights li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--art-rule);
+  color: var(--art-ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+body.detail-body #detail-highlights li:last-child {
+  border-bottom: 0;
+}
+
+/* Bloco de anúncio no meio da coluna: só um aviso, sem caixa. */
+body.detail-body .sponsored-detail {
+  border-top: 1px solid var(--art-rule);
+  padding-top: 1rem;
+}
+
+/* ------------------------------------------------------------- módulos ---- */
+
+/* Perguntas e relacionadas: sem cartão, sem sombra, só tipografia. */
+body.detail-body .article-faq,
+body.detail-body .article-related {
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 3rem auto 0;
+  padding: 1.5rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--art-rule-strong);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+body.detail-body .article-faq > .eyebrow,
+body.detail-body .article-related > .eyebrow {
+  margin: 0 0 0.3rem;
+  padding: 0;
+  background: none;
+  color: var(--art-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.detail-body .article-faq h2,
+body.detail-body .article-related h2 {
+  margin: 0 0 1rem;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--art-ink);
+}
+
+body.detail-body .article-faq details {
+  border-top: 1px solid var(--art-rule);
+  padding: 0.85rem 0;
+}
+
+body.detail-body .article-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--art-ink);
+}
+
+body.detail-body .article-faq details p {
+  margin: 0.6rem 0 0;
+  color: var(--art-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+body.detail-body .article-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+}
+
+body.detail-body .article-related-card {
+  display: block;
+  padding: 0.9rem 0 0;
+  border: 0;
+  border-top: 2px solid var(--art-rule-strong);
+  border-radius: 0;
+  background: none;
+  text-decoration: none;
+}
+
+body.detail-body .article-related-card:hover {
+  border-top-color: var(--art-accent);
+}
+
+body.detail-body .article-related-card span {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--art-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.detail-body .article-related-card strong {
+  display: block;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.28;
+  color: var(--art-ink);
+}
+
+body.detail-body .article-related-card small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--art-muted);
+  font-size: 0.76rem;
+}
+
+/* Leitura em voz: uma linha discreta, não uma caixa luminosa. */
+body.detail-body .detail-audio-reader {
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 2rem auto 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--art-rule);
+  border-bottom: 1px solid var(--art-rule);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+body.detail-body .detail-audio-reader h2 {
+  margin: 0;
+  font-family: var(--czs-font-ui, system-ui, sans-serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--art-ink);
+}
+
+body.detail-body .detail-audio-reader p {
+  margin: 0.25rem 0 0;
+  color: var(--art-muted);
+  font-size: 0.82rem;
+}
+
+body.detail-body .detail-audio-actions button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--art-rule-strong);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--art-ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+body.detail-body .detail-audio-actions button:hover {
+  border-color: var(--art-accent);
+  color: var(--art-accent);
+}
+
+/* Botão flutuante de voltar: mantém, mas discreto e só no celular. */
+body.detail-body .detail-home-return-fab {
+  border: 1px solid var(--art-rule-strong);
+  border-radius: 2px;
+  background: var(--art-paper);
+  color: var(--art-ink);
+  box-shadow: 0 1px 0 rgba(20, 24, 31, 0.08);
+}
+
+body.detail-body .detail-report-row {
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 0.75rem auto 0;
+  color: var(--art-muted);
+}
+
+body.detail-body .detail-report-button {
+  border: 1px solid var(--art-rule-strong);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--art-ink-soft);
+}
+
+/* ------------------------------------------------------------- celular ---- */
+
+@media (max-width: 900px) {
+  body.detail-body .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  body.detail-body .detail-aside {
+    position: static;
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--art-rule);
+    padding-top: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  body.detail-body {
+    --art-measure: 100%;
+  }
+
+  body.detail-body .detail-shell,
+  body.detail-body #detail-title,
+  body.detail-body #detail-lede,
+  body.detail-body .article-breadcrumbs,
+  body.detail-body #detail-eyebrow,
+  body.detail-body .article-meta-grid,
+  body.detail-body .article-share {
+    max-width: 100%;
+  }
+
+  body.detail-body #detail-title {
+    font-size: clamp(1.6rem, 1.2rem + 3vw, 2.2rem);
+  }
+
+  body.detail-body #detail-lede {
+    font-size: 1.06rem;
+  }
+
+  body.detail-body .detail-content p,
+  body.detail-body .detail-content li {
+    font-size: 1.04rem;
+    line-height: 1.66;
+  }
+
+  body.detail-body .detail-content > p:first-of-type::first-letter {
+    font-size: 2.4em;
+  }
+
+  body.detail-body .article-share {
+    gap: 0.6rem;
+  }
+}
+
+/* Impressão: vira a matéria e mais nada. */
+@media print {
+  body.detail-body {
+    background: #fff;
+  }
+
+  body.detail-body .site-header,
+  body.detail-body .article-share,
+  body.detail-body .detail-aside,
+  body.detail-body .article-related,
+  body.detail-body .detail-audio-reader,
+  body.detail-body .detail-home-return-fab,
+  body.detail-body .detail-report-row {
+    display: none !important;
+  }
+
+  body.detail-body .detail-grid {
+    display: block;
+  }
+
+  body.detail-body .detail-content {
+    max-width: 100%;
+  }
+}
+/* === LIMPEZA FINAL: SEM GRADIENTE, SEM AZUL === */
+
+/* A pagina da materia nao tem gradiente, halo, brilho nem vinheta.
+   Qualquer regra antiga que tente isso perde para estas. */
+
+body.detail-body,
+body.detail-body::before,
+body.detail-body::after,
+body.detail-body *::before,
+body.detail-body *::after {
+  background-image: none !important;
+}
+
+body.detail-body {
+  background-color: var(--art-paper) !important;
+  color: var(--art-ink) !important;
+}
+
+/* Superficies: cor chapada, uma borda de 1px quando precisa separar. */
+body.detail-body .detail-hero-thumb,
+body.detail-body .detail-content,
+body.detail-body .detail-card,
+body.detail-body .analysis-box,
+body.detail-body .article-faq,
+body.detail-body .article-related,
+body.detail-body .detail-audio-reader,
+body.detail-body .article-toc,
+body.detail-body .detail-fact-tabs {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* A foto em si mantem a imagem; so o fundo vazio vira cor chapada. */
+body.detail-body .detail-hero-thumb {
+  background-color: var(--art-paper-2) !important;
+}
+
+/* Cabecalho do site: cor solida, sem brilho. */
+body.detail-body .site-header,
+body.detail-body .site-header * {
+  background-image: none !important;
+}
+
+body.detail-body .site-header {
+  background-color: #101820 !important;
+}
+
+/* Botoes e chips: contorno, nao pilula luminosa. */
+body.detail-body button,
+body.detail-body .solid-button,
+body.detail-body .outline-button,
+body.detail-body .article-share a,
+body.detail-body .article-share button {
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Nada de texto com brilho. */
+body.detail-body * {
+  text-shadow: none !important;
+}
+
+
+/* === ESPECIFICIDADE: vence article-premium-ready === */
+/* A regra original tem duas classes no seletor; esta tem tres, entao vence
+   sem depender da ordem dos arquivos. */
+html body.detail-body.article-premium-ready {
+  background-color: #faf8f3 !important;
+  background-image: none !important;
+  color: #1a1a1a !important;
+}
+
+html body.detail-body.article-premium-ready::before,
+html body.detail-body.article-premium-ready::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* === SUPERFICIES E CABECALHO DA MATERIA === */
+
+/* Nada de bloco escuro atras da manchete. */
+html body.detail-body #detail-shell,
+html body.detail-body #detail-shell.detail-shell,
+html body.detail-body .article-premium-template {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Data e tempo de leitura: texto simples, sem pilula. */
+body.detail-body #article-byline time,
+body.detail-body #article-byline .article-reading-time,
+body.detail-body .article-meta-grid time,
+body.detail-body .article-meta-grid .article-reading-time {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--art-muted) !important;
+  font-size: 0.85rem !important;
+}
+
+/* Linha de metadados: uma vez a editoria, alinhada com o titulo. */
+body.detail-body #detail-meta {
+  max-width: calc(var(--art-measure) + 8rem);
+  margin: 0 auto 0.85rem;
+  color: var(--art-muted) !important;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+}
+
+/* O botao flutuante e do celular. No desktop ele cobria a data. */
+@media (min-width: 901px) {
+  body.detail-body .detail-home-return-fab {
+    display: none !important;
+  }
+}
+
+/* Cabecalho do site na materia: papel, tipografia escura, sem brilho. */
+body.detail-body .site-header {
+  background-color: var(--art-paper) !important;
+  background-image: none !important;
+  border-bottom: 1px solid var(--art-rule) !important;
+  box-shadow: none !important;
+}
+
+body.detail-body .site-header .top-strip {
+  background: transparent !important;
+  border-bottom: 1px solid var(--art-rule) !important;
+  color: var(--art-muted) !important;
+}
+
+body.detail-body .site-header .top-strip p,
+body.detail-body .site-header .top-strip a {
+  color: var(--art-muted) !important;
+  font-size: 0.78rem;
+}
+
+body.detail-body .site-header .top-strip a:hover {
+  color: var(--art-accent) !important;
+}
+
+body.detail-body .site-header .masthead {
+  background: transparent !important;
+  padding: 0.5rem 0 0.75rem;
+}
+
+body.detail-body .site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+body.detail-body .site-header .brand img {
+  height: 44px;
+  width: auto;
+  border-radius: 0;
+  box-shadow: none !important;
+}
+
+body.detail-body .site-header .brand-kicker {
+  color: var(--art-muted) !important;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.detail-body .site-header .brand strong {
+  color: var(--art-ink) !important;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* === PALETA FINAL DA MATERIA === */
+
+/* As variaveis antigas eram de texto claro sobre fundo escuro. Trocadas
+   na raiz, todo o resto herda a cor certa sem brigar regra por regra. */
+html body.detail-body {
+  --article-text: #1a1a1a;
+  --article-muted: #595959;
+  --article-gold: #c70000;
+  --article-blue: #c70000;
+  --article-line: #dcd8ce;
+  --article-bg: #faf8f3;
+  --article-bg-soft: #f3ede2;
+  --article-card: #ffffff;
+}
+
+/* Titulo e chamada: texto escuro sobre papel, sem excecao. */
+html body.detail-body #detail-title,
+html body.detail-body.article-premium-ready #detail-title,
+html body.detail-body .detail-shell h1 {
+  color: var(--art-ink) !important;
+}
+
+html body.detail-body #detail-lede,
+html body.detail-body.article-premium-ready #detail-lede {
+  color: var(--art-ink-soft) !important;
+}
+
+html body.detail-body #detail-meta,
+html body.detail-body .article-breadcrumbs,
+html body.detail-body .article-breadcrumbs a,
+html body.detail-body .article-meta-grid,
+html body.detail-body .article-meta-grid span,
+html body.detail-body .article-meta-grid strong,
+html body.detail-body .article-meta-grid time,
+html body.detail-body .article-reading-time {
+  color: var(--art-muted) !important;
+}
+
+html body.detail-body .article-meta-grid strong {
+  color: var(--art-ink-soft) !important;
+}
+
+/* Corpo: escuro, sem depender de variavel de terceiros. */
+html body.detail-body #detail-content p,
+html body.detail-body #detail-content li {
+  color: var(--art-ink) !important;
+}
+
+/* Cabecalho: texto escuro sobre papel. */
+html body.detail-body .site-header .brand,
+html body.detail-body .site-header .brand strong,
+html body.detail-body .site-header .site-title {
+  color: var(--art-ink) !important;
+}
+
+html body.detail-body .site-header .brand-kicker,
+html body.detail-body .site-header .top-strip,
+html body.detail-body .site-header .top-strip p {
+  color: var(--art-muted) !important;
+}
+
+/* O link do topo era dourado sobre azul escuro. Agora o topo e papel. */
+html body.detail-body .site-header .top-strip a {
+  color: var(--art-accent) !important;
+}
+
+/* Chamada: sem negrito pesado, e texto de leitura. */
+html body.detail-body #detail-lede {
+  font-weight: 400 !important;
+}
+
+/* === LAYOUT FINAL: SEM CARTAO === */
+
+/* A materia nao e um card. Sem raio, sem borda, sem sombra: a coluna de
+   texto e a propria pagina. */
+html body.detail-body #detail-shell,
+html body.detail-body #detail-shell.detail-shell,
+html body.detail-body #detail-shell.active,
+html body.detail-body .detail-shell.article-premium-template {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Fundos intermediarios tambem sao papel. */
+html body.detail-body .page-shell,
+html body.detail-body .detail-main {
+  background: var(--art-paper) !important;
+  background-image: none !important;
+}
+
+html body.detail-body .detail-main {
+  padding-top: 1.75rem;
+  padding-bottom: 3rem;
+}
+
+/* A coluna de leitura fica centrada na pagina, nao dentro de uma caixa. */
+html body.detail-body .detail-shell > * {
+  width: 100%;
+}
+
+/* Chips e pilulas que sobraram: contorno fino, nada arredondado em excesso. */
+html body.detail-body .article-share a,
+html body.detail-body .article-share button {
+  border-radius: 0 !important;
+}
+
+/* Legenda de video, quando existir, em texto simples. */
+html body.detail-body .detail-video-caption {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 2px solid var(--art-rule-strong) !important;
+  border-radius: 0 !important;
+  padding: 0.25rem 0 0.25rem 0.9rem !important;
+  box-shadow: none !important;
+}
+
+html body.detail-body .detail-video-caption h2 {
+  font-family: var(--czs-font-ui, system-ui, sans-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--art-muted) !important;
+}
+
+html body.detail-body .detail-video-caption p {
+  color: var(--art-ink-soft) !important;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* === ACABAMENTO DE LEITURA === */
+
+/* Foto: canto reto. O raio de 16px vinha do tempo em que a materia era card. */
+html body.detail-body .detail-hero-thumb,
+html body.detail-body .detail-hero-thumb img,
+html body.detail-body .detail-hero-thumb video {
+  border-radius: 0 !important;
+}
+
+/* Chamada: abertura de materia, nao paragrafo. Aumenta o tamanho e abre o
+   espaco antes do corpo. */
+html body.detail-body #detail-lede {
+  margin: 1.75rem auto 2.25rem !important;
+  padding-left: 1rem !important;
+  border-left: 3px solid var(--art-accent) !important;
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.32rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: var(--art-ink-soft) !important;
+}
+
+/* Primeiro paragrafo: capitular limpa, sem aspa decorativa colidindo.
+   A marca citada vem de um ::before antigo em noticia-premium.css. */
+html body.detail-body .detail-content::before,
+html body.detail-body .detail-content > p:first-of-type::before,
+html body.detail-body #detail-content::before,
+html body.detail-body #detail-content > p:first-of-type::before {
+  content: none !important;
+  display: none !important;
+}
+
+html body.detail-body .detail-content > p:first-of-type::first-letter,
+html body.detail-body #detail-content > p:first-of-type::first-letter {
+  float: left !important;
+  margin: 0.06em 0.09em 0 0 !important;
+  padding: 0 !important;
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: 3.2em !important;
+  line-height: 0.82 !important;
+  font-weight: 700 !important;
+  color: var(--art-accent) !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Coluna lateral: a regua comeca alinhada ao corpo, nao no meio da pagina. */
+html body.detail-body .detail-aside {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+html body.detail-body .detail-card > span {
+  color: var(--art-accent) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em !important;
+}
+
+/* Leitura em voz: depois do texto, discreta. */
+html body.detail-body .detail-audio-reader {
+  margin-top: 2.5rem !important;
+}
+
+html body.detail-body .detail-audio-reader .eyebrow {
+  color: var(--art-accent) !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+/* O texto narrado nao precisa aparecer inteiro na tela: ele e o audio. */
+html body.detail-body #detail-audio-text {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--art-muted) !important;
+  font-size: 0.84rem !important;
+  line-height: 1.45 !important;
+}
+
+/* === BOTOES DA COLUNA LATERAL === */
+
+/* Botoes da coluna: contorno escuro sobre papel, alvo de toque confortavel. */
+html body.detail-body .detail-aside .solid-button,
+html body.detail-body .detail-aside .outline-button,
+html body.detail-body .detail-card .solid-button,
+html body.detail-body .detail-card .outline-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 36px !important;
+  margin-top: 0.7rem !important;
+  padding: 0.4rem 0.8rem !important;
+  border: 1px solid var(--art-rule-strong) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--art-ink) !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+html body.detail-body .detail-aside .solid-button:hover,
+html body.detail-body .detail-aside .outline-button:hover,
+html body.detail-body .detail-card .solid-button:hover,
+html body.detail-body .detail-card .outline-button:hover {
+  border-color: var(--art-accent) !important;
+  color: var(--art-accent) !important;
+}
+
+/* Player de audio depois do texto: botoes no mesmo padrao. */
+html body.detail-body .detail-audio-actions button {
+  min-height: 36px !important;
+  padding: 0.4rem 0.9rem !important;
+  border: 1px solid var(--art-rule-strong) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  color: var(--art-ink) !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+html body.detail-body .detail-audio-actions button:hover {
+  border-color: var(--art-accent) !important;
+  color: var(--art-accent) !important;
+}
+
+/* === RODAPE E RELACIONADAS === */
+
+/* Rodape da materia: bloco escuro chapado, sem gradiente nem brilho.
+   O rodape escuro e padrao de jornal; o que saiu foi o efeito. */
+html body.detail-body .site-footer,
+html body.detail-body .site-footer.rich-footer,
+html body.detail-body .site-footer.detail-footer,
+html body.detail-body .site-footer * {
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+html body.detail-body .site-footer {
+  background-color: #101820 !important;
+  border-top: 0 !important;
+}
+
+html body.detail-body .site-footer .footer-photo,
+html body.detail-body .site-footer .footer-sitemap {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Relacionadas: quando todas as materias sao da mesma editoria, o rotulo
+   repetido nao distingue nada. Mostra so a data. */
+html body.detail-body .article-related-card span {
+  display: none !important;
+}
+
+html body.detail-body .article-related-card small {
+  margin-top: 0.5rem !important;
+  color: var(--art-muted) !important;
+  font-size: 0.74rem !important;
+}
+
+/* O cartao de destaques vazio some por completo. */
+html body.detail-body .detail-card[hidden] {
+  display: none !important;
+}
+
+/* === AJUSTES DE CELULAR === */
+
+/* O botao flutuante nao pode ficar por cima do texto no celular.
+   Vira uma linha discreta no fim do artigo, sem sobrepor a leitura. */
+@media (max-width: 900px) {
+  html body.detail-body .detail-home-return-fab {
+    position: static !important;
+    display: inline-flex !important;
+    margin: 0 0 1rem !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: var(--art-ink-soft) !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    padding: 0.4rem 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--art-rule-strong) !important;
+  }
+}
+
+/* Breadcrumb: cinza legivel sobre papel, sem apagar a ultima migalha. */
+html body.detail-body .article-breadcrumbs ol li,
+html body.detail-body .article-breadcrumbs ol li span {
+  color: var(--art-muted) !important;
+}
+
+html body.detail-body .article-breadcrumbs ol li:last-child span {
+  color: var(--art-ink-soft) !important;
+  font-weight: 600 !important;
+}
+
+/* "Informar erro": discreto e fora do caminho da leitura. */
+html body.detail-body .detail-report-row {
+  margin: 2rem auto 0 !important;
+  padding-top: 1rem !important;
+  border-top: 1px solid var(--art-rule) !important;
+  justify-content: flex-start !important;
+}
+
+html body.detail-body .detail-report-button {
+  min-height: 32px !important;
+  padding: 0.3rem 0.7rem !important;
+  border: 1px solid var(--art-rule-strong) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  color: var(--art-muted) !important;
+  font-size: 0.78rem !important;
+}
+
+html body.detail-body .detail-report-hint {
+  color: var(--art-muted) !important;
+  font-size: 0.76rem !important;
+}
+
+
+/* === FAB FORA DO CELULAR === */
+/* A faixa do topo ja leva para a home. O botao flutuante, quando vira
+   estatico, cria um terceiro link igual na mesma tela. */
+@media (max-width: 900px) {
+  html body.detail-body .detail-home-return-fab {
+    display: none !important;
+  }
+}
+
+/* === COLUNA UNICA === */
+
+/* Todo o bloco de leitura comeca e termina no mesmo ponto. */
+html body.detail-body .article-breadcrumbs,
+html body.detail-body #detail-eyebrow,
+html body.detail-body #detail-title,
+html body.detail-body .article-meta-grid,
+html body.detail-body .article-share,
+html body.detail-body #detail-lede,
+html body.detail-body .detail-hero-thumb {
+  max-width: calc(var(--art-measure) + 8rem) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* O titulo acompanha a largura da coluna, nao a da pagina. */
+html body.detail-body #detail-title {
+  width: 100% !important;
+}
+
+/* O grid (texto + coluna lateral) fica centrado e a coluna de texto
+   alinhada com o titulo. */
+html body.detail-body .detail-grid {
+  max-width: calc(calc(var(--art-measure) + 8rem) + 22rem) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.detail-body .detail-content {
+  max-width: var(--art-measure) !important;
+  margin-left: 0 !important;
+}
+
+/* O arco decorativo do canto direito sai. */
+html body.detail-body .detail-shell::before,
+html body.detail-body .detail-shell::after,
+html body.detail-body .article-premium-template::before,
+html body.detail-body .article-premium-template::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* === UMA COLUNA CENTRADA === */
+
+/* Mesmo eixo para tudo: 40rem, centrado. */
+html body.detail-body #detail-shell {
+  display: block !important;
+  width: min(40rem, 100% - 2.5rem) !important;
+  max-width: 40rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.detail-body .article-breadcrumbs,
+html body.detail-body #detail-eyebrow,
+html body.detail-body #detail-title,
+html body.detail-body .article-meta-grid,
+html body.detail-body .article-share,
+html body.detail-body #detail-lede,
+html body.detail-body .detail-hero-thumb,
+html body.detail-body .detail-grid,
+html body.detail-body .detail-content,
+html body.detail-body .detail-audio-reader,
+html body.detail-body .detail-report-row,
+html body.detail-body .article-faq,
+html body.detail-body .article-related {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* O grid deixa de ser duas colunas. */
+html body.detail-body .detail-grid {
+  display: block !important;
+  max-width: 100% !important;
+}
+
+html body.detail-body .detail-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* A coluna lateral vira faixa de apoio no fim: tres blocos lado a lado no
+   desktop, empilhados no celular. */
+html body.detail-body .detail-aside {
+  position: static !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)) !important;
+  gap: 1.75rem 2rem !important;
+  margin-top: 3rem !important;
+  padding: 1.75rem 0 0 !important;
+  border-left: 0 !important;
+  border-top: 1px solid var(--art-rule-strong) !important;
+}
+
+html body.detail-body .detail-card {
+  margin: 0 !important;
+}
+
+/* Espaco antes da primeira linha de texto. */
+html body.detail-body #detail-lede {
+  margin-top: 1.75rem !important;
+  margin-bottom: 2rem !important;
+}
+
+
+/* === AUDIO E TOPO === */
+
+/* Leitura em voz: sem contorno, so as reguas que separam do texto. */
+html body.detail-body .detail-audio-reader {
+  border: 0 !important;
+  border-top: 1px solid var(--art-rule) !important;
+  border-bottom: 1px solid var(--art-rule) !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+}
+
+/* Faixa do topo: so o link, sem a frase institucional repetida. */
+html body.detail-body .site-header .top-strip p {
+  display: none !important;
+}
+
+html body.detail-body .site-header .top-strip {
+  justify-content: flex-end !important;
+  min-height: 0 !important;
+  padding: 0.55rem 0 !important;
+}

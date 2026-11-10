@@ -308,7 +308,10 @@ body.czs-official-system .divulgue-shell {
 
 @media (max-width: 860px) {
   body.czs-official-system {
-    background: linear-gradient(180deg, #061323 0, #071a2e 18rem, #fffdf8 18.1rem, #fffdf8 100%);
+  /* CZS 2026-11-10 - removido: pintava a materia de azul-marinho ate
+     18rem. A folha da materia define papel claro. */
+  body.czs-official-system {
+    background: #fbf8f2;
   }
   .czs-official-system .section-heading,
   .article-meta-grid { align-items: flex-start; flex-direction: column; }
