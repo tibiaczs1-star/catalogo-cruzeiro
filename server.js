@@ -1368,6 +1368,16 @@ const TOPIC_FEED_CONFIG = {
     }
   ]
 };
+// CZS 2026-11-10 — hosts que respondem devagar demais para a busca de
+// imagem durante o ciclo. A noticia entra sem imagem e o reparo cobre.
+const IMAGE_PREVIEW_SKIP_HOSTS = new Set([
+  "g1.globo.com",
+  "globo.com",
+  "globoplay.globo.com",
+  "cnnbrasil.com.br",
+  "theverge.com"
+]);
+
 const IMAGE_PREVIEW_ALLOWLIST = [
   "ac24horas.com",
   "ac24agro.com",
@@ -5518,7 +5528,21 @@ async function refreshRssRuntime(limitPerSource = 30) {
 
   writeJson(path.join(DATA_DIR, "runtime-news.json"), payload);
   if (enrichedItems.length) {
-    writeStaticNewsData(enrichedItems);
+    // CZS 2026-11-10 — nao sobrescrever o acervo com apenas a rodada de agora.
+    // Antes, cada ciclo trocava news-data.js pelos ~400 itens frescos e o
+    // arquivo publico caia de 1186 para 421. Agora mescla: novas primeiro,
+    // sem repetir a mesma URL, preservando o historico.
+    const existing = getStaticNewsItemsUncached();
+    const seen = new Set(
+      existing.map((item) => String(item.sourceUrl || item.url || "").trim()).filter(Boolean)
+    );
+    const fresh = enrichedItems.filter((item) => {
+      const key = String(item.sourceUrl || item.url || "").trim();
+      if (key && seen.has(key)) return false;
+      if (key) seen.add(key);
+      return true;
+    });
+    writeStaticNewsData(fresh.concat(existing));
   }
   return payload;
 }
@@ -6780,7 +6804,7 @@ function fetchPreviewImage(sourceUrl) {
       return resolve(cached.url || "");
     }
 
-    fetchRemoteText(sourceUrl, { timeoutMs: 2500, maxBytes: 350000 })
+    fetchRemoteText(sourceUrl, { timeoutMs: 1800, maxBytes: 320000 })
       .then((raw) => {
         const imageUrl = extractBestSourceImage(raw, sourceUrl);
         updateImagePreviewCache(sourceUrl, imageUrl);
@@ -6829,7 +6853,15 @@ async function enrichNewsItemsWithSourceImages(items = []) {
     IMAGE_PREVIEW_DYNAMIC_ALLOWLIST.add(host);
   });
 
-  return mapWithConcurrency(items, 4, async (item) => {
+  // CZS 2026-11-10 — orcamento de tempo: buscar imagem na pagina de origem
+  // para centenas de itens travava o ciclo por horas (concorrencia 4 x 2,5s).
+  // Agora a busca tem teto; quem nao entrar no orcamento fica sem imagem
+  // nesta rodada e pega no cache da proxima.
+  const budgetMs = Number(process.env.NEWS_IMAGE_BUDGET_MS || 45000);
+  const deadline = Date.now() + Math.max(5000, budgetMs);
+  let skipped = 0;
+
+  return mapWithConcurrency(items, 8, async (item) => {
     if (!item || !item.sourceUrl) {
       return item;
     }
@@ -6842,6 +6874,22 @@ async function enrichNewsItemsWithSourceImages(items = []) {
         sourceImageUrl: item.sourceImageUrl || "",
         imageUrl: canonicalFeedImage || item.imageUrl || item.feedImageUrl || ""
       };
+    }
+
+    if (Date.now() > deadline) {
+      skipped += 1;
+      return item;
+    }
+
+    // CZS 2026-11-10 — fontes que nunca entregam imagem em tempo util
+    // (G1 redireciona para pagina pesada) ficam de fora sem tentar.
+    const host = (() => {
+      try { return new URL(item.sourceUrl).hostname.toLowerCase().replace(/^www\./, ""); }
+      catch (_e) { return ""; }
+    })();
+    if (IMAGE_PREVIEW_SKIP_HOSTS.has(host) || [...IMAGE_PREVIEW_SKIP_HOSTS].some((h) => host.endsWith("." + h))) {
+      skipped += 1;
+      return item;
     }
 
     const sourceImageUrl = await fetchPreviewImage(item.sourceUrl).catch(() => "");
