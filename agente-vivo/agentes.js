@@ -32,7 +32,7 @@
     if (SAVE_DATA) return;
     var CSS = document.createElement("link");
     CSS.rel = "stylesheet";
-    CSS.href = "/agente-vivo/agentes.css?v=20261110-a9";
+    CSS.href = "/agente-vivo/agentes.css?v=20261110-a10";
     document.head.appendChild(CSS);
     boot();
   });
@@ -241,8 +241,10 @@
 
       var heroLimit = Math.min(window.innerHeight * 0.72, 620);
       if (y < heroLimit) { if (!state.mobile) setCollapsed(false); return; }
-      if (delta > 6 && !state.collapsed) setCollapsed(true);
-      else if (delta < -8 && state.collapsed && !state.mobile) setCollapsed(false);
+      // Regra pedida: assim que a hero passa, os agentes vao para a
+      // lateral; ao descer a pagina eles voltam a aparecer.
+      if (delta > 6 && state.collapsed) setCollapsed(false);
+      else if (delta < -8 && !state.collapsed) setCollapsed(true);
     }
 
     // rAF não dispara em aba de fundo; se o guard ficar preso em `true`,

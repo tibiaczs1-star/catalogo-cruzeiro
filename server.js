@@ -7010,7 +7010,7 @@ function rememberStaticFileResponse(key, value) {
 // Uma unica tag injetada no fim do HTML de todas as paginas publicas,
 // em vez de editar 30 arquivos. Admin, jogos, manutencao e paginas de
 // impressao ficam de fora: o painel nao deve aparecer em cockpit interno.
-const AGENTE_VIVO_SCRIPT = '<script src="/agente-vivo/agentes.js?v=20261110-a9" defer data-czs-agente-vivo="1"></script>';
+const AGENTE_VIVO_SCRIPT = '<script src="/agente-vivo/agentes.js?v=20261110-a10" defer data-czs-agente-vivo="1"></script>';
 // Camada visual surreal: tipografia editorial, grao de impressao e
 // marcas de registro. Sai no mesmo ponto de injecao, com as mesmas
 // exclusoes (admin, jogos, manutencao).
