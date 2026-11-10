@@ -1361,7 +1361,15 @@
   function installHeaderNewsCrawl() {
     const row = $(".brandrow");
     if (!row || $(".v8-header-crawl", row)) return;
-    const source = (allStories.length ? allStories : heroStories).filter(Boolean).slice(0, 12);
+    // CZS 2026-11-09: o plantao precisa mostrar a selecao editorial atual.
+    // allStories e o acervo inteiro ordenado por data, entao o letreiro
+    // anunciava manchetes de setembro como se fossem plantao de hoje.
+    const currentFeatures = Array.isArray(window.CZS_CURRENT_FEATURES)
+      ? window.CZS_CURRENT_FEATURES
+      : [];
+    const source = (currentFeatures.length
+      ? currentFeatures
+      : (heroStories.length ? heroStories : allStories)).filter(Boolean).slice(0, 12);
     if (!source.length) return;
     const items = source.map((story) => `
       <a href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
