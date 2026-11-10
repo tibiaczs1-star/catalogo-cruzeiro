@@ -88,16 +88,21 @@
     const newest = decorated.reduce((latest, item) => Math.max(latest, timestamp(item)), 0);
 
     return decorated.sort((left, right) => {
-      const leftFresh = Number(newest - timestamp(left) <= 96 * HOUR_MS);
-      const rightFresh = Number(newest - timestamp(right) <= 96 * HOUR_MS);
-      if (rightFresh !== leftFresh) return rightFresh - leftFresh;
+      // CZS 2026-11-10 — relevancia regional antes de frescor. Antes, uma
+      // nota nacional de hoje (Trump, Mega-Sena) passava na frente de uma
+      // noticia do Juruá de ontem. O portal e do Vale: o que e local vem
+      // primeiro; noticia de fora so entra se nao houver local mais nova.
+      const localTierDiff = Number(right.editorialLocalTier || 0) - Number(left.editorialLocalTier || 0);
+      const bothForeign = Number(left.editorialLocalTier || 0) === 0 && Number(right.editorialLocalTier || 0) === 0;
+      if (localTierDiff !== 0 && !bothForeign) return localTierDiff;
 
       const noticeDiff =
         Number(isLowSignalAdministrativeNotice(left)) - Number(isLowSignalAdministrativeNotice(right));
       if (noticeDiff !== 0) return noticeDiff;
 
-      const localTierDiff = Number(right.editorialLocalTier || 0) - Number(left.editorialLocalTier || 0);
-      if (localTierDiff !== 0) return localTierDiff;
+      const leftFresh = Number(newest - timestamp(left) <= 96 * HOUR_MS);
+      const rightFresh = Number(newest - timestamp(right) <= 96 * HOUR_MS);
+      if (rightFresh !== leftFresh) return rightFresh - leftFresh;
 
       const timestampDiff = timestamp(right) - timestamp(left);
       if (timestampDiff !== 0) return timestampDiff;

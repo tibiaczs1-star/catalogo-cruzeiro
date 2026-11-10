@@ -5519,10 +5519,33 @@ async function refreshRssRuntime(limitPerSource = 30) {
       .map(sanitizePublicPortugueseRuntimeItem)
   );
 
+  // CZS 2026-11-10 — conteudo proprio (nao coletado de RSS) nunca sai do
+  // runtime. Antes, cada ciclo trocava o arquivo inteiro e apagava pautas
+  // editoriais como a do book da Raiane, que tem origem no proprio site.
+  const previousRuntime = readJson(path.join(DATA_DIR, "runtime-news.json"), {});
+  const previousItems = Array.isArray(previousRuntime?.items) ? previousRuntime.items : [];
+  const isOwnedItem = (item) => {
+    const sourceUrl = String(item?.sourceUrl || item?.url || "").trim();
+    return /catalogo-cruzeiro-web\.onrender\.com|catalogo-cruzeiro|127\.0\.0\.1|localhost/i.test(sourceUrl);
+  };
+  const runtimeSeen = new Set(
+    enrichedItems.map((item) => String(item.sourceUrl || item.url || "").trim()).filter(Boolean)
+  );
+  const ownedKept = previousItems.filter((item) => {
+    if (!isOwnedItem(item)) return false;
+    const key = String(item.sourceUrl || item.url || "").trim();
+    return !key || !runtimeSeen.has(key);
+  });
+
+  const mergedRuntimeItems = enrichedItems.concat(ownedKept);
   const payload = {
     lastAttemptAt: new Date().toISOString(),
     lastSuccessAt: enrichedItems.length ? new Date().toISOString() : null,
-    items: enrichedItems,
+    source: "RSS runtime",
+    // CZS 2026-11-10 — `activeWindowItems` e o nome historico que o teste de
+    // contrato e outros leitores usam. Publicar so `items` quebrou o formato.
+    activeWindowItems: mergedRuntimeItems,
+    items: mergedRuntimeItems,
     reports
   };
 
