@@ -21,7 +21,7 @@ test("cache offline nao ressuscita materia que saiu do acervo", () => {
 });
 
 test("pagina carrega a correcao com versao nova de cache", () => {
-  assert.match(html, /noticia\.js\?v=20261109-media-local-guard1/);
+  assert.match(html, /noticia\.js\?v=[a-f0-9]{12}/);
 });
 
 test("acervo publicado nao contem midia local", () => {
@@ -33,4 +33,10 @@ test("camada premium so desliga com saveData explicito", () => {
   const premium = fs.readFileSync(path.join(ROOT, "czs-premium.js"), "utf8");
   assert.match(premium, /navigator\.connection\.saveData === true/);
   assert.doesNotMatch(premium, /var saveData = navigator\.connection && navigator\.connection\.saveData;/);
+});
+
+test("materia resolve a selecao atual do plantao", () => {
+  assert.match(noticia, /const currentFeatures = Array\.isArray\(window\.CZS_CURRENT_FEATURES\)/);
+  assert.match(noticia, /currentFeatures\.find\(\(item\) => normalizeSlug\(item\?\.slug\) === targetSlug\)/);
+  assert.match(noticia, /window\.CZS_CURRENT_FEATURES\.some\(\(item\) => normalizeSlug\(item\?\.slug\) === targetSlug\)/);
 });

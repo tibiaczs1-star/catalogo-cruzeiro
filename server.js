@@ -160,6 +160,9 @@ const ADMIN_MASTER_FILE = path.join(ROOT_DIR, "backend", "public", "admin-master
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
+// Selecao editorial atual: vive fora do acervo historico e e o que a capa
+// anuncia como plantao. Sem esta fonte, os destaques atuais abrem 404.
+const CURRENT_NEWS_FILE = path.join(ROOT_DIR, "home-current-news.js");
 const FAVICON_ICO_FILE = path.join(ROOT_DIR, "assets", "favicon-32x32.png");
 const ANDROID_APP_METADATA_FILE = path.join(ROOT_DIR, "downloads", "catalogo-czs-android.json");
 const RE_RODADA_DIA_GERAL_REPORT_FILE = path.join(DATA_DIR, "re-rodada-dia-geral-report.json");
@@ -1756,7 +1759,8 @@ function getNewsDataCacheKey() {
   const files = [
     path.join(DATA_DIR, "runtime-news.json"),
     path.join(DATA_DIR, "news-archive.json"),
-    STATIC_NEWS_FILE
+    STATIC_NEWS_FILE,
+    CURRENT_NEWS_FILE
   ];
 
   if (path.resolve(DATA_DIR) !== path.resolve(DEFAULT_DATA_DIR)) {
@@ -2046,6 +2050,33 @@ function getStaticNewsItemsUncached() {
 
 function getStaticNewsItems() {
   return getCachedStaticNewsItems();
+}
+
+let currentNewsCache = { key: "", items: [] };
+
+function getCurrentNewsFeaturesUncached() {
+  try {
+    if (!fs.existsSync(CURRENT_NEWS_FILE)) return [];
+    const source = fs.readFileSync(CURRENT_NEWS_FILE, "utf-8");
+    const sandbox = { window: {} };
+    vm.createContext(sandbox);
+    vm.runInContext(source, sandbox, { filename: CURRENT_NEWS_FILE, timeout: 1000 });
+    const items = sandbox.window.CZS_CURRENT_FEATURES;
+    return Array.isArray(items) ? items : [];
+  } catch (_error) {
+    return [];
+  }
+}
+
+function getCurrentNewsFeatures() {
+  const key = getFileCacheSignature(CURRENT_NEWS_FILE);
+  if (currentNewsCache.key === key) {
+    return currentNewsCache.items;
+  }
+  const items = getCurrentNewsFeaturesUncached();
+  currentNewsCache.key = key;
+  currentNewsCache.items = items;
+  return items;
 }
 
 function getElectionConfig() {
@@ -7554,7 +7585,10 @@ function getRawNewsItems() {
   const runtime = readMergedNewsCollection("runtime-news.json");
   const archive = readMergedNewsCollection("news-archive.json");
   const staticNews = getStaticNewsItems();
+  // A selecao atual vem primeiro: ela define o plantao da capa e precisa
+  // resolver na pagina de materia mesmo sem estar no acervo historico.
   const fileItems = []
+    .concat(getCurrentNewsFeatures())
     .concat(runtime)
     .concat(archive)
     .concat(staticNews);

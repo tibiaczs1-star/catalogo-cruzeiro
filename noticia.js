@@ -2269,6 +2269,10 @@ const isSlugInCurrentArchive = (targetSlug) => {
   if (window.NEWS_MAP && Object.prototype.hasOwnProperty.call(window.NEWS_MAP, targetSlug)) {
     return true;
   }
+  if (Array.isArray(window.CZS_CURRENT_FEATURES) &&
+      window.CZS_CURRENT_FEATURES.some((item) => normalizeSlug(item?.slug) === targetSlug)) {
+    return true;
+  }
   if (Array.isArray(window.NEWS_DATA)) {
     return window.NEWS_DATA.some((item) => normalizeSlug(item?.slug) === targetSlug);
   }
@@ -2281,9 +2285,16 @@ const findLocalArticle = (targetSlug) => {
     return null;
   }
 
+  // A capa anuncia a selecao atual como plantao. Ela vive fora do acervo
+  // historico, entao sem esta fonte o destaque da capa abria como inexistente.
+  const currentFeatures = Array.isArray(window.CZS_CURRENT_FEATURES)
+    ? window.CZS_CURRENT_FEATURES
+    : [];
+
   const article =
     AUTHORIAL_DETAIL_ARTICLES[targetSlug] ||
     window.NEWS_MAP?.[targetSlug] ||
+    currentFeatures.find((item) => normalizeSlug(item?.slug) === targetSlug) ||
     (Array.isArray(window.NEWS_DATA)
       ? window.NEWS_DATA.find((item) => normalizeSlug(item?.slug) === targetSlug)
       : null) ||
