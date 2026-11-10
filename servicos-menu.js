@@ -116,10 +116,14 @@
   }
 
   function init() {
-    inject();
+    // CZS 2026-11-10 — a injecao do bloco "Catalogo de Servicos" foi
+    // removida: ela nao encontrava alvo em nenhuma pagina publicada e, na
+    // materia, o seletor "nav" a colocava dentro do breadcrumb. As abas
+    // de modulo da propria pagina de servicos (svc-tab) ja funcionam
+    // sozinhas. Fica so o vinculo dos elementos marcados com
+    // data-servico-modulo, que continua sendo util.
     initPhonebookRedirects();
     const observer = new MutationObserver(() => {
-      inject();
       initPhonebookRedirects();
     });
     observer.observe(document.body, { childList: true, subtree: true });
