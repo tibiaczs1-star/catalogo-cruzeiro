@@ -10,7 +10,10 @@
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var saveData = navigator.connection && navigator.connection.saveData;
+  // Cuidado: navigator.connection existe em muitos navegadores mas
+  // saveData pode vir undefined. Comparar com === true evita desligar
+  // a camada sem motivo.
+  var saveData = Boolean(navigator.connection) && navigator.connection.saveData === true;
   if (reduceMotion || saveData) {
     document.documentElement.classList.add("czs-premium-off");
     return;
