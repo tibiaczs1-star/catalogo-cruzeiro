@@ -54,3 +54,20 @@ test("rota do registro e servida sem cache para o painel ver o estado novo", () 
   const routeBlock = server.slice(server.indexOf("/agente-vivo/registro.json"));
   assert.match(routeBlock.slice(0, 600), /cacheControl: "no-store"/);
 });
+test("camada surreal sai no mesmo ponto de injecao, declarada antes do uso", () => {
+  const surrealIndex = server.indexOf("const SURREAL_LAYER_TAG");
+  assert.ok(surrealIndex > 0, "SURREAL_LAYER_TAG precisa existir");
+  assert.ok(surrealIndex < server.indexOf("function injectAgenteVivo"), "constante antes da funcao");
+  assert.match(server, /\/surreal\/surreal\.css\?v=/);
+  assert.match(server, /\/surreal\/surreal\.js\?v=/);
+  // Uma pagina que pede so uma das camadas recebe so ela.
+  assert.match(server, /const wantsSurreal =/);
+  assert.match(server, /if \(wantsSurreal\) tags\.push\(SURREAL_LAYER_TAG\)/);
+});
+
+test("camada surreal nao mexe em conteudo nem esconde texto", () => {
+  const surrealJs = fs.readFileSync(path.join(ROOT, "surreal", "surreal.js"), "utf8");
+  assert.doesNotMatch(surrealJs, /innerHTML|textContent\s*=|display\s*=\s*["']none/);
+  assert.match(surrealJs, /prefers-reduced-motion/);
+  assert.match(surrealJs, /saveData/);
+});

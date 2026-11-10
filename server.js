@@ -7011,6 +7011,12 @@ function rememberStaticFileResponse(key, value) {
 // em vez de editar 30 arquivos. Admin, jogos, manutencao e paginas de
 // impressao ficam de fora: o painel nao deve aparecer em cockpit interno.
 const AGENTE_VIVO_SCRIPT = '<script src="/agente-vivo/agentes.js?v=20261110-a9" defer data-czs-agente-vivo="1"></script>';
+// Camada visual surreal: tipografia editorial, grao de impressao e
+// marcas de registro. Sai no mesmo ponto de injecao, com as mesmas
+// exclusoes (admin, jogos, manutencao).
+const SURREAL_LAYER_TAG =
+  '<link rel="stylesheet" href="/surreal/surreal.css?v=20261110-s3" data-czs-surreal="1">\n  ' +
+  '<script src="/surreal/surreal.js?v=20261110-s3" defer data-czs-surreal="1"></script>';
 const AGENTE_VIVO_EXCLUDED_FILES = new Set([
   "maintenance.html",
   "pubpaid.html",
@@ -7032,12 +7038,22 @@ function shouldInjectAgenteVivo(filePath) {
 
 function injectAgenteVivo(html) {
   if (!/<html[\s>]/i.test(html)) return html;
-  if (html.includes('data-czs-agente-vivo="1"')) return html;
   if (/<html[^>]*\bczs-agente-vivo-offline\b/i.test(html)) return html;
+
+  const wantsAgents = !html.includes('data-czs-agente-vivo="1"');
+  const wantsSurreal =
+    !html.includes('data-czs-surreal="1"') && !/<html[^>]*\bczs-surreal-offline\b/i.test(html);
+  if (!wantsAgents && !wantsSurreal) return html;
+
+  const tags = [];
+  if (wantsSurreal) tags.push(SURREAL_LAYER_TAG);
+  if (wantsAgents) tags.push(AGENTE_VIVO_SCRIPT);
+  const payload = "  " + tags.join("\n  ");
+
   if (html.includes("</body>")) {
-    return html.replace(/<\/body>(?![\s\S]*<\/body>)/i, `  ${AGENTE_VIVO_SCRIPT}\n</body>`);
+    return html.replace(/<\/body>(?![\s\S]*<\/body>)/i, `${payload}\n</body>`);
   }
-  return html + `\n${AGENTE_VIVO_SCRIPT}\n`;
+  return html + `\n${payload}\n`;
 }
 
 function sendFile(req, res, filePath, options = {}) {

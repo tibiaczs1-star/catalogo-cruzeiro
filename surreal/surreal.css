@@ -1,0 +1,173 @@
+/* ============================================================
+   CZS — Camada Surreal Editorial (plugin global)
+   Direção: gravura amazônica sobre papel antigo.
+   Papel granulado, marcas de registro de impressão, meio-tom sobre
+   a fotografia e tipografia editorial com sangria.
+   Regra: nada de contorno brilhante, nada de gradiente de IA.
+   Tudo funciona em qualquer página, clara ou escura, porque a
+   textura usa mix-blend-mode e herda a cor de acento do próprio site.
+   ============================================================ */
+
+html.cz-surreal {
+  --cz-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)' opacity='.5'/%3E%3C/svg%3E");
+  --cz-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.02' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23p)' opacity='.35'/%3E%3C/svg%3E");
+  --cz-gold: #d4a843;
+  --cz-ink: #0f2d4a;
+}
+
+/* ---------- 1. Grão de impressão (universal) ---------- */
+.cz-surreal-grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 2147482000;
+  pointer-events: none;
+  background-image: var(--cz-grain);
+  background-size: 180px 180px;
+  opacity: .052;
+  mix-blend-mode: overlay;
+  will-change: transform;
+  animation: cz-grain-drift 9s steps(6, end) infinite;
+}
+@keyframes cz-grain-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  30% { transform: translate3d(-2%, 1%, 0); }
+  60% { transform: translate3d(1%, -2%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* ---------- 2. Marcas de registro da hero ---------- */
+.hero-grid,
+.cz-plate {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-grid::before,
+.hero-grid::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: .5;
+  background:
+    linear-gradient(var(--cz-gold), var(--cz-gold)) left top / 100% 1px no-repeat,
+    linear-gradient(var(--cz-gold), var(--cz-gold)) left top / 1px 100% no-repeat;
+}
+.hero-grid::before { inset: 6px auto auto 6px; }
+.hero-grid::after {
+  inset: auto 6px 6px auto;
+  transform: rotate(180deg);
+}
+
+.czs-plate-mark {
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  z-index: 12;
+  opacity: .6;
+  background:
+    linear-gradient(var(--cz-gold), var(--cz-gold)) right top / 100% 1px no-repeat,
+    linear-gradient(var(--cz-gold), var(--cz-gold)) right top / 1px 26px no-repeat,
+    linear-gradient(var(--cz-gold), var(--cz-gold)) left bottom / 100% 1px no-repeat,
+    linear-gradient(var(--cz-gold), var(--cz-gold)) left bottom / 1px 26px no-repeat;
+}
+
+/* ---------- 3. Meio-tom sobre a fotografia da capa ---------- */
+.lead-card .lead-media,
+.lead-card figure,
+.lead-card > .media,
+.cz-halftone {
+  position: relative;
+}
+.lead-card .lead-media::after,
+.lead-card figure::after,
+.cz-halftone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(8, 20, 34, 0.55) 0.9px, transparent 1.1px);
+  background-size: 4px 4px;
+  opacity: .16;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- 4. Tipografia editorial ---------- */
+html.cz-surreal .section-kicker {
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+  display: inline-block;
+}
+
+html.cz-surreal .section-head h2,
+html.cz-surreal .section-head h3 {
+  letter-spacing: -.018em;
+  text-wrap: balance;
+}
+
+/* Filete duplo sob o título da seção: assinatura de jornal antigo. */
+html.cz-surreal .section-head > div > h2::after,
+html.cz-surreal .section-head h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  background: currentColor;
+  box-shadow: 0 5px 0 -1px currentColor;
+  opacity: .45;
+}
+
+/* ---------- 5. Numeração de prancha ---------- */
+html.cz-surreal .section {
+  counter-increment: cz-plate;
+}
+html.cz-surreal main {
+  counter-reset: cz-plate;
+}
+html.cz-surreal .section > .section-head::before {
+  content: "PRANCHA " counter(cz-plate, decimal-leading-zero);
+  display: block;
+  font: 600 9.5px/1 "Sora", system-ui, sans-serif;
+  letter-spacing: .22em;
+  opacity: .42;
+  margin-bottom: 7px;
+}
+
+/* ---------- 6. Cartões com borda de buril ---------- */
+html.cz-surreal .news-card,
+html.cz-surreal .service-card,
+html.cz-surreal .v8-continuous-card {
+  position: relative;
+}
+html.cz-surreal .news-card::after,
+html.cz-surreal .service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(15, 45, 74, 0.10);
+  border-radius: inherit;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- 7. Cabeçalho: filete tipográfico ---------- */
+html.cz-surreal .top-strip {
+  letter-spacing: .01em;
+}
+
+/* ---------- 8. Acessibilidade e economia ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cz-surreal-grain { animation: none; }
+}
+
+@media print {
+  .cz-surreal-grain { display: none; }
+}
