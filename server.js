@@ -7015,8 +7015,8 @@ const AGENTE_VIVO_SCRIPT = '<script src="/agente-vivo/agentes.js?v=20261110-a10"
 // marcas de registro. Sai no mesmo ponto de injecao, com as mesmas
 // exclusoes (admin, jogos, manutencao).
 const SURREAL_LAYER_TAG =
-  '<link rel="stylesheet" href="/surreal/surreal.css?v=20261110-s3" data-czs-surreal="1">\n  ' +
-  '<script src="/surreal/surreal.js?v=20261110-s3" defer data-czs-surreal="1"></script>';
+  '<link rel="stylesheet" href="/surreal/surreal.css?v=20261110-s4" data-czs-surreal="1">\n  ' +
+  '<script src="/surreal/surreal.js?v=20261110-s4" defer data-czs-surreal="1"></script>';
 const AGENTE_VIVO_EXCLUDED_FILES = new Set([
   "maintenance.html",
   "pubpaid.html",

@@ -171,3 +171,75 @@ html.cz-surreal .top-strip {
 @media print {
   .cz-surreal-grain { display: none; }
 }
+/* ---------- 9. Prancha principal: a capa como gravura ---------- */
+html.cz-surreal .lead-card {
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(212, 168, 67, 0.35),
+    0 0 0 7px rgba(250, 250, 247, 0.92),
+    0 0 0 8px rgba(15, 45, 74, 0.22),
+    0 26px 60px -28px rgba(6, 20, 34, 0.55);
+}
+
+html.cz-surreal .lead-image {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Meio-tom de gravura sobre a foto da capa. */
+html.cz-surreal .lead-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image: radial-gradient(rgba(6, 18, 30, 0.86) 0.8px, transparent 1.3px);
+  background-size: 3px 3px;
+  opacity: .26;
+  mix-blend-mode: multiply;
+}
+
+/* Vinheta de buril: escurece os cantos e firma a leitura do texto. */
+html.cz-surreal .lead-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(130% 105% at 50% 40%, transparent 48%, rgba(4, 14, 26, 0.34) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Legenda de prancha entre filetes, como chapas antigas. */
+html.cz-surreal .lead-copy {
+  position: relative;
+  border-top: 1px solid rgba(212, 168, 67, 0.55);
+  box-shadow: inset 0 3px 0 -2px rgba(212, 168, 67, 0.28);
+}
+
+html.cz-surreal .lead-copy::before {
+  content: "PRANCHA I — CAPA";
+  position: absolute;
+  top: -9px;
+  left: 0;
+  padding-right: 10px;
+  font: 600 9px/1 "Sora", system-ui, sans-serif;
+  letter-spacing: .24em;
+  background: inherit;
+}
+
+/* Título da capa com respiro de manchete impressa. */
+html.cz-surreal .lead-copy h1,
+html.cz-surreal .lead-copy h2 {
+  letter-spacing: -.022em;
+  text-wrap: balance;
+}
+
+@media (max-width: 720px) {
+  html.cz-surreal .lead-card {
+    box-shadow:
+      0 0 0 1px rgba(212, 168, 67, 0.32),
+      0 0 0 4px rgba(250, 250, 247, 0.92),
+      0 16px 34px -18px rgba(6, 20, 34, 0.5);
+  }
+}
