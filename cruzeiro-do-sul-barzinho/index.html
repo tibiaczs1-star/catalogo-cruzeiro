@@ -37,9 +37,28 @@ body {
 #intro-subtitle {
   position:relative; z-index:2;
   margin-top:20px;
-  font-size:12px;
-  color:#ff00ff;
-  text-shadow:0 0 10px #ff00ff;
+  font-size:13px;
+  /* CZS 2026-11-10 — legibilidade: o roxo neon sobre verde do fundo
+     ficava ilegivel. Creme com sombra escura le em qualquer fundo. */
+  color:#f5efe4;
+  letter-spacing:.04em;
+  text-shadow:0 1px 3px #04100a, 0 0 14px rgba(0,0,0,.85);
+}
+
+/* Veu atras da entrada: o titulo precisa de contraste sobre a chuva
+   de codigo, sem apagar o efeito. */
+#intro-title {
+  position:relative;
+  z-index:2;
+}
+#intro-title::before {
+  content:"";
+  position:absolute;
+  inset:-18px -34px;
+  background:radial-gradient(ellipse at center, rgba(2,10,6,.86) 0%, rgba(2,10,6,.55) 55%, transparent 78%);
+  border-radius:24px;
+  z-index:-1;
+  pointer-events:none;
 }
 #intro-enter {
   position:relative; z-index:2;
