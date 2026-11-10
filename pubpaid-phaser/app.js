@@ -16,7 +16,7 @@ import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260527-chessfast1";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260527-chessfast1";
 import { UIScene } from "./scenes/UIScene.js?v=20260527-chessfast1";
 
-const PUBPAID_BUILD_VERSION = "arizona-pub-20261110-restore1";
+const PUBPAID_BUILD_VERSION = "arizona-pub-20261110-restore2";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 const startupParams = new URLSearchParams(window.location.search || "");
 const silentAudioParam = String(startupParams.get("silent") || startupParams.get("mute") || startupParams.get("audio") || "").toLowerCase();
@@ -329,7 +329,7 @@ async function refreshPubpaidRuntimeCache() {
 async function runPubpaidUpdateGate() {
   refs.updateGate?.removeAttribute("hidden");
   refs.updateReload?.setAttribute("hidden", "");
-  setUpdateStatus("Checando versao online...");
+  setUpdateStatus("Checando versão online...");
   const currentUrl = new URL(window.location.href);
   const urlVersion = currentUrl.searchParams.get("v") || "";
 
@@ -351,7 +351,7 @@ async function runPubpaidUpdateGate() {
 
   const targetVersion = serverVersion || PUBPAID_BUILD_VERSION;
   if (serverVersion && serverVersion !== PUBPAID_BUILD_VERSION) {
-    setUpdateStatus("Atualizacao nova encontrada. Reabrindo o PubPaid...");
+    setUpdateStatus("Atualização nova encontrada. Reabrindo o PubPaid...");
     await clearPubpaidCachesAndWorkers();
     try {
       window.localStorage?.removeItem("pubpaid_v2_build_version");
@@ -364,7 +364,7 @@ async function runPubpaidUpdateGate() {
   }
 
   if (urlVersion !== targetVersion) {
-    setUpdateStatus("Aplicando versao correta antes de entrar...");
+    setUpdateStatus("Aplicando versão correta antes de entrar...");
     await clearPubpaidCachesAndWorkers();
     try {
       window.localStorage?.removeItem("pubpaid_v2_build_version");
@@ -377,7 +377,7 @@ async function runPubpaidUpdateGate() {
   }
 
   await refreshPubpaidRuntimeCache();
-  setUpdateStatus("Versao conferida. Abrindo entrada...");
+  setUpdateStatus("Versão conferida. Abrindo entrada...");
   window.setTimeout(() => refs.updateGate?.setAttribute("hidden", ""), isSmallScreen ? 90 : 140);
   return true;
 }
