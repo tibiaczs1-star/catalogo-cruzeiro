@@ -84,7 +84,11 @@ function feature(item, index) {
     summary,
     highlights: [],
     development: [],
-    body: Array.isArray(item.body) && item.body.length ? item.body : [summary],
+    // CZS 2026-11-10 — sem texto de preenchimento. O corpo usa o resumo
+    // real da fonte quando nao ha materia propria. Paragrafos de formula
+    // ("A leitura do CZS parte...", "Impacto pratico...", "O que seguir...")
+    // foram removidos: sao IA slop e nao informam nada ao leitor.
+    body: [summary].filter(Boolean),
     imageUrl: item.imageUrl || item.feedImageUrl || "",
     feedImageUrl: item.feedImageUrl || item.imageUrl || "",
     imageCredit: item.imageCredit || item.sourceName || "",

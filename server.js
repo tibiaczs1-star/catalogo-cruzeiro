@@ -2719,14 +2719,15 @@ function inferCategoryKeyFromContent(rawText) {
   const haystack = normalizeText(rawText);
   if (!haystack) return "";
 
-  if (
-    /\b(policia|policial|preso|prende|prisao|trafico|traficante|crime|assalto|roubo|furto|homicidio|estupr|foragido|delegacia|delegado|operacao|apreensao|apreende|apreendid|cocaina|maconha|crack|entorpecente|drogas?|armas? de fogo|mandado de prisao|investigacao|ocorrencia policial)\b/.test(
-      haystack
-    )
-  ) {
+  // CZS 2026-11-10 — "policia" sozinho nao faz uma materia policial. Uma
+  // reuniao da Prefeitura com a Policia Rodoviaria Federal sobre regularizacao
+  // de caminhoes estava classificada como Policia. Agora a palavra generica
+  // so conta junto com um termo de crime de verdade.
+  const crimeStrong =
+    /\b(preso|prende|prenderam|prisao|presos|trafico|traficante|crime|criminal|assalto|roubo|furt(?:o|aram|ou)|homicidio|homicida|assassin(?:ato|ad[oa]|aram|ou|o)|matou|mataram|morto|morte violenta|estupr|esfaque|foragido|apreensao|apreende|apreendid|cocaina|maconha|crack|entorpecente|drogas?|armas? de fogo|mandado de prisao|ocorrencia policial|balead|tiroteio|executad|sequestro|latrocinio|corrupcao|gefron)\b/;
+  if (crimeStrong.test(haystack)) {
     return "policia";
   }
-
   if (
     /\b(saude|hospital|ubs|upa|medic|vacina|vacinacao|dengue|cirurg|sus|atendimento|doenca|doula)\b/.test(
       haystack
@@ -7477,41 +7478,14 @@ function isRepeatedEditorialText(paragraph = "", reference = "") {
 }
 
 function buildFallbackEditorialBody(item = {}) {
-  const title = cleanShortText(stripHtml(item.title || "este assunto"), 180);
-  const sourceName = cleanShortText(stripHtml(item.sourceName || item.source || item.sourceLabel || "a fonte consultada"), 90);
-  const category = cleanShortText(stripHtml(item.category || "noticia local"), 80).toLowerCase();
-  const publishedAt = item.publishedAt || item.date || item.createdAt || new Date().toISOString();
-  const dateLabel = item.date || formatDisplayDate(publishedAt);
-  const sourceLabel = cleanShortText(stripHtml(item.sourceLabel || title), 180);
-  const searchable = normalizeText([title, sourceLabel, category, item.location, item.sourceUrl].join(" "));
-  const territory = /\b(cruzeiro do sul|jurua|juru[aá]|mancio|porto walter|marechal thaumaturgo|tarauaca|rodrigues alves)\b/.test(
-    searchable
-  )
-    ? "o Vale do Jurua"
-    : /\b(acre|rio branco|xapuri|brasileia|sena madureira|feijo|placido de castro)\b/.test(searchable)
-      ? "o Acre"
-      : "a rotina local";
-  const impactByCategory = {
-    prefeitura: "medir se ha efeito direto em bairro, atendimento publico, obra, prazo ou servico municipal",
-    servicos: "verificar prazo, endereco, telefone, documento exigido ou mudanca que afete o dia do leitor",
-    "utilidade-publica": "identificar quem precisa agir agora, qual servico consultar e que informacao ainda falta",
-    saude: "acompanhar atendimento, unidade envolvida, orientacao oficial e possivel impacto para familias",
-    seguranca: "separar fato confirmado, local, autoridade citada e cuidado necessario para nao espalhar boato",
-    educacao: "observar escola, calendario, matricula, transporte, bolsa ou decisao que alcance estudantes e familias",
-    agenda: "confirmar data, horario, local e utilidade para quem pretende participar",
-    politica: "entender decisao, cargo, fonte e consequencia pratica antes de transformar disputa em ruido",
-    economia: "avaliar preco, renda, emprego, comercio e servico que possam alterar a vida da cidade",
-    cultura: "localizar data, espaco, realizadores e acesso do publico sem perder o contexto regional"
-  };
-  const impactSentence =
-    impactByCategory[normalizeText(category)] ||
-    "entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao";
-
-  return [
-    `${sourceName} registrou em ${dateLabel}: ${sourceLabel}. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.`,
-    `Impacto pratico: ${impactSentence}. Para quem acompanha ${territory}, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.`,
-    "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
-  ];
+  // CZS 2026-11-10 — sem paragrafo de formula. Antes esta funcao montava
+  // tres paragrafos fixos ("<Fonte> registrou em <data>: ...", "Impacto
+  // pratico: ...", "O que seguir: ...") que se repetiam em toda materia e
+  // nao informavam nada. E o texto de preenchimento que o leitor chama de
+  // IA slop. Agora o corpo usa o resumo real da fonte; se nao houver,
+  // devolve vazio e a pagina mostra so o que existe.
+  const summary = cleanFeedText(item.summary || item.description || item.lede || "");
+  return summary ? [summary] : [];
 }
 
 function normalizeEditorialBody(item = {}) {
@@ -7544,6 +7518,26 @@ function isLegacyFallbackEditorialBody(paragraph = "") {
   ) || (
     key.includes("redacao automatica acompanha") &&
     key.includes("novas atualizacoes")
+  ) || (
+    // CZS 2026-11-10 — qualquer paragrafo de formula "Impacto pratico:" /
+    // "O que seguir:" montado por categoria. O miolo e sempre o mesmo e nao
+    // informa nada sobre a materia; o leitor chama isso de IA slop.
+    key.startsWith("impacto pratico")
+  ) || (
+    key.startsWith("o que seguir")
+  ) || (
+    // CZS 2026-11-10 — padrao antigo do buildFallbackEditorialBody que ainda
+    // ficou gravado no acervo: "<Fonte> registrou em <data>: ... A leitura do
+    // CZS parte desse fato confirmado ...". Sem este filtro, o texto de
+    // formula continuava aparecendo na pagina da materia.
+    key.includes("registrou em") &&
+    key.includes("a leitura do czs parte desse fato confirmado")
+  ) || (
+    key.startsWith("impacto pratico") &&
+    key.includes("o que muda agora")
+  ) || (
+    key.startsWith("o que seguir") &&
+    key.includes("conferir novas atualizacoes oficiais")
   );
 }
 

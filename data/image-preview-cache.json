@@ -729,7 +729,7 @@
   },
   "https://www.crunchyroll.com/simulcastcalendar?date=2026-04-13": {
     "url": "",
-    "at": 1794270581056
+    "at": 1794316650131
   },
   "https://press.disneyplus.com/news/disney-plus-more-bluey": {
     "url": "https://lumiere-a.akamaihd.net/v1/images/bluey_logo_media_center_thumbnail_09e55144.jpeg?region=750%2C0%2C1000%2C1000",
@@ -2233,7 +2233,7 @@
   },
   "https://blog.youtube/news-and-events/youtube-billboard-chart-update/": {
     "url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/YOUTUBE_BLOG_-_NEAL_S_LETTER_SQ.max-900x600.format-webp.webp",
-    "at": 1794270580188
+    "at": 1794316649181
   },
   "https://juruacomunicacao.com.br/foragida-condenada-por-integrar-organizacao-criminosa-e-presa-em-rodrigues-alves/": {
     "url": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-09-at-17.16.27.jpeg?fit=576%2C582&#038;ssl=1",
@@ -2750,5 +2750,13 @@
   "https://www.edsurge.com/news/do-classroom-games-teach-or-just-entertain": {
     "url": "https://images.ctfassets.net/eflsecw4kznd/2m6Xv3W5bukAazssqyS5hi/6c37562a394f73db0d034640ae410798/shutterstock_2372825867.jpg?w=1200",
     "at": 1794309223824
+  },
+  "https://www.animenewsnetwork.com/news/2026-11-10/dmm-establishes-new-animation-studio-gleestone/.243682": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gHH/cms/news.10/243682/glee.png.jpg",
+    "at": 1794316649401
+  },
+  "https://www.animenewsnetwork.com/news/2026-11-10/hollywood-reporter-variety-apple-tv-in-talks-for-monarch-legacy-of-monsters-season-3/.243668": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gH0/cms/news.6/203372/monarch.jpg",
+    "at": 1794316649575
   }
 }

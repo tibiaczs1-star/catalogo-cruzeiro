@@ -22,9 +22,7 @@ window.CZS_CURRENT_FEATURES = [
     "highlights": [],
     "development": [],
     "body": [
-      "Jurua em Tempo registrou em 9 de nov. de 2026: Cruzeiro do Sul é 2º do Norte em cobertura da atenção primária à saúde. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.",
-      "Impacto pratico: entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao. Para quem acompanha o Vale do Jurua, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.",
-      "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
+      "Cruzeiro do Sul conquistou a segunda posição na Região Norte e a sétima no Brasil em cobertura da atenção primária à saúde, segundo o Ranking de Competitividade dos Municípios 2026, divulgado pelo Centro de Liderança Pública (CLP). O município acreano registro"
     ],
     "imageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/11/saude-cruzeiro-do-sul-1140x570-jpg.avif",
     "feedImageUrl": "https://www.juruaemtempo.com.br/wp-content/uploads/2026/11/saude-cruzeiro-do-sul-1140x570-jpg.avif",
@@ -71,9 +69,7 @@ window.CZS_CURRENT_FEATURES = [
     "highlights": [],
     "development": [],
     "body": [
-      "Jurua Comunicacao registrou em 9 de nov. de 2026: Chuva com ventos fortes provoca destelhamentos e queda de árvores em Cruzeiro do Sul. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.",
-      "Impacto pratico: acompanhar atendimento, unidade envolvida, orientacao oficial e possivel impacto para familias. Para quem acompanha o Vale do Jurua, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.",
-      "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
+      "Uma chuva acompanhada de ventos fortes provocou estragos em Cruzeiro do Sul , no interior do Acre, na tarde deste domingo (8). O Corpo de Bombeiros registrou sete ocorrências relacionadas ao evento climático, sendo seis destelhamentos de residências e uma queda de árvore. De acordo com o tenente Rosenildo Pires, oficial do Corpo de Bombeiros, as ocorrências começaram a ser registradas após as 15h. O bairro COHAB concentrou parte dos atendimentos, com três casas destelhadas e a queda de um buriti"
     ],
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/11/IMG_1839-900x520-1.webp?fit=900%2C520&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/11/IMG_1839-900x520-1.webp?fit=900%2C520&#038;ssl=1",
@@ -120,9 +116,7 @@ window.CZS_CURRENT_FEATURES = [
     "highlights": [],
     "development": [],
     "body": [
-      "Voz do Norte registrou em 9 de nov. de 2026: Prefeitura de Cruzeiro do Sul articula regularização de cerca de 60 caminhões que atendem comunidades rurais. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.",
-      "Impacto pratico: entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao. Para quem acompanha o Vale do Jurua, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.",
-      "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
+      "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Transporte, Trânsito e Mobilidade Urbana, realizou nesta segunda-feira, 9, no Teatro José de Alencar, uma reunião de alinhamento com caminhoneiros e representantes da Polícia Rodoviária Federal (PRF) para tratar da etapa final do processo de regularização dos veículos utilizados no transporte de produtores […] O post Prefeitura de Cruzeiro do Sul articula regularização de cerca de 60 caminhões que atendem comunidades rurais apa"
     ],
     "imageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2020/07/BANNER-GOVERNO-SAUDE-NO-ACRE-CUIDAR-E-PARA-TODOS-04-15-1140X300-1024x269.jpg",
     "feedImageUrl": "https://www.vozdonorte.com.br/wp-content/uploads/2020/07/BANNER-GOVERNO-SAUDE-NO-ACRE-CUIDAR-E-PARA-TODOS-04-15-1140X300-1024x269.jpg",
@@ -169,9 +163,7 @@ window.CZS_CURRENT_FEATURES = [
     "highlights": [],
     "development": [],
     "body": [
-      "Jurua Online registrou em 9 de nov. de 2026: Ufac abre seleção para Medicina com 80 vagas em 2027; provas serão aplicadas em Cruzeiro do Sul e outras quatro cidades. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.",
-      "Impacto pratico: entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao. Para quem acompanha o Vale do Jurua, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.",
-      "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
+      "A Universidade Federal do Acre (Ufac) publicou nesta segunda-feira (9) o edital do processo seletivo para ingresso no curso de Medicina em 2027. São oferecidas 80 vagas, divididas igualmente entre os dois semestres do próximo ano: 40 para o primeiro e 40 para"
     ],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2022/12/UFAC.jpg",
     "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2022/12/UFAC.jpg",
@@ -218,9 +210,7 @@ window.CZS_CURRENT_FEATURES = [
     "highlights": [],
     "development": [],
     "body": [
-      "Jurua Online registrou em 9 de nov. de 2026: Apreensão de 15 kg de cocaína causa prejuízo de mais de R$ 210 mil ao crime em Cruzeiro do Sul. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.",
-      "Impacto pratico: entender quem e afetado, o que muda agora e qual detalhe precisa de confirmacao. Para quem acompanha o Vale do Jurua, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.",
-      "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
+      "A apreensão de mais de 15 quilos de cocaína realizada pela Polícia Civil no último sábado (7), em Cruzeiro do Sul, provocou um prejuízo estimado em mais de R$ 210 mil ao tráfico de drogas. O valor foi informado pelo delegado Heverton Carvalho, que explicou que"
     ],
     "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-09-at-10.10.00-900x520-1.avif",
     "feedImageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-09-at-10.10.00-900x520-1.avif",
@@ -267,9 +257,7 @@ window.CZS_CURRENT_FEATURES = [
     "highlights": [],
     "development": [],
     "body": [
-      "Integracao Net registrou em 9 de nov. de 2026: Prefeitura inicia obra para evitar desmoronamento de túmulos no cemitério São João Batista, em Cruzeiro do Sul. A leitura do CZS parte desse fato confirmado e evita ampliar a chamada alem do que a fonte publicou.",
-      "Impacto pratico: medir se ha efeito direto em bairro, atendimento publico, obra, prazo ou servico municipal. Para quem acompanha o Vale do Jurua, a prioridade e saber se o assunto muda servico, deslocamento, seguranca, agenda ou decisao publica ainda hoje.",
-      "O que seguir: conferir novas atualizacoes oficiais, cruzar com outras fontes regionais quando disponiveis e manter o link da fonte original para acompanhamento completo."
+      "A Prefeitura de Cruzeiro do Sul começou, nesta segunda-feira (9), os serviços de preparação para a construção de um muro de arrimo em uma área próxima ao cemitério São João Batista. A intervenção pretende conter o desbarrancamento do terreno, que ameaça atingir túmulos localizados nas proximidades. Os trabalhos são executados pela Secretaria Municipal de Obras, Desenvolvimento Urbano e Habitação. Nesta primeira etapa, as equipes realizam a limpeza e a preparação do espaço onde será construída a"
     ],
     "imageUrl": "https://integracaonet.com/wp-content/uploads/2026/11/896af6_bc6393bfcb62488e8295a3e0eeb36dffmv2-1024x768.avif",
     "feedImageUrl": "https://integracaonet.com/wp-content/uploads/2026/11/896af6_bc6393bfcb62488e8295a3e0eeb36dffmv2-1024x768.avif",
