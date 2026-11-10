@@ -1334,21 +1334,10 @@
       link.dataset.v8Iconified = "1";
       link.innerHTML = `<span class="v8-nav-glyph">${iconSvg(icon)}</span><span>${esc(text)}</span>`;
     });
-    const footerShortcutNav = $(".nav");
-    if (footerShortcutNav && !$(".v8-nav-footer-shortcut", footerShortcutNav)) {
-      const footerLink = document.createElement("a");
-      footerLink.className = "v8-nav-footer-shortcut";
-      footerLink.href = "#fullSiteFooter";
-      footerLink.dataset.v8Iconified = "1";
-      footerLink.innerHTML = `<span class="v8-nav-glyph">${iconSvg("archive")}</span><span>Rodapé</span>`;
-      footerLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        const footer = $("#fullSiteFooter");
-        footer?.classList.add("revealed", "forced");
-        footer?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-      footerShortcutNav.appendChild(footerLink);
-    }
+    // CZS 2026-11-09: o link "Rodape" saiu da nav. Ele ocupava a ultima
+    // vaga de uma barra de 14 itens e empurrava JOVEM para fora da tela em
+    // telas de 1024-1180px. O acesso ao rodape continua no botao fixo
+    // "Ver tudo no rodape", que fica visivel em toda a navegacao.
 
     const chipIcons = ["pulse", "grid", "read", "star", "archive", "bag", "pulse", "home"];
     $$(".utility-row .chip").forEach((chip, index) => {

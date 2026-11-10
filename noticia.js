@@ -2065,8 +2065,8 @@ const renderNotFound = () => {
   sourceLinkNode.textContent = "Voltar para a home";
 
   if (mediaKindNode && mediaNoteNode && mediaLinkNode) {
-    mediaKindNode.textContent = "Foto real";
-    mediaNoteNode.textContent = "Esta capa é um apoio visual da página de leitura.";
+    mediaKindNode.textContent = "";
+    mediaNoteNode.textContent = "";
     mediaLinkNode.href = HOME_RETURN_URL;
     mediaLinkNode.removeAttribute("target");
     mediaLinkNode.removeAttribute("rel");
@@ -2157,10 +2157,11 @@ const renderArticle = (article) => {
         mediaLinkNode.removeAttribute("rel");
       }
     } else if (article.imageUrl) {
-      mediaKindNode.textContent = "Imagem da materia";
-      mediaNoteNode.textContent = article.imageCredit || "";
+      mediaKindNode.textContent = "Imagem da matéria";
+      // Sem credito declarado e melhor declarar a origem do que imprimir vazio.
+      mediaNoteNode.textContent = article.imageCredit || "Imagem publicada pela fonte original da matéria.";
       mediaLinkNode.href = article.sourceUrl || HOME_RETURN_URL;
-      mediaLinkNode.textContent = "Ver fonte";
+      mediaLinkNode.textContent = article.sourceUrl ? "Ver fonte" : "Voltar para a home";
       if (article.sourceUrl && article.sourceUrl.startsWith("http")) {
         mediaLinkNode.setAttribute("target", "_blank");
         mediaLinkNode.setAttribute("rel", "noreferrer");

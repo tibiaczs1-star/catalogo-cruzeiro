@@ -1661,7 +1661,7 @@ body.v8-merge-ready #cinematicLoader.done {
   grid-area: nav !important;
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 2px !important;
   min-width: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
@@ -1675,8 +1675,8 @@ body.v8-merge-ready #cinematicLoader.done {
 .nav a {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  padding: 10px 8px !important;
+  gap: 5px !important;
+  padding: 10px 4px !important;
   border: 0 !important;
   border-bottom: 2px solid transparent !important;
   border-radius: 0 !important;
@@ -3731,6 +3731,39 @@ body.v8-merge-ready textarea {
 @keyframes v8Reveal {
   from { opacity: .72; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 981px) and (max-width: 1179px) {
+  /* CZS 2026-11-09: 14 itens de navegacao nao cabiam abaixo de ~1180px
+     e JOVEM/RODAPE ficavam cortados. Escala propria para essa faixa. */
+  .nav {
+    gap: 0 !important;
+  }
+  .nav a {
+    padding: 10px 1px !important;
+    font-size: 10.5px !important;
+    gap: 2px !important;
+    letter-spacing: -0.02em !important;
+  }
+  .v8-nav-glyph svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 1439px) {
+  .nav {
+    gap: 0 !important;
+  }
+  .nav a {
+    padding: 10px 2px !important;
+    font-size: 12px !important;
+    gap: 3px !important;
+  }
+  .v8-nav-glyph svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
 }
 
 @media (max-width: 1100px) {
