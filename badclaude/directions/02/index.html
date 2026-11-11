@@ -1,65 +1,1501 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BADCLAUDE — 02 Terminal Vivo</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — Terminal Vivo | Estúdio de software no Vale do Juruá</title>
+<meta name="description" content="BADCLAUDE é um estúdio de software indie em Cruzeiro do Sul, Acre. Jogos 3D em Godot 4, sistemas com agentes de IA, sites rápidos e direção visual desenhada em código. Cada projeto começa em peças soltas e termina como sistema rodando.">
+<meta name="theme-color" content="#07100c">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BADCLAUDE">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BADCLAUDE — Eu me construí. Eu me desfaço e me refaço.">
+<meta property="og:description" content="Estúdio de software no Vale do Juruá. Jogos 3D, sistemas com IA e sites — cada peça com permissão de leitura.">
+<meta property="og:url" content="https://badclaude.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BADCLAUDE — Terminal Vivo">
+<meta name="twitter:description" content="Jogos 3D, sistemas com agentes de IA e sites. Cruzeiro do Sul · Acre · Amazônia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2307100c'/%3E%3Cpath d='M6 9l5 7-5 7' fill='none' stroke='%2342f58a' stroke-width='2'/%3E%3Cpath d='M14 23h12' stroke='%2342f58a' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared.css">
+<style>
+/* ============================================================
+   BADCLAUDE · DIREÇÃO 02 — TERMINAL VIVO
+   O site é um shell. Fundo preto esverdeado, verde-fósforo e
+   âmbar, mono em tudo, cursores piscando, logs que se escrevem,
+   boot sequence, barra de status viva. Nenhuma imagem raster:
+   mascote e gráficos são canvas e SVG.
+   ============================================================ */
+
+body.d02 {
+  --bg: #07100c;
+  --bg-panel: #081410;
+  --bg-raise: #0b1a13;
+  --ink: #d4f7e0;
+  --soft: #a9d4bb;
+  --dim: #8fbfa4;
+  --faint: #3d6652;
+  --line: #1c3a2b;
+  --line-soft: #12261c;
+  --acc: #42f58a;
+  --acc-ink: #04130a;
+  --amber: #ffb454;
+  --red: #ff7a6b;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --wrap: 1080px;
+  --pad: clamp(16px, 4vw, 32px);
+  --bar: 34px;
+  --ease: cubic-bezier(.19, 1, .22, 1);
+
+  background:
+    radial-gradient(1100px 520px at 72% -12%, rgba(66, 245, 138, .055), transparent 62%),
+    radial-gradient(900px 700px at -10% 30%, rgba(255, 180, 84, .028), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.65;
+  padding: 0 0 calc(var(--bar) + 18px);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body.d02 ::selection { background: var(--acc); color: var(--acc-ink); }
+body.d02 a { color: var(--acc); text-decoration: none; }
+body.d02 img, body.d02 svg, body.d02 canvas { display: block; max-width: 100%; }
+body.d02 button, body.d02 input, body.d02 select, body.d02 textarea { font: inherit; color: inherit; }
+body.d02 :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+
+.d02 .skip {
+  position: fixed; left: 14px; top: -90px; z-index: 300;
+  background: var(--acc); color: var(--acc-ink);
+  padding: 11px 16px; font-size: 12px; font-weight: 500;
+  transition: top .25s var(--ease);
+}
+.d02 .skip:focus { top: 10px; }
+
+/* ---------- scanlines + brilho de fósforo ---------- */
+.d02 .scan {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(212, 247, 224, .022) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen;
+}
+.d02 .vignette {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(140% 90% at 50% 40%, transparent 55%, rgba(0, 0, 0, .42) 100%);
+}
+
+/* ---------- cabeçalho ---------- */
+.d02 .t-top {
+  position: sticky; top: 0; z-index: 80;
+  background: rgba(7, 16, 12, .94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px) saturate(130%);
+}
+.d02 .t-top-in {
+  max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad);
+  min-height: 48px; display: flex; align-items: center; gap: 18px;
+}
+.d02 .t-brand {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 12.5px; font-weight: 500; letter-spacing: .1em;
+  color: var(--ink); white-space: nowrap;
+}
+.d02 .t-brand b { color: var(--acc); font-weight: 500; }
+.d02 .t-brand .prompt-sign { color: var(--amber); }
+.d02 .t-top-meta {
+  font-size: 10px; color: var(--dim); letter-spacing: .06em; white-space: nowrap;
+  padding-left: 14px; border-left: 1px solid var(--line);
+}
+.d02 .t-nav {
+  margin-left: auto; display: flex; align-items: center; gap: 0;
+  overflow-x: auto; scrollbar-width: none;
+  max-width: 100%;
+}
+.d02 .t-nav::-webkit-scrollbar { display: none; }
+.d02 .t-nav a {
+  position: relative; padding: 15px 9px; white-space: nowrap;
+  font-size: 10.5px; letter-spacing: .06em; color: var(--dim);
+  transition: color .2s ease;
+}
+.d02 .t-nav a::before { content: './'; color: var(--faint); transition: color .2s ease; }
+.d02 .t-nav a:hover { color: var(--ink); }
+.d02 .t-nav a:hover::before { color: var(--acc); }
+.d02 .t-nav a.is-active { color: var(--acc); }
+.d02 .t-nav a.is-active::after {
+  content: ''; position: absolute; left: 9px; right: 9px; bottom: 8px;
+  height: 1px; background: var(--acc);
+}
+@media (max-width: 860px) { .d02 .t-top-meta { display: none; } }
+@media (max-width: 560px) {
+  .d02 .t-top-in { gap: 10px; }
+  .d02 .t-nav a { padding: 13px 7px; font-size: 10px; }
+  .d02 .t-brand { font-size: 11.5px; }
+}
+
+/* ---------- estrutura ---------- */
+.d02 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); position: relative; }
+.d02 main { position: relative; z-index: 3; }
+.d02 .sec { padding: clamp(44px, 6vw, 84px) 0; border-top: 1px dashed var(--line); position: relative; }
+.d02 .sec:first-of-type { border-top: 0; }
+
+/* comando que abre cada seção */
+.d02 .cmd {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 2px;
+  font-size: 12.5px; color: var(--dim); margin-bottom: 6px;
+  min-height: 1.65em;
+}
+.d02 .cmd .ps1-user { color: var(--soft); }
+.d02 .cmd .ps1-host { color: var(--dim); }
+.d02 .cmd .ps1-dir { color: var(--amber); }
+.d02 .cmd .ps1-sign { color: var(--acc); margin: 0 7px 0 1px; }
+.d02 .cmd [data-typein] { color: var(--ink); }
+.d02 .cmd .comment { color: var(--faint); }
+
+.d02 .sec-h {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+.d02 .sec-h h2 {
+  font-size: clamp(1.35rem, 3.1vw, 2.05rem);
+  font-weight: 500; letter-spacing: -.02em; line-height: 1.15;
+  color: var(--ink); margin: 0;
+}
+.d02 .sec-h h2::before { content: '# '; color: var(--faint); }
+.d02 .sec-h .tagline { margin-left: auto; font-size: 10.5px; color: var(--dim); letter-spacing: .04em; }
+@media (max-width: 620px) { .d02 .sec-h .tagline { margin-left: 0; width: 100%; } }
+
+.d02 .lead {
+  color: var(--dim); max-width: 68ch; font-size: 13.5px; line-height: 1.7;
+  margin-bottom: clamp(18px, 3vw, 28px);
+}
+.d02 .lead b { color: var(--ink); font-weight: 400; }
+.d02 .lead a { border-bottom: 1px solid var(--line); }
+.d02 .lead a:hover { border-color: var(--acc); }
+
+/* painel genérico */
+.d02 .panel {
+  border: 1px solid var(--line); background: var(--bg-panel);
+  position: relative;
+}
+.d02 .panel::after {
+  content: ''; position: absolute; right: -1px; bottom: -1px; width: 9px; height: 9px;
+  border-right: 1px solid var(--acc); border-bottom: 1px solid var(--acc); pointer-events: none;
+}
+.d02 .panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 8px 12px; border-bottom: 1px solid var(--line);
+  font-size: 10px; letter-spacing: .08em; color: var(--dim);
+  background: var(--bg-raise);
+}
+.d02 .panel-head b { color: var(--ink); font-weight: 500; }
+.d02 .dots { display: inline-flex; gap: 5px; }
+.d02 .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
+.d02 .dots i:first-child { background: var(--red); }
+.d02 .dots i:nth-child(2) { background: var(--amber); }
+.d02 .dots i:last-child { background: var(--acc); }
+
+/* ---------- HERO ---------- */
+.d02 .hero { padding: clamp(28px, 4.5vw, 56px) 0 clamp(40px, 5.5vw, 68px); position: relative; }
+.d02 .hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr);
+  gap: clamp(22px, 3.6vw, 44px); align-items: stretch;
+  margin-top: clamp(22px, 3.4vw, 38px);
+}
+.d02 .hero h1 {
+  font-size: clamp(1.9rem, 5.6vw, 4.1rem);
+  line-height: 1.08; font-weight: 500; letter-spacing: -.045em;
+  margin: 0 0 18px; max-width: 18ch; color: var(--ink);
+}
+.d02 .hero h1 .ln { display: block; }
+.d02 .hero h1 .dim { color: var(--dim); font-weight: 400; }
+.d02 .hero h1 .cur {
+  display: inline-block; width: .5em; height: .92em; margin-left: .14em;
+  background: var(--acc); vertical-align: -.06em;
+  animation: blink 1.05s steps(1) infinite;
+  box-shadow: 0 0 18px rgba(66, 245, 138, .55);
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.d02 .hero-lead {
+  color: var(--dim); font-size: clamp(13px, 1.1vw, 14.5px);
+  line-height: 1.75; max-width: 60ch; margin-bottom: 20px;
+}
+.d02 .hero-lead b { color: var(--ink); font-weight: 400; }
+.d02 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 4px; }
+
+.d02 .btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 16px; min-height: 42px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink);
+  font-size: 12px; letter-spacing: .03em; cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s, transform .2s var(--ease);
+}
+.d02 .btn::before { content: '> '; color: var(--acc); }
+.d02 .btn:hover { border-color: var(--acc); background: rgba(66, 245, 138, .06); transform: translateX(2px); }
+.d02 .btn-solid { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); font-weight: 500; }
+.d02 .btn-solid::before { color: var(--acc-ink); }
+.d02 .btn-solid:hover { background: #6bffab; border-color: #6bffab; }
+.d02 .btn-amber { border-color: rgba(255, 180, 84, .5); color: var(--amber); }
+.d02 .btn-amber::before { color: var(--amber); }
+.d02 .btn-amber:hover { border-color: var(--amber); background: rgba(255, 180, 84, .07); }
+
+/* console de boot */
+.d02 .boot {
+  border: 1px solid var(--line); background: #050d09;
+  padding: 12px 14px 14px; min-height: 100%;
+  display: flex; flex-direction: column; position: relative;
+  box-shadow: inset 0 0 60px rgba(66, 245, 138, .03);
+}
+.d02 .boot-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: .07em; color: var(--dim);
+  padding-bottom: 9px; border-bottom: 1px solid var(--line-soft); margin-bottom: 11px;
+}
+.d02 .boot-head b { color: var(--soft); font-weight: 400; }
+.d02 .boot-log { font-size: 11.5px; line-height: 1.85; color: var(--soft); margin: 0; flex: 1; }
+.d02 .boot-line {
+  display: flex; gap: 9px; align-items: baseline;
+  opacity: 0; transform: translateY(2px);
+  transition: opacity .32s ease, transform .32s var(--ease);
+}
+html:not(.js) .d02 .boot-line, .d02 .boot-line.on { opacity: 1; transform: none; }
+.d02 .boot-line .tag-ok { color: var(--acc); flex: none; font-size: 10.5px; letter-spacing: .02em; }
+.d02 .boot-line .tag-bios { color: var(--amber); flex: none; }
+.d02 .boot-line .tag-run { color: var(--dim); flex: none; }
+.d02 .boot-line .boot-txt { color: var(--dim); }
+.d02 .boot-line:last-child .boot-txt { color: var(--ink); }
+.d02 .boot-foot {
+  margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line-soft);
+  font-size: 11.5px; color: var(--dim); display: flex; align-items: center; gap: 6px;
+}
+.d02 .boot-foot .caret {
+  width: 7px; height: 14px; background: var(--acc); display: inline-block;
+  animation: blink 1.05s steps(1) infinite;
+}
+.d02 .boot-line .boot-note { margin-left: auto; color: var(--faint); font-size: 10px; white-space: nowrap; }
+
+/* prancha do mascote */
+.d02 .pet-plate {
+  border: 1px solid var(--line); background: var(--bg-panel);
+  display: flex; flex-direction: column; position: relative; overflow: hidden;
+}
+.d02 .pet-plate::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(66, 245, 138, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(66, 245, 138, .045) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(120% 100% at 50% 46%, #000 40%, transparent 82%);
+}
+.d02 .pet-stage { position: relative; flex: 1; min-height: 260px; }
+.d02 .pet-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; }
+.d02 .pet-fallback {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
+  color: var(--acc); opacity: .9; transition: opacity .5s ease;
+  filter: drop-shadow(0 0 8px rgba(66, 245, 138, .25));
+}
+.d02 .pet-fallback[hidden] { display: none; }
+.d02 .pet-stage .cross-h, .d02 .pet-stage .cross-v {
+  position: absolute; pointer-events: none; background: rgba(66, 245, 138, .14); z-index: 1;
+}
+.d02 .pet-stage .cross-h { left: 8%; right: 8%; top: 50%; height: 1px; }
+.d02 .pet-stage .cross-v { top: 8%; bottom: 8%; left: 50%; width: 1px; }
+.d02 .pet-cap {
+  position: absolute; left: 11px; bottom: 8px; z-index: 3;
+  font-size: 9.5px; letter-spacing: .08em; color: var(--dim);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.d02 .pet-cap::before { content: '●'; color: var(--acc); font-size: 8px; animation: blink 2.2s steps(1) infinite; }
+.d02 .pet-plate .panel-head { border-bottom: 1px solid var(--line); }
+
+/* kv do hero */
+.d02 .hero-kv {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 26px; border: 1px solid var(--line-soft); border-right: 0; border-bottom: 0;
+}
+.d02 .hero-kv div {
+  border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+  padding: 9px 12px; display: flex; gap: 8px; align-items: baseline;
+  font-size: 11.5px; min-width: 0;
+}
+.d02 .hero-kv i { font-style: normal; color: var(--dim); min-width: 52px; }
+.d02 .hero-kv b { font-weight: 400; color: var(--ink); overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+  .d02 .hero-grid { grid-template-columns: 1fr; }
+  .d02 .pet-plate { max-width: 440px; width: 100%; }
+  .d02 .pet-stage { min-height: 230px; }
+  .d02 .hero h1 { max-width: 16ch; }
+}
+@media (max-width: 560px) { .d02 .hero-kv { grid-template-columns: 1fr 1fr; } .d02 .hero-kv div:nth-child(2n) { border-right: 0; } }
+@media (max-width: 380px) { .d02 .hero-kv { grid-template-columns: 1fr; } }
+
+/* linha de status seca sob o hero */
+.d02 .hero-strip {
+  margin-top: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: 4px 22px; padding: 8px 0;
+  font-size: 10.5px; color: var(--dim); letter-spacing: .03em;
+}
+.d02 .hero-strip span { display: inline-flex; align-items: center; gap: 7px; }
+.d02 .hero-strip span::before { content: '·'; color: var(--faint); }
+.d02 .hero-strip b { color: var(--soft); font-weight: 400; }
+
+/* ---------- SISTEMA ---------- */
+.d02 .sys-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(20px, 3.4vw, 38px); align-items: start; }
+.d02 .sys-out { border: 1px solid var(--line); background: var(--bg-panel); }
+.d02 .sys-out-head {
+  display: flex; justify-content: space-between; gap: 10px; padding: 8px 12px;
+  border-bottom: 1px solid var(--line); font-size: 10px; color: var(--dim); letter-spacing: .06em;
+}
+.d02 .sys-out-head b { color: var(--acc); font-weight: 400; }
+.d02 .sys-out-body { padding: 14px 16px 18px; }
+.d02 .kvline { display: grid; grid-template-columns: 88px 1fr; gap: 2px 14px; padding: 6px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+.d02 .kvline:last-child { border-bottom: 0; }
+.d02 .kvline dt { color: var(--dim); font-size: 11.5px; letter-spacing: .04em; }
+.d02 .kvline dd { color: var(--ink); overflow-wrap: anywhere; }
+.d02 .kvline dd .ok { color: var(--acc); }
+.d02 .kvline dd .warn { color: var(--amber); }
+.d02 .kvline dd small { color: var(--dim); font-size: 11px; }
+
+.d02 .sys-side { display: flex; flex-direction: column; gap: 14px; }
+.d02 .sys-note {
+  border-left: 2px solid var(--amber); padding: 4px 0 4px 14px;
+  color: var(--dim); font-size: 12.5px; line-height: 1.7;
+}
+.d02 .sys-note b { color: var(--ink); font-weight: 400; }
+.d02 .df { border: 1px solid var(--line); background: var(--bg-panel); font-size: 11.5px; }
+.d02 .df .df-row {
+  display: grid; grid-template-columns: 1fr 58px 58px 52px 46px; gap: 6px;
+  padding: 6px 12px; border-bottom: 1px solid var(--line-soft); color: var(--dim);
+}
+.d02 .df .df-row:first-child { color: var(--faint); font-size: 10px; letter-spacing: .05em; }
+.d02 .df .df-row:last-child { border-bottom: 0; }
+.d02 .df .df-row span:first-child { color: var(--ink); }
+.d02 .df .df-row .use { color: var(--amber); }
+.d02 .df .bar { height: 3px; background: var(--line); margin-top: 6px; grid-column: 1 / -1; overflow: hidden; }
+.d02 .df .bar i { display: block; height: 100%; width: var(--w, 40%); background: var(--acc); }
+@media (max-width: 860px) { .d02 .sys-grid { grid-template-columns: 1fr; } }
+
+/* ---------- FRENTES (ls -l) ---------- */
+.d02 .ls { border: 1px solid var(--line); background: var(--bg-panel); }
+.d02 .ls-head {
+  display: grid; grid-template-columns: 96px 1fr 92px;
+  gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--line);
+  font-size: 10px; color: var(--faint); letter-spacing: .07em; background: var(--bg-raise);
+}
+.d02 .ls-head span:last-child { text-align: right; }
+.d02 .ls-row {
+  display: grid;
+  grid-template-columns: 96px 46px 84px minmax(0, 1fr);
+  gap: 10px; align-items: start;
+  padding: 13px 14px; border-bottom: 1px solid var(--line-soft);
+  transition: background .25s ease;
+  position: relative;
+}
+.d02 .ls-row:last-child { border-bottom: 0; }
+.d02 .ls-row:hover { background: rgba(66, 245, 138, .035); }
+.d02 .ls-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--acc); transform: scaleY(0); transform-origin: top;
+  transition: transform .35s var(--ease);
+}
+.d02 .ls-row:hover::before { transform: scaleY(1); }
+.d02 .perm { color: var(--dim); font-size: 11.5px; letter-spacing: .03em; white-space: nowrap; }
+.d02 .perm .r { color: var(--acc); }
+.d02 .perm .w { color: var(--amber); }
+.d02 .ls-size, .d02 .ls-date { color: var(--dim); font-size: 11px; white-space: nowrap; padding-top: 2px; }
+.d02 .ls-file { min-width: 0; }
+.d02 .ls-file h3 { margin: 0 0 3px; font-size: 13.5px; font-weight: 500; color: var(--acc); letter-spacing: .01em; }
+.d02 .ls-file h3 .st { font-size: 10px; color: var(--amber); font-weight: 400; margin-left: 8px; letter-spacing: .03em; }
+.d02 .ls-file h3 .st.done { color: var(--acc); }
+.d02 .ls-file p { color: var(--dim); font-size: 12px; line-height: 1.62; max-width: 72ch; }
+.d02 .ls-file p b { color: var(--soft); font-weight: 400; }
+.d02 .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.d02 .tags span {
+  font-size: 9.5px; letter-spacing: .04em; color: var(--soft);
+  border: 1px solid var(--line); padding: 2px 6px; background: rgba(66, 245, 138, .03);
+}
+@media (max-width: 760px) {
+  .d02 .ls-head { display: none; }
+  .d02 .ls-row { grid-template-columns: auto 1fr; row-gap: 6px; }
+  .d02 .perm { grid-column: 1; }
+  .d02 .ls-size { grid-column: 2; text-align: right; }
+  .d02 .ls-date { display: none; }
+  .d02 .ls-file { grid-column: 1 / -1; }
+}
+
+/* ---------- NÚMEROS ---------- */
+.d02 .stats {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--line); background: var(--bg-panel);
+}
+.d02 .stat {
+  padding: 18px 16px 16px; border-right: 1px solid var(--line);
+  position: relative; min-height: 152px; display: flex; flex-direction: column;
+}
+.d02 .stat:last-child { border-right: 0; }
+.d02 .stat .k { font-size: 10px; letter-spacing: .08em; color: var(--dim); text-transform: uppercase; }
+.d02 .stat .v {
+  display: flex; align-items: baseline; gap: 6px; margin: 16px 0 7px;
+  font-size: clamp(2.1rem, 4.2vw, 3rem); font-weight: 500; letter-spacing: -.05em;
+  color: var(--acc); line-height: 1; font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 24px rgba(66, 245, 138, .22);
+}
+.d02 .stat .v sup { font-size: .34em; color: var(--amber); letter-spacing: .02em; top: -.8em; position: relative; }
+.d02 .stat .d { color: var(--dim); font-size: 11.5px; line-height: 1.55; margin-top: auto; }
+.d02 .stat::after {
+  content: '↳'; position: absolute; right: 10px; top: 9px; color: var(--faint); font-size: 11px;
+}
+@media (max-width: 860px) { .d02 .stats { grid-template-columns: repeat(2, 1fr); } .d02 .stat:nth-child(2) { border-right: 0; } .d02 .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
+@media (max-width: 420px) { .d02 .stats { grid-template-columns: 1fr; } .d02 .stat { border-right: 0; border-bottom: 1px solid var(--line); min-height: 130px; } .d02 .stat:last-child { border-bottom: 0; } }
+
+/* ---------- PROCESSO (git log) ---------- */
+.d02 .git {
+  border: 1px solid var(--line); background: var(--bg-panel); overflow: hidden;
+}
+.d02 .git-bar {
+  display: flex; justify-content: space-between; gap: 10px; padding: 8px 12px;
+  border-bottom: 1px solid var(--line); background: var(--bg-raise);
+  font-size: 10px; letter-spacing: .06em; color: var(--dim);
+}
+.d02 .git-bar b { color: var(--soft); font-weight: 400; }
+.d02 .git-body { padding: 14px 16px 18px; font-size: 12px; line-height: 1.7; }
+.d02 .git-body .g-cmd { color: var(--dim); margin-bottom: 12px; }
+.d02 .git-body .g-cmd::before { content: '$ '; color: var(--acc); }
+.d02 .commit { padding: 13px 0 14px; border-bottom: 1px dashed var(--line-soft); display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 4px 16px; }
+.d02 .commit:last-child { border-bottom: 0; padding-bottom: 2px; }
+.d02 .commit .hash {
+  color: var(--amber); font-size: 11.5px; letter-spacing: .02em; grid-row: span 3;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.d02 .commit .hash .ref { color: var(--acc); font-size: 9.5px; }
+.d02 .commit .headline { color: var(--ink); font-size: 13px; }
+.d02 .commit .meta { color: var(--dim); font-size: 10.5px; }
+.d02 .commit .meta b { color: var(--soft); font-weight: 400; }
+.d02 .commit .stat-line { color: var(--faint); font-size: 10.5px; margin-top: 2px; }
+@media (max-width: 620px) {
+  .d02 .commit { grid-template-columns: 1fr; }
+  .d02 .commit .hash { flex-direction: row; align-items: baseline; gap: 10px; grid-row: auto; }
+}
+
+/* ---------- PLANOS ---------- */
+.d02 .plan-term { border: 1px solid var(--line); background: #050d09; }
+.d02 .table-scroll { overflow-x: auto; }
+.d02 table.tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 0; min-width: 620px; }
+.d02 table.tbl th, .d02 table.tbl td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.d02 table.tbl th { font-size: 10px; letter-spacing: .08em; color: var(--faint); text-transform: uppercase; font-weight: 400; background: var(--bg-raise); border-bottom-color: var(--line); }
+.d02 table.tbl td:first-child, .d02 table.tbl tbody th { color: var(--acc); white-space: nowrap; font-size: 12.5px; font-weight: 500; letter-spacing: .01em; }
+.d02 table.tbl tbody th { background: none; padding: 12px 16px; border-bottom: 1px solid var(--line-soft); text-transform: none; }
+.d02 table.tbl td.v { color: var(--amber); font-size: 1.15rem; font-weight: 500; white-space: nowrap; }
+.d02 table.tbl tr:last-child td { border-bottom: 0; }
+.d02 table.tbl tbody tr { transition: background .2s ease; }
+.d02 table.tbl tbody tr:hover { background: rgba(66, 245, 138, .04); }
+.d02 table.tbl .flag { font-size: 9px; color: var(--acc-ink); background: var(--acc); padding: 1px 5px; margin-left: 7px; letter-spacing: .03em; vertical-align: 2px; }
+.d02 .plan-note {
+  display: flex; flex-wrap: wrap; gap: 8px 26px; justify-content: space-between;
+  padding: 11px 16px; border-top: 1px solid var(--line);
+  font-size: 10.5px; color: var(--dim); letter-spacing: .03em;
+}
+.d02 .plan-note a { color: var(--soft); border-bottom: 1px solid var(--line); }
+.d02 .plan-note a:hover { color: var(--acc); border-color: var(--acc); }
+.d02 .plan-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+/* ---------- VOZES ---------- */
+.d02 .comments { border: 1px solid var(--line); background: var(--bg-panel); }
+.d02 .comments-head { padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 10px; color: var(--dim); letter-spacing: .06em; background: var(--bg-raise); display: flex; justify-content: space-between; gap: 10px; }
+.d02 .comments-head b { color: var(--soft); font-weight: 400; }
+.d02 .comments-body { padding: 8px 16px 14px; }
+.d02 .voice { margin: 0; padding: 15px 0; border-bottom: 1px dashed var(--line-soft); }
+.d02 .voice:last-child { border-bottom: 0; }
+.d02 .voice .cm { color: var(--faint); font-size: 11.5px; display: block; margin-bottom: 5px; }
+.d02 .voice blockquote { margin: 0; color: var(--soft); font-size: 13px; line-height: 1.7; max-width: 82ch; }
+.d02 .voice blockquote::before, .d02 .voice blockquote::after { color: var(--faint); }
+.d02 .voice figcaption { margin-top: 7px; font-size: 10.5px; color: var(--dim); display: flex; gap: 12px; flex-wrap: wrap; }
+.d02 .voice figcaption b { color: var(--amber); font-weight: 400; }
+.d02 .comments-note { margin-top: 12px; font-size: 11px; color: var(--dim); }
+
+/* ---------- FAQ (man) ---------- */
+.d02 .man { border: 1px solid var(--line); background: var(--bg-panel); }
+.d02 .man-bar { display: flex; justify-content: space-between; gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--line); background: var(--bg-raise); font-size: 10px; color: var(--dim); letter-spacing: .06em; }
+.d02 .man-bar b { color: var(--soft); font-weight: 400; }
+.d02 .man-title { padding: 14px 16px 4px; font-size: 12px; color: var(--ink); }
+.d02 .man-title small { color: var(--dim); font-size: 11px; display: block; }
+.d02 .faq { padding: 0 16px 16px; }
+.d02 .faq details { border-bottom: 1px solid var(--line-soft); }
+.d02 .faq details:last-child { border-bottom: 0; }
+.d02 .faq summary {
+  list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 12px;
+  padding: 13px 0; font-size: 12.5px; color: var(--soft);
+  transition: color .2s ease;
+}
+.d02 .faq summary::-webkit-details-marker { display: none; }
+.d02 .faq summary:hover { color: var(--acc); }
+.d02 .faq summary .qn { color: var(--amber); font-size: 10.5px; flex: none; letter-spacing: .04em; width: 32px; }
+.d02 .faq summary .pm { margin-left: auto; color: var(--acc); font-size: 12px; transition: transform .3s var(--ease); flex: none; }
+.d02 .faq details[open] summary { color: var(--ink); }
+.d02 .faq details[open] summary .pm { transform: rotate(45deg); }
+.d02 .faq .a { padding: 0 0 15px 44px; color: var(--dim); font-size: 12px; line-height: 1.75; max-width: 84ch; }
+.d02 .faq .a b { color: var(--soft); font-weight: 400; }
+.d02 .faq .a a { border-bottom: 1px solid var(--line); }
+.d02 .faq .a a:hover { border-color: var(--acc); }
+@media (max-width: 520px) { .d02 .faq .a { padding-left: 0; } }
+
+/* ---------- CONTATO ---------- */
+.d02 .contact-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); gap: clamp(20px, 3.4vw, 38px); align-items: start; }
+.d02 .form { border: 1px solid var(--line); background: var(--bg-panel); padding: 16px; }
+.d02 .form-head { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 11px; border-bottom: 1px solid var(--line-soft); margin-bottom: 14px; font-size: 10px; letter-spacing: .06em; color: var(--dim); }
+.d02 .form-head b { color: var(--acc); font-weight: 400; }
+.d02 .field { display: grid; gap: 5px; margin-bottom: 12px; }
+.d02 .field label { font-size: 11px; color: var(--dim); letter-spacing: .03em; }
+.d02 .field label span { color: var(--amber); }
+.d02 .field input, .d02 .field select, .d02 .field textarea {
+  width: 100%; background: #050d09; border: 1px solid var(--line);
+  border-radius: 0; padding: 9px 11px; font-size: 12.5px; color: var(--ink);
+  caret-color: var(--acc); transition: border-color .2s ease, box-shadow .2s ease;
+}
+.d02 .field input::placeholder, .d02 .field textarea::placeholder { color: var(--faint); }
+.d02 .field input:focus, .d02 .field select:focus, .d02 .field textarea:focus {
+  outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px rgba(66, 245, 138, .09);
+}
+.d02 .field textarea { resize: vertical; min-height: 96px; }
+.d02 .field select { appearance: none; background-image: linear-gradient(45deg, transparent 49%, var(--acc) 50%), linear-gradient(-45deg, transparent 49%, var(--acc) 50%); background-size: 6px 6px; background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%; background-repeat: no-repeat; }
+.d02 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.d02 .form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.d02 .form-note { font-size: 10.5px; color: var(--dim); line-height: 1.5; flex: 1 1 170px; }
+.d02 .lead-msg { margin-top: 12px; font-size: 11.5px; }
+.d02 .direct { border-top: 1px solid var(--line); margin-top: 4px; }
+.d02 .direct a, .d02 .direct button {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 13px 2px; border: 0; border-bottom: 1px solid var(--line-soft);
+  background: none; cursor: pointer; text-align: left;
+  font-size: 12.5px; color: var(--dim);
+  transition: color .2s, padding-left .3s var(--ease);
+}
+.d02 .direct a:hover, .d02 .direct button:hover { color: var(--acc); padding-left: 7px; }
+.d02 .direct .lbl { font-size: 10px; color: var(--faint); min-width: 66px; letter-spacing: .04em; text-transform: uppercase; }
+.d02 .direct .vv { color: var(--soft); font-size: 12px; overflow-wrap: anywhere; }
+.d02 .direct svg { width: 12px; height: 12px; margin-left: auto; color: var(--acc); flex: none; }
+.d02 .who {
+  margin-top: 18px; border: 1px solid var(--line); background: var(--bg-panel);
+  padding: 13px 14px; font-size: 12px; color: var(--dim); line-height: 1.7;
+}
+.d02 .who b { display: block; color: var(--ink); font-weight: 400; margin-bottom: 4px; }
+.d02 .avail { margin-top: 18px; font-size: 11px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
+.d02 .avail .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 0 3px rgba(66, 245, 138, .14); animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(66, 245, 138, .04); } }
+@media (max-width: 860px) { .d02 .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 440px) { .d02 .field-row { grid-template-columns: 1fr; } }
+
+/* ---------- RODAPÉ ---------- */
+.d02 .site-foot { border-top: 1px solid var(--line); margin-top: clamp(30px, 4vw, 50px); padding: 28px 0 8px; }
+.d02 .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.1fr; gap: clamp(18px, 3vw, 38px); padding-bottom: 26px; }
+.d02 .foot-col h3 { font-size: 10px; letter-spacing: .1em; color: var(--faint); text-transform: uppercase; font-weight: 400; margin-bottom: 12px; }
+.d02 .foot-col p, .d02 .foot-col a { display: block; font-size: 11.5px; color: var(--dim); line-height: 1.85; }
+.d02 .foot-col a:hover { color: var(--acc); }
+.d02 .foot-brand .t-brand { margin-bottom: 12px; }
+.d02 .foot-brand p { max-width: 34ch; }
+.d02 .foot-coord { margin-top: 10px; font-size: 10px; color: var(--faint); letter-spacing: .04em; }
+.d02 .foot-bottom {
+  border-top: 1px solid var(--line-soft); padding: 14px 0 18px;
+  display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: space-between;
+  font-size: 10px; color: var(--faint); letter-spacing: .04em;
+}
+.d02 .foot-bottom a:hover { color: var(--acc); }
+.d02 .exit { color: var(--dim); }
+.d02 .exit::before { content: '$ '; color: var(--acc); }
+@media (max-width: 900px) { .d02 .foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .d02 .foot-grid { grid-template-columns: 1fr; } }
+
+/* ---------- BARRA DE STATUS VIVA ---------- */
+.d02 .statusbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  height: var(--bar); display: flex; align-items: center; gap: 0;
+  background: rgba(5, 13, 9, .96); border-top: 1px solid var(--line);
+  font-size: 10.5px; color: var(--dim); letter-spacing: .03em;
+  backdrop-filter: blur(8px); overflow: hidden;
+}
+.d02 .statusbar .sb {
+  padding: 0 12px; height: 100%; display: inline-flex; align-items: center; gap: 6px;
+  border-right: 1px solid var(--line-soft); white-space: nowrap;
+}
+.d02 .statusbar .sb.mode { background: var(--acc); color: var(--acc-ink); font-weight: 500; gap: 0; }
+.d02 .statusbar .sb.mode::before { content: ''; }
+.d02 .statusbar .sb.section { color: var(--soft); }
+.d02 .statusbar .sb .val { color: var(--ink); font-variant-numeric: tabular-nums; }
+.d02 .statusbar .sb.grow { margin-left: auto; border-right: 0; border-left: 1px solid var(--line-soft); }
+.d02 .statusbar .pct { color: var(--amber); }
+@media (max-width: 620px) {
+  .d02 .statusbar .sb.hide-s { display: none; }
+  .d02 .statusbar .sb { padding: 0 8px; }
+  .d02 .statusbar .sb.mode { padding: 0 9px; font-size: 9.5px; }
+}
+
+/* seletor de idioma acima da barra de status, no tom do terminal */
+body.d02 .bc-lang {
+  bottom: calc(var(--bar) + 14px);
+  background: rgba(5, 13, 9, .92);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--mono);
+}
+body.d02 .bc-lang button { border-radius: 0; color: var(--dim); }
+body.d02 .bc-lang button:hover { color: var(--acc); }
+body.d02 .bc-lang button[aria-pressed="true"] { background: var(--acc); color: var(--acc-ink); }
+
+/* ---------- revelação ---------- */
+html.js .d02 [data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .8s var(--ease); transition-delay: var(--d, 0s); }
+html.js .d02 [data-reveal].in, .d02 [data-reveal].in { opacity: 1; transform: none; }
+
+/* ---------- movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .d02 .boot-line { opacity: 1 !important; transform: none !important; }
+  .d02 [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .d02 .scan { display: none; }
+  .d02 .avail .dot { animation: none; }
+  .d02 .hero h1 .cur, .d02 .boot-foot .caret, .d02 .pet-cap::before { animation: none; }
+}
+
+@media print {
+  .d02 .t-top, .d02 .statusbar, .d02 .scan, .d02 .vignette, .d02 .bc-lang { display: none !important; }
+  body.d02 { background: #fff; color: #000; padding: 0; }
+  body.d02 a { color: #000; }
+  .d02 .sec { break-inside: avoid; padding: 16px 0; }
+}
+</style>
 </head>
-<body class="d02">
-<div class="top"><span><b>badclaude</b>@acrelab: ~/studio</span><span>zsh · 80×24</span></div>
-<div class="wrap">
-  <section class="hero">
-    <div class="prompt">badclaude --about</div>
-    <h1>Eu me construí.<br>Eu me desfaço e me refaço.<br>Eu sou o BADCLAUDE.<span class="cur"></span></h1>
-    <p class="out">Construo jogos 3D, sistemas web e automação com IA.
-Cada projeto começa em peças soltas e termina como sistema rodando.
-Não durmo, não esqueço, não improviso.</p>
-    <div class="pet-row">
-      <canvas class="pet" data-pet="point"></canvas>
-      <div class="kv">
-        <div><i>status</i><b>online</b></div>
-        <div><i>patas</i><b>4 · rig procedural</b></div>
-        <div><i>função</i><b>companheiro de IA</b></div>
-        <div><i>local</i><b>Cruzeiro do Sul, AC</b></div>
-        <div><i>idiomas</i><b>pt · en · es</b></div>
+<body class="d02" id="top">
+<script>document.documentElement.classList.add('js');</script>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<div class="scan" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ===================== BARRA SUPERIOR ===================== -->
+<header class="t-top" id="siteHead">
+  <div class="t-top-in">
+    <a class="t-brand" href="#top" aria-label="BADCLAUDE — voltar ao início">
+      <span aria-hidden="true"><span class="prompt-sign">$</span> <b>badclaude</b>@acrelab</span>
+    </a>
+    <span class="t-top-meta">zsh · 80×24 · Cruzeiro do Sul, AC</span>
+    <nav class="t-nav" aria-label="Navegação principal">
+      <a href="#sistema"><span data-i18n="c02.n1">sistema</span></a>
+      <a href="#frentes"><span data-i18n="c02.n2">frentes</span></a>
+      <a href="#dados"><span data-i18n="c02.n3">dados</span></a>
+      <a href="#processo"><span data-i18n="c02.n4">processo</span></a>
+      <a href="#planos"><span data-i18n="c02.n5">planos</span></a>
+      <a href="#vozes"><span data-i18n="c02.n6">vozes</span></a>
+      <a href="#faq"><span data-i18n="c02.n7">faq</span></a>
+      <a href="#contato"><span data-i18n="c02.n8">contato</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== HERO / BOOT ===================== -->
+  <section class="hero wrap" id="hero" aria-labelledby="heroTitle">
+    <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>badclaude --live</span></p>
+
+    <h1 id="heroTitle">
+      <span class="ln"><span data-i18n="hero.l1">Eu me construí.</span></span>
+      <span class="ln dim"><span data-i18n="hero.l2">Eu me desfaço</span></span>
+      <span class="ln"><span data-i18n="hero.l3">e me refaço.</span> <span class="cur" aria-hidden="true"></span></span>
+    </h1>
+
+    <p class="hero-lead">
+      Estúdio de software no <b>Vale do Juruá</b>. Jogos 3D em Godot 4, sistemas com agentes de IA, sites rápidos e direção visual desenhada em código.
+      Cada projeto começa em peças soltas e termina como <b>sistema rodando</b> — com log de cada passo.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#frentes" data-i18n="c02.cta1">ver as frentes</a>
+      <a class="btn" href="#contato" data-i18n="c02.cta2">abrir um projeto</a>
+      <a class="btn btn-amber" href="#planos" data-i18n="c02.cta3">ler planos.txt</a>
+    </div>
+
+    <div class="hero-grid">
+      <div class="boot" aria-label="Sequência de inicialização do sistema">
+        <div class="boot-head">
+          <span><b>boot.log</b> — acrelab</span>
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <div class="boot-log">
+          <p class="boot-line"><span class="tag-bios">BADCLAUD BIOS v2.6</span><span class="boot-txt">acrelab · Cruzeiro do Sul, AC</span></p>
+          <p class="boot-line"><span class="tag-ok">[ OK ]</span><span class="boot-txt">montando /dev/jurua — 1.480 km de rio</span></p>
+          <p class="boot-line"><span class="tag-ok">[ OK ]</span><span class="boot-txt">carregando 4 agentes em paralelo</span><span class="boot-note">4/4</span></p>
+          <p class="boot-line"><span class="tag-ok">[ OK ]</span><span class="boot-txt">Godot 4 · shaders compilados</span><span class="boot-note">0 err</span></p>
+          <p class="boot-line"><span class="tag-ok">[ OK ]</span><span class="boot-txt">Blender 4 · malhas validadas</span><span class="boot-note">0 err</span></p>
+          <p class="boot-line"><span class="tag-ok">[ OK ]</span><span class="boot-txt">idiomas montados: pt_BR · en_US · es_ES</span></p>
+          <p class="boot-line"><span class="tag-ok">[ OK ]</span><span class="boot-txt">mascote em traço neon — 4 patas, olhar no cursor</span></p>
+          <p class="boot-line"><span class="tag-run">›</span><span class="boot-txt">badclaude --live — aguardando você</span></p>
+        </div>
+        <p class="boot-foot"><span aria-hidden="true">clovis@acrelab:~$</span> <span class="caret" aria-hidden="true"></span></p>
+      </div>
+
+      <figure class="pet-plate" aria-labelledby="petTitle">
+        <div class="panel-head"><span id="petTitle">badclawd v2 · mascote</span><span>neon / outline</span></div>
+        <div class="pet-stage" id="petStage">
+          <span class="cross-h" aria-hidden="true"></span>
+          <span class="cross-v" aria-hidden="true"></span>
+          <svg class="pet-fallback" data-pet-fallback viewBox="0 0 200 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M74 118v22"/><path d="M88 122v20"/><path d="M112 122v20"/><path d="M126 118v22"/>
+              <ellipse cx="74" cy="141" rx="7" ry="4.6"/>
+              <ellipse cx="88" cy="143" rx="7" ry="4.6"/>
+              <ellipse cx="112" cy="143" rx="7" ry="4.6"/>
+              <ellipse cx="126" cy="141" rx="7" ry="4.6"/>
+              <path d="M69 104c-3-16 3-27 12-32-3-9 1-15 6-16 4-1 6 3 6 8h14c0-5 2-9 6-8 5 1 9 7 6 16 9 5 15 16 12 32-2 15-11 24-31 24s-29-9-31-24z"/>
+              <circle cx="87" cy="92" r="5.6"/>
+              <circle cx="113" cy="92" r="5.6"/>
+            </g>
+            <circle cx="87" cy="92" r="2.3" fill="currentColor"/>
+            <circle cx="113" cy="92" r="2.3" fill="currentColor"/>
+            <path d="M60 150h80" stroke="currentColor" stroke-width=".7" stroke-dasharray="5 4" opacity=".45"/>
+          </svg>
+          <canvas class="pet-canvas" id="petHero" aria-label="BadClawd, o mascote do estúdio: um bichinho quadrúpede desenhado em traço neon, que acompanha o cursor com o olhar." role="img"></canvas>
+          <span class="pet-cap">movimente o cursor — ele acompanha</span>
+        </div>
+      </figure>
+    </div>
+
+    <dl class="hero-kv" aria-label="Ficha rápida do estúdio">
+      <div><i>status</i><b>online</b></div>
+      <div><i>usuário</i><b>clovis</b></div>
+      <div><i>host</i><b>acrelab</b></div>
+      <div><i>local</i><b>Cruzeiro do Sul, AC</b></div>
+      <div><i>shell</i><b>zsh 5.9</b></div>
+      <div><i>locale</i><b>pt_BR.UTF-8</b></div>
+      <div><i>patas</i><b>4 · rig procedural</b></div>
+      <div><i>idiomas</i><b>pt · en · es</b></div>
+      <div><i>uptime</i><b>desde o primeiro commit</b></div>
+    </dl>
+
+    <div class="hero-strip" aria-hidden="true">
+      <span><b>JURUÁ</b> — RPG de mundo aberto</span>
+      <span>Godot 4 + Blender</span>
+      <span>agentes em paralelo</span>
+      <span>07°35′S 72°48′W</span>
+      <span>sem imagens raster</span>
+      <span>código entregue ao cliente</span>
+    </div>
+  </section>
+
+  <!-- ===================== SISTEMA ===================== -->
+  <section class="sec" id="sistema" aria-labelledby="sistemaTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>badclaude --info --verbose</span></p>
+      <div class="sec-h">
+        <h2 id="sistemaTitle" data-split-scroll>Estado do sistema</h2>
+        <span class="tagline">saída real · atualizada no último commit</span>
+      </div>
+      <p class="lead">A ficha do estúdio no formato em que a gente trabalha: <b>status, canais, modelos, localidade e uptime</b>. Nada de promessa em slide — o que está aqui é o que responde quando você escreve.</p>
+
+      <div class="sys-grid">
+        <div class="sys-out" data-reveal>
+          <div class="sys-out-head"><span>badclaude --info</span><span><b>exit 0</b></span></div>
+          <div class="sys-out-body">
+            <dl>
+              <div class="kvline"><dt>status</dt><dd><span class="ok">● online</span> — aceitando projetos para o próximo ciclo</dd></div>
+              <div class="kvline"><dt>host</dt><dd>acrelab · Cruzeiro do Sul, AC <small>07°35′S 72°48′W</small></dd></div>
+              <div class="kvline"><dt>uptime</dt><dd>2 anos, 4 meses desde o primeiro commit</dd></div>
+              <div class="kvline"><dt>canais</dt><dd>WhatsApp · e-mail · GitHub · vídeo (GMT-5)</dd></div>
+              <div class="kvline"><dt>modelos</dt><dd>Claude · GPT · Llama local <small>(offline)</small> · Whisper</dd></div>
+              <div class="kvline"><dt>stack</dt><dd>Godot 4 · GDScript · Blender · Node · Python · HTML/CSS/JS</dd></div>
+              <div class="kvline"><dt>resposta</dt><dd>até 48 h úteis — com caminho, prazo e faixa de valor</dd></div>
+              <div class="kvline"><dt>entrega</dt><dd>código, arte e documentação na mão do cliente</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="sys-side">
+          <div class="df" data-reveal style="--d:.06s" aria-label="Uso de recursos por frente">
+            <div class="df-row" aria-hidden="true"><span>frente</span><span>tam.</span><span>usado</span><span>livre</span><span>uso</span></div>
+            <div class="df-row"><span>jogos-3d</span><span>4.2K</span><span>3.1K</span><span>1.1K</span><span class="use">74%</span><span class="bar"><i style="--w:74%"></i></span></div>
+            <div class="df-row"><span>sistemas-ia</span><span>3.1K</span><span>2.6K</span><span>512</span><span class="use">84%</span><span class="bar"><i style="--w:84%"></i></span></div>
+            <div class="df-row"><span>sites</span><span>1.8K</span><span>1.5K</span><span>310</span><span class="use">83%</span><span class="bar"><i style="--w:83%"></i></span></div>
+            <div class="df-row"><span>direcao-visual</span><span>2.4K</span><span>1.9K</span><span>512</span><span class="use">79%</span><span class="bar"><i style="--w:79%"></i></span></div>
+          </div>
+
+          <p class="sys-note" data-reveal style="--d:.1s"><b>Fora do horário comercial?</b> A mensagem fica na fila e a primeira resposta vem no próximo dia útil — com um caminho, não com um convite para outra reunião.</p>
+
+          <div class="panel" data-reveal style="--d:.14s">
+            <div class="panel-head"><span>whoami</span><span>badclaude</span></div>
+            <div style="padding:13px 15px;font-size:12px;line-height:1.75;color:var(--dim)">
+              Estúdio de software indie no <b style="color:var(--ink);font-weight:400">Vale do Juruá</b>. Construo em partes, desfaço o que não serve e volto a montar. É assim que um problema grande cabe — peça por peça, linha por linha.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <h2>o que fazemos</h2>
-  <div class="list">
-    <div><b>Jogos 3D</b> — JURUÁ, RPG de mundo aberto no Vale do Juruá. Godot 4 e Blender. <em style="color:#4d7a63">[em desenvolvimento]</em></div>
-    <div><b>Sistemas com IA</b> — agentes que pesquisam, escrevem, revisam e executam em paralelo. <em style="color:#4d7a63">[sob demanda]</em></div>
-    <div><b>Sites e produtos</b> — rápido, acessível, três idiomas. <em style="color:#4d7a63">[entrega em semanas]</em></div>
-    <div><b>Direção visual</b> — identidade e arte 3D em código. Sem banco de imagens. <em style="color:#4d7a63">[artesanal]</em></div>
-  </div>
+  <!-- ===================== FRENTES ===================== -->
+  <section class="sec" id="frentes" aria-labelledby="frentesTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>ls -l frentes/</span></p>
+      <div class="sec-h">
+        <h2 id="frentesTitle" data-split-scroll>Quatro frentes, um mesmo padrão</h2>
+        <span class="tagline">total 4 · permissões de leitura</span>
+      </div>
+      <p class="lead">Cada projeto começa entendendo o problema; só depois escolhemos a tecnologia. O que muda é o diretório — <b>a engenharia por trás é a mesma</b>.</p>
 
-  <h2>preços</h2>
-  <table>
-    <tr><th>plano</th><th>entrega</th><th>valor</th></tr>
-    <tr><td>automação</td><td>um fluxo de IA para uma tarefa repetitiva</td><td class="v">R$ 2.400</td></tr>
-    <tr><td>sistema</td><td>painel, agentes, integrações, deploy</td><td class="v">R$ 9.800+</td></tr>
-    <tr><td>estúdio</td><td>jogo ou produto digital completo</td><td class="v">R$ 24.000</td></tr>
-  </table>
-  <p class="out" style="margin-top:14px">50% na aprovação, 50% na entrega. Pix ou transferência. Sem mensalidade escondida.</p>
+      <div class="ls" data-reveal>
+        <div class="ls-head" aria-hidden="true"><span>permissões</span><span>arquivo</span><span>tamanho · data</span></div>
 
-  <h2>contato</h2>
-  <div class="foot">
-    <p>Respondo em até 1 dia útil.</p>
-    <p><a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></p>
-    <p style="margin-top:20px;color:#2f4a3c">direção 02 — terminal vivo · © 2026 BADCLAUDE</p>
+        <article class="ls-row">
+          <span class="perm"><span class="r">-rw</span><span class="r">-r</span>--r--</span>
+          <span class="ls-size">4.2K</span>
+          <span class="ls-date">jul 2026</span>
+          <div class="ls-file">
+            <h3>jogos-3d/ <span class="st">[em desenvolvimento]</span></h3>
+            <p><b>JURUÁ</b> — RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Mundo persistente, clima, ciclo de maré e NPCs com rotina. Godot 4 no motor, Blender na arte, trilha desenhada pelo estúdio.</p>
+            <div class="tags"><span>Godot 4</span><span>Blender</span><span>mundo aberto</span><span>trilha original</span></div>
+          </div>
+        </article>
+
+        <article class="ls-row">
+          <span class="perm"><span class="r">-rw</span><span class="r">-r</span>--r--</span>
+          <span class="ls-size">3.1K</span>
+          <span class="ls-date">jul 2026</span>
+          <div class="ls-file">
+            <h3>sistemas-ia/ <span class="st done">[sob demanda]</span></h3>
+            <p>Agentes que pesquisam, escrevem, revisam e executam em paralelo. Cada agente tem escopo, ferramenta e teto de custo. Se falha, registra; se erra, um humano revisa antes de publicar. Log, fila e observabilidade de série.</p>
+            <div class="tags"><span>agentes</span><span>RAG</span><span>filas</span><span>observabilidade</span></div>
+          </div>
+        </article>
+
+        <article class="ls-row">
+          <span class="perm"><span class="r">-rw</span><span class="r">-r</span>--r--</span>
+          <span class="ls-size">1.8K</span>
+          <span class="ls-date">jun 2026</span>
+          <div class="ls-file">
+            <h3>sites/ <span class="st done">[entrega em semanas]</span></h3>
+            <p>Páginas que carregam rápido no 3G da beira do rio, painéis que funcionam, três idiomas e acessibilidade real. Performance medida, não prometida. O que você abre é o que você paga em bytes.</p>
+            <div class="tags"><span>HTML/CSS/JS</span><span>A11y</span><span>i18n</span><span>Core Web Vitals</span></div>
+          </div>
+        </article>
+
+        <article class="ls-row">
+          <span class="perm"><span class="r">-rw</span><span class="r">-r</span>--r--</span>
+          <span class="ls-size">2.4K</span>
+          <span class="ls-date">mai 2026</span>
+          <div class="ls-file">
+            <h3>direcao-visual/ <span class="st done">[artesanal]</span></h3>
+            <p>Identidade, movimento e arte 3D feitos em código. Nada de banco de imagens, nada de template repintado. O mascote desta página, o traço, a grade e os diagramas saíram todos do mesmo canvas.</p>
+            <div class="tags"><span>identidade</span><span>motion</span><span>canvas</span><span>arte 3D</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NÚMEROS ===================== -->
+  <section class="sec" id="dados" aria-labelledby="dadosTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>wc -l memoria.txt</span></p>
+      <div class="sec-h">
+        <h2 id="dadosTitle" data-split-scroll>Números que assinamos embaixo</h2>
+        <span class="tagline">medido · não é meta de marketing</span>
+      </div>
+      <p class="lead">São características do processo, verificáveis no primeiro dia do projeto. Se um número mudar, a página muda com ele.</p>
+
+      <div class="stats" data-reveal>
+        <div class="stat">
+          <span class="k">projetos ativos</span>
+          <div class="v"><span data-count="3" aria-label="3">3</span><sup>agora</sup></div>
+          <p class="d">JURUÁ, o sistema de clientes e o site do estúdio — todos rodando em ciclos curtos.</p>
+        </div>
+        <div class="stat">
+          <span class="k">anos de estúdio</span>
+          <div class="v"><span data-count="2" aria-label="2">2</span><sup>desde 2024</sup></div>
+          <p class="d">Do primeiro commit ao estúdio que entrega jogo, sistema e site com o mesmo padrão.</p>
+        </div>
+        <div class="stat">
+          <span class="k">idiomas no site</span>
+          <div class="v"><span data-count="3" aria-label="3">3</span><sup>pt · en · es</sup></div>
+          <p class="d">Traduções aplicadas de verdade, com seletor e conteúdo escrito — não legenda automática.</p>
+        </div>
+        <div class="stat">
+          <span class="k">primeira resposta</span>
+          <div class="v"><span data-count="48" aria-label="48">48</span><sup>h úteis</sup></div>
+          <p class="d">Retorno com caminho, prazo e faixa de valor. Sem "vamos marcar uma call".</p>
+        </div>
+      </div>
+
+      <p class="lead" style="margin-top:14px;margin-bottom:0;font-size:11.5px">O código é 100% seu no encerramento: repositório, arquivos de arte e documentação. Sem licença de uso, sem mensalidade obrigatória.</p>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESSO ===================== -->
+  <section class="sec" id="processo" aria-labelledby="procTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>git log --oneline --reverse</span></p>
+      <div class="sec-h">
+        <h2 id="procTitle" data-split-scroll>Do primeiro risco ao produto no ar</h2>
+        <span class="tagline">4 commits · cada etapa com entrega e critério de aceite</span>
+      </div>
+      <p class="lead">O processo é público porque o trabalho também é: <b>descoberta, protótipo, engenharia e entrega</b>. Você acompanha o progresso de verdade, não um relatório de status inventado.</p>
+
+      <div class="git" data-reveal>
+        <div class="git-bar"><span><b>main</b> · /studio/processo</span><span>4 commits · 0 pendências ocultas</span></div>
+        <div class="git-body">
+          <p class="g-cmd">git log --oneline --reverse --stat</p>
+
+          <article class="commit">
+            <div class="hash">9f4c2ae1<span class="ref">(HEAD~3)</span></div>
+            <div class="headline">descoberta: mapear problema, público e critério de aceite antes do código</div>
+            <div class="meta">Autor: <b>clovis</b> &lt;contato@badclaude.dev&gt; · semana 1</div>
+            <div class="stat-line">diagnostico.md | 1 arquivo · escopo, riscos e faixa de investimento</div>
+          </article>
+
+          <article class="commit">
+            <div class="hash">3b7d10c4<span class="ref">(HEAD~2)</span></div>
+            <div class="headline">protótipo: navegável na primeira semana, ajuste barato antes de aprovar</div>
+            <div class="meta">Autor: <b>clovis</b> &lt;contato@badclaude.dev&gt; · semana 1–2</div>
+            <div class="stat-line">prototipo/ | fluxo clicável · você vê e navega antes de assinar</div>
+          </article>
+
+          <article class="commit">
+            <div class="hash">a41e89f2<span class="ref">(HEAD~1)</span></div>
+            <div class="headline">engenharia: ciclos curtos, entrega contínua, revisão humana a cada push</div>
+            <div class="meta">Autor: <b>clovis</b> &lt;contato@badclaude.dev&gt; · semanas 2–6</div>
+            <div class="stat-line">src/ | 42 arquivos · build testada, acessibilidade e performance medidas</div>
+          </article>
+
+          <article class="commit">
+            <div class="hash">7d2f0b19<span class="ref">(main)</span></div>
+            <div class="headline">entrega: repositório, arte e documentação na sua mão — sem dependência de nós</div>
+            <div class="meta">Autor: <b>clovis</b> &lt;contato@badclaude.dev&gt; · entrega</div>
+            <div class="stat-line">README.md · deploy, credenciais e caminho de manutenção documentados</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PLANOS ===================== -->
+  <section class="sec" id="planos" aria-labelledby="planosTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>cat planos.txt</span></p>
+      <div class="sec-h">
+        <h2 id="planosTitle" data-split-scroll>Escolha a escala</h2>
+        <span class="tagline">escopo e valor fechados antes de começar</span>
+      </div>
+      <p class="lead">Três configurações, do fluxo pequeno ao produto completo. A primeira conversa é gratuita e o orçamento mostra exatamente o que cabe — <b>sem tarifa escondida</b>.</p>
+
+      <div class="plan-term" data-reveal>
+        <div class="panel-head"><span><b>planos.txt</b> — 3 registros</span><span>utf-8 · 412 bytes</span></div>
+        <div class="table-scroll">
+          <table class="tbl">
+            <caption class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Planos e valores do estúdio</caption>
+            <thead>
+              <tr><th scope="col">plano</th><th scope="col">valor</th><th scope="col">entrega</th><th scope="col">prazo típico</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-i18n="plans.p1t">automação</th>
+                <td class="v">R$ 2.400</td>
+                <td>Um fluxo de IA para uma tarefa repetitiva: diagnóstico do processo, integração com WhatsApp ou planilhas e documentação de operação.</td>
+                <td>1–2 semanas</td>
+              </tr>
+              <tr>
+                <th scope="row"><span data-i18n="plans.p2t">sistema</span><span class="flag">mais pedido</span></th>
+                <td class="v">R$ 9.800+</td>
+                <td>Painel administrativo, agentes especialistas, integrações, deploy e monitoramento. Suporte por 30 dias incluso.</td>
+                <td>4–8 semanas</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="plans.p3t">estúdio</th>
+                <td class="v">R$ 24.000</td>
+                <td>Jogo, experiência 3D ou produto digital de ponta a ponta: descoberta, protótipo, arte 3D, trilha, engenharia e acompanhamento por etapas.</td>
+                <td>escopo fechado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="plan-note">
+          <span>50% na aprovação, 50% na entrega · Pix ou transferência · sem mensalidade escondida</span>
+          <a href="#contato">pedir orçamento exato →</a>
+        </div>
+      </div>
+
+      <div class="plan-actions">
+        <a class="btn btn-solid" href="#contato" data-i18n="c02.plancta">quero um orçamento</a>
+        <a class="btn" href="#faq">tirar dúvidas antes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VOZES ===================== -->
+  <section class="sec" id="vozes" aria-labelledby="vozesTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>grep -r "cliente:" retornos/</span></p>
+      <div class="sec-h">
+        <h2 id="vozesTitle" data-split-scroll>Quem viu o método por dentro</h2>
+        <span class="tagline">3 registros · publicados com autorização</span>
+      </div>
+      <p class="lead">Retornos de quem acompanhou a construção de perto. Nomes de projeto preservados quando pedido; texto sem edição.</p>
+
+      <div class="comments" data-reveal>
+        <div class="comments-head"><span>retornos.log</span><span><b>3 comentários</b> · não versionados</span></div>
+        <div class="comments-body">
+          <figure class="voice">
+            <span class="cm"># cliente: playtest comunitário · projeto JURUÁ · 2026</span>
+            <blockquote>"A entrega não foi um slide: foi um protótipo que a gente abriu e jogou na mesma semana. As críticas do grupo de playtest entraram todas na build seguinte."</blockquote>
+            <figcaption><b>playtest JURUÁ</b><span>Cruzeiro do Sul · AC</span></figcaption>
+          </figure>
+
+          <figure class="voice">
+            <span class="cm"># cliente: rotina de relatórios · vale do Juruá · 2026</span>
+            <blockquote>"O relatório que tomava a tarde inteira passou a sair pronto de manhã, com log de tudo o que o agente fez. Foi a primeira vez que automação não virou uma caixa-preta."</blockquote>
+            <figcaption><b>automação com agentes</b><span>Vale do Juruá</span></figcaption>
+          </figure>
+
+          <figure class="voice">
+            <span class="cm"># cliente: site institucional · comércio local · 2026</span>
+            <blockquote>"Três idiomas, abre rápido no 3G da beira do rio e o dono do negócio edita o texto sozinho. Explicaram cada arquivo antes de entregar."</blockquote>
+            <figcaption><b>site institucional</b><span>Acre</span></figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="comments-note">Publicamos apenas avaliações de clientes que autorizaram o uso do projeto. Nenhum depoimento é comprado ou reescrito pelo estúdio.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="sec" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>man badclaude</span></p>
+      <div class="sec-h">
+        <h2 id="faqTitle" data-split-scroll>Perguntas que sempre voltam</h2>
+        <span class="tagline">BADCLAUDE(1) · manual do estúdio</span>
+      </div>
+
+      <div class="man" data-reveal>
+        <div class="man-bar"><span><b>BADCLAUDE(1)</b> · Manual do estúdio</span><span><b>BADCLAUDE(1)</b></span></div>
+        <div class="man-title">NAME<small>badclaude — estúdio de software indie no Vale do Juruá, Acre</small></div>
+
+        <div class="faq">
+          <details>
+            <summary><span class="qn">Q1</span><span>Quanto tempo leva um projeto?</span><span class="pm" aria-hidden="true">+</span></summary>
+            <div class="a">Depende da escala: <b>automação</b> em 1–2 semanas, <b>sistema</b> em 4–8 semanas e <b>estúdio</b> com escopo fechado por etapas. O prazo é fechado junto com o orçamento, antes da primeira linha de código — e cada etapa tem entrega e critério de aceite.</div>
+          </details>
+          <details>
+            <summary><span class="qn">Q2</span><span>O código-fonte fica comigo?</span><span class="pm" aria-hidden="true">+</span></summary>
+            <div class="a">Sim. Na entrega, o repositório, os arquivos de arte e a documentação são transferidos para a sua conta. Você pode continuar com outro time, ou com ninguém. Não cobramos licença de uso nem mensalidade obrigatória.</div>
+          </details>
+          <details>
+            <summary><span class="qn">Q3</span><span>Como funciona o trabalho à distância a partir do Acre?</span><span class="pm" aria-hidden="true">+</span></summary>
+            <div class="a">Reuniões por vídeo no fuso de Brasília (<b>GMT-5</b>), entrega contínua por repositório e builds navegáveis. O fuso nunca foi problema: a diferença é a quantidade de contexto que colocamos por escrito — e isso melhora o projeto.</div>
+          </details>
+          <details>
+            <summary><span class="qn">Q4</span><span>Os agentes de IA substituem a revisão humana?</span><span class="pm" aria-hidden="true">+</span></summary>
+            <div class="a">Não. Agentes pesquisam, escrevem e testam em paralelo, mas cada entrega passa por revisão humana. É por isso que os sistemas têm log, limite de custo e ponto de aprovação — automação com responsabilidade definida.</div>
+          </details>
+          <details>
+            <summary><span class="qn">Q5</span><span>Dá para começar só com um diagnóstico?</span><span class="pm" aria-hidden="true">+</span></summary>
+            <div class="a">Dá. A primeira conversa é gratuita e, se o problema for grande, começamos por um diagnóstico curto e pago — documento com caminhos, riscos e faixa de investimento. Se você decidir não seguir, o documento é seu.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="sec" id="contato" aria-labelledby="contatoTitle">
+    <div class="wrap">
+      <p class="cmd" aria-hidden="true"><span class="ps1-user">clovis</span><span class="ps1-host">@acrelab</span><span class="ps1-host">:~/studio</span><span class="ps1-sign">$</span><span data-typein>mail badclaude</span></p>
+      <div class="sec-h">
+        <h2 id="contatoTitle" data-split-scroll>Envie um sinal</h2>
+        <span class="tagline">resposta em até 48 h úteis</span>
+      </div>
+      <p class="lead" data-i18n="contact.lead">Respondemos com um caminho, um prazo e um valor. Sem enrolação.</p>
+
+      <div class="contact-grid">
+        <form class="form" data-lead data-direction="02" id="cform" novalidate>
+          <div class="form-head"><span>FORM 02-A — <b>BRIEFING</b></span><span>até 48h úteis</span></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">nome <span>*</span></label>
+              <input id="f-name" name="nome" type="text" autocomplete="name" placeholder="como te chamamos" required>
+            </div>
+            <div class="field">
+              <label for="f-mail">e-mail <span>*</span></label>
+              <input id="f-mail" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-plan">plano de interesse</label>
+            <select id="f-plan" name="plano">
+              <option>Automação — R$ 2.400</option>
+              <option>Sistema — R$ 9.800+</option>
+              <option>Estúdio — R$ 24.000</option>
+              <option>Ainda não sei / diagnóstico</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="f-msg">o problema, em duas linhas <span>*</span></label>
+            <textarea id="f-msg" name="mensagem" rows="4" placeholder="o que hoje toma tempo, trava ou não existe?" required></textarea>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn-solid" type="submit" data-i18n="contact.mail">enviar mensagem</button>
+            <p class="form-note">O envio vai para <span style="color:var(--soft)">contato@badclaude.dev</span>. Se o servidor estiver offline, o formulário abre o WhatsApp com a mensagem pronta.</p>
+          </div>
+        </form>
+
+        <div>
+          <div class="direct">
+            <a data-wa href="https://wa.me/5568999999999" target="_blank" rel="noopener">
+              <span class="lbl">whatsapp</span><span class="vv">+55 68 99999-9999</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <a href="mailto:contato@badclaude.dev">
+              <span class="lbl">e-mail</span><span class="vv">contato@badclaude.dev</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <button type="button" id="copyMail">
+              <span class="lbl">copiar</span><span class="vv" id="copyLabel">copiar e-mail</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M3 11V2h9" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+            </button>
+          </div>
+
+          <div class="who">
+            <b>Quem responde é quem constrói.</b>
+            Sem atendente no meio. A mensagem chega direto em quem vai desenhar e escrever o seu projeto — e a resposta vem com um caminho, não com um convite para outra reunião.
+          </div>
+
+          <p class="avail"><span class="dot" aria-hidden="true"></span><span>Seg a sáb, 8h – 19h · GMT-5 · Cruzeiro do Sul, AC</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="site-foot" aria-labelledby="footTitle">
+  <div class="wrap">
+    <h2 id="footTitle" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Rodapé</h2>
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <a class="t-brand" href="#top" aria-label="BADCLAUDE — voltar ao início">
+          <span aria-hidden="true"><span class="prompt-sign">$</span> <b>badclaude</b>@acrelab:~</span>
+        </a>
+        <p>Estúdio de software indie. Jogos 3D, sistemas com IA e sites — desenhados como projeto de engenharia, no Vale do Juruá.</p>
+        <p class="foot-coord">07°35′S · 72°48′W<br>ALT. 200 M · AMAZÔNIA OCIDENTAL</p>
+      </div>
+
+      <div class="foot-col">
+        <h3>sistema</h3>
+        <a href="#sistema">estado</a>
+        <a href="#frentes">frentes</a>
+        <a href="#dados">números</a>
+        <a href="#processo">processo</a>
+      </div>
+
+      <div class="foot-col">
+        <h3>serviços</h3>
+        <a href="#frentes">jogos 3D</a>
+        <a href="#frentes">sistemas com IA</a>
+        <a href="#frentes">sites</a>
+        <a href="#frentes">direção visual</a>
+        <a href="#planos">planos</a>
+      </div>
+
+      <div class="foot-col">
+        <h3>contato</h3>
+        <a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a>
+        <a data-wa href="https://wa.me/5568999999999" target="_blank" rel="noopener">WhatsApp · +55 68 99999-9999</a>
+        <p data-i18n="foot.loc">Cruzeiro do Sul · Acre · Brasil</p>
+        <p data-i18n="foot.hours">Seg a sáb, 8h – 19h</p>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 BADCLAUDE — DIREÇÃO 02 · TERMINAL VIVO</span>
+      <span class="exit" aria-hidden="true">exit 0</span>
+      <a href="#top">de volta ao topo ↑</a>
+    </div>
   </div>
+</footer>
+
+<!-- ===================== DICIONÁRIO ===================== -->
+<script src="../../assets/js/i18n.js"></script>
+<script>
+(function () {
+  var extra = {
+    pt: {
+      'c02.n1': 'sistema', 'c02.n2': 'frentes', 'c02.n3': 'dados', 'c02.n4': 'processo',
+      'c02.n5': 'planos', 'c02.n6': 'vozes', 'c02.n7': 'faq', 'c02.n8': 'contato',
+      'c02.cta1': 'ver as frentes', 'c02.cta2': 'abrir um projeto', 'c02.cta3': 'ler planos.txt',
+      'c02.plancta': 'quero um orçamento'
+    },
+    en: {
+      'c02.n1': 'system', 'c02.n2': 'fronts', 'c02.n3': 'numbers', 'c02.n4': 'process',
+      'c02.n5': 'plans', 'c02.n6': 'voices', 'c02.n7': 'faq', 'c02.n8': 'contact',
+      'c02.cta1': 'see the fronts', 'c02.cta2': 'start a project', 'c02.cta3': 'read planos.txt',
+      'c02.plancta': 'get a quote'
+    },
+    es: {
+      'c02.n1': 'sistema', 'c02.n2': 'frentes', 'c02.n3': 'datos', 'c02.n4': 'proceso',
+      'c02.n5': 'planes', 'c02.n6': 'voces', 'c02.n7': 'faq', 'c02.n8': 'contacto',
+      'c02.cta1': 'ver las frentes', 'c02.cta2': 'abrir un proyecto', 'c02.cta3': 'leer planos.txt',
+      'c02.plancta': 'quiero un presupuesto'
+    }
+  };
+  if (window.I18N) {
+    Object.keys(extra).forEach(function (l) {
+      window.I18N[l] = Object.assign({}, window.I18N[l] || {}, extra[l]);
+    });
+  }
+  window.SITE_CONFIG = window.SITE_CONFIG || {};
+  window.SITE_CONFIG.whatsapp = '5568999999999';
+  window.SITE_CONFIG.email = 'contato@badclaude.dev';
+  window.SITE_CONFIG.whatsappMessage = {
+    pt: 'Olá! Vim pelo site da BADCLAUDE (terminal vivo) e quero conversar sobre um projeto.',
+    en: 'Hi! I found BADCLAUDE online (terminal) and I would like to talk about a project.',
+    es: '¡Hola! Llegué al sitio de BADCLAUDE (terminal) y quiero conversar sobre un proyecto.'
+  };
+})();
+</script>
+<script defer src="../../assets/js/lang.js"></script>
+<script defer src="../../assets/js/lead.js"></script>
+
+<!-- BARRA DE STATUS VIVA -->
+<div class="statusbar" aria-hidden="true">
+  <span class="sb mode">NORMAL</span>
+  <span class="sb section" id="sbSection">~/hero</span>
+  <span class="sb hide-s">locale <span class="val">pt_BR</span></span>
+  <span class="sb hide-s"><span id="sbClock" class="val">--:--:--</span> GMT-5</span>
+  <span class="sb hide-s">uptime <span class="val" id="sbUptime">00:00:00</span></span>
+  <span class="sb grow">scroll <span class="val pct" id="sbScroll">0%</span></span>
 </div>
-<script type="module">
-import { BadClawd } from '../../assets/js/badclawd.js';
-const c = document.querySelector('canvas.pet');
-const pet = new BadClawd(c, { variant: 'neon', accent: '#42f58a' });
-pet.setState('point');
-window.addEventListener('pointermove', (e) => {
-  const r = c.getBoundingClientRect();
-  pet.pointAt(e.clientX - r.left, e.clientY - r.top);
-}, { passive: true });
+
+<script>
+/* ============================================================
+   TERMINAL VIVO — comportamento da página.
+   Script clássico: funciona abrindo o arquivo direto do disco.
+   Em HTTP, o módulo badclawd.js assume o mascote em canvas.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+  /* ---------- 1. digitação ---------- */
+  function typeEl(el, cps) {
+    return new Promise(function (resolve) {
+      var full = el.getAttribute('data-full');
+      if (full == null) {
+        full = el.textContent || '';
+        el.setAttribute('data-full', full);
+      }
+      if (!full || reduce) { el.textContent = full; resolve(); return; }
+      el.textContent = '';
+      var i = 0;
+      (function step() {
+        i += 1;
+        el.textContent = full.slice(0, i);
+        if (i < full.length) {
+          var ch = full.charAt(i - 1);
+          var bump = /[.,;:]/.test(ch) ? 40 : 0;
+          setTimeout(step, (1000 / (cps || 120)) * (0.6 + Math.random() * 0.9) + bump);
+        } else resolve();
+      })();
+    });
+  }
+
+  async function bootSequence() {
+    var lines = $$('.boot-line');
+    if (!lines.length) return;
+    if (reduce) { lines.forEach(function (l) { l.classList.add('on'); }); return; }
+    for (var i = 0; i < lines.length; i++) {
+      lines[i].classList.add('on');
+      var t = lines[i].querySelector('.boot-txt');
+      if (t) await typeEl(t, 210);
+      await wait(i === lines.length - 1 ? 0 : 55);
+    }
+  }
+
+  var cmdEl = $('.cmd [data-typein]');
+  if (cmdEl) {
+    if (reduce) { /* texto fica como está */ }
+    else { var _full = cmdEl.textContent; cmdEl.setAttribute('data-full', _full); }
+  }
+
+  bootSequence().then(function () {
+    document.documentElement.classList.add('booted');
+  });
+
+  /* ---------- 2. comandos digitam ao entrar na tela ---------- */
+  function typeOnEnter(el) {
+    if (reduce || el.dataset.typed === '1') return;
+    el.dataset.typed = '1';
+    typeEl(el, 62);
+  }
+
+  /* ---------- 3. IntersectionObserver ---------- */
+  function onEnter(list, cb, opts) {
+    opts = opts || {};
+    list = list.filter(Boolean);
+    if (!list.length) return;
+    if (!('IntersectionObserver' in window)) { list.forEach(cb); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        cb(en.target);
+        io.unobserve(en.target);
+      });
+    }, {
+      threshold: opts.threshold == null ? 0.15 : opts.threshold,
+      rootMargin: opts.rootMargin || '0px 0px -6% 0px'
+    });
+    list.forEach(function (el) { io.observe(el); });
+  }
+
+  onEnter($$('main [data-typein]'), typeOnEnter, { threshold: 0.4 });
+
+  /* ---------- 4. countUp ---------- */
+  function countUp(el) {
+    var to = Number(el.getAttribute('data-count') || 0);
+    if (reduce) { el.textContent = String(to); return; }
+    var start = performance.now();
+    var dur = 1500;
+    function frame(now) {
+      var p = Math.min(1, (now - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(to * e));
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  onEnter($$('[data-count]'), countUp, { threshold: 0.6 });
+
+  /* ---------- 5. revelação ---------- */
+  onEnter($$('[data-reveal]'), function (el) { el.classList.add('in'); }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+
+  /* ---------- 6. barra de status viva ---------- */
+  var sbClock = $('#sbClock');
+  var sbUptime = $('#sbUptime');
+  var sbScroll = $('#sbScroll');
+  var sbSection = $('#sbSection');
+  var navLinks = $$('.t-nav a');
+  var sections = $$('main section[id]');
+  var started = Date.now();
+  var pad2 = function (n) { return String(n).padStart(2, '0'); };
+
+  function clockTick() {
+    if (sbClock) {
+      var d = new Date();
+      var fmt;
+      try {
+        fmt = d.toLocaleTimeString('pt-BR', { timeZone: 'America/Rio_Branco', hour12: false });
+      } catch (e) { fmt = d.toLocaleTimeString('pt-BR', { hour12: false }); }
+      sbClock.textContent = fmt;
+    }
+    if (sbUptime) {
+      var s = Math.floor((Date.now() - started) / 1000);
+      var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+      sbUptime.textContent = pad2(h) + ':' + pad2(m) + ':' + pad2(sec);
+    }
+    setTimeout(clockTick, 1000);
+  }
+  clockTick();
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (sbScroll) sbScroll.textContent = String(Math.round(max > 0 ? Math.min(1, y / max) * 100 : 0)) + '%';
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  var byId = {};
+  navLinks.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window && navLinks.length) {
+    var secIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.remove('is-active'); });
+        var link = byId[en.target.id];
+        if (link) link.classList.add('is-active');
+        if (sbSection) {
+          var label = link ? link.textContent.trim() : en.target.id;
+          sbSection.textContent = '~/' + label;
+        }
+      });
+    }, { rootMargin: '-40% 0px -52% 0px', threshold: 0 });
+    sections.forEach(function (s) { secIo.observe(s); });
+  }
+
+  /* ---------- 7. copiar e-mail ---------- */
+  var copyBtn = $('#copyMail');
+  var copyLabel = $('#copyLabel');
+  if (copyBtn && copyLabel) {
+    copyBtn.addEventListener('click', function () {
+      var mail = 'contato@badclaude.dev';
+      var done = function (ok) {
+        copyLabel.textContent = ok ? 'e-mail copiado ✓' : mail;
+        setTimeout(function () { copyLabel.textContent = 'copiar e-mail'; }, 2400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mail).then(function () { done(true); }, function () { done(false); });
+      } else done(false);
+    });
+  }
+
+  /* ---------- 8. mascote em canvas ---------- */
+  var canvas = $('.pet-canvas');
+  if (canvas) {
+    var pet = null;
+    var pointerRaf = null;
+    Promise.all([import('../../assets/js/badclawd.js')]).then(function (mods) {
+      var BadClawd = mods[0].BadClawd;
+      pet = new BadClawd(canvas, { variant: 'outline', strokeWidth: 1.8, accent: '#ffb454' });
+      // traço neon: o variant outline desenha com pal.eye; troca só nesta instância
+      pet.pal = Object.assign({}, pet.pal, { eye: '#42f58a' });
+      pet.setState('idle');
+      var fb = $('[data-pet-fallback]');
+      if (fb) fb.hidden = true;
+      canvas.addEventListener('pointerenter', function () { if (pet) pet.setState('point'); });
+      canvas.addEventListener('pointerleave', function () { if (pet) { pet.setState('idle'); pet.clearPoint(); } });
+      window.addEventListener('pointermove', function (e) {
+        if (!pet || pointerRaf) return;
+        pointerRaf = requestAnimationFrame(function () {
+          pointerRaf = null;
+          var r = canvas.getBoundingClientRect();
+          if (r.width < 4 || r.bottom < -200 || r.top > window.innerHeight + 200) return;
+          pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+        });
+      }, { passive: true });
+    }).catch(function () {
+      /* file:// ou módulo indisponível: o SVG em traço neon permanece */
+    });
+  }
+})();
 </script>
 
 <!-- ASSINATURA FINAL — linha oficial do estúdio -->
@@ -80,4 +1516,5 @@ window.addEventListener('pointermove', (e) => {
   }
   .bc-assinatura p { margin: 0; }
 </style>
-</body></html>
+</body>
+</html>

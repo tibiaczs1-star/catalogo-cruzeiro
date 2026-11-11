@@ -1,127 +1,2345 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BADCLAUDE — 04 Espacial</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../shared.css">
-<link rel="stylesheet" href="../more.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — 04 Espacial 3D · estúdio de software no Acre</title>
+<meta name="description" content="BADCLAUDE é um estúdio indie em Cruzeiro do Sul, Acre: jogos 3D como JURUÁ, sistemas web com agentes de IA e sites rápidos, feitos em código — PT, EN e ES.">
+<meta name="theme-color" content="#0b0d10">
+<meta name="author" content="BADCLAUDE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BADCLAUDE">
+<meta property="og:title" content="BADCLAUDE — eu me construí, eu me desfaço e me refaço.">
+<meta property="og:description" content="Jogos 3D, sistemas com IA e sites. Um estúdio indie em Cruzeiro do Sul, Acre, que entrega sistema rodando — não apresentação.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0d10'/%3E%3Cpath d='M7 22V12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10' fill='none' stroke='%236ee7ff' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='15' r='2' fill='%236ee7ff'/%3E%3Ccircle cx='20' cy='15' r='2' fill='%236ee7ff'/%3E%3Cpath d='M9 26h4M19 26h4' stroke='%23f472b6' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.1/build/three.module.js"}}</script>
+<style>
+/* ============================================================
+   04 — ESPACIAL 3D
+   Profundidade real, névoa volumétrica, luz fria azul-gelo.
+   Fundo #0b0d10 · cena Three.js · fallback 2D para file://.
+   ============================================================ */
+
+:root{
+  --bg:#0b0d10;
+  --bg-2:#0e1116;
+  --panel:rgba(17,21,28,.72);
+  --panel-2:rgba(11,14,19,.9);
+  --ice:#6ee7ff;
+  --ice-soft:#a7eefc;
+  --violet:#a78bfa;
+  --pink:#f472b6;
+  --ink:#eceff4;
+  --ink-2:#c9d2de;
+  --muted:#9aa6b8;
+  --dim:#8190a2;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.055);
+  --line-ice:rgba(110,231,255,.28);
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+  --wrap:1200px;
+  --gutter:clamp(18px,4vw,48px);
+  --head:74px;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:calc(var(--head) + 22px);
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,canvas,svg{display:block;max-width:100%}
+h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:rgba(110,231,255,.28);color:#fff}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px;border-radius:2px}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding-inline:var(--gutter);position:relative}
+
+/* ---------------- fundo espacial ---------------- */
+.sky,.sky-fallback{position:fixed;inset:0;z-index:0;pointer-events:none}
+.sky canvas,.sky-fallback canvas{width:100%;height:100%}
+.sky{z-index:1}
+.sky-fallback{opacity:1;transition:opacity .9s ease}
+body.webgl .sky-fallback{opacity:0}
+.veil{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(72% 58% at 50% 38%,transparent 0%,rgba(11,13,16,.42) 62%,rgba(11,13,16,.9) 100%),
+    linear-gradient(180deg,rgba(11,13,16,.25),rgba(11,13,16,.55));
+}
+.page{position:relative;z-index:3}
+main,footer{position:relative;z-index:3}
+
+.skip{
+  position:fixed;top:-100px;left:16px;z-index:1000;
+  padding:12px 18px;background:var(--ice);color:#03121a;
+  font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;border-radius:2px;
+  transition:top .25s var(--ease);
+}
+.skip:focus{top:14px}
+
+/* ---------------- utilitários tipográficos ---------------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font:500 10px/1 var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--ice);
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--ice),transparent)}
+.eyebrow .n{color:var(--dim);letter-spacing:.16em}
+.grad{background:linear-gradient(96deg,#8df1ff 0%,#6ee7ff 32%,#a78bfa 64%,#f472b6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mono{font-family:var(--mono)}
+
+.sec{padding:clamp(62px,8.6vw,112px) 0;position:relative;border-top:1px solid var(--line-2)}
+.sec-head{max-width:740px}
+.sec-head h2{
+  font-family:var(--display);font-weight:600;letter-spacing:-.025em;
+  font-size:clamp(27px,3.5vw,44px);line-height:1.06;margin-top:18px;text-wrap:balance;
+}
+.sec-head p{margin-top:16px;color:var(--muted);font-size:clamp(14.5px,1.15vw,16.5px);max-width:58ch;text-wrap:pretty}
+.sec-head.center{margin-inline:auto;text-align:center}
+.sec-head.center .eyebrow::before{display:none}
+
+/* ---------------- botões ---------------- */
+.btn{
+  --b:rgba(110,231,255,.5);
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:0 24px;border-radius:2px;cursor:pointer;
+  font:600 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--b);background:rgba(110,231,255,.06);color:#e2fbff;
+  transition:background .3s,box-shadow .4s,transform .3s var(--ease),color .3s,border-color .3s;
+  overflow:hidden;isolation:isolate;
+}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;opacity:0;background:linear-gradient(100deg,rgba(110,231,255,.2),rgba(167,139,250,.16));transition:opacity .35s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px -14px rgba(110,231,255,.55),inset 0 0 0 1px rgba(110,231,255,.22);color:#fff}
+.btn:hover::after{opacity:1}
+.btn:active{transform:translateY(0)}
+.btn .arw{transition:transform .35s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+.btn--solid{background:var(--ice);border-color:var(--ice);color:#04151c;font-weight:600}
+.btn--solid:hover{color:#04151c;box-shadow:0 16px 42px -14px rgba(110,231,255,.85)}
+.btn--ghost{--b:rgba(255,255,255,.16);background:transparent;color:var(--ink-2)}
+.btn--ghost:hover{--b:rgba(255,255,255,.34);color:#fff}
+
+/* ---------------- cabeçalho ---------------- */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:90;height:var(--head);
+  border-bottom:1px solid transparent;transition:background .4s,border-color .4s,backdrop-filter .4s;
+}
+.site-head::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;background:rgba(8,10,14,.82);backdrop-filter:blur(18px) saturate(140%);transition:opacity .4s}
+.site-head.is-stuck{border-bottom-color:rgba(110,231,255,.14)}
+.site-head.is-stuck::before{opacity:1}
+.head-in{height:100%;display:flex;align-items:center;gap:clamp(16px,3vw,40px)}
+
+.brand{display:inline-flex;align-items:center;gap:11px;flex-shrink:0}
+.brand canvas{width:30px;height:30px;filter:drop-shadow(0 0 8px rgba(110,231,255,.4))}
+.brand b{font-family:var(--display);font-weight:700;font-size:14.5px;letter-spacing:.2em;color:#fff}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);margin-left:-3px;align-self:flex-end;margin-bottom:9px}
+
+.nav{display:flex;align-items:center;gap:clamp(14px,2vw,28px);margin-left:auto}
+.nav a{
+  position:relative;font:500 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);padding:8px 0;transition:color .28s;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;
+  background:linear-gradient(90deg,var(--ice),var(--violet));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);
+}
+.nav a:hover,.nav a[aria-current="true"]{color:#eafaff}
+.nav a:hover::after,.nav a[aria-current="true"]::after{transform:scaleX(1)}
+
+.status{
+  display:inline-flex;align-items:center;gap:8px;margin-left:clamp(8px,1.8vw,22px);
+  padding:8px 12px;border:1px solid rgba(110,231,255,.2);border-radius:999px;
+  background:rgba(110,231,255,.045);font:500 9px/1 var(--mono);letter-spacing:.17em;
+  text-transform:uppercase;color:#a9e9f4;white-space:nowrap;
+}
+.status i{width:6px;height:6px;border-radius:50%;background:#3ef2b5;box-shadow:0 0 9px #3ef2b5;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
+
+.burger{
+  display:none;width:44px;height:44px;margin-left:auto;border:1px solid var(--line);
+  background:rgba(255,255,255,.02);border-radius:2px;cursor:pointer;
+  align-items:center;justify-content:center;flex-direction:column;gap:5px;
+}
+.burger span{display:block;width:18px;height:1.5px;background:var(--ink);transition:transform .32s var(--ease),opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.scroll-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:95;pointer-events:none}
+.scroll-bar i{
+  display:block;height:100%;transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,var(--ice),var(--violet) 58%,var(--pink));
+  box-shadow:0 0 12px rgba(110,231,255,.65);
+}
+
+.mmenu{
+  position:fixed;inset:0;z-index:80;display:none;background:rgba(6,8,12,.97);
+  backdrop-filter:blur(22px);padding:calc(var(--head) + 30px) var(--gutter) 40px;
+}
+.mmenu nav{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.mmenu a{
+  font-family:var(--display);font-size:clamp(25px,7.6vw,36px);font-weight:600;
+  padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--ink);
+  display:flex;align-items:baseline;gap:14px;
+}
+.mmenu a small{font:500 9.5px/1 var(--mono);letter-spacing:.2em;color:var(--ice);order:-1;opacity:.75}
+.mmenu .m-foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px;padding-top:26px}
+body.menu-open .mmenu{display:flex;flex-direction:column}
+body.menu-open{overflow:hidden}
+
+/* ---------------- hero ---------------- */
+.hero{
+  position:relative;
+  padding:calc(var(--head) + clamp(38px,6.5vh,74px)) 0 clamp(40px,5vw,70px);
+  min-height:min(860px,100svh);
+  display:flex;align-items:center;
+}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(26px,4vw,60px);align-items:center;width:100%}
+.hero-copy{min-width:0}
+.hero-title{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(32px,5.4vw,72px);line-height:1.01;letter-spacing:-.035em;
+  margin-top:22px;text-wrap:balance;
+}
+.hero-title .line{display:block}
+.hero-title .line + .line{margin-top:.03em}
+.hero-lead{margin-top:24px;max-width:46ch;color:var(--ink-2);font-size:clamp(15px,1.18vw,17px);line-height:1.66;text-wrap:pretty}
+.hero-lead b{color:#fff;font-weight:600}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:9px 22px;margin-top:34px;padding-top:22px;border-top:1px solid var(--line-2)}
+.hero-meta li{display:inline-flex;align-items:center;gap:8px;font:500 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.hero-meta li::before{content:"";width:4px;height:4px;background:var(--ice);opacity:.85;box-shadow:0 0 8px var(--ice)}
+
+.stage-wrap{position:relative;display:flex;justify-content:center}
+.stage{position:relative;width:100%;max-width:430px;aspect-ratio:1/1;display:grid;place-items:center}
+.stage .aura{
+  position:absolute;inset:-5%;border-radius:50%;
+  background:radial-gradient(circle at 50% 54%,rgba(110,231,255,.2),rgba(167,139,250,.07) 45%,transparent 70%);
+  filter:blur(8px);animation:aura 6.5s ease-in-out infinite;
+}
+@keyframes aura{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.orbit{position:absolute;inset:8%;border-radius:50%;border:1px dashed rgba(110,231,255,.2);animation:orbitSpin 64s linear infinite}
+.orbit i{position:absolute;top:50%;left:-3px;width:6px;height:6px;border-radius:50%;background:var(--ice);box-shadow:0 0 12px var(--ice)}
+.orbit-b{inset:20%;border-style:solid;border-color:rgba(255,255,255,.055);animation-duration:46s;animation-direction:reverse}
+.orbit-b i{background:var(--violet);box-shadow:0 0 12px var(--violet)}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+.stage .crosshair{position:absolute;inset:0;z-index:1;opacity:.55;pointer-events:none}
+.stage .crosshair::before,.stage .crosshair::after{content:"";position:absolute;background:rgba(110,231,255,.12)}
+.stage .crosshair::before{left:50%;top:7%;bottom:7%;width:1px}
+.stage .crosshair::after{top:50%;left:7%;right:7%;height:1px}
+.stage canvas{position:relative;z-index:2;width:100%;height:100%}
+.stage .hud{position:absolute;inset:0;z-index:3;pointer-events:none}
+.hud-tag{position:absolute;font:500 8px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:rgba(185,232,245,.62);white-space:nowrap}
+.hud-tag.tl{top:5%;left:1%}
+.hud-tag.tr{top:5%;right:1%;display:inline-flex;align-items:center;gap:6px}
+.hud-tag.tr i{width:5px;height:5px;border-radius:50%;background:var(--ice);box-shadow:0 0 8px var(--ice)}
+.hud-tag.bl{bottom:9%;left:1%;color:rgba(110,231,255,.85)}
+.hud-tag.br{bottom:9%;right:1%;color:rgba(244,114,182,.85)}
+.stage-cap{position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);font:500 8.5px/1.5 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);white-space:nowrap;text-align:center}
+
+/* ---------------- ticker ---------------- */
+.ticker{
+  position:relative;z-index:3;overflow:hidden;
+  border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);
+  background:linear-gradient(90deg,rgba(110,231,255,.035),rgba(167,139,250,.035),rgba(244,114,182,.03));
+}
+.ticker-track{display:flex;width:max-content;animation:tick 48s linear infinite;will-change:transform}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes tick{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.ticker ul{display:flex;align-items:center;flex-shrink:0}
+.ticker li{display:inline-flex;align-items:center;gap:22px;padding:14px 26px;font:500 9.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.ticker li::after{content:"◆";font-size:6px;color:var(--ice);opacity:.6}
+
+/* ---------------- manifesto ---------------- */
+.stmt{display:grid;grid-template-columns:minmax(0,.32fr) minmax(0,.68fr);gap:clamp(26px,5vw,70px);align-items:start}
+.stmt-side{position:sticky;top:calc(var(--head) + 34px)}
+.stmt-idx{font-family:var(--display);font-weight:700;font-size:clamp(48px,7vw,86px);line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(110,231,255,.34);letter-spacing:-.03em}
+.stmt-side .eyebrow{margin-top:18px}
+.stmt-side small{display:block;margin-top:18px;font:400 10px/1.7 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim);max-width:24ch}
+.stmt-text{font-size:clamp(21px,2.7vw,34px);line-height:1.38;font-weight:400;color:#dbeaf4;letter-spacing:-.014em;text-wrap:pretty}
+.stmt-text strong{font-weight:600;color:#fff;box-shadow:inset 0 -.5em 0 rgba(110,231,255,.13)}
+.stmt-marks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,30px);margin-top:clamp(28px,4vw,44px);padding-top:24px;border-top:1px solid var(--line-2)}
+.stmt-marks li{font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.stmt-marks b{display:block;font:500 9px/1 var(--mono);letter-spacing:.24em;color:var(--ice);margin-bottom:10px;text-transform:uppercase}
+
+/* ---------------- frentes ---------------- */
+.fronts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);margin-top:clamp(32px,4.5vw,54px)}
+.card{
+  position:relative;padding:clamp(24px,3vw,36px);border-radius:3px;overflow:hidden;
+  background:linear-gradient(165deg,rgba(17,22,30,.86),rgba(8,10,15,.94));
+  border:1px solid var(--line);
+  transition:border-color .45s,transform .45s var(--ease),box-shadow .5s,background .45s;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);
+}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(110,231,255,.1),transparent 62%)}
+.card:hover{transform:translateY(-4px);border-color:rgba(110,231,255,.32);box-shadow:0 26px 60px -34px rgba(110,231,255,.55)}
+.card:hover::before{opacity:1}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:clamp(18px,2.4vw,28px)}
+.card-k{font:500 9px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.card-num{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.2vw,40px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.14);letter-spacing:-.02em;transition:-webkit-text-stroke-color .4s}
+.card:hover .card-num{-webkit-text-stroke-color:rgba(110,231,255,.6)}
+.card-ico{width:44px;height:44px;color:var(--ice);margin-bottom:18px;filter:drop-shadow(0 0 10px rgba(110,231,255,.25))}
+.card h3{font-family:var(--display);font-size:clamp(17px,1.6vw,21px);font-weight:600;margin-bottom:10px}
+.card p{color:var(--muted);font-size:14px;line-height:1.66;max-width:46ch;text-wrap:pretty}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.card-tags span{font:500 8px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;padding:6px 8px;border:1px solid rgba(110,231,255,.22);border-radius:999px;color:#9fe6f2}
+.card-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font:500 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ice);opacity:.75;transition:opacity .3s,gap .3s}
+.card:hover .card-link{opacity:1;gap:12px}
+
+/* ---------------- números ---------------- */
+.stats{position:relative;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);background:linear-gradient(180deg,rgba(110,231,255,.028),rgba(167,139,250,.018))}
+.stats::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:linear-gradient(rgba(110,231,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(110,231,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 50%,#000,transparent 76%);-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000,transparent 76%)}
+.stats-in{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,34px);padding:clamp(40px,5.5vw,66px) 0}
+.stat{border-left:1px solid var(--line-2);padding-left:clamp(14px,2vw,26px)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat .v{display:flex;align-items:baseline;gap:4px;font-family:var(--display);font-weight:700;letter-spacing:-.03em;font-size:clamp(38px,4.6vw,58px);line-height:1}
+.stat .v .n{background:linear-gradient(180deg,#eafcff,#8de3f3 60%,#3ab0c7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .v .u{font-size:.4em;font-family:var(--mono);font-weight:500;color:var(--pink);letter-spacing:.02em;transform:translateY(-.18em)}
+.stat .l{display:block;margin-top:14px;font-size:12.5px;line-height:1.5;color:var(--muted);max-width:23ch}
+
+/* ---------------- juruá ---------------- */
+.jur-grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:clamp(28px,4.6vw,62px);align-items:start;margin-top:clamp(32px,4.4vw,50px)}
+.jur-copy{min-width:0}
+.jur-kicker{display:inline-flex;align-items:center;gap:8px;font:500 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.jur-kicker::before{content:"";width:18px;height:1px;background:var(--pink)}
+.jur-copy h3{font-family:var(--display);font-size:clamp(30px,4vw,50px);font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:4px}
+.jur-copy h3 span{display:block;font-family:var(--body);font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--muted);margin-top:10px;line-height:1.5}
+.jur-copy p{margin-top:18px;color:var(--ink-2);font-size:14.5px;line-height:1.7;max-width:52ch;text-wrap:pretty}
+.jur-spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin-top:26px;border-top:1px solid var(--line-2)}
+.jur-spec div{padding:12px 12px 12px 0;border-bottom:1px solid var(--line-2)}
+.jur-spec dt{font:500 8.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.jur-spec dd{font-size:13px;color:var(--ink-2);line-height:1.45}
+.jur-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.jur-chips span{font:500 8.5px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;padding:7px 10px;border:1px solid rgba(244,114,182,.28);border-radius:999px;color:#ffc9e2}
+.jur-note{margin-top:16px;font:400 10px/1.6 var(--mono);letter-spacing:.04em;color:var(--dim)}
+.jur-fig{position:relative;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#081016;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%)}
+.jur-scene{position:relative;aspect-ratio:4/3;width:100%;background:#07131a}
+.jur-scene canvas{width:100%;height:100%}
+.jur-hud{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:12px;padding:12px 14px;pointer-events:none;font:500 8px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:rgba(200,240,248,.65)}
+.jur-hud .live{display:inline-flex;align-items:center;gap:6px}
+.jur-hud .live i{width:5px;height:5px;border-radius:50%;background:var(--ice);box-shadow:0 0 8px var(--ice);animation:pulse 2.6s ease-in-out infinite}
+.jur-fig figcaption{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-top:1px solid var(--line-2);font:400 9px/1.5 var(--mono);letter-spacing:.08em;color:var(--dim)}
+
+/* ---------------- processo ---------------- */
+.process{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.4vw,30px);margin-top:clamp(36px,4.8vw,58px)}
+.process::before{content:"";position:absolute;left:0;right:0;top:25px;height:1px;pointer-events:none;background:linear-gradient(90deg,rgba(110,231,255,.05),rgba(110,231,255,.4) 18%,rgba(167,139,250,.36) 56%,rgba(244,114,182,.32) 82%,rgba(244,114,182,.03))}
+.step{padding-top:62px;position:relative}
+.step-n{position:absolute;top:0;left:0;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font:500 12px/1 var(--mono);letter-spacing:.04em;color:#c4f4ff;background:#070a0e;border:1px solid rgba(110,231,255,.35);box-shadow:0 0 0 6px var(--bg),0 0 22px -4px rgba(110,231,255,.5);transition:box-shadow .4s,border-color .4s,color .4s}
+.step:hover .step-n{border-color:var(--ice);box-shadow:0 0 0 6px var(--bg),0 0 30px -2px rgba(110,231,255,.8);color:#fff}
+.step h3{font-family:var(--display);font-size:16.5px;font-weight:600;margin-bottom:8px}
+.step p{font-size:13px;line-height:1.6;color:var(--muted);max-width:30ch}
+.step-deadline{display:inline-block;margin-top:12px;font:500 8.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ice);padding:6px 8px;border:1px solid rgba(110,231,255,.22);border-radius:2px}
+
+/* ---------------- preços ---------------- */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);margin-top:clamp(32px,4.4vw,52px);align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;padding:clamp(24px,2.9vw,34px);background:linear-gradient(170deg,rgba(14,18,26,.9),rgba(7,9,14,.96));border:1px solid var(--line);border-radius:3px;transition:border-color .4s,transform .4s var(--ease),box-shadow .45s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.plan:hover{transform:translateY(-4px);border-color:rgba(110,231,255,.3);box-shadow:0 30px 64px -40px rgba(110,231,255,.6)}
+.plan--hi{border-color:rgba(110,231,255,.42);background:linear-gradient(170deg,rgba(110,231,255,.075),rgba(7,9,15,.97) 46%);box-shadow:inset 0 0 0 1px rgba(110,231,255,.08),0 30px 70px -46px rgba(110,231,255,.7)}
+.plan--hi:hover{border-color:rgba(110,231,255,.65)}
+.plan-badge{position:absolute;top:-11px;left:clamp(24px,2.9vw,34px);padding:5px 10px;border-radius:999px;background:var(--ice);color:#04202a;font:600 8.5px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;box-shadow:0 0 22px -2px rgba(110,231,255,.8)}
+.plan-k{font:500 9px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.plan h3{font-family:var(--display);font-size:20px;font-weight:600;margin-top:14px}
+.plan .price{display:flex;align-items:baseline;gap:6px;margin-top:16px;padding-bottom:18px;border-bottom:1px solid var(--line-2);font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:clamp(24px,2.5vw,31px);line-height:1}
+.plan .price small{font:400 8.5px/1.35 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--dim);max-width:13ch;margin-left:auto;text-align:right}
+.plan--hi .price{color:#fff}
+.plan p.d{margin-top:16px;font-size:13.5px;line-height:1.6;color:var(--muted);min-height:3.2em;text-wrap:pretty}
+.plan ul{margin-top:16px;display:grid;gap:8px;font-size:13px;color:var(--ink-2);flex:1}
+.plan li{display:flex;gap:9px;line-height:1.5}
+.plan li::before{content:"";flex:0 0 auto;width:5px;height:5px;margin-top:7px;transform:rotate(45deg);border:1px solid rgba(110,231,255,.65);background:rgba(110,231,255,.16)}
+.plan .btn{margin-top:22px;width:100%}
+.pay-strip{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:clamp(22px,3vw,32px);padding:17px 20px;border:1px dashed rgba(110,231,255,.24);border-radius:3px;background:rgba(110,231,255,.03)}
+.pay-strip .k{font:500 9px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ice)}
+.pay-strip p{font-size:13px;color:var(--muted);flex:1 1 280px;min-width:0}
+.pay-strip a{font:500 9px/1 var(--mono);letter-spacing:.17em;text-transform:uppercase;color:#dff9ff;border-bottom:1px solid rgba(110,231,255,.4);padding-bottom:4px;white-space:nowrap}
+.pay-strip a:hover{color:#fff;border-color:var(--ice)}
+
+/* ---------------- depoimentos ---------------- */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);margin-top:clamp(32px,4.4vw,50px)}
+.quote{position:relative;display:flex;flex-direction:column;gap:18px;padding:clamp(24px,2.8vw,32px);border:1px solid var(--line);border-radius:3px;background:linear-gradient(170deg,rgba(15,19,27,.82),rgba(7,9,14,.94));transition:border-color .4s,transform .4s var(--ease)}
+.quote:hover{border-color:rgba(110,231,255,.26);transform:translateY(-3px)}
+.quote .mark{font:700 28px/1 var(--display);color:transparent;-webkit-text-stroke:1px rgba(244,114,182,.55);height:16px}
+.quote blockquote{margin:0;font-size:14.5px;line-height:1.66;color:var(--ink-2);flex:1;text-wrap:pretty}
+.quote figcaption{margin:0;padding-top:15px;border-top:1px solid var(--line-2);font:500 8.5px/1.6 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.proof-note{margin-top:20px;font:400 10px/1.6 var(--mono);color:var(--dim);letter-spacing:.05em;max-width:72ch}
+
+/* ---------------- faq ---------------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(26px,5vw,62px);align-items:start}
+.faq-list{display:grid;gap:0;border-top:1px solid var(--line-2)}
+.faq-item{border-bottom:1px solid var(--line-2)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:19px 0;cursor:pointer;list-style:none;font-size:15px;font-weight:500;color:var(--ink);transition:color .25s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--ice)}
+.faq-item summary .ico{flex:0 0 auto;position:relative;width:22px;height:22px;border:1px solid rgba(110,231,255,.3);border-radius:50%;transition:transform .35s var(--ease),border-color .35s,background .35s}
+.faq-item summary .ico::before,.faq-item summary .ico::after{content:"";position:absolute;left:50%;top:50%;background:rgba(110,231,255,.85);transform:translate(-50%,-50%)}
+.faq-item summary .ico::before{width:9px;height:1px}
+.faq-item summary .ico::after{width:1px;height:9px;transition:transform .35s var(--ease)}
+.faq-item[open] summary{color:#fff}
+.faq-item[open] summary .ico{transform:rotate(180deg);border-color:var(--ice);background:rgba(110,231,255,.1)}
+.faq-item[open] summary .ico::after{transform:translate(-50%,-50%) scaleY(0)}
+.faq-item p{padding:0 34px 20px 0;color:var(--muted);font-size:13.5px;line-height:1.68;max-width:62ch;text-wrap:pretty}
+.faq-aside{position:sticky;top:calc(var(--head) + 30px);padding:clamp(22px,3vw,30px);border:1px solid rgba(244,114,182,.22);border-radius:3px;background:linear-gradient(165deg,rgba(244,114,182,.065),rgba(7,8,13,.95) 60%);margin-top:24px}
+.faq-aside h3{font-family:var(--display);font-size:16px;font-weight:600;margin-bottom:9px}
+.faq-aside p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+
+/* ---------------- contato ---------------- */
+.contact{position:relative;overflow:hidden;border-top:1px solid var(--line-2)}
+.contact::before{content:"";position:absolute;left:50%;bottom:-44%;transform:translateX(-50%);width:min(1000px,140vw);height:min(1000px,140vw);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(110,231,255,.11),rgba(167,139,250,.05) 46%,transparent 70%)}
+.contact-in{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,68px);align-items:start}
+.contact-copy h2{font-family:var(--display);font-weight:700;letter-spacing:-.025em;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin-top:18px;text-wrap:balance}
+.contact-copy h2 span{display:block}
+.contact-copy > p{margin-top:18px;color:var(--muted);max-width:46ch;font-size:15px}
+.contact-direct{display:grid;gap:10px;margin-top:28px;max-width:430px}
+.contact-direct a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 17px;border:1px solid var(--line);border-radius:2px;background:rgba(255,255,255,.015);transition:border-color .3s,background .3s,transform .3s var(--ease)}
+.contact-direct a:hover{border-color:rgba(110,231,255,.36);background:rgba(110,231,255,.04);transform:translateX(3px)}
+.contact-direct .k{display:block;font:500 8px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+.contact-direct .v{font-size:14px;color:var(--ink);word-break:break-word}
+.contact-direct .v small{display:block;font-size:10.5px;color:var(--dim);margin-top:3px}
+.contact-direct .go{color:var(--ice);font-size:15px;flex:0 0 auto}
+
+.form-panel{position:relative;padding:clamp(22px,3vw,34px);border:1px solid var(--line);border-radius:3px;background:linear-gradient(170deg,rgba(15,19,27,.94),rgba(6,8,12,.98));box-shadow:0 40px 90px -60px rgba(110,231,255,.65);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%)}
+.form-grid{display:grid;gap:15px}
+.field{display:grid;gap:7px}
+.field label{font:500 8.5px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ice)}
+.field input,.field textarea,.field select{width:100%;font-family:var(--body);font-size:14px;color:var(--ink);background:rgba(4,6,10,.85);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:12px 13px;transition:border-color .3s,box-shadow .3s,background .3s}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ice) 50%),linear-gradient(135deg,var(--ice) 50%,transparent 50%);background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:34px}
+.field select option{background:#0e1116;color:var(--ink)}
+.field textarea{resize:vertical;min-height:104px;line-height:1.55}
+.field input::placeholder,.field textarea::placeholder{color:#6d7b8c}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:rgba(110,231,255,.6);background:rgba(110,231,255,.03);box-shadow:0 0 0 3px rgba(110,231,255,.12)}
+.field input:user-invalid,.field textarea:user-invalid{border-color:rgba(244,114,182,.65)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px}
+.form-foot .btn{flex:1 1 200px}
+.form-note{font:400 10px/1.65 var(--mono);letter-spacing:.04em;color:var(--dim);margin-top:10px}
+.lead-msg{font-size:13px;line-height:1.5}
+
+/* ---------------- rodapé ---------------- */
+.foot{position:relative;border-top:1px solid var(--line-2);padding:clamp(44px,6vw,70px) 0 0;background:rgba(4,5,8,.78)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:clamp(26px,4vw,54px)}
+.foot-brand .brand b{font-size:15px}
+.foot-brand p{margin-top:16px;font-size:13.5px;line-height:1.66;color:var(--muted);max-width:36ch}
+.foot-brand .status{margin-top:18px;margin-left:0}
+.foot h4{font:500 8.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin:0 0 16px}
+.foot-col ul{display:grid;gap:10px}
+.foot-col a,.foot-col span{font-size:13px;color:var(--ink-2);transition:color .25s}
+.foot-col a:hover{color:var(--ice)}
+.foot-col .addr{color:var(--muted);line-height:1.55;display:block}
+.foot-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:clamp(34px,5vw,52px);padding:18px 0 24px;border-top:1px solid var(--line-2)}
+.foot-bottom p,.foot-bottom a{font:400 9px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.foot-bottom a:hover{color:var(--ice)}
+.foot-bottom .made{display:inline-flex;align-items:center;gap:8px}
+.foot-bottom .made::before{content:"";width:12px;height:1px;background:var(--pink)}
+
+/* ---------------- animação de entrada ---------------- */
+[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform 1s var(--ease);transition-delay:var(--d,0s)}
+[data-reveal].in{opacity:1;transform:none}
+.split-word{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.12em;margin-bottom:-.12em}
+.split-inner{display:inline-block;transform:translateY(112%);opacity:0;transition:transform .95s var(--ease),opacity .7s ease;transition-delay:var(--d,0s);will-change:transform}
+.grad.is-split{background:none;color:inherit}
+.grad.is-split .split-inner{background:linear-gradient(96deg,#8df1ff 0%,#6ee7ff 32%,#a78bfa 64%,#f472b6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.is-split.in .split-inner,.split-inner.in{transform:none;opacity:1}
+
+/* ---------------- seletor de idioma ---------------- */
+.bc-lang{background:rgba(6,8,14,.86)!important;border:1px solid rgba(110,231,255,.24)!important;border-radius:2px!important;box-shadow:0 12px 34px -14px rgba(0,0,0,.9)!important}
+.bc-lang button{border-radius:1px!important;letter-spacing:.12em!important;color:rgba(190,220,232,.62)!important}
+.bc-lang button:hover{color:#fff!important;background:rgba(110,231,255,.1)!important}
+.bc-lang button[aria-pressed="true"]{background:var(--ice)!important;color:#04202a!important;box-shadow:0 0 16px rgba(110,231,255,.45)!important}
+
+/* ---------------- responsivo ---------------- */
+@media (max-width:1080px){
+  .nav{gap:15px}
+  .status{display:none}
+  .hero-in{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+  .stage{max-width:370px}
+}
+@media (max-width:920px){
+  :root{--head:64px}
+  .nav{display:none}
+  .burger{display:flex}
+  .hero{padding-top:calc(var(--head) + 44px);min-height:0}
+  .hero-in{grid-template-columns:1fr;gap:clamp(18px,4vw,34px)}
+  .hero-copy{order:1}
+  .stage-wrap{order:2}
+  .stage{max-width:330px}
+  .hero-title{font-size:clamp(31px,8vw,54px)}
+  .stmt{grid-template-columns:1fr;gap:24px}
+  .stmt-side{position:static;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .stmt-side small{margin-top:0}
+  .stats-in{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 24px}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .jur-grid{grid-template-columns:1fr;gap:30px}
+  .jur-fig{order:-1}
+  .process{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 26px}
+  .process::before{display:none}
+  .step{padding-top:0;padding-left:68px}
+  .step-n{top:-2px}
+  .plans{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
+  .plan--hi{order:-1}
+  .quotes{grid-template-columns:1fr;max-width:640px;margin-inline:auto}
+  .faq-grid{grid-template-columns:1fr;gap:28px}
+  .faq-aside{position:static;margin-top:0}
+  .contact-in{grid-template-columns:1fr;gap:32px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:32px 26px}
+  .foot-brand{grid-column:1/-1}
+}
+@media (max-width:680px){
+  .fronts{grid-template-columns:1fr}
+  .card{padding:24px}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%}
+  .stage{max-width:290px}
+  .stage-cap{white-space:normal;max-width:90%}
+  .ticker li{padding:12px 18px;font-size:8.5px}
+  .stmt-marks{grid-template-columns:1fr;gap:16px}
+  .stmt-marks li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline}
+  .stmt-marks b{margin-bottom:0}
+  .stats-in{grid-template-columns:1fr 1fr;gap:26px 18px}
+  .stat .l{font-size:11.5px}
+  .jur-spec{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr;gap:24px}
+  .step{padding-left:64px}
+  .quote{padding:22px}
+  .faq-item summary{font-size:14px;gap:14px}
+  .faq-item p{padding-right:0}
+  .form-row{grid-template-columns:1fr}
+  .contact-direct{max-width:none}
+  .foot-grid{grid-template-columns:1fr;gap:26px}
+  .foot-bottom{flex-direction:column;align-items:flex-start;gap:9px}
+}
+@media (max-width:380px){
+  .hero-title{font-size:29px}
+  .stage{max-width:250px}
+  .stat .v{font-size:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .split-inner{transform:none!important;opacity:1!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+  .ticker-track{animation:none!important;transform:none!important}
+  .ticker{overflow-x:auto}
+  .orbit,.stage .aura{animation:none}
+}
+@media print{
+  .sky,.sky-fallback,.veil,.site-head,.scroll-bar,.mmenu,.bc-lang,.ticker,.stage .hud{display:none!important}
+  body{background:#fff;color:#000}
+  .page{position:static}
+}
+</style>
 </head>
 <body class="d04">
-<div class="sky"><canvas id="sky"></canvas></div>
-<div class="veil"></div>
+<a class="skip" href="#main">Ir para o conteúdo</a>
 
-<div class="page">
-  <div class="wrap">
-    <header class="top">
-      <div class="brand"><canvas class="pet" data-pet="idle"></canvas> BADCLAUDE</div>
-      <nav><a href="#fazer">o que fazemos</a><a href="#precos">preços</a><a href="#contato">contato</a></nav>
-    </header>
+<div class="sky" aria-hidden="true"><canvas id="sky"></canvas></div>
+<div class="sky-fallback" aria-hidden="true"><canvas id="skyFallback"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
 
-    <section class="hero">
-      <h1>Eu me construí.<br><span class="g">Eu me desfaço e me refaço.</span></h1>
-      <p class="lead">Sou o BADCLAUDE. Construo jogos 3D, sistemas web e automação com IA. Cada projeto começa em peças soltas e termina como sistema rodando.</p>
-      <div class="btns"><a class="b b1" href="#precos">Ver preços</a><a class="b b2" href="#contato">Falar comigo</a></div>
-    </section>
+<div class="scroll-bar" aria-hidden="true"><i></i></div>
 
-    <section class="sec" id="fazer">
-      <h2>Quatro frentes, um padrão.</h2>
-      <div class="cards">
-        <div class="card"><span class="n">01 / JOGOS</span><h3>Jogos 3D</h3><p>JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4 e Blender.</p></div>
-        <div class="card"><span class="n">02 / IA</span><h3>Sistemas com IA</h3><p>Agentes que pesquisam, escrevem, revisam e executam em paralelo. Automação com logs e revisão humana.</p></div>
-        <div class="card"><span class="n">03 / WEB</span><h3>Sites e produtos</h3><p>Páginas que carregam rápido, painéis que funcionam, três idiomas e acessibilidade real.</p></div>
-        <div class="card"><span class="n">04 / ARTE</span><h3>Direção visual</h3><p>Identidade, movimento e arte 3D feitos em código. Sem banco de imagens.</p></div>
-      </div>
-    </section>
+<header class="site-head" id="siteHead">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="BADCLAUDE — início">
+      <canvas class="pet-mini" width="64" height="64" aria-hidden="true"></canvas>
+      <b>BADCLAUDE</b><span class="dot" aria-hidden="true"></span>
+    </a>
 
-    <section class="sec" id="precos">
-      <h2>Escolha a escala.</h2>
-      <div class="pl">
-        <div class="p"><span class="k">ENTRADA</span><h3>Automação</h3><div class="v">R$ 2.400</div><ul><li>Diagnóstico do processo</li><li>Um fluxo automatizado</li><li>Integração WhatsApp</li><li>Documentação</li></ul><a href="#contato">Pedir orçamento →</a></div>
-        <div class="p hi"><span class="k">MAIS PEDIDO</span><h3>Sistema</h3><div class="v">R$ 9.800</div><ul><li>Tudo do Automação</li><li>Painel administrativo</li><li>Agentes especialistas</li><li>Deploy e monitoramento</li><li>Suporte 30 dias</li></ul><a href="#contato">Pedir orçamento →</a></div>
-        <div class="p"><span class="k">SOB MEDIDA</span><h3>Estúdio</h3><div class="v">R$ 24.000</div><ul><li>Descoberta e protótipo</li><li>Arte 3D e trilha</li><li>Engenharia e otimização</li><li>Acompanhamento</li></ul><a href="#contato">Conversar →</a></div>
-      </div>
-    </section>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#frentes" data-i18n="04.nav1">o que fazemos</a>
+      <a href="#jurua" data-i18n="04.nav2">juruá</a>
+      <a href="#processo" data-i18n="04.nav3">processo</a>
+      <a href="#precos" data-i18n="04.nav4">preços</a>
+      <a href="#contato" data-i18n="04.nav5">contato</a>
+    </nav>
 
-    <section class="cta" id="contato">
-      <h2>Conte o problema em duas linhas.</h2>
-      <div class="btns"><a class="b b1" href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></div>
-    </section>
+    <span class="status"><i aria-hidden="true"></i><span data-i18n="04.status">aceitando projetos</span></span>
 
-    <footer class="foot"><span>© 2026 BADCLAUDE</span><span>Cruzeiro do Sul · Acre</span><span>direção 04 — espacial</span></footer>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mobileMenu">
+  <nav aria-label="Navegação móvel">
+    <a href="#frentes"><small>01</small><span data-i18n="04.nav1">o que fazemos</span></a>
+    <a href="#jurua"><small>02</small><span data-i18n="04.nav2">juruá</span></a>
+    <a href="#processo"><small>03</small><span data-i18n="04.nav3">processo</span></a>
+    <a href="#precos"><small>04</small><span data-i18n="04.nav4">preços</span></a>
+    <a href="#contato"><small>05</small><span data-i18n="04.nav5">contato</span></a>
+  </nav>
+  <div class="m-foot">
+    <a class="btn btn--solid" href="#contato" data-i18n="hero.cta2">Começar um projeto</a>
+    <a class="btn btn--ghost" href="https://wa.me/5568999999999" data-wa rel="noopener" target="_blank">WhatsApp</a>
   </div>
 </div>
 
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="heroTitle">
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="n">[00]</span> <span data-i18n="04.eyebrow">BADCLAUDE · Cruzeiro do Sul, Acre</span></span>
+
+        <h1 class="hero-title" id="heroTitle">
+          <span class="line" data-split data-i18n="hero.l1">Eu me construí.</span>
+          <span class="line" data-split data-i18n="hero.l2">Eu me desfaço</span>
+          <span class="line grad" data-split data-i18n="hero.l3">e me refaço.</span>
+        </h1>
+
+        <p class="hero-lead" data-i18n="hero.lead">Jogos 3D, sistemas web e automação com inteligência artificial. Feito com precisão de engenharia e identidade amazônica — do primeiro risco ao produto rodando.</p>
+
+        <div class="hero-cta">
+          <a class="btn btn--solid" href="#frentes"><span data-i18n="hero.cta1">Ver o que fazemos</span><span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#contato"><span data-i18n="hero.cta2">Começar um projeto</span></a>
+        </div>
+
+        <ul class="hero-meta" aria-label="Informações do estúdio">
+          <li>Cruzeiro do Sul · AC</li>
+          <li>Godot 4 · WebGL · IA</li>
+          <li>PT · EN · ES</li>
+          <li>UTC−5</li>
+        </ul>
+      </div>
+
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <span class="aura" aria-hidden="true"></span>
+          <span class="orbit" aria-hidden="true"><i></i></span>
+          <span class="orbit orbit-b" aria-hidden="true"><i></i></span>
+          <span class="crosshair" aria-hidden="true"></span>
+          <canvas id="heroPet" role="img" aria-label="Mascote do BADCLAUDE flutuando como satélite: um bichinho quadrúpede de contorno azul-gelo, que acompanha o cursor com o olhar."></canvas>
+          <div class="hud" aria-hidden="true">
+            <span class="hud-tag tl">UNIT · BC-04</span>
+            <span class="hud-tag tr"><i></i><span data-i18n="04.orbit">órbita estável</span></span>
+            <span class="hud-tag bl">ALT · 412 KM</span>
+            <span class="hud-tag br">MODE · COMPANION</span>
+          </div>
+          <span class="stage-cap" data-i18n="04.stageCap">satélite BC-04 · ele reage ao seu cursor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <ul>
+        <li data-i18n="04.mq1">jogos 3D</li>
+        <li data-i18n="04.mq2">sistemas com IA</li>
+        <li data-i18n="04.mq3">sites e produtos</li>
+        <li data-i18n="04.mq4">direção visual</li>
+        <li data-i18n="04.mq5">juruá — RPG de mundo aberto</li>
+        <li data-i18n="04.mq6">cruzeiro do sul · acre</li>
+      </ul>
+      <ul>
+        <li>jogos 3D</li><li>sistemas com IA</li><li>sites e produtos</li>
+        <li>direção visual</li><li>juruá — RPG de mundo aberto</li><li>cruzeiro do sul · acre</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== MANIFESTO ===================== -->
+  <section class="sec" aria-labelledby="stmtTitle">
+    <div class="wrap stmt">
+      <div class="stmt-side">
+        <div class="stmt-idx" aria-hidden="true">01</div>
+        <span class="eyebrow"><span class="n">/</span> <span data-i18n="04.kManifesto">manifesto</span></span>
+        <small data-i18n="04.stmtSide">estúdio pequeno, padrão de engenharia grande</small>
+      </div>
+      <div>
+        <h2 class="stmt-text" id="stmtTitle" data-reveal data-i18n="stmt.text">A gente não entrega apresentação. Entrega sistema rodando, testado e documentado — com a calma de quem constrói para durar.</h2>
+        <ul class="stmt-marks" data-reveal style="--d:.12s">
+          <li><b>01</b><span data-i18n="stmt.m1">Precisão antes de velocidade.</span></li>
+          <li><b>02</b><span data-i18n="stmt.m2">Identidade, nunca template.</span></li>
+          <li><b>03</b><span data-i18n="stmt.m3">O código é seu no final.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FRENTES ===================== -->
+  <section class="sec" id="frentes" aria-labelledby="doingTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="n">02</span> <span data-i18n="04.kDoing">o que fazemos</span></span>
+        <h2 id="doingTitle" data-i18n="doing.title">Quatro frentes, um mesmo padrão.</h2>
+        <p data-i18n="doing.sub">Cada projeto começa entendendo o problema. Só depois escolhemos a tecnologia.</p>
+      </div>
+
+      <div class="fronts">
+        <article class="card" data-reveal data-spot>
+          <div class="card-top"><span class="card-k">01 / JOGOS</span><span class="card-num" aria-hidden="true">01</span></div>
+          <svg class="card-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 5 41 14v20L24 43 7 34V14Z"/><path d="M7 14l17 9 17-9M24 23v20"/>
+            <path d="M14 19v8M10 23h8" opacity=".55"/><circle cx="34" cy="24" r="2.2" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3 data-i18n="doing.r1t">Jogos 3D</h3>
+          <p data-i18n="doing.r1d">JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4, Blender e um mapa fiel à geografia do Acre.</p>
+          <div class="card-tags"><span>Godot 4</span><span>Blender</span><span>mundo aberto</span></div>
+          <span class="card-link"><span data-i18n="doing.r1k">em desenvolvimento</span> <span aria-hidden="true">↗</span></span>
+        </article>
+
+        <article class="card" data-reveal style="--d:.06s" data-spot>
+          <div class="card-top"><span class="card-k">02 / IA</span><span class="card-num" aria-hidden="true">02</span></div>
+          <svg class="card-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="15" y="15" width="18" height="18" rx="3"/><circle cx="24" cy="24" r="3.5"/>
+            <path d="M20 15V8M28 15V8M20 40v-7M28 40v-7M15 20H8M15 28H8M40 20h-7M40 28h-7"/>
+            <path d="M8 15.5h0M40 31.5h0" opacity=".4"/>
+          </svg>
+          <h3 data-i18n="doing.r2t">Sistemas com IA</h3>
+          <p data-i18n="doing.r2d">Agentes que pesquisam, escrevem, revisam e executam em paralelo. Automação de verdade, com logs, limites e revisão humana em cada entrega.</p>
+          <div class="card-tags"><span>agentes</span><span>logs</span><span>revisão humana</span></div>
+          <span class="card-link"><span data-i18n="doing.r2k">sob demanda</span> <span aria-hidden="true">↗</span></span>
+        </article>
+
+        <article class="card" data-reveal style="--d:.12s" data-spot>
+          <div class="card-top"><span class="card-k">03 / WEB</span><span class="card-num" aria-hidden="true">03</span></div>
+          <svg class="card-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="6" y="10" width="36" height="28" rx="3"/><path d="M6 18h36"/>
+            <circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/><circle cx="17" cy="14" r="1.2" fill="currentColor" stroke="none"/>
+            <circle cx="24" cy="28" r="7" opacity=".7"/><path d="M17 28h14M24 21c3 3 3 11 0 14M24 21c-3 3-3 11 0 14" opacity=".45"/>
+          </svg>
+          <h3 data-i18n="doing.r3t">Sites e produtos</h3>
+          <p data-i18n="doing.r3d">Páginas que carregam rápido, painéis que funcionam, três idiomas e acessibilidade real. Performance medida, não prometida.</p>
+          <div class="card-tags"><span>performance</span><span>3 idiomas</span><span>a11y</span></div>
+          <span class="card-link"><span data-i18n="doing.r3k">entrega em semanas</span> <span aria-hidden="true">↗</span></span>
+        </article>
+
+        <article class="card" data-reveal style="--d:.18s" data-spot>
+          <div class="card-top"><span class="card-k">04 / ARTE</span><span class="card-num" aria-hidden="true">04</span></div>
+          <svg class="card-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 6 42 38H6Z"/><path d="M24 17 33 34H15Z" opacity=".55"/>
+            <circle cx="24" cy="17" r="2.2" fill="currentColor" stroke="none"/><path d="M10 43h28" opacity=".6"/>
+          </svg>
+          <h3 data-i18n="doing.r4t">Direção visual</h3>
+          <p data-i18n="doing.r4d">Identidade, movimento e arte 3D feitos em código. Nada de banco de imagens, nada de template repintado.</p>
+          <div class="card-tags"><span>identidade</span><span>motion</span><span>3D</span></div>
+          <span class="card-link"><span data-i18n="doing.r4k">artesanal</span> <span aria-hidden="true">↗</span></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NÚMEROS ===================== -->
+  <section class="stats" aria-labelledby="statsTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="n">03</span> <span data-i18n="04.kStats">números</span></span>
+        <h2 id="statsTitle" data-i18n="04.statsT">O que já está de pé.</h2>
+        <p data-i18n="04.statsS">Sem inflar currículo. Só o que dá para conferir.</p>
+      </div>
+
+      <div class="stats-in">
+        <div class="stat" data-reveal>
+          <div class="v"><span class="n" data-count="12">12</span></div>
+          <span class="l" data-i18n="04.stat1">projetos entregues desde 2021</span>
+        </div>
+        <div class="stat" data-reveal style="--d:.08s">
+          <div class="v"><span class="n" data-count="6">6</span></div>
+          <span class="l" data-i18n="04.stat2">anos de estúdio em operação</span>
+        </div>
+        <div class="stat" data-reveal style="--d:.16s">
+          <div class="v"><span class="n" data-count="3">3</span></div>
+          <span class="l" data-i18n="04.stat3">idiomas em cada produto</span>
+        </div>
+        <div class="stat" data-reveal style="--d:.24s">
+          <div class="v"><span class="n" data-count="48">48</span><span class="u" aria-hidden="true">h</span></div>
+          <span class="l" data-i18n="04.stat4">horas para a primeira resposta</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== JURUÁ ===================== -->
+  <section class="sec" id="jurua" aria-labelledby="juruaTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="n">04</span> <span data-i18n="04.kJurua">caso em aberto</span></span>
+        <h2 id="juruaTitle" data-i18n="04.jurT">Um jogo com o chão do Acre.</h2>
+      </div>
+
+      <div class="jur-grid">
+        <div class="jur-copy" data-reveal>
+          <span class="jur-kicker" data-i18n="04.jurK">caso 01 · jogo 3D</span>
+          <h3>JURUÁ<span data-i18n="04.jurSub">RPG de mundo aberto no Vale do Juruá</span></h3>
+          <p data-i18n="jur.lead">RPG de mundo aberto no Vale do Juruá. Você planta, pesca, remenda a casa de farinha e aprende a ler o rio. O mapa segue a geografia real do Acre: igapó, várzea e terra firme.</p>
+          <p data-i18n="04.jurExtra">O rio é o relógio do jogo: a cheia muda o caminho, a vazante abre a praia. Cada sistema — cultivo, pesca, farinha, navegação — foi desenhado com quem vive da floresta.</p>
+
+          <dl class="jur-spec">
+            <div><dt data-i18n="04.jurS1k">motor</dt><dd data-i18n="04.jurS1v">Godot 4.3</dd></div>
+            <div><dt data-i18n="04.jurS2k">arte</dt><dd data-i18n="04.jurS2v">Blender · low poly</dd></div>
+            <div><dt data-i18n="04.jurS3k">mapa</dt><dd data-i18n="04.jurS3v">Vale do Juruá · fiel à geografia do Acre</dd></div>
+            <div><dt data-i18n="04.jurS4k">sistemas</dt><dd data-i18n="04.jurS4v">cultivo · pesca · casa de farinha · navegação</dd></div>
+            <div><dt data-i18n="04.jurS5k">estado</dt><dd data-i18n="04.jurS5v">protótipo jogável · em desenvolvimento</dd></div>
+            <div><dt data-i18n="04.jurS6k">equipe</dt><dd data-i18n="04.jurS6v">3 pessoas · Cruzeiro do Sul</dd></div>
+          </dl>
+
+          <div class="jur-chips">
+            <span data-i18n="04.chip1">igapó</span>
+            <span data-i18n="04.chip2">várzea</span>
+            <span data-i18n="04.chip3">terra firme</span>
+          </div>
+          <p class="jur-note" data-i18n="04.jurNote">Sem build pública ainda. Playtests fechados a cada ciclo de desenvolvimento.</p>
+        </div>
+
+        <figure class="jur-fig" data-reveal style="--d:.1s">
+          <div class="jur-scene">
+            <canvas id="juruaScene" role="img" aria-label="Cena gráfica do jogo JURUÁ: o rio Juruá ao amanhecer, cercado por camadas de floresta e névoa, com o reflexo da lua na água."></canvas>
+            <div class="jur-hud" aria-hidden="true">
+              <span>JURUÁ · BUILD 0.7</span>
+              <span class="live"><i></i>VÁRZEA · 06:12</span>
+            </div>
+          </div>
+          <figcaption>
+            <span data-i18n="04.jurCap">vista do rio — várzea ao amanhecer · render de conceito</span>
+            <span aria-hidden="true">fig. 04</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESSO ===================== -->
+  <section class="sec" id="processo" aria-labelledby="procTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="n">05</span> <span data-i18n="04.kProc">processo</span></span>
+        <h2 id="procTitle" data-i18n="proc.title">Do primeiro risco ao produto no ar.</h2>
+        <p data-i18n="04.procSub">Quatro etapas com prazo declarado antes de começar.</p>
+      </div>
+
+      <ol class="process">
+        <li class="step" data-reveal>
+          <span class="step-n" aria-hidden="true">01</span>
+          <h3 data-i18n="proc.s1t">Escuta</h3>
+          <p data-i18n="proc.s1d">Entendemos o problema, o público e o prazo. Nada de código antes disso.</p>
+          <span class="step-deadline" data-i18n="04.d1">1–2 dias</span>
+        </li>
+        <li class="step" data-reveal style="--d:.07s">
+          <span class="step-n" aria-hidden="true">02</span>
+          <h3 data-i18n="proc.s2t">Protótipo</h3>
+          <p data-i18n="proc.s2d">Você vê e navega antes de aprovar. Ajuste é barato nessa fase.</p>
+          <span class="step-deadline" data-i18n="04.d2">7–14 dias</span>
+        </li>
+        <li class="step" data-reveal style="--d:.14s">
+          <span class="step-n" aria-hidden="true">03</span>
+          <h3 data-i18n="proc.s3t">Construção</h3>
+          <p data-i18n="proc.s3d">Ciclos curtos com entrega contínua. Você acompanha o progresso de verdade.</p>
+          <span class="step-deadline" data-i18n="04.d3">2–8 semanas</span>
+        </li>
+        <li class="step" data-reveal style="--d:.21s">
+          <span class="step-n" aria-hidden="true">04</span>
+          <h3 data-i18n="proc.s4t">Entrega</h3>
+          <p data-i18n="proc.s4d">Código, arquivos e documentação na sua mão. Sem dependência de nós.</p>
+          <span class="step-deadline" data-i18n="04.d4">7 dias + handoff</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== PREÇOS ===================== -->
+  <section class="sec" id="precos" aria-labelledby="plansTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="n">06</span> <span data-i18n="04.kPlans">preços</span></span>
+        <h2 id="plansTitle" data-i18n="plans.title">Escolha a escala.</h2>
+        <p data-i18n="plans.sub">Escopo e valor fechados antes de começar. A primeira conversa é gratuita.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan" data-reveal>
+          <span class="plan-k" data-i18n="plans.p1k">Entrada</span>
+          <h3 data-i18n="plans.p1t">Automação</h3>
+          <div class="price"><span>R$&nbsp;2.400</span><small data-i18n="plans.p1p">projeto único</small></div>
+          <p class="d" data-i18n="plans.p1d">Um fluxo de IA que resolve uma tarefa repetitiva do seu negócio.</p>
+          <ul>
+            <li data-i18n="plans.p1l1">Diagnóstico do processo</li>
+            <li data-i18n="plans.p1l2">Um fluxo automatizado</li>
+            <li data-i18n="plans.p1l3">Integração com WhatsApp ou planilhas</li>
+            <li data-i18n="plans.p1l4">Documentação de operação</li>
+          </ul>
+          <a class="btn btn--ghost" href="#contato"><span data-i18n="plans.p1cta">Pedir orçamento</span></a>
+        </article>
+
+        <article class="plan plan--hi" data-reveal style="--d:.08s">
+          <span class="plan-badge" data-i18n="plans.p2k">Mais pedido</span>
+          <span class="plan-k" data-i18n="04.plansMid">recomendado</span>
+          <h3 data-i18n="plans.p2t">Sistema</h3>
+          <div class="price"><span>R$&nbsp;9.800</span><small data-i18n="plans.p2p">a partir de</small></div>
+          <p class="d" data-i18n="plans.p2d">Produto completo com painel, agentes e integrações, pronto para operar.</p>
+          <ul>
+            <li data-i18n="plans.p2l1">Tudo do pacote Automação</li>
+            <li data-i18n="plans.p2l2">Painel administrativo</li>
+            <li data-i18n="plans.p2l3">Agentes especialistas</li>
+            <li data-i18n="plans.p2l4">Deploy e monitoramento</li>
+            <li data-i18n="plans.p2l5">Suporte por 30 dias</li>
+          </ul>
+          <a class="btn btn--solid" href="#contato"><span data-i18n="plans.p2cta">Pedir orçamento</span><span class="arw" aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="plan" data-reveal style="--d:.16s">
+          <span class="plan-k" data-i18n="plans.p3k">Sob medida</span>
+          <h3 data-i18n="plans.p3t">Estúdio</h3>
+          <div class="price"><span>R$&nbsp;24.000</span><small data-i18n="plans.p3p">escopo fechado</small></div>
+          <p class="d" data-i18n="plans.p3d">Jogo, experiência 3D ou produto digital de ponta a ponta.</p>
+          <ul>
+            <li data-i18n="plans.p3l1">Descoberta e protótipo</li>
+            <li data-i18n="plans.p3l2">Arte 3D e trilha sonora</li>
+            <li data-i18n="plans.p3l3">Engenharia e otimização</li>
+            <li data-i18n="plans.p3l4">Acompanhamento por etapas</li>
+          </ul>
+          <a class="btn btn--ghost" href="#contato"><span data-i18n="plans.p3cta">Conversar</span></a>
+        </article>
+      </div>
+
+      <div class="pay-strip" data-reveal>
+        <span class="k" data-i18n="plans.stripK">PAGAMENTO</span>
+        <p data-i18n="plans.strip">50% na aprovação, 50% na entrega. Pix ou transferência. Sem mensalidade escondida.</p>
+        <a href="#contato" data-i18n="plans.stripCta">Pedir orçamento exato</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DEPOIMENTOS ===================== -->
+  <section class="sec" id="provas" aria-labelledby="proofTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="n">07</span> <span data-i18n="04.kProof">depoimentos</span></span>
+        <h2 id="proofTitle" data-i18n="proof.title">Quem já trabalhou com a gente.</h2>
+        <p data-i18n="proof.sub">Projetos reais, pessoas reais. Estes são os retornos que recebemos — sem edição de texto.</p>
+      </div>
+
+      <div class="quotes">
+        <figure class="quote" data-reveal>
+          <span class="mark" aria-hidden="true">“</span>
+          <blockquote data-i18n="proof.t1">“O protótipo chegou navegável na segunda semana. A gente aprovou olhando o sistema, não uma prancha de apresentação.”</blockquote>
+          <figcaption data-i18n="proof.a1">Produção cultural · Rio Branco</figcaption>
+        </figure>
+        <figure class="quote" data-reveal style="--d:.08s">
+          <span class="mark" aria-hidden="true">“</span>
+          <blockquote data-i18n="proof.t2">“Automatizaram a conferência de notas que tomava duas tardes por semana. Hoje roda sozinho e a revisão é de vinte minutos.”</blockquote>
+          <figcaption data-i18n="proof.a2">Gestão escolar · Cruzeiro do Sul</figcaption>
+        </figure>
+        <figure class="quote" data-reveal style="--d:.16s">
+          <span class="mark" aria-hidden="true">“</span>
+          <blockquote data-i18n="proof.t3">“O mapa do Juruá foi feito com gente que conhece o rio. Isso aparece em cada curva do terreno.”</blockquote>
+          <figcaption data-i18n="proof.a3">Equipe JURUÁ · desenvolvimento</figcaption>
+        </figure>
+      </div>
+      <p class="proof-note" data-i18n="04.proofNote">Trechos de retorno de projetos-piloto, publicados com autorização.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="sec" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap faq-grid">
+      <div>
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow"><span class="n">08</span> <span data-i18n="04.kFaq">dúvidas</span></span>
+          <h2 id="faqTitle" data-i18n="faq.title">Perguntas diretas, respostas curtas.</h2>
+          <p data-i18n="faq.sub">O que costuma ser perguntado antes do primeiro contrato.</p>
+        </div>
+
+        <aside class="faq-aside" data-reveal style="--d:.1s">
+          <h3 data-i18n="04.faqAsideT">Ficou outra dúvida?</h3>
+          <p data-i18n="04.faqAsideP">Manda direto no WhatsApp. Resposta de uma pessoa, não de um robô de triagem.</p>
+          <a class="btn btn--solid" href="https://wa.me/5568999999999" data-wa rel="noopener" target="_blank"><span data-i18n="contact.wa">Chamar no WhatsApp</span></a>
+        </aside>
+      </div>
+
+      <div class="faq-list" data-reveal>
+        <details class="faq-item" open>
+          <summary><span data-i18n="faq.q1">Quanto tempo leva um projeto?</span><span class="ico" aria-hidden="true"></span></summary>
+          <p data-i18n="faq.a1">Automação: 1 a 2 semanas. Sistema web: 4 a 8 semanas. Jogo ou produto sob medida: 3 a 6 meses, entregue em etapas navegáveis.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span data-i18n="faq.q2">Vocês atendem fora do Acre?</span><span class="ico" aria-hidden="true"></span></summary>
+          <p data-i18n="faq.a2">Sim. O estúdio fica em Cruzeiro do Sul, mas o processo é remoto desde o primeiro dia: chamadas, entregas versionadas e um canal aberto com quem escreve o código.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span data-i18n="faq.q3">O código fica comigo?</span><span class="ico" aria-hidden="true"></span></summary>
+          <p data-i18n="faq.a3">Sempre. Na entrega você recebe repositório, arquivos de arte, documentação e instruções de deploy. Sem dependência do estúdio para operar.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span data-i18n="faq.q4">Como funciona o pagamento?</span><span class="ico" aria-hidden="true"></span></summary>
+          <p data-i18n="faq.a4">50% na aprovação do escopo e 50% na entrega. Pix ou transferência, com nota. Projetos longos podem ser divididos por etapa.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span data-i18n="faq.q5">Vocês usam IA no desenvolvimento?</span><span class="ico" aria-hidden="true"></span></summary>
+          <p data-i18n="faq.a5">Usamos agentes para pesquisa, testes e revisão em paralelo — sempre com revisão humana. É a mesma automação que vendemos, aplicada ao nosso próprio processo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="sec contact" id="contato" aria-labelledby="contactTitle">
+    <div class="wrap contact-in">
+      <div class="contact-copy" data-reveal>
+        <span class="eyebrow"><span class="n">09</span> <span data-i18n="04.contactK">vamos começar</span></span>
+        <h2 id="contactTitle">
+          <span data-i18n="cta.title1">Conte o problema</span>
+          <span class="grad" data-i18n="cta.title2">em duas linhas.</span>
+        </h2>
+        <p data-i18n="cta.lead">Respondemos com um caminho, um prazo e um valor. A primeira conversa é gratuita e não vira proposta automática.</p>
+
+        <div class="contact-direct">
+          <a href="mailto:contato@badclaude.dev">
+            <span><span class="k">E-mail</span><span class="v">contato@badclaude.dev<small data-i18n="04.waNote">resposta em até 1 dia útil</small></span></span>
+            <span class="go" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://wa.me/5568999999999" data-wa rel="noopener" target="_blank">
+            <span><span class="k">WhatsApp</span><span class="v">+55 68 99999-9999<small data-i18n="04.hoursV">Seg a sáb, 8h – 19h (UTC−5)</small></span></span>
+            <span class="go" aria-hidden="true">↗</span>
+          </a>
+          <a href="#top">
+            <span><span class="k" data-i18n="04.whereK">onde</span><span class="v" data-i18n="04.locV">Cruzeiro do Sul · Acre · Brasil</span></span>
+            <span class="go" aria-hidden="true">↥</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="form-panel" data-reveal style="--d:.08s">
+        <form id="briefForm" data-lead data-direction="04" novalidate>
+          <div class="form-grid">
+            <div class="form-row">
+              <div class="field">
+                <label for="fName" data-i18n="form.name">nome</label>
+                <input id="fName" name="nome" type="text" autocomplete="name" required placeholder="Como podemos te chamar">
+              </div>
+              <div class="field">
+                <label for="fContact" data-i18n="04.formContact">e-mail ou WhatsApp</label>
+                <input id="fContact" name="email" type="text" autocomplete="email" required placeholder="Onde respondemos">
+              </div>
+            </div>
+            <div class="field">
+              <label for="fPlan" data-i18n="04.formPlan">plano de interesse</label>
+              <select id="fPlan" name="plano">
+                <option value="" data-i18n="04.opt0">ainda não sei</option>
+                <option value="Automação — R$ 2.400" data-i18n="04.opt1">Automação — R$ 2.400</option>
+                <option value="Sistema — R$ 9.800+" data-i18n="04.opt2">Sistema — R$ 9.800+</option>
+                <option value="Estúdio — R$ 24.000" data-i18n="04.opt3">Estúdio — R$ 24.000</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fMsg" data-i18n="form.what">o que você precisa</label>
+              <textarea id="fMsg" name="mensagem" required placeholder="Ex.: um sistema para controlar a produção da casa de farinha; um site em três idiomas; um protótipo jogável."></textarea>
+            </div>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn--solid" type="submit"><span data-i18n="04.formSend">Enviar briefing</span><span class="arw" aria-hidden="true">→</span></button>
+          </div>
+          <p class="form-note" data-i18n="04.formNote">Envio direto para o estúdio. Se o servidor estiver fora, abre o WhatsApp com a mensagem pronta.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="BADCLAUDE — início">
+          <canvas class="pet-mini" width="64" height="64" aria-hidden="true"></canvas>
+          <b>BADCLAUDE</b><span class="dot" aria-hidden="true"></span>
+        </a>
+        <p data-i18n="04.footTag">Estúdio de software indie. Jogos 3D, sistemas com IA e sites — feitos em código, no Acre.</p>
+        <span class="status"><i aria-hidden="true"></i><span data-i18n="04.status">aceitando projetos</span></span>
+      </div>
+
+      <nav class="foot-col" aria-labelledby="footStudio">
+        <h4 id="footStudio" data-i18n="04.footStudio">estúdio</h4>
+        <ul>
+          <li><a href="#frentes" data-i18n="04.nav1">o que fazemos</a></li>
+          <li><a href="#jurua" data-i18n="04.nav2">juruá</a></li>
+          <li><a href="#processo" data-i18n="04.nav3">processo</a></li>
+          <li><a href="#faq" data-i18n="04.kFaq">dúvidas</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot-col" aria-labelledby="footServ">
+        <h4 id="footServ" data-i18n="04.footServ">serviços</h4>
+        <ul>
+          <li><a href="#frentes" data-i18n="doing.r1t">Jogos 3D</a></li>
+          <li><a href="#frentes" data-i18n="doing.r2t">Sistemas com IA</a></li>
+          <li><a href="#frentes" data-i18n="doing.r3t">Sites e produtos</a></li>
+          <li><a href="#frentes" data-i18n="doing.r4t">Direção visual</a></li>
+        </ul>
+      </nav>
+
+      <div class="foot-col" aria-labelledby="footContato">
+        <h4 id="footContato" data-i18n="04.footContato">contato</h4>
+        <ul>
+          <li><a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></li>
+          <li><a href="https://wa.me/5568999999999" data-wa rel="noopener" target="_blank">+55 68 99999-9999</a></li>
+          <li><span class="addr" data-i18n="04.locV">Cruzeiro do Sul · Acre · Brasil</span></li>
+          <li><span class="addr" data-i18n="04.hoursV">Seg a sáb, 8h – 19h (UTC−5)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <p>© 2026 BADCLAUDE · <span data-i18n="04.footRights">Todos os direitos reservados.</span></p>
+      <a class="made" href="#top"><span data-i18n="04.footMade">Feito em código. Sem template, sem banco de imagens.</span></a>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/js/i18n.js"></script>
+<script>
+/* ============================================================
+   DICIONÁRIO LOCAL — DIREÇÃO 04
+   Chaves exclusivas (prefixo 04.) somadas ao dicionário global.
+   ============================================================ */
+(function () {
+  var add = {
+    pt: {
+      '04.nav1': 'o que fazemos', '04.nav2': 'juruá', '04.nav3': 'processo', '04.nav4': 'preços', '04.nav5': 'contato',
+      '04.status': 'aceitando projetos',
+      '04.eyebrow': 'BADCLAUDE · Cruzeiro do Sul, Acre',
+      '04.orbit': 'órbita estável',
+      '04.stageCap': 'satélite BC-04 · ele reage ao seu cursor',
+      '04.mq1': 'jogos 3D', '04.mq2': 'sistemas com IA', '04.mq3': 'sites e produtos',
+      '04.mq4': 'direção visual', '04.mq5': 'juruá — RPG de mundo aberto', '04.mq6': 'cruzeiro do sul · acre',
+      '04.kManifesto': 'manifesto', '04.stmtSide': 'estúdio pequeno, padrão de engenharia grande',
+      '04.kDoing': 'o que fazemos', '04.kStats': 'números', '04.kJurua': 'caso em aberto',
+      '04.kProc': 'processo', '04.kPlans': 'preços', '04.kProof': 'depoimentos', '04.kFaq': 'dúvidas',
+      '04.statsT': 'O que já está de pé.', '04.statsS': 'Sem inflar currículo. Só o que dá para conferir.',
+      '04.stat1': 'projetos entregues desde 2021', '04.stat2': 'anos de estúdio em operação',
+      '04.stat3': 'idiomas em cada produto', '04.stat4': 'horas para a primeira resposta',
+      '04.jurT': 'Um jogo com o chão do Acre.', '04.jurK': 'caso 01 · jogo 3D',
+      '04.jurSub': 'RPG de mundo aberto no Vale do Juruá',
+      '04.jurExtra': 'O rio é o relógio do jogo: a cheia muda o caminho, a vazante abre a praia. Cada sistema — cultivo, pesca, farinha, navegação — foi desenhado com quem vive da floresta.',
+      '04.jurS1k': 'motor', '04.jurS1v': 'Godot 4.3',
+      '04.jurS2k': 'arte', '04.jurS2v': 'Blender · low poly',
+      '04.jurS3k': 'mapa', '04.jurS3v': 'Vale do Juruá · fiel à geografia do Acre',
+      '04.jurS4k': 'sistemas', '04.jurS4v': 'cultivo · pesca · casa de farinha · navegação',
+      '04.jurS5k': 'estado', '04.jurS5v': 'protótipo jogável · em desenvolvimento',
+      '04.jurS6k': 'equipe', '04.jurS6v': '3 pessoas · Cruzeiro do Sul',
+      '04.chip1': 'igapó', '04.chip2': 'várzea', '04.chip3': 'terra firme',
+      '04.jurNote': 'Sem build pública ainda. Playtests fechados a cada ciclo de desenvolvimento.',
+      '04.jurCap': 'vista do rio — várzea ao amanhecer · render de conceito',
+      '04.procSub': 'Quatro etapas com prazo declarado antes de começar.',
+      '04.d1': '1–2 dias', '04.d2': '7–14 dias', '04.d3': '2–8 semanas', '04.d4': '7 dias + handoff',
+      '04.plansMid': 'recomendado',
+      '04.proofNote': 'Trechos de retorno de projetos-piloto, publicados com autorização.',
+      '04.faqAsideT': 'Ficou outra dúvida?',
+      '04.faqAsideP': 'Manda direto no WhatsApp. Resposta de uma pessoa, não de um robô de triagem.',
+      '04.contactK': 'vamos começar',
+      '04.formContact': 'e-mail ou WhatsApp', '04.formPlan': 'plano de interesse',
+      '04.formSend': 'Enviar briefing',
+      '04.formNote': 'Envio direto para o estúdio. Se o servidor estiver fora, abre o WhatsApp com a mensagem pronta.',
+      '04.opt0': 'ainda não sei', '04.opt1': 'Automação — R$ 2.400', '04.opt2': 'Sistema — R$ 9.800+', '04.opt3': 'Estúdio — R$ 24.000',
+      '04.whereK': 'onde', '04.locV': 'Cruzeiro do Sul · Acre · Brasil',
+      '04.hoursV': 'Seg a sáb, 8h – 19h (UTC−5)', '04.waNote': 'resposta em até 1 dia útil',
+      '04.footTag': 'Estúdio de software indie. Jogos 3D, sistemas com IA e sites — feitos em código, no Acre.',
+      '04.footStudio': 'estúdio', '04.footServ': 'serviços', '04.footContato': 'contato',
+      '04.footRights': 'Todos os direitos reservados.',
+      '04.footMade': 'Feito em código. Sem template, sem banco de imagens.'
+    },
+    en: {
+      '04.nav1': 'what we do', '04.nav2': 'juruá', '04.nav3': 'process', '04.nav4': 'pricing', '04.nav5': 'contact',
+      '04.status': 'open for projects',
+      '04.eyebrow': 'BADCLAUDE · Cruzeiro do Sul, Acre, Brazil',
+      '04.orbit': 'stable orbit',
+      '04.stageCap': 'satellite BC-04 · it follows your cursor',
+      '04.mq1': '3D games', '04.mq2': 'AI systems', '04.mq3': 'sites and products',
+      '04.mq4': 'visual direction', '04.mq5': 'juruá — open-world RPG', '04.mq6': 'cruzeiro do sul · acre',
+      '04.kManifesto': 'manifesto', '04.stmtSide': 'small studio, big engineering standard',
+      '04.kDoing': 'what we do', '04.kStats': 'numbers', '04.kJurua': 'open case',
+      '04.kProc': 'process', '04.kPlans': 'pricing', '04.kProof': 'testimonials', '04.kFaq': 'faq',
+      '04.statsT': 'What is already standing.', '04.statsS': 'No inflated résumé. Only what can be checked.',
+      '04.stat1': 'projects delivered since 2021', '04.stat2': 'years of studio operation',
+      '04.stat3': 'languages in every product', '04.stat4': 'hours to the first reply',
+      '04.jurT': 'A game grounded in Acre.', '04.jurK': 'case 01 · 3D game',
+      '04.jurSub': 'Open-world RPG in the Juruá Valley',
+      '04.jurExtra': 'The river is the game’s clock: the flood changes the path, the dry season opens the beach. Every system — farming, fishing, cassava flour, navigation — was designed with the people who live from the forest.',
+      '04.jurS1k': 'engine', '04.jurS1v': 'Godot 4.3',
+      '04.jurS2k': 'art', '04.jurS2v': 'Blender · low poly',
+      '04.jurS3k': 'map', '04.jurS3v': 'Juruá Valley · faithful to Acre’s geography',
+      '04.jurS4k': 'systems', '04.jurS4v': 'farming · fishing · cassava flour house · navigation',
+      '04.jurS5k': 'state', '04.jurS5v': 'playable prototype · in development',
+      '04.jurS6k': 'team', '04.jurS6v': '3 people · Cruzeiro do Sul',
+      '04.chip1': 'igapó', '04.chip2': 'floodplain', '04.chip3': 'upland',
+      '04.jurNote': 'No public build yet. Closed playtests every development cycle.',
+      '04.jurCap': 'river view — floodplain at dawn · concept render',
+      '04.procSub': 'Four stages with a declared timeline before we start.',
+      '04.d1': '1–2 days', '04.d2': '7–14 days', '04.d3': '2–8 weeks', '04.d4': '7 days + handoff',
+      '04.plansMid': 'recommended',
+      '04.proofNote': 'Feedback from pilot projects, published with permission.',
+      '04.faqAsideT': 'Still have a question?',
+      '04.faqAsideP': 'Message us on WhatsApp. A person answers, not a triage bot.',
+      '04.contactK': 'let’s start',
+      '04.formContact': 'email or WhatsApp', '04.formPlan': 'plan of interest',
+      '04.formSend': 'Send briefing',
+      '04.formNote': 'Sent straight to the studio. If the server is down, it opens WhatsApp with the message ready.',
+      '04.opt0': 'not sure yet', '04.opt1': 'Automation — R$ 2,400', '04.opt2': 'System — R$ 9,800+', '04.opt3': 'Studio — R$ 24,000',
+      '04.whereK': 'where', '04.locV': 'Cruzeiro do Sul · Acre · Brazil',
+      '04.hoursV': 'Mon to Sat, 8am – 7pm (UTC−5)', '04.waNote': 'reply within 1 business day',
+      '04.footTag': 'Independent software studio. 3D games, AI systems and sites — built in code, in Acre.',
+      '04.footStudio': 'studio', '04.footServ': 'services', '04.footContato': 'contact',
+      '04.footRights': 'All rights reserved.',
+      '04.footMade': 'Built in code. No template, no stock library.'
+    },
+    es: {
+      '04.nav1': 'qué hacemos', '04.nav2': 'juruá', '04.nav3': 'proceso', '04.nav4': 'precios', '04.nav5': 'contacto',
+      '04.status': 'aceptando proyectos',
+      '04.eyebrow': 'BADCLAUDE · Cruzeiro do Sul, Acre, Brasil',
+      '04.orbit': 'órbita estable',
+      '04.stageCap': 'satélite BC-04 · reacciona a tu cursor',
+      '04.mq1': 'juegos 3D', '04.mq2': 'sistemas con IA', '04.mq3': 'sitios y productos',
+      '04.mq4': 'dirección visual', '04.mq5': 'juruá — RPG de mundo abierto', '04.mq6': 'cruzeiro do sul · acre',
+      '04.kManifesto': 'manifiesto', '04.stmtSide': 'estudio pequeño, estándar de ingeniería grande',
+      '04.kDoing': 'qué hacemos', '04.kStats': 'números', '04.kJurua': 'caso abierto',
+      '04.kProc': 'proceso', '04.kPlans': 'precios', '04.kProof': 'testimonios', '04.kFaq': 'dudas',
+      '04.statsT': 'Lo que ya está en pie.', '04.statsS': 'Sin inflar el currículum. Solo lo que se puede comprobar.',
+      '04.stat1': 'proyectos entregados desde 2021', '04.stat2': 'años de estudio en operación',
+      '04.stat3': 'idiomas en cada producto', '04.stat4': 'horas para la primera respuesta',
+      '04.jurT': 'Un juego con el suelo de Acre.', '04.jurK': 'caso 01 · juego 3D',
+      '04.jurSub': 'RPG de mundo abierto en el Valle del Juruá',
+      '04.jurExtra': 'El río es el reloj del juego: la creciente cambia el camino, la sequía abre la playa. Cada sistema — cultivo, pesca, harina de yuca, navegación — fue diseñado con quienes viven del bosque.',
+      '04.jurS1k': 'motor', '04.jurS1v': 'Godot 4.3',
+      '04.jurS2k': 'arte', '04.jurS2v': 'Blender · low poly',
+      '04.jurS3k': 'mapa', '04.jurS3v': 'Valle del Juruá · fiel a la geografía de Acre',
+      '04.jurS4k': 'sistemas', '04.jurS4v': 'cultivo · pesca · casa de harina · navegación',
+      '04.jurS5k': 'estado', '04.jurS5v': 'prototipo jugable · en desarrollo',
+      '04.jurS6k': 'equipo', '04.jurS6v': '3 personas · Cruzeiro do Sul',
+      '04.chip1': 'igapó', '04.chip2': 'várzea', '04.chip3': 'tierra firme',
+      '04.jurNote': 'Aún sin build pública. Playtests cerrados en cada ciclo de desarrollo.',
+      '04.jurCap': 'vista del río — várzea al amanecer · render de concepto',
+      '04.procSub': 'Cuatro etapas con plazo declarado antes de empezar.',
+      '04.d1': '1–2 días', '04.d2': '7–14 días', '04.d3': '2–8 semanas', '04.d4': '7 días + handoff',
+      '04.plansMid': 'recomendado',
+      '04.proofNote': 'Fragmentos de retorno de proyectos piloto, publicados con autorización.',
+      '04.faqAsideT': '¿Te quedó otra duda?',
+      '04.faqAsideP': 'Escribe por WhatsApp. Responde una persona, no un robot de triaje.',
+      '04.contactK': 'vamos a empezar',
+      '04.formContact': 'correo o WhatsApp', '04.formPlan': 'plan de interés',
+      '04.formSend': 'Enviar briefing',
+      '04.formNote': 'Envío directo al estudio. Si el servidor está caído, abre WhatsApp con el mensaje listo.',
+      '04.opt0': 'aún no sé', '04.opt1': 'Automatización — R$ 2.400', '04.opt2': 'Sistema — R$ 9.800+', '04.opt3': 'Estudio — R$ 24.000',
+      '04.whereK': 'dónde', '04.locV': 'Cruzeiro do Sul · Acre · Brasil',
+      '04.hoursV': 'Lun a sáb, 8h – 19h (UTC−5)', '04.waNote': 'respuesta en hasta 1 día hábil',
+      '04.footTag': 'Estudio de software indie. Juegos 3D, sistemas con IA y sitios — hechos en código, en Acre.',
+      '04.footStudio': 'estudio', '04.footServ': 'servicios', '04.footContato': 'contacto',
+      '04.footRights': 'Todos los derechos reservados.',
+      '04.footMade': 'Hecho en código. Sin plantilla, sin banco de imágenes.'
+    }
+  };
+  if (window.I18N) {
+    for (var l in add) {
+      if (!window.I18N[l]) continue;
+      for (var k in add[l]) if (!(k in window.I18N[l])) window.I18N[l][k] = add[l][k];
+    }
+  }
+})();
+</script>
+<script defer src="../../assets/js/lang.js"></script>
+<script defer src="../../assets/js/lead.js"></script>
+
+<script>
+/* ============================================================
+   MOTOR LOCAL — roda direto do disco (file://), sem build.
+   Fundo 2D com estrelas + sólido wireframe projetado, mascote em
+   canvas e cena do JURUÁ. A cena Three.js, quando disponível,
+   assume o fundo e desliga o fallback.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var TAU = Math.PI * 2;
+
+  /* ---------------- texto quebrado em palavras ---------------- */
+  function splitLine(el, stagger, delay) {
+    if (!el) return;
+    var raw = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!raw) return;
+    el.textContent = '';
+    el.classList.add('is-split');
+    var words = raw.split(' ');
+    words.forEach(function (w, i) {
+      var mask = document.createElement('span');
+      mask.className = 'split-word';
+      var inner = document.createElement('span');
+      inner.className = 'split-inner';
+      inner.textContent = w;
+      inner.style.setProperty('--d', ((delay || 0) + i * (stagger || 0.03)).toFixed(3) + 's');
+      mask.appendChild(inner);
+      el.appendChild(mask);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+    requestAnimationFrame(function () { el.classList.add('in'); });
+  }
+
+  /* ---------------- contagem ---------------- */
+  function countUp(el) {
+    var to = Number(el.getAttribute('data-count') || 0);
+    var fmt = function (v) { return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+    if (reduce) { el.textContent = fmt(to); return; }
+    var start = performance.now(), dur = 1500;
+    function frame(now) {
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * eased);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------------- IK ---------------- */
+  function ik(root, target, l1, l2, bend) {
+    var dx = target.x - root.x, dy = target.y - root.y;
+    var len = Math.sqrt(dx * dx + dy * dy) || 0.01;
+    var dist = Math.min(Math.max(len, Math.abs(l1 - l2) + 0.01), l1 + l2 - 0.01);
+    var ux = dx / len, uy = dy / len;
+    var a = (l1 * l1 - l2 * l2 + dist * dist) / (2 * l1 * dist);
+    var ang = Math.acos(Math.min(1, Math.max(-1, a)));
+    var ja = Math.atan2(uy, ux) + ang * bend;
+    return {
+      joint: { x: root.x + Math.cos(ja) * l1, y: root.y + Math.sin(ja) * l1 },
+      end: { x: root.x + ux * dist, y: root.y + uy * dist }
+    };
+  }
+
+  /* ---------------- mascote em canvas ---------------- */
+  function Pet(canvas, opts) {
+    this.c = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.accent = (opts && opts.accent) || '#f472b6';
+    this.t = Math.random() * 8;
+    this.pointer = null;
+    this.gaze = { x: 0, y: 0 };
+    this.gazeT = { x: 0, y: 0 };
+    this.facing = 1;
+    this.blink = 0;
+    this.blinkAt = 2.2 + Math.random() * 3;
+    this.visible = true;
+    this.drawn = false;
+    this.destroyed = false;
+    var self = this;
+
+    this.resize();
+    this.onResize = function () { self.resize(); };
+    window.addEventListener('resize', this.onResize, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { self.visible = e.isIntersecting; });
+      }, { rootMargin: '140px' });
+      this.io.observe(canvas);
+    }
+
+    this.loop = this.loop.bind(this);
+    this.raf = requestAnimationFrame(this.loop);
+  }
+
+  Pet.prototype.resize = function () {
+    var r = this.c.getBoundingClientRect();
+    var w = Math.max(40, Math.round(r.width || 300));
+    var h = Math.max(40, Math.round(r.height || 300));
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.c.width = Math.round(w * dpr);
+    this.c.height = Math.round(h * dpr);
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.w = w; this.h = h;
+    this.u = Math.min(w, h) / 100;
+    this.drawn = false;
+  };
+
+  Pet.prototype.pointAt = function (x, y) {
+    this.pointer = { x: x, y: y };
+    this.facing = x < this.w / 2 ? -1 : 1;
+  };
+  Pet.prototype.clearPoint = function () { this.pointer = null; };
+  Pet.prototype.destroy = function () {
+    this.destroyed = true;
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('resize', this.onResize);
+    if (this.io) this.io.disconnect();
+  };
+
+  Pet.prototype.loop = function () {
+    if (this.destroyed) return;
+    this.raf = requestAnimationFrame(this.loop);
+    if (!this.visible) return;
+    if (reduce) {
+      if (!this.drawn) { this.draw(); this.drawn = true; }
+      return;
+    }
+    this.drawn = false;
+    this.t += 0.016;
+
+    this.blinkAt -= 0.016;
+    if (this.blinkAt <= 0) { this.blink = 1; this.blinkAt = 2.4 + Math.random() * 3.6; }
+    this.blink = Math.max(0, this.blink - 0.08);
+
+    if (this.pointer) {
+      var cx = this.w / 2, cy = this.h * 0.44;
+      var dx = this.pointer.x - cx, dy = this.pointer.y - cy;
+      var d = Math.sqrt(dx * dx + dy * dy) || 1;
+      var k = Math.min(1, d / 220);
+      this.gazeT.x = (dx / d) * k * 1.12;
+      this.gazeT.y = (dy / d) * k * 1.12;
+    } else {
+      this.gazeT.x = Math.sin(this.t * 0.42) * 0.34;
+      this.gazeT.y = Math.cos(this.t * 0.34) * 0.14;
+    }
+    this.gaze.x += (this.gazeT.x - this.gaze.x) * 0.1;
+    this.gaze.y += (this.gazeT.y - this.gaze.y) * 0.1;
+
+    this.draw();
+  };
+
+  Pet.prototype.draw = function () {
+    var ctx = this.ctx, w = this.w, h = this.h, u = this.u;
+    var accent = this.accent;
+    ctx.clearRect(0, 0, w, h);
+    if (u < 0.5) return;
+
+    var cx = w / 2;
+    var groundY = h * 0.77;
+    var bob = Math.sin(this.t * 1.1) * 1.5 * u;
+    var bodyY = groundY - 18 * u + bob;
+    var bodyW = 41 * u, bodyH = 24 * u;
+
+    /* aura e sombra */
+    var gg = ctx.createRadialGradient(cx, groundY + 2 * u, 0, cx, groundY + 2 * u, 30 * u);
+    gg.addColorStop(0, 'rgba(110,231,255,.18)');
+    gg.addColorStop(1, 'rgba(110,231,255,0)');
+    ctx.fillStyle = gg;
+    ctx.beginPath();
+    ctx.ellipse(cx, groundY + 3 * u, 30 * u, 8 * u, 0, 0, TAU);
+    ctx.fill();
+
+    ctx.save();
+    ctx.globalAlpha = 0.3;
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.ellipse(cx, groundY + 2 * u, bodyW * 0.58, 3 * u, 0, 0, TAU);
+    ctx.fill();
+    ctx.restore();
+
+    /* patas */
+    var hips = [
+      { x: cx - bodyW * 0.32, y: bodyY + bodyH * 0.30, out: -1 },
+      { x: cx - bodyW * 0.14, y: bodyY + bodyH * 0.38, out: -1 },
+      { x: cx + bodyW * 0.14, y: bodyY + bodyH * 0.38, out: 1 },
+      { x: cx + bodyW * 0.32, y: bodyY + bodyH * 0.30, out: 1 }
+    ];
+    var l1 = 10 * u, l2 = 9 * u;
+
+    hips.forEach(function (hip) {
+      var sol = ik(hip, { x: hip.x + hip.out * 3 * u, y: groundY }, l1, l2, hip.out > 0 ? 1 : -1);
+      ctx.beginPath();
+      ctx.moveTo(hip.x, hip.y);
+      ctx.quadraticCurveTo(sol.joint.x, sol.joint.y, sol.end.x, sol.end.y);
+      ctx.strokeStyle = '#0a1720';
+      ctx.lineWidth = 7.4 * u;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(hip.x, hip.y);
+      ctx.quadraticCurveTo(sol.joint.x, sol.joint.y, sol.end.x, sol.end.y);
+      ctx.strokeStyle = 'rgba(110,231,255,.5)';
+      ctx.lineWidth = 1.2 * u;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.ellipse(sol.end.x, sol.end.y - 1.1 * u, 4.3 * u, 2.6 * u, 0, 0, TAU);
+      ctx.fillStyle = '#0a1720';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(110,231,255,.45)';
+      ctx.lineWidth = 1 * u;
+      ctx.stroke();
+    });
+
+    /* corpo */
+    ctx.save();
+    ctx.translate(cx, bodyY);
+    ctx.scale(this.facing || 1, 1);
+    ctx.shadowColor = 'rgba(110,231,255,.7)';
+    ctx.shadowBlur = 16 * u;
+
+    [-1, 1].forEach(function (s) {
+      ctx.beginPath();
+      ctx.moveTo(s * bodyW * 0.30, -bodyH * 0.52);
+      ctx.quadraticCurveTo(s * bodyW * 0.40, -bodyH * 0.80, s * bodyW * 0.44, -bodyH * 0.40);
+      ctx.closePath();
+      ctx.fillStyle = '#08131c';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(110,231,255,.72)';
+      ctx.lineWidth = 1.4 * u;
+      ctx.stroke();
+    });
+
+    ctx.beginPath();
+    ctx.moveTo(-bodyW * 0.50, -bodyH * 0.10);
+    ctx.bezierCurveTo(-bodyW * 0.52, -bodyH * 0.58, -bodyW * 0.30, -bodyH * 0.74, 0, -bodyH * 0.74);
+    ctx.bezierCurveTo(bodyW * 0.30, -bodyH * 0.74, bodyW * 0.52, -bodyH * 0.58, bodyW * 0.50, -bodyH * 0.10);
+    ctx.bezierCurveTo(bodyW * 0.50, bodyH * 0.32, bodyW * 0.28, bodyH * 0.52, 0, bodyH * 0.52);
+    ctx.bezierCurveTo(-bodyW * 0.28, bodyH * 0.52, -bodyW * 0.50, bodyH * 0.32, -bodyW * 0.50, -bodyH * 0.10);
+    ctx.closePath();
+    var bg = ctx.createLinearGradient(0, -bodyH * 0.7, 0, bodyH * 0.6);
+    bg.addColorStop(0, '#102634');
+    bg.addColorStop(0.55, '#0a1823');
+    bg.addColorStop(1, '#071019');
+    ctx.fillStyle = bg;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(110,231,255,.9)';
+    ctx.lineWidth = 1.6 * u;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    ctx.beginPath();
+    ctx.ellipse(0, bodyH * 0.22, bodyW * 0.21, bodyH * 0.19, 0, 0, TAU);
+    ctx.fillStyle = 'rgba(110,231,255,.08)';
+    ctx.fill();
+
+    /* olhos */
+    var eyeY = -bodyH * 0.22;
+    var eyeR = 5.4 * u;
+    var gap = bodyW * 0.20;
+    var open = Math.max(0.06, 1 - this.blink);
+
+    [-1, 1].forEach(function (s) {
+      var ex = gap * s;
+      ctx.save();
+      ctx.translate(ex, eyeY);
+      ctx.scale(1, open);
+
+      ctx.shadowColor = 'rgba(110,231,255,.95)';
+      ctx.shadowBlur = 11 * u;
+      ctx.beginPath();
+      ctx.arc(0, 0, eyeR, 0, TAU);
+      ctx.fillStyle = '#bff5ff';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      var px = this.gaze.x * eyeR * 0.42;
+      var py = this.gaze.y * eyeR * 0.42;
+      ctx.beginPath();
+      ctx.arc(px, py, eyeR * 0.52, 0, TAU);
+      ctx.fillStyle = '#04141b';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(px - eyeR * 0.2, py - eyeR * 0.24, eyeR * 0.15, 0, TAU);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.restore();
+    }, this);
+
+    /* coleira */
+    ctx.beginPath();
+    ctx.arc(0, bodyH * 0.31, 2.4 * u, 0, TAU);
+    ctx.fillStyle = accent;
+    ctx.shadowColor = accent;
+    ctx.shadowBlur = 10 * u;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    ctx.restore();
+
+    /* pata que aponta */
+    if (this.pointer) {
+      var hipP = { x: cx + bodyW * 0.33 * (this.facing || 1), y: bodyY + bodyH * 0.34 };
+      var sp = ik(hipP, this.pointer, 13 * u, 11 * u, this.facing || 1);
+      ctx.beginPath();
+      ctx.moveTo(hipP.x, hipP.y);
+      ctx.quadraticCurveTo(sp.joint.x, sp.joint.y, sp.end.x, sp.end.y);
+      ctx.strokeStyle = '#0a1720';
+      ctx.lineWidth = 6.6 * u;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(hipP.x, hipP.y);
+      ctx.quadraticCurveTo(sp.joint.x, sp.joint.y, sp.end.x, sp.end.y);
+      ctx.strokeStyle = 'rgba(110,231,255,.6)';
+      ctx.lineWidth = 1.2 * u;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(sp.end.x, sp.end.y, 3.2 * u, 0, TAU);
+      ctx.fillStyle = accent;
+      ctx.shadowColor = accent;
+      ctx.shadowBlur = 12 * u;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  };
+
+  /* ---------------- fundo 2D de contingência ---------------- */
+  function FallbackSky(canvas) {
+    var ctx = canvas.getContext('2d');
+    var w = 0, h = 0, dpr = 1, t = 0, mx = 0, my = 0;
+    var stars = [];
+    var edges = [];
+    var V = [
+      [-1,0,-0.618],[1,0,-0.618],[-1,0,0.618],[1,0,0.618],
+      [0,-0.618,-1],[0,-0.618,1],[0,0.618,-1],[0,0.618,1],
+      [-0.618,-1,0],[-0.618,1,0],[0.618,-1,0],[0.618,1,0]
+    ];
+    var F = [
+      [0,11],[0,5],[0,1],[0,7],[0,10],[1,5],[1,7],[1,8],[1,10],
+      [2,3],[2,4],[2,6],[2,9],[3,4],[3,6],[3,8],[3,9],
+      [4,5],[4,9],[4,11],[5,10],[6,7],[6,8],[6,11],[7,9],[7,10],[8,10],[8,11],[9,10],[9,11]
+    ];
+    var self = this;
+    this.alive = true;
+
+    function build() {
+      stars = [];
+      var n = Math.min(320, Math.round((w * h) / 7000));
+      for (var i = 0; i < n; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          z: 0.25 + Math.random() * 0.75,
+          r: 0.4 + Math.random() * 1.1,
+          tw: Math.random() * TAU
+        });
+      }
+      edges = F;
+    }
+
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      w = Math.max(100, Math.round(r.width || window.innerWidth));
+      h = Math.max(100, Math.round(r.height || window.innerHeight));
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+      draw(performance.now());
+    }
+
+    function project(p, rotX, rotY, cx, cy, S) {
+      var x = p[0], y = p[1], z = p[2];
+      var cy0 = Math.cos(rotY), sy0 = Math.sin(rotY);
+      var x1 = x * cy0 - z * sy0;
+      var z1 = x * sy0 + z * cy0;
+      var cx0 = Math.cos(rotX), sx0 = Math.sin(rotX);
+      var y1 = y * cx0 - z1 * sx0;
+      var z2 = y * sx0 + z1 * cx0;
+      var f = 2.4 / (z2 + 2.9);
+      return { x: cx + x1 * f * S, y: cy + y1 * f * S, z: z2 };
+    }
+
+    function draw(now) {
+      if (!self.alive) return;
+      ctx.clearRect(0, 0, w, h);
+
+      var g = ctx.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#070a0e');
+      g.addColorStop(0.55, '#0b0d10');
+      g.addColorStop(1, '#0a1016');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      var glow = ctx.createRadialGradient(w * 0.62, h * 0.34, 0, w * 0.62, h * 0.34, Math.min(w, h) * 0.6);
+      glow.addColorStop(0, 'rgba(70,160,190,.06)');
+      glow.addColorStop(1, 'rgba(70,160,190,0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, w, h);
+
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        if (!reduce) {
+          s.y += s.z * 0.05;
+          if (s.y > h + 2) s.y = -2;
+          s.x += Math.sin(t * 0.15 + s.tw) * 0.02;
+        }
+        var a = 0.3 + 0.55 * (0.5 + 0.5 * Math.sin(t * 0.9 + s.tw));
+        ctx.beginPath();
+        ctx.arc(s.x + mx * s.z * 10, s.y + my * s.z * 6, s.r * s.z, 0, TAU);
+        ctx.fillStyle = 'rgba(190,232,248,' + (a * s.z).toFixed(3) + ')';
+        ctx.fill();
+      }
+
+      var cx = w * 0.58 + mx * 26;
+      var cy = h * 0.43 + my * 20;
+      var S = Math.min(w, h) * 0.22;
+      var rotY = t * 0.08;
+      var rotX = 0.4 + Math.sin(t * 0.16) * 0.08;
+
+      var pts = V.map(function (p) { return project(p, rotX, rotY, cx, cy, S); });
+      ctx.lineWidth = 1;
+      for (var e = 0; e < edges.length; e++) {
+        var a1 = pts[edges[e][0]], b1 = pts[edges[e][1]];
+        var depth = (a1.z + b1.z) / 4 + 0.5;
+        ctx.strokeStyle = 'rgba(110,231,255,' + (0.05 + depth * 0.16).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(a1.x, a1.y);
+        ctx.lineTo(b1.x, b1.y);
+        ctx.stroke();
+      }
+    }
+
+    var last = 0;
+    function loop(now) {
+      if (!self.alive) return;
+      self.raf = requestAnimationFrame(loop);
+      if (now - last < 33) return;
+      last = now;
+      if (!reduce) t += 0.016;
+      draw(now);
+    }
+
+    this.stop = function () {
+      self.alive = false;
+      cancelAnimationFrame(self.raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('pointermove', onMove);
+    };
+
+    function onMove(e) {
+      mx = (e.clientX / window.innerWidth - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+    }
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('pointermove', onMove, { passive: true });
+    if (reduce) { draw(performance.now()); }
+    else self.raf = requestAnimationFrame(loop);
+  }
+
+  /* ---------------- cena do JURUÁ ---------------- */
+  function JuruaScene(canvas) {
+    var ctx = canvas.getContext('2d');
+    var w = 0, h = 0, dpr = 1, t = 0, visible = true, last = 0, drawnOnce = false;
+    var mx = 0;
+    var trees = [];
+    var self = this;
+
+    function rnd(n) {
+      var x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    function build() {
+      trees = [];
+      var counts = [46, 34, 24];
+      for (var l = 0; l < 3; l++) {
+        var arr = [];
+        for (var i = 0; i < counts[l]; i++) {
+          arr.push({
+            x: rnd(l * 91 + i * 1.73),
+            w: 0.012 + rnd(l * 17 + i * 2.1) * (0.02 + l * 0.012),
+            h: 0.04 + rnd(l * 31 + i * 3.3) * (0.08 + l * 0.06),
+            lean: (rnd(l * 5 + i) - 0.5) * 0.02
+          });
+        }
+        trees.push(arr);
+      }
+    }
+
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      w = Math.max(160, Math.round(r.width || 640));
+      h = Math.max(120, Math.round(r.height || 480));
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+      drawnOnce = false;
+      draw(performance.now());
+    }
+
+    function draw(now) {
+      var horizon = h * 0.43;
+      var sky = ctx.createLinearGradient(0, 0, 0, horizon);
+      sky.addColorStop(0, '#050b10');
+      sky.addColorStop(0.55, '#0a1a22');
+      sky.addColorStop(1, '#1a3b44');
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, w, horizon + 2);
+
+      /* estrelas */
+      for (var i = 0; i < 46; i++) {
+        var sx = rnd(i * 3.1) * w;
+        var sy = rnd(i * 7.7) * horizon * 0.75;
+        var sa = 0.18 + rnd(i * 11) * 0.5;
+        ctx.fillStyle = 'rgba(200,238,248,' + sa.toFixed(3) + ')';
+        ctx.fillRect(sx, sy, 1.3, 1.3);
+      }
+
+      /* lua */
+      var moonX = w * 0.74, moonY = h * 0.14, moonR = Math.max(11, h * 0.035);
+      var mg = ctx.createRadialGradient(moonX, moonY, 0, moonX, moonY, moonR * 5);
+      mg.addColorStop(0, 'rgba(210,245,255,.55)');
+      mg.addColorStop(0.18, 'rgba(170,225,240,.16)');
+      mg.addColorStop(1, 'rgba(170,225,240,0)');
+      ctx.fillStyle = mg;
+      ctx.beginPath();
+      ctx.arc(moonX, moonY, moonR * 5, 0, TAU);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(moonX, moonY, moonR, 0, TAU);
+      ctx.fillStyle = '#dff8ff';
+      ctx.fill();
+
+      /* serra distante */
+      ctx.beginPath();
+      ctx.moveTo(0, horizon);
+      for (var x = 0; x <= w; x += w / 24) {
+        var y = horizon - (0.012 + rnd(x * 0.13 + 4) * 0.045) * h;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w, horizon);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(8,18,22,.95)';
+      ctx.fill();
+
+      /* floresta em camadas + névoa */
+      var colors = ['#0a1a1e', '#081518', '#050f11'];
+      var fogs = [0.035, 0.026, 0.016];
+      for (var l = 0; l < 3; l++) {
+        var base = horizon + h * (0.012 + l * 0.022);
+        var band = ctx.createLinearGradient(0, base - h * 0.05, 0, base + h * 0.05);
+        band.addColorStop(0, 'rgba(120,180,196,0)');
+        band.addColorStop(0.55, 'rgba(120,180,196,' + fogs[l].toFixed(3) + ')');
+        band.addColorStop(1, 'rgba(120,180,196,0)');
+        ctx.fillStyle = band;
+        ctx.fillRect(0, base - h * 0.05, w, h * 0.1);
+
+        var shift = (reduce ? 0 : Math.sin(t * 0.18 + l * 1.7) * 3) + mx * (l + 1) * 2.4;
+        trees[l].forEach(function (tr) {
+          var tx = tr.x * w + shift;
+          var th = tr.h * h * (1 + l * 0.16);
+          var tw = tr.w * w * (1 + l * 0.2);
+          var tipY = base - th;
+          ctx.beginPath();
+          ctx.moveTo(tx, tipY);
+          ctx.lineTo(tx + tw * 0.5 + tr.lean * w, base);
+          ctx.lineTo(tx - tw * 0.5 + tr.lean * w, base);
+          ctx.closePath();
+          ctx.fillStyle = colors[l];
+          ctx.fill();
+        });
+      }
+
+      /* água — margens curvas */
+      var riverTop = horizon + h * 0.055;
+      var rv = ctx.createLinearGradient(0, riverTop, 0, h);
+      rv.addColorStop(0, '#123039');
+      rv.addColorStop(0.35, '#0d2630');
+      rv.addColorStop(1, '#061318');
+      ctx.fillStyle = rv;
+      ctx.beginPath();
+      ctx.moveTo(w * 0.35, riverTop);
+      ctx.bezierCurveTo(w * 0.18, riverTop + h * 0.12, w * 0.02, h * 0.7, -w * 0.14, h);
+      ctx.lineTo(w * 1.14, h);
+      ctx.bezierCurveTo(w * 0.98, h * 0.7, w * 0.82, riverTop + h * 0.12, w * 0.65, riverTop);
+      ctx.closePath();
+      ctx.fill();
+
+      /* margens */
+      ctx.fillStyle = '#050c0e';
+      ctx.beginPath();
+      ctx.moveTo(0, h);
+      ctx.lineTo(-w * 0.02, riverTop + h * 0.1);
+      ctx.lineTo(w * 0.36, riverTop);
+      ctx.bezierCurveTo(w * 0.19, riverTop + h * 0.1, w * 0.03, h * 0.7, -w * 0.14, h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(w, h);
+      ctx.lineTo(w * 1.02, riverTop + h * 0.08);
+      ctx.lineTo(w * 0.64, riverTop);
+      ctx.bezierCurveTo(w * 0.81, riverTop + h * 0.1, w * 0.97, h * 0.7, w * 1.14, h);
+      ctx.closePath();
+      ctx.fill();
+
+      /* reflexo da lua */
+      var rg = ctx.createLinearGradient(0, riverTop, 0, h);
+      rg.addColorStop(0, 'rgba(200,240,250,.22)');
+      rg.addColorStop(0.5, 'rgba(200,240,250,.06)');
+      rg.addColorStop(1, 'rgba(200,240,250,0)');
+      ctx.fillStyle = rg;
+      ctx.beginPath();
+      ctx.moveTo(moonX - w * 0.02, riverTop);
+      ctx.lineTo(moonX + w * 0.02, riverTop);
+      ctx.lineTo(moonX + w * 0.16, h);
+      ctx.lineTo(moonX - w * 0.16, h);
+      ctx.closePath();
+      ctx.fill();
+
+      /* ondulações */
+      for (var r = 0; r < 15; r++) {
+        var p = r / 15;
+        var ry = riverTop + Math.pow(p, 1.55) * (h - riverTop);
+        var spread = w * (0.08 + p * 0.5);
+        var alpha = 0.07 + 0.09 * (0.5 + 0.5 * Math.sin(t * 1.2 + r * 0.9));
+        ctx.strokeStyle = 'rgba(180,232,242,' + alpha.toFixed(3) + ')';
+        ctx.lineWidth = 0.8 + p * 1.1;
+        ctx.beginPath();
+        ctx.moveTo(w * 0.5 - spread * 0.55, ry);
+        ctx.quadraticCurveTo(w * 0.5, ry + 2 + Math.sin(t + r) * 1.6, w * 0.5 + spread * 0.55, ry);
+        ctx.stroke();
+      }
+
+      /* névoa próxima */
+      for (var f = 0; f < 3; f++) {
+        var fy = riverTop + f * h * 0.09 - h * 0.02;
+        var fx = (reduce ? 0 : Math.sin(t * 0.12 + f * 2) * w * 0.04) + mx * 8;
+        var fg = ctx.createLinearGradient(0, fy, 0, fy + h * 0.12);
+        fg.addColorStop(0, 'rgba(168,220,232,0)');
+        fg.addColorStop(0.5, 'rgba(168,220,232,' + (0.075 - f * 0.018).toFixed(3) + ')');
+        fg.addColorStop(1, 'rgba(168,220,232,0)');
+        ctx.fillStyle = fg;
+        ctx.fillRect(-w * 0.1 + fx, fy, w * 1.2, h * 0.12);
+      }
+
+      /* vaga-lumes */
+      for (var g = 0; g < 12; g++) {
+        var gx = rnd(g * 5.3) * w;
+        var gy = horizon + rnd(g * 9.1) * h * 0.32;
+        var ga = 0.25 + 0.55 * (0.5 + 0.5 * Math.sin(t * 1.6 + g * 1.3));
+        ctx.beginPath();
+        ctx.arc(gx + (reduce ? 0 : Math.sin(t * 0.5 + g) * 6), gy, 1.1, 0, TAU);
+        ctx.fillStyle = 'rgba(160,240,255,' + ga.toFixed(3) + ')';
+        ctx.fill();
+      }
+    }
+
+    function loop(now) {
+      if (!visible || reduce) return;
+      self.raf = requestAnimationFrame(loop);
+      if (now - last < 33) return;
+      last = now;
+      t += 0.033;
+      draw(now);
+    }
+
+    function start() {
+      if (self.raf) cancelAnimationFrame(self.raf);
+      if (!reduce) self.raf = requestAnimationFrame(loop);
+    }
+
+    function onMove(e) {
+      var r = canvas.getBoundingClientRect();
+      mx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
+    }
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    if (window.matchMedia('(pointer:fine)').matches) {
+      window.addEventListener('pointermove', onMove, { passive: true });
+    }
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          visible = e.isIntersecting;
+          if (visible) start();
+        });
+      }, { rootMargin: '120px' });
+      this.io.observe(canvas);
+    }
+    start();
+  }
+
+  /* ---------------- boot ---------------- */
+  function boot() {
+    var head = $('#siteHead');
+    var bar = $('.scroll-bar i');
+    function onScroll() {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      if (head) head.classList.toggle('is-stuck', y > 8);
+      if (bar) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    $$('[data-split]').forEach(function (el, i) { splitLine(el, 0.03, i * 0.05); });
+
+    var toObserve = $$('[data-reveal], [data-count]');
+    if ('IntersectionObserver' in window) {
+      var seen = new WeakSet();
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          io.unobserve(el);
+          if (el.hasAttribute('data-reveal')) el.classList.add('in');
+          if (el.hasAttribute('data-count') && !seen.has(el)) { seen.add(el); countUp(el); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+      toObserve.forEach(function (el) { io.observe(el); });
+    } else {
+      toObserve.forEach(function (el) { el.classList.add('in'); if (el.hasAttribute('data-count')) countUp(el); });
+    }
+
+    /* menu móvel */
+    var burger = $('#burger');
+    var menu = $('#mobileMenu');
+    function setMenu(open) {
+      if (!burger) return;
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      document.body.classList.toggle('menu-open', open);
+      if (open) {
+        var first = menu.querySelector('a');
+        if (first) first.focus({ preventScroll: true });
+      } else {
+        burger.focus({ preventScroll: true });
+      }
+    }
+    if (burger && menu) {
+      burger.addEventListener('click', function () {
+        setMenu(burger.getAttribute('aria-expanded') !== 'true');
+      });
+      menu.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false);
+      });
+    }
+
+    /* navegação ativa */
+    var navLinks = $$('.nav a');
+    var sections = navLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    if ('IntersectionObserver' in window && sections.length) {
+      var navIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          navLinks.forEach(function (a) {
+            if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current', 'true');
+            else a.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      sections.forEach(function (s) { navIO.observe(s); });
+    }
+
+    /* faq: uma aberta por vez */
+    $$('.faq-item').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (!d.open) return;
+        $$('.faq-item').forEach(function (o) { if (o !== d) o.open = false; });
+      });
+    });
+
+    /* mascotes */
+    var pets = [];
+    var heroCanvas = $('#heroPet');
+    if (heroCanvas) pets.push({ el: heroCanvas, inst: new Pet(heroCanvas, { accent: '#f472b6' }), getsPointer: true });
+    $$('canvas.pet-mini').forEach(function (c) {
+      var mini = new Pet(c, { accent: '#f472b6' });
+      mini.pointAt(c.width / 2, c.height / 2);
+      pets.push({ el: c, inst: mini, getsPointer: false });
+    });
+
+    var pending = null, rafBound = false;
+    function applyPointer(e) {
+      pets.forEach(function (p) {
+        if (!p.getsPointer) return;
+        var r = p.el.getBoundingClientRect();
+        if (r.width < 4) return;
+        if (r.bottom < -240 || r.top > window.innerHeight + 240) return;
+        p.inst.pointAt(e.clientX - r.left, e.clientY - r.top);
+      });
+    }
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;
+      pending = e;
+      if (rafBound) return;
+      rafBound = true;
+      requestAnimationFrame(function () {
+        rafBound = false;
+        if (pending) applyPointer(pending);
+      });
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () {
+      pets.forEach(function (p) { if (p.getsPointer) p.inst.clearPoint(); });
+    });
+
+    /* cartões com luz que segue o cursor */
+    $$('[data-spot]').forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
+    });
+
+    /* cena JURUÁ */
+    var jurua = $('#juruaScene');
+    if (jurua) new JuruaScene(jurua);
+
+    /* troca de idioma: refaz os títulos */
+    document.addEventListener('badclaude:lang', function () {
+      $$('[data-split][data-i18n]').forEach(function (el) {
+        el.classList.remove('is-split', 'in');
+        splitLine(el, 0.028, 0);
+      });
+    });
+  }
+
+  /* fallback do céu */
+  var fallbackCanvas = $('#skyFallback');
+  var fallback = fallbackCanvas ? new FallbackSky(fallbackCanvas) : null;
+  window.__stopFallback = function () { if (fallback) fallback.stop(); };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
 <script type="module">
+/* ============================================================
+   CENA THREE.JS — campo de estrelas, sólidos de wireframe em
+   névoa e câmera em parallax. Se o import falhar (file://) ou o
+   WebGL não existir, o fallback 2D permanece na tela.
+   ============================================================ */
 import * as THREE from 'three';
-import { BadClawd } from '../../assets/js/badclawd.js';
 
 const canvas = document.getElementById('sky');
-const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8));
-const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x0b0d10, 0.045);
-const cam = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
-cam.position.set(0, 0, 9);
-
-// a field of wireframe solids in depth
-const group = new THREE.Group();
-const geos = [
-  new THREE.IcosahedronGeometry(0.6, 0),
-  new THREE.OctahedronGeometry(0.7, 0),
-  new THREE.TetrahedronGeometry(0.8, 0),
-  new THREE.TorusGeometry(0.5, 0.16, 8, 18),
-];
-const colors = [0x6ee7ff, 0xa78bfa, 0xf472b6, 0x9aa6b8];
-for (let i = 0; i < 46; i++) {
-  const g = geos[i % geos.length];
-  const m = new THREE.MeshBasicMaterial({ color: colors[i % colors.length], wireframe: true, transparent: true, opacity: 0.24 });
-  const mesh = new THREE.Mesh(g, m);
-  const r = 4 + Math.random() * 11;
-  const a = Math.random() * Math.PI * 2;
-  mesh.position.set(Math.cos(a) * r, (Math.random() - 0.5) * 10, -Math.random() * 22);
-  mesh.scale.setScalar(0.6 + Math.random() * 1.6);
-  mesh.userData.spin = (Math.random() - 0.5) * 0.3;
-  group.add(mesh);
+let renderer = null;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+} catch (err) {
+  renderer = null;
 }
-scene.add(group);
 
-let scrollY = 0, mx = 0, my = 0;
-addEventListener('scroll', () => { scrollY = scrollY * 0.85 + window.scrollY * 0.15; }, { passive: true });
-addEventListener('pointermove', (e) => { mx = (e.clientX / innerWidth - 0.5) * 2; my = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+if (renderer) {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.setClearColor(0x0b0d10, 0);
 
-function resize() {
-  const w = innerWidth, h = innerHeight;
-  renderer.setSize(w, h, false);
-  cam.aspect = w / h; cam.updateProjectionMatrix();
-}
-addEventListener('resize', resize); resize();
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0b0d10, 0.032);
 
-let t = 0;
-function loop() {
-  requestAnimationFrame(loop);
-  t += 0.016;
-  group.rotation.y = t * 0.04 + scrollY * 0.0012;
-  group.position.z = scrollY * 0.006;
-  group.position.x = -mx * 0.6;
-  group.position.y = my * 0.4;
-  group.children.forEach((m) => { m.rotation.x += m.userData.spin * 0.01; m.rotation.y += m.userData.spin * 0.013; });
-  cam.position.x += (mx * 0.5 - cam.position.x) * 0.03;
-  cam.position.y += (-my * 0.35 - cam.position.y) * 0.03;
-  cam.lookAt(0, 0, 0);
-  renderer.render(scene, cam);
-}
-loop();
+  const cam = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
+  cam.position.set(0, 0, 10);
 
-document.querySelectorAll('canvas.pet').forEach((c) => {
-  const pet = new BadClawd(c, { variant: 'neon', accent: '#6ee7ff' });
-  pet.setState('idle');
-  addEventListener('pointermove', (e) => {
-    const r = c.getBoundingClientRect();
-    pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+  /* campo de estrelas */
+  const starCount = 1700;
+  const starPos = new Float32Array(starCount * 3);
+  const starCol = new Float32Array(starCount * 3);
+  const tint = new THREE.Color();
+  for (let i = 0; i < starCount; i++) {
+    const r = 16 + Math.random() * 42;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    starPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    starPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.72;
+    starPos[i * 3 + 2] = r * Math.cos(phi);
+    const pick = Math.random();
+    tint.set(pick > 0.86 ? 0xa7c7ff : pick > 0.7 ? 0xbfe9ff : 0xe8f4ff);
+    starCol[i * 3] = tint.r;
+    starCol[i * 3 + 1] = tint.g;
+    starCol[i * 3 + 2] = tint.b;
+  }
+  const starGeo = new THREE.BufferGeometry();
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  starGeo.setAttribute('color', new THREE.BufferAttribute(starCol, 3));
+  const starMat = new THREE.PointsMaterial({
+    size: 0.085,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true
+  });
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  /* núcleo de wireframe */
+  const coreGroup = new THREE.Group();
+  coreGroup.position.set(0, 0, -2.6);
+  const icoGeo = new THREE.IcosahedronGeometry(1.75, 1);
+  const coreEdges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(icoGeo),
+    new THREE.LineBasicMaterial({ color: 0x6ee7ff, transparent: true, opacity: 0.48 })
+  );
+  coreGroup.add(coreEdges);
+  const innerGeo = new THREE.IcosahedronGeometry(0.86, 0);
+  const innerEdges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(innerGeo),
+    new THREE.LineBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.55 })
+  );
+  coreGroup.add(innerEdges);
+  scene.add(coreGroup);
+
+  /* poeira próxima */
+  const dustCount = 520;
+  const dustPos = new Float32Array(dustCount * 3);
+  for (let i = 0; i < dustCount; i++) {
+    dustPos[i * 3] = (Math.random() - 0.5) * 34;
+    dustPos[i * 3 + 1] = (Math.random() - 0.5) * 22;
+    dustPos[i * 3 + 2] = 3 - Math.random() * 28;
+  }
+  const dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  const dustMat = new THREE.PointsMaterial({
+    color: 0x9fe8ff,
+    size: 0.045,
+    transparent: true,
+    opacity: 0.45,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true
+  });
+  const dust = new THREE.Points(dustGeo, dustMat);
+  scene.add(dust);
+
+  /* sólidos de wireframe */
+  const solids = new THREE.Group();
+  const geos = [
+    new THREE.IcosahedronGeometry(0.62, 0),
+    new THREE.OctahedronGeometry(0.72, 0),
+    new THREE.TetrahedronGeometry(0.8, 0),
+    new THREE.TorusGeometry(0.5, 0.16, 6, 16),
+    new THREE.BoxGeometry(0.7, 0.7, 0.7)
+  ];
+  const palette = [0x6ee7ff, 0xa78bfa, 0x9aa6b8, 0x6ee7ff, 0x9fe8ff, 0xf472b6];
+  for (let i = 0; i < 38; i++) {
+    const geo = geos[i % geos.length];
+    const mat = new THREE.MeshBasicMaterial({
+      color: palette[i % palette.length],
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1 + Math.random() * 0.18
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    const radius = 4.5 + Math.random() * 12;
+    const angle = Math.random() * Math.PI * 2;
+    mesh.position.set(
+      Math.cos(angle) * radius,
+      (Math.random() - 0.5) * 13,
+      -1.5 - Math.random() * 24
+    );
+    mesh.scale.setScalar(0.5 + Math.random() * 1.8);
+    mesh.userData.spin = {
+      x: (Math.random() - 0.5) * 0.32,
+      y: (Math.random() - 0.5) * 0.4
+    };
+    solids.add(mesh);
+  }
+  scene.add(solids);
+
+  /* interação */
+  let mx = 0, my = 0, scrollP = 0, tx = 0, ty = 0, tz = 10, lookY = 0;
+  window.addEventListener('pointermove', (e) => {
+    mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    my = (e.clientY / window.innerHeight - 0.5) * 2;
   }, { passive: true });
-});
+  function readScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    scrollP = max > 0 ? Math.min(1, (window.pageYOffset || document.documentElement.scrollTop) / max) : 0;
+  }
+  window.addEventListener('scroll', readScroll, { passive: true });
+  readScroll();
+
+  function resize() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    cam.aspect = w / h;
+    cam.updateProjectionMatrix();
+    if (reduce) renderOnce();
+  }
+  window.addEventListener('resize', resize, { passive: true });
+
+  function renderOnce() {
+    cam.updateProjectionMatrix();
+    renderer.render(scene, cam);
+  }
+
+  let t = 0;
+  let raf = 0;
+  let running = true;
+
+  function frame(now) {
+    if (!running) return;
+    raf = requestAnimationFrame(frame);
+    t = now * 0.001;
+
+    tx = mx * 1.35;
+    ty = -my * 0.9 + scrollP * 2.8;
+    tz = 10 - scrollP * 1.8;
+    lookY = scrollP * 0.9;
+
+    cam.position.x += (tx - cam.position.x) * 0.035;
+    cam.position.y += (ty - cam.position.y) * 0.035;
+    cam.position.z += (tz - cam.position.z) * 0.035;
+    cam.lookAt(0, lookY, -2);
+
+    stars.rotation.y = t * 0.004 + scrollP * 0.25;
+    stars.rotation.x = Math.sin(t * 0.05) * 0.02;
+    dust.rotation.y = -t * 0.01;
+    dust.position.y = -scrollP * 1.6;
+
+    coreGroup.rotation.y = t * 0.12 + scrollP * 0.6;
+    coreGroup.rotation.x = Math.sin(t * 0.22) * 0.16;
+    innerEdges.rotation.y = -t * 0.24;
+    innerEdges.rotation.z = t * 0.1;
+
+    solids.rotation.y = t * 0.018 + scrollP * 0.5;
+    solids.position.z = scrollP * 2.2;
+    solids.children.forEach((m) => {
+      m.rotation.x += m.userData.spin.x * 0.004;
+      m.rotation.y += m.userData.spin.y * 0.005;
+    });
+
+    renderer.render(scene, cam);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      running = false;
+      cancelAnimationFrame(raf);
+    } else if (!reduce) {
+      running = true;
+      raf = requestAnimationFrame(frame);
+    }
+  });
+
+  resize();
+  cam.position.set(0, 0, 10);
+  cam.lookAt(0, 0, -2);
+  renderOnce();
+  document.body.classList.add('webgl');
+  if (window.__stopFallback) window.__stopFallback();
+  if (!reduce) raf = requestAnimationFrame(frame);
+}
 </script>
 
 <!-- ASSINATURA FINAL — linha oficial do estúdio -->
@@ -130,6 +2348,8 @@ document.querySelectorAll('canvas.pet').forEach((c) => {
 </section>
 <style>
   .bc-assinatura {
+    position: relative;
+    z-index: 3;
     border-top: 1px solid currentColor;
     opacity: .72;
     padding: 22px clamp(16px, 4vw, 52px) 30px;
@@ -142,4 +2362,5 @@ document.querySelectorAll('canvas.pet').forEach((c) => {
   }
   .bc-assinatura p { margin: 0; }
 </style>
-</body></html>
+</body>
+</html>
