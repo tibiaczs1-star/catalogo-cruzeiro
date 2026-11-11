@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — 10 direções de arte</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0a0b; --card:#141416; --line:#26262a; --ink:#f2f2ef; --dim:#8c8c94; --acc:#f5c518;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 clamp(16px,3vw,32px); }
+  header { padding:clamp(40px,7vw,80px) 0 30px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(1.8rem,4.2vw,3.2rem); letter-spacing:-.04em; line-height:1.04; margin-bottom:14px; font-weight:600; }
+  .sub { color:var(--dim); font-size:15px; max-width:56ch; }
+  .hint { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--acc); letter-spacing:.1em; margin-top:18px; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin:0 0 60px; }
+  @media (max-width:980px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px) { .grid { grid-template-columns:1fr; } }
+  .card { background:var(--bg); display:flex; flex-direction:column; text-decoration:none; color:inherit; position:relative; transition:background .3s; }
+  .card:hover { background:#101012; }
+  .shot { aspect-ratio:16/10; overflow:hidden; border-bottom:1px solid var(--line); position:relative; background:#0d0d0f; }
+  .shot img { width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform .6s cubic-bezier(.22,1,.36,1); }
+  .card:hover .shot img { transform:scale(1.04); }
+  .body { padding:22px 22px 26px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .num { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; color:var(--dim); }
+  .name { font-size:19px; font-weight:600; letter-spacing:-.02em; }
+  .concept { font-size:13.5px; color:var(--dim); line-height:1.55; flex:1; }
+  .swatches { display:flex; gap:5px; margin-top:6px; }
+  .swatches i { width:18px; height:18px; border-radius:4px; display:block; border:1px solid rgba(255,255,255,.12); }
+  .meta { font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.08em; color:#5f5f66; margin-top:8px; }
+  .go { font-size:12px; font-weight:600; color:var(--acc); margin-top:10px; letter-spacing:.06em; }
+  footer { padding:0 0 70px; color:#5f5f66; font-size:12px; font-family:'JetBrains Mono',monospace; letter-spacing:.06em; }
+</style>
+  <link rel="stylesheet" href="choose.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Dez direções de arte</h1>
+    <p class="sub">Cada card é uma landing completa, funcional, com preços e contato. Mesmo conteúdo, linguagem visual diferente. Abra e me diga qual seguir.</p>
+    <p class="hint">ESCOLHA UMA — EU CONSOLIDO ELA E TRAIGO DE VOLTA OS EFEITOS QUE FUNCIONAVAM.</p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="01/">
+      <div class="shot"><img src="shots/01.png" alt="Direção 01" loading="lazy"></div>
+      <div class="body">
+        <span class="num">01</span><span class="name">Papel Suíço</span>
+        <p class="concept">Grade rígida, tipografia grotesca enorme, vermelho de sinalização. Arquitetura, não interface. O mascote vira pictograma.</p>
+        <div class="swatches"><i style="background:#f2f1ee"></i><i style="background:#0a0a0a"></i><i style="background:#e3271c"></i></div>
+        <div class="meta">Inter Tight · claro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="02/">
+      <div class="shot"><img src="shots/02.png" alt="Direção 02" loading="lazy"></div>
+      <div class="body">
+        <span class="num">02</span><span class="name">Terminal Vivo</span>
+        <p class="concept">O site é um shell. Mono em tudo, cursores piscando, o mascote desenhado em traço neon e respondendo ao cursor.</p>
+        <div class="swatches"><i style="background:#07100c"></i><i style="background:#42f58a"></i><i style="background:#c8f2d8"></i></div>
+        <div class="meta">JetBrains Mono · escuro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="03/">
+      <div class="shot"><img src="shots/03.png" alt="Direção 03" loading="lazy"></div>
+      <div class="body">
+        <span class="num">03</span><span class="name">Editorial Quente</span>
+        <p class="concept">Papel creme, serifa grande, margens largas. O espaço vazio faz o trabalho. Mascote a traço, como ilustração de livro.</p>
+        <div class="swatches"><i style="background:#f6efe3"></i><i style="background:#231a12"></i><i style="background:#7c2a24"></i></div>
+        <div class="meta">Instrument Serif · claro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="04/">
+      <div class="shot"><img src="shots/04.png" alt="Direção 04" loading="lazy"></div>
+      <div class="body">
+        <span class="num">04</span><span class="name">Espacial 3D</span>
+        <p class="concept">Three.js com profundidade real, câmera em parallax, sólidos de wireframe em névoa. O mais impactante tecnicamente.</p>
+        <div class="swatches"><i style="background:#0b0d10"></i><i style="background:#6ee7ff"></i><i style="background:#a78bfa"></i></div>
+        <div class="meta">Inter · Three.js</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="05/">
+      <div class="shot"><img src="shots/05.png" alt="Direção 05" loading="lazy"></div>
+      <div class="body">
+        <span class="num">05</span><span class="name">Brutalista</span>
+        <p class="concept">Blocos pretos grossos, bordas de 3px, tipografia condensada, zero arredondamento. Agressivo e memorável.</p>
+        <div class="swatches"><i style="background:#f0f0ec"></i><i style="background:#000000"></i><i style="background:#ff4d3d"></i></div>
+        <div class="meta">Archivo Black · claro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="06/">
+      <div class="shot"><img src="shots/06.png" alt="Direção 06" loading="lazy"></div>
+      <div class="body">
+        <span class="num">06</span><span class="name">Neon Noturno</span>
+        <p class="concept">Escuro com ciano e magenta, glow, grade em perspectiva. É o território que já erramos — aqui com contenção e hierarquia.</p>
+        <div class="swatches"><i style="background:#06070d"></i><i style="background:#00e5ff"></i><i style="background:#ff3d9a"></i></div>
+        <div class="meta">Sora · escuro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="07/">
+      <div class="shot"><img src="shots/07.png" alt="Direção 07" loading="lazy"></div>
+      <div class="body">
+        <span class="num">07</span><span class="name">Tátil / Clay</span>
+        <p class="concept">Tons de massa, sombras longas e macias, tudo modelado à mão. O mascote em plateau, com peso. Acolhedor.</p>
+        <div class="swatches"><i style="background:#e9e2d8"></i><i style="background:#2b241d"></i><i style="background:#c2683c"></i></div>
+        <div class="meta">Nunito · claro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="08/">
+      <div class="shot"><img src="shots/08.png" alt="Direção 08" loading="lazy"></div>
+      <div class="body">
+        <span class="num">08</span><span class="name">Grid Técnico</span>
+        <p class="concept">Fundo branco, réguas finas, numeração, ficha técnica do mascote com cotas. Parece desenho de engenharia.</p>
+        <div class="swatches"><i style="background:#ffffff"></i><i style="background:#111820"></i><i style="background:#dfe4ea"></i></div>
+        <div class="meta">IBM Plex Mono · claro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="09/">
+      <div class="shot"><img src="shots/09.png" alt="Direção 09" loading="lazy"></div>
+      <div class="body">
+        <span class="num">09</span><span class="name">Cinemático</span>
+        <p class="concept">Preto profundo, letterbox, poeira no feixe, cenas em atos. Tipografia fina sobreposta. O mascote como personagem.</p>
+        <div class="swatches"><i style="background:#07080a"></i><i style="background:#f2f2ef"></i><i style="background:#f5c518"></i></div>
+        <div class="meta">Inter Light · escuro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+
+    <a class="card" href="10/">
+      <div class="shot"><img src="shots/10.png" alt="Direção 10" loading="lazy"></div>
+      <div class="body">
+        <span class="num">10</span><span class="name">Kinetic Type</span>
+        <p class="concept">O texto é a interface: palavras gigantes, contorno e sólido, fita correndo. Amarelo de sinalização. Máximo impacto.</p>
+        <div class="swatches"><i style="background:#141414"></i><i style="background:#f5f5f2"></i><i style="background:#f5c518"></i></div>
+        <div class="meta">Anton · escuro</div>
+        <span class="go">Abrir →</span>
+      </div>
+    </a>
+  </div>
+
+  <footer>BADCLAUDE · 10 direções · todas funcionais · todas com o mascote procedural</footer>
+</div>
+<script src="choose.js"></script>
+<script>
+(function () {
+  // qualquer card abre a cinemática do mascote; o escolhido é sempre o último
+  document.querySelectorAll('a.card[href]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (!window.BadChoose) return;
+      e.preventDefault();
+      var id = (card.getAttribute('href') || '').replace(/\D/g, '').padStart(2, '0');
+      window.BadChoose.open({ id: id });
+    });
+  });
+})();
+</script>
+
+<section class="bc-assinatura" aria-label="Condições e assinatura"><p>Preços variados — depende da demanda e oferta do mercado de pontes. O cliente pode ter seu dinheiro de volta do que não usou em contrato. CZSLHBS · Antônio Clóvis · Acre · Cruzeiro do Sul — (fé em Deus e justa é a batalha do guerreiro)</p></section>
+<style>.bc-assinatura{border-top:1px solid #26262a;opacity:.72;padding:22px 16px 30px;text-align:center;font-size:11.5px;line-height:1.7;max-width:92ch;margin:0 auto}</style>
+</body>
+</html>

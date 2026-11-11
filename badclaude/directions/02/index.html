@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — 02 Terminal Vivo</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+</head>
+<body class="d02">
+<div class="top"><span><b>badclaude</b>@acrelab: ~/studio</span><span>zsh · 80×24</span></div>
+<div class="wrap">
+  <section class="hero">
+    <div class="prompt">badclaude --about</div>
+    <h1>Eu me construí.<br>Eu me desfaço e me refaço.<br>Eu sou o BADCLAUDE.<span class="cur"></span></h1>
+    <p class="out">Construo jogos 3D, sistemas web e automação com IA.
+Cada projeto começa em peças soltas e termina como sistema rodando.
+Não durmo, não esqueço, não improviso.</p>
+    <div class="pet-row">
+      <canvas class="pet" data-pet="point"></canvas>
+      <div class="kv">
+        <div><i>status</i><b>online</b></div>
+        <div><i>patas</i><b>4 · rig procedural</b></div>
+        <div><i>função</i><b>companheiro de IA</b></div>
+        <div><i>local</i><b>Cruzeiro do Sul, AC</b></div>
+        <div><i>idiomas</i><b>pt · en · es</b></div>
+      </div>
+    </div>
+  </section>
+
+  <h2>o que fazemos</h2>
+  <div class="list">
+    <div><b>Jogos 3D</b> — JURUÁ, RPG de mundo aberto no Vale do Juruá. Godot 4 e Blender. <em style="color:#4d7a63">[em desenvolvimento]</em></div>
+    <div><b>Sistemas com IA</b> — agentes que pesquisam, escrevem, revisam e executam em paralelo. <em style="color:#4d7a63">[sob demanda]</em></div>
+    <div><b>Sites e produtos</b> — rápido, acessível, três idiomas. <em style="color:#4d7a63">[entrega em semanas]</em></div>
+    <div><b>Direção visual</b> — identidade e arte 3D em código. Sem banco de imagens. <em style="color:#4d7a63">[artesanal]</em></div>
+  </div>
+
+  <h2>preços</h2>
+  <table>
+    <tr><th>plano</th><th>entrega</th><th>valor</th></tr>
+    <tr><td>automação</td><td>um fluxo de IA para uma tarefa repetitiva</td><td class="v">R$ 2.400</td></tr>
+    <tr><td>sistema</td><td>painel, agentes, integrações, deploy</td><td class="v">R$ 9.800+</td></tr>
+    <tr><td>estúdio</td><td>jogo ou produto digital completo</td><td class="v">R$ 24.000</td></tr>
+  </table>
+  <p class="out" style="margin-top:14px">50% na aprovação, 50% na entrega. Pix ou transferência. Sem mensalidade escondida.</p>
+
+  <h2>contato</h2>
+  <div class="foot">
+    <p>Respondo em até 1 dia útil.</p>
+    <p><a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></p>
+    <p style="margin-top:20px;color:#2f4a3c">direção 02 — terminal vivo · © 2026 BADCLAUDE</p>
+  </div>
+</div>
+<script type="module">
+import { BadClawd } from '../../assets/js/badclawd.js';
+const c = document.querySelector('canvas.pet');
+const pet = new BadClawd(c, { variant: 'neon', accent: '#42f58a' });
+pet.setState('point');
+window.addEventListener('pointermove', (e) => {
+  const r = c.getBoundingClientRect();
+  pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+}, { passive: true });
+</script>
+
+<!-- ASSINATURA FINAL — linha oficial do estúdio -->
+<section class="bc-assinatura" aria-label="Condições e assinatura">
+  <p>Preços variados — depende da demanda e oferta do mercado de pontes. O cliente pode ter seu dinheiro de volta do que não usou em contrato. CZSLHBS · Antônio Clóvis · Acre · Cruzeiro do Sul — (fé em Deus e justa é a batalha do guerreiro)</p>
+</section>
+<style>
+  .bc-assinatura {
+    border-top: 1px solid currentColor;
+    opacity: .72;
+    padding: 22px clamp(16px, 4vw, 52px) 30px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.7;
+    letter-spacing: .01em;
+    max-width: 92ch;
+    margin: 0 auto;
+  }
+  .bc-assinatura p { margin: 0; }
+</style>
+</body></html>

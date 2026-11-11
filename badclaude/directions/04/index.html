@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — 04 Espacial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="../more.css">
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.1/build/three.module.js"}}</script>
+</head>
+<body class="d04">
+<div class="sky"><canvas id="sky"></canvas></div>
+<div class="veil"></div>
+
+<div class="page">
+  <div class="wrap">
+    <header class="top">
+      <div class="brand"><canvas class="pet" data-pet="idle"></canvas> BADCLAUDE</div>
+      <nav><a href="#fazer">o que fazemos</a><a href="#precos">preços</a><a href="#contato">contato</a></nav>
+    </header>
+
+    <section class="hero">
+      <h1>Eu me construí.<br><span class="g">Eu me desfaço e me refaço.</span></h1>
+      <p class="lead">Sou o BADCLAUDE. Construo jogos 3D, sistemas web e automação com IA. Cada projeto começa em peças soltas e termina como sistema rodando.</p>
+      <div class="btns"><a class="b b1" href="#precos">Ver preços</a><a class="b b2" href="#contato">Falar comigo</a></div>
+    </section>
+
+    <section class="sec" id="fazer">
+      <h2>Quatro frentes, um padrão.</h2>
+      <div class="cards">
+        <div class="card"><span class="n">01 / JOGOS</span><h3>Jogos 3D</h3><p>JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4 e Blender.</p></div>
+        <div class="card"><span class="n">02 / IA</span><h3>Sistemas com IA</h3><p>Agentes que pesquisam, escrevem, revisam e executam em paralelo. Automação com logs e revisão humana.</p></div>
+        <div class="card"><span class="n">03 / WEB</span><h3>Sites e produtos</h3><p>Páginas que carregam rápido, painéis que funcionam, três idiomas e acessibilidade real.</p></div>
+        <div class="card"><span class="n">04 / ARTE</span><h3>Direção visual</h3><p>Identidade, movimento e arte 3D feitos em código. Sem banco de imagens.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="precos">
+      <h2>Escolha a escala.</h2>
+      <div class="pl">
+        <div class="p"><span class="k">ENTRADA</span><h3>Automação</h3><div class="v">R$ 2.400</div><ul><li>Diagnóstico do processo</li><li>Um fluxo automatizado</li><li>Integração WhatsApp</li><li>Documentação</li></ul><a href="#contato">Pedir orçamento →</a></div>
+        <div class="p hi"><span class="k">MAIS PEDIDO</span><h3>Sistema</h3><div class="v">R$ 9.800</div><ul><li>Tudo do Automação</li><li>Painel administrativo</li><li>Agentes especialistas</li><li>Deploy e monitoramento</li><li>Suporte 30 dias</li></ul><a href="#contato">Pedir orçamento →</a></div>
+        <div class="p"><span class="k">SOB MEDIDA</span><h3>Estúdio</h3><div class="v">R$ 24.000</div><ul><li>Descoberta e protótipo</li><li>Arte 3D e trilha</li><li>Engenharia e otimização</li><li>Acompanhamento</li></ul><a href="#contato">Conversar →</a></div>
+      </div>
+    </section>
+
+    <section class="cta" id="contato">
+      <h2>Conte o problema em duas linhas.</h2>
+      <div class="btns"><a class="b b1" href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></div>
+    </section>
+
+    <footer class="foot"><span>© 2026 BADCLAUDE</span><span>Cruzeiro do Sul · Acre</span><span>direção 04 — espacial</span></footer>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { BadClawd } from '../../assets/js/badclawd.js';
+
+const canvas = document.getElementById('sky');
+const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8));
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0b0d10, 0.045);
+const cam = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+cam.position.set(0, 0, 9);
+
+// a field of wireframe solids in depth
+const group = new THREE.Group();
+const geos = [
+  new THREE.IcosahedronGeometry(0.6, 0),
+  new THREE.OctahedronGeometry(0.7, 0),
+  new THREE.TetrahedronGeometry(0.8, 0),
+  new THREE.TorusGeometry(0.5, 0.16, 8, 18),
+];
+const colors = [0x6ee7ff, 0xa78bfa, 0xf472b6, 0x9aa6b8];
+for (let i = 0; i < 46; i++) {
+  const g = geos[i % geos.length];
+  const m = new THREE.MeshBasicMaterial({ color: colors[i % colors.length], wireframe: true, transparent: true, opacity: 0.24 });
+  const mesh = new THREE.Mesh(g, m);
+  const r = 4 + Math.random() * 11;
+  const a = Math.random() * Math.PI * 2;
+  mesh.position.set(Math.cos(a) * r, (Math.random() - 0.5) * 10, -Math.random() * 22);
+  mesh.scale.setScalar(0.6 + Math.random() * 1.6);
+  mesh.userData.spin = (Math.random() - 0.5) * 0.3;
+  group.add(mesh);
+}
+scene.add(group);
+
+let scrollY = 0, mx = 0, my = 0;
+addEventListener('scroll', () => { scrollY = scrollY * 0.85 + window.scrollY * 0.15; }, { passive: true });
+addEventListener('pointermove', (e) => { mx = (e.clientX / innerWidth - 0.5) * 2; my = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  cam.aspect = w / h; cam.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+let t = 0;
+function loop() {
+  requestAnimationFrame(loop);
+  t += 0.016;
+  group.rotation.y = t * 0.04 + scrollY * 0.0012;
+  group.position.z = scrollY * 0.006;
+  group.position.x = -mx * 0.6;
+  group.position.y = my * 0.4;
+  group.children.forEach((m) => { m.rotation.x += m.userData.spin * 0.01; m.rotation.y += m.userData.spin * 0.013; });
+  cam.position.x += (mx * 0.5 - cam.position.x) * 0.03;
+  cam.position.y += (-my * 0.35 - cam.position.y) * 0.03;
+  cam.lookAt(0, 0, 0);
+  renderer.render(scene, cam);
+}
+loop();
+
+document.querySelectorAll('canvas.pet').forEach((c) => {
+  const pet = new BadClawd(c, { variant: 'neon', accent: '#6ee7ff' });
+  pet.setState('idle');
+  addEventListener('pointermove', (e) => {
+    const r = c.getBoundingClientRect();
+    pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+  }, { passive: true });
+});
+</script>
+
+<!-- ASSINATURA FINAL — linha oficial do estúdio -->
+<section class="bc-assinatura" aria-label="Condições e assinatura">
+  <p>Preços variados — depende da demanda e oferta do mercado de pontes. O cliente pode ter seu dinheiro de volta do que não usou em contrato. CZSLHBS · Antônio Clóvis · Acre · Cruzeiro do Sul — (fé em Deus e justa é a batalha do guerreiro)</p>
+</section>
+<style>
+  .bc-assinatura {
+    border-top: 1px solid currentColor;
+    opacity: .72;
+    padding: 22px clamp(16px, 4vw, 52px) 30px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.7;
+    letter-spacing: .01em;
+    max-width: 92ch;
+    margin: 0 auto;
+  }
+  .bc-assinatura p { margin: 0; }
+</style>
+</body></html>

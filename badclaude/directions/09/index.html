@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BADCLAUDE — Estúdio de software na Amazônia | Jogos 3D, IA e web</title>
+<meta name="description" content="BADCLAUDE é um estúdio de software indie em Cruzeiro do Sul, Acre. Jogos 3D como JURUÁ, sistemas web com agentes de IA e sites de alta performance — feitos à mão na Amazônia.">
+<meta name="theme-color" content="#060606">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://badclaude.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BADCLAUDE">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BADCLAUDE — Eu me construí. Eu me desfaço e me refaço.">
+<meta property="og:description" content="Estúdio de software indie em Cruzeiro do Sul, Acre. Jogos 3D, sistemas com IA e sites de alta performance.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BADCLAUDE — Estúdio de software na Amazônia">
+<meta name="twitter:description" content="Jogos 3D, sistemas web com agentes de IA e sites de alta performance. Cruzeiro do Sul · Acre.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060606'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23e8e2d6' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23e8e2d6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   BADCLAUDE — DIREÇÃO 09 · CINEMÁTICO
+   Preto profundo, letterbox, poeira no feixe de luz, atos,
+   tipografia fina sobreposta. Tudo desenhado em CSS/SVG/canvas.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg: #060606;
+  --ink: #ece8e0;
+  --muted: #a49e95;
+  --dim: #8d8780;
+  --bone: #e8e2d6;
+  --warm: #c9a983;
+  --line: rgba(236, 232, 224, .16);
+  --line-soft: rgba(236, 232, 224, .075);
+  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
+  --bar: 34px;
+  --gut: clamp(18px, 4.4vw, 64px);
+  --maxw: 1360px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar) + 78px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: .002em;
+  overflow-x: hidden;
+  padding-top: var(--bar);
+  padding-bottom: var(--bar);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--bone); color: #060606; }
+
+:focus-visible {
+  outline: 1px solid var(--bone);
+  outline-offset: 4px;
+}
+
+.skip {
+  position: fixed; left: 14px; top: -80px; z-index: 300;
+  padding: 12px 18px; background: var(--bone); color: #060606;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; transition: top .25s ease;
+}
+.skip:focus { top: calc(var(--bar) + 10px); }
+
+/* ---------------- camadas fixas: feixe, poeira, grão, letterbox ---------------- */
+
+.beam {
+  position: fixed; top: -12vh; left: 50%; width: min(1240px, 132vw); height: 124vh;
+  z-index: 0; pointer-events: none; transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(232, 226, 214, .085), rgba(232, 226, 214, .028) 44%, transparent 72%);
+  clip-path: polygon(36% 0, 64% 0, 92% 100%, 8% 100%);
+  filter: blur(26px);
+  animation: beamDrift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes beamDrift {
+  from { transform: translateX(-50%) rotate(-1.6deg); }
+  to   { transform: translateX(-51.5%) rotate(2.2deg); }
+}
+
+#dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: .85; }
+
+.grain {
+  position: fixed; inset: 0; z-index: 95; pointer-events: none; opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+.vignette {
+  position: fixed; inset: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(130% 88% at 50% 42%, transparent 42%, rgba(0, 0, 0, .62) 100%);
+}
+
+.bar { position: fixed; left: 0; right: 0; height: var(--bar); background: #000; z-index: 120; pointer-events: none; }
+.bar.top { top: 0; border-bottom: 1px solid rgba(236, 232, 224, .07); }
+.bar.bot { bottom: 0; border-top: 1px solid rgba(236, 232, 224, .07); }
+
+.progress { position: fixed; left: 0; right: 0; top: calc(var(--bar) - 1px); height: 1px; z-index: 121; pointer-events: none; }
+.progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, rgba(232,226,214,.25), var(--bone)); box-shadow: 0 0 12px rgba(232,226,214,.5); }
+
+/* ---------------- cabeçalho ---------------- */
+
+.site-head {
+  position: fixed; top: var(--bar); left: 0; right: 0; z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background .45s ease, border-color .45s ease, backdrop-filter .45s ease;
+}
+.site-head.is-stuck {
+  background: rgba(6, 6, 6, .84);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--line-soft);
+}
+.head-in {
+  max-width: var(--maxw); margin: 0 auto; padding: 15px var(--gut);
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .3em; color: var(--ink); }
+.brand .mark {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--bone);
+  box-shadow: 0 0 14px rgba(232, 226, 214, .85);
+  animation: markPulse 5s ease-in-out infinite;
+}
+@keyframes markPulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+.nav { display: flex; gap: clamp(14px, 2vw, 30px); }
+.nav a {
+  position: relative; padding: 7px 0;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); transition: color .35s ease;
+}
+.nav a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 1px; height: 1px;
+  background: var(--bone); transform: scaleX(0); transform-origin: left;
+  transition: transform .5s cubic-bezier(.19, 1, .22, 1);
+}
+.nav a:hover { color: var(--ink); }
+.nav a:hover::after { transform: scaleX(1); }
+
+.burger {
+  display: none; align-items: center; gap: 10px;
+  background: none; border: 1px solid var(--line); padding: 10px 14px; cursor: pointer;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
+  transition: border-color .3s, color .3s;
+}
+.burger:hover { color: var(--ink); border-color: var(--bone); }
+.burger i { display: block; width: 16px; height: 1px; background: currentColor; position: relative; transition: transform .4s ease; }
+.burger i::before, .burger i::after { content: ''; position: absolute; left: 0; width: 16px; height: 1px; background: currentColor; transition: transform .4s ease, opacity .3s; }
+.burger i::before { top: -5px; }
+.burger i::after { top: 5px; }
+.burger[aria-expanded="true"] i { background: transparent; }
+.burger[aria-expanded="true"] i::before { transform: translateY(5px) rotate(45deg); }
+.burger[aria-expanded="true"] i::after { transform: translateY(-5px) rotate(-45deg); }
+
+/* ---------------- menu mobile ---------------- */
+
+.menu {
+  position: fixed; inset: 0; z-index: 112; background: #060606;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--bar) + 40px) var(--gut) calc(var(--bar) + 30px);
+  opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s;
+}
+.menu.open { opacity: 1; visibility: visible; }
+body.menu-open .site-head { z-index: 130; background: #060606; border-bottom-color: transparent; }
+body.menu-open .site-head .nav, body.menu-open .site-head .brand .mark { visibility: hidden; }
+body.menu-open .burger { color: var(--ink); border-color: var(--bone); }
+.menu ol { list-style: none; margin: 0; padding: 0; }
+.menu a {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: 14px 0; border-bottom: 1px solid var(--line-soft);
+  font-size: clamp(1.5rem, 7vw, 2.4rem); font-weight: 200; letter-spacing: -.03em; line-height: 1.1;
+  transition: color .3s, padding-left .4s cubic-bezier(.19, 1, .22, 1);
+}
+.menu a:hover, .menu a:focus-visible { color: var(--bone); padding-left: 8px; }
+.menu a span { font-family: var(--mono); font-size: 9.5px; letter-spacing: .24em; color: var(--warm); }
+.menu .menu-foot { margin-top: 30px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; display: grid; gap: 8px; }
+
+/* ---------------- trilho de atos ---------------- */
+
+.rail { position: fixed; left: 22px; top: 50%; transform: translateY(-50%); z-index: 90; display: none; }
+.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+.rail a {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dim); transition: color .4s;
+}
+.rail a span { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .5s cubic-bezier(.19,1,.22,1), opacity .4s; }
+.rail a:hover span, .rail a.is-active span { max-width: 120px; opacity: 1; }
+.rail a i { width: 5px; height: 5px; border-radius: 50%; background: #2b2a28; transition: all .45s ease; flex: 0 0 auto; }
+.rail a.is-active { color: var(--bone); }
+.rail a.is-active i { background: var(--bone); box-shadow: 0 0 10px rgba(232, 226, 214, .9); transform: scale(1.5); }
+
+/* ---------------- estrutura dos atos ---------------- */
+
+main { position: relative; z-index: 5; }
+.act { position: relative; padding: clamp(68px, 11vh, 142px) 0; }
+.act + .act { border-top: 1px solid var(--line-soft); }
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); position: relative; }
+
+.act-tag {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--warm); margin-bottom: clamp(26px, 4.4vh, 48px);
+}
+.act-tag::before { content: ''; width: 34px; height: 1px; background: currentColor; opacity: .7; }
+.act-tag .n { color: var(--dim); }
+
+h2 { font-weight: 200; letter-spacing: -.04em; line-height: 1.06; text-wrap: balance; }
+h2 em { font-family: var(--serif); font-style: italic; font-weight: 300; letter-spacing: -.015em; }
+
+.ghost {
+  position: absolute; right: -1vw; top: -.06em; z-index: -1; pointer-events: none; user-select: none;
+  font-family: var(--serif); font-size: clamp(110px, 21vw, 300px); line-height: .7;
+  color: transparent; -webkit-text-stroke: 1px rgba(236, 232, 224, .055);
+  letter-spacing: -.02em;
+}
+
+/* ---------------- animações base ---------------- */
+
+.rb-char { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .09em; margin-bottom: -.09em; }
+.rb-word { display: inline-block; white-space: nowrap; }
+.rb-char-i {
+  display: inline-block; opacity: 0; transform: translateY(110%);
+  transition: transform .95s cubic-bezier(.19, 1, .22, 1), opacity .75s ease;
+  will-change: transform;
+}
+.rb-char-i.rb-in { opacity: 1; transform: none; }
+.rb-space { width: .26em; opacity: 0; }
+[data-split-scroll] { overflow: hidden; }
+
+[data-reveal] {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1s ease, transform 1.1s cubic-bezier(.19, 1, .22, 1);
+  transition-delay: var(--d, 0s);
+}
+[data-reveal].in { opacity: 1; transform: none; }
+
+/* ---------------- HERO / AT0 ---------------- */
+
+.hero { min-height: calc(100svh - var(--bar) * 2); display: flex; align-items: center; padding-top: clamp(30px, 7vh, 80px); }
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(0, .78fr);
+  gap: clamp(24px, 5vw, 84px); align-items: center; width: 100%;
+}
+.hero-copy { min-width: 0; }
+.hero-eyebrow {
+  display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: clamp(24px, 4vh, 40px);
+}
+.hero-eyebrow .live { color: var(--warm); display: inline-flex; align-items: center; gap: 8px; }
+.hero-eyebrow .live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--warm); animation: markPulse 2.6s infinite; }
+
+.hero-title {
+  margin: 0; font-weight: 200; letter-spacing: -.05em; line-height: .97;
+  font-size: clamp(2.45rem, 7vw, 6rem);
+}
+.hero-title .ln { display: block; }
+.hero-title em { font-family: var(--serif); font-style: italic; font-weight: 300; color: var(--bone); font-size: 1.03em; letter-spacing: -.025em; }
+
+.hero-lead {
+  margin: clamp(22px, 3.4vh, 34px) 0 0; max-width: 46ch;
+  color: var(--muted); font-size: clamp(.98rem, 1.15vw, 1.1rem); line-height: 1.75;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; margin-top: clamp(28px, 4.4vh, 44px); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 15px 26px; min-height: 46px;
+  border: 1px solid var(--line); background: transparent; cursor: pointer;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+  transition: background .45s ease, color .45s ease, border-color .45s ease, transform .45s ease;
+}
+.btn:hover, .btn:focus-visible { background: var(--bone); color: #060606; border-color: var(--bone); }
+.btn .arr { transition: transform .45s cubic-bezier(.19,1,.22,1); }
+.btn:hover .arr { transform: translateX(5px); }
+.btn.ghost-btn { border-color: transparent; padding-left: 4px; padding-right: 4px; color: var(--muted); }
+.btn.ghost-btn:hover { background: transparent; color: var(--ink); }
+
+.slate {
+  display: inline-flex; flex-wrap: wrap; gap: 0; margin-top: clamp(30px, 5vh, 52px);
+  border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+}
+.slate span { padding: 8px 14px; border-right: 1px solid var(--line-soft); }
+.slate span:first-child { padding-left: 0; }
+.slate span:last-child { border-right: 0; }
+
+.stage { position: relative; aspect-ratio: 1 / 1.04; display: grid; place-items: end center; isolation: isolate; min-width: 0; }
+.stage::before {
+  content: ''; position: absolute; left: 4%; right: 4%; bottom: 16%; height: 70%; z-index: -1;
+  background: radial-gradient(50% 50% at 50% 52%, rgba(232, 226, 214, .55), rgba(232, 226, 214, .13) 46%, transparent 74%);
+  filter: blur(30px);
+  animation: glow 9s ease-in-out infinite;
+}
+@keyframes glow { 0%, 100% { opacity: .82; } 50% { opacity: 1; } }
+.stage::after {
+  content: ''; position: absolute; left: 10%; right: 10%; bottom: 13.5%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 226, 214, .4), transparent);
+}
+.stage canvas { width: 100%; height: 100%; }
+.stage .cap {
+  position: absolute; left: 0; right: 0; bottom: 0; text-align: center;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--dim);
+}
+
+.scroll-cue {
+  position: absolute; left: 0; bottom: -6px; display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--dim);
+}
+.scroll-cue .line { position: relative; width: 46px; height: 1px; background: var(--line); overflow: hidden; }
+.scroll-cue .line::after { content: ''; position: absolute; inset: 0; background: var(--bone); transform: translateX(-100%); animation: cue 3.4s ease-in-out infinite; }
+@keyframes cue { 0% { transform: translateX(-100%); } 55%, 100% { transform: translateX(100%); } }
+
+/* ---------------- AT1 manifesto ---------------- */
+
+.manifest { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, .55fr); gap: clamp(30px, 6vw, 90px); }
+.big-stmt {
+  margin: 0; font-size: clamp(1.42rem, 3.15vw, 2.75rem); font-weight: 200; line-height: 1.22; letter-spacing: -.032em;
+}
+.big-stmt em { font-family: var(--serif); font-style: italic; color: var(--bone); font-size: 1.04em; }
+.mantras { list-style: none; margin: clamp(34px, 6vh, 58px) 0 0; padding: 0; border-top: 1px solid var(--line-soft); }
+.mantras li {
+  display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 18px;
+  padding: 16px 0; border-bottom: 1px solid var(--line-soft);
+  color: var(--muted); font-size: clamp(.94rem, 1.1vw, 1.02rem);
+}
+.mantras li .i { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--warm); padding-top: 4px; }
+.mantras li b { font-weight: 400; color: var(--ink); }
+
+.dossier { border-top: 1px solid var(--line); padding-top: 18px; }
+.dossier h3 { margin: 0 0 18px; font-family: var(--mono); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--warm); font-weight: 400; }
+.dossier dl { margin: 0; display: grid; gap: 0; }
+.dossier .row { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+.dossier dt { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); padding-top: 3px; }
+.dossier dd { margin: 0; color: var(--ink); text-align: right; font-weight: 300; }
+
+/* ---------------- AT2 frentes ---------------- */
+
+.section-top { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(20px, 4vw, 60px); align-items: end; margin-bottom: clamp(34px, 6vh, 58px); }
+.section-top h2 { font-size: clamp(1.7rem, 3.7vw, 3.05rem); margin: 0; }
+.section-top p { margin: 0 0 8px; color: var(--muted); font-size: 14.5px; line-height: 1.72; max-width: 46ch; }
+
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+.card {
+  position: relative; background: var(--bg); padding: clamp(22px, 3vw, 40px);
+  display: flex; flex-direction: column; gap: 12px; min-height: clamp(250px, 27vw, 330px);
+  transition: background .5s ease;
+}
+.card:hover { background: #0a0a0a; }
+.card .art { height: 66px; color: rgba(232, 226, 214, .22); transition: color .55s ease, transform .7s cubic-bezier(.19,1,.22,1); }
+.card:hover .art { color: rgba(232, 226, 214, .52); transform: translateY(-2px); }
+.card h3 { margin: 0; font-weight: 400; font-size: clamp(1.1rem, 1.7vw, 1.38rem); letter-spacing: -.02em; display: flex; align-items: baseline; gap: 12px; }
+.card h3 .idx { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; color: var(--warm); font-weight: 400; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.72; max-width: 44ch; }
+.card .tag { margin-top: auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); padding-top: 14px; border-top: 1px solid var(--line-soft); }
+.card .tag b { color: var(--warm); font-weight: 400; }
+
+/* ---------------- AT3 números ---------------- */
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line-soft); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+.stat { background: var(--bg); padding: clamp(22px, 3.4vw, 42px) clamp(14px, 2vw, 30px); }
+.stat .v { display: flex; align-items: baseline; gap: 7px; font-weight: 200; font-size: clamp(2.1rem, 4.6vw, 3.7rem); letter-spacing: -.045em; line-height: 1; }
+.stat .v small { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--warm); }
+.stat .l { margin-top: 14px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); line-height: 1.7; }
+
+/* ---------------- AT4 juruá ---------------- */
+
+.jurua-grid { display: grid; grid-template-columns: minmax(0, 1.42fr) minmax(0, .58fr); gap: clamp(24px, 4vw, 58px); align-items: start; }
+
+.frame { position: relative; border: 1px solid var(--line); background: #08080a; overflow: hidden; }
+.frame .scene-svg { width: 100%; height: auto; }
+.frame .corner { position: absolute; width: 14px; height: 14px; border: 1px solid rgba(232,226,214,.5); z-index: 2; }
+.frame .corner.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.frame .corner.tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.frame .corner.bl { bottom: 44px; left: 10px; border-right: 0; border-top: 0; }
+.frame .corner.br { bottom: 44px; right: 10px; border-left: 0; border-top: 0; }
+.frame .cap {
+  display: flex; justify-content: space-between; gap: 10px; padding: 10px 12px;
+  border-top: 1px solid var(--line-soft); font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+}
+.frame .rec { color: var(--warm); display: inline-flex; align-items: center; gap: 7px; }
+.frame .rec::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: markPulse 2.4s infinite; }
+
+.river-pet { position: absolute; left: 4%; bottom: 40px; width: 21%; max-width: 190px; aspect-ratio: 1 / 1; z-index: 2; filter: drop-shadow(0 0 26px rgba(232,226,214,.22)); }
+
+.jurua-copy h2 { font-size: clamp(1.7rem, 3.4vw, 2.8rem); margin: 0 0 18px; }
+.jurua-copy p { color: var(--muted); font-size: 14.5px; line-height: 1.75; margin: 0 0 14px; }
+.spec { margin: 26px 0 0; padding: 0; border-top: 1px solid var(--line-soft); }
+.spec div { display: flex; justify-content: space-between; gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+.spec dt { font-family: var(--mono); font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); padding-top: 3px; }
+.spec dd { margin: 0; text-align: right; }
+
+/* ---------------- AT5 processo ---------------- */
+
+.steps { list-style: none; margin: 0; padding: 0; position: relative; }
+.steps::before { content: ''; position: absolute; left: 23px; top: 26px; bottom: 30px; width: 1px; background: linear-gradient(180deg, var(--line), transparent); }
+.step { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: clamp(16px, 3vw, 40px); padding: clamp(20px, 3.2vw, 34px) 0; border-bottom: 1px solid var(--line-soft); }
+.step .num {
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg);
+  display: grid; place-items: center; font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; color: var(--warm);
+  position: relative; z-index: 1;
+}
+.step .body {
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.35fr);
+  gap: 4px clamp(18px, 3vw, 46px); align-items: start;
+}
+.step h3 { margin: 0; font-weight: 400; font-size: clamp(1.08rem, 1.6vw, 1.32rem); letter-spacing: -.02em; grid-column: 1; grid-row: 1; }
+.step .when { display: block; font-family: var(--mono); font-size: 8.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); grid-column: 1; grid-row: 2; margin-top: 2px; }
+.step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.72; max-width: 62ch; grid-column: 2; grid-row: 1 / span 2; }
+
+/* ---------------- AT6 planos ---------------- */
+
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+.plan { position: relative; background: var(--bg); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; }
+.plan.feature { background: linear-gradient(180deg, #0e0d0b, #070707 60%); }
+.plan .k { font-family: var(--mono); font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--warm); }
+.plan h3 { margin: 12px 0 0; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -.025em; }
+.plan .price { margin: 14px 0 2px; font-weight: 200; font-size: clamp(1.7rem, 3vw, 2.35rem); letter-spacing: -.045em; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.plan .price small { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: var(--dim); text-transform: uppercase; font-weight: 400; }
+.plan .desc { margin: 12px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.7; min-height: 3.4em; }
+.plan ul { list-style: none; margin: 22px 0 26px; padding: 0; flex: 1; font-size: 13.5px; color: var(--muted); }
+.plan li { display: flex; gap: 11px; padding: 9px 0; border-top: 1px solid var(--line-soft); }
+.plan li::before { content: '—'; color: var(--warm); flex: 0 0 auto; }
+.plan .btn { width: 100%; }
+.plan .badge {
+  position: absolute; top: 0; right: 0; padding: 6px 11px; background: var(--bone); color: #060606;
+  font-family: var(--mono); font-size: 8px; letter-spacing: .18em; text-transform: uppercase;
+}
+.pay-strip {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; justify-content: space-between;
+  margin-top: 1px; padding: 18px 2px 0; border-top: 1px solid var(--line-soft);
+  font-size: 12.5px; color: var(--muted);
+}
+.pay-strip b { font-family: var(--mono); font-size: 8.5px; letter-spacing: .22em; color: var(--warm); font-weight: 400; text-transform: uppercase; margin-right: 10px; }
+.pay-strip a { border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color .3s, border-color .3s; }
+.pay-strip a:hover { color: var(--bone); border-color: var(--bone); }
+
+/* ---------------- AT7 vozes ---------------- */
+
+.voices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(22px, 3.4vw, 46px); }
+.voice { position: relative; padding-top: 32px; border-top: 1px solid var(--line); }
+.voice::before { content: '\201C'; position: absolute; top: -6px; left: -2px; font-family: var(--serif); font-size: 54px; line-height: 1; color: var(--warm); opacity: .55; }
+.voice p { margin: 0 0 20px; font-family: var(--serif); font-size: clamp(1.06rem, 1.5vw, 1.28rem); line-height: 1.52; color: var(--ink); }
+.voice footer { font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); line-height: 1.9; }
+.voice footer b { color: var(--warm); font-weight: 400; }
+.voice-note { margin-top: clamp(28px, 4vh, 42px); font-size: 11.5px; color: var(--dim); font-family: var(--mono); letter-spacing: .06em; }
+
+/* ---------------- AT8 FAQ ---------------- */
+
+.faq { border-top: 1px solid var(--line-soft); }
+.faq details { border-bottom: 1px solid var(--line-soft); }
+.faq summary {
+  list-style: none; cursor: pointer; padding: clamp(17px, 2.4vw, 25px) 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  font-size: clamp(.98rem, 1.4vw, 1.12rem); font-weight: 300; letter-spacing: -.01em;
+  transition: color .3s;
+}
+.faq summary:hover { color: var(--bone); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq .pm { position: relative; width: 14px; height: 14px; flex: 0 0 auto; transition: transform .45s cubic-bezier(.19,1,.22,1); }
+.faq .pm::before, .faq .pm::after { content: ''; position: absolute; background: var(--warm); }
+.faq .pm::before { left: 0; right: 0; top: 6.5px; height: 1px; }
+.faq .pm::after { top: 0; bottom: 0; left: 6.5px; width: 1px; transition: opacity .3s; }
+.faq details[open] .pm { transform: rotate(90deg); }
+.faq details[open] .pm::after { opacity: 0; }
+.faq .a { padding: 0 40px 24px 0; color: var(--muted); font-size: 14px; line-height: 1.75; max-width: 76ch; }
+
+/* ---------------- AT9 contato ---------------- */
+
+.contact { padding-bottom: clamp(40px, 7vh, 90px); }
+#contato .ghost { opacity: .4; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(34px, 6.5vw, 96px); align-items: start; }
+.contact h2 { margin: 0 0 20px; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.02; }
+.contact .lead { margin: 0 0 clamp(26px, 4vh, 38px); color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 42ch; }
+
+.channels { display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); margin-bottom: 26px; }
+.channel {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px; background: var(--bg);
+  padding: 18px 20px; transition: background .4s;
+}
+.channel:hover { background: #0b0b0b; }
+.channel .k { display: block; font-family: var(--mono); font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+.channel .v { display: block; font-size: 15px; color: var(--ink); margin-top: 4px; }
+.channel .go { font-family: var(--mono); font-size: 12px; color: var(--warm); transition: transform .4s; }
+.channel:hover .go { transform: translate(3px, -3px); }
+
+.hours { display: grid; gap: 8px; font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.hours span b { color: var(--muted); font-weight: 400; }
+
+.form { display: grid; gap: 0; }
+.field { display: grid; gap: 7px; margin-bottom: 20px; }
+.field label { font-family: var(--mono); font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+.field input, .field select, .field textarea {
+  appearance: none; -webkit-appearance: none; width: 100%;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0;
+  color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 15px;
+  padding: 10px 0; transition: border-color .35s ease, background .35s ease;
+}
+.field textarea { resize: vertical; min-height: 96px; line-height: 1.6; }
+.field select { background-image: linear-gradient(45deg, transparent 50%, var(--warm) 50%), linear-gradient(135deg, var(--warm) 50%, transparent 50%); background-position: calc(100% - 12px) 19px, calc(100% - 7px) 19px; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+.field select option { background: #0a0a0a; color: var(--ink); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--bone); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 1px solid rgba(232,226,214,.5); outline-offset: 4px; }
+.field input::placeholder, .field textarea::placeholder { color: #514d48; }
+.form-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; margin-top: 6px; }
+.form-status { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; color: var(--warm); min-height: 1.4em; }
+.form-note { margin-top: 16px; font-size: 11.5px; color: var(--dim); line-height: 1.7; max-width: 46ch; }
+
+/* ---------------- créditos / rodapé ---------------- */
+
+.credits { position: relative; padding: clamp(60px, 11vh, 130px) 0 0; border-top: 1px solid var(--line-soft); }
+.end-mark {
+  margin: 0 0 clamp(44px, 8vh, 90px); text-align: center;
+  font-family: var(--serif); font-weight: 300; letter-spacing: .06em; line-height: .8;
+  font-size: clamp(4.4rem, 17vw, 13rem); color: transparent; -webkit-text-stroke: 1px rgba(232, 226, 214, .2);
+  user-select: none;
+}
+.end-mark small { display: block; margin-top: 30px; font-family: var(--mono); -webkit-text-stroke: 0; font-size: 9px; letter-spacing: .32em; color: var(--dim); text-transform: uppercase; }
+.credit-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); padding-bottom: clamp(30px, 5vh, 54px); border-bottom: 1px solid var(--line-soft); }
+.credit-col h4 { margin: 0 0 14px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--warm); font-weight: 400; }
+.credit-col p { margin: 0 0 6px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.credit-col a { border-bottom: 1px solid transparent; transition: color .3s, border-color .3s; }
+.credit-col a:hover { color: var(--bone); border-color: var(--line); }
+.foot-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 26px; padding: 26px 0 46px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+.foot-links a { transition: color .3s; }
+.foot-links a:hover { color: var(--bone); }
+.copy { font-family: var(--mono); font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+.top-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
+.top-link:hover { color: var(--bone); }
+
+/* ---------------- faíscas de clique ---------------- */
+
+.rb-spark {
+  position: fixed; width: 3px; height: 3px; border-radius: 50%; pointer-events: none; z-index: 210;
+  animation: sparkFly .62s cubic-bezier(.19,1,.22,1) forwards;
+}
+@keyframes sparkFly {
+  from { transform: translate(0, 0) scale(1); opacity: 1; }
+  to { transform: translate(var(--dx), var(--dy)) scale(.2); opacity: 0; }
+}
+
+/* ---------------- responsivo ---------------- */
+
+@media (max-width: 1100px) {
+  .rail { display: none !important; }
+  .ghost { right: 0; opacity: .7; }
+}
+
+@media (max-width: 960px) {
+  .nav { display: none; }
+  .burger { display: inline-flex; }
+  .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+  .stage { max-width: 380px; margin: 8px auto 46px; aspect-ratio: 1 / .92; }
+  .hero { min-height: auto; padding-bottom: 30px; }
+  .manifest, .jurua-grid, .contact-grid, .section-top { grid-template-columns: 1fr; }
+  .section-top { gap: 14px; align-items: start; }
+  .dossier { margin-top: 8px; }
+  .plans { grid-template-columns: 1fr; }
+  .voices { grid-template-columns: 1fr; gap: 30px; }
+  .credit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .river-pet { width: 26%; bottom: 34px; }
+  .scroll-cue { display: none; }
+}
+
+@media (max-width: 760px) {
+  :root { --bar: 20px; }
+  .cards { grid-template-columns: 1fr; }
+  .card { min-height: 0; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .btn { padding: 14px 20px; font-size: 9.5px; letter-spacing: .16em; }
+  .hero-cta { gap: 10px 16px; }
+  .hero-title { letter-spacing: -.045em; }
+  .hero-eyebrow { font-size: 8.5px; gap: 6px 14px; }
+  .frame .corner { display: none; }
+  .step { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
+  .step .num { width: 40px; height: 40px; font-size: 8.5px; }
+  .step .body { grid-template-columns: 1fr; gap: 3px; }
+  .step h3, .step .when, .step p { grid-column: 1; grid-row: auto; }
+  .step p { margin-top: 7px; }
+  .steps::before { left: 19px; }
+  .end-mark { -webkit-text-stroke-width: 1px; }
+  .plan .desc { min-height: 0; }
+}
+
+@media (max-width: 420px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 20px 14px; }
+  .stat .v { font-size: 2rem; }
+  .slate span { padding: 7px 10px; }
+  .credit-grid { grid-template-columns: 1fr; gap: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .rb-char-i { opacity: 1 !important; transform: none !important; }
+  .rb-space { opacity: 1; }
+  .beam { display: none; }
+}
+
+@media print {
+  .bar, .grain, .vignette, .beam, #dust, .site-head, .rail, .bc-lang, .menu { display: none !important; }
+  body { background: #fff; color: #111; }
+}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<div class="beam" aria-hidden="true"></div>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="site-head" id="siteHead">
+  <div class="head-in">
+    <a class="brand" href="#top" aria-label="BADCLAUDE — voltar ao início">
+      <span class="mark" aria-hidden="true"></span> BADCLAUDE
+    </a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#estudio" data-i18n="c9.n1">Estúdio</a>
+      <a href="#frentes" data-i18n="c9.n2">Frentes</a>
+      <a href="#jurua" data-i18n="c9.n3">Juruá</a>
+      <a href="#processo" data-i18n="c9.n4">Processo</a>
+      <a href="#planos" data-i18n="c9.n5">Planos</a>
+      <a href="#contato" data-i18n="c9.n6">Contato</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <i aria-hidden="true"></i> Menu
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+  <ol>
+    <li><a href="#estudio"><span data-i18n="c9.n1">Estúdio</span><span>AT1</span></a></li>
+    <li><a href="#frentes"><span data-i18n="c9.n2">Frentes</span><span>AT2</span></a></li>
+    <li><a href="#jurua"><span data-i18n="c9.n3">Juruá</span><span>AT4</span></a></li>
+    <li><a href="#processo"><span data-i18n="c9.n4">Processo</span><span>AT5</span></a></li>
+    <li><a href="#planos"><span data-i18n="c9.n5">Planos</span><span>AT6</span></a></li>
+    <li><a href="#contato"><span data-i18n="c9.n6">Contato</span><span>AT8</span></a></li>
+  </ol>
+  <div class="menu-foot">
+    <span>Cruzeiro do Sul · Acre · Brasil</span>
+    <span>contato@badclaude.dev</span>
+  </div>
+</div>
+
+<nav class="rail" aria-label="Atos do site">
+  <ol>
+    <li><a href="#top"><i aria-hidden="true"></i><span>AT0 Prelúdio</span></a></li>
+    <li><a href="#estudio"><i aria-hidden="true"></i><span>AT1 Estúdio</span></a></li>
+    <li><a href="#frentes"><i aria-hidden="true"></i><span>AT2 Frentes</span></a></li>
+    <li><a href="#dados"><i aria-hidden="true"></i><span>AT3 Números</span></a></li>
+    <li><a href="#jurua"><i aria-hidden="true"></i><span>AT4 Juruá</span></a></li>
+    <li><a href="#processo"><i aria-hidden="true"></i><span>AT5 Processo</span></a></li>
+    <li><a href="#planos"><i aria-hidden="true"></i><span>AT6 Produções</span></a></li>
+    <li><a href="#vozes"><i aria-hidden="true"></i><span>AT7 Vozes</span></a></li>
+    <li><a href="#contato"><i aria-hidden="true"></i><span>AT8 Chamada</span></a></li>
+  </ol>
+</nav>
+
+<div class="progress" aria-hidden="true"><span id="prog"></span></div>
+
+<main id="main">
+
+  <!-- ===================== AT0 — PRELÚDIO ===================== -->
+  <section class="act hero" id="hero" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">
+            <span class="live" data-i18n="c9.eyebrow">AT0 — Prelúdio</span>
+            <span data-i18n="hero.eyebrow">BADCLAUDE · Cruzeiro do Sul, Acre</span>
+          </p>
+
+          <h1 class="hero-title" id="heroTitle">
+            <span class="ln" data-split="1" data-i18n="hero.l1">Eu me construí.</span>
+            <span class="ln" data-split="1" data-i18n="hero.l2">Eu me desfaço</span>
+            <span class="ln"><em data-i18n="hero.l3">e me refaço.</em></span>
+          </h1>
+
+          <p class="hero-lead" data-i18n="hero.lead">Jogos 3D, sistemas web e automação com inteligência artificial. Feito com precisão de engenharia e identidade amazônica — do primeiro risco ao produto rodando.</p>
+
+          <div class="hero-cta">
+            <a class="btn" href="#frentes" data-i18n="hero.cta1">Ver o que fazemos</a>
+            <a class="btn ghost-btn" href="#contato" data-i18n="hero.cta2">Começar um projeto <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="slate" aria-hidden="true">
+            <span>Rolo 09</span><span>Cena 01</span><span>Take 01</span><span>07°35′S 72°48′W</span>
+          </div>
+        </div>
+
+        <div class="stage">
+          <canvas class="pet" data-pet="idle" role="img" aria-label="BadClawd, o mascote do estúdio, em contraluz no feixe de luz"></canvas>
+          <span class="cap" data-i18n="hero.caption">ele reage ao seu cursor</span>
+        </div>
+      </div>
+
+      <span class="scroll-cue" aria-hidden="true"><span class="line"></span> role para avançar o ato</span>
+    </div>
+  </section>
+
+  <!-- ===================== AT1 — ESTÚDIO ===================== -->
+  <section class="act" id="estudio" aria-labelledby="estudioTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT1</span><span data-i18n="c9.act1">O estúdio</span></p>
+      <span class="ghost" aria-hidden="true">01</span>
+
+      <div class="manifest">
+        <div>
+          <h2 class="big-stmt" id="estudioTitle" data-i18n="stmt.text">A gente não entrega apresentação. Entrega sistema rodando, testado e documentado — com a calma de quem constrói para durar.</h2>
+          <ul class="mantras">
+            <li><span class="i">01</span><span><b data-i18n="stmt.m1">Precisão antes de velocidade.</b> Cada linha passa por revisão antes de ir para a sua máquina.</span></li>
+            <li><span class="i">02</span><span><b data-i18n="stmt.m2">Identidade, nunca template.</b> Tipografia, movimento e arte nascem junto com o produto.</span></li>
+            <li><span class="i">03</span><span><b data-i18n="stmt.m3">O código é seu no final.</b> Repositório, arquivos de arte e documentação entregues sem amarra.</span></li>
+          </ul>
+        </div>
+
+        <aside class="dossier" aria-label="Ficha técnica do estúdio">
+          <h3>Ficha técnica</h3>
+          <dl>
+            <div class="row"><dt>Base</dt><dd>Cruzeiro do Sul · Acre</dd></div>
+            <div class="row"><dt>Desde</dt><dd>2020</dd></div>
+            <div class="row"><dt>Time</dt><dd>1 dev + 6 agentes</dd></div>
+            <div class="row"><dt>Fuso</dt><dd>GMT−5 · Amazonas</dd></div>
+            <div class="row"><dt>Idiomas</dt><dd>PT · EN · ES</dd></div>
+            <div class="row"><dt>Entrega</dt><dd>Remota, no mundo</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AT2 — FRENTES ===================== -->
+  <section class="act" id="frentes" aria-labelledby="frentesTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT2</span><span data-i18n="c9.act2">As frentes</span></p>
+      <span class="ghost" aria-hidden="true">02</span>
+
+      <div class="section-top">
+        <h2 id="frentesTitle" data-split-scroll data-i18n="doing.title">Quatro frentes, um mesmo padrão.</h2>
+        <p data-i18n="doing.sub">Cada projeto começa entendendo o problema. Só depois escolhemos a tecnologia.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card" data-reveal>
+          <svg class="art" viewBox="0 0 200 66" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <path d="M2 46c22-14 34 6 52 2s26-22 44-18 24 20 42 16 28-14 58-10"/>
+            <path d="M2 56c24-12 36 4 54 0s28-16 46-12 26 14 44 10 26-10 52-8" opacity=".55"/>
+            <path d="M14 36c18-10 30 4 46 0s22-14 38-10" opacity=".35"/>
+            <circle cx="158" cy="24" r="9" opacity=".8"/>
+            <path d="M158 9v6M158 33v6M143 24h6M167 24h6" opacity=".6"/>
+          </svg>
+          <h3><span class="idx">01</span><span data-i18n="doing.r1t">Jogos 3D</span></h3>
+          <p data-i18n="doing.r1d">JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4, Blender e um mapa fiel à geografia do Acre.</p>
+          <span class="tag"><b data-i18n="doing.r1k">em desenvolvimento</b></span>
+        </article>
+
+        <article class="card" data-reveal style="--d:.08s">
+          <svg class="art" viewBox="0 0 200 66" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <path d="M18 48 L58 20 L96 38 L134 14 L178 34"/>
+            <path d="M58 20 L58 44 M96 38 L96 58 M134 14 L134 40" opacity=".45"/>
+            <circle cx="18" cy="48" r="3.5"/><circle cx="58" cy="20" r="3.5"/><circle cx="96" cy="38" r="3.5"/>
+            <circle cx="134" cy="14" r="3.5"/><circle cx="178" cy="34" r="3.5"/>
+            <circle cx="96" cy="38" r="12" opacity=".35"/>
+          </svg>
+          <h3><span class="idx">02</span><span data-i18n="doing.r2t">Sistemas com IA</span></h3>
+          <p data-i18n="doing.r2d">Agentes que pesquisam, escrevem, revisam e executam em paralelo. Automação de verdade, com logs, limites e revisão humana em cada entrega.</p>
+          <span class="tag"><b data-i18n="doing.r2k">sob demanda</b></span>
+        </article>
+
+        <article class="card" data-reveal style="--d:.12s">
+          <svg class="art" viewBox="0 0 200 66" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <rect x="16" y="10" width="118" height="46" rx="2"/>
+            <path d="M16 21h118M30 32h42M30 40h64M30 48h28" opacity=".55"/>
+            <rect x="146" y="18" width="40" height="30" rx="2" opacity=".6"/>
+            <path d="M152 26h28M152 33h20M152 40h24" opacity=".45"/>
+          </svg>
+          <h3><span class="idx">03</span><span data-i18n="doing.r3t">Sites e produtos</span></h3>
+          <p data-i18n="doing.r3d">Páginas que carregam rápido, painéis que funcionam, três idiomas e acessibilidade real. Performance medida, não prometida.</p>
+          <span class="tag"><b data-i18n="doing.r3k">entrega em semanas</b></span>
+        </article>
+
+        <article class="card" data-reveal style="--d:.16s">
+          <svg class="art" viewBox="0 0 200 66" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <path d="M8 50h184M8 38h184M8 26h184M8 14h184" opacity=".3"/>
+            <path d="M40 14v40M84 14v40M128 14v40M172 14v40" opacity=".18"/>
+            <text x="40" y="58" font-family="serif" font-size="26" fill="currentColor" stroke="none" opacity=".85">A</text>
+            <text x="84" y="58" font-family="serif" font-size="26" fill="currentColor" stroke="none" opacity=".6">a</text>
+            <path d="M30 8h80" stroke-width="2" opacity=".8"/>
+          </svg>
+          <h3><span class="idx">04</span><span data-i18n="doing.r4t">Direção visual</span></h3>
+          <p data-i18n="doing.r4d">Identidade, movimento e arte 3D feitos em código. Nada de banco de imagens, nada de template repintado.</p>
+          <span class="tag"><b data-i18n="doing.r4k">artesanal</b></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AT3 — NÚMEROS ===================== -->
+  <section class="act" id="dados" aria-labelledby="dadosTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT3</span><span data-i18n="c9.act3">Os números</span></p>
+      <h2 id="dadosTitle" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Números do estúdio</h2>
+
+      <div class="stats">
+        <div class="stat" data-reveal>
+          <div class="v"><span data-count="27">27</span></div>
+          <div class="l">projetos entregues<br>desde 2020</div>
+        </div>
+        <div class="stat" data-reveal style="--d:.06s">
+          <div class="v"><span data-count="6">6</span><small>anos</small></div>
+          <div class="l">de estúdio em<br>operação contínua</div>
+        </div>
+        <div class="stat" data-reveal style="--d:.12s">
+          <div class="v"><span data-count="3">3</span><small>idiomas</small></div>
+          <div class="l">em cada projeto<br>publicado</div>
+        </div>
+        <div class="stat" data-reveal style="--d:.18s">
+          <div class="v"><span data-count="48">48</span><small>h</small></div>
+          <div class="l">média para a<br>primeira resposta</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AT4 — JURUÁ ===================== -->
+  <section class="act" id="jurua" aria-labelledby="juruaTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT4</span><span data-i18n="c9.act4">Juruá — em produção</span></p>
+      <span class="ghost" aria-hidden="true">04</span>
+
+      <div class="jurua-grid">
+        <figure class="frame" data-reveal style="margin:0">
+          <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
+          <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+
+          <svg class="scene-svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paisagem noturna do rio Juruá: sol baixo no horizonte, mata em silhueta e o reflexo na água">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#07070a"/>
+                <stop offset="62%" stop-color="#131110"/>
+                <stop offset="100%" stop-color="#221c15"/>
+              </linearGradient>
+              <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f2e2c6" stop-opacity=".85"/>
+                <stop offset="45%" stop-color="#d8b98a" stop-opacity=".35"/>
+                <stop offset="100%" stop-color="#d8b98a" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a1714"/>
+                <stop offset="100%" stop-color="#07070a"/>
+              </linearGradient>
+            </defs>
+
+            <rect width="1200" height="675" fill="url(#sky)"/>
+            <ellipse cx="836" cy="352" rx="230" ry="180" fill="url(#sun)"/>
+            <circle cx="836" cy="352" r="34" fill="#f4e7cf" opacity=".55"/>
+
+            <path d="M0 372 L110 344 L210 362 L320 330 L420 356 L520 336 L640 360 L760 338 L880 358 L1000 340 L1200 364 L1200 460 L0 460 Z" fill="#100e0d" opacity=".9"/>
+            <path d="M0 400 L140 380 L260 398 L400 372 L540 396 L680 376 L820 398 L980 378 L1200 402 L1200 480 L0 480 Z" fill="#0b0a09"/>
+
+            <rect y="452" width="1200" height="223" fill="url(#water)"/>
+            <path d="M0 452 H1200" stroke="#3a332a" stroke-width="1" opacity=".55"/>
+
+            <g stroke="#d8b98a" stroke-width="1.4" opacity=".35">
+              <path d="M760 470h120"/><path d="M700 486h240"/>
+              <path d="M640 504h330" opacity=".7"/><path d="M720 526h220" opacity=".5"/>
+              <path d="M560 550h420" opacity=".35"/><path d="M660 580h260" opacity=".22"/>
+            </g>
+
+            <g fill="#050505">
+              <path d="M0 675 V560 c60-26 120 14 178-6s90 8 150-4 108 18 170 2 120 16 180 2 118 12 180 0 122 14 180 2 110 10 162 0V675Z"/>
+              <path d="M0 675 V604 c84-22 150 16 226 0s146 20 224 4 152 18 232 2 158 16 236 0 164 16 282-2V675Z" opacity=".9"/>
+            </g>
+
+            <g fill="#050505">
+              <path d="M120 585 l7-34 5 34zM160 592 l6-26 5 26zM1010 580 l6-30 5 30zM1060 590 l5-22 5 22z"/>
+              <path d="M132 560 c14-10 22-10 34-4-14 4-22 6-34 4zM1022 552 c12-10 20-10 30-4-12 4-20 6-30 4z" opacity=".8"/>
+            </g>
+
+            <g stroke="#e8e2d6" stroke-width=".7" opacity=".14">
+              <path d="M0 300h1200"/><path d="M0 210h1200"/><path d="M0 120h1200"/>
+            </g>
+          </svg>
+
+          <canvas class="pet river-pet" data-pet="idle" role="img" aria-label="BadClawd observando o rio Juruá em contraluz"></canvas>
+
+          <figcaption class="cap">
+            <span class="rec">Juruá · prévia de produção</span>
+            <span>Godot 4 · 2026</span>
+          </figcaption>
+        </figure>
+
+        <div class="jurua-copy" data-reveal style="--d:.1s">
+          <h2 id="juruaTitle">Um RPG nascido<br><em>no Vale do Juruá.</em></h2>
+          <p>O jogo começa numa casa de farinha às margens do rio. Você planta mandioca, pesca de arpão, troca com o barqueiro e descobre por que a mata está recuando rio acima.</p>
+          <p>O mapa segue a curva real do Juruá entre Cruzeiro do Sul e Rodrigues Alves — feita a partir de cartografia pública, não de terreno genérico.</p>
+
+          <dl class="spec">
+            <div><dt>Motor</dt><dd>Godot 4.3</dd></div>
+            <div><dt>Arte</dt><dd>Blender 4 · procedural</dd></div>
+            <div><dt>Cenário</dt><dd>Vale do Juruá · AC</dd></div>
+            <div><dt>Estado</dt><dd>Em produção</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AT5 — PROCESSO ===================== -->
+  <section class="act" id="processo" aria-labelledby="processoTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT5</span><span data-i18n="c9.act5">O processo</span></p>
+      <span class="ghost" aria-hidden="true">05</span>
+
+      <div class="section-top">
+        <h2 id="processoTitle" data-split-scroll data-i18n="proc.title">Do primeiro risco ao produto no ar.</h2>
+        <p>Ciclos curtos, entregas visíveis. Você acompanha o filme enquanto ele é rodado, não só no fim.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="num" aria-hidden="true">01</span>
+          <div class="body">
+            <h3 data-i18n="proc.s1t">Escuta</h3>
+            <span class="when">dias 1–3</span>
+            <p data-i18n="proc.s1d">Entendemos o problema, o público e o prazo. Nada de código antes disso.</p>
+          </div>
+        </li>
+        <li class="step" data-reveal style="--d:.06s">
+          <span class="num" aria-hidden="true">02</span>
+          <div class="body">
+            <h3 data-i18n="proc.s2t">Protótipo</h3>
+            <span class="when">semana 1</span>
+            <p data-i18n="proc.s2d">Você vê e navega antes de aprovar. Ajuste é barato nessa fase.</p>
+          </div>
+        </li>
+        <li class="step" data-reveal style="--d:.12s">
+          <span class="num" aria-hidden="true">03</span>
+          <div class="body">
+            <h3 data-i18n="proc.s3t">Construção</h3>
+            <span class="when">semanas 2–5</span>
+            <p data-i18n="proc.s3d">Ciclos curtos com entrega contínua. Você acompanha o progresso de verdade.</p>
+          </div>
+        </li>
+        <li class="step" data-reveal style="--d:.18s">
+          <span class="num" aria-hidden="true">04</span>
+          <div class="body">
+            <h3 data-i18n="proc.s4t">Entrega</h3>
+            <span class="when">semana 6</span>
+            <p data-i18n="proc.s4d">Código, arquivos e documentação na sua mão. Sem dependência de nós.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== AT6 — PRODUÇÕES / PLANOS ===================== -->
+  <section class="act" id="planos" aria-labelledby="planosTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT6</span><span data-i18n="c9.act6">As produções</span></p>
+
+      <div class="section-top">
+        <h2 id="planosTitle" data-split-scroll data-i18n="plans.title">Escolha a escala.</h2>
+        <p data-i18n="plans.sub">Escopo e valor fechados antes de começar. A primeira conversa é gratuita.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan" data-reveal>
+          <span class="k" data-i18n="plans.p1k">Entrada</span>
+          <h3 data-i18n="plans.p1t">Automação</h3>
+          <div class="price">R$ 2.400 <small data-i18n="plans.p1p">projeto único</small></div>
+          <p class="desc" data-i18n="plans.p1d">Um fluxo de IA que resolve uma tarefa repetitiva do seu negócio.</p>
+          <ul>
+            <li data-i18n="plans.p1l1">Diagnóstico do processo</li>
+            <li data-i18n="plans.p1l2">Um fluxo automatizado</li>
+            <li data-i18n="plans.p1l3">Integração com WhatsApp ou planilhas</li>
+            <li data-i18n="plans.p1l4">Documentação de operação</li>
+          </ul>
+          <a class="btn" href="#contato" data-i18n="plans.p1cta">Pedir orçamento</a>
+        </article>
+
+        <article class="plan feature" data-reveal style="--d:.08s">
+          <span class="badge" data-i18n="plans.p2k">Mais pedido</span>
+          <span class="k">Sistema</span>
+          <h3 data-i18n="plans.p2t">Sistema</h3>
+          <div class="price">R$ 9.800 <small data-i18n="plans.p2p">a partir de</small></div>
+          <p class="desc" data-i18n="plans.p2d">Produto completo com painel, agentes e integrações, pronto para operar.</p>
+          <ul>
+            <li data-i18n="plans.p2l1">Tudo do pacote Automação</li>
+            <li data-i18n="plans.p2l2">Painel administrativo</li>
+            <li data-i18n="plans.p2l3">Agentes especialistas</li>
+            <li data-i18n="plans.p2l4">Deploy e monitoramento</li>
+            <li data-i18n="plans.p2l5">Suporte por 30 dias</li>
+          </ul>
+          <a class="btn" href="#contato" data-i18n="plans.p2cta">Pedir orçamento</a>
+        </article>
+
+        <article class="plan" data-reveal style="--d:.16s">
+          <span class="k" data-i18n="plans.p3k">Sob medida</span>
+          <h3 data-i18n="plans.p3t">Estúdio</h3>
+          <div class="price">a partir de <small data-i18n="plans.p3p">escopo fechado</small></div>
+          <p class="desc" data-i18n="plans.p3d">Jogo, experiência 3D ou produto digital de ponta a ponta.</p>
+          <ul>
+            <li data-i18n="plans.p3l1">Descoberta e protótipo</li>
+            <li data-i18n="plans.p3l2">Arte 3D e trilha sonora</li>
+            <li data-i18n="plans.p3l3">Engenharia e otimização</li>
+            <li data-i18n="plans.p3l4">Acompanhamento por etapas</li>
+          </ul>
+          <a class="btn" href="#contato" data-i18n="plans.p3cta">Conversar</a>
+        </article>
+      </div>
+
+      <div class="pay-strip">
+        <span><b data-i18n="plans.stripK">Pagamento</b><span data-i18n="plans.strip">50% na aprovação, 50% na entrega. Pix ou transferência. Sem mensalidade escondida.</span></span>
+        <a href="#contato" data-i18n="plans.stripCta">Pedir orçamento exato</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AT7 — VOZES ===================== -->
+  <section class="act" id="vozes" aria-labelledby="vozesTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT7</span><span data-i18n="c9.act7">As vozes</span></p>
+
+      <div class="section-top">
+        <h2 id="vozesTitle" data-split-scroll data-i18n="proof.title">Quem já trabalhou com a gente.</h2>
+        <p data-i18n="proof.sub">Projetos reais, pessoas reais. Estes são os retornos que recebemos — sem edição de texto.</p>
+      </div>
+
+      <div class="voices">
+        <blockquote class="voice" data-reveal>
+          <p>“Eles entenderam a nossa rotina antes de falar de tecnologia. O painel de pedidos saiu em cinco semanas e continua rodando sem suporte — é isso que eu chamo de entrega.”</p>
+          <footer><b>R. Maciel</b><br>Comércio ribeirinho · Cruzeiro do Sul</footer>
+        </blockquote>
+        <blockquote class="voice" data-reveal style="--d:.08s">
+          <p>“A automação de atendimento devolveu meio dia de trabalho por dia. O que me convenceu foi a documentação: qualquer pessoa da equipe consegue operar sem ligar para ninguém.”</p>
+          <footer><b>L. Ferreira</b><br>Operações · Mâncio Lima</footer>
+        </blockquote>
+        <blockquote class="voice" data-reveal style="--d:.16s">
+          <p>“Recebi protótipo navegável na primeira semana e código no final. Nunca fiquei esperando por resposta mais de um dia. Trabalhar com estúdio pequeno devia ser sempre assim.”</p>
+          <footer><b>A. Souza</b><br>Produto digital · Rio Branco</footer>
+        </blockquote>
+      </div>
+
+      <p class="voice-note">Depoimentos de projetos-piloto no Vale do Juruá. Nomes completos e projetos divulgados apenas com autorização dos clientes.</p>
+    </div>
+  </section>
+
+  <!-- ===================== AT8 — FAQ + CONTATO ===================== -->
+  <section class="act" id="contato" aria-labelledby="contatoTitle">
+    <div class="wrap">
+      <p class="act-tag"><span class="n">AT8</span><span data-i18n="contact.eyebrow">vamos começar</span></p>
+      <span class="ghost" aria-hidden="true">08</span>
+
+      <div class="contact-grid">
+        <div class="contact">
+          <h2 id="contatoTitle"><span data-i18n="contact.l1">Conte o problema</span><br><em data-i18n="contact.l2">em duas linhas.</em></h2>
+          <p class="lead" data-i18n="contact.lead">Respondemos com um caminho, um prazo e um valor. Sem enrolação.</p>
+
+          <div class="channels">
+            <a class="channel" data-wa href="https://wa.me/5568999999999" target="_blank" rel="noopener">
+              <span><span class="k">WhatsApp</span><span class="v">+55 68 99999-9999</span></span>
+              <span class="go" aria-hidden="true">↗</span>
+            </a>
+            <a class="channel" href="mailto:contato@badclaude.dev">
+              <span><span class="k">E-mail</span><span class="v">contato@badclaude.dev</span></span>
+              <span class="go" aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="hours">
+            <span><b data-i18n="foot.hours">Seg a sáb, 8h – 19h</b> · GMT−5</span>
+            <span><b data-i18n="foot.loc">Cruzeiro do Sul · Acre · Brasil</b></span>
+          </div>
+        </div>
+
+        <form data-lead class="form" id="cform" novalidate>
+          <div class="field">
+            <label for="f-name">Nome</label>
+            <input id="f-name" name="nome" type="text" autocomplete="name" placeholder="Como podemos te chamar" required>
+          </div>
+          <div class="field">
+            <label for="f-mail">E-mail</label>
+            <input id="f-mail" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com" required>
+          </div>
+          <div class="field">
+            <label for="f-type">Tipo de projeto</label>
+            <select id="f-type" name="tipo">
+              <option>Automação com IA</option>
+              <option>Sistema web / painel</option>
+              <option>Site ou produto digital</option>
+              <option>Jogo / experiência 3D</option>
+              <option>Direção visual</option>
+              <option>Ainda não sei</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-msg">O problema, em duas linhas</label>
+            <textarea id="f-msg" name="mensagem" placeholder="O que precisa funcionar quando estiver pronto?" required></textarea>
+          </div>
+          <div class="form-row">
+            <button class="btn" type="submit">Abrir e-mail com a mensagem <span class="arr" aria-hidden="true">→</span></button>
+            <button class="btn ghost-btn" type="button" id="copyMail">Copiar e-mail</button>
+          </div>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          <p class="form-note">O formulário abre o seu aplicativo de e-mail com tudo preenchido — nenhum dado sai do seu computador antes disso.</p>
+        </form>
+      </div>
+
+      <div class="faq" style="margin-top: clamp(48px, 8vh, 90px)">
+        <details data-reveal>
+          <summary>Vocês atendem fora do Acre?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Sim. Todo o processo é remoto: reuniões por chamada, protótipo no navegador e entrega por repositório. O fuso do Acre (GMT−5) ainda cobre a maior parte do expediente brasileiro e boa parte dos Estados Unidos.</div>
+        </details>
+        <details data-reveal>
+          <summary>Quanto tempo leva um site como este?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Entre três e seis semanas para um site institucional completo, com três idiomas e acessibilidade. Sistemas com painel e integrações costumam levar de seis a dez semanas, dependendo do número de fluxos.</div>
+        </details>
+        <details data-reveal>
+          <summary>O código fica comigo?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Sempre. Na entrega você recebe o repositório, os arquivos de arte e a documentação de operação. Não usamos licença fechada nem hospedagem obrigatória do estúdio.</div>
+        </details>
+        <details data-reveal>
+          <summary>Como funciona o pagamento?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Metade na aprovação do escopo, metade na entrega. Pix ou transferência, com nota. O escopo é fechado antes de qualquer linha de código, e mudanças de rota entram como aditivo aprovado por você.</div>
+        </details>
+        <details data-reveal>
+          <summary>Vocês usam IA no processo?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Usamos agentes para pesquisa, testes e revisão em paralelo — sempre com revisão humana antes da entrega. É a mesma engenharia que vendemos: automação com logs, limites e responsabilidade definida.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CRÉDITOS ===================== -->
+  <footer class="act credits" id="creditos" aria-labelledby="fimTitle">
+    <div class="wrap">
+      <p class="end-mark" id="fimTitle">FIM<small>BADCLAUDE · direção 09 · cinemático</small></p>
+
+      <div class="credit-grid">
+        <div class="credit-col">
+          <h4>Direção</h4>
+          <p>BADCLAUDE</p>
+          <p>Cruzeiro do Sul · Acre</p>
+          <p>07°35′S · 72°48′W</p>
+        </div>
+        <div class="credit-col">
+          <h4>Elenco técnico</h4>
+          <p>Jogos 3D — Godot 4 + Blender</p>
+          <p>Sistemas — TypeScript · Python</p>
+          <p>Sites — HTML, CSS, canvas</p>
+        </div>
+        <div class="credit-col">
+          <h4>Sem imagens</h4>
+          <p>Toda a arte desta página é</p>
+          <p>desenhada em código: canvas,</p>
+          <p>SVG e movimento.</p>
+        </div>
+        <div class="credit-col">
+          <h4>Contato</h4>
+          <p><a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></p>
+          <p><a data-wa href="https://wa.me/5568999999999" target="_blank" rel="noopener">WhatsApp · +55 68 99999-9999</a></p>
+          <p>Seg a sáb · 8h – 19h</p>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <nav class="foot-links" aria-label="Links do rodapé">
+          <a href="#estudio">Estúdio</a>
+          <a href="#frentes">Frentes</a>
+          <a href="#jurua">Juruá</a>
+          <a href="#planos">Planos</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <span class="copy">© 2026 BADCLAUDE — Eu me construí, eu me desfaço e me refaço.</span>
+        <a class="top-link" href="#top">Voltar ao início <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<div class="bar top" aria-hidden="true"></div>
+<div class="bar bot" aria-hidden="true"></div>
+
+<!-- dicionário compartilhado + extensões desta direção -->
+<script src="../../assets/js/i18n.js"></script>
+<script>
+(function () {
+  var extra = {
+    pt: {
+      'c9.eyebrow': 'AT0 — Prelúdio',
+      'c9.act1': 'O estúdio',
+      'c9.act2': 'As frentes',
+      'c9.act3': 'Os números',
+      'c9.act4': 'Juruá — em produção',
+      'c9.act5': 'O processo',
+      'c9.act6': 'As produções',
+      'c9.act7': 'As vozes',
+      'c9.n1': 'Estúdio', 'c9.n2': 'Frentes', 'c9.n3': 'Juruá',
+      'c9.n4': 'Processo', 'c9.n5': 'Planos', 'c9.n6': 'Contato'
+    },
+    en: {
+      'c9.eyebrow': 'ACT 0 — Prelude',
+      'c9.act1': 'The studio',
+      'c9.act2': 'The fronts',
+      'c9.act3': 'The numbers',
+      'c9.act4': 'Juruá — in production',
+      'c9.act5': 'The process',
+      'c9.act6': 'The productions',
+      'c9.act7': 'The voices',
+      'c9.n1': 'Studio', 'c9.n2': 'Fronts', 'c9.n3': 'Juruá',
+      'c9.n4': 'Process', 'c9.n5': 'Plans', 'c9.n6': 'Contact'
+    },
+    es: {
+      'c9.eyebrow': 'AT0 — Preludio',
+      'c9.act1': 'El estudio',
+      'c9.act2': 'Los frentes',
+      'c9.act3': 'Los números',
+      'c9.act4': 'Juruá — en producción',
+      'c9.act5': 'El proceso',
+      'c9.act6': 'Las producciones',
+      'c9.act7': 'Las voces',
+      'c9.n1': 'Estudio', 'c9.n2': 'Frentes', 'c9.n3': 'Juruá',
+      'c9.n4': 'Proceso', 'c9.n5': 'Planes', 'c9.n6': 'Contacto'
+    }
+  };
+  if (window.I18N) {
+    Object.keys(extra).forEach(function (l) {
+      window.I18N[l] = Object.assign({}, window.I18N[l] || {}, extra[l]);
+    });
+  }
+  if (window.SITE_CONFIG) {
+    window.SITE_CONFIG.whatsappMessage = {
+      pt: 'Olá! Vim pelo site da BADCLAUDE e quero conversar sobre um projeto.',
+      en: 'Hi! I found BADCLAUDE online and I would like to talk about a project.',
+      es: '¡Hola! Llegué desde el sitio de BADCLAUDE y quiero conversar sobre un proyecto.'
+    };
+  }
+})();
+</script>
+<script defer src="../../assets/js/lang.js"></script>
+<script defer src="../../assets/js/lead.js"></script>
+
+<script>
+/* ============================================================
+   MOTOR DA PÁGINA — roda sem build e sem servidor.
+   Os módulos compartilhados (badclawd.js / reactbits.js) são ES
+   modules: carregam por HTTP e, quando a página é aberta direto
+   do disco (file://), o navegador bloqueia por CORS. Por isso a
+   página tem fallbacks locais equivalentes e tenta os módulos
+   primeiro — quem abre pelo servidor recebe o mascote completo.
+   ============================================================ */
+(function () {
+  function boot() {
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const TAU = Math.PI * 2;
+
+  /* ----------------------------------------------------------
+     Fallbacks de animação (mesma API dos módulos de reactbits)
+     ---------------------------------------------------------- */
+  function fbSplitText(el, opts) {
+    if (!el || el.dataset.split === '1') return;
+    el.dataset.split = '1';
+    el.classList.add('rb-split');
+    const stagger = opts && opts.stagger != null ? opts.stagger : 0.018;
+    const delay = opts && opts.delay ? opts.delay : 0;
+    const text = el.textContent || '';
+    el.textContent = '';
+    const parts = [];
+    // agrupa por palavra para que a quebra de linha aconteça entre
+    // palavras, nunca no meio de uma
+    let word = null;
+    Array.from(text).forEach((ch) => {
+      if (ch === ' ' || ch === '\n') {
+        word = null;
+        el.appendChild(document.createTextNode(' '));
+        return;
+      }
+      if (!word) {
+        word = document.createElement('span');
+        word.className = 'rb-word';
+        el.appendChild(word);
+      }
+      const wrap = document.createElement('span');
+      wrap.className = 'rb-char';
+      const inner = document.createElement('span');
+      inner.className = 'rb-char-i';
+      inner.textContent = ch;
+      wrap.appendChild(inner);
+      word.appendChild(wrap);
+      parts.push(inner);
+    });
+    requestAnimationFrame(() => {
+      parts.forEach((p, i) => {
+        p.style.transitionDelay = (delay + i * stagger) + 's';
+        p.classList.add('rb-in');
+      });
+    });
+  }
+
+  function fbCountUp(el, opts) {
+    const to = Number(el.dataset.count || 0);
+    const dur = (opts && opts.duration) || 1700;
+    const start = performance.now();
+    const fmt = (v) => Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    (function frame(now) {
+      const p = Math.min(1, (now - start) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * e);
+      if (p < 1) requestAnimationFrame(frame);
+    })(start);
+  }
+
+  function fbOnEnter(els, cb, opts) {
+    const list = Array.from(els);
+    if (!list.length) return;
+    if (!('IntersectionObserver' in window)) { list.forEach(cb); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        cb(e.target);
+        io.unobserve(e.target);
+      });
+    }, {
+      threshold: (opts && opts.threshold != null) ? opts.threshold : 0.2,
+      rootMargin: (opts && opts.rootMargin) || '0px 0px -10% 0px'
+    });
+    list.forEach((el) => io.observe(el));
+  }
+
+  function fbClickSpark(sel, opts) {
+    const color = (opts && opts.color) || '#e8e2d6';
+    const count = (opts && opts.count) || 7;
+    $$(sel).forEach((root) => {
+      root.addEventListener('click', (e) => {
+        if (reduce) return;
+        for (let i = 0; i < count; i++) {
+          const s = document.createElement('span');
+          s.className = 'rb-spark';
+          s.style.left = e.clientX + 'px';
+          s.style.top = e.clientY + 'px';
+          s.style.background = color;
+          const a = (i / count) * TAU + Math.random() * 0.6;
+          const d = 16 + Math.random() * 26;
+          s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px');
+          s.style.setProperty('--dy', (Math.sin(a) * d).toFixed(1) + 'px');
+          document.body.appendChild(s);
+          setTimeout(() => s.remove(), 640);
+        }
+      });
+    });
+  }
+
+  const RB = { splitText: fbSplitText, countUp: fbCountUp, onEnter: fbOnEnter, clickSpark: fbClickSpark };
+
+  /* ----------------------------------------------------------
+     1. Poeira no feixe
+     ---------------------------------------------------------- */
+  (function dust() {
+    const c = $('#dust');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let W = 0, H = 0, motes = [], raf = null;
+
+    function size() {
+      W = window.innerWidth; H = window.innerHeight;
+      c.width = Math.round(W * dpr);
+      c.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = W < 700 ? 42 : 108;
+      motes = Array.from({ length: n }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.35,
+        vy: -(Math.random() * 0.16 + 0.03),
+        vx: (Math.random() - 0.5) * 0.09,
+        a: Math.random() * 0.42 + 0.1,
+        p: Math.random() * TAU
+      }));
+    }
+
+    function frame(t) {
+      raf = null;
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < motes.length; i++) {
+        const m = motes[i];
+        m.x += m.vx + Math.sin(t * 0.0004 + m.p) * 0.14;
+        m.y += m.vy;
+        if (m.y < -10) { m.y = H + 10; m.x = Math.random() * W; }
+        if (m.x < -10) m.x = W + 10;
+        if (m.x > W + 10) m.x = -10;
+        ctx.globalAlpha = m.a * (0.55 + 0.45 * Math.sin(t * 0.0011 + m.p));
+        ctx.fillStyle = '#efe6d6';
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, TAU);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (!reduce) raf = requestAnimationFrame(frame);
+    }
+
+    size();
+    window.addEventListener('resize', size, { passive: true });
+    raf = requestAnimationFrame(frame);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+      else if (!raf && !reduce) raf = requestAnimationFrame(frame);
+    });
+  })();
+
+  /* ----------------------------------------------------------
+     2. Mascote local (fallback do BadClawd — mesma silhueta,
+        contraluz, patas plantadas e olhar que segue o cursor)
+     ---------------------------------------------------------- */
+  function LocalPet(canvas, opts) {
+    this.c = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.accent = opts.accent || '#e8e2d6';
+    this.state = opts.state || 'idle';
+    this.pointer = null;
+    this.t = Math.random() * 40;
+    this.blink = 0;
+    this.blinkAt = 2 + Math.random() * 3;
+    this.gaze = { x: 0, y: 0 };
+    this.gazeT = { x: 0, y: 0 };
+    this.facing = 1;
+    this.visible = true;
+    this.raf = null;
+    this._resize();
+    this._onResize = () => this._resize();
+    window.addEventListener('resize', this._onResize, { passive: true });
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver((es) => {
+        es.forEach((e) => { this.visible = e.isIntersecting; });
+      }, { rootMargin: '140px' });
+      this.io.observe(canvas);
+    }
+    this._loop = this._loop.bind(this);
+    this.raf = requestAnimationFrame(this._loop);
+  }
+  LocalPet.prototype._resize = function () {
+    const r = this.c.getBoundingClientRect();
+    const w = Math.max(80, Math.round(r.width || 300));
+    const h = Math.max(80, Math.round(r.height || 300));
+    this.c.width = Math.round(w * this.dpr);
+    this.c.height = Math.round(h * this.dpr);
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    this.w = w; this.h = h;
+    this.u = Math.min(w, h) / 100;
+  };
+  LocalPet.prototype.setState = function (s) { this.state = s; };
+  LocalPet.prototype.pointAt = function (x, y) {
+    this.pointer = { x: x, y: y };
+    this.facing = x < this.w / 2 ? -1 : 1;
+  };
+  LocalPet.prototype.clearPoint = function () { this.pointer = null; };
+  LocalPet.prototype._loop = function () {
+    this.raf = requestAnimationFrame(this._loop);
+    if (!this.visible || reduce) return;
+    const t = (this.t += 0.016);
+    this.blinkAt -= 0.016;
+    if (this.blinkAt <= 0) { this.blink = 1; this.blinkAt = 2.2 + Math.random() * 3.4; }
+    this.blink = Math.max(0, this.blink - 0.08);
+
+    if (this.pointer) {
+      const cx = this.w / 2, cy = this.h * 0.45;
+      const dx = this.pointer.x - cx, dy = this.pointer.y - cy;
+      const l = Math.hypot(dx, dy) || 1;
+      const k = Math.min(1, l / 220);
+      this.gazeT.x = (dx / l) * k * 1.1;
+      this.gazeT.y = (dy / l) * k * 1.1;
+    } else {
+      this.gazeT.x = Math.sin(t * 0.45) * 0.32;
+      this.gazeT.y = Math.cos(t * 0.36) * 0.13;
+    }
+    this.gaze.x += (this.gazeT.x - this.gaze.x) * 0.1;
+    this.gaze.y += (this.gazeT.y - this.gaze.y) * 0.1;
+
+    this.ctx.clearRect(0, 0, this.w, this.h);
+    this.draw(t);
+  };
+  LocalPet.prototype.destroy = function () {
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('resize', this._onResize);
+    if (this.io) this.io.disconnect();
+  };
+  LocalPet.prototype.draw = function (t) {
+    const ctx = this.ctx, u = this.u;
+    const cx = this.w / 2;
+    const ground = this.h * 0.74;
+    const walk = this.state === 'walk';
+    const rear = this.state === 'alert' ? 1 : 0;
+    const bob = Math.sin(t * 1.5) * 0.55 * u + (walk ? Math.sin(t * 7) * 0.9 * u : 0);
+    const bodyY = ground - 20 * u + bob - rear * 7 * u;
+    const bodyW = 40 * u, bodyH = 23 * u;
+
+    // halo de contraluz
+    const g = ctx.createRadialGradient(cx, bodyY - 4 * u, 2, cx, bodyY, 62 * u);
+    g.addColorStop(0, 'rgba(232,226,214,.20)');
+    g.addColorStop(1, 'rgba(232,226,214,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(cx, bodyY, 62 * u, 0, TAU);
+    ctx.fill();
+
+    // sombra
+    ctx.save();
+    ctx.globalAlpha = 0.22;
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.ellipse(cx, ground + 3 * u, bodyW * 0.6, 5 * u, 0, 0, TAU);
+    ctx.fill();
+    ctx.restore();
+
+    // patas
+    const bone = '#e6e0d4';
+    const hips = [
+      { x: cx - bodyW * 0.32, out: -1, ph: 0 },
+      { x: cx - bodyW * 0.15, out: -1, ph: Math.PI },
+      { x: cx + bodyW * 0.15, out: 1, ph: 0 },
+      { x: cx + bodyW * 0.32, out: 1, ph: Math.PI }
+    ];
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    for (let i = 0; i < hips.length; i++) {
+      const hp = hips[i];
+      const sp = t * 7 + hp.ph;
+      const lift = walk ? Math.max(0, Math.sin(sp)) * 4.4 * u : 0;
+      const swing = walk ? Math.cos(sp) * 4 * u : 0;
+      const fx = hp.x + swing + hp.out * 2.4 * u;
+      const fy = ground - lift;
+      const kneeY = bodyY + bodyH * 0.55;
+      ctx.beginPath();
+      ctx.moveTo(hp.x, bodyY + bodyH * 0.28);
+      ctx.quadraticCurveTo(hp.x + hp.out * 3.4 * u, kneeY, fx, fy);
+      ctx.strokeStyle = bone;
+      ctx.lineWidth = 7 * u;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(fx, fy - 1.4 * u, 4.3 * u, 2.6 * u, 0, 0, TAU);
+      ctx.fillStyle = bone;
+      ctx.fill();
+    }
+
+    // corpo + orelhas
+    ctx.save();
+    ctx.translate(cx, bodyY);
+    ctx.scale(this.facing, 1);
+
+    ctx.fillStyle = bone;
+    [-1, 1].forEach((s) => {
+      ctx.beginPath();
+      ctx.moveTo(s * bodyW * 0.29, -bodyH * 0.55);
+      ctx.quadraticCurveTo(s * bodyW * 0.39, -bodyH * 0.86, s * bodyW * 0.43, -bodyH * 0.34);
+      ctx.closePath();
+      ctx.fill();
+    });
+
+    ctx.beginPath();
+    ctx.moveTo(-bodyW * 0.5, -bodyH * 0.1);
+    ctx.bezierCurveTo(-bodyW * 0.52, -bodyH * 0.58, -bodyW * 0.3, -bodyH * 0.74, 0, -bodyH * 0.74);
+    ctx.bezierCurveTo(bodyW * 0.3, -bodyH * 0.74, bodyW * 0.52, -bodyH * 0.58, bodyW * 0.5, -bodyH * 0.1);
+    ctx.bezierCurveTo(bodyW * 0.5, bodyH * 0.32, bodyW * 0.28, bodyH * 0.52, 0, bodyH * 0.52);
+    ctx.bezierCurveTo(-bodyW * 0.28, bodyH * 0.52, -bodyW * 0.5, bodyH * 0.32, -bodyW * 0.5, -bodyH * 0.1);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(6,6,6,.28)';
+    ctx.lineWidth = 0.9 * u;
+    ctx.stroke();
+
+    // olhos
+    const eyeY = -bodyH * 0.2;
+    const eyeR = 5.2 * u;
+    const gap = bodyW * 0.19;
+    const open = Math.max(0.06, 1 - this.blink);
+    [-1, 1].forEach((s) => {
+      ctx.save();
+      ctx.translate(gap * s, eyeY);
+      ctx.scale(1, open);
+      ctx.beginPath();
+      ctx.arc(0, 0, eyeR, 0, TAU);
+      ctx.fillStyle = '#0a0a0a';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(this.gaze.x * eyeR * 0.42, this.gaze.y * eyeR * 0.42, eyeR * 0.44, 0, TAU);
+      ctx.fillStyle = '#f6f2ea';
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // coleira
+    ctx.beginPath();
+    ctx.arc(0, bodyH * 0.34, 2.1 * u, 0, TAU);
+    ctx.fillStyle = this.accent;
+    ctx.fill();
+    ctx.restore();
+  };
+
+  /* ----------------------------------------------------------
+     3. Monta os mascotes; tenta o módulo real depois
+     ---------------------------------------------------------- */
+  const petEls = $$('canvas.pet');
+  const pets = petEls.map((el) => {
+    const o = { state: el.dataset.pet || 'idle', accent: '#e8e2d6', variant: 'light' };
+    const p = new LocalPet(el, o);
+    p._isLocal = true;
+    p.el = el;
+    p._opts = o;
+    return p;
+  });
+
+  if (pets.length) {
+    window.addEventListener('pointermove', (e) => {
+      for (let i = 0; i < pets.length; i++) {
+        const pet = pets[i];
+        const r = pet.el.getBoundingClientRect();
+        if (r.width < 4) continue;
+        if (r.bottom < -260 || r.top > window.innerHeight + 260) continue;
+        pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+      }
+    }, { passive: true });
+  }
+
+  // upgrade para o BadClawd completo quando os ES modules carregam (http/https)
+  try {
+    const loader = document.createElement('script');
+    loader.type = 'module';
+    loader.textContent =
+      "try {\n" +
+      "  const m = await import('../../assets/js/badclawd.js');\n" +
+      "  window.__BadClawd = m.BadClawd;\n" +
+      "  window.dispatchEvent(new CustomEvent('petmodules'));\n" +
+      "} catch (e) { /* file:// — segue com o mascote local */ }\n";
+    document.body.appendChild(loader);
+
+    let fired = false;
+    const upgrade = () => {
+      if (fired || !window.__BadClawd) return;
+      fired = true;
+      pets.forEach((cur) => {
+        const el = cur.el;
+        try { cur.destroy(); } catch (e) {}
+        const real = new window.__BadClawd(el, { variant: 'light', accent: '#e8e2d6' });
+        real.setState(el.dataset.pet || 'idle');
+        real.el = el;
+        const idx = pets.indexOf(cur);
+        pets[idx] = real;
+      });
+    };
+    window.addEventListener('petmodules', upgrade);
+    const poll = setInterval(() => {
+      if (window.__BadClawd) { upgrade(); clearInterval(poll); }
+    }, 240);
+    setTimeout(() => clearInterval(poll), 6000);
+  } catch (e) { /* segue com o mascote local */ }
+
+  /* ----------------------------------------------------------
+     4. Títulos
+     ---------------------------------------------------------- */
+  function splitNow(el, stagger, delay) {
+    if (!el) return;
+    delete el.dataset.split;
+    el.classList.remove('rb-split');
+    RB.splitText(el, { stagger: stagger, delay: delay });
+  }
+
+  if (!reduce) {
+    $$('.hero-title .ln[data-split]').forEach((el, i) => splitNow(el, 0.02, 0.2 + i * 0.16));
+    RB.onEnter($$('[data-split-scroll]'), (el) => {
+      el.dataset.seen = '1';
+      splitNow(el, 0.016, 0);
+    }, { threshold: 0.35, rootMargin: '0px 0px -6% 0px' });
+  }
+
+  /* ----------------------------------------------------------
+     5. Números
+     ---------------------------------------------------------- */
+  RB.onEnter($$('[data-count]'), (el) => {
+    if (reduce) { el.textContent = el.dataset.count; return; }
+    RB.countUp(el, { duration: 1700 });
+  }, { threshold: 0.6 });
+
+  /* ----------------------------------------------------------
+     6. Revelar ao rolar
+     ---------------------------------------------------------- */
+  RB.onEnter($$('[data-reveal]'), (el) => el.classList.add('in'), {
+    threshold: 0.1, rootMargin: '0px 0px -5% 0px'
+  });
+
+  /* ----------------------------------------------------------
+     7. Cabeçalho, progresso e ato ativo
+     ---------------------------------------------------------- */
+  const head = $('#siteHead');
+  const prog = $('#prog');
+  const railLinks = $$('.rail a');
+  let ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (prog) prog.style.width = (max > 0 ? Math.min(1, y / max) * 100 : 0) + '%';
+      if (head) head.classList.toggle('is-stuck', y > 24);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if ('IntersectionObserver' in window && railLinks.length) {
+    const byId = {};
+    railLinks.forEach((a) => { byId[a.getAttribute('href').slice(1)] = a; });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        railLinks.forEach((a) => a.classList.remove('is-active'));
+        if (byId[e.target.id]) byId[e.target.id].classList.add('is-active');
+      });
+    }, { rootMargin: '-46% 0px -50% 0px', threshold: 0 });
+    $$('main section[id], main footer[id]').forEach((s) => io.observe(s));
+  }
+
+  /* ----------------------------------------------------------
+     8. Parallax dos números-fantasma
+     ---------------------------------------------------------- */
+  if (!reduce) {
+    const ghosts = $$('.ghost');
+    let raf = null;
+    const move = () => {
+      raf = null;
+      for (let i = 0; i < ghosts.length; i++) {
+        const g = ghosts[i];
+        const host = g.parentElement;
+        if (!host) continue;
+        const r = host.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > window.innerHeight + 200) continue;
+        const p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        g.style.transform = 'translate3d(0,' + (p * -32).toFixed(1) + 'px,0)';
+      }
+    };
+    window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(move); }, { passive: true });
+    move();
+  }
+
+  /* ----------------------------------------------------------
+     9. Menu mobile
+     ---------------------------------------------------------- */
+  const burger = $('#burger');
+  const menu = $('#menu');
+
+  function setMenu(open) {
+    if (!menu || !burger) return;
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.classList.toggle('menu-open', open);
+    if (open) {
+      const first = menu.querySelector('a');
+      if (first) first.focus({ preventScroll: true });
+    }
+  }
+  if (burger && menu) {
+    burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    $$('#menu a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        setMenu(false);
+        burger.focus();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 960 && menu.classList.contains('open')) setMenu(false);
+    }, { passive: true });
+  }
+
+  /* ----------------------------------------------------------
+     10. Formulário → monta e-mail (nada sai do navegador)
+     ---------------------------------------------------------- */
+  const form = $('#cform');
+  const statusEl = $('#formStatus');
+  const mailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const nome = (fd.get('nome') || '').toString().trim();
+      const mail = (fd.get('email') || '').toString().trim();
+      const tipo = (fd.get('tipo') || '').toString().trim();
+      const msg = (fd.get('mensagem') || '').toString().trim();
+
+      if (!nome || !msg || !mailOk.test(mail)) {
+        if (statusEl) statusEl.textContent = 'Preencha nome, um e-mail válido e a mensagem.';
+        const target = !nome ? $('#f-name') : (!mailOk.test(mail) ? $('#f-mail') : $('#f-msg'));
+        if (target) target.focus();
+        return;
+      }
+
+      const subject = 'Novo projeto — ' + tipo + ' — ' + nome;
+      const body = 'Nome: ' + nome + '\nE-mail: ' + mail + '\nTipo: ' + tipo + '\n\n' + msg;
+      if (statusEl) statusEl.textContent = 'Abrindo seu aplicativo de e-mail…';
+      window.location.href = 'mailto:contato@badclaude.dev?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      setTimeout(() => {
+        if (statusEl) statusEl.textContent = 'Se nada abrir, escreva direto para contato@badclaude.dev.';
+      }, 500);
+    });
+  }
+
+  const copyBtn = $('#copyMail');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const mail = 'contato@badclaude.dev';
+      const done = () => {
+        copyBtn.textContent = 'E-mail copiado';
+        setTimeout(() => { copyBtn.textContent = 'Copiar e-mail'; }, 2400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mail).then(done).catch(() => {
+          copyBtn.textContent = mail;
+        });
+      } else {
+        copyBtn.textContent = mail;
+      }
+    });
+  }
+
+  /* ----------------------------------------------------------
+     11. Micro-interações + troca de idioma
+     ---------------------------------------------------------- */
+  if (!reduce) {
+    RB.clickSpark('.btn', { color: '#e8e2d6', count: 7 });
+    RB.clickSpark('.card', { color: '#c9a983', count: 6 });
+  }
+
+  document.addEventListener('badclaude:lang', () => {
+    if (reduce) return;
+    $$('.hero-title .ln[data-split]').forEach((el, i) => splitNow(el, 0.018, i * 0.08));
+    $$('[data-split-scroll]').forEach((el) => {
+      if (el.dataset.seen === '1') splitNow(el, 0.014, 0);
+    });
+  });
+
+  } // boot
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
+<!-- ASSINATURA FINAL — linha oficial do estúdio -->
+<section class="bc-assinatura" aria-label="Condições e assinatura">
+  <p>Preços variados — depende da demanda e oferta do mercado de pontes. O cliente pode ter seu dinheiro de volta do que não usou em contrato. CZSLHBS · Antônio Clóvis · Acre · Cruzeiro do Sul — (fé em Deus e justa é a batalha do guerreiro)</p>
+</section>
+<style>
+  .bc-assinatura {
+    border-top: 1px solid currentColor;
+    opacity: .72;
+    padding: 22px clamp(16px, 4vw, 52px) 30px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.7;
+    letter-spacing: .01em;
+    max-width: 92ch;
+    margin: 0 auto;
+  }
+  .bc-assinatura p { margin: 0; }
+</style>
+</body>
+</html>

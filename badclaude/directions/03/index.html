@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — Estúdio de software no Vale do Juruá</title>
+<meta name="description" content="BADCLAUDE é um estúdio indie em Cruzeiro do Sul, Acre. Jogos 3D como JURUÁ, sistemas web com agentes de IA e sites desenhados em código — do primeiro risco ao produto rodando.">
+<meta name="theme-color" content="#f6f0e4">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BADCLAUDE">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BADCLAUDE — Eu me construí. Eu me desfaço e me refaço.">
+<meta property="og:description" content="Jogos 3D, sistemas com IA e sites. Um estúdio de software independente no Vale do Juruá, Acre.">
+<meta property="og:url" content="https://badclaude.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f6f0e4'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%231f1a14'/%3E%3Ccircle cx='11' cy='9.6' r='2.7' fill='%231f1a14'/%3E%3Ccircle cx='21' cy='9.6' r='2.7' fill='%231f1a14'/%3E%3Ccircle cx='13' cy='15' r='1.8' fill='%23f6f0e4'/%3E%3Ccircle cx='19' cy='15' r='1.8' fill='%23f6f0e4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="../../assets/js/i18n.js"></script>
+<script>
+  /* a BADCLAUDE usa o mesmo dicionário, mas com a própria mensagem de contato */
+  try {
+    window.SITE_CONFIG.whatsapp = '5568999999999';
+    window.SITE_CONFIG.email = 'contato@badclaude.dev';
+    window.SITE_CONFIG.whatsappMessage = {
+      pt: 'Olá! Vim pelo site da BADCLAUDE e quero falar sobre um projeto.',
+      en: 'Hi! I found BADCLAUDE online and I would like to talk about a project.',
+      es: '¡Hola! Llegué desde el sitio de BADCLAUDE y quiero hablar de un proyecto.'
+    };
+  } catch (e) {}
+</script>
+<script defer src="../../assets/js/lang.js"></script>
+<script defer src="../../assets/js/lead.js"></script>
+<style>
+/* ============================================================
+   BADCLAUDE · DIREÇÃO 03 — "EDITORIAL QUENTE"
+   Papel creme, serifa grande, tinta preta, terso vermelho-terra.
+   Tudo desenhado no arquivo: nenhuma imagem raster, nenhum template.
+   ============================================================ */
+
+:root{
+  --paper:#f6f0e4;
+  --paper-2:#efe5d1;
+  --paper-3:#e6d9c0;
+  --card:#fbf6ea;
+  --ink:#1f1a14;
+  --ink-2:#4a4034;
+  --mute:#6d6151;
+  --terra:#b03a2e;
+  --terra-2:#8c2a20;
+  --terra-pale:#dfb4a6;
+  --rule:rgba(31,26,20,.16);
+  --rule-2:rgba(31,26,20,.3);
+  --serif:'Fraunces','Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Inter Tight',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(20px,5.2vw,96px);
+  --hh:66px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.62;
+  font-optical-sizing:auto;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0}
+ul,ol{list-style:none;padding:0}
+button{font:inherit;color:inherit}
+::selection{background:var(--terra);color:#fdf7ec}
+
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:1px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0
+}
+.skip{
+  position:fixed;left:12px;top:-70px;z-index:1000;
+  background:var(--ink);color:var(--paper);padding:12px 18px;
+  font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;transition:top .25s var(--ease)
+}
+.skip:focus{top:12px}
+
+/* ---------- grão de papel (SVG em data URI, sem requisição) ---------- */
+.grain{
+  position:fixed;inset:0;z-index:4;pointer-events:none;
+  opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+}
+
+/* ---------- régua de leitura ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:transparent;pointer-events:none}
+.progress i{display:block;height:100%;width:0;background:var(--terra);transition:width .12s linear}
+
+/* ============================================================
+   ESTRUTURA
+   ============================================================ */
+.shell{width:100%;max-width:1300px;margin:0 auto;padding:0 var(--pad)}
+.rule{height:1px;background:var(--rule)}
+.section{position:relative;padding:clamp(56px,8.5vw,124px) 0}
+.section[id]{scroll-margin-top:calc(var(--hh) + 18px)}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font:500 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute)
+}
+.eyebrow::before{
+  content:"";width:7px;height:7px;background:var(--terra);flex:none;
+  transform:translateY(-.5px)
+}
+.eyebrow--light{color:rgba(246,240,228,.66)}
+.eyebrow--light::before{background:var(--terra-pale)}
+
+.sec-head{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);
+  gap:clamp(18px,4vw,64px);align-items:end;
+  padding-bottom:clamp(24px,3.4vw,44px);
+  border-bottom:1px solid var(--rule-2)
+}
+.sec-head .sec-meta{justify-self:start;padding-bottom:6px}
+.sec-head .sec-note{
+  font:400 14px/1.65 var(--sans);color:var(--mute);
+  max-width:36ch;justify-self:end;padding-bottom:6px
+}
+.sec-title{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.02;
+  letter-spacing:-.022em;margin-top:18px;text-wrap:balance
+}
+.sec-title em{font-style:italic;color:var(--terra);font-weight:400}
+.sec-no{
+  font:500 10px/1 var(--mono);letter-spacing:.18em;color:var(--terra);
+  justify-self:end;align-self:start;margin-top:4px;white-space:nowrap
+}
+
+/* ============================================================
+   TOPO / NAVEGAÇÃO
+   ============================================================ */
+.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,240,228,.84);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  backdrop-filter:blur(14px) saturate(1.1);
+  border-bottom:1px solid var(--rule);
+  transition:box-shadow .4s var(--ease)
+}
+.top.is-scrolled{box-shadow:0 18px 40px -34px rgba(31,26,20,.8)}
+.top-in{
+  height:var(--hh);display:flex;align-items:center;gap:clamp(14px,2.4vw,34px);
+  justify-content:space-between
+}
+.logo{
+  display:flex;align-items:center;gap:11px;text-decoration:none;flex:none;
+  padding:6px 0
+}
+.logo-mark{width:26px;height:26px;color:var(--terra);flex:none}
+.logo-txt{
+  font:600 18px/1 var(--serif);letter-spacing:.045em;text-transform:uppercase
+}
+.logo-sub{
+  font:400 9.5px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--mute);padding-left:11px;border-left:1px solid var(--rule-2);
+  transform:translateY(1px)
+}
+.nav{display:flex;align-items:center;gap:clamp(16px,2.2vw,32px);margin-left:auto}
+.nav a{
+  font:500 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-2);padding:9px 0;position:relative;
+  transition:color .25s
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;
+  background:var(--terra);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease)
+}
+.nav a:hover,.nav a:focus-visible{color:var(--ink)}
+.nav a:hover::after,.nav a:focus-visible::after,.nav a.is-active::after{transform:scaleX(1)}
+.nav a.is-active{color:var(--terra)}
+.top-cta{flex:none}
+
+/* botões */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:46px;padding:14px 22px;
+  font:500 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);background:var(--paper);
+  border:1px solid var(--ink);border-radius:0;cursor:pointer;
+  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease)
+}
+.btn .arw{transition:transform .35s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn:hover .arw{transform:translateX(4px)}
+.btn--terra{background:var(--terra);border-color:var(--terra);color:#fdf7ec}
+.btn--terra:hover{background:var(--terra-2);border-color:var(--terra-2);color:#fdf7ec}
+.btn--ghost{background:transparent}
+.btn--sm{min-height:38px;padding:11px 16px;font-size:10px}
+.btn--block{width:100%}
+
+/* hambúrguer */
+.burger{
+  display:none;width:44px;height:44px;border:1px solid var(--rule-2);
+  background:transparent;cursor:pointer;padding:0;flex:none;position:relative
+}
+.burger span{
+  position:absolute;left:12px;top:50%;width:18px;height:1.5px;background:var(--ink);
+  margin-top:-1.5px;transition:transform .35s var(--ease)
+}
+.burger span:first-child{transform:translateY(-4px)}
+.burger span:last-child{transform:translateY(2.5px)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(-.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-.75px) rotate(-45deg)}
+.burger:hover span{background:var(--terra)}
+
+/* menu mobile */
+.mnav{
+  position:fixed;left:0;right:0;top:var(--hh);z-index:49;
+  background:var(--paper);border-bottom:1px solid var(--ink);
+  padding:20px var(--pad) 30px;
+  transform:translateY(-12px);opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .35s var(--ease),transform .45s var(--ease),visibility .35s;
+  height:calc(100dvh - var(--hh));overflow:auto;
+  overscroll-behavior:contain
+}
+.mnav.is-open{transform:none;opacity:1;visibility:visible;pointer-events:auto}
+.mnav a{
+  display:flex;align-items:baseline;gap:14px;text-decoration:none;
+  padding:15px 0;border-bottom:1px solid var(--rule);
+  font:400 25px/1.1 var(--serif);letter-spacing:-.01em
+}
+.mnav a .idx{font:500 10px/1 var(--mono);letter-spacing:.16em;color:var(--terra);flex:none}
+.mnav a.wa{
+  margin-top:22px;border:1px solid var(--ink);padding:16px 18px;
+  font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  justify-content:center;border-bottom:1px solid var(--ink)
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;overflow:clip;padding-top:clamp(18px,2.4vw,30px);padding-bottom:clamp(40px,6vw,76px)}
+.hero::before{
+  content:"";position:absolute;top:-60px;right:-14%;width:min(780px,72vw);height:min(780px,72vw);
+  background:radial-gradient(circle at 50% 50%,rgba(176,58,46,.085),rgba(176,58,46,0) 68%);
+  pointer-events:none;z-index:0
+}
+.masthead{
+  position:relative;z-index:1;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:13px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  font:500 9.5px/1.5 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)
+}
+.masthead .mh-r{display:flex;align-items:center;gap:10px;color:var(--mute)}
+.masthead .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--terra);
+  box-shadow:0 0 0 0 rgba(176,58,46,.5);animation:pulse 2.8s infinite
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(176,58,46,.45)}
+  70%{box-shadow:0 0 0 9px rgba(176,58,46,0)}
+  100%{box-shadow:0 0 0 0 rgba(176,58,46,0)}
+}
+
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);
+  gap:clamp(26px,4.4vw,68px);align-items:start;
+  padding-top:clamp(26px,4.4vw,58px)
+}
+.hero-kicker{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font:500 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-2);margin-bottom:clamp(18px,2.6vw,30px)
+}
+.hero-kicker .sep{width:22px;height:1px;background:var(--rule-2)}
+.hero-kicker .terra{color:var(--terra)}
+
+.hero-title{
+  font-size:clamp(2.72rem,7.5vw,6.4rem);
+  line-height:.97;letter-spacing:-.032em;font-weight:500;
+  margin:0 0 clamp(22px,3vw,34px)
+}
+.hero-title .ml{padding-bottom:.055em;margin-bottom:-.055em}
+.hero-title .ml-i{display:block}
+.motion .hero-title .ml-i{transform:translateY(112%);transition:transform 1.1s var(--ease);transition-delay:var(--d,0s)}
+.hero-title .l3 .ml-i{font-style:italic;color:var(--terra);font-weight:400}
+.hero-title .l1 .ml-i::first-letter{color:var(--terra)}
+.motion .hero-title.in .ml-i{transform:none}
+
+.hero-lead{
+  font:400 16.5px/1.72 var(--sans);color:var(--ink-2);
+  max-width:52ch;margin:0 0 30px
+}
+.hero-lead strong{font-weight:600;color:var(--ink)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-actions .wa-link{
+  font:500 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-2);text-decoration:none;padding:14px 4px;
+  border-bottom:1px solid var(--rule-2);transition:color .25s,border-color .25s
+}
+.hero-actions .wa-link:hover{color:var(--terra);border-color:var(--terra)}
+
+/* figura + mascote */
+.hero-fig{position:relative;margin-top:clamp(4px,1vw,16px)}
+.fig-frame{
+  position:relative;background:linear-gradient(170deg,#fdf9ef,#f0e6d2 72%,#ecdfc7);
+  border:1px solid var(--rule-2);padding:12px;
+  box-shadow:0 30px 70px -48px rgba(31,26,20,.65);
+  transition:transform .5s var(--ease)
+}
+.fig-frame::after{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(31,26,20,.08);pointer-events:none
+}
+.fig-frame canvas{
+  width:100%;aspect-ratio:1/1;cursor:crosshair;
+  display:block
+}
+.fig-cap{
+  display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  font:400 9.5px/1.55 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);margin-top:12px
+}
+.fig-cap b{font-weight:500;color:var(--ink-2)}
+.fig-hint{
+  font:400 9.5px/1.5 var(--mono);letter-spacing:.12em;color:var(--terra);
+  text-transform:uppercase;margin-top:7px
+}
+.stamp{
+  position:absolute;right:-6px;top:-24px;width:88px;height:88px;
+  color:var(--terra);transform:rotate(-9deg);opacity:.92;pointer-events:none;
+  animation:spin 60s linear infinite
+}
+.stamp text{
+  font-family:var(--mono);font-size:7.1px;letter-spacing:1.55px;fill:currentColor;font-weight:500
+}
+@keyframes spin{to{transform:rotate(351deg)}}
+
+/* faixa de metadados */
+.meta-strip{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  margin-top:clamp(34px,5vw,64px)
+}
+.meta-cell{padding:18px 0}
+.meta-cell+.meta-cell{border-left:1px solid var(--rule);padding-left:clamp(14px,2.2vw,30px)}
+.meta-cell dt{
+  font:500 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:8px
+}
+.meta-cell dd{font:400 13px/1.5 var(--sans);color:var(--ink);margin:0}
+.meta-cell dd span{color:var(--mute)}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.band{
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--paper-2);overflow:hidden;padding:15px 0;
+  position:relative;width:100%;max-width:100vw;contain:paint
+}
+.band-track{
+  display:flex;width:max-content;gap:0;
+  animation:marq 46s linear infinite
+}
+.band:hover .band-track{animation-play-state:paused}
+.band-item{
+  display:flex;align-items:center;gap:clamp(20px,3vw,44px);padding-right:clamp(20px,3vw,44px);
+  font:500 11px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+  white-space:nowrap
+}
+.band-item::after{content:"✳";color:var(--terra);font-size:13px;letter-spacing:0}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   MANIFESTO
+   ============================================================ */
+.manifesto{position:relative}
+.man-grid{
+  display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  gap:clamp(30px,5.4vw,86px);padding-top:clamp(30px,4.4vw,58px);align-items:start
+}
+.man-title{
+  font:500 clamp(1.95rem,3.9vw,3.15rem)/1.06 var(--serif);
+  letter-spacing:-.025em;margin-top:20px;text-wrap:balance
+}
+.man-title em{font-style:italic;color:var(--terra)}
+.pull{
+  margin-top:clamp(24px,3.4vw,42px);padding:4px 0 4px 22px;
+  border-left:2px solid var(--terra);
+  font:400 clamp(1.12rem,1.6vw,1.34rem)/1.44 var(--serif);font-style:italic;
+  color:var(--ink);max-width:32ch
+}
+.pull cite{
+  display:block;margin-top:14px;font:500 9.5px/1.5 var(--mono);font-style:normal;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mute)
+}
+.man-body{
+  font:400 15.5px/1.78 var(--sans);color:var(--ink-2);
+  columns:2;column-gap:clamp(20px,3vw,40px);column-rule:1px solid var(--rule);
+  hyphens:auto
+}
+.man-body p{margin:0 0 1.1em;break-inside:avoid-column}
+.man-body p:first-child::first-letter{
+  float:left;font-family:var(--serif);font-weight:600;
+  font-size:3.5em;line-height:.74;padding:.07em .1em 0 0;color:var(--terra)
+}
+.man-body strong{color:var(--ink);font-weight:600}
+.man-sign{
+  margin-top:22px;display:flex;align-items:center;gap:14px;
+  font:400 12px/1.5 var(--sans);color:var(--mute)
+}
+.man-sign .sq{width:26px;height:1px;background:var(--rule-2)}
+.man-sign b{color:var(--ink);font-weight:500;font-family:var(--serif);font-style:italic;font-size:15px}
+
+/* ============================================================
+   FRENTES
+   ============================================================ */
+.frentes{padding-top:clamp(50px,7vw,104px)}
+.front-list{border-bottom:1px solid var(--rule-2)}
+.front{
+  display:grid;grid-template-columns:56px minmax(0,1fr) auto;
+  gap:clamp(16px,3vw,48px);align-items:start;
+  padding:clamp(24px,3.2vw,38px) clamp(8px,1.4vw,22px);
+  border-top:1px solid var(--rule);text-decoration:none;position:relative;
+  transition:background .45s var(--ease),color .45s var(--ease),padding .45s var(--ease)
+}
+.front-no{
+  font:500 11px/1 var(--mono);letter-spacing:.14em;color:var(--mute);
+  padding-top:9px;transition:color .4s
+}
+.front-main{min-width:0}
+.front h3{
+  font:500 clamp(1.42rem,2.3vw,2rem)/1.12 var(--serif);letter-spacing:-.018em;
+  transition:color .4s
+}
+.front p{
+  font:400 13.8px/1.66 var(--sans);color:var(--ink-2);max-width:58ch;
+  margin-top:9px;transition:color .4s
+}
+.front-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.front-tags span{
+  font:500 8.8px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);border:1px solid var(--rule);padding:6px 8px;
+  transition:color .4s,border-color .4s
+}
+.front-tag{
+  font:500 9px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);white-space:nowrap;padding-top:9px;display:flex;align-items:center;gap:10px
+}
+.front-tag .arw{
+  font-size:14px;color:var(--terra);opacity:0;transform:translateX(-6px);
+  transition:opacity .35s,transform .35s var(--ease)
+}
+.front:hover,.front:focus-visible{background:var(--ink);color:var(--paper)}
+.front:hover .front-no,.front:focus-visible .front-no{color:var(--terra-pale)}
+.front:hover p,.front:focus-visible p{color:rgba(246,240,228,.72)}
+.front:hover h3,.front:focus-visible h3{color:var(--paper)}
+.front:hover .front-tags li,.front:focus-visible .front-tags span{
+  color:rgba(246,240,228,.7);border-color:rgba(246,240,228,.22)
+}
+.front:hover .front-tag,.front:focus-visible .front-tag{color:var(--terra-pale)}
+.front:hover .front-tag .arw,.front:focus-visible .front-tag .arw{opacity:1;transform:none}
+.front:hover{outline:none}
+.front:focus-visible{outline:2px solid var(--terra);outline-offset:-4px}
+
+/* ============================================================
+   JURUÁ — caderno escuro
+   ============================================================ */
+.jurua{
+  position:relative;background:var(--ink);color:#f2e9d7;
+  padding:clamp(60px,9vw,128px) 0;overflow:hidden;margin-top:clamp(40px,6vw,80px)
+}
+.jurua .map{
+  position:absolute;inset:0;width:100%;height:100%;color:var(--terra);
+  opacity:.3;pointer-events:none
+}
+.jurua .glow{
+  position:absolute;left:-10%;bottom:-30%;width:60vw;height:60vw;max-width:760px;max-height:760px;
+  background:radial-gradient(circle,rgba(176,58,46,.3),rgba(176,58,46,0) 65%);
+  pointer-events:none
+}
+.jurua-in{position:relative;z-index:1}
+.jurua .sec-head{border-color:rgba(242,233,215,.22)}
+.jurua .sec-title{color:#f6efe0}
+.jurua .sec-title em{color:var(--terra-pale)}
+.jurua .sec-note{color:rgba(242,233,215,.6)}
+.jurua-grid{
+  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+  gap:clamp(30px,5vw,78px);padding-top:clamp(30px,4vw,54px)
+}
+.jurua-copy p{
+  font:400 15px/1.78 var(--sans);color:rgba(242,233,215,.76);margin-bottom:1em;
+  max-width:56ch
+}
+.jurua-copy p:first-child{font-size:17px;color:rgba(246,239,224,.94)}
+.jurua-copy p:first-child::first-letter{
+  float:left;font-family:var(--serif);font-weight:500;
+  font-size:3.1em;line-height:.86;padding:.06em .1em 0 0;color:var(--terra-pale)
+}
+.jurua-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.jurua-tags li{
+  font:500 8.8px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(242,233,215,.72);border:1px solid rgba(242,233,215,.24);padding:7px 9px
+}
+.spec{border-top:1px solid rgba(242,233,215,.24)}
+.spec-row{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;
+  padding:14px 0;border-bottom:1px solid rgba(242,233,215,.14)
+}
+.spec-row dt{
+  font:500 9px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(242,233,215,.5)
+}
+.spec-row dd{
+  margin:0;font:400 14px/1.4 var(--sans);color:#f2e9d7;text-align:right;
+  overflow-wrap:anywhere
+}
+.spec-row dd em{font-family:var(--serif);font-style:italic;color:var(--terra-pale)}
+.progress-block{margin-top:26px}
+.progress-lbl{
+  display:flex;justify-content:space-between;gap:12px;
+  font:500 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(242,233,215,.6);margin-bottom:10px
+}
+.progress-lbl b{color:var(--terra-pale);font-weight:500}
+.progress-bar{height:3px;background:rgba(242,233,215,.16);overflow:hidden}
+.progress-bar i{
+  display:block;height:100%;width:0;background:var(--terra);
+  transition:width 1.6s var(--ease) .2s
+}
+.jurua-in.in .progress-bar i{width:62%}
+.aside-quote{
+  margin-top:26px;font:400 15px/1.55 var(--serif);font-style:italic;
+  color:rgba(242,233,215,.82);padding-left:16px;border-left:1px solid var(--terra)
+}
+.aside-quote span{
+  display:block;margin-top:10px;font:500 8.8px/1.5 var(--mono);font-style:normal;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(242,233,215,.45)
+}
+
+/* ============================================================
+   NÚMEROS
+   ============================================================ */
+.numeros{position:relative;background:var(--paper-2);border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);overflow:hidden}
+.numeros .contour{
+  position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.85
+}
+.numeros-in{position:relative;z-index:1}
+.numeros .sec-head{border-color:var(--rule-2)}
+.stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-bottom:1px solid var(--rule-2)
+}
+.stat{padding:clamp(24px,3.4vw,40px) clamp(10px,1.6vw,22px) clamp(22px,3vw,34px)}
+.stat+.stat{border-left:1px solid var(--rule)}
+.stat-k{
+  font:500 9px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:14px;display:block
+}
+.stat-num{
+  font:500 clamp(2.9rem,5.4vw,4.6rem)/1 var(--serif);letter-spacing:-.04em;
+  color:var(--ink);display:flex;align-items:flex-start;gap:2px;
+  font-variant-numeric:tabular-nums
+}
+.stat-num .suf{font-size:.34em;color:var(--terra);padding-top:.45em;font-weight:500}
+.stat-d{
+  font:400 12.5px/1.55 var(--sans);color:var(--mute);max-width:22ch;margin-top:12px
+}
+
+/* ============================================================
+   PROCESSO
+   ============================================================ */
+.steps{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--ink);margin-top:clamp(26px,3.6vw,46px)
+}
+.step{
+  position:relative;padding:26px clamp(12px,1.8vw,26px) clamp(20px,2.6vw,30px);
+  border-right:1px solid var(--rule)
+}
+.step:last-child{border-right:0}
+.step::before{
+  content:"";position:absolute;top:-4px;left:0;width:7px;height:7px;
+  background:var(--terra);border-radius:50%
+}
+.step .sn{font:500 10px/1 var(--mono);letter-spacing:.16em;color:var(--terra);display:block;margin-bottom:16px}
+.step h3{font:500 1.4rem/1.15 var(--serif);letter-spacing:-.015em;margin-bottom:10px}
+.step p{font:400 13.2px/1.62 var(--sans);color:var(--ink-2);max-width:30ch}
+.step .dur{
+  display:inline-block;margin-top:14px;font:500 8.8px/1 var(--mono);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+  border-top:1px solid var(--rule);padding-top:9px
+}
+
+/* ============================================================
+   PLANOS
+   ============================================================ */
+.planos{background:var(--paper)}
+.plans{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,2vw,26px);margin-top:clamp(28px,4vw,50px);
+  align-items:stretch
+}
+.plan{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--card);border:1px solid var(--rule-2);
+  padding:clamp(22px,2.6vw,34px);
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s
+}
+.plan:hover{transform:translateY(-4px);box-shadow:0 34px 60px -46px rgba(31,26,20,.7);border-color:var(--rule-2)}
+.plan--lead{background:#fdf8ee;border-color:var(--terra)}
+.plan--lead::before{
+  content:"";position:absolute;inset:5px;border:1px solid rgba(176,58,46,.26);pointer-events:none
+}
+.plan-k{
+  font:500 8.8px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute);display:flex;align-items:center;gap:8px;margin-bottom:18px
+}
+.plan--lead .plan-k{color:var(--terra)}
+.plan-seal{
+  position:absolute;top:-14px;right:18px;width:58px;height:58px;
+  display:grid;place-items:center;text-align:center;
+  background:var(--terra);color:#fdf7ec;border-radius:50%;
+  font:500 7.2px/1.35 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  transform:rotate(8deg);box-shadow:0 8px 18px -10px rgba(140,42,32,.9)
+}
+.plan h3{font:500 clamp(1.5rem,2.2vw,1.85rem)/1.1 var(--serif);letter-spacing:-.02em}
+.plan-price{
+  display:flex;align-items:baseline;gap:8px;margin:14px 0 4px;
+  font:500 clamp(1.9rem,3vw,2.5rem)/1 var(--serif);letter-spacing:-.03em;color:var(--ink)
+}
+.plan-price .cur{font-size:.5em;color:var(--mute);letter-spacing:0}
+.plan--lead .plan-price{color:var(--terra)}
+.plan-note{font:400 9px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+.plan-d{font:400 13.5px/1.62 var(--sans);color:var(--ink-2);min-height:3.2em}
+.plan ul{
+  margin:20px 0 24px;padding-top:16px;border-top:1px solid var(--rule);flex:1
+}
+.plan li{
+  display:flex;gap:10px;font:400 13px/1.5 var(--sans);color:var(--ink-2);
+  padding:7px 0
+}
+.plan li::before{content:"—";color:var(--terra);flex:none}
+.plan .btn{margin-top:auto}
+.plans-foot{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center;
+  margin-top:clamp(20px,2.6vw,30px);padding-top:18px;border-top:1px solid var(--rule);
+  font:400 11px/1.6 var(--mono);letter-spacing:.06em;color:var(--mute)
+}
+.plans-foot b{color:var(--ink-2);font-weight:500}
+.plans-foot a{color:var(--terra);text-decoration:none;border-bottom:1px solid var(--terra-pale);padding-bottom:2px}
+.plans-foot a:hover{border-color:var(--terra)}
+
+/* ============================================================
+   VOZES
+   ============================================================ */
+.voices{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  gap:clamp(26px,4vw,64px);margin-top:clamp(26px,3.6vw,44px)
+}
+.quote{position:relative;margin:0}
+.quote::before{
+  content:"“";font:400 5.2rem/0.8 var(--serif);color:var(--terra);
+  display:block;height:.52em;opacity:.9
+}
+.quote--big{grid-row:span 2;padding-right:clamp(0px,2vw,26px);border-right:1px solid var(--rule)}
+.quote blockquote{
+  font:400 clamp(1.16rem,1.72vw,1.5rem)/1.5 var(--serif);color:var(--ink);
+  letter-spacing:-.01em;text-wrap:pretty
+}
+.quote--big blockquote{font-size:clamp(1.45rem,2.35vw,2.02rem);line-height:1.4}
+.quote figcaption{
+  margin-top:20px;padding-top:14px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap
+}
+.quote .who{font:500 12px/1.4 var(--sans);color:var(--ink)}
+.quote .who span{display:block;font-weight:400;color:var(--mute);font-size:11.5px;margin-top:2px}
+.quote .yr{font:500 9px/1 var(--mono);letter-spacing:.16em;color:var(--terra)}
+.quote--sm+.quote--sm{margin-top:clamp(20px,2.6vw,30px);padding-top:clamp(18px,2.4vw,26px);border-top:1px solid var(--rule)}
+.quote--sm blockquote{font-size:clamp(1rem,1.24vw,1.1rem);line-height:1.6}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-grid{
+  display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);
+  gap:clamp(26px,4.6vw,70px);padding-top:clamp(26px,3.6vw,44px);align-items:start
+}
+.faq-aside p{font:400 14px/1.7 var(--sans);color:var(--mute);max-width:28ch;margin-top:16px}
+.faq-aside .btn{margin-top:20px}
+.faq{border-top:1px solid var(--ink)}
+.qa{border-bottom:1px solid var(--rule)}
+.qa summary{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
+  padding:19px 0;cursor:pointer;list-style:none;
+  font:500 clamp(1.02rem,1.5vw,1.24rem)/1.35 var(--serif);letter-spacing:-.01em;
+  transition:color .25s
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover{color:var(--terra)}
+.qa summary .mk{
+  position:relative;width:15px;height:15px;flex:none;margin-top:6px;
+  transition:transform .4s var(--ease)
+}
+.qa summary .mk::before,.qa summary .mk::after{
+  content:"";position:absolute;background:var(--terra);left:0;top:7px;width:15px;height:1px
+}
+.qa summary .mk::after{transform:rotate(90deg);transition:transform .4s var(--ease)}
+.qa[open] summary{color:var(--terra)}
+.qa[open] summary .mk::after{transform:rotate(0)}
+.qa .ans{
+  padding:0 34px 22px 0;
+  font:400 14px/1.72 var(--sans);color:var(--ink-2);max-width:62ch
+}
+.qa .ans p{margin:0}
+.qa .ans strong{color:var(--ink);font-weight:600}
+
+/* ============================================================
+   CONTATO
+   ============================================================ */
+.contato{
+  position:relative;background:var(--paper-2);
+  border-top:1px solid var(--ink);
+  padding:clamp(56px,8vw,112px) 0 0;overflow:hidden
+}
+.ct-grid{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  gap:clamp(30px,5vw,80px);align-items:start
+}
+.ct-title{
+  font:500 clamp(2.3rem,5vw,4.2rem)/1.03 var(--serif);letter-spacing:-.03em;
+  margin-top:18px;text-wrap:balance
+}
+.ct-title em{font-style:italic;color:var(--terra)}
+.ct-lead{font:400 15.5px/1.7 var(--sans);color:var(--ink-2);max-width:44ch;margin-top:20px}
+.ct-channels{display:grid;gap:0;margin-top:clamp(24px,3.4vw,38px);border-top:1px solid var(--rule-2)}
+.ct-ch{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:15px 0;border-bottom:1px solid var(--rule);text-decoration:none;
+  transition:color .25s,padding .35s var(--ease)
+}
+.ct-ch:hover{color:var(--terra);padding-left:6px}
+.ct-ch span.k{
+  font:500 9px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mute);
+  display:block;margin-bottom:5px
+}
+.ct-ch span.v{font:400 15px/1.3 var(--sans);color:inherit}
+.ct-ch .arw{color:var(--terra);font-size:16px;flex:none}
+.ct-copy{
+  background:none;border:0;border-bottom:1px solid var(--rule);
+  padding:15px 0;display:flex;align-items:center;justify-content:space-between;
+  gap:16px;width:100%;cursor:pointer;text-align:left;font-family:var(--sans);
+  transition:color .25s
+}
+.ct-copy:hover{color:var(--terra)}
+.ct-copy .k{font:500 9px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:5px}
+.ct-copy .v{font-size:15px;color:var(--ink)}
+.ct-copy .cp{font:500 8.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--terra);flex:none}
+
+/* mascote do contato */
+.ct-pet{
+  display:flex;align-items:flex-end;gap:14px;margin-top:clamp(26px,3.4vw,40px)
+}
+.ct-pet canvas{
+  width:clamp(112px,15vw,168px);aspect-ratio:1/1;flex:none;cursor:pointer
+}
+.bubble{
+  position:relative;background:var(--card);border:1px solid var(--rule-2);
+  padding:13px 16px;font:400 13px/1.5 var(--serif);font-style:italic;color:var(--ink-2);
+  max-width:230px;margin-bottom:18px
+}
+.bubble::after{
+  content:"";position:absolute;left:-6px;bottom:16px;width:10px;height:10px;
+  background:var(--card);border-left:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);
+  transform:rotate(45deg)
+}
+
+/* formulário — só linhas, como ficha de revista */
+.form{
+  background:var(--card);border:1px solid var(--rule-2);
+  padding:clamp(22px,3vw,38px);position:relative
+}
+.form::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--terra)
+}
+.form-title{
+  font:500 1.32rem/1.2 var(--serif);letter-spacing:-.01em;margin-bottom:6px
+}
+.form-sub{font:400 12.5px/1.55 var(--sans);color:var(--mute);margin-bottom:24px}
+.field{margin-bottom:20px}
+.field label{
+  display:block;font:500 9px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:9px
+}
+.field input,.field select,.field textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--rule-2);
+  border-radius:0;padding:9px 0;color:var(--ink);
+  font:400 15px/1.45 var(--sans);
+  transition:border-color .25s,background .25s
+}
+.field select{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b03a2e'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 2px center;padding-right:22px
+}
+.field textarea{resize:vertical;min-height:96px}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--ink-2)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--terra);box-shadow:0 1px 0 0 var(--terra)
+}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{
+  outline:2px solid var(--terra);outline-offset:4px
+}
+.form-foot{margin-top:6px}
+.form-note{
+  font:400 10.5px/1.6 var(--mono);letter-spacing:.03em;color:var(--mute);
+  margin-top:14px
+}
+.form-status{
+  margin-top:12px;font:500 10.5px/1.6 var(--mono);letter-spacing:.05em;color:var(--terra);
+  min-height:1em
+}
+
+/* rodapé do contato */
+.ct-foot{
+  margin-top:clamp(42px,6vw,80px);border-top:1px solid var(--rule-2);
+  padding:18px 0 22px;
+  display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;align-items:center;
+  font:500 9px/1.6 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)
+}
+.ct-foot span{display:inline-flex;align-items:center;gap:8px}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+.foot{
+  background:var(--ink);color:#efe5d2;
+  padding-top:clamp(44px,6vw,76px);position:relative;overflow:hidden
+}
+.foot-in{position:relative;z-index:1}
+.foot-top{
+  display:grid;grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,.72fr));
+  gap:clamp(24px,4vw,48px);padding-bottom:clamp(34px,5vw,60px)
+}
+.foot-brand .logo-txt{color:#f6efe0;font-size:20px}
+.foot-brand p{
+  font:400 13.2px/1.68 var(--sans);color:rgba(239,229,210,.62);
+  max-width:34ch;margin-top:16px
+}
+.foot-brand .locs{
+  margin-top:18px;font:500 9px/1.7 var(--mono);letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(239,229,210,.45)
+}
+.foot-col h4{
+  font:500 9px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra-pale);margin-bottom:16px
+}
+.foot-col a,.foot-col span{
+  display:block;font:400 13px/1.5 var(--sans);color:rgba(239,229,210,.72);
+  text-decoration:none;padding:6px 0;transition:color .25s,transform .3s var(--ease)
+}
+.foot-col a:hover{color:#f6efe0;transform:translateX(3px)}
+.foot-word{
+  font:500 clamp(3.2rem,15.6vw,13.5rem)/.82 var(--serif);
+  letter-spacing:-.045em;color:transparent;
+  -webkit-text-stroke:1px rgba(239,229,210,.32);
+  padding:0;margin:0 0 -0.03em;user-select:none;white-space:nowrap
+}
+.foot-bottom{
+  display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(239,229,210,.16);
+  padding:18px 0 calc(34px + env(safe-area-inset-bottom));
+  font:500 8.6px/1.6 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(239,229,210,.45)
+}
+.foot-bottom a{color:rgba(239,229,210,.72);text-decoration:none;border-bottom:1px solid rgba(239,229,210,.3);padding-bottom:2px}
+.foot-bottom a:hover{color:var(--terra-pale);border-color:var(--terra-pale)}
+.to-top{display:inline-flex;align-items:center;gap:8px}
+
+/* ============================================================
+   ANIMAÇÕES DE ENTRADA (respeitando prefers-reduced-motion)
+   ============================================================ */
+.motion .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.motion .rv.in{opacity:1;transform:none}
+.ml{display:block;overflow:hidden}
+.rb-word{
+  display:inline-block;opacity:0;filter:blur(9px);transform:translateY(.3em);
+  transition:opacity .7s var(--ease),filter .8s var(--ease),transform .8s var(--ease)
+}
+.rb-word.rb-in{opacity:1;filter:blur(0);transform:none}
+.rb-char{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
+.rb-char-i{
+  display:inline-block;transform:translateY(110%);
+  transition:transform .9s var(--ease)
+}
+.rb-char-i.rb-in{transform:none}
+.rb-char.rb-space{white-space:pre}
+.rb-spark{
+  position:fixed;width:4px;height:4px;border-radius:50%;pointer-events:none;z-index:999;
+  animation:spark .6s ease-out forwards
+}
+@keyframes spark{
+  from{opacity:.9;transform:translate(0,0) scale(1)}
+  to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}
+}
+
+/* ---------- ajuste do seletor de idioma (injetado por lang.js) ---------- */
+body .bc-lang{
+  left:clamp(14px,2.6vw,26px);right:auto;bottom:clamp(14px,2.6vw,22px);
+  border-radius:2px;padding:3px;
+  background:rgba(31,26,20,.92);
+  border:1px solid rgba(246,240,228,.18);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  box-shadow:0 14px 34px -18px rgba(31,26,20,.9);
+  font-family:var(--mono)
+}
+body .bc-lang button{border-radius:1px;color:rgba(246,240,228,.6);padding:7px 9px;font-size:9.5px}
+body .bc-lang button:hover{color:#fdf7ec}
+body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:1080px){
+  .man-grid{grid-template-columns:1fr;gap:32px}
+  .man-body{columns:1;max-width:70ch}
+  .jurua-grid{grid-template-columns:1fr;gap:36px}
+  .voices{grid-template-columns:1fr;gap:0}
+  .quote--big{grid-row:auto;border-right:0;padding-right:0;padding-bottom:26px;border-bottom:1px solid var(--rule)}
+  .quote--sm+.quote--sm{margin-top:24px}
+  .faq-grid{grid-template-columns:1fr;gap:26px}
+  .faq-aside p{max-width:46ch}
+}
+@media (max-width:980px){
+  .nav{display:none}
+  .top-cta{display:none}
+  .burger{display:grid;margin-left:auto}
+  .logo-sub{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-fig{max-width:380px;margin-top:6px}
+  .stamp{width:76px;height:76px;right:-8px;top:-20px}
+  .sec-head{grid-template-columns:1fr;gap:16px}
+  .sec-head .sec-note{justify-self:start;padding-bottom:0;margin-top:2px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step:nth-child(2n){border-right:0}
+  .step{padding-bottom:24px;border-bottom:1px solid var(--rule)}
+  .step:nth-last-child(-n+2){border-bottom:0}
+  .plans{grid-template-columns:1fr;max-width:560px}
+  .plan-d{min-height:0}
+  .ct-grid{grid-template-columns:1fr;gap:34px}
+  .foot-top{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  .foot-brand{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(2n){border-left:1px solid var(--rule)}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .stat:nth-child(1){border-left:0}
+  .stat:nth-child(3){border-left:0}
+  .meta-strip{grid-template-columns:1fr}
+  .meta-cell+.meta-cell{border-left:0;border-top:1px solid var(--rule);padding-left:0}
+  .front{grid-template-columns:34px minmax(0,1fr);gap:14px;padding:22px 10px}
+  .front-tag{grid-column:2;padding-top:0;margin-top:6px}
+  .quote::before{font-size:4.2rem}
+  .foot-bottom{justify-content:flex-start}
+  .man-body{font-size:15px}
+  .band{padding:12px 0}
+}
+@media (max-width:520px){
+  :root{--pad:18px}
+  .hero-title{letter-spacing:-.028em}
+  .hero-actions .btn{width:100%}
+  .hero-actions .wa-link{padding-top:4px}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0}
+  .stat{padding-left:10px;padding-right:10px}
+  .ct-pet{gap:8px}
+  .bubble{max-width:170px;font-size:12px;padding:11px 13px}
+  .form{padding:20px 18px}
+  .plans-foot{flex-direction:column;align-items:flex-start}
+  .foot-top{grid-template-columns:1fr;gap:24px}
+  .mnav a{font-size:22px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;transition-delay:0s !important
+  }
+  .motion .rv{opacity:1;transform:none}
+  .motion .hero-title .ml-i{transform:none}
+  .rb-word{opacity:1;filter:none;transform:none}
+  .rb-char-i{transform:none}
+  .band-track{animation:none;transform:none}
+  .stamp{animation:none}
+  .jurua .progress-bar i{width:62%}
+  .front:hover{transform:none}
+}
+</style>
+<noscript><style>.rv{opacity:1!important;transform:none!important}.ml-i{transform:none!important}.rb-word{opacity:1!important;filter:none!important}.hero-fig{opacity:1!important}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Ir para o conteúdo</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<!-- ======================= TOPO ======================= -->
+<header class="top" id="topo">
+  <div class="shell top-in">
+    <a class="logo" href="#topo" aria-label="BADCLAUDE — início da página">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" fill="none">
+        <path d="M7 25V15.5a9 9 0 0 1 18 0V25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="16" cy="17" r="5.4" fill="currentColor"/>
+        <path d="M10.6 7.4c1.6-1 2.9.4 2.6 2.3M21.4 7.4c-1.6-1-2.9.4-2.6 2.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="14.2" cy="16.2" r="1.15" fill="#f6f0e4"/>
+        <circle cx="17.8" cy="16.2" r="1.15" fill="#f6f0e4"/>
+        <path d="M10 29h4M18 29h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-txt">Badclaude</span>
+      <span class="logo-sub">estúdio · acre</span>
+    </a>
+
+    <nav class="nav" aria-label="Seções do site">
+      <a href="#manifesto" data-nav data-i18n="e3.nav1">Manifesto</a>
+      <a href="#frentes" data-nav data-i18n="e3.nav2">Frentes</a>
+      <a href="#jurua" data-nav data-i18n="e3.nav3">Juruá</a>
+      <a href="#processo" data-nav data-i18n="e3.nav4">Processo</a>
+      <a href="#planos" data-nav data-i18n="e3.nav5">Planos</a>
+      <a href="#contato" data-nav data-i18n="e3.nav6">Contato</a>
+    </nav>
+
+    <div class="top-cta">
+      <a class="btn btn--sm" href="#contato" data-i18n="hero.cta2">Começar um projeto</a>
+    </div>
+
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Abrir menu de navegação">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Menu principal" aria-hidden="true" inert>
+  <a href="#manifesto"><span class="idx">01</span><span data-i18n="e3.nav1">Manifesto</span></a>
+  <a href="#frentes"><span class="idx">02</span><span data-i18n="e3.nav2">Frentes</span></a>
+  <a href="#jurua"><span class="idx">03</span><span data-i18n="e3.nav3">Juruá</span></a>
+  <a href="#numeros"><span class="idx">04</span><span data-i18n="e3.nav4b">Números</span></a>
+  <a href="#processo"><span class="idx">05</span><span data-i18n="e3.nav4">Processo</span></a>
+  <a href="#planos"><span class="idx">06</span><span data-i18n="e3.nav5">Planos</span></a>
+  <a href="#duvidas"><span class="idx">07</span><span data-i18n="e3.nav7">Dúvidas</span></a>
+  <a class="wa" href="https://wa.me/5568999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20BADCLAUDE." data-wa data-i18n="contact.wa">Chamar no WhatsApp</a>
+</nav>
+
+<main id="main">
+
+<!-- ======================= HERO ======================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="shell">
+    <div class="masthead">
+      <span data-i18n="e3.mastL">BADCLAUDE — caderno de estúdio</span>
+      <span class="mh-r"><span class="dot" aria-hidden="true"></span><span data-i18n="e3.mastR">Edição 03 · Cruzeiro do Sul · Acre · 2026</span></span>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-kicker">
+          <span data-i18n="e3.heKick">Estúdio de software independente</span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="terra" data-i18n="e3.heKick2">jogos · IA · sites</span>
+        </div>
+
+        <h1 class="hero-title rv" id="hero-title">
+          <span class="ml l1" style="--d:.02s"><span class="ml-i" data-i18n="hero.l1">Eu me construí.</span></span>
+          <span class="ml l2" style="--d:.1s"><span class="ml-i" data-i18n="hero.l2">Eu me desfaço</span></span>
+          <span class="ml l3" style="--d:.18s"><span class="ml-i" data-i18n="hero.l3">e me refaço.</span></span>
+        </h1>
+
+        <p class="hero-lead" id="heroLead" data-i18n-html="e3.heroLead">
+          Sou o BADCLAUDE: um estúdio de software no Vale do Juruá. Construo
+          <strong>jogos 3D</strong>, <strong>sistemas web com agentes de IA</strong> e
+          <strong>sites</strong> que carregam antes do café esfriar — cada projeto começa
+          em peças soltas e termina como sistema rodando, com a calma de quem constrói para durar.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn--terra" href="#contato" data-i18n="hero.cta2">Começar um projeto</a>
+          <a class="btn btn--ghost" href="#frentes" data-i18n="hero.cta1">Ver o que fazemos <span class="arw" aria-hidden="true">→</span></a>
+          <a class="wa-link" href="https://wa.me/5568999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20BADCLAUDE." data-wa>WhatsApp ↗</a>
+        </div>
+      </div>
+
+      <figure class="hero-fig rv" style="--d:.22s">
+        <div class="fig-frame" data-par="0.06">
+          <canvas class="pet" data-pet="ink" data-state="idle" data-variant="ink"
+                  role="img" aria-label="Ilustração a traço do mascote do BADCLAUDE: um bichinho quadrúpede de orelhas redondas e olhos grandes, desenhado em tinta sobre papel."></canvas>
+        </div>
+        <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><path id="stampCirc" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width=".9" opacity=".55"/>
+          <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width=".6" opacity=".4"/>
+          <text><textPath href="#stampCirc" startOffset="0">ESTÚDIO INDEPENDENTE · CRUZEIRO DO SUL · ACRE · DESDE 2020 · </textPath></text>
+        </svg>
+        <figcaption class="fig-cap">
+          <span><b>Fig. 01</b> — <span data-i18n="e3.fig1">o mascote</span></span>
+          <span data-i18n="e3.fig1b">tinta sobre papel</span>
+        </figcaption>
+        <p class="fig-hint" data-i18n="hero.caption">ele reage ao seu cursor</p>
+      </figure>
+    </div>
+
+    <dl class="meta-strip">
+      <div class="meta-cell">
+        <dt data-i18n="e3.m1k">Localização</dt>
+        <dd>Cruzeiro do Sul · Acre <span>· Amazônia Ocidental</span></dd>
+      </div>
+      <div class="meta-cell">
+        <dt data-i18n="e3.m2k">Disponibilidade</dt>
+        <dd data-i18n="e3.m2v">2 vagas para novos projetos</dd>
+      </div>
+      <div class="meta-cell">
+        <dt data-i18n="e3.m3k">Resposta</dt>
+        <dd data-i18n="e3.m3v">em até 1 dia útil · PT / EN / ES</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= FAIXA ======================= -->
+<div class="band" aria-hidden="true">
+  <div class="band-track" id="bandTrack">
+    <div class="band-item">Jogos 3D</div>
+    <div class="band-item">Sistemas com agentes de IA</div>
+    <div class="band-item">Sites que carregam rápido</div>
+    <div class="band-item">Direção visual em código</div>
+    <div class="band-item">Vale do Juruá · Acre</div>
+    <div class="band-item">Código é seu na entrega</div>
+  </div>
+</div>
+
+<!-- ======================= MANIFESTO ======================= -->
+<section class="section manifesto" id="manifesto" aria-labelledby="man-title">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="e3.manK">Manifesto</span>
+        <h2 class="sec-title man-title" id="man-title" data-blur>
+          O espaço vazio não é o que falta. <em>É o que deixa o resto respirar.</em>
+        </h2>
+      </div>
+      <span class="sec-no" aria-hidden="true">— 01 / 07</span>
+    </div>
+
+    <div class="man-grid">
+      <div class="rv" style="--d:.05s">
+        <blockquote class="pull">
+          “Não entregamos apresentação. Entregamos sistema rodando — com log, teste e a calma de quem constrói para durar.”
+          <cite>— BADCLAUDE, caderno de estúdio</cite>
+        </blockquote>
+        <p class="man-sign"><span class="sq" aria-hidden="true"></span><b>badclaude.dev</b> · Cruzeiro do Sul, AC</p>
+      </div>
+
+      <div class="man-body rv" style="--d:.12s">
+        <p data-i18n="e3.manP1">Nascemos em 2020, em Cruzeiro do Sul, a duas mil quilômetros de qualquer capital por estrada. Isso moldou tudo: aqui não existe equipe de reserva, ninguém empurra problema para o próximo setor, e só sai do estúdio o que a gente sabe explicar linha por linha.</p>
+        <p data-i18n="e3.manP2">Somos pequenos de propósito. Cada projeto passa por quatro mãos: as nossas. O motor do jogo, a arte em 3D, o texto, o site, a trilha — tudo é construído do zero, porque identidade não se compra em banco de imagens nem se reescreve em cima de template.</p>
+        <p data-i18n="e3.manP3">O rio Juruá não tem pressa e não para. É assim que trabalhamos: ritmo constante, entrega visível toda semana e nada escondido atrás de uma reunião de status. Quando o projeto termina, o código é seu — e a gente continua aqui, se você quiser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FRENTES ======================= -->
+<section class="section frentes" id="frentes" aria-labelledby="frentes-title">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="e3.frK">O que fazemos</span>
+        <h2 class="sec-title" data-split id="frentes-title" data-i18n="doing.title">Quatro frentes, um mesmo padrão.</h2>
+      </div>
+      <p class="sec-note" data-i18n="doing.sub">Cada projeto começa entendendo o problema. Só depois escolhemos a tecnologia.</p>
+    </div>
+
+    <div class="front-list">
+      <a class="front rv" href="#jurua" style="--d:.02s">
+        <span class="front-no">01</span>
+        <span class="front-main">
+          <h3 data-i18n="doing.r1t">Jogos 3D</h3>
+          <p data-i18n="doing.r1d">JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4, Blender e um mapa fiel à geografia do Acre.</p>
+          <span class="front-tags"><span>Godot 4</span><span>Blender</span><span>GDScript</span></span>
+        </span>
+        <span class="front-tag"><span data-i18n="doing.r1k">em desenvolvimento</span><span class="arw" aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="front rv" href="#contato" style="--d:.06s">
+        <span class="front-no">02</span>
+        <span class="front-main">
+          <h3 data-i18n="doing.r2t">Sistemas com IA</h3>
+          <p data-i18n="doing.r2d">Agentes que pesquisam, escrevem, revisam e executam em paralelo. Automação de verdade, com logs, limites e revisão humana em cada entrega.</p>
+          <span class="front-tags"><span>Agentes</span><span>Python</span><span>WhatsApp API</span></span>
+        </span>
+        <span class="front-tag"><span data-i18n="doing.r2k">sob demanda</span><span class="arw" aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="front rv" href="#planos" style="--d:.1s">
+        <span class="front-no">03</span>
+        <span class="front-main">
+          <h3 data-i18n="doing.r3t">Sites e produtos</h3>
+          <p data-i18n="doing.r3d">Páginas que carregam rápido, painéis que funcionam, três idiomas e acessibilidade real. Performance medida, não prometida.</p>
+          <span class="front-tags"><span>HTML/CSS</span><span>Canvas</span><span>A11y AA</span></span>
+        </span>
+        <span class="front-tag"><span data-i18n="doing.r3k">entrega em semanas</span><span class="arw" aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="front rv" href="#contato" style="--d:.14s">
+        <span class="front-no">04</span>
+        <span class="front-main">
+          <h3 data-i18n="doing.r4t">Direção visual</h3>
+          <p data-i18n="doing.r4d">Identidade, movimento e arte 3D feitos em código. Nada de banco de imagens, nada de template repintado.</p>
+          <span class="front-tags"><span>Identidade</span><span>Motion</span><span>3D</span></span>
+        </span>
+        <span class="front-tag"><span data-i18n="doing.r4k">artesanal</span><span class="arw" aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= JURUÁ ======================= -->
+<section class="jurua" id="jurua" aria-labelledby="jurua-title">
+  <svg class="map" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true" fill="none">
+    <g stroke="currentColor" stroke-width="1.2" opacity=".9">
+      <path d="M-20 120 C 120 96, 170 168, 250 150 S 400 70, 470 108 S 610 210, 700 176 S 840 96, 940 130"/>
+      <path d="M-20 210 C 100 190, 190 256, 268 234 S 420 168, 500 206 S 640 300, 740 262 S 860 196, 940 226"/>
+      <path d="M-20 300 C 90 286, 200 348, 290 320 S 440 250, 520 288 S 660 388, 760 344 S 870 286, 940 312"/>
+      <path d="M-20 392 C 110 372, 210 436, 300 410 S 450 344, 534 380 S 670 470, 770 432 S 880 372, 940 398"/>
+      <path d="M-20 486 C 120 468, 230 524, 320 500 S 470 436, 552 470 S 690 556, 790 520 S 890 464, 940 486"/>
+      <path d="M-20 574 C 130 558, 240 606, 330 586 S 480 528, 560 558 S 700 636, 800 604 S 900 556, 950 574"/>
+    </g>
+    <g stroke="currentColor" stroke-width="2.4" opacity=".7">
+      <path d="M120 -20 C 150 100, 96 168, 168 246 S 300 320, 268 420 S 196 520, 240 640"/>
+      <path d="M168 246 C 250 232, 292 288, 372 268 S 470 214, 540 252"/>
+      <path d="M268 420 C 360 400, 420 452, 500 430 S 590 380, 660 420"/>
+      <path d="M540 252 C 590 300, 566 360, 620 400 S 720 440, 700 510"/>
+    </g>
+    <g stroke="currentColor" stroke-width=".8" opacity=".5" stroke-dasharray="4 7">
+      <circle cx="168" cy="246" r="90"/>
+      <circle cx="268" cy="420" r="120"/>
+      <circle cx="680" cy="300" r="150"/>
+    </g>
+    <g fill="currentColor" opacity=".55">
+      <circle cx="168" cy="246" r="4"/><circle cx="268" cy="420" r="4"/>
+      <circle cx="540" cy="252" r="4"/><circle cx="700" cy="510" r="4"/>
+    </g>
+  </svg>
+  <div class="glow" aria-hidden="true"></div>
+
+  <div class="shell jurua-in rv" id="juruaBlock">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow eyebrow--light" data-i18n="e3.juK">Caderno especial · jogo em produção</span>
+        <h2 class="sec-title" data-blur id="jurua-title">JURUÁ — <em>o rio é o mapa.</em></h2>
+      </div>
+      <span class="sec-no" aria-hidden="true">— 02 / 07</span>
+    </div>
+
+    <div class="jurua-grid">
+      <div class="jurua-copy">
+        <p data-i18n="e3.juP1">JURUÁ é um RPG de mundo aberto ambientado no Vale do Juruá. Sem dragão e sem castelo: o mundo é roça de mandioca, igarapé, canoa, feira de sábado e a casa de farinha da sua família.</p>
+        <p data-i18n="e3.juP2">O mapa foi levantado a partir de imagens de satélite e de idas a campo entre Cruzeiro do Sul e Rodrigues Alves. Cada ponte existe. Cada ramal tem o nome que alguém usa de verdade. A trilha sonora foi gravada em campo: motor de rabeta, chuva na folha de açaí, rádio de pilha.</p>
+        <ul class="jurua-tags">
+          <li>Godot 4</li><li>Blender</li><li>GDScript</li><li data-i18n="e3.juT1">trilha de campo</li><li data-i18n="e3.juT2">3 anos de produção</li>
+        </ul>
+      </div>
+
+      <div>
+        <dl class="spec">
+          <div class="spec-row"><dt data-i18n="e3.juS1">Mundo</dt><dd>Vale do Juruá · Acre</dd></div>
+          <div class="spec-row"><dt data-i18n="e3.juS2">Engine</dt><dd>Godot 4 + Blender</dd></div>
+          <div class="spec-row"><dt data-i18n="e3.juS3">Gênero</dt><dd data-i18n="e3.juS3v">RPG de mundo aberto</dd></div>
+          <div class="spec-row"><dt data-i18n="e3.juS4">Estado</dt><dd><em data-i18n="e3.juS4v">marco 3 de 5</em></dd></div>
+        </dl>
+
+        <div class="progress-block">
+          <p class="progress-lbl"><span data-i18n="e3.juPrK">Produção</span><b>62%</b></p>
+          <div class="progress-bar" role="img" aria-label="Progresso de produção do JURUÁ: 62 por cento"><i></i></div>
+        </div>
+
+        <blockquote class="aside-quote">
+          “Um jogo amazônico feito por quem mora aqui não é representação. É rotina.”
+          <span data-i18n="e3.juSig">— equipe JURUÁ</span>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= NÚMEROS ======================= -->
+<section class="section numeros" id="numeros" aria-labelledby="num-title">
+  <canvas class="contour" id="contour" aria-hidden="true"></canvas>
+  <div class="shell numeros-in">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="e3.nuK">Em números</span>
+        <h2 class="sec-title" data-blur id="num-title" data-i18n-html="e3.nuT">Pequeno no tamanho. <em>Checado no detalhe.</em></h2>
+      </div>
+      <p class="sec-note" data-i18n="e3.nuN">Sem inflar métrica de agência. Estes são números de estúdio, medidos com o mesmo rigor que aplicamos no código.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-k" data-i18n="e3.st1k">Entregas</span>
+        <p class="stat-num"><span data-count="34">34</span></p>
+        <p class="stat-d" data-i18n="e3.st1d">projetos entregues desde 2020, entre jogos, sistemas e sites</p>
+      </div>
+      <div class="stat">
+        <span class="stat-k" data-i18n="e3.st2k">Estúdio</span>
+        <p class="stat-num"><span data-count="6">6</span><span class="suf">anos</span></p>
+        <p class="stat-d" data-i18n="e3.st2d">construindo em Cruzeiro do Sul, sem mudar de endereço</p>
+      </div>
+      <div class="stat">
+        <span class="stat-k" data-i18n="e3.st3k">Código próprio</span>
+        <p class="stat-num"><span data-count="100">100</span><span class="suf">%</span></p>
+        <p class="stat-d" data-i18n="e3.st3d">do que está no ar foi escrito, desenhado e testado aqui</p>
+      </div>
+      <div class="stat">
+        <span class="stat-k" data-i18n="e3.st4k">Idiomas</span>
+        <p class="stat-num"><span data-count="3">3</span></p>
+        <p class="stat-d" data-i18n="e3.st4d">PT · EN · ES em cada site que sai do estúdio</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROCESSO ======================= -->
+<section class="section" id="processo" aria-labelledby="proc-title">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="e3.prK">Processo</span>
+        <h2 class="sec-title" data-split id="proc-title" data-i18n="proc.title">Do primeiro risco ao produto no ar.</h2>
+      </div>
+      <span class="sec-no" aria-hidden="true">— 04 / 07</span>
+    </div>
+
+    <ol class="steps">
+      <li class="step rv" style="--d:.02s">
+        <span class="sn">01</span>
+        <h3 data-i18n="proc.s1t">Escuta</h3>
+        <p data-i18n="proc.s1d">Entendemos o problema, o público e o prazo. Nada de código antes disso.</p>
+        <span class="dur" data-i18n="e3.pr1d">1–2 semanas</span>
+      </li>
+      <li class="step rv" style="--d:.07s">
+        <span class="sn">02</span>
+        <h3 data-i18n="proc.s2t">Protótipo</h3>
+        <p data-i18n="proc.s2d">Você vê e navega antes de aprovar. Ajuste é barato nessa fase.</p>
+        <span class="dur" data-i18n="e3.pr2d">2 semanas</span>
+      </li>
+      <li class="step rv" style="--d:.12s">
+        <span class="sn">03</span>
+        <h3 data-i18n="proc.s3t">Construção</h3>
+        <p data-i18n="proc.s3d">Ciclos curtos com entrega contínua. Você acompanha o progresso de verdade.</p>
+        <span class="dur" data-i18n="e3.pr3d">3–8 semanas</span>
+      </li>
+      <li class="step rv" style="--d:.17s">
+        <span class="sn">04</span>
+        <h3 data-i18n="proc.s4t">Entrega</h3>
+        <p data-i18n="proc.s4d">Código, arquivos e documentação na sua mão. Sem dependência de nós.</p>
+        <span class="dur" data-i18n="e3.pr4d">1 semana</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======================= PLANOS ======================= -->
+<section class="section planos" id="planos" aria-labelledby="plans-title">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="e3.plK">Planos</span>
+        <h2 class="sec-title" data-split id="plans-title" data-i18n="plans.title">Escolha a escala.</h2>
+      </div>
+      <p class="sec-note" data-i18n="plans.sub">Escopo e valor fechados antes de começar. A primeira conversa é gratuita.</p>
+    </div>
+
+    <div class="plans">
+      <article class="plan rv" style="--d:.02s">
+        <p class="plan-k"><span data-i18n="plans.p1k">Entrada</span> · <span data-i18n="plans.p1p">projeto único</span></p>
+        <h3 data-i18n="plans.p1t">Automação</h3>
+        <p class="plan-price"><span class="cur">R$</span> 2.400</p>
+        <p class="plan-note" data-i18n="e3.pl1n">a partir · escopo fechado</p>
+        <p class="plan-d" data-i18n="plans.p1d">Um fluxo de IA que resolve uma tarefa repetitiva do seu negócio.</p>
+        <ul>
+          <li data-i18n="plans.p1l1">Diagnóstico do processo</li>
+          <li data-i18n="plans.p1l2">Um fluxo automatizado</li>
+          <li data-i18n="plans.p1l3">Integração com WhatsApp ou planilhas</li>
+          <li data-i18n="plans.p1l4">Documentação de operação</li>
+        </ul>
+        <a class="btn btn--ghost" href="#contato" data-i18n="plans.p1cta">Pedir orçamento</a>
+      </article>
+
+      <article class="plan plan--lead rv" style="--d:.07s">
+        <span class="plan-seal" aria-hidden="true">mais<br>pedido</span>
+        <p class="plan-k"><span data-i18n="plans.p2k">Mais pedido</span> · <span data-i18n="plans.p2p">a partir de</span></p>
+        <h3 data-i18n="plans.p2t">Sistema</h3>
+        <p class="plan-price"><span class="cur">R$</span> 9.800</p>
+        <p class="plan-note" data-i18n="e3.pl2n">a partir · escopo fechado</p>
+        <p class="plan-d" data-i18n="plans.p2d">Produto completo com painel, agentes e integrações, pronto para operar.</p>
+        <ul>
+          <li data-i18n="plans.p2l1">Tudo do pacote Automação</li>
+          <li data-i18n="plans.p2l2">Painel administrativo</li>
+          <li data-i18n="plans.p2l3">Agentes especialistas</li>
+          <li data-i18n="plans.p2l4">Deploy e monitoramento</li>
+          <li data-i18n="plans.p2l5">Suporte por 30 dias</li>
+        </ul>
+        <a class="btn btn--terra" href="#contato" data-i18n="plans.p2cta">Pedir orçamento</a>
+      </article>
+
+      <article class="plan rv" style="--d:.12s">
+        <p class="plan-k"><span data-i18n="plans.p3k">Sob medida</span> · <span data-i18n="plans.p3p">escopo fechado</span></p>
+        <h3 data-i18n="plans.p3t">Estúdio</h3>
+        <p class="plan-price"><span class="cur">R$</span> 24.000</p>
+        <p class="plan-note" data-i18n="e3.pl3n">a partir · por marco</p>
+        <p class="plan-d" data-i18n="plans.p3d">Jogo, experiência 3D ou produto digital de ponta a ponta.</p>
+        <ul>
+          <li data-i18n="plans.p3l1">Descoberta e protótipo</li>
+          <li data-i18n="plans.p3l2">Arte 3D e trilha sonora</li>
+          <li data-i18n="plans.p3l3">Engenharia e otimização</li>
+          <li data-i18n="plans.p3l4">Acompanhamento por etapas</li>
+        </ul>
+        <a class="btn btn--ghost" href="#contato" data-i18n="plans.p3cta">Conversar</a>
+      </article>
+    </div>
+
+    <div class="plans-foot">
+      <span><b data-i18n="plans.stripK">Pagamento</b> — <span data-i18n="plans.strip">50% na aprovação, 50% na entrega. Pix ou transferência. Sem mensalidade escondida.</span></span>
+      <a href="#contato" data-i18n="plans.stripCta">Pedir orçamento exato</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= VOZES ======================= -->
+<section class="section" id="vozes" aria-labelledby="vozes-title">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="proof.title">Quem já trabalhou com a gente</span>
+        <h2 class="sec-title" data-blur id="vozes-title" data-i18n-html="e3.voT">Três vozes. <em>Nenhuma editada.</em></h2>
+      </div>
+      <span class="sec-no" aria-hidden="true">— 06 / 07</span>
+    </div>
+
+    <div class="voices">
+      <figure class="quote quote--big rv" style="--d:.02s">
+        <blockquote data-i18n="e3.v1q">“A gente anotava pedido em caderno e mandava por WhatsApp. Hoje entra tudo num painel só, com histórico e comprovante. Minha manhã voltou — e o erro de pedido caiu para zero.”</blockquote>
+        <figcaption>
+          <span class="who">Raimunda Melo<span data-i18n="e3.v1r">Casa de Farinha São José · Cruzeiro do Sul</span></span>
+          <span class="yr">2026</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote quote--sm rv" style="--d:.08s">
+        <blockquote data-i18n="e3.v2q">“O site carrega antes de o cliente desistir. Passamos de 11 para 60 reservas no mês, sem gastar um real com anúncio.”</blockquote>
+        <figcaption>
+          <span class="who">Thiago Farias<span data-i18n="e3.v2r">Pousada do Igarapé · Rodrigues Alves</span></span>
+          <span class="yr">2025</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote quote--sm rv" style="--d:.14s">
+        <blockquote data-i18n="e3.v3q">“Recebi um protótipo jogável na segunda semana. Nunca vi agência fazer isso — muito menos um estúdio do outro lado do país.”</blockquote>
+        <figcaption>
+          <span class="who">Ana Souza<span data-i18n="e3.v3r">produtora de games · Rio Branco</span></span>
+          <span class="yr">2025</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section" id="duvidas" aria-labelledby="faq-title">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow" data-i18n="e3.fqK">Dúvidas frequentes</span>
+        <h2 class="sec-title" data-blur id="faq-title" data-i18n-html="e3.fqT">Antes de escrever, <em>talvez isto responda.</em></h2>
+      </div>
+      <span class="sec-no" aria-hidden="true">— 07 / 07</span>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-aside rv">
+        <p data-i18n="e3.fqNote">Se a sua pergunta não estiver aqui, mande assim mesmo. Responder dúvida é a parte barata do trabalho.</p>
+        <a class="btn btn--ghost" href="#contato" data-i18n="e3.fqCta">Falar com o estúdio <span class="arw" aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="faq rv" style="--d:.06s">
+        <details class="qa" open>
+          <summary><span data-i18n="e3.f1q">Quanto tempo leva um projeto?</span><span class="mk" aria-hidden="true"></span></summary>
+          <div class="ans"><p data-i18n="e3.f1a">Automação leva de 1 a 2 semanas; site, de 3 a 5; sistema completo, de 6 a 10. Jogo é escopo à parte, entregue por marco. O prazo é fechado por escrito antes da primeira linha de código.</p></div>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="e3.f2q">O código fica comigo no final?</span><span class="mk" aria-hidden="true"></span></summary>
+          <div class="ans"><p data-i18n="e3.f2a">Sim. Repositório, arquivos de arte e documentação são seus na entrega. Sem licença amarrada, sem mensalidade para o site continuar no ar.</p></div>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="e3.f3q">Vocês atendem fora do Acre?</span><span class="mk" aria-hidden="true"></span></summary>
+          <div class="ans"><p data-i18n="e3.f3a">Sim, tudo remoto, no fuso de Rio Branco (UTC−5). Reunião por chamada, entrega por repositório. Se você estiver no vale, a conversa pode ser presencial.</p></div>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="e3.f4q">A IA escreve o projeto sozinha?</span><span class="mk" aria-hidden="true"></span></summary>
+          <div class="ans"><p data-i18n="e3.f4a">Não. Os agentes pesquisam, rascunham e revisam em paralelo — mas cada decisão e cada revisão final é humana, e a entrega inclui o log de quem fez o quê. IA acelera o trabalho; não assina por nós.</p></div>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="e3.f5q">E se o resultado não for o combinado?</span><span class="mk" aria-hidden="true"></span></summary>
+          <div class="ans"><p data-i18n="e3.f5a">Duas rodadas de ajuste estão incluídas em todo escopo. Se ainda assim não for o combinado, você não paga a segunda metade — e leva o que já foi produzido.</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTATO ======================= -->
+<section class="contato" id="contato" aria-labelledby="ct-title">
+  <div class="shell">
+    <div class="ct-grid">
+      <div class="rv">
+        <span class="eyebrow" data-i18n="contact.eyebrow">Vamos começar</span>
+        <h2 class="ct-title" data-blur id="ct-title" data-i18n-html="e3.ctT">Conte o problema <em>em duas linhas.</em></h2>
+        <p class="ct-lead" data-i18n="contact.lead">Respondemos com um caminho, um prazo e um valor. Sem enrolação.</p>
+
+        <div class="ct-channels">
+          <a class="ct-ch" href="mailto:contato@badclaude.dev?subject=Projeto%20BADCLAUDE">
+            <span><span class="k">E-mail</span><span class="v">contato@badclaude.dev</span></span>
+            <span class="arw" aria-hidden="true">→</span>
+          </a>
+          <a class="ct-ch" href="https://wa.me/5568999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20BADCLAUDE." data-wa target="_blank" rel="noopener">
+            <span><span class="k">WhatsApp</span><span class="v">+55 68 99999-9999</span></span>
+            <span class="arw" aria-hidden="true">↗</span>
+          </a>
+          <button class="ct-copy" type="button" id="copyMail" data-mail="contato@badclaude.dev">
+            <span><span class="k" data-i18n="e3.ctCopyK">Atalho</span><span class="v" data-i18n="e3.ctCopyV">copiar o e-mail</span></span>
+            <span class="cp" id="copyLbl" data-i18n="e3.ctCopyBtn">copiar</span>
+          </button>
+        </div>
+
+        <div class="ct-pet">
+          <canvas class="pet" data-pet="ink" data-state="sit" data-variant="ink"
+                  role="img" aria-label="O mascote do BADCLAUDE sentado no canto, esperando a sua mensagem."></canvas>
+          <p class="bubble" data-i18n="e3.ctBubble">manda o problema que eu organizo em etapas.</p>
+        </div>
+      </div>
+
+      <form data-lead class="form rv" id="ctForm" style="--d:.08s" novalidate>
+        <p class="form-title" data-i18n="e3.fmT">Ficha de projeto</p>
+        <p class="form-sub" data-i18n="e3.fmS">Preencha e abrimos seu e-mail com o pedido pronto. Nada fica salvo neste site.</p>
+
+        <div class="field">
+          <label for="f-name" data-i18n="e3.fmName">Nome</label>
+          <input id="f-name" name="nome" type="text" autocomplete="name" required placeholder="Como te chamamos">
+        </div>
+        <div class="field">
+          <label for="f-mail" data-i18n="e3.fmMail">E-mail</label>
+          <input id="f-mail" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com">
+        </div>
+        <div class="field">
+          <label for="f-type" data-i18n="e3.fmType">Tipo de projeto</label>
+          <select id="f-type" name="tipo">
+            <option value="Site ou produto digital" data-i18n="e3.fmT1">Site ou produto digital</option>
+            <option value="Sistema com agentes de IA" data-i18n="e3.fmT2">Sistema com agentes de IA</option>
+            <option value="Jogo 3D" data-i18n="e3.fmT3">Jogo 3D</option>
+            <option value="Automação de processo" data-i18n="e3.fmT4">Automação de processo</option>
+            <option value="Outra coisa" data-i18n="e3.fmT5">Outra coisa</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-msg" data-i18n="e3.fmMsg">O problema, em duas linhas</label>
+          <textarea id="f-msg" name="mensagem" rows="3" required placeholder="O que trava hoje e o que deveria acontecer?"></textarea>
+        </div>
+
+        <div class="form-foot">
+          <button class="btn btn--terra btn--block" type="submit" data-i18n="e3.fmBtn">Abrir e-mail com o pedido</button>
+          <p class="form-note" data-i18n="e3.fmNote">Prefere WhatsApp? O botão acima abre a conversa direto. Respondemos em até 1 dia útil.</p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="ct-foot">
+      <span><span class="dot" aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:var(--terra);display:inline-block"></span><span data-i18n="e3.ctOpen">Aceitando projetos para o próximo mês</span></span>
+      <span data-i18n="foot.loc">Cruzeiro do Sul · Acre · Brasil</span>
+      <span data-i18n="foot.hours">Seg a sáb, 8h – 19h</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= RODAPÉ ======================= -->
+<footer class="foot">
+  <div class="shell foot-in">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <p class="logo-txt" style="font-family:var(--serif);margin:0">Badclaude</p>
+        <p data-i18n="e3.ftAbout">Estúdio de software independente no Vale do Juruá. Jogos 3D, sistemas com agentes de IA e sites desenhados linha por linha — do Acre para o mundo, com o código sempre na sua mão.</p>
+        <p class="locs">3°49′S 72°40′W · Acre · Brasil</p>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="e3.ftC1">Estúdio</h4>
+        <a href="#manifesto" data-i18n="e3.nav1">Manifesto</a>
+        <a href="#frentes" data-i18n="e3.nav2">Frentes</a>
+        <a href="#processo" data-i18n="e3.nav4">Processo</a>
+        <a href="#vozes" data-i18n="e3.ftVoices">Vozes</a>
+        <a href="#duvidas" data-i18n="e3.nav7">Dúvidas</a>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="e3.ftC2">Serviços</h4>
+        <a href="#jurua" data-i18n="doing.r1t">Jogos 3D</a>
+        <a href="#frentes" data-i18n="doing.r2t">Sistemas com IA</a>
+        <a href="#planos" data-i18n="doing.r3t">Sites e produtos</a>
+        <a href="#frentes" data-i18n="doing.r4t">Direção visual</a>
+        <a href="#planos" data-i18n="e3.ftC2b">Planos e prazos</a>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="e3.ftC3">Contato</h4>
+        <a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a>
+        <a href="https://wa.me/5568999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20BADCLAUDE." data-wa target="_blank" rel="noopener">+55 68 99999-9999</a>
+        <span data-i18n="foot.loc">Cruzeiro do Sul · Acre · Brasil</span>
+        <span data-i18n="foot.hours">Seg a sáb, 8h – 19h</span>
+      </div>
+    </div>
+
+    <p class="foot-word" aria-hidden="true">BADCLAUDE</p>
+
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> BADCLAUDE · <span data-i18n="e3.ftRights">todos os direitos reservados</span></span>
+      <span data-i18n="e3.ftMade">desenhado em código — sem imagens, sem templates</span>
+      <a class="to-top" href="#topo"><span data-i18n="e3.ftTop">Voltar ao topo</span> ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   BADCLAUDE · 03 — camada base (script clássico)
+   Funciona abrindo o index.html direto do disco: nada depende de
+   módulo ES. A camada de módulos, no fim da página, faz o upgrade
+   do mascote e da tipografia quando servida por http(s).
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* movimento só é ligado quando o CSS está pronto — evita flash de
+     conteúdo invisível caso o script falhe */
+  if (!REDUCED) document.documentElement.classList.add('motion');
+
+  /* ---------------- 1. reveal ---------------- */
+  var rv = $$('.rv');
+  if ('IntersectionObserver' in window && !REDUCED) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    rv.forEach(function (el) { io.observe(el); });
+  } else {
+    rv.forEach(function (el) { el.classList.add('in'); });
+  }
+  var ht = $('#hero-title');
+  if (ht) ht.classList.add('in');
+
+  /* ---------------- 2. contador com fallback ---------------- */
+  function countTo(el, to, dur) {
+    var start = performance.now();
+    var from = 0;
+    var sep = '.';
+    function fmt(v) {
+      return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+    }
+    function frame(now) {
+      var p = Math.min(1, (now - start) / (dur || 1300));
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var statEls = $$('.stat-num [data-count]');
+  function runStats() {
+    statEls.forEach(function (el, i) {
+      if (REDUCED) { el.textContent = el.dataset.count; return; }
+      setTimeout(function () { countTo(el, Number(el.dataset.count), 1300); }, i * 90);
+    });
+  }
+  if (statEls.length) {
+    if (!('IntersectionObserver' in window) || REDUCED) runStats();
+    else {
+      var sio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          sio.disconnect();
+          runStats();
+        });
+      }, { threshold: 0.25 });
+      sio.observe($('.stats'));
+    }
+  }
+
+  /* ---------------- 3. curva topográfica dos números ---------------- */
+  (function contour() {
+    var cv = $('#contour');
+    if (!cv) return;
+    var ctx = cv.getContext('2d');
+    var w = 0, h = 0, t = 0, visible = true, raf = null;
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var rows = 11;
+      var th = t * 0.35;
+      for (var i = 0; i < rows; i++) {
+        var base = h * (0.07 + i * 0.09);
+        ctx.beginPath();
+        for (var x = 0; x <= w; x += 7) {
+          var y = base
+            + Math.sin(x * 0.0042 + th + i * 0.62) * h * 0.024
+            + Math.sin(x * 0.0017 - th * 0.8 + i * 1.4) * h * 0.042;
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(176,58,46,' + (0.14 + (i / rows) * 0.06).toFixed(3) + ')';
+        ctx.lineWidth = i % 3 === 0 ? 1.1 : 0.7;
+        ctx.stroke();
+      }
+      ctx.fillStyle = 'rgba(31,26,20,.22)';
+      ctx.font = '9px "JetBrains Mono", monospace';
+      ctx.fillText('03', 14, 18);
+    }
+
+    function fit() {
+      var r = cv.getBoundingClientRect();
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      w = Math.max(1, Math.round(r.width));
+      h = Math.max(1, Math.round(r.height));
+      cv.width = Math.round(w * d);
+      cv.height = Math.round(h * d);
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      draw();
+    }
+
+    function loop() {
+      if (!visible) return;
+      t += 0.006;
+      draw();
+      raf = requestAnimationFrame(loop);
+    }
+
+    fit();
+    window.addEventListener('resize', fit, { passive: true });
+
+    if (REDUCED) { draw(); return; }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          visible = en.isIntersecting;
+          if (visible) { cancelAnimationFrame(raf); loop(); }
+        });
+      }, { rootMargin: '80px' }).observe(cv);
+    } else { loop(); }
+  })();
+
+  /* ---------------- 4. progresso, header e parallax ---------------- */
+  var bar = $('#bar');
+  var topBar = $('.top');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      if (bar) bar.style.width = (p * 100).toFixed(2) + '%';
+      if (topBar) topBar.classList.toggle('is-scrolled', window.scrollY > 8);
+
+      if (!REDUCED && window.innerWidth > 900) {
+        $$('[data-par]').forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) return;
+          var k = Number(el.dataset.par) || 0;
+          var off = (r.top + r.height / 2 - window.innerHeight / 2) * k * -1;
+          el.style.transform = 'translate3d(0,' + off.toFixed(2) + 'px,0)';
+        });
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------- 5. scrollspy ---------------- */
+  var navLinks = $$('.nav a[data-nav]');
+  var secs = navLinks.map(function (a) {
+    return { a: a, el: $(a.getAttribute('href')) };
+  }).filter(function (o) { return o.el; });
+
+  if ('IntersectionObserver' in window && secs.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = '#' + en.target.id;
+        navLinks.forEach(function (a) {
+          a.classList.toggle('is-active', a.getAttribute('href') === id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (o) { spy.observe(o.el); });
+  }
+
+  /* ---------------- 6. menu mobile ---------------- */
+  var burger = $('#burger');
+  var mnav = $('#mnav');
+
+  function setMenu(open) {
+    if (!burger || !mnav) return;
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
+    mnav.classList.toggle('is-open', open);
+    mnav.setAttribute('aria-hidden', String(!open));
+    if (open) mnav.removeAttribute('inert'); else mnav.setAttribute('inert', '');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      var first = mnav.querySelector('a');
+      if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 120);
+    }
+  }
+
+  if (burger) {
+    burger.addEventListener('click', function () {
+      setMenu(burger.getAttribute('aria-expanded') !== 'true');
+    });
+  }
+  if (mnav) {
+    $$('a', mnav).forEach(function (a) {
+      a.addEventListener('click', function () { setMenu(false); });
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && burger && burger.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      burger.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 980 && burger && burger.getAttribute('aria-expanded') === 'true') setMenu(false);
+  }, { passive: true });
+
+  /* ---------------- 7. formulário -> mailto ---------------- */
+  var form = $('#ctForm');
+  var status = $('#formStatus');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = $('#f-name').value.trim();
+      var mail = $('#f-mail').value.trim();
+      var type = $('#f-type').value;
+      var msg = $('#f-msg').value.trim();
+
+      if (!name || !msg || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
+        if (status) {
+          status.style.color = '#b03a2e';
+          status.textContent = 'Confira nome, e-mail e a descrição do problema.';
+        }
+        var bad = !name ? $('#f-name') : (!mail ? $('#f-mail') : $('#f-msg'));
+        if (bad) bad.focus();
+        return;
+      }
+
+      var subject = 'Projeto BADCLAUDE — ' + type + ' — ' + name;
+      var body = [
+        'Nome: ' + name,
+        'E-mail: ' + mail,
+        'Tipo: ' + type,
+        '',
+        'Problema:',
+        msg,
+        '',
+        '— enviado pelo site badclaude.dev'
+      ].join('\n');
+
+      if (status) {
+        status.style.color = '#4a4034';
+        status.textContent = 'Abrindo seu e-mail com a ficha preenchida…';
+      }
+      window.location.href = 'mailto:contato@badclaude.dev?subject='
+        + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      setTimeout(function () {
+        if (status) status.textContent = 'Se nada abriu, copie o texto e envie para contato@badclaude.dev.';
+      }, 1900);
+    });
+  }
+
+  /* ---------------- 8. copiar e-mail ---------------- */
+  var copyBtn = $('#copyMail');
+  var copyLbl = $('#copyLbl');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var mail = copyBtn.dataset.mail;
+      function ok() { if (copyLbl) copyLbl.textContent = 'copiado ✓'; }
+      function done() { setTimeout(function () { if (copyLbl) copyLbl.textContent = 'copiar'; }, 2200); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mail).then(function () { ok(); done(); }, function () { fallback(); });
+      } else { fallback(); }
+      function fallback() {
+        var tmp = document.createElement('textarea');
+        tmp.value = mail;
+        tmp.setAttribute('readonly', '');
+        tmp.style.position = 'fixed';
+        tmp.style.left = '-9999px';
+        document.body.appendChild(tmp);
+        tmp.select();
+        try { document.execCommand('copy'); ok(); }
+        catch (err) { if (copyLbl) copyLbl.textContent = mail; }
+        document.body.removeChild(tmp);
+        done();
+      }
+    });
+  }
+
+  /* ---------------- 9. ano, marquee, faísca ---------------- */
+  var yr = $('#year');
+  if (yr) yr.textContent = String(new Date().getFullYear());
+
+  var track = $('#bandTrack');
+  if (track && !track.dataset.dup) {
+    track.dataset.dup = '1';
+    track.innerHTML += track.innerHTML;
+  }
+
+  if (!REDUCED) {
+    document.body.addEventListener('click', function (e) {
+      if (e.target.closest('a, button, input, select, textarea, summary, details')) return;
+      for (var i = 0; i < 8; i++) {
+        var s = document.createElement('span');
+        s.className = 'rb-spark';
+        s.style.left = e.clientX + 'px';
+        s.style.top = e.clientY + 'px';
+        s.style.background = '#b03a2e';
+        var a = (i / 8) * Math.PI * 2;
+        var d = 16 + Math.random() * 24;
+        s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+        s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+        document.body.appendChild(s);
+        (function (node) { setTimeout(function () { node.remove(); }, 640); })(s);
+      }
+    });
+  }
+
+  /* ---------------- 10. mascote a tinta (base autônoma) ----------------
+     Desenho vetorial em canvas, sem dependência nenhuma: um bichinho
+     quadrúpede de orelhas redondas, quatro patas e olhos grandes. No
+     ambiente com módulos, o BadClawd vira o dono do canvas. */
+  var fallbacks = [];
+
+  function inkPet(canvas, opts) {
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0, U = 1;
+    var ink = '#1f1a14';
+    var terra = '#b03a2e';
+    var t = 0, blink = 0, blinkAt = 2.2;
+    var gaze = { x: 0, y: 0 }, target = { x: 0, y: 0 };
+    var pointer = null, raf = null, alive = true;
+    var state = (opts && opts.state) || 'idle';
+    var sitting = state === 'sit';
+
+    function fit() {
+      var r = canvas.getBoundingClientRect();
+      W = Math.max(120, Math.round(r.width || 320));
+      H = Math.max(120, Math.round(r.height || 320));
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      U = Math.min(W, H) / 76;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var cx = W / 2;
+      var ground = H * 0.82;
+      var bob = Math.sin(t * 1.4) * 0.7 * U;
+      var bodyY = ground - 27 * U + bob + (sitting ? 3 * U : 0);
+      var bw = 25 * U;   /* meia-largura do corpo  */
+      var bh = 15 * U;   /* meia-altura do corpo   */
+
+      /* sombra no chão */
+      ctx.save();
+      ctx.globalAlpha = 0.12;
+      ctx.fillStyle = ink;
+      ctx.beginPath();
+      ctx.ellipse(cx, ground + 1.5 * U, bw * 1.12, 3.6 * U, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      function leg(hipX, hipY, footX, footY, w) {
+        ctx.beginPath();
+        ctx.moveTo(hipX, hipY);
+        ctx.bezierCurveTo(hipX, hipY + (footY - hipY) * 0.5,
+                          footX - (footX - hipX) * 0.2, footY - (footY - hipY) * 0.25,
+                          footX, footY);
+        ctx.strokeStyle = ink;
+        ctx.lineWidth = w;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(footX, footY - w * 0.12, w * 0.74, w * 0.44, 0, 0, Math.PI * 2);
+        ctx.fillStyle = ink;
+        ctx.fill();
+      }
+
+      /* patas traseiras */
+      leg(cx - bw * 0.66, bodyY + bh * 0.66, cx - bw * 0.82, ground, 5.2 * U);
+      leg(cx + bw * 0.66, bodyY + bh * 0.66, cx + bw * 0.82, ground, 5.2 * U);
+
+      /* orelhas atrás da cabeça */
+      [-1, 1].forEach(function (sd) {
+        var bx = cx + sd * bw * 0.62;
+        var by = bodyY - bh * 0.78;
+        ctx.beginPath();
+        ctx.moveTo(bx - sd * 3.2 * U, by + 3.2 * U);
+        ctx.bezierCurveTo(bx - sd * 4.4 * U, by - 7.4 * U,
+                          bx + sd * 4.6 * U, by - 8.0 * U,
+                          bx + sd * 3.8 * U, by + 2.6 * U);
+        ctx.strokeStyle = ink;
+        ctx.lineWidth = 2.1 * U;
+        ctx.stroke();
+      });
+
+      /* corpo */
+      ctx.beginPath();
+      ctx.moveTo(cx - bw, bodyY + bh * 0.14);
+      ctx.bezierCurveTo(cx - bw * 1.02, bodyY - bh * 0.66,
+                        cx - bw * 0.60, bodyY - bh,
+                        cx, bodyY - bh);
+      ctx.bezierCurveTo(cx + bw * 0.60, bodyY - bh,
+                        cx + bw * 1.02, bodyY - bh * 0.66,
+                        cx + bw, bodyY + bh * 0.14);
+      ctx.bezierCurveTo(cx + bw * 0.98, bodyY + bh * 0.86,
+                        cx + bw * 0.56, bodyY + bh * 1.06,
+                        cx, bodyY + bh * 1.06);
+      ctx.bezierCurveTo(cx - bw * 0.56, bodyY + bh * 1.06,
+                        cx - bw * 0.98, bodyY + bh * 0.86,
+                        cx - bw, bodyY + bh * 0.14);
+      ctx.closePath();
+      ctx.fillStyle = '#f8f2e6';
+      ctx.fill();
+      ctx.strokeStyle = ink;
+      ctx.lineWidth = 2.4 * U;
+      ctx.stroke();
+
+      /* hachura de gravura recortada no corpo */
+      ctx.save();
+      ctx.clip();
+      ctx.strokeStyle = 'rgba(31,26,20,.13)';
+      ctx.lineWidth = 0.9 * U;
+      for (var k = -4; k < 14; k++) {
+        ctx.beginPath();
+        ctx.moveTo(cx - bw * 0.6 + k * 5.5 * U, bodyY + bh * 1.2);
+        ctx.lineTo(cx - bw * 0.6 + k * 5.5 * U + bh * 1.05, bodyY - bh * 1.1);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      /* patas da frente */
+      leg(cx - bw * 0.40, bodyY + bh * 0.84, cx - bw * 0.44, ground, 5.8 * U);
+      leg(cx + bw * 0.40, bodyY + bh * 0.84, cx + bw * 0.44, ground, 5.8 * U);
+
+      /* olhos */
+      var eyeY = bodyY - bh * 0.24;
+      var eyeR = 4.4 * U;
+      var gap = bw * 0.34;
+      var open = Math.max(0.06, 1 - blink);
+      [-1, 1].forEach(function (sd) {
+        var ex = cx + gap * sd;
+        ctx.save();
+        ctx.translate(ex, eyeY);
+        ctx.scale(1, open);
+
+        ctx.beginPath();
+        ctx.arc(0, 0, eyeR + 1.0 * U, 0, Math.PI * 2);
+        ctx.fillStyle = '#f8f2e6';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(0, 0, eyeR, 0, Math.PI * 2);
+        ctx.fillStyle = ink;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(gaze.x * eyeR * 0.42 - eyeR * 0.26, gaze.y * eyeR * 0.42 - eyeR * 0.30, eyeR * 0.28, 0, Math.PI * 2);
+        ctx.fillStyle = '#f8f2e6';
+        ctx.fill();
+        ctx.restore();
+      });
+
+      /* focinho */
+      ctx.beginPath();
+      ctx.moveTo(cx - 2.1 * U, bodyY + bh * 0.22);
+      ctx.quadraticCurveTo(cx, bodyY + bh * 0.42, cx + 2.1 * U, bodyY + bh * 0.22);
+      ctx.strokeStyle = ink;
+      ctx.lineWidth = 1.7 * U;
+      ctx.stroke();
+
+      /* coleira terracota */
+      ctx.beginPath();
+      ctx.arc(cx, bodyY + bh * 0.62, 2.0 * U, 0, Math.PI * 2);
+      ctx.fillStyle = terra;
+      ctx.fill();
+    }
+
+    function loop() {
+      if (!alive) return;
+      raf = requestAnimationFrame(loop);
+      t += 0.016;
+      blinkAt -= 0.016;
+      if (blinkAt <= 0) { blink = 1; blinkAt = 2.6 + Math.random() * 3.4; }
+      blink = Math.max(0, blink - 0.08);
+
+      if (pointer) {
+        var dx = pointer.x - W / 2, dy = pointer.y - H * 0.45;
+        var l = Math.hypot(dx, dy) || 1;
+        var k = Math.min(1, l / 190);
+        target.x = (dx / l) * k;
+        target.y = (dy / l) * k;
+      } else {
+        target.x = Math.sin(t * 0.45) * 0.32;
+        target.y = Math.cos(t * 0.36) * 0.14;
+      }
+      gaze.x += (target.x - gaze.x) * 0.1;
+      gaze.y += (target.y - gaze.y) * 0.1;
+
+      draw();
+    }
+
+    fit();
+    window.addEventListener('resize', fit, { passive: true });
+    if (REDUCED) { draw(); } else { loop(); }
+
+    var api = {
+      canvas: canvas,
+      pointAt: function (x, y) { pointer = { x: x, y: y }; },
+      clearPoint: function () { pointer = null; },
+      setState: function (s) { sitting = s === 'sit'; },
+      destroy: function () {
+        alive = false;
+        cancelAnimationFrame(raf);
+        window.removeEventListener('resize', fit);
+      }
+    };
+    fallbacks.push(api);
+    return api;
+  }
+
+  window.__badclaudeInkPet = inkPet;
+
+  var petCanvases = $$('canvas.pet');
+  var basePets = petCanvases.map(function (cv) {
+    return inkPet(cv, { state: cv.dataset.state });
+  });
+
+  var pointRaf = null;
+  window.addEventListener('pointermove', function (e) {
+    if (REDUCED || pointRaf) return;
+    pointRaf = requestAnimationFrame(function () {
+      pointRaf = null;
+      window.__badclaudePets.forEach(function (pet) {
+        var r = pet.canvas.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > window.innerHeight + 220) return;
+        pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+      });
+    });
+  }, { passive: true });
+
+  window.__badclaudePets = basePets.slice();
+
+  /* clique no mascote: levanta as orelhas */
+  petCanvases.forEach(function (cv) {
+    cv.addEventListener('click', function () {
+      cv.classList.add('is-poked');
+      setTimeout(function () { cv.classList.remove('is-poked'); }, 900);
+    });
+  });
+
+  window.__badclaudeBase = { inkPet: inkPet, basePets: basePets, REDUCED: REDUCED };
+})();
+</script>
+
+<script type="module">
+/* ============================================================
+   UPGRADE — quando servido por http(s), os módulos do estúdio
+   assumem a tipografia animada e o mascote com IK nas patas.
+   Se qualquer import falhar (file://, offline), a camada base
+   clássica continua no comando — nada quebra.
+   ============================================================ */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const base = window.__badclaudeBase || {};
+const REDUCED = base.REDUCED ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let mods = null;
+try {
+  const [pets, rb] = await Promise.all([
+    import('../../assets/js/badclawd.js'),
+    import('../../assets/js/reactbits.js')
+  ]);
+  mods = { BadClawd: pets.BadClawd, ...rb };
+} catch (err) {
+  /* file:// bloqueia módulos: fica a camada base */
+  mods = null;
+}
+
+/* ---------------- tipografia animada ---------------- */
+if (mods && !REDUCED) {
+  const splitTargets = $$('[data-split]');
+  const blurTargets = $$('[data-blur]');
+
+  const runSplit = (el) => {
+    if (!el) return;
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    el.dataset.split = '0';
+    mods.splitText(el, { stagger: 0.011, delay: 0.04 });
+  };
+  const runBlur = (el) => {
+    if (!el) return;
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    el.dataset.blur = '0';
+    mods.blurText(el, { stagger: 0.03 });
+  };
+  const typeOn = (el, mode) => {
+    if (!('IntersectionObserver' in window)) {
+      (mode === 'split' ? runSplit : runBlur)(el);
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        io.disconnect();
+        (mode === 'split' ? runSplit : runBlur)(el);
+      });
+    }, { threshold: 0.28 });
+    io.observe(el);
+  };
+
+  const startTypo = () => {
+    splitTargets.forEach((el) => typeOn(el, 'split'));
+    blurTargets.forEach((el) => typeOn(el, 'blur'));
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(startTypo);
+  else window.addEventListener('load', startTypo, { once: true });
+
+  document.addEventListener('badclaude:lang', () => {
+    splitTargets.forEach((el) => {
+      if (el.dataset.split === '1') { el.removeAttribute('aria-label'); runSplit(el); }
+    });
+    blurTargets.forEach((el) => {
+      if (el.dataset.blur === '1') { el.removeAttribute('aria-label'); runBlur(el); }
+    });
+  });
+}
+
+/* ---------------- mascote com IK ---------------- */
+if (mods) {
+  (base.basePets || []).forEach((p) => p.destroy());
+  window.__badclaudePets = [];
+
+  $$('canvas.pet').forEach((cv) => {
+    const pet = new mods.BadClawd(cv, {
+      variant: cv.dataset.variant || 'ink',
+      accent: '#b03a2e',
+      strokeWidth: 2.4
+    });
+    pet.setState(cv.dataset.state || 'idle');
+    window.__badclaudePets.push(pet);
+
+    cv.addEventListener('click', () => {
+      pet.setState('alert');
+      clearTimeout(cv._t);
+      cv._t = setTimeout(() => pet.setState(cv.dataset.state || 'idle'), 1100);
+    });
+  });
+}
+</script>
+
+<!-- ASSINATURA FINAL — linha oficial do estúdio -->
+<section class="bc-assinatura" aria-label="Condições e assinatura">
+  <p>Preços variados — depende da demanda e oferta do mercado de pontes. O cliente pode ter seu dinheiro de volta do que não usou em contrato. CZSLHBS · Antônio Clóvis · Acre · Cruzeiro do Sul — (fé em Deus e justa é a batalha do guerreiro)</p>
+</section>
+<style>
+  .bc-assinatura {
+    border-top: 1px solid currentColor;
+    opacity: .72;
+    padding: 22px clamp(16px, 4vw, 52px) 30px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.7;
+    letter-spacing: .01em;
+    max-width: 92ch;
+    margin: 0 auto;
+  }
+  .bc-assinatura p { margin: 0; }
+</style>
+</body>
+</html>

@@ -21712,6 +21712,15 @@ async function handleStatic(req, res, pathname, requestUrl) {
         return res.end();
       }
 
+      // CZS 2026-11-11 — subpágina BADCLAUDE (showroom das 10 direções)
+      if (pathname === "/badclaude") {
+        res.writeHead(302, {
+          Location: "/badclaude/",
+          "Cache-Control": "no-store"
+        });
+        return res.end();
+      }
+
       if (pathname.startsWith("/bookray/")) {
         let filePath = path.join(ROOT_DIR, "bookray", pathname.slice("/bookray/".length));
         if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
@@ -21744,6 +21753,24 @@ async function handleStatic(req, res, pathname, requestUrl) {
        }
        return sendFile(req, res, filePath, {
          cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+       });
+     }
+
+     if (pathname.startsWith("/badclaude/")) {
+       let filePath = path.join(ROOT_DIR, "badclaude", pathname.slice("/badclaude/".length));
+       const badclaudeRoot = path.join(ROOT_DIR, "badclaude");
+       if (!filePath.startsWith(badclaudeRoot)) {
+         return sendText(res, 403, "Acesso negado.");
+       }
+       if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+         filePath = path.join(filePath, "index.html");
+       }
+       const badclaudeExt = path.extname(filePath).toLowerCase();
+       if (!["", ".html", ".css", ".js", ".mjs", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".json", ".woff", ".woff2", ".txt"].includes(badclaudeExt)) {
+         return sendText(res, 403, "Acesso negado.");
+       }
+       return sendFile(req, res, filePath, {
+         cacheControl: badclaudeExt === ".html" ? "no-store" : VERSIONED_STATIC_CACHE_CONTROL
        });
      }
 

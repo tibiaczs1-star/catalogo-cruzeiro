@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — Grid Técnico | Estúdio de software em Cruzeiro do Sul, Acre</title>
+<meta name="description" content="BADCLAUDE é um estúdio de software indie em Cruzeiro do Sul, Acre. Jogos 3D como JURUÁ, sistemas web com agentes de IA e sites desenhados como projeto de engenharia: com cota, grade e revisão.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BADCLAUDE">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BADCLAUDE — Eu me construí. Eu me desfaço e me refaço.">
+<meta property="og:description" content="Estúdio de software indie no Vale do Juruá. Jogos 3D, sistemas com IA e sites — cada peça com sua cota.">
+<meta property="og:url" content="https://badclaude.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BADCLAUDE — Grid Técnico">
+<meta name="twitter:description" content="Jogos 3D, sistemas web com agentes de IA e sites. Cruzeiro do Sul · Acre · Amazônia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M5 5h22v22H5z' fill='none' stroke='%231e5aa8' stroke-width='1.6'/%3E%3Cpath d='M11 11h10v10H11z' fill='none' stroke='%231e5aa8' stroke-width='1.4'/%3E%3Cpath d='M5 16h22M16 5v22' stroke='%231e5aa8' stroke-width='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BADCLAUDE · DIREÇÃO 08 — GRID TÉCNICO
+   Papel branco, réguas azul-técnico #1e5aa8, numeração, cotas,
+   crosshairs e grade de colunas visível. Inter + JetBrains Mono.
+   Todo gráfico é CSS, SVG ou canvas — nenhuma imagem raster.
+   ============================================================ */
+
+:root {
+  --paper: #ffffff;
+  --ink: #0c1b2a;
+  --ink-soft: #2a3d52;
+  --muted: #55677b;
+  --blue: #1e5aa8;
+  --blue-deep: #123f7c;
+  --blue-ink: #0e2c52;
+  --rule: #ccd9e7;
+  --rule-soft: #e6edf5;
+  --tint: #f4f8fc;
+  --tint-2: #e7eff8;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pad: clamp(16px, 4vw, 40px);
+  --head: 66px;
+  --ease: cubic-bezier(.19, 1, .22, 1);
+  --maxw: 1240px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--head) + 18px); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.62;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--blue); color: #fff; }
+
+h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -.035em; line-height: 1.06; color: var(--ink); }
+p { margin: 0; }
+ul, ol, dl, dd, figure { margin: 0; padding: 0; }
+li { list-style: none; }
+a { color: inherit; text-decoration: none; }
+img, svg, canvas { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+:where(p, li, dd, a, span) { overflow-wrap: break-word; }
+
+.skip {
+  position: fixed; left: 12px; top: -90px; z-index: 200;
+  background: var(--blue); color: #fff; padding: 12px 18px;
+  font: 500 12px/1 var(--mono); letter-spacing: .08em;
+  transition: top .25s var(--ease);
+}
+.skip:focus { top: 12px; }
+
+/* ---------- grade de colunas visível ---------- */
+.sheet-grid {
+  position: fixed; inset-block: 0; left: 50%; transform: translateX(-50%);
+  width: min(var(--maxw), calc(100% - 2 * var(--pad)));
+  z-index: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg,
+    rgba(30, 90, 168, .07) 0 1px,
+    transparent 1px calc(100% / 12));
+  border-right: 1px solid rgba(30, 90, 168, .07);
+  opacity: .9;
+}
+.sheet-grid::before {
+  content: ''; position: absolute; inset-block: 0; left: 0; width: 1px;
+  background: rgba(30, 90, 168, .07);
+}
+@media (max-width: 900px) { .sheet-grid { display: none; } }
+
+/* ---------- barra de progresso ---------- */
+.progress { position: fixed; inset-inline: 0; top: 0; height: 2px; z-index: 120; pointer-events: none; }
+.progress i { display: block; height: 100%; width: 0; background: var(--blue); }
+
+.wrap { width: min(var(--maxw), calc(100% - 2 * var(--pad))); margin-inline: auto; position: relative; z-index: 2; }
+
+/* ---------- cabeçalho ---------- */
+.hdr {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(255, 255, 255, .95);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  transition: box-shadow .3s ease;
+}
+.hdr.is-stuck { box-shadow: 0 1px 0 var(--blue), 0 10px 30px -22px rgba(14, 44, 82, .5); }
+.hdr-in {
+  width: min(var(--maxw), calc(100% - 2 * var(--pad)));
+  margin-inline: auto; min-height: var(--head);
+  display: flex; align-items: center; gap: 20px;
+}
+.brand { display: inline-flex; align-items: center; gap: 11px; min-width: 0; }
+.brand-mark { width: 22px; height: 22px; flex: none; color: var(--blue); }
+.brand-name { font: 700 15px/1 var(--mono); letter-spacing: .17em; color: var(--ink); }
+.brand-meta {
+  font: 400 9px/1 var(--mono); letter-spacing: .11em; color: var(--muted);
+  padding-left: 12px; border-left: 1px solid var(--rule); white-space: nowrap;
+}
+.nav { margin-left: auto; display: flex; align-items: center; gap: 0; }
+.nav a {
+  position: relative;
+  font: 500 10px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-soft); padding: 13px 11px; white-space: nowrap;
+  transition: color .2s ease;
+}
+.nav a b { color: var(--blue); font-weight: 500; margin-right: 5px; }
+.nav a::after {
+  content: ''; position: absolute; left: 11px; right: 11px; bottom: 6px; height: 1px;
+  background: var(--blue); transform: scaleX(0); transform-origin: left;
+  transition: transform .45s var(--ease);
+}
+.nav a:hover { color: var(--blue-deep); }
+.nav a:hover::after, .nav a.is-active::after { transform: scaleX(1); }
+.nav a.is-active { color: var(--blue-deep); }
+
+.burger {
+  display: none; margin-left: auto;
+  background: #fff; border: 1px solid var(--rule); color: var(--blue);
+  padding: 10px 12px; cursor: pointer; align-items: center; gap: 9px;
+  font: 500 9.5px/1 var(--mono); letter-spacing: .17em; text-transform: uppercase;
+  transition: border-color .2s ease, background .2s ease;
+}
+.burger i { display: block; width: 15px; height: 9px; border-top: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; }
+.burger:hover { border-color: var(--blue); background: var(--tint); }
+
+@media (max-width: 1040px) {
+  .nav { display: none; }
+  .burger { display: inline-flex; }
+  .brand-meta { display: none; }
+}
+
+/* ---------- menu mobile ---------- */
+.menu {
+  position: fixed; inset: 0; z-index: 90; background: var(--paper);
+  transform: translateY(-101%); transition: transform .55s var(--ease);
+  display: flex; flex-direction: column; padding: 0 var(--pad) 26px;
+  overflow-y: auto;
+}
+.menu.open { transform: none; }
+.menu-head {
+  min-height: var(--head); display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--blue); position: sticky; top: 0; background: var(--paper); z-index: 2;
+}
+.menu-close {
+  background: none; border: 1px solid var(--rule); padding: 10px 12px; cursor: pointer;
+  font: 500 9.5px/1 var(--mono); letter-spacing: .17em; text-transform: uppercase; color: var(--blue);
+}
+.menu-close:hover { border-color: var(--blue); }
+.menu ol { margin-top: 10px; border-top: 1px solid var(--rule); }
+.menu li { border-bottom: 1px solid var(--rule); }
+.menu li a {
+  display: flex; align-items: baseline; gap: 14px; padding: 17px 4px;
+  font-size: clamp(1.15rem, 4.6vw, 1.55rem); letter-spacing: -.03em; font-weight: 500;
+  transition: color .2s ease, padding-left .3s var(--ease);
+}
+.menu li a:hover { color: var(--blue); padding-left: 10px; }
+.menu li a span:first-child { font: 500 9.5px/1 var(--mono); letter-spacing: .14em; color: var(--blue); min-width: 26px; }
+.menu li a span:last-child { margin-left: auto; font: 400 9.5px/1 var(--mono); color: var(--muted); letter-spacing: .1em; }
+.menu-foot {
+  margin-top: auto; padding-top: 26px; display: grid; gap: 5px;
+  font: 400 10px/1.7 var(--mono); letter-spacing: .07em; color: var(--muted);
+}
+
+/* ---------- etiquetas, réguas, cabeçalhos de seção ---------- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 500 9.5px/1 var(--mono); letter-spacing: .19em; text-transform: uppercase; color: var(--blue);
+}
+.eyebrow::before { content: ''; width: 7px; height: 7px; background: var(--blue); flex: none; }
+
+.sec { position: relative; padding: clamp(52px, 8vw, 108px) 0; }
+.sec + .sec { border-top: 1px solid var(--rule-soft); }
+.sec-head { border-top: 1px solid var(--blue); padding-top: 15px; margin-bottom: clamp(24px, 4vw, 44px); position: relative; }
+.sec-head::before, .sec-head::after {
+  content: ''; position: absolute; top: -4px; width: 7px; height: 7px;
+  border-left: 1px solid var(--blue); border-bottom: 1px solid var(--blue);
+  transform: rotate(45deg); background: #fff;
+}
+.sec-head::before { left: -4px; }
+.sec-head::after { right: -4px; }
+.fig {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  font: 400 9px/1.5 var(--mono); letter-spacing: .17em; color: var(--muted);
+  margin-bottom: 15px; text-transform: uppercase;
+}
+.fig b { color: var(--blue); font-weight: 500; }
+.sec-title { font-size: clamp(1.7rem, 4.1vw, 2.95rem); max-width: 24ch; letter-spacing: -.045em; line-height: 1.04; }
+.sec-sub { margin-top: 13px; max-width: 58ch; color: var(--muted); font-size: clamp(14px, 1.1vw, 16px); }
+.sec-count {
+  position: absolute; right: 0; top: 15px;
+  font: 400 9px/1 var(--mono); letter-spacing: .15em; color: var(--muted);
+}
+@media (max-width: 780px) { .sec-count { display: none; } }
+
+/* ---------- botões ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 11px;
+  padding: 15px 21px; min-height: 50px; border: 1px solid var(--blue);
+  font: 500 10.5px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase;
+  cursor: pointer; background: #fff; color: var(--blue-deep);
+  transition: background .25s ease, color .25s ease, transform .25s var(--ease), box-shadow .25s ease, border-color .2s;
+  position: relative; border-radius: 0;
+}
+.btn svg { width: 14px; height: 14px; flex: none; transition: transform .35s var(--ease); }
+.btn:hover svg { transform: translateX(4px); }
+.btn-solid { background: var(--blue); color: #fff; box-shadow: 5px 5px 0 var(--tint-2); }
+.btn-solid:hover { background: var(--blue-deep); transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--tint-2); }
+.btn-line:hover { background: var(--tint); }
+.btn-ghost { border-color: var(--rule); color: var(--ink-soft); }
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); background: var(--tint); }
+
+/* ---------- HERO / PRANCHA 01 ---------- */
+.hero { padding-top: clamp(18px, 2.6vw, 30px); padding-bottom: clamp(38px, 5vw, 62px); }
+.sheet-meta {
+  display: flex; flex-wrap: wrap; gap: 7px 26px; justify-content: space-between;
+  border-top: 1px solid var(--blue); border-bottom: 1px solid var(--rule);
+  padding: 9px 0; margin-bottom: clamp(24px, 4vw, 50px);
+  font: 400 9px/1.5 var(--mono); letter-spacing: .15em; color: var(--muted); text-transform: uppercase;
+}
+.sheet-meta b { color: var(--blue); font-weight: 500; }
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.32fr) minmax(290px, .78fr);
+  gap: clamp(26px, 4.5vw, 66px); align-items: start;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: .97; letter-spacing: -.052em; font-weight: 600;
+  margin: clamp(14px, 2.2vw, 24px) 0 0; max-width: 13ch;
+}
+.hero-title .ln { display: block; }
+.hero-title em { font-style: normal; color: var(--blue); }
+.hero-title em::after {
+  content: ''; display: inline-block; width: .12em; height: .12em; margin-left: .2em;
+  background: var(--blue); transform: translateY(-.62em);
+}
+.hero-lead {
+  margin-top: clamp(16px, 2.2vw, 24px); max-width: 47ch;
+  font-size: clamp(14.5px, 1.2vw, 16.5px); color: var(--ink-soft); line-height: 1.68;
+  padding-left: 15px; border-left: 1px solid var(--rule);
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: clamp(20px, 2.8vw, 30px); }
+.hero-facts {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(26px, 3.6vw, 40px);
+  border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+}
+.hero-facts > div { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 11px 13px; }
+.hero-facts dt { font: 400 8.8px/1 var(--mono); letter-spacing: .17em; color: var(--blue); margin-bottom: 7px; text-transform: uppercase; }
+.hero-facts dd { font-size: 12.5px; line-height: 1.42; color: var(--ink-soft); }
+
+/* prancha do mascote */
+.plate { border: 1px solid var(--blue); background: #fff; position: relative; }
+.plate::before, .plate::after { content: ''; position: absolute; width: 10px; height: 10px; background: var(--blue); z-index: 4; }
+.plate::before { left: -1px; top: -1px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.plate::after { right: -1px; bottom: -1px; clip-path: polygon(100% 100%, 100% 0, 0 100%); }
+.plate-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  border-bottom: 1px solid var(--blue); padding: 9px 11px;
+  font: 400 8.4px/1.3 var(--mono); letter-spacing: .13em; color: var(--blue); text-transform: uppercase;
+}
+.plate-head span:nth-child(2) { color: var(--ink-soft); }
+.plate-stage {
+  position: relative; height: clamp(240px, 26vw, 320px); background-color: #fff;
+  background-image:
+    linear-gradient(var(--rule-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule-soft) 1px, transparent 1px);
+  background-size: 25% 25%, 25% 25%;
+  background-position: center center;
+  border-bottom: 1px solid var(--rule);
+}
+.plate-stage::before, .plate-stage::after { content: ''; position: absolute; pointer-events: none; }
+.plate-stage::before {
+  left: 50%; top: 12%; bottom: 12%; width: 1px;
+  background: repeating-linear-gradient(var(--blue) 0 4px, transparent 4px 9px); opacity: .3;
+}
+.plate-stage::after {
+  top: 50%; left: 8%; right: 8%; height: 1px;
+  background: repeating-linear-gradient(90deg, var(--blue) 0 4px, transparent 4px 9px); opacity: .3;
+}
+.plate-stage canvas { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: min(100%, 300px); height: 100%; }
+.corner { position: absolute; width: 13px; height: 13px; color: var(--blue); opacity: .75; z-index: 3; }
+.corner.tl { top: 6px; left: 6px; }
+.corner.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+.corner.bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+.corner.br { bottom: 6px; right: 6px; transform: scale(-1); }
+.dim-h { position: absolute; left: 15%; right: 15%; top: 8px; height: 20px; color: var(--blue); z-index: 3; opacity: .85; }
+.dim-v { position: absolute; right: 7px; top: 27%; height: 42%; width: 20px; color: var(--blue); z-index: 3; opacity: .85; }
+.plate-cap {
+  position: absolute; left: 11px; bottom: 7px; z-index: 3;
+  font: 400 8.2px/1.3 var(--mono); letter-spacing: .11em; color: var(--muted);
+  display: flex; align-items: center; gap: 7px; text-transform: uppercase;
+}
+.plate-cap::before { content: ''; width: 6px; height: 6px; border: 1px solid var(--blue); border-radius: 50%; flex: none; }
+.plate-spec { width: 100%; border-collapse: collapse; }
+.plate-spec th, .plate-spec td {
+  text-align: left; padding: 6.5px 11px; border-bottom: 1px solid var(--rule-soft);
+  font: 400 9.4px/1.4 var(--mono); letter-spacing: .03em; vertical-align: top;
+}
+.plate-spec tr:last-child th, .plate-spec tr:last-child td { border-bottom: 0; }
+.plate-spec th { color: var(--muted); letter-spacing: .13em; text-transform: uppercase; width: 33%; font-weight: 400; }
+.plate-spec td { color: var(--blue-deep); }
+
+/* carimbo técnico (title block) */
+.stamp {
+  margin-top: 10px; border: 1px solid var(--rule); border-left: 1px solid var(--blue);
+  display: grid; grid-template-columns: 1fr 1fr; background: #fff;
+}
+.stamp div { padding: 7px 10px; border-right: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft); }
+.stamp div:nth-child(2n) { border-right: 0; }
+.stamp div:nth-last-child(-n+2) { border-bottom: 0; }
+.stamp dt { font: 400 7.8px/1 var(--mono); letter-spacing: .16em; color: var(--muted); text-transform: uppercase; margin-bottom: 5px; }
+.stamp dd { font: 500 10px/1.3 var(--mono); letter-spacing: .05em; color: var(--blue-deep); }
+
+/* faixa de dados em movimento */
+.strip {
+  margin-top: clamp(30px, 4.5vw, 52px);
+  border-top: 1px solid var(--blue); border-bottom: 1px solid var(--blue);
+  overflow: hidden; position: relative; background: var(--tint);
+}
+.strip-track { display: flex; width: max-content; animation: strip 48s linear infinite; }
+.strip:hover .strip-track { animation-play-state: paused; }
+.strip-group { display: flex; align-items: center; }
+.strip-group span {
+  display: inline-flex; align-items: center; gap: 18px; padding: 11px 18px;
+  font: 400 9.5px/1 var(--mono); letter-spacing: .19em; color: var(--blue-deep);
+  text-transform: uppercase; white-space: nowrap;
+}
+.strip-group span::after { content: ''; width: 5px; height: 5px; background: var(--blue); transform: rotate(45deg); }
+@keyframes strip { to { transform: translateX(-50%); } }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-title { max-width: 16ch; }
+  .plate-mount { max-width: 430px; }
+}
+
+/* ---------- revelação / split ---------- */
+.js [data-reveal] {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .9s ease, transform 1s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+[data-reveal].in, html:not(.js) [data-reveal] { opacity: 1; transform: none; }
+.rb-word { display: inline-block; white-space: nowrap; }
+.rb-char { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .1em; margin-bottom: -.1em; }
+.rb-char-i {
+  display: inline-block; opacity: 0; transform: translateY(108%);
+  transition: transform .95s cubic-bezier(.19, 1, .22, 1), opacity .7s ease;
+  will-change: transform;
+}
+.rb-char-i.rb-in { opacity: 1; transform: none; }
+.rb-space { width: .27em; opacity: 0; }
+
+/* ---------- FIG 02 — MANIFESTO ---------- */
+.memo { background: var(--tint); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.memo-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(255px, .82fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.memo-quote { font-size: clamp(1.4rem, 3.05vw, 2.3rem); line-height: 1.24; letter-spacing: -.038em; font-weight: 500; max-width: 25ch; }
+.memo-quote b { color: var(--blue); font-weight: 500; }
+.memo-lead { margin-top: 18px; max-width: 52ch; color: var(--ink-soft); font-size: clamp(14px, 1.05vw, 15.5px); }
+.memo-sign {
+  margin-top: 24px; display: flex; align-items: center; gap: 12px;
+  font: 400 9px/1 var(--mono); letter-spacing: .17em; color: var(--muted); text-transform: uppercase;
+}
+.memo-sign i { display: block; width: 40px; height: 1px; background: var(--blue); flex: none; }
+.memo-notes { border-top: 1px solid var(--blue); }
+.memo-notes article { display: grid; grid-template-columns: 30px 1fr; gap: 11px; padding: 15px 0; border-bottom: 1px solid var(--rule); }
+.memo-notes .n { font: 500 9px/1.6 var(--mono); color: var(--blue); letter-spacing: .1em; padding-top: 2px; }
+.memo-notes h3 { font-size: 15px; letter-spacing: -.012em; font-weight: 600; margin-bottom: 3px; }
+.memo-notes p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+@media (max-width: 860px) { .memo-grid { grid-template-columns: 1fr; } }
+
+/* ---------- FIG 03 — FRENTES ---------- */
+.fronts { border-top: 1px solid var(--blue); }
+.front {
+  display: grid; grid-template-columns: 56px minmax(0, 1.5fr) minmax(0, 1.05fr) 150px;
+  gap: clamp(14px, 2vw, 28px); align-items: start;
+  padding: clamp(20px, 2.6vw, 30px) 14px;
+  border-bottom: 1px solid var(--rule);
+  position: relative; transition: background .3s ease;
+}
+.front::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--blue); transform: scaleY(0); transform-origin: top;
+  transition: transform .45s var(--ease);
+}
+.front:hover { background: var(--tint); }
+.front:hover::before { transform: scaleY(1); }
+.front-n { font: 500 11px/1 var(--mono); color: var(--blue); letter-spacing: .1em; padding-top: 7px; }
+.front-n small { display: block; color: var(--muted); font-size: 8px; letter-spacing: .14em; margin-top: 7px; }
+.front h3 { font-size: clamp(1.12rem, 2vw, 1.5rem); letter-spacing: -.03em; }
+.front p { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 56ch; }
+.front-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.front-tags span {
+  font: 400 8.8px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--blue-deep); border: 1px solid var(--rule); padding: 5px 7px; background: #fff;
+}
+.front-side { display: grid; gap: 10px; padding-top: 4px; }
+.front-side .lab { font: 400 8.6px/1 var(--mono); letter-spacing: .15em; color: var(--muted); text-transform: uppercase; }
+.front-side .val { font: 500 10.5px/1.4 var(--mono); color: var(--blue-deep); letter-spacing: .04em; }
+.meter { height: 4px; background: var(--tint-2); position: relative; overflow: hidden; }
+.meter i { position: absolute; inset-block: 0; left: 0; background: var(--blue); width: 0; transition: width 1.4s var(--ease); }
+.in .meter i, .front.in .meter i { width: var(--w, 60%); }
+.front-status { display: inline-flex; align-items: center; gap: 7px; font: 400 9px/1 var(--mono); letter-spacing: .12em; color: var(--blue); text-transform: uppercase; }
+.front-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px var(--tint-2); }
+@media (max-width: 980px) {
+  .front { grid-template-columns: 44px minmax(0, 1fr); row-gap: 12px; }
+  .front > div:nth-of-type(1) { grid-column: 1; grid-row: 1; }
+  .front > div:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+  .front > div:nth-of-type(3) { grid-column: 2; grid-row: 2; }
+  .front-side {
+    grid-column: 2; grid-row: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-top: 12px; border-top: 1px solid var(--rule-soft); align-items: start;
+  }
+  .front-side .front-status { align-self: end; }
+}
+@media (max-width: 560px) {
+  .front { grid-template-columns: 26px minmax(0, 1fr); padding-inline: 4px; }
+  .front-side { grid-template-columns: 1fr 1fr; }
+  .front-side > span.val { grid-column: 1 / -1; }
+}
+
+/* ---------- FIG 04 — NÚMEROS ---------- */
+.stats { border-top: 1px solid var(--blue); border-left: 1px solid var(--rule); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stat { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: clamp(18px, 2.4vw, 28px) clamp(13px, 1.6vw, 20px); position: relative; }
+.stat::after {
+  content: '+'; position: absolute; right: 8px; top: 7px;
+  font: 400 11px/1 var(--mono); color: var(--rule); opacity: 0; transition: opacity .3s ease;
+}
+.stat:hover::after { opacity: 1; color: var(--blue); }
+.stat .k { font: 400 8.8px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.stat .v {
+  display: flex; align-items: baseline; gap: 4px; margin-top: 14px;
+  font: 500 clamp(2rem, 4.4vw, 3.1rem)/1 var(--mono); letter-spacing: -.05em; color: var(--ink);
+}
+.stat .v sup { font-size: .38em; color: var(--blue); top: -.9em; position: relative; letter-spacing: 0; }
+.stat .d { margin-top: 9px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.ruler {
+  margin-top: 18px; height: 22px; position: relative;
+  background: repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px 2%);
+  border-bottom: 1px solid var(--rule);
+}
+.ruler span {
+  position: absolute; bottom: 4px; font: 400 8px/1 var(--mono); color: var(--muted); letter-spacing: .1em;
+  transform: translateX(-50%);
+}
+.ruler span::after { content: ''; position: absolute; left: 50%; bottom: -6px; width: 1px; height: 5px; background: var(--blue); }
+@media (max-width: 860px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 380px) { .stats { grid-template-columns: 1fr; } }
+
+/* ---------- FIG 05 — JURUÁ ---------- */
+.jurua-grid { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); gap: clamp(26px, 4vw, 54px); align-items: start; }
+.blueprint {
+  border: 1px solid var(--blue); position: relative; background: #fff;
+  background-image:
+    linear-gradient(var(--rule-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule-soft) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.blueprint svg { width: 100%; height: auto; display: block; }
+.blueprint .bp-tag {
+  position: absolute; left: 10px; top: 9px; z-index: 2;
+  font: 400 8.4px/1 var(--mono); letter-spacing: .13em; color: var(--blue);
+  background: #fff; padding: 4px 6px; border: 1px solid var(--rule);
+}
+.blueprint .bp-note {
+  position: absolute; right: 10px; bottom: 9px; z-index: 2;
+  font: 400 8.4px/1.4 var(--mono); letter-spacing: .08em; color: var(--muted);
+  background: #fff; padding: 4px 6px; max-width: 55%; text-align: right;
+}
+.spec-list { border-top: 1px solid var(--blue); }
+.spec-list > div { display: grid; grid-template-columns: 108px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.spec-list dt { font: 400 8.8px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.spec-list dd { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+.spec-list dd b { color: var(--ink); font-weight: 600; }
+.term {
+  margin-top: 18px; background: var(--blue-ink); color: #d7e6f7; border: 1px solid var(--blue-deep);
+  padding: 14px 15px; position: relative; overflow: hidden;
+}
+.term::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
+}
+.term-bar { display: flex; align-items: center; gap: 7px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.14); margin-bottom: 11px; }
+.term-bar i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.32); }
+.term-bar span { margin-left: auto; font: 400 8.4px/1 var(--mono); letter-spacing: .13em; color: rgba(215,230,247,.6); }
+.term-body { font: 400 11.5px/1.75 var(--mono); letter-spacing: .01em; min-height: 5.4em; white-space: pre-wrap; color: #cfe2f6; }
+.term-body .caret { display: inline-block; width: 7px; height: 1.05em; background: #7fb2e8; vertical-align: -.18em; animation: caret 1s steps(2) infinite; }
+.term-body .caret.is-done { animation: none; opacity: 0; }
+@keyframes caret { 50% { opacity: 0; } }
+@media (max-width: 900px) { .jurua-grid { grid-template-columns: 1fr; } }
+
+/* ---------- FIG 06 — PROCESSO ---------- */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--blue); }
+.step { padding: 20px 18px 22px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); position: relative; background: #fff; transition: background .3s ease; }
+.step:last-child { border-right: 0; }
+.step:hover { background: var(--tint); }
+.step-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 18px; }
+.step-n { font: 500 10px/1 var(--mono); letter-spacing: .1em; color: var(--blue); }
+.step-d { font: 400 8.6px/1 var(--mono); color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+.step h3 { font-size: 17px; letter-spacing: -.02em; margin-bottom: 8px; }
+.step p { font-size: 13px; color: var(--muted); line-height: 1.58; }
+.step-bar { height: 1px; background: var(--rule); margin: 16px 0 0; position: relative; }
+.step-bar i { position: absolute; left: 0; top: -1px; height: 3px; width: var(--w, 25%); background: var(--blue); }
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .step:nth-child(2) { border-right: 0; } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } .step { border-right: 0; } }
+
+/* ---------- FIG 07 — PLANOS ---------- */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--blue); background: #fff; }
+.plan { padding: clamp(20px, 2.4vw, 28px) clamp(16px, 2vw, 24px); border-right: 1px solid var(--rule); position: relative; display: flex; flex-direction: column; background: #fff; transition: background .3s ease; }
+.plan:last-child { border-right: 0; }
+.plan:hover { background: var(--tint); }
+.plan.hi { background: var(--tint); box-shadow: inset 0 0 0 1px var(--blue); }
+.plan.hi::before {
+  content: 'MAIS PEDIDO'; position: absolute; top: 0; right: 0; background: var(--blue); color: #fff;
+  font: 500 8.2px/1 var(--mono); letter-spacing: .16em; padding: 7px 9px;
+}
+.plan-k { font: 400 8.8px/1 var(--mono); letter-spacing: .17em; text-transform: uppercase; color: var(--muted); }
+.plan h3 { font-size: clamp(1.15rem, 1.8vw, 1.4rem); margin-top: 14px; letter-spacing: -.025em; }
+.plan .price { margin-top: 12px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.plan .price small { font: 400 9px/1 var(--mono); letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.plan .price b { font: 500 clamp(1.5rem, 2.6vw, 1.95rem)/1 var(--mono); letter-spacing: -.04em; color: var(--ink); }
+.plan .price em { font: 400 9px/1 var(--mono); color: var(--muted); font-style: normal; letter-spacing: .08em; }
+.plan .desc { margin-top: 11px; font-size: 12.8px; color: var(--muted); line-height: 1.55; min-height: 3.1em; }
+.plan ul { margin-top: 16px; border-top: 1px solid var(--rule); flex: 1; }
+.plan li { display: flex; gap: 9px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--rule-soft); font-size: 12.8px; color: var(--ink-soft); line-height: 1.45; }
+.plan li::before { content: ''; width: 8px; height: 1px; background: var(--blue); margin-top: 8px; flex: none; }
+.plan .btn { margin-top: 20px; width: 100%; }
+.plans-note {
+  margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between;
+  font: 400 9px/1.6 var(--mono); letter-spacing: .08em; color: var(--muted); text-transform: uppercase;
+}
+@media (max-width: 900px) { .plans { grid-template-columns: 1fr; } .plan { border-right: 0; border-bottom: 1px solid var(--rule); } .plan:last-child { border-bottom: 0; } .plan .desc { min-height: 0; } }
+
+/* ---------- FIG 08 — VOZES ---------- */
+.voices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--blue); border-left: 1px solid var(--rule); }
+.voice { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: clamp(18px, 2.4vw, 26px); position: relative; background: #fff; }
+.voice::after { content: ''; position: absolute; right: 8px; bottom: 8px; width: 10px; height: 10px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.voice .q { font: 500 8.6px/1 var(--mono); letter-spacing: .15em; color: var(--blue); text-transform: uppercase; }
+.voice blockquote { margin: 16px 0 0; font-size: clamp(14.5px, 1.35vw, 16.5px); line-height: 1.6; color: var(--ink); letter-spacing: -.012em; }
+.voice figcaption { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rule-soft); font: 400 9px/1.6 var(--mono); letter-spacing: .09em; color: var(--muted); text-transform: uppercase; }
+.voice figcaption b { display: block; color: var(--blue-deep); font-weight: 500; }
+.voices-note { margin-top: 14px; font: 400 9px/1.7 var(--mono); letter-spacing: .06em; color: var(--muted); max-width: 82ch; }
+@media (max-width: 900px) { .voices { grid-template-columns: 1fr; } }
+
+/* ---------- FIG 09 — FAQ ---------- */
+.faq { border-top: 1px solid var(--blue); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq details[open] { background: var(--tint); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 14px; font-size: clamp(14.5px, 1.3vw, 16.5px); font-weight: 500; letter-spacing: -.015em;
+  transition: background .25s ease, color .2s ease;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { color: var(--blue); }
+.faq summary .fn { font: 400 9px/1.9 var(--mono); color: var(--blue); letter-spacing: .1em; flex: none; width: 26px; }
+.faq .pm { margin-left: auto; position: relative; width: 12px; height: 12px; flex: none; margin-top: 6px; transition: transform .45s var(--ease); }
+.faq .pm::before, .faq .pm::after { content: ''; position: absolute; background: var(--blue); }
+.faq .pm::before { left: 0; right: 0; top: 5.5px; height: 1px; }
+.faq .pm::after { top: 0; bottom: 0; left: 5.5px; width: 1px; transition: opacity .3s; }
+.faq details[open] .pm { transform: rotate(90deg); }
+.faq details[open] .pm::after { opacity: 0; }
+.faq .a { padding: 0 44px 22px 56px; color: var(--muted); font-size: 13.5px; line-height: 1.7; max-width: 82ch; }
+.faq .a a { color: var(--blue-deep); border-bottom: 1px solid var(--rule); }
+.faq .a a:hover { border-color: var(--blue); }
+@media (max-width: 560px) { .faq .a { padding: 0 18px 20px 56px; } }
+
+/* ---------- FIG 10 — CONTATO ---------- */
+.contact { background: var(--tint); border-top: 1px solid var(--rule); }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); gap: clamp(28px, 4.5vw, 60px); align-items: start; }
+.form { border: 1px solid var(--blue); background: #fff; padding: clamp(18px, 2.4vw, 26px); }
+.form-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 13px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; font: 400 8.8px/1 var(--mono); letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.form-head b { color: var(--blue); font-weight: 500; }
+.field { display: grid; gap: 6px; margin-bottom: 14px; }
+.field label { font: 500 8.8px/1 var(--mono); letter-spacing: .14em; color: var(--ink-soft); text-transform: uppercase; }
+.field label span { color: var(--blue); }
+.field input, .field select, .field textarea {
+  width: 100%; border: 1px solid var(--rule); background: #fff; border-radius: 0;
+  padding: 11px 12px; font-size: 14px; color: var(--ink);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field input::placeholder, .field textarea::placeholder { color: #93a4b6; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(30, 90, 168, .1);
+}
+.field textarea { resize: vertical; min-height: 108px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 4px; }
+.form-status { font: 400 9.5px/1.5 var(--mono); color: var(--muted); letter-spacing: .04em; min-height: 1.5em; flex: 1 1 180px; }
+.direct { border-top: 1px solid var(--blue); padding-top: 16px; margin-top: 22px; display: grid; gap: 2px; }
+.direct a, .direct button {
+  display: flex; align-items: center; gap: 12px; padding: 13px 4px; border: 0; background: none; cursor: pointer;
+  border-bottom: 1px solid var(--rule); text-align: left; font-size: 13.5px; color: var(--ink-soft);
+  transition: color .2s ease, padding-left .3s var(--ease);
+}
+.direct a:hover, .direct button:hover { color: var(--blue); padding-left: 8px; }
+.direct .lbl { font: 400 8.6px/1.4 var(--mono); letter-spacing: .14em; color: var(--muted); text-transform: uppercase; min-width: 78px; }
+.direct .vv { font: 500 12.5px/1.4 var(--mono); color: var(--blue-deep); letter-spacing: .02em; }
+.direct svg { width: 13px; height: 13px; margin-left: auto; color: var(--blue); flex: none; }
+.who { border: 1px solid var(--rule); background: #fff; margin-top: 20px; }
+.who-head { display: flex; justify-content: space-between; gap: 8px; padding: 9px 11px; border-bottom: 1px solid var(--rule); font: 400 8.4px/1 var(--mono); letter-spacing: .13em; color: var(--muted); text-transform: uppercase; }
+.who-body { display: grid; grid-template-columns: 128px 1fr; gap: 0; align-items: stretch; }
+.who-pet { position: relative; border-right: 1px solid var(--rule); min-height: 132px; background-image: linear-gradient(var(--rule-soft) 1px, transparent 1px), linear-gradient(90deg, var(--rule-soft) 1px, transparent 1px); background-size: 22px 22px; }
+.who-pet canvas { position: absolute; inset: 0 auto 0 50%; transform: translateX(-50%); width: 128px; height: 100%; }
+.who-copy { padding: 12px 14px; }
+.who-copy p { font-size: 12.8px; color: var(--muted); line-height: 1.55; }
+.who-copy strong { display: block; font-size: 13px; color: var(--ink); margin-bottom: 5px; letter-spacing: -.01em; }
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .field-row { grid-template-columns: 1fr; } .who-body { grid-template-columns: 1fr; } .who-pet { border-right: 0; border-bottom: 1px solid var(--rule); min-height: 116px; } }
+
+/* ---------- RODAPÉ ---------- */
+.foot { border-top: 1px solid var(--blue); background: #fff; padding-top: clamp(34px, 4.5vw, 52px); }
+.foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: clamp(22px, 3.4vw, 44px); padding-bottom: 34px; }
+.foot-col h4 { font: 500 8.8px/1 var(--mono); letter-spacing: .17em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+.foot-col p, .foot-col a { font-size: 12.8px; color: var(--muted); line-height: 1.85; display: block; }
+.foot-col a:hover { color: var(--blue-deep); }
+.foot-brand .brand-name { font-size: 14px; }
+.foot-brand p { margin-top: 14px; max-width: 30ch; }
+.foot-coord { margin-top: 12px; font: 400 9.5px/1.7 var(--mono); letter-spacing: .1em; color: var(--muted); }
+.foot-badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 7px 9px;
+  border: 1px solid var(--rule); font: 400 8.6px/1 var(--mono); letter-spacing: .13em; color: var(--blue); text-transform: uppercase;
+}
+.foot-badge i { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+.foot-bottom {
+  border-top: 1px solid var(--rule); padding: 16px 0 22px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; justify-content: space-between;
+  font: 400 9px/1.5 var(--mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase;
+}
+.foot-links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.foot-links a:hover { color: var(--blue); }
+.top-link { display: inline-flex; align-items: center; gap: 7px; color: var(--blue); }
+.top-link:hover { color: var(--blue-deep); }
+@media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .foot-grid { grid-template-columns: 1fr; } .foot-bottom { justify-content: flex-start; } }
+
+/* ---------- mascote estático (fallback sem módulos) ---------- */
+.pet-fallback {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
+  color: #0f1216; opacity: .9; transition: opacity .5s ease;
+}
+.pet-fallback[hidden] { display: none; }
+.plate-stage canvas, .who-pet canvas { z-index: 2; }
+
+/* ---------- utilizado por clickspark ---------- */
+.rb-spark {
+  position: fixed; width: 4px; height: 4px; border-radius: 50%; pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  animation: spark .6s ease-out forwards;
+}
+@keyframes spark {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.2); }
+}
+
+/* ---------- movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  [data-pet-fallback] { opacity: .55 !important; }
+  .rb-char-i { opacity: 1 !important; transform: none !important; }
+  .rb-space { opacity: 1; }
+  .strip-track { animation: none; }
+  .term-body .caret { animation: none; }
+}
+
+@media print {
+  .hdr, .menu, .burger, .progress, .sheet-grid, .bc-lang, .skip, .strip, .term { display: none !important; }
+  body { background: #fff; color: #000; }
+  .sec { padding: 20px 0; break-inside: avoid; }
+}
+</style>
+</head>
+<body id="top">
+<script>document.documentElement.className += " js";</script>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+<div class="sheet-grid" aria-hidden="true"></div>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header class="hdr" id="siteHead">
+  <div class="hdr-in">
+    <a class="brand" href="#top" aria-label="BADCLAUDE — voltar ao início">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1"/>
+        <path d="M1.5 12h21M12 1.5v21" stroke="currentColor" stroke-width=".6"/>
+        <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+      </svg>
+      <span class="brand-name">BADCLAUDE</span>
+    </a>
+    <span class="brand-meta">ESTÚDIO · AC · 07°35′S 72°48′W</span>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#frentes"><b>02</b><span data-i18n="c08.n1">Frentes</span></a>
+      <a href="#dados"><b>03</b><span data-i18n="c08.n2">Dados</span></a>
+      <a href="#jurua"><b>04</b><span data-i18n="c08.n3">Juruá</span></a>
+      <a href="#processo"><b>05</b><span data-i18n="c08.n4">Processo</span></a>
+      <a href="#planos"><b>06</b><span data-i18n="c08.n5">Planos</span></a>
+      <a href="#faq"><b>08</b><span data-i18n="c08.n6">FAQ</span></a>
+      <a href="#contato"><b>09</b><span data-i18n="c08.n7">Contato</span></a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <i aria-hidden="true"></i> Índice
+    </button>
+  </div>
+</header>
+
+<!-- ===================== ÍNDICE MOBILE ===================== -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+  <div class="menu-head">
+    <span class="eyebrow" id="menuTitle" data-i18n="c08.menu">Índice da prancha</span>
+    <button class="menu-close" id="menuClose" type="button" data-i18n="c08.fechar">Fechar ✕</button>
+  </div>
+  <ol>
+    <li><a href="#hero"><span>01</span><span data-i18n="c08.m1">Prancha</span><span>hero</span></a></li>
+    <li><a href="#manifesto"><span>02</span><span data-i18n="c08.m2">Manifesto</span><span>fig. 02</span></a></li>
+    <li><a href="#frentes"><span>03</span><span data-i18n="c08.n1">Frentes</span><span>fig. 03</span></a></li>
+    <li><a href="#dados"><span>04</span><span data-i18n="c08.n2">Números</span><span>fig. 04</span></a></li>
+    <li><a href="#jurua"><span>05</span><span data-i18n="c08.n3">Juruá</span><span>fig. 05</span></a></li>
+    <li><a href="#processo"><span>06</span><span data-i18n="c08.n4">Processo</span><span>fig. 06</span></a></li>
+    <li><a href="#planos"><span>07</span><span data-i18n="c08.n5">Planos</span><span>fig. 07</span></a></li>
+    <li><a href="#vozes"><span>08</span><span data-i18n="c08.m3">Vozes</span><span>fig. 08</span></a></li>
+    <li><a href="#faq"><span>09</span><span data-i18n="c08.n6">FAQ</span><span>fig. 09</span></a></li>
+    <li><a href="#contato"><span>10</span><span data-i18n="c08.n7">Contato</span><span>fig. 10</span></a></li>
+  </ol>
+  <div class="menu-foot">
+    <span>contato@badclaude.dev</span>
+    <span>Cruzeiro do Sul · Acre · Brasil</span>
+    <span>Seg a sáb, 8h – 19h</span>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ===================== FIG 01 — PRANCHA / HERO ===================== -->
+  <section class="hero wrap" id="hero" aria-labelledby="heroTitle">
+    <div class="sheet-meta">
+      <span>PRANCHA <b>01/10</b> — FACHADA</span>
+      <span>ESCALA <b>1:1</b></span>
+      <span>PROJETO <b>BADCLAUDE</b></span>
+      <span>REVISÃO <b>A</b></span>
+      <span>FOLHA <b>A3</b></span>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">BADCLAUDE · Cruzeiro do Sul, Acre</p>
+
+        <h1 class="hero-title" id="heroTitle">
+          <span class="ln" data-split="1" data-i18n="hero.l1">Eu me construí.</span>
+          <span class="ln" data-split="1" data-i18n="hero.l2">Eu me desfaço</span>
+          <span class="ln"><em data-i18n="hero.l3">e me refaço.</em></span>
+        </h1>
+
+        <p class="hero-lead" data-i18n="hero.lead">Jogos 3D, sistemas web e automação com inteligência artificial. Feito com precisão de engenharia e identidade amazônica — do primeiro risco ao produto rodando.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#frentes">
+            <span data-i18n="hero.cta1">Ver o que fazemos</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </a>
+          <a class="btn btn-line" href="#contato" data-i18n="hero.cta2">Começar um projeto</a>
+        </div>
+
+        <dl class="hero-facts">
+          <div><dt>Base</dt><dd>Cruzeiro do Sul · AC · Amazônia Ocidental</dd></div>
+          <div><dt>Atuação</dt><dd>Jogos 3D, sistemas com IA, sites, direção visual</dd></div>
+          <div><dt>Idiomas</dt><dd>Português · English · Español</dd></div>
+          <div><dt>Contato</dt><dd>contato@badclaude.dev · +55 68 99999-9999</dd></div>
+        </dl>
+      </div>
+
+      <div class="plate-mount">
+        <figure class="plate" aria-labelledby="plateTitle">
+          <div class="plate-head"><span id="plateTitle">FIG. 01-A · MASCOTE</span><span>BADCLAWD v2</span></div>
+          <div class="plate-stage" id="heroStage">
+            <svg class="pet-fallback" data-pet-fallback viewBox="0 0 200 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M74 118v22"/><path d="M88 122v20"/><path d="M112 122v20"/><path d="M126 118v22"/>
+                <ellipse cx="74" cy="141" rx="7" ry="4.6"/>
+                <ellipse cx="88" cy="143" rx="7" ry="4.6"/>
+                <ellipse cx="112" cy="143" rx="7" ry="4.6"/>
+                <ellipse cx="126" cy="141" rx="7" ry="4.6"/>
+                <path d="M69 104c-3-16 3-27 12-32-3-9 1-15 6-16 4-1 6 3 6 8h14c0-5 2-9 6-8 5 1 9 7 6 16 9 5 15 16 12 32-2 15-11 24-31 24s-29-9-31-24z"/>
+                <circle cx="87" cy="92" r="5.6"/>
+                <circle cx="113" cy="92" r="5.6"/>
+              </g>
+              <circle cx="87" cy="92" r="2.3" fill="currentColor"/>
+              <circle cx="113" cy="92" r="2.3" fill="currentColor"/>
+              <circle cx="100" cy="112" r="1.6" fill="#1e5aa8"/>
+              <path d="M60 150h80" stroke="#1e5aa8" stroke-width=".7" stroke-dasharray="5 4" opacity=".55"/>
+            </svg>
+          <canvas class="pet-canvas" id="petHero" data-pet-state="idle" aria-label="BadClawd, o mascote do estúdio: um bichinho quadrúpede desenhado em linhas, que acompanha o cursor." role="img"></canvas>
+            <svg class="corner tl" viewBox="0 0 13 13" aria-hidden="true"><path d="M0 13V0h13" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            <svg class="corner tr" viewBox="0 0 13 13" aria-hidden="true"><path d="M0 13V0h13" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            <svg class="corner bl" viewBox="0 0 13 13" aria-hidden="true"><path d="M0 13V0h13" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            <svg class="corner br" viewBox="0 0 13 13" aria-hidden="true"><path d="M0 13V0h13" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+
+            <svg class="dim-h" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 6v6M0 9h200M200 6v6" stroke="currentColor" stroke-width=".7" fill="none"/>
+              <text x="100" y="4" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" fill="currentColor">412</text>
+            </svg>
+            <svg class="dim-v" viewBox="0 0 20 120" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M6 0h6M9 0v120M6 120h6" stroke="currentColor" stroke-width=".7" fill="none"/>
+              <text x="14" y="62" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" fill="currentColor" transform="rotate(90 14 62)">300</text>
+            </svg>
+
+            <span class="plate-cap" data-i18n="hero.caption">ele reage ao seu cursor</span>
+          </div>
+          <table class="plate-spec">
+            <tr><th>patas</th><td>4 · rig procedural, IK de dois ossos</td></tr>
+            <tr><th>estado</th><td>idle / point / alert / walk</td></tr>
+            <tr><th>material</th><td>traço único · tinta #0f1216 · azul #1e5aa8</td></tr>
+            <tr><th>origem</th><td>Cruzeiro do Sul, AC — desenhado em código</td></tr>
+          </table>
+        </figure>
+
+        <dl class="stamp" aria-label="Carimbo técnico do projeto">
+          <div><dt>projetista</dt><dd>BADCLAUDE</dd></div>
+          <div><dt>data</dt><dd>2026 · REV. A</dd></div>
+          <div><dt>escala</dt><dd>1 : 1</dd></div>
+          <div><dt>série</dt><dd>08 / GRID</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="strip" aria-hidden="true">
+      <div class="strip-track">
+        <div class="strip-group">
+          <span>JURUÁ — RPG de mundo aberto</span>
+          <span>Godot 4 + Blender</span>
+          <span>Agentes de IA em paralelo</span>
+          <span>Vale do Juruá</span>
+          <span>Sem imagens raster</span>
+          <span>Código entregue ao cliente</span>
+          <span>Três idiomas</span>
+          <span>07°35′S 72°48′W</span>
+        </div>
+        <div class="strip-group" aria-hidden="true">
+          <span>JURUÁ — RPG de mundo aberto</span>
+          <span>Godot 4 + Blender</span>
+          <span>Agentes de IA em paralelo</span>
+          <span>Vale do Juruá</span>
+          <span>Sem imagens raster</span>
+          <span>Código entregue ao cliente</span>
+          <span>Três idiomas</span>
+          <span>07°35′S 72°48′W</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 02 — MANIFESTO ===================== -->
+  <section class="sec memo" id="manifesto" aria-labelledby="memoTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 02</b><span>DECLARAÇÃO DE MÉTODO</span><span>—</span><span>REV. A</span></div>
+        <h2 class="sec-title" id="memoTitle" data-split-scroll>Nada aqui é montado por você.</h2>
+        <span class="sec-count">FOLHA 02 / 10</span>
+      </div>
+
+      <div class="memo-grid">
+        <div>
+          <p class="memo-quote" data-reveal>Construo em partes, <b>desfaço o que não serve</b> e volto a montar. É assim que um problema grande cabe — peça por peça, linha por linha, com a calma de quem desenha antes de cortar.</p>
+          <p class="memo-lead" data-reveal style="--d:.08s">A BADCLAUDE é um estúdio de software indie no Acre. Não vendemos apresentação bonita: entregamos sistema rodando, testado e documentado. O mascote acima é o mesmo motor que desenha a nossa interface — covariância entre o que falamos e o que é feito.</p>
+          <p class="memo-sign" data-reveal style="--d:.14s"><i aria-hidden="true"></i><span>BADCLAW D. — CRUZEIRO DO SUL, AC</span></p>
+        </div>
+
+        <div class="memo-notes">
+          <article><span class="n">01</span><div><h3 data-i18n="stmt.m1">Precisão antes de velocidade.</h3><p>Desenho, cota e revisão antes da primeira linha de produção. Retrabalho custa mais que desenho.</p></div></article>
+          <article><span class="n">02</span><div><h3 data-i18n="stmt.m2">Identidade, nunca template.</h3><p>Cada projeto nasce do problema do cliente, não de um tema comprado. A grade é nossa; a matéria é sua.</p></div></article>
+          <article><span class="n">03</span><div><h3 data-i18n="stmt.m3">O código é seu no final.</h3><p>Repositório, arquivos-fonte e documentação na sua mão. Sem sequestro de projeto, sem aluguel de sistema.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 03 — FRENTES ===================== -->
+  <section class="sec" id="frentes" aria-labelledby="frentesTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 03</b><span>QUADRO DE FRENTES</span><span>—</span><span>4 ITENS</span></div>
+        <h2 class="sec-title" id="frentesTitle" data-i18n="doing.title" data-split-scroll>Quatro frentes, um mesmo padrão.</h2>
+        <p class="sec-sub" data-i18n="doing.sub">Cada projeto começa entendendo o problema. Só depois escolhemos a tecnologia.</p>
+        <span class="sec-count">FOLHA 03 / 10</span>
+      </div>
+
+      <div class="fronts">
+        <article class="front" data-reveal>
+          <div class="front-n">01<small>GAME</small></div>
+          <div>
+            <h3 data-i18n="doing.r1t">Jogos 3D</h3>
+            <p data-i18n="doing.r1d">JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4, Blender e um mapa fiel à geografia do Acre.</p>
+            <div class="front-tags"><span>Godot 4</span><span>Blender</span><span>Mundo aberto</span><span>Trilha original</span></div>
+          </div>
+          <div>
+            <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Sistemas de mundo persistente, clima, ciclo de maré e NPCs com rotina — a mesma engenharia que sustenta os sistemas web.</p>
+          </div>
+          <div class="front-side">
+            <span class="front-status">prototype</span>
+            <div><span class="lab">maturidade</span><div class="meter" style="--w:72%"><i></i></div></div>
+            <span class="front-status" style="visibility:hidden">—</span>
+            <span class="val">JURUÁ · 2026</span>
+          </div>
+        </article>
+
+        <article class="front" data-reveal>
+          <div class="front-n">02<small>IA</small></div>
+          <div>
+            <h3 data-i18n="doing.r2t">Sistemas com IA</h3>
+            <p data-i18n="doing.r2d">Agentes que pesquisam, escrevem, revisam e executam em paralelo. Automação de verdade, com logs, limites e revisão humana em cada entrega.</p>
+            <div class="front-tags"><span>Agentes</span><span>RAG</span><span>Filas</span><span>Observabilidade</span></div>
+          </div>
+          <div>
+            <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Cada agente tem escopo, ferramenta e teto de custo. Se falha, registra; se erra, um humano revisa antes de publicar.</p>
+          </div>
+          <div class="front-side">
+            <span class="front-status">sob demanda</span>
+            <div><span class="lab">maturidade</span><div class="meter" style="--w:88%"><i></i></div></div>
+            <span class="front-status" style="visibility:hidden">—</span>
+            <span class="val">Python · TS · LLMs</span>
+          </div>
+        </article>
+
+        <article class="front" data-reveal>
+          <div class="front-n">03<small>WEB</small></div>
+          <div>
+            <h3 data-i18n="doing.r3t">Sites e produtos</h3>
+            <p data-i18n="doing.r3d">Páginas que carregam rápido, painéis que funcionam, três idiomas e acessibilidade real. Performance medida, não prometida.</p>
+            <div class="front-tags"><span>HTML/CSS/JS</span><span>A11y</span><span>i18n</span><span>Core Web Vitals</span></div>
+          </div>
+          <div>
+            <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Sem framework pesado por padrão. O que você abre é o que você paga em bytes — e o que o Google ranqueia.</p>
+          </div>
+          <div class="front-side">
+            <span class="front-status">semanas</span>
+            <div><span class="lab">maturidade</span><div class="meter" style="--w:94%"><i></i></div></div>
+            <span class="front-status" style="visibility:hidden">—</span>
+            <span class="val">entrega + docs</span>
+          </div>
+        </article>
+
+        <article class="front" data-reveal>
+          <div class="front-n">04<small>ART</small></div>
+          <div>
+            <h3 data-i18n="doing.r4t">Direção visual</h3>
+            <p data-i18n="doing.r4d">Identidade, movimento e arte 3D feitos em código. Nada de banco de imagens, nada de template repintado.</p>
+            <div class="front-tags"><span>Identidade</span><span>Motion</span><span>Canvas</span><span>Arte 3D</span></div>
+          </div>
+          <div>
+            <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Toda a arte desta página — mascote, mapa, réguas e diagramas — foi desenhada em canvas e SVG.</p>
+          </div>
+          <div class="front-side">
+            <span class="front-status">artesanal</span>
+            <div><span class="lab">maturidade</span><div class="meter" style="--w:80%"><i></i></div></div>
+            <span class="front-status" style="visibility:hidden">—</span>
+            <span class="val">código como meio</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 04 — NÚMEROS ===================== -->
+  <section class="sec" id="dados" aria-labelledby="dadosTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 04</b><span>MEMÓRIA DE CÁLCULO</span><span>—</span><span>MEDIDO</span></div>
+        <h2 class="sec-title" id="dadosTitle" data-split-scroll>Números que assinamos embaixo.</h2>
+        <p class="sec-sub">Não são metas de marketing: são características do processo. Cada uma delas é verificável no primeiro dia do projeto.</p>
+        <span class="sec-count">FOLHA 04 / 10</span>
+      </div>
+
+      <div class="stats" data-reveal>
+        <div class="stat">
+          <span class="k" data-i18n="c08.k1">frentes técnicas</span>
+          <div class="v"><span data-count="4" data-i18n="stats.n1">4</span><sup>×</sup></div>
+          <p class="d">Jogos, IA, web e direção visual sob o mesmo padrão de entrega.</p>
+        </div>
+        <div class="stat">
+          <span class="k" data-i18n="c08.k2">idiomas no site</span>
+          <div class="v"><span data-count="3">3</span><sup>idiomas</sup></div>
+          <p class="d">PT · EN · ES aplicados de verdade, com seletor e conteúdo traduzido.</p>
+        </div>
+        <div class="stat">
+          <span class="k" data-i18n="c08.k3">primeira resposta</span>
+          <div class="v"><span data-count="48">48</span><sup>h</sup></div>
+          <p class="d">Retorno com caminho, prazo e faixa de valor — não com "vamos marcar uma call".</p>
+        </div>
+        <div class="stat">
+          <span class="k" data-i18n="c08.k4">código entregue</span>
+          <div class="v"><span data-count="100">100</span><sup>%</sup></div>
+          <p class="d">Repositório, arte e documentação na mão do cliente no encerramento.</p>
+        </div>
+      </div>
+
+      <div class="ruler" aria-hidden="true">
+        <span style="left:0%">0</span>
+        <span style="left:25%">25</span>
+        <span style="left:50%">50</span>
+        <span style="left:75%">75</span>
+        <span style="left:100%">100</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 05 — JURUÁ ===================== -->
+  <section class="sec" id="jurua" aria-labelledby="juruaTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 05</b><span>ESTUDO DE CASO · JURUÁ</span><span>—</span><span>EM PRODUÇÃO</span></div>
+        <h2 class="sec-title" id="juruaTitle" data-split-scroll>Um rio vira mapa jogável.</h2>
+        <p class="sec-sub">JURUÁ é o nosso projeto-âncora: um RPG de mundo aberto ambientado no Vale do Juruá, construído com gente da região como referência.</p>
+        <span class="sec-count">FOLHA 05 / 10</span>
+      </div>
+
+      <div class="jurua-grid">
+        <figure class="blueprint" data-reveal>
+          <span class="bp-tag">PLANTA 05-A · VALE DO JURUÁ</span>
+          <svg viewBox="0 0 640 460" role="img" aria-label="Planta técnica estilizada do Vale do Juruá, com o rio como linha principal, curvas de nível e pontos de interesse do jogo JURUÁ.">
+            <defs>
+              <pattern id="bpGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M20 0H0v20" fill="none" stroke="#e6edf5" stroke-width=".7"/>
+              </pattern>
+              <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0l8 4-8 4z" fill="#1e5aa8"/>
+              </marker>
+            </defs>
+            <rect width="640" height="460" fill="url(#bpGrid)"/>
+
+            <!-- curvas de nível -->
+            <g fill="none" stroke="#1e5aa8" stroke-opacity=".18" stroke-width="1">
+              <path d="M-10 340C80 300 140 360 210 330s150-90 240-50 150 30 210 0"/>
+              <path d="M-10 378C70 342 150 396 226 366s150-84 236-52 140 40 196 12"/>
+              <path d="M-10 300C90 262 130 322 200 292s160-96 250-56 140 24 200-8"/>
+              <path d="M-10 418C60 388 160 438 240 406s150-70 250-40 130 46 170 24"/>
+            </g>
+
+            <!-- rio principal -->
+            <path d="M-8 208C70 190 120 250 186 238s96-78 168-74 104 70 172 62 84-44 126-40"
+                  fill="none" stroke="#1e5aa8" stroke-width="7" stroke-linecap="round" stroke-opacity=".9"/>
+            <path d="M-8 208C70 190 120 250 186 238s96-78 168-74 104 70 172 62 84-44 126-40"
+                  fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+
+            <!-- afluentes -->
+            <g fill="none" stroke="#1e5aa8" stroke-width="2" stroke-opacity=".55" stroke-linecap="round">
+              <path d="M300 176c-6-48 14-80 44-104"/>
+              <path d="M470 302c8-38 34-58 66-70"/>
+              <path d="M150 250c-14 34-6 62 10 88"/>
+              <path d="M540 250c22-6 40 2 58 18"/>
+            </g>
+
+            <!-- pontos de interesse -->
+            <g>
+              <g transform="translate(186 238)">
+                <circle r="13" fill="#fff" stroke="#1e5aa8" stroke-width="1.2"/>
+                <circle r="4" fill="#1e5aa8"/>
+                <text x="20" y="4" font-family="JetBrains Mono, monospace" font-size="10" fill="#123f7c">PORTO</text>
+              </g>
+              <g transform="translate(354 164)">
+                <circle r="13" fill="#fff" stroke="#1e5aa8" stroke-width="1.2"/>
+                <path d="M-5 5l10-10M-5-5l10 10" stroke="#1e5aa8" stroke-width="1.2"/>
+                <text x="20" y="4" font-family="JetBrains Mono, monospace" font-size="10" fill="#123f7c">ROÇA</text>
+              </g>
+              <g transform="translate(536 302)">
+                <circle r="13" fill="#fff" stroke="#1e5aa8" stroke-width="1.2"/>
+                <rect x="-4" y="-4" width="8" height="8" fill="#1e5aa8"/>
+                <text x="20" y="4" font-family="JetBrains Mono, monospace" font-size="10" fill="#123f7c">FARINHA</text>
+              </g>
+              <g transform="translate(160 338)">
+                <circle r="13" fill="#fff" stroke="#1e5aa8" stroke-width="1.2"/>
+                <circle r="6" fill="none" stroke="#1e5aa8" stroke-width="1.2" stroke-dasharray="2 2"/>
+                <text x="20" y="4" font-family="JetBrains Mono, monospace" font-size="10" fill="#123f7c">PESCA</text>
+              </g>
+            </g>
+
+            <!-- crosshair de referência -->
+            <g transform="translate(470 96)" stroke="#1e5aa8" stroke-width=".9" opacity=".8">
+              <circle r="15" fill="none"/>
+              <path d="M-24 0h18M6 0h18M0-24v18M0 6v18"/>
+            </g>
+
+            <!-- cota horizontal -->
+            <g stroke="#1e5aa8" stroke-width=".9" fill="none">
+              <path d="M60 430v-12M580 430v-12M60 424h520" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+            </g>
+            <text x="320" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2" fill="#1e5aa8">1 480 KM DE RIO</text>
+
+            <!-- norte -->
+            <g transform="translate(596 44)" stroke="#1e5aa8" fill="#1e5aa8">
+              <circle r="16" fill="none" stroke-width=".9"/>
+              <path d="M0 -11L4 4 0 1 -4 4z"/>
+              <text x="0" y="-21" text-anchor="middle" font-size="9" font-family="JetBrains Mono, monospace" stroke="none">N</text>
+            </g>
+          </svg>
+          <span class="bp-note">PLANTA ESQUEMÁTICA — NÃO GEOGRÁFICA · DESENHO EM SVG</span>
+        </figure>
+
+        <div data-reveal style="--d:.08s">
+          <dl class="spec-list">
+            <div><dt>gênero</dt><dd><b>RPG de mundo aberto</b> · exploração, cultivo, pesca e narrativa ribeirinha</dd></div>
+            <div><dt>motor</dt><dd>Godot 4 · GDScript · pipeline de arte no Blender</dd></div>
+            <div><dt>cenário</dt><dd>Vale do Juruá, Acre — casas de farinha, portos, várzea e floresta de igapó</dd></div>
+            <div><dt>sistemas</dt><dd>Clima, ciclo de maré, rotina de NPCs, economia local, save persistente</dd></div>
+            <div><dt>estado</dt><dd><b>Em desenvolvimento</b> — protótipo jogável e mundo verticalizado</dd></div>
+            <div><dt>princípio</dt><dd>Nenhuma arte de terceiros. Personagens, mapa e trilha desenhados pelo estúdio.</dd></div>
+          </dl>
+
+          <div class="term" aria-hidden="true">
+            <div class="term-bar"><i></i><i></i><i></i><span>build.log</span></div>
+            <div class="term-body" id="buildLog">$ godot --headless --export-release "JURUÁ"
+[ok]  mundo verticalizado — 1 480 km de rio
+[ok]  42 npcs com rotina diária
+[ok]  clima e maré sincronizados
+[--]  build 0.7.3 · validação em curso_</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 06 — PROCESSO ===================== -->
+  <section class="sec" id="processo" aria-labelledby="procTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 06</b><span>SEQUÊNCIA DE MONTAGEM</span><span>—</span><span>4 ETAPAS</span></div>
+        <h2 class="sec-title" id="procTitle" data-i18n="proc.title" data-split-scroll>Do primeiro risco ao produto no ar.</h2>
+        <p class="sec-sub">Cada etapa tem entrega e critério de aceite. Você nunca fica esperando um mês por notícia.</p>
+        <span class="sec-count">FOLHA 06 / 10</span>
+      </div>
+
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <div class="step-top"><span class="step-n">01</span><span class="step-d">semana 1</span></div>
+          <h3 data-i18n="proc.s1t">Escuta</h3>
+          <p data-i18n="proc.s1d">Entendemos o problema, o público e o prazo. Nada de código antes disso.</p>
+          <div class="step-bar"><i style="--w:14%"></i></div>
+        </li>
+        <li class="step" data-reveal style="--d:.06s">
+          <div class="step-top"><span class="step-n">02</span><span class="step-d">semana 1–2</span></div>
+          <h3 data-i18n="proc.s2t">Protótipo</h3>
+          <p data-i18n="proc.s2d">Você vê e navega antes de aprovar. Ajuste é barato nessa fase.</p>
+          <div class="step-bar"><i style="--w:38%"></i></div>
+        </li>
+        <li class="step" data-reveal style="--d:.12s">
+          <div class="step-top"><span class="step-n">03</span><span class="step-d">semanas 2–6</span></div>
+          <h3 data-i18n="proc.s3t">Construção</h3>
+          <p data-i18n="proc.s3d">Ciclos curtos com entrega contínua. Você acompanha o progresso de verdade.</p>
+          <div class="step-bar"><i style="--w:72%"></i></div>
+        </li>
+        <li class="step" data-reveal style="--d:.18s">
+          <div class="step-top"><span class="step-n">04</span><span class="step-d">entrega</span></div>
+          <h3 data-i18n="proc.s4t">Entrega</h3>
+          <p data-i18n="proc.s4d">Código, arquivos e documentação na sua mão. Sem dependência de nós.</p>
+          <div class="step-bar"><i style="--w:100%"></i></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 07 — PLANOS ===================== -->
+  <section class="sec" id="planos" aria-labelledby="plansTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 07</b><span>ORÇAMENTO DE ESCALA</span><span>—</span><span>3 CONFIGURAÇÕES</span></div>
+        <h2 class="sec-title" id="plansTitle" data-i18n="plans.title" data-split-scroll>Escolha a escala.</h2>
+        <p class="sec-sub" data-i18n="plans.sub">Escopo e valor fechados antes de começar. A primeira conversa é gratuita.</p>
+        <span class="sec-count">FOLHA 07 / 10</span>
+      </div>
+
+      <div class="plans">
+        <article class="plan" data-reveal>
+          <span class="plan-k" data-i18n="plans.p1k">Entrada</span>
+          <h3 data-i18n="plans.p1t">Automação</h3>
+          <div class="price"><small data-i18n="plans.p2p">a partir de</small><b>R$ 2.400</b><em data-i18n="plans.p1p">projeto único</em></div>
+          <p class="desc" data-i18n="plans.p1d">Um fluxo de IA que resolve uma tarefa repetitiva do seu negócio.</p>
+          <ul>
+            <li data-i18n="plans.p1l1">Diagnóstico do processo</li>
+            <li data-i18n="plans.p1l2">Um fluxo automatizado</li>
+            <li data-i18n="plans.p1l3">Integração com WhatsApp ou planilhas</li>
+            <li data-i18n="plans.p1l4">Documentação de operação</li>
+          </ul>
+          <a class="btn btn-line" href="#contato" data-i18n="plans.p1cta">Pedir orçamento</a>
+        </article>
+
+        <article class="plan hi" data-reveal style="--d:.06s">
+          <span class="plan-k" data-i18n="plans.p2k">Mais pedido</span>
+          <h3 data-i18n="plans.p2t">Sistema</h3>
+          <div class="price"><small data-i18n="plans.p2p">a partir de</small><b>R$ 9.800</b><em>4–8 semanas</em></div>
+          <p class="desc" data-i18n="plans.p2d">Produto completo com painel, agentes e integrações, pronto para operar.</p>
+          <ul>
+            <li data-i18n="plans.p2l1">Tudo do pacote Automação</li>
+            <li data-i18n="plans.p2l2">Painel administrativo</li>
+            <li data-i18n="plans.p2l3">Agentes especialistas</li>
+            <li data-i18n="plans.p2l4">Deploy e monitoramento</li>
+            <li data-i18n="plans.p2l5">Suporte por 30 dias</li>
+          </ul>
+          <a class="btn btn-solid" href="#contato" data-i18n="plans.p2cta">Pedir orçamento</a>
+        </article>
+
+        <article class="plan" data-reveal style="--d:.12s">
+          <span class="plan-k" data-i18n="plans.p3k">Sob medida</span>
+          <h3 data-i18n="plans.p3t">Estúdio</h3>
+          <div class="price"><small data-i18n="plans.p2p">a partir de</small><b>R$ 24.000</b><em data-i18n="plans.p3p">escopo fechado</em></div>
+          <p class="desc" data-i18n="plans.p3d">Jogo, experiência 3D ou produto digital de ponta a ponta.</p>
+          <ul>
+            <li data-i18n="plans.p3l1">Descoberta e protótipo</li>
+            <li data-i18n="plans.p3l2">Arte 3D e trilha sonora</li>
+            <li data-i18n="plans.p3l3">Engenharia e otimização</li>
+            <li data-i18n="plans.p3l4">Acompanhamento por etapas</li>
+          </ul>
+          <a class="btn btn-line" href="#contato" data-i18n="plans.p3cta">Conversar</a>
+        </article>
+      </div>
+
+      <div class="plans-note">
+        <span data-i18n="plans.strip">50% na aprovação, 50% na entrega. Pix ou transferência. Sem mensalidade escondida.</span>
+        <a href="#contato" style="color:var(--blue-deep)">PEDIR ORÇAMENTO EXATO →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 08 — VOZES ===================== -->
+  <section class="sec" id="vozes" aria-labelledby="vozesTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 08</b><span>REGISTRO DE RETORNO</span><span>—</span><span>3 CAMPOS</span></div>
+        <h2 class="sec-title" id="vozesTitle" data-split-scroll>Quem viu o método por dentro.</h2>
+        <p class="sec-sub">Retornos de quem acompanhou a construção de perto. Publicados com autorização, com o nome do projeto preservado quando solicitado.</p>
+        <span class="sec-count">FOLHA 08 / 10</span>
+      </div>
+
+      <div class="voices">
+        <figure class="voice" data-reveal>
+          <span class="q">V-01 · PROJETO JURUÁ</span>
+          <blockquote>“A entrega não foi um slide: foi um protótipo que a gente abriu e jogou na mesma semana. As críticas do grupo de playtest entraram todas na build seguinte.”</blockquote>
+          <figcaption><b>Playtest comunitário</b>Cruzeiro do Sul · 2026</figcaption>
+        </figure>
+
+        <figure class="voice" data-reveal style="--d:.06s">
+          <span class="q">V-02 · AUTOMAÇÃO</span>
+          <blockquote>“O relatório que tomava a tarde inteira passou a sair pronto de manhã, com log de tudo o que o agente fez. Foi a primeira vez que automação não virou uma caixa-preta.”</blockquote>
+          <figcaption><b>Rotina de relatórios</b>Vale do Juruá · 2026</figcaption>
+        </figure>
+
+        <figure class="voice" data-reveal style="--d:.12s">
+          <span class="q">V-03 · SITE INSTITUCIONAL</span>
+          <blockquote>“Três idiomas, abre rápido no 3G da beira do rio e o dono do negócio edita o texto sozinho. Explicaram cada arquivo antes de entregar.”</blockquote>
+          <figcaption><b>Comércio local</b>Acre · 2026</figcaption>
+        </figure>
+      </div>
+
+      <p class="voices-note" data-i18n="proof.note">Publicamos apenas avaliações de clientes que autorizaram o uso do nome e do projeto.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 09 — FAQ ===================== -->
+  <section class="sec" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 09</b><span>NOTAS DO PROJETISTA</span><span>—</span><span>05 NOTAS</span></div>
+        <h2 class="sec-title" id="faqTitle" data-split-scroll>Perguntas que sempre voltam.</h2>
+        <span class="sec-count">FOLHA 09 / 10</span>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary><span class="fn">N.01</span><span>Vocês entregam o código-fonte mesmo?</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Sim. Na entrega, o repositório, os arquivos de arte e a documentação são transferidos para a sua conta. Você pode continuar com outro time, ou com ninguém. Não cobramos licença de uso nem mensalidade obrigatória.</div>
+        </details>
+        <details>
+          <summary><span class="fn">N.02</span><span>Um projeto pequeno é aceito?</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Sim. A faixa de entrada é uma automação ou uma página — a partir de R$ 2.400. O que não fazemos é prometer escopo de estúdio por preço de automação: o orçamento mostra exatamente o que cabe.</div>
+        </details>
+        <details>
+          <summary><span class="fn">N.03</span><span>Como funciona o trabalho à distância a partir do Acre?</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Reuniões por vídeo no fuso de Brasília (GMT-5), entrega contínua por repositório e builds navegáveis. O fuso nunca foi problema: a diferença é a quantidade de contexto que colocamos por escrito — e isso melhora o projeto.</div>
+        </details>
+        <details>
+          <summary><span class="fn">N.04</span><span>Os agentes de IA substituem a revisão humana?</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Não. Agentes pesquisam, escrevem e testam em paralelo, mas cada entrega passa por revisão humana. É por isso que os sistemas têm log, limite de custo e ponto de aprovação — automação com responsabilidade definida.</div>
+        </details>
+        <details>
+          <summary><span class="fn">N.05</span><span>Dá para começar só com um diagnóstico?</span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="a">Dá. A primeira conversa é gratuita e, se o problema for grande, começamos por um diagnóstico pago e curto — documento com caminhos, riscos e faixa de investimento. Se você decidir não seguir, o documento é seu.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIG 10 — CONTATO ===================== -->
+  <section class="sec contact" id="contato" aria-labelledby="contatoTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="fig"><b>FIG. 10</b><span>FOLHA DE ENCAMINHAMENTO</span><span>—</span><span>ABERTA</span></div>
+        <h2 class="sec-title" id="contatoTitle"><span data-i18n="contact.l1">Conte o problema</span> <span data-i18n="contact.l2" style="color:var(--blue)">em duas linhas.</span></h2>
+        <p class="sec-sub" data-i18n="contact.lead">Respondemos com um caminho, um prazo e um valor. Sem enrolação.</p>
+        <span class="sec-count">FOLHA 10 / 10</span>
+      </div>
+
+      <div class="contact-grid">
+        <form data-lead class="form" id="cform" novalidate>
+          <div class="form-head"><span>FORM. 10-A — <b>BRIEFING</b></span><span>RESPOSTA EM ATÉ 48H</span></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Nome <span>*</span></label>
+              <input id="f-name" name="nome" type="text" autocomplete="name" placeholder="Como te chamamos" required>
+            </div>
+            <div class="field">
+              <label for="f-mail">E-mail <span>*</span></label>
+              <input id="f-mail" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-type">Tipo de projeto</label>
+            <select id="f-type" name="tipo">
+              <option>Automação com IA</option>
+              <option>Sistema web / painel</option>
+              <option>Jogo 3D</option>
+              <option>Site institucional</option>
+              <option>Direção visual / identidade</option>
+              <option>Ainda não sei</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="f-msg">O problema, em duas linhas <span>*</span></label>
+            <textarea id="f-msg" name="mensagem" rows="4" placeholder="O que hoje toma tempo, trava ou não existe?" required></textarea>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn-solid" type="submit">
+              <span data-i18n="contact.mail">Enviar e-mail</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite">Sem servidor: o botão abre seu e-mail já preenchido.</p>
+          </div>
+        </form>
+
+        <div>
+          <div class="direct">
+            <a data-wa href="https://wa.me/5568999999999" target="_blank" rel="noopener">
+              <span class="lbl">WhatsApp</span><span class="vv">+55 68 99999-9999</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <a href="mailto:contato@badclaude.dev">
+              <span class="lbl">E-mail</span><span class="vv">contato@badclaude.dev</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <button type="button" id="copyMail">
+              <span class="lbl">Copiar</span><span class="vv" id="copyLabel">Copiar e-mail</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M3 11V2h9" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+            </button>
+          </div>
+
+          <div class="who">
+            <div class="who-head"><span>FIG. 10-B · ATENDIMENTO</span><span>07°35′S · 72°48′W</span></div>
+            <div class="who-body">
+              <div class="who-pet">
+                <svg class="pet-fallback" data-pet-fallback viewBox="0 0 200 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M74 118v22"/><path d="M88 122v20"/><path d="M112 122v20"/><path d="M126 118v22"/>
+                <ellipse cx="74" cy="141" rx="7" ry="4.6"/>
+                <ellipse cx="88" cy="143" rx="7" ry="4.6"/>
+                <ellipse cx="112" cy="143" rx="7" ry="4.6"/>
+                <ellipse cx="126" cy="141" rx="7" ry="4.6"/>
+                <path d="M69 104c-3-16 3-27 12-32-3-9 1-15 6-16 4-1 6 3 6 8h14c0-5 2-9 6-8 5 1 9 7 6 16 9 5 15 16 12 32-2 15-11 24-31 24s-29-9-31-24z"/>
+                <circle cx="87" cy="92" r="5.6"/>
+                <circle cx="113" cy="92" r="5.6"/>
+              </g>
+              <circle cx="87" cy="92" r="2.3" fill="currentColor"/>
+              <circle cx="113" cy="92" r="2.3" fill="currentColor"/>
+              <circle cx="100" cy="112" r="1.6" fill="#1e5aa8"/>
+              <path d="M60 150h80" stroke="#1e5aa8" stroke-width=".7" stroke-dasharray="5 4" opacity=".55"/>
+            </svg>
+                <canvas class="pet-canvas" id="petContact" data-pet-state="idle" aria-label="BadClawd apontando para o formulário de contato." role="img"></canvas>
+              </div>
+              <div class="who-copy">
+                <strong>Quem responde é quem constrói.</strong>
+                <p>Sem atendente no meio. A mensagem chega direto em quem vai desenhar e escrever o seu projeto — e a resposta vem com um caminho, não com um convite para outra reunião.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="foot" aria-labelledby="footTitle">
+  <div class="wrap">
+    <h2 id="footTitle" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Rodapé</h2>
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <a class="brand" href="#top" aria-label="BADCLAUDE — voltar ao início">
+          <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1"/>
+            <path d="M1.5 12h21M12 1.5v21" stroke="currentColor" stroke-width=".6"/>
+            <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+          </svg>
+          <span class="brand-name">BADCLAUDE</span>
+        </a>
+        <p>Estúdio de software indie. Jogos 3D, sistemas com IA e sites — desenhados como projeto de engenharia, no Vale do Juruá.</p>
+        <span class="foot-coord">07°35′S · 72°48′W<br>ALT. 200 M · AMAZÔNIA OCIDENTAL</span>
+        <span class="foot-badge"><i aria-hidden="true"></i>Fazendo agora: JURUÁ</span>
+      </div>
+
+      <div class="foot-col">
+        <h4>Pranchas</h4>
+        <a href="#frentes">Frentes</a>
+        <a href="#dados">Números</a>
+        <a href="#jurua">Juruá</a>
+        <a href="#processo">Processo</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Serviços</h4>
+        <a href="#frentes">Jogos 3D</a>
+        <a href="#frentes">Sistemas com IA</a>
+        <a href="#frentes">Sites e produtos</a>
+        <a href="#frentes">Direção visual</a>
+        <a href="#planos">Automação</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Contato</h4>
+        <a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a>
+        <a data-wa href="https://wa.me/5568999999999" target="_blank" rel="noopener">WhatsApp · +55 68 99999-9999</a>
+        <p data-i18n="foot.loc">Cruzeiro do Sul · Acre · Brasil</p>
+        <p data-i18n="foot.hours">Seg a sáb, 8h – 19h</p>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <nav class="foot-links" aria-label="Links do rodapé">
+        <a href="#hero">Início</a>
+        <a href="#manifesto">Manifesto</a>
+        <a href="#contato">Contato</a>
+        <a href="mailto:contato@badclaude.dev">E-mail</a>
+      </nav>
+      <span>© 2026 BADCLAUDE — DIREÇÃO 08 · GRID TÉCNICO</span>
+      <a class="top-link" href="#top">Voltar ao início <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== DICIONÁRIO ===================== -->
+<script src="../../assets/js/i18n.js"></script>
+<script>
+(function () {
+  var extra = {
+    pt: {
+      'c08.menu': 'Índice da prancha',
+      'c08.fechar': 'Fechar ✕',
+      'c08.resp': 'Resposta em até 48h',
+      'c08.formnote': 'Sem servidor: o botão abre seu e-mail já preenchido.',
+      'c08.n1': 'Frentes', 'c08.n2': 'Dados', 'c08.n3': 'Juruá', 'c08.n4': 'Processo',
+      'c08.n5': 'Planos', 'c08.n6': 'FAQ', 'c08.n7': 'Contato',
+      'c08.m1': 'Prancha', 'c08.m2': 'Manifesto', 'c08.m3': 'Vozes',
+      'c08.k1': 'frentes técnicas', 'c08.k2': 'idiomas no site',
+      'c08.k3': 'primeira resposta', 'c08.k4': 'código entregue',
+      'stats.n1': '4'
+    },
+    en: {
+      'c08.menu': 'Sheet index',
+      'c08.fechar': 'Close ✕',
+      'c08.resp': 'Reply within 48h',
+      'c08.formnote': 'No server: the button opens your mail app pre-filled.',
+      'c08.n1': 'Fronts', 'c08.n2': 'Figures', 'c08.n3': 'Juruá', 'c08.n4': 'Process',
+      'c08.n5': 'Plans', 'c08.n6': 'FAQ', 'c08.n7': 'Contact',
+      'c08.m1': 'Sheet', 'c08.m2': 'Manifesto', 'c08.m3': 'Voices',
+      'c08.k1': 'technical fronts', 'c08.k2': 'site languages',
+      'c08.k3': 'first reply', 'c08.k4': 'code delivered',
+      'stats.n1': '4'
+    },
+    es: {
+      'c08.menu': 'Índice de la lámina',
+      'c08.fechar': 'Cerrar ✕',
+      'c08.resp': 'Respuesta en 48h',
+      'c08.formnote': 'Sin servidor: el botón abre tu correo ya rellenado.',
+      'c08.n1': 'Frentes', 'c08.n2': 'Datos', 'c08.n3': 'Juruá', 'c08.n4': 'Proceso',
+      'c08.n5': 'Planes', 'c08.n6': 'FAQ', 'c08.n7': 'Contacto',
+      'c08.m1': 'Lámina', 'c08.m2': 'Manifiesto', 'c08.m3': 'Voces',
+      'c08.k1': 'frentes técnicas', 'c08.k2': 'idiomas del sitio',
+      'c08.k3': 'primera respuesta', 'c08.k4': 'código entregado',
+      'stats.n1': '4'
+    }
+  };
+  if (window.I18N) {
+    Object.keys(extra).forEach(function (l) {
+      window.I18N[l] = Object.assign({}, window.I18N[l] || {}, extra[l]);
+    });
+  }
+  if (window.SITE_CONFIG) {
+    window.SITE_CONFIG.whatsappMessage = {
+      pt: 'Olá! Vim pelo site da BADCLAUDE e quero conversar sobre um projeto.',
+      en: 'Hi! I found BADCLAUDE online and I would like to talk about a project.',
+      es: '¡Hola! Llegué desde el sitio de BADCLAUDE y quiero conversar sobre un proyecto.'
+    };
+  }
+  /* mantém o número e o e-mail corretos para a BADCLAUDE */
+  window.SITE_CONFIG = window.SITE_CONFIG || {};
+  window.SITE_CONFIG.whatsapp = '5568999999999';
+  window.SITE_CONFIG.email = 'contato@badclaude.dev';
+})();
+</script>
+<script defer src="../../assets/js/lang.js"></script>
+<script defer src="../../assets/js/lead.js"></script>
+
+<script>
+/* ============================================================
+   Comportamento da página — script clássico para funcionar também
+   abrindo o index.html direto do disco, onde o navegador bloqueia
+   imports de módulos. Em HTTP, os módulos do estúdio assumem o
+   mascote (BadClawd em canvas, com IK e olhar no cursor).
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ---------- 1. Letras nascem de uma máscara ---------- */
+  function splitText(el, opts) {
+    if (!el || el.dataset.splitDone === '1') return;
+    opts = opts || {};
+    var stagger = opts.stagger == null ? 0.018 : opts.stagger;
+    var delay = opts.delay || 0;
+    var text = el.textContent || '';
+    el.textContent = '';
+    el.dataset.splitDone = '1';
+    var out = document.createElement('span');
+    out.className = 'rb-split';
+    out.style.display = 'inline';
+    var idx = 0;
+    text.split(/(\s+)/).forEach(function (word) {
+      if (!word) return;
+      if (/^\s+$/.test(word)) {
+        var sp = document.createElement('span');
+        sp.className = 'rb-char rb-space';
+        sp.innerHTML = '&nbsp;';
+        out.appendChild(sp);
+        return;
+      }
+      var wordEl = document.createElement('span');
+      wordEl.className = 'rb-word';
+      word.split('').forEach(function (ch) {
+        var w = document.createElement('span');
+        w.className = 'rb-char';
+        var inner = document.createElement('span');
+        inner.className = 'rb-char-i';
+        inner.textContent = ch;
+        inner.style.transitionDelay = (delay + idx * stagger) + 's';
+        idx++;
+        w.appendChild(inner);
+        wordEl.appendChild(w);
+      });
+      out.appendChild(wordEl);
+    });
+    el.appendChild(out);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        $$('.rb-char-i', out).forEach(function (n) { n.classList.add('rb-in'); });
+      });
+    });
+  }
+
+  /* ---------- 2. Números ---------- */
+  function countUp(el, opts) {
+    opts = opts || {};
+    var to = Number(el.getAttribute('data-count') || 0);
+    var dur = opts.duration || 1600;
+    var t0 = performance.now();
+    function frame(now) {
+      var p = Math.min(1, (now - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(to * e));
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- 3. IntersectionObserver ---------- */
+  function onEnter(list, cb, opts) {
+    opts = opts || {};
+    list = list.filter(Boolean);
+    if (!list.length) return;
+    if (!('IntersectionObserver' in window)) { list.forEach(cb); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        cb(en.target);
+        io.unobserve(en.target);
+      });
+    }, {
+      threshold: opts.threshold == null ? 0.15 : opts.threshold,
+      rootMargin: opts.rootMargin || '0px 0px -6% 0px'
+    });
+    list.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- 4. Faísca no clique ---------- */
+  function clickSpark(sel, opts) {
+    opts = opts || {};
+    if (reduce) return;
+    var color = opts.color || '#1e5aa8';
+    var count = opts.count || 6;
+    $$(sel).forEach(function (root) {
+      root.addEventListener('click', function (e) {
+        for (var i = 0; i < count; i++) {
+          var sp = document.createElement('span');
+          sp.className = 'rb-spark';
+          sp.style.left = e.clientX + 'px';
+          sp.style.top = e.clientY + 'px';
+          sp.style.background = color;
+          var a = (i / count) * Math.PI * 2;
+          var d = 16 + Math.random() * 26;
+          sp.style.setProperty('--dx', Math.cos(a) * d + 'px');
+          sp.style.setProperty('--dy', Math.sin(a) * d + 'px');
+          document.body.appendChild(sp);
+          setTimeout((function (n) { return function () { n.remove(); }; })(sp), 620);
+        }
+      });
+    });
+  }
+
+  /* ---------- 5. Títulos ---------- */
+  function splitNow(el, stagger, delay) {
+    if (!el) return;
+    delete el.dataset.splitDone;
+    splitText(el, { stagger: stagger, delay: delay });
+  }
+
+  if (!reduce) {
+    $$('.hero-title .ln[data-split]').forEach(function (el, i) {
+      splitText(el, { stagger: 0.022, delay: 0.18 + i * 0.14 });
+    });
+  }
+
+  onEnter($$('[data-split-scroll]'), function (el) {
+    if (reduce) return;
+    el.dataset.seen = '1';
+    splitText(el, { stagger: 0.013, delay: 0 });
+  }, { threshold: 0.45, rootMargin: '0px 0px -6% 0px' });
+
+  /* ---------- 6. Números ---------- */
+  onEnter($$('[data-count]'), function (el) {
+    if (reduce) { el.textContent = el.getAttribute('data-count'); return; }
+    countUp(el, { duration: 1650 });
+  }, { threshold: 0.6 });
+
+  /* ---------- 7. Revelação ---------- */
+  onEnter($$('[data-reveal]'), function (el) { el.classList.add('in'); }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
+  onEnter($$('.front'), function (el) { el.classList.add('in'); }, { threshold: 0.25 });
+
+  /* ---------- 8. Cabeçalho, progresso, link ativo ---------- */
+  var head = $('#siteHead');
+  var prog = $('#prog');
+  var navLinks = $$('.nav a');
+  var sectionEls = $$('main section[id]');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (prog) prog.style.width = (max > 0 ? Math.min(1, y / max) * 100 : 0) + '%';
+      if (head) head.classList.toggle('is-stuck', y > 24);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  if ('IntersectionObserver' in window && navLinks.length) {
+    var byId = {};
+    navLinks.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.remove('is-active'); });
+        var link = byId[en.target.id];
+        if (link) link.classList.add('is-active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sectionEls.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---------- 9. Índice mobile ---------- */
+  var burger = $('#burger');
+  var menu = $('#menu');
+  var menuClose = $('#menuClose');
+
+  function setMenu(open) {
+    if (!menu || !burger) return;
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Fechar índice' : 'Abrir índice');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      var first = menu.querySelector('a');
+      if (first) first.focus({ preventScroll: true });
+    }
+  }
+
+  if (burger) burger.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+  if (menuClose) menuClose.addEventListener('click', function () { setMenu(false); if (burger) burger.focus(); });
+  $$('#menu a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu && menu.classList.contains('open')) {
+      setMenu(false);
+      if (burger) burger.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 1040 && menu && menu.classList.contains('open')) setMenu(false);
+  }, { passive: true });
+
+  /* ---------- 10. Formulário ---------- */
+  var form = $('#cform');
+  var status = $('#formStatus');
+  var mailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      var nome = String(data.get('nome') || '').trim();
+      var mail = String(data.get('email') || '').trim();
+      var tipo = String(data.get('tipo') || '').trim();
+      var msg = String(data.get('mensagem') || '').trim();
+
+      if (!nome || !msg || !mailRe.test(mail)) {
+        if (status) status.textContent = 'Preencha nome, um e-mail válido e a mensagem.';
+        if (!nome) $('#f-name').focus();
+        else if (!mailRe.test(mail)) $('#f-mail').focus();
+        else $('#f-msg').focus();
+        return;
+      }
+
+      var subject = 'Novo projeto — ' + tipo + ' — ' + nome;
+      var body = 'Nome: ' + nome + '\nE-mail: ' + mail + '\nTipo: ' + tipo + '\n\n' + msg;
+      if (status) status.textContent = 'Abrindo seu aplicativo de e-mail…';
+
+      setTimeout(function () {
+        window.location.href = 'mailto:contato@badclaude.dev?subject=' +
+          encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        if (status) status.textContent = 'Se nada abrir, escreva direto para contato@badclaude.dev.';
+      }, 140);
+    });
+  }
+
+  var copyBtn = $('#copyMail');
+  var copyLabel = $('#copyLabel');
+  if (copyBtn && copyLabel) {
+    copyBtn.addEventListener('click', function () {
+      var mail = 'contato@badclaude.dev';
+      var done = function (ok) {
+        copyLabel.textContent = ok ? 'E-mail copiado ✓' : mail;
+        setTimeout(function () { copyLabel.textContent = 'Copiar e-mail'; }, 2400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mail).then(function () { done(true); }, function () { done(false); });
+      } else done(false);
+    });
+  }
+
+  /* ---------- 11. Micro-interações ---------- */
+  clickSpark('.btn', { color: '#1e5aa8', count: 7 });
+  clickSpark('.front', { color: '#1e5aa8', count: 5 });
+
+  /* ---------- 12. Troca de idioma: re-monta os títulos ---------- */
+  document.addEventListener('badclaude:lang', function () {
+    if (reduce) return;
+    $$('.hero-title .ln[data-split]').forEach(function (el, i) { splitNow(el, 0.02, i * 0.09); });
+    $$('[data-split-scroll]').forEach(function (el) {
+      if (el.dataset.seen === '1') splitNow(el, 0.012, 0);
+    });
+  });
+
+  /* ---------- 13. Mascote real (módulos do estúdio) ---------- */
+  var pets = [];
+  var pointerRaf = null;
+
+  Promise.all([
+    import('../../assets/js/badclawd.js')
+  ]).then(function (mods) {
+    var BadClawd = mods[0].BadClawd;
+    $$('canvas.pet-canvas').forEach(function (el) {
+      try {
+        var pet = new BadClawd(el, { variant: 'outline', accent: '#1e5aa8', strokeWidth: 1.9 });
+        pet.setState(el.dataset.petState || 'point');
+        pet.el = el;
+        pets.push(pet);
+        var fb = el.parentElement.querySelector('[data-pet-fallback]');
+        if (fb) fb.hidden = true;
+        el.addEventListener('pointerenter', function () { pet.setState('point'); });
+        el.addEventListener('pointerleave', function () { pet.setState('idle'); pet.clearPoint(); });
+      } catch (err) { /* mantém o SVG */ }
+    });
+
+    if (pets.length) {
+      window.addEventListener('pointermove', function (e) {
+        if (pointerRaf) return;
+        pointerRaf = requestAnimationFrame(function () {
+          pointerRaf = null;
+          for (var i = 0; i < pets.length; i++) {
+            var pet = pets[i];
+            var r = pet.el.getBoundingClientRect();
+            if (r.width < 4) continue;
+            if (r.bottom < -220 || r.top > window.innerHeight + 220) continue;
+            pet.pointAt(e.clientX - r.left, e.clientY - r.top);
+          }
+        });
+      }, { passive: true });
+    }
+  }).catch(function () {
+    /* file:// ou módulo indisponível: o desenho SVG permanece visível */
+  });
+})();
+</script>
+
+<!-- ASSINATURA FINAL — linha oficial do estúdio -->
+<section class="bc-assinatura" aria-label="Condições e assinatura">
+  <p>Preços variados — depende da demanda e oferta do mercado de pontes. O cliente pode ter seu dinheiro de volta do que não usou em contrato. CZSLHBS · Antônio Clóvis · Acre · Cruzeiro do Sul — (fé em Deus e justa é a batalha do guerreiro)</p>
+</section>
+<style>
+  .bc-assinatura {
+    border-top: 1px solid currentColor;
+    opacity: .72;
+    padding: 22px clamp(16px, 4vw, 52px) 30px;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.7;
+    letter-spacing: .01em;
+    max-width: 92ch;
+    margin: 0 auto;
+  }
+  .bc-assinatura p { margin: 0; }
+</style>
+</body>
+</html>

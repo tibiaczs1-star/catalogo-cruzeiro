@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BADCLAUDE — área do cliente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#07080a; --panel:#0f1115; --line:#22262e; --ink:#f2f3f7; --dim:#8a8f9c;
+    --acc:#22d3ee; --amber:#f59e0b; --violet:#8b5cf6; --green:#10b981; --red:#e11d2e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:radial-gradient(55% 40% at 10% 0%, rgba(34,211,238,.10), transparent 70%),
+               radial-gradient(45% 45% at 95% 8%, rgba(139,92,246,.08), transparent 70%);
+  }
+  .wrap { position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 clamp(16px,3vw,32px) 70px; }
+
+  header.top {
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:18px 0; border-bottom:1px solid var(--line); margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .brand { display:flex; align-items:center; gap:11px; }
+  .brand b { font-size:12.5px; letter-spacing:.2em; }
+  .brand span { display:block; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); }
+  .chip { display:inline-flex; align-items:center; gap:7px; padding:6px 12px; border-radius:999px; border:1px solid var(--line); font-size:11px; color:var(--dim); }
+  .chip b { color:var(--ink); font-weight:600; }
+
+  /* login */
+  .login { max-width:440px; margin:8vh auto; background:linear-gradient(180deg,var(--panel),#0b0d11); border:1px solid var(--line); border-radius:20px; padding:30px; }
+  .login h1 { font-size:1.6rem; letter-spacing:-.03em; margin-bottom:6px; }
+  .login p { color:var(--dim); font-size:13.5px; margin-bottom:22px; }
+  .field { margin-bottom:13px; }
+  .field label { display:block; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--dim); margin-bottom:6px; }
+  .field input { width:100%; padding:12px 14px; border-radius:10px; background:#0a0c10; border:1px solid var(--line); color:var(--ink); font:400 14px 'Inter',sans-serif; }
+  .field input:focus { outline:none; border-color:var(--acc); box-shadow:0 0 0 3px rgba(34,211,238,.13); }
+  .btn { padding:13px 20px; border:0; border-radius:11px; background:var(--acc); color:#04191d; font-weight:700; font-size:14px; cursor:pointer; width:100%; }
+  .btn:hover { filter:brightness(1.08); }
+  .btn.ghost { background:none; border:1px solid var(--line); color:var(--dim); font-weight:600; width:auto; padding:9px 16px; font-size:12.5px; }
+  .btn.ghost:hover { color:var(--ink); border-color:#3a3f4a; }
+  .msg { font-size:12.5px; color:var(--red); margin-top:10px; min-height:18px; }
+
+  /* painel */
+  .hero { display:grid; grid-template-columns:1.4fr 1fr; gap:16px; margin-bottom:22px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .card h2 { font-size:1.35rem; letter-spacing:-.03em; margin-bottom:4px; }
+  .card .sub { color:var(--dim); font-size:13px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin-top:18px; }
+  .stat { background:var(--panel); padding:16px; }
+  .stat .k { font-size:9.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); }
+  .stat .v { font-size:1.7rem; font-weight:600; letter-spacing:-.03em; margin-top:6px; }
+  .stat.acc .v { color:var(--acc); }
+  .stat.amb .v { color:var(--amber); }
+  .stat.grn .v { color:var(--green); }
+
+  h3.sec { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); font-weight:500; margin:30px 0 12px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .item { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .item h4 { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .item p { font-size:12.5px; color:var(--dim); }
+  .item .pts { display:inline-block; margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--acc); }
+  .item.done { opacity:.62; }
+  .item.done .pts { color:var(--green); }
+
+  .convite-box { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+  .convite-box input { flex:1; min-width:200px; padding:11px 13px; border-radius:10px; background:#0a0c10; border:1px solid var(--line); color:var(--ink); font-size:13px; }
+  .codigo { font-family:'JetBrains Mono',monospace; font-size:20px; letter-spacing:.18em; color:var(--amber); background:rgba(245,158,11,.08); border:1px dashed rgba(245,158,11,.4); border-radius:10px; padding:10px 16px; display:inline-block; }
+
+  textarea { width:100%; padding:11px 13px; border-radius:10px; background:#0a0c10; border:1px solid var(--line); color:var(--ink); font:400 13.5px 'Inter',sans-serif; resize:vertical; }
+  textarea:focus, .convite-box input:focus { outline:none; border-color:var(--acc); }
+  .stars { display:flex; gap:6px; margin:10px 0 12px; }
+  .stars button { background:none; border:0; font-size:22px; color:#3a3f4a; cursor:pointer; padding:0; line-height:1; }
+  .stars button.on { color:var(--amber); }
+
+  /* escritório */
+  .office { position:relative; height:260px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#12141a; }
+  .office canvas { display:block; width:100%; height:100%; }
+  .office-fallback {
+    position:absolute; inset:0; display:grid; grid-template-columns:repeat(2,1fr); gap:12px; padding:16px;
+  }
+  .agent { display:flex; align-items:center; gap:10px; background:#0f1115; border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .agent .dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); }
+  .agent.ocioso .dot { background:#5f6470; box-shadow:none; }
+  .agent b { display:block; font-size:12.5px; }
+  .agent span { font-size:11px; color:var(--dim); }
+
+  .lista { display:flex; flex-direction:column; gap:8px; max-height:240px; overflow:auto; }
+  .linha { display:flex; justify-content:space-between; gap:10px; font-size:12.5px; border-bottom:1px solid rgba(34,38,46,.6); padding-bottom:8px; }
+  .linha:last-child { border-bottom:0; }
+  .linha .d { color:var(--dim); font-family:'JetBrains Mono',monospace; font-size:10.5px; }
+
+  @media (max-width:900px) { .hero, .grid3, .grid2 { grid-template-columns:1fr; } .stats { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion:reduce) { * { transition:none!important; animation:none!important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="4" y="6" width="24" height="22" rx="6" fill="#141417" stroke="#e11d2e" stroke-width="1.4"/>
+        <path d="M4 11.5h24v5.5c-8-3.2-16-3.2-24 0z" fill="#e11d2e"/>
+        <circle cx="11" cy="22" r="1.7" fill="#e11d2e"/>
+        <circle cx="21" cy="22" r="3" fill="#22d3ee"/>
+      </svg>
+      <div><b>BADCLAUDE</b><span>área do cliente</span></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <span class="chip" id="chipEmail" hidden></span>
+      <button class="btn ghost" id="sair" type="button" hidden>sair</button>
+    </div>
+  </header>
+
+  <!-- login -->
+  <section class="login" id="loginBox">
+    <h1>Entrar na sua área</h1>
+    <p>Seu e-mail identifica suas missões, convites e o escritório dos agentes.</p>
+    <form id="loginForm" novalidate>
+      <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required></div>
+      <div class="field"><label for="nome">Nome (opcional)</label><input id="nome" type="text" autocomplete="name" placeholder="Como quer ser chamado"></div>
+      <div class="field"><label for="cidade">Cidade (opcional)</label><input id="cidade" type="text" autocomplete="address-level2" placeholder="Cruzeiro do Sul"></div>
+      <button class="btn" type="submit" id="entrarBtn">Entrar</button>
+      <p class="msg" id="loginMsg" role="status"></p>
+    </form>
+  </section>
+
+  <!-- painel -->
+  <main id="painel" hidden>
+    <section class="hero">
+      <div class="card">
+        <h2 id="olaNome">Olá!</h2>
+        <p class="sub" id="olaSub">Sua área no BADCLAUDE.</p>
+        <div class="stats">
+          <div class="stat acc"><div class="k">Pontos</div><div class="v" id="sPontos">0</div></div>
+          <div class="stat amb"><div class="k">Dias bônus</div><div class="v" id="sDias">0</div></div>
+          <div class="stat grn"><div class="k">Convites</div><div class="v" id="sConvites">0</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Seu convite</h2>
+        <p class="sub">Cada amigo que comprar pelo seu código te dá <b>1 dia a mais</b> de acesso.</p>
+        <div style="margin-top:14px"><span class="codigo" id="codigoConvite">—</span></div>
+        <div class="convite-box">
+          <input id="emailConvite" type="email" placeholder="e-mail do amigo">
+          <button class="btn ghost" id="convidarBtn" type="button">convidar</button>
+        </div>
+        <p class="msg" id="conviteMsg" role="status"></p>
+      </div>
+    </section>
+
+    <h3 class="sec">Missões</h3>
+    <div class="grid3" id="missoes"></div>
+
+    <h3 class="sec">Campanhas de engajamento</h3>
+    <div class="grid3" id="campanhas"></div>
+
+    <h3 class="sec" style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+      <span>Seu escritório de agentes</span>
+      <span data-escritorio-status style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--acc);letter-spacing:.1em">conectando…</span>
+    </h3>
+    <div class="office" id="office">
+      <canvas id="officeCanvas" aria-label="Escritório dos agentes do BADCLAUDE"></canvas>
+    </div>
+
+    <div class="grid2" style="margin-top:22px">
+      <div class="card">
+        <h2 style="font-size:1.1rem">Deixe sua opinião</h2>
+        <p class="sub">O que funcionou e o que faltou. Vale 50 pontos.</p>
+        <div class="stars" id="stars" role="group" aria-label="Nota">
+          <button type="button" data-n="1" aria-label="1 estrela">★</button>
+          <button type="button" data-n="2" aria-label="2 estrelas">★</button>
+          <button type="button" data-n="3" aria-label="3 estrelas">★</button>
+          <button type="button" data-n="4" aria-label="4 estrelas">★</button>
+          <button type="button" data-n="5" aria-label="5 estrelas" class="on">★</button>
+        </div>
+        <textarea id="opiniao" rows="4" placeholder="Conte com suas palavras…"></textarea>
+        <p class="msg" id="opiniaoMsg" role="status"></p>
+        <button class="btn" id="enviarOpiniao" type="button" style="margin-top:8px">Enviar opinião</button>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.1rem">Seus convites</h2>
+        <p class="sub" id="convitesSub">Nenhum convite enviado ainda.</p>
+        <div class="lista" id="listaConvites"></div>
+        <h3 class="sec" style="margin-top:22px">Suas opiniões</h3>
+        <div class="lista" id="listaOpinioes"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var API = '/badclaude/api/cliente';
+  var estado = { email: '', nome: '', nota: 5, painel: null };
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function dataCurta(iso) {
+    try { return new Date(iso).toLocaleDateString('pt-BR'); } catch (e) { return ''; }
+  }
+
+  function guardarEmail(email) {
+    try { localStorage.setItem('badclaude-cliente', email); } catch (e) {}
+  }
+  function lerEmail() {
+    try { return localStorage.getItem('badclaude-cliente') || ''; } catch (e) { return ''; }
+  }
+
+  async function entrar(email, nome, cidade) {
+    var res = await fetch(API + '/entrar', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, nome: nome, cidade: cidade }),
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'falha ao entrar');
+    guardarEmail(email);
+    estado.email = email;
+    await carregar();
+  }
+
+  async function carregar() {
+    var res = await fetch(API + '/painel?email=' + encodeURIComponent(estado.email));
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'não foi possível carregar');
+    estado.painel = data;
+    $('loginBox').hidden = true;
+    $('painel').hidden = false;
+    $('chipEmail').hidden = false;
+    $('chipEmail').innerHTML = '<b>' + esc(data.cliente.email) + '</b>';
+    $('sair').hidden = false;
+    pintar(data);
+  }
+
+  function pintar(d) {
+    var c = d.cliente;
+    $('olaNome').textContent = 'Olá' + (c.nome ? ', ' + c.nome.split(' ')[0] : '') + '!';
+    $('olaSub').textContent = (c.cidade ? c.cidade + ' · ' : '') + (c.diasAtivos || 0) + ' dia(s) ativo(s) na área.';
+    $('sPontos').textContent = c.pontos || 0;
+    $('sDias').textContent = c.diasBonus || 0;
+    $('sConvites').textContent = d.convites.convertidos + '/' + d.convites.enviados;
+    $('codigoConvite').textContent = c.codigoConvite || '—';
+
+    $('missoes').innerHTML = d.missoes.map(function (m) {
+      return '<div class="item' + (m.feita ? ' done' : '') + '">' +
+        '<h4>' + esc(m.titulo) + '</h4><p>' + esc(m.descricao) + '</p>' +
+        '<span class="pts">' + (m.feita ? '✓ feita · ' : '+') + m.pontos + ' pts</span></div>';
+    }).join('');
+
+    $('campanhas').innerHTML = d.campanhas.map(function (k) {
+      return '<div class="item"><h4>' + esc(k.titulo) + '</h4><p>' + esc(k.resumo) + '</p>' +
+        '<span class="pts">' + esc(k.regra) + '</span></div>';
+    }).join('');
+
+    $('convitesSub').textContent = d.convites.enviados
+      ? d.convites.enviados + ' enviados · ' + d.convites.convertidos + ' converteram · ' + d.convites.diasGanhos + ' dia(s) ganho(s)'
+      : 'Nenhum convite enviado ainda.';
+
+    $('listaConvites').innerHTML = d.convites.lista.length
+      ? d.convites.lista.map(function (c) {
+          return '<div class="linha"><span>' + esc(c.nome) + (c.convertido ? ' ✓ comprou' : ' · aguardando') + '</span><span class="d">' + dataCurta(c.quando) + '</span></div>';
+        }).join('')
+      : '<div class="linha"><span class="d">sem convites</span></div>';
+
+    $('listaOpinioes').innerHTML = d.opinioes.length
+      ? d.opinioes.map(function (o) {
+          return '<div class="linha"><span>' + '★'.repeat(o.nota) + ' ' + esc(String(o.texto).slice(0, 60)) + '</span><span class="d">' + dataCurta(o.criadoEm) + '</span></div>';
+        }).join('')
+      : '<div class="linha"><span class="d">nenhuma opinião ainda</span></div>';
+
+    iniciarEscritorio();
+  }
+
+  /* ---------- escritório (módulo Unicenter ao vivo) ---------- */
+  var escritorio = null;
+
+  function iniciarEscritorio() {
+    var canvas = $('officeCanvas');
+    if (!canvas || escritorio) return;
+    import('/badclaude/escritorio/escritorio.js').then(function (mod) {
+      escritorio = mod.montarEscritorio(canvas, { api: '/badclaude/api/presenca' });
+    }).catch(function (e) {
+      console.warn('[escritorio] módulo indisponível:', e.message);
+      var box = $('office');
+      if (box) box.innerHTML = '<div style="padding:22px;color:#8a8f9c;font-size:13px">Escritório indisponível sem o servidor.</div>';
+    });
+  }
+
+  /* ---------- eventos ---------- */
+  $('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var email = $('email').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('loginMsg').textContent = 'E-mail inválido.'; return; }
+    $('entrarBtn').disabled = true;
+    $('loginMsg').textContent = '';
+    try { await entrar(email, $('nome').value.trim(), $('cidade').value.trim()); }
+    catch (err) { $('loginMsg').textContent = err.message; }
+    finally { $('entrarBtn').disabled = false; }
+  });
+
+  $('sair').addEventListener('click', function () {
+    try { localStorage.removeItem('badclaude-cliente'); } catch (e) {}
+    location.reload();
+  });
+
+  $('convidarBtn').addEventListener('click', async function () {
+    var email = $('emailConvite').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('conviteMsg').textContent = 'E-mail inválido.'; return; }
+    try {
+      var res = await fetch(API + '/convite', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigo: estado.painel.cliente.codigoConvite, emailConvidado: email, nomeConvidado: email.split('@')[0] }),
+      });
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'falha');
+      $('conviteMsg').style.color = 'var(--green)';
+      $('conviteMsg').textContent = 'Convite registrado. Link: ' + data.link;
+      $('emailConvite').value = '';
+      await carregar();
+    } catch (err) { $('conviteMsg').style.color = 'var(--red)'; $('conviteMsg').textContent = err.message; }
+  });
+
+  document.getElementById('stars').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-n]');
+    if (!b) return;
+    estado.nota = Number(b.dataset.n);
+    [...this.querySelectorAll('button')].forEach(function (x) {
+      x.classList.toggle('on', Number(x.dataset.n) <= estado.nota);
+    });
+  });
+
+  $('enviarOpiniao').addEventListener('click', async function () {
+    var texto = $('opiniao').value.trim();
+    if (!texto) { $('opiniaoMsg').textContent = 'Escreva algo antes de enviar.'; return; }
+    try {
+      var res = await fetch(API + '/opiniao', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: estado.email, nome: estado.painel.cliente.nome, cidade: estado.painel.cliente.cidade,
+          texto: texto, nota: estado.nota, direcao: '',
+        }),
+      });
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'falha');
+      $('opiniaoMsg').style.color = 'var(--green)';
+      $('opiniaoMsg').textContent = 'Obrigado! Sua opinião foi registrada.';
+      $('opiniao').value = '';
+      await carregar();
+    } catch (err) { $('opiniaoMsg').style.color = 'var(--red)'; $('opiniaoMsg').textContent = err.message; }
+  });
+
+  /* ---------- boot ---------- */
+  (async function init() {
+    var params = new URLSearchParams(location.search);
+    var convite = params.get('convite');
+    var salvo = lerEmail();
+    if (salvo) {
+      estado.email = salvo;
+      try { await carregar(); return; } catch (e) {}
+    }
+    $('loginBox').hidden = false;
+    if (convite) $('nome').placeholder = 'você foi convidado!';
+  })();
+})();
+</script>
+</body>
+</html>
