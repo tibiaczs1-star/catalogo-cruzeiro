@@ -21713,6 +21713,18 @@ async function handleStatic(req, res, pathname, requestUrl) {
       }
 
       // CZS 2026-11-11 — subpágina BADCLAUDE (showroom das 10 direções)
+      if (pathname === "/badclaude/cliente" || pathname === "/badclaude/cliente/") {
+        return sendFile(req, res, path.join(ROOT_DIR, "badclaude", "directions", "cliente.html"), {
+          cacheControl: "no-store"
+        });
+      }
+
+      if (pathname === "/badclaude/pagamento" || pathname === "/badclaude/pagamento/") {
+        return sendFile(req, res, path.join(ROOT_DIR, "badclaude", "directions", "pagamento.html"), {
+          cacheControl: "no-store"
+        });
+      }
+
       if (pathname === "/badclaude") {
         res.writeHead(302, {
           Location: "/badclaude/",
