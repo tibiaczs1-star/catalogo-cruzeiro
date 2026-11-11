@@ -21643,6 +21643,22 @@ async function handleStatic(req, res, pathname, requestUrl) {
         if (handled) return;
       }
 
+      // CZS 2026-11-11 — BadClaudio Agent Room: status demo para a sala publica
+      // (a sala real do cliente le a ponte local; aqui o site mostra uma
+      // vitrine animada com os mesmos dados visuais)
+      if (pathname === "/api/room-status") {
+        const demoRequests = 420 + Math.floor((Date.now() / 90000) % 500);
+        return sendJson(res, 200, {
+          online: true,
+          keys: 11,
+          models: 17,
+          requests: demoRequests,
+          lastServed: "claude-fable-5.1-free via Canal #1",
+          server: "demo-publica",
+          demo: true
+        });
+      }
+
       // CZS 2026-11-11 — BadClaudio Admin: subpagina /claude/admin
       if (pathname === "/claude/admin") {
         return sendFile(req, res, path.join(ROOT_DIR, "claude", "admin.html"), {
