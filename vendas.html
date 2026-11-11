@@ -960,16 +960,17 @@
         <img id="modal-qr" src="" alt="QR Code Pix" style="width:160px; height:160px; display:block;">
       </div>
 
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Pague via Pix e mande o comprovante para liberarmos sua senha:</p>
+      <p style="font-size:13px; color:#fff; font-weight:700; margin-bottom:4px;">Chave Pix Celular: <span style="color:var(--accent-cyan); font-family:var(--mono);">68992269296</span></p>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">Titular: <b>Raiane Leoncio</b> • Banco Inter / Pix Local</p>
 
       <div class="copia-box">
-        <input type="text" id="modal-copia" class="copia-input" readonly value="">
-        <button class="btn btn-secondary" style="width:auto; padding:8px 14px; font-size:12px;" onclick="copyCode()">Copiar</button>
+        <input type="text" id="modal-copia" class="copia-input" readonly value="68992269296">
+        <button class="btn btn-secondary" style="width:auto; padding:8px 14px; font-size:12px;" onclick="copyCode()">Copiar Chave</button>
       </div>
 
       <div style="margin-top:18px;">
         <a id="modal-zap-btn" href="#" target="_blank" class="btn btn-cyan" style="font-size:13.5px; padding:13px; text-decoration:none;">
-          📲 Enviar Comprovante no WhatsApp ➔
+          📲 Enviar Comprovante no WhatsApp (68 99226-9296) ➔
         </a>
       </div>
     </div>
@@ -978,29 +979,29 @@
   <!-- FOOTER -->
   <footer>
     <div style="max-width:800px; margin:0 auto;">
-      <p>© 2026 Catálogo Cruzeiro do Sul • Divisão de Inteligência &amp; Computação • Clovis Sampaio.</p>
+      <p>© 2026 BAD CLAUDE 🏴‍☠️ • Divisão de Inteligência &amp; Computação • Clovis Sampaio &amp; Raiane Leoncio.</p>
       <p style="margin-top:6px; font-size:12px; color:var(--text-muted);">
-        Cruzeiro do Sul, Acre • Brasil • Suporte Comercial VIP 24h
+        Cruzeiro do Sul, Acre • Brasil • Suporte Comercial VIP &amp; Liberação Manual via Pix
       </p>
     </div>
   </footer>
 
   <script>
-    const CHAVE_PIX = "pix-unicenter@czslabs.com";
+    const CHAVE_PIX_TELEFONE = "68992269296";
+    const TITULAR_PIX = "Raiane Leoncio";
 
     function openPixModal(id, title, price, duration, rate) {
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-price').textContent = `R$ ${price},00`;
       document.getElementById('modal-rate').textContent = `Tarifa: ${rate} • ${duration} de acesso total`;
 
-      const pixPayload = `00020126580014BR.GOV.BCB.PIX0136${CHAVE_PIX}5204000053039865405${price}.005802BR5918CATALOGO CRUZEIRO6009CRUZEIRO 62070503***6304`;
-      
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixPayload)}`;
-      document.getElementById('modal-qr').src = qrUrl;
-      document.getElementById('modal-copia').value = pixPayload;
+      document.getElementById('modal-copia').value = CHAVE_PIX_TELEFONE;
 
-      const zapMsg = encodeURIComponent(`Olá! Acabei de fazer o Pix de R$ ${price},00 para o plano "${title}". Segue o comprovante para liberação da minha chave do Claudio Turbo:`);
-      document.getElementById('modal-zap-btn').href = `https://api.whatsapp.com/send?phone=5568999999999&text=${zapMsg}`;
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(CHAVE_PIX_TELEFONE)}`;
+      document.getElementById('modal-qr').src = qrUrl;
+
+      const zapMsg = encodeURIComponent(`Olá Raiane e Junior! Acabei de fazer o Pix de R$ ${price},00 para o plano "${title}" do BAD CLAUDE. Segue em anexo o comprovante para liberação da minha chave de acesso:`);
+      document.getElementById('modal-zap-btn').href = `https://api.whatsapp.com/send?phone=5568992269296&text=${zapMsg}`;
 
       document.getElementById('pix-modal').classList.add('active');
     }
@@ -1013,7 +1014,7 @@
       const input = document.getElementById('modal-copia');
       input.select();
       document.execCommand('copy');
-      alert('Código Pix Copia e Cola copiado com sucesso! Abra seu banco e cole para pagar.');
+      alert('Chave Pix [68992269296 - Raiane Leoncio] copiada! Abra o app do seu banco para fazer o pagamento.');
     }
   </script>
 

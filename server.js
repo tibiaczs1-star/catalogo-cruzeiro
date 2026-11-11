@@ -21643,6 +21643,21 @@ async function handleStatic(req, res, pathname, requestUrl) {
         if (handled) return;
       }
 
+      // CZS 2026-11-11 — BadClaudio Admin: subpagina /claude/admin
+      if (pathname === "/claude/admin") {
+        return sendFile(req, res, path.join(ROOT_DIR, "claude", "admin.html"), {
+          cacheControl: "no-store"
+        });
+      }
+      if (pathname === "/claude/admin/") {
+        res.writeHead(302, { Location: "/claude/admin", "Cache-Control": "no-store" });
+        return res.end();
+      }
+      if (pathname === "/claude") {
+        res.writeHead(302, { Location: "/claude/admin", "Cache-Control": "no-store" });
+        return res.end();
+      }
+
       if (pathname === "/bookray") {
         res.writeHead(302, {
           Location: "/bookray/",

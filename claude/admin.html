@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BadClaudio Admin — Catálogo CZS</title>
+<link rel="icon" href="../claudio_logo.png">
+<style>
+:root{--r:#ff164f;--p:#ff52b8;--c:#18dbff;--g:#66ff75;--bg:#0b0c10;--card:#101218;--line:#3a1520;--muted:#889}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#eee;font:15px/1.6 Consolas,"Courier New",monospace}
+.wrap{max-width:900px;margin:0 auto;padding:36px 20px}
+h1{color:var(--r);font-size:30px;letter-spacing:1px;margin:0}
+.sub{color:var(--c);margin:4px 0 26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--r);padding:18px}
+.card h2{margin:0 0 8px;font-size:16px;color:#fff}
+.card p{margin:0 0 12px;color:var(--muted);font-size:13px}
+.btn{display:inline-block;background:var(--r);color:#fff;text-decoration:none;padding:10px 18px;font-weight:700;font-size:13px}
+.btn.alt{background:#17191f;border:1px solid var(--p);color:var(--p)}
+.btn.c{border:1px solid var(--c);color:var(--c);background:transparent}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+td,th{padding:8px 10px;border:1px solid #23262e;text-align:left}
+th{color:var(--c);background:#0d0f14}
+.status{display:inline-block;width:9px;height:9px;border-radius:50%;background:#555;margin-right:6px}
+.status.on{background:var(--g);box-shadow:0 0 8px var(--g)}
+hr{border:0;border-top:1px solid #23262e;margin:26px 0}
+small{color:var(--muted)}
+a{color:var(--c)}
+@media(max-width:600px){h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🏴‍☠️ BADCLAUDIO — ADMIN</h1>
+<div class="sub">Painel Master do Catálogo CZS • /claude/admin</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Dashboard Render</h2>
+    <p>Console, deploys e logs dos serviços da conta tibiaczs1.</p>
+    <a class="btn" href="https://dashboard.render.com" target="_blank" rel="noopener">ABRIR DASHBOARD</a>
+  </div>
+
+  <div class="card">
+    <h2>BadClaudio Master (CLI)</h2>
+    <p>Versão local em <code>C:\badclaudio</code> com chaves fora do código. Interfaces Normal e Clean em shell.</p>
+    <a class="btn alt" href="#master">INSTRUÇÕES DE USO</a>
+  </div>
+
+  <div class="card">
+    <h2>BadClaudio Diag (Omniroute)</h2>
+    <p>Claude com Omniroute para recuperação quando os canais principais caírem.</p>
+    <a class="btn alt" href="#diag">VER COMO ATIVAR</a>
+  </div>
+
+  <div class="card">
+    <h2>Agent Room 2D</h2>
+    <p>Escritório pixel art que reflete o estado do bridge.</p>
+    <a class="btn c" href="./agent-room/index.html" target="_blank" rel="noopener">ABRIR DEMO</a>
+  </div>
+
+  <div class="card">
+    <h2>Pacote do Cliente</h2>
+    <p>ZIP sem chaves, com interfaces CLI e condições comerciais.</p>
+    <a class="btn c" href="https://github.com/tibiaczs1-star/badclaudio" target="_blank" rel="noopener">REPO PÚBLICO</a>
+  </div>
+
+  <div class="card">
+    <h2>Condições Comerciais</h2>
+    <p>Preços, disponibilidade e estorno proporcional dos tokens pagos.</p>
+    <a class="btn c" href="https://github.com/tibiaczs1-star/badclaudio/raw/main/publico-site.zip" download>DOWNLOAD ZIP</a>
+  </div>
+</div>
+
+<hr>
+
+<h2 id="master" style="color:#fff;font-size:18px">BadClaudio Master — uso local</h2>
+<table>
+  <tr><th>Atalho</th><th>O que faz</th></tr>
+  <tr><td><code>BadClaudio-Master.bat</code></td><td>Interface Normal CLI (mascote, missões, histórico) com bridge local</td></tr>
+  <tr><td><code>BadClaudio-Clean.bat</code></td><td>Interface Clean CLI minimalista</td></tr>
+  <tr><td><code>BadClaudio-Diag.bat</code></td><td>Claude Code com Omniroute — recuperação de emergência</td></tr>
+  <tr><td><code>Render-Dashboard.bat</code></td><td>Abre o dashboard do Render no navegador</td></tr>
+</table>
+<p><small>Instalação: copie os quatro .bat para <code>C:\badclaudio</code> (a pasta já existe) e de dois cliques.
+O bridge lê <code>chaves.json</code> local; nunca suba esse arquivo para o Git.</small></p>
+
+<h2 id="diag" style="color:#fff;font-size:18px">BadClaudio Diag — recuperação via Omniroute</h2>
+<p>Quando todos os canais do bridge caírem, o Diag abre o Claude Code roteado pelo Omniroute
+(gateway local compatível, <code>http://127.0.0.1:20128</code>). O próprio bridge já tenta o Omniroute
+automaticamente como fallback; o Diag é a rota manual quando nem o bridge subir.</p>
+<p><small>Comando equivalente no terminal:</small></p>
+<p><code>set ANTHROPIC_BASE_URL=http://127.0.0.1:20128 &amp;&amp; claude</code></p>
+
+<hr>
+<small>BadClaudio Admin • Catálogo CZS &amp; Junior Play • Segurança: nenhuma chave de provedor nesta página.
+Conexões remotas sempre HTTPS; HTTP apenas em localhost.</small>
+</div>
+</body>
+</html>
