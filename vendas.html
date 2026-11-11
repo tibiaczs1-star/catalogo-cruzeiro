@@ -1,275 +1,684 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vendas Locais | Catalogo Cruzeiro do Sul</title>
-    <meta
-      name="description"
-      content="Pagina filha de vendas locais para anunciar itens, servicos, veiculos, eletronicos, moda, casa e ofertas de Cruzeiro do Sul."
-    />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta name="theme-color" content="#102744" />
-    <link rel="canonical" href="{{SITE_URL}}/vendas.html" />
-    <link rel="manifest" href="./site.webmanifest" />
-    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260415k" />
-    <link rel="stylesheet" href="./vendas-hub.css?v=20260415a" />
-    <link rel="stylesheet" href="./czs-design-system.css?v=5803365ec802" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Claude Turbo • Catalogo Cruzeiro do Sul</title>
+  <meta name="description" content="Acesso Ilimitado de Alta Performance ao Claude Code (Fable 5.1, Opus 5.5, Gemini 4) com 13 canais em cascata e garantia blindada pro-rata por hora.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07080a;
+      --bg-card: #0f1117;
+      --bg-card-hover: #151821;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(0, 210, 255, 0.35);
+      --accent-cyan: #00d2ff;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --text: #f4f4f6;
+      --text-muted: #8b8e9e;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.5;
+      padding: 0 0 80px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Topbar CZS */
+    .czs-topbar {
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 8, 10, 0.85);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .czs-topbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .czs-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .czs-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #000;
+      font-size: 16px;
+    }
+
+    .czs-brand-text {
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .czs-brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .czs-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--accent-green);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .czs-status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 900px;
+      margin: 50px auto 40px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      color: var(--accent-cyan);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #fff 20%, var(--accent-cyan) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Plans Grid */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .card.popular {
+      background: linear-gradient(180deg, #131722 0%, var(--bg-card) 100%);
+      border-color: var(--border-active);
+      box-shadow: 0 16px 48px rgba(0, 210, 255, 0.12);
+    }
+
+    .card-ribbon {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: var(--accent-cyan);
+      color: #000;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-header {
+      margin-bottom: 20px;
+    }
+
+    .plan-period {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .plan-name {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 4px 0 16px;
+      color: #fff;
+    }
+
+    .price-main {
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .price-meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .price-rate {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .features-list {
+      list-style: none;
+      margin: 22px 0 30px;
+      flex: 1;
+      font-size: 13.5px;
+      color: #ccc;
+    }
+
+    .features-list li {
+      margin-bottom: 11px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .features-list li::before {
+      content: '✓';
+      color: var(--accent-green);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      display: inline-block;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: #1e2029;
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #272a36;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-cyan {
+      background: var(--accent-cyan);
+      color: #000;
+      box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
+    }
+
+    .btn-cyan:hover {
+      background: #3ee2ff;
+      transform: translateY(-1px);
+    }
+
+    /* Garantia */
+    .guarantee-card {
+      background: rgba(16, 185, 129, 0.04);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .guarantee-icon {
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .guarantee-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .guarantee-text {
+      font-size: 13.5px;
+      color: #a1a1aa;
+      line-height: 1.6;
+    }
+
+    .guarantee-text b {
+      color: #fff;
+    }
+
+    /* Como Funciona a Liberacao */
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 50px;
+    }
+
+    .step-box {
+      background: #0d0e13;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Modal Pix */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #121319;
+      border: 1px solid var(--border-active);
+      border-radius: 20px;
+      max-width: 440px;
+      width: 100%;
+      padding: 28px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+      animation: pop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .qr-frame {
+      background: #fff;
+      padding: 12px;
+      border-radius: 14px;
+      display: inline-block;
+      margin: 16px 0 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .copia-box {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .copia-input {
+      flex: 1;
+      background: #08090d;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: var(--mono);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 20px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .plans-grid, .flow-steps { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
+      .guarantee-card { flex-direction: column; }
+    }
+  </style>
 </head>
-  <body class="sales-page construction-mode czs-official-system">
-    <div class="sales-shell">
-      <header class="sales-topbar">
-        <a class="sales-brand" href="./index.html">
-          <img src="./assets/logo-czs.svg" alt="" />
-          <span>Catalogo Cruzeiro do Sul</span>
-        </a>
-        <nav aria-label="Menu de vendas">
-          <a href="./index.html">Home</a>
-          <a href="./ninjas.html">Ninjas</a>
-          <a href="./catalogo-servicos.html?modulo=locacao-transporte">Locacao e transporte</a>
-          <a class="featured" href="#anunciar">Anunciar venda</a>
-        </nav>
-      </header>
+<body>
 
-      <aside class="launch-side-notice" aria-label="Aviso de pagina em construcao">
-        <span>em preparação</span>
-        <strong>robos trabalhando</strong>
-      </aside>
-
-      <section class="launch-construction-banner" aria-label="Vendas Locais em construcao">
-        <div class="launch-construction-copy">
-          <span>modo construcao</span>
-          <strong>Vendas Locais esta em preparação com robos organizando os cards do marketplace.</strong>
-          <p>
-            A vitrine ja mostra o caminho dos usados, mas lista publica, filtros, destaques
-            e revisao dos anuncios ainda estao sendo encaixados.
-          </p>
+  <!-- TOPBAR -->
+  <header class="czs-topbar">
+    <div class="czs-topbar-inner">
+      <a class="czs-brand" href="/">
+        <div class="czs-logo">CZS</div>
+        <div>
+          <span class="czs-brand-text">Catalogo Cruzeiro do Sul</span>
+          <span class="czs-brand-sub">Divisao de IA &amp; Automacao</span>
         </div>
-        <div class="launch-construction-bots" aria-hidden="true">
-          <span class="launch-build-crane"></span>
-          <span class="launch-build-card card-a"></span>
-          <span class="launch-build-card card-b"></span>
-          <span class="launch-build-card card-c"></span>
-          <span class="launch-build-bot bot-a"></span>
-          <span class="launch-build-bot bot-b"></span>
-          <span class="launch-build-bot bot-c"></span>
-          <span class="launch-build-bot bot-d"></span>
-          <span class="launch-build-spark spark-a"></span>
-          <span class="launch-build-spark spark-b"></span>
+      </a>
+      <div class="czs-status-pill">
+        <span class="czs-status-dot"></span>
+        <span>Rede Turbo 13 Canais Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">⚡ MOTOR DE ULTRA PERFORMANCE 2026</div>
+    <h1>Acesso Ilimitado ao <span>Claude Turbo</span></h1>
+    <p class="hero-subtitle">
+      Conecte-se ao poder maximo do Claude Fable 5.1, Opus 5.5 e Gemini com Ultracode e EGM. Sem rate limits travando seu fluxo, com roteamento continuo e garantia pro-rata por hora.
+    </p>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container">
+
+    <!-- 3 CARTOES DE PLANOS -->
+    <div class="plans-grid">
+
+      <!-- 1 DIA -->
+      <div class="card">
+        <div class="plan-header">
+          <span class="plan-period">Passe Rapido</span>
+          <h3 class="plan-name">1 Dia</h3>
+          <div class="price-main">R$ 20</div>
+          <div class="price-meta">24 horas de uso irrestrito</div>
+          <div class="price-rate">R$ 0,83 / hora</div>
         </div>
-      </section>
+        <ul class="features-list">
+          <li>Uso Ilimitado por 24 horas</li>
+          <li>Claude Fable 5.1 &amp; Opus 5.5</li>
+          <li>13 Canais com Failover em 0.1s</li>
+          <li>Ultracode + EGM habilitados</li>
+          <li>Ativacao instantanea via Pix</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="openPixModal('1d', 'Passe 1 Dia', 20, '24 horas', 'R$ 0,83/h')">
+          Comprar 1 Dia (R$ 20) ➔
+        </button>
+      </div>
 
-      <main class="sales-layout">
-        <section class="sales-hero">
-          <div class="sales-hero-copy">
-            <p class="sales-eyebrow">marketplace local de usados</p>
-            <h1>Anuncie celular, bike, movel, eletro e desapego local numa vitrine com cara de marketplace.</h1>
-            <p>
-              A pagina assume de vez a proposta de venda de usados com cara de feed local.
-              Celular, sofa, armario, bicicleta, fogao, ferramenta, roupa, item de bebe e outros achados
-              entram num fluxo de anuncio rapido para Cruzeiro do Sul e regiao.
-            </p>
-            <div class="sales-actions">
-              <a class="sales-button primary" href="#anunciar">Quero anunciar</a>
-              <a class="sales-button" href="#lista-vendas">Ver desapegos</a>
-            </div>
-          </div>
+      <!-- 7 DIAS -->
+      <div class="card">
+        <div class="plan-header">
+          <span class="plan-period">Semanal</span>
+          <h3 class="plan-name">7 Dias</h3>
+          <div class="price-main">R$ 80</div>
+          <div class="price-meta">168 horas continuas</div>
+          <div class="price-rate">R$ 0,47 / hora (43% OFF)</div>
+        </div>
+        <ul class="features-list">
+          <li>Uso Ilimitado por 7 dias</li>
+          <li>Prioridade de fila na cascata</li>
+          <li>Todos os 5 Orquestradores ativos</li>
+          <li>Suporte direto para instalacao</li>
+          <li>Garantia pro-rata integral</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="openPixModal('7d', 'Passe 7 Dias', 80, '168 horas', 'R$ 0,47/h')">
+          Comprar 7 Dias (R$ 80) ➔
+        </button>
+      </div>
 
-          <div class="sales-hero-stage" aria-hidden="true">
-            <div class="sales-stage-grid"></div>
-            <span class="sales-orb orb-a"></span>
-            <span class="sales-orb orb-b"></span>
+      <!-- 15 DIAS (DESTAQUE) -->
+      <div class="card popular">
+        <div class="card-ribbon">MAIS POPULAR</div>
+        <div class="plan-header">
+          <span class="plan-period" style="color:var(--accent-cyan);">Quinzenal</span>
+          <h3 class="plan-name">15 Dias</h3>
+          <div class="price-main">R$ 100</div>
+          <div class="price-meta">360 horas de autonomia total</div>
+          <div class="price-rate">R$ 0,27 / hora (67% OFF)</div>
+        </div>
+        <ul class="features-list">
+          <li><b>Uso Ilimitado por 15 dias</b></li>
+          <li>Maxima prioridade de throughput</li>
+          <li>Acesso a todos os lancamentos da rede</li>
+          <li>Scripts protegidos de 1-clique</li>
+          <li>Menor custo por hora garantido</li>
+        </ul>
+        <button class="btn btn-cyan" onclick="openPixModal('15d', 'Passe 15 Dias', 100, '360 horas', 'R$ 0,27/h')">
+          Garantir 15 Dias (R$ 100) ➔
+        </button>
+      </div>
 
-            <figure class="sales-pop-portal">
-              <div class="sales-pop-portal-shell">
-                <div class="sales-pop-hud">
-                  <span>usados</span>
-                  <span>eletronicos</span>
-                  <span>casa</span>
-                  <span>retirada local</span>
-                </div>
-
-                <div class="sales-pop-frame">
-                  <img
-                    src="./assets/sales-warehouse-pixel.svg"
-                    alt="Ilustracao em pixel art com varios trabalhadores separando itens usados, empilhando produtos e levando caixas para a esteira do marketplace local"
-                    loading="eager"
-                    decoding="async"
-                  />
-                  <div class="sales-pop-glow glow-left"></div>
-                  <div class="sales-pop-glow glow-right"></div>
-                </div>
-              </div>
-
-              <figcaption class="sales-pop-caption">
-                <span>marketplace de usados trabalhando</span>
-                <strong>gente separando, empilhando e levando itens para a esteira como um mercado local de desapegos</strong>
-              </figcaption>
-            </figure>
-
-            <article class="sales-floating-card card-a sales-pop-card">
-              <span>desapego do dia</span>
-              <strong>Celular, mesa, bike, sofa e eletro usado entrando rapido na vitrine local.</strong>
-            </article>
-
-            <article class="sales-floating-card card-b sales-pop-card mobility">
-              <span>giro rapido</span>
-              <strong>Foto boa, estado do item, retirada combinada e entrega no bairro puxando contato.</strong>
-            </article>
-          </div>
-        </section>
-
-        <section class="sales-panel" id="anunciar">
-          <div class="sales-section-head">
-            <div>
-              <p class="sales-eyebrow">formulario de venda</p>
-              <h2>Anuncie item, servico ou oferta com contato direto.</h2>
-            </div>
-            <p>
-              Preencha os dados principais. O sistema salva no backend e mostra a venda na lista
-              por tipo, deixando tudo pronto para migrar para banco persistente na hospedagem.
-            </p>
-          </div>
-
-          <form class="sales-form" id="sales-form">
-            <div class="sales-form-grid">
-              <label>
-                <span>O que voce quer vender?</span>
-                <input name="title" maxlength="120" placeholder="Ex: bicicleta aro 29, celular, sofa, servico de frete" required />
-              </label>
-              <label>
-                <span>Tipo</span>
-                <select name="category" required>
-                  <option value="eletronicos">Eletronicos</option>
-                  <option value="veiculos">Veiculos e transporte</option>
-                  <option value="casa">Casa e moveis</option>
-                  <option value="moda">Moda e acessorios</option>
-                  <option value="servicos">Servicos</option>
-                  <option value="outros">Outros</option>
-                </select>
-              </label>
-              <label>
-                <span>Preco</span>
-                <input name="price" maxlength="60" placeholder="Ex: R$ 350 / a combinar" />
-              </label>
-              <label>
-                <span>Estado do item</span>
-                <input name="condition" maxlength="80" placeholder="Ex: novo, usado, revisado, seminovo" />
-              </label>
-              <label>
-                <span>Seu nome</span>
-                <input name="sellerName" maxlength="90" placeholder="Ex: Joao do Centro" />
-              </label>
-              <label>
-                <span>WhatsApp ou telefone</span>
-                <input name="phone" maxlength="32" placeholder="Ex: (68) 99999-9999" required />
-              </label>
-              <label>
-                <span>Bairro</span>
-                <input name="neighborhood" maxlength="90" placeholder="Ex: Centro, Remanso, Cruzeirao" />
-              </label>
-              <label>
-                <span>Entrega ou retirada</span>
-                <input name="deliveryMode" maxlength="120" placeholder="Ex: buscar no bairro / entrego com taxa" />
-              </label>
-              <label class="full">
-                <span>Descricao</span>
-                <textarea
-                  name="description"
-                  rows="5"
-                  maxlength="1200"
-                  placeholder="Conte detalhes, marca, tamanho, motivo da venda, forma de entrega e qualquer informacao que ajude a pessoa a decidir."
-                ></textarea>
-              </label>
-            </div>
-
-            <div class="sales-form-actions">
-              <button class="sales-button primary" type="submit">Publicar venda</button>
-              <p id="sales-form-status" aria-live="polite">Depois de enviar, a oferta aparece na lista abaixo.</p>
-            </div>
-          </form>
-        </section>
-
-        <section class="sales-panel" id="lista-vendas">
-          <div class="sales-section-head">
-            <div>
-              <p class="sales-eyebrow">lista publica</p>
-              <h2>Itens de venda por tipo.</h2>
-            </div>
-            <p>Use os filtros para navegar entre eletronicos, veiculos, casa, moda, servicos e outros.</p>
-          </div>
-
-          <div class="sales-filter-row" role="group" aria-label="Filtrar vendas por tipo">
-            <button class="sales-filter is-active" type="button" data-sales-filter="">Todos</button>
-            <button class="sales-filter" type="button" data-sales-filter="eletronicos">Eletronicos</button>
-            <button class="sales-filter" type="button" data-sales-filter="veiculos">Veiculos</button>
-            <button class="sales-filter" type="button" data-sales-filter="casa">Casa</button>
-            <button class="sales-filter" type="button" data-sales-filter="moda">Moda</button>
-            <button class="sales-filter" type="button" data-sales-filter="servicos">Servicos</button>
-            <button class="sales-filter" type="button" data-sales-filter="outros">Outros</button>
-          </div>
-
-          <p class="sales-status" id="sales-list-status">Buscando vendas locais...</p>
-          <div class="sales-list-grid" id="sales-list"></div>
-        </section>
-
-        <section class="sales-panel sales-market-panel" id="rodape-mercado">
-          <div class="sales-section-head">
-            <div>
-              <p class="sales-eyebrow">rodape do marketplace</p>
-              <h2>Categorias que mais giram num marketplace local de usados.</h2>
-            </div>
-            <p>
-              O rodape termina com as frentes que mais fazem sentido aqui:
-              eletronico, casa, mobilidade, moda, ferramenta e eletro para dar leitura rapida da oferta local.
-            </p>
-          </div>
-
-          <div class="sales-market-grid" aria-label="Cards de categorias de usados">
-            <article class="sales-market-card devices">
-              <span>eletronicos usados</span>
-              <h3>Celulares e notebooks</h3>
-              <p>Smartphone, tablet, notebook, videogame, monitor e acessorio que costumam girar rapido.</p>
-            </article>
-
-            <article class="sales-market-card home">
-              <span>casa e moveis</span>
-              <h3>Sofa, armario e mesa</h3>
-              <p>Itens grandes com retirada combinada, foto clara e negociacao direta pelo bairro.</p>
-            </article>
-
-            <article class="sales-market-card mobility">
-              <span>mobilidade</span>
-              <h3>Bikes e transporte</h3>
-              <p>Bicicleta, moto, capacete, cadeirinha e item de deslocamento com procura local forte.</p>
-            </article>
-
-            <article class="sales-market-card fashion">
-              <span>moda e infantil</span>
-              <h3>Roupa, calcado e bebe</h3>
-              <p>Lote, desapego, roupa semi nova, carrinho, berco e item infantil com giro constante.</p>
-            </article>
-
-            <article class="sales-market-card tools">
-              <span>obra e servico</span>
-              <h3>Ferramentas e oficina</h3>
-              <p>Parafusadeira, maquina, escada, compressor e itens de trabalho que pedem vitrine objetiva.</p>
-            </article>
-
-            <article class="sales-market-card electro">
-              <span>eletro e cozinha</span>
-              <h3>Fogao, geladeira e utilidade</h3>
-              <p>Item de casa, cozinha e rotina com espaco para condicao, retirada e bairro logo no card.</p>
-            </article>
-          </div>
-        </section>
-      </main>
     </div>
 
-    <script defer src="./runtime-config.js?v=20260415d"></script>
-    <script defer src="./analytics-client.js?v=20260428consent1"></script>
-    <script defer src="./vendas.js?v=20260415b"></script>
-    <script defer src="./czs-design-system.js?v=20260603-official-ds1"></script>
+    <!-- GARANTIA BLINDADA -->
+    <div class="guarantee-card">
+      <div class="guarantee-icon">🛡️</div>
+      <div>
+        <h4 class="guarantee-title">Garantia Blindada com Devolucao Pro-Rata por Hora</h4>
+        <p class="guarantee-text">
+          Se você encontrar qualquer problema técnico em qualquer solucao implementada que nossa equipe nao consiga resolver, 
+          <b>nos devolvemos o valor do tempo restante que sobrou</b>. 
+          Como o acesso e ilimitado, a devolução e dividida por hora desde a liberação da conta. 
+          <i>Exemplo:</i> Usou 4 horas do Passe de 1 Dia (R$ 0,83/h)? Consumiu apenas R$ 3,32 e <b>devolvemos R$ 16,68 imediatamente via Pix</b>. Risco rigorosamente zero para voce.
+        </p>
+      </div>
+    </div>
+
+    <!-- PASSO A PASSO -->
+    <div style="margin-bottom: 20px; text-align: center;">
+      <h3 style="color:#fff; font-size:20px; font-weight:700;">Como Funciona o Acesso em 3 Passos</h3>
+    </div>
+    <div class="flow-steps">
+      <div class="step-box">
+        <div class="step-num">PASSO 01</div>
+        <h4 class="step-title">Escolha e Pague no Pix</h4>
+        <p class="step-desc">Selecione seu passe, escaneie o QR Code ou copie a chave Pix com valor exato.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">PASSO 02</div>
+        <h4 class="step-title">Envie o Comprovante</h4>
+        <p class="step-desc">Clique no botão do WhatsApp para enviar o comprovante diretamente ao suporte.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">PASSO 03</div>
+        <h4 class="step-title">Receba o Script Protegido</h4>
+        <p class="step-desc">Assim que validamos, você recebe o comando de 1-clique que configura tudo no seu PC na hora!</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL PIX CHECKOUT -->
+  <div id="pix-modal" class="modal">
+    <div class="modal-box">
+      <button class="close-btn" onclick="closePixModal()">&times;</button>
+      
+      <span class="czs-status-pill" style="margin-bottom:12px;">PAGAMENTO PIX DIRETO</span>
+      <h3 id="modal-title" style="color:#fff; font-size:22px; margin:4px 0;">Passe 15 Dias</h3>
+      <div id="modal-price" style="font-size:32px; font-weight:800; color:var(--accent-cyan); margin:6px 0;">R$ 100,00</div>
+      <p id="modal-rate" style="color:var(--text-muted); font-size:12px; margin-bottom:12px;">Tarifa: R$ 0,27/h • 360 horas de acesso</p>
+
+      <div class="qr-frame">
+        <img id="modal-qr" src="" alt="QR Code Pix" style="width:160px; height:160px; display:block;">
+      </div>
+
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Pague via Pix e mande o comprovante para liberarmos sua senha:</p>
+
+      <div class="copia-box">
+        <input type="text" id="modal-copia" class="copia-input" readonly value="">
+        <button class="btn btn-secondary" style="width:auto; padding:8px 14px; font-size:12px;" onclick="copyCode()">Copiar</button>
+      </div>
+
+      <div style="margin-top:18px;">
+        <a id="modal-zap-btn" href="#" target="_blank" class="btn btn-cyan" style="font-size:13.5px; padding:13px; text-decoration:none;">
+          📲 Enviar Comprovante no WhatsApp ➔
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="max-width:800px; margin:0 auto;">
+      <p>© 2026 Catalogo Cruzeiro do Sul • Desenvolvido com padrao Masterpiece por Clovis Sampaio.</p>
+      <p style="margin-top:6px; font-size:12px; color:var(--text-muted);">
+        Cruzeiro do Sul, Acre • Brasil • Suporte Comercial VIP 24h
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const CHAVE_PIX = "pix-unicenter@czslabs.com";
+
+    function openPixModal(id, title, price, duration, rate) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-price').textContent = `R$ ${price},00`;
+      document.getElementById('modal-rate').textContent = `Tarifa: ${rate} • ${duration} de acesso total`;
+
+      const pixPayload = `00020126580014BR.GOV.BCB.PIX0136${CHAVE_PIX}5204000053039865405${price}.005802BR5918CATALOGO CRUZEIRO6009CRUZEIRO 62070503***6304`;
+      
+      document.getElementById('modal-copia').value = pixPayload;
+      document.getElementById('modal-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(pixPayload)}`;
+
+      const zapText = `Olá Clovis! Acabei de fazer o Pix do *${title} (R$ ${price},00)* no Catálogo CZS. Segue o comprovante em anexo para validação e liberação do meu script do Claude Turbo!`;
+      document.getElementById('modal-zap-btn').href = `https://api.whatsapp.com/send?phone=5568999999999&text=${encodeURIComponent(zapText)}`;
+
+      document.getElementById('pix-modal').style.display = 'flex';
+    }
+
+    function closePixModal() {
+      document.getElementById('pix-modal').style.display = 'none';
+    }
+
+    function copyCode() {
+      const el = document.getElementById('modal-copia');
+      el.select();
+      el.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(el.value).then(() => {
+        alert('Chave Pix Copia e Cola copiada com sucesso!');
+      }).catch(() => {
+        document.execCommand('copy');
+        alert('Chave Pix copiada!');
+      });
+    }
+
+    window.onclick = function(e) {
+      const m = document.getElementById('pix-modal');
+      if (e.target === m) closePixModal();
+    };
+  </script>
 </body>
 </html>
