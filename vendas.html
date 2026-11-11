@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acesso Claudio Turbo • Catalogo Cruzeiro do Sul</title>
-  <meta name="description" content="Acesso Ilimitado de Alta Performance ao Claudio Code (Fable 5.1, Opus 5.5, Gemini 4) com 13 canais em cascata e garantia blindada pro-rata por hora.">
+  <meta name="description" content="Acesso Ilimitado de Alta Performance ao Claudio (Fable 5.1, Opus 5.5, Gemini 4) com 13 canais em cascata, garantia blindada pro-rata por hora e instalador unico Claudio.exe.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./claudio_logo.png" type="image/png">
   <style>
     :root {
       --bg: #07080a;
@@ -49,7 +50,7 @@
     .czs-topbar-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -62,17 +63,11 @@
       text-decoration: none;
     }
 
-    .czs-logo {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #000;
-      font-size: 16px;
+    .czs-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      border: 1px solid var(--border-active);
     }
 
     .czs-brand-text {
@@ -111,9 +106,23 @@
     /* Hero */
     .hero {
       max-width: 900px;
-      margin: 50px auto 40px;
+      margin: 40px auto 35px;
       text-align: center;
       padding: 0 20px;
+    }
+
+    .hero-logo-img {
+      width: 104px;
+      height: 104px;
+      border-radius: 26px;
+      box-shadow: 0 10px 40px rgba(0, 210, 255, 0.35);
+      border: 2px solid var(--border-active);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-logo-img:hover {
+      transform: scale(1.04) rotate(1deg);
     }
 
     .hero-badge {
@@ -128,14 +137,14 @@
       padding: 6px 14px;
       border-radius: 999px;
       letter-spacing: 0.5px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     h1 {
       font-size: 42px;
       font-weight: 800;
       letter-spacing: -1px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       line-height: 1.15;
     }
 
@@ -165,7 +174,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     .card {
@@ -314,8 +323,8 @@
       background: rgba(16, 185, 129, 0.04);
       border: 1px solid rgba(16, 185, 129, 0.25);
       border-radius: 18px;
-      padding: 26px;
-      margin-bottom: 40px;
+      padding: 24px;
+      margin-bottom: 30px;
       display: flex;
       gap: 20px;
       align-items: flex-start;
@@ -343,12 +352,111 @@
       color: #fff;
     }
 
+    /* Indique e Ganhe Box */
+    .referral-box {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.08), rgba(16, 185, 129, 0.08));
+      border: 1px solid var(--border-active);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .referral-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .referral-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .referral-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .referral-desc {
+      font-size: 13.5px;
+      color: #a1a1aa;
+    }
+
+    /* Vitrine Outros Produtos */
+    .ecosystem-section {
+      margin-bottom: 40px;
+    }
+
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .eco-card {
+      background: #0c0d12;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+
+    .eco-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .eco-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .eco-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .eco-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .eco-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+
     /* Como Funciona a Liberacao */
     .flow-steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     .step-box {
@@ -457,7 +565,7 @@
     }
 
     @media (max-width: 860px) {
-      .plans-grid, .flow-steps { grid-template-columns: 1fr; }
+      .plans-grid, .flow-steps, .ecosystem-grid { grid-template-columns: 1fr; }
       h1 { font-size: 32px; }
       .guarantee-card { flex-direction: column; }
     }
@@ -469,7 +577,7 @@
   <header class="czs-topbar">
     <div class="czs-topbar-inner">
       <a class="czs-brand" href="/">
-        <div class="czs-logo">CZS</div>
+        <img src="./claudio_logo.png" alt="Claudio Logo">
         <div>
           <span class="czs-brand-text">Catalogo Cruzeiro do Sul</span>
           <span class="czs-brand-sub">Divisao de IA &amp; Automacao</span>
@@ -484,11 +592,19 @@
 
   <!-- HERO -->
   <section class="hero">
+    <img src="./claudio_logo.png" class="hero-logo-img" alt="Claudio Turbo Icon">
     <div class="hero-badge">⚡ MOTOR DE ULTRA PERFORMANCE 2026</div>
     <h1>Acesso Ilimitado ao <span>Claudio Turbo</span></h1>
     <p class="hero-subtitle">
       Conecte-se ao poder maximo do Claude Fable 5.1, Opus 5.5 e Gemini com Ultracode e EGM. Sem rate limits travando seu fluxo, com roteamento continuo e garantia pro-rata por hora.
     </p>
+    
+    <!-- BOTAO DE DOWNLOAD DIRETO DO EXE UNICO -->
+    <div style="margin-top:22px;">
+      <a href="https://raw.githubusercontent.com/tibiaczs1-star/claude-turbo-vendas/main/dist/Claudio.exe" download class="btn btn-cyan" style="max-width:340px; margin:0 auto; font-size:14px; padding:13px 24px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+        <span>🎮 Baixar Claudio.exe (Um Arquivo So • 58 KB)</span>
+      </a>
+    </div>
   </section>
 
   <!-- MAIN CONTAINER -->
@@ -563,6 +679,22 @@
 
     </div>
 
+    <!-- INDIQUE E GANHE -->
+    <div class="referral-box">
+      <div class="referral-content">
+        <div class="referral-tag">🤝 PROGRAMA VIRAL DE RECOMPENSAS</div>
+        <h4 class="referral-title">Indique um Amigo e Ganhe Acesso Gratis!</h4>
+        <p class="referral-desc">
+          Indicou 1 amigo que assinou o plano semanal (7 dias)? Você ganha <b>1 DIA DE ACESSO GRÁTIS (24 horas)</b> adicionado automaticamente na sua conta. Sem limites de indicacao!
+        </p>
+      </div>
+      <div>
+        <a href="https://api.whatsapp.com/send?phone=5568999999999&text=Ola!%20Quero%20indicar%20um%20amigo%20para%20o%20Claudio%20Turbo" target="_blank" class="btn btn-secondary" style="width:auto; padding:11px 20px; font-size:13px; text-decoration:none;">
+          Gerar Link de Indicacao ➔
+        </a>
+      </div>
+    </div>
+
     <!-- GARANTIA BLINDADA -->
     <div class="guarantee-card">
       <div class="guarantee-icon">🛡️</div>
@@ -574,6 +706,55 @@
           Como o acesso e ilimitado, a devolução e dividida por hora desde a liberação da conta. 
           <i>Exemplo:</i> Usou 4 horas do Passe de 1 Dia (R$ 0,83/h)? Consumiu apenas R$ 3,32 e <b>devolvemos R$ 16,68 imediatamente via Pix</b>. Risco rigorosamente zero para voce.
         </p>
+      </div>
+    </div>
+
+    <!-- VITRINE OUTROS PRODUTOS DO ECOSSISTEMA -->
+    <div class="ecosystem-section">
+      <div style="text-align: center; margin-bottom: 6px;">
+        <span class="czs-status-pill" style="margin-bottom:8px;">SOLUCOES INTEGRADAS</span>
+        <h3 style="color:#fff; font-size:22px; font-weight:800;">Outros Produtos do Ecossistema CZS Labs</h3>
+      </div>
+
+      <div class="ecosystem-grid">
+        <!-- UNILABS -->
+        <div class="eco-card">
+          <span class="eco-badge" style="background:rgba(139, 92, 246, 0.15); color:var(--accent-purple);">PRE-LANCAMENTO</span>
+          <h4 class="eco-title">UniLabs Studio</h4>
+          <p class="eco-desc">
+            Laboratorio autonomo de agentes com 40 especialistas integrados, clonagem de voz e pipelines locais de geracao.
+          </p>
+          <div class="eco-price">Acesso VIP</div>
+          <a href="https://api.whatsapp.com/send?phone=5568999999999&text=Ola!%20Quero%20acesso%20ao%20pre-lancamento%20do%20UniLabs" target="_blank" class="btn btn-secondary" style="font-size:12.5px; padding:10px;">
+            Entrar na Lista VIP ➔
+          </a>
+        </div>
+
+        <!-- IPTV -->
+        <div class="eco-card" style="border-color:rgba(0, 210, 255, 0.25);">
+          <span class="eco-badge" style="background:rgba(0, 210, 255, 0.15); color:var(--accent-cyan);">ALTA ESTABILIDADE</span>
+          <h4 class="eco-title">IPTV Premium CZS</h4>
+          <p class="eco-desc">
+            Mais de 2.500 canais em 4K, filmes, series e esportes ao vivo com servidor dedicado e zero travamento.
+          </p>
+          <div class="eco-price">R$ 40,00 <span style="font-size:12px; color:var(--text-muted); font-weight:400;">/ mes</span></div>
+          <a href="https://api.whatsapp.com/send?phone=5568999999999&text=Ola!%20Quero%20assinar%20o%20IPTV%20Premium%20por%20R$%2040" target="_blank" class="btn btn-cyan" style="font-size:12.5px; padding:10px;">
+            Assinar IPTV (R$ 40) ➔
+          </a>
+        </div>
+
+        <!-- VIRAIS -->
+        <div class="eco-card">
+          <span class="eco-badge" style="background:rgba(245, 158, 11, 0.15); color:var(--accent-amber);">AUTOMACAO VIRAL</span>
+          <h4 class="eco-title">Fabrica de Videos Virais</h4>
+          <p class="eco-desc">
+            Cortes automaticos no formato 9:16 com ganchos magneticos de 3s, legendas sincronizadas para TikTok e Reels.
+          </p>
+          <div class="eco-price">Escala Mensal</div>
+          <a href="https://api.whatsapp.com/send?phone=5568999999999&text=Ola!%20Quero%20saber%20mais%20sobre%20a%20Fabrica%20de%20Videos%20Virais" target="_blank" class="btn btn-secondary" style="font-size:12.5px; padding:10px;">
+            Ver Demonstracao ➔
+          </a>
+        </div>
       </div>
     </div>
 
@@ -594,23 +775,23 @@
       </div>
       <div class="step-box">
         <div class="step-num">PASSO 03</div>
-        <h4 class="step-title">Receba o Script Protegido</h4>
-        <p class="step-desc">Assim que validamos, você recebe o comando de 1-clique que configura tudo no seu PC na hora!</p>
+        <h4 class="step-title">Receba o Claudio.exe</h4>
+        <p class="step-desc">Você recebe o executável único que instala tudo, pede suas preferências e já abre pronto!</p>
       </div>
     </div>
 
     <!-- AREA DE AUTO-UPDATE & VALIDAÇÃO DO CLIENTE -->
     <div style="background:#0f1117; border:1px solid var(--border-active); border-radius:18px; padding:26px; margin-top:20px; text-align:center;">
-      <span class="czs-status-pill" style="margin-bottom:10px;">AREA DO CLIENTE • AUTO-UPDATE ATIVO (v2.2.0)</span>
+      <span class="czs-status-pill" style="margin-bottom:10px;">AREA DO CLIENTE • AUTO-UPDATE ATIVO (v2.5.0)</span>
       <h3 style="color:#fff; font-size:18px; margin:6px 0 8px;">Ja possui uma licenca ativa?</h3>
       <p style="color:var(--text-muted); font-size:13px; max-width:600px; margin:0 auto 16px;">
-        Nosso iniciador atualiza automaticamente toda vez que você executa. Se precisar baixar o script protegido novamente no seu computador:
+        Nosso executável atualiza automaticamente toda vez que você executa. Se precisar baixar o Claudio.exe novamente no seu computador:
       </p>
       <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-        <a href="https://raw.githubusercontent.com/tibiaczs1-star/claude-turbo-vendas/main/dist/iniciar-claude-turbo.bat" download class="btn btn-secondary" style="width:auto; padding:10px 20px; font-size:13px; text-decoration:none;">
-          ⬇ Baixar Iniciador Protegido (.bat)
+        <a href="https://raw.githubusercontent.com/tibiaczs1-star/claude-turbo-vendas/main/dist/Claudio.exe" download class="btn btn-secondary" style="width:auto; padding:10px 20px; font-size:13px; text-decoration:none;">
+          ⬇ Baixar Claudio.exe (58 KB)
         </a>
-        <a href="https://api.whatsapp.com/send?phone=5568999999999&text=Ola!%20Preciso%20de%20suporte%20com%20minha%20chave%20do%20Claude%20Turbo" target="_blank" class="btn btn-cyan" style="width:auto; padding:10px 20px; font-size:13px; text-decoration:none;">
+        <a href="https://api.whatsapp.com/send?phone=5568999999999&text=Ola!%20Preciso%20de%20suporte%20com%20minha%20chave%20do%20Claudio%20Turbo" target="_blank" class="btn btn-cyan" style="width:auto; padding:10px 20px; font-size:13px; text-decoration:none;">
           💬 Suporte VIP no WhatsApp
         </a>
       </div>
@@ -670,7 +851,7 @@
       document.getElementById('modal-copia').value = pixPayload;
       document.getElementById('modal-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(pixPayload)}`;
 
-      const zapText = `Olá Clovis! Acabei de fazer o Pix do *${title} (R$ ${price},00)* no Catálogo CZS. Segue o comprovante em anexo para validação e liberação do meu script do Claudio Turbo!`;
+      const zapText = `Olá Clovis! Acabei de fazer o Pix do *${title} (R$ ${price},00)* no Catálogo CZS. Segue o comprovante em anexo para validação e liberação do meu Claudio.exe!`;
       document.getElementById('modal-zap-btn').href = `https://api.whatsapp.com/send?phone=5568999999999&text=${encodeURIComponent(zapText)}`;
 
       document.getElementById('pix-modal').style.display = 'flex';
