@@ -357,15 +357,15 @@ body.menu-open{overflow:hidden}
 
 /* ---------------- preços ---------------- */
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);margin-top:clamp(32px,4.4vw,52px);align-items:stretch}
-.plan{position:relative;display:flex;flex-direction:column;padding:clamp(24px,2.9vw,34px);background:linear-gradient(170deg,rgba(14,18,26,.9),rgba(7,9,14,.96));border:1px solid var(--line);border-radius:3px;transition:border-color .4s,transform .4s var(--ease),box-shadow .45s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.plan{position:relative;display:flex;flex-direction:column;padding:clamp(24px,2.9vw,34px);background:linear-gradient(170deg,rgba(14,18,26,.9),rgba(7,9,14,.96));border:1px solid var(--line);border-radius:3px;transition:border-color .4s,transform .4s var(--ease),box-shadow .45s}
 .plan:hover{transform:translateY(-4px);border-color:rgba(110,231,255,.3);box-shadow:0 30px 64px -40px rgba(110,231,255,.6)}
 .plan--hi{border-color:rgba(110,231,255,.42);background:linear-gradient(170deg,rgba(110,231,255,.075),rgba(7,9,15,.97) 46%);box-shadow:inset 0 0 0 1px rgba(110,231,255,.08),0 30px 70px -46px rgba(110,231,255,.7)}
 .plan--hi:hover{border-color:rgba(110,231,255,.65)}
 .plan-badge{position:absolute;top:-11px;left:clamp(24px,2.9vw,34px);padding:5px 10px;border-radius:999px;background:var(--ice);color:#04202a;font:600 8.5px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;box-shadow:0 0 22px -2px rgba(110,231,255,.8)}
 .plan-k{font:500 9px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
 .plan h3{font-family:var(--display);font-size:20px;font-weight:600;margin-top:14px}
-.plan .price{display:flex;align-items:baseline;gap:6px;margin-top:16px;padding-bottom:18px;border-bottom:1px solid var(--line-2);font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:clamp(24px,2.5vw,31px);line-height:1}
-.plan .price small{font:400 8.5px/1.35 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--dim);max-width:13ch;margin-left:auto;text-align:right}
+.plan .price{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:16px;padding-bottom:18px;border-bottom:1px solid var(--line-2);font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:clamp(24px,2.5vw,31px);line-height:1}
+.plan .price small{font:400 8.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);max-width:none}
 .plan--hi .price{color:#fff}
 .plan p.d{margin-top:16px;font-size:13.5px;line-height:1.6;color:var(--muted);min-height:3.2em;text-wrap:pretty}
 .plan ul{margin-top:16px;display:grid;gap:8px;font-size:13px;color:var(--ink-2);flex:1}
@@ -509,6 +509,8 @@ body.menu-open{overflow:hidden}
 }
 @media (max-width:680px){
   .fronts{grid-template-columns:1fr}
+  .eyebrow{letter-spacing:.18em;font-size:9px;gap:9px}
+  .eyebrow::before{width:16px}
   .card{padding:24px}
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta .btn{width:100%}
@@ -873,7 +875,7 @@ body.menu-open{overflow:hidden}
         <article class="plan" data-reveal>
           <span class="plan-k" data-i18n="plans.p1k">Entrada</span>
           <h3 data-i18n="plans.p1t">Automação</h3>
-          <div class="price"><span>R$&nbsp;2.400</span><small data-i18n="plans.p1p">projeto único</small></div>
+          <div class="price"><small data-i18n="plans.p1p">projeto único</small><span>R$&nbsp;2.400</span></div>
           <p class="d" data-i18n="plans.p1d">Um fluxo de IA que resolve uma tarefa repetitiva do seu negócio.</p>
           <ul>
             <li data-i18n="plans.p1l1">Diagnóstico do processo</li>
@@ -888,7 +890,7 @@ body.menu-open{overflow:hidden}
           <span class="plan-badge" data-i18n="plans.p2k">Mais pedido</span>
           <span class="plan-k" data-i18n="04.plansMid">recomendado</span>
           <h3 data-i18n="plans.p2t">Sistema</h3>
-          <div class="price"><span>R$&nbsp;9.800</span><small data-i18n="plans.p2p">a partir de</small></div>
+          <div class="price"><small data-i18n="plans.p2p">a partir de</small><span>R$&nbsp;9.800</span></div>
           <p class="d" data-i18n="plans.p2d">Produto completo com painel, agentes e integrações, pronto para operar.</p>
           <ul>
             <li data-i18n="plans.p2l1">Tudo do pacote Automação</li>
@@ -903,7 +905,7 @@ body.menu-open{overflow:hidden}
         <article class="plan" data-reveal style="--d:.16s">
           <span class="plan-k" data-i18n="plans.p3k">Sob medida</span>
           <h3 data-i18n="plans.p3t">Estúdio</h3>
-          <div class="price"><span>R$&nbsp;24.000</span><small data-i18n="plans.p3p">escopo fechado</small></div>
+          <div class="price"><small data-i18n="plans.p3p">escopo fechado</small><span>R$&nbsp;24.000</span></div>
           <p class="d" data-i18n="plans.p3d">Jogo, experiência 3D ou produto digital de ponta a ponta.</p>
           <ul>
             <li data-i18n="plans.p3l1">Descoberta e protótipo</li>
@@ -1778,6 +1780,9 @@ body.menu-open{overflow:hidden}
     }
 
     function draw(now) {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#061016';
+      ctx.fillRect(0, 0, w, h);
       var horizon = h * 0.43;
       var sky = ctx.createLinearGradient(0, 0, 0, horizon);
       sky.addColorStop(0, '#050b10');
