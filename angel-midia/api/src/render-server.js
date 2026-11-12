@@ -19,8 +19,30 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const mediaDir = path.join(process.env.DATA_DIR || path.resolve('render-data'), 'angel-midia');
 const db = createDatabase({ databaseUrl });
 
-await mkdir(mediaDir, { recursive: true });
-await applyMigrations({ db, migrations: await loadMigrations(path.join(here, '..', 'migrations')) });
+// Checagem de sanidade do banco: se o Postgres nao existir mais, avisa curto
+// e sai com codigo 0 (servico opcional) em vez de derrubar com stack trace.
+function hostOf(url) {
+  try { return new URL(url).hostname; } catch { return '(url invalida)'; }
+}
+try {
+  await db.query('select 1');
+} catch (error) {
+  const code = error && error.code ? error.code : 'erro';
+  console.warn(
+    `[angel-midia] banco indisponivel (${code}) em ${hostOf(databaseUrl)}. ` +
+    'A API da Angel Midia fica desligada; o site do Catalogo segue normal. ' +
+    'Para reativar, configure ANGEL_DATABASE_URL com um Postgres valido.'
+  );
+  process.exit(0);
+}
+
+try {
+  await mkdir(mediaDir, { recursive: true });
+  await applyMigrations({ db, migrations: await loadMigrations(path.join(here, '..', 'migrations')) });
+} catch (error) {
+  console.warn(`[angel-midia] falha ao preparar o banco (${error && error.code ? error.code : 'erro'}): ${error && error.message ? error.message : error}`);
+  process.exit(0);
+}
 await db.query(
   `INSERT INTO admins (id, email, password_hash, name)
    VALUES ($1, $2, $3, $4)

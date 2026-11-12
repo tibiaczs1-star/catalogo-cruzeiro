@@ -22029,7 +22029,13 @@ function startAngelApi() {
     env: { ...process.env, ANGEL_INTERNAL_PORT: String(ANGEL_INTERNAL_PORT) },
     stdio: "inherit"
   });
-  angelApiProcess.on("exit", (code) => console.warn(`[angel-midia] API encerrada (${code})`));
+  angelApiProcess.on("exit", (code) => {
+    if (code === 0) {
+      console.warn("[angel-midia] API desligada (servico opcional). O Catalogo segue normal.");
+    } else {
+      console.warn(`[angel-midia] API encerrada com erro (${code}). O Catalogo segue normal.`);
+    }
+  });
 }
 
 const server = http.createServer(async (req, res) => {
