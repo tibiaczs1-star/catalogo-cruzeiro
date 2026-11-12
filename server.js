@@ -21660,6 +21660,21 @@ async function handleStatic(req, res, pathname, requestUrl) {
       }
 
       // CZS 2026-11-11 — BadClaudio Admin: subpagina /claude/admin
+      // CZS 2026-11-11 — BadClaudio Agent Room: sala dos agentes (subpagina /claude/agent-room)
+      if (pathname === "/claude/agent-room" || pathname === "/claude/agent-room/") {
+        return sendFile(req, res, path.join(ROOT_DIR, "claude", "agent-room", "index.html"), {
+          cacheControl: "no-store"
+        });
+      }
+      if (pathname.startsWith("/claude/agent-room/assets/")) {
+        const rel = pathname.slice("/claude/agent-room/assets/".length).replace(/\.\./g, "");
+        const file = path.join(ROOT_DIR, "claude", "agent-room", "assets", rel);
+        if (path.extname(file).toLowerCase() === ".png" && fs.existsSync(file) && fs.statSync(file).isFile()) {
+          return sendFile(req, res, file, { cacheControl: "public, max-age=86400" });
+        }
+        return sendText(res, 404, "Asset não encontrado.");
+      }
+
       if (pathname === "/claude/admin") {
         return sendFile(req, res, path.join(ROOT_DIR, "claude", "admin.html"), {
           cacheControl: "no-store"
