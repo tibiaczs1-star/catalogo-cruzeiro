@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BADCLAUDE — Estúdio de software no Vale do Juruá</title>
-<meta name="description" content="BADCLAUDE é um estúdio indie em Cruzeiro do Sul, Acre. Jogos 3D como JURUÁ, sistemas web com agentes de IA e sites desenhados em código — do primeiro risco ao produto rodando.">
+<title>BADCLAUDE — Estúdio de software que escolhe linguagem por problema</title>
+<meta name="description" content="BADCLAUDE é um estúdio indie que escolhe a linguagem pelo problema: JavaScript, Python, Rust, Go e C#. Sistemas web, automação com IA e interfaces desenhadas em código.">
 <meta name="theme-color" content="#f6f0e4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BADCLAUDE">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="BADCLAUDE — Eu me construí. Eu me desfaço e me refaço.">
-<meta property="og:description" content="Jogos 3D, sistemas com IA e sites. Um estúdio de software independente no Vale do Juruá, Acre.">
+<meta property="og:description" content="Sistemas web, automação com IA e sites. Um estúdio independente que escolhe a linguagem pelo problema.">
 <meta property="og:url" content="https://badclaude.dev/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f6f0e4'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%231f1a14'/%3E%3Ccircle cx='11' cy='9.6' r='2.7' fill='%231f1a14'/%3E%3Ccircle cx='21' cy='9.6' r='2.7' fill='%231f1a14'/%3E%3Ccircle cx='13' cy='15' r='1.8' fill='%23f6f0e4'/%3E%3Ccircle cx='19' cy='15' r='1.8' fill='%23f6f0e4'/%3E%3C/svg%3E">
@@ -477,41 +477,41 @@ button{font:inherit;color:inherit}
 .front:focus-visible{outline:2px solid var(--terra);outline-offset:-4px}
 
 /* ============================================================
-   JURUÁ — caderno escuro
+   LINGUAGENS — caderno escuro
    ============================================================ */
-.jurua{
+.linguagens{
   position:relative;background:var(--ink);color:#f2e9d7;
   padding:clamp(60px,9vw,128px) 0;overflow:hidden;margin-top:clamp(40px,6vw,80px)
 }
-.jurua .map{
+.linguagens .map{
   position:absolute;inset:0;width:100%;height:100%;color:var(--terra);
   opacity:.3;pointer-events:none
 }
-.jurua .glow{
+.linguagens .glow{
   position:absolute;left:-10%;bottom:-30%;width:60vw;height:60vw;max-width:760px;max-height:760px;
   background:radial-gradient(circle,rgba(176,58,46,.3),rgba(176,58,46,0) 65%);
   pointer-events:none
 }
-.jurua-in{position:relative;z-index:1}
-.jurua .sec-head{border-color:rgba(242,233,215,.22)}
-.jurua .sec-title{color:#f6efe0}
-.jurua .sec-title em{color:var(--terra-pale)}
-.jurua .sec-note{color:rgba(242,233,215,.6)}
-.jurua-grid{
+.linguagens-in{position:relative;z-index:1}
+.linguagens .sec-head{border-color:rgba(242,233,215,.22)}
+.linguagens .sec-title{color:#f6efe0}
+.linguagens .sec-title em{color:var(--terra-pale)}
+.linguagens .sec-note{color:rgba(242,233,215,.6)}
+.linguagens-grid{
   display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
   gap:clamp(30px,5vw,78px);padding-top:clamp(30px,4vw,54px)
 }
-.jurua-copy p{
+.linguagens-copy p{
   font:400 15px/1.78 var(--sans);color:rgba(242,233,215,.76);margin-bottom:1em;
   max-width:56ch
 }
-.jurua-copy p:first-child{font-size:17px;color:rgba(246,239,224,.94)}
-.jurua-copy p:first-child::first-letter{
+.linguagens-copy p:first-child{font-size:17px;color:rgba(246,239,224,.94)}
+.linguagens-copy p:first-child::first-letter{
   float:left;font-family:var(--serif);font-weight:500;
   font-size:3.1em;line-height:.86;padding:.06em .1em 0 0;color:var(--terra-pale)
 }
-.jurua-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.jurua-tags li{
+.linguagens-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.linguagens-tags li{
   font:500 8.8px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
   color:rgba(242,233,215,.72);border:1px solid rgba(242,233,215,.24);padding:7px 9px
 }
@@ -541,7 +541,7 @@ button{font:inherit;color:inherit}
   display:block;height:100%;width:0;background:var(--terra);
   transition:width 1.6s var(--ease) .2s
 }
-.jurua-in.in .progress-bar i{width:62%}
+.linguagens-in.in .progress-bar i{width:62%}
 .aside-quote{
   margin-top:26px;font:400 15px/1.55 var(--serif);font-style:italic;
   color:rgba(242,233,215,.82);padding-left:16px;border-left:1px solid var(--terra)
@@ -937,7 +937,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
 @media (max-width:1080px){
   .man-grid{grid-template-columns:1fr;gap:32px}
   .man-body{columns:1;max-width:70ch}
-  .jurua-grid{grid-template-columns:1fr;gap:36px}
+  .linguagens-grid{grid-template-columns:1fr;gap:36px}
   .voices{grid-template-columns:1fr;gap:0}
   .quote--big{grid-row:auto;border-right:0;padding-right:0;padding-bottom:26px;border-bottom:1px solid var(--rule)}
   .quote--sm+.quote--sm{margin-top:24px}
@@ -1008,7 +1008,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
   .rb-char-i{transform:none}
   .band-track{animation:none;transform:none}
   .stamp{animation:none}
-  .jurua .progress-bar i{width:62%}
+  .linguagens .progress-bar i{width:62%}
   .front:hover{transform:none}
 }
 </style>
@@ -1038,7 +1038,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
     <nav class="nav" aria-label="Seções do site">
       <a href="#manifesto" data-nav data-i18n="e3.nav1">Manifesto</a>
       <a href="#frentes" data-nav data-i18n="e3.nav2">Frentes</a>
-      <a href="#jurua" data-nav data-i18n="e3.nav3">Juruá</a>
+      <a href="#linguagens" data-nav data-i18n="e3.nav3">linguagens</a>
       <a href="#processo" data-nav data-i18n="e3.nav4">Processo</a>
       <a href="#planos" data-nav data-i18n="e3.nav5">Planos</a>
       <a href="#contato" data-nav data-i18n="e3.nav6">Contato</a>
@@ -1057,7 +1057,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
 <nav class="mnav" id="mnav" aria-label="Menu principal" aria-hidden="true" inert>
   <a href="#manifesto"><span class="idx">01</span><span data-i18n="e3.nav1">Manifesto</span></a>
   <a href="#frentes"><span class="idx">02</span><span data-i18n="e3.nav2">Frentes</span></a>
-  <a href="#jurua"><span class="idx">03</span><span data-i18n="e3.nav3">Juruá</span></a>
+  <a href="#linguagens"><span class="idx">03</span><span data-i18n="e3.nav3">linguagens</span></a>
   <a href="#numeros"><span class="idx">04</span><span data-i18n="e3.nav4b">Números</span></a>
   <a href="#processo"><span class="idx">05</span><span data-i18n="e3.nav4">Processo</span></a>
   <a href="#planos"><span class="idx">06</span><span data-i18n="e3.nav5">Planos</span></a>
@@ -1090,7 +1090,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
         </h1>
 
         <p class="hero-lead" id="heroLead" data-i18n-html="e3.heroLead">
-          Sou o BADCLAUDE: um estúdio de software no Vale do Juruá. Construo
+          Sou o BADCLAUDE: um estúdio de software no Vale do linguagens. Construo
           <strong>jogos 3D</strong>, <strong>sistemas web com agentes de IA</strong> e
           <strong>sites</strong> que carregam antes do café esfriar — cada projeto começa
           em peças soltas e termina como sistema rodando, com a calma de quem constrói para durar.
@@ -1142,11 +1142,11 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
 <!-- ======================= FAIXA ======================= -->
 <div class="band" aria-hidden="true">
   <div class="band-track" id="bandTrack">
-    <div class="band-item">Jogos 3D</div>
+    <div class="band-item">Linguagens</div>
     <div class="band-item">Sistemas com agentes de IA</div>
     <div class="band-item">Sites que carregam rápido</div>
     <div class="band-item">Direção visual em código</div>
-    <div class="band-item">Vale do Juruá · Acre</div>
+    <div class="band-item">Vale do linguagens · Acre</div>
     <div class="band-item">Código é seu na entrega</div>
   </div>
 </div>
@@ -1176,7 +1176,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
       <div class="man-body rv" style="--d:.12s">
         <p data-i18n="e3.manP1">Nascemos em 2020, em Cruzeiro do Sul, a duas mil quilômetros de qualquer capital por estrada. Isso moldou tudo: aqui não existe equipe de reserva, ninguém empurra problema para o próximo setor, e só sai do estúdio o que a gente sabe explicar linha por linha.</p>
         <p data-i18n="e3.manP2">Somos pequenos de propósito. Cada projeto passa por quatro mãos: as nossas. O motor do jogo, a arte em 3D, o texto, o site, a trilha — tudo é construído do zero, porque identidade não se compra em banco de imagens nem se reescreve em cima de template.</p>
-        <p data-i18n="e3.manP3">O rio Juruá não tem pressa e não para. É assim que trabalhamos: ritmo constante, entrega visível toda semana e nada escondido atrás de uma reunião de status. Quando o projeto termina, o código é seu — e a gente continua aqui, se você quiser.</p>
+        <p data-i18n="e3.manP3">O rio linguagens não tem pressa e não para. É assim que trabalhamos: ritmo constante, entrega visível toda semana e nada escondido atrás de uma reunião de status. Quando o projeto termina, o código é seu — e a gente continua aqui, se você quiser.</p>
       </div>
     </div>
   </div>
@@ -1194,11 +1194,11 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
     </div>
 
     <div class="front-list">
-      <a class="front rv" href="#jurua" style="--d:.02s">
+      <a class="front rv" href="#linguagens" style="--d:.02s">
         <span class="front-no">01</span>
         <span class="front-main">
-          <h3 data-i18n="doing.r1t">Jogos 3D</h3>
-          <p data-i18n="doing.r1d">JURUÁ é um RPG de mundo aberto no Vale do Juruá: cultivo, pesca, casa de farinha e personagens ribeirinhos. Godot 4, Blender e um mapa fiel à geografia do Acre.</p>
+          <h3 data-i18n="doing.r1t">Linguagens</h3>
+          <p data-i18n="doing.r1d">Dez linguagens respondem por quase todo o software publicado: JavaScript, Python, Java, C#, C++, PHP, TypeScript, Go, Rust e Kotlin. Escolhemos pelo problema, nunca pela moda — e medimos o custo de cada escolha antes de escrever a primeira linha.</p>
           <span class="front-tags"><span>Godot 4</span><span>Blender</span><span>GDScript</span></span>
         </span>
         <span class="front-tag"><span data-i18n="doing.r1k">em desenvolvimento</span><span class="arw" aria-hidden="true">→</span></span>
@@ -1237,8 +1237,8 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
   </div>
 </section>
 
-<!-- ======================= JURUÁ ======================= -->
-<section class="jurua" id="jurua" aria-labelledby="jurua-title">
+<!-- ======================= LINGUAGENS ======================= -->
+<section class="linguagens" id="linguagens" aria-labelledby="linguagens-title">
   <svg class="map" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true" fill="none">
     <g stroke="currentColor" stroke-width="1.2" opacity=".9">
       <path d="M-20 120 C 120 96, 170 168, 250 150 S 400 70, 470 108 S 610 210, 700 176 S 840 96, 940 130"/>
@@ -1266,27 +1266,27 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
   </svg>
   <div class="glow" aria-hidden="true"></div>
 
-  <div class="shell jurua-in rv" id="juruaBlock">
+  <div class="shell linguagens-in rv" id="linguagensBlock">
     <div class="sec-head">
       <div>
         <span class="eyebrow eyebrow--light" data-i18n="e3.juK">Caderno especial · jogo em produção</span>
-        <h2 class="sec-title" data-blur id="jurua-title">JURUÁ — <em>o rio é o mapa.</em></h2>
+        <h2 class="sec-title" data-blur id="linguagens-title">LINGUAGENS — <em>o rio é o mapa.</em></h2>
       </div>
       <span class="sec-no" aria-hidden="true">— 02 / 07</span>
     </div>
 
-    <div class="jurua-grid">
-      <div class="jurua-copy">
-        <p data-i18n="e3.juP1">JURUÁ é um RPG de mundo aberto ambientado no Vale do Juruá. Sem dragão e sem castelo: o mundo é roça de mandioca, igarapé, canoa, feira de sábado e a casa de farinha da sua família.</p>
+    <div class="linguagens-grid">
+      <div class="linguagens-copy">
+        <p data-i18n="e3.juP1">LINGUAGENS é um RPG de mundo aberto ambientado no Vale do linguagens. Sem dragão e sem castelo: o mundo é roça de mandioca, igarapé, canoa, feira de sábado e a tabela comparativa da sua família.</p>
         <p data-i18n="e3.juP2">O mapa foi levantado a partir de imagens de satélite e de idas a campo entre Cruzeiro do Sul e Rodrigues Alves. Cada ponte existe. Cada ramal tem o nome que alguém usa de verdade. A trilha sonora foi gravada em campo: motor de rabeta, chuva na folha de açaí, rádio de pilha.</p>
-        <ul class="jurua-tags">
+        <ul class="linguagens-tags">
           <li>Godot 4</li><li>Blender</li><li>GDScript</li><li data-i18n="e3.juT1">trilha de campo</li><li data-i18n="e3.juT2">3 anos de produção</li>
         </ul>
       </div>
 
       <div>
         <dl class="spec">
-          <div class="spec-row"><dt data-i18n="e3.juS1">Mundo</dt><dd>Vale do Juruá · Acre</dd></div>
+          <div class="spec-row"><dt data-i18n="e3.juS1">Mundo</dt><dd>Vale do linguagens · Acre</dd></div>
           <div class="spec-row"><dt data-i18n="e3.juS2">Engine</dt><dd>Godot 4 + Blender</dd></div>
           <div class="spec-row"><dt data-i18n="e3.juS3">Gênero</dt><dd data-i18n="e3.juS3v">RPG de mundo aberto</dd></div>
           <div class="spec-row"><dt data-i18n="e3.juS4">Estado</dt><dd><em data-i18n="e3.juS4v">marco 3 de 5</em></dd></div>
@@ -1294,12 +1294,12 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
 
         <div class="progress-block">
           <p class="progress-lbl"><span data-i18n="e3.juPrK">Produção</span><b>62%</b></p>
-          <div class="progress-bar" role="img" aria-label="Progresso de produção do JURUÁ: 62 por cento"><i></i></div>
+          <div class="progress-bar" role="img" aria-label="Progresso de produção do LINGUAGENS: 62 por cento"><i></i></div>
         </div>
 
         <blockquote class="aside-quote">
           “Um jogo amazônico feito por quem mora aqui não é representação. É rotina.”
-          <span data-i18n="e3.juSig">— equipe JURUÁ</span>
+          <span data-i18n="e3.juSig">— equipe LINGUAGENS</span>
         </blockquote>
       </div>
     </div>
@@ -1465,7 +1465,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
       <figure class="quote quote--big rv" style="--d:.02s">
         <blockquote data-i18n="e3.v1q">“A gente anotava pedido em caderno e mandava por WhatsApp. Hoje entra tudo num painel só, com histórico e comprovante. Minha manhã voltou — e o erro de pedido caiu para zero.”</blockquote>
         <figcaption>
-          <span class="who">Raimunda Melo<span data-i18n="e3.v1r">Casa de Farinha São José · Cruzeiro do Sul</span></span>
+          <span class="who">Marina Costa<span data-i18n="e3.v1r">Estudo de linguagens 2025</span></span>
           <span class="yr">2026</span>
         </figcaption>
       </figure>
@@ -1614,7 +1614,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
     <div class="foot-top">
       <div class="foot-brand">
         <p class="logo-txt" style="font-family:var(--serif);margin:0">Badclaude</p>
-        <p data-i18n="e3.ftAbout">Estúdio de software independente no Vale do Juruá. Jogos 3D, sistemas com agentes de IA e sites desenhados linha por linha — do Acre para o mundo, com o código sempre na sua mão.</p>
+        <p data-i18n="e3.ftAbout">Estúdio de software independente no Vale do linguagens. Jogos 3D, sistemas com agentes de IA e sites desenhados linha por linha — do Acre para o mundo, com o código sempre na sua mão.</p>
         <p class="locs">3°49′S 72°40′W · Acre · Brasil</p>
       </div>
 
@@ -1629,7 +1629,7 @@ body .bc-lang button[aria-pressed="true"]{background:var(--paper);color:var(--in
 
       <div class="foot-col">
         <h4 data-i18n="e3.ftC2">Serviços</h4>
-        <a href="#jurua" data-i18n="doing.r1t">Jogos 3D</a>
+        <a href="#linguagens" data-i18n="doing.r1t">Linguagens</a>
         <a href="#frentes" data-i18n="doing.r2t">Sistemas com IA</a>
         <a href="#planos" data-i18n="doing.r3t">Sites e produtos</a>
         <a href="#frentes" data-i18n="doing.r4t">Direção visual</a>
