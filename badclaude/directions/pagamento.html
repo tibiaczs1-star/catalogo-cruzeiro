@@ -160,7 +160,7 @@
     var params=new URLSearchParams(location.search);
     var planoId=params.get('plano')||'semana';
     try{
-      var res=await fetch('/badclaude/api/pagamento/planos');
+      var res=await fetch('/api/badclaude/planos');
       var d=await res.json();
       var p=(d.planos||[]).find(function(x){return x.id===planoId})||d.planos[0];
       $('planoNome').textContent=p.nome+' · '+p.duracao;
@@ -179,12 +179,12 @@
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){$('msg1').textContent='E-mail inválido.';return}
     var btn=$('btnCriar');btn.disabled=true;btn.textContent='gerando…';$('msg1').textContent='';
     try{
-      var res=await fetch('/badclaude/api/pedido',{method:'POST',headers:{'Content-Type':'application/json'},
+      var res=await fetch('/api/badclaude/pedido',{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({plano:btn.dataset.plano,nome:nome,contato:email,whatsapp:zap})});
       var d=await res.json();
       if(!res.ok)throw new Error(d.error||'falha');
       estado.pedido=d.pedido;
-      $('qr').src='/badclaude/api/pedido/'+d.pedido.id+'/pix.svg?t='+Date.now();
+      $('qr').src='/api/badclaude/pedido/'+d.pedido.id+'/pix.svg?t='+Date.now();
       $('copiaCola').textContent=d.copiaECola;
       $('valorPix').textContent=Number(d.pedido.valor).toFixed(2).replace('.',',');
       var z=d.whatsapp||'5568992269296';
@@ -217,7 +217,7 @@
         body.base64=await dataURL(estado.arquivo);
         body.nomeArquivo=estado.arquivo.name;
       }
-      var res=await fetch('/badclaude/api/pedido/'+estado.pedido.id+'/comprovante',
+      var res=await fetch('/api/badclaude/pedido/'+estado.pedido.id+'/comprovante',
         {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
       var d=await res.json();
       if(!res.ok)throw new Error(d.error||'falha');
@@ -233,7 +233,7 @@
   async function consultarLiberacao(){
     if(!estado.pedido)return;
     try{
-      var res=await fetch('/badclaude/api/pedido/'+estado.pedido.id+'/status');
+      var res=await fetch('/api/badclaude/pedido/'+estado.pedido.id+'/status');
       var d=await res.json();
       if(d.senha){
         senhaAtual=d.senha;

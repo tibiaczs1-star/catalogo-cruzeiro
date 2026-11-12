@@ -2,6 +2,7 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
+const { criarVendaBadclaude } = require("./badclaude-venda");
 const { execFile, spawn, spawnSync } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
@@ -17483,6 +17484,18 @@ function buildPubpaidAdminPayload() {
   };
 }
 
+let vendaBadclaude = null;
+try {
+  vendaBadclaude = criarVendaBadclaude({
+    dataDir: DATA_DIR,
+    sendJson,
+    parseBody,
+    qrcode: QRCode,
+  });
+} catch (err) {
+  console.warn("[badclaude-venda] indisponível:", err.message);
+}
+
 async function handleApi(req, res, pathname, searchParams) {
   applyApiCors(req, res);
 
@@ -17490,6 +17503,10 @@ async function handleApi(req, res, pathname, searchParams) {
     res.writeHead(204);
     res.end();
     return;
+  }
+
+  if (pathname.startsWith("/api/badclaude/") && vendaBadclaude) {
+    return vendaBadclaude.tratar(req, res, pathname);
   }
 
   if (pathname.startsWith("/api/garra-admin/")) {
