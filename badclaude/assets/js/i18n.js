@@ -1,13 +1,13 @@
 /* ORCA LAB — i18n PT / EN / ES */
 
 window.SITE_CONFIG = {
-  whatsapp: '5568999999999',
+  whatsapp: '5568992269296',
   whatsappMessage: {
     pt: 'Olá! Vim pelo site da Orca Lab e quero conversar sobre um projeto.',
     en: "Hi! I found Orca Lab online and I'd like to talk about a project.",
     es: '¡Hola! Llegué desde el sitio de Orca Lab y quiero hablar sobre un proyecto.',
   },
-  email: 'contato@orcalab.dev',
+  email: 'juniorclovissampaio@gmail.com',
 };
 
 window.I18N = {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="js">
+<html lang="pt-BR" class="czs-enxame-offline czs-swarm-offline czs-agente-vivo-offline js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1338,12 +1338,12 @@ h1 .inv{
       </h2>
       <p class="cta-lead" data-i18n="cta.lead">Respondemos com um caminho, um prazo e um valor. A primeira conversa é gratuita e não vira proposta automática.</p>
       <div class="cta-ctas">
-        <a class="btn btn-ink" href="mailto:contato@badclaude.dev?subject=Projeto%20BADCLAUDE" data-i18n="form.send">Enviar e-mail</a>
+        <a class="btn btn-ink" href="mailto:juniorclovissampaio@gmail.com?subject=Projeto%20BADCLAUDE" data-i18n="form.send">Enviar e-mail</a>
         <a class="btn btn-ghost" href="#" data-wa data-i18n="form.wa">Enviar no WhatsApp</a>
       </div>
       <p class="cta-meta">
-        <span><i class="sq" aria-hidden="true"></i>contato@badclaude.dev</span>
-        <span><i class="sq" aria-hidden="true"></i>+55 68 99999-9999</span>
+        <span><i class="sq" aria-hidden="true"></i>juniorclovissampaio@gmail.com</span>
+        <span><i class="sq" aria-hidden="true"></i>+55 68 99226-9296</span>
         <span><i class="sq" aria-hidden="true"></i><span data-i18n="foot.hours">Seg a sáb, 8h – 19h</span></span>
       </p>
     </div>
@@ -1402,8 +1402,8 @@ h1 .inv{
       <div class="foot-col">
         <h3 class="h" data-i18n="foot.h.contact">contato</h3>
         <ul class="foot-contact">
-          <li><a href="mailto:contato@badclaude.dev">contato@badclaude.dev</a></li>
-          <li><a href="#" data-wa>+55 68 99999-9999</a></li>
+          <li><a href="mailto:juniorclovissampaio@gmail.com">juniorclovissampaio@gmail.com</a></li>
+          <li><a href="#" data-wa>+55 68 99226-9296</a></li>
           <li class="static"><span data-i18n="foot.hours">Seg a sáb, 8h – 19h</span></li>
         </ul>
       </div>
@@ -1646,7 +1646,7 @@ if (form) {
     e.preventDefault();
     if (!form.reportValidity()) return;
     const m = buildMsg();
-    window.location.href = 'mailto:contato@badclaude.dev?subject=' + m.subject + '&body=' + m.body;
+    window.location.href = 'mailto:juniorclovissampaio@gmail.com?subject=' + m.subject + '&body=' + m.body;
   });
   const waBtn = document.getElementById('wa-btn');
   if (waBtn) {
@@ -1656,7 +1656,7 @@ if (form) {
       const msg = (window.SITE_CONFIG && window.SITE_CONFIG.whatsappMessage) || '';
       const text = typeof msg === 'string' ? msg : msg.pt || 'Olá! Quero conversar sobre um projeto.';
       const final = text + '\n\n' + m.raw;
-      window.location.href = 'https://wa.me/5568999999999?text=' + encodeURIComponent(final);
+      window.location.href = 'https://wa.me/5568992269296?text=' + encodeURIComponent(final);
     });
   }
 }
