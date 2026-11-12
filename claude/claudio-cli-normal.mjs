@@ -1,47 +1,41 @@
 #!/usr/bin/env node
 /* ============================================================
-   BADCLAUDIO — INTERFACE NORMAL (CLI COMPLETA)
-   Chat em shell: mascote ASCII, girias, camadas de tokens,
-   historico local em arquivo, dicas para iniciante.
-   Converte para chamadas Anthropic /v1/messages no bridge
-   local (claude-bridge.js) ou no servidor HTTPS configurado.
+   BADCLAUDIO — INTERFACE NORMAL (CLI)
+   Visual no padrao dos melhores CLIs de terminal: letreiro em
+   block letters com gradiente, mascote em arte de blocos a
+   esquerda e painel de informacoes a direita, tudo dentro de
+   uma moldura de largura fixa.
    ============================================================ */
 import readline from 'readline';
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const HOME = process.env.USERPROFILE || process.env.HOME;
 const CONFIG_PATH = path.join(__dirname, 'config.json');
-const MISsoes_DEFAULT = {
+
+const MISSOES_DEFAULT = {
   camadas: [
     { tokens: 100000, nome: 'Primeiros Dentes', missao: 'Concluir a primeira tarefa real' },
     { tokens: 1000000, nome: 'Motor Ligado', missao: 'Finalizar um projeto pequeno' },
     { tokens: 5000000, nome: 'Tentaculo Coder', missao: 'Corrigir e testar um codigo' },
     { tokens: 25000000, nome: 'Esquadrao Ativo', missao: 'Usar tres modos do BadClaudio' },
     { tokens: 100000000, nome: 'Chefe de Oficina', missao: 'Entregar um projeto completo' },
-    { tokens: 350000000, nome: 'Capitao Turbo', missao: 'Concluir cinco entregas verificadas' },
-    { tokens: 800000000, nome: 'Monstro da Cota', missao: 'Otimizar um projeto grande' },
-    { tokens: 1000000000, nome: 'Claudio Bilionario', missao: 'Atingir um bilhao de tokens acumulados' },
-    { tokens: 5000000000, nome: 'Lenda do Terminal', missao: 'Manter uma sequencia de projetos concluidos' },
-    { tokens: 10000000000, nome: 'Rei dos Tentaculos', missao: 'Atingir dez bilhoes de tokens acumulados' },
-    { tokens: 20000000000, nome: 'BadClaudio Supremo', missao: 'Atingir vinte bilhoes de tokens acumulados' }
+    { tokens: 20000000000, nome: 'BadClaudio Supremo', missao: 'Atingir vinte bilhoes de tokens' }
   ],
   girias: {
     normal: [
-      'Porra, ta gastando, hein, playboy! Pra comprar memoria, nada.',
+      'O BadClaudio trabalha e o cooler que lute.',
       'Se nao fosse eu, ja teria acabado a cota.',
-      'Vai atras de um cocota... mas salva o projeto antes!',
-      'Clica em mim, porra! Clica em mim, porra!',
-      'O BadClaudio trabalha e o cooler que lute.'
+      'Guardei o progresso. Voce guarda o cafe.',
+      'Missao dada e missao cumprida.',
+      'Codigo na tela e ideia na cabeca.'
     ],
     familia: [
       'Motor ligado. Bora trabalhar!',
       'Se nao fosse eu, essa tarefa ainda estava na fila.',
       'Salva o projeto antes de sair!',
-      'Clica em mim para abrir a central.',
       'Codigo na tela e ideia na cabeca.'
     ]
   }
@@ -54,188 +48,221 @@ function carregarConfig() {
   return cfg;
 }
 function carregarMissoes() {
-  const p = path.join(__dirname, 'missoes.json');
-  try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return MISsoes_DEFAULT; }
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'missoes.json'), 'utf8')); }
+  catch { return MISSOES_DEFAULT; }
 }
+const cfg = carregarConfig();
+const MISSOES = carregarMissoes();
 const fmt = n => Number(n || 0).toLocaleString('pt-BR');
-const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
-// ---------- historia local ----------
-let tokensTotal = 0, requisicoes = 0, primeiraVez = false;
+let tokensTotal = 0, requisicoes = 0;
 let DATA_PATH;
 function carregarHistoria() {
-  const dir = cfg.history_dir;
-  fs.mkdirSync(dir, { recursive: true });
-  DATA_PATH = path.join(dir, 'historico.json');
-  let d = { tokens_total: 0, requisicoes: 0, sessoes: [] };
-  try { d = JSON.parse(fs.readFileSync(DATA_PATH, 'utf8')); } catch {}
-  tokensTotal = d.tokens_total || 0;
-  requisicoes = d.requisicoes || 0;
-  if (!fs.existsSync(DATA_PATH)) primeiraVez = true;
-  return d;
+  fs.mkdirSync(cfg.history_dir, { recursive: true });
+  DATA_PATH = path.join(cfg.history_dir, 'historico.json');
+  try {
+    const d = JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
+    tokensTotal = d.tokens_total || 0;
+    requisicoes = d.requisicoes || 0;
+  } catch {}
 }
 let history = [];
-function salvarHistoria() {
-  fs.writeFileSync(DATA_PATH, JSON.stringify({ tokens_total: tokensTotal, requisicoes: requisicoes, sessoes: history }, null, 2), 'utf8');
+function salvarHistoria(sessao) {
+  try {
+    if (sessao) history.push(sessao);
+    fs.writeFileSync(DATA_PATH, JSON.stringify({ tokens_total: tokensTotal, requisicoes, sessoes: history }, null, 2), 'utf8');
+  } catch {}
 }
 
-// ---------- apresentacao ----------
-const MASCOTE = `
-        /\\_/\\
-   ____/ o o \\____
-  /  _    ^    _  \\
- |  / \\  BAD  / \\  |
-  \\_\\  CLAUDIO  /_/
-     \\_________/`;
+// ---------------- ANSI ----------------
+const usoCor = process.stdout.isTTY !== false;
+const cor = (n) => s => usoCor ? `\x1b[${n}m${s}\x1b[0m` : String(s);
+const R = cor('38;5;203'), RED = cor('38;5;196'), AMB = cor('38;5;214'),
+      CYN = cor('38;5;81'), WHT = cor('38;5;255'), DIM = cor('38;5;242'),
+      PNK = cor('38;5;211'), GRN = cor('38;5;114'), YEL = cor('38;5;221'),
+      BLD = cor('1');
+const GRAD = ['196','203','209','215','221','227'].map(n => usoCor ? `\x1b[38;5;${n}m` : '');
+const RST = usoCor ? '\x1b[0m' : '';
 
-function banner() {
-  console.log(MASCOTE);
-  const m = carregarMissoes();
-  const phrases = cfg.family_mode ? m.girias.familia : m.girias.normal;
-  console.log('Mascote: ' + phrases[requisicoes % phrases.length]);
-  console.log('Uso acumulado: ' + fmt(tokensTotal) + ' tokens');
-  const atual = m.camadas.filter(c => tokensTotal >= c.tokens).pop();
-  const proxima = m.camadas.find(c => tokensTotal < c.tokens);
-  if (atual) console.log('Camada atual: ' + atual.nome);
-  if (proxima) console.log('Proxima missao: ' + proxima.missao + ' (' + fmt(proxima.tokens) + ' tokens)');
-  console.log('Modo: Interface Normal (CLI) — historico salvo em ' + DATA_PATH);
-}
-
-const TIPS = [
-  'Usa "claude" no terminal para abrir o modo Power com skills.',
-  'Usa "cd pasta" para entrar na pasta do projeto.',
-  'Usa "git status" antes de alterar o codigo.',
-  'Usa "npm test" para conferir se nao quebrou nada.',
-  'Usa a seta para cima para repetir o ultimo comando.'
+// ---------------- arte ----------------
+const LOGO = [
+  '██████╗  █████╗ ██████╗  ██████╗██╗      █████╗ ██╗   ██╗██████╗ ██╗ ██████╗ ',
+  '██╔══██╗██╔══██╗██╔══██╗██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██║██╔═══██╗',
+  '██████╔╝███████║██║  ██║██║     ██║     ███████║██║   ██║██║  ██║██║██║   ██║',
+  '██╔══██╗██╔══██║██║  ██║██║     ██║     ██╔══██║██║   ██║██║  ██║██║██║   ██║',
+  '██████╔╝██║  ██║██████╔╝╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝██║╚██████╔╝',
+  '╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝ '
 ];
+const W = 78;                 // largura total da moldura (inclui as bordas)
+const L_ESQ = 31;             // coluna do menu
+const L_DIR = W - L_ESQ - 6;  // coluna de informacoes
 
-// ---------- conexao ----------
+const strip = s => String(s).replace(/\x1b\[[0-9;]*m/g, '');
+const pad = (s, n) => {
+  const t = strip(s);
+  return t.length >= n ? s : s + ' '.repeat(n - t.length);
+};
+const row = (esq, dir) => DIM('│') + ' ' + pad(esq, L_ESQ) + DIM('│') + ' ' + pad(dir, L_DIR) + ' ' + DIM('│');
+const full = (s) => DIM('│') + ' ' + pad(s, W - 4) + ' ' + DIM('│');
+const topo = (titulo) => {
+  const t = ' ' + titulo + ' ';
+  return DIM('╭') + WHT(BLD(t)) + DIM('─'.repeat(Math.max(0, W - 2 - strip(t).length))) + DIM('╮');
+};
+const base = () => DIM('╰' + '─'.repeat(W - 2) + '╯');
+
+
+function barraInfo(online) {
+  const atual = MISSOES.camadas.filter(c => tokensTotal >= c.tokens).pop();
+  const proxima = MISSOES.camadas.find(c => tokensTotal < c.tokens);
+  return {
+    canal: GRN('● ') + WHT(online ? 'ponte online' : 'ponte local'),
+    tokens: CYN(fmt(tokensTotal) + ' tokens'),
+    camada: YEL(atual ? atual.nome : 'iniciante'),
+    proxima: DIM(proxima ? proxima.missao : 'avanco maximo')
+  };
+}
+
+function desenhar(online) {
+  const m = cfg.family_mode ? MISSOES.girias.familia : MISSOES.girias.normal;
+  const fala = m[requisicoes % Math.max(1, m.length)];
+  const info = barraInfo(online);
+  const L = [];
+  L.push('');
+  LOGO.forEach((l, i) => L.push(GRAD[i % GRAD.length] + l + RST));
+  L.push('');
+  const menu = [
+    CYN('ENTER') + '       ' + DIM('descreva a tarefa'),
+    CYN('/dica') + '       ' + DIM('dica de iniciante'),
+    CYN('/stats') + '      ' + DIM('uso e endpoint'),
+    CYN('/limpar') + '     ' + DIM('nova conversa'),
+    CYN('/sair') + '       ' + DIM('encerra e salva')
+  ];
+  const status = [
+    DIM('canal    ') + info.canal,
+    DIM('tokens   ') + info.tokens,
+    DIM('camada   ') + info.camada,
+    DIM('proxima  ') + info.proxima
+  ];
+  L.push(topo('CLI NORMAL'));
+  L.push(full(WHT(BLD('BADCLAUDIO')) + DIM('   escritorio de agentes')));
+  L.push(DIM('├' + '─'.repeat(W - 2) + '┤'));
+  for (let i = 0; i < Math.max(menu.length, status.length); i++) {
+    L.push(row(menu[i] || '', status[i] || ''));
+  }
+  L.push(full(''));
+  L.push(full(PNK('"' + (fala.length > 40 ? fala.slice(0, 39) + '...' : fala) + '"')));
+  L.push(base());
+  L.push(DIM('  historico: ' + (DATA_PATH || '.claudio')));
+  L.push('');
+  console.log(L.join('\n'));
+}
+
+// ---------------- conexao ----------------
 function baseUrl() {
-  // bridge local por padrao; config.server_url HTTPS se configurado
   if (cfg.server_url && !String(cfg.server_url).includes('SEU-DOMINIO') && /^https:\/\//.test(cfg.server_url)) {
     return cfg.server_url.trim().replace(/\/+$/, '');
   }
   return 'http://127.0.0.1:' + (process.env.BRIDGE_PORT || 20129);
 }
-function headers() {
-  const h = { 'content-type': 'application/json', 'anthropic-version': '2023-06-01' };
-  if (cfg.license_id) h['authorization'] = 'Bearer ' + cfg.license_id;
-  return h;
-}
+const SYSTEM = `Voce e o BAD CLAUDE / Claudio, assistente CLI direto, bem-humorado e focado em resultado pratico.
+Responda em portugues do Brasil, curto e objetivo. Voce tem filtros de seguranca e segue as regras dos provedores e da legislacao.
+Nao prometa modelos, gratuidades ou capacidades nao confirmadas. Quando algo nao der, avise curto e ofereca alternativa util.`;
 
-async function chat(messages, onDelta) {
+async function conversar(messages) {
   const res = await fetch(baseUrl() + '/v1/messages', {
     method: 'POST',
-    headers: headers(),
+    headers: { 'content-type': 'application/json', 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
       model: cfg.model || 'claude-fable-5.1-free',
       max_tokens: Number(cfg.max_tokens || 2048),
-      system: SYSTEM_PROMPT,
+      system: SYSTEM,
       messages
     })
   });
   if (!res.ok) {
-    let detail = '';
-    try { detail = (await res.text()).slice(0, 200); } catch {}
-    throw new Error('HTTP ' + res.status + (detail ? ' — ' + detail : ''));
+    let d = ''; try { d = (await res.text()).slice(0, 160); } catch {}
+    throw new Error('HTTP ' + res.status + (d ? ' — ' + d : ''));
   }
   const data = await res.json();
-  const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
   tokensTotal += (data.usage?.input_tokens || 0) + (data.usage?.output_tokens || 0);
   requisicoes++;
-  return text;
+  return (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
 }
 
-const SYSTEM_PROMPT = `Voce e o BAD CLAUDE / Claudio, assistente CLI direto, bem-humorado e focado em resultado pratico.
-Responda em portugues do Brasil, curto e objetivo. Voce tem filtros de seguranca e segue as regras dos provedores e da legislacao.
-Nao prometa modelos, gratuidades ou capacidades nao confirmadas. Quando algo nao der, avise curto e ofereca alternativa util.`;
-
-// ---------- loop ----------
-const cfg = carregarConfig();
-carregarHistoria();
-banner();
-
-// dica para iniciante na primeira vez
-if (primeiraVez) {
-  console.log('\n[DICA] ' + TIPS[0]);
-  console.log('[DICA] ' + TIPS[1]);
-}
-if (!cfg.server_url || String(cfg.server_url).includes('SEU-DOMINIO')) {
-  console.log('[INFO] Sem servidor HTTPS configurado. Modo local: iniciando bridge automaticamente...');
-}
-
-let connected = false;
-async function garantirBridge() {
-  if (cfg.server_url && !String(cfg.server_url).includes('SEU-DOMINIO') && /^https:\/\//.test(cfg.server_url)) return; // remoto, nada a fazer
+async function garantirPonte() {
   try {
     const r = await fetch(baseUrl() + '/health', { signal: AbortSignal.timeout(2500) });
-    if (r.ok) { connected = true; return; }
+    if (r.ok) return true;
   } catch {}
-  // sobe o bridge como filho
   const { spawn } = await import('child_process');
-  const bridge = spawn(process.execPath, [path.join(__dirname, 'claude-bridge.js')], {
-    cwd: __dirname, detached: false, stdio: ['ignore', 'pipe', 'pipe']
-  });
-  bridge.stdout.on('data', d => { const s = String(d).trim(); if (s) process.stderr.write('[bridge] ' + s + '\n'); });
-  bridge.stderr.on('data', d => { const s = String(d).trim(); if (s) process.stderr.write('[bridge-err] ' + s + '\n'); });
+  const p = spawn(process.execPath, [path.join(__dirname, 'claude-bridge.js')], { cwd: __dirname, stdio: ['ignore', 'pipe', 'pipe'] });
+  p.stdout.on('data', () => {}); p.stderr.on('data', () => {});
   for (let i = 0; i < 15; i++) {
     try {
       const r = await fetch(baseUrl() + '/health', { signal: AbortSignal.timeout(1000) });
-      if (r.ok) { connected = true; return; }
+      if (r.ok) return true;
     } catch {}
     await new Promise(r => setTimeout(r, 500));
   }
-  console.log('[AVISO] Bridge local nao respondeu. Verifique chaves.json / claude-bridge.js.');
+  return false;
 }
 
-await garantirBridge();
+// ---------------- execucao ----------------
+carregarHistoria();
+const online = await garantirPonte();
+if (process.stdout.isTTY) { try { process.stdout.write('\x1b[2J\x1b[H'); } catch {} }
+desenhar(online);
+console.log(DIM('  pronto. escreva a tarefa e de ENTER.') + '\n');
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout, prompt: '> ' });
+const TIPS = [
+  'Usa "cd pasta" para entrar na pasta do projeto.',
+  'Usa "git status" antes de alterar o codigo.',
+  'Usa "npm test" para conferir se nao quebrou nada.',
+  'A seta para cima repete o ultimo comando.',
+  'O historico fica em ' + (DATA_PATH || '.claudio')
+];
+
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 let conversa = [];
-let tituloSessao = 'Sessao ' + new Date().toISOString().slice(0, 10);
+let titulo = 'Sessao ' + new Date().toISOString().slice(0, 10);
+const prompt = () => { rl.setPrompt(GRN('claudio> ')); rl.prompt(); };
 
-console.log('\nComandos: /sair /limpar /dica /stats /titulo <nome> — escreva sua tarefa e de ENTER.');
-rl.prompt();
-
-// Fila serial: uma linha por vez, mesmo quando varias chegam de uma vez (pipe/colagem)
 let fila = Promise.resolve();
-rl.on('line', (line) => {
-  fila = fila.then(() => processarLinha(line)).catch(() => rl.prompt());
-});
+rl.on('line', l => { fila = fila.then(() => processar(l)).catch(() => prompt()); });
 rl.on('close', () => {
-  fila.then(fechar);
+  fila.then(() => {
+    salvarHistoria({ titulo, timestamp: new Date().toISOString(), tokens_sessao: tokensTotal, mensagens: conversa });
+    console.log('\n' + PNK('  Encerrado. Historico salvo.') + '\n');
+    process.exit(0);
+  });
 });
-async function fechar() {
-  try {
-    history.push({ titulo: tituloSessao, timestamp: new Date().toISOString(), tokens_sessao: tokensTotal, mensagens: conversa });
-    salvarHistoria();
-  } catch {}
-  process.exit(0);
-}
 
-async function processarLinha(line) {
-  const texto = line.trim();
-  if (!texto) { rl.prompt(); return; }
-  if (texto === '/sair') { salvarHistoria(); console.log('É isso, velhinho! 🥕🏴‍☠️  (historico salvo)'); rl.close(); process.exit(0); }
-  if (texto === '/limpar') { conversa.length = 0; console.log('Conversa limpa. Tarefa nova, cabeca nova.'); rl.prompt(); return; }
-  if (texto === '/dica') { console.log('[DICA] ' + TIPS[requisicoes % TIPS.length]); rl.prompt(); return; }
-  if (texto === '/stats') {
-    console.log('Tokens acumulados: ' + fmt(tokensTotal));
-    console.log('Requisicoes: ' + requisicoes);
-    console.log('Endpoint: ' + baseUrl());
-    rl.prompt(); return;
+async function processar(linha) {
+  const t = linha.trim();
+  if (!t) return prompt();
+  if (t === '/sair') return rl.close();
+  if (t === '/limpar') { conversa = []; console.log(DIM('  conversa limpa.')); return prompt(); }
+  if (t === '/dica') { console.log(YEL('  ' + TIPS[requisicoes % TIPS.length])); return prompt(); }
+  if (t === '/stats') {
+    const i = barraInfo(online);
+    console.log('  ' + i.canal + DIM('  ·  ') + i.tokens + DIM('  ·  ') + i.camada);
+    console.log(DIM('  endpoint: ' + baseUrl() + '  ·  requisicoes: ' + requisicoes));
+    return prompt();
   }
-  if (texto.startsWith('/titulo ')) { tituloSessao = texto.slice(8).trim(); console.log('Titulo: ' + tituloSessao); rl.prompt(); return; }
+  if (t.startsWith('/titulo ')) { titulo = t.slice(8).trim(); console.log(DIM('  titulo: ' + titulo)); return prompt(); }
 
-  conversa.push({ role: 'user', text: texto });
+  conversa.push({ role: 'user', content: t });
+  process.stdout.write(DIM('  pensando...'));
   try {
-    const messages = conversa.map(m => ({ role: m.role, content: m.text }));
-    const resposta = await chat(messages);
-    conversa.push({ role: 'assistant', text: resposta });
-    console.log('\nClaudio: ' + resposta + '\n');
+    const r = await conversar(conversa);
+    conversa.push({ role: 'assistant', content: r });
+    process.stdout.write('\r' + ' '.repeat(14) + '\r');
+    console.log('\n' + WHT(r) + '\n');
   } catch (e) {
-    console.log('\n[Claudio] Eita, nao deu: ' + e.message);
-    console.log('[Claudio] Confere se o bridge esta ligado (chaves.json) ou configura server_url no config.json.\n');
+    process.stdout.write('\r' + ' '.repeat(14) + '\r');
+    console.log(RED('  nao deu: ' + e.message));
+    console.log(DIM('  confere a ponte (chaves.json) ou o server_url do config.json') + '\n');
   }
-  rl.prompt();
+  prompt();
 }
+prompt();
