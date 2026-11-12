@@ -288,7 +288,7 @@
         </div>
       </div>
 
-      <div class="swarm-note"><i aria-hidden="true"></i>o mascote acima é feito de código, não de imagem</div>
+      <div class="swarm-note"><i aria-hidden="true"></i>os agentes acima são desenhados em código, não em vídeo</div>
 
       <button class="fullscreen" id="fsBtn" type="button" aria-pressed="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -312,162 +312,28 @@
   var $ = function (s) { return document.querySelector(s); };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ================= mascote ================= */
-  var pet = null;
-  try {
-    var cvs = document.getElementById('pet');
-    var ctx = cvs.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+/* ================= enxame de agentes ao vivo ================= */
+  var enxame = null;
 
-    function ajusta() {
-      var r = cvs.getBoundingClientRect();
-      var w = Math.max(120, Math.round(r.width || 300));
-      var h = Math.max(120, Math.round(r.height || 300));
-      cvs.width = Math.round(w * dpr);
-      cvs.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cvs._w = w; cvs._h = h;
-    }
-    ajusta();
-    window.addEventListener('resize', ajusta, { passive: true });
-
-    var banda = '#e11d2e', cir = '#22d3ee';
-    var tt = 0, estado = 'idle', olhar = { x: 0, y: 0 }, olharAlvo = { x: 0, y: 0 };
-
-    function desenhar() {
-      requestAnimationFrame(desenhar);
-      tt += 0.016;
-      var w = cvs._w, h = cvs._h;
-      if (!w || !h) return;
-      ctx.clearRect(0, 0, w, h);
-
-      olhar.x += (olharAlvo.x - olhar.x) * 0.13;
-      olhar.y += (olharAlvo.y - olhar.y) * 0.13;
-
-      var u = Math.min(w, h) / 100;
-      var ataque = estado === 'point';
-      var bob = Math.sin(tt * (ataque ? 9 : 2.1)) * (ataque ? 2.2 : 1.0) * u;
-      var cx = w / 2;
-      var body = 46 * u;
-      var bx = cx - body / 2;
-      var by = h * 0.30 + bob;
-
-      var g = ctx.createRadialGradient(cx, by + body * .5, body * .2, cx, by + body * .5, body * 1.15);
-      g.addColorStop(0, ataque ? 'rgba(245,197,24,.30)' : 'rgba(34,211,238,.22)');
-      g.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath(); ctx.arc(cx, by + body * .5, body * 1.15, 0, Math.PI * 2); ctx.fill();
-
-      ctx.save(); ctx.globalAlpha = .25; ctx.fillStyle = '#000';
-      ctx.beginPath(); ctx.ellipse(cx, h * .93, body * .55, 4.5 * u, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-
-      ctx.strokeStyle = '#0b0b0d'; ctx.lineCap = 'round'; ctx.lineWidth = 7.5 * u;
-      [-1, 1].forEach(function (sd) {
-        ctx.beginPath();
-        ctx.moveTo(cx + sd * 11 * u, by + body - 2 * u);
-        ctx.lineTo(cx + sd * 11 * u, by + body + 9 * u);
-        ctx.stroke();
+  (function ligarEnxame() {
+    var alvo = document.getElementById('enxame');
+    if (!alvo) return;
+    import('../assets/js/enxame.js')
+      .then(function (mod) {
+        enxame = mod.montarEnxame(alvo);
+      })
+      .catch(function (e) {
+        console.warn('[enxame]', e.message);
+        import('/badclaude/assets/js/enxame.js')
+          .then(function (mod) { enxame = mod.montarEnxame(alvo); })
+          .catch(function (err) { console.warn('[enxame]', err.message); });
       });
+  })();
 
-      ctx.fillStyle = '#12141a';
-      ctx.beginPath(); ctx.roundRect(bx, by, body, body, 11 * u); ctx.fill();
-      ctx.strokeStyle = ataque ? 'rgba(245,197,24,.75)' : 'rgba(34,211,238,.55)';
-      ctx.lineWidth = 1.5 * u; ctx.stroke();
+  /* compatibilidade com a roda, que chama window.__pet.setState */
+  window.__pet = { setState: function () {} };
 
-      var eyeY = by + body * .38;
-      var exL = bx + body * .30, r = 7.5 * u;
-      ctx.strokeStyle = banda; ctx.lineWidth = 3 * u;
-      ctx.beginPath();
-      ctx.moveTo(exL - r / 2, eyeY - r / 2); ctx.lineTo(exL + r / 2, eyeY + r / 2);
-      ctx.moveTo(exL + r / 2, eyeY - r / 2); ctx.lineTo(exL - r / 2, eyeY + r / 2);
-      ctx.stroke();
-
-      var exR = bx + body * .68, lr = 8 * u;
-      var lg = ctx.createRadialGradient(exR, eyeY, lr * .2, exR, eyeY, lr);
-      lg.addColorStop(0, '#c9faff'); lg.addColorStop(.55, '#37d6ef'); lg.addColorStop(1, '#0891b2');
-      ctx.fillStyle = lg;
-      ctx.beginPath(); ctx.arc(exR, eyeY, lr, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = 'rgba(200,250,255,.9)'; ctx.lineWidth = 1.5 * u; ctx.stroke();
-      ctx.fillStyle = '#04181d';
-      ctx.beginPath();
-      ctx.arc(exR + olhar.x * lr * .38, eyeY + olhar.y * lr * .38, lr * .34, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#e8feff';
-      ctx.beginPath(); ctx.arc(exR - lr * .3, eyeY - lr * .34, lr * .16, 0, Math.PI * 2); ctx.fill();
-
-      ctx.strokeStyle = '#f08c2e'; ctx.lineWidth = 1.8 * u;
-      ctx.beginPath();
-      var my = by + body * .68;
-      ctx.moveTo(cx - 4 * u, my);
-      ctx.quadraticCurveTo(cx, my + (ataque ? 3.4 : 1.8) * u, cx + 4 * u, my);
-      ctx.stroke();
-
-      ctx.fillStyle = banda;
-      var bh = body * .30, byTop = by - 2 * u;
-      ctx.beginPath();
-      ctx.moveTo(bx - 2 * u, byTop + bh * .62);
-      ctx.quadraticCurveTo(cx, byTop - bh * .5, bx + body + 2 * u, byTop + bh * .62);
-      ctx.lineTo(bx + body + 2 * u, byTop + bh);
-      ctx.quadraticCurveTo(cx, byTop + bh + 7 * u, bx - 2 * u, byTop + bh);
-      ctx.closePath(); ctx.fill();
-
-      var fl = Math.sin(tt * 4) * 1.6 * u;
-      ctx.beginPath();
-      ctx.moveTo(bx - 1 * u, byTop + bh * .4);
-      ctx.quadraticCurveTo(bx - 12 * u + fl, byTop + bh + 8 * u, bx - 8 * u + fl, byTop + bh + 17 * u);
-      ctx.quadraticCurveTo(bx - 4 * u + fl * .5, byTop + bh + 9 * u, bx + 2 * u, byTop + bh * .8);
-      ctx.closePath(); ctx.fill();
-
-      var skX = cx, skY = byTop + bh * .46, sk = 3.4 * u;
-      ctx.fillStyle = '#f7f4ee';
-      ctx.beginPath();
-      ctx.arc(skX, skY, sk, Math.PI, 0);
-      ctx.lineTo(skX + sk * .72, skY + sk * 1.1);
-      ctx.lineTo(skX + sk * .33, skY + sk * .8);
-      ctx.lineTo(skX + sk * .1, skY + sk * 1.15);
-      ctx.lineTo(skX - sk * .1, skY + sk * .8);
-      ctx.lineTo(skX - sk * .33, skY + sk * 1.15);
-      ctx.lineTo(skX - sk * .72, skY + sk * 1.1);
-      ctx.lineTo(skX - sk, skY);
-      ctx.closePath(); ctx.fill();
-      ctx.fillStyle = banda;
-      ctx.beginPath();
-      ctx.arc(skX - sk * .34, skY - sk * .1, sk * .22, 0, Math.PI * 2);
-      ctx.arc(skX + sk * .34, skY - sk * .1, sk * .22, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = '#0b0b0d'; ctx.lineWidth = 7 * u; ctx.lineCap = 'round';
-      var shX = bx + body, shY = by + body * .62;
-      var upY = by + body * .06;
-      var armY = shY + (upY - shY) * (ataque ? 1 : 0.15);
-      var armX = shX + (bx + body + 10 * u - shX) * (ataque ? 1 : 0.25);
-      ctx.beginPath();
-      ctx.moveTo(shX, shY);
-      ctx.quadraticCurveTo(shX + 7 * u, (shY + armY) / 2, armX, armY);
-      ctx.stroke();
-      ctx.fillStyle = ataque ? '#f5c518' : cir;
-      ctx.beginPath(); ctx.arc(armX, armY, 3.4 * u, 0, Math.PI * 2); ctx.fill();
-
-      ctx.fillStyle = '#e879a8';
-      ctx.beginPath(); ctx.ellipse(bx + body + 8 * u, by + body * .55, 9 * u, 7 * u, -.2, 0, Math.PI * 2); ctx.fill();
-    }
-    requestAnimationFrame(desenhar);
-
-    pet = { setState: function (s) { estado = s; } };
-    window.__pet = pet;
-
-    window.addEventListener('pointermove', function (ev) {
-      var r = cvs.getBoundingClientRect();
-      var dx = ev.clientX - (r.left + r.width / 2);
-      var dy = ev.clientY - (r.top + r.height * .45);
-      var l = Math.hypot(dx, dy) || 1;
-      var k = Math.min(1, l / 220);
-      olharAlvo.x = (dx / l) * k;
-      olharAlvo.y = (dy / l) * k;
-    }, { passive: true });
-  } catch (e) {
-    console.warn('[mascote]', e.message);
-  }  /* ================= relógio ================= */
+  /* ================= relógio ================= */
   function tick() {
     var d = new Date();
     var p = function (n) { return String(n).padStart(2, '0'); };
