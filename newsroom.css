@@ -31,3 +31,9 @@ a {color:var(--link)}
 small,#status {color:var(--muted)}
 nav {padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
 img,video {border-radius:10px}
+.text-editor {display:grid;gap:10px;min-width:0}
+.editor-toolbar {display:flex;gap:6px;flex-wrap:wrap}
+.editor-toolbar button {min-height:38px;padding:6px 12px;font-size:.9rem;font-weight:600}
+.text-editor textarea {width:100%;min-height:300px;line-height:1.6}
+.article-body {line-height:1.75;overflow-wrap:anywhere}
+.article-body h3 {margin:1.5em 0 .5em}

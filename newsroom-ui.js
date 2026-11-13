@@ -40,6 +40,45 @@ function field(panel,label,name,kind='text') {
   node.required=kind!=='file';
   return node;
 }
+function formattedContent(parent, text) {
+  const body=element('div','',parent);
+  body.className='article-body';
+  for(const block of String(text||'').split(/\n\s*\n/)) {
+    if(!block.trim()) continue;
+    const heading=block.startsWith('## ');
+    const node=element(heading?'h3':'p','',body);
+    const value=heading?block.slice(3):block;
+    const pattern=/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|\[[^\]\n]+\]\(https?:\/\/[^\s)]+\))/g;
+    let last=0, match;
+    while((match=pattern.exec(value))) {
+      node.append(document.createTextNode(value.slice(last,match.index)));
+      const token=match[0];
+      if(token.startsWith('[')) {
+        const parts=token.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
+        const link=element('a',parts[1],node); link.href=parts[2]; link.target='_blank'; link.rel='noopener noreferrer';
+      } else element(token.startsWith('**')?'strong':'em',token.slice(token.startsWith('**')?2:1,token.startsWith('**')?-2:-1),node);
+      last=pattern.lastIndex;
+    }
+    node.append(document.createTextNode(value.slice(last)));
+  }
+}
+function textEditor(panel) {
+  const box=element('div','',panel); box.className='text-editor';
+  const toolbar=element('div','',box); toolbar.className='editor-toolbar';
+  const textarea=field(box,'Texto da matéria','content','textarea'); textarea.maxLength=40000; textarea.rows=16;
+  function wrap(before,after,placeholder) {
+    const start=textarea.selectionStart, end=textarea.selectionEnd;
+    const selected=textarea.value.slice(start,end)||placeholder;
+    textarea.setRangeText(before+selected+after,start,end,'select'); textarea.focus();
+  }
+  for(const [label,before,after,placeholder] of [['Negrito','**','**','texto'],['Itálico','*','*','texto'],['Intertítulo','\n\n## ','\n\n','Intertítulo'],['Link','[','](https://)','texto do link']]) {
+    const button=element('button',label,toolbar); button.type='button';
+    button.addEventListener('mousedown',event=>event.preventDefault());
+    button.onclick=()=>wrap(before,after,placeholder);
+  }
+  const help=element('small','Selecione o texto e use os botões. No link, complete o endereço entre parênteses.',box);
+  return textarea;
+}
 function article(parent,a,chief=false) {
   const publicPage=new URLSearchParams(location.search).has('publicadas');
   const wrapper=publicPage?element('details','',parent):parent;
@@ -67,7 +106,7 @@ function article(parent,a,chief=false) {
     if(media.tagName==='VIDEO'){media.controls=true;media.preload='metadata';}
     else media.alt='Foto da matéria '+a.title;
   }
-  element('p',a.content,card);
+  formattedContent(card,a.content);
   if(!publicPage && a.status==='Publicada'){
     element('a','Ver na capa',card).href='/#redacao-'+a.id;
     element('a','Abrir matéria publicada',card).href='/editores?publicadas&materia='+a.id;
@@ -157,6 +196,16 @@ async function render() {
   if(!user.chief || tab==='Nova matéria'){
   const submission=form('Nova matéria',async data=>{
     const attachment=data.media;
+    if(data.sourceName || data.sourceUrl) {
+      const source=String(data.sourceName||'Fonte').replace(/[\[\]\n]/g,'').trim();
+      if(data.sourceUrl) {
+        let url;
+        try { url=new URL(data.sourceUrl); } catch { throw new Error('Informe um endereço válido para a fonte.'); }
+        if(!['http:','https:'].includes(url.protocol) || /[\s)]/.test(url.href)) throw new Error('Use um link de fonte iniciado por http ou https.');
+        data.content+='\n\nFonte: ['+source+']('+url.href+')';
+      } else data.content+='\n\nFonte: '+source;
+    }
+    delete data.sourceName; delete data.sourceUrl;
     data.level=Number(data.level);
     data.media=null;
     if(attachment.size) {
@@ -175,7 +224,9 @@ async function render() {
     status.textContent=user.chief?'Matéria publicada.':'Matéria enviada para revisão.';
   },user.chief?'Publicar agora':'Enviar para revisão');
   field(submission.panel,'Título','title').maxLength=160;
-  field(submission.panel,'Texto da matéria','content','textarea').maxLength=40000;
+  textEditor(submission.panel);
+  const sourceName=field(submission.panel,'Nome da fonte (opcional)','sourceName'); sourceName.required=false; sourceName.maxLength=160;
+  const sourceUrl=field(submission.panel,'Link da fonte (opcional)','sourceUrl','url'); sourceUrl.required=false;
   field(submission.panel,user.chief?'Posição editorial':'Destaque sugerido','level','select');
   field(submission.panel,'Foto ou vídeo','media','file').accept='image/jpeg,image/png,image/webp,video/mp4';
   element('small','JPG, PNG ou WebP até 5 MB. MP4 até 16 MB.',submission.panel);
