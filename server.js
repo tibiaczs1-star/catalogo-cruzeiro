@@ -21979,6 +21979,7 @@ async function handleStatic(req, res, pathname, requestUrl) {
   const hasVersionParam = Boolean(requestUrl?.searchParams?.has("v"));
 
   if (!safePath) return sendText(res, 400, "Caminho inválido.");
+  if (/^newsroom-private[.]json(?:[.]tmp)?$/i.test(path.basename(safePath))) return sendText(res, 404, 'Página não encontrada.');
 
   if (fs.existsSync(safePath) && fs.statSync(safePath).isFile()) {
     if (!isPublicStaticFile(safePath)) return sendText(res, 404, "Página não encontrada.");
