@@ -6,7 +6,7 @@ module.exports = function newsroom(directory) {
   const file = path.join(directory, 'newsroom-private.json');
   const digest = (secret, salt) => crypto.scryptSync(secret, salt, 64).toString('hex');
   const token = () => crypto.randomBytes(24).toString('base64url');
-  const sessions = new Map();
+  const sessionHash = (id) => crypto.createHash('sha256').update(id).digest('hex');
   let attempts = 0;
   let windowEnd = 0;
   const levels = ['Comum', 'Destaque', 'Manchete'];
@@ -50,9 +50,11 @@ module.exports = function newsroom(directory) {
         body = JSON.parse(Buffer.concat(chunks).toString());
       }
       const state = fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{users:[],articles:[]};
+      state.sessions ||= [];
       const sessionId = /(?:^|; )czs_editor=([\w-]+)/.exec(req.headers.cookie || '')?.[1];
       const now = Date.now();
-      const session = sessions.get(sessionId);
+      const currentHash = sessionId ? sessionHash(sessionId) : '';
+      const session = state.sessions.find(item=>item.idHash===currentHash);
       const user = session?.until > now && state.users.find(u=>u.name===session.name && !u.disabled);
       const chief = user?.name === 'editor-geral';
       const send = (status,data)=>respond(res,status,data);
@@ -77,12 +79,12 @@ module.exports = function newsroom(directory) {
         if (!state.users.includes(account)) {
           state.users = state.users.filter(user => user.name !== name);
           state.users.push(account);
-          save(state);
-          for (const [id,value] of sessions) if (value.name === name) sessions.delete(id);
+          state.sessions = state.sessions.filter(item=>item.name!==name);
         }
-        for (const [id,value] of sessions) if (value.until <= now || id===sessionId) sessions.delete(id);
+        state.sessions = state.sessions.filter(item=>item.until>now && item.idHash!==currentHash);
         const id=token();
-        sessions.set(id,{name,until:now+8*3600000});
+        state.sessions.push({idHash:sessionHash(id),name,until:now+8*3600000});
+        save(state);
         res.setHeader('Set-Cookie','czs_editor='+id+'; Path=/api/editores; HttpOnly; SameSite=Strict; Max-Age=28800'+(process.env.RENDER || req.socket.encrypted?'; Secure':''));
         return send(200,{ok:true});
       }
@@ -107,7 +109,9 @@ module.exports = function newsroom(directory) {
       if (req.method==='GET' && route==='/api/editores') return send(200,{name:user.name,chief,temporary:user.temporary,team:chief&&!user.temporary?state.users.filter(u=>u.name!=='editor-geral').map(({name,disabled,temporary})=>({name,disabled,temporary})):[],articles:user.temporary?[]:state.articles.filter(a=>chief||a.author===user.name).map(({media,...a})=>({...a,hasMedia:Boolean(media)}))});
       if (req.method!=='POST') return send(404,{error:'Página indisponível.'});
       if (route.endsWith('/sair')) {
-        sessions.delete(sessionId);
+        state.sessions = state.sessions.filter(item=>item.idHash!==currentHash);
+        save(state);
+        res.setHeader('Set-Cookie','czs_editor=; Path=/api/editores; HttpOnly; SameSite=Strict; Max-Age=0'+(process.env.RENDER || req.socket.encrypted?'; Secure':''));
         return send(200,{ok:true});
       }
       if (route.endsWith('/senha')) {
@@ -115,8 +119,8 @@ module.exports = function newsroom(directory) {
         user.salt=token();
         user.hash=digest(body.password,user.salt);
         user.temporary=false;
+        state.sessions = state.sessions.filter(item=>item.name!==user.name || item.idHash===currentHash);
         save(state);
-        for (const [id,value] of sessions) if (value.name===user.name && id!==sessionId) sessions.delete(id);
         return send(200,{ok:true});
       }
       if (user.temporary) return send(403,{error:'Troque a senha temporária.'});
@@ -140,8 +144,8 @@ module.exports = function newsroom(directory) {
         } else {
           account.disabled=body.action==='disable';
         }
+        state.sessions = state.sessions.filter(item=>item.name!==account.name);
         save(state);
-        for (const [id,value] of sessions) if(value.name===account.name) sessions.delete(id);
         return send(200,{password});
       }
       if (route==='/api/editores/gerenciar' && chief) {
@@ -168,9 +172,10 @@ module.exports = function newsroom(directory) {
           if (!valid || bytes.length>(type==='video/mp4'?16:5)*1024*1024) return send(400,{error:'Use JPG, PNG ou WebP até 5 MB ou MP4 até 16 MB.'});
           media={type,data};
         }
-        state.articles.push({id:crypto.randomUUID(),title,content,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
+        const id=crypto.randomUUID();
+        state.articles.push({id,title,content,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
         save(state);
-        return send(201,{ok:true});
+        return send(201,{ok:true,id});
       }
       if (route.endsWith('/revisar') && chief) {
         const article=state.articles.find(a=>a.id===body.id && a.status==='Em revisão');

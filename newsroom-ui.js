@@ -165,7 +165,13 @@ function article(parent,a,chief=false) {
     const review=form('Revisão editorial',async data=>{
       await api('/revisar',{id:a.id,level:Number(data.level),approve:data.decision==='publish'});
       await render();
-      status.textContent='Revisão concluída.';
+      status.textContent=data.decision==='publish'?'Matéria aprovada e publicada.':'Matéria recusada.';
+      if(data.decision==='publish') {
+        const confirmation=element('section','');
+        element('p','Matéria aprovada e publicada.',confirmation);
+        element('a','Abrir matéria publicada',confirmation).href='/editores?publicadas&materia='+encodeURIComponent(a.id);
+        app.prepend(confirmation);
+      }
     },'Confirmar decisão',card);
     field(review.panel,'Posição editorial','level','select').value=a.level;
     const choice=field(review.panel,'Decisão','decision','select');
@@ -177,6 +183,7 @@ async function render() {
   app.replaceChildren();
   if(new URLSearchParams(location.search).has('publicadas')) {
     document.querySelector('#heading').textContent='Matérias da redação';
+    element('a','Voltar à redação').href='/editores';
     const rows=await api('/publicadas');
     if(!rows.length) element('p','Nenhuma matéria publicada.');
     const id=new URLSearchParams(location.search).get('materia');
@@ -190,7 +197,12 @@ async function render() {
     if(error.status!==401) throw error;
     const login=form('Entrar na redação',async data=>{await api('/login',data);await render();},'Entrar');
     field(login.panel,'Usuário','name').autocomplete='username';
-    field(login.panel,'Senha','password','password').autocomplete='current-password';
+    const password=field(login.panel,'Senha','password','password');
+    password.autocomplete='current-password';
+    const show=element('button','Mostrar senha',login.panel);
+    show.type='button';
+    show.onclick=()=>{const visible=password.type==='password';password.type=visible?'text':'password';show.textContent=visible?'Ocultar senha':'Mostrar senha';};
+    element('small','Use o nome de usuário e a senha fornecidos pelo editor-geral.',login.panel);
     login.finish();
     element('a','Ver matérias publicadas').href='/editores?publicadas';
     return;
@@ -256,10 +268,17 @@ async function render() {
       });
       data.media={type:attachment.type,data:encoded};
     }
-    await api('/enviar',data);
+    const result=await api('/enviar',data);
     if(user.chief) tab='Matérias';
     await render();
     status.textContent=user.chief?'Matéria publicada.':'Matéria enviada para revisão.';
+    const confirmation=element('section','');
+    element('p',user.chief?'Matéria publicada com sucesso.':'Matéria enviada ao editor-geral para aprovação.',confirmation);
+    if(user.chief) {
+      element('a','Abrir matéria publicada',confirmation).href='/editores?publicadas&materia='+encodeURIComponent(result.id);
+      element('a','Ver na capa do portal',confirmation).href='/#redacao-'+encodeURIComponent(result.id);
+    }
+    app.prepend(confirmation);
   },user.chief?'Publicar agora':'Enviar para revisão');
   field(submission.panel,'Título','title').maxLength=160;
   textEditor(submission.panel);
