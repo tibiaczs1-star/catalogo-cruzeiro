@@ -8,9 +8,9 @@
       article.level > 0 ? '#redacao-destaques' : '#redacao-feed');
     const card = document.createElement('article');
     card.id = 'redacao-' + article.id;
-    card.className = article === headline ? 'lead-card' : 'news-card';
+    card.className = article === headline ? 'redacao-headline' : 'news-card';
     const copy = document.createElement('div');
-    copy.className = 'lead-copy';
+    copy.className = article === headline ? 'redacao-headline-copy' : 'lead-copy';
     const title = document.createElement('h2');
     const link = document.createElement('a');
     link.href = '/editores?publicadas&materia=' + encodeURIComponent(article.id);
@@ -20,14 +20,13 @@
     const content = article.content.replace(/\s+/g, ' ').trim();
     summary.textContent = content.length > 180 ? content.slice(0, 177) + '…' : content;
     copy.append(title, summary);
-    if (article.hasMedia && article.mediaType.startsWith('image/')) {
-      const cover = document.createElement('div');
-      cover.className = article === headline ? 'lead-image' : '';
+    const photo = article.hasMedia && article.mediaType?.startsWith('image/');
+    if (photo || article === headline) {
       const image = document.createElement('img');
-      image.src = '/api/editores/midia/' + encodeURIComponent(article.id);
-      image.alt = '';
-      cover.append(image);
-      card.append(cover);
+      image.src = photo ? '/api/editores/midia/' + encodeURIComponent(article.id)
+        : '/assets/home-cache/rio-jurua-panorama.jpg';
+      image.alt = photo ? '' : 'Vista panoramica do Rio Jurua, imagem ilustrativa';
+      card.append(image);
     }
     card.append(copy);
     (section.querySelector('.feed-grid') || section).append(card);
