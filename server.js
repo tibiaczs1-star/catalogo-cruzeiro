@@ -22070,9 +22070,11 @@ function startAngelApi() {
   });
 }
 
+const handleNewsroom = require('./newsroom')(DATA_DIR);
 const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = requestUrl.pathname;
+  if (['/editores', '/editores.js', '/editores.css', '/api/editores'].includes(pathname) || pathname.startsWith('/api/editores/')) return handleNewsroom(req, res, requestUrl);
 
   if (pathname === `${ANGEL_PREFIX}/api` || pathname.startsWith(`${ANGEL_PREFIX}/api/`)) {
     return proxyAngelApi(req, res);
