@@ -1,7 +1,7 @@
 const app=document.querySelector('#app');
 const status=document.querySelector('#status');
 let tab='Para aprovar';
-const levels=['Comum','Destaque','Manchete'];
+const levels=['Feed de notícias','Destaque na capa','Manchete principal'];
 function element(tag,text,parent=app) {
   const node=document.createElement(tag);
   if(text) node.textContent=text;
@@ -41,9 +41,10 @@ function field(panel,label,name,kind='text') {
   return node;
 }
 function article(parent,a,chief=false) {
-  const publicPage=location.search==='?publicadas';
+  const publicPage=new URLSearchParams(location.search).has('publicadas');
   const wrapper=publicPage?element('details','',parent):parent;
   if(publicPage){
+    wrapper.open=new URLSearchParams(location.search).get('materia')===a.id;
     element('summary',a.title+' · '+levels[a.level],wrapper);
     wrapper.addEventListener('toggle',()=>{
       if(wrapper.open) api('/metrica',{id:a.id,event:'views'}).catch(()=>{});
@@ -67,6 +68,10 @@ function article(parent,a,chief=false) {
     else media.alt='Foto da matéria '+a.title;
   }
   element('p',a.content,card);
+  if(!publicPage && a.status==='Publicada'){
+    element('a','Ver na capa',card).href='/#redacao-'+a.id;
+    element('a','Abrir matéria publicada',card).href='/editores?publicadas&materia='+a.id;
+  }
   if(chief && ['Publicada','Arquivada'].includes(a.status)){
     const manage=form('Gerenciar publicação',async data=>{
       await api('/gerenciar',{id:a.id,level:Number(data.level),active:data.visibility==='public'});
@@ -93,11 +98,14 @@ function article(parent,a,chief=false) {
 }
 async function render() {
   app.replaceChildren();
-  if(location.search==='?publicadas') {
+  if(new URLSearchParams(location.search).has('publicadas')) {
     document.querySelector('#heading').textContent='Matérias da redação';
     const rows=await api('/publicadas');
     if(!rows.length) element('p','Nenhuma matéria publicada.');
-    rows.forEach(a=>article(app,a));
+    const id=new URLSearchParams(location.search).get('materia');
+    const visible=id?rows.filter(a=>a.id===id):rows;
+    if(id&&!visible.length) element('p','Matéria indisponível.');
+    visible.forEach(a=>article(app,a));
     return;
   }
   let user;
@@ -162,6 +170,7 @@ async function render() {
       data.media={type:attachment.type,data:encoded};
     }
     await api('/enviar',data);
+    if(user.chief) tab='Matérias';
     await render();
     status.textContent=user.chief?'Matéria publicada.':'Matéria enviada para revisão.';
   },user.chief?'Publicar agora':'Enviar para revisão');
