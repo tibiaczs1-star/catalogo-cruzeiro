@@ -37,3 +37,13 @@ img,video {border-radius:10px}
 .text-editor textarea {width:100%;min-height:300px;line-height:1.6}
 .article-body {line-height:1.75;overflow-wrap:anywhere}
 .article-body h3 {margin:1.5em 0 .5em}
+.editor-toolbar{align-items:center;padding:10px;background:var(--canvas);border:1px solid var(--line);border-radius:10px}
+.editor-toolbar select{width:auto;max-width:100%;font-size:.9rem}
+.editor-toolbar .editor-color{display:flex;align-items:center;gap:8px;font-size:.85rem;padding:0 4px}
+.editor-toolbar input[type=color]{width:42px;height:38px;min-height:38px;padding:3px;cursor:pointer}
+.editor-preview{border:1px solid var(--line);border-radius:10px;padding:18px;background:var(--surface)}
+.editor-preview>strong{display:block;color:var(--muted);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase}
+.article-body h1,.article-body h2,.article-body h3{line-height:1.25;margin:1.4em 0 .5em}
+.article-body blockquote{margin:1em 0;padding:.2em 1em;border-left:3px solid var(--accent);color:var(--muted);white-space:pre-wrap}
+.article-body li{margin:.35em 0}
+@media(max-width:600px){.editor-toolbar button{flex:1 1 auto}.editor-toolbar select{width:100%}}

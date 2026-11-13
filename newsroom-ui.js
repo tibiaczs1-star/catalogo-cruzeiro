@@ -43,41 +43,79 @@ function field(panel,label,name,kind='text') {
 function formattedContent(parent, text) {
   const body=element('div','',parent);
   body.className='article-body';
-  for(const block of String(text||'').split(/\n\s*\n/)) {
-    if(!block.trim()) continue;
-    const heading=block.startsWith('## ');
-    const node=element(heading?'h3':'p','',body);
-    const value=heading?block.slice(3):block;
-    const pattern=/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|\[[^\]\n]+\]\(https?:\/\/[^\s)]+\))/g;
+  function inline(node,value) {
+    const pattern=/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|~~[^~\n]+~~|\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)|\{(#[0-9a-fA-F]{6})\|([^{}\n]+)\})/g;
     let last=0, match;
     while((match=pattern.exec(value))) {
       node.append(document.createTextNode(value.slice(last,match.index)));
       const token=match[0];
-      if(token.startsWith('[')) {
-        const parts=token.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
-        const link=element('a',parts[1],node); link.href=parts[2]; link.target='_blank'; link.rel='noopener noreferrer';
-      } else element(token.startsWith('**')?'strong':'em',token.slice(token.startsWith('**')?2:1,token.startsWith('**')?-2:-1),node);
+      if(match[2]) {
+        const link=element('a',match[2],node); link.href=match[3]; link.target='_blank'; link.rel='noopener noreferrer';
+      } else if(match[4]) { const span=element('span',match[5],node); span.style.color=match[4]; }
+      else if(token.startsWith('~~')) element('s',token.slice(2,-2),node);
+      else element(token.startsWith('**')?'strong':'em',token.slice(token.startsWith('**')?2:1,token.startsWith('**')?-2:-1),node);
       last=pattern.lastIndex;
     }
     node.append(document.createTextNode(value.slice(last)));
+  }
+  for(const block of String(text||'').split(/\n\s*\n/)) {
+    if(!block.trim()) continue;
+    const heading=block.match(/^(#{1,3}) (.*)$/s);
+    if(heading) { const node=element('h'+heading[1].length,'',body); inline(node,heading[2]); continue; }
+    const lines=block.split('\n');
+    if(lines.every(line=>/^[-*] /.test(line))) {
+      const list=element('ul','',body); lines.forEach(line=>inline(element('li','',list),line.slice(2))); continue;
+    }
+    if(lines.every(line=>/^\d+\. /.test(line))) {
+      const list=element('ol','',body); lines.forEach(line=>inline(element('li','',list),line.replace(/^\d+\. /,''))); continue;
+    }
+    const quote=lines.every(line=>/^> ?/.test(line));
+    const node=element(quote?'blockquote':'p','',body);
+    inline(node,quote?lines.map(line=>line.replace(/^> ?/,'')).join('\n'):block);
   }
 }
 function textEditor(panel) {
   const box=element('div','',panel); box.className='text-editor';
   const toolbar=element('div','',box); toolbar.className='editor-toolbar';
+  toolbar.setAttribute('role','toolbar'); toolbar.setAttribute('aria-label','Formatação do texto');
   const textarea=field(box,'Texto da matéria','content','textarea'); textarea.maxLength=40000; textarea.rows=16;
+  textarea.placeholder='Escreva sua matéria aqui. Selecione um trecho para formatar.';
+  const preview=element('div','',box); preview.className='editor-preview';
+  element('strong','Prévia da matéria',preview);
+  const previewBody=element('div','',preview);
+  function refresh() { previewBody.replaceChildren(); formattedContent(previewBody,textarea.value); }
+  textarea.addEventListener('input',refresh);
   function wrap(before,after,placeholder) {
     const start=textarea.selectionStart, end=textarea.selectionEnd;
     const selected=textarea.value.slice(start,end)||placeholder;
-    textarea.setRangeText(before+selected+after,start,end,'select'); textarea.focus();
+    textarea.setRangeText(before+selected+after,start,end,'select'); textarea.focus(); refresh();
   }
-  for(const [label,before,after,placeholder] of [['Negrito','**','**','texto'],['Itálico','*','*','texto'],['Intertítulo','\n\n## ','\n\n','Intertítulo'],['Link','[','](https://)','texto do link']]) {
+  function control(label,action) {
     const button=element('button',label,toolbar); button.type='button';
-    button.addEventListener('mousedown',event=>event.preventDefault());
-    button.onclick=()=>wrap(before,after,placeholder);
+    button.addEventListener('mousedown',event=>event.preventDefault()); button.onclick=action;
   }
-  const help=element('small','Selecione o texto e use os botões. No link, complete o endereço entre parênteses.',box);
-  return textarea;
+  const heading=element('select','',toolbar); heading.setAttribute('aria-label','Nível de título');
+  [['Título e subtítulos',''],['Título H1','# '],['Subtítulo H2','## '],['Subtítulo H3','### ']].forEach(([label,value])=>heading.add(new Option(label,value)));
+  heading.onchange=()=>{if(heading.value) wrap('\n\n'+heading.value,'\n\n','Título'); heading.value='';};
+  control('Negrito',()=>wrap('**','**','texto'));
+  control('Itálico',()=>wrap('*','*','texto'));
+  control('Riscado',()=>wrap('~~','~~','texto'));
+  control('Link',()=>{
+    const address=prompt('Endereço do link (começando com https://):','https://');
+    if(address===null) return;
+    try { const url=new URL(address); if(!['https:','http:'].includes(url.protocol)||/[\s)]/.test(url.href)) throw Error(); wrap('[',']('+url.href+')','texto do link'); }
+    catch { status.textContent='Informe um endereço de link válido começando com http ou https.'; }
+  });
+  control('Lista',()=>wrap('\n\n- ','\n\n','item'));
+  control('Lista numerada',()=>wrap('\n\n1. ','\n\n','item'));
+  control('Citação',()=>wrap('\n\n> ','\n\n','citação'));
+  const colorLabel=element('label','Cor do texto',toolbar); colorLabel.className='editor-color';
+  const color=element('input','',colorLabel); color.type='color'; color.value='#b91c1c'; color.setAttribute('aria-label','Escolher cor do texto');
+  let savedStart=0,savedEnd=0;
+  textarea.addEventListener('select',()=>{savedStart=textarea.selectionStart;savedEnd=textarea.selectionEnd;});
+  color.addEventListener('change',()=>{textarea.setSelectionRange(savedStart,savedEnd);wrap('{'+color.value+'|','}','texto');});
+  element('small','Selecione um trecho e escolha uma ferramenta. A prévia mostra como ele aparecerá na matéria.',box);
+  refresh(); return textarea;
 }
 function article(parent,a,chief=false) {
   const publicPage=new URLSearchParams(location.search).has('publicadas');
