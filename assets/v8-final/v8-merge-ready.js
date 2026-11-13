@@ -1013,6 +1013,7 @@
     .slice(0, 9);
 
   const v8Url = (story) => {
+    if (story?.newsroomId) return '/editores?publicadas&materia=' + encodeURIComponent(story.newsroomId);
     const url = new URL(location.href);
     url.hash = `noticia=${encodeURIComponent(story?.slug || "")}`;
     return url.toString();
@@ -1878,6 +1879,10 @@
     const slug = typeof input === "string" ? input : input?.slug;
     const story = bySlug.get(String(slug || "")) || input || allStories[0];
     if (!story) return;
+    if (story.newsroomId) {
+      window.location.href = '/editores?publicadas&materia=' + encodeURIComponent(story.newsroomId);
+      return;
+    }
     installReader();
     const reader = $("#v8Reader");
     reader.dataset.slug = story.slug || "";
@@ -2204,6 +2209,31 @@
     const next = () => paint(index + 1);
     const prev = () => paint(index - 1);
     paint(0);
+    window.addEventListener('czs-newsroom-articles', (event) => {
+      const articles = Array.isArray(event.detail) ? event.detail : [];
+      const converted = articles.map((article) => ({
+        newsroomId: String(article.id), slug: 'redacao-' + article.id,
+        title: article.title, summary: String(article.content || '').replace(/\s+/g, ' ').trim().slice(0, 180),
+        category: article.category || 'Notícias', sourceName: 'Redação CZS',
+        publishedAt: article.published || article.created,
+        imageUrl: article.hasMedia && String(article.mediaType || '').startsWith('image/') ? '/api/editores/midia/' + encodeURIComponent(article.id) : '',
+        newsroomLevel: Number(article.level || 0)
+      }));
+      converted.forEach((story) => { if (!bySlug.has(story.slug)) { bySlug.set(story.slug, story); allStories.unshift(story); } });
+      const headlines = converted.filter((story) => story.newsroomLevel >= 2);
+      const highlights = converted.filter((story) => story.newsroomLevel === 1);
+      const featured = [...headlines, ...highlights];
+      if (featured.length) {
+        if (headlines.length) heroStories.unshift(...headlines, ...highlights);
+        else heroStories.splice(1, 0, ...highlights);
+        rail.innerHTML = heroStories.slice(1, 6).map((story, i) => railCard(story, i + 1)).join('');
+        renderSponsorSideRail();
+        paint(0);
+      }
+      const ordinary = converted.filter((story) => story.newsroomLevel === 0);
+      const grid = document.querySelector('#feedGrid');
+      if (grid && ordinary.length) grid.insertAdjacentHTML('afterbegin', ordinary.map((story, i) => renderContinuousStoryCard(story, i)).join(''));
+    }, { once: true });
     lead.addEventListener("click", (event) => {
       if (event.target.closest("[data-v8-hero-next]")) next();
       if (event.target.closest("[data-v8-hero-prev]")) prev();
