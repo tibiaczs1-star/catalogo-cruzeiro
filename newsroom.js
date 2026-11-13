@@ -126,7 +126,7 @@ module.exports = function newsroom(directory) {
           if (!valid || bytes.length>(type==='video/mp4'?16:5)*1024*1024) return send(400,{error:'Use JPG, PNG ou WebP até 5 MB ou MP4 até 16 MB.'});
           media={type,data};
         }
-        state.articles.push({id:crypto.randomUUID(),title,content,level,media,mediaType:media?.type,author:user.name,status:'Em revisão',created:new Date().toISOString()});
+        state.articles.push({id:crypto.randomUUID(),title,content,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
         save(state);
         return send(201,{ok:true});
       }

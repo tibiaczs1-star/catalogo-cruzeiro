@@ -108,11 +108,11 @@ async function render() {
     }
     await api('/enviar',data);
     await render();
-    status.textContent='Matéria enviada para revisão.';
-  },'Enviar para revisão');
+    status.textContent=user.chief?'Matéria publicada.':'Matéria enviada para revisão.';
+  },user.chief?'Publicar agora':'Enviar para revisão');
   field(submission.panel,'Título','title').maxLength=160;
   field(submission.panel,'Texto da matéria','content','textarea').maxLength=40000;
-  field(submission.panel,'Destaque sugerido','level','select');
+  field(submission.panel,user.chief?'Posição editorial':'Destaque sugerido','level','select');
   field(submission.panel,'Foto ou vídeo','media','file').accept='image/jpeg,image/png,image/webp,video/mp4';
   element('small','JPG, PNG ou WebP até 5 MB. MP4 até 16 MB.',submission.panel);
   submission.finish();
