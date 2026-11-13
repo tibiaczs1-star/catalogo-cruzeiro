@@ -205,3 +205,17 @@ async function render() {
   user.articles.slice().reverse().forEach(a=>article(app,a,user.chief));
 }
 render().catch(error=>{status.textContent=error.message;});
+const themeButton = document.querySelector('#theme');
+const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+function applyTheme() {
+  const dark = (localStorage.getItem('czs-editor-theme') || (systemTheme.matches ? 'dark' : 'light')) === 'dark';
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  themeButton.setAttribute('aria-pressed', String(dark));
+  themeButton.textContent = dark ? 'Tema claro' : 'Tema escuro';
+}
+themeButton.onclick = () => {
+  localStorage.setItem('czs-editor-theme', document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+  applyTheme();
+};
+systemTheme.addEventListener('change', applyTheme);
+applyTheme();

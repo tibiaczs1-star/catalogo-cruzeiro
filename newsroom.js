@@ -59,17 +59,27 @@ module.exports = function newsroom(directory) {
       if (req.method === 'POST' && route.endsWith('/login')) {
         if (now > windowEnd) { attempts=0; windowEnd=now+60000; }
         if (++attempts > 25) return send(429,{error:'Aguarde um minuto.'});
-        const name = String(body.name || '').toLowerCase().trim();
+        const login = String(body.name || '').toLowerCase().trim();
+        const name = login === 'clebson santos' ? 'editor-geral' : login;
         const password = String(body.password || '');
         if (password.length > 256) return send(400,{error:'Senha inválida.'});
         let account = state.users.find(u=>u.name===name);
-        if (!account && name==='editor-geral' && process.env.CZS_EDITOR_INITIAL_HASH) {
+        const rotation = name === 'editor-geral' ? process.env.CZS_EDITOR_ROTATION_HASH : '';
+        if (rotation && account?.rotation !== rotation) {
+          const [salt,hash] = rotation.split(':');
+          account = {...account,name,salt,hash,rotation,temporary:false};
+        } else if (!account && name==='editor-geral' && process.env.CZS_EDITOR_INITIAL_HASH) {
           const [salt,hash] = process.env.CZS_EDITOR_INITIAL_HASH.split(':');
           account={name,salt,hash,temporary:true};
         }
         const actual = digest(password,account?.salt || 'invalid-account');
         if (!account || account.disabled || !/^[a-f0-9]{128}$/.test(account.hash) || !crypto.timingSafeEqual(Buffer.from(actual,'hex'),Buffer.from(account.hash,'hex'))) return send(401,{error:'Usuário ou senha inválidos.'});
-        if (!state.users.includes(account)) {state.users.push(account);save(state);}
+        if (!state.users.includes(account)) {
+          state.users = state.users.filter(user => user.name !== name);
+          state.users.push(account);
+          save(state);
+          for (const [id,value] of sessions) if (value.name === name) sessions.delete(id);
+        }
         for (const [id,value] of sessions) if (value.until <= now || id===sessionId) sessions.delete(id);
         const id=token();
         sessions.set(id,{name,until:now+8*3600000});

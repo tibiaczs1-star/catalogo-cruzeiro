@@ -5,3 +5,29 @@ section,form,article{background:white;border:1px solid #dce4ef;border-radius:12p
 textarea{min-height:150px;resize:vertical} button{cursor:pointer;width:fit-content} button[type=submit]{color:white;background:#005bb9;border-color:#005bb9} button:disabled{opacity:.6} a{color:#0059aa} img,video{max-width:100%;max-height:420px;display:block;margin:12px 0} article p{white-space:pre-wrap;overflow-wrap:anywhere} #status{min-height:1.2em} small{color:#43546c}
 
 nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}nav [aria-pressed=true]{background:#005bb9;color:#fff;border-color:#005bb9}details{margin:12px 0;padding:12px;background:#fff;border:1px solid #dce4ef;border-radius:8px}summary{cursor:pointer;font-weight:600}section button+button{margin-left:8px}
+:root {
+  color-scheme: light;
+  --canvas:#edf2f9; --surface:#fff; --text:#14223a; --muted:#4e5f79;
+  --line:#cbd6e6; --accent:#125dcd; --link:#1259b5; --shadow:0 10px 28px #17325312;
+  color:var(--text); background:var(--canvas);
+}
+:root[data-theme=dark] {
+  color-scheme:dark;
+  --canvas:#101622; --surface:#192333; --text:#edf3ff; --muted:#b0bfd6;
+  --line:#41516a; --accent:#2564ce; --link:#9cc6ff; --shadow:0 10px 28px #0004;
+}
+header {background:var(--surface);border-color:var(--line);gap:16px;flex-wrap:wrap}
+.header-actions {display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+main {padding-top:40px}
+h1 {font-size:clamp(1.8rem,5vw,2.8rem)}
+section,form,article,details {background:var(--surface);border-color:var(--line);border-radius:16px}
+section,form {box-shadow:var(--shadow);padding:clamp(16px,3vw,28px)}
+#app > form {max-width:640px}
+input,textarea,select,button {background:var(--surface);border-color:var(--line);border-radius:9px;min-height:42px}
+button[type=submit],nav [aria-pressed=true] {background:var(--accent);border-color:var(--accent)}
+button:hover {box-shadow:0 0 0 2px var(--line)}
+:focus-visible {outline:2px solid var(--link);outline-offset:3px}
+a {color:var(--link)}
+small,#status {color:var(--muted)}
+nav {padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+img,video {border-radius:10px}
