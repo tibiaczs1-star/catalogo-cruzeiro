@@ -53,7 +53,7 @@ module.exports = function newsroom(directory) {
       const sessionId = /(?:^|; )czs_editor=([\w-]+)/.exec(req.headers.cookie || '')?.[1];
       const now = Date.now();
       const session = sessions.get(sessionId);
-      const user = session?.until > now && state.users.find(u=>u.name===session.name);
+      const user = session?.until > now && state.users.find(u=>u.name===session.name && !u.disabled);
       const chief = user?.name === 'editor-geral';
       const send = (status,data)=>respond(res,status,data);
       if (req.method === 'POST' && route.endsWith('/login')) {
@@ -68,7 +68,7 @@ module.exports = function newsroom(directory) {
           account={name,salt,hash,temporary:true};
         }
         const actual = digest(password,account?.salt || 'invalid-account');
-        if (!account || !/^[a-f0-9]{128}$/.test(account.hash) || !crypto.timingSafeEqual(Buffer.from(actual,'hex'),Buffer.from(account.hash,'hex'))) return send(401,{error:'Usuário ou senha inválidos.'});
+        if (!account || account.disabled || !/^[a-f0-9]{128}$/.test(account.hash) || !crypto.timingSafeEqual(Buffer.from(actual,'hex'),Buffer.from(account.hash,'hex'))) return send(401,{error:'Usuário ou senha inválidos.'});
         if (!state.users.includes(account)) {state.users.push(account);save(state);}
         for (const [id,value] of sessions) if (value.until <= now || id===sessionId) sessions.delete(id);
         const id=token();
@@ -85,8 +85,16 @@ module.exports = function newsroom(directory) {
         res.setHeader('Content-Type',a.media.type);
         return res.end(Buffer.from(a.media.data,'base64'));
       }
+      if (req.method==='POST' && route==='/api/editores/metrica') {
+        const article=state.articles.find(a=>a.id===body.id && a.status==='Publicada');
+        if (!article || !['views','clicks'].includes(body.event)) return send(404,{error:'Matéria indisponível.'});
+        article.metrics ||= {views:0,clicks:0};
+        article.metrics[body.event]++;
+        save(state);
+        return send(200,{ok:true});
+      }
       if (!user) return send(401,{error:'Entre para continuar.'});
-      if (req.method==='GET' && route==='/api/editores') return send(200,{name:user.name,chief,temporary:user.temporary,articles:user.temporary?[]:state.articles.filter(a=>chief||a.author===user.name).map(({media,...a})=>({...a,hasMedia:Boolean(media)}))});
+      if (req.method==='GET' && route==='/api/editores') return send(200,{name:user.name,chief,temporary:user.temporary,team:chief&&!user.temporary?state.users.filter(u=>u.name!=='editor-geral').map(({name,disabled,temporary})=>({name,disabled,temporary})):[],articles:user.temporary?[]:state.articles.filter(a=>chief||a.author===user.name).map(({media,...a})=>({...a,hasMedia:Boolean(media)}))});
       if (req.method!=='POST') return send(404,{error:'Página indisponível.'});
       if (route.endsWith('/sair')) {
         sessions.delete(sessionId);
@@ -109,6 +117,30 @@ module.exports = function newsroom(directory) {
         state.users.push({name,salt,hash:digest(password,salt),temporary:true});
         save(state);
         return send(201,{name,password});
+      }
+      if (route==='/api/editores/conta' && chief) {
+        const account=state.users.find(u=>u.name===body.name && u.name!=='editor-geral');
+        if (!account || !['disable','enable','reset'].includes(body.action)) return send(400,{error:'Ação inválida.'});
+        let password;
+        if (body.action==='reset') {
+          password=token();
+          account.salt=token();
+          account.hash=digest(password,account.salt);
+          account.temporary=true;
+        } else {
+          account.disabled=body.action==='disable';
+        }
+        save(state);
+        for (const [id,value] of sessions) if(value.name===account.name) sessions.delete(id);
+        return send(200,{password});
+      }
+      if (route==='/api/editores/gerenciar' && chief) {
+        const article=state.articles.find(a=>a.id===body.id && ['Publicada','Arquivada'].includes(a.status));
+        if (!article || ![0,1,2].includes(body.level) || typeof body.active!=='boolean') return send(400,{error:'Alteração inválida.'});
+        article.level=body.level;
+        article.status=body.active?'Publicada':'Arquivada';
+        save(state);
+        return send(200,{ok:true});
       }
       if (route.endsWith('/enviar')) {
         const title=String(body.title||'').trim(), content=String(body.content||'').trim(), level=body.level;

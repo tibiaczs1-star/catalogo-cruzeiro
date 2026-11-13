@@ -1,5 +1,6 @@
 const app=document.querySelector('#app');
 const status=document.querySelector('#status');
+let tab='Para aprovar';
 const levels=['Comum','Destaque','Manchete'];
 function element(tag,text,parent=app) {
   const node=document.createElement(tag);
@@ -40,16 +41,44 @@ function field(panel,label,name,kind='text') {
   return node;
 }
 function article(parent,a,chief=false) {
-  const card=element('article','',parent);
+  const publicPage=location.search==='?publicadas';
+  const wrapper=publicPage?element('details','',parent):parent;
+  if(publicPage){
+    element('summary',a.title+' · '+levels[a.level],wrapper);
+    wrapper.addEventListener('toggle',()=>{
+      if(wrapper.open) api('/metrica',{id:a.id,event:'views'}).catch(()=>{});
+    },{once:true});
+  }
+  const card=element('article','',wrapper);
   element('h2',a.title,card);
   element('small',a.author+' · '+a.status+' · '+levels[a.level],card);
   if(a.hasMedia) {
     const media=element(a.mediaType.startsWith('video/')?'video':'img','',card);
+    if(publicPage){
+      if(media.tagName==='IMG'){
+        const link=element('a','',card);
+        link.href='/api/editores/midia/'+a.id;
+        link.append(media);
+      }
+      media.addEventListener(media.tagName==='VIDEO'?'play':'click',()=>api('/metrica',{id:a.id,event:'clicks'}).catch(()=>{}),{once:true});
+    }
     media.src='/api/editores/midia/'+a.id;
     if(media.tagName==='VIDEO'){media.controls=true;media.preload='metadata';}
     else media.alt='Foto da matéria '+a.title;
   }
   element('p',a.content,card);
+  if(chief && ['Publicada','Arquivada'].includes(a.status)){
+    const manage=form('Gerenciar publicação',async data=>{
+      await api('/gerenciar',{id:a.id,level:Number(data.level),active:data.visibility==='public'});
+      await render();
+      status.textContent='Publicação atualizada.';
+    },'Salvar',card);
+    field(manage.panel,'Posição editorial','level','select').value=a.level;
+    const visibility=field(manage.panel,'Visibilidade','visibility','select');
+    visibility.replaceChildren(new Option('Publicada','public'),new Option('Arquivada','archive'));
+    visibility.value=a.status==='Publicada'?'public':'archive';
+    manage.finish();
+  }
   if(chief && a.status==='Em revisão') {
     const review=form('Revisão editorial',async data=>{
       await api('/revisar',{id:a.id,level:Number(data.level),approve:data.decision==='publish'});
@@ -92,6 +121,32 @@ async function render() {
     change.finish();
     return;
   }
+  if(user.chief){
+    const pending=user.articles.filter(a=>a.status==='Em revisão');
+    const nav=element('nav','');
+    for(const name of ['Para aprovar','Nova matéria','Matérias','Equipe','Métricas']){
+      const button=element('button',name==='Para aprovar'?name+' ('+pending.length+')':name,nav);
+      button.setAttribute('aria-pressed',String(tab===name));
+      button.onclick=()=>{tab=name;render().catch(error=>{status.textContent=error.message;});};
+    }
+    if(tab==='Para aprovar' || tab==='Matérias'){
+      const rows=tab==='Para aprovar'?pending:user.articles;
+      element('h2',tab==='Para aprovar'?'Fila de aprovação':'Todas as matérias');
+      if(!rows.length) element('p','Nenhuma matéria nesta fila.');
+      rows.slice().reverse().forEach(a=>article(app,a,true));
+      return;
+    }
+    if(tab==='Métricas'){
+      element('h2','Métricas da redação');
+      element('p','Visualizações contam aberturas de matérias. Cliques contam abertura de fotos ou início de vídeos.');
+      const rows=user.articles.filter(a=>['Publicada','Arquivada'].includes(a.status));
+      const total=(key)=>rows.reduce((sum,a)=>sum+(a.metrics?.[key]||0),0);
+      element('p',total('views')+' visualizações · '+total('clicks')+' cliques em mídia');
+      rows.forEach(a=>element('p',a.title+' · '+(a.metrics?.views||0)+' visualizações · '+(a.metrics?.clicks||0)+' cliques'));
+      return;
+    }
+  }
+  if(!user.chief || tab==='Nova matéria'){
   const submission=form('Nova matéria',async data=>{
     const attachment=data.media;
     data.level=Number(data.level);
@@ -116,17 +171,36 @@ async function render() {
   field(submission.panel,'Foto ou vídeo','media','file').accept='image/jpeg,image/png,image/webp,video/mp4';
   element('small','JPG, PNG ou WebP até 5 MB. MP4 até 16 MB.',submission.panel);
   submission.finish();
-  if(user.chief) {
+  }
+  if(user.chief && tab==='Equipe') {
     const team=form('Nomear editor',async data=>{
       const created=await api('/equipe',data);
-      result.textContent='Usuário '+created.name+' · Senha temporária '+created.password;
+      await render();
+      document.querySelector('#team-result').textContent='Usuário '+created.name+' · Senha temporária '+created.password;
       team.panel.reset();
     },'Gerar senha');
     field(team.panel,'Usuário do editor','name');
     team.finish();
-    const result=element('output','',team.panel);
+    element('output','',team.panel).id='team-result';
+    for(const account of user.team){
+      const card=element('section','');
+      element('h2',account.name,card);
+      element('p',account.disabled?'Desativado':account.temporary?'Senha temporária':'Ativo',card);
+      for(const [action,label] of [[account.disabled?'enable':'disable',account.disabled?'Reativar':'Desativar'],['reset','Gerar nova senha']]){
+        const button=element('button',label,card);
+        button.onclick=async()=>{
+          button.disabled=true;
+          try {
+            const result=await api('/conta',{name:account.name,action});
+            await render();
+            if(result.password) document.querySelector('#team-result').textContent='Usuário '+account.name+' · Senha temporária '+result.password;
+          } catch(error){status.textContent=error.message;button.disabled=false;}
+        };
+      }
+    }
   }
-  element('h2',user.chief?'Fila editorial':'Minhas matérias');
+  if(user.chief) return;
+  element('h2','Minhas matérias');
   if(!user.articles.length) element('p','Nenhuma matéria enviada.');
   user.articles.slice().reverse().forEach(a=>article(app,a,user.chief));
 }
