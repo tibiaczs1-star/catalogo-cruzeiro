@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="night" data-festive="natal">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHICO • Caminhos do Juruá — RPG 3D em Cruzeiro do Sul</title>
+  <meta name="description" content="Explore CHICO • Caminhos do Juruá: um RPG 3D acolhedor em Cruzeiro do Sul — Acre, com personagens e objetos 3D interativos e a voz oficial do Chico Gatão." />
+  <link rel="icon" type="image/png" href="./assets/icons/ico_enxada.png" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/vendor/three/build/three.module.min.js",
+        "three/addons/": "./assets/vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .gap-4 { gap: 16px; }
+    .wrap { flex-wrap: wrap; }
+    .text-xs { font-size: 12px; }
+    .text-sm { font-size: 14px; }
+    .text-muted { color: var(--text-muted); }
+    .mt-2 { margin-top: 8px; }
+    .mt-3 { margin-top: 12px; }
+    .mt-4 { margin-top: 16px; }
+    .mb-0 { margin-bottom: 0; }
+    .w-full { width: 100%; }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo Cartoon 3D em Camadas Parallax + Partículas Natalinas -->
+  <div class="parallax-backdrop" aria-hidden="true"></div>
+  <div class="parallax-tint" aria-hidden="true"></div>
+  <div class="parallax-orbs" aria-hidden="true"></div>
+  <canvas id="natalAmbientCanvas" class="natal-ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- 1. NAVBAR ORGÂNICA FLUTUANTE COM ENFEITE DE NATAL -->
+  <div class="nav-shell">
+    <nav class="site-nav" aria-label="Navegação principal">
+      <div class="natal-garland" aria-hidden="true">
+        <span class="bulb is-gold"></span>
+        <span class="bulb is-ruby"></span>
+        <span class="bulb is-emerald"></span>
+        <span class="bulb is-sky"></span>
+        <span class="bulb is-gold"></span>
+        <span class="bulb is-ruby"></span>
+        <span class="bulb is-emerald"></span>
+        <span class="bulb is-sky"></span>
+        <span class="bulb is-gold"></span>
+        <span class="bulb is-ruby"></span>
+        <span class="bulb is-emerald"></span>
+        <span class="bulb is-gold"></span>
+      </div>
+      <div class="nav-inner">
+        <a href="#inicio" class="brand-link">
+          <span class="brand-orb">
+            <img src="./assets/images/chico_3d_portrait.jpg" alt="Chico Gatão" />
+          </span>
+          <div>
+            <div class="font-display" style="font-weight:800; font-size:17px; letter-spacing:0.04em; line-height:1;">CHICO</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Caminhos do Juruá</div>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <a href="#inicio" class="nav-pill is-active"><img src="./assets/icons/ico_pin.png" alt="" />Início</a>
+          <a href="#funcoes" class="nav-pill"><img src="./assets/icons/ico_enxada.png" alt="" />A Vida no Juruá</a>
+          <a href="#turma-3d" class="nav-pill"><img src="./assets/icons/ico_vida.png" alt="" />A Turma</a>
+          <a href="#objetos-3d" class="nav-pill"><img src="./assets/icons/ico_madeira.png" alt="" />Ferramentas</a>
+          <a href="#galeria" class="nav-pill"><img src="./assets/icons/ico_relogio.png" alt="" />Cruzeiro do Sul</a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btn-sfx" class="icon-btn is-sfx-on" title="Alternar Efeitos Sonoros" aria-label="Alternar Efeitos Sonoros" aria-pressed="true">🔊</button>
+          <button id="btn-natal" class="natal-toggle-pill is-active" title="Alternar enfeites de Natal no Juruá" aria-pressed="true">🎄 Natal</button>
+          <button id="btn-search" class="icon-btn" title="Buscar no jogo" aria-label="Buscar no site">🔍</button>
+          <button id="btn-theme" class="icon-btn" title="Alternar Noite do Rio / Amanhecer" aria-label="Alternar tema">☀</button>
+          <button id="btn-nav-demo" class="btn-gold" style="padding:9px 18px; font-size:13px;">Jogar Demo</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 2. HERO + VOZ REAL DO CHICO GATÃO -->
+  <header id="inicio" class="hero-section">
+    <div class="container-max">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-title-png-wrap">
+            <img src="./assets/ui/title_hero_chico.png" alt="CHICO • Caminhos do Juruá" class="hero-title-png" />
+            <h1 class="sr-only-heading">CHICO • Caminhos do Juruá — Explore o Sítio e Viva o Vale do Juruá</h1>
+          </div>
+
+          <p class="text-sm text-muted" style="max-width:490px; font-size:16px; line-height:1.65; margin:0 0 22px;">
+            Plante no Sítio do Chico, torre farinha artesanal no forno de barro, navegue pelo Rio Juruá com o boto e percorra Cruzeiro do Sul em 3D.
+          </p>
+
+          <div class="flex wrap items-center gap-3">
+            <button id="btn-hero-download" class="btn-gold">Baixar Demo Windows 🚀</button>
+            <a href="#turma-3d" class="btn-glass">Conhecer a Turma ✨</a>
+          </div>
+
+          <!-- Cápsula da Introdução Oficial do Jogo (Voz Real do Chico Gatão) -->
+          <div id="voice-capsule" class="voice-capsule">
+            <div class="voice-top-row">
+              <button id="btn-voice-toggle" class="voice-play-orb" aria-label="Ouvir ou pausar a introdução oficial do jogo na voz do Chico Gatão">♫</button>
+              <div class="voice-meta">
+                <div class="voice-title">Introdução do Jogo · Voz do Chico Gatão</div>
+                <div id="voice-track-label" class="voice-subtitle">
+                  Narração Oficial de Abertura
+                </div>
+              </div>
+              <div class="voice-bars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <div id="voice-verse-box" class="voice-verse-box">
+              &ldquo;Nas curvas lentas do meu Juruá, onde a floresta se deita pra rezar... Eu sou Chico Gatão, filho desse rincão. Pegue sua coragem, segure o timão. Bem-vindo ao Juruá, começa a nossa missão.&rdquo;
+            </div>
+            <audio id="chico-real-audio" preload="auto" src="./assets/audio/narracao_chico_abertura.mp3"></audio>
+          </div>
+        </div>
+
+        <!-- Direita: Diorama de Features Principais do Jogo -->
+        <div class="hero-diorama-wrap">
+          <div id="hero-diorama" class="hero-diorama">
+            <div class="hero-stage">
+              <img id="hero-stage-img" src="./assets/images/demo_fazenda.jpg" alt="Plantio &amp; 60 Canteiros no Sítio do Chico" />
+              <canvas id="heroFxCanvas" class="hero-fx-canvas"></canvas>
+
+              <div class="hero-float-chip" style="top:14px; left:14px;">
+                <img id="hero-stage-icon" src="./assets/icons/ico_enxada.png" alt="" />
+                <span id="hero-stage-badge">Plantio &amp; 60 Canteiros</span>
+              </div>
+
+              <div class="hero-stage-caption">
+                <span id="hero-stage-desc">Prepare a terra, plante 8 culturas amazônicas e colha direto na roça em 3D.</span>
+                <div class="hero-progress-bar" aria-hidden="true"><span id="hero-progress-fill"></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage-pills" role="tablist" aria-label="Principais features do jogo">
+            <button data-stage="fazenda" class="stage-pill is-active"><img src="./assets/icons/ico_enxada.png" alt="" />Plantio 3D</button>
+            <button data-stage="farinha" class="stage-pill"><img src="./assets/icons/ico_madeira.png" alt="" />Casa de Farinha</button>
+            <button data-stage="pesca" class="stage-pill"><img src="./assets/icons/ico_balde.png" alt="" />Pesca &amp; Rio</button>
+            <button data-stage="cidade" class="stage-pill"><img src="./assets/icons/ico_celular.png" alt="" />Juruá Zap [N]</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atalhos do Jogo -->
+      <div class="pillar-ribbon">
+        <a href="#funcoes" class="pillar-chip"><img src="./assets/icons/ico_enxada.png" alt="" />Roça &amp; Farinha Ouro</a>
+        <a href="#funcoes" class="pillar-chip"><img src="./assets/icons/ico_balde.png" alt="" />Pesca &amp; Rio Juruá</a>
+        <a href="#turma-3d" class="pillar-chip"><img src="./assets/icons/ico_vida.png" alt="" />A Turma do Sítio</a>
+        <a href="#objetos-3d" class="pillar-chip"><img src="./assets/icons/ico_madeira.png" alt="" />Ferramentas do Chico</a>
+        <a href="#galeria" class="pillar-chip"><img src="./assets/icons/ico_pin.png" alt="" />Cruzeiro do Sul</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-max">
+
+    <!-- 3. SEÇÃO 1 — A VIDA NO JURUÁ -->
+    <section id="funcoes" class="section-block reveal">
+      <div class="section-head">
+        <img src="./assets/ui/title_vida_jurua.png" alt="A Vida no Juruá" class="section-title-png" />
+        <h2 class="sr-only-heading">A Vida no Juruá</h2>
+        <p class="text-sm text-muted" style="margin:0;">
+          Da terra roxa da roça às águas do Rio Juruá e às ruas de Cruzeiro do Sul: descubra o que você faz no jogo.
+        </p>
+      </div>
+
+      <div class="cartoon-grid">
+        <button class="tilt-card" data-tilt-3d data-modal-img="./assets/images/cartoon_farinha_roca.jpg" data-modal-title="Roça &amp; Casa de Farinha Artesanal" data-modal-desc="Cultive 60 canteiros de mandioca brava, macaxeira e milho crioulo; depois raspe, prense no tipiti e torre no forno de barro até alcançar a Farinha Cruzeiro do Sul Qualidade Ouro.">
+          <span class="card-sheen"></span>
+          <div class="cartoon-media">
+            <img src="./assets/images/cartoon_farinha_roca.jpg" alt="Ilustração cartoon de Chico torrando farinha na Casa de Farinha" />
+            <span class="cartoon-float-icon"><img src="./assets/icons/ico_enxada.png" alt="" /></span>
+          </div>
+          <div class="cartoon-body">
+            <h3 class="font-display" style="font-size:19px; font-weight:800; margin:0 0 6px;">Roça &amp; Casa de Farinha</h3>
+            <p class="text-xs text-muted" style="margin:0; font-size:13px;">
+              60 canteiros vivos, tipiti e forno de barro para torrar a famosa farinha ouro do Acre.
+            </p>
+          </div>
+        </button>
+
+        <button class="tilt-card" data-tilt-3d data-modal-img="./assets/images/cartoon_pesca_boto.jpg" data-modal-title="Pesca no Trapiche, Canoa &amp; Rio Juruá" data-modal-desc="Navegue de canoa pelo Rio Juruá, pesque 7 espécies nativas do Lambari ao Tambaqui e observe o boto-cor-de-rosa saltando diante da Ponte da União.">
+          <span class="card-sheen"></span>
+          <div class="cartoon-media">
+            <img src="./assets/images/cartoon_pesca_boto.jpg" alt="Ilustração cartoon do Chico pescando na canoa com o boto no Rio Juruá" />
+            <span class="cartoon-float-icon"><img src="./assets/icons/ico_balde.png" alt="" /></span>
+          </div>
+          <div class="cartoon-body">
+            <h3 class="font-display" style="font-size:19px; font-weight:800; margin:0 0 6px;">Pesca &amp; Lendas do Rio</h3>
+            <p class="text-xs text-muted" style="margin:0; font-size:13px;">
+              Vara na mão, canoa nas águas do Juruá e encontro com o Boto-cor-de-rosa ao pôr do sol.
+            </p>
+          </div>
+        </button>
+
+        <button class="tilt-card" data-tilt-3d data-modal-img="./assets/images/cartoon_cidade_zap.jpg" data-modal-title="Cruzeiro do Sul 3D &amp; Celular Juruá Zap" data-modal-desc="Atravesse a ponte até a Praça Orleir Cameli, explore a Catedral e o coreto em escala 3D e receba encomendas dos moradores pelo Juruá Zap [N].">
+          <span class="card-sheen"></span>
+          <div class="cartoon-media">
+            <img src="./assets/images/cartoon_cidade_zap.jpg" alt="Ilustração cartoon do Chico na Praça e Catedral de Cruzeiro do Sul com Juruá Zap" />
+            <span class="cartoon-float-icon"><img src="./assets/icons/ico_celular.png" alt="" /></span>
+          </div>
+          <div class="cartoon-body">
+            <h3 class="font-display" style="font-size:19px; font-weight:800; margin:0 0 6px;">Cidade Viva &amp; Juruá Zap</h3>
+            <p class="text-xs text-muted" style="margin:0; font-size:13px;">
+              Missões no celular [N], corridas pela cidade, comércio da praça e catedral em 3D.
+            </p>
+          </div>
+        </button>
+      </div>
+
+      <!-- Painel Interativo Ilustrado das 6 Principais Funções do Jogo -->
+      <div id="mechanic-showcase" class="organic-panel mechanic-showcase">
+        <div class="mechanic-tabs" role="tablist" aria-label="Principais funções do jogo">
+          <button type="button" class="mechanic-tab is-active" data-mech="plantio">
+            <img src="./assets/icons/ico_enxada.png" alt="" />
+            <span>1. Roça &amp; 60 Canteiros</span>
+          </button>
+          <button type="button" class="mechanic-tab" data-mech="farinha">
+            <img src="./assets/icons/ico_machado.png" alt="" />
+            <span>2. Casa de Farinha Ouro</span>
+          </button>
+          <button type="button" class="mechanic-tab" data-mech="pesca">
+            <img src="./assets/icons/ico_balde.png" alt="" />
+            <span>3. Pesca &amp; Rio Juruá</span>
+          </button>
+          <button type="button" class="mechanic-tab" data-mech="zap">
+            <img src="./assets/icons/ico_celular.png" alt="" />
+            <span>4. Celular Juruá Zap [N]</span>
+          </button>
+          <button type="button" class="mechanic-tab" data-mech="cidade">
+            <img src="./assets/icons/ico_pin.png" alt="" />
+            <span>5. Cidade 3D &amp; Comércio</span>
+          </button>
+          <button type="button" class="mechanic-tab" data-mech="natal">
+            <img src="./assets/icons/ico_relogio.png" alt="" />
+            <span>6. Clima UTC-5 &amp; Natal</span>
+          </button>
+        </div>
+
+        <div class="mechanic-stage-grid">
+          <div class="mechanic-visual-wrap">
+            <img id="mech-preview-img" src="./assets/images/demo_fazenda.jpg" alt="Ilustração da função ativa do jogo" />
+            <span id="mech-hotkey-badge" class="mech-hotkey-badge">Teclas [1] Enxada · [2] Regador · [E] Plantar</span>
+          </div>
+
+          <div class="mechanic-details">
+            <span id="mech-kicker" class="section-kicker" style="align-self:flex-start; margin-bottom:6px;">Ciclo Agrícola Completo</span>
+            <h3 id="mech-title" class="font-display" style="font-size:24px; font-weight:800; margin:0 0 8px;">Plantio Vivo nos 60 Canteiros do Sítio</h3>
+            <p id="mech-desc" class="text-sm text-muted" style="margin:0 0 14px; line-height:1.6;">
+              Prepare a terra roxa com a enxada, semeie mandioca brava, macaxeira e milho crioulo e acompanhe os 4 estágios reais de crescimento até a colheita.
+            </p>
+
+            <div class="mech-steps-grid">
+              <div class="mech-step-card">
+                <span class="mech-step-num">Passo 1</span>
+                <strong id="mech-step1-title">Capinar &amp; Adubar</strong>
+                <p id="mech-step1-desc" class="text-xs text-muted">Use a Enxada [1] e a Pá para limpar e abrir os canteiros.</p>
+              </div>
+              <div class="mech-step-card">
+                <span class="mech-step-num">Passo 2</span>
+                <strong id="mech-step2-title">Semear &amp; Regar</strong>
+                <p id="mech-step2-desc" class="text-xs text-muted">Plante sementes do Sr. Celso [E] e mantenha a umidade com o Regador [2].</p>
+              </div>
+              <div class="mech-step-card">
+                <span class="mech-step-num">Passo 3</span>
+                <strong id="mech-step3-title">Colher Safra Cheia</strong>
+                <p id="mech-step3-desc" class="text-xs text-muted">Recolha raízes maduras para a Casa de Farinha ou venda direta.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SEÇÃO 2 — A TURMA DO SÍTIO -->
+    <section id="turma-3d" class="section-block reveal">
+      <div class="section-head">
+        <img src="./assets/ui/title_turma_sitio.png" alt="A Turma do Sítio" class="section-title-png" />
+        <h2 class="sr-only-heading">A Turma do Sítio</h2>
+        <p class="text-sm text-muted" style="margin:0;">
+          Escolha um morador do Juruá para girar em 360°, testar animações e ouvir histórias da roça e da cidade.
+        </p>
+      </div>
+
+      <div class="organic-panel character-stage-grid">
+        <div class="stage-column">
+          <div class="webgl-stage-box">
+            <div id="stage-city-backdrop" class="stage-city-backdrop" aria-hidden="true">
+              <img id="stage-city-img" src="./assets/images/bg_praca_noite_natal.jpg" alt="Cenário real de Cruzeiro do Sul ao fundo" />
+              <div class="stage-city-vignette"></div>
+            </div>
+            <div class="natal-stage-ribbon" aria-hidden="true">
+              <span class="bulb is-gold"></span><span class="bulb is-ruby"></span><span class="bulb is-emerald"></span><span class="bulb is-sky"></span><span class="bulb is-gold"></span><span class="bulb is-ruby"></span><span class="bulb is-emerald"></span>
+            </div>
+            <canvas id="char3d-canvas" aria-label="Palco 3D interativo dos personagens do jogo"></canvas>
+            <div id="char-stage-pill" class="stage-overlay-pill">Chico Gatão · Praça Orleir Cameli (Natal)</div>
+            <div class="stage-drag-hint">Arraste para girar 360°</div>
+          </div>
+
+          <div class="stage-scene-pills" role="tablist" aria-label="Fundo real da cidade atrás do personagem">
+            <button class="stage-scene-pill is-active" data-city-bg="./assets/images/bg_praca_noite_natal.jpg" data-city-label="Praça Orleir Cameli (Natal)" data-city-tint="night">Praça à Noite (Natal)</button>
+            <button class="stage-scene-pill" data-city-bg="./assets/images/mirante_catedral.jpg" data-city-label="Catedral &amp; Centro 3D" data-city-tint="day">Catedral da Glória</button>
+            <button class="stage-scene-pill" data-city-bg="./assets/images/mirante_ponte.jpg" data-city-label="Mirante do Rio Juruá" data-city-tint="day">Ponte do Rio Juruá</button>
+            <button class="stage-scene-pill" data-city-bg="./assets/images/bg_praca_dia_natal.jpg" data-city-label="Coreto &amp; Feira de Natal" data-city-tint="day">Praça de Dia (Natal)</button>
+            <button class="stage-scene-pill" data-city-bg="./assets/images/bg_sitio_noite_natal.jpg" data-city-label="Sítio do Chico (Natal)" data-city-tint="night">Sítio à Noite (Natal)</button>
+          </div>
+        </div>
+
+        <div class="flex" style="flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="crew-selector" role="tablist" aria-label="Selecionar personagem 3D">
+              <button class="crew-tab is-active" data-char="chico">
+                <span class="crew-tab-dot"><img src="./assets/images/chico_3d_portrait.jpg" alt="Chico Gatão" style="width:100%; height:100%; object-fit:cover;" /></span>
+                Chico
+              </button>
+              <button class="crew-tab" data-char="raiane">
+                <span class="crew-tab-dot"><img src="./assets/images/portrait_raiane.jpg" alt="Raiane" style="width:100%; height:100%; object-fit:cover;" /></span>
+                Raiane
+              </button>
+              <button class="crew-tab" data-char="rosa">
+                <span class="crew-tab-dot"><img src="./assets/images/portrait_rosa.jpg" alt="Dona Rosa" style="width:100%; height:100%; object-fit:cover;" /></span>
+                D. Rosa
+              </button>
+              <button class="crew-tab" data-char="sebastiao">
+                <span class="crew-tab-dot"><img src="./assets/images/portrait_sebastiao.jpg" alt="Vovô Sebastião" style="width:100%; height:100%; object-fit:cover;" /></span>
+                V. Sebastião
+              </button>
+              <button class="crew-tab" data-char="celso">
+                <span class="crew-tab-dot"><img src="./assets/images/portrait_celso.jpg" alt="Sr. Celso" style="width:100%; height:100%; object-fit:cover;" /></span>
+                Sr. Celso
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between wrap gap-2">
+              <div>
+                <h3 id="char-info-name" class="font-display" style="font-size:24px; font-weight:800; margin:0;">Chico Gatão</h3>
+                <div id="char-info-role" class="text-xs text-muted" style="font-size:13px;">Protagonista · Agricultor Caboclo</div>
+              </div>
+              <button id="btn-char-speak" class="btn-gold" style="padding:9px 18px; font-size:13px;">
+                ♫ Ouvir Chico Gatão
+              </button>
+            </div>
+
+            <div class="dialogue-bubble">
+              <div class="text-xs" style="color:var(--gold-bright); font-weight:800; margin-bottom:4px;">Fala do Personagem</div>
+              <p id="char-dialogue-text" style="margin:0;">
+                &ldquo;Eu sou Chico Gatão, filho desse rincão. Pegue sua coragem, segure o timão. Bem-vindo ao Juruá!&rdquo;
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-xs text-muted" style="font-weight:800; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.08em;">
+              Animações &amp; Movimento 3D
+            </div>
+            <div class="action-pills">
+              <button class="action-chip is-active" data-anim="Idle_A">Respirando</button>
+              <button class="action-chip" data-anim="Interact">Conversar / Acenar</button>
+              <button class="action-chip" data-anim="Walking_A">Caminhando</button>
+              <button class="action-chip" data-anim="Digging">Capinando</button>
+              <button class="action-chip" data-anim="Fishing_Idle">Pescando</button>
+              <button id="btn-next-dialogue" class="action-chip" style="border-color:var(--border-glow); color:var(--gold-bright);">Trocar Fala ↻</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SEÇÃO 3 — FERRAMENTAS DO CHICO -->
+    <section id="objetos-3d" class="section-block reveal">
+      <div class="section-head">
+        <img src="./assets/ui/title_ferramentas.png" alt="Ferramentas do Chico" class="section-title-png" />
+        <h2 class="sr-only-heading">Ferramentas do Chico</h2>
+        <p class="text-sm text-muted" style="margin:0;">
+          Cada ferramenta de trabalho carrega sua própria raridade e brilho — filtre por classe, ajuste a luz e gire em 360°.
+        </p>
+      </div>
+
+      <div class="organic-panel rarity-toolbar">
+        <div class="rarity-filter-pills" role="tablist" aria-label="Filtrar ferramentas por raridade">
+          <button class="rarity-pill is-active" data-filter-rarity="todos">Todas as Ferramentas (9)</button>
+          <button class="rarity-pill" data-filter-rarity="comum" data-rarity="comum">● Comum</button>
+          <button class="rarity-pill" data-filter-rarity="incomum" data-rarity="incomum">● Incomum</button>
+          <button class="rarity-pill" data-filter-rarity="raro" data-rarity="raro">✦ Raro</button>
+          <button class="rarity-pill" data-filter-rarity="epico" data-rarity="epico">❖ Épico</button>
+          <button class="rarity-pill" data-filter-rarity="lendario" data-rarity="lendario">★ Lendário</button>
+        </div>
+
+        <label class="rarity-intensity-control" for="rarity-light-slider">
+          <span>Intensidade 3D</span>
+          <input id="rarity-light-slider" type="range" min="40" max="160" step="5" value="100" />
+          <strong id="rarity-light-readout">100%</strong>
+        </label>
+      </div>
+
+      <div class="props-grid">
+        <article class="prop-card" data-rarity="comum" data-intensity="38" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/props/hoe.glb" data-rarity="comum" data-intensity="0.38">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Tecla [1]</span>
+            <span class="prop-rarity-tag">Comum</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Enxada de Roça</h3>
+              <span class="prop-lux-val">Luz 38%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Capina a terra roxa e abre cada um dos 60 canteiros do Sítio.</p>
+            <div class="rarity-meter"><span style="width:38%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="comum" data-intensity="42" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/farming_props/tool-shovel.glb" data-rarity="comum" data-intensity="0.42">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Canteiro</span>
+            <span class="prop-rarity-tag">Comum</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Pá de Canteiro</h3>
+              <span class="prop-lux-val">Luz 42%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Revolve o solo adubado e abre covas fundas para mudas.</p>
+            <div class="rarity-meter"><span style="width:42%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="incomum" data-intensity="58" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/props/watering_can.glb" data-rarity="incomum" data-intensity="0.58">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Tecla [2]</span>
+            <span class="prop-rarity-tag">Incomum</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Regador do Sítio</h3>
+              <span class="prop-lux-val">Luz 58%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Mantém a umidade diária da mandioca, macaxeira e milho.</p>
+            <div class="rarity-meter"><span style="width:58%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="incomum" data-intensity="64" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/char3d/axe.glb" data-rarity="incomum" data-intensity="0.64">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Tecla [3]</span>
+            <span class="prop-rarity-tag">Incomum</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Machado de Lenha</h3>
+              <span class="prop-lux-val">Luz 64%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Corta lenha firme para alimentar o forno de barro da farinhada.</p>
+            <div class="rarity-meter"><span style="width:64%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="raro" data-intensity="74" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/char3d/pickaxe.glb" data-rarity="raro" data-intensity="0.74">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Minério</span>
+            <span class="prop-rarity-tag">Raro</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Picareta de Rocha</h3>
+              <span class="prop-lux-val">Luz 74%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Quebra pedras brutas e desobstrui trilhas nos barrancos.</p>
+            <div class="rarity-meter"><span style="width:74%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="raro" data-intensity="78" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/char3d/hammer.glb" data-rarity="raro" data-intensity="0.78">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Oficina</span>
+            <span class="prop-rarity-tag">Raro</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Martelo de Carpintaria</h3>
+              <span class="prop-lux-val">Luz 78%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Repara cercas, prensa de tipiti, cocho e tábuas do trapiche.</p>
+            <div class="rarity-meter"><span style="width:78%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="epico" data-intensity="88" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/char3d/net.glb" data-rarity="epico" data-intensity="0.88">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Ribeirinha</span>
+            <span class="prop-rarity-tag">Épico</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Puçá &amp; Rede do Juruá</h3>
+              <span class="prop-lux-val">Luz 88%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Captura iscas vivas e peixes de igarapé nas margens rasas.</p>
+            <div class="rarity-meter"><span style="width:88%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="epico" data-intensity="92" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/farm_town/lantern.glb" data-rarity="epico" data-intensity="0.92">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Tecla [F]</span>
+            <span class="prop-rarity-tag">Épico</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Lanterna Noturna</h3>
+              <span class="prop-lux-val">Luz 92%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Clareia a mata, o trapiche e a roça nas noites escuras do Acre.</p>
+            <div class="rarity-meter"><span style="width:92%;"></span></div>
+          </div>
+        </article>
+
+        <article class="prop-card" data-rarity="lendario" data-intensity="100" data-tilt-3d>
+          <span class="card-sheen"></span>
+          <div class="prop-viewport" data-model="./assets/models/char3d/rod.glb" data-rarity="lendario" data-intensity="1.0">
+            <canvas class="prop-item-canvas"></canvas>
+            <span class="prop-badge">Ferramenta · Tecla [4]</span>
+            <span class="prop-rarity-tag">Lendário</span>
+          </div>
+          <div>
+            <div class="prop-meta-row">
+              <h3 class="font-display" style="font-size:17px; margin:0;">Vara Mestre do Juruá</h3>
+              <span class="prop-lux-val">Luz 100%</span>
+            </div>
+            <p class="text-xs text-muted" style="margin:4px 0 8px;">Vara artesanal de mestre para fisgar Tambaqui e Pirarucu no rio.</p>
+            <div class="rarity-meter"><span style="width:100%;"></span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. SEÇÃO 4 — CRUZEIRO DO SUL -->
+    <section id="galeria" class="section-block reveal">
+      <div class="section-head">
+        <img src="./assets/ui/title_cruzeiro_sul.png" alt="Cruzeiro do Sul" class="section-title-png" />
+        <h2 class="sr-only-heading">Cruzeiro do Sul</h2>
+        <p class="text-sm text-muted" style="margin:0;">
+          Do amanhecer na horta à praça iluminada de Natal: clique em qualquer cena para ampliar.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <button class="gallery-card" data-tilt-3d data-modal-img="./assets/images/demo_fazenda.jpg" data-modal-title="Roça do Chico (Visão em 3D)" data-modal-desc="Canteiros orgânicos, ferramentas rápidas 1 a 6 e barranco iluminado pelo sol do Juruá.">
+          <span class="card-sheen"></span>
+          <div class="gallery-media"><img src="./assets/images/demo_fazenda.jpg" alt="Roça do Chico em 3D" /></div>
+          <div class="gallery-body">
+            <span class="mini-orb"><img src="./assets/icons/ico_enxada.png" alt="" /></span>
+            <div>
+              <div style="font-size:14px; font-weight:800;">Roça do Sítio</div>
+              <div class="text-xs text-muted">60 canteiros · 8 culturas</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="gallery-card" data-tilt-3d data-modal-img="./assets/images/demo_casa_interior.jpg" data-modal-title="Interior da Casa (5 Cômodos)" data-modal-desc="Quarto, Sala, Cozinha com fogão a lenha, Despensa e Alpendre exploráveis.">
+          <span class="card-sheen"></span>
+          <div class="gallery-media"><img src="./assets/images/demo_casa_interior.jpg" alt="Casa de 5 Cômodos em 3D" /></div>
+          <div class="gallery-body">
+            <span class="mini-orb"><img src="./assets/icons/ico_bolsa.png" alt="" /></span>
+            <div>
+              <div style="font-size:14px; font-weight:800;">Casa 5 Cômodos</div>
+              <div class="text-xs text-muted">Fogão a lenha e descanso</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="gallery-card" data-tilt-3d data-modal-img="./assets/images/demo_zap.jpg" data-modal-title="Celular Juruá Zap [N]" data-modal-desc="Pedidos dos moradores, mapa em tempo real, corridas e caderno de missões.">
+          <span class="card-sheen"></span>
+          <div class="gallery-media"><img src="./assets/images/demo_zap.jpg" alt="Celular Juruá Zap no jogo" /></div>
+          <div class="gallery-body">
+            <span class="mini-orb"><img src="./assets/icons/ico_celular.png" alt="" /></span>
+            <div>
+              <div style="font-size:14px; font-weight:800;">Celular Juruá Zap</div>
+              <div class="text-xs text-muted">Encomendas &amp; Mapa</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="gallery-card" data-tilt-3d data-modal-img="./assets/images/mirante_ponte.jpg" data-modal-title="Ponte Estaiada &amp; Rio Juruá" data-modal-desc="Conexão direta entre a vida rural do sítio e o centro comercial de Cruzeiro do Sul.">
+          <span class="card-sheen"></span>
+          <div class="gallery-media"><img src="./assets/images/mirante_ponte.jpg" alt="Ponte do Rio Juruá em 3D" /></div>
+          <div class="gallery-body">
+            <span class="mini-orb"><img src="./assets/icons/ico_pin.png" alt="" /></span>
+            <div>
+              <div style="font-size:14px; font-weight:800;">Ponte do Rio Juruá</div>
+              <div class="text-xs text-muted">Travessia Sítio ↔ Cidade</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="gallery-card" data-tilt-3d data-modal-img="./assets/images/demo_noite_centro.jpg" data-modal-title="Noite de Natal na Praça Orleir Cameli" data-modal-desc="Iluminação noturna real da Demo com pisca-pisca, árvore de Natal, coreto e trânsito.">
+          <span class="card-sheen"></span>
+          <div class="gallery-media"><img src="./assets/images/demo_noite_centro.jpg" alt="Praça Orleir Cameli iluminada à noite com enfeites de Natal" /></div>
+          <div class="gallery-body">
+            <span class="mini-orb"><img src="./assets/icons/ico_relogio.png" alt="" /></span>
+            <div>
+              <div style="font-size:14px; font-weight:800;">Noite de Natal na Praça</div>
+              <div class="text-xs text-muted">Pisca-Pisca &amp; Trânsito 3D</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="gallery-card" data-tilt-3d data-modal-img="./assets/images/mirante_catedral.jpg" data-modal-title="Catedral da Glória &amp; Calçadão" data-modal-desc="Catedral e centro comercial de Cruzeiro do Sul em 3D ao redor da Praça Orleir Cameli.">
+          <span class="card-sheen"></span>
+          <div class="gallery-media"><img src="./assets/images/mirante_catedral.jpg" alt="Catedral da Glória e Praça em 3D" /></div>
+          <div class="gallery-body">
+            <span class="mini-orb"><img src="./assets/icons/ico_diario.png" alt="" /></span>
+            <div>
+              <div style="font-size:14px; font-weight:800;">Catedral da Glória</div>
+              <div class="text-xs text-muted">Centro Histórico 3D</div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- 7. EDIÇÃO DE NATAL & CONVITE FINAL -->
+    <section id="build" class="section-block reveal">
+      <div class="trust-grid">
+        <div class="organic-panel trust-inner">
+          <div>
+            <div class="trust-header-row">
+              <span class="section-kicker" style="margin-bottom:0;">Edição Especial de Natal</span>
+              <span id="jurua-live-clock" class="live-clock-pill" title="Horário oficial do Vale do Juruá (Acre)">
+                <span class="live-dot"></span>
+                <span id="jurua-clock-text">Cruzeiro do Sul · --:--</span>
+              </span>
+            </div>
+            <h2 class="font-display" style="font-size:24px; font-weight:800; margin:10px 0 12px;">Feito no Acre, Vivo no Juruá</h2>
+            <p class="text-xs text-muted" style="margin:0 0 12px;">Toque em qualquer destaque abaixo para testar ao vivo:</p>
+            <div class="live-checklist" role="list">
+              <button type="button" class="live-check-item is-checked" data-live-action="natal">
+                <span class="check-badge">✔</span>
+                <span>Cidade &amp; Sítio decorados com Árvore de Natal e Pisca-Pisca</span>
+              </button>
+              <button type="button" class="live-check-item" data-live-action="catedral">
+                <span class="check-badge">✔</span>
+                <span>Praça Orleir Cameli, Catedral da Glória e Ponte em escala 3D</span>
+              </button>
+              <button type="button" class="live-check-item" data-live-action="dia">
+                <span class="check-badge">✔</span>
+                <span>Ciclo real do sol e da noite seguindo o horário do Acre</span>
+              </button>
+              <button type="button" class="live-check-item" data-live-action="voz">
+                <span class="check-badge">✔</span>
+                <span>Introdução oficial do jogo narrada na voz do Chico Gatão</span>
+              </button>
+            </div>
+            <button id="btn-download-trust" class="btn-gold">Baixar Demo Windows 🚀</button>
+          </div>
+
+          <button class="demo-preview-card" data-tilt-3d data-modal-img="./assets/images/demo_noite_centro.jpg" data-modal-title="Especial de Natal em Cruzeiro do Sul" data-modal-desc="Explore a Praça Orleir Cameli e o Sítio do Chico enfeitados para o Natal com iluminação noturna completa.">
+            <span class="card-sheen"></span>
+            <img src="./assets/images/bg_praca_noite_natal.jpg" alt="Prévia do Especial de Natal na Praça Orleir Cameli" />
+            <span class="demo-preview-badge">🎄 Especial de Natal</span>
+          </button>
+        </div>
+
+        <div class="organic-panel" style="padding:28px; display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+          <div style="font-size:34px; line-height:1; color:var(--gold-bright);">“</div>
+          <p class="font-display" style="font-size:16px; line-height:1.65; margin:0;">
+            Chico, bem-vindo a Cruzeiro do Sul! Entre as barrancas do Juruá, o perfume da farinha no forno e o coreto iluminado, cada pedaço dessa terra ganha vida em 3D.
+          </p>
+          <div>
+            <div style="color:var(--gold-bright); font-size:14px; letter-spacing:2px;">★★★★★</div>
+            <div class="text-xs text-muted mt-2">
+              <strong style="color:var(--text-main);">Orca Game Studio &amp; Junior Play</strong> · Vale do Juruá, Acre
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 8. FOOTER ORGÂNICO -->
+  <footer class="site-footer">
+    <div class="container-max footer-grid">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="brand-orb" style="width:36px; height:36px;">
+            <img src="./assets/images/chico_3d_portrait.jpg" alt="" />
+          </span>
+          <strong class="font-display" style="font-size:17px;">CHICO • JURUÁ</strong>
+        </div>
+        <p class="text-xs text-muted mt-3" style="max-width:260px; line-height:1.65;">
+          Um RPG 3D acolhedor ambientado entre o Sítio do Chico, o Rio Juruá e o Centro de Cruzeiro do Sul, Acre.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explorar</h4>
+        <a href="#inicio">Início</a>
+        <a href="#funcoes">A Vida no Juruá</a>
+        <a href="#turma-3d">A Turma do Sítio</a>
+        <a href="#objetos-3d">Ferramentas do Chico</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Cruzeiro do Sul</h4>
+        <a href="#galeria">Praça Orleir Cameli</a>
+        <a href="#galeria">Catedral da Glória</a>
+        <a href="#galeria">Ponte do Rio Juruá</a>
+        <a href="#galeria">Casa 5 Cômodos</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Estúdio</h4>
+        <a href="#build">Orca Game Studio</a>
+        <a href="#build">Junior Play</a>
+        <a href="#build">Especial de Natal</a>
+        <a href="#build">Voz de Chico Gatão</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL 1: LIGHTBOX 100% IMAGEM -->
+  <div id="media-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="media-modal-title">
+    <div class="modal-box">
+      <div class="flex items-center justify-between gap-3" style="margin-bottom:14px;">
+        <h3 id="media-modal-title" class="font-display" style="font-size:21px; font-weight:800; margin:0;"></h3>
+        <div class="flex items-center gap-2">
+          <button id="media-modal-prev" class="icon-btn" aria-label="Cena anterior" title="Cena anterior">◀</button>
+          <button id="media-modal-next" class="icon-btn" aria-label="Próxima cena" title="Próxima cena">▶</button>
+          <button id="media-modal-close" class="icon-btn" aria-label="Fechar imagem">✕</button>
+        </div>
+      </div>
+      <div style="border-radius:22px; overflow:hidden; border:1px solid var(--border-soft); background:#040a0e;">
+        <img id="media-modal-img" src="./assets/images/hero_chico_cartoon.jpg" alt="Prévia da cena selecionada" style="width:100%; max-height:66vh; object-fit:contain; object-position:center center; display:block;" />
+      </div>
+      <p id="media-modal-desc" class="text-sm text-muted mt-3 mb-0" style="line-height:1.65;"></p>
+    </div>
+  </div>
+
+  <!-- MODAL 2: BUSCA RÁPIDA -->
+  <div id="search-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Buscar no site">
+    <div class="modal-box" style="max-width:540px;">
+      <div class="flex items-center justify-between gap-2" style="margin-bottom:12px;">
+        <strong class="font-display" style="font-size:19px;">Buscar no Vale do Juruá</strong>
+        <button id="search-close" class="icon-btn" aria-label="Fechar busca">✕</button>
+      </div>
+      <input id="search-input" type="search" placeholder="Ex.: farinha, Dona Rosa, Boto, Catedral, Juruá Zap..." style="width:100%; padding:12px 16px; border-radius:9999px; border:1px solid var(--border-glow); background:var(--bg-base); color:var(--text-main); font-size:14px;" />
+      <div id="search-results" class="mt-3" style="display:grid; gap:8px;"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: DISPONIBILIDADE DA DEMO -->
+  <div id="download-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Disponibilidade da demo">
+    <div class="modal-box" style="max-width:520px;">
+      <div class="flex items-center justify-between gap-2" style="margin-bottom:10px;">
+        <h3 class="font-display" style="font-size:21px; font-weight:800; margin:0;">Demo Piloto — Windows</h3>
+        <button id="download-close" class="icon-btn" aria-label="Fechar janela">✕</button>
+      </div>
+      <p class="text-sm text-muted" style="line-height:1.65;">
+        A demo para Windows ainda não está hospedada para download público. Esta página apresenta o projeto e suas cenas do Vale do Juruá.
+      </p>
+      <div class="flex justify-between items-center wrap mt-4 gap-2">
+        <span class="text-xs text-muted">Acompanhe as próximas novidades do projeto.</span>
+        <div class="flex items-center gap-2">
+          <button id="download-ok" class="btn-gold" style="padding:10px 20px; font-size:13px;">Entendi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./assets/stage3d.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+</html>

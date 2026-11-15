@@ -7072,6 +7072,10 @@ function mimeFor(filePath) {
       return "image/jpeg";
     case ".webp":
       return "image/webp";
+    case ".glb":
+      return "model/gltf-binary";
+    case ".ttf":
+      return "font/ttf";
     case ".gif":
       return "image/gif";
     case ".mp4":
@@ -21717,6 +21721,35 @@ async function handleStatic(req, res, pathname, requestUrl) {
       if (pathname === "/bookray/") {
         return sendFile(req, res, path.join(ROOT_DIR, "bookray", "index.html"), {
           cacheControl: "no-store"
+        });
+      }
+
+      if (pathname === "/chico") {
+        res.writeHead(302, { Location: "/chico/", "Cache-Control": "no-store" });
+        return res.end();
+      }
+
+      if (pathname.startsWith("/chico/")) {
+        let relativePath;
+        try {
+          relativePath = decodeURIComponent(pathname.slice("/chico/".length));
+        } catch {
+          res.writeHead(400, { "Cache-Control": "no-store" });
+          return res.end("URL inválida");
+        }
+        const chicoRoot = path.resolve(ROOT_DIR, "chico");
+        let filePath = path.resolve(chicoRoot, relativePath);
+        if (filePath !== chicoRoot && !filePath.startsWith(chicoRoot + path.sep)) {
+          res.writeHead(404, { "Cache-Control": "no-store" });
+          return res.end("Não encontrado");
+        }
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+          filePath = path.join(filePath, "index.html");
+        }
+        return sendFile(req, res, filePath, {
+          cacheControl: path.extname(filePath).toLowerCase() === ".html"
+            ? "no-store"
+            : "public, max-age=3600"
         });
       }
 
