@@ -21937,6 +21937,13 @@ async function handleStatic(req, res, pathname, requestUrl) {
     return sendText(res, 410, "Serviço indisponível.");
   }
 
+  if (pathname === "/catalogocruzeirodosul-") {
+    return sendFile(req, res, path.join(ROOT_DIR, "catalogocruzeirodosul-.html"), {
+      cacheControl: "no-store",
+      templateVars
+    });
+  }
+
   if (pathname === "/pubpaid" || pathname === "/pubpaid/") {
     res.writeHead(302, {
       Location: `/pubpaid.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
