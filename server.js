@@ -3,6 +3,7 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const { criarVendaBadclaude } = require("./badclaude-venda");
+const { createSuperbadSalesApi } = require("./badclaude-superbad-api");
 const { execFile, spawn, spawnSync } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
@@ -287,6 +288,8 @@ const PRIVATE_STATIC_FILES = new Set([
   "pubpaid-runtime.js",
   "cashier.js",
   "arizona-ranch.js",
+  "badclaude-venda.js",
+  "badclaude-superbad-api.js",
   "analytics-client.js",
   "engagement-api.js",
   "render.yaml",
@@ -351,7 +354,8 @@ const PRIVATE_STATIC_SEGMENTS = new Set([
   ".github",
   "backend",
   "data",
-  "node_modules"
+  "node_modules",
+  "private_releases"
 ]);
 const IMAGE_PREVIEW_CACHE_FILE = path.join(DATA_DIR, "image-preview-cache.json");
 const NINJAS_REQUESTS_FILE = path.join(DATA_DIR, "ninjas-requests.json");
@@ -17488,9 +17492,22 @@ function buildPubpaidAdminPayload() {
   };
 }
 
+let superbadSalesApi = null;
+try {
+  superbadSalesApi = createSuperbadSalesApi({
+    rootDir: ROOT_DIR,
+    dataDir: DATA_DIR,
+    environment: process.env,
+    qrcode: QRCode,
+  });
+} catch (err) {
+  console.warn("[superbad-sales] indisponível:", err.message);
+}
+
 let vendaBadclaude = null;
 try {
   vendaBadclaude = criarVendaBadclaude({
+    isAdmin: requireAdmin,
     dataDir: DATA_DIR,
     sendJson,
     parseBody,
@@ -17507,6 +17524,10 @@ async function handleApi(req, res, pathname, searchParams) {
     res.writeHead(204);
     res.end();
     return;
+  }
+
+  if (pathname.startsWith("/api/superbad/") && superbadSalesApi) {
+    return superbadSalesApi.handleApi(req, res, pathname, searchParams);
   }
 
   if (pathname.startsWith("/api/badclaude/") && vendaBadclaude) {
@@ -21790,6 +21811,18 @@ async function handleStatic(req, res, pathname, requestUrl) {
         });
       }
 
+      if (pathname === "/superbad-texte" || pathname === "/superbad-texte/") {
+        return sendFile(req, res, path.join(ROOT_DIR, "badclaude", "superbad-texte", "index.html"), {
+          cacheControl: "no-store"
+        });
+      }
+
+      if (pathname === "/superbad-admin" || pathname === "/superbad-admin/") {
+        return sendFile(req, res, path.join(ROOT_DIR, "badclaude", "superbad-admin", "index.html"), {
+          cacheControl: "no-store"
+        });
+      }
+
       if (pathname === "/badclaude") {
         res.writeHead(302, {
           Location: "/badclaude/",
@@ -21836,7 +21869,7 @@ async function handleStatic(req, res, pathname, requestUrl) {
      if (pathname.startsWith("/badclaude/")) {
        let filePath = path.join(ROOT_DIR, "badclaude", pathname.slice("/badclaude/".length));
        const badclaudeRoot = path.join(ROOT_DIR, "badclaude");
-       if (!filePath.startsWith(badclaudeRoot)) {
+       if (filePath !== badclaudeRoot && !filePath.startsWith(`${badclaudeRoot}${path.sep}`)) {
          return sendText(res, 403, "Acesso negado.");
        }
        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {

@@ -95,6 +95,14 @@ services:
         sync: false
       - key: NINJAS_MERCHANT_CITY
         sync: false
+      - key: SUPERBAD_ADMIN_PASSWORD_HASH
+        sync: false
+      - key: SUPERBAD_SESSION_SECRET
+        sync: false
+      - key: SUPERBAD_DOWNLOAD_SECRET
+        sync: false
+      - key: BADCLAUDE_RELEASES_DIR
+        value: /opt/render/project/src/render-data/private_releases
     headers:
       X-Content-Type-Options: nosniff
       X-Frame-Options: DENY

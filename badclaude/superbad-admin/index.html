@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin SuperBad — Liberação de Pedidos e Licenças</title>
+  <style>
+    :root {
+      --bg: #05060b;
+      --panel: #0d1018;
+      --panel-2: #141826;
+      --line: #262b3d;
+      --ink: #f3f5fa;
+      --dim: #a4acc0;
+      --cyan: #22d3ee;
+      --red: #c81929;
+      --green: #10b981;
+      --amber: #f5c518;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: "Cascadia Mono", "Consolas", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 20px 16px 48px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 8px;
+      z-index: 100;
+      background: var(--cyan);
+      color: #04171c;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      left: 12px;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .login-box {
+      max-width: 440px;
+      margin: 40px auto;
+      width: 100%;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .input, .select {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #080a10;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn:hover:not(:disabled) { border-color: var(--cyan); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--cyan); border-color: var(--cyan); color: #04171c; }
+    .btn-green { background: var(--green); border-color: var(--green); color: #03150e; }
+    .btn-red { background: rgba(200, 25, 41, 0.2); border-color: var(--red); color: #ff8f99; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+
+    .badge-ok { border-color: rgba(16, 185, 129, 0.55); color: var(--green); }
+    .badge-warn { border-color: rgba(245, 197, 24, 0.55); color: var(--amber); }
+    .badge-err { border-color: rgba(225, 29, 46, 0.6); color: #ff8f99; }
+
+    .order-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-2);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .controls-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      align-items: end;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .alert {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 13.5px;
+      background: var(--panel-2);
+    }
+
+    .alert-ok { border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.12); }
+    .alert-err { border-color: rgba(225, 29, 46, 0.6); background: rgba(225, 29, 46, 0.14); }
+    .alert-warn { border-color: rgba(245, 197, 24, 0.55); background: rgba(245, 197, 24, 0.1); }
+
+    .key-reveal {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--green);
+      background: #07090f;
+      border: 1px dashed rgba(16, 185, 129, 0.6);
+      border-radius: 8px;
+      padding: 12px;
+      word-break: break-all;
+    }
+
+    .hidden { display: none !important; }
+    .mono { font-family: var(--mono); }
+
+    @media (max-width: 780px) {
+      .controls-row, .release-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <div class="wrap">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <strong class="mono" style="letter-spacing:0.12em;">ADMIN SUPERBAD</strong>
+        <span class="badge">Liberação manual • PIX R$ 350,00</span>
+      </div>
+      <nav aria-label="Atalhos administrativos" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <a href="/superbad-texte" class="btn">Página Super Bad Texte</a>
+        <button type="button" class="btn btn-red hidden" id="btnLogout">Sair</button>
+      </nav>
+    </header>
+
+    <div id="globalAlert" class="alert hidden" role="status"></div>
+
+    <main id="conteudo-principal" style="display:flex;flex-direction:column;gap:18px;">
+      <!-- LOGIN -->
+      <section id="loginCard" class="card login-box hidden" aria-label="Login administrativo">
+        <h1 style="margin:0;font-size:1.3rem;">Acesso do Administrador</h1>
+        <p style="margin:0;color:var(--dim);font-size:13.5px;">
+          Autenticação validada no servidor via variável de ambiente. Nenhuma senha é armazenada no cliente.
+        </p>
+        <form id="loginForm" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="field">
+            <label for="adminPassInput">Senha administrativa</label>
+            <input id="adminPassInput" class="input mono" type="password" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="btnLogin">Entrar no painel</button>
+        </form>
+      </section>
+
+      <!-- DASHBOARD -->
+      <div id="adminPanel" class="hidden" style="display:flex;flex-direction:column;gap:18px;">
+        <section id="issuedKeyCard" class="card hidden" aria-live="polite">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <h2 style="margin:0;font-size:1.1rem;">Nova senha gerada (exibida uma única vez)</h2>
+            <button type="button" class="btn" id="btnCopyIssuedKey">Copiar senha</button>
+          </div>
+          <div class="key-reveal" id="issuedKeyValue">—</div>
+          <p style="margin:0;font-size:13px;color:var(--dim);" id="issuedKeyMeta">—</p>
+        </section>
+
+        <!-- RELEASES PRIVADAS -->
+        <section class="card" aria-label="Releases privadas">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div>
+              <h2 style="margin:0;font-size:1.15rem;">Releases Privadas (.zip fora do diretório estático)</h2>
+              <p style="margin:2px 0 0;color:var(--dim);font-size:13px;">Os pacotes Beta e SuperBad ficam armazenados em <code>BADCLAUDE_RELEASES_DIR</code> e são entregues apenas com token temporário assinado.</p>
+            </div>
+            <button type="button" class="btn" id="btnReloadReleases">Atualizar releases</button>
+          </div>
+
+          <div id="releasesGrid" class="release-grid"></div>
+
+          <form id="uploadReleaseForm" class="controls-row" style="grid-template-columns: 1fr 1.5fr auto;">
+            <div class="field">
+              <label for="uploadEditionSelect">Edição do pacote (.zip)</label>
+              <select id="uploadEditionSelect" class="select">
+                <option value="superbad">BadClaudio SuperBad (BadClaudio-Desktop-SuperBad.zip)</option>
+                <option value="beta">BadClaudio Beta (BadClaudio-Desktop-Beta.zip)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="uploadZipInput">Arquivo .zip (máx. 15 MB)</label>
+              <input id="uploadZipInput" class="input" type="file" accept=".zip,application/zip" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnUploadRelease">Enviar pacote privado</button>
+          </form>
+        </section>
+
+        <section class="card" aria-label="Pedidos recebidos">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div>
+              <h2 style="margin:0;font-size:1.15rem;">Pedidos recebidos</h2>
+              <p style="margin:2px 0 0;color:var(--dim);font-size:13px;">Escolha a edição (Beta ou SuperBad), validade em dias e limite de downloads antes de gerar a nova senha.</p>
+            </div>
+            <button type="button" class="btn" id="btnReloadOrders">Atualizar lista</button>
+          </div>
+          <div id="ordersList" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </section>
+
+        <section class="card" aria-label="Licenças emitidas">
+          <h2 style="margin:0;font-size:1.15rem;">Licenças emitidas</h2>
+          <div id="licensesList" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      function $(id) { return document.getElementById(id); }
+
+      function el(tag, className, text) {
+        var n = document.createElement(tag);
+        if (className) n.className = className;
+        if (text !== undefined && text !== null) n.textContent = String(text);
+        return n;
+      }
+
+      function clearNode(node) {
+        while (node.firstChild) node.removeChild(node.firstChild);
+      }
+
+      function statusPtBr(st) {
+        var map = {
+          pending_pix: "Aguardando PIX",
+          receipt_submitted: "Comprovante em análise",
+          approved: "Aprovado",
+          revoked: "Revogada"
+        };
+        return map[st] || String(st || "Pendente");
+      }
+
+      function setAlert(kind, msg) {
+        var box = $("globalAlert");
+        if (!msg) {
+          box.classList.add("hidden");
+          return;
+        }
+        box.className = "alert " + (kind === "ok" ? "alert-ok" : kind === "err" ? "alert-err" : "alert-warn");
+        box.textContent = String(msg);
+        box.classList.remove("hidden");
+      }
+
+      function apiJson(url, opts) {
+        return fetch(url, Object.assign({ credentials: "same-origin" }, opts || {}))
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (data) {
+              return { ok: r.ok, status: r.status, data: data };
+            });
+          });
+      }
+
+      function checkSession(focusTarget) {
+        apiJson("/api/superbad/admin/session").then(function (res) {
+          var d = res.data || {};
+          if (d.configured === false) {
+            $("loginCard").classList.add("hidden");
+            $("adminPanel").classList.add("hidden");
+            $("btnLogout").classList.add("hidden");
+            setAlert("err", "Painel desativado: configure SUPERBAD_ADMIN_PASSWORD ou SUPERBAD_ADMIN_PASSWORD_HASH no ambiente do servidor.");
+            return;
+          }
+          if (d.authenticated) {
+            $("loginCard").classList.add("hidden");
+            $("adminPanel").classList.remove("hidden");
+            $("btnLogout").classList.remove("hidden");
+            setAlert("", "");
+            loadOrdersAndLicenses();
+            loadReleases();
+            if (focusTarget === "dashboard") {
+              $("btnReloadOrders").focus();
+            }
+          } else {
+            $("loginCard").classList.remove("hidden");
+            $("adminPanel").classList.add("hidden");
+            $("btnLogout").classList.add("hidden");
+            if (focusTarget === "login") {
+              $("adminPassInput").focus();
+            }
+          }
+        }).catch(function () {
+          setAlert("err", "Não foi possível consultar a sessão administrativa.");
+        });
+      }
+
+      function loadReleases() {
+        apiJson("/api/superbad/admin/releases").then(function (res) {
+          if (!res.ok || !res.data || !res.data.ok) {
+            return;
+          }
+          renderReleases(res.data.releases || []);
+        }).catch(function () {});
+      }
+
+      function renderReleases(releases) {
+        var grid = $("releasesGrid");
+        clearNode(grid);
+        if (!releases.length) {
+          grid.appendChild(el("div", "alert", "Nenhuma informação de release retornada."));
+          return;
+        }
+        releases.forEach(function (rel) {
+          var card = el("div", "order-item");
+          var head = el("div");
+          head.style.display = "flex";
+          head.style.justifyContent = "space-between";
+          head.style.gap = "8px";
+          head.style.flexWrap = "wrap";
+          head.appendChild(el("strong", "mono", (rel.edition || "—").toUpperCase() + " • " + (rel.filename || "—")));
+          head.appendChild(el("span", "badge " + (rel.exists ? "badge-ok" : "badge-warn"), rel.exists ? "Pronto para download" : "Arquivo ausente"));
+
+          var sizeKb = rel.size_bytes ? (Math.round(Number(rel.size_bytes) / 1024) + " KB") : "0 KB";
+          var meta = el("div", "mono", "Tamanho: " + sizeKb + (rel.updated_at ? " • Atualizado: " + rel.updated_at : ""));
+          meta.style.fontSize = "12px";
+          meta.style.color = "var(--dim)";
+
+          card.appendChild(head);
+          card.appendChild(meta);
+          grid.appendChild(card);
+        });
+      }
+
+      function loadOrdersAndLicenses() {
+        apiJson("/api/superbad/admin/orders").then(function (res) {
+          if (!res.ok || !res.data || !res.data.ok) {
+            if (res.status === 401 || res.status === 403) {
+              checkSession("login");
+              return;
+            }
+            setAlert("err", (res.data && res.data.error) || "Erro ao carregar pedidos.");
+            return;
+          }
+          renderOrders(res.data.orders || []);
+          renderLicenses(res.data.licenses || []);
+        }).catch(function () {
+          setAlert("err", "Erro de rede ao carregar pedidos.");
+        });
+      }
+
+      function renderOrders(orders) {
+        var box = $("ordersList");
+        clearNode(box);
+        if (!orders.length) {
+          box.appendChild(el("div", "alert", "Nenhum pedido registrado ainda."));
+          return;
+        }
+        orders.forEach(function (ord, idx) {
+          var item = el("div", "order-item");
+          var safeSuffix = String(ord.order_id || idx).replace(/[^A-Za-z0-9_-]/g, "_");
+
+          var top = el("div");
+          top.style.display = "flex";
+          top.style.justifyContent = "space-between";
+          top.style.flexWrap = "wrap";
+          top.style.gap = "8px";
+
+          var title = el("strong", "mono", (ord.order_id || "—") + " • " + (ord.buyer_name || "Cliente"));
+          var stClass = ord.status === "approved" ? "badge-ok" : "badge-warn";
+          var stBadge = el("span", "badge " + stClass, statusPtBr(ord.status));
+          top.appendChild(title);
+          top.appendChild(stBadge);
+
+          var meta = el(
+            "div",
+            "mono",
+            "Contato: " + (ord.buyer_contact || "—") +
+            " • Solicitado: " + (ord.requested_edition || "superbad") +
+            " • Valor: R$ " + ((Number(ord.amount_centavos || 35000) / 100).toFixed(2).replace(".", ",")) +
+            (ord.receipt_note ? " • Comprovante: " + ord.receipt_note : "")
+          );
+          meta.style.fontSize = "12.5px";
+          meta.style.color = "var(--dim)";
+
+          var controls = el("div", "controls-row");
+
+          var idEd = "ed_" + safeSuffix;
+          var fEd = el("div", "field");
+          var lEd = el("label", "", "Edição a liberar");
+          lEd.setAttribute("for", idEd);
+          var selEd = el("select", "select");
+          selEd.id = idEd;
+          var optSb = el("option", "", "SuperBad (completo)");
+          optSb.value = "superbad";
+          var optBt = el("option", "", "Beta (limpo)");
+          optBt.value = "beta";
+          selEd.appendChild(optSb);
+          selEd.appendChild(optBt);
+          selEd.value = ord.requested_edition === "beta" ? "beta" : "superbad";
+          fEd.appendChild(lEd);
+          fEd.appendChild(selEd);
+
+          var idDays = "days_" + safeSuffix;
+          var fDays = el("div", "field");
+          var lDays = el("label", "", "Validade (dias)");
+          lDays.setAttribute("for", idDays);
+          var inpDays = el("input", "input mono");
+          inpDays.id = idDays;
+          inpDays.type = "number";
+          inpDays.min = "1";
+          inpDays.max = "365";
+          inpDays.value = "30";
+          fDays.appendChild(lDays);
+          fDays.appendChild(inpDays);
+
+          var idMax = "maxdl_" + safeSuffix;
+          var fMax = el("div", "field");
+          var lMax = el("label", "", "Máx. downloads");
+          lMax.setAttribute("for", idMax);
+          var inpMax = el("input", "input mono");
+          inpMax.id = idMax;
+          inpMax.type = "number";
+          inpMax.min = "1";
+          inpMax.max = "50";
+          inpMax.value = "5";
+          fMax.appendChild(lMax);
+          fMax.appendChild(inpMax);
+
+          var btnAuth = el("button", "btn btn-green", "Gerar nova senha e liberar");
+          btnAuth.type = "button";
+          btnAuth.addEventListener("click", function () {
+            btnAuth.disabled = true;
+            btnAuth.textContent = "Gerando senha...";
+            authorizeOrder(ord.order_id, selEd.value, Number(inpDays.value || 30), Number(inpMax.value || 5), btnAuth);
+          });
+
+          controls.appendChild(fEd);
+          controls.appendChild(fDays);
+          controls.appendChild(fMax);
+          controls.appendChild(btnAuth);
+
+          item.appendChild(top);
+          item.appendChild(meta);
+          item.appendChild(controls);
+          box.appendChild(item);
+        });
+      }
+
+      function authorizeOrder(orderId, edition, days, maxDl, btn) {
+        apiJson("/api/superbad/admin/orders/" + encodeURIComponent(orderId) + "/authorize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            edition: edition,
+            expires_in_days: days,
+            max_downloads: maxDl
+          })
+        }).then(function (res) {
+          if (!res.ok || !res.data || !res.data.ok) {
+            setAlert("err", (res.data && res.data.error) || "Falha ao autorizar pedido.");
+            return;
+          }
+          var d = res.data;
+          $("issuedKeyValue").textContent = d.license_key || "—";
+          var lic = d.license || {};
+          $("issuedKeyMeta").textContent =
+            "Pedido: " + orderId +
+            " • Edição: " + (lic.edition || edition) +
+            " • Expira em: " + (lic.expires_at || "—") +
+            " • Máx. downloads: " + (lic.max_downloads || maxDl);
+          $("issuedKeyCard").classList.remove("hidden");
+          setAlert("ok", "Nova senha gerada para o pedido " + orderId + ". Envie-a ao comprador.");
+          loadOrdersAndLicenses();
+        }).catch(function () {
+          setAlert("err", "Erro ao autorizar pedido.");
+        }).finally(function () {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = "Gerar nova senha e liberar";
+          }
+        });
+      }
+
+      function renderLicenses(licenses) {
+        var box = $("licensesList");
+        clearNode(box);
+        if (!licenses.length) {
+          box.appendChild(el("div", "alert", "Nenhuma licença emitida ainda."));
+          return;
+        }
+        licenses.forEach(function (lic) {
+          var item = el("div", "order-item");
+          var row = el("div");
+          row.style.display = "flex";
+          row.style.justifyContent = "space-between";
+          row.style.alignItems = "center";
+          row.style.flexWrap = "wrap";
+          row.style.gap = "8px";
+
+          var info = el(
+            "div",
+            "mono",
+            (lic.license_id || "—") +
+            " • Edição: " + (lic.edition || "—") +
+            " • Pedido: " + (lic.order_id || "—") +
+            " • Downloads: " + (lic.downloads_used || 0) + "/" + (lic.max_downloads || 0) +
+            " • Expira: " + (lic.expires_at || "—")
+          );
+          info.style.fontSize = "12.5px";
+
+          var right = el("div");
+          right.style.display = "flex";
+          right.style.gap = "8px";
+          right.style.alignItems = "center";
+          right.style.flexWrap = "wrap";
+
+          var badge = el("span", "badge " + (lic.revoked ? "badge-err" : "badge-ok"), lic.revoked ? "Revogada" : "Ativa");
+          right.appendChild(badge);
+
+          if (!lic.revoked) {
+            var btnRev = el("button", "btn btn-red", "Revogar");
+            btnRev.type = "button";
+            var btnConfirm = el("button", "btn btn-red hidden", "Confirmar revogação");
+            btnConfirm.type = "button";
+            var btnCancelRev = el("button", "btn hidden", "Cancelar");
+            btnCancelRev.type = "button";
+
+            btnRev.addEventListener("click", function () {
+              btnRev.classList.add("hidden");
+              btnConfirm.classList.remove("hidden");
+              btnCancelRev.classList.remove("hidden");
+              btnCancelRev.focus();
+            });
+
+            btnCancelRev.addEventListener("click", function () {
+              btnConfirm.classList.add("hidden");
+              btnCancelRev.classList.add("hidden");
+              btnRev.classList.remove("hidden");
+            });
+
+            btnConfirm.addEventListener("click", function () {
+              btnConfirm.disabled = true;
+              btnConfirm.textContent = "Revogando...";
+              apiJson("/api/superbad/admin/licenses/" + encodeURIComponent(lic.license_id) + "/revoke", {
+                method: "POST"
+              }).then(function (res) {
+                if (!res.ok || !res.data || !res.data.ok) {
+                  setAlert("err", (res.data && res.data.error) || "Falha ao revogar licença.");
+                  return;
+                }
+                setAlert("ok", "Licença " + lic.license_id + " revogada imediatamente.");
+                loadOrdersAndLicenses();
+              }).catch(function () {
+                setAlert("err", "Erro ao revogar licença.");
+              }).finally(function () {
+                btnConfirm.disabled = false;
+                btnConfirm.textContent = "Confirmar revogação";
+              });
+            });
+
+            right.appendChild(btnRev);
+            right.appendChild(btnConfirm);
+            right.appendChild(btnCancelRev);
+          }
+
+          row.appendChild(info);
+          row.appendChild(right);
+          item.appendChild(row);
+          box.appendChild(item);
+        });
+      }
+
+      $("uploadReleaseForm").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var edition = $("uploadEditionSelect").value;
+        var fileInput = $("uploadZipInput");
+        var file = fileInput.files && fileInput.files[0];
+        if (!file) {
+          setAlert("warn", "Selecione um arquivo .zip antes de enviar.");
+          return;
+        }
+        var btn = $("btnUploadRelease");
+        btn.disabled = true;
+        btn.textContent = "Enviando pacote...";
+
+        file.arrayBuffer().then(function (buf) {
+          return apiJson("/api/superbad/admin/releases/" + encodeURIComponent(edition), {
+            method: "POST",
+            headers: { "Content-Type": "application/octet-stream" },
+            body: buf
+          });
+        }).then(function (res) {
+          if (!res.ok || !res.data || !res.data.ok) {
+            setAlert("err", (res.data && res.data.error) || "Falha no envio da release privada.");
+            return;
+          }
+          fileInput.value = "";
+          setAlert("ok", "Release " + (res.data.filename || edition) + " gravada em diretório privado (" + (res.data.size_bytes || 0) + " bytes).");
+          loadReleases();
+        }).catch(function () {
+          setAlert("err", "Erro ao enviar release privada.");
+        }).finally(function () {
+          btn.disabled = false;
+          btn.textContent = "Enviar pacote privado";
+        });
+      });
+
+      $("loginForm").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var pass = $("adminPassInput").value;
+        $("adminPassInput").value = "";
+        if (!pass) return;
+        $("btnLogin").disabled = true;
+        $("btnLogin").textContent = "Entrando...";
+
+        apiJson("/api/superbad/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: pass })
+        }).then(function (res) {
+          if (!res.ok || !res.data || !res.data.ok) {
+            setAlert("err", (res.data && res.data.error) || "Credenciais inválidas.");
+            return;
+          }
+          checkSession("dashboard");
+        }).catch(function () {
+          setAlert("err", "Erro ao autenticar.");
+        }).finally(function () {
+          $("btnLogin").disabled = false;
+          $("btnLogin").textContent = "Entrar no painel";
+        });
+      });
+
+      $("btnLogout").addEventListener("click", function () {
+        apiJson("/api/superbad/admin/logout", { method: "POST" }).then(function () {
+          $("issuedKeyCard").classList.add("hidden");
+          $("issuedKeyValue").textContent = "—";
+          checkSession("login");
+        });
+      });
+
+      $("btnReloadOrders").addEventListener("click", loadOrdersAndLicenses);
+      $("btnReloadReleases").addEventListener("click", loadReleases);
+
+      $("btnCopyIssuedKey").addEventListener("click", function () {
+        var val = $("issuedKeyValue").textContent;
+        if (!val || val === "—") return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(val).then(function () {
+            $("btnCopyIssuedKey").textContent = "Copiada!";
+            setTimeout(function () { $("btnCopyIssuedKey").textContent = "Copiar senha"; }, 1800);
+          }).catch(function () {});
+        }
+      });
+
+      checkSession();
+    })();
+  </script>
+</body>
+</html>

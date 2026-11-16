@@ -33,7 +33,8 @@ const PLANOS = {
 
 const JANELA_MS = 30 * 60 * 1000;
 
-function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode }) {
+function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode, isAdmin }) {
+  const checkAdmin = typeof isAdmin === "function" ? isAdmin : () => false;
   const dir = path.join(dataDir, "badclaude");
   const arquivo = path.join(dir, "pedidos.json");
   const recibos = path.join(dir, "comprovantes");
@@ -247,6 +248,9 @@ function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode }) {
     }
 
     /* ---------- admin ---------- */
+    if (pathname.startsWith("/api/badclaude/admin/") && !checkAdmin(req)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso administrativo obrigatório." });
+    }
     if (req.method === "GET" && pathname === "/api/badclaude/admin/pedidos") {
       const rows = await ler();
       const lista = rows.slice().sort((a, b) => String(b.at).localeCompare(String(a.at)));
@@ -278,7 +282,13 @@ function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode }) {
         const buf = await fs.promises.readFile(alvo);
         const ext = path.extname(alvo).toLowerCase();
         const tipo = ext === ".pdf" ? "application/pdf" : ext === ".png" ? "image/png" : /\.jpe?g$/.test(ext) ? "image/jpeg" : "application/octet-stream";
-        res.writeHead(200, { "Content-Type": tipo, "Cache-Control": "no-store" });
+        const nomeSeguro = path.basename(alvo).replace(/[^A-Za-z0-9._-]/g, "_");
+        res.writeHead(200, {
+          "Content-Type": tipo,
+          "Cache-Control": "no-store",
+          "X-Content-Type-Options": "nosniff",
+          "Content-Disposition": `attachment; filename="${nomeSeguro}"`,
+        });
         return res.end(buf);
       } catch {
         return sendJson(res, 404, { ok: false });

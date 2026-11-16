@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Bad Texte — BadClaudio Beta vs SuperBad</title>
+  <meta name="description" content="Compare as edições BadClaudio Beta e SuperBad, pague R$ 350,00 via PIX manual, envie o comprovante no WhatsApp e valide sua licença privada.">
+  <style>
+    :root {
+      --bg: #05060b;
+      --panel: #0d1018;
+      --panel-2: #131724;
+      --line: #23283a;
+      --ink: #f3f5fa;
+      --dim: #a4acc0;
+      --cyan: #22d3ee;
+      --cyan-dark: #0ea5b7;
+      --violet: #8b5cf6;
+      --red: #c81929;
+      --green: #10b981;
+      --amber: #f5c518;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: "Cascadia Mono", "Consolas", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(45% 35% at 15% 5%, rgba(34, 211, 238, 0.11), transparent 70%),
+        radial-gradient(40% 35% at 88% 12%, rgba(139, 92, 246, 0.11), transparent 70%),
+        radial-gradient(45% 35% at 50% 95%, rgba(225, 29, 46, 0.09), transparent 70%);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    a { color: var(--cyan); }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 8px;
+      z-index: 100;
+      background: var(--cyan);
+      color: #04171c;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      left: 12px;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+    }
+
+    .brand strong {
+      letter-spacing: 0.14em;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--dim);
+    }
+
+    .badge-cyan { border-color: rgba(34, 211, 238, 0.45); color: var(--cyan); }
+    .badge-red { border-color: rgba(225, 29, 46, 0.55); color: #ff8a95; }
+    .badge-green { border-color: rgba(16, 185, 129, 0.5); color: var(--green); }
+    .badge-amber { border-color: rgba(245, 197, 24, 0.5); color: var(--amber); }
+
+    .hero {
+      background: linear-gradient(180deg, var(--panel), #090b12);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-price-box {
+      background: var(--panel-2);
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .price-val {
+      font-family: var(--mono);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-superbad {
+      border-color: rgba(225, 29, 46, 0.55);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--dim);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .list strong { color: var(--ink); }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+    }
+
+    .input, .select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #080a10;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 9px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: filter 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover:not(:disabled):not([aria-disabled="true"]) { border-color: var(--cyan); filter: brightness(1.06); }
+    .btn:disabled, .btn[aria-disabled="true"] {
+      opacity: 0.48;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .btn-primary { background: var(--cyan); border-color: var(--cyan); color: #04171c; }
+    .btn-green { background: var(--green); border-color: var(--green); color: #03150e; }
+    .btn-red { background: var(--red); border-color: var(--red); color: #ffffff; }
+
+    .pix-panel {
+      background: #080a10;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .qr-img {
+      width: 210px;
+      height: 210px;
+      max-width: 100%;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 8px;
+      align-self: center;
+    }
+
+    .brcode-box {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      word-break: break-all;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      color: #c5cbe0;
+      max-height: 92px;
+      overflow-y: auto;
+    }
+
+    .alert {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 13.5px;
+      background: var(--panel-2);
+    }
+
+    .alert-ok { border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.12); }
+    .alert-err { border-color: rgba(225, 29, 46, 0.6); background: rgba(225, 29, 46, 0.14); }
+    .alert-warn { border-color: rgba(245, 197, 24, 0.55); background: rgba(245, 197, 24, 0.1); }
+
+    .hidden { display: none !important; }
+    .mono { font-family: var(--mono); }
+
+    @media (max-width: 820px) {
+      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <strong>SUPER BAD TEXTE</strong>
+        <span class="badge badge-cyan">BadClaudio Desktop</span>
+      </div>
+      <nav aria-label="Navegação do BadClaude" style="display:flex;gap:12px;flex-wrap:wrap;font-size:13px;">
+        <a href="/badclaude/">Showroom BadClaude</a>
+        <a href="/badclaude/directions/pagamento.html">PIX Geral</a>
+        <a href="/superbad-admin">Painel Admin</a>
+      </nav>
+    </header>
+
+    <main id="conteudo-principal" style="display:flex;flex-direction:column;gap:20px;">
+      <section class="hero" aria-label="Apresentação Super Bad Texte">
+        <div>
+          <span class="badge badge-red">Pacotes oficiais • Liberação privada por licença</span>
+          <h1>Escolha entre BadClaudio Beta e BadClaudio SuperBad</h1>
+          <p style="color:var(--dim);margin:0 0 12px;">
+            Ambiente desktop seguro com Claude Agent SDK, Claude Code CLI fallback, API pessoal com DPAPI, Controle de PC governado e integração OpenCode Infinite via proxy WARP.
+            A liberação do download ocorre após conferência manual do PIX e validação da nova senha gerada pelo administrador.
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="#checkout" class="btn btn-primary">Comprar por R$ 350,00 (PIX)</a>
+            <a href="#validar-licenca" class="btn">Já tenho minha senha de licença</a>
+          </div>
+        </div>
+
+        <div class="hero-price-box">
+          <span class="badge badge-amber">Pagamento único manual</span>
+          <div class="price-val">R$ 350,00</div>
+          <div class="mono" style="font-size:12.5px;color:var(--ink);">
+            Chave PIX: <strong>68 99226-9296</strong><br>
+            Titular: <strong>Raiane Lenoncio</strong>
+          </div>
+          <p style="margin:4px 0 0;font-size:12.5px;color:var(--dim);">
+            Após o pagamento, envie o comprovante no WhatsApp e aguarde a senha exclusiva da edição escolhida.
+          </p>
+        </div>
+      </section>
+
+      <section class="grid-2" aria-label="Comparativo honesto entre edições">
+        <article class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <h2>BadClaudio Beta</h2>
+            <span class="badge badge-cyan">Código limpo • Chaves do usuário</span>
+          </div>
+          <ul class="list">
+            <li><strong>Chaves próprias (BYOK):</strong> você cadastra sua chave pessoal no DPAPI local (SecretStore) ou usa seu Claude Code CLI / SDK.</li>
+            <li><strong>Zero segredos do fundador:</strong> nenhuma chave privada, cofre `.enc`, cache ou histórico interno é incluído no pacote Beta.</li>
+            <li><strong>Governança e Controle de PC:</strong> PermissionBroker deny-by-default, proteção SSRF com pinning de DNS e contenção de workspace.</li>
+            <li><strong>Indicado para:</strong> quem quer usar sua própria conta ou API pessoal com segurança desktop.</li>
+          </ul>
+        </article>
+
+        <article class="card card-superbad">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <h2>BadClaudio SuperBad</h2>
+            <span class="badge badge-red">Pacote completo • Licença dedicada</span>
+          </div>
+          <ul class="list">
+            <li><strong>Ecossistema completo:</strong> inclui a edição SuperBad completa e cofres criptografados em AES-256-GCM.</li>
+            <li><strong>Nova senha gerada por pedido:</strong> nenhuma senha padrão é embutida; o administrador emite uma senha exclusiva após conferir o PIX.</li>
+            <li><strong>Download privado temporário:</strong> link assinado com expiração curta e limite de downloads auditado no servidor.</li>
+            <li><strong>Indicado para:</strong> clientes autorizados que adquiriram o pacote completo por R$ 350,00.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="grid-3" aria-label="Recursos técnicos e dependências">
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Controle de PC Governado</h2>
+          <p style="margin:0;color:var(--dim);font-size:13.5px;">
+            Automação local (janelas, screenshot contido no workspace, teclado/mouse/clipboard) protegida pelo <strong>PermissionBroker</strong> em modo <em>aprovar uma vez / negar / cancelar</em>.
+          </p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">OpenCode Infinite + WARP</h2>
+          <p style="margin:0;color:var(--dim);font-size:13.5px;">
+            Modo opcional integrado ao <strong>OpenCode Infinite</strong> e ao proxy local <strong>Cloudflare One / WARP (127.0.0.1:40000)</strong>, mantendo isolamento por subprocesso.
+          </p>
+        </article>
+        <article class="card">
+          <h2 style="font-size:1.05rem;">Dependências &amp; Auto-Instalação</h2>
+          <p style="margin:0;color:var(--dim);font-size:13.5px;">
+            O pacote acompanha <code>Instalar-Dependencias.bat</code> e painel interno com mapa completo do que quebra se faltar cada item, além de instalação automática no <code>.venv</code>.
+          </p>
+        </article>
+      </section>
+
+      <section class="card" aria-label="Complemento opcional de efeitos de vídeo">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div>
+            <h2 style="font-size:1.05rem;">Complemento opcional: efeitos de vídeo no Claude</h2>
+            <p style="margin:4px 0 0;color:var(--dim);font-size:13.5px;">
+              Referência informativa externa para quem deseja explorar habilidades extras de efeitos de vídeo (instalação opcional e independente pelo usuário):
+              <a href="https://github.com/Vibha-Ramprakash/claude-video-effects" target="_blank" rel="noopener noreferrer">github.com/Vibha-Ramprakash/claude-video-effects</a>.
+            </p>
+          </div>
+          <span class="badge">Referência opcional</span>
+        </div>
+      </section>
+
+      <section class="grid-2" id="checkout" aria-label="Pedido PIX e Validação de Licença">
+        <div class="card">
+          <h2>1. Gerar pedido PIX — R$ 350,00</h2>
+          <p style="margin:0;color:var(--dim);font-size:13.5px;">
+            O valor é travado no servidor em R$ 350,00. Informe seu nome, contato e edição desejada para gerar o QR Code e o Copia e Cola.
+          </p>
+
+          <form id="orderForm" style="display:flex;flex-direction:column;gap:10px;">
+            <div class="field">
+              <label for="buyerName">Seu nome completo</label>
+              <input id="buyerName" class="input" type="text" required placeholder="Ex.: João da Silva">
+            </div>
+            <div class="field">
+              <label for="buyerContact">WhatsApp ou e-mail para contato</label>
+              <input id="buyerContact" class="input" type="text" required placeholder="Ex.: (68) 99999-9999">
+            </div>
+            <div class="field">
+              <label for="requestedEdition">Edição solicitada</label>
+              <select id="requestedEdition" class="select">
+                <option value="superbad">BadClaudio SuperBad (R$ 350,00)</option>
+                <option value="beta">BadClaudio Beta (R$ 350,00)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnCreateOrder">Gerar PIX de R$ 350,00</button>
+          </form>
+
+          <div id="orderAlert" class="alert hidden" role="status"></div>
+
+          <div id="pixPanel" class="pix-panel hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="mono" style="font-size:12.5px;">Pedido: <strong id="pixOrderId">—</strong></span>
+              <span class="badge badge-amber" id="pixOrderStatus">Aguardando PIX</span>
+            </div>
+
+            <img id="pixQrImg" class="qr-img hidden" alt="QR Code PIX de R$ 350,00 para Raiane Lenoncio">
+
+            <div class="mono" style="font-size:12.5px;">
+              Chave PIX: <strong id="pixKeyText">68 99226-9296</strong> • Titular: <strong id="pixRecipientText">Raiane Lenoncio</strong>
+            </div>
+
+            <div class="brcode-box" id="pixBrCode">—</div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" class="btn" id="btnCopyPix">Copiar código PIX</button>
+              <a id="btnWhatsApp" class="btn btn-green" href="https://wa.me/5568992269296" target="_blank" rel="noopener noreferrer">Enviar comprovante no WhatsApp</a>
+            </div>
+
+            <div class="field" style="margin-top:4px;">
+              <label for="receiptNote">Referência / observação do comprovante</label>
+              <input id="receiptNote" class="input" type="text" placeholder="Ex.: Comprovante enviado no WhatsApp às 14:32">
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-primary" id="btnSubmitReceipt">Já enviei o comprovante</button>
+              <button type="button" class="btn" id="btnRefreshOrder">Atualizar status do pedido</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="validar-licenca">
+          <h2>2. Validar senha e baixar edição</h2>
+          <p style="margin:0;color:var(--dim);font-size:13.5px;">
+            Assim que o administrador confirmar seu comprovante e gerar a nova senha da sua licença, informe-a abaixo para liberar o botão de download privado.
+          </p>
+
+          <form id="licenseForm" style="display:flex;flex-direction:column;gap:10px;">
+            <div class="field">
+              <label for="licenseKeyInput">Senha / chave de licença</label>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <input id="licenseKeyInput" class="input mono" type="password" autocomplete="off" spellcheck="false" required placeholder="Cole aqui sua senha liberada" style="flex:1 1 200px;">
+                <button type="button" class="btn" id="btnToggleLicenseVis">Mostrar</button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-red" id="btnValidateLicense">Validar licença e gerar link</button>
+          </form>
+
+          <div id="licenseAlert" class="alert hidden" role="status"></div>
+
+          <div id="downloadResultBox" class="pix-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="badge" id="dlStatusBadge">Aguardando validação</span>
+              <span class="mono" style="font-size:12px;">Edição: <strong id="dlEdition">—</strong></span>
+            </div>
+            <div class="mono" style="font-size:12.5px;color:var(--dim);">
+              Expira em: <span id="dlExpires">—</span><br>
+              Downloads restantes: <span id="dlRemaining">—</span>
+            </div>
+            <a id="btnPrivateDownload" class="btn btn-primary" href="#" aria-disabled="true" tabindex="-1">Valide sua licença para liberar o download</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      function $(id) { return document.getElementById(id); }
+
+      function statusPtBr(st) {
+        var map = {
+          pending_pix: "Aguardando PIX",
+          receipt_submitted: "Comprovante em análise",
+          approved: "Aprovado",
+          revoked: "Revogado",
+          expired: "Expirado"
+        };
+        return map[st] || String(st || "Pendente");
+      }
+
+      function setAlert(box, kind, msg) {
+        box.className = "alert " + (kind === "ok" ? "alert-ok" : kind === "err" ? "alert-err" : "alert-warn");
+        box.textContent = String(msg || "");
+        box.classList.remove("hidden");
+      }
+
+      function setDownloadEnabled(url) {
+        var link = $("btnPrivateDownload");
+        if (url) {
+          link.href = url;
+          link.removeAttribute("aria-disabled");
+          link.removeAttribute("tabindex");
+          link.textContent = "Baixar pacote privado agora";
+        } else {
+          link.href = "#";
+          link.setAttribute("aria-disabled", "true");
+          link.setAttribute("tabindex", "-1");
+          link.textContent = "Valide sua licença para liberar o download";
+        }
+      }
+
+      var currentOrder = null;
+
+      $("btnPrivateDownload").addEventListener("click", function (ev) {
+        if ($("btnPrivateDownload").getAttribute("aria-disabled") === "true") {
+          ev.preventDefault();
+        }
+      });
+
+      $("orderForm").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var name = $("buyerName").value.trim();
+        var contact = $("buyerContact").value.trim();
+        var edition = $("requestedEdition").value;
+        var alertBox = $("orderAlert");
+
+        if (!name || !contact) {
+          setAlert(alertBox, "warn", "Preencha seu nome e contato para gerar o pedido PIX.");
+          return;
+        }
+
+        var btn = $("btnCreateOrder");
+        btn.disabled = true;
+        btn.textContent = "Gerando pedido PIX...";
+
+        fetch("/api/superbad/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            buyer_name: name,
+            buyer_contact: contact,
+            requested_edition: edition
+          })
+        })
+          .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, data: d }; }); })
+          .then(function (res) {
+            if (!res.ok || !res.data || !res.data.ok) {
+              throw new Error((res.data && res.data.error) || "Falha ao criar pedido.");
+            }
+            var ord = res.data.order || res.data;
+            currentOrder = {
+              order_id: ord.order_id,
+              order_secret: ord.order_secret
+            };
+            $("pixOrderId").textContent = ord.order_id || "—";
+            $("pixOrderStatus").textContent = statusPtBr(ord.status || "pending_pix");
+            if (ord.pix) {
+              $("pixKeyText").textContent = ord.pix.key || "68 99226-9296";
+              $("pixRecipientText").textContent = ord.pix.recipient || "Raiane Lenoncio";
+              $("pixBrCode").textContent = ord.pix.brcode || "";
+              if (ord.pix.qr_data_url) {
+                $("pixQrImg").src = ord.pix.qr_data_url;
+                $("pixQrImg").classList.remove("hidden");
+              } else {
+                $("pixQrImg").classList.add("hidden");
+              }
+            }
+            if (ord.whatsapp_url) {
+              $("btnWhatsApp").href = ord.whatsapp_url;
+            }
+            $("pixPanel").classList.remove("hidden");
+            setAlert(alertBox, "ok", "Pedido criado com sucesso. Faça o PIX de R$ 350,00 e envie o comprovante no WhatsApp.");
+          })
+          .catch(function (err) {
+            setAlert(alertBox, "err", err.message || "Erro ao criar pedido.");
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = "Gerar PIX de R$ 350,00";
+          });
+      });
+
+      $("btnCopyPix").addEventListener("click", function () {
+        var code = $("pixBrCode").textContent;
+        if (!code) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(function () {
+            $("btnCopyPix").textContent = "Código PIX copiado!";
+            setTimeout(function () { $("btnCopyPix").textContent = "Copiar código PIX"; }, 1800);
+          }).catch(function () {});
+        }
+      });
+
+      $("btnSubmitReceipt").addEventListener("click", function () {
+        if (!currentOrder || !currentOrder.order_id) return;
+        var note = $("receiptNote").value.trim() || "Comprovante enviado no WhatsApp";
+        var alertBox = $("orderAlert");
+        var btn = $("btnSubmitReceipt");
+        btn.disabled = true;
+        btn.textContent = "Enviando comprovante...";
+
+        fetch("/api/superbad/orders/" + encodeURIComponent(currentOrder.order_id) + "/receipt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            order_secret: currentOrder.order_secret,
+            receipt_note: note
+          })
+        })
+          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+          .then(function (res) {
+            if (!res.ok || !res.data || !res.data.ok) {
+              throw new Error((res.data && res.data.error) || "Não foi possível registrar o comprovante.");
+            }
+            var ord = res.data.order || res.data;
+            $("pixOrderStatus").textContent = statusPtBr(ord.status || "receipt_submitted");
+            setAlert(alertBox, "ok", "Comprovante registrado. Aguarde a validação do administrador para receber sua senha.");
+          })
+          .catch(function (err) {
+            setAlert(alertBox, "err", err.message);
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = "Já enviei o comprovante";
+          });
+      });
+
+      $("btnRefreshOrder").addEventListener("click", function () {
+        if (!currentOrder || !currentOrder.order_id) return;
+        var alertBox = $("orderAlert");
+        var btn = $("btnRefreshOrder");
+        btn.disabled = true;
+        btn.textContent = "Consultando...";
+        var url = "/api/superbad/orders/" + encodeURIComponent(currentOrder.order_id) +
+          "?order_secret=" + encodeURIComponent(currentOrder.order_secret || "");
+
+        fetch(url)
+          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+          .then(function (res) {
+            if (!res.ok || !res.data || !res.data.ok) {
+              throw new Error((res.data && res.data.error) || "Não foi possível consultar o pedido.");
+            }
+            var ord = res.data.order || res.data;
+            $("pixOrderStatus").textContent = statusPtBr(ord.status);
+            if (ord.status === "approved") {
+              setAlert(alertBox, "ok", "Pedido aprovado! Use a senha enviada pelo administrador no formulário ao lado para baixar.");
+            } else {
+              setAlert(alertBox, "warn", "Status atual do pedido: " + statusPtBr(ord.status) + ".");
+            }
+          })
+          .catch(function (err) {
+            setAlert(alertBox, "err", err.message);
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = "Atualizar status do pedido";
+          });
+      });
+
+      $("btnToggleLicenseVis").addEventListener("click", function () {
+        var inp = $("licenseKeyInput");
+        var show = inp.type === "password";
+        inp.type = show ? "text" : "password";
+        $("btnToggleLicenseVis").textContent = show ? "Ocultar" : "Mostrar";
+      });
+
+      $("licenseForm").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var key = $("licenseKeyInput").value.trim();
+        var alertBox = $("licenseAlert");
+        setDownloadEnabled(null);
+        $("dlStatusBadge").className = "badge";
+        $("dlStatusBadge").textContent = "Validando...";
+
+        if (!key) {
+          $("dlStatusBadge").textContent = "Aguardando validação";
+          setAlert(alertBox, "warn", "Informe a senha da sua licença.");
+          return;
+        }
+
+        var btn = $("btnValidateLicense");
+        btn.disabled = true;
+        btn.textContent = "Validando...";
+
+        fetch("/api/superbad/license/validate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ license_key: key })
+        })
+          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+          .then(function (res) {
+            if (!res.ok || !res.data || !res.data.ok) {
+              throw new Error((res.data && res.data.error) || "Licença inválida, expirada ou revogada.");
+            }
+            $("dlStatusBadge").className = "badge badge-green";
+            $("dlStatusBadge").textContent = "Licença válida";
+            $("dlEdition").textContent = res.data.edition || "—";
+            $("dlExpires").textContent = res.data.expires_at || "—";
+            $("dlRemaining").textContent = String(res.data.downloads_remaining !== undefined ? res.data.downloads_remaining : "—");
+            setDownloadEnabled(res.data.download_url || null);
+            setAlert(alertBox, "ok", "Licença confirmada! Link temporário liberado abaixo.");
+          })
+          .catch(function (err) {
+            $("dlStatusBadge").className = "badge badge-red";
+            $("dlStatusBadge").textContent = "Não validada";
+            setAlert(alertBox, "err", err.message);
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = "Validar licença e gerar link";
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

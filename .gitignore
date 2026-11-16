@@ -70,3 +70,8 @@ android/*.keystore
 android/local.properties
 *.jks
 *.keystore
+
+
+# SuperBad private releases & local sales state (never commit to public repo)
+private_releases/
+data/superbad-*.json
