@@ -11518,6 +11518,86 @@ async function callLocalOllama({ area = "rayl", system = "", prompt = "", contex
   }
 }
 
+async function callFreeCloudAi(options = {}) {
+  const area = cleanShortText(options.area || "site", 40) || "site";
+  const systemPrompt = cleanShortText(options.system || "Responda em português do Brasil, de forma objetiva, verificável e clara.", 4000);
+  const cleanPrompt = cleanShortText(options.prompt || "", 4000);
+  if (!cleanPrompt) {
+    return { ok: false, error: "Pergunta vazia.", ai: { status: "offline", provider: "free-cloud", model: "none" } };
+  }
+
+  const googleKey = String(process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY || "").trim();
+  const openrouterKey = String(process.env.OPENROUTER_API_KEY || "").trim();
+
+  if (googleKey) {
+    const model = String(process.env.CZS_GEMINI_MODEL || "gemini-2.5-flash").trim();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 16000);
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(googleKey)}`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ role: "user", parts: [{ text: cleanPrompt }] }],
+          generationConfig: { temperature: 0.25, maxOutputTokens: 700 }
+        }),
+        signal: controller.signal
+      });
+      const data = await res.json().catch(() => ({}));
+      const raw = data?.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("\n") || "";
+      const answer = sanitizeLocalAiAnswer(raw);
+      if (res.ok && answer) {
+        const item = recordOllamaConversation({ area, model, prompt: cleanPrompt, answer, ok: true, meta: { provider: "gemini-free" } });
+        return { ok: true, answer, itemId: item.id, ai: { status: "online", provider: "gemini-free", model } };
+      }
+    } catch (_err) {
+      // tenta proximo provedor gratuito
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  if (openrouterKey) {
+    const model = String(process.env.CZS_OPENROUTER_MODEL || "meta-llama/llama-3.3-70b-instruct:free").trim();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 18000);
+    try {
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${openrouterKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: cleanPrompt }
+          ],
+          temperature: 0.25,
+          max_tokens: 700
+        }),
+        signal: controller.signal
+      });
+      const data = await res.json().catch(() => ({}));
+      const raw = data?.choices?.[0]?.message?.content || "";
+      const answer = sanitizeLocalAiAnswer(raw);
+      if (res.ok && answer) {
+        const item = recordOllamaConversation({ area, model, prompt: cleanPrompt, answer, ok: true, meta: { provider: "openrouter-free" } });
+        return { ok: true, answer, itemId: item.id, ai: { status: "online", provider: "openrouter-free", model } };
+      }
+    } catch (_err) {
+      // segue para retorno offline
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  return { ok: false, error: "Nenhuma API gratuita configurada ou disponível no momento.", ai: { status: "offline", provider: "free-cloud", model: "none" } };
+}
+
 async function callCatalogAi(options = {}) {
   if (CZS_AI_PRIMARY === "openai") {
     const cloud = await callOpenAiResponse(options);
@@ -11543,6 +11623,15 @@ async function callCatalogAi(options = {}) {
 
   const local = await callLocalOllama(options);
   if (local.ok) return local;
+
+  const freeCloud = await callFreeCloudAi(options);
+  if (freeCloud.ok) {
+    return {
+      ...freeCloud,
+      fallbackFrom: local.ai || { status: "offline", provider: "ollama", model: OLLAMA_MODEL },
+      warning: local.error || ""
+    };
+  }
 
   if (CZS_OPENAI_FALLBACK_ENABLED) {
     const cloud = await callOpenAiResponse(options);
@@ -22157,7 +22246,9 @@ function startAngelApi() {
   });
 }
 
-const handleNewsroom = require('./newsroom')(DATA_DIR);
+const handleNewsroom = require('./newsroom')(DATA_DIR, {
+  aiAssist: (opts) => callCatalogAi({ ...opts, area: 'editores' })
+});
 const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = requestUrl.pathname;

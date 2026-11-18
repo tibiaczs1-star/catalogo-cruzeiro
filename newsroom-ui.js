@@ -74,21 +74,37 @@ function formattedContent(parent, text) {
     inline(node,quote?lines.map(line=>line.replace(/^> ?/,'')).join('\n'):block);
   }
 }
-function textEditor(panel) {
+function textEditor(panel, titleInput) {
   const box=element('div','',panel); box.className='text-editor';
   const toolbar=element('div','',box); toolbar.className='editor-toolbar';
   toolbar.setAttribute('role','toolbar'); toolbar.setAttribute('aria-label','Formatação do texto');
-  const textarea=field(box,'Texto da matéria','content','textarea'); textarea.maxLength=40000; textarea.rows=16;
+  const split=element('div','',box); split.className='editor-split';
+  const textarea=field(split,'Texto da matéria','content','textarea'); textarea.maxLength=40000; textarea.rows=16;
   textarea.placeholder='Escreva sua matéria aqui. Selecione um trecho para formatar.';
-  const preview=element('div','',box); preview.className='editor-preview';
+  const preview=element('div','',split); preview.className='editor-preview';
   element('strong','Prévia da matéria',preview);
   const previewBody=element('div','',preview);
-  function refresh() { previewBody.replaceChildren(); formattedContent(previewBody,textarea.value); }
-  textarea.addEventListener('input',refresh);
+  const statsBar=element('div','',box); statsBar.className='editor-stats';
+  const DRAFT_KEY='czs_editor_draft_v1';
+  function refresh(saveDraft=true) {
+    previewBody.replaceChildren();
+    formattedContent(previewBody,textarea.value);
+    const words=(textarea.value.trim()?textarea.value.trim().split(/\s+/).length:0);
+    const mins=Math.max(1,Math.ceil(words/180));
+    statsBar.textContent=`${words} palavra(s) · ${textarea.value.length}/40000 caracteres · ~${mins} min de leitura · Rascunho salvo localmente`;
+    if(saveDraft && (textarea.value.trim() || titleInput?.value.trim())) {
+      try { localStorage.setItem(DRAFT_KEY, JSON.stringify({title:titleInput?.value||'',content:textarea.value,savedAt:Date.now()})); } catch {}
+    }
+  }
+  textarea.addEventListener('input',()=>refresh(true));
+  if(titleInput) titleInput.addEventListener('input',()=>refresh(true));
+  textarea.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){ e.preventDefault(); refresh(true); status.textContent='Rascunho salvo no navegador.'; }
+  });
   function wrap(before,after,placeholder) {
     const start=textarea.selectionStart, end=textarea.selectionEnd;
     const selected=textarea.value.slice(start,end)||placeholder;
-    textarea.setRangeText(before+selected+after,start,end,'select'); textarea.focus(); refresh();
+    textarea.setRangeText(before+selected+after,start,end,'select'); textarea.focus(); refresh(true);
   }
   function control(label,action) {
     const button=element('button',label,toolbar); button.type='button';
@@ -109,13 +125,55 @@ function textEditor(panel) {
   control('Lista',()=>wrap('\n\n- ','\n\n','item'));
   control('Lista numerada',()=>wrap('\n\n1. ','\n\n','item'));
   control('Citação',()=>wrap('\n\n> ','\n\n','citação'));
+  control('Bloco Essencial',()=>wrap('\n\n> **O essencial:** ','\n\n','Resumo direto em 1 frase.'));
   const colorLabel=element('label','Cor do texto',toolbar); colorLabel.className='editor-color';
   const color=element('input','',colorLabel); color.type='color'; color.value='#b91c1c'; color.setAttribute('aria-label','Escolher cor do texto');
   let savedStart=0,savedEnd=0;
   textarea.addEventListener('select',()=>{savedStart=textarea.selectionStart;savedEnd=textarea.selectionEnd;});
   color.addEventListener('change',()=>{textarea.setSelectionRange(savedStart,savedEnd);wrap('{'+color.value+'|','}','texto');});
-  element('small','Selecione um trecho e escolha uma ferramenta. A prévia mostra como ele aparecerá na matéria.',box);
-  refresh(); return textarea;
+
+  try {
+    const saved=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null');
+    if(saved && (saved.content||saved.title)) {
+      const restoreBtn=element('button','Restaurar rascunho',toolbar); restoreBtn.type='button';
+      restoreBtn.onclick=()=>{
+        if(titleInput && saved.title) titleInput.value=saved.title;
+        if(saved.content) textarea.value=saved.content;
+        refresh(false);
+        status.textContent='Rascunho restaurado.';
+      };
+    }
+  } catch {}
+
+  const aiBar=element('div','',box); aiBar.className='editor-ai-bar';
+  element('strong','Assistente IA da Redação (grátis)',aiBar);
+  const aiResult=element('div','',box); aiResult.className='editor-ai-result'; aiResult.hidden=true;
+  const aiOut=element('pre','',aiResult); aiOut.className='editor-ai-out';
+  const aiActions=element('div','',aiResult); aiActions.className='editor-ai-actions';
+  let lastAiMode='melhorar';
+  const applyReplace=element('button','Substituir texto',aiActions); applyReplace.type='button';
+  applyReplace.onclick=()=>{ textarea.value=aiOut.textContent; refresh(true); aiResult.hidden=true; status.textContent='Texto atualizado pela sugestão.'; };
+  const applyPrepend=element('button','Inserir no topo',aiActions); applyPrepend.type='button';
+  applyPrepend.onclick=()=>{ textarea.value=aiOut.textContent.trim()+'\n\n'+textarea.value.trim(); refresh(true); aiResult.hidden=true; status.textContent='Bloco inserido no topo.'; };
+  const closeAi=element('button','Fechar',aiActions); closeAi.type='button'; closeAi.onclick=()=>{ aiResult.hidden=true; };
+
+  for(const [mode,label] of [['melhorar','✨ Revisar Português'],['titulo','📰 3 Manchetes'],['resumo','📌 Resumo 3 Pontos'],['contraponto','⚖️ Contraponto Semafor']]) {
+    const btn=element('button',label,aiBar); btn.type='button';
+    btn.onclick=async()=>{
+      btn.disabled=true; status.textContent='Consultando editor IA…'; lastAiMode=mode;
+      try {
+        const res=await api('/ai',{mode,title:titleInput?.value||'',content:textarea.value});
+        aiOut.textContent=res.answer||'';
+        applyReplace.hidden=(mode==='titulo');
+        aiResult.hidden=false;
+        status.textContent='Sugestão pronta ('+(res.model||'IA grátis')+').';
+      } catch(err) { status.textContent=err.message; }
+      finally { btn.disabled=false; }
+    };
+  }
+
+  element('small','Atalho Ctrl+S salva o rascunho localmente. A prévia ao lado mostra exatamente como aparecerá no jornal.',box);
+  refresh(false); return textarea;
 }
 function article(parent,a,chief=false) {
   const publicPage=new URLSearchParams(location.search).has('publicadas');
@@ -269,6 +327,7 @@ async function render() {
       data.media={type:attachment.type,data:encoded};
     }
     const result=await api('/enviar',data);
+    try { localStorage.removeItem('czs_editor_draft_v1'); } catch {}
     if(user.chief) tab='Matérias';
     await render();
     status.textContent=user.chief?'Matéria publicada.':'Matéria enviada para revisão.';
@@ -280,8 +339,8 @@ async function render() {
     }
     app.prepend(confirmation);
   },user.chief?'Publicar agora':'Enviar para revisão');
-  field(submission.panel,'Título','title').maxLength=160;
-  textEditor(submission.panel);
+  const titleInput=field(submission.panel,'Título','title'); titleInput.maxLength=160;
+  textEditor(submission.panel, titleInput);
   const sourceName=field(submission.panel,'Nome da fonte (opcional)','sourceName'); sourceName.required=false; sourceName.maxLength=160;
   const sourceUrl=field(submission.panel,'Link da fonte (opcional)','sourceUrl','url'); sourceUrl.required=false;
   field(submission.panel,user.chief?'Posição editorial':'Destaque sugerido','level','select');

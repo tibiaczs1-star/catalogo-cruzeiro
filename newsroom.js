@@ -2,7 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 
-module.exports = function newsroom(directory) {
+module.exports = function newsroom(directory, options = {}) {
+  const aiAssist = typeof options.aiAssist === 'function' ? options.aiAssist : null;
   const file = path.join(directory, 'newsroom-private.json');
   const digest = (secret, salt) => crypto.scryptSync(secret, salt, 64).toString('hex');
   const token = () => crypto.randomBytes(24).toString('base64url');
@@ -155,6 +156,26 @@ module.exports = function newsroom(directory) {
         article.status=body.active?'Publicada':'Arquivada';
         save(state);
         return send(200,{ok:true});
+      }
+      if (route === '/api/editores/ai') {
+        const mode = String(body.mode || 'melhorar').trim();
+        const title = String(body.title || '').trim().slice(0, 200);
+        const content = String(body.content || '').trim().slice(0, 12000);
+        if (!content && !title) return send(400, { error: 'Escreva um título ou rascunho para a IA ajudar.' });
+        if (!aiAssist) return send(503, { error: 'Assistente editorial indisponível no momento.' });
+        const prompts = {
+          melhorar: 'Você é editor-chefe de jornalismo local (padrão Nexo + Semafor). Revise o português, melhore a clareza e a fluidez mantendo rigorosamente apenas os fatos do texto abaixo, em Markdown limpo (parágrafos curtos, subtítulos ## quando ajudar). Não invente dados.\n\nTítulo: ' + title + '\nTexto:\n' + content,
+          titulo: 'Sugira exatamente 3 opções de manchete jornalística direta, forte e sem sensacionalismo (máx 90 caracteres cada, numeradas 1., 2., 3.) para esta matéria de Cruzeiro do Sul/Vale do Juruá:\n\nTítulo atual: ' + title + '\nTexto:\n' + content,
+          resumo: 'Crie um bloco de abertura padrão Semafor + Nexo com:\n> **O essencial:** (1 frase direta)\n\n- **O que muda hoje:** ...\n- **Quem acompanha / impacto:** ...\n- **O que observar:** ...\n\nBaseie-se apenas no texto:\nTítulo: ' + title + '\nTexto:\n' + content,
+          contraponto: 'Crie uma seção curta e equilibrada padrão Semafor com:\n## Os dois lados e checagem\n- **O que os fatos mostram:** ...\n- **Contraponto / o que falta confirmar:** ...\n\nBaseie-se apenas no texto:\nTítulo: ' + title + '\nTexto:\n' + content
+        };
+        const prompt = prompts[mode] || prompts.melhorar;
+        const result = await aiAssist({
+          prompt,
+          system: 'Você é editor sênior do jornal Catálogo CZS (Cruzeiro do Sul, Acre). Seja preciso, imparcial, direto e escreva apenas em português do Brasil.'
+        });
+        if (!result?.ok) return send(503, { error: result?.error || 'IA gratuita indisponível no momento.' });
+        return send(200, { ok: true, answer: result.answer, model: result.ai?.model || '', provider: result.ai?.provider || '' });
       }
       if (route.endsWith('/enviar')) {
         const title=String(body.title||'').trim(), content=String(body.content||'').trim(), level=body.level;
