@@ -396,3 +396,80 @@ body.v8-merge-ready .page .news-card.no-img a {
 body.v8-merge-ready .page .news-card.no-img .copy {
   padding-top: 16px !important;
 }
+
+/* Alinhamento simetrico da Hero + HeroSide (zero buraco branco e zero barras nas thumbnails) */
+@media (min-width: 960px) {
+  html body.v8-merge-ready .page > .hero-grid,
+  html body.v8-merge-ready .page .hero-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.78fr) !important;
+    gap: 18px !important;
+    align-items: stretch !important;
+    margin-bottom: 24px !important;
+  }
+  html body.v8-merge-ready .page .hero-grid #leadStory.lead-card:not(.v8-live-hero),
+  html body.v8-merge-ready .page .hero-grid #leadStory.lead-card,
+  html body.v8-merge-ready .page .hero-grid #leadStory.v8-live-hero {
+    height: 100% !important;
+    min-height: 410px !important;
+    align-self: stretch !important;
+  }
+  html body.v8-merge-ready .page .hero-grid #leadStory .lead-image {
+    height: 100% !important;
+    min-height: 410px !important;
+  }
+}
+
+html body.v8-merge-ready .page .hero-grid #heroSide {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+html body.v8-merge-ready .page .hero-grid #heroSide .story-row,
+html body.v8-merge-ready .page .hero-grid #heroSide .v8-rail-story {
+  display: grid !important;
+  grid-template-columns: 112px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  align-items: center !important;
+  padding: 10px 12px !important;
+  margin: 0 !important;
+  min-height: 92px !important;
+  background: #ffffff !important;
+  border: 1px solid #ded7c8 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+html body.v8-merge-ready .page .hero-grid #heroSide .story-row.no-img,
+html body.v8-merge-ready .page .hero-grid #heroSide .v8-rail-story.v8-rail-story-text-only {
+  grid-template-columns: 1fr !important;
+}
+html body.v8-merge-ready .page .hero-grid #heroSide .story-row img,
+html body.v8-merge-ready .page .hero-grid #heroSide .v8-rail-story img {
+  width: 112px !important;
+  max-width: 112px !important;
+  height: 76px !important;
+  min-height: 76px !important;
+  object-fit: cover !important;
+  object-position: center 22% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 4px !important;
+  background: #ede7da !important;
+  display: block !important;
+}
+html body.v8-merge-ready .page .hero-grid #heroSide .story-row h3 {
+  font-size: 14px !important;
+  line-height: 1.25 !important;
+  margin: 4px 0 !important;
+  color: #121923 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+html body.v8-merge-ready .page .hero-grid #heroSide .story-row .meta {
+  font-size: 11px !important;
+  margin-top: 2px !important;
+}
