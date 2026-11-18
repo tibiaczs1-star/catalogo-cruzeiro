@@ -299,3 +299,36 @@ body.v8-merge-ready .czs-read-progress {
     border-top: 1px solid #ece6d9 !important;
   }
 }
+
+/* Remoção definitiva da introdução azul/cósmica */
+#cinematicLoader,
+.czs-simple-loader,
+.cosmic-depth,
+.spark-star-layer,
+.cosmic-prelude,
+.boom-wave,
+.loader-aurora,
+.v8-loader-welcome,
+.v8-loader-sponsor-bubble,
+.v8-loader-status,
+.v8-star-rush,
+.v8-star-swarm,
+.v8-intro-flash,
+.v8-intro-core,
+.v8-intro-streaks,
+.v8-intro-orbits,
+.v8-intro-chips {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+html.czs-intro-lock,
+html.czs-daily-intro,
+body.v8-intro-running {
+  overflow: auto !important;
+  pointer-events: auto !important;
+}

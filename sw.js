@@ -4,7 +4,7 @@
  * Versão: 2026-06-02
  */
 
-const CACHE_NAME = 'catalogo-czs-v20261118-nexo-semafor5';
+const CACHE_NAME = 'catalogo-czs-v20261118-fix-final';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -57,8 +57,8 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET
   if (request.method !== 'GET') return;
 
-  // API calls — network first, fallback to cache
-  if (url.pathname.startsWith('/api/')) {
+  // API calls & HTML navigations — network first, fallback to cache
+  if (url.pathname.startsWith('/api/') || request.mode === 'navigate' || url.pathname === '/' || url.pathname.endsWith('.html')) {
     event.respondWith(
       fetch(request)
         .then((response) => {
