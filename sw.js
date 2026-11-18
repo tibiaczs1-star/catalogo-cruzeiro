@@ -4,7 +4,7 @@
  * Versão: 2026-06-02
  */
 
-const CACHE_NAME = 'catalogo-czs-v20260602b';
+const CACHE_NAME = 'catalogo-czs-v20261118-nexo-semafor';
 const STATIC_ASSETS = [
   './',
   './index.html',

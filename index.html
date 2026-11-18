@@ -437,7 +437,7 @@ body.v8-merge-ready #leadStory:not(.v8-live-hero) .lead-image{background-color:#
 </div><div class="toast" id="toast"></div>
 <script src="editorial-scope.js?v=cc6cd51bc7d3"></script>
 <script src="news-data.js?v=b0342979ef84"></script>
-<script src="home-current-news.js?v=45b5ed7e5f47"></script>
+<script src="home-current-news.js?v=20261118-live"></script>
 <script src="czs-premium.js?v=20261109-premium1" defer></script>
 <script>window.CZS_FALLBACK_FEATURES=[{"slug":"modelo-cruzeirense-lanca-seu-book-online-confira","title":"Modelo cruzeirense lança seu book online — confira","category":"Cruzeiro do Sul","categoryKey":"cruzeiro-do-sul","summary":"Raiane Leoncio, de 17 anos, apresenta seu trabalho como modelo de passarela em book completo online.","sourceUrl":"/bookray/","imageUrl":"bookray/assets/IMG_1127.jpeg"}];</script>
 <script>
@@ -485,9 +485,10 @@ function initCinematicLoader(){window.__czsInlineShortcutsReady=true}
 
 function initFooterReveal(){const full=$('#fullSiteFooter'),compact=$('#footerCompact');if(!full||!compact)return;const reveal=()=>full.classList.add('revealed');const nearEnd=()=>{const max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);if(window.scrollY/max>.78||window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-900)reveal()};const footerRevealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){reveal();footerRevealObserver.disconnect();}})},{rootMargin:'0px 0px 120px 0px',threshold:.05});footerRevealObserver.observe(compact);addEventListener('scroll',nearEnd,{passive:true});addEventListener('resize',nearEnd,{passive:true});nearEnd()}
 function initPubPaidPopup(){const pop=$('#pubPaidPopup');$('#popupLater')?.addEventListener('click',()=>pop.classList.remove('on'));$('#popupKnow')?.addEventListener('click',()=>pop.classList.remove('on'));pop?.addEventListener('click',e=>{if(e.target===pop)pop.classList.remove('on')});}
-async function syncOnline(){toast('Tentando sincronizar com o Render...');try{const r=await fetch(API_ARCHIVE,{cache:'no-store'});const d=await r.json();if(d.items?.length){stories=(window.CzsEditorialScope?.orderPortalStories?.(d.items.map(x=>Object.assign({},x,{subtitle:x.lede||x.summary,readMin:3})))||d.items);filtered=[...stories];$('#syncStatus').textContent=`Sincronizado agora: ${stories.length} notícias com seleção regional`;
+async function syncOnline(silent=false){if(!silent)toast('Tentando sincronizar com o Render...');try{const r=await fetch(API_ARCHIVE,{cache:'no-store'});const d=await r.json();if(d.items?.length){stories=(window.CzsEditorialScope?.orderPortalStories?.(d.items.map(x=>Object.assign({},x,{subtitle:x.lede||x.summary,readMin:3})))||d.items);filtered=[...stories];$('#syncStatus').textContent=`Sincronizado agora: ${stories.length} notícias com seleção regional`;renderTop();renderFeed(true);if(!silent)toast('Feed atualizado!');}}catch(_){if(!silent)toast('Sem conexão com o servidor');}}
+setTimeout(()=>syncOnline(true),350);
 
-bootRender();toast('Sincronizado com online')}}catch(e){$('#syncStatus').textContent=`Usando arquivo local: ${stories.length} notícias`;toast('Snapshot local mantido')}}
+// syncOnline auto-boot ativo above
 function bootRender(){renderTicker();renderTop();renderFilters();renderVideos();renderGallery();renderArchiveArticleSystem();applyFilter();}
 $('#searchForm').addEventListener('submit',e=>{e.preventDefault();query=$('#searchInput').value.trim();currentFilter='Tudo';$$('#filters button').forEach(b=>b.classList.toggle('active',b.dataset.filter==='Tudo'));applyFilter();location.hash='feed';});
 $('#newsletterForm').addEventListener('submit',e=>{e.preventDefault();toast('Cadastro recebido para o resumo do CZS.')});
@@ -504,7 +505,7 @@ initPubPaidPopup=function(){const pop=$('#pubPaidPopup');if(!pop)return;const cl
 document.addEventListener('pointermove',e=>{const av=document.querySelector('.css-wife-avatar');if(!av)return;const r=av.getBoundingClientRect();const dx=((e.clientX-(r.left+r.width/2))/Math.max(1,window.innerWidth))*10;const dy=((e.clientY-(r.top+r.height/2))/Math.max(1,window.innerHeight))*10;av.style.setProperty('--look-x',dx.toFixed(2)+'deg');av.style.setProperty('--look-y',dy.toFixed(2)+'deg')},{passive:true});
 
 // FINAL_REPAIR_20260603_GOAL runtime override: top surfaces, modern article layout, public copy
-const CZS_LOW_VALUE_RE=/lei\s+org[aâ]nica|selo\s+qualidade|transpar[eê]ncia|e-saj|confer[eê]ncia\s+de\s+documentos|documentos\s+e-saj/i;
+const CZS_LOW_VALUE_RE=/lei\s+org[aâ]nica|selo\s+qualidade|transpar[eê]ncia|e-saj|confer[eê]ncia\s+de\s+documentos|documentos\s+e-saj|^(?:inexigibilidade|aviso\s+de\s+reabertura|preg[aã]o\s+eletr|dispensa\s+de\s+licita)/i;
 function czsStoryTime(n){const raw=n.publishedAt||n.createdAt||n.updatedAt||n.date;const t=Date.parse(raw);return Number.isFinite(t)?t:0}
 function czsSurfaceStories(){const eligible=stories.filter(n=>!CZS_LOW_VALUE_RE.test([n.title,n.subtitle,n.summary,n.category,n.categoryKey].join(' ')));return window.CzsEditorialScope?.orderPortalStories?.(eligible)||eligible.slice().sort((a,b)=>czsStoryTime(b)-czsStoryTime(a));}
 function czsCompactRow(n){return `<a class="story-row" href="${urlFor(n)}"><img loading="lazy" src="${esc(imgFor(n))}" alt="${esc(n.title)}" onerror="this.remove()"><div><span class="badge ${isUrgent(n)?'urgent':''}">${esc(isUrgent(n)?'Urgente':n.category||'Notícias')}</span><h3>${esc(czsCompactTitle(n.title))}</h3><div class="meta"><span>${esc(n.sourceName||'CZS')}</span><span>${esc(n.date||'Atualizado')}</span></div></div></a>`}
