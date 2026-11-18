@@ -332,3 +332,54 @@ body.v8-intro-running {
   overflow: auto !important;
   pointer-events: auto !important;
 }
+
+/* Correcao definitiva do bloco azul #06235c e estiramento na hero-grid */
+html body.v8-merge-ready .page > .hero-grid,
+html body.v8-merge-ready .page .hero-grid {
+  align-items: start !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory.lead-card:not(.v8-live-hero),
+html body.v8-merge-ready .page .hero-grid #leadStory.lead-card,
+html body.v8-merge-ready .page .hero-grid #leadStory.v8-live-hero {
+  background: #ffffff !important;
+  color: #121923 !important;
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+  border: 1px solid #ded7c8 !important;
+  border-top: 3px solid #121923 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 8px 26px rgba(18, 25, 35, 0.06) !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy,
+html body.v8-merge-ready .page .hero-grid #leadStory.lead-card .lead-copy {
+  background: #ffffff !important;
+  color: #121923 !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy h1 {
+  color: #121923 !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy p {
+  color: #2f3a48 !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-image {
+  background-color: #ede7da !important;
+  height: 360px !important;
+  min-height: 260px !important;
+  max-height: 440px !important;
+}
+@media (min-width: 960px) {
+  html body.v8-merge-ready .page .hero-grid #leadStory.lead-card:not(.v8-live-hero),
+  html body.v8-merge-ready .page .hero-grid #leadStory.lead-card,
+  html body.v8-merge-ready .page .hero-grid #leadStory.v8-live-hero {
+    display: grid !important;
+    grid-template-columns: minmax(320px, 1.1fr) minmax(0, 0.9fr) !important;
+  }
+  html body.v8-merge-ready .page .hero-grid #leadStory .lead-image {
+    height: 100% !important;
+    min-height: 380px !important;
+    max-height: none !important;
+  }
+}

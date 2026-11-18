@@ -57,7 +57,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/v8-final/v8-merge-ready.css?v=e018e640b5e1">
-<link rel="stylesheet" href="czs-premium.css?v=20261118-fix-final">
+<link rel="stylesheet" href="czs-premium.css?v=20261118-fix-final2">
 <link rel="stylesheet" href="assets/czs-simple-loader.css?v=20261107-no-blue-1">
 <style>
 body.v8-merge-ready #leadStory:not(.v8-live-hero),body.v8-merge-ready #leadStory:not(.v8-live-hero) .lead-copy{background:#fff!important;color:#132741!important}
@@ -468,7 +468,7 @@ document.addEventListener('pointermove',e=>{const av=document.querySelector('.cs
 // FINAL_REPAIR_20260603_GOAL runtime override: top surfaces, modern article layout, public copy
 const CZS_LOW_VALUE_RE=/lei\s+org[aâ]nica|selo\s+qualidade|transpar[eê]ncia|e-saj|confer[eê]ncia\s+de\s+documentos|documentos\s+e-saj|^(?:inexigibilidade|aviso\s+de\s+reabertura|preg[aã]o\s+eletr|dispensa\s+de\s+licita)/i;
 function czsStoryTime(n){const raw=n.publishedAt||n.createdAt||n.updatedAt||n.date;const t=Date.parse(raw);return Number.isFinite(t)?t:0}
-function czsSurfaceStories(){const eligible=stories.filter(n=>!CZS_LOW_VALUE_RE.test([n.title,n.subtitle,n.summary,n.category,n.categoryKey].join(' ')));const ordered=window.CzsEditorialScope?.orderPortalStories?.(eligible)||eligible.slice().sort((a,b)=>czsStoryTime(b)-czsStoryTime(a));const photoIdx=ordered.findIndex(n=>/^https?:\/\//i.test(imgFor(n)));if(photoIdx>0){const [hero]=ordered.splice(photoIdx,1);ordered.unshift(hero);}return ordered;}
+function czsSurfaceStories(){const eligible=stories.filter(n=>!CZS_LOW_VALUE_RE.test([n.title,n.subtitle,n.summary,n.category,n.categoryKey].join(' ')));const ordered=window.CzsEditorialScope?.orderPortalStories?.(eligible)||eligible.slice().sort((a,b)=>czsStoryTime(b)-czsStoryTime(a));const topPicks=[];const rest=[];const seenImgs=new Set();for(const n of ordered){const src=imgFor(n);const hasReal=/^(https?:\/\/|assets\/news-manual\/)/i.test(src);if(topPicks.length<7&&hasReal&&!seenImgs.has(src)){seenImgs.add(src);topPicks.push(n);}else{rest.push(n);}}return [...topPicks,...rest];}
 function czsCompactRow(n){return `<a class="story-row" href="${urlFor(n)}"><img loading="lazy" src="${esc(imgFor(n))}" alt="${esc(n.title)}" onerror="this.remove()"><div><span class="badge ${isUrgent(n)?'urgent':''}">${esc(isUrgent(n)?'Urgente':n.category||'Notícias')}</span><h3>${esc(czsCompactTitle(n.title))}</h3><div class="meta"><span>${esc(n.sourceName||'CZS')}</span><span>${esc(n.date||'Atualizado')}</span></div></div></a>`}
 renderTop=function(){
   const top=czsSurfaceStories();
@@ -714,8 +714,14 @@ initFooterReveal();
       if (!image || image.tagName !== 'IMG' || image.dataset.czsFallbackApplied === '1') return;
       image.dataset.czsFallbackApplied = '1';
       image.removeAttribute('srcset');
-      image.src = fallback;
-      image.alt = image.alt || 'Paisagem do Vale do Juruá';
+      if (image.closest('.lead-image')) {
+        image.src = fallback;
+        image.alt = image.alt || 'Paisagem do Vale do Juruá';
+      } else {
+        var frame = image.closest('.media-frame');
+        image.remove();
+        if (frame && !frame.querySelector('img')) frame.style.display = 'none';
+      }
     }
 
     function watch(image) {
