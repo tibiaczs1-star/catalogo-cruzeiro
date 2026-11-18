@@ -158,6 +158,13 @@ html body.v8-merge-ready #leadStory .v8-hero-media-frame img {
   display: block !important;
   border-radius: 0 !important;
 }
+html body.v8-merge-ready #leadStory .lead-image:has(.czs-image-status),
+html body.v8-merge-ready .lead-image:has(.czs-image-status) {
+  display: none !important;
+}
+html body.v8-merge-ready #leadStory:has(.czs-image-status) {
+  grid-template-columns: 1fr !important;
+}
 html body.v8-merge-ready .assistant-card,
 html body.v8-merge-ready .wife-inspired-assistant,
 html body.v8-merge-ready #assistantCard,
