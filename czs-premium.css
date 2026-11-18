@@ -473,3 +473,46 @@ html body.v8-merge-ready .page .hero-grid #heroSide .story-row .meta {
   font-size: 11px !important;
   margin-top: 2px !important;
 }
+
+/* Hero em coluna vertical (foto em cima 100% + texto completo embaixo sem cortar) */
+html body.v8-merge-ready .page .hero-grid #leadStory.lead-card:not(.v8-live-hero),
+html body.v8-merge-ready .page .hero-grid #leadStory.lead-card,
+html body.v8-merge-ready .page .hero-grid #leadStory.v8-live-hero {
+  display: flex !important;
+  flex-direction: column !important;
+  grid-template-columns: 1fr !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  align-self: stretch !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-image {
+  width: 100% !important;
+  height: 390px !important;
+  min-height: 320px !important;
+  max-height: 410px !important;
+  flex: 0 0 auto !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy {
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  border-left: none !important;
+  border-top: 1px solid #ece6d9 !important;
+  padding: 20px 24px 22px !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy h1 {
+  font-size: clamp(23px, 2.2vw, 31px) !important;
+  line-height: 1.15 !important;
+  margin: 8px 0 10px !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
+html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy p {
+  font-size: 15.5px !important;
+  line-height: 1.5 !important;
+  margin: 0 0 14px !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
