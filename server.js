@@ -4924,7 +4924,10 @@ function shouldIgnoreImageUrl(value) {
   if (
     imageUrl.includes("agenciabrasil.ebc.com.br/ebc.png") ||
     imageUrl.includes("agenciabrasil.ebc.com.br/ebc.gif") ||
-    imageUrl.includes("/edital-assinado-")
+    imageUrl.includes("/edital-assinado-") ||
+    imageUrl.includes("banner-governo") ||
+    imageUrl.includes("infancia-protegida") ||
+    imageUrl.includes("1140x300")
   ) {
     return true;
   }
