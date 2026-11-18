@@ -121,59 +121,84 @@ body.v8-merge-ready .ticker-item {
   color: #121923 !important;
   border-right: 1px solid #ece6d9 !important;
 }
-body.v8-merge-ready .page .lead-card,
-body.v8-merge-ready #leadStory {
+html body.v8-merge-ready .page .lead-card,
+html body.v8-merge-ready #leadStory,
+html body.v8-merge-ready #leadStory.v8-live-hero {
   display: grid !important;
-  grid-template-columns: minmax(340px, 1.12fr) minmax(0, 0.88fr) !important;
+  grid-template-columns: minmax(360px, 1.15fr) minmax(0, 0.85fr) !important;
   align-items: stretch !important;
-  min-height: 380px !important;
+  min-height: 390px !important;
   background: #ffffff !important;
   color: #121923 !important;
   border: 1px solid #ded7c8 !important;
   border-top: 3px solid #121923 !important;
   border-radius: 6px !important;
   box-shadow: 0 8px 26px rgba(18, 25, 35, 0.06) !important;
+  overflow: hidden !important;
 }
-body.v8-merge-ready .page .lead-card .lead-image,
-body.v8-merge-ready #leadStory .lead-image {
-  min-height: 380px !important;
+html body.v8-merge-ready .page .lead-card .lead-image,
+html body.v8-merge-ready #leadStory .lead-image,
+html body.v8-merge-ready #leadStory .v8-hero-media,
+html body.v8-merge-ready #leadStory .v8-hero-media-frame {
+  min-height: 390px !important;
   height: 100% !important;
   padding: 0 !important;
+  margin: 0 !important;
   background-size: cover !important;
   background-position: center 22% !important;
   background-color: #ede7da !important;
   overflow: hidden !important;
 }
-body.v8-merge-ready .page .lead-card .lead-image img,
-body.v8-merge-ready #leadStory .lead-image img {
+html body.v8-merge-ready #leadStory .lead-image img,
+html body.v8-merge-ready #leadStory .v8-hero-media-frame img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
   object-position: center 22% !important;
   display: block !important;
+  border-radius: 0 !important;
 }
-body.v8-merge-ready .assistant-card,
-body.v8-merge-ready .wife-inspired-assistant,
-body.v8-merge-ready .footer-jump-float,
-body.v8-merge-ready .v8-float-icon {
+html body.v8-merge-ready .assistant-card,
+html body.v8-merge-ready .wife-inspired-assistant,
+html body.v8-merge-ready #assistantCard,
+html body.v8-merge-ready button#footerJumpFloat,
+html body.v8-merge-ready .footer-jump-float,
+html body.v8-merge-ready .czs-footer-gate-button,
+html body.v8-merge-ready .v8-float-icon {
   display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
-body.v8-merge-ready .nav {
-  flex-wrap: nowrap !important;
-  gap: 0 !important;
+html body.v8-merge-ready #heroSide .v8-rail-story img,
+html body.v8-merge-ready .v8-rail-story img {
+  width: 100% !important;
+  max-width: none !important;
+  height: 150px !important;
+  object-fit: cover !important;
+  object-position: center 22% !important;
+  padding: 0 !important;
+  background: #ede7da !important;
 }
-body.v8-merge-ready .nav a {
-  padding: 8px 9px !important;
-  font-size: 13px !important;
+html body.v8-merge-ready .nav {
+  flex-wrap: wrap !important;
+  gap: 2px !important;
+}
+html body.v8-merge-ready .nav a {
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
 }
 @media (max-width: 900px) {
-  body.v8-merge-ready .page .lead-card,
-  body.v8-merge-ready #leadStory {
+  html body.v8-merge-ready .page .lead-card,
+  html body.v8-merge-ready #leadStory,
+  html body.v8-merge-ready #leadStory.v8-live-hero {
     grid-template-columns: 1fr !important;
     min-height: 0 !important;
   }
-  body.v8-merge-ready .page .lead-card .lead-image,
-  body.v8-merge-ready #leadStory .lead-image {
+  html body.v8-merge-ready .page .lead-card .lead-image,
+  html body.v8-merge-ready #leadStory .lead-image,
+  html body.v8-merge-ready #leadStory .v8-hero-media,
+  html body.v8-merge-ready #leadStory .v8-hero-media-frame {
     min-height: 240px !important;
     max-height: 280px !important;
   }
