@@ -209,9 +209,9 @@ const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_IN
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   : 5 * 60 * 1000;
 const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
-const NEWS_REFRESH_AUTO_DISABLED = String(process.env.NEWS_REFRESH_AUTO_DISABLED || "true").toLowerCase() !== "false";
-const ARTICLE_INTEGRITY_AUTO_RUN_DISABLED = String(process.env.ARTICLE_INTEGRITY_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
-const TOPIC_FEED_AUTO_REFRESH_DISABLED = String(process.env.TOPIC_FEED_AUTO_REFRESH_DISABLED || "true").toLowerCase() !== "false";
+const NEWS_REFRESH_AUTO_DISABLED = String(process.env.NEWS_REFRESH_AUTO_DISABLED || "false").toLowerCase() === "true";
+const ARTICLE_INTEGRITY_AUTO_RUN_DISABLED = String(process.env.ARTICLE_INTEGRITY_AUTO_RUN_DISABLED || "false").toLowerCase() === "true";
+const TOPIC_FEED_AUTO_REFRESH_DISABLED = String(process.env.TOPIC_FEED_AUTO_REFRESH_DISABLED || "false").toLowerCase() === "true";
 const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_INTERVAL_MS || 30 * 60 * 1000);
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
@@ -5592,6 +5592,7 @@ async function refreshRssRuntime(limitPerSource = 30) {
   const reports = [];
   const items = [];
 
+  const activeSources = [];
   for (const source of RSS_SOURCES) {
     if (source.disabled) {
       reports.push({
@@ -5601,17 +5602,23 @@ async function refreshRssRuntime(limitPerSource = 30) {
         skipped: true,
         reason: source.disabledReason || "fonte desativada temporariamente"
       });
-      continue;
+    } else {
+      activeSources.push(source);
     }
+  }
 
-    try {
-      const rawText = await fetchSourceFeed(source);
-      const parsedItems = parseSourceFeedItems(rawText, source).slice(0, limitPerSource);
-      items.push(...parsedItems);
-      reports.push({ source: source.id, ok: true, count: parsedItems.length, mode: source.feedType || "rss" });
-    } catch (error) {
-      reports.push({ source: source.id, ok: false, error: String(error?.message || "falha") });
-    }
+  for (let idx = 0; idx < activeSources.length; idx += 8) {
+    const chunk = activeSources.slice(idx, idx + 8);
+    await Promise.all(chunk.map(async (source) => {
+      try {
+        const rawText = await fetchSourceFeed(source);
+        const parsedItems = parseSourceFeedItems(rawText, source).slice(0, limitPerSource);
+        items.push(...parsedItems);
+        reports.push({ source: source.id, ok: true, count: parsedItems.length, mode: source.feedType || "rss" });
+      } catch (error) {
+        reports.push({ source: source.id, ok: false, error: String(error?.message || "falha") });
+      }
+    }));
   }
 
   const deduped = [];
@@ -5641,13 +5648,16 @@ async function refreshRssRuntime(limitPerSource = 30) {
   const runtimeSeen = new Set(
     enrichedItems.map((item) => String(item.sourceUrl || item.url || "").trim()).filter(Boolean)
   );
+  const cutoffMs = Date.now() - 14 * 24 * 60 * 60 * 1000;
   const ownedKept = previousItems.filter((item) => {
-    if (!isOwnedItem(item)) return false;
-    const key = String(item.sourceUrl || item.url || "").trim();
-    return !key || !runtimeSeen.has(key);
+    const key = String(item?.sourceUrl || item?.url || "").trim();
+    if (key && runtimeSeen.has(key)) return false;
+    if (isOwnedItem(item)) return true;
+    const ts = Date.parse(item?.publishedAt || "");
+    return Number.isFinite(ts) && ts >= cutoffMs;
   });
 
-  const mergedRuntimeItems = enrichedItems.concat(ownedKept);
+  const mergedRuntimeItems = enrichedItems.concat(ownedKept).slice(0, 2500);
   const payload = {
     lastAttemptAt: new Date().toISOString(),
     lastSuccessAt: enrichedItems.length ? new Date().toISOString() : null,

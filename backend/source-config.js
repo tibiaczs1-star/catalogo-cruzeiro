@@ -368,5 +368,394 @@ module.exports = [
     limitPerSource: 10,
     disabled: true,
     disabledReason: "Desativado na rodada 20260522-homecatch1: textos em ingles nao podem vazar para a area publica antes de uma etapa de traducao editorial."
+  },
+  // +42 fontes validadas ao vivo em 2026-11-18 (Acre, Amazonia, Regional e Brasil)
+  {
+    id: "g1-acre",
+    name: "G1 Acre",
+    feedUrl: "https://g1.globo.com/rss/g1/ac/acre/",
+    siteUrl: "https://g1.globo.com/ac/acre/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 30,
+    priority: 960,
+    priorityReason: "Cobertura estadual oficial do G1 Acre validada com RSS ativo."
+  },
+  {
+    id: "contilnet-rss",
+    name: "ContilNet Noticias",
+    feedUrl: "https://contilnetnoticias.com.br/wp-json/wp/v2/posts?per_page=20&_embed=1",
+    feedType: "wordpress-json",
+    siteUrl: "https://contilnetnoticias.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 25,
+    priority: 955,
+    priorityReason: "WP-JSON oficial do ContilNet com publicacoes completas do Acre."
+  },
+  {
+    id: "noticias-da-hora",
+    name: "Noticias da Hora",
+    feedUrl: "https://www.noticiasdahora.com.br/feed/",
+    siteUrl: "https://www.noticiasdahora.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 920,
+    priorityReason: "Portal acreano de cobertura diaria validado com RSS ativo."
+  },
+  {
+    id: "oriobranco",
+    name: "O Rio Branco",
+    feedUrl: "https://oriobranco.net/feed/",
+    siteUrl: "https://oriobranco.net/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 915,
+    priorityReason: "Portal tradicional do Acre validado com RSS ativo."
+  },
+  {
+    id: "diario-do-acre",
+    name: "Diario do Acre",
+    feedUrl: "https://diariodoacre.com.br/feed/",
+    siteUrl: "https://diariodoacre.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 25,
+    priority: 910,
+    priorityReason: "Portal jornalístico do Acre validado com RSS ativo."
+  },
+  {
+    id: "acrenews",
+    name: "Acre News",
+    feedUrl: "https://acrenews.com.br/feed/",
+    siteUrl: "https://acrenews.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 905,
+    priorityReason: "Portal estadual de noticias do Acre validado com RSS ativo."
+  },
+  {
+    id: "o-seringal",
+    name: "O Seringal",
+    feedUrl: "https://oseringal.com/feed/",
+    siteUrl: "https://oseringal.com/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 900,
+    priorityReason: "Veiculo regional acreano validado com RSS ativo."
+  },
+  {
+    id: "jurua-informativo-wp",
+    name: "Jurua Informativo WP",
+    feedUrl: "https://juruainformativo.com.br/wp-json/wp/v2/posts?per_page=15&_embed=1",
+    feedType: "wordpress-json",
+    siteUrl: "https://juruainformativo.com.br/",
+    defaultCategory: "Cotidiano",
+    limitPerSource: 20,
+    priority: 965,
+    priorityReason: "API WP-JSON direta do Vale do Jurua."
+  },
+  {
+    id: "portal-amazonia",
+    name: "Portal Amazonia",
+    feedUrl: "https://portalamazonia.com/feed/",
+    siteUrl: "https://portalamazonia.com/",
+    defaultCategory: "Amazonia",
+    limitPerSource: 15,
+    priority: 720
+  },
+  {
+    id: "amazonia-real",
+    name: "Amazonia Real",
+    feedUrl: "https://amazoniareal.com.br/feed/",
+    siteUrl: "https://amazoniareal.com.br/",
+    defaultCategory: "Amazonia",
+    limitPerSource: 15,
+    priority: 715
+  },
+  {
+    id: "o-eco",
+    name: "O Eco",
+    feedUrl: "https://oeco.org.br/feed/",
+    siteUrl: "https://oeco.org.br/",
+    defaultCategory: "Clima",
+    limitPerSource: 12,
+    priority: 700
+  },
+  {
+    id: "infoamazonia",
+    name: "InfoAmazonia",
+    feedUrl: "https://infoamazonia.org/feed/",
+    siteUrl: "https://infoamazonia.org/",
+    defaultCategory: "Clima",
+    limitPerSource: 15,
+    priority: 705
+  },
+  {
+    id: "rondoniagora",
+    name: "Rondoniagora",
+    feedUrl: "https://www.rondoniagora.com/rss",
+    siteUrl: "https://www.rondoniagora.com/",
+    defaultCategory: "Regional",
+    limitPerSource: 12,
+    priority: 640
+  },
+  {
+    id: "g1-amazonas",
+    name: "G1 Amazonas",
+    feedUrl: "https://g1.globo.com/rss/g1/am/amazonas/",
+    siteUrl: "https://g1.globo.com/am/amazonas/",
+    defaultCategory: "Regional",
+    limitPerSource: 15,
+    priority: 650
+  },
+  {
+    id: "g1-rondonia",
+    name: "G1 Rondonia",
+    feedUrl: "https://g1.globo.com/rss/g1/ro/rondonia/",
+    siteUrl: "https://g1.globo.com/ro/rondonia/",
+    defaultCategory: "Regional",
+    limitPerSource: 15,
+    priority: 645
+  },
+  {
+    id: "g1-economia",
+    name: "G1 Economia",
+    feedUrl: "https://g1.globo.com/rss/g1/economia/",
+    siteUrl: "https://g1.globo.com/economia/",
+    defaultCategory: "Economia",
+    limitPerSource: 12,
+    priority: 520
+  },
+  {
+    id: "g1-educacao",
+    name: "G1 Educacao",
+    feedUrl: "https://g1.globo.com/rss/g1/educacao/",
+    siteUrl: "https://g1.globo.com/educacao/",
+    defaultCategory: "Educacao",
+    limitPerSource: 12,
+    priority: 525
+  },
+  {
+    id: "g1-tecnologia",
+    name: "G1 Tecnologia",
+    feedUrl: "https://g1.globo.com/rss/g1/tecnologia/",
+    siteUrl: "https://g1.globo.com/tecnologia/",
+    defaultCategory: "Tecnologia",
+    limitPerSource: 10,
+    priority: 490
+  },
+  {
+    id: "g1-saude",
+    name: "G1 Saude",
+    feedUrl: "https://g1.globo.com/rss/g1/saude/",
+    siteUrl: "https://g1.globo.com/saude/",
+    defaultCategory: "Saude",
+    limitPerSource: 12,
+    priority: 530
+  },
+  {
+    id: "g1-mundo",
+    name: "G1 Mundo",
+    feedUrl: "https://g1.globo.com/rss/g1/mundo/",
+    siteUrl: "https://g1.globo.com/mundo/",
+    defaultCategory: "Mundo",
+    limitPerSource: 10,
+    priority: 460
+  },
+  {
+    id: "g1-natureza",
+    name: "G1 Meio Ambiente",
+    feedUrl: "https://g1.globo.com/rss/g1/natureza/",
+    siteUrl: "https://g1.globo.com/meio-ambiente/",
+    defaultCategory: "Clima",
+    limitPerSource: 10,
+    priority: 510
+  },
+  {
+    id: "g1-concursos",
+    name: "G1 Trabalho e Carreira",
+    feedUrl: "https://g1.globo.com/rss/g1/trabalho-e-carreira/",
+    siteUrl: "https://g1.globo.com/trabalho-e-carreira/",
+    defaultCategory: "Emprego",
+    limitPerSource: 12,
+    priority: 540
+  },
+  {
+    id: "g1-ciencia",
+    name: "G1 Ciencia",
+    feedUrl: "https://g1.globo.com/rss/g1/ciencia/",
+    siteUrl: "https://g1.globo.com/ciencia/",
+    defaultCategory: "Ciencia",
+    limitPerSource: 10,
+    priority: 470
+  },
+  {
+    id: "poder360",
+    name: "Poder360",
+    feedUrl: "https://www.poder360.com.br/feed/",
+    siteUrl: "https://www.poder360.com.br/",
+    defaultCategory: "Politica",
+    limitPerSource: 10,
+    priority: 500
+  },
+  {
+    id: "metropoles",
+    name: "Metropoles",
+    feedUrl: "https://www.metropoles.com/feed",
+    siteUrl: "https://www.metropoles.com/",
+    defaultCategory: "Nacional",
+    limitPerSource: 12,
+    priority: 495
+  },
+  {
+    id: "correio-braziliense",
+    name: "Correio Braziliense",
+    feedUrl: "https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml",
+    siteUrl: "https://www.correiobraziliense.com.br/",
+    defaultCategory: "Nacional",
+    limitPerSource: 10,
+    priority: 480
+  },
+  {
+    id: "senado-noticias",
+    name: "Agencia Senado",
+    feedUrl: "https://www12.senado.leg.br/noticias/feed/todasnoticias/RSS",
+    siteUrl: "https://www12.senado.leg.br/noticias",
+    defaultCategory: "Politica",
+    limitPerSource: 10,
+    priority: 515
+  },
+  {
+    id: "agencia-brasil-economia",
+    name: "Agencia Brasil Economia",
+    feedUrl: "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml",
+    siteUrl: "https://agenciabrasil.ebc.com.br/economia",
+    defaultCategory: "Economia",
+    limitPerSource: 10,
+    priority: 510
+  },
+  {
+    id: "agencia-brasil-educacao",
+    name: "Agencia Brasil Educacao",
+    feedUrl: "https://agenciabrasil.ebc.com.br/rss/educacao/feed.xml",
+    siteUrl: "https://agenciabrasil.ebc.com.br/educacao",
+    defaultCategory: "Educacao",
+    limitPerSource: 10,
+    priority: 515
+  },
+  {
+    id: "agencia-brasil-saude",
+    name: "Agencia Brasil Saude",
+    feedUrl: "https://agenciabrasil.ebc.com.br/rss/saude/feed.xml",
+    siteUrl: "https://agenciabrasil.ebc.com.br/saude",
+    defaultCategory: "Saude",
+    limitPerSource: 10,
+    priority: 515
+  },
+  {
+    id: "agencia-brasil-justica",
+    name: "Agencia Brasil Justica",
+    feedUrl: "https://agenciabrasil.ebc.com.br/rss/justica/feed.xml",
+    siteUrl: "https://agenciabrasil.ebc.com.br/justica",
+    defaultCategory: "Seguranca",
+    limitPerSource: 10,
+    priority: 505
+  },
+  {
+    id: "infomoney",
+    name: "InfoMoney",
+    feedUrl: "https://www.infomoney.com.br/feed/",
+    siteUrl: "https://www.infomoney.com.br/",
+    defaultCategory: "Economia",
+    limitPerSource: 10,
+    priority: 485
+  },
+  {
+    id: "canaltech",
+    name: "Canaltech",
+    feedUrl: "https://canaltech.com.br/rss/",
+    siteUrl: "https://canaltech.com.br/",
+    defaultCategory: "Tecnologia",
+    limitPerSource: 10,
+    priority: 475
+  },
+  {
+    id: "olhar-digital",
+    name: "Olhar Digital",
+    feedUrl: "https://olhardigital.com.br/feed/",
+    siteUrl: "https://olhardigital.com.br/",
+    defaultCategory: "Tecnologia",
+    limitPerSource: 10,
+    priority: 470
+  },
+  {
+    id: "tecnoblog",
+    name: "Tecnoblog",
+    feedUrl: "https://tecnoblog.net/feed/",
+    siteUrl: "https://tecnoblog.net/",
+    defaultCategory: "Tecnologia",
+    limitPerSource: 10,
+    priority: 470
+  },
+  {
+    id: "ge-futebol",
+    name: "ge Esportes",
+    feedUrl: "https://ge.globo.com/rss/ge/",
+    siteUrl: "https://ge.globo.com/",
+    defaultCategory: "Esportes",
+    limitPerSource: 12,
+    priority: 500
+  },
+  {
+    id: "uol-noticias",
+    name: "UOL Noticias",
+    feedUrl: "https://rss.uol.com.br/feed/noticias.xml",
+    siteUrl: "https://noticias.uol.com.br/",
+    defaultCategory: "Nacional",
+    limitPerSource: 10,
+    priority: 480
+  },
+  {
+    id: "folha-poder",
+    name: "Folha Poder",
+    feedUrl: "https://feeds.folha.uol.com.br/poder/rss091.xml",
+    siteUrl: "https://www1.folha.uol.com.br/poder/",
+    defaultCategory: "Politica",
+    limitPerSource: 10,
+    priority: 475
+  },
+  {
+    id: "folha-mercado",
+    name: "Folha Mercado",
+    feedUrl: "https://feeds.folha.uol.com.br/mercado/rss091.xml",
+    siteUrl: "https://www1.folha.uol.com.br/mercado/",
+    defaultCategory: "Economia",
+    limitPerSource: 10,
+    priority: 475
+  },
+  {
+    id: "gazeta-do-povo",
+    name: "Gazeta do Povo",
+    feedUrl: "https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml",
+    siteUrl: "https://www.gazetadopovo.com.br/",
+    defaultCategory: "Nacional",
+    limitPerSource: 10,
+    priority: 485
+  },
+  {
+    id: "revista-oeste",
+    name: "Revista Oeste",
+    feedUrl: "https://revistaoeste.com/feed/",
+    siteUrl: "https://revistaoeste.com/",
+    defaultCategory: "Nacional",
+    limitPerSource: 10,
+    priority: 485
+  },
+  {
+    id: "terra-noticias",
+    name: "Terra Noticias",
+    feedUrl: "https://www.terra.com.br/rss.xml",
+    siteUrl: "https://www.terra.com.br/noticias/",
+    defaultCategory: "Nacional",
+    limitPerSource: 10,
+    priority: 465
   }
 ];
