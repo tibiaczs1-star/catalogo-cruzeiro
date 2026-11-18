@@ -302,7 +302,7 @@ body.v8-merge-ready .czs-read-progress {
 
 /* Remoção definitiva da introdução azul/cósmica */
 #cinematicLoader,
-.czs-simple-loader,
+#cinematicLoader.czs-simple-loader,
 .cosmic-depth,
 .spark-star-layer,
 .cosmic-prelude,
