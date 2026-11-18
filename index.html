@@ -454,7 +454,7 @@ $('#syncStatus').textContent=`Arquivo atualizado: ${stories.length} notícias �
 $('#searchInput').placeholder=`Buscar em ${stories.length} notícias, serviços e editorias`;
 const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const urlFor=n=>`${LIVE}/noticia.html?slug=${encodeURIComponent(n.slug||'')}`;
-const imgFor=n=>String(n.imageUrl||n.feedImageUrl||n.sourceImageUrl||'').replace(/^\/assets\//,'assets/');
+const imgFor=n=>{const raw=String(n.imageUrl||n.feedImageUrl||n.sourceImageUrl||'').replace(/^\/assets\//,'assets/');return /banner-governo|infancia-protegida|1140x300|blur_2/i.test(raw)?'':raw;};
 function leadImageMarkup(n){const primary=imgFor(n);if(!primary)return '<span class="czs-image-status">Imagem em atualização</span>';return `<img src="${esc(primary)}" alt="${esc(n?.title||'Imagem da notícia')}" loading="eager" decoding="async" fetchpriority="high" onerror="this.closest('.lead-image')?.classList.add('czs-image-missing');this.remove()">`}
 function czsCompactTitle(value,max=72){const text=String(value||'').replace(/\s+/g,' ').trim();if(text.length<=max)return text;const cut=text.slice(0,max+1);const at=Math.max(cut.lastIndexOf(' '),cut.lastIndexOf(','),cut.lastIndexOf(';'));const head=(at>Math.floor(max*.55)?cut.slice(0,at):text.slice(0,max)).trim();return `${head}...`}
 function czsCompactSummary(value,max=150){return czsCompactTitle(value,max)}
@@ -758,7 +758,9 @@ initFooterReveal();
     }
 
     function watch(image) {
+      document.querySelectorAll('.assistant-card,.wife-inspired-assistant,#assistantCard,#footerJumpFloat,.footer-jump-float,.v8-float-icon,.v8-side-rail-dock,.czs-side-shortcuts').forEach(function (el) { el.remove(); });
       if (!image || image.dataset.czsFallbackWatching === '1') return;
+      if (/banner-governo|infancia-protegida|1140x300|blur_2/i.test(image.src || '')) applyFallback(image);
       image.dataset.czsFallbackWatching = '1';
       image.addEventListener('error', function () { applyFallback(image); }, { once: true });
       if (image.complete && !image.naturalWidth) applyFallback(image);
@@ -776,6 +778,9 @@ initFooterReveal();
       records.forEach(function (record) { record.addedNodes.forEach(scan); });
     }).observe(document.documentElement, { childList: true, subtree: true });
     setTimeout(function () { scan(document); }, 1000);
+    setInterval(function () {
+      document.querySelectorAll('.assistant-card,.wife-inspired-assistant,#assistantCard,#footerJumpFloat,.footer-jump-float,.czs-footer-gate-button,.v8-float-icon').forEach(function (el) { el.remove(); });
+    }, 800);
   })();
   </script>
 <script src="/newsroom-home.js?v=3" defer></script></body>

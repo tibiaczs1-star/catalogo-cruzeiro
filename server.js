@@ -4927,7 +4927,8 @@ function shouldIgnoreImageUrl(value) {
     imageUrl.includes("/edital-assinado-") ||
     imageUrl.includes("banner-governo") ||
     imageUrl.includes("infancia-protegida") ||
-    imageUrl.includes("1140x300")
+    imageUrl.includes("1140x300") ||
+    imageUrl.includes("blur_2")
   ) {
     return true;
   }
@@ -5070,7 +5071,10 @@ function repairNewsImagesForDisplay(items = []) {
 
     const reason = isBadImage ? "imagem-ausente-ou-generica" : "foto-repetida-na-mesma-divisao";
     const fallbackUrl = ensureNewsFallbackImage(item, reason);
-    if (!fallbackUrl) return item;
+    if (!fallbackUrl) {
+      if (isBadImage) return { ...item, imageUrl: "", feedImageUrl: "", sourceImageUrl: "" };
+      return item;
+    }
 
     return {
       ...item,
@@ -8404,7 +8408,8 @@ function buildArticleNewsApiPayload(limit = 1000, options = {}) {
   const sort = requestedSort === "latest" || requestedSort === "editorial" ? requestedSort : "";
   const video = Boolean(options.video);
   const basePayload = getArticleNewsApiBasePayload();
-  const eligibleItems = video ? basePayload.items.filter(articleHasVideo) : basePayload.items;
+  const cleanItems = repairNewsImagesForDisplay(basePayload.items);
+  const eligibleItems = video ? cleanItems.filter(articleHasVideo) : cleanItems;
   const orderedItems =
     sort === "latest"
       ? eligibleItems.slice().sort(sortArticleItems)
