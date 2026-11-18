@@ -276,7 +276,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".ogg",
   ".wav",
   ".mp4",
-  ".pdf",
+  ".pdf", ".zip",
   ".apk",
   ".ico",
   ".webmanifest"
@@ -323,7 +323,7 @@ const SERVED_ROOT_EXTENSIONS = new Set([
   ".ogg",
   ".wav",
   ".mp4",
-  ".pdf",
+  ".pdf", ".zip",
   ".apk",
   ".ico",
   ".webmanifest",
@@ -7112,7 +7112,7 @@ function mimeFor(filePath) {
     case ".wav":
       return "audio/wav";
     case ".pdf":
-      return "application/pdf";
+      return "application/pdf"; case ".zip": return "application/zip";
     case ".apk":
       return "application/vnd.android.package-archive";
     case ".ico":

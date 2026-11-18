@@ -293,11 +293,21 @@ async function render() {
     element('small','Use o nome de usuário e a senha fornecidos pelo editor-geral.',login.panel);
     login.finish();
     element('a','Ver matérias publicadas').href='/editores?publicadas';
+    const docsBar=element('div','');
+    docsBar.style.cssText='margin-top:16px;padding:12px;background:#faf7f0;border:1px solid #d5cfc1;border-radius:4px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;';
+    const dl1=element('a','📘 Baixar Guia Prático do Editor (PDF)',docsBar); dl1.href='/GUIA_DO_EDITOR.pdf'; dl1.download='01_GUIA_PRATICO_DO_EDITOR.pdf';
+    const dl2=element('a','💼 Baixar Plano de Negócios (PDF)',docsBar); dl2.href='/PLANO_DE_NEGOCIOS.pdf'; dl2.download='02_PLANO_DE_NEGOCIOS_E_PARCERIAS.pdf';
+    const dl3=element('a','📦 Baixar Pacote Completo (.ZIP)',docsBar); dl3.href='/CATALOGO_CZS_ENTREGA_EDITORES_E_PARCEIROS.zip'; dl3.download='CATALOGO_CZS_ENTREGA_EDITORES_E_PARCEIROS.zip';
     return;
   }
   element('small',user.name+' · '+(user.chief?'Editor-geral':'Editor'));
   const logout=element('button','Sair');
   logout.onclick=async()=>{await api('/sair');await render();};
+  const topDocs=element('div','');
+  topDocs.style.cssText='margin:10px 0;padding:8px 12px;background:#faf7f0;border:1px solid #d5cfc1;border-radius:4px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;';
+  const tdl1=element('a','📘 Guia do Editor (PDF)',topDocs); tdl1.href='/GUIA_DO_EDITOR.pdf'; tdl1.download='01_GUIA_PRATICO_DO_EDITOR.pdf';
+  const tdl2=element('a','💼 Plano de Negócios (PDF)',topDocs); tdl2.href='/PLANO_DE_NEGOCIOS.pdf'; tdl2.download='02_PLANO_DE_NEGOCIOS_E_PARCERIAS.pdf';
+  const tdl3=element('a','📦 Pacote Completo (.ZIP)',topDocs); tdl3.href='/CATALOGO_CZS_ENTREGA_EDITORES_E_PARCEIROS.zip'; tdl3.download='CATALOGO_CZS_ENTREGA_EDITORES_E_PARCEIROS.zip';
   if(user.temporary) {
     const change=form('Troque a senha temporária',async data=>{await api('/senha',data);await render();},'Salvar senha');
     const password=field(change.panel,'Nova senha','password','password');
