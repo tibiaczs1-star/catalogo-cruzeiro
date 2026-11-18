@@ -157,7 +157,7 @@ function textEditor(panel, titleInput) {
   applyPrepend.onclick=()=>{ textarea.value=aiOut.textContent.trim()+'\n\n'+textarea.value.trim(); refresh(true); aiResult.hidden=true; status.textContent='Bloco inserido no topo.'; };
   const closeAi=element('button','Fechar',aiActions); closeAi.type='button'; closeAi.onclick=()=>{ aiResult.hidden=true; };
 
-  for(const [mode,label] of [['estudar_fontes','🔎 Estudar Fontes & Incoerências (NYT)'],['melhorar','✨ Revisar Português'],['titulo','📰 3 Manchetes'],['resumo','📌 Resumo 3 Pontos'],['contraponto','⚖️ Contraponto Semafor']]) {
+  for(const [mode,label] of [['estudar_fontes','🔎 Estudar Fontes & Incoerências (NYT)'],['anti_assessoria','🧹 Secar Release (Anti-Assessoria)'],['perguntas_furo','🕵️ Perguntas Investigativas'],['melhorar','✨ Revisar Português'],['titulo','📰 3 Manchetes'],['resumo','📌 Resumo 3 Pontos'],['contraponto','⚖️ Contraponto Semafor']]) {
     const btn=element('button',label,aiBar); btn.type='button';
     btn.onclick=async()=>{
       btn.disabled=true; status.textContent='Consultando editor IA…'; lastAiMode=mode;
@@ -208,11 +208,17 @@ function article(parent,a,chief=false) {
     element('a','Abrir matéria publicada',card).href='/noticia.html?slug=redacao-'+a.id;
   }
   if(chief && ['Publicada','Arquivada'].includes(a.status)){
-    const manage=form('Gerenciar publicação',async data=>{
+    const manage=form('Gerenciar ou Editar Publicação',async data=>{
       await api('/gerenciar',{id:a.id,level:Number(data.level),active:data.visibility==='public'});
+      if(data.editTitle && data.editContent) {
+        await api('/editar',{id:a.id,title:data.editTitle,content:data.editContent,category:data.editCategory||a.category,level:Number(data.level)});
+      }
       await render();
       status.textContent='Publicação atualizada.';
-    },'Salvar',card);
+    },'Salvar alterações',card);
+    field(manage.panel,'Editar Título','editTitle').value=a.title||'';
+    const editCat=field(manage.panel,'Editoria','editCategory'); editCat.required=false; editCat.value=a.category||'Redação CZS';
+    const editTxt=field(manage.panel,'Editar Texto da Matéria','editContent','textarea'); editTxt.rows=6; editTxt.value=a.content||'';
     field(manage.panel,'Posição editorial','level','select').value=a.level;
     const visibility=field(manage.panel,'Visibilidade','visibility','select');
     visibility.replaceChildren(new Option('Publicada','public'),new Option('Arquivada','archive'));
@@ -279,14 +285,65 @@ async function render() {
   if(user.chief){
     const pending=user.articles.filter(a=>a.status==='Em revisão');
     const nav=element('nav','');
-    for(const name of ['Para aprovar','Nova matéria','Matérias','Equipe','Métricas']){
-      const button=element('button',name==='Para aprovar'?name+' ('+pending.length+')':name,nav);
+    for(const name of ['Para aprovar','Nova matéria','Radar do Dia','Matérias','Comentários Cidadãos','Equipe','Métricas']){
+      const button=element('button',name==='Para aprovar'?name+' ('+pending.length+')':name==='Comentários Cidadãos'?name+' ('+(user.comments?.length||0)+')':name,nav);
       button.setAttribute('aria-pressed',String(tab===name));
       button.onclick=()=>{tab=name;render().catch(error=>{status.textContent=error.message;});};
+    }
+    if(tab==='Radar do Dia'){
+      element('h2','Radar do Dia — Assumir Pauta como Original (Apagar Réplica)');
+      element('p','Ao assumir uma pauta abaixo e publicá-la pela Redação CZS, o sistema destaca sua reportagem original e apaga automaticamente a réplica externa do feed público.');
+      const radarBox=element('div','Carregando pautas do dia…');
+      fetch('/api/news/archive?limit=25',{cache:'no-store'}).then(r=>r.json()).then(d=>{
+        radarBox.replaceChildren();
+        (d.items||[]).filter(x=>!x.isOriginal).slice(0,20).forEach(item=>{
+          const row=element('section','',radarBox);
+          element('h3',item.title,row);
+          element('small',(item.sourceName||'Fonte externa')+' · '+(item.category||'Notícias')+' · '+(item.date||'Hoje'),row);
+          element('p',item.summary||item.lede||'',row);
+          const takeBtn=element('button','⚡ Assumir Pauta como Original (Apagar Réplica)',row);
+          takeBtn.type='button';
+          takeBtn.onclick=()=>{
+            localStorage.setItem('czs_editor_draft_v1',JSON.stringify({
+              title:item.title,
+              content:'Insumo da fonte ('+(item.sourceName||'Veículo')+' - '+(item.sourceUrl||'')+'):\n'+(item.summary||item.lede||'')+'\n\n[Clique em "🔎 Estudar Fontes & Incoerências (NYT)" abaixo para gerar a reportagem autoral verificada]',
+              savedAt:Date.now()
+            }));
+            tab='Nova matéria';
+            render();
+            status.textContent='Pauta carregada! Clique em "Restaurar rascunho" ou use o botão "Estudar Fontes & Incoerências (NYT)".';
+          };
+        });
+      }).catch(()=>{radarBox.textContent='Não foi possível carregar o radar.';});
+      return;
+    }
+    if(tab==='Comentários Cidadãos'){
+      element('h2','Moderação de Comentários e Relatos dos Cidadãos');
+      const list=user.comments||[];
+      if(!list.length) element('p','Nenhum comentário registrado.');
+      list.forEach(c=>{
+        const card=element('section','');
+        element('h3',(c.name||'Cidadão')+' — '+(c.badge||c.neighborhood||'Cruzeiro do Sul'),card);
+        element('small','Matéria: '+(c.articleSlug||c.articleId||'geral')+' · '+(c.createdAt||''),card);
+        element('p',c.message||c.text||'',card);
+        const vBtn=element('button',c.verifiedByEditor?'Remover selo de verificado':'✓ Destacar como Relato Verificado',card);
+        vBtn.onclick=async()=>{await api('/comentarios/moderar',{id:c.id,action:'verify'});await render();};
+        const dBtn=element('button','🗑️ Excluir comentário',card);
+        dBtn.onclick=async()=>{await api('/comentarios/moderar',{id:c.id,action:'delete'});await render();};
+      });
+      return;
     }
     if(tab==='Para aprovar' || tab==='Matérias'){
       const rows=tab==='Para aprovar'?pending:user.articles;
       element('h2',tab==='Para aprovar'?'Fila de aprovação':'Todas as matérias');
+      if(tab==='Matérias'){
+        const backupBtn=element('button','💾 Baixar Backup JSON da Redação');
+        backupBtn.type='button';
+        backupBtn.onclick=()=>{
+          const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),articles:user.articles,comments:user.comments||[]},null,2)],{type:'application/json'});
+          const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-redacao-czs.json';a.click();
+        };
+      }
       if(!rows.length) element('p','Nenhuma matéria nesta fila.');
       rows.slice().reverse().forEach(a=>article(app,a,true));
       return;
@@ -340,7 +397,25 @@ async function render() {
     app.prepend(confirmation);
   },user.chief?'Publicar agora':'Enviar para revisão');
   const titleInput=field(submission.panel,'Título','title'); titleInput.maxLength=160;
-  textEditor(submission.panel, titleInput);
+  const catSelect=field(submission.panel,'Editoria / Categoria','category'); catSelect.required=false; catSelect.placeholder='Ex.: Cruzeiro do Sul, Polícia, Saúde, Educação, Economia'; catSelect.value='Cruzeiro do Sul';
+  const nutInput=field(submission.panel,'Por que importa (Nut Graph — opcional)','nutGraph'); nutInput.required=false; nutInput.maxLength=400; nutInput.placeholder='1 frase explicando o impacto direto para o morador de Cruzeiro do Sul / Juruá';
+  const importBar=element('div','',submission.panel); importBar.className='editor-ai-bar';
+  const urlToImport=element('input','',importBar); urlToImport.type='url'; urlToImport.placeholder='Cole o link (https://...) de outro jornal para importar e checar fatos'; urlToImport.style.flex='1';
+  const importBtn=element('button','🔗 Importar Fatos da URL',importBar); importBtn.type='button';
+  const bodyEditor=textEditor(submission.panel, titleInput);
+  importBtn.onclick=async()=>{
+    if(!urlToImport.value.trim()) return;
+    importBtn.disabled=true; status.textContent='Extraindo fatos da URL para estudo…';
+    try {
+      const r=await api('/importar-url',{url:urlToImport.value.trim()});
+      if(r.title && !titleInput.value.trim()) titleInput.value=r.title;
+      bodyEditor.value=(bodyEditor.value?bodyEditor.value+'\n\n---\n':'')+'Fonte consultada ('+r.host+' - '+r.sourceUrl+'):\n'+r.content;
+      bodyEditor.dispatchEvent(new Event('input'));
+      urlToImport.value='';
+      status.textContent='Insumos importados! Agora clique em "🔎 Estudar Fontes & Incoerências (NYT)" para redigir a matéria autoral.';
+    } catch(e){ status.textContent=e.message; }
+    finally { importBtn.disabled=false; }
+  };
   const sourceName=field(submission.panel,'Nome da fonte (opcional)','sourceName'); sourceName.required=false; sourceName.maxLength=160;
   const sourceUrl=field(submission.panel,'Link da fonte (opcional)','sourceUrl','url'); sourceUrl.required=false;
   field(submission.panel,user.chief?'Posição editorial':'Destaque sugerido','level','select');

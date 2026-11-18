@@ -107,7 +107,18 @@ module.exports = function newsroom(directory, options = {}) {
         return send(200,{ok:true});
       }
       if (!user) return send(401,{error:'Entre para continuar.'});
-      if (req.method==='GET' && route==='/api/editores') return send(200,{name:user.name,chief,temporary:user.temporary,team:chief&&!user.temporary?state.users.filter(u=>u.name!=='editor-geral').map(({name,disabled,temporary})=>({name,disabled,temporary})):[],articles:user.temporary?[]:state.articles.filter(a=>chief||a.author===user.name).map(({media,...a})=>({...a,hasMedia:Boolean(media)}))});
+      if (req.method==='GET' && route==='/api/editores') {
+        const commentsFile = path.join(directory, 'comments.json');
+        const allComments = fs.existsSync(commentsFile) ? JSON.parse(fs.readFileSync(commentsFile, 'utf8')) : [];
+        return send(200,{
+          name:user.name,
+          chief,
+          temporary:user.temporary,
+          team:chief&&!user.temporary?state.users.filter(u=>u.name!=='editor-geral').map(({name,disabled,temporary})=>({name,disabled,temporary})):[],
+          articles:user.temporary?[]:state.articles.filter(a=>chief||a.author===user.name).map(({media,...a})=>({...a,hasMedia:Boolean(media)})),
+          comments:user.temporary?[]:(Array.isArray(allComments)?allComments:[]).slice(-100).reverse()
+        });
+      }
       if (req.method!=='POST') return send(404,{error:'Página indisponível.'});
       if (route.endsWith('/sair')) {
         state.sessions = state.sessions.filter(item=>item.idHash!==currentHash);
@@ -168,7 +179,9 @@ module.exports = function newsroom(directory, options = {}) {
           titulo: 'Sugira exatamente 3 opções de manchete jornalística direta, forte e sem sensacionalismo (máx 90 caracteres cada, numeradas 1., 2., 3.) para esta matéria de Cruzeiro do Sul/Vale do Juruá:\n\nTítulo atual: ' + title + '\nTexto:\n' + content,
           resumo: 'Crie um bloco de abertura padrão Semafor + Nexo com:\n> **O essencial:** (1 frase direta)\n\n- **O que muda hoje:** ...\n- **Quem acompanha / impacto:** ...\n- **O que observar:** ...\n\nBaseie-se apenas no texto:\nTítulo: ' + title + '\nTexto:\n' + content,
           contraponto: 'Crie uma seção curta e equilibrada padrão Semafor com:\n## Os dois lados e checagem\n- **O que os fatos mostram:** ...\n- **Contraponto / o que falta confirmar:** ...\n\nBaseie-se apenas no texto:\nTítulo: ' + title + '\nTexto:\n' + content,
-          estudar_fontes: 'Você é editor investigativo sênior do Catálogo CZS (padrão The New York Times + Semafor). Estude os relatos/fontes abaixo. NÃO copie frases prontas: escreva uma matéria 100% original, clara e analítica em Markdown.\nEstruture obrigatoriamente assim:\n> **Por que importa (Nut Graph):** (1 parágrafo de impacto local em Cruzeiro do Sul/Acre)\n\n(3 a 4 parágrafos de reportagem autoral estilo NYT com os fatos apurados)\n\n## Checagem de Fatos\n- **Confirmado:** ...\n- **Em apuração / pendente:** ...\n\n## Incoerências e Divergências entre Jornais\n- Explicite qualquer diferença de números, datas, valores, nomes ou omissões encontrada entre os relatos consultados.\n\nInsumos para estudo:\nTítulo: ' + title + '\nRelatos/Fontes:\n' + content
+          estudar_fontes: 'Você é editor investigativo sênior do Catálogo CZS (padrão The New York Times + Semafor). Estude os relatos/fontes abaixo. NÃO copie frases prontas: escreva uma matéria 100% original, clara e analítica em Markdown.\nEstruture obrigatoriamente assim:\n> **Por que importa (Nut Graph):** (1 parágrafo de impacto local em Cruzeiro do Sul/Acre)\n\n(3 a 4 parágrafos de reportagem autoral estilo NYT com os fatos apurados)\n\n## Checagem de Fatos\n- **Confirmado:** ...\n- **Em apuração / pendente:** ...\n\n## Incoerências e Divergências entre Jornais\n- Explicite qualquer diferença de números, datas, valores, nomes ou omissões encontrada entre os relatos consultados.\n\nInsumos para estudo:\nTítulo: ' + title + '\nRelatos/Fontes:\n' + content,
+          anti_assessoria: 'Você é editor do The New York Times. Reescreva o texto abaixo removendo 100% dos adjetivos elogiosos, autopromoção política e jargão de assessoria de imprensa. Mantenha apenas os fatos objetivos verificáveis, valores, datas, locais e impacto prático para o cidadão de Cruzeiro do Sul:\n\nTítulo: ' + title + '\nTexto:\n' + content,
+          perguntas_furo: 'Analise a pauta abaixo como repórter investigativo do Catálogo CZS e liste:\n## 4 Perguntas Essenciais Não Respondidas\n1. ...\n2. ...\n3. ...\n4. ...\n\n## Documentos e Fontes Oficiais para Checar\n- ...\n\nTítulo: ' + title + '\nTexto:\n' + content
         };
         const prompt = prompts[mode] || prompts.melhorar;
         const result = await aiAssist({
@@ -195,9 +208,60 @@ module.exports = function newsroom(directory, options = {}) {
           media={type,data};
         }
         const id=crypto.randomUUID();
-        state.articles.push({id,title,content,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
+        const category=String(body.category||'Redação CZS').trim().slice(0,60)||'Redação CZS';
+        const nutGraph=String(body.nutGraph||'').trim().slice(0,500);
+        const imageCredit=String(body.imageCredit||'').trim().slice(0,160);
+        state.articles.push({id,title,content,category,nutGraph,imageCredit,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
         save(state);
         return send(201,{ok:true,id});
+      }
+      if (route==='/api/editores/editar') {
+        const article=state.articles.find(a=>a.id===body.id && (chief || a.author===user.name));
+        if (!article) return send(404,{error:'Matéria não encontrada.'});
+        const nextTitle=String(body.title||article.title||'').trim();
+        const nextContent=String(body.content||article.content||'').trim();
+        if (!nextTitle || nextTitle.length>160 || !nextContent || nextContent.length>40000) return send(400,{error:'Confira o título e o texto.'});
+        article.title=nextTitle;
+        article.content=nextContent;
+        if (body.category) article.category=String(body.category).trim().slice(0,60);
+        if (body.nutGraph!==undefined) article.nutGraph=String(body.nutGraph||'').trim().slice(0,500);
+        if (chief && [0,1,2].includes(Number(body.level))) article.level=Number(body.level);
+        article.updatedAt=new Date().toISOString();
+        save(state);
+        return send(200,{ok:true,id:article.id});
+      }
+      if (route==='/api/editores/importar-url') {
+        let target;
+        try { target = new URL(String(body.url||'').trim()); } catch { return send(400,{error:'Informe uma URL válida começando com https://'}); }
+        if (!['http:','https:'].includes(target.protocol)) return send(400,{error:'Protocolo inválido.'});
+        try {
+          const resp = await fetch(target.href, { headers: {'User-Agent':'CatalogoCZS-Newsroom/1.0'} });
+          const html = await resp.text();
+          const titleMatch = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i) || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+          const extractedTitle = (titleMatch ? titleMatch[1] : '').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+          const paragraphs = [...html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
+            .map(m => m[1].replace(/<[^>]+>/g,' ').replace(/&nbsp;/gi,' ').replace(/\s+/g,' ').trim())
+            .filter(p => p.length > 45 && !/cookie|privacidade|todos os direitos|copyright/i.test(p))
+            .slice(0, 18);
+          return send(200, { ok: true, title: extractedTitle, content: paragraphs.join('\n\n'), sourceUrl: target.href, host: target.hostname });
+        } catch {
+          return send(502, { error: 'Não foi possível extrair o conteúdo desta URL.' });
+        }
+      }
+      if (route==='/api/editores/comentarios/moderar' && chief) {
+        const commentsFile = path.join(directory, 'comments.json');
+        const list = fs.existsSync(commentsFile) ? JSON.parse(fs.readFileSync(commentsFile, 'utf8')) : [];
+        const arr = Array.isArray(list) ? list : [];
+        const idx = arr.findIndex(c => c && c.id === body.id);
+        if (idx === -1) return send(404, { error: 'Comentário não encontrado.' });
+        if (body.action === 'delete') {
+          arr.splice(idx, 1);
+        } else if (body.action === 'verify') {
+          arr[idx].verifiedByEditor = !arr[idx].verifiedByEditor;
+          arr[idx].badge = arr[idx].verifiedByEditor ? '✓ Relato Verificado pela Redação • ' + (arr[idx].neighborhood || 'CZS') : ('Relato de Morador • ' + (arr[idx].neighborhood || 'CZS'));
+        }
+        fs.writeFileSync(commentsFile, JSON.stringify(arr, null, 2), 'utf8');
+        return send(200, { ok: true });
       }
       if (route.endsWith('/revisar') && chief) {
         const article=state.articles.find(a=>a.id===body.id && a.status==='Em revisão');

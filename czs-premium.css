@@ -958,3 +958,25 @@ body.czs-dossier-open {
   font: 400 14.5px/1.55 Georgia, "Times New Roman", serif !important;
   color: #1f2937 !important;
 }
+
+.czs-nyt-tools {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-left: auto !important;
+}
+.czs-nyt-tool-btn {
+  background: #ffffff !important;
+  color: #121923 !important;
+  border: 1px solid #c5bba8 !important;
+  padding: 5px 10px !important;
+  font: 600 11.5px/1.2 Inter, system-ui, sans-serif !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+}
+.czs-nyt-tool-btn:hover {
+  background: #121923 !important;
+  color: #ffffff !important;
+  border-color: #121923 !important;
+}

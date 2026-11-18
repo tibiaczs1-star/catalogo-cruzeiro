@@ -18367,6 +18367,26 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, { items: getNews(Math.max(1, Math.min(200, limit))) });
   }
 
+  if (req.method === "GET" && pathname === "/healthz") {
+    return sendJson(res, 200, { ok: true, status: "healthy", ts: Date.now() });
+  }
+
+  if (req.method === "GET" && pathname === "/rss.xml") {
+    const editorArticles = nytEditorialEngine.loadPublishedEditorArticles(DATA_DIR);
+    const archiveItems = (buildNewsArchivePayload(60).items || []);
+    const merged = nytEditorialEngine.mergeEditorAndDeduplicateReplicas(editorArticles, archiveItems).slice(0, 40);
+    const base = "https://catalogo-cruzeiro-web.onrender.com";
+    const itemsXml = merged.map((item) => {
+      const link = base + "/noticia.html?slug=" + encodeURIComponent(item.slug || "");
+      const title = nytEditorialEngine.cleanText(item.title || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+      const desc = nytEditorialEngine.cleanText(item.summary || item.lede || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+      return "    <item><title>" + title + "</title><link>" + link + "</link><guid>" + link + "</guid><description>" + desc + "</description></item>";
+    }).join("\n");
+    const rss = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rss version=\"2.0\">\n  <channel>\n    <title>Catálogo CZS — Reportagens Originais e Fatos Checados</title>\n    <link>" + base + "/</link>\n    <description>Jornalismo original, checagem de fatos e monitoramento do Vale do Juruá, Acre.</description>\n" + itemsXml + "\n  </channel>\n</rss>";
+    res.writeHead(200, { "Content-Type": "application/rss+xml; charset=utf-8", "Cache-Control": "public, max-age=600" });
+    return res.end(rss);
+  }
+
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 1000);
     const lite = /^(1|true|yes|sim)$/i.test(String(searchParams.get("lite") || ""));

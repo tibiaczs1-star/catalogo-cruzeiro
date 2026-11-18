@@ -76,6 +76,12 @@
     modal.classList.remove("is-open");
     modal.hidden = true;
     document.body.classList.remove("czs-dossier-open");
+    try {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      if (window.location.search.indexOf("materia=") !== -1) {
+        history.pushState({}, "", window.location.pathname);
+      }
+    } catch (_e) {}
   }
 
   function renderCommentsList(comments) {
@@ -193,6 +199,12 @@
       '    <span>Por <strong>Redação Catálogo CZS</strong> (Síntese Autoral &amp; Checagem)</span>',
       '    <span>' + esc(article.date || "18 de nov. de 2026") + "</span>",
       '    <span>' + esc((article.readMin || 3) + " min de leitura") + "</span>",
+      '    <div class="czs-nyt-tools">',
+      '      <button type="button" class="czs-nyt-tool-btn" data-czs-tts-toggle>🔊 Ouvir reportagem</button>',
+      '      <button type="button" class="czs-nyt-tool-btn" data-czs-font-delta="-1" aria-label="Diminuir fonte">A-</button>',
+      '      <button type="button" class="czs-nyt-tool-btn" data-czs-font-delta="1" aria-label="Aumentar fonte">A+</button>',
+      '      <button type="button" class="czs-nyt-tool-btn" data-czs-copy-wa="' + esc(slug) + '">📲 Copiar resumo p/ WhatsApp</button>',
+      "    </div>",
       "  </div>",
       '  <figure class="czs-nyt-figure">',
       '    <img src="' + esc(imgUrl) + '" alt="' + esc(article.title || "Ilustração da matéria") + '" onerror="if(this.src.indexOf(\'illustration.svg\')===-1){this.src=\'' + esc(illustrationFallback) + '\';}" />',
@@ -264,6 +276,54 @@
 
   function bindDossierInteractions(container, slug) {
     if (!container) return;
+
+    var ttsBtn = container.querySelector("[data-czs-tts-toggle]");
+    if (ttsBtn && window.speechSynthesis) {
+      ttsBtn.addEventListener("click", function () {
+        if (window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+          ttsBtn.textContent = "🔊 Ouvir reportagem";
+          return;
+        }
+        var h1 = container.querySelector(".czs-nyt-headline")?.textContent || "";
+        var nut = container.querySelector(".czs-nyt-nutgraph")?.textContent || "";
+        var bodyTxt = Array.from(container.querySelectorAll(".czs-nyt-prose p")).map(function (p) { return p.textContent; }).join(". ");
+        var utter = new SpeechSynthesisUtterance(h1 + ". " + nut + ". " + bodyTxt);
+        utter.lang = "pt-BR";
+        utter.rate = 1.03;
+        utter.onend = function () { ttsBtn.textContent = "🔊 Ouvir reportagem"; };
+        ttsBtn.textContent = "⏹ Parar áudio";
+        window.speechSynthesis. cancel();
+        window.speechSynthesis.speak(utter);
+      });
+    }
+
+    var fontSize = 18.5;
+    container.querySelectorAll("[data-czs-font-delta]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var delta = Number(btn.getAttribute("data-czs-font-delta") || 0);
+        fontSize = Math.max(15, Math.min(24, fontSize + delta * 1.5));
+        container.querySelectorAll(".czs-nyt-prose p").forEach(function (p) {
+          p.style.setProperty("font-size", fontSize + "px", "important");
+        });
+      });
+    });
+
+    var waBtn = container.querySelector("[data-czs-copy-wa]");
+    if (waBtn) {
+      waBtn.addEventListener("click", function () {
+        var h1 = container.querySelector(".czs-nyt-headline")?.textContent || "";
+        var badge = container.querySelector(".czs-nyt-fact-badge")?.textContent || "Fato Checado CZS";
+        var nut = container.querySelector(".czs-nyt-nutgraph")?.textContent || "";
+        var shareUrl = window.location.origin + "/?materia=" + encodeURIComponent(slug);
+        var text = "📰 *CATÁLOGO CZS — " + badge + "*\n\n*" + h1 + "*\n\n" + nut + "\n\nLeia a checagem completa: " + shareUrl;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text);
+        }
+        waBtn.textContent = "✓ Copiado p/ WhatsApp!";
+        setTimeout(function () { waBtn.textContent = "📲 Copiar resumo p/ WhatsApp"; }, 2400);
+      });
+    }
 
     var checkBtn = container.querySelector("[data-czs-run-ai-check]");
     if (checkBtn) {
@@ -356,6 +416,11 @@
     modal.hidden = false;
     modal.classList.add("is-open");
     document.body.classList.add("czs-dossier-open");
+    try {
+      if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
+        history.pushState({ czsMateria: slug }, "", "/?materia=" + encodeURIComponent(slug));
+      }
+    } catch (_e) {}
 
     if (fallbackStory && fallbackStory.title) {
       content.innerHTML = renderDossierMarkup({
@@ -431,4 +496,13 @@
     },
     true
   );
+
+  // Auto-open if URL has ?materia=<slug>
+  window.addEventListener("DOMContentLoaded", function () {
+    var q = new URLSearchParams(window.location.search);
+    var mSlug = q.get("materia");
+    if (mSlug && window.location.pathname.indexOf("noticia.html") === -1) {
+      setTimeout(function () { openCzsDossierModal(mSlug); }, 250);
+    }
+  });
 })();
