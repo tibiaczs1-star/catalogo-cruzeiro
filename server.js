@@ -2,6 +2,7 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
+const nytEditorialEngine = require("./backend/nyt-editorial-engine");
 const { criarVendaBadclaude } = require("./badclaude-venda");
 const { createSuperbadSalesApi } = require("./badclaude-superbad-api");
 const { execFile, spawn, spawnSync } = require("child_process");
@@ -18371,12 +18372,145 @@ async function handleApi(req, res, pathname, searchParams) {
     const lite = /^(1|true|yes|sim)$/i.test(String(searchParams.get("lite") || ""));
     const sort = searchParams.get("sort") || "";
     const video = /^(1|true|yes|sim)$/i.test(String(searchParams.get("video") || ""));
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { lite, sort, video }));
+    const payload = getCachedArticleNewsApiPayload(limit, { lite, sort, video });
+    const editorArticles = nytEditorialEngine.loadPublishedEditorArticles(DATA_DIR);
+    const merged = nytEditorialEngine.mergeEditorAndDeduplicateReplicas(editorArticles, payload.items || []).slice(0, Math.max(1, Math.min(1000, limit)));
+    return sendJson(res, 200, { ...payload, items: merged, returned: merged.length });
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
     const limit = Number(searchParams.get("limit") || 500);
-    return sendJson(res, 200, { ok: true, ...buildNewsArchivePayload(limit) });
+    const payload = buildNewsArchivePayload(limit);
+    const editorArticles = nytEditorialEngine.loadPublishedEditorArticles(DATA_DIR);
+    const merged = nytEditorialEngine.mergeEditorAndDeduplicateReplicas(editorArticles, payload.items || []).slice(0, Math.max(1, Math.min(1000, limit)));
+    return sendJson(res, 200, { ok: true, ...payload, items: merged, returned: merged.length });
+  }
+
+  // ===== CZS NYT EDITORIAL DOSSIER, FACT-CHECK, ILLUSTRATION & CITIZEN COMMENTS API =====
+  if (pathname.startsWith("/api/articles/")) {
+    const parts = pathname.slice("/api/articles/".length).split("/").filter(Boolean);
+    const rawSlug = decodeURIComponent(parts[0] || "").trim();
+    const action = parts[1] || "dossier";
+
+    const getUnifiedStories = () => {
+      const editorArticles = nytEditorialEngine.loadPublishedEditorArticles(DATA_DIR);
+      const archiveItems = buildNewsArchivePayload(1000).items || [];
+      return nytEditorialEngine.mergeEditorAndDeduplicateReplicas(editorArticles, archiveItems);
+    };
+
+    const findArticleBySlug = (slugToFind, list) => {
+      if (!slugToFind) return list[0] || null;
+      return (
+        list.find((item) => item.slug === slugToFind || item.id === slugToFind) ||
+        list.find((item) => String(item.slug || "").toLowerCase() === slugToFind.toLowerCase()) ||
+        null
+      );
+    };
+
+    if (req.method === "GET" && action === "illustration.svg") {
+      const all = getUnifiedStories();
+      const story = findArticleBySlug(rawSlug, all) || { slug: rawSlug, title: rawSlug.replace(/-/g, " "), category: "Reportagem CZS" };
+      const svg = nytEditorialEngine.buildEditorialIllustrationSvg(story);
+      res.writeHead(200, {
+        "Content-Type": "image/svg+xml; charset=utf-8",
+        "Cache-Control": "public, max-age=3600"
+      });
+      return res.end(svg);
+    }
+
+    if (req.method === "GET" && action === "comments") {
+      const comments = readJson(path.join(DATA_DIR, "comments.json"), []);
+      const filtered = (Array.isArray(comments) ? comments : [])
+        .filter((c) => !rawSlug || c.articleSlug === rawSlug || c.articleId === rawSlug)
+        .sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")))
+        .slice(0, 100)
+        .map((c) => ({
+          id: c.id,
+          articleSlug: c.articleSlug || c.articleId || rawSlug,
+          name: nytEditorialEngine.cleanText(c.name || c.author || "Cidadão de Cruzeiro do Sul").slice(0, 80),
+          neighborhood: nytEditorialEngine.cleanText(c.neighborhood || c.city || "Cruzeiro do Sul").slice(0, 80),
+          contributionType: c.contributionType || "relato",
+          badge: nytEditorialEngine.cleanText(c.badge || "Cidadão local").slice(0, 80),
+          message: nytEditorialEngine.cleanText(c.message || c.text || "").slice(0, 1200),
+          createdAt: c.createdAt || new Date().toISOString()
+        }));
+      return sendJson(res, 200, { ok: true, slug: rawSlug, total: filtered.length, items: filtered });
+    }
+
+    if (req.method === "POST" && action === "comments") {
+      const body = await parseBody(req);
+      const message = nytEditorialEngine.cleanText(body.message || body.text || "").slice(0, 1200);
+      if (!message || message.length < 4) {
+        return sendJson(res, 400, { ok: false, error: "Escreva seu comentário ou relato com pelo menos 4 caracteres." });
+      }
+      const name = nytEditorialEngine.cleanText(body.name || body.author || "Morador local").slice(0, 80) || "Morador local";
+      const neighborhood = nytEditorialEngine.cleanText(body.neighborhood || "Cruzeiro do Sul").slice(0, 80) || "Cruzeiro do Sul";
+      const contributionType = ["relato", "checagem", "opiniao"].includes(body.contributionType) ? body.contributionType : "relato";
+      const badgeMap = {
+        relato: "Relato de Morador",
+        checagem: "Checagem / Correção Cidadã",
+        opiniao: "Opinião do Leitor"
+      };
+      const comments = readJson(path.join(DATA_DIR, "comments.json"), []);
+      const nextItem = {
+        id: "cid-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+        articleSlug: rawSlug,
+        articleId: rawSlug,
+        name,
+        author: name,
+        neighborhood,
+        contributionType,
+        badge: badgeMap[contributionType] + " • " + neighborhood,
+        message,
+        text: message,
+        status: "published",
+        createdAt: new Date().toISOString()
+      };
+      const list = Array.isArray(comments) ? comments : [];
+      list.push(nextItem);
+      writeJson(path.join(DATA_DIR, "comments.json"), list);
+      return sendJson(res, 201, { ok: true, item: nextItem });
+    }
+
+    if (req.method === "GET" && action === "dossier") {
+      const all = getUnifiedStories();
+      const story = findArticleBySlug(rawSlug, all);
+      if (!story) {
+        return sendJson(res, 404, { ok: false, error: "Matéria não encontrada no acervo." });
+      }
+      const dossier = nytEditorialEngine.buildAuthorialNytDossier(story, all, { dataDir: DATA_DIR });
+      const comments = readJson(path.join(DATA_DIR, "comments.json"), []);
+      const storyComments = (Array.isArray(comments) ? comments : [])
+        .filter((c) => c.articleSlug === story.slug || c.articleId === story.slug)
+        .sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")))
+        .slice(0, 50)
+        .map((c) => ({
+          id: c.id,
+          name: nytEditorialEngine.cleanText(c.name || c.author || "Cidadão").slice(0, 80),
+          neighborhood: nytEditorialEngine.cleanText(c.neighborhood || "Cruzeiro do Sul").slice(0, 80),
+          contributionType: c.contributionType || "relato",
+          badge: nytEditorialEngine.cleanText(c.badge || "Cidadão local").slice(0, 80),
+          message: nytEditorialEngine.cleanText(c.message || c.text || "").slice(0, 1200),
+          createdAt: c.createdAt
+        }));
+      return sendJson(res, 200, { ok: true, article: story, dossier, comments: storyComments });
+    }
+
+    if (req.method === "POST" && action === "check") {
+      const all = getUnifiedStories();
+      const story = findArticleBySlug(rawSlug, all);
+      if (!story) {
+        return sendJson(res, 404, { ok: false, error: "Matéria não encontrada para checagem." });
+      }
+      const baseDossier = nytEditorialEngine.buildAuthorialNytDossier(story, all, { dataDir: DATA_DIR, forceRefresh: true });
+      const enriched = await nytEditorialEngine.enrichDossierWithAi(
+        story,
+        baseDossier,
+        typeof callFreeCloudAi === "function" ? callFreeCloudAi : null,
+        DATA_DIR
+      );
+      return sendJson(res, 200, { ok: true, article: story, dossier: enriched });
+    }
   }
 
   // ===== CZS NEWS INGEST API (2026-11-09) =====

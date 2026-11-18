@@ -57,6 +57,8 @@
   <link rel="stylesheet" href="./noticia-premium.css?v=a529563ba618" />
   <link rel="stylesheet" href="./czs-design-system.css?v=5803365ec802" />
   <link rel="stylesheet" href="./czs-article-sheet.css?v=08bef743c7ba" />
+  <link rel="stylesheet" href="./czs-premium.css?v=20261118-nyt1" />
+  <style>.catalogo-top-return-loader,.is-article-page-loader{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}body.detail-body{background:#faf7f0!important;color:#121923!important}</style>
 </head>
   <body class="detail-body czs-official-system">
     <script>
@@ -350,5 +352,15 @@
   <script defer src="photo-layout-fix.js?v=20260411ab"></script>
   <script defer src="newspaper-gradient-balance.js?v=20260411r"></script>
   <script defer src="./czs-design-system.js?v=84a8612fdddc"></script>
+  <script src="./czs-nyt-dossier.js?v=20261118-nyt1" defer></script>
+  <script>
+  window.addEventListener("DOMContentLoaded", function(){
+    var slug = new URLSearchParams(window.location.search).get("slug");
+    var shell = document.getElementById("detail-shell");
+    if (slug && shell && typeof window.renderCzsNytDossierInto === "function") {
+      window.renderCzsNytDossierInto(shell, slug);
+    }
+  });
+  </script>
 </body>
 </html>

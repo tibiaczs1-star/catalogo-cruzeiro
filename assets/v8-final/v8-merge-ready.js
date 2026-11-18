@@ -1877,10 +1877,14 @@
 
   function openReader(input, push = true) {
     const slug = typeof input === "string" ? input : input?.slug;
+    if (typeof window.openCzsDossierModal === "function" && slug) {
+      window.openCzsDossierModal(slug);
+      return;
+    }
     const story = bySlug.get(String(slug || "")) || input || allStories[0];
     if (!story) return;
-    if (story.newsroomId) {
-      window.location.href = '/editores?publicadas&materia=' + encodeURIComponent(story.newsroomId);
+    if (typeof window.openCzsDossierModal === "function" && story.slug) {
+      window.openCzsDossierModal(story.slug, story);
       return;
     }
     installReader();

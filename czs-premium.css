@@ -516,3 +516,445 @@ html body.v8-merge-ready .page .hero-grid #leadStory .lead-copy p {
   -webkit-line-clamp: unset !important;
   overflow: visible !important;
 }
+
+/* ============================================================
+   THE NEW YORK TIMES + SEMAFOR SOBRIETY LAYER (2026-11-18)
+   Elimina 100% do amarelo-ovo (#ffd000) com azul (#03194f) e
+   estiliza o Leitor de Dossie, Checagem, Incoerencias e Cidadaos
+   ============================================================ */
+
+html body.v8-merge-ready .page .section-kicker,
+html body.v8-merge-ready .section-kicker,
+body.v8-merge-ready #cruzeiroHoje .section-kicker {
+  background: transparent !important;
+  color: #121923 !important;
+  border: 0 !important;
+  border-bottom: 2px solid #121923 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  padding: 0 0 4px 0 !important;
+  margin-bottom: 6px !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  display: inline-block !important;
+}
+
+html body.v8-merge-ready .section-head::after,
+html body.v8-merge-ready #cruzeiroHoje .section-head::after {
+  background: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid #d8d0c0 !important;
+  height: 1px !important;
+}
+
+html body.v8-merge-ready .badge,
+html body.v8-merge-ready #leadStory .lead-copy .badge,
+html body.v8-merge-ready #heroSide .badge,
+html body.v8-merge-ready .news-card .badge,
+html body.v8-merge-ready .story-row .badge,
+html body.v8-merge-ready .cruzeiro-badge,
+html body.v8-merge-ready .ticker-item .badge {
+  background: #f0ebe1 !important;
+  color: #121923 !important;
+  border: 1px solid #d5ccb8 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  transform: none !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  padding: 3px 8px !important;
+}
+
+html body.v8-merge-ready .badge.urgent,
+html body.v8-merge-ready #leadStory .lead-copy .badge.urgent,
+html body.v8-merge-ready .cruzeiro-badge.alert-badge {
+  background: #8b1e1e !important;
+  color: #ffffff !important;
+  border-color: #8b1e1e !important;
+}
+
+html body.v8-merge-ready .utility-row a,
+html body.v8-merge-ready .utility-row button,
+html body.v8-merge-ready .top-strip a,
+html body.v8-merge-ready .filters button {
+  background: #ffffff !important;
+  color: #121923 !important;
+  border: 1px solid #d8d0c0 !important;
+  border-radius: 3px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body.v8-merge-ready .filters button.active,
+html body.v8-merge-ready .btn,
+html body.v8-merge-ready #leadStory .btn:not(.ghost) {
+  background: #121923 !important;
+  color: #ffffff !important;
+  border: 1px solid #121923 !important;
+  border-radius: 3px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body.v8-merge-ready .btn.ghost,
+html body.v8-merge-ready #leadStory .btn.ghost,
+html body.v8-merge-ready .small-btn {
+  background: #ffffff !important;
+  color: #121923 !important;
+  border: 1px solid #c5bba8 !important;
+  border-radius: 3px !important;
+  box-shadow: none !important;
+}
+
+/* Vitrine Destaques Originais da Redacao */
+#redacao-destaques {
+  margin: 22px 0 28px !important;
+  padding: 18px 20px !important;
+  background: #f5efe2 !important;
+  border: 1px solid #d8d0c0 !important;
+  border-top: 3px solid #121923 !important;
+  border-radius: 4px !important;
+}
+#redacao-destaques h2 {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 22px !important;
+  color: #121923 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+/* ============================================================
+   MODAL & PAGINA DO LEITOR EDITORIAL NYT (#czsDossierModal)
+   ============================================================ */
+body.czs-dossier-open {
+  overflow: hidden !important;
+}
+.czs-dossier-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  padding: 24px 16px 48px !important;
+}
+.czs-dossier-modal[hidden] {
+  display: none !important;
+}
+.czs-dossier-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(18, 25, 35, 0.62) !important;
+  backdrop-filter: blur(2px) !important;
+}
+.czs-dossier-sheet {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(920px, 100%) !important;
+  background: #faf7f0 !important;
+  color: #121923 !important;
+  border: 1px solid #121923 !important;
+  border-top: 4px solid #121923 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28) !important;
+  padding: 0 !important;
+}
+.czs-dossier-topbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 12px 24px !important;
+  background: #faf7f0 !important;
+  border-bottom: 1px solid #d8d0c0 !important;
+}
+.czs-dossier-back {
+  background: #121923 !important;
+  color: #ffffff !important;
+  border: 1px solid #121923 !important;
+  padding: 8px 14px !important;
+  font: 700 13px/1 Inter, system-ui, sans-serif !important;
+  cursor: pointer !important;
+  border-radius: 3px !important;
+}
+.czs-dossier-masthead {
+  font: 700 11.5px/1.2 Georgia, "Times New Roman", serif !important;
+  letter-spacing: 0.14em !important;
+  color: #121923 !important;
+  text-transform: uppercase !important;
+}
+.czs-dossier-direct {
+  font: 600 12.5px/1 Inter, system-ui, sans-serif !important;
+  color: #121923 !important;
+  text-decoration: underline !important;
+}
+.czs-dossier-body {
+  padding: 28px 36px 40px !important;
+}
+@media (max-width: 680px) {
+  .czs-dossier-body {
+    padding: 18px 16px 28px !important;
+  }
+  .czs-dossier-masthead {
+    display: none !important;
+  }
+}
+.czs-nyt-kicker-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 12px !important;
+}
+.czs-nyt-kicker {
+  font: 700 11.5px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #8b1e1e !important;
+}
+.czs-nyt-fact-badge {
+  font: 700 11px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  background: #ece5d5 !important;
+  color: #121923 !important;
+  border: 1px solid #c9bfa8 !important;
+  padding: 4px 9px !important;
+  border-radius: 2px !important;
+}
+.czs-nyt-headline {
+  font: 700 clamp(26px, 3.3vw, 38px)/1.14 Georgia, "Times New Roman", serif !important;
+  color: #121923 !important;
+  margin: 0 0 14px 0 !important;
+  letter-spacing: -0.015em !important;
+}
+.czs-nyt-nutgraph {
+  font: 400 17px/1.55 Georgia, "Times New Roman", serif !important;
+  color: #26303d !important;
+  background: #f2ece0 !important;
+  border-left: 3px solid #8b1e1e !important;
+  padding: 12px 16px !important;
+  margin: 0 0 16px 0 !important;
+}
+.czs-nyt-byline {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+  font: 500 12.5px/1.4 Inter, system-ui, sans-serif !important;
+  color: #55606e !important;
+  border-top: 1px solid #ded7c8 !important;
+  border-bottom: 1px solid #ded7c8 !important;
+  padding: 10px 0 !important;
+  margin-bottom: 20px !important;
+}
+.czs-nyt-figure {
+  margin: 0 0 24px 0 !important;
+  background: #f2ece0 !important;
+  border: 1px solid #ded7c8 !important;
+}
+.czs-nyt-figure img {
+  width: 100% !important;
+  max-height: 460px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.czs-nyt-figure figcaption {
+  font: 500 12px/1.4 Inter, system-ui, sans-serif !important;
+  color: #5c6672 !important;
+  padding: 8px 12px !important;
+  border-top: 1px solid #ded7c8 !important;
+}
+.czs-nyt-prose p {
+  font: 400 18.5px/1.72 Georgia, "Times New Roman", serif !important;
+  color: #161e29 !important;
+  margin: 0 0 18px 0 !important;
+}
+
+/* Quadro de Checagem e Incoerencias entre Jornais */
+.czs-nyt-factcheck-panel,
+.czs-nyt-citizen-panel {
+  margin-top: 32px !important;
+  padding: 22px 24px !important;
+  background: #ffffff !important;
+  border: 1px solid #cfc6b4 !important;
+  border-top: 3px solid #121923 !important;
+}
+.czs-nyt-panel-head {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  border-bottom: 1px solid #e6dfd1 !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 14px !important;
+}
+.czs-nyt-panel-eyebrow {
+  font: 700 10.5px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: 0.12em !important;
+  color: #8b1e1e !important;
+  text-transform: uppercase !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+.czs-nyt-panel-head h2 {
+  font: 700 21px/1.2 Georgia, "Times New Roman", serif !important;
+  color: #121923 !important;
+  margin: 0 !important;
+}
+.czs-nyt-ai-check-btn {
+  background: #121923 !important;
+  color: #ffffff !important;
+  border: 1px solid #121923 !important;
+  padding: 8px 13px !important;
+  font: 700 12px/1 Inter, system-ui, sans-serif !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+}
+.czs-nyt-methodology {
+  font: italic 13.5px/1.5 Georgia, "Times New Roman", serif !important;
+  color: #4b5563 !important;
+  margin: 0 0 14px 0 !important;
+}
+.czs-nyt-verified-box h3,
+.czs-nyt-sources-box h4 {
+  font: 700 14px/1.3 Inter, system-ui, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #121923 !important;
+  margin: 0 0 8px 0 !important;
+}
+.czs-nyt-verified-box ul,
+.czs-nyt-sources-box ul {
+  margin: 0 0 16px 18px !important;
+  padding: 0 !important;
+  font: 400 14.5px/1.55 Inter, system-ui, sans-serif !important;
+  color: #1f2937 !important;
+}
+.czs-inconsistency-box {
+  background: #fdf6f6 !important;
+  border: 1px solid #d9a7a7 !important;
+  border-left: 4px solid #8b1e1e !important;
+  padding: 14px 16px !important;
+  margin: 16px 0 !important;
+}
+.czs-inconsistency-box.is-convergent {
+  background: #f5f3ed !important;
+  border-color: #d5ccb8 !important;
+  border-left-color: #1b4332 !important;
+}
+.czs-inconsistency-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 10px !important;
+}
+.czs-inconsistency-pill {
+  background: #8b1e1e !important;
+  color: #ffffff !important;
+  font: 700 10px/1 Inter, system-ui, sans-serif !important;
+  letter-spacing: 0.08em !important;
+  padding: 4px 8px !important;
+  border-radius: 2px !important;
+}
+.czs-inconsistency-pill.is-ok {
+  background: #1b4332 !important;
+}
+.czs-inconsistency-list {
+  margin: 0 0 0 18px !important;
+  padding: 0 !important;
+  font: 400 14.5px/1.55 Inter, system-ui, sans-serif !important;
+}
+.czs-inconsistency-finding {
+  margin-top: 4px !important;
+  color: #374151 !important;
+  font-size: 13.5px !important;
+}
+
+/* Comentarios dos Cidadaos */
+.czs-citizen-form {
+  display: grid !important;
+  gap: 12px !important;
+  background: #faf7f0 !important;
+  border: 1px solid #ded7c8 !important;
+  padding: 16px !important;
+  margin-bottom: 18px !important;
+}
+.czs-citizen-form-row {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap: 12px !important;
+}
+.czs-citizen-form label {
+  display: grid !important;
+  gap: 5px !important;
+  font: 600 12.5px/1.3 Inter, system-ui, sans-serif !important;
+  color: #121923 !important;
+}
+.czs-citizen-form input,
+.czs-citizen-form select,
+.czs-citizen-form textarea {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 9px 11px !important;
+  background: #ffffff !important;
+  color: #121923 !important;
+  border: 1px solid #c8beaa !important;
+  border-radius: 3px !important;
+  font: 400 14px/1.4 Inter, system-ui, sans-serif !important;
+}
+.czs-citizen-form-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+.czs-citizen-submit {
+  background: #121923 !important;
+  color: #ffffff !important;
+  border: 1px solid #121923 !important;
+  padding: 10px 18px !important;
+  font: 700 13px/1 Inter, system-ui, sans-serif !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+}
+.czs-citizen-list {
+  display: grid !important;
+  gap: 12px !important;
+}
+.czs-citizen-card {
+  padding: 12px 14px !important;
+  background: #faf7f0 !important;
+  border: 1px solid #ded7c8 !important;
+  border-left: 3px solid #121923 !important;
+}
+.czs-citizen-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font: 600 12.5px/1.3 Inter, system-ui, sans-serif !important;
+  margin-bottom: 6px !important;
+}
+.czs-citizen-badge {
+  background: #e9e2d2 !important;
+  color: #121923 !important;
+  padding: 2px 7px !important;
+  font-size: 11px !important;
+  border-radius: 2px !important;
+}
+.czs-citizen-msg {
+  margin: 0 !important;
+  font: 400 14.5px/1.55 Georgia, "Times New Roman", serif !important;
+  color: #1f2937 !important;
+}

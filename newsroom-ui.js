@@ -157,7 +157,7 @@ function textEditor(panel, titleInput) {
   applyPrepend.onclick=()=>{ textarea.value=aiOut.textContent.trim()+'\n\n'+textarea.value.trim(); refresh(true); aiResult.hidden=true; status.textContent='Bloco inserido no topo.'; };
   const closeAi=element('button','Fechar',aiActions); closeAi.type='button'; closeAi.onclick=()=>{ aiResult.hidden=true; };
 
-  for(const [mode,label] of [['melhorar','✨ Revisar Português'],['titulo','📰 3 Manchetes'],['resumo','📌 Resumo 3 Pontos'],['contraponto','⚖️ Contraponto Semafor']]) {
+  for(const [mode,label] of [['estudar_fontes','🔎 Estudar Fontes & Incoerências (NYT)'],['melhorar','✨ Revisar Português'],['titulo','📰 3 Manchetes'],['resumo','📌 Resumo 3 Pontos'],['contraponto','⚖️ Contraponto Semafor']]) {
     const btn=element('button',label,aiBar); btn.type='button';
     btn.onclick=async()=>{
       btn.disabled=true; status.textContent='Consultando editor IA…'; lastAiMode=mode;
@@ -205,7 +205,7 @@ function article(parent,a,chief=false) {
   formattedContent(card,a.content);
   if(!publicPage && a.status==='Publicada'){
     element('a','Ver na capa',card).href='/#redacao-'+a.id;
-    element('a','Abrir matéria publicada',card).href='/editores?publicadas&materia='+a.id;
+    element('a','Abrir matéria publicada',card).href='/noticia.html?slug=redacao-'+a.id;
   }
   if(chief && ['Publicada','Arquivada'].includes(a.status)){
     const manage=form('Gerenciar publicação',async data=>{
