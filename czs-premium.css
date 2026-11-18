@@ -383,3 +383,16 @@ html body.v8-merge-ready .page .hero-grid #leadStory .lead-image {
     max-height: none !important;
   }
 }
+
+/* Cards editoriais sem foto (Nexo/Semafor style - sem imagem generica nem repetida) */
+body.v8-merge-ready .page .story-row.no-img {
+  grid-template-columns: 1fr !important;
+  display: block !important;
+  padding: 14px 16px !important;
+}
+body.v8-merge-ready .page .news-card.no-img a {
+  display: block !important;
+}
+body.v8-merge-ready .page .news-card.no-img .copy {
+  padding-top: 16px !important;
+}
