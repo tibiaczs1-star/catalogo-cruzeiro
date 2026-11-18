@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Guia e FAQ Completo do Editor — Redação Catálogo CZS</title>
+  <style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    color: #121923;
+    background-color: #ffffff;
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Georgia', serif;
+    color: #111827;
+    margin-top: 1.3em;
+    margin-bottom: 0.4em;
+    font-weight: 700;
+  }
+  h1 { font-size: 24px; line-height: 1.25; letter-spacing: -0.5px; }
+  h2 { font-size: 17px; border-bottom: 1.5px solid #121923; padding-bottom: 4px; margin-top: 1.6em; }
+  h3 { font-size: 14.5px; color: #8b1e1e; margin-top: 1.2em; }
+  h4 { font-size: 12.5px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  p { margin: 0 0 10px 0; }
+  strong { font-weight: 700; color: #000; }
+
+  .masthead {
+    text-align: center;
+    border-bottom: 3px double #121923;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .masthead-title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0;
+    color: #121923;
+  }
+  .masthead-subtitle {
+    font-style: italic;
+    font-size: 12.5px;
+    color: #4b5563;
+    margin: 3px 0 6px 0;
+  }
+  .dateline-bar {
+    display: flex;
+    justify-content: space-between;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-top: 1px solid #121923;
+    border-bottom: 1px solid #121923;
+    padding: 3px 6px;
+    color: #374151;
+    background: #faf7f0;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-nyt { background: #121923; color: #fff; }
+  .badge-redacao { background: #8b1e1e; color: #fff; }
+  .badge-check { background: #065f46; color: #fff; }
+  .badge-gold { background: #b45309; color: #fff; }
+  .badge-blue { background: #1e3a8a; color: #fff; }
+
+  .box-quote {
+    background: #faf7f0;
+    border-left: 4px solid #8b1e1e;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+  .box-quote p:last-child { margin-bottom: 0; }
+
+  .nutgraph-box {
+    background: #fdfaf3;
+    border: 1px solid #e7dfce;
+    border-left: 4px solid #121923;
+    padding: 10px 14px;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .nutgraph-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #8b1e1e;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 11px;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #d1d5db;
+    padding: 7px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #121923;
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+  tr:nth-child(even) { background-color: #faf7f0; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .card {
+    border: 1px solid #dcd7cc;
+    background: #faf7f0;
+    padding: 10px 12px;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+  .card-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .architecture-svg-wrap {
+    text-align: center;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+  .architecture-svg-wrap svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .footer-brand {
+    margin-top: 24px;
+    padding-top: 8px;
+    border-top: 1px solid #d1d5db;
+    display: flex;
+    justify-content: space-between;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 9.5px;
+    color: #6b7280;
+    text-transform: uppercase;
+  }
+
+  .item-row {
+    margin-bottom: 7px;
+    padding-bottom: 7px;
+    border-bottom: 1px dashed #e5e7eb;
+    page-break-inside: avoid;
+  }
+  .item-num {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    color: #8b1e1e;
+    display: inline-block;
+    width: 28px;
+    font-size: 11px;
+  }
+  .item-name {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    color: #111827;
+    font-size: 12px;
+  }
+  .item-desc {
+    margin: 2px 0 0 28px;
+    color: #4b5563;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+</style>
+</head>
+<body>
+  <div class="masthead">
+    <div class="masthead-title">Catálogo CZS</div>
+    <div class="masthead-subtitle">Manual Operacional de Redação, Fact-Checking e Publicação Autoral</div>
+    <div class="dateline-bar">
+      <span>Painel da Redação (/editores)</span>
+      <span>Guia Definitivo do Editor 2026</span>
+      <span>Acesso Restrito &amp; Auditado</span>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-bottom: 20px;">
+    <h1>MANUAL DO EDITOR &amp; FAQ DA REDAÇÃO</h1>
+    <p style="font-size:14px; color:#4b5563; font-style:italic;">Instruções Práticas para Escrever Matérias Autorais, Checar Fatos, Apagar Réplicas e Moderar a Voz do Cidadão</p>
+    <div style="margin-top: 8px;">
+      <span class="badge badge-redacao">Aba Nova Matéria</span>
+      <span class="badge badge-nyt">7 Ferramentas IA</span>
+      <span class="badge badge-check">Radar do Dia</span>
+      <span class="badge badge-blue">Moderação Cidadã</span>
+    </div>
+  </div>
+
+  <div class="box-quote">
+    <p><strong>Missão do Editor no Catálogo CZS:</strong> Garantir que Cruzeiro do Sul e os municípios vizinhos tenham acesso a reportagens com <strong>apuração própria, linguagem direta e zero poluição</strong>. O editor tem soberania total para assumir pautas, suprimir cópias de outros portais e transformar comunicados secos em notícias relevantes para a população.</p>
+  </div>
+
+  <h2>1. Onde Acessar as Ferramentas</h2>
+  <ul>
+    <li><strong>Painel de Redação:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/editores</code></li>
+    <li><strong>Capa do Portal:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/</code></li>
+    <li><strong>Portfólio de Matérias da Redação:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/editores?publicadas</code></li>
+    <li><strong>Dossiê de Matéria (API):</strong> <code>GET /api/articles/:slug/dossier</code></li>
+  </ul>
+
+  <h2>2. Hierarquia Editorial e Exclusão Automática de Réplicas</h2>
+  <div class="nutgraph-box">
+    <div class="nutgraph-label">Como o Motor Trata Suas Matérias</div>
+    <p>Quando você publica uma matéria pelo <code>/editores</code>, o sistema aplica <strong>Soberania Editorial Imediata</strong>:</p>
+    <ul style="margin-top:6px; margin-bottom:0;">
+      <li><strong>Nível 2 (Manchete do Editor):</strong> Assume instantaneamente o topo absoluto da capa (<strong>#leadStory</strong>), com fotografia grande, resumo destacado e botão de áudio.</li>
+      <li><strong>Nível 1 (Destaque do Editor):</strong> Vai para a primeira posição da coluna lateral direita (<strong>#heroSide</strong>) e entra na vitrine <em>"Destaques da Redação"</em>.</li>
+      <li><strong>Nível 0 (Feed da Redação):</strong> Fica posicionado antes de todas as notícias externas no feed geral.</li>
+    </ul>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">E se o fato já tiver saído em outro portal?</div>
+      <p style="font-size:12px; margin:0;">O motor do Catálogo CZS calcula a similaridade semântica do evento. Assim que você publica a versão original da Redação, <strong>a matéria copiada do outro portal é automaticamente removida do feed público</strong> e preservada apenas como link de referência comparativa no quadro de auditoria da sua reportagem.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">E se a matéria não tiver foto?</div>
+      <p style="font-size:12px; margin:0;">O sistema <strong>nunca usa fotos genéricas repetidas</strong> (como a foto da ponte) e nunca deixa espaço em branco. O backend gera automaticamente uma <strong>Ilustração Editorial Vetorial (SVG) Padrão NYT</strong> baseada no tema da reportagem (Justiça, Cidade, Saúde, Rio Juruá, Educação ou Economia).</p>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>3. Como Usar as 7 Ferramentas IA na Aba "Nova Matéria"</h2>
+  <p>Na aba <strong>Nova matéria</strong>, o editor dispõe de um estúdio completo de apuração e redação:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%;">Botão / Ferramenta</th>
+        <th style="width:70%;">O que a Ferramenta Faz em Segundos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>🔎 Estudar Fontes &amp; Incoerências (NYT)</strong></td>
+        <td>Lê todos os textos ou links importados, não copia frases alheias, gera uma reportagem 100% original no estilo broadsheet, cria a seção de <em>Fato Checado</em> e lista as <em>Divergências Numéricas e de Versão</em> entre os veículos comparados.</td>
+      </tr>
+      <tr>
+        <td><strong>🧹 Secar Release (Anti-Assessoria)</strong></td>
+        <td>Elimina jargões burocráticos, autopromoção e adjetivos vazios de informes emitidos por prefeituras, órgãos estaduais e secretarias, preservando unicamente os dados e impactos reais.</td>
+      </tr>
+      <tr>
+        <td><strong>🕵️ Perguntas Investigativas</strong></td>
+        <td>Aponta 4 perguntas cruciais que a notícia deixou sem resposta e indica quais documentos públicos ou órgãos devem ser cobrados pelo repórter.</td>
+      </tr>
+      <tr>
+        <td><strong>✨ Revisar Português</strong></td>
+        <td>Executa revisão ortográfica, concordância e fluidez sintática, sem alterar nomes de pessoas, locais do Juruá ou dados apurados.</td>
+      </tr>
+      <tr>
+        <td><strong>📰 3 Manchetes</strong></td>
+        <td>Gera 3 opções de títulos fortes, objetivos e atraentes, sem apelar para sensacionalismo ou títulos caça-cliques (<em>clickbait</em>).</td>
+      </tr>
+      <tr>
+        <td><strong>📌 Resumo 3 Pontos</strong></td>
+        <td>Cria o bloco estruturado de leitura ultrarrápida: <em>O essencial</em>, <em>O que muda hoje</em> e <em>Quem acompanha o caso</em>.</td>
+      </tr>
+      <tr>
+        <td><strong>⚖️ Contraponto Semafor</strong></td>
+        <td>Divide o texto em dois blocos transparentes: <em>O que os fatos mostram</em> versus <em>O que falta confirmar / Versão do outro lado</em>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. O "Radar do Dia": Transformando Notícias em Matérias Autorais</h2>
+  <ol style="margin-left: -15px;">
+    <li>Clique na aba <strong>Radar do Dia</strong> no menu superior do <code>/editores</code>.</li>
+    <li>O painel exibe em tempo real as ocorrências captadas de 77 fontes externas.</li>
+    <li>Ao identificar uma pauta relevante, clique no botão <strong>"⚡ Assumir Pauta como Original (Apagar Réplica)"</strong>.</li>
+    <li>O rascunho é carregado automaticamente no editor. Clique em <strong>"🔎 Estudar Fontes &amp; Incoerências (NYT)"</strong>, adicione sua checagem local, anexe foto (se houver) e clique em <strong>"Publicar agora"</strong>.</li>
+    <li>A sua matéria assume a capa e a matéria externa replicada é apagada do feed público.</li>
+  </ol>
+
+  <h2>5. Moderação da "Voz do Cidadão" e Backup de Segurança</h2>
+  <ul>
+    <li><strong>Selo de Relato Verificado:</strong> Na aba <em>Comentários Cidadãos</em>, clique em <code>✓ Destacar como Relato Verificado</code> quando a informação trazida pelo morador do bairro for conferida pela redação. O relato ganha destaque ouro na matéria.</li>
+    <li><strong>Exclusão de Spam:</strong> O botão <code>🗑️ Excluir comentário</code> remove instantaneamente mensagens impróprias ou ofensivas.</li>
+    <li><strong>Backup Integral:</strong> Na aba <em>Matérias</em>, clique em <code>💾 Baixar Backup JSON da Redação</code> para salvar no computador todos os textos, fotos e comentários em formato aberto e seguro.</li>
+  </ul>
+
+  <div class="footer-brand">
+    <span>Catálogo CZS — Manual da Redação</span>
+    <span>Cruzeiro do Sul • Acre</span>
+    <span>Versão 2026.4 • Padrão NYT &amp; Semafor</span>
+  </div>
+</body>
+</html>

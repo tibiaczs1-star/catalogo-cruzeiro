@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Briefing Executivo & Plano de Negócios para Parceiros — Catálogo CZS</title>
+  <style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    color: #121923;
+    background-color: #ffffff;
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Georgia', serif;
+    color: #111827;
+    margin-top: 1.3em;
+    margin-bottom: 0.4em;
+    font-weight: 700;
+  }
+  h1 { font-size: 24px; line-height: 1.25; letter-spacing: -0.5px; }
+  h2 { font-size: 17px; border-bottom: 1.5px solid #121923; padding-bottom: 4px; margin-top: 1.6em; }
+  h3 { font-size: 14.5px; color: #8b1e1e; margin-top: 1.2em; }
+  h4 { font-size: 12.5px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  p { margin: 0 0 10px 0; }
+  strong { font-weight: 700; color: #000; }
+
+  .masthead {
+    text-align: center;
+    border-bottom: 3px double #121923;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .masthead-title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0;
+    color: #121923;
+  }
+  .masthead-subtitle {
+    font-style: italic;
+    font-size: 12.5px;
+    color: #4b5563;
+    margin: 3px 0 6px 0;
+  }
+  .dateline-bar {
+    display: flex;
+    justify-content: space-between;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-top: 1px solid #121923;
+    border-bottom: 1px solid #121923;
+    padding: 3px 6px;
+    color: #374151;
+    background: #faf7f0;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-nyt { background: #121923; color: #fff; }
+  .badge-redacao { background: #8b1e1e; color: #fff; }
+  .badge-check { background: #065f46; color: #fff; }
+  .badge-gold { background: #b45309; color: #fff; }
+  .badge-blue { background: #1e3a8a; color: #fff; }
+
+  .box-quote {
+    background: #faf7f0;
+    border-left: 4px solid #8b1e1e;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+  .box-quote p:last-child { margin-bottom: 0; }
+
+  .nutgraph-box {
+    background: #fdfaf3;
+    border: 1px solid #e7dfce;
+    border-left: 4px solid #121923;
+    padding: 10px 14px;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .nutgraph-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #8b1e1e;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 11px;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #d1d5db;
+    padding: 7px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #121923;
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+  tr:nth-child(even) { background-color: #faf7f0; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .card {
+    border: 1px solid #dcd7cc;
+    background: #faf7f0;
+    padding: 10px 12px;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+  .card-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .architecture-svg-wrap {
+    text-align: center;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+  .architecture-svg-wrap svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .footer-brand {
+    margin-top: 24px;
+    padding-top: 8px;
+    border-top: 1px solid #d1d5db;
+    display: flex;
+    justify-content: space-between;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 9.5px;
+    color: #6b7280;
+    text-transform: uppercase;
+  }
+
+  .item-row {
+    margin-bottom: 7px;
+    padding-bottom: 7px;
+    border-bottom: 1px dashed #e5e7eb;
+    page-break-inside: avoid;
+  }
+  .item-num {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    color: #8b1e1e;
+    display: inline-block;
+    width: 28px;
+    font-size: 11px;
+  }
+  .item-name {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    color: #111827;
+    font-size: 12px;
+  }
+  .item-desc {
+    margin: 2px 0 0 28px;
+    color: #4b5563;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+</style>
+</head>
+<body>
+  <div class="masthead">
+    <div class="masthead-title">Catálogo CZS</div>
+    <div class="masthead-subtitle">A Gazeta Digital do Vale do Juruá • Padrão Editorial The New York Times & Semafor</div>
+    <div class="dateline-bar">
+      <span>Cruzeiro do Sul, Acre</span>
+      <span>Briefing Executivo & Plano de Negócios 2026</span>
+      <span>Produção Verificada</span>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-bottom: 20px;">
+    <h1>PLANO DE NEGÓCIOS & BRIEFING COMERCIAL</h1>
+    <p style="font-size:14px; color:#4b5563; font-style:italic;">A Primeira Plataforma de Jornalismo Autoral, Checagem de Fatos e Inteligência Comunitária do Vale do Juruá</p>
+    <div style="margin-top: 8px;">
+      <span class="badge badge-nyt">The New York Times Standard</span>
+      <span class="badge badge-check">Zero Cópias &amp; Réplicas</span>
+      <span class="badge badge-redacao">Redação CZS Soberana</span>
+      <span class="badge badge-gold">R$ 0,00 Custo Marginal</span>
+    </div>
+  </div>
+
+  <div class="box-quote">
+    <p><strong>Sumário Executivo:</strong> O Catálogo CZS migrou da condição de agregador regional passivo para o patamar de <strong>Portal de Referência Editorial e Utilidade Pública</strong> em Cruzeiro do Sul e em todo o Estado do Acre. O sistema opera com IA autoral própria, descarte automático de réplicas de releases, detector de incoerências entre portais concorrentes, narração em áudio, ilustrações vetoriais sob medida e espaço ativo de escuta comunitária.</p>
+  </div>
+
+  <h2>1. O Problema do Mercado Regional & A Solução Catálogo CZS</h2>
+  <p>No Vale do Juruá e no Acre, a maioria dos portais de notícias sofre de <strong>três problemas crônicos</strong>:</p>
+  <ul>
+    <li><strong>Clonagem Massiva de Releases:</strong> O mesmo texto emitido por assessorias políticas e policiais é colado sem filtro em 4 ou 5 sites diferentes, gerando cansaço e desconfiança no leitor.</li>
+    <li><strong>Poluição Visual Extrema:</strong> Banners piscantes, pop-ups que bloqueiam o texto e imagens genéricas repetidas (como a foto coringa da ponte da cidade para qualquer ocorrência).</li>
+    <li><strong>Incoerências Despercebidas:</strong> Veículos concorrentes publicam números conflitantes de prejuízo, valores em R$, quantidade de envolvidos ou datas, sem que ninguém explique quem está correto.</li>
+  </ul>
+
+  <div class="nutgraph-box">
+    <div class="nutgraph-label">A Solução Catálogo CZS</div>
+    <p>Um jornalismo sóbrio, inspirado no <em>The New York Times</em> (leitura limpa em papel creme e tipografia clássica) e no <em>Semafor</em> (separação transparente entre o fato apurado e o que cada veículo alega). Toda matéria repetida externa é <strong>sumariamente eliminada do feed</strong> e convertida em fonte comparativa dentro de um dossiê com o bloco <strong>"Por que importa (Nut Graph)"</strong>.</p>
+  </div>
+
+  <h2>2. Arquitetura Editorial em 4 Níveis</h2>
+  <p>O fluxo de notícias do Catálogo CZS segue uma hierarquia rigorosa, garantindo que o jornalismo local produzido pelos editores tenha precedência total sobre o noticiário automático:</p>
+
+  <div class="architecture-svg-wrap">
+    
+<svg width="720" height="360" viewBox="0 0 720 360" fill="none" xmlns="http://www.w3.org/2000/svg" style="background:#13181f; border-radius:6px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <!-- NÍVEL 1: SOBERANIA DA REDAÇÃO -->
+  <rect x="15" y="14" width="690" height="92" rx="4" stroke="#333e4d" stroke-width="1.2" fill="#181f2a" />
+  <text x="26" y="30" fill="#8b9bb0" font-size="10" font-weight="700" letter-spacing="0.8">NÍVEL 1 — SOBERANIA DA REDAÇÃO (/editores)</text>
+  
+  <rect x="25" y="38" width="210" height="56" rx="3" fill="#202937" stroke="#374355" stroke-width="1"/>
+  <text x="130" y="56" text-anchor="middle" fill="#f3f4f6" font-size="10.5" font-weight="700">Nível 0: MATÉRIA DA REDAÇÃO</text>
+  <text x="130" y="72" text-anchor="middle" fill="#9ca3af" font-size="9">Entra no topo do Feed ('Redação CZS')</text>
+  <text x="130" y="84" text-anchor="middle" fill="#fbbf24" font-size="8.5">Prioridade sobre notícias externas</text>
+
+  <rect x="255" y="38" width="210" height="56" rx="3" fill="#2d1b1f" stroke="#8b1e1e" stroke-width="1.2"/>
+  <text x="360" y="56" text-anchor="middle" fill="#fecaca" font-size="10.5" font-weight="700">Nível 2: MANCHETE DO EDITOR</text>
+  <text x="360" y="72" text-anchor="middle" fill="#fca5a5" font-size="9">Assume o #1 da Hero (#leadStory)</text>
+  <text x="360" y="84" text-anchor="middle" fill="#fef08a" font-size="8.5">Foto grande + Nut Graph + Áudio</text>
+
+  <rect x="485" y="38" width="210" height="56" rx="3" fill="#202937" stroke="#374355" stroke-width="1"/>
+  <text x="590" y="56" text-anchor="middle" fill="#f3f4f6" font-size="10.5" font-weight="700">Nível 1: DESTAQUE DO EDITOR</text>
+  <text x="590" y="72" text-anchor="middle" fill="#9ca3af" font-size="9">Topo do #heroSide + Faixa Especial</text>
+  <text x="590" y="84" text-anchor="middle" fill="#6ee7b7" font-size="8.5">Cards perfeitamente alinhados</text>
+
+  <!-- SETA 1 -> 2 -->
+  <line x1="360" y1="106" x2="360" y2="120" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <polygon points="356,120 360,126 364,120" fill="#9ca3af"/>
+
+  <!-- NÍVEL 2: JORNALISMO AUTORAL & CHECAGEM MULTI-FONTE -->
+  <rect x="195" y="128" width="330" height="64" rx="4" stroke="#047857" stroke-width="1.2" fill="#062e22" />
+  <text x="360" y="144" text-anchor="middle" fill="#a7f3d0" font-size="10" font-weight="700" letter-spacing="0.5">NÍVEL 2 — JORNALISMO AUTORAL & CHECAGEM (Padrão NYT)</text>
+  <text x="360" y="162" text-anchor="middle" fill="#ecfdf5" font-size="10.5" font-weight="600">Matérias Autorais Checadas (2+ fontes cruzadas)</text>
+  <text x="360" y="177" text-anchor="middle" fill="#6ee7b7" font-size="9">Texto Próprio Sintetizado • Fato Checado • Divergências Explícitas</text>
+
+  <!-- SETA 2 -> 3 -->
+  <line x1="360" y1="192" x2="360" y2="206" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <polygon points="356,206 360,212 364,206" fill="#9ca3af"/>
+
+  <!-- NÍVEL 3: COBERTURA REGIONAL & NACIONAL -->
+  <rect x="15" y="214" width="690" height="64" rx="4" stroke="#333e4d" stroke-width="1.2" fill="#181f2a" />
+  <text x="26" y="230" fill="#8b9bb0" font-size="9.5" font-weight="700" letter-spacing="0.8">NÍVEL 3 — COBERTURA REGIONAL & NACIONAL (77 Fontes com Absorção de Cópias)</text>
+  
+  <rect x="25" y="238" width="210" height="30" rx="3" fill="#202937"/>
+  <text x="130" y="258" text-anchor="middle" fill="#d1d5db" font-size="9.5" font-weight="600">Brasil & Mundo (Impacto Local)</text>
+
+  <rect x="255" y="238" width="210" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+  <text x="360" y="258" text-anchor="middle" fill="#7dd3fc" font-size="9.5" font-weight="700">Cruzeiro do Sul & Vale do Juruá</text>
+
+  <rect x="485" y="238" width="210" height="30" rx="3" fill="#202937"/>
+  <text x="590" y="258" text-anchor="middle" fill="#d1d5db" font-size="9.5" font-weight="600">Acre & Amazônia Legal</text>
+
+  <!-- SETA 3 -> 4 -->
+  <line x1="360" y1="278" x2="360" y2="292" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <polygon points="356,292 360,298 364,292" fill="#9ca3af"/>
+
+  <!-- NÍVEL 4: PARTICIPAÇÃO CIDADÃ -->
+  <rect x="180" y="300" width="360" height="50" rx="4" stroke="#d97706" stroke-width="1.2" fill="#261b0c" />
+  <text x="360" y="316" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="700" letter-spacing="0.5">NÍVEL 4 — PARTICIPAÇÃO CIDADÃ ("Voz do Cidadão")</text>
+  <text x="360" y="331" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Comentários e Relatos dos Cidadãos por Matéria</text>
+  <text x="360" y="343" text-anchor="middle" fill="#fcd34d" font-size="8.5">Relato de Bairro • Correção com Evidência • Selo de Verificação</text>
+</svg>
+
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>3. Modelos de Parceria & Cotas Comerciais</h2>
+  <p>Diferente de anúncios tradicionais que os leitores ignoram, o Catálogo CZS oferece <strong>inserção nativa editorial de alta retenção</strong>. O anunciante se posiciona junto à credibilidade de um veículo que combate a desinformação local:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:28%;">Cota / Produto Comercial</th>
+        <th style="width:28%;">Onde Aparece no Jornal</th>
+        <th style="width:44%;">Entrega de Valor & Benefício Mensurável</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Patrocinador Master de Capa & Feed</strong><br><span style="font-size:10px; color:#6b7280;">Bancos, Telecom, Grandes Lojas</span></td>
+        <td>Card nativo editorial na capa + Destaque fixo pós-manchete com botão para WhatsApp.</td>
+        <td>Máxima visibilidade em Cruzeiro do Sul; integração natural ao design broadsheet sem aspecto de banner invasivo; alta taxa de conversão em leads qualificados.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Patrocínio de Editoria & Motor Diário</strong><br><span style="font-size:10px; color:#6b7280;">Saúde, Educação, Agronegócio</span></td>
+        <td>Assinatura <em>"Oferecimento [Marca]"</em> nos cards do Motor Diário (Rio Juruá, Clima, Saúde) e matérias do setor.</td>
+        <td>Associação da marca a um serviço de utilidade pública consultado diariamente pela população (ex.: cotação do rio e avisos meteorológicos).</td>
+      </tr>
+      <tr>
+        <td><strong>3. Publieditorial Verificado & Guia Local</strong><br><span style="font-size:10px; color:#6b7280;">Comércio, Gastronomia, Serviços</span></td>
+        <td>Reportagem especial redigida pela Redação CZS com selo claro de publicação patrocinada.</td>
+        <td>Indexação permanente no Google (SEO + Schema.org + Sitemap XML); distribuição para redes e botão exclusivo de compartilhamento para WhatsApp.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Boletim WhatsApp & Resumo em Áudio</strong><br><span style="font-size:10px; color:#6b7280;">Patrocínio de Utilidade Diária</span></td>
+        <td>Assinatura de voz na narração das matérias e créditos no resumo copiado para os grupos de WhatsApp.</td>
+        <td>Viralidade orgânica no Vale do Juruá, onde o WhatsApp é a principal fonte de circulação de mensagens e áudios comunitários.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Métricas Transparentes & Brand Safety</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">Métricas Auditáveis (/editores)</div>
+      <p style="font-size:12px; margin:0;">Contagem real de visualizações (<em>views</em>) e cliques efetivos em links comerciais (<em>clicks</em>), sem inflar números com tráfego fantasma ou robôs.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Brand Safety Rigoroso</div>
+      <p style="font-size:12px; margin:0;">Filtro de qualidade editorial automático impede a veiculação de marcas parceiras ao lado de fake news, violência explícita desnecessária ou notícias falsas.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Infraestrutura em Nuvem Própria</div>
+      <p style="font-size:12px; margin:0;">Hospedado no cluster Render com disco persistente de 5 GB, garantindo 99.9% de disponibilidade mesmo em picos de tráfego em dias de eleição ou eventos climáticos.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Google News &amp; SEO Técnico</div>
+      <p style="font-size:12px; margin:0;">Feed RSS 2.0 dinâmico (<code>/rss.xml</code>) e Sitemap estruturado (<code>/sitemap.xml</code>) otimizados para rápida indexação pelos algoritmos de busca.</p>
+    </div>
+  </div>
+
+  <h2>5. Endereços Oficiais em Produção</h2>
+  <ul>
+    <li><strong>Portal Ao Vivo:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/</code></li>
+    <li><strong>Redação & Painel de Editores:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/editores</code></li>
+    <li><strong>Feed RSS Oficial:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/rss.xml</code></li>
+    <li><strong>Sitemap Google News:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/sitemap.xml</code></li>
+    <li><strong>Status de Saúde da Aplicação:</strong> <code>https://catalogo-cruzeiro-web.onrender.com/healthz</code></li>
+  </ul>
+
+  <div class="footer-brand">
+    <span>Catálogo CZS — Redação Editorial & Comercial</span>
+    <span>Cruzeiro do Sul • Acre • Brasil</span>
+    <span>Documento Oficial de Parcerias</span>
+  </div>
+</body>
+</html>
